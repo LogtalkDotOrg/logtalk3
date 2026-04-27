@@ -136,6 +136,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hierarchical_clustering.html"><code class="docutils literal notranslate"><span class="pre">hierarchical_clustering</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hmac.html"><code class="docutils literal notranslate"><span class="pre">hmac</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hodge_rank.html"><code class="docutils literal notranslate"><span class="pre">hodge_rank</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
@@ -290,6 +291,7 @@
 learning ranking algorithms. Rankers are represented as objects
 implementing the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> protocol. Datasets are represented
 as objects implementing the <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pairwise_measurement_dataset_protocol</span></code>,
 <code class="docutils literal notranslate"><span class="pre">temporal_pairwise_ranking_dataset_protocol</span></code>, or the
 <code class="docutils literal notranslate"><span class="pre">ranking_dataset_protocol</span></code> protocol.</p>
 <p>This library also provides reusable test datasets and smoke tests for
@@ -301,9 +303,9 @@ be imported by ranking algorithm implementations:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_common</span></code> — dataset collection, summaries, graph
 connectivity, connected-component analysis, and pairwise/grouped
-dataset correctness checks, including temporal pairwise rating-period
-helpers and grouped tie-block extraction helpers for algorithms that
-consume tied rankings directly.</p></li>
+dataset correctness checks, including pairwise measurement helpers,
+temporal pairwise rating-period helpers, and grouped tie-block
+extraction helpers for algorithms that consume tied rankings directly.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">glicko2_common</span></code> — shared internal Glicko-2 numeric helpers for
 scale conversions, per-period player updates, and volatility root
 solving used by both the batch and periodic Glicko-2 rankers.</p></li>
@@ -406,6 +408,29 @@ relevance value is not a non-negative integer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sparse_preferences.lgt</span></code> — A sparse pairwise dataset with an
 isolated item, useful for testing dataset summaries and
 disconnected-graph detection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">two_item_measurements.lgt</span></code> — A compact pairwise measurement dataset
+with two items and one signed measurement, useful for smoke testing
+exact two-item least-squares fits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">regular_measurements.lgt</span></code> — A compact connected pairwise
+measurement dataset whose measurements are perfectly explained by a
+zero-sum score potential, useful for regression tests with zero
+residuals.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cyclic_measurements.lgt</span></code> — A compact connected pairwise measurement
+dataset with cyclic inconsistency, useful for smoke testing zero
+global scores with non-zero residuals.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disconnected_measurements.lgt</span></code> — A pairwise measurement fixture
+with more than one connected component, useful for testing
+identifiable-score checks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_unknown_item.lgt</span></code> — A negative measurement
+fixture where a measurement mentions an undeclared item.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_duplicate_items.lgt</span></code> — A negative measurement
+fixture where an item is declared more than once.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_self.lgt</span></code> — A negative measurement fixture
+where an item is measured against itself.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_non_numeric.lgt</span></code> — A negative measurement
+fixture where a measurement value is not numeric.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_non_positive_weight.lgt</span></code> — A negative
+measurement fixture where a measurement weight is not positive.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">temporal_two_period_chain.lgt</span></code> — A compact temporal pairwise
 dataset with two rating periods and three players, useful for smoke
 testing periodic rating carryover.</p></li>

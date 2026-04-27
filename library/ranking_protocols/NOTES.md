@@ -25,6 +25,7 @@ This library provides protocols used in the implementation of machine
 learning ranking algorithms. Rankers are represented as objects
 implementing the `ranker_protocol` protocol. Datasets are represented as
 objects implementing the `pairwise_ranking_dataset_protocol`,
+`pairwise_measurement_dataset_protocol`,
 `temporal_pairwise_ranking_dataset_protocol`, or the
 `ranking_dataset_protocol` protocol.
 
@@ -39,9 +40,9 @@ imported by ranking algorithm implementations:
 
 - `ranking_dataset_common` — dataset collection, summaries, graph
   connectivity, connected-component analysis, and pairwise/grouped dataset
-  correctness checks, including temporal pairwise rating-period helpers and
-  grouped tie-block extraction helpers for algorithms that consume tied
-  rankings directly.
+  correctness checks, including pairwise measurement helpers, temporal
+  pairwise rating-period helpers, and grouped tie-block extraction helpers
+  for algorithms that consume tied rankings directly.
 - `glicko2_common` — shared internal Glicko-2 numeric helpers for scale
   conversions, per-period player updates, and volatility root solving used
   by both the batch and periodic Glicko-2 rankers.
@@ -151,6 +152,36 @@ Several sample datasets are included in the `test_datasets` directory:
 
 - `sparse_preferences.lgt` — A sparse pairwise dataset with an isolated item,
   useful for testing dataset summaries and disconnected-graph detection.
+
+- `two_item_measurements.lgt` — A compact pairwise measurement dataset with
+  two items and one signed measurement, useful for smoke testing exact
+  two-item least-squares fits.
+
+- `regular_measurements.lgt` — A compact connected pairwise measurement
+  dataset whose measurements are perfectly explained by a zero-sum score
+  potential, useful for regression tests with zero residuals.
+
+- `cyclic_measurements.lgt` — A compact connected pairwise measurement dataset
+  with cyclic inconsistency, useful for smoke testing zero global scores with
+  non-zero residuals.
+
+- `disconnected_measurements.lgt` — A pairwise measurement fixture with more
+  than one connected component, useful for testing identifiable-score checks.
+
+- `malformed_measurement_unknown_item.lgt` — A negative measurement fixture
+  where a measurement mentions an undeclared item.
+
+- `malformed_measurement_duplicate_items.lgt` — A negative measurement fixture
+  where an item is declared more than once.
+
+- `malformed_measurement_self.lgt` — A negative measurement fixture where an
+  item is measured against itself.
+
+- `malformed_measurement_non_numeric.lgt` — A negative measurement fixture
+  where a measurement value is not numeric.
+
+- `malformed_measurement_non_positive_weight.lgt` — A negative measurement
+  fixture where a measurement weight is not positive.
 
 - `temporal_two_period_chain.lgt` — A compact temporal pairwise dataset with
   two rating periods and three players, useful for smoke testing periodic

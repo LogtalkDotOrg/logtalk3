@@ -77,6 +77,41 @@
 		argnames is ['Dataset', 'Matchups']
 	]).
 
+	:- public(pairwise_measurement_dataset_declared_items/2).
+	:- mode(pairwise_measurement_dataset_declared_items(+object_identifier, -list), one).
+	:- info(pairwise_measurement_dataset_declared_items/2, [
+		comment is 'Collects the pairwise measurement dataset declared items preserving declaration order.',
+		argnames is ['Dataset', 'Items']
+	]).
+
+	:- public(pairwise_measurement_dataset_items/2).
+	:- mode(pairwise_measurement_dataset_items(+object_identifier, -list), one).
+	:- info(pairwise_measurement_dataset_items/2, [
+		comment is 'Collects the unique pairwise measurement dataset items preserving their first declaration order.',
+		argnames is ['Dataset', 'Items']
+	]).
+
+	:- public(pairwise_measurement_dataset_measurements/2).
+	:- mode(pairwise_measurement_dataset_measurements(+object_identifier, -list(compound)), one).
+	:- info(pairwise_measurement_dataset_measurements/2, [
+		comment is 'Collects the pairwise measurement dataset observations as ``m(Item1,Item2,Value,Weight)`` terms preserving enumeration order.',
+		argnames is ['Dataset', 'Measurements']
+	]).
+
+	:- public(pairwise_measurement_dataset_connected_components/2).
+	:- mode(pairwise_measurement_dataset_connected_components(+object_identifier, -list(list)), one).
+	:- info(pairwise_measurement_dataset_connected_components/2, [
+		comment is 'Returns the connected components induced by the pairwise measurement support graph.',
+		argnames is ['Dataset', 'Components']
+	]).
+
+	:- public(pairwise_measurement_dataset_summary/2).
+	:- mode(pairwise_measurement_dataset_summary(+object_identifier, -list(compound)), one).
+	:- info(pairwise_measurement_dataset_summary/2, [
+		comment is 'Returns a summary of a pairwise measurement dataset, including item, measurement, component, and isolated-item counts.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
 	:- public(temporal_pairwise_dataset_declared_items/2).
 	:- mode(temporal_pairwise_dataset_declared_items(+object_identifier, -list), one).
 	:- info(temporal_pairwise_dataset_declared_items/2, [
@@ -196,6 +231,20 @@
 		argnames is ['Dataset', 'Summary']
 	]).
 
+	:- public(validate_pairwise_measurement_dataset/1).
+	:- mode(validate_pairwise_measurement_dataset(+object_identifier), one).
+	:- info(validate_pairwise_measurement_dataset/1, [
+		comment is 'Validates a pairwise measurement dataset and throws an error if the dataset is malformed or disconnected.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_pairwise_measurement_dataset/2).
+	:- mode(validate_pairwise_measurement_dataset(+object_identifier, -list(compound)), one).
+	:- info(validate_pairwise_measurement_dataset/2, [
+		comment is 'Validates a pairwise measurement dataset and returns its dataset summary when validation succeeds.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
 	:- public(validate_grouped_dataset/1).
 	:- mode(validate_grouped_dataset(+object_identifier), one).
 	:- info(validate_grouped_dataset/1, [
@@ -285,6 +334,38 @@
 		aggregate_matchups(Preferences, ItemIndices, Matchups0, Matchups1),
 		dictionary_as_list(Matchups1, MatchupEntries),
 		matchup_entries(MatchupEntries, IndexedItems, Matchups).
+
+	pairwise_measurement_dataset_declared_items(Dataset, Items) :-
+		findall(Item, Dataset::item(Item), Items).
+
+	pairwise_measurement_dataset_items(Dataset, Items) :-
+		pairwise_measurement_dataset_declared_items(Dataset, RawItems),
+		unique_list(RawItems, Items).
+
+	pairwise_measurement_dataset_measurements(Dataset, Measurements) :-
+		findall(m(Item1, Item2, Value, Weight), Dataset::measurement(Item1, Item2, Value, Weight), Measurements).
+
+	pairwise_measurement_dataset_connected_components(Dataset, Components) :-
+		pairwise_measurement_dataset_items(Dataset, Items),
+		pairwise_measurement_dataset_measurements(Dataset, Measurements),
+		measurement_edges(Measurements, Preferences),
+		connected_components(Items, Preferences, Components).
+
+	pairwise_measurement_dataset_summary(Dataset, Summary) :-
+		pairwise_measurement_dataset_items(Dataset, Items),
+		pairwise_measurement_dataset_measurements(Dataset, Measurements),
+		measurement_edges(Measurements, Preferences),
+		connected_components(Items, Preferences, Components),
+		length(Items, NumberOfItems),
+		length(Measurements, NumberOfMeasurements),
+		length(Components, NumberOfComponents),
+		isolated_items(Components, Preferences, IsolatedItems),
+		Summary = [
+			items(NumberOfItems),
+			measurements(NumberOfMeasurements),
+			connected_components(NumberOfComponents),
+			isolated_items(IsolatedItems)
+		].
 
 	temporal_pairwise_dataset_declared_items(Dataset, Items) :-
 		findall(Item, Dataset::item(Item), Items).
@@ -392,6 +473,26 @@
 		;   domain_error(connected_pairwise_dataset, Components)
 		),
 		::pairwise_dataset_summary(Dataset, Summary).
+
+	validate_pairwise_measurement_dataset(Dataset) :-
+		validate_pairwise_measurement_dataset(Dataset, _Summary).
+
+	validate_pairwise_measurement_dataset(Dataset, Summary) :-
+		::pairwise_measurement_dataset_declared_items(Dataset, RawItems),
+		RawItems \== [],
+		check_unique_items(RawItems),
+		::pairwise_measurement_dataset_items(Dataset, Items),
+		::pairwise_measurement_dataset_measurements(Dataset, Measurements),
+		forall(
+			member(m(Item1, Item2, Value, Weight), Measurements),
+			validate_measurement(Items, Item1, Item2, Value, Weight)
+		),
+		::pairwise_measurement_dataset_connected_components(Dataset, Components),
+		(   Components = [_] ->
+			true
+		;   domain_error(connected_pairwise_measurement_dataset, Components)
+		),
+		::pairwise_measurement_dataset_summary(Dataset, Summary).
 
 	validate_grouped_dataset(Dataset) :-
 		validate_grouped_dataset(Dataset, _Summary).
@@ -580,6 +681,10 @@
 		dictionary_lookup(RightIndex, RightItem, IndexedItems),
 		matchup_entries(MatchupEntries, IndexedItems, Matchups).
 
+	measurement_edges([], []).
+	measurement_edges([m(Item1, Item2, _Value, Weight)| Measurements], [p(Item1, Item2, Weight)| Preferences]) :-
+		measurement_edges(Measurements, Preferences).
+
 	temporal_game_edges([], []).
 	temporal_game_edges([game(_Period, Item1, Item2, _Score)| Games], [p(Item1, Item2, 1)| Preferences]) :-
 		temporal_game_edges(Games, Preferences).
@@ -624,6 +729,28 @@
 		(   Winner == Loser ->
 			domain_error(distinct_items, Winner-Loser)
 		;   true
+		),
+		(   number(Weight), Weight > 0 ->
+			true
+		;   domain_error(positive_number, Weight)
+		).
+
+	validate_measurement(Items, Item1, Item2, Value, Weight) :-
+		(   member(Item1, Items) ->
+			true
+		;   existence_error(item, Item1)
+		),
+		(   member(Item2, Items) ->
+			true
+		;   existence_error(item, Item2)
+		),
+		(   Item1 == Item2 ->
+			domain_error(distinct_items, Item1-Item2)
+		;   true
+		),
+		(   number(Value) ->
+			true
+		;   type_error(number, Value)
 		),
 		(   number(Weight), Weight > 0 ->
 			true

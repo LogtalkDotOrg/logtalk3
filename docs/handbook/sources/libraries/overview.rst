@@ -56,7 +56,7 @@ multiple areas):
     ``regression_tree``.
   - Ranking: ``ranking_protocols``, ``borda``, ``bradley_terry``,
     ``colley``, ``copeland``, ``elo``, ``glicko2``,
-    ``glicko2_periodic``, ``massey``, ``plackett_luce``,
+    ``glicko2_periodic``, ``hodge_rank``, ``massey``, ``plackett_luce``,
     ``plackett_luce_last``, ``rank_centrality``, ``ranked_pairs``,
     ``regularized_bradley_terry``, ``schulze``, and
     ``thurstone_mosteller``.

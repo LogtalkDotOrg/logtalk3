@@ -144,6 +144,7 @@ sed '1,19d' ../../../library/heaps/NOTES.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/hierarchical_clustering/NOTES.md | pandoc -f gfm -t rst -o libraries/hierarchical_clustering.rst
 sed '1,19d' ../../../library/hierarchies/NOTES.md | pandoc -f gfm -t rst -o libraries/hierarchies.rst
 sed '1,19d' ../../../library/hmac/NOTES.md | pandoc -f gfm -t rst -o libraries/hmac.rst
+sed '1,19d' ../../../library/hodge_rank/NOTES.md | pandoc -f gfm -t rst -o libraries/hodge_rank.rst
 sed '1,19d' ../../../library/hook_flows/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_flows.rst
 sed '1,19d' ../../../library/hook_objects/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/html.rst

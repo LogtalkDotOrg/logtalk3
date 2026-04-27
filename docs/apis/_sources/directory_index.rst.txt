@@ -891,6 +891,16 @@ To load an entity, always load the library that includes it using the goal ``log
    hmac <hmac_0>
    hmac_protocol <hmac_protocol_0>
 
+``library/hodge_rank/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   hodge_rank <hodge_rank_0>
+
 ``library/hook_flows/``
 -----------------------
 
@@ -1584,6 +1594,7 @@ To load an entity, always load the library that includes it using the goal ``log
    condorcet_victory_common <condorcet_victory_common_0>
    glicko2_common <glicko2_common_0>
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
+   pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
    pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
    plackett_luce_common <plackett_luce_common_0>

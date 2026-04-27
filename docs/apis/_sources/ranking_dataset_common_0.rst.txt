@@ -172,6 +172,101 @@ Returns aggregated pairwise matchups as ``matchup(Item1,Item2,Item1Wins,Item2Win
 
 ------------
 
+.. index:: pairwise_measurement_dataset_declared_items/2
+.. _ranking_dataset_common/0::pairwise_measurement_dataset_declared_items/2:
+
+``pairwise_measurement_dataset_declared_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the pairwise measurement dataset declared items preserving declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_measurement_dataset_declared_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``pairwise_measurement_dataset_declared_items(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: pairwise_measurement_dataset_items/2
+.. _ranking_dataset_common/0::pairwise_measurement_dataset_items/2:
+
+``pairwise_measurement_dataset_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique pairwise measurement dataset items preserving their first declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_measurement_dataset_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``pairwise_measurement_dataset_items(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: pairwise_measurement_dataset_measurements/2
+.. _ranking_dataset_common/0::pairwise_measurement_dataset_measurements/2:
+
+``pairwise_measurement_dataset_measurements/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the pairwise measurement dataset observations as ``m(Item1,Item2,Value,Weight)`` terms preserving enumeration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_measurement_dataset_measurements(Dataset,Measurements)``
+| **Mode and number of proofs:**
+|    ``pairwise_measurement_dataset_measurements(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: pairwise_measurement_dataset_connected_components/2
+.. _ranking_dataset_common/0::pairwise_measurement_dataset_connected_components/2:
+
+``pairwise_measurement_dataset_connected_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the connected components induced by the pairwise measurement support graph.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_measurement_dataset_connected_components(Dataset,Components)``
+| **Mode and number of proofs:**
+|    ``pairwise_measurement_dataset_connected_components(+object_identifier,-list(list))`` - ``one``
+
+
+------------
+
+.. index:: pairwise_measurement_dataset_summary/2
+.. _ranking_dataset_common/0::pairwise_measurement_dataset_summary/2:
+
+``pairwise_measurement_dataset_summary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a summary of a pairwise measurement dataset, including item, measurement, component, and isolated-item counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairwise_measurement_dataset_summary(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``pairwise_measurement_dataset_summary(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
 .. index:: temporal_pairwise_dataset_declared_items/2
 .. _ranking_dataset_common/0::temporal_pairwise_dataset_declared_items/2:
 
@@ -415,6 +510,44 @@ Validates a pairwise ranking dataset and returns its dataset summary when valida
 |    ``validate_pairwise_dataset(Dataset,Summary)``
 | **Mode and number of proofs:**
 |    ``validate_pairwise_dataset(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: validate_pairwise_measurement_dataset/1
+.. _ranking_dataset_common/0::validate_pairwise_measurement_dataset/1:
+
+``validate_pairwise_measurement_dataset/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a pairwise measurement dataset and throws an error if the dataset is malformed or disconnected.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_pairwise_measurement_dataset(Dataset)``
+| **Mode and number of proofs:**
+|    ``validate_pairwise_measurement_dataset(+object_identifier)`` - ``one``
+
+
+------------
+
+.. index:: validate_pairwise_measurement_dataset/2
+.. _ranking_dataset_common/0::validate_pairwise_measurement_dataset/2:
+
+``validate_pairwise_measurement_dataset/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a pairwise measurement dataset and returns its dataset summary when validation succeeds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_pairwise_measurement_dataset(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``validate_pairwise_measurement_dataset(+object_identifier,-list(compound))`` - ``one``
 
 
 ------------

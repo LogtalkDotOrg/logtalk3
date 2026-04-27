@@ -8422,6 +8422,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::item/1>`
 * :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`
 * :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::item/1>`
 
@@ -10560,6 +10561,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::mean_squared_error/3>`
 
+``measurement/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::measurement/4>`
+
 ``median/2``
 ------------
 
@@ -12397,6 +12408,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_dataset_win_totals/2>`
+
+``pairwise_measurement_dataset_connected_components/2``
+-------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_measurement_dataset_connected_components/2>`
+
+``pairwise_measurement_dataset_declared_items/2``
+-------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_measurement_dataset_declared_items/2>`
+
+``pairwise_measurement_dataset_items/2``
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_measurement_dataset_items/2>`
+
+``pairwise_measurement_dataset_measurements/2``
+-----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_measurement_dataset_measurements/2>`
+
+``pairwise_measurement_dataset_summary/2``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::pairwise_measurement_dataset_summary/2>`
 
 ``params/2``
 ------------
@@ -14746,6 +14807,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`fast_random(Algorithm) <fast_random/1::reset_seed/0>`
 * :ref:`random(Algorithm) <random/1::reset_seed/0>`
+
+``residuals/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hodge_rank <hodge_rank/0::residuals/2>`
 
 ``resize/2``
 ------------
@@ -18280,6 +18351,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_dataset/2>`
+
+``validate_pairwise_measurement_dataset/1``
+-------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_measurement_dataset/1>`
+
+``validate_pairwise_measurement_dataset/2``
+-------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_measurement_dataset/2>`
 
 ``validate_temporal_pairwise_dataset/1``
 ----------------------------------------

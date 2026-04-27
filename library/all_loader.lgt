@@ -146,6 +146,7 @@
 		massey(loader),
 		glicko2(loader),
 		glicko2_periodic(loader),
+		hodge_rank(loader),
 		regularized_bradley_terry(loader),
 		copeland(loader),
 		elo(loader),

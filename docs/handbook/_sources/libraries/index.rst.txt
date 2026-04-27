@@ -94,6 +94,7 @@ directory in the ``NOTES.md`` file.
    hierarchical_clustering
    hierarchies
    hmac
+   hodge_rank
    hook_flows
    hook_objects
    html

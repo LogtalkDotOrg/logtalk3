@@ -187,6 +187,10 @@ pairwise outcomes.
 Glicko-2 updates over temporal pairwise game datasets with explicit
 rating periods and support for draws and inactivity.
 
+* ADDED: New `hodge_rank` library implementing pairwise measurement
+ranking using a weighted graph-Laplacian least-squares fit with explicit
+edge residual diagnostics.
+
 * ADDED: New `massey` library implementing pairwise preference ranking
 using the Massey matrix method.
 

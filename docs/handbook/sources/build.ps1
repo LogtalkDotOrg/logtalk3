@@ -144,6 +144,7 @@ Foreach-Object {
 (Get-Content ../../../library/hierarchical_clustering/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hierarchical_clustering.rst
 (Get-Content ../../../library/hierarchies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hierarchies.rst
 (Get-Content ../../../library/hmac/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hmac.rst
+(Get-Content ../../../library/hodge_rank/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hodge_rank.rst
 (Get-Content ../../../library/hook_flows/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_flows.rst
 (Get-Content ../../../library/hook_objects/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 (Get-Content ../../../library/html/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/html.rst

@@ -219,6 +219,39 @@
 	test(sparse_preferences_summary, deterministic(memberchk(isolated_items([gamma]), Summary))) :-
 		ranking_test_support::pairwise_dataset_summary(sparse_preferences, Summary).
 
+	% Pairwise measurement dataset protocol smoke tests.
+
+	test(two_item_measurements_items, deterministic(Items == [alpha, beta])) :-
+		findall(Item, two_item_measurements::item(Item), Items).
+
+	test(regular_measurements_count, deterministic(Count == 6)) :-
+		findall(Item1-Item2, regular_measurements::measurement(Item1, Item2, _Value, _Weight), Measurements),
+		length(Measurements, Count).
+
+	test(two_item_measurements_validation, deterministic) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(two_item_measurements).
+
+	test(cyclic_measurements_summary, deterministic((memberchk(measurements(3), Summary), memberchk(isolated_items([]), Summary)))) :-
+		ranking_test_support::pairwise_measurement_dataset_summary(cyclic_measurements, Summary).
+
+	test(malformed_measurement_unknown_item_validation, error(existence_error(item, phantom))) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(malformed_measurement_unknown_item).
+
+	test(malformed_measurement_duplicate_items_validation, error(domain_error(unique_items, [alpha, alpha, beta]))) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(malformed_measurement_duplicate_items).
+
+	test(malformed_measurement_self_validation, error(domain_error(distinct_items, alpha-alpha))) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(malformed_measurement_self).
+
+	test(malformed_measurement_non_numeric_validation, error(type_error(number, foo))) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(malformed_measurement_non_numeric).
+
+	test(malformed_measurement_non_positive_weight_validation, error(domain_error(positive_number, 0))) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(malformed_measurement_non_positive_weight).
+
+	test(disconnected_measurements_validation, error(domain_error(connected_pairwise_measurement_dataset, [[alpha, beta], [gamma, delta]]))) :-
+		ranking_test_support::validate_pairwise_measurement_dataset(disconnected_measurements).
+
 	% Temporal pairwise dataset protocol smoke tests.
 
 	test(temporal_two_period_chain_periods, deterministic(Periods == [round1, round2])) :-

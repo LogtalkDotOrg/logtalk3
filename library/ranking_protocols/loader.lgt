@@ -37,6 +37,7 @@
 		ranking_dataset_common,
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol,
+		pairwise_measurement_dataset_protocol,
 		temporal_pairwise_ranking_dataset_protocol
 	], [
 		optimize(on)

@@ -1,0 +1,95 @@
+.. index:: single: pairwise_measurement_dataset_protocol
+.. _pairwise_measurement_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``pairwise_measurement_dataset_protocol``
+=========================================
+
+Protocol for pairwise measurement datasets.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Validity requirements: Datasets are expected to declare each item once, use only declared items in measurements, assign numeric measurement values, and assign a positive weight to each measurement between distinct items.
+   - Semantics: Each ``measurement(Item1, Item2, Value, Weight)`` fact describes a weighted signed scalar observation for the oriented edge ``Item1 -> Item2``. Positive values favor ``Item1`` over ``Item2``, negative values favor ``Item2`` over ``Item1``, and zero values denote neutral observations.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: item/1
+.. _pairwise_measurement_dataset_protocol/0::item/1:
+
+``item/1``
+^^^^^^^^^^
+
+Enumerates by backtracking the items that can be ranked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item(Item)``
+| **Mode and number of proofs:**
+|    ``item(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: measurement/4
+.. _pairwise_measurement_dataset_protocol/0::measurement/4:
+
+``measurement/4``
+^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking weighted pairwise signed measurements where ``Value`` is the observed scalar measurement for the oriented edge ``Item1 -> Item2`` and ``Weight`` is its positive confidence or repetition weight.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``measurement(Item1,Item2,Value,Weight)``
+| **Mode and number of proofs:**
+|    ``measurement(-atom,-atom,-number,-number)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
