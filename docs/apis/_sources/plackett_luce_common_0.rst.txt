@@ -49,9 +49,13 @@ Protected predicates
 ``index_items/3``
 ^^^^^^^^^^^^^^^^^
 
+Builds ``Item-Index`` pairs for the ordered training items.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``index_items(Items,Index,Indices)``
 | **Mode and number of proofs:**
 |    ``index_items(+list,+integer,-list)`` - ``one``
 
@@ -64,9 +68,13 @@ Protected predicates
 ``preprocess_groups/10``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Builds per-group choice steps, selection counts, and forward and reverse adjacency dictionaries from grouped rankings under the selected traversal order.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``preprocess_groups(Order,Groups,Dataset,MissingRelevance,IndexDictionary,Count,Steps,SelectionCounts,DirectedAdjacency,ReverseAdjacency)``
 | **Mode and number of proofs:**
 |    ``preprocess_groups(+atom,+list,+object_identifier,+atom,+compound,+integer,-list,-list,-compound,-compound)`` - ``one``
 
@@ -79,9 +87,13 @@ Protected predicates
 ``selection_exposures/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Computes the per-item exposure counts implied by the grouped choice steps and the current value dictionary.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``selection_exposures(Steps,SelectionCounts,ValueDictionary,ExposureCounts)``
 | **Mode and number of proofs:**
 |    ``selection_exposures(+list,+list,+compound,-list)`` - ``one``
 
@@ -94,9 +106,13 @@ Protected predicates
 ``normalize_strengths/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Normalizes raw strength values to sum to one while tracking the maximum absolute change from the current strengths.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``normalize_strengths(RawStrengths,TotalRawStrength,CurrentStrengths,Strengths,MaximumDifference0,MaximumDifference)``
 | **Mode and number of proofs:**
 |    ``normalize_strengths(+list(number),+number,+list(number),-list(number),+number,-number)`` - ``one``
 

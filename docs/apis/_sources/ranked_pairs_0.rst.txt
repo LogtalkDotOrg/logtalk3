@@ -1,0 +1,90 @@
+.. index:: single: ranked_pairs
+.. _ranked_pairs/0:
+
+.. rst-class:: right
+
+**object**
+
+``ranked_pairs``
+================
+
+Ranked Pairs pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by locking direct pairwise victories in descending strength order while avoiding cycles and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
+
+| **Availability:** 
+|    ``logtalk_load(ranked_pairs(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
+|    ``public`` :ref:`condorcet_victory_common <condorcet_victory_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Algorithm: Builds the direct pairwise victory graph from aggregated matchups, considers victories in descending direct-victory strength order, and locks each victory unless it would create a directed cycle in the accepted lock graph.
+   - Victory ordering: Victories are sorted by descending direct-victory strength. Equal-strength victories are processed deterministically using the selected ``tie_breaking/1`` option, either by standard term order or by dataset item declaration order.
+   - Victory-strength semantics: The ``victory_strength/1`` option selects whether direct victories are measured using winning votes or victory margins before the locking phase.
+   - Equal-strength tie breaking: The ``tie_breaking/1`` option selects how equal-strength victories are ordered before the locking phase. The default ``term_order`` mode preserves the current deterministic behavior, while ``declaration_order`` follows the ordered training items returned by the dataset helpers.
+   - Locked-pair access: The ``locked_pairs/2`` predicate returns the accepted lock graph in the exact order in which locks were accepted as ``lock(Item1,Item2,Strength)`` terms.
+   - Score semantics: The learned score for each item is the number of opponents reachable from that item in the final locked relation. Ranking ties are then broken deterministically using the standard term order of the item identifiers.
+   - Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain part of a single comparison graph.
+   - Ranker representation: The learned ranker is represented by default as ``ranked_pairs_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the effective victory-strength mode, locked pairs, and dataset summary.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: locked_pairs/2
+.. _ranked_pairs/0::locked_pairs/2:
+
+``locked_pairs/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the accepted lock graph in lock order as ``lock(Item1,Item2,Strength)`` terms for the learned items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``locked_pairs(Ranker,LockedPairs)``
+| **Mode and number of proofs:**
+|    ``locked_pairs(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`schulze <schulze/0>`, :ref:`copeland <copeland/0>`
+

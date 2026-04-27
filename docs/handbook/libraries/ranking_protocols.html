@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="reader" href="reader.html" />
-    <link rel="prev" title="rank_centrality" href="rank_centrality.html" />
+    <link rel="prev" title="ranked_pairs" href="ranked_pairs.html" />
    
 </head>
 
@@ -193,6 +193,7 @@
 <li class="toctree-l2"><a class="reference internal" href="random_forest_regression.html"><code class="docutils literal notranslate"><span class="pre">random_forest_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_projection.html"><code class="docutils literal notranslate"><span class="pre">random_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_centrality.html"><code class="docutils literal notranslate"><span class="pre">rank_centrality</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ranked_pairs.html"><code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#shared-categories">Shared categories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
@@ -298,6 +299,10 @@ be imported by ranking algorithm implementations:</p>
 connectivity, connected-component analysis, and pairwise/grouped
 dataset correctness checks, including grouped tie-block extraction
 helpers for algorithms that consume tied rankings directly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condorcet_victory_common</span></code> — shared direct-victory preprocessing
+helpers for Condorcet-family rankers that derive dense directed
+victory strengths from aggregated pairwise matchups under the
+<code class="docutils literal notranslate"><span class="pre">victory_strength(...)</span></code> option semantics.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> — representation-independent access to
 learned-ranker diagnostics plus reusable helpers for exporting learned
 rankers.</p></li>
@@ -384,6 +389,10 @@ identifiable global scores.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cyclic_pairwise.lgt</span></code> — A connected pairwise fixture with a
 preference cycle, useful for smoke testing algorithms on
 non-transitive data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condorcet_divergence_pairwise.lgt</span></code> — A compact connected pairwise
+fixture where the current <code class="docutils literal notranslate"><span class="pre">schulze</span></code> and <code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code>
+implementations produce different rankings, useful for cross-method
+regression tests.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">malformed_grouped.lgt</span></code> — A negative fixture where a grouped
 relevance value is not a non-negative integer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sparse_preferences.lgt</span></code> — A sparse pairwise dataset with an
@@ -397,7 +406,7 @@ disconnected-graph detection.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="rank_centrality.html" class="btn btn-neutral float-left" title="rank_centrality" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ranked_pairs.html" class="btn btn-neutral float-left" title="ranked_pairs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="reader.html" class="btn btn-neutral float-right" title="reader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

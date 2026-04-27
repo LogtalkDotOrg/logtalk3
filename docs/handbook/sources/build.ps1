@@ -201,6 +201,7 @@ Foreach-Object {
 (Get-Content ../../../library/random_forest_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_forest_regression.rst
 (Get-Content ../../../library/random_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_projection.rst
 (Get-Content ../../../library/rank_centrality/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rank_centrality.rst
+(Get-Content ../../../library/ranked_pairs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ranked_pairs.rst
 (Get-Content ../../../library/ranking_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 (Get-Content ../../../library/reader/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/reader.rst
 (Get-Content ../../../library/recorded_database/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/recorded_database.rst

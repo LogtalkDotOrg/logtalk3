@@ -155,6 +155,7 @@ logtalk_library_path(random_forest, library('random_forest/')).
 logtalk_library_path(random_forest_regression, library('random_forest_regression/')).
 logtalk_library_path(random_projection, library('random_projection/')).
 logtalk_library_path(rank_centrality, library('rank_centrality/')).
+logtalk_library_path(ranked_pairs, library('ranked_pairs/')).
 logtalk_library_path(ranking_protocols, library('ranking_protocols/')).
 logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(recorded_database, library('recorded_database/')).

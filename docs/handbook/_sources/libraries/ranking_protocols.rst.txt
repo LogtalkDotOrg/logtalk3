@@ -22,6 +22,10 @@ be imported by ranking algorithm implementations:
   connectivity, connected-component analysis, and pairwise/grouped
   dataset correctness checks, including grouped tie-block extraction
   helpers for algorithms that consume tied rankings directly.
+- ``condorcet_victory_common`` — shared direct-victory preprocessing
+  helpers for Condorcet-family rankers that derive dense directed
+  victory strengths from aggregated pairwise matchups under the
+  ``victory_strength(...)`` option semantics.
 - ``ranker_common`` — representation-independent access to
   learned-ranker diagnostics plus reusable helpers for exporting learned
   rankers.
@@ -126,6 +130,11 @@ Several sample datasets are included in the ``test_datasets`` directory:
 - ``cyclic_pairwise.lgt`` — A connected pairwise fixture with a
   preference cycle, useful for smoke testing algorithms on
   non-transitive data.
+
+- ``condorcet_divergence_pairwise.lgt`` — A compact connected pairwise
+  fixture where the current ``schulze`` and ``ranked_pairs``
+  implementations produce different rankings, useful for cross-method
+  regression tests.
 
 - ``malformed_grouped.lgt`` — A negative fixture where a grouped
   relevance value is not a non-negative integer.

@@ -151,6 +151,7 @@ directory in the ``NOTES.md`` file.
    random_forest_regression
    random_projection
    rank_centrality
+   ranked_pairs
    ranking_protocols
    reader
    recorded_database

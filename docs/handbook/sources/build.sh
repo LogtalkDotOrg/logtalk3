@@ -201,6 +201,7 @@ sed '1,19d' ../../../library/random_forest/NOTES.md | pandoc -f gfm -t rst -o li
 sed '1,19d' ../../../library/random_forest_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/random_forest_regression.rst
 sed '1,19d' ../../../library/random_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/random_projection.rst
 sed '1,19d' ../../../library/rank_centrality/NOTES.md | pandoc -f gfm -t rst -o libraries/rank_centrality.rst
+sed '1,19d' ../../../library/ranked_pairs/NOTES.md | pandoc -f gfm -t rst -o libraries/ranked_pairs.rst
 sed '1,19d' ../../../library/ranking_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/ranking_protocols.rst
 sed '1,19d' ../../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
 sed '1,19d' ../../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst

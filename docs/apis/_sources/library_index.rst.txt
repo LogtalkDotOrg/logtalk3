@@ -1771,6 +1771,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    rank_centrality <rank_centrality_0>
 
+:ref:`ranked_pairs <library_ranked_pairs>`
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ranked_pairs <ranked_pairs_0>
+
 :ref:`ranking_protocols <library_ranking_protocols>`
 ----------------------------------------------------
 
@@ -1779,6 +1789,7 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
 
+   condorcet_victory_common <condorcet_victory_common_0>
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
    pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>

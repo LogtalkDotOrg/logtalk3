@@ -39,15 +39,31 @@
 
 	:- protected(index_items/3).
 	:- mode(index_items(+list, +integer, -list), one).
+	:- info(index_items/3, [
+		comment is 'Builds ``Item-Index`` pairs for the ordered training items.',
+		argnames is ['Items', 'Index', 'Indices']
+	]).
 
 	:- protected(preprocess_groups/10).
 	:- mode(preprocess_groups(+atom, +list, +object_identifier, +atom, +compound, +integer, -list, -list, -compound, -compound), one).
+	:- info(preprocess_groups/10, [
+		comment is 'Builds per-group choice steps, selection counts, and forward and reverse adjacency dictionaries from grouped rankings under the selected traversal order.',
+		argnames is ['Order', 'Groups', 'Dataset', 'MissingRelevance', 'IndexDictionary', 'Count', 'Steps', 'SelectionCounts', 'DirectedAdjacency', 'ReverseAdjacency']
+	]).
 
 	:- protected(selection_exposures/4).
 	:- mode(selection_exposures(+list, +list, +compound, -list), one).
+	:- info(selection_exposures/4, [
+		comment is 'Computes the per-item exposure counts implied by the grouped choice steps and the current value dictionary.',
+		argnames is ['Steps', 'SelectionCounts', 'ValueDictionary', 'ExposureCounts']
+	]).
 
 	:- protected(normalize_strengths/6).
 	:- mode(normalize_strengths(+list(number), +number, +list(number), -list(number), +number, -number), one).
+	:- info(normalize_strengths/6, [
+		comment is 'Normalizes raw strength values to sum to one while tracking the maximum absolute change from the current strengths.',
+		argnames is ['RawStrengths', 'TotalRawStrength', 'CurrentStrengths', 'Strengths', 'MaximumDifference0', 'MaximumDifference']
+	]).
 
 	index_items([], _Index, []).
 	index_items([Item| Items], Index, [Item-Index| Indices]) :-

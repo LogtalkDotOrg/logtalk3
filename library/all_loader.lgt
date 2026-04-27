@@ -147,6 +147,7 @@
 		copeland(loader),
 		elo(loader),
 		rank_centrality(loader),
+		ranked_pairs(loader),
 		thurstone_mosteller(loader),
 		regression_protocols(loader),
 		gradient_boosting_regression(loader),

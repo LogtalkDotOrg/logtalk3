@@ -29,6 +29,7 @@
 		ranker_common,
 		score_ranker_common,
 		score_ranker_model_common,
+		condorcet_victory_common,
 		grouped_strength_ranker_common,
 		plackett_luce_common,
 		pairwise_strength_ranker_common,

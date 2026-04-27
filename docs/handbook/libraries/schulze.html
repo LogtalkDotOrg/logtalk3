@@ -193,6 +193,7 @@
 <li class="toctree-l2"><a class="reference internal" href="random_forest_regression.html"><code class="docutils literal notranslate"><span class="pre">random_forest_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_projection.html"><code class="docutils literal notranslate"><span class="pre">random_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_centrality.html"><code class="docutils literal notranslate"><span class="pre">rank_centrality</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ranked_pairs.html"><code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ranking_protocols.html"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
@@ -319,7 +320,7 @@ item from aggregated pairwise outcomes.</p></li>
 the Schulze strongest-path dynamic program over aggregated
 head-to-head data.</p></li>
 <li><p><strong>Configurable Direct Edge Semantics</strong>: Supports both winning-votes
-and victory-margins path-strength modes.</p></li>
+and victory-margins victory-strength modes.</p></li>
 <li><p><strong>Strongest-Path Access</strong>: Exposes the labeled strongest-path relation
 for ordered item pairs using the <code class="docutils literal notranslate"><span class="pre">strongest_paths/2</span></code> predicate.</p></li>
 <li><p><strong>Deterministic Ranking</strong>: Orders candidate items by final Schulze
@@ -328,7 +329,7 @@ relation win counts with deterministic tie-breaking.</p></li>
 items, self-preferences, non-positive weights, and disconnected
 comparison graphs.</p></li>
 <li><p><strong>Training Diagnostics</strong>: Learned rankers include dataset summary
-metadata and the effective path-strength mode.</p></li>
+metadata and the effective victory-strength mode.</p></li>
 <li><p><strong>Ranker Export</strong>: Learned rankers can be exported as self-contained
 terms.</p></li>
 </ul>
@@ -337,12 +338,12 @@ terms.</p></li>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">path_strength(winning_votes)</span></code>: Use the winning side’s aggregated
+<li><p><code class="docutils literal notranslate"><span class="pre">victory_strength(winning_votes)</span></code>: Use the winning side’s aggregated
 vote total as the direct edge strength.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path_strength(margins)</span></code>: Use the victory margin as the direct edge
-strength.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">victory_strength(margins)</span></code>: Use the victory margin as the direct
+edge strength.</p></li>
 </ul>
-<p>The default is <code class="docutils literal notranslate"><span class="pre">path_strength(winning_votes)</span></code>.</p>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">victory_strength(winning_votes)</span></code>.</p>
 </section>
 <section id="strongest-paths">
 <h2>Strongest paths<a class="headerlink" href="#strongest-paths" title="Link to this heading"></a></h2>

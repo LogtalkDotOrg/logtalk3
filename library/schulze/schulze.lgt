@@ -20,7 +20,7 @@
 
 
 :- object(schulze,
-	imports([ranking_dataset_common, score_ranker_model_common])).
+	imports([ranking_dataset_common, score_ranker_model_common, condorcet_victory_common])).
 
 	:- info([
 		version is 1:0:0,
@@ -30,10 +30,10 @@
 		remarks is [
 			'Algorithm' - 'Builds the direct pairwise strength graph from aggregated matchups and applies the Schulze strongest-path dynamic program to derive the final pairwise preference relation.',
 			'Strongest-path access' - 'The ``strongest_paths/2`` predicate returns the labeled strongest-path matrix as ``path(Item1,Item2,Strength)`` terms for ordered pairs of distinct items, preserving the learned item order.',
-			'Path-strength semantics' - 'The ``path_strength/1`` option selects whether direct edges use winning votes or victory margins before strongest-path propagation.',
+			'Victory-strength semantics' - 'The ``victory_strength/1`` option selects whether direct edges use winning votes or victory margins before strongest-path propagation.',
 			'Tie-breaking' - 'Items tied in the final Schulze relation receive the same learned score, and ranking ties are then broken deterministically using the standard term order of the item identifiers.',
 			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain comparable in the aggregated matchup graph.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``schulze_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the effective path-strength mode, labeled strongest paths, and dataset summary.'
+			'Ranker representation' - 'The learned ranker is represented by default as ``schulze_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the effective victory-strength mode, labeled strongest paths, and dataset summary.'
 		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland, borda]
 	]).
@@ -50,7 +50,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2, nth1/3
+		length/2, memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -63,10 +63,10 @@
 		^^pairwise_dataset_items(Dataset, Items),
 		^^pairwise_dataset_matchups(Dataset, Matchups),
 		length(Items, Count),
-		index_items(Items, 1, IndexPairs),
+		^^index_items(Items, 1, IndexPairs),
 		as_dictionary(IndexPairs, IndexDictionary),
-		^^option(path_strength(PathStrength), Options),
-		build_direct_strengths(Matchups, IndexDictionary, Count, PathStrength, DirectStrengths),
+		^^option(victory_strength(VictoryStrength), Options),
+		^^build_direct_strengths(Matchups, IndexDictionary, Count, VictoryStrength, DirectStrengths),
 		compute_strongest_paths(DirectStrengths, StrongestPathMatrix),
 		schulze_scores(Count, StrongestPathMatrix, ScoreValues),
 		score_pairs(Items, ScoreValues, Scores),
@@ -85,41 +85,6 @@
 	strongest_paths(Ranker, StrongestPaths) :-
 		^^score_ranker_data(Ranker, _Items, _Scores, Diagnostics),
 		memberchk(strongest_paths(StrongestPaths), Diagnostics).
-
-	build_direct_strengths(Matchups, IndexDictionary, Count, PathStrength, DirectStrengths) :-
-		zero_matrix(Count, DirectStrengths0),
-		accumulate_direct_strengths(Matchups, IndexDictionary, PathStrength, DirectStrengths0, DirectStrengths).
-
-	accumulate_direct_strengths([], _IndexDictionary, _PathStrength, DirectStrengths, DirectStrengths).
-	accumulate_direct_strengths([matchup(Item1, Item2, Item1Wins, Item2Wins)| Matchups], IndexDictionary, PathStrength, DirectStrengths0, DirectStrengths) :-
-		dictionary_lookup(Item1, Index1, IndexDictionary),
-		dictionary_lookup(Item2, Index2, IndexDictionary),
-		direct_strengths(Item1Wins, Item2Wins, PathStrength, Strength12, Strength21),
-		set_matrix_entry(DirectStrengths0, Index1, Index2, Strength12, DirectStrengths1),
-		set_matrix_entry(DirectStrengths1, Index2, Index1, Strength21, DirectStrengths2),
-		accumulate_direct_strengths(Matchups, IndexDictionary, PathStrength, DirectStrengths2, DirectStrengths).
-
-	direct_strengths(Item1Wins, Item2Wins, winning_votes, Strength12, Strength21) :-
-		!,
-		(   Item1Wins > Item2Wins ->
-			Strength12 = Item1Wins,
-			Strength21 = 0
-		;   Item2Wins > Item1Wins ->
-			Strength12 = 0,
-			Strength21 = Item2Wins
-		;   Strength12 = 0,
-			Strength21 = 0
-		).
-	direct_strengths(Item1Wins, Item2Wins, margins, Strength12, Strength21) :-
-		(   Item1Wins > Item2Wins ->
-			Strength12 is Item1Wins - Item2Wins,
-			Strength21 = 0
-		;   Item2Wins > Item1Wins ->
-			Strength12 = 0,
-			Strength21 is Item2Wins - Item1Wins
-		;   Strength12 = 0,
-			Strength21 = 0
-		).
 
 	compute_strongest_paths(DirectStrengths, StrongestPaths) :-
 		length(DirectStrengths, Count),
@@ -156,19 +121,19 @@
 	updated_strength_value(RowIndex, ColumnIndex, _Pivot, OriginalPaths, Value) :-
 		RowIndex =:= ColumnIndex,
 		!,
-		matrix_value(OriginalPaths, RowIndex, ColumnIndex, Value).
+		^^matrix_entry(OriginalPaths, RowIndex, ColumnIndex, Value).
 	updated_strength_value(RowIndex, ColumnIndex, Pivot, OriginalPaths, Value) :-
 		RowIndex =:= Pivot,
 		!,
-		matrix_value(OriginalPaths, RowIndex, ColumnIndex, Value).
+		^^matrix_entry(OriginalPaths, RowIndex, ColumnIndex, Value).
 	updated_strength_value(RowIndex, ColumnIndex, Pivot, OriginalPaths, Value) :-
 		ColumnIndex =:= Pivot,
 		!,
-		matrix_value(OriginalPaths, RowIndex, ColumnIndex, Value).
+		^^matrix_entry(OriginalPaths, RowIndex, ColumnIndex, Value).
 	updated_strength_value(RowIndex, ColumnIndex, Pivot, OriginalPaths, Value) :-
-		matrix_value(OriginalPaths, RowIndex, ColumnIndex, CurrentStrength),
-		matrix_value(OriginalPaths, RowIndex, Pivot, LeftStrength),
-		matrix_value(OriginalPaths, Pivot, ColumnIndex, RightStrength),
+		^^matrix_entry(OriginalPaths, RowIndex, ColumnIndex, CurrentStrength),
+		^^matrix_entry(OriginalPaths, RowIndex, Pivot, LeftStrength),
+		^^matrix_entry(OriginalPaths, Pivot, ColumnIndex, RightStrength),
 		(   LeftStrength =< RightStrength ->
 			CandidateStrength = LeftStrength
 		;   CandidateStrength = RightStrength
@@ -195,8 +160,8 @@
 	schulze_score(Index, OpponentIndex, Count, StrongestPaths, Score0, Score) :-
 		(   Index =:= OpponentIndex ->
 			Score1 = Score0
-		;   matrix_value(StrongestPaths, Index, OpponentIndex, ForwardStrength),
-			matrix_value(StrongestPaths, OpponentIndex, Index, ReverseStrength),
+		;   ^^matrix_entry(StrongestPaths, Index, OpponentIndex, ForwardStrength),
+			^^matrix_entry(StrongestPaths, OpponentIndex, Index, ReverseStrength),
 			(   ForwardStrength > ReverseStrength ->
 				Score1 is Score0 + 1
 			;   Score1 = Score0
@@ -204,43 +169,6 @@
 		),
 		NextOpponentIndex is OpponentIndex + 1,
 		schulze_score(Index, NextOpponentIndex, Count, StrongestPaths, Score1, Score).
-
-	zero_matrix(Count, Matrix) :-
-		zero_matrix(Count, Count, Matrix).
-
-	zero_matrix(0, _Width, []) :-
-		!.
-	zero_matrix(RemainingRows, Width, [Row| Matrix]) :-
-		RemainingRows > 0,
-		zero_row(Width, Row),
-		NextRemainingRows is RemainingRows - 1,
-		zero_matrix(NextRemainingRows, Width, Matrix).
-
-	zero_row(0, []) :-
-		!.
-	zero_row(Count, [0| Row]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_row(NextCount, Row).
-
-	matrix_value(Matrix, RowIndex, ColumnIndex, Value) :-
-		nth1(RowIndex, Matrix, Row),
-		nth1(ColumnIndex, Row, Value).
-
-	set_matrix_entry([Row| Matrix], 1, ColumnIndex, Value, [UpdatedRow| Matrix]) :-
-		!,
-		set_row_entry(Row, ColumnIndex, Value, UpdatedRow).
-	set_matrix_entry([Row| Matrix], RowIndex, ColumnIndex, Value, [Row| UpdatedMatrix]) :-
-		RowIndex > 1,
-		NextRowIndex is RowIndex - 1,
-		set_matrix_entry(Matrix, NextRowIndex, ColumnIndex, Value, UpdatedMatrix).
-
-	set_row_entry([_Entry| Row], 1, Value, [Value| Row]) :-
-		!.
-	set_row_entry([Entry| Row], ColumnIndex, Value, [Entry| UpdatedRow]) :-
-		ColumnIndex > 1,
-		NextColumnIndex is ColumnIndex - 1,
-		set_row_entry(Row, NextColumnIndex, Value, UpdatedRow).
 
 	score_pairs([], [], []).
 	score_pairs([Item| Items], [Score| ScoreValues], [Item-Score| Scores]) :-
@@ -262,11 +190,6 @@
 		),
 		row_strongest_paths(OtherItems, Item, Strengths, StrongestPaths1-StrongestPaths).
 
-	index_items([], _Index, []).
-	index_items([Item| Items], Index, [Item-Index| Indices]) :-
-		NextIndex is Index + 1,
-		index_items(Items, NextIndex, Indices).
-
 	score_ranker_model(schulze).
 
 	score_ranker_label('Schulze').
@@ -277,9 +200,9 @@
 		integer(Score),
 		Score >= 0.
 
-	valid_option(path_strength(Value)) :-
+	valid_option(victory_strength(Value)) :-
 		once((Value == winning_votes; Value == margins)).
 
-	default_option(path_strength(winning_votes)).
+	default_option(victory_strength(winning_votes)).
 
 :- end_object.

@@ -61,8 +61,8 @@
 		schulze::learn(singleton_pairwise, Ranker),
 		schulze::strongest_paths(Ranker, StrongestPaths).
 
-	test(schulze_learn_3_custom_options, deterministic(memberchk(options([path_strength(margins)]), Diagnostics))) :-
-		schulze::learn(regular_head_to_head, schulze_ranker(_Items, _Scores, Diagnostics), [path_strength(margins)]).
+	test(schulze_learn_3_custom_options, deterministic(memberchk(options([victory_strength(margins)]), Diagnostics))) :-
+		schulze::learn(regular_head_to_head, schulze_ranker(_Items, _Scores, Diagnostics), [victory_strength(margins)]).
 
 	test(schulze_learn_3_unknown_option_error, error(domain_error(option, tie_policy(ignore_missing)))) :-
 		schulze::learn(regular_head_to_head, _Ranker, [tie_policy(ignore_missing)]).
@@ -98,7 +98,7 @@
 		schulze::learn(strong_path_pairwise, Ranker),
 		schulze::strongest_paths(Ranker, StrongestPaths).
 
-	test(schulze_diagnostics_2, deterministic((memberchk(model(schulze), Diagnostics), memberchk(options([path_strength(winning_votes)]), Diagnostics)))) :-
+	test(schulze_diagnostics_2, deterministic((memberchk(model(schulze), Diagnostics), memberchk(options([victory_strength(winning_votes)]), Diagnostics)))) :-
 		schulze::learn(regular_head_to_head, Ranker),
 		schulze::diagnostics(Ranker, Diagnostics).
 
@@ -106,7 +106,7 @@
 		schulze::learn(regular_head_to_head, Ranker),
 		schulze::diagnostic(Ranker, model(schulze)).
 
-	test(schulze_ranker_options_2, deterministic(Options == [path_strength(winning_votes)])) :-
+	test(schulze_ranker_options_2, deterministic(Options == [victory_strength(winning_votes)])) :-
 		schulze::learn(regular_head_to_head, Ranker),
 		schulze::ranker_options(Ranker, Options).
 
@@ -156,8 +156,8 @@
 	test(schulze_rank_invalid_ranker_error, error(domain_error(schulze_ranker, fake_ranker([alpha], [alpha-0], [model(fake)])))) :-
 		schulze::rank(fake_ranker([alpha], [alpha-0], [model(fake)]), [alpha], _Ranking).
 
-	test(schulze_scores_invalid_ranker_error, error(domain_error(schulze_ranker, schulze_ranker([alpha, beta], [alpha-1.5, beta-0], [model(schulze), options([path_strength(winning_votes)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])])))) :-
-		schulze::scores(schulze_ranker([alpha, beta], [alpha-1.5, beta-0], [model(schulze), options([path_strength(winning_votes)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
+	test(schulze_scores_invalid_ranker_error, error(domain_error(schulze_ranker, schulze_ranker([alpha, beta], [alpha-1.5, beta-0], [model(schulze), options([victory_strength(winning_votes)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])])))) :-
+		schulze::scores(schulze_ranker([alpha, beta], [alpha-1.5, beta-0], [model(schulze), options([victory_strength(winning_votes)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(schulze_strongest_paths_invalid_ranker_error, error(domain_error(schulze_ranker, fake_ranker([alpha], [alpha-0], [model(fake)])))) :-
 		schulze::strongest_paths(fake_ranker([alpha], [alpha-0], [model(fake)]), _StrongestPaths).

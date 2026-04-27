@@ -194,6 +194,9 @@ preference ranking using a regularized Bradley-Terry model.
 * ADDED: New `schulze` library implementing pairwise preference ranking
 using the Schulze strongest-path method.
 
+* ADDED: New `ranked_pairs` library implementing pairwise preference
+ranking using the Ranked Pairs lock-graph method.
+
 * ADDED: New `thurstone_mosteller` library implementing pairwise
 preference ranking using a deterministic Thurstone-Mosteller Case V fit.
 

@@ -29,6 +29,7 @@
 		ranker_protocol,
 		ranker_common,
 		score_ranker_common,
+		condorcet_victory_common,
 		ranking_dataset_common,
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol
@@ -38,6 +39,8 @@
 	]),
 	logtalk_load([
 		'test_datasets/head_to_head',
+		'test_datasets/regular_head_to_head',
+		'test_datasets/condorcet_divergence_pairwise',
 		'test_datasets/sparse_preferences',
 		'test_datasets/disconnected_pairwise',
 		'test_datasets/cyclic_pairwise',

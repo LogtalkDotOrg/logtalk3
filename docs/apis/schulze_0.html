@@ -207,6 +207,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random-forest-regression"><span class="xref std std-ref">random_forest_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random-projection"><span class="xref std std-ref">random_projection</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#rank-centrality"><span class="xref std std-ref">rank_centrality</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ranked-pairs"><span class="xref std std-ref">ranked_pairs</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ranking-protocols"><span class="xref std std-ref">ranking_protocols</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
@@ -327,6 +328,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="ranking_dataset_common_0.html#ranking-dataset-common-0"><span class="std std-ref">ranking_dataset_common</span></a></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="score_ranker_model_common_0.html#score-ranker-model-common-0"><span class="std std-ref">score_ranker_model_common</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="condorcet_victory_common_0.html#condorcet-victory-common-0"><span class="std std-ref">condorcet_victory_common</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
@@ -341,10 +343,10 @@
 <div><ul class="simple">
 <li><p>Algorithm: Builds the direct pairwise strength graph from aggregated matchups and applies the Schulze strongest-path dynamic program to derive the final pairwise preference relation.</p></li>
 <li><p>Strongest-path access: The <code class="docutils literal notranslate"><span class="pre">strongest_paths/2</span></code> predicate returns the labeled strongest-path matrix as <code class="docutils literal notranslate"><span class="pre">path(Item1,Item2,Strength)</span></code> terms for ordered pairs of distinct items, preserving the learned item order.</p></li>
-<li><p>Path-strength semantics: The <code class="docutils literal notranslate"><span class="pre">path_strength/1</span></code> option selects whether direct edges use winning votes or victory margins before strongest-path propagation.</p></li>
+<li><p>Victory-strength semantics: The <code class="docutils literal notranslate"><span class="pre">victory_strength/1</span></code> option selects whether direct edges use winning votes or victory margins before strongest-path propagation.</p></li>
 <li><p>Tie-breaking: Items tied in the final Schulze relation receive the same learned score, and ranking ties are then broken deterministically using the standard term order of the item identifiers.</p></li>
 <li><p>Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain comparable in the aggregated matchup graph.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">schulze_ranker(Items,</span> <span class="pre">Scores,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Scores</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the effective path-strength mode, labeled strongest paths, and dataset summary.</p></li>
+<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">schulze_ranker(Items,</span> <span class="pre">Scores,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Scores</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the effective victory-strength mode, labeled strongest paths, and dataset summary.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

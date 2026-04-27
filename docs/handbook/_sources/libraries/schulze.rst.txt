@@ -49,7 +49,7 @@ Features
   the Schulze strongest-path dynamic program over aggregated
   head-to-head data.
 - **Configurable Direct Edge Semantics**: Supports both winning-votes
-  and victory-margins path-strength modes.
+  and victory-margins victory-strength modes.
 - **Strongest-Path Access**: Exposes the labeled strongest-path relation
   for ordered item pairs using the ``strongest_paths/2`` predicate.
 - **Deterministic Ranking**: Orders candidate items by final Schulze
@@ -58,7 +58,7 @@ Features
   items, self-preferences, non-positive weights, and disconnected
   comparison graphs.
 - **Training Diagnostics**: Learned rankers include dataset summary
-  metadata and the effective path-strength mode.
+  metadata and the effective victory-strength mode.
 - **Ranker Export**: Learned rankers can be exported as self-contained
   terms.
 
@@ -67,12 +67,12 @@ Options
 
 The following options can be passed to the ``learn/3`` predicate:
 
-- ``path_strength(winning_votes)``: Use the winning side's aggregated
+- ``victory_strength(winning_votes)``: Use the winning side's aggregated
   vote total as the direct edge strength.
-- ``path_strength(margins)``: Use the victory margin as the direct edge
-  strength.
+- ``victory_strength(margins)``: Use the victory margin as the direct
+  edge strength.
 
-The default is ``path_strength(winning_votes)``.
+The default is ``victory_strength(winning_votes)``.
 
 Strongest paths
 ---------------

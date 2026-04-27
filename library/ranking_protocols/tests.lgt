@@ -56,6 +56,48 @@
 :- end_object.
 
 
+:- object(condorcet_test_support,
+	imports([ranking_dataset_common, condorcet_victory_common])).
+
+	:- public(indexed_items/2).
+	:- public(direct_strengths/3).
+	:- public(zero_square_matrix/2).
+	:- public(matrix_entry/4).
+	:- public(update_matrix_entry/5).
+
+	:- uses(avltree, [
+		as_dictionary/2
+	]).
+
+	:- uses(list, [
+		length/2
+	]).
+
+	indexed_items(Dataset, IndexPairs) :-
+		^^pairwise_dataset_items(Dataset, Items),
+		^^index_items(Items, 1, IndexPairs).
+
+	direct_strengths(Dataset, VictoryStrength, DirectStrengths) :-
+		^^validate_pairwise_dataset(Dataset, _Summary),
+		^^pairwise_dataset_items(Dataset, Items),
+		^^pairwise_dataset_matchups(Dataset, Matchups),
+		^^index_items(Items, 1, IndexPairs),
+		as_dictionary(IndexPairs, IndexDictionary),
+		length(Items, Count),
+		^^build_direct_strengths(Matchups, IndexDictionary, Count, VictoryStrength, DirectStrengths).
+
+	zero_square_matrix(Count, Matrix) :-
+		^^zero_matrix(Count, Matrix).
+
+	matrix_entry(Matrix, RowIndex, ColumnIndex, Value) :-
+		^^matrix_entry(Matrix, RowIndex, ColumnIndex, Value).
+
+	update_matrix_entry(Matrix, RowIndex, ColumnIndex, Value, UpdatedMatrix) :-
+		^^set_matrix_entry(Matrix, RowIndex, ColumnIndex, Value, UpdatedMatrix).
+
+:- end_object.
+
+
 :- object(sample_ranker,
 	implements(ranker_protocol),
 	imports([ranking_dataset_common, ranker_common])).
@@ -152,6 +194,27 @@
 
 	test(cyclic_pairwise_validation, deterministic) :-
 		ranking_test_support::validate_pairwise_dataset(cyclic_pairwise).
+
+	test(condorcet_divergence_pairwise_validation, deterministic) :-
+		ranking_test_support::validate_pairwise_dataset(condorcet_divergence_pairwise).
+
+	test(condorcet_victory_common_index_items, deterministic(IndexPairs == [alpha-1, beta-2, gamma-3, delta-4])) :-
+		condorcet_test_support::indexed_items(head_to_head, IndexPairs).
+
+	test(condorcet_victory_common_build_direct_strengths_winning_votes, deterministic(DirectStrengths == [[0, 6, 6, 7], [0, 0, 5, 6], [0, 0, 0, 5], [0, 0, 0, 0]])) :-
+		condorcet_test_support::direct_strengths(regular_head_to_head, winning_votes, DirectStrengths).
+
+	test(condorcet_victory_common_build_direct_strengths_margins, deterministic(DirectStrengths == [[0, 5, 4, 5], [0, 0, 3, 4], [0, 0, 0, 3], [0, 0, 0, 0]])) :-
+		condorcet_test_support::direct_strengths(regular_head_to_head, margins, DirectStrengths).
+
+	test(condorcet_victory_common_zero_matrix, deterministic(Matrix == [[0, 0, 0], [0, 0, 0], [0, 0, 0]])) :-
+		condorcet_test_support::zero_square_matrix(3, Matrix).
+
+	test(condorcet_victory_common_matrix_entry, deterministic(Value == 5)) :-
+		condorcet_test_support::matrix_entry([[0, 5], [1, 0]], 1, 2, Value).
+
+	test(condorcet_victory_common_set_matrix_entry, deterministic(UpdatedMatrix == [[0, 7], [0, 0]])) :-
+		condorcet_test_support::update_matrix_entry([[0, 0], [0, 0]], 1, 2, 7, UpdatedMatrix).
 
 	test(sparse_preferences_summary, deterministic(memberchk(isolated_items([gamma]), Summary))) :-
 		ranking_test_support::pairwise_dataset_summary(sparse_preferences, Summary).

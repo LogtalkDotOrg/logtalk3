@@ -1,0 +1,150 @@
+.. index:: single: condorcet_victory_common
+.. _condorcet_victory_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``condorcet_victory_common``
+============================
+
+Shared direct-victory preprocessing helpers for Condorcet-family rankers.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: index_items/3
+.. _condorcet_victory_common/0::index_items/3:
+
+``index_items/3``
+^^^^^^^^^^^^^^^^^
+
+Builds ``Item-Index`` pairs for the ordered training items.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``index_items(Items,Index,Indices)``
+| **Mode and number of proofs:**
+|    ``index_items(+list,+integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: build_direct_strengths/5
+.. _condorcet_victory_common/0::build_direct_strengths/5:
+
+``build_direct_strengths/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the dense direct-victory strength matrix from aggregated pairwise matchups using the selected victory-strength semantics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_direct_strengths(Matchups,IndexDictionary,Count,VictoryStrength,DirectStrengths)``
+| **Mode and number of proofs:**
+|    ``build_direct_strengths(+list,+compound,+integer,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: zero_matrix/2
+.. _condorcet_victory_common/0::zero_matrix/2:
+
+``zero_matrix/2``
+^^^^^^^^^^^^^^^^^
+
+Builds a square zero matrix with the given row and column count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_matrix(Count,Matrix)``
+| **Mode and number of proofs:**
+|    ``zero_matrix(+integer,-list)`` - ``one``
+
+
+------------
+
+.. index:: matrix_entry/4
+.. _condorcet_victory_common/0::matrix_entry/4:
+
+``matrix_entry/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the value stored at the given matrix row and column.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_entry(Matrix,RowIndex,ColumnIndex,Value)``
+| **Mode and number of proofs:**
+|    ``matrix_entry(+list,+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: set_matrix_entry/5
+.. _condorcet_victory_common/0::set_matrix_entry/5:
+
+``set_matrix_entry/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an updated matrix where the given row and column entry was replaced by the supplied value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_matrix_entry(Matrix,RowIndex,ColumnIndex,Value,UpdatedMatrix)``
+| **Mode and number of proofs:**
+|    ``set_matrix_entry(+list,+integer,+integer,+integer,-list)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
