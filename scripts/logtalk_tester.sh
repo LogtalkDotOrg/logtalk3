@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 2, 2026
+##   Last updated on April 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 26.1"
+	echo "$(basename "$0") 27.0"
 	exit 0
 }
 
@@ -93,6 +93,7 @@ wipe='false'
 timeout=0
 jobs=1
 prefix="$HOME/"
+audible_completion='false'
 issue_server=""
 issue_labels="bug"
 url=""
@@ -124,6 +125,30 @@ format_decimal() {
     local places=$2
     LC_NUMERIC=C
 	printf "%.${places}f" "$num"
+}
+
+notify_completion() {
+	status="$1"
+
+	if [ "$audible_completion" != 'true' ] || [ ! -t 1 ] ; then
+		return
+	fi
+
+	if [ "$status" -eq 0 ] ; then
+		printf '\a'
+		sleep 0.10
+		printf '\a'
+	else
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+	fi
 }
 
 run_testset() {
@@ -354,7 +379,7 @@ usage_help() {
 	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-z] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -386,13 +411,15 @@ usage_help() {
 	echo "  -r random generator starting seed (no default)"
 	echo "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
 	echo "     (this option should not be used when running parallel processes that use the same test sets)"
+	echo "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	echo "  -- arguments to be passed to the tests (no default)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vp:o:m:f:d:t:j:n:s:b:u:c:l:e:g:r:i:wh" option; do
+while getopts "vzp:o:m:f:d:t:j:n:s:b:u:c:l:e:g:r:i:wh" option; do
 	case $option in
+		z) audible_completion='true';;
 		v) print_version;;
 		p) p_arg="$OPTARG";;
 		o) o_arg="$OPTARG";;
@@ -885,13 +912,17 @@ fi
 echo "% Batch run took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
 
 if [ "$crashed" -gt 0 ] ; then
-	exit 7
+	exit_code=7
 elif [ "$broken" -gt 0 ] ; then
-	exit 5
+	exit_code=5
 elif [ "$timeouts" -gt 0 ] ; then
-	exit 3
+	exit_code=3
 elif [ "$((failed - flaky))" -gt 0 ] ; then
-	exit 1
+	exit_code=1
 else
-	exit 0
+	exit_code=0
 fi
+
+notify_completion "$exit_code"
+
+exit "$exit_code"

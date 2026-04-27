@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on February 24, 2026
+##   Last updated on April 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,6 +32,7 @@ param(
 	[String]$s = $env:USERPROFILE,
 	# disable timeouts to maintain backward compatibility
 	[String]$t = 0,
+	[Switch]$z,
 	[String]$a = "",
 	[Switch]$v,
 	[Switch]$h
@@ -40,7 +41,60 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 3.0"
+	Write-Output "$myName 4.0"
+}
+
+Function Invoke-CompletionNotification {
+	param(
+		[Parameter(Mandatory = $true)]
+		[int]$ExitCode
+	)
+
+	if (-not $z -or [Console]::IsOutputRedirected) {
+		return
+	}
+
+	$use_native_beep = $true
+
+	try {
+		if ($ExitCode -eq 0) {
+			[Console]::Beep(1760, 120)
+			Start-Sleep -Milliseconds 100
+			[Console]::Beep(2093, 160)
+		} else {
+			[Console]::Beep(880, 140)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(880, 140)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(698, 260)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(698, 260)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(698, 260)
+		}
+	} catch {
+		$use_native_beep = $false
+	}
+
+	if (-not $use_native_beep) {
+		if ($ExitCode -eq 0) {
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 100
+			[Console]::Write("`a")
+		} else {
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+		}
+	}
 }
 
 Function Invoke-Doclets() {
@@ -94,7 +148,7 @@ Function Write-Usage-Help() {
 	Write-Output  "case of failed doclets or doclet errors, this script returns a non-zero exit code."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName -p prolog [-d results] [-t timeout] [-s prefix] [-a arguments]"
+	Write-Output "  $myName -p prolog [-d results] [-t timeout] [-s prefix] [-z] [-a arguments]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
@@ -106,6 +160,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	Write-Output "  -t timeout in seconds for running each doclet (default is $t; i.e. disabled)"
 	Write-Output "  -s suppress path prefix (default is $s)"
+	Write-Output "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	Write-Output "  -a arguments wrapped as a string to be passed to the integration script used to run the doclets (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -305,11 +360,14 @@ Write-Output '******************************************************************
 Pop-Location
 
 if ($crashes -gt 0) {
-	Exit 7
+	$exit_code = 7
 } elseif ($timeouts -gt 0) {
-	Exit 3
+	$exit_code = 3
 } elseif ($failures -gt 0) {
-	Exit 1
+	$exit_code = 1
 } else {
-	Exit 0
+	$exit_code = 0
 }
+
+Invoke-CompletionNotification $exit_code
+Exit $exit_code

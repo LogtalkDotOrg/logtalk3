@@ -306,6 +306,9 @@ and `validations` libraries.
 Tools
 -----
 
+* ADDED: New option, `-z`, to the `logtalk_doclet` and `logtalk_tester` Bash
+and PowerShell scripts to make a sound on completion.
+
 * IMPROVED: Rewritten `sarif` tool auxiliary predicate to be tail-recursive.
 
 * FIXED: Deleted dead code in the `dead_code_scanner` tool.

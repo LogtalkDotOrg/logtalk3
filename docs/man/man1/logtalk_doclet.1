@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "January 15, 2026" "Logtalk 3.98.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "April 28, 2026" "Logtalk 3.100.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -10,6 +10,7 @@ logtalk_doclet \- Logtalk script for automating running doclets
 [\fB-d \fIresults\fR]
 [\fB-t \fItimeout\fR]
 [\fB-s \fIprefix\fR]
+[\fB-z\fR]
 [\fB-- \fIarguments\fR]
 .br
 .B logtalk_doclet -h
@@ -33,6 +34,9 @@ Timeout in seconds for running each doclet. Default is \fI0\fR (i.e., disabled).
 .TP
 .BI \-s
 Path prefix to suppress when printing doclet paths. Default is the user home directory.
+.TP
+.BI \-z
+Enable audible completion notification: two chimes on exit status 0, five chimes otherwise. Default is off.
 .TP
 .BI \--
 Arguments to be passed to the integration script used to run the doclets (no default).

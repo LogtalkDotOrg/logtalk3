@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on February 24, 2026
+##   Last updated on April 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -31,7 +31,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 3.0"
+	echo "$(basename "$0") 4.0"
 	exit 0
 }
 
@@ -76,6 +76,31 @@ logtalk_call="$logtalk -g"
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
+audible_completion='false'
+
+notify_completion() {
+	status="$1"
+
+	if [ "$audible_completion" != 'true' ] || [ ! -t 1 ] ; then
+		return
+	fi
+
+	if [ "$status" -eq 0 ] ; then
+		printf '\a'
+		sleep 0.10
+		printf '\a'
+	else
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+		sleep 0.05
+		printf '\a'
+	fi
+}
 
 run_doclets() {
 	directory=$(dirname "$1")
@@ -116,7 +141,7 @@ usage_help() {
 	echo  "case of failed doclets or doclet errors, this script returns a non-zero exit code."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-d results] [-t timeout] [-s prefix] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-d results] [-t timeout] [-s prefix] [-z] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -128,14 +153,16 @@ usage_help() {
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
 	echo "  -s suppress path prefix (default is $prefix)"
+	echo "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	echo "  -- arguments to be passed to the integration script used to run the doclets (no default)"
 	echo "  -v print version"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vp:m:f:d:t:s:h" option; do
+while getopts "vzp:m:f:d:t:s:h" option; do
 	case $option in
+		z) audible_completion='true';;
 		v) print_version;;
 		p) p_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
@@ -321,11 +348,14 @@ echo "***** Batch documentation processing took $(printf '%dh:%02dm:%02ds' $hour
 echo '*******************************************************************************'
 
 if [ "$crashes" -gt 0 ] ; then
-	exit 7
+	exit_code=7
 elif [ "$timeouts" -gt 0 ] ; then
-	exit 3
+	exit_code=3
 elif [ "$failures" -gt 0 ] ; then
-	exit 1
+	exit_code=1
 else
-	exit 0
+	exit_code=0
 fi
+
+notify_completion "$exit_code"
+exit "$exit_code"

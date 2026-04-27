@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "February 27, 2026" "Logtalk 3.99.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "April 28, 2026" "Logtalk 3.100.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -24,6 +24,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 [\fB-g \fIgoal\fR]
 [\fB-r \fIseed\fR]
 [\fB-w\fR]
+[\fB-z\fR]
 [\fB-- \fIarguments\fR]
 .br
 .B logtalk_tester -h
@@ -89,6 +90,9 @@ Random generator starting seed (no default). Only meaningful when running proper
 .TP
 .BI \-w
 Wipe test set default scratch directories (\fI./.lgt_tmp\fR and \fI./lgt_tmp\fR) before running it. This option should not be used when running parallel processes that use the same test sets.
+.TP
+.BI \-z
+Enable audible completion notification: two chimes on exit status 0, five chimes otherwise. Default is off.
 .TP
 .BI \--
 Arguments to be passed to the tests (no default).

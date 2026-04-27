@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 21, 2026
+##   Last updated on April 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -47,6 +47,7 @@ param(
 	[String]$r,
 	[String]$testset,
 	[Switch]$w,
+	[Switch]$z,
 	[String[]]$a,
 	[Switch]$v,
 	[Switch]$h
@@ -55,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 18.3"
+	Write-Output "$myName 19.0"
 }
 
 Function Format-Decimal {
@@ -64,6 +65,59 @@ Function Format-Decimal {
         [int]$DecimalPlaces
     )
     return [Math]::Round($Number, $DecimalPlaces)
+}
+
+Function Invoke-CompletionNotification {
+	param(
+		[Parameter(Mandatory = $true)]
+		[int]$ExitCode
+	)
+
+	if (-not $z -or [Console]::IsOutputRedirected) {
+		return
+	}
+
+	$use_native_beep = $true
+
+	try {
+		if ($ExitCode -eq 0) {
+			[Console]::Beep(1760, 120)
+			Start-Sleep -Milliseconds 100
+			[Console]::Beep(2093, 160)
+		} else {
+			[Console]::Beep(880, 140)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(880, 140)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(698, 260)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(698, 260)
+			Start-Sleep -Milliseconds 50
+			[Console]::Beep(698, 260)
+		}
+	} catch {
+		$use_native_beep = $false
+	}
+
+	if (-not $use_native_beep) {
+		if ($ExitCode -eq 0) {
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 100
+			[Console]::Write("`a")
+		} else {
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+			Start-Sleep -Milliseconds 50
+			[Console]::Write("`a")
+		}
+	}
 }
 
 Function ConvertTo-ArgumentString {
@@ -353,7 +407,7 @@ Function Write-Usage-Help() {
 	Write-Output "The `"tester.sh`" file is sourced with all the parameters passed to the script."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-a arguments]"
+	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-j jobs] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-z] [-a arguments]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
@@ -384,6 +438,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -r random generator starting seed (no default)"
 	Write-Output "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
 	Write-Output "     (this option should not be used when running parallel processes that use the same test sets)"
+	Write-Output "  -z audible completion notification (two chimes on exit 0, five otherwise; default is off)"
 	Write-Output "  -a arguments as an array (i.e., comma separated) to be passed to the tests (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -761,6 +816,7 @@ if ($max_jobs -eq 1) {
 	if ($g -ne "") { $worker_arguments += @('-g', $g) }
 	if ($r -ne "") { $worker_arguments += @('-r', $r) }
 	if ($w -eq $true) { $worker_arguments += '-w' }
+	if ($z -eq $true) { $worker_arguments += '-z' }
 	if ($null -ne $a -and $a.Count -gt 0) { $worker_arguments += @('-a', ($a -join ',')) }
 
 	$workers = @()
@@ -975,13 +1031,16 @@ Write-Output "% Batch run took $runtime_str"
 Pop-Location
 
 if ($crashed -gt 0) {
-	Exit 7
+	$exit_code = 7
 } elseif ($broken -gt 0) {
-	Exit 5
+	$exit_code = 5
 } elseif ($timeouts -gt 0) {
-	Exit 3
+	$exit_code = 3
 } elseif (($failed - $flaky) -gt 0) {
-	Exit 1
+	$exit_code = 1
 } else {
-	Exit 0
+	$exit_code = 0
 }
+
+Invoke-CompletionNotification $exit_code
+Exit $exit_code
