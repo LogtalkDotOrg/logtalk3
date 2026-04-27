@@ -20,9 +20,12 @@
 
 
 :- initialization((
+	logtalk_load(basic_types(loader)),
 	logtalk_load(pattern_mining_protocols(loader)),
 	logtalk_load([
 		transaction_dataset_protocol,
 		frequent_pattern_mining_common
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 )).

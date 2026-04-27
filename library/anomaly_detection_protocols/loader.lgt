@@ -27,5 +27,7 @@
 		anomaly_detector_protocol,
 		anomaly_detector_common,
 		anomaly_dataset_protocol
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 )).

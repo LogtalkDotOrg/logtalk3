@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "regression_tree" library.'
 	]).
 
@@ -44,6 +44,17 @@
 
 	test(regression_tree_learn_2_step_signal, deterministic(ground(Regressor))) :-
 		regression_tree::learn(step_signal, Regressor).
+
+	test(regression_tree_valid_regressor_1, deterministic(regression_tree::valid_regressor(Regressor))) :-
+		regression_tree::learn(step_signal, Regressor).
+
+	test(regression_tree_invalid_regressor_1, fail) :-
+		regression_tree::valid_regressor(regression_tree_regressor(
+			[continuous(x, 0.0, 1.0)],
+			[feature(x, value), feature(x, missing)],
+			node(3, 0.5, 7.0, leaf(1.0), leaf(2.0)),
+			[maximum_depth(10), minimum_samples_leaf(1), minimum_variance_reduction(0.0), feature_scaling(false)]
+		)).
 
 	test(regression_tree_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
 		regression_tree::learn(step_signal, Regressor, [minimum_samples_leaf(2)]),

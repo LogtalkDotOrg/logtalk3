@@ -24,7 +24,13 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load(loader),
+	logtalk_load([
+		pattern_miner_protocol,
+		pattern_miner_common
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

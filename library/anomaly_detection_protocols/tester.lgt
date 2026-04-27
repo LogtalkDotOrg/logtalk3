@@ -23,7 +23,15 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
-	logtalk_load(loader),
+	logtalk_load(options(loader)),
+	logtalk_load([
+		anomaly_detector_protocol,
+		anomaly_detector_common,
+		anomaly_dataset_protocol
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load([
 		'test_datasets/gaussian_anomalies',
 		'test_datasets/mixed_distance_behaviors',

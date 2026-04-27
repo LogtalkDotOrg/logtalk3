@@ -22,6 +22,10 @@
 :- object(sample_classifier,
 	imports(classifier_common)).
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
 	learn(Dataset, sample_classifier(DefaultClass, Diagnostics)) :-
 		Dataset::class_values([DefaultClass| _]),
 		Diagnostics = [

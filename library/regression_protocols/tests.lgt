@@ -33,6 +33,16 @@
 
 	predict(sample_regressor(_TargetName, _Attributes, Target, _Options), _Instance, Target).
 
+	check_regressor(Regressor) :-
+		(   Regressor = sample_regressor(TargetName, Attributes, Target, Options),
+			atom(TargetName),
+			^^valid_attribute_declarations(Attributes),
+			number(Target),
+			^^valid_regressor_options(Options) ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
+
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Regressor'].
 
@@ -59,7 +69,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-04-27,
 		comment is 'Smoke tests for the "regression_protocols" library.'
 	]).
 
@@ -77,6 +87,12 @@
 
 	test(sample_regressor_learn_3, deterministic(ground(Regressor))) :-
 		sample_regressor::learn(simple_line, Regressor, [sample_option(enabled)]).
+
+	test(sample_regressor_valid_regressor_1, deterministic(sample_regressor::valid_regressor(Regressor))) :-
+		sample_regressor::learn(simple_line, Regressor).
+
+	test(sample_regressor_invalid_regressor_1, fail) :-
+		sample_regressor::valid_regressor(sample_regressor(y, [x], bad, [sample_option(enabled)])).
 
 	test(sample_regressor_predict_3, deterministic(Prediction == 3)) :-
 		sample_regressor::learn(simple_line, Regressor),

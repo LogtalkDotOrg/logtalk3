@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-27,
 		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using batch gradient descent. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to minimize mean squared error. Supports optional L2 regularization and optional feature scaling for continuous attributes.',
@@ -261,6 +261,17 @@
 		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Options'].
 
 	regressor_term_template(linear_regressor(_Encoders, _Bias, _Weights, _Options), linear_regressor('Encoders', 'Bias', 'Weights', 'Options')).
+
+	check_regressor(Regressor) :-
+		(   Regressor = linear_regressor(Encoders, Bias, Weights, Options),
+			^^valid_regression_encoders(Encoders),
+			valid(float, Bias),
+			encoders_feature_count(Encoders, FeatureCount),
+			valid(list(float, FeatureCount), Weights),
+			^^valid_regressor_options(Options) ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Regressor = linear_regressor(Encoders, Bias, Weights, Options),

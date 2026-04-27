@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
 		remarks is [
 			'Algorithm' - 'Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.',
@@ -261,6 +261,15 @@
 		Template =.. [Functor, 'Encoders', 'Rows', 'Options'].
 
 	regressor_term_template(knn_regressor(_Encoders, _Rows, _Options), knn_regressor('Encoders', 'Rows', 'Options')).
+
+	check_regressor(Regressor) :-
+		(   Regressor = knn_regressor(Encoders, Rows, Options),
+			^^valid_regression_encoders(Encoders),
+			^^valid_encoded_rows(Encoders, Rows),
+			^^valid_regressor_options(Options) ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Regressor = knn_regressor(Encoders, Rows, Options),

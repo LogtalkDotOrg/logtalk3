@@ -15,7 +15,7 @@ Protocol for machine learning regressors.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-21
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -91,6 +91,44 @@ Predicts the numeric target value for a new instance using the learned regressor
 |    ``predict(Regressor,Instance,Target)``
 | **Mode and number of proofs:**
 |    ``predict(+compound,+list,-number)`` - ``one``
+
+
+------------
+
+.. index:: check_regressor/1
+.. _regressor_protocol/0::check_regressor/1:
+
+``check_regressor/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a learned regressor term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid regressor representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_regressor(Regressor)``
+| **Mode and number of proofs:**
+|    ``check_regressor(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_regressor/1
+.. _regressor_protocol/0::valid_regressor/1:
+
+``valid_regressor/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+True when a learned regressor term is structurally valid for the receiving implementation. Succeeds iff ``check_regressor/1`` succeeds without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_regressor(Regressor)``
+| **Mode and number of proofs:**
+|    ``valid_regressor(+compound)`` - ``zero_or_one``
 
 
 ------------

@@ -8,14 +8,14 @@
 ``regressor_common``
 ====================
 
-Shared predicates for regressor learning defaults, dataset validation, export, and pretty-print helpers.
+Shared predicates for regressor learning defaults, validation, dataset validation, export, and pretty-print helpers.
 
 | **Availability:** 
 |    ``logtalk_load(regression_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-21
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -26,12 +26,13 @@ Shared predicates for regressor learning defaults, dataset validation, export, a
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  
+|     :ref:`regressor_protocol/0::check_regressor/1`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
 
 .. contents::
    :local:
@@ -174,6 +175,158 @@ Pretty-printing helper predicate used by importing regressor implementations to 
 |    ``print_regressor_template(Regressor)``
 | **Mode and number of proofs:**
 |    ``print_regressor_template(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_attribute_names/1
+.. _regressor_common/0::valid_attribute_names/1:
+
+``valid_attribute_names/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of attribute names is a proper list of distinct atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_attribute_names(AttributeNames)``
+| **Mode and number of proofs:**
+|    ``valid_attribute_names(+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_attribute_declarations/1
+.. _regressor_common/0::valid_attribute_declarations/1:
+
+``valid_attribute_declarations/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of attribute declarations is a proper list of distinct ``Attribute-Values`` pairs where values are either ``continuous`` or a valid discrete value list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_attribute_declarations(Attributes)``
+| **Mode and number of proofs:**
+|    ``valid_attribute_declarations(+list(pair))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_discrete_values/1
+.. _regressor_common/0::valid_discrete_values/1:
+
+``valid_discrete_values/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of categorical values is non-empty, contains only nonvar terms, and has no duplicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_discrete_values(Values)``
+| **Mode and number of proofs:**
+|    ``valid_discrete_values(+list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_regression_encoders/1
+.. _regressor_common/0::valid_regression_encoders/1:
+
+``valid_regression_encoders/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of encoders only contains valid ``continuous/3`` or ``categorical/2`` encoder terms with distinct attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_regression_encoders(Encoders)``
+| **Mode and number of proofs:**
+|    ``valid_regression_encoders(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_regressor_options/1
+.. _regressor_common/0::valid_regressor_options/1:
+
+``valid_regressor_options/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of options is structurally valid for the receiving regressor implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_regressor_options(Options)``
+| **Mode and number of proofs:**
+|    ``valid_regressor_options(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_encoded_rows/2
+.. _regressor_common/0::valid_encoded_rows/2:
+
+``valid_encoded_rows/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when encoded training rows match the feature count induced by the encoders and carry numeric targets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_encoded_rows(Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``valid_encoded_rows(+list(compound),+list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_feature_labels/1
+.. _regressor_common/0::valid_feature_labels/1:
+
+``valid_feature_labels/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of regression-tree feature labels only contains valid ``feature/2`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_feature_labels(FeatureLabels)``
+| **Mode and number of proofs:**
+|    ``valid_feature_labels(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_regression_tree/2
+.. _regressor_common/0::valid_regression_tree/2:
+
+``valid_regression_tree/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a regression tree only contains valid ``leaf/1`` and ``node/5`` terms using feature indexes within bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_regression_tree(Tree,FeatureCount)``
+| **Mode and number of proofs:**
+|    ``valid_regression_tree(+compound,+positive_integer)`` - ``zero_or_one``
 
 
 ------------

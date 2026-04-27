@@ -315,7 +315,7 @@
 			true
 		;   permission_error(repeat, attribute_declaration, Attribute)
 		),
-		remove_attribute_declarations(Attribute, Attributes, RemainingAttributes),
+		remove_attribute_declarations(Attributes, Attribute, RemainingAttributes),
 		check_attribute_declarations(RemainingAttributes).
 
 	attribute_declaration_occurrences([], _Attribute, Count, Count).
@@ -326,12 +326,12 @@
 	attribute_declaration_occurrences([_OtherAttribute-_Values| Attributes], Attribute, Count0, Count) :-
 		attribute_declaration_occurrences(Attributes, Attribute, Count0, Count).
 
-	remove_attribute_declarations(_Attribute, [], []).
-	remove_attribute_declarations(Attribute, [Attribute-_Values| Attributes], RemainingAttributes) :-
+	remove_attribute_declarations([], _Attribute, []).
+	remove_attribute_declarations([Attribute-_Values| Attributes], Attribute, RemainingAttributes) :-
 		!,
-		remove_attribute_declarations(Attribute, Attributes, RemainingAttributes).
-	remove_attribute_declarations(Attribute, [Declaration| Attributes], [Declaration| RemainingAttributes]) :-
-		remove_attribute_declarations(Attribute, Attributes, RemainingAttributes).
+		remove_attribute_declarations(Attributes, Attribute, RemainingAttributes).
+	remove_attribute_declarations([Declaration| Attributes], Attribute, [Declaration| RemainingAttributes]) :-
+		remove_attribute_declarations(Attributes, Attribute, RemainingAttributes).
 
 	check_continuous_attributes([]).
 	check_continuous_attributes([Attribute-Values| Attributes]) :-

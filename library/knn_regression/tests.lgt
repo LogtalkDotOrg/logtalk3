@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "knn_regression" library.'
 	]).
 
@@ -43,6 +43,16 @@
 
 	test(knn_regression_learn_2_step_signal, deterministic(ground(Regressor))) :-
 		knn_regression::learn(step_signal, Regressor).
+
+	test(knn_regression_valid_regressor_1, deterministic(knn_regression::valid_regressor(Regressor))) :-
+		knn_regression::learn(step_signal, Regressor).
+
+	test(knn_regression_invalid_regressor_1, fail) :-
+		knn_regression::valid_regressor(knn_regressor(
+			[continuous(x, 0.0, 1.0)],
+			[[1.0]-7],
+			[k(1), distance_metric(euclidean), weight_scheme(uniform), minkowski_power(3.0), feature_scaling(true)]
+		)).
 
 	test(knn_regression_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
 		knn_regression::learn(step_signal, Regressor, [k(1), feature_scaling(false)]),

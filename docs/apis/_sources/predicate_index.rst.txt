@@ -1822,6 +1822,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranker_protocol <ranker_protocol/0::check_ranker/1>`
 
+``check_regressor/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`regressor_protocol <regressor_protocol/0::check_regressor/1>`
+
 ``chi_squared/2``
 -----------------
 
@@ -18341,6 +18351,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranker_protocol <ranker_protocol/0::valid_ranker/1>`
+
+``valid_regressor/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`regressor_protocol <regressor_protocol/0::valid_regressor/1>`
 
 ``valid_scale/1``
 -----------------

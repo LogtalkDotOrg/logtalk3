@@ -243,7 +243,7 @@
 			FinalShift = PreviousShift
 		;   assign_rows(Rows, Prototypes0, Encoders, Options, Assignments),
 			recompute_prototypes(Prototypes0, Assignments, Encoders, 1, Prototypes1),
-			max_prototype_shift(Prototypes0, Prototypes1, Encoders, Options, Shift),
+			max_prototype_shift(Prototypes0, Prototypes1, Encoders, Options, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
 			NextIteration is Iteration + 1,
 			(   Shift =< Tolerance ->
@@ -366,11 +366,11 @@
 	count_occurrences([_Other| Values], Value, Count0, Count) :-
 		count_occurrences(Values, Value, Count0, Count).
 
-	max_prototype_shift([], [], _Encoders, _Options, 0.0).
-	max_prototype_shift([Prototype0| Prototypes0], [Prototype1| Prototypes1], Encoders, Options, MaxShift) :-
+	max_prototype_shift([], [], _Encoders, _Options, MaxShift, MaxShift).
+	max_prototype_shift([Prototype0| Prototypes0], [Prototype1| Prototypes1], Encoders, Options, MaxShift0, MaxShift) :-
 		mixed_distance(Encoders, Prototype0, Prototype1, Options, Shift),
-		max_prototype_shift(Prototypes0, Prototypes1, Encoders, Options, RestMaxShift),
-		MaxShift is max(Shift, RestMaxShift).
+		MaxShift1 is max(MaxShift0, Shift),
+		max_prototype_shift(Prototypes0, Prototypes1, Encoders, Options, MaxShift1, MaxShift).
 
 	print_clusterer(Clusterer) :-
 		clusterer_data(Clusterer, Encoders, Prototypes, Options, Diagnostics),

@@ -91,7 +91,7 @@
 			Value = 0.0
 		;	nth1(Index, PairWeights, Neighbors),
 			nth1(Index, Wins, WinCount),
-			row_games(Neighbors, Games),
+			row_games(Neighbors, 0.0, Games),
 			row_value(WinCount, Games, Value),
 			row_coefficients(1, Count, Index, Neighbors, Games, Row)
 		),
@@ -105,10 +105,10 @@
 		NextCount is Count - 1,
 		ones_row(NextCount, Row).
 
-	row_games([], 0.0).
-	row_games([_Neighbor-Weight| Neighbors], Games) :-
-		row_games(Neighbors, RestGames),
-		Games is Weight + RestGames.
+	row_games([], Games, Games).
+	row_games([_Neighbor-Weight| Neighbors], Games0, Games) :-
+		Games1 is Games0 + Weight,
+		row_games(Neighbors, Games1, Games).
 
 	row_value(Wins, Games, Value) :-
 		Value is 2.0 * Wins - Games.

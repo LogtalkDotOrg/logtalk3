@@ -207,7 +207,7 @@
 			Value = 0.0
 		;   nth1(Index, PairWeights, Neighbors),
 			nth1(Index, Deltas, Value),
-			row_weight(Neighbors, TotalWeight),
+			row_weight(Neighbors, 0.0, TotalWeight),
 			row_coefficients(1, Count, Index, Neighbors, TotalWeight, Row)
 		),
 		NextIndex is Index + 1,
@@ -220,10 +220,10 @@
 		NextCount is Count - 1,
 		ones_row(NextCount, Row).
 
-	row_weight([], 0.0).
-	row_weight([_Neighbor-Weight| Neighbors], TotalWeight) :-
-		row_weight(Neighbors, RestWeight),
-		TotalWeight is Weight + RestWeight.
+	row_weight([], TotalWeight, TotalWeight).
+	row_weight([_Neighbor-Weight| Neighbors], TotalWeight0, TotalWeight) :-
+		TotalWeight1 is TotalWeight0 + Weight,
+		row_weight(Neighbors, TotalWeight1, TotalWeight).
 
 	row_coefficients(Column, Count, _Index, _Neighbors, _TotalWeight, []) :-
 		Column > Count,

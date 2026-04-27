@@ -25,17 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
-		comment is 'Shared predicates for regressor learning defaults, dataset validation, export, and pretty-print helpers.'
-	]).
-
-	:- uses(format, [
-		format/2,
-		format/3
-	]).
-
-	:- uses(list, [
-		last/2
+		date is 2026-04-27,
+		comment is 'Shared predicates for regressor learning defaults, validation, dataset validation, export, and pretty-print helpers.'
 	]).
 
 	:- protected(regressor_options/2).
@@ -87,8 +78,85 @@
 		argnames is ['Regressor']
 	]).
 
+	:- protected(valid_attribute_names/1).
+	:- mode(valid_attribute_names(+list(atom)), zero_or_one).
+	:- info(valid_attribute_names/1, [
+		comment is 'True when a list of attribute names is a proper list of distinct atoms.',
+		argnames is ['AttributeNames']
+	]).
+
+	:- protected(valid_attribute_declarations/1).
+	:- mode(valid_attribute_declarations(+list(pair)), zero_or_one).
+	:- info(valid_attribute_declarations/1, [
+		comment is 'True when a list of attribute declarations is a proper list of distinct ``Attribute-Values`` pairs where values are either ``continuous`` or a valid discrete value list.',
+		argnames is ['Attributes']
+	]).
+
+	:- protected(valid_discrete_values/1).
+	:- mode(valid_discrete_values(+list), zero_or_one).
+	:- info(valid_discrete_values/1, [
+		comment is 'True when a list of categorical values is non-empty, contains only nonvar terms, and has no duplicates.',
+		argnames is ['Values']
+	]).
+
+	:- protected(valid_regression_encoders/1).
+	:- mode(valid_regression_encoders(+list(compound)), zero_or_one).
+	:- info(valid_regression_encoders/1, [
+		comment is 'True when a list of encoders only contains valid ``continuous/3`` or ``categorical/2`` encoder terms with distinct attributes.',
+		argnames is ['Encoders']
+	]).
+
+	:- protected(valid_regressor_options/1).
+	:- mode(valid_regressor_options(+list(compound)), zero_or_one).
+	:- info(valid_regressor_options/1, [
+		comment is 'True when a list of options is structurally valid for the receiving regressor implementation.',
+		argnames is ['Options']
+	]).
+
+	:- protected(valid_encoded_rows/2).
+	:- mode(valid_encoded_rows(+list(compound), +list), zero_or_one).
+	:- info(valid_encoded_rows/2, [
+		comment is 'True when encoded training rows match the feature count induced by the encoders and carry numeric targets.',
+		argnames is ['Encoders', 'Rows']
+	]).
+
+	:- protected(valid_feature_labels/1).
+	:- mode(valid_feature_labels(+list(compound)), zero_or_one).
+	:- info(valid_feature_labels/1, [
+		comment is 'True when a list of regression-tree feature labels only contains valid ``feature/2`` terms.',
+		argnames is ['FeatureLabels']
+	]).
+
+	:- protected(valid_regression_tree/2).
+	:- mode(valid_regression_tree(+compound, +positive_integer), zero_or_one).
+	:- info(valid_regression_tree/2, [
+		comment is 'True when a regression tree only contains valid ``leaf/1`` and ``node/5`` terms using feature indexes within bounds.',
+		argnames is ['Tree', 'FeatureCount']
+	]).
+
+	:- uses(format, [
+		format/2, format/3
+	]).
+
+	:- uses(list, [
+		length/2, last/2, member/2
+	]).
+
+	:- uses(type, [
+		valid/2
+	]).
+
 	learn(Dataset, Regressor) :-
 		::learn(Dataset, Regressor, []).
+
+	check_regressor(Regressor) :-
+		(   ::regressor_term_template(Regressor, _Template) ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
+
+	valid_regressor(Regressor) :-
+		catch(::check_regressor(Regressor), _Error, fail).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
@@ -123,6 +191,42 @@
 		::regressor_term_template(Regressor, Template),
 		format('Template: ~w~n', [Template]).
 
+	valid_attribute_names(AttributeNames) :-
+		valid(list(atom), AttributeNames),
+		valid_distinct_terms(AttributeNames).
+
+	valid_attribute_declarations(Attributes) :-
+		valid(list(pair), Attributes),
+		valid_attribute_declarations_(Attributes, []).
+
+	valid_discrete_values(Values) :-
+		valid(list(nonvar), Values),
+		Values \== [],
+		valid_distinct_terms(Values).
+
+	valid_regression_encoders(Encoders) :-
+		valid(list(compound), Encoders),
+		valid_regression_encoders_(Encoders, []).
+
+	valid_regressor_options(Options) :-
+		valid(list(compound), Options),
+		catch(::check_options(Options), _Error, fail).
+
+	valid_encoded_rows(Encoders, Rows) :-
+		valid(list(compound), Rows),
+		Rows \== [],
+		encoded_feature_count(Encoders, FeatureCount),
+		valid_encoded_rows_(Rows, FeatureCount).
+
+	valid_feature_labels(FeatureLabels) :-
+		valid(list(compound), FeatureLabels),
+		valid_feature_labels_(FeatureLabels).
+
+	valid_regression_tree(Tree, FeatureCount) :-
+		integer(FeatureCount),
+		FeatureCount > 0,
+		valid_regression_tree_(Tree, FeatureCount).
+
 	regressor_options(Regressor, Options) :-
 		Regressor =.. [_| Arguments],
 		last(Arguments, Options).
@@ -153,5 +257,71 @@
 	write_clauses([Clause| Clauses], Stream) :-
 		format(Stream, '~q.~n', [Clause]),
 		write_clauses(Clauses, Stream).
+
+	valid_distinct_terms([]).
+	valid_distinct_terms([Term| Terms]) :-
+		\+ member(Term, Terms),
+		valid_distinct_terms(Terms).
+
+	valid_attribute_declarations_([], _SeenAttributes).
+	valid_attribute_declarations_([Attribute-Values| Attributes], SeenAttributes) :-
+		atom(Attribute),
+		\+ member(Attribute, SeenAttributes),
+		(   Values == continuous
+		;   valid_discrete_values(Values)
+		),
+		valid_attribute_declarations_(Attributes, [Attribute| SeenAttributes]).
+
+	valid_regression_encoders_([], _SeenAttributes).
+	valid_regression_encoders_([continuous(Attribute, Mean, Scale)| Encoders], SeenAttributes) :-
+		atom(Attribute),
+		valid(float, Mean),
+		valid(positive_float, Scale),
+		\+ member(Attribute, SeenAttributes),
+		valid_regression_encoders_(Encoders, [Attribute| SeenAttributes]).
+	valid_regression_encoders_([categorical(Attribute, Values)| Encoders], SeenAttributes) :-
+		atom(Attribute),
+		valid_discrete_values(Values),
+		\+ member(Attribute, SeenAttributes),
+		valid_regression_encoders_(Encoders, [Attribute| SeenAttributes]).
+
+	encoded_feature_count([], 0).
+	encoded_feature_count([continuous(_, _, _)| Encoders], Count) :-
+		!,
+		encoded_feature_count(Encoders, RestCount),
+		Count is RestCount + 2.
+	encoded_feature_count([categorical(_, Values)| Encoders], Count) :-
+		length(Values, ValueCount),
+		encoded_feature_count(Encoders, RestCount),
+		Count is RestCount + ValueCount + 1.
+
+	valid_encoded_rows_([], _FeatureCount).
+	valid_encoded_rows_([Features-Target| Rows], FeatureCount) :-
+		valid(list(float, FeatureCount), Features),
+		number(Target),
+		valid_encoded_rows_(Rows, FeatureCount).
+
+	valid_feature_labels_([]).
+	valid_feature_labels_([feature(Attribute, value)| FeatureLabels]) :-
+		atom(Attribute),
+		valid_feature_labels_(FeatureLabels).
+	valid_feature_labels_([feature(Attribute, missing)| FeatureLabels]) :-
+		atom(Attribute),
+		valid_feature_labels_(FeatureLabels).
+	valid_feature_labels_([feature(Attribute, category(Value))| FeatureLabels]) :-
+		atom(Attribute),
+		nonvar(Value),
+		valid_feature_labels_(FeatureLabels).
+
+	valid_regression_tree_(leaf(Target), _FeatureCount) :-
+		number(Target).
+	valid_regression_tree_(node(Index, Threshold, Fallback, LeftTree, RightTree), FeatureCount) :-
+		integer(Index),
+		Index >= 1,
+		Index =< FeatureCount,
+		number(Threshold),
+		number(Fallback),
+		valid_regression_tree_(LeftTree, FeatureCount),
+		valid_regression_tree_(RightTree, FeatureCount).
 
 :- end_category.

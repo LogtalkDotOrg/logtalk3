@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and random feature subsets.',
 		remarks is [
 			'Algorithm' - 'Builds an ensemble of regression trees trained on bootstrap samples and random feature subsets and predicts using the arithmetic mean of the individual tree predictions.',
@@ -192,6 +192,17 @@
 
 	regressor_term_template(rf_regressor(_Trees, _Options), rf_regressor('Trees', 'Options')).
 
+	check_regressor(Regressor) :-
+		(   Regressor = rf_regressor(Trees, Options),
+			Trees \== [],
+			^^valid_regressor_options(Options),
+			memberchk(number_of_trees(ExpectedTreeCount), Options),
+			valid_trees(Trees),
+			length(Trees, ExpectedTreeCount) ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
+
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Regressor =.. [_, Trees, Options],
 		Clause =.. [Functor, Trees, Options].
@@ -211,6 +222,13 @@
 		format('  Tree ~w features: ~w~n', [Index, AttributeNames]),
 		NextIndex is Index + 1,
 		print_trees(Trees, NextIndex).
+
+	valid_trees([]).
+	valid_trees([tree(TreeRegressor, AttributeNames)| Trees]) :-
+		^^valid_attribute_names(AttributeNames),
+		AttributeNames \== [],
+		regression_tree::valid_regressor(TreeRegressor),
+		valid_trees(Trees).
 
 	default_option(number_of_trees(10)).
 	default_option(maximum_depth(10)).

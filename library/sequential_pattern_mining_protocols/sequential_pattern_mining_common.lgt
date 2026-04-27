@@ -25,12 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Shared predicates for sequential pattern miner dataset validation, support counting, and pattern ordering helpers.'
-	]).
-
-	:- uses(list, [
-		length/2, member/2
 	]).
 
 	:- protected(check_sequences/4).
@@ -80,6 +76,10 @@
 	:- info(sort_item_supports/2, [
 		comment is 'Sorts item supports lexicographically by item.',
 		argnames is ['ItemSupports0', 'ItemSupports']
+	]).
+
+	:- uses(list, [
+		length/2, member/2
 	]).
 
 	check_sequences(Dataset, _ItemDomain, Sequences, _MaxSequenceLength) :-

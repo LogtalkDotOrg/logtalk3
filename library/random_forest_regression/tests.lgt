@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "random_forest_regression" library.'
 	]).
 
@@ -39,6 +39,13 @@
 
 	test(random_forest_regression_learn_2_step_signal, deterministic(ground(Regressor))) :-
 		random_forest_regression::learn(step_signal, Regressor).
+
+	test(random_forest_regression_valid_regressor_1, deterministic(random_forest_regression::valid_regressor(Regressor))) :-
+		random_forest_regression::learn(step_signal, Regressor).
+
+	test(random_forest_regression_invalid_regressor_1, fail) :-
+		random_forest_regression::learn(intercept_only, rf_regressor([tree(TreeRegressor, _AttributeNames)], Options), [number_of_trees(1)]),
+		random_forest_regression::valid_regressor(rf_regressor([tree(TreeRegressor, [dummy, dummy])], Options)).
 
 	test(random_forest_regression_learn_2_structure, deterministic(functor(Regressor, rf_regressor, 2))) :-
 		random_forest_regression::learn(step_signal, Regressor).

@@ -25,12 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Shared predicates for frequent itemset miner dataset validation, support accumulation, and itemset ordering/filtering helpers.'
-	]).
-
-	:- uses(list, [
-		length/2, memberchk/2
 	]).
 
 	:- protected(check_transactions/4).
@@ -68,6 +64,10 @@
 		argnames is ['ItemCounts', 'SupportCount', 'FrequentItemSupports']
 	]).
 
+	:- uses(list, [
+		length/2, member/2
+	]).
+
 	check_transactions(Dataset, _ItemDomain, Transactions, _MaxTransactionLength) :-
 		Transactions == [],
 		!,
@@ -92,7 +92,7 @@
 
 	check_transaction_items([], _ItemDomain).
 	check_transaction_items([Item| Items], ItemDomain) :-
-		(   memberchk(Item, ItemDomain) ->
+		(   member(Item, ItemDomain) ->
 			true
 		;   domain_error(item, Item)
 		),

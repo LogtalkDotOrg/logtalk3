@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "gradient_boosting_regression" library.'
 	]).
 
@@ -44,6 +44,16 @@
 
 	test(gradient_boosting_regression_learn_2_step_signal, deterministic(ground(Regressor))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor).
+
+	test(gradient_boosting_regression_valid_regressor_1, deterministic(gradient_boosting_regression::valid_regressor(Regressor))) :-
+		gradient_boosting_regression::learn(step_signal, Regressor).
+
+	test(gradient_boosting_regression_invalid_regressor_1, fail) :-
+		gradient_boosting_regression::valid_regressor(gradient_boosting_regressor(
+			0.0,
+			[weighted_tree(-0.1, regression_tree_regressor([continuous(x, 0.0, 1.0)], [feature(x, value), feature(x, missing)], leaf(1.0), [maximum_depth(3), minimum_samples_leaf(1), minimum_variance_reduction(0.0), feature_scaling(false)]))],
+			[number_of_estimators(1), learning_rate(0.1), maximum_depth(3), minimum_samples_leaf(1), minimum_variance_reduction(0.0), feature_scaling(false)]
+		)).
 
 	test(gradient_boosting_regression_learn_2_structure, deterministic(functor(Regressor, gradient_boosting_regressor, 3))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor).

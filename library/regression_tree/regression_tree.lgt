@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Regression tree regressor supporting continuous and mixed-feature datasets using recursive variance-reduction splits.',
 		remarks is [
 			'Algorithm' - 'Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.',
@@ -341,6 +341,18 @@
 
 	regressor_term_template(regression_tree_regressor(_Encoders, _FeatureLabels, _Tree, _Options), regression_tree_regressor('Encoders', 'FeatureLabels', 'Tree', 'Options')).
 
+	check_regressor(Regressor) :-
+		(   Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Options),
+			^^valid_regression_encoders(Encoders),
+			^^valid_feature_labels(FeatureLabels),
+			encoded_feature_count(Encoders, FeatureCount),
+			length(FeatureLabels, FeatureCount),
+			^^valid_regression_tree(Tree, FeatureCount),
+			^^valid_regressor_options(Options) ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
+
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Options),
 		Clause =.. [Functor, Encoders, FeatureLabels, Tree, Options].
@@ -371,6 +383,16 @@
 			true
 		;   format('~*|', [Indent])
 		).
+
+	encoded_feature_count([], 0).
+	encoded_feature_count([continuous(_, _, _)| Encoders], Count) :-
+		!,
+		encoded_feature_count(Encoders, RestCount),
+		Count is RestCount + 2.
+	encoded_feature_count([categorical(_, Values)| Encoders], Count) :-
+		length(Values, ValueCount),
+		encoded_feature_count(Encoders, RestCount),
+		Count is RestCount + ValueCount + 1.
 
 	default_option(maximum_depth(10)).
 	default_option(minimum_samples_leaf(1)).

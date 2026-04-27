@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "linear_regression" library.'
 	]).
 
@@ -44,6 +44,13 @@
 
 	test(linear_regression_learn_2_simple_line, deterministic(ground(Regressor))) :-
 		linear_regression::learn(simple_line, Regressor).
+
+	test(linear_regression_valid_regressor_1, deterministic(linear_regression::valid_regressor(Regressor))) :-
+		linear_regression::learn(simple_line, Regressor).
+
+	test(linear_regression_invalid_regressor_1, fail) :-
+		linear_regression::learn(simple_line, linear_regressor(Encoders, _Bias, _Weights, Options)),
+		linear_regression::valid_regressor(linear_regressor(Encoders, 0.0, [1.0], Options)).
 
 	test(linear_regression_predict_3_simple_line, deterministic(Prediction =~= 13.0)) :-
 		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),

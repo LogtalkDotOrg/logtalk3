@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-27,
 		comment is 'Gradient boosting regression using regression trees as additive base learners fitted to successive residuals.',
 		remarks is [
 			'Algorithm' - 'Builds an additive ensemble of regression trees by repeatedly fitting the current residuals under squared-error loss.',
@@ -52,7 +52,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2
+		append/3, length/2, member/2, memberchk/2
 	]).
 
 	:- uses(population, [
@@ -151,6 +151,18 @@
 
 	regressor_term_template(gradient_boosting_regressor(_InitialPrediction, _WeightedTrees, _Options), gradient_boosting_regressor('InitialPrediction', 'WeightedTrees', 'Options')).
 
+	check_regressor(Regressor) :-
+		(   Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Options),
+			number(InitialPrediction),
+			^^valid_regressor_options(Options),
+			memberchk(number_of_estimators(MaxEstimators), Options),
+			valid_weighted_trees(WeightedTrees),
+			length(WeightedTrees, StageCount),
+			StageCount =< MaxEstimators ->
+			true
+		;   domain_error(valid_regressor, Regressor)
+		).
+
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Options),
 		Clause =.. [Functor, InitialPrediction, WeightedTrees, Options].
@@ -171,6 +183,12 @@
 		format('  Stage ~w (learning rate ~4f)~n', [Index, LearningRate]),
 		NextIndex is Index + 1,
 		print_weighted_trees(WeightedTrees, NextIndex).
+
+	valid_weighted_trees([]).
+	valid_weighted_trees([weighted_tree(LearningRate, TreeRegressor)| WeightedTrees]) :-
+		valid(positive_float, LearningRate),
+		regression_tree::valid_regressor(TreeRegressor),
+		valid_weighted_trees(WeightedTrees).
 
 	default_option(number_of_estimators(50)).
 	default_option(learning_rate(0.1)).

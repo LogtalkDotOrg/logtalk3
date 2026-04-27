@@ -26,5 +26,7 @@
 	logtalk_load([
 		pattern_miner_protocol,
 		pattern_miner_common
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 )).

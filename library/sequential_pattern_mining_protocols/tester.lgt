@@ -21,7 +21,15 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(loader),
+	logtalk_load(basic_types(loader)),
+	logtalk_load(pattern_mining_protocols(loader)),
+	logtalk_load([
+		sequence_dataset_protocol,
+		sequential_pattern_mining_common
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load([
 		'test_datasets/border_threshold_sequences',
 		'test_datasets/branching_sequences',

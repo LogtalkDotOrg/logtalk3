@@ -47,6 +47,9 @@ across all machine learning libraries.
 (functionality preserved but four export and print predicates were renamed
 with this change).
 
+* ADDED: Predicates `check_classifier/1` and `valid_classifier/1` to the
+`classification_protocols` library.
+
 * ADDED: New `clustering_protocols` library providing protocols and datasets
 to support the implementation of clustering libraries.
 

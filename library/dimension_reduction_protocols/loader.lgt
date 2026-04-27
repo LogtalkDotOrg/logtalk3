@@ -29,5 +29,7 @@
 		dimension_reducer_common,
 		dimension_reduction_dataset_protocol,
 		supervised_dimension_reduction_dataset_protocol
-	], [optimize(on)])
+	], [
+		optimize(on)
+	])
 )).
