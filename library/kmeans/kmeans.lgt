@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'k-Means clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses Lloyd''s algorithm with deterministic initialization.',
@@ -82,6 +82,9 @@
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_centroid(Centroids, Features, Cluster, _DistanceSquared).
 
+	clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Centroids, Options, Diagnostics].
+
 	build_diagnostics(TrainingExampleCount, Centroids, Options, Convergence, Iterations, FinalShift, Diagnostics) :-
 		length(Centroids, CentroidCount),
 		Diagnostics = [
@@ -97,8 +100,17 @@
 	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
 		clusterer_data(Clusterer, _Encoders, _Centroids, _Options, Diagnostics).
 
-	clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics) :-
-		Clusterer =.. [_Functor, Encoders, Centroids, Options, Diagnostics].
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid(list(list(float, FeatureCount)), Centroids),
+			^^valid_clusterer_metadata(kmeans, Options, Diagnostics),
+			length(Centroids, CentroidCount),
+			^^valid_diagnostic_count(centroid_count, Diagnostics, CentroidCount) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
 
 	initialize_centroids(first_k, K, Rows, Centroids) :-
 		^^take_first_k(K, Rows, Centroids).

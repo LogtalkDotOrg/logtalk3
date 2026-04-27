@@ -28,6 +28,12 @@
 
 	learn(_Dataset, sample_clusterer([x, y]), _Options).
 
+	check_clusterer(sample_clusterer(Attributes)) :-
+		(   ^^valid_attribute_names(Attributes) ->
+			true
+		;   domain_error(valid_clusterer, sample_clusterer(Attributes))
+		).
+
 	clusterer_diagnostics_data(sample_clusterer(Attributes), [
 		model(sample_clusterer),
 		attributes(Attributes),
@@ -53,7 +59,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-27,
 		comment is 'Smoke tests for the "clustering_protocols" library.'
 	]).
 
@@ -126,6 +132,12 @@
 	test(sample_clusterer_diagnostics_2, deterministic((memberchk(model(sample_clusterer), Diagnostics), memberchk(attributes([x, y]), Diagnostics), memberchk(options([]), Diagnostics)))) :-
 		sample_clusterer::learn(two_blobs, Clusterer),
 		sample_clusterer::diagnostics(Clusterer, Diagnostics).
+
+	test(sample_clusterer_valid_clusterer_1, deterministic(sample_clusterer::valid_clusterer(Clusterer))) :-
+		sample_clusterer::learn(two_blobs, Clusterer).
+
+	test(sample_clusterer_invalid_clusterer_1, fail) :-
+		sample_clusterer::valid_clusterer(sample_clusterer([x, 1])).
 
 	test(sample_clusterer_diagnostic_2_enumerates, deterministic(Enumerated == Diagnostics)) :-
 		sample_clusterer::learn(two_blobs, Clusterer),

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Shared predicates for clusterer learning defaults, export, and common dataset and encoding helpers.'
 	]).
 
@@ -35,6 +35,62 @@
 	:- info(dataset_attributes/2, [
 		comment is 'Collects the dataset attribute declarations as `Attribute-Values` pairs.',
 		argnames is ['Dataset', 'Attributes']
+	]).
+
+	:- protected(valid_attribute_names/1).
+	:- mode(valid_attribute_names(+list(atom)), zero_or_one).
+	:- info(valid_attribute_names/1, [
+		comment is 'True when a list of attribute names is a proper list of distinct atoms.',
+		argnames is ['AttributeNames']
+	]).
+
+	:- protected(valid_continuous_encoders/1).
+	:- mode(valid_continuous_encoders(+list(compound)), zero_or_one).
+	:- info(valid_continuous_encoders/1, [
+		comment is 'True when a list of encoders only contains valid continuous encoder terms with distinct attributes.',
+		argnames is ['Encoders']
+	]).
+
+	:- protected(valid_discrete_encoders/1).
+	:- mode(valid_discrete_encoders(+list(compound)), zero_or_one).
+	:- info(valid_discrete_encoders/1, [
+		comment is 'True when a list of encoders only contains valid discrete encoder terms with distinct attributes.',
+		argnames is ['Encoders']
+	]).
+
+	:- protected(valid_mixed_encoders/1).
+	:- mode(valid_mixed_encoders(+list(compound)), zero_or_one).
+	:- info(valid_mixed_encoders/1, [
+		comment is 'True when a list of encoders only contains valid continuous or discrete encoder terms with distinct attributes.',
+		argnames is ['Encoders']
+	]).
+
+	:- protected(valid_mixed_vectors/2).
+	:- mode(valid_mixed_vectors(+list(compound), +list), zero_or_one).
+	:- info(valid_mixed_vectors/2, [
+		comment is 'True when all vectors conform to the given continuous or discrete encoder specifications.',
+		argnames is ['Encoders', 'Vectors']
+	]).
+
+	:- protected(valid_clusterer_metadata/3).
+	:- mode(valid_clusterer_metadata(+atom, +list(compound), +list(compound)), zero_or_one).
+	:- info(valid_clusterer_metadata/3, [
+		comment is 'True when diagnostics metadata contains the expected model term and records the given effective options.',
+		argnames is ['Model', 'Options', 'Diagnostics']
+	]).
+
+	:- protected(valid_diagnostic_count/3).
+	:- mode(valid_diagnostic_count(+atom, +list(compound), +integer), zero_or_one).
+	:- info(valid_diagnostic_count/3, [
+		comment is 'True when diagnostics contains a count term with the given functor and integer value.',
+		argnames is ['Functor', 'Diagnostics', 'Count']
+	]).
+
+	:- protected(valid_diagnostic_choice/3).
+	:- mode(valid_diagnostic_choice(+atom, +list(compound), +list), zero_or_one).
+	:- info(valid_diagnostic_choice/3, [
+		comment is 'True when diagnostics contains a term with the given functor and a value selected from the allowed choices.',
+		argnames is ['Functor', 'Diagnostics', 'Choices']
 	]).
 
 	:- protected(check_continuous_attributes/1).
@@ -149,6 +205,13 @@
 		argnames is ['Candidate', 'Candidates', 'RemainingCandidates']
 	]).
 
+	:- protected(clusterer_diagnostics_data/2).
+	:- mode(clusterer_diagnostics_data(+compound, -list(compound)), one).
+	:- info(clusterer_diagnostics_data/2, [
+		comment is 'Hook predicate that importing clusterer implementations must define in order to expose diagnostics metadata.',
+		argnames is ['Clusterer', 'Diagnostics']
+	]).
+
 	:- uses(format, [
 		format/3
 	]).
@@ -157,19 +220,25 @@
 		length/2, member/2, memberchk/2
 	]).
 
-	:- protected(clusterer_diagnostics_data/2).
-	:- mode(clusterer_diagnostics_data(+compound, -list(compound)), one).
-	:- info(clusterer_diagnostics_data/2, [
-		comment is 'Hook predicate that importing clusterer implementations must define in order to expose diagnostics metadata.',
-		argnames is ['Clusterer', 'Diagnostics']
-	]).
-
 	:- uses(population, [
 		arithmetic_mean/2, variance/2
 	]).
 
+	:- uses(type, [
+		valid/2
+	]).
+
 	learn(Dataset, Clusterer) :-
 		::learn(Dataset, Clusterer, []).
+
+	check_clusterer(Clusterer) :-
+		(   ::clusterer_diagnostics_data(Clusterer, _Diagnostics) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_clusterer(Clusterer) :-
+		catch(::check_clusterer(Clusterer), _Error, fail).
 
 	diagnostics(Clusterer, Diagnostics) :-
 		::clusterer_diagnostics_data(Clusterer, Diagnostics).
@@ -181,6 +250,44 @@
 	clusterer_options(Clusterer, Options) :-
 		diagnostics(Clusterer, Diagnostics),
 		memberchk(options(Options), Diagnostics).
+
+	valid_attribute_names(AttributeNames) :-
+		valid(list(atom), AttributeNames),
+		valid_distinct_terms(AttributeNames).
+
+	valid_continuous_encoders(Encoders) :-
+		valid(list(compound), Encoders),
+		valid_continuous_encoders(Encoders, []).
+
+	valid_discrete_encoders(Encoders) :-
+		valid(list(compound), Encoders),
+		valid_discrete_encoders(Encoders, []).
+
+	valid_mixed_encoders(Encoders) :-
+		valid(list(compound), Encoders),
+		valid_mixed_encoders(Encoders, []).
+
+	valid_mixed_vectors(Encoders, Vectors) :-
+		valid(list, Vectors),
+		valid_mixed_vectors_(Vectors, Encoders).
+
+	valid_clusterer_metadata(Model, Options, Diagnostics) :-
+		valid(list(compound), Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		catch(::check_options(Options), _Error, fail).
+
+	valid_diagnostic_count(Functor, Diagnostics, Count) :-
+		integer(Count),
+		Count >= 0,
+		Diagnostic =.. [Functor, Count],
+		memberchk(Diagnostic, Diagnostics).
+
+	valid_diagnostic_choice(Functor, Diagnostics, Choices) :-
+		valid(list, Choices),
+		Diagnostic =.. [Functor, Choice],
+		memberchk(Diagnostic, Diagnostics),
+		memberchk(Choice, Choices).
 
 	export_to_clauses(_Dataset, Clusterer, Functor, [Clause]) :-
 		Clusterer =.. [_| Arguments],
@@ -283,7 +390,7 @@
 
 	check_undeclared_attribute_bindings([], _AttributeNames).
 	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
-		(   memberchk(Attribute, AttributeNames) ->
+		(   member(Attribute, AttributeNames) ->
 			true
 		;   domain_error(declared_attribute(AttributeNames), Attribute)
 		),
@@ -399,5 +506,63 @@
 	write_clauses([Clause| Clauses], Stream) :-
 		format(Stream, '~q.~n', [Clause]),
 		write_clauses(Clauses, Stream).
+
+	valid_continuous_encoders([], _Seen).
+	valid_continuous_encoders([continuous(Attribute, Mean, Scale)| Encoders], Seen) :-
+		atom(Attribute),
+		valid(float, Mean),
+		valid(positive_float, Scale),
+		\+ member(Attribute, Seen),
+		valid_continuous_encoders(Encoders, [Attribute| Seen]).
+
+	valid_discrete_encoders([], _Seen).
+	valid_discrete_encoders([discrete(Attribute, AllowedValues)| Encoders], Seen) :-
+		atom(Attribute),
+		valid_discrete_allowed_values(AllowedValues),
+		\+ member(Attribute, Seen),
+		valid_discrete_encoders(Encoders, [Attribute| Seen]).
+
+	valid_mixed_encoders([], _Seen).
+	valid_mixed_encoders([continuous(Attribute, Mean, Scale)| Encoders], Seen) :-
+		atom(Attribute),
+		valid(float, Mean),
+		valid(positive_float, Scale),
+		\+ member(Attribute, Seen),
+		valid_mixed_encoders(Encoders, [Attribute| Seen]).
+	valid_mixed_encoders([discrete(Attribute, AllowedValues)| Encoders], Seen) :-
+		atom(Attribute),
+		valid_discrete_allowed_values(AllowedValues),
+		\+ member(Attribute, Seen),
+		valid_mixed_encoders(Encoders, [Attribute| Seen]).
+
+	valid_discrete_allowed_values(AllowedValues) :-
+		valid(list, AllowedValues),
+		AllowedValues \== [],
+		type::valid(list(nonvar), AllowedValues),
+		valid_distinct_terms(AllowedValues).
+
+	valid_distinct_terms([]).
+	valid_distinct_terms([Term| Terms]) :-
+		\+ member(Term, Terms),
+		valid_distinct_terms(Terms).
+
+	valid_mixed_vectors_([], _Encoders).
+	valid_mixed_vectors_([Vector| Vectors], Encoders) :-
+		valid_mixed_vector(Encoders, Vector),
+		valid_mixed_vectors_(Vectors, Encoders).
+
+	valid_mixed_vector(Encoders, Vector) :-
+		length(Encoders, Length),
+		length(Vector, Length),
+		valid_mixed_vector_values(Encoders, Vector).
+
+	valid_mixed_vector_values([], []).
+	valid_mixed_vector_values([continuous(_Attribute, _Mean, _Scale)| Encoders], [Value| Values]) :-
+		number(Value),
+		valid_mixed_vector_values(Encoders, Values).
+	valid_mixed_vector_values([discrete(_Attribute, AllowedValues)| Encoders], [Value| Values]) :-
+		nonvar(Value),
+		memberchk(Value, AllowedValues),
+		valid_mixed_vector_values(Encoders, Values).
 
 :- end_category.

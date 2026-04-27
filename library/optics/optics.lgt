@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-27,
 		comment is 'OPTICS clusterer for continuous datasets. Learns an ordering from a dataset object implementing the ``clustering_dataset_protocol`` protocol and extracts clusters using an epsilon threshold so the result can be used with the standard clusterer protocol.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic OPTICS ordering with epsilon-based cluster extraction for the fixed clusterer protocol.',
@@ -73,11 +73,15 @@
 		Clusterer = optics_clusterer(Encoders, Ordering, Clusters, Noise, Options).
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, _Ordering, Clusters, _Noise, Options],
+		clusterer_data(Clusterer, Encoders, _Ordering, Clusters, _Noise, Options),
 		^^encode_instance(Encoders, Instance, Features),
 		classify_cluster(Clusters, Features, Options, Cluster).
 
-	clusterer_diagnostics_data(optics_clusterer(_Encoders, Ordering, Clusters, Noise, Options), Diagnostics) :-
+	clusterer_data(Clusterer, Encoders, Ordering, Clusters, Noise, Options) :-
+		Clusterer =.. [_, Encoders, Ordering, Clusters, Noise, Options].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, Ordering, Clusters, Noise, Options),
 		length(Ordering, OrderingCount),
 		length(Clusters, ClusterCount),
 		length(Noise, NoiseCount),
@@ -88,6 +92,43 @@
 			noise_count(NoiseCount),
 			options(Options)
 		].
+
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Ordering, Clusters, Noise, Options),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid_ordering(Ordering, FeatureCount, []),
+			valid_clusters(Clusters, FeatureCount, []),
+			valid(list(list(number, FeatureCount)), Noise),
+			catch(::check_options(Options), _Error, fail) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_ordering([], _FeatureCount, _SeenIds).
+	valid_ordering([ordered(Id, Reachability, CoreDistance, Vector)| Ordering], FeatureCount, SeenIds) :-
+		nonvar(Id),
+		\+ member(Id, SeenIds),
+		valid_optional_distance(Reachability),
+		valid_optional_distance(CoreDistance),
+		valid(list(number, FeatureCount), Vector),
+		valid_ordering(Ordering, FeatureCount, [Id| SeenIds]).
+
+	valid_optional_distance(none).
+	valid_optional_distance(Distance) :-
+		number(Distance),
+		Distance >= 0.0.
+
+	valid_clusters([], _FeatureCount, _SeenIds).
+	valid_clusters([cluster(ClusterId, CorePoints, BorderPoints, bounds(Minimums, Maximums))| Clusters], FeatureCount, SeenIds) :-
+		valid(positive_integer, ClusterId),
+		\+ member(ClusterId, SeenIds),
+		CorePoints \== [],
+		valid(list(list(number, FeatureCount)), CorePoints),
+		valid(list(list(number, FeatureCount)), BorderPoints),
+		valid(list(number, FeatureCount), Minimums),
+		valid(list(number, FeatureCount), Maximums),
+		valid_clusters(Clusters, FeatureCount, [ClusterId| SeenIds]).
 
 	optics_order(Rows, SearchIndex, Options, Ordering) :-
 		avltree::new(Processed0),

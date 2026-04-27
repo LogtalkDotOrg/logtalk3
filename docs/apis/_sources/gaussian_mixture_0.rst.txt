@@ -15,7 +15,7 @@ Gaussian mixture model clusterer for continuous datasets. Learns from a dataset 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-26
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,6 +26,7 @@ Gaussian mixture model clusterer for continuous datasets. Learns from a dataset 
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
 |    :ref:`pairs <pairs/0>`
 |    :ref:`population <population/0>`
 |    :ref:`type <type/0>`
@@ -40,7 +41,7 @@ Gaussian mixture model clusterer for continuous datasets. Learns from a dataset 
    - Clusterer representation: The learned clusterer is represented by default as ``gaussian_mixture_clusterer(Encoders, Components, Weights, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Components`` stores the learned means and diagonal variances, ``Weights`` stores the mixture weights, ``Options`` stores the effective training options, and ``Diagnostics`` stores convergence metadata.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-27,
 		comment is 'HDBSCAN clusterer for continuous datasets using a mutual-reachability hierarchy, condensed tree pruning, and stability-based cluster selection.',
 		remarks is [
 			'Algorithm' - 'Builds the mutual-reachability graph, computes a minimum spanning tree, derives the single-linkage hierarchy, condenses the hierarchy using ``minimum_cluster_size``, and selects clusters using ``eom`` or ``leaf`` selection.',
@@ -84,11 +84,15 @@
 		Clusterer = hdbscan_clusterer(Encoders, Clusters, Noise, Options).
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Clusters, _Noise, Options],
+		clusterer_data(Clusterer, Encoders, Clusters, _Noise, Options),
 		^^encode_instance(Encoders, Instance, Features),
 		classify_cluster(Clusters, Features, Options, Cluster).
 
-	clusterer_diagnostics_data(hdbscan_clusterer(_Encoders, Clusters, Noise, Options), Diagnostics) :-
+	clusterer_data(Clusterer, Encoders, Clusters, Noise, Options) :-
+		Clusterer =.. [_, Encoders, Clusters, Noise, Options].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, Clusters, Noise, Options),
 		length(Clusters, ClusterCount),
 		length(Noise, NoiseCount),
 		Diagnostics = [
@@ -97,6 +101,27 @@
 			noise_count(NoiseCount),
 			options(Options)
 		].
+
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Clusters, Noise, Options),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid_clusters(Clusters, FeatureCount, []),
+			valid(list(list(number, FeatureCount)), Noise),
+			catch(::check_options(Options), _Error, fail) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_clusters([], _FeatureCount, _SeenIds).
+	valid_clusters([cluster(ClusterId, Points, MaxCoreDistance, Stability)| Clusters], FeatureCount, SeenIds) :-
+		valid(positive_integer, ClusterId),
+		\+ memberchk(ClusterId, SeenIds),
+		Points \== [],
+		valid(list(list(number, FeatureCount)), Points),
+		valid(non_negative_float, MaxCoreDistance),
+		valid(non_negative_float, Stability),
+		valid_clusters(Clusters, FeatureCount, [ClusterId| SeenIds]).
 
 	distance_graph(Rows, Options, PairDistances, NeighborMap) :-
 		initialize_neighbor_map(Rows, NeighborMap0),

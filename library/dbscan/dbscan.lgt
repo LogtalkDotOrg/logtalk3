@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'DBSCAN clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic density-based clustering based on epsilon neighborhoods and minimum point counts.',
@@ -78,11 +78,16 @@
 		Clusterer = dbscan_clusterer(Encoders, Clusters, Noise, Options).
 
 	cluster(Clusterer, Instance, Cluster) :-
-		Clusterer =.. [_, Encoders, Clusters, _Noise, Options],
+		clusterer_data(Clusterer, Encoders, Clusters, _Noise, Options),
 		^^encode_instance(Encoders, Instance, Features),
 		classify_cluster(Clusters, Features, Options, Cluster).
 
-	clusterer_diagnostics_data(dbscan_clusterer(_Encoders, Clusters, Noise, Options), Diagnostics) :-
+
+	clusterer_data(Clusterer, Encoders, Clusters, Noise, Options) :-
+		Clusterer =.. [_, Encoders, Clusters, Noise, Options].
+
+	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
+		clusterer_data(Clusterer, _Encoders, Clusters, Noise, Options),
 		length(Clusters, ClusterCount),
 		length(Noise, NoiseCount),
 		Diagnostics = [
@@ -91,6 +96,26 @@
 			noise_count(NoiseCount),
 			options(Options)
 		].
+
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Clusters, Noise, Options),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid_clusters(Clusters, FeatureCount, []),
+			valid(list(list(number, FeatureCount)), Noise),
+			catch(::check_options(Options), _Error, fail) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_clusters([], _FeatureCount, _SeenIds).
+	valid_clusters([cluster(ClusterId, CorePoints, BorderPoints)| Clusters], FeatureCount, SeenIds) :-
+		valid(positive_integer, ClusterId),
+		\+ member(ClusterId, SeenIds),
+		CorePoints \== [],
+		valid(list(list(number, FeatureCount)), CorePoints),
+		valid(list(list(number, FeatureCount)), BorderPoints),
+		valid_clusters(Clusters, FeatureCount, [ClusterId| SeenIds]).
 
 	cluster_rows(Rows, NeighborhoodIndex, Options, ClusterCount, Assignments, CoreIds) :-
 		avltree::new(Visited),

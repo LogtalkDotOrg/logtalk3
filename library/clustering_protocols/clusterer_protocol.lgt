@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-27,
 		comment is 'Protocol for machine learning clusterers.',
 		see_also is [clustering_dataset_protocol]
 	]).
@@ -55,6 +55,20 @@
 	:- info(diagnostics/2, [
 		comment is 'Returns diagnostics and metadata associated with a learned clusterer in a representation-independent way.',
 		argnames is ['Clusterer', 'Diagnostics']
+	]).
+
+	:- public(check_clusterer/1).
+	:- mode(check_clusterer(+compound), one).
+	:- info(check_clusterer/1, [
+		comment is 'Checks that a learned clusterer term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid clusterer representation.',
+		argnames is ['Clusterer']
+	]).
+
+	:- public(valid_clusterer/1).
+	:- mode(valid_clusterer(+compound), zero_or_one).
+	:- info(valid_clusterer/1, [
+		comment is 'True when a learned clusterer term is structurally valid for the receiving implementation. Succeeds iff `check_clusterer/1` succeeds without throwing an exception.',
+		argnames is ['Clusterer']
 	]).
 
 	:- public(diagnostic/2).

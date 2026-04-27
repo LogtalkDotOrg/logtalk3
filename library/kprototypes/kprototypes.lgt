@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'k-Prototypes clusterer for mixed datasets with continuous and discrete attributes. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses an iterative prototype-update algorithm with deterministic initialization and deterministic cluster assignments.',
@@ -85,6 +85,9 @@
 		encode_instance(Encoders, Instance, Features),
 		nearest_prototype(Prototypes, Encoders, Features, Options, Cluster, _Distance).
 
+	clusterer_data(Clusterer, Encoders, Prototypes, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Prototypes, Options, Diagnostics].
+
 	build_diagnostics(TrainingExampleCount, Prototypes, Options, Convergence, Iterations, FinalShift, Diagnostics) :-
 		length(Prototypes, PrototypeCount),
 		Diagnostics = [
@@ -100,8 +103,16 @@
 	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
 		clusterer_data(Clusterer, _Encoders, _Prototypes, _Options, Diagnostics).
 
-	clusterer_data(Clusterer, Encoders, Prototypes, Options, Diagnostics) :-
-		Clusterer =.. [_Functor, Encoders, Prototypes, Options, Diagnostics].
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Prototypes, Options, Diagnostics),
+			^^valid_mixed_encoders(Encoders),
+			^^valid_mixed_vectors(Encoders, Prototypes),
+			^^valid_clusterer_metadata(kprototypes, Options, Diagnostics),
+			length(Prototypes, PrototypeCount),
+			^^valid_diagnostic_count(prototype_count, Diagnostics, PrototypeCount) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
 
 	check_examples(Dataset, Attributes, AttributeNames, Examples) :-
 		^^check_examples_non_empty(Dataset, Examples),

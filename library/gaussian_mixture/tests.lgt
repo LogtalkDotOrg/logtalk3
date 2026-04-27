@@ -37,7 +37,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "gaussian_mixture" library.'
 	]).
 
@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(gaussian_mixture, [
-		cluster/3, cluster_probabilities/3, clusterer_options/2, diagnostic/2, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, cluster_probabilities/3, clusterer_options/2, diagnostic/2, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1, valid_clusterer/1
 	]).
 
 	cover(gaussian_mixture).
@@ -56,6 +56,13 @@
 
 	test(gaussian_mixture_learn_2_two_blobs, deterministic(ground(Clusterer))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]).
+
+	test(gaussian_mixture_valid_clusterer_1_valid, deterministic(valid_clusterer(Clusterer))) :-
+		learn(two_blobs, Clusterer, [feature_scaling(off)]).
+
+	test(gaussian_mixture_valid_clusterer_1_invalid, fail) :-
+		learn(two_blobs, gaussian_mixture_clusterer(Encoders, Components, _Weights, Options, Diagnostics), [feature_scaling(off)]),
+		valid_clusterer(gaussian_mixture_clusterer(Encoders, Components, [1.0], Options, Diagnostics)).
 
 	test(gaussian_mixture_cluster_3_left_blob, deterministic(Cluster == 1)) :-
 		learn(two_blobs, Clusterer, [k(2), initialization(spread), feature_scaling(off)]),

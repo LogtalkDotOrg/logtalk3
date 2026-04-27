@@ -15,7 +15,7 @@ Protocol for machine learning clusterers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-23
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -110,6 +110,44 @@ Returns diagnostics and metadata associated with a learned clusterer in a repres
 |    ``diagnostics(Clusterer,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: check_clusterer/1
+.. _clusterer_protocol/0::check_clusterer/1:
+
+``check_clusterer/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a learned clusterer term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid clusterer representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_clusterer(Clusterer)``
+| **Mode and number of proofs:**
+|    ``check_clusterer(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_clusterer/1
+.. _clusterer_protocol/0::valid_clusterer/1:
+
+``valid_clusterer/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+True when a learned clusterer term is structurally valid for the receiving implementation. Succeeds iff `check_clusterer/1` succeeds without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_clusterer(Clusterer)``
+| **Mode and number of proofs:**
+|    ``valid_clusterer(+compound)`` - ``zero_or_one``
 
 
 ------------

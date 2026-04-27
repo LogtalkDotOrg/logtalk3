@@ -15,7 +15,7 @@ Shared predicates for clusterer learning defaults, export, and common dataset an
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-24
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -29,12 +29,13 @@ Shared predicates for clusterer learning defaults, export, and common dataset an
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -63,6 +64,158 @@ Collects the dataset attribute declarations as `Attribute-Values` pairs.
 |    ``dataset_attributes(Dataset,Attributes)``
 | **Mode and number of proofs:**
 |    ``dataset_attributes(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: valid_attribute_names/1
+.. _clusterer_common/0::valid_attribute_names/1:
+
+``valid_attribute_names/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of attribute names is a proper list of distinct atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_attribute_names(AttributeNames)``
+| **Mode and number of proofs:**
+|    ``valid_attribute_names(+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_continuous_encoders/1
+.. _clusterer_common/0::valid_continuous_encoders/1:
+
+``valid_continuous_encoders/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of encoders only contains valid continuous encoder terms with distinct attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_continuous_encoders(Encoders)``
+| **Mode and number of proofs:**
+|    ``valid_continuous_encoders(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_discrete_encoders/1
+.. _clusterer_common/0::valid_discrete_encoders/1:
+
+``valid_discrete_encoders/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of encoders only contains valid discrete encoder terms with distinct attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_discrete_encoders(Encoders)``
+| **Mode and number of proofs:**
+|    ``valid_discrete_encoders(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_mixed_encoders/1
+.. _clusterer_common/0::valid_mixed_encoders/1:
+
+``valid_mixed_encoders/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of encoders only contains valid continuous or discrete encoder terms with distinct attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_mixed_encoders(Encoders)``
+| **Mode and number of proofs:**
+|    ``valid_mixed_encoders(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_mixed_vectors/2
+.. _clusterer_common/0::valid_mixed_vectors/2:
+
+``valid_mixed_vectors/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when all vectors conform to the given continuous or discrete encoder specifications.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_mixed_vectors(Encoders,Vectors)``
+| **Mode and number of proofs:**
+|    ``valid_mixed_vectors(+list(compound),+list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_clusterer_metadata/3
+.. _clusterer_common/0::valid_clusterer_metadata/3:
+
+``valid_clusterer_metadata/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term and records the given effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_clusterer_metadata(Model,Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_clusterer_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_diagnostic_count/3
+.. _clusterer_common/0::valid_diagnostic_count/3:
+
+``valid_diagnostic_count/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics contains a count term with the given functor and integer value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_diagnostic_count(Functor,Diagnostics,Count)``
+| **Mode and number of proofs:**
+|    ``valid_diagnostic_count(+atom,+list(compound),+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_diagnostic_choice/3
+.. _clusterer_common/0::valid_diagnostic_choice/3:
+
+``valid_diagnostic_choice/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics contains a term with the given functor and a value selected from the allowed choices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_diagnostic_choice(Functor,Diagnostics,Choices)``
+| **Mode and number of proofs:**
+|    ``valid_diagnostic_choice(+atom,+list(compound),+list)`` - ``zero_or_one``
 
 
 ------------

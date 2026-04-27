@@ -37,7 +37,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "agglomerative" library.'
 	]).
 
@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(agglomerative, [
-		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1, valid_clusterer/1
 	]).
 
 	cover(agglomerative).
@@ -56,6 +56,14 @@
 
 	test(agglomerative_learn_2_two_blobs, deterministic(ground(Clusterer))) :-
 		learn(two_blobs, Clusterer).
+
+	test(agglomerative_valid_clusterer_1_valid, deterministic(valid_clusterer(Clusterer))) :-
+		learn(two_blobs, Clusterer).
+
+	test(agglomerative_valid_clusterer_1_invalid, fail) :-
+		learn(two_blobs, agglomerative_clusterer(Encoders, Clusters, Prototypes, Options, Diagnostics), [feature_scaling(off)]),
+		valid_clusterer(agglomerative_clusterer(Encoders, Clusters, [_OnlyPrototype], Options, Diagnostics)),
+		Prototypes = [_FirstPrototype| _MorePrototypes].
 
 	test(agglomerative_cluster_3_left_blob, deterministic(Cluster == 1)) :-
 		learn(two_blobs, Clusterer, [k(2), linkage(average), distance_metric(euclidean), feature_scaling(off)]),

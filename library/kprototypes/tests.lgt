@@ -53,7 +53,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "kprototypes" library.'
 	]).
 
@@ -62,7 +62,7 @@
 	]).
 
 	:- uses(kprototypes, [
-		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1, valid_clusterer/1
 	]).
 
 	cover(kprototypes).
@@ -72,6 +72,13 @@
 
 	test(kprototypes_learn_2_mixed_profiles, deterministic(ground(Clusterer))) :-
 		learn(mixed_profiles, Clusterer).
+
+	test(kprototypes_valid_clusterer_1_valid, deterministic(valid_clusterer(Clusterer))) :-
+		learn(mixed_profiles, Clusterer).
+
+	test(kprototypes_valid_clusterer_1_invalid, fail) :-
+		learn(mixed_profiles, kprototypes_clusterer(Encoders, Prototypes, Options, _Diagnostics)),
+		valid_clusterer(kprototypes_clusterer(Encoders, Prototypes, Options, [model(kprototypes), prototype_count(99), options(Options)])).
 
 	test(kprototypes_cluster_3_left_segment, deterministic(Cluster == 1)) :-
 		learn(mixed_profiles, Clusterer, [k(2), initialization(spread), gamma(1.0)]),

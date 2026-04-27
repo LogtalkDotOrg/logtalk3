@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Agglomerative clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic bottom-up agglomerative clustering and stops when the requested number of clusters is reached.',
@@ -53,7 +53,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		append/3, length/2, memberchk/2
 	]).
 
 	:- uses(numberlist, [
@@ -103,6 +103,9 @@
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_cluster(Clusters, Features, Options, Cluster, _Distance).
 
+	clusterer_data(Clusterer, Encoders, Clusters, Prototypes, Options, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Clusters, Prototypes, Options, Diagnostics].
+
 	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
 		clusterer_data(Clusterer, _Encoders, _Clusters, _Prototypes, _Options, Diagnostics).
 
@@ -126,8 +129,28 @@
 			options(Options)
 		].
 
-	clusterer_data(Clusterer, Encoders, Clusters, Prototypes, Options, Diagnostics) :-
-		Clusterer =.. [_Functor, Encoders, Clusters, Prototypes, Options, Diagnostics].
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Clusters, Prototypes, Options, Diagnostics),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid_clusters(Clusters, FeatureCount, []),
+			valid(list(list(float, FeatureCount)), Prototypes),
+			length(Clusters, ClusterCount),
+			length(Prototypes, ClusterCount),
+			^^valid_clusterer_metadata(agglomerative, Options, Diagnostics),
+			^^valid_diagnostic_count(cluster_count, Diagnostics, ClusterCount),
+			^^valid_diagnostic_count(prototype_count, Diagnostics, ClusterCount) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_clusters([], _FeatureCount, _SeenIds).
+	valid_clusters([cluster(ClusterId, Points)| Clusters], FeatureCount, SeenIds) :-
+		valid(positive_integer, ClusterId),
+		\+ memberchk(ClusterId, SeenIds),
+		Points \== [],
+		valid(list(list(number, FeatureCount)), Points),
+		valid_clusters(Clusters, FeatureCount, [ClusterId| SeenIds]).
 
 	pair_queue_max(pair_queue(_Heap, _Size, MaximumSize), MaximumSize).
 

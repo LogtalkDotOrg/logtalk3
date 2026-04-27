@@ -64,7 +64,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "kmodes" library.'
 	]).
 
@@ -73,7 +73,7 @@
 	]).
 
 	:- uses(kmodes, [
-		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1, valid_clusterer/1
 	]).
 
 	cover(kmodes).
@@ -83,6 +83,13 @@
 
 	test(kmodes_learn_2_shopping_profiles, deterministic(ground(Clusterer))) :-
 		learn(shopping_profiles, Clusterer).
+
+	test(kmodes_valid_clusterer_1_valid, deterministic(valid_clusterer(Clusterer))) :-
+		learn(shopping_profiles, Clusterer).
+
+	test(kmodes_valid_clusterer_1_invalid, fail) :-
+		learn(shopping_profiles, kmodes_clusterer(Encoders, Modes, Options, _Diagnostics)),
+		valid_clusterer(kmodes_clusterer(Encoders, Modes, Options, [model(kmodes), mode_count(99), options(Options)])).
 
 	test(kmodes_cluster_3_left_segment, deterministic(Cluster == 1)) :-
 		learn(shopping_profiles, Clusterer, [k(2), initialization(spread)]),

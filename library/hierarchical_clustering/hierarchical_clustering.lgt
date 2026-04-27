@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'Hierarchical clusterer for continuous datasets. Learns a full agglomerative merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.',
 		remarks is [
 			'Algorithm' - 'Builds the full bottom-up agglomerative hierarchy and derives the requested partition by cutting the learned dendrogram at the largest remaining merge distances.',
@@ -119,14 +119,81 @@
 		^^encode_instance(Encoders, Instance, Features),
 		nearest_cluster(Clusters, Features, Options, Cluster, _Distance).
 
+	clusterer_data(Clusterer, Encoders, Hierarchy, Clusters, Prototypes, Diagnostics) :-
+		Clusterer =.. [_Functor, Encoders, Hierarchy, Clusters, Prototypes, Diagnostics].
+
 	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
 		clusterer_data(Clusterer, _Encoders, _Hierarchy, _Clusters, _Prototypes, Diagnostics).
 
 	clusterer_functor(Clusterer, Functor) :-
 		functor(Clusterer, Functor, 5).
 
-	clusterer_data(Clusterer, Encoders, Hierarchy, Clusters, Prototypes, Diagnostics) :-
-		Clusterer =.. [_Functor, Encoders, Hierarchy, Clusters, Prototypes, Diagnostics].
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Hierarchy, Clusters, Prototypes, Diagnostics),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid_hierarchy(Hierarchy, FeatureCount),
+			valid_clusters(Clusters, FeatureCount, []),
+			valid(list(list(float, FeatureCount)), Prototypes),
+			length(Clusters, ClusterCount),
+			length(Prototypes, ClusterCount),
+			memberchk(options(Options), Diagnostics),
+			^^valid_clusterer_metadata(hierarchical_clustering, Options, Diagnostics),
+			^^valid_diagnostic_count(cluster_count, Diagnostics, ClusterCount),
+			^^valid_diagnostic_count(prototype_count, Diagnostics, ClusterCount) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_hierarchy(hierarchy(RootState, MergeRecords, Dendrogram), FeatureCount) :-
+		valid_cluster_state(RootState, FeatureCount),
+		valid_merge_records(MergeRecords, FeatureCount),
+		valid_dendrogram(Dendrogram).
+
+	valid_merge_records(MergeRecords, FeatureCount) :-
+		valid(list(compound), MergeRecords),
+		valid_merge_records_(MergeRecords, FeatureCount).
+
+	valid_merge_records_([], _FeatureCount).
+	valid_merge_records_([merge_node(NodeId, LeftState, RightState, Distance)| MergeRecords], FeatureCount) :-
+		valid(positive_integer, NodeId),
+		valid(non_negative_float, Distance),
+		valid_cluster_state(LeftState, FeatureCount),
+		valid_cluster_state(RightState, FeatureCount),
+		valid_merge_records_(MergeRecords, FeatureCount).
+
+	valid_cluster_state(cluster_state(NodeId, Members, Height, Size), FeatureCount) :-
+		valid(positive_integer, NodeId),
+		valid(non_negative_float, Height),
+		valid(positive_integer, Size),
+		valid_members(Members, FeatureCount).
+
+	valid_members(Members, FeatureCount) :-
+		valid(list, Members),
+		Members \== [],
+		valid_members_(Members, FeatureCount).
+
+	valid_members_([], _FeatureCount).
+	valid_members_([Id-Vector| Members], FeatureCount) :-
+		nonvar(Id),
+		valid(list(number, FeatureCount), Vector),
+		valid_members_(Members, FeatureCount).
+
+	valid_dendrogram(leaf(NodeId)) :-
+		valid(positive_integer, NodeId).
+	valid_dendrogram(merge(Left, Right, Distance, Size)) :-
+		valid_dendrogram(Left),
+		valid_dendrogram(Right),
+		valid(positive_float, Distance),
+		valid(positive_integer, Size).
+
+	valid_clusters([], _FeatureCount, _SeenIds).
+	valid_clusters([cluster(ClusterId, Points)| Clusters], FeatureCount, SeenIds) :-
+		valid(positive_integer, ClusterId),
+		\+ member(ClusterId, SeenIds),
+		Points \== [],
+		valid(list(list(number, FeatureCount)), Points),
+		valid_clusters(Clusters, FeatureCount, [ClusterId| SeenIds]).
 
 	make_clusterer(Functor, Encoders, RootState, MergeRecords, Options, RuntimeStats, MaximumHeapSize, Clusterer) :-
 		^^option(k(K), Options),

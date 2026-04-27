@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-27,
 		comment is 'k-Centers clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic farthest-first center selection heuristic.',
@@ -109,6 +109,19 @@
 
 	clusterer_data(Clusterer, Encoders, Centers, Options, Diagnostics) :-
 		Clusterer =.. [_Functor, Encoders, Centers, Options, Diagnostics].
+
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Centers, Options, Diagnostics),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid(list(list(number, FeatureCount)), Centers),
+			^^valid_clusterer_metadata(kcenters, Options, Diagnostics),
+			length(Centers, CenterCount),
+			^^valid_diagnostic_count(center_count, Diagnostics, CenterCount),
+			^^valid_diagnostic_choice(selection_strategy, Diagnostics, [deterministic_farthest_first, first_k]) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
 
 	initialize_centers(first_k, K, Rows, _Options, Centers) :-
 		^^take_first_k(K, Rows, Centers).

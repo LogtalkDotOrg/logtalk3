@@ -1732,6 +1732,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`type <type/0::check/3>`
 
+``check_clusterer/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`clusterer_protocol <clusterer_protocol/0::check_clusterer/1>`
+
 ``check_conversion/3``
 ----------------------
 
@@ -18221,6 +18231,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::valid/3>`
 * :ref:`timep <timep/0::valid/3>`
+
+``valid_clusterer/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`clusterer_protocol <clusterer_protocol/0::valid_clusterer/1>`
 
 ``valid_conversion/3``
 ----------------------

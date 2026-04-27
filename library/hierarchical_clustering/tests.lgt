@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-23,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "hierarchical_clustering" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(hierarchical_clustering, [
-		cluster/3, cut/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1
+		cluster/3, cut/3, diagnostics/2, export_to_clauses/4, export_to_file/4, learn/2, learn/3, print_clusterer/1, valid_clusterer/1
 	]).
 
 	cover(hierarchical_clustering).
@@ -44,6 +44,14 @@
 
 	test(hierarchical_clustering_learn_2_two_blobs, deterministic(ground(Clusterer))) :-
 		learn(two_blobs, Clusterer).
+
+	test(hierarchical_clustering_valid_clusterer_1_valid, deterministic(valid_clusterer(Clusterer))) :-
+		learn(two_blobs, Clusterer).
+
+	test(hierarchical_clustering_valid_clusterer_1_invalid, fail) :-
+		learn(two_blobs, hierarchical_clustering_clusterer(Encoders, Hierarchy, Clusters, Prototypes, Diagnostics), [feature_scaling(off)]),
+		valid_clusterer(hierarchical_clustering_clusterer(Encoders, Hierarchy, Clusters, [_OnlyPrototype], Diagnostics)),
+		Prototypes = [_FirstPrototype| _MorePrototypes].
 
 	test(hierarchical_clustering_learn_3_dendrogram, deterministic(functor(Dendrogram, merge, 4))) :-
 		learn(two_blobs, hierarchical_clustering_clusterer(_Encoders, hierarchy(_RootState, _MergeRecords, Dendrogram), _Clusters, _Prototypes, _Diagnostics), [feature_scaling(off)]).

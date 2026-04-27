@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Gaussian mixture model clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic expectation-maximization with diagonal covariance matrices.',
@@ -51,6 +51,10 @@
 
 	:- uses(list, [
 		length/2, nth1/3
+	]).
+
+	:- uses(numberlist, [
+		sum/2
 	]).
 
 	:- uses(pairs, [
@@ -453,6 +457,33 @@
 	clusterer_data(Clusterer, Encoders, Components, Weights, Options, Diagnostics) :-
 		Clusterer =.. [_, Encoders, Components, Weights, Options, Diagnostics].
 
+	check_clusterer(Clusterer) :-
+		(   clusterer_data(Clusterer, Encoders, Components, Weights, Options, Diagnostics),
+			length(Encoders, FeatureCount),
+			^^valid_continuous_encoders(Encoders),
+			valid_components(Components, FeatureCount),
+			valid_weights(Weights, Components),
+			^^valid_clusterer_metadata(gaussian_mixture, Options, Diagnostics),
+			length(Components, ComponentCount),
+			^^valid_diagnostic_count(components, Diagnostics, ComponentCount) ->
+			true
+		;   domain_error(valid_clusterer, Clusterer)
+		).
+
+	valid_components([], _FeatureCount).
+	valid_components([component(Mean, Variances)| Components], FeatureCount) :-
+		valid(list(float, FeatureCount), Mean),
+		valid(list(positive_float, FeatureCount), Variances),
+		valid_components(Components, FeatureCount).
+
+	valid_weights(Weights, Components) :-
+		length(Components, ComponentCount),
+		length(Weights, ComponentCount),
+		valid(list(positive_float), Weights),
+		sum(Weights, Sum),
+		Delta is abs(Sum - 1.0),
+		Delta =< 1.0e-6.
+
 	variance_from_moments([], [], _Options, []).
 	variance_from_moments([SecondMoment| SecondMoments], [Mean| Means], Options, [Variance| Variances]) :-
 		Variance0 is SecondMoment - Mean * Mean,
@@ -464,13 +495,8 @@
 		variance_from_moments(SecondMoments, Means, Options, Variances).
 
 	normalize_weights(Weights0, Weights) :-
-		sum_weights(Weights0, 0.0, Total),
+		sum(Weights0, Total),
 		divide_vector(Weights0, Total, Weights).
-
-	sum_weights([], Total, Total).
-	sum_weights([Weight| Weights], Total0, Total) :-
-		Total1 is Total0 + Weight,
-		sum_weights(Weights, Total1, Total).
 
 	best_component(Features, Components, Weights, Cluster) :-
 		row_log_score_summary(Features, Components, Weights, _LogLikelihood, Cluster).
