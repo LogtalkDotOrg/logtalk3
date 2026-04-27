@@ -147,6 +147,7 @@
 		glicko2(loader),
 		glicko2_periodic(loader),
 		hodge_rank(loader),
+		kemeny_young(loader),
 		regularized_bradley_terry(loader),
 		copeland(loader),
 		elo(loader),

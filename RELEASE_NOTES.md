@@ -164,20 +164,20 @@ anomaly detector with mixed-feature and missing-value support.
 * ADDED: New `ranking_protocols` library defining common protocols, shared
 test datasets, and smoke tests for machine learning ranking algorithms.
 
-* ADDED: New `borda` library implementing grouped relevance ranking
-using the Borda count method.
+* ADDED: New `borda` library implementing grouped relevance ranking using the
+Borda count method.
 
 * ADDED: New `bradley_terry` library implementing pairwise preference ranking
 using the Bradley-Terry model.
 
-* ADDED: New `colley` library implementing pairwise preference ranking
-using the Colley matrix method.
+* ADDED: New `colley` library implementing pairwise preference ranking using
+the Colley matrix method.
 
 * ADDED: New `copeland` library implementing pairwise preference ranking
 using Copeland scores.
 
-* ADDED: New `elo` library implementing pairwise preference ranking
-using deterministic batch Elo rating updates.
+* ADDED: New `elo` library implementing pairwise preference ranking using
+deterministic batch Elo rating updates.
 
 * ADDED: New `glicko2` library implementing pairwise preference ranking
 using a deterministic single-period Glicko-2 update over aggregated
@@ -187,15 +187,19 @@ pairwise outcomes.
 Glicko-2 updates over temporal pairwise game datasets with explicit
 rating periods and support for draws and inactivity.
 
-* ADDED: New `hodge_rank` library implementing pairwise measurement
-ranking using a weighted graph-Laplacian least-squares fit with explicit
-edge residual diagnostics.
+* ADDED: New `hodge_rank` library implementing pairwise measurement ranking
+using a weighted graph-Laplacian least-squares fit with explicit edge
+residual diagnostics.
+
+* ADDED: New `kemeny_young` library implementing exact pairwise preference
+consensus ranking using Kemeny-Young optimization with deterministic
+optimal-order tie breaking.
 
 * ADDED: New `massey` library implementing pairwise preference ranking
 using the Massey matrix method.
 
-* ADDED: New `plackett_luce` library implementing grouped ranking
-using a tie-aware top-choice Plackett-Luce model.
+* ADDED: New `plackett_luce` library implementing grouped ranking using
+a tie-aware top-choice Plackett-Luce model.
 
 * ADDED: New `plackett_luce_last` library implementing grouped ranking
 using a tie-aware Plackett-Luce-last model.
@@ -212,8 +216,8 @@ using the Schulze strongest-path method.
 * ADDED: New `ranked_pairs` library implementing pairwise preference
 ranking using the Ranked Pairs lock-graph method.
 
-* ADDED: New `thurstone_mosteller` library implementing pairwise
-preference ranking using a deterministic Thurstone-Mosteller Case V fit.
+* ADDED: New `thurstone_mosteller` library implementing pairwise preference
+ranking using a deterministic Thurstone-Mosteller Case V fit.
 
 * ADDED: New `logistic_regression` library implementing logistic regression
 for binary and multiclass classification on continuous and mixed-feature

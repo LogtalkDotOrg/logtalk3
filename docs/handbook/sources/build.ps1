@@ -158,6 +158,7 @@ Foreach-Object {
 (Get-Content ../../../library/json_rpc/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 (Get-Content ../../../library/json_schema/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_schema.rst
 (Get-Content ../../../library/kcenters/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kcenters.rst
+(Get-Content ../../../library/kemeny_young/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kemeny_young.rst
 (Get-Content ../../../library/kmeans/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmeans.rst
 (Get-Content ../../../library/kmedians/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmedians.rst
 (Get-Content ../../../library/kmedoids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmedoids.rst

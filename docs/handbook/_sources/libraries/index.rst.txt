@@ -108,6 +108,7 @@ directory in the ``NOTES.md`` file.
    json_rpc
    json_schema
    kcenters
+   kemeny_young
    kmeans
    kmedians
    kmedoids

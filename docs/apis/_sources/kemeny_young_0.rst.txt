@@ -1,0 +1,108 @@
+.. index:: single: kemeny_young
+.. _kemeny_young/0:
+
+.. rst-class:: right
+
+**object**
+
+``kemeny_young``
+================
+
+Kemeny-Young pairwise preference ranker. Learns one deterministic consensus order from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by maximizing the total agreeing pairwise preference weight over all linear orders and returns a self-describing ranker term with diagnostics that can be used for ranking and export.
+
+| **Availability:** 
+|    ``logtalk_load(kemeny_young(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
+|    ``public`` :ref:`condorcet_victory_common <condorcet_victory_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Algorithm: Aggregates head-to-head preference weights, then performs an exact branch-and-bound search over linear orders to maximize the total pairwise agreement score under the Kemeny-Young criterion.
+   - Tie-breaking: When multiple optimal Kemeny orders exist, the ``tie_breaking/1`` option selects the deterministic search order used to choose one representative consensus ranking.
+   - Consensus access: The ``consensus_ranking/2`` predicate returns the learned full-item Kemeny order, while ``consensus_score/2`` returns its maximum total pairwise agreement score.
+   - Score semantics: The learned score for each item is its reverse position in the selected consensus ranking, ranging from ``N-1`` for the first ranked item down to ``0`` for the last ranked item.
+   - Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain part of a single comparison graph.
+   - Complexity: Kemeny-Young optimization is NP-hard in general. This implementation uses exact search with pruning and is intended for small to moderate item sets.
+   - Ranker representation: The learned ranker is represented by default as ``kemeny_young_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the selected consensus ranking, its agreement score, the effective tie-breaking mode, and the training dataset summary.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_measurements/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_summary/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_games/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_games/3`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_periods/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_summary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_measurement_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_measurement_dataset/2`  :ref:`ranking_dataset_common/0::validate_temporal_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_temporal_pairwise_dataset/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: consensus_ranking/2
+.. _kemeny_young/0::consensus_ranking/2:
+
+``consensus_ranking/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the learned full-item consensus ranking selected by the Kemeny-Young optimization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``consensus_ranking(Ranker,ConsensusRanking)``
+| **Mode and number of proofs:**
+|    ``consensus_ranking(+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: consensus_score/2
+.. _kemeny_young/0::consensus_score/2:
+
+``consensus_score/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the maximum total pairwise agreement score of the learned consensus ranking.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``consensus_score(Ranker,ConsensusScore)``
+| **Mode and number of proofs:**
+|    ``consensus_score(+compound,-number)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`ranked_pairs <ranked_pairs/0>`, :ref:`schulze <schulze/0>`
+

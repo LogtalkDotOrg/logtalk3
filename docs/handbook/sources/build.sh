@@ -158,6 +158,7 @@ sed '1,19d' ../../../library/json_lines/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/json_rpc/NOTES.md | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libraries/json_schema.rst
 sed '1,19d' ../../../library/kcenters/NOTES.md | pandoc -f gfm -t rst -o libraries/kcenters.rst
+sed '1,19d' ../../../library/kemeny_young/NOTES.md | pandoc -f gfm -t rst -o libraries/kemeny_young.rst
 sed '1,19d' ../../../library/kmeans/NOTES.md | pandoc -f gfm -t rst -o libraries/kmeans.rst
 sed '1,19d' ../../../library/kmedians/NOTES.md | pandoc -f gfm -t rst -o libraries/kmedians.rst
 sed '1,19d' ../../../library/kmedoids/NOTES.md | pandoc -f gfm -t rst -o libraries/kmedoids.rst
