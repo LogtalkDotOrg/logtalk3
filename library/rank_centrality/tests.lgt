@@ -50,7 +50,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "rank_centrality" library.'
 	]).
 
@@ -184,6 +184,13 @@
 	test(rank_centrality_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		rank_centrality::learn(regular_head_to_head, Ranker),
 		rank_centrality::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(rank_centrality_valid_ranker_1, deterministic) :-
+		rank_centrality::learn(regular_head_to_head, Ranker),
+		rank_centrality::valid_ranker(Ranker).
+
+	test(rank_centrality_invalid_valid_ranker_1, fail) :-
+		rank_centrality::valid_ranker(fake_ranker([alpha], [alpha-1.0], [model(fake)])).
 
 	test(rank_centrality_rank_invalid_ranker_error, error(domain_error(rank_centrality_ranker, fake_ranker([alpha], [alpha-1.0], [model(fake)])))) :-
 		rank_centrality::rank(fake_ranker([alpha], [alpha-1.0], [model(fake)]), [alpha], _Ranking).

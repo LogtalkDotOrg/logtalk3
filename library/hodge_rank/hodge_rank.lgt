@@ -105,20 +105,28 @@
 
 	hodge_rank_data(Ranker, Items, Scores, Diagnostics, Residuals) :-
 		::score_ranker_data(Ranker, Items, Scores, Diagnostics),
-		(   memberchk(residuals(Residuals), Diagnostics),
-			valid_residuals(Residuals) ->
+		(   memberchk(residuals(Residuals), Diagnostics) ->
 			true
 		;   domain_error(hodge_rank_ranker, Ranker)
 		).
 
-	valid_residuals([]).
-	valid_residuals([residual(Item1, Item2, Residual, Weight)| Residuals]) :-
-		nonvar(Item1),
-		nonvar(Item2),
+	valid_score_ranker_diagnostics(Items, _Scores, Diagnostics) :-
+		^^valid_ranker_metadata(hodge_rank, Diagnostics),
+		memberchk(residuals(Residuals), Diagnostics),
+		valid_residuals(Items, Residuals),
+		memberchk(residual_norm(ResidualNorm), Diagnostics),
+		number(ResidualNorm),
+		ResidualNorm >= 0.0.
+
+	valid_residuals(_Items, []).
+	valid_residuals(Items, [residual(Item1, Item2, Residual, Weight)| Residuals]) :-
+		memberchk(Item1, Items),
+		memberchk(Item2, Items),
+		Item1 \== Item2,
 		number(Residual),
 		number(Weight),
 		Weight > 0,
-		valid_residuals(Residuals).
+		valid_residuals(Items, Residuals).
 
 	measurement_system(Measurements, IndexDictionary, Count, Matrix, Vector) :-
 		dictionary_new(PairAdjacency0),

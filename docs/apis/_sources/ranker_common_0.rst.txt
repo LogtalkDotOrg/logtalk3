@@ -15,7 +15,7 @@ Shared predicates for ranker score access, diagnostics, and export.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-26
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -26,14 +26,16 @@ Shared predicates for ranker score access, diagnostics, and export.
 | **Extends:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`ranker_protocol/0::check_ranker/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranker_protocol/0::valid_ranker/1`  
 
 .. contents::
    :local:
@@ -138,6 +140,44 @@ Pretty-printing helper predicate used by importing ranker implementations to sho
 |    ``print_ranker_template(Ranker)``
 | **Mode and number of proofs:**
 |    ``print_ranker_template(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_ranker_metadata/2
+.. _ranker_common/0::valid_ranker_metadata/2:
+
+``valid_ranker_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the diagnostics list contains the expected model identifier, a valid effective options list, and a structurally valid dataset summary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_ranker_metadata(Model,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_ranker_metadata(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_item_value_pairs/2
+.. _ranker_common/0::valid_item_value_pairs/2:
+
+``valid_item_value_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the second argument is an ordered list of unique ``Item-Value`` pairs aligned with the first argument item list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_item_value_pairs(Items,Pairs)``
+| **Mode and number of proofs:**
+|    ``valid_item_value_pairs(+list,+list(pair))`` - ``zero_or_one``
 
 
 ------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Rank Centrality pairwise preference ranker. Learns one stationary probability score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying power iteration to the Rank Centrality Markov chain built from aggregated head-to-head outcomes, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses the Rank Centrality transition rule where each observed opponent contributes an outgoing transition proportional to the empirical probability of beating the current item, scaled by the maximum comparison degree, and estimates the stationary distribution using deterministic power iteration.',
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, nth1/3, reverse/2
+		length/2, member/2, memberchk/2, nth1/3, reverse/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -113,10 +113,34 @@
 	ranker_data(Ranker, Items, Scores, Diagnostics) :-
 		(	var(Ranker) ->
 			instantiation_error
-		;	Ranker = rank_centrality_ranker(Items, Scores, Diagnostics) ->
+		;	Ranker = rank_centrality_ranker(Items, Scores, Diagnostics),
+			valid_ranker_data(Items, Scores, Diagnostics) ->
 			true
 		;	domain_error(rank_centrality_ranker, Ranker)
 		).
+
+	valid_ranker_data(Items, Scores, Diagnostics) :-
+		^^valid_item_value_pairs(Items, Scores),
+		valid_probability_values(Scores),
+		^^valid_ranker_metadata(rank_centrality, Diagnostics),
+		memberchk(convergence(Status), Diagnostics),
+		atom(Status),
+		memberchk(iterations(Iterations), Diagnostics),
+		integer(Iterations),
+		Iterations >= 0,
+		memberchk(final_delta(FinalDifference), Diagnostics),
+		number(FinalDifference),
+		FinalDifference >= 0.0,
+		memberchk(maximum_degree(MaximumDegree), Diagnostics),
+		integer(MaximumDegree),
+		MaximumDegree >= 0.
+
+	valid_probability_values([]).
+	valid_probability_values([_Item-Value| Pairs]) :-
+		number(Value),
+		Value > 0.0,
+		Value =< 1.0,
+		valid_probability_values(Pairs).
 
 	singleton_ranker(Item, Options, DatasetSummary, rank_centrality_ranker([Item], [Item-1.0], [
 		model(rank_centrality),

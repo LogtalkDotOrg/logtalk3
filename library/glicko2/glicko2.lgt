@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		length/2, memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -80,6 +80,23 @@
 		volatilities(Volatilities),
 		dataset_summary(DatasetSummary)
 	])).
+
+	valid_score_ranker_diagnostics(Items, _Ratings, Diagnostics) :-
+		^^valid_ranker_metadata(glicko2, Diagnostics),
+		memberchk(rating_deviations(Deviations), Diagnostics),
+		valid_positive_item_values(Items, Deviations),
+		memberchk(volatilities(Volatilities), Diagnostics),
+		valid_positive_item_values(Items, Volatilities).
+
+	valid_positive_item_values(Items, Pairs) :-
+		^^valid_item_value_pairs(Items, Pairs),
+		valid_positive_values(Pairs).
+
+	valid_positive_values([]).
+	valid_positive_values([_Item-Value| Pairs]) :-
+		number(Value),
+		Value > 0.0,
+		valid_positive_values(Pairs).
 
 	validate_integer_preferences([]).
 	validate_integer_preferences([p(_Winner, _Loser, Weight)| Preferences]) :-

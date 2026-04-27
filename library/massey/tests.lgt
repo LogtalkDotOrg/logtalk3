@@ -165,6 +165,13 @@
 		massey::learn(regular_head_to_head, Ranker),
 		massey::rank(Ranker, [alpha, alpha, beta], _Ranking).
 
+	test(massey_valid_ranker_1, deterministic) :-
+		massey::learn(regular_head_to_head, Ranker),
+		massey::valid_ranker(Ranker).
+
+	test(massey_invalid_valid_ranker_1, fail) :-
+		massey::valid_ranker(fake_ranker([alpha], [alpha-0.0], [model(fake)])).
+
 	test(massey_rank_invalid_ranker_error, error(domain_error(massey_ranker, fake_ranker([alpha], [alpha-0.0], [model(fake)])))) :-
 		massey::rank(fake_ranker([alpha], [alpha-0.0], [model(fake)]), [alpha], _Ranking).
 

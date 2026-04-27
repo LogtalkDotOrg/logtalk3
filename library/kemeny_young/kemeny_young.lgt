@@ -101,6 +101,19 @@
 		^^score_ranker_data(Ranker, _Items, _Scores, Diagnostics),
 		memberchk(consensus_score(ConsensusScore), Diagnostics).
 
+	valid_score_ranker_diagnostics(Items, _Scores, Diagnostics) :-
+		^^valid_ranker_metadata(kemeny_young, Diagnostics),
+		memberchk(consensus_ranking(ConsensusRanking), Diagnostics),
+		valid_item_permutation(Items, ConsensusRanking),
+		memberchk(consensus_score(ConsensusScore), Diagnostics),
+		number(ConsensusScore),
+		ConsensusScore >= 0.
+
+	valid_item_permutation([], []).
+	valid_item_permutation([Item| Items], Ranking0) :-
+		select_ordered(Item, Ranking0, Ranking),
+		valid_item_permutation(Items, Ranking).
+
 	singleton_ranker(Item, Options, DatasetSummary, kemeny_young_ranker([Item], [Item-0], [
 		model(kemeny_young),
 		options(Options),
@@ -160,7 +173,7 @@
 	explore_consensus_candidates([], _Remaining, _PrefixRev, _CurrentScore, _IndexDictionary, _PreferenceMatrix, BestScore, BestRanking, BestScore, BestRanking).
 	explore_consensus_candidates([Candidate| Candidates], Remaining, PrefixRev, CurrentScore, IndexDictionary, PreferenceMatrix, BestScore0, BestRanking0, BestScore, BestRanking) :-
 		select_ordered(Candidate, Remaining, NextRemaining),
-		prefix_contribution(PrefixRev, Candidate, IndexDictionary, PreferenceMatrix, Increment),
+		prefix_contribution(PrefixRev, Candidate, IndexDictionary, PreferenceMatrix, 0, Increment),
 		NextScore is CurrentScore + Increment,
 		search_best_consensus(NextRemaining, [Candidate| PrefixRev], NextScore, IndexDictionary, PreferenceMatrix, BestScore0, BestRanking0, BestScore1, BestRanking1),
 		explore_consensus_candidates(Candidates, Remaining, PrefixRev, CurrentScore, IndexDictionary, PreferenceMatrix, BestScore1, BestRanking1, BestScore, BestRanking).
@@ -171,41 +184,40 @@
 		select_ordered(Item, Items, Remaining).
 
 	upper_bound(PrefixRev, Remaining, CurrentScore, IndexDictionary, PreferenceMatrix, UpperBound) :-
-		prefix_remaining_contribution(PrefixRev, Remaining, IndexDictionary, PreferenceMatrix, PrefixRemainingContribution),
-		remaining_pair_upper_bound(Remaining, IndexDictionary, PreferenceMatrix, RemainingPairBound),
+		prefix_remaining_contribution(PrefixRev, Remaining, IndexDictionary, PreferenceMatrix, 0, PrefixRemainingContribution),
+		remaining_pair_upper_bound(Remaining, IndexDictionary, PreferenceMatrix, 0, RemainingPairBound),
 		UpperBound is CurrentScore + PrefixRemainingContribution + RemainingPairBound.
 
-	prefix_remaining_contribution([], _Remaining, _IndexDictionary, _PreferenceMatrix, 0).
-	prefix_remaining_contribution([Item| PrefixRev], Remaining, IndexDictionary, PreferenceMatrix, Contribution) :-
-		item_remaining_contribution(Remaining, Item, IndexDictionary, PreferenceMatrix, ItemContribution),
-		prefix_remaining_contribution(PrefixRev, Remaining, IndexDictionary, PreferenceMatrix, RemainingContribution),
-		Contribution is ItemContribution + RemainingContribution.
+	prefix_remaining_contribution([], _Remaining, _IndexDictionary, _PreferenceMatrix, Contribution, Contribution).
+	prefix_remaining_contribution([Item| PrefixRev], Remaining, IndexDictionary, PreferenceMatrix, Contribution0, Contribution) :-
+		item_remaining_contribution(Remaining, Item, IndexDictionary, PreferenceMatrix, 0, ItemContribution),
+		Contribution1 is Contribution0 + ItemContribution,
+		prefix_remaining_contribution(PrefixRev, Remaining, IndexDictionary, PreferenceMatrix, Contribution1, Contribution).
 
-	item_remaining_contribution([], _Item, _IndexDictionary, _PreferenceMatrix, 0).
-	item_remaining_contribution([Other| Remaining], Item, IndexDictionary, PreferenceMatrix, Contribution) :-
+	item_remaining_contribution([], _Item, _IndexDictionary, _PreferenceMatrix, Contribution, Contribution).
+	item_remaining_contribution([Other| Remaining], Item, IndexDictionary, PreferenceMatrix, Contribution0, Contribution) :-
 		preference_weight(Item, Other, IndexDictionary, PreferenceMatrix, Weight),
-		item_remaining_contribution(Remaining, Item, IndexDictionary, PreferenceMatrix, RemainingContribution),
-		Contribution is Weight + RemainingContribution.
+		Contribution1 is Contribution0 + Weight,
+		item_remaining_contribution(Remaining, Item, IndexDictionary, PreferenceMatrix, Contribution1, Contribution).
 
-	remaining_pair_upper_bound([], _IndexDictionary, _PreferenceMatrix, 0).
-	remaining_pair_upper_bound([Item| Items], IndexDictionary, PreferenceMatrix, Bound) :-
-		item_pair_upper_bound(Items, Item, IndexDictionary, PreferenceMatrix, ItemBound),
-		remaining_pair_upper_bound(Items, IndexDictionary, PreferenceMatrix, RemainingBound),
-		Bound is ItemBound + RemainingBound.
+	remaining_pair_upper_bound([], _IndexDictionary, _PreferenceMatrix, Bound, Bound).
+	remaining_pair_upper_bound([Item| Items], IndexDictionary, PreferenceMatrix, Bound0, Bound) :-
+		item_pair_upper_bound(Items, Item, IndexDictionary, PreferenceMatrix, 0, ItemBound),
+		Bound1 is Bound0 + ItemBound,
+		remaining_pair_upper_bound(Items, IndexDictionary, PreferenceMatrix, Bound1, Bound).
 
-	item_pair_upper_bound([], _Item, _IndexDictionary, _PreferenceMatrix, 0).
-	item_pair_upper_bound([Other| Items], Item, IndexDictionary, PreferenceMatrix, Bound) :-
+	item_pair_upper_bound([], _Item, _IndexDictionary, _PreferenceMatrix, Bound, Bound).
+	item_pair_upper_bound([Other| Items], Item, IndexDictionary, PreferenceMatrix, Bound0, Bound) :-
 		preference_weight(Item, Other, IndexDictionary, PreferenceMatrix, WeightForward),
 		preference_weight(Other, Item, IndexDictionary, PreferenceMatrix, WeightBackward),
-		PairBound is max(WeightForward, WeightBackward),
-		item_pair_upper_bound(Items, Item, IndexDictionary, PreferenceMatrix, RemainingBound),
-		Bound is PairBound + RemainingBound.
+		Bound1 is Bound0 + max(WeightForward, WeightBackward),
+		item_pair_upper_bound(Items, Item, IndexDictionary, PreferenceMatrix, Bound1, Bound).
 
-	prefix_contribution([], _Candidate, _IndexDictionary, _PreferenceMatrix, 0).
-	prefix_contribution([Item| PrefixRev], Candidate, IndexDictionary, PreferenceMatrix, Contribution) :-
+	prefix_contribution([], _Candidate, _IndexDictionary, _PreferenceMatrix, Contribution, Contribution).
+	prefix_contribution([Item| PrefixRev], Candidate, IndexDictionary, PreferenceMatrix, Contribution0, Contribution) :-
 		preference_weight(Item, Candidate, IndexDictionary, PreferenceMatrix, Weight),
-		prefix_contribution(PrefixRev, Candidate, IndexDictionary, PreferenceMatrix, RemainingContribution),
-		Contribution is Weight + RemainingContribution.
+		Contribution1 is Contribution0 + Weight,
+		prefix_contribution(PrefixRev, Candidate, IndexDictionary, PreferenceMatrix, Contribution1, Contribution).
 
 	preference_weight(Item1, Item2, IndexDictionary, PreferenceMatrix, Weight) :-
 		dictionary_lookup(Item1, Index1, IndexDictionary),

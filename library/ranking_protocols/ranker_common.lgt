@@ -26,18 +26,22 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Shared predicates for ranker score access, diagnostics, and export.'
 	]).
 
 	:- uses(format, [
-		format/2,
-		format/3
+		format/2, format/3
 	]).
 
 	:- uses(list, [
-		member/2,
-		memberchk/2
+		member/2, memberchk/2
+	]).
+
+	:- uses(avltree, [
+		insert/4 as dictionary_insert/4,
+		lookup/3 as dictionary_lookup/3,
+		new/1 as dictionary_new/1
 	]).
 
 	:- protected(ranker_scores_data/2).
@@ -75,6 +79,20 @@
 		argnames is ['Ranker']
 	]).
 
+	:- protected(valid_ranker_metadata/2).
+	:- mode(valid_ranker_metadata(+atom, +list(compound)), zero_or_one).
+	:- info(valid_ranker_metadata/2, [
+		comment is 'True when the diagnostics list contains the expected model identifier, a valid effective options list, and a structurally valid dataset summary.',
+		argnames is ['Model', 'Diagnostics']
+	]).
+
+	:- protected(valid_item_value_pairs/2).
+	:- mode(valid_item_value_pairs(+list, +list(pair)), zero_or_one).
+	:- info(valid_item_value_pairs/2, [
+		comment is 'True when the second argument is an ordered list of unique ``Item-Value`` pairs aligned with the first argument item list.',
+		argnames is ['Items', 'Pairs']
+	]).
+
 	scores(Ranker, Scores) :-
 		::ranker_scores_data(Ranker, Scores).
 
@@ -89,9 +107,40 @@
 		diagnostics(Ranker, Diagnostics),
 		memberchk(options(Options), Diagnostics).
 
+	check_ranker(Ranker) :-
+		::ranker_scores_data(Ranker, _Scores),
+		::ranker_diagnostics_data(Ranker, _Diagnostics).
+
+	valid_ranker(Ranker) :-
+		catch(::check_ranker(Ranker), _Error, fail).
+
 	print_ranker_template(Ranker) :-
 		::ranker_term_template(Ranker, Template),
 		format('Template: ~w~n', [Template]).
+
+	valid_ranker_metadata(Model, Diagnostics) :-
+		type::valid(list(compound), Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		catch(::check_options(Options), _Error, fail),
+		memberchk(dataset_summary(Summary), Diagnostics),
+		type::valid(list(compound), Summary).
+
+	valid_item_value_pairs(Items, Pairs) :-
+		dictionary_new(SeenItems),
+		valid_item_value_pairs(Items, Pairs, SeenItems).
+
+	valid_item_value_pairs(Items, Pairs, _SeenItems) :-
+		(   var(Items); var(Pairs) ),
+		!,
+		fail.
+	valid_item_value_pairs([], [], _SeenItems).
+	valid_item_value_pairs([Item| Items], [PairItem-_Value| Pairs], SeenItems0) :-
+		nonvar(Item),
+		Item == PairItem,
+		\+ dictionary_lookup(Item, _Seen, SeenItems0),
+		dictionary_insert(SeenItems0, Item, true, SeenItems),
+		valid_item_value_pairs(Items, Pairs, SeenItems).
 
 	export_to_file(Dataset, Ranker, Functor, File) :-
 		::export_to_clauses(Dataset, Ranker, Functor, Clauses),

@@ -183,6 +183,13 @@
 		kemeny_young::learn(regular_head_to_head, Ranker),
 		kemeny_young::rank(Ranker, [alpha, alpha, beta], _Ranking).
 
+	test(kemeny_young_valid_ranker_1, deterministic) :-
+		kemeny_young::learn(regular_head_to_head, Ranker),
+		kemeny_young::valid_ranker(Ranker).
+
+	test(kemeny_young_invalid_valid_ranker_1, fail) :-
+		kemeny_young::valid_ranker(fake_ranker([alpha], [alpha-0], [model(fake)])).
+
 	test(kemeny_young_rank_invalid_ranker_error, error(domain_error(kemeny_young_ranker, fake_ranker([alpha], [alpha-0], [model(fake)])))) :-
 		kemeny_young::rank(fake_ranker([alpha], [alpha-0], [model(fake)]), [alpha], _Ranking).
 

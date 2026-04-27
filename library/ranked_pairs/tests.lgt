@@ -49,7 +49,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "ranked_pairs" library.'
 	]).
 
@@ -192,6 +192,13 @@
 	test(ranked_pairs_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		ranked_pairs::learn(regular_head_to_head, Ranker),
 		ranked_pairs::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(ranked_pairs_valid_ranker_1, deterministic) :-
+		ranked_pairs::learn(regular_head_to_head, Ranker),
+		ranked_pairs::valid_ranker(Ranker).
+
+	test(ranked_pairs_invalid_valid_ranker_1, fail) :-
+		ranked_pairs::valid_ranker(fake_ranker([alpha], [alpha-0], [model(fake)])).
 
 	test(ranked_pairs_rank_invalid_ranker_error, error(domain_error(ranked_pairs_ranker, fake_ranker([alpha], [alpha-0], [model(fake)])))) :-
 		ranked_pairs::rank(fake_ranker([alpha], [alpha-0], [model(fake)]), [alpha], _Ranking).

@@ -167,6 +167,13 @@
 		hodge_rank::learn(regular_measurements, Ranker),
 		hodge_rank::rank(Ranker, [alpha, alpha, beta], _Ranking).
 
+	test(hodge_rank_valid_ranker_1, deterministic) :-
+		hodge_rank::learn(regular_measurements, Ranker),
+		hodge_rank::valid_ranker(Ranker).
+
+	test(hodge_rank_invalid_valid_ranker_1, fail) :-
+		hodge_rank::valid_ranker(fake_ranker([alpha], [alpha-0.0], [model(fake)])).
+
 	test(hodge_rank_rank_invalid_ranker_error, error(domain_error(hodge_rank_ranker, fake_ranker([alpha], [alpha-0.0], [model(fake)])))) :-
 		hodge_rank::rank(fake_ranker([alpha], [alpha-0.0], [model(fake)]), [alpha], _Ranking).
 

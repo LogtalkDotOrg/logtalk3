@@ -302,6 +302,13 @@
 		plackett_luce_last::learn(ranked_ballots, Ranker),
 		plackett_luce_last::rank(Ranker, [alpha, alpha, beta], _Ranking).
 
+	test(plackett_luce_last_valid_ranker_1, deterministic) :-
+		plackett_luce_last::learn(ranked_ballots, Ranker),
+		plackett_luce_last::valid_ranker(Ranker).
+
+	test(plackett_luce_last_invalid_valid_ranker_1, fail) :-
+		plackett_luce_last::valid_ranker(fake_ranker([alpha], [alpha-1.0], [model(fake)])).
+
 	test(plackett_luce_last_rank_invalid_ranker_error, error(domain_error(plackett_luce_last_ranker, fake_ranker([alpha], [alpha-1.0], [model(fake)])))) :-
 		plackett_luce_last::rank(fake_ranker([alpha], [alpha-1.0], [model(fake)]), [alpha], _Ranking).
 

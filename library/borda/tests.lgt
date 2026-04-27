@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "borda" library.'
 	]).
 
@@ -153,6 +153,13 @@
 	test(borda_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		borda::learn(ranked_ballots, Ranker),
 		borda::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(borda_valid_ranker_1, deterministic) :-
+		borda::learn(ranked_ballots, Ranker),
+		borda::valid_ranker(Ranker).
+
+	test(borda_invalid_valid_ranker_1, fail) :-
+		borda::valid_ranker(fake_ranker([alpha], [alpha-1], [model(fake)])).
 
 	test(borda_rank_invalid_ranker_error, error(domain_error(borda_ranker, fake_ranker([alpha], [alpha-1], [model(fake)])))) :-
 		borda::rank(fake_ranker([alpha], [alpha-1], [model(fake)]), [alpha], _Ranking).

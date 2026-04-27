@@ -15,7 +15,7 @@ Protocol for machine learning rankers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-26
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -167,6 +167,44 @@ Returns the effective training options recorded in a learned ranker diagnostics 
 |    ``ranker_options(Ranker,Options)``
 | **Mode and number of proofs:**
 |    ``ranker_options(+compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_ranker/1
+.. _ranker_protocol/0::check_ranker/1:
+
+``check_ranker/1``
+^^^^^^^^^^^^^^^^^^
+
+Checks that the argument is a structurally valid learned ranker term for the receiving ranker implementation, throwing an exception on invalid input when applicable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_ranker(Ranker)``
+| **Mode and number of proofs:**
+|    ``check_ranker(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_ranker/1
+.. _ranker_protocol/0::valid_ranker/1:
+
+``valid_ranker/1``
+^^^^^^^^^^^^^^^^^^
+
+True when `check_ranker/1` succeeds for the argument without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_ranker(Ranker)``
+| **Mode and number of proofs:**
+|    ``valid_ranker(+compound)`` - ``zero_or_one``
 
 
 ------------

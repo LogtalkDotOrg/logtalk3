@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Ranked Pairs pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by locking direct pairwise victories in descending strength order while avoiding cycles and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Builds the direct pairwise victory graph from aggregated matchups, considers victories in descending direct-victory strength order, and locks each victory unless it would create a directed cycle in the accepted lock graph.',
@@ -88,6 +88,20 @@
 	locked_pairs(Ranker, LockedPairs) :-
 		^^score_ranker_data(Ranker, _Items, _Scores, Diagnostics),
 		memberchk(locked_pairs(LockedPairs), Diagnostics).
+
+	valid_score_ranker_diagnostics(Items, _Scores, Diagnostics) :-
+		^^valid_ranker_metadata(ranked_pairs, Diagnostics),
+		memberchk(locked_pairs(LockedPairs), Diagnostics),
+		valid_locked_pairs(Items, LockedPairs).
+
+	valid_locked_pairs(_Items, []).
+	valid_locked_pairs(Items, [lock(Item1, Item2, Strength)| LockedPairs]) :-
+		memberchk(Item1, Items),
+		memberchk(Item2, Items),
+		Item1 \== Item2,
+		number(Strength),
+		Strength > 0,
+		valid_locked_pairs(Items, LockedPairs).
 
 	direct_victories(IndexPairs, DirectStrengths, TieBreaking, Victories) :-
 		direct_victories(IndexPairs, IndexPairs, DirectStrengths, TieBreaking, 1, VictoryPairs-[], _),

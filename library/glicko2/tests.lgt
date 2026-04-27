@@ -197,6 +197,13 @@
 		glicko2::learn(regular_head_to_head, Ranker),
 		glicko2::rank(Ranker, [alpha, alpha, beta], _Ranking).
 
+	test(glicko2_valid_ranker_1, deterministic) :-
+		glicko2::learn(regular_head_to_head, Ranker),
+		glicko2::valid_ranker(Ranker).
+
+	test(glicko2_invalid_valid_ranker_1, fail) :-
+		glicko2::valid_ranker(fake_ranker([alpha], [alpha-1500.0], [model(fake)])).
+
 	test(glicko2_rank_invalid_ranker_error, error(domain_error(glicko2_ranker, fake_ranker([alpha], [alpha-1500.0], [model(fake)])))) :-
 		glicko2::rank(fake_ranker([alpha], [alpha-1500.0], [model(fake)]), [alpha], _Ranking).
 

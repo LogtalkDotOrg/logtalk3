@@ -153,6 +153,13 @@
 		glicko2_periodic::learn(temporal_two_period_chain, Ranker),
 		glicko2_periodic::rank(Ranker, [alpha, phantom], _Ranking).
 
+	test(glicko2_periodic_valid_ranker_1, deterministic) :-
+		glicko2_periodic::learn(temporal_two_period_chain, Ranker),
+		glicko2_periodic::valid_ranker(Ranker).
+
+	test(glicko2_periodic_invalid_valid_ranker_1, fail) :-
+		glicko2_periodic::valid_ranker(fake_ranker([alpha], [alpha-1500.0], [model(fake)])).
+
 	test(glicko2_periodic_print_ranker_1, deterministic) :-
 		glicko2_periodic::learn(temporal_two_period_chain, Ranker),
 		glicko2_periodic::print_ranker(Ranker).

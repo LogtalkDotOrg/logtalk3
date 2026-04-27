@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -115,10 +115,50 @@
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
 		(	var(Ranker) ->
 			instantiation_error
-		;	Ranker = plackett_luce_ranker(Items, Strengths, Diagnostics) ->
+		;	Ranker = plackett_luce_ranker(Items, Strengths, Diagnostics),
+			valid_ranker_data(Items, Strengths, Diagnostics) ->
 			true
 		;	domain_error(plackett_luce_ranker, Ranker)
 		).
+
+	valid_ranker_data(Items, Strengths, Diagnostics) :-
+		^^valid_item_value_pairs(Items, Strengths),
+		valid_positive_values(Strengths),
+		memberchk(model(plackett_luce), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		valid_recorded_options(Options),
+		memberchk(dataset_summary(Summary), Diagnostics),
+		type::valid(list(compound), Summary),
+		memberchk(convergence(Status), Diagnostics),
+		atom(Status),
+		memberchk(iterations(Iterations), Diagnostics),
+		integer(Iterations),
+		Iterations >= 0,
+		memberchk(final_delta(FinalDifference), Diagnostics),
+		number(FinalDifference),
+		FinalDifference >= 0.0.
+
+	valid_recorded_options(Options) :-
+		type::valid(list(compound), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		integer(MaximumIterations),
+		MaximumIterations > 0,
+		memberchk(tolerance(Tolerance), Options),
+		number(Tolerance),
+		Tolerance > 0.0,
+		memberchk(missing_relevance(MissingRelevance), Options),
+		(	MissingRelevance == zero
+		;	MissingRelevance == error
+		).
+
+	valid_positive_values(Pairs) :-
+		positive_values(Pairs).
+
+	positive_values([]).
+	positive_values([_Item-Value| Pairs]) :-
+		number(Value),
+		Value > 0.0,
+		positive_values(Pairs).
 
 	singleton_ranker(Item, Options, DatasetSummary, plackett_luce_ranker([Item], [Item-1.0], [
 		model(plackett_luce),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Shared predicates for score-ranker term construction, validation, ranking, export, and pretty-printing.'
 	]).
 
@@ -69,6 +69,13 @@
 	:- info(score_ranker_data/4, [
 		comment is 'Validates and destructures a score-ranker term into its items, score pairs, and diagnostics payloads.',
 		argnames is ['Ranker', 'Items', 'Scores', 'Diagnostics']
+	]).
+
+	:- protected(valid_score_ranker_diagnostics/3).
+	:- mode(valid_score_ranker_diagnostics(+list, +list(pair), +list(compound)), zero_or_one).
+	:- info(valid_score_ranker_diagnostics/3, [
+		comment is 'Hook predicate that importing rankers can define to validate diagnostics beyond the common model, options, and dataset summary metadata.',
+		argnames is ['Items', 'Scores', 'Diagnostics']
 	]).
 
 	:- protected(initialize_scores/2).
@@ -154,27 +161,24 @@
 		(   var(Ranker) ->
 			instantiation_error
 		;   ::score_ranker_term(Items, Scores, Diagnostics, Ranker),
-			valid_core_ranker_data(Items, Scores) ->
+			valid_score_ranker_data(Items, Scores, Diagnostics) ->
 			true
 		;   domain_error(Domain, Ranker)
 		).
 
-	valid_core_ranker_data(Items, Scores) :-
-		dictionary_new(SeenItems),
-		validate_item_scores(Items, Scores, SeenItems).
+	valid_score_ranker_data(Items, Scores, Diagnostics) :-
+		^^valid_item_value_pairs(Items, Scores),
+		valid_score_values(Scores),
+		::valid_score_ranker_diagnostics(Items, Scores, Diagnostics).
 
-	validate_item_scores(Items, Scores, _SeenItems) :-
-		(   var(Items); var(Scores) ),
-		!,
-		fail.
-	validate_item_scores([], [], _SeenItems).
-	validate_item_scores([Item| Items], [ScoreItem-Score| Scores], SeenItems0) :-
-		nonvar(Item),
-		Item == ScoreItem,
+	valid_score_values([]).
+	valid_score_values([_Item-Score| Scores]) :-
 		::valid_score(Score),
-		\+ dictionary_lookup(Item, _Seen, SeenItems0),
-		dictionary_insert(SeenItems0, Item, true, SeenItems),
-		validate_item_scores(Items, Scores, SeenItems).
+		valid_score_values(Scores).
+
+	valid_score_ranker_diagnostics(_Items, _Scores, Diagnostics) :-
+		::score_ranker_model(Model),
+		^^valid_ranker_metadata(Model, Diagnostics).
 
 	initialize_scores(Items, Scores) :-
 		dictionary_new(Scores0),

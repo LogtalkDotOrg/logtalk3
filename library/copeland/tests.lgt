@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "copeland" library.'
 	]).
 
@@ -131,6 +131,13 @@
 	test(copeland_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		copeland::learn(regular_head_to_head, Ranker),
 		copeland::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(copeland_valid_ranker_1, deterministic) :-
+		copeland::learn(regular_head_to_head, Ranker),
+		copeland::valid_ranker(Ranker).
+
+	test(copeland_invalid_valid_ranker_1, fail) :-
+		copeland::valid_ranker(fake_ranker([alpha], [alpha-1], [model(fake)])).
 
 	test(copeland_rank_invalid_ranker_error, error(domain_error(copeland_ranker, fake_ranker([alpha], [alpha-1], [model(fake)])))) :-
 		copeland::rank(fake_ranker([alpha], [alpha-1], [model(fake)]), [alpha], _Ranking).

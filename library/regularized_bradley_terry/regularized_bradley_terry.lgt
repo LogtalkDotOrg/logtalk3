@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Regularized Bradley-Terry MAP ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol using a Bradley-Terry likelihood with an explicit independent Gamma prior, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic MM-style posterior-mode update for a Bradley-Terry likelihood regularized by an explicit independent Gamma prior over item strengths.',
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -111,10 +111,38 @@
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
 		(   var(Ranker) ->
 			instantiation_error
-		;   Ranker = regularized_bt_ranker(Items, Strengths, Diagnostics) ->
+		;   Ranker = regularized_bt_ranker(Items, Strengths, Diagnostics),
+			valid_ranker_data(Items, Strengths, Diagnostics) ->
 			true
 		;   domain_error(regularized_bradley_terry_ranker, Ranker)
 		).
+
+	valid_ranker_data(Items, Strengths, Diagnostics) :-
+		^^valid_item_value_pairs(Items, Strengths),
+		valid_positive_values(Strengths),
+		^^valid_ranker_metadata(regularized_bradley_terry, Diagnostics),
+		memberchk(prior(gamma(Shape, Rate)), Diagnostics),
+		number(Shape),
+		Shape > 1.0,
+		number(Rate),
+		Rate > 0.0,
+		memberchk(convergence(Status), Diagnostics),
+		atom(Status),
+		memberchk(iterations(Iterations), Diagnostics),
+		integer(Iterations),
+		Iterations >= 0,
+		memberchk(final_delta(FinalDifference), Diagnostics),
+		number(FinalDifference),
+		FinalDifference >= 0.0.
+
+	valid_positive_values(Pairs) :-
+		positive_values(Pairs).
+
+	positive_values([]).
+	positive_values([_Item-Value| Pairs]) :-
+		number(Value),
+		Value > 0.0,
+		positive_values(Pairs).
 
 	update_strengths(regularized_bt_context(PairWeights, Wins, ShapeMinusOne, Rate), Strengths0, Strengths, MaximumDifference) :-
 		^^strength_dictionary(Strengths0, StrengthDictionary),

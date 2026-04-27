@@ -49,7 +49,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "schulze" library.'
 	]).
 
@@ -164,6 +164,13 @@
 	test(schulze_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		schulze::learn(regular_head_to_head, Ranker),
 		schulze::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(schulze_valid_ranker_1, deterministic) :-
+		schulze::learn(regular_head_to_head, Ranker),
+		schulze::valid_ranker(Ranker).
+
+	test(schulze_invalid_valid_ranker_1, fail) :-
+		schulze::valid_ranker(fake_ranker([alpha], [alpha-0], [model(fake)])).
 
 	test(schulze_rank_invalid_ranker_error, error(domain_error(schulze_ranker, fake_ranker([alpha], [alpha-0], [model(fake)])))) :-
 		schulze::rank(fake_ranker([alpha], [alpha-0], [model(fake)]), [alpha], _Ranking).

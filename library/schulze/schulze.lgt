@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Schulze pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by computing strongest paths over aggregated head-to-head outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Builds the direct pairwise strength graph from aggregated matchups and applies the Schulze strongest-path dynamic program to derive the final pairwise preference relation.',
@@ -85,6 +85,20 @@
 	strongest_paths(Ranker, StrongestPaths) :-
 		^^score_ranker_data(Ranker, _Items, _Scores, Diagnostics),
 		memberchk(strongest_paths(StrongestPaths), Diagnostics).
+
+	valid_score_ranker_diagnostics(Items, _Scores, Diagnostics) :-
+		^^valid_ranker_metadata(schulze, Diagnostics),
+		memberchk(strongest_paths(StrongestPaths), Diagnostics),
+		valid_strongest_paths(Items, StrongestPaths).
+
+	valid_strongest_paths(_Items, []).
+	valid_strongest_paths(Items, [path(Item1, Item2, Strength)| StrongestPaths]) :-
+		memberchk(Item1, Items),
+		memberchk(Item2, Items),
+		Item1 \== Item2,
+		number(Strength),
+		Strength >= 0,
+		valid_strongest_paths(Items, StrongestPaths).
 
 	compute_strongest_paths(DirectStrengths, StrongestPaths) :-
 		length(DirectStrengths, Count),

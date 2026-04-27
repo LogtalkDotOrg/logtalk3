@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued latent utility per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by fitting continuity-corrected empirical paired-comparison probabilities with a deterministic weighted least-squares normal model, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Aggregates pairwise outcomes into matchup probabilities, applies a fixed continuity correction to avoid infinite probit values, transforms them with the inverse standard normal CDF, and fits Case V latent utilities using a deterministic weighted least-squares linear solve.',
@@ -41,7 +41,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, reverse/2
+		length/2, memberchk/2, reverse/2
 	]).
 
 	:- uses(numberlist, [
@@ -87,6 +87,13 @@
 		continuity_correction(0.5),
 		dataset_summary(DatasetSummary)
 	])).
+
+	valid_score_ranker_diagnostics(_Items, _Scores, Diagnostics) :-
+		^^valid_ranker_metadata(thurstone_mosteller, Diagnostics),
+		memberchk(fit(weighted_least_squares), Diagnostics),
+		memberchk(continuity_correction(ContinuityCorrection), Diagnostics),
+		number(ContinuityCorrection),
+		ContinuityCorrection > 0.0.
 
 	build_system(Matchups, IndexDictionary, Count, Matrix, Vector) :-
 		VariableCount is Count - 1,

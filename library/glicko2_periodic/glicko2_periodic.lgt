@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		last/2, length/2
+		last/2, length/2, memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -86,6 +86,28 @@
 	])) :-
 		length(Periods, PeriodsProcessed),
 		last(Periods, FinalPeriod).
+
+	valid_score_ranker_diagnostics(Items, _Ratings, Diagnostics) :-
+		^^valid_ranker_metadata(glicko2_periodic, Diagnostics),
+		memberchk(rating_deviations(Deviations), Diagnostics),
+		valid_positive_item_values(Items, Deviations),
+		memberchk(volatilities(Volatilities), Diagnostics),
+		valid_positive_item_values(Items, Volatilities),
+		memberchk(periods_processed(PeriodsProcessed), Diagnostics),
+		integer(PeriodsProcessed),
+		PeriodsProcessed > 0,
+		memberchk(final_period(FinalPeriod), Diagnostics),
+		nonvar(FinalPeriod).
+
+	valid_positive_item_values(Items, Pairs) :-
+		^^valid_item_value_pairs(Items, Pairs),
+		valid_positive_values(Pairs).
+
+	valid_positive_values([]).
+	valid_positive_values([_Item-Value| Pairs]) :-
+		number(Value),
+		Value > 0.0,
+		valid_positive_values(Pairs).
 
 	ensure_initialized_items([], _InitialMu, _InitialPhi, _InitialVolatility, Ratings, Ratings, Deviations, Deviations, Volatilities, Volatilities).
 	ensure_initialized_items([Item| Items], InitialMu, InitialPhi, InitialVolatility, Ratings0, Ratings, Deviations0, Deviations, Volatilities0, Volatilities) :-

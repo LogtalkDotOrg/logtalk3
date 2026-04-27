@@ -33,7 +33,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "colley" library.'
 	]).
 
@@ -129,6 +129,13 @@
 	test(colley_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		colley::learn(regular_head_to_head, Ranker),
 		colley::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(colley_valid_ranker_1, deterministic) :-
+		colley::learn(regular_head_to_head, Ranker),
+		colley::valid_ranker(Ranker).
+
+	test(colley_invalid_valid_ranker_1, fail) :-
+		colley::valid_ranker(fake_ranker([alpha], [alpha-0.5], [model(fake)])).
 
 	test(colley_rank_invalid_ranker_error, error(domain_error(colley_ranker, fake_ranker([alpha], [alpha-0.5], [model(fake)])))) :-
 		colley::rank(fake_ranker([alpha], [alpha-0.5], [model(fake)]), [alpha], _Ranking).

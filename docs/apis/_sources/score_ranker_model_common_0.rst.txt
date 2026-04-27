@@ -15,7 +15,7 @@ Shared predicates for score-ranker term construction, validation, ranking, expor
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-26
+| **Date:** 2026-04-27
 
 | **Compilation flags:**
 |    ``static``
@@ -32,7 +32,7 @@ Shared predicates for score-ranker term construction, validation, ranking, expor
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`ranker_protocol/0::check_ranker/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranker_protocol/0::valid_ranker/1`  
 
 .. contents::
    :local:
@@ -156,6 +156,25 @@ Validates and destructures a score-ranker term into its items, score pairs, and 
 |    ``score_ranker_data(Ranker,Items,Scores,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``score_ranker_data(+compound,-list,-list(pair),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: valid_score_ranker_diagnostics/3
+.. _score_ranker_model_common/0::valid_score_ranker_diagnostics/3:
+
+``valid_score_ranker_diagnostics/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing rankers can define to validate diagnostics beyond the common model, options, and dataset summary metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_score_ranker_diagnostics(Items,Scores,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_score_ranker_diagnostics(+list,+list(pair),+list(compound))`` - ``zero_or_one``
 
 
 ------------

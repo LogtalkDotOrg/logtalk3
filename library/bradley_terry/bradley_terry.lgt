@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
@@ -44,7 +44,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -108,10 +108,35 @@
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
 		(   var(Ranker) ->
 			instantiation_error
-		;   Ranker = bt_ranker(Items, Strengths, Diagnostics) ->
+		;   Ranker = bt_ranker(Items, Strengths, Diagnostics),
+			valid_ranker_data(Items, Strengths, Diagnostics) ->
 			true
 		;   domain_error(bradley_terry_ranker, Ranker)
 		).
+
+	valid_ranker_data(Items, Strengths, Diagnostics) :-
+		^^valid_item_value_pairs(Items, Strengths),
+		valid_normalized_positive_values(Strengths),
+		^^valid_ranker_metadata(bradley_terry, Diagnostics),
+		memberchk(convergence(Status), Diagnostics),
+		atom(Status),
+		memberchk(iterations(Iterations), Diagnostics),
+		integer(Iterations),
+		Iterations >= 0,
+		memberchk(final_delta(FinalDifference), Diagnostics),
+		number(FinalDifference),
+		FinalDifference >= 0.0.
+
+	valid_normalized_positive_values(Pairs) :-
+		positive_values(Pairs, 0.0, Sum),
+		abs(Sum - 1.0) =< 1.0e-9.
+
+	positive_values([], Sum, Sum).
+	positive_values([_Item-Value| Pairs], Sum0, Sum) :-
+		number(Value),
+		Value > 0.0,
+		Sum1 is Sum0 + Value,
+		positive_values(Pairs, Sum1, Sum).
 
 	update_strengths(bradley_terry_context(PairWeights, Wins), Strengths0, Strengths, MaximumDifference) :-
 		^^strength_dictionary(Strengths0, StrengthDictionary),

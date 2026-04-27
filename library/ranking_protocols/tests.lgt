@@ -103,7 +103,7 @@
 	imports([ranking_dataset_common, ranker_common])).
 
 	:- uses(list, [
-		member/2
+		member/2, memberchk/2
 	]).
 
 	learn(Dataset, sample_ranker(Strengths, Diagnostics)) :-
@@ -124,6 +124,20 @@
 	ranker_scores_data(sample_ranker(Strengths, _Diagnostics), Strengths).
 
 	ranker_diagnostics_data(sample_ranker(_Strengths, Diagnostics), Diagnostics).
+
+	check_ranker(sample_ranker(Strengths, Diagnostics)) :-
+		valid_strengths(Strengths),
+		^^valid_ranker_metadata(sample_ranker, Diagnostics),
+		memberchk(convergence(not_applicable), Diagnostics),
+		memberchk(iterations(0), Diagnostics),
+		memberchk(final_delta(0.0), Diagnostics).
+
+	valid_strengths([]).
+	valid_strengths([Item-Strength| Strengths]) :-
+		nonvar(Item),
+		number(Strength),
+		Strength >= 0,
+		valid_strengths(Strengths).
 
 	ranker_export_template(_Dataset, _Ranker, Functor, Template) :-
 		Template =.. [Functor, 'Ranker'].
@@ -154,7 +168,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Smoke tests for the "ranking_protocols" library.'
 	]).
 
@@ -176,6 +190,20 @@
 
 	test(head_to_head_validation, deterministic) :-
 		ranking_test_support::validate_pairwise_dataset(head_to_head).
+
+	test(sample_ranker_valid_ranker, deterministic) :-
+		sample_ranker::learn(head_to_head, Ranker),
+		sample_ranker::valid_ranker(Ranker).
+
+	test(sample_ranker_invalid_ranker, fail) :-
+		sample_ranker::valid_ranker(sample_ranker([alpha-foo], [
+			model(sample_ranker),
+			options([]),
+			convergence(not_applicable),
+			iterations(0),
+			final_delta(0.0),
+			dataset_summary([items(1)])
+		])).
 
 	test(malformed_pairwise_validation, error(existence_error(item, phantom))) :-
 		ranking_test_support::validate_pairwise_dataset(malformed_pairwise).

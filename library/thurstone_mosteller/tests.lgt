@@ -4,6 +4,18 @@
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- object(singleton_pairwise,
@@ -20,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "thurstone_mosteller" library.'
 	]).
 
@@ -123,6 +135,13 @@
 	test(thurstone_mosteller_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		thurstone_mosteller::learn(regular_head_to_head, Ranker),
 		thurstone_mosteller::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(thurstone_mosteller_valid_ranker_1, deterministic) :-
+		thurstone_mosteller::learn(regular_head_to_head, Ranker),
+		thurstone_mosteller::valid_ranker(Ranker).
+
+	test(thurstone_mosteller_invalid_valid_ranker_1, fail) :-
+		thurstone_mosteller::valid_ranker(fake_ranker([alpha], [alpha-0.0], [model(fake)])).
 
 	test(thurstone_mosteller_rank_invalid_ranker_error, error(domain_error(thurstone_mosteller_ranker, fake_ranker([alpha], [alpha-0.0], [model(fake)])))) :-
 		thurstone_mosteller::rank(fake_ranker([alpha], [alpha-0.0], [model(fake)]), [alpha], _Ranking).

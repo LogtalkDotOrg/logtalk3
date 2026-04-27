@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-04-27,
 		comment is 'Unit tests for the "bradley_terry" library.'
 	]).
 
@@ -113,6 +113,13 @@
 	test(bradley_terry_rank_duplicate_candidates_error, error(domain_error(unique_candidates, [alpha, alpha, beta]))) :-
 		bradley_terry::learn(regular_head_to_head, Ranker),
 		bradley_terry::rank(Ranker, [alpha, alpha, beta], _Ranking).
+
+	test(bradley_terry_valid_ranker_1, deterministic) :-
+		bradley_terry::learn(regular_head_to_head, Ranker),
+		bradley_terry::valid_ranker(Ranker).
+
+	test(bradley_terry_invalid_valid_ranker_1, fail) :-
+		bradley_terry::valid_ranker(fake_ranker([alpha], [alpha-1.0], [model(fake)])).
 
 	test(bradley_terry_rank_invalid_ranker_error, error(domain_error(bradley_terry_ranker, fake_ranker([alpha], [alpha-1.0], [model(fake)])))) :-
 		bradley_terry::rank(fake_ranker([alpha], [alpha-1.0], [model(fake)]), [alpha], _Ranking).
