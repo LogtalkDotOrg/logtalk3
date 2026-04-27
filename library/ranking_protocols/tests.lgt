@@ -219,6 +219,42 @@
 	test(sparse_preferences_summary, deterministic(memberchk(isolated_items([gamma]), Summary))) :-
 		ranking_test_support::pairwise_dataset_summary(sparse_preferences, Summary).
 
+	% Temporal pairwise dataset protocol smoke tests.
+
+	test(temporal_two_period_chain_periods, deterministic(Periods == [round1, round2])) :-
+		ranking_test_support::temporal_pairwise_dataset_periods(temporal_two_period_chain, Periods).
+
+	test(temporal_two_period_chain_games_count, deterministic(Count == 3)) :-
+		ranking_test_support::temporal_pairwise_dataset_games(temporal_two_period_chain, Games),
+		length(Games, Count).
+
+	test(temporal_draws_round_games, deterministic(Games == [game(alpha, beta, 0.5)])) :-
+		ranking_test_support::temporal_pairwise_dataset_games(temporal_draws, round1, Games).
+
+	test(temporal_two_period_chain_validation, deterministic) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(temporal_two_period_chain).
+
+	test(temporal_idle_periods_summary, deterministic((memberchk(periods(3), Summary), memberchk(games(2), Summary)))) :-
+		ranking_test_support::temporal_pairwise_dataset_summary(temporal_idle_periods, Summary).
+
+	test(malformed_duplicate_periods_validation, error(domain_error(unique_periods, [round1, round1]))) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(malformed_duplicate_periods).
+
+	test(malformed_temporal_unknown_period_validation, error(existence_error(period, round2))) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(malformed_temporal_unknown_period).
+
+	test(malformed_temporal_unknown_item_validation, error(existence_error(item, phantom))) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(malformed_temporal_unknown_item).
+
+	test(malformed_temporal_self_game_validation, error(domain_error(distinct_items, alpha-alpha))) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(malformed_temporal_self_game).
+
+	test(malformed_temporal_illegal_score_validation, error(domain_error(game_score, 0.75))) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(malformed_temporal_illegal_score).
+
+	test(disconnected_temporal_pairwise_validation, error(domain_error(connected_temporal_pairwise_dataset, [[alpha, beta], [gamma, delta]]))) :-
+		ranking_test_support::validate_temporal_pairwise_dataset(disconnected_temporal_pairwise).
+
 	% Grouped dataset protocol smoke tests.
 
 	test(search_results_groups, deterministic(Groups == [query_one, query_two])) :-

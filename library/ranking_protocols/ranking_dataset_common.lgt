@@ -77,6 +77,55 @@
 		argnames is ['Dataset', 'Matchups']
 	]).
 
+	:- public(temporal_pairwise_dataset_declared_items/2).
+	:- mode(temporal_pairwise_dataset_declared_items(+object_identifier, -list), one).
+	:- info(temporal_pairwise_dataset_declared_items/2, [
+		comment is 'Collects the temporal pairwise dataset declared items preserving declaration order.',
+		argnames is ['Dataset', 'Items']
+	]).
+
+	:- public(temporal_pairwise_dataset_items/2).
+	:- mode(temporal_pairwise_dataset_items(+object_identifier, -list), one).
+	:- info(temporal_pairwise_dataset_items/2, [
+		comment is 'Collects the unique temporal pairwise dataset items preserving their first declaration order.',
+		argnames is ['Dataset', 'Items']
+	]).
+
+	:- public(temporal_pairwise_dataset_periods/2).
+	:- mode(temporal_pairwise_dataset_periods(+object_identifier, -list), one).
+	:- info(temporal_pairwise_dataset_periods/2, [
+		comment is 'Collects the unique temporal pairwise dataset periods preserving their first declaration order.',
+		argnames is ['Dataset', 'Periods']
+	]).
+
+	:- public(temporal_pairwise_dataset_games/2).
+	:- mode(temporal_pairwise_dataset_games(+object_identifier, -list(compound)), one).
+	:- info(temporal_pairwise_dataset_games/2, [
+		comment is 'Collects the temporal pairwise dataset games as ``game(Period,Item1,Item2,Score)`` terms preserving enumeration order.',
+		argnames is ['Dataset', 'Games']
+	]).
+
+	:- public(temporal_pairwise_dataset_games/3).
+	:- mode(temporal_pairwise_dataset_games(+object_identifier, +term, -list(compound)), one).
+	:- info(temporal_pairwise_dataset_games/3, [
+		comment is 'Collects the temporal pairwise dataset games for a single period as ``game(Item1,Item2,Score)`` terms preserving enumeration order.',
+		argnames is ['Dataset', 'Period', 'Games']
+	]).
+
+	:- public(temporal_pairwise_dataset_connected_components/2).
+	:- mode(temporal_pairwise_dataset_connected_components(+object_identifier, -list(list)), one).
+	:- info(temporal_pairwise_dataset_connected_components/2, [
+		comment is 'Returns the connected components induced by the temporal pairwise game graph.',
+		argnames is ['Dataset', 'Components']
+	]).
+
+	:- public(temporal_pairwise_dataset_summary/2).
+	:- mode(temporal_pairwise_dataset_summary(+object_identifier, -list(compound)), one).
+	:- info(temporal_pairwise_dataset_summary/2, [
+		comment is 'Returns a summary of a temporal pairwise dataset, including item, period, game, component, and isolated-item counts.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
 	:- public(grouped_dataset_groups/2).
 	:- mode(grouped_dataset_groups(+object_identifier, -list), one).
 	:- info(grouped_dataset_groups/2, [
@@ -154,6 +203,20 @@
 		argnames is ['Dataset']
 	]).
 
+	:- public(validate_temporal_pairwise_dataset/1).
+	:- mode(validate_temporal_pairwise_dataset(+object_identifier), one).
+	:- info(validate_temporal_pairwise_dataset/1, [
+		comment is 'Validates a temporal pairwise ranking dataset and throws an error if the dataset is malformed or disconnected.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_temporal_pairwise_dataset/2).
+	:- mode(validate_temporal_pairwise_dataset(+object_identifier, -list(compound)), one).
+	:- info(validate_temporal_pairwise_dataset/2, [
+		comment is 'Validates a temporal pairwise ranking dataset and returns its dataset summary when validation succeeds.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
 	:- public(validate_grouped_dataset/2).
 	:- mode(validate_grouped_dataset(+object_identifier, -list(compound)), one).
 	:- info(validate_grouped_dataset/2, [
@@ -223,6 +286,48 @@
 		dictionary_as_list(Matchups1, MatchupEntries),
 		matchup_entries(MatchupEntries, IndexedItems, Matchups).
 
+	temporal_pairwise_dataset_declared_items(Dataset, Items) :-
+		findall(Item, Dataset::item(Item), Items).
+
+	temporal_pairwise_dataset_items(Dataset, Items) :-
+		temporal_pairwise_dataset_declared_items(Dataset, RawItems),
+		unique_list(RawItems, Items).
+
+	temporal_pairwise_dataset_periods(Dataset, Periods) :-
+		findall(Period, Dataset::period(Period), RawPeriods),
+		unique_list(RawPeriods, Periods).
+
+	temporal_pairwise_dataset_games(Dataset, Games) :-
+		findall(game(Period, Item1, Item2, Score), Dataset::game(Period, Item1, Item2, Score), Games).
+
+	temporal_pairwise_dataset_games(Dataset, Period, Games) :-
+		findall(game(Item1, Item2, Score), Dataset::game(Period, Item1, Item2, Score), Games).
+
+	temporal_pairwise_dataset_connected_components(Dataset, Components) :-
+		temporal_pairwise_dataset_items(Dataset, Items),
+		temporal_pairwise_dataset_games(Dataset, Games),
+		temporal_game_edges(Games, Preferences),
+		connected_components(Items, Preferences, Components).
+
+	temporal_pairwise_dataset_summary(Dataset, Summary) :-
+		temporal_pairwise_dataset_items(Dataset, Items),
+		temporal_pairwise_dataset_periods(Dataset, Periods),
+		temporal_pairwise_dataset_games(Dataset, Games),
+		temporal_game_edges(Games, Preferences),
+		connected_components(Items, Preferences, Components),
+		length(Items, NumberOfItems),
+		length(Periods, NumberOfPeriods),
+		length(Games, NumberOfGames),
+		length(Components, NumberOfComponents),
+		isolated_items(Components, Preferences, IsolatedItems),
+		Summary = [
+			items(NumberOfItems),
+			periods(NumberOfPeriods),
+			games(NumberOfGames),
+			connected_components(NumberOfComponents),
+			isolated_items(IsolatedItems)
+		].
+
 	grouped_dataset_groups(Dataset, Groups) :-
 		findall(Group, Dataset::group(Group), RawGroups),
 		unique_list(RawGroups, Groups).
@@ -290,6 +395,30 @@
 
 	validate_grouped_dataset(Dataset) :-
 		validate_grouped_dataset(Dataset, _Summary).
+
+	validate_temporal_pairwise_dataset(Dataset) :-
+		validate_temporal_pairwise_dataset(Dataset, _Summary).
+
+	validate_temporal_pairwise_dataset(Dataset, Summary) :-
+		::temporal_pairwise_dataset_declared_items(Dataset, RawItems),
+		RawItems \== [],
+		check_unique_items(RawItems),
+		findall(Period, Dataset::period(Period), RawPeriods),
+		RawPeriods \== [],
+		check_unique_periods(RawPeriods),
+		::temporal_pairwise_dataset_items(Dataset, Items),
+		::temporal_pairwise_dataset_periods(Dataset, Periods),
+		::temporal_pairwise_dataset_games(Dataset, Games),
+		forall(
+			member(game(Period, Item1, Item2, Score), Games),
+			validate_temporal_game(Periods, Items, Period, Item1, Item2, Score)
+		),
+		::temporal_pairwise_dataset_connected_components(Dataset, Components),
+		(   Components = [_] ->
+			true
+		;   domain_error(connected_temporal_pairwise_dataset, Components)
+		),
+		::temporal_pairwise_dataset_summary(Dataset, Summary).
 
 	validate_grouped_dataset(Dataset, Summary) :-
 		findall(Group, Dataset::group(Group), RawGroups),
@@ -451,11 +580,22 @@
 		dictionary_lookup(RightIndex, RightItem, IndexedItems),
 		matchup_entries(MatchupEntries, IndexedItems, Matchups).
 
+	temporal_game_edges([], []).
+	temporal_game_edges([game(_Period, Item1, Item2, _Score)| Games], [p(Item1, Item2, 1)| Preferences]) :-
+		temporal_game_edges(Games, Preferences).
+
 	check_unique_items([]).
 	check_unique_items([Item| Items]) :-
 		(   member(Item, Items) ->
 			domain_error(unique_items, [Item| Items])
 		;   check_unique_items(Items)
+		).
+
+	check_unique_periods([]).
+	check_unique_periods([Period| Periods]) :-
+		(   member(Period, Periods) ->
+			domain_error(unique_periods, [Period| Periods])
+		;   check_unique_periods(Periods)
 		).
 
 	check_unique_groups([]).
@@ -488,6 +628,28 @@
 		(   number(Weight), Weight > 0 ->
 			true
 		;   domain_error(positive_number, Weight)
+		).
+
+	validate_temporal_game(Periods, Items, Period, Item1, Item2, Score) :-
+		(   member(Period, Periods) ->
+			true
+		;   existence_error(period, Period)
+		),
+		(   member(Item1, Items) ->
+			true
+		;   existence_error(item, Item1)
+		),
+		(   member(Item2, Items) ->
+			true
+		;   existence_error(item, Item2)
+		),
+		(   Item1 == Item2 ->
+			domain_error(distinct_items, Item1-Item2)
+		;   true
+		),
+		(   number(Score), {Score =:= 0.0; Score =:= 0.5; Score =:= 1.0} ->
+			true
+		;   domain_error(game_score, Score)
 		).
 
 	validate_relevance(Dataset, Groups, Group, Item, Relevance) :-

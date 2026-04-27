@@ -1,0 +1,114 @@
+.. index:: single: glicko2_common
+.. _glicko2_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``glicko2_common``
+==================
+
+Shared internal Glicko-2 numeric helpers for rating updates, volatility search, and scale conversions.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: update_item_parameters/10
+.. _glicko2_common/0::update_item_parameters/10:
+
+``update_item_parameters/10``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: to_mu/2
+.. _glicko2_common/0::to_mu/2:
+
+``to_mu/2``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: to_phi/2
+.. _glicko2_common/0::to_phi/2:
+
+``to_phi/2``
+^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: to_rating/2
+.. _glicko2_common/0::to_rating/2:
+
+``to_rating/2``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: to_deviation/2
+.. _glicko2_common/0::to_deviation/2:
+
+``to_deviation/2``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -24,8 +24,9 @@ ________________________________________________________________________
 This library provides protocols used in the implementation of machine
 learning ranking algorithms. Rankers are represented as objects
 implementing the `ranker_protocol` protocol. Datasets are represented as
-objects implementing either the `pairwise_ranking_dataset_protocol`
-protocol or the `ranking_dataset_protocol` protocol.
+objects implementing the `pairwise_ranking_dataset_protocol`,
+`temporal_pairwise_ranking_dataset_protocol`, or the
+`ranking_dataset_protocol` protocol.
 
 This library also provides reusable test datasets and smoke tests for the
 shared ranking-family contracts.
@@ -38,8 +39,12 @@ imported by ranking algorithm implementations:
 
 - `ranking_dataset_common` — dataset collection, summaries, graph
   connectivity, connected-component analysis, and pairwise/grouped dataset
-  correctness checks, including grouped tie-block extraction helpers for
-  algorithms that consume tied rankings directly.
+  correctness checks, including temporal pairwise rating-period helpers and
+  grouped tie-block extraction helpers for algorithms that consume tied
+  rankings directly.
+- `glicko2_common` — shared internal Glicko-2 numeric helpers for scale
+  conversions, per-period player updates, and volatility root solving used
+  by both the batch and periodic Glicko-2 rankers.
 - `condorcet_victory_common` — shared direct-victory preprocessing helpers
   for Condorcet-family rankers that derive dense directed victory strengths
   from aggregated pairwise matchups under the `victory_strength(...)`
@@ -146,3 +151,13 @@ Several sample datasets are included in the `test_datasets` directory:
 
 - `sparse_preferences.lgt` — A sparse pairwise dataset with an isolated item,
   useful for testing dataset summaries and disconnected-graph detection.
+
+- `temporal_two_period_chain.lgt` — A compact temporal pairwise dataset with
+  two rating periods and three players, useful for smoke testing periodic
+  rating carryover.
+
+- `temporal_draws.lgt` — A compact temporal pairwise dataset with a draw,
+  useful for testing score handling in temporal game results.
+
+- `temporal_idle_periods.lgt` — A temporal pairwise dataset with an empty
+  period between two played periods, useful for testing inactivity handling.

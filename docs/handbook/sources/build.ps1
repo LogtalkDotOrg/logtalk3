@@ -132,6 +132,8 @@ Foreach-Object {
 (Get-Content ../../../library/gensym/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gensym.rst
 (Get-Content ../../../library/geospatial/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/geospatial.rst
 (Get-Content ../../../library/git/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/git.rst
+(Get-Content ../../../library/glicko2/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/glicko2.rst
+(Get-Content ../../../library/glicko2_periodic/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/glicko2_periodic.rst
 (Get-Content ../../../library/gradient_boosting_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 (Get-Content ../../../library/grammars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/grammars.rst
 (Get-Content ../../../library/graphs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/graphs.rst

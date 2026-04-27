@@ -132,6 +132,8 @@ sed '1,19d' ../../../library/genint/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries/gensym.rst
 sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libraries/geospatial.rst
 sed '1,19d' ../../../library/git/NOTES.md | pandoc -f gfm -t rst -o libraries/git.rst
+sed '1,19d' ../../../library/glicko2/NOTES.md | pandoc -f gfm -t rst -o libraries/glicko2.rst
+sed '1,19d' ../../../library/glicko2_periodic/NOTES.md | pandoc -f gfm -t rst -o libraries/glicko2_periodic.rst
 sed '1,19d' ../../../library/gradient_boosting_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 sed '1,19d' ../../../library/grammars/NOTES.md | pandoc -f gfm -t rst -o libraries/grammars.rst
 sed '1,19d' ../../../library/graphs/NOTES.md | pandoc -f gfm -t rst -o libraries/graphs.rst

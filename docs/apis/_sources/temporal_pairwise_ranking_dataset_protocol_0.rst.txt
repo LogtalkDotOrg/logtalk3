@@ -1,0 +1,114 @@
+.. index:: single: temporal_pairwise_ranking_dataset_protocol
+.. _temporal_pairwise_ranking_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``temporal_pairwise_ranking_dataset_protocol``
+==============================================
+
+Protocol for temporal pairwise ranking datasets with explicit rating periods and per-game outcomes.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Validity requirements: Datasets are expected to declare each item and each period once, use only declared items and periods in games, use distinct game participants, and assign each game a score on the set {0.0, 0.5, 1.0}.
+   - Game semantics: A game ``game(Period, Item1, Item2, Score)`` records the observed result for ``Item1`` against ``Item2`` in the given rating period. The score for ``Item2`` is implicitly ``1.0 - Score``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: item/1
+.. _temporal_pairwise_ranking_dataset_protocol/0::item/1:
+
+``item/1``
+^^^^^^^^^^
+
+Enumerates by backtracking the items that can be ranked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item(Item)``
+| **Mode and number of proofs:**
+|    ``item(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: period/1
+.. _temporal_pairwise_ranking_dataset_protocol/0::period/1:
+
+``period/1``
+^^^^^^^^^^^^
+
+Enumerates by backtracking the rating periods in declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``period(Period)``
+| **Mode and number of proofs:**
+|    ``period(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: game/4
+.. _temporal_pairwise_ranking_dataset_protocol/0::game/4:
+
+``game/4``
+^^^^^^^^^^
+
+Enumerates by backtracking observed games where ``Score`` is the result for ``Item1`` against ``Item2`` in the given ``Period``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``game(Period,Item1,Item2,Score)``
+| **Mode and number of proofs:**
+|    ``game(-atom,-atom,-atom,-number)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- protocol(temporal_pairwise_ranking_dataset_protocol).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-27,
+		comment is 'Protocol for temporal pairwise ranking datasets with explicit rating periods and per-game outcomes.',
+		remarks is [
+			'Validity requirements' - 'Datasets are expected to declare each item and each period once, use only declared items and periods in games, use distinct game participants, and assign each game a score on the set {0.0, 0.5, 1.0}.',
+			'Game semantics' - 'A game ``game(Period, Item1, Item2, Score)`` records the observed result for ``Item1`` against ``Item2`` in the given rating period. The score for ``Item2`` is implicitly ``1.0 - Score``.'
+		]
+	]).
+
+	:- public(item/1).
+	:- mode(item(-atom), zero_or_more).
+	:- info(item/1, [
+		comment is 'Enumerates by backtracking the items that can be ranked.',
+		argnames is ['Item']
+	]).
+
+	:- public(period/1).
+	:- mode(period(-atom), zero_or_more).
+	:- info(period/1, [
+		comment is 'Enumerates by backtracking the rating periods in declaration order.',
+		argnames is ['Period']
+	]).
+
+	:- public(game/4).
+	:- mode(game(-atom, -atom, -atom, -number), zero_or_more).
+	:- info(game/4, [
+		comment is 'Enumerates by backtracking observed games where ``Score`` is the result for ``Item1`` against ``Item2`` in the given ``Period``.',
+		argnames is ['Period', 'Item1', 'Item2', 'Score']
+	]).
+
+:- end_protocol.

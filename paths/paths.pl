@@ -161,6 +161,8 @@ logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).
+logtalk_library_path(glicko2, library('glicko2/')).
+logtalk_library_path(glicko2_periodic, library('glicko2_periodic/')).
 logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
 logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(graphs, library('graphs/')).

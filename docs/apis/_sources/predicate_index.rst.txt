@@ -6340,6 +6340,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::functional/0>`
 
+``game/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::game/4>`
+
 ``gamma/3``
 -----------
 
@@ -8413,6 +8423,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`
+* :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::item/1>`
 
 ``item/2``
 ----------
@@ -12646,6 +12657,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::percentile/3>`
+
+``period/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::period/1>`
 
 ``permutation/2``
 -----------------
@@ -17068,6 +17089,76 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_data <time_scales_data/0::tdb_minus_tt_approx/3>`
 
+``temporal_pairwise_dataset_connected_components/2``
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_connected_components/2>`
+
+``temporal_pairwise_dataset_declared_items/2``
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_declared_items/2>`
+
+``temporal_pairwise_dataset_games/2``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_games/2>`
+
+``temporal_pairwise_dataset_games/3``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_games/3>`
+
+``temporal_pairwise_dataset_items/2``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_items/2>`
+
+``temporal_pairwise_dataset_periods/2``
+---------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_periods/2>`
+
+``temporal_pairwise_dataset_summary/2``
+---------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::temporal_pairwise_dataset_summary/2>`
+
 ``temporary_directory/1``
 -------------------------
 
@@ -18189,6 +18280,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_dataset/2>`
+
+``validate_temporal_pairwise_dataset/1``
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_temporal_pairwise_dataset/1>`
+
+``validate_temporal_pairwise_dataset/2``
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_temporal_pairwise_dataset/2>`
 
 ``valids/2``
 ------------

@@ -29,10 +29,12 @@
 		ranker_protocol,
 		ranker_common,
 		score_ranker_common,
+		glicko2_common,
 		condorcet_victory_common,
 		ranking_dataset_common,
 		ranking_dataset_protocol,
-		pairwise_ranking_dataset_protocol
+		pairwise_ranking_dataset_protocol,
+		temporal_pairwise_ranking_dataset_protocol
 	], [
 		source_data(on),
 		debug(on)
@@ -47,6 +49,16 @@
 		'test_datasets/search_results',
 		'test_datasets/tied_grouped',
 		'test_datasets/sparse_grouped_relevance',
+		'test_datasets/temporal_two_period_chain',
+		'test_datasets/temporal_draws',
+		'test_datasets/temporal_idle_periods',
+		'test_datasets/temporal_late_activity',
+		'test_datasets/disconnected_temporal_pairwise',
+		'test_datasets/malformed_duplicate_periods',
+		'test_datasets/malformed_temporal_unknown_period',
+		'test_datasets/malformed_temporal_unknown_item',
+		'test_datasets/malformed_temporal_self_game',
+		'test_datasets/malformed_temporal_illegal_score',
 		'test_datasets/malformed_pairwise',
 		'test_datasets/malformed_grouped',
 		'test_datasets/malformed_duplicate_items',

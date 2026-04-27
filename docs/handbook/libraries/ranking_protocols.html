@@ -124,6 +124,8 @@
 <li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="geospatial.html"><code class="docutils literal notranslate"><span class="pre">geospatial</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="glicko2.html"><code class="docutils literal notranslate"><span class="pre">glicko2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="glicko2_periodic.html"><code class="docutils literal notranslate"><span class="pre">glicko2_periodic</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gradient_boosting_regression.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
@@ -287,8 +289,9 @@
 <p>This library provides protocols used in the implementation of machine
 learning ranking algorithms. Rankers are represented as objects
 implementing the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> protocol. Datasets are represented
-as objects implementing either the <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code>
-protocol or the <code class="docutils literal notranslate"><span class="pre">ranking_dataset_protocol</span></code> protocol.</p>
+as objects implementing the <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code>,
+<code class="docutils literal notranslate"><span class="pre">temporal_pairwise_ranking_dataset_protocol</span></code>, or the
+<code class="docutils literal notranslate"><span class="pre">ranking_dataset_protocol</span></code> protocol.</p>
 <p>This library also provides reusable test datasets and smoke tests for
 the shared ranking-family contracts.</p>
 <section id="shared-categories">
@@ -298,8 +301,12 @@ be imported by ranking algorithm implementations:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_common</span></code> — dataset collection, summaries, graph
 connectivity, connected-component analysis, and pairwise/grouped
-dataset correctness checks, including grouped tie-block extraction
-helpers for algorithms that consume tied rankings directly.</p></li>
+dataset correctness checks, including temporal pairwise rating-period
+helpers and grouped tie-block extraction helpers for algorithms that
+consume tied rankings directly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glicko2_common</span></code> — shared internal Glicko-2 numeric helpers for
+scale conversions, per-period player updates, and volatility root
+solving used by both the batch and periodic Glicko-2 rankers.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">condorcet_victory_common</span></code> — shared direct-victory preprocessing
 helpers for Condorcet-family rankers that derive dense directed
 victory strengths from aggregated pairwise matchups under the
@@ -399,6 +406,14 @@ relevance value is not a non-negative integer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sparse_preferences.lgt</span></code> — A sparse pairwise dataset with an
 isolated item, useful for testing dataset summaries and
 disconnected-graph detection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_two_period_chain.lgt</span></code> — A compact temporal pairwise
+dataset with two rating periods and three players, useful for smoke
+testing periodic rating carryover.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_draws.lgt</span></code> — A compact temporal pairwise dataset with a
+draw, useful for testing score handling in temporal game results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_idle_periods.lgt</span></code> — A temporal pairwise dataset with an
+empty period between two played periods, useful for testing inactivity
+handling.</p></li>
 </ul>
 </section>
 </section>

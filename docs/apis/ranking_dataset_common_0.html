@@ -126,6 +126,8 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#geospatial"><span class="xref std std-ref">geospatial</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#glicko2"><span class="xref std std-ref">glicko2</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#glicko2-periodic"><span class="xref std std-ref">glicko2_periodic</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#gradient-boosting-regression"><span class="xref std std-ref">gradient_boosting_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#graphs"><span class="xref std std-ref">graphs</span></a></li>
@@ -211,6 +213,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ranked-pairs"><span class="xref std std-ref">ranked_pairs</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#ranking-protocols"><span class="xref std std-ref">ranking_protocols</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="condorcet_victory_common_0.html">condorcet_victory_common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glicko2_common_0.html">glicko2_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="grouped_strength_ranker_common_0.html">grouped_strength_ranker_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pairwise_ranking_dataset_protocol_0.html">pairwise_ranking_dataset_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pairwise_strength_ranker_common_0.html">pairwise_strength_ranker_common</a></li>
@@ -221,6 +224,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ranking_dataset_protocol_0.html">ranking_dataset_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="score_ranker_common_0.html">score_ranker_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="score_ranker_model_common_0.html">score_ranker_model_common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temporal_pairwise_ranking_dataset_protocol_0.html">temporal_pairwise_ranking_dataset_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
@@ -365,26 +369,35 @@
 <li><p><a class="reference internal" href="#pairwise-dataset-summary-2" id="id6"><code class="docutils literal notranslate"><span class="pre">pairwise_dataset_summary/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#pairwise-dataset-win-totals-2" id="id7"><code class="docutils literal notranslate"><span class="pre">pairwise_dataset_win_totals/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#pairwise-dataset-matchups-2" id="id8"><code class="docutils literal notranslate"><span class="pre">pairwise_dataset_matchups/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-groups-2" id="id9"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_groups/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-items-2" id="id10"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-items-3" id="id11"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-summary-2" id="id12"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_summary/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-pairwise-dataset-1" id="id13"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-pairwise-dataset-2" id="id14"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-grouped-dataset-1" id="id15"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-grouped-dataset-2" id="id16"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-declared-items-2" id="id9"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_declared_items/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-items-2" id="id10"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_items/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-periods-2" id="id11"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_periods/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-games-2" id="id12"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-games-3" id="id13"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-connected-components-2" id="id14"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_connected_components/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#temporal-pairwise-dataset-summary-2" id="id15"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_summary/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-groups-2" id="id16"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_groups/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-items-2" id="id17"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-items-3" id="id18"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-summary-2" id="id19"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_summary/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-pairwise-dataset-1" id="id20"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-pairwise-dataset-2" id="id21"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-grouped-dataset-1" id="id22"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-temporal-pairwise-dataset-1" id="id23"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-temporal-pairwise-dataset-2" id="id24"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-grouped-dataset-2" id="id25"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id17">Protected predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id26">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#grouped-dataset-item-relevances-4" id="id18"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevances/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-relevance-frequencies-2" id="id19"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_relevance_frequencies/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-item-relevance-scores-3" id="id20"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevance_scores/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#grouped-dataset-tie-blocks-4" id="id21"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-item-relevances-4" id="id27"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevances/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-relevance-frequencies-2" id="id28"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_relevance_frequencies/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-item-relevance-scores-3" id="id29"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevance_scores/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#grouped-dataset-tie-blocks-4" id="id30"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id31">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id32">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -536,8 +549,155 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="temporal-pairwise-dataset-declared-items-2">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-declared-items-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_declared_items/2</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-declared-items-2" title="Link to this heading"></a></h3>
+<p>Collects the temporal pairwise dataset declared items preserving declaration order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_declared_items(Dataset,Items)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_declared_items(+object_identifier,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporal-pairwise-dataset-items-2">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-items-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_items/2</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-items-2" title="Link to this heading"></a></h3>
+<p>Collects the unique temporal pairwise dataset items preserving their first declaration order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_items(Dataset,Items)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_items(+object_identifier,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporal-pairwise-dataset-periods-2">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-periods-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_periods/2</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-periods-2" title="Link to this heading"></a></h3>
+<p>Collects the unique temporal pairwise dataset periods preserving their first declaration order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_periods(Dataset,Periods)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_periods(+object_identifier,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporal-pairwise-dataset-games-2">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-games-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games/2</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-games-2" title="Link to this heading"></a></h3>
+<p>Collects the temporal pairwise dataset games as <code class="docutils literal notranslate"><span class="pre">game(Period,Item1,Item2,Score)</span></code> terms preserving enumeration order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games(Dataset,Games)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games(+object_identifier,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporal-pairwise-dataset-games-3">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-games-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games/3</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-games-3" title="Link to this heading"></a></h3>
+<p>Collects the temporal pairwise dataset games for a single period as <code class="docutils literal notranslate"><span class="pre">game(Item1,Item2,Score)</span></code> terms preserving enumeration order.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games(Dataset,Period,Games)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_games(+object_identifier,+term,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporal-pairwise-dataset-connected-components-2">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-connected-components-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_connected_components/2</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-connected-components-2" title="Link to this heading"></a></h3>
+<p>Returns the connected components induced by the temporal pairwise game graph.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_connected_components(Dataset,Components)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_connected_components(+object_identifier,-list(list))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="temporal-pairwise-dataset-summary-2">
+<span id="ranking-dataset-common-0-temporal-pairwise-dataset-summary-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_summary/2</span></code></a><a class="headerlink" href="#temporal-pairwise-dataset-summary-2" title="Link to this heading"></a></h3>
+<p>Returns a summary of a temporal pairwise dataset, including item, period, game, component, and isolated-item counts.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_summary(Dataset,Summary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_dataset_summary(+object_identifier,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="grouped-dataset-groups-2">
-<span id="ranking-dataset-common-0-grouped-dataset-groups-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_groups/2</span></code></a><a class="headerlink" href="#grouped-dataset-groups-2" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-groups-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_groups/2</span></code></a><a class="headerlink" href="#grouped-dataset-groups-2" title="Link to this heading"></a></h3>
 <p>Collects the unique grouped-dataset groups preserving their first declaration order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -558,7 +718,7 @@
 <hr class="docutils" />
 </section>
 <section id="grouped-dataset-items-2">
-<span id="ranking-dataset-common-0-grouped-dataset-items-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/2</span></code></a><a class="headerlink" href="#grouped-dataset-items-2" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-items-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/2</span></code></a><a class="headerlink" href="#grouped-dataset-items-2" title="Link to this heading"></a></h3>
 <p>Collects the unique items declared across all groups in a grouped dataset preserving their first declaration order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -579,7 +739,7 @@
 <hr class="docutils" />
 </section>
 <section id="grouped-dataset-items-3">
-<span id="ranking-dataset-common-0-grouped-dataset-items-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/3</span></code></a><a class="headerlink" href="#grouped-dataset-items-3" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-items-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_items/3</span></code></a><a class="headerlink" href="#grouped-dataset-items-3" title="Link to this heading"></a></h3>
 <p>Collects the unique items declared for a grouped-dataset group.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -600,7 +760,7 @@
 <hr class="docutils" />
 </section>
 <section id="grouped-dataset-summary-2">
-<span id="ranking-dataset-common-0-grouped-dataset-summary-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_summary/2</span></code></a><a class="headerlink" href="#grouped-dataset-summary-2" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-summary-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_summary/2</span></code></a><a class="headerlink" href="#grouped-dataset-summary-2" title="Link to this heading"></a></h3>
 <p>Returns a summary of a grouped dataset, including group, item, and relevance-judgment counts.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -621,7 +781,7 @@
 <hr class="docutils" />
 </section>
 <section id="validate-pairwise-dataset-1">
-<span id="ranking-dataset-common-0-validate-pairwise-dataset-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/1</span></code></a><a class="headerlink" href="#validate-pairwise-dataset-1" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-validate-pairwise-dataset-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/1</span></code></a><a class="headerlink" href="#validate-pairwise-dataset-1" title="Link to this heading"></a></h3>
 <p>Validates a pairwise ranking dataset and throws an error if the dataset is malformed or disconnected.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -642,7 +802,7 @@
 <hr class="docutils" />
 </section>
 <section id="validate-pairwise-dataset-2">
-<span id="ranking-dataset-common-0-validate-pairwise-dataset-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/2</span></code></a><a class="headerlink" href="#validate-pairwise-dataset-2" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-validate-pairwise-dataset-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/2</span></code></a><a class="headerlink" href="#validate-pairwise-dataset-2" title="Link to this heading"></a></h3>
 <p>Validates a pairwise ranking dataset and returns its dataset summary when validation succeeds.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -663,7 +823,7 @@
 <hr class="docutils" />
 </section>
 <section id="validate-grouped-dataset-1">
-<span id="ranking-dataset-common-0-validate-grouped-dataset-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/1</span></code></a><a class="headerlink" href="#validate-grouped-dataset-1" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-validate-grouped-dataset-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/1</span></code></a><a class="headerlink" href="#validate-grouped-dataset-1" title="Link to this heading"></a></h3>
 <p>Validates a grouped ranking dataset and throws an error if the dataset is malformed.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -683,8 +843,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="validate-temporal-pairwise-dataset-1">
+<span id="ranking-dataset-common-0-validate-temporal-pairwise-dataset-1"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset/1</span></code></a><a class="headerlink" href="#validate-temporal-pairwise-dataset-1" title="Link to this heading"></a></h3>
+<p>Validates a temporal pairwise ranking dataset and throws an error if the dataset is malformed or disconnected.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset(Dataset)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset(+object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="validate-temporal-pairwise-dataset-2">
+<span id="ranking-dataset-common-0-validate-temporal-pairwise-dataset-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset/2</span></code></a><a class="headerlink" href="#validate-temporal-pairwise-dataset-2" title="Link to this heading"></a></h3>
+<p>Validates a temporal pairwise ranking dataset and returns its dataset summary when validation succeeds.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset(Dataset,Summary)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset(+object_identifier,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="validate-grouped-dataset-2">
-<span id="ranking-dataset-common-0-validate-grouped-dataset-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/2</span></code></a><a class="headerlink" href="#validate-grouped-dataset-2" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-validate-grouped-dataset-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/2</span></code></a><a class="headerlink" href="#validate-grouped-dataset-2" title="Link to this heading"></a></h3>
 <p>Validates a grouped ranking dataset and returns its dataset summary when validation succeeds.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -708,7 +910,7 @@
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="grouped-dataset-item-relevances-4">
-<span id="ranking-dataset-common-0-grouped-dataset-item-relevances-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevances/4</span></code></a><a class="headerlink" href="#grouped-dataset-item-relevances-4" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-item-relevances-4"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevances/4</span></code></a><a class="headerlink" href="#grouped-dataset-item-relevances-4" title="Link to this heading"></a></h3>
 <p>Collects the declared items for a grouped-dataset group paired with their relevance values under the given missing-relevance policy.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -729,7 +931,7 @@
 <hr class="docutils" />
 </section>
 <section id="grouped-dataset-relevance-frequencies-2">
-<span id="ranking-dataset-common-0-grouped-dataset-relevance-frequencies-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_relevance_frequencies/2</span></code></a><a class="headerlink" href="#grouped-dataset-relevance-frequencies-2" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-relevance-frequencies-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_relevance_frequencies/2</span></code></a><a class="headerlink" href="#grouped-dataset-relevance-frequencies-2" title="Link to this heading"></a></h3>
 <p>Aggregates grouped item relevances into a relevance-frequency dictionary.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -750,7 +952,7 @@
 <hr class="docutils" />
 </section>
 <section id="grouped-dataset-item-relevance-scores-3">
-<span id="ranking-dataset-common-0-grouped-dataset-item-relevance-scores-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevance_scores/3</span></code></a><a class="headerlink" href="#grouped-dataset-item-relevance-scores-3" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-item-relevance-scores-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_item_relevance_scores/3</span></code></a><a class="headerlink" href="#grouped-dataset-item-relevance-scores-3" title="Link to this heading"></a></h3>
 <p>Maps grouped item relevances to per-item score deltas using a relevance-points dictionary.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -771,7 +973,7 @@
 <hr class="docutils" />
 </section>
 <section id="grouped-dataset-tie-blocks-4">
-<span id="ranking-dataset-common-0-grouped-dataset-tie-blocks-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks/4</span></code></a><a class="headerlink" href="#grouped-dataset-tie-blocks-4" title="Link to this heading"></a></h3>
+<span id="ranking-dataset-common-0-grouped-dataset-tie-blocks-4"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">grouped_dataset_tie_blocks/4</span></code></a><a class="headerlink" href="#grouped-dataset-tie-blocks-4" title="Link to this heading"></a></h3>
 <p>Collects grouped-dataset item relevances into descending relevance tie blocks represented as <code class="docutils literal notranslate"><span class="pre">tie_block(Relevance,</span> <span class="pre">Items)</span></code> terms, preserving the declaration order of items inside each block.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

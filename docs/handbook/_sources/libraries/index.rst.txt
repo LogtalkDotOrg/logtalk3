@@ -82,6 +82,8 @@ directory in the ``NOTES.md`` file.
    gensym
    geospatial
    git
+   glicko2
+   glicko2_periodic
    gradient_boosting_regression
    grammars
    graphs

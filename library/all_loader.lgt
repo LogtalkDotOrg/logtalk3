@@ -144,6 +144,8 @@
 		plackett_luce(loader),
 		plackett_luce_last(loader),
 		massey(loader),
+		glicko2(loader),
+		glicko2_periodic(loader),
 		regularized_bradley_terry(loader),
 		copeland(loader),
 		elo(loader),

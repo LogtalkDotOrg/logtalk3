@@ -47,6 +47,7 @@ Categories
    frequent_pattern_mining_common <frequent_pattern_mining_common_0>
    genint_core <genint_core_0>
    gensym_core <gensym_core_0>
+   glicko2_common <glicko2_common_0>
    graph_common <graph_common_0>
    graph_types <graph_types_0>
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
@@ -238,6 +239,8 @@ Objects
    gensym <gensym_0>
    geospatial <geospatial_0>
    git <git_0>
+   glicko2 <glicko2_0>
+   glicko2_periodic <glicko2_periodic_0>
    gradient_boosting_regression <gradient_boosting_regression_0>
    grammar_rules_hook <grammar_rules_hook_0>
    graph_language_registry <graph_language_registry_0>
@@ -638,6 +641,7 @@ Protocols
    stemmer_protocol <stemmer_protocol_0>
    subsequences_protocol <subsequences_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+   temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>
    time_scales_protocol <time_scales_protocol_0>

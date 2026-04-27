@@ -179,6 +179,14 @@ using Copeland scores.
 * ADDED: New `elo` library implementing pairwise preference ranking
 using deterministic batch Elo rating updates.
 
+* ADDED: New `glicko2` library implementing pairwise preference ranking
+using a deterministic single-period Glicko-2 update over aggregated
+pairwise outcomes.
+
+* ADDED: New `glicko2_periodic` library implementing full multi-period
+Glicko-2 updates over temporal pairwise game datasets with explicit
+rating periods and support for draws and inactivity.
+
 * ADDED: New `massey` library implementing pairwise preference ranking
 using the Massey matrix method.
 
