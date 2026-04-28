@@ -232,6 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="toml.html"><code class="docutils literal notranslate"><span class="pre">toml</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="truncated_svd.html"><code class="docutils literal notranslate"><span class="pre">truncated_svd</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tzif.html"><code class="docutils literal notranslate"><span class="pre">tzif</span></code></a></li>
@@ -286,25 +287,35 @@
              
   <section id="dimension-reduction-protocols">
 <span id="library-dimension-reduction-protocols"></span><h1><code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code><a class="headerlink" href="#dimension-reduction-protocols" title="Link to this heading"></a></h1>
-<p>This library provides protocols and a reusable category used in the
-implementation of machine learning dimension reduction algorithms.
+<p>This library provides protocols and reusable support predicates used in
+the implementation of machine learning dimension reduction algorithms.
 Unsupervised datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">dimension_reduction_dataset_protocol</span></code> protocol. Labeled datasets for
 supervised reducers such as Linear Discriminant Analysis are represented
 as objects implementing the
-<code class="docutils literal notranslate"><span class="pre">supervised_dimension_reduction_dataset_protocol</span></code> protocol. Dimension
-reducers are represented as objects importing the
+<code class="docutils literal notranslate"><span class="pre">supervised_dimension_reduction_dataset_protocol</span></code> protocol.
+Target-valued datasets for reducers such as partial least squares
+projections are represented as objects implementing the
+<code class="docutils literal notranslate"><span class="pre">target_supervised_dimension_reduction_dataset_protocol</span></code> protocol.
+Dimension reducers are represented as objects importing the
 <code class="docutils literal notranslate"><span class="pre">dimension_reducer_common</span></code> category.</p>
 <p>This library also provides reusable test datasets and a small smoke-test
 suite.</p>
 <p>Concrete dimension reduction algorithms are intentionally out of scope
 for this package. The goal is to provide a portable foundation for
-libraries such as <code class="docutils literal notranslate"><span class="pre">pca</span></code>, <code class="docutils literal notranslate"><span class="pre">random_projection</span></code>, and
+libraries such as <code class="docutils literal notranslate"><span class="pre">pca</span></code>, <code class="docutils literal notranslate"><span class="pre">truncated_svd</span></code>, <code class="docutils literal notranslate"><span class="pre">random_projection</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>, including shared reducer helpers for common tasks
-such as feature encoding, projection, export, and pretty-printing.</p>
+such as feature encoding, projection, reducer validation, diagnostics,
+export, and pretty-printing.</p>
 <p>Exported reducers are serialized protocol-wide as single-argument
 predicates such as <code class="docutils literal notranslate"><span class="pre">reducer(Reducer)</span></code>, allowing the saved reducer term
 to be loaded and passed directly to <code class="docutils literal notranslate"><span class="pre">transform/3</span></code>.</p>
+<p>All reducers importing the shared category are also expected to record a
+diagnostics list containing at least <code class="docutils literal notranslate"><span class="pre">model/1</span></code> and <code class="docutils literal notranslate"><span class="pre">options/1</span></code>
+terms. The shared protocol surface exposes this metadata using the
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">dimension_reducer_options/2</span></code>
+predicates and validates serialized reducers using
+<code class="docutils literal notranslate"><span class="pre">check_dimension_reducer/1</span></code>.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -351,11 +362,19 @@ projection smoke tests.</p></li>
 with 10 examples and 6 continuous attributes (<code class="docutils literal notranslate"><span class="pre">f1</span></code> through <code class="docutils literal notranslate"><span class="pre">f6</span></code>).
 It is intended for testing projected dimensionality and reducer output
 shape.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">low_rank_rectangular.lgt</span></code> — A compact continuous dataset with 4
+examples and 3 continuous attributes whose third feature is the sum of
+the first two. It is intended for testing matrix-rank truncation and
+singular-value-based reducers such as <code class="docutils literal notranslate"><span class="pre">truncated_svd</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">labeled_measurements.lgt</span></code> — A compact labeled continuous dataset
 with 9 examples, 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>,
 <code class="docutils literal notranslate"><span class="pre">height</span></code>, <code class="docutils literal notranslate"><span class="pre">weight</span></code>), and 3 class labels (<code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>,
 <code class="docutils literal notranslate"><span class="pre">gamma</span></code>). It is intended for testing supervised reducers such as
 <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>.</p></li>
+<li><p>Target-supervised smoke coverage is currently provided by the
+<code class="docutils literal notranslate"><span class="pre">target_measurements</span></code> object in the library smoke tests, which
+exercises the
+<code class="docutils literal notranslate"><span class="pre">target_supervised_dimension_reduction_dataset_protocol</span></code> contract.</p></li>
 </ul>
 </section>
 </section>

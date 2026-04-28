@@ -25,15 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Random projection reducer for continuous datasets using a portable seeded Rademacher projection matrix.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, and samples a dense Rademacher projection matrix with entries in {-$1/sqrt(k)$, +$1/sqrt(k)$} where $k$ is the requested reduced dimensionality.',
 			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
 			'Reproducibility' - 'Projection matrices are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``random_projection_reducer(Encoders, Components, Options)`` where ``Encoders`` stores attribute centering/scaling metadata and ``Components`` stores the sampled projection vectors.'
+			'Dimension reducer representation' - 'The learned reducer is represented by default as ``random_projection_reducer(Encoders, Components, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the sampled projection vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
 		],
-		see_also is [dimension_reducer_protocol, dimension_reduction_dataset_protocol, pca]
+		see_also is [lda_projection, pca]
 	]).
 
 	:- public(learn/3).
@@ -77,7 +77,8 @@
 		^^option(n_components(RequestedComponents), Options),
 		ComponentCount is min(RequestedComponents, FeatureCount),
 		generate_components(ComponentCount, FeatureCount, Options, Components),
-		DimensionReducer = random_projection_reducer(Encoders, Components, Options),
+		build_diagnostics(AttributeNames, Components, Options, Diagnostics),
+		DimensionReducer = random_projection_reducer(Encoders, Components, Diagnostics),
 		!.
 
 	check_examples(Dataset, AttributeNames, Examples) :-
@@ -117,13 +118,26 @@
 		NextFeatureCount is FeatureCount - 1,
 		generate_component(NextFeatureCount, Scale, Component).
 
+	build_diagnostics(AttributeNames, Components, Options, Diagnostics) :-
+		length(AttributeNames, FeatureCount),
+		length(Components, ComponentCount),
+		Diagnostics = [
+			model(random_projection),
+			options(Options),
+			attribute_names(AttributeNames),
+			feature_count(FeatureCount),
+			component_count(ComponentCount)
+		].
+
 	dimension_reducer_data(DimensionReducer, Encoders, Components) :-
 		DimensionReducer =.. [_Functor, Encoders, Components| _].
 
-	print_dimension_reducer_properties(random_projection_reducer(Encoders, Components, Options)) :-
+	dimension_reducer_diagnostics_data(random_projection_reducer(_Encoders, _Components, Diagnostics), Diagnostics).
+
+	print_dimension_reducer_properties(random_projection_reducer(Encoders, Components, Diagnostics)) :-
 		format('Random Projection Dimension Reducer~n', []),
 		format('==================================~n~n', []),
-		format('Options: ~w~n', [Options]),
+		format('Diagnostics: ~w~n', [Diagnostics]),
 		format('Encoders: ~w~n', [Encoders]),
 		length(Components, ComponentCount),
 		format('Components: ~w~n', [ComponentCount]).

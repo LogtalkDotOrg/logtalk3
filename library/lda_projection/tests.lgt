@@ -35,13 +35,59 @@
 :- end_object.
 
 
+:- object(duplicate_attribute_lda_dataset,
+	implements(supervised_dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	class(label).
+	class_values([left, right]).
+
+	example(1, left, [x-1.0, x-1.1, y-2.0]).
+	example(2, right, [x-(-1.0), y-(-2.0)]).
+
+:- end_object.
+
+
+:- object(undeclared_attribute_lda_dataset,
+	implements(supervised_dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	class(label).
+	class_values([left, right]).
+
+	example(1, left, [x-1.0, y-2.0, junk-9.0]).
+	example(2, right, [x-(-1.0), y-(-2.0)]).
+
+:- end_object.
+
+
+:- object(duplicate_attribute_declaration_lda_dataset,
+	implements(supervised_dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	class(label).
+	class_values([left, right]).
+
+	example(1, left, [x-1.0, y-2.0]).
+	example(2, right, [x-(-1.0), y-(-2.0)]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Unit tests for the "lda_projection" library.'
 	]).
 
@@ -60,8 +106,16 @@
 	test(lda_projection_learn_2_structure, deterministic(functor(DimensionReducer, lda_projection_reducer, 4))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer).
 
-	test(lda_projection_learn_3_custom_options, deterministic((length(Components, 2), ClassValues == [alpha, beta, gamma], memberchk(n_components(4), Options), memberchk(feature_scaling(false), Options), memberchk(regularization(1.0e-5), Options)))) :-
-		lda_projection::learn(labeled_measurements, lda_projection_reducer(_Encoders, Components, ClassValues, Options), [n_components(4), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
+	test(lda_projection_learn_3_custom_options, deterministic((length(Components, 2), ClassValues == [alpha, beta, gamma], memberchk(options(Options), Diagnostics), memberchk(n_components(4), Options), memberchk(feature_scaling(false), Options), memberchk(regularization(1.0e-5), Options), memberchk(model(lda_projection), Diagnostics)))) :-
+		lda_projection::learn(labeled_measurements, lda_projection_reducer(_Encoders, Components, ClassValues, Diagnostics), [n_components(4), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
+
+	test(lda_projection_check_dimension_reducer_1, deterministic) :-
+		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
+		lda_projection::check_dimension_reducer(DimensionReducer).
+
+	test(lda_projection_diagnostics_2, deterministic((memberchk(model(lda_projection), Diagnostics), memberchk(class_values([alpha, beta, gamma]), Diagnostics), memberchk(component_count(1), Diagnostics)))) :-
+		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
+		lda_projection::diagnostics(DimensionReducer, Diagnostics).
 
 	test(lda_projection_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer),
@@ -72,11 +126,16 @@
 		lda_projection::transform(DimensionReducer, [length-5.1, width-3.5, height-1.4, weight-0.2], [component_1-AlphaScore| _]),
 		lda_projection::transform(DimensionReducer, [length-6.2, width-3.4, height-5.4, weight-2.3], [component_1-GammaScore| _]).
 
+	test(lda_projection_learn_2_anti_diagonal_singletons_regression, deterministic((Score1 =\= 0.0, Score2 =\= 0.0, Score1 * Score2 < 0.0))) :-
+		lda_projection::learn(anti_diagonal_singletons, DimensionReducer, [n_components(1), feature_scaling(false), regularization(1.0e-6)]),
+		lda_projection::transform(DimensionReducer, [x-(-1.0), y-1.0], [component_1-Score1]),
+		lda_projection::transform(DimensionReducer, [x-1.0, y-(-1.0)], [component_1-Score2]).
+
 	test(lda_projection_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
 		lda_projection::export_to_clauses(labeled_measurements, DimensionReducer, reduced, [Clause]).
 
-	test(lda_projection_export_to_file_4, deterministic((Reducer = lda_projection_reducer(_Encoders, Components, ClassValues, _Options), length(Components, 1), ClassValues == [alpha, beta, gamma]))) :-
+	test(lda_projection_export_to_file_4, deterministic((Reducer = lda_projection_reducer(_Encoders, Components, ClassValues, _Diagnostics), length(Components, 1), ClassValues == [alpha, beta, gamma]))) :-
 		^^file_path('test_output.pl', File),
 		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
 		lda_projection::export_to_file(labeled_measurements, DimensionReducer, reducer, File),
@@ -96,7 +155,24 @@
 		lda_projection::learn(labeled_measurements, DimensionReducer),
 		lda_projection::print_dimension_reducer(DimensionReducer).
 
-	test(lda_projection_learn_2_invalid_dataset, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
+	test(lda_projection_learn_2_duplicate_training_attribute, error(domain_error(attribute_occurrences, x))) :-
+		lda_projection::learn(duplicate_attribute_lda_dataset, _DimensionReducer).
+
+	test(lda_projection_learn_2_undeclared_training_attribute, error(domain_error(declared_attribute, junk))) :-
+		lda_projection::learn(undeclared_attribute_lda_dataset, _DimensionReducer).
+
+	test(lda_projection_learn_2_duplicate_attribute_declaration, error(domain_error(attribute_declarations, x))) :-
+		lda_projection::learn(duplicate_attribute_declaration_lda_dataset, _DimensionReducer).
+
+	test(lda_projection_transform_3_duplicate_attribute, error(domain_error(attribute_occurrences, length))) :-
+		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
+		lda_projection::transform(DimensionReducer, [length-5.1, length-5.2, width-3.5, height-1.4, weight-0.2], _ReducedInstance).
+
+	test(lda_projection_transform_3_undeclared_attribute, error(domain_error(declared_attribute, junk))) :-
+		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
+		lda_projection::transform(DimensionReducer, [length-5.1, width-3.5, height-1.4, weight-0.2, junk-9.0], _ReducedInstance).
+
+	test(lda_projection_learn_2_invalid_dataset, error(domain_error(continuous_attribute, channel))) :-
 		lda_projection::learn(invalid_lda_dataset, _DimensionReducer).
 
 :- end_object.

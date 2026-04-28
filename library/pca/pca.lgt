@@ -25,14 +25,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, computes the covariance matrix, and extracts principal components using deterministic power iteration with deflation.',
 			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``pca_reducer(Encoders, Components, ExplainedVariances, Options)`` where ``Encoders`` stores attribute centering/scaling metadata and ``Components`` stores the principal direction vectors.'
+			'Dimension reducer representation' - 'The learned reducer is represented by default as ``pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the principal direction vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
 		],
-		see_also is [dimension_reducer_protocol, dimension_reduction_dataset_protocol]
+		see_also is [lda_projection, random_projection]
 	]).
 
 	:- public(learn/3).
@@ -77,12 +77,21 @@
 		ComponentCount is min(RequestedComponents, FeatureCount),
 		covariance_matrix(Rows, CovarianceMatrix),
 		extract_components(CovarianceMatrix, ComponentCount, Options, Components, ExplainedVariances),
-		DimensionReducer = pca_reducer(Encoders, Components, ExplainedVariances, Options),
+		build_diagnostics(AttributeNames, Components, ExplainedVariances, Options, Diagnostics),
+		DimensionReducer = pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics),
 		!.
 
 	check_examples(Dataset, AttributeNames, Examples) :-
 		^^check_examples_non_empty(Dataset, Examples),
+		check_minimum_examples(Examples),
 		^^check_example_values(Examples, AttributeNames).
+
+	check_minimum_examples(Examples) :-
+		length(Examples, Count),
+		(   Count >= 2 ->
+			true
+		;   domain_error(minimum_number_of_examples, Count)
+		).
 
 	example_attribute_values(_-AttributeValues, AttributeValues).
 
@@ -97,10 +106,7 @@
 		zero_matrix(FeatureCount, ZeroMatrix),
 		accumulate_outer_products(Rows, ZeroMatrix, SumMatrix),
 		length(Rows, Count),
-		(   Count > 1 ->
-			Scale is 1.0 / (Count - 1)
-		;   Scale = 1.0
-		),
+		Scale is 1.0 / (Count - 1),
 		scale_matrix(SumMatrix, Scale, CovarianceMatrix).
 
 	zero_vector(0, []) :-
@@ -174,9 +180,34 @@
 
 	principal_component(Matrix, Options, Eigenvalue, Eigenvector) :-
 		length(Matrix, Size),
+		initial_vectors(Size, InitialVectors),
+		zero_vector(Size, ZeroVector),
+		principal_component_candidates(Matrix, Options, InitialVectors, 0.0, ZeroVector, Eigenvalue, Eigenvector).
+
+	initial_vectors(Size, [InitialVector| BasisVectors]) :-
 		initial_vector(Size, InitialVector),
+		basis_initial_vectors(1, Size, BasisVectors).
+
+	basis_initial_vectors(Index, Size, []) :-
+		Index > Size,
+		!.
+	basis_initial_vectors(Index, Size, [BasisVector| BasisVectors]) :-
+		basis_vector(Size, Index, BasisVector),
+		NextIndex is Index + 1,
+		basis_initial_vectors(NextIndex, Size, BasisVectors).
+
+	principal_component_candidates(_Matrix, _Options, [], BestEigenvalue, BestEigenvector, BestEigenvalue, BestEigenvector) :-
+		!.
+	principal_component_candidates(Matrix, Options, [InitialVector| InitialVectors], BestEigenvalue0, BestEigenvector0, BestEigenvalue, BestEigenvector) :-
 		normalize_vector(InitialVector, NormalizedInitial),
-		iterate_component(Matrix, Options, 0, NormalizedInitial, Eigenvalue, Eigenvector).
+		iterate_component(Matrix, Options, 0, NormalizedInitial, CandidateEigenvalue, CandidateEigenvector),
+		(   CandidateEigenvalue > BestEigenvalue0 ->
+			BestEigenvalue1 = CandidateEigenvalue,
+			BestEigenvector1 = CandidateEigenvector
+		;   BestEigenvalue1 = BestEigenvalue0,
+			BestEigenvector1 = BestEigenvector0
+		),
+		principal_component_candidates(Matrix, Options, InitialVectors, BestEigenvalue1, BestEigenvector1, BestEigenvalue, BestEigenvector).
 
 	initial_vector(0, []) :-
 		!.
@@ -184,6 +215,20 @@
 		Size > 0,
 		NextSize is Size - 1,
 		initial_vector(NextSize, Vector).
+
+	basis_vector(Size, Index, Vector) :-
+		basis_vector(1, Size, Index, Vector).
+
+	basis_vector(Current, Size, _Index, []) :-
+		Current > Size,
+		!.
+	basis_vector(Index, Size, Index, [1.0| Vector]) :-
+		!,
+		Next is Index + 1,
+		basis_vector(Next, Size, Index, Vector).
+	basis_vector(Current, Size, Index, [0.0| Vector]) :-
+		Next is Current + 1,
+		basis_vector(Next, Size, Index, Vector).
 
 	normalize_vector(Vector, NormalizedVector) :-
 		vector_norm(Vector, Norm),
@@ -252,6 +297,18 @@
 		scale_matrix(Outer, Eigenvalue, ScaledOuter),
 		subtract_matrices(Matrix, ScaledOuter, DeflatedMatrix).
 
+	build_diagnostics(AttributeNames, Components, ExplainedVariances, Options, Diagnostics) :-
+		length(AttributeNames, FeatureCount),
+		length(Components, ComponentCount),
+		Diagnostics = [
+			model(pca),
+			options(Options),
+			attribute_names(AttributeNames),
+			feature_count(FeatureCount),
+			component_count(ComponentCount),
+			explained_variances(ExplainedVariances)
+		].
+
 	subtract_matrices([], [], []).
 	subtract_matrices([Row1| Rows1], [Row2| Rows2], [Row| Rows]) :-
 		subtract_vectors(Row1, Row2, Row),
@@ -260,10 +317,12 @@
 	dimension_reducer_data(DimensionReducer, Encoders, Components) :-
 		DimensionReducer =.. [_Functor, Encoders, Components| _].
 
-	print_dimension_reducer_properties(pca_reducer(Encoders, Components, ExplainedVariances, Options)) :-
+	dimension_reducer_diagnostics_data(pca_reducer(_Encoders, _Components, _ExplainedVariances, Diagnostics), Diagnostics).
+
+	print_dimension_reducer_properties(pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics)) :-
 		format('PCA Dimension Reducer~n', []),
 		format('=====================~n~n', []),
-		format('Options: ~w~n', [Options]),
+		format('Diagnostics: ~w~n', [Diagnostics]),
 		format('Encoders: ~w~n', [Encoders]),
 		length(Components, ComponentCount),
 		format('Components: ~w~n', [ComponentCount]),

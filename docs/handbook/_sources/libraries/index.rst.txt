@@ -183,6 +183,7 @@ directory in the ``NOTES.md`` file.
    timeout
    toml
    toon
+   truncated_svd
    tsv
    types
    tzif

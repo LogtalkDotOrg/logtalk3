@@ -27,8 +27,10 @@
 	logtalk_load(options(loader)),
 	logtalk_load(dimension_reduction_protocols(loader)),
 	logtalk_load([
+		dimension_reduction_protocols('test_datasets/anti_correlated_plane'),
 		dimension_reduction_protocols('test_datasets/correlated_plane'),
-		dimension_reduction_protocols('test_datasets/high_dimensional_measurements')
+		dimension_reduction_protocols('test_datasets/high_dimensional_measurements'),
+		dimension_reduction_protocols('test_datasets/singleton_measurement')
 	], [
 		source_data(on),
 		debug(on)

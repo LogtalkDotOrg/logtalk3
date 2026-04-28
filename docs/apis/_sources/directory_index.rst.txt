@@ -550,6 +550,7 @@ To load an entity, always load the library that includes it using the goal ``log
    dimension_reducer_protocol <dimension_reducer_protocol_0>
    dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+   target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
 
 ``library/eclat/``
 ------------------
@@ -1897,6 +1898,16 @@ To load an entity, always load the library that includes it using the goal ``log
    toon(StringRepresentation) <toon_1>
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toon_protocol <toon_protocol_0>
+
+``library/truncated_svd/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   truncated_svd <truncated_svd_0>
 
 ``library/tsv/``
 ----------------

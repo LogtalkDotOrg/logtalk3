@@ -1772,6 +1772,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::check_convert/4>`
 
+``check_dimension_reducer/1``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::check_dimension_reducer/1>`
+
 ``check_instant/1``
 -------------------
 
@@ -3900,6 +3910,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`
+* :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
@@ -3953,6 +3964,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`
+* :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
@@ -4117,6 +4129,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`number_grammars(Format) <number_grammars/1::digits//1>`
+
+``dimension_reducer_options/2``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::dimension_reducer_options/2>`
 
 ``directories/1``
 -----------------
@@ -5134,6 +5156,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dataset_protocol <dataset_protocol/0::example/3>`
 * :ref:`regression_dataset_protocol <regression_dataset_protocol/0::example/3>`
 * :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0::example/3>`
+* :ref:`target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol/0::example/3>`
 
 ``exchange_bind/4``
 -------------------
@@ -8944,6 +8967,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
 * :ref:`regression_tree <regression_tree/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
+* :ref:`truncated_svd <truncated_svd/0::learn/3>`
 
 ``learn_seq/2``
 ---------------
@@ -17189,6 +17213,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`regression_dataset_protocol <regression_dataset_protocol/0::target/1>`
+* :ref:`target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol/0::target/1>`
 
 ``tcb_minus_tdb_approx/3``
 --------------------------
@@ -18311,6 +18336,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::valid_date_time/1>`
+
+``valid_dimension_reducer/1``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::valid_dimension_reducer/1>`
 
 ``valid_instant/1``
 -------------------

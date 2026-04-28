@@ -112,6 +112,7 @@
 		lda_projection(loader),
 		pca(loader),
 		random_projection(loader),
+		truncated_svd(loader),
 		clustering_protocols(loader),
 		agglomerative(loader),
 		dbscan(loader),

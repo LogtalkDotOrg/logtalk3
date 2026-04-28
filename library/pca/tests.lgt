@@ -31,13 +31,50 @@
 :- end_object.
 
 
+:- object(duplicate_attribute_pca_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, x-1.1, y-2.0]).
+	example(2, [x-2.0, y-4.0]).
+
+:- end_object.
+
+
+:- object(undeclared_attribute_pca_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, y-2.0, junk-9.0]).
+	example(2, [x-2.0, y-4.0]).
+
+:- end_object.
+
+
+:- object(duplicate_attribute_declaration_pca_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, y-2.0]).
+	example(2, [x-2.0, y-4.0]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Unit tests for the "pca" library.'
 	]).
 
@@ -56,8 +93,16 @@
 	test(pca_learn_2_structure, deterministic(functor(DimensionReducer, pca_reducer, 4))) :-
 		pca::learn(correlated_plane, DimensionReducer).
 
-	test(pca_learn_3_custom_options, deterministic((length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0, memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options)))) :-
-		pca::learn(correlated_plane, pca_reducer(_Encoders, Components, ExplainedVariances, Options), [n_components(1), feature_scaling(false), maximum_iterations(200), tolerance(1.0e-7)]).
+	test(pca_learn_3_custom_options, deterministic((length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0, memberchk(options(Options), Diagnostics), memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options), memberchk(model(pca), Diagnostics)))) :-
+		pca::learn(correlated_plane, pca_reducer(_Encoders, Components, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false), maximum_iterations(200), tolerance(1.0e-7)]).
+
+	test(pca_check_dimension_reducer_1, deterministic) :-
+		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
+		pca::check_dimension_reducer(DimensionReducer).
+
+	test(pca_diagnostics_2, deterministic((memberchk(model(pca), Diagnostics), memberchk(component_count(1), Diagnostics), memberchk(explained_variances([_]), Diagnostics)))) :-
+		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
+		pca::diagnostics(DimensionReducer, Diagnostics).
 
 	test(pca_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
 		pca::learn(high_dimensional_measurements, DimensionReducer),
@@ -68,11 +113,16 @@
 		pca::transform(DimensionReducer, [x-1.0, y-2.0, z-3.0], [component_1-Score1]),
 		pca::transform(DimensionReducer, [x-4.5, y-9.0, z-13.7], [component_1-Score2]).
 
+	test(pca_learn_2_anti_correlated_plane_regression, deterministic((Score1 =\= 0.0, Score2 =\= 0.0, Score1 * Score2 < 0.0))) :-
+		pca::learn(anti_correlated_plane, DimensionReducer, [n_components(1), feature_scaling(false)]),
+		pca::transform(DimensionReducer, [x-1.0, y-(-1.0)], [component_1-Score1]),
+		pca::transform(DimensionReducer, [x-(-1.0), y-1.0], [component_1-Score2]).
+
 	test(pca_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		pca::export_to_clauses(correlated_plane, DimensionReducer, reduced, [Clause]).
 
-	test(pca_export_to_file_4, deterministic((Reducer = pca_reducer(_Encoders, Components, ExplainedVariances, _Options), length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0))) :-
+	test(pca_export_to_file_4, deterministic((Reducer = pca_reducer(_Encoders, Components, ExplainedVariances, _Diagnostics), length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0))) :-
 		^^file_path('test_output.pl', File),
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		pca::export_to_file(correlated_plane, DimensionReducer, reducer, File),
@@ -92,7 +142,27 @@
 		pca::learn(correlated_plane, DimensionReducer),
 		pca::print_dimension_reducer(DimensionReducer).
 
-	test(pca_learn_2_invalid_dataset, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
+	test(pca_learn_2_singleton_dataset, error(domain_error(minimum_number_of_examples, 1))) :-
+		pca::learn(singleton_measurement, _DimensionReducer).
+
+	test(pca_learn_2_duplicate_training_attribute, error(domain_error(attribute_occurrences, x))) :-
+		pca::learn(duplicate_attribute_pca_dataset, _DimensionReducer).
+
+	test(pca_learn_2_undeclared_training_attribute, error(domain_error(declared_attribute, junk))) :-
+		pca::learn(undeclared_attribute_pca_dataset, _DimensionReducer).
+
+	test(pca_learn_2_duplicate_attribute_declaration, error(domain_error(attribute_declarations, x))) :-
+		pca::learn(duplicate_attribute_declaration_pca_dataset, _DimensionReducer).
+
+	test(pca_transform_3_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
+		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
+		pca::transform(DimensionReducer, [x-1.0, x-1.1, y-2.0, z-3.0], _ReducedInstance).
+
+	test(pca_transform_3_undeclared_attribute, error(domain_error(declared_attribute, junk))) :-
+		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
+		pca::transform(DimensionReducer, [x-1.0, y-2.0, z-3.0, junk-9.0], _ReducedInstance).
+
+	test(pca_learn_2_invalid_dataset, error(domain_error(continuous_attribute, channel))) :-
 		pca::learn(invalid_pca_dataset, _DimensionReducer).
 
 :- end_object.

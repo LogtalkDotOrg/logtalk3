@@ -15,7 +15,7 @@ Linear Discriminant Analysis projection for labeled continuous datasets using a 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-22
+| **Date:** 2026-04-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -36,10 +36,10 @@ Linear Discriminant Analysis projection for labeled continuous datasets using a 
    - Algorithm: Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.
    - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
    - Supervision: Requires a dataset implementing ``supervised_dimension_reduction_dataset_protocol`` and therefore uses class labels during training.
-   - Dimension reducer representation: The learned reducer is represented by default as ``lda_projection_reducer(Encoders, Components, ClassValues, Options)`` where ``Encoders`` stores attribute centering/scaling metadata and ``Components`` stores the learned discriminant vectors.
+   - Dimension reducer representation: The learned reducer is represented by default as ``lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the learned discriminant vectors, and ``Diagnostics`` records the learned model metadata and effective options.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -84,5 +84,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0>`, :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0>`, :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0>`, :ref:`pca <pca/0>`, :ref:`random_projection <random_projection/0>`
+   :ref:`pca <pca/0>`, :ref:`random_projection <random_projection/0>`
 

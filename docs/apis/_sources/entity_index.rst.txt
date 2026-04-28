@@ -483,6 +483,7 @@ Objects
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toychrdb <toychrdb_0>
    treap_set <treap_set_0>
+   truncated_svd <truncated_svd_0>
    truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
    tsv <tsv_0>
    tsv(Header) <tsv_1>
@@ -644,6 +645,7 @@ Protocols
    stemmer_protocol <stemmer_protocol_0>
    subsequences_protocol <subsequences_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+   target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
    temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>

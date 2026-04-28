@@ -22,28 +22,90 @@
 :- object(sample_dimension_reducer,
 	imports(dimension_reducer_common)).
 
-	:- uses(list, [
-		member/2, memberchk/2
+	:- uses(pairs, [
+		keys/2
 	]).
 
-	learn(_Dataset, sample_dimension_reducer([x, y], [component_1, component_2]), _Options).
+	:- uses(list, [
+		length/2
+	]).
 
-	transform(sample_dimension_reducer(Attributes, Components), Instance, ReducedInstance) :-
-		findall(Component-Value,
-			(
-				member(Component, Components),
-				component_value(Component, Attributes, Instance, Value)
-			),
-			ReducedInstance).
+	learn(Dataset, sample_dimension_reducer(Encoders, Components, Diagnostics), UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		^^dataset_attributes(Dataset, Attributes),
+		^^check_continuous_attributes(Attributes),
+		keys(Attributes, AttributeNames),
+		findall(Id-AttributeValues, Dataset::example(Id, AttributeValues), Examples),
+		^^check_examples_non_empty(Dataset, Examples),
+		^^check_example_values(Examples, AttributeNames),
+		^^build_encoders(AttributeNames, Examples, Options, Encoders),
+		length(AttributeNames, FeatureCount),
+		identity_prefix_components(FeatureCount, Components),
+		Diagnostics = [
+			model(sample_dimension_reducer),
+			options(Options),
+			attribute_names(AttributeNames),
+			feature_count(FeatureCount),
+			component_count(2)
+		].
 
-	component_value(component_1, [Attribute1| _], Instance, Value) :-
-		memberchk(Attribute1-Value, Instance).
-	component_value(component_2, [_| Attributes], Instance, Value) :-
-		Attributes = [Attribute2| _],
-		memberchk(Attribute2-Value, Instance).
+	identity_prefix_components(FeatureCount, Components) :-
+		component_count(FeatureCount, ComponentCount),
+		identity_prefix_components(1, ComponentCount, FeatureCount, Components).
+
+	component_count(FeatureCount, 1) :-
+		FeatureCount =< 1,
+		!.
+	component_count(_FeatureCount, 2).
+
+	identity_prefix_components(Index, ComponentCount, _FeatureCount, []) :-
+		Index > ComponentCount,
+		!.
+	identity_prefix_components(Index, ComponentCount, FeatureCount, [Component| Components]) :-
+		basis_vector(1, FeatureCount, Index, Component),
+		NextIndex is Index + 1,
+		identity_prefix_components(NextIndex, ComponentCount, FeatureCount, Components).
+
+	basis_vector(Current, FeatureCount, _Index, []) :-
+		Current > FeatureCount,
+		!.
+	basis_vector(Index, FeatureCount, Index, [1.0| Component]) :-
+		!,
+		Next is Index + 1,
+		basis_vector(Next, FeatureCount, Index, Component).
+	basis_vector(Current, FeatureCount, Index, [0.0| Component]) :-
+		Next is Current + 1,
+		basis_vector(Next, FeatureCount, Index, Component).
+
+	dimension_reducer_data(sample_dimension_reducer(Encoders, Components, _Diagnostics), Encoders, Components).
+
+	dimension_reducer_diagnostics_data(sample_dimension_reducer(_Encoders, _Components, Diagnostics), Diagnostics).
 
 	print_dimension_reducer_properties(DimensionReducer) :-
 		writeq(DimensionReducer), nl.
+
+	example_attribute_values(_-AttributeValues, AttributeValues).
+
+	default_option(feature_scaling(false)).
+
+	valid_option(feature_scaling(FeatureScaling)) :-
+		type::valid(boolean, FeatureScaling).
+
+:- end_object.
+
+
+:- object(target_measurements,
+	implements(target_supervised_dimension_reduction_dataset_protocol)).
+
+	attribute_values(length, continuous).
+	attribute_values(width, continuous).
+	attribute_values(weight, continuous).
+
+	target(score).
+
+	example(1, 0.5, [length-1.0, width-2.0, weight-3.0]).
+	example(2, 1.5, [length-2.0, width-3.0, weight-5.0]).
 
 :- end_object.
 
@@ -85,18 +147,32 @@
 	test(labeled_measurements_supervised_example_3, deterministic((Label == gamma, memberchk(weight-2.3, Values)))) :-
 		labeled_measurements::example(8, Label, Values).
 
-	test(sample_dimension_reducer_learn_2, deterministic(DimensionReducer == sample_dimension_reducer([x, y], [component_1, component_2]))) :-
+	test(target_measurements_target_attribute, deterministic(Target == score)) :-
+		target_measurements::target(Target).
+
+	test(target_measurements_example_3, deterministic((Score == 1.5, memberchk(weight-5.0, Values)))) :-
+		target_measurements::example(2, Score, Values).
+
+	test(sample_dimension_reducer_learn_2, deterministic(sample_dimension_reducer::valid_dimension_reducer(DimensionReducer))) :-
 		sample_dimension_reducer::learn(correlated_plane, DimensionReducer).
 
-	test(sample_dimension_reducer_transform_3, deterministic(ReducedInstance == [component_1-1.0, component_2-2.0])) :-
+	test(sample_dimension_reducer_transform_3, deterministic(ReducedInstance == [component_1-(-1.75), component_2-(-3.5)])) :-
 		sample_dimension_reducer::learn(correlated_plane, DimensionReducer),
 		sample_dimension_reducer::transform(DimensionReducer, [x-1.0, y-2.0, z-3.0], ReducedInstance).
 
-	test(sample_export_to_clauses_4, deterministic(Clause == reduced(sample_dimension_reducer([x, y], [component_1, component_2])))) :-
+	test(sample_dimension_reducer_diagnostics_2, deterministic((memberchk(model(sample_dimension_reducer), Diagnostics), memberchk(options([feature_scaling(false)]), Diagnostics)))) :-
+		sample_dimension_reducer::learn(correlated_plane, DimensionReducer),
+		sample_dimension_reducer::diagnostics(DimensionReducer, Diagnostics).
+
+	test(sample_dimension_reducer_options_2, deterministic(Options == [feature_scaling(false)])) :-
+		sample_dimension_reducer::learn(correlated_plane, DimensionReducer),
+		sample_dimension_reducer::dimension_reducer_options(DimensionReducer, Options).
+
+	test(sample_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		sample_dimension_reducer::learn(correlated_plane, DimensionReducer),
 		sample_dimension_reducer::export_to_clauses(correlated_plane, DimensionReducer, reduced, [Clause]).
 
-	test(sample_export_to_file_4, deterministic(DimensionReducer == sample_dimension_reducer([x, y], [component_1, component_2]))) :-
+	test(sample_export_to_file_4, deterministic(sample_dimension_reducer::valid_dimension_reducer(DimensionReducer))) :-
 		^^file_path('test_output.pl', File),
 		sample_dimension_reducer::learn(correlated_plane, DimensionReducer),
 		sample_dimension_reducer::export_to_file(correlated_plane, DimensionReducer, reducer, File),

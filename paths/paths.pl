@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 27, 2026
+%  Last updated on April 28, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -262,6 +262,7 @@ logtalk_library_path(time_scales, library('time_scales/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(toml, library('toml/')).
 logtalk_library_path(toon, library('toon/')).
+logtalk_library_path(truncated_svd, library('truncated_svd/')).
 logtalk_library_path(tsv, library('tsv/')).
 logtalk_library_path(types, library('types/')).
 logtalk_library_path(tzif, library('tzif/')).

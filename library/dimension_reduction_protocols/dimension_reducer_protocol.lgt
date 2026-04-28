@@ -26,7 +26,7 @@
 		author is 'Paulo Moura',
 		date is 2026-04-20,
 		comment is 'Protocol for machine learning dimension reducers.',
-		see_also is [dimension_reduction_dataset_protocol, supervised_dimension_reduction_dataset_protocol]
+		see_also is [dimension_reduction_dataset_protocol, supervised_dimension_reduction_dataset_protocol, target_supervised_dimension_reduction_dataset_protocol]
 	]).
 
 	:- public(learn/3).
@@ -48,6 +48,41 @@
 	:- info(transform/3, [
 		comment is 'Transforms a new instance into a reduced representation using the learned dimension reducer. The instance is a list of ``Attribute-Value`` pairs and the reduced representation is a list of ``Component-Value`` pairs.',
 		argnames is ['DimensionReducer', 'Instance', 'ReducedInstance']
+	]).
+
+	:- public(check_dimension_reducer/1).
+	:- mode(check_dimension_reducer(+compound), one).
+	:- info(check_dimension_reducer/1, [
+		comment is 'Checks that a learned dimension reducer term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid dimension reducer representation.',
+		argnames is ['DimensionReducer']
+	]).
+
+	:- public(valid_dimension_reducer/1).
+	:- mode(valid_dimension_reducer(+compound), zero_or_one).
+	:- info(valid_dimension_reducer/1, [
+		comment is 'True when a learned dimension reducer term is structurally valid for the receiving implementation. Succeeds iff ``check_dimension_reducer/1`` succeeds without throwing an exception.',
+		argnames is ['DimensionReducer']
+	]).
+
+	:- public(diagnostics/2).
+	:- mode(diagnostics(+compound, -list(compound)), one).
+	:- info(diagnostics/2, [
+		comment is 'Returns diagnostics and metadata associated with a learned dimension reducer in a representation-independent way.',
+		argnames is ['DimensionReducer', 'Diagnostics']
+	]).
+
+	:- public(diagnostic/2).
+	:- mode(diagnostic(+compound, ?compound), zero_or_more).
+	:- info(diagnostic/2, [
+		comment is 'Tests or enumerates individual diagnostics metadata terms for a learned dimension reducer.',
+		argnames is ['DimensionReducer', 'Diagnostic']
+	]).
+
+	:- public(dimension_reducer_options/2).
+	:- mode(dimension_reducer_options(+compound, -list(compound)), zero_or_one).
+	:- info(dimension_reducer_options/2, [
+		comment is 'Returns the effective training options recorded in a learned dimension reducer diagnostics list.',
+		argnames is ['DimensionReducer', 'Options']
 	]).
 
 	:- public(export_to_clauses/4).

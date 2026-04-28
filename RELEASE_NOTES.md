@@ -155,6 +155,9 @@ dimension reduction for continuous datasets.
 * ADDED: New `random_projection` library implementing seeded random
 projection for continuous datasets.
 
+* ADDED: New `truncated_svd` library implementing Truncated Singular Value
+Decomposition dimension reduction for continuous datasets.
+
 * ADDED: New `anomaly_detection_protocols` library defining common protocols,
 benchmark datasets, and smoke tests for anomaly-detection algorithms.
 

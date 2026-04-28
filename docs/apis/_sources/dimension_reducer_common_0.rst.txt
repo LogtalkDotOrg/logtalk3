@@ -15,7 +15,7 @@ Shared predicates for dimension reducer learning defaults, dataset helpers, tran
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-22
+| **Date:** 2026-04-28
 
 | **Compilation flags:**
 |    ``static``
@@ -30,13 +30,14 @@ Shared predicates for dimension reducer learning defaults, dataset helpers, tran
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -65,6 +66,25 @@ Hook predicate that importing dimension reducer implementations must define in o
 |    ``dimension_reducer_data(DimensionReducer,Encoders,Components)``
 | **Mode and number of proofs:**
 |    ``dimension_reducer_data(+compound,-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: dimension_reducer_diagnostics_data/2
+.. _dimension_reducer_common/0::dimension_reducer_diagnostics_data/2:
+
+``dimension_reducer_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing dimension reducer implementations must define in order to expose diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dimension_reducer_diagnostics_data(DimensionReducer,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``dimension_reducer_diagnostics_data(+compound,-list(compound))`` - ``one``
 
 
 ------------
@@ -252,9 +272,9 @@ Collects the known numeric values for a given attribute across the training exam
 |    ``static``
 
 | **Template:**
-|    ``known_attribute_values(Attribute,Examples,Values)``
+|    ``known_attribute_values(Examples,Attribute,Values)``
 | **Mode and number of proofs:**
-|    ``known_attribute_values(+atom,+list,-list(number))`` - ``one``
+|    ``known_attribute_values(+list,+atom,-list(number))`` - ``one``
 
 
 ------------
@@ -293,6 +313,63 @@ Projects encoded features onto the learned components and returns `component_N-S
 |    ``project_components(Components,Features,Index,ReducedInstance)``
 | **Mode and number of proofs:**
 |    ``project_components(+list(list(number)),+list(number),+integer,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: valid_linear_encoders/1
+.. _dimension_reducer_common/0::valid_linear_encoders/1:
+
+``valid_linear_encoders/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a list of encoders only contains valid ``continuous/3`` encoder terms with distinct attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_linear_encoders(Encoders)``
+| **Mode and number of proofs:**
+|    ``valid_linear_encoders(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_projection_components/2
+.. _dimension_reducer_common/0::valid_projection_components/2:
+
+``valid_projection_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when projection components are numeric vectors compatible with the encoder feature dimension.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_projection_components(Encoders,Components)``
+| **Mode and number of proofs:**
+|    ``valid_projection_components(+list(compound),+list(list(number)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_dimension_reducer_metadata/1
+.. _dimension_reducer_common/0::valid_dimension_reducer_metadata/1:
+
+``valid_dimension_reducer_metadata/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata records the reducer model and effective training options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_dimension_reducer_metadata(Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_dimension_reducer_metadata(+list(compound))`` - ``zero_or_one``
 
 
 ------------

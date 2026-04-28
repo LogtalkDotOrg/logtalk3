@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Shared predicates for dimension reducer learning defaults, dataset helpers, transformation, export, and printing.'
 	]).
 
@@ -35,6 +35,13 @@
 	:- info(dimension_reducer_data/3, [
 		comment is 'Hook predicate that importing dimension reducer implementations must define in order to expose the learned encoders and projection components.',
 		argnames is ['DimensionReducer', 'Encoders', 'Components']
+	]).
+
+	:- protected(dimension_reducer_diagnostics_data/2).
+	:- mode(dimension_reducer_diagnostics_data(+compound, -list(compound)), one).
+	:- info(dimension_reducer_diagnostics_data/2, [
+		comment is 'Hook predicate that importing dimension reducer implementations must define in order to expose diagnostics metadata.',
+		argnames is ['DimensionReducer', 'Diagnostics']
 	]).
 
 	:- protected(print_dimension_reducer_properties/1).
@@ -101,10 +108,10 @@
 	]).
 
 	:- protected(known_attribute_values/3).
-	:- mode(known_attribute_values(+atom, +list, -list(number)), one).
+	:- mode(known_attribute_values(+list, +atom, -list(number)), one).
 	:- info(known_attribute_values/3, [
 		comment is 'Collects the known numeric values for a given attribute across the training examples.',
-		argnames is ['Attribute', 'Examples', 'Values']
+		argnames is ['Examples', 'Attribute', 'Values']
 	]).
 
 	:- protected(encode_instance/3).
@@ -121,12 +128,33 @@
 		argnames is ['Components', 'Features', 'Index', 'ReducedInstance']
 	]).
 
+	:- protected(valid_linear_encoders/1).
+	:- mode(valid_linear_encoders(+list(compound)), zero_or_one).
+	:- info(valid_linear_encoders/1, [
+		comment is 'True when a list of encoders only contains valid ``continuous/3`` encoder terms with distinct attributes.',
+		argnames is ['Encoders']
+	]).
+
+	:- protected(valid_projection_components/2).
+	:- mode(valid_projection_components(+list(compound), +list(list(number))), zero_or_one).
+	:- info(valid_projection_components/2, [
+		comment is 'True when projection components are numeric vectors compatible with the encoder feature dimension.',
+		argnames is ['Encoders', 'Components']
+	]).
+
+	:- protected(valid_dimension_reducer_metadata/1).
+	:- mode(valid_dimension_reducer_metadata(+list(compound)), zero_or_one).
+	:- info(valid_dimension_reducer_metadata/1, [
+		comment is 'True when diagnostics metadata records the reducer model and effective training options.',
+		argnames is ['Diagnostics']
+	]).
+
 	:- uses(format, [
 		format/3
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(numberlist, [
@@ -137,6 +165,10 @@
 		arithmetic_mean/2, variance/2
 	]).
 
+	:- uses(type, [
+		valid/2
+	]).
+
 	:- uses(user, [
 		atomic_concat/3
 	]).
@@ -145,14 +177,40 @@
 		::learn(Dataset, DimensionReducer, []).
 
 	transform(DimensionReducer, Instance, ReducedInstance) :-
+		::check_dimension_reducer(DimensionReducer),
 		::dimension_reducer_data(DimensionReducer, Encoders, Components),
 		::encode_instance(Encoders, Instance, Features),
 		::project_components(Components, Features, 1, ReducedInstance).
+
+	check_dimension_reducer(DimensionReducer) :-
+		(   ::dimension_reducer_data(DimensionReducer, Encoders, Components),
+			::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics),
+			::valid_linear_encoders(Encoders),
+			::valid_projection_components(Encoders, Components),
+			::valid_dimension_reducer_metadata(Diagnostics) ->
+			true
+		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		).
+
+	valid_dimension_reducer(DimensionReducer) :-
+		catch(::check_dimension_reducer(DimensionReducer), _Error, fail).
+
+	diagnostics(DimensionReducer, Diagnostics) :-
+		::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics).
+
+	diagnostic(DimensionReducer, Diagnostic) :-
+		diagnostics(DimensionReducer, Diagnostics),
+		member(Diagnostic, Diagnostics).
+
+	dimension_reducer_options(DimensionReducer, Options) :-
+		diagnostics(DimensionReducer, Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	export_to_clauses(_Dataset, DimensionReducer, Functor, [Clause]) :-
 		Clause =.. [Functor, DimensionReducer].
 
 	export_to_file(Dataset, DimensionReducer, Functor, File) :-
+		::check_dimension_reducer(DimensionReducer),
 		::export_to_clauses(Dataset, DimensionReducer, Functor, Clauses),
 		open(File, write, Stream),
 		write_comment_header(Dataset, DimensionReducer, Functor, Stream),
@@ -160,20 +218,32 @@
 		close(Stream).
 
 	print_dimension_reducer(DimensionReducer) :-
+		::check_dimension_reducer(DimensionReducer),
 		::print_dimension_reducer_properties(DimensionReducer).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
 			Attribute-Values,
 			Dataset::attribute_values(Attribute, Values),
-			Attributes
-		).
+			Attributes0
+		),
+		check_attribute_declarations(Attributes0),
+		Attributes = Attributes0.
+
+	check_attribute_declarations([]).
+	check_attribute_declarations([Attribute-_Values| Attributes]) :-
+		attribute_occurrences(Attributes, Attribute, 0, Count),
+		(	Count == 0 ->
+			true
+		;	domain_error(attribute_declarations, Attribute)
+		),
+		check_attribute_declarations(Attributes).
 
 	check_continuous_attributes([]).
 	check_continuous_attributes([Attribute-Values| Attributes]) :-
 		(	Values == continuous ->
 			true
-		;	domain_error(continuous_attribute(Attribute), Values)
+		;	domain_error(continuous_attribute, Attribute)
 		),
 		check_continuous_attributes(Attributes).
 
@@ -189,8 +259,12 @@
 		::check_example_attributes(AttributeNames, AttributeValues),
 		check_example_values(Examples, AttributeNames).
 
-	check_example_attributes([], _AttributeValues).
-	check_example_attributes([Attribute| Attributes], AttributeValues) :-
+	check_example_attributes(AttributeNames, AttributeValues) :-
+		check_attribute_bindings(AttributeNames, AttributeValues),
+		check_example_attributes_checked(AttributeNames, AttributeValues).
+
+	check_example_attributes_checked([], _AttributeValues).
+	check_example_attributes_checked([Attribute| Attributes], AttributeValues) :-
 		attribute_value(Attribute, AttributeValues, Value),
 		(   nonvar(Value) ->
 			true
@@ -200,7 +274,38 @@
 			true
 		;   type_error(number, Value)
 		),
-		check_example_attributes(Attributes, AttributeValues).
+		check_example_attributes_checked(Attributes, AttributeValues).
+
+	check_attribute_bindings(AttributeNames, AttributeValues) :-
+		check_declared_attribute_bindings(AttributeNames, AttributeValues),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	check_declared_attribute_bindings([], _AttributeValues).
+	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
+		attribute_occurrences(AttributeValues, Attribute, 0, Count),
+		(   Count == 1 ->
+			true
+		;   Count == 0 ->
+			existence_error(attribute, Attribute)
+		;   domain_error(attribute_occurrences, Attribute)
+		),
+		check_declared_attribute_bindings(Attributes, AttributeValues).
+
+	check_undeclared_attribute_bindings([], _AttributeNames).
+	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
+		(   member(Attribute, AttributeNames) ->
+			true
+		;   domain_error(declared_attribute, Attribute)
+		),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	attribute_occurrences([], _Attribute, Count, Count).
+	attribute_occurrences([Attribute-_Value| AttributeValues], Attribute, Count0, Count) :-
+		!,
+		Count1 is Count0 + 1,
+		attribute_occurrences(AttributeValues, Attribute, Count1, Count).
+	attribute_occurrences([_OtherAttribute-_Value| AttributeValues], Attribute, Count0, Count) :-
+		attribute_occurrences(AttributeValues, Attribute, Count0, Count).
 
 	attribute_value(Attribute, AttributeValues, Value) :-
 		(   member(Attribute-Value, AttributeValues) ->
@@ -214,7 +319,7 @@
 		build_encoders(Attributes, Examples, Options, Encoders).
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
-		known_attribute_values(Attribute, Examples, Values),
+		known_attribute_values(Examples, Attribute, Values),
 		arithmetic_mean(Values, Mean),
 		^^option(feature_scaling(FeatureScaling), Options),
 		(   FeatureScaling == true ->
@@ -230,14 +335,23 @@
 		;   Scale = 1.0
 		).
 
-	known_attribute_values(_Attribute, [], []).
-	known_attribute_values(Attribute, [Example| Examples], [Value| Values]) :-
+	known_attribute_values([], _Attribute, []).
+	known_attribute_values([Example| Examples], Attribute, [Value| Values]) :-
 		::example_attribute_values(Example, AttributeValues),
 		attribute_value(Attribute, AttributeValues, Value),
-		known_attribute_values(Attribute, Examples, Values).
+		known_attribute_values(Examples, Attribute, Values).
 
-	encode_instance([], _AttributeValues, []).
-	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
+	encode_instance(Encoders, AttributeValues, Features) :-
+		encoder_attribute_names(Encoders, AttributeNames),
+		check_attribute_bindings(AttributeNames, AttributeValues),
+		encode_instance_checked(Encoders, AttributeValues, Features).
+
+	encoder_attribute_names([], []).
+	encoder_attribute_names([continuous(Attribute, _Mean, _Scale)| Encoders], [Attribute| AttributeNames]) :-
+		encoder_attribute_names(Encoders, AttributeNames).
+
+	encode_instance_checked([], _AttributeValues, []).
+	encode_instance_checked([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
 		attribute_value(Attribute, AttributeValues, Value),
 		(   nonvar(Value) ->
 			true
@@ -248,7 +362,7 @@
 		;   type_error(number, Value)
 		),
 		Feature is (Value - Mean) / Scale,
-		encode_instance(Encoders, AttributeValues, Features).
+		encode_instance_checked(Encoders, AttributeValues, Features).
 
 	project_components([], _Features, _Index, []).
 	project_components([Component| Components], Features, Index, [ComponentName-Score| ReducedInstance]) :-
@@ -260,8 +374,43 @@
 	component_name(Index, Name) :-
 		atomic_concat(component_, Index, Name).
 
+	valid_linear_encoders(Encoders) :-
+		valid(list(compound), Encoders),
+		valid_linear_encoders_(Encoders, []).
+
+	valid_linear_encoders_([], _SeenAttributes).
+	valid_linear_encoders_([continuous(Attribute, Mean, Scale)| Encoders], SeenAttributes) :-
+		atom(Attribute),
+		valid(number, Mean),
+		valid(positive_number, Scale),
+		\+ member(Attribute, SeenAttributes),
+		valid_linear_encoders_(Encoders, [Attribute| SeenAttributes]).
+
+	valid_projection_components(Encoders, Components) :-
+		valid(list, Components),
+		length(Encoders, FeatureCount),
+		valid_projection_components_(Components, FeatureCount).
+
+	valid_projection_components_([], _FeatureCount).
+	valid_projection_components_([Component| Components], FeatureCount) :-
+		valid(list(number), Component),
+		length(Component, FeatureCount),
+		valid_projection_components_(Components, FeatureCount).
+
+	valid_dimension_reducer_metadata(Diagnostics) :-
+		valid(list(compound), Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		atom(Model),
+		memberchk(options(Options), Diagnostics),
+		catch(::check_options(Options), _Error, fail).
+
 	write_comment_header(_Dataset, _DimensionReducer, Functor, Stream) :-
 		Template =.. [Functor, 'Reducer'],
+		format(Stream, '% exported dimension reducer predicate: ~q/1~n', [Functor]),
+		(   ::diagnostics(_DimensionReducer, Diagnostics) ->
+			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
+		;   true
+		),
 		format(Stream, '% ~w~n', [Template]).
 
 	write_clauses([], _Stream).

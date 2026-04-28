@@ -588,6 +588,7 @@ To load any library (including developer tools, ports, and contributions), use t
    dimension_reducer_protocol <dimension_reducer_protocol_0>
    dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+   target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
 
 :ref:`doclet <library_doclet>`
 ------------------------------
@@ -2176,6 +2177,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    toychrdb <toychrdb_0>
+
+:ref:`truncated_svd <library_truncated_svd>`
+--------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   truncated_svd <truncated_svd_0>
 
 :ref:`tsv <library_tsv>`
 ------------------------

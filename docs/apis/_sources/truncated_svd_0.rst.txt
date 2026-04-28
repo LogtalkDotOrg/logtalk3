@@ -1,0 +1,87 @@
+.. index:: single: truncated_svd
+.. _truncated_svd/0:
+
+.. rst-class:: right
+
+**object**
+
+``truncated_svd``
+=================
+
+Truncated singular value decomposition reducer for continuous datasets using a portable two-sided power-iteration solver over the data matrix.
+
+| **Availability:** 
+|    ``logtalk_load(truncated_svd(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-28
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Builds a preprocessed data matrix using optional centering and scaling, extracts singular triplets using deterministic two-sided power iteration, and applies rank-one deflation directly to the data matrix.
+   - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
+   - Dimension reducer representation: The learned reducer is represented by default as ``truncated_svd_reducer(Encoders, Components, SingularValues, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores right singular vectors, and ``Diagnostics`` records the learned model metadata and effective options.
+
+| **Inherited public predicates:**
+|     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _truncated_svd/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a truncated singular value decomposition reducer from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,DimensionReducer,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pca <pca/0>`, :ref:`random_projection <random_projection/0>`
+

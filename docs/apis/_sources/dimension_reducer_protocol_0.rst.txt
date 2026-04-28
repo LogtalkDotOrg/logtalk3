@@ -95,6 +95,101 @@ Transforms a new instance into a reduced representation using the learned dimens
 
 ------------
 
+.. index:: check_dimension_reducer/1
+.. _dimension_reducer_protocol/0::check_dimension_reducer/1:
+
+``check_dimension_reducer/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a learned dimension reducer term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid dimension reducer representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_dimension_reducer(DimensionReducer)``
+| **Mode and number of proofs:**
+|    ``check_dimension_reducer(+compound)`` - ``one``
+
+
+------------
+
+.. index:: valid_dimension_reducer/1
+.. _dimension_reducer_protocol/0::valid_dimension_reducer/1:
+
+``valid_dimension_reducer/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a learned dimension reducer term is structurally valid for the receiving implementation. Succeeds iff ``check_dimension_reducer/1`` succeeds without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_dimension_reducer(DimensionReducer)``
+| **Mode and number of proofs:**
+|    ``valid_dimension_reducer(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _dimension_reducer_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics and metadata associated with a learned dimension reducer in a representation-independent way.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(DimensionReducer,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _dimension_reducer_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics metadata terms for a learned dimension reducer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(DimensionReducer,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: dimension_reducer_options/2
+.. _dimension_reducer_protocol/0::dimension_reducer_options/2:
+
+``dimension_reducer_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options recorded in a learned dimension reducer diagnostics list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dimension_reducer_options(DimensionReducer,Options)``
+| **Mode and number of proofs:**
+|    ``dimension_reducer_options(+compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: export_to_clauses/4
 .. _dimension_reducer_protocol/0::export_to_clauses/4:
 
@@ -169,5 +264,5 @@ Operators
 
 .. seealso::
 
-   :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0>`, :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0>`
+   :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0>`, :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0>`, :ref:`target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol/0>`
 

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 27, 2026
+##   Last updated on April 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -233,6 +233,7 @@ sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
 sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/toml.rst
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
+sed '1,19d' ../../../library/truncated_svd/NOTES.md | pandoc -f gfm -t rst -o libraries/truncated_svd.rst
 sed '1,19d' ../../../library/tsv/NOTES.md | pandoc -f gfm -t rst -o libraries/tsv.rst
 sed '1,19d' ../../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
 sed '1,19d' ../../../library/tzif/NOTES.md | pandoc -f gfm -t rst -o libraries/tzif.rst

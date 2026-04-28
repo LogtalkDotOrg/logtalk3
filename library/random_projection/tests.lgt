@@ -31,13 +31,26 @@
 :- end_object.
 
 
+:- object(duplicate_attribute_declaration_random_projection_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	attribute_values(x, continuous).
+	attribute_values(x, continuous).
+	attribute_values(y, continuous).
+
+	example(1, [x-1.0, y-2.0]).
+	example(2, [x-2.0, y-4.0]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Unit tests for the "random_projection" library.'
 	]).
 
@@ -56,8 +69,16 @@
 	test(random_projection_learn_2_structure, deterministic(functor(DimensionReducer, random_projection_reducer, 3))) :-
 		random_projection::learn(correlated_plane, DimensionReducer).
 
-	test(random_projection_learn_3_custom_options, deterministic((length(Components, 1), memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options), memberchk(random_seed(17), Options)))) :-
-		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders, Components, Options), [n_components(1), feature_scaling(false), random_seed(17)]).
+	test(random_projection_learn_3_custom_options, deterministic((length(Components, 1), memberchk(options(Options), Diagnostics), memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options), memberchk(random_seed(17), Options), memberchk(model(random_projection), Diagnostics)))) :-
+		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders, Components, Diagnostics), [n_components(1), feature_scaling(false), random_seed(17)]).
+
+	test(random_projection_check_dimension_reducer_1, deterministic) :-
+		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(17)]),
+		random_projection::check_dimension_reducer(DimensionReducer).
+
+	test(random_projection_diagnostics_2, deterministic((memberchk(model(random_projection), Diagnostics), memberchk(component_count(1), Diagnostics)))) :-
+		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(17)]),
+		random_projection::diagnostics(DimensionReducer, Diagnostics).
 
 	test(random_projection_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
 		random_projection::learn(high_dimensional_measurements, DimensionReducer, [random_seed(11)]),
@@ -68,14 +89,14 @@
 		random_projection::learn(correlated_plane, DimensionReducer2, [random_seed(19)]).
 
 	test(random_projection_different_seed_changes_components, deterministic(Components1 \== Components2)) :-
-		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders1, Components1, _Options1), [random_seed(17)]),
-		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders2, Components2, _Options2), [random_seed(23)]).
+		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders1, Components1, _Diagnostics1), [random_seed(17)]),
+		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders2, Components2, _Diagnostics2), [random_seed(23)]).
 
 	test(random_projection_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		random_projection::export_to_clauses(correlated_plane, DimensionReducer, reduced, [Clause]).
 
-	test(random_projection_export_to_file_4, deterministic((Reducer = random_projection_reducer(_Encoders, Components, _Options), length(Components, 1)))) :-
+	test(random_projection_export_to_file_4, deterministic((Reducer = random_projection_reducer(_Encoders, Components, _Diagnostics), length(Components, 1)))) :-
 		^^file_path('test_output.pl', File),
 		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(29)]),
 		random_projection::export_to_file(correlated_plane, DimensionReducer, reducer, File),
@@ -95,7 +116,18 @@
 		random_projection::learn(correlated_plane, DimensionReducer),
 		random_projection::print_dimension_reducer(DimensionReducer).
 
-	test(random_projection_learn_2_invalid_dataset, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
+	test(random_projection_transform_3_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
+		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(29)]),
+		random_projection::transform(DimensionReducer, [x-1.0, x-1.1, y-2.0, z-3.0], _ReducedInstance).
+
+	test(random_projection_learn_2_duplicate_attribute_declaration, error(domain_error(attribute_declarations, x))) :-
+		random_projection::learn(duplicate_attribute_declaration_random_projection_dataset, _DimensionReducer).
+
+	test(random_projection_transform_3_undeclared_attribute, error(domain_error(declared_attribute, junk))) :-
+		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(29)]),
+		random_projection::transform(DimensionReducer, [x-1.0, y-2.0, z-3.0, junk-9.0], _ReducedInstance).
+
+	test(random_projection_learn_2_invalid_dataset, error(domain_error(continuous_attribute, channel))) :-
 		random_projection::learn(invalid_random_projection_dataset, _DimensionReducer).
 
 :- end_object.

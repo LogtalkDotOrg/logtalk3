@@ -25,17 +25,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-28,
 		comment is 'Linear Discriminant Analysis projection for labeled continuous datasets using a portable regularized Fisher eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.',
 			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
 			'Supervision' - 'Requires a dataset implementing ``supervised_dimension_reduction_dataset_protocol`` and therefore uses class labels during training.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``lda_projection_reducer(Encoders, Components, ClassValues, Options)`` where ``Encoders`` stores attribute centering/scaling metadata and ``Components`` stores the learned discriminant vectors.'
+			'Dimension reducer representation' - 'The learned reducer is represented by default as ``lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the learned discriminant vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
 		],
 		see_also is [
-			dimension_reducer_protocol, dimension_reduction_dataset_protocol,
-			supervised_dimension_reduction_dataset_protocol, pca, random_projection
+			pca, random_projection
 		]
 	]).
 
@@ -100,7 +99,8 @@
 		ComponentCount is min(RequestedComponents, min(FeatureCount, ClassCount - 1)),
 		extract_components(SymmetricCriterion, ComponentCount, Options, WhitenedComponents, _Eigenvalues),
 		map_whitened_components(WhitenedComponents, InverseLowerTriangularTranspose, Components),
-		DimensionReducer = lda_projection_reducer(Encoders, Components, ClassValues, Options),
+		build_diagnostics(AttributeNames, Components, ClassValues, Options, Diagnostics),
+		DimensionReducer = lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics),
 		!.
 
 	check_class_values(ClassValues) :-
@@ -412,9 +412,34 @@
 
 	principal_component(Matrix, Options, Eigenvalue, Eigenvector) :-
 		length(Matrix, Size),
+		initial_vectors(Size, InitialVectors),
+		zero_vector(Size, ZeroVector),
+		principal_component_candidates(Matrix, Options, InitialVectors, 0.0, ZeroVector, Eigenvalue, Eigenvector).
+
+	initial_vectors(Size, [InitialVector| BasisVectors]) :-
 		initial_vector(Size, InitialVector),
+		basis_initial_vectors(1, Size, BasisVectors).
+
+	basis_initial_vectors(Index, Size, []) :-
+		Index > Size,
+		!.
+	basis_initial_vectors(Index, Size, [BasisVector| BasisVectors]) :-
+		basis_vector(Size, Index, BasisVector),
+		NextIndex is Index + 1,
+		basis_initial_vectors(NextIndex, Size, BasisVectors).
+
+	principal_component_candidates(_Matrix, _Options, [], BestEigenvalue, BestEigenvector, BestEigenvalue, BestEigenvector) :-
+		!.
+	principal_component_candidates(Matrix, Options, [InitialVector| InitialVectors], BestEigenvalue0, BestEigenvector0, BestEigenvalue, BestEigenvector) :-
 		normalize_vector(InitialVector, NormalizedInitial),
-		iterate_component(Matrix, Options, 0, NormalizedInitial, Eigenvalue, Eigenvector).
+		iterate_component(Matrix, Options, 0, NormalizedInitial, CandidateEigenvalue, CandidateEigenvector),
+		(   CandidateEigenvalue > BestEigenvalue0 ->
+			BestEigenvalue1 = CandidateEigenvalue,
+			BestEigenvector1 = CandidateEigenvector
+		;   BestEigenvalue1 = BestEigenvalue0,
+			BestEigenvector1 = BestEigenvector0
+		),
+		principal_component_candidates(Matrix, Options, InitialVectors, BestEigenvalue1, BestEigenvector1, BestEigenvalue, BestEigenvector).
 
 	initial_vector(0, []) :-
 		!.
@@ -485,13 +510,29 @@
 		scale_matrix(OuterProduct, Eigenvalue, ScaledOuterProduct),
 		subtract_matrices(Matrix, ScaledOuterProduct, DeflatedMatrix).
 
+	build_diagnostics(AttributeNames, Components, ClassValues, Options, Diagnostics) :-
+		length(AttributeNames, FeatureCount),
+		length(Components, ComponentCount),
+		length(ClassValues, ClassCount),
+		Diagnostics = [
+			model(lda_projection),
+			options(Options),
+			attribute_names(AttributeNames),
+			feature_count(FeatureCount),
+			class_values(ClassValues),
+			class_count(ClassCount),
+			component_count(ComponentCount)
+		].
+
 	dimension_reducer_data(DimensionReducer, Encoders, Components) :-
 		DimensionReducer =.. [_Functor, Encoders, Components| _].
 
-	print_dimension_reducer_properties(lda_projection_reducer(Encoders, Components, ClassValues, Options)) :-
+	dimension_reducer_diagnostics_data(lda_projection_reducer(_Encoders, _Components, _ClassValues, Diagnostics), Diagnostics).
+
+	print_dimension_reducer_properties(lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics)) :-
 		format('LDA Projection Reducer~n', []),
 		format('======================~n~n', []),
-		format('Options: ~w~n', [Options]),
+		format('Diagnostics: ~w~n', [Diagnostics]),
 		format('Classes: ~w~n', [ClassValues]),
 		format('Encoders: ~w~n', [Encoders]),
 		length(Components, ComponentCount),
