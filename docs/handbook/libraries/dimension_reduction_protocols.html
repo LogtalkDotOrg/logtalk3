@@ -147,6 +147,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ica.html"><code class="docutils literal notranslate"><span class="pre">ica</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="isolation_forest.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest</span></code></a></li>
@@ -187,6 +188,7 @@
 <li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nearest_centroid.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nmf.html"><code class="docutils literal notranslate"><span class="pre">nmf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="optics.html"><code class="docutils literal notranslate"><span class="pre">optics</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
@@ -196,6 +198,7 @@
 <li class="toctree-l2"><a class="reference internal" href="permutations.html"><code class="docutils literal notranslate"><span class="pre">permutations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="plackett_luce.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="plackett_luce_last.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefix_span.html"><code class="docutils literal notranslate"><span class="pre">prefix_span</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
@@ -303,10 +306,10 @@ Dimension reducers are represented as objects importing the
 suite.</p>
 <p>Concrete dimension reduction algorithms are intentionally out of scope
 for this package. The goal is to provide a portable foundation for
-libraries such as <code class="docutils literal notranslate"><span class="pre">pca</span></code>, <code class="docutils literal notranslate"><span class="pre">truncated_svd</span></code>, <code class="docutils literal notranslate"><span class="pre">random_projection</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>, including shared reducer helpers for common tasks
-such as feature encoding, projection, reducer validation, diagnostics,
-export, and pretty-printing.</p>
+libraries such as <code class="docutils literal notranslate"><span class="pre">pca</span></code>, <code class="docutils literal notranslate"><span class="pre">truncated_svd</span></code>, <code class="docutils literal notranslate"><span class="pre">random_projection</span></code>,
+<code class="docutils literal notranslate"><span class="pre">nmf</span></code>, <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>, and <code class="docutils literal notranslate"><span class="pre">pls_projection</span></code>, including shared
+reducer helpers for common tasks such as feature encoding, projection,
+reducer validation, diagnostics, export, and pretty-printing.</p>
 <p>Exported reducers are serialized protocol-wide as single-argument
 predicates such as <code class="docutils literal notranslate"><span class="pre">reducer(Reducer)</span></code>, allowing the saved reducer term
 to be loaded and passed directly to <code class="docutils literal notranslate"><span class="pre">transform/3</span></code>.</p>
@@ -340,8 +343,12 @@ its training-set mean and standard deviation.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling(false)</span></code> only centers each continuous attribute
 using its training-set mean.</p></li>
 </ul>
-<p>The current <code class="docutils literal notranslate"><span class="pre">pca</span></code>, <code class="docutils literal notranslate"><span class="pre">random_projection</span></code>, and <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>
-libraries all define <code class="docutils literal notranslate"><span class="pre">feature_scaling(true)</span></code> as their default.</p>
+<p>The current <code class="docutils literal notranslate"><span class="pre">pca</span></code>, <code class="docutils literal notranslate"><span class="pre">random_projection</span></code>, <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">pls_projection</span></code> libraries all define <code class="docutils literal notranslate"><span class="pre">feature_scaling(true)</span></code> as
+their default.</p>
+<p>Reducers can also specialize preprocessing behavior. For example, the
+<code class="docutils literal notranslate"><span class="pre">nmf</span></code> library only supports <code class="docutils literal notranslate"><span class="pre">center(false)</span></code> because the learned
+feature representation must remain non-negative.</p>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
@@ -371,6 +378,15 @@ with 9 examples, 4 continuous attributes (<code class="docutils literal notransl
 <code class="docutils literal notranslate"><span class="pre">height</span></code>, <code class="docutils literal notranslate"><span class="pre">weight</span></code>), and 3 class labels (<code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>,
 <code class="docutils literal notranslate"><span class="pre">gamma</span></code>). It is intended for testing supervised reducers such as
 <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parts_based_measurements.lgt</span></code> — A compact non-negative continuous
+dataset with 5 examples and 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">f1</span></code> through
+<code class="docutils literal notranslate"><span class="pre">f4</span></code>) built from two latent additive parts. It is intended for
+testing parts-based reducers such as <code class="docutils literal notranslate"><span class="pre">nmf</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_latent_measurements.lgt</span></code> — A compact target-valued
+continuous dataset with 6 examples, 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">f1</span></code>
+through <code class="docutils literal notranslate"><span class="pre">f4</span></code>), and a numeric target attribute (<code class="docutils literal notranslate"><span class="pre">score</span></code>) influenced
+by two latent directions. It is intended for testing target-supervised
+reducers such as <code class="docutils literal notranslate"><span class="pre">pls_projection</span></code>.</p></li>
 <li><p>Target-supervised smoke coverage is currently provided by the
 <code class="docutils literal notranslate"><span class="pre">target_measurements</span></code> object in the library smoke tests, which
 exercises the

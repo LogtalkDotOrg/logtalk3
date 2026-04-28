@@ -64,8 +64,9 @@ multiple areas):
     ``gaussian_mixture``, ``hdbscan``, ``hierarchical_clustering``,
     ``kcenters``, ``kmeans``, ``kmedians``, ``kmedoids``, ``kmodes``,
     ``kprototypes``, and ``optics``.
-  - Dimension reduction: ``dimension_reduction_protocols``,
-    ``lda_projection``, ``pca``, and ``random_projection``.
+  - Dimension reduction: ``dimension_reduction_protocols``, ``ica``,
+    ``lda_projection``, ``nmf``, ``pca``, ``pls_projection``, and
+    ``random_projection``.
   - Pattern mining: ``pattern_mining_protocols``,
     ``frequent_pattern_mining_protocols``,
     ``sequential_pattern_mining_protocols``, ``apriori``, ``clo_span``,

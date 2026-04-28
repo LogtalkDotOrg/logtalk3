@@ -102,6 +102,7 @@ logtalk_library_path(hodge_rank, library('hodge_rank/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).
 logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
+logtalk_library_path(ica, library('ica/')).
 logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(isolation_forest, library('isolation_forest/')).
@@ -142,12 +143,14 @@ logtalk_library_path(naive_bayes, library('naive_bayes/')).
 logtalk_library_path(nanoid, library('nanoid/')).
 logtalk_library_path(nearest_centroid, library('nearest_centroid/')).
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
+logtalk_library_path(nmf, library('nmf/')).
 logtalk_library_path(optics, library('optics/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
 logtalk_library_path(pattern_mining_protocols, library('pattern_mining_protocols/')).
 logtalk_library_path(pca, library('pca/')).
+logtalk_library_path(pls_projection, library('pls_projection/')).
 logtalk_library_path(permutations, library('permutations/')).
 logtalk_library_path(plackett_luce, library('plackett_luce/')).
 logtalk_library_path(plackett_luce_last, library('plackett_luce_last/')).

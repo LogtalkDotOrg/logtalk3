@@ -66,7 +66,7 @@ Options
 
 The `learn/3` predicate accepts the following options:
 
-- `n_components/1`: Number of principal components to extract. The default is `2`.
+- `n_components/1`: Number of principal components to extract. Requests that exceed the number of features raise `domain_error(component_count, Requested-Maximum)`. The default is `2`.
 - `feature_scaling/1`: Whether to standardize continuous attributes before extracting components. Options: `true` (default) or `false`.
 - `maximum_iterations/1`: Maximum number of power-iteration steps used when estimating each principal direction. The default is `1000`.
 - `tolerance/1`: Positive convergence tolerance used both for power-iteration stopping and for deciding when deflated eigenvalues are negligible. The default is `1.0e-8`.

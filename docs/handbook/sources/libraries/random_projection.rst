@@ -54,7 +54,9 @@ Options
 The ``learn/3`` predicate accepts the following options:
 
 - ``n_components/1``: Number of random projection components to sample.
-  The default is ``2``.
+  Requests that exceed the number of features raise
+  ``domain_error(component_count, Requested-Maximum)``. The default is
+  ``2``.
 - ``feature_scaling/1``: Whether to standardize continuous attributes
   before projection. Options: ``true`` (default) or ``false``.
 - ``random_seed/1``: Positive integer used to seed the portable

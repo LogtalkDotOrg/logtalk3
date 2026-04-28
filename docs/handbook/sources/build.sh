@@ -148,6 +148,7 @@ sed '1,19d' ../../../library/hodge_rank/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/hook_flows/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_flows.rst
 sed '1,19d' ../../../library/hook_objects/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/html.rst
+sed '1,19d' ../../../library/ica/NOTES.md | pandoc -f gfm -t rst -o libraries/ica.rst
 sed '1,19d' ../../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.rst
 sed '1,19d' ../../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
 sed '1,19d' ../../../library/isolation_forest/NOTES.md | pandoc -f gfm -t rst -o libraries/isolation_forest.rst
@@ -188,6 +189,7 @@ sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/naive_bayes/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes.rst
 sed '1,19d' ../../../library/nearest_centroid/NOTES.md | pandoc -f gfm -t rst -o libraries/nearest_centroid.rst
 sed '1,19d' ../../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
+sed '1,19d' ../../../library/nmf/NOTES.md | pandoc -f gfm -t rst -o libraries/nmf.rst
 sed '1,19d' ../../../library/optics/NOTES.md | pandoc -f gfm -t rst -o libraries/optics.rst
 sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
 sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst
@@ -197,6 +199,7 @@ sed '1,19d' ../../../library/pca/NOTES.md | pandoc -f gfm -t rst -o libraries/pc
 sed '1,19d' ../../../library/permutations/NOTES.md | pandoc -f gfm -t rst -o libraries/permutations.rst
 sed '1,19d' ../../../library/plackett_luce/NOTES.md | pandoc -f gfm -t rst -o libraries/plackett_luce.rst
 sed '1,19d' ../../../library/plackett_luce_last/NOTES.md | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
+sed '1,19d' ../../../library/pls_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/pls_projection.rst
 sed '1,19d' ../../../library/prefix_span/NOTES.md | pandoc -f gfm -t rst -o libraries/prefix_span.rst
 sed '1,19d' ../../../library/process/NOTES.md | pandoc -f gfm -t rst -o libraries/process.rst
 sed '1,19d' ../../../library/protobuf/NOTES.md | pandoc -f gfm -t rst -o libraries/protobuf.rst

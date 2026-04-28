@@ -80,7 +80,8 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 		`random_forest_regression`, and `regression_tree`.
 	- Ranking:
 		`ranking_protocols`, `borda`, `bradley_terry`, `colley`, `copeland`,
-	    `elo`, `glicko2`, `glicko2_periodic`, `hodge_rank`, `kemeny_young`, `massey`, `plackett_luce`, `plackett_luce_last`, `rank_centrality`,
+	    `elo`, `glicko2`, `glicko2_periodic`, `hodge_rank`, `kemeny_young`,
+        `massey`, `plackett_luce`, `plackett_luce_last`, `rank_centrality`,
         `ranked_pairs`, `regularized_bradley_terry`, `schulze`, and
         `thurstone_mosteller`.
 	- Clustering:
@@ -89,8 +90,8 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 		`kcenters`, `kmeans`, `kmedians`, `kmedoids`, `kmodes`,
 		`kprototypes`, and `optics`.
 	- Dimension reduction:
-		`dimension_reduction_protocols`, `lda_projection`, `pca`, and
-		`random_projection`.
+		`dimension_reduction_protocols`, `ica`, `lda_projection`, `nmf`,
+		`pca`, `pls_projection`, and `random_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
 		`sequential_pattern_mining_protocols`, `apriori`, `clo_span`,

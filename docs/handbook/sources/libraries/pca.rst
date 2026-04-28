@@ -52,8 +52,10 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- ``n_components/1``: Number of principal components to extract. The
-  default is ``2``.
+- ``n_components/1``: Number of principal components to extract.
+  Requests that exceed the number of features raise
+  ``domain_error(component_count, Requested-Maximum)``. The default is
+  ``2``.
 - ``feature_scaling/1``: Whether to standardize continuous attributes
   before extracting components. Options: ``true`` (default) or
   ``false``.

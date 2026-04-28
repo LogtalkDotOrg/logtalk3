@@ -948,6 +948,16 @@ To load an entity, always load the library that includes it using the goal ``log
    html5 <html5_0>
    xhtml11 <xhtml11_0>
 
+``library/ica/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ica <ica_0>
+
 ``library/ids/``
 ----------------
 
@@ -1389,6 +1399,16 @@ To load an entity, always load the library that includes it using the goal ``log
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nrbtree <nrbtree_0>
 
+``library/nmf/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   nmf <nmf_0>
+
 ``library/optics/``
 -------------------
 
@@ -1485,6 +1505,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    plackett_luce_last <plackett_luce_last_0>
+
+``library/pls_projection/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pls_projection <pls_projection_0>
 
 ``library/prefix_span/``
 ------------------------

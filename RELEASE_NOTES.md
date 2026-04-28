@@ -146,11 +146,20 @@ and random feature subsets.
 datasets for use in the implementation of machine learning dimension
 reduction algorithms.
 
+* ADDED: New `ica` library implementing Independent Component Analysis
+reducer for continuous datasets.
+
 * ADDED: New `lda_projection` library implementing Linear Discriminant
 Analysis projection for labeled continuous datasets.
 
+* ADDED: New `nmf` library implementing Non-negative Matrix Factorization
+dimension reduction for non-negative continuous datasets.
+
 * ADDED: New `pca` library implementing Principal Component Analysis
 dimension reduction for continuous datasets.
+
+* ADDED: New `pls_projection` library implementing Partial Least Squares
+projection for target-valued continuous datasets.
 
 * ADDED: New `random_projection` library implementing seeded random
 projection for continuous datasets.

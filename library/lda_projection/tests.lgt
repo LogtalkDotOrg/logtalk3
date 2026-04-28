@@ -91,6 +91,10 @@
 		comment is 'Unit tests for the "lda_projection" library.'
 	]).
 
+	:- uses(lgtunit, [
+		assertion/1
+	]).
+
 	:- uses(list, [
 		length/2, memberchk/2
 	]).
@@ -106,41 +110,68 @@
 	test(lda_projection_learn_2_structure, deterministic(functor(DimensionReducer, lda_projection_reducer, 4))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer).
 
-	test(lda_projection_learn_3_custom_options, deterministic((length(Components, 2), ClassValues == [alpha, beta, gamma], memberchk(options(Options), Diagnostics), memberchk(n_components(4), Options), memberchk(feature_scaling(false), Options), memberchk(regularization(1.0e-5), Options), memberchk(model(lda_projection), Diagnostics)))) :-
-		lda_projection::learn(labeled_measurements, lda_projection_reducer(_Encoders, Components, ClassValues, Diagnostics), [n_components(4), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
+	test(lda_projection_learn_3_custom_options, deterministic) :-
+		lda_projection::learn(labeled_measurements, lda_projection_reducer(_Encoders, Components, ClassValues, Diagnostics), [n_components(2), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]),
+		assertion(ground(Components)),
+		assertion(length(Components, 2)),
+		assertion(ClassValues == [alpha, beta, gamma]),
+		memberchk(options(Options), Diagnostics),
+		assertion(ground(Options)),
+		assertion(memberchk(n_components(2), Options)),
+		assertion(memberchk(feature_scaling(false), Options)),
+		assertion(memberchk(maximum_iterations(250), Options)),
+		assertion(memberchk(tolerance(1.0e-7), Options)),
+		assertion(memberchk(regularization(1.0e-5), Options)),
+		assertion(memberchk(model(lda_projection), Diagnostics)).
+
+	test(lda_projection_learn_2_component_count_exceeds_shape, error(domain_error(component_count, 4-2))) :-
+		lda_projection::learn(labeled_measurements, _DimensionReducer, [n_components(4), feature_scaling(false), maximum_iterations(250), tolerance(1.0e-7), regularization(1.0e-5)]).
 
 	test(lda_projection_check_dimension_reducer_1, deterministic) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
 		lda_projection::check_dimension_reducer(DimensionReducer).
 
-	test(lda_projection_diagnostics_2, deterministic((memberchk(model(lda_projection), Diagnostics), memberchk(class_values([alpha, beta, gamma]), Diagnostics), memberchk(component_count(1), Diagnostics)))) :-
+	test(lda_projection_diagnostics_2, deterministic) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
-		lda_projection::diagnostics(DimensionReducer, Diagnostics).
+		lda_projection::diagnostics(DimensionReducer, Diagnostics),
+		assertion(memberchk(model(lda_projection), Diagnostics)),
+		assertion(memberchk(class_values([alpha, beta, gamma]), Diagnostics)),
+		assertion(memberchk(component_count(1), Diagnostics)).
 
-	test(lda_projection_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
+	test(lda_projection_transform_3_component_names, deterministic) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer),
-		lda_projection::transform(DimensionReducer, [length-5.1, width-3.5, height-1.4, weight-0.2], ReducedInstance).
+		lda_projection::transform(DimensionReducer, [length-5.1, width-3.5, height-1.4, weight-0.2], ReducedInstance),
+		assertion(length(ReducedInstance, 2)),
+		assertion(memberchk(component_1-_, ReducedInstance)),
+		assertion(memberchk(component_2-_, ReducedInstance)).
 
 	test(lda_projection_transform_3_class_separation, deterministic(AlphaScore =\= GammaScore)) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer),
 		lda_projection::transform(DimensionReducer, [length-5.1, width-3.5, height-1.4, weight-0.2], [component_1-AlphaScore| _]),
 		lda_projection::transform(DimensionReducer, [length-6.2, width-3.4, height-5.4, weight-2.3], [component_1-GammaScore| _]).
 
-	test(lda_projection_learn_2_anti_diagonal_singletons_regression, deterministic((Score1 =\= 0.0, Score2 =\= 0.0, Score1 * Score2 < 0.0))) :-
+	test(lda_projection_learn_2_anti_diagonal_singletons_regression, deterministic) :-
 		lda_projection::learn(anti_diagonal_singletons, DimensionReducer, [n_components(1), feature_scaling(false), regularization(1.0e-6)]),
 		lda_projection::transform(DimensionReducer, [x-(-1.0), y-1.0], [component_1-Score1]),
-		lda_projection::transform(DimensionReducer, [x-1.0, y-(-1.0)], [component_1-Score2]).
+		lda_projection::transform(DimensionReducer, [x-1.0, y-(-1.0)], [component_1-Score2]),
+		assertion(Score1 =\= 0.0),
+		assertion(Score2 =\= 0.0),
+		assertion(Score1 * Score2 < 0.0).
 
 	test(lda_projection_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
 		lda_projection::export_to_clauses(labeled_measurements, DimensionReducer, reduced, [Clause]).
 
-	test(lda_projection_export_to_file_4, deterministic((Reducer = lda_projection_reducer(_Encoders, Components, ClassValues, _Diagnostics), length(Components, 1), ClassValues == [alpha, beta, gamma]))) :-
+	test(lda_projection_export_to_file_4, deterministic) :-
 		^^file_path('test_output.pl', File),
 		lda_projection::learn(labeled_measurements, DimensionReducer, [n_components(1)]),
 		lda_projection::export_to_file(labeled_measurements, DimensionReducer, reducer, File),
 		logtalk_load(File),
-		{reducer(Reducer)}.
+		{reducer(Reducer)},
+		Reducer = lda_projection_reducer(_Encoders, Components, ClassValues, _Diagnostics),
+		assertion(ground(Components)),
+		assertion(length(Components, 1)),
+		assertion(ClassValues == [alpha, beta, gamma]).
 
 	test(lda_projection_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
 		^^file_path('test_output.pl', File),

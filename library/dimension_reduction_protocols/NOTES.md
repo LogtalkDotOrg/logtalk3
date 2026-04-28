@@ -39,10 +39,10 @@ suite.
 
 Concrete dimension reduction algorithms are intentionally out of scope
 for this package. The goal is to provide a portable foundation for
-libraries such as `pca`, `truncated_svd`, `random_projection`, and
-`lda_projection`, including shared reducer helpers for common tasks such
-as feature encoding, projection, reducer validation, diagnostics,
-export, and pretty-printing.
+libraries such as `pca`, `truncated_svd`, `random_projection`, `nmf`,
+`lda_projection`, and `pls_projection`, including shared reducer helpers
+for common tasks such as feature encoding, projection, reducer validation,
+diagnostics, export, and pretty-printing.
 
 Exported reducers are serialized protocol-wide as single-argument
 predicates such as `reducer(Reducer)`, allowing the saved reducer term to
@@ -84,8 +84,13 @@ normalization before projection:
 - `feature_scaling(false)` only centers each continuous attribute using its
   training-set mean.
 
-The current `pca`, `random_projection`, and `lda_projection` libraries
-all define `feature_scaling(true)` as their default.
+The current `pca`, `random_projection`, `lda_projection`, and
+`pls_projection` libraries all define `feature_scaling(true)` as their
+default.
+
+Reducers can also specialize preprocessing behavior. For example, the
+`nmf` library only supports `center(false)` because the learned feature
+representation must remain non-negative.
 
 
 Testing
@@ -119,6 +124,17 @@ Several sample datasets are included in the `test_datasets` directory:
   examples, 4 continuous attributes (`length`, `width`, `height`,
   `weight`), and 3 class labels (`alpha`, `beta`, `gamma`). It is
   intended for testing supervised reducers such as `lda_projection`.
+
+- `parts_based_measurements.lgt` — A compact non-negative continuous
+  dataset with 5 examples and 4 continuous attributes (`f1` through
+  `f4`) built from two latent additive parts. It is intended for testing
+  parts-based reducers such as `nmf`.
+
+- `target_latent_measurements.lgt` — A compact target-valued continuous
+  dataset with 6 examples, 4 continuous attributes (`f1` through `f4`),
+  and a numeric target attribute (`score`) influenced by two latent
+  directions. It is intended for testing target-supervised reducers such
+  as `pls_projection`.
 
 - Target-supervised smoke coverage is currently provided by the
   `target_measurements` object in the library smoke tests, which exercises

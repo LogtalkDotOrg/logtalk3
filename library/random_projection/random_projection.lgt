@@ -36,13 +36,6 @@
 		see_also is [lda_projection, pca]
 	]).
 
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a random projection reducer from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'DimensionReducer', 'Options']
-	]).
-
 	:- uses(fast_random(xoshiro128pp), [
 		get_seed/1 as get_random_seed/1, set_seed/1 as set_random_seed/1, random/1 as random_float/1,
 		randomize/1 as randomize_seed/1
@@ -75,7 +68,7 @@
 		^^build_encoders(AttributeNames, Examples, Options, Encoders),
 		length(AttributeNames, FeatureCount),
 		^^option(n_components(RequestedComponents), Options),
-		ComponentCount is min(RequestedComponents, FeatureCount),
+		^^check_component_count(RequestedComponents, FeatureCount, ComponentCount),
 		generate_components(ComponentCount, FeatureCount, Options, Components),
 		build_diagnostics(AttributeNames, Components, Options, Diagnostics),
 		DimensionReducer = random_projection_reducer(Encoders, Components, Diagnostics),
@@ -119,28 +112,12 @@
 		generate_component(NextFeatureCount, Scale, Component).
 
 	build_diagnostics(AttributeNames, Components, Options, Diagnostics) :-
-		length(AttributeNames, FeatureCount),
-		length(Components, ComponentCount),
-		Diagnostics = [
-			model(random_projection),
-			options(Options),
-			attribute_names(AttributeNames),
-			feature_count(FeatureCount),
-			component_count(ComponentCount)
-		].
-
-	dimension_reducer_data(DimensionReducer, Encoders, Components) :-
-		DimensionReducer =.. [_Functor, Encoders, Components| _].
-
-	dimension_reducer_diagnostics_data(random_projection_reducer(_Encoders, _Components, Diagnostics), Diagnostics).
+		^^base_dimension_reducer_diagnostics(random_projection, AttributeNames, Components, Options, [], Diagnostics).
 
 	print_dimension_reducer_properties(random_projection_reducer(Encoders, Components, Diagnostics)) :-
 		format('Random Projection Dimension Reducer~n', []),
 		format('==================================~n~n', []),
-		format('Diagnostics: ~w~n', [Diagnostics]),
-		format('Encoders: ~w~n', [Encoders]),
-		length(Components, ComponentCount),
-		format('Components: ~w~n', [ComponentCount]).
+		^^print_dimension_reducer_details(Diagnostics, Encoders, Components).
 
 	default_option(n_components(2)).
 	default_option(feature_scaling(true)).

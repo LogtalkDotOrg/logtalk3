@@ -51,13 +51,32 @@ Public predicates
 Protected predicates
 --------------------
 
+.. index:: check_component_count/3
+.. _dimension_reducer_common/0::check_component_count/3:
+
+``check_component_count/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a requested component count does not exceed the supported maximum and returns the accepted count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_component_count(RequestedComponentCount,MaxComponentCount,ComponentCount)``
+| **Mode and number of proofs:**
+|    ``check_component_count(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
 .. index:: dimension_reducer_data/3
 .. _dimension_reducer_common/0::dimension_reducer_data/3:
 
 ``dimension_reducer_data/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hook predicate that importing dimension reducer implementations must define in order to expose the learned encoders and projection components.
+Default hook predicate for exposing the learned encoders and projection components from a reducer term. Importing implementations may override it when using a non-standard reducer representation.
 
 | **Compilation flags:**
 |    ``static``
@@ -76,7 +95,7 @@ Hook predicate that importing dimension reducer implementations must define in o
 ``dimension_reducer_diagnostics_data/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hook predicate that importing dimension reducer implementations must define in order to expose diagnostics metadata.
+Default hook predicate for exposing diagnostics metadata from a reducer term. Importing implementations may override it when using a non-standard reducer representation.
 
 | **Compilation flags:**
 |    ``static``
@@ -260,6 +279,595 @@ Builds continuous feature encoders by computing per-attribute centering and opti
 
 ------------
 
+.. index:: base_dimension_reducer_diagnostics/6
+.. _dimension_reducer_common/0::base_dimension_reducer_diagnostics/6:
+
+``base_dimension_reducer_diagnostics/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds common diagnostics metadata terms for a learned reducer and appends reducer-specific diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base_dimension_reducer_diagnostics(Model,AttributeNames,Components,Options,ExtraDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``base_dimension_reducer_diagnostics(+atom,+list(atom),+list,+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: preprocessing_diagnostics/3
+.. _dimension_reducer_common/0::preprocessing_diagnostics/3:
+
+``preprocessing_diagnostics/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds shared preprocessing diagnostics metadata from an explicit centering flag and the effective training options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preprocessing_diagnostics(Center,Options,Preprocessing)``
+| **Mode and number of proofs:**
+|    ``preprocessing_diagnostics(+boolean,+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: iterative_dimension_reducer_diagnostics/11
+.. _dimension_reducer_common/0::iterative_dimension_reducer_diagnostics/11:
+
+``iterative_dimension_reducer_diagnostics/11``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds diagnostics metadata for reducers that report sample counts, iterative convergence terms, and optional leading or trailing reducer-specific diagnostics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``iterative_dimension_reducer_diagnostics(Model,AttributeNames,Components,SampleCount,Options,LeadingDiagnostics,Convergence,Iterations,FinalDelta,TrailingDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``iterative_dimension_reducer_diagnostics(+atom,+list(atom),+list,+integer,+list(compound),+list(compound),+term,+term,+term,+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: component_iteration_diagnostics/4
+.. _dimension_reducer_common/0::component_iteration_diagnostics/4:
+
+``component_iteration_diagnostics/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts per-component convergence, iteration, and final-delta lists from component diagnostics records.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``component_iteration_diagnostics(ComponentDiagnostics,Convergences,IterationCounts,FinalDeltas)``
+| **Mode and number of proofs:**
+|    ``component_iteration_diagnostics(+list(compound),-list(atom),-list(integer),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: zero_vector/2
+.. _dimension_reducer_common/0::zero_vector/2:
+
+``zero_vector/2``
+^^^^^^^^^^^^^^^^^
+
+Constructs a numeric zero vector with the requested length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_vector(Count,Zeroes)``
+| **Mode and number of proofs:**
+|    ``zero_vector(+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: zero_vector_like/2
+.. _dimension_reducer_common/0::zero_vector_like/2:
+
+``zero_vector_like/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a zero vector matching the length of the first vector in a list of vectors, or returns the empty list when the input is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_vector_like(Vectors,ZeroVector)``
+| **Mode and number of proofs:**
+|    ``zero_vector_like(+list(list(number)),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: scale_vector/3
+.. _dimension_reducer_common/0::scale_vector/3:
+
+``scale_vector/3``
+^^^^^^^^^^^^^^^^^^
+
+Scales each element of a numeric vector by the given factor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_vector(Vector,Scale,ScaledVector)``
+| **Mode and number of proofs:**
+|    ``scale_vector(+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: add_vectors/3
+.. _dimension_reducer_common/0::add_vectors/3:
+
+``add_vectors/3``
+^^^^^^^^^^^^^^^^^
+
+Adds two numeric vectors element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_vectors(Vector1,Vector2,Vector)``
+| **Mode and number of proofs:**
+|    ``add_vectors(+list(number),+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: subtract_vectors/3
+.. _dimension_reducer_common/0::subtract_vectors/3:
+
+``subtract_vectors/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Subtracts the second numeric vector from the first element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subtract_vectors(Vector1,Vector2,Vector)``
+| **Mode and number of proofs:**
+|    ``subtract_vectors(+list(number),+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: initial_vector/2
+.. _dimension_reducer_common/0::initial_vector/2:
+
+``initial_vector/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs the canonical all-ones initial vector with the requested length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_vector(Size,Vector)``
+| **Mode and number of proofs:**
+|    ``initial_vector(+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: basis_vector/3
+.. _dimension_reducer_common/0::basis_vector/3:
+
+``basis_vector/3``
+^^^^^^^^^^^^^^^^^^
+
+Constructs a canonical basis vector for the requested size and one-based index.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``basis_vector(Size,Index,Vector)``
+| **Mode and number of proofs:**
+|    ``basis_vector(+integer,+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: initial_vectors/2
+.. _dimension_reducer_common/0::initial_vectors/2:
+
+``initial_vectors/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs the default all-ones initial vector followed by canonical basis vectors for the requested size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_vectors(Size,Vectors)``
+| **Mode and number of proofs:**
+|    ``initial_vectors(+integer,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: make_vector/3
+.. _dimension_reducer_common/0::make_vector/3:
+
+``make_vector/3``
+^^^^^^^^^^^^^^^^^
+
+Constructs a numeric vector with the requested length, filled with the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``make_vector(Count,Value,Vector)``
+| **Mode and number of proofs:**
+|    ``make_vector(+integer,+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: basis_initial_vectors/3
+.. _dimension_reducer_common/0::basis_initial_vectors/3:
+
+``basis_initial_vectors/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs canonical basis vectors from the given one-based index up to the requested size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``basis_initial_vectors(Index,Size,Vectors)``
+| **Mode and number of proofs:**
+|    ``basis_initial_vectors(+integer,+integer,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: make_matrix/4
+.. _dimension_reducer_common/0::make_matrix/4:
+
+``make_matrix/4``
+^^^^^^^^^^^^^^^^^
+
+Constructs a numeric matrix with the requested row and column counts, filled with the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``make_matrix(Rows,Columns,Value,Matrix)``
+| **Mode and number of proofs:**
+|    ``make_matrix(+integer,+integer,+number,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: matrix_vector_product/3
+.. _dimension_reducer_common/0::matrix_vector_product/3:
+
+``matrix_vector_product/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the matrix-vector product for a numeric matrix and vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_vector_product(Matrix,Vector,Product)``
+| **Mode and number of proofs:**
+|    ``matrix_vector_product(+list(list(number)),+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: vector_norm/2
+.. _dimension_reducer_common/0::vector_norm/2:
+
+``vector_norm/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the Euclidean norm of a numeric vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vector_norm(Vector,Norm)``
+| **Mode and number of proofs:**
+|    ``vector_norm(+list(number),-float)`` - ``one``
+
+
+------------
+
+.. index:: normalize_vector/2
+.. _dimension_reducer_common/0::normalize_vector/2:
+
+``normalize_vector/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a numeric vector to unit length when its norm is above the shared numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_vector(Vector,NormalizedVector)``
+| **Mode and number of proofs:**
+|    ``normalize_vector(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: difference_norm/3
+.. _dimension_reducer_common/0::difference_norm/3:
+
+``difference_norm/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Euclidean norm of the difference between two numeric vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``difference_norm(Vector1,Vector2,Norm)``
+| **Mode and number of proofs:**
+|    ``difference_norm(+list(number),+list(number),-float)`` - ``one``
+
+
+------------
+
+.. index:: stabilize_vector_sign/2
+.. _dimension_reducer_common/0::stabilize_vector_sign/2:
+
+``stabilize_vector_sign/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a vector sign convention by flipping vectors whose first significant component is negative.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stabilize_vector_sign(Vector,StableVector)``
+| **Mode and number of proofs:**
+|    ``stabilize_vector_sign(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: first_significant_component/2
+.. _dimension_reducer_common/0::first_significant_component/2:
+
+``first_significant_component/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the first component whose absolute value exceeds the shared numerical tolerance, defaulting to zero when no such component exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``first_significant_component(Vector,First)``
+| **Mode and number of proofs:**
+|    ``first_significant_component(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: zero_matrix/2
+.. _dimension_reducer_common/0::zero_matrix/2:
+
+``zero_matrix/2``
+^^^^^^^^^^^^^^^^^
+
+Constructs a square numeric zero matrix with the requested size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_matrix(Size,Matrix)``
+| **Mode and number of proofs:**
+|    ``zero_matrix(+integer,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: zero_matrix/3
+.. _dimension_reducer_common/0::zero_matrix/3:
+
+``zero_matrix/3``
+^^^^^^^^^^^^^^^^^
+
+Constructs a numeric zero matrix with the requested row and column counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_matrix(Rows,Columns,Matrix)``
+| **Mode and number of proofs:**
+|    ``zero_matrix(+integer,+integer,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: outer_product/3
+.. _dimension_reducer_common/0::outer_product/3:
+
+``outer_product/3``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the outer product of two numeric vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``outer_product(Vector1,Vector2,Matrix)``
+| **Mode and number of proofs:**
+|    ``outer_product(+list(number),+list(number),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: add_matrices/3
+.. _dimension_reducer_common/0::add_matrices/3:
+
+``add_matrices/3``
+^^^^^^^^^^^^^^^^^^
+
+Adds two numeric matrices element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_matrices(Matrix1,Matrix2,Matrix)``
+| **Mode and number of proofs:**
+|    ``add_matrices(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: subtract_matrices/3
+.. _dimension_reducer_common/0::subtract_matrices/3:
+
+``subtract_matrices/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Subtracts the second numeric matrix from the first element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subtract_matrices(Matrix1,Matrix2,Matrix)``
+| **Mode and number of proofs:**
+|    ``subtract_matrices(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: scale_matrix/3
+.. _dimension_reducer_common/0::scale_matrix/3:
+
+``scale_matrix/3``
+^^^^^^^^^^^^^^^^^^
+
+Scales each element of a numeric matrix by the given factor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_matrix(Matrix,Scale,ScaledMatrix)``
+| **Mode and number of proofs:**
+|    ``scale_matrix(+list(list(number)),+number,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: transpose_matrix/2
+.. _dimension_reducer_common/0::transpose_matrix/2:
+
+``transpose_matrix/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Transposes a numeric matrix represented as a list of row lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transpose_matrix(Matrix,Transpose)``
+| **Mode and number of proofs:**
+|    ``transpose_matrix(+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: matrix_value/4
+.. _dimension_reducer_common/0::matrix_value/4:
+
+``matrix_value/4``
+^^^^^^^^^^^^^^^^^^
+
+Looks up a numeric matrix element using one-based row and column indices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_value(Matrix,RowIndex,ColumnIndex,Value)``
+| **Mode and number of proofs:**
+|    ``matrix_value(+list(list(number)),+integer,+integer,-number)`` - ``one``
+
+
+------------
+
+.. index:: mean_vector/2
+.. _dimension_reducer_common/0::mean_vector/2:
+
+``mean_vector/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the column-wise arithmetic mean vector for a numeric row matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mean_vector(Rows,Mean)``
+| **Mode and number of proofs:**
+|    ``mean_vector(+list(list(number)),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: extract_components/5
+.. _dimension_reducer_common/0::extract_components/5:
+
+``extract_components/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts leading eigen-components from a numeric matrix using repeated power iteration and deflation until the requested count or the configured tolerance is reached.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extract_components(Matrix,Requested,Options,Components,Eigenvalues)``
+| **Mode and number of proofs:**
+|    ``extract_components(+list(list(number)),+integer,+list(compound),-list(list(number)),-list(number))`` - ``one``
+
+
+------------
+
 .. index:: known_attribute_values/3
 .. _dimension_reducer_common/0::known_attribute_values/3:
 
@@ -275,6 +883,25 @@ Collects the known numeric values for a given attribute across the training exam
 |    ``known_attribute_values(Examples,Attribute,Values)``
 | **Mode and number of proofs:**
 |    ``known_attribute_values(+list,+atom,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: examples_to_rows/3
+.. _dimension_reducer_common/0::examples_to_rows/3:
+
+``examples_to_rows/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a list of training examples into numeric feature rows using the importing reducer example hook and learned encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``examples_to_rows(Examples,Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``examples_to_rows(+list,+list(compound),-list(list(number)))`` - ``one``
 
 
 ------------
@@ -298,6 +925,25 @@ Encodes an instance using the learned continuous attribute encoders.
 
 ------------
 
+.. index:: encoder_attribute_names/2
+.. _dimension_reducer_common/0::encoder_attribute_names/2:
+
+``encoder_attribute_names/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects encoder attribute names preserving encoder order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encoder_attribute_names(Encoders,AttributeNames)``
+| **Mode and number of proofs:**
+|    ``encoder_attribute_names(+list(compound),-list(atom))`` - ``one``
+
+
+------------
+
 .. index:: project_components/4
 .. _dimension_reducer_common/0::project_components/4:
 
@@ -313,6 +959,25 @@ Projects encoded features onto the learned components and returns `component_N-S
 |    ``project_components(Components,Features,Index,ReducedInstance)``
 | **Mode and number of proofs:**
 |    ``project_components(+list(list(number)),+list(number),+integer,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: covariance_matrix/2
+.. _dimension_reducer_common/0::covariance_matrix/2:
+
+``covariance_matrix/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the sample covariance matrix for a list of centered numeric feature rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``covariance_matrix(Rows,CovarianceMatrix)``
+| **Mode and number of proofs:**
+|    ``covariance_matrix(+list(list(number)),-list(list(number)))`` - ``one``
 
 
 ------------
@@ -370,6 +1035,25 @@ True when diagnostics metadata records the reducer model and effective training 
 |    ``valid_dimension_reducer_metadata(Diagnostics)``
 | **Mode and number of proofs:**
 |    ``valid_dimension_reducer_metadata(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: print_dimension_reducer_details/3
+.. _dimension_reducer_common/0::print_dimension_reducer_details/3:
+
+``print_dimension_reducer_details/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints the common diagnostics, encoders, and component-count lines used by reducer-specific pretty printers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_dimension_reducer_details(Diagnostics,Encoders,Components)``
+| **Mode and number of proofs:**
+|    ``print_dimension_reducer_details(+list(compound),+list(compound),+list)`` - ``one``
 
 
 ------------

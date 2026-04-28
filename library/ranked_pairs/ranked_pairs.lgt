@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-28,
 		comment is 'Ranked Pairs pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by locking direct pairwise victories in descending strength order while avoiding cycles and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Builds the direct pairwise victory graph from aggregated matchups, considers victories in descending direct-victory strength order, and locks each victory unless it would create a directed cycle in the accepted lock graph.',
@@ -53,6 +53,10 @@
 
 	:- uses(list, [
 		length/2, memberchk/2, nth1/3, reverse/2, sort/4
+	]).
+
+	:- uses(numberlist, [
+		sum/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -202,13 +206,8 @@
 
 	locked_scores([], []).
 	locked_scores([Row| Rows], [Score| Scores]) :-
-		row_sum(Row, Score),
+		sum(Row, Score),
 		locked_scores(Rows, Scores).
-
-	row_sum([], 0).
-	row_sum([Value| Values], Sum) :-
-		row_sum(Values, TailSum),
-		Sum is Value + TailSum.
 
 	score_pairs([], [], []).
 	score_pairs([Item| Items], [Score| ScoreValues], [Item-Score| Scores]) :-

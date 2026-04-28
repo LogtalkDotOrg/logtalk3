@@ -98,6 +98,7 @@ directory in the ``NOTES.md`` file.
    hook_flows
    hook_objects
    html
+   ica
    ids
    intervals
    isolation_forest
@@ -138,6 +139,7 @@ directory in the ``NOTES.md`` file.
    naive_bayes
    nearest_centroid
    nested_dictionaries
+   nmf
    optics
    optionals
    options
@@ -147,6 +149,7 @@ directory in the ``NOTES.md`` file.
    permutations
    plackett_luce
    plackett_luce_last
+   pls_projection
    prefix_span
    process
    protobuf

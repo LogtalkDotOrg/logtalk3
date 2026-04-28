@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-28,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		remarks is [
 			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
@@ -140,15 +140,15 @@
 
 	update_strengths(bradley_terry_context(PairWeights, Wins), Strengths0, Strengths, MaximumDifference) :-
 		^^strength_dictionary(Strengths0, StrengthDictionary),
-		update_strength_values(PairWeights, Wins, StrengthDictionary, Strengths0, RawStrengths, TotalRawStrength),
+		update_strength_values(PairWeights, Wins, StrengthDictionary, Strengths0, RawStrengths, 0.0, TotalRawStrength),
 		normalize_strengths(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference).
 
-	update_strength_values([], [], _StrengthDictionary, [], [], 0.0).
-	update_strength_values([Neighbors| PairWeights], [Wins| WinTotals], StrengthDictionary, [CurrentStrength| CurrentStrengths], [RawStrength| RawStrengths], TotalRawStrength) :-
+	update_strength_values([], [], _StrengthDictionary, [], [], TotalRawStrength, TotalRawStrength).
+	update_strength_values([Neighbors| PairWeights], [Wins| WinTotals], StrengthDictionary, [CurrentStrength| CurrentStrengths], [RawStrength| RawStrengths], TotalRawStrength0, TotalRawStrength) :-
 		^^item_denominator(Neighbors, StrengthDictionary, CurrentStrength, 0.0, Denominator),
 		RawStrength is Wins / Denominator,
-		update_strength_values(PairWeights, WinTotals, StrengthDictionary, CurrentStrengths, RawStrengths, RemainingRawStrength),
-		TotalRawStrength is RawStrength + RemainingRawStrength.
+		TotalRawStrength1 is TotalRawStrength0 + RawStrength,
+		update_strength_values(PairWeights, WinTotals, StrengthDictionary, CurrentStrengths, RawStrengths, TotalRawStrength1, TotalRawStrength).
 
 	normalize_strengths(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference) :-
 		(   TotalRawStrength =< 1.0e-12 ->

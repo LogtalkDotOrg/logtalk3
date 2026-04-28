@@ -75,7 +75,7 @@
 		findall(Id-AttributeValues, Dataset::example(Id, AttributeValues), Examples),
 		check_examples(Dataset, AttributeNames, Examples),
 		build_truncated_svd_encoders(AttributeNames, Examples, Options, Encoders),
-		examples_to_rows(Examples, Encoders, Rows),
+		^^examples_to_rows(Examples, Encoders, Rows),
 		length(AttributeNames, FeatureCount),
 		length(Examples, ExampleCount),
 		^^option(n_components(RequestedComponents), Options),
@@ -124,28 +124,6 @@
 		;   Scale = 1.0
 		).
 
-	examples_to_rows([], _Encoders, []).
-	examples_to_rows([_-AttributeValues| Examples], Encoders, [Features| Rows]) :-
-		^^encode_instance(Encoders, AttributeValues, Features),
-		examples_to_rows(Examples, Encoders, Rows).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
-	scale_vector([], _Scale, []).
-	scale_vector([Value| Values], Scale, [Scaled| ScaledValues]) :-
-		Scaled is Value * Scale,
-		scale_vector(Values, Scale, ScaledValues).
-
-	add_vectors([], [], []).
-	add_vectors([Value1| Values1], [Value2| Values2], [Value| Values]) :-
-		Value is Value1 + Value2,
-		add_vectors(Values1, Values2, Values).
-
 	extract_components(_Rows, 0, _Options, [], [], []) :-
 		!.
 	extract_components(Rows, Requested, Options, Components, SingularValues, ComponentDiagnostics) :-
@@ -171,27 +149,15 @@
 		Rows = [FirstRow| _],
 		length(FirstRow, FeatureCount),
 		length(Rows, ExampleCount),
-		initial_vectors(FeatureCount, InitialVectors),
-		zero_vector(ExampleCount, ZeroLeftSingularVector),
-		zero_vector(FeatureCount, ZeroRightSingularVector),
+		^^initial_vectors(FeatureCount, InitialVectors),
+		^^zero_vector(ExampleCount, ZeroLeftSingularVector),
+		^^zero_vector(FeatureCount, ZeroRightSingularVector),
 		singular_triplet_candidates(Rows, Options, InitialVectors, 0.0, ZeroLeftSingularVector, ZeroRightSingularVector, tolerance, 0, 0.0, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta).
-
-	initial_vectors(Size, [InitialVector| BasisVectors]) :-
-		initial_vector(Size, InitialVector),
-		basis_initial_vectors(1, Size, BasisVectors).
-
-	basis_initial_vectors(Index, Size, []) :-
-		Index > Size,
-		!.
-	basis_initial_vectors(Index, Size, [BasisVector| BasisVectors]) :-
-		basis_vector(Size, Index, BasisVector),
-		NextIndex is Index + 1,
-		basis_initial_vectors(NextIndex, Size, BasisVectors).
 
 	singular_triplet_candidates(_Rows, _Options, [], BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta) :-
 		!.
 	singular_triplet_candidates(Rows, Options, [InitialVector| InitialVectors], BestSingularValue0, BestLeftSingularVector0, BestRightSingularVector0, BestConvergence0, BestIterations0, BestFinalDelta0, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta) :-
-		normalize_vector(InitialVector, NormalizedInitial),
+		^^normalize_vector(InitialVector, NormalizedInitial),
 		iterate_singular_triplet(Rows, Options, 0, NormalizedInitial, CandidateSingularValue, CandidateLeftSingularVector, CandidateRightSingularVector, CandidateConvergence, CandidateIterations, CandidateFinalDelta),
 		(   CandidateSingularValue > BestSingularValue0 ->
 			BestSingularValue1 = CandidateSingularValue,
@@ -209,60 +175,32 @@
 		),
 		singular_triplet_candidates(Rows, Options, InitialVectors, BestSingularValue1, BestLeftSingularVector1, BestRightSingularVector1, BestConvergence1, BestIterations1, BestFinalDelta1, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta).
 
-	initial_vector(0, []) :-
-		!.
-	initial_vector(Size, [1.0| Vector]) :-
-		Size > 0,
-		NextSize is Size - 1,
-		initial_vector(NextSize, Vector).
-
-	basis_vector(Size, Index, Vector) :-
-		basis_vector(1, Size, Index, Vector).
-
-	basis_vector(Current, Size, _Index, []) :-
-		Current > Size,
-		!.
-	basis_vector(Index, Size, Index, [1.0| Vector]) :-
-		!,
-		Next is Index + 1,
-		basis_vector(Next, Size, Index, Vector).
-	basis_vector(Current, Size, Index, [0.0| Vector]) :-
-		Next is Current + 1,
-		basis_vector(Next, Size, Index, Vector).
-
-	normalize_vector(Vector, NormalizedVector) :-
-		vector_norm(Vector, Norm),
-		(   Norm =< 1.0e-12 ->
-			NormalizedVector = Vector
-		;   scale_vector(Vector, 1.0 / Norm, NormalizedVector)
-		).
-
 	iterate_singular_triplet(Rows, Options, Iteration, RightSingularVector0, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta) :-
-		matrix_vector_product(Rows, RightSingularVector0, LeftProduct),
-		vector_norm(LeftProduct, LeftNorm),
+		^^matrix_vector_product(Rows, RightSingularVector0, LeftProduct),
+		^^vector_norm(LeftProduct, LeftNorm),
 		^^option(tolerance(Tolerance), Options),
 		(   LeftNorm =< Tolerance ->
 			length(Rows, ExampleCount),
-			zero_vector(ExampleCount, LeftSingularVector),
+			^^zero_vector(ExampleCount, LeftSingularVector),
 			SingularValue = 0.0,
 			RightSingularVector = RightSingularVector0,
 			Convergence = tolerance,
 			Iterations = Iteration,
 			FinalDelta = 0.0
-		;   scale_vector(LeftProduct, 1.0 / LeftNorm, LeftSingularVector0),
+		;   ^^scale_vector(LeftProduct, 1.0 / LeftNorm, LeftSingularVector0),
 			transpose_matrix_vector_product(Rows, LeftSingularVector0, RightProduct),
-			vector_norm(RightProduct, RightNorm),
+			^^vector_norm(RightProduct, RightNorm),
 			(   RightNorm =< Tolerance ->
 				length(Rows, ExampleCount),
-				zero_vector(ExampleCount, LeftSingularVector),
+				^^zero_vector(ExampleCount, LeftSingularVector),
 				SingularValue = 0.0,
 				RightSingularVector = RightSingularVector0,
 				Convergence = tolerance,
 				Iterations = Iteration,
 				FinalDelta = 0.0
-			;   scale_vector(RightProduct, 1.0 / RightNorm, RightSingularVector1),
-				stabilize_vector_sign(RightSingularVector1, StableRightSingularVector),
-				difference_norm(StableRightSingularVector, RightSingularVector0, Delta),
+			;   ^^scale_vector(RightProduct, 1.0 / RightNorm, RightSingularVector1),
+				^^stabilize_vector_sign(RightSingularVector1, StableRightSingularVector),
+				^^difference_norm(StableRightSingularVector, RightSingularVector0, Delta),
 				^^option(maximum_iterations(MaximumIterations), Options),
 				(   Delta =< Tolerance ->
 					finalize_singular_triplet(Rows, StableRightSingularVector, Tolerance, SingularValue, LeftSingularVector),
@@ -282,65 +220,32 @@
 			)
 		).
 
-	matrix_vector_product([], _Vector, []).
-	matrix_vector_product([Row| Rows], Vector, [Value| Values]) :-
-		dot_product(Row, Vector, Value),
-		matrix_vector_product(Rows, Vector, Values).
-
 	transpose_matrix_vector_product([FirstRow| Rows], LeftSingularVector, RightProduct) :-
 		length(FirstRow, FeatureCount),
-		zero_vector(FeatureCount, ZeroRightProduct),
+		^^zero_vector(FeatureCount, ZeroRightProduct),
 		transpose_matrix_vector_product([FirstRow| Rows], LeftSingularVector, ZeroRightProduct, RightProduct).
 
 	transpose_matrix_vector_product([], [], RightProduct, RightProduct).
 	transpose_matrix_vector_product([Row| Rows], [LeftValue| LeftSingularVector], RightProduct0, RightProduct) :-
-		scale_vector(Row, LeftValue, Contribution),
-		add_vectors(RightProduct0, Contribution, RightProduct1),
+		^^scale_vector(Row, LeftValue, Contribution),
+		^^add_vectors(RightProduct0, Contribution, RightProduct1),
 		transpose_matrix_vector_product(Rows, LeftSingularVector, RightProduct1, RightProduct).
 
-	vector_norm(Vector, Norm) :-
-		dot_product(Vector, Vector, SumSquares),
-		Norm is sqrt(SumSquares).
-
-	difference_norm(Vector1, Vector2, Norm) :-
-		subtract_vectors(Vector1, Vector2, Difference),
-		vector_norm(Difference, Norm).
-
-	subtract_vectors([], [], []).
-	subtract_vectors([Value1| Values1], [Value2| Values2], [Value| Values]) :-
-		Value is Value1 - Value2,
-		subtract_vectors(Values1, Values2, Values).
-
-	stabilize_vector_sign(Vector, StableVector) :-
-		(   first_significant_component(Vector, First),
-			First < 0.0 ->
-			scale_vector(Vector, -1.0, StableVector)
-		;   StableVector = Vector
-		).
-
-	first_significant_component([Value| _Values], Value) :-
-		abs(Value) > 1.0e-12,
-		!.
-	first_significant_component([_Value| Values], First) :-
-		first_significant_component(Values, First).
-	first_significant_component([], 0.0).
-
 	finalize_singular_triplet(Rows, RightSingularVector, Tolerance, SingularValue, LeftSingularVector) :-
-		matrix_vector_product(Rows, RightSingularVector, LeftProduct),
-		vector_norm(LeftProduct, SingularValue),
+		^^matrix_vector_product(Rows, RightSingularVector, LeftProduct),
+		^^vector_norm(LeftProduct, SingularValue),
 		(   SingularValue =< Tolerance ->
 			length(Rows, ExampleCount),
-			zero_vector(ExampleCount, LeftSingularVector)
-		;   scale_vector(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
+			^^zero_vector(ExampleCount, LeftSingularVector)
+		;   ^^scale_vector(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
 		).
 
 	deflate_rows([], _SingularValue, [], _RightSingularVector, []).
 	deflate_rows([Row| Rows], SingularValue, [LeftValue| LeftSingularVector], RightSingularVector, [DeflatedRow| DeflatedRows]) :-
 		Scale is SingularValue * LeftValue,
-		scale_vector(RightSingularVector, Scale, ReconstructionRow),
-		subtract_vectors(Row, ReconstructionRow, DeflatedRow),
+		^^scale_vector(RightSingularVector, Scale, ReconstructionRow),
+		^^subtract_vectors(Row, ReconstructionRow, DeflatedRow),
 		deflate_rows(Rows, SingularValue, LeftSingularVector, RightSingularVector, DeflatedRows).
-
 
 	valid_singular_values(Components, SingularValues) :-
 		valid(list(number), SingularValues),
@@ -360,41 +265,27 @@
 		valid_singular_value_sequence(SingularValues, SingularValue).
 
 	build_diagnostics(AttributeNames, ExampleCount, Components, SingularValues, ComponentDiagnostics, Options, Diagnostics) :-
-		length(AttributeNames, FeatureCount),
-		length(Components, ComponentCount),
-		component_diagnostics(ComponentDiagnostics, Convergences, IterationCounts, FinalDeltas),
+		^^component_iteration_diagnostics(ComponentDiagnostics, Convergences, IterationCounts, FinalDeltas),
 		^^option(center(Center), Options),
-		^^option(feature_scaling(FeatureScaling), Options),
-		Diagnostics = [
-			model(truncated_svd),
-			options(Options),
-			attribute_names(AttributeNames),
-			feature_count(FeatureCount),
-			sample_count(ExampleCount),
-			component_count(ComponentCount),
-			singular_values(SingularValues),
-			convergence(Convergences),
-			iterations(IterationCounts),
-			final_delta(FinalDeltas),
-			preprocessing([center(Center), feature_scaling(FeatureScaling)])
-		].
-
-	component_diagnostics([], [], [], []).
-	component_diagnostics([component_diagnostics(Convergence, Iterations, FinalDelta)| ComponentDiagnostics], [Convergence| Convergences], [Iterations| IterationCounts], [FinalDelta| FinalDeltas]) :-
-		component_diagnostics(ComponentDiagnostics, Convergences, IterationCounts, FinalDeltas).
-
-	dimension_reducer_data(DimensionReducer, Encoders, Components) :-
-		DimensionReducer =.. [_Functor, Encoders, Components| _].
-
-	dimension_reducer_diagnostics_data(truncated_svd_reducer(_Encoders, _Components, _SingularValues, Diagnostics), Diagnostics).
+		^^preprocessing_diagnostics(Center, Options, Preprocessing),
+		^^iterative_dimension_reducer_diagnostics(
+			truncated_svd,
+			AttributeNames,
+			Components,
+			ExampleCount,
+			Options,
+			[singular_values(SingularValues)],
+			Convergences,
+			IterationCounts,
+			FinalDeltas,
+			[preprocessing(Preprocessing)],
+			Diagnostics
+		).
 
 	print_dimension_reducer_properties(truncated_svd_reducer(Encoders, Components, SingularValues, Diagnostics)) :-
 		format('Truncated SVD Dimension Reducer~n', []),
 		format('===============================~n~n', []),
-		format('Diagnostics: ~w~n', [Diagnostics]),
-		format('Encoders: ~w~n', [Encoders]),
-		length(Components, ComponentCount),
-		format('Components: ~w~n', [ComponentCount]),
+		^^print_dimension_reducer_details(Diagnostics, Encoders, Components),
 		format('Singular values: ~w~n', [SingularValues]).
 
 	default_option(n_components(2)).

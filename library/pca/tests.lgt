@@ -78,6 +78,10 @@
 		comment is 'Unit tests for the "pca" library.'
 	]).
 
+	:- uses(lgtunit, [
+		assertion/1
+	]).
+
 	:- uses(list, [
 		length/2, memberchk/2
 	]).
@@ -93,41 +97,69 @@
 	test(pca_learn_2_structure, deterministic(functor(DimensionReducer, pca_reducer, 4))) :-
 		pca::learn(correlated_plane, DimensionReducer).
 
-	test(pca_learn_3_custom_options, deterministic((length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0, memberchk(options(Options), Diagnostics), memberchk(n_components(1), Options), memberchk(feature_scaling(false), Options), memberchk(model(pca), Diagnostics)))) :-
-		pca::learn(correlated_plane, pca_reducer(_Encoders, Components, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false), maximum_iterations(200), tolerance(1.0e-7)]).
+	test(pca_learn_3_custom_options, deterministic) :-
+		pca::learn(correlated_plane, pca_reducer(_Encoders, Components, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false), maximum_iterations(200), tolerance(1.0e-7)]),
+		assertion(ground(Components)),
+		assertion(length(Components, 1)),
+		ExplainedVariances = [Variance],
+		assertion(Variance > 0.0),
+		memberchk(options(Options), Diagnostics),
+		assertion(ground(Options)),
+		assertion(memberchk(n_components(1), Options)),
+		assertion(memberchk(feature_scaling(false), Options)),
+		assertion(memberchk(maximum_iterations(200), Options)),
+		assertion(memberchk(tolerance(1.0e-7), Options)),
+		assertion(memberchk(model(pca), Diagnostics)).
 
 	test(pca_check_dimension_reducer_1, deterministic) :-
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		pca::check_dimension_reducer(DimensionReducer).
 
-	test(pca_diagnostics_2, deterministic((memberchk(model(pca), Diagnostics), memberchk(component_count(1), Diagnostics), memberchk(explained_variances([_]), Diagnostics)))) :-
+	test(pca_diagnostics_2, deterministic) :-
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
-		pca::diagnostics(DimensionReducer, Diagnostics).
+		pca::diagnostics(DimensionReducer, Diagnostics),
+		assertion(memberchk(model(pca), Diagnostics)),
+		assertion(memberchk(component_count(1), Diagnostics)),
+		assertion(memberchk(explained_variances([_]), Diagnostics)).
 
-	test(pca_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
+	test(pca_learn_2_component_count_exceeds_feature_count, error(domain_error(component_count, 4-3))) :-
+		pca::learn(correlated_plane, _DimensionReducer, [n_components(4)]).
+
+	test(pca_transform_3_component_names, deterministic) :-
 		pca::learn(high_dimensional_measurements, DimensionReducer),
-		pca::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance).
+		pca::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance),
+		assertion(length(ReducedInstance, 2)),
+		assertion(memberchk(component_1-_, ReducedInstance)),
+		assertion(memberchk(component_2-_, ReducedInstance)).
 
 	test(pca_transform_3_monotonic_component, deterministic(Score1 < Score2)) :-
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		pca::transform(DimensionReducer, [x-1.0, y-2.0, z-3.0], [component_1-Score1]),
 		pca::transform(DimensionReducer, [x-4.5, y-9.0, z-13.7], [component_1-Score2]).
 
-	test(pca_learn_2_anti_correlated_plane_regression, deterministic((Score1 =\= 0.0, Score2 =\= 0.0, Score1 * Score2 < 0.0))) :-
+	test(pca_learn_2_anti_correlated_plane_regression, deterministic) :-
 		pca::learn(anti_correlated_plane, DimensionReducer, [n_components(1), feature_scaling(false)]),
 		pca::transform(DimensionReducer, [x-1.0, y-(-1.0)], [component_1-Score1]),
-		pca::transform(DimensionReducer, [x-(-1.0), y-1.0], [component_1-Score2]).
+		pca::transform(DimensionReducer, [x-(-1.0), y-1.0], [component_1-Score2]),
+		assertion(Score1 =\= 0.0),
+		assertion(Score2 =\= 0.0),
+		assertion(Score1 * Score2 < 0.0).
 
 	test(pca_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		pca::export_to_clauses(correlated_plane, DimensionReducer, reduced, [Clause]).
 
-	test(pca_export_to_file_4, deterministic((Reducer = pca_reducer(_Encoders, Components, ExplainedVariances, _Diagnostics), length(Components, 1), ExplainedVariances = [Variance], Variance > 0.0))) :-
+	test(pca_export_to_file_4, deterministic) :-
 		^^file_path('test_output.pl', File),
 		pca::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		pca::export_to_file(correlated_plane, DimensionReducer, reducer, File),
 		logtalk_load(File),
-		{reducer(Reducer)}.
+		{reducer(Reducer)},
+		Reducer = pca_reducer(_Encoders, Components, ExplainedVariances, _Diagnostics),
+		assertion(ground(Components)),
+		assertion(length(Components, 1)),
+		ExplainedVariances = [Variance],
+		assertion(Variance > 0.0).
 
 	test(pca_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
 		^^file_path('test_output.pl', File),

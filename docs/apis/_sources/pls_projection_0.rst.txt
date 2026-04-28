@@ -1,0 +1,71 @@
+.. index:: single: pls_projection
+.. _pls_projection/0:
+
+.. rst-class:: right
+
+**object**
+
+``pls_projection``
+==================
+
+Partial Least Squares projection for target-valued continuous datasets using deterministic PLS1 deflation.
+
+| **Availability:** 
+|    ``logtalk_load(pls_projection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-04-28
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Centers the training data, optionally standardizes continuous attributes, centers the numeric target, extracts deterministic PLS1 latent directions using repeated cross-covariance maximization with sequential deflation, and stores the equivalent direct projection rotations for future transforms.
+   - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
+   - Supervision: Requires a dataset implementing ``target_supervised_dimension_reduction_dataset_protocol`` and therefore uses a numeric target during training.
+   - Dimension reducer representation: The learned reducer is represented by default as ``pls_projection_reducer(Encoders, Rotations, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Rotations`` stores the direct PLS projection vectors derived from the learned latent weights and loadings, and ``Diagnostics`` records the learned model metadata and effective options.
+
+| **Inherited public predicates:**
+|     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`lda_projection <lda_projection/0>`, :ref:`pca <pca/0>`
+

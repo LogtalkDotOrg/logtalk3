@@ -15,7 +15,7 @@ Ranked Pairs pairwise preference ranker. Learns one deterministic score per item
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-04-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,7 @@ Ranked Pairs pairwise preference ranker. Learns one deterministic score per item
 | **Uses:**
 |    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
 
 | **Remarks:**
 

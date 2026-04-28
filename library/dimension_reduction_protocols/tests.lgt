@@ -42,13 +42,7 @@
 		^^build_encoders(AttributeNames, Examples, Options, Encoders),
 		length(AttributeNames, FeatureCount),
 		identity_prefix_components(FeatureCount, Components),
-		Diagnostics = [
-			model(sample_dimension_reducer),
-			options(Options),
-			attribute_names(AttributeNames),
-			feature_count(FeatureCount),
-			component_count(2)
-		].
+		^^base_dimension_reducer_diagnostics(sample_dimension_reducer, AttributeNames, Components, Options, [], Diagnostics).
 
 	identity_prefix_components(FeatureCount, Components) :-
 		component_count(FeatureCount, ComponentCount),
@@ -77,10 +71,6 @@
 	basis_vector(Current, FeatureCount, Index, [0.0| Component]) :-
 		Next is Current + 1,
 		basis_vector(Next, FeatureCount, Index, Component).
-
-	dimension_reducer_data(sample_dimension_reducer(Encoders, Components, _Diagnostics), Encoders, Components).
-
-	dimension_reducer_diagnostics_data(sample_dimension_reducer(_Encoders, _Components, Diagnostics), Diagnostics).
 
 	print_dimension_reducer_properties(DimensionReducer) :-
 		writeq(DimensionReducer), nl.
