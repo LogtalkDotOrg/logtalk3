@@ -110,6 +110,7 @@
 		lof(loader),
 		dimension_reduction_protocols(loader),
 		ica(loader),
+		kernel_pca(loader),
 		lda_projection(loader),
 		nmf(loader),
 		pca(loader),

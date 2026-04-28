@@ -189,6 +189,7 @@ logtalk_library_path(json_rpc, library('json_rpc/')).
 logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(kcenters, library('kcenters/')).
 logtalk_library_path(kemeny_young, library('kemeny_young/')).
+logtalk_library_path(kernel_pca, library('kernel_pca/')).
 logtalk_library_path(kmeans, library('kmeans/')).
 logtalk_library_path(kmedians, library('kmedians/')).
 logtalk_library_path(kmedoids, library('kmedoids/')).

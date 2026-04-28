@@ -110,6 +110,7 @@ directory in the ``NOTES.md`` file.
    json_schema
    kcenters
    kemeny_young
+   kernel_pca
    kmeans
    kmedians
    kmedoids

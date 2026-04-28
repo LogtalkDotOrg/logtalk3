@@ -149,6 +149,9 @@ reduction algorithms.
 * ADDED: New `ica` library implementing Independent Component Analysis
 reducer for continuous datasets.
 
+* ADDED: New `kernel_pca` implementing Kernel Principal Component Analysis
+reducer for continuous datasets.
+
 * ADDED: New `lda_projection` library implementing Linear Discriminant
 Analysis projection for labeled continuous datasets.
 

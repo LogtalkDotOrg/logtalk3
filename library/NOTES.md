@@ -90,8 +90,8 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 		`kcenters`, `kmeans`, `kmedians`, `kmedoids`, `kmodes`,
 		`kprototypes`, and `optics`.
 	- Dimension reduction:
-		`dimension_reduction_protocols`, `ica`, `lda_projection`, `nmf`,
-		`pca`, `pls_projection`, and `random_projection`.
+		`dimension_reduction_protocols`, `ica`, `kernel_pca`, `lda_projection`,
+        `nmf`, `pca`, `pls_projection`, and `random_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
 		`sequential_pattern_mining_protocols`, `apriori`, `clo_span`,
