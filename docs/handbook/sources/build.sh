@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 28, 2026
+##   Last updated on April 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -202,6 +202,7 @@ sed '1,19d' ../../../library/plackett_luce/NOTES.md | pandoc -f gfm -t rst -o li
 sed '1,19d' ../../../library/plackett_luce_last/NOTES.md | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
 sed '1,19d' ../../../library/pls_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/pls_projection.rst
 sed '1,19d' ../../../library/prefix_span/NOTES.md | pandoc -f gfm -t rst -o libraries/prefix_span.rst
+sed '1,19d' ../../../library/probabilistic_pca/NOTES.md | pandoc -f gfm -t rst -o libraries/probabilistic_pca.rst
 sed '1,19d' ../../../library/process/NOTES.md | pandoc -f gfm -t rst -o libraries/process.rst
 sed '1,19d' ../../../library/protobuf/NOTES.md | pandoc -f gfm -t rst -o libraries/protobuf.rst
 sed '1,19d' ../../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst

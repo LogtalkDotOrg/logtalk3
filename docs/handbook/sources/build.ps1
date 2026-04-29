@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 28, 2026
+##   Last updated on April 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -202,6 +202,7 @@ Foreach-Object {
 (Get-Content ../../../library/plackett_luce_last/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/plackett_luce_last.rst
 (Get-Content ../../../library/pls_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pls_projection.rst
 (Get-Content ../../../library/prefix_span/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/prefix_span.rst
+(Get-Content ../../../library/probabilistic_pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/probabilistic_pca.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
 (Get-Content ../../../library/queues/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/queues.rst

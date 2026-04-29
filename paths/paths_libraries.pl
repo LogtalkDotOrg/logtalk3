@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 28, 2026
+%  Last updated on April 29, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -156,6 +156,7 @@ logtalk_library_path(permutations, library('permutations/')).
 logtalk_library_path(plackett_luce, library('plackett_luce/')).
 logtalk_library_path(plackett_luce_last, library('plackett_luce_last/')).
 logtalk_library_path(prefix_span, library('prefix_span/')).
+logtalk_library_path(probabilistic_pca, library('probabilistic_pca/')).
 logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
 logtalk_library_path(queues, library('queues/')).

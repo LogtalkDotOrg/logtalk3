@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>probabilistic_pca &mdash; Logtalk 3.100.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=da5c6007"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.100.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/probabilistic_pca.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="probabilistic-pca">
+<span id="library-probabilistic-pca"></span><h1><code class="docutils literal notranslate"><span class="pre">probabilistic_pca</span></code><a class="headerlink" href="#probabilistic-pca" title="Link to this heading"></a></h1>
+<p>Probabilistic Principal Component Analysis reducer for continuous
+datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code>
+defined in the <code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library and learns a
+linear latent-variable projection using a portable covariance
+eigensolver and the closed-form maximum-likelihood PPCA solution.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#probabilistic_pca">../../apis/library_index.html#probabilistic_pca</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(probabilistic_pca(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(probabilistic_pca(tester)).
+</pre></div>
+</div>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
+attributes.</p></li>
+<li><p><strong>Centering and Optional Scaling</strong>: Centers all attributes and
+optionally standardizes them before fitting the covariance model.</p></li>
+<li><p><strong>Probabilistic Latent Model</strong>: Estimates the PPCA loading matrix and
+isotropic observation noise variance from the learned covariance
+eigensystem.</p></li>
+<li><p><strong>Configurable Shortfall Handling</strong>: Lets callers choose whether a
+numerical-rank shortfall raises an error or returns a truncated
+reducer with explicit diagnostics.</p></li>
+<li><p><strong>Projection API</strong>: Transforms a new instance into posterior latent
+means returned as <code class="docutils literal notranslate"><span class="pre">component_N-Value</span></code> pairs.</p></li>
+<li><p><strong>Model Export</strong>: Learned reducers can be exported as predicate
+clauses or written to a file.</p></li>
+</ul>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_components/1</span></code>: Number of latent dimensions to extract. Requests
+that exceed the structural PPCA limit
+<code class="docutils literal notranslate"><span class="pre">min(FeatureCount,</span> <span class="pre">SampleCount</span> <span class="pre">-</span> <span class="pre">1)</span></code> raise
+<code class="docutils literal notranslate"><span class="pre">domain_error(component_count,</span> <span class="pre">Requested-Maximum)</span></code>. The default is
+<code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code>: Whether to standardize continuous attributes
+before fitting the covariance model. Options: <code class="docutils literal notranslate"><span class="pre">true</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shortfall_policy/1</span></code>: Controls what happens when the covariance
+matrix yields fewer numerically significant components than requested
+after passing the structural PPCA bound above. Options: <code class="docutils literal notranslate"><span class="pre">truncate</span></code>
+(default), which returns a reducer with fewer components and records a
+<code class="docutils literal notranslate"><span class="pre">shortfall(truncated(Requested,</span> <span class="pre">Learned,</span> <span class="pre">ResidualEigenvalue,</span> <span class="pre">Tolerance))</span></code>
+diagnostic, or <code class="docutils literal notranslate"><span class="pre">error</span></code>, which raises
+<code class="docutils literal notranslate"><span class="pre">domain_error(component_count,</span> <span class="pre">Requested-Learned)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Maximum number of power-iteration steps used
+when estimating each covariance eigenvector. The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Positive convergence tolerance used both for
+power-iteration stopping and for deciding when residual eigenvalues
+are negligible. The default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The following examples use the sample datasets shipped with the
+<code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dimension_reduction_protocols(<span class="s">&#39;test_datasets/correlated_plane&#39;</span>)).
+</pre></div>
+</div>
+<section id="learning-a-reducer">
+<h3>Learning a reducer<a class="headerlink" href="#learning-a-reducer" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> probabilistic_pca<span class="o">::</span>learn(correlated_plane, <span class="nv">DimensionReducer</span>).
+
+| <span class="o">?-</span> probabilistic_pca<span class="o">::</span>learn(correlated_plane, <span class="nv">DimensionReducer</span>, [n_components(<span class="m">1</span>), feature_scaling(<span class="k">false</span>), shortfall_policy(error)]).
+</pre></div>
+</div>
+</section>
+<section id="transforming-new-instances">
+<h3>Transforming new instances<a class="headerlink" href="#transforming-new-instances" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> probabilistic_pca<span class="o">::</span>learn(correlated_plane, <span class="nv">DimensionReducer</span>, [n_components(<span class="m">2</span>)]),
+     probabilistic_pca<span class="o">::</span>transform(<span class="nv">DimensionReducer</span>, [x<span class="o">-</span><span class="m">2.0</span>, y<span class="o">-</span><span class="m">4.0</span>, z<span class="o">-</span><span class="m">6.0</span>], <span class="nv">ReducedInstance</span>).
+</pre></div>
+</div>
+</section>
+<section id="exporting-and-reusing-the-reducer">
+<h3>Exporting and reusing the reducer<a class="headerlink" href="#exporting-and-reusing-the-reducer" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> probabilistic_pca<span class="o">::</span>learn(correlated_plane, <span class="nv">DimensionReducer</span>, [n_components(<span class="m">1</span>)]),
+     probabilistic_pca<span class="o">::</span>export_to_file(correlated_plane, <span class="nv">DimensionReducer</span>, reducer, <span class="s">&#39;probabilistic_pca_reducer.pl&#39;</span>).
+
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;probabilistic_pca_reducer.pl&#39;</span>),
+     reducer(<span class="nv">Reducer</span>),
+     probabilistic_pca<span class="o">::</span>transform(<span class="nv">Reducer</span>, [x<span class="o">-</span><span class="m">1.0</span>, y<span class="o">-</span><span class="m">2.0</span>, z<span class="o">-</span><span class="m">3.0</span>], <span class="nv">ReducedInstance</span>).
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dimension-reducer-representation">
+<h2>Dimension reducer representation<a class="headerlink" href="#dimension-reducer-representation" title="Link to this heading"></a></h2>
+<p>The learned dimension reducer is represented by a compound term with the
+functor chosen by the implementation and arity 6. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>probabilistic_pca_reducer(<span class="nv">Encoders</span>, <span class="nv">Components</span>, <span class="nv">Loadings</span>, <span class="nv">NoiseVariance</span>, <span class="nv">ExplainedVariances</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Encoders</span></code>: List of continuous attribute encoders storing attribute
+name, mean, and scale.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Components</span></code>: List of posterior latent projection vectors in
+descending explained-variance order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Loadings</span></code>: List of maximum-likelihood PPCA loading vectors aligned
+with the extracted latent dimensions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NoiseVariance</span></code>: Estimated isotropic observation noise variance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ExplainedVariances</span></code>: List of retained covariance eigenvalues
+matching the extracted latent dimensions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Learned metadata including the effective training
+options, sample count, retained explained variances, estimated noise
+variance, preprocessing details, and optional truncate-mode shortfall
+details.</p></li>
+</ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
+this reducer term is serialized directly as the single argument of the
+generated predicate clause so that the exported model can be loaded and
+reused as-is.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Tipping, M. E. and Bishop, C. M. (1999) - “Probabilistic Principal
+Component Analysis”.</p></li>
+<li><p>Bishop, C. M. (2006) - “Pattern Recognition and Machine Learning”.
+Section 12.2.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

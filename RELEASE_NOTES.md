@@ -164,6 +164,9 @@ dimension reduction for continuous datasets.
 * ADDED: New `pls_projection` library implementing Partial Least Squares
 projection for target-valued continuous datasets.
 
+* ADDED: New `probabilistic_pca` library implementing Probabilistic Principal
+Component Analysis reducer for continuous datasets.
+
 * ADDED: New `random_projection` library implementing seeded random
 projection for continuous datasets.
 

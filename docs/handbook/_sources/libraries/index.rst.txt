@@ -152,6 +152,7 @@ directory in the ``NOTES.md`` file.
    plackett_luce_last
    pls_projection
    prefix_span
+	probabilistic_pca
    process
    protobuf
    queues

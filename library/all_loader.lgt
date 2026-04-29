@@ -115,6 +115,7 @@
 		nmf(loader),
 		pca(loader),
 		pls_projection(loader),
+		probabilistic_pca(loader),
 		random_projection(loader),
 		truncated_svd(loader),
 		clustering_protocols(loader),
