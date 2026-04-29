@@ -295,10 +295,12 @@
 <span id="library-clo-span"></span><h1><code class="docutils literal notranslate"><span class="pre">clo_span</span></code><a class="headerlink" href="#clo-span" title="Link to this heading"></a></h1>
 <p>CloSpan closed sequential pattern miner for sequence datasets. The
 library depends on the <code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code> support
-library and the <code class="docutils literal notranslate"><span class="pre">prefix_span</span></code> library, implements the generic
-<code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> defined in the <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code>
-core library, and mines closed frequent sequential patterns by filtering
-the frequent sequential pattern collection to the closed subset.</p>
+library, implements the generic <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> defined in
+the <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library, and mines closed frequent
+sequential patterns directly using closure-aware projected-database
+search with explicit projected-database-equivalence backward pruning
+that skips equivalent branches before recursion, together with a
+same-support closed frontier.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -324,8 +326,11 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Closed Pattern Mining</strong>: Retains only frequent sequential patterns
 that have no superpattern with the same support.</p></li>
-<li><p><strong>Closure Filtering</strong>: Filters the frequent pattern collection using a
-strict sequential superpattern relation.</p></li>
+<li><p><strong>Backward and Closure Pruning</strong>: Uses projected-database equivalence
+to skip equivalent backward-growth branches before recursion, then
+maintains a same-support closed frontier to suppress dominated
+patterns during the search instead of post-filtering another miner
+output.</p></li>
 <li><p><strong>Canonical Sequences</strong>: Uses the shared sequential validation logic
 from the support library.</p></li>
 <li><p><strong>Flexible Support Thresholds</strong>: Supports relative minimum support and

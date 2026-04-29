@@ -36,6 +36,7 @@
 		'test_datasets/clickstream_sequences',
 		'test_datasets/closure_sequences',
 		'test_datasets/dense_overlap_sequences',
+		'test_datasets/invalid_duplicate_id_sequences',
 		'test_datasets/invalid_duplicate_item_in_event_sequences',
 		'test_datasets/invalid_empty_event_sequences',
 		'test_datasets/invalid_undeclared_item_sequences',

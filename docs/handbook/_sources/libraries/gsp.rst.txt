@@ -40,6 +40,8 @@ Features
 
 - **Level-Wise Mining**: Builds longer frequent sequences by extending
   the current frequent level.
+- **Join-Based Candidates**: Generates candidate sequences by joining
+  compatible frequent patterns from the previous level.
 - **Support-Pruned Candidates**: Prunes candidates whose immediate
   subpatterns are not all frequent.
 - **Canonical Sequences**: Validates that itemsets are sorted,

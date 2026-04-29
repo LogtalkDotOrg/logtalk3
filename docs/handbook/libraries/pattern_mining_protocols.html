@@ -192,6 +192,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#related-support-libraries">Related support libraries</a></li>
 </ul>
 </li>
@@ -296,7 +297,7 @@ implementation of machine learning pattern-finding algorithms.
 Pattern-mining algorithm implementations typically import the
 <code class="docutils literal notranslate"><span class="pre">pattern_miner_common</span></code> category, which implements the
 <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> protocol and provides shared defaults, option
-handling, and export helpers.</p>
+handling, diagnostics accessors, and export helpers.</p>
 <p>The family-specific dataset protocols and bundled smoke-test datasets
 are provided by the <code class="docutils literal notranslate"><span class="pre">frequent_pattern_mining_protocols</span></code> and
 <code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code> support libraries.</p>
@@ -338,6 +339,27 @@ in the mined result.</p></li>
 </ul>
 <p>The current <code class="docutils literal notranslate"><span class="pre">apriori</span></code>, <code class="docutils literal notranslate"><span class="pre">eclat</span></code>, <code class="docutils literal notranslate"><span class="pre">fp_growth</span></code>, and <code class="docutils literal notranslate"><span class="pre">prefix_span</span></code>
 libraries all use these shared defaults.</p>
+</section>
+<section id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> protocol also defines the
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">pattern_miner_options/2</span></code>
+predicates. These expose representation-independent metadata about mined
+results.</p>
+<p>All pattern miners now provide at least the following generic
+diagnostics terms:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model(Model)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item_domain_size(Size)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pattern_count(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pattern_length_histogram(Histogram)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">support_range(MinimumSupport,</span> <span class="pre">MaximumSupport)</span></code></p></li>
+</ul>
+<p>Each miner also provides algorithm-specific diagnostics terms describing
+its mining strategy and support representation, such as
+candidate-generation style, projected-database growth, closure
+filtering, or vertical support layout.</p>
 </section>
 <section id="related-support-libraries">
 <h2>Related support libraries<a class="headerlink" href="#related-support-libraries" title="Link to this heading"></a></h2>

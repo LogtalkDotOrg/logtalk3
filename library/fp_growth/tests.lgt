@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Unit tests for the "fp_growth" library.'
 	]).
 
@@ -56,6 +56,30 @@
 	test(fp_growth_mine_3_layered_baskets_pair, deterministic(memberchk(itemset([bread, diapers], 4), Patterns))) :-
 		fp_growth::mine(layered_baskets, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]).
 
+	test(fp_growth_mine_3_dense_shared_prefix_quads, deterministic((
+		memberchk(itemset([alpha, beta, delta, epsilon], 5), Patterns),
+		memberchk(itemset([alpha, beta, delta, gamma], 5), Patterns),
+		memberchk(itemset([alpha, beta, epsilon, gamma], 5), Patterns)
+	))) :-
+		fp_growth::mine(dense_shared_prefix_baskets, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(5)]).
+
+	test(fp_growth_matches_apriori_dense_shared_prefix, deterministic(FPGrowthPatterns == AprioriPatterns)) :-
+		Options = [minimum_support_count(5)],
+		fp_growth::mine(dense_shared_prefix_baskets, fp_growth_pattern_miner(_ItemDomain, FPGrowthPatterns, _Options), Options),
+		apriori::mine(dense_shared_prefix_baskets, apriori_pattern_miner(_AprioriDomain, AprioriPatterns, _AprioriOptions), Options).
+
+	test(fp_growth_diagnostics_2, deterministic((memberchk(model(fp_growth), Diagnostics), memberchk(compression(prefix_tree_sharing), Diagnostics), memberchk(support_layout(fp_tree), Diagnostics), memberchk(projection_access(header_table_parent_links), Diagnostics)))) :-
+		fp_growth::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
+		fp_growth::diagnostics(PatternMiner, Diagnostics).
+
+	test(fp_growth_valid_pattern_miner_1, deterministic) :-
+		fp_growth::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
+		fp_growth::valid_pattern_miner(PatternMiner).
+
+	test(fp_growth_invalid_pattern_miner_1, fail) :-
+		PatternMiner = fp_growth_pattern_miner([bread], [itemset([bread], foo)], [minimum_support(0.5)]),
+		fp_growth::valid_pattern_miner(PatternMiner).
+
 	test(fp_growth_export_to_clauses_4, deterministic(functor(Clause, mined_patterns, 3))) :-
 		fp_growth::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
 		fp_growth::export_to_clauses(market_basket_basics, PatternMiner, mined_patterns, [Clause]).
@@ -80,6 +104,9 @@
 
 	test(fp_growth_mine_2_invalid_duplicate_item_dataset, error(domain_error(canonical_transaction, [bread, bread, milk]))) :-
 		fp_growth::mine(invalid_duplicate_item_baskets, _PatternMiner).
+
+	test(fp_growth_mine_2_invalid_duplicate_id_dataset, error(domain_error(unique_transaction_ids, [1, 1]))) :-
+		fp_growth::mine(invalid_duplicate_id_baskets, _PatternMiner).
 
 	test(fp_growth_mine_2_invalid_empty_dataset, error(domain_error(non_empty_dataset, invalid_empty_baskets))) :-
 		fp_growth::mine(invalid_empty_baskets, _PatternMiner).

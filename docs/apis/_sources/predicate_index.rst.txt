@@ -1822,6 +1822,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`options_protocol <options_protocol/0::check_options/1>`
 
+``check_pattern_miner/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::check_pattern_miner/1>`
+
 ``check_ranker/1``
 ------------------
 
@@ -3911,6 +3921,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostic/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
@@ -3965,6 +3976,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostics/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
@@ -11069,13 +11081,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`apriori <apriori/0::mine/3>`
-* :ref:`clo_span <clo_span/0::mine/3>`
-* :ref:`eclat <eclat/0::mine/3>`
-* :ref:`fp_growth <fp_growth/0::mine/3>`
-* :ref:`gsp <gsp/0::mine/3>`
-* :ref:`prefix_span <prefix_span/0::mine/3>`
-* :ref:`spade <spade/0::mine/3>`
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::mine/3>`
 
 ``minimum_enclosing_circle/3``
 ------------------------------
@@ -12769,6 +12775,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::path_concat/3>`
+
+``pattern_miner_options/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::pattern_miner_options/2>`
 
 ``peek_back/2``
 ---------------
@@ -18373,6 +18389,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`options_protocol <options_protocol/0::valid_options/1>`
+
+``valid_pattern_miner/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`pattern_miner_protocol <pattern_miner_protocol/0::valid_pattern_miner/1>`
 
 ``valid_ranker/1``
 ------------------

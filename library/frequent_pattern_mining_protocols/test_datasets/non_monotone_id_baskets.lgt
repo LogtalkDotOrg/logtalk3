@@ -19,10 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(sequential_pattern_mining_protocols(loader)),
-	logtalk_load(clo_span, [optimize(on)])
-)).
+:- object(non_monotone_id_baskets,
+	implements(transaction_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-29,
+		comment is 'Market-basket-style transaction dataset with unique but non-monotone transaction identifiers, suitable for regression tests that verify miners do not depend on external identifier ordering.'
+	]).
+
+	items([bread, butter, cereal, eggs, milk]).
+
+	transaction(60, [bread, milk]).
+	transaction(10, [bread, butter, milk]).
+	transaction(40, [bread, butter]).
+	transaction(20, [butter, milk]).
+	transaction(50, [bread, cereal, milk]).
+	transaction(30, [bread, butter, eggs, milk]).
+
+:- end_object.

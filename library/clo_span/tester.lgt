@@ -24,11 +24,18 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
+	logtalk_load(sequential_pattern_mining_protocols(loader)),
 	logtalk_load(prefix_span(loader)),
 	logtalk_load([
 		sequential_pattern_mining_protocols('test_datasets/closure_sequences'),
+		sequential_pattern_mining_protocols('test_datasets/dense_overlap_sequences'),
+		sequential_pattern_mining_protocols('test_datasets/invalid_duplicate_id_sequences'),
+		sequential_pattern_mining_protocols('test_datasets/invalid_duplicate_item_in_event_sequences'),
 		sequential_pattern_mining_protocols('test_datasets/invalid_empty_event_sequences'),
-		sequential_pattern_mining_protocols('test_datasets/prefix_ladder_sequences')
+		sequential_pattern_mining_protocols('test_datasets/invalid_undeclared_item_sequences'),
+		sequential_pattern_mining_protocols('test_datasets/invalid_unsorted_itemset_sequences'),
+		sequential_pattern_mining_protocols('test_datasets/prefix_ladder_sequences'),
+		sequential_pattern_mining_protocols('test_datasets/same_event_vs_next_event_sequences')
 	], [
 		source_data(on),
 		debug(on)

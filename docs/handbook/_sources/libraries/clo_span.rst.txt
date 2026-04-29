@@ -5,10 +5,12 @@
 
 CloSpan closed sequential pattern miner for sequence datasets. The
 library depends on the ``sequential_pattern_mining_protocols`` support
-library and the ``prefix_span`` library, implements the generic
-``pattern_miner_protocol`` defined in the ``pattern_mining_protocols``
-core library, and mines closed frequent sequential patterns by filtering
-the frequent sequential pattern collection to the closed subset.
+library, implements the generic ``pattern_miner_protocol`` defined in
+the ``pattern_mining_protocols`` core library, and mines closed frequent
+sequential patterns directly using closure-aware projected-database
+search with explicit projected-database-equivalence backward pruning
+that skips equivalent branches before recursion, together with a
+same-support closed frontier.
 
 API documentation
 -----------------
@@ -40,8 +42,11 @@ Features
 
 - **Closed Pattern Mining**: Retains only frequent sequential patterns
   that have no superpattern with the same support.
-- **Closure Filtering**: Filters the frequent pattern collection using a
-  strict sequential superpattern relation.
+- **Backward and Closure Pruning**: Uses projected-database equivalence
+  to skip equivalent backward-growth branches before recursion, then
+  maintains a same-support closed frontier to suppress dominated
+  patterns during the search instead of post-filtering another miner
+  output.
 - **Canonical Sequences**: Uses the shared sequential validation logic
   from the support library.
 - **Flexible Support Thresholds**: Supports relative minimum support and

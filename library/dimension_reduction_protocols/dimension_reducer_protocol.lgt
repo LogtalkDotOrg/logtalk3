@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-29,
 		comment is 'Protocol for machine learning dimension reducers.',
 		see_also is [dimension_reduction_dataset_protocol, supervised_dimension_reduction_dataset_protocol, target_supervised_dimension_reduction_dataset_protocol]
 	]).
@@ -51,14 +51,14 @@
 	]).
 
 	:- public(check_dimension_reducer/1).
-	:- mode(check_dimension_reducer(+compound), one).
+	:- mode(check_dimension_reducer(@compound), one_or_error).
 	:- info(check_dimension_reducer/1, [
 		comment is 'Checks that a learned dimension reducer term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid dimension reducer representation.',
 		argnames is ['DimensionReducer']
 	]).
 
 	:- public(valid_dimension_reducer/1).
-	:- mode(valid_dimension_reducer(+compound), zero_or_one).
+	:- mode(valid_dimension_reducer(@compound), zero_or_one).
 	:- info(valid_dimension_reducer/1, [
 		comment is 'True when a learned dimension reducer term is structurally valid for the receiving implementation. Succeeds iff ``check_dimension_reducer/1`` succeeds without throwing an exception.',
 		argnames is ['DimensionReducer']

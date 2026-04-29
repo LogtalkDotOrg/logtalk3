@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-29,
 		comment is 'Shared predicates for frequent itemset miner dataset validation, support accumulation, and itemset ordering/filtering helpers.'
 	]).
 
@@ -64,8 +64,19 @@
 		argnames is ['ItemCounts', 'SupportCount', 'FrequentItemSupports']
 	]).
 
+	:- protected(valid_itemset_patterns/2).
+	:- mode(valid_itemset_patterns(+list(atom), +list(compound)), zero_or_one).
+	:- info(valid_itemset_patterns/2, [
+		comment is 'True when the patterns are valid ``itemset(Items, Support)`` terms over the given item domain with positive integer supports.',
+		argnames is ['ItemDomain', 'Patterns']
+	]).
+
 	:- uses(list, [
 		length/2, member/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	check_transactions(Dataset, _ItemDomain, Transactions, _MaxTransactionLength) :-
@@ -73,7 +84,18 @@
 		!,
 		domain_error(non_empty_dataset, Dataset).
 	check_transactions(_Dataset, ItemDomain, Transactions, MaxTransactionLength) :-
+		check_unique_transaction_ids(Transactions),
 		check_transactions_list(Transactions, ItemDomain, 0, MaxTransactionLength).
+
+	check_unique_transaction_ids(Transactions) :-
+		findall(Id, member(Id-_, Transactions), Ids),
+		sort(Ids, UniqueIds),
+		length(Ids, IdsCount),
+		length(UniqueIds, UniqueIdsCount),
+		(   IdsCount =:= UniqueIdsCount ->
+			true
+		;   domain_error(unique_transaction_ids, Ids)
+		).
 
 	check_transactions_list([], _ItemDomain, MaxTransactionLength, MaxTransactionLength).
 	check_transactions_list([_-Transaction| Transactions], ItemDomain, MaxTransactionLength0, MaxTransactionLength) :-
@@ -141,5 +163,12 @@
 		;   FrequentItemSupports = RestFrequentItemSupports
 		),
 		select_frequent_item_supports(ItemCounts, SupportCount, RestFrequentItemSupports).
+
+	valid_itemset_patterns(_ItemDomain, []) :-
+		!.
+	valid_itemset_patterns(ItemDomain, [itemset(Items, Support)| Patterns]) :-
+		catch(check_transaction(Items, ItemDomain), _Error, fail),
+		valid(positive_integer, Support),
+		valid_itemset_patterns(ItemDomain, Patterns).
 
 :- end_category.

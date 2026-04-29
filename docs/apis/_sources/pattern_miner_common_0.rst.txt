@@ -8,14 +8,14 @@
 ``pattern_miner_common``
 ========================
 
-Shared predicates for pattern miner defaults, option handling, and export helpers.
+Shared predicates for pattern miner diagnostics, defaults, option handling, and export helpers.
 
 | **Availability:** 
 |    ``logtalk_load(pattern_mining_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-22
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -27,13 +27,14 @@ Shared predicates for pattern miner defaults, option handling, and export helper
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`pattern_miner_protocol/0::check_pattern_miner/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::diagnostic/2`  :ref:`pattern_miner_protocol/0::diagnostics/2`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`pattern_miner_protocol/0::mine/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::pattern_miner_options/2`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`pattern_miner_protocol/0::valid_pattern_miner/1`  
 
 .. contents::
    :local:
@@ -46,6 +47,44 @@ Public predicates
 
 Protected predicates
 --------------------
+
+.. index:: pattern_miner_diagnostics_data/2
+.. _pattern_miner_common/0::pattern_miner_diagnostics_data/2:
+
+``pattern_miner_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing pattern miner implementations must define in order to expose diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pattern_miner_diagnostics_data(PatternMiner,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``pattern_miner_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: pattern_miner_diagnostics/6
+.. _pattern_miner_common/0::pattern_miner_diagnostics/6:
+
+``pattern_miner_diagnostics/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a standard diagnostics list from generic pattern miner metadata and algorithm-specific diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pattern_miner_diagnostics(Model,ItemDomain,Patterns,Options,SpecificDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``pattern_miner_diagnostics(+atom,+list(atom),+list(compound),+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
 
 .. index:: pattern_miner_export_template/4
 .. _pattern_miner_common/0::pattern_miner_export_template/4:
@@ -62,6 +101,25 @@ Hook predicate that importing pattern miner implementations must define in order
 |    ``pattern_miner_export_template(Dataset,PatternMiner,Functor,Template)``
 | **Mode and number of proofs:**
 |    ``pattern_miner_export_template(+object_identifier,+compound,+atom,-callable)`` - ``one``
+
+
+------------
+
+.. index:: valid_pattern_miner_metadata/5
+.. _pattern_miner_common/0::valid_pattern_miner_metadata/5:
+
+``valid_pattern_miner_metadata/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the diagnostics list matches the generic pattern miner metadata implied by the model, item domain, mined patterns, and effective options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_pattern_miner_metadata(Model,ItemDomain,Patterns,Options,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_pattern_miner_metadata(+atom,+list(atom),+list(compound),+list(compound),+list(compound))`` - ``zero_or_one``
 
 
 ------------

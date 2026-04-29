@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-29,
 		comment is 'Protocol for machine learning classifiers.',
 		see_also is [c45, isolation_forest, knn, linear_svm, logistic_regression, naive_bayes, nearest_centroid, random_forest]
 	]).
@@ -44,14 +44,14 @@
 	]).
 
 	:- public(check_classifier/1).
-	:- mode(check_classifier(+compound), one).
+	:- mode(check_classifier(@compound), one_or_error).
 	:- info(check_classifier/1, [
 		comment is 'Checks that a learned classifier term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid classifier representation.',
 		argnames is ['Classifier']
 	]).
 
 	:- public(valid_classifier/1).
-	:- mode(valid_classifier(+compound), zero_or_one).
+	:- mode(valid_classifier(@compound), zero_or_one).
 	:- info(valid_classifier/1, [
 		comment is 'True when a learned classifier term is structurally valid for the receiving implementation. Succeeds iff ``check_classifier/1`` succeeds without throwing an exception.',
 		argnames is ['Classifier']

@@ -15,7 +15,7 @@ Protocol for machine learning classifiers.
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -90,7 +90,7 @@ Checks that a learned classifier term is structurally valid for the receiving im
 | **Template:**
 |    ``check_classifier(Classifier)``
 | **Mode and number of proofs:**
-|    ``check_classifier(+compound)`` - ``one``
+|    ``check_classifier(@compound)`` - ``one_or_error``
 
 
 ------------
@@ -109,7 +109,7 @@ True when a learned classifier term is structurally valid for the receiving impl
 | **Template:**
 |    ``valid_classifier(Classifier)``
 | **Mode and number of proofs:**
-|    ``valid_classifier(+compound)`` - ``zero_or_one``
+|    ``valid_classifier(@compound)`` - ``zero_or_one``
 
 
 ------------

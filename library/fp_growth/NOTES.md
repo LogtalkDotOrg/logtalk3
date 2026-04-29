@@ -26,7 +26,9 @@ depends on the `frequent_pattern_mining_protocols` support library,
 implements the generic `pattern_miner_protocol` defined in the
 `pattern_mining_protocols` core library, and mines frequent itemsets
 using recursive conditional pattern-base projection over a compact
-FP-tree.
+FP-tree whose nodes store parent links directly, plus header-table node
+chains derived from the final tree for direct conditional-base
+reconstruction.
 
 
 API documentation
@@ -56,6 +58,7 @@ Features
 --------
 
 - **FP-tree Construction**: Builds a compact prefix tree from frequent items ordered by global support.
+- **Header and Parent Links**: Stores parent links directly in tree nodes and derives header-table node chains from the final tree so conditional pattern bases are reconstructed by walking parent links instead of using a separate node index.
 - **Pattern Growth**: Mines frequent itemsets recursively from conditional pattern bases without candidate generation.
 - **Canonical Transactions**: Validates that transactions are sorted, duplicate-free, and restricted to declared items.
 - **Flexible Support Thresholds**: Supports relative minimum support and absolute minimum support count.

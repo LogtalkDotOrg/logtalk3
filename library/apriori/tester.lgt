@@ -25,8 +25,12 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(combinations(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(frequent_pattern_mining_protocols(loader)),
+	logtalk_load(hashes(loader)),
 	logtalk_load([
+		frequent_pattern_mining_protocols('test_datasets/deep_intersection_baskets'),
+		frequent_pattern_mining_protocols('test_datasets/invalid_duplicate_id_baskets'),
 		frequent_pattern_mining_protocols('test_datasets/invalid_duplicate_item_baskets'),
 		frequent_pattern_mining_protocols('test_datasets/invalid_empty_baskets'),
 		frequent_pattern_mining_protocols('test_datasets/invalid_item_domain_baskets'),
@@ -39,6 +43,7 @@
 		debug(on)
 	]),
 	logtalk_load(apriori, [source_data(on), debug(on)]),
+	logtalk_load(eclat(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

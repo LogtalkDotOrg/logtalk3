@@ -8,7 +8,7 @@ implementation of machine learning pattern-finding algorithms.
 Pattern-mining algorithm implementations typically import the
 ``pattern_miner_common`` category, which implements the
 ``pattern_miner_protocol`` protocol and provides shared defaults, option
-handling, and export helpers.
+handling, diagnostics accessors, and export helpers.
 
 The family-specific dataset protocols and bundled smoke-test datasets
 are provided by the ``frequent_pattern_mining_protocols`` and
@@ -61,6 +61,34 @@ pattern length filtering:
 
 The current ``apriori``, ``eclat``, ``fp_growth``, and ``prefix_span``
 libraries all use these shared defaults.
+
+Diagnostics
+-----------
+
+The ``pattern_miner_protocol`` protocol also defines the
+``diagnostics/2``, ``diagnostic/2``, and ``pattern_miner_options/2``
+predicates. These expose representation-independent metadata about mined
+results.
+
+All pattern miners now provide at least the following generic
+diagnostics terms:
+
+- ``model(Model)``
+
+- ``options(Options)``
+
+- ``item_domain_size(Size)``
+
+- ``pattern_count(Count)``
+
+- ``pattern_length_histogram(Histogram)``
+
+- ``support_range(MinimumSupport, MaximumSupport)``
+
+Each miner also provides algorithm-specific diagnostics terms describing
+its mining strategy and support representation, such as
+candidate-generation style, projected-database growth, closure
+filtering, or vertical support layout.
 
 Related support libraries
 -------------------------

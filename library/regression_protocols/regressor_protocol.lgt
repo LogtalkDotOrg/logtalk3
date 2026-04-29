@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-29,
 		comment is 'Protocol for machine learning regressors.',
 		see_also is [linear_regression, regression_dataset_protocol]
 	]).
@@ -51,14 +51,14 @@
 	]).
 
 	:- public(check_regressor/1).
-	:- mode(check_regressor(+compound), one).
+	:- mode(check_regressor(@compound), one_or_error).
 	:- info(check_regressor/1, [
 		comment is 'Checks that a learned regressor term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid regressor representation.',
 		argnames is ['Regressor']
 	]).
 
 	:- public(valid_regressor/1).
-	:- mode(valid_regressor(+compound), zero_or_one).
+	:- mode(valid_regressor(@compound), zero_or_one).
 	:- info(valid_regressor/1, [
 		comment is 'True when a learned regressor term is structurally valid for the receiving implementation. Succeeds iff ``check_regressor/1`` succeeds without throwing an exception.',
 		argnames is ['Regressor']

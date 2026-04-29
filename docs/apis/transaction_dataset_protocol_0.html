@@ -317,7 +317,7 @@
   <p class="right" id="transaction-dataset-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="transaction-dataset-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">transaction_dataset_protocol</span></code><a class="headerlink" href="#transaction-dataset-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for transaction datasets used with frequent itemset mining algorithms.</p>
+<p>Protocol for transaction datasets used with frequent itemset mining algorithms. Transaction identifiers are expected to be unique within a dataset.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -327,7 +327,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-22</div>
+<div class="line"><strong>Date:</strong> 2026-04-29</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -391,7 +391,7 @@
 </section>
 <section id="transaction-2">
 <span id="transaction-dataset-protocol-0-transaction-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">transaction/2</span></code></a><a class="headerlink" href="#transaction-2" title="Link to this heading"></a></h3>
-<p>Enumerates by backtracking the transactions in the dataset. Each transaction is represented as a canonical sorted list of unique declared items.</p>
+<p>Enumerates by backtracking the transactions in the dataset. The transaction identifier is expected to be unique within the dataset. Each transaction is represented as a canonical sorted list of unique declared items.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -327,7 +327,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-22</div>
+<div class="line"><strong>Date:</strong> 2026-04-29</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -357,22 +357,49 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#mine-2" id="id2"><code class="docutils literal notranslate"><span class="pre">mine/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-to-clauses-4" id="id3"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-to-file-4" id="id4"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-pattern-miner-1" id="id5"><code class="docutils literal notranslate"><span class="pre">print_pattern_miner/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mine-3" id="id2"><code class="docutils literal notranslate"><span class="pre">mine/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mine-2" id="id3"><code class="docutils literal notranslate"><span class="pre">mine/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#diagnostics-2" id="id4"><code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#diagnostic-2" id="id5"><code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#pattern-miner-options-2" id="id6"><code class="docutils literal notranslate"><span class="pre">pattern_miner_options/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-pattern-miner-1" id="id7"><code class="docutils literal notranslate"><span class="pre">check_pattern_miner/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-pattern-miner-1" id="id8"><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#export-to-clauses-4" id="id9"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#export-to-file-4" id="id10"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-pattern-miner-1" id="id11"><code class="docutils literal notranslate"><span class="pre">print_pattern_miner/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id12">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="mine-3">
+<span id="pattern-miner-protocol-0-mine-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mine/3</span></code></a><a class="headerlink" href="#mine-3" title="Link to this heading"></a></h3>
+<p>Mines a pattern miner result from the given dataset object using the specified options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mine(Dataset,PatternMiner,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">mine(+object_identifier,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="mine-2">
-<span id="pattern-miner-protocol-0-mine-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mine/2</span></code></a><a class="headerlink" href="#mine-2" title="Link to this heading"></a></h3>
-<p>Mines a pattern miner result from the given dataset object.</p>
+<span id="pattern-miner-protocol-0-mine-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mine/2</span></code></a><a class="headerlink" href="#mine-2" title="Link to this heading"></a></h3>
+<p>Mines a pattern miner result from the given dataset object using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -391,8 +418,113 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="diagnostics-2">
+<span id="pattern-miner-protocol-0-diagnostics-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code></a><a class="headerlink" href="#diagnostics-2" title="Link to this heading"></a></h3>
+<p>Returns diagnostics and metadata associated with a mined pattern miner in a representation-independent way.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostics(PatternMiner,Diagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostics(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="diagnostic-2">
+<span id="pattern-miner-protocol-0-diagnostic-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code></a><a class="headerlink" href="#diagnostic-2" title="Link to this heading"></a></h3>
+<p>Tests or enumerates individual diagnostics metadata terms for a mined pattern miner.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostic(PatternMiner,Diagnostic)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostic(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="pattern-miner-options-2">
+<span id="pattern-miner-protocol-0-pattern-miner-options-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pattern_miner_options/2</span></code></a><a class="headerlink" href="#pattern-miner-options-2" title="Link to this heading"></a></h3>
+<p>Returns the effective mining options recorded in a mined pattern miner diagnostics list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pattern_miner_options(PatternMiner,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pattern_miner_options(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-pattern-miner-1">
+<span id="pattern-miner-protocol-0-check-pattern-miner-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_pattern_miner/1</span></code></a><a class="headerlink" href="#check-pattern-miner-1" title="Link to this heading"></a></h3>
+<p>Checks that the argument is a structurally valid mined pattern miner term for the receiving pattern miner implementation, throwing an exception on invalid input when applicable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_pattern_miner(PatternMiner)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_pattern_miner(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-pattern-miner-1">
+<span id="pattern-miner-protocol-0-valid-pattern-miner-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner/1</span></code></a><a class="headerlink" href="#valid-pattern-miner-1" title="Link to this heading"></a></h3>
+<p>True when <code class="docutils literal notranslate"><span class="pre">check_pattern_miner/1</span></code> succeeds for the argument without throwing an exception.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner(PatternMiner)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="export-to-clauses-4">
-<span id="pattern-miner-protocol-0-export-to-clauses-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a><a class="headerlink" href="#export-to-clauses-4" title="Link to this heading"></a></h3>
+<span id="pattern-miner-protocol-0-export-to-clauses-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a><a class="headerlink" href="#export-to-clauses-4" title="Link to this heading"></a></h3>
 <p>Converts a pattern miner result into a list of predicate clauses. <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is the functor for the generated predicate clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -413,7 +545,7 @@
 <hr class="docutils" />
 </section>
 <section id="export-to-file-4">
-<span id="pattern-miner-protocol-0-export-to-file-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a><a class="headerlink" href="#export-to-file-4" title="Link to this heading"></a></h3>
+<span id="pattern-miner-protocol-0-export-to-file-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a><a class="headerlink" href="#export-to-file-4" title="Link to this heading"></a></h3>
 <p>Exports a pattern miner result to a file. <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is the functor for the generated predicate clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -434,7 +566,7 @@
 <hr class="docutils" />
 </section>
 <section id="print-pattern-miner-1">
-<span id="pattern-miner-protocol-0-print-pattern-miner-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_pattern_miner/1</span></code></a><a class="headerlink" href="#print-pattern-miner-1" title="Link to this heading"></a></h3>
+<span id="pattern-miner-protocol-0-print-pattern-miner-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_pattern_miner/1</span></code></a><a class="headerlink" href="#print-pattern-miner-1" title="Link to this heading"></a></h3>
 <p>Prints a pattern miner result to the current output stream in a human-readable format.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Unit tests for the "apriori" library.'
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		memberchk/2
 	]).
 
 	cover(apriori).
@@ -56,6 +56,25 @@
 	test(apriori_mine_3_layered_baskets_pair, deterministic(memberchk(itemset([bread, diapers], 4), Patterns))) :-
 		apriori::mine(layered_baskets, apriori_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]).
 
+	test(apriori_mine_3_deep_intersection_quadruple, deterministic(memberchk(itemset([alpha, beta, delta, gamma], 4), Patterns))) :-
+		apriori::mine(deep_intersection_baskets, apriori_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4)]).
+
+	test(apriori_mine_3_deep_intersection_maximum_length, deterministic(Patterns == [itemset([alpha, beta, delta, gamma], 4)])) :-
+		apriori::mine(deep_intersection_baskets, apriori_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), minimum_pattern_length(4), maximum_pattern_length(4)]).
+
+	test(apriori_matches_eclat_deep_intersection, deterministic(AprioriPatterns == EclatPatterns)) :-
+		Options = [minimum_support_count(4)],
+		apriori::mine(deep_intersection_baskets, apriori_pattern_miner(_ItemDomain, AprioriPatterns, _Options), Options),
+		eclat::mine(deep_intersection_baskets, eclat_pattern_miner(_EclatDomain, EclatPatterns, _EclatOptions), Options).
+
+	test(apriori_diagnostics_2, deterministic((memberchk(model(apriori), Diagnostics), memberchk(candidate_generation(join_prune), Diagnostics), memberchk(candidate_counting(hash_tree), Diagnostics), memberchk(pattern_length_histogram([1-3, 2-1]), Diagnostics)))) :-
+		apriori::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
+		apriori::diagnostics(PatternMiner, Diagnostics).
+
+	test(apriori_valid_pattern_miner_1, deterministic) :-
+		apriori::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
+		apriori::valid_pattern_miner(PatternMiner).
+
 	test(apriori_export_to_clauses_4, deterministic(functor(Clause, mined_patterns, 3))) :-
 		apriori::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
 		apriori::export_to_clauses(market_basket_basics, PatternMiner, mined_patterns, [Clause]).
@@ -80,6 +99,9 @@
 
 	test(apriori_mine_2_invalid_duplicate_item_dataset, error(domain_error(canonical_transaction, [bread, bread, milk]))) :-
 		apriori::mine(invalid_duplicate_item_baskets, _PatternMiner).
+
+	test(apriori_mine_2_invalid_duplicate_id_dataset, error(domain_error(unique_transaction_ids, [1, 1]))) :-
+		apriori::mine(invalid_duplicate_id_baskets, _PatternMiner).
 
 	test(apriori_mine_2_invalid_empty_dataset, error(domain_error(non_empty_dataset, invalid_empty_baskets))) :-
 		apriori::mine(invalid_empty_baskets, _PatternMiner).

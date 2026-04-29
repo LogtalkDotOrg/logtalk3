@@ -15,7 +15,7 @@ Protocol for machine learning clusterers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -128,7 +128,7 @@ Checks that a learned clusterer term is structurally valid for the receiving imp
 | **Template:**
 |    ``check_clusterer(Clusterer)``
 | **Mode and number of proofs:**
-|    ``check_clusterer(+compound)`` - ``one``
+|    ``check_clusterer(@compound)`` - ``one_or_error``
 
 
 ------------
@@ -147,7 +147,7 @@ True when a learned clusterer term is structurally valid for the receiving imple
 | **Template:**
 |    ``valid_clusterer(Clusterer)``
 | **Mode and number of proofs:**
-|    ``valid_clusterer(+compound)`` - ``zero_or_one``
+|    ``valid_clusterer(@compound)`` - ``zero_or_one``
 
 
 ------------

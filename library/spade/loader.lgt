@@ -21,6 +21,7 @@
 
 :- initialization((
 	logtalk_load(types(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(sequential_pattern_mining_protocols(loader)),

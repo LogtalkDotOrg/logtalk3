@@ -27,13 +27,34 @@
 :- object(sample_pattern_miner,
 	imports(pattern_miner_common)).
 
-	:- public(mine/3).
-	:- mode(mine(+object_identifier, -compound, +list(compound)), one).
+	:- uses(list, [
+		memberchk/2
+	]).
 
 	mine(_Dataset, sample_pattern_miner([
 		frequent_itemset([bread], 5),
 		frequent_itemset([bread, milk], 4)
 	]), _Options).
+
+	pattern_miner_diagnostics_data(sample_pattern_miner(Patterns), Diagnostics) :-
+		^^pattern_miner_diagnostics(sample_pattern_miner, [bread, milk], Patterns, [], [search_strategy(sample_projection)], Diagnostics).
+
+	check_pattern_miner(PatternMiner) :-
+		(   PatternMiner = sample_pattern_miner(Patterns),
+			valid_patterns(Patterns),
+			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
+			^^valid_pattern_miner_metadata(sample_pattern_miner, [bread, milk], Patterns, [], Diagnostics),
+			memberchk(search_strategy(sample_projection), Diagnostics) ->
+			true
+		;   domain_error(sample_pattern_miner, PatternMiner)
+		).
+
+	valid_patterns([]).
+	valid_patterns([frequent_itemset(Items, Support)| Patterns]) :-
+		catch(^^check_item_domain(Items), _Error, fail),
+		integer(Support),
+		Support > 0,
+		valid_patterns(Patterns).
 
 	pattern_miner_export_template(_Dataset, sample_pattern_miner(Patterns), Functor, Template) :-
 		Template =.. [Functor, Patterns].
@@ -50,7 +71,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Smoke tests for the "pattern_mining_protocols" library.'
 	]).
 
@@ -79,5 +100,33 @@
 		^^suppress_text_output,
 		sample_pattern_miner::mine(sample_dataset, PatternMiner),
 		sample_pattern_miner::print_pattern_miner(PatternMiner).
+
+	test(sample_pattern_miner_diagnostics_2, deterministic((memberchk(model(sample_pattern_miner), Diagnostics), memberchk(pattern_count(2), Diagnostics), memberchk(search_strategy(sample_projection), Diagnostics)))) :-
+		sample_pattern_miner::mine(sample_dataset, PatternMiner),
+		sample_pattern_miner::diagnostics(PatternMiner, Diagnostics).
+
+	test(sample_pattern_miner_diagnostic_2, true) :-
+		sample_pattern_miner::mine(sample_dataset, PatternMiner),
+		sample_pattern_miner::diagnostic(PatternMiner, pattern_length_histogram([1-1, 2-1])).
+
+	test(sample_pattern_miner_options_2, deterministic(Options == [])) :-
+		sample_pattern_miner::mine(sample_dataset, PatternMiner),
+		sample_pattern_miner::pattern_miner_options(PatternMiner, Options).
+
+	test(sample_pattern_miner_check_pattern_miner_1, deterministic) :-
+		sample_pattern_miner::mine(sample_dataset, PatternMiner),
+		sample_pattern_miner::check_pattern_miner(PatternMiner).
+
+	test(sample_pattern_miner_check_invalid_pattern_miner_1, error(domain_error(sample_pattern_miner, sample_pattern_miner([frequent_itemset([bread], foo)])))) :-
+		PatternMiner = sample_pattern_miner([frequent_itemset([bread], foo)]),
+		sample_pattern_miner::check_pattern_miner(PatternMiner).
+
+	test(sample_pattern_miner_valid_pattern_miner_1, deterministic) :-
+		sample_pattern_miner::mine(sample_dataset, PatternMiner),
+		sample_pattern_miner::valid_pattern_miner(PatternMiner).
+
+	test(sample_pattern_miner_invalid_pattern_miner_1, fail) :-
+		PatternMiner = sample_pattern_miner([frequent_itemset([bread], foo)]),
+		sample_pattern_miner::valid_pattern_miner(PatternMiner).
 
 :- end_object.

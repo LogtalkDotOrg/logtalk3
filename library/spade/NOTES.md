@@ -25,7 +25,8 @@ SPADE sequential pattern miner for sequence datasets. The library
 depends on the `sequential_pattern_mining_protocols` support library,
 implements the generic `pattern_miner_protocol` defined in the
 `pattern_mining_protocols` core library, and mines frequent sequential
-patterns using vertical occurrence lists over sequence and event
+patterns using Zaki's equivalence-class decomposition with temporal
+joins over vertical occurrence lists keyed by sequence and event
 identifiers.
 
 
@@ -55,7 +56,9 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
+- **Equivalence-Class Decomposition**: Mines frequent sequences using Zaki's equivalence-class decomposition over prefix-sharing classes.
 - **Vertical Occurrence Lists**: Represents frequent patterns using sequence and event occurrence lists.
+- **Active Class Candidate Pruning**: Restricts class joins to members that occur in the supporting sequences of the current prefix, using per-sequence member-id indexes instead of storing full pattern terms in the sequence index.
 - **Same-Event and Sequence Extensions**: Supports both itemset growth and next-event sequence growth.
 - **Canonical Sequences**: Validates that itemsets are sorted, duplicate-free, non-empty, and restricted to declared items.
 - **Flexible Support Thresholds**: Supports relative minimum support and absolute minimum support count.

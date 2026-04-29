@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-29,
 		comment is 'Shared predicates for sequential pattern miner dataset validation, support counting, and pattern ordering helpers.'
 	]).
 
@@ -78,16 +78,37 @@
 		argnames is ['ItemSupports0', 'ItemSupports']
 	]).
 
+	:- protected(valid_sequence_patterns/2).
+	:- mode(valid_sequence_patterns(+list(atom), +list(compound)), zero_or_one).
+	:- info(valid_sequence_patterns/2, [
+		comment is 'True when the patterns are valid ``sequence_pattern(Pattern, Support)`` terms over the given item domain with positive integer supports.',
+		argnames is ['ItemDomain', 'Patterns']
+	]).
+
 	:- uses(list, [
 		length/2, member/2
 	]).
 
-	check_sequences(Dataset, _ItemDomain, Sequences, _MaxSequenceLength) :-
-		Sequences == [],
+	:- uses(type, [
+		valid/2
+	]).
+
+	check_sequences(Dataset, _ItemDomain, [], _MaxSequenceLength) :-
 		!,
 		domain_error(non_empty_dataset, Dataset).
 	check_sequences(_Dataset, ItemDomain, Sequences, MaxSequenceLength) :-
+		check_unique_sequence_ids(Sequences),
 		check_sequences_list(Sequences, ItemDomain, 0, MaxSequenceLength).
+
+	check_unique_sequence_ids(Sequences) :-
+		findall(Id, member(Id-_, Sequences), Ids),
+		sort(Ids, UniqueIds),
+		length(Ids, IdsCount),
+		length(UniqueIds, UniqueIdsCount),
+		(	IdsCount =:= UniqueIdsCount ->
+			true
+		;	domain_error(unique_sequence_ids, Ids)
+		).
 
 	check_sequences_list([], _ItemDomain, MaxSequenceLength, MaxSequenceLength).
 	check_sequences_list([_-Sequence| Sequences], ItemDomain, MaxSequenceLength0, MaxSequenceLength) :-
@@ -192,5 +213,12 @@
 		;   FilteredPatterns = RestFilteredPatterns
 		),
 		filter_patterns(Patterns, MinimumPatternLength, RestFilteredPatterns).
+
+	valid_sequence_patterns(_ItemDomain, []) :-
+		!.
+	valid_sequence_patterns(ItemDomain, [sequence_pattern(Pattern, Support)| Patterns]) :-
+		catch(check_sequence(Pattern, ItemDomain, _PatternLength), _Error, fail),
+		valid(positive_integer, Support),
+		valid_sequence_patterns(ItemDomain, Patterns).
 
 :- end_category.

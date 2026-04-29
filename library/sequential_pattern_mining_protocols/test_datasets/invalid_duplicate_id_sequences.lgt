@@ -19,10 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(sequential_pattern_mining_protocols(loader)),
-	logtalk_load(clo_span, [optimize(on)])
-)).
+:- object(invalid_duplicate_id_sequences,
+	implements(sequence_dataset_protocol)).
+
+	items([a, b]).
+
+	sequence(1, [[a]]).
+	sequence(1, [[b]]).
+
+:- end_object.

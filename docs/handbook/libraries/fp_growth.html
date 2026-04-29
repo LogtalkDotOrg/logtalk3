@@ -298,7 +298,9 @@ depends on the <code class="docutils literal notranslate"><span class="pre">freq
 implements the generic <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library, and mines frequent itemsets
 using recursive conditional pattern-base projection over a compact
-FP-tree.</p>
+FP-tree whose nodes store parent links directly, plus header-table node
+chains derived from the final tree for direct conditional-base
+reconstruction.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -324,6 +326,10 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>FP-tree Construction</strong>: Builds a compact prefix tree from frequent
 items ordered by global support.</p></li>
+<li><p><strong>Header and Parent Links</strong>: Stores parent links directly in tree
+nodes and derives header-table node chains from the final tree so
+conditional pattern bases are reconstructed by walking parent links
+instead of using a separate node index.</p></li>
 <li><p><strong>Pattern Growth</strong>: Mines frequent itemsets recursively from
 conditional pattern bases without candidate generation.</p></li>
 <li><p><strong>Canonical Transactions</strong>: Validates that transactions are sorted,

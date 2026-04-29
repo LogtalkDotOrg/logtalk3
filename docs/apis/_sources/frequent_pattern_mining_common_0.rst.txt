@@ -15,7 +15,7 @@ Shared predicates for frequent itemset miner dataset validation, support accumul
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -25,12 +25,13 @@ Shared predicates for frequent itemset miner dataset validation, support accumul
 |    ``public`` :ref:`pattern_miner_common <pattern_miner_common/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`pattern_miner_protocol/0::check_pattern_miner/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::diagnostic/2`  :ref:`pattern_miner_protocol/0::diagnostics/2`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`pattern_miner_protocol/0::mine/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::pattern_miner_options/2`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`pattern_miner_protocol/0::valid_pattern_miner/1`  
 
 .. contents::
    :local:
@@ -135,6 +136,25 @@ Selects the item supports that satisfy the minimum support count.
 |    ``select_frequent_item_supports(ItemCounts,SupportCount,FrequentItemSupports)``
 | **Mode and number of proofs:**
 |    ``select_frequent_item_supports(+list(pair(atom,integer)),+integer,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: valid_itemset_patterns/2
+.. _frequent_pattern_mining_common/0::valid_itemset_patterns/2:
+
+``valid_itemset_patterns/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the patterns are valid ``itemset(Items, Support)`` terms over the given item domain with positive integer supports.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_itemset_patterns(ItemDomain,Patterns)``
+| **Mode and number of proofs:**
+|    ``valid_itemset_patterns(+list(atom),+list(compound))`` - ``zero_or_one``
 
 
 ------------

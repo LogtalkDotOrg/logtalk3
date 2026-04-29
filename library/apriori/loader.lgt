@@ -24,6 +24,8 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(combinations(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(frequent_pattern_mining_protocols(loader)),
+	logtalk_load(hashes(loader)),
 	logtalk_load(apriori, [optimize(on)])
 )).

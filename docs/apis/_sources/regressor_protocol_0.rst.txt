@@ -15,7 +15,7 @@ Protocol for machine learning regressors.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -109,7 +109,7 @@ Checks that a learned regressor term is structurally valid for the receiving imp
 | **Template:**
 |    ``check_regressor(Regressor)``
 | **Mode and number of proofs:**
-|    ``check_regressor(+compound)`` - ``one``
+|    ``check_regressor(@compound)`` - ``one_or_error``
 
 
 ------------
@@ -128,7 +128,7 @@ True when a learned regressor term is structurally valid for the receiving imple
 | **Template:**
 |    ``valid_regressor(Regressor)``
 | **Mode and number of proofs:**
-|    ``valid_regressor(+compound)`` - ``zero_or_one``
+|    ``valid_regressor(@compound)`` - ``zero_or_one``
 
 
 ------------

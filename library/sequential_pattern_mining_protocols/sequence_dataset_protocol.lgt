@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
-		comment is 'Protocol for ordered sequence datasets used with sequential pattern mining algorithms.'
+		date is 2026-04-29,
+		comment is 'Protocol for ordered sequence datasets used with sequential pattern mining algorithms. Sequence identifiers are expected to be unique within a dataset.'
 	]).
 
 	:- public(items/1).
@@ -38,7 +38,7 @@
 	:- public(sequence/2).
 	:- mode(sequence(-integer, -list(list(atom))), zero_or_more).
 	:- info(sequence/2, [
-		comment is 'Enumerates by backtracking the sequences in the dataset. Each sequence is represented as an ordered list of canonical sorted itemsets with unique declared items.',
+		comment is 'Enumerates by backtracking the sequences in the dataset. The sequence identifier is expected to be unique within the dataset. Each sequence is represented as an ordered list of canonical sorted itemsets with unique declared items.',
 		argnames is ['Id', 'Sequence']
 	]).
 

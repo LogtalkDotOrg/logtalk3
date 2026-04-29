@@ -15,7 +15,7 @@ Protocol for machine learning dimension reducers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -109,7 +109,7 @@ Checks that a learned dimension reducer term is structurally valid for the recei
 | **Template:**
 |    ``check_dimension_reducer(DimensionReducer)``
 | **Mode and number of proofs:**
-|    ``check_dimension_reducer(+compound)`` - ``one``
+|    ``check_dimension_reducer(@compound)`` - ``one_or_error``
 
 
 ------------
@@ -128,7 +128,7 @@ True when a learned dimension reducer term is structurally valid for the receivi
 | **Template:**
 |    ``valid_dimension_reducer(DimensionReducer)``
 | **Mode and number of proofs:**
-|    ``valid_dimension_reducer(+compound)`` - ``zero_or_one``
+|    ``valid_dimension_reducer(@compound)`` - ``zero_or_one``
 
 
 ------------

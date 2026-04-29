@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Smoke tests for the "sequential_pattern_mining_protocols" library.'
 	]).
 
@@ -91,6 +91,9 @@
 	test(invalid_duplicate_item_in_event_sequences_has_duplicate_item, deterministic(\+ sequence_has_canonical_itemsets(Sequence))) :-
 		invalid_duplicate_item_in_event_sequences::sequence(1, Sequence).
 
+	test(invalid_duplicate_id_sequences_has_non_unique_ids, true(\+ unique_sequence_ids(Ids))) :-
+		findall(Id, invalid_duplicate_id_sequences::sequence(Id, _Sequence), Ids).
+
 	test(invalid_empty_event_sequences_has_empty_event, deterministic(\+ sequence_has_canonical_itemsets(Sequence))) :-
 		invalid_empty_event_sequences::sequence(1, Sequence).
 
@@ -114,5 +117,11 @@
 				Itemset == Sorted
 			)
 		).
+
+	unique_sequence_ids(Ids) :-
+		sort(Ids, UniqueIds),
+		length(Ids, IdsCount),
+		length(UniqueIds, UniqueIdsCount),
+		IdsCount =:= UniqueIdsCount.
 
 :- end_object.

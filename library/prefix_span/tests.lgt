@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Unit tests for the "prefix_span" library.'
 	]).
 
@@ -65,6 +65,9 @@
 	test(prefix_span_mine_3_same_event_and_next_event_extensions, deterministic((memberchk(sequence_pattern([[a, b]], 3), Patterns), memberchk(sequence_pattern([[a], [b]], 3), Patterns)))) :-
 		prefix_span::mine(same_event_vs_next_event_sequences, prefix_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(2)]).
 
+	test(prefix_span_mine_3_late_i_extension_support, deterministic(memberchk(sequence_pattern([[a, c]], 2), Patterns))) :-
+		prefix_span::mine(late_i_extension_sequences, prefix_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(2)]).
+
 	test(prefix_span_mine_3_repeated_embedding_support, deterministic((memberchk(sequence_pattern([[a], [b]], 2), Patterns), memberchk(sequence_pattern([[a], [b], [c]], 2), Patterns)))) :-
 		prefix_span::mine(repeated_embedding_sequences, prefix_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]).
 
@@ -79,6 +82,18 @@
 
 	test(prefix_span_mine_3_branching_patterns, deterministic((memberchk(sequence_pattern([[start], [a], [end]], 3), Patterns), memberchk(sequence_pattern([[start], [b], [end]], 3), Patterns)))) :-
 		prefix_span::mine(branching_sequences, prefix_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]).
+
+	test(prefix_span_diagnostics_2, deterministic((memberchk(model(prefix_span), Diagnostics), memberchk(extension_modes([itemset, sequence]), Diagnostics), memberchk(support_layout(projected_database), Diagnostics)))) :-
+		prefix_span::mine(prefix_ladder_sequences, PatternMiner, [minimum_support_count(4), maximum_pattern_length(2)]),
+		prefix_span::diagnostics(PatternMiner, Diagnostics).
+
+	test(prefix_span_valid_pattern_miner_1, deterministic) :-
+		prefix_span::mine(prefix_ladder_sequences, PatternMiner, [minimum_support_count(4), maximum_pattern_length(2)]),
+		prefix_span::valid_pattern_miner(PatternMiner).
+
+	test(prefix_span_invalid_pattern_miner_1, fail) :-
+		PatternMiner = prefix_span_pattern_miner([a], [sequence_pattern([[a]], foo)], [minimum_support(0.5)]),
+		prefix_span::valid_pattern_miner(PatternMiner).
 
 	test(prefix_span_export_to_clauses_4, deterministic(functor(Clause, mined_patterns, 3))) :-
 		prefix_span::mine(clickstream_sequences, PatternMiner, [minimum_support_count(5), maximum_pattern_length(1)]),
@@ -104,6 +119,9 @@
 
 	test(prefix_span_mine_2_invalid_duplicate_item_dataset, error(domain_error(canonical_itemset, [a, a]))) :-
 		prefix_span::mine(invalid_duplicate_item_in_event_sequences, _PatternMiner).
+
+	test(prefix_span_mine_2_invalid_duplicate_id_dataset, error(domain_error(unique_sequence_ids, [1, 1]))) :-
+		prefix_span::mine(invalid_duplicate_id_sequences, _PatternMiner).
 
 	test(prefix_span_mine_2_invalid_empty_itemset_dataset, error(domain_error(non_empty_itemset, []))) :-
 		prefix_span::mine(invalid_empty_event_sequences, _PatternMiner).

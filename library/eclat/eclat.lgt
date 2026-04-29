@@ -25,30 +25,29 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Eclat frequent itemset miner for transaction datasets using portable vertical tidsets and depth-first recursive prefix extension.',
 		remarks is [
-			'Algorithm' - 'Builds vertical tidsets for frequent singleton items and recursively extends them by lexicographic suffix joins and tidset intersections.',
-			'Dataset handling' - 'Requires a dataset implementing ``transaction_dataset_protocol`` with transactions represented as canonical sorted lists of unique declared items.',
+			'Algorithm' - 'Normalizes dataset transaction identifiers to internal ascending ordinals, builds vertical tidsets for frequent singleton items, and recursively extends them by lexicographic suffix joins and tidset intersections.',
+			'Dataset handling' - 'Requires a dataset implementing ``transaction_dataset_protocol`` with transactions represented as canonical sorted lists of unique declared items. External transaction identifiers are treated as opaque metadata and normalized to internal ordinals before tidset construction.',
 			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
 			'Pattern miner representation' - 'The mined result is represented by default as ``eclat_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``itemset(Items, SupportCount)`` terms ordered first by pattern length and then lexicographically.'
 		],
 		see_also is [pattern_miner_protocol, transaction_dataset_protocol, apriori, fp_growth]
 	]).
 
-	:- public(mine/3).
-	:- mode(mine(+object_identifier, -compound, +list(compound)), one).
-	:- info(mine/3, [
-		comment is 'Mines frequent itemsets from the given transaction dataset using the specified options.',
-		argnames is ['Dataset', 'PatternMiner', 'Options']
-	]).
-
 	:- uses(format, [
 		format/2
 	]).
 
+	:- uses(avltree, [
+		insert/4 as dictionary_insert/4,
+		lookup/3 as dictionary_lookup/3,
+		new/1 as dictionary_new/1
+	]).
+
 	:- uses(list, [
-		append/3, length/2, member/2
+		append/3, length/2, memberchk/2, reverse/2
 	]).
 
 	mine(Dataset, PatternMiner, UserOptions) :-
@@ -56,8 +55,9 @@
 		^^merge_options(UserOptions, Options),
 		Dataset::items(ItemDomain),
 		^^check_item_domain(ItemDomain),
-		findall(Id-Transaction, Dataset::transaction(Id, Transaction), Transactions),
-		^^check_transactions(Dataset, ItemDomain, Transactions, MaxTransactionLength),
+		findall(ExternalId-Transaction, Dataset::transaction(ExternalId, Transaction), DatasetTransactions),
+		^^check_transactions(Dataset, ItemDomain, DatasetTransactions, MaxTransactionLength),
+		normalize_transactions(DatasetTransactions, Transactions),
 		length(Transactions, TransactionCount),
 		^^effective_support_count(TransactionCount, Options, SupportCount),
 		^^effective_maximum_pattern_length(MaxTransactionLength, Options, MaximumPatternLength),
@@ -68,23 +68,46 @@
 		^^filter_patterns(SortedPatterns, MinimumPatternLength, Patterns),
 		PatternMiner = eclat_pattern_miner(ItemDomain, Patterns, Options).
 
-	build_initial_tidsets([], _Transactions, _SupportCount, []).
-	build_initial_tidsets([Item| Items], Transactions, SupportCount, Tidsets) :-
-		item_tidset(Transactions, Item, Tidset),
-		length(Tidset, Support),
-		(   Support >= SupportCount ->
+	normalize_transactions(Transactions, NormalizedTransactions) :-
+		normalize_transactions(Transactions, 1, NormalizedTransactions).
+
+	normalize_transactions([], _TransactionOrdinal, []).
+	normalize_transactions([_ExternalId-Transaction| Transactions], TransactionOrdinal, [TransactionOrdinal-Transaction| NormalizedTransactions]) :-
+		NextTransactionOrdinal is TransactionOrdinal + 1,
+		normalize_transactions(Transactions, NextTransactionOrdinal, NormalizedTransactions).
+
+	build_initial_tidsets(ItemDomain, Transactions, SupportCount, Tidsets) :-
+		dictionary_new(TidsetDictionary0),
+		build_tidset_dictionary(Transactions, TidsetDictionary0, TidsetDictionary),
+		select_initial_tidsets(ItemDomain, TidsetDictionary, SupportCount, Tidsets).
+
+	build_tidset_dictionary([], TidsetDictionary, TidsetDictionary).
+	build_tidset_dictionary([TransactionOrdinal-Transaction| Transactions], TidsetDictionary0, TidsetDictionary) :-
+		add_transaction_items(Transaction, TransactionOrdinal, TidsetDictionary0, TidsetDictionary1),
+		build_tidset_dictionary(Transactions, TidsetDictionary1, TidsetDictionary).
+
+	add_transaction_items([], _TransactionOrdinal, TidsetDictionary, TidsetDictionary).
+	add_transaction_items([Item| Items], TransactionOrdinal, TidsetDictionary0, TidsetDictionary) :-
+		increment_item_tidset(Item, TransactionOrdinal, TidsetDictionary0, TidsetDictionary1),
+		add_transaction_items(Items, TransactionOrdinal, TidsetDictionary1, TidsetDictionary).
+
+	increment_item_tidset(Item, TransactionOrdinal, TidsetDictionary0, TidsetDictionary) :-
+		(   dictionary_lookup(Item, tidset_support(RevTidset0, Support0), TidsetDictionary0) ->
+			RevTidset = [TransactionOrdinal| RevTidset0],
+			Support is Support0 + 1
+		;   RevTidset = [TransactionOrdinal],
+			Support = 1
+		),
+		dictionary_insert(TidsetDictionary0, Item, tidset_support(RevTidset, Support), TidsetDictionary).
+
+	select_initial_tidsets([], _TidsetDictionary, _SupportCount, []).
+	select_initial_tidsets([Item| Items], TidsetDictionary, SupportCount, Tidsets) :-
+		(   dictionary_lookup(Item, tidset_support(RevTidset, Support), TidsetDictionary), Support >= SupportCount ->
+			reverse(RevTidset, Tidset),
 			Tidsets = [item_tidset(Item, Tidset)| RestTidsets]
 		;   Tidsets = RestTidsets
 		),
-		build_initial_tidsets(Items, Transactions, SupportCount, RestTidsets).
-
-	item_tidset([], _Item, []).
-	item_tidset([Id-Transaction| Transactions], Item, Tidset) :-
-		(   member(Item, Transaction) ->
-			Tidset = [Id| RestTidset]
-		;   Tidset = RestTidset
-		),
-		item_tidset(Transactions, Item, RestTidset).
+		select_initial_tidsets(Items, TidsetDictionary, SupportCount, RestTidsets).
 
 	mine_tidsets([], _Prefix, _SupportCount, _MaximumPatternLength, []).
 	mine_tidsets([item_tidset(Item, Tidset)| Tidsets], Prefix, SupportCount, MaximumPatternLength, Patterns) :-
@@ -124,6 +147,25 @@
 		(   Tid1 < Tid2 ->
 			intersect_tidsets(Tids1, [Tid2| Tids2], Intersection)
 		;   intersect_tidsets([Tid1| Tids1], Tids2, Intersection)
+		).
+
+	pattern_miner_diagnostics_data(eclat_pattern_miner(ItemDomain, Patterns, Options), Diagnostics) :-
+		^^pattern_miner_diagnostics(eclat, ItemDomain, Patterns, Options, [
+			search_strategy(depth_first_prefix_extension),
+			extension_operator(tidset_intersection),
+			support_layout(vertical_tidsets)
+		], Diagnostics).
+
+	check_pattern_miner(PatternMiner) :-
+		(   PatternMiner = eclat_pattern_miner(ItemDomain, Patterns, Options),
+			^^valid_itemset_patterns(ItemDomain, Patterns),
+			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
+			^^valid_pattern_miner_metadata(eclat, ItemDomain, Patterns, Options, Diagnostics),
+			memberchk(search_strategy(depth_first_prefix_extension), Diagnostics),
+			memberchk(extension_operator(tidset_intersection), Diagnostics),
+			memberchk(support_layout(vertical_tidsets), Diagnostics) ->
+			true
+		;   domain_error(eclat_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, eclat_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

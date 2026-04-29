@@ -8,14 +8,14 @@
 ``transaction_dataset_protocol``
 ================================
 
-Protocol for transaction datasets used with frequent itemset mining algorithms.
+Protocol for transaction datasets used with frequent itemset mining algorithms. Transaction identifiers are expected to be unique within a dataset.
 
 | **Availability:** 
 |    ``logtalk_load(frequent_pattern_mining_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-22
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -63,7 +63,7 @@ Returns the declared transaction item domain as a canonical sorted list of uniqu
 ``transaction/2``
 ^^^^^^^^^^^^^^^^^
 
-Enumerates by backtracking the transactions in the dataset. Each transaction is represented as a canonical sorted list of unique declared items.
+Enumerates by backtracking the transactions in the dataset. The transaction identifier is expected to be unique within the dataset. Each transaction is represented as a canonical sorted list of unique declared items.
 
 | **Compilation flags:**
 |    ``static``

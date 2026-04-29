@@ -19,10 +19,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(sequential_pattern_mining_protocols(loader)),
-	logtalk_load(clo_span, [optimize(on)])
-)).
+:- object(self_join_sequences,
+	implements(sequence_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-29,
+		comment is 'Sequence dataset where a singleton equivalence class must self-join to mine the repeated-event pattern [[a],[a]].'
+	]).
+
+	items([a, b]).
+
+	sequence(1, [[a], [a]]).
+	sequence(2, [[a], [a], [b]]).
+	sequence(3, [[a], [b]]).
+
+:- end_object.

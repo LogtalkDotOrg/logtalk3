@@ -19,10 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(sequential_pattern_mining_protocols(loader)),
-	logtalk_load(clo_span, [optimize(on)])
-)).
+:- object(late_i_extension_sequences,
+	implements(sequence_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-29,
+		comment is 'Sequence dataset where a same-event extension is supported only by a later occurrence of the prefix in one of the sequences.'
+	]).
+
+	items([a, b, c]).
+
+	sequence(1, [[a], [b], [a, c]]).
+	sequence(2, [[a, c]]).
+
+:- end_object.

@@ -297,7 +297,8 @@
 depends on the <code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code> support library,
 implements the generic <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library, and mines frequent sequential
-patterns using vertical occurrence lists over sequence and event
+patterns using Zaki’s equivalence-class decomposition with temporal
+joins over vertical occurrence lists keyed by sequence and event
 identifiers.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -322,8 +323,14 @@ link in a web browser.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><strong>Equivalence-Class Decomposition</strong>: Mines frequent sequences using
+Zaki’s equivalence-class decomposition over prefix-sharing classes.</p></li>
 <li><p><strong>Vertical Occurrence Lists</strong>: Represents frequent patterns using
 sequence and event occurrence lists.</p></li>
+<li><p><strong>Active Class Candidate Pruning</strong>: Restricts class joins to members
+that occur in the supporting sequences of the current prefix, using
+per-sequence member-id indexes instead of storing full pattern terms
+in the sequence index.</p></li>
 <li><p><strong>Same-Event and Sequence Extensions</strong>: Supports both itemset growth
 and next-event sequence growth.</p></li>
 <li><p><strong>Canonical Sequences</strong>: Validates that itemsets are sorted,

@@ -32,6 +32,7 @@
 	]),
 	logtalk_load([
 		'test_datasets/deep_intersection_baskets',
+		'test_datasets/invalid_duplicate_id_baskets',
 		'test_datasets/invalid_duplicate_item_baskets',
 		'test_datasets/invalid_empty_baskets',
 		'test_datasets/invalid_item_domain_baskets',

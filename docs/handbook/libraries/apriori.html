@@ -298,7 +298,8 @@ depends on the <code class="docutils literal notranslate"><span class="pre">freq
 implements the generic <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library, and mines frequent itemsets
 using deterministic level-wise candidate generation and anti-monotone
-pruning.</p>
+pruning with one transaction rescan per candidate level using a
+candidate hash tree backed by keyed bucket dictionaries.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -323,9 +324,20 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Deterministic Level-Wise Mining</strong>: Builds frequent itemsets by
-deterministic candidate generation and support rescans.</p></li>
+deterministic candidate generation and one transaction rescan per
+candidate level.</p></li>
+<li><p><strong>Candidate Hash Tree Counting</strong>: Counts supports for an entire
+candidate level by traversing a hash tree with keyed bucket and item
+dictionaries instead of linearly scanning bucket lists for every
+transaction.</p></li>
+<li><p><strong>Library Hashing</strong>: Uses the <code class="docutils literal notranslate"><span class="pre">hashes</span></code> library <code class="docutils literal notranslate"><span class="pre">fnv1a_32</span></code> object
+to hash candidate items instead of relying on an ad hoc local hash
+function.</p></li>
+<li><p><strong>Apriori Join Step</strong>: Generates level candidates by pairwise joins of
+the previous frequent itemsets with shared prefixes.</p></li>
 <li><p><strong>Apriori Pruning</strong>: Rejects candidate itemsets whose immediate
-subsets are not all frequent.</p></li>
+subsets are not all frequent using ordered subset checks over the
+previous level.</p></li>
 <li><p><strong>Canonical Transactions</strong>: Validates that transactions are sorted,
 duplicate-free, and restricted to declared items.</p></li>
 <li><p><strong>Flexible Support Thresholds</strong>: Supports relative minimum support and

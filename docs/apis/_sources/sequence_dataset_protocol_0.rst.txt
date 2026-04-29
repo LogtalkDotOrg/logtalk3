@@ -8,14 +8,14 @@
 ``sequence_dataset_protocol``
 =============================
 
-Protocol for ordered sequence datasets used with sequential pattern mining algorithms.
+Protocol for ordered sequence datasets used with sequential pattern mining algorithms. Sequence identifiers are expected to be unique within a dataset.
 
 | **Availability:** 
 |    ``logtalk_load(sequential_pattern_mining_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-22
+| **Date:** 2026-04-29
 
 | **Compilation flags:**
 |    ``static``
@@ -63,7 +63,7 @@ Returns the declared sequence item domain as a canonical sorted list of unique i
 ``sequence/2``
 ^^^^^^^^^^^^^^
 
-Enumerates by backtracking the sequences in the dataset. Each sequence is represented as an ordered list of canonical sorted itemsets with unique declared items.
+Enumerates by backtracking the sequences in the dataset. The sequence identifier is expected to be unique within the dataset. Each sequence is represented as an ordered list of canonical sorted itemsets with unique declared items.
 
 | **Compilation flags:**
 |    ``static``

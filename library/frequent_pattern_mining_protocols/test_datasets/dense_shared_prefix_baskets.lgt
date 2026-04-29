@@ -19,10 +19,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(sequential_pattern_mining_protocols(loader)),
-	logtalk_load(clo_span, [optimize(on)])
-)).
+:- object(dense_shared_prefix_baskets,
+	implements(transaction_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-04-29,
+		comment is 'Dense transaction dataset where every basket shares the same leading frequent prefix and diverges only in the suffix, suitable for stressing FP-tree header and parent-link traversal.'
+	]).
+
+	items([alpha, beta, delta, epsilon, gamma]).
+
+	transaction(1, [alpha, beta, delta, epsilon, gamma]).
+	transaction(2, [alpha, beta, delta, epsilon, gamma]).
+	transaction(3, [alpha, beta, delta, gamma]).
+	transaction(4, [alpha, beta, epsilon, gamma]).
+	transaction(5, [alpha, beta, delta, epsilon]).
+	transaction(6, [alpha, beta, gamma]).
+	transaction(7, [alpha, beta, delta, epsilon, gamma]).
+	transaction(8, [alpha, beta, delta, epsilon, gamma]).
+
+:- end_object.

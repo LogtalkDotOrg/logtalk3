@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-29,
 		comment is 'Protocol for machine learning rankers.',
 		see_also is [bradley_terry, ranking_dataset_protocol, pairwise_ranking_dataset_protocol]
 	]).
@@ -79,14 +79,14 @@
 	]).
 
 	:- public(check_ranker/1).
-	:- mode(check_ranker(+compound), one).
+	:- mode(check_ranker(@compound), one_or_error).
 	:- info(check_ranker/1, [
 		comment is 'Checks that the argument is a structurally valid learned ranker term for the receiving ranker implementation, throwing an exception on invalid input when applicable.',
 		argnames is ['Ranker']
 	]).
 
 	:- public(valid_ranker/1).
-	:- mode(valid_ranker(+compound), zero_or_one).
+	:- mode(valid_ranker(@compound), zero_or_one).
 	:- info(valid_ranker/1, [
 		comment is 'True when `check_ranker/1` succeeds for the argument without throwing an exception.',
 		argnames is ['Ranker']

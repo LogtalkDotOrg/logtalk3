@@ -25,10 +25,10 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
-		comment is 'FP-growth frequent itemset miner for transaction datasets using recursive conditional pattern-base projection.',
+		date is 2026-04-29,
+		comment is 'FP-growth frequent itemset miner for transaction datasets using recursive conditional pattern-base projection over an FP-tree with header-table and parent-link navigation.',
 		remarks is [
-			'Algorithm' - 'Builds a compact FP-tree from globally ordered frequent items and mines conditional pattern bases recursively without candidate generation.',
+			'Algorithm' - 'Builds a compact FP-tree from globally ordered frequent items, stores parent links directly in each node, derives header-table node chains from the final tree, and mines conditional pattern bases recursively without candidate generation.',
 			'Dataset handling' - 'Requires a dataset implementing ``transaction_dataset_protocol`` with transactions represented as canonical sorted lists of unique declared items.',
 			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
 			'Pattern miner representation' - 'The mined result is represented by default as ``fp_growth_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``itemset(Items, SupportCount)`` terms ordered first by pattern length and then lexicographically.'
@@ -36,19 +36,12 @@
 		see_also is [pattern_miner_protocol, transaction_dataset_protocol, apriori]
 	]).
 
-	:- public(mine/3).
-	:- mode(mine(+object_identifier, -compound, +list(compound)), one).
-	:- info(mine/3, [
-		comment is 'Mines frequent itemsets from the given transaction dataset using the specified options.',
-		argnames is ['Dataset', 'PatternMiner', 'Options']
-	]).
-
 	:- uses(format, [
 		format/2
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, reverse/2
+		append/3, length/2, member/2, memberchk/2, reverse/2
 	]).
 
 	mine(Dataset, PatternMiner, UserOptions) :-
@@ -70,8 +63,7 @@
 		^^sort_patterns(Patterns0, SortedPatterns),
 		^^option(minimum_pattern_length(MinimumPatternLength), Options),
 		^^filter_patterns(SortedPatterns, MinimumPatternLength, Patterns),
-		PatternMiner = fp_growth_pattern_miner(ItemDomain, Patterns, Options),
-		!.
+		PatternMiner = fp_growth_pattern_miner(ItemDomain, Patterns, Options).
 
 	count_transaction_items([], ItemCounts, ItemCounts).
 	count_transaction_items([_Id-Transaction| Transactions], ItemCounts0, ItemCounts) :-
@@ -127,25 +119,46 @@
 		order_transaction_by_supports(FrequentItemSupports, Transaction, RestOrderedTransaction).
 
 	build_fp_tree(Transactions, Tree) :-
-		build_fp_tree(Transactions, tree([]), Tree).
+		build_fp_tree(Transactions, tree([]), Tree0),
+		build_header(Tree0, Tree).
 
 	build_fp_tree([], Tree, Tree).
 	build_fp_tree([Count-Transaction| Transactions], Tree0, Tree) :-
-		insert_transaction(Transaction, Count, Tree0, Tree1),
+		insert_transaction(Transaction, Count, root, Tree0, Tree1),
 		build_fp_tree(Transactions, Tree1, Tree).
 
-	insert_transaction([], _Count, Tree, Tree).
-	insert_transaction([Item| Items], Count, tree(Children0), tree(Children)) :-
-		insert_child(Item, Items, Count, Children0, Children).
+	insert_transaction([], _Count, _Parent, Tree, Tree).
+	insert_transaction([Item| Items], Count, Parent, tree(Children0), tree(Children)) :-
+		insert_child(Item, Items, Count, Parent, Children0, Children).
 
-	insert_child(Item, Items, Count, [], [node(Item, Count, Children)]) :-
-		insert_transaction(Items, Count, tree([]), tree(Children)).
-	insert_child(Item, Items, Count, [node(Item, Count0, Children0)| Siblings], [node(Item, Count1, Children)| Siblings]) :-
+	insert_child(Item, Items, Count, Parent, [], [node(Item, Count, Parent, Children)]) :-
+		!,
+		child_parent(Item, Parent, ChildParent),
+		insert_transaction(Items, Count, ChildParent, tree([]), tree(Children)).
+	insert_child(Item, Items, Count, Parent, [node(Item, Count0, Parent, Children0)| Siblings], [node(Item, Count1, Parent, Children)| Siblings]) :-
 		!,
 		Count1 is Count0 + Count,
-		insert_transaction(Items, Count, tree(Children0), tree(Children)).
-	insert_child(Item, Items, Count, [Node| Siblings0], [Node| Siblings]) :-
-		insert_child(Item, Items, Count, Siblings0, Siblings).
+		child_parent(Item, Parent, ChildParent),
+		insert_transaction(Items, Count, ChildParent, tree(Children0), tree(Children)).
+	insert_child(Item, Items, Count, Parent, [Node| Siblings0], [Node| Siblings]) :-
+		insert_child(Item, Items, Count, Parent, Siblings0, Siblings).
+
+	child_parent(Item, Parent, parent(Item, Parent)).
+
+	build_header(tree(Children), tree(Children, Header)) :-
+		build_header(Children, [], Header).
+
+	build_header([], Header, Header).
+	build_header([node(Item, Count, Parent, Children)| Siblings], Header0, Header) :-
+		insert_header_node(Header0, Item, node_occurrence(Count, Parent), Header1),
+		build_header(Children, Header1, Header2),
+		build_header(Siblings, Header2, Header).
+
+	insert_header_node([], Item, NodeOccurrence, [item_nodes(Item, [NodeOccurrence])]).
+	insert_header_node([item_nodes(Item, NodeOccurrences0)| Header0], Item, NodeOccurrence, [item_nodes(Item, [NodeOccurrence| NodeOccurrences0])| Header0]) :-
+		!.
+	insert_header_node([Entry| Header0], Item, NodeOccurrence, [Entry| Header]) :-
+		insert_header_node(Header0, Item, NodeOccurrence, Header).
 
 	mine_tree([], _Tree, _SupportCount, _MaximumPatternLength, _Suffix, []).
 	mine_tree([item_support(Item, Support)| ItemSupports], Tree, SupportCount, MaximumPatternLength, Suffix, Patterns) :-
@@ -176,24 +189,57 @@
 			mine_tree(MiningItemSupports, ConditionalTree, SupportCount, MaximumPatternLength, Pattern, Patterns)
 		).
 
-	conditional_pattern_base(tree(Children), Item, PatternBase) :-
-		conditional_pattern_base(Children, [], Item, PatternBase).
+	conditional_pattern_base(tree(_Children, Header), Item, PatternBase) :-
+		header_node_occurrences(Item, Header, NodeOccurrences),
+		conditional_pattern_base_from_nodes(NodeOccurrences, [], RevPatternBase),
+		reverse(RevPatternBase, PatternBase).
 
-	conditional_pattern_base([], _Prefix, _Item, []).
-	conditional_pattern_base([node(NodeItem, Count, Children)| Siblings], Prefix, Item, PatternBase) :-
-		conditional_pattern_base(Siblings, Prefix, Item, SiblingPatternBase),
-		(   NodeItem == Item ->
-			(   Prefix == [] ->
-				PatternBase = SiblingPatternBase
-			;   PatternBase = [Count-Prefix| SiblingPatternBase]
-			)
-		;   append(Prefix, [NodeItem], NodePrefix),
-			conditional_pattern_base(Children, NodePrefix, Item, ChildPatternBase),
-			append(ChildPatternBase, SiblingPatternBase, PatternBase)
-		).
+	header_node_occurrences(Item, [item_nodes(Item, NodeOccurrences)| _Header], NodeOccurrences) :-
+		!.
+	header_node_occurrences(Item, [_Entry| Header], NodeOccurrences) :-
+		!,
+		header_node_occurrences(Item, Header, NodeOccurrences).
+	header_node_occurrences(_Item, [], []).
+
+	conditional_pattern_base_from_nodes([], PatternBase, PatternBase).
+	conditional_pattern_base_from_nodes([NodeOccurrence| NodeOccurrences], PatternBase0, PatternBase) :-
+		(   node_prefix_path(NodeOccurrence, Count, Prefix) ->
+			PatternBase1 = [Count-Prefix| PatternBase0]
+		;   PatternBase1 = PatternBase0
+		),
+		conditional_pattern_base_from_nodes(NodeOccurrences, PatternBase1, PatternBase).
+
+	node_prefix_path(node_occurrence(Count, Parent), Count, Prefix) :-
+		Parent \== root,
+		parent_items(Parent, [], Prefix).
+
+	parent_items(root, Items, Items).
+	parent_items(parent(Item, Parent), Items0, Items) :-
+		parent_items(Parent, [Item| Items0], Items).
 
 	canonical_pattern(Item, Suffix, Pattern) :-
 		sort([Item| Suffix], Pattern).
+
+	pattern_miner_diagnostics_data(fp_growth_pattern_miner(ItemDomain, Patterns, Options), Diagnostics) :-
+		^^pattern_miner_diagnostics(fp_growth, ItemDomain, Patterns, Options, [
+			search_strategy(depth_first_conditional_projection),
+			compression(prefix_tree_sharing),
+			support_layout(fp_tree),
+			projection_access(header_table_parent_links)
+		], Diagnostics).
+
+	check_pattern_miner(PatternMiner) :-
+		(   PatternMiner = fp_growth_pattern_miner(ItemDomain, Patterns, Options),
+			^^valid_itemset_patterns(ItemDomain, Patterns),
+			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
+			^^valid_pattern_miner_metadata(fp_growth, ItemDomain, Patterns, Options, Diagnostics),
+			memberchk(search_strategy(depth_first_conditional_projection), Diagnostics),
+			memberchk(compression(prefix_tree_sharing), Diagnostics),
+			memberchk(support_layout(fp_tree), Diagnostics),
+			memberchk(projection_access(header_table_parent_links), Diagnostics) ->
+			true
+		;   domain_error(fp_growth_pattern_miner, PatternMiner)
+		).
 
 	pattern_miner_export_template(_Dataset, fp_growth_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-
 		Template =.. [Functor, ItemDomain, Patterns, Options].

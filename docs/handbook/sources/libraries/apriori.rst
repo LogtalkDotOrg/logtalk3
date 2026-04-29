@@ -8,7 +8,8 @@ depends on the ``frequent_pattern_mining_protocols`` support library,
 implements the generic ``pattern_miner_protocol`` defined in the
 ``pattern_mining_protocols`` core library, and mines frequent itemsets
 using deterministic level-wise candidate generation and anti-monotone
-pruning.
+pruning with one transaction rescan per candidate level using a
+candidate hash tree backed by keyed bucket dictionaries.
 
 API documentation
 -----------------
@@ -39,9 +40,20 @@ Features
 --------
 
 - **Deterministic Level-Wise Mining**: Builds frequent itemsets by
-  deterministic candidate generation and support rescans.
+  deterministic candidate generation and one transaction rescan per
+  candidate level.
+- **Candidate Hash Tree Counting**: Counts supports for an entire
+  candidate level by traversing a hash tree with keyed bucket and item
+  dictionaries instead of linearly scanning bucket lists for every
+  transaction.
+- **Library Hashing**: Uses the ``hashes`` library ``fnv1a_32`` object
+  to hash candidate items instead of relying on an ad hoc local hash
+  function.
+- **Apriori Join Step**: Generates level candidates by pairwise joins of
+  the previous frequent itemsets with shared prefixes.
 - **Apriori Pruning**: Rejects candidate itemsets whose immediate
-  subsets are not all frequent.
+  subsets are not all frequent using ordered subset checks over the
+  previous level.
 - **Canonical Transactions**: Validates that transactions are sorted,
   duplicate-free, and restricted to declared items.
 - **Flexible Support Thresholds**: Supports relative minimum support and

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Smoke tests for the "frequent_pattern_mining_protocols" library.'
 	]).
 
@@ -62,6 +62,9 @@
 	test(invalid_duplicate_item_baskets_not_canonical, deterministic(\+ canonical_transaction(Transaction))) :-
 		invalid_duplicate_item_baskets::transaction(1, Transaction).
 
+	test(invalid_duplicate_id_baskets_has_non_unique_ids, deterministic(\+ unique_transaction_ids(Ids))) :-
+		findall(Id, invalid_duplicate_id_baskets::transaction(Id, _Transaction), Ids).
+
 	test(invalid_empty_baskets_has_no_transactions, deterministic(Count == 0)) :-
 		findall(Id, invalid_empty_baskets::transaction(Id, _Transaction), Ids),
 		length(Ids, Count).
@@ -82,5 +85,11 @@
 	canonical_item_domain(ItemDomain) :-
 		sort(ItemDomain, SortedItemDomain),
 		ItemDomain == SortedItemDomain.
+
+	unique_transaction_ids(Ids) :-
+		sort(Ids, UniqueIds),
+		length(Ids, IdsCount),
+		length(UniqueIds, UniqueIdsCount),
+		IdsCount =:= UniqueIdsCount.
 
 :- end_object.

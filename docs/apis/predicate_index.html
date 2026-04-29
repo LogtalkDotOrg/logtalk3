@@ -600,6 +600,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#check-options-1"><code class="docutils literal notranslate"><span class="pre">check_options/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#check-pattern-miner-1"><code class="docutils literal notranslate"><span class="pre">check_pattern_miner/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#check-ranker-1"><code class="docutils literal notranslate"><span class="pre">check_ranker/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3792,6 +3795,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#path-concat-3"><code class="docutils literal notranslate"><span class="pre">path_concat/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#pattern-miner-options-2"><code class="docutils literal notranslate"><span class="pre">pattern_miner_options/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#peek-back-2"><code class="docutils literal notranslate"><span class="pre">peek_back/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5437,6 +5443,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-options-1"><code class="docutils literal notranslate"><span class="pre">valid_options/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-pattern-miner-1"><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-ranker-1"><code class="docutils literal notranslate"><span class="pre">valid_ranker/1</span></code></a><ul class="simple">
@@ -7210,6 +7219,14 @@
 <li><p><a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">options_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="check-pattern-miner-1">
+<h2><code class="docutils literal notranslate"><span class="pre">check_pattern_miner/1</span></code><a class="headerlink" href="#check-pattern-miner-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-check-pattern-miner-1"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="check-ranker-1">
 <h2><code class="docutils literal notranslate"><span class="pre">check_ranker/1</span></code><a class="headerlink" href="#check-ranker-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -8886,6 +8903,7 @@
 <li><p><a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-diagnostic-2"><span class="std std-ref">classifier_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-diagnostic-2"><span class="std std-ref">clusterer_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dimension_reducer_protocol_0.html#dimension-reducer-protocol-0-diagnostic-2"><span class="std std-ref">dimension_reducer_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-diagnostic-2"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ranker_protocol_0.html#ranker-protocol-0-diagnostic-2"><span class="std std-ref">ranker_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostic-2"><span class="std std-ref">tool_diagnostics_protocol</span></a></p></li>
 </ul>
@@ -8930,6 +8948,7 @@
 <li><p><a class="reference internal" href="classifier_protocol_0.html#classifier-protocol-0-diagnostics-2"><span class="std std-ref">classifier_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="clusterer_protocol_0.html#clusterer-protocol-0-diagnostics-2"><span class="std std-ref">clusterer_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="dimension_reducer_protocol_0.html#dimension-reducer-protocol-0-diagnostics-2"><span class="std std-ref">dimension_reducer_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-diagnostics-2"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ranker_protocol_0.html#ranker-protocol-0-diagnostics-2"><span class="std std-ref">ranker_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="tool_diagnostics_protocol_0.html#tool-diagnostics-protocol-0-diagnostics-2"><span class="std std-ref">tool_diagnostics_protocol</span></a></p></li>
 </ul>
@@ -14656,13 +14675,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
-<li><p><a class="reference internal" href="apriori_0.html#apriori-0-mine-3"><span class="std std-ref">apriori</span></a></p></li>
-<li><p><a class="reference internal" href="clo_span_0.html#clo-span-0-mine-3"><span class="std std-ref">clo_span</span></a></p></li>
-<li><p><a class="reference internal" href="eclat_0.html#eclat-0-mine-3"><span class="std std-ref">eclat</span></a></p></li>
-<li><p><a class="reference internal" href="fp_growth_0.html#fp-growth-0-mine-3"><span class="std std-ref">fp_growth</span></a></p></li>
-<li><p><a class="reference internal" href="gsp_0.html#gsp-0-mine-3"><span class="std std-ref">gsp</span></a></p></li>
-<li><p><a class="reference internal" href="prefix_span_0.html#prefix-span-0-mine-3"><span class="std std-ref">prefix_span</span></a></p></li>
-<li><p><a class="reference internal" href="spade_0.html#spade-0-mine-3"><span class="std std-ref">spade</span></a></p></li>
+<li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-mine-3"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="minimum-enclosing-circle-3">
@@ -16028,6 +16041,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-path-concat-3"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="pattern-miner-options-2">
+<h2><code class="docutils literal notranslate"><span class="pre">pattern_miner_options/2</span></code><a class="headerlink" href="#pattern-miner-options-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-pattern-miner-options-2"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="peek-back-2">
@@ -20534,6 +20555,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">options_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="valid-pattern-miner-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner/1</span></code><a class="headerlink" href="#valid-pattern-miner-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-valid-pattern-miner-1"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="valid-ranker-1">

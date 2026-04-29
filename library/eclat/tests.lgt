@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-29,
 		comment is 'Unit tests for the "eclat" library.'
 	]).
 
@@ -56,19 +56,51 @@
 	test(eclat_mine_3_layered_baskets_pair, deterministic(memberchk(itemset([bread, diapers], 4), Patterns))) :-
 		eclat::mine(layered_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]).
 
+	test(eclat_mine_3_non_monotone_transaction_ids, deterministic(Patterns == [itemset([bread], 5), itemset([butter], 4), itemset([milk], 5), itemset([bread, butter], 3), itemset([bread, milk], 4), itemset([butter, milk], 3)])) :-
+		eclat::mine(non_monotone_id_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options)).
+
 	test(eclat_mine_3_deep_intersection_quadruple, deterministic(memberchk(itemset([alpha, beta, delta, gamma], 4), Patterns))) :-
 		eclat::mine(deep_intersection_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4)]).
 
 	test(eclat_mine_3_deep_intersection_maximum_length, deterministic(Patterns == [itemset([alpha, beta, delta, gamma], 4)])) :-
 		eclat::mine(deep_intersection_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), minimum_pattern_length(4), maximum_pattern_length(4)]).
 
+	test(eclat_mine_3_dense_shared_prefix_quads, deterministic((
+		memberchk(itemset([alpha, beta, delta, epsilon], 5), Patterns),
+		memberchk(itemset([alpha, beta, delta, gamma], 5), Patterns),
+		memberchk(itemset([alpha, beta, epsilon, gamma], 5), Patterns)
+	))) :-
+		eclat::mine(dense_shared_prefix_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(5)]).
+
 	test(eclat_matches_apriori, deterministic(EclatPatterns == AprioriPatterns)) :-
 		eclat::mine(market_basket_basics, eclat_pattern_miner(_ItemDomain, EclatPatterns, _Options), [minimum_support_count(3)]),
 		apriori::mine(market_basket_basics, apriori_pattern_miner(_AprioriDomain, AprioriPatterns, _AprioriOptions), [minimum_support_count(3)]).
 
+	test(eclat_matches_apriori_non_monotone_transaction_ids, deterministic(EclatPatterns == AprioriPatterns)) :-
+		Options = [minimum_support_count(3)],
+		eclat::mine(non_monotone_id_baskets, eclat_pattern_miner(_ItemDomain, EclatPatterns, _Options), Options),
+		apriori::mine(non_monotone_id_baskets, apriori_pattern_miner(_AprioriDomain, AprioriPatterns, _AprioriOptions), Options).
+
+	test(eclat_matches_fp_growth_dense_shared_prefix, deterministic(EclatPatterns == FPGrowthPatterns)) :-
+		Options = [minimum_support_count(5)],
+		eclat::mine(dense_shared_prefix_baskets, eclat_pattern_miner(_ItemDomain, EclatPatterns, _Options), Options),
+		fp_growth::mine(dense_shared_prefix_baskets, fp_growth_pattern_miner(_FPGrowthDomain, FPGrowthPatterns, _FPGrowthOptions), Options).
+
 	test(eclat_matches_fp_growth, deterministic(EclatPatterns == FPGrowthPatterns)) :-
 		eclat::mine(layered_baskets, eclat_pattern_miner(_ItemDomain, EclatPatterns, _Options), [minimum_support_count(3)]),
 		fp_growth::mine(layered_baskets, fp_growth_pattern_miner(_FPGrowthDomain, FPGrowthPatterns, _FPGrowthOptions), [minimum_support_count(3)]).
+
+	test(eclat_diagnostics_2, deterministic((memberchk(model(eclat), Diagnostics), memberchk(extension_operator(tidset_intersection), Diagnostics), memberchk(support_layout(vertical_tidsets), Diagnostics)))) :-
+		eclat::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
+		eclat::diagnostics(PatternMiner, Diagnostics).
+
+	test(eclat_valid_pattern_miner_1, deterministic) :-
+		eclat::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
+		eclat::valid_pattern_miner(PatternMiner).
+
+	test(eclat_invalid_pattern_miner_1, fail) :-
+		PatternMiner = eclat_pattern_miner([bread], [itemset([bread], foo)], [minimum_support(0.5)]),
+		eclat::valid_pattern_miner(PatternMiner).
 
 	test(eclat_export_to_clauses_4, deterministic(functor(Clause, mined_patterns, 3))) :-
 		eclat::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
@@ -94,6 +126,9 @@
 
 	test(eclat_mine_2_invalid_duplicate_item_dataset, error(domain_error(canonical_transaction, [bread, bread, milk]))) :-
 		eclat::mine(invalid_duplicate_item_baskets, _PatternMiner).
+
+	test(eclat_mine_2_invalid_duplicate_id_dataset, error(domain_error(unique_transaction_ids, [1, 1]))) :-
+		eclat::mine(invalid_duplicate_id_baskets, _PatternMiner).
 
 	test(eclat_mine_2_invalid_empty_dataset, error(domain_error(non_empty_dataset, invalid_empty_baskets))) :-
 		eclat::mine(invalid_empty_baskets, _PatternMiner).

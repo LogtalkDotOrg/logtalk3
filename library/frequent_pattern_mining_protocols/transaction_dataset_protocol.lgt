@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
-		comment is 'Protocol for transaction datasets used with frequent itemset mining algorithms.'
+		date is 2026-04-29,
+		comment is 'Protocol for transaction datasets used with frequent itemset mining algorithms. Transaction identifiers are expected to be unique within a dataset.'
 	]).
 
 	:- public(items/1).
@@ -38,7 +38,7 @@
 	:- public(transaction/2).
 	:- mode(transaction(-integer, -list(atom)), zero_or_more).
 	:- info(transaction/2, [
-		comment is 'Enumerates by backtracking the transactions in the dataset. Each transaction is represented as a canonical sorted list of unique declared items.',
+		comment is 'Enumerates by backtracking the transactions in the dataset. The transaction identifier is expected to be unique within the dataset. Each transaction is represented as a canonical sorted list of unique declared items.',
 		argnames is ['Id', 'Transaction']
 	]).
 
