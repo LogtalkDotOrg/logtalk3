@@ -475,7 +475,7 @@
 			true
 		;   type_error(number, Value)
 		),
-		Feature is (Value - Mean) / Scale.
+		Feature is float((Value - Mean) / Scale).
 
 	check_cluster_count(K, Count) :-
 		(   K =< Count ->

@@ -44,11 +44,11 @@
 	]).
 
 	:- uses(list, [
-		length/2, nth1/3
+		length/2, msort/2, nth1/3
 	]).
 
 	:- uses(numberlist, [
-		manhattan_distance/3
+		manhattan_distance/3, median/2
 	]).
 
 	:- uses(pairs, [
@@ -240,35 +240,9 @@
 
 	medians_of_columns([], []).
 	medians_of_columns([Column| Columns], [Median| Medians]) :-
-		numeric_sort(Column, SortedColumn),
-		median_of_sorted(SortedColumn, Median),
+		msort(Column, SortedColumn),
+		median(SortedColumn, Median),
 		medians_of_columns(Columns, Medians).
-
-	numeric_sort([], []).
-	numeric_sort([Value| Values], Sorted) :-
-		numeric_sort(Values, SortedValues),
-		insert_sorted(Value, SortedValues, Sorted).
-
-	insert_sorted(Value, [], [Value]) :-
-		!.
-	insert_sorted(Value, [Head| Tail], [Value, Head| Tail]) :-
-		Value =< Head,
-		!.
-	insert_sorted(Value, [Head| Tail], [Head| SortedTail]) :-
-		insert_sorted(Value, Tail, SortedTail).
-
-	median_of_sorted(Sorted, Median) :-
-		length(Sorted, Count),
-		Middle is Count // 2,
-		(   1 is Count mod 2 ->
-			Index is Middle + 1,
-			nth1(Index, Sorted, Median)
-		;   LeftIndex is Middle,
-			RightIndex is Middle + 1,
-			nth1(LeftIndex, Sorted, LeftValue),
-			nth1(RightIndex, Sorted, RightValue),
-			Median is (LeftValue + RightValue) / 2.0
-		).
 
 	max_median_shift([], [], MaxShift, MaxShift).
 	max_median_shift([Median0| Medians0], [Median1| Medians1], MaxShift0, MaxShift) :-
