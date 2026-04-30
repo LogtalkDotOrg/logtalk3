@@ -54,7 +54,7 @@
 	]).
 
 	:- uses(numberlist, [
-		sum/2
+		rescale/3, sum/2
 	]).
 
 	:- uses(pairs, [
@@ -411,7 +411,7 @@
 	component_statistics([], _Index, [], ResponsibilitySum, ResponsibilitySum, WeightedSum, WeightedSum, WeightedSquares, WeightedSquares).
 	component_statistics([_-Features| Rows], Index, [Responsibilities| ResponsibilitiesRows], ResponsibilitySum0, ResponsibilitySum, WeightedSum0, WeightedSum, WeightedSquares0, WeightedSquares) :-
 		nth1(Index, Responsibilities, Responsibility),
-		scale_vector(Features, Responsibility, RowWeightedFeatures),
+		rescale(Features, Responsibility, RowWeightedFeatures),
 		scale_squares(Features, Responsibility, RowWeightedSquares),
 		ResponsibilitySum1 is ResponsibilitySum0 + Responsibility,
 		add_optional_vectors(RowWeightedFeatures, WeightedSum0, WeightedSum1),
@@ -422,11 +422,6 @@
 	scale_squares([Value| Values], Responsibility, [WeightedSquare| WeightedSquares]) :-
 		WeightedSquare is Responsibility * Value * Value,
 		scale_squares(Values, Responsibility, WeightedSquares).
-
-	scale_vector([], _Responsibility, []).
-	scale_vector([Value| Values], Responsibility, [WeightedValue| WeightedValues]) :-
-		WeightedValue is Responsibility * Value,
-		scale_vector(Values, Responsibility, WeightedValues).
 
 	add_optional_vectors(Vector, [], Vector) :-
 		!.

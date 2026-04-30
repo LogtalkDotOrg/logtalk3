@@ -44,7 +44,7 @@
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		euclidean_norm/2, rescale/3, scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(pairs, [
@@ -329,14 +329,14 @@
 	whitening_rows([eigenpair(Eigenvalue, Eigenvector)| Eigenpairs], Requested, [WhiteningRow| WhiteningRows], [Eigenvalue| WhiteningEigenvalues]) :-
 		Requested > 0,
 		WhiteningScale is 1.0 / sqrt(Eigenvalue),
-		^^scale_vector(Eigenvector, WhiteningScale, WhiteningRow),
+		rescale(Eigenvector, WhiteningScale, WhiteningRow),
 		NextRequested is Requested - 1,
 		whitening_rows(Eigenpairs, NextRequested, WhiteningRows, WhiteningEigenvalues).
 
 	normalize_nonzero_vector(Vector, NormalizedVector) :-
-		^^vector_norm(Vector, Norm),
+		euclidean_norm(Vector, Norm),
 		Norm > 1.0e-12,
-		^^scale_vector(Vector, 1.0 / Norm, NormalizedVector).
+		rescale(Vector, 1.0 / Norm, NormalizedVector).
 
 	whiten_rows([], _WhiteningRows, []).
 	whiten_rows([Row| Rows], WhiteningRows, [WhitenedRow| WhitenedRows]) :-
@@ -414,7 +414,7 @@
 		cubic_expectation(WhitenedRows, Projections, Numerator),
 		projection_square_mean(Projections, SquareMean),
 		CorrectionScale is 3.0 * SquareMean,
-		^^scale_vector(Vector0, CorrectionScale, Correction),
+		rescale(Vector0, CorrectionScale, Correction),
 		^^subtract_vectors(Numerator, Correction, Updated0),
 		orthonormalize_vector(Updated0, PreviousWhitenedComponents, Updated1),
 		normalize_nonzero_vector(Updated1, NormalizedUpdated),
@@ -432,12 +432,12 @@
 		cubic_expectation([FirstRow| Rows], Projections, ZeroExpectation, SumExpectation),
 		length([FirstRow| Rows], Count),
 		Scale is 1.0 / Count,
-		^^scale_vector(SumExpectation, Scale, Expectation).
+		rescale(SumExpectation, Scale, Expectation).
 
 	cubic_expectation([], [], Expectation, Expectation).
 	cubic_expectation([Row| Rows], [Projection| Projections], Expectation0, Expectation) :-
 		Weight is Projection * Projection * Projection,
-		^^scale_vector(Row, Weight, Contribution),
+		rescale(Row, Weight, Contribution),
 		^^add_vectors(Expectation0, Contribution, Expectation1),
 		cubic_expectation(Rows, Projections, Expectation1, Expectation).
 
@@ -471,7 +471,7 @@
 	orthonormalize_vector(Vector, [], Vector).
 	orthonormalize_vector(Vector0, [PreviousVector| PreviousWhitenedComponents], Vector) :-
 		dot_product(Vector0, PreviousVector, Projection),
-		^^scale_vector(PreviousVector, Projection, Contribution),
+		rescale(PreviousVector, Projection, Contribution),
 		^^subtract_vectors(Vector0, Contribution, Vector1),
 		orthonormalize_vector(Vector1, PreviousWhitenedComponents, Vector).
 
@@ -485,7 +485,7 @@
 
 	accumulate_weighted_rows([], [], Component, Component).
 	accumulate_weighted_rows([Weight| Weights], [Row| Rows], Component0, Component) :-
-		^^scale_vector(Row, Weight, Contribution),
+		rescale(Row, Weight, Contribution),
 		^^add_vectors(Component0, Contribution, Component1),
 		accumulate_weighted_rows(Weights, Rows, Component1, Component).
 

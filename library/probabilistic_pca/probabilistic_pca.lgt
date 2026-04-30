@@ -44,6 +44,10 @@
 		length/2, memberchk/2
 	]).
 
+	:- uses(numberlist, [
+		rescale/3
+	]).
+
 	:- uses(pairs, [
 		keys/2
 	]).
@@ -182,7 +186,7 @@
 			length(Eigenvector, FeatureCount),
 			^^zero_vector(FeatureCount, Loading)
 		;   LoadingScale is sqrt(LoadingVariance),
-			^^scale_vector(Eigenvector, LoadingScale, Loading)
+			rescale(Eigenvector, LoadingScale, Loading)
 		),
 		build_loadings(Eigenvectors, ExplainedVariances, NoiseVariance, Tolerance, Loadings).
 
@@ -196,7 +200,7 @@
 			length(Eigenvector, FeatureCount),
 			^^zero_vector(FeatureCount, Component)
 		;   Scale is sqrt(PosteriorVariance) / ExplainedVariance,
-			^^scale_vector(Eigenvector, Scale, Component)
+			rescale(Eigenvector, Scale, Component)
 		),
 		build_posterior_components(Eigenvectors, ExplainedVariances, NoiseVariance, Tolerance, Components).
 

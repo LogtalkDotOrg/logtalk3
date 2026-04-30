@@ -51,7 +51,7 @@
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		euclidean_norm/2, rescale/3, scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(pairs, [
@@ -177,7 +177,7 @@
 
 	iterate_singular_triplet(Rows, Options, Iteration, RightSingularVector0, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta) :-
 		^^matrix_vector_product(Rows, RightSingularVector0, LeftProduct),
-		^^vector_norm(LeftProduct, LeftNorm),
+		euclidean_norm(LeftProduct, LeftNorm),
 		^^option(tolerance(Tolerance), Options),
 		(   LeftNorm =< Tolerance ->
 			length(Rows, ExampleCount),
@@ -187,9 +187,9 @@
 			Convergence = tolerance,
 			Iterations = Iteration,
 			FinalDelta = 0.0
-		;   ^^scale_vector(LeftProduct, 1.0 / LeftNorm, LeftSingularVector0),
+		;   rescale(LeftProduct, 1.0 / LeftNorm, LeftSingularVector0),
 			transpose_matrix_vector_product(Rows, LeftSingularVector0, RightProduct),
-			^^vector_norm(RightProduct, RightNorm),
+			euclidean_norm(RightProduct, RightNorm),
 			(   RightNorm =< Tolerance ->
 				length(Rows, ExampleCount),
 				^^zero_vector(ExampleCount, LeftSingularVector),
@@ -198,7 +198,7 @@
 				Convergence = tolerance,
 				Iterations = Iteration,
 				FinalDelta = 0.0
-			;   ^^scale_vector(RightProduct, 1.0 / RightNorm, RightSingularVector1),
+			;   rescale(RightProduct, 1.0 / RightNorm, RightSingularVector1),
 				^^stabilize_vector_sign(RightSingularVector1, StableRightSingularVector),
 				^^difference_norm(StableRightSingularVector, RightSingularVector0, Delta),
 				^^option(maximum_iterations(MaximumIterations), Options),
@@ -227,23 +227,23 @@
 
 	transpose_matrix_vector_product([], [], RightProduct, RightProduct).
 	transpose_matrix_vector_product([Row| Rows], [LeftValue| LeftSingularVector], RightProduct0, RightProduct) :-
-		^^scale_vector(Row, LeftValue, Contribution),
+		rescale(Row, LeftValue, Contribution),
 		^^add_vectors(RightProduct0, Contribution, RightProduct1),
 		transpose_matrix_vector_product(Rows, LeftSingularVector, RightProduct1, RightProduct).
 
 	finalize_singular_triplet(Rows, RightSingularVector, Tolerance, SingularValue, LeftSingularVector) :-
 		^^matrix_vector_product(Rows, RightSingularVector, LeftProduct),
-		^^vector_norm(LeftProduct, SingularValue),
+		euclidean_norm(LeftProduct, SingularValue),
 		(   SingularValue =< Tolerance ->
 			length(Rows, ExampleCount),
 			^^zero_vector(ExampleCount, LeftSingularVector)
-		;   ^^scale_vector(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
+		;   rescale(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
 		).
 
 	deflate_rows([], _SingularValue, [], _RightSingularVector, []).
 	deflate_rows([Row| Rows], SingularValue, [LeftValue| LeftSingularVector], RightSingularVector, [DeflatedRow| DeflatedRows]) :-
 		Scale is SingularValue * LeftValue,
-		^^scale_vector(RightSingularVector, Scale, ReconstructionRow),
+		rescale(RightSingularVector, Scale, ReconstructionRow),
 		^^subtract_vectors(Row, ReconstructionRow, DeflatedRow),
 		deflate_rows(Rows, SingularValue, LeftSingularVector, RightSingularVector, DeflatedRows).
 

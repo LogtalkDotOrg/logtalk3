@@ -159,13 +159,6 @@
 		argnames is ['Vectors', 'ZeroVector']
 	]).
 
-	:- protected(scale_vector/3).
-	:- mode(scale_vector(+list(number), +number, -list(number)), one).
-	:- info(scale_vector/3, [
-		comment is 'Scales each element of a numeric vector by the given factor.',
-		argnames is ['Vector', 'Scale', 'ScaledVector']
-	]).
-
 	:- protected(add_vectors/3).
 	:- mode(add_vectors(+list(number), +list(number), -list(number)), one).
 	:- info(add_vectors/3, [
@@ -227,13 +220,6 @@
 	:- info(matrix_vector_product/3, [
 		comment is 'Computes the matrix-vector product for a numeric matrix and vector.',
 		argnames is ['Matrix', 'Vector', 'Product']
-	]).
-
-	:- protected(vector_norm/2).
-	:- mode(vector_norm(+list(number), -float), one).
-	:- info(vector_norm/2, [
-		comment is 'Computes the Euclidean norm of a numeric vector.',
-		argnames is ['Vector', 'Norm']
 	]).
 
 	:- protected(normalize_vector/2).
@@ -413,7 +399,7 @@
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		euclidean_norm/2, rescale/3, scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(population, [
@@ -642,11 +628,6 @@
 		RemainingCount is Count - 1,
 		make_vector(RemainingCount, Value, Values).
 
-	scale_vector([], _Scale, []).
-	scale_vector([Value| Values], Scale, [Scaled| ScaledValues]) :-
-		Scaled is Value * Scale,
-		scale_vector(Values, Scale, ScaledValues).
-
 	add_vectors([], [], []).
 	add_vectors([Value1| Values1], [Value2| Values2], [Value| Values]) :-
 		Value is Value1 + Value2,
@@ -695,25 +676,21 @@
 		dot_product(Row, Vector, Value),
 		matrix_vector_product(Rows, Vector, Values).
 
-	vector_norm(Vector, Norm) :-
-		dot_product(Vector, Vector, SumSquares),
-		Norm is sqrt(SumSquares).
-
 	normalize_vector(Vector, NormalizedVector) :-
-		vector_norm(Vector, Norm),
+		euclidean_norm(Vector, Norm),
 		(   Norm =< 1.0e-12 ->
 			NormalizedVector = Vector
-		;   scale_vector(Vector, 1.0 / Norm, NormalizedVector)
+		;   rescale(Vector, 1.0 / Norm, NormalizedVector)
 		).
 
 	difference_norm(Vector1, Vector2, Norm) :-
 		subtract_vectors(Vector1, Vector2, Difference),
-		vector_norm(Difference, Norm).
+		euclidean_norm(Difference, Norm).
 
 	stabilize_vector_sign(Vector, StableVector) :-
 		(   first_significant_component(Vector, First),
 			First < 0.0 ->
-			scale_vector(Vector, -1.0, StableVector)
+			rescale(Vector, -1.0, StableVector)
 		;   StableVector = Vector
 		).
 
@@ -745,7 +722,7 @@
 
 	outer_product([], _Vector, []).
 	outer_product([Value| Values], Vector, [Row| Rows]) :-
-		scale_vector(Vector, Value, Row),
+		rescale(Vector, Value, Row),
 		outer_product(Values, Vector, Rows).
 
 	add_matrices([], [], []).
@@ -760,7 +737,7 @@
 
 	scale_matrix([], _Scale, []).
 	scale_matrix([Row| Rows], Scale, [ScaledRow| ScaledRows]) :-
-		scale_vector(Row, Scale, ScaledRow),
+		rescale(Row, Scale, ScaledRow),
 		scale_matrix(Rows, Scale, ScaledRows).
 
 	transpose_matrix([], []) :-
@@ -838,12 +815,12 @@
 
 	iterate_component(Matrix, Options, Iteration, Vector0, Eigenvalue, Eigenvector) :-
 		matrix_vector_product(Matrix, Vector0, Product),
-		vector_norm(Product, Norm),
+		euclidean_norm(Product, Norm),
 		^^option(tolerance(Tolerance), Options),
 		(   Norm =< Tolerance ->
 			Eigenvalue = 0.0,
 			Eigenvector = Vector0
-		;   scale_vector(Product, 1.0 / Norm, Vector1),
+		;   rescale(Product, 1.0 / Norm, Vector1),
 			stabilize_vector_sign(Vector1, StableVector),
 			difference_norm(StableVector, Vector0, Delta),
 			^^option(maximum_iterations(MaximumIterations), Options),

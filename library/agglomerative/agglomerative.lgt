@@ -57,7 +57,7 @@
 	]).
 
 	:- uses(numberlist, [
-		euclidean_distance/3, manhattan_distance/3
+		euclidean_distance/3, manhattan_distance/3, rescale/3
 	]).
 
 	:- uses(pairs, [
@@ -415,7 +415,7 @@
 	average_vectors([Vector| Vectors], Average) :-
 		sum_vectors(Vectors, Vector, 1, Sum, Count),
 		Factor is 1.0 / Count,
-		scale_vector(Sum, Factor, Average).
+		rescale(Sum, Factor, Average).
 
 	sum_vectors([], Sum, Count, Sum, Count).
 	sum_vectors([Vector| Vectors], Sum0, Count0, Sum, Count) :-
@@ -427,11 +427,6 @@
 	add_vectors([Left| Lefts], [Right| Rights], [Sum| Sums]) :-
 		Sum is Left + Right,
 		add_vectors(Lefts, Rights, Sums).
-
-	scale_vector([], _, []).
-	scale_vector([Value| Values], Factor, [Scaled| ScaledValues]) :-
-		Scaled is Value * Factor,
-		scale_vector(Values, Factor, ScaledValues).
 
 	nearest_cluster([cluster(Cluster, Points)| Clusters], Features, Options, BestCluster, BestDistance) :-
 		cluster_distance(Options, Features, Points, InitialDistance),

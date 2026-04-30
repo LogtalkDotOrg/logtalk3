@@ -46,6 +46,10 @@
 		length/2
 	]).
 
+	:- uses(numberlist, [
+		rescale/3
+	]).
+
 	:- uses(pairs, [
 		keys/2
 	]).
@@ -228,7 +232,7 @@
 	average_vectors([Vector| Vectors], Average) :-
 		sum_vectors(Vectors, Vector, 1, Sum, Count),
 		Factor is 1.0 / Count,
-		scale_vector(Sum, Factor, Average).
+		rescale(Sum, Factor, Average).
 
 	sum_vectors([], Sum, Count, Sum, Count) :-
 		!.
@@ -241,11 +245,6 @@
 	add_vectors([Left| Lefts], [Right| Rights], [Sum| Sums]) :-
 		Sum is Left + Right,
 		add_vectors(Lefts, Rights, Sums).
-
-	scale_vector([], _, []).
-	scale_vector([Value| Values], Factor, [Scaled| ScaledValues]) :-
-		Scaled is Value * Factor,
-		scale_vector(Values, Factor, ScaledValues).
 
 	max_centroid_shift([], [], MaxShift, MaxShift).
 	max_centroid_shift([Centroid0| Centroids0], [Centroid1| Centroids1], MaxShift0, MaxShift) :-

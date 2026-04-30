@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		rescale/3, scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(pairs, [
@@ -234,7 +234,7 @@
 	normalize_dual_components([], [], []).
 	normalize_dual_components([DualEigenvector| DualEigenvectors], [ExplainedVariance| ExplainedVariances], [Component| Components]) :-
 		Scale is 1.0 / sqrt(ExplainedVariance),
-		^^scale_vector(DualEigenvector, Scale, Component),
+		rescale(DualEigenvector, Scale, Component),
 		normalize_dual_components(DualEigenvectors, ExplainedVariances, Components).
 
 	valid_training_rows(Encoders, TrainingRows) :-

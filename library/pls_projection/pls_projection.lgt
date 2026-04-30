@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		rescale/3, scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(pairs, [
@@ -216,9 +216,9 @@
 	stabilize_component_sign(Component0, Scores0, Loading0, TargetLoading0, Component, Scores, Loading, TargetLoading) :-
 		(   ^^first_significant_component(Component0, First),
 			First < 0.0 ->
-			^^scale_vector(Component0, -1.0, Component),
-			^^scale_vector(Scores0, -1.0, Scores),
-			^^scale_vector(Loading0, -1.0, Loading),
+			rescale(Component0, -1.0, Component),
+			rescale(Scores0, -1.0, Scores),
+			rescale(Loading0, -1.0, Loading),
 			TargetLoading is -TargetLoading0
 		;   Component = Component0,
 			Scores = Scores0,
@@ -228,7 +228,7 @@
 
 	deflate_rows([], [], _Loading, []).
 	deflate_rows([Row| Rows], [Score| Scores], Loading, [DeflatedRow| DeflatedRows]) :-
-		^^scale_vector(Loading, Score, Adjustment),
+		rescale(Loading, Score, Adjustment),
 		^^subtract_vectors(Row, Adjustment, DeflatedRow),
 		deflate_rows(Rows, Scores, Loading, DeflatedRows).
 
@@ -251,7 +251,7 @@
 	build_rotation([], _Component, Rotation, Rotation).
 	build_rotation([Loading-PreviousRotation| PreviousPairs], Component, Rotation0, Rotation) :-
 		dot_product(Loading, Component, Projection),
-		^^scale_vector(PreviousRotation, Projection, Adjustment),
+		rescale(PreviousRotation, Projection, Adjustment),
 		^^subtract_vectors(Rotation0, Adjustment, Rotation1),
 		build_rotation(PreviousPairs, Component, Rotation1, Rotation).
 
