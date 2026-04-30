@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Shared predicates for clusterer learning defaults, export, and common dataset and encoding helpers.'
 	]).
 
@@ -234,7 +234,7 @@
 	check_clusterer(Clusterer) :-
 		(   ::clusterer_diagnostics_data(Clusterer, _Diagnostics) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusterer(Clusterer) :-

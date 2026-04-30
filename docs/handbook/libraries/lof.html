@@ -337,6 +337,8 @@ distances.</p></li>
 Minkowski distance metrics.</p></li>
 <li><p><strong>Detector export</strong>: learned detectors can be exported as predicate
 clauses.</p></li>
+<li><p><strong>Dataset validation</strong>: learning rejects empty datasets with a
+<code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_dataset,</span> <span class="pre">Dataset)</span></code> exception.</p></li>
 </ul>
 </section>
 <section id="options">
@@ -354,7 +356,7 @@ predicates:</p>
 <section id="detector-representation">
 <h2>Detector Representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
 <p>The learned detector is represented by default as:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lof_detector(<span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">AttributeScales</span>, <span class="nv">Instances</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>lof_detector(<span class="nv">TrainingDataset</span>, <span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">AttributeScales</span>, <span class="nv">Instances</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Options</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -364,8 +366,13 @@ predicates:</p>
 <code class="docutils literal notranslate"><span class="pre">categorical</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">AttributeScales</span></code>: Normalization scales for numeric features</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of training <code class="docutils literal notranslate"><span class="pre">Id-Class-Values</span></code> triples</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: Cached leave-one-out raw training scores reused
+by <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Learned options</p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">score/3</span></code> predicate always treats its input as a fresh query. Only
+<code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> on the original training dataset reuses the cached
+leave-one-out <code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>.</p>
 <p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
 this detector term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and

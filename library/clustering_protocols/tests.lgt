@@ -31,7 +31,7 @@
 	check_clusterer(sample_clusterer(Attributes)) :-
 		(   ^^valid_attribute_names(Attributes) ->
 			true
-		;   domain_error(valid_clusterer, sample_clusterer(Attributes))
+		;   domain_error(clusterer, sample_clusterer(Attributes))
 		).
 
 	clusterer_diagnostics_data(sample_clusterer(Attributes), [
@@ -59,7 +59,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Smoke tests for the "clustering_protocols" library.'
 	]).
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'DBSCAN clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses deterministic density-based clustering based on epsilon neighborhoods and minimum point counts.',
@@ -105,7 +105,7 @@
 			valid(list(list(number, FeatureCount)), Noise),
 			catch(::check_options(Options), _Error, fail) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusters([], _FeatureCount, _SeenIds).

@@ -43,7 +43,7 @@
 			memberchk(training_dataset(_Dataset), Diagnostics),
 			memberchk(options([]), Diagnostics) ->
 			true
-		;   domain_error(valid_classifier, Classifier)
+		;   domain_error(classifier, Classifier)
 		).
 
 	classifier_diagnostics_data(sample_classifier(_DefaultClass, Diagnostics), Diagnostics).
@@ -69,7 +69,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Smoke tests for the "classification_protocols" library.'
 	]).
 

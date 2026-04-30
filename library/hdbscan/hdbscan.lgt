@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'HDBSCAN clusterer for continuous datasets using a mutual-reachability hierarchy, condensed tree pruning, and stability-based cluster selection.',
 		remarks is [
 			'Algorithm' - 'Builds the mutual-reachability graph, computes a minimum spanning tree, derives the single-linkage hierarchy, condenses the hierarchy using ``minimum_cluster_size``, and selects clusters using ``eom`` or ``leaf`` selection.',
@@ -110,7 +110,7 @@
 			valid(list(list(number, FeatureCount)), Noise),
 			catch(::check_options(Options), _Error, fail) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusters([], _FeatureCount, _SeenIds).

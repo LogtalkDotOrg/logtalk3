@@ -1,5 +1,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+
+:- object(isolation_forest_empty_anomalies,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+:- end_object.
+
+
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
@@ -19,13 +32,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(missing_value_branching_fixture,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+	example(1, normal, [x-0.00]).
+	example(2, normal, [x-0.10]).
+	example(3, normal, [x-0.20]).
+	example(4, normal, [x-0.30]).
+	example(5, anomaly, [x-5.00]).
+	example(6, anomaly, [x-5.20]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-30,
 		comment is 'Unit tests for the "isolation_forest" library.'
 	]).
 
@@ -47,6 +79,28 @@
 
 	test(isolation_forest_learn_2_gaussian_model_structure, true(functor(Model, if_model, 6))) :-
 		isolation_forest::learn(gaussian_anomalies, Model).
+
+	test(isolation_forest_valid_anomaly_detector_1, deterministic(isolation_forest::valid_anomaly_detector(Model))) :-
+		isolation_forest::learn(gaussian_anomalies, Model).
+
+	test(isolation_forest_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [number_of_trees(10)])))) :-
+		isolation_forest::check_anomaly_detector(if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [number_of_trees(10)])).
+
+	test(isolation_forest_diagnostics_2, deterministic((memberchk(model(isolation_forest), Diagnostics), memberchk(tree_count(50), Diagnostics), memberchk(subsample_size(48), Diagnostics), memberchk(feature_count(2), Diagnostics)))) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(50)]),
+		isolation_forest::diagnostics(Model, Diagnostics).
+
+	test(isolation_forest_anomaly_detector_options_2, deterministic(memberchk(number_of_trees(50), Options))) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(50)]),
+		isolation_forest::anomaly_detector_options(Model, Options).
+
+	test(isolation_forest_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
+		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(50)]),
+		isolation_forest::diagnostics(Model, Diagnostics),
+		findall(Diagnostic, isolation_forest::diagnostic(Model, Diagnostic), Enumerated).
+
+	test(isolation_forest_learn_3_empty_dataset_error, error(domain_error(non_empty_dataset, isolation_forest_empty_anomalies))) :-
+		isolation_forest::learn(isolation_forest_empty_anomalies, _Model, [number_of_trees(10)]).
 
 	test(isolation_forest_learn_2_gaussian_default_trees, true(NumTrees == 100)) :-
 		isolation_forest::learn(gaussian_anomalies, Model),
@@ -343,6 +397,12 @@
 		% Scores should still be in [0, 1] even with missing values
 		isolation_forest::learn(sensor_anomalies, Model, [number_of_trees(50)]),
 		isolation_forest::score(Model, [temperature- _, pressure- _, vibration-0.30], Score).
+
+	test(isolation_forest_missing_split_branches_both_ways, true((MissingScore > NormalScore, MissingScore < AnomalyScore))) :-
+		isolation_forest::learn(missing_value_branching_fixture, Model, [number_of_trees(256), subsample_size(6), extension_level(0)]),
+		isolation_forest::score(Model, [x-0.15], NormalScore),
+		isolation_forest::score(Model, [x- _], MissingScore),
+		isolation_forest::score(Model, [x-5.10], AnomalyScore).
 
 	% ===================================================================
 	% Auxiliary predicates

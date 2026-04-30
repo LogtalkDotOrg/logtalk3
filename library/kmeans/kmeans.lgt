@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'k-Means clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses Lloyd''s algorithm with deterministic initialization.',
@@ -109,7 +109,7 @@
 			length(Centroids, CentroidCount),
 			^^valid_diagnostic_count(centroid_count, Diagnostics, CentroidCount) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	initialize_centroids(first_k, K, Rows, Centroids) :-

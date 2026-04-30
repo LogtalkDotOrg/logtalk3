@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'k-Prototypes clusterer for mixed datasets with continuous and discrete attributes. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses an iterative prototype-update algorithm with deterministic initialization and deterministic cluster assignments.',
@@ -111,7 +111,7 @@
 			length(Prototypes, PrototypeCount),
 			^^valid_diagnostic_count(prototype_count, Diagnostics, PrototypeCount) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	check_examples(Dataset, Attributes, AttributeNames, Examples) :-

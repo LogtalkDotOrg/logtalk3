@@ -591,6 +591,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_64 <hash_common_64/0::and64/3>`
 
+``anomaly_detector_options/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::anomaly_detector_options/2>`
+
 ``apid/2``
 ----------
 
@@ -1731,6 +1741,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`type <type/0::check/3>`
+
+``check_anomaly_detector/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::check_anomaly_detector/1>`
 
 ``check_classifier/1``
 ----------------------
@@ -3918,6 +3938,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostic/2>`
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`
@@ -3973,6 +3994,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostics/2>`
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`
@@ -18289,6 +18311,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::valid/3>`
 * :ref:`timep <timep/0::valid/3>`
+
+``valid_anomaly_detector/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::valid_anomaly_detector/1>`
 
 ``valid_classifier/1``
 ----------------------

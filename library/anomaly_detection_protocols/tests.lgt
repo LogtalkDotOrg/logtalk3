@@ -181,6 +181,27 @@
 		^^merge_options(UserOptions, Options),
 		anomaly_test_support::training_model(Dataset, AttributeNames, Scale).
 
+	check_anomaly_detector(Detector) :-
+		(   Detector = sample_anomaly_detector(Dataset, AttributeNames, Scale, Options),
+			valid(object_identifier, Dataset),
+			valid(list(atom), AttributeNames),
+			AttributeNames \== [],
+			number(Scale),
+			Scale > 0.0,
+			valid(list(compound), Options),
+			catch(^^check_options(Options), _Error, fail) ->
+			true
+		;   domain_error(anomaly_detector, Detector)
+		).
+
+	anomaly_detector_diagnostics_data(sample_anomaly_detector(Dataset, AttributeNames, Scale, Options), [
+		model(sample_anomaly_detector),
+		training_dataset(Dataset),
+		attribute_names(AttributeNames),
+		score_scale(Scale),
+		options(Options)
+	]).
+
 	score(sample_anomaly_detector(_Dataset, AttributeNames, Scale, _Options), Instance, Score) :-
 		anomaly_test_support::instance_score(AttributeNames, Scale, Instance, Score).
 
@@ -212,7 +233,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-30,
 		comment is 'Smoke tests for the "anomaly_detection_protocols" library.'
 	]).
 
@@ -262,6 +283,25 @@
 
 	test(sample_anomaly_detector_learn_2, deterministic(ground(Detector))) :-
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector).
+
+	test(sample_anomaly_detector_valid_anomaly_detector_1, deterministic(sample_anomaly_detector::valid_anomaly_detector(Detector))) :-
+		sample_anomaly_detector::learn(gaussian_anomalies, Detector).
+
+	test(sample_anomaly_detector_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, sample_anomaly_detector(gaussian_anomalies, [x, 1], 5.3, [anomaly_threshold(0.5)])))) :-
+		sample_anomaly_detector::check_anomaly_detector(sample_anomaly_detector(gaussian_anomalies, [x, 1], 5.3, [anomaly_threshold(0.5)])).
+
+	test(sample_anomaly_detector_diagnostics_2, deterministic((memberchk(model(sample_anomaly_detector), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(attribute_names([x, y]), Diagnostics), memberchk(options([anomaly_threshold(0.5)]), Diagnostics)))) :-
+		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
+		sample_anomaly_detector::diagnostics(Detector, Diagnostics).
+
+	test(sample_anomaly_detector_options_2, deterministic(Options == [anomaly_threshold(0.5)])) :-
+		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
+		sample_anomaly_detector::anomaly_detector_options(Detector, Options).
+
+	test(sample_anomaly_detector_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
+		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
+		sample_anomaly_detector::diagnostics(Detector, Diagnostics),
+		findall(Diagnostic, sample_anomaly_detector::diagnostic(Detector, Diagnostic), Enumerated).
 
 	test(sample_anomaly_detector_predict_3_normal, deterministic(Prediction == normal)) :-
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),

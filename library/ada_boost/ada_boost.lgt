@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		remarks is [
 			'Algorithm' - 'AdaBoost iteratively trains weak learners (C4.5 decision trees) on weighted versions of the training data. After each iteration, the weights of misclassified examples are increased so that subsequent learners focus more on difficult cases.',
@@ -361,7 +361,7 @@
 			EstimatorCount =< ExpectedEstimators,
 			valid_weighted_trees(WeightedTrees) ->
 			true
-		;   domain_error(valid_classifier, Classifier)
+		;   domain_error(classifier, Classifier)
 		).
 
 	% export_to_clauses/4 - exports classifier as a clause

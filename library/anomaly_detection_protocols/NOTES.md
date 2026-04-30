@@ -26,10 +26,16 @@ learning anomaly-detection algorithms. Datasets are represented as objects
 implementing the `anomaly_dataset_protocol` protocol. Anomaly detectors are
 represented as objects importing the `anomaly_detector_common` category
 which imports the `anomaly_detector_protocol` protocol. The category
-provides shared `learn/2`, `predict/3-4`, file export, and dataset helper
-predicates. It keeps threshold-based prediction and export behavior separate
-from the algorithm-specific learning, scoring, clause export, and
-pretty-printing code.
+provides shared `learn/2`, `predict/3-4`, `diagnostics/2`, `diagnostic/2`,
+`anomaly_detector_options/2`, file export, and dataset helper predicates.
+It keeps threshold-based prediction and export behavior separate from the
+algorithm-specific learning, scoring, clause export, pretty-printing, and
+diagnostics metadata code.
+
+Learned detector terms can be validated explicitly using the shared
+`check_anomaly_detector/1` and `valid_anomaly_detector/1` predicates.
+This validation API is never called implicitly by scoring, prediction,
+printing, or export predicates.
 
 This library also provides a reusable shared category, anomaly benchmark
 datasets, and a small family smoke-test suite.

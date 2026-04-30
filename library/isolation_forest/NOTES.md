@@ -81,13 +81,15 @@ Implemented features
 - Handling of missing attribute values (represented using anonymous
   variables): during tree construction, missing values are replaced with
   random values drawn from the observed range of the corresponding
-  attribute; during scoring, missing dimensions are excluded from the
-  hyperplane dot product computation so that routing decisions at each
-  tree node are based entirely on the known attribute values
+  attribute; during scoring, each internal tree node stores its own
+  feasible per-dimension bounds so that missing dimensions can be routed
+  using subtree-local support instead of only the global training ranges
 - Scoring all dataset instances with results sorted by descending anomaly
   score for easy identification of top anomalies
 - Pretty-printing of learned models with tree depth and node count
   summaries
+- Learning rejects empty datasets with a
+  `domain_error(non_empty_dataset, Dataset)` exception
 
 
 Options
@@ -122,8 +124,11 @@ Where:
 - `Psi`: Effective subsample size used to build each tree
 - `AttributeNames`: List of attribute names in order
 - `Attributes`: List of `Attribute-Values` declarations from the training dataset
-- `Ranges`: Observed numeric ranges used for imputing and scoring missing values
+- `Ranges`: Observed numeric ranges used for imputing missing values during training
 - `Options`: Learned options
+
+Each internal tree node additionally stores node-local dimension bounds
+used when resolving missing-value routing during scoring.
 
 When exported using `export_to_clauses/4` or
 `export_to_file/4`, this detector term is serialized directly as
@@ -193,7 +198,7 @@ anomaly score. This makes it easy to inspect top anomalies:
 To print a summary of the learned model:
 
 	| ?- isolation_forest::learn(gaussian_anomalies, Model),
-	     isolation_forest::print_model(Model).
+         isolation_forest::print_anomaly_detector(Model).
 
 To use the original (non-extended) Isolation Forest, set the extension
 level to 0:

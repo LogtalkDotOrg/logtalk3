@@ -297,10 +297,15 @@ objects implementing the <code class="docutils literal notranslate"><span class=
 detectors are represented as objects importing the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detector_common</span></code> category which imports the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> protocol. The category provides shared
-<code class="docutils literal notranslate"><span class="pre">learn/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>, file export, and dataset helper
+<code class="docutils literal notranslate"><span class="pre">learn/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code>, file export, and dataset helper
 predicates. It keeps threshold-based prediction and export behavior
 separate from the algorithm-specific learning, scoring, clause export,
-and pretty-printing code.</p>
+pretty-printing, and diagnostics metadata code.</p>
+<p>Learned detector terms can be validated explicitly using the shared
+<code class="docutils literal notranslate"><span class="pre">check_anomaly_detector/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector/1</span></code>
+predicates. This validation API is never called implicitly by scoring,
+prediction, printing, or export predicates.</p>
 <p>This library also provides a reusable shared category, anomaly benchmark
 datasets, and a small family smoke-test suite.</p>
 <section id="export-header-format">

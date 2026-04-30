@@ -15,7 +15,7 @@ Shared predicates for anomaly detector learning defaults, threshold-based predic
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-20
+| **Date:** 2026-04-30
 
 | **Compilation flags:**
 |    ``static``
@@ -33,7 +33,7 @@ Shared predicates for anomaly detector learning defaults, threshold-based predic
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::export_to_clauses/4`  :ref:`anomaly_detector_protocol/0::export_to_file/4`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`anomaly_detector_protocol/0::score/3`  :ref:`anomaly_detector_protocol/0::score_all/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`anomaly_detector_protocol/0::anomaly_detector_options/2`  :ref:`anomaly_detector_protocol/0::check_anomaly_detector/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::diagnostic/2`  :ref:`anomaly_detector_protocol/0::diagnostics/2`  :ref:`anomaly_detector_protocol/0::export_to_clauses/4`  :ref:`anomaly_detector_protocol/0::export_to_file/4`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`anomaly_detector_protocol/0::score/3`  :ref:`anomaly_detector_protocol/0::score_all/3`  :ref:`anomaly_detector_protocol/0::valid_anomaly_detector/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -47,21 +47,21 @@ Public predicates
 Protected predicates
 --------------------
 
-.. index:: anomaly_detector_options/2
-.. _anomaly_detector_common/0::anomaly_detector_options/2:
+.. index:: anomaly_detector_diagnostics_data/2
+.. _anomaly_detector_common/0::anomaly_detector_diagnostics_data/2:
 
-``anomaly_detector_options/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``anomaly_detector_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hook predicate that importing anomaly detector implementations may override in order to expose the effective detector options.
+Hook predicate that importing anomaly detector implementations may override in order to expose diagnostics and metadata for learned detectors.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``anomaly_detector_options(AnomalyDetector,Options)``
+|    ``anomaly_detector_diagnostics_data(AnomalyDetector,Diagnostics)``
 | **Mode and number of proofs:**
-|    ``anomaly_detector_options(+compound,-list(compound))`` - ``one``
+|    ``anomaly_detector_diagnostics_data(+compound,-list(compound))`` - ``one``
 
 
 ------------
@@ -119,6 +119,25 @@ Collects the dataset attribute declarations as `Attribute-Values` pairs.
 |    ``dataset_attributes(Dataset,Attributes)``
 | **Mode and number of proofs:**
 |    ``dataset_attributes(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_examples_non_empty/2
+.. _anomaly_detector_common/0::check_examples_non_empty/2:
+
+``check_examples_non_empty/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a dataset contains at least one example.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples_non_empty(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples_non_empty(+object_identifier,+list)`` - ``one``
 
 
 ------------

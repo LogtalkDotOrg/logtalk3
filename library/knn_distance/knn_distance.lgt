@@ -25,14 +25,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-30,
 		comment is 'k-nearest-neighbor distance anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
 		remarks is [
 			'Algorithm' - 'The detector memorizes the training instances and computes an anomaly score from normalized distances to the nearest neighbors. Larger distances indicate more isolated and therefore more anomalous instances.',
 			'Score modes' - 'Supports both the distance to the k-th nearest neighbor and the mean distance to the k nearest neighbors.',
 			'Feature types' - 'Handles continuous and categorical attributes declared by the dataset object.',
 			'Missing values' - 'Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.',
-			'Anomaly detector representation' - 'The learned detector is represented as a ``knn_distance_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options)`` term.'
+			'Anomaly detector representation' - 'The learned detector is represented as a ``knn_distance_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options)`` term.'
 		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, isolation_forest, lof]
 	]).
@@ -73,20 +73,49 @@
 			),
 			Instances
 		),
-		Detector = knn_distance_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options).
+		^^check_examples_non_empty(Dataset, Instances),
+		training_raw_scores(FeatureTypes, AttributeScales, Instances, Options, ReferenceScores),
+		Detector = knn_distance_detector(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options).
+
+	check_anomaly_detector(Detector) :-
+		(   Detector = knn_distance_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options),
+			valid(object_identifier, TrainingDataset),
+			valid_attribute_names(AttributeNames),
+			valid_feature_types(FeatureTypes, AttributeNames),
+			valid_attribute_scales(AttributeScales, AttributeNames),
+			valid_training_instances(Instances, AttributeNames),
+			valid_reference_scores(ReferenceScores, Instances),
+			valid_detector_options(Options) ->
+			true
+		;   domain_error(anomaly_detector, Detector)
+		).
+
+	anomaly_detector_diagnostics_data(knn_distance_detector(Dataset, AttributeNames, FeatureTypes, _AttributeScales, Instances, ReferenceScores, Options), Diagnostics) :-
+		length(Instances, ExampleCount),
+		length(ReferenceScores, ReferenceScoreCount),
+		Diagnostics = [
+			model(knn_distance),
+			training_dataset(Dataset),
+			attribute_names(AttributeNames),
+			feature_types(FeatureTypes),
+			example_count(ExampleCount),
+			reference_score_count(ReferenceScoreCount),
+			options(Options)
+		].
 
 	score(Detector, Instance, Score) :-
-		detector_data(Detector, AttributeNames, FeatureTypes, AttributeScales, Instances, Options),
+		detector_data(Detector, _TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options),
 		extract_values(AttributeNames, Instance, RawValues),
 		sanitize_input_values(RawValues, Values),
-		instance_raw_score(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore),
-		training_raw_scores(FeatureTypes, AttributeScales, Instances, Options, ReferenceScores),
+		raw_score_for_instance(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore),
 		normalize_against_reference(RawScore, ReferenceScores, Score).
 
 	score_all(Dataset, Detector, Scores) :-
-		detector_data(Detector, AttributeNames, FeatureTypes, AttributeScales, Instances, Options),
-		raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs),
-		reference_scores(RawPairs, ReferenceScores),
+		detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options),
+		(	Dataset == TrainingDataset ->
+			raw_score_pairs_training(Instances, ReferenceScores, RawPairs)
+		;	raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs)
+		),
 		normalize_raw_pairs(RawPairs, ReferenceScores, ScoredPairs),
 		msort(ScoredPairs, SortedAscending),
 		reverse(SortedAscending, SortedDescending),
@@ -96,7 +125,7 @@
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-
-		detector_data(Detector, AttributeNames, FeatureTypes, _AttributeScales, Instances, Options),
+		detector_data(Detector, _TrainingDataset, AttributeNames, FeatureTypes, _AttributeScales, Instances, _ReferenceScores, Options),
 		length(Instances, NumInstances),
 		format('k-Nearest-Neighbor Distance Anomaly Detector~n', []),
 		format('==========================================~n~n', []),
@@ -109,10 +138,59 @@
 	anomaly_detector_export_template(Functor, Template) :-
 		Template =.. [Functor, 'Detector'].
 
-	anomaly_detector_term_template(knn_distance_detector(_AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _Options), knn_distance_detector('AttributeNames', 'FeatureTypes', 'AttributeScales', 'Instances', 'Options')).
+	anomaly_detector_term_template(knn_distance_detector(_TrainingDataset, _AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _ReferenceScores, _Options), knn_distance_detector('TrainingDataset', 'AttributeNames', 'FeatureTypes', 'AttributeScales', 'Instances', 'ReferenceScores', 'Options')).
 
-	detector_data(Detector, AttributeNames, FeatureTypes, AttributeScales, Instances, Options) :-
-		Detector =.. [_Functor, AttributeNames, FeatureTypes, AttributeScales, Instances, Options].
+	detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options) :-
+		Detector =.. [_Functor, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options].
+
+	valid_attribute_names(AttributeNames) :-
+		valid(list(atom), AttributeNames),
+		AttributeNames \== [].
+
+	valid_feature_types(FeatureTypes, AttributeNames) :-
+		valid(list(atom), FeatureTypes),
+		length(FeatureTypes, Count),
+		length(AttributeNames, Count),
+		valid_feature_types_(FeatureTypes).
+
+	valid_feature_types_([]).
+	valid_feature_types_([FeatureType| FeatureTypes]) :-
+		memberchk(FeatureType, [numeric, categorical]),
+		valid_feature_types_(FeatureTypes).
+
+	valid_attribute_scales(AttributeScales, AttributeNames) :-
+		valid(list(number), AttributeScales),
+		length(AttributeScales, Count),
+		length(AttributeNames, Count),
+		valid_attribute_scales_(AttributeScales).
+
+	valid_attribute_scales_([]).
+	valid_attribute_scales_([AttributeScale| AttributeScales]) :-
+		AttributeScale > 0.0,
+		valid_attribute_scales_(AttributeScales).
+
+	valid_training_instances(Instances, AttributeNames) :-
+		valid(list(compound), Instances),
+		Instances \== [],
+		length(AttributeNames, FeatureCount),
+		valid_training_instances_(Instances, FeatureCount).
+
+	valid_training_instances_([], _).
+	valid_training_instances_([Id-Class-Values| Instances], FeatureCount) :-
+		nonvar(Id),
+		nonvar(Class),
+		valid(list(nonvar), Values),
+		length(Values, FeatureCount),
+		valid_training_instances_(Instances, FeatureCount).
+
+	valid_reference_scores(ReferenceScores, Instances) :-
+		valid(list(number), ReferenceScores),
+		length(ReferenceScores, Count),
+		length(Instances, Count).
+
+	valid_detector_options(Options) :-
+		valid(list(compound), Options),
+		catch(^^check_options(Options), _Error, fail).
 
 	determine_feature_types([], []).
 	determine_feature_types([_-Values| Pairs], [Type| Types]) :-
@@ -171,6 +249,9 @@
 		),
 		sanitize_input_values(Values, SanitizedValues).
 
+	raw_score_for_instance(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore) :-
+		instance_raw_score(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore).
+
 	instance_raw_score(Values, FeatureTypes, AttributeScales, Instances, Options, Score) :-
 		^^option(k(K0), Options),
 		length(Instances, MaxK),
@@ -184,63 +265,62 @@
 				),
 				Distances
 			),
-			keysort_distances(Distances, SortedDistances),
-			take(K, SortedDistances, NeighborDistances),
+			(   Distances == [] ->
+				Score = 0.0
+			;   keysort_distances(Distances, SortedDistances),
+				take(K, SortedDistances, NeighborDistances),
 				raw_score_from_neighbors(NeighborDistances, Options, Score)
+			)
 		;   Score = 0.0
 		).
 
-		raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs) :-
-			findall(
-				RawScore-Id-Class,
-				(
-					Dataset::example(Id, Class, AttributeValues),
-					extract_values(AttributeNames, AttributeValues, Values),
-					remove_instance(Instances, Id, OtherInstances),
-					instance_raw_score(Values, FeatureTypes, AttributeScales, OtherInstances, Options, RawScore)
-				),
-				RawPairs
-			).
-
-		training_raw_scores(FeatureTypes, AttributeScales, Instances, Options, ReferenceScores) :-
-			findall(
-				RawScore,
-				(
-					member(Id-_Class-Values, Instances),
-					remove_instance(Instances, Id, OtherInstances),
-					instance_raw_score(Values, FeatureTypes, AttributeScales, OtherInstances, Options, RawScore)
-				),
-				ReferenceScores
-			).
-
-		reference_scores([], [0.0]).
-		reference_scores([RawPair| RawPairs], ReferenceScores) :-
-			findall(RawScore, member(RawScore-_-_, [RawPair| RawPairs]), Scores),
-			(   Scores == [] ->
-				ReferenceScores = [0.0]
-			;   ReferenceScores = Scores
-			).
-
-		normalize_raw_pairs([], _ReferenceScores, []).
-		normalize_raw_pairs([RawScore-Id-Class| RawPairs], ReferenceScores, [Score-Id-Class| ScoredPairs]) :-
-			normalize_against_reference(RawScore, ReferenceScores, Score),
-			normalize_raw_pairs(RawPairs, ReferenceScores, ScoredPairs).
-
-		normalize_against_reference(RawScore, ReferenceScores, Score) :-
-			count_less_or_equal(ReferenceScores, RawScore, 0, Count),
-			length(ReferenceScores, Total),
-			(   Total > 0 ->
-				Score is float(Count / Total)
-			;   Score = 0.0
-			).
-
-		count_less_or_equal([], _RawScore, Count, Count).
-		count_less_or_equal([ReferenceScore| ReferenceScores], RawScore, Count0, Count) :-
-			(   ReferenceScore =< RawScore ->
-				Count1 is Count0 + 1
-			;   Count1 = Count0
+	raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs) :-
+		findall(
+			RawScore-Id-Class,
+			(
+				Dataset::example(Id, Class, AttributeValues),
+				extract_values(AttributeNames, AttributeValues, RawValues),
+				sanitize_input_values(RawValues, Values),
+				instance_raw_score(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore)
 			),
-			count_less_or_equal(ReferenceScores, RawScore, Count1, Count).
+			RawPairs
+		).
+
+	raw_score_pairs_training([], [], []).
+	raw_score_pairs_training([Id-Class-_Values| Instances], [RawScore| ReferenceScores], [RawScore-Id-Class| RawPairs]) :-
+		raw_score_pairs_training(Instances, ReferenceScores, RawPairs).
+
+	training_raw_scores(FeatureTypes, AttributeScales, Instances, Options, ReferenceScores) :-
+		findall(
+			RawScore,
+			(
+				member(Id-_Class-Values, Instances),
+				remove_instance(Instances, Id, OtherInstances),
+				instance_raw_score(Values, FeatureTypes, AttributeScales, OtherInstances, Options, RawScore)
+			),
+			ReferenceScores
+		).
+
+	normalize_raw_pairs([], _ReferenceScores, []).
+	normalize_raw_pairs([RawScore-Id-Class| RawPairs], ReferenceScores, [Score-Id-Class| ScoredPairs]) :-
+		normalize_against_reference(RawScore, ReferenceScores, Score),
+		normalize_raw_pairs(RawPairs, ReferenceScores, ScoredPairs).
+
+	normalize_against_reference(RawScore, ReferenceScores, Score) :-
+		count_less_or_equal(ReferenceScores, RawScore, 0, Count),
+		length(ReferenceScores, Total),
+		(   Total > 0 ->
+			Score is float(Count / Total)
+		;   Score = 0.0
+		).
+
+	count_less_or_equal([], _RawScore, Count, Count).
+	count_less_or_equal([ReferenceScore| ReferenceScores], RawScore, Count0, Count) :-
+		(   ReferenceScore =< RawScore ->
+			Count1 is Count0 + 1
+		;   Count1 = Count0
+		),
+		count_less_or_equal(ReferenceScores, RawScore, Count1, Count).
 
 	keysort_distances(Distances, SortedDistances) :-
 		findall(Distance-Distance, member(Distance, Distances), Pairs),
@@ -269,22 +349,22 @@
 
 	compute_metric_distance(euclidean, Values1, Values2, FeatureTypes, AttributeScales, Distance) :-
 		sum_squared_components(Values1, Values2, FeatureTypes, AttributeScales, 0.0, 0, SumSq, Count),
+		Count > 0,
 		normalize_component_distance(Count, SumSq, Normalized),
 		Distance is sqrt(Normalized).
 	compute_metric_distance(manhattan, Values1, Values2, FeatureTypes, AttributeScales, Distance) :-
 		sum_absolute_components(Values1, Values2, FeatureTypes, AttributeScales, 0.0, 0, SumAbs, Count),
+		Count > 0,
 		normalize_component_distance(Count, SumAbs, Distance).
 	compute_metric_distance(chebyshev, Values1, Values2, FeatureTypes, AttributeScales, Distance) :-
-		max_component_distance(Values1, Values2, FeatureTypes, AttributeScales, 0.0, 0, Distance, _Count).
+		max_component_distance(Values1, Values2, FeatureTypes, AttributeScales, 0.0, 0, Distance, Count),
+		Count > 0.
 	compute_metric_distance(minkowski, Values1, Values2, FeatureTypes, AttributeScales, Distance) :-
 		P = 3.0,
 		sum_power_components(Values1, Values2, FeatureTypes, AttributeScales, P, 0.0, 0, SumPow, Count),
+		Count > 0,
 		normalize_component_distance(Count, SumPow, Normalized),
 		Distance is Normalized ** (1.0 / P).
-
-	normalize_component_distance(Count, _Raw, 1.0) :-
-		Count =< 0,
-		!.
 	normalize_component_distance(Count, Raw, Normalized) :-
 		Normalized is float(Raw / Count).
 

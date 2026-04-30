@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Hierarchical clusterer for continuous datasets. Learns a full agglomerative merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.',
 		remarks is [
 			'Algorithm' - 'Builds the full bottom-up agglomerative hierarchy and derives the requested partition by cutting the learned dendrogram at the largest remaining merge distances.',
@@ -142,7 +142,7 @@
 			^^valid_diagnostic_count(cluster_count, Diagnostics, ClusterCount),
 			^^valid_diagnostic_count(prototype_count, Diagnostics, ClusterCount) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	valid_hierarchy(hierarchy(RootState, MergeRecords, Dendrogram), FeatureCount) :-

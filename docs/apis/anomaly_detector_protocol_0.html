@@ -328,7 +328,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-20</div>
+<div class="line"><strong>Date:</strong> 2026-04-30</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -360,18 +360,23 @@
 <ul>
 <li><p><a class="reference internal" href="#learn-2" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#learn-3" id="id3"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-3" id="id4"><code class="docutils literal notranslate"><span class="pre">predict/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predict-4" id="id5"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#score-3" id="id6"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#score-all-3" id="id7"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-to-clauses-4" id="id8"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#export-to-file-4" id="id9"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-anomaly-detector-1" id="id10"><code class="docutils literal notranslate"><span class="pre">print_anomaly_detector/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-anomaly-detector-1" id="id4"><code class="docutils literal notranslate"><span class="pre">check_anomaly_detector/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-anomaly-detector-1" id="id5"><code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#diagnostics-2" id="id6"><code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#diagnostic-2" id="id7"><code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#anomaly-detector-options-2" id="id8"><code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predict-3" id="id9"><code class="docutils literal notranslate"><span class="pre">predict/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predict-4" id="id10"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-3" id="id11"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#score-all-3" id="id12"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#export-to-clauses-4" id="id13"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#export-to-file-4" id="id14"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-anomaly-detector-1" id="id15"><code class="docutils literal notranslate"><span class="pre">print_anomaly_detector/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -418,8 +423,113 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="check-anomaly-detector-1">
+<span id="anomaly-detector-protocol-0-check-anomaly-detector-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_anomaly_detector/1</span></code></a><a class="headerlink" href="#check-anomaly-detector-1" title="Link to this heading"></a></h3>
+<p>Checks that a learned anomaly detector term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid anomaly detector representation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_anomaly_detector(AnomalyDetector)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_anomaly_detector(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-anomaly-detector-1">
+<span id="anomaly-detector-protocol-0-valid-anomaly-detector-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector/1</span></code></a><a class="headerlink" href="#valid-anomaly-detector-1" title="Link to this heading"></a></h3>
+<p>True when a learned anomaly detector term is structurally valid for the receiving implementation. Succeeds iff <code class="docutils literal notranslate"><span class="pre">check_anomaly_detector/1</span></code> succeeds without throwing an exception.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector(AnomalyDetector)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector(&#64;compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="diagnostics-2">
+<span id="anomaly-detector-protocol-0-diagnostics-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code></a><a class="headerlink" href="#diagnostics-2" title="Link to this heading"></a></h3>
+<p>Returns diagnostics and metadata associated with a learned anomaly detector in a representation-independent way.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostics(AnomalyDetector,Diagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostics(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="diagnostic-2">
+<span id="anomaly-detector-protocol-0-diagnostic-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code></a><a class="headerlink" href="#diagnostic-2" title="Link to this heading"></a></h3>
+<p>Tests or enumerates individual diagnostics metadata terms for a learned anomaly detector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostic(AnomalyDetector,Diagnostic)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">diagnostic(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="anomaly-detector-options-2">
+<span id="anomaly-detector-protocol-0-anomaly-detector-options-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code></a><a class="headerlink" href="#anomaly-detector-options-2" title="Link to this heading"></a></h3>
+<p>Returns the effective training options recorded in a learned anomaly detector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">anomaly_detector_options(AnomalyDetector,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">anomaly_detector_options(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="predict-3">
-<span id="anomaly-detector-protocol-0-predict-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/3</span></code></a><a class="headerlink" href="#predict-3" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-predict-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/3</span></code></a><a class="headerlink" href="#predict-3" title="Link to this heading"></a></h3>
 <p>Predicts whether a new instance is <code class="docutils literal notranslate"><span class="pre">normal</span></code> or <code class="docutils literal notranslate"><span class="pre">anomaly</span></code> using the learned detector. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -440,7 +550,7 @@
 <hr class="docutils" />
 </section>
 <section id="predict-4">
-<span id="anomaly-detector-protocol-0-predict-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a><a class="headerlink" href="#predict-4" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-predict-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predict/4</span></code></a><a class="headerlink" href="#predict-4" title="Link to this heading"></a></h3>
 <p>Predicts whether a new instance is <code class="docutils literal notranslate"><span class="pre">normal</span></code> or <code class="docutils literal notranslate"><span class="pre">anomaly</span></code> using the learned detector and the specified options. The instance is a list of <code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -461,7 +571,7 @@
 <hr class="docutils" />
 </section>
 <section id="score-3">
-<span id="anomaly-detector-protocol-0-score-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a><a class="headerlink" href="#score-3" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-score-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a><a class="headerlink" href="#score-3" title="Link to this heading"></a></h3>
 <p>Computes an anomaly score in the interval <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code> for a new instance. Larger scores indicate more anomalous instances.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -482,7 +592,7 @@
 <hr class="docutils" />
 </section>
 <section id="score-all-3">
-<span id="anomaly-detector-protocol-0-score-all-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a><a class="headerlink" href="#score-all-3" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-score-all-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></a><a class="headerlink" href="#score-all-3" title="Link to this heading"></a></h3>
 <p>Computes anomaly scores for all examples in a dataset and returns a list of <code class="docutils literal notranslate"><span class="pre">Id-Class-Score</span></code> triples sorted by descending score.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -503,7 +613,7 @@
 <hr class="docutils" />
 </section>
 <section id="export-to-clauses-4">
-<span id="anomaly-detector-protocol-0-export-to-clauses-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a><a class="headerlink" href="#export-to-clauses-4" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-export-to-clauses-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code></a><a class="headerlink" href="#export-to-clauses-4" title="Link to this heading"></a></h3>
 <p>Converts an anomaly detector into a list of predicate clauses. <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as <code class="docutils literal notranslate"><span class="pre">detector</span></code> or <code class="docutils literal notranslate"><span class="pre">model</span></code> is usually clearer than a verb such as <code class="docutils literal notranslate"><span class="pre">detect</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -524,7 +634,7 @@
 <hr class="docutils" />
 </section>
 <section id="export-to-file-4">
-<span id="anomaly-detector-protocol-0-export-to-file-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a><a class="headerlink" href="#export-to-file-4" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-export-to-file-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code></a><a class="headerlink" href="#export-to-file-4" title="Link to this heading"></a></h3>
 <p>Exports an anomaly detector to a file. <code class="docutils literal notranslate"><span class="pre">Functor</span></code> is the functor for the generated predicate clauses. When exporting a serialized detector term, a noun such as <code class="docutils literal notranslate"><span class="pre">detector</span></code> or <code class="docutils literal notranslate"><span class="pre">model</span></code> is usually clearer than a verb such as <code class="docutils literal notranslate"><span class="pre">detect</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -545,7 +655,7 @@
 <hr class="docutils" />
 </section>
 <section id="print-anomaly-detector-1">
-<span id="anomaly-detector-protocol-0-print-anomaly-detector-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_anomaly_detector/1</span></code></a><a class="headerlink" href="#print-anomaly-detector-1" title="Link to this heading"></a></h3>
+<span id="anomaly-detector-protocol-0-print-anomaly-detector-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_anomaly_detector/1</span></code></a><a class="headerlink" href="#print-anomaly-detector-1" title="Link to this heading"></a></h3>
 <p>Prints an anomaly detector to the current output stream in a human-readable format.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

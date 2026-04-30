@@ -120,7 +120,7 @@
 			^^valid_diagnostic_count(center_count, Diagnostics, CenterCount),
 			^^valid_diagnostic_choice(selection_strategy, Diagnostics, [deterministic_farthest_first, first_k]) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	initialize_centers(first_k, K, Rows, _Options, Centers) :-

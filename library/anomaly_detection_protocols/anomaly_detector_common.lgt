@@ -26,15 +26,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-30,
 		comment is 'Shared predicates for anomaly detector learning defaults, threshold-based prediction, dataset helpers, and export.'
 	]).
 
-	:- protected(anomaly_detector_options/2).
-	:- mode(anomaly_detector_options(+compound, -list(compound)), one).
-	:- info(anomaly_detector_options/2, [
-		comment is 'Hook predicate that importing anomaly detector implementations may override in order to expose the effective detector options.',
-		argnames is ['AnomalyDetector', 'Options']
+	:- protected(anomaly_detector_diagnostics_data/2).
+	:- mode(anomaly_detector_diagnostics_data(+compound, -list(compound)), one).
+	:- info(anomaly_detector_diagnostics_data/2, [
+		comment is 'Hook predicate that importing anomaly detector implementations may override in order to expose diagnostics and metadata for learned detectors.',
+		argnames is ['AnomalyDetector', 'Diagnostics']
 	]).
 
 	:- protected(anomaly_detector_export_template/2).
@@ -58,6 +58,13 @@
 		argnames is ['Dataset', 'Attributes']
 	]).
 
+	:- protected(check_examples_non_empty/2).
+	:- mode(check_examples_non_empty(+object_identifier, +list), one).
+	:- info(check_examples_non_empty/2, [
+		comment is 'Checks that a dataset contains at least one example.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
 	:- protected(extract_scores/2).
 	:- mode(extract_scores(+list, -list), one).
 	:- info(extract_scores/2, [
@@ -77,11 +84,27 @@
 	]).
 
 	:- uses(list, [
-		last/2, member/2
+		last/2, member/2, memberchk/2
 	]).
 
 	learn(Dataset, Detector) :-
 		::learn(Dataset, Detector, []).
+
+	check_anomaly_detector(Detector) :-
+		(   ::anomaly_detector_term_template(Detector, _Template) ->
+			true
+		;   domain_error(anomaly_detector, Detector)
+		).
+
+	valid_anomaly_detector(Detector) :-
+		catch(::check_anomaly_detector(Detector), _Error, fail).
+
+	diagnostics(Detector, Diagnostics) :-
+		::anomaly_detector_diagnostics_data(Detector, Diagnostics).
+
+	diagnostic(Detector, Diagnostic) :-
+		::anomaly_detector_diagnostics_data(Detector, Diagnostics),
+		member(Diagnostic, Diagnostics).
 
 	predict(Detector, Instance, Prediction) :-
 		::anomaly_detector_options(Detector, Options),
@@ -112,6 +135,11 @@
 		close(Stream).
 
 	anomaly_detector_options(Detector, Options) :-
+		diagnostics(Detector, Diagnostics),
+		memberchk(options(Options), Diagnostics).
+
+	anomaly_detector_diagnostics_data(Detector, [model(Model), options(Options)]) :-
+		self(Model),
 		Detector =.. [_| Arguments],
 		last(Arguments, Options).
 
@@ -120,6 +148,12 @@
 			Attribute-Values,
 			Dataset::attribute_values(Attribute, Values),
 			Attributes
+		).
+
+	check_examples_non_empty(Dataset, Examples) :-
+		(   Examples == [] ->
+			domain_error(non_empty_dataset, Dataset)
+		;   true
 		).
 
 	extract_scores([], []).

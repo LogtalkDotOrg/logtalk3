@@ -1,5 +1,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+
+:- object(knn_identical_query_fixture,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+	example(1, normal, [x-0.00]).
+	example(2, normal, [x-0.10]).
+	example(3, anomaly, [x-10.00]).
+
+:- end_object.
+
+
+:- object(knn_empty_anomalies,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+:- end_object.
+
+
+:- object(knn_singleton_anomalies,
+	implements(anomaly_dataset_protocol)).
+
+	attribute_values(x, continuous).
+
+	class(label).
+
+	class_values([normal, anomaly]).
+
+	example(1, normal, [x-1.00]).
+
+:- end_object.
+
+
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
@@ -25,18 +68,22 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-30,
 		comment is 'Unit tests for the "knn_distance" library.'
 	]).
 
 	:- uses(list, [
-		length/2, take/3
+		length/2, member/2, take/3
 	]).
 
 	:- uses(knn_distance, [
+		anomaly_detector_options/2,
+		check_anomaly_detector/1,
+		diagnostic/2, diagnostics/2,
 		export_to_clauses/4, export_to_file/4,
 		learn/2, learn/3, predict/3, predict/4,
-		print_anomaly_detector/1, score/3, score_all/3
+		print_anomaly_detector/1, score/3, score_all/3,
+		valid_anomaly_detector/1
 	]).
 
 	cover(knn_distance).
@@ -77,6 +124,39 @@
 		learn(mixed_distance_behaviors, Detector, [k(3), distance_metric(manhattan), score_mode(mean_distance)]),
 		score(Detector, [size-10.05, weight-100.05, color-red,  shape-round], BaseScore),
 		score(Detector, [size-12.0,  weight-104.0,  color-blue, shape-square], CombinedScore).
+
+	test(knn_distance_score_3_fresh_identical_query_is_not_leave_one_out, true((FreshScore =:= 0.0, FreshScore < TrainingScore))) :-
+		learn(knn_identical_query_fixture, Detector, [k(1)]),
+		score(Detector, [x-0.00], FreshScore),
+		score_all(knn_identical_query_fixture, Detector, Scores),
+		member(1-normal-TrainingScore, Scores).
+
+	test(knn_distance_learn_3_empty_dataset_error, error(domain_error(non_empty_dataset, knn_empty_anomalies))) :-
+		learn(knn_empty_anomalies, _Detector, [k(1)]).
+
+	test(knn_distance_score_3_singleton_dataset_bounded_and_consistent, true((FreshScore =:= TrainingScore, FreshScore >= 0.0, FreshScore =< 1.0))) :-
+		learn(knn_singleton_anomalies, Detector, [k(3)]),
+		score(Detector, [x-1.00], FreshScore),
+		score_all(knn_singleton_anomalies, Detector, [1-normal-TrainingScore]).
+
+	test(knn_distance_valid_anomaly_detector_1, deterministic(valid_anomaly_detector(Detector))) :-
+		learn(knn_singleton_anomalies, Detector, [k(3)]).
+
+	test(knn_distance_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [k(1)])))) :-
+		check_anomaly_detector(knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [k(1)])).
+
+	test(knn_distance_diagnostics_2, deterministic((memberchk(model(knn_distance), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(example_count(48), Diagnostics), memberchk(reference_score_count(48), Diagnostics)))) :-
+		learn(gaussian_anomalies, Detector, [k(5)]),
+		diagnostics(Detector, Diagnostics).
+
+	test(knn_distance_anomaly_detector_options_2, deterministic(memberchk(k(5), Options))) :-
+		learn(gaussian_anomalies, Detector, [k(5)]),
+		anomaly_detector_options(Detector, Options).
+
+	test(knn_distance_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
+		learn(gaussian_anomalies, Detector, [k(5)]),
+		diagnostics(Detector, Diagnostics),
+		findall(Diagnostic, diagnostic(Detector, Diagnostic), Enumerated).
 
 	test(knn_distance_predict_3_gaussian_normal, true(Prediction == normal)) :-
 		learn(gaussian_anomalies, Detector, [k(5)]),

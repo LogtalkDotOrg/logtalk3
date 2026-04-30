@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'k-Medoids clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses an iterative medoid-update algorithm with deterministic initialization and deterministic cluster assignments.',
@@ -114,7 +114,7 @@
 			length(Medoids, MedoidCount),
 			^^valid_diagnostic_count(medoid_count, Diagnostics, MedoidCount) ->
 			true
-		;   domain_error(valid_clusterer, Clusterer)
+		;   domain_error(clusterer, Clusterer)
 		).
 
 	initialize_medoids(first_k, K, Rows, _Options, Medoids) :-

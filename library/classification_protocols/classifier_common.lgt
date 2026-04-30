@@ -26,7 +26,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Shared predicates for classifier diagnostics and export.'
 	]).
 
@@ -122,7 +122,7 @@
 	check_classifier(Classifier) :-
 		(   ::classifier_diagnostics_data(Classifier, _Diagnostics) ->
 			true
-		;   domain_error(valid_classifier, Classifier)
+		;   domain_error(classifier, Classifier)
 		).
 
 	valid_classifier(Classifier) :-

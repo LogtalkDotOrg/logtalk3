@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-04-30,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		remarks is [
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
@@ -34,7 +34,7 @@
 			'Prediction' - 'The ``predict/3`` predicate returns ``anomaly`` if the anomaly score is above the threshold (default: 0.5) and ``normal`` otherwise. The ``score_all/3`` predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the ``anomaly_threshold/1`` option.',
 			'Anomaly score' - 'The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.',
 			'Discrete attributes' - 'Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.',
-			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values are sent down both branches of the tree and the path length is computed as the weighted average of the two branches.',
+			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values use node-local bounds stored in each tree split to decide whether a split is forced or genuinely ambiguous; ambiguous splits are evaluated down both branches and combined using subtree-size weights.',
 			'Anomaly detector representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.'
 		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance, lof]
@@ -98,6 +98,7 @@
 			Dataset::example(_, _, AVs),
 			AllAVs
 		),
+		^^check_examples_non_empty(Dataset, AllAVs),
 		% Compute ranges from known values for imputation
 		compute_attribute_ranges(AttributeNames, AllAVs, Attributes, Ranges),
 		% Convert to numeric vectors with random imputation of missing values
@@ -119,17 +120,43 @@
 		max_depth(Psi, MaxDepth),
 		% Build the forest
 		build_forest(Vectors, NumTrees, Psi, MaxDepth, NumDimensions, ExtLevel, Trees),
-		% Create model term (includes Ranges for scoring missing values)
+		% Create model term (includes Ranges for training-time missing-value imputation)
 		Model = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Options).
+
+	check_anomaly_detector(Detector) :-
+		(   Detector = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Options),
+			valid_attribute_names(AttributeNames),
+			valid_attribute_declarations(Attributes, AttributeNames),
+			integer(Psi),
+			Psi > 0,
+			valid_ranges(Ranges, AttributeNames),
+			valid_forest(Trees, AttributeNames),
+			valid_detector_options(Options) ->
+			true
+		;   domain_error(anomaly_detector, Detector)
+		).
+
+	anomaly_detector_diagnostics_data(if_model(Trees, Psi, AttributeNames, _Attributes, _Ranges, Options), Diagnostics) :-
+		length(Trees, TreeCount),
+		length(AttributeNames, FeatureCount),
+		Diagnostics = [
+			model(isolation_forest),
+			tree_count(TreeCount),
+			subsample_size(Psi),
+			attribute_names(AttributeNames),
+			feature_count(FeatureCount),
+			options(Options)
+		].
 
 	% score/3 - compute anomaly score for an instance
 	% Missing values are handled by sending the instance down both
-	% branches and computing a weighted average path length
+	% branches for uncertain splits and computing a weighted average
+	% path length using the subtree sizes as weights
 	score(Model, Instance, Score) :-
-		detector_data(Model, Trees, Psi, AttributeNames, Attributes, Ranges, _Options),
+		detector_data(Model, Trees, Psi, AttributeNames, Attributes, _Ranges, _Options),
 		to_numeric_vector_with_missing(AttributeNames, Instance, Attributes, Vector, MissingMask),
 		% Compute average path length across all trees
-		compute_average_path_length(Trees, Vector, MissingMask, Ranges, AvgPathLength),
+		compute_average_path_length(Trees, Vector, MissingMask, AvgPathLength),
 		% Compute anomaly score: s(x) = 2^(-E(h(x)) / c(psi))
 		average_path_length_bst(Psi, CPsi),
 		(	CPsi > 0.0 ->
@@ -139,12 +166,12 @@
 
 	% score_all/3 - compute scores for all instances
 	score_all(Dataset, Model, SortedScores) :-
-		detector_data(Model, _Trees, _Psi, AttributeNames, Attributes, Ranges, _Options),
+		detector_data(Model, _Trees, _Psi, AttributeNames, Attributes, _Ranges, _Options),
 		findall(
 			Score-Id-Class,
 			(	Dataset::example(Id, Class, AVs),
 				to_numeric_vector_with_missing(AttributeNames, AVs, Attributes, Vector, MissingMask),
-				score_vector(Model, Vector, MissingMask, Ranges, Score)
+				score_vector(Model, Vector, MissingMask, Score)
 			),
 			UnsortedPairs
 		),
@@ -152,8 +179,8 @@
 		reverse(SortedPairsAsc, SortedPairsDesc),
 		^^extract_scores(SortedPairsDesc, SortedScores).
 
-	score_vector(if_model(Trees, Psi, _, _, _, _), Vector, MissingMask, Ranges, Score) :-
-		compute_average_path_length(Trees, Vector, MissingMask, Ranges, AvgPathLength),
+	score_vector(if_model(Trees, Psi, _, _, _, _), Vector, MissingMask, Score) :-
+		compute_average_path_length(Trees, Vector, MissingMask, AvgPathLength),
 		average_path_length_bst(Psi, CPsi),
 		(	CPsi > 0.0 ->
 			Score is 2.0 ** (-(AvgPathLength / CPsi))
@@ -187,6 +214,83 @@
 	detector_data(Detector, Trees, Psi, AttributeNames, Attributes, Ranges, Options) :-
 		Detector =.. [_Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
 
+	valid_attribute_names(AttributeNames) :-
+		valid(list(atom), AttributeNames),
+		AttributeNames \== [].
+
+	valid_attribute_declarations(Attributes, AttributeNames) :-
+		valid(list(pair), Attributes),
+		length(Attributes, Count),
+		length(AttributeNames, Count),
+		valid_attribute_declarations_(Attributes, AttributeNames).
+
+	valid_attribute_declarations_([], []).
+	valid_attribute_declarations_([Attribute-Values| Attributes], [AttributeName| AttributeNames]) :-
+		Attribute == AttributeName,
+		atom(Attribute),
+		(   Values == continuous ->
+			true
+		;   valid(list(nonvar), Values),
+			Values \== []
+		),
+		valid_attribute_declarations_(Attributes, AttributeNames).
+
+	valid_ranges(Ranges, AttributeNames) :-
+		valid(list(compound), Ranges),
+		length(Ranges, Count),
+		length(AttributeNames, Count),
+		valid_named_ranges_(Ranges, AttributeNames).
+
+	valid_named_ranges_([], []).
+	valid_named_ranges_([Attribute-Minimum-Maximum| Ranges], [AttributeName| AttributeNames]) :-
+		Attribute == AttributeName,
+		atom(Attribute),
+		number(Minimum),
+		number(Maximum),
+		Minimum =< Maximum,
+		valid_named_ranges_(Ranges, AttributeNames).
+
+	valid_ranges_([]).
+	valid_ranges_([Minimum-Maximum| Ranges]) :-
+		number(Minimum),
+		number(Maximum),
+		Minimum =< Maximum,
+		valid_ranges_(Ranges).
+
+	valid_forest(Trees, AttributeNames) :-
+		valid(list(compound), Trees),
+		Trees \== [],
+		length(AttributeNames, FeatureCount),
+		valid_forest_(Trees, FeatureCount).
+
+	valid_forest_([], _).
+	valid_forest_([Tree| Trees], FeatureCount) :-
+		valid_tree(Tree, FeatureCount),
+		valid_forest_(Trees, FeatureCount).
+
+	valid_tree(external(Size), _FeatureCount) :-
+		integer(Size),
+		Size > 0.
+	valid_tree(internal(Normal, Intercept, NodeRanges, Left, Right), FeatureCount) :-
+		valid_vector(Normal, FeatureCount),
+		valid_vector(Intercept, FeatureCount),
+		valid_ranges_by_count(NodeRanges, FeatureCount),
+		valid_tree(Left, FeatureCount),
+		valid_tree(Right, FeatureCount).
+
+	valid_vector(Vector, FeatureCount) :-
+		valid(list(number), Vector),
+		length(Vector, FeatureCount).
+
+	valid_ranges_by_count(Ranges, FeatureCount) :-
+		valid(list(pair), Ranges),
+		length(Ranges, FeatureCount),
+		valid_ranges_(Ranges).
+
+	valid_detector_options(Options) :-
+		valid(list(compound), Options),
+		catch(^^check_options(Options), _Error, fail).
+
 	print_trees([], _).
 	print_trees([Tree| Trees], N) :-
 		tree_depth(Tree, Depth),
@@ -196,13 +300,13 @@
 		print_trees(Trees, N1).
 
 	tree_depth(external(_), 0).
-	tree_depth(internal(_, _, Left, Right), Depth) :-
+	tree_depth(internal(_, _, _, Left, Right), Depth) :-
 		tree_depth(Left, LeftDepth),
 		tree_depth(Right, RightDepth),
 		Depth is max(LeftDepth, RightDepth) + 1.
 
 	tree_size(external(_), 1).
-	tree_size(internal(_, _, Left, Right), Size) :-
+	tree_size(internal(_, _, _, Left, Right), Size) :-
 		tree_size(Left, LeftSize),
 		tree_size(Right, RightSize),
 		Size is LeftSize + RightSize + 1.
@@ -332,10 +436,11 @@
 		length(Data, Size),
 		Size > 1,
 		CurrentDepth < MaxDepth,
+		compute_ranges(Data, NumDimensions, NodeRanges),
 		% Generate random normal vector (hyperplane direction)
 		generate_normal_vector(NumDimensions, ExtLevel, Normal),
 		% Generate random intercept point within the data range
-		generate_intercept(Data, NumDimensions, Intercept),
+		random_point_in_ranges(NodeRanges, Intercept),
 		% Split data using the hyperplane: (x - p) . n <= 0 goes left
 		split_by_hyperplane(Data, Normal, Intercept, Left, Right),
 		% If split is degenerate (all to one side), make it a leaf
@@ -344,7 +449,7 @@
 		;	NextDepth is CurrentDepth + 1,
 			build_itree(Left, MaxDepth, NextDepth, NumDimensions, ExtLevel, LeftTree),
 			build_itree(Right, MaxDepth, NextDepth, NumDimensions, ExtLevel, RightTree),
-			Tree = internal(Normal, Intercept, LeftTree, RightTree)
+			Tree = internal(Normal, Intercept, NodeRanges, LeftTree, RightTree)
 		).
 
 	% generate_normal_vector/3 - generate a random normal vector for hyperplane
@@ -389,11 +494,6 @@
 	fill_normal_vector(N, I, ActiveIndices, Components, [0.0| Rest]) :-
 		I1 is I + 1,
 		fill_normal_vector(N, I1, ActiveIndices, Components, Rest).
-
-	% generate_intercept/3 - generate a random intercept point within data range
-	generate_intercept(Data, NumDimensions, Intercept) :-
-		compute_ranges(Data, NumDimensions, Ranges),
-		random_point_in_ranges(Ranges, Intercept).
 
 	% compute_ranges/3 - compute min/max for each dimension
 	compute_ranges(Data, NumDimensions, Ranges) :-
@@ -444,9 +544,9 @@
 		Dot1 is Dot0 + (Xi - Pi) * Ni,
 		dot_shifted(Xs, Ps, Ns, Dot1, Dot).
 
-	% compute_average_path_length/5 - compute average path length across all trees
+	% compute_average_path_length/4 - compute average path length across all trees
 	% handling missing values
-	compute_average_path_length(Trees, Vector, MissingMask, _Ranges, AvgPathLength) :-
+	compute_average_path_length(Trees, Vector, MissingMask, AvgPathLength) :-
 		(	has_missing(MissingMask) ->
 			compute_path_lengths_missing(Trees, Vector, MissingMask, 0.0, TotalPathLength, 0, NumTrees)
 		;	compute_path_lengths(Trees, Vector, 0.0, TotalPathLength, 0, NumTrees)
@@ -480,7 +580,7 @@
 	path_length(external(Size), _, CurrentLength, PathLength) :-
 		average_path_length_bst(Size, Adjustment),
 		PathLength is CurrentLength + Adjustment.
-	path_length(internal(Normal, Intercept, Left, Right), Vector, CurrentLength, PathLength) :-
+	path_length(internal(Normal, Intercept, _Ranges, Left, Right), Vector, CurrentLength, PathLength) :-
 		dot_shifted(Vector, Intercept, Normal, DotProduct),
 		NextLength is CurrentLength + 1.0,
 		(	DotProduct =< 0.0 ->
@@ -489,32 +589,71 @@
 		).
 
 	% path_length_missing/5 - compute path length with missing value handling
-	% Uses only the known dimensions to compute the dot product for routing.
-	% Missing dimensions contribute zero to the dot product, meaning the
-	% routing decision is based entirely on the known attribute values.
+	% When a split depends on one or more missing dimensions, score both
+	% branches and weight them by the number of training instances routed
+	% to each subtree when the tree was built.
 	path_length_missing(external(Size), _, _, CurrentLength, PathLength) :-
 		average_path_length_bst(Size, Adjustment),
 		PathLength is CurrentLength + Adjustment.
-	path_length_missing(internal(Normal, Intercept, Left, Right), Vector, MissingMask, CurrentLength, PathLength) :-
-		dot_shifted_masked(Vector, Intercept, Normal, MissingMask, DotProduct),
+	path_length_missing(internal(Normal, Intercept, Ranges, Left, Right), Vector, MissingMask, CurrentLength, PathLength) :-
 		NextLength is CurrentLength + 1.0,
-		(	DotProduct =< 0.0 ->
+		(	split_decision_with_missing(Vector, Intercept, Normal, MissingMask, Ranges, branch) ->
+			path_length_missing(Left, Vector, MissingMask, NextLength, LeftPathLength),
+			path_length_missing(Right, Vector, MissingMask, NextLength, RightPathLength),
+			subtree_size(Left, LeftSize),
+			subtree_size(Right, RightSize),
+			weighted_path_length(LeftPathLength, LeftSize, RightPathLength, RightSize, PathLength)
+		;	split_decision_with_missing(Vector, Intercept, Normal, MissingMask, Ranges, left) ->
 			path_length_missing(Left, Vector, MissingMask, NextLength, PathLength)
 		;	path_length_missing(Right, Vector, MissingMask, NextLength, PathLength)
 		).
 
-	% dot_shifted_masked/5 - compute (x - p) . n skipping missing dimensions
-	dot_shifted_masked(X, P, N, Mask, Dot) :-
-		dot_shifted_masked(X, P, N, Mask, 0.0, Dot).
+	split_decision_with_missing(Vector, Intercept, Normal, MissingMask, Ranges, Decision) :-
+		dot_shifted_interval(Vector, Intercept, Normal, MissingMask, Ranges, MinDotProduct, MaxDotProduct),
+		(	MaxDotProduct =< 0.0 ->
+			Decision = left
+		;	MinDotProduct > 0.0 ->
+			Decision = right
+		;	Decision = branch
+		).
 
-	dot_shifted_masked([], [], [], [], Dot, Dot).
-	dot_shifted_masked([_| Xs], [_| Ps], [_| Ns], [true| Ms], Dot0, Dot) :-
-		!,
-		% Skip missing dimension (zero contribution)
-		dot_shifted_masked(Xs, Ps, Ns, Ms, Dot0, Dot).
-	dot_shifted_masked([Xi| Xs], [Pi| Ps], [Ni| Ns], [false| Ms], Dot0, Dot) :-
-		Dot1 is Dot0 + (Xi - Pi) * Ni,
-		dot_shifted_masked(Xs, Ps, Ns, Ms, Dot1, Dot).
+	dot_shifted_interval(Vector, Intercept, Normal, MissingMask, Ranges, MinDotProduct, MaxDotProduct) :-
+		dot_shifted_interval(Vector, Intercept, Normal, MissingMask, Ranges, 0.0, MinDotProduct, 0.0, MaxDotProduct).
+
+	dot_shifted_interval([], [], [], [], [], MinDotProduct, MinDotProduct, MaxDotProduct, MaxDotProduct).
+	dot_shifted_interval([Xi| Xs], [Pi| Ps], [Ni| Ns], [false| Ms], [_-_| Rs], Min0, MinDotProduct, Max0, MaxDotProduct) :-
+		Contribution is (Xi - Pi) * Ni,
+		Min1 is Min0 + Contribution,
+		Max1 is Max0 + Contribution,
+		dot_shifted_interval(Xs, Ps, Ns, Ms, Rs, Min1, MinDotProduct, Max1, MaxDotProduct).
+	dot_shifted_interval([_| Xs], [Pi| Ps], [Ni| Ns], [true| Ms], [Min-Max| Rs], Min0, MinDotProduct, Max0, MaxDotProduct) :-
+		minimum_and_maximum_contribution(Min, Max, Pi, Ni, MinimumContribution, MaximumContribution),
+		Min1 is Min0 + MinimumContribution,
+		Max1 is Max0 + MaximumContribution,
+		dot_shifted_interval(Xs, Ps, Ns, Ms, Rs, Min1, MinDotProduct, Max1, MaxDotProduct).
+
+	minimum_and_maximum_contribution(MinimumValue, MaximumValue, InterceptValue, Coefficient, MinimumContribution, MaximumContribution) :-
+		Contribution1 is (MinimumValue - InterceptValue) * Coefficient,
+		Contribution2 is (MaximumValue - InterceptValue) * Coefficient,
+		(	Contribution1 =< Contribution2 ->
+			MinimumContribution = Contribution1,
+			MaximumContribution = Contribution2
+		;	MinimumContribution = Contribution2,
+			MaximumContribution = Contribution1
+		).
+
+	weighted_path_length(LeftPathLength, LeftSize, RightPathLength, RightSize, PathLength) :-
+		TotalSize is LeftSize + RightSize,
+		(	TotalSize > 0 ->
+			PathLength is (LeftPathLength * LeftSize + RightPathLength * RightSize) / TotalSize
+		;	PathLength is (LeftPathLength + RightPathLength) / 2.0
+		).
+
+	subtree_size(external(Size), Size).
+	subtree_size(internal(_, _, _, Left, Right), Size) :-
+		subtree_size(Left, LeftSize),
+		subtree_size(Right, RightSize),
+		Size is LeftSize + RightSize.
 
 	% average_path_length_bst/2 - average path length of unsuccessful search
 	% in a Binary Search Tree (BST) with n nodes

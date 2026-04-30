@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-04-30,
 		comment is 'Protocol for machine learning anomaly detectors.',
 		see_also is [anomaly_dataset_protocol, anomaly_detector_common, isolation_forest, knn_distance, lof]
 	]).
@@ -41,6 +41,41 @@
 	:- info(learn/3, [
 		comment is 'Learns an anomaly detector from the given dataset object using the specified options.',
 		argnames is ['Dataset', 'AnomalyDetector', 'Options']
+	]).
+
+	:- public(check_anomaly_detector/1).
+	:- mode(check_anomaly_detector(@compound), one_or_error).
+	:- info(check_anomaly_detector/1, [
+		comment is 'Checks that a learned anomaly detector term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid anomaly detector representation.',
+		argnames is ['AnomalyDetector']
+	]).
+
+	:- public(valid_anomaly_detector/1).
+	:- mode(valid_anomaly_detector(@compound), zero_or_one).
+	:- info(valid_anomaly_detector/1, [
+		comment is 'True when a learned anomaly detector term is structurally valid for the receiving implementation. Succeeds iff ``check_anomaly_detector/1`` succeeds without throwing an exception.',
+		argnames is ['AnomalyDetector']
+	]).
+
+	:- public(diagnostics/2).
+	:- mode(diagnostics(+compound, -list(compound)), one).
+	:- info(diagnostics/2, [
+		comment is 'Returns diagnostics and metadata associated with a learned anomaly detector in a representation-independent way.',
+		argnames is ['AnomalyDetector', 'Diagnostics']
+	]).
+
+	:- public(diagnostic/2).
+	:- mode(diagnostic(+compound, ?compound), zero_or_more).
+	:- info(diagnostic/2, [
+		comment is 'Tests or enumerates individual diagnostics metadata terms for a learned anomaly detector.',
+		argnames is ['AnomalyDetector', 'Diagnostic']
+	]).
+
+	:- public(anomaly_detector_options/2).
+	:- mode(anomaly_detector_options(+compound, -list(compound)), one).
+	:- info(anomaly_detector_options/2, [
+		comment is 'Returns the effective training options recorded in a learned anomaly detector.',
+		argnames is ['AnomalyDetector', 'Options']
 	]).
 
 	:- public(predict/3).

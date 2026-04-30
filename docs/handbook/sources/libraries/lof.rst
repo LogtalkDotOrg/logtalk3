@@ -60,6 +60,9 @@ Features
 - **Detector export**: learned detectors can be exported as predicate
   clauses.
 
+- **Dataset validation**: learning rejects empty datasets with a
+  ``domain_error(non_empty_dataset, Dataset)`` exception.
+
 Options
 -------
 
@@ -79,7 +82,7 @@ The learned detector is represented by default as:
 
 ::
 
-   lof_detector(AttributeNames, FeatureTypes, AttributeScales, Instances, Options)
+   lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options)
 
 Where:
 
@@ -88,7 +91,13 @@ Where:
   ``categorical``)
 - ``AttributeScales``: Normalization scales for numeric features
 - ``Instances``: List of training ``Id-Class-Values`` triples
+- ``ReferenceScores``: Cached leave-one-out raw training scores reused
+  by ``score_all/3``
 - ``Options``: Learned options
+
+The ``score/3`` predicate always treats its input as a fresh query. Only
+``score_all/3`` on the original training dataset reuses the cached
+leave-one-out ``ReferenceScores``.
 
 When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
 this detector term is serialized directly as the single argument of the
