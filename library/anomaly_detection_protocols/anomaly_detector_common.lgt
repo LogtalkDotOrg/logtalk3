@@ -91,7 +91,9 @@
 		::learn(Dataset, Detector, []).
 
 	check_anomaly_detector(Detector) :-
-		(   ::anomaly_detector_term_template(Detector, _Template) ->
+		(	var(Detector) ->
+			instantiation_error
+		;   ::anomaly_detector_term_template(Detector, _Template) ->
 			true
 		;   domain_error(anomaly_detector, Detector)
 		).

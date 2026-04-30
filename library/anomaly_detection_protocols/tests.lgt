@@ -238,7 +238,7 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		length/2, memberchk/2
 	]).
 
 	cleanup :-

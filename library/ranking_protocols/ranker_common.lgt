@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Shared predicates for ranker score access, diagnostics, and export.'
 	]).
 
@@ -108,8 +108,13 @@
 		memberchk(options(Options), Diagnostics).
 
 	check_ranker(Ranker) :-
-		::ranker_scores_data(Ranker, _Scores),
-		::ranker_diagnostics_data(Ranker, _Diagnostics).
+		(	var(Ranker) ->
+			instantiation_error
+		;	::ranker_scores_data(Ranker, _Scores),
+			::ranker_diagnostics_data(Ranker, _Diagnostics) ->
+			true
+		;	domain_error(ranker, Ranker)
+		).
 
 	valid_ranker(Ranker) :-
 		catch(::check_ranker(Ranker), _Error, fail).

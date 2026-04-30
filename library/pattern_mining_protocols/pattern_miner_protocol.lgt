@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-04-30,
 		comment is 'Protocol for machine learning pattern-mining algorithms.',
 		see_also is [transaction_dataset_protocol, sequence_dataset_protocol]
 	]).
@@ -68,7 +68,11 @@
 	:- mode(check_pattern_miner(@compound), one_or_error).
 	:- info(check_pattern_miner/1, [
 		comment is 'Checks that the argument is a structurally valid mined pattern miner term for the receiving pattern miner implementation, throwing an exception on invalid input when applicable.',
-		argnames is ['PatternMiner']
+		argnames is ['PatternMiner'],
+		exceptions is [
+			'``PatternMiner`` is a variable' - instantiation_error,
+			'``PatternMiner`` is neither a variable nor a valid pattern miner' - domain_error(pattern_miner, 'PatternMiner')
+		]
 	]).
 
 	:- public(valid_pattern_miner/1).

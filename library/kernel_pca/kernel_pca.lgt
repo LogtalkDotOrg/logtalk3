@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-04-30,
 		comment is 'Kernel Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver over centered kernel Gram matrices.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds a centered kernel Gram matrix, and extracts deterministic principal directions in sample space using portable power iteration with deflation.',
@@ -104,7 +104,7 @@
 			valid_dual_components(Components, SampleCount),
 			valid_kernel_pca_diagnostics(Components, ExplainedVariances, Diagnostics) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(kernel_pca_reducer(Encoders, _TrainingRows, _RowMeans, _TotalMean, Components, ExplainedVariances, Diagnostics)) :-

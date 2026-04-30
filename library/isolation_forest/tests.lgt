@@ -62,7 +62,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, take/3
+		length/2, take/3, memberchk/2
 	]).
 
 	cover(isolation_forest).

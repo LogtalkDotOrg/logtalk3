@@ -73,7 +73,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, take/3
+		length/2, member/2, memberchk/2, take/3
 	]).
 
 	:- uses(lof, [

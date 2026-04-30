@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Gradient boosting regression using regression trees as additive base learners fitted to successive residuals.',
 		remarks is [
 			'Algorithm' - 'Builds an additive ensemble of regression trees by repeatedly fitting the current residuals under squared-error loss.',
@@ -160,7 +160,7 @@
 			length(WeightedTrees, StageCount),
 			StageCount =< MaxEstimators ->
 			true
-		;   domain_error(valid_regressor, Regressor)
+		;   domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-

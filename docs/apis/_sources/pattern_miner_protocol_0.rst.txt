@@ -15,7 +15,7 @@ Protocol for machine learning pattern-mining algorithms.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-29
+| **Date:** 2026-04-30
 
 | **Compilation flags:**
 |    ``static``
@@ -148,6 +148,12 @@ Checks that the argument is a structurally valid mined pattern miner term for th
 |    ``check_pattern_miner(PatternMiner)``
 | **Mode and number of proofs:**
 |    ``check_pattern_miner(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PatternMiner`` is a variable:
+|        ``instantiation_error``
+|    ``PatternMiner`` is neither a variable nor a valid pattern miner:
+|        ``domain_error(pattern_miner,PatternMiner)``
 
 
 ------------

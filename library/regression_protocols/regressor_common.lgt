@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Shared predicates for regressor learning defaults, validation, dataset validation, export, and pretty-print helpers.'
 	]).
 
@@ -150,9 +150,11 @@
 		::learn(Dataset, Regressor, []).
 
 	check_regressor(Regressor) :-
-		(   ::regressor_term_template(Regressor, _Template) ->
+		(   var(Regressor) ->
+			instantiation_error
+		;	::regressor_term_template(Regressor, _Template) ->
 			true
-		;   domain_error(valid_regressor, Regressor)
+		;   domain_error(regressor, Regressor)
 		).
 
 	valid_regressor(Regressor) :-

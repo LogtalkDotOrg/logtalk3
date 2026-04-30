@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-04-30,
 		comment is 'Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric Jacobi whitening.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using a deterministic symmetric Jacobi eigendecomposition, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.',
@@ -82,7 +82,7 @@
 		(   DimensionReducer = ica_reducer(Encoders, Components, Diagnostics),
 			valid_ica_diagnostics(Encoders, Components, Diagnostics) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	check_examples(Dataset, AttributeNames, Examples) :-

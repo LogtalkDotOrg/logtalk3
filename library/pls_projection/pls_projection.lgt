@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-04-30,
 		comment is 'Partial Least Squares projection for target-valued continuous datasets using deterministic PLS1 deflation.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, centers the numeric target, extracts deterministic PLS1 latent directions using repeated cross-covariance maximization with sequential deflation, and stores the equivalent direct projection rotations for future transforms.',
@@ -96,7 +96,7 @@
 			^^valid_projection_components(Encoders, Rotations),
 			valid_pls_diagnostics(Rotations, Diagnostics) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(pls_projection_reducer(Encoders, Rotations, Diagnostics)) :-

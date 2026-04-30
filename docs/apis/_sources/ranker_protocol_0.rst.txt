@@ -15,7 +15,7 @@ Protocol for machine learning rankers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-29
+| **Date:** 2026-04-30
 
 | **Compilation flags:**
 |    ``static``
@@ -186,6 +186,12 @@ Checks that the argument is a structurally valid learned ranker term for the rec
 |    ``check_ranker(Ranker)``
 | **Mode and number of proofs:**
 |    ``check_ranker(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Ranker`` is a variable:
+|        ``instantiation_error``
+|    ``Ranker`` is neither a variable nor a valid ranker:
+|        ``domain_error(ranker,Ranker)``
 
 
 ------------

@@ -120,7 +120,9 @@
 	]).
 
 	check_classifier(Classifier) :-
-		(   ::classifier_diagnostics_data(Classifier, _Diagnostics) ->
+		(	var(Classifier) ->
+			instantiation_error
+		;   ::classifier_diagnostics_data(Classifier, _Diagnostics) ->
 			true
 		;   domain_error(classifier, Classifier)
 		).

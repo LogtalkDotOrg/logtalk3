@@ -111,6 +111,12 @@ Checks that a learned regressor term is structurally valid for the receiving imp
 | **Mode and number of proofs:**
 |    ``check_regressor(@compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Regressor`` is a variable:
+|        ``instantiation_error``
+|    ``Regressor`` is neither a variable nor a valid regressor:
+|        ``domain_error(regressor,Regressor)``
+
 
 ------------
 

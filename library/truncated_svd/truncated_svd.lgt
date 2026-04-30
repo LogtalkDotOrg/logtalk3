@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-04-30,
 		comment is 'Truncated singular value decomposition reducer for continuous datasets using a portable two-sided power-iteration solver over the data matrix.',
 		remarks is [
 			'Algorithm' - 'Builds a preprocessed data matrix using optional centering and scaling, extracts singular triplets using deterministic two-sided power iteration, and applies rank-one deflation directly to the data matrix.',
@@ -89,7 +89,7 @@
 		(   DimensionReducer = truncated_svd_reducer(_Encoders, Components, SingularValues, _Diagnostics),
 			valid_singular_values(Components, SingularValues) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	check_examples(Dataset, AttributeNames, Examples) :-

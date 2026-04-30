@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-04-30,
 		comment is 'Non-negative Matrix Factorization dimension reduction for non-negative continuous datasets.'
 	]).
 
@@ -87,7 +87,7 @@
 			valid_non_negative_components(Components),
 			valid_nmf_diagnostics(Encoders, Components, Diagnostics) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(nmf_reducer(Encoders, Components, Diagnostics)) :-

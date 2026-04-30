@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-04-30,
 		comment is 'Shared predicates for dimension reducer learning defaults, dataset helpers, transformation, export, and printing.'
 	]).
 
@@ -438,13 +438,15 @@
 		::project_components(Components, Features, 1, ReducedInstance).
 
 	check_dimension_reducer(DimensionReducer) :-
-		(   ::dimension_reducer_data(DimensionReducer, Encoders, Components),
+		(	var(DimensionReducer) ->
+			instantiation_error
+		;   ::dimension_reducer_data(DimensionReducer, Encoders, Components),
 			::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics),
 			::valid_linear_encoders(Encoders),
 			::valid_projection_components(Encoders, Components),
 			::valid_dimension_reducer_metadata(Diagnostics) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	valid_dimension_reducer(DimensionReducer) :-
@@ -454,11 +456,11 @@
 		::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics).
 
 	diagnostic(DimensionReducer, Diagnostic) :-
-		diagnostics(DimensionReducer, Diagnostics),
+		::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics),
 		member(Diagnostic, Diagnostics).
 
 	dimension_reducer_options(DimensionReducer, Options) :-
-		diagnostics(DimensionReducer, Diagnostics),
+		::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics),
 		memberchk(options(Options), Diagnostics).
 
 	export_to_clauses(_Dataset, DimensionReducer, Functor, [Clause]) :-

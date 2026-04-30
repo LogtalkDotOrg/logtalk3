@@ -47,7 +47,11 @@
 	:- mode(check_anomaly_detector(@compound), one_or_error).
 	:- info(check_anomaly_detector/1, [
 		comment is 'Checks that a learned anomaly detector term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid anomaly detector representation.',
-		argnames is ['AnomalyDetector']
+		argnames is ['AnomalyDetector'],
+		exceptions is [
+			'``AnomalyDetector`` is a variable' - instantiation_error,
+			'``AnomalyDetector`` is neither a variable nor a valid anomaly detector' - domain_error(anomaly_detector, 'AnomalyDetector')
+		]
 	]).
 
 	:- public(valid_anomaly_detector/1).

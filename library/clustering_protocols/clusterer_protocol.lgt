@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-04-30,
 		comment is 'Protocol for machine learning clusterers.',
 		see_also is [clustering_dataset_protocol]
 	]).
@@ -61,7 +61,11 @@
 	:- mode(check_clusterer(@compound), one_or_error).
 	:- info(check_clusterer/1, [
 		comment is 'Checks that a learned clusterer term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid clusterer representation.',
-		argnames is ['Clusterer']
+		argnames is ['Clusterer'],
+		exceptions is [
+			'``Clusterer`` is a variable' - instantiation_error,
+			'``Clusterer`` is neither a variable nor a valid clusterer' - domain_error(clusterer, 'Clusterer')
+		]
 	]).
 
 	:- public(valid_clusterer/1).

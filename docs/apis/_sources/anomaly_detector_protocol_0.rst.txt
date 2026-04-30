@@ -92,6 +92,12 @@ Checks that a learned anomaly detector term is structurally valid for the receiv
 | **Mode and number of proofs:**
 |    ``check_anomaly_detector(@compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``AnomalyDetector`` is a variable:
+|        ``instantiation_error``
+|    ``AnomalyDetector`` is neither a variable nor a valid anomaly detector:
+|        ``domain_error(anomaly_detector,AnomalyDetector)``
+
 
 ------------
 

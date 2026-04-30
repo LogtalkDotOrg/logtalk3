@@ -40,7 +40,7 @@
 			number(Target),
 			^^valid_regressor_options(Options) ->
 			true
-		;   domain_error(valid_regressor, Regressor)
+		;   domain_error(regressor, Regressor)
 		).
 
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
@@ -69,7 +69,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Smoke tests for the "regression_protocols" library.'
 	]).
 

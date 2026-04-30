@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-04-30,
 		comment is 'Probabilistic Principal Component Analysis reducer for continuous datasets using a portable covariance eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, estimates the sample covariance matrix, extracts deterministic leading eigenvectors using portable power iteration with deflation, and then converts them into the closed-form maximum-likelihood probabilistic PCA loading matrix and posterior latent projection.',
@@ -86,7 +86,7 @@
 			valid(non_negative_number, NoiseVariance),
 			valid_probabilistic_pca_diagnostics(Components, Loadings, ExplainedVariances, Diagnostics) ->
 			true
-		;   domain_error(valid_dimension_reducer, DimensionReducer)
+		;   domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics)) :-

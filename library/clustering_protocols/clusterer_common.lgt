@@ -232,7 +232,9 @@
 		::learn(Dataset, Clusterer, []).
 
 	check_clusterer(Clusterer) :-
-		(   ::clusterer_diagnostics_data(Clusterer, _Diagnostics) ->
+		(	var(Clusterer) ->
+			instantiation_error
+		;   ::clusterer_diagnostics_data(Clusterer, _Diagnostics) ->
 			true
 		;   domain_error(clusterer, Clusterer)
 		).

@@ -54,7 +54,11 @@
 	:- mode(check_regressor(@compound), one_or_error).
 	:- info(check_regressor/1, [
 		comment is 'Checks that a learned regressor term is structurally valid for the receiving implementation. Throws an exception when the term is not a valid regressor representation.',
-		argnames is ['Regressor']
+		argnames is ['Regressor'],
+		exceptions is [
+			'``Regressor`` is a variable' - instantiation_error,
+			'``Regressor`` is neither a variable nor a valid regressor' - domain_error(regressor, 'Regressor')
+		]
 	]).
 
 	:- public(valid_regressor/1).

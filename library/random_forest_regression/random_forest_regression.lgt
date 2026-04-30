@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-04-30,
 		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and random feature subsets.',
 		remarks is [
 			'Algorithm' - 'Builds an ensemble of regression trees trained on bootstrap samples and random feature subsets and predicts using the arithmetic mean of the individual tree predictions.',
@@ -200,7 +200,7 @@
 			valid_trees(Trees),
 			length(Trees, ExpectedTreeCount) ->
 			true
-		;   domain_error(valid_regressor, Regressor)
+		;   domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-

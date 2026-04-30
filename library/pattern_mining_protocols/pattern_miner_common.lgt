@@ -30,18 +30,6 @@
 		comment is 'Shared predicates for pattern miner diagnostics, defaults, option handling, and export helpers.'
 	]).
 
-	:- uses(format, [
-		format/3
-	]).
-
-	:- uses(list, [
-		member/2, memberchk/2
-	]).
-
-	:- uses(type, [
-		valid/2
-	]).
-
 	:- protected(pattern_miner_diagnostics_data/2).
 	:- mode(pattern_miner_diagnostics_data(+compound, -list(compound)), one).
 	:- info(pattern_miner_diagnostics_data/2, [
@@ -91,6 +79,18 @@
 		argnames is ['DatasetMaximumPatternLength', 'Options', 'MaximumPatternLength']
 	]).
 
+	:- uses(format, [
+		format/3
+	]).
+
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
+
+	:- uses(type, [
+		valid/2
+	]).
+
 	mine(Dataset, PatternMiner) :-
 		::mine(Dataset, PatternMiner, []).
 
@@ -106,7 +106,9 @@
 		memberchk(options(Options), Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   ::pattern_miner_diagnostics_data(PatternMiner, _Diagnostics) ->
+		(	var(PatternMiner) ->
+			instantiation_error
+		;   ::pattern_miner_diagnostics_data(PatternMiner, _Diagnostics) ->
 			true
 		;   domain_error(pattern_miner, PatternMiner)
 		).
