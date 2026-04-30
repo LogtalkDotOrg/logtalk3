@@ -393,25 +393,6 @@ Constructs a zero vector matching the length of the first vector in a list of ve
 
 ------------
 
-.. index:: scale_vector/3
-.. _dimension_reducer_common/0::scale_vector/3:
-
-``scale_vector/3``
-^^^^^^^^^^^^^^^^^^
-
-Scales each element of a numeric vector by the given factor.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scale_vector(Vector,Scale,ScaledVector)``
-| **Mode and number of proofs:**
-|    ``scale_vector(+list(number),+number,-list(number))`` - ``one``
-
-
-------------
-
 .. index:: add_vectors/3
 .. _dimension_reducer_common/0::add_vectors/3:
 
@@ -579,25 +560,6 @@ Computes the matrix-vector product for a numeric matrix and vector.
 |    ``matrix_vector_product(Matrix,Vector,Product)``
 | **Mode and number of proofs:**
 |    ``matrix_vector_product(+list(list(number)),+list(number),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: vector_norm/2
-.. _dimension_reducer_common/0::vector_norm/2:
-
-``vector_norm/2``
-^^^^^^^^^^^^^^^^^
-
-Computes the Euclidean norm of a numeric vector.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``vector_norm(Vector,Norm)``
-| **Mode and number of proofs:**
-|    ``vector_norm(+list(number),-float)`` - ``one``
 
 
 ------------

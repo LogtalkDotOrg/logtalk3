@@ -142,8 +142,8 @@
 	test(knn_distance_valid_anomaly_detector_1, deterministic(valid_anomaly_detector(Detector))) :-
 		learn(knn_singleton_anomalies, Detector, [k(3)]).
 
-	test(knn_distance_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [k(1)])))) :-
-		check_anomaly_detector(knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [k(1)])).
+	test(knn_distance_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [model(knn_distance), training_dataset(knn_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(1), options([k(1)])])))) :-
+		check_anomaly_detector(knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [model(knn_distance), training_dataset(knn_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(1), options([k(1)])])).
 
 	test(knn_distance_diagnostics_2, deterministic((memberchk(model(knn_distance), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(example_count(48), Diagnostics), memberchk(reference_score_count(48), Diagnostics)))) :-
 		learn(gaussian_anomalies, Detector, [k(5)]),

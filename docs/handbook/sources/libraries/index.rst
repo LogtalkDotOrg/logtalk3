@@ -135,6 +135,7 @@ directory in the ``NOTES.md`` file.
    meta
    meta_compiler
    mime_types
+   modified_z_score
    mutations
    nanoid
    naive_bayes
@@ -199,4 +200,5 @@ directory in the ``NOTES.md`` file.
    uuid
    validations
    yaml
+   z_score
    zippers

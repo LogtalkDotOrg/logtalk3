@@ -108,6 +108,8 @@
 		isolation_forest(loader),
 		knn_distance(loader),
 		lof(loader),
+		modified_z_score(loader),
+		z_score(loader),
 		dimension_reduction_protocols(loader),
 		ica(loader),
 		kernel_pca(loader),

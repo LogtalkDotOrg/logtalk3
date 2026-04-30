@@ -186,6 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="mime_types.html"><code class="docutils literal notranslate"><span class="pre">mime_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_z_score.html"><code class="docutils literal notranslate"><span class="pre">modified_z_score</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nanoid.html"><code class="docutils literal notranslate"><span class="pre">nanoid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
@@ -249,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="z_score.html"><code class="docutils literal notranslate"><span class="pre">z_score</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
 </ul>
 </li>
@@ -359,7 +361,7 @@ predicates:</p>
 <section id="detector-representation">
 <h2>Detector Representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
 <p>The learned detector is represented by default as:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_distance_detector(<span class="nv">TrainingDataset</span>, <span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">AttributeScales</span>, <span class="nv">Instances</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>knn_distance_detector(<span class="nv">TrainingDataset</span>, <span class="nv">AttributeNames</span>, <span class="nv">FeatureTypes</span>, <span class="nv">AttributeScales</span>, <span class="nv">Instances</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -371,7 +373,9 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of training <code class="docutils literal notranslate"><span class="pre">Id-Class-Values</span></code> triples</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: Cached leave-one-out raw training scores reused
 by <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Learned options</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Learned metadata terms including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">training_dataset/1</span></code>, <code class="docutils literal notranslate"><span class="pre">attribute_names/1</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_types/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">reference_score_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">score/3</span></code> predicate always treats its input as a fresh query. Only
 <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> on the original training dataset reuses the cached

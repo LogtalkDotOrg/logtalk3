@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 29, 2026
+##   Last updated on April 30, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -185,6 +185,7 @@ sed '1,19d' ../../../library/memcached/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
 sed '1,19d' ../../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libraries/mime_types.rst
+sed '1,19d' ../../../library/modified_z_score/NOTES.md | pandoc -f gfm -t rst -o libraries/modified_z_score.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes.rst
@@ -249,6 +250,7 @@ sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/ur
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
 sed '1,19d' ../../../library/validations/NOTES.md | pandoc -f gfm -t rst -o libraries/validations.rst
 sed '1,19d' ../../../library/yaml/NOTES.md | pandoc -f gfm -t rst -o libraries/yaml.rst
+sed '1,19d' ../../../library/z_score/NOTES.md | pandoc -f gfm -t rst -o libraries/z_score.rst
 sed '1,19d' ../../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
 
 for file in libraries/*.rst; do

@@ -96,7 +96,7 @@ Detector Representation
 
 The learned detector is represented by default as:
 
-    lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options)
+    lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics)
 
 Where:
 
@@ -105,7 +105,9 @@ Where:
 - `AttributeScales`: Normalization scales for numeric features
 - `Instances`: List of training `Id-Class-Values` triples
 - `ReferenceScores`: Cached leave-one-out raw training scores reused by `score_all/3`
-- `Options`: Learned options
+- `Diagnostics`: Learned metadata terms including `model/1`,
+  `training_dataset/1`, `attribute_names/1`, `feature_types/1`,
+  `example_count/1`, `reference_score_count/1`, and `options/1`
 
 The `score/3` predicate always treats its input as a fresh query. Only
 `score_all/3` on the original training dataset reuses the cached

@@ -116,7 +116,7 @@ Detector Representation
 
 The learned detector is represented by default as:
 
-	if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Options)
+    if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics)
 
 Where:
 
@@ -125,7 +125,8 @@ Where:
 - `AttributeNames`: List of attribute names in order
 - `Attributes`: List of `Attribute-Values` declarations from the training dataset
 - `Ranges`: Observed numeric ranges used for imputing missing values during training
-- `Options`: Learned options
+- `Diagnostics`: Learned metadata terms including `model/1`, `tree_count/1`,
+  `subsample_size/1`, `attribute_names/1`, `feature_count/1`, and `options/1`
 
 Each internal tree node additionally stores node-local dimension bounds
 used when resolving missing-value routing during scoring.

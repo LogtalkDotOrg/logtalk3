@@ -136,8 +136,8 @@
 	test(lof_valid_anomaly_detector_1, deterministic(valid_anomaly_detector(Detector))) :-
 		learn(lof_singleton_anomalies, Detector, [k(3)]).
 
-	test(lof_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, lof_detector(lof_singleton_anomalies, [x], [numeric], [1.0], [1-normal-[1.0]], [], [k(1)])))) :-
-		check_anomaly_detector(lof_detector(lof_singleton_anomalies, [x], [numeric], [1.0], [1-normal-[1.0]], [], [k(1)])).
+	test(lof_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, lof_detector(lof_singleton_anomalies, [x], [numeric], [1.0], [1-normal-[1.0]], [], [model(lof), training_dataset(lof_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(0), options([k(1)])])))) :-
+		check_anomaly_detector(lof_detector(lof_singleton_anomalies, [x], [numeric], [1.0], [1-normal-[1.0]], [], [model(lof), training_dataset(lof_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(0), options([k(1)])])).
 
 	test(lof_diagnostics_2, deterministic((memberchk(model(lof), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(example_count(48), Diagnostics), memberchk(reference_score_count(48), Diagnostics)))) :-
 		learn(gaussian_anomalies, Detector, [k(5)]),

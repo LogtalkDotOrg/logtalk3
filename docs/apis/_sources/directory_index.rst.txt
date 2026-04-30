@@ -1348,6 +1348,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    mime_types <mime_types_0>
 
+``library/modified_z_score/``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   modified_z_score <modified_z_score_0>
+
 ``library/mutations/``
 ----------------------
 
@@ -2084,6 +2094,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    yaml <yaml_0>
    yaml_protocol <yaml_protocol_0>
+
+``library/z_score/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   z_score <z_score_0>
 
 ``library/zippers/``
 --------------------

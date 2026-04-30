@@ -83,8 +83,8 @@
 	test(isolation_forest_valid_anomaly_detector_1, deterministic(isolation_forest::valid_anomaly_detector(Model))) :-
 		isolation_forest::learn(gaussian_anomalies, Model).
 
-	test(isolation_forest_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [number_of_trees(10)])))) :-
-		isolation_forest::check_anomaly_detector(if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [number_of_trees(10)])).
+	test(isolation_forest_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [model(isolation_forest), tree_count(1), subsample_size(2), attribute_names([x]), feature_count(1), options([number_of_trees(10)])])))) :-
+		isolation_forest::check_anomaly_detector(if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [model(isolation_forest), tree_count(1), subsample_size(2), attribute_names([x]), feature_count(1), options([number_of_trees(10)])])).
 
 	test(isolation_forest_diagnostics_2, deterministic((memberchk(model(isolation_forest), Diagnostics), memberchk(tree_count(50), Diagnostics), memberchk(subsample_size(48), Diagnostics), memberchk(feature_count(2), Diagnostics)))) :-
 		isolation_forest::learn(gaussian_anomalies, Model, [number_of_trees(50)]),

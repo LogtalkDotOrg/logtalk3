@@ -35,7 +35,7 @@
 			'Anomaly score' - 'The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.',
 			'Discrete attributes' - 'Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.',
 			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values use node-local bounds stored in each tree split to decide whether a split is forced or genuinely ambiguous; ambiguous splits are evaluated down both branches and combined using subtree-size weights.',
-			'Anomaly detector representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Options)`` compound term.'
+			'Anomaly detector representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Diagnostics)`` compound term where ``Diagnostics`` stores the learned metadata, including the effective options.'
 		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance, lof]
 	]).
@@ -120,23 +120,26 @@
 		max_depth(Psi, MaxDepth),
 		% Build the forest
 		build_forest(Vectors, NumTrees, Psi, MaxDepth, NumDimensions, ExtLevel, Trees),
+		build_diagnostics(Trees, Psi, AttributeNames, Options, Diagnostics),
 		% Create model term (includes Ranges for training-time missing-value imputation)
-		Model = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Options).
+		Model = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics).
 
 	check_anomaly_detector(Detector) :-
-		(   Detector = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Options),
+		(   Detector = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics),
 			valid_attribute_names(AttributeNames),
 			valid_attribute_declarations(Attributes, AttributeNames),
 			integer(Psi),
 			Psi > 0,
 			valid_ranges(Ranges, AttributeNames),
 			valid_forest(Trees, AttributeNames),
-			valid_detector_options(Options) ->
+			valid_detector_diagnostics(Trees, Psi, AttributeNames, Diagnostics) ->
 			true
 		;   domain_error(anomaly_detector, Detector)
 		).
 
-	anomaly_detector_diagnostics_data(if_model(Trees, Psi, AttributeNames, _Attributes, _Ranges, Options), Diagnostics) :-
+	anomaly_detector_diagnostics_data(if_model(_Trees, _Psi, _AttributeNames, _Attributes, _Ranges, Diagnostics), Diagnostics).
+
+	build_diagnostics(Trees, Psi, AttributeNames, Options, Diagnostics) :-
 		length(Trees, TreeCount),
 		length(AttributeNames, FeatureCount),
 		Diagnostics = [
@@ -192,9 +195,10 @@
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Model) :-
-		detector_data(Model, Trees, Psi, AttributeNames, _Attributes, _Ranges, Options),
+		detector_data(Model, Trees, Psi, AttributeNames, _Attributes, _Ranges, Diagnostics),
 		length(Trees, NumTrees),
 		length(AttributeNames, NumDimensions),
+		memberchk(options(Options), Diagnostics),
 		format('Extended Isolation Forest Model~n', []),
 		format('==============================~n~n', []),
 		format('Number of trees:    ~w~n', [NumTrees]),
@@ -209,10 +213,10 @@
 	anomaly_detector_export_template(Functor, Template) :-
 		Template =.. [Functor, 'Detector'].
 
-	anomaly_detector_term_template(if_model(_Trees, _Psi, _AttributeNames, _Attributes, _Ranges, _Options), if_model('Trees', 'Psi', 'AttributeNames', 'Attributes', 'Ranges', 'Options')).
+	anomaly_detector_term_template(if_model(_Trees, _Psi, _AttributeNames, _Attributes, _Ranges, _Diagnostics), if_model('Trees', 'Psi', 'AttributeNames', 'Attributes', 'Ranges', 'Diagnostics')).
 
-	detector_data(Detector, Trees, Psi, AttributeNames, Attributes, Ranges, Options) :-
-		Detector =.. [_Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Options].
+	detector_data(Detector, Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics) :-
+		Detector =.. [_Functor, Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics].
 
 	valid_attribute_names(AttributeNames) :-
 		valid(list(atom), AttributeNames),
@@ -290,6 +294,18 @@
 	valid_detector_options(Options) :-
 		valid(list(compound), Options),
 		catch(^^check_options(Options), _Error, fail).
+
+	valid_detector_diagnostics(Trees, Psi, AttributeNames, Diagnostics) :-
+		valid(list(compound), Diagnostics),
+		memberchk(model(isolation_forest), Diagnostics),
+		length(Trees, TreeCount),
+		memberchk(tree_count(TreeCount), Diagnostics),
+		memberchk(subsample_size(Psi), Diagnostics),
+		memberchk(attribute_names(AttributeNames), Diagnostics),
+		length(AttributeNames, FeatureCount),
+		memberchk(feature_count(FeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		valid_detector_options(Options).
 
 	print_trees([], _).
 	print_trees([Tree| Trees], N) :-

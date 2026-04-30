@@ -182,6 +182,12 @@ distance anomaly detector with mixed-feature and missing-value support.
 * ADDED: New `lof` library implementing a portable Local Outlier Factor
 anomaly detector with mixed-feature and missing-value support.
 
+* ADDED: New `z_score` library implementing a configurable statistical
+Z-score anomaly detector for continuous datasets.
+
+* ADDED: New `modified_z_score` library implementing a configurable
+statistical modified Z-score anomaly detector for continuous datasets.
+
 * ADDED: New `ranking_protocols` library defining common protocols, shared
 test datasets, and smoke tests for machine learning ranking algorithms.
 

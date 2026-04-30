@@ -188,6 +188,7 @@
 <li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="mime_types.html"><code class="docutils literal notranslate"><span class="pre">mime_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_z_score.html"><code class="docutils literal notranslate"><span class="pre">modified_z_score</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nanoid.html"><code class="docutils literal notranslate"><span class="pre">nanoid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="naive_bayes.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes</span></code></a></li>
@@ -251,6 +252,7 @@
 <li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="z_score.html"><code class="docutils literal notranslate"><span class="pre">z_score</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
 </ul>
 </li>
@@ -384,7 +386,7 @@ is the number of dimensions</p></li>
 <section id="detector-representation">
 <h2>Detector Representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
 <p>The learned detector is represented by default as:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>if_model(<span class="nv">Trees</span>, <span class="nv">Psi</span>, <span class="nv">AttributeNames</span>, <span class="nv">Attributes</span>, <span class="nv">Ranges</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>if_model(<span class="nv">Trees</span>, <span class="nv">Psi</span>, <span class="nv">AttributeNames</span>, <span class="nv">Attributes</span>, <span class="nv">Ranges</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -396,7 +398,9 @@ is the number of dimensions</p></li>
 training dataset</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ranges</span></code>: Observed numeric ranges used for imputing missing values
 during training</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Learned options</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Learned metadata terms including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tree_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">subsample_size/1</span></code>, <code class="docutils literal notranslate"><span class="pre">attribute_names/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">feature_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
 </ul>
 <p>Each internal tree node additionally stores node-local dimension bounds
 used when resolving missing-value routing during scoring.</p>

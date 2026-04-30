@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on April 29, 2026
+%  Last updated on April 30, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -214,6 +214,7 @@ logtalk_library_path(memcached, library('memcached/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(mime_types, library('mime_types/')).
+logtalk_library_path(modified_z_score, library('modified_z_score/')).
 logtalk_library_path(mutations, library('mutations/')).
 logtalk_library_path(naive_bayes, library('naive_bayes/')).
 logtalk_library_path(nanoid, library('nanoid/')).
@@ -277,6 +278,7 @@ logtalk_library_path(url, library('url/')).
 logtalk_library_path(uuid, library('uuid/')).
 logtalk_library_path(validations, library('validations/')).
 logtalk_library_path(yaml, library('yaml/')).
+logtalk_library_path(z_score, library('z_score/')).
 logtalk_library_path(zippers, library('zippers/')).
 
 % programming examples

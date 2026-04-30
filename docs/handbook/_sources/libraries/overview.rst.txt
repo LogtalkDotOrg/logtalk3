@@ -49,7 +49,8 @@ multiple areas):
     ``c45``, ``knn``, ``linear_svm``, ``logistic_regression``,
     ``naive_bayes``, ``nearest_centroid``, and ``random_forest``.
   - Anomaly detection: ``anomaly_detection_protocols``,
-    ``isolation_forest``, ``knn_distance``, and ``lof``.
+    ``isolation_forest``, ``knn_distance``, ``lof``,
+    ``modified_z_score``, and ``z_score``.
   - Regression: ``regression_protocols``,
     ``gradient_boosting_regression``, ``knn_regression``,
     ``linear_regression``, ``random_forest_regression``, and

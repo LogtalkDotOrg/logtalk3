@@ -32,7 +32,7 @@
 			'Feature types' - 'Handles continuous and categorical attributes declared by the dataset object.',
 			'Missing values' - 'Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.',
 			'Normalized scores' - 'Raw LOF values are normalized to the interval ``[0.0, 1.0]`` by mapping the ideal baseline value ``1.0`` to ``0.0`` and scaling larger values against the largest training raw score.',
-			'Anomaly detector representation' - 'The learned detector is represented as a ``lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options)`` term.'
+			'Anomaly detector representation' - 'The learned detector is represented as a ``lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics)`` term where ``Diagnostics`` stores the learned metadata, including the effective options.'
 		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance, isolation_forest]
 	]).
@@ -75,22 +75,25 @@
 		),
 		^^check_examples_non_empty(Dataset, Instances),
 		training_raw_scores(FeatureTypes, AttributeScales, Instances, Options, ReferenceScores),
-		Detector = lof_detector(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options).
+			build_diagnostics(Dataset, AttributeNames, FeatureTypes, Instances, ReferenceScores, Options, Diagnostics),
+			Detector = lof_detector(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics).
 
 	check_anomaly_detector(Detector) :-
-		(   Detector = lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options),
+			(   Detector = lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics),
 			valid(object_identifier, TrainingDataset),
 			valid_attribute_names(AttributeNames),
 			valid_feature_types(FeatureTypes, AttributeNames),
 			valid_attribute_scales(AttributeScales, AttributeNames),
 			valid_training_instances(Instances, AttributeNames),
 			valid_reference_scores(ReferenceScores, Instances),
-			valid_detector_options(Options) ->
+				valid_detector_diagnostics(TrainingDataset, AttributeNames, FeatureTypes, Instances, ReferenceScores, Diagnostics) ->
 			true
 		;   domain_error(anomaly_detector, Detector)
 		).
 
-	anomaly_detector_diagnostics_data(lof_detector(Dataset, AttributeNames, FeatureTypes, _AttributeScales, Instances, ReferenceScores, Options), Diagnostics) :-
+		anomaly_detector_diagnostics_data(lof_detector(_Dataset, _AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _ReferenceScores, Diagnostics), Diagnostics).
+
+		build_diagnostics(Dataset, AttributeNames, FeatureTypes, Instances, ReferenceScores, Options, Diagnostics) :-
 		length(Instances, ExampleCount),
 		length(ReferenceScores, ReferenceScoreCount),
 		Diagnostics = [
@@ -104,14 +107,16 @@
 		].
 
 	score(Detector, Instance, Score) :-
-		detector_data(Detector, _TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options),
+		detector_data(Detector, _TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics),
+		memberchk(options(Options), Diagnostics),
 		extract_values(AttributeNames, Instance, RawValues),
 		sanitize_input_values(RawValues, Values),
 		raw_score_for_instance(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore),
 		normalize_against_reference(RawScore, ReferenceScores, Score).
 
 	score_all(Dataset, Detector, Scores) :-
-		detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options),
+		detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics),
+		memberchk(options(Options), Diagnostics),
 		(	Dataset == TrainingDataset ->
 			raw_score_pairs_training(Instances, ReferenceScores, RawPairs)
 		;	raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs)
@@ -125,8 +130,9 @@
 		Clause =.. [Functor, Detector].
 
 	print_anomaly_detector(Detector) :-
-		detector_data(Detector, _TrainingDataset, AttributeNames, FeatureTypes, _AttributeScales, Instances, _ReferenceScores, Options),
+		detector_data(Detector, _TrainingDataset, AttributeNames, FeatureTypes, _AttributeScales, Instances, _ReferenceScores, Diagnostics),
 		length(Instances, NumInstances),
+		memberchk(options(Options), Diagnostics),
 		format('Local Outlier Factor Anomaly Detector~n', []),
 		format('====================================~n~n', []),
 		format('Training instances: ~w~n', [NumInstances]),
@@ -138,10 +144,10 @@
 	anomaly_detector_export_template(Functor, Template) :-
 		Template =.. [Functor, 'Detector'].
 
-	anomaly_detector_term_template(lof_detector(_TrainingDataset, _AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _ReferenceScores, _Options), lof_detector('TrainingDataset', 'AttributeNames', 'FeatureTypes', 'AttributeScales', 'Instances', 'ReferenceScores', 'Options')).
+	anomaly_detector_term_template(lof_detector(_TrainingDataset, _AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _ReferenceScores, _Diagnostics), lof_detector('TrainingDataset', 'AttributeNames', 'FeatureTypes', 'AttributeScales', 'Instances', 'ReferenceScores', 'Diagnostics')).
 
-	detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options) :-
-		Detector =.. [_Functor, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options].
+	detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics) :-
+		Detector =.. [_Functor, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics].
 
 	valid_attribute_names(AttributeNames) :-
 		valid(list(atom), AttributeNames),
@@ -191,6 +197,19 @@
 	valid_detector_options(Options) :-
 		valid(list(compound), Options),
 		catch(^^check_options(Options), _Error, fail).
+
+	valid_detector_diagnostics(Dataset, AttributeNames, FeatureTypes, Instances, ReferenceScores, Diagnostics) :-
+		valid(list(compound), Diagnostics),
+		memberchk(model(lof), Diagnostics),
+		memberchk(training_dataset(Dataset), Diagnostics),
+		memberchk(attribute_names(AttributeNames), Diagnostics),
+		memberchk(feature_types(FeatureTypes), Diagnostics),
+		length(Instances, ExampleCount),
+		memberchk(example_count(ExampleCount), Diagnostics),
+		length(ReferenceScores, ReferenceScoreCount),
+		memberchk(reference_score_count(ReferenceScoreCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		valid_detector_options(Options).
 
 	determine_feature_types([], []).
 	determine_feature_types([_-Values| Pairs], [Type| Types]) :-

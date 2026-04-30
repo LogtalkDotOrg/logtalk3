@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 29, 2026
+##   Last updated on April 30, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -185,6 +185,7 @@ Foreach-Object {
 (Get-Content ../../../library/meta/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta.rst
 (Get-Content ../../../library/meta_compiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 (Get-Content ../../../library/mime_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mime_types.rst
+(Get-Content ../../../library/modified_z_score/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/modified_z_score.rst
 (Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
 (Get-Content ../../../library/nanoid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nanoid.rst
 (Get-Content ../../../library/naive_bayes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes.rst
@@ -249,6 +250,7 @@ Foreach-Object {
 (Get-Content ../../../library/uuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/uuid.rst
 (Get-Content ../../../library/validations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/validations.rst
 (Get-Content ../../../library/yaml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/yaml.rst
+(Get-Content ../../../library/z_score/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/z_score.rst
 (Get-Content ../../../library/zippers/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/zippers.rst
 
 Get-ChildItem -Path libraries/*.rst |
