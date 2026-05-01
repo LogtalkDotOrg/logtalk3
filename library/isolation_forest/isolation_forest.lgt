@@ -26,9 +26,10 @@
 		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-30,
-		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
+		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
 		remarks is [
 			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
+			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the forest. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before training.',
 			'Extended vs Original' - 'The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.',
 			'Extension level' - 'The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is ``d - 1`` (fully extended) where ``d`` is the number of dimensions.',
 			'Prediction' - 'The ``predict/3`` predicate returns ``anomaly`` if the anomaly score is above the threshold (default: 0.5) and ``normal`` otherwise. The ``score_all/3`` predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the ``anomaly_threshold/1`` option.',
@@ -90,15 +91,11 @@
 		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		length(AttributeNames, NumDimensions),
+		^^baseline_training_examples(Dataset, Examples, Options),
 		% Get all examples as numeric vectors; missing values are replaced
 		% with random values drawn from the attribute range after ranges
 		% are computed from the known values
-		findall(
-			AVs,
-			Dataset::example(_, _, AVs),
-			AllAVs
-		),
-		^^check_examples_non_empty(Dataset, AllAVs),
+		findall(AVs, member(_Id-_Class-AVs, Examples), AllAVs),
 		% Compute ranges from known values for imputation
 		compute_attribute_ranges(AttributeNames, AllAVs, Attributes, Ranges),
 		% Convert to numeric vectors with random imputation of missing values
@@ -693,6 +690,8 @@
 	% Default options
 	default_option(number_of_trees(100)).
 	default_option(anomaly_threshold(0.5)).
+	default_option(baseline_class_values([normal])).
+	default_option(baseline_selection_policy(reject)).
 
 	% Option validation
 	valid_option(number_of_trees(N)) :-
@@ -706,5 +705,9 @@
 		float(T),
 		T >= 0.0,
 		T =< 1.0.
+	valid_option(baseline_class_values(BaselineClassValues)) :-
+		^^valid_baseline_class_values(BaselineClassValues).
+	valid_option(baseline_selection_policy(Policy)) :-
+		valid(one_of(atom, [reject, filter]), Policy).
 
 :- end_object.

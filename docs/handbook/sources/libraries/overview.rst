@@ -48,7 +48,7 @@ multiple areas):
   - Classification: ``classification_protocols``, ``ada_boost``,
     ``c45``, ``knn``, ``linear_svm``, ``logistic_regression``,
     ``naive_bayes``, ``nearest_centroid``, and ``random_forest``.
-  - Anomaly detection: ``anomaly_detection_protocols``,
+  - Anomaly detection: ``anomaly_detection_protocols``, ``cusum``,
     ``isolation_forest``, ``knn_distance``, ``lof``,
     ``modified_z_score``, and ``z_score``.
   - Regression: ``regression_protocols``,

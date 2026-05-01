@@ -10,10 +10,17 @@ detectors are represented as objects importing the
 ``anomaly_detector_common`` category which imports the
 ``anomaly_detector_protocol`` protocol. The category provides shared
 ``learn/2``, ``predict/3-4``, ``diagnostics/2``, ``diagnostic/2``,
-``anomaly_detector_options/2``, file export, and dataset helper
-predicates. It keeps threshold-based prediction and export behavior
-separate from the algorithm-specific learning, scoring, clause export,
-pretty-printing, and diagnostics metadata code.
+``anomaly_detector_options/2``, file export, baseline training-selection
+helpers, and dataset helper predicates. It keeps threshold-based
+prediction and export behavior separate from the algorithm-specific
+learning, scoring, clause export, pretty-printing, and diagnostics
+metadata code.
+
+The shared category also provides reusable protected predicates for
+baseline-only training workflows. Libraries can use the
+``baseline_class_values/1`` and ``baseline_selection_policy/1`` options
+via a single helper instead of reimplementing class-label validation and
+baseline-example filtering or rejection logic locally.
 
 Learned detector terms can be validated explicitly using the shared
 ``check_anomaly_detector/1`` and ``valid_anomaly_detector/1``

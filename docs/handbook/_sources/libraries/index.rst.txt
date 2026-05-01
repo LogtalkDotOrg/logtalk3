@@ -59,6 +59,7 @@ directory in the ``NOTES.md`` file.
    coroutining
    csv
    cuid2
+   cusum
    datalog
    dates
    dates_tz
@@ -153,7 +154,7 @@ directory in the ``NOTES.md`` file.
    plackett_luce_last
    pls_projection
    prefix_span
-	probabilistic_pca
+   probabilistic_pca
    process
    protobuf
    queues

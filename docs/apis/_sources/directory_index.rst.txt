@@ -446,6 +446,16 @@ To load an entity, always load the library that includes it using the goal ``log
    cuid2(Representation,Size,Alphabet) <cuid2_3>
    cuid2_protocol <cuid2_protocol_0>
 
+``library/cusum/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   cusum <cusum_0>
+
 ``library/datalog/``
 --------------------
 

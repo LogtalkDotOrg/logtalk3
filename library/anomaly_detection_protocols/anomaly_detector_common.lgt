@@ -26,8 +26,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
-		comment is 'Shared predicates for anomaly detector learning defaults, threshold-based prediction, dataset helpers, and export.'
+		date is 2026-05-01,
+		comment is 'Shared predicates for anomaly detector learning defaults, threshold-based prediction, baseline training-data selection, dataset helpers, and export.'
 	]).
 
 	:- protected(anomaly_detector_diagnostics_data/2).
@@ -65,6 +65,20 @@
 		argnames is ['Dataset', 'Examples']
 	]).
 
+	:- protected(baseline_training_examples/3).
+	:- mode(baseline_training_examples(+object_identifier, -list, +list(compound)), one).
+	:- info(baseline_training_examples/3, [
+		comment is 'Collects training examples selected by the ``baseline_class_values/1`` and ``baseline_selection_policy/1`` options. The ``reject`` policy throws an error when non-baseline examples are present. The ``filter`` policy removes non-baseline examples and throws an error when no baseline examples remain.',
+		argnames is ['Dataset', 'Examples', 'Options']
+	]).
+
+	:- protected(valid_baseline_class_values/1).
+	:- mode(valid_baseline_class_values(+list(atom)), one).
+	:- info(valid_baseline_class_values/1, [
+		comment is 'Checks that a ``baseline_class_values/1`` option value is a non-empty list of distinct atoms.',
+		argnames is ['BaselineClassValues']
+	]).
+
 	:- protected(extract_scores/2).
 	:- mode(extract_scores(+list, -list), one).
 	:- info(extract_scores/2, [
@@ -85,6 +99,10 @@
 
 	:- uses(list, [
 		last/2, member/2, memberchk/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	learn(Dataset, Detector) :-
@@ -157,6 +175,68 @@
 			domain_error(non_empty_dataset, Dataset)
 		;   true
 		).
+
+	baseline_training_examples(Dataset, Examples, Options) :-
+		memberchk(baseline_class_values(BaselineClassValues), Options),
+		check_baseline_class_values(Dataset, BaselineClassValues),
+		memberchk(baseline_selection_policy(Policy), Options),
+		baseline_training_examples(Policy, Dataset, BaselineClassValues, Examples),
+		check_baseline_training_examples_non_empty(Dataset, Policy, Examples).
+
+	valid_baseline_class_values(BaselineClassValues) :-
+		valid(list(atom), BaselineClassValues),
+		BaselineClassValues \== [],
+		unique_baseline_class_values(BaselineClassValues).
+
+	check_baseline_class_values(Dataset, BaselineClassValues) :-
+		Dataset::class_values(ClassValues),
+		check_baseline_class_values_list(BaselineClassValues, ClassValues).
+
+	check_baseline_class_values_list([], _ClassValues).
+	check_baseline_class_values_list([BaselineClassValue| BaselineClassValues], ClassValues) :-
+		(	member(BaselineClassValue, ClassValues) ->
+			true
+		;	existence_error(class_value, BaselineClassValue)
+		),
+		check_baseline_class_values_list(BaselineClassValues, ClassValues).
+
+	baseline_training_examples(reject, Dataset, BaselineClassValues, Examples) :-
+		(	Dataset::example(_Id, Class, _AttributeValues), \+ member(Class, BaselineClassValues) ->
+			domain_error(baseline_only_training_data, Dataset)
+		;	findall(
+				Id-Class-AttributeValues,
+				(
+					Dataset::example(Id, Class, AttributeValues),
+					member(Class, BaselineClassValues)
+				),
+				Examples
+			)
+		).
+	baseline_training_examples(filter, Dataset, BaselineClassValues, Examples) :-
+		findall(
+			Id-Class-AttributeValues,
+			(
+				Dataset::example(Id, Class, AttributeValues),
+				member(Class, BaselineClassValues)
+			),
+			Examples
+		).
+
+	check_baseline_training_examples_non_empty(_Dataset, _Policy, Examples) :-
+		Examples \== [],
+		!.
+	check_baseline_training_examples_non_empty(Dataset, reject, []) :-
+		domain_error(non_empty_dataset, Dataset).
+	check_baseline_training_examples_non_empty(Dataset, filter, []) :-
+		(	Dataset::example(_Id, _Class, _AttributeValues) ->
+			domain_error(non_empty_baseline_training_data, Dataset)
+		;	domain_error(non_empty_dataset, Dataset)
+		).
+
+	unique_baseline_class_values([]).
+	unique_baseline_class_values([BaselineClassValue| BaselineClassValues]) :-
+		\+ member(BaselineClassValue, BaselineClassValues),
+		unique_baseline_class_values(BaselineClassValues).
 
 	extract_scores([], []).
 	extract_scores([Score-Id-Class| Pairs], [Id-Class-Score| Scores]) :-

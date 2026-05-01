@@ -63,6 +63,7 @@ logtalk_library_path(coroutining, library('coroutining/')).
 logtalk_library_path(ccsds, library('ccsds/')).
 logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(cuid2, library('cuid2/')).
+logtalk_library_path(cusum, library('cusum/')).
 logtalk_library_path(datalog, library('datalog/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dates_tz, library('dates_tz/')).

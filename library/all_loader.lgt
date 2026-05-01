@@ -105,6 +105,7 @@
 		linear_svm(loader),
 		logistic_regression(loader),
 		anomaly_detection_protocols(loader),
+		cusum(loader),
 		isolation_forest(loader),
 		knn_distance(loader),
 		lof(loader),

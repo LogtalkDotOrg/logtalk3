@@ -77,6 +77,13 @@ Features
   `population` object to compute per-attribute arithmetic means and
   standard deviations.
 
+- **Baseline training selection**: supports learn-time
+  `baseline_class_values(ClassValues)` and
+  `baseline_selection_policy(Policy)` options. The default baseline class
+  values are `[normal]`. The default `reject` policy throws an error if
+  non-baseline examples are present, while `filter` removes them before
+  fitting.
+
 - **Missing-value tolerant**: ignores missing values when fitting
   attribute statistics. During scoring, queries must provide at least
   one known value. In the default `score_mode(root_mean_square)`, the
@@ -124,6 +131,11 @@ The following options are supported by the public API:
 
 - `anomaly_threshold(Threshold)`: Threshold for `predict/3-4`
   (default: `0.70`)
+- `baseline_class_values(ClassValues)`: Learn-time class labels that are
+  admissible for baseline fitting (default: `[normal]`)
+- `baseline_selection_policy(Policy)`: Learn-time handling of examples
+  whose class is not listed in `baseline_class_values/1`. Supported
+  values are `filter` and `reject` (default: `reject`)
 - `score_mode(Mode)`: Learn-time score aggregation mode for `learn/3`.
   Supported values are `root_mean_square` and `any_feature_extreme`
   (default: `root_mean_square`). If passed to `predict/4`, it is ignored
@@ -166,6 +178,14 @@ formula. It only changes the aggregation step. With
 `score_mode(root_mean_square)`, the raw score is the root mean square of
 the per-attribute Z-scores. With `score_mode(any_feature_extreme)`, the
 raw score is the maximum absolute per-attribute Z-score.
+
+The `baseline_class_values/1` option declares which dataset class labels
+are admissible for fitting the baseline means and standard deviations.
+The `baseline_selection_policy/1` option then controls what happens when
+other labels are present in the training data. The default `reject`
+policy raises a `domain_error(baseline_only_training_data, Dataset)`
+exception when any non-baseline example is found. The `filter` policy
+removes non-baseline examples before fitting.
 
 Attributes with zero observed dispersion are assigned a fallback scale of
 `1.0`. This keeps the detector well-defined for singleton datasets or

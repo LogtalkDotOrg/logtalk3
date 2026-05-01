@@ -87,7 +87,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-01,
 		comment is 'Unit tests for the "z_score" library.'
 	]).
 
@@ -106,8 +106,20 @@
 	cleanup :-
 		^^clean_file('test_output.pl').
 
-	test(z_score_learn_2_gaussian, true(ground(Detector))) :-
-		learn(gaussian_anomalies, Detector).
+	learn_filtered_gaussian_anomalies(Detector) :-
+		learn(gaussian_anomalies, Detector, [baseline_selection_policy(filter)]).
+
+	learn_filtered_gaussian_anomalies(ExtraOptions, Detector) :-
+		learn(gaussian_anomalies, Detector, [baseline_selection_policy(filter)| ExtraOptions]).
+
+	test(z_score_learn_2_gaussian_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
+		learn(gaussian_anomalies, _Detector).
+
+	test(z_score_learn_3_gaussian_filter, true(ground(Detector))) :-
+		learn_filtered_gaussian_anomalies(Detector).
+
+	test(z_score_learn_3_non_baseline_dataset_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
+		learn(gaussian_anomalies, _Detector, [baseline_selection_policy(reject)]).
 
 	test(z_score_learn_2_invalid_dataset, error(domain_error(continuous_attribute, student))) :-
 		learn(mixed_anomalies, _Detector).
@@ -119,20 +131,20 @@
 		learn(z_score_featureless_anomalies, _Detector).
 
 	test(z_score_score_3_gaussian_anomaly_higher_than_normal, true(AnomalyScore > NormalScore)) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		score(Detector, [x-0.12, y-0.34], NormalScore),
 		score(Detector, [x-4.50, y-4.20], AnomalyScore).
 
 	test(z_score_score_3_gaussian_score_range, true((Score >= 0.0, Score < 1.0))) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		score(Detector, [x-4.50, y-4.20], Score).
 
 	test(z_score_score_3_sensor_missing_value, true((Score >= 0.0, Score < 1.0))) :-
-		learn(sensor_anomalies, Detector),
+		learn(sensor_anomalies, Detector, [baseline_selection_policy(filter)]),
 		score(Detector, [temperature-101.0, pressure-_, vibration-2.10], Score).
 
 	test(z_score_score_3_all_missing_error, error(domain_error(non_empty_known_values, [x, y]))) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		score(Detector, [x-_, y-_], _Score).
 
 	test(z_score_score_3_singleton_dataset_matching_point, true(Score =:= 0.0)) :-
@@ -140,15 +152,15 @@
 		score(Detector, [x-1.00], Score).
 
 	test(z_score_predict_3_gaussian_normal, true(Prediction == normal)) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		predict(Detector, [x-0.12, y-0.34], Prediction).
 
 	test(z_score_predict_3_gaussian_anomaly, true(Prediction == anomaly)) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		predict(Detector, [x-4.50, y-4.20], Prediction).
 
 	test(z_score_predict_4_threshold_override, true(Prediction == anomaly)) :-
-		learn(gaussian_anomalies, Detector, [anomaly_threshold(0.99)]),
+		learn_filtered_gaussian_anomalies([anomaly_threshold(0.99)], Detector),
 		predict(Detector, [x-4.50, y-4.20], Prediction, [anomaly_threshold(0.70)]).
 
 	test(z_score_predict_4_score_mode_override_ignored, true(Prediction == normal)) :-
@@ -182,55 +194,55 @@
 		Delta is abs(FullScore - PartialScore).
 
 	test(z_score_score_all_3_gaussian_count, true(length(Scores, 48))) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		score_all(gaussian_anomalies, Detector, Scores),
 		length(Scores, 48).
 
 	test(z_score_score_all_3_gaussian_sorted, true(FirstScore >= SecondScore)) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		score_all(gaussian_anomalies, Detector, [_-_-FirstScore, _-_-SecondScore| _]).
 
 	test(z_score_score_all_3_gaussian_top_anomalies, true(AnomalyCount >= 6)) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		score_all(gaussian_anomalies, Detector, Scores),
 		take(8, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
 	test(z_score_valid_anomaly_detector_1, deterministic(valid_anomaly_detector(Detector))) :-
-		learn(gaussian_anomalies, Detector).
+		learn_filtered_gaussian_anomalies(Detector).
 
-	test(z_score_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, z_score_detector(gaussian_anomalies, [zscore(x, 0.0, 1.0)], [model(z_score), training_dataset(gaussian_anomalies), attribute_names([x]), feature_count(1), example_count(0), options([anomaly_threshold(0.70), score_mode(root_mean_square)])])))) :-
-		check_anomaly_detector(z_score_detector(gaussian_anomalies, [zscore(x, 0.0, 1.0)], [model(z_score), training_dataset(gaussian_anomalies), attribute_names([x]), feature_count(1), example_count(0), options([anomaly_threshold(0.70), score_mode(root_mean_square)])])).
+	test(z_score_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, z_score_detector(gaussian_anomalies, [zscore(x, 0.0, 1.0)], [model(z_score), training_dataset(gaussian_anomalies), attribute_names([x]), feature_count(1), example_count(0), options([anomaly_threshold(0.70), baseline_class_values([normal]), baseline_selection_policy(reject), score_mode(root_mean_square)])])))) :-
+		check_anomaly_detector(z_score_detector(gaussian_anomalies, [zscore(x, 0.0, 1.0)], [model(z_score), training_dataset(gaussian_anomalies), attribute_names([x]), feature_count(1), example_count(0), options([anomaly_threshold(0.70), baseline_class_values([normal]), baseline_selection_policy(reject), score_mode(root_mean_square)])])).
 
-	test(z_score_diagnostics_2, deterministic((memberchk(model(z_score), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(feature_count(2), Diagnostics), memberchk(example_count(48), Diagnostics)))) :-
-		learn(gaussian_anomalies, Detector),
+	test(z_score_diagnostics_2, deterministic((memberchk(model(z_score), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(feature_count(2), Diagnostics), memberchk(example_count(40), Diagnostics)))) :-
+		learn_filtered_gaussian_anomalies(Detector),
 		diagnostics(Detector, Diagnostics).
 
-	test(z_score_anomaly_detector_options_2, deterministic((memberchk(anomaly_threshold(0.70), Options), memberchk(score_mode(root_mean_square), Options)))) :-
-		learn(gaussian_anomalies, Detector),
+	test(z_score_anomaly_detector_options_2, deterministic((memberchk(anomaly_threshold(0.70), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options), memberchk(score_mode(root_mean_square), Options)))) :-
+		learn_filtered_gaussian_anomalies(Detector),
 		anomaly_detector_options(Detector, Options).
 
 	test(z_score_anomaly_detector_options_2_any_feature_extreme, deterministic(memberchk(score_mode(any_feature_extreme), Options))) :-
-		learn(gaussian_anomalies, Detector, [score_mode(any_feature_extreme)]),
+		learn_filtered_gaussian_anomalies([score_mode(any_feature_extreme)], Detector),
 		anomaly_detector_options(Detector, Options).
 
 	test(z_score_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		diagnostics(Detector, Diagnostics),
 		findall(Diagnostic, diagnostic(Detector, Diagnostic), Enumerated).
 
 	test(z_score_export_to_clauses_4, true(ground(Clauses))) :-
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		export_to_clauses(gaussian_anomalies, Detector, detect, Clauses).
 
 	test(z_score_export_to_file_4, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		export_to_file(gaussian_anomalies, Detector, detect, File).
 
 	test(z_score_export_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
 		^^file_path('test_output.pl', File),
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		export_to_file(gaussian_anomalies, Detector, detector, File),
 		logtalk_load(File),
 		{detector(LoadedDetector)},
@@ -238,7 +250,7 @@
 
 	test(z_score_print_anomaly_detector_1, deterministic) :-
 		^^suppress_text_output,
-		learn(gaussian_anomalies, Detector),
+		learn_filtered_gaussian_anomalies(Detector),
 		print_anomaly_detector(Detector).
 
 	count_class([], _Class, 0).

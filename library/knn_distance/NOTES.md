@@ -26,7 +26,8 @@ metrics, mixed continuous and categorical features, and missing values.
 
 The library implements the `anomaly_detector_protocol` defined in the
 `anomaly_detection_protocols` library. It learns a compact detector from
-a dataset, computes anomaly scores for new instances, predicts `normal`
+a dataset by selecting baseline training examples from the declared class
+labels, computes anomaly scores for new instances, predicts `normal`
 or `anomaly`, and exports learned detectors as clauses or files.
 
 Datasets are represented as objects implementing the
@@ -69,6 +70,11 @@ Features
 
 - **Missing values**: ignores missing dimensions while normalizing distances.
 
+- **Baseline training selection**: `baseline_class_values/1` declares which
+  class labels are admissible for fitting the detector, while
+  `baseline_selection_policy/1` controls whether non-baseline examples are
+  rejected (default) or filtered before training.
+
 - **Multiple metrics**: supports Euclidean, Manhattan, Chebyshev, and
   Minkowski distance metrics.
 
@@ -91,6 +97,10 @@ predicates:
   `kth_distance` (default) and `mean_distance`
 - `anomaly_threshold(Threshold)`: Threshold for `predict/3-4`
   (default: `0.5`)
+- `baseline_class_values(Classes)`: Learn-time list of admissible baseline
+  class labels (default: `[normal]`)
+- `baseline_selection_policy(Policy)`: Learn-time handling of non-baseline
+  examples. Supported values are `reject` (default) and `filter`
 
 
 Detector Representation
@@ -105,15 +115,19 @@ Where:
 - `AttributeNames`: List of attribute names in order
 - `FeatureTypes`: List of feature types (`numeric` or `categorical`)
 - `AttributeScales`: Normalization scales for numeric features
-- `Instances`: List of training `Id-Class-Values` triples
-- `ReferenceScores`: Cached leave-one-out raw training scores reused by `score_all/3`
+- `Instances`: List of retained baseline training `Id-Class-Values` triples
+- `ReferenceScores`: Cached leave-one-out raw training scores for the
+  retained baseline training instances
 - `Diagnostics`: Learned metadata terms including `model/1`,
   `training_dataset/1`, `attribute_names/1`, `feature_types/1`,
   `example_count/1`, `reference_score_count/1`, and `options/1`
 
 The `score/3` predicate always treats its input as a fresh query. Only
-`score_all/3` on the original training dataset reuses the cached
-leave-one-out `ReferenceScores`.
+`score_all/3` on the original training dataset with the `reject` baseline
+selection policy reuses the cached leave-one-out `ReferenceScores` for all
+examples. With the `filter` policy, retained baseline training examples
+reuse the cached leave-one-out scores while excluded examples are scored as
+fresh queries against the learned baseline detector.
 
 When exported using `export_to_clauses/4` or
 `export_to_file/4`, this detector term is serialized directly as

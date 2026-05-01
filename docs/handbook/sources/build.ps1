@@ -109,6 +109,7 @@ Foreach-Object {
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
 (Get-Content ../../../library/csv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/csv.rst
 (Get-Content ../../../library/cuid2/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cuid2.rst
+(Get-Content ../../../library/cusum/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cusum.rst
 (Get-Content ../../../library/datalog/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/datalog.rst
 (Get-Content ../../../library/dates/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dates.rst
 (Get-Content ../../../library/dates_tz/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dates_tz.rst

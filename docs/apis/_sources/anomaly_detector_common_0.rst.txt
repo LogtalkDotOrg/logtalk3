@@ -8,14 +8,14 @@
 ``anomaly_detector_common``
 ===========================
 
-Shared predicates for anomaly detector learning defaults, threshold-based prediction, dataset helpers, and export.
+Shared predicates for anomaly detector learning defaults, threshold-based prediction, baseline training-data selection, dataset helpers, and export.
 
 | **Availability:** 
 |    ``logtalk_load(anomaly_detection_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-01
 
 | **Compilation flags:**
 |    ``static``
@@ -28,6 +28,7 @@ Shared predicates for anomaly detector learning defaults, threshold-based predic
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
@@ -138,6 +139,44 @@ Checks that a dataset contains at least one example.
 |    ``check_examples_non_empty(Dataset,Examples)``
 | **Mode and number of proofs:**
 |    ``check_examples_non_empty(+object_identifier,+list)`` - ``one``
+
+
+------------
+
+.. index:: baseline_training_examples/3
+.. _anomaly_detector_common/0::baseline_training_examples/3:
+
+``baseline_training_examples/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects training examples selected by the ``baseline_class_values/1`` and ``baseline_selection_policy/1`` options. The ``reject`` policy throws an error when non-baseline examples are present. The ``filter`` policy removes non-baseline examples and throws an error when no baseline examples remain.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``baseline_training_examples(Dataset,Examples,Options)``
+| **Mode and number of proofs:**
+|    ``baseline_training_examples(+object_identifier,-list,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: valid_baseline_class_values/1
+.. _anomaly_detector_common/0::valid_baseline_class_values/1:
+
+``valid_baseline_class_values/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a ``baseline_class_values/1`` option value is a non-empty list of distinct atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_baseline_class_values(BaselineClassValues)``
+| **Mode and number of proofs:**
+|    ``valid_baseline_class_values(+list(atom))`` - ``one``
 
 
 ------------

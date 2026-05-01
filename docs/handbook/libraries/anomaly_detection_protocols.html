@@ -108,6 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cuid2.html"><code class="docutils literal notranslate"><span class="pre">cuid2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cusum.html"><code class="docutils literal notranslate"><span class="pre">cusum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates_tz.html"><code class="docutils literal notranslate"><span class="pre">dates_tz</span></code></a></li>
@@ -202,6 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plackett_luce_last.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefix_span.html"><code class="docutils literal notranslate"><span class="pre">prefix_span</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="probabilistic_pca.html"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
@@ -300,10 +302,16 @@ detectors are represented as objects importing the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detector_common</span></code> category which imports the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> protocol. The category provides shared
 <code class="docutils literal notranslate"><span class="pre">learn/2</span></code>, <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code>, file export, and dataset helper
-predicates. It keeps threshold-based prediction and export behavior
-separate from the algorithm-specific learning, scoring, clause export,
-pretty-printing, and diagnostics metadata code.</p>
+<code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code>, file export, baseline training-selection
+helpers, and dataset helper predicates. It keeps threshold-based
+prediction and export behavior separate from the algorithm-specific
+learning, scoring, clause export, pretty-printing, and diagnostics
+metadata code.</p>
+<p>The shared category also provides reusable protected predicates for
+baseline-only training workflows. Libraries can use the
+<code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> and <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> options
+via a single helper instead of reimplementing class-label validation and
+baseline-example filtering or rejection logic locally.</p>
 <p>Learned detector terms can be validated explicitly using the shared
 <code class="docutils literal notranslate"><span class="pre">check_anomaly_detector/1</span></code> and <code class="docutils literal notranslate"><span class="pre">valid_anomaly_detector/1</span></code>
 predicates. This validation API is never called implicitly by scoring,

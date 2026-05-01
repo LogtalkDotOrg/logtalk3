@@ -8,7 +8,8 @@ for anomaly detection as described by Hariri et al. (2019). The Extended
 Isolation Forest improves upon the original Isolation Forest algorithm
 (Liu et al., 2008) by using random hyperplane cuts instead of
 axis-aligned cuts, eliminating bias artifacts in anomaly scores along
-coordinate axes.
+coordinate axes. Learning fits the forest from baseline training
+examples selected from the dataset class labels.
 
 The algorithm builds an ensemble of isolation trees (iTrees) by
 recursively partitioning data using random hyperplanes. Anomalous
@@ -65,6 +66,10 @@ Implemented features
 - Handling of both continuous (numeric) and discrete (categorical)
   attributes: discrete attributes are mapped to numeric indices based on
   their position in the attribute value list declared by the dataset
+- Baseline training selection: ``baseline_class_values/1`` declares
+  which class labels are admissible for fitting the forest, while
+  ``baseline_selection_policy/1`` controls whether non-baseline examples
+  are rejected (default) or filtered before training
 - Handling of missing attribute values (represented using anonymous
   variables): during tree construction, missing values are replaced with
   random values drawn from the observed range of the corresponding
@@ -95,6 +100,11 @@ predicates:
   is the number of dimensions
 - ``anomaly_threshold(T)``: threshold used by ``predict/3-4`` (default:
   ``0.5``)
+- ``baseline_class_values(Classes)``: learn-time list of admissible
+  baseline class labels (default: ``[normal]``)
+- ``baseline_selection_policy(Policy)``: learn-time handling of
+  non-baseline examples. Supported values are ``reject`` (default) and
+  ``filter``
 
 Detector Representation
 -----------------------
@@ -149,15 +159,15 @@ Usage
 
 To learn an isolation forest model from a dataset with default options:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]).
 
 To learn with custom options:
 
 ::
 
    | ?- isolation_forest::learn(gaussian_anomalies, Model, [
+          baseline_selection_policy(filter),
             number_of_trees(200),
             subsample_size(128),
             extension_level(1),
@@ -166,43 +176,38 @@ To learn with custom options:
 
 To compute the anomaly score for a new instance:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model),
-        isolation_forest::score(Model, [x-0.12, y-0.34], Score).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]), isolation_forest::score(Model,
+[x-0.12, y-0.34], Score).
 
 To predict whether an instance is an anomaly or normal:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model),
-        isolation_forest::predict(Model, [x-4.50, y-4.20], Prediction).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]), isolation_forest::predict(Model,
+[x-4.50, y-4.20], Prediction).
 
 To compute and rank anomaly scores for all instances in a dataset:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model),
-        isolation_forest::score_all(gaussian_anomalies, Model, Scores).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]),
+isolation_forest::score_all(gaussian_anomalies, Model, Scores).
 
 The ``Scores`` list contains ``Id-Class-Score`` triples sorted by
 descending anomaly score. This makes it easy to inspect top anomalies:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model),
-        isolation_forest::score_all(gaussian_anomalies, Model, [Top1, Top2, Top3| _]).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]),
+isolation_forest::score_all(gaussian_anomalies, Model, [Top1, Top2,
+Top3\| \_]).
 
 To print a summary of the learned model:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model),
-        isolation_forest::print_anomaly_detector(Model).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]),
+isolation_forest::print_anomaly_detector(Model).
 
 To use the original (non-extended) Isolation Forest, set the extension
 level to 0:
 
-::
-
-   | ?- isolation_forest::learn(gaussian_anomalies, Model, [extension_level(0)]).
+\| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter), extension_level(0)]).

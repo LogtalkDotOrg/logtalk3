@@ -26,9 +26,10 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-30,
-		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
+		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
 		remarks is [
 			'Algorithm' - 'The detector memorizes the training instances and computes Local Outlier Factor values by comparing the local reachability density of a query to the densities of its neighbors.',
+			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the detector. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.',
 			'Feature types' - 'Handles continuous and categorical attributes declared by the dataset object.',
 			'Missing values' - 'Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.',
 			'Normalized scores' - 'Raw LOF values are normalized to the interval ``[0.0, 1.0]`` by mapping the ideal baseline value ``1.0`` to ``0.0`` and scaling larger values against the largest training raw score.',
@@ -60,14 +61,15 @@
 	learn(Dataset, Detector, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		^^baseline_training_examples(Dataset, Examples, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		determine_feature_types(Attributes, FeatureTypes),
-		compute_attribute_scales(AttributeNames, Attributes, Dataset, AttributeScales),
+		compute_attribute_scales(AttributeNames, Attributes, Examples, AttributeScales),
 		findall(
 			Id-Class-Values,
 			(
-				Dataset::example(Id, Class, AttributeValues),
+				member(Id-Class-AttributeValues, Examples),
 				extract_values(AttributeNames, AttributeValues, RawValues),
 				sanitize_training_values(RawValues, Values)
 			),
@@ -117,8 +119,12 @@
 	score_all(Dataset, Detector, Scores) :-
 		detector_data(Detector, TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics),
 		memberchk(options(Options), Diagnostics),
-		(	Dataset == TrainingDataset ->
+		memberchk(baseline_selection_policy(Policy), Options),
+		(	Dataset == TrainingDataset,
+			Policy == reject ->
 			raw_score_pairs_training(Instances, ReferenceScores, RawPairs)
+		;	Dataset == TrainingDataset ->
+			raw_score_pairs_training_dataset(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options, RawPairs)
 		;	raw_score_pairs(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, Options, RawPairs)
 		),
 		normalize_raw_pairs(RawPairs, ReferenceScores, ScoredPairs),
@@ -220,20 +226,20 @@
 		determine_feature_types(Pairs, Types).
 
 	compute_attribute_scales([], _, _, []).
-	compute_attribute_scales([Attribute| Attributes], AttributePairs, Dataset, [Scale| Scales]) :-
+	compute_attribute_scales([Attribute| Attributes], AttributePairs, Examples, [Scale| Scales]) :-
 		memberchk(Attribute-Values, AttributePairs),
 		(   Values == continuous ->
 			findall(
 				Value,
 				(
-					Dataset::example(_Id, _Class, AttributeValues),
+					member(_Id-_Class-AttributeValues, Examples),
 					memberchk(Attribute-Value, AttributeValues),
 					nonvar(Value),
 					number(Value)
 				),
 				NumericValues
 			),
-			(   NumericValues == [] ->
+			(	NumericValues == [] ->
 				Scale = 1.0
 			;   min(NumericValues, Minimum),
 				max(NumericValues, Maximum),
@@ -245,7 +251,7 @@
 			)
 		;   Scale = 1.0
 		),
-		compute_attribute_scales(Attributes, AttributePairs, Dataset, Scales).
+		compute_attribute_scales(Attributes, AttributePairs, Examples, Scales).
 
 	extract_values([], _, []).
 	extract_values([Attribute| Attributes], AttributeValues, [Value| Values]) :-
@@ -375,6 +381,26 @@
 	raw_score_pairs_training([], [], []).
 	raw_score_pairs_training([Id-Class-_Values| Instances], [RawScore| ReferenceScores], [RawScore-Id-Class| RawPairs]) :-
 		raw_score_pairs_training(Instances, ReferenceScores, RawPairs).
+
+	raw_score_pairs_training_dataset(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Options, RawPairs) :-
+		findall(
+			RawScore-Id-Class,
+			(
+				Dataset::example(Id, Class, AttributeValues),
+				(	training_reference_raw_score(Id, Class, Instances, ReferenceScores, RawScore) ->
+					true
+				;	extract_values(AttributeNames, AttributeValues, RawValues),
+					sanitize_input_values(RawValues, Values),
+					raw_lof(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore)
+				)
+			),
+			RawPairs
+		).
+
+	training_reference_raw_score(Id, Class, [Id-Class-_Values| _], [RawScore| _], RawScore) :-
+		!.
+	training_reference_raw_score(Id, Class, [_Instance| Instances], [_OtherRawScore| ReferenceScores], RawScore) :-
+		training_reference_raw_score(Id, Class, Instances, ReferenceScores, RawScore).
 
 	training_raw_scores(FeatureTypes, AttributeScales, Instances, Options, ReferenceScores) :-
 		findall(
@@ -508,6 +534,8 @@
 	default_option(k(5)).
 	default_option(distance_metric(euclidean)).
 	default_option(anomaly_threshold(0.4)).
+	default_option(baseline_class_values([normal])).
+	default_option(baseline_selection_policy(reject)).
 
 	valid_option(k(K)) :-
 		valid(positive_integer, K).
@@ -515,5 +543,9 @@
 		valid(one_of(atom, [euclidean, manhattan, chebyshev, minkowski]), Metric).
 	valid_option(anomaly_threshold(Threshold)) :-
 		valid(probability, Threshold).
+	valid_option(baseline_class_values(BaselineClassValues)) :-
+		^^valid_baseline_class_values(BaselineClassValues).
+	valid_option(baseline_selection_policy(Policy)) :-
+		valid(one_of(atom, [reject, filter]), Policy).
 
 :- end_object.

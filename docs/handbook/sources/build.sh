@@ -109,6 +109,7 @@ sed '1,19d' ../../../library/combinations/NOTES.md | pandoc -f gfm -t rst -o lib
 sed '1,32d' ../../../library/command_line_options/NOTES.md | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 sed '1,19d' ../../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
 sed '1,19d' ../../../library/cuid2/NOTES.md | pandoc -f gfm -t rst -o libraries/cuid2.rst
+sed '1,19d' ../../../library/cusum/NOTES.md | pandoc -f gfm -t rst -o libraries/cusum.rst
 sed '1,19d' ../../../library/datalog/NOTES.md | pandoc -f gfm -t rst -o libraries/datalog.rst
 sed '1,19d' ../../../library/dates/NOTES.md | pandoc -f gfm -t rst -o libraries/dates.rst
 sed '1,19d' ../../../library/dates_tz/NOTES.md | pandoc -f gfm -t rst -o libraries/dates_tz.rst

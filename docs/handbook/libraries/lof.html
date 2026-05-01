@@ -101,6 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cuid2.html"><code class="docutils literal notranslate"><span class="pre">cuid2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cusum.html"><code class="docutils literal notranslate"><span class="pre">cusum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates_tz.html"><code class="docutils literal notranslate"><span class="pre">dates_tz</span></code></a></li>
@@ -204,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plackett_luce_last.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefix_span.html"><code class="docutils literal notranslate"><span class="pre">prefix_span</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="probabilistic_pca.html"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
@@ -299,7 +301,8 @@
 metrics, mixed continuous and categorical features, and missing values.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a compact detector
-from a dataset, computes normalized anomaly scores for new instances,
+from a dataset by selecting baseline training examples from the declared
+class labels, computes normalized anomaly scores for new instances,
 predicts <code class="docutils literal notranslate"><span class="pre">normal</span></code> or <code class="docutils literal notranslate"><span class="pre">anomaly</span></code>, and exports learned detectors as
 clauses or files.</p>
 <p>Datasets are represented as objects implementing the
@@ -335,6 +338,10 @@ scores from local reachability densities.</p></li>
 features declared by the dataset.</p></li>
 <li><p><strong>Missing values</strong>: ignores missing dimensions while normalizing
 distances.</p></li>
+<li><p><strong>Baseline training selection</strong>: <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> declares
+which class labels are admissible for fitting the detector, while
+<code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> controls whether non-baseline examples
+are rejected (default) or filtered before training.</p></li>
 <li><p><strong>Multiple metrics</strong>: supports Euclidean, Manhattan, Chebyshev, and
 Minkowski distance metrics.</p></li>
 <li><p><strong>Detector export</strong>: learned detectors can be exported as predicate
@@ -353,6 +360,11 @@ predicates:</p>
 <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> (default), <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>, <code class="docutils literal notranslate"><span class="pre">chebyshev</span></code>, <code class="docutils literal notranslate"><span class="pre">minkowski</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold(Threshold)</span></code>: Threshold for <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">0.4</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseline_class_values(Classes)</span></code>: Learn-time list of admissible
+baseline class labels (default: <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseline_selection_policy(Policy)</span></code>: Learn-time handling of
+non-baseline examples. Supported values are <code class="docutils literal notranslate"><span class="pre">reject</span></code> (default) and
+<code class="docutils literal notranslate"><span class="pre">filter</span></code></p></li>
 </ul>
 </section>
 <section id="detector-representation">
@@ -367,16 +379,21 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">FeatureTypes</span></code>: List of feature types (<code class="docutils literal notranslate"><span class="pre">numeric</span></code> or
 <code class="docutils literal notranslate"><span class="pre">categorical</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">AttributeScales</span></code>: Normalization scales for numeric features</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of training <code class="docutils literal notranslate"><span class="pre">Id-Class-Values</span></code> triples</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: Cached leave-one-out raw training scores reused
-by <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Instances</span></code>: List of retained baseline training <code class="docutils literal notranslate"><span class="pre">Id-Class-Values</span></code>
+triples</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: Cached leave-one-out raw training scores for the
+retained baseline training instances</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Learned metadata terms including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">training_dataset/1</span></code>, <code class="docutils literal notranslate"><span class="pre">attribute_names/1</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_types/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">reference_score_count/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">score/3</span></code> predicate always treats its input as a fresh query. Only
-<code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> on the original training dataset reuses the cached
-leave-one-out <code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> on the original training dataset with the <code class="docutils literal notranslate"><span class="pre">reject</span></code>
+baseline selection policy reuses the cached leave-one-out
+<code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code> for all examples. With the <code class="docutils literal notranslate"><span class="pre">filter</span></code> policy,
+retained baseline training examples reuse the cached leave-one-out
+scores while excluded examples are scored as fresh queries against the
+learned baseline detector.</p>
 <p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
 this detector term is serialized directly as the single argument of the
 generated predicate clause so that the exported model can be loaded and

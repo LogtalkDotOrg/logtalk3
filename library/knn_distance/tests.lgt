@@ -91,28 +91,37 @@
 	cleanup :-
 		^^clean_file('test_output.pl').
 
-	test(knn_distance_learn_2_gaussian, true(ground(Detector))) :-
-		learn(gaussian_anomalies, Detector).
+	learn_filtered(Dataset, Detector) :-
+		learn(Dataset, Detector, [baseline_selection_policy(filter)]).
+
+	learn_filtered(Dataset, ExtraOptions, Detector) :-
+		learn(Dataset, Detector, [baseline_selection_policy(filter)| ExtraOptions]).
+
+	test(knn_distance_learn_2_gaussian_error, error(domain_error(baseline_only_training_data, gaussian_anomalies))) :-
+		learn(gaussian_anomalies, _Detector).
+
+	test(knn_distance_learn_3_gaussian_filter, true(ground(Detector))) :-
+		learn_filtered(gaussian_anomalies, Detector).
 
 	test(knn_distance_learn_2_mixed, true(ground(Detector))) :-
-		learn(mixed_anomalies, Detector).
+		learn_filtered(mixed_anomalies, Detector).
 
 	test(knn_distance_score_3_gaussian_anomaly_higher_than_normal, true(AnomalyScore > NormalScore)) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		score(Detector, [x-0.12, y-0.34], NormalScore),
 		score(Detector, [x-4.50, y-4.20], AnomalyScore).
 
 	test(knn_distance_score_3_sensor_missing_value, true((Score >= 0.0, Score =< 1.0))) :-
-		learn(sensor_anomalies, Detector, [k(3)]),
+		learn_filtered(sensor_anomalies, [k(3)], Detector),
 		score(Detector, [temperature-101.0, pressure-_, vibration-2.10], Score).
 
 	test(knn_distance_score_3_mean_distance_mode, true(AnomalyScore > NormalScore)) :-
-		learn(gaussian_anomalies, Detector, [k(5), score_mode(mean_distance)]),
+		learn_filtered(gaussian_anomalies, [k(5), score_mode(mean_distance)], Detector),
 		score(Detector, [x-0.12, y-0.34], NormalScore),
 		score(Detector, [x-4.50, y-4.20], AnomalyScore).
 
 	test(knn_distance_score_3_mixed_distance_ordering, true((NumericScore > BaseScore, CategoricalScore > BaseScore, CombinedScore >= NumericScore, CombinedScore >= CategoricalScore, MissingCategoricalScore > BaseScore, MissingNumericScore > BaseScore))) :-
-		learn(mixed_distance_behaviors, Detector, [k(3), score_mode(mean_distance)]),
+		learn_filtered(mixed_distance_behaviors, [k(3), score_mode(mean_distance)], Detector),
 		score(Detector, [size-10.05, weight-100.05, color-red,  shape-round], BaseScore),
 		score(Detector, [size-12.0,  weight-104.0,  color-red,  shape-round], NumericScore),
 		score(Detector, [size-10.05, weight-100.05, color-blue, shape-square], CategoricalScore),
@@ -121,12 +130,12 @@
 		score(Detector, [size-_,     weight-_,      color-blue, shape-square], MissingNumericScore).
 
 	test(knn_distance_score_3_mixed_distance_manhattan, true(CombinedScore > BaseScore)) :-
-		learn(mixed_distance_behaviors, Detector, [k(3), distance_metric(manhattan), score_mode(mean_distance)]),
+		learn_filtered(mixed_distance_behaviors, [k(3), distance_metric(manhattan), score_mode(mean_distance)], Detector),
 		score(Detector, [size-10.05, weight-100.05, color-red,  shape-round], BaseScore),
 		score(Detector, [size-12.0,  weight-104.0,  color-blue, shape-square], CombinedScore).
 
 	test(knn_distance_score_3_fresh_identical_query_is_not_leave_one_out, true((FreshScore =:= 0.0, FreshScore < TrainingScore))) :-
-		learn(knn_identical_query_fixture, Detector, [k(1)]),
+		learn_filtered(knn_identical_query_fixture, [k(1)], Detector),
 		score(Detector, [x-0.00], FreshScore),
 		score_all(knn_identical_query_fixture, Detector, Scores),
 		member(1-normal-TrainingScore, Scores).
@@ -145,70 +154,70 @@
 	test(knn_distance_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [model(knn_distance), training_dataset(knn_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(1), options([k(1)])])))) :-
 		check_anomaly_detector(knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [model(knn_distance), training_dataset(knn_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(1), options([k(1)])])).
 
-	test(knn_distance_diagnostics_2, deterministic((memberchk(model(knn_distance), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(example_count(48), Diagnostics), memberchk(reference_score_count(48), Diagnostics)))) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+	test(knn_distance_diagnostics_2, deterministic((memberchk(model(knn_distance), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(example_count(40), Diagnostics), memberchk(reference_score_count(40), Diagnostics)))) :-
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		diagnostics(Detector, Diagnostics).
 
-	test(knn_distance_anomaly_detector_options_2, deterministic(memberchk(k(5), Options))) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+	test(knn_distance_anomaly_detector_options_2, deterministic((memberchk(k(5), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options)))) :-
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		anomaly_detector_options(Detector, Options).
 
 	test(knn_distance_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		diagnostics(Detector, Diagnostics),
 		findall(Diagnostic, diagnostic(Detector, Diagnostic), Enumerated).
 
 	test(knn_distance_predict_3_gaussian_normal, true(Prediction == normal)) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		predict(Detector, [x-0.12, y-0.34], Prediction).
 
 	test(knn_distance_predict_3_gaussian_anomaly, true(Prediction == anomaly)) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		predict(Detector, [x-4.50, y-4.20], Prediction).
 
 	test(knn_distance_predict_4_threshold_override, true(Prediction == anomaly)) :-
-		learn(gaussian_anomalies, Detector, [k(5), anomaly_threshold(0.99)]),
+		learn_filtered(gaussian_anomalies, [k(5), anomaly_threshold(0.99)], Detector),
 		predict(Detector, [x-4.50, y-4.20], Prediction, [anomaly_threshold(0.5)]).
 
 	test(knn_distance_score_all_3_gaussian_count, true(length(Scores, 48))) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		score_all(gaussian_anomalies, Detector, Scores),
 		length(Scores, 48).
 
 	test(knn_distance_score_all_3_gaussian_sorted, true(FirstScore >= SecondScore)) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		score_all(gaussian_anomalies, Detector, [_-_-FirstScore, _-_-SecondScore| _]).
 
 	test(knn_distance_score_all_3_gaussian_top_anomalies, true(AnomalyCount >= 6)) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		score_all(gaussian_anomalies, Detector, Scores),
 		take(8, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
 	test(knn_distance_score_all_3_mixed_top_anomalies, true(AnomalyCount >= 3)) :-
-		learn(mixed_anomalies, Detector, [k(3), score_mode(mean_distance)]),
+		learn_filtered(mixed_anomalies, [k(3), score_mode(mean_distance)], Detector),
 		score_all(mixed_anomalies, Detector, Scores),
 		take(4, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
 	test(knn_distance_score_all_3_mixed_distance_top_anomalies, true(AnomalyCount == 2)) :-
-		learn(mixed_distance_behaviors, Detector, [k(3), score_mode(mean_distance)]),
+		learn_filtered(mixed_distance_behaviors, [k(3), score_mode(mean_distance)], Detector),
 		score_all(mixed_distance_behaviors, Detector, Scores),
 		take(2, Scores, TopScores),
 		count_class(TopScores, anomaly, AnomalyCount).
 
 	test(knn_distance_export_to_clauses_4, true(ground(Clauses))) :-
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		export_to_clauses(gaussian_anomalies, Detector, detect, Clauses).
 
 	test(knn_distance_export_to_file_4, deterministic(os::file_exists(File))) :-
 		^^file_path('test_output.pl', File),
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		export_to_file(gaussian_anomalies, Detector, detect, File).
 
 	test(knn_distance_export_to_file_4_loadable, deterministic(Prediction == anomaly)) :-
 		^^file_path('test_output.pl', File),
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		export_to_file(gaussian_anomalies, Detector, detector, File),
 		logtalk_load(File),
 		{detector(LoadedDetector)},
@@ -216,7 +225,7 @@
 
 	test(knn_distance_print_anomaly_detector_1, deterministic) :-
 		^^suppress_text_output,
-		learn(gaussian_anomalies, Detector, [k(5)]),
+		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		print_anomaly_detector(Detector).
 
 	count_class([], _Class, 0).

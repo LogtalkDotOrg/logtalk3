@@ -101,6 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cuid2.html"><code class="docutils literal notranslate"><span class="pre">cuid2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cusum.html"><code class="docutils literal notranslate"><span class="pre">cusum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates_tz.html"><code class="docutils literal notranslate"><span class="pre">dates_tz</span></code></a></li>
@@ -206,6 +207,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plackett_luce_last.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefix_span.html"><code class="docutils literal notranslate"><span class="pre">prefix_span</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="probabilistic_pca.html"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
@@ -302,7 +304,8 @@ for anomaly detection as described by Hariri et al. (2019). The Extended
 Isolation Forest improves upon the original Isolation Forest algorithm
 (Liu et al., 2008) by using random hyperplane cuts instead of
 axis-aligned cuts, eliminating bias artifacts in anomaly scores along
-coordinate axes.</p>
+coordinate axes. Learning fits the forest from baseline training
+examples selected from the dataset class labels.</p>
 <p>The algorithm builds an ensemble of isolation trees (iTrees) by
 recursively partitioning data using random hyperplanes. Anomalous
 points, being few and different from normal points, require fewer
@@ -351,6 +354,10 @@ unsuccessful searches in a BST, and <code class="docutils literal notranslate"><
 <li><p>Handling of both continuous (numeric) and discrete (categorical)
 attributes: discrete attributes are mapped to numeric indices based on
 their position in the attribute value list declared by the dataset</p></li>
+<li><p>Baseline training selection: <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> declares
+which class labels are admissible for fitting the forest, while
+<code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> controls whether non-baseline examples
+are rejected (default) or filtered before training</p></li>
 <li><p>Handling of missing attribute values (represented using anonymous
 variables): during tree construction, missing values are replaced with
 random values drawn from the observed range of the corresponding
@@ -381,6 +388,11 @@ Forest; when omitted, the implementation uses <code class="docutils literal notr
 is the number of dimensions</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold(T)</span></code>: threshold used by <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code> (default:
 <code class="docutils literal notranslate"><span class="pre">0.5</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseline_class_values(Classes)</span></code>: learn-time list of admissible
+baseline class labels (default: <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseline_selection_policy(Policy)</span></code>: learn-time handling of
+non-baseline examples. Supported values are <code class="docutils literal notranslate"><span class="pre">reject</span></code> (default) and
+<code class="docutils literal notranslate"><span class="pre">filter</span></code></p></li>
 </ul>
 </section>
 <section id="detector-representation">
@@ -431,11 +443,11 @@ Forest. <em>IEEE Transactions on Knowledge and Data Engineering</em>, 33(4),
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>To learn an isolation forest model from a dataset with default options:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]).</p>
 <p>To learn with custom options:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>, [
+       baseline_selection_policy(filter),
          number_of_trees(<span class="m">200</span>),
          subsample_size(<span class="m">128</span>),
          extension_level(<span class="m">1</span>),
@@ -444,36 +456,31 @@ Forest. <em>IEEE Transactions on Knowledge and Data Engineering</em>, 33(4),
 </pre></div>
 </div>
 <p>To compute the anomaly score for a new instance:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>),
-     isolation_forest<span class="o">::</span>score(<span class="nv">Model</span>, [x<span class="o">-</span><span class="m">0.12</span>, y<span class="o">-</span><span class="m">0.34</span>], <span class="nv">Score</span>).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]), isolation_forest::score(Model,
+[x-0.12, y-0.34], Score).</p>
 <p>To predict whether an instance is an anomaly or normal:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>),
-     isolation_forest<span class="o">::</span>predict(<span class="nv">Model</span>, [x<span class="o">-</span><span class="m">4.50</span>, y<span class="o">-</span><span class="m">4.20</span>], <span class="nv">Prediction</span>).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]), isolation_forest::predict(Model,
+[x-4.50, y-4.20], Prediction).</p>
 <p>To compute and rank anomaly scores for all instances in a dataset:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>),
-     isolation_forest<span class="o">::</span>score_all(gaussian_anomalies, <span class="nv">Model</span>, <span class="nv">Scores</span>).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]),
+isolation_forest::score_all(gaussian_anomalies, Model, Scores).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Scores</span></code> list contains <code class="docutils literal notranslate"><span class="pre">Id-Class-Score</span></code> triples sorted by
 descending anomaly score. This makes it easy to inspect top anomalies:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>),
-     isolation_forest<span class="o">::</span>score_all(gaussian_anomalies, <span class="nv">Model</span>, [<span class="nv">Top1</span>, <span class="nv">Top2</span>, <span class="nv">Top3</span>| <span class="nv">_</span>]).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]),
+isolation_forest::score_all(gaussian_anomalies, Model, [Top1, Top2,
+Top3| _]).</p>
 <p>To print a summary of the learned model:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>),
-     isolation_forest<span class="o">::</span>print_anomaly_detector(<span class="nv">Model</span>).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter)]),
+isolation_forest::print_anomaly_detector(Model).</p>
 <p>To use the original (non-extended) Isolation Forest, set the extension
 level to 0:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> isolation_forest<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Model</span>, [extension_level(<span class="m">0</span>)]).
-</pre></div>
-</div>
+<p>| ?- isolation_forest::learn(gaussian_anomalies, Model,
+[baseline_selection_policy(filter), extension_level(0)]).</p>
 </section>
 </section>
 

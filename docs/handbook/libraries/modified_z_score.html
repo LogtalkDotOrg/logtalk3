@@ -101,6 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="cuid2.html"><code class="docutils literal notranslate"><span class="pre">cuid2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cusum.html"><code class="docutils literal notranslate"><span class="pre">cusum</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates_tz.html"><code class="docutils literal notranslate"><span class="pre">dates_tz</span></code></a></li>
@@ -204,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plackett_luce_last.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefix_span.html"><code class="docutils literal notranslate"><span class="pre">prefix_span</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="probabilistic_pca.html"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
@@ -343,6 +345,12 @@ attributes are all <code class="docutils literal notranslate"><span class="pre">
 <li><p><strong>Robust statistics</strong>: reuses the <code class="docutils literal notranslate"><span class="pre">statistics</span></code> library <code class="docutils literal notranslate"><span class="pre">sample</span></code>
 object to compute per-attribute medians and the median of absolute
 deviations.</p></li>
+<li><p><strong>Baseline training selection</strong>: supports learn-time
+<code class="docutils literal notranslate"><span class="pre">baseline_class_values(ClassValues)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">baseline_selection_policy(Policy)</span></code> options. The default baseline
+class values are <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>. The default <code class="docutils literal notranslate"><span class="pre">reject</span></code> policy throws an
+error if non-baseline examples are present, while <code class="docutils literal notranslate"><span class="pre">filter</span></code> removes
+them before fitting.</p></li>
 <li><p><strong>Missing-value tolerant</strong>: ignores missing values when fitting
 attribute statistics. During scoring, queries must provide at least
 one known value. In the default <code class="docutils literal notranslate"><span class="pre">score_mode(root_mean_square)</span></code>, the
@@ -386,6 +394,11 @@ clauses.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">anomaly_threshold(Threshold)</span></code>: Threshold for <code class="docutils literal notranslate"><span class="pre">predict/3-4</span></code>
 (default: <code class="docutils literal notranslate"><span class="pre">0.7777777777777778</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseline_class_values(ClassValues)</span></code>: Learn-time class labels that
+are admissible for baseline fitting (default: <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">baseline_selection_policy(Policy)</span></code>: Learn-time handling of examples
+whose class is not listed in <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code>. Supported
+values are <code class="docutils literal notranslate"><span class="pre">filter</span></code> and <code class="docutils literal notranslate"><span class="pre">reject</span></code> (default: <code class="docutils literal notranslate"><span class="pre">reject</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">score_mode(Mode)</span></code>: Learn-time score aggregation mode for
 <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>. Supported values are <code class="docutils literal notranslate"><span class="pre">root_mean_square</span></code> and
 <code class="docutils literal notranslate"><span class="pre">any_feature_extreme</span></code> (default: <code class="docutils literal notranslate"><span class="pre">root_mean_square</span></code>). If passed to
@@ -427,6 +440,14 @@ formula. It only changes the aggregation step. With
 of the per-attribute modified Z-scores. With
 <code class="docutils literal notranslate"><span class="pre">score_mode(any_feature_extreme)</span></code>, the raw score is the maximum
 absolute per-attribute modified Z-score.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> option declares which dataset class
+labels are admissible for fitting the baseline medians and median
+absolute deviations. The <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> option then
+controls what happens when other labels are present in the training
+data. The default <code class="docutils literal notranslate"><span class="pre">reject</span></code> policy raises a
+<code class="docutils literal notranslate"><span class="pre">domain_error(baseline_only_training_data,</span> <span class="pre">Dataset)</span></code> exception when
+any non-baseline example is found. The <code class="docutils literal notranslate"><span class="pre">filter</span></code> policy removes
+non-baseline examples before fitting.</p>
 <p>Attributes with zero observed median absolute deviation are assigned a
 fallback scale of <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. This keeps the detector well-defined for
 singleton datasets or constant columns while still yielding zero score
