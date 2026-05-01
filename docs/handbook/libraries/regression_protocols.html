@@ -302,7 +302,11 @@ learning regression algorithms. Datasets are represented as objects
 implementing the <code class="docutils literal notranslate"><span class="pre">regression_dataset_protocol</span></code> protocol. Regressors
 are represented as objects importing the <code class="docutils literal notranslate"><span class="pre">regressor_common</span></code> category.
 This category provides shared helpers for regressor defaults, dataset
-validation, export, and pretty-printing support.</p>
+validation, diagnostics metadata, export, and pretty-printing support.</p>
+<p>Learned regressors expose diagnostics using the shared
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">regressor_options/2</span></code>
+predicates. Concrete regressor implementations store effective training
+options in the diagnostics metadata under an <code class="docutils literal notranslate"><span class="pre">options(Options)</span></code> term.</p>
 <p>This library also provides regression test datasets under the
 <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory.</p>
 <section id="api-documentation">

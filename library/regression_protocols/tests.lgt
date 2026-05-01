@@ -22,23 +22,28 @@
 :- object(sample_regressor,
 	imports([options, regressor_common])).
 
-	learn(Dataset, sample_regressor(TargetName, Attributes, Target, Options), UserOptions) :-
+	learn(Dataset, sample_regressor(TargetName, Attributes, Target, Diagnostics), UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		Dataset::target(TargetName),
 		^^dataset_attributes(Dataset, Attributes),
 		^^dataset_examples(Dataset, Examples),
 		^^check_examples(Dataset, Examples),
-		Examples = [example(_Id, Target, _AttributeValues)| _].
+		Examples = [example(_Id, Target, _AttributeValues)| _],
+		length(Examples, TrainingExampleCount),
+		build_diagnostics(TargetName, TrainingExampleCount, Options, Diagnostics).
 
-	predict(sample_regressor(_TargetName, _Attributes, Target, _Options), _Instance, Target).
+	predict(sample_regressor(_TargetName, _Attributes, Target, _Diagnostics), _Instance, Target).
+
+	build_diagnostics(TargetName, TrainingExampleCount, Options, Diagnostics) :-
+		^^base_regressor_diagnostics(sample_regressor, TargetName, TrainingExampleCount, Options, [], Diagnostics).
 
 	check_regressor(Regressor) :-
-		(   Regressor = sample_regressor(TargetName, Attributes, Target, Options),
+		(   Regressor = sample_regressor(TargetName, Attributes, Target, Diagnostics),
 			atom(TargetName),
 			^^valid_attribute_declarations(Attributes),
 			number(Target),
-			^^valid_regressor_options(Options) ->
+			^^valid_regressor_metadata(sample_regressor, Diagnostics) ->
 			true
 		;   domain_error(regressor, Regressor)
 		).
@@ -46,7 +51,7 @@
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Regressor'].
 
-	regressor_term_template(sample_regressor(_TargetName, _Attributes, _Target, _Options), sample_regressor('TargetName', 'Attributes', 'Target', 'Options')).
+	regressor_term_template(sample_regressor(_TargetName, _Attributes, _Target, _Diagnostics), sample_regressor('TargetName', 'Attributes', 'Target', 'Diagnostics')).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Clause =.. [Functor, Regressor].
@@ -69,7 +74,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-01,
 		comment is 'Smoke tests for the "regression_protocols" library.'
 	]).
 
@@ -92,13 +97,29 @@
 		sample_regressor::learn(simple_line, Regressor).
 
 	test(sample_regressor_invalid_regressor_1, fail) :-
-		sample_regressor::valid_regressor(sample_regressor(y, [x], bad, [sample_option(enabled)])).
+		sample_regressor::valid_regressor(sample_regressor(y, [x], bad, [model(sample_regressor), target(y), training_example_count(5), options([sample_option(enabled)])])).
 
 	test(sample_regressor_predict_3, deterministic(Prediction == 3)) :-
 		sample_regressor::learn(simple_line, Regressor),
 		sample_regressor::predict(Regressor, [x-6], Prediction).
 
-	test(sample_regressor_export_to_clauses_4, deterministic(Clause == regress(sample_regressor(y, [x-continuous], 3, [sample_option(enabled)])))) :-
+	test(sample_regressor_diagnostics_2, true(Options == [sample_option(enabled)])) :-
+		sample_regressor::learn(simple_line, Regressor),
+		sample_regressor::diagnostics(Regressor, _Diagnostics),
+		sample_regressor::diagnostic(Regressor, model(sample_regressor)),
+		sample_regressor::diagnostic(Regressor, target(y)),
+		sample_regressor::diagnostic(Regressor, training_example_count(5)),
+		sample_regressor::regressor_options(Regressor, Options).
+
+	test(sample_regressor_diagnostic_2, true) :-
+		sample_regressor::learn(simple_line, Regressor),
+		sample_regressor::diagnostic(Regressor, model(sample_regressor)).
+
+	test(sample_regressor_regressor_options_2, deterministic(Options == [sample_option(enabled)])) :-
+		sample_regressor::learn(simple_line, Regressor),
+		sample_regressor::regressor_options(Regressor, Options).
+
+	test(sample_regressor_export_to_clauses_4, deterministic(Clause == regress(sample_regressor(y, [x-continuous], 3, [model(sample_regressor), target(y), training_example_count(5), options([sample_option(enabled)])])))) :-
 		sample_regressor::learn(simple_line, Regressor),
 		sample_regressor::export_to_clauses(simple_line, Regressor, regress, [Clause]).
 
@@ -108,13 +129,13 @@
 		sample_regressor::export_to_file(simple_line, Regressor, regress, File),
 		first_header_line(File, HeaderLine).
 
-	test(sample_regressor_export_to_file_4_metadata, deterministic(HeaderLines == ['% exported regressor predicate: regress/1', '% training dataset: simple_line', '% target: y', '% attributes: [x-continuous]', '% options: [sample_option(enabled)]', '% regress(Regressor)'])) :-
+	test(sample_regressor_export_to_file_4_metadata, deterministic(HeaderLines == ['% exported regressor predicate: regress/1', '% training dataset: simple_line', '% target: y', '% attributes: [x-continuous]', '% diagnostics: [model(sample_regressor),target(y),training_example_count(5),options([sample_option(enabled)])]', '% regress(Regressor)'])) :-
 		^^file_path('test_output.pl', File),
 		sample_regressor::learn(simple_line, Regressor),
 		sample_regressor::export_to_file(simple_line, Regressor, regress, File),
 		header_lines(File, HeaderLines).
 
-	test(sample_regressor_export_to_file_4_loadable, deterministic(LoadedRegressor == sample_regressor(y, [x-continuous], 3, [sample_option(enabled)]))) :-
+	test(sample_regressor_export_to_file_4_loadable, deterministic(LoadedRegressor == sample_regressor(y, [x-continuous], 3, [model(sample_regressor), target(y), training_example_count(5), options([sample_option(enabled)])]))) :-
 		^^file_path('test_output.pl', File),
 		sample_regressor::learn(simple_line, Regressor),
 		sample_regressor::export_to_file(simple_line, Regressor, regress, File),

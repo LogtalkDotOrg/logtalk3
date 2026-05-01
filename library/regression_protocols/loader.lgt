@@ -22,6 +22,7 @@
 :- initialization((
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load([
 		regressor_protocol,
 		regressor_common,

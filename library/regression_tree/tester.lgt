@@ -25,6 +25,7 @@
 	logtalk_load(statistics(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
+	logtalk_load(random(loader)),
 	logtalk_load(regression_protocols(loader)),
 	logtalk_load([
 		regression_protocols('test_datasets/step_signal'),

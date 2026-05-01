@@ -64,16 +64,16 @@ before the exported clauses in the following format:
 	% training dataset: Dataset
 	% target: Target
 	% attributes: Attributes
-	% options: Options
-	% Functor(Trees, Options)
-	Functor(Trees, Options)
+	% diagnostics: Diagnostics
+	% Functor(Encoders, FeatureLabels, Tree, Diagnostics)
+	Functor(Encoders, FeatureLabels, Tree, Diagnostics)
 
 The exported clauses serialize the learned regressor state so that
 loading the file gives a regressor term that can be passed directly to
 the `predict/3` predicate.
 
 When exporting a serialized regressor term, using a noun such as
-`regressor/2` or `model/2` is recommended.
+`regressor/4` or `model/4` is recommended.
 
 
 Features
@@ -82,10 +82,20 @@ Features
 - **Variance-Reduction Splits**: Selects binary thresholds over encoded features to reduce target variance.
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using one-hot vectors.
 - **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Per-Split Feature Sampling**: Optionally samples a subset of dataset attributes at each split before searching for the best partition.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling before tree induction.
+- **Diagnostics Metadata**: Learned regressors record model name, target, training example count, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
 - **Readable Trees**: Includes a pretty-printer for inspecting learned tree structure.
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for representative regression datasets.
+
+
+Regressor representation
+------------------------
+
+The learned regressor is represented by default as:
+
+- `regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics)`
 
 
 Options
@@ -96,4 +106,5 @@ The `learn/3` predicate accepts the following options:
 - `maximum_depth/1`: Maximum depth allowed for the induced regression tree. Lower values yield smaller trees; higher values allow more detailed partitioning of the training data. The default is `10`.
 - `minimum_samples_leaf/1`: Minimum number of training examples required in a leaf. This option also prevents candidate splits that would create child nodes smaller than the requested size. The default is `1`.
 - `minimum_variance_reduction/1`: Minimum variance-reduction gain required for accepting a split. Higher values make the learner more conservative by pruning weak splits during induction. The default is `0.0`.
+- `maximum_features_per_split/1`: Number of dataset attributes sampled at each split when searching for the best partition. Accepted values are a positive integer or `all`. The default is `all`.
 - `feature_scaling/1`: Controls z-score standardization of continuous attributes before tree induction. Accepted values are `true` and `false`. The default is `false`.

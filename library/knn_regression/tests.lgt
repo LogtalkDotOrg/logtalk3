@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-01,
 		comment is 'Unit tests for the "knn_regression" library.'
 	]).
 
@@ -33,7 +33,7 @@
 		op(700, xfx, =~=), (=~=)/2
 	]).
 	:- uses(list, [
-		memberchk/2
+		member/2
 	]).
 
 	cover(knn_regression).
@@ -51,7 +51,7 @@
 		knn_regression::valid_regressor(knn_regressor(
 			[continuous(x, 0.0, 1.0)],
 			[[1.0]-7],
-			[k(1), distance_metric(euclidean), weight_scheme(uniform), minkowski_power(3.0), feature_scaling(true)]
+			[model(knn_regression), target(y), training_example_count(1), options([k(1), distance_metric(euclidean), weight_scheme(uniform), minkowski_power(3.0), feature_scaling(true)]), encoded_feature_count(2)]
 		)).
 
 	test(knn_regression_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
@@ -70,8 +70,13 @@
 		knn_regression::learn(mixed_signal, Regressor, [k(1)]),
 		knn_regression::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
 
-	test(knn_regression_learn_3_custom_options, deterministic((memberchk(k(5), Options), memberchk(distance_metric(manhattan), Options), memberchk(weight_scheme(distance), Options), memberchk(minkowski_power(4.0), Options), memberchk(feature_scaling(false), Options)))) :-
-		knn_regression::learn(step_signal, knn_regressor(_Encoders, _Rows, Options), [k(5), distance_metric(manhattan), weight_scheme(distance), minkowski_power(4.0), feature_scaling(false)]).
+	test(knn_regression_learn_3_custom_options, deterministic((member(k(5), Options), member(distance_metric(manhattan), Options), member(weight_scheme(distance), Options), member(minkowski_power(4.0), Options), member(feature_scaling(false), Options)))) :-
+		knn_regression::learn(step_signal, Regressor, [k(5), distance_metric(manhattan), weight_scheme(distance), minkowski_power(4.0), feature_scaling(false)]),
+		knn_regression::regressor_options(Regressor, Options).
+
+	test(knn_regression_diagnostics_2, deterministic((member(model(knn_regression), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(k(3), Options)))) :-
+		knn_regression::learn(step_signal, Regressor),
+		knn_regression::diagnostics(Regressor, Diagnostics).
 
 	test(knn_regression_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-
 		knn_regression::learn(step_signal, Regressor, [k(1), feature_scaling(false)]),
@@ -88,8 +93,8 @@
 		knn_regression::learn(step_signal, Regressor, [k(1), feature_scaling(false)]),
 		knn_regression::export_to_file(step_signal, Regressor, regress, File),
 		logtalk_load(File),
-		{regress(Encoders, Rows, Options)},
-		knn_regression::predict(regress(Encoders, Rows, Options), [x-2], Prediction).
+		{regress(Encoders, Rows, Diagnostics)},
+		knn_regression::predict(regress(Encoders, Rows, Diagnostics), [x-2], Prediction).
 
 	test(knn_regression_print_regressor_1, deterministic) :-
 		^^suppress_text_output,

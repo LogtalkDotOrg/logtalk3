@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-05-01,
 		comment is 'Protocol for machine learning regressors.',
 		see_also is [linear_regression, regression_dataset_protocol]
 	]).
@@ -66,6 +66,27 @@
 	:- info(valid_regressor/1, [
 		comment is 'True when a learned regressor term is structurally valid for the receiving implementation. Succeeds iff ``check_regressor/1`` succeeds without throwing an exception.',
 		argnames is ['Regressor']
+	]).
+
+	:- public(diagnostics/2).
+	:- mode(diagnostics(+compound, -list(compound)), one).
+	:- info(diagnostics/2, [
+		comment is 'Returns diagnostics metadata for a learned regressor.',
+		argnames is ['Regressor', 'Diagnostics']
+	]).
+
+	:- public(diagnostic/2).
+	:- mode(diagnostic(+compound, ?compound), zero_or_more).
+	:- info(diagnostic/2, [
+		comment is 'Enumerates individual diagnostics metadata terms for a learned regressor.',
+		argnames is ['Regressor', 'Diagnostic']
+	]).
+
+	:- public(regressor_options/2).
+	:- mode(regressor_options(+compound, -list(compound)), one).
+	:- info(regressor_options/2, [
+		comment is 'Returns the effective options stored in a learned regressor diagnostics metadata.',
+		argnames is ['Regressor', 'Options']
 	]).
 
 	:- public(export_to_clauses/4).

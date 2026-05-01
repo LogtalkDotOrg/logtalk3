@@ -8,7 +8,12 @@ learning regression algorithms. Datasets are represented as objects
 implementing the ``regression_dataset_protocol`` protocol. Regressors
 are represented as objects importing the ``regressor_common`` category.
 This category provides shared helpers for regressor defaults, dataset
-validation, export, and pretty-printing support.
+validation, diagnostics metadata, export, and pretty-printing support.
+
+Learned regressors expose diagnostics using the shared
+``diagnostics/2``, ``diagnostic/2``, and ``regressor_options/2``
+predicates. Concrete regressor implementations store effective training
+options in the diagnostics metadata under an ``options(Options)`` term.
 
 This library also provides regression test datasets under the
 ``test_datasets`` directory.

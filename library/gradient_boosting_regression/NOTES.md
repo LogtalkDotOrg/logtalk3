@@ -61,8 +61,21 @@ Features
 - **Shrinkage**: Supports a fixed learning rate to scale stage contributions.
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded by the underlying regression-tree learner.
 - **Tree Configuration**: Exposes the underlying regression-tree depth, minimum-leaf, variance-reduction, and scaling options.
+- **Diagnostics Metadata**: Learned regressors record model name, target, training example count, initial prediction, fitted stage count, and effective options, accessible using the shared regression diagnostics predicates.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for representative regression datasets.
+
+
+Regressor representation
+------------------------
+
+The learned regressor is represented by default as:
+
+- `gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics)`
+
+The exported predicate clauses therefore use the shape:
+
+- `Functor(InitialPrediction, WeightedTrees, Diagnostics)`
 
 
 Options

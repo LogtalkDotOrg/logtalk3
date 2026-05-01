@@ -20,12 +20,12 @@
 
 
 :- object(knn_regression,
-	imports([options, regressor_common])).
+	imports(regressor_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-01,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
 		remarks is [
 			'Algorithm' - 'Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.',
@@ -33,16 +33,9 @@
 			'Weighting schemes' - 'Supports uniform, distance-based, and Gaussian weighting of neighbors.',
 			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
 			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``knn_regressor(Encoders, Rows, Options)`` where ``Rows`` stores encoded feature vectors paired with numeric targets.'
+			'Regressor representation' - 'The learned regressor is represented by default as ``knn_regressor(Encoders, Rows, Diagnostics)`` where ``Rows`` stores encoded feature vectors paired with numeric targets and ``Diagnostics`` stores training metadata including the effective options.'
 		],
 		see_also is [linear_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a regressor from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Regressor', 'Options']
 	]).
 
 	:- uses(format, [
@@ -68,20 +61,27 @@
 	learn(Dataset, Regressor, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		Dataset::target(_Target),
+		Dataset::target(Target),
 		^^dataset_attributes(Dataset, Attributes),
 		^^dataset_examples(Dataset, Examples),
 		^^check_examples(Dataset, Examples),
 		build_encoders(Attributes, Examples, Options, Encoders),
 		examples_to_rows(Examples, Encoders, Rows),
-		Regressor = knn_regressor(Encoders, Rows, Options).
+		length(Examples, TrainingExampleCount),
+		build_diagnostics(Target, Encoders, TrainingExampleCount, Options, Diagnostics),
+		Regressor = knn_regressor(Encoders, Rows, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Encoders, Rows, Options],
+		Regressor =.. [_, Encoders, Rows, _Diagnostics],
+		^^regressor_options(Regressor, Options),
 		encode_instance(Encoders, Instance, Features),
 		^^option(k(K), Options),
 		find_k_nearest(Features, Rows, K, Neighbors, Options),
 		predict_from_neighbors(Neighbors, Options, Target).
+
+	build_diagnostics(Target, Encoders, TrainingExampleCount, Options, Diagnostics) :-
+		^^encoded_feature_count(Encoders, FeatureCount),
+		^^base_regressor_diagnostics(knn_regression, Target, TrainingExampleCount, Options, [encoded_feature_count(FeatureCount)], Diagnostics).
 
 	build_encoders([], _, _, []).
 	build_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders]) :-
@@ -258,29 +258,31 @@
 		accumulate_weighted_targets(WeightedNeighbors, WeightedSum1, WeightedSum, TotalWeight1, TotalWeight).
 
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
-		Template =.. [Functor, 'Encoders', 'Rows', 'Options'].
+		Template =.. [Functor, 'Encoders', 'Rows', 'Diagnostics'].
 
-	regressor_term_template(knn_regressor(_Encoders, _Rows, _Options), knn_regressor('Encoders', 'Rows', 'Options')).
+	regressor_term_template(knn_regressor(_Encoders, _Rows, _Diagnostics), knn_regressor('Encoders', 'Rows', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = knn_regressor(Encoders, Rows, Options),
+		(   Regressor = knn_regressor(Encoders, Rows, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			^^valid_encoded_rows(Encoders, Rows),
-			^^valid_regressor_options(Options) ->
+			^^valid_regressor_metadata(knn_regression, Diagnostics),
+			length(Rows, TrainingExampleCount),
+			^^valid_diagnostic_count(training_example_count, Diagnostics, TrainingExampleCount) ->
 			true
 		;   domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = knn_regressor(Encoders, Rows, Options),
-		Clause =.. [Functor, Encoders, Rows, Options].
+		Regressor = knn_regressor(Encoders, Rows, Diagnostics),
+		Clause =.. [Functor, Encoders, Rows, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = knn_regressor(Encoders, Rows, Options),
+		Regressor = knn_regressor(Encoders, Rows, Diagnostics),
 		format('k-Nearest Neighbors Regressor~n', []),
 		format('=============================~n~n', []),
 		^^print_regressor_template(Regressor),
-		format('Options: ~w~n', [Options]),
+		format('Diagnostics: ~w~n', [Diagnostics]),
 		length(Rows, RowCount),
 		format('Training rows: ~w~n~n', [RowCount]),
 		format('Encoders: ~w~n', [Encoders]).

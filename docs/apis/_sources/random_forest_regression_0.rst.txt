@@ -8,41 +8,39 @@
 ``random_forest_regression``
 ============================
 
-Random Forest regression using regression trees as base learners trained on bootstrap samples and random feature subsets.
+Random Forest regression using regression trees as base learners trained on bootstrap samples and per-split random feature subsets.
 
 | **Availability:** 
 |    ``logtalk_load(random_forest_regression(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
-|    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`regressor_common <regressor_common/0>`
 | **Uses:**
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
-|    :ref:`pairs <pairs/0>`
 |    :ref:`population <population/0>`
 |    :ref:`regression_tree <regression_tree/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
 
-   - Algorithm: Builds an ensemble of regression trees trained on bootstrap samples and random feature subsets and predicts using the arithmetic mean of the individual tree predictions.
+   - Algorithm: Builds an ensemble of regression trees trained on bootstrap samples and predicts using the arithmetic mean of the individual tree predictions. Each split samples a random subset of the available dataset attributes before selecting the best split among them.
    - Bootstrap sampling: Each tree is trained on a bootstrap sample drawn with replacement from the original training examples.
-   - Feature randomization: Each tree uses a random subset of the available dataset attributes. The default number of features is the square root of the total number of features.
-   - Reproducibility: Random subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.
-   - Regressor representation: The learned regressor is represented by default as ``rf_regressor(Trees, Options)`` where ``Trees`` contains ``tree(TreeRegressor, AttributeNames)`` terms.
+   - Feature randomization: Each split samples a random subset of the available dataset attributes. The default number of sampled attributes is the square root of the total number of dataset attributes.
+   - Reproducibility: Bootstrap samples and split-level random feature subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.
+   - Regressor representation: The learned regressor is represented by default as ``rf_regressor(Trees, Diagnostics)`` where ``Trees`` contains ``tree(TreeRegressor)`` terms and ``Diagnostics`` stores training metadata including the effective options.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
 
 .. contents::
    :local:
@@ -51,24 +49,7 @@ Random Forest regression using regression trees as base learners trained on boot
 Public predicates
 -----------------
 
-.. index:: learn/3
-.. _random_forest_regression/0::learn/3:
-
-``learn/3``
-^^^^^^^^^^^
-
-Learns a regressor from the given dataset object using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Regressor,Options)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

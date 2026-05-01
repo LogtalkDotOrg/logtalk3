@@ -20,28 +20,21 @@
 
 
 :- object(random_forest_regression,
-	imports([options, regressor_common])).
+	imports(regressor_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
-		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and random feature subsets.',
+		date is 2026-05-01,
+		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and per-split random feature subsets.',
 		remarks is [
-			'Algorithm' - 'Builds an ensemble of regression trees trained on bootstrap samples and random feature subsets and predicts using the arithmetic mean of the individual tree predictions.',
+			'Algorithm' - 'Builds an ensemble of regression trees trained on bootstrap samples and predicts using the arithmetic mean of the individual tree predictions. Each split samples a random subset of the available dataset attributes before selecting the best split among them.',
 			'Bootstrap sampling' - 'Each tree is trained on a bootstrap sample drawn with replacement from the original training examples.',
-			'Feature randomization' - 'Each tree uses a random subset of the available dataset attributes. The default number of features is the square root of the total number of features.',
-			'Reproducibility' - 'Random subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``rf_regressor(Trees, Options)`` where ``Trees`` contains ``tree(TreeRegressor, AttributeNames)`` terms.'
+			'Feature randomization' - 'Each split samples a random subset of the available dataset attributes. The default number of sampled attributes is the square root of the total number of dataset attributes.',
+			'Reproducibility' - 'Bootstrap samples and split-level random feature subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
+			'Regressor representation' - 'The learned regressor is represented by default as ``rf_regressor(Trees, Diagnostics)`` where ``Trees`` contains ``tree(TreeRegressor)`` terms and ``Diagnostics`` stores training metadata including the effective options.'
 		],
 		see_also is [linear_regression, knn_regression, regression_tree, gradient_boosting_regression]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a regressor from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Regressor', 'Options']
 	]).
 
 	:- uses(regression_tree, [
@@ -49,7 +42,7 @@
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
-		between/3 as random_between/3, get_seed/1 as get_random_seed/1, permutation/2 as random_permutation/2,
+		between/3 as random_between/3, get_seed/1 as get_random_seed/1,
 		randomize/1 as randomize_seed/1, set_seed/1 as set_random_seed/1
 	]).
 
@@ -58,11 +51,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, nth1/3, take/3
-	]).
-
-	:- uses(pairs, [
-		keys/2, keys_values/3
+		append/3, length/2, memberchk/2, nth1/3
 	]).
 
 	:- uses(population, [
@@ -76,65 +65,63 @@
 	learn(Dataset, Regressor, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		Dataset::target(_Target),
+		Dataset::target(Target),
 		^^dataset_attributes(Dataset, Attributes),
-		keys(Attributes, AttributeNames),
 		^^dataset_examples(Dataset, Examples),
 		^^check_examples(Dataset, Examples),
-		length(AttributeNames, NumFeatures),
+		length(Attributes, NumFeatures),
 		^^option(number_of_trees(NumTrees), Options),
-		(   ^^option(maximum_features_per_tree(MaxFeatures), Options) ->
+		(   ^^option(maximum_features_per_split(MaxFeatures), Options) ->
 			true
 		;   MaxFeatures is max(1, floor(sqrt(NumFeatures)))
 		),
-		build_tree_options(Options, TreeOptions),
+		build_tree_options(Options, MaxFeatures, TreeOptions),
 		get_random_seed(OriginalSeed),
 		^^option(random_seed(RandomSeed), Options),
 		randomize_seed(RandomSeed),
-		build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, TreeOptions, Trees),
+		build_forest(Dataset, NumTrees, Attributes, TreeOptions, Trees),
 		set_random_seed(OriginalSeed),
-		Regressor = rf_regressor(Trees, Options).
+		length(Examples, TrainingExampleCount),
+		build_diagnostics(Target, NumFeatures, TrainingExampleCount, Trees, Options, Diagnostics),
+		Regressor = rf_regressor(Trees, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Trees, _Options],
+		Regressor =.. [_, Trees, _Diagnostics],
 		collect_predictions(Trees, Instance, Predictions),
 		(   Predictions == [] ->
 			domain_error(non_empty_predictions, Regressor)
 		;   arithmetic_mean(Predictions, Target)
 		).
 
-	build_tree_options(Options, [maximum_depth(MaximumDepth), minimum_samples_leaf(MinimumSamplesLeaf), minimum_variance_reduction(MinimumVarianceReduction), feature_scaling(FeatureScaling)]) :-
+	build_diagnostics(Target, AttributeCount, TrainingExampleCount, Trees, Options, Diagnostics) :-
+		length(Trees, TreeCount),
+		^^base_regressor_diagnostics(random_forest_regression, Target, TrainingExampleCount, Options, [attribute_count(AttributeCount), tree_count(TreeCount)], Diagnostics).
+
+	build_tree_options(Options, MaximumFeaturesPerSplit, [maximum_depth(MaximumDepth), minimum_samples_leaf(MinimumSamplesLeaf), minimum_variance_reduction(MinimumVarianceReduction), maximum_features_per_split(MaximumFeaturesPerSplit), feature_scaling(FeatureScaling)]) :-
 		^^option(maximum_depth(MaximumDepth), Options),
 		^^option(minimum_samples_leaf(MinimumSamplesLeaf), Options),
 		^^option(minimum_variance_reduction(MinimumVarianceReduction), Options),
 		^^option(feature_scaling(FeatureScaling), Options).
 
-	build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, TreeOptions, Trees) :-
-		build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, TreeOptions, 1, [], Trees).
+	build_forest(Dataset, NumTrees, Attributes, TreeOptions, Trees) :-
+		build_forest(Dataset, NumTrees, Attributes, TreeOptions, 1, [], Trees).
 
-	build_forest(_Dataset, NumTrees, _Attributes, _AttributeNames, _MaxFeatures, _TreeOptions, TreeID, Trees, Trees) :-
+	build_forest(_Dataset, NumTrees, _Attributes, _TreeOptions, TreeID, Trees, Trees) :-
 		TreeID > NumTrees,
 		!.
-	build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, TreeOptions, TreeID, Trees0, Trees) :-
-		select_feature_subset(AttributeNames, Attributes, MaxFeatures, SelectedNames, SelectedAttributes),
-		create_bootstrap_dataset(Dataset, SelectedNames, SelectedAttributes, BootstrapDataset),
+	build_forest(Dataset, NumTrees, Attributes, TreeOptions, TreeID, Trees0, Trees) :-
+		create_bootstrap_dataset(Dataset, Attributes, BootstrapDataset),
 		tree_learn(BootstrapDataset, Tree, TreeOptions),
 		abolish_object(BootstrapDataset),
 		NextTreeID is TreeID + 1,
-		build_forest(Dataset, NumTrees, Attributes, AttributeNames, MaxFeatures, TreeOptions, NextTreeID, [tree(Tree, SelectedNames)| Trees0], Trees).
+		build_forest(Dataset, NumTrees, Attributes, TreeOptions, NextTreeID, [tree(Tree)| Trees0], Trees).
 
-	select_feature_subset(AttributeNames, Attributes, MaxFeatures, SelectedNames, SelectedAttributes) :-
-		keys_values(Pairs, AttributeNames, Attributes),
-		random_permutation(Pairs, ShuffledPairs),
-		take(MaxFeatures, ShuffledPairs, SelectedPairs),
-		keys_values(SelectedPairs, SelectedNames, SelectedAttributes).
-
-	create_bootstrap_dataset(Dataset, SelectedNames, SelectedAttributes, BootstrapDataset) :-
+	create_bootstrap_dataset(Dataset, Attributes, BootstrapDataset) :-
 		findall(example(Id, Target, AttributeValues), Dataset::example(Id, Target, AttributeValues), Examples),
 		length(Examples, Count),
 		bootstrap_sample(Examples, Count, BootstrapExamples),
 		Dataset::target(TargetName),
-		create_bootstrap_object(BootstrapDataset, SelectedNames, SelectedAttributes, TargetName, BootstrapExamples).
+		create_bootstrap_object(BootstrapDataset, Attributes, TargetName, BootstrapExamples).
 
 	bootstrap_sample(Examples, Count, BootstrapExamples) :-
 		bootstrap_sample(Examples, Count, Count, BootstrapExamples).
@@ -148,85 +135,70 @@
 		NextRemaining is Remaining - 1,
 		bootstrap_sample(Examples, Count, NextRemaining, BootstrapExamples).
 
-	create_bootstrap_object(Name, SelectedNames, SelectedAttributes, TargetName, Examples) :-
-		build_attribute_clauses(SelectedNames, SelectedAttributes, AttributeClauses),
-		build_example_clauses(Examples, SelectedNames, ExampleClauses),
+	create_bootstrap_object(Name, Attributes, TargetName, Examples) :-
+		build_attribute_clauses(Attributes, AttributeClauses),
+		build_example_clauses(Examples, ExampleClauses),
 		append(AttributeClauses, ExampleClauses, DataClauses),
 		AllClauses = [target(TargetName)| DataClauses],
 		create_object(Name, [implements(regression_dataset_protocol)], [], AllClauses).
 
-	build_attribute_clauses([], [], []).
-	build_attribute_clauses([Name| Names], [Name-Values| Attributes], [attribute_values(Name, Values)| Clauses]) :-
-		build_attribute_clauses(Names, Attributes, Clauses).
+	build_attribute_clauses([], []).
+	build_attribute_clauses([Attribute-Values| Attributes], [attribute_values(Attribute, Values)| Clauses]) :-
+		build_attribute_clauses(Attributes, Clauses).
 
-	build_example_clauses([], _SelectedNames, []).
-	build_example_clauses([example(Id, Target, AttributeValues)| Examples], SelectedNames, [example(Id, Target, FilteredAttributeValues)| Clauses]) :-
-		filter_attribute_values(SelectedNames, AttributeValues, FilteredAttributeValues),
-		build_example_clauses(Examples, SelectedNames, Clauses).
-
-	filter_attribute_values([], _AttributeValues, []).
-	filter_attribute_values([Name| Names], AttributeValues, [Name-Value| FilteredAttributeValues]) :-
-		memberchk(Name-Value, AttributeValues),
-		filter_attribute_values(Names, AttributeValues, FilteredAttributeValues).
+	build_example_clauses([], []).
+	build_example_clauses([example(Id, Target, AttributeValues)| Examples], [example(Id, Target, AttributeValues)| Clauses]) :-
+		build_example_clauses(Examples, Clauses).
 
 	collect_predictions([], _Instance, []).
-	collect_predictions([tree(Tree, AttributeNames)| Trees], Instance, Predictions) :-
-		filter_instance(AttributeNames, Instance, FilteredInstance),
-		(   catch(once(tree_predict(Tree, FilteredInstance, Prediction)), error(instantiation_error, _), fail),
+	collect_predictions([tree(Tree)| Trees], Instance, Predictions) :-
+		(   catch(once(tree_predict(Tree, Instance, Prediction)), error(instantiation_error, _), fail),
 			number(Prediction) ->
 			Predictions = [Prediction| RestPredictions]
 		;   Predictions = RestPredictions
 		),
 		collect_predictions(Trees, Instance, RestPredictions).
 
-	filter_instance([], _Instance, []).
-	filter_instance([Name| Names], Instance, FilteredInstance) :-
-		(   member(Name-Value, Instance) ->
-			FilteredInstance = [Name-Value| RestInstance]
-		;   FilteredInstance = RestInstance
-		),
-		filter_instance(Names, Instance, RestInstance).
-
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
-		Template =.. [Functor, 'Trees', 'Options'].
+		Template =.. [Functor, 'Trees', 'Diagnostics'].
 
-	regressor_term_template(rf_regressor(_Trees, _Options), rf_regressor('Trees', 'Options')).
+	regressor_term_template(rf_regressor(_Trees, _Diagnostics), rf_regressor('Trees', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = rf_regressor(Trees, Options),
+		(   Regressor = rf_regressor(Trees, Diagnostics),
 			Trees \== [],
-			^^valid_regressor_options(Options),
+			^^valid_regressor_metadata(random_forest_regression, Diagnostics),
+			^^regressor_options(Regressor, Options),
 			memberchk(number_of_trees(ExpectedTreeCount), Options),
 			valid_trees(Trees),
-			length(Trees, ExpectedTreeCount) ->
+			length(Trees, ExpectedTreeCount),
+			^^valid_diagnostic_count(tree_count, Diagnostics, ExpectedTreeCount) ->
 			true
 		;   domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor =.. [_, Trees, Options],
-		Clause =.. [Functor, Trees, Options].
+		Regressor =.. [_, Trees, Diagnostics],
+		Clause =.. [Functor, Trees, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = rf_regressor(Trees, Options),
+		Regressor = rf_regressor(Trees, Diagnostics),
 		format('Random Forest Regressor~n', []),
 		format('=======================~n~n', []),
 		^^print_regressor_template(Regressor),
-		format('Options: ~w~n', [Options]),
+		format('Diagnostics: ~w~n', [Diagnostics]),
 		length(Trees, TreeCount),
 		format('Trees: ~w~n', [TreeCount]),
 		print_trees(Trees, 1).
 
 	print_trees([], _).
-	print_trees([tree(_Tree, AttributeNames)| Trees], Index) :-
-		format('  Tree ~w features: ~w~n', [Index, AttributeNames]),
+	print_trees([tree(_Tree)| Trees], Index) :-
+		format('  Tree ~w~n', [Index]),
 		NextIndex is Index + 1,
 		print_trees(Trees, NextIndex).
 
 	valid_trees([]).
-	valid_trees([tree(TreeRegressor, AttributeNames)| Trees]) :-
-		^^valid_attribute_names(AttributeNames),
-		AttributeNames \== [],
+	valid_trees([tree(TreeRegressor)| Trees]) :-
 		regression_tree::valid_regressor(TreeRegressor),
 		valid_trees(Trees).
 
@@ -239,8 +211,11 @@
 
 	valid_option(number_of_trees(NumberOfTrees)) :-
 		valid(positive_integer, NumberOfTrees).
-	valid_option(maximum_features_per_tree(MaximumFeaturesPerTree)) :-
-		valid(positive_integer, MaximumFeaturesPerTree).
+	valid_option(maximum_features_per_split(MaximumFeaturesPerSplit)) :-
+		(   MaximumFeaturesPerSplit == all ->
+			true
+		;   valid(positive_integer, MaximumFeaturesPerSplit)
+		).
 	valid_option(maximum_depth(MaximumDepth)) :-
 		valid(positive_integer, MaximumDepth).
 	valid_option(minimum_samples_leaf(MinimumSamplesLeaf)) :-

@@ -15,7 +15,7 @@ Protocol for machine learning regressors.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-29
+| **Date:** 2026-05-01
 
 | **Compilation flags:**
 |    ``static``
@@ -135,6 +135,63 @@ True when a learned regressor term is structurally valid for the receiving imple
 |    ``valid_regressor(Regressor)``
 | **Mode and number of proofs:**
 |    ``valid_regressor(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _regressor_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics metadata for a learned regressor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Regressor,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _regressor_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Enumerates individual diagnostics metadata terms for a learned regressor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Regressor,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: regressor_options/2
+.. _regressor_protocol/0::regressor_options/2:
+
+``regressor_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective options stored in a learned regressor diagnostics metadata.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``regressor_options(Regressor,Options)``
+| **Mode and number of proofs:**
+|    ``regressor_options(+compound,-list(compound))`` - ``one``
 
 
 ------------

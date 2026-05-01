@@ -50,11 +50,26 @@ Features
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
 - **Regularization**: Supports optional L2 regularization.
+- **Diagnostics Metadata**: Learned regressors record model name,
+  target, training example count, encoded feature count, and effective
+  options, accessible using the shared regression diagnostics
+  predicates.
 - **Model Export**: Learned regressors can be exported as predicate
   clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite
   reporting training time, RMSE, and MAE for representative regression
   datasets.
+
+Regressor representation
+------------------------
+
+The learned regressor is represented by default as:
+
+- ``linear_regressor(Encoders, Bias, Weights, Diagnostics)``
+
+The exported predicate clauses therefore use the shape:
+
+- ``Functor(Encoders, Bias, Weights, Diagnostics)``
 
 Options
 -------

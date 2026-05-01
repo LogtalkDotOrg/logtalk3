@@ -25,18 +25,23 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-21,
+		date is 2026-05-01,
 		comment is 'Performance and reference-fit benchmarks for the "random_forest_regression" library.'
 	]).
 
-	:- uses(lgtunit, [benchmark/2]).
-	:- uses(list, [length/2]).
+	:- uses(lgtunit, [
+		benchmark/2
+	]).
+
+	:- uses(list, [
+		length/2
+	]).
 
 	test(step_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(step_signal, [number_of_trees(11), maximum_features_per_tree(1), minimum_samples_leaf(2)], 0.75, 0.50, TrainTime, RMSE, MAE).
+		reference_fit(step_signal, [number_of_trees(11), maximum_features_per_split(1), minimum_samples_leaf(2)], 0.75, 0.50, TrainTime, RMSE, MAE).
 
 	test(mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(mixed_signal, [number_of_trees(21), maximum_features_per_tree(3)], 5.0, 4.0, TrainTime, RMSE, MAE).
+		reference_fit(mixed_signal, [number_of_trees(21), maximum_features_per_split(3)], 5.0, 4.0, TrainTime, RMSE, MAE).
 
 	test(intercept_only_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(intercept_only, [number_of_trees(5)], 0.01, 0.01, TrainTime, RMSE, MAE).

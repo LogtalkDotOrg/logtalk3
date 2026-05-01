@@ -3944,6 +3944,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostic/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`
+* :ref:`regressor_protocol <regressor_protocol/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
 ``diagnostic/3``
@@ -4000,6 +4001,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostics/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
+* :ref:`regressor_protocol <regressor_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
 ``diagnostics/3``
@@ -8987,16 +8989,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
-* :ref:`gradient_boosting_regression <gradient_boosting_regression/0::learn/3>`
-* :ref:`knn_regression <knn_regression/0::learn/3>`
-* :ref:`linear_regression <linear_regression/0::learn/3>`
 * :ref:`linear_svm <linear_svm/0::learn/3>`
 * :ref:`logistic_regression <logistic_regression/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`random_forest <random_forest/0::learn/3>`
-* :ref:`random_forest_regression <random_forest_regression/0::learn/3>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
-* :ref:`regression_tree <regression_tree/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
 * :ref:`truncated_svd <truncated_svd/0::learn/3>`
 
@@ -14538,6 +14535,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`recorded_database_core <recorded_database_core/0::recordz/3>`
+
+``regressor_options/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`regressor_protocol <regressor_protocol/0::regressor_options/2>`
 
 ``relative_standard_deviation/2``
 ---------------------------------

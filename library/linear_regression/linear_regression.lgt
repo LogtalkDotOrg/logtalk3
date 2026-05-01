@@ -20,28 +20,21 @@
 
 
 :- object(linear_regression,
-	imports([options, regressor_common])).
+	imports(regressor_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-01,
 		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using batch gradient descent. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to minimize mean squared error. Supports optional L2 regularization and optional feature scaling for continuous attributes.',
 			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
 			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
 			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``linear_regressor(Encoders, Bias, Weights, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, and ``Weights`` stores one coefficient per encoded feature.'
+			'Regressor representation' - 'The learned regressor is represented by default as ``linear_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.'
 		],
 		see_also is [knn_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a regressor from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Regressor', 'Options']
 	]).
 
 	:- uses(format, [
@@ -67,7 +60,7 @@
 	learn(Dataset, Regressor, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		Dataset::target(_Target),
+		Dataset::target(Target),
 		^^dataset_attributes(Dataset, Attributes),
 		^^dataset_examples(Dataset, Examples),
 		^^check_examples(Dataset, Examples),
@@ -75,13 +68,19 @@
 		examples_to_rows(Examples, Encoders, Rows),
 		encoders_feature_count(Encoders, NumFeatures),
 		train_model(Rows, NumFeatures, Options, Bias, Weights),
-		Regressor = linear_regressor(Encoders, Bias, Weights, Options).
+		length(Examples, TrainingExampleCount),
+		build_diagnostics(Target, Encoders, TrainingExampleCount, Options, Diagnostics),
+		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics).
 
 	predict(Regressor, Instance, Target) :-
-		Regressor =.. [_, Encoders, Bias, Weights, _Options],
+		Regressor =.. [_, Encoders, Bias, Weights, _Diagnostics],
 		encode_instance(Encoders, Instance, Features),
 		dot_product(Weights, Features, Linear),
 		Target is Bias + Linear.
+
+	build_diagnostics(Target, Encoders, TrainingExampleCount, Options, Diagnostics) :-
+		encoders_feature_count(Encoders, FeatureCount),
+		^^base_regressor_diagnostics(linear_regression, Target, TrainingExampleCount, Options, [encoded_feature_count(FeatureCount)], Diagnostics).
 
 	build_encoders([], _, _, []).
 	build_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders]) :-
@@ -258,38 +257,36 @@
 		zero_vector_like(Weights, Zeroes).
 
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
-		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Options'].
+		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Diagnostics'].
 
-	regressor_term_template(linear_regressor(_Encoders, _Bias, _Weights, _Options), linear_regressor('Encoders', 'Bias', 'Weights', 'Options')).
+	regressor_term_template(linear_regressor(_Encoders, _Bias, _Weights, _Diagnostics), linear_regressor('Encoders', 'Bias', 'Weights', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = linear_regressor(Encoders, Bias, Weights, Options),
+		(   Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			encoders_feature_count(Encoders, FeatureCount),
 			valid(list(float, FeatureCount), Weights),
-			^^valid_regressor_options(Options) ->
+			^^valid_regressor_metadata(linear_regression, Diagnostics),
+			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
 		;   domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
-		Regressor = linear_regressor(Encoders, Bias, Weights, Options),
-		Clause =.. [Functor, Encoders, Bias, Weights, Options].
+		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
+		Clause =.. [Functor, Encoders, Bias, Weights, Diagnostics].
 
 	print_regressor(Regressor) :-
-		Regressor = linear_regressor(Encoders, Bias, Weights, Options),
+		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
 		format('Linear Regression Regressor~n', []),
 		format('===========================~n~n', []),
 		^^print_regressor_template(Regressor),
-		print_options(Options),
+		format('Diagnostics: ~w~n', [Diagnostics]),
 		format('Bias: ~4f~n', [Bias]),
 		format('Weights: ~w coefficients~n~n', [Weights]),
 		format('Encoders:~n', []),
 		print_encoders(Encoders).
-
-	print_options(Options) :-
-		format('Options: ~w~n', [Options]).
 
 	print_encoders([]).
 	print_encoders([continuous(Attribute, Mean, Scale)| Encoders]) :-

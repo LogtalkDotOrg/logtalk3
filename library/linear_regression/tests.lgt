@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-01,
 		comment is 'Unit tests for the "linear_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		member/2
 	]).
 
 	cover(linear_regression).
@@ -49,8 +49,8 @@
 		linear_regression::learn(simple_line, Regressor).
 
 	test(linear_regression_invalid_regressor_1, fail) :-
-		linear_regression::learn(simple_line, linear_regressor(Encoders, _Bias, _Weights, Options)),
-		linear_regression::valid_regressor(linear_regressor(Encoders, 0.0, [1.0], Options)).
+		linear_regression::learn(simple_line, linear_regressor(Encoders, _Bias, _Weights, Diagnostics)),
+		linear_regression::valid_regressor(linear_regressor(Encoders, 0.0, [1.0], Diagnostics)).
 
 	test(linear_regression_predict_3_simple_line, deterministic(Prediction =~= 13.0)) :-
 		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
@@ -58,7 +58,7 @@
 
 	test(linear_regression_simple_line_matches_numberlist, deterministic(([Weight, Bias] =~= [Slope, Intercept]))) :-
 		numberlist::linear_regression([1,2,3,4,5], [3,5,7,9,11], Slope, Intercept),
-		linear_regression::learn(simple_line, linear_regressor([continuous(x, 0.0, 1.0)], Bias, [Weight, _MissingWeight], _Options), [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10)]).
+		linear_regression::learn(simple_line, linear_regressor([continuous(x, 0.0, 1.0)], Bias, [Weight, _MissingWeight], _Diagnostics), [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10)]).
 
 	test(linear_regression_predict_3_plane, deterministic(Prediction =~= 3.0)) :-
 		linear_regression::learn(plane, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
@@ -72,8 +72,13 @@
 		linear_regression::learn(intercept_only, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
 		linear_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(linear_regression_learn_3_custom_options, deterministic((memberchk(learning_rate(0.1), Options), memberchk(maximum_iterations(1500), Options), memberchk(tolerance(1.0e-6), Options), memberchk(l2_regularization(0.02), Options), memberchk(feature_scaling(false), Options)))) :-
-		linear_regression::learn(simple_line, linear_regressor(_Encoders, _Bias, _Weights, Options), [learning_rate(0.1), maximum_iterations(1500), tolerance(1.0e-6), l2_regularization(0.02), feature_scaling(false)]).
+	test(linear_regression_learn_3_custom_options, deterministic((member(learning_rate(0.1), Options), member(maximum_iterations(1500), Options), member(tolerance(1.0e-6), Options), member(l2_regularization(0.02), Options), member(feature_scaling(false), Options)))) :-
+		linear_regression::learn(simple_line, Regressor, [learning_rate(0.1), maximum_iterations(1500), tolerance(1.0e-6), l2_regularization(0.02), feature_scaling(false)]),
+		linear_regression::regressor_options(Regressor, Options).
+
+	test(linear_regression_diagnostics_2, deterministic((member(model(linear_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(feature_scaling(true), Options)))) :-
+		linear_regression::learn(simple_line, Regressor),
+		linear_regression::diagnostics(Regressor, Diagnostics).
 
 	test(linear_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
 		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
@@ -90,8 +95,8 @@
 		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
 		linear_regression::export_to_file(simple_line, Regressor, regress, File),
 		logtalk_load(File),
-		{regress(Encoders, Bias, Weights, Options)},
-		linear_regression::predict(regress(Encoders, Bias, Weights, Options), [x-6], Prediction).
+		{regress(Encoders, Bias, Weights, Diagnostics)},
+		linear_regression::predict(regress(Encoders, Bias, Weights, Diagnostics), [x-6], Prediction).
 
 	test(linear_regression_print_regressor_1, deterministic) :-
 		^^suppress_text_output,

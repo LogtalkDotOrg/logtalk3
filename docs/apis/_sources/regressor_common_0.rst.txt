@@ -8,14 +8,14 @@
 ``regressor_common``
 ====================
 
-Shared predicates for regressor learning defaults, validation, dataset validation, export, and pretty-print helpers.
+Shared predicates for regressor learning defaults, diagnostics, validation, dataset validation, export, and pretty-print helpers.
 
 | **Availability:** 
 |    ``logtalk_load(regression_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-01
 
 | **Compilation flags:**
 |    ``static``
@@ -23,6 +23,8 @@ Shared predicates for regressor learning defaults, validation, dataset validatio
 
 | **Implements:**
 |    ``public`` :ref:`regressor_protocol <regressor_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
@@ -32,7 +34,7 @@ Shared predicates for regressor learning defaults, validation, dataset validatio
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`regressor_protocol/0::check_regressor/1`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
 
 .. contents::
    :local:
@@ -46,21 +48,21 @@ Public predicates
 Protected predicates
 --------------------
 
-.. index:: regressor_options/2
-.. _regressor_common/0::regressor_options/2:
+.. index:: regressor_diagnostics_data/2
+.. _regressor_common/0::regressor_diagnostics_data/2:
 
-``regressor_options/2``
-^^^^^^^^^^^^^^^^^^^^^^^
+``regressor_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hook predicate that importing regressor implementations may override in order to expose the effective regressor options.
+Default hook predicate for exposing diagnostics metadata from a regressor term. Importing implementations may override it when using a non-standard regressor representation.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``regressor_options(Regressor,Options)``
+|    ``regressor_diagnostics_data(Regressor,Diagnostics)``
 | **Mode and number of proofs:**
-|    ``regressor_options(+compound,-list(compound))`` - ``one``
+|    ``regressor_diagnostics_data(+compound,-list(compound))`` - ``one``
 
 
 ------------
@@ -179,6 +181,25 @@ Pretty-printing helper predicate used by importing regressor implementations to 
 
 ------------
 
+.. index:: base_regressor_diagnostics/6
+.. _regressor_common/0::base_regressor_diagnostics/6:
+
+``base_regressor_diagnostics/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds common diagnostics metadata terms for a learned regressor and appends regressor-specific diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base_regressor_diagnostics(Model,Target,TrainingExampleCount,Options,ExtraDiagnostics,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``base_regressor_diagnostics(+atom,+atom,+integer,+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
 .. index:: valid_attribute_names/1
 .. _regressor_common/0::valid_attribute_names/1:
 
@@ -274,6 +295,44 @@ True when a list of options is structurally valid for the receiving regressor im
 
 ------------
 
+.. index:: valid_regressor_metadata/2
+.. _regressor_common/0::valid_regressor_metadata/2:
+
+``valid_regressor_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics metadata contains the expected model term and records a structurally valid effective options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_regressor_metadata(Model,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_regressor_metadata(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_diagnostic_count/3
+.. _regressor_common/0::valid_diagnostic_count/3:
+
+``valid_diagnostic_count/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics contains a count term with the given functor and integer value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_diagnostic_count(Functor,Diagnostics,Count)``
+| **Mode and number of proofs:**
+|    ``valid_diagnostic_count(+atom,+list(compound),+integer)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: valid_encoded_rows/2
 .. _regressor_common/0::valid_encoded_rows/2:
 
@@ -289,6 +348,25 @@ True when encoded training rows match the feature count induced by the encoders 
 |    ``valid_encoded_rows(Encoders,Rows)``
 | **Mode and number of proofs:**
 |    ``valid_encoded_rows(+list(compound),+list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: encoded_feature_count/2
+.. _regressor_common/0::encoded_feature_count/2:
+
+``encoded_feature_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of numeric features induced by a list of continuous and categorical encoders, including missing-value indicator features.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encoded_feature_count(Encoders,FeatureCount)``
+| **Mode and number of proofs:**
+|    ``encoded_feature_count(+list(compound),-integer)`` - ``one``
 
 
 ------------

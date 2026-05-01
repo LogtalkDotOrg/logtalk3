@@ -15,14 +15,13 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
-|    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`regressor_common <regressor_common/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
@@ -37,10 +36,10 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
    - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.
    - Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.
    - Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
-   - Regressor representation: The learned regressor is represented by default as ``linear_regressor(Encoders, Bias, Weights, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, and ``Weights`` stores one coefficient per encoded feature.
+   - Regressor representation: The learned regressor is represented by default as ``linear_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
 
 .. contents::
    :local:
@@ -49,24 +48,7 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
 Public predicates
 -----------------
 
-.. index:: learn/3
-.. _linear_regression/0::learn/3:
-
-``learn/3``
-^^^^^^^^^^^
-
-Learns a regressor from the given dataset object using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Regressor,Options)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

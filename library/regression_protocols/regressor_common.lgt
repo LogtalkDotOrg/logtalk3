@@ -20,20 +20,21 @@
 
 
 :- category(regressor_common,
-	implements(regressor_protocol)).
+	implements(regressor_protocol),
+	extends(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
-		comment is 'Shared predicates for regressor learning defaults, validation, dataset validation, export, and pretty-print helpers.'
+		date is 2026-05-01,
+		comment is 'Shared predicates for regressor learning defaults, diagnostics, validation, dataset validation, export, and pretty-print helpers.'
 	]).
 
-	:- protected(regressor_options/2).
-	:- mode(regressor_options(+compound, -list(compound)), one).
-	:- info(regressor_options/2, [
-		comment is 'Hook predicate that importing regressor implementations may override in order to expose the effective regressor options.',
-		argnames is ['Regressor', 'Options']
+	:- protected(regressor_diagnostics_data/2).
+	:- mode(regressor_diagnostics_data(+compound, -list(compound)), one).
+	:- info(regressor_diagnostics_data/2, [
+		comment is 'Default hook predicate for exposing diagnostics metadata from a regressor term. Importing implementations may override it when using a non-standard regressor representation.',
+		argnames is ['Regressor', 'Diagnostics']
 	]).
 
 	:- protected(regressor_export_template/4).
@@ -78,6 +79,13 @@
 		argnames is ['Regressor']
 	]).
 
+	:- protected(base_regressor_diagnostics/6).
+	:- mode(base_regressor_diagnostics(+atom, +atom, +integer, +list(compound), +list(compound), -list(compound)), one).
+	:- info(base_regressor_diagnostics/6, [
+		comment is 'Builds common diagnostics metadata terms for a learned regressor and appends regressor-specific diagnostics terms.',
+		argnames is ['Model', 'Target', 'TrainingExampleCount', 'Options', 'ExtraDiagnostics', 'Diagnostics']
+	]).
+
 	:- protected(valid_attribute_names/1).
 	:- mode(valid_attribute_names(+list(atom)), zero_or_one).
 	:- info(valid_attribute_names/1, [
@@ -113,11 +121,32 @@
 		argnames is ['Options']
 	]).
 
+	:- protected(valid_regressor_metadata/2).
+	:- mode(valid_regressor_metadata(+atom, +list(compound)), zero_or_one).
+	:- info(valid_regressor_metadata/2, [
+		comment is 'True when diagnostics metadata contains the expected model term and records a structurally valid effective options list.',
+		argnames is ['Model', 'Diagnostics']
+	]).
+
+	:- protected(valid_diagnostic_count/3).
+	:- mode(valid_diagnostic_count(+atom, +list(compound), +integer), zero_or_one).
+	:- info(valid_diagnostic_count/3, [
+		comment is 'True when diagnostics contains a count term with the given functor and integer value.',
+		argnames is ['Functor', 'Diagnostics', 'Count']
+	]).
+
 	:- protected(valid_encoded_rows/2).
 	:- mode(valid_encoded_rows(+list(compound), +list), zero_or_one).
 	:- info(valid_encoded_rows/2, [
 		comment is 'True when encoded training rows match the feature count induced by the encoders and carry numeric targets.',
 		argnames is ['Encoders', 'Rows']
+	]).
+
+	:- protected(encoded_feature_count/2).
+	:- mode(encoded_feature_count(+list(compound), -integer), one).
+	:- info(encoded_feature_count/2, [
+		comment is 'Counts the number of numeric features induced by a list of continuous and categorical encoders, including missing-value indicator features.',
+		argnames is ['Encoders', 'FeatureCount']
 	]).
 
 	:- protected(valid_feature_labels/1).
@@ -139,7 +168,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, last/2, member/2
+		length/2, last/2, member/2, memberchk/2
 	]).
 
 	:- uses(type, [
@@ -152,13 +181,21 @@
 	check_regressor(Regressor) :-
 		(   var(Regressor) ->
 			instantiation_error
-		;	::regressor_term_template(Regressor, _Template) ->
+		; 	::regressor_term_template(Regressor, _Template),
+			::regressor_diagnostics_data(Regressor, _Diagnostics) ->
 			true
 		;   domain_error(regressor, Regressor)
 		).
 
 	valid_regressor(Regressor) :-
 		catch(::check_regressor(Regressor), _Error, fail).
+
+	diagnostics(Regressor, Diagnostics) :-
+		::regressor_diagnostics_data(Regressor, Diagnostics).
+
+	diagnostic(Regressor, Diagnostic) :-
+		::regressor_diagnostics_data(Regressor, Diagnostics),
+		member(Diagnostic, Diagnostics).
 
 	dataset_attributes(Dataset, Attributes) :-
 		findall(
@@ -193,6 +230,19 @@
 		::regressor_term_template(Regressor, Template),
 		format('Template: ~w~n', [Template]).
 
+	regressor_diagnostics_data(Regressor, Diagnostics) :-
+		Regressor =.. [_| Arguments],
+		last(Arguments, Diagnostics).
+
+	base_regressor_diagnostics(Model, Target, TrainingExampleCount, Options, ExtraDiagnostics, Diagnostics) :-
+		Diagnostics = [
+			model(Model),
+			target(Target),
+			training_example_count(TrainingExampleCount),
+			options(Options)
+		| ExtraDiagnostics
+		].
+
 	valid_attribute_names(AttributeNames) :-
 		valid(list(atom), AttributeNames),
 		valid_distinct_terms(AttributeNames).
@@ -214,6 +264,19 @@
 		valid(list(compound), Options),
 		catch(::check_options(Options), _Error, fail).
 
+	valid_regressor_metadata(Model, Diagnostics) :-
+		valid(list(compound), Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		catch(::check_options(Options), _Error, fail).
+
+	valid_diagnostic_count(Functor, Diagnostics, Count) :-
+		integer(Count),
+		Diagnostic =.. [Functor, Value],
+		memberchk(Diagnostic, Diagnostics),
+		integer(Value),
+		Value =:= Count.
+
 	valid_encoded_rows(Encoders, Rows) :-
 		valid(list(compound), Rows),
 		Rows \== [],
@@ -230,8 +293,8 @@
 		valid_regression_tree_(Tree, FeatureCount).
 
 	regressor_options(Regressor, Options) :-
-		Regressor =.. [_| Arguments],
-		last(Arguments, Options).
+		diagnostics(Regressor, Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	export_to_file(Dataset, Regressor, Functor, File) :-
 		::export_to_clauses(Dataset, Regressor, Functor, Clauses),
@@ -249,8 +312,8 @@
 		format(Stream, '% target: ~q~n', [Target]),
 		::dataset_attributes(Dataset, Attributes),
 		format(Stream, '% attributes: ~q~n', [Attributes]),
-		(   ::regressor_options(Regressor, Options) ->
-			format(Stream, '% options: ~q~n', [Options])
+		(   ::diagnostics(Regressor, Diagnostics) ->
+			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
 		;   true
 		),
 		format(Stream, '% ~w~n', [Template]).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-01,
 		comment is 'Unit tests for the "gradient_boosting_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2
 	]).
 
 	cover(gradient_boosting_regression).
@@ -51,15 +51,21 @@
 	test(gradient_boosting_regression_invalid_regressor_1, fail) :-
 		gradient_boosting_regression::valid_regressor(gradient_boosting_regressor(
 			0.0,
-			[weighted_tree(-0.1, regression_tree_regressor([continuous(x, 0.0, 1.0)], [feature(x, value), feature(x, missing)], leaf(1.0), [maximum_depth(3), minimum_samples_leaf(1), minimum_variance_reduction(0.0), feature_scaling(false)]))],
-			[number_of_estimators(1), learning_rate(0.1), maximum_depth(3), minimum_samples_leaf(1), minimum_variance_reduction(0.0), feature_scaling(false)]
+			[weighted_tree(-0.1, regression_tree_regressor([continuous(x, 0.0, 1.0)], [feature(x, value), feature(x, missing)], leaf(1.0), [model(regression_tree), target(residual), training_example_count(5), options([maximum_depth(3), minimum_samples_leaf(1), minimum_variance_reduction(0.0), maximum_features_per_split(all), feature_scaling(false)]), encoded_feature_count(2)]))],
+			[model(gradient_boosting_regression), target(y), training_example_count(5), options([number_of_estimators(1), learning_rate(0.1), maximum_depth(3), minimum_samples_leaf(1), minimum_variance_reduction(0.0), feature_scaling(false)]), initial_prediction(0.0), stage_count(1)]
 		)).
 
 	test(gradient_boosting_regression_learn_2_structure, deterministic(functor(Regressor, gradient_boosting_regressor, 3))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor).
 
-	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, memberchk(number_of_estimators(5), Options), memberchk(learning_rate(1.0), Options), memberchk(maximum_depth(3), Options), memberchk(minimum_samples_leaf(2), Options), memberchk(feature_scaling(false), Options)))) :-
-		gradient_boosting_regression::learn(step_signal, gradient_boosting_regressor(_InitialPrediction, WeightedTrees, Options), [number_of_estimators(5), learning_rate(1.0), maximum_depth(3), minimum_samples_leaf(2), feature_scaling(false)]).
+	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, member(number_of_estimators(5), Options), member(learning_rate(1.0), Options), member(maximum_depth(3), Options), member(minimum_samples_leaf(2), Options), member(feature_scaling(false), Options)))) :-
+		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(3), minimum_samples_leaf(2), feature_scaling(false)]),
+		Regressor = gradient_boosting_regressor(_InitialPrediction, WeightedTrees, _Diagnostics),
+		gradient_boosting_regression::regressor_options(Regressor, Options).
+
+	test(gradient_boosting_regression_diagnostics_2, deterministic((member(model(gradient_boosting_regression), Diagnostics), member(stage_count(StageCount), Diagnostics), StageCount >= 1, member(options(Options), Diagnostics), member(number_of_estimators(5), Options)))) :-
+		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
+		gradient_boosting_regression::diagnostics(Regressor, Diagnostics).
 
 	test(gradient_boosting_regression_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
@@ -92,8 +98,8 @@
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
 		gradient_boosting_regression::export_to_file(step_signal, Regressor, regress, File),
 		logtalk_load(File),
-		{regress(InitialPrediction, WeightedTrees, Options)},
-		gradient_boosting_regression::predict(regress(InitialPrediction, WeightedTrees, Options), [x-2], Prediction).
+		{regress(InitialPrediction, WeightedTrees, Diagnostics)},
+		gradient_boosting_regression::predict(regress(InitialPrediction, WeightedTrees, Diagnostics), [x-2], Prediction).
 
 	test(gradient_boosting_regression_print_regressor_1, deterministic) :-
 		^^suppress_text_output,

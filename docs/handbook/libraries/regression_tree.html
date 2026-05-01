@@ -220,6 +220,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#export-header-format">Export header format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#regressor-representation">Regressor representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -336,16 +337,16 @@ before the exported clauses in the following format:</p>
 <span class="c">% training dataset: Dataset</span>
 <span class="c">% target: Target</span>
 <span class="c">% attributes: Attributes</span>
-<span class="c">% options: Options</span>
-<span class="c">% Functor(Trees, Options)</span>
-<span class="nv">Functor</span>(<span class="nv">Trees</span>, <span class="nv">Options</span>)
+<span class="c">% diagnostics: Diagnostics</span>
+<span class="c">% Functor(Encoders, FeatureLabels, Tree, Diagnostics)</span>
+<span class="nv">Functor</span>(<span class="nv">Encoders</span>, <span class="nv">FeatureLabels</span>, <span class="nv">Tree</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>The exported clauses serialize the learned regressor state so that
 loading the file gives a regressor term that can be passed directly to
 the <code class="docutils literal notranslate"><span class="pre">predict/3</span></code> predicate.</p>
 <p>When exporting a serialized regressor term, using a noun such as
-<code class="docutils literal notranslate"><span class="pre">regressor/2</span></code> or <code class="docutils literal notranslate"><span class="pre">model/2</span></code> is recommended.</p>
+<code class="docutils literal notranslate"><span class="pre">regressor/4</span></code> or <code class="docutils literal notranslate"><span class="pre">model/4</span></code> is recommended.</p>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
@@ -356,8 +357,14 @@ features to reduce target variance.</p></li>
 categorical attributes encoded using one-hot vectors.</p></li>
 <li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
 using explicit missing-value indicator features.</p></li>
+<li><p><strong>Per-Split Feature Sampling</strong>: Optionally samples a subset of dataset
+attributes at each split before searching for the best partition.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling before tree induction.</p></li>
+<li><p><strong>Diagnostics Metadata</strong>: Learned regressors record model name,
+target, training example count, encoded feature count, and effective
+options, accessible using the shared regression diagnostics
+predicates.</p></li>
 <li><p><strong>Model Export</strong>: Learned regressors can be exported as predicate
 clauses or written to a file.</p></li>
 <li><p><strong>Readable Trees</strong>: Includes a pretty-printer for inspecting learned
@@ -365,6 +372,13 @@ tree structure.</p></li>
 <li><p><strong>Reference Benchmarks</strong>: Includes a dedicated performance suite
 reporting training time, RMSE, and MAE for representative regression
 datasets.</p></li>
+</ul>
+</section>
+<section id="regressor-representation">
+<h2>Regressor representation<a class="headerlink" href="#regressor-representation" title="Link to this heading"></a></h2>
+<p>The learned regressor is represented by default as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">regression_tree_regressor(Encoders,</span> <span class="pre">FeatureLabels,</span> <span class="pre">Tree,</span> <span class="pre">Diagnostics)</span></code></p></li>
 </ul>
 </section>
 <section id="options">
@@ -382,6 +396,9 @@ is <code class="docutils literal notranslate"><span class="pre">1</span></code>.
 required for accepting a split. Higher values make the learner more
 conservative by pruning weak splits during induction. The default is
 <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_features_per_split/1</span></code>: Number of dataset attributes sampled
+at each split when searching for the best partition. Accepted values
+are a positive integer or <code class="docutils literal notranslate"><span class="pre">all</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code>: Controls z-score standardization of continuous
 attributes before tree induction. Accepted values are <code class="docutils literal notranslate"><span class="pre">true</span></code> and
 <code class="docutils literal notranslate"><span class="pre">false</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
