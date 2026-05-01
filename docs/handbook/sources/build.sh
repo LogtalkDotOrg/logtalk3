@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 30, 2026
+##   Last updated on May 1, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -123,6 +123,7 @@ sed '1,19d' ../../../library/eclat/NOTES.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst
 sed '1,19d' ../../../library/elo/NOTES.md | pandoc -f gfm -t rst -o libraries/elo.rst
 sed '1,19d' ../../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries/events.rst
+sed '1,19d' ../../../library/ewma/NOTES.md | pandoc -f gfm -t rst -o libraries/ewma.rst
 sed '1,19d' ../../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 sed '1,19d' ../../../library/expecteds/NOTES.md | pandoc -f gfm -t rst -o libraries/expecteds.rst
 sed '1,19d' ../../../library/format/NOTES.md | pandoc -f gfm -t rst -o libraries/format.rst
@@ -152,6 +153,7 @@ sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/h
 sed '1,19d' ../../../library/ica/NOTES.md | pandoc -f gfm -t rst -o libraries/ica.rst
 sed '1,19d' ../../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.rst
 sed '1,19d' ../../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
+sed '1,19d' ../../../library/iqr/NOTES.md | pandoc -f gfm -t rst -o libraries/iqr.rst
 sed '1,19d' ../../../library/isolation_forest/NOTES.md | pandoc -f gfm -t rst -o libraries/isolation_forest.rst
 sed '1,19d' ../../../library/java/NOTES.md | pandoc -f gfm -t rst -o libraries/java.rst
 sed '1,19d' ../../../library/json/NOTES.md | pandoc -f gfm -t rst -o libraries/json.rst

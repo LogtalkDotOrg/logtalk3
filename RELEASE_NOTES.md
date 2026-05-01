@@ -179,6 +179,10 @@ benchmark datasets, and smoke tests for anomaly-detection algorithms.
 * ADDED: New `cusum` library implementing a configurable CUSUM (Cumulative
 Sum Control Chart) anomaly detector for continuous sequence-like datasets.
 
+* ADDED: New `ewma` library implementing a configurable EWMA (Exponentially
+Weighted Moving Average) anomaly detector for continuous sequence-like
+datasets.
+
 * ADDED: New `knn_distance` library implementing a portable k-nearest-neighbor
 distance anomaly detector with mixed-feature and missing-value support.
 
@@ -190,6 +194,9 @@ Z-score anomaly detector for continuous datasets.
 
 * ADDED: New `modified_z_score` library implementing a configurable
 statistical modified Z-score anomaly detector for continuous datasets.
+
+* ADDED: New `iqr` library implementing a configurable statistical
+interquartile-range anomaly detector for continuous datasets.
 
 * ADDED: New `ranking_protocols` library defining common protocols, shared
 test datasets, and smoke tests for machine learning ranking algorithms.

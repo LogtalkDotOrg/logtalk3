@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on April 30, 2026
+##   Last updated on May 1, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -123,6 +123,7 @@ Foreach-Object {
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst
 (Get-Content ../../../library/elo/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/elo.rst
 (Get-Content ../../../library/events/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/events.rst
+(Get-Content ../../../library/ewma/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ewma.rst
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst
 (Get-Content ../../../library/expecteds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expecteds.rst
 (Get-Content ../../../library/format/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/format.rst
@@ -152,6 +153,7 @@ Foreach-Object {
 (Get-Content ../../../library/ica/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ica.rst
 (Get-Content ../../../library/ids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ids.rst
 (Get-Content ../../../library/intervals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/intervals.rst
+(Get-Content ../../../library/iqr/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iqr.rst
 (Get-Content ../../../library/isolation_forest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/isolation_forest.rst
 (Get-Content ../../../library/java/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/java.rst
 (Get-Content ../../../library/json/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json.rst

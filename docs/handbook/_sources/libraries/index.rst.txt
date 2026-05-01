@@ -60,6 +60,7 @@ directory in the ``NOTES.md`` file.
    csv
    cuid2
    cusum
+   ewma
    datalog
    dates
    dates_tz
@@ -73,6 +74,7 @@ directory in the ``NOTES.md`` file.
    edcg
    elo
    events
+   ewma
    expand_library_alias_paths
    expecteds
    format
@@ -102,6 +104,7 @@ directory in the ``NOTES.md`` file.
    ica
    ids
    intervals
+   iqr
    isolation_forest
    java
    json

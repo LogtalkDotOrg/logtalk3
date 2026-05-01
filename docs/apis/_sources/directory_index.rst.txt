@@ -607,6 +607,16 @@ To load an entity, always load the library that includes it using the goal ``log
    monitor <monitor_0>
    monitorp <monitorp_0>
 
+``library/ewma/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ewma <ewma_0>
+
 ``library/expand_library_alias_paths/``
 ---------------------------------------
 
@@ -989,6 +999,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    interval <interval_0>
    intervalp <intervalp_0>
+
+``library/iqr/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   iqr <iqr_0>
 
 ``library/isolation_forest/``
 -----------------------------

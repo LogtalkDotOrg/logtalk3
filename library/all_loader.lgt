@@ -106,6 +106,8 @@
 		logistic_regression(loader),
 		anomaly_detection_protocols(loader),
 		cusum(loader),
+		ewma(loader),
+		iqr(loader),
 		isolation_forest(loader),
 		knn_distance(loader),
 		lof(loader),

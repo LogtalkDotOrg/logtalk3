@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 30, 2026
+%  Last updated on May 1, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -77,6 +77,7 @@ logtalk_library_path(eclat, library('eclat/')).
 logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(elo, library('elo/')).
 logtalk_library_path(events, library('events/')).
+logtalk_library_path(ewma, library('ewma/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(format, library('format/')).
@@ -106,6 +107,7 @@ logtalk_library_path(html, library('html/')).
 logtalk_library_path(ica, library('ica/')).
 logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(intervals, library('intervals/')).
+logtalk_library_path(iqr, library('iqr/')).
 logtalk_library_path(isolation_forest, library('isolation_forest/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
