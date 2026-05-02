@@ -19,6 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if(current_logtalk_flag(prolog_dialect, xvm)).
+	:- set_prolog_flag(enable_occurs_check, false).
+:- endif.
+
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(dead_code_scanner(loader)),
