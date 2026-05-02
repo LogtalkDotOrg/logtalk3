@@ -51,8 +51,9 @@ Features
   using explicit missing-value indicator features.
 - **Regularization**: Supports optional L2 regularization.
 - **Diagnostics Metadata**: Learned regressors record model name,
-  target, training example count, encoded feature count, and effective
-  options, accessible using the shared regression diagnostics
+  target, training example count, optimization stop reason, completed
+  iterations, final parameter delta, encoded feature count, and
+  effective options, accessible using the shared regression diagnostics
   predicates.
 - **Model Export**: Learned regressors can be exported as predicate
   clauses or written to a file.
@@ -84,6 +85,9 @@ the form:
        target(Target),
        training_example_count(TrainingExampleCount),
        options(Options),
+       convergence(Status),
+       iterations(Iterations),
+       final_delta(FinalDelta),
        encoded_feature_count(FeatureCount)
    ]
 
@@ -97,6 +101,14 @@ Where:
   examples used during training.
 - ``options(Options)`` stores the effective learning options after
   merging the user options with the library defaults.
+- ``convergence(Status)`` records the optimization stop condition. The
+  current values are ``tolerance`` when the largest parameter update is
+  within the configured tolerance and ``maximum_iterations_exhausted``
+  when training stops because the iteration cap is reached.
+- ``iterations(Iterations)`` stores the number of batch gradient-descent
+  updates completed during training.
+- ``final_delta(FinalDelta)`` stores the maximum absolute parameter
+  change from the final optimization step.
 - ``encoded_feature_count(FeatureCount)`` stores the number of numeric
   features induced by the encoder list, including missing-value
   indicator features.

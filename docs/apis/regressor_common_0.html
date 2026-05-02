@@ -234,6 +234,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regression-tree"><span class="xref std std-ref">regression_tree</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regularized-bradley-terry"><span class="xref std std-ref">regularized_bradley_terry</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#ridge-regression"><span class="xref std std-ref">ridge_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sarif"><span class="xref std std-ref">sarif</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sbom"><span class="xref std std-ref">sbom</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#schulze"><span class="xref std std-ref">schulze</span></a></li>
@@ -333,7 +334,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-01</div>
+<div class="line"><strong>Date:</strong> 2026-05-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -354,6 +355,8 @@
 <div class="line-block">
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
+<div class="line"><a class="reference internal" href="population_0.html#population-0"><span class="std std-ref">population</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
@@ -389,14 +392,45 @@
 <li><p><a class="reference internal" href="#valid-regressor-options-1" id="id15"><code class="docutils literal notranslate"><span class="pre">valid_regressor_options/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#valid-regressor-metadata-2" id="id16"><code class="docutils literal notranslate"><span class="pre">valid_regressor_metadata/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#valid-diagnostic-count-3" id="id17"><code class="docutils literal notranslate"><span class="pre">valid_diagnostic_count/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-encoded-rows-2" id="id18"><code class="docutils literal notranslate"><span class="pre">valid_encoded_rows/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encoded-feature-count-2" id="id19"><code class="docutils literal notranslate"><span class="pre">encoded_feature_count/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-feature-labels-1" id="id20"><code class="docutils literal notranslate"><span class="pre">valid_feature_labels/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-regression-tree-2" id="id21"><code class="docutils literal notranslate"><span class="pre">valid_regression_tree/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-linear-model-diagnostics-1" id="id18"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_diagnostics/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-encoded-rows-2" id="id19"><code class="docutils literal notranslate"><span class="pre">valid_encoded_rows/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encoded-feature-count-2" id="id20"><code class="docutils literal notranslate"><span class="pre">encoded_feature_count/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#continuous-stats-5" id="id21"><code class="docutils literal notranslate"><span class="pre">continuous_stats/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#examples-to-rows-3" id="id22"><code class="docutils literal notranslate"><span class="pre">examples_to_rows/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encode-instance-3" id="id23"><code class="docutils literal notranslate"><span class="pre">encode_instance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fit-linear-model-7" id="id24"><code class="docutils literal notranslate"><span class="pre">fit_linear_model/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-feature-labels-1" id="id25"><code class="docutils literal notranslate"><span class="pre">valid_feature_labels/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-regression-tree-2" id="id26"><code class="docutils literal notranslate"><span class="pre">valid_regression_tree/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#known-attribute-values-3" id="id28"><code class="docutils literal notranslate"><span class="pre">known_attribute_values/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-attribute-bindings-2" id="id29"><code class="docutils literal notranslate"><span class="pre">check_attribute_bindings/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-declared-attribute-bindings-2" id="id30"><code class="docutils literal notranslate"><span class="pre">check_declared_attribute_bindings/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-undeclared-attribute-bindings-2" id="id31"><code class="docutils literal notranslate"><span class="pre">check_undeclared_attribute_bindings/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#attribute-occurrences-4" id="id32"><code class="docutils literal notranslate"><span class="pre">attribute_occurrences/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#declared-attribute-names-2" id="id33"><code class="docutils literal notranslate"><span class="pre">declared_attribute_names/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encoder-attribute-names-2" id="id34"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encode-instance-checked-3" id="id35"><code class="docutils literal notranslate"><span class="pre">encode_instance_checked/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-linear-model-convergence-1" id="id36"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_convergence/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-continuous-4" id="id37"><code class="docutils literal notranslate"><span class="pre">normalize_continuous/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-categorical-value-3" id="id38"><code class="docutils literal notranslate"><span class="pre">check_categorical_value/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#one-hot-encode-3" id="id39"><code class="docutils literal notranslate"><span class="pre">one_hot_encode/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#missing-one-hot-encode-2" id="id40"><code class="docutils literal notranslate"><span class="pre">missing_one_hot_encode/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zero-vector-from-values-2" id="id41"><code class="docutils literal notranslate"><span class="pre">zero_vector_from_values/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#build-linear-encoders-4" id="id42"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#train-linear-model-6" id="id43"><code class="docutils literal notranslate"><span class="pre">train_linear_model/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#optimize-linear-model-11" id="id44"><code class="docutils literal notranslate"><span class="pre">optimize_linear_model/11</span></code></a></p></li>
+<li><p><a class="reference internal" href="#update-linear-parameters-7" id="id45"><code class="docutils literal notranslate"><span class="pre">update_linear_parameters/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#accumulate-linear-gradients-7" id="id46"><code class="docutils literal notranslate"><span class="pre">accumulate_linear_gradients/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#add-scaled-vector-4" id="id47"><code class="docutils literal notranslate"><span class="pre">add_scaled_vector/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#update-linear-weights-8" id="id48"><code class="docutils literal notranslate"><span class="pre">update_linear_weights/8</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zero-vector-2" id="id49"><code class="docutils literal notranslate"><span class="pre">zero_vector/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zero-vector-like-2" id="id50"><code class="docutils literal notranslate"><span class="pre">zero_vector_like/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id51">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -512,7 +546,7 @@
 </section>
 <section id="check-examples-2">
 <span id="regressor-common-0-check-examples-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_examples/2</span></code></a><a class="headerlink" href="#check-examples-2" title="Link to this heading"></a></h3>
-<p>Validates that the collected examples list is non-empty and only contains numeric targets.</p>
+<p>Validates that the collected examples list is non-empty, only contains numeric targets, and only uses declared attributes without duplicate bindings.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -526,7 +560,28 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Examples is the empty list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_dataset,Dataset)</span></code></div>
+</div>
+<div class="line">An example target is not numeric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Target)</span></code></div>
+</div>
+<div class="line">An example repeats a declared attribute binding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(attribute_occurrences,Attribute)</span></code></div>
+</div>
+<div class="line">An example contains an undeclared attribute binding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(declared_attribute,Attribute)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -720,8 +775,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="valid-linear-model-diagnostics-1">
+<span id="regressor-common-0-valid-linear-model-diagnostics-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_diagnostics/1</span></code></a><a class="headerlink" href="#valid-linear-model-diagnostics-1" title="Link to this heading"></a></h3>
+<p>True when diagnostics contains structurally valid linear-model optimization metadata terms for convergence, completed iterations, and final parameter delta.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_diagnostics(Diagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_diagnostics(+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="valid-encoded-rows-2">
-<span id="regressor-common-0-valid-encoded-rows-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_encoded_rows/2</span></code></a><a class="headerlink" href="#valid-encoded-rows-2" title="Link to this heading"></a></h3>
+<span id="regressor-common-0-valid-encoded-rows-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_encoded_rows/2</span></code></a><a class="headerlink" href="#valid-encoded-rows-2" title="Link to this heading"></a></h3>
 <p>True when encoded training rows match the feature count induced by the encoders and carry numeric targets.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -742,7 +818,7 @@
 <hr class="docutils" />
 </section>
 <section id="encoded-feature-count-2">
-<span id="regressor-common-0-encoded-feature-count-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoded_feature_count/2</span></code></a><a class="headerlink" href="#encoded-feature-count-2" title="Link to this heading"></a></h3>
+<span id="regressor-common-0-encoded-feature-count-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoded_feature_count/2</span></code></a><a class="headerlink" href="#encoded-feature-count-2" title="Link to this heading"></a></h3>
 <p>Counts the number of numeric features induced by a list of continuous and categorical encoders, including missing-value indicator features.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -762,8 +838,92 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="continuous-stats-5">
+<span id="regressor-common-0-continuous-stats-5"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">continuous_stats/5</span></code></a><a class="headerlink" href="#continuous-stats-5" title="Link to this heading"></a></h3>
+<p>Computes the mean and scaling factor used to encode a continuous attribute from the training examples according to the effective feature scaling option.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">continuous_stats(Attribute,Examples,Options,Mean,Scale)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">continuous_stats(+atom,+list(compound),+list(compound),-float,-positive_float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="examples-to-rows-3">
+<span id="regressor-common-0-examples-to-rows-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">examples_to_rows/3</span></code></a><a class="headerlink" href="#examples-to-rows-3" title="Link to this heading"></a></h3>
+<p>Encodes dataset examples as numeric feature-vector and target pairs using a list of encoders.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">examples_to_rows(Examples,Encoders,Rows)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">examples_to_rows(+list(compound),+list(compound),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="encode-instance-3">
+<span id="regressor-common-0-encode-instance-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_instance/3</span></code></a><a class="headerlink" href="#encode-instance-3" title="Link to this heading"></a></h3>
+<p>Validates and encodes an attribute-value list as a numeric feature vector using a list of continuous and categorical encoders.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_instance(Encoders,AttributeValues,Features)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_instance(+list(compound),+list(pair),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="fit-linear-model-7">
+<span id="regressor-common-0-fit-linear-model-7"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fit_linear_model/7</span></code></a><a class="headerlink" href="#fit-linear-model-7" title="Link to this heading"></a></h3>
+<p>Builds linear-model encoders from the training dataset, encodes the examples, fits a bias plus weight vector using batch gradient descent and an L2 regularization option, and returns optimization diagnostics terms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fit_linear_model(Dataset,Options,Encoders,TrainingExampleCount,Bias,Weights,TrainingDiagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fit_linear_model(+object_identifier,+list(compound),-list(compound),-integer,-float,-list(float),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="valid-feature-labels-1">
-<span id="regressor-common-0-valid-feature-labels-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_feature_labels/1</span></code></a><a class="headerlink" href="#valid-feature-labels-1" title="Link to this heading"></a></h3>
+<span id="regressor-common-0-valid-feature-labels-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_feature_labels/1</span></code></a><a class="headerlink" href="#valid-feature-labels-1" title="Link to this heading"></a></h3>
 <p>True when a list of regression-tree feature labels only contains valid <code class="docutils literal notranslate"><span class="pre">feature/2</span></code> terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -784,7 +944,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-regression-tree-2">
-<span id="regressor-common-0-valid-regression-tree-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_regression_tree/2</span></code></a><a class="headerlink" href="#valid-regression-tree-2" title="Link to this heading"></a></h3>
+<span id="regressor-common-0-valid-regression-tree-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_regression_tree/2</span></code></a><a class="headerlink" href="#valid-regression-tree-2" title="Link to this heading"></a></h3>
 <p>True when a regression tree only contains valid <code class="docutils literal notranslate"><span class="pre">leaf/1</span></code> and <code class="docutils literal notranslate"><span class="pre">node/5</span></code> terms using feature indexes within bounds.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -807,8 +967,490 @@
 <hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="known-attribute-values-3">
+<span id="regressor-common-0-known-attribute-values-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">known_attribute_values/3</span></code></a><a class="headerlink" href="#known-attribute-values-3" title="Link to this heading"></a></h3>
+<p>Collects the known numeric values for a continuous attribute from the training examples, skipping omitted and variable values.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">known_attribute_values(Examples,Attribute,Values)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">known_attribute_values(+list(compound),+atom,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="check-attribute-bindings-2">
+<span id="regressor-common-0-check-attribute-bindings-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_attribute_bindings/2</span></code></a><a class="headerlink" href="#check-attribute-bindings-2" title="Link to this heading"></a></h3>
+<p>Checks that an attribute-value list contains only declared attributes and does not repeat any declared attribute; omitted declared attributes are allowed and treated as missing values.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_attribute_bindings(AttributeNames,AttributeValues)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_attribute_bindings(+list(atom),+list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-declared-attribute-bindings-2">
+<span id="regressor-common-0-check-declared-attribute-bindings-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_declared_attribute_bindings/2</span></code></a><a class="headerlink" href="#check-declared-attribute-bindings-2" title="Link to this heading"></a></h3>
+<p>Checks that no declared attribute appears more than once in an attribute-value list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_declared_attribute_bindings(AttributeNames,AttributeValues)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_declared_attribute_bindings(+list(atom),+list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-undeclared-attribute-bindings-2">
+<span id="regressor-common-0-check-undeclared-attribute-bindings-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_undeclared_attribute_bindings/2</span></code></a><a class="headerlink" href="#check-undeclared-attribute-bindings-2" title="Link to this heading"></a></h3>
+<p>Checks that every attribute occurring in an attribute-value list is declared.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_undeclared_attribute_bindings(AttributeValues,AttributeNames)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_undeclared_attribute_bindings(+list(pair),+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="attribute-occurrences-4">
+<span id="regressor-common-0-attribute-occurrences-4"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">attribute_occurrences/4</span></code></a><a class="headerlink" href="#attribute-occurrences-4" title="Link to this heading"></a></h3>
+<p>Counts the number of times an attribute occurs in an attribute-value list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">attribute_occurrences(AttributeValues,Attribute,Count0,Count)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">attribute_occurrences(+list(pair),+atom,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="declared-attribute-names-2">
+<span id="regressor-common-0-declared-attribute-names-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">declared_attribute_names/2</span></code></a><a class="headerlink" href="#declared-attribute-names-2" title="Link to this heading"></a></h3>
+<p>Collects the declared attribute names from dataset attribute declarations.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">declared_attribute_names(Attributes,AttributeNames)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">declared_attribute_names(+list(pair),-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="encoder-attribute-names-2">
+<span id="regressor-common-0-encoder-attribute-names-2"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names/2</span></code></a><a class="headerlink" href="#encoder-attribute-names-2" title="Link to this heading"></a></h3>
+<p>Collects the declared attribute names from a list of regression encoders.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names(Encoders,AttributeNames)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names(+list(compound),-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="encode-instance-checked-3">
+<span id="regressor-common-0-encode-instance-checked-3"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_instance_checked/3</span></code></a><a class="headerlink" href="#encode-instance-checked-3" title="Link to this heading"></a></h3>
+<p>Encodes an already validated attribute-value list as a numeric feature vector using a list of continuous and categorical encoders.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_instance_checked(Encoders,AttributeValues,Features)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_instance_checked(+list(compound),+list(pair),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="valid-linear-model-convergence-1">
+<span id="regressor-common-0-valid-linear-model-convergence-1"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_convergence/1</span></code></a><a class="headerlink" href="#valid-linear-model-convergence-1" title="Link to this heading"></a></h3>
+<p>True when a linear-model optimization stop reason is recognized.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_convergence(Convergence)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">valid_linear_model_convergence(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="normalize-continuous-4">
+<span id="regressor-common-0-normalize-continuous-4"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_continuous/4</span></code></a><a class="headerlink" href="#normalize-continuous-4" title="Link to this heading"></a></h3>
+<p>Normalizes a continuous value using a stored mean and scale.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_continuous(Value,Mean,Scale,Feature)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_continuous(+number,+float,+positive_float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-categorical-value-3">
+<span id="regressor-common-0-check-categorical-value-3"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_categorical_value/3</span></code></a><a class="headerlink" href="#check-categorical-value-3" title="Link to this heading"></a></h3>
+<p>Validates that a categorical value is declared for an attribute.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_categorical_value(Attribute,Values,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_categorical_value(+atom,+list,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="one-hot-encode-3">
+<span id="regressor-common-0-one-hot-encode-3"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">one_hot_encode/3</span></code></a><a class="headerlink" href="#one-hot-encode-3" title="Link to this heading"></a></h3>
+<p>Encodes a declared categorical value using one-hot encoding plus a trailing missing-value indicator feature set to zero.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">one_hot_encode(Values,Value,Encoded)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">one_hot_encode(+list,+nonvar,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="missing-one-hot-encode-2">
+<span id="regressor-common-0-missing-one-hot-encode-2"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">missing_one_hot_encode/2</span></code></a><a class="headerlink" href="#missing-one-hot-encode-2" title="Link to this heading"></a></h3>
+<p>Encodes a missing categorical value as zeroes plus a trailing missing-value indicator feature set to one.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">missing_one_hot_encode(Values,Encoded)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">missing_one_hot_encode(+list,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zero-vector-from-values-2">
+<span id="regressor-common-0-zero-vector-from-values-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_vector_from_values/2</span></code></a><a class="headerlink" href="#zero-vector-from-values-2" title="Link to this heading"></a></h3>
+<p>Creates a zero vector with one element per declared categorical value.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector_from_values(Values,Zeroes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector_from_values(+list,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="build-linear-encoders-4">
+<span id="regressor-common-0-build-linear-encoders-4"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders/4</span></code></a><a class="headerlink" href="#build-linear-encoders-4" title="Link to this heading"></a></h3>
+<p>Builds the encoder list used by linear models from dataset attribute declarations, training examples, and the effective feature scaling option.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders(Attributes,Examples,Options,Encoders)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders(+list(pair),+list(compound),+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="train-linear-model-6">
+<span id="regressor-common-0-train-linear-model-6"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">train_linear_model/6</span></code></a><a class="headerlink" href="#train-linear-model-6" title="Link to this heading"></a></h3>
+<p>Fits a linear model bias and weight vector from encoded rows using batch gradient descent and returns optimization diagnostics terms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">train_linear_model(Rows,FeatureCount,Options,Bias,Weights,TrainingDiagnostics)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">train_linear_model(+list(pair),+integer,+list(compound),-float,-list(float),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="optimize-linear-model-11">
+<span id="regressor-common-0-optimize-linear-model-11"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">optimize_linear_model/11</span></code></a><a class="headerlink" href="#optimize-linear-model-11" title="Link to this heading"></a></h3>
+<p>Runs iterative batch gradient-descent updates until the tolerance or maximum iteration limit is reached and reports the stop reason, completed iterations, and final maximum parameter delta.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">optimize_linear_model(Rows,Options,Iteration,Bias0,Weights0,PreviousDelta,Bias,Weights,Convergence,Iterations,FinalDelta)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">optimize_linear_model(+list(pair),+list(compound),+integer,+float,+list(float),+float,-float,-list(float),-atom,-integer,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="update-linear-parameters-7">
+<span id="regressor-common-0-update-linear-parameters-7"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_linear_parameters/7</span></code></a><a class="headerlink" href="#update-linear-parameters-7" title="Link to this heading"></a></h3>
+<p>Performs one batch gradient-descent parameter update step and returns the maximum absolute parameter change.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_linear_parameters(Rows,Bias0,Weights0,Options,Bias1,Weights1,MaxDelta)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_linear_parameters(+list(pair),+float,+list(float),+list(compound),-float,-list(float),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="accumulate-linear-gradients-7">
+<span id="regressor-common-0-accumulate-linear-gradients-7"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accumulate_linear_gradients/7</span></code></a><a class="headerlink" href="#accumulate-linear-gradients-7" title="Link to this heading"></a></h3>
+<p>Accumulates the batch bias and weight gradients over a list of encoded training rows.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accumulate_linear_gradients(Rows,Bias,Weights,GradientBias0,GradientWeights0,GradientBias,GradientWeights)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accumulate_linear_gradients(+list(pair),+float,+list(float),+float,+list(float),-float,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="add-scaled-vector-4">
+<span id="regressor-common-0-add-scaled-vector-4"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_scaled_vector/4</span></code></a><a class="headerlink" href="#add-scaled-vector-4" title="Link to this heading"></a></h3>
+<p>Adds a scaled feature vector to an accumulated gradient vector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_scaled_vector(Features,Scale,Gradients0,Gradients)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_scaled_vector(+list(float),+number,+list(float),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="update-linear-weights-8">
+<span id="regressor-common-0-update-linear-weights-8"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_linear_weights/8</span></code></a><a class="headerlink" href="#update-linear-weights-8" title="Link to this heading"></a></h3>
+<p>Updates the weight vector using the mean gradients and L2 regularization term while tracking the maximum absolute weight change.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_linear_weights(Weights0,Gradients,Scale,Regularization,LearningRate,Weights1,MaxDelta0,MaxDelta)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_linear_weights(+list(float),+list(float),+float,+float,+float,-list(float),+float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zero-vector-2">
+<span id="regressor-common-0-zero-vector-2"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_vector/2</span></code></a><a class="headerlink" href="#zero-vector-2" title="Link to this heading"></a></h3>
+<p>Creates a zero-filled float vector with the requested length.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector(Count,Zeroes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector(+integer,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="zero-vector-like-2">
+<span id="regressor-common-0-zero-vector-like-2"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_vector_like/2</span></code></a><a class="headerlink" href="#zero-vector-like-2" title="Link to this heading"></a></h3>
+<p>Creates a zero-filled float vector with the same length as the reference list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector_like(Reference,Zeroes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector_like(+list,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

@@ -142,6 +142,10 @@ splits.
 forest regression using regression trees trained on bootstrap samples
 and random feature subsets.
 
+* ADDED: New `ridge_regression` library implementing ridge regression for
+continuous and mixed-feature datasets using batch gradient descent with
+L2 regularization.
+
 * ADDED: New `dimension_reduction_protocols` library with protocols and
 datasets for use in the implementation of machine learning dimension
 reduction algorithms.

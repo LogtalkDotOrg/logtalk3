@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-02,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
 		remarks is [
 			'Algorithm' - 'Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.',
@@ -43,15 +43,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, take/3
+		length/2, member/2, take/3
 	]).
 
 	:- uses(numberlist, [
 		chebyshev_distance/3, euclidean_distance/3, manhattan_distance/3
-	]).
-
-	:- uses(population, [
-		arithmetic_mean/2, variance/2
 	]).
 
 	:- uses(type, [
@@ -66,7 +62,7 @@
 		^^dataset_examples(Dataset, Examples),
 		^^check_examples(Dataset, Examples),
 		build_encoders(Attributes, Examples, Options, Encoders),
-		examples_to_rows(Examples, Encoders, Rows),
+		^^examples_to_rows(Examples, Encoders, Rows),
 		length(Examples, TrainingExampleCount),
 		build_diagnostics(Target, Encoders, TrainingExampleCount, Options, Diagnostics),
 		Regressor = knn_regressor(Encoders, Rows, Diagnostics).
@@ -74,7 +70,7 @@
 	predict(Regressor, Instance, Target) :-
 		Regressor =.. [_, Encoders, Rows, _Diagnostics],
 		^^regressor_options(Regressor, Options),
-		encode_instance(Encoders, Instance, Features),
+		^^encode_instance(Encoders, Instance, Features),
 		^^option(k(K), Options),
 		find_k_nearest(Features, Rows, K, Neighbors, Options),
 		predict_from_neighbors(Neighbors, Options, Target).
@@ -86,101 +82,11 @@
 	build_encoders([], _, _, []).
 	build_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders]) :-
 		(   Values == continuous ->
-			continuous_stats(Attribute, Examples, Options, Mean, Scale),
+			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
 		;   Encoder = categorical(Attribute, Values)
 		),
 		build_encoders(Rest, Examples, Options, Encoders).
-
-	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
-		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == true ->
-			known_attribute_values(Examples, Attribute, Values),
-			(   Values == [] ->
-				Mean = 0.0,
-				Scale = 1.0
-			;   arithmetic_mean(Values, Mean),
-				length(Values, Count),
-				(   Count > 1 ->
-					variance(Values, Variance)
-				;   Variance = 0.0
-				),
-				(   Variance > 0.0 ->
-					Scale is sqrt(Variance)
-				;   Scale = 1.0
-				)
-			)
-		;   Mean = 0.0,
-			Scale = 1.0
-		).
-
-	known_attribute_values([], _, []).
-	known_attribute_values([example(_Id, _Target, AttributeValues)| Examples], Attribute, Values) :-
-		(   memberchk(Attribute-Value, AttributeValues),
-			nonvar(Value) ->
-			Values = [Value| Rest]
-		;   Values = Rest
-		),
-		known_attribute_values(Examples, Attribute, Rest).
-
-	examples_to_rows([], _, []).
-	examples_to_rows([example(_Id, Target, AttributeValues)| Examples], Encoders, [Features-Target| Rows]) :-
-		encode_instance(Encoders, AttributeValues, Features),
-		examples_to_rows(Examples, Encoders, Rows).
-
-	encode_instance([], _, []).
-	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features]) :-
-		!,
-		(   memberchk(Attribute-Value, AttributeValues),
-			nonvar(Value) ->
-			normalize_continuous(Value, Mean, Scale, Feature),
-			Missing = 0.0
-		;   Feature = 0.0,
-			Missing = 1.0
-		),
-		encode_instance(Encoders, AttributeValues, Features).
-	encode_instance([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
-		(   memberchk(Attribute-Value, AttributeValues),
-			nonvar(Value) ->
-			check_categorical_value(Attribute, Values, Value),
-			one_hot_encode(Values, Value, Encoded)
-		;   missing_one_hot_encode(Values, Encoded)
-		),
-		encode_instance(Encoders, AttributeValues, RestFeatures),
-		append(Encoded, RestFeatures, Features).
-
-	normalize_continuous(Value, Mean, Scale, Feature) :-
-		(   number(Value) ->
-			true
-		;   type_error(number, Value)
-		),
-		Feature is (Value - Mean) / Scale.
-
-	check_categorical_value(Attribute, Values, Value) :-
-		(   member(Value, Values) ->
-			true
-		;   domain_error(attribute_value(Attribute, Values), Value)
-		).
-
-	one_hot_encode(Values, Value, Encoded) :-
-		one_hot_encode_(Values, Value, Encoded0),
-		append(Encoded0, [0.0], Encoded).
-
-	one_hot_encode_([], _, []).
-	one_hot_encode_([Category| Categories], Value, [Feature| Features]) :-
-		(   Value == Category ->
-			Feature = 1.0
-		;   Feature = 0.0
-		),
-		one_hot_encode_(Categories, Value, Features).
-
-	missing_one_hot_encode(Values, Encoded) :-
-		zero_vector_from_values(Values, Zeroes),
-		append(Zeroes, [1.0], Encoded).
-
-	zero_vector_from_values([], []).
-	zero_vector_from_values([_| Values], [0.0| Zeroes]) :-
-		zero_vector_from_values(Values, Zeroes).
 
 	find_k_nearest(Features, Rows, K, Neighbors, Options) :-
 		findall(Distance-Target, (member(Row, Rows), row_distance(Features, Row, Distance, Target, Options)), Distances),

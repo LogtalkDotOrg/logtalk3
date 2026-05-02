@@ -150,6 +150,12 @@
 	test(sample_regressor_learn_2_invalid_target, error(type_error(number, bad))) :-
 		sample_regressor::learn(invalid_target, _Regressor).
 
+	test(sample_regressor_learn_2_undeclared_attribute, error(domain_error(declared_attribute, typo))) :-
+		sample_regressor::learn(undeclared_attribute_example, _Regressor).
+
+	test(sample_regressor_learn_2_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
+		sample_regressor::learn(duplicate_attribute_example, _Regressor).
+
 	header_lines(File, Lines) :-
 		open(File, read, Stream),
 		read_header_lines(Stream, Lines),

@@ -53,8 +53,8 @@ multiple areas):
     ``modified_z_score``, and ``z_score``.
   - Regression: ``regression_protocols``,
     ``gradient_boosting_regression``, ``knn_regression``,
-    ``linear_regression``, ``random_forest_regression``, and
-    ``regression_tree``.
+    ``linear_regression``, ``random_forest_regression``,
+    ``regression_tree``, and ``ridge_regression``.
   - Ranking: ``ranking_protocols``, ``borda``, ``bradley_terry``,
     ``colley``, ``copeland``, ``elo``, ``glicko2``,
     ``glicko2_periodic``, ``hodge_rank``, ``kemeny_young``, ``massey``,

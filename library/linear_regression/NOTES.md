@@ -61,7 +61,7 @@ Features
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
 - **Regularization**: Supports optional L2 regularization.
-- **Diagnostics Metadata**: Learned regressors record model name, target, training example count, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
+- **Diagnostics Metadata**: Learned regressors record model name, target, training example count, optimization stop reason, completed iterations, final parameter delta, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for representative regression datasets.
 
@@ -88,6 +88,9 @@ The `diagnostics/2` predicate returns a list of metadata terms with the form:
 		target(Target),
 		training_example_count(TrainingExampleCount),
 		options(Options),
+		convergence(Status),
+		iterations(Iterations),
+		final_delta(FinalDelta),
 		encoded_feature_count(FeatureCount)
 	]
 
@@ -97,6 +100,9 @@ Where:
 - `target(Target)` stores the target attribute name declared by the training dataset.
 - `training_example_count(TrainingExampleCount)` stores the number of examples used during training.
 - `options(Options)` stores the effective learning options after merging the user options with the library defaults.
+- `convergence(Status)` records the optimization stop condition. The current values are `tolerance` when the largest parameter update is within the configured tolerance and `maximum_iterations_exhausted` when training stops because the iteration cap is reached.
+- `iterations(Iterations)` stores the number of batch gradient-descent updates completed during training.
+- `final_delta(FinalDelta)` stores the maximum absolute parameter change from the final optimization step.
 - `encoded_feature_count(FeatureCount)` stores the number of numeric features induced by the encoder list, including missing-value indicator features.
 
 Use the `regression_protocols` `diagnostic/2` and `regressor_options/2` helper predicates when you only need a single metadata term or the effective options.

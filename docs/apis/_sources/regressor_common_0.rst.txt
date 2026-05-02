@@ -15,7 +15,7 @@ Shared predicates for regressor learning defaults, diagnostics, validation, data
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-01
+| **Date:** 2026-05-02
 
 | **Compilation flags:**
 |    ``static``
@@ -28,6 +28,8 @@ Shared predicates for regressor learning defaults, diagnostics, validation, data
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`population <population/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -149,7 +151,7 @@ Collects the dataset examples as `example(Id, TargetValue, AttributeValues)` ter
 ``check_examples/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Validates that the collected examples list is non-empty and only contains numeric targets.
+Validates that the collected examples list is non-empty, only contains numeric targets, and only uses declared attributes without duplicate bindings.
 
 | **Compilation flags:**
 |    ``static``
@@ -157,7 +159,17 @@ Validates that the collected examples list is non-empty and only contains numeri
 | **Template:**
 |    ``check_examples(Dataset,Examples)``
 | **Mode and number of proofs:**
-|    ``check_examples(+object_identifier,+list)`` - ``one``
+|    ``check_examples(+object_identifier,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Examples is the empty list:
+|        ``domain_error(non_empty_dataset,Dataset)``
+|    An example target is not numeric:
+|        ``type_error(number,Target)``
+|    An example repeats a declared attribute binding:
+|        ``domain_error(attribute_occurrences,Attribute)``
+|    An example contains an undeclared attribute binding:
+|        ``domain_error(declared_attribute,Attribute)``
 
 
 ------------
@@ -333,6 +345,25 @@ True when diagnostics contains a count term with the given functor and integer v
 
 ------------
 
+.. index:: valid_linear_model_diagnostics/1
+.. _regressor_common/0::valid_linear_model_diagnostics/1:
+
+``valid_linear_model_diagnostics/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when diagnostics contains structurally valid linear-model optimization metadata terms for convergence, completed iterations, and final parameter delta.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_linear_model_diagnostics(Diagnostics)``
+| **Mode and number of proofs:**
+|    ``valid_linear_model_diagnostics(+list(compound))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: valid_encoded_rows/2
 .. _regressor_common/0::valid_encoded_rows/2:
 
@@ -367,6 +398,82 @@ Counts the number of numeric features induced by a list of continuous and catego
 |    ``encoded_feature_count(Encoders,FeatureCount)``
 | **Mode and number of proofs:**
 |    ``encoded_feature_count(+list(compound),-integer)`` - ``one``
+
+
+------------
+
+.. index:: continuous_stats/5
+.. _regressor_common/0::continuous_stats/5:
+
+``continuous_stats/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the mean and scaling factor used to encode a continuous attribute from the training examples according to the effective feature scaling option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``continuous_stats(Attribute,Examples,Options,Mean,Scale)``
+| **Mode and number of proofs:**
+|    ``continuous_stats(+atom,+list(compound),+list(compound),-float,-positive_float)`` - ``one``
+
+
+------------
+
+.. index:: examples_to_rows/3
+.. _regressor_common/0::examples_to_rows/3:
+
+``examples_to_rows/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes dataset examples as numeric feature-vector and target pairs using a list of encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``examples_to_rows(Examples,Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``examples_to_rows(+list(compound),+list(compound),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: encode_instance/3
+.. _regressor_common/0::encode_instance/3:
+
+``encode_instance/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Validates and encodes an attribute-value list as a numeric feature vector using a list of continuous and categorical encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_instance(Encoders,AttributeValues,Features)``
+| **Mode and number of proofs:**
+|    ``encode_instance(+list(compound),+list(pair),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: fit_linear_model/7
+.. _regressor_common/0::fit_linear_model/7:
+
+``fit_linear_model/7``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Builds linear-model encoders from the training dataset, encodes the examples, fits a bias plus weight vector using batch gradient descent and an L2 regularization option, and returns optimization diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit_linear_model(Dataset,Options,Encoders,TrainingExampleCount,Bias,Weights,TrainingDiagnostics)``
+| **Mode and number of proofs:**
+|    ``fit_linear_model(+object_identifier,+list(compound),-list(compound),-integer,-float,-list(float),-list(compound))`` - ``one``
 
 
 ------------
@@ -412,7 +519,442 @@ True when a regression tree only contains valid ``leaf/1`` and ``node/5`` terms 
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: known_attribute_values/3
+.. _regressor_common/0::known_attribute_values/3:
+
+``known_attribute_values/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the known numeric values for a continuous attribute from the training examples, skipping omitted and variable values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``known_attribute_values(Examples,Attribute,Values)``
+| **Mode and number of proofs:**
+|    ``known_attribute_values(+list(compound),+atom,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: check_attribute_bindings/2
+.. _regressor_common/0::check_attribute_bindings/2:
+
+``check_attribute_bindings/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that an attribute-value list contains only declared attributes and does not repeat any declared attribute; omitted declared attributes are allowed and treated as missing values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_attribute_bindings(AttributeNames,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``check_attribute_bindings(+list(atom),+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_declared_attribute_bindings/2
+.. _regressor_common/0::check_declared_attribute_bindings/2:
+
+``check_declared_attribute_bindings/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that no declared attribute appears more than once in an attribute-value list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_declared_attribute_bindings(AttributeNames,AttributeValues)``
+| **Mode and number of proofs:**
+|    ``check_declared_attribute_bindings(+list(atom),+list(pair))`` - ``one``
+
+
+------------
+
+.. index:: check_undeclared_attribute_bindings/2
+.. _regressor_common/0::check_undeclared_attribute_bindings/2:
+
+``check_undeclared_attribute_bindings/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that every attribute occurring in an attribute-value list is declared.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_undeclared_attribute_bindings(AttributeValues,AttributeNames)``
+| **Mode and number of proofs:**
+|    ``check_undeclared_attribute_bindings(+list(pair),+list(atom))`` - ``one``
+
+
+------------
+
+.. index:: attribute_occurrences/4
+.. _regressor_common/0::attribute_occurrences/4:
+
+``attribute_occurrences/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of times an attribute occurs in an attribute-value list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attribute_occurrences(AttributeValues,Attribute,Count0,Count)``
+| **Mode and number of proofs:**
+|    ``attribute_occurrences(+list(pair),+atom,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: declared_attribute_names/2
+.. _regressor_common/0::declared_attribute_names/2:
+
+``declared_attribute_names/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the declared attribute names from dataset attribute declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``declared_attribute_names(Attributes,AttributeNames)``
+| **Mode and number of proofs:**
+|    ``declared_attribute_names(+list(pair),-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: encoder_attribute_names/2
+.. _regressor_common/0::encoder_attribute_names/2:
+
+``encoder_attribute_names/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the declared attribute names from a list of regression encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encoder_attribute_names(Encoders,AttributeNames)``
+| **Mode and number of proofs:**
+|    ``encoder_attribute_names(+list(compound),-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: encode_instance_checked/3
+.. _regressor_common/0::encode_instance_checked/3:
+
+``encode_instance_checked/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an already validated attribute-value list as a numeric feature vector using a list of continuous and categorical encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_instance_checked(Encoders,AttributeValues,Features)``
+| **Mode and number of proofs:**
+|    ``encode_instance_checked(+list(compound),+list(pair),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: valid_linear_model_convergence/1
+.. _regressor_common/0::valid_linear_model_convergence/1:
+
+``valid_linear_model_convergence/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a linear-model optimization stop reason is recognized.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_linear_model_convergence(Convergence)``
+| **Mode and number of proofs:**
+|    ``valid_linear_model_convergence(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalize_continuous/4
+.. _regressor_common/0::normalize_continuous/4:
+
+``normalize_continuous/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a continuous value using a stored mean and scale.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_continuous(Value,Mean,Scale,Feature)``
+| **Mode and number of proofs:**
+|    ``normalize_continuous(+number,+float,+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: check_categorical_value/3
+.. _regressor_common/0::check_categorical_value/3:
+
+``check_categorical_value/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates that a categorical value is declared for an attribute.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_categorical_value(Attribute,Values,Value)``
+| **Mode and number of proofs:**
+|    ``check_categorical_value(+atom,+list,+nonvar)`` - ``one``
+
+
+------------
+
+.. index:: one_hot_encode/3
+.. _regressor_common/0::one_hot_encode/3:
+
+``one_hot_encode/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Encodes a declared categorical value using one-hot encoding plus a trailing missing-value indicator feature set to zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``one_hot_encode(Values,Value,Encoded)``
+| **Mode and number of proofs:**
+|    ``one_hot_encode(+list,+nonvar,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: missing_one_hot_encode/2
+.. _regressor_common/0::missing_one_hot_encode/2:
+
+``missing_one_hot_encode/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a missing categorical value as zeroes plus a trailing missing-value indicator feature set to one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``missing_one_hot_encode(Values,Encoded)``
+| **Mode and number of proofs:**
+|    ``missing_one_hot_encode(+list,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: zero_vector_from_values/2
+.. _regressor_common/0::zero_vector_from_values/2:
+
+``zero_vector_from_values/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a zero vector with one element per declared categorical value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_vector_from_values(Values,Zeroes)``
+| **Mode and number of proofs:**
+|    ``zero_vector_from_values(+list,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: build_linear_encoders/4
+.. _regressor_common/0::build_linear_encoders/4:
+
+``build_linear_encoders/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the encoder list used by linear models from dataset attribute declarations, training examples, and the effective feature scaling option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_linear_encoders(Attributes,Examples,Options,Encoders)``
+| **Mode and number of proofs:**
+|    ``build_linear_encoders(+list(pair),+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: train_linear_model/6
+.. _regressor_common/0::train_linear_model/6:
+
+``train_linear_model/6``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Fits a linear model bias and weight vector from encoded rows using batch gradient descent and returns optimization diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``train_linear_model(Rows,FeatureCount,Options,Bias,Weights,TrainingDiagnostics)``
+| **Mode and number of proofs:**
+|    ``train_linear_model(+list(pair),+integer,+list(compound),-float,-list(float),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: optimize_linear_model/11
+.. _regressor_common/0::optimize_linear_model/11:
+
+``optimize_linear_model/11``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Runs iterative batch gradient-descent updates until the tolerance or maximum iteration limit is reached and reports the stop reason, completed iterations, and final maximum parameter delta.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``optimize_linear_model(Rows,Options,Iteration,Bias0,Weights0,PreviousDelta,Bias,Weights,Convergence,Iterations,FinalDelta)``
+| **Mode and number of proofs:**
+|    ``optimize_linear_model(+list(pair),+list(compound),+integer,+float,+list(float),+float,-float,-list(float),-atom,-integer,-float)`` - ``one``
+
+
+------------
+
+.. index:: update_linear_parameters/7
+.. _regressor_common/0::update_linear_parameters/7:
+
+``update_linear_parameters/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Performs one batch gradient-descent parameter update step and returns the maximum absolute parameter change.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_linear_parameters(Rows,Bias0,Weights0,Options,Bias1,Weights1,MaxDelta)``
+| **Mode and number of proofs:**
+|    ``update_linear_parameters(+list(pair),+float,+list(float),+list(compound),-float,-list(float),-float)`` - ``one``
+
+
+------------
+
+.. index:: accumulate_linear_gradients/7
+.. _regressor_common/0::accumulate_linear_gradients/7:
+
+``accumulate_linear_gradients/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accumulates the batch bias and weight gradients over a list of encoded training rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accumulate_linear_gradients(Rows,Bias,Weights,GradientBias0,GradientWeights0,GradientBias,GradientWeights)``
+| **Mode and number of proofs:**
+|    ``accumulate_linear_gradients(+list(pair),+float,+list(float),+float,+list(float),-float,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: add_scaled_vector/4
+.. _regressor_common/0::add_scaled_vector/4:
+
+``add_scaled_vector/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds a scaled feature vector to an accumulated gradient vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_scaled_vector(Features,Scale,Gradients0,Gradients)``
+| **Mode and number of proofs:**
+|    ``add_scaled_vector(+list(float),+number,+list(float),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: update_linear_weights/8
+.. _regressor_common/0::update_linear_weights/8:
+
+``update_linear_weights/8``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Updates the weight vector using the mean gradients and L2 regularization term while tracking the maximum absolute weight change.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_linear_weights(Weights0,Gradients,Scale,Regularization,LearningRate,Weights1,MaxDelta0,MaxDelta)``
+| **Mode and number of proofs:**
+|    ``update_linear_weights(+list(float),+list(float),+float,+float,+float,-list(float),+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: zero_vector/2
+.. _regressor_common/0::zero_vector/2:
+
+``zero_vector/2``
+^^^^^^^^^^^^^^^^^
+
+Creates a zero-filled float vector with the requested length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_vector(Count,Zeroes)``
+| **Mode and number of proofs:**
+|    ``zero_vector(+integer,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: zero_vector_like/2
+.. _regressor_common/0::zero_vector_like/2:
+
+``zero_vector_like/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a zero-filled float vector with the same length as the reference list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_vector_like(Reference,Zeroes)``
+| **Mode and number of proofs:**
+|    ``zero_vector_like(+list,-list(float))`` - ``one``
+
+
+------------
 
 Operators
 ---------

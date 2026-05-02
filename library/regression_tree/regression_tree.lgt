@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, nth1/3
+		append/3, length/2, member/2, nth1/3
 	]).
 
 	:- uses(population, [
@@ -64,7 +64,7 @@
 		^^dataset_examples(Dataset, Examples),
 		^^check_examples(Dataset, Examples),
 		build_encoders(Attributes, Examples, Options, Encoders, FeatureLabels),
-		examples_to_rows(Examples, Encoders, Rows),
+		^^examples_to_rows(Examples, Encoders, Rows),
 		build_tree(Rows, FeatureLabels, 0, Options, Tree),
 		length(Examples, TrainingExampleCount),
 		build_diagnostics(Target, FeatureLabels, TrainingExampleCount, Options, Diagnostics),
@@ -72,7 +72,7 @@
 
 	predict(Regressor, Instance, Target) :-
 		Regressor =.. [_, Encoders, _FeatureLabels, Tree, _Diagnostics],
-		encode_instance(Encoders, Instance, Features),
+		^^encode_instance(Encoders, Instance, Features),
 		predict_tree(Tree, Features, Target).
 
 	build_diagnostics(Target, FeatureLabels, TrainingExampleCount, Options, Diagnostics) :-
@@ -82,7 +82,7 @@
 	build_encoders([], _, _, [], []).
 	build_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders], FeatureLabels) :-
 		(   Values == continuous ->
-			continuous_stats(Attribute, Examples, Options, Mean, Scale),
+			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale),
 			AttributeLabels = [feature(Attribute, value), feature(Attribute, missing)]
 		;   Encoder = categorical(Attribute, Values),
@@ -91,37 +91,6 @@
 		append(AttributeLabels, RestLabels, FeatureLabels),
 		build_encoders(Rest, Examples, Options, Encoders, RestLabels).
 
-	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
-		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == true ->
-			known_attribute_values(Examples, Attribute, Values),
-			(   Values == [] ->
-				Mean = 0.0,
-				Scale = 1.0
-			;   arithmetic_mean(Values, Mean),
-				length(Values, Count),
-				(   Count > 1 ->
-					variance(Values, Variance)
-				;   Variance = 0.0
-				),
-				(   Variance > 0.0 ->
-					Scale is sqrt(Variance)
-				;   Scale = 1.0
-				)
-			)
-		;   Mean = 0.0,
-			Scale = 1.0
-		).
-
-	known_attribute_values([], _, []).
-	known_attribute_values([example(_Id, _Target, AttributeValues)| Examples], Attribute, Values) :-
-		(   memberchk(Attribute-Value, AttributeValues),
-			nonvar(Value) ->
-			Values = [Value| Rest]
-		;   Values = Rest
-		),
-		known_attribute_values(Examples, Attribute, Rest).
-
 	categorical_feature_labels(Attribute, Values, Labels) :-
 		categorical_value_labels(Values, Attribute, ValueLabels),
 		append(ValueLabels, [feature(Attribute, missing)], Labels).
@@ -129,65 +98,6 @@
 	categorical_value_labels([], _Attribute, []).
 	categorical_value_labels([Value| Values], Attribute, [feature(Attribute, category(Value))| Labels]) :-
 		categorical_value_labels(Values, Attribute, Labels).
-
-	examples_to_rows([], _, []).
-	examples_to_rows([example(_Id, Target, AttributeValues)| Examples], Encoders, [Features-Target| Rows]) :-
-		encode_instance(Encoders, AttributeValues, Features),
-		examples_to_rows(Examples, Encoders, Rows).
-
-	encode_instance([], _, []).
-	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features]) :-
-		!,
-		(   memberchk(Attribute-Value, AttributeValues),
-			nonvar(Value) ->
-			normalize_continuous(Value, Mean, Scale, Feature),
-			Missing = 0.0
-		;   Feature = 0.0,
-			Missing = 1.0
-		),
-		encode_instance(Encoders, AttributeValues, Features).
-	encode_instance([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
-		(   memberchk(Attribute-Value, AttributeValues),
-			nonvar(Value) ->
-			check_categorical_value(Attribute, Values, Value),
-			one_hot_encode(Values, Value, Encoded)
-		;   missing_one_hot_encode(Values, Encoded)
-		),
-		append(Encoded, RestFeatures, Features),
-		encode_instance(Encoders, AttributeValues, RestFeatures).
-
-	normalize_continuous(Value, Mean, Scale, Feature) :-
-		(   number(Value) ->
-			true
-		;   type_error(number, Value)
-		),
-		Feature is (Value - Mean) / Scale.
-
-	check_categorical_value(Attribute, Values, Value) :-
-		(   member(Value, Values) ->
-			true
-		;   domain_error(attribute_value(Attribute, Values), Value)
-		).
-
-	one_hot_encode(Values, Value, Encoded) :-
-		one_hot_encode_(Values, Value, Encoded0),
-		append(Encoded0, [0.0], Encoded).
-
-	one_hot_encode_([], _, []).
-	one_hot_encode_([Category| Categories], Value, [Feature| Features]) :-
-		(   Value == Category ->
-			Feature = 1.0
-		;   Feature = 0.0
-		),
-		one_hot_encode_(Categories, Value, Features).
-
-	missing_one_hot_encode(Values, Encoded) :-
-		zero_vector_from_values(Values, Zeroes),
-		append(Zeroes, [1.0], Encoded).
-
-	zero_vector_from_values([], []).
-	zero_vector_from_values([_| Values], [0.0| Zeroes]) :-
-		zero_vector_from_values(Values, Zeroes).
 
 	build_tree(Rows, FeatureLabels, Depth, Options, Tree) :-
 		mean_target(Rows, Mean),
@@ -384,7 +294,7 @@
 		(   Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			^^valid_feature_labels(FeatureLabels),
-			encoded_feature_count(Encoders, FeatureCount),
+			^^encoded_feature_count(Encoders, FeatureCount),
 			length(FeatureLabels, FeatureCount),
 			^^valid_regression_tree(Tree, FeatureCount),
 			^^valid_regressor_metadata(regression_tree, Diagnostics),
@@ -423,16 +333,6 @@
 			true
 		;   format('~*|', [Indent])
 		).
-
-	encoded_feature_count([], 0).
-	encoded_feature_count([continuous(_, _, _)| Encoders], Count) :-
-		!,
-		encoded_feature_count(Encoders, RestCount),
-		Count is RestCount + 2.
-	encoded_feature_count([categorical(_, Values)| Encoders], Count) :-
-		length(Values, ValueCount),
-		encoded_feature_count(Encoders, RestCount),
-		Count is RestCount + ValueCount + 1.
 
 	default_option(maximum_depth(10)).
 	default_option(minimum_samples_leaf(1)).

@@ -15,7 +15,7 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-01
+| **Date:** 2026-05-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,7 +27,6 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
-|    :ref:`population <population/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -67,5 +66,5 @@ Operators
 
 .. seealso::
 
-   :ref:`knn_regression <knn_regression/0>`, :ref:`regression_tree <regression_tree/0>`, :ref:`random_forest_regression <random_forest_regression/0>`, :ref:`gradient_boosting_regression <gradient_boosting_regression/0>`
+   :ref:`ridge_regression <ridge_regression/0>`, :ref:`knn_regression <knn_regression/0>`, :ref:`regression_tree <regression_tree/0>`, :ref:`random_forest_regression <random_forest_regression/0>`, :ref:`gradient_boosting_regression <gradient_boosting_regression/0>`
 

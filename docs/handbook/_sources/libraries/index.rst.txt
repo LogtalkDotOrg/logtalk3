@@ -174,6 +174,7 @@ directory in the ``NOTES.md`` file.
    regression_protocols
    regression_tree
    regularized_bradley_terry
+   ridge_regression
    schulze
    sequential_pattern_mining_protocols
    sets

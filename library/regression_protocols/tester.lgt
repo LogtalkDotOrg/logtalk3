@@ -24,6 +24,7 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
+	logtalk_load(statistics(loader)),
 	logtalk_load([
 		regressor_protocol,
 		regressor_common,
@@ -33,12 +34,14 @@
 		debug(on)
 	]),
 	logtalk_load([
+		'test_datasets/duplicate_attribute_example',
 		'test_datasets/intercept_only',
 		'test_datasets/invalid_target',
 		'test_datasets/mixed_signal',
 		'test_datasets/plane',
 		'test_datasets/simple_line',
-		'test_datasets/step_signal'
+		'test_datasets/step_signal',
+		'test_datasets/undeclared_attribute_example'
 	], [
 		source_data(on),
 		debug(on)

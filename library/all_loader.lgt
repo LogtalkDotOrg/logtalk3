@@ -169,6 +169,7 @@
 		gradient_boosting_regression(loader),
 		knn_regression(loader),
 		linear_regression(loader),
+		ridge_regression(loader),
 		random_forest_regression(loader),
 		regression_tree(loader),
 		pattern_mining_protocols(loader),
