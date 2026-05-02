@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-02,
 		comment is 'Unit tests for the "gradient_boosting_regression" library.'
 	]).
 
@@ -82,6 +82,10 @@
 	test(gradient_boosting_regression_predict_3_mixed_signal, deterministic(Prediction =~= 175.0)) :-
 		gradient_boosting_regression::learn(mixed_signal, Regressor, [number_of_estimators(3), learning_rate(1.0), maximum_depth(4), feature_scaling(false)]),
 		gradient_boosting_regression::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
+
+	test(gradient_boosting_regression_predict_3_sparse_mixed_signal_missing_attributes, deterministic(Prediction =~= 200.0)) :-
+		gradient_boosting_regression::learn(sparse_mixed_signal, Regressor, [number_of_estimators(3), learning_rate(1.0), maximum_depth(2), feature_scaling(false)]),
+		gradient_boosting_regression::predict(Regressor, [age-20], Prediction).
 
 	test(gradient_boosting_regression_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),

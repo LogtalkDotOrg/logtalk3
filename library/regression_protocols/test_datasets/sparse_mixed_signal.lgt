@@ -19,24 +19,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(regression_protocols(loader)),
-	logtalk_load(regression_tree(loader)),
-	logtalk_load([
-		regression_protocols('test_datasets/step_signal'),
-		regression_protocols('test_datasets/mixed_signal'),
-		regression_protocols('test_datasets/sparse_mixed_signal'),
-		regression_protocols('test_datasets/intercept_only'),
-		regression_protocols('test_datasets/invalid_target')
-	], [source_data(on), debug(on)]),
-	logtalk_load(random_forest_regression, [source_data(on), debug(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(sparse_mixed_signal,
+	implements(regression_dataset_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-02,
+		comment is 'Mixed regression dataset with omitted attribute-value pairs used to exercise missing-value handling during training and prediction.'
+	]).
+
+	attribute_values(age, continuous).
+	attribute_values(student, [yes, no]).
+	attribute_values(plan, [basic, premium]).
+
+	target(score).
+
+	example(1, 100, [age-10, student-no]).
+	example(2, 100, [age-10, plan-basic]).
+	example(3, 100, [age-10, student-yes, plan-premium]).
+	example(4, 100, [age-10]).
+	example(5, 200, [age-20, student-no]).
+	example(6, 200, [age-20, plan-basic]).
+	example(7, 200, [age-20, student-yes, plan-premium]).
+	example(8, 200, [age-20]).
+
+:- end_object.

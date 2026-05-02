@@ -30,6 +30,7 @@
 		regression_protocols('test_datasets/simple_line'),
 		regression_protocols('test_datasets/plane'),
 		regression_protocols('test_datasets/mixed_signal'),
+		regression_protocols('test_datasets/sparse_mixed_signal'),
 		regression_protocols('test_datasets/intercept_only'),
 		regression_protocols('test_datasets/invalid_target')
 	], [

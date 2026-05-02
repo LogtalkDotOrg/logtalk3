@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-02,
 		comment is 'Regression tree regressor supporting continuous and mixed-feature datasets using recursive variance-reduction splits.',
 		remarks is [
 			'Algorithm' - 'Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.',
 			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
-			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
+			'Missing values' - 'Missing feature values represented using anonymous variables or omitted attribute-value pairs are encoded using explicit missing-value indicator features during both training and prediction.',
 			'Regressor representation' - 'The learned regressor is represented by default as ``regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics)`` where ``Tree`` is built from ``leaf(Prediction)`` and ``node(Index, Threshold, FallbackPrediction, Left, Right)`` terms and ``Diagnostics`` stores training metadata including the effective options.'
 		],
 		see_also is [linear_regression, knn_regression, random_forest_regression, gradient_boosting_regression]

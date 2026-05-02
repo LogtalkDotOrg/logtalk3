@@ -211,6 +211,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#regressor-representation">Regressor representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics-syntax">Diagnostics syntax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
@@ -365,6 +366,39 @@ datasets.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Functor(Trees,</span> <span class="pre">Diagnostics)</span></code></p></li>
 </ul>
+</section>
+<section id="diagnostics-syntax">
+<h2>Diagnostics syntax<a class="headerlink" href="#diagnostics-syntax" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns a list of metadata terms with
+the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[
+    model(random_forest_regression),
+    target(<span class="nv">Target</span>),
+    training_example_count(<span class="nv">TrainingExampleCount</span>),
+    options(<span class="nv">Options</span>),
+    attribute_count(<span class="nv">AttributeCount</span>),
+    tree_count(<span class="nv">TreeCount</span>)
+]
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model(random_forest_regression)</span></code> identifies the learning algorithm
+that produced the regressor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target(Target)</span></code> stores the target attribute name declared by the
+training dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training_example_count(TrainingExampleCount)</span></code> stores the number of
+examples used during training.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code> stores the effective learning options after
+merging the user options with the library defaults.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_count(AttributeCount)</span></code> stores the number of dataset
+attributes available to the ensemble before split-level subsampling.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tree_count(TreeCount)</span></code> stores the number of trained regression
+trees in the ensemble.</p></li>
+</ul>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> <code class="docutils literal notranslate"><span class="pre">diagnostic/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">regressor_options/2</span></code> helper predicates when you only need a single
+metadata term or the effective options.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>

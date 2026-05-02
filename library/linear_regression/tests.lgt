@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-02,
 		comment is 'Unit tests for the "linear_regression" library.'
 	]).
 
@@ -67,6 +67,10 @@
 	test(linear_regression_predict_3_mixed_signal, deterministic(Prediction =~= 170.0)) :-
 		linear_regression::learn(mixed_signal, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
 		linear_regression::predict(Regressor, [age-15, student-yes, plan-premium], Prediction).
+
+	test(linear_regression_predict_3_sparse_mixed_signal_missing_attributes, true(Prediction > 150.0)) :-
+		linear_regression::learn(sparse_mixed_signal, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
+		linear_regression::predict(Regressor, [age-20], Prediction).
 
 	test(linear_regression_predict_3_intercept_only, deterministic(Prediction =~= 7.0)) :-
 		linear_regression::learn(intercept_only, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),

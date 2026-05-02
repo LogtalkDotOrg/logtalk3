@@ -78,6 +78,31 @@ The exported predicate clauses therefore use the shape:
 - `Functor(InitialPrediction, WeightedTrees, Diagnostics)`
 
 
+Diagnostics syntax
+------------------
+
+The `diagnostics/2` predicate returns a list of metadata terms with the form:
+
+	[
+		model(gradient_boosting_regression),
+		target(Target),
+		training_example_count(TrainingExampleCount),
+		options(Options),
+		initial_prediction(InitialPrediction),
+		stage_count(StageCount)
+	]
+
+Where:
+
+- `model(gradient_boosting_regression)` identifies the learning algorithm that produced the regressor.
+- `target(Target)` stores the target attribute name declared by the training dataset.
+- `training_example_count(TrainingExampleCount)` stores the number of examples used during training.
+- `options(Options)` stores the effective learning options after merging the user options with the library defaults.
+- `initial_prediction(InitialPrediction)` stores the constant prediction used to initialize the additive model before fitting any trees.
+- `stage_count(StageCount)` stores the number of boosting stages that were actually fitted.
+
+Use the `regression_protocols` `diagnostic/2` and `regressor_options/2` helper predicates when you only need a single metadata term or the effective options.
+
 Options
 -------
 

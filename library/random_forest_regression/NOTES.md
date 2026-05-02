@@ -79,6 +79,31 @@ The exported predicate clauses therefore use the shape:
 - `Functor(Trees, Diagnostics)`
 
 
+Diagnostics syntax
+------------------
+
+The `diagnostics/2` predicate returns a list of metadata terms with the form:
+
+	[
+		model(random_forest_regression),
+		target(Target),
+		training_example_count(TrainingExampleCount),
+		options(Options),
+		attribute_count(AttributeCount),
+		tree_count(TreeCount)
+	]
+
+Where:
+
+- `model(random_forest_regression)` identifies the learning algorithm that produced the regressor.
+- `target(Target)` stores the target attribute name declared by the training dataset.
+- `training_example_count(TrainingExampleCount)` stores the number of examples used during training.
+- `options(Options)` stores the effective learning options after merging the user options with the library defaults.
+- `attribute_count(AttributeCount)` stores the number of dataset attributes available to the ensemble before split-level subsampling.
+- `tree_count(TreeCount)` stores the number of trained regression trees in the ensemble.
+
+Use the `regression_protocols` `diagnostic/2` and `regressor_options/2` helper predicates when you only need a single metadata term or the effective options.
+
 Options
 -------
 

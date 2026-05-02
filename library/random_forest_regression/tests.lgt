@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-02,
 		comment is 'Unit tests for the "random_forest_regression" library.'
 	]).
 
@@ -89,6 +89,10 @@
 	test(random_forest_regression_predict_3_step_signal_right_band, true(Prediction > 15.0)) :-
 		random_forest_regression::learn(step_signal, Regressor, [number_of_trees(11), maximum_features_per_split(1), minimum_samples_leaf(2)]),
 		random_forest_regression::predict(Regressor, [x-8.5], Prediction).
+
+	test(random_forest_regression_predict_3_sparse_mixed_signal_missing_attributes, true(Prediction > 150.0)) :-
+		random_forest_regression::learn(sparse_mixed_signal, Regressor, [number_of_trees(9), maximum_features_per_split(2), minimum_samples_leaf(2), feature_scaling(false), random_seed(29)]),
+		random_forest_regression::predict(Regressor, [age-20], Prediction).
 
 	test(random_forest_regression_export_to_clauses_4, deterministic(Prediction =~= 7.0)) :-
 		random_forest_regression::learn(intercept_only, Regressor, [number_of_trees(3)]),

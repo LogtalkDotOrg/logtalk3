@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-02,
 		comment is 'Unit tests for the "regression_tree" library.'
 	]).
 
@@ -71,6 +71,10 @@
 	test(regression_tree_predict_3_mixed_signal, deterministic(Prediction =~= 175.0)) :-
 		regression_tree::learn(mixed_signal, Regressor, [feature_scaling(false)]),
 		regression_tree::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
+
+	test(regression_tree_predict_3_sparse_mixed_signal_missing_attributes, deterministic(Prediction =~= 200.0)) :-
+		regression_tree::learn(sparse_mixed_signal, Regressor, [feature_scaling(false)]),
+		regression_tree::predict(Regressor, [age-20], Prediction).
 
 	test(regression_tree_learn_3_default_maximum_features_per_split, deterministic(member(maximum_features_per_split(all), Options))) :-
 		regression_tree::learn(step_signal, Regressor),
