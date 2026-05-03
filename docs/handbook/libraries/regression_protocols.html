@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dimension_reduction_protocols.html"><code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="eclat.html"><code class="docutils literal notranslate"><span class="pre">eclat</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="elastic_net_regression.html"><code class="docutils literal notranslate"><span class="pre">elastic_net_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="elo.html"><code class="docutils literal notranslate"><span class="pre">elo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ewma.html"><code class="docutils literal notranslate"><span class="pre">ewma</span></code></a></li>
@@ -166,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="knn_regression.html"><code class="docutils literal notranslate"><span class="pre">knn_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="kprototypes.html"><code class="docutils literal notranslate"><span class="pre">kprototypes</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ksuid.html"><code class="docutils literal notranslate"><span class="pre">ksuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_regression.html"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a></li>
@@ -332,8 +334,15 @@ the <code class="docutils literal notranslate"><span class="pre">tester.lgt</spa
 <section id="test-datasets">
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory includes the following compact
-regression datasets:</p>
+regression datasets and validation fixtures:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicate_attribute_declaration.lgt</span></code>: invalid dataset fixture
+containing a duplicated attribute declaration in the dataset schema.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicate_attribute_example.lgt</span></code>: invalid dataset fixture
+containing a duplicated declared attribute binding in one example.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grouped_categorical_signal.lgt</span></code>: regression dataset with one
+relevant continuous attribute and one irrelevant categorical attribute
+for testing shrinkage of encoded categorical coefficients.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">intercept_only.lgt</span></code>: constant-target dataset for intercept-learning
 tests.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">invalid_target.lgt</span></code>: invalid dataset with a non-numeric target for
@@ -344,8 +353,19 @@ dataset.</p></li>
 <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">3x1</span> <span class="pre">-</span> <span class="pre">2x2</span> <span class="pre">+</span> <span class="pre">5</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simple_line.lgt</span></code>: single-feature regression dataset following the
 line <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">2x</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sparse_mixed_signal.lgt</span></code>: mixed regression dataset with omitted
+attribute-value pairs used to exercise missing-value handling during
+training and prediction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sparse_signal.lgt</span></code>: two-feature regression dataset where only the
+signal attribute contributes to the target and the noise attribute is
+orthogonal to it.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">step_signal.lgt</span></code>: piecewise-constant regression dataset for
 tree-based and neighborhood regressor testing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">undeclared_attribute_example.lgt</span></code>: invalid dataset fixture
+containing an undeclared attribute binding in one example.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wide_mixed_signal.lgt</span></code>: synthetic wide mixed regression dataset
+with many continuous and categorical predictors for non-trivial
+linear-model benchmarking.</p></li>
 </ul>
 </section>
 </section>

@@ -113,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#eclat"><span class="xref std std-ref">eclat</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#elastic-net-regression"><span class="xref std std-ref">elastic_net_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#elo"><span class="xref std std-ref">elo</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ewma"><span class="xref std std-ref">ewma</span></a></li>
@@ -170,6 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#knn-regression"><span class="xref std std-ref">knn_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#kprototypes"><span class="xref std std-ref">kprototypes</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ksuid"><span class="xref std std-ref">ksuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lasso-regression"><span class="xref std std-ref">lasso_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lda-projection"><span class="xref std std-ref">lda_projection</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
@@ -360,7 +362,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Algorithm: Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.</p></li>
-<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.</p></li>
+<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values.</p></li>
 <li><p>Missing values: Missing feature values represented using anonymous variables or omitted attribute-value pairs are encoded using explicit missing-value indicator features during both training and prediction.</p></li>
 <li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">regression_tree_regressor(Encoders,</span> <span class="pre">FeatureLabels,</span> <span class="pre">Tree,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Tree</span></code> is built from <code class="docutils literal notranslate"><span class="pre">leaf(Prediction)</span></code> and <code class="docutils literal notranslate"><span class="pre">node(Index,</span> <span class="pre">Threshold,</span> <span class="pre">FallbackPrediction,</span> <span class="pre">Left,</span> <span class="pre">Right)</span></code> terms and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options.</p></li>
 </ul>

@@ -75,6 +75,7 @@ logtalk_library_path(dif, library('dif/')).
 logtalk_library_path(dimension_reduction_protocols, library('dimension_reduction_protocols/')).
 logtalk_library_path(eclat, library('eclat/')).
 logtalk_library_path(edcg, library('edcg/')).
+logtalk_library_path(elastic_net_regression, library('elastic_net_regression/')).
 logtalk_library_path(elo, library('elo/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(ewma, library('ewma/')).
@@ -127,6 +128,7 @@ logtalk_library_path(knn_distance, library('knn_distance/')).
 logtalk_library_path(knn_regression, library('knn_regression/')).
 logtalk_library_path(kprototypes, library('kprototypes/')).
 logtalk_library_path(ksuid, library('ksuid/')).
+logtalk_library_path(lasso_regression, library('lasso_regression/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).
 logtalk_library_path(linda, library('linda/')).
 logtalk_library_path(linear_regression, library('linear_regression/')).

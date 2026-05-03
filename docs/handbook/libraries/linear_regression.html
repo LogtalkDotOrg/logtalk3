@@ -114,6 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dimension_reduction_protocols.html"><code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="eclat.html"><code class="docutils literal notranslate"><span class="pre">eclat</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="elastic_net_regression.html"><code class="docutils literal notranslate"><span class="pre">elastic_net_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="elo.html"><code class="docutils literal notranslate"><span class="pre">elo</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ewma.html"><code class="docutils literal notranslate"><span class="pre">ewma</span></code></a></li>
@@ -166,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="knn_regression.html"><code class="docutils literal notranslate"><span class="pre">knn_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="kprototypes.html"><code class="docutils literal notranslate"><span class="pre">kprototypes</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ksuid.html"><code class="docutils literal notranslate"><span class="pre">ksuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a><ul>
@@ -303,8 +305,8 @@
 <span id="library-linear-regression"></span><h1><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code><a class="headerlink" href="#linear-regression" title="Link to this heading"></a></h1>
 <p>Linear regression regressor supporting continuous and mixed-feature
 datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in
-the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns a linear model using
-batch gradient descent.</p>
+the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns a linear model using a
+direct ordinary least-squares solve.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -334,15 +336,17 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous and Mixed Features</strong>: Supports continuous attributes and
-categorical attributes encoded using one-hot vectors.</p></li>
+categorical attributes encoded using reference-level dummy coding.</p></li>
 <li><p><strong>Feature Scaling</strong>: Continuous attributes can be standardized using
 z-score scaling.</p></li>
 <li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
 using explicit missing-value indicator features.</p></li>
-<li><p><strong>Regularization</strong>: Supports optional L2 regularization.</p></li>
+<li><p><strong>Rank Handling</strong>: Encoded columns that are numerically dependent on
+the intercept or on earlier selected columns are dropped from the
+direct solve and assigned zero coefficients.</p></li>
 <li><p><strong>Diagnostics Metadata</strong>: Learned regressors record model name,
-target, training example count, optimization stop reason, completed
-iterations, final parameter delta, encoded feature count, and
+target, training example count, solver name, residual sum of squares,
+effective rank, active feature count, encoded feature count, and
 effective options, accessible using the shared regression diagnostics
 predicates.</p></li>
 <li><p><strong>Model Export</strong>: Learned regressors can be exported as predicate
@@ -372,9 +376,10 @@ the form:</p>
     target(<span class="nv">Target</span>),
     training_example_count(<span class="nv">TrainingExampleCount</span>),
     options(<span class="nv">Options</span>),
-    convergence(<span class="nv">Status</span>),
-    iterations(<span class="nv">Iterations</span>),
-    final_delta(<span class="nv">FinalDelta</span>),
+    solver(<span class="nv">Solver</span>),
+    residual_sum_of_squares(<span class="nv">ResidualSumOfSquares</span>),
+    effective_rank(<span class="nv">EffectiveRank</span>),
+    active_feature_count(<span class="nv">ActiveFeatureCount</span>),
     encoded_feature_count(<span class="nv">FeatureCount</span>)
 ]
 </pre></div>
@@ -389,14 +394,16 @@ training dataset.</p></li>
 examples used during training.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code> stores the effective learning options after
 merging the user options with the library defaults.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">convergence(Status)</span></code> records the optimization stop condition. The
-current values are <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> when the largest parameter update is
-within the configured tolerance and <code class="docutils literal notranslate"><span class="pre">maximum_iterations_exhausted</span></code>
-when training stops because the iteration cap is reached.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">iterations(Iterations)</span></code> stores the number of batch gradient-descent
-updates completed during training.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_delta(FinalDelta)</span></code> stores the maximum absolute parameter
-change from the final optimization step.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code> records the direct solver used for the
+least-squares fit. The current value is
+<code class="docutils literal notranslate"><span class="pre">modified_gram_schmidt_column_pivoting</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">residual_sum_of_squares(ResidualSumOfSquares)</span></code> stores the training
+residual sum of squares for the fitted regressor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effective_rank(EffectiveRank)</span></code> stores the number of selected
+independent columns in the direct solve, including the intercept.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">active_feature_count(ActiveFeatureCount)</span></code> stores the number of
+encoded feature columns retained in the direct solve after dropping
+numerically dependent columns.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">encoded_feature_count(FeatureCount)</span></code> stores the number of numeric
 features induced by the encoder list, including missing-value
 indicator features.</p></li>
@@ -409,20 +416,6 @@ metadata term or the effective options.</p>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate accepts the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">learning_rate/1</span></code>: Step size used by batch gradient descent when
-updating the bias and weights. Larger values speed up training but can
-overshoot; smaller values are more conservative. The default is
-<code class="docutils literal notranslate"><span class="pre">0.05</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Maximum number of gradient-descent
-iterations to run before stopping even if the tolerance criterion has
-not been met. The default is <code class="docutils literal notranslate"><span class="pre">2000</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Convergence threshold for the maximum parameter
-update. Training stops early when the largest absolute change in the
-bias or any weight is at or below this value. The default is
-<code class="docutils literal notranslate"><span class="pre">1.0e-7</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">l2_regularization/1</span></code>: L2 penalty coefficient applied to the weight
-vector during optimization. Higher values increase shrinkage and can
-reduce overfitting. The default is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code>: Controls z-score standardization of continuous
 attributes before training and prediction. Accepted values are
 <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>

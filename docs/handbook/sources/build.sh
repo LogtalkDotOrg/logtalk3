@@ -121,6 +121,7 @@ sed '1,19d' ../../../library/dif/NOTES.md | pandoc -f gfm -t rst -o libraries/di
 sed '1,19d' ../../../library/dimension_reduction_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 sed '1,19d' ../../../library/eclat/NOTES.md | pandoc -f gfm -t rst -o libraries/eclat.rst
 sed '1,19d' ../../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst
+sed '1,19d' ../../../library/elastic_net_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/elastic_net_regression.rst
 sed '1,19d' ../../../library/elo/NOTES.md | pandoc -f gfm -t rst -o libraries/elo.rst
 sed '1,19d' ../../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries/events.rst
 sed '1,19d' ../../../library/ewma/NOTES.md | pandoc -f gfm -t rst -o libraries/ewma.rst
@@ -173,6 +174,7 @@ sed '1,19d' ../../../library/knn_distance/NOTES.md | pandoc -f gfm -t rst -o lib
 sed '1,19d' ../../../library/knn_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_regression.rst
 sed '1,19d' ../../../library/kprototypes/NOTES.md | pandoc -f gfm -t rst -o libraries/kprototypes.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst
+sed '1,19d' ../../../library/lasso_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 sed '1,19d' ../../../library/lda_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 sed '1,19d' ../../../library/linda/NOTES.md | pandoc -f gfm -t rst -o libraries/linda.rst
 sed '1,19d' ../../../library/linear_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_regression.rst

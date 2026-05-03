@@ -121,6 +121,7 @@ Foreach-Object {
 (Get-Content ../../../library/dimension_reduction_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 (Get-Content ../../../library/eclat/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/eclat.rst
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst
+(Get-Content ../../../library/elastic_net_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/elastic_net_regression.rst
 (Get-Content ../../../library/elo/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/elo.rst
 (Get-Content ../../../library/events/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/events.rst
 (Get-Content ../../../library/ewma/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ewma.rst
@@ -173,6 +174,7 @@ Foreach-Object {
 (Get-Content ../../../library/knn_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_regression.rst
 (Get-Content ../../../library/kprototypes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kprototypes.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
+(Get-Content ../../../library/lasso_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 (Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
 (Get-Content ../../../library/linear_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_regression.rst

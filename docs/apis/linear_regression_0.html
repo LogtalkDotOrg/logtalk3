@@ -113,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#eclat"><span class="xref std std-ref">eclat</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#elastic-net-regression"><span class="xref std std-ref">elastic_net_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#elo"><span class="xref std std-ref">elo</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ewma"><span class="xref std std-ref">ewma</span></a></li>
@@ -170,6 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#knn-regression"><span class="xref std std-ref">knn_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#kprototypes"><span class="xref std std-ref">kprototypes</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ksuid"><span class="xref std std-ref">ksuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lasso-regression"><span class="xref std std-ref">lasso_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lda-projection"><span class="xref std std-ref">lda_projection</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
@@ -322,7 +324,7 @@
   <p class="right" id="linear-regression-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="linear-regression">
 <h1><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code><a class="headerlink" href="#linear-regression" title="Link to this heading"></a></h1>
-<p>Linear regression regressor supporting continuous and mixed-feature datasets using batch gradient descent. Learns from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">regression_dataset_protocol</span></code> protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.</p>
+<p>Linear regression regressor supporting continuous and mixed-feature datasets using a direct ordinary least-squares solve. Learns from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">regression_dataset_protocol</span></code> protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -358,8 +360,8 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Algorithm: Uses batch gradient descent to minimize mean squared error. Supports optional L2 regularization and optional feature scaling for continuous attributes.</p></li>
-<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.</p></li>
+<li><p>Algorithm: Uses the shared regression encoding core to solve the ordinary least-squares problem directly with pivoted modified Gram-Schmidt orthogonalization. The intercept is always retained and encoded feature columns that are numerically dependent on earlier selected columns are dropped and assigned zero coefficients.</p></li>
+<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and encoded columns with no independent signal after accounting for the intercept and previously selected features are assigned zero coefficients.</p></li>
 <li><p>Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.</p></li>
 <li><p>Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.</p></li>
 <li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">linear_regressor(Encoders,</span> <span class="pre">Bias,</span> <span class="pre">Weights,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Bias</span></code> stores the intercept, <code class="docutils literal notranslate"><span class="pre">Weights</span></code> stores one coefficient per encoded feature, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options.</p></li>

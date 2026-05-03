@@ -25,6 +25,7 @@
 	logtalk_load([
 		regression_protocols('test_datasets/step_signal'),
 		regression_protocols('test_datasets/mixed_signal'),
+		regression_protocols('test_datasets/wide_mixed_signal'),
 		regression_protocols('test_datasets/intercept_only')
 	], [
 		optimize(on)

@@ -38,13 +38,16 @@
 	]).
 
 	test(step_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(step_signal, [number_of_trees(11), maximum_features_per_split(1), minimum_samples_leaf(2)], 0.75, 0.50, TrainTime, RMSE, MAE).
+		reference_fit(step_signal, [number_of_trees(31), maximum_features_per_split(1), minimum_samples_leaf(2), random_seed(12345)], 2.0, 2.0, TrainTime, RMSE, MAE).
 
 	test(mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(mixed_signal, [number_of_trees(21), maximum_features_per_split(3)], 5.0, 4.0, TrainTime, RMSE, MAE).
+		reference_fit(mixed_signal, [number_of_trees(21), maximum_features_per_split(3), random_seed(12345)], 5.0, 4.0, TrainTime, RMSE, MAE).
+
+	test(wide_mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
+		reference_fit(wide_mixed_signal, [number_of_trees(31), maximum_depth(12), minimum_samples_leaf(1), maximum_features_per_split(6), feature_scaling(false), random_seed(12345)], 2.0, 1.55, TrainTime, RMSE, MAE).
 
 	test(intercept_only_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(intercept_only, [number_of_trees(5)], 0.01, 0.01, TrainTime, RMSE, MAE).
+		reference_fit(intercept_only, [number_of_trees(5), random_seed(12345)], 0.01, 0.01, TrainTime, RMSE, MAE).
 
 	reference_fit(Dataset, Options, MaximumRMSE, MaximumMAE, TrainTime, RMSE, MAE) :-
 		benchmark(benchmark_learn(Dataset, Options), TrainTime),

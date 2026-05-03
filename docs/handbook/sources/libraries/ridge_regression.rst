@@ -5,9 +5,9 @@
 
 Ridge regression regressor supporting continuous and mixed-feature
 datasets. The library implements the ``regressor_protocol`` defined in
-the ``regression_protocols`` library and learns a linear model using
-batch gradient descent with L2 regularization via the shared
-linear-model training core in ``regressor_common``.
+the ``regression_protocols`` library and learns a linear model by
+solving the weighted ridge normal equations directly via the shared
+regression encoding core in ``regressor_common``.
 
 API documentation
 -----------------
@@ -45,16 +45,21 @@ Features
 --------
 
 - **Continuous and Mixed Features**: Supports continuous attributes and
-  categorical attributes encoded using one-hot vectors.
-- **Feature Scaling**: Continuous attributes can be standardized using
-  z-score scaling.
+  categorical attributes encoded using reference-level dummy coding.
+- **Feature Scaling and Penalty Scaling**: Continuous attributes can be
+  standardized using z-score scaling. Ridge regularization uses
+  scale-aware weights equivalent to standardizing each penalized encoded
+  feature column before applying the L2 penalty.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
+- **Zero-Variance Features**: Encoded columns with zero variance are
+  excluded from the direct solve and assigned zero coefficients in the
+  learned regressor.
 - **Ridge Penalty**: Applies L2 regularization to the learned weights
-  using a ridge-specific ``regularization/1`` option.
+  using the shared ``regularization/1`` option.
 - **Diagnostics Metadata**: Learned regressors record model name,
-  target, training example count, optimization stop reason, completed
-  iterations, final parameter delta, encoded feature count, and
+  target, training example count, solver, linear-system residual, active
+  feature count, penalty scaling strategy, encoded feature count, and
   effective options, accessible using the shared regression diagnostics
   predicates.
 - **Model Export**: Learned regressors can be exported as predicate
@@ -87,9 +92,10 @@ the form:
        target(Target),
        training_example_count(TrainingExampleCount),
        options(Options),
-       convergence(Status),
-       iterations(Iterations),
-       final_delta(FinalDelta),
+       solver(Solver),
+       linear_system_residual(Residual),
+       active_feature_count(ActiveFeatureCount),
+       penalty_scaling(encoded_feature_standardization),
        encoded_feature_count(FeatureCount)
    ]
 
@@ -103,14 +109,16 @@ Where:
   examples used during training.
 - ``options(Options)`` stores the effective learning options after
   merging the user options with the library defaults.
-- ``convergence(Status)`` records the optimization stop condition. The
-  current values are ``tolerance`` when the largest parameter update is
-  within the configured tolerance and ``maximum_iterations_exhausted``
-  when training stops because the iteration cap is reached.
-- ``iterations(Iterations)`` stores the number of batch gradient-descent
-  updates completed during training.
-- ``final_delta(FinalDelta)`` stores the maximum absolute parameter
-  change from the final optimization step.
+- ``solver(Solver)`` records the direct linear-system solver used during
+  training. The current value is ``pivoted_gaussian_elimination``.
+- ``linear_system_residual(Residual)`` stores the maximum absolute
+  residual of the solved ridge linear system.
+- ``active_feature_count(ActiveFeatureCount)`` stores the number of
+  encoded feature columns retained for the direct solve after dropping
+  zero-variance columns.
+- ``penalty_scaling(encoded_feature_standardization)`` records that the
+  ridge penalty is scaled as if each penalized encoded feature column
+  had been standardized before applying the L2 penalty.
 - ``encoded_feature_count(FeatureCount)`` stores the number of numeric
   features induced by the encoder list, including missing-value
   indicator features.
@@ -124,20 +132,9 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- ``learning_rate/1``: Step size used by batch gradient descent when
-  updating the bias and weights. Larger values speed up training but can
-  overshoot; smaller values are more conservative. The default is
-  ``0.05``.
-- ``maximum_iterations/1``: Maximum number of gradient-descent
-  iterations to run before stopping even if the tolerance criterion has
-  not been met. The default is ``2000``.
-- ``tolerance/1``: Convergence threshold for the maximum parameter
-  update. Training stops early when the largest absolute change in the
-  bias or any weight is at or below this value. The default is
-  ``1.0e-7``.
 - ``regularization/1``: Ridge penalty coefficient applied to the weight
-  vector during optimization. Higher values increase shrinkage and can
-  reduce overfitting. The default is ``0.01``.
+  vector during the direct solve. Higher values increase shrinkage and
+  can reduce overfitting. The default is ``0.01``.
 - ``feature_scaling/1``: Controls z-score standardization of continuous
   attributes before training and prediction. Accepted values are
   ``true`` and ``false``. The default is ``true``.

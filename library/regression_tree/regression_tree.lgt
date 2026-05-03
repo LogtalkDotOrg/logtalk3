@@ -29,7 +29,7 @@
 		comment is 'Regression tree regressor supporting continuous and mixed-feature datasets using recursive variance-reduction splits.',
 		remarks is [
 			'Algorithm' - 'Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
+			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values.',
 			'Missing values' - 'Missing feature values represented using anonymous variables or omitted attribute-value pairs are encoded using explicit missing-value indicator features during both training and prediction.',
 			'Regressor representation' - 'The learned regressor is represented by default as ``regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics)`` where ``Tree`` is built from ``leaf(Prediction)`` and ``node(Index, Threshold, FallbackPrediction, Left, Right)`` terms and ``Diagnostics`` stores training metadata including the effective options.'
 		],
@@ -96,8 +96,14 @@
 		append(ValueLabels, [feature(Attribute, missing)], Labels).
 
 	categorical_value_labels([], _Attribute, []).
-	categorical_value_labels([Value| Values], Attribute, [feature(Attribute, category(Value))| Labels]) :-
-		categorical_value_labels(Values, Attribute, Labels).
+	categorical_value_labels([_Baseline], _Attribute, []) :-
+		!.
+	categorical_value_labels([_Baseline| Values], Attribute, Labels) :-
+		categorical_non_baseline_value_labels(Values, Attribute, Labels).
+
+	categorical_non_baseline_value_labels([], _Attribute, []).
+	categorical_non_baseline_value_labels([Value| Values], Attribute, [feature(Attribute, category(Value))| Labels]) :-
+		categorical_non_baseline_value_labels(Values, Attribute, Labels).
 
 	build_tree(Rows, FeatureLabels, Depth, Options, Tree) :-
 		mean_target(Rows, Mean),

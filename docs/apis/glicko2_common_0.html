@@ -113,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#doclet"><span class="xref std std-ref">doclet</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#eclat"><span class="xref std std-ref">eclat</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#edcg"><span class="xref std std-ref">edcg</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#elastic-net-regression"><span class="xref std std-ref">elastic_net_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#elo"><span class="xref std std-ref">elo</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#events"><span class="xref std std-ref">events</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ewma"><span class="xref std std-ref">ewma</span></a></li>
@@ -170,6 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#knn-regression"><span class="xref std std-ref">knn_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#kprototypes"><span class="xref std std-ref">kprototypes</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ksuid"><span class="xref std std-ref">ksuid</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#lasso-regression"><span class="xref std std-ref">lasso_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lda-projection"><span class="xref std std-ref">lda_projection</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
@@ -345,7 +347,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-27</div>
+<div class="line"><strong>Date:</strong> 2026-05-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -395,50 +397,105 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="update-item-parameters-10">
 <span id="glicko2-common-0-update-item-parameters-10"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_item_parameters/10</span></code></a><a class="headerlink" href="#update-item-parameters-10" title="Link to this heading"></a></h3>
+<p>Computes the simultaneous Glicko-2 rating, deviation, and volatility update for one item over a rating period using the current dictionaries and aggregated game results.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_item_parameters(Item,ItemResults,Ratings,Deviations,Volatilities,Tau,VolatilityTolerance,UpdatedRating,UpdatedDeviation,UpdatedVolatility)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_item_parameters(+term,+list(compound),+compound,+compound,+compound,+number,+number,-number,-number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="to-mu-2">
 <span id="glicko2-common-0-to-mu-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">to_mu/2</span></code></a><a class="headerlink" href="#to-mu-2" title="Link to this heading"></a></h3>
+<p>Converts a rating on the external Glicko scale to the internal <code class="docutils literal notranslate"><span class="pre">mu</span></code> scale.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_mu(Rating,Mu)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_mu(+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="to-phi-2">
 <span id="glicko2-common-0-to-phi-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">to_phi/2</span></code></a><a class="headerlink" href="#to-phi-2" title="Link to this heading"></a></h3>
+<p>Converts a rating deviation on the external Glicko scale to the internal <code class="docutils literal notranslate"><span class="pre">phi</span></code> scale.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_phi(Deviation,Phi)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_phi(+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="to-rating-2">
 <span id="glicko2-common-0-to-rating-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">to_rating/2</span></code></a><a class="headerlink" href="#to-rating-2" title="Link to this heading"></a></h3>
+<p>Converts a value on the internal <code class="docutils literal notranslate"><span class="pre">mu</span></code> scale back to the external Glicko rating scale.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_rating(Mu,Rating)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_rating(+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="to-deviation-2">
 <span id="glicko2-common-0-to-deviation-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">to_deviation/2</span></code></a><a class="headerlink" href="#to-deviation-2" title="Link to this heading"></a></h3>
+<p>Converts a value on the internal <code class="docutils literal notranslate"><span class="pre">phi</span></code> scale back to the external Glicko rating-deviation scale.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_deviation(Phi,Deviation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">to_deviation(+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

@@ -38,16 +38,19 @@
 	]).
 
 	test(simple_line_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(simple_line, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)], 0.01, 0.01, TrainTime, RMSE, MAE).
+		reference_fit(simple_line, [], 1.0e-8, 1.0e-8, TrainTime, RMSE, MAE).
 
 	test(plane_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(plane, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)], 0.05, 0.05, TrainTime, RMSE, MAE).
+		reference_fit(plane, [], 1.0e-8, 1.0e-8, TrainTime, RMSE, MAE).
 
 	test(mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(mixed_signal, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)], 0.05, 0.05, TrainTime, RMSE, MAE).
+		reference_fit(mixed_signal, [], 1.0e-8, 1.0e-8, TrainTime, RMSE, MAE).
+
+	test(wide_mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
+		reference_fit(wide_mixed_signal, [], 1.0e-8, 1.0e-8, TrainTime, RMSE, MAE).
 
 	test(intercept_only_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(intercept_only, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)], 0.01, 0.01, TrainTime, RMSE, MAE).
+		reference_fit(intercept_only, [], 1.0e-8, 1.0e-8, TrainTime, RMSE, MAE).
 
 	reference_fit(Dataset, Options, MaximumRMSE, MaximumMAE, TrainTime, RMSE, MAE) :-
 		benchmark(linear_regression::learn(Dataset, _Regressor, Options), TrainTime),

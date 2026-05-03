@@ -26,10 +26,10 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-02,
-		comment is 'Ridge regression regressor supporting continuous and mixed-feature datasets using batch gradient descent with L2 regularization. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
+		comment is 'Ridge regression regressor supporting continuous and mixed-feature datasets using a direct weighted linear-system solve with L2 regularization. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
-			'Algorithm' - 'Uses the shared linear-model gradient-descent training core with a ridge-specific regularization option in order to minimize mean squared error plus an L2 penalty on the weights.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
+			'Algorithm' - 'Uses the shared regression encoding core to solve the weighted ridge normal equations directly with partial pivoting. The intercept is left unpenalized while encoded feature columns are penalized using scale-aware weights equivalent to standardizing penalized columns before applying the L2 penalty.',
+			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and zero-variance encoded columns are dropped from the direct solve and assigned zero coefficients.',
 			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
 			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
 			'Regressor representation' - 'The learned regressor is represented by default as ``ridge_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.'
@@ -57,8 +57,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		Dataset::target(Target),
-		translate_options(Options, TrainingOptions),
-		^^fit_linear_model(Dataset, TrainingOptions, Encoders, TrainingExampleCount, Bias, Weights, TrainingDiagnostics),
+		^^fit_ridge_model(Dataset, Options, Encoders, TrainingExampleCount, Bias, Weights, TrainingDiagnostics),
 		build_diagnostics(Target, Encoders, TrainingExampleCount, Options, TrainingDiagnostics, Diagnostics),
 		Regressor = ridge_regressor(Encoders, Bias, Weights, Diagnostics).
 
@@ -73,13 +72,6 @@
 		append(TrainingDiagnostics, [encoded_feature_count(FeatureCount)], ExtraDiagnostics),
 		^^base_regressor_diagnostics(ridge_regression, Target, TrainingExampleCount, Options, ExtraDiagnostics, Diagnostics).
 
-	translate_options([], []).
-	translate_options([regularization(Regularization)| Options], [l2_regularization(Regularization)| LinearOptions]) :-
-		!,
-		translate_options(Options, LinearOptions).
-	translate_options([Option| Options], [Option| LinearOptions]) :-
-		translate_options(Options, LinearOptions).
-
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
 		Template =.. [Functor, 'Encoders', 'Bias', 'Weights', 'Diagnostics'].
 
@@ -92,10 +84,26 @@
 			^^encoded_feature_count(Encoders, FeatureCount),
 			valid(list(float, FeatureCount), Weights),
 			^^valid_regressor_metadata(ridge_regression, Diagnostics),
-			^^valid_linear_model_diagnostics(Diagnostics),
+			valid_ridge_diagnostics(Diagnostics),
 			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
 		;   domain_error(regressor, Regressor)
+		).
+
+	valid_ridge_diagnostics(Diagnostics) :-
+		memberchk(penalty_scaling(encoded_feature_standardization), Diagnostics),
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics),
+		integer(ActiveFeatureCount),
+		ActiveFeatureCount >= 0,
+		(	memberchk(solver(pivoted_gaussian_elimination), Diagnostics),
+			memberchk(linear_system_residual(Residual), Diagnostics),
+			valid(non_negative_float, Residual)
+		;	memberchk(solver(modified_gram_schmidt_column_pivoting), Diagnostics),
+			memberchk(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics),
+			valid(non_negative_float, ResidualSumOfSquares),
+			memberchk(effective_rank(EffectiveRank), Diagnostics),
+			integer(EffectiveRank),
+			EffectiveRank >= 1
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
@@ -112,18 +120,9 @@
 		format('Weights: ~w coefficients~n~n', [Weights]),
 		format('Encoders: ~w~n', [Encoders]).
 
-	default_option(learning_rate(0.05)).
-	default_option(maximum_iterations(2000)).
-	default_option(tolerance(1.0e-7)).
 	default_option(regularization(0.01)).
 	default_option(feature_scaling(true)).
 
-	valid_option(learning_rate(Rate)) :-
-		valid(positive_float, Rate).
-	valid_option(maximum_iterations(Iterations)) :-
-		valid(positive_integer, Iterations).
-	valid_option(tolerance(Tolerance)) :-
-		valid(non_negative_float, Tolerance).
 	valid_option(regularization(Regularization)) :-
 		valid(non_negative_float, Regularization).
 	valid_option(feature_scaling(FeatureScaling)) :-

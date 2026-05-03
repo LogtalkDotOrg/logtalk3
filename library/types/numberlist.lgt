@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:19:0,
+		version is 1:19:1,
 		author is 'Paulo Moura',
-		date is 2026-04-15,
+		date is 2026-05-02,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -39,7 +39,7 @@
 		average(Ns, 1, N, Average).
 
 	average([], Length, Sum, Average) :-
-		Average is Sum / Length.
+		Average is float(Sum / Length).
 	average([N| Ns], Lacc, Sacc, Average) :-
 		Lacc2 is Lacc + 1,
 		Sacc2 is Sacc + N,
@@ -55,7 +55,7 @@
 			middle_element(1, Middle, Sorted, Median)
 		;	Left is Length // 2,
 			middle_elements(1, Left, Sorted, XLeft, XRight),
-			Median is XLeft + (XRight - XLeft) / 2
+			Median is float(XLeft + (XRight - XLeft) / 2)
 		).
 
 	quicksort([], Sorted, Sorted, Length, Length).
@@ -300,7 +300,7 @@
 
 	softmax_exps_softmax([], _, []).
 	softmax_exps_softmax([E| Es], Sum, [Y| Ys]) :-
-		Y is E / Sum,
+		Y is float(E / Sum),
 		softmax_exps_softmax(Es, Sum, Ys).
 
 	linear_regression([X1| Xs], [Y1| Ys], Slope, Intercept) :-

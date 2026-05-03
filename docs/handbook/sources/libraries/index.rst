@@ -72,6 +72,7 @@ directory in the ``NOTES.md`` file.
    dimension_reduction_protocols
    eclat
    edcg
+   elastic_net_regression
    elo
    events
    ewma
@@ -124,6 +125,7 @@ directory in the ``NOTES.md`` file.
    knn_regression
    kprototypes
    ksuid
+   lasso_regression
    lda_projection
    linda
    linear_regression

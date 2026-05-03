@@ -33,7 +33,7 @@ Regression tree regressor supporting continuous and mixed-feature datasets using
 | **Remarks:**
 
    - Algorithm: Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.
-   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.
+   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values.
    - Missing values: Missing feature values represented using anonymous variables or omitted attribute-value pairs are encoded using explicit missing-value indicator features during both training and prediction.
    - Regressor representation: The learned regressor is represented by default as ``regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics)`` where ``Tree`` is built from ``leaf(Prediction)`` and ``node(Index, Threshold, FallbackPrediction, Left, Right)`` terms and ``Diagnostics`` stores training metadata including the effective options.
 

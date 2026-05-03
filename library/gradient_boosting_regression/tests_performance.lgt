@@ -43,6 +43,9 @@
 	test(mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(mixed_signal, [number_of_estimators(3), learning_rate(1.0), maximum_depth(4), feature_scaling(false)], 0.01, 0.01, TrainTime, RMSE, MAE).
 
+	test(wide_mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
+		reference_fit(wide_mixed_signal, [number_of_estimators(20), learning_rate(0.3), maximum_depth(3), minimum_samples_leaf(1), feature_scaling(false)], 0.75, 0.60, TrainTime, RMSE, MAE).
+
 	test(intercept_only_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(intercept_only, [number_of_estimators(5), learning_rate(1.0)], 0.01, 0.01, TrainTime, RMSE, MAE).
 

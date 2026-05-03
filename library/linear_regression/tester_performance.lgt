@@ -26,6 +26,7 @@
 		regression_protocols('test_datasets/simple_line'),
 		regression_protocols('test_datasets/plane'),
 		regression_protocols('test_datasets/mixed_signal'),
+		regression_protocols('test_datasets/wide_mixed_signal'),
 		regression_protocols('test_datasets/intercept_only')
 	], [
 		optimize(on)

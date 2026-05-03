@@ -15,7 +15,7 @@ Shared internal Glicko-2 numeric helpers for rating updates, volatility search, 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-05-02
 
 | **Compilation flags:**
 |    ``static``
@@ -48,8 +48,15 @@ Protected predicates
 ``update_item_parameters/10``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Computes the simultaneous Glicko-2 rating, deviation, and volatility update for one item over a rating period using the current dictionaries and aggregated game results.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``update_item_parameters(Item,ItemResults,Ratings,Deviations,Volatilities,Tau,VolatilityTolerance,UpdatedRating,UpdatedDeviation,UpdatedVolatility)``
+| **Mode and number of proofs:**
+|    ``update_item_parameters(+term,+list(compound),+compound,+compound,+compound,+number,+number,-number,-number,-number)`` - ``one``
 
 
 ------------
@@ -60,8 +67,15 @@ Protected predicates
 ``to_mu/2``
 ^^^^^^^^^^^
 
+Converts a rating on the external Glicko scale to the internal ``mu`` scale.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``to_mu(Rating,Mu)``
+| **Mode and number of proofs:**
+|    ``to_mu(+number,-number)`` - ``one``
 
 
 ------------
@@ -72,8 +86,15 @@ Protected predicates
 ``to_phi/2``
 ^^^^^^^^^^^^
 
+Converts a rating deviation on the external Glicko scale to the internal ``phi`` scale.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``to_phi(Deviation,Phi)``
+| **Mode and number of proofs:**
+|    ``to_phi(+number,-number)`` - ``one``
 
 
 ------------
@@ -84,8 +105,15 @@ Protected predicates
 ``to_rating/2``
 ^^^^^^^^^^^^^^^
 
+Converts a value on the internal ``mu`` scale back to the external Glicko rating scale.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``to_rating(Mu,Rating)``
+| **Mode and number of proofs:**
+|    ``to_rating(+number,-number)`` - ``one``
 
 
 ------------
@@ -96,8 +124,15 @@ Protected predicates
 ``to_deviation/2``
 ^^^^^^^^^^^^^^^^^^
 
+Converts a value on the internal ``phi`` scale back to the external Glicko rating-deviation scale.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``to_deviation(Phi,Deviation)``
+| **Mode and number of proofs:**
+|    ``to_deviation(+number,-number)`` - ``one``
 
 
 ------------

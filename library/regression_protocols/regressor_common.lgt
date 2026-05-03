@@ -65,6 +65,16 @@
 		argnames is ['Dataset', 'Examples']
 	]).
 
+	:- private(check_attribute_declarations/1).
+	:- mode(check_attribute_declarations(+list(pair)), one_or_error).
+	:- info(check_attribute_declarations/1, [
+		comment is 'Checks that dataset attribute declarations use distinct attribute names and valid value domains.',
+		argnames is ['Attributes'],
+		exceptions is [
+			'An attribute is declared more than once or uses an invalid value domain' - domain_error(attribute_declarations, 'Attribute')
+		]
+	]).
+
 	:- protected(check_examples/2).
 	:- mode(check_examples(+object_identifier, +list), one_or_error).
 	:- info(check_examples/2, [
@@ -242,7 +252,14 @@
 	:- protected(fit_linear_model/7).
 	:- mode(fit_linear_model(+object_identifier, +list(compound), -list(compound), -integer, -float, -list(float), -list(compound)), one).
 	:- info(fit_linear_model/7, [
-		comment is 'Builds linear-model encoders from the training dataset, encodes the examples, fits a bias plus weight vector using batch gradient descent and an L2 regularization option, and returns optimization diagnostics terms.',
+		comment is 'Builds linear-model encoders from the training dataset, encodes the examples, fits an ordinary least-squares bias plus weight vector using a direct pivoted orthogonal solve, and returns solver diagnostics terms.',
+		argnames is ['Dataset', 'Options', 'Encoders', 'TrainingExampleCount', 'Bias', 'Weights', 'TrainingDiagnostics']
+	]).
+
+	:- protected(fit_ridge_model/7).
+	:- mode(fit_ridge_model(+object_identifier, +list(compound), -list(compound), -integer, -float, -list(float), -list(compound)), one).
+	:- info(fit_ridge_model/7, [
+		comment is 'Builds linear-model encoders from the training dataset, encodes the examples, fits a bias plus weight vector by solving the ridge normal equations with partial pivoting, and returns ridge-specific diagnostics terms.',
 		argnames is ['Dataset', 'Options', 'Encoders', 'TrainingExampleCount', 'Bias', 'Weights', 'TrainingDiagnostics']
 	]).
 
@@ -281,25 +298,25 @@
 		argnames is ['Attribute', 'Values', 'Value']
 	]).
 
-	:- private(one_hot_encode/3).
-	:- mode(one_hot_encode(+list, +nonvar, -list(float)), one).
-	:- info(one_hot_encode/3, [
-		comment is 'Encodes a declared categorical value using one-hot encoding plus a trailing missing-value indicator feature set to zero.',
-		argnames is ['Values', 'Value', 'Encoded']
+	:- private(one_hot_encode/4).
+	:- mode(one_hot_encode(+list, +nonvar, -list(float), +list(float)), one).
+	:- info(one_hot_encode/4, [
+		comment is 'Encodes a declared categorical value using reference-level dummy coding plus a trailing missing-value indicator feature set to zero.',
+		argnames is ['Values', 'Value', 'Encoded', 'Tail']
 	]).
 
-	:- private(missing_one_hot_encode/2).
-	:- mode(missing_one_hot_encode(+list, -list(float)), one).
-	:- info(missing_one_hot_encode/2, [
-		comment is 'Encodes a missing categorical value as zeroes plus a trailing missing-value indicator feature set to one.',
-		argnames is ['Values', 'Encoded']
+	:- private(missing_one_hot_encode/3).
+	:- mode(missing_one_hot_encode(+list, -list(float), +list(float)), one).
+	:- info(missing_one_hot_encode/3, [
+		comment is 'Encodes a missing categorical value as reference-level dummy zeroes plus a trailing missing-value indicator feature set to one.',
+		argnames is ['Values', 'Encoded', 'Tail']
 	]).
 
-	:- private(zero_vector_from_values/2).
-	:- mode(zero_vector_from_values(+list, -list(float)), one).
-	:- info(zero_vector_from_values/2, [
-		comment is 'Creates a zero vector with one element per declared categorical value.',
-		argnames is ['Values', 'Zeroes']
+	:- private(zero_vector_from_values/3).
+	:- mode(zero_vector_from_values(+list, -list(float), +list(float)), one).
+	:- info(zero_vector_from_values/3, [
+		comment is 'Creates a zero vector with one element per supplied categorical value slot.',
+		argnames is ['Values', 'Zeroes', 'Tail']
 	]).
 
 	:- private(build_linear_encoders/4).
@@ -312,43 +329,155 @@
 	:- private(train_linear_model/6).
 	:- mode(train_linear_model(+list(pair), +integer, +list(compound), -float, -list(float), -list(compound)), one).
 	:- info(train_linear_model/6, [
-		comment is 'Fits a linear model bias and weight vector from encoded rows using batch gradient descent and returns optimization diagnostics terms.',
+		comment is 'Fits an ordinary least-squares linear model bias and weight vector from encoded rows using a direct pivoted orthogonal solve and returns solver diagnostics terms.',
 		argnames is ['Rows', 'FeatureCount', 'Options', 'Bias', 'Weights', 'TrainingDiagnostics']
 	]).
 
-	:- private(optimize_linear_model/11).
-	:- mode(optimize_linear_model(+list(pair), +list(compound), +integer, +float, +list(float), +float, -float, -list(float), -atom, -integer, -float), one).
-	:- info(optimize_linear_model/11, [
-		comment is 'Runs iterative batch gradient-descent updates until the tolerance or maximum iteration limit is reached and reports the stop reason, completed iterations, and final maximum parameter delta.',
-		argnames is ['Rows', 'Options', 'Iteration', 'Bias0', 'Weights0', 'PreviousDelta', 'Bias', 'Weights', 'Convergence', 'Iterations', 'FinalDelta']
+	:- private(rows_to_training_matrix/5).
+	:- mode(rows_to_training_matrix(+list(pair), +integer, -list(float), -list(list(float)), -integer), one).
+	:- info(rows_to_training_matrix/5, [
+		comment is 'Transforms encoded training rows into a target vector and one numeric column per encoded feature.',
+		argnames is ['Rows', 'FeatureCount', 'Targets', 'Columns', 'RowCount']
 	]).
 
-	:- private(update_linear_parameters/7).
-	:- mode(update_linear_parameters(+list(pair), +float, +list(float), +list(compound), -float, -list(float), -float), one).
-	:- info(update_linear_parameters/7, [
-		comment is 'Performs one batch gradient-descent parameter update step and returns the maximum absolute parameter change.',
-		argnames is ['Rows', 'Bias0', 'Weights0', 'Options', 'Bias1', 'Weights1', 'MaxDelta']
+	:- private(empty_columns/2).
+	:- mode(empty_columns(+integer, -list(list)), one).
+	:- info(empty_columns/2, [
+		comment is 'Creates a list of empty columns with the requested count.',
+		argnames is ['Count', 'Columns']
 	]).
 
-	:- private(accumulate_linear_gradients/7).
-	:- mode(accumulate_linear_gradients(+list(pair), +float, +list(float), +float, +list(float), -float, -list(float)), one).
-	:- info(accumulate_linear_gradients/7, [
-		comment is 'Accumulates the batch bias and weight gradients over a list of encoded training rows.',
-		argnames is ['Rows', 'Bias', 'Weights', 'GradientBias0', 'GradientWeights0', 'GradientBias', 'GradientWeights']
+	:- private(prepend_features_to_columns/3).
+	:- mode(prepend_features_to_columns(+list(float), +list(list(float)), -list(list(float))), one).
+	:- info(prepend_features_to_columns/3, [
+		comment is 'Prepends one encoded feature vector into the accumulated column-oriented design matrix representation.',
+		argnames is ['Features', 'Columns0', 'Columns']
+	]).
+
+	:- private(reverse_columns/2).
+	:- mode(reverse_columns(+list(list(float)), -list(list(float))), one).
+	:- info(reverse_columns/2, [
+		comment is 'Reverses every column in a column-oriented design matrix built by prepending feature values.',
+		argnames is ['Columns0', 'Columns']
+	]).
+
+	:- private(intercept_column/2).
+	:- mode(intercept_column(+integer, -list(float)), one).
+	:- info(intercept_column/2, [
+		comment is 'Creates the all-ones intercept column for a given number of training rows.',
+		argnames is ['RowCount', 'Column']
+	]).
+
+	:- private(select_orthogonal_columns/5).
+	:- mode(select_orthogonal_columns(+list(list(float)), +list(float), +list(float), -list(compound), -integer), one).
+	:- info(select_orthogonal_columns/5, [
+		comment is 'Builds a pivoted orthogonal least-squares basis consisting of the intercept and the encoded feature columns that contribute independent signal.',
+		argnames is ['FeatureColumns', 'Targets', 'InterceptColumn', 'SelectedColumns', 'ActiveFeatureCount']
+	]).
+
+	:- private(initialize_candidates/4).
+	:- mode(initialize_candidates(+list(list(float)), +list(float), +integer, -list(compound)), one).
+	:- info(initialize_candidates/4, [
+		comment is 'Initializes encoded feature-column candidates by removing their intercept projection and storing the first upper-triangular coefficients.',
+		argnames is ['FeatureColumns', 'InterceptBasis', 'Index', 'Candidates']
+	]).
+
+	:- private(initialize_candidate/4).
+	:- mode(initialize_candidate(+list(float), +list(float), +integer, -compound), one).
+	:- info(initialize_candidate/4, [
+		comment is 'Initializes one encoded feature-column candidate for pivoted orthogonal selection.',
+		argnames is ['Column', 'InterceptBasis', 'Index', 'Candidate']
+	]).
+
+	:- private(select_active_columns/5).
+	:- mode(select_active_columns(+list(compound), +list(float), +list(compound), -list(compound), -integer), one).
+	:- info(select_active_columns/5, [
+		comment is 'Selects independent encoded feature columns by repeatedly promoting the candidate with the largest residual norm and orthogonalizing the remainder.',
+		argnames is ['Candidates', 'Targets', 'SelectedColumns0', 'SelectedColumns', 'ActiveFeatureCount']
+	]).
+
+	:- private(select_best_candidate/3).
+	:- mode(select_best_candidate(+list(compound), -compound, -list(compound)), one).
+	:- info(select_best_candidate/3, [
+		comment is 'Selects the remaining encoded feature-column candidate with the largest residual norm.',
+		argnames is ['Candidates0', 'BestCandidate', 'RemainingCandidates']
+	]).
+
+	:- private(candidate_norm/2).
+	:- mode(candidate_norm(+compound, -float), one).
+	:- info(candidate_norm/2, [
+		comment is 'Computes the Euclidean norm of an encoded feature-column residual candidate.',
+		argnames is ['Candidate', 'Norm']
+	]).
+
+	:- private(promote_candidate/5).
+	:- mode(promote_candidate(+compound, +float, +list(float), -list(float), -compound), one).
+	:- info(promote_candidate/5, [
+		comment is 'Promotes a selected residual candidate into a normalized orthogonal basis vector and records the corresponding upper-triangular coefficients.',
+		argnames is ['Candidate', 'Norm', 'Targets', 'Basis', 'SelectedColumn']
+	]).
+
+	:- private(orthogonalize_candidates/3).
+	:- mode(orthogonalize_candidates(+list(compound), +list(float), -list(compound)), one).
+	:- info(orthogonalize_candidates/3, [
+		comment is 'Orthogonalizes the remaining encoded feature-column candidates against a newly selected basis vector.',
+		argnames is ['Candidates0', 'Basis', 'Candidates']
+	]).
+
+	:- private(solve_selected_least_squares/2).
+	:- mode(solve_selected_least_squares(+list(compound), -list(float)), one).
+	:- info(solve_selected_least_squares/2, [
+		comment is 'Solves the upper-triangular least-squares system induced by the selected orthogonal columns.',
+		argnames is ['SelectedColumns', 'Coefficients']
+	]).
+
+	:- private(selected_correction/4).
+	:- mode(selected_correction(+list(compound), +integer, +list(pair), -float), one).
+	:- info(selected_correction/4, [
+		comment is 'Computes the already-known back-substitution correction for one selected orthogonal column row.',
+		argnames is ['SelectedColumns', 'RowIndex', 'KnownCoefficients', 'Correction']
+	]).
+
+	:- private(coefficients_from_pairs/2).
+	:- mode(coefficients_from_pairs(+list(pair), -list(float)), one).
+	:- info(coefficients_from_pairs/2, [
+		comment is 'Extracts pivot-order coefficient values from indexed back-substitution pairs.',
+		argnames is ['Pairs', 'Coefficients']
+	]).
+
+	:- private(expand_selected_coefficients/5).
+	:- mode(expand_selected_coefficients(+list(compound), +list(float), +integer, -float, -list(float)), one).
+	:- info(expand_selected_coefficients/5, [
+		comment is 'Expands pivot-order least-squares coefficients back into the intercept plus one coefficient per encoded feature.',
+		argnames is ['SelectedColumns', 'Coefficients', 'FeatureCount', 'Bias', 'Weights']
+	]).
+
+	:- private(assign_selected_weights/4).
+	:- mode(assign_selected_weights(+list(compound), +list(float), +list(float), -list(float)), one).
+	:- info(assign_selected_weights/4, [
+		comment is 'Assigns selected encoded feature coefficients into the full encoded weight vector, leaving dropped coefficients at zero.',
+		argnames is ['SelectedColumns', 'Coefficients', 'Weights0', 'Weights']
+	]).
+
+	:- private(set_weight_at/4).
+	:- mode(set_weight_at(+list(float), +integer, +float, -list(float)), one).
+	:- info(set_weight_at/4, [
+		comment is 'Sets one 1-based position of a numeric weight vector to a supplied value.',
+		argnames is ['Weights0', 'Index', 'Weight', 'Weights']
+	]).
+
+	:- private(residual_sum_of_squares/4).
+	:- mode(residual_sum_of_squares(+list(pair), +float, +list(float), -float), one).
+	:- info(residual_sum_of_squares/4, [
+		comment is 'Computes the residual sum of squares for encoded training rows and a learned intercept plus weight vector.',
+		argnames is ['Rows', 'Bias', 'Weights', 'ResidualSumOfSquares']
 	]).
 
 	:- private(add_scaled_vector/4).
 	:- mode(add_scaled_vector(+list(float), +number, +list(float), -list(float)), one).
 	:- info(add_scaled_vector/4, [
-		comment is 'Adds a scaled feature vector to an accumulated gradient vector.',
-		argnames is ['Features', 'Scale', 'Gradients0', 'Gradients']
-	]).
-
-	:- private(update_linear_weights/8).
-	:- mode(update_linear_weights(+list(float), +list(float), +float, +float, +float, -list(float), +float, -float), one).
-	:- info(update_linear_weights/8, [
-		comment is 'Updates the weight vector using the mean gradients and L2 regularization term while tracking the maximum absolute weight change.',
-		argnames is ['Weights0', 'Gradients', 'Scale', 'Regularization', 'LearningRate', 'Weights1', 'MaxDelta0', 'MaxDelta']
+		comment is 'Adds a scaled numeric vector to another numeric vector.',
+		argnames is ['Vector', 'Scale', 'Vector0', 'UpdatedVector']
 	]).
 
 	:- private(zero_vector/2).
@@ -365,16 +494,194 @@
 		argnames is ['Reference', 'Zeroes']
 	]).
 
+	:- private(train_ridge_model/6).
+	:- mode(train_ridge_model(+list(pair), +integer, +list(compound), -float, -list(float), -list(compound)), one).
+	:- info(train_ridge_model/6, [
+		comment is 'Fits a ridge model bias and weight vector from encoded rows by solving a direct weighted linear system and returns diagnostics terms describing the solve.',
+		argnames is ['Rows', 'FeatureCount', 'Options', 'Bias', 'Weights', 'TrainingDiagnostics']
+	]).
+
+	:- private(ridge_feature_statistics/3).
+	:- mode(ridge_feature_statistics(+list(pair), -list(float), -list(atom)), one).
+	:- info(ridge_feature_statistics/3, [
+		comment is 'Computes per-feature ridge penalty weights and active-feature flags from encoded training rows, dropping zero-variance columns from the direct solve.',
+		argnames is ['Rows', 'PenaltyWeights', 'ActiveFlags']
+	]).
+
+	:- private(accumulate_feature_statistics/5).
+	:- mode(accumulate_feature_statistics(+list(pair), +list(float), +list(float), -list(float), -list(float)), one).
+	:- info(accumulate_feature_statistics/5, [
+		comment is 'Accumulates per-feature sums and squared sums over encoded training rows.',
+		argnames is ['Rows', 'Sums0', 'SumSquares0', 'Sums', 'SumSquares']
+	]).
+
+	:- private(add_squared_vector/3).
+	:- mode(add_squared_vector(+list(float), +list(float), -list(float)), one).
+	:- info(add_squared_vector/3, [
+		comment is 'Adds the element-wise squares of a feature vector to an accumulated vector.',
+		argnames is ['Features', 'AccumulatedSquares0', 'AccumulatedSquares']
+	]).
+
+	:- private(feature_penalty_profiles/5).
+	:- mode(feature_penalty_profiles(+list(float), +list(float), +integer, -list(float), -list(atom)), one).
+	:- info(feature_penalty_profiles/5, [
+		comment is 'Builds ridge penalty weights and active-feature flags from per-feature sums and squared sums.',
+		argnames is ['Sums', 'SumSquares', 'Count', 'PenaltyWeights', 'ActiveFlags']
+	]).
+
+	:- private(active_feature_count/2).
+	:- mode(active_feature_count(+list(atom), -integer), one).
+	:- info(active_feature_count/2, [
+		comment is 'Counts the number of active encoded features retained for the direct ridge solve.',
+		argnames is ['ActiveFlags', 'Count']
+	]).
+
+	:- private(compress_rows/3).
+	:- mode(compress_rows(+list(pair), +list(atom), -list(pair)), one).
+	:- info(compress_rows/3, [
+		comment is 'Filters encoded training rows down to the active feature subset selected for the direct ridge solve.',
+		argnames is ['Rows', 'ActiveFlags', 'CompressedRows']
+	]).
+
+	:- private(compress_features/3).
+	:- mode(compress_features(+list(float), +list(atom), -list(float)), one).
+	:- info(compress_features/3, [
+		comment is 'Filters a feature vector down to the active feature subset selected for the direct ridge solve.',
+		argnames is ['Features', 'ActiveFlags', 'CompressedFeatures']
+	]).
+
+	:- private(compress_vector/3).
+	:- mode(compress_vector(+list(float), +list(atom), -list(float)), one).
+	:- info(compress_vector/3, [
+		comment is 'Filters a numeric vector down to the active positions selected for the direct ridge solve.',
+		argnames is ['Vector', 'ActiveFlags', 'CompressedVector']
+	]).
+
+	:- private(build_ridge_system/5).
+	:- mode(build_ridge_system(+list(pair), +list(float), +float, -list(list(float)), -list(float)), one).
+	:- info(build_ridge_system/5, [
+		comment is 'Builds the regularized linear system for the intercept plus active ridge coefficients.',
+		argnames is ['Rows', 'PenaltyWeights', 'Regularization', 'Matrix', 'Vector']
+	]).
+
+	:- private(accumulate_ridge_system/5).
+	:- mode(accumulate_ridge_system(+list(pair), +list(list(float)), +list(float), -list(list(float)), -list(float)), one).
+	:- info(accumulate_ridge_system/5, [
+		comment is 'Accumulates the unregularized normal-equation matrix and target vector for a set of active encoded rows.',
+		argnames is ['Rows', 'Matrix0', 'Vector0', 'Matrix', 'Vector']
+	]).
+
+	:- private(add_outer_product/4).
+	:- mode(add_outer_product(+list(float), +list(float), +list(list(float)), -list(list(float))), one).
+	:- info(add_outer_product/4, [
+		comment is 'Adds the outer product of two vectors to an accumulated matrix.',
+		argnames is ['Vector1', 'Vector2', 'Matrix0', 'Matrix']
+	]).
+
+	:- private(regularize_ridge_matrix/4).
+	:- mode(regularize_ridge_matrix(+list(list(float)), +list(float), +float, -list(list(float))), one).
+	:- info(regularize_ridge_matrix/4, [
+		comment is 'Adds the ridge penalty weights to the feature-feature diagonal block of a linear system matrix.',
+		argnames is ['Matrix0', 'PenaltyWeights', 'Regularization', 'Matrix']
+	]).
+
+	:- private(zero_matrix/3).
+	:- mode(zero_matrix(+integer, +integer, -list(list(float))), one).
+	:- info(zero_matrix/3, [
+		comment is 'Creates a zero-filled numeric matrix with the requested row and column counts.',
+		argnames is ['Rows', 'Columns', 'Matrix']
+	]).
+
+	:- private(solve_linear_system/4).
+	:- mode(solve_linear_system(+list(list(float)), +list(float), -list(float), -atom), one_or_error).
+	:- info(solve_linear_system/4, [
+		comment is 'Solves a square linear system using partial pivoting Gaussian elimination and returns the solver name.',
+		argnames is ['Matrix', 'Vector', 'Solution', 'Solver']
+	]).
+
+	:- private(augment_rows/3).
+	:- mode(augment_rows(+list(list(float)), +list(float), -list(compound)), one).
+	:- info(augment_rows/3, [
+		comment is 'Pairs each matrix row with its corresponding right-hand-side value for elimination.',
+		argnames is ['Matrix', 'Vector', 'Rows']
+	]).
+
+	:- private(triangularize/2).
+	:- mode(triangularize(+list(compound), -list(compound)), one_or_error).
+	:- info(triangularize/2, [
+		comment is 'Transforms an augmented matrix into upper-triangular form using partial pivoting.',
+		argnames is ['Rows0', 'UpperRows']
+	]).
+
+	:- private(select_pivot_row/3).
+	:- mode(select_pivot_row(+list(compound), -compound, -list(compound)), one).
+	:- info(select_pivot_row/3, [
+		comment is 'Selects the pivot row with the largest leading magnitude and returns the remaining rows.',
+		argnames is ['Rows0', 'PivotRow', 'RemainingRows']
+	]).
+
+	:- private(leading_magnitude/2).
+	:- mode(leading_magnitude(+compound, -float), one).
+	:- info(leading_magnitude/2, [
+		comment is 'Returns the absolute leading coefficient magnitude of an augmented row.',
+		argnames is ['Row', 'Magnitude']
+	]).
+
+	:- private(ensure_non_zero/1).
+	:- mode(ensure_non_zero(+float), one_or_error).
+	:- info(ensure_non_zero/1, [
+		comment is 'Checks that a pivot coefficient is numerically non-zero.',
+		argnames is ['Value'],
+		exceptions is [
+			'A pivot coefficient is numerically zero' - evaluation_error(zero_divisor)
+		]
+	]).
+
+	:- private(eliminate_rows/5).
+	:- mode(eliminate_rows(+float, +list(float), +float, +list(compound), -list(compound)), one).
+	:- info(eliminate_rows/5, [
+		comment is 'Eliminates the leading coefficient from remaining augmented rows using a pivot row.',
+		argnames is ['Pivot', 'PivotTail', 'PivotValue', 'Rows0', 'Rows']
+	]).
+
+	:- private(scaled_row_difference/4).
+	:- mode(scaled_row_difference(+list(float), +list(float), +float, -list(float)), one).
+	:- info(scaled_row_difference/4, [
+		comment is 'Subtracts a scaled pivot tail from another row tail.',
+		argnames is ['PivotTail', 'RowTail', 'Factor', 'Difference']
+	]).
+
+	:- private(back_substitution/2).
+	:- mode(back_substitution(+list(compound), -list(float)), one_or_error).
+	:- info(back_substitution/2, [
+		comment is 'Performs back-substitution on an upper-triangular augmented matrix.',
+		argnames is ['UpperRows', 'Solution']
+	]).
+
+	:- private(maximum_linear_system_residual/4).
+	:- mode(maximum_linear_system_residual(+list(list(float)), +list(float), +list(float), -float), one).
+	:- info(maximum_linear_system_residual/4, [
+		comment is 'Computes the maximum absolute residual of a solved linear system.',
+		argnames is ['Matrix', 'Vector', 'Solution', 'MaximumResidual']
+	]).
+
+	:- private(expand_weights/3).
+	:- mode(expand_weights(+list(atom), +list(float), -list(float)), one).
+	:- info(expand_weights/3, [
+		comment is 'Expands active ridge coefficients back to the full encoded feature vector, inserting zeroes for dropped zero-variance features.',
+		argnames is ['ActiveFlags', 'ActiveWeights', 'Weights']
+	]).
+
 	:- uses(format, [
 		format/2, format/3
 	]).
 
 	:- uses(list, [
-		append/3, length/2, last/2, member/2, memberchk/2
+		append/3, length/2, last/2, member/2, memberchk/2, nth0/3, reverse/2
 	]).
 
 	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		rescale/3, scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(population, [
@@ -411,8 +718,10 @@
 		findall(
 			Attribute-Values,
 			Dataset::attribute_values(Attribute, Values),
-			Attributes
-		).
+			Attributes0
+		),
+		check_attribute_declarations(Attributes0),
+		Attributes = Attributes0.
 
 	dataset_examples(Dataset, Examples) :-
 		findall(
@@ -554,6 +863,18 @@
 		\+ member(Term, Terms),
 		valid_distinct_terms(Terms).
 
+	check_attribute_declarations([]).
+	check_attribute_declarations([Attribute-Values| Attributes]) :-
+		(   atom(Attribute),
+			\+ member(Attribute-_, Attributes),
+			(   Values == continuous
+			;   valid_discrete_values(Values)
+			) ->
+			true
+		;   domain_error(attribute_declarations, Attribute)
+		),
+		check_attribute_declarations(Attributes).
+
 	valid_attribute_declarations_([], _SeenAttributes).
 	valid_attribute_declarations_([Attribute-Values| Attributes], SeenAttributes) :-
 		atom(Attribute),
@@ -565,6 +886,7 @@
 
 	valid_regression_encoders_([], _SeenAttributes).
 	valid_regression_encoders_([continuous(Attribute, Mean, Scale)| Encoders], SeenAttributes) :-
+		!,
 		atom(Attribute),
 		valid(float, Mean),
 		valid(positive_float, Scale),
@@ -600,7 +922,7 @@
 
 	known_attribute_values([], _, []).
 	known_attribute_values([example(_Id, _Target, AttributeValues)| Examples], Attribute, Values) :-
-		(   member(Attribute-Value, AttributeValues),
+		(   memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			Values = [Value| Rest]
 		;   Values = Rest
@@ -617,26 +939,28 @@
 		check_attribute_bindings(AttributeNames, AttributeValues),
 		encode_instance_checked(Encoders, AttributeValues, Features).
 
-	encode_instance_checked([], _, []).
-	encode_instance_checked([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features]) :-
+	encode_instance_checked(Encoders, AttributeValues, Features) :-
+		encode_instance_checked_(Encoders, AttributeValues, Features, []).
+
+	encode_instance_checked_([], _, Features, Features).
+	encode_instance_checked_([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features], Tail) :-
 		!,
-		(   member(Attribute-Value, AttributeValues),
+		(   memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			normalize_continuous(Value, Mean, Scale, Feature),
 			Missing = 0.0
 		;   Feature = 0.0,
 			Missing = 1.0
 		),
-		encode_instance_checked(Encoders, AttributeValues, Features).
-	encode_instance_checked([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
-		(   member(Attribute-Value, AttributeValues),
+		encode_instance_checked_(Encoders, AttributeValues, Features, Tail).
+	encode_instance_checked_([categorical(Attribute, Values)| Encoders], AttributeValues, Features, Tail) :-
+		(   memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			check_categorical_value(Attribute, Values, Value),
-			one_hot_encode(Values, Value, Encoded)
-		;   missing_one_hot_encode(Values, Encoded)
+			one_hot_encode(Values, Value, Features, RestFeatures)
+		;   missing_one_hot_encode(Values, Features, RestFeatures)
 		),
-		encode_instance_checked(Encoders, AttributeValues, RestFeatures),
-		append(Encoded, RestFeatures, Features).
+		encode_instance_checked_(Encoders, AttributeValues, RestFeatures, Tail).
 
 	check_attribute_bindings(AttributeNames, AttributeValues) :-
 		check_declared_attribute_bindings(AttributeNames, AttributeValues),
@@ -688,6 +1012,16 @@
 		train_linear_model(Rows, FeatureCount, Options, Bias, Weights, TrainingDiagnostics),
 		length(Examples, TrainingExampleCount).
 
+	fit_ridge_model(Dataset, Options, Encoders, TrainingExampleCount, Bias, Weights, TrainingDiagnostics) :-
+		::dataset_attributes(Dataset, Attributes),
+		::dataset_examples(Dataset, Examples),
+		::check_examples(Dataset, Examples),
+		build_linear_encoders(Attributes, Examples, Options, Encoders),
+		::examples_to_rows(Examples, Encoders, Rows),
+		::encoded_feature_count(Encoders, FeatureCount),
+		train_ridge_model(Rows, FeatureCount, Options, Bias, Weights, TrainingDiagnostics),
+		length(Examples, TrainingExampleCount).
+
 	normalize_continuous(Value, Mean, Scale, Feature) :-
 		(   number(Value) ->
 			true
@@ -701,25 +1035,27 @@
 		;   domain_error(attribute_value(Attribute, Values), Value)
 		).
 
-	one_hot_encode(Values, Value, Encoded) :-
-		one_hot_encode_(Values, Value, Encoded0),
-		append(Encoded0, [0.0], Encoded).
+	one_hot_encode([Baseline| Values], Value, Encoded, Tail) :-
+		(   Value == Baseline ->
+			zero_vector_from_values(Values, Encoded, [0.0| Tail])
+		;   one_hot_encode_(Values, Value, Encoded, [0.0| Tail])
+		).
 
-	one_hot_encode_([], _, []).
-	one_hot_encode_([Category| Categories], Value, [Feature| Features]) :-
+	one_hot_encode_([], _Value, Tail, Tail).
+	one_hot_encode_([Category| Categories], Value, [Feature| Features], Tail) :-
 		(   Value == Category ->
-			Feature = 1.0
-		;   Feature = 0.0
-		),
-		one_hot_encode_(Categories, Value, Features).
+			Feature = 1.0,
+			zero_vector_from_values(Categories, Features, Tail)
+		;   Feature = 0.0,
+			one_hot_encode_(Categories, Value, Features, Tail)
+		).
 
-	missing_one_hot_encode(Values, Encoded) :-
-		zero_vector_from_values(Values, Zeroes),
-		append(Zeroes, [1.0], Encoded).
+	missing_one_hot_encode([_Baseline| Values], Encoded, Tail) :-
+		zero_vector_from_values(Values, Encoded, [1.0| Tail]).
 
-	zero_vector_from_values([], []).
-	zero_vector_from_values([_| Values], [0.0| Zeroes]) :-
-		zero_vector_from_values(Values, Zeroes).
+	zero_vector_from_values([], Tail, Tail).
+	zero_vector_from_values([_| Values], [0.0| Zeroes], Tail) :-
+		zero_vector_from_values(Values, Zeroes, Tail).
 
 	encoded_feature_count([], 0).
 	encoded_feature_count([continuous(_, _, _)| Encoders], Count) :-
@@ -729,7 +1065,7 @@
 	encoded_feature_count([categorical(_, Values)| Encoders], Count) :-
 		length(Values, ValueCount),
 		encoded_feature_count(Encoders, RestCount),
-		Count is RestCount + ValueCount + 1.
+		Count is RestCount + ValueCount.
 
 	build_linear_encoders([], _Examples, _Options, []).
 	build_linear_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders]) :-
@@ -740,66 +1076,398 @@
 		),
 		build_linear_encoders(Rest, Examples, Options, Encoders).
 
-	train_linear_model(Rows, FeatureCount, Options, Bias, Weights, TrainingDiagnostics) :-
-		zero_vector(FeatureCount, InitialWeights),
-		optimize_linear_model(Rows, Options, 0, 0.0, InitialWeights, 0.0, Bias, Weights, Convergence, Iterations, FinalDelta),
-		TrainingDiagnostics = [convergence(Convergence), iterations(Iterations), final_delta(FinalDelta)].
+	train_linear_model(Rows, FeatureCount, _Options, Bias, Weights, TrainingDiagnostics) :-
+		rows_to_training_matrix(Rows, FeatureCount, Targets, FeatureColumns, RowCount),
+		intercept_column(RowCount, InterceptColumn),
+		select_orthogonal_columns(FeatureColumns, Targets, InterceptColumn, SelectedColumns, ActiveFeatureCount),
+		solve_selected_least_squares(SelectedColumns, Coefficients),
+		expand_selected_coefficients(SelectedColumns, Coefficients, FeatureCount, Bias, Weights),
+		residual_sum_of_squares(Rows, Bias, Weights, ResidualSumOfSquares),
+		length(SelectedColumns, EffectiveRank),
+		TrainingDiagnostics = [solver(modified_gram_schmidt_column_pivoting), residual_sum_of_squares(ResidualSumOfSquares), effective_rank(EffectiveRank), active_feature_count(ActiveFeatureCount)].
 
-	optimize_linear_model(Rows, Options, Iteration, Bias0, Weights0, PreviousDelta, Bias, Weights, Convergence, Iterations, FinalDelta) :-
-		::option(maximum_iterations(MaxIterations), Options),
-		(   Iteration >= MaxIterations ->
-			Bias = Bias0,
-			Weights = Weights0,
-			Convergence = maximum_iterations_exhausted,
-			Iterations = Iteration,
-			FinalDelta = PreviousDelta
-		;   update_linear_parameters(Rows, Bias0, Weights0, Options, Bias1, Weights1, MaxDelta),
-			::option(tolerance(Tolerance), Options),
-			NextIteration is Iteration + 1,
-			(   MaxDelta =< Tolerance ->
-				Bias = Bias1,
-				Weights = Weights1,
-				Convergence = tolerance,
-				Iterations = NextIteration,
-				FinalDelta = MaxDelta
-			;   optimize_linear_model(Rows, Options, NextIteration, Bias1, Weights1, MaxDelta, Bias, Weights, Convergence, Iterations, FinalDelta)
+	rows_to_training_matrix(Rows, FeatureCount, Targets, Columns, RowCount) :-
+		empty_columns(FeatureCount, EmptyColumns),
+		rows_to_training_matrix(Rows, [], Targets0, EmptyColumns, Columns0, 0, RowCount),
+		reverse(Targets0, Targets),
+		reverse_columns(Columns0, Columns).
+
+	rows_to_training_matrix([], Targets, Targets, Columns, Columns, RowCount, RowCount).
+	rows_to_training_matrix([Features-Target| Rows], Targets0, Targets, Columns0, Columns, RowCount0, RowCount) :-
+		prepend_features_to_columns(Features, Columns0, Columns1),
+		RowCount1 is RowCount0 + 1,
+		rows_to_training_matrix(Rows, [Target| Targets0], Targets, Columns1, Columns, RowCount1, RowCount).
+
+	empty_columns(0, []) :-
+		!.
+	empty_columns(Count, [[]| Columns]) :-
+		Count > 0,
+		NextCount is Count - 1,
+		empty_columns(NextCount, Columns).
+
+	prepend_features_to_columns([], [], []).
+	prepend_features_to_columns([Feature| Features], [Column0| Columns0], [[Feature| Column0]| Columns]) :-
+		prepend_features_to_columns(Features, Columns0, Columns).
+
+	reverse_columns([], []).
+	reverse_columns([Column0| Columns0], [Column| Columns]) :-
+		reverse(Column0, Column),
+		reverse_columns(Columns0, Columns).
+
+	intercept_column(0, []) :-
+		!.
+	intercept_column(RowCount, [1.0| Column]) :-
+		RowCount > 0,
+		NextRowCount is RowCount - 1,
+		intercept_column(NextRowCount, Column).
+
+	select_orthogonal_columns(FeatureColumns, Targets, InterceptColumn, SelectedColumns, ActiveFeatureCount) :-
+		dot_product(InterceptColumn, InterceptColumn, InterceptNormSquared),
+		InterceptNorm is sqrt(InterceptNormSquared),
+		ensure_non_zero(InterceptNorm),
+		InterceptScale is 1.0 / InterceptNorm,
+		rescale(InterceptColumn, InterceptScale, InterceptBasis),
+		dot_product(InterceptBasis, Targets, InterceptQtY),
+		initialize_candidates(FeatureColumns, InterceptBasis, 1, Candidates),
+		select_active_columns(Candidates, Targets, [selected(intercept, [InterceptNorm], InterceptQtY)], SelectedColumns, ActiveFeatureCount).
+
+	initialize_candidates([], _InterceptBasis, _Index, []).
+	initialize_candidates([Column| Columns], InterceptBasis, Index, [Candidate| Candidates]) :-
+		initialize_candidate(Column, InterceptBasis, Index, Candidate),
+		NextIndex is Index + 1,
+		initialize_candidates(Columns, InterceptBasis, NextIndex, Candidates).
+
+	initialize_candidate(Column, InterceptBasis, Index, candidate(Index, Residual, [Projection])) :-
+		dot_product(InterceptBasis, Column, Projection),
+		add_scaled_vector(InterceptBasis, -Projection, Column, Residual).
+
+	select_active_columns(Candidates, Targets, SelectedColumns0, SelectedColumns, ActiveFeatureCount) :-
+		(   Candidates == [] ->
+			SelectedColumns = SelectedColumns0,
+			ActiveFeatureCount = 0
+		;   select_best_candidate(Candidates, Candidate, RemainingCandidates),
+			candidate_norm(Candidate, Norm),
+			(   Norm > 1.0e-12 ->
+				promote_candidate(Candidate, Norm, Targets, Basis, SelectedColumn),
+				orthogonalize_candidates(RemainingCandidates, Basis, OrthogonalCandidates),
+				append(SelectedColumns0, [SelectedColumn], SelectedColumns1),
+				select_active_columns(OrthogonalCandidates, Targets, SelectedColumns1, SelectedColumns, RestCount),
+				ActiveFeatureCount is RestCount + 1
+			;   SelectedColumns = SelectedColumns0,
+				ActiveFeatureCount = 0
 			)
 		).
 
-	update_linear_parameters(Rows, Bias0, Weights0, Options, Bias1, Weights1, MaxDelta) :-
-		length(Rows, Count),
-		zero_vector_like(Weights0, InitialGradientWeights),
-		accumulate_linear_gradients(Rows, Bias0, Weights0, 0.0, InitialGradientWeights, GradientBias, GradientWeights),
-		Scale is 1.0 / Count,
-		::option(learning_rate(LearningRate), Options),
-		::option(l2_regularization(Regularization), Options),
-		MeanBiasGradient is GradientBias * Scale,
-		Bias1 is Bias0 - LearningRate * MeanBiasGradient,
-		BiasDelta is abs(Bias1 - Bias0),
-		update_linear_weights(Weights0, GradientWeights, Scale, Regularization, LearningRate, Weights1, 0.0, MaxWeightDelta),
-		MaxDelta is max(BiasDelta, MaxWeightDelta).
+	select_best_candidate([Candidate| Candidates], BestCandidate, RemainingCandidates) :-
+		select_best_candidate(Candidates, Candidate, [], BestCandidate, RemainingCandidates).
 
-	accumulate_linear_gradients([], _, _, GradientBias, GradientWeights, GradientBias, GradientWeights).
-	accumulate_linear_gradients([Features-Target| Rows], Bias, Weights, GradientBias0, GradientWeights0, GradientBias, GradientWeights) :-
+	select_best_candidate([], BestCandidate, RemainingCandidates, BestCandidate, RemainingCandidates).
+	select_best_candidate([Candidate| Candidates], Candidate0, RemainingCandidates0, BestCandidate, RemainingCandidates) :-
+		candidate_norm(Candidate, Norm),
+		candidate_norm(Candidate0, Norm0),
+		(   Norm > Norm0 ->
+			Candidate1 = Candidate,
+			RemainingCandidates1 = [Candidate0| RemainingCandidates0]
+		;   Candidate1 = Candidate0,
+			RemainingCandidates1 = [Candidate| RemainingCandidates0]
+		),
+		select_best_candidate(Candidates, Candidate1, RemainingCandidates1, BestCandidate, RemainingCandidates).
+
+	candidate_norm(candidate(_Index, Residual, _Projections), Norm) :-
+		dot_product(Residual, Residual, NormSquared),
+		Norm is sqrt(NormSquared).
+
+	promote_candidate(candidate(Index, Residual, Projections), Norm, Targets, Basis, selected(Index, Coefficients, QtY)) :-
+		Scale is 1.0 / Norm,
+		rescale(Residual, Scale, Basis),
+		append(Projections, [Norm], Coefficients),
+		dot_product(Basis, Targets, QtY).
+
+	orthogonalize_candidates([], _Basis, []).
+	orthogonalize_candidates([candidate(Index, Residual0, Projections0)| Candidates0], Basis, [candidate(Index, Residual, Projections)| Candidates]) :-
+		dot_product(Basis, Residual0, Projection),
+		add_scaled_vector(Basis, -Projection, Residual0, Residual),
+		append(Projections0, [Projection], Projections),
+		orthogonalize_candidates(Candidates0, Basis, Candidates).
+
+	solve_selected_least_squares(SelectedColumns, Coefficients) :-
+		length(SelectedColumns, Count),
+		LastIndex is Count - 1,
+		solve_selected_least_squares(SelectedColumns, LastIndex, [], Pairs),
+		coefficients_from_pairs(Pairs, Coefficients).
+
+	solve_selected_least_squares(_SelectedColumns, -1, Pairs, Pairs) :-
+		!.
+	solve_selected_least_squares(SelectedColumns, Index, KnownPairs0, Pairs) :-
+		nth0(Index, SelectedColumns, selected(_SelectedIndex, TriangularCoefficients, QtY)),
+		last(TriangularCoefficients, Diagonal),
+		ensure_non_zero(Diagonal),
+		selected_correction(SelectedColumns, Index, KnownPairs0, Correction),
+		Coefficient is (QtY - Correction) / Diagonal,
+		NextIndex is Index - 1,
+		solve_selected_least_squares(SelectedColumns, NextIndex, [Index-Coefficient| KnownPairs0], Pairs).
+
+	selected_correction(_SelectedColumns, _RowIndex, [], 0.0) :-
+		!.
+	selected_correction(SelectedColumns, RowIndex, [ColumnIndex-Coefficient| Pairs], Correction) :-
+		nth0(ColumnIndex, SelectedColumns, selected(_SelectedIndex, TriangularCoefficients, _QtY)),
+		nth0(RowIndex, TriangularCoefficients, TriangularCoefficient),
+		selected_correction(SelectedColumns, RowIndex, Pairs, RestCorrection),
+		Correction is RestCorrection + TriangularCoefficient * Coefficient.
+
+	coefficients_from_pairs([], []).
+	coefficients_from_pairs([_Index-Coefficient| Pairs], [Coefficient| Coefficients]) :-
+		coefficients_from_pairs(Pairs, Coefficients).
+
+	expand_selected_coefficients([selected(intercept, _InterceptCoefficients, _InterceptQtY)| SelectedColumns], [Bias| Coefficients], FeatureCount, Bias, Weights) :-
+		zero_vector(FeatureCount, Weights0),
+		assign_selected_weights(SelectedColumns, Coefficients, Weights0, Weights).
+
+	assign_selected_weights([], [], Weights, Weights).
+	assign_selected_weights([selected(Index, _TriangularCoefficients, _QtY)| SelectedColumns], [Coefficient| Coefficients], Weights0, Weights) :-
+		set_weight_at(Weights0, Index, Coefficient, Weights1),
+		assign_selected_weights(SelectedColumns, Coefficients, Weights1, Weights).
+
+	set_weight_at([_Weight0| Weights], 1, Weight, [Weight| Weights]) :-
+		!.
+	set_weight_at([Weight0| Weights0], Index, Weight, [Weight0| Weights]) :-
+		NextIndex is Index - 1,
+		set_weight_at(Weights0, NextIndex, Weight, Weights).
+
+	residual_sum_of_squares(Rows, Bias, Weights, ResidualSumOfSquares) :-
+		residual_sum_of_squares(Rows, Bias, Weights, 0.0, ResidualSumOfSquares).
+
+	residual_sum_of_squares([], _Bias, _Weights, ResidualSumOfSquares, ResidualSumOfSquares).
+	residual_sum_of_squares([Features-Target| Rows], Bias, Weights, ResidualSumOfSquares0, ResidualSumOfSquares) :-
 		dot_product(Weights, Features, Linear),
-		Prediction is Bias + Linear,
-		Error is Prediction - Target,
-		GradientBias1 is GradientBias0 + Error,
-		add_scaled_vector(Features, Error, GradientWeights0, GradientWeights1),
-		accumulate_linear_gradients(Rows, Bias, Weights, GradientBias1, GradientWeights1, GradientBias, GradientWeights).
+		Residual is Bias + Linear - Target,
+		ResidualSumOfSquares1 is ResidualSumOfSquares0 + Residual * Residual,
+		residual_sum_of_squares(Rows, Bias, Weights, ResidualSumOfSquares1, ResidualSumOfSquares).
+
+	train_ridge_model(Rows, FeatureCount, Options, Bias, Weights, TrainingDiagnostics) :-
+		::option(regularization(Regularization), Options),
+		(   Regularization =< 1.0e-12 ->
+			train_linear_model(Rows, FeatureCount, Options, Bias, Weights, LinearDiagnostics),
+			append(LinearDiagnostics, [penalty_scaling(encoded_feature_standardization)], TrainingDiagnostics)
+		;   ridge_feature_statistics(Rows, PenaltyWeights, ActiveFlags),
+			active_feature_count(ActiveFlags, ActiveFeatureCount),
+			compress_rows(Rows, ActiveFlags, ActiveRows),
+			compress_vector(PenaltyWeights, ActiveFlags, ActivePenaltyWeights),
+			build_ridge_system(ActiveRows, ActivePenaltyWeights, Regularization, Matrix, Vector),
+			solve_linear_system(Matrix, Vector, [Bias| ActiveWeights], Solver),
+			expand_weights(ActiveFlags, ActiveWeights, Weights0),
+			(   FeatureCount =:= 0 ->
+				Weights = []
+			;   Weights = Weights0
+			),
+			maximum_linear_system_residual(Matrix, Vector, [Bias| ActiveWeights], Residual),
+			TrainingDiagnostics = [solver(Solver), linear_system_residual(Residual), active_feature_count(ActiveFeatureCount), penalty_scaling(encoded_feature_standardization)]
+		).
+
+	ridge_feature_statistics([Features-_Target| Rows], PenaltyWeights, ActiveFlags) :-
+		zero_vector_like(Features, Zeroes),
+		accumulate_feature_statistics([Features-_Target| Rows], Zeroes, Zeroes, Sums, SumSquares),
+		length([Features-_Target| Rows], Count),
+		feature_penalty_profiles(Sums, SumSquares, Count, PenaltyWeights, ActiveFlags).
+
+	accumulate_feature_statistics([], Sums, SumSquares, Sums, SumSquares).
+	accumulate_feature_statistics([Features-_Target| Rows], Sums0, SumSquares0, Sums, SumSquares) :-
+		add_scaled_vector(Features, 1.0, Sums0, Sums1),
+		add_squared_vector(Features, SumSquares0, SumSquares1),
+		accumulate_feature_statistics(Rows, Sums1, SumSquares1, Sums, SumSquares).
+
+	add_squared_vector([], [], []).
+	add_squared_vector([Feature| Features], [Square0| Squares0], [Square| Squares]) :-
+		Square is Square0 + Feature * Feature,
+		add_squared_vector(Features, Squares0, Squares).
+
+	feature_penalty_profiles([], [], _Count, [], []).
+	feature_penalty_profiles([Sum| Sums], [SumSquares| Squares], Count, [PenaltyWeight| PenaltyWeights], [Active| ActiveFlags]) :-
+		Mean is Sum / Count,
+		Variance0 is SumSquares / Count - Mean * Mean,
+		(   Variance0 > 1.0e-12 ->
+			PenaltyWeight = Variance0,
+			Active = active
+		;   PenaltyWeight = 1.0,
+			Active = inactive
+		),
+		feature_penalty_profiles(Sums, Squares, Count, PenaltyWeights, ActiveFlags).
+
+	active_feature_count([], 0).
+	active_feature_count([active| ActiveFlags], Count) :-
+		!,
+		active_feature_count(ActiveFlags, RestCount),
+		Count is RestCount + 1.
+	active_feature_count([inactive| ActiveFlags], Count) :-
+		active_feature_count(ActiveFlags, Count).
+
+	compress_rows([], _ActiveFlags, []).
+	compress_rows([Features-Target| Rows], ActiveFlags, [CompressedFeatures-Target| CompressedRows]) :-
+		compress_features(Features, ActiveFlags, CompressedFeatures),
+		compress_rows(Rows, ActiveFlags, CompressedRows).
+
+	compress_features([], [], []).
+	compress_features([Feature| Features], [active| ActiveFlags], [Feature| Compressed]) :-
+		!,
+		compress_features(Features, ActiveFlags, Compressed).
+	compress_features([_Feature| Features], [inactive| ActiveFlags], Compressed) :-
+		compress_features(Features, ActiveFlags, Compressed).
+
+	compress_vector([], [], []).
+	compress_vector([Value| Values], [active| ActiveFlags], [Value| Compressed]) :-
+		!,
+		compress_vector(Values, ActiveFlags, Compressed).
+	compress_vector([_Value| Values], [inactive| ActiveFlags], Compressed) :-
+		compress_vector(Values, ActiveFlags, Compressed).
+
+	build_ridge_system(Rows, PenaltyWeights, Regularization, Matrix, Vector) :-
+		length(PenaltyWeights, ActiveFeatureCount),
+		Size is ActiveFeatureCount + 1,
+		zero_matrix(Size, Size, Matrix0),
+		zero_vector(Size, Vector0),
+		accumulate_ridge_system(Rows, Matrix0, Vector0, Matrix1, Vector),
+		regularize_ridge_matrix(Matrix1, PenaltyWeights, Regularization, Matrix).
+
+	accumulate_ridge_system([], Matrix, Vector, Matrix, Vector).
+	accumulate_ridge_system([Features-Target| Rows], Matrix0, Vector0, Matrix, Vector) :-
+		add_outer_product([1.0| Features], [1.0| Features], Matrix0, Matrix1),
+		add_scaled_vector([1.0| Features], Target, Vector0, Vector1),
+		accumulate_ridge_system(Rows, Matrix1, Vector1, Matrix, Vector).
+
+	add_outer_product([], _Vector2, [], []).
+	add_outer_product([Value| Values], Vector2, [Row0| Rows0], [Row| Rows]) :-
+		add_scaled_vector(Vector2, Value, Row0, Row),
+		add_outer_product(Values, Vector2, Rows0, Rows).
+
+	regularize_ridge_matrix(Matrix0, PenaltyWeights, Regularization, Matrix) :-
+		regularize_ridge_matrix(Matrix0, PenaltyWeights, Regularization, 1, Matrix).
+
+	regularize_ridge_matrix([], _PenaltyWeights, _Regularization, _RowIndex, []).
+	regularize_ridge_matrix([Row0| Rows0], PenaltyWeights, Regularization, RowIndex, [Row| Rows]) :-
+		regularize_ridge_row(Row0, PenaltyWeights, Regularization, RowIndex, 1, Row),
+		NextRowIndex is RowIndex + 1,
+		regularize_ridge_matrix(Rows0, PenaltyWeights, Regularization, NextRowIndex, Rows).
+
+	regularize_ridge_row([], _PenaltyWeights, _Regularization, _RowIndex, _ColumnIndex, []).
+	regularize_ridge_row([Value| Values], PenaltyWeights, Regularization, RowIndex, ColumnIndex, [RegularizedValue| RegularizedValues]) :-
+		(   RowIndex > 1,
+			ColumnIndex =:= RowIndex ->
+			PenaltyIndex is RowIndex - 1,
+			penalty_weight(PenaltyWeights, PenaltyIndex, PenaltyWeight),
+			RegularizedValue is Value + Regularization * PenaltyWeight
+		;   RegularizedValue = Value
+		),
+		NextColumnIndex is ColumnIndex + 1,
+		regularize_ridge_row(Values, PenaltyWeights, Regularization, RowIndex, NextColumnIndex, RegularizedValues).
+
+	penalty_weight([PenaltyWeight| _PenaltyWeights], 1, PenaltyWeight) :-
+		!.
+	penalty_weight([_PenaltyWeight| PenaltyWeights], Index, PenaltyWeight) :-
+		NextIndex is Index - 1,
+		penalty_weight(PenaltyWeights, NextIndex, PenaltyWeight).
+
+	zero_matrix(0, _Columns, []) :-
+		!.
+	zero_matrix(Rows, Columns, [Row| Matrix]) :-
+		Rows > 0,
+		zero_vector(Columns, Row),
+		NextRows is Rows - 1,
+		zero_matrix(NextRows, Columns, Matrix).
+
+	solve_linear_system(Matrix, Vector, Solution, pivoted_gaussian_elimination) :-
+		augment_rows(Matrix, Vector, Rows),
+		triangularize(Rows, UpperRows),
+		back_substitution(UpperRows, Solution).
+
+	augment_rows([], [], []).
+	augment_rows([Row| Matrix], [Value| Vector], [row(Row, Value)| Rows]) :-
+		augment_rows(Matrix, Vector, Rows).
+
+	triangularize([], []).
+	triangularize([Row0| Rows0], [PivotRow| UpperRows]) :-
+		select_pivot_row([Row0| Rows0], PivotRow, Rows),
+		PivotRow = row([Pivot| PivotTail], PivotValue),
+		ensure_non_zero(Pivot),
+		eliminate_rows(Pivot, PivotTail, PivotValue, Rows, ReducedRows),
+		triangularize(ReducedRows, UpperRows).
+
+	select_pivot_row([Row| Rows], PivotRow, RemainingRows) :-
+		select_pivot_row(Rows, Row, [], PivotRow, RemainingRows).
+
+	select_pivot_row([], PivotRow, RemainingRows, PivotRow, RemainingRows).
+	select_pivot_row([Row| Rows], Candidate0, RemainingRows0, PivotRow, RemainingRows) :-
+		leading_magnitude(Row, Magnitude),
+		leading_magnitude(Candidate0, CandidateMagnitude),
+		(   Magnitude > CandidateMagnitude ->
+			Candidate = Row,
+			RemainingRows1 = [Candidate0| RemainingRows0]
+		;   Candidate = Candidate0,
+			RemainingRows1 = [Row| RemainingRows0]
+		),
+		select_pivot_row(Rows, Candidate, RemainingRows1, PivotRow, RemainingRows).
+
+	leading_magnitude(row([Leading| _Tail], _Value), Magnitude) :-
+		Magnitude is abs(Leading).
+
+	ensure_non_zero(Value) :-
+		(   abs(Value) > 1.0e-12 ->
+			true
+		;   evaluation_error(zero_divisor)
+		).
+
+	eliminate_rows(_Pivot, _PivotTail, _PivotValue, [], []) :-
+		!.
+	eliminate_rows(Pivot, PivotTail, PivotValue, [row([Leading| Tail], Value)| Rows], [row(NewTail, NewValue)| ReducedRows]) :-
+		Factor is Leading / Pivot,
+		scaled_row_difference(PivotTail, Tail, Factor, NewTail),
+		NewValue is Value - Factor * PivotValue,
+		eliminate_rows(Pivot, PivotTail, PivotValue, Rows, ReducedRows).
+
+	scaled_row_difference([], [], _Factor, []).
+	scaled_row_difference([PivotCoefficient| PivotTail], [Coefficient| Tail], Factor, [NewCoefficient| NewTail]) :-
+		NewCoefficient is Coefficient - Factor * PivotCoefficient,
+		scaled_row_difference(PivotTail, Tail, Factor, NewTail).
+
+	back_substitution(UpperRows, Solution) :-
+		reverse(UpperRows, ReversedRows),
+		back_substitution(ReversedRows, [], Solution).
+
+	back_substitution([], Solution, Solution).
+	back_substitution([row([Diagonal], Value)| Rows], KnownSolutions0, KnownSolutions) :-
+		!,
+		ensure_non_zero(Diagonal),
+		Solution is Value / Diagonal,
+		back_substitution(Rows, [Solution| KnownSolutions0], KnownSolutions).
+	back_substitution([row([Diagonal| Tail], Value)| Rows], KnownSolutions0, KnownSolutions) :-
+		ensure_non_zero(Diagonal),
+		dot_product(Tail, KnownSolutions0, Correction),
+		Solution is (Value - Correction) / Diagonal,
+		back_substitution(Rows, [Solution| KnownSolutions0], KnownSolutions).
+
+	maximum_linear_system_residual(Matrix, Vector, Solution, MaximumResidual) :-
+		maximum_linear_system_residual(Matrix, Vector, Solution, 0.0, MaximumResidual).
+
+	maximum_linear_system_residual([], [], _Solution, MaximumResidual, MaximumResidual).
+	maximum_linear_system_residual([Row| Matrix], [Value| Vector], Solution, MaximumResidual0, MaximumResidual) :-
+		dot_product(Row, Solution, RowValue),
+		Residual is abs(RowValue - Value),
+		(   Residual > MaximumResidual0 ->
+			MaximumResidual1 = Residual
+		;   MaximumResidual1 = MaximumResidual0
+		),
+		maximum_linear_system_residual(Matrix, Vector, Solution, MaximumResidual1, MaximumResidual).
+
+	expand_weights([], [], []).
+	expand_weights([active| ActiveFlags], [Weight| ActiveWeights], [Weight| Weights]) :-
+		!,
+		expand_weights(ActiveFlags, ActiveWeights, Weights).
+	expand_weights([inactive| ActiveFlags], ActiveWeights, [0.0| Weights]) :-
+		expand_weights(ActiveFlags, ActiveWeights, Weights).
 
 	add_scaled_vector([], _, [], []).
 	add_scaled_vector([Feature| Features], Scale, [Gradient| Gradients], [Updated| UpdatedGradients]) :-
 		Updated is Gradient + Feature * Scale,
 		add_scaled_vector(Features, Scale, Gradients, UpdatedGradients).
-
-	update_linear_weights([], [], _, _, _, [], MaxDelta, MaxDelta).
-	update_linear_weights([Weight0| Weights0], [Gradient| Gradients], Scale, Regularization, LearningRate, [Weight1| Weights1], MaxDelta0, MaxDelta) :-
-		MeanGradient is Gradient * Scale + Regularization * Weight0,
-		Weight1 is Weight0 - LearningRate * MeanGradient,
-		Delta is abs(Weight1 - Weight0),
-		MaxDelta1 is max(Delta, MaxDelta0),
-		update_linear_weights(Weights0, Gradients, Scale, Regularization, LearningRate, Weights1, MaxDelta1, MaxDelta).
 
 	zero_vector(0, []) :-
 		!.
@@ -820,9 +1488,11 @@
 
 	valid_feature_labels_([]).
 	valid_feature_labels_([feature(Attribute, value)| FeatureLabels]) :-
+		!,
 		atom(Attribute),
 		valid_feature_labels_(FeatureLabels).
 	valid_feature_labels_([feature(Attribute, missing)| FeatureLabels]) :-
+		!,
 		atom(Attribute),
 		valid_feature_labels_(FeatureLabels).
 	valid_feature_labels_([feature(Attribute, category(Value))| FeatureLabels]) :-

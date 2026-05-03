@@ -53,47 +53,52 @@
 		linear_regression::valid_regressor(linear_regressor(Encoders, 0.0, [1.0], Diagnostics)).
 
 	test(linear_regression_predict_3_simple_line, deterministic(Prediction =~= 13.0)) :-
-		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
+		linear_regression::learn(simple_line, Regressor),
 		linear_regression::predict(Regressor, [x-6], Prediction).
 
 	test(linear_regression_simple_line_matches_numberlist, deterministic(([Weight, Bias] =~= [Slope, Intercept]))) :-
 		numberlist::linear_regression([1,2,3,4,5], [3,5,7,9,11], Slope, Intercept),
-		linear_regression::learn(simple_line, linear_regressor([continuous(x, 0.0, 1.0)], Bias, [Weight, _MissingWeight], _Diagnostics), [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10)]).
+		linear_regression::learn(simple_line, linear_regressor([continuous(x, 0.0, 1.0)], Bias, [Weight, _MissingWeight], _Diagnostics), [feature_scaling(false)]).
 
 	test(linear_regression_predict_3_plane, deterministic(Prediction =~= 3.0)) :-
-		linear_regression::learn(plane, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
+		linear_regression::learn(plane, Regressor),
 		linear_regression::predict(Regressor, [x1-2, x2-4], Prediction).
 
 	test(linear_regression_predict_3_mixed_signal, deterministic(Prediction =~= 170.0)) :-
-		linear_regression::learn(mixed_signal, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
+		linear_regression::learn(mixed_signal, Regressor),
 		linear_regression::predict(Regressor, [age-15, student-yes, plan-premium], Prediction).
 
 	test(linear_regression_predict_3_sparse_mixed_signal_missing_attributes, true(Prediction > 150.0)) :-
-		linear_regression::learn(sparse_mixed_signal, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9)]),
+		linear_regression::learn(sparse_mixed_signal, Regressor),
 		linear_regression::predict(Regressor, [age-20], Prediction).
 
 	test(linear_regression_predict_3_intercept_only, deterministic(Prediction =~= 7.0)) :-
-		linear_regression::learn(intercept_only, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
+		linear_regression::learn(intercept_only, Regressor),
 		linear_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(linear_regression_learn_3_custom_options, deterministic((member(learning_rate(0.1), Options), member(maximum_iterations(1500), Options), member(tolerance(1.0e-6), Options), member(l2_regularization(0.02), Options), member(feature_scaling(false), Options)))) :-
-		linear_regression::learn(simple_line, Regressor, [learning_rate(0.1), maximum_iterations(1500), tolerance(1.0e-6), l2_regularization(0.02), feature_scaling(false)]),
+	test(linear_regression_learn_3_custom_options, deterministic((member(feature_scaling(false), Options), \+ member(learning_rate(_), Options), \+ member(maximum_iterations(_), Options), \+ member(tolerance(_), Options), \+ member(regularization(_), Options)))) :-
+		linear_regression::learn(simple_line, Regressor, [feature_scaling(false)]),
 		linear_regression::regressor_options(Regressor, Options).
 
-	test(linear_regression_diagnostics_2, deterministic((member(model(linear_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(convergence(Convergence), Diagnostics), member(Convergence, [tolerance, maximum_iterations_exhausted]), member(iterations(Iterations), Diagnostics), Iterations >= 1, member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0, member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(feature_scaling(true), Options)))) :-
+	test(linear_regression_diagnostics_2, deterministic((member(model(linear_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(solver(modified_gram_schmidt_column_pivoting), Diagnostics), member(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics), ResidualSumOfSquares =< 1.0e-8, member(effective_rank(2), Diagnostics), member(active_feature_count(1), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(feature_scaling(true), Options)))) :-
 		linear_regression::learn(simple_line, Regressor),
 		linear_regression::diagnostics(Regressor, Diagnostics).
 
-	test(linear_regression_learn_3_maximum_iterations_diagnostics, deterministic((member(convergence(maximum_iterations_exhausted), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta > 0.0))) :-
-		linear_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(1), tolerance(1.0e-12)]),
+	test(linear_regression_mixed_signal_encoded_feature_count, deterministic(member(encoded_feature_count(6), Diagnostics))) :-
+		linear_regression::learn(mixed_signal, Regressor),
 		linear_regression::diagnostics(Regressor, Diagnostics).
 
-	test(linear_regression_learn_3_tolerance_diagnostics, deterministic((member(convergence(tolerance), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0))) :-
-		linear_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(100.0)]),
+	test(linear_regression_collinear_line_rank_handling, deterministic((Prediction =~= 27.0, member(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics), ResidualSumOfSquares =< 1.0e-8, member(effective_rank(2), Diagnostics), member(active_feature_count(1), Diagnostics), member(encoded_feature_count(4), Diagnostics)))) :-
+		linear_regression::learn(collinear_line, Regressor, [feature_scaling(false)]),
+		linear_regression::predict(Regressor, [x1-6, x2-12], Prediction),
+		linear_regression::diagnostics(Regressor, Diagnostics).
+
+	test(linear_regression_intercept_only_diagnostics, deterministic((member(solver(modified_gram_schmidt_column_pivoting), Diagnostics), member(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics), ResidualSumOfSquares =< 1.0e-8, member(effective_rank(1), Diagnostics), member(active_feature_count(0), Diagnostics), member(encoded_feature_count(2), Diagnostics)))) :-
+		linear_regression::learn(intercept_only, Regressor),
 		linear_regression::diagnostics(Regressor, Diagnostics).
 
 	test(linear_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
-		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
+		linear_regression::learn(simple_line, Regressor),
 		linear_regression::export_to_clauses(_Dataset, Regressor, regress, [Clause]),
 		linear_regression::predict(Clause, [x-6], Prediction).
 
@@ -104,7 +109,7 @@
 
 	test(linear_regression_export_to_file_4_loaded, deterministic(Prediction =~= 13.0)) :-
 		^^file_path('test_output.pl', File),
-		linear_regression::learn(simple_line, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
+		linear_regression::learn(simple_line, Regressor),
 		linear_regression::export_to_file(simple_line, Regressor, regress, File),
 		logtalk_load(File),
 		{regress(Encoders, Bias, Weights, Diagnostics)},
@@ -117,6 +122,9 @@
 
 	test(linear_regression_learn_2_invalid_target, error(type_error(number, bad))) :-
 		linear_regression::learn(invalid_target, _Regressor).
+
+	test(linear_regression_learn_2_duplicate_attribute_declaration, error(domain_error(attribute_declarations, x))) :-
+		linear_regression::learn(duplicate_attribute_declaration, _Regressor).
 
 	test(linear_regression_predict_3_undeclared_attribute, error(domain_error(declared_attribute, typo))) :-
 		linear_regression::learn(simple_line, Regressor),

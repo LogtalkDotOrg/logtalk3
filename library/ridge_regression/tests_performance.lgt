@@ -38,25 +38,28 @@
 	]).
 
 	test(simple_line_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(simple_line, [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)], 0.01, 0.01, TrainTime, RMSE, MAE).
+		reference_fit(simple_line, [feature_scaling(false), regularization(0.0)], 0.01, 0.01, TrainTime, RMSE, MAE).
 
 	test(simple_line_default_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(simple_line, [], 0.25, 0.25, TrainTime, RMSE, MAE).
 
 	test(plane_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(plane, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9), regularization(0.0)], 0.05, 0.05, TrainTime, RMSE, MAE).
+		reference_fit(plane, [regularization(0.0)], 0.05, 0.05, TrainTime, RMSE, MAE).
 
 	test(plane_default_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(plane, [], 0.5, 0.5, TrainTime, RMSE, MAE).
 
 	test(mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(mixed_signal, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9), regularization(0.0)], 0.05, 0.05, TrainTime, RMSE, MAE).
+		reference_fit(mixed_signal, [regularization(0.0)], 0.05, 0.05, TrainTime, RMSE, MAE).
 
 	test(mixed_signal_default_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
 		reference_fit(mixed_signal, [], 1.0, 1.0, TrainTime, RMSE, MAE).
 
+	test(wide_mixed_signal_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
+		reference_fit(wide_mixed_signal, [regularization(0.0)], 0.20, 0.20, TrainTime, RMSE, MAE).
+
 	test(intercept_only_reference_fit, true, [note(metrics(train_seconds-TrainTime, rmse-RMSE, mae-MAE))]) :-
-		reference_fit(intercept_only, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)], 0.01, 0.01, TrainTime, RMSE, MAE).
+		reference_fit(intercept_only, [], 0.01, 0.01, TrainTime, RMSE, MAE).
 
 	reference_fit(Dataset, Options, MaximumRMSE, MaximumMAE, TrainTime, RMSE, MAE) :-
 		benchmark(ridge_regression::learn(Dataset, _Regressor, Options), TrainTime),

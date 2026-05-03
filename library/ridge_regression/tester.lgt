@@ -27,6 +27,7 @@
 	logtalk_load(options(loader)),
 	logtalk_load(regression_protocols(loader)),
 	logtalk_load([
+		regression_protocols('test_datasets/duplicate_attribute_declaration'),
 		regression_protocols('test_datasets/simple_line'),
 		regression_protocols('test_datasets/plane'),
 		regression_protocols('test_datasets/mixed_signal'),

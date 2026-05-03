@@ -24,15 +24,47 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-02,
 		comment is 'Shared internal Glicko-2 numeric helpers for rating updates, volatility search, and scale conversions.'
 	]).
 
 	:- protected(update_item_parameters/10).
+	:- mode(update_item_parameters(+term, +list(compound), +compound, +compound, +compound, +number, +number, -number, -number, -number), one).
+	:- info(update_item_parameters/10, [
+		comment is 'Computes the simultaneous Glicko-2 rating, deviation, and volatility update for one item over a rating period using the current dictionaries and aggregated game results.',
+		argnames is [
+			'Item', 'ItemResults', 'Ratings', 'Deviations', 'Volatilities', 'Tau', 'VolatilityTolerance',
+			'UpdatedRating', 'UpdatedDeviation', 'UpdatedVolatility'
+		]
+	]).
+
 	:- protected(to_mu/2).
+	:- mode(to_mu(+number, -number), one).
+	:- info(to_mu/2, [
+		comment is 'Converts a rating on the external Glicko scale to the internal ``mu`` scale.',
+		argnames is ['Rating', 'Mu']
+	]).
+
 	:- protected(to_phi/2).
+	:- mode(to_phi(+number, -number), one).
+	:- info(to_phi/2, [
+		comment is 'Converts a rating deviation on the external Glicko scale to the internal ``phi`` scale.',
+		argnames is ['Deviation', 'Phi']
+	]).
+
 	:- protected(to_rating/2).
+	:- mode(to_rating(+number, -number), one).
+	:- info(to_rating/2, [
+		comment is 'Converts a value on the internal ``mu`` scale back to the external Glicko rating scale.',
+		argnames is ['Mu', 'Rating']
+	]).
+
 	:- protected(to_deviation/2).
+	:- mode(to_deviation(+number, -number), one).
+	:- info(to_deviation/2, [
+		comment is 'Converts a value on the internal ``phi`` scale back to the external Glicko rating-deviation scale.',
+		argnames is ['Phi', 'Deviation']
+	]).
 
 	:- uses(avltree, [
 		lookup/3 as dictionary_lookup/3

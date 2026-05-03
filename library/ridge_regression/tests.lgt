@@ -40,7 +40,9 @@
 	cover(ridge_regression).
 
 	cleanup :-
-		^^clean_file('test_output.pl').
+		^^clean_file('test_output.pl'),
+		^^clean_file('test_output_simple_line.pl'),
+		^^clean_file('test_output_mixed_signal.pl').
 
 	test(ridge_regression_learn_2_simple_line, deterministic(ground(Regressor))) :-
 		ridge_regression::learn(simple_line, Regressor).
@@ -53,7 +55,7 @@
 		ridge_regression::valid_regressor(ridge_regressor(Encoders, 0.0, [1.0], Diagnostics)).
 
 	test(ridge_regression_predict_3_simple_line, deterministic(Prediction =~= 13.0)) :-
-		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
+		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), regularization(0.0)]),
 		ridge_regression::predict(Regressor, [x-6], Prediction).
 
 	test(ridge_regression_predict_3_simple_line_default_regularized, true(abs(Prediction - 13.0) < 0.25)) :-
@@ -61,11 +63,15 @@
 		ridge_regression::predict(Regressor, [x-6], Prediction).
 
 	test(ridge_regression_regularization_shrinks_weight, true(abs(ShrunkWeight) < abs(UnregularizedWeight))) :-
-		ridge_regression::learn(simple_line, ridge_regressor([continuous(x, 0.0, 1.0)], _UnregularizedBias, [UnregularizedWeight, _UnregularizedMissingWeight], _UnregularizedDiagnostics), [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
-		ridge_regression::learn(simple_line, ridge_regressor([continuous(x, 0.0, 1.0)], _ShrunkBias, [ShrunkWeight, _ShrunkMissingWeight], _ShrunkDiagnostics), [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.1)]).
+		ridge_regression::learn(simple_line, ridge_regressor([continuous(x, 0.0, 1.0)], _UnregularizedBias, [UnregularizedWeight, _UnregularizedMissingWeight], _UnregularizedDiagnostics), [feature_scaling(false), regularization(0.0)]),
+		ridge_regression::learn(simple_line, ridge_regressor([continuous(x, 0.0, 1.0)], _ShrunkBias, [ShrunkWeight, _ShrunkMissingWeight], _ShrunkDiagnostics), [feature_scaling(false), regularization(0.1)]).
+
+	test(ridge_regression_regularization_shrinks_categorical_weight, true(abs(ShrunkPremiumWeight) < abs(UnregularizedPremiumWeight))) :-
+		ridge_regression::learn(mixed_signal, ridge_regressor(_Encoders0, _Bias0, [_AgeWeight0, _AgeMissingWeight0, _StudentNoWeight0, _StudentMissingWeight0, UnregularizedPremiumWeight, _PlanMissingWeight0], _Diagnostics0), [regularization(0.0)]),
+		ridge_regression::learn(mixed_signal, ridge_regressor(_Encoders1, _Bias1, [_AgeWeight1, _AgeMissingWeight1, _StudentNoWeight1, _StudentMissingWeight1, ShrunkPremiumWeight, _PlanMissingWeight1], _Diagnostics1), [regularization(0.2)]).
 
 	test(ridge_regression_predict_3_plane, deterministic(Prediction =~= 3.0)) :-
-		ridge_regression::learn(plane, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9), regularization(0.0)]),
+		ridge_regression::learn(plane, Regressor, [regularization(0.0)]),
 		ridge_regression::predict(Regressor, [x1-2, x2-4], Prediction).
 
 	test(ridge_regression_predict_3_mixed_signal_default_regularized, true(abs(Prediction - 175.0) < 1.0)) :-
@@ -73,31 +79,33 @@
 		ridge_regression::predict(Regressor, [age-20, student-yes, plan-premium], Prediction).
 
 	test(ridge_regression_predict_3_sparse_mixed_signal_missing_attributes, true(Prediction > 150.0)) :-
-		ridge_regression::learn(sparse_mixed_signal, Regressor, [learning_rate(0.05), maximum_iterations(8000), tolerance(1.0e-9), regularization(0.0)]),
+		ridge_regression::learn(sparse_mixed_signal, Regressor, [regularization(0.0)]),
 		ridge_regression::predict(Regressor, [age-20], Prediction).
 
 	test(ridge_regression_predict_3_intercept_only, deterministic(Prediction =~= 7.0)) :-
-		ridge_regression::learn(intercept_only, Regressor, [learning_rate(0.05), maximum_iterations(5000), tolerance(1.0e-9)]),
+		ridge_regression::learn(intercept_only, Regressor),
 		ridge_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(ridge_regression_learn_3_custom_options, deterministic((member(learning_rate(0.1), Options), member(maximum_iterations(1500), Options), member(tolerance(1.0e-6), Options), member(regularization(0.02), Options), member(feature_scaling(false), Options)))) :-
-		ridge_regression::learn(simple_line, Regressor, [learning_rate(0.1), maximum_iterations(1500), tolerance(1.0e-6), regularization(0.02), feature_scaling(false)]),
+	test(ridge_regression_learn_3_custom_options, deterministic((member(regularization(0.02), Options), member(feature_scaling(false), Options)))) :-
+		ridge_regression::learn(simple_line, Regressor, [regularization(0.02), feature_scaling(false)]),
 		ridge_regression::regressor_options(Regressor, Options).
 
-	test(ridge_regression_diagnostics_2, deterministic((member(model(ridge_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(convergence(Convergence), Diagnostics), member(Convergence, [tolerance, maximum_iterations_exhausted]), member(iterations(Iterations), Diagnostics), Iterations >= 1, member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0, member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(regularization(0.01), Options)))) :-
+	test(ridge_regression_diagnostics_2, deterministic((member(model(ridge_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(solver(pivoted_gaussian_elimination), Diagnostics), member(linear_system_residual(Residual), Diagnostics), Residual =< 1.0e-8, member(active_feature_count(1), Diagnostics), member(penalty_scaling(encoded_feature_standardization), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(regularization(0.01), Options)))) :-
 		ridge_regression::learn(simple_line, Regressor),
 		ridge_regression::diagnostics(Regressor, Diagnostics).
 
-	test(ridge_regression_learn_3_maximum_iterations_diagnostics, deterministic((member(convergence(maximum_iterations_exhausted), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta > 0.0))) :-
-		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(1), tolerance(1.0e-12), regularization(0.0)]),
+	test(ridge_regression_mixed_signal_encoded_feature_count, deterministic((member(encoded_feature_count(6), Diagnostics), member(active_feature_count(3), Diagnostics)))) :-
+		ridge_regression::learn(mixed_signal, Regressor),
 		ridge_regression::diagnostics(Regressor, Diagnostics).
 
-	test(ridge_regression_learn_3_tolerance_diagnostics, deterministic((member(convergence(tolerance), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0))) :-
-		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(100.0), regularization(0.01)]),
-		ridge_regression::diagnostics(Regressor, Diagnostics).
+	test(ridge_regression_simple_line_zero_variance_missing_weight_is_zero, deterministic(MissingWeight =~= 0.0)) :-
+		ridge_regression::learn(simple_line, ridge_regressor(_Encoders, _Bias, [_Weight, MissingWeight], _Diagnostics), [feature_scaling(false), regularization(0.0)]).
+
+	test(ridge_regression_intercept_only_zero_variance_weights_are_zero, deterministic(([ValueWeight, MissingWeight] =~= [0.0, 0.0]))) :-
+		ridge_regression::learn(intercept_only, ridge_regressor(_Encoders, _Bias, [ValueWeight, MissingWeight], _Diagnostics)).
 
 	test(ridge_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
-		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
+		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), regularization(0.0)]),
 		ridge_regression::export_to_clauses(_Dataset, Regressor, regress, [Clause]),
 		ridge_regression::predict(Clause, [x-6], Prediction).
 
@@ -113,15 +121,15 @@
 		ridge_regression::export_to_file(simple_line, Regressor, regress, File).
 
 	test(ridge_regression_export_to_file_4_loaded, deterministic(Prediction =~= 13.0)) :-
-		^^file_path('test_output.pl', File),
-		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), learning_rate(0.01), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
+		^^file_path('test_output_simple_line.pl', File),
+		ridge_regression::learn(simple_line, Regressor, [feature_scaling(false), regularization(0.0)]),
 		ridge_regression::export_to_file(simple_line, Regressor, regress_simple_line, File),
 		logtalk_load(File),
 		{regress_simple_line(Encoders, Bias, Weights, Diagnostics)},
 		ridge_regression::predict(regress(Encoders, Bias, Weights, Diagnostics), [x-6], Prediction).
 
 	test(ridge_regression_export_to_file_4_loaded_default_regularized, deterministic(LoadedPrediction =~= ModelPrediction)) :-
-		^^file_path('test_output.pl', File),
+		^^file_path('test_output_mixed_signal.pl', File),
 		ridge_regression::learn(mixed_signal, Regressor),
 		ridge_regression::predict(Regressor, [age-20, student-yes, plan-premium], ModelPrediction),
 		ridge_regression::export_to_file(mixed_signal, Regressor, regress_mixed_signal, File),
@@ -136,6 +144,9 @@
 
 	test(ridge_regression_learn_2_invalid_target, error(type_error(number, bad))) :-
 		ridge_regression::learn(invalid_target, _Regressor).
+
+	test(ridge_regression_learn_2_duplicate_attribute_declaration, error(domain_error(attribute_declarations, x))) :-
+		ridge_regression::learn(duplicate_attribute_declaration, _Regressor).
 
 	test(ridge_regression_predict_3_undeclared_attribute, error(domain_error(declared_attribute, typo))) :-
 		ridge_regression::learn(simple_line, Regressor),

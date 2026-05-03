@@ -132,7 +132,20 @@ regression with multiple distance metrics, weighting schemes, optional
 feature scaling, and mixed-feature support.
 
 * ADDED: New `linear_regression` library implementing linear regression
-for continuous and mixed-feature datasets using batch gradient descent.
+for continuous and mixed-feature datasets using a direct ordinary
+least-squares solve with pivoted orthogonal rank handling.
+
+* ADDED: New `ridge_regression` library implementing ridge regression for
+continuous and mixed-feature datasets using a direct weighted linear-system
+solve with scale-aware L2 regularization.
+
+* ADDED: New `lasso_regression` library implementing lasso regression for
+continuous and mixed-feature datasets using coordinate descent with
+L1 regularization.
+
+* ADDED: New `elastic_net_regression` library implementing elastic net
+regression for continuous and mixed-feature datasets using coordinate
+descent with mixed L1/L2 regularization.
 
 * ADDED: New `regression_tree` library implementing regression trees for
 continuous and mixed-feature datasets using recursive variance-reduction
@@ -141,10 +154,6 @@ splits.
 * ADDED: New `random_forest_regression` library implementing random
 forest regression using regression trees trained on bootstrap samples
 and random feature subsets.
-
-* ADDED: New `ridge_regression` library implementing ridge regression for
-continuous and mixed-feature datasets using batch gradient descent with
-L2 regularization.
 
 * ADDED: New `dimension_reduction_protocols` library with protocols and
 datasets for use in the implementation of machine learning dimension
@@ -340,6 +349,9 @@ all their entities in optimal mode.
 
 * FIXED: Deleted dead code in the `linda`, `meta_compiler`, `sockets`, `toml`,
 and `validations` libraries.
+
+* FIXED: The `numberlist` object `average/2`, `median/2`, and `softmax/2-3`
+predicate to workaround SWI-Prolog returning integers for float operations.
 
 Tools
 -----

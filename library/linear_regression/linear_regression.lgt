@@ -26,10 +26,10 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-02,
-		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using batch gradient descent. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
+		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using a direct ordinary least-squares solve. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
-			'Algorithm' - 'Uses batch gradient descent to minimize mean squared error. Supports optional L2 regularization and optional feature scaling for continuous attributes.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
+			'Algorithm' - 'Uses the shared regression encoding core to solve the ordinary least-squares problem directly with pivoted modified Gram-Schmidt orthogonalization. The intercept is always retained and encoded feature columns that are numerically dependent on earlier selected columns are dropped and assigned zero coefficients.',
+			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and encoded columns with no independent signal after accounting for the intercept and previously selected features are assigned zero coefficients.',
 			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
 			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
 			'Regressor representation' - 'The learned regressor is represented by default as ``linear_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.'
@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		append/3
+		append/3, memberchk/2
 	]).
 
 	:- uses(numberlist, [
@@ -84,11 +84,22 @@
 			^^encoded_feature_count(Encoders, FeatureCount),
 			valid(list(float, FeatureCount), Weights),
 			^^valid_regressor_metadata(linear_regression, Diagnostics),
-			^^valid_linear_model_diagnostics(Diagnostics),
+			valid_linear_regression_diagnostics(Diagnostics),
 			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
 		;   domain_error(regressor, Regressor)
 		).
+
+	valid_linear_regression_diagnostics(Diagnostics) :-
+		memberchk(solver(modified_gram_schmidt_column_pivoting), Diagnostics),
+		memberchk(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics),
+		valid(non_negative_float, ResidualSumOfSquares),
+		memberchk(effective_rank(EffectiveRank), Diagnostics),
+		integer(EffectiveRank),
+		EffectiveRank >= 1,
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics),
+		integer(ActiveFeatureCount),
+		ActiveFeatureCount >= 0.
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
 		Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
@@ -114,20 +125,8 @@
 		format('  ~w (categorical, values=~w, missing-indicator=yes)~n', [Attribute, Values]),
 		print_encoders(Encoders).
 
-	default_option(learning_rate(0.05)).
-	default_option(maximum_iterations(2000)).
-	default_option(tolerance(1.0e-7)).
-	default_option(l2_regularization(0.0)).
 	default_option(feature_scaling(true)).
 
-	valid_option(learning_rate(Rate)) :-
-		valid(positive_float, Rate).
-	valid_option(maximum_iterations(Iterations)) :-
-		valid(positive_integer, Iterations).
-	valid_option(tolerance(Tolerance)) :-
-		valid(non_negative_float, Tolerance).
-	valid_option(l2_regularization(Regularization)) :-
-		valid(non_negative_float, Regularization).
 	valid_option(feature_scaling(FeatureScaling)) :-
 		valid(boolean, FeatureScaling).
 

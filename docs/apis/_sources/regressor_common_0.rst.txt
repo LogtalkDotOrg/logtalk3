@@ -465,7 +465,7 @@ Validates and encodes an attribute-value list as a numeric feature vector using 
 ``fit_linear_model/7``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Builds linear-model encoders from the training dataset, encodes the examples, fits a bias plus weight vector using batch gradient descent and an L2 regularization option, and returns optimization diagnostics terms.
+Builds linear-model encoders from the training dataset, encodes the examples, fits an ordinary least-squares bias plus weight vector using a direct pivoted orthogonal solve, and returns solver diagnostics terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -474,6 +474,25 @@ Builds linear-model encoders from the training dataset, encodes the examples, fi
 |    ``fit_linear_model(Dataset,Options,Encoders,TrainingExampleCount,Bias,Weights,TrainingDiagnostics)``
 | **Mode and number of proofs:**
 |    ``fit_linear_model(+object_identifier,+list(compound),-list(compound),-integer,-float,-list(float),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: fit_ridge_model/7
+.. _regressor_common/0::fit_ridge_model/7:
+
+``fit_ridge_model/7``
+^^^^^^^^^^^^^^^^^^^^^
+
+Builds linear-model encoders from the training dataset, encodes the examples, fits a bias plus weight vector by solving the ridge normal equations with partial pivoting, and returns ridge-specific diagnostics terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit_ridge_model(Dataset,Options,Encoders,TrainingExampleCount,Bias,Weights,TrainingDiagnostics)``
+| **Mode and number of proofs:**
+|    ``fit_ridge_model(+object_identifier,+list(compound),-list(compound),-integer,-float,-list(float),-list(compound))`` - ``one``
 
 
 ------------
@@ -518,6 +537,29 @@ True when a regression tree only contains valid ``leaf/1`` and ``node/5`` terms 
 
 Private predicates
 ------------------
+
+.. index:: check_attribute_declarations/1
+.. _regressor_common/0::check_attribute_declarations/1:
+
+``check_attribute_declarations/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that dataset attribute declarations use distinct attribute names and valid value domains.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_attribute_declarations(Attributes)``
+| **Mode and number of proofs:**
+|    ``check_attribute_declarations(+list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An attribute is declared more than once or uses an invalid value domain:
+|        ``domain_error(attribute_declarations,Attribute)``
+
+
+------------
 
 .. index:: known_attribute_values/3
 .. _regressor_common/0::known_attribute_values/3:
@@ -728,59 +770,59 @@ Validates that a categorical value is declared for an attribute.
 
 ------------
 
-.. index:: one_hot_encode/3
-.. _regressor_common/0::one_hot_encode/3:
+.. index:: one_hot_encode/4
+.. _regressor_common/0::one_hot_encode/4:
 
-``one_hot_encode/3``
+``one_hot_encode/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Encodes a declared categorical value using one-hot encoding plus a trailing missing-value indicator feature set to zero.
+Encodes a declared categorical value using reference-level dummy coding plus a trailing missing-value indicator feature set to zero.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``one_hot_encode(Values,Value,Encoded)``
+|    ``one_hot_encode(Values,Value,Encoded,Tail)``
 | **Mode and number of proofs:**
-|    ``one_hot_encode(+list,+nonvar,-list(float))`` - ``one``
+|    ``one_hot_encode(+list,+nonvar,-list(float),+list(float))`` - ``one``
 
 
 ------------
 
-.. index:: missing_one_hot_encode/2
-.. _regressor_common/0::missing_one_hot_encode/2:
+.. index:: missing_one_hot_encode/3
+.. _regressor_common/0::missing_one_hot_encode/3:
 
-``missing_one_hot_encode/2``
+``missing_one_hot_encode/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Encodes a missing categorical value as zeroes plus a trailing missing-value indicator feature set to one.
+Encodes a missing categorical value as reference-level dummy zeroes plus a trailing missing-value indicator feature set to one.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``missing_one_hot_encode(Values,Encoded)``
+|    ``missing_one_hot_encode(Values,Encoded,Tail)``
 | **Mode and number of proofs:**
-|    ``missing_one_hot_encode(+list,-list(float))`` - ``one``
+|    ``missing_one_hot_encode(+list,-list(float),+list(float))`` - ``one``
 
 
 ------------
 
-.. index:: zero_vector_from_values/2
-.. _regressor_common/0::zero_vector_from_values/2:
+.. index:: zero_vector_from_values/3
+.. _regressor_common/0::zero_vector_from_values/3:
 
-``zero_vector_from_values/2``
+``zero_vector_from_values/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a zero vector with one element per declared categorical value.
+Creates a zero vector with one element per supplied categorical value slot.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``zero_vector_from_values(Values,Zeroes)``
+|    ``zero_vector_from_values(Values,Zeroes,Tail)``
 | **Mode and number of proofs:**
-|    ``zero_vector_from_values(+list,-list(float))`` - ``one``
+|    ``zero_vector_from_values(+list,-list(float),+list(float))`` - ``one``
 
 
 ------------
@@ -810,7 +852,7 @@ Builds the encoder list used by linear models from dataset attribute declaration
 ``train_linear_model/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Fits a linear model bias and weight vector from encoded rows using batch gradient descent and returns optimization diagnostics terms.
+Fits an ordinary least-squares linear model bias and weight vector from encoded rows using a direct pivoted orthogonal solve and returns solver diagnostics terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -823,59 +865,382 @@ Fits a linear model bias and weight vector from encoded rows using batch gradien
 
 ------------
 
-.. index:: optimize_linear_model/11
-.. _regressor_common/0::optimize_linear_model/11:
+.. index:: rows_to_training_matrix/5
+.. _regressor_common/0::rows_to_training_matrix/5:
 
-``optimize_linear_model/11``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``rows_to_training_matrix/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Runs iterative batch gradient-descent updates until the tolerance or maximum iteration limit is reached and reports the stop reason, completed iterations, and final maximum parameter delta.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``optimize_linear_model(Rows,Options,Iteration,Bias0,Weights0,PreviousDelta,Bias,Weights,Convergence,Iterations,FinalDelta)``
-| **Mode and number of proofs:**
-|    ``optimize_linear_model(+list(pair),+list(compound),+integer,+float,+list(float),+float,-float,-list(float),-atom,-integer,-float)`` - ``one``
-
-
-------------
-
-.. index:: update_linear_parameters/7
-.. _regressor_common/0::update_linear_parameters/7:
-
-``update_linear_parameters/7``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Performs one batch gradient-descent parameter update step and returns the maximum absolute parameter change.
+Transforms encoded training rows into a target vector and one numeric column per encoded feature.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``update_linear_parameters(Rows,Bias0,Weights0,Options,Bias1,Weights1,MaxDelta)``
+|    ``rows_to_training_matrix(Rows,FeatureCount,Targets,Columns,RowCount)``
 | **Mode and number of proofs:**
-|    ``update_linear_parameters(+list(pair),+float,+list(float),+list(compound),-float,-list(float),-float)`` - ``one``
+|    ``rows_to_training_matrix(+list(pair),+integer,-list(float),-list(list(float)),-integer)`` - ``one``
 
 
 ------------
 
-.. index:: accumulate_linear_gradients/7
-.. _regressor_common/0::accumulate_linear_gradients/7:
+.. index:: empty_columns/2
+.. _regressor_common/0::empty_columns/2:
 
-``accumulate_linear_gradients/7``
+``empty_columns/2``
+^^^^^^^^^^^^^^^^^^^
+
+Creates a list of empty columns with the requested count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty_columns(Count,Columns)``
+| **Mode and number of proofs:**
+|    ``empty_columns(+integer,-list(list))`` - ``one``
+
+
+------------
+
+.. index:: prepend_features_to_columns/3
+.. _regressor_common/0::prepend_features_to_columns/3:
+
+``prepend_features_to_columns/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accumulates the batch bias and weight gradients over a list of encoded training rows.
+Prepends one encoded feature vector into the accumulated column-oriented design matrix representation.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``accumulate_linear_gradients(Rows,Bias,Weights,GradientBias0,GradientWeights0,GradientBias,GradientWeights)``
+|    ``prepend_features_to_columns(Features,Columns0,Columns)``
 | **Mode and number of proofs:**
-|    ``accumulate_linear_gradients(+list(pair),+float,+list(float),+float,+list(float),-float,-list(float))`` - ``one``
+|    ``prepend_features_to_columns(+list(float),+list(list(float)),-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: reverse_columns/2
+.. _regressor_common/0::reverse_columns/2:
+
+``reverse_columns/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Reverses every column in a column-oriented design matrix built by prepending feature values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reverse_columns(Columns0,Columns)``
+| **Mode and number of proofs:**
+|    ``reverse_columns(+list(list(float)),-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: intercept_column/2
+.. _regressor_common/0::intercept_column/2:
+
+``intercept_column/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates the all-ones intercept column for a given number of training rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``intercept_column(RowCount,Column)``
+| **Mode and number of proofs:**
+|    ``intercept_column(+integer,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: select_orthogonal_columns/5
+.. _regressor_common/0::select_orthogonal_columns/5:
+
+``select_orthogonal_columns/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a pivoted orthogonal least-squares basis consisting of the intercept and the encoded feature columns that contribute independent signal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_orthogonal_columns(FeatureColumns,Targets,InterceptColumn,SelectedColumns,ActiveFeatureCount)``
+| **Mode and number of proofs:**
+|    ``select_orthogonal_columns(+list(list(float)),+list(float),+list(float),-list(compound),-integer)`` - ``one``
+
+
+------------
+
+.. index:: initialize_candidates/4
+.. _regressor_common/0::initialize_candidates/4:
+
+``initialize_candidates/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Initializes encoded feature-column candidates by removing their intercept projection and storing the first upper-triangular coefficients.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initialize_candidates(FeatureColumns,InterceptBasis,Index,Candidates)``
+| **Mode and number of proofs:**
+|    ``initialize_candidates(+list(list(float)),+list(float),+integer,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: initialize_candidate/4
+.. _regressor_common/0::initialize_candidate/4:
+
+``initialize_candidate/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Initializes one encoded feature-column candidate for pivoted orthogonal selection.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initialize_candidate(Column,InterceptBasis,Index,Candidate)``
+| **Mode and number of proofs:**
+|    ``initialize_candidate(+list(float),+list(float),+integer,-compound)`` - ``one``
+
+
+------------
+
+.. index:: select_active_columns/5
+.. _regressor_common/0::select_active_columns/5:
+
+``select_active_columns/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Selects independent encoded feature columns by repeatedly promoting the candidate with the largest residual norm and orthogonalizing the remainder.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_active_columns(Candidates,Targets,SelectedColumns0,SelectedColumns,ActiveFeatureCount)``
+| **Mode and number of proofs:**
+|    ``select_active_columns(+list(compound),+list(float),+list(compound),-list(compound),-integer)`` - ``one``
+
+
+------------
+
+.. index:: select_best_candidate/3
+.. _regressor_common/0::select_best_candidate/3:
+
+``select_best_candidate/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Selects the remaining encoded feature-column candidate with the largest residual norm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_best_candidate(Candidates0,BestCandidate,RemainingCandidates)``
+| **Mode and number of proofs:**
+|    ``select_best_candidate(+list(compound),-compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: candidate_norm/2
+.. _regressor_common/0::candidate_norm/2:
+
+``candidate_norm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the Euclidean norm of an encoded feature-column residual candidate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``candidate_norm(Candidate,Norm)``
+| **Mode and number of proofs:**
+|    ``candidate_norm(+compound,-float)`` - ``one``
+
+
+------------
+
+.. index:: promote_candidate/5
+.. _regressor_common/0::promote_candidate/5:
+
+``promote_candidate/5``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Promotes a selected residual candidate into a normalized orthogonal basis vector and records the corresponding upper-triangular coefficients.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``promote_candidate(Candidate,Norm,Targets,Basis,SelectedColumn)``
+| **Mode and number of proofs:**
+|    ``promote_candidate(+compound,+float,+list(float),-list(float),-compound)`` - ``one``
+
+
+------------
+
+.. index:: orthogonalize_candidates/3
+.. _regressor_common/0::orthogonalize_candidates/3:
+
+``orthogonalize_candidates/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Orthogonalizes the remaining encoded feature-column candidates against a newly selected basis vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``orthogonalize_candidates(Candidates0,Basis,Candidates)``
+| **Mode and number of proofs:**
+|    ``orthogonalize_candidates(+list(compound),+list(float),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: solve_selected_least_squares/2
+.. _regressor_common/0::solve_selected_least_squares/2:
+
+``solve_selected_least_squares/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves the upper-triangular least-squares system induced by the selected orthogonal columns.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_selected_least_squares(SelectedColumns,Coefficients)``
+| **Mode and number of proofs:**
+|    ``solve_selected_least_squares(+list(compound),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: selected_correction/4
+.. _regressor_common/0::selected_correction/4:
+
+``selected_correction/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the already-known back-substitution correction for one selected orthogonal column row.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``selected_correction(SelectedColumns,RowIndex,KnownCoefficients,Correction)``
+| **Mode and number of proofs:**
+|    ``selected_correction(+list(compound),+integer,+list(pair),-float)`` - ``one``
+
+
+------------
+
+.. index:: coefficients_from_pairs/2
+.. _regressor_common/0::coefficients_from_pairs/2:
+
+``coefficients_from_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts pivot-order coefficient values from indexed back-substitution pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``coefficients_from_pairs(Pairs,Coefficients)``
+| **Mode and number of proofs:**
+|    ``coefficients_from_pairs(+list(pair),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: expand_selected_coefficients/5
+.. _regressor_common/0::expand_selected_coefficients/5:
+
+``expand_selected_coefficients/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Expands pivot-order least-squares coefficients back into the intercept plus one coefficient per encoded feature.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand_selected_coefficients(SelectedColumns,Coefficients,FeatureCount,Bias,Weights)``
+| **Mode and number of proofs:**
+|    ``expand_selected_coefficients(+list(compound),+list(float),+integer,-float,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: assign_selected_weights/4
+.. _regressor_common/0::assign_selected_weights/4:
+
+``assign_selected_weights/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Assigns selected encoded feature coefficients into the full encoded weight vector, leaving dropped coefficients at zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``assign_selected_weights(SelectedColumns,Coefficients,Weights0,Weights)``
+| **Mode and number of proofs:**
+|    ``assign_selected_weights(+list(compound),+list(float),+list(float),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: set_weight_at/4
+.. _regressor_common/0::set_weight_at/4:
+
+``set_weight_at/4``
+^^^^^^^^^^^^^^^^^^^
+
+Sets one 1-based position of a numeric weight vector to a supplied value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_weight_at(Weights0,Index,Weight,Weights)``
+| **Mode and number of proofs:**
+|    ``set_weight_at(+list(float),+integer,+float,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: residual_sum_of_squares/4
+.. _regressor_common/0::residual_sum_of_squares/4:
+
+``residual_sum_of_squares/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the residual sum of squares for encoded training rows and a learned intercept plus weight vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``residual_sum_of_squares(Rows,Bias,Weights,ResidualSumOfSquares)``
+| **Mode and number of proofs:**
+|    ``residual_sum_of_squares(+list(pair),+float,+list(float),-float)`` - ``one``
 
 
 ------------
@@ -886,34 +1251,15 @@ Accumulates the batch bias and weight gradients over a list of encoded training 
 ``add_scaled_vector/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Adds a scaled feature vector to an accumulated gradient vector.
+Adds a scaled numeric vector to another numeric vector.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``add_scaled_vector(Features,Scale,Gradients0,Gradients)``
+|    ``add_scaled_vector(Vector,Scale,Vector0,UpdatedVector)``
 | **Mode and number of proofs:**
 |    ``add_scaled_vector(+list(float),+number,+list(float),-list(float))`` - ``one``
-
-
-------------
-
-.. index:: update_linear_weights/8
-.. _regressor_common/0::update_linear_weights/8:
-
-``update_linear_weights/8``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Updates the weight vector using the mean gradients and L2 regularization term while tracking the maximum absolute weight change.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``update_linear_weights(Weights0,Gradients,Scale,Regularization,LearningRate,Weights1,MaxDelta0,MaxDelta)``
-| **Mode and number of proofs:**
-|    ``update_linear_weights(+list(float),+list(float),+float,+float,+float,-list(float),+float,-float)`` - ``one``
 
 
 ------------
@@ -952,6 +1298,485 @@ Creates a zero-filled float vector with the same length as the reference list.
 |    ``zero_vector_like(Reference,Zeroes)``
 | **Mode and number of proofs:**
 |    ``zero_vector_like(+list,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: train_ridge_model/6
+.. _regressor_common/0::train_ridge_model/6:
+
+``train_ridge_model/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Fits a ridge model bias and weight vector from encoded rows by solving a direct weighted linear system and returns diagnostics terms describing the solve.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``train_ridge_model(Rows,FeatureCount,Options,Bias,Weights,TrainingDiagnostics)``
+| **Mode and number of proofs:**
+|    ``train_ridge_model(+list(pair),+integer,+list(compound),-float,-list(float),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: ridge_feature_statistics/3
+.. _regressor_common/0::ridge_feature_statistics/3:
+
+``ridge_feature_statistics/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes per-feature ridge penalty weights and active-feature flags from encoded training rows, dropping zero-variance columns from the direct solve.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ridge_feature_statistics(Rows,PenaltyWeights,ActiveFlags)``
+| **Mode and number of proofs:**
+|    ``ridge_feature_statistics(+list(pair),-list(float),-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: accumulate_feature_statistics/5
+.. _regressor_common/0::accumulate_feature_statistics/5:
+
+``accumulate_feature_statistics/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accumulates per-feature sums and squared sums over encoded training rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accumulate_feature_statistics(Rows,Sums0,SumSquares0,Sums,SumSquares)``
+| **Mode and number of proofs:**
+|    ``accumulate_feature_statistics(+list(pair),+list(float),+list(float),-list(float),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: add_squared_vector/3
+.. _regressor_common/0::add_squared_vector/3:
+
+``add_squared_vector/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds the element-wise squares of a feature vector to an accumulated vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_squared_vector(Features,AccumulatedSquares0,AccumulatedSquares)``
+| **Mode and number of proofs:**
+|    ``add_squared_vector(+list(float),+list(float),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: feature_penalty_profiles/5
+.. _regressor_common/0::feature_penalty_profiles/5:
+
+``feature_penalty_profiles/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds ridge penalty weights and active-feature flags from per-feature sums and squared sums.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``feature_penalty_profiles(Sums,SumSquares,Count,PenaltyWeights,ActiveFlags)``
+| **Mode and number of proofs:**
+|    ``feature_penalty_profiles(+list(float),+list(float),+integer,-list(float),-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: active_feature_count/2
+.. _regressor_common/0::active_feature_count/2:
+
+``active_feature_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of active encoded features retained for the direct ridge solve.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``active_feature_count(ActiveFlags,Count)``
+| **Mode and number of proofs:**
+|    ``active_feature_count(+list(atom),-integer)`` - ``one``
+
+
+------------
+
+.. index:: compress_rows/3
+.. _regressor_common/0::compress_rows/3:
+
+``compress_rows/3``
+^^^^^^^^^^^^^^^^^^^
+
+Filters encoded training rows down to the active feature subset selected for the direct ridge solve.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compress_rows(Rows,ActiveFlags,CompressedRows)``
+| **Mode and number of proofs:**
+|    ``compress_rows(+list(pair),+list(atom),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: compress_features/3
+.. _regressor_common/0::compress_features/3:
+
+``compress_features/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Filters a feature vector down to the active feature subset selected for the direct ridge solve.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compress_features(Features,ActiveFlags,CompressedFeatures)``
+| **Mode and number of proofs:**
+|    ``compress_features(+list(float),+list(atom),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: compress_vector/3
+.. _regressor_common/0::compress_vector/3:
+
+``compress_vector/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Filters a numeric vector down to the active positions selected for the direct ridge solve.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compress_vector(Vector,ActiveFlags,CompressedVector)``
+| **Mode and number of proofs:**
+|    ``compress_vector(+list(float),+list(atom),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: build_ridge_system/5
+.. _regressor_common/0::build_ridge_system/5:
+
+``build_ridge_system/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the regularized linear system for the intercept plus active ridge coefficients.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_ridge_system(Rows,PenaltyWeights,Regularization,Matrix,Vector)``
+| **Mode and number of proofs:**
+|    ``build_ridge_system(+list(pair),+list(float),+float,-list(list(float)),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: accumulate_ridge_system/5
+.. _regressor_common/0::accumulate_ridge_system/5:
+
+``accumulate_ridge_system/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accumulates the unregularized normal-equation matrix and target vector for a set of active encoded rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accumulate_ridge_system(Rows,Matrix0,Vector0,Matrix,Vector)``
+| **Mode and number of proofs:**
+|    ``accumulate_ridge_system(+list(pair),+list(list(float)),+list(float),-list(list(float)),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: add_outer_product/4
+.. _regressor_common/0::add_outer_product/4:
+
+``add_outer_product/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds the outer product of two vectors to an accumulated matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_outer_product(Vector1,Vector2,Matrix0,Matrix)``
+| **Mode and number of proofs:**
+|    ``add_outer_product(+list(float),+list(float),+list(list(float)),-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: regularize_ridge_matrix/4
+.. _regressor_common/0::regularize_ridge_matrix/4:
+
+``regularize_ridge_matrix/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds the ridge penalty weights to the feature-feature diagonal block of a linear system matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``regularize_ridge_matrix(Matrix0,PenaltyWeights,Regularization,Matrix)``
+| **Mode and number of proofs:**
+|    ``regularize_ridge_matrix(+list(list(float)),+list(float),+float,-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: zero_matrix/3
+.. _regressor_common/0::zero_matrix/3:
+
+``zero_matrix/3``
+^^^^^^^^^^^^^^^^^
+
+Creates a zero-filled numeric matrix with the requested row and column counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_matrix(Rows,Columns,Matrix)``
+| **Mode and number of proofs:**
+|    ``zero_matrix(+integer,+integer,-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: solve_linear_system/4
+.. _regressor_common/0::solve_linear_system/4:
+
+``solve_linear_system/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves a square linear system using partial pivoting Gaussian elimination and returns the solver name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_linear_system(Matrix,Vector,Solution,Solver)``
+| **Mode and number of proofs:**
+|    ``solve_linear_system(+list(list(float)),+list(float),-list(float),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: augment_rows/3
+.. _regressor_common/0::augment_rows/3:
+
+``augment_rows/3``
+^^^^^^^^^^^^^^^^^^
+
+Pairs each matrix row with its corresponding right-hand-side value for elimination.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``augment_rows(Matrix,Vector,Rows)``
+| **Mode and number of proofs:**
+|    ``augment_rows(+list(list(float)),+list(float),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: triangularize/2
+.. _regressor_common/0::triangularize/2:
+
+``triangularize/2``
+^^^^^^^^^^^^^^^^^^^
+
+Transforms an augmented matrix into upper-triangular form using partial pivoting.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``triangularize(Rows0,UpperRows)``
+| **Mode and number of proofs:**
+|    ``triangularize(+list(compound),-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: select_pivot_row/3
+.. _regressor_common/0::select_pivot_row/3:
+
+``select_pivot_row/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Selects the pivot row with the largest leading magnitude and returns the remaining rows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_pivot_row(Rows0,PivotRow,RemainingRows)``
+| **Mode and number of proofs:**
+|    ``select_pivot_row(+list(compound),-compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: leading_magnitude/2
+.. _regressor_common/0::leading_magnitude/2:
+
+``leading_magnitude/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the absolute leading coefficient magnitude of an augmented row.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leading_magnitude(Row,Magnitude)``
+| **Mode and number of proofs:**
+|    ``leading_magnitude(+compound,-float)`` - ``one``
+
+
+------------
+
+.. index:: ensure_non_zero/1
+.. _regressor_common/0::ensure_non_zero/1:
+
+``ensure_non_zero/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a pivot coefficient is numerically non-zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ensure_non_zero(Value)``
+| **Mode and number of proofs:**
+|    ``ensure_non_zero(+float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A pivot coefficient is numerically zero:
+|        ``evaluation_error(zero_divisor)``
+
+
+------------
+
+.. index:: eliminate_rows/5
+.. _regressor_common/0::eliminate_rows/5:
+
+``eliminate_rows/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Eliminates the leading coefficient from remaining augmented rows using a pivot row.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``eliminate_rows(Pivot,PivotTail,PivotValue,Rows0,Rows)``
+| **Mode and number of proofs:**
+|    ``eliminate_rows(+float,+list(float),+float,+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: scaled_row_difference/4
+.. _regressor_common/0::scaled_row_difference/4:
+
+``scaled_row_difference/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Subtracts a scaled pivot tail from another row tail.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scaled_row_difference(PivotTail,RowTail,Factor,Difference)``
+| **Mode and number of proofs:**
+|    ``scaled_row_difference(+list(float),+list(float),+float,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: back_substitution/2
+.. _regressor_common/0::back_substitution/2:
+
+``back_substitution/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Performs back-substitution on an upper-triangular augmented matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``back_substitution(UpperRows,Solution)``
+| **Mode and number of proofs:**
+|    ``back_substitution(+list(compound),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: maximum_linear_system_residual/4
+.. _regressor_common/0::maximum_linear_system_residual/4:
+
+``maximum_linear_system_residual/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the maximum absolute residual of a solved linear system.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``maximum_linear_system_residual(Matrix,Vector,Solution,MaximumResidual)``
+| **Mode and number of proofs:**
+|    ``maximum_linear_system_residual(+list(list(float)),+list(float),+list(float),-float)`` - ``one``
+
+
+------------
+
+.. index:: expand_weights/3
+.. _regressor_common/0::expand_weights/3:
+
+``expand_weights/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Expands active ridge coefficients back to the full encoded feature vector, inserting zeroes for dropped zero-variance features.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand_weights(ActiveFlags,ActiveWeights,Weights)``
+| **Mode and number of proofs:**
+|    ``expand_weights(+list(atom),+list(float),-list(float))`` - ``one``
 
 
 ------------

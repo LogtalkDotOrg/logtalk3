@@ -5,8 +5,8 @@
 
 Linear regression regressor supporting continuous and mixed-feature
 datasets. The library implements the ``regressor_protocol`` defined in
-the ``regression_protocols`` library and learns a linear model using
-batch gradient descent.
+the ``regression_protocols`` library and learns a linear model using a
+direct ordinary least-squares solve.
 
 API documentation
 -----------------
@@ -44,15 +44,17 @@ Features
 --------
 
 - **Continuous and Mixed Features**: Supports continuous attributes and
-  categorical attributes encoded using one-hot vectors.
+  categorical attributes encoded using reference-level dummy coding.
 - **Feature Scaling**: Continuous attributes can be standardized using
   z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
-- **Regularization**: Supports optional L2 regularization.
+- **Rank Handling**: Encoded columns that are numerically dependent on
+  the intercept or on earlier selected columns are dropped from the
+  direct solve and assigned zero coefficients.
 - **Diagnostics Metadata**: Learned regressors record model name,
-  target, training example count, optimization stop reason, completed
-  iterations, final parameter delta, encoded feature count, and
+  target, training example count, solver name, residual sum of squares,
+  effective rank, active feature count, encoded feature count, and
   effective options, accessible using the shared regression diagnostics
   predicates.
 - **Model Export**: Learned regressors can be exported as predicate
@@ -85,9 +87,10 @@ the form:
        target(Target),
        training_example_count(TrainingExampleCount),
        options(Options),
-       convergence(Status),
-       iterations(Iterations),
-       final_delta(FinalDelta),
+       solver(Solver),
+       residual_sum_of_squares(ResidualSumOfSquares),
+       effective_rank(EffectiveRank),
+       active_feature_count(ActiveFeatureCount),
        encoded_feature_count(FeatureCount)
    ]
 
@@ -101,14 +104,16 @@ Where:
   examples used during training.
 - ``options(Options)`` stores the effective learning options after
   merging the user options with the library defaults.
-- ``convergence(Status)`` records the optimization stop condition. The
-  current values are ``tolerance`` when the largest parameter update is
-  within the configured tolerance and ``maximum_iterations_exhausted``
-  when training stops because the iteration cap is reached.
-- ``iterations(Iterations)`` stores the number of batch gradient-descent
-  updates completed during training.
-- ``final_delta(FinalDelta)`` stores the maximum absolute parameter
-  change from the final optimization step.
+- ``solver(Solver)`` records the direct solver used for the
+  least-squares fit. The current value is
+  ``modified_gram_schmidt_column_pivoting``.
+- ``residual_sum_of_squares(ResidualSumOfSquares)`` stores the training
+  residual sum of squares for the fitted regressor.
+- ``effective_rank(EffectiveRank)`` stores the number of selected
+  independent columns in the direct solve, including the intercept.
+- ``active_feature_count(ActiveFeatureCount)`` stores the number of
+  encoded feature columns retained in the direct solve after dropping
+  numerically dependent columns.
 - ``encoded_feature_count(FeatureCount)`` stores the number of numeric
   features induced by the encoder list, including missing-value
   indicator features.
@@ -122,20 +127,6 @@ Options
 
 The ``learn/3`` predicate accepts the following options:
 
-- ``learning_rate/1``: Step size used by batch gradient descent when
-  updating the bias and weights. Larger values speed up training but can
-  overshoot; smaller values are more conservative. The default is
-  ``0.05``.
-- ``maximum_iterations/1``: Maximum number of gradient-descent
-  iterations to run before stopping even if the tolerance criterion has
-  not been met. The default is ``2000``.
-- ``tolerance/1``: Convergence threshold for the maximum parameter
-  update. Training stops early when the largest absolute change in the
-  bias or any weight is at or below this value. The default is
-  ``1.0e-7``.
-- ``l2_regularization/1``: L2 penalty coefficient applied to the weight
-  vector during optimization. Higher values increase shrinkage and can
-  reduce overfitting. The default is ``0.0``.
 - ``feature_scaling/1``: Controls z-score standardization of continuous
   attributes before training and prediction. Accepted values are
   ``true`` and ``false``. The default is ``true``.
