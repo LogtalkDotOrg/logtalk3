@@ -168,6 +168,7 @@
 		regression_protocols(loader),
 		elastic_net_regression(loader),
 		gradient_boosting_regression(loader),
+		gaussian_process_regression(loader),
 		knn_regression(loader),
 		linear_regression(loader),
 		lasso_regression(loader),

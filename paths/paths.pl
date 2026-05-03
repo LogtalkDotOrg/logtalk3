@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 2, 2026
+%  Last updated on May 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -160,6 +160,7 @@ logtalk_library_path(format, library('format/')).
 logtalk_library_path(fp_growth, library('fp_growth/')).
 logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).
 logtalk_library_path(gaussian_mixture, library('gaussian_mixture/')).
+logtalk_library_path(gaussian_process_regression, library('gaussian_process_regression/')).
 logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(geospatial, library('geospatial/')).

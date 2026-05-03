@@ -131,6 +131,7 @@ sed '1,19d' ../../../library/format/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/fp_growth/NOTES.md | pandoc -f gfm -t rst -o libraries/fp_growth.rst
 sed '1,19d' ../../../library/frequent_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/gaussian_mixture/NOTES.md | pandoc -f gfm -t rst -o libraries/gaussian_mixture.rst
+sed '1,19d' ../../../library/gaussian_process_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gaussian_process_regression.rst
 sed '1,19d' ../../../library/genint/NOTES.md | pandoc -f gfm -t rst -o libraries/genint.rst
 sed '1,19d' ../../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries/gensym.rst
 sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libraries/geospatial.rst

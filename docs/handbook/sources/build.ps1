@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 2, 2026
+##   Last updated on May 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -131,6 +131,7 @@ Foreach-Object {
 (Get-Content ../../../library/fp_growth/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/fp_growth.rst
 (Get-Content ../../../library/frequent_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
 (Get-Content ../../../library/gaussian_mixture/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gaussian_mixture.rst
+(Get-Content ../../../library/gaussian_process_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gaussian_process_regression.rst
 (Get-Content ../../../library/genint/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/genint.rst
 (Get-Content ../../../library/gensym/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gensym.rst
 (Get-Content ../../../library/geospatial/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/geospatial.rst

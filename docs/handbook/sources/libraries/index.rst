@@ -60,7 +60,6 @@ directory in the ``NOTES.md`` file.
    csv
    cuid2
    cusum
-   ewma
    datalog
    dates
    dates_tz
@@ -82,6 +81,7 @@ directory in the ``NOTES.md`` file.
    fp_growth
    frequent_pattern_mining_protocols
    gaussian_mixture
+   gaussian_process_regression
    genint
    gensym
    geospatial

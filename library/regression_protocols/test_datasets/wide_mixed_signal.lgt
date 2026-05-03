@@ -25,8 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-03,
 		comment is 'Synthetic wide mixed regression dataset with many continuous and categorical predictors for non-trivial linear-model benchmarking.'
+	]).
+
+	:- uses(integer, [
+		between/3
 	]).
 
 	attribute_values(x1, continuous).

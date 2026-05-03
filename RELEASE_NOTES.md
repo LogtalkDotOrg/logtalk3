@@ -127,6 +127,12 @@ for use in the implementation of machine learning regression algorithms.
 gradient boosting regression using regression trees as additive base
 learners fitted to successive residuals.
 
+* ADDED: New `gaussian_process_regression` library implementing exact
+Gaussian process regression for continuous and mixed-feature datasets
+using a squared-exponential covariance kernel, deterministic
+log-marginal-likelihood hyperparameter optimization, and predictive
+uncertainty estimates.
+
 * ADDED: New `knn_regression` library implementing k-nearest neighbors
 regression with multiple distance metrics, weighting schemes, optional
 feature scaling, and mixed-feature support.
