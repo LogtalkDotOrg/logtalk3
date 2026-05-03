@@ -1,0 +1,109 @@
+.. index:: single: bayesian_ridge_regression
+.. _bayesian_ridge_regression/0:
+
+.. rst-class:: right
+
+**object**
+
+``bayesian_ridge_regression``
+=============================
+
+Bayesian ridge regression regressor supporting continuous and mixed-feature datasets using evidence maximization and posterior uncertainty over coefficients. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.
+
+| **Availability:** 
+|    ``logtalk_load(bayesian_ridge_regression(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`regressor_common <regressor_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`population <population/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Uses Bayesian linear regression with a shared scalar coefficient precision, Gamma hyperpriors over the weight and noise precisions, an explicit unpenalized intercept, and MacKay-style fixed-point evidence maximization updates.
+   - Numerical stability: Evidence-maximization updates clamp the learned weight and noise precisions to configurable ``precision_bounds(Min, Max)`` to avoid degenerate zero or infinite precision estimates. Posterior solves use Cholesky factorization of positive-definite precision matrices, diagnostics report any diagonal jitter applied when factorization retries are needed, and the evidence-maximization loop computes the effective degrees of freedom from a one-time eigenspectrum of the centered Gram surrogate while still switching to a sample-space solve when the active encoded feature count exceeds the number of training rows.
+   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and zero-variance encoded columns are dropped from posterior updates and assigned zero mean and zero variance.
+   - Uncertainty estimates: In addition to mean predictions, the library can return the posterior predictive Gaussian distribution for a new instance using coefficient posterior uncertainty plus observation noise. The intercept is treated as a deterministic centering adjustment and therefore has no associated posterior variance.
+   - Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.
+   - Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
+   - Regressor representation: The learned regressor is represented by default as ``bayesian_ridge_regressor(Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics)`` where ``Encoders`` stores feature encoding metadata, ``Bias`` stores the posterior mean intercept, ``Weights`` stores one posterior mean coefficient per encoded feature, ``ActiveFlags`` records which encoded features participated in the posterior update, ``PosteriorCovariance`` stores the posterior covariance matrix of the intercept plus active coefficients, ``NoiseVariance`` stores the learned observation noise variance, and ``Diagnostics`` stores training metadata including the effective options and learned precisions.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: predict_distribution/3
+.. _bayesian_ridge_regression/0::predict_distribution/3:
+
+``predict_distribution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Predicts the posterior predictive Gaussian distribution for a new instance using the learned regressor. The returned term has the shape ``gaussian(Mean, Variance)`` where ``Variance`` includes the learned observation noise variance and coefficient posterior uncertainty only; the intercept is not treated as a probabilistic parameter.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_distribution(Regressor,Instance,Distribution)``
+| **Mode and number of proofs:**
+|    ``predict_distribution(+compound,+list,-compound)`` - ``one``
+
+
+------------
+
+.. index:: weight_variances/2
+.. _bayesian_ridge_regression/0::weight_variances/2:
+
+``weight_variances/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the posterior marginal variances of the encoded feature coefficients in encoder order. Encoded features dropped from fitting because they had zero variance are reported with posterior variance zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``weight_variances(Regressor,Variances)``
+| **Mode and number of proofs:**
+|    ``weight_variances(+compound,-list(float))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`linear_regression <linear_regression/0>`, :ref:`ridge_regression <ridge_regression/0>`, :ref:`lasso_regression <lasso_regression/0>`, :ref:`elastic_net_regression <elastic_net_regression/0>`, :ref:`gaussian_process_regression <gaussian_process_regression/0>`, :ref:`knn_regression <knn_regression/0>`, :ref:`regression_tree <regression_tree/0>`, :ref:`random_forest_regression <random_forest_regression/0>`, :ref:`gradient_boosting_regression <gradient_boosting_regression/0>`
+

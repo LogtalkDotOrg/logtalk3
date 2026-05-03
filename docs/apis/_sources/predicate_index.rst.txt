@@ -13365,6 +13365,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`knn <knn/0::predict/4>`
 * :ref:`nearest_centroid <nearest_centroid/0::predict/4>`
 
+``predict_distribution/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`bayesian_ridge_regression <bayesian_ridge_regression/0::predict_distribution/3>`
+* :ref:`gaussian_process_regression <gaussian_process_regression/0::predict_distribution/3>`
+
 ``predict_probabilities/3``
 ---------------------------
 
@@ -18881,6 +18892,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::weibull/3>`
+
+``weight_variances/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`bayesian_ridge_regression <bayesian_ridge_regression/0::weight_variances/2>`
 
 ``weighted_mean/3``
 -------------------

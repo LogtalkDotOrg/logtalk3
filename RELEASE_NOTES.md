@@ -123,6 +123,11 @@ mining for sequence datasets.
 * ADDED: New `regression_protocols`  library with protocols and datasets
 for use in the implementation of machine learning regression algorithms.
 
+* ADDED: New `bayesian_ridge_regression` library implementing Bayesian
+ridge regression for continuous and mixed-feature datasets using
+evidence maximization for the coefficient and noise precisions plus
+posterior predictive uncertainty estimates.
+
 * ADDED: New `gradient_boosting_regression` library implementing
 gradient boosting regression using regression trees as additive base
 learners fitted to successive residuals.

@@ -47,6 +47,7 @@ logtalk_library_path(base58, library('base58/')).
 logtalk_library_path(base64, library('base64/')).
 logtalk_library_path(base85, library('base85/')).
 logtalk_library_path(basic_types, library('basic_types/')).
+logtalk_library_path(bayesian_ridge_regression, library('bayesian_ridge_regression/')).
 logtalk_library_path(borda, library('borda/')).
 logtalk_library_path(bradley_terry, library('bradley_terry/')).
 logtalk_library_path(c45, library('c45/')).

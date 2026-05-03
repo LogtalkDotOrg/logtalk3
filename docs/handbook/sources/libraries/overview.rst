@@ -51,9 +51,10 @@ multiple areas):
   - Anomaly detection: ``anomaly_detection_protocols``, ``cusum``,
     ``ewma``, ``iqr``, ``isolation_forest``, ``knn_distance``, ``lof``,
     ``modified_z_score``, and ``z_score``.
-  - Regression: ``regression_protocols``, ``elastic_net_regression``,
-    ``gradient_boosting_regression``, ``gaussian_process_regression``,
-    ``knn_regression``, ``lasso_regression``, ``linear_regression``,
+  - Regression: ``regression_protocols``, ``bayesian_ridge_regression``,
+    ``elastic_net_regression``, ``gradient_boosting_regression``,
+    ``gaussian_process_regression``, ``knn_regression``,
+    ``lasso_regression``, ``linear_regression``,
     ``random_forest_regression``, ``regression_tree``, and
     ``ridge_regression``.
   - Ranking: ``ranking_protocols``, ``borda``, ``bradley_terry``,

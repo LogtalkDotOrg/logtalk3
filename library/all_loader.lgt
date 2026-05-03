@@ -166,6 +166,7 @@
 		ranked_pairs(loader),
 		thurstone_mosteller(loader),
 		regression_protocols(loader),
+		bayesian_ridge_regression(loader),
 		elastic_net_regression(loader),
 		gradient_boosting_regression(loader),
 		gaussian_process_regression(loader),

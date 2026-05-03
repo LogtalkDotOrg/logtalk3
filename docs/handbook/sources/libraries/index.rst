@@ -42,6 +42,7 @@ directory in the ``NOTES.md`` file.
    base64
    base85
    basic_types
+   bayesian_ridge_regression
    borda
    bradley_terry
    c45
