@@ -116,10 +116,11 @@
 		length(TrainingFeatures, TrainingExampleCount),
 		arithmetic_mean(Targets, TargetMean),
 		center_targets(Targets, TargetMean, CenteredTargets),
+		factorization_settings(Options, FactorizationSettings),
 		initial_kernel(FeatureLayout, ContinuousFeatureCount, CategoricalFeatureCount, TrainingFeatures, CenteredTargets, Options, InitialKernel),
 		(   ^^option(optimize_hyperparameters(true), Options) ->
-			optimize_kernel_hyperparameters(TrainingFeatures, CenteredTargets, Options, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Convergence, Iterations, FinalDelta, LogMarginalLikelihood)
-		;   evaluate_kernel(TrainingFeatures, CenteredTargets, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, LogMarginalLikelihood),
+			optimize_kernel_hyperparameters(TrainingFeatures, CenteredTargets, Options, FactorizationSettings, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Convergence, Iterations, FinalDelta, LogMarginalLikelihood)
+		;   evaluate_kernel(TrainingFeatures, CenteredTargets, FactorizationSettings, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, LogMarginalLikelihood),
 			Convergence = disabled,
 			Iterations = 0,
 			FinalDelta = 0.0
@@ -296,23 +297,32 @@
 	resolve_noise_variance(NoiseVariance, _SignalVariance, NoiseVariance) :-
 		NoiseVariance \== auto.
 
-	optimize_kernel_hyperparameters(TrainingFeatures, CenteredTargets, Options, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Convergence, Iterations, FinalDelta, LogMarginalLikelihood) :-
-		evaluate_kernel(TrainingFeatures, CenteredTargets, InitialKernel, InitialKernel1, CholeskyFactor0, Alpha0, JitterAttempts0, Score0),
+	factorization_settings(Options, factorization_settings(MaxAttempts, JitterScaleFactor)) :-
+		^^option(max_factorization_attempts(MaxAttempts), Options),
+		^^option(jitter_scale_factor(JitterScaleFactor), Options).
+
+	optimize_kernel_hyperparameters(TrainingFeatures, CenteredTargets, Options, FactorizationSettings, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Convergence, Iterations, FinalDelta, LogMarginalLikelihood) :-
+		evaluate_kernel(TrainingFeatures, CenteredTargets, FactorizationSettings, InitialKernel, InitialKernel1, CholeskyFactor0, Alpha0, JitterAttempts0, Score0),
 		InitialState = state(InitialKernel1, Score0, CholeskyFactor0, Alpha0, JitterAttempts0),
 		^^option(maximum_iterations(MaximumIterations), Options),
 		^^option(tolerance(Tolerance), Options),
+		^^option(relative_improvement_factor(RelativeImprovementFactor), Options),
+		^^option(hyperparameter_minimum(HyperparameterMinimum), Options),
+		^^option(maximum_continuous_length_scale(MaximumContinuousLengthScale), Options),
+		^^option(maximum_categorical_penalty(MaximumCategoricalPenalty), Options),
 		InitialStep is log(2.0),
 		MinimumStep is log(1.05),
-		coordinate_search(TrainingFeatures, CenteredTargets, MaximumIterations, Tolerance, MinimumStep, 0, InitialStep, InitialState, FinalState, Convergence, Iterations, FinalDelta),
+		coordinate_search(TrainingFeatures, CenteredTargets, FactorizationSettings, MaximumIterations, Tolerance, RelativeImprovementFactor, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, MinimumStep, 0, InitialStep, InitialState, FinalState, Convergence, Iterations, FinalDelta),
 		FinalState = state(Kernel, LogMarginalLikelihood, CholeskyFactor, Alpha, JitterAttempts).
 
-	coordinate_search(_TrainingFeatures, _CenteredTargets, MaximumIterations, _Tolerance, _MinimumStep, Iteration, _Step, State, State, maximum_iterations_exhausted, Iteration, 0.0) :-
+	coordinate_search(_TrainingFeatures, _CenteredTargets, _FactorizationSettings, MaximumIterations, _Tolerance, _RelativeImprovementFactor, _HyperparameterMinimum, _MaximumContinuousLengthScale, _MaximumCategoricalPenalty, _MinimumStep, Iteration, _Step, State, State, maximum_iterations_exhausted, Iteration, 0.0) :-
 		Iteration >= MaximumIterations,
 		!.
-	coordinate_search(TrainingFeatures, CenteredTargets, MaximumIterations, Tolerance, MinimumStep, Iteration, Step, State0, State, Convergence, Iterations, FinalDelta) :-
-		sweep_hyperparameters(TrainingFeatures, CenteredTargets, Step, State0, State1),
+	coordinate_search(TrainingFeatures, CenteredTargets, FactorizationSettings, MaximumIterations, Tolerance, RelativeImprovementFactor, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, MinimumStep, Iteration, Step, State0, State, Convergence, Iterations, FinalDelta) :-
+		sweep_hyperparameters(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State1),
 		state_score(State0, Score0),
 		state_score(State1, Score1),
+		effective_tolerance(Score0, Tolerance, RelativeImprovementFactor, EffectiveTolerance),
 		Improvement0 is Score1 - Score0,
 		(   Improvement0 >= 0.0 ->
 			Improvement = Improvement0,
@@ -320,13 +330,13 @@
 		;   Improvement = 0.0,
 			BestState = State0
 		),
-		(   Improvement > Tolerance ->
+		(   Improvement > EffectiveTolerance ->
 			NextIteration is Iteration + 1,
-			coordinate_search(TrainingFeatures, CenteredTargets, MaximumIterations, Tolerance, MinimumStep, NextIteration, Step, BestState, State, Convergence, Iterations, FinalDelta)
+			coordinate_search(TrainingFeatures, CenteredTargets, FactorizationSettings, MaximumIterations, Tolerance, RelativeImprovementFactor, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, MinimumStep, NextIteration, Step, BestState, State, Convergence, Iterations, FinalDelta)
 		;   Step > MinimumStep ->
 			ReducedStep is Step / 2.0,
 			NextIteration is Iteration + 1,
-			coordinate_search(TrainingFeatures, CenteredTargets, MaximumIterations, Tolerance, MinimumStep, NextIteration, ReducedStep, BestState, State, Convergence, Iterations, FinalDelta)
+			coordinate_search(TrainingFeatures, CenteredTargets, FactorizationSettings, MaximumIterations, Tolerance, RelativeImprovementFactor, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, MinimumStep, NextIteration, ReducedStep, BestState, State, Convergence, Iterations, FinalDelta)
 		;   State = BestState,
 			Convergence = tolerance,
 			Iterations is Iteration,
@@ -335,73 +345,98 @@
 
 	state_score(state(_Kernel, Score, _CholeskyFactor, _Alpha, _JitterAttempts), Score).
 
-	sweep_hyperparameters(TrainingFeatures, CenteredTargets, Step, State0, State) :-
-		sweep_length_scales(TrainingFeatures, CenteredTargets, Step, State0, State1),
-		sweep_categorical_penalties(TrainingFeatures, CenteredTargets, Step, State1, State2),
-		sweep_parameter(signal_variance, TrainingFeatures, CenteredTargets, Step, State2, State3),
-		sweep_parameter(noise_variance, TrainingFeatures, CenteredTargets, Step, State3, State).
+	effective_tolerance(Score, Tolerance, RelativeImprovementFactor, EffectiveTolerance) :-
+		RelativeTolerance is abs(Score) * RelativeImprovementFactor,
+		(   RelativeTolerance > Tolerance ->
+			EffectiveTolerance = RelativeTolerance
+		;   EffectiveTolerance = Tolerance
+		).
 
-	sweep_length_scales(TrainingFeatures, CenteredTargets, Step, State0, State) :-
+	sweep_hyperparameters(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
+		sweep_length_scales(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State1),
+		sweep_categorical_penalties(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State1, State2),
+		sweep_parameter(signal_variance, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State2, State3),
+		sweep_parameter(noise_variance, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State3, State).
+
+	sweep_length_scales(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
 		State0 = state(squared_exponential_kernel(_FeatureLayout, LengthScales, _CategoricalPenalties, _SignalVariance, _NoiseVariance, _Jitter), _Score, _CholeskyFactor, _Alpha, _JitterAttempts),
 		length(LengthScales, FeatureCount),
-		sweep_length_scales(1, FeatureCount, TrainingFeatures, CenteredTargets, Step, State0, State).
+		sweep_length_scales(1, FeatureCount, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State).
 
-	sweep_length_scales(Index, FeatureCount, _TrainingFeatures, _CenteredTargets, _Step, State, State) :-
+	sweep_length_scales(Index, FeatureCount, _TrainingFeatures, _CenteredTargets, _FactorizationSettings, _Step, _HyperparameterMinimum, _MaximumContinuousLengthScale, _MaximumCategoricalPenalty, State, State) :-
 		Index > FeatureCount,
 		!.
-	sweep_length_scales(Index, FeatureCount, TrainingFeatures, CenteredTargets, Step, State0, State) :-
-		sweep_parameter(length_scale(Index), TrainingFeatures, CenteredTargets, Step, State0, State1),
+	sweep_length_scales(Index, FeatureCount, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
+		sweep_parameter(length_scale(Index), TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State1),
 		NextIndex is Index + 1,
-		sweep_length_scales(NextIndex, FeatureCount, TrainingFeatures, CenteredTargets, Step, State1, State).
+		sweep_length_scales(NextIndex, FeatureCount, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State1, State).
 
-	sweep_categorical_penalties(TrainingFeatures, CenteredTargets, Step, State0, State) :-
+	sweep_categorical_penalties(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
 		State0 = state(squared_exponential_kernel(_FeatureLayout, _LengthScales, CategoricalPenalties, _SignalVariance, _NoiseVariance, _Jitter), _Score, _CholeskyFactor, _Alpha, _JitterAttempts),
 		length(CategoricalPenalties, FeatureCount),
-		sweep_categorical_penalties(1, FeatureCount, TrainingFeatures, CenteredTargets, Step, State0, State).
+		sweep_categorical_penalties(1, FeatureCount, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State).
 
-	sweep_categorical_penalties(Index, FeatureCount, _TrainingFeatures, _CenteredTargets, _Step, State, State) :-
+	sweep_categorical_penalties(Index, FeatureCount, _TrainingFeatures, _CenteredTargets, _FactorizationSettings, _Step, _HyperparameterMinimum, _MaximumContinuousLengthScale, _MaximumCategoricalPenalty, State, State) :-
 		Index > FeatureCount,
 		!.
-	sweep_categorical_penalties(Index, FeatureCount, TrainingFeatures, CenteredTargets, Step, State0, State) :-
-		sweep_parameter(categorical_penalty(Index), TrainingFeatures, CenteredTargets, Step, State0, State1),
+	sweep_categorical_penalties(Index, FeatureCount, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
+		sweep_parameter(categorical_penalty(Index), TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State1),
 		NextIndex is Index + 1,
-		sweep_categorical_penalties(NextIndex, FeatureCount, TrainingFeatures, CenteredTargets, Step, State1, State).
+		sweep_categorical_penalties(NextIndex, FeatureCount, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State1, State).
 
-	sweep_parameter(Parameter, TrainingFeatures, CenteredTargets, Step, State0, State) :-
+	sweep_parameter(Parameter, TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
 		State0 = state(Kernel0, _Score0, _CholeskyFactor0, _Alpha0, _JitterAttempts0),
-		parameter_candidates(Parameter, Kernel0, Step, CandidateKernels),
-		best_candidate_state(CandidateKernels, TrainingFeatures, CenteredTargets, State0, State).
+		parameter_candidates(Parameter, Kernel0, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, CandidateKernels),
+		best_candidate_state(CandidateKernels, TrainingFeatures, CenteredTargets, FactorizationSettings, State0, State).
 
-	parameter_candidates(length_scale(Index), squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), Step, [
-		squared_exponential_kernel(FeatureLayout, LengthScales0, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales1, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter)
-	]) :-
+	parameter_candidates(length_scale(Index), Kernel, Step, HyperparameterMinimum, MaximumContinuousLengthScale, _MaximumCategoricalPenalty, CandidateKernels) :-
+		Kernel = squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
 		nth1(Index, LengthScales, LengthScale),
-		scale_parameter(LengthScale, Step, LengthScale0, LengthScale1),
+		scale_length_scale(LengthScale, Step, HyperparameterMinimum, MaximumContinuousLengthScale, LengthScale0, LengthScale1),
 		replace_nth1(Index, LengthScales, LengthScale0, LengthScales0),
-		replace_nth1(Index, LengthScales, LengthScale1, LengthScales1).
-	parameter_candidates(categorical_penalty(Index), squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), Step, [
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties0, SignalVariance, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties1, SignalVariance, NoiseVariance, Jitter)
-	]) :-
+		replace_nth1(Index, LengthScales, LengthScale1, LengthScales1),
+		unique_new_candidates(Kernel, [
+			squared_exponential_kernel(FeatureLayout, LengthScales0, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
+			squared_exponential_kernel(FeatureLayout, LengthScales1, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter)
+		], CandidateKernels).
+	parameter_candidates(categorical_penalty(Index), Kernel, Step, HyperparameterMinimum, _MaximumContinuousLengthScale, MaximumCategoricalPenalty, CandidateKernels) :-
+		Kernel = squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
 		nth1(Index, CategoricalPenalties, CategoricalPenalty),
-		scale_parameter(CategoricalPenalty, Step, CategoricalPenalty0, CategoricalPenalty1),
+		scale_categorical_penalty(CategoricalPenalty, Step, HyperparameterMinimum, MaximumCategoricalPenalty, CategoricalPenalty0, CategoricalPenalty1),
 		replace_nth1(Index, CategoricalPenalties, CategoricalPenalty0, CategoricalPenalties0),
-		replace_nth1(Index, CategoricalPenalties, CategoricalPenalty1, CategoricalPenalties1).
-	parameter_candidates(signal_variance, squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), Step, [
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance0, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance1, NoiseVariance, Jitter)
-	]) :-
-		scale_parameter(SignalVariance, Step, SignalVariance0, SignalVariance1).
-	parameter_candidates(noise_variance, squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), Step, [
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance0, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
-		squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance1, Jitter)
-	]) :-
-		scale_parameter(NoiseVariance, Step, NoiseVariance0, NoiseVariance1).
+		replace_nth1(Index, CategoricalPenalties, CategoricalPenalty1, CategoricalPenalties1),
+		unique_new_candidates(Kernel, [
+			squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties0, SignalVariance, NoiseVariance, Jitter),
+			squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties1, SignalVariance, NoiseVariance, Jitter)
+		], CandidateKernels).
+	parameter_candidates(signal_variance, Kernel, Step, HyperparameterMinimum, _MaximumContinuousLengthScale, _MaximumCategoricalPenalty, CandidateKernels) :-
+		Kernel = squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
+		scale_parameter(SignalVariance, Step, HyperparameterMinimum, SignalVariance0, SignalVariance1),
+		unique_new_candidates(Kernel, [
+			squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance0, NoiseVariance, Jitter),
+			squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance1, NoiseVariance, Jitter)
+		], CandidateKernels).
+	parameter_candidates(noise_variance, Kernel, Step, HyperparameterMinimum, _MaximumContinuousLengthScale, _MaximumCategoricalPenalty, CandidateKernels) :-
+		Kernel = squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter),
+		scale_parameter(NoiseVariance, Step, HyperparameterMinimum, NoiseVariance0, NoiseVariance1),
+		unique_new_candidates(Kernel, [
+			squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance0, Jitter),
+			squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance1, Jitter)
+		], CandidateKernels).
+
+	unique_new_candidates(CurrentKernel, CandidateKernels0, CandidateKernels) :-
+		unique_new_candidates(CandidateKernels0, CurrentKernel, [], CandidateKernels1),
+		reverse(CandidateKernels1, CandidateKernels).
+
+	unique_new_candidates([], _CurrentKernel, CandidateKernels, CandidateKernels).
+	unique_new_candidates([CandidateKernel| CandidateKernels0], CurrentKernel, CandidateKernels1, CandidateKernels) :-
+		(   CandidateKernel == CurrentKernel ->
+			CandidateKernels2 = CandidateKernels1
+		;   member(ExistingKernel, CandidateKernels1), CandidateKernel == ExistingKernel ->
+			CandidateKernels2 = CandidateKernels1
+		;   CandidateKernels2 = [CandidateKernel| CandidateKernels1]
+		),
+		unique_new_candidates(CandidateKernels0, CurrentKernel, CandidateKernels2, CandidateKernels).
 
 	replace_nth1(1, [_Value| Values], Replacement, [Replacement| Values]) :-
 		!.
@@ -410,62 +445,77 @@
 		NextIndex is Index - 1,
 		replace_nth1(NextIndex, Values, Replacement, Replacements).
 
-	scale_parameter(Parameter, Step, Smaller, Larger) :-
+	scale_length_scale(LengthScale, Step, Minimum, Maximum, Smaller, Larger) :-
+		bounded_scale_parameter(LengthScale, Step, Minimum, Maximum, Smaller, Larger).
+
+	scale_categorical_penalty(CategoricalPenalty, Step, Minimum, Maximum, Smaller, Larger) :-
+		bounded_scale_parameter(CategoricalPenalty, Step, Minimum, Maximum, Smaller, Larger).
+
+	bounded_scale_parameter(Parameter, Step, Minimum, Maximum, Smaller, Larger) :-
 		Scale is exp(Step),
 		Smaller0 is Parameter / Scale,
-		(   Smaller0 >= 1.0e-6 ->
+		clamp_parameter(Smaller0, Minimum, Maximum, Smaller),
+		Larger0 is Parameter * Scale,
+		clamp_parameter(Larger0, Minimum, Maximum, Larger).
+
+	scale_parameter(Parameter, Step, Minimum, Smaller, Larger) :-
+		Scale is exp(Step),
+		Smaller0 is Parameter / Scale,
+		(   Smaller0 >= Minimum ->
 			Smaller = Smaller0
-		;   Smaller = 1.0e-6
+		;   Smaller = Minimum
 		),
 		Larger is Parameter * Scale.
 
-	best_candidate_state([], _TrainingFeatures, _CenteredTargets, State, State).
-	best_candidate_state([CandidateKernel| CandidateKernels], TrainingFeatures, CenteredTargets, State0, State) :-
-		(   catch(candidate_state(CandidateKernel, TrainingFeatures, CenteredTargets, CandidateState), error(domain_error(positive_definite_covariance, _), _), fail) ->
+	clamp_parameter(Value, Minimum, Maximum, Clamped) :-
+		(   Value < Minimum ->
+			Clamped = Minimum
+		;   Value > Maximum ->
+			Clamped = Maximum
+		;   Clamped = Value
+		).
+
+	best_candidate_state([], _TrainingFeatures, _CenteredTargets, _FactorizationSettings, State, State).
+	best_candidate_state([CandidateKernel| CandidateKernels], TrainingFeatures, CenteredTargets, FactorizationSettings, State0, State) :-
+		(   catch(candidate_state(CandidateKernel, TrainingFeatures, CenteredTargets, FactorizationSettings, CandidateState), error(domain_error(positive_definite_covariance, _), _), fail) ->
 			better_state(CandidateState, State0, BetterState)
 		;   BetterState = State0
 		),
-		best_candidate_state(CandidateKernels, TrainingFeatures, CenteredTargets, BetterState, State).
+		best_candidate_state(CandidateKernels, TrainingFeatures, CenteredTargets, FactorizationSettings, BetterState, State).
 
-	candidate_state(CandidateKernel, TrainingFeatures, CenteredTargets, state(Kernel, Score, CholeskyFactor, Alpha, JitterAttempts)) :-
-		evaluate_kernel(TrainingFeatures, CenteredTargets, CandidateKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Score).
+	candidate_state(CandidateKernel, TrainingFeatures, CenteredTargets, FactorizationSettings, state(Kernel, Score, CholeskyFactor, Alpha, JitterAttempts)) :-
+		evaluate_kernel(TrainingFeatures, CenteredTargets, FactorizationSettings, CandidateKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Score).
 
 	better_state(state(Kernel0, Score0, CholeskyFactor0, Alpha0, JitterAttempts0), state(_Kernel1, Score1, _CholeskyFactor1, _Alpha1, _JitterAttempts1), state(Kernel0, Score0, CholeskyFactor0, Alpha0, JitterAttempts0)) :-
 		Score0 > Score1,
 		!.
 	better_state(_State0, State1, State1).
 
-	evaluate_kernel(TrainingFeatures, CenteredTargets, Kernel0, Kernel, CholeskyFactor, Alpha, JitterAttempts, LogMarginalLikelihood) :-
-		factorize_covariance(TrainingFeatures, Kernel0, Kernel, JitterAttempts, CholeskyFactor),
+	evaluate_kernel(TrainingFeatures, CenteredTargets, FactorizationSettings, Kernel0, Kernel, CholeskyFactor, Alpha, JitterAttempts, LogMarginalLikelihood) :-
+		factorize_covariance(TrainingFeatures, Kernel0, FactorizationSettings, Kernel, JitterAttempts, CholeskyFactor),
 		solve_cholesky(CholeskyFactor, CenteredTargets, Alpha),
 		log_marginal_likelihood(CenteredTargets, Alpha, CholeskyFactor, LogMarginalLikelihood).
 
-	factorize_covariance(TrainingFeatures, Kernel0, Kernel, JitterAttempts, CholeskyFactor) :-
-		max_factorization_attempts(MaxAttempts),
-		factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, 0, Kernel, JitterAttempts, CholeskyFactor).
+	factorize_covariance(TrainingFeatures, Kernel0, factorization_settings(MaxAttempts, JitterScaleFactor), Kernel, JitterAttempts, CholeskyFactor) :-
+		factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, 0, Kernel, JitterAttempts, CholeskyFactor).
 
-	factorize_covariance(_TrainingFeatures, Kernel0, MaxAttempts, Attempt, _Kernel, _JitterAttempts, _CholeskyFactor) :-
+	factorize_covariance(_TrainingFeatures, Kernel0, MaxAttempts, _JitterScaleFactor, Attempt, _Kernel, _JitterAttempts, _CholeskyFactor) :-
 		Attempt > MaxAttempts,
 		!,
 		domain_error(positive_definite_covariance, Kernel0).
-	factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, Attempt, Kernel, JitterAttempts, CholeskyFactor) :-
-		update_kernel_jitter(Kernel0, Attempt, CandidateKernel),
+	factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, Attempt, Kernel, JitterAttempts, CholeskyFactor) :-
+		update_kernel_jitter(Kernel0, JitterScaleFactor, Attempt, CandidateKernel),
 		build_covariance_matrix(TrainingFeatures, CandidateKernel, CovarianceMatrix),
 		(   catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(non_positive_definite_covariance(_Value), _Context), fail) ->
 			Kernel = CandidateKernel,
 			JitterAttempts = Attempt
 		;   NextAttempt is Attempt + 1,
-			factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, NextAttempt, Kernel, JitterAttempts, CholeskyFactor)
+			factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, NextAttempt, Kernel, JitterAttempts, CholeskyFactor)
 		).
 
-	max_factorization_attempts(32).
-
-	jitter_scale_factor(2.0).
-
-	update_kernel_jitter(squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), 0, squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter)) :-
+	update_kernel_jitter(squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter), _JitterScaleFactor, 0, squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter)) :-
 		!.
-	update_kernel_jitter(squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter0), Attempt, squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter)) :-
-		jitter_scale_factor(JitterScaleFactor),
+	update_kernel_jitter(squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter0), JitterScaleFactor, Attempt, squared_exponential_kernel(FeatureLayout, LengthScales, CategoricalPenalties, SignalVariance, NoiseVariance, Jitter)) :-
 		Scale is JitterScaleFactor ** Attempt,
 		Jitter is Jitter0 * Scale.
 
@@ -580,6 +630,13 @@
 			NextColumnIndex is ColumnIndex + 1,
 			cholesky_row(NextColumnIndex, RowIndex, Size, CovarianceRow, PreviousRows, NextPrefix, CholeskyRow)
 		).
+
+	zero_vector(0, []) :-
+		!.
+	zero_vector(Count, [0.0| Zeroes]) :-
+		Count > 0,
+		NextCount is Count - 1,
+		zero_vector(NextCount, Zeroes).
 
 	sum_squares([], 0.0).
 	sum_squares([Value| Values], SumSquares) :-
@@ -808,8 +865,14 @@
 	default_option(signal_variance(auto)).
 	default_option(noise_variance(auto)).
 	default_option(jitter(1.0e-8)).
-	default_option(maximum_iterations(25)).
+	default_option(maximum_iterations(12)).
 	default_option(tolerance(1.0e-6)).
+	default_option(relative_improvement_factor(1.0e-4)).
+	default_option(hyperparameter_minimum(1.0e-6)).
+	default_option(maximum_continuous_length_scale(32.0)).
+	default_option(maximum_categorical_penalty(32.0)).
+	default_option(max_factorization_attempts(32)).
+	default_option(jitter_scale_factor(2.0)).
 
 	valid_option(kernel(Kernel)) :-
 		Kernel == squared_exponential.
@@ -847,12 +910,17 @@
 		valid(positive_integer, MaximumIterations).
 	valid_option(tolerance(Tolerance)) :-
 		valid(non_negative_float, Tolerance).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
+	valid_option(relative_improvement_factor(RelativeImprovementFactor)) :-
+		valid(non_negative_float, RelativeImprovementFactor).
+	valid_option(hyperparameter_minimum(HyperparameterMinimum)) :-
+		valid(positive_float, HyperparameterMinimum).
+	valid_option(maximum_continuous_length_scale(MaximumContinuousLengthScale)) :-
+		valid(positive_float, MaximumContinuousLengthScale).
+	valid_option(maximum_categorical_penalty(MaximumCategoricalPenalty)) :-
+		valid(positive_float, MaximumCategoricalPenalty).
+	valid_option(max_factorization_attempts(MaxFactorizationAttempts)) :-
+		valid(positive_integer, MaxFactorizationAttempts).
+	valid_option(jitter_scale_factor(JitterScaleFactor)) :-
+		valid(positive_float, JitterScaleFactor).
 
 :- end_object.

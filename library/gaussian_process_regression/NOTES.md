@@ -161,5 +161,11 @@ The `learn/3` predicate accepts the following options:
 - `signal_variance/1`: Initial or fixed latent-process variance. Accepted values are `auto` or a positive float. The default is `auto`.
 - `noise_variance/1`: Initial or fixed observation noise variance. Accepted values are `auto` or a non-negative float. The default is `auto`.
 - `jitter/1`: Positive diagonal stabilization jitter added to the covariance matrix before factorization. When factorization fails, the implementation retries with progressively larger jitter values until it succeeds or exhausts the retry budget. The default is `1.0e-8`.
-- `maximum_iterations/1`: Maximum number of hyperparameter-search sweeps when optimization is enabled. The default is `25`.
-- `tolerance/1`: Minimum log-marginal-likelihood improvement required to continue hyperparameter optimization. The default is `1.0e-6`.
+- `maximum_iterations/1`: Maximum number of hyperparameter-search sweeps when optimization is enabled. The default is `12`.
+- `tolerance/1`: Minimum log-marginal-likelihood improvement floor required to continue hyperparameter optimization. The default floor is `1.0e-6`.
+- `relative_improvement_factor/1`: Relative log-marginal-likelihood improvement factor used together with `tolerance/1` to stop hyperparameter optimization when only numerically insignificant gains remain. The default is `1.0e-4`.
+- `hyperparameter_minimum/1`: Lower bound used when proposing scaled hyperparameter candidates during coordinate search. The default is `1.0e-6`.
+- `maximum_continuous_length_scale/1`: Upper bound used when proposing scaled continuous length-scale candidates during coordinate search. The default is `32.0`.
+- `maximum_categorical_penalty/1`: Upper bound used when proposing scaled categorical mismatch-penalty candidates during coordinate search. The default is `32.0`.
+- `max_factorization_attempts/1`: Maximum number of covariance-factorization retries performed with progressively increased jitter before training raises a positive-definiteness error. The default is `32`.
+- `jitter_scale_factor/1`: Multiplicative factor used to increase the diagonal jitter on each covariance-factorization retry. The default is `2.0`.

@@ -52,6 +52,8 @@
 	test(intercept_only_reference_fit, true, [note(metrics(default_train_seconds-DefaultTrainTime, reference_train_seconds-ReferenceTrainTime, rmse-RMSE, mae-MAE))]) :-
 		performance_profile(intercept_only, [optimize_hyperparameters(false), signal_variance(1.0), noise_variance(1.0e-6)], 0.01, 0.01, DefaultTrainTime, ReferenceTrainTime, RMSE, MAE).
 
+	% auxiliary predicates
+
 	performance_profile(Dataset, ReferenceOptions, MaximumRMSE, MaximumMAE, DefaultTrainTime, ReferenceTrainTime, RMSE, MAE) :-
 		benchmark(gaussian_process_regression::learn(Dataset, _DefaultRegressor), DefaultTrainTime),
 		reference_fit(Dataset, ReferenceOptions, MaximumRMSE, MaximumMAE, ReferenceTrainTime, RMSE, MAE).

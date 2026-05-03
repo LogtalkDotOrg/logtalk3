@@ -163,7 +163,19 @@
 		assertion(Variance >= 0.0).
 
 	test(gaussian_process_regression_learn_3_custom_options, deterministic) :-
-		gp_exact_options(UserOptions),
+		UserOptions = [
+			feature_scaling(false),
+			optimize_hyperparameters(false),
+			length_scale(2.0),
+			signal_variance(16.0),
+			noise_variance(1.0e-6),
+			relative_improvement_factor(1.0e-3),
+			hyperparameter_minimum(1.0e-5),
+			maximum_continuous_length_scale(16.0),
+			maximum_categorical_penalty(8.0),
+			max_factorization_attempts(8),
+			jitter_scale_factor(4.0)
+		],
 		gaussian_process_regression::learn(simple_line, Regressor, UserOptions),
 		gaussian_process_regression::regressor_options(Regressor, Options),
 		assertion(member(feature_scaling(false), Options)),
@@ -171,6 +183,12 @@
 		assertion(member(length_scale(2.0), Options)),
 		assertion(member(signal_variance(16.0), Options)),
 		assertion(member(noise_variance(1.0e-6), Options)),
+		assertion(member(relative_improvement_factor(1.0e-3), Options)),
+		assertion(member(hyperparameter_minimum(1.0e-5), Options)),
+		assertion(member(maximum_continuous_length_scale(16.0), Options)),
+		assertion(member(maximum_categorical_penalty(8.0), Options)),
+		assertion(member(max_factorization_attempts(8), Options)),
+		assertion(member(jitter_scale_factor(4.0), Options)),
 		assertion(member(kernel(squared_exponential), Options)).
 
 	test(gaussian_process_regression_diagnostics_2, deterministic) :-

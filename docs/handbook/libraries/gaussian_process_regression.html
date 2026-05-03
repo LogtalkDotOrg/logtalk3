@@ -502,9 +502,30 @@ covariance matrix before factorization. When factorization fails, the
 implementation retries with progressively larger jitter values until
 it succeeds or exhausts the retry budget. The default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Maximum number of hyperparameter-search
-sweeps when optimization is enabled. The default is <code class="docutils literal notranslate"><span class="pre">25</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Minimum log-marginal-likelihood improvement required
-to continue hyperparameter optimization. The default is <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>.</p></li>
+sweeps when optimization is enabled. The default is <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Minimum log-marginal-likelihood improvement floor
+required to continue hyperparameter optimization. The default floor is
+<code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">relative_improvement_factor/1</span></code>: Relative log-marginal-likelihood
+improvement factor used together with <code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code> to stop
+hyperparameter optimization when only numerically insignificant gains
+remain. The default is <code class="docutils literal notranslate"><span class="pre">1.0e-4</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hyperparameter_minimum/1</span></code>: Lower bound used when proposing scaled
+hyperparameter candidates during coordinate search. The default is
+<code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_continuous_length_scale/1</span></code>: Upper bound used when proposing
+scaled continuous length-scale candidates during coordinate search.
+The default is <code class="docutils literal notranslate"><span class="pre">32.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_categorical_penalty/1</span></code>: Upper bound used when proposing
+scaled categorical mismatch-penalty candidates during coordinate
+search. The default is <code class="docutils literal notranslate"><span class="pre">32.0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_factorization_attempts/1</span></code>: Maximum number of
+covariance-factorization retries performed with progressively
+increased jitter before training raises a positive-definiteness error.
+The default is <code class="docutils literal notranslate"><span class="pre">32</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jitter_scale_factor/1</span></code>: Multiplicative factor used to increase the
+diagonal jitter on each covariance-factorization retry. The default is
+<code class="docutils literal notranslate"><span class="pre">2.0</span></code>.</p></li>
 </ul>
 </section>
 </section>
