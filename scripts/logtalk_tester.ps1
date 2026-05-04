@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on April 28, 2026
+##   Last updated on May 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -105,8 +105,6 @@ Function Invoke-CompletionNotification {
 			Start-Sleep -Milliseconds 100
 			[Console]::Write("`a")
 		} else {
-			[Console]::Write("`a")
-			Start-Sleep -Milliseconds 50
 			[Console]::Write("`a")
 			Start-Sleep -Milliseconds 50
 			[Console]::Write("`a")
