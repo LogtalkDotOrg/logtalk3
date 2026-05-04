@@ -28,10 +28,10 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:4:0,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2025-11-11,
-		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
+		date is 2026-05-04,
+		comment is 'Built-in object providing message printing, debugging, library, source file, halt predicates, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
 			'Printing of silent messages' - 'By default, silent messages are not printed. These messages are only useful when intercepted.',
@@ -274,6 +274,31 @@
 	:- info(file_type_extension/2, [
 		comment is 'Enumerates, by backtracking, all defined file type extensions. The defined types are: ``source``, ``object``, ``logtalk``, ``prolog``, and ``tmp``. The source type returns both ``logtalk`` and ``prolog`` type extensions.',
 		argnames is ['Type', 'Extension']
+	]).
+
+	% halt/0-1 hook predicates
+
+	:- public(halt/1).
+	:- mode(halt(+integer), one).
+	:- info(halt/1, [
+		comment is 'Halts the Logtalk process with the given exit code. Calls all defined halt hook goals whose exit code unifies with its argument. A warning message is printed in case of goal failures or errors (which are otherwise ignored).',
+		argnames is ['ExitCode']
+	]).
+
+	:- public(halt/0).
+	:- mode(halt, one).
+	:- info(halt/0, [
+		comment is 'Halts the Logtalk process with the given exit code. Calls all defined halt hook goals whose exit code unifies with the integer zero. A warning message is printed in case of goal failures or errors (which are otherwise ignored).'
+	]).
+
+	:- public(halt_hook/2).
+	:- multifile(halt_hook/2).
+	:- dynamic(halt_hook/2).
+	:- mode(halt_hook(?var, ?callable), zero_or_more).
+	:- mode(halt_hook(?integer, ?callable), zero_or_more).
+	:- info(halt_hook/2, [
+		comment is 'Hook predicate defining a goal to be called when sending the ``halt/0-1`` messages.',
+		argnames is ['ExitCode', 'Goal']
 	]).
 
 	% hacking predicates
@@ -725,6 +750,25 @@
 		{'$lgt_file_extension'(logtalk, Extension)}.
 	file_type_extension(source, Extension) :-
 		{'$lgt_file_extension'(prolog, Extension)}.
+
+	% halt/0-1 hook predicates
+
+	halt(ExitCode) :-
+		halt_hook(ExitCode, Goal),
+		catch(
+			(	Goal ->
+				true
+			;	print_message(warning(halt), core, halt_hook_failure(ExitCode, Goal))
+			),
+			Error,
+			print_message(warning(halt), core, halt_hook_error(ExitCode, Goal, Error))
+		),
+		fail.
+	halt(ExitCode) :-
+		{halt(ExitCode)}.
+
+	halt :-
+		halt(0).
 
 	% hacking predicates
 

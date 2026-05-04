@@ -25,6 +25,12 @@ RELEASE NOTES
 3.100.0 - April ??, 2026
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: New `logtalk::halt/0-1` public predicates and `logtalk::halt_hook/2`
+user-defined hook predicate.
+
 Documentation
 -------------
 

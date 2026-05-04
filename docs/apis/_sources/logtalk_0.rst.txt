@@ -8,14 +8,14 @@
 ``logtalk``
 ===========
 
-Built-in object providing message printing, debugging, library, source file, and hacking methods.
+Built-in object providing message printing, debugging, library, source file, halt predicates, and hacking methods.
 
 | **Availability:** 
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 3:4:0
-| **Date:** 2025-11-11
+| **Version:** 3:5:0
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -506,6 +506,62 @@ Enumerates, by backtracking, all defined file type extensions. The defined types
 |    ``file_type_extension(Type,Extension)``
 | **Mode and number of proofs:**
 |    ``file_type_extension(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: halt/1
+.. _logtalk/0::halt/1:
+
+``halt/1``
+^^^^^^^^^^
+
+Halts the Logtalk process with the given exit code. Calls all defined halt hook goals whose exit code unifies with its argument. A warning message is printed in case of goal failures or errors (which are otherwise ignored).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``halt(ExitCode)``
+| **Mode and number of proofs:**
+|    ``halt(+integer)`` - ``one``
+
+
+------------
+
+.. index:: halt/0
+.. _logtalk/0::halt/0:
+
+``halt/0``
+^^^^^^^^^^
+
+Halts the Logtalk process with the given exit code. Calls all defined halt hook goals whose exit code unifies with the integer zero. A warning message is printed in case of goal failures or errors (which are otherwise ignored).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``halt`` - ``one``
+
+
+------------
+
+.. index:: halt_hook/2
+.. _logtalk/0::halt_hook/2:
+
+``halt_hook/2``
+^^^^^^^^^^^^^^^
+
+Hook predicate defining a goal to be called when sending the ``halt/0-1`` messages.
+
+| **Compilation flags:**
+|    ``dynamic, multifile``
+
+| **Template:**
+|    ``halt_hook(ExitCode,Goal)``
+| **Mode and number of proofs:**
+|    ``halt_hook(?var,?callable)`` - ``zero_or_more``
+|    ``halt_hook(?integer,?callable)`` - ``zero_or_more``
 
 
 ------------

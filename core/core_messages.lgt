@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:146:0,
+		version is 1:147:0,
 		author is 'Paulo Moura',
-		date is 2026-03-25,
+		date is 2026-05-04,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -841,6 +841,14 @@
 		['Duplicated grammar rule: ~q'-[GrammarRule], nl],
 		first_found_at(OriginalFile, OriginalLines, File),
 		message_context(File, Lines, Type, Entity).
+
+	% halt/0-1 hook predicate messages
+
+	message_tokens(halt_hook_failure(ExitCode, Goal)) -->
+		['Hook goal ~q for halt(~d) call failure'-[Goal, ExitCode], nl, nl].
+
+	message_tokens(halt_hook_error(ExitCode, Goal, Error)) -->
+		['Hook goal ~q for halt(~d) call error: ~q'-[Goal, ExitCode, Error], nl, nl].
 
 	% auxiliary grammar rules
 
