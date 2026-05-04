@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1249 2788,-1249 2788,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object nearest_centroid</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;03, 19:40</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;04, 02:28</text>
 <g id="clust1" class="cluster">
 <title>cluster_nearest_centroid_object</title>
 <g id="a_clust1"><a xlink:title="nearest_centroid">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2764,-54.25 2764,-54.25 2770,-54.25 2776,-60.25 2776,-66.25 2776,-66.25 2776,-1225 2776,-1225 2776,-1231 2770,-1237 2764,-1237 2764,-1237 20,-1237 20,-1237 14,-1237 8,-1231 8,-1225 8,-1225 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1219.25" font-family="Monospace" font-size="10.00" fill="dimgray">nearest_centroid</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>predict/4</title>
 <polygon fill="springgreen" stroke="black" points="852.62,-577.25 765.38,-577.25 765.38,-541.25 852.62,-541.25 852.62,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="773.38" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L39">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="778.62" y="-561.12" font-family="Monospace" font-size="11.00">predict/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>extract_values/3</title>
 <polygon fill="cornsilk" stroke="black" points="1176.25,-458 1041.75,-458 1041.75,-422 1176.25,-422 1176.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1049.75" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L113">
+<g id="a_node11_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1055" y="-441.88" font-family="Monospace" font-size="11.00">extract_values/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- predict/4&#45;&gt;extract_values/3 -->
 <g id="edge20" class="edge">
 <title>predict/4&#45;&gt;extract_values/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M853,-552.87C897.96,-546.15 968.94,-532.11 1025,-505.25 1046.04,-495.17 1066.89,-479.27 1082.55,-465.81"/>
 <polygon fill="black" stroke="black" points="1084.82,-468.47 1090,-459.23 1080.19,-463.22 1084.82,-468.47"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="1042.65" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>compute_distance/5</title>
 <polygon fill="cornsilk" stroke="black" points="725,-458 577,-458 577,-422 725,-422 725,-458"/>
 <text xml:space="preserve" text-anchor="start" x="585" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L273">
+<g id="a_node31_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="590.25" y="-441.88" font-family="Monospace" font-size="11.00">compute_distance/5</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- predict/4&#45;&gt;compute_distance/5 -->
 <g id="edge21" class="edge">
 <title>predict/4&#45;&gt;compute_distance/5</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M790.5,-540.78C775.91,-527.37 754.8,-508.71 735,-494 720.94,-483.56 704.82,-473.06 690.48,-464.19"/>
 <polygon fill="black" stroke="black" points="692.53,-461.35 682.18,-459.12 688.89,-467.32 692.53,-461.35"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="747.69" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- predict/4&#45;&gt;list::member/2 -->
 <g id="edge61" class="edge">
 <title>predict/4&#45;&gt;list::member/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M831.72,-540.95C858,-520.95 901.42,-487.88 931.08,-465.3"/>
 <polygon fill="black" stroke="black" points="933.14,-468.13 938.98,-459.29 928.9,-462.56 933.14,-468.13"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="890.62" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- predict/4&#45;&gt;^^check_options/1 -->
 <g id="edge47" class="edge">
 <title>predict/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M765.26,-549.36C718.55,-539.6 642.51,-522.95 577.75,-505.25 551.54,-498.09 488.33,-477.77 439.59,-461.89"/>
 <polygon fill="black" stroke="black" points="440.84,-458.61 430.24,-458.83 438.66,-465.26 440.84,-458.61"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="577.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- predict/4&#45;&gt;^^merge_options/2 -->
 <g id="edge48" class="edge">
 <title>predict/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M819.2,-540.75C824.46,-530.72 830.31,-517.69 833,-505.25 835.61,-493.14 832.76,-479.99 828.55,-468.75"/>
 <polygon fill="black" stroke="black" points="831.8,-467.45 824.62,-459.66 825.37,-470.23 831.8,-467.45"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="834" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -181,12 +181,12 @@
 <!-- predict/4&#45;&gt;^^option/2 -->
 <g id="edge49" class="edge">
 <title>predict/4&#45;&gt;^^option/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M764.99,-544.51C734.71,-534.62 693.78,-520.4 658.75,-505.25 648.76,-500.93 646.85,-498.63 637,-494 613.99,-483.19 588.18,-472.08 566.02,-462.85"/>
 <polygon fill="black" stroke="black" points="567.43,-459.64 556.86,-459.05 564.75,-466.11 567.43,-459.64"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L211">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="658.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -196,7 +196,7 @@
 <title>predict_probabilities/3</title>
 <polygon fill="springgreen" stroke="black" points="700.88,-696.5 519.12,-696.5 519.12,-660.5 700.88,-660.5 700.88,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="527.12" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L46">
+<g id="a_node2_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="532.38" y="-680.38" font-family="Monospace" font-size="11.00">predict_probabilities/3</text>
 </a>
 </g>
@@ -210,7 +210,7 @@
 <title>predict_probabilities/4</title>
 <polygon fill="springgreen" stroke="black" points="700.88,-577.25 519.12,-577.25 519.12,-541.25 700.88,-541.25 700.88,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="527.12" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L53">
+<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="532.38" y="-561.12" font-family="Monospace" font-size="11.00">predict_probabilities/4</text>
 </a>
 </g>
@@ -222,12 +222,12 @@
 <!-- predict_probabilities/3&#45;&gt;predict_probabilities/4 -->
 <g id="edge22" class="edge">
 <title>predict_probabilities/3&#45;&gt;predict_probabilities/4</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L227" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M610,-660.2C610,-641.5 610,-611.37 610,-589.08"/>
 <polygon fill="black" stroke="black" points="613.5,-589.14 610,-579.14 606.5,-589.14 613.5,-589.14"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L227">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="610" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -235,12 +235,12 @@
 <!-- predict_probabilities/4&#45;&gt;extract_values/3 -->
 <g id="edge23" class="edge">
 <title>predict_probabilities/4&#45;&gt;extract_values/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M701.3,-546.63C763.71,-537.73 848.01,-523.81 921,-505.25 966.64,-493.64 1017.07,-476.14 1054.2,-462.34"/>
 <polygon fill="black" stroke="black" points="1055.23,-465.69 1063.37,-458.9 1052.78,-459.13 1055.23,-465.69"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="957.61" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -250,7 +250,7 @@
 <title>convert_distances_to_probabilities/2</title>
 <polygon fill="cornsilk" stroke="black" points="287.75,-458 18.25,-458 18.25,-422 287.75,-422 287.75,-458"/>
 <text xml:space="preserve" text-anchor="start" x="26.25" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247">
+<g id="a_node26_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="31.5" y="-441.88" font-family="Monospace" font-size="11.00">convert_distances_to_probabilities/2</text>
 </a>
 </g>
@@ -262,12 +262,12 @@
 <!-- predict_probabilities/4&#45;&gt;convert_distances_to_probabilities/2 -->
 <g id="edge25" class="edge">
 <title>predict_probabilities/4&#45;&gt;convert_distances_to_probabilities/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M542.08,-540.82C459.22,-519.56 319.39,-483.69 231.86,-461.23"/>
 <polygon fill="black" stroke="black" points="232.95,-457.9 222.39,-458.8 231.21,-464.68 232.95,-457.9"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="395.2" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -275,12 +275,12 @@
 <!-- predict_probabilities/4&#45;&gt;compute_distance/5 -->
 <g id="edge24" class="edge">
 <title>predict_probabilities/4&#45;&gt;compute_distance/5</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M607.31,-540.84C605.95,-527.62 605.54,-509.19 610.75,-494 614.04,-484.42 619.8,-475.18 625.95,-467.18"/>
 <polygon fill="black" stroke="black" points="628.57,-469.5 632.26,-459.57 623.18,-465.03 628.57,-469.5"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="610.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -288,12 +288,12 @@
 <!-- predict_probabilities/4&#45;&gt;list::member/2 -->
 <g id="edge62" class="edge">
 <title>predict_probabilities/4&#45;&gt;list::member/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M671.27,-540.87C703.37,-531.27 743.16,-518.61 778,-505.25 789.28,-500.92 791.5,-498.4 802.75,-494 832.51,-482.35 866,-471.01 894.64,-461.83"/>
 <polygon fill="black" stroke="black" points="895.45,-465.24 903.92,-458.87 893.33,-458.57 895.45,-465.24"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="802.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -301,12 +301,12 @@
 <!-- predict_probabilities/4&#45;&gt;^^check_options/1 -->
 <g id="edge50" class="edge">
 <title>predict_probabilities/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M560.38,-540.82C535.15,-531.34 504.29,-518.81 477.75,-505.25 454.35,-493.3 429.39,-477.59 410.04,-464.69"/>
 <polygon fill="black" stroke="black" points="412.26,-461.96 402.01,-459.27 408.35,-467.77 412.26,-461.96"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="477.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -314,12 +314,12 @@
 <!-- predict_probabilities/4&#45;&gt;^^merge_options/2 -->
 <g id="edge51" class="edge">
 <title>predict_probabilities/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M633.53,-540.9C652.34,-527.37 679.62,-508.51 704.75,-494 723.77,-483.01 745.41,-472.19 764.38,-463.22"/>
 <polygon fill="black" stroke="black" points="765.67,-466.48 773.24,-459.07 762.7,-460.14 765.67,-466.48"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="704.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -327,12 +327,12 @@
 <!-- predict_probabilities/4&#45;&gt;^^option/2 -->
 <g id="edge52" class="edge">
 <title>predict_probabilities/4&#45;&gt;^^option/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M555.19,-540.81C538.66,-532.71 522.37,-521.23 512.75,-505.25 506.41,-494.71 505.39,-481.33 506.29,-469.52"/>
 <polygon fill="black" stroke="black" points="509.72,-470.24 507.5,-459.88 502.78,-469.37 509.72,-470.24"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L230">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="512.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -342,7 +342,7 @@
 <title>classifier_export_template/4</title>
 <polygon fill="cornsilk" stroke="black" points="724.75,-1198.25 509.25,-1198.25 509.25,-1162.25 724.75,-1162.25 724.75,-1198.25"/>
 <text xml:space="preserve" text-anchor="start" x="517.25" y="-1182.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L370">
+<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="522.5" y="-1182.12" font-family="Monospace" font-size="11.00">classifier_export_template/4</text>
 </a>
 </g>
@@ -356,7 +356,7 @@
 <title>manhattan_distance/4</title>
 <polygon fill="cornsilk" stroke="black" points="626.75,-338.75 465.25,-338.75 465.25,-302.75 626.75,-302.75 626.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="473.25" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L284">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L284">
 <text xml:space="preserve" text-anchor="start" x="478.5" y="-322.62" font-family="Monospace" font-size="11.00">manhattan_distance/4</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <title>sum_abs_diffs/5</title>
 <polygon fill="cornsilk" stroke="black" points="593.88,-219.5 466.12,-219.5 466.12,-183.5 593.88,-183.5 593.88,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="474.12" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node38_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L324">
+<g id="a_node38_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L324">
 <text xml:space="preserve" text-anchor="start" x="479.38" y="-203.38" font-family="Monospace" font-size="11.00">sum_abs_diffs/5</text>
 </a>
 </g>
@@ -382,12 +382,12 @@
 <!-- manhattan_distance/4&#45;&gt;sum_abs_diffs/5 -->
 <g id="edge34" class="edge">
 <title>manhattan_distance/4&#45;&gt;sum_abs_diffs/5</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L284" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L284" xlink:title="calls">
 <path fill="none" stroke="black" d="M543.64,-302.45C541.07,-283.66 536.94,-253.34 533.89,-231.02"/>
 <polygon fill="black" stroke="black" points="537.4,-230.81 532.58,-221.37 530.46,-231.75 537.4,-230.81"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L284">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L284">
 <text xml:space="preserve" text-anchor="start" x="538.48" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -397,7 +397,7 @@
 <title>predict/3</title>
 <polygon fill="cornsilk" stroke="black" points="852.62,-696.5 765.38,-696.5 765.38,-660.5 852.62,-660.5 852.62,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="773.38" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L208">
+<g id="a_node6_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="778.62" y="-680.38" font-family="Monospace" font-size="11.00">predict/3</text>
 </a>
 </g>
@@ -409,12 +409,12 @@
 <!-- predict/3&#45;&gt;predict/4 -->
 <g id="edge19" class="edge">
 <title>predict/3&#45;&gt;predict/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L208" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M809,-660.2C809,-641.5 809,-611.37 809,-589.08"/>
 <polygon fill="black" stroke="black" points="812.5,-589.14 809,-579.14 805.5,-589.14 812.5,-589.14"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L208">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="809" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -424,7 +424,7 @@
 <title>count_frequencies/2</title>
 <polygon fill="cornsilk" stroke="black" points="1494.38,-458 1339.62,-458 1339.62,-422 1494.38,-422 1494.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1347.62" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L179">
+<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="1352.88" y="-441.88" font-family="Monospace" font-size="11.00">count_frequencies/2</text>
 </a>
 </g>
@@ -438,7 +438,7 @@
 <title>count_freq_acc/3</title>
 <polygon fill="cornsilk" stroke="black" points="1484.25,-338.75 1349.75,-338.75 1349.75,-302.75 1484.25,-302.75 1484.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1357.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L182">
+<g id="a_node22_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="1363" y="-322.62" font-family="Monospace" font-size="11.00">count_freq_acc/3</text>
 </a>
 </g>
@@ -450,12 +450,12 @@
 <!-- count_frequencies/2&#45;&gt;count_freq_acc/3 -->
 <g id="edge16" class="edge">
 <title>count_frequencies/2&#45;&gt;count_freq_acc/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L179" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L179" xlink:title="calls">
 <path fill="none" stroke="black" d="M1417,-421.7C1417,-403 1417,-372.87 1417,-350.58"/>
 <polygon fill="black" stroke="black" points="1420.5,-350.64 1417,-340.64 1413.5,-350.64 1420.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L179">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="1417" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -465,7 +465,7 @@
 <title>learn/2</title>
 <polygon fill="cornsilk" stroke="black" points="1306.88,-1198.25 1233.12,-1198.25 1233.12,-1162.25 1306.88,-1162.25 1306.88,-1198.25"/>
 <text xml:space="preserve" text-anchor="start" x="1241.12" y="-1182.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1246.38" y="-1182.12" font-family="Monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -479,7 +479,7 @@
 <title>dataset_attributes/2</title>
 <polygon fill="cornsilk" stroke="black" points="1089.75,-1079 928.25,-1079 928.25,-1043 1089.75,-1043 1089.75,-1079"/>
 <text xml:space="preserve" text-anchor="start" x="936.25" y="-1063.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L100">
+<g id="a_node9_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="941.5" y="-1062.88" font-family="Monospace" font-size="11.00">dataset_attributes/2</text>
 </a>
 </g>
@@ -491,12 +491,12 @@
 <!-- learn/2&#45;&gt;dataset_attributes/2 -->
 <g id="edge1" class="edge">
 <title>learn/2&#45;&gt;dataset_attributes/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1232.79,-1176.93C1188.61,-1172.66 1114.21,-1160.55 1060.75,-1126.25 1046.15,-1116.88 1033.78,-1102 1024.8,-1088.91"/>
 <polygon fill="black" stroke="black" points="1027.81,-1087.13 1019.43,-1080.64 1021.94,-1090.94 1027.81,-1087.13"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1060.75" y="-1117.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -506,7 +506,7 @@
 <title>examples_to_instances/3</title>
 <polygon fill="cornsilk" stroke="black" points="1199.88,-1007 1018.12,-1007 1018.12,-971 1199.88,-971 1199.88,-1007"/>
 <text xml:space="preserve" text-anchor="start" x="1026.12" y="-991.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L108">
+<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="1031.38" y="-990.88" font-family="Monospace" font-size="11.00">examples_to_instances/3</text>
 </a>
 </g>
@@ -518,12 +518,12 @@
 <!-- learn/2&#45;&gt;examples_to_instances/3 -->
 <g id="edge2" class="edge">
 <title>learn/2&#45;&gt;examples_to_instances/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1232.63,-1165.09C1197.34,-1149.62 1146.05,-1121.26 1120,-1079 1108.94,-1061.06 1106.5,-1037.21 1106.66,-1018.72"/>
 <polygon fill="black" stroke="black" points="1110.15,-1019.09 1107.02,-1008.96 1103.15,-1018.83 1110.15,-1019.09"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1162.56" y="-1117.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -533,7 +533,7 @@
 <title>determine_feature_types_from_dataset/2</title>
 <polygon fill="cornsilk" stroke="black" points="1411.5,-1079 1128.5,-1079 1128.5,-1043 1411.5,-1043 1411.5,-1079"/>
 <text xml:space="preserve" text-anchor="start" x="1136.5" y="-1063.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L119">
+<g id="a_node12_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L119">
 <text xml:space="preserve" text-anchor="start" x="1141.75" y="-1062.88" font-family="Monospace" font-size="11.00">determine_feature_types_from_dataset/2</text>
 </a>
 </g>
@@ -545,12 +545,12 @@
 <!-- learn/2&#45;&gt;determine_feature_types_from_dataset/2 -->
 <g id="edge3" class="edge">
 <title>learn/2&#45;&gt;determine_feature_types_from_dataset/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1270,-1161.95C1270,-1143.25 1270,-1113.12 1270,-1090.83"/>
 <polygon fill="black" stroke="black" points="1273.5,-1090.89 1270,-1080.89 1266.5,-1090.89 1273.5,-1090.89"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1270" y="-1117.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -560,7 +560,7 @@
 <title>compute_all_centroids/4</title>
 <polygon fill="cornsilk" stroke="black" points="1610.88,-1079 1429.12,-1079 1429.12,-1043 1610.88,-1043 1610.88,-1079"/>
 <text xml:space="preserve" text-anchor="start" x="1437.12" y="-1063.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L128">
+<g id="a_node13_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="1442.38" y="-1062.88" font-family="Monospace" font-size="11.00">compute_all_centroids/4</text>
 </a>
 </g>
@@ -572,12 +572,12 @@
 <!-- learn/2&#45;&gt;compute_all_centroids/4 -->
 <g id="edge4" class="edge">
 <title>learn/2&#45;&gt;compute_all_centroids/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1307.16,-1161.82C1351.26,-1141.14 1424.85,-1106.63 1472.9,-1084.09"/>
 <polygon fill="black" stroke="black" points="1474.11,-1087.39 1481.68,-1079.97 1471.14,-1081.05 1474.11,-1087.39"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1402.5" y="-1117.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -599,12 +599,12 @@
 <!-- learn/2&#45;&gt;pairs::keys/2 -->
 <g id="edge56" class="edge">
 <title>learn/2&#45;&gt;pairs::keys/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M1307.28,-1168.74C1377.18,-1149.04 1528.87,-1106.29 1617.6,-1081.28"/>
 <polygon fill="black" stroke="black" points="1618.5,-1084.66 1627.17,-1078.58 1616.6,-1077.93 1618.5,-1084.66"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L80">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1490.47" y="-1117.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -612,12 +612,12 @@
 <!-- examples_to_instances/3&#45;&gt;extract_values/3 -->
 <g id="edge5" class="edge">
 <title>examples_to_instances/3&#45;&gt;extract_values/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L109" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M1109,-970.81C1109,-945.98 1109,-898.66 1109,-858.38 1109,-858.38 1109,-858.38 1109,-558.25 1109,-528.09 1109,-493.56 1109,-469.83"/>
 <polygon fill="black" stroke="black" points="1112.5,-469.99 1109,-459.99 1105.5,-469.99 1112.5,-469.99"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L109">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1109" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -639,12 +639,12 @@
 <!-- extract_values/3&#45;&gt;list::memberchk/2 -->
 <g id="edge57" class="edge">
 <title>extract_values/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L114" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M1109,-421.7C1109,-403 1109,-372.87 1109,-350.58"/>
 <polygon fill="black" stroke="black" points="1112.5,-350.64 1109,-340.64 1105.5,-350.64 1112.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L114">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="1109" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -654,7 +654,7 @@
 <title>get_instances_for_class/3</title>
 <polygon fill="cornsilk" stroke="black" points="1774.62,-935 1579.38,-935 1579.38,-899 1774.62,-899 1774.62,-935"/>
 <text xml:space="preserve" text-anchor="start" x="1587.38" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L135">
+<g id="a_node14_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="1592.62" y="-918.88" font-family="Monospace" font-size="11.00">get_instances_for_class/3</text>
 </a>
 </g>
@@ -666,12 +666,12 @@
 <!-- compute_all_centroids/4&#45;&gt;get_instances_for_class/3 -->
 <g id="edge6" class="edge">
 <title>compute_all_centroids/4&#45;&gt;get_instances_for_class/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1539.25,-1042.59C1566.94,-1017.54 1618.16,-971.22 1649.73,-942.66"/>
 <polygon fill="black" stroke="black" points="1651.89,-945.43 1656.96,-936.13 1647.19,-940.24 1651.89,-945.43"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L129">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1617.18" y="-985.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -681,7 +681,7 @@
 <title>compute_centroid/3</title>
 <polygon fill="cornsilk" stroke="black" points="1561,-935 1413,-935 1413,-899 1561,-899 1561,-935"/>
 <text xml:space="preserve" text-anchor="start" x="1421" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143">
+<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="1426.25" y="-918.88" font-family="Monospace" font-size="11.00">compute_centroid/3</text>
 </a>
 </g>
@@ -693,12 +693,12 @@
 <!-- compute_all_centroids/4&#45;&gt;compute_centroid/3 -->
 <g id="edge7" class="edge">
 <title>compute_all_centroids/4&#45;&gt;compute_centroid/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1512.71,-1042.6C1508.67,-1032.39 1503.86,-1019.14 1500.75,-1007 1495.64,-987.06 1492.15,-964.1 1489.97,-946.49"/>
 <polygon fill="black" stroke="black" points="1493.47,-946.29 1488.83,-936.77 1486.51,-947.1 1493.47,-946.29"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L129">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1500.75" y="-985.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -708,7 +708,7 @@
 <title>transpose/2</title>
 <polygon fill="cornsilk" stroke="black" points="1675.38,-815.75 1574.62,-815.75 1574.62,-779.75 1675.38,-779.75 1675.38,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1582.62" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L148">
+<g id="a_node16_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1587.88" y="-799.62" font-family="Monospace" font-size="11.00">transpose/2</text>
 </a>
 </g>
@@ -720,12 +720,12 @@
 <!-- compute_centroid/3&#45;&gt;transpose/2 -->
 <g id="edge8" class="edge">
 <title>compute_centroid/3&#45;&gt;transpose/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M1507.36,-898.7C1530.8,-878.78 1569.48,-845.92 1596.05,-823.35"/>
 <polygon fill="black" stroke="black" points="1598.05,-826.24 1603.4,-817.1 1593.51,-820.91 1598.05,-826.24"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="1560.14" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -735,7 +735,7 @@
 <title>compute_centroid_features/3</title>
 <polygon fill="cornsilk" stroke="black" points="1539.38,-815.75 1330.62,-815.75 1330.62,-779.75 1539.38,-779.75 1539.38,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1338.62" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L159">
+<g id="a_node18_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1343.88" y="-799.62" font-family="Monospace" font-size="11.00">compute_centroid_features/3</text>
 </a>
 </g>
@@ -747,12 +747,12 @@
 <!-- compute_centroid/3&#45;&gt;compute_centroid_features/3 -->
 <g id="edge9" class="edge">
 <title>compute_centroid/3&#45;&gt;compute_centroid_features/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M1479.33,-898.7C1470.88,-879.65 1457.18,-848.75 1447.24,-826.35"/>
 <polygon fill="black" stroke="black" points="1450.57,-825.23 1443.32,-817.51 1444.17,-828.07 1450.57,-825.23"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L143">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="1462.56" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -762,7 +762,7 @@
 <title>extract_first_column/3</title>
 <polygon fill="cornsilk" stroke="black" points="1718.5,-696.5 1543.5,-696.5 1543.5,-660.5 1718.5,-660.5 1718.5,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1551.5" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L154">
+<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="1556.75" y="-680.38" font-family="Monospace" font-size="11.00">extract_first_column/3</text>
 </a>
 </g>
@@ -774,12 +774,12 @@
 <!-- transpose/2&#45;&gt;extract_first_column/3 -->
 <g id="edge10" class="edge">
 <title>transpose/2&#45;&gt;extract_first_column/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L150" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L150" xlink:title="calls">
 <path fill="none" stroke="black" d="M1625.89,-779.45C1626.84,-760.75 1628.38,-730.62 1629.52,-708.33"/>
 <polygon fill="black" stroke="black" points="1633.02,-708.55 1630.03,-698.38 1626.03,-708.19 1633.02,-708.55"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L150">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="1628.18" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -789,7 +789,7 @@
 <title>compute_feature_centroid/3</title>
 <polygon fill="cornsilk" stroke="black" points="1525,-696.5 1323,-696.5 1323,-660.5 1525,-660.5 1525,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1331" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L164">
+<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1336.25" y="-680.38" font-family="Monospace" font-size="11.00">compute_feature_centroid/3</text>
 </a>
 </g>
@@ -801,12 +801,12 @@
 <!-- compute_centroid_features/3&#45;&gt;compute_feature_centroid/3 -->
 <g id="edge11" class="edge">
 <title>compute_centroid_features/3&#45;&gt;compute_feature_centroid/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L160" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L160" xlink:title="calls">
 <path fill="none" stroke="black" d="M1433.38,-779.45C1431.62,-760.75 1428.8,-730.62 1426.7,-708.33"/>
 <polygon fill="black" stroke="black" points="1430.19,-708.01 1425.77,-698.38 1423.22,-708.66 1430.19,-708.01"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L160">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L160">
 <text xml:space="preserve" text-anchor="start" x="1429.83" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -816,7 +816,7 @@
 <title>compute_mean/2</title>
 <polygon fill="cornsilk" stroke="black" points="1643.5,-577.25 1522.5,-577.25 1522.5,-541.25 1643.5,-541.25 1643.5,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1530.5" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169">
+<g id="a_node20_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="1535.75" y="-561.12" font-family="Monospace" font-size="11.00">compute_mean/2</text>
 </a>
 </g>
@@ -828,12 +828,12 @@
 <!-- compute_feature_centroid/3&#45;&gt;compute_mean/2 -->
 <g id="edge12" class="edge">
 <title>compute_feature_centroid/3&#45;&gt;compute_mean/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L164" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1447.46,-660.2C1474.7,-640.11 1519.81,-606.85 1550.44,-584.26"/>
 <polygon fill="black" stroke="black" points="1552.25,-587.27 1558.22,-578.52 1548.1,-581.64 1552.25,-587.27"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L164">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="1508.27" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,7 +843,7 @@
 <title>compute_mode/2</title>
 <polygon fill="cornsilk" stroke="black" points="1477.5,-577.25 1356.5,-577.25 1356.5,-541.25 1477.5,-541.25 1477.5,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1364.5" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175">
+<g id="a_node21_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="1369.75" y="-561.12" font-family="Monospace" font-size="11.00">compute_mode/2</text>
 </a>
 </g>
@@ -855,12 +855,12 @@
 <!-- compute_feature_centroid/3&#45;&gt;compute_mode/2 -->
 <g id="edge13" class="edge">
 <title>compute_feature_centroid/3&#45;&gt;compute_mode/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L166" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M1422.97,-660.2C1421.85,-641.5 1420.05,-611.37 1418.72,-589.08"/>
 <polygon fill="black" stroke="black" points="1422.22,-588.91 1418.13,-579.13 1415.23,-589.32 1422.22,-588.91"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L166">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="1420.71" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -882,12 +882,12 @@
 <!-- compute_mean/2&#45;&gt;list::length/2 -->
 <g id="edge58" class="edge">
 <title>compute_mean/2&#45;&gt;list::length/2</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="calls">
 <path fill="none" stroke="black" d="M1627.46,-540.82C1662.19,-527.43 1711.77,-508.78 1755.75,-494 1790.04,-482.48 1828.47,-470.79 1860.67,-461.32"/>
 <polygon fill="black" stroke="black" points="1861.27,-464.79 1869.88,-458.63 1859.3,-458.08 1861.27,-464.79"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="1755.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -909,12 +909,12 @@
 <!-- compute_mean/2&#45;&gt;numberlist::sum/2 -->
 <g id="edge59" class="edge">
 <title>compute_mean/2&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="calls">
 <path fill="none" stroke="black" d="M1583,-540.95C1583,-522.25 1583,-492.12 1583,-469.83"/>
 <polygon fill="black" stroke="black" points="1586.5,-469.89 1583,-459.89 1579.5,-469.89 1586.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L169">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="1583" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -922,12 +922,12 @@
 <!-- compute_mode/2&#45;&gt;count_frequencies/2 -->
 <g id="edge14" class="edge">
 <title>compute_mode/2&#45;&gt;count_frequencies/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M1417,-540.95C1417,-522.25 1417,-492.12 1417,-469.83"/>
 <polygon fill="black" stroke="black" points="1420.5,-469.89 1417,-459.89 1413.5,-469.89 1420.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="1417" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -937,7 +937,7 @@
 <title>max_frequency/3</title>
 <polygon fill="cornsilk" stroke="black" points="1321.88,-458 1194.12,-458 1194.12,-422 1321.88,-422 1321.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1202.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L201">
+<g id="a_node25_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L201">
 <text xml:space="preserve" text-anchor="start" x="1207.38" y="-441.88" font-family="Monospace" font-size="11.00">max_frequency/3</text>
 </a>
 </g>
@@ -949,12 +949,12 @@
 <!-- compute_mode/2&#45;&gt;max_frequency/3 -->
 <g id="edge15" class="edge">
 <title>compute_mode/2&#45;&gt;max_frequency/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="calls">
 <path fill="none" stroke="black" d="M1393.54,-540.95C1366.3,-520.86 1321.19,-487.6 1290.56,-465.01"/>
 <polygon fill="black" stroke="black" points="1292.9,-462.39 1282.78,-459.27 1288.75,-468.02 1292.9,-462.39"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L175">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="1342.27" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -964,7 +964,7 @@
 <title>member_freq/3</title>
 <polygon fill="cornsilk" stroke="black" points="1342.12,-219.5 1227.88,-219.5 1227.88,-183.5 1342.12,-183.5 1342.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1235.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L192">
+<g id="a_node23_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L192">
 <text xml:space="preserve" text-anchor="start" x="1241.12" y="-203.38" font-family="Monospace" font-size="11.00">member_freq/3</text>
 </a>
 </g>
@@ -976,12 +976,12 @@
 <!-- count_freq_acc/3&#45;&gt;member_freq/3 -->
 <g id="edge17" class="edge">
 <title>count_freq_acc/3&#45;&gt;member_freq/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1397.52,-302.45C1375.2,-282.62 1338.42,-249.95 1313.02,-227.39"/>
 <polygon fill="black" stroke="black" points="1315.49,-224.9 1305.69,-220.88 1310.84,-230.13 1315.49,-224.9"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L184">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1354.96" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -991,7 +991,7 @@
 <title>update_freq/4</title>
 <polygon fill="cornsilk" stroke="black" points="1474.12,-219.5 1359.88,-219.5 1359.88,-183.5 1474.12,-183.5 1474.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1367.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L197">
+<g id="a_node24_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1373.12" y="-203.38" font-family="Monospace" font-size="11.00">update_freq/4</text>
 </a>
 </g>
@@ -1003,12 +1003,12 @@
 <!-- count_freq_acc/3&#45;&gt;update_freq/4 -->
 <g id="edge18" class="edge">
 <title>count_freq_acc/3&#45;&gt;update_freq/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1417,-302.45C1417,-283.75 1417,-253.62 1417,-231.33"/>
 <polygon fill="black" stroke="black" points="1420.5,-231.39 1417,-221.39 1413.5,-231.39 1420.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L184">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1417" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1030,12 +1030,12 @@
 <!-- count_freq_acc/3&#45;&gt;list::sort/4 -->
 <g id="edge60" class="edge">
 <title>count_freq_acc/3&#45;&gt;list::sort/4</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L182" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M1436.03,-302.45C1457.85,-282.62 1493.79,-249.95 1518.61,-227.39"/>
 <polygon fill="black" stroke="black" points="1520.72,-230.21 1525.77,-220.89 1516.01,-225.03 1520.72,-230.21"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L182">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="1485.37" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1045,7 +1045,7 @@
 <title>compute_inverse_weights/2</title>
 <polygon fill="cornsilk" stroke="black" points="213.62,-338.75 18.38,-338.75 18.38,-302.75 213.62,-302.75 213.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="26.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L251">
+<g id="a_node27_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L251">
 <text xml:space="preserve" text-anchor="start" x="31.62" y="-322.62" font-family="Monospace" font-size="11.00">compute_inverse_weights/2</text>
 </a>
 </g>
@@ -1057,12 +1057,12 @@
 <!-- convert_distances_to_probabilities/2&#45;&gt;compute_inverse_weights/2 -->
 <g id="edge26" class="edge">
 <title>convert_distances_to_probabilities/2&#45;&gt;compute_inverse_weights/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M147.54,-421.7C141.58,-402.82 131.96,-372.31 124.9,-349.96"/>
 <polygon fill="black" stroke="black" points="128.28,-349.05 121.94,-340.57 121.61,-351.15 128.28,-349.05"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="135.61" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1072,7 +1072,7 @@
 <title>normalize_to_probabilities/2</title>
 <polygon fill="cornsilk" stroke="black" points="446.75,-338.75 231.25,-338.75 231.25,-302.75 446.75,-302.75 446.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="239.25" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259">
+<g id="a_node28_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="244.5" y="-322.62" font-family="Monospace" font-size="11.00">normalize_to_probabilities/2</text>
 </a>
 </g>
@@ -1084,12 +1084,12 @@
 <!-- convert_distances_to_probabilities/2&#45;&gt;normalize_to_probabilities/2 -->
 <g id="edge27" class="edge">
 <title>convert_distances_to_probabilities/2&#45;&gt;normalize_to_probabilities/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M180.44,-421.7C212.59,-401.44 265.99,-367.77 301.83,-345.18"/>
 <polygon fill="black" stroke="black" points="303.57,-348.22 310.16,-339.93 299.84,-342.3 303.57,-348.22"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L247">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="251.58" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1099,7 +1099,7 @@
 <title>sum_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="421.12,-219.5 306.88,-219.5 306.88,-183.5 421.12,-183.5 421.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="314.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L263">
+<g id="a_node29_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="320.12" y="-203.38" font-family="Monospace" font-size="11.00">sum_weights/3</text>
 </a>
 </g>
@@ -1111,12 +1111,12 @@
 <!-- normalize_to_probabilities/2&#45;&gt;sum_weights/3 -->
 <g id="edge28" class="edge">
 <title>normalize_to_probabilities/2&#45;&gt;sum_weights/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="calls">
 <path fill="none" stroke="black" d="M342.69,-302.45C346.7,-283.66 353.16,-253.34 357.92,-231.02"/>
 <polygon fill="black" stroke="black" points="361.32,-231.86 359.98,-221.35 354.47,-230.4 361.32,-231.86"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="352.25" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1126,7 +1126,7 @@
 <title>normalize_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="288.38,-219.5 133.62,-219.5 133.62,-183.5 288.38,-183.5 288.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="141.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L268">
+<g id="a_node30_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L268">
 <text xml:space="preserve" text-anchor="start" x="146.88" y="-203.38" font-family="Monospace" font-size="11.00">normalize_weights/3</text>
 </a>
 </g>
@@ -1138,12 +1138,12 @@
 <!-- normalize_to_probabilities/2&#45;&gt;normalize_weights/3 -->
 <g id="edge29" class="edge">
 <title>normalize_to_probabilities/2&#45;&gt;normalize_weights/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="calls">
 <path fill="none" stroke="black" d="M320.11,-302.45C298.47,-282.62 262.81,-249.95 238.18,-227.39"/>
 <polygon fill="black" stroke="black" points="240.82,-225.07 231.08,-220.89 236.09,-230.23 240.82,-225.07"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L259">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="278.84" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1151,12 +1151,12 @@
 <!-- compute_distance/5&#45;&gt;manhattan_distance/4 -->
 <g id="edge31" class="edge">
 <title>compute_distance/5&#45;&gt;manhattan_distance/4</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L275" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L275" xlink:title="calls">
 <path fill="none" stroke="black" d="M635.51,-421.7C617.98,-402.13 589.26,-370.06 569.09,-347.53"/>
 <polygon fill="black" stroke="black" points="571.84,-345.36 562.57,-340.25 566.63,-350.03 571.84,-345.36"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L275">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="601.65" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1166,7 +1166,7 @@
 <title>euclidean_distance/4</title>
 <polygon fill="cornsilk" stroke="black" points="806.75,-338.75 645.25,-338.75 645.25,-302.75 806.75,-302.75 806.75,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="653.25" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L280">
+<g id="a_node32_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="658.5" y="-322.62" font-family="Monospace" font-size="11.00">euclidean_distance/4</text>
 </a>
 </g>
@@ -1178,12 +1178,12 @@
 <!-- compute_distance/5&#45;&gt;euclidean_distance/4 -->
 <g id="edge30" class="edge">
 <title>compute_distance/5&#45;&gt;euclidean_distance/4</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L273" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M662.07,-421.7C674.36,-402.48 694.38,-371.19 708.74,-348.74"/>
 <polygon fill="black" stroke="black" points="711.63,-350.71 714.07,-340.4 705.74,-346.93 711.63,-350.71"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L273">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="690.75" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1193,7 +1193,7 @@
 <title>cosine_distance/4</title>
 <polygon fill="cornsilk" stroke="black" points="973.62,-338.75 832.38,-338.75 832.38,-302.75 973.62,-302.75 973.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="840.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287">
+<g id="a_node33_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="845.62" y="-322.62" font-family="Monospace" font-size="11.00">cosine_distance/4</text>
 </a>
 </g>
@@ -1205,12 +1205,12 @@
 <!-- compute_distance/5&#45;&gt;cosine_distance/4 -->
 <g id="edge32" class="edge">
 <title>compute_distance/5&#45;&gt;cosine_distance/4</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L277" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L277" xlink:title="calls">
 <path fill="none" stroke="black" d="M688.45,-421.57C732.91,-400.89 807.09,-366.38 855.53,-343.84"/>
 <polygon fill="black" stroke="black" points="856.79,-347.11 864.38,-339.72 853.84,-340.76 856.79,-347.11"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L277">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="784.56" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1220,7 +1220,7 @@
 <title>sum_squared_diffs/5</title>
 <polygon fill="cornsilk" stroke="black" points="803.38,-219.5 648.62,-219.5 648.62,-183.5 803.38,-183.5 803.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="656.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node37_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L318">
+<g id="a_node37_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="661.88" y="-203.38" font-family="Monospace" font-size="11.00">sum_squared_diffs/5</text>
 </a>
 </g>
@@ -1232,12 +1232,12 @@
 <!-- euclidean_distance/4&#45;&gt;sum_squared_diffs/5 -->
 <g id="edge33" class="edge">
 <title>euclidean_distance/4&#45;&gt;sum_squared_diffs/5</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L280" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L280" xlink:title="calls">
 <path fill="none" stroke="black" d="M726,-302.45C726,-283.75 726,-253.62 726,-231.33"/>
 <polygon fill="black" stroke="black" points="729.5,-231.39 726,-221.39 722.5,-231.39 729.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L280">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="726" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1247,7 +1247,7 @@
 <title>dot_product/4</title>
 <polygon fill="cornsilk" stroke="black" points="1109.12,-219.5 994.88,-219.5 994.88,-183.5 1109.12,-183.5 1109.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1002.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L298">
+<g id="a_node34_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="1008.12" y="-203.38" font-family="Monospace" font-size="11.00">dot_product/4</text>
 </a>
 </g>
@@ -1259,12 +1259,12 @@
 <!-- cosine_distance/4&#45;&gt;dot_product/4 -->
 <g id="edge35" class="edge">
 <title>cosine_distance/4&#45;&gt;dot_product/4</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="calls">
 <path fill="none" stroke="black" d="M924.99,-302.45C950.41,-282.45 992.42,-249.38 1021.11,-226.8"/>
 <polygon fill="black" stroke="black" points="1023.04,-229.74 1028.73,-220.81 1018.71,-224.24 1023.04,-229.74"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="981.97" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1274,7 +1274,7 @@
 <title>vector_magnitude/2</title>
 <polygon fill="cornsilk" stroke="black" points="977,-219.5 829,-219.5 829,-183.5 977,-183.5 977,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="837" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L306">
+<g id="a_node35_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L306">
 <text xml:space="preserve" text-anchor="start" x="842.25" y="-203.38" font-family="Monospace" font-size="11.00">vector_magnitude/2</text>
 </a>
 </g>
@@ -1286,12 +1286,12 @@
 <!-- cosine_distance/4&#45;&gt;vector_magnitude/2 -->
 <g id="edge36" class="edge">
 <title>cosine_distance/4&#45;&gt;vector_magnitude/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="calls">
 <path fill="none" stroke="black" d="M903,-302.45C903,-283.75 903,-253.62 903,-231.33"/>
 <polygon fill="black" stroke="black" points="906.5,-231.39 903,-221.39 899.5,-231.39 906.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L287">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L287">
 <text xml:space="preserve" text-anchor="start" x="903" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1301,7 +1301,7 @@
 <title>sum_of_squares/3</title>
 <polygon fill="cornsilk" stroke="black" points="979.25,-100.25 844.75,-100.25 844.75,-64.25 979.25,-64.25 979.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="852.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node36_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L310">
+<g id="a_node36_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L310" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L310">
 <text xml:space="preserve" text-anchor="start" x="858" y="-84.12" font-family="Monospace" font-size="11.00">sum_of_squares/3</text>
 </a>
 </g>
@@ -1313,12 +1313,12 @@
 <!-- vector_magnitude/2&#45;&gt;sum_of_squares/3 -->
 <g id="edge37" class="edge">
 <title>vector_magnitude/2&#45;&gt;sum_of_squares/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L306" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M904.33,-183.2C905.76,-164.5 908.08,-134.37 909.79,-112.08"/>
 <polygon fill="black" stroke="black" points="913.28,-112.37 910.55,-102.13 906.3,-111.83 913.28,-112.37"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L306">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L306">
 <text xml:space="preserve" text-anchor="start" x="907.77" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1328,7 +1328,7 @@
 <title>feature_distance_squared/4</title>
 <polygon fill="cornsilk" stroke="black" points="827,-100.25 625,-100.25 625,-64.25 827,-64.25 827,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="633" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node39_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L331">
+<g id="a_node39_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="638.25" y="-84.12" font-family="Monospace" font-size="11.00">feature_distance_squared/4</text>
 </a>
 </g>
@@ -1340,12 +1340,12 @@
 <!-- sum_squared_diffs/5&#45;&gt;feature_distance_squared/4 -->
 <g id="edge38" class="edge">
 <title>sum_squared_diffs/5&#45;&gt;feature_distance_squared/4</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L319" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L319" xlink:title="calls">
 <path fill="none" stroke="black" d="M726,-183.2C726,-164.5 726,-134.37 726,-112.08"/>
 <polygon fill="black" stroke="black" points="729.5,-112.14 726,-102.14 722.5,-112.14 729.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L319">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="726" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1355,7 +1355,7 @@
 <title>feature_distance_abs/4</title>
 <polygon fill="cornsilk" stroke="black" points="606.5,-100.25 431.5,-100.25 431.5,-64.25 606.5,-64.25 606.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="439.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node40_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L339">
+<g id="a_node40_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L339">
 <text xml:space="preserve" text-anchor="start" x="444.75" y="-84.12" font-family="Monospace" font-size="11.00">feature_distance_abs/4</text>
 </a>
 </g>
@@ -1367,12 +1367,12 @@
 <!-- sum_abs_diffs/5&#45;&gt;feature_distance_abs/4 -->
 <g id="edge39" class="edge">
 <title>sum_abs_diffs/5&#45;&gt;feature_distance_abs/4</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L325" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M528.38,-183.2C526.62,-164.5 523.8,-134.37 521.7,-112.08"/>
 <polygon fill="black" stroke="black" points="525.19,-111.76 520.77,-102.13 518.22,-112.41 525.19,-111.76"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L325">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="524.83" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1382,7 +1382,7 @@
 <title>classifier_diagnostics_data/2</title>
 <polygon fill="cornsilk" stroke="black" points="2274.12,-577.25 2051.88,-577.25 2051.88,-541.25 2274.12,-541.25 2274.12,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2059.88" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node41_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346">
+<g id="a_node41_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346">
 <text xml:space="preserve" text-anchor="start" x="2065.12" y="-561.12" font-family="Monospace" font-size="11.00">classifier_diagnostics_data/2</text>
 </a>
 </g>
@@ -1396,7 +1396,7 @@
 <title>classifier_data/4</title>
 <polygon fill="cornsilk" stroke="black" points="2311.62,-458 2170.38,-458 2170.38,-422 2311.62,-422 2311.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2178.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node48_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L397" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L397">
+<g id="a_node48_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L397" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L397">
 <text xml:space="preserve" text-anchor="start" x="2183.62" y="-441.88" font-family="Monospace" font-size="11.00">classifier_data/4</text>
 </a>
 </g>
@@ -1408,12 +1408,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;classifier_data/4 -->
 <g id="edge40" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;classifier_data/4</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="calls">
 <path fill="none" stroke="black" d="M2174.51,-540.95C2187.36,-521.64 2208.3,-490.16 2223.25,-467.69"/>
 <polygon fill="black" stroke="black" points="2225.98,-469.9 2228.61,-459.63 2220.15,-466.02 2225.98,-469.9"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346">
 <text xml:space="preserve" text-anchor="start" x="2204.34" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1421,12 +1421,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;list::length/2 -->
 <g id="edge63" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;list::length/2</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="calls">
 <path fill="none" stroke="black" d="M2118.03,-540.83C2094.12,-531.13 2064.44,-518.38 2038.75,-505.25 2014.58,-492.9 1988.46,-477.22 1968.11,-464.44"/>
 <polygon fill="black" stroke="black" points="1970.21,-461.63 1959.89,-459.24 1966.47,-467.55 1970.21,-461.63"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L346">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L346">
 <text xml:space="preserve" text-anchor="start" x="2038.75" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1436,7 +1436,7 @@
 <title>check_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="2107,-815.75 1959,-815.75 1959,-779.75 2107,-779.75 2107,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1967" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node42_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356">
+<g id="a_node42_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356">
 <text xml:space="preserve" text-anchor="start" x="1972.25" y="-799.62" font-family="Monospace" font-size="11.00">check_classifier/1</text>
 </a>
 </g>
@@ -1450,7 +1450,7 @@
 <title>valid_centroids/2</title>
 <polygon fill="cornsilk" stroke="black" points="2103.62,-696.5 1962.38,-696.5 1962.38,-660.5 2103.62,-660.5 2103.62,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1970.38" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node45_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375">
+<g id="a_node45_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375">
 <text xml:space="preserve" text-anchor="start" x="1975.62" y="-680.38" font-family="Monospace" font-size="11.00">valid_centroids/2</text>
 </a>
 </g>
@@ -1462,12 +1462,12 @@
 <!-- check_classifier/1&#45;&gt;valid_centroids/2 -->
 <g id="edge42" class="edge">
 <title>check_classifier/1&#45;&gt;valid_centroids/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M2033,-779.45C2033,-760.75 2033,-730.62 2033,-708.33"/>
 <polygon fill="black" stroke="black" points="2036.5,-708.39 2033,-698.39 2029.5,-708.39 2036.5,-708.39"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356">
 <text xml:space="preserve" text-anchor="start" x="2033" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1475,12 +1475,12 @@
 <!-- check_classifier/1&#45;&gt;classifier_data/4 -->
 <g id="edge41" class="edge">
 <title>check_classifier/1&#45;&gt;classifier_data/4</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M2067.07,-779.45C2124.38,-748.18 2238.21,-676.17 2283,-577.25 2299.55,-540.7 2278.3,-495.81 2260.49,-467.8"/>
 <polygon fill="black" stroke="black" points="2263.45,-465.93 2255,-459.54 2257.62,-469.81 2263.45,-465.93"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356">
 <text xml:space="preserve" text-anchor="start" x="2261.18" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1488,12 +1488,12 @@
 <!-- check_classifier/1&#45;&gt;list::length/2 -->
 <g id="edge64" class="edge">
 <title>check_classifier/1&#45;&gt;list::length/2</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M2014.34,-779.52C1995.53,-760.97 1967.29,-729.62 1953,-696.5 1919.91,-619.84 1924.04,-518.33 1928.61,-469.55"/>
 <polygon fill="black" stroke="black" points="1932.07,-470.15 1929.6,-459.84 1925.1,-469.43 1932.07,-470.15"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356">
 <text xml:space="preserve" text-anchor="start" x="1932.54" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1512,12 +1512,12 @@
 <!-- check_classifier/1&#45;&gt;^^valid_attribute_names/1 -->
 <g id="edge53" class="edge">
 <title>check_classifier/1&#45;&gt;^^valid_attribute_names/1</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M2107.31,-788.43C2161.44,-780.81 2235.85,-767.08 2298,-743.75 2325.54,-733.41 2354.27,-716.79 2375.74,-703.05"/>
 <polygon fill="black" stroke="black" points="2377.63,-705.99 2384.09,-697.59 2373.8,-700.13 2377.63,-705.99"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356">
 <text xml:space="preserve" text-anchor="start" x="2323.88" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1536,12 +1536,12 @@
 <!-- check_classifier/1&#45;&gt;^^valid_feature_types/2 -->
 <g id="edge54" class="edge">
 <title>check_classifier/1&#45;&gt;^^valid_feature_types/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M1985.16,-779.35C1962.22,-770.14 1934.79,-757.82 1911.75,-743.75 1893.29,-732.48 1874.46,-717.27 1859.84,-704.48"/>
 <polygon fill="black" stroke="black" points="1862.24,-701.94 1852.45,-697.9 1857.59,-707.16 1862.24,-701.94"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L356">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L356">
 <text xml:space="preserve" text-anchor="start" x="1911.75" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1551,7 +1551,7 @@
 <title>export_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="1936.38,-1198.25 1781.62,-1198.25 1781.62,-1162.25 1936.38,-1162.25 1936.38,-1198.25"/>
 <text xml:space="preserve" text-anchor="start" x="1789.62" y="-1182.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node43_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L367">
+<g id="a_node43_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L367">
 <text xml:space="preserve" text-anchor="start" x="1794.88" y="-1182.12" font-family="Monospace" font-size="11.00">export_to_clauses/4</text>
 </a>
 </g>
@@ -1565,7 +1565,7 @@
 <title>classifier_term_template/2</title>
 <polygon fill="cornsilk" stroke="black" points="2385,-1198.25 2183,-1198.25 2183,-1162.25 2385,-1162.25 2385,-1198.25"/>
 <text xml:space="preserve" text-anchor="start" x="2191" y="-1182.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node44_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L373" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L373">
+<g id="a_node44_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L373" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L373">
 <text xml:space="preserve" text-anchor="start" x="2196.25" y="-1182.12" font-family="Monospace" font-size="11.00">classifier_term_template/2</text>
 </a>
 </g>
@@ -1579,7 +1579,7 @@
 <title>valid_centroids_/3</title>
 <polygon fill="cornsilk" stroke="black" points="1886,-577.25 1738,-577.25 1738,-541.25 1886,-541.25 1886,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1746" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node46_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L380">
+<g id="a_node46_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L380" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L380">
 <text xml:space="preserve" text-anchor="start" x="1751.25" y="-561.12" font-family="Monospace" font-size="11.00">valid_centroids_/3</text>
 </a>
 </g>
@@ -1591,12 +1591,12 @@
 <!-- valid_centroids/2&#45;&gt;valid_centroids_/3 -->
 <g id="edge43" class="edge">
 <title>valid_centroids/2&#45;&gt;valid_centroids_/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="calls">
 <path fill="none" stroke="black" d="M2020.8,-660.21C2009.8,-645.79 1992.42,-625.66 1973,-613.25 1950.11,-598.62 1922.8,-587.65 1897.22,-579.6"/>
 <polygon fill="black" stroke="black" points="1898.42,-576.31 1887.83,-576.76 1896.4,-583.01 1898.42,-576.31"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375">
 <text xml:space="preserve" text-anchor="start" x="1986.42" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1618,12 +1618,12 @@
 <!-- valid_centroids/2&#45;&gt;type::valid/2 -->
 <g id="edge65" class="edge">
 <title>valid_centroids/2&#45;&gt;type::valid/2</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="calls">
 <path fill="none" stroke="black" d="M2030.18,-660.02C2026.68,-632.94 2023.35,-579.95 2043,-541.25 2068.88,-490.3 2117,-509.87 2141,-458 2159.21,-418.63 2125.79,-374.11 2099.15,-346.99"/>
 <polygon fill="black" stroke="black" points="2101.83,-344.72 2092.24,-340.22 2096.93,-349.72 2101.83,-344.72"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L375">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L375">
 <text xml:space="preserve" text-anchor="start" x="2105.24" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1633,7 +1633,7 @@
 <title>valid_centroid_values/2</title>
 <polygon fill="cornsilk" stroke="black" points="1853.88,-458 1672.12,-458 1672.12,-422 1853.88,-422 1853.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1680.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node47_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L389">
+<g id="a_node47_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L389">
 <text xml:space="preserve" text-anchor="start" x="1685.38" y="-441.88" font-family="Monospace" font-size="11.00">valid_centroid_values/2</text>
 </a>
 </g>
@@ -1645,12 +1645,12 @@
 <!-- valid_centroids_/3&#45;&gt;valid_centroid_values/2 -->
 <g id="edge44" class="edge">
 <title>valid_centroids_/3&#45;&gt;valid_centroid_values/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="calls">
 <path fill="none" stroke="black" d="M1804.77,-540.95C1796.84,-521.99 1784.01,-491.28 1774.66,-468.9"/>
 <polygon fill="black" stroke="black" points="1777.93,-467.65 1770.84,-459.77 1771.47,-470.34 1777.93,-467.65"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="1788.97" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1658,12 +1658,12 @@
 <!-- valid_centroids_/3&#45;&gt;list::length/2 -->
 <g id="edge67" class="edge">
 <title>valid_centroids_/3&#45;&gt;list::length/2</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="calls">
 <path fill="none" stroke="black" d="M1829.71,-540.95C1849.91,-521.21 1883.14,-488.74 1906.22,-466.19"/>
 <polygon fill="black" stroke="black" points="1908.43,-468.92 1913.14,-459.43 1903.54,-463.91 1908.43,-468.92"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="1875.6" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1671,12 +1671,12 @@
 <!-- valid_centroids_/3&#45;&gt;list::member/2 -->
 <g id="edge66" class="edge">
 <title>valid_centroids_/3&#45;&gt;list::member/2</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="calls">
 <path fill="none" stroke="black" d="M1768.95,-540.88C1729.18,-525.68 1668.11,-504.44 1613,-494 1362.83,-446.63 1290.41,-495.21 1035.07,-458.13"/>
 <polygon fill="black" stroke="black" points="1035.86,-454.7 1025.45,-456.7 1034.83,-461.63 1035.86,-454.7"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L381">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="1657.58" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1684,12 +1684,12 @@
 <!-- valid_centroid_values/2&#45;&gt;type::valid/2 -->
 <g id="edge68" class="edge">
 <title>valid_centroid_values/2&#45;&gt;type::valid/2</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L390" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L390" xlink:title="calls">
 <path fill="none" stroke="black" d="M1808.78,-421.57C1863.6,-400.7 1955.42,-365.75 2014.57,-343.23"/>
 <polygon fill="black" stroke="black" points="2015.71,-346.54 2023.81,-339.72 2013.22,-340 2015.71,-346.54"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L390" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L390">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L390" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L390">
 <text xml:space="preserve" text-anchor="start" x="1926.24" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1699,7 +1699,7 @@
 <title>print_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="2489,-577.25 2341,-577.25 2341,-541.25 2489,-541.25 2489,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2349" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node49_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400">
+<g id="a_node49_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2354.25" y="-561.12" font-family="Monospace" font-size="11.00">print_classifier/1</text>
 </a>
 </g>
@@ -1711,12 +1711,12 @@
 <!-- print_classifier/1&#45;&gt;classifier_data/4 -->
 <g id="edge45" class="edge">
 <title>print_classifier/1&#45;&gt;classifier_data/4</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M2398.28,-540.79C2384.52,-527.03 2364.09,-507.91 2344,-494 2327.41,-482.52 2308.01,-471.9 2290.54,-463.23"/>
 <polygon fill="black" stroke="black" points="2292.41,-460.24 2281.88,-459.02 2289.34,-466.54 2292.41,-460.24"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2358.66" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1726,7 +1726,7 @@
 <title>print_features/2</title>
 <polygon fill="cornsilk" stroke="black" points="2464.25,-458 2329.75,-458 2329.75,-422 2464.25,-422 2464.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2337.75" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node50_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L410" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L410">
+<g id="a_node50_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L410" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L410">
 <text xml:space="preserve" text-anchor="start" x="2343" y="-441.88" font-family="Monospace" font-size="11.00">print_features/2</text>
 </a>
 </g>
@@ -1738,12 +1738,12 @@
 <!-- print_classifier/1&#45;&gt;print_features/2 -->
 <g id="edge46" class="edge">
 <title>print_classifier/1&#45;&gt;print_features/2</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M2412.34,-540.95C2409.46,-522.16 2404.81,-491.84 2401.38,-469.52"/>
 <polygon fill="black" stroke="black" points="2404.87,-469.22 2399.9,-459.87 2397.95,-470.28 2404.87,-469.22"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2406.54" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1751,12 +1751,12 @@
 <!-- print_classifier/1&#45;&gt;list::length/2 -->
 <g id="edge70" class="edge">
 <title>print_classifier/1&#45;&gt;list::length/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M2373.15,-540.76C2337.11,-526.31 2283.41,-506.26 2235,-494 2136.9,-469.15 2106.83,-477.73 2003.85,-458.24"/>
 <polygon fill="black" stroke="black" points="2004.61,-454.82 1994.12,-456.35 2003.27,-461.69 2004.61,-454.82"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2270.17" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1778,12 +1778,12 @@
 <!-- print_classifier/1&#45;&gt;format::format/2 -->
 <g id="edge69" class="edge">
 <title>print_classifier/1&#45;&gt;format::format/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M2489.45,-556.3C2559.98,-550.01 2662.43,-528.37 2713,-458 2740.59,-419.61 2694.09,-373.2 2658.57,-345.65"/>
 <polygon fill="black" stroke="black" points="2661.13,-343.2 2651.04,-339.98 2656.92,-348.79 2661.13,-343.2"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2721.36" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1802,12 +1802,12 @@
 <!-- print_classifier/1&#45;&gt;^^print_classifier_template/1 -->
 <g id="edge55" class="edge">
 <title>print_classifier/1&#45;&gt;^^print_classifier_template/1</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="calls">
 <path fill="none" stroke="black" d="M2441.26,-540.95C2472.03,-520.69 2523.13,-487.02 2557.43,-464.43"/>
 <polygon fill="black" stroke="black" points="2558.94,-467.63 2565.36,-459.2 2555.09,-461.78 2558.94,-467.63"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L400">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L400">
 <text xml:space="preserve" text-anchor="start" x="2509.34" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1815,12 +1815,12 @@
 <!-- print_features/2&#45;&gt;format::format/2 -->
 <g id="edge71" class="edge">
 <title>print_features/2&#45;&gt;format::format/2</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L411" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L411" xlink:title="calls">
 <path fill="none" stroke="black" d="M2430.49,-421.7C2470.23,-401.18 2536.57,-366.91 2580.31,-344.32"/>
 <polygon fill="black" stroke="black" points="2581.74,-347.52 2589.02,-339.82 2578.53,-341.3 2581.74,-347.52"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L411">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L411">
 <text xml:space="preserve" text-anchor="start" x="2517.31" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1830,7 +1830,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2651.25,-1198.25 2516.75,-1198.25 2516.75,-1162.25 2651.25,-1162.25 2651.25,-1198.25"/>
 <text xml:space="preserve" text-anchor="start" x="2524.75" y="-1182.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node51_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L415">
+<g id="a_node51_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L415" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L415">
 <text xml:space="preserve" text-anchor="start" x="2530" y="-1182.12" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -1844,7 +1844,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="2131.5,-458 2010.5,-458 2010.5,-422 2131.5,-422 2131.5,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2018.5" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node52_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L417">
+<g id="a_node52_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="2023.75" y="-441.88" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -1856,12 +1856,12 @@
 <!-- valid_option/1&#45;&gt;type::valid/2 -->
 <g id="edge72" class="edge">
 <title>valid_option/1&#45;&gt;type::valid/2</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L417" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L417" xlink:title="calls">
 <path fill="none" stroke="black" d="M2071,-421.7C2071,-403 2071,-372.87 2071,-350.58"/>
 <polygon fill="black" stroke="black" points="2074.5,-350.64 2071,-340.64 2067.5,-350.64 2074.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/57817de1df9f7b9d00ad5a9c249fafe03fc865d0/library/nearest_centroid/nearest_centroid.lgt#L417">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5acb595799f78eecf38eae50487820206951b6b9/library/nearest_centroid/nearest_centroid.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="2071" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
