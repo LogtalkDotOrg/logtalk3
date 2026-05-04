@@ -307,6 +307,10 @@ used with HMAC.
 * ADDED: Support for diagnostics and classifier metadata to the classifier
 libraries, allowing more detailed exports.
 
+* ADDED: New `skip_code_coverage.lgt` file with a hack for running the Logtalk
+distribution tests in a CI/CD pipeline without generating code coverage stats
+for faster run times.
+
 * IMPROVED: Code refactoring of the classifier libraries by introducing a new
 `classifier_common` category with shared code.
 
