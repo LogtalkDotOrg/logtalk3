@@ -306,7 +306,12 @@
   <section id="ewma">
 <span id="library-ewma"></span><h1><code class="docutils literal notranslate"><span class="pre">ewma</span></code><a class="headerlink" href="#ewma" title="Link to this heading"></a></h1>
 <p>EWMA (Exponentially Weighted Moving Average) anomaly detector for
-continuous sequence-like datasets.</p>
+continuous sequence-like datasets. It is a statistical anomaly-detection
+method based on a two-sided EWMA control chart: for each known step
+value <code class="docutils literal notranslate"><span class="pre">x_t</span></code>, it computes a standardized deviation, updates the EWMA
+statistic <code class="docutils literal notranslate"><span class="pre">E_t</span></code>, and uses the maximum normalized excursion
+<code class="docutils literal notranslate"><span class="pre">|E_t|</span> <span class="pre">/</span> <span class="pre">(L*c_t)</span></code> as the raw anomaly score, so a score of <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
+corresponds exactly to reaching the chosen EWMA control limit.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a detector from a
 continuous dataset, computes anomaly scores for new instances, predicts

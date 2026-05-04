@@ -10,7 +10,11 @@ implements the generic ``pattern_miner_protocol`` defined in the
 using recursive conditional pattern-base projection over a compact
 FP-tree whose nodes store parent links directly, plus header-table node
 chains derived from the final tree for direct conditional-base
-reconstruction.
+reconstruction, without candidate generation.
+
+Requires a dataset implementing ``transaction_dataset_protocol`` with
+transactions represented as canonical sorted lists of unique declared
+items.
 
 API documentation
 -----------------

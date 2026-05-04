@@ -304,7 +304,11 @@
              
   <section id="hdbscan">
 <span id="library-hdbscan"></span><h1><code class="docutils literal notranslate"><span class="pre">hdbscan</span></code><a class="headerlink" href="#hdbscan" title="Link to this heading"></a></h1>
-<p>Simplified HDBSCAN-style clusterer.</p>
+<p>Simplified HDBSCAN-style clusterer. It builds the mutual-reachability
+graph, computes a minimum spanning tree, derives the single-linkage
+hierarchy, condenses the hierarchy using <code class="docutils literal notranslate"><span class="pre">minimum_cluster_size</span></code>, and
+selects clusters using <code class="docutils literal notranslate"><span class="pre">eom</span></code> or <code class="docutils literal notranslate"><span class="pre">leaf</span></code> selection. Supports
+continuous attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -349,8 +353,7 @@ clusters using <code class="docutils literal notranslate"><span class="pre">eom<
 attributes.</p></li>
 <li><p><strong>Cluster Selection Methods</strong>: Supports both <code class="docutils literal notranslate"><span class="pre">eom</span></code> and <code class="docutils literal notranslate"><span class="pre">leaf</span></code>
 cluster selection.</p></li>
-<li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
-distances.</p></li>
+<li><p><strong>Distance Metrics</strong>: Supports Euclidean and Manhattan distances.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Reachability-Based Prediction</strong>: New instances are assigned to the

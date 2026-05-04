@@ -311,11 +311,15 @@
              
   <section id="ica">
 <span id="library-ica"></span><h1><code class="docutils literal notranslate"><span class="pre">ica</span></code><a class="headerlink" href="#ica" title="Link to this heading"></a></h1>
-<p>Independent Component Analysis reducer for continuous datasets. The
-library implements the <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code> defined in the
+<p>Independent Component Analysis reducer for continuous datasets (missing
+or non-numeric values are rejected). The library implements the
+<code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library and learns a linear unmixing
-projection using a portable FastICA-style fixed-point solver over a
-whitened feature space.</p>
+projection by centering the training data, optionally standardizing
+continuous attributes, whitening the covariance matrix using the shared
+deterministic symmetric eigen-decomposition from <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code>, and
+then extracting independent components using a deterministic cubic
+FastICA fixed-point iteration with orthogonal deflation.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

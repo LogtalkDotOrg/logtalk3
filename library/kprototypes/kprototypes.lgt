@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'k-Prototypes clusterer for mixed datasets with continuous and discrete attributes. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses an iterative prototype-update algorithm with deterministic initialization and deterministic cluster assignments.',
-			'Feature handling' - 'Supports continuous and discrete attributes in the same dataset. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Categorical weighting' - 'Uses the ``gamma`` option to weight discrete mismatches in the mixed distance function.',
-			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the prototypes selected so far.',
-			'Empty clusters' - 'If an iteration leaves a cluster empty, its prototype is kept unchanged from the previous iteration.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kprototypes_clusterer(Encoders, Prototypes, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Prototypes`` stores the learned mixed prototypes in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores convergence metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans, kmedoids]
 	]).
 

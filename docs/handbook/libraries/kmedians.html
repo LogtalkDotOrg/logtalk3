@@ -306,7 +306,8 @@
              
   <section id="kmedians">
 <span id="library-kmedians"></span><h1><code class="docutils literal notranslate"><span class="pre">kmedians</span></code><a class="headerlink" href="#kmedians" title="Link to this heading"></a></h1>
-<p>k-Medians clusterer.</p>
+<p>k-Medians clusterer. It uses an iterative median-update algorithm with
+deterministic initialization. Supports continuous attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -346,7 +347,8 @@ link in a web browser.</p>
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
-deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
+deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the
+farthest example from the medians selected so far.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Manhattan Distance</strong>: Uses Manhattan distance for cluster assignment

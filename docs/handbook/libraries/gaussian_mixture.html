@@ -305,7 +305,9 @@
              
   <section id="gaussian-mixture">
 <span id="library-gaussian-mixture"></span><h1><code class="docutils literal notranslate"><span class="pre">gaussian_mixture</span></code><a class="headerlink" href="#gaussian-mixture" title="Link to this heading"></a></h1>
-<p>Gaussian mixture model clusterer.</p>
+<p>Gaussian mixture model clusterer. It uses deterministic
+expectation-maximization with diagonal covariance matrices. Supports
+continuous attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, returning

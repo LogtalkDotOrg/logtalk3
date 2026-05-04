@@ -306,7 +306,9 @@
              
   <section id="kprototypes">
 <span id="library-kprototypes"></span><h1><code class="docutils literal notranslate"><span class="pre">kprototypes</span></code><a class="headerlink" href="#kprototypes" title="Link to this heading"></a></h1>
-<p>k-Prototypes clusterer.</p>
+<p>k-Prototypes clusterer. It uses an iterative prototype-update algorithm
+with deterministic initialization and deterministic cluster assignments.
+Supports continuous and discrete attributes in the same dataset.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -349,11 +351,12 @@ mixed attributes.</p></li>
 instances must contain each declared attribute exactly once and no
 undeclared attributes.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
-deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
+deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the
+farthest example from the prototypes selected so far.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Categorical Weighting</strong>: Uses a <code class="docutils literal notranslate"><span class="pre">gamma</span></code> mismatch penalty for
-discrete attributes.</p></li>
+discrete attributes in the mixed distance function.</p></li>
 <li><p><strong>Portable Export</strong>: Learned clusterers can be exported as clauses or
 files and reused later.</p></li>
 <li><p><strong>Stable Empty-Cluster Handling</strong>: Empty clusters keep their previous

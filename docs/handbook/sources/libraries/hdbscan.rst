@@ -3,7 +3,11 @@
 ``hdbscan``
 ===========
 
-Simplified HDBSCAN-style clusterer.
+Simplified HDBSCAN-style clusterer. It builds the mutual-reachability
+graph, computes a minimum spanning tree, derives the single-linkage
+hierarchy, condenses the hierarchy using ``minimum_cluster_size``, and
+selects clusters using ``eom`` or ``leaf`` selection. Supports
+continuous attributes only.
 
 The library implements the ``clusterer_protocol`` defined in the
 ``clustering_protocols`` library. It provides predicates for learning a
@@ -58,8 +62,7 @@ Features
   attributes.
 - **Cluster Selection Methods**: Supports both ``eom`` and ``leaf``
   cluster selection.
-- **Distance Metrics**: Supports ``euclidean`` and ``manhattan``
-  distances.
+- **Distance Metrics**: Supports Euclidean and Manhattan distances.
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling.
 - **Reachability-Based Prediction**: New instances are assigned to the

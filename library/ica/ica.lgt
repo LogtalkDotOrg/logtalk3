@@ -27,11 +27,6 @@
 		author is 'Paulo Moura',
 		date is 2026-05-04,
 		comment is 'Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric eigendecomposition whitening.',
-		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using the shared deterministic symmetric eigendecomposition from ``linear_algebra``, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``ica_reducer(Encoders, Components, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores the learned unmixing vectors in feature space, and ``Diagnostics`` records whitening and FastICA metadata.'
-		],
 		see_also is [nmf, pca, random_projection, truncated_svd]
 	]).
 

@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'k-Means clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses Lloyd''s algorithm with deterministic initialization.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the centroids selected so far.',
-			'Empty clusters' - 'If an iteration leaves a cluster empty, its centroid is kept unchanged from the previous iteration.',
-			'Training diagnostics' - 'Exposes training metadata including example count, convergence status, performed iterations, and final centroid shift.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmeans_clusterer(Encoders, Centroids, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Centroids`` stores the learned centroid vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, nearest_centroid]
 	]).
 

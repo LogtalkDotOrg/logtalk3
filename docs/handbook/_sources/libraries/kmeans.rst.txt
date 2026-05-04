@@ -3,7 +3,8 @@
 ``kmeans``
 ==========
 
-k-Means clusterer.
+k-Means clusterer. It uses Lloyd's algorithm with deterministic
+initialization. Supports continuous attributes only.
 
 The library implements the ``clusterer_protocol`` defined in the
 ``clustering_protocols`` library. It provides predicates for learning a
@@ -53,7 +54,8 @@ Features
 - **Continuous Datasets**: Accepts datasets containing only continuous
   attributes.
 - **Deterministic Initialization**: Supports ``first_k`` and
-  deterministic ``spread`` initialization.
+  deterministic ``spread`` initialization that repeatedly chooses the
+  farthest example from the centroids selected so far.
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling.
 - **Rich Training Diagnostics**: Learned clusterers report training

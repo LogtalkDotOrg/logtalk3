@@ -25,17 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'k-Medoids clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses an iterative medoid-update algorithm with deterministic initialization and deterministic cluster assignments.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
-			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the medoids selected so far.',
-			'Empty clusters' - 'If an iteration leaves a cluster empty, its medoid is kept unchanged from the previous iteration.',
-			'Training diagnostics' - 'Exposes training metadata including example count, convergence status, performed iterations, and final medoid shift.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kmedoids_clusterer(Encoders, Medoids, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Medoids`` stores the learned medoid vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans]
 	]).
 

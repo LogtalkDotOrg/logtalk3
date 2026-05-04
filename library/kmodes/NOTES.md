@@ -19,9 +19,11 @@ ________________________________________________________________________
 
 
 `kmodes`
-=========
+========
 
-k-Modes clusterer.
+k-Modes clusterer. It uses an iterative mode-update algorithm with
+deterministic initialization and deterministic cluster assignments.
+Supports discrete attributes only.
 
 The library implements the `clusterer_protocol` defined in the
 `clustering_protocols` library. It provides predicates for learning a
@@ -66,7 +68,7 @@ Features
 --------
 
 - **Discrete Datasets**: Accepts datasets containing only discrete attributes.
-- **Deterministic Initialization**: Supports `first_k` and deterministic `spread` initialization.
+- **Deterministic Initialization**: Supports `first_k` and deterministic `spread` initialization that repeatedly chooses the farthest example from the modes selected so far.
 - **Rich Training Diagnostics**: Learned clusterers report training example count, convergence status, iteration count, and final mode shift.
 - **Portable Export**: Learned clusterers can be exported as clauses or files and reused later.
 - **Stable Empty-Cluster Handling**: Empty clusters keep their previous modes instead of failing.

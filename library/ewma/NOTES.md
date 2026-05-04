@@ -22,7 +22,12 @@ ________________________________________________________________________
 ======
 
 EWMA (Exponentially Weighted Moving Average) anomaly detector for
-continuous sequence-like datasets.
+continuous sequence-like datasets. It is a statistical anomaly-detection
+method based on a two-sided EWMA control chart: for each known step
+value `x_t`, it computes a standardized deviation, updates the EWMA
+statistic `E_t`, and uses the maximum normalized excursion
+`|E_t| / (L*c_t)` as the raw anomaly score, so a score of `1.0`
+corresponds exactly to reaching the chosen EWMA control limit.
 
 The library implements the `anomaly_detector_protocol` defined in the
 `anomaly_detection_protocols` library. It learns a detector from a

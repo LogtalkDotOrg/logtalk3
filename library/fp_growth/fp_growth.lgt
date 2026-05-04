@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-05-04,
 		comment is 'FP-growth frequent itemset miner for transaction datasets using recursive conditional pattern-base projection over an FP-tree with header-table and parent-link navigation.',
-		remarks is [
-			'Algorithm' - 'Builds a compact FP-tree from globally ordered frequent items, stores parent links directly in each node, derives header-table node chains from the final tree, and mines conditional pattern bases recursively without candidate generation.',
-			'Dataset handling' - 'Requires a dataset implementing ``transaction_dataset_protocol`` with transactions represented as canonical sorted lists of unique declared items.',
-			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
-			'Pattern miner representation' - 'The mined result is represented by default as ``fp_growth_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``itemset(Items, SupportCount)`` terms ordered first by pattern length and then lexicographically.'
-		],
 		see_also is [pattern_miner_protocol, transaction_dataset_protocol, apriori]
 	]).
 

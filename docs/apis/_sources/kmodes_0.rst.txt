@@ -15,7 +15,7 @@ k-Modes clusterer for discrete datasets. Learns from a dataset object implementi
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,13 +30,7 @@ k-Modes clusterer for discrete datasets. Learns from a dataset object implementi
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Uses an iterative mode-update algorithm with deterministic initialization and deterministic cluster assignments.
-   - Feature handling: Supports discrete attributes only.
-   - Initialization: Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the modes selected so far.
-   - Empty clusters: If an iteration leaves a cluster empty, its mode is kept unchanged from the previous iteration.
-   - Training diagnostics: Exposes training metadata including example count, convergence status, performed iterations, and final mode shift.
-   - Clusterer representation: The learned clusterer is represented by default as ``kmodes_clusterer(Encoders, Modes, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Modes`` stores the learned categorical modes in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

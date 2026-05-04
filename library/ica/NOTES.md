@@ -21,12 +21,14 @@ ________________________________________________________________________
 `ica`
 =====
 
-Independent Component Analysis reducer for continuous datasets. The
-library implements the `dimension_reducer_protocol` defined in the
-`dimension_reduction_protocols` library and learns a linear unmixing
-projection using a portable FastICA-style fixed-point solver over a
-whitened feature space.
-
+Independent Component Analysis reducer for continuous datasets (missing
+or non-numeric values are rejected). The library implements the
+`dimension_reducer_protocol` defined in the `dimension_reduction_protocols`
+library and learns a linear unmixing projection by centering the training
+data, optionally standardizing continuous attributes, whitening the
+covariance matrix using the shared deterministic symmetric eigen-decomposition
+from `linear_algebra`, and then extracting independent components using a
+deterministic cubic FastICA fixed-point iteration with orthogonal deflation.
 
 API documentation
 -----------------

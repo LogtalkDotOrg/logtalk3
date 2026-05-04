@@ -19,9 +19,10 @@ ________________________________________________________________________
 
 
 `kcenters`
-===========
+==========
 
-k-Centers clusterer.
+k-Centers clusterer. It uses a deterministic farthest-first center
+selection heuristic. Supports continuous attributes only.
 
 The library implements the `clusterer_protocol` defined in the
 `clustering_protocols` library. It provides predicates for learning a
@@ -67,8 +68,8 @@ Features
 
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
 - **Farthest-First Center Selection**: Uses a deterministic farthest-first heuristic to choose centers.
-- **Deterministic Initialization**: Supports `first_k` and deterministic `spread` initialization.
-- **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
+- **Deterministic Initialization**: Supports `first_k` and deterministic `spread` initialization that repeatedly chooses the farthest example from the centers selected so far..
+- **Distance Metrics**: Supports Euclidean and Manhattan distances..
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Rich Training Diagnostics**: Learned clusterers report training example count, selected center count, and the center-selection strategy used during learning.
 - **Portable Export**: Learned clusterers can be exported as clauses or files and reused later.

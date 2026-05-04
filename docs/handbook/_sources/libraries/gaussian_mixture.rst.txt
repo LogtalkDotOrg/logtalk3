@@ -3,7 +3,9 @@
 ``gaussian_mixture``
 ====================
 
-Gaussian mixture model clusterer.
+Gaussian mixture model clusterer. It uses deterministic
+expectation-maximization with diagonal covariance matrices. Supports
+continuous attributes only.
 
 The library implements the ``clusterer_protocol`` defined in the
 ``clustering_protocols`` library. It provides predicates for learning a

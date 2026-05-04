@@ -362,14 +362,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using the shared deterministic symmetric eigendecomposition from <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code>, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.</p></li>
-<li><p>Dimension reducer representation: The learned reducer is represented by default as <code class="docutils literal notranslate"><span class="pre">ica_reducer(Encoders,</span> <span class="pre">Components,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores preprocessing metadata, <code class="docutils literal notranslate"><span class="pre">Components</span></code> stores the learned unmixing vectors in feature space, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> records whitening and FastICA metadata.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

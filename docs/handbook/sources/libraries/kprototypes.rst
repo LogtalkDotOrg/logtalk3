@@ -3,7 +3,9 @@
 ``kprototypes``
 ===============
 
-k-Prototypes clusterer.
+k-Prototypes clusterer. It uses an iterative prototype-update algorithm
+with deterministic initialization and deterministic cluster assignments.
+Supports continuous and discrete attributes in the same dataset.
 
 The library implements the ``clusterer_protocol`` defined in the
 ``clustering_protocols`` library. It provides predicates for learning a
@@ -56,11 +58,12 @@ Features
   instances must contain each declared attribute exactly once and no
   undeclared attributes.
 - **Deterministic Initialization**: Supports ``first_k`` and
-  deterministic ``spread`` initialization.
+  deterministic ``spread`` initialization that repeatedly chooses the
+  farthest example from the prototypes selected so far.
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling.
 - **Categorical Weighting**: Uses a ``gamma`` mismatch penalty for
-  discrete attributes.
+  discrete attributes in the mixed distance function.
 - **Portable Export**: Learned clusterers can be exported as clauses or
   files and reused later.
 - **Stable Empty-Cluster Handling**: Empty clusters keep their previous

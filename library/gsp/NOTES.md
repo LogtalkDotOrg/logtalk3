@@ -25,8 +25,13 @@ GSP sequential pattern miner for sequence datasets. The library depends
 on the `sequential_pattern_mining_protocols` support library,
 implements the generic `pattern_miner_protocol` defined in the
 `pattern_mining_protocols` core library, and mines frequent sequential
-patterns using level-wise candidate generation and subsequence support
-counting.
+patterns using prefix-indexed candidate joins, pruning candidates whose
+immediate subpatterns are not all frequent, and counting singleton and
+candidate supports in batched horizontal dataset scans.
+
+Requires a dataset implementing `sequence_dataset_protocol` with sequences
+represented as ordered lists of canonical sorted itemsets over a declared
+item domain.
 
 
 API documentation

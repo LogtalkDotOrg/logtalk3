@@ -306,7 +306,8 @@
              
   <section id="kcenters">
 <span id="library-kcenters"></span><h1><code class="docutils literal notranslate"><span class="pre">kcenters</span></code><a class="headerlink" href="#kcenters" title="Link to this heading"></a></h1>
-<p>k-Centers clusterer.</p>
+<p>k-Centers clusterer. It uses a deterministic farthest-first center
+selection heuristic. Supports continuous attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -348,9 +349,9 @@ attributes.</p></li>
 <li><p><strong>Farthest-First Center Selection</strong>: Uses a deterministic
 farthest-first heuristic to choose centers.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
-deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
-<li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
-distances.</p></li>
+deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the
+farthest example from the centers selected so far..</p></li>
+<li><p><strong>Distance Metrics</strong>: Supports Euclidean and Manhattan distances..</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Rich Training Diagnostics</strong>: Learned clusterers report training

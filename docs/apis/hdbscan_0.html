@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -362,16 +362,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds the mutual-reachability graph, computes a minimum spanning tree, derives the single-linkage hierarchy, condenses the hierarchy using <code class="docutils literal notranslate"><span class="pre">minimum_cluster_size</span></code>, and selects clusters using <code class="docutils literal notranslate"><span class="pre">eom</span></code> or <code class="docutils literal notranslate"><span class="pre">leaf</span></code> selection.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.</p></li>
-<li><p>Distance metrics: Supports Euclidean and Manhattan distances.</p></li>
-<li><p>Prediction: Assigns new instances to the selected cluster with the nearest training point when the distance is within the learned cluster reachability threshold; otherwise the atom <code class="docutils literal notranslate"><span class="pre">noise</span></code> is returned.</p></li>
-<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">hdbscan_clusterer(Encoders,</span> <span class="pre">Clusters,</span> <span class="pre">Noise,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">cluster(Id,</span> <span class="pre">Points,</span> <span class="pre">MaxCoreDistance,</span> <span class="pre">Stability)</span></code> terms.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-04,
 		comment is 'EWMA (Exponentially Weighted Moving Average) anomaly detector for continuous sequence-like datasets. Learns per-step population mean and standard deviation from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'This is a statistical anomaly-detection method based on a two-sided EWMA control chart. Declared continuous attributes are interpreted as ordered monitoring steps. For each known step value ``x_t``, the detector computes the standardized deviation ``z_t = (x_t - mu_t) / sigma_t`` and updates the EWMA statistic ``E_t = lambda*z_t + (1 - lambda)*E_(t-1)`` with ``E_0 = 0``. The raw anomaly score is the maximum normalized excursion ``|E_t| / (L*c_t)``, where ``lambda`` is the learn-time smoothing factor, ``L`` is the learn-time control-limit multiplier, and ``c_t = sqrt(lambda/(2-lambda) * (1 - (1-lambda)^(2*t)))`` is the classical EWMA control-limit factor after ``t`` EWMA updates. A raw score of ``1.0`` therefore corresponds exactly to reaching the chosen EWMA control limit.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for baseline fitting. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled: ``reject`` throws an error if any non-baseline example is found, while ``filter`` removes those examples before fitting the baseline statistics.',
-			'Feature handling' - 'Supports continuous attributes only. Missing values are ignored when fitting per-step statistics. During scoring, missing step values do not update the EWMA state or advance the EWMA update count, and queries must still contain at least one known value. The learned detector stores a precomputed attribute schema so that scoring reuses the same ordering metadata without rebuilding it on every call.',
-			'Predict-time options' - 'The ``control_limit_multiplier/1`` and ``smoothing_factor/1`` options are learn-time options. ``predict/4`` always uses the values stored in the learned detector. If either option is passed to ``predict/4``, it is ignored. Only ``anomaly_threshold/1`` can be overridden at predict time.',
-			'Score normalization' - 'The raw EWMA excursion is mapped to the interval ``[0.0,1.0)`` using ``Score = Raw / (1 + Raw)``. Because the raw score is normalized by the chosen control limit, the default threshold ``0.5`` corresponds to the EWMA control limit for any learned ``control_limit_multiplier/1`` value.',
-			'Detector representation' - 'The learned detector is represented as a ``ewma_detector(TrainingDataset, AttributeSchema, Encoders, Diagnostics)`` term where ``AttributeSchema`` stores the precomputed attribute ordering and ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, cusum, isolation_forest, knn_distance, lof, modified_z_score, z_score]
 	]).
 

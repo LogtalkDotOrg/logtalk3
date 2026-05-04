@@ -306,7 +306,9 @@
              
   <section id="kmedoids">
 <span id="library-kmedoids"></span><h1><code class="docutils literal notranslate"><span class="pre">kmedoids</span></code><a class="headerlink" href="#kmedoids" title="Link to this heading"></a></h1>
-<p>k-Medoids clusterer.</p>
+<p>k-Medoids clusterer. It uses an iterative medoid-update algorithm with
+deterministic initialization and deterministic cluster assignments.
+Supports continuous attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -345,10 +347,10 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes.</p></li>
-<li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
-distances.</p></li>
+<li><p><strong>Distance Metrics</strong>: Supports Euclidean and Manhattan distances.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
-deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
+deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the
+farthest example from the medoids selected so far.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Rich Training Diagnostics</strong>: Learned clusterers report training

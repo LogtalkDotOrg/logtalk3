@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'HDBSCAN clusterer for continuous datasets using a mutual-reachability hierarchy, condensed tree pruning, and stability-based cluster selection.',
-		remarks is [
-			'Algorithm' - 'Builds the mutual-reachability graph, computes a minimum spanning tree, derives the single-linkage hierarchy, condenses the hierarchy using ``minimum_cluster_size``, and selects clusters using ``eom`` or ``leaf`` selection.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
-			'Prediction' - 'Assigns new instances to the selected cluster with the nearest training point when the distance is within the learned cluster reachability threshold; otherwise the atom ``noise`` is returned.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``hdbscan_clusterer(Encoders, Clusters, Noise, Options)`` where ``Clusters`` is a list of ``cluster(Id, Points, MaxCoreDistance, Stability)`` terms.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, dbscan, optics]
 	]).
 

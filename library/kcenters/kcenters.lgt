@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-04,
 		comment is 'k-Centers clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses a deterministic farthest-first center selection heuristic.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
-			'Initialization' - 'Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the centers selected so far.',
-			'Training diagnostics' - 'Exposes training metadata including example count, selected center count, and the center-selection strategy used during learning.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``kcenters_clusterer(Encoders, Centers, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Centers`` stores the learned center vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans, kmedoids, kmedians]
 	]).
 

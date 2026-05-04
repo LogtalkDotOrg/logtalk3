@@ -32,10 +32,7 @@ Independent Component Analysis reducer for continuous datasets using a portable 
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using the shared deterministic symmetric eigendecomposition from ``linear_algebra``, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.
-   - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
-   - Dimension reducer representation: The learned reducer is represented by default as ``ica_reducer(Encoders, Components, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores the learned unmixing vectors in feature space, and ``Diagnostics`` records whitening and FastICA metadata.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

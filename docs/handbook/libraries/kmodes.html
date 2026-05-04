@@ -306,7 +306,9 @@
              
   <section id="kmodes">
 <span id="library-kmodes"></span><h1><code class="docutils literal notranslate"><span class="pre">kmodes</span></code><a class="headerlink" href="#kmodes" title="Link to this heading"></a></h1>
-<p>k-Modes clusterer.</p>
+<p>k-Modes clusterer. It uses an iterative mode-update algorithm with
+deterministic initialization and deterministic cluster assignments.
+Supports discrete attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -346,7 +348,8 @@ link in a web browser.</p>
 <li><p><strong>Discrete Datasets</strong>: Accepts datasets containing only discrete
 attributes.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
-deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
+deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization that repeatedly chooses the
+farthest example from the modes selected so far.</p></li>
 <li><p><strong>Rich Training Diagnostics</strong>: Learned clusterers report training
 example count, convergence status, iteration count, and final mode
 shift.</p></li>

@@ -19,9 +19,13 @@ ________________________________________________________________________
 
 
 `hdbscan`
-==========
+=========
 
-Simplified HDBSCAN-style clusterer.
+Simplified HDBSCAN-style clusterer. It builds the mutual-reachability
+graph, computes a minimum spanning tree, derives the single-linkage
+hierarchy, condenses the hierarchy using `minimum_cluster_size`, and
+selects clusters using `eom` or `leaf` selection. Supports continuous
+attributes only.
 
 The library implements the `clusterer_protocol` defined in the
 `clustering_protocols` library. It provides predicates for learning a
@@ -33,11 +37,13 @@ Datasets are represented as objects implementing the
 `clustering_dataset_protocol` protocol from the `clustering_protocols`
 library.
 
+
 API documentation
 -----------------
 
 Open the [../../apis/library_index.html#hdbscan](../../apis/library_index.html#hdbscan)
 link in a web browser.
+
 
 Loading
 -------
@@ -45,6 +51,7 @@ Loading
 To load this library, load the `loader.lgt` file:
 
 	| ?- logtalk_load(hdbscan(loader)).
+
 
 Testing
 -------
@@ -65,7 +72,7 @@ Features
 - **Hierarchical Density Clustering**: Builds the mutual-reachability graph, computes a minimum spanning tree, derives the single-linkage hierarchy, condenses it using `minimum_cluster_size`, and selects clusters using `eom` or `leaf` selection.
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
 - **Cluster Selection Methods**: Supports both `eom` and `leaf` cluster selection.
-- **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
+- **Distance Metrics**: Supports Euclidean and Manhattan distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Reachability-Based Prediction**: New instances are assigned to the selected cluster with the nearest training point when the distance is within the learned cluster reachability threshold; otherwise the atom `noise` is returned.
 - **Noise Detection**: Points not assigned to any extracted cluster are retained as noise.

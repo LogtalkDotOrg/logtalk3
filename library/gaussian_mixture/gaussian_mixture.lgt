@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Gaussian mixture model clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses deterministic expectation-maximization with diagonal covariance matrices.',
-			'Dead components' - 'Supports explicit dead-component handling policies: ``zero_weight`` preserves the previous component with zero weight, while ``reseed`` relocates the component to the least-confident training row.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Initialization' - 'Supports ``first_k`` initialization and deterministic ``spread`` initialization for component means.',
-			'Prediction' - 'Assigns new instances to the component with the largest posterior score and can also return per-component posterior probabilities.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``gaussian_mixture_clusterer(Encoders, Components, Weights, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Components`` stores the learned means and diagonal variances, ``Weights`` stores the mixture weights, ``Options`` stores the effective training options, and ``Diagnostics`` stores convergence metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans]
 	]).
 

@@ -15,7 +15,7 @@ k-Means clusterer for continuous datasets. Learns from a dataset object implemen
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,13 +31,7 @@ k-Means clusterer for continuous datasets. Learns from a dataset object implemen
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Uses Lloyd's algorithm with deterministic initialization.
-   - Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.
-   - Initialization: Supports ``first_k`` initialization and a deterministic ``spread`` initialization that repeatedly chooses the farthest example from the centroids selected so far.
-   - Empty clusters: If an iteration leaves a cluster empty, its centroid is kept unchanged from the previous iteration.
-   - Training diagnostics: Exposes training metadata including example count, convergence status, performed iterations, and final centroid shift.
-   - Clusterer representation: The learned clusterer is represented by default as ``kmeans_clusterer(Encoders, Centroids, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Centroids`` stores the learned centroid vectors in cluster-id order, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
