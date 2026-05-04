@@ -16,6 +16,20 @@ Draws are represented directly using game scores on the set
 their rating and volatility while their rating deviation is inflated for
 that period.
 
+Players are initialized when they first play instead of being forced to
+appear in the first declared period.
+
+The learned ranker is represented by the compound term:
+
+::
+
+   glicko2_periodic_ranker(Items, Ratings, Diagnostics)
+
+where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics``
+stores metadata including the effective options, per-item rating
+deviations, per-item volatilities, processed periods, and the training
+dataset summary.
+
 Load with:
 
 ::

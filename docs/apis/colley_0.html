@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-26</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -361,15 +361,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds the Colley coefficient matrix with diagonal entries <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">games_i</span></code> and off-diagonal entries <code class="docutils literal notranslate"><span class="pre">-games_ij</span></code>, then solves the linear system <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">r</span> <span class="pre">=</span> <span class="pre">b</span></code> using deterministic Gaussian elimination with partial pivoting and residual validation.</p></li>
-<li><p>Score semantics: Learned ratings are conservative scores in the interval <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code> centered around <code class="docutils literal notranslate"><span class="pre">0.5</span></code> when evidence is weak or perfectly balanced.</p></li>
-<li><p>Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that learned rankings remain globally comparable across all ranked items.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">colley_ranker(Items,</span> <span class="pre">Ratings,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Ratings</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the training dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

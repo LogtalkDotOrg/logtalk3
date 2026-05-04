@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-05-04,
 		comment is 'Apriori frequent itemset miner for transaction datasets using deterministic level-wise candidate generation and anti-monotone pruning.',
-		remarks is [
-			'Algorithm' - 'Builds frequent itemsets level by level by generating deterministic candidate combinations, pruning candidates whose subsets are infrequent, and rescanning transactions once per level to compute support counts for all candidates using a candidate hash tree.',
-			'Dataset handling' - 'Requires a dataset implementing ``transaction_dataset_protocol`` with transactions represented as canonical sorted lists of unique declared items.',
-			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
-			'Pattern miner representation' - 'The mined result is represented by default as ``apriori_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``itemset(Items, SupportCount)`` terms ordered first by pattern length and then lexicographically.'
-		],
 		see_also is [pattern_miner_protocol, transaction_dataset_protocol, combinations]
 	]).
 
@@ -45,9 +39,7 @@
 	]).
 
 	:- uses(avltree, [
-		as_list/2 as dictionary_as_list/2,
-		insert/4 as dictionary_insert/4,
-		lookup/3 as dictionary_lookup/3,
+		as_list/2 as dictionary_as_list/2, insert/4 as dictionary_insert/4, lookup/3 as dictionary_lookup/3,
 		new/1 as dictionary_new/1
 	]).
 

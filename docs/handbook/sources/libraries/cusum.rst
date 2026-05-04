@@ -4,7 +4,9 @@
 =========
 
 CUSUM (Cumulative Sum Control Chart) anomaly detector for continuous
-sequence-like datasets.
+sequence-like datasets. This is a statistical anomaly-detection method
+based on a two-sided CUSUM control chart. Declared continuous attributes
+are interpreted as ordered monitoring steps.
 
 The library implements the ``anomaly_detector_protocol`` defined in the
 ``anomaly_detection_protocols`` library. It learns a detector from a

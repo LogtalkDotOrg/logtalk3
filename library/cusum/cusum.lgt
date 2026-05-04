@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-04,
 		comment is 'CUSUM (Cumulative Sum Control Chart) anomaly detector for continuous sequence-like datasets. Learns per-step population mean and standard deviation from baseline training examples, or from the baseline subset of a labeled dataset selected by learn-time class-label options, using a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'This is a statistical anomaly-detection method based on a two-sided CUSUM control chart. Declared continuous attributes are interpreted as ordered monitoring steps. For each known step value ``x_t``, the detector computes the standardized deviation ``z_t = (x_t - mu_t) / sigma_t`` and then updates the one-sided cumulative sums ``C+_t = max(0, C+_(t-1) + z_t - k)`` and ``C-_t = max(0, C-_(t-1) - z_t - k)``, where ``k`` is the learn-time allowance. The raw anomaly score is the maximum excursion over the positive and negative cumulative sums.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for baseline fitting. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled: ``reject`` throws an error if any non-baseline example is found, while ``filter`` removes those examples before fitting the baseline statistics.',
-			'Feature handling' - 'Supports continuous attributes only. Missing values are ignored when fitting per-step statistics and skipped during scoring. During scoring, queries must contain at least one known value. The learned detector stores a precomputed attribute schema so that scoring reuses the same step ordering without rebuilding it on every call.',
-			'Predict-time options' - 'The ``allowance/1`` and ``decision_interval/1`` options are learn-time options. ``predict/4`` always uses the values stored in the learned detector. If these options are passed to ``predict/4``, they are ignored. Only ``anomaly_threshold/1`` can be overridden at predict time.',
-			'Score normalization' - 'The raw CUSUM excursion is mapped to the interval ``[0.0,1.0)`` using ``Score = Raw / (1 + Raw)``. The default threshold ``0.8333333333333334`` corresponds to the classical decision interval ``5.0``.',
-			'Detector representation' - 'The learned detector is represented as a ``cusum_detector(TrainingDataset, AttributeSchema, Encoders, Diagnostics)`` term where ``AttributeSchema`` stores the precomputed attribute ordering and ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, isolation_forest, knn_distance, lof, modified_z_score, z_score]
 	]).
 

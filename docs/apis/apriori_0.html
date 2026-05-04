@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-29</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -361,15 +361,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds frequent itemsets level by level by generating deterministic candidate combinations, pruning candidates whose subsets are infrequent, and rescanning transactions once per level to compute support counts for all candidates using a candidate hash tree.</p></li>
-<li><p>Dataset handling: Requires a dataset implementing <code class="docutils literal notranslate"><span class="pre">transaction_dataset_protocol</span></code> with transactions represented as canonical sorted lists of unique declared items.</p></li>
-<li><p>Support thresholds: Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.</p></li>
-<li><p>Pattern miner representation: The mined result is represented by default as <code class="docutils literal notranslate"><span class="pre">apriori_pattern_miner(ItemDomain,</span> <span class="pre">Patterns,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Patterns</span></code> stores <code class="docutils literal notranslate"><span class="pre">itemset(Items,</span> <span class="pre">SupportCount)</span></code> terms ordered first by pattern length and then lexicographically.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

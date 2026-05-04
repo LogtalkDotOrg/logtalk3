@@ -346,6 +346,8 @@ scale-aware weights equivalent to standardizing each penalized encoded
 feature column before applying the L2 penalty.</p></li>
 <li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
 using explicit missing-value indicator features.</p></li>
+<li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
+that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Zero-Variance Features</strong>: Encoded columns with zero variance are
 excluded from the direct solve and assigned zero coefficients in the
 learned regressor.</p></li>

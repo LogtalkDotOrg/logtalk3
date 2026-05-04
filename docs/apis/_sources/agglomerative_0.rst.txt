@@ -15,7 +15,7 @@ Agglomerative clusterer for continuous datasets. Learns from a dataset object im
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,15 +33,7 @@ Agglomerative clusterer for continuous datasets. Learns from a dataset object im
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Uses deterministic bottom-up agglomerative clustering and stops when the requested number of clusters is reached.
-   - Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.
-   - Linkage strategies: Supports ``single``, ``complete``, and ``average`` linkage strategies.
-   - Distance metrics: Supports Euclidean and Manhattan distances.
-   - Diagnostics: Exposes training metadata including example count, merge count, initial pair count, maximum heap size, stale-pair discard count, prediction strategy, and deterministic heap-based pair selection.
-   - Prediction: New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric applied to the learned cluster members.
-   - Tie-breaking: When two candidate merges have the same distance, the implementation deterministically prefers the smallest node-id pair and orders the final clusters by minimum training example id.
-   - Clusterer representation: The learned clusterer is represented by default as ``agglomerative_clusterer(Encoders, Clusters, Prototypes, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Clusters`` stores the learned cluster members, ``Prototypes`` stores average vectors for display and export metadata, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

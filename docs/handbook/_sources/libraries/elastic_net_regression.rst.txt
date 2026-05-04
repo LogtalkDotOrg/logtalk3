@@ -53,6 +53,8 @@ Features
   z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Mixed Penalty**: Combines coefficient-wise L1 shrinkage with an L2
   penalty controlled by the ``regularization/1`` and ``l1_ratio/1``
   options, including the ridge-like ``l1_ratio(0.0)`` and lasso-like

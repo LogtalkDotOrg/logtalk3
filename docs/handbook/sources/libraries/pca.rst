@@ -116,7 +116,7 @@ functor chosen by the implementation and arity 4. For example:
 
 ::
 
-   pca_reducer(Encoders, Components, ExplainedVariances, Options)
+   pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics)
 
 Where:
 
@@ -126,7 +126,8 @@ Where:
   variance order.
 - ``ExplainedVariances``: List of eigenvalues matching the extracted
   components.
-- ``Options``: Effective training options used to learn the reducer.
+- ``Diagnostics``: Learned reducer metadata including the effective
+  training options and learned model details.
 
 When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
 this reducer term is serialized directly as the single argument of the

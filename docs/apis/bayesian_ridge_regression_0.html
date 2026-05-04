@@ -362,18 +362,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses Bayesian linear regression with a shared scalar coefficient precision, Gamma hyperpriors over the weight and noise precisions, an explicit unpenalized intercept, and MacKay-style fixed-point evidence maximization updates.</p></li>
-<li><p>Numerical stability: Evidence-maximization updates clamp the learned weight and noise precisions to configurable <code class="docutils literal notranslate"><span class="pre">precision_bounds(Min,</span> <span class="pre">Max)</span></code> to avoid degenerate zero or infinite precision estimates. Posterior solves use Cholesky factorization of positive-definite precision matrices, diagnostics report any diagonal jitter applied when factorization retries are needed, and the evidence-maximization loop computes the effective degrees of freedom from a one-time eigenspectrum of the centered Gram surrogate while still switching to a sample-space solve when the active encoded feature count exceeds the number of training rows.</p></li>
-<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and zero-variance encoded columns are dropped from posterior updates and assigned zero mean and zero variance.</p></li>
-<li><p>Uncertainty estimates: In addition to mean predictions, the library can return the posterior predictive Gaussian distribution for a new instance using coefficient posterior uncertainty plus observation noise. The intercept is treated as a deterministic centering adjustment and therefore has no associated posterior variance.</p></li>
-<li><p>Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.</p></li>
-<li><p>Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.</p></li>
-<li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regressor(Encoders,</span> <span class="pre">Bias,</span> <span class="pre">Weights,</span> <span class="pre">ActiveFlags,</span> <span class="pre">PosteriorCovariance,</span> <span class="pre">NoiseVariance,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Bias</span></code> stores the posterior mean intercept, <code class="docutils literal notranslate"><span class="pre">Weights</span></code> stores one posterior mean coefficient per encoded feature, <code class="docutils literal notranslate"><span class="pre">ActiveFlags</span></code> records which encoded features participated in the posterior update, <code class="docutils literal notranslate"><span class="pre">PosteriorCovariance</span></code> stores the posterior covariance matrix of the intercept plus active coefficients, <code class="docutils literal notranslate"><span class="pre">NoiseVariance</span></code> stores the learned observation noise variance, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options and learned precisions.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

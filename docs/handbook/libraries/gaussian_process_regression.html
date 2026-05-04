@@ -347,6 +347,8 @@ categorical attributes encoded using reference-level dummy coding.</p></li>
 z-score scaling.</p></li>
 <li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
 using explicit missing-value indicator features.</p></li>
+<li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
+that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Exact Bayesian Regression</strong>: Uses exact Gaussian process regression
 with a mixed covariance kernel combining an
 automatic-relevance-determination squared-exponential component for

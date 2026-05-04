@@ -111,14 +111,14 @@ Dimension reducer representation
 The learned dimension reducer is represented by a compound term with the
 functor chosen by the implementation and arity 4. For example:
 
-	lda_projection_reducer(Encoders, Components, ClassValues, Options)
+	lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics)
 
 Where:
 
 - `Encoders`: List of continuous attribute encoders storing attribute name, mean, and scale.
 - `Components`: List of learned discriminant vectors in component order.
 - `ClassValues`: Ordered list of class labels used during training.
-- `Options`: Effective training options used to learn the reducer.
+- `Diagnostics`: Learned reducer metadata including the effective training options and model details.
 
 When exported using `export_to_clauses/4` or
 `export_to_file/4`, this reducer term is serialized directly

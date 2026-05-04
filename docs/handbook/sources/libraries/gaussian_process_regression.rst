@@ -52,6 +52,8 @@ Features
   z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Exact Bayesian Regression**: Uses exact Gaussian process regression
   with a mixed covariance kernel combining an
   automatic-relevance-determination squared-exponential component for

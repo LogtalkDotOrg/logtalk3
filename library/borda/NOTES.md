@@ -21,7 +21,8 @@ ________________________________________________________________________
 `borda`
 ========
 
-Borda grouped-ranking ranker.
+Borda grouped-ranking ranker. Ranks each item by summing, across groups,
+the number of same-group items with strictly lower relevance.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +31,9 @@ exporting it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `ranking_dataset_protocol` protocol from the `ranking_protocols` library.
-See the `test_datasets` directory for examples.
+See the `test_datasets` directory for examples. 'The training dataset must
+declare each group once, use only declared groups and items in relevance
+judgments, and assign non-negative integer relevance values.
 
 
 API documentation
@@ -68,8 +71,17 @@ Features
 	grouped ranking or relevance-judgment datasets.
 - **Portable Borda Scoring**: Computes scores using only non-negative integer
 	grouped relevance judgments and standard Logtalk library predicates.
+    Within each group, an item receives one point for every same-group item
+    with strictly lower relevance when using `tie_scoring(standard)` and
+    the average of the minimum and maximum tied positions when using
+    `tie_scoring(fractional)`.
 - **Deterministic Ranking**: Orders candidate items by learned score with
-	deterministic tie-breaking.
+	deterministic tie-breaking. Ranking ties are broken deterministically
+    using the standard term order of the item identifiers after sorting by
+    descending score.
+- **Missing relevance semantics**: Missing relevance facts are treated as zero
+    by default using the `missing_relevance(zero)` option and can be rejected
+    using `missing_relevance(error)`.
 - **Strict Dataset Validation**: Rejects duplicate groups, duplicate items
 	within a group, undeclared groups or items in relevance judgments, and
 	non-integer or negative relevance values.

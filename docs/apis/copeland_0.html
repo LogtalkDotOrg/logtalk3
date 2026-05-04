@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-26</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -354,16 +354,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Copeland ranks each item by its number of matchup wins minus losses after aggregating weighted pairwise preferences per observed opponent pair.</p></li>
-<li><p>Score semantics: Only observed opponent pairs contribute to the learned scores. Unobserved pairs are ignored rather than treated as ties.</p></li>
-<li><p>Tie-breaking: Ranking ties are broken deterministically using the standard term order of the item identifiers after sorting by descending score.</p></li>
-<li><p>Dataset requirements: The training dataset must declare each ranked item once, use only declared items in preferences, assign positive weights to preferences between distinct items, and induce a connected undirected comparison graph.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">copeland_ranker(Items,</span> <span class="pre">Scores,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Scores</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the training dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

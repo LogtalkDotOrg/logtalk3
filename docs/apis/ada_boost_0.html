@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -362,16 +362,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: AdaBoost iteratively trains weak learners (C4.5 decision trees) on weighted versions of the training data. After each iteration, the weights of misclassified examples are increased so that subsequent learners focus more on difficult cases.</p></li>
-<li><p>SAMME variant: This implementation uses the SAMME algorithm (Zhu et al., 2009) which extends AdaBoost to the multi-class case by adjusting the weight update formula to account for the number of classes.</p></li>
-<li><p>Learner weights: Each base learner receives a weight (alpha) proportional to its accuracy. More accurate learners have higher weights in the final ensemble vote.</p></li>
-<li><p>Classifier representation: The learned classifier is represented as a <code class="docutils literal notranslate"><span class="pre">ab_classifier(WeightedTrees,</span> <span class="pre">ClassValues,</span> <span class="pre">Options)</span></code> term where <code class="docutils literal notranslate"><span class="pre">WeightedTrees</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">weighted_tree(Alpha,</span> <span class="pre">Tree,</span> <span class="pre">AttributeNames)</span></code> elements.</p></li>
-<li><p>Early stopping: Training stops early if a perfect classifier is found (zero weighted error) or if a base learner performs worse than random guessing.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

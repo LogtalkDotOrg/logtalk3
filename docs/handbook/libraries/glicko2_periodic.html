@@ -306,6 +306,16 @@ simultaneous Glicko-2 player updates inside each period.</p>
 <code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0}</span></code>. Players who are inactive in a declared period keep
 their rating and volatility while their rating deviation is inflated for
 that period.</p>
+<p>Players are initialized when they first play instead of being forced to
+appear in the first declared period.</p>
+<p>The learned ranker is represented by the compound term:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>glicko2_periodic_ranker(<span class="nv">Items</span>, <span class="nv">Ratings</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">Ratings</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>
+stores metadata including the effective options, per-item rating
+deviations, per-item volatilities, processed periods, and the training
+dataset summary.</p>
 <p>Load with:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(glicko2_periodic(loader)).
 </pre></div>

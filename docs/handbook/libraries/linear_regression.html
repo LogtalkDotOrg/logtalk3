@@ -343,6 +343,8 @@ categorical attributes encoded using reference-level dummy coding.</p></li>
 z-score scaling.</p></li>
 <li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
 using explicit missing-value indicator features.</p></li>
+<li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
+that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Rank Handling</strong>: Encoded columns that are numerically dependent on
 the intercept or on earlier selected columns are dropped from the
 direct solve and assigned zero coefficients.</p></li>

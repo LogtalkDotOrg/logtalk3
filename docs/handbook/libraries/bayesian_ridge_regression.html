@@ -340,7 +340,8 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous and Mixed Features</strong>: Supports continuous attributes and
-categorical attributes encoded using reference-level dummy coding.</p></li>
+categorical attributes encoded using reference-level dummy coding from
+the declared dataset attribute values.</p></li>
 <li><p><strong>Automatic Hyperparameter Tuning</strong>: Learns the global coefficient
 precision and observation-noise precision using MacKay-style evidence
 maximization with configurable Gamma hyperpriors instead of a
@@ -352,15 +353,21 @@ intercept is not probabilistic. Posterior coefficient variances are
 also exposed.</p></li>
 <li><p><strong>Feature Scaling</strong>: Continuous attributes can be standardized using
 z-score scaling before fitting and prediction.</p></li>
-<li><p><strong>Stable Posterior Solves</strong>: The evidence-maximization loop works from
-centered sufficient statistics, computes the effective degrees of
-freedom from a one-time eigenspectrum of the smaller centered Gram
-surrogate, and switches to a sample-space Cholesky solve when the
-active encoded feature count exceeds the row count. The full posterior
-covariance is materialized only after the final hyperparameters are
-selected.</p></li>
-<li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
-using explicit missing-value indicator features.</p></li>
+<li><p><strong>Stable Posterior Solves</strong>: Evidence-maximization updates clamp the
+learned weight and noise precisions to configurable
+<code class="docutils literal notranslate"><span class="pre">precision_bounds(Min,</span> <span class="pre">Max)</span></code> to avoid degenerate zero or infinite
+precision estimates. Posterior solves use Cholesky factorization of
+positive-definite precision matrices, diagnostics report any diagonal
+jitter applied when factorization retries are needed, and the
+evidence-maximization loop computes the effective degrees of freedom
+from a one-time eigenspectrum of the centered Gram surrogate while
+still switching to a sample-space solve when the active encoded
+feature count exceeds the number of training rows.</p></li>
+<li><p><strong>Missing Values</strong>: Missing numeric and categorical values represented
+using anonymous variables are encoded using explicit missing-value
+indicator features.</p></li>
+<li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
+that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Zero-Variance Features</strong>: Encoded columns with zero variance are
 excluded from posterior updates and assigned zero mean and zero
 posterior variance.</p></li>

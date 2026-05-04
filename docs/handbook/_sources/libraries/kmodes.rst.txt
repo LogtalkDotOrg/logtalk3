@@ -88,7 +88,7 @@ The ``diagnostics/2`` predicate returns a list containing:
 - ``final_shift(Shift)``
 - ``options(Options)``
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the functor

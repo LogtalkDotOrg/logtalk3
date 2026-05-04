@@ -50,6 +50,8 @@ Features
   z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Coefficient-wise L1 Shrinkage**: Applies soft-thresholding updates
   independently to every encoded feature, including categorical dummy
   and missing-indicator features.

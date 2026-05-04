@@ -316,7 +316,9 @@
              
   <section id="bradley-terry">
 <span id="library-bradley-terry"></span><h1><code class="docutils literal notranslate"><span class="pre">bradley_terry</span></code><a class="headerlink" href="#bradley-terry" title="Link to this heading"></a></h1>
-<p>Bradley-Terry pairwise preference ranker.</p>
+<p>Bradley-Terry pairwise preference ranker. Uses a deterministic
+minorization-maximization update to estimate one relative strength
+parameter per item from weighted pairwise wins and losses.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preferences, using it to order candidate items, and
@@ -324,7 +326,11 @@ exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The training dataset must declare each ranked item once,
+enumerate positive-weight pairwise preferences between distinct declared
+items, induce a connected undirected comparison graph, and induce a
+strongly connected directed win graph so that a finite Bradley-Terry
+maximum-likelihood estimate exists.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -342,6 +348,11 @@ link in a web browser.</p>
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(bradley_terry(tester)).
+</pre></div>
+</div>
+<p>To run the performance benchmark suite, load the
+<code class="docutils literal notranslate"><span class="pre">tester_performance.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(bradley_terry(tester_performance)).
 </pre></div>
 </div>
 </section>

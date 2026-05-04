@@ -3,7 +3,9 @@
 ``bradley_terry``
 =================
 
-Bradley-Terry pairwise preference ranker.
+Bradley-Terry pairwise preference ranker. Uses a deterministic
+minorization-maximization update to estimate one relative strength
+parameter per item from weighted pairwise wins and losses.
 
 The library implements the ``ranker_protocol`` defined in the
 ``ranking_protocols`` library. It provides predicates for learning a
@@ -13,7 +15,11 @@ exporting it as a list of predicate clauses or to a file.
 Datasets are represented as objects implementing the
 ``pairwise_ranking_dataset_protocol`` protocol from the
 ``ranking_protocols`` library. See the ``test_datasets`` directory for
-examples.
+examples. The training dataset must declare each ranked item once,
+enumerate positive-weight pairwise preferences between distinct declared
+items, induce a connected undirected comparison graph, and induce a
+strongly connected directed win graph so that a finite Bradley-Terry
+maximum-likelihood estimate exists.
 
 API documentation
 -----------------
@@ -39,6 +45,13 @@ To test this library predicates, load the ``tester.lgt`` file:
 ::
 
    | ?- logtalk_load(bradley_terry(tester)).
+
+To run the performance benchmark suite, load the
+``tester_performance.lgt`` file:
+
+::
+
+   | ?- logtalk_load(bradley_terry(tester_performance)).
 
 Features
 --------

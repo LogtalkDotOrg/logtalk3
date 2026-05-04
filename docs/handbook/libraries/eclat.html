@@ -305,12 +305,17 @@
              
   <section id="eclat">
 <span id="library-eclat"></span><h1><code class="docutils literal notranslate"><span class="pre">eclat</span></code><a class="headerlink" href="#eclat" title="Link to this heading"></a></h1>
-<p>Eclat frequent itemset miner for transaction datasets. The library
-depends on the <code class="docutils literal notranslate"><span class="pre">frequent_pattern_mining_protocols</span></code> support library,
-implements the generic <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code> defined in the
-<code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library, and mines frequent itemsets
-using a portable vertical tidset representation and depth-first
-recursion.</p>
+<p>Eclat frequent itemset miner for transaction datasets. Normalizes
+dataset transaction identifiers to internal ascending ordinals, builds
+vertical tidsets for frequent singleton items, and recursively extends
+them by lexicographic suffix joins and tidset intersections.</p>
+<p>This library depends on the <code class="docutils literal notranslate"><span class="pre">frequent_pattern_mining_protocols</span></code>
+support library, implements the generic <code class="docutils literal notranslate"><span class="pre">pattern_miner_protocol</span></code>
+defined in the <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library.</p>
+<p>Requires a dataset implementing <code class="docutils literal notranslate"><span class="pre">transaction_dataset_protocol</span></code> with
+transactions represented as canonical sorted lists of unique declared
+items. External transaction identifiers are treated as opaque metadata
+and normalized to internal ordinals before tidset construction.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -336,12 +341,16 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Vertical Tidsets</strong>: Represents each frequent extension by the sorted
 list of transaction identifiers containing it.</p></li>
+<li><p><strong>Transaction Ordinal Normalization</strong>: Treats external transaction
+identifiers as opaque metadata and normalizes them to internal
+ascending ordinals before building vertical tidsets.</p></li>
 <li><p><strong>Depth-First Mining</strong>: Extends frequent prefixes recursively using
 tidset intersections.</p></li>
 <li><p><strong>Canonical Transactions</strong>: Validates that transactions are sorted,
 duplicate-free, and restricted to declared items.</p></li>
 <li><p><strong>Flexible Support Thresholds</strong>: Supports relative minimum support and
-absolute minimum support count.</p></li>
+absolute minimum support count. When both are given, the
+absolute-count threshold takes precedence.</p></li>
 <li><p><strong>Model Export</strong>: Mined pattern collections can be exported as
 predicate clauses or written to a file.</p></li>
 </ul>

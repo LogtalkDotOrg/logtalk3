@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `agglomerative`
-=================
+===============
 
 Agglomerative clusterer.
 
@@ -60,12 +60,12 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Bottom-Up Clustering**: Merges singleton clusters until the requested number of clusters is reached.
+- **Bottom-Up Clustering**: Uses deterministic bottom-up agglomerative clustering and stops when the requested number of clusters is reached.
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
 - **Linkage Strategies**: Supports `single`, `complete`, and `average` linkage.
 - **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
-- **Linkage-Aware Prediction**: New instances are assigned using the configured linkage strategy against the learned cluster members instead of only against cluster prototypes.
+- **Linkage-Aware Prediction**: New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric applied to the learned cluster members.
 - **Deterministic Ordering**: Equal-distance merges are broken using node-id order and final clusters are ordered by minimum training example id so equivalent dataset permutations keep the same cluster ids.
 - **Cached Distances**: Inter-cluster distances are cached and incrementally updated after each merge instead of being fully recomputed from cluster members at every iteration.
 - **Priority-Queue Merge Selection**: Candidate merges are tracked in a min-heap keyed by distance and node-id order, allowing stale entries to be discarded lazily while keeping merge selection deterministic.
@@ -85,7 +85,7 @@ The following options can be passed to the `learn/3` predicate:
 - `feature_scaling(FeatureScaling)`: Whether to standardize continuous attributes before clustering. Options: `on` (default) or `off`.
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the

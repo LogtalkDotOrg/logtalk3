@@ -25,15 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
-		remarks is [
-			'Algorithm' - 'C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.',
-			'Discrete attributes' - 'The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes with discrete attributes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.',
-			'Continuous attributes' - 'For continuous (numeric) attributes, the tree uses binary threshold splits represented as ``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`` where ``LeftSubtree`` corresponds to values ``=< Threshold`` and ``RightSubtree`` to values ``> Threshold``.',
-			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.',
-			'Tree pruning' - 'The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.'
-		],
 		see_also is [dataset_protocol, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest, ada_boost]
 	]).
 
@@ -409,7 +402,7 @@
 	export_to_clauses(Dataset, Tree, Functor, Clauses) :-
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
-		tree_to_clauses_(Tree, Functor, AttributeNames, [], Clauses).
+		tree_to_clauses(Tree, Functor, AttributeNames, [], Clauses).
 
 	check_classifier(Classifier) :-
 		(   valid_tree(Classifier) ->
@@ -454,18 +447,18 @@
 		valid_tree(Subtree),
 		valid_subtrees(Subtrees, [Value| SeenValues]).
 
-	tree_to_clauses_(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
+	tree_to_clauses(leaf(Class), Functor, AttributeNames, Bindings, [Clause]) :-
 		build_clause(Functor, AttributeNames, Bindings, Class, Clause).
-	tree_to_clauses_(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Functor, AttributeNames, Bindings, Clauses) :-
-		tree_to_clauses_(LeftTree, Functor, AttributeNames, [Attribute-(=<(Threshold))| Bindings], LeftClauses),
-		tree_to_clauses_(RightTree, Functor, AttributeNames, [Attribute-(>(Threshold))| Bindings], RightClauses),
+	tree_to_clauses(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Functor, AttributeNames, Bindings, Clauses) :-
+		tree_to_clauses(LeftTree, Functor, AttributeNames, [Attribute-(=<(Threshold))| Bindings], LeftClauses),
+		tree_to_clauses(RightTree, Functor, AttributeNames, [Attribute-(>(Threshold))| Bindings], RightClauses),
 		append(LeftClauses, RightClauses, Clauses).
-	tree_to_clauses_(tree(Attribute, Subtrees), Functor, AttributeNames, Bindings, Clauses) :-
+	tree_to_clauses(tree(Attribute, Subtrees), Functor, AttributeNames, Bindings, Clauses) :-
 		subtrees_to_clauses(Subtrees, Attribute, Functor, AttributeNames, Bindings, Clauses).
 
 	subtrees_to_clauses([], _, _, _, _, []).
 	subtrees_to_clauses([Value-Subtree| Subtrees], Attribute, Functor, AttributeNames, Bindings, Clauses) :-
-		tree_to_clauses_(Subtree, Functor, AttributeNames, [Attribute-Value| Bindings], Clauses1),
+		tree_to_clauses(Subtree, Functor, AttributeNames, [Attribute-Value| Bindings], Clauses1),
 		append(Clauses1, Clauses2, Clauses),
 		subtrees_to_clauses(Subtrees, Attribute, Functor, AttributeNames, Bindings, Clauses2).
 

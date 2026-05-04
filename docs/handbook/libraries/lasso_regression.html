@@ -344,6 +344,8 @@ categorical attributes encoded using one-hot vectors.</p></li>
 z-score scaling.</p></li>
 <li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
 using explicit missing-value indicator features.</p></li>
+<li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
+that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Coefficient-wise L1 Shrinkage</strong>: Applies soft-thresholding updates
 independently to every encoded feature, including categorical dummy
 and missing-indicator features.</p></li>

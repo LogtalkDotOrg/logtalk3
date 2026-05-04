@@ -410,7 +410,7 @@ are negligible. The default is <code class="docutils literal notranslate"><span 
 <h2>Dimension reducer representation<a class="headerlink" href="#dimension-reducer-representation" title="Link to this heading"></a></h2>
 <p>The learned dimension reducer is represented by a compound term with the
 functor chosen by the implementation and arity 4. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pca_reducer(<span class="nv">Encoders</span>, <span class="nv">Components</span>, <span class="nv">ExplainedVariances</span>, <span class="nv">Options</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pca_reducer(<span class="nv">Encoders</span>, <span class="nv">Components</span>, <span class="nv">ExplainedVariances</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
 <p>Where:</p>
@@ -421,7 +421,8 @@ name, mean, and scale.</p></li>
 variance order.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ExplainedVariances</span></code>: List of eigenvalues matching the extracted
 components.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Effective training options used to learn the reducer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Learned reducer metadata including the effective
+training options and learned model details.</p></li>
 </ul>
 <p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
 this reducer term is serialized directly as the single argument of the

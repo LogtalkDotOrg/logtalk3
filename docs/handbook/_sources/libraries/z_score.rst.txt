@@ -162,6 +162,8 @@ aggregated into a single raw anomaly score according to the learned
 ``score_mode/1`` option. Third, the raw score is mapped to the interval
 ``[0.0, 1.0)`` using ``Score = Raw / (1 + Raw)``.
 
+With this normalization, a raw score of ``3.0`` maps to ``0.75``.
+
 The ``score_mode/1`` option does not change the classical per-attribute
 formula. It only changes the aggregation step. With
 ``score_mode(root_mean_square)``, the raw score is the root mean square

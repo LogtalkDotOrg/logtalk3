@@ -61,6 +61,7 @@ Features
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding.
 - **Feature Scaling and Penalty Scaling**: Continuous attributes can be standardized using z-score scaling. Ridge regularization uses scale-aware weights equivalent to standardizing each penalized encoded feature column before applying the L2 penalty.
 - **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Zero-Variance Features**: Encoded columns with zero variance are excluded from the direct solve and assigned zero coefficients in the learned regressor.
 - **Ridge Penalty**: Applies L2 regularization to the learned weights using the shared `regularization/1` option.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, solver, linear-system residual, active feature count, penalty scaling strategy, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.

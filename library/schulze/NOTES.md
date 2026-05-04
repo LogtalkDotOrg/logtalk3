@@ -100,3 +100,32 @@ This predicate complements `scores/2` and `rank/3` without changing their
 semantics. The `scores/2` predicate still returns the number of opponents that
 each item beats in the final Schulze relation, while `strongest_paths/2`
 exposes the underlying pairwise path strengths used to derive that relation.
+
+
+Diagnostics syntax
+------------------
+
+The `diagnostics/2` predicate returns a list of metadata terms with the form:
+
+	[
+		model(schulze),
+		options(Options),
+		strongest_paths(StrongestPaths),
+		dataset_summary(DatasetSummary)
+	]
+
+
+Ranker representation
+---------------------
+
+The learned ranker is represented by a compound term of the form:
+
+	schulze_ranker(Items, Scores, Diagnostics)
+
+Where:
+
+- `Items`: List of ranked items.
+- `Scores`: List of `Item-Score` pairs.
+- `Diagnostics`: List of metadata terms, including the effective
+	`victory_strength/1` option, the labeled strongest paths, and the dataset
+	summary.

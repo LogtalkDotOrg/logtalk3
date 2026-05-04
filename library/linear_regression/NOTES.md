@@ -60,6 +60,7 @@ Features
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding.
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Rank Handling**: Encoded columns that are numerically dependent on the intercept or on earlier selected columns are dropped from the direct solve and assigned zero coefficients.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, solver name, residual sum of squares, effective rank, active feature count, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.

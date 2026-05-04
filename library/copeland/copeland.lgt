@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-05-04,
 		comment is 'Copeland pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by comparing aggregated head-to-head outcomes for each observed matchup and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Copeland ranks each item by its number of matchup wins minus losses after aggregating weighted pairwise preferences per observed opponent pair.',
-			'Score semantics' - 'Only observed opponent pairs contribute to the learned scores. Unobserved pairs are ignored rather than treated as ties.',
-			'Tie-breaking' - 'Ranking ties are broken deterministically using the standard term order of the item identifiers after sorting by descending score.',
-			'Dataset requirements' - 'The training dataset must declare each ranked item once, use only declared items in preferences, assign positive weights to preferences between distinct items, and induce a connected undirected comparison graph.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``copeland_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry]
 	]).
 

@@ -30,7 +30,9 @@ it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `pairwise_ranking_dataset_protocol` protocol from the `ranking_protocols`
-library. See the `test_datasets` directory for examples.
+library. See the `test_datasets` directory for examples. Requires well-formed
+connected pairwise datasets so that the learned rankings remain globally
+comparable across all ranked items.
 
 
 API documentation

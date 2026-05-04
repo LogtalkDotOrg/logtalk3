@@ -311,7 +311,9 @@ implements the generic <code class="docutils literal notranslate"><span class="p
 <code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code> core library, and mines frequent itemsets
 using deterministic level-wise candidate generation and anti-monotone
 pruning with one transaction rescan per candidate level using a
-candidate hash tree backed by keyed bucket dictionaries.</p>
+candidate hash tree backed by keyed bucket dictionaries. Requires a
+dataset implementing <code class="docutils literal notranslate"><span class="pre">transaction_dataset_protocol</span></code> with transactions
+represented as canonical sorted lists of unique declared items.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -335,9 +337,11 @@ link in a web browser.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Deterministic Level-Wise Mining</strong>: Builds frequent itemsets by
-deterministic candidate generation and one transaction rescan per
-candidate level.</p></li>
+<li><p><strong>Deterministic Level-Wise Mining</strong>: Builds frequent itemsets level by
+level by generating deterministic candidate combinations, pruning
+candidates whose subsets are infrequent, and rescanning transactions
+once per level to compute support counts for all candidates using a
+candidate hash tree.</p></li>
 <li><p><strong>Candidate Hash Tree Counting</strong>: Counts supports for an entire
 candidate level by traversing a hash tree with keyed bucket and item
 dictionaries instead of linearly scanning bucket lists for every

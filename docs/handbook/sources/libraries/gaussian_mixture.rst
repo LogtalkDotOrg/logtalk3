@@ -100,7 +100,7 @@ The following options can be passed to the ``learn/3`` predicate:
   weight; ``reseed`` relocates the component to the least-confident
   training row and gives it one-example prior weight.
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the functor

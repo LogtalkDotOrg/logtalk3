@@ -25,13 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-05-04,
 		comment is 'Bradley-Terry pairwise preference ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol when the directed win graph admits a finite Bradley-Terry maximum-likelihood estimate, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Uses a deterministic minorization-maximization update to estimate one relative strength parameter per item from weighted pairwise wins and losses.',
-			'Dataset requirements' - 'The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, induce a connected undirected comparison graph, and induce a strongly connected directed win graph so that a finite Bradley-Terry maximum-likelihood estimate exists.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``bt_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as convergence status, iteration count, and dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranking_dataset_protocol, ranker_protocol, regularized_bradley_terry]
 	]).
 

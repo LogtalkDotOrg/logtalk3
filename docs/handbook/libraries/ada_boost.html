@@ -76,7 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classifier-representation">Classifier representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#learning-a-classifier">Learning a Classifier</a></li>
@@ -316,9 +316,12 @@
 <p>AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as
 base learners. Implements the SAMME (Stagewise Additive Modeling using a
 Multi-class Exponential loss function) variant, which supports
-multi-class classification. Builds an ensemble of weighted decision
-trees where each subsequent tree focuses on the examples misclassified
-by previous trees.</p>
+multi-class classification by adjusting the weight update formula to
+account for the number of classes. Builds an ensemble of weighted
+decision trees where each subsequent tree focuses on the examples
+misclassified by previous trees: after each iteration, the weights of
+misclassified examples are increased so that subsequent learners focus
+more on difficult cases.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code> library. It provides predicates for
 learning an ensemble classifier from a dataset, using it to make
@@ -377,7 +380,7 @@ predicate clauses</p></li>
 </ul>
 </section>
 <section id="classifier-representation">
-<h2>Classifier Representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
+<h2>Classifier representation<a class="headerlink" href="#classifier-representation" title="Link to this heading"></a></h2>
 <p>The learned classifier is represented as a compound term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ab_classifier(<span class="nv">WeightedTrees</span>, <span class="nv">ClassValues</span>, <span class="nv">Options</span>)
 </pre></div>

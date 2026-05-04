@@ -63,6 +63,7 @@ Features
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using one-hot vectors.
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Mixed Penalty**: Combines coefficient-wise L1 shrinkage with an L2 penalty controlled by the `regularization/1` and `l1_ratio/1` options, including the ridge-like `l1_ratio(0.0)` and lasso-like `l1_ratio(1.0)` endpoints.
 - **Standard Encoding Semantics**: Categorical attributes are one-hot encoded and each encoded coefficient is regularized independently, matching standard elastic-net implementations.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, optimization stop reason, completed iterations, final parameter delta, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.

@@ -46,7 +46,8 @@ Features
 --------
 
 - **Continuous and Mixed Features**: Supports continuous attributes and
-  categorical attributes encoded using reference-level dummy coding.
+  categorical attributes encoded using reference-level dummy coding from
+  the declared dataset attribute values.
 - **Automatic Hyperparameter Tuning**: Learns the global coefficient
   precision and observation-noise precision using MacKay-style evidence
   maximization with configurable Gamma hyperpriors instead of a
@@ -58,15 +59,21 @@ Features
   also exposed.
 - **Feature Scaling**: Continuous attributes can be standardized using
   z-score scaling before fitting and prediction.
-- **Stable Posterior Solves**: The evidence-maximization loop works from
-  centered sufficient statistics, computes the effective degrees of
-  freedom from a one-time eigenspectrum of the smaller centered Gram
-  surrogate, and switches to a sample-space Cholesky solve when the
-  active encoded feature count exceeds the row count. The full posterior
-  covariance is materialized only after the final hyperparameters are
-  selected.
-- **Missing Values**: Missing numeric and categorical values are encoded
-  using explicit missing-value indicator features.
+- **Stable Posterior Solves**: Evidence-maximization updates clamp the
+  learned weight and noise precisions to configurable
+  ``precision_bounds(Min, Max)`` to avoid degenerate zero or infinite
+  precision estimates. Posterior solves use Cholesky factorization of
+  positive-definite precision matrices, diagnostics report any diagonal
+  jitter applied when factorization retries are needed, and the
+  evidence-maximization loop computes the effective degrees of freedom
+  from a one-time eigenspectrum of the centered Gram surrogate while
+  still switching to a sample-space solve when the active encoded
+  feature count exceeds the number of training rows.
+- **Missing Values**: Missing numeric and categorical values represented
+  using anonymous variables are encoded using explicit missing-value
+  indicator features.
+- **Unknown Values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Zero-Variance Features**: Encoded columns with zero variance are
   excluded from posterior updates and assigned zero mean and zero
   posterior variance.

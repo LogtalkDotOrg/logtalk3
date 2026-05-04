@@ -44,6 +44,9 @@ Features
   compatible frequent patterns from the previous level.
 - **Support-Pruned Candidates**: Prunes candidates whose immediate
   subpatterns are not all frequent.
+- **Batched Horizontal Support Counting**: Counts singleton and
+  candidate supports using horizontal scans over the sequence database
+  at each level.
 - **Canonical Sequences**: Validates that itemsets are sorted,
   duplicate-free, non-empty, and restricted to declared items.
 - **Flexible Support Thresholds**: Supports relative minimum support and

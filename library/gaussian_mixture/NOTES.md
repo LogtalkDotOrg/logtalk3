@@ -97,7 +97,7 @@ The following options can be passed to the `learn/3` predicate:
 - `dead_component_policy(Policy)`: Handling for components whose total responsibility collapses below the dead-component threshold. Options: `zero_weight` (default) keeps the previous component with zero weight; `reseed` relocates the component to the least-confident training row and gives it one-example prior weight.
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the

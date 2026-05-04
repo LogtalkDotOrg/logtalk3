@@ -9,7 +9,9 @@ implements the generic ``pattern_miner_protocol`` defined in the
 ``pattern_mining_protocols`` core library, and mines frequent itemsets
 using deterministic level-wise candidate generation and anti-monotone
 pruning with one transaction rescan per candidate level using a
-candidate hash tree backed by keyed bucket dictionaries.
+candidate hash tree backed by keyed bucket dictionaries. Requires a
+dataset implementing ``transaction_dataset_protocol`` with transactions
+represented as canonical sorted lists of unique declared items.
 
 API documentation
 -----------------
@@ -39,9 +41,11 @@ To test this library predicates, load the ``tester.lgt`` file:
 Features
 --------
 
-- **Deterministic Level-Wise Mining**: Builds frequent itemsets by
-  deterministic candidate generation and one transaction rescan per
-  candidate level.
+- **Deterministic Level-Wise Mining**: Builds frequent itemsets level by
+  level by generating deterministic candidate combinations, pruning
+  candidates whose subsets are infrequent, and rescanning transactions
+  once per level to compute support counts for all candidates using a
+  candidate hash tree.
 - **Candidate Hash Tree Counting**: Counts supports for an entire
   candidate level by traversing a hash tree with keyed bucket and item
   dictionaries instead of linearly scanning bucket lists for every

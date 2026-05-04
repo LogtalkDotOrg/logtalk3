@@ -142,7 +142,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer representation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
@@ -336,16 +336,22 @@ link in a web browser.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Hierarchical Density Clustering</strong>: Builds a mutual-reachability
-minimum spanning tree and extracts clusters by cutting strong gaps.</p></li>
+<li><p><strong>Hierarchical Density Clustering</strong>: Builds the mutual-reachability
+graph, computes a minimum spanning tree, derives the single-linkage
+hierarchy, condenses it using <code class="docutils literal notranslate"><span class="pre">minimum_cluster_size</span></code>, and selects
+clusters using <code class="docutils literal notranslate"><span class="pre">eom</span></code> or <code class="docutils literal notranslate"><span class="pre">leaf</span></code> selection.</p></li>
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes.</p></li>
-<li><p><strong>Leaf Cluster Extraction</strong>: Uses a simplified <code class="docutils literal notranslate"><span class="pre">leaf</span></code> cluster
-selection method.</p></li>
+<li><p><strong>Cluster Selection Methods</strong>: Supports both <code class="docutils literal notranslate"><span class="pre">eom</span></code> and <code class="docutils literal notranslate"><span class="pre">leaf</span></code>
+cluster selection.</p></li>
 <li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
 distances.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
+<li><p><strong>Reachability-Based Prediction</strong>: New instances are assigned to the
+selected cluster with the nearest training point when the distance is
+within the learned cluster reachability threshold; otherwise the atom
+<code class="docutils literal notranslate"><span class="pre">noise</span></code> is returned.</p></li>
 <li><p><strong>Noise Detection</strong>: Points not assigned to any extracted cluster are
 retained as noise.</p></li>
 <li><p><strong>Portable Export</strong>: Learned clusterers can be exported as clauses or
@@ -360,8 +366,8 @@ files and reused later.</p></li>
 computing core distances and mutual reachability. Default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">minimum_cluster_size(MinimumClusterSize)</span></code>: Minimum number of points
 required for an extracted cluster. Default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cluster_selection_method(Method)</span></code>: Cluster extraction policy. The
-current implementation accepts only <code class="docutils literal notranslate"><span class="pre">leaf</span></code> (default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cluster_selection_method(Method)</span></code>: Cluster extraction policy.
+Options: <code class="docutils literal notranslate"><span class="pre">eom</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">leaf</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distance_metric(Metric)</span></code>: Distance metric to use. Options:
 <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling(FeatureScaling)</span></code>: Whether to standardize continuous
@@ -369,7 +375,7 @@ attributes before clustering. Options: <code class="docutils literal notranslate
 </ul>
 </section>
 <section id="clusterer-representation">
-<h2>Clusterer Representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
+<h2>Clusterer representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
 <p>The learned clusterer is represented as a compound term with the functor
 chosen by the user when exporting the clusterer and arity 4. For
 example:</p>
@@ -379,9 +385,13 @@ example:</p>
 <p>Where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Encoders</span></code>: List of continuous attribute encoders storing attribute
-name, mean, and scale.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Clusters</span></code>: List of <code class="docutils literal notranslate"><span class="pre">cluster(Id,</span> <span class="pre">Points,</span> <span class="pre">Prototype,</span> <span class="pre">Radius)</span></code> terms
-in cluster-id order.</p></li>
+name, mean, and scale.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Clusters</span></code>: List of
+<code class="docutils literal notranslate"><span class="pre">cluster(Id,</span> <span class="pre">Points,</span> <span class="pre">MaxCoreDistance,</span> <span class="pre">Stability)</span></code> terms in
+cluster-id order.</p></li>
+</ul>
+</li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Noise</span></code>: List of encoded training points classified as noise.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Effective training options used to learn the clusterer.</p></li>
 </ul>

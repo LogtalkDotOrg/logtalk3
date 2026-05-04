@@ -15,7 +15,7 @@ AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learne
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,12 +32,7 @@ AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learne
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: AdaBoost iteratively trains weak learners (C4.5 decision trees) on weighted versions of the training data. After each iteration, the weights of misclassified examples are increased so that subsequent learners focus more on difficult cases.
-   - SAMME variant: This implementation uses the SAMME algorithm (Zhu et al., 2009) which extends AdaBoost to the multi-class case by adjusting the weight update formula to account for the number of classes.
-   - Learner weights: Each base learner receives a weight (alpha) proportional to its accuracy. More accurate learners have higher weights in the final ensemble vote.
-   - Classifier representation: The learned classifier is represented as a ``ab_classifier(WeightedTrees, ClassValues, Options)`` term where ``WeightedTrees`` is a list of ``weighted_tree(Alpha, Tree, AttributeNames)`` elements.
-   - Early stopping: Training stops early if a perfect classifier is found (zero weighted error) or if a base learner performs worse than random guessing.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

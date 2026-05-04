@@ -49,6 +49,8 @@ Features
   z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Rank Handling**: Encoded columns that are numerically dependent on
   the intercept or on earlier selected columns are dropped from the
   direct solve and assigned zero coefficients.

@@ -25,18 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Agglomerative clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses deterministic bottom-up agglomerative clustering and stops when the requested number of clusters is reached.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Linkage strategies' - 'Supports ``single``, ``complete``, and ``average`` linkage strategies.',
-			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
-			'Diagnostics' - 'Exposes training metadata including example count, merge count, initial pair count, maximum heap size, stale-pair discard count, prediction strategy, and deterministic heap-based pair selection.',
-			'Prediction' - 'New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric applied to the learned cluster members.',
-			'Tie-breaking' - 'When two candidate merges have the same distance, the implementation deterministically prefers the smallest node-id pair and orders the final clusters by minimum training example id.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``agglomerative_clusterer(Encoders, Clusters, Prototypes, Options, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Clusters`` stores the learned cluster members, ``Prototypes`` stores average vectors for display and export metadata, ``Options`` stores the effective training options, and ``Diagnostics`` stores training metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kcenters, kmeans, kmedoids]
 	]).
 

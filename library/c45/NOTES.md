@@ -33,8 +33,8 @@ decision tree from a dataset, optionally prune it, using it to make
 predictions, and exporting it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
-protocol from the `classification_protocols` library. See `test_files` directory
-for examples.
+protocol from the `classification_protocols` library. See `test_files`
+directory for examples.
 
 
 API documentation
@@ -83,6 +83,20 @@ Implemented features
   helps reduce overfitting and improve generalization
 - Export of learned decision trees as predicate clauses
 - Pretty-printing of learned decision trees
+
+
+Learned tree representation
+---------------------------
+
+For discrete attributes, the learned decision tree is represented as
+`leaf(Class)` for leaf nodes and `tree(Attribute, Subtrees)` for internal
+nodes with discrete attributes, where `Subtrees` is a list of `Value-Subtree`
+pairs.
+
+For continuous (numeric) attributes, the tree uses binary threshold splits
+represented as `tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`
+where `LeftSubtree` corresponds to values `=< Threshold` and `RightSubtree`
+to values `> Threshold`.
 
 
 Limitations

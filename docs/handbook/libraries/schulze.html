@@ -228,6 +228,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#strongest-paths">Strongest paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics-syntax">Diagnostics syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ranker-representation">Ranker representation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="sequential_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code></a></li>
@@ -377,6 +379,34 @@ their semantics. The <code class="docutils literal notranslate"><span class="pre
 opponents that each item beats in the final Schulze relation, while
 <code class="docutils literal notranslate"><span class="pre">strongest_paths/2</span></code> exposes the underlying pairwise path strengths
 used to derive that relation.</p>
+</section>
+<section id="diagnostics-syntax">
+<h2>Diagnostics syntax<a class="headerlink" href="#diagnostics-syntax" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns a list of metadata terms with
+the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[
+    model(schulze),
+    options(<span class="nv">Options</span>),
+    strongest_paths(<span class="nv">StrongestPaths</span>),
+    dataset_summary(<span class="nv">DatasetSummary</span>)
+]
+</pre></div>
+</div>
+</section>
+<section id="ranker-representation">
+<h2>Ranker representation<a class="headerlink" href="#ranker-representation" title="Link to this heading"></a></h2>
+<p>The learned ranker is represented by a compound term of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>schulze_ranker(<span class="nv">Items</span>, <span class="nv">Scores</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Items</span></code>: List of ranked items.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Scores</span></code>: List of <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: List of metadata terms, including the effective
+<code class="docutils literal notranslate"><span class="pre">victory_strength/1</span></code> option, the labeled strongest paths, and the
+dataset summary.</p></li>
+</ul>
 </section>
 </section>
 

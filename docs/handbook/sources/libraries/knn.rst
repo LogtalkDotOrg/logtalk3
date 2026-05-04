@@ -139,7 +139,7 @@ The following options can be passed to the ``predict/4`` and
 - ``weight_scheme(Scheme)``: Weighting scheme for neighbor votes.
   Options: ``uniform`` (default), ``distance``, ``gaussian``
 
-Classifier Representation
+Classifier representation
 -------------------------
 
 The learned classifier is represented as a compound term:

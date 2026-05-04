@@ -19,9 +19,11 @@ ________________________________________________________________________
 
 
 `dbscan`
-===========
+========
 
-DBSCAN clusterer.
+DBSCAN clusterer. Uses deterministic density-based clustering based on
+epsilon neighborhoods and minimum point counts. Supports continuous
+attributes only.
 
 The library implements the `clusterer_protocol` defined in the
 `clustering_protocols` library. It provides predicates for learning a
@@ -69,7 +71,7 @@ Features
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
 - **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
-- **Noise Detection**: New instances outside all learned core neighborhoods are assigned to the atom `noise`.
+- **Reachable-Core Prediction**: New instances are assigned to the cluster of the nearest reachable core point within the learned epsilon radius; otherwise the atom `noise` is returned.
 - **Portable Export**: Learned clusterers can be exported as clauses or files and reused later.
 
 
@@ -85,7 +87,7 @@ The following options can be passed to the `learn/3` predicate:
 - `pivot_scoring(PivotScoring)`: Metric-tree pivot scoring strategy. Options: `heuristic` (default, single-pass dispersion scoring with one final sort) or `exact` (more expensive gap-and-range scoring that sorts each candidate profile).
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the

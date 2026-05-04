@@ -306,7 +306,9 @@
   <section id="cusum">
 <span id="library-cusum"></span><h1><code class="docutils literal notranslate"><span class="pre">cusum</span></code><a class="headerlink" href="#cusum" title="Link to this heading"></a></h1>
 <p>CUSUM (Cumulative Sum Control Chart) anomaly detector for continuous
-sequence-like datasets.</p>
+sequence-like datasets. This is a statistical anomaly-detection method
+based on a two-sided CUSUM control chart. Declared continuous attributes
+are interpreted as ordered monitoring steps.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a detector from a
 continuous dataset, computes anomaly scores for new instances, predicts

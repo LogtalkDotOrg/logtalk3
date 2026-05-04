@@ -113,7 +113,7 @@ needing to access the original training dataset.
    Class = ...
    ...
 
-Classifier Representation
+Classifier representation
 -------------------------
 
 The learned classifier is represented as a compound term:

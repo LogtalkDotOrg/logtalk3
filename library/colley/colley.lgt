@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-05-04,
 		comment is 'Colley pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by solving the Colley linear system built from aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Builds the Colley coefficient matrix with diagonal entries ``2 + games_i`` and off-diagonal entries ``-games_ij``, then solves the linear system ``C r = b`` using deterministic Gaussian elimination with partial pivoting and residual validation.',
-			'Score semantics' - 'Learned ratings are conservative scores in the interval ``[0,1]`` centered around ``0.5`` when evidence is weak or perfectly balanced.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that learned rankings remain globally comparable across all ranked items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``colley_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland, rank_centrality]
 	]).
 

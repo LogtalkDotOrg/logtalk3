@@ -87,3 +87,35 @@ Options
 
 The current ``learn/3`` implementation does not define any user options
 beyond the default empty list. Non-empty options lists are rejected.
+
+Diagnostics syntax
+------------------
+
+The ``diagnostics/2`` predicate returns a list of metadata terms with
+the form:
+
+::
+
+   [
+       model(thurstone_mosteller),
+       options(Options),
+       fitting(weighted_least_squares_case_v),
+       continuity_correction(0.5),
+       dataset_summary(DatasetSummary)
+   ]
+
+Ranker representation
+---------------------
+
+The learned ranker is represented by a compound term of the form:
+
+::
+
+   thurstone_mosteller_ranker(Items, Scores, Diagnostics)
+
+Where:
+
+- ``Items``: List of ranked items.
+- ``Scores``: List of ``Item-Score`` pairs.
+- ``Diagnostics``: List of metadata terms, including the fitting method,
+  continuity correction, and dataset summary.

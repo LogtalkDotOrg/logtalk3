@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -363,19 +363,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses deterministic bottom-up agglomerative clustering and stops when the requested number of clusters is reached.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.</p></li>
-<li><p>Linkage strategies: Supports <code class="docutils literal notranslate"><span class="pre">single</span></code>, <code class="docutils literal notranslate"><span class="pre">complete</span></code>, and <code class="docutils literal notranslate"><span class="pre">average</span></code> linkage strategies.</p></li>
-<li><p>Distance metrics: Supports Euclidean and Manhattan distances.</p></li>
-<li><p>Diagnostics: Exposes training metadata including example count, merge count, initial pair count, maximum heap size, stale-pair discard count, prediction strategy, and deterministic heap-based pair selection.</p></li>
-<li><p>Prediction: New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric applied to the learned cluster members.</p></li>
-<li><p>Tie-breaking: When two candidate merges have the same distance, the implementation deterministically prefers the smallest node-id pair and orders the final clusters by minimum training example id.</p></li>
-<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">agglomerative_clusterer(Encoders,</span> <span class="pre">Clusters,</span> <span class="pre">Prototypes,</span> <span class="pre">Options,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> stores the learned cluster members, <code class="docutils literal notranslate"><span class="pre">Prototypes</span></code> stores average vectors for display and export metadata, <code class="docutils literal notranslate"><span class="pre">Options</span></code> stores the effective training options, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

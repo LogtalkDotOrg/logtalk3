@@ -82,7 +82,7 @@ The following options can be passed to the `learn/3` predicate:
 - `random_seed(N)`: Positive integer seed used by the portable `fast_random(xoshiro128pp)` pseudo-random generator when drawing bootstrap samples and random feature subsets. Using the same seed with the same dataset and options reproduces the same learned classifier (default: `1357911`).
 
 
-Classifier Representation
+Classifier representation
 -------------------------
 
 The learned classifier is represented as a compound term:

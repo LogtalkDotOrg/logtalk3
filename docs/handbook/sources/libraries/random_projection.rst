@@ -114,14 +114,15 @@ functor chosen by the implementation and arity 3. For example:
 
 ::
 
-   random_projection_reducer(Encoders, Components, Options)
+   random_projection_reducer(Encoders, Components, Diagnostics)
 
 Where:
 
 - ``Encoders``: List of continuous attribute encoders storing attribute
   name, mean, and scale.
 - ``Components``: List of sampled projection vectors in component order.
-- ``Options``: Effective training options used to learn the reducer.
+- ``Diagnostics``: Learned reducer metadata including the effective
+  training options and reproducibility details.
 
 When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
 this reducer term is serialized directly as the single argument of the

@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-01</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -361,17 +361,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: This is a statistical anomaly-detection method based on a two-sided CUSUM control chart. Declared continuous attributes are interpreted as ordered monitoring steps. For each known step value <code class="docutils literal notranslate"><span class="pre">x_t</span></code>, the detector computes the standardized deviation <code class="docutils literal notranslate"><span class="pre">z_t</span> <span class="pre">=</span> <span class="pre">(x_t</span> <span class="pre">-</span> <span class="pre">mu_t)</span> <span class="pre">/</span> <span class="pre">sigma_t</span></code> and then updates the one-sided cumulative sums <code class="docutils literal notranslate"><span class="pre">C+_t</span> <span class="pre">=</span> <span class="pre">max(0,</span> <span class="pre">C+_(t-1)</span> <span class="pre">+</span> <span class="pre">z_t</span> <span class="pre">-</span> <span class="pre">k)</span></code> and <code class="docutils literal notranslate"><span class="pre">C-_t</span> <span class="pre">=</span> <span class="pre">max(0,</span> <span class="pre">C-_(t-1)</span> <span class="pre">-</span> <span class="pre">z_t</span> <span class="pre">-</span> <span class="pre">k)</span></code>, where <code class="docutils literal notranslate"><span class="pre">k</span></code> is the learn-time allowance. The raw anomaly score is the maximum excursion over the positive and negative cumulative sums.</p></li>
-<li><p>Baseline training selection: The learn-time <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> option declares which class labels are admissible for baseline fitting. The default is <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>. The <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> option then controls how non-baseline examples are handled: <code class="docutils literal notranslate"><span class="pre">reject</span></code> throws an error if any non-baseline example is found, while <code class="docutils literal notranslate"><span class="pre">filter</span></code> removes those examples before fitting the baseline statistics.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing values are ignored when fitting per-step statistics and skipped during scoring. During scoring, queries must contain at least one known value. The learned detector stores a precomputed attribute schema so that scoring reuses the same step ordering without rebuilding it on every call.</p></li>
-<li><p>Predict-time options: The <code class="docutils literal notranslate"><span class="pre">allowance/1</span></code> and <code class="docutils literal notranslate"><span class="pre">decision_interval/1</span></code> options are learn-time options. <code class="docutils literal notranslate"><span class="pre">predict/4</span></code> always uses the values stored in the learned detector. If these options are passed to <code class="docutils literal notranslate"><span class="pre">predict/4</span></code>, they are ignored. Only <code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> can be overridden at predict time.</p></li>
-<li><p>Score normalization: The raw CUSUM excursion is mapped to the interval <code class="docutils literal notranslate"><span class="pre">[0.0,1.0)</span></code> using <code class="docutils literal notranslate"><span class="pre">Score</span> <span class="pre">=</span> <span class="pre">Raw</span> <span class="pre">/</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">Raw)</span></code>. The default threshold <code class="docutils literal notranslate"><span class="pre">0.8333333333333334</span></code> corresponds to the classical decision interval <code class="docutils literal notranslate"><span class="pre">5.0</span></code>.</p></li>
-<li><p>Detector representation: The learned detector is represented as a <code class="docutils literal notranslate"><span class="pre">cusum_detector(TrainingDataset,</span> <span class="pre">AttributeSchema,</span> <span class="pre">Encoders,</span> <span class="pre">Diagnostics)</span></code> term where <code class="docutils literal notranslate"><span class="pre">AttributeSchema</span></code> stores the precomputed attribute ordering and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores the learned metadata, including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

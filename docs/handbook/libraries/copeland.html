@@ -314,7 +314,9 @@
              
   <section id="copeland">
 <span id="library-copeland"></span><h1><code class="docutils literal notranslate"><span class="pre">copeland</span></code><a class="headerlink" href="#copeland" title="Link to this heading"></a></h1>
-<p>Copeland pairwise preference ranker.</p>
+<p>Copeland pairwise preference ranker. Ranks each item by its number of
+matchup wins minus losses after aggregating weighted pairwise
+preferences per observed opponent pair.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preference judgments, using it to order candidate
@@ -322,7 +324,10 @@ items, and exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The training dataset must declare each ranked item once, use
+only declared items in preferences, assign positive weights to
+preferences between distinct items, and induce a connected undirected
+comparison graph.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -355,7 +360,8 @@ predicates.</p></li>
 integers, because each observed aggregated matchup contributes exactly
 <code class="docutils literal notranslate"><span class="pre">+1</span></code>, <code class="docutils literal notranslate"><span class="pre">-1</span></code>, or <code class="docutils literal notranslate"><span class="pre">0</span></code> to an item’s total score.</p></li>
 <li><p><strong>Deterministic Ranking</strong>: Orders candidate items by learned score
-with deterministic tie-breaking.</p></li>
+with deterministic tie-breaking using the standard term order of the
+item identifiers after sorting by descending score.</p></li>
 <li><p><strong>Strict Dataset Validation</strong>: Rejects duplicate items, undeclared
 items in preferences, self-preferences, non-positive weights, and
 disconnected comparison graphs.</p></li>

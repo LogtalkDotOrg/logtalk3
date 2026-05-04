@@ -112,7 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -305,7 +305,9 @@
              
   <section id="dbscan">
 <span id="library-dbscan"></span><h1><code class="docutils literal notranslate"><span class="pre">dbscan</span></code><a class="headerlink" href="#dbscan" title="Link to this heading"></a></h1>
-<p>DBSCAN clusterer.</p>
+<p>DBSCAN clusterer. Uses deterministic density-based clustering based on
+epsilon neighborhoods and minimum point counts. Supports continuous
+attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -356,8 +358,9 @@ attributes.</p></li>
 distances.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
-<li><p><strong>Noise Detection</strong>: New instances outside all learned core
-neighborhoods are assigned to the atom <code class="docutils literal notranslate"><span class="pre">noise</span></code>.</p></li>
+<li><p><strong>Reachable-Core Prediction</strong>: New instances are assigned to the
+cluster of the nearest reachable core point within the learned epsilon
+radius; otherwise the atom <code class="docutils literal notranslate"><span class="pre">noise</span></code> is returned.</p></li>
 <li><p><strong>Portable Export</strong>: Learned clusterers can be exported as clauses or
 files and reused later.</p></li>
 </ul>
@@ -381,7 +384,7 @@ that sorts each candidate profile).</p></li>
 </ul>
 </section>
 <section id="clusterer-representation">
-<h2>Clusterer Representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
+<h2>Clusterer representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
 <p>The learned clusterer is represented as a compound term with the functor
 chosen by the user when exporting the clusterer and arity 4. For
 example:</p>

@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-05-04,
 		comment is 'Borda grouped-ranking ranker. Learns one deterministic score per item from a dataset object implementing the ``ranking_dataset_protocol`` protocol by summing per-group Borda points and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Borda ranks each item by summing, across groups, the number of same-group items with strictly lower relevance.',
-			'Score semantics' - 'Within each group, an item receives one point for every same-group item with strictly lower relevance when using ``tie_scoring(standard)`` and the average of the minimum and maximum tied positions when using ``tie_scoring(fractional)``.',
-			'Missing relevance semantics' - 'Missing relevance facts are treated as zero by default using the ``missing_relevance(zero)`` option and can be rejected using ``missing_relevance(error)``.',
-			'Tie-breaking' - 'Ranking ties are broken deterministically using the standard term order of the item identifiers after sorting by descending score.',
-			'Dataset requirements' - 'The training dataset must declare each group once, use only declared groups and items in relevance judgments, and assign non-negative integer relevance values.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``borda_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.'
-		],
 		see_also is [ranking_dataset_protocol, ranker_protocol, copeland]
 	]).
 

@@ -15,7 +15,7 @@ Closed sequential pattern miner for sequence datasets using closure-aware projec
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-29
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,11 +28,7 @@ Closed sequential pattern miner for sequence datasets using closure-aware projec
 |    :ref:`list <list/0>`
 
 | **Remarks:**
-
-   - Algorithm: Builds closed frequent sequential patterns by recursive projected-database growth, using projected-database-equivalence backward pruning to skip equivalent branches before recursion together with an online same-support closed frontier that merges branch results during the search without a final post-filter.
-   - Dataset handling: Requires a dataset implementing ``sequence_dataset_protocol`` with sequences represented as ordered lists of canonical sorted itemsets over a declared item domain.
-   - Support thresholds: Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.
-   - Pattern miner representation: The mined result is represented by default as ``clo_span_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores closed ``sequence_pattern(Pattern, SupportCount)`` terms ordered first by total item count and then lexicographically.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`pattern_miner_protocol/0::check_pattern_miner/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::diagnostic/2`  :ref:`pattern_miner_protocol/0::diagnostics/2`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`pattern_miner_protocol/0::mine/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::pattern_miner_options/2`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`pattern_miner_protocol/0::valid_pattern_miner/1`  

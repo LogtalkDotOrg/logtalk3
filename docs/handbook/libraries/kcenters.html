@@ -163,7 +163,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clusterer-representation">Clusterer representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -345,6 +345,8 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes.</p></li>
+<li><p><strong>Farthest-First Center Selection</strong>: Uses a deterministic
+farthest-first heuristic to choose centers.</p></li>
 <li><p><strong>Deterministic Initialization</strong>: Supports <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
 deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization.</p></li>
 <li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
@@ -383,7 +385,7 @@ attributes before clustering. Options: <code class="docutils literal notranslate
 </ul>
 </section>
 <section id="clusterer-representation">
-<h2>Clusterer Representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
+<h2>Clusterer representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
 <p>The learned clusterer is represented as a compound term with the functor
 chosen by the user when exporting the clusterer and arity 4. For
 example:</p>

@@ -131,7 +131,7 @@ The following options can be passed to the ``predict/4`` and
 - ``distance_metric(Metric)``: Distance metric to use. Options:
   ``euclidean`` (default), ``manhattan``, ``cosine``
 
-Classifier Representation
+Classifier representation
 -------------------------
 
 The learned classifier is represented as a compound term:

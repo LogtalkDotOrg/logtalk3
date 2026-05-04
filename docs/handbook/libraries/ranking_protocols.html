@@ -214,6 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="rank_centrality.html"><code class="docutils literal notranslate"><span class="pre">rank_centrality</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ranked_pairs.html"><code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-requirements">Protocol requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shared-categories">Shared categories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#export-header-format">Export header format</a></li>
@@ -314,6 +315,33 @@ as objects implementing the <code class="docutils literal notranslate"><span cla
 <code class="docutils literal notranslate"><span class="pre">ranking_dataset_protocol</span></code> protocol.</p>
 <p>This library also provides reusable test datasets and smoke tests for
 the shared ranking-family contracts.</p>
+<section id="protocol-requirements">
+<h2>Protocol requirements<a class="headerlink" href="#protocol-requirements" title="Link to this heading"></a></h2>
+<p>The dataset protocols defined by this library impose the following
+semantic and validity expectations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> datasets should declare each
+item once, use only declared items in preferences, assign positive
+weights to preferences between distinct items, and may still need
+stronger conditions such as a strongly connected directed win graph
+for algorithms like Bradley-Terry that require finite
+maximum-likelihood estimates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pairwise_measurement_dataset_protocol</span></code> datasets should declare each
+item once, use only declared items in measurements, assign numeric
+measurement values, and assign positive weights to measurements
+between distinct items. Each
+<code class="docutils literal notranslate"><span class="pre">measurement(Item1,</span> <span class="pre">Item2,</span> <span class="pre">Value,</span> <span class="pre">Weight)</span></code> fact denotes a weighted
+signed scalar observation on the oriented edge <code class="docutils literal notranslate"><span class="pre">Item1</span> <span class="pre">-&gt;</span> <span class="pre">Item2</span></code>,
+where positive values favor <code class="docutils literal notranslate"><span class="pre">Item1</span></code>, negative values favor
+<code class="docutils literal notranslate"><span class="pre">Item2</span></code>, and zero denotes a neutral observation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_pairwise_ranking_dataset_protocol</span></code> datasets should declare
+each item and period once, use only declared items and periods in
+games, keep game participants distinct, and restrict scores to the set
+<code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0}</span></code>. A fact <code class="docutils literal notranslate"><span class="pre">game(Period,</span> <span class="pre">Item1,</span> <span class="pre">Item2,</span> <span class="pre">Score)</span></code>
+records the observed result for <code class="docutils literal notranslate"><span class="pre">Item1</span></code> against <code class="docutils literal notranslate"><span class="pre">Item2</span></code>, with the
+score for <code class="docutils literal notranslate"><span class="pre">Item2</span></code> implicitly equal to <code class="docutils literal notranslate"><span class="pre">1.0</span> <span class="pre">-</span> <span class="pre">Score</span></code>.</p></li>
+</ul>
+</section>
 <section id="shared-categories">
 <h2>Shared categories<a class="headerlink" href="#shared-categories" title="Link to this heading"></a></h2>
 <p>The library includes a small family of reusable categories intended to

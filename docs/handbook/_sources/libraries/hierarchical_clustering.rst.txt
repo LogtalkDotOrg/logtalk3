@@ -89,7 +89,7 @@ The following options can be passed to the ``learn/3`` predicate:
 - ``feature_scaling(FeatureScaling)``: Whether to standardize continuous
   attributes before clustering. Options: ``on`` (default) or ``off``.
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the functor

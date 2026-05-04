@@ -111,14 +111,14 @@ Dimension reducer representation
 The learned dimension reducer is represented by a compound term with the
 functor chosen by the implementation and arity 4. For example:
 
-	pca_reducer(Encoders, Components, ExplainedVariances, Options)
+	pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics)
 
 Where:
 
 - `Encoders`: List of continuous attribute encoders storing attribute name, mean, and scale.
 - `Components`: List of principal direction vectors in descending variance order.
 - `ExplainedVariances`: List of eigenvalues matching the extracted components.
-- `Options`: Effective training options used to learn the reducer.
+- `Diagnostics`: Learned reducer metadata including the effective training options and learned model details.
 
 When exported using `export_to_clauses/4` or
 `export_to_file/4`, this reducer term is serialized directly

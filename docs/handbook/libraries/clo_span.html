@@ -312,7 +312,11 @@ the <code class="docutils literal notranslate"><span class="pre">pattern_mining_
 sequential patterns directly using closure-aware projected-database
 search with explicit projected-database-equivalence backward pruning
 that skips equivalent branches before recursion, together with a
-same-support closed frontier.</p>
+same-support closed frontier that merges branch results during the
+search without a final post-filter.</p>
+<p>Requires a dataset implementing <code class="docutils literal notranslate"><span class="pre">sequence_dataset_protocol</span></code> with
+sequences represented as ordered lists of canonical sorted itemsets over
+a declared item domain.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -346,7 +350,8 @@ output.</p></li>
 <li><p><strong>Canonical Sequences</strong>: Uses the shared sequential validation logic
 from the support library.</p></li>
 <li><p><strong>Flexible Support Thresholds</strong>: Supports relative minimum support and
-absolute minimum support count.</p></li>
+absolute minimum support count. When both are given, the
+absolute-count threshold takes precedence.</p></li>
 <li><p><strong>Model Export</strong>: Closed pattern collections can be exported as
 predicate clauses or written to a file.</p></li>
 </ul>

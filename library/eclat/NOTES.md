@@ -21,12 +21,19 @@ ________________________________________________________________________
 `eclat`
 ========
 
-Eclat frequent itemset miner for transaction datasets. The library
-depends on the `frequent_pattern_mining_protocols` support library,
-implements the generic `pattern_miner_protocol` defined in the
-`pattern_mining_protocols` core library, and mines frequent itemsets
-using a portable vertical tidset representation and depth-first
-recursion.
+Eclat frequent itemset miner for transaction datasets. Normalizes dataset
+transaction identifiers to internal ascending ordinals, builds vertical
+tidsets for frequent singleton items, and recursively extends them by
+lexicographic suffix joins and tidset intersections.
+
+This library depends on the `frequent_pattern_mining_protocols` support
+library, implements the generic `pattern_miner_protocol` defined in the
+`pattern_mining_protocols` core library.
+
+Requires a dataset implementing `transaction_dataset_protocol` with
+transactions represented as canonical sorted lists of unique declared
+items. External transaction identifiers are treated as opaque metadata
+and normalized to internal ordinals before tidset construction.
 
 
 API documentation
@@ -56,9 +63,10 @@ Features
 --------
 
 - **Vertical Tidsets**: Represents each frequent extension by the sorted list of transaction identifiers containing it.
+- **Transaction Ordinal Normalization**: Treats external transaction identifiers as opaque metadata and normalizes them to internal ascending ordinals before building vertical tidsets.
 - **Depth-First Mining**: Extends frequent prefixes recursively using tidset intersections.
 - **Canonical Transactions**: Validates that transactions are sorted, duplicate-free, and restricted to declared items.
-- **Flexible Support Thresholds**: Supports relative minimum support and absolute minimum support count.
+- **Flexible Support Thresholds**: Supports relative minimum support and absolute minimum support count. When both are given, the absolute-count threshold takes precedence.
 - **Model Export**: Mined pattern collections can be exported as predicate clauses or written to a file.
 
 

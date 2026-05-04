@@ -21,7 +21,9 @@ ________________________________________________________________________
 `copeland`
 ===========
 
-Copeland pairwise preference ranker.
+Copeland pairwise preference ranker. Ranks each item by its number of matchup
+wins minus losses after aggregating weighted pairwise preferences per observed
+opponent pair.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +32,10 @@ exporting it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `pairwise_ranking_dataset_protocol` protocol from the `ranking_protocols`
-library. See the `test_datasets` directory for examples.
+library. See the `test_datasets` directory for examples. The training
+dataset must declare each ranked item once, use only declared items in
+preferences, assign positive weights to preferences between distinct items,
+and induce a connected undirected comparison graph.
 
 
 API documentation
@@ -67,7 +72,8 @@ Features
 	because each observed aggregated matchup contributes exactly `+1`, `-1`, or
 	`0` to an item's total score.
 - **Deterministic Ranking**: Orders candidate items by learned score with
-	deterministic tie-breaking.
+	deterministic tie-breaking using the standard term order of the item
+    identifiers after sorting by descending score.
 - **Strict Dataset Validation**: Rejects duplicate items, undeclared items in
 	preferences, self-preferences, non-positive weights, and disconnected
 	comparison graphs.

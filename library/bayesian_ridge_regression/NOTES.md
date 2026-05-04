@@ -24,8 +24,8 @@ ________________________________________________________________________
 Bayesian ridge regression regressor supporting continuous and mixed-feature
 datasets. The library implements the `regressor_protocol` defined in the
 `regression_protocols` library and learns a Bayesian linear model using
-evidence maximization for the global weight and noise precisions together with
-Gamma hyperpriors over both precision terms.
+evidence maximization for the global weight and noise precisions together
+with Gamma hyperpriors over both precision terms.
 
 
 API documentation
@@ -58,12 +58,13 @@ To run the reference timing and fit benchmarks, load the `tester_performance.lgt
 Features
 --------
 
-- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding.
+- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding from the declared dataset attribute values.
 - **Automatic Hyperparameter Tuning**: Learns the global coefficient precision and observation-noise precision using MacKay-style evidence maximization with configurable Gamma hyperpriors instead of a user-supplied ridge penalty.
 - **Posterior Uncertainty**: Exposes predictive Gaussian distributions using coefficient posterior uncertainty plus observation noise, matching the usual scikit-learn BayesianRidge treatment where the intercept is not probabilistic. Posterior coefficient variances are also exposed.
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling before fitting and prediction.
-- **Stable Posterior Solves**: The evidence-maximization loop works from centered sufficient statistics, computes the effective degrees of freedom from a one-time eigenspectrum of the smaller centered Gram surrogate, and switches to a sample-space Cholesky solve when the active encoded feature count exceeds the row count. The full posterior covariance is materialized only after the final hyperparameters are selected.
-- **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Stable Posterior Solves**: Evidence-maximization updates clamp the learned weight and noise precisions to configurable `precision_bounds(Min, Max)` to avoid degenerate zero or infinite precision estimates. Posterior solves use Cholesky factorization of positive-definite precision matrices, diagnostics report any diagonal jitter applied when factorization retries are needed, and the evidence-maximization loop computes the effective degrees of freedom from a one-time eigenspectrum of the centered Gram surrogate while still switching to a sample-space solve when the active encoded feature count exceeds the number of training rows.
+- **Missing Values**: Missing numeric and categorical values represented using anonymous variables are encoded using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Zero-Variance Features**: Encoded columns with zero variance are excluded from posterior updates and assigned zero mean and zero posterior variance.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, Cholesky stabilization attempts and applied jitter, Gamma hyperpriors for both precision terms, effective precision bounds, learned precisions, learned noise variance, final log evidence, the full log-evidence score trace, active feature count, posterior variances, intercept treatment, convergence metric and status, encoded feature count, and effective options.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.

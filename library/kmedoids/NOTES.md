@@ -101,7 +101,7 @@ The `diagnostics/2` predicate returns a list containing:
 - `options(Options)`
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the

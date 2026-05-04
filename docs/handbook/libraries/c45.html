@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implemented-features">Implemented features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learned-tree-representation">Learned tree representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
@@ -362,6 +363,18 @@ helps reduce overfitting and improve generalization</p></li>
 <li><p>Export of learned decision trees as predicate clauses</p></li>
 <li><p>Pretty-printing of learned decision trees</p></li>
 </ul>
+</section>
+<section id="learned-tree-representation">
+<h2>Learned tree representation<a class="headerlink" href="#learned-tree-representation" title="Link to this heading"></a></h2>
+<p>For discrete attributes, the learned decision tree is represented as
+<code class="docutils literal notranslate"><span class="pre">leaf(Class)</span></code> for leaf nodes and <code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">Subtrees)</span></code> for
+internal nodes with discrete attributes, where <code class="docutils literal notranslate"><span class="pre">Subtrees</span></code> is a list of
+<code class="docutils literal notranslate"><span class="pre">Value-Subtree</span></code> pairs.</p>
+<p>For continuous (numeric) attributes, the tree uses binary threshold
+splits represented as
+<code class="docutils literal notranslate"><span class="pre">tree(Attribute,</span> <span class="pre">threshold(Threshold),</span> <span class="pre">LeftSubtree,</span> <span class="pre">RightSubtree)</span></code>
+where <code class="docutils literal notranslate"><span class="pre">LeftSubtree</span></code> corresponds to values <code class="docutils literal notranslate"><span class="pre">=&lt;</span> <span class="pre">Threshold</span></code> and
+<code class="docutils literal notranslate"><span class="pre">RightSubtree</span></code> to values <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">Threshold</span></code>.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

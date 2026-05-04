@@ -62,6 +62,7 @@ Features
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding.
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Exact Bayesian Regression**: Uses exact Gaussian process regression with a mixed covariance kernel combining an automatic-relevance-determination squared-exponential component for continuous encoded features and a field-wise categorical overlap component for categorical attributes.
 - **Automatic Hyperparameter Selection**: By default performs deterministic log-marginal-likelihood optimization of the continuous-feature length scales, categorical mismatch penalties, signal variance, and noise variance. The `length_scale/1`, `categorical_penalty/1`, `signal_variance/1`, and `noise_variance/1` options also accept `auto` when optimization is disabled.
 - **Uncertainty Quantification**: Exposes posterior predictive Gaussian distributions for new instances using the `predict_distribution/3` predicate.

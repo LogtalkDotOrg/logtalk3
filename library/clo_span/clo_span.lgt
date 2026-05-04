@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-05-04,
 		comment is 'Closed sequential pattern miner for sequence datasets using closure-aware projected-database search.',
-		remarks is [
-			'Algorithm' - 'Builds closed frequent sequential patterns by recursive projected-database growth, using projected-database-equivalence backward pruning to skip equivalent branches before recursion together with an online same-support closed frontier that merges branch results during the search without a final post-filter.',
-			'Dataset handling' - 'Requires a dataset implementing ``sequence_dataset_protocol`` with sequences represented as ordered lists of canonical sorted itemsets over a declared item domain.',
-			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
-			'Pattern miner representation' - 'The mined result is represented by default as ``clo_span_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores closed ``sequence_pattern(Pattern, SupportCount)`` terms ordered first by total item count and then lexicographically.'
-		],
 		see_also is [pattern_miner_protocol, sequence_dataset_protocol, prefix_span, gsp, spade]
 	]).
 

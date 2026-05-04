@@ -24,8 +24,11 @@ ________________________________________________________________________
 AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base
 learners. Implements the SAMME (Stagewise Additive Modeling using a
 Multi-class Exponential loss function) variant, which supports multi-class
-classification. Builds an ensemble of weighted decision trees where each
-subsequent tree focuses on the examples misclassified by previous trees.
+classification by adjusting the weight update formula to account for the
+number of classes. Builds an ensemble of weighted decision trees where each
+subsequent tree focuses on the examples misclassified by previous trees:
+after each iteration, the weights of misclassified examples are increased
+so that subsequent learners focus more on difficult cases.
 
 The library implements the `classifier_protocol` defined in the
 `classification_protocols` library. It provides predicates for learning an
@@ -82,7 +85,7 @@ The following options can be passed to the `learn/3` predicate:
 - `number_of_estimators(N)`: Number of boosting rounds / weak learners (default: 10)
 
 
-Classifier Representation
+Classifier representation
 -------------------------
 
 The learned classifier is represented as a compound term:

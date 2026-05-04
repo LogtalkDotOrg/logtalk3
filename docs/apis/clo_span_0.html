@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-29</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -358,15 +358,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds closed frequent sequential patterns by recursive projected-database growth, using projected-database-equivalence backward pruning to skip equivalent branches before recursion together with an online same-support closed frontier that merges branch results during the search without a final post-filter.</p></li>
-<li><p>Dataset handling: Requires a dataset implementing <code class="docutils literal notranslate"><span class="pre">sequence_dataset_protocol</span></code> with sequences represented as ordered lists of canonical sorted itemsets over a declared item domain.</p></li>
-<li><p>Support thresholds: Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.</p></li>
-<li><p>Pattern miner representation: The mined result is represented by default as <code class="docutils literal notranslate"><span class="pre">clo_span_pattern_miner(ItemDomain,</span> <span class="pre">Patterns,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Patterns</span></code> stores closed <code class="docutils literal notranslate"><span class="pre">sequence_pattern(Pattern,</span> <span class="pre">SupportCount)</span></code> terms ordered first by total item count and then lexicographically.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

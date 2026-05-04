@@ -314,14 +314,18 @@
              
   <section id="borda">
 <span id="library-borda"></span><h1><code class="docutils literal notranslate"><span class="pre">borda</span></code><a class="headerlink" href="#borda" title="Link to this heading"></a></h1>
-<p>Borda grouped-ranking ranker.</p>
+<p>Borda grouped-ranking ranker. Ranks each item by summing, across groups,
+the number of same-group items with strictly lower relevance.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from grouped relevance judgments, using it to order candidate
 items, and exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">ranking_dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code>
-library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples.</p>
+library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples. ‘The training
+dataset must declare each group once, use only declared groups and items
+in relevance judgments, and assign non-negative integer relevance
+values.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -354,9 +358,17 @@ link in a web browser.</p>
 from grouped ranking or relevance-judgment datasets.</p></li>
 <li><p><strong>Portable Borda Scoring</strong>: Computes scores using only non-negative
 integer grouped relevance judgments and standard Logtalk library
-predicates.</p></li>
+predicates. Within each group, an item receives one point for every
+same-group item with strictly lower relevance when using
+<code class="docutils literal notranslate"><span class="pre">tie_scoring(standard)</span></code> and the average of the minimum and maximum
+tied positions when using <code class="docutils literal notranslate"><span class="pre">tie_scoring(fractional)</span></code>.</p></li>
 <li><p><strong>Deterministic Ranking</strong>: Orders candidate items by learned score
-with deterministic tie-breaking.</p></li>
+with deterministic tie-breaking. Ranking ties are broken
+deterministically using the standard term order of the item
+identifiers after sorting by descending score.</p></li>
+<li><p><strong>Missing relevance semantics</strong>: Missing relevance facts are treated
+as zero by default using the <code class="docutils literal notranslate"><span class="pre">missing_relevance(zero)</span></code> option and
+can be rejected using <code class="docutils literal notranslate"><span class="pre">missing_relevance(error)</span></code>.</p></li>
 <li><p><strong>Strict Dataset Validation</strong>: Rejects duplicate groups, duplicate
 items within a group, undeclared groups or items in relevance
 judgments, and non-integer or negative relevance values.</p></li>

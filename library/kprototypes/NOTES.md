@@ -106,7 +106,7 @@ or more values are tied, the implementation deterministically keeps the
 first value in the declared attribute-values list.
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the

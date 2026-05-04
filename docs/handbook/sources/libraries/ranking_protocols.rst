@@ -14,6 +14,33 @@ as objects implementing the ``pairwise_ranking_dataset_protocol``,
 This library also provides reusable test datasets and smoke tests for
 the shared ranking-family contracts.
 
+Protocol requirements
+---------------------
+
+The dataset protocols defined by this library impose the following
+semantic and validity expectations:
+
+- ``pairwise_ranking_dataset_protocol`` datasets should declare each
+  item once, use only declared items in preferences, assign positive
+  weights to preferences between distinct items, and may still need
+  stronger conditions such as a strongly connected directed win graph
+  for algorithms like Bradley-Terry that require finite
+  maximum-likelihood estimates.
+- ``pairwise_measurement_dataset_protocol`` datasets should declare each
+  item once, use only declared items in measurements, assign numeric
+  measurement values, and assign positive weights to measurements
+  between distinct items. Each
+  ``measurement(Item1, Item2, Value, Weight)`` fact denotes a weighted
+  signed scalar observation on the oriented edge ``Item1 -> Item2``,
+  where positive values favor ``Item1``, negative values favor
+  ``Item2``, and zero denotes a neutral observation.
+- ``temporal_pairwise_ranking_dataset_protocol`` datasets should declare
+  each item and period once, use only declared items and periods in
+  games, keep game participants distinct, and restrict scores to the set
+  ``{0.0, 0.5, 1.0}``. A fact ``game(Period, Item1, Item2, Score)``
+  records the observed result for ``Item1`` against ``Item2``, with the
+  score for ``Item2`` implicitly equal to ``1.0 - Score``.
+
 Shared categories
 -----------------
 

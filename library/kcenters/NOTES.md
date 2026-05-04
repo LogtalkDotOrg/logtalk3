@@ -65,6 +65,7 @@ Features
 --------
 
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
+- **Farthest-First Center Selection**: Uses a deterministic farthest-first heuristic to choose centers.
 - **Deterministic Initialization**: Supports `first_k` and deterministic `spread` initialization.
 - **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
@@ -95,7 +96,7 @@ The `diagnostics/2` predicate returns a list containing:
 - `options(Options)`
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the

@@ -10,7 +10,12 @@ the ``pattern_mining_protocols`` core library, and mines closed frequent
 sequential patterns directly using closure-aware projected-database
 search with explicit projected-database-equivalence backward pruning
 that skips equivalent branches before recursion, together with a
-same-support closed frontier.
+same-support closed frontier that merges branch results during the
+search without a final post-filter.
+
+Requires a dataset implementing ``sequence_dataset_protocol`` with
+sequences represented as ordered lists of canonical sorted itemsets over
+a declared item domain.
 
 API documentation
 -----------------
@@ -50,7 +55,8 @@ Features
 - **Canonical Sequences**: Uses the shared sequential validation logic
   from the support library.
 - **Flexible Support Thresholds**: Supports relative minimum support and
-  absolute minimum support count.
+  absolute minimum support count. When both are given, the
+  absolute-count threshold takes precedence.
 - **Model Export**: Closed pattern collections can be exported as
   predicate clauses or written to a file.
 

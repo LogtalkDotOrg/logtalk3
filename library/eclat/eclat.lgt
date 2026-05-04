@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-05-04,
 		comment is 'Eclat frequent itemset miner for transaction datasets using portable vertical tidsets and depth-first recursive prefix extension.',
-		remarks is [
-			'Algorithm' - 'Normalizes dataset transaction identifiers to internal ascending ordinals, builds vertical tidsets for frequent singleton items, and recursively extends them by lexicographic suffix joins and tidset intersections.',
-			'Dataset handling' - 'Requires a dataset implementing ``transaction_dataset_protocol`` with transactions represented as canonical sorted lists of unique declared items. External transaction identifiers are treated as opaque metadata and normalized to internal ordinals before tidset construction.',
-			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
-			'Pattern miner representation' - 'The mined result is represented by default as ``eclat_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``itemset(Items, SupportCount)`` terms ordered first by pattern length and then lexicographically.'
-		],
 		see_also is [pattern_miner_protocol, transaction_dataset_protocol, apriori, fp_growth]
 	]).
 

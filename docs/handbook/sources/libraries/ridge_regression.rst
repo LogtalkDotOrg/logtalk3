@@ -52,6 +52,8 @@ Features
   feature column before applying the L2 penalty.
 - **Missing Values**: Missing numeric and categorical values are encoded
   using explicit missing-value indicator features.
+- **Unknown Values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Zero-Variance Features**: Encoded columns with zero variance are
   excluded from the direct solve and assigned zero coefficients in the
   learned regressor.

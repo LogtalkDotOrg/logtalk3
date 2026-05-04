@@ -57,11 +57,12 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Hierarchical Density Clustering**: Builds a mutual-reachability minimum spanning tree and extracts clusters by cutting strong gaps.
+- **Hierarchical Density Clustering**: Builds the mutual-reachability graph, computes a minimum spanning tree, derives the single-linkage hierarchy, condenses it using `minimum_cluster_size`, and selects clusters using `eom` or `leaf` selection.
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
-- **Leaf Cluster Extraction**: Uses a simplified `leaf` cluster selection method.
+- **Cluster Selection Methods**: Supports both `eom` and `leaf` cluster selection.
 - **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
+- **Reachability-Based Prediction**: New instances are assigned to the selected cluster with the nearest training point when the distance is within the learned cluster reachability threshold; otherwise the atom `noise` is returned.
 - **Noise Detection**: Points not assigned to any extracted cluster are retained as noise.
 - **Portable Export**: Learned clusterers can be exported as clauses or files and reused later.
 
@@ -73,12 +74,12 @@ The following options can be passed to the `learn/3` predicate:
 
 - `minimum_points(MinimumPoints)`: Minimum neighborhood size used when computing core distances and mutual reachability. Default is `2`.
 - `minimum_cluster_size(MinimumClusterSize)`: Minimum number of points required for an extracted cluster. Default is `2`.
-- `cluster_selection_method(Method)`: Cluster extraction policy. The current implementation accepts only `leaf` (default).
+- `cluster_selection_method(Method)`: Cluster extraction policy. Options: `eom` (default) or `leaf`.
 - `distance_metric(Metric)`: Distance metric to use. Options: `euclidean` (default) or `manhattan`.
 - `feature_scaling(FeatureScaling)`: Whether to standardize continuous attributes before clustering. Options: `on` (default) or `off`.
 
 
-Clusterer Representation
+Clusterer representation
 ------------------------
 
 The learned clusterer is represented as a compound term with the
@@ -90,6 +91,6 @@ For example:
 Where:
 
 - `Encoders`: List of continuous attribute encoders storing attribute name, mean, and scale.
-- `Clusters`: List of `cluster(Id, Points, Prototype, Radius)` terms in cluster-id order.
+	- `Clusters`: List of `cluster(Id, Points, MaxCoreDistance, Stability)` terms in cluster-id order.
 - `Noise`: List of encoded training points classified as noise.
 - `Options`: Effective training options used to learn the clusterer.

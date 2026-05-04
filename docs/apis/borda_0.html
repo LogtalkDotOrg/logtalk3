@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-26</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -358,17 +358,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Borda ranks each item by summing, across groups, the number of same-group items with strictly lower relevance.</p></li>
-<li><p>Score semantics: Within each group, an item receives one point for every same-group item with strictly lower relevance when using <code class="docutils literal notranslate"><span class="pre">tie_scoring(standard)</span></code> and the average of the minimum and maximum tied positions when using <code class="docutils literal notranslate"><span class="pre">tie_scoring(fractional)</span></code>.</p></li>
-<li><p>Missing relevance semantics: Missing relevance facts are treated as zero by default using the <code class="docutils literal notranslate"><span class="pre">missing_relevance(zero)</span></code> option and can be rejected using <code class="docutils literal notranslate"><span class="pre">missing_relevance(error)</span></code>.</p></li>
-<li><p>Tie-breaking: Ranking ties are broken deterministically using the standard term order of the item identifiers after sorting by descending score.</p></li>
-<li><p>Dataset requirements: The training dataset must declare each group once, use only declared groups and items in relevance judgments, and assign non-negative integer relevance values.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">borda_ranker(Items,</span> <span class="pre">Scores,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Scores</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the training dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

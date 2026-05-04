@@ -15,7 +15,7 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,12 +31,7 @@ C4.5 decision tree learning algorithm. Builds a decision tree from a dataset obj
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: C4.5 is an extension of the ID3 algorithm that uses information gain ratio instead of information gain for attribute selection, which avoids bias towards attributes with many values.
-   - Discrete attributes: The learned decision tree is represented as ``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for internal nodes with discrete attributes, where ``Subtrees`` is a list of ``Value-Subtree`` pairs.
-   - Continuous attributes: For continuous (numeric) attributes, the tree uses binary threshold splits represented as ``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)`` where ``LeftSubtree`` corresponds to values ``=< Threshold`` and ``RightSubtree`` to values ``> Threshold``.
-   - Missing values: Missing attribute values are represented using anonymous variables. During tree construction, examples with missing values for the split attribute are distributed to all branches. Entropy and gain calculations use only examples with known values for the attribute being evaluated.
-   - Tree pruning: The ``prune/3`` and ``prune/5`` predicates implement pessimistic error pruning (PEP), which estimates error rates using the upper confidence bound of the binomial distribution (Wilson score interval) with a configurable confidence factor (default 0.25, range ``(0.0, 1.0)``) and minimum instances per leaf (default 2). Subtrees are replaced with leaf nodes when doing so would not increase the estimated error.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

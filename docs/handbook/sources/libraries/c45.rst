@@ -68,6 +68,20 @@ Implemented features
 - Export of learned decision trees as predicate clauses
 - Pretty-printing of learned decision trees
 
+Learned tree representation
+---------------------------
+
+For discrete attributes, the learned decision tree is represented as
+``leaf(Class)`` for leaf nodes and ``tree(Attribute, Subtrees)`` for
+internal nodes with discrete attributes, where ``Subtrees`` is a list of
+``Value-Subtree`` pairs.
+
+For continuous (numeric) attributes, the tree uses binary threshold
+splits represented as
+``tree(Attribute, threshold(Threshold), LeftSubtree, RightSubtree)``
+where ``LeftSubtree`` corresponds to values ``=< Threshold`` and
+``RightSubtree`` to values ``> Threshold``.
+
 Limitations
 -----------
 

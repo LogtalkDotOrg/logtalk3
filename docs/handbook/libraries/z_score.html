@@ -439,6 +439,7 @@ per-attribute Z-score for each known attribute value using
 aggregated into a single raw anomaly score according to the learned
 <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> option. Third, the raw score is mapped to the interval
 <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0)</span></code> using <code class="docutils literal notranslate"><span class="pre">Score</span> <span class="pre">=</span> <span class="pre">Raw</span> <span class="pre">/</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">Raw)</span></code>.</p>
+<p>With this normalization, a raw score of <code class="docutils literal notranslate"><span class="pre">3.0</span></code> maps to <code class="docutils literal notranslate"><span class="pre">0.75</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> option does not change the classical per-attribute
 formula. It only changes the aggregation step. With
 <code class="docutils literal notranslate"><span class="pre">score_mode(root_mean_square)</span></code>, the raw score is the root mean square
