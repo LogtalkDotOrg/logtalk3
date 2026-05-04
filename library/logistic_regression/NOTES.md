@@ -22,14 +22,16 @@ ________________________________________________________________________
 =====================
 
 Logistic regression classifier supporting both binary and multiclass
-classification. Multiclass classification is implemented using a joint
-softmax model trained across all classes.
+classification. Multiclass classification is implemented using batch
+gradient descent to train a single multiclass softmax model. Binary
+classification is treated as a two-class special case of the same
+objective.
 
 The library implements the `classifier_protocol` defined in the
-`classification_protocols` library. It provides predicates for learning a
-classifier from a dataset object, using it to make predictions,
-returning class probabilities, and exporting the learned model as a list
-of predicate clauses or to a file.
+`classification_protocols` library. It provides predicates for learning
+a classifier from a dataset object, using it to make predictions,
+returning class probabilities, and exporting the learned model as a
+list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
 protocol from the `classification_protocols` library. Existing datasets in
@@ -71,7 +73,8 @@ Features
 - **Binary and Multiclass Classification**: Learns a joint softmax logistic model with one parameter vector per class.
 - **Continuous Features**: Standardizes numeric attributes using z-score scaling derived from the training data.
 - **Categorical Features**: Expands discrete attributes using one-hot encoding based on the declared dataset attribute values and rejects unseen values with a domain error.
-- **Missing Values**: Encodes missing numeric and categorical values using explicit missing-value indicator features.
+- **Missing Values**: Encodes missing numeric and categorical values using explicit missing-value indicator features instead of being conflated with baseline feature values.
+- **Unknown values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error instead of being silently mapped into an existing feature bucket.
 - **Probability Estimation**: Provides class probability distributions in addition to class predictions.
 - **Classifier Export**: Learned classifiers can be exported as predicate clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite covering the `weather`, `mixed`, `iris_small`, `missing_mixed`, and `breast_cancer` datasets with reported training time, training accuracy, and mean log loss.

@@ -363,16 +363,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses batch gradient descent to train a single multiclass softmax model. Binary classification is treated as a two-class special case of the same objective.</p></li>
-<li><p>Feature handling: Continuous features are standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.</p></li>
-<li><p>Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features instead of being conflated with baseline feature values.</p></li>
-<li><p>Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error instead of being silently mapped into an existing feature bucket.</p></li>
-<li><p>Classifier representation: The learned classifier is represented by default as <code class="docutils literal notranslate"><span class="pre">lr_classifier(Classes,</span> <span class="pre">Encoders,</span> <span class="pre">Models,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata and <code class="docutils literal notranslate"><span class="pre">Models</span></code> stores one parameter vector per class in the joint softmax model.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

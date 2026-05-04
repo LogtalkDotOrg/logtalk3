@@ -3,8 +3,9 @@
 ``naive_bayes``
 ===============
 
-Naive Bayes classifier supporting both categorical and continuous
-(Gaussian) features with Laplace smoothing.
+Naive Bayes probabilistic classifier based on Bayes theorem with strong
+(naive) independence assumptions between features and supporting both
+categorical and continuous (Gaussian) features with Laplace smoothing.
 
 The library implements the ``classifier_protocol`` defined in the
 ``classification_protocols`` library. It provides predicates for

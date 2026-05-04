@@ -307,7 +307,9 @@
 <span id="library-knn-distance"></span><h1><code class="docutils literal notranslate"><span class="pre">knn_distance</span></code><a class="headerlink" href="#knn-distance" title="Link to this heading"></a></h1>
 <p>k-nearest-neighbor distance anomaly detector supporting multiple
 distance metrics, mixed continuous and categorical features, and missing
-values.</p>
+values. The detector memorizes the training instances and computes an
+anomaly score from normalized distances to the nearest neighbors. Larger
+distances indicate more isolated and therefore more anomalous instances.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a compact detector
 from a dataset by selecting baseline training examples from the declared
@@ -346,7 +348,8 @@ neighbor and average distance to the k nearest neighbors.</p></li>
 <li><p><strong>Mixed features</strong>: automatically handles continuous and categorical
 features declared by the dataset.</p></li>
 <li><p><strong>Missing values</strong>: ignores missing dimensions while normalizing
-distances.</p></li>
+distances (distances are normalized by the number of comparable
+dimensions).</p></li>
 <li><p><strong>Baseline training selection</strong>: <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> declares
 which class labels are admissible for fitting the detector, while
 <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> controls whether non-baseline examples

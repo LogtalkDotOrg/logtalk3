@@ -313,7 +313,9 @@
   <section id="knn">
 <span id="library-knn"></span><h1><code class="docutils literal notranslate"><span class="pre">knn</span></code><a class="headerlink" href="#knn" title="Link to this heading"></a></h1>
 <p>k-Nearest Neighbors classifier supporting multiple distance metrics,
-weighting schemes, and both categorical and continuous features.</p>
+weighting schemes, and both categorical and continuous features. This is
+a lazy learning algorithm that classifies instances based on the
+majority class among the k nearest training instances.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code> library. It provides predicates for
 learning a classifier from a dataset, using it to make predictions, and
@@ -345,16 +347,17 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Multiple Distance Metrics</strong>: Euclidean, Manhattan, Chebyshev,
-Minkowski</p></li>
+Minkowski.</p></li>
 <li><p><strong>Flexible Weighting</strong>: Uniform, distance-based, and Gaussian
-weighting</p></li>
+weighting of neighbors.</p></li>
 <li><p><strong>Mixed Features</strong>: Automatically handles categorical and continuous
-features</p></li>
+features.</p></li>
 <li><p><strong>Configurable Options</strong>: k value, distance metric, and weighting
-scheme via predicate options</p></li>
-<li><p><strong>Probability Estimation</strong>: Provides confidence scores for predictions</p></li>
+scheme via predicate options.</p></li>
+<li><p><strong>Probability Estimation</strong>: Provides confidence scores for
+predictions.</p></li>
 <li><p><strong>Classifier Export</strong>: Learned classifiers can be exported as
-predicate clauses</p></li>
+predicate clauses.</p></li>
 </ul>
 </section>
 <section id="usage">

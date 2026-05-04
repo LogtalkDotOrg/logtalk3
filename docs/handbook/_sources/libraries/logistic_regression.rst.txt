@@ -4,8 +4,10 @@
 =======================
 
 Logistic regression classifier supporting both binary and multiclass
-classification. Multiclass classification is implemented using a joint
-softmax model trained across all classes.
+classification. Multiclass classification is implemented using batch
+gradient descent to train a single multiclass softmax model. Binary
+classification is treated as a two-class special case of the same
+objective.
 
 The library implements the ``classifier_protocol`` defined in the
 ``classification_protocols`` library. It provides predicates for
@@ -62,7 +64,11 @@ Features
   encoding based on the declared dataset attribute values and rejects
   unseen values with a domain error.
 - **Missing Values**: Encodes missing numeric and categorical values
-  using explicit missing-value indicator features.
+  using explicit missing-value indicator features instead of being
+  conflated with baseline feature values.
+- **Unknown values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error instead of
+  being silently mapped into an existing feature bucket.
 - **Probability Estimation**: Provides class probability distributions
   in addition to class predictions.
 - **Classifier Export**: Learned classifiers can be exported as

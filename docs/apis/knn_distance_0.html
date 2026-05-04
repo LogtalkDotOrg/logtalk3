@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -361,17 +361,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: The detector memorizes the training instances and computes an anomaly score from normalized distances to the nearest neighbors. Larger distances indicate more isolated and therefore more anomalous instances.</p></li>
-<li><p>Baseline training selection: The learn-time <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> option declares which class labels are admissible for fitting the detector. The default is <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>. The <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> option then controls how non-baseline examples are handled. The default <code class="docutils literal notranslate"><span class="pre">reject</span></code> policy throws an error when any non-baseline example is found, while <code class="docutils literal notranslate"><span class="pre">filter</span></code> removes them before fitting.</p></li>
-<li><p>Score modes: Supports both the distance to the k-th nearest neighbor and the mean distance to the k nearest neighbors.</p></li>
-<li><p>Feature types: Handles continuous and categorical attributes declared by the dataset object.</p></li>
-<li><p>Missing values: Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.</p></li>
-<li><p>Anomaly detector representation: The learned detector is represented as a <code class="docutils literal notranslate"><span class="pre">knn_distance_detector(TrainingDataset,</span> <span class="pre">AttributeNames,</span> <span class="pre">FeatureTypes,</span> <span class="pre">AttributeScales,</span> <span class="pre">Instances,</span> <span class="pre">ReferenceScores,</span> <span class="pre">Diagnostics)</span></code> term where <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores the learned metadata, including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

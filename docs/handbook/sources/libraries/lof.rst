@@ -5,6 +5,9 @@
 
 Local Outlier Factor anomaly detector supporting multiple distance
 metrics, mixed continuous and categorical features, and missing values.
+The detector memorizes the training instances and computes Local Outlier
+Factor values by comparing the local reachability density of a query to
+the densities of its neighbors.
 
 The library implements the ``anomaly_detector_protocol`` defined in the
 ``anomaly_detection_protocols`` library. It learns a compact detector
@@ -49,11 +52,16 @@ Features
 - **Density-based anomaly scoring**: computes Local Outlier Factor
   scores from local reachability densities.
 
+- **Normalized scores**: Raw LOF values are normalized to the interval
+  ``[0.0, 1.0]`` by mapping the ideal baseline value ``1.0`` to ``0.0``
+  and scaling larger values against the largest training raw score.
+
 - **Mixed features**: automatically handles continuous and categorical
   features declared by the dataset.
 
 - **Missing values**: ignores missing dimensions while normalizing
-  distances.
+  distances (distances are normalized by the number of comparable
+  dimensions).
 
 - **Baseline training selection**: ``baseline_class_values/1`` declares
   which class labels are admissible for fitting the detector, while

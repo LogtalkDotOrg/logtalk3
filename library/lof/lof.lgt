@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'The detector memorizes the training instances and computes Local Outlier Factor values by comparing the local reachability density of a query to the densities of its neighbors.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the detector. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.',
-			'Feature types' - 'Handles continuous and categorical attributes declared by the dataset object.',
-			'Missing values' - 'Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.',
-			'Normalized scores' - 'Raw LOF values are normalized to the interval ``[0.0, 1.0]`` by mapping the ideal baseline value ``1.0`` to ``0.0`` and scaling larger values against the largest training raw score.',
-			'Anomaly detector representation' - 'The learned detector is represented as a ``lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics)`` term where ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance, isolation_forest]
 	]).
 

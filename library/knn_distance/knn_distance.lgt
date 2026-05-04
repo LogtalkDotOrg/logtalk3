@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'k-nearest-neighbor distance anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'The detector memorizes the training instances and computes an anomaly score from normalized distances to the nearest neighbors. Larger distances indicate more isolated and therefore more anomalous instances.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the detector. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.',
-			'Score modes' - 'Supports both the distance to the k-th nearest neighbor and the mean distance to the k nearest neighbors.',
-			'Feature types' - 'Handles continuous and categorical attributes declared by the dataset object.',
-			'Missing values' - 'Missing values are ignored when computing distances. Distances are normalized by the number of comparable dimensions.',
-			'Anomaly detector representation' - 'The learned detector is represented as a ``knn_distance_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics)`` term where ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, isolation_forest, lof]
 	]).
 

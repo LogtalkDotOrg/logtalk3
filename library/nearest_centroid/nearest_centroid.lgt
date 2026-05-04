@@ -25,14 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Assign to an instance the the class of the training samples whose mean (centroid) is closest to the instance.',
-			'Distance metrics' - 'Supports Euclidean, Manhattan, and cosine distance metrics.',
-			'Feature types' - 'Automatically handles numeric and categorical features.',
-			'Classifier representation' - 'The learned classifier is represented by default as a ``nc_classifier(AttributeNames, FeatureTypes, Centroids)`` term.'
-		],
 		see_also is [dataset_protocol, isolation_forest, c45, knn, naive_bayes, random_forest, ada_boost]
 	]).
 

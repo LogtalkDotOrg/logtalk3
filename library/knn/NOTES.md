@@ -22,7 +22,9 @@ ________________________________________________________________________
 =====
 
 k-Nearest Neighbors classifier supporting multiple distance metrics,
-weighting schemes, and both categorical and continuous features.
+weighting schemes, and both categorical and continuous features. This
+is a lazy learning algorithm that classifies instances based on the
+majority class among the k nearest training instances.
 
 The library implements the `classifier_protocol` defined in the
 `classification_protocols` library. It provides predicates for learning a
@@ -30,8 +32,8 @@ classifier from a dataset, using it to make predictions, and exporting
 it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the `dataset_protocol`
-protocol from the `classification_protocols` library. See `test_files` directory
-for examples.
+protocol from the `classification_protocols` library. See `test_files`
+directory for examples.
 
 
 API documentation
@@ -60,12 +62,12 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Multiple Distance Metrics**: Euclidean, Manhattan, Chebyshev, Minkowski
-- **Flexible Weighting**: Uniform, distance-based, and Gaussian weighting
-- **Mixed Features**: Automatically handles categorical and continuous features
-- **Configurable Options**: k value, distance metric, and weighting scheme via predicate options
-- **Probability Estimation**: Provides confidence scores for predictions
-- **Classifier Export**: Learned classifiers can be exported as predicate clauses
+- **Multiple Distance Metrics**: Euclidean, Manhattan, Chebyshev, Minkowski.
+- **Flexible Weighting**: Uniform, distance-based, and Gaussian weighting of neighbors.
+- **Mixed Features**: Automatically handles categorical and continuous features.
+- **Configurable Options**: k value, distance metric, and weighting scheme via predicate options.
+- **Probability Estimation**: Provides confidence scores for predictions.
+- **Classifier Export**: Learned classifiers can be exported as predicate clauses.
 
 
 Usage

@@ -27,13 +27,6 @@
 		author is 'Paulo Moura',
 		date is 2026-05-04,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses batch gradient descent to train a single multiclass softmax model. Binary classification is treated as a two-class special case of the same objective.',
-			'Feature handling' - 'Continuous features are standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
-			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features instead of being conflated with baseline feature values.',
-			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error instead of being silently mapped into an existing feature bucket.',
-			'Classifier representation' - 'The learned classifier is represented by default as ``lr_classifier(Classes, Encoders, Models, Options)`` where ``Encoders`` stores the feature encoding metadata and ``Models`` stores one parameter vector per class in the joint softmax model.'
-		],
 		see_also is [dataset_protocol, c45, knn, naive_bayes, nearest_centroid, random_forest, ada_boost]
 	]).
 

@@ -21,7 +21,8 @@ ________________________________________________________________________
 `nearest_centroid`
 ==================
 
-Nearest Centroid classifier.
+Nearest Centroid classifier. Assigns to an instance the class of the
+training samples whose mean (centroid) is closest to the instance.
 
 The library implements the `classifier_protocol` defined in the
 `classification_protocols` library. It provides predicates for learning a

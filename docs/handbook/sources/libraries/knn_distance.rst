@@ -5,7 +5,9 @@
 
 k-nearest-neighbor distance anomaly detector supporting multiple
 distance metrics, mixed continuous and categorical features, and missing
-values.
+values. The detector memorizes the training instances and computes an
+anomaly score from normalized distances to the nearest neighbors. Larger
+distances indicate more isolated and therefore more anomalous instances.
 
 The library implements the ``anomaly_detector_protocol`` defined in the
 ``anomaly_detection_protocols`` library. It learns a compact detector
@@ -54,7 +56,8 @@ Features
   features declared by the dataset.
 
 - **Missing values**: ignores missing dimensions while normalizing
-  distances.
+  distances (distances are normalized by the number of comparable
+  dimensions).
 
 - **Baseline training selection**: ``baseline_class_values/1`` declares
   which class labels are admissible for fitting the detector, while
