@@ -1281,6 +1281,17 @@ To load an entity, always load the library that includes it using the goal ``log
    linda_client <linda_client_0>
    linda_server <linda_server_0>
 
+``library/linear_algebra/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   linear_algebra <linear_algebra_0>
+   linear_algebra_protocol <linear_algebra_protocol_0>
+
 ``library/linear_regression/``
 ------------------------------
 

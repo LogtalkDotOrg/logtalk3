@@ -15,7 +15,7 @@ Shared predicates for dimension reducer learning defaults, dataset helpers, tran
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static``
@@ -27,6 +27,7 @@ Shared predicates for dimension reducer learning defaults, dataset helpers, tran
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`population <population/0>`
@@ -355,25 +356,6 @@ Extracts per-component convergence, iteration, and final-delta lists from compon
 
 ------------
 
-.. index:: zero_vector/2
-.. _dimension_reducer_common/0::zero_vector/2:
-
-``zero_vector/2``
-^^^^^^^^^^^^^^^^^
-
-Constructs a numeric zero vector with the requested length.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zero_vector(Count,Zeroes)``
-| **Mode and number of proofs:**
-|    ``zero_vector(+integer,-list(number))`` - ``one``
-
-
-------------
-
 .. index:: zero_vector_like/2
 .. _dimension_reducer_common/0::zero_vector_like/2:
 
@@ -389,63 +371,6 @@ Constructs a zero vector matching the length of the first vector in a list of ve
 |    ``zero_vector_like(Vectors,ZeroVector)``
 | **Mode and number of proofs:**
 |    ``zero_vector_like(+list(list(number)),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: add_vectors/3
-.. _dimension_reducer_common/0::add_vectors/3:
-
-``add_vectors/3``
-^^^^^^^^^^^^^^^^^
-
-Adds two numeric vectors element-wise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``add_vectors(Vector1,Vector2,Vector)``
-| **Mode and number of proofs:**
-|    ``add_vectors(+list(number),+list(number),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: subtract_vectors/3
-.. _dimension_reducer_common/0::subtract_vectors/3:
-
-``subtract_vectors/3``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Subtracts the second numeric vector from the first element-wise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``subtract_vectors(Vector1,Vector2,Vector)``
-| **Mode and number of proofs:**
-|    ``subtract_vectors(+list(number),+list(number),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: initial_vector/2
-.. _dimension_reducer_common/0::initial_vector/2:
-
-``initial_vector/2``
-^^^^^^^^^^^^^^^^^^^^
-
-Constructs the canonical all-ones initial vector with the requested length.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``initial_vector(Size,Vector)``
-| **Mode and number of proofs:**
-|    ``initial_vector(+integer,-list(number))`` - ``one``
 
 
 ------------
@@ -488,25 +413,6 @@ Constructs the default all-ones initial vector followed by canonical basis vecto
 
 ------------
 
-.. index:: make_vector/3
-.. _dimension_reducer_common/0::make_vector/3:
-
-``make_vector/3``
-^^^^^^^^^^^^^^^^^
-
-Constructs a numeric vector with the requested length, filled with the given value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``make_vector(Count,Value,Vector)``
-| **Mode and number of proofs:**
-|    ``make_vector(+integer,+number,-list(number))`` - ``one``
-
-
-------------
-
 .. index:: basis_initial_vectors/3
 .. _dimension_reducer_common/0::basis_initial_vectors/3:
 
@@ -526,298 +432,13 @@ Constructs canonical basis vectors from the given one-based index up to the requ
 
 ------------
 
-.. index:: make_matrix/4
-.. _dimension_reducer_common/0::make_matrix/4:
-
-``make_matrix/4``
-^^^^^^^^^^^^^^^^^
-
-Constructs a numeric matrix with the requested row and column counts, filled with the given value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``make_matrix(Rows,Columns,Value,Matrix)``
-| **Mode and number of proofs:**
-|    ``make_matrix(+integer,+integer,+number,-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: matrix_vector_product/3
-.. _dimension_reducer_common/0::matrix_vector_product/3:
-
-``matrix_vector_product/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Computes the matrix-vector product for a numeric matrix and vector.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``matrix_vector_product(Matrix,Vector,Product)``
-| **Mode and number of proofs:**
-|    ``matrix_vector_product(+list(list(number)),+list(number),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: normalize_vector/2
-.. _dimension_reducer_common/0::normalize_vector/2:
-
-``normalize_vector/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Normalizes a numeric vector to unit length when its norm is above the shared numerical tolerance.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``normalize_vector(Vector,NormalizedVector)``
-| **Mode and number of proofs:**
-|    ``normalize_vector(+list(number),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: difference_norm/3
-.. _dimension_reducer_common/0::difference_norm/3:
-
-``difference_norm/3``
-^^^^^^^^^^^^^^^^^^^^^
-
-Computes the Euclidean norm of the difference between two numeric vectors.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``difference_norm(Vector1,Vector2,Norm)``
-| **Mode and number of proofs:**
-|    ``difference_norm(+list(number),+list(number),-float)`` - ``one``
-
-
-------------
-
-.. index:: stabilize_vector_sign/2
-.. _dimension_reducer_common/0::stabilize_vector_sign/2:
-
-``stabilize_vector_sign/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Normalizes a vector sign convention by flipping vectors whose first significant component is negative.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``stabilize_vector_sign(Vector,StableVector)``
-| **Mode and number of proofs:**
-|    ``stabilize_vector_sign(+list(number),-list(number))`` - ``one``
-
-
-------------
-
-.. index:: first_significant_component/2
-.. _dimension_reducer_common/0::first_significant_component/2:
-
-``first_significant_component/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Returns the first component whose absolute value exceeds the shared numerical tolerance, defaulting to zero when no such component exists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``first_significant_component(Vector,First)``
-| **Mode and number of proofs:**
-|    ``first_significant_component(+list(number),-number)`` - ``one``
-
-
-------------
-
-.. index:: zero_matrix/2
-.. _dimension_reducer_common/0::zero_matrix/2:
-
-``zero_matrix/2``
-^^^^^^^^^^^^^^^^^
-
-Constructs a square numeric zero matrix with the requested size.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zero_matrix(Size,Matrix)``
-| **Mode and number of proofs:**
-|    ``zero_matrix(+integer,-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: zero_matrix/3
-.. _dimension_reducer_common/0::zero_matrix/3:
-
-``zero_matrix/3``
-^^^^^^^^^^^^^^^^^
-
-Constructs a numeric zero matrix with the requested row and column counts.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zero_matrix(Rows,Columns,Matrix)``
-| **Mode and number of proofs:**
-|    ``zero_matrix(+integer,+integer,-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: outer_product/3
-.. _dimension_reducer_common/0::outer_product/3:
-
-``outer_product/3``
-^^^^^^^^^^^^^^^^^^^
-
-Computes the outer product of two numeric vectors.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``outer_product(Vector1,Vector2,Matrix)``
-| **Mode and number of proofs:**
-|    ``outer_product(+list(number),+list(number),-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: add_matrices/3
-.. _dimension_reducer_common/0::add_matrices/3:
-
-``add_matrices/3``
-^^^^^^^^^^^^^^^^^^
-
-Adds two numeric matrices element-wise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``add_matrices(Matrix1,Matrix2,Matrix)``
-| **Mode and number of proofs:**
-|    ``add_matrices(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: subtract_matrices/3
-.. _dimension_reducer_common/0::subtract_matrices/3:
-
-``subtract_matrices/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Subtracts the second numeric matrix from the first element-wise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``subtract_matrices(Matrix1,Matrix2,Matrix)``
-| **Mode and number of proofs:**
-|    ``subtract_matrices(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: scale_matrix/3
-.. _dimension_reducer_common/0::scale_matrix/3:
-
-``scale_matrix/3``
-^^^^^^^^^^^^^^^^^^
-
-Scales each element of a numeric matrix by the given factor.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``scale_matrix(Matrix,Scale,ScaledMatrix)``
-| **Mode and number of proofs:**
-|    ``scale_matrix(+list(list(number)),+number,-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: transpose_matrix/2
-.. _dimension_reducer_common/0::transpose_matrix/2:
-
-``transpose_matrix/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Transposes a numeric matrix represented as a list of row lists.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``transpose_matrix(Matrix,Transpose)``
-| **Mode and number of proofs:**
-|    ``transpose_matrix(+list(list(number)),-list(list(number)))`` - ``one``
-
-
-------------
-
-.. index:: matrix_value/4
-.. _dimension_reducer_common/0::matrix_value/4:
-
-``matrix_value/4``
-^^^^^^^^^^^^^^^^^^
-
-Looks up a numeric matrix element using one-based row and column indices.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``matrix_value(Matrix,RowIndex,ColumnIndex,Value)``
-| **Mode and number of proofs:**
-|    ``matrix_value(+list(list(number)),+integer,+integer,-number)`` - ``one``
-
-
-------------
-
-.. index:: mean_vector/2
-.. _dimension_reducer_common/0::mean_vector/2:
-
-``mean_vector/2``
-^^^^^^^^^^^^^^^^^
-
-Computes the column-wise arithmetic mean vector for a numeric row matrix.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``mean_vector(Rows,Mean)``
-| **Mode and number of proofs:**
-|    ``mean_vector(+list(list(number)),-list(number))`` - ``one``
-
-
-------------
-
 .. index:: extract_components/5
 .. _dimension_reducer_common/0::extract_components/5:
 
 ``extract_components/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Extracts leading eigen-components from a numeric matrix using repeated power iteration and deflation until the requested count or the configured tolerance is reached.
+Extracts leading positive eigen-components from a numeric matrix using the shared symmetric eigensolver until the requested count or the configured tolerance is reached.
 
 | **Compilation flags:**
 |    ``static``
@@ -921,25 +542,6 @@ Projects encoded features onto the learned components and returns `component_N-S
 |    ``project_components(Components,Features,Index,ReducedInstance)``
 | **Mode and number of proofs:**
 |    ``project_components(+list(list(number)),+list(number),+integer,-list(pair))`` - ``one``
-
-
-------------
-
-.. index:: covariance_matrix/2
-.. _dimension_reducer_common/0::covariance_matrix/2:
-
-``covariance_matrix/2``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Computes the sample covariance matrix for a list of centered numeric feature rows.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``covariance_matrix(Rows,CovarianceMatrix)``
-| **Mode and number of proofs:**
-|    ``covariance_matrix(+list(list(number)),-list(list(number)))`` - ``one``
 
 
 ------------

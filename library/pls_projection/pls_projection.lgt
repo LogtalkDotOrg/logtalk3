@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Partial Least Squares projection for target-valued continuous datasets using deterministic PLS1 deflation.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, centers the numeric target, extracts deterministic PLS1 latent directions using repeated cross-covariance maximization with sequential deflation, and stores the equivalent direct projection rotations for future transforms.',
@@ -58,6 +58,11 @@
 
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(linear_algebra, [
+		matrix_vector_product/3, normalize_vector/2, stabilize_vector_sign/3, subtract_vectors/3,
+		transpose_matrix/2
 	]).
 
 	learn(Dataset, DimensionReducer, UserOptions) :-
@@ -164,7 +169,7 @@
 		reverse(TargetLoadingsAcc, TargetLoadings).
 	extract_pls_components(Rows, Targets, Requested, TotalRequested, Options, ComponentsAcc, LoadingsAcc, TargetLoadingsAcc, Components, Loadings, TargetLoadings, ExtractionDiagnostics) :-
 		covariance_vector(Rows, Targets, RawComponent),
-		^^normalize_vector(RawComponent, NormalizedComponent),
+		normalize_vector(RawComponent, NormalizedComponent),
 		score_vector(Rows, NormalizedComponent, Scores0),
 		dot_product(Scores0, Scores0, Denominator),
 		^^option(tolerance(Tolerance), Options),
@@ -173,7 +178,7 @@
 		;   component_loading(Rows, Scores0, Denominator, Loading0),
 			dot_product(Targets, Scores0, TargetLoadingNumerator),
 			TargetLoading0 is TargetLoadingNumerator / Denominator,
-			stabilize_component_sign(NormalizedComponent, Scores0, Loading0, TargetLoading0, Component, Scores, Loading, TargetLoading),
+			stabilize_component_sign(NormalizedComponent, Scores0, Loading0, TargetLoading0, Tolerance, Component, Scores, Loading, TargetLoading),
 			deflate_rows(Rows, Scores, Loading, DeflatedRows),
 			deflate_targets(Targets, Scores, TargetLoading, DeflatedTargets),
 			NextRequested is Requested - 1,
@@ -192,7 +197,7 @@
 		).
 
 	covariance_vector(Rows, Targets, CovarianceVector) :-
-		^^transpose_matrix(Rows, Columns),
+		transpose_matrix(Rows, Columns),
 		column_covariances(Columns, Targets, CovarianceVector).
 
 	column_covariances([], _Targets, []).
@@ -201,10 +206,10 @@
 		column_covariances(Columns, Targets, Covariances).
 
 	score_vector(Rows, Component, Scores) :-
-		^^matrix_vector_product(Rows, Component, Scores).
+		matrix_vector_product(Rows, Component, Scores).
 
 	component_loading(Rows, Scores, Denominator, Loading) :-
-		^^transpose_matrix(Rows, Columns),
+		transpose_matrix(Rows, Columns),
 		column_loadings(Columns, Scores, Denominator, Loading).
 
 	column_loadings([], _Scores, _Denominator, []).
@@ -213,23 +218,22 @@
 		Loading is Numerator / Denominator,
 		column_loadings(Columns, Scores, Denominator, Loadings).
 
-	stabilize_component_sign(Component0, Scores0, Loading0, TargetLoading0, Component, Scores, Loading, TargetLoading) :-
-		(   ^^first_significant_component(Component0, First),
-			First < 0.0 ->
-			rescale(Component0, -1.0, Component),
-			rescale(Scores0, -1.0, Scores),
-			rescale(Loading0, -1.0, Loading),
-			TargetLoading is -TargetLoading0
-		;   Component = Component0,
+	stabilize_component_sign(Component0, Scores0, Loading0, TargetLoading0, Tolerance, Component, Scores, Loading, TargetLoading) :-
+		stabilize_vector_sign(Component0, Tolerance, Component),
+		(   Component == Component0 ->
 			Scores = Scores0,
 			Loading = Loading0,
 			TargetLoading = TargetLoading0
+		;
+			rescale(Scores0, -1.0, Scores),
+			rescale(Loading0, -1.0, Loading),
+			TargetLoading is -TargetLoading0
 		).
 
 	deflate_rows([], [], _Loading, []).
 	deflate_rows([Row| Rows], [Score| Scores], Loading, [DeflatedRow| DeflatedRows]) :-
 		rescale(Loading, Score, Adjustment),
-		^^subtract_vectors(Row, Adjustment, DeflatedRow),
+		subtract_vectors(Row, Adjustment, DeflatedRow),
 		deflate_rows(Rows, Scores, Loading, DeflatedRows).
 
 	deflate_targets([], [], _TargetLoading, []).
@@ -252,7 +256,7 @@
 	build_rotation([Loading-PreviousRotation| PreviousPairs], Component, Rotation0, Rotation) :-
 		dot_product(Loading, Component, Projection),
 		rescale(PreviousRotation, Projection, Adjustment),
-		^^subtract_vectors(Rotation0, Adjustment, Rotation1),
+		subtract_vectors(Rotation0, Adjustment, Rotation1),
 		build_rotation(PreviousPairs, Component, Rotation1, Rotation).
 
 	valid_pls_diagnostics(Rotations, Diagnostics) :-

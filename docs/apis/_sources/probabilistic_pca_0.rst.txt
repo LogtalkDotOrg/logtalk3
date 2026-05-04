@@ -15,7 +15,7 @@ Probabilistic Principal Component Analysis reducer for continuous datasets using
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Probabilistic Principal Component Analysis reducer for continuous datasets using
 |    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`pairs <pairs/0>`

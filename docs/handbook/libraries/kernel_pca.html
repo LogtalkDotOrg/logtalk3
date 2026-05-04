@@ -186,6 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_algebra.html"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_regression.html"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_svm.html"><code class="docutils literal notranslate"><span class="pre">linear_svm</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
@@ -348,6 +349,9 @@ learned reducer with explicit diagnostics.</p></li>
 <li><p><strong>Supported Kernels</strong>: Supports <code class="docutils literal notranslate"><span class="pre">linear</span></code>,
 <code class="docutils literal notranslate"><span class="pre">polynomial(Degree,</span> <span class="pre">Gamma,</span> <span class="pre">Coef0)</span></code> with <code class="docutils literal notranslate"><span class="pre">Coef0</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">rbf(Gamma)</span></code> kernels.</p></li>
+<li><p><strong>Shared Gram-Centering Helpers</strong>: Delegates training Gram-matrix
+centering and out-of-sample Gram-vector centering to the shared
+<code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library.</p></li>
 <li><p><strong>Portable Eigensolver</strong>: Uses deterministic power iteration with
 deflation instead of backend-specific linear algebra libraries.</p></li>
 <li><p><strong>Projection API</strong>: Transforms a new instance into a list of

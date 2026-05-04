@@ -129,6 +129,7 @@ directory in the ``NOTES.md`` file.
    lasso_regression
    lda_projection
    linda
+   linear_algebra
    linear_regression
    linear_svm
    listing

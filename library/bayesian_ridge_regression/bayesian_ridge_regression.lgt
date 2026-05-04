@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-03,
+		date is 2026-05-04,
 		comment is 'Bayesian ridge regression regressor supporting continuous and mixed-feature datasets using evidence maximization and posterior uncertainty over coefficients. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses Bayesian linear regression with a shared scalar coefficient precision, Gamma hyperpriors over the weight and noise precisions, an explicit unpenalized intercept, and MacKay-style fixed-point evidence maximization updates.',
@@ -62,6 +62,13 @@
 
 	:- uses(list, [
 		append/3, length/2, memberchk/2, nth1/3, reverse/2
+	]).
+
+	:- uses(linear_algebra, [
+		add_scaled_outer_product/4, add_scaled_vector/4, cholesky_decomposition/2, invert_from_cholesky/2,
+		gram_matrix/2, matrix_diagonal/2, matrix_value/4, matrix_vector_product/3, new_matrix/4, new_vector/3,
+		scale_vector/3, shift_matrix_diagonal/3, solve_cholesky/3, symmetric_eigen/4, symmetric_eigen/5,
+		subtract_vectors/3, new_vector_like/2
 	]).
 
 	:- uses(numberlist, [
@@ -187,7 +194,7 @@
 		rows_targets(Rows, Targets),
 		length(Targets, RowCount),
 		arithmetic_mean(Targets, Bias),
-		zero_vector(FeatureCount, Weights),
+		new_vector(FeatureCount, 0.0, Weights),
 		residual_sum_of_squares(Rows, Bias, Weights, ResidualSumOfSquares),
 		initial_precisions(Rows, Options, Alpha0, Beta0),
 		updated_weight_precision([], 0.0, Alpha0, Options, Alpha),
@@ -262,22 +269,25 @@
 		Rows = [Features-_Target| _],
 		length(Rows, RowCount),
 		length(Features, FeatureCount),
-		zero_vector(FeatureCount, Zeroes),
+		new_vector(FeatureCount, 0.0, Zeroes),
 		sum_row_features_targets(Rows, Zeroes, 0.0, SumFeatures, SumTargets),
 		Scale is 1.0 / RowCount,
 		scale_vector(SumFeatures, Scale, FeatureMeans),
 		TargetMean is SumTargets / RowCount,
 		center_rows(Rows, FeatureMeans, TargetMean, CenteredRows, CenteredTargets),
-		zero_matrix(FeatureCount, FeatureCount, ZeroGram),
-		zero_vector(FeatureCount, ZeroProjection),
+		new_matrix(FeatureCount, FeatureCount, 0.0, ZeroGram),
+		new_vector(FeatureCount, 0.0, ZeroProjection),
 		accumulate_centered_statistics(CenteredRows, CenteredTargets, ZeroGram, ZeroProjection, 0.0, GramMatrix, Projection, TargetSquareNorm),
 		(   RowCount < FeatureCount ->
-			sample_gram_matrix(CenteredRows, SampleGram),
+			gram_matrix(CenteredRows, SampleGram),
 			SpectralMatrix = SampleGram
 		;   SampleGram = [],
 			SpectralMatrix = GramMatrix
 		),
-		extract_positive_eigenvalues(SpectralMatrix, Eigenvalues),
+		spectral_tolerance(Tolerance),
+		spectral_maximum_iterations(MaximumIterations),
+		symmetric_eigen(SpectralMatrix, Tolerance, MaximumIterations, _Eigenvectors, SpectralEigenvalues),
+		positive_eigenvalues(SpectralEigenvalues, Tolerance, Eigenvalues),
 		Summary = bayesian_training_summary(RowCount, FeatureCount, FeatureMeans, TargetMean, CenteredRows, CenteredTargets, GramMatrix, Projection, TargetSquareNorm, SampleGram, Eigenvalues).
 
 	sum_row_features_targets([], SumFeatures, SumTargets, SumFeatures, SumTargets).
@@ -292,32 +302,12 @@
 		CenteredTarget is Target - TargetMean,
 		center_rows(Rows, FeatureMeans, TargetMean, CenteredRows, CenteredTargets).
 
-	subtract_vectors([], [], []).
-	subtract_vectors([Value| Values], [Mean| Means], [Difference| Differences]) :-
-		Difference is Value - Mean,
-		subtract_vectors(Values, Means, Differences).
-
 	accumulate_centered_statistics([], [], GramMatrix, Projection, TargetSquareNorm, GramMatrix, Projection, TargetSquareNorm).
 	accumulate_centered_statistics([Features| Rows], [Target| Targets], GramMatrix0, Projection0, TargetSquareNorm0, GramMatrix, Projection, TargetSquareNorm) :-
 		add_scaled_outer_product(Features, 1.0, GramMatrix0, GramMatrix1),
 		add_scaled_vector(Features, Target, Projection0, Projection1),
 		TargetSquareNorm1 is TargetSquareNorm0 + Target * Target,
 		accumulate_centered_statistics(Rows, Targets, GramMatrix1, Projection1, TargetSquareNorm1, GramMatrix, Projection, TargetSquareNorm).
-
-	sample_gram_matrix([], []) :-
-		!.
-	sample_gram_matrix(Rows, SampleGram) :-
-		sample_gram_rows(Rows, Rows, SampleGram).
-
-	sample_gram_rows([], _AllRows, []).
-	sample_gram_rows([Row| Rows], AllRows, [SampleRow| SampleGram]) :-
-		row_dot_products(AllRows, Row, SampleRow),
-		sample_gram_rows(Rows, AllRows, SampleGram).
-
-	row_dot_products([], _Row, []).
-	row_dot_products([OtherRow| OtherRows], Row, [Value| Values]) :-
-		dot_product(Row, OtherRow, Value),
-		row_dot_products(OtherRows, Row, Values).
 
 	optimize_bayesian_ridge_model(Summary, Options, Iteration, PreviousWeights, Alpha0, Beta0, Bias, Weights, PosteriorCovariance, Alpha, Beta, Convergence, Iterations, FinalDelta, LogEvidence, Scores0, Scores, AccumulatedStabilization, Stabilization) :-
 		Summary = bayesian_training_summary(RowCount, _FeatureCount, _FeatureMeans, _TargetMean, _CenteredRows, _CenteredTargets, _GramMatrix, _Projection, _TargetSquareNorm, _SampleGram, _Eigenvalues),
@@ -398,7 +388,7 @@
 		Bias is TargetMean - FeatureMeanResponse.
 
 	build_full_posterior_covariance(_RowCount, _Beta, FeatureMeans, WeightCovariance, [[0.0| BiasCovariances]| PosteriorRows]) :-
-		zero_vector_like(FeatureMeans, BiasCovariances),
+		new_vector_like(FeatureMeans, BiasCovariances),
 		prepend_bias_covariances(WeightCovariance, BiasCovariances, PosteriorRows).
 
 	prepend_bias_covariances([], [], []).
@@ -545,7 +535,7 @@
 		length(PosteriorCovariance, Size),
 		(   Index > Size ->
 			ActiveVariances = []
-		;   diagonal_entry(PosteriorCovariance, Index, Variance),
+		;   matrix_value(PosteriorCovariance, Index, Index, Variance),
 			ActiveVariances = [Variance| Rest],
 			NextIndex is Index + 1,
 			active_diagonal_variances(PosteriorCovariance, NextIndex, Rest)
@@ -682,13 +672,20 @@
 		weight_square_norm(Weights, WeightSquaredNorm1, WeightSquaredNorm).
 
 	log_determinant_sigma_from_cholesky(CholeskyFactor, LogDeterminantSigma) :-
-		sum_log_diagonal(CholeskyFactor, 1, 0.0, LogDeterminantHalf),
+		matrix_diagonal(CholeskyFactor, Diagonal),
+		sum_log_values(Diagonal, 0.0, LogDeterminantHalf),
 		LogDeterminantSigma is -2.0 * LogDeterminantHalf.
 
 	log_determinant_sigma_from_sample_space_cholesky(CholeskyFactor, FeatureCount, Alpha, LogDeterminantSigma) :-
-		sum_log_diagonal(CholeskyFactor, 1, 0.0, LogDeterminantHalf),
+		matrix_diagonal(CholeskyFactor, Diagonal),
+		sum_log_values(Diagonal, 0.0, LogDeterminantHalf),
 		LogDeterminantB is 2.0 * LogDeterminantHalf,
 		LogDeterminantSigma is -FeatureCount * log(Alpha) - LogDeterminantB.
+
+	sum_log_values([], SumLog, SumLog).
+	sum_log_values([Value| Values], SumLog0, SumLog) :-
+		SumLog1 is SumLog0 + log(Value),
+		sum_log_values(Values, SumLog1, SumLog).
 
 	log_evidence(RowCount, FeatureCount, Alpha, Beta, LogDeterminantSigma, ResidualSumOfSquares, WeightSquaredNorm, Options, LogEvidence) :-
 		weight_precision_hyperparameters(Options, LambdaShape, LambdaRate),
@@ -708,7 +705,7 @@
 	weighted_feature_projection([], [], Projection) :-
 		Projection = [].
 	weighted_feature_projection([FirstRow| Rows], Coefficients, Projection) :-
-		zero_vector_like(FirstRow, Zeroes),
+		new_vector_like(FirstRow, Zeroes),
 		weighted_feature_projection([FirstRow| Rows], Coefficients, Zeroes, Projection).
 
 	weighted_feature_projection([], [], Projection, Projection).
@@ -720,136 +717,13 @@
 		matrix_vector_product(Matrix, Vector, Product),
 		dot_product(Vector, Product, Value).
 
-	matrix_vector_product([], _Vector, []).
-	matrix_vector_product([Row| Rows], Vector, [Value| Values]) :-
-		dot_product(Row, Vector, Value),
-		matrix_vector_product(Rows, Vector, Values).
-
-	extract_positive_eigenvalues([], []) :-
-		!.
-	extract_positive_eigenvalues([[]| _], []) :-
-		!.
-	extract_positive_eigenvalues(Matrix, Eigenvalues) :-
-		length(Matrix, Requested),
-		extract_positive_eigenvalues(Matrix, Requested, [], Eigenvalues).
-
-	extract_positive_eigenvalues(_Matrix, 0, EigenvaluesAcc, Eigenvalues) :-
-		!,
-		reverse(EigenvaluesAcc, Eigenvalues).
-	extract_positive_eigenvalues(Matrix, Requested, EigenvaluesAcc, Eigenvalues) :-
-		principal_component(Matrix, Eigenvalue, Eigenvector),
-		spectral_tolerance(Tolerance),
-		(   Eigenvalue =< Tolerance ->
-			reverse(EigenvaluesAcc, Eigenvalues)
-		;   add_scaled_outer_product(Eigenvector, -Eigenvalue, Matrix, DeflatedMatrix),
-			NextRequested is Requested - 1,
-			extract_positive_eigenvalues(DeflatedMatrix, NextRequested, [Eigenvalue| EigenvaluesAcc], Eigenvalues)
+	positive_eigenvalues([], _Tolerance, []).
+	positive_eigenvalues([Eigenvalue| Eigenvalues], Tolerance, PositiveEigenvalues) :-
+		(   Eigenvalue > Tolerance ->
+			PositiveEigenvalues = [Eigenvalue| PositiveEigenvalues0],
+			positive_eigenvalues(Eigenvalues, Tolerance, PositiveEigenvalues0)
+		;   PositiveEigenvalues = []
 		).
-
-	principal_component(Matrix, Eigenvalue, Eigenvector) :-
-		length(Matrix, Size),
-		initial_vectors(Size, InitialVectors),
-		zero_vector(Size, ZeroVector),
-		principal_component_candidates(Matrix, InitialVectors, 0.0, ZeroVector, Eigenvalue, Eigenvector).
-
-	principal_component_candidates(_Matrix, [], BestEigenvalue, BestEigenvector, BestEigenvalue, BestEigenvector) :-
-		!.
-	principal_component_candidates(Matrix, [InitialVector| InitialVectors], BestEigenvalue0, BestEigenvector0, BestEigenvalue, BestEigenvector) :-
-		normalize_vector(InitialVector, NormalizedInitial),
-		iterate_component(Matrix, 0, NormalizedInitial, CandidateEigenvalue, CandidateEigenvector),
-		(   CandidateEigenvalue > BestEigenvalue0 ->
-			BestEigenvalue1 = CandidateEigenvalue,
-			BestEigenvector1 = CandidateEigenvector
-		;   BestEigenvalue1 = BestEigenvalue0,
-			BestEigenvector1 = BestEigenvector0
-		),
-		principal_component_candidates(Matrix, InitialVectors, BestEigenvalue1, BestEigenvector1, BestEigenvalue, BestEigenvector).
-
-	iterate_component(Matrix, Iteration, Vector0, Eigenvalue, Eigenvector) :-
-		matrix_vector_product(Matrix, Vector0, Product),
-		euclidean_norm(Product, Norm),
-		spectral_tolerance(Tolerance),
-		(   Norm =< Tolerance ->
-			Eigenvalue = 0.0,
-			Eigenvector = Vector0
-		;   scale_vector(Product, 1.0 / Norm, Vector1),
-			stabilize_vector_sign(Vector1, StableVector),
-			difference_norm(StableVector, Vector0, Delta),
-			spectral_maximum_iterations(MaximumIterations),
-			(   (Delta =< Tolerance ; Iteration >= MaximumIterations) ->
-				rayleigh_quotient(Matrix, StableVector, Eigenvalue),
-				Eigenvector = StableVector
-			;   NextIteration is Iteration + 1,
-				iterate_component(Matrix, NextIteration, StableVector, Eigenvalue, Eigenvector)
-			)
-		).
-
-	rayleigh_quotient(Matrix, Vector, Eigenvalue) :-
-		matrix_vector_product(Matrix, Vector, Product),
-		dot_product(Vector, Product, Eigenvalue).
-
-	initial_vectors(Size, [InitialVector| BasisVectors]) :-
-		initial_vector(Size, InitialVector),
-		basis_initial_vectors(1, Size, BasisVectors).
-
-	initial_vector(0, []) :-
-		!.
-	initial_vector(Size, [1.0| Vector]) :-
-		Size > 0,
-		NextSize is Size - 1,
-		initial_vector(NextSize, Vector).
-
-	basis_initial_vectors(Index, Size, []) :-
-		Index > Size,
-		!.
-	basis_initial_vectors(Index, Size, [BasisVector| BasisVectors]) :-
-		basis_vector(Size, Index, BasisVector),
-		NextIndex is Index + 1,
-		basis_initial_vectors(NextIndex, Size, BasisVectors).
-
-	basis_vector(Size, Index, Vector) :-
-		basis_vector(1, Size, Index, Vector).
-
-	basis_vector(Current, Size, _Index, []) :-
-		Current > Size,
-		!.
-	basis_vector(Index, Size, Index, [1.0| Vector]) :-
-		!,
-		Next is Index + 1,
-		basis_vector(Next, Size, Index, Vector).
-	basis_vector(Current, Size, Index, [0.0| Vector]) :-
-		Next is Current + 1,
-		basis_vector(Next, Size, Index, Vector).
-
-	normalize_vector(Vector, NormalizedVector) :-
-		euclidean_norm(Vector, Norm),
-		spectral_tolerance(Tolerance),
-		(   Norm =< Tolerance ->
-			NormalizedVector = Vector
-		;   scale_vector(Vector, 1.0 / Norm, NormalizedVector)
-		).
-
-	euclidean_norm(Vector, Norm) :-
-		dot_product(Vector, Vector, SumSquares),
-		Norm is sqrt(SumSquares).
-
-	difference_norm(Vector1, Vector2, Norm) :-
-		subtract_vectors(Vector1, Vector2, Difference),
-		euclidean_norm(Difference, Norm).
-
-	stabilize_vector_sign(Vector, StableVector) :-
-		(   first_significant_component(Vector, First),
-			First < 0.0 ->
-			scale_vector(Vector, -1.0, StableVector)
-		;   StableVector = Vector
-		).
-
-	first_significant_component([Value| _Values], Value) :-
-		abs(Value) > 1.0e-12,
-		!.
-	first_significant_component([_Value| Values], First) :-
-		first_significant_component(Values, First).
-	first_significant_component([], 0.0).
 
 	spectral_tolerance(1.0e-10).
 
@@ -871,7 +745,7 @@
 		dot_product(Weights, Features, Linear).
 
 	bayesian_feature_activity([Features-_Target| Rows], ActiveFlags) :-
-		zero_vector_like(Features, Zeroes),
+		new_vector_like(Features, Zeroes),
 		accumulate_feature_statistics([Features-_Target| Rows], Zeroes, Zeroes, Sums, SumSquares),
 		length([Features-_Target| Rows], Count),
 		feature_activity_flags(Sums, SumSquares, Count, ActiveFlags).
@@ -932,99 +806,6 @@
 	expand_weights([inactive| ActiveFlags], ActiveWeights, [0.0| Weights]) :-
 		expand_weights(ActiveFlags, ActiveWeights, Weights).
 
-	add_scaled_outer_product(Vector, Scale, Rows0, Rows) :-
-		add_scaled_outer_product(Vector, Vector, Scale, Rows0, Rows).
-
-	add_scaled_outer_product([], _Vector, _Scale, [], []).
-	add_scaled_outer_product([Value| Values], Vector, Scale, [Row0| Rows0], [Row| Rows]) :-
-		ScaledValue is Scale * Value,
-		add_scaled_vector(Vector, ScaledValue, Row0, Row),
-		add_scaled_outer_product(Values, Vector, Scale, Rows0, Rows).
-
-	add_scaled_vector([], _Scale, [], []).
-	add_scaled_vector([Value| Values], Scale, [Value0| Values0], [UpdatedValue| UpdatedValues]) :-
-		UpdatedValue is Value0 + Scale * Value,
-		add_scaled_vector(Values, Scale, Values0, UpdatedValues).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
-	zero_vector_like([], []).
-	zero_vector_like([_| Reference], [0.0| Zeroes]) :-
-		zero_vector_like(Reference, Zeroes).
-
-	scale_vector([], _Scale, []).
-	scale_vector([Value| Values], Scale, [ScaledValue| ScaledValues]) :-
-		ScaledValue is Scale * Value,
-		scale_vector(Values, Scale, ScaledValues).
-
-	zero_matrix(0, _Columns, []) :-
-		!.
-	zero_matrix(Rows, Columns, [Row| Matrix]) :-
-		Rows > 0,
-		zero_vector(Columns, Row),
-		NextRows is Rows - 1,
-		zero_matrix(NextRows, Columns, Matrix).
-
-	invert_from_cholesky(CholeskyFactor, Inverse) :-
-		length(CholeskyFactor, Size),
-		identity_columns(Size, Columns),
-		solve_inverse_columns(Columns, CholeskyFactor, InverseColumns),
-		columns_to_rows(InverseColumns, Inverse).
-
-	identity_columns(Size, Columns) :-
-		identity_columns(1, Size, Columns).
-
-	identity_columns(Index, Size, []) :-
-		Index > Size,
-		!.
-	identity_columns(Index, Size, [Column| Columns]) :-
-		identity_column(1, Size, Index, Column),
-		NextIndex is Index + 1,
-		identity_columns(NextIndex, Size, Columns).
-
-	identity_column(Index, Size, _OneIndex, []) :-
-		Index > Size,
-		!.
-	identity_column(Index, Size, OneIndex, [Value| Column]) :-
-		(   Index =:= OneIndex ->
-			Value = 1.0
-		;   Value = 0.0
-		),
-		NextIndex is Index + 1,
-		identity_column(NextIndex, Size, OneIndex, Column).
-
-	solve_inverse_columns([], _CholeskyFactor, []).
-	solve_inverse_columns([Column| Columns], CholeskyFactor, [InverseColumn| InverseColumns]) :-
-		solve_cholesky(CholeskyFactor, Column, InverseColumn),
-		solve_inverse_columns(Columns, CholeskyFactor, InverseColumns).
-
-	columns_to_rows([], []).
-	columns_to_rows([Column| Columns], Rows) :-
-		length(Column, Size),
-		columns_to_rows(1, Size, [Column| Columns], Rows).
-
-	columns_to_rows(Index, Size, _Columns, []) :-
-		Index > Size,
-		!.
-	columns_to_rows(Index, Size, Columns, [Row| Rows]) :-
-		column_values_at(Columns, Index, Row),
-		NextIndex is Index + 1,
-		columns_to_rows(NextIndex, Size, Columns, Rows).
-
-	column_values_at([], _Index, []).
-	column_values_at([Column| Columns], Index, [Value| Values]) :-
-		nth1(Index, Column, Value),
-		column_values_at(Columns, Index, Values).
-
-	diagonal_entry(Matrix, Index, Value) :-
-		nth1(Index, Matrix, Row),
-		nth1(Index, Row, Value).
-
 	factorize_precision_matrix(Matrix, CholeskyFactor, stabilization(Attempts, Jitter)) :-
 		precision_matrix_scale(Matrix, Scale),
 		BaseJitter is max(1.0, Scale) * 1.0e-15,
@@ -1036,7 +817,7 @@
 		domain_error(positive_definite_precision_matrix, Matrix).
 	factorize_precision_matrix(Matrix0, Attempt, MaxAttempts, BaseJitter, CholeskyFactor, Attempts, Jitter) :-
 		add_precision_jitter(Matrix0, Attempt, BaseJitter, Matrix),
-		(   catch(cholesky_decomposition(Matrix, CholeskyFactor), error(non_positive_definite_precision_matrix(_Value), _Context), fail) ->
+		(   catch(cholesky_decomposition(Matrix, CholeskyFactor), error(non_positive_definite_matrix(_Value), _Context), fail) ->
 			Attempts = Attempt,
 			applied_precision_jitter(Attempt, BaseJitter, Jitter)
 		;   NextAttempt is Attempt + 1,
@@ -1049,148 +830,20 @@
 		Jitter is BaseJitter * 10.0 ** (Attempt - 1).
 
 	precision_matrix_scale(Matrix, Scale) :-
-		maximum_diagonal_magnitude(Matrix, 1, 0.0, Scale).
+		matrix_diagonal(Matrix, Diagonal),
+		maximum_abs(Diagonal, 0.0, Scale).
 
-	maximum_diagonal_magnitude([], _Index, Scale, Scale).
-	maximum_diagonal_magnitude([Row| Rows], Index, Scale0, Scale) :-
-		nth1(Index, Row, Diagonal),
-		Magnitude is abs(Diagonal),
-		Scale1 is max(Scale0, Magnitude),
-		NextIndex is Index + 1,
-		maximum_diagonal_magnitude(Rows, NextIndex, Scale1, Scale).
+	maximum_abs([], Maximum, Maximum).
+	maximum_abs([Value| Values], Maximum0, Maximum) :-
+		Magnitude is abs(Value),
+		Maximum1 is max(Maximum0, Magnitude),
+		maximum_abs(Values, Maximum1, Maximum).
 
 	add_precision_jitter(Matrix, 0, _BaseJitter, Matrix) :-
 		!.
 	add_precision_jitter(Matrix0, Attempt, BaseJitter, Matrix) :-
 		Jitter is BaseJitter * 10.0 ** (Attempt - 1),
-		add_diagonal_jitter(Matrix0, 1, Jitter, Matrix).
-
-	add_diagonal_jitter([], _Index, _Jitter, []).
-	add_diagonal_jitter([Row0| Rows0], Index, Jitter, [Row| Rows]) :-
-		add_row_diagonal_jitter(Row0, 1, Index, Jitter, Row),
-		NextIndex is Index + 1,
-		add_diagonal_jitter(Rows0, NextIndex, Jitter, Rows).
-
-	add_row_diagonal_jitter([], _ColumnIndex, _DiagonalIndex, _Jitter, []).
-	add_row_diagonal_jitter([Value0| Values0], ColumnIndex, DiagonalIndex, Jitter, [Value| Values]) :-
-		(   ColumnIndex =:= DiagonalIndex ->
-			Value is Value0 + Jitter
-		;   Value = Value0
-		),
-		NextColumnIndex is ColumnIndex + 1,
-		add_row_diagonal_jitter(Values0, NextColumnIndex, DiagonalIndex, Jitter, Values).
-
-	cholesky_decomposition(Matrix, CholeskyFactor) :-
-		length(Matrix, Size),
-		cholesky_decomposition(1, Size, Matrix, [], CholeskyFactor).
-
-	cholesky_decomposition(Index, Size, _Matrix, CholeskyFactor, CholeskyFactor) :-
-		Index > Size,
-		!.
-	cholesky_decomposition(Index, Size, Matrix, PreviousRows, CholeskyFactor) :-
-		nth1(Index, Matrix, MatrixRow),
-		cholesky_row(1, Index, Size, MatrixRow, PreviousRows, [], CholeskyRow),
-		append(PreviousRows, [CholeskyRow], NextRows),
-		NextIndex is Index + 1,
-		cholesky_decomposition(NextIndex, Size, Matrix, NextRows, CholeskyFactor).
-
-	cholesky_row(ColumnIndex, RowIndex, Size, _MatrixRow, _PreviousRows, Prefix, CholeskyRow) :-
-		ColumnIndex > RowIndex,
-		!,
-		Remaining is Size - RowIndex,
-		zero_vector(Remaining, Zeroes),
-		append(Prefix, Zeroes, CholeskyRow).
-	cholesky_row(ColumnIndex, RowIndex, Size, MatrixRow, PreviousRows, Prefix, CholeskyRow) :-
-		nth1(ColumnIndex, MatrixRow, MatrixValue),
-		(   ColumnIndex =:= RowIndex ->
-			sum_squares(Prefix, Correction),
-			DiagonalValue0 is MatrixValue - Correction,
-			(   DiagonalValue0 > 1.0e-12 ->
-				DiagonalValue is sqrt(DiagonalValue0)
-			;   throw(error(non_positive_definite_precision_matrix(DiagonalValue0), logtalk(cholesky_decomposition(MatrixRow), this)))
-			),
-			append(Prefix, [DiagonalValue], NextPrefix),
-			NextColumnIndex is ColumnIndex + 1,
-			cholesky_row(NextColumnIndex, RowIndex, Size, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
-		;   nth1(ColumnIndex, PreviousRows, PreviousRow),
-			prefix_dot(Prefix, PreviousRow, 0.0, Correction),
-			nth1(ColumnIndex, PreviousRow, Diagonal),
-			Entry is (MatrixValue - Correction) / Diagonal,
-			append(Prefix, [Entry], NextPrefix),
-			NextColumnIndex is ColumnIndex + 1,
-			cholesky_row(NextColumnIndex, RowIndex, Size, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
-		).
-
-	sum_squares([], 0.0).
-	sum_squares([Value| Values], SumSquares) :-
-		SumSquares0 is Value * Value,
-		sum_squares(Values, SumSquares0, SumSquares).
-
-	sum_squares([], SumSquares, SumSquares).
-	sum_squares([Value| Values], SumSquares0, SumSquares) :-
-		SumSquares1 is SumSquares0 + Value * Value,
-		sum_squares(Values, SumSquares1, SumSquares).
-
-	prefix_dot([], _OtherValues, DotProduct, DotProduct).
-	prefix_dot([Value| Values], [OtherValue| OtherValues], DotProduct0, DotProduct) :-
-		DotProduct1 is DotProduct0 + Value * OtherValue,
-		prefix_dot(Values, OtherValues, DotProduct1, DotProduct).
-
-	solve_cholesky(CholeskyFactor, Values, Solution) :-
-		forward_substitution(CholeskyFactor, Values, ForwardSolution),
-		backward_substitution(CholeskyFactor, ForwardSolution, Solution).
-
-	forward_substitution(CholeskyFactor, Values, Solution) :-
-		forward_substitution(CholeskyFactor, Values, 1, [], Solution).
-
-	forward_substitution([], [], _Index, Solution, Solution).
-	forward_substitution([Row| Rows], [Value| Values], Index, KnownSolutions0, Solution) :-
-		PreviousCount is Index - 1,
-		forward_correction(Row, KnownSolutions0, PreviousCount, 0.0, Correction),
-		nth1(Index, Row, Diagonal),
-		CurrentSolution is (Value - Correction) / Diagonal,
-		append(KnownSolutions0, [CurrentSolution], KnownSolutions1),
-		NextIndex is Index + 1,
-		forward_substitution(Rows, Values, NextIndex, KnownSolutions1, Solution).
-
-	forward_correction(_Row, _KnownSolutions, 0, Correction, Correction) :-
-		!.
-	forward_correction([Coefficient| Coefficients], [KnownSolution| KnownSolutions], Count, Correction0, Correction) :-
-		Correction1 is Correction0 + Coefficient * KnownSolution,
-		NextCount is Count - 1,
-		forward_correction(Coefficients, KnownSolutions, NextCount, Correction1, Correction).
-
-	backward_substitution(CholeskyFactor, Values, Solution) :-
-		length(Values, Size),
-		backward_substitution(Size, CholeskyFactor, Values, [], Solution).
-
-	backward_substitution(0, _CholeskyFactor, _Values, Solution, Solution) :-
-		!.
-	backward_substitution(Index, CholeskyFactor, Values, KnownSolutions0, Solution) :-
-		nth1(Index, CholeskyFactor, Row),
-		nth1(Index, Row, Diagonal),
-		nth1(Index, Values, Value),
-		NextIndex is Index + 1,
-		backward_correction(NextIndex, Index, CholeskyFactor, KnownSolutions0, 0.0, Correction),
-		CurrentSolution is (Value - Correction) / Diagonal,
-		NextRowIndex is Index - 1,
-		backward_substitution(NextRowIndex, CholeskyFactor, Values, [CurrentSolution| KnownSolutions0], Solution).
-
-	backward_correction(_RowIndex, _ColumnIndex, _CholeskyFactor, [], Correction, Correction) :-
-		!.
-	backward_correction(RowIndex, ColumnIndex, CholeskyFactor, [KnownSolution| KnownSolutions], Correction0, Correction) :-
-		nth1(RowIndex, CholeskyFactor, Row),
-		nth1(ColumnIndex, Row, Coefficient),
-		Correction1 is Correction0 + Coefficient * KnownSolution,
-		NextRowIndex is RowIndex + 1,
-		backward_correction(NextRowIndex, ColumnIndex, CholeskyFactor, KnownSolutions, Correction1, Correction).
-
-	sum_log_diagonal([], _Index, SumLog, SumLog).
-	sum_log_diagonal([Row| Rows], Index, SumLog0, SumLog) :-
-		nth1(Index, Row, Diagonal),
-		SumLog1 is SumLog0 + log(Diagonal),
-		NextIndex is Index + 1,
-		sum_log_diagonal(Rows, NextIndex, SumLog1, SumLog).
+		shift_matrix_diagonal(Matrix0, Jitter, Matrix).
 
 	default_option(maximum_iterations(300)).
 	default_option(tolerance(1.0e-6)).

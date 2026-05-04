@@ -25,10 +25,10 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
-		comment is 'Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric Jacobi whitening.',
+		date is 2026-05-04,
+		comment is 'Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric eigendecomposition whitening.',
 		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using a deterministic symmetric Jacobi eigendecomposition, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.',
+			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using the shared deterministic symmetric eigendecomposition from ``linear_algebra``, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.',
 			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
 			'Dimension reducer representation' - 'The learned reducer is represented by default as ``ica_reducer(Encoders, Components, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores the learned unmixing vectors in feature space, and ``Diagnostics`` records whitening and FastICA metadata.'
 		],
@@ -55,6 +55,11 @@
 		valid/2
 	]).
 
+	:- uses(linear_algebra, [
+		add_vectors/3, covariance_matrix/2, matrix_vector_product/3, new_vector/3,
+		stabilize_vector_sign/2, subtract_vectors/3, symmetric_eigen/5
+	]).
+
 	learn(Dataset, DimensionReducer, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -70,7 +75,7 @@
 		^^option(n_components(RequestedComponentCount), Options),
 		MaxComponentCount is min(FeatureCount, SampleCount - 1),
 		^^check_component_count(RequestedComponentCount, MaxComponentCount, ComponentCount),
-		^^covariance_matrix(Rows, CovarianceMatrix),
+		covariance_matrix(Rows, CovarianceMatrix),
 		extract_whitening_rows(CovarianceMatrix, ComponentCount, Options, WhiteningRows, WhiteningEigenvalues),
 		whiten_rows(Rows, WhiteningRows, WhitenedRows),
 		extract_components(WhitenedRows, WhiteningRows, ComponentCount, Options, Components, ComponentDiagnostics),
@@ -101,237 +106,33 @@
 
 	extract_whitening_rows(CovarianceMatrix, Requested, Options, WhiteningRows, WhiteningEigenvalues) :-
 		^^option(tolerance(Tolerance), Options),
-		jacobi_eigenpairs(CovarianceMatrix, Tolerance, Eigenpairs),
-		positive_eigenpairs(Eigenpairs, Tolerance, PositiveEigenpairs),
-		length(PositiveEigenpairs, AvailableComponentCount),
+		^^option(maximum_iterations(MaximumIterations), Options),
+		symmetric_eigen(CovarianceMatrix, Tolerance, MaximumIterations, OrderedEigenvectors, OrderedEigenvalues),
+		positive_eigenpairs(OrderedEigenvectors, OrderedEigenvalues, Tolerance, PositiveEigenvectors, PositiveEigenvalues),
+		length(PositiveEigenvalues, AvailableComponentCount),
 		(   Requested =< AvailableComponentCount ->
-			whitening_rows(PositiveEigenpairs, Requested, WhiteningRows, WhiteningEigenvalues)
+			whitening_rows(PositiveEigenvectors, PositiveEigenvalues, Requested, WhiteningRows, WhiteningEigenvalues)
 		;   domain_error(component_count, Requested-AvailableComponentCount)
 		).
 
-	jacobi_eigenpairs(Matrix, Tolerance, Eigenpairs) :-
-		length(Matrix, Size),
-		^^basis_initial_vectors(1, Size, Eigenvectors0),
-		jacobi_maximum_sweeps(Size, MaximumSweeps),
-		jacobi_sweeps(Matrix, Eigenvectors0, Size, Tolerance, MaximumSweeps, DiagonalMatrix, Eigenvectors),
-		diagonal_values(DiagonalMatrix, Eigenvalues),
-		^^transpose_matrix(Eigenvectors, EigenvectorColumns),
-		eigenpairs(Eigenvalues, EigenvectorColumns, Eigenpairs0),
-		sort_eigenpairs_descending(Eigenpairs0, Eigenpairs).
-
-	jacobi_maximum_sweeps(Size, MaximumSweeps) :-
-		MaximumSweeps is max(1, 8 * Size * Size).
-
-	jacobi_sweeps(Matrix, Eigenvectors, _Size, Tolerance, _RemainingSweeps, Matrix, Eigenvectors) :-
-		max_off_diagonal(Matrix, MaximumOffDiagonal),
-		MaximumOffDiagonal =< Tolerance,
-		!.
-	jacobi_sweeps(Matrix, Eigenvectors, _Size, _Tolerance, 0, Matrix, Eigenvectors) :-
-		!.
-	jacobi_sweeps(Matrix0, Eigenvectors0, Size, Tolerance, RemainingSweeps, Matrix, Eigenvectors) :-
-		jacobi_sweep_pairs(1, 2, Size, Tolerance, Matrix0, Eigenvectors0, Matrix1, Eigenvectors1),
-		NextRemainingSweeps is RemainingSweeps - 1,
-		jacobi_sweeps(Matrix1, Eigenvectors1, Size, Tolerance, NextRemainingSweeps, Matrix, Eigenvectors).
-
-	jacobi_sweep_pairs(Pivot, _Partner, Size, _Tolerance, Matrix, Eigenvectors, Matrix, Eigenvectors) :-
-		Pivot >= Size,
-		!.
-	jacobi_sweep_pairs(Pivot, Partner, Size, Tolerance, Matrix0, Eigenvectors0, Matrix, Eigenvectors) :-
-		(   Partner > Size ->
-			NextPivot is Pivot + 1,
-			NextPartner is NextPivot + 1,
-			jacobi_sweep_pairs(NextPivot, NextPartner, Size, Tolerance, Matrix0, Eigenvectors0, Matrix, Eigenvectors)
-		;   jacobi_rotate_if_needed(Matrix0, Eigenvectors0, Pivot, Partner, Tolerance, Matrix1, Eigenvectors1),
-			NextPartner is Partner + 1,
-			jacobi_sweep_pairs(Pivot, NextPartner, Size, Tolerance, Matrix1, Eigenvectors1, Matrix, Eigenvectors)
+	positive_eigenpairs([], [], _Tolerance, [], []).
+	positive_eigenpairs([Eigenvector| Eigenvectors], [Eigenvalue| Eigenvalues], Tolerance, PositiveEigenvectors, PositiveEigenvalues) :-
+		(   Eigenvalue > Tolerance ->
+			PositiveEigenvectors = [Eigenvector| PositiveEigenvectors0],
+			PositiveEigenvalues = [Eigenvalue| PositiveEigenvalues0],
+			positive_eigenpairs(Eigenvectors, Eigenvalues, Tolerance, PositiveEigenvectors0, PositiveEigenvalues0)
+		;   PositiveEigenvectors = [],
+			PositiveEigenvalues = []
 		).
 
-	jacobi_rotate_if_needed(Matrix0, Eigenvectors0, Pivot, Partner, Tolerance, Matrix, Eigenvectors) :-
-		^^matrix_value(Matrix0, Pivot, Partner, OffDiagonal),
-		(   abs(OffDiagonal) =< Tolerance ->
-			Matrix = Matrix0,
-			Eigenvectors = Eigenvectors0
-		;   jacobi_rotation(Matrix0, Pivot, Partner, Cosine, Sine),
-			rotate_matrix(Matrix0, Pivot, Partner, Cosine, Sine, Matrix),
-			rotate_eigenvectors(Eigenvectors0, Pivot, Partner, Cosine, Sine, Eigenvectors)
-		).
-
-	jacobi_rotation(Matrix, Pivot, Partner, Cosine, Sine) :-
-		^^matrix_value(Matrix, Pivot, Pivot, PivotDiagonal),
-		^^matrix_value(Matrix, Partner, Partner, PartnerDiagonal),
-		^^matrix_value(Matrix, Pivot, Partner, OffDiagonal),
-		HalfDelta is (PartnerDiagonal - PivotDiagonal) / (2.0 * OffDiagonal),
-		(   abs(HalfDelta) =< 1.0e-12 ->
-			Tangent = 1.0
-		;   Sign is HalfDelta / abs(HalfDelta),
-			Tangent is Sign / (abs(HalfDelta) + sqrt(1.0 + HalfDelta * HalfDelta))
-		),
-		Cosine is 1.0 / sqrt(1.0 + Tangent * Tangent),
-		Sine is Tangent * Cosine.
-
-	rotate_matrix(Matrix0, Pivot, Partner, Cosine, Sine, Matrix) :-
-		length(Matrix0, Size),
-		rotate_matrix_rows(1, Size, Matrix0, Pivot, Partner, Cosine, Sine, Matrix).
-
-	rotate_matrix_rows(RowIndex, Size, _Matrix0, _Pivot, _Partner, _Cosine, _Sine, []) :-
-		RowIndex > Size,
+	whitening_rows(_Eigenvectors, _Eigenvalues, 0, [], []) :-
 		!.
-	rotate_matrix_rows(RowIndex, Size, Matrix0, Pivot, Partner, Cosine, Sine, [Row| Matrix]) :-
-		rotate_matrix_columns(RowIndex, 1, Size, Matrix0, Pivot, Partner, Cosine, Sine, Row),
-		NextRowIndex is RowIndex + 1,
-		rotate_matrix_rows(NextRowIndex, Size, Matrix0, Pivot, Partner, Cosine, Sine, Matrix).
-
-	rotate_matrix_columns(_RowIndex, ColumnIndex, Size, _Matrix0, _Pivot, _Partner, _Cosine, _Sine, []) :-
-		ColumnIndex > Size,
-		!.
-	rotate_matrix_columns(RowIndex, ColumnIndex, Size, Matrix0, Pivot, Partner, Cosine, Sine, [Value| Row]) :-
-		rotated_matrix_value(Matrix0, Pivot, Partner, Cosine, Sine, RowIndex, ColumnIndex, Value),
-		NextColumnIndex is ColumnIndex + 1,
-		rotate_matrix_columns(RowIndex, NextColumnIndex, Size, Matrix0, Pivot, Partner, Cosine, Sine, Row).
-
-	rotated_matrix_value(Matrix, Pivot, Partner, Cosine, Sine, Pivot, Pivot, Value) :-
-		!,
-		^^matrix_value(Matrix, Pivot, Pivot, PivotDiagonal),
-		^^matrix_value(Matrix, Partner, Partner, PartnerDiagonal),
-		^^matrix_value(Matrix, Pivot, Partner, OffDiagonal),
-		Value is Cosine * Cosine * PivotDiagonal - 2.0 * Sine * Cosine * OffDiagonal + Sine * Sine * PartnerDiagonal.
-	rotated_matrix_value(Matrix, Pivot, Partner, Cosine, Sine, Partner, Partner, Value) :-
-		!,
-		^^matrix_value(Matrix, Pivot, Pivot, PivotDiagonal),
-		^^matrix_value(Matrix, Partner, Partner, PartnerDiagonal),
-		^^matrix_value(Matrix, Pivot, Partner, OffDiagonal),
-		Value is Sine * Sine * PivotDiagonal + 2.0 * Sine * Cosine * OffDiagonal + Cosine * Cosine * PartnerDiagonal.
-	rotated_matrix_value(_Matrix, Pivot, Partner, _Cosine, _Sine, Pivot, Partner, 0.0) :-
-		!.
-	rotated_matrix_value(_Matrix, Pivot, Partner, _Cosine, _Sine, Partner, Pivot, 0.0) :-
-		!.
-	rotated_matrix_value(Matrix, Pivot, Partner, Cosine, Sine, Pivot, ColumnIndex, Value) :-
-		ColumnIndex =\= Pivot,
-		ColumnIndex =\= Partner,
-		!,
-		^^matrix_value(Matrix, Pivot, ColumnIndex, PivotValue),
-		^^matrix_value(Matrix, Partner, ColumnIndex, PartnerValue),
-		Value is Cosine * PivotValue - Sine * PartnerValue.
-	rotated_matrix_value(Matrix, Pivot, Partner, Cosine, Sine, Partner, ColumnIndex, Value) :-
-		ColumnIndex =\= Pivot,
-		ColumnIndex =\= Partner,
-		!,
-		^^matrix_value(Matrix, Pivot, ColumnIndex, PivotValue),
-		^^matrix_value(Matrix, Partner, ColumnIndex, PartnerValue),
-		Value is Sine * PivotValue + Cosine * PartnerValue.
-	rotated_matrix_value(Matrix, Pivot, Partner, Cosine, Sine, RowIndex, Pivot, Value) :-
-		RowIndex =\= Pivot,
-		RowIndex =\= Partner,
-		!,
-		^^matrix_value(Matrix, RowIndex, Pivot, PivotValue),
-		^^matrix_value(Matrix, RowIndex, Partner, PartnerValue),
-		Value is Cosine * PivotValue - Sine * PartnerValue.
-	rotated_matrix_value(Matrix, Pivot, Partner, Cosine, Sine, RowIndex, Partner, Value) :-
-		RowIndex =\= Pivot,
-		RowIndex =\= Partner,
-		!,
-		^^matrix_value(Matrix, RowIndex, Pivot, PivotValue),
-		^^matrix_value(Matrix, RowIndex, Partner, PartnerValue),
-		Value is Sine * PivotValue + Cosine * PartnerValue.
-	rotated_matrix_value(Matrix, _Pivot, _Partner, _Cosine, _Sine, RowIndex, ColumnIndex, Value) :-
-		^^matrix_value(Matrix, RowIndex, ColumnIndex, Value).
-
-	rotate_eigenvectors(Eigenvectors0, Pivot, Partner, Cosine, Sine, Eigenvectors) :-
-		length(Eigenvectors0, Size),
-		rotate_eigenvector_rows(1, Size, Eigenvectors0, Pivot, Partner, Cosine, Sine, Eigenvectors).
-
-	rotate_eigenvector_rows(RowIndex, Size, _Eigenvectors0, _Pivot, _Partner, _Cosine, _Sine, []) :-
-		RowIndex > Size,
-		!.
-	rotate_eigenvector_rows(RowIndex, Size, Eigenvectors0, Pivot, Partner, Cosine, Sine, [Row| Eigenvectors]) :-
-		rotate_eigenvector_columns(RowIndex, 1, Size, Eigenvectors0, Pivot, Partner, Cosine, Sine, Row),
-		NextRowIndex is RowIndex + 1,
-		rotate_eigenvector_rows(NextRowIndex, Size, Eigenvectors0, Pivot, Partner, Cosine, Sine, Eigenvectors).
-
-	rotate_eigenvector_columns(_RowIndex, ColumnIndex, Size, _Eigenvectors0, _Pivot, _Partner, _Cosine, _Sine, []) :-
-		ColumnIndex > Size,
-		!.
-	rotate_eigenvector_columns(RowIndex, ColumnIndex, Size, Eigenvectors0, Pivot, Partner, Cosine, Sine, [Value| Row]) :-
-		rotated_eigenvector_value(Eigenvectors0, Pivot, Partner, Cosine, Sine, RowIndex, ColumnIndex, Value),
-		NextColumnIndex is ColumnIndex + 1,
-		rotate_eigenvector_columns(RowIndex, NextColumnIndex, Size, Eigenvectors0, Pivot, Partner, Cosine, Sine, Row).
-
-	rotated_eigenvector_value(Eigenvectors, Pivot, Partner, Cosine, Sine, RowIndex, Pivot, Value) :-
-		!,
-		^^matrix_value(Eigenvectors, RowIndex, Pivot, PivotValue),
-		^^matrix_value(Eigenvectors, RowIndex, Partner, PartnerValue),
-		Value is Cosine * PivotValue - Sine * PartnerValue.
-	rotated_eigenvector_value(Eigenvectors, Pivot, Partner, Cosine, Sine, RowIndex, Partner, Value) :-
-		!,
-		^^matrix_value(Eigenvectors, RowIndex, Pivot, PivotValue),
-		^^matrix_value(Eigenvectors, RowIndex, Partner, PartnerValue),
-		Value is Sine * PivotValue + Cosine * PartnerValue.
-	rotated_eigenvector_value(Eigenvectors, _Pivot, _Partner, _Cosine, _Sine, RowIndex, ColumnIndex, Value) :-
-		^^matrix_value(Eigenvectors, RowIndex, ColumnIndex, Value).
-
-	max_off_diagonal(Matrix, MaximumOffDiagonal) :-
-		length(Matrix, Size),
-		max_off_diagonal(1, 2, Size, Matrix, 0.0, MaximumOffDiagonal).
-
-	max_off_diagonal(Pivot, _Partner, Size, _Matrix, Maximum0, Maximum0) :-
-		Pivot >= Size,
-		!.
-	max_off_diagonal(Pivot, Partner, Size, Matrix, Maximum0, Maximum) :-
-		(   Partner > Size ->
-			NextPivot is Pivot + 1,
-			NextPartner is NextPivot + 1,
-			max_off_diagonal(NextPivot, NextPartner, Size, Matrix, Maximum0, Maximum)
-		;   ^^matrix_value(Matrix, Pivot, Partner, Value),
-			Maximum1 is max(Maximum0, abs(Value)),
-			NextPartner is Partner + 1,
-			max_off_diagonal(Pivot, NextPartner, Size, Matrix, Maximum1, Maximum)
-		).
-
-	diagonal_values(Matrix, Values) :-
-		length(Matrix, Size),
-		diagonal_values(1, Size, Matrix, Values).
-
-	diagonal_values(Index, Size, _Matrix, []) :-
-		Index > Size,
-		!.
-	diagonal_values(Index, Size, Matrix, [Value| Values]) :-
-		^^matrix_value(Matrix, Index, Index, Value),
-		NextIndex is Index + 1,
-		diagonal_values(NextIndex, Size, Matrix, Values).
-
-	eigenpairs([], [], []).
-	eigenpairs([Eigenvalue| Eigenvalues], [Eigenvector| Eigenvectors], [eigenpair(Eigenvalue, Eigenvector)| Eigenpairs]) :-
-		eigenpairs(Eigenvalues, Eigenvectors, Eigenpairs).
-
-	sort_eigenpairs_descending([], []).
-	sort_eigenpairs_descending([Eigenpair| Eigenpairs], SortedEigenpairs) :-
-		sort_eigenpairs_descending(Eigenpairs, SortedEigenpairs0),
-		insert_eigenpair_descending(Eigenpair, SortedEigenpairs0, SortedEigenpairs).
-
-	insert_eigenpair_descending(eigenpair(Eigenvalue, Eigenvector), [], [eigenpair(Eigenvalue, Eigenvector)]) :-
-		!.
-	insert_eigenpair_descending(eigenpair(Eigenvalue, Eigenvector), [eigenpair(OtherEigenvalue, OtherEigenvector)| Eigenpairs], [eigenpair(Eigenvalue, Eigenvector), eigenpair(OtherEigenvalue, OtherEigenvector)| Eigenpairs]) :-
-		Eigenvalue >= OtherEigenvalue,
-		!.
-	insert_eigenpair_descending(Eigenpair, [OtherEigenpair| Eigenpairs], [OtherEigenpair| SortedEigenpairs]) :-
-		insert_eigenpair_descending(Eigenpair, Eigenpairs, SortedEigenpairs).
-
-	positive_eigenpairs([], _Tolerance, []).
-	positive_eigenpairs([eigenpair(Eigenvalue, Eigenvector)| Eigenpairs], Tolerance, [eigenpair(Eigenvalue, Eigenvector)| PositiveEigenpairs]) :-
-		Eigenvalue > Tolerance,
-		!,
-		positive_eigenpairs(Eigenpairs, Tolerance, PositiveEigenpairs).
-	positive_eigenpairs([_Eigenpair| Eigenpairs], Tolerance, PositiveEigenpairs) :-
-		positive_eigenpairs(Eigenpairs, Tolerance, PositiveEigenpairs).
-
-	whitening_rows(_Eigenpairs, 0, [], []) :-
-		!.
-	whitening_rows([eigenpair(Eigenvalue, Eigenvector)| Eigenpairs], Requested, [WhiteningRow| WhiteningRows], [Eigenvalue| WhiteningEigenvalues]) :-
+	whitening_rows([Eigenvector| Eigenvectors], [Eigenvalue| Eigenvalues], Requested, [WhiteningRow| WhiteningRows], [Eigenvalue| WhiteningEigenvalues]) :-
 		Requested > 0,
 		WhiteningScale is 1.0 / sqrt(Eigenvalue),
 		rescale(Eigenvector, WhiteningScale, WhiteningRow),
 		NextRequested is Requested - 1,
-		whitening_rows(Eigenpairs, NextRequested, WhiteningRows, WhiteningEigenvalues).
+		whitening_rows(Eigenvectors, Eigenvalues, NextRequested, WhiteningRows, WhiteningEigenvalues).
 
 	normalize_nonzero_vector(Vector, NormalizedVector) :-
 		euclidean_norm(Vector, Norm),
@@ -340,7 +141,7 @@
 
 	whiten_rows([], _WhiteningRows, []).
 	whiten_rows([Row| Rows], WhiteningRows, [WhitenedRow| WhitenedRows]) :-
-		^^matrix_vector_product(WhiteningRows, Row, WhitenedRow),
+		matrix_vector_product(WhiteningRows, Row, WhitenedRow),
 		whiten_rows(Rows, WhiteningRows, WhitenedRows).
 
 	extract_components(WhitenedRows, WhiteningRows, Requested, Options, Components, ComponentDiagnostics) :-
@@ -415,10 +216,10 @@
 		projection_square_mean(Projections, SquareMean),
 		CorrectionScale is 3.0 * SquareMean,
 		rescale(Vector0, CorrectionScale, Correction),
-		^^subtract_vectors(Numerator, Correction, Updated0),
+		subtract_vectors(Numerator, Correction, Updated0),
 		orthonormalize_vector(Updated0, PreviousWhitenedComponents, Updated1),
 		normalize_nonzero_vector(Updated1, NormalizedUpdated),
-		^^stabilize_vector_sign(NormalizedUpdated, Vector),
+		stabilize_vector_sign(NormalizedUpdated, Vector),
 		alignment_delta(Vector, Vector0, Delta).
 
 	row_projections([], _Vector, []).
@@ -428,7 +229,7 @@
 
 	cubic_expectation([FirstRow| Rows], Projections, Expectation) :-
 		length(FirstRow, Size),
-		^^zero_vector(Size, ZeroExpectation),
+		new_vector(Size, 0.0, ZeroExpectation),
 		cubic_expectation([FirstRow| Rows], Projections, ZeroExpectation, SumExpectation),
 		length([FirstRow| Rows], Count),
 		Scale is 1.0 / Count,
@@ -438,7 +239,7 @@
 	cubic_expectation([Row| Rows], [Projection| Projections], Expectation0, Expectation) :-
 		Weight is Projection * Projection * Projection,
 		rescale(Row, Weight, Contribution),
-		^^add_vectors(Expectation0, Contribution, Expectation1),
+		add_vectors(Expectation0, Contribution, Expectation1),
 		cubic_expectation(Rows, Projections, Expectation1, Expectation).
 
 	projection_square_mean(Projections, Mean) :-
@@ -472,7 +273,7 @@
 	orthonormalize_vector(Vector0, [PreviousVector| PreviousWhitenedComponents], Vector) :-
 		dot_product(Vector0, PreviousVector, Projection),
 		rescale(PreviousVector, Projection, Contribution),
-		^^subtract_vectors(Vector0, Contribution, Vector1),
+		subtract_vectors(Vector0, Contribution, Vector1),
 		orthonormalize_vector(Vector1, PreviousWhitenedComponents, Vector).
 
 	alignment_delta(Vector1, Vector2, Delta) :-
@@ -486,7 +287,7 @@
 	accumulate_weighted_rows([], [], Component, Component).
 	accumulate_weighted_rows([Weight| Weights], [Row| Rows], Component0, Component) :-
 		rescale(Row, Weight, Contribution),
-		^^add_vectors(Component0, Contribution, Component1),
+		add_vectors(Component0, Contribution, Component1),
 		accumulate_weighted_rows(Weights, Rows, Component1, Component).
 
 	valid_ica_diagnostics(Encoders, Components, Diagnostics) :-

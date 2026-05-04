@@ -8,14 +8,14 @@
 ``ica``
 =======
 
-Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric Jacobi whitening.
+Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric eigendecomposition whitening.
 
 | **Availability:** 
 |    ``logtalk_load(ica(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Independent Component Analysis reducer for continuous datasets using a portable 
 |    ``public`` :ref:`dimension_reducer_common <dimension_reducer_common/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`pairs <pairs/0>`
@@ -32,7 +33,7 @@ Independent Component Analysis reducer for continuous datasets using a portable 
 
 | **Remarks:**
 
-   - Algorithm: Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using a deterministic symmetric Jacobi eigendecomposition, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.
+   - Algorithm: Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using the shared deterministic symmetric eigendecomposition from ``linear_algebra``, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.
    - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
    - Dimension reducer representation: The learned reducer is represented by default as ``ica_reducer(Encoders, Components, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores the learned unmixing vectors in feature space, and ``Diagnostics`` records whitening and FastICA metadata.
 

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-03,
+		date is 2026-05-04,
 		comment is 'Gaussian process regression regressor supporting continuous and mixed-feature datasets using an exact mixed Gaussian process with posterior uncertainty estimates. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses exact Gaussian process regression with a mixed covariance kernel: an automatic-relevance-determination squared-exponential component over continuous encoded features and a field-wise categorical overlap component over categorical attributes. Hyperparameters are selected by maximizing the log marginal likelihood using a deterministic coordinate search in log space.',
@@ -67,6 +67,10 @@
 
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(linear_algebra, [
+		cholesky_decomposition/2, forward_substitution/3, matrix_diagonal/2, solve_cholesky/3
 	]).
 
 	learn(Dataset, Regressor, UserOptions) :-
@@ -160,9 +164,6 @@
 	feature_layout_encoded_feature_count([categorical_segment(_Attribute, Width)| FeatureLayout], FeatureCount) :-
 		feature_layout_encoded_feature_count(FeatureLayout, FeatureCount0),
 		FeatureCount is FeatureCount0 + Width.
-
-	training_feature_count([TrainingFeature| _TrainingFeatures], FeatureCount) :-
-		length(TrainingFeature, FeatureCount).
 
 	build_gaussian_process_encoders([], _Examples, _Options, []).
 	build_gaussian_process_encoders([Attribute-Values| Attributes], Examples, Options, [Encoder| Encoders]) :-
@@ -506,7 +507,7 @@
 	factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, Attempt, Kernel, JitterAttempts, CholeskyFactor) :-
 		update_kernel_jitter(Kernel0, JitterScaleFactor, Attempt, CandidateKernel),
 		build_covariance_matrix(TrainingFeatures, CandidateKernel, CovarianceMatrix),
-		(   catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(non_positive_definite_covariance(_Value), _Context), fail) ->
+		(   catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(non_positive_definite_matrix(_Value), _Context), fail) ->
 			Kernel = CandidateKernel,
 			JitterAttempts = Attempt
 		;   NextAttempt is Attempt + 1,
@@ -584,136 +585,17 @@
 	observation_variance(squared_exponential_kernel(_FeatureLayout, _LengthScales, _CategoricalPenalties, SignalVariance, NoiseVariance, _Jitter), Variance) :-
 		Variance is SignalVariance + NoiseVariance.
 
-	squared_distance([], [], DistanceSquared, DistanceSquared).
-	squared_distance([Value| Values], [OtherValue| OtherValues], DistanceSquared0, DistanceSquared) :-
-		Difference is Value - OtherValue,
-		DistanceSquared1 is DistanceSquared0 + Difference * Difference,
-		squared_distance(Values, OtherValues, DistanceSquared1, DistanceSquared).
-
-	cholesky_decomposition(CovarianceMatrix, CholeskyFactor) :-
-		length(CovarianceMatrix, Size),
-		cholesky_decomposition(1, Size, CovarianceMatrix, [], CholeskyFactor).
-
-	cholesky_decomposition(Index, Size, _CovarianceMatrix, CholeskyFactor, CholeskyFactor) :-
-		Index > Size,
-		!.
-	cholesky_decomposition(Index, Size, CovarianceMatrix, PreviousRows, CholeskyFactor) :-
-		nth1(Index, CovarianceMatrix, CovarianceRow),
-		cholesky_row(1, Index, Size, CovarianceRow, PreviousRows, [], CholeskyRow),
-		append(PreviousRows, [CholeskyRow], NextRows),
-		NextIndex is Index + 1,
-		cholesky_decomposition(NextIndex, Size, CovarianceMatrix, NextRows, CholeskyFactor).
-
-	cholesky_row(ColumnIndex, RowIndex, Size, _CovarianceRow, _PreviousRows, Prefix, CholeskyRow) :-
-		ColumnIndex > RowIndex,
-		!,
-		Remaining is Size - RowIndex,
-		zero_vector(Remaining, Zeroes),
-		append(Prefix, Zeroes, CholeskyRow).
-	cholesky_row(ColumnIndex, RowIndex, Size, CovarianceRow, PreviousRows, Prefix, CholeskyRow) :-
-		nth1(ColumnIndex, CovarianceRow, CovarianceValue),
-		(   ColumnIndex =:= RowIndex ->
-			sum_squares(Prefix, Correction),
-			DiagonalValue0 is CovarianceValue - Correction,
-			(   DiagonalValue0 > 1.0e-12 ->
-				DiagonalValue is sqrt(DiagonalValue0)
-			;   throw(error(non_positive_definite_covariance(DiagonalValue0), logtalk(cholesky_decomposition(CovarianceRow), this)))
-			),
-			append(Prefix, [DiagonalValue], NextPrefix),
-			NextColumnIndex is ColumnIndex + 1,
-			cholesky_row(NextColumnIndex, RowIndex, Size, CovarianceRow, PreviousRows, NextPrefix, CholeskyRow)
-		;   nth1(ColumnIndex, PreviousRows, PreviousRow),
-			prefix_dot(Prefix, PreviousRow, 0.0, Correction),
-			nth1(ColumnIndex, PreviousRow, Diagonal),
-			Entry is (CovarianceValue - Correction) / Diagonal,
-			append(Prefix, [Entry], NextPrefix),
-			NextColumnIndex is ColumnIndex + 1,
-			cholesky_row(NextColumnIndex, RowIndex, Size, CovarianceRow, PreviousRows, NextPrefix, CholeskyRow)
-		).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
-	sum_squares([], 0.0).
-	sum_squares([Value| Values], SumSquares) :-
-		SumSquares0 is Value * Value,
-		sum_squares(Values, SumSquares0, SumSquares).
-
-	sum_squares([], SumSquares, SumSquares).
-	sum_squares([Value| Values], SumSquares0, SumSquares) :-
-		SumSquares1 is SumSquares0 + Value * Value,
-		sum_squares(Values, SumSquares1, SumSquares).
-
-	prefix_dot([], _OtherValues, DotProduct, DotProduct).
-	prefix_dot([Value| Values], [OtherValue| OtherValues], DotProduct0, DotProduct) :-
-		DotProduct1 is DotProduct0 + Value * OtherValue,
-		prefix_dot(Values, OtherValues, DotProduct1, DotProduct).
-
-	solve_cholesky(CholeskyFactor, Values, Solution) :-
-		forward_substitution(CholeskyFactor, Values, ForwardSolution),
-		backward_substitution(CholeskyFactor, ForwardSolution, Solution).
-
-	forward_substitution(CholeskyFactor, Values, Solution) :-
-		forward_substitution(CholeskyFactor, Values, 1, [], Solution).
-
-	forward_substitution([], [], _Index, Solution, Solution).
-	forward_substitution([Row| Rows], [Value| Values], Index, KnownSolutions0, Solution) :-
-		PreviousCount is Index - 1,
-		forward_correction(Row, KnownSolutions0, PreviousCount, 0.0, Correction),
-		nth1(Index, Row, Diagonal),
-		CurrentSolution is (Value - Correction) / Diagonal,
-		append(KnownSolutions0, [CurrentSolution], KnownSolutions1),
-		NextIndex is Index + 1,
-		forward_substitution(Rows, Values, NextIndex, KnownSolutions1, Solution).
-
-	forward_correction(_Row, _KnownSolutions, 0, Correction, Correction) :-
-		!.
-	forward_correction([Coefficient| Coefficients], [KnownSolution| KnownSolutions], Count, Correction0, Correction) :-
-		Correction1 is Correction0 + Coefficient * KnownSolution,
-		NextCount is Count - 1,
-		forward_correction(Coefficients, KnownSolutions, NextCount, Correction1, Correction).
-
-	backward_substitution(CholeskyFactor, Values, Solution) :-
-		length(Values, Size),
-		backward_substitution(Size, CholeskyFactor, Values, [], Solution).
-
-	backward_substitution(0, _CholeskyFactor, _Values, Solution, Solution) :-
-		!.
-	backward_substitution(Index, CholeskyFactor, Values, KnownSolutions0, Solution) :-
-		nth1(Index, CholeskyFactor, Row),
-		nth1(Index, Row, Diagonal),
-		nth1(Index, Values, Value),
-		NextIndex is Index + 1,
-		backward_correction(NextIndex, Index, CholeskyFactor, KnownSolutions0, 0.0, Correction),
-		CurrentSolution is (Value - Correction) / Diagonal,
-		NextRowIndex is Index - 1,
-		backward_substitution(NextRowIndex, CholeskyFactor, Values, [CurrentSolution| KnownSolutions0], Solution).
-
-	backward_correction(_RowIndex, _ColumnIndex, _CholeskyFactor, [], Correction, Correction) :-
-		!.
-	backward_correction(RowIndex, ColumnIndex, CholeskyFactor, [KnownSolution| KnownSolutions], Correction0, Correction) :-
-		nth1(RowIndex, CholeskyFactor, Row),
-		nth1(ColumnIndex, Row, Coefficient),
-		Correction1 is Correction0 + Coefficient * KnownSolution,
-		NextRowIndex is RowIndex + 1,
-		backward_correction(NextRowIndex, ColumnIndex, CholeskyFactor, KnownSolutions, Correction1, Correction).
-
 	log_marginal_likelihood(CenteredTargets, Alpha, CholeskyFactor, LogMarginalLikelihood) :-
 		length(CenteredTargets, Count),
 		dot_product(CenteredTargets, Alpha, DataFit),
-		sum_log_diagonal(CholeskyFactor, 1, 0.0, LogDeterminantHalf),
+		matrix_diagonal(CholeskyFactor, Diagonal),
+		sum_log_values(Diagonal, 0.0, LogDeterminantHalf),
 		LogMarginalLikelihood is -0.5 * DataFit - LogDeterminantHalf - 0.5 * Count * log(2.0 * pi).
 
-	sum_log_diagonal([], _Index, SumLog, SumLog).
-	sum_log_diagonal([Row| Rows], Index, SumLog0, SumLog) :-
-		nth1(Index, Row, Diagonal),
-		SumLog1 is SumLog0 + log(Diagonal),
-		NextIndex is Index + 1,
-		sum_log_diagonal(Rows, NextIndex, SumLog1, SumLog).
+	sum_log_values([], SumLog, SumLog).
+	sum_log_values([Value| Values], SumLog0, SumLog) :-
+		SumLog1 is SumLog0 + log(Value),
+		sum_log_values(Values, SumLog1, SumLog).
 
 	kernel_vector([], _Features, _Kernel, []).
 	kernel_vector([TrainingFeature| TrainingFeatures], Features, Kernel, [Value| Values]) :-

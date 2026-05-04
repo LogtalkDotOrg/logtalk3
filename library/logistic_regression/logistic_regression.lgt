@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch gradient descent to train a single multiclass softmax model. Binary classification is treated as a two-class special case of the same objective.',
@@ -57,6 +57,10 @@
 
 	:- uses(list, [
 		append/3, length/2, member/2, memberchk/2
+	]).
+
+	:- uses(linear_algebra, [
+		add_scaled_vector/4, new_vector/3, new_vector_like/2
 	]).
 
 	:- uses(numberlist, [
@@ -215,7 +219,7 @@
 
 	initialize_models([], _, []).
 	initialize_models([Class| Classes], NumFeatures, [class_model(Class, 0.0, Weights)| Models]) :-
-		zero_vector(NumFeatures, Weights),
+		new_vector(NumFeatures, 0.0, Weights),
 		initialize_models(Classes, NumFeatures, Models).
 
 	optimize_models(Rows, Options, Iteration, Models0, Models) :-
@@ -242,7 +246,7 @@
 
 	zero_gradient_models([], []).
 	zero_gradient_models([class_model(Class, _Bias, Weights)| Models], [class_gradient(Class, 0.0, ZeroWeights)| GradientModels]) :-
-		zero_vector_like(Weights, ZeroWeights),
+		new_vector_like(Weights, ZeroWeights),
 		zero_gradient_models(Models, GradientModels).
 
 	accumulate_model_gradients([], _, GradientModels, GradientModels).
@@ -291,11 +295,6 @@
 		!.
 	target_value(_, _, 0.0).
 
-	add_scaled_vector([], _, [], []).
-	add_scaled_vector([Feature| Features], Scale, [Gradient| Gradients], [Updated| UpdatedGradients]) :-
-		Updated is Gradient + Feature * Scale,
-		add_scaled_vector(Features, Scale, Gradients, UpdatedGradients).
-
 	update_weights([], [], _, _, _, [], MaxDelta, MaxDelta).
 	update_weights([Weight0| Weights0], [Gradient| Gradients], Scale, Regularization, LearningRate, [Weight1| Weights1], MaxDelta0, MaxDelta) :-
 		MeanGradient is Gradient * Scale + Regularization * Weight0,
@@ -303,17 +302,6 @@
 		Delta is abs(Weight1 - Weight0),
 		MaxDelta1 is max(Delta, MaxDelta0),
 		update_weights(Weights0, Gradients, Scale, Regularization, LearningRate, Weights1, MaxDelta1, MaxDelta).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
-	zero_vector_like([], []).
-	zero_vector_like([_| Weights], [0.0| Zeroes]) :-
-		zero_vector_like(Weights, Zeroes).
 
 	class_logits([], _, []).
 	class_logits([class_model(Class, Bias, Weights)| Models], Features, [Class-Score| ClassLogits]) :-

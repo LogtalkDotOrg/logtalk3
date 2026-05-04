@@ -21,6 +21,7 @@
 
 :- initialization((
 	logtalk_load(types(loader)),
+	logtalk_load(linear_algebra(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(statistics(loader)),

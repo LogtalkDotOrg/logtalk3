@@ -186,6 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linda"><span class="xref std std-ref">linda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#linear-algebra"><span class="xref std std-ref">linear_algebra</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linear-regression"><span class="xref std std-ref">linear_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linear-svm"><span class="xref std std-ref">linear_svm</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linter-reporter"><span class="xref std std-ref">linter_reporter</span></a></li>
@@ -340,7 +341,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -360,6 +361,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
+<div class="line"><a class="reference internal" href="linear_algebra_0.html#linear-algebra-0"><span class="std std-ref">linear_algebra</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
 <div class="line"><a class="reference internal" href="population_0.html#population-0"><span class="std std-ref">population</span></a></div>
@@ -400,45 +402,24 @@
 <li><p><a class="reference internal" href="#preprocessing-diagnostics-3" id="id16"><code class="docutils literal notranslate"><span class="pre">preprocessing_diagnostics/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#iterative-dimension-reducer-diagnostics-11" id="id17"><code class="docutils literal notranslate"><span class="pre">iterative_dimension_reducer_diagnostics/11</span></code></a></p></li>
 <li><p><a class="reference internal" href="#component-iteration-diagnostics-4" id="id18"><code class="docutils literal notranslate"><span class="pre">component_iteration_diagnostics/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#zero-vector-2" id="id19"><code class="docutils literal notranslate"><span class="pre">zero_vector/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#zero-vector-like-2" id="id20"><code class="docutils literal notranslate"><span class="pre">zero_vector_like/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#add-vectors-3" id="id21"><code class="docutils literal notranslate"><span class="pre">add_vectors/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#subtract-vectors-3" id="id22"><code class="docutils literal notranslate"><span class="pre">subtract_vectors/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#initial-vector-2" id="id23"><code class="docutils literal notranslate"><span class="pre">initial_vector/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#basis-vector-3" id="id24"><code class="docutils literal notranslate"><span class="pre">basis_vector/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#initial-vectors-2" id="id25"><code class="docutils literal notranslate"><span class="pre">initial_vectors/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#make-vector-3" id="id26"><code class="docutils literal notranslate"><span class="pre">make_vector/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#basis-initial-vectors-3" id="id27"><code class="docutils literal notranslate"><span class="pre">basis_initial_vectors/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#make-matrix-4" id="id28"><code class="docutils literal notranslate"><span class="pre">make_matrix/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#matrix-vector-product-3" id="id29"><code class="docutils literal notranslate"><span class="pre">matrix_vector_product/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#normalize-vector-2" id="id30"><code class="docutils literal notranslate"><span class="pre">normalize_vector/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#difference-norm-3" id="id31"><code class="docutils literal notranslate"><span class="pre">difference_norm/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#stabilize-vector-sign-2" id="id32"><code class="docutils literal notranslate"><span class="pre">stabilize_vector_sign/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#first-significant-component-2" id="id33"><code class="docutils literal notranslate"><span class="pre">first_significant_component/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#zero-matrix-2" id="id34"><code class="docutils literal notranslate"><span class="pre">zero_matrix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#zero-matrix-3" id="id35"><code class="docutils literal notranslate"><span class="pre">zero_matrix/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#outer-product-3" id="id36"><code class="docutils literal notranslate"><span class="pre">outer_product/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#add-matrices-3" id="id37"><code class="docutils literal notranslate"><span class="pre">add_matrices/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#subtract-matrices-3" id="id38"><code class="docutils literal notranslate"><span class="pre">subtract_matrices/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#scale-matrix-3" id="id39"><code class="docutils literal notranslate"><span class="pre">scale_matrix/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#transpose-matrix-2" id="id40"><code class="docutils literal notranslate"><span class="pre">transpose_matrix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#matrix-value-4" id="id41"><code class="docutils literal notranslate"><span class="pre">matrix_value/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mean-vector-2" id="id42"><code class="docutils literal notranslate"><span class="pre">mean_vector/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#extract-components-5" id="id43"><code class="docutils literal notranslate"><span class="pre">extract_components/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#known-attribute-values-3" id="id44"><code class="docutils literal notranslate"><span class="pre">known_attribute_values/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#examples-to-rows-3" id="id45"><code class="docutils literal notranslate"><span class="pre">examples_to_rows/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encode-instance-3" id="id46"><code class="docutils literal notranslate"><span class="pre">encode_instance/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encoder-attribute-names-2" id="id47"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#project-components-4" id="id48"><code class="docutils literal notranslate"><span class="pre">project_components/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#covariance-matrix-2" id="id49"><code class="docutils literal notranslate"><span class="pre">covariance_matrix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-linear-encoders-1" id="id50"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-projection-components-2" id="id51"><code class="docutils literal notranslate"><span class="pre">valid_projection_components/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-dimension-reducer-metadata-1" id="id52"><code class="docutils literal notranslate"><span class="pre">valid_dimension_reducer_metadata/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-dimension-reducer-details-3" id="id53"><code class="docutils literal notranslate"><span class="pre">print_dimension_reducer_details/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#zero-vector-like-2" id="id19"><code class="docutils literal notranslate"><span class="pre">zero_vector_like/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basis-vector-3" id="id20"><code class="docutils literal notranslate"><span class="pre">basis_vector/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#initial-vectors-2" id="id21"><code class="docutils literal notranslate"><span class="pre">initial_vectors/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#basis-initial-vectors-3" id="id22"><code class="docutils literal notranslate"><span class="pre">basis_initial_vectors/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#extract-components-5" id="id23"><code class="docutils literal notranslate"><span class="pre">extract_components/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#known-attribute-values-3" id="id24"><code class="docutils literal notranslate"><span class="pre">known_attribute_values/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#examples-to-rows-3" id="id25"><code class="docutils literal notranslate"><span class="pre">examples_to_rows/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encode-instance-3" id="id26"><code class="docutils literal notranslate"><span class="pre">encode_instance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encoder-attribute-names-2" id="id27"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#project-components-4" id="id28"><code class="docutils literal notranslate"><span class="pre">project_components/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-linear-encoders-1" id="id29"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-projection-components-2" id="id30"><code class="docutils literal notranslate"><span class="pre">valid_projection_components/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-dimension-reducer-metadata-1" id="id31"><code class="docutils literal notranslate"><span class="pre">valid_dimension_reducer_metadata/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-dimension-reducer-details-3" id="id32"><code class="docutils literal notranslate"><span class="pre">print_dimension_reducer_details/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id54">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id55">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id33">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id34">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -783,29 +764,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="zero-vector-2">
-<span id="dimension-reducer-common-0-zero-vector-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_vector/2</span></code></a><a class="headerlink" href="#zero-vector-2" title="Link to this heading"></a></h3>
-<p>Constructs a numeric zero vector with the requested length.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector(Count,Zeroes)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_vector(+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="zero-vector-like-2">
-<span id="dimension-reducer-common-0-zero-vector-like-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_vector_like/2</span></code></a><a class="headerlink" href="#zero-vector-like-2" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-zero-vector-like-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_vector_like/2</span></code></a><a class="headerlink" href="#zero-vector-like-2" title="Link to this heading"></a></h3>
 <p>Constructs a zero vector matching the length of the first vector in a list of vectors, or returns the empty list when the input is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -825,71 +785,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="add-vectors-3">
-<span id="dimension-reducer-common-0-add-vectors-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_vectors/3</span></code></a><a class="headerlink" href="#add-vectors-3" title="Link to this heading"></a></h3>
-<p>Adds two numeric vectors element-wise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_vectors(Vector1,Vector2,Vector)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_vectors(+list(number),+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="subtract-vectors-3">
-<span id="dimension-reducer-common-0-subtract-vectors-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subtract_vectors/3</span></code></a><a class="headerlink" href="#subtract-vectors-3" title="Link to this heading"></a></h3>
-<p>Subtracts the second numeric vector from the first element-wise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract_vectors(Vector1,Vector2,Vector)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract_vectors(+list(number),+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="initial-vector-2">
-<span id="dimension-reducer-common-0-initial-vector-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initial_vector/2</span></code></a><a class="headerlink" href="#initial-vector-2" title="Link to this heading"></a></h3>
-<p>Constructs the canonical all-ones initial vector with the requested length.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">initial_vector(Size,Vector)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">initial_vector(+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="basis-vector-3">
-<span id="dimension-reducer-common-0-basis-vector-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basis_vector/3</span></code></a><a class="headerlink" href="#basis-vector-3" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-basis-vector-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basis_vector/3</span></code></a><a class="headerlink" href="#basis-vector-3" title="Link to this heading"></a></h3>
 <p>Constructs a canonical basis vector for the requested size and one-based index.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -910,7 +807,7 @@
 <hr class="docutils" />
 </section>
 <section id="initial-vectors-2">
-<span id="dimension-reducer-common-0-initial-vectors-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initial_vectors/2</span></code></a><a class="headerlink" href="#initial-vectors-2" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-initial-vectors-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initial_vectors/2</span></code></a><a class="headerlink" href="#initial-vectors-2" title="Link to this heading"></a></h3>
 <p>Constructs the default all-ones initial vector followed by canonical basis vectors for the requested size.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -930,29 +827,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="make-vector-3">
-<span id="dimension-reducer-common-0-make-vector-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">make_vector/3</span></code></a><a class="headerlink" href="#make-vector-3" title="Link to this heading"></a></h3>
-<p>Constructs a numeric vector with the requested length, filled with the given value.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">make_vector(Count,Value,Vector)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">make_vector(+integer,+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="basis-initial-vectors-3">
-<span id="dimension-reducer-common-0-basis-initial-vectors-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basis_initial_vectors/3</span></code></a><a class="headerlink" href="#basis-initial-vectors-3" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-basis-initial-vectors-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">basis_initial_vectors/3</span></code></a><a class="headerlink" href="#basis-initial-vectors-3" title="Link to this heading"></a></h3>
 <p>Constructs canonical basis vectors from the given one-based index up to the requested size.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -972,324 +848,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="make-matrix-4">
-<span id="dimension-reducer-common-0-make-matrix-4"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">make_matrix/4</span></code></a><a class="headerlink" href="#make-matrix-4" title="Link to this heading"></a></h3>
-<p>Constructs a numeric matrix with the requested row and column counts, filled with the given value.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">make_matrix(Rows,Columns,Value,Matrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">make_matrix(+integer,+integer,+number,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="matrix-vector-product-3">
-<span id="dimension-reducer-common-0-matrix-vector-product-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">matrix_vector_product/3</span></code></a><a class="headerlink" href="#matrix-vector-product-3" title="Link to this heading"></a></h3>
-<p>Computes the matrix-vector product for a numeric matrix and vector.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_vector_product(Matrix,Vector,Product)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_vector_product(+list(list(number)),+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="normalize-vector-2">
-<span id="dimension-reducer-common-0-normalize-vector-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_vector/2</span></code></a><a class="headerlink" href="#normalize-vector-2" title="Link to this heading"></a></h3>
-<p>Normalizes a numeric vector to unit length when its norm is above the shared numerical tolerance.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_vector(Vector,NormalizedVector)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_vector(+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="difference-norm-3">
-<span id="dimension-reducer-common-0-difference-norm-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">difference_norm/3</span></code></a><a class="headerlink" href="#difference-norm-3" title="Link to this heading"></a></h3>
-<p>Computes the Euclidean norm of the difference between two numeric vectors.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">difference_norm(Vector1,Vector2,Norm)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">difference_norm(+list(number),+list(number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="stabilize-vector-sign-2">
-<span id="dimension-reducer-common-0-stabilize-vector-sign-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">stabilize_vector_sign/2</span></code></a><a class="headerlink" href="#stabilize-vector-sign-2" title="Link to this heading"></a></h3>
-<p>Normalizes a vector sign convention by flipping vectors whose first significant component is negative.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">stabilize_vector_sign(Vector,StableVector)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">stabilize_vector_sign(+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="first-significant-component-2">
-<span id="dimension-reducer-common-0-first-significant-component-2"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">first_significant_component/2</span></code></a><a class="headerlink" href="#first-significant-component-2" title="Link to this heading"></a></h3>
-<p>Returns the first component whose absolute value exceeds the shared numerical tolerance, defaulting to zero when no such component exists.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">first_significant_component(Vector,First)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">first_significant_component(+list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="zero-matrix-2">
-<span id="dimension-reducer-common-0-zero-matrix-2"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_matrix/2</span></code></a><a class="headerlink" href="#zero-matrix-2" title="Link to this heading"></a></h3>
-<p>Constructs a square numeric zero matrix with the requested size.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_matrix(Size,Matrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_matrix(+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="zero-matrix-3">
-<span id="dimension-reducer-common-0-zero-matrix-3"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zero_matrix/3</span></code></a><a class="headerlink" href="#zero-matrix-3" title="Link to this heading"></a></h3>
-<p>Constructs a numeric zero matrix with the requested row and column counts.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_matrix(Rows,Columns,Matrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">zero_matrix(+integer,+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="outer-product-3">
-<span id="dimension-reducer-common-0-outer-product-3"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">outer_product/3</span></code></a><a class="headerlink" href="#outer-product-3" title="Link to this heading"></a></h3>
-<p>Computes the outer product of two numeric vectors.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">outer_product(Vector1,Vector2,Matrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">outer_product(+list(number),+list(number),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="add-matrices-3">
-<span id="dimension-reducer-common-0-add-matrices-3"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_matrices/3</span></code></a><a class="headerlink" href="#add-matrices-3" title="Link to this heading"></a></h3>
-<p>Adds two numeric matrices element-wise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_matrices(Matrix1,Matrix2,Matrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">add_matrices(+list(list(number)),+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="subtract-matrices-3">
-<span id="dimension-reducer-common-0-subtract-matrices-3"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subtract_matrices/3</span></code></a><a class="headerlink" href="#subtract-matrices-3" title="Link to this heading"></a></h3>
-<p>Subtracts the second numeric matrix from the first element-wise.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract_matrices(Matrix1,Matrix2,Matrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">subtract_matrices(+list(list(number)),+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="scale-matrix-3">
-<span id="dimension-reducer-common-0-scale-matrix-3"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">scale_matrix/3</span></code></a><a class="headerlink" href="#scale-matrix-3" title="Link to this heading"></a></h3>
-<p>Scales each element of a numeric matrix by the given factor.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">scale_matrix(Matrix,Scale,ScaledMatrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">scale_matrix(+list(list(number)),+number,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="transpose-matrix-2">
-<span id="dimension-reducer-common-0-transpose-matrix-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">transpose_matrix/2</span></code></a><a class="headerlink" href="#transpose-matrix-2" title="Link to this heading"></a></h3>
-<p>Transposes a numeric matrix represented as a list of row lists.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">transpose_matrix(Matrix,Transpose)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">transpose_matrix(+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="matrix-value-4">
-<span id="dimension-reducer-common-0-matrix-value-4"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">matrix_value/4</span></code></a><a class="headerlink" href="#matrix-value-4" title="Link to this heading"></a></h3>
-<p>Looks up a numeric matrix element using one-based row and column indices.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_value(Matrix,RowIndex,ColumnIndex,Value)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_value(+list(list(number)),+integer,+integer,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="mean-vector-2">
-<span id="dimension-reducer-common-0-mean-vector-2"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_vector/2</span></code></a><a class="headerlink" href="#mean-vector-2" title="Link to this heading"></a></h3>
-<p>Computes the column-wise arithmetic mean vector for a numeric row matrix.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_vector(Rows,Mean)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">mean_vector(+list(list(number)),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="extract-components-5">
-<span id="dimension-reducer-common-0-extract-components-5"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">extract_components/5</span></code></a><a class="headerlink" href="#extract-components-5" title="Link to this heading"></a></h3>
-<p>Extracts leading eigen-components from a numeric matrix using repeated power iteration and deflation until the requested count or the configured tolerance is reached.</p>
+<span id="dimension-reducer-common-0-extract-components-5"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">extract_components/5</span></code></a><a class="headerlink" href="#extract-components-5" title="Link to this heading"></a></h3>
+<p>Extracts leading positive eigen-components from a numeric matrix using the shared symmetric eigensolver until the requested count or the configured tolerance is reached.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1309,7 +870,7 @@
 <hr class="docutils" />
 </section>
 <section id="known-attribute-values-3">
-<span id="dimension-reducer-common-0-known-attribute-values-3"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">known_attribute_values/3</span></code></a><a class="headerlink" href="#known-attribute-values-3" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-known-attribute-values-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">known_attribute_values/3</span></code></a><a class="headerlink" href="#known-attribute-values-3" title="Link to this heading"></a></h3>
 <p>Collects the known numeric values for a given attribute across the training examples.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1330,7 +891,7 @@
 <hr class="docutils" />
 </section>
 <section id="examples-to-rows-3">
-<span id="dimension-reducer-common-0-examples-to-rows-3"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">examples_to_rows/3</span></code></a><a class="headerlink" href="#examples-to-rows-3" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-examples-to-rows-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">examples_to_rows/3</span></code></a><a class="headerlink" href="#examples-to-rows-3" title="Link to this heading"></a></h3>
 <p>Encodes a list of training examples into numeric feature rows using the importing reducer example hook and learned encoders.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1351,7 +912,7 @@
 <hr class="docutils" />
 </section>
 <section id="encode-instance-3">
-<span id="dimension-reducer-common-0-encode-instance-3"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_instance/3</span></code></a><a class="headerlink" href="#encode-instance-3" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-encode-instance-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_instance/3</span></code></a><a class="headerlink" href="#encode-instance-3" title="Link to this heading"></a></h3>
 <p>Encodes an instance using the learned continuous attribute encoders.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1372,7 +933,7 @@
 <hr class="docutils" />
 </section>
 <section id="encoder-attribute-names-2">
-<span id="dimension-reducer-common-0-encoder-attribute-names-2"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names/2</span></code></a><a class="headerlink" href="#encoder-attribute-names-2" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-encoder-attribute-names-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encoder_attribute_names/2</span></code></a><a class="headerlink" href="#encoder-attribute-names-2" title="Link to this heading"></a></h3>
 <p>Collects encoder attribute names preserving encoder order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1393,7 +954,7 @@
 <hr class="docutils" />
 </section>
 <section id="project-components-4">
-<span id="dimension-reducer-common-0-project-components-4"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">project_components/4</span></code></a><a class="headerlink" href="#project-components-4" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-project-components-4"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">project_components/4</span></code></a><a class="headerlink" href="#project-components-4" title="Link to this heading"></a></h3>
 <p>Projects encoded features onto the learned components and returns <cite>component_N-Score</cite> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1413,29 +974,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="covariance-matrix-2">
-<span id="dimension-reducer-common-0-covariance-matrix-2"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">covariance_matrix/2</span></code></a><a class="headerlink" href="#covariance-matrix-2" title="Link to this heading"></a></h3>
-<p>Computes the sample covariance matrix for a list of centered numeric feature rows.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">covariance_matrix(Rows,CovarianceMatrix)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">covariance_matrix(+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="valid-linear-encoders-1">
-<span id="dimension-reducer-common-0-valid-linear-encoders-1"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a><a class="headerlink" href="#valid-linear-encoders-1" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-valid-linear-encoders-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a><a class="headerlink" href="#valid-linear-encoders-1" title="Link to this heading"></a></h3>
 <p>True when a list of encoders only contains valid <code class="docutils literal notranslate"><span class="pre">continuous/3</span></code> encoder terms with distinct attributes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1456,7 +996,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-projection-components-2">
-<span id="dimension-reducer-common-0-valid-projection-components-2"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_projection_components/2</span></code></a><a class="headerlink" href="#valid-projection-components-2" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-valid-projection-components-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_projection_components/2</span></code></a><a class="headerlink" href="#valid-projection-components-2" title="Link to this heading"></a></h3>
 <p>True when projection components are numeric vectors compatible with the encoder feature dimension.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1477,7 +1017,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-dimension-reducer-metadata-1">
-<span id="dimension-reducer-common-0-valid-dimension-reducer-metadata-1"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_dimension_reducer_metadata/1</span></code></a><a class="headerlink" href="#valid-dimension-reducer-metadata-1" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-valid-dimension-reducer-metadata-1"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_dimension_reducer_metadata/1</span></code></a><a class="headerlink" href="#valid-dimension-reducer-metadata-1" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata records the reducer model and effective training options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1498,7 +1038,7 @@
 <hr class="docutils" />
 </section>
 <section id="print-dimension-reducer-details-3">
-<span id="dimension-reducer-common-0-print-dimension-reducer-details-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_dimension_reducer_details/3</span></code></a><a class="headerlink" href="#print-dimension-reducer-details-3" title="Link to this heading"></a></h3>
+<span id="dimension-reducer-common-0-print-dimension-reducer-details-3"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_dimension_reducer_details/3</span></code></a><a class="headerlink" href="#print-dimension-reducer-details-3" title="Link to this heading"></a></h3>
 <p>Prints the common diagnostics, encoders, and component-count lines used by reducer-specific pretty printers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

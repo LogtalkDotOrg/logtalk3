@@ -186,6 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_algebra.html"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_regression.html"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_svm.html"><code class="docutils literal notranslate"><span class="pre">linear_svm</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
@@ -340,9 +341,10 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes.</p></li>
-<li><p><strong>Jacobi Whitening Plus Fixed-Point ICA</strong>: Whitens the training
-covariance matrix using a symmetric Jacobi eigendecomposition and then
-extracts independent directions using deterministic cubic FastICA with
+<li><p><strong>Shared Symmetric Whitening Plus Fixed-Point ICA</strong>: Whitens the
+training covariance matrix using the shared symmetric
+eigendecomposition from <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> and then extracts
+independent directions using deterministic cubic FastICA with
 orthogonal deflation.</p></li>
 <li><p><strong>Always Centered</strong>: Training and transform inputs are always centered
 using the training-set means before whitening and projection.</p></li>
@@ -370,9 +372,9 @@ default is <code class="docutils literal notranslate"><span class="pre">2</span>
 <li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling/1</span></code>: Whether to divide each continuous attribute by
 its training-set standard deviation before whitening. Options:
 <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> (default).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Maximum number of FastICA fixed-point steps
-used when estimating each independent component. The default is
-<code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maximum_iterations/1</span></code>: Maximum iteration bound used both by the
+whitening eigensolver and by the FastICA fixed-point steps for each
+independent component. The default is <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tolerance/1</span></code>: Positive convergence tolerance used both for
 whitening rank detection and for FastICA fixed-point stopping. The
 default is <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>.</p></li>

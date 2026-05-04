@@ -15,7 +15,7 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-02
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,7 +31,7 @@ Linear regression regressor supporting continuous and mixed-feature datasets usi
 
 | **Remarks:**
 
-   - Algorithm: Uses the shared regression encoding core to solve the ordinary least-squares problem directly with pivoted modified Gram-Schmidt orthogonalization. The intercept is always retained and encoded feature columns that are numerically dependent on earlier selected columns are dropped and assigned zero coefficients.
+   - Algorithm: Uses the shared regression encoding core to build a row-oriented design matrix with an explicit intercept column, then delegates least-squares solving and rank estimation to the linear_algebra library. The intercept is always retained and encoded feature columns that are numerically dependent on the design matrix are assigned zero coefficients.
    - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and encoded columns with no independent signal after accounting for the intercept and previously selected features are assigned zero coefficients.
    - Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.
    - Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.

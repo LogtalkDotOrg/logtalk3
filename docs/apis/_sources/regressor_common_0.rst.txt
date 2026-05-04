@@ -15,7 +15,7 @@ Shared predicates for regressor learning defaults, diagnostics, validation, data
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-02
+| **Date:** 2026-05-04
 
 | **Compilation flags:**
 |    ``static``
@@ -27,6 +27,7 @@ Shared predicates for regressor learning defaults, diagnostics, validation, data
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`population <population/0>`
@@ -465,7 +466,7 @@ Validates and encodes an attribute-value list as a numeric feature vector using 
 ``fit_linear_model/7``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Builds linear-model encoders from the training dataset, encodes the examples, fits an ordinary least-squares bias plus weight vector using a direct pivoted orthogonal solve, and returns solver diagnostics terms.
+Builds linear-model encoders from the training dataset, encodes the examples, fits an ordinary least-squares bias plus weight vector using the linear_algebra least-squares solver, and returns solver diagnostics terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -852,7 +853,7 @@ Builds the encoder list used by linear models from dataset attribute declaration
 ``train_linear_model/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Fits an ordinary least-squares linear model bias and weight vector from encoded rows using a direct pivoted orthogonal solve and returns solver diagnostics terms.
+Fits an ordinary least-squares linear model bias and weight vector from encoded rows by delegating the solve and rank estimation to the linear_algebra library and returns solver diagnostics terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -865,363 +866,21 @@ Fits an ordinary least-squares linear model bias and weight vector from encoded 
 
 ------------
 
-.. index:: rows_to_training_matrix/5
-.. _regressor_common/0::rows_to_training_matrix/5:
+.. index:: rows_to_design_matrix/3
+.. _regressor_common/0::rows_to_design_matrix/3:
 
-``rows_to_training_matrix/5``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Transforms encoded training rows into a target vector and one numeric column per encoded feature.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rows_to_training_matrix(Rows,FeatureCount,Targets,Columns,RowCount)``
-| **Mode and number of proofs:**
-|    ``rows_to_training_matrix(+list(pair),+integer,-list(float),-list(list(float)),-integer)`` - ``one``
-
-
-------------
-
-.. index:: empty_columns/2
-.. _regressor_common/0::empty_columns/2:
-
-``empty_columns/2``
-^^^^^^^^^^^^^^^^^^^
-
-Creates a list of empty columns with the requested count.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``empty_columns(Count,Columns)``
-| **Mode and number of proofs:**
-|    ``empty_columns(+integer,-list(list))`` - ``one``
-
-
-------------
-
-.. index:: prepend_features_to_columns/3
-.. _regressor_common/0::prepend_features_to_columns/3:
-
-``prepend_features_to_columns/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Prepends one encoded feature vector into the accumulated column-oriented design matrix representation.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``prepend_features_to_columns(Features,Columns0,Columns)``
-| **Mode and number of proofs:**
-|    ``prepend_features_to_columns(+list(float),+list(list(float)),-list(list(float)))`` - ``one``
-
-
-------------
-
-.. index:: reverse_columns/2
-.. _regressor_common/0::reverse_columns/2:
-
-``reverse_columns/2``
-^^^^^^^^^^^^^^^^^^^^^
-
-Reverses every column in a column-oriented design matrix built by prepending feature values.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``reverse_columns(Columns0,Columns)``
-| **Mode and number of proofs:**
-|    ``reverse_columns(+list(list(float)),-list(list(float)))`` - ``one``
-
-
-------------
-
-.. index:: intercept_column/2
-.. _regressor_common/0::intercept_column/2:
-
-``intercept_column/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Creates the all-ones intercept column for a given number of training rows.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``intercept_column(RowCount,Column)``
-| **Mode and number of proofs:**
-|    ``intercept_column(+integer,-list(float))`` - ``one``
-
-
-------------
-
-.. index:: select_orthogonal_columns/5
-.. _regressor_common/0::select_orthogonal_columns/5:
-
-``select_orthogonal_columns/5``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Builds a pivoted orthogonal least-squares basis consisting of the intercept and the encoded feature columns that contribute independent signal.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``select_orthogonal_columns(FeatureColumns,Targets,InterceptColumn,SelectedColumns,ActiveFeatureCount)``
-| **Mode and number of proofs:**
-|    ``select_orthogonal_columns(+list(list(float)),+list(float),+list(float),-list(compound),-integer)`` - ``one``
-
-
-------------
-
-.. index:: initialize_candidates/4
-.. _regressor_common/0::initialize_candidates/4:
-
-``initialize_candidates/4``
+``rows_to_design_matrix/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Initializes encoded feature-column candidates by removing their intercept projection and storing the first upper-triangular coefficients.
+Transforms encoded training rows into a row-oriented design matrix with a leading intercept column and a target vector.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``initialize_candidates(FeatureColumns,InterceptBasis,Index,Candidates)``
+|    ``rows_to_design_matrix(Rows,DesignMatrix,Targets)``
 | **Mode and number of proofs:**
-|    ``initialize_candidates(+list(list(float)),+list(float),+integer,-list(compound))`` - ``one``
-
-
-------------
-
-.. index:: initialize_candidate/4
-.. _regressor_common/0::initialize_candidate/4:
-
-``initialize_candidate/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Initializes one encoded feature-column candidate for pivoted orthogonal selection.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``initialize_candidate(Column,InterceptBasis,Index,Candidate)``
-| **Mode and number of proofs:**
-|    ``initialize_candidate(+list(float),+list(float),+integer,-compound)`` - ``one``
-
-
-------------
-
-.. index:: select_active_columns/5
-.. _regressor_common/0::select_active_columns/5:
-
-``select_active_columns/5``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Selects independent encoded feature columns by repeatedly promoting the candidate with the largest residual norm and orthogonalizing the remainder.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``select_active_columns(Candidates,Targets,SelectedColumns0,SelectedColumns,ActiveFeatureCount)``
-| **Mode and number of proofs:**
-|    ``select_active_columns(+list(compound),+list(float),+list(compound),-list(compound),-integer)`` - ``one``
-
-
-------------
-
-.. index:: select_best_candidate/3
-.. _regressor_common/0::select_best_candidate/3:
-
-``select_best_candidate/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Selects the remaining encoded feature-column candidate with the largest residual norm.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``select_best_candidate(Candidates0,BestCandidate,RemainingCandidates)``
-| **Mode and number of proofs:**
-|    ``select_best_candidate(+list(compound),-compound,-list(compound))`` - ``one``
-
-
-------------
-
-.. index:: candidate_norm/2
-.. _regressor_common/0::candidate_norm/2:
-
-``candidate_norm/2``
-^^^^^^^^^^^^^^^^^^^^
-
-Computes the Euclidean norm of an encoded feature-column residual candidate.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``candidate_norm(Candidate,Norm)``
-| **Mode and number of proofs:**
-|    ``candidate_norm(+compound,-float)`` - ``one``
-
-
-------------
-
-.. index:: promote_candidate/5
-.. _regressor_common/0::promote_candidate/5:
-
-``promote_candidate/5``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Promotes a selected residual candidate into a normalized orthogonal basis vector and records the corresponding upper-triangular coefficients.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``promote_candidate(Candidate,Norm,Targets,Basis,SelectedColumn)``
-| **Mode and number of proofs:**
-|    ``promote_candidate(+compound,+float,+list(float),-list(float),-compound)`` - ``one``
-
-
-------------
-
-.. index:: orthogonalize_candidates/3
-.. _regressor_common/0::orthogonalize_candidates/3:
-
-``orthogonalize_candidates/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Orthogonalizes the remaining encoded feature-column candidates against a newly selected basis vector.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``orthogonalize_candidates(Candidates0,Basis,Candidates)``
-| **Mode and number of proofs:**
-|    ``orthogonalize_candidates(+list(compound),+list(float),-list(compound))`` - ``one``
-
-
-------------
-
-.. index:: solve_selected_least_squares/2
-.. _regressor_common/0::solve_selected_least_squares/2:
-
-``solve_selected_least_squares/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Solves the upper-triangular least-squares system induced by the selected orthogonal columns.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``solve_selected_least_squares(SelectedColumns,Coefficients)``
-| **Mode and number of proofs:**
-|    ``solve_selected_least_squares(+list(compound),-list(float))`` - ``one``
-
-
-------------
-
-.. index:: selected_correction/4
-.. _regressor_common/0::selected_correction/4:
-
-``selected_correction/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Computes the already-known back-substitution correction for one selected orthogonal column row.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``selected_correction(SelectedColumns,RowIndex,KnownCoefficients,Correction)``
-| **Mode and number of proofs:**
-|    ``selected_correction(+list(compound),+integer,+list(pair),-float)`` - ``one``
-
-
-------------
-
-.. index:: coefficients_from_pairs/2
-.. _regressor_common/0::coefficients_from_pairs/2:
-
-``coefficients_from_pairs/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Extracts pivot-order coefficient values from indexed back-substitution pairs.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``coefficients_from_pairs(Pairs,Coefficients)``
-| **Mode and number of proofs:**
-|    ``coefficients_from_pairs(+list(pair),-list(float))`` - ``one``
-
-
-------------
-
-.. index:: expand_selected_coefficients/5
-.. _regressor_common/0::expand_selected_coefficients/5:
-
-``expand_selected_coefficients/5``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Expands pivot-order least-squares coefficients back into the intercept plus one coefficient per encoded feature.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``expand_selected_coefficients(SelectedColumns,Coefficients,FeatureCount,Bias,Weights)``
-| **Mode and number of proofs:**
-|    ``expand_selected_coefficients(+list(compound),+list(float),+integer,-float,-list(float))`` - ``one``
-
-
-------------
-
-.. index:: assign_selected_weights/4
-.. _regressor_common/0::assign_selected_weights/4:
-
-``assign_selected_weights/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Assigns selected encoded feature coefficients into the full encoded weight vector, leaving dropped coefficients at zero.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``assign_selected_weights(SelectedColumns,Coefficients,Weights0,Weights)``
-| **Mode and number of proofs:**
-|    ``assign_selected_weights(+list(compound),+list(float),+list(float),-list(float))`` - ``one``
-
-
-------------
-
-.. index:: set_weight_at/4
-.. _regressor_common/0::set_weight_at/4:
-
-``set_weight_at/4``
-^^^^^^^^^^^^^^^^^^^
-
-Sets one 1-based position of a numeric weight vector to a supplied value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``set_weight_at(Weights0,Index,Weight,Weights)``
-| **Mode and number of proofs:**
-|    ``set_weight_at(+list(float),+integer,+float,-list(float))`` - ``one``
+|    ``rows_to_design_matrix(+list(pair),-list(list(float)),-list(float))`` - ``one``
 
 
 ------------
@@ -1241,63 +900,6 @@ Computes the residual sum of squares for encoded training rows and a learned int
 |    ``residual_sum_of_squares(Rows,Bias,Weights,ResidualSumOfSquares)``
 | **Mode and number of proofs:**
 |    ``residual_sum_of_squares(+list(pair),+float,+list(float),-float)`` - ``one``
-
-
-------------
-
-.. index:: add_scaled_vector/4
-.. _regressor_common/0::add_scaled_vector/4:
-
-``add_scaled_vector/4``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Adds a scaled numeric vector to another numeric vector.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``add_scaled_vector(Vector,Scale,Vector0,UpdatedVector)``
-| **Mode and number of proofs:**
-|    ``add_scaled_vector(+list(float),+number,+list(float),-list(float))`` - ``one``
-
-
-------------
-
-.. index:: zero_vector/2
-.. _regressor_common/0::zero_vector/2:
-
-``zero_vector/2``
-^^^^^^^^^^^^^^^^^
-
-Creates a zero-filled float vector with the requested length.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zero_vector(Count,Zeroes)``
-| **Mode and number of proofs:**
-|    ``zero_vector(+integer,-list(float))`` - ``one``
-
-
-------------
-
-.. index:: zero_vector_like/2
-.. _regressor_common/0::zero_vector_like/2:
-
-``zero_vector_like/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Creates a zero-filled float vector with the same length as the reference list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zero_vector_like(Reference,Zeroes)``
-| **Mode and number of proofs:**
-|    ``zero_vector_like(+list,-list(float))`` - ``one``
 
 
 ------------
@@ -1545,25 +1147,6 @@ Adds the ridge penalty weights to the feature-feature diagonal block of a linear
 |    ``regularize_ridge_matrix(Matrix0,PenaltyWeights,Regularization,Matrix)``
 | **Mode and number of proofs:**
 |    ``regularize_ridge_matrix(+list(list(float)),+list(float),+float,-list(list(float)))`` - ``one``
-
-
-------------
-
-.. index:: zero_matrix/3
-.. _regressor_common/0::zero_matrix/3:
-
-``zero_matrix/3``
-^^^^^^^^^^^^^^^^^
-
-Creates a zero-filled numeric matrix with the requested row and column counts.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``zero_matrix(Rows,Columns,Matrix)``
-| **Mode and number of proofs:**
-|    ``zero_matrix(+integer,+integer,-list(list(float)))`` - ``one``
 
 
 ------------

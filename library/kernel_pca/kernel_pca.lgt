@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Kernel Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver over centered kernel Gram matrices.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds a centered kernel Gram matrix, and extracts deterministic principal directions in sample space using portable power iteration with deflation.',
@@ -53,12 +53,12 @@
 		keys/2
 	]).
 
-	:- uses(population, [
-		arithmetic_mean/2
-	]).
-
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(linear_algebra, [
+		center_gram_matrix/4, center_gram_vector/4, outer_product/3, scale_matrix/3, subtract_matrices/3, subtract_vectors/3
 	]).
 
 	learn(Dataset, DimensionReducer, UserOptions) :-
@@ -77,7 +77,7 @@
 		^^check_component_count(RequestedComponents, MaxComponentCount, ComponentCount),
 		^^option(kernel(Kernel), Options),
 		build_kernel_matrix(Rows, Kernel, KernelMatrix),
-		center_kernel_matrix(KernelMatrix, CenteredKernelMatrix, RowMeans, TotalMean),
+		center_gram_matrix(KernelMatrix, CenteredKernelMatrix, RowMeans, TotalMean),
 		^^extract_components(CenteredKernelMatrix, ComponentCount, Options, DualEigenvectors, ExplainedVariances),
 		handle_component_shortfall(ComponentCount, Options, CenteredKernelMatrix, DualEigenvectors, ExplainedVariances, ExtractionDiagnostics),
 		normalize_dual_components(DualEigenvectors, ExplainedVariances, Components),
@@ -91,7 +91,7 @@
 		^^option(kernel(Kernel), Options),
 		^^encode_instance(Encoders, Instance, Features),
 		kernel_vector(TrainingRows, Features, Kernel, KernelVector),
-		center_kernel_vector(KernelVector, RowMeans, TotalMean, CenteredKernelVector),
+		center_gram_vector(KernelVector, RowMeans, TotalMean, CenteredKernelVector),
 		^^project_components(Components, CenteredKernelVector, 1, ReducedInstance).
 
 	check_dimension_reducer(DimensionReducer) :-
@@ -154,9 +154,9 @@
 		deflate_extracted_components(Components, ExplainedVariances, DeflatedMatrix, ResidualMatrix).
 
 	deflate_component_matrix(Component, ExplainedVariance, Matrix, DeflatedMatrix) :-
-		^^outer_product(Component, Component, OuterProduct),
-		^^scale_matrix(OuterProduct, ExplainedVariance, ScaledOuterProduct),
-		^^subtract_matrices(Matrix, ScaledOuterProduct, DeflatedMatrix).
+		outer_product(Component, Component, OuterProduct),
+		scale_matrix(OuterProduct, ExplainedVariance, ScaledOuterProduct),
+		subtract_matrices(Matrix, ScaledOuterProduct, DeflatedMatrix).
 
 	build_diagnostics(AttributeNames, SampleCount, Components, ExplainedVariances, Options, ExtractionDiagnostics, Diagnostics) :-
 		^^preprocessing_diagnostics(true, Options, Preprocessing),
@@ -193,38 +193,9 @@
 		Base is Gamma * DotProduct + Coef0,
 		KernelValue is Base ** Degree.
 	kernel_value(rbf(Gamma), Row1, Row2, KernelValue) :-
-		^^subtract_vectors(Row1, Row2, Difference),
+		subtract_vectors(Row1, Row2, Difference),
 		dot_product(Difference, Difference, SquaredDistance),
 		KernelValue is exp(-Gamma * SquaredDistance).
-
-	center_kernel_matrix(KernelMatrix, CenteredKernelMatrix, RowMeans, TotalMean) :-
-		kernel_row_means(KernelMatrix, RowMeans),
-		arithmetic_mean(RowMeans, TotalMean),
-		center_kernel_rows(KernelMatrix, RowMeans, RowMeans, TotalMean, CenteredKernelMatrix).
-
-	kernel_row_means([], []).
-	kernel_row_means([KernelRow| KernelMatrix], [RowMean| RowMeans]) :-
-		arithmetic_mean(KernelRow, RowMean),
-		kernel_row_means(KernelMatrix, RowMeans).
-
-	center_kernel_rows([], [], _AllRowMeans, _TotalMean, []).
-	center_kernel_rows([KernelRow| KernelMatrix], [RowMean| RowMeans], AllRowMeans, TotalMean, [CenteredKernelRow| CenteredKernelMatrix]) :-
-		center_kernel_row(KernelRow, RowMean, AllRowMeans, TotalMean, CenteredKernelRow),
-		center_kernel_rows(KernelMatrix, RowMeans, AllRowMeans, TotalMean, CenteredKernelMatrix).
-
-	center_kernel_row([], _RowMean, [], _TotalMean, []).
-	center_kernel_row([KernelValue| KernelValues], RowMean, [ColumnMean| ColumnMeans], TotalMean, [CenteredKernelValue| CenteredKernelValues]) :-
-		CenteredKernelValue is KernelValue - RowMean - ColumnMean + TotalMean,
-		center_kernel_row(KernelValues, RowMean, ColumnMeans, TotalMean, CenteredKernelValues).
-
-	center_kernel_vector(KernelVector, RowMeans, TotalMean, CenteredKernelVector) :-
-		arithmetic_mean(KernelVector, KernelMean),
-		center_kernel_vector(KernelVector, RowMeans, KernelMean, TotalMean, CenteredKernelVector).
-
-	center_kernel_vector([], [], _KernelMean, _TotalMean, []).
-	center_kernel_vector([KernelValue| KernelValues], [RowMean| RowMeans], KernelMean, TotalMean, [CenteredKernelValue| CenteredKernelValues]) :-
-		CenteredKernelValue is KernelValue - RowMean - KernelMean + TotalMean,
-		center_kernel_vector(KernelValues, RowMeans, KernelMean, TotalMean, CenteredKernelValues).
 
 	kernel_vector([], _Features, _Kernel, []).
 	kernel_vector([TrainingRow| TrainingRows], Features, Kernel, [KernelValue| KernelValues]) :-

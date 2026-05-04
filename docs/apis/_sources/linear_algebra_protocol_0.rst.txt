@@ -1,0 +1,1423 @@
+.. index:: single: linear_algebra_protocol
+.. _linear_algebra_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``linear_algebra_protocol``
+===========================
+
+Linear algebra protocol.
+
+| **Availability:** 
+|    ``logtalk_load(linear_algebra(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new_vector/3
+.. _linear_algebra_protocol/0::new_vector/3:
+
+``new_vector/3``
+^^^^^^^^^^^^^^^^
+
+Constructs a numeric vector with the requested length, filled with the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new_vector(Count,Value,Vector)``
+| **Mode and number of proofs:**
+|    ``new_vector(+integer,+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: new_vector_like/2
+.. _linear_algebra_protocol/0::new_vector_like/2:
+
+``new_vector_like/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a numeric zero vector matching the length of the reference list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new_vector_like(Reference,Zeroes)``
+| **Mode and number of proofs:**
+|    ``new_vector_like(+list,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: add_vectors/3
+.. _linear_algebra_protocol/0::add_vectors/3:
+
+``add_vectors/3``
+^^^^^^^^^^^^^^^^^
+
+Adds two numeric vectors element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_vectors(Vector1,Vector2,Vector)``
+| **Mode and number of proofs:**
+|    ``add_vectors(+list(number),+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: subtract_vectors/3
+.. _linear_algebra_protocol/0::subtract_vectors/3:
+
+``subtract_vectors/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Subtracts the second numeric vector from the first element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subtract_vectors(Vector1,Vector2,Vector)``
+| **Mode and number of proofs:**
+|    ``subtract_vectors(+list(number),+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: add_scaled_vector/4
+.. _linear_algebra_protocol/0::add_scaled_vector/4:
+
+``add_scaled_vector/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds a scaled numeric vector to another numeric vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_scaled_vector(Vector,Scale,Vector0,UpdatedVector)``
+| **Mode and number of proofs:**
+|    ``add_scaled_vector(+list(number),+number,+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: scale_vector/3
+.. _linear_algebra_protocol/0::scale_vector/3:
+
+``scale_vector/3``
+^^^^^^^^^^^^^^^^^^
+
+Scales a numeric vector by the given factor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_vector(Vector,Scale,ScaledVector)``
+| **Mode and number of proofs:**
+|    ``scale_vector(+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: dot_product/3
+.. _linear_algebra_protocol/0::dot_product/3:
+
+``dot_product/3``
+^^^^^^^^^^^^^^^^^
+
+Computes the dot product of two numeric vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dot_product(Vector1,Vector2,Product)``
+| **Mode and number of proofs:**
+|    ``dot_product(+list(number),+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: euclidean_norm/2
+.. _linear_algebra_protocol/0::euclidean_norm/2:
+
+``euclidean_norm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the Euclidean norm of a numeric vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``euclidean_norm(Vector,Norm)``
+| **Mode and number of proofs:**
+|    ``euclidean_norm(+list(number),-float)`` - ``one``
+
+
+------------
+
+.. index:: vector_norm/3
+.. _linear_algebra_protocol/0::vector_norm/3:
+
+``vector_norm/3``
+^^^^^^^^^^^^^^^^^
+
+Computes the norm of a numeric vector for a positive numeric order or the atoms `inf` and `infinity`.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vector_norm(Vector,Order,Norm)``
+| **Mode and number of proofs:**
+|    ``vector_norm(+list(number),@term,-number)`` - ``one_or_error``
+
+
+------------
+
+.. index:: basis_vector/3
+.. _linear_algebra_protocol/0::basis_vector/3:
+
+``basis_vector/3``
+^^^^^^^^^^^^^^^^^^
+
+Constructs a numeric basis vector with value 1.0 at the given one-based index and 0.0 elsewhere.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``basis_vector(Size,Index,Vector)``
+| **Mode and number of proofs:**
+|    ``basis_vector(+integer,+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: new_matrix/4
+.. _linear_algebra_protocol/0::new_matrix/4:
+
+``new_matrix/4``
+^^^^^^^^^^^^^^^^
+
+Constructs a numeric matrix with the requested row and column counts, filled with the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new_matrix(Rows,Columns,Value,Matrix)``
+| **Mode and number of proofs:**
+|    ``new_matrix(+integer,+integer,+number,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: identity_matrix/2
+.. _linear_algebra_protocol/0::identity_matrix/2:
+
+``identity_matrix/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a square identity matrix with the requested size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``identity_matrix(Size,Matrix)``
+| **Mode and number of proofs:**
+|    ``identity_matrix(+integer,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: matrix_vector_product/3
+.. _linear_algebra_protocol/0::matrix_vector_product/3:
+
+``matrix_vector_product/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the matrix-vector product for a numeric matrix and vector, returning the list of row-wise dot products between each matrix row and the vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_vector_product(Matrix,Vector,Product)``
+| **Mode and number of proofs:**
+|    ``matrix_vector_product(+list(list(number)),+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: matrix_matrix_product/3
+.. _linear_algebra_protocol/0::matrix_matrix_product/3:
+
+``matrix_matrix_product/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the matrix-matrix product for two numeric matrices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_matrix_product(Matrix1,Matrix2,Product)``
+| **Mode and number of proofs:**
+|    ``matrix_matrix_product(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: gram_matrix/2
+.. _linear_algebra_protocol/0::gram_matrix/2:
+
+``gram_matrix/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the row Gram matrix of a numeric row matrix by taking all row-wise dot products.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gram_matrix(Rows,GramMatrix)``
+| **Mode and number of proofs:**
+|    ``gram_matrix(+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: matrix_row_means/2
+.. _linear_algebra_protocol/0::matrix_row_means/2:
+
+``matrix_row_means/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the arithmetic mean of each row in a numeric matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_row_means(Matrix,Means)``
+| **Mode and number of proofs:**
+|    ``matrix_row_means(+list(list(number)),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: matrix_column_means/2
+.. _linear_algebra_protocol/0::matrix_column_means/2:
+
+``matrix_column_means/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the arithmetic mean of each column in a numeric matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_column_means(Matrix,Means)``
+| **Mode and number of proofs:**
+|    ``matrix_column_means(+list(list(number)),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: center_gram_matrix/4
+.. _linear_algebra_protocol/0::center_gram_matrix/4:
+
+``center_gram_matrix/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Double-centers a numeric Gram matrix and also returns its row means and total mean.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``center_gram_matrix(GramMatrix,CenteredGramMatrix,RowMeans,TotalMean)``
+| **Mode and number of proofs:**
+|    ``center_gram_matrix(+list(list(number)),-list(list(number)),-list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: center_gram_vector/4
+.. _linear_algebra_protocol/0::center_gram_vector/4:
+
+``center_gram_vector/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Centers a numeric Gram vector using training row means and total mean.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``center_gram_vector(GramVector,RowMeans,TotalMean,CenteredGramVector)``
+| **Mode and number of proofs:**
+|    ``center_gram_vector(+list(number),+list(number),+number,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: outer_product/3
+.. _linear_algebra_protocol/0::outer_product/3:
+
+``outer_product/3``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the outer product of two numeric vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``outer_product(Vector1,Vector2,Matrix)``
+| **Mode and number of proofs:**
+|    ``outer_product(+list(number),+list(number),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: add_matrices/3
+.. _linear_algebra_protocol/0::add_matrices/3:
+
+``add_matrices/3``
+^^^^^^^^^^^^^^^^^^
+
+Adds two numeric matrices element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_matrices(Matrix1,Matrix2,Matrix)``
+| **Mode and number of proofs:**
+|    ``add_matrices(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: subtract_matrices/3
+.. _linear_algebra_protocol/0::subtract_matrices/3:
+
+``subtract_matrices/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Subtracts the second numeric matrix from the first element-wise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subtract_matrices(Matrix1,Matrix2,Matrix)``
+| **Mode and number of proofs:**
+|    ``subtract_matrices(+list(list(number)),+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: scale_matrix/3
+.. _linear_algebra_protocol/0::scale_matrix/3:
+
+``scale_matrix/3``
+^^^^^^^^^^^^^^^^^^
+
+Scales each element of a numeric matrix by the given factor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scale_matrix(Matrix,Scale,ScaledMatrix)``
+| **Mode and number of proofs:**
+|    ``scale_matrix(+list(list(number)),+number,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: frobenius_norm/2
+.. _linear_algebra_protocol/0::frobenius_norm/2:
+
+``frobenius_norm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the Frobenius norm of a numeric matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frobenius_norm(Matrix,Norm)``
+| **Mode and number of proofs:**
+|    ``frobenius_norm(+list(list(number)),-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: transpose_matrix/2
+.. _linear_algebra_protocol/0::transpose_matrix/2:
+
+``transpose_matrix/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Transposes a numeric matrix represented as a list of row lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transpose_matrix(Matrix,Transpose)``
+| **Mode and number of proofs:**
+|    ``transpose_matrix(+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: vector_value/3
+.. _linear_algebra_protocol/0::vector_value/3:
+
+``vector_value/3``
+^^^^^^^^^^^^^^^^^^
+
+Looks up a numeric vector element using a one-based index.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vector_value(Vector,Index,Value)``
+| **Mode and number of proofs:**
+|    ``vector_value(+list(number),+integer,-number)`` - ``one``
+
+
+------------
+
+.. index:: matrix_row/3
+.. _linear_algebra_protocol/0::matrix_row/3:
+
+``matrix_row/3``
+^^^^^^^^^^^^^^^^
+
+Looks up a numeric matrix row using a one-based row index.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_row(Matrix,RowIndex,Row)``
+| **Mode and number of proofs:**
+|    ``matrix_row(+list(list(number)),+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: matrix_column/3
+.. _linear_algebra_protocol/0::matrix_column/3:
+
+``matrix_column/3``
+^^^^^^^^^^^^^^^^^^^
+
+Looks up a numeric matrix column using a one-based column index.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_column(Matrix,ColumnIndex,Column)``
+| **Mode and number of proofs:**
+|    ``matrix_column(+list(list(number)),+integer,-list(number))`` - ``one``
+
+
+------------
+
+.. index:: matrix_value/4
+.. _linear_algebra_protocol/0::matrix_value/4:
+
+``matrix_value/4``
+^^^^^^^^^^^^^^^^^^
+
+Looks up a numeric matrix element using one-based row and column indices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_value(Matrix,RowIndex,ColumnIndex,Value)``
+| **Mode and number of proofs:**
+|    ``matrix_value(+list(list(number)),+integer,+integer,-number)`` - ``one``
+
+
+------------
+
+.. index:: matrix_diagonal/2
+.. _linear_algebra_protocol/0::matrix_diagonal/2:
+
+``matrix_diagonal/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the main diagonal of a numeric matrix as a vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_diagonal(Matrix,Diagonal)``
+| **Mode and number of proofs:**
+|    ``matrix_diagonal(+list(list(number)),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: matrix_diagonal/3
+.. _linear_algebra_protocol/0::matrix_diagonal/3:
+
+``matrix_diagonal/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the diagonal of a numeric matrix at the given offset, where positive offsets select superdiagonals and negative offsets select subdiagonals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_diagonal(Matrix,Offset,Diagonal)``
+| **Mode and number of proofs:**
+|    ``matrix_diagonal(+list(list(number)),+integer,-list(number))`` - ``one_or_error``
+
+
+------------
+
+.. index:: diagonal_matrix/2
+.. _linear_algebra_protocol/0::diagonal_matrix/2:
+
+``diagonal_matrix/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a square diagonal matrix from a numeric vector of diagonal entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagonal_matrix(Diagonal,Matrix)``
+| **Mode and number of proofs:**
+|    ``diagonal_matrix(+list(number),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: diagonal_matrix/3
+.. _linear_algebra_protocol/0::diagonal_matrix/3:
+
+``diagonal_matrix/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs the minimal square numeric matrix whose diagonal at the given offset matches the input vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagonal_matrix(Diagonal,Offset,Matrix)``
+| **Mode and number of proofs:**
+|    ``diagonal_matrix(+list(number),+integer,-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: diagonal_matrix/4
+.. _linear_algebra_protocol/0::diagonal_matrix/4:
+
+``diagonal_matrix/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Constructs a square numeric matrix of the requested size whose diagonal at the given offset matches the input vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagonal_matrix(Diagonal,Offset,Size,Matrix)``
+| **Mode and number of proofs:**
+|    ``diagonal_matrix(+list(number),+integer,+integer,-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: matrix_trace/2
+.. _linear_algebra_protocol/0::matrix_trace/2:
+
+``matrix_trace/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes the trace of a numeric matrix by summing its main diagonal entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_trace(Matrix,Trace)``
+| **Mode and number of proofs:**
+|    ``matrix_trace(+list(list(number)),-number)`` - ``one``
+
+
+------------
+
+.. index:: shift_matrix_diagonal/3
+.. _linear_algebra_protocol/0::shift_matrix_diagonal/3:
+
+``shift_matrix_diagonal/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Shifts the main diagonal of a numeric matrix by the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``shift_matrix_diagonal(Matrix,Shift,ShiftedMatrix)``
+| **Mode and number of proofs:**
+|    ``shift_matrix_diagonal(+list(list(number)),+number,-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: upper_triangular_part/2
+.. _linear_algebra_protocol/0::upper_triangular_part/2:
+
+``upper_triangular_part/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the upper-triangular part of a numeric matrix including the main diagonal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``upper_triangular_part(Matrix,UpperTriangular)``
+| **Mode and number of proofs:**
+|    ``upper_triangular_part(+list(list(number)),-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: upper_triangular_part/3
+.. _linear_algebra_protocol/0::upper_triangular_part/3:
+
+``upper_triangular_part/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the upper-triangular part of a numeric matrix using the given diagonal offset, where positive offsets exclude leading diagonals and negative offsets include additional subdiagonals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``upper_triangular_part(Matrix,Offset,UpperTriangular)``
+| **Mode and number of proofs:**
+|    ``upper_triangular_part(+list(list(number)),+integer,-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: lower_triangular_part/2
+.. _linear_algebra_protocol/0::lower_triangular_part/2:
+
+``lower_triangular_part/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the lower-triangular part of a numeric matrix including the main diagonal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lower_triangular_part(Matrix,LowerTriangular)``
+| **Mode and number of proofs:**
+|    ``lower_triangular_part(+list(list(number)),-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: lower_triangular_part/3
+.. _linear_algebra_protocol/0::lower_triangular_part/3:
+
+``lower_triangular_part/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the lower-triangular part of a numeric matrix using the given diagonal offset, where positive offsets include additional superdiagonals and negative offsets exclude leading diagonals below the main diagonal.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lower_triangular_part(Matrix,Offset,LowerTriangular)``
+| **Mode and number of proofs:**
+|    ``lower_triangular_part(+list(list(number)),+integer,-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: solve_linear_system/3
+.. _linear_algebra_protocol/0::solve_linear_system/3:
+
+``solve_linear_system/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves a non-singular square numeric linear system with a vector right-hand side using pivoted elimination.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_linear_system(Matrix,Values,Solution)``
+| **Mode and number of proofs:**
+|    ``solve_linear_system(+list(list(number)),+list(number),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: solve_linear_systems/3
+.. _linear_algebra_protocol/0::solve_linear_systems/3:
+
+``solve_linear_systems/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves a non-singular square numeric linear system with a matrix right-hand side using pivoted elimination.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_linear_systems(Matrix,RightHandSides,Solutions)``
+| **Mode and number of proofs:**
+|    ``solve_linear_systems(+list(list(number)),+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: determinant/2
+.. _linear_algebra_protocol/0::determinant/2:
+
+``determinant/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the determinant of a square numeric matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``determinant(Matrix,Determinant)``
+| **Mode and number of proofs:**
+|    ``determinant(+list(list(number)),-number)`` - ``one_or_error``
+
+
+------------
+
+.. index:: inverse_matrix/2
+.. _linear_algebra_protocol/0::inverse_matrix/2:
+
+``inverse_matrix/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the inverse of a non-singular square numeric matrix by solving one linear system per identity column.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``inverse_matrix(Matrix,Inverse)``
+| **Mode and number of proofs:**
+|    ``inverse_matrix(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: qr_decomposition/3
+.. _linear_algebra_protocol/0::qr_decomposition/3:
+
+``qr_decomposition/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a thin QR decomposition of a rectangular numeric matrix, returning orthogonal columns and an upper-trapezoidal factor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``qr_decomposition(Matrix,Orthogonal,UpperTriangular)``
+| **Mode and number of proofs:**
+|    ``qr_decomposition(+list(list(number)),-list(list(float)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: least_squares/3
+.. _linear_algebra_protocol/0::least_squares/3:
+
+``least_squares/3``
+^^^^^^^^^^^^^^^^^^^
+
+Computes a least-squares solution for a rectangular numeric linear system using a pivoted orthogonal solve without forming normal equations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``least_squares(Matrix,Values,Solution)``
+| **Mode and number of proofs:**
+|    ``least_squares(+list(list(number)),+list(number),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: matrix_rank/2
+.. _linear_algebra_protocol/0::matrix_rank/2:
+
+``matrix_rank/2``
+^^^^^^^^^^^^^^^^^
+
+Estimates the rank of a numeric matrix using the default library numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_rank(Matrix,Rank)``
+| **Mode and number of proofs:**
+|    ``matrix_rank(+list(list(number)),-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: matrix_rank/3
+.. _linear_algebra_protocol/0::matrix_rank/3:
+
+``matrix_rank/3``
+^^^^^^^^^^^^^^^^^
+
+Estimates the rank of a numeric matrix using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``matrix_rank(Matrix,Tolerance,Rank)``
+| **Mode and number of proofs:**
+|    ``matrix_rank(+list(list(number)),+number,-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: symmetric_eigen/3
+.. _linear_algebra_protocol/0::symmetric_eigen/3:
+
+``symmetric_eigen/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes an orthonormal eigendecomposition of a real symmetric dense matrix using the default library numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``symmetric_eigen(Matrix,Eigenvectors,Eigenvalues)``
+| **Mode and number of proofs:**
+|    ``symmetric_eigen(+list(list(number)),-list(list(float)),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: symmetric_eigen/4
+.. _linear_algebra_protocol/0::symmetric_eigen/4:
+
+``symmetric_eigen/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes an orthonormal eigendecomposition of a real symmetric dense matrix using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``symmetric_eigen(Matrix,Tolerance,Eigenvectors,Eigenvalues)``
+| **Mode and number of proofs:**
+|    ``symmetric_eigen(+list(list(number)),+number,-list(list(float)),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: symmetric_eigen/5
+.. _linear_algebra_protocol/0::symmetric_eigen/5:
+
+``symmetric_eigen/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes an orthonormal eigendecomposition of a real symmetric dense matrix using the given non-negative numerical tolerance and positive iteration bound.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``symmetric_eigen(Matrix,Tolerance,MaximumIterations,Eigenvectors,Eigenvalues)``
+| **Mode and number of proofs:**
+|    ``symmetric_eigen(+list(list(number)),+number,+integer,-list(list(float)),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: pseudo_inverse/2
+.. _linear_algebra_protocol/0::pseudo_inverse/2:
+
+``pseudo_inverse/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the Moore-Penrose pseudo-inverse of a rectangular numeric matrix using the default library numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pseudo_inverse(Matrix,PseudoInverse)``
+| **Mode and number of proofs:**
+|    ``pseudo_inverse(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: pseudo_inverse/3
+.. _linear_algebra_protocol/0::pseudo_inverse/3:
+
+``pseudo_inverse/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the Moore-Penrose pseudo-inverse of a rectangular numeric matrix using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pseudo_inverse(Matrix,Tolerance,PseudoInverse)``
+| **Mode and number of proofs:**
+|    ``pseudo_inverse(+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: null_space/2
+.. _linear_algebra_protocol/0::null_space/2:
+
+``null_space/2``
+^^^^^^^^^^^^^^^^
+
+Computes an orthonormal basis for the right null space of a rectangular numeric matrix using the default library numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``null_space(Matrix,Basis)``
+| **Mode and number of proofs:**
+|    ``null_space(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: null_space/3
+.. _linear_algebra_protocol/0::null_space/3:
+
+``null_space/3``
+^^^^^^^^^^^^^^^^
+
+Computes an orthonormal basis for the right null space of a rectangular numeric matrix using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``null_space(Matrix,Tolerance,Basis)``
+| **Mode and number of proofs:**
+|    ``null_space(+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: normalize_vector/2
+.. _linear_algebra_protocol/0::normalize_vector/2:
+
+``normalize_vector/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a numeric vector to unit length when its norm is above the default library numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_vector(Vector,NormalizedVector)``
+| **Mode and number of proofs:**
+|    ``normalize_vector(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: normalize_vector/3
+.. _linear_algebra_protocol/0::normalize_vector/3:
+
+``normalize_vector/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a numeric vector to unit length when its norm is above the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_vector(Vector,Tolerance,NormalizedVector)``
+| **Mode and number of proofs:**
+|    ``normalize_vector(+list(number),+number,-list(number))`` - ``one_or_error``
+
+
+------------
+
+.. index:: difference_norm/3
+.. _linear_algebra_protocol/0::difference_norm/3:
+
+``difference_norm/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Euclidean norm of the difference between two numeric vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``difference_norm(Vector1,Vector2,Norm)``
+| **Mode and number of proofs:**
+|    ``difference_norm(+list(number),+list(number),-float)`` - ``one``
+
+
+------------
+
+.. index:: stabilize_vector_sign/2
+.. _linear_algebra_protocol/0::stabilize_vector_sign/2:
+
+``stabilize_vector_sign/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a vector sign convention by flipping vectors whose first significant component is negative.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stabilize_vector_sign(Vector,StableVector)``
+| **Mode and number of proofs:**
+|    ``stabilize_vector_sign(+list(number),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: stabilize_vector_sign/3
+.. _linear_algebra_protocol/0::stabilize_vector_sign/3:
+
+``stabilize_vector_sign/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes a vector sign convention by flipping vectors whose first significant component under the given non-negative numerical tolerance is negative.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stabilize_vector_sign(Vector,Tolerance,StableVector)``
+| **Mode and number of proofs:**
+|    ``stabilize_vector_sign(+list(number),+number,-list(number))`` - ``one_or_error``
+
+
+------------
+
+.. index:: first_significant_component/2
+.. _linear_algebra_protocol/0::first_significant_component/2:
+
+``first_significant_component/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the first component whose absolute value exceeds the default library numerical tolerance of 1.0e-12, defaulting to zero when no such component exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``first_significant_component(Vector,First)``
+| **Mode and number of proofs:**
+|    ``first_significant_component(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: first_significant_component/3
+.. _linear_algebra_protocol/0::first_significant_component/3:
+
+``first_significant_component/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the first component whose absolute value exceeds the given non-negative numerical tolerance, defaulting to zero when no such component exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``first_significant_component(Vector,Tolerance,First)``
+| **Mode and number of proofs:**
+|    ``first_significant_component(+list(number),+number,-number)`` - ``one_or_error``
+
+
+------------
+
+.. index:: add_scaled_outer_product/4
+.. _linear_algebra_protocol/0::add_scaled_outer_product/4:
+
+``add_scaled_outer_product/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds a scaled outer product of a vector with itself to an accumulated matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_scaled_outer_product(Vector,Scale,Matrix0,Matrix)``
+| **Mode and number of proofs:**
+|    ``add_scaled_outer_product(+list(number),+number,+list(list(number)),-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: covariance_matrix/2
+.. _linear_algebra_protocol/0::covariance_matrix/2:
+
+``covariance_matrix/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the sample covariance matrix from a list of centered numeric row vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``covariance_matrix(Rows,CovarianceMatrix)``
+| **Mode and number of proofs:**
+|    ``covariance_matrix(+list(list(number)),-list(list(number)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: cholesky_decomposition/2
+.. _linear_algebra_protocol/0::cholesky_decomposition/2:
+
+``cholesky_decomposition/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the lower-triangular Cholesky factor of a positive definite numeric matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cholesky_decomposition(Matrix,CholeskyFactor)``
+| **Mode and number of proofs:**
+|    ``cholesky_decomposition(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: solve_cholesky/3
+.. _linear_algebra_protocol/0::solve_cholesky/3:
+
+``solve_cholesky/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Solves a positive definite linear system from a lower-triangular Cholesky factor and a right-hand-side vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_cholesky(CholeskyFactor,Values,Solution)``
+| **Mode and number of proofs:**
+|    ``solve_cholesky(+list(list(number)),+list(number),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: forward_substitution/3
+.. _linear_algebra_protocol/0::forward_substitution/3:
+
+``forward_substitution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves a lower-triangular system by forward substitution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``forward_substitution(LowerTriangular,Values,Solution)``
+| **Mode and number of proofs:**
+|    ``forward_substitution(+list(list(number)),+list(number),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: solve_lower_triangular_matrix/3
+.. _linear_algebra_protocol/0::solve_lower_triangular_matrix/3:
+
+``solve_lower_triangular_matrix/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves a lower-triangular system with a matrix right-hand side by forward substitution on each column.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_lower_triangular_matrix(LowerTriangular,Matrix,Solution)``
+| **Mode and number of proofs:**
+|    ``solve_lower_triangular_matrix(+list(list(number)),+list(list(number)),-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: solve_upper_triangular/3
+.. _linear_algebra_protocol/0::solve_upper_triangular/3:
+
+``solve_upper_triangular/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves an upper-triangular system by backward substitution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_upper_triangular(UpperTriangular,Values,Solution)``
+| **Mode and number of proofs:**
+|    ``solve_upper_triangular(+list(list(number)),+list(number),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: solve_upper_triangular_matrix/3
+.. _linear_algebra_protocol/0::solve_upper_triangular_matrix/3:
+
+``solve_upper_triangular_matrix/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves an upper-triangular system with a matrix right-hand side by backward substitution on each column.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve_upper_triangular_matrix(UpperTriangular,Matrix,Solution)``
+| **Mode and number of proofs:**
+|    ``solve_upper_triangular_matrix(+list(list(number)),+list(list(number)),-list(list(float)))`` - ``one``
+
+
+------------
+
+.. index:: backward_substitution/3
+.. _linear_algebra_protocol/0::backward_substitution/3:
+
+``backward_substitution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Solves the transposed upper-triangular system induced by a lower-triangular Cholesky factor using backward substitution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``backward_substitution(CholeskyFactor,Values,Solution)``
+| **Mode and number of proofs:**
+|    ``backward_substitution(+list(list(number)),+list(number),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: invert_from_cholesky/2
+.. _linear_algebra_protocol/0::invert_from_cholesky/2:
+
+``invert_from_cholesky/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a matrix inverse from a Cholesky factor by solving one linear system per basis column.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``invert_from_cholesky(CholeskyFactor,Inverse)``
+| **Mode and number of proofs:**
+|    ``invert_from_cholesky(+list(list(number)),-list(list(float)))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

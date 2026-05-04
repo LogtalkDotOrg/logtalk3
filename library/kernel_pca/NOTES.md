@@ -58,6 +58,7 @@ Features
 - **Centering and Optional Scaling**: Centers all attributes and optionally standardizes them before evaluating kernels.
 - **Configurable Shortfall Handling**: Lets callers choose whether a component-extraction shortfall raises an error or truncates the learned reducer with explicit diagnostics.
 - **Supported Kernels**: Supports `linear`, `polynomial(Degree, Gamma, Coef0)` with `Coef0 >= 0`, and `rbf(Gamma)` kernels.
+- **Shared Gram-Centering Helpers**: Delegates training Gram-matrix centering and out-of-sample Gram-vector centering to the shared `linear_algebra` library.
 - **Portable Eigensolver**: Uses deterministic power iteration with deflation instead of backend-specific linear algebra libraries.
 - **Projection API**: Transforms a new instance into a list of `component_N-Value` pairs using centered kernel evaluations against the training rows.
 - **Model Export**: Learned reducers can be exported as predicate clauses or written to a file.

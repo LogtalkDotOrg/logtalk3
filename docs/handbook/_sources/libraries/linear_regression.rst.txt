@@ -104,16 +104,18 @@ Where:
   examples used during training.
 - ``options(Options)`` stores the effective learning options after
   merging the user options with the library defaults.
-- ``solver(Solver)`` records the direct solver used for the
-  least-squares fit. The current value is
-  ``modified_gram_schmidt_column_pivoting``.
+- ``solver(Solver)`` records the direct least-squares solver family used
+  for the fit. The current value is
+  ``modified_gram_schmidt_column_pivoting``, which is now reported by
+  the shared regression core while delegating the actual solve to the
+  ``linear_algebra`` library.
 - ``residual_sum_of_squares(ResidualSumOfSquares)`` stores the training
   residual sum of squares for the fitted regressor.
-- ``effective_rank(EffectiveRank)`` stores the number of selected
-  independent columns in the direct solve, including the intercept.
+- ``effective_rank(EffectiveRank)`` stores the rank of the fitted
+  row-oriented design matrix, including the intercept column.
 - ``active_feature_count(ActiveFeatureCount)`` stores the number of
-  encoded feature columns retained in the direct solve after dropping
-  numerically dependent columns.
+  encoded feature columns retained after subtracting the intercept
+  contribution from the fitted design-matrix rank.
 - ``encoded_feature_count(FeatureCount)`` stores the number of numeric
   features induced by the encoder list, including missing-value
   indicator features.

@@ -133,6 +133,7 @@ logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(lasso_regression, library('lasso_regression/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).
 logtalk_library_path(linda, library('linda/')).
+logtalk_library_path(linear_algebra, library('linear_algebra/')).
 logtalk_library_path(linear_regression, library('linear_regression/')).
 logtalk_library_path(linear_svm, library('linear_svm/')).
 logtalk_library_path(listing, library('listing/')).

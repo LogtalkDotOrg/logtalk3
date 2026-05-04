@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Probabilistic Principal Component Analysis reducer for continuous datasets using a portable covariance eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, estimates the sample covariance matrix, extracts deterministic leading eigenvectors using portable power iteration with deflation, and then converts them into the closed-form maximum-likelihood probabilistic PCA loading matrix and posterior latent projection.',
@@ -56,6 +56,11 @@
 		valid/2
 	]).
 
+	:- uses(linear_algebra, [
+		covariance_matrix/2, matrix_trace/2, new_vector/3, outer_product/3, scale_matrix/3,
+		subtract_matrices/3
+	]).
+
 	learn(Dataset, DimensionReducer, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -71,8 +76,8 @@
 		^^option(n_components(RequestedComponents), Options),
 		MaxComponentCount is min(FeatureCount, SampleCount - 1),
 		^^check_component_count(RequestedComponents, MaxComponentCount, ComponentCount),
-		^^covariance_matrix(Rows, CovarianceMatrix),
-		covariance_trace(CovarianceMatrix, CovarianceTrace),
+		covariance_matrix(Rows, CovarianceMatrix),
+		matrix_trace(CovarianceMatrix, CovarianceTrace),
 		^^extract_components(CovarianceMatrix, ComponentCount, Options, Eigenvectors, ExplainedVariances),
 		handle_component_shortfall(ComponentCount, Options, CovarianceMatrix, Eigenvectors, ExplainedVariances, ExtractionDiagnostics),
 		estimate_noise_variance(CovarianceTrace, FeatureCount, ExplainedVariances, NoiseVariance),
@@ -142,23 +147,9 @@
 		deflate_extracted_components(Components, ExplainedVariances, DeflatedCovarianceMatrix, ResidualCovarianceMatrix).
 
 	deflate_component_matrix(Component, ExplainedVariance, CovarianceMatrix, DeflatedCovarianceMatrix) :-
-		^^outer_product(Component, Component, OuterProduct),
-		^^scale_matrix(OuterProduct, ExplainedVariance, ScaledOuterProduct),
-		^^subtract_matrices(CovarianceMatrix, ScaledOuterProduct, DeflatedCovarianceMatrix).
-
-	covariance_trace([], 0.0).
-	covariance_trace(CovarianceMatrix, Trace) :-
-		length(CovarianceMatrix, Size),
-		covariance_trace(CovarianceMatrix, 1, Size, 0.0, Trace).
-
-	covariance_trace(_CovarianceMatrix, Index, Size, Trace, Trace) :-
-		Index > Size,
-		!.
-	covariance_trace(CovarianceMatrix, Index, Size, Trace0, Trace) :-
-		^^matrix_value(CovarianceMatrix, Index, Index, Diagonal),
-		Trace1 is Trace0 + Diagonal,
-		NextIndex is Index + 1,
-		covariance_trace(CovarianceMatrix, NextIndex, Size, Trace1, Trace).
+		outer_product(Component, Component, OuterProduct),
+		scale_matrix(OuterProduct, ExplainedVariance, ScaledOuterProduct),
+		subtract_matrices(CovarianceMatrix, ScaledOuterProduct, DeflatedCovarianceMatrix).
 
 	estimate_noise_variance(CovarianceTrace, FeatureCount, ExplainedVariances, NoiseVariance) :-
 		length(ExplainedVariances, LearnedComponentCount),
@@ -184,7 +175,7 @@
 		latent_variance(ExplainedVariance, NoiseVariance, Tolerance, LoadingVariance),
 		(   LoadingVariance =< Tolerance ->
 			length(Eigenvector, FeatureCount),
-			^^zero_vector(FeatureCount, Loading)
+			new_vector(FeatureCount, 0.0, Loading)
 		;   LoadingScale is sqrt(LoadingVariance),
 			rescale(Eigenvector, LoadingScale, Loading)
 		),
@@ -195,10 +186,10 @@
 		latent_variance(ExplainedVariance, NoiseVariance, Tolerance, PosteriorVariance),
 		(   ExplainedVariance =< Tolerance ->
 			length(Eigenvector, FeatureCount),
-			^^zero_vector(FeatureCount, Component)
+			new_vector(FeatureCount, 0.0, Component)
 		;   PosteriorVariance =< Tolerance ->
 			length(Eigenvector, FeatureCount),
-			^^zero_vector(FeatureCount, Component)
+			new_vector(FeatureCount, 0.0, Component)
 		;   Scale is sqrt(PosteriorVariance) / ExplainedVariance,
 			rescale(Eigenvector, Scale, Component)
 		),

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Shared predicates for dimension reducer learning defaults, dataset helpers, transformation, export, and printing.'
 	]).
 
@@ -145,39 +145,11 @@
 		argnames is ['ComponentDiagnostics', 'Convergences', 'IterationCounts', 'FinalDeltas']
 	]).
 
-	:- protected(zero_vector/2).
-	:- mode(zero_vector(+integer, -list(number)), one).
-	:- info(zero_vector/2, [
-		comment is 'Constructs a numeric zero vector with the requested length.',
-		argnames is ['Count', 'Zeroes']
-	]).
-
 	:- protected(zero_vector_like/2).
 	:- mode(zero_vector_like(+list(list(number)), -list(number)), one).
 	:- info(zero_vector_like/2, [
 		comment is 'Constructs a zero vector matching the length of the first vector in a list of vectors, or returns the empty list when the input is empty.',
 		argnames is ['Vectors', 'ZeroVector']
-	]).
-
-	:- protected(add_vectors/3).
-	:- mode(add_vectors(+list(number), +list(number), -list(number)), one).
-	:- info(add_vectors/3, [
-		comment is 'Adds two numeric vectors element-wise.',
-		argnames is ['Vector1', 'Vector2', 'Vector']
-	]).
-
-	:- protected(subtract_vectors/3).
-	:- mode(subtract_vectors(+list(number), +list(number), -list(number)), one).
-	:- info(subtract_vectors/3, [
-		comment is 'Subtracts the second numeric vector from the first element-wise.',
-		argnames is ['Vector1', 'Vector2', 'Vector']
-	]).
-
-	:- protected(initial_vector/2).
-	:- mode(initial_vector(+integer, -list(number)), one).
-	:- info(initial_vector/2, [
-		comment is 'Constructs the canonical all-ones initial vector with the requested length.',
-		argnames is ['Size', 'Vector']
 	]).
 
 	:- protected(basis_vector/3).
@@ -194,13 +166,6 @@
 		argnames is ['Size', 'Vectors']
 	]).
 
-	:- protected(make_vector/3).
-	:- mode(make_vector(+integer, +number, -list(number)), one).
-	:- info(make_vector/3, [
-		comment is 'Constructs a numeric vector with the requested length, filled with the given value.',
-		argnames is ['Count', 'Value', 'Vector']
-	]).
-
 	:- protected(basis_initial_vectors/3).
 	:- mode(basis_initial_vectors(+integer, +integer, -list(list(number))), one).
 	:- info(basis_initial_vectors/3, [
@@ -208,115 +173,10 @@
 		argnames is ['Index', 'Size', 'Vectors']
 	]).
 
-	:- protected(make_matrix/4).
-	:- mode(make_matrix(+integer, +integer, +number, -list(list(number))), one).
-	:- info(make_matrix/4, [
-		comment is 'Constructs a numeric matrix with the requested row and column counts, filled with the given value.',
-		argnames is ['Rows', 'Columns', 'Value', 'Matrix']
-	]).
-
-	:- protected(matrix_vector_product/3).
-	:- mode(matrix_vector_product(+list(list(number)), +list(number), -list(number)), one).
-	:- info(matrix_vector_product/3, [
-		comment is 'Computes the matrix-vector product for a numeric matrix and vector.',
-		argnames is ['Matrix', 'Vector', 'Product']
-	]).
-
-	:- protected(normalize_vector/2).
-	:- mode(normalize_vector(+list(number), -list(number)), one).
-	:- info(normalize_vector/2, [
-		comment is 'Normalizes a numeric vector to unit length when its norm is above the shared numerical tolerance.',
-		argnames is ['Vector', 'NormalizedVector']
-	]).
-
-	:- protected(difference_norm/3).
-	:- mode(difference_norm(+list(number), +list(number), -float), one).
-	:- info(difference_norm/3, [
-		comment is 'Computes the Euclidean norm of the difference between two numeric vectors.',
-		argnames is ['Vector1', 'Vector2', 'Norm']
-	]).
-
-	:- protected(stabilize_vector_sign/2).
-	:- mode(stabilize_vector_sign(+list(number), -list(number)), one).
-	:- info(stabilize_vector_sign/2, [
-		comment is 'Normalizes a vector sign convention by flipping vectors whose first significant component is negative.',
-		argnames is ['Vector', 'StableVector']
-	]).
-
-	:- protected(first_significant_component/2).
-	:- mode(first_significant_component(+list(number), -number), one).
-	:- info(first_significant_component/2, [
-		comment is 'Returns the first component whose absolute value exceeds the shared numerical tolerance, defaulting to zero when no such component exists.',
-		argnames is ['Vector', 'First']
-	]).
-
-	:- protected(zero_matrix/2).
-	:- mode(zero_matrix(+integer, -list(list(number))), one).
-	:- info(zero_matrix/2, [
-		comment is 'Constructs a square numeric zero matrix with the requested size.',
-		argnames is ['Size', 'Matrix']
-	]).
-
-	:- protected(zero_matrix/3).
-	:- mode(zero_matrix(+integer, +integer, -list(list(number))), one).
-	:- info(zero_matrix/3, [
-		comment is 'Constructs a numeric zero matrix with the requested row and column counts.',
-		argnames is ['Rows', 'Columns', 'Matrix']
-	]).
-
-	:- protected(outer_product/3).
-	:- mode(outer_product(+list(number), +list(number), -list(list(number))), one).
-	:- info(outer_product/3, [
-		comment is 'Computes the outer product of two numeric vectors.',
-		argnames is ['Vector1', 'Vector2', 'Matrix']
-	]).
-
-	:- protected(add_matrices/3).
-	:- mode(add_matrices(+list(list(number)), +list(list(number)), -list(list(number))), one).
-	:- info(add_matrices/3, [
-		comment is 'Adds two numeric matrices element-wise.',
-		argnames is ['Matrix1', 'Matrix2', 'Matrix']
-	]).
-
-	:- protected(subtract_matrices/3).
-	:- mode(subtract_matrices(+list(list(number)), +list(list(number)), -list(list(number))), one).
-	:- info(subtract_matrices/3, [
-		comment is 'Subtracts the second numeric matrix from the first element-wise.',
-		argnames is ['Matrix1', 'Matrix2', 'Matrix']
-	]).
-
-	:- protected(scale_matrix/3).
-	:- mode(scale_matrix(+list(list(number)), +number, -list(list(number))), one).
-	:- info(scale_matrix/3, [
-		comment is 'Scales each element of a numeric matrix by the given factor.',
-		argnames is ['Matrix', 'Scale', 'ScaledMatrix']
-	]).
-
-	:- protected(transpose_matrix/2).
-	:- mode(transpose_matrix(+list(list(number)), -list(list(number))), one).
-	:- info(transpose_matrix/2, [
-		comment is 'Transposes a numeric matrix represented as a list of row lists.',
-		argnames is ['Matrix', 'Transpose']
-	]).
-
-	:- protected(matrix_value/4).
-	:- mode(matrix_value(+list(list(number)), +integer, +integer, -number), one).
-	:- info(matrix_value/4, [
-		comment is 'Looks up a numeric matrix element using one-based row and column indices.',
-		argnames is ['Matrix', 'RowIndex', 'ColumnIndex', 'Value']
-	]).
-
-	:- protected(mean_vector/2).
-	:- mode(mean_vector(+list(list(number)), -list(number)), one).
-	:- info(mean_vector/2, [
-		comment is 'Computes the column-wise arithmetic mean vector for a numeric row matrix.',
-		argnames is ['Rows', 'Mean']
-	]).
-
 	:- protected(extract_components/5).
 	:- mode(extract_components(+list(list(number)), +integer, +list(compound), -list(list(number)), -list(number)), one).
 	:- info(extract_components/5, [
-		comment is 'Extracts leading eigen-components from a numeric matrix using repeated power iteration and deflation until the requested count or the configured tolerance is reached.',
+		comment is 'Extracts leading positive eigen-components from a numeric matrix using the shared symmetric eigensolver until the requested count or the configured tolerance is reached.',
 		argnames is ['Matrix', 'Requested', 'Options', 'Components', 'Eigenvalues']
 	]).
 
@@ -355,13 +215,6 @@
 		argnames is ['Components', 'Features', 'Index', 'ReducedInstance']
 	]).
 
-	:- protected(covariance_matrix/2).
-	:- mode(covariance_matrix(+list(list(number)), -list(list(number))), one).
-	:- info(covariance_matrix/2, [
-		comment is 'Computes the sample covariance matrix for a list of centered numeric feature rows.',
-		argnames is ['Rows', 'CovarianceMatrix']
-	]).
-
 	:- protected(valid_linear_encoders/1).
 	:- mode(valid_linear_encoders(+list(compound)), zero_or_one).
 	:- info(valid_linear_encoders/1, [
@@ -398,8 +251,12 @@
 		append/3, last/2, length/2, member/2, memberchk/2, reverse/2
 	]).
 
+	:- uses(linear_algebra, [
+		basis_vector/3, new_vector/3, symmetric_eigen/4, symmetric_eigen/5
+	]).
+
 	:- uses(numberlist, [
-		euclidean_norm/2, rescale/3, scalar_product/3 as dot_product/3
+		scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(population, [
@@ -609,58 +466,13 @@
 	component_iteration_diagnostics([component_diagnostics(Convergence, Iterations, FinalDelta)| ComponentDiagnostics], [Convergence| Convergences], [Iterations| IterationCounts], [FinalDelta| FinalDeltas]) :-
 		component_iteration_diagnostics(ComponentDiagnostics, Convergences, IterationCounts, FinalDeltas).
 
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
 	zero_vector_like([], []).
 	zero_vector_like([Vector| _Vectors], ZeroVector) :-
 		length(Vector, Size),
-		zero_vector(Size, ZeroVector).
-
-	make_vector(0, _Value, []) :-
-		!.
-	make_vector(Count, Value, [Value| Values]) :-
-		Count > 0,
-		RemainingCount is Count - 1,
-		make_vector(RemainingCount, Value, Values).
-
-	add_vectors([], [], []).
-	add_vectors([Value1| Values1], [Value2| Values2], [Value| Values]) :-
-		Value is Value1 + Value2,
-		add_vectors(Values1, Values2, Values).
-
-	subtract_vectors([], [], []).
-	subtract_vectors([Value1| Values1], [Value2| Values2], [Value| Values]) :-
-		Value is Value1 - Value2,
-		subtract_vectors(Values1, Values2, Values).
-
-	initial_vector(0, []) :-
-		!.
-	initial_vector(Size, [1.0| Vector]) :-
-		Size > 0,
-		NextSize is Size - 1,
-		initial_vector(NextSize, Vector).
-
-	basis_vector(Size, Index, Vector) :-
-		basis_vector(1, Size, Index, Vector).
-
-	basis_vector(Current, Size, _Index, []) :-
-		Current > Size,
-		!.
-	basis_vector(Index, Size, Index, [1.0| Vector]) :-
-		!,
-		Next is Index + 1,
-		basis_vector(Next, Size, Index, Vector).
-	basis_vector(Current, Size, Index, [0.0| Vector]) :-
-		Next is Current + 1,
-		basis_vector(Next, Size, Index, Vector).
+		new_vector(Size, 0.0, ZeroVector).
 
 	initial_vectors(Size, [InitialVector| BasisVectors]) :-
-		initial_vector(Size, InitialVector),
+		new_vector(Size, 1.0, InitialVector),
 		basis_initial_vectors(1, Size, BasisVectors).
 
 	basis_initial_vectors(Index, Size, []) :-
@@ -671,175 +483,26 @@
 		NextIndex is Index + 1,
 		basis_initial_vectors(NextIndex, Size, BasisVectors).
 
-	matrix_vector_product([], _Vector, []).
-	matrix_vector_product([Row| Rows], Vector, [Value| Values]) :-
-		dot_product(Row, Vector, Value),
-		matrix_vector_product(Rows, Vector, Values).
-
-	normalize_vector(Vector, NormalizedVector) :-
-		euclidean_norm(Vector, Norm),
-		(   Norm =< 1.0e-12 ->
-			NormalizedVector = Vector
-		;   rescale(Vector, 1.0 / Norm, NormalizedVector)
-		).
-
-	difference_norm(Vector1, Vector2, Norm) :-
-		subtract_vectors(Vector1, Vector2, Difference),
-		euclidean_norm(Difference, Norm).
-
-	stabilize_vector_sign(Vector, StableVector) :-
-		(   first_significant_component(Vector, First),
-			First < 0.0 ->
-			rescale(Vector, -1.0, StableVector)
-		;   StableVector = Vector
-		).
-
-	first_significant_component([Value| _Values], Value) :-
-		abs(Value) > 1.0e-12,
-		!.
-	first_significant_component([_Value| Values], First) :-
-		first_significant_component(Values, First).
-	first_significant_component([], 0.0).
-
-	zero_matrix(Size, Matrix) :-
-		zero_matrix(Size, Size, Matrix).
-
-	zero_matrix(0, _Columns, []) :-
-		!.
-	zero_matrix(Rows, Columns, [Row| Matrix]) :-
-		Rows > 0,
-		zero_vector(Columns, Row),
-		NextRows is Rows - 1,
-		zero_matrix(NextRows, Columns, Matrix).
-
-	make_matrix(0, _Columns, _Value, []) :-
-		!.
-	make_matrix(Rows, Columns, Value, [Row| Matrix]) :-
-		Rows > 0,
-		make_vector(Columns, Value, Row),
-		NextRows is Rows - 1,
-		make_matrix(NextRows, Columns, Value, Matrix).
-
-	outer_product([], _Vector, []).
-	outer_product([Value| Values], Vector, [Row| Rows]) :-
-		rescale(Vector, Value, Row),
-		outer_product(Values, Vector, Rows).
-
-	add_matrices([], [], []).
-	add_matrices([Row1| Rows1], [Row2| Rows2], [Row| Rows]) :-
-		add_vectors(Row1, Row2, Row),
-		add_matrices(Rows1, Rows2, Rows).
-
-	subtract_matrices([], [], []).
-	subtract_matrices([Row1| Rows1], [Row2| Rows2], [Row| Rows]) :-
-		subtract_vectors(Row1, Row2, Row),
-		subtract_matrices(Rows1, Rows2, Rows).
-
-	scale_matrix([], _Scale, []).
-	scale_matrix([Row| Rows], Scale, [ScaledRow| ScaledRows]) :-
-		rescale(Row, Scale, ScaledRow),
-		scale_matrix(Rows, Scale, ScaledRows).
-
-	transpose_matrix([], []) :-
-		!.
-	transpose_matrix([[]| _], []) :-
-		!.
-	transpose_matrix(Matrix, [Column| Columns]) :-
-		extract_first_column(Matrix, Column, RemainingMatrix),
-		transpose_matrix(RemainingMatrix, Columns).
-
-	extract_first_column([], [], []).
-	extract_first_column([[Head| Tail]| Rows], [Head| Column], [Tail| RemainingRows]) :-
-		extract_first_column(Rows, Column, RemainingRows).
-
-	matrix_value([Row| _Rows], 1, ColumnIndex, Value) :-
-		!,
-		list_value(Row, ColumnIndex, Value).
-	matrix_value([_Row| Rows], RowIndex, ColumnIndex, Value) :-
-		NextRowIndex is RowIndex - 1,
-		matrix_value(Rows, NextRowIndex, ColumnIndex, Value).
-
-	list_value([Value| _Values], 1, Value) :-
-		!.
-	list_value([_Value| Values], Index, Value) :-
-		NextIndex is Index - 1,
-		list_value(Values, NextIndex, Value).
-
-	mean_vector(Rows, Mean) :-
-		transpose_matrix(Rows, Columns),
-		column_means(Columns, Mean).
-
-	column_means([], []).
-	column_means([Column| Columns], [Mean| Means]) :-
-		arithmetic_mean(Column, Mean),
-		column_means(Columns, Means).
-
 	extract_components(_Matrix, 0, _Options, [], []) :-
 		!.
 	extract_components(Matrix, Requested, Options, Components, Eigenvalues) :-
-		extract_components(Matrix, Requested, Options, [], [], Components, Eigenvalues).
-
-	extract_components(_Matrix, 0, _Options, ComponentsAcc, EigenvaluesAcc, Components, Eigenvalues) :-
-		!,
-		reverse(ComponentsAcc, Components),
-		reverse(EigenvaluesAcc, Eigenvalues).
-	extract_components(Matrix, Requested, Options, ComponentsAcc, EigenvaluesAcc, Components, Eigenvalues) :-
-		principal_component(Matrix, Options, Eigenvalue, Eigenvector),
 		^^option(tolerance(Tolerance), Options),
-		(   Eigenvalue =< Tolerance ->
-			reverse(ComponentsAcc, Components),
-			reverse(EigenvaluesAcc, Eigenvalues)
-		;   deflate_matrix(Matrix, Eigenvalue, Eigenvector, DeflatedMatrix),
-			NextRequested is Requested - 1,
-			extract_components(DeflatedMatrix, NextRequested, Options, [Eigenvector| ComponentsAcc], [Eigenvalue| EigenvaluesAcc], Components, Eigenvalues)
-		).
+		^^option(maximum_iterations(MaximumIterations), Options),
+		symmetric_eigen(Matrix, Tolerance, MaximumIterations, OrderedComponents, OrderedEigenvalues),
+		take_positive_components(OrderedComponents, OrderedEigenvalues, Requested, Tolerance, Components, Eigenvalues).
 
-	principal_component(Matrix, Options, Eigenvalue, Eigenvector) :-
-		length(Matrix, Size),
-		initial_vectors(Size, InitialVectors),
-		zero_vector(Size, ZeroVector),
-		principal_component_candidates(Matrix, Options, InitialVectors, 0.0, ZeroVector, Eigenvalue, Eigenvector).
-
-	principal_component_candidates(_Matrix, _Options, [], BestEigenvalue, BestEigenvector, BestEigenvalue, BestEigenvector) :-
+	take_positive_components(_Components0, _Eigenvalues0, 0, _Tolerance, [], []) :-
 		!.
-	principal_component_candidates(Matrix, Options, [InitialVector| InitialVectors], BestEigenvalue0, BestEigenvector0, BestEigenvalue, BestEigenvector) :-
-		normalize_vector(InitialVector, NormalizedInitial),
-		iterate_component(Matrix, Options, 0, NormalizedInitial, CandidateEigenvalue, CandidateEigenvector),
-		(   CandidateEigenvalue > BestEigenvalue0 ->
-			BestEigenvalue1 = CandidateEigenvalue,
-			BestEigenvector1 = CandidateEigenvector
-		;   BestEigenvalue1 = BestEigenvalue0,
-			BestEigenvector1 = BestEigenvector0
-		),
-		principal_component_candidates(Matrix, Options, InitialVectors, BestEigenvalue1, BestEigenvector1, BestEigenvalue, BestEigenvector).
-
-	iterate_component(Matrix, Options, Iteration, Vector0, Eigenvalue, Eigenvector) :-
-		matrix_vector_product(Matrix, Vector0, Product),
-		euclidean_norm(Product, Norm),
-		^^option(tolerance(Tolerance), Options),
-		(   Norm =< Tolerance ->
-			Eigenvalue = 0.0,
-			Eigenvector = Vector0
-		;   rescale(Product, 1.0 / Norm, Vector1),
-			stabilize_vector_sign(Vector1, StableVector),
-			difference_norm(StableVector, Vector0, Delta),
-			^^option(maximum_iterations(MaximumIterations), Options),
-			(   (Delta =< Tolerance ; Iteration >= MaximumIterations) ->
-				rayleigh_quotient(Matrix, StableVector, Eigenvalue),
-				Eigenvector = StableVector
-			;   NextIteration is Iteration + 1,
-				iterate_component(Matrix, Options, NextIteration, StableVector, Eigenvalue, Eigenvector)
-			)
+	take_positive_components([], [], _Requested, _Tolerance, [], []).
+	take_positive_components([Component| Components0], [Eigenvalue| Eigenvalues0], Requested, Tolerance, Components, Eigenvalues) :-
+		(   Eigenvalue > Tolerance ->
+			Components = [Component| Components1],
+			Eigenvalues = [Eigenvalue| Eigenvalues1],
+			NextRequested is Requested - 1,
+			take_positive_components(Components0, Eigenvalues0, NextRequested, Tolerance, Components1, Eigenvalues1)
+		;   Components = [],
+			Eigenvalues = []
 		).
-
-	rayleigh_quotient(Matrix, Vector, Eigenvalue) :-
-		matrix_vector_product(Matrix, Vector, Product),
-		dot_product(Vector, Product, Eigenvalue).
-
-	deflate_matrix(Matrix, Eigenvalue, Eigenvector, DeflatedMatrix) :-
-		outer_product(Eigenvector, Eigenvector, OuterProduct),
-		scale_matrix(OuterProduct, Eigenvalue, ScaledOuterProduct),
-		subtract_matrices(Matrix, ScaledOuterProduct, DeflatedMatrix).
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		known_attribute_values(Examples, Attribute, Values),
@@ -899,21 +562,6 @@
 		component_name(Index, ComponentName),
 		NextIndex is Index + 1,
 		project_components(Components, Features, NextIndex, ReducedInstance).
-
-	covariance_matrix(Rows, CovarianceMatrix) :-
-		Rows = [FirstRow| _],
-		length(FirstRow, FeatureCount),
-		zero_matrix(FeatureCount, ZeroMatrix),
-		accumulate_outer_products(Rows, ZeroMatrix, SumMatrix),
-		length(Rows, Count),
-		Scale is 1.0 / (Count - 1),
-		scale_matrix(SumMatrix, Scale, CovarianceMatrix).
-
-	accumulate_outer_products([], Matrix, Matrix).
-	accumulate_outer_products([Row| Rows], Matrix0, Matrix) :-
-		outer_product(Row, Row, Outer),
-		add_matrices(Matrix0, Outer, Matrix1),
-		accumulate_outer_products(Rows, Matrix1, Matrix).
 
 	print_dimension_reducer_details(Diagnostics, Encoders, Components) :-
 		format('Diagnostics: ~w~n', [Diagnostics]),

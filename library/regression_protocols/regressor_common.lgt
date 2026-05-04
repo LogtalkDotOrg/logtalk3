@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-04,
 		comment is 'Shared predicates for regressor learning defaults, diagnostics, validation, dataset validation, export, and pretty-print helpers.'
 	]).
 
@@ -252,7 +252,7 @@
 	:- protected(fit_linear_model/7).
 	:- mode(fit_linear_model(+object_identifier, +list(compound), -list(compound), -integer, -float, -list(float), -list(compound)), one).
 	:- info(fit_linear_model/7, [
-		comment is 'Builds linear-model encoders from the training dataset, encodes the examples, fits an ordinary least-squares bias plus weight vector using a direct pivoted orthogonal solve, and returns solver diagnostics terms.',
+		comment is 'Builds linear-model encoders from the training dataset, encodes the examples, fits an ordinary least-squares bias plus weight vector using the linear_algebra least-squares solver, and returns solver diagnostics terms.',
 		argnames is ['Dataset', 'Options', 'Encoders', 'TrainingExampleCount', 'Bias', 'Weights', 'TrainingDiagnostics']
 	]).
 
@@ -329,141 +329,15 @@
 	:- private(train_linear_model/6).
 	:- mode(train_linear_model(+list(pair), +integer, +list(compound), -float, -list(float), -list(compound)), one).
 	:- info(train_linear_model/6, [
-		comment is 'Fits an ordinary least-squares linear model bias and weight vector from encoded rows using a direct pivoted orthogonal solve and returns solver diagnostics terms.',
+		comment is 'Fits an ordinary least-squares linear model bias and weight vector from encoded rows by delegating the solve and rank estimation to the linear_algebra library and returns solver diagnostics terms.',
 		argnames is ['Rows', 'FeatureCount', 'Options', 'Bias', 'Weights', 'TrainingDiagnostics']
 	]).
 
-	:- private(rows_to_training_matrix/5).
-	:- mode(rows_to_training_matrix(+list(pair), +integer, -list(float), -list(list(float)), -integer), one).
-	:- info(rows_to_training_matrix/5, [
-		comment is 'Transforms encoded training rows into a target vector and one numeric column per encoded feature.',
-		argnames is ['Rows', 'FeatureCount', 'Targets', 'Columns', 'RowCount']
-	]).
-
-	:- private(empty_columns/2).
-	:- mode(empty_columns(+integer, -list(list)), one).
-	:- info(empty_columns/2, [
-		comment is 'Creates a list of empty columns with the requested count.',
-		argnames is ['Count', 'Columns']
-	]).
-
-	:- private(prepend_features_to_columns/3).
-	:- mode(prepend_features_to_columns(+list(float), +list(list(float)), -list(list(float))), one).
-	:- info(prepend_features_to_columns/3, [
-		comment is 'Prepends one encoded feature vector into the accumulated column-oriented design matrix representation.',
-		argnames is ['Features', 'Columns0', 'Columns']
-	]).
-
-	:- private(reverse_columns/2).
-	:- mode(reverse_columns(+list(list(float)), -list(list(float))), one).
-	:- info(reverse_columns/2, [
-		comment is 'Reverses every column in a column-oriented design matrix built by prepending feature values.',
-		argnames is ['Columns0', 'Columns']
-	]).
-
-	:- private(intercept_column/2).
-	:- mode(intercept_column(+integer, -list(float)), one).
-	:- info(intercept_column/2, [
-		comment is 'Creates the all-ones intercept column for a given number of training rows.',
-		argnames is ['RowCount', 'Column']
-	]).
-
-	:- private(select_orthogonal_columns/5).
-	:- mode(select_orthogonal_columns(+list(list(float)), +list(float), +list(float), -list(compound), -integer), one).
-	:- info(select_orthogonal_columns/5, [
-		comment is 'Builds a pivoted orthogonal least-squares basis consisting of the intercept and the encoded feature columns that contribute independent signal.',
-		argnames is ['FeatureColumns', 'Targets', 'InterceptColumn', 'SelectedColumns', 'ActiveFeatureCount']
-	]).
-
-	:- private(initialize_candidates/4).
-	:- mode(initialize_candidates(+list(list(float)), +list(float), +integer, -list(compound)), one).
-	:- info(initialize_candidates/4, [
-		comment is 'Initializes encoded feature-column candidates by removing their intercept projection and storing the first upper-triangular coefficients.',
-		argnames is ['FeatureColumns', 'InterceptBasis', 'Index', 'Candidates']
-	]).
-
-	:- private(initialize_candidate/4).
-	:- mode(initialize_candidate(+list(float), +list(float), +integer, -compound), one).
-	:- info(initialize_candidate/4, [
-		comment is 'Initializes one encoded feature-column candidate for pivoted orthogonal selection.',
-		argnames is ['Column', 'InterceptBasis', 'Index', 'Candidate']
-	]).
-
-	:- private(select_active_columns/5).
-	:- mode(select_active_columns(+list(compound), +list(float), +list(compound), -list(compound), -integer), one).
-	:- info(select_active_columns/5, [
-		comment is 'Selects independent encoded feature columns by repeatedly promoting the candidate with the largest residual norm and orthogonalizing the remainder.',
-		argnames is ['Candidates', 'Targets', 'SelectedColumns0', 'SelectedColumns', 'ActiveFeatureCount']
-	]).
-
-	:- private(select_best_candidate/3).
-	:- mode(select_best_candidate(+list(compound), -compound, -list(compound)), one).
-	:- info(select_best_candidate/3, [
-		comment is 'Selects the remaining encoded feature-column candidate with the largest residual norm.',
-		argnames is ['Candidates0', 'BestCandidate', 'RemainingCandidates']
-	]).
-
-	:- private(candidate_norm/2).
-	:- mode(candidate_norm(+compound, -float), one).
-	:- info(candidate_norm/2, [
-		comment is 'Computes the Euclidean norm of an encoded feature-column residual candidate.',
-		argnames is ['Candidate', 'Norm']
-	]).
-
-	:- private(promote_candidate/5).
-	:- mode(promote_candidate(+compound, +float, +list(float), -list(float), -compound), one).
-	:- info(promote_candidate/5, [
-		comment is 'Promotes a selected residual candidate into a normalized orthogonal basis vector and records the corresponding upper-triangular coefficients.',
-		argnames is ['Candidate', 'Norm', 'Targets', 'Basis', 'SelectedColumn']
-	]).
-
-	:- private(orthogonalize_candidates/3).
-	:- mode(orthogonalize_candidates(+list(compound), +list(float), -list(compound)), one).
-	:- info(orthogonalize_candidates/3, [
-		comment is 'Orthogonalizes the remaining encoded feature-column candidates against a newly selected basis vector.',
-		argnames is ['Candidates0', 'Basis', 'Candidates']
-	]).
-
-	:- private(solve_selected_least_squares/2).
-	:- mode(solve_selected_least_squares(+list(compound), -list(float)), one).
-	:- info(solve_selected_least_squares/2, [
-		comment is 'Solves the upper-triangular least-squares system induced by the selected orthogonal columns.',
-		argnames is ['SelectedColumns', 'Coefficients']
-	]).
-
-	:- private(selected_correction/4).
-	:- mode(selected_correction(+list(compound), +integer, +list(pair), -float), one).
-	:- info(selected_correction/4, [
-		comment is 'Computes the already-known back-substitution correction for one selected orthogonal column row.',
-		argnames is ['SelectedColumns', 'RowIndex', 'KnownCoefficients', 'Correction']
-	]).
-
-	:- private(coefficients_from_pairs/2).
-	:- mode(coefficients_from_pairs(+list(pair), -list(float)), one).
-	:- info(coefficients_from_pairs/2, [
-		comment is 'Extracts pivot-order coefficient values from indexed back-substitution pairs.',
-		argnames is ['Pairs', 'Coefficients']
-	]).
-
-	:- private(expand_selected_coefficients/5).
-	:- mode(expand_selected_coefficients(+list(compound), +list(float), +integer, -float, -list(float)), one).
-	:- info(expand_selected_coefficients/5, [
-		comment is 'Expands pivot-order least-squares coefficients back into the intercept plus one coefficient per encoded feature.',
-		argnames is ['SelectedColumns', 'Coefficients', 'FeatureCount', 'Bias', 'Weights']
-	]).
-
-	:- private(assign_selected_weights/4).
-	:- mode(assign_selected_weights(+list(compound), +list(float), +list(float), -list(float)), one).
-	:- info(assign_selected_weights/4, [
-		comment is 'Assigns selected encoded feature coefficients into the full encoded weight vector, leaving dropped coefficients at zero.',
-		argnames is ['SelectedColumns', 'Coefficients', 'Weights0', 'Weights']
-	]).
-
-	:- private(set_weight_at/4).
-	:- mode(set_weight_at(+list(float), +integer, +float, -list(float)), one).
-	:- info(set_weight_at/4, [
-		comment is 'Sets one 1-based position of a numeric weight vector to a supplied value.',
-		argnames is ['Weights0', 'Index', 'Weight', 'Weights']
+	:- private(rows_to_design_matrix/3).
+	:- mode(rows_to_design_matrix(+list(pair), -list(list(float)), -list(float)), one).
+	:- info(rows_to_design_matrix/3, [
+		comment is 'Transforms encoded training rows into a row-oriented design matrix with a leading intercept column and a target vector.',
+		argnames is ['Rows', 'DesignMatrix', 'Targets']
 	]).
 
 	:- private(residual_sum_of_squares/4).
@@ -471,27 +345,6 @@
 	:- info(residual_sum_of_squares/4, [
 		comment is 'Computes the residual sum of squares for encoded training rows and a learned intercept plus weight vector.',
 		argnames is ['Rows', 'Bias', 'Weights', 'ResidualSumOfSquares']
-	]).
-
-	:- private(add_scaled_vector/4).
-	:- mode(add_scaled_vector(+list(float), +number, +list(float), -list(float)), one).
-	:- info(add_scaled_vector/4, [
-		comment is 'Adds a scaled numeric vector to another numeric vector.',
-		argnames is ['Vector', 'Scale', 'Vector0', 'UpdatedVector']
-	]).
-
-	:- private(zero_vector/2).
-	:- mode(zero_vector(+integer, -list(float)), one).
-	:- info(zero_vector/2, [
-		comment is 'Creates a zero-filled float vector with the requested length.',
-		argnames is ['Count', 'Zeroes']
-	]).
-
-	:- private(zero_vector_like/2).
-	:- mode(zero_vector_like(+list, -list(float)), one).
-	:- info(zero_vector_like/2, [
-		comment is 'Creates a zero-filled float vector with the same length as the reference list.',
-		argnames is ['Reference', 'Zeroes']
 	]).
 
 	:- private(train_ridge_model/6).
@@ -585,13 +438,6 @@
 		argnames is ['Matrix0', 'PenaltyWeights', 'Regularization', 'Matrix']
 	]).
 
-	:- private(zero_matrix/3).
-	:- mode(zero_matrix(+integer, +integer, -list(list(float))), one).
-	:- info(zero_matrix/3, [
-		comment is 'Creates a zero-filled numeric matrix with the requested row and column counts.',
-		argnames is ['Rows', 'Columns', 'Matrix']
-	]).
-
 	:- private(solve_linear_system/4).
 	:- mode(solve_linear_system(+list(list(float)), +list(float), -list(float), -atom), one_or_error).
 	:- info(solve_linear_system/4, [
@@ -677,11 +523,15 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, last/2, member/2, memberchk/2, nth0/3, reverse/2
+		append/3, length/2, last/2, member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(linear_algebra, [
+		add_scaled_vector/4, least_squares/3, matrix_rank/2, new_matrix/4, new_vector/3, new_vector_like/2
 	]).
 
 	:- uses(numberlist, [
-		rescale/3, scalar_product/3 as dot_product/3
+		scalar_product/3 as dot_product/3
 	]).
 
 	:- uses(population, [
@@ -1076,163 +926,17 @@
 		),
 		build_linear_encoders(Rest, Examples, Options, Encoders).
 
-	train_linear_model(Rows, FeatureCount, _Options, Bias, Weights, TrainingDiagnostics) :-
-		rows_to_training_matrix(Rows, FeatureCount, Targets, FeatureColumns, RowCount),
-		intercept_column(RowCount, InterceptColumn),
-		select_orthogonal_columns(FeatureColumns, Targets, InterceptColumn, SelectedColumns, ActiveFeatureCount),
-		solve_selected_least_squares(SelectedColumns, Coefficients),
-		expand_selected_coefficients(SelectedColumns, Coefficients, FeatureCount, Bias, Weights),
+	train_linear_model(Rows, _FeatureCount, _Options, Bias, Weights, TrainingDiagnostics) :-
+		rows_to_design_matrix(Rows, DesignMatrix, Targets),
+		least_squares(DesignMatrix, Targets, [Bias| Weights]),
 		residual_sum_of_squares(Rows, Bias, Weights, ResidualSumOfSquares),
-		length(SelectedColumns, EffectiveRank),
+		matrix_rank(DesignMatrix, EffectiveRank),
+		ActiveFeatureCount is EffectiveRank - 1,
 		TrainingDiagnostics = [solver(modified_gram_schmidt_column_pivoting), residual_sum_of_squares(ResidualSumOfSquares), effective_rank(EffectiveRank), active_feature_count(ActiveFeatureCount)].
 
-	rows_to_training_matrix(Rows, FeatureCount, Targets, Columns, RowCount) :-
-		empty_columns(FeatureCount, EmptyColumns),
-		rows_to_training_matrix(Rows, [], Targets0, EmptyColumns, Columns0, 0, RowCount),
-		reverse(Targets0, Targets),
-		reverse_columns(Columns0, Columns).
-
-	rows_to_training_matrix([], Targets, Targets, Columns, Columns, RowCount, RowCount).
-	rows_to_training_matrix([Features-Target| Rows], Targets0, Targets, Columns0, Columns, RowCount0, RowCount) :-
-		prepend_features_to_columns(Features, Columns0, Columns1),
-		RowCount1 is RowCount0 + 1,
-		rows_to_training_matrix(Rows, [Target| Targets0], Targets, Columns1, Columns, RowCount1, RowCount).
-
-	empty_columns(0, []) :-
-		!.
-	empty_columns(Count, [[]| Columns]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		empty_columns(NextCount, Columns).
-
-	prepend_features_to_columns([], [], []).
-	prepend_features_to_columns([Feature| Features], [Column0| Columns0], [[Feature| Column0]| Columns]) :-
-		prepend_features_to_columns(Features, Columns0, Columns).
-
-	reverse_columns([], []).
-	reverse_columns([Column0| Columns0], [Column| Columns]) :-
-		reverse(Column0, Column),
-		reverse_columns(Columns0, Columns).
-
-	intercept_column(0, []) :-
-		!.
-	intercept_column(RowCount, [1.0| Column]) :-
-		RowCount > 0,
-		NextRowCount is RowCount - 1,
-		intercept_column(NextRowCount, Column).
-
-	select_orthogonal_columns(FeatureColumns, Targets, InterceptColumn, SelectedColumns, ActiveFeatureCount) :-
-		dot_product(InterceptColumn, InterceptColumn, InterceptNormSquared),
-		InterceptNorm is sqrt(InterceptNormSquared),
-		ensure_non_zero(InterceptNorm),
-		InterceptScale is 1.0 / InterceptNorm,
-		rescale(InterceptColumn, InterceptScale, InterceptBasis),
-		dot_product(InterceptBasis, Targets, InterceptQtY),
-		initialize_candidates(FeatureColumns, InterceptBasis, 1, Candidates),
-		select_active_columns(Candidates, Targets, [selected(intercept, [InterceptNorm], InterceptQtY)], SelectedColumns, ActiveFeatureCount).
-
-	initialize_candidates([], _InterceptBasis, _Index, []).
-	initialize_candidates([Column| Columns], InterceptBasis, Index, [Candidate| Candidates]) :-
-		initialize_candidate(Column, InterceptBasis, Index, Candidate),
-		NextIndex is Index + 1,
-		initialize_candidates(Columns, InterceptBasis, NextIndex, Candidates).
-
-	initialize_candidate(Column, InterceptBasis, Index, candidate(Index, Residual, [Projection])) :-
-		dot_product(InterceptBasis, Column, Projection),
-		add_scaled_vector(InterceptBasis, -Projection, Column, Residual).
-
-	select_active_columns(Candidates, Targets, SelectedColumns0, SelectedColumns, ActiveFeatureCount) :-
-		(   Candidates == [] ->
-			SelectedColumns = SelectedColumns0,
-			ActiveFeatureCount = 0
-		;   select_best_candidate(Candidates, Candidate, RemainingCandidates),
-			candidate_norm(Candidate, Norm),
-			(   Norm > 1.0e-12 ->
-				promote_candidate(Candidate, Norm, Targets, Basis, SelectedColumn),
-				orthogonalize_candidates(RemainingCandidates, Basis, OrthogonalCandidates),
-				append(SelectedColumns0, [SelectedColumn], SelectedColumns1),
-				select_active_columns(OrthogonalCandidates, Targets, SelectedColumns1, SelectedColumns, RestCount),
-				ActiveFeatureCount is RestCount + 1
-			;   SelectedColumns = SelectedColumns0,
-				ActiveFeatureCount = 0
-			)
-		).
-
-	select_best_candidate([Candidate| Candidates], BestCandidate, RemainingCandidates) :-
-		select_best_candidate(Candidates, Candidate, [], BestCandidate, RemainingCandidates).
-
-	select_best_candidate([], BestCandidate, RemainingCandidates, BestCandidate, RemainingCandidates).
-	select_best_candidate([Candidate| Candidates], Candidate0, RemainingCandidates0, BestCandidate, RemainingCandidates) :-
-		candidate_norm(Candidate, Norm),
-		candidate_norm(Candidate0, Norm0),
-		(   Norm > Norm0 ->
-			Candidate1 = Candidate,
-			RemainingCandidates1 = [Candidate0| RemainingCandidates0]
-		;   Candidate1 = Candidate0,
-			RemainingCandidates1 = [Candidate| RemainingCandidates0]
-		),
-		select_best_candidate(Candidates, Candidate1, RemainingCandidates1, BestCandidate, RemainingCandidates).
-
-	candidate_norm(candidate(_Index, Residual, _Projections), Norm) :-
-		dot_product(Residual, Residual, NormSquared),
-		Norm is sqrt(NormSquared).
-
-	promote_candidate(candidate(Index, Residual, Projections), Norm, Targets, Basis, selected(Index, Coefficients, QtY)) :-
-		Scale is 1.0 / Norm,
-		rescale(Residual, Scale, Basis),
-		append(Projections, [Norm], Coefficients),
-		dot_product(Basis, Targets, QtY).
-
-	orthogonalize_candidates([], _Basis, []).
-	orthogonalize_candidates([candidate(Index, Residual0, Projections0)| Candidates0], Basis, [candidate(Index, Residual, Projections)| Candidates]) :-
-		dot_product(Basis, Residual0, Projection),
-		add_scaled_vector(Basis, -Projection, Residual0, Residual),
-		append(Projections0, [Projection], Projections),
-		orthogonalize_candidates(Candidates0, Basis, Candidates).
-
-	solve_selected_least_squares(SelectedColumns, Coefficients) :-
-		length(SelectedColumns, Count),
-		LastIndex is Count - 1,
-		solve_selected_least_squares(SelectedColumns, LastIndex, [], Pairs),
-		coefficients_from_pairs(Pairs, Coefficients).
-
-	solve_selected_least_squares(_SelectedColumns, -1, Pairs, Pairs) :-
-		!.
-	solve_selected_least_squares(SelectedColumns, Index, KnownPairs0, Pairs) :-
-		nth0(Index, SelectedColumns, selected(_SelectedIndex, TriangularCoefficients, QtY)),
-		last(TriangularCoefficients, Diagonal),
-		ensure_non_zero(Diagonal),
-		selected_correction(SelectedColumns, Index, KnownPairs0, Correction),
-		Coefficient is (QtY - Correction) / Diagonal,
-		NextIndex is Index - 1,
-		solve_selected_least_squares(SelectedColumns, NextIndex, [Index-Coefficient| KnownPairs0], Pairs).
-
-	selected_correction(_SelectedColumns, _RowIndex, [], 0.0) :-
-		!.
-	selected_correction(SelectedColumns, RowIndex, [ColumnIndex-Coefficient| Pairs], Correction) :-
-		nth0(ColumnIndex, SelectedColumns, selected(_SelectedIndex, TriangularCoefficients, _QtY)),
-		nth0(RowIndex, TriangularCoefficients, TriangularCoefficient),
-		selected_correction(SelectedColumns, RowIndex, Pairs, RestCorrection),
-		Correction is RestCorrection + TriangularCoefficient * Coefficient.
-
-	coefficients_from_pairs([], []).
-	coefficients_from_pairs([_Index-Coefficient| Pairs], [Coefficient| Coefficients]) :-
-		coefficients_from_pairs(Pairs, Coefficients).
-
-	expand_selected_coefficients([selected(intercept, _InterceptCoefficients, _InterceptQtY)| SelectedColumns], [Bias| Coefficients], FeatureCount, Bias, Weights) :-
-		zero_vector(FeatureCount, Weights0),
-		assign_selected_weights(SelectedColumns, Coefficients, Weights0, Weights).
-
-	assign_selected_weights([], [], Weights, Weights).
-	assign_selected_weights([selected(Index, _TriangularCoefficients, _QtY)| SelectedColumns], [Coefficient| Coefficients], Weights0, Weights) :-
-		set_weight_at(Weights0, Index, Coefficient, Weights1),
-		assign_selected_weights(SelectedColumns, Coefficients, Weights1, Weights).
-
-	set_weight_at([_Weight0| Weights], 1, Weight, [Weight| Weights]) :-
-		!.
-	set_weight_at([Weight0| Weights0], Index, Weight, [Weight0| Weights]) :-
-		NextIndex is Index - 1,
-		set_weight_at(Weights0, NextIndex, Weight, Weights).
+	rows_to_design_matrix([], [], []).
+	rows_to_design_matrix([Features-Target| Rows], [[1.0| Features]| DesignMatrix], [Target| Targets]) :-
+		rows_to_design_matrix(Rows, DesignMatrix, Targets).
 
 	residual_sum_of_squares(Rows, Bias, Weights, ResidualSumOfSquares) :-
 		residual_sum_of_squares(Rows, Bias, Weights, 0.0, ResidualSumOfSquares).
@@ -1265,7 +969,7 @@
 		).
 
 	ridge_feature_statistics([Features-_Target| Rows], PenaltyWeights, ActiveFlags) :-
-		zero_vector_like(Features, Zeroes),
+		new_vector_like(Features, Zeroes),
 		accumulate_feature_statistics([Features-_Target| Rows], Zeroes, Zeroes, Sums, SumSquares),
 		length([Features-_Target| Rows], Count),
 		feature_penalty_profiles(Sums, SumSquares, Count, PenaltyWeights, ActiveFlags).
@@ -1323,8 +1027,8 @@
 	build_ridge_system(Rows, PenaltyWeights, Regularization, Matrix, Vector) :-
 		length(PenaltyWeights, ActiveFeatureCount),
 		Size is ActiveFeatureCount + 1,
-		zero_matrix(Size, Size, Matrix0),
-		zero_vector(Size, Vector0),
+		new_matrix(Size, Size, 0.0, Matrix0),
+		new_vector(Size, 0.0, Vector0),
 		accumulate_ridge_system(Rows, Matrix0, Vector0, Matrix1, Vector),
 		regularize_ridge_matrix(Matrix1, PenaltyWeights, Regularization, Matrix).
 
@@ -1365,14 +1069,6 @@
 	penalty_weight([_PenaltyWeight| PenaltyWeights], Index, PenaltyWeight) :-
 		NextIndex is Index - 1,
 		penalty_weight(PenaltyWeights, NextIndex, PenaltyWeight).
-
-	zero_matrix(0, _Columns, []) :-
-		!.
-	zero_matrix(Rows, Columns, [Row| Matrix]) :-
-		Rows > 0,
-		zero_vector(Columns, Row),
-		NextRows is Rows - 1,
-		zero_matrix(NextRows, Columns, Matrix).
 
 	solve_linear_system(Matrix, Vector, Solution, pivoted_gaussian_elimination) :-
 		augment_rows(Matrix, Vector, Rows),
@@ -1463,22 +1159,6 @@
 		expand_weights(ActiveFlags, ActiveWeights, Weights).
 	expand_weights([inactive| ActiveFlags], ActiveWeights, [0.0| Weights]) :-
 		expand_weights(ActiveFlags, ActiveWeights, Weights).
-
-	add_scaled_vector([], _, [], []).
-	add_scaled_vector([Feature| Features], Scale, [Gradient| Gradients], [Updated| UpdatedGradients]) :-
-		Updated is Gradient + Feature * Scale,
-		add_scaled_vector(Features, Scale, Gradients, UpdatedGradients).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
-	zero_vector_like([], []).
-	zero_vector_like([_| Values], [0.0| Zeroes]) :-
-		zero_vector_like(Values, Zeroes).
 
 	valid_encoded_rows_([], _FeatureCount).
 	valid_encoded_rows_([Features-Target| Rows], FeatureCount) :-

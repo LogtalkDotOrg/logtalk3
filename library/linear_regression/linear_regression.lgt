@@ -25,10 +25,10 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-04,
 		comment is 'Linear regression regressor supporting continuous and mixed-feature datasets using a direct ordinary least-squares solve. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
-			'Algorithm' - 'Uses the shared regression encoding core to solve the ordinary least-squares problem directly with pivoted modified Gram-Schmidt orthogonalization. The intercept is always retained and encoded feature columns that are numerically dependent on earlier selected columns are dropped and assigned zero coefficients.',
+			'Algorithm' - 'Uses the shared regression encoding core to build a row-oriented design matrix with an explicit intercept column, then delegates least-squares solving and rank estimation to the linear_algebra library. The intercept is always retained and encoded feature columns that are numerically dependent on the design matrix are assigned zero coefficients.',
 			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and encoded columns with no independent signal after accounting for the intercept and previously selected features are assigned zero coefficients.',
 			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
 			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',

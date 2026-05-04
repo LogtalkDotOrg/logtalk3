@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-05-04,
 		comment is 'Linear Discriminant Analysis projection for labeled continuous datasets using a portable regularized Fisher eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.',
@@ -43,23 +43,21 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, nth1/3, reverse/2
-	]).
-
-	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		append/3, length/2, member/2, nth1/3
 	]).
 
 	:- uses(pairs, [
 		keys/2
 	]).
 
-	:- uses(population, [
-		arithmetic_mean/2
-	]).
-
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(linear_algebra, [
+		add_matrices/3, matrix_column_means/2, new_matrix/4, new_vector/3, normalize_vector/2, outer_product/3, scale_matrix/3,
+		shift_matrix_diagonal/3, solve_lower_triangular_matrix/3, solve_upper_triangular/3, stabilize_vector_sign/2,
+		subtract_vectors/3, transpose_matrix/2
 	]).
 
 	learn(Dataset, DimensionReducer, UserOptions) :-
@@ -76,23 +74,24 @@
 		examples_to_rows(Examples, Encoders, Rows),
 		class_statistics(ClassValues, Rows, ClassStatistics),
 		rows_only(Rows, FeatureRows),
-		^^mean_vector(FeatureRows, OverallMean),
+		matrix_column_means(FeatureRows, OverallMean),
 		length(AttributeNames, FeatureCount),
 		within_class_scatter(ClassStatistics, FeatureCount, WithinScatter),
 		between_class_scatter(ClassStatistics, OverallMean, FeatureCount, BetweenScatter),
 		^^option(regularization(Regularization), Options),
-		regularize_matrix(WithinScatter, Regularization, RegularizedWithinScatter),
+		shift_matrix_diagonal(WithinScatter, Regularization, RegularizedWithinScatter),
 		cholesky_decomposition(RegularizedWithinScatter, LowerTriangular),
-		inverse_lower_triangular(LowerTriangular, InverseLowerTriangular),
-		^^transpose_matrix(InverseLowerTriangular, InverseLowerTriangularTranspose),
-		matrix_multiply(InverseLowerTriangular, BetweenScatter, WhiteningLeft),
-		matrix_multiply(WhiteningLeft, InverseLowerTriangularTranspose, SymmetricCriterion),
+		transpose_matrix(LowerTriangular, UpperTriangular),
+		solve_lower_triangular_matrix(LowerTriangular, BetweenScatter, WhiteningLeft),
+		transpose_matrix(WhiteningLeft, WhiteningLeftTranspose),
+		solve_lower_triangular_matrix(LowerTriangular, WhiteningLeftTranspose, SymmetricCriterionTranspose),
+		transpose_matrix(SymmetricCriterionTranspose, SymmetricCriterion),
 		length(ClassValues, ClassCount),
 		^^option(n_components(RequestedComponents), Options),
 		MaxComponentCount is min(FeatureCount, ClassCount - 1),
 		^^check_component_count(RequestedComponents, MaxComponentCount, ComponentCount),
 		^^extract_components(SymmetricCriterion, ComponentCount, Options, WhitenedComponents, _Eigenvalues),
-		map_whitened_components(WhitenedComponents, InverseLowerTriangularTranspose, Components),
+		map_whitened_components(WhitenedComponents, UpperTriangular, Components),
 		build_diagnostics(AttributeNames, Components, ClassValues, Options, Diagnostics),
 		DimensionReducer = lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics),
 		!.
@@ -136,7 +135,7 @@
 		collect_class_rows(Rows, Class, ClassRows),
 		length(ClassRows, Count),
 		(   Count > 0 ->
-			^^mean_vector(ClassRows, Mean)
+			matrix_column_means(ClassRows, Mean)
 		;   domain_error(non_empty_class, Class)
 		),
 		class_statistics(Classes, Rows, Statistics).
@@ -149,54 +148,35 @@
 		collect_class_rows(Rows, Class, ClassRows).
 
 	within_class_scatter(ClassStatistics, FeatureCount, WithinScatter) :-
-		^^zero_matrix(FeatureCount, ZeroMatrix),
+		new_matrix(FeatureCount, FeatureCount, 0.0, ZeroMatrix),
 		accumulate_within_class_scatter(ClassStatistics, ZeroMatrix, WithinScatter).
 
 	accumulate_within_class_scatter([], WithinScatter, WithinScatter).
 	accumulate_within_class_scatter([class_statistics(_Class, _Count, Mean, Rows)| Statistics], WithinScatter0, WithinScatter) :-
 		class_within_scatter(Rows, Mean, ClassScatter),
-		^^add_matrices(WithinScatter0, ClassScatter, WithinScatter1),
+		add_matrices(WithinScatter0, ClassScatter, WithinScatter1),
 		accumulate_within_class_scatter(Statistics, WithinScatter1, WithinScatter).
 
 	class_within_scatter([], Mean, Scatter) :-
 		length(Mean, FeatureCount),
-		^^zero_matrix(FeatureCount, Scatter).
+		new_matrix(FeatureCount, FeatureCount, 0.0, Scatter).
 	class_within_scatter([Row| Rows], Mean, Scatter) :-
-		^^subtract_vectors(Row, Mean, Difference),
-		^^outer_product(Difference, Difference, Scatter0),
+		subtract_vectors(Row, Mean, Difference),
+		outer_product(Difference, Difference, Scatter0),
 		class_within_scatter(Rows, Mean, ScatterRest),
-		^^add_matrices(Scatter0, ScatterRest, Scatter).
+		add_matrices(Scatter0, ScatterRest, Scatter).
 
 	between_class_scatter(ClassStatistics, OverallMean, FeatureCount, BetweenScatter) :-
-		^^zero_matrix(FeatureCount, ZeroMatrix),
+		new_matrix(FeatureCount, FeatureCount, 0.0, ZeroMatrix),
 		accumulate_between_class_scatter(ClassStatistics, OverallMean, ZeroMatrix, BetweenScatter).
 
 	accumulate_between_class_scatter([], _OverallMean, BetweenScatter, BetweenScatter).
 	accumulate_between_class_scatter([class_statistics(_Class, Count, Mean, _Rows)| Statistics], OverallMean, BetweenScatter0, BetweenScatter) :-
-		^^subtract_vectors(Mean, OverallMean, Difference),
-		^^outer_product(Difference, Difference, OuterProduct),
-		^^scale_matrix(OuterProduct, Count, ScaledOuterProduct),
-		^^add_matrices(BetweenScatter0, ScaledOuterProduct, BetweenScatter1),
+		subtract_vectors(Mean, OverallMean, Difference),
+		outer_product(Difference, Difference, OuterProduct),
+		scale_matrix(OuterProduct, Count, ScaledOuterProduct),
+		add_matrices(BetweenScatter0, ScaledOuterProduct, BetweenScatter1),
 		accumulate_between_class_scatter(Statistics, OverallMean, BetweenScatter1, BetweenScatter).
-
-	regularize_matrix(Matrix, Regularization, RegularizedMatrix) :-
-		regularize_matrix(Matrix, Regularization, 1, RegularizedMatrix).
-
-	regularize_matrix([], _Regularization, _Index, []).
-	regularize_matrix([Row| Rows], Regularization, Index, [RegularizedRow| RegularizedRows]) :-
-		regularize_row(Row, Regularization, Index, 1, RegularizedRow),
-		NextIndex is Index + 1,
-		regularize_matrix(Rows, Regularization, NextIndex, RegularizedRows).
-
-	regularize_row([], _Regularization, _DiagonalIndex, _Index, []).
-	regularize_row([Value| Values], Regularization, DiagonalIndex, DiagonalIndex, [RegularizedValue| RegularizedValues]) :-
-		!,
-		RegularizedValue is Value + Regularization,
-		NextIndex is DiagonalIndex + 1,
-		regularize_row(Values, Regularization, DiagonalIndex, NextIndex, RegularizedValues).
-	regularize_row([Value| Values], Regularization, DiagonalIndex, Index, [Value| RegularizedValues]) :-
-		NextIndex is Index + 1,
-		regularize_row(Values, Regularization, DiagonalIndex, NextIndex, RegularizedValues).
 
 	cholesky_decomposition(Matrix, LowerTriangular) :-
 		length(Matrix, Size),
@@ -215,7 +195,7 @@
 		Column > RowIndex,
 		!,
 		PaddingSize is Size - RowIndex,
-		^^zero_vector(PaddingSize, Padding),
+		new_vector(PaddingSize, 0.0, Padding),
 		append(Prefix, Padding, Row).
 	cholesky_row(Column, RowIndex, Size, Matrix, LowerTriangular, Prefix, Row) :-
 		nth1(RowIndex, Matrix, MatrixRow),
@@ -247,54 +227,12 @@
 		DotProduct1 is DotProduct0 + Value * Other,
 		prefix_dot(Values, Others, NextCount, DotProduct1, DotProduct).
 
-	inverse_lower_triangular(LowerTriangular, InverseLowerTriangular) :-
-		length(LowerTriangular, Size),
-		inverse_lower_columns(1, Size, LowerTriangular, [], InverseColumns),
-		^^transpose_matrix(InverseColumns, InverseLowerTriangular).
-
-	inverse_lower_columns(Index, Size, _LowerTriangular, Columns, Columns) :-
-		Index > Size,
-		!.
-	inverse_lower_columns(Index, Size, LowerTriangular, Columns0, Columns) :-
-		^^basis_vector(Size, Index, BasisVector),
-		solve_lower_triangular(LowerTriangular, BasisVector, Column),
-		append(Columns0, [Column], Columns1),
-		NextIndex is Index + 1,
-		inverse_lower_columns(NextIndex, Size, LowerTriangular, Columns1, Columns).
-
-	solve_lower_triangular(LowerTriangular, RightHandSide, Solution) :-
-		solve_lower_triangular(LowerTriangular, RightHandSide, [], 1, Solution).
-
-	solve_lower_triangular([], [], Solution, _Index, Solution).
-	solve_lower_triangular([Row| Rows], [Value| Values], Prefix, Index, Solution) :-
-		PrefixCount is Index - 1,
-		prefix_dot(Row, Prefix, PrefixCount, 0.0, DotProduct),
-		nth1(Index, Row, Diagonal),
-		SolutionValue is (Value - DotProduct) / Diagonal,
-		append(Prefix, [SolutionValue], Prefix1),
-		NextIndex is Index + 1,
-		solve_lower_triangular(Rows, Values, Prefix1, NextIndex, Solution).
-
-	map_whitened_components([], _InverseLowerTriangularTranspose, []).
-	map_whitened_components([WhitenedComponent| WhitenedComponents], InverseLowerTriangularTranspose, [Component| Components]) :-
-		^^matrix_vector_product(InverseLowerTriangularTranspose, WhitenedComponent, RawComponent),
-		^^normalize_vector(RawComponent, NormalizedComponent),
-		^^stabilize_vector_sign(NormalizedComponent, Component),
-		map_whitened_components(WhitenedComponents, InverseLowerTriangularTranspose, Components).
-
-	matrix_multiply(Matrix1, Matrix2, Product) :-
-		^^transpose_matrix(Matrix2, TransposedMatrix2),
-		matrix_multiply_rows(Matrix1, TransposedMatrix2, Product).
-
-	matrix_multiply_rows([], _TransposedMatrix2, []).
-	matrix_multiply_rows([Row| Rows], TransposedMatrix2, [ProductRow| ProductRows]) :-
-		matrix_row_products(TransposedMatrix2, Row, ProductRow),
-		matrix_multiply_rows(Rows, TransposedMatrix2, ProductRows).
-
-	matrix_row_products([], _Row, []).
-	matrix_row_products([Column| Columns], Row, [Value| Values]) :-
-		dot_product(Row, Column, Value),
-		matrix_row_products(Columns, Row, Values).
+	map_whitened_components([], _UpperTriangular, []).
+	map_whitened_components([WhitenedComponent| WhitenedComponents], UpperTriangular, [Component| Components]) :-
+		solve_upper_triangular(UpperTriangular, WhitenedComponent, RawComponent),
+		normalize_vector(RawComponent, NormalizedComponent),
+		stabilize_vector_sign(NormalizedComponent, Component),
+		map_whitened_components(WhitenedComponents, UpperTriangular, Components).
 
 	build_diagnostics(AttributeNames, Components, ClassValues, Options, Diagnostics) :-
 		length(ClassValues, ClassCount),

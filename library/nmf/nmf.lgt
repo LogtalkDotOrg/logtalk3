@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Non-negative Matrix Factorization dimension reduction for non-negative continuous datasets.'
 	]).
 
@@ -47,6 +47,10 @@
 
 	:- uses(user, [
 		atomic_concat/3
+	]).
+
+	:- uses(linear_algebra, [
+		new_matrix/4, new_vector/3, transpose_matrix/2
 	]).
 
 	learn(Dataset, DimensionReducer, UserOptions) :-
@@ -152,7 +156,7 @@
 		example_rows(Examples, Encoders, Rows).
 
 	initialize_coefficients(RowCount, ComponentCount, Coefficients) :-
-		^^make_matrix(RowCount, ComponentCount, 1.0, Coefficients).
+		new_matrix(RowCount, ComponentCount, 1.0, Coefficients).
 
 	initialize_basis(Rows, ComponentCount, Components) :-
 		take(ComponentCount, Rows, SeedRows),
@@ -201,9 +205,9 @@
 
 	update_components(Rows, Coefficients, Components0, Components, Delta) :-
 		reconstruct_rows(Coefficients, Components0, ApproximationRows),
-		^^transpose_matrix(Coefficients, CoefficientColumns),
-		^^transpose_matrix(Rows, FeatureColumns),
-		^^transpose_matrix(ApproximationRows, ApproximationColumns),
+		transpose_matrix(Coefficients, CoefficientColumns),
+		transpose_matrix(Rows, FeatureColumns),
+		transpose_matrix(ApproximationRows, ApproximationColumns),
 		update_component_rows(Components0, CoefficientColumns, FeatureColumns, ApproximationColumns, 0.0, Components, Delta).
 
 	update_coefficients(Rows, Coefficients0, Components, Coefficients, Delta) :-
@@ -215,7 +219,7 @@
 	infer_weights(Features, Components, Diagnostics, Weights) :-
 		memberchk(options(Options), Diagnostics),
 		length(Components, ComponentCount),
-		^^make_vector(ComponentCount, 1.0, InitialWeights),
+		new_vector(ComponentCount, 1.0, InitialWeights),
 		iterate_weights(Options, Features, Components, 0, InitialWeights, Weights).
 
 	iterate_weights(Options, Features, Components, Iteration0, Weights0, Weights) :-

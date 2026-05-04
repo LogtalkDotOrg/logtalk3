@@ -1,0 +1,59 @@
+.. index:: single: linear_algebra
+.. _linear_algebra/0:
+
+.. rst-class:: right
+
+**object**
+
+``linear_algebra``
+==================
+
+Linear algebra predicates for numeric vectors and matrices implemented without dependencies on machine learning libraries.
+
+| **Availability:** 
+|    ``logtalk_load(linear_algebra(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`linear_algebra_protocol <linear_algebra_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`linear_algebra_protocol/0::add_matrices/3`  :ref:`linear_algebra_protocol/0::add_scaled_outer_product/4`  :ref:`linear_algebra_protocol/0::add_scaled_vector/4`  :ref:`linear_algebra_protocol/0::add_vectors/3`  :ref:`linear_algebra_protocol/0::backward_substitution/3`  :ref:`linear_algebra_protocol/0::basis_vector/3`  :ref:`linear_algebra_protocol/0::center_gram_matrix/4`  :ref:`linear_algebra_protocol/0::center_gram_vector/4`  :ref:`linear_algebra_protocol/0::cholesky_decomposition/2`  :ref:`linear_algebra_protocol/0::covariance_matrix/2`  :ref:`linear_algebra_protocol/0::determinant/2`  :ref:`linear_algebra_protocol/0::diagonal_matrix/2`  :ref:`linear_algebra_protocol/0::diagonal_matrix/3`  :ref:`linear_algebra_protocol/0::diagonal_matrix/4`  :ref:`linear_algebra_protocol/0::difference_norm/3`  :ref:`linear_algebra_protocol/0::dot_product/3`  :ref:`linear_algebra_protocol/0::euclidean_norm/2`  :ref:`linear_algebra_protocol/0::first_significant_component/2`  :ref:`linear_algebra_protocol/0::first_significant_component/3`  :ref:`linear_algebra_protocol/0::forward_substitution/3`  :ref:`linear_algebra_protocol/0::frobenius_norm/2`  :ref:`linear_algebra_protocol/0::gram_matrix/2`  :ref:`linear_algebra_protocol/0::identity_matrix/2`  :ref:`linear_algebra_protocol/0::inverse_matrix/2`  :ref:`linear_algebra_protocol/0::invert_from_cholesky/2`  :ref:`linear_algebra_protocol/0::least_squares/3`  :ref:`linear_algebra_protocol/0::lower_triangular_part/2`  :ref:`linear_algebra_protocol/0::lower_triangular_part/3`  :ref:`linear_algebra_protocol/0::matrix_column/3`  :ref:`linear_algebra_protocol/0::matrix_column_means/2`  :ref:`linear_algebra_protocol/0::matrix_diagonal/2`  :ref:`linear_algebra_protocol/0::matrix_diagonal/3`  :ref:`linear_algebra_protocol/0::matrix_matrix_product/3`  :ref:`linear_algebra_protocol/0::matrix_rank/2`  :ref:`linear_algebra_protocol/0::matrix_rank/3`  :ref:`linear_algebra_protocol/0::matrix_row/3`  :ref:`linear_algebra_protocol/0::matrix_row_means/2`  :ref:`linear_algebra_protocol/0::matrix_trace/2`  :ref:`linear_algebra_protocol/0::matrix_value/4`  :ref:`linear_algebra_protocol/0::matrix_vector_product/3`  :ref:`linear_algebra_protocol/0::new_matrix/4`  :ref:`linear_algebra_protocol/0::new_vector/3`  :ref:`linear_algebra_protocol/0::new_vector_like/2`  :ref:`linear_algebra_protocol/0::normalize_vector/2`  :ref:`linear_algebra_protocol/0::normalize_vector/3`  :ref:`linear_algebra_protocol/0::null_space/2`  :ref:`linear_algebra_protocol/0::null_space/3`  :ref:`linear_algebra_protocol/0::outer_product/3`  :ref:`linear_algebra_protocol/0::pseudo_inverse/2`  :ref:`linear_algebra_protocol/0::pseudo_inverse/3`  :ref:`linear_algebra_protocol/0::qr_decomposition/3`  :ref:`linear_algebra_protocol/0::scale_matrix/3`  :ref:`linear_algebra_protocol/0::scale_vector/3`  :ref:`linear_algebra_protocol/0::shift_matrix_diagonal/3`  :ref:`linear_algebra_protocol/0::solve_cholesky/3`  :ref:`linear_algebra_protocol/0::solve_linear_system/3`  :ref:`linear_algebra_protocol/0::solve_linear_systems/3`  :ref:`linear_algebra_protocol/0::solve_lower_triangular_matrix/3`  :ref:`linear_algebra_protocol/0::solve_upper_triangular/3`  :ref:`linear_algebra_protocol/0::solve_upper_triangular_matrix/3`  :ref:`linear_algebra_protocol/0::stabilize_vector_sign/2`  :ref:`linear_algebra_protocol/0::stabilize_vector_sign/3`  :ref:`linear_algebra_protocol/0::subtract_matrices/3`  :ref:`linear_algebra_protocol/0::subtract_vectors/3`  :ref:`linear_algebra_protocol/0::symmetric_eigen/3`  :ref:`linear_algebra_protocol/0::symmetric_eigen/4`  :ref:`linear_algebra_protocol/0::symmetric_eigen/5`  :ref:`linear_algebra_protocol/0::transpose_matrix/2`  :ref:`linear_algebra_protocol/0::upper_triangular_part/2`  :ref:`linear_algebra_protocol/0::upper_triangular_part/3`  :ref:`linear_algebra_protocol/0::vector_norm/3`  :ref:`linear_algebra_protocol/0::vector_value/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -182,6 +182,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linda"><span class="xref std std-ref">linda</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#linear-algebra"><span class="xref std std-ref">linear_algebra</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linear-regression"><span class="xref std std-ref">linear_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linear-svm"><span class="xref std std-ref">linear_svm</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#linter-reporter"><span class="xref std std-ref">linter_reporter</span></a></li>
@@ -326,7 +327,7 @@
   <p class="right" id="ica-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="ica">
 <h1><code class="docutils literal notranslate"><span class="pre">ica</span></code><a class="headerlink" href="#ica" title="Link to this heading"></a></h1>
-<p>Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric Jacobi whitening.</p>
+<p>Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric eigendecomposition whitening.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -336,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -352,6 +353,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
+<div class="line"><a class="reference internal" href="linear_algebra_0.html#linear-algebra-0"><span class="std std-ref">linear_algebra</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
 <div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
@@ -363,7 +365,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using a deterministic symmetric Jacobi eigendecomposition, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.</p></li>
+<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, whitens the covariance matrix using the shared deterministic symmetric eigendecomposition from <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code>, and then extracts independent components using a deterministic cubic FastICA fixed-point iteration with orthogonal deflation.</p></li>
 <li><p>Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.</p></li>
 <li><p>Dimension reducer representation: The learned reducer is represented by default as <code class="docutils literal notranslate"><span class="pre">ica_reducer(Encoders,</span> <span class="pre">Components,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores preprocessing metadata, <code class="docutils literal notranslate"><span class="pre">Components</span></code> stores the learned unmixing vectors in feature space, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> records whitening and FastICA metadata.</p></li>
 </ul>

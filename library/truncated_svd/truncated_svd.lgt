@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Truncated singular value decomposition reducer for continuous datasets using a portable two-sided power-iteration solver over the data matrix.',
 		remarks is [
 			'Algorithm' - 'Builds a preprocessed data matrix using optional centering and scaling, extracts singular triplets using deterministic two-sided power iteration, and applies rank-one deflation directly to the data matrix.',
@@ -64,6 +64,11 @@
 
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(linear_algebra, [
+		add_vectors/3, difference_norm/3, matrix_vector_product/3, new_vector/3, normalize_vector/2,
+		stabilize_vector_sign/2, subtract_vectors/3
 	]).
 
 	learn(Dataset, DimensionReducer, UserOptions) :-
@@ -150,14 +155,14 @@
 		length(FirstRow, FeatureCount),
 		length(Rows, ExampleCount),
 		^^initial_vectors(FeatureCount, InitialVectors),
-		^^zero_vector(ExampleCount, ZeroLeftSingularVector),
-		^^zero_vector(FeatureCount, ZeroRightSingularVector),
+		new_vector(ExampleCount, 0.0, ZeroLeftSingularVector),
+		new_vector(FeatureCount, 0.0, ZeroRightSingularVector),
 		singular_triplet_candidates(Rows, Options, InitialVectors, 0.0, ZeroLeftSingularVector, ZeroRightSingularVector, tolerance, 0, 0.0, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta).
 
 	singular_triplet_candidates(_Rows, _Options, [], BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta) :-
 		!.
 	singular_triplet_candidates(Rows, Options, [InitialVector| InitialVectors], BestSingularValue0, BestLeftSingularVector0, BestRightSingularVector0, BestConvergence0, BestIterations0, BestFinalDelta0, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta) :-
-		^^normalize_vector(InitialVector, NormalizedInitial),
+		normalize_vector(InitialVector, NormalizedInitial),
 		iterate_singular_triplet(Rows, Options, 0, NormalizedInitial, CandidateSingularValue, CandidateLeftSingularVector, CandidateRightSingularVector, CandidateConvergence, CandidateIterations, CandidateFinalDelta),
 		(   CandidateSingularValue > BestSingularValue0 ->
 			BestSingularValue1 = CandidateSingularValue,
@@ -176,12 +181,12 @@
 		singular_triplet_candidates(Rows, Options, InitialVectors, BestSingularValue1, BestLeftSingularVector1, BestRightSingularVector1, BestConvergence1, BestIterations1, BestFinalDelta1, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta).
 
 	iterate_singular_triplet(Rows, Options, Iteration, RightSingularVector0, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta) :-
-		^^matrix_vector_product(Rows, RightSingularVector0, LeftProduct),
+		matrix_vector_product(Rows, RightSingularVector0, LeftProduct),
 		euclidean_norm(LeftProduct, LeftNorm),
 		^^option(tolerance(Tolerance), Options),
 		(   LeftNorm =< Tolerance ->
 			length(Rows, ExampleCount),
-			^^zero_vector(ExampleCount, LeftSingularVector),
+			new_vector(ExampleCount, 0.0, LeftSingularVector),
 			SingularValue = 0.0,
 			RightSingularVector = RightSingularVector0,
 			Convergence = tolerance,
@@ -192,15 +197,15 @@
 			euclidean_norm(RightProduct, RightNorm),
 			(   RightNorm =< Tolerance ->
 				length(Rows, ExampleCount),
-				^^zero_vector(ExampleCount, LeftSingularVector),
+				new_vector(ExampleCount, 0.0, LeftSingularVector),
 				SingularValue = 0.0,
 				RightSingularVector = RightSingularVector0,
 				Convergence = tolerance,
 				Iterations = Iteration,
 				FinalDelta = 0.0
 			;   rescale(RightProduct, 1.0 / RightNorm, RightSingularVector1),
-				^^stabilize_vector_sign(RightSingularVector1, StableRightSingularVector),
-				^^difference_norm(StableRightSingularVector, RightSingularVector0, Delta),
+				stabilize_vector_sign(RightSingularVector1, StableRightSingularVector),
+				difference_norm(StableRightSingularVector, RightSingularVector0, Delta),
 				^^option(maximum_iterations(MaximumIterations), Options),
 				(   Delta =< Tolerance ->
 					finalize_singular_triplet(Rows, StableRightSingularVector, Tolerance, SingularValue, LeftSingularVector),
@@ -222,21 +227,21 @@
 
 	transpose_matrix_vector_product([FirstRow| Rows], LeftSingularVector, RightProduct) :-
 		length(FirstRow, FeatureCount),
-		^^zero_vector(FeatureCount, ZeroRightProduct),
+		new_vector(FeatureCount, 0.0, ZeroRightProduct),
 		transpose_matrix_vector_product([FirstRow| Rows], LeftSingularVector, ZeroRightProduct, RightProduct).
 
 	transpose_matrix_vector_product([], [], RightProduct, RightProduct).
 	transpose_matrix_vector_product([Row| Rows], [LeftValue| LeftSingularVector], RightProduct0, RightProduct) :-
 		rescale(Row, LeftValue, Contribution),
-		^^add_vectors(RightProduct0, Contribution, RightProduct1),
+		add_vectors(RightProduct0, Contribution, RightProduct1),
 		transpose_matrix_vector_product(Rows, LeftSingularVector, RightProduct1, RightProduct).
 
 	finalize_singular_triplet(Rows, RightSingularVector, Tolerance, SingularValue, LeftSingularVector) :-
-		^^matrix_vector_product(Rows, RightSingularVector, LeftProduct),
+		matrix_vector_product(Rows, RightSingularVector, LeftProduct),
 		euclidean_norm(LeftProduct, SingularValue),
 		(   SingularValue =< Tolerance ->
 			length(Rows, ExampleCount),
-			^^zero_vector(ExampleCount, LeftSingularVector)
+			new_vector(ExampleCount, 0.0, LeftSingularVector)
 		;   rescale(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
 		).
 
@@ -244,7 +249,7 @@
 	deflate_rows([Row| Rows], SingularValue, [LeftValue| LeftSingularVector], RightSingularVector, [DeflatedRow| DeflatedRows]) :-
 		Scale is SingularValue * LeftValue,
 		rescale(RightSingularVector, Scale, ReconstructionRow),
-		^^subtract_vectors(Row, ReconstructionRow, DeflatedRow),
+		subtract_vectors(Row, ReconstructionRow, DeflatedRow),
 		deflate_rows(Rows, SingularValue, LeftSingularVector, RightSingularVector, DeflatedRows).
 
 	valid_singular_values(Components, SingularValues) :-

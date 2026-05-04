@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-05-04,
 		comment is 'Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver.',
 		remarks is [
 			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, computes the covariance matrix, and extracts principal components using deterministic power iteration with deflation.',
@@ -55,6 +55,10 @@
 		valid/2
 	]).
 
+	:- uses(linear_algebra, [
+		covariance_matrix/2
+	]).
+
 	learn(Dataset, DimensionReducer, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -68,7 +72,7 @@
 		length(AttributeNames, FeatureCount),
 		^^option(n_components(RequestedComponents), Options),
 		^^check_component_count(RequestedComponents, FeatureCount, ComponentCount),
-		^^covariance_matrix(Rows, CovarianceMatrix),
+		covariance_matrix(Rows, CovarianceMatrix),
 		^^extract_components(CovarianceMatrix, ComponentCount, Options, Components, ExplainedVariances),
 		build_diagnostics(AttributeNames, Components, ExplainedVariances, Options, Diagnostics),
 		DimensionReducer = pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics),

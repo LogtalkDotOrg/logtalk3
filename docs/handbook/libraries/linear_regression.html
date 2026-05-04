@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="linear_svm" href="linear_svm.html" />
-    <link rel="prev" title="linda" href="linda.html" />
+    <link rel="prev" title="linear_algebra" href="linear_algebra.html" />
    
 </head>
 
@@ -171,6 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_algebra.html"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
@@ -395,16 +396,18 @@ training dataset.</p></li>
 examples used during training.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code> stores the effective learning options after
 merging the user options with the library defaults.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code> records the direct solver used for the
-least-squares fit. The current value is
-<code class="docutils literal notranslate"><span class="pre">modified_gram_schmidt_column_pivoting</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solver(Solver)</span></code> records the direct least-squares solver family used
+for the fit. The current value is
+<code class="docutils literal notranslate"><span class="pre">modified_gram_schmidt_column_pivoting</span></code>, which is now reported by
+the shared regression core while delegating the actual solve to the
+<code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">residual_sum_of_squares(ResidualSumOfSquares)</span></code> stores the training
 residual sum of squares for the fitted regressor.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">effective_rank(EffectiveRank)</span></code> stores the number of selected
-independent columns in the direct solve, including the intercept.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effective_rank(EffectiveRank)</span></code> stores the rank of the fitted
+row-oriented design matrix, including the intercept column.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">active_feature_count(ActiveFeatureCount)</span></code> stores the number of
-encoded feature columns retained in the direct solve after dropping
-numerically dependent columns.</p></li>
+encoded feature columns retained after subtracting the intercept
+contribution from the fitted design-matrix rank.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">encoded_feature_count(FeatureCount)</span></code> stores the number of numeric
 features induced by the encoder list, including missing-value
 indicator features.</p></li>
@@ -428,7 +431,7 @@ attributes before training and prediction. Accepted values are
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="linda.html" class="btn btn-neutral float-left" title="linda" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="linear_algebra.html" class="btn btn-neutral float-left" title="linear_algebra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="linear_svm.html" class="btn btn-neutral float-right" title="linear_svm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

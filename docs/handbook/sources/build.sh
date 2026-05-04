@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 2, 2026
+##   Last updated on May 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -179,6 +179,7 @@ sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/lasso_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 sed '1,19d' ../../../library/lda_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 sed '1,19d' ../../../library/linda/NOTES.md | pandoc -f gfm -t rst -o libraries/linda.rst
+sed '1,19d' ../../../library/linear_algebra/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_algebra.rst
 sed '1,19d' ../../../library/linear_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_regression.rst
 sed '1,19d' ../../../library/linear_svm/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_svm.rst
 sed '1,19d' ../../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst

@@ -21,6 +21,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	logtalk_load(linear_algebra(loader)),
 	logtalk_load(loader),
 	logtalk_load([
 		regression_protocols('test_datasets/simple_line'),

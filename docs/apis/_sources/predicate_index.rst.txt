@@ -352,6 +352,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::add_edges/3>`
 
+``add_matrices/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::add_matrices/3>`
+
 ``add_rule/3``
 --------------
 
@@ -361,6 +371,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::add_rule/3>`
+
+``add_scaled_outer_product/4``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::add_scaled_outer_product/4>`
+
+``add_scaled_vector/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::add_scaled_vector/4>`
 
 ``add_type/2``
 --------------
@@ -381,6 +411,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mime_types <mime_types/0::add_type/3>`
+
+``add_vectors/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::add_vectors/3>`
 
 ``add_vertex/3``
 ----------------
@@ -1038,6 +1078,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::average_deviation/3>`
 
+``backward_substitution/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::backward_substitution/3>`
+
 ``basic_ack/3``
 ---------------
 
@@ -1127,6 +1177,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::basic_reject/3>`
+
+``basis_vector/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::basis_vector/3>`
 
 ``bbox_contains/2``
 -------------------
@@ -1611,6 +1671,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`maybe <maybe/0::cat/2>`
 
+``center_gram_matrix/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::center_gram_matrix/4>`
+
+``center_gram_vector/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::center_gram_vector/4>`
+
 ``central_moment/3``
 --------------------
 
@@ -1881,6 +1961,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::chi_squared/2>`
+
+``cholesky_decomposition/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::cholesky_decomposition/2>`
 
 ``chr_is/2``
 ------------
@@ -2866,6 +2956,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::covariance/3>`
+
+``covariance_matrix/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::covariance_matrix/2>`
 
 ``cover/1``
 -----------
@@ -3910,6 +4010,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp_pool <amqp_pool/0::destroy/0>`
 
+``determinant/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::determinant/2>`
+
 ``deterministic/1``
 -------------------
 
@@ -4064,6 +4174,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics_tool/5>`
 
+``diagonal_matrix/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::diagonal_matrix/2>`
+
+``diagonal_matrix/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::diagonal_matrix/3>`
+
+``diagonal_matrix/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::diagonal_matrix/4>`
+
 ``diagram_description/1``
 -------------------------
 
@@ -4105,6 +4245,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`coroutining <coroutining/0::dif/2>`
 * :ref:`dif <dif/0::dif/2>`
+
+``difference_norm/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::difference_norm/3>`
 
 ``digest/2``
 ------------
@@ -4558,6 +4708,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`number_grammars(Format) <number_grammars/1::dot//1>`
+
+``dot_product/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::dot_product/3>`
 
 ``double_metaphone/3``
 ----------------------
@@ -5167,6 +5327,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::euclidean_norm/2>`
 * :ref:`numberlistp <numberlistp/0::euclidean_norm/2>`
 
 ``example/2``
@@ -5862,6 +6023,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`intervalp <intervalp/0::finishes/2>`
 
+``first_significant_component/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::first_significant_component/2>`
+
+``first_significant_component/3``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::first_significant_component/3>`
+
 ``fisher/3``
 ------------
 
@@ -6238,6 +6419,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`zipperp <zipperp/0::forward/3>`
 
+``forward_substitution/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::forward_substitution/3>`
+
 ``fractile/3``
 --------------
 
@@ -6307,6 +6498,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::frequency_distribution/2>`
+
+``frobenius_norm/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::frobenius_norm/2>`
 
 ``from_expected/2``
 -------------------
@@ -6745,6 +6946,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expanding <expanding/0::goal_expansion/2>`
+
+``gram_matrix/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::gram_matrix/2>`
 
 ``graph_coloring/3``
 --------------------
@@ -7298,6 +7509,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::id/2>`
+
+``identity_matrix/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::identity_matrix/2>`
 
 ``if_empty/1``
 --------------
@@ -8021,6 +8242,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`validated <validated/0::invalids/2>`
+
+``inverse_matrix/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::inverse_matrix/2>`
+
+``invert_from_cholesky/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::invert_from_cholesky/2>`
 
 ``invoke/1``
 ------------
@@ -9046,6 +9287,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`numberlistp <numberlistp/0::least_common_multiple/2>`
+
+``least_squares/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::least_squares/3>`
 
 ``leaves/1``
 ------------
@@ -10175,6 +10426,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::lookup_in/3>`
 
+``lower_triangular_part/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::lower_triangular_part/2>`
+
+``lower_triangular_part/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::lower_triangular_part/3>`
+
 ``lower_upper/2``
 -----------------
 
@@ -10500,6 +10771,126 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::materialize/0>`
+
+``matrix_column/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_column/3>`
+
+``matrix_column_means/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_column_means/2>`
+
+``matrix_diagonal/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_diagonal/2>`
+
+``matrix_diagonal/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_diagonal/3>`
+
+``matrix_matrix_product/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_matrix_product/3>`
+
+``matrix_rank/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_rank/2>`
+
+``matrix_rank/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_rank/3>`
+
+``matrix_row/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_row/3>`
+
+``matrix_row_means/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_row_means/2>`
+
+``matrix_trace/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_trace/2>`
+
+``matrix_value/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_value/4>`
+
+``matrix_vector_product/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::matrix_vector_product/3>`
 
 ``max/2``
 ---------
@@ -11436,6 +11827,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::new_lines//0>`
 
+``new_matrix/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::new_matrix/4>`
+
+``new_vector/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::new_vector/3>`
+
+``new_vector_like/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::new_vector_like/2>`
+
 ``next/2``
 ----------
 
@@ -11667,6 +12088,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`numberlistp <numberlistp/0::normalize_unit/2>`
 
+``normalize_vector/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::normalize_vector/2>`
+
+``normalize_vector/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::normalize_vector/3>`
+
 ``nospy/1``
 -----------
 
@@ -11860,6 +12301,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::null_device_path/1>`
+
+``null_space/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::null_space/2>`
+
+``null_space/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::null_space/3>`
 
 ``number//1``
 -------------
@@ -12344,6 +12805,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::outdated/5>`
+
+``outer_product/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::outer_product/3>`
 
 ``output_file_name/2``
 ----------------------
@@ -13815,6 +14286,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`c45 <c45/0::prune/5>`
 
+``pseudo_inverse/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::pseudo_inverse/2>`
+
+``pseudo_inverse/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::pseudo_inverse/3>`
+
 ``push_back/3``
 ---------------
 
@@ -13834,6 +14325,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`deque_protocol <deque_protocol/0::push_front/3>`
+
+``qr_decomposition/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::qr_decomposition/3>`
 
 ``quartiles/4``
 ---------------
@@ -15471,6 +15972,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`numberlistp <numberlistp/0::scalar_product/3>`
 
+``scale_matrix/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::scale_matrix/3>`
+
+``scale_vector/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::scale_vector/3>`
+
 ``scan_left/4``
 ---------------
 
@@ -15996,6 +16517,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`doclet <doclet/0::shell_command/1>`
 
+``shift_matrix_diagonal/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::shift_matrix_diagonal/3>`
+
 ``shl64/3``
 -----------
 
@@ -16177,6 +16708,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::software_heritage_identifier/1>`
+
+``solve_cholesky/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::solve_cholesky/3>`
+
+``solve_linear_system/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::solve_linear_system/3>`
+
+``solve_linear_systems/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::solve_linear_systems/3>`
+
+``solve_lower_triangular_matrix/3``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::solve_lower_triangular_matrix/3>`
+
+``solve_upper_triangular/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::solve_upper_triangular/3>`
+
+``solve_upper_triangular_matrix/3``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::solve_upper_triangular_matrix/3>`
 
 ``sort/2``
 ----------
@@ -16367,6 +16958,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::srem/4>`
+
+``stabilize_vector_sign/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::stabilize_vector_sign/2>`
+
+``stabilize_vector_sign/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::stabilize_vector_sign/3>`
 
 ``standard_cauchy/3``
 ---------------------
@@ -16994,6 +17605,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::subtract_duration/3>`
 
+``subtract_matrices/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::subtract_matrices/3>`
+
+``subtract_vectors/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::subtract_vectors/3>`
+
 ``succ/2``
 ----------
 
@@ -17166,6 +17797,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`directed_graph_protocol <directed_graph_protocol/0::symmetric_closure/2>`
+
+``symmetric_eigen/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::symmetric_eigen/3>`
+
+``symmetric_eigen/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::symmetric_eigen/4>`
+
+``symmetric_eigen/5``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::symmetric_eigen/5>`
 
 ``tab//0``
 ----------
@@ -17731,6 +18392,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`directed_graph_protocol <directed_graph_protocol/0::transpose/2>`
 * :ref:`pairs <pairs/0::transpose/2>`
 
+``transpose_matrix/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::transpose_matrix/2>`
+
 ``traverse/3``
 --------------
 
@@ -18163,6 +18834,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::update_in/5>`
+
+``upper_triangular_part/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::upper_triangular_part/2>`
+
+``upper_triangular_part/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::upper_triangular_part/3>`
 
 ``user_data/2``
 ---------------
@@ -18701,6 +19392,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`termp <termp/0::varnumbers/3>`
+
+``vector_norm/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::vector_norm/3>`
+
+``vector_value/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_algebra_protocol <linear_algebra_protocol/0::vector_value/3>`
 
 ``verify_commands_availability/0``
 ----------------------------------

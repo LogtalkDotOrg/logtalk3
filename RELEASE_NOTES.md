@@ -47,6 +47,9 @@ across all machine learning libraries.
 (functionality preserved but four export and print predicates were renamed
 with this change).
 
+* ADDED: New `linear_algebra` library implementing predicates for numeric
+vectors and matrices.
+
 * ADDED: Predicates `check_classifier/1` and `valid_classifier/1` to the
 `classification_protocols` library.
 

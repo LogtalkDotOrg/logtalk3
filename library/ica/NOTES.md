@@ -55,7 +55,7 @@ Features
 --------
 
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
-- **Jacobi Whitening Plus Fixed-Point ICA**: Whitens the training covariance matrix using a symmetric Jacobi eigendecomposition and then extracts independent directions using deterministic cubic FastICA with orthogonal deflation.
+- **Shared Symmetric Whitening Plus Fixed-Point ICA**: Whitens the training covariance matrix using the shared symmetric eigendecomposition from `linear_algebra` and then extracts independent directions using deterministic cubic FastICA with orthogonal deflation.
 - **Always Centered**: Training and transform inputs are always centered using the training-set means before whitening and projection.
 - **Optional Scaling**: Can optionally standardize each continuous attribute before whitening.
 - **Training Diagnostics**: Records whitening eigenvalues plus per-component convergence reasons, iteration counts, and final deltas.
@@ -70,7 +70,7 @@ The `learn/3` predicate accepts the following options:
 
 - `n_components/1`: Number of independent components to extract. Because training data is always centered, requests that exceed `min(feature_count, sample_count - 1)` raise `domain_error(component_count, Requested-Maximum)`. Requests that still exceed the numerical rank of the whitened covariance matrix raise `domain_error(component_count, Requested-Extracted)`. The default is `2`.
 - `feature_scaling/1`: Whether to divide each continuous attribute by its training-set standard deviation before whitening. Options: `true` or `false` (default).
-- `maximum_iterations/1`: Maximum number of FastICA fixed-point steps used when estimating each independent component. The default is `1000`.
+- `maximum_iterations/1`: Maximum iteration bound used both by the whitening eigensolver and by the FastICA fixed-point steps for each independent component. The default is `1000`.
 - `tolerance/1`: Positive convergence tolerance used both for whitening rank detection and for FastICA fixed-point stopping. The default is `1.0e-8`.
 
 The learned diagnostics also include:

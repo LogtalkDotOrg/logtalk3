@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-04,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses batch subgradient descent to train one linear hinge-loss model per class in a one-vs-rest configuration.',
@@ -50,6 +50,10 @@
 
 	:- uses(list, [
 		append/3, length/2, member/2, memberchk/2
+	]).
+
+	:- uses(linear_algebra, [
+		add_scaled_vector/4, new_vector/3, new_vector_like/2
 	]).
 
 	:- uses(numberlist, [
@@ -204,7 +208,7 @@
 		train_models(Classes, Rows, NumFeatures, Options, Models).
 
 	initialize_model(Class, NumFeatures, class_model(Class, 0.0, Weights)) :-
-		zero_vector(NumFeatures, Weights).
+		new_vector(NumFeatures, 0.0, Weights).
 
 	optimize_model(Rows, PositiveClass, Options, Iteration, Model0, Model) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
@@ -223,7 +227,7 @@
 
 	update_model(Rows, PositiveClass, class_model(Class, Bias0, Weights0), Step, Options, class_model(Class, Bias1, Weights1), MaxDelta) :-
 		length(Rows, Count),
-		zero_vector_like(Weights0, ZeroGradients),
+		new_vector_like(Weights0, ZeroGradients),
 		accumulate_binary_gradients(Rows, PositiveClass, Bias0, Weights0, 0.0, BiasGradient, ZeroGradients, WeightGradients),
 		Scale is 1.0 / Count,
 		MeanBiasGradient is BiasGradient * Scale,
@@ -252,11 +256,6 @@
 		!.
 	target_sign(_, _, -1.0).
 
-	add_scaled_vector([], _, [], []).
-	add_scaled_vector([Feature| Features], Scale, [Gradient| Gradients], [Updated| UpdatedGradients]) :-
-		Updated is Gradient + Feature * Scale,
-		add_scaled_vector(Features, Scale, Gradients, UpdatedGradients).
-
 	update_weights([], [], _, _, _, [], MaxDelta, MaxDelta).
 	update_weights([Weight0| Weights0], [Gradient| Gradients], Scale, Regularization, Step, [Weight1| Weights1], MaxDelta0, MaxDelta) :-
 		MeanGradient is Gradient * Scale + Regularization * Weight0,
@@ -264,17 +263,6 @@
 		Delta is abs(Weight1 - Weight0),
 		MaxDelta1 is max(Delta, MaxDelta0),
 		update_weights(Weights0, Gradients, Scale, Regularization, Step, Weights1, MaxDelta1, MaxDelta).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Zeroes]) :-
-		Count > 0,
-		NextCount is Count - 1,
-		zero_vector(NextCount, Zeroes).
-
-	zero_vector_like([], []).
-	zero_vector_like([_| Values], [0.0| Zeroes]) :-
-		zero_vector_like(Values, Zeroes).
 
 	class_scores([], _, []).
 	class_scores([class_model(Class, Bias, Weights)| Models], Features, [Class-Score| Scores]) :-
