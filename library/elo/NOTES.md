@@ -21,7 +21,9 @@ ________________________________________________________________________
 `elo`
 =======
 
-Elo pairwise preference ranker.
+Elo pairwise preference ranker. Processes the pairwise preference stream
+in dataset enumeration order using the standard Elo expected-score formula
+and symmetric rating updates after each observed result.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +32,9 @@ it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `pairwise_ranking_dataset_protocol` protocol from the `ranking_protocols`
-library. See the `test_datasets` directory for examples.
+library. See the `test_datasets` directory for examples. The current
+implementation requires a well-formed connected pairwise dataset so that
+learned ratings remain globally comparable across all ranked items.
 
 
 API documentation
@@ -62,11 +66,15 @@ Features
 - **Pairwise Preference Learning**: Learns one deterministic rating per item
   from pairwise outcomes.
 - **Deterministic Batch Elo Semantics**: Replays the dataset preference stream
-  in enumeration order using the standard Elo expected-score formula.
+  in enumeration order using the standard Elo expected-score formula. Because
+  the current pairwise dataset protocol does not record historical timestamps,
+  the implementation is a deterministic batch interpretation of that
+  enumeration order rather than a reconstruction of a literal chronological
+  competition log.
 - **Configurable Rating Parameters**: Exposes the initial rating, K-factor,
   and rating scale as user options.
 - **Integer Weight Fidelity**: Preference weights must be positive integers
-  and are interpreted as repeated unit outcomes.
+  and are replayed as repeated unit outcomes in dataset enumeration order.
 - **Deterministic Ranking**: Orders candidate items by learned rating with
   deterministic tie-breaking.
 - **Strict Dataset Validation**: Rejects duplicate items, undeclared items,

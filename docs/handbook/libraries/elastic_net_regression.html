@@ -308,8 +308,9 @@
 <p>Elastic net regression regressor supporting continuous and mixed-feature
 datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in
 the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns a linear model using
-cyclic coordinate descent with standard coefficient-wise elastic net
-regularization.</p>
+cyclic coordinate descent with coefficient-wise soft-thresholding
+updates and an additional L2 term in order to minimize mean squared
+error plus a standard elastic net penalty.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -341,20 +342,22 @@ with the boundary cases <code class="docutils literal notranslate"><span class="
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous and Mixed Features</strong>: Supports continuous attributes and
-categorical attributes encoded using one-hot vectors.</p></li>
+categorical attributes.</p></li>
 <li><p><strong>Feature Scaling</strong>: Continuous attributes can be standardized using
 z-score scaling.</p></li>
-<li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
-using explicit missing-value indicator features.</p></li>
+<li><p><strong>Missing Values</strong>: Missing numeric and categorical values represented
+using anonymous variables are encoded using explicit missing-value
+indicator features.</p></li>
 <li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
 that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Mixed Penalty</strong>: Combines coefficient-wise L1 shrinkage with an L2
 penalty controlled by the <code class="docutils literal notranslate"><span class="pre">regularization/1</span></code> and <code class="docutils literal notranslate"><span class="pre">l1_ratio/1</span></code>
 options, including the ridge-like <code class="docutils literal notranslate"><span class="pre">l1_ratio(0.0)</span></code> and lasso-like
 <code class="docutils literal notranslate"><span class="pre">l1_ratio(1.0)</span></code> endpoints.</p></li>
-<li><p><strong>Standard Encoding Semantics</strong>: Categorical attributes are one-hot
-encoded and each encoded coefficient is regularized independently,
-matching standard elastic-net implementations.</p></li>
+<li><p><strong>Standard Encoding Semantics</strong>: Categorical attributes are encoded
+using reference-level dummy coding derived from the declared dataset
+attribute values, with a trailing missing-value indicator feature, and
+each encoded coefficient is regularized independently.</p></li>
 <li><p><strong>Diagnostics Metadata</strong>: Learned regressors record model name,
 target, training example count, optimization stop reason, completed
 iterations, final parameter delta, encoded feature count, and

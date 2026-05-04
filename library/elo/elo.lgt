@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-05-04,
 		comment is 'Elo pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by replaying the observed preference stream using a deterministic batch Elo update rule, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Processes the pairwise preference stream in dataset enumeration order using the standard Elo expected-score formula and symmetric rating updates after each observed result.',
-			'Weight semantics' - 'Preference weights must be positive integers and are replayed as repeated unit outcomes in dataset enumeration order.',
-			'Batch semantics' - 'Because the current pairwise dataset protocol does not encode historical timestamps, the implementation is a deterministic batch Elo variant over the dataset enumeration order rather than a literal chronological competition log.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that learned ratings remain globally comparable across all ranked items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``elo_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the effective options and training dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, colley, rank_centrality]
 	]).
 

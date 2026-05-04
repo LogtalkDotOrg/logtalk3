@@ -337,7 +337,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-02</div>
+<div class="line"><strong>Date:</strong> 2026-05-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -360,16 +360,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses cyclic coordinate descent with coefficient-wise soft-thresholding updates and an additional L2 term in order to minimize mean squared error plus a standard elastic net penalty.</p></li>
-<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values and regularized coefficient-wise like any other encoded feature.</p></li>
-<li><p>Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.</p></li>
-<li><p>Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.</p></li>
-<li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">elastic_net_regressor(Encoders,</span> <span class="pre">Bias,</span> <span class="pre">Weights,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Bias</span></code> stores the intercept, <code class="docutils literal notranslate"><span class="pre">Weights</span></code> stores one coefficient per encoded feature, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

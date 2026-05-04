@@ -24,8 +24,9 @@ ________________________________________________________________________
 Elastic net regression regressor supporting continuous and mixed-feature
 datasets. The library implements the `regressor_protocol` defined in the
 `regression_protocols` library and learns a linear model using cyclic
-coordinate descent with standard coefficient-wise elastic net
-regularization.
+coordinate descent with coefficient-wise soft-thresholding updates and an
+additional L2 term in order to minimize mean squared error plus a standard
+elastic net penalty.
 
 
 API documentation
@@ -61,12 +62,12 @@ file:
 Features
 --------
 
-- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using one-hot vectors.
+ - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes.
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
-- **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Missing Values**: Missing numeric and categorical values represented using anonymous variables are encoded using explicit missing-value indicator features.
 - **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Mixed Penalty**: Combines coefficient-wise L1 shrinkage with an L2 penalty controlled by the `regularization/1` and `l1_ratio/1` options, including the ridge-like `l1_ratio(0.0)` and lasso-like `l1_ratio(1.0)` endpoints.
-- **Standard Encoding Semantics**: Categorical attributes are one-hot encoded and each encoded coefficient is regularized independently, matching standard elastic-net implementations.
+ - **Standard Encoding Semantics**: Categorical attributes are encoded using reference-level dummy coding derived from the declared dataset attribute values, with a trailing missing-value indicator feature, and each encoded coefficient is regularized independently.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, optimization stop reason, completed iterations, final parameter delta, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for both zero-penalty baselines and explicit elastic-net runs on sparse, mixed, categorical, and wide mixed datasets.
