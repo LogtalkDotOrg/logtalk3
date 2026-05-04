@@ -261,6 +261,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of using the built-in database handling methods to
 	implement dynamic object state
 
+- `eclipse_tests_dsl`  
+	example illustrating how to run tests written using the ECLiPSE
+    tests dialect
+
 - `edcgs`  
 	several examples of Extended Definite Clause Grammars (EDCGs)
 

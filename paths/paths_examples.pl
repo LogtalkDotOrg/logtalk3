@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on March 2, 2026
+%  Last updated on May 4, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -83,6 +83,7 @@ logtalk_library_path(document_converter, examples('document_converter/')).
 logtalk_library_path(diamonds, examples('diamonds/')).
 logtalk_library_path(dynpred, examples('dynpred/')).
 logtalk_library_path(ebench, engines('ebench/')).
+logtalk_library_path(eclipse_tests_dsl, examples('eclipse_tests_dsl/')).
 logtalk_library_path(edcgs, examples('edcgs/')).
 logtalk_library_path(elephants, examples('elephants/')).
 logtalk_library_path(emetas, engines('emetas/')).

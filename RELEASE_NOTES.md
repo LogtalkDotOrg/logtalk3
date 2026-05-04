@@ -387,6 +387,12 @@ and PowerShell scripts to make a sound on completion.
 
 * FIXED: Deleted dead code in the `dead_code_scanner` tool.
 
+Examples
+--------
+
+* ADDED: New `eclipse_tests_dsl` example illustrating how to run tests written
+using the ECLiPSE tests dialect using the `lgtunit` tool.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
