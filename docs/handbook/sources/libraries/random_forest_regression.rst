@@ -34,7 +34,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(random_forest_regression(tester)).
 
-To run the reference timing and fit benchmarks, load the
+To run the performance benchmark suite, load the
 ``tester_performance.lgt`` file:
 
 ::

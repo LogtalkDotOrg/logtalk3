@@ -35,7 +35,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(bayesian_ridge_regression(tester)).
 
-To run the reference timing and fit benchmarks, load the
+To run the performance benchmark suite, load the
 ``tester_performance.lgt`` file:
 
 ::

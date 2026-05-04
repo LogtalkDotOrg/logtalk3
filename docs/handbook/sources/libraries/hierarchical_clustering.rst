@@ -40,6 +40,13 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(hierarchical_clustering(tester)).
 
+To run the performance benchmark suite, load the
+``tester_performance.lgt`` file:
+
+::
+
+   | ?- logtalk_load(hierarchical_clustering(tester_performance)).
+
 Features
 --------
 

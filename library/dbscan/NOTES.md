@@ -58,7 +58,8 @@ To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(dbscan(tester)).
 
-To run the performance and reference-fit benchmarks, load the `tester_performance.lgt` file:
+To run the performance benchmark suite, load the `tester_performance.lgt`
+file:
 
 	| ?- logtalk_load(dbscan(tester_performance)).
 

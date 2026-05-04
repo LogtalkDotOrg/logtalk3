@@ -40,7 +40,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(kmodes(tester)).
 
-To run the performance and reference-fit benchmarks, load the
+To run the performance benchmark suite, load the
 ``tester_performance.lgt`` file:
 
 ::

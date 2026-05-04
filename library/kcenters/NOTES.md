@@ -56,7 +56,8 @@ To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(kcenters(tester)).
 
-To run the performance and reference-fit benchmarks, load the `tester_performance.lgt` file:
+To run the performance benchmark suite, load the `tester_performance.lgt`
+file:
 
 	| ?- logtalk_load(kcenters(tester_performance)).
 

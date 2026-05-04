@@ -52,7 +52,8 @@ To test this library predicates, load the `tester.lgt` file:
 
 The unit test suite covers the default mixed-penalty behavior together with the boundary cases `l1_ratio(0.0)` and `l1_ratio(1.0)`.
 
-To run the reference timing and fit benchmarks, load the `tester_performance.lgt` file:
+To run the performance benchmark suite, load the `tester_performance.lgt`
+file:
 
 	| ?- logtalk_load(elastic_net_regression(tester_performance)).
 

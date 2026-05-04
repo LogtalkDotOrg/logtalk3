@@ -41,6 +41,13 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(gaussian_mixture(tester)).
 
+To run the performance benchmark suite, load the
+``tester_performance.lgt`` file:
+
+::
+
+   | ?- logtalk_load(gaussian_mixture(tester_performance)).
+
 Features
 --------
 
