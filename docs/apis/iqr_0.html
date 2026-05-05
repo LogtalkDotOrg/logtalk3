@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-01</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -367,17 +367,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: This is a statistical anomaly-detection method based on Tukey interquartile fences. For each known continuous attribute value <code class="docutils literal notranslate"><span class="pre">x</span></code>, the detector learns <code class="docutils literal notranslate"><span class="pre">Q1</span></code> and <code class="docutils literal notranslate"><span class="pre">Q3</span></code> and computes the positive exceedance of <code class="docutils literal notranslate"><span class="pre">x</span></code> beyond the interval <code class="docutils literal notranslate"><span class="pre">[Q1,Q3]</span></code> in interquartile-range units, normalized by the learned <code class="docutils literal notranslate"><span class="pre">fence_multiplier/1</span></code> option. Each per-attribute normalized deviation therefore reaches <code class="docutils literal notranslate"><span class="pre">1.0</span></code> exactly at the chosen Tukey fence. These per-attribute scores are then aggregated according to <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code>. In both supported modes, any attribute value at or beyond <code class="docutils literal notranslate"><span class="pre">[Q1</span> <span class="pre">-</span> <span class="pre">k*IQR,</span> <span class="pre">Q3</span> <span class="pre">+</span> <span class="pre">k*IQR]</span></code> contributes a raw score at or above the default anomaly boundary when using <code class="docutils literal notranslate"><span class="pre">fence_multiplier(k)</span></code>.</p></li>
-<li><p>Baseline training selection: The learn-time <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> option declares which class labels are admissible for fitting the per-attribute baseline statistics. The default is <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>. The <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> option then controls how non-baseline examples are handled. The default <code class="docutils literal notranslate"><span class="pre">reject</span></code> policy throws an error when any non-baseline example is found, while <code class="docutils literal notranslate"><span class="pre">filter</span></code> removes them before fitting.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing values are ignored when fitting attribute statistics. During scoring, queries must contain at least one known value. The learned detector stores a precomputed attribute schema so that scoring reuses the same attribute ordering without rebuilding it on every call. The <code class="docutils literal notranslate"><span class="pre">root_mean_square</span></code> score mode aggregates normalized deviations over attributes with positive deviation so that neutral inlier attributes do not dilute fence-reaching anomalies.</p></li>
-<li><p>Predict-time options: The <code class="docutils literal notranslate"><span class="pre">fence_multiplier/1</span></code> and <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> options are learn-time options. <code class="docutils literal notranslate"><span class="pre">predict/4</span></code> always uses the values stored in the learned detector. If these options are passed to <code class="docutils literal notranslate"><span class="pre">predict/4</span></code>, they are ignored.</p></li>
-<li><p>Score normalization: The raw multivariate IQR score is mapped to the interval <code class="docutils literal notranslate"><span class="pre">[0.0,1.0)</span></code> using <code class="docutils literal notranslate"><span class="pre">Score</span> <span class="pre">=</span> <span class="pre">Raw</span> <span class="pre">/</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">Raw)</span></code>. Because each per-attribute score is normalized by <code class="docutils literal notranslate"><span class="pre">fence_multiplier/1</span></code> before aggregation, the default threshold <code class="docutils literal notranslate"><span class="pre">0.5</span></code> corresponds to the chosen Tukey fence cutoff for both supported score modes.</p></li>
-<li><p>Detector representation: The learned detector is represented as a <code class="docutils literal notranslate"><span class="pre">iqr_detector(TrainingDataset,</span> <span class="pre">AttributeSchema,</span> <span class="pre">Encoders,</span> <span class="pre">Diagnostics)</span></code> term where <code class="docutils literal notranslate"><span class="pre">AttributeSchema</span></code> stores the precomputed attribute ordering and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores the learned metadata, including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

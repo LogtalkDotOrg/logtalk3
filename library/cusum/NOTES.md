@@ -150,7 +150,7 @@ The following options are supported by the public API:
   `H / (1 + H)`.
 
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

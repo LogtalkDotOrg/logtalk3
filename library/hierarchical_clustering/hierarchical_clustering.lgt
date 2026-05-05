@@ -25,18 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-05,
 		comment is 'Hierarchical clusterer for continuous datasets. Learns a full agglomerative merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.',
-		remarks is [
-			'Algorithm' - 'Builds the full bottom-up agglomerative hierarchy and derives the requested partition by cutting the learned dendrogram at the largest remaining merge distances.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Linkage strategies' - 'Supports ``single``, ``complete``, and ``average`` linkage.',
-			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
-			'Re-cutting' - 'Supports re-cutting a learned hierarchy to a different number of clusters using ``cut/3`` without retraining.',
-			'Tie-breaking' - 'When merge distances or cut heights are equal, the implementation deterministically prefers the smallest node-id pair.',
-			'Prediction' - 'New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``hierarchical_clustering_clusterer(Encoders, hierarchy(RootState, MergeRecords, Dendrogram), Clusters, Prototypes, Diagnostics)`` where ``hierarchy(...)`` stores the reusable merge state for re-cutting, ``Clusters`` stores the partition obtained by cutting the hierarchy to ``k`` clusters, ``Prototypes`` stores average vectors for display and export metadata, and ``Diagnostics`` stores the effective options and training metadata.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, agglomerative]
 	]).
 

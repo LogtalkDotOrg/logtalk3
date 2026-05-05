@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-01</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,15 +366,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds an additive ensemble of regression trees by repeatedly fitting the current residuals under squared-error loss.</p></li>
-<li><p>Initial model: Starts from the arithmetic mean of the training targets and then adds a scaled tree prediction at each boosting stage.</p></li>
-<li><p>Shrinkage: Uses a fixed learning rate to scale each stage contribution and reduce overfitting.</p></li>
-<li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">gradient_boosting_regressor(InitialPrediction,</span> <span class="pre">WeightedTrees,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">WeightedTrees</span></code> contains <code class="docutils literal notranslate"><span class="pre">weighted_tree(LearningRate,</span> <span class="pre">Tree)</span></code> terms and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

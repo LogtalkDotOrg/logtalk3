@@ -130,7 +130,7 @@ The following options are supported by the public API:
   ``predict/4``, it is ignored and the value stored in the learned
   detector is used.
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

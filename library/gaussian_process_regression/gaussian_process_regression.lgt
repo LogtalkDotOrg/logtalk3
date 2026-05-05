@@ -25,17 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Gaussian process regression regressor supporting continuous and mixed-feature datasets using an exact mixed Gaussian process with posterior uncertainty estimates. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses exact Gaussian process regression with a mixed covariance kernel: an automatic-relevance-determination squared-exponential component over continuous encoded features and a field-wise categorical overlap component over categorical attributes. Hyperparameters are selected by maximizing the log marginal likelihood using a deterministic coordinate search in log space.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and missing values are encoded using explicit missing-value indicator features.',
-			'Uncertainty estimates' - 'In addition to mean predictions, the library can return the posterior predictive Gaussian distribution for a new instance, including observation noise variance. Small negative posterior variances caused by floating-point roundoff are clipped to zero while larger negative values raise an error.',
-			'Numerical stability' - 'Covariance factorization uses adaptive jitter escalation and raises a domain error when the covariance matrix cannot be made positive definite within the configured retry budget.',
-			'Memory-based representation' - 'The learned regressor stores the encoded training rows together with the cached Cholesky factor and dual coefficients required for exact posterior prediction.',
-			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics)`` where ``Encoders`` stores feature encoding metadata, ``TrainingFeatures`` stores the encoded training rows, ``TargetMean`` stores the centered-mean offset, ``Alpha`` stores the cached dual coefficients, ``CholeskyFactor`` stores the lower-triangular covariance factor, ``Kernel`` stores the learned mixed-kernel hyperparameters including one continuous length scale per encoded continuous feature and one categorical penalty per categorical attribute, and ``Diagnostics`` stores training metadata including the effective options and learned hyperparameters.'
-		],
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, regression_tree,
 			random_forest_regression

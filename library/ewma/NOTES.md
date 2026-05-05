@@ -153,7 +153,7 @@ The following options are supported by the public API:
   `lambda` (default: `0.2`)
 
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

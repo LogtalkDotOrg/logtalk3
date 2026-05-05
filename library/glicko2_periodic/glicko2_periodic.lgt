@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Multi-period Glicko-2 ranker over temporal pairwise game datasets with explicit rating periods and per-game results.',
-		remarks is [
-			'Algorithm' - 'Applies the standard Glicko-2 rating, rating-deviation, and volatility update equations period by period using simultaneous player updates inside each declared rating period.',
-			'Dataset protocol' - 'Learns from datasets implementing the ``temporal_pairwise_ranking_dataset_protocol`` protocol with explicit ``period/1`` and ``game/4`` facts.',
-			'Draw support' - 'Games encode the score for the first player on the set {0.0, 0.5, 1.0}, allowing wins, draws, and losses.',
-			'Inactivity' - 'Players who have already appeared in at least one game keep their rating and volatility but have their rating deviation inflated in declared periods where they are inactive; players are initialized when they first play.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``glicko2_periodic_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the effective options, per-item rating deviations, per-item volatilities, processed periods, and the training dataset summary.'
-		],
 		see_also is [temporal_pairwise_ranking_dataset_protocol, ranker_protocol, glicko2]
 	]).
 

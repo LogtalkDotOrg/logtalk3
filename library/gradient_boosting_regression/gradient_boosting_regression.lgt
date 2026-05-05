@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-05,
 		comment is 'Gradient boosting regression using regression trees as additive base learners fitted to successive residuals.',
-		remarks is [
-			'Algorithm' - 'Builds an additive ensemble of regression trees by repeatedly fitting the current residuals under squared-error loss.',
-			'Initial model' - 'Starts from the arithmetic mean of the training targets and then adds a scaled tree prediction at each boosting stage.',
-			'Shrinkage' - 'Uses a fixed learning rate to scale each stage contribution and reduce overfitting.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics)`` where ``WeightedTrees`` contains ``weighted_tree(LearningRate, Tree)`` terms and ``Diagnostics`` stores training metadata including the effective options.'
-		],
 		see_also is [linear_regression, knn_regression, regression_tree, random_forest_regression]
 	]).
 

@@ -147,6 +147,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scoring-semantics">Scoring semantics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#residual-semantics">Residual semantics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#learning-a-ranker">Learning a ranker</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inspecting-residuals">Inspecting residuals</a></li>
@@ -316,7 +317,11 @@
              
   <section id="hodge-rank">
 <span id="library-hodge-rank"></span><h1><code class="docutils literal notranslate"><span class="pre">hodge_rank</span></code><a class="headerlink" href="#hodge-rank" title="Link to this heading"></a></h1>
-<p>HodgeRank pairwise measurement ranker.</p>
+<p>HodgeRank pairwise measurement ranker. It builds a weighted graph
+Laplacian from the pairwise measurement support graph, solves the
+anchored normal equations using deterministic Gaussian elimination with
+partial pivoting and residual validation, and computes edge residuals
+against the fitted score differences.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from weighted signed pairwise measurements, using it to order
@@ -325,7 +330,9 @@ it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_measurement_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The current implementation requires a well-formed connected
+pairwise measurement dataset so that learned scores remain globally
+comparable across all ranked items.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -390,6 +397,12 @@ whose fitted global potential is higher than average. The
 <code class="docutils literal notranslate"><span class="pre">residuals/2</span></code> predicate returns the unexplained part of each observed
 edge measurement after removing the fitted score difference, i.e. the
 non-global residual edge flow left after fitting the global component.</p>
+</section>
+<section id="residual-semantics">
+<h2>Residual semantics<a class="headerlink" href="#residual-semantics" title="Link to this heading"></a></h2>
+<p>Residuals capture the part of each observed edge measurement that is not
+explained by the fitted global score difference, exposing the non-global
+residual edge flow left after fitting the global component.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>

@@ -311,9 +311,14 @@
   <section id="gradient-boosting-regression">
 <span id="library-gradient-boosting-regression"></span><h1><code class="docutils literal notranslate"><span class="pre">gradient_boosting_regression</span></code><a class="headerlink" href="#gradient-boosting-regression" title="Link to this heading"></a></h1>
 <p>Gradient boosting regression supporting continuous and mixed-feature
-datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in
-the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns an additive ensemble of
-regression trees fitted to successive residuals.</p>
+datasets. Builds an additive ensemble of regression trees by repeatedly
+fitting the current residuals under squared-error loss. Starts from the
+arithmetic mean of the training targets and then adds a scaled tree
+prediction at each boosting stage.</p>
+<p>The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in the
+<code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns an additive ensemble of
+regression trees by repeatedly fitting the current residuals under
+squared-error loss.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -345,7 +350,7 @@ link in a web browser.</p>
 <li><p><strong>Residual Fitting</strong>: Fits each regression tree to the residuals of
 the current additive model under squared-error loss.</p></li>
 <li><p><strong>Shrinkage</strong>: Supports a fixed learning rate to scale stage
-contributions.</p></li>
+contributions and reduce overfitting.</p></li>
 <li><p><strong>Continuous and Mixed Features</strong>: Supports continuous attributes and
 categorical attributes encoded by the underlying regression-tree
 learner.</p></li>
@@ -372,6 +377,9 @@ datasets.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Functor(InitialPrediction,</span> <span class="pre">WeightedTrees,</span> <span class="pre">Diagnostics)</span></code></p></li>
 </ul>
+<p>In this representation, <code class="docutils literal notranslate"><span class="pre">WeightedTrees</span></code> contains
+<code class="docutils literal notranslate"><span class="pre">weighted_tree(LearningRate,</span> <span class="pre">Tree)</span></code> terms and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores
+training metadata including the effective options.</p>
 </section>
 <section id="diagnostics-syntax">
 <h2>Diagnostics syntax<a class="headerlink" href="#diagnostics-syntax" title="Link to this heading"></a></h2>

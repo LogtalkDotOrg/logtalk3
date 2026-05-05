@@ -136,7 +136,7 @@ The following options are supported by the public API:
   ``anomaly_threshold/1`` is passed to ``learn/3``, the stored threshold
   is derived from this value as ``H / (1 + H)``.
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

@@ -130,7 +130,25 @@
 <li class="toctree-l2"><a class="reference internal" href="geospatial.html"><code class="docutils literal notranslate"><span class="pre">geospatial</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="glicko2.html"><code class="docutils literal notranslate"><span class="pre">glicko2</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">glicko2_periodic</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">glicko2_periodic</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rating-semantics">Rating semantics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#learning-a-ranker">Learning a ranker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inspecting-diagnostics">Inspecting diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ranking-candidate-items">Ranking candidate items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exporting-the-ranker">Exporting the ranker</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics-syntax">Diagnostics syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ranker-representation">Ranker representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="gradient_boosting_regression.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
@@ -301,36 +319,214 @@
              
   <section id="glicko2-periodic">
 <span id="library-glicko2-periodic"></span><h1><code class="docutils literal notranslate"><span class="pre">glicko2_periodic</span></code><a class="headerlink" href="#glicko2-periodic" title="Link to this heading"></a></h1>
-<p>Multi-period Glicko-2 ranker over temporal pairwise game datasets.</p>
+<p>Multi-period Glicko-2 ranker over temporal pairwise game datasets.
+Applies the standard Glicko-2 rating, rating-deviation, and volatility
+update equations period by period using simultaneous player updates
+inside each declared rating period.</p>
 <p>This library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It learns one rating per item from
 datasets implementing the <code class="docutils literal notranslate"><span class="pre">temporal_pairwise_ranking_dataset_protocol</span></code>
 protocol, processing declared rating periods in order and applying
-simultaneous Glicko-2 player updates inside each period.</p>
+simultaneous Glicko-2 player updates inside each period using the
+standard Glicko-2 rating, rating-deviation, and volatility update
+equations.</p>
 <p>Draws are represented directly using game scores on the set
 <code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0}</span></code>. Players who are inactive in a declared period keep
 their rating and volatility while their rating deviation is inflated for
 that period.</p>
 <p>Players are initialized when they first play instead of being forced to
 appear in the first declared period.</p>
-<p>The learned ranker is represented by the compound term:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>glicko2_periodic_ranker(<span class="nv">Items</span>, <span class="nv">Ratings</span>, <span class="nv">Diagnostics</span>)
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">Ratings</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>
-stores metadata including the effective options, per-item rating
-deviations, per-item volatilities, processed periods, and the training
-dataset summary.</p>
-<p>Load with:</p>
+<p>The library provides predicates for learning a ranker from temporal
+pairwise games, using it to order candidate items, and exporting it as a
+list of predicate clauses or to a file.</p>
+<p>Datasets are represented as objects implementing the
+<code class="docutils literal notranslate"><span class="pre">temporal_pairwise_ranking_dataset_protocol</span></code> protocol from the
+<code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
+examples.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#glicko2_periodic">../../apis/library_index.html#glicko2_periodic</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(glicko2_periodic(loader)).
 </pre></div>
 </div>
-<p>Test with:</p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(glicko2_periodic(tester)).
 </pre></div>
 </div>
-<p>The supported options are <code class="docutils literal notranslate"><span class="pre">initial_rating/1</span></code>, <code class="docutils literal notranslate"><span class="pre">initial_deviation/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">initial_volatility/1</span></code>, <code class="docutils literal notranslate"><span class="pre">tau/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">volatility_tolerance/1</span></code>.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Temporal Pairwise Game Learning</strong>: Learns one deterministic rating
+per item from temporal pairwise game results.</p></li>
+<li><p><strong>Deterministic Multi-Period Glicko-2 Semantics</strong>: Processes the
+declared rating periods in order and applies simultaneous Glicko-2
+player updates within each period.</p></li>
+<li><p><strong>Direct Draw Support</strong>: Uses explicit game scores on the set
+<code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0}</span></code>, allowing wins, draws, and losses to be
+represented directly.</p></li>
+<li><p><strong>Inactive-Period Deviation Inflation</strong>: Players who do not play in a
+declared period keep their rating and volatility while their rating
+deviation is inflated for that period.</p></li>
+<li><p><strong>Late Player Initialization</strong>: Players are initialized when they
+first appear in the dataset instead of being forced to play in the
+first declared period.</p></li>
+<li><p><strong>Configurable Rating Parameters</strong>: Exposes the initial rating,
+initial rating deviation, initial volatility, volatility constraint
+parameter, and volatility-solver tolerance as user options.</p></li>
+<li><p><strong>Deterministic Ranking</strong>: Orders candidate items by learned rating
+with deterministic tie-breaking.</p></li>
+<li><p><strong>Strict Dataset Validation</strong>: Rejects duplicate periods, unknown
+periods, undeclared items, self-games, illegal scores, and
+disconnected comparison graphs.</p></li>
+<li><p><strong>Extended Diagnostics</strong>: Preserves per-item rating deviations,
+volatilities, processed period count, and final period metadata in the
+learned ranker diagnostics.</p></li>
+<li><p><strong>Ranker Export</strong>: Learned rankers can be exported as self-contained
+terms.</p></li>
+<li><p><strong>Shared Ranking Infrastructure</strong>: Reuses the <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code>
+helpers for option processing, dataset validation, diagnostics access,
+export, and candidate ranking.</p></li>
+</ul>
+</section>
+<section id="rating-semantics">
+<h2>Rating semantics<a class="headerlink" href="#rating-semantics" title="Link to this heading"></a></h2>
+<p>This implementation uses the standard Glicko-2 update equations over
+explicit rating periods supplied by the dataset. The declared periods
+are processed in order, and all active players in a period are updated
+simultaneously from the pre-period ratings, deviations, and
+volatilities.</p>
+<p>Game results are represented directly using scores in the set
+<code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0}</span></code>. A score of <code class="docutils literal notranslate"><span class="pre">0.5</span></code> denotes a draw. Players who are
+inactive in a period keep their rating and volatility, but their rating
+deviation is inflated for that period according to the Glicko-2
+inactivity rule.</p>
+<p>Players are initialized when they first appear in a game rather than
+being required to occur in the first declared period. Items declared by
+the dataset but never seen in a game are initialized after training so
+they remain present in the learned ranker with the configured initial
+parameters.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="learning-a-ranker">
+<h3>Learning a ranker<a class="headerlink" href="#learning-a-ranker" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Learn from a temporal pairwise ranking dataset object</span>
+| <span class="o">?-</span> glicko2_periodic<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>).
+...
+
+<span class="c">% Learn with custom Glicko-2 parameters</span>
+| <span class="o">?-</span> glicko2_periodic<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>, [initial_rating(<span class="m">1400.0</span>), initial_deviation(<span class="m">300.0</span>), initial_volatility(<span class="m">0.07</span>), tau(<span class="m">0.4</span>)]).
+...
+</pre></div>
+</div>
+</section>
+<section id="inspecting-diagnostics">
+<h3>Inspecting diagnostics<a class="headerlink" href="#inspecting-diagnostics" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Inspect model, options, deviations, volatilities, and period metadata</span>
+| <span class="o">?-</span> glicko2_periodic<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>),
+     glicko2_periodic<span class="o">::</span>diagnostics(<span class="nv">Ranker</span>, <span class="nv">Diagnostics</span>).
+<span class="nv">Diagnostics</span> <span class="o">=</span> [...]
+...
+</pre></div>
+</div>
+</section>
+<section id="ranking-candidate-items">
+<h3>Ranking candidate items<a class="headerlink" href="#ranking-candidate-items" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Rank a candidate set from most preferred to least preferred</span>
+| <span class="o">?-</span> glicko2_periodic<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>),
+     glicko2_periodic<span class="o">::</span>rank(<span class="nv">Ranker</span>, [item_a, item_b, item_c], <span class="nv">Ranking</span>).
+<span class="nv">Ranking</span> <span class="o">=</span> [...]
+...
+</pre></div>
+</div>
+<p>Candidate lists must be proper lists of unique, ground items declared by
+the training dataset. Invalid ranker terms, duplicate candidates, and
+candidates containing variables are rejected with errors instead of
+being silently accepted.</p>
+</section>
+<section id="exporting-the-ranker">
+<h3>Exporting the ranker<a class="headerlink" href="#exporting-the-ranker" title="Link to this heading"></a></h3>
+<p>Learned rankers can be exported as a list of clauses or to a file for
+later use.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Export as predicate clauses</span>
+| <span class="o">?-</span> glicko2_periodic<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>),
+     glicko2_periodic<span class="o">::</span>export_to_clauses(my_dataset, <span class="nv">Ranker</span>, my_ranker, <span class="nv">Clauses</span>).
+<span class="nv">Clauses</span> <span class="o">=</span> [my_ranker(glicko2_periodic_ranker(...))]
+...
+
+<span class="c">% Export to a file</span>
+| <span class="o">?-</span> glicko2_periodic<span class="o">::</span>learn(my_dataset, <span class="nv">Ranker</span>),
+     glicko2_periodic<span class="o">::</span>export_to_file(my_dataset, <span class="nv">Ranker</span>, my_ranker, <span class="s">&#39;ranker.pl&#39;</span>).
+...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_rating(Rating)</span></code>: Initial rating assigned to a player when
+it is first initialized.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_deviation(Deviation)</span></code>: Initial rating deviation assigned to
+a player when it is first initialized.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_volatility(Volatility)</span></code>: Initial volatility assigned to a
+player when it is first initialized.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau(Tau)</span></code>: Positive volatility-constraint parameter used by the
+Glicko-2 update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">volatility_tolerance(Tolerance)</span></code>: Positive stopping tolerance used
+by the volatility root-finding iteration.</p></li>
+</ul>
+<p>Datasets supplied to the ranker must use legal game scores from the set
+<code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">0.5,</span> <span class="pre">1.0}</span></code>.</p>
+</section>
+<section id="diagnostics-syntax">
+<h2>Diagnostics syntax<a class="headerlink" href="#diagnostics-syntax" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns a list of metadata terms with
+the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[
+    model(glicko2_periodic),
+    options(<span class="nv">Options</span>),
+    rating_deviations(<span class="nv">Deviations</span>),
+    volatilities(<span class="nv">Volatilities</span>),
+    periods_processed(<span class="nv">PeriodsProcessed</span>),
+    final_period(<span class="nv">FinalPeriod</span>),
+    dataset_summary(<span class="nv">DatasetSummary</span>)
+]
+</pre></div>
+</div>
+</section>
+<section id="ranker-representation">
+<h2>Ranker representation<a class="headerlink" href="#ranker-representation" title="Link to this heading"></a></h2>
+<p>The learned ranker is represented by a compound term of the form:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>glicko2_periodic_ranker(<span class="nv">Items</span>, <span class="nv">Ratings</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Items</span></code>: List of ranked items.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ratings</span></code>: List of <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> pairs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: List of metadata terms, including the effective
+options, per-item rating deviations, per-item volatilities, processed
+period count, final period, and dataset summary.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Glickman, M. E. (2012). <em>Example of the Glicko-2 system</em>.</p></li>
+</ol>
+</section>
 </section>
 
 

@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-05,
 		comment is 'Statistical interquartile-range anomaly detector for continuous datasets. Learns per-attribute quartiles and interquartile ranges from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'This is a statistical anomaly-detection method based on Tukey interquartile fences. For each known continuous attribute value ``x``, the detector learns ``Q1`` and ``Q3`` and computes the positive exceedance of ``x`` beyond the interval ``[Q1,Q3]`` in interquartile-range units, normalized by the learned ``fence_multiplier/1`` option. Each per-attribute normalized deviation therefore reaches ``1.0`` exactly at the chosen Tukey fence. These per-attribute scores are then aggregated according to ``score_mode/1``. In both supported modes, any attribute value at or beyond ``[Q1 - k*IQR, Q3 + k*IQR]`` contributes a raw score at or above the default anomaly boundary when using ``fence_multiplier(k)``.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the per-attribute baseline statistics. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.',
-			'Feature handling' - 'Supports continuous attributes only. Missing values are ignored when fitting attribute statistics. During scoring, queries must contain at least one known value. The learned detector stores a precomputed attribute schema so that scoring reuses the same attribute ordering without rebuilding it on every call. The ``root_mean_square`` score mode aggregates normalized deviations over attributes with positive deviation so that neutral inlier attributes do not dilute fence-reaching anomalies.',
-			'Predict-time options' - 'The ``fence_multiplier/1`` and ``score_mode/1`` options are learn-time options. ``predict/4`` always uses the values stored in the learned detector. If these options are passed to ``predict/4``, they are ignored.',
-			'Score normalization' - 'The raw multivariate IQR score is mapped to the interval ``[0.0,1.0)`` using ``Score = Raw / (1 + Raw)``. Because each per-attribute score is normalized by ``fence_multiplier/1`` before aggregation, the default threshold ``0.5`` corresponds to the chosen Tukey fence cutoff for both supported score modes.',
-			'Detector representation' - 'The learned detector is represented as a ``iqr_detector(TrainingDataset, AttributeSchema, Encoders, Diagnostics)`` term where ``AttributeSchema`` stores the precomputed attribute ordering and ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, modified_z_score, z_score, isolation_forest, knn_distance, lof]
 	]).
 

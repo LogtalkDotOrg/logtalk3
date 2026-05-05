@@ -319,7 +319,10 @@
              
   <section id="glicko2">
 <span id="library-glicko2"></span><h1><code class="docutils literal notranslate"><span class="pre">glicko2</span></code><a class="headerlink" href="#glicko2" title="Link to this heading"></a></h1>
-<p>Glicko-2 pairwise preference ranker.</p>
+<p>Glicko-2 pairwise preference ranker. It applies the standard Glicko-2
+rating, rating-deviation, and volatility update equations over a single
+synthetic rating period built from the aggregated pairwise outcomes of
+the dataset.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preferences, using it to order candidate items, and
@@ -327,7 +330,9 @@ exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that learned ratings remain globally comparable
+across all ranked items.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

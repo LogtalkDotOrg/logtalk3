@@ -21,7 +21,15 @@ ________________________________________________________________________
 `iqr`
 =======
 
-Statistical interquartile-range anomaly detector for continuous datasets.
+Statistical interquartile-range anomaly detector for continuous
+datasets. It is a statistical anomaly-detection method based on Tukey
+interquartile fences: for each known continuous attribute value it
+learns `Q1` and `Q3`, computes the exceedance beyond `[Q1,Q3]` in
+interquartile-range units normalized by the learned
+`fence_multiplier/1`, and then aggregates the per-attribute normalized
+deviations according to `score_mode/1`, so any value at or beyond
+`[Q1 - k*IQR, Q3 + k*IQR]` reaches the default anomaly boundary when
+using `fence_multiplier(k)`.
 
 The library implements the `anomaly_detector_protocol` defined in the
 `anomaly_detection_protocols` library. It learns a detector from a
@@ -150,7 +158,7 @@ The following options are supported by the public API:
   and the value stored in the learned detector is used.
 
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

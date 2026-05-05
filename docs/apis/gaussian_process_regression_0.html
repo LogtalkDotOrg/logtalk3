@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-04</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -367,18 +367,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses exact Gaussian process regression with a mixed covariance kernel: an automatic-relevance-determination squared-exponential component over continuous encoded features and a field-wise categorical overlap component over categorical attributes. Hyperparameters are selected by maximizing the log marginal likelihood using a deterministic coordinate search in log space.</p></li>
-<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and missing values are encoded using explicit missing-value indicator features.</p></li>
-<li><p>Uncertainty estimates: In addition to mean predictions, the library can return the posterior predictive Gaussian distribution for a new instance, including observation noise variance. Small negative posterior variances caused by floating-point roundoff are clipped to zero while larger negative values raise an error.</p></li>
-<li><p>Numerical stability: Covariance factorization uses adaptive jitter escalation and raises a domain error when the covariance matrix cannot be made positive definite within the configured retry budget.</p></li>
-<li><p>Memory-based representation: The learned regressor stores the encoded training rows together with the cached Cholesky factor and dual coefficients required for exact posterior prediction.</p></li>
-<li><p>Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.</p></li>
-<li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">gaussian_process_regressor(Encoders,</span> <span class="pre">TrainingFeatures,</span> <span class="pre">TargetMean,</span> <span class="pre">Alpha,</span> <span class="pre">CholeskyFactor,</span> <span class="pre">Kernel,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">TrainingFeatures</span></code> stores the encoded training rows, <code class="docutils literal notranslate"><span class="pre">TargetMean</span></code> stores the centered-mean offset, <code class="docutils literal notranslate"><span class="pre">Alpha</span></code> stores the cached dual coefficients, <code class="docutils literal notranslate"><span class="pre">CholeskyFactor</span></code> stores the lower-triangular covariance factor, <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> stores the learned mixed-kernel hyperparameters including one continuous length scale per encoded continuous feature and one categorical penalty per categorical attribute, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options and learned hyperparameters.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

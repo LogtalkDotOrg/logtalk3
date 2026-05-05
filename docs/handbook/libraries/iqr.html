@@ -154,7 +154,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#detector-representation">Detector Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detector-representation">Detector representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
@@ -311,7 +311,14 @@
   <section id="iqr">
 <span id="library-iqr"></span><h1><code class="docutils literal notranslate"><span class="pre">iqr</span></code><a class="headerlink" href="#iqr" title="Link to this heading"></a></h1>
 <p>Statistical interquartile-range anomaly detector for continuous
-datasets.</p>
+datasets. It is a statistical anomaly-detection method based on Tukey
+interquartile fences: for each known continuous attribute value it
+learns <code class="docutils literal notranslate"><span class="pre">Q1</span></code> and <code class="docutils literal notranslate"><span class="pre">Q3</span></code>, computes the exceedance beyond <code class="docutils literal notranslate"><span class="pre">[Q1,Q3]</span></code> in
+interquartile-range units normalized by the learned
+<code class="docutils literal notranslate"><span class="pre">fence_multiplier/1</span></code>, and then aggregates the per-attribute normalized
+deviations according to <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code>, so any value at or beyond
+<code class="docutils literal notranslate"><span class="pre">[Q1</span> <span class="pre">-</span> <span class="pre">k*IQR,</span> <span class="pre">Q3</span> <span class="pre">+</span> <span class="pre">k*IQR]</span></code> reaches the default anomaly boundary when
+using <code class="docutils literal notranslate"><span class="pre">fence_multiplier(k)</span></code>.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a detector from a
 continuous dataset, computes anomaly scores for new instances, predicts
@@ -423,7 +430,7 @@ detector is used.</p></li>
 </ul>
 </section>
 <section id="detector-representation">
-<h2>Detector Representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
+<h2>Detector representation<a class="headerlink" href="#detector-representation" title="Link to this heading"></a></h2>
 <p>The learned detector is represented by default as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>iqr_detector(<span class="nv">TrainingDataset</span>, <span class="nv">AttributeSchema</span>, <span class="nv">Encoders</span>, <span class="nv">Diagnostics</span>)
 </pre></div>

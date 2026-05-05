@@ -142,7 +142,7 @@ The following options are supported by the public API:
   and the value stored in the learned detector is used.
 
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

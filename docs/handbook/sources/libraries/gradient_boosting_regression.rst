@@ -4,9 +4,15 @@
 ================================
 
 Gradient boosting regression supporting continuous and mixed-feature
-datasets. The library implements the ``regressor_protocol`` defined in
-the ``regression_protocols`` library and learns an additive ensemble of
-regression trees fitted to successive residuals.
+datasets. Builds an additive ensemble of regression trees by repeatedly
+fitting the current residuals under squared-error loss. Starts from the
+arithmetic mean of the training targets and then adds a scaled tree
+prediction at each boosting stage.
+
+The library implements the ``regressor_protocol`` defined in the
+``regression_protocols`` library and learns an additive ensemble of
+regression trees by repeatedly fitting the current residuals under
+squared-error loss.
 
 API documentation
 -----------------
@@ -46,7 +52,7 @@ Features
 - **Residual Fitting**: Fits each regression tree to the residuals of
   the current additive model under squared-error loss.
 - **Shrinkage**: Supports a fixed learning rate to scale stage
-  contributions.
+  contributions and reduce overfitting.
 - **Continuous and Mixed Features**: Supports continuous attributes and
   categorical attributes encoded by the underlying regression-tree
   learner.
@@ -72,6 +78,10 @@ The learned regressor is represented by default as:
 The exported predicate clauses therefore use the shape:
 
 - ``Functor(InitialPrediction, WeightedTrees, Diagnostics)``
+
+In this representation, ``WeightedTrees`` contains
+``weighted_tree(LearningRate, Tree)`` terms and ``Diagnostics`` stores
+training metadata including the effective options.
 
 Diagnostics syntax
 ------------------

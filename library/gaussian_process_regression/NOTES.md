@@ -22,11 +22,20 @@ ________________________________________________________________________
 =============================
 
 Gaussian process regression regressor supporting continuous and mixed-feature
-datasets. The library implements the `regressor_protocol` defined in the
+datasets. Uses exact Gaussian process regression with a mixed covariance
+kernel: an automatic-relevance-determination squared-exponential component
+over continuous encoded features and a field-wise categorical overlap
+component over categorical attributes. Hyperparameters are selected by
+maximizing the log marginal likelihood using a deterministic coordinate
+search in log space.
+
+The library implements the `regressor_protocol` defined in the
 `regression_protocols` library and learns an exact mixed gaussian process
 using an automatic-relevance-determination squared-exponential kernel for
 continuous encoded features together with a categorical overlap kernel for
-categorical attributes.
+categorical attributes. Hyperparameters are selected by maximizing the
+log marginal likelihood using a deterministic coordinate search in log
+space.
 
 
 API documentation
@@ -66,9 +75,9 @@ Features
 - **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Exact Bayesian Regression**: Uses exact Gaussian process regression with a mixed covariance kernel combining an automatic-relevance-determination squared-exponential component for continuous encoded features and a field-wise categorical overlap component for categorical attributes.
 - **Automatic Hyperparameter Selection**: By default performs deterministic log-marginal-likelihood optimization of the continuous-feature length scales, categorical mismatch penalties, signal variance, and noise variance. The `length_scale/1`, `categorical_penalty/1`, `signal_variance/1`, and `noise_variance/1` options also accept `auto` when optimization is disabled.
-- **Uncertainty Quantification**: Exposes posterior predictive Gaussian distributions for new instances using the `predict_distribution/3` predicate.
+- **Uncertainty Quantification**: Exposes posterior predictive Gaussian distributions for new instances (including observation noise variance) using the `predict_distribution/3` predicate. Small negative posterior variances caused by floating-point roundoff are clipped to zero while larger negative values raise an error.
 - **Adaptive Stabilization**: Retries covariance factorization with progressively larger jitter values and records the effective retry count in the learned diagnostics.
-- **Memory-Based Representation**: Stores the encoded training rows and cached Cholesky factor required for exact posterior prediction.
+- **Memory-Based Representation**: Stores the encoded training rows and cached Cholesky factor required for exact posterior prediction plus the dual coefficients required for exact posterior prediction.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for representative regression datasets.
 
@@ -83,6 +92,15 @@ The learned regressor is represented by default as:
 The exported predicate clauses therefore use the shape:
 
 - `Functor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics)`
+
+In this representation, `Encoders` stores feature encoding metadata,
+`TrainingFeatures` stores the encoded training rows, `TargetMean`
+stores the centered-mean offset, `Alpha` stores the cached dual coefficients,
+`CholeskyFactor` stores the lower-triangular covariance factor, `Kernel`
+stores the learned mixed-kernel hyperparameters including one continuous
+length scale per encoded continuous feature and one categorical penalty
+per categorical attribute, and ``Diagnostics`` stores training metadata
+including the effective options and learned hyperparameters.
 
 
 Prediction API

@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'HodgeRank pairwise measurement ranker. Learns one deterministic zero-sum score per item from a dataset object implementing the ``pairwise_measurement_dataset_protocol`` protocol by solving the weighted graph-Laplacian least-squares system induced by signed edge measurements and returns a self-describing ranker term with diagnostics and residuals.',
-		remarks is [
-			'Algorithm' - 'Builds a weighted graph Laplacian from the pairwise measurement support graph, solves the anchored normal equations using deterministic Gaussian elimination with partial pivoting and residual validation, and computes edge residuals against the fitted score differences.',
-			'Score semantics' - 'Learned scores are zero-sum potentials centered around ``0.0``. Positive values indicate items whose fitted global potential is above average and negative values indicate items below average.',
-			'Residual semantics' - 'Residuals capture the part of each observed edge measurement that is not explained by the fitted global score difference, exposing the non-global residual edge flow left after fitting the global component.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise measurement dataset so that learned scores remain globally comparable across all ranked items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``hodge_rank_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the residuals, residual norm, effective options, and the training dataset summary.'
-		],
 		see_also is [pairwise_measurement_dataset_protocol, ranker_protocol, massey]
 	]).
 

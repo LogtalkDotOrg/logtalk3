@@ -312,12 +312,19 @@
   <section id="gaussian-process-regression">
 <span id="library-gaussian-process-regression"></span><h1><code class="docutils literal notranslate"><span class="pre">gaussian_process_regression</span></code><a class="headerlink" href="#gaussian-process-regression" title="Link to this heading"></a></h1>
 <p>Gaussian process regression regressor supporting continuous and
-mixed-feature datasets. The library implements the
-<code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library
-and learns an exact mixed gaussian process using an
-automatic-relevance-determination squared-exponential kernel for
-continuous encoded features together with a categorical overlap kernel
-for categorical attributes.</p>
+mixed-feature datasets. Uses exact Gaussian process regression with a
+mixed covariance kernel: an automatic-relevance-determination
+squared-exponential component over continuous encoded features and a
+field-wise categorical overlap component over categorical attributes.
+Hyperparameters are selected by maximizing the log marginal likelihood
+using a deterministic coordinate search in log space.</p>
+<p>The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in the
+<code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns an exact mixed gaussian
+process using an automatic-relevance-determination squared-exponential
+kernel for continuous encoded features together with a categorical
+overlap kernel for categorical attributes. Hyperparameters are selected
+by maximizing the log marginal likelihood using a deterministic
+coordinate search in log space.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -367,13 +374,16 @@ signal variance, and noise variance. The <code class="docutils literal notransla
 <code class="docutils literal notranslate"><span class="pre">noise_variance/1</span></code> options also accept <code class="docutils literal notranslate"><span class="pre">auto</span></code> when optimization is
 disabled.</p></li>
 <li><p><strong>Uncertainty Quantification</strong>: Exposes posterior predictive Gaussian
-distributions for new instances using the <code class="docutils literal notranslate"><span class="pre">predict_distribution/3</span></code>
-predicate.</p></li>
+distributions for new instances (including observation noise variance)
+using the <code class="docutils literal notranslate"><span class="pre">predict_distribution/3</span></code> predicate. Small negative
+posterior variances caused by floating-point roundoff are clipped to
+zero while larger negative values raise an error.</p></li>
 <li><p><strong>Adaptive Stabilization</strong>: Retries covariance factorization with
 progressively larger jitter values and records the effective retry
 count in the learned diagnostics.</p></li>
 <li><p><strong>Memory-Based Representation</strong>: Stores the encoded training rows and
-cached Cholesky factor required for exact posterior prediction.</p></li>
+cached Cholesky factor required for exact posterior prediction plus
+the dual coefficients required for exact posterior prediction.</p></li>
 <li><p><strong>Model Export</strong>: Learned regressors can be exported as predicate
 clauses or written to a file.</p></li>
 <li><p><strong>Reference Benchmarks</strong>: Includes a dedicated performance suite
@@ -391,6 +401,15 @@ datasets.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Functor(Encoders,</span> <span class="pre">TrainingFeatures,</span> <span class="pre">TargetMean,</span> <span class="pre">Alpha,</span> <span class="pre">CholeskyFactor,</span> <span class="pre">Kernel,</span> <span class="pre">Diagnostics)</span></code></p></li>
 </ul>
+<p>In this representation, <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores feature encoding metadata,
+<code class="docutils literal notranslate"><span class="pre">TrainingFeatures</span></code> stores the encoded training rows, <code class="docutils literal notranslate"><span class="pre">TargetMean</span></code>
+stores the centered-mean offset, <code class="docutils literal notranslate"><span class="pre">Alpha</span></code> stores the cached dual
+coefficients, <code class="docutils literal notranslate"><span class="pre">CholeskyFactor</span></code> stores the lower-triangular covariance
+factor, <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> stores the learned mixed-kernel hyperparameters
+including one continuous length scale per encoded continuous feature and
+one categorical penalty per categorical attribute, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>
+stores training metadata including the effective options and learned
+hyperparameters.</p>
 </section>
 <section id="prediction-api">
 <h2>Prediction API<a class="headerlink" href="#prediction-api" title="Link to this heading"></a></h2>

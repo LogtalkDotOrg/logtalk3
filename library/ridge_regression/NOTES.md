@@ -25,7 +25,9 @@ Ridge regression regressor supporting continuous and mixed-feature
 datasets. The library implements the `regressor_protocol` defined in the
 `regression_protocols` library and learns a linear model by solving the
 weighted ridge normal equations directly via the shared regression
-encoding core in `regressor_common`.
+encoding core in `regressor_common`, leaving the intercept unpenalized
+while penalizing encoded feature columns using scale-aware weights that
+match standardizing penalized columns before applying the L2 penalty.
 
 
 API documentation
@@ -61,7 +63,7 @@ Features
 
 - **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding.
 - **Feature Scaling and Penalty Scaling**: Continuous attributes can be standardized using z-score scaling. Ridge regularization uses scale-aware weights equivalent to standardizing each penalized encoded feature column before applying the L2 penalty.
-- **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Missing Values**: Missing numeric and categorical values represented using anonymous variables are encoded using explicit missing-value indicator features.
 - **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Zero-Variance Features**: Encoded columns with zero variance are excluded from the direct solve and assigned zero coefficients in the learned regressor.
 - **Ridge Penalty**: Applies L2 regularization to the learned weights using the shared `regularization/1` option.

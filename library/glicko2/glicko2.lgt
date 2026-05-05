@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Glicko-2 pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying one Glicko-2 rating-period update over the aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Applies the standard Glicko-2 rating, rating-deviation, and volatility update equations over a single synthetic rating period built from the aggregated pairwise outcomes of the dataset.',
-			'Weight semantics' - 'Preference weights must be positive integers and are interpreted as repeated unit outcomes inside the same synthetic rating period.',
-			'Batch semantics' - 'Because the current pairwise dataset protocol does not encode timestamps or rating periods, the implementation treats the whole dataset as a single deterministic Glicko-2 rating period.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that learned ratings remain globally comparable across all ranked items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``glicko2_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the effective options, per-item rating deviations, per-item volatilities, and the training dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, elo, rank_centrality]
 	]).
 

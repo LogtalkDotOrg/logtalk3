@@ -3,7 +3,11 @@
 ``hodge_rank``
 ==============
 
-HodgeRank pairwise measurement ranker.
+HodgeRank pairwise measurement ranker. It builds a weighted graph
+Laplacian from the pairwise measurement support graph, solves the
+anchored normal equations using deterministic Gaussian elimination with
+partial pivoting and residual validation, and computes edge residuals
+against the fitted score differences.
 
 The library implements the ``ranker_protocol`` defined in the
 ``ranking_protocols`` library. It provides predicates for learning a
@@ -14,7 +18,9 @@ it as a list of predicate clauses or to a file.
 Datasets are represented as objects implementing the
 ``pairwise_measurement_dataset_protocol`` protocol from the
 ``ranking_protocols`` library. See the ``test_datasets`` directory for
-examples.
+examples. The current implementation requires a well-formed connected
+pairwise measurement dataset so that learned scores remain globally
+comparable across all ranked items.
 
 API documentation
 -----------------
@@ -90,6 +96,13 @@ whose fitted global potential is higher than average. The
 ``residuals/2`` predicate returns the unexplained part of each observed
 edge measurement after removing the fitted score difference, i.e. the
 non-global residual edge flow left after fitting the global component.
+
+Residual semantics
+------------------
+
+Residuals capture the part of each observed edge measurement that is not
+explained by the fitted global score difference, exposing the non-global
+residual edge flow left after fitting the global component.
 
 Usage
 -----

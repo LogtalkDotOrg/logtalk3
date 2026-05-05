@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-27</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -365,16 +365,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Applies the standard Glicko-2 rating, rating-deviation, and volatility update equations period by period using simultaneous player updates inside each declared rating period.</p></li>
-<li><p>Dataset protocol: Learns from datasets implementing the <code class="docutils literal notranslate"><span class="pre">temporal_pairwise_ranking_dataset_protocol</span></code> protocol with explicit <code class="docutils literal notranslate"><span class="pre">period/1</span></code> and <code class="docutils literal notranslate"><span class="pre">game/4</span></code> facts.</p></li>
-<li><p>Draw support: Games encode the score for the first player on the set {0.0, 0.5, 1.0}, allowing wins, draws, and losses.</p></li>
-<li><p>Inactivity: Players who have already appeared in at least one game keep their rating and volatility but have their rating deviation inflated in declared periods where they are inactive; players are initialized when they first play.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">glicko2_periodic_ranker(Items,</span> <span class="pre">Ratings,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Ratings</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Rating</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the effective options, per-item rating deviations, per-item volatilities, processed periods, and the training dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

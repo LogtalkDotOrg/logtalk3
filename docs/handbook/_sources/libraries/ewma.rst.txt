@@ -139,7 +139,7 @@ The following options are supported by the public API:
 - ``smoothing_factor(SmoothingFactor)``: Learn-time EWMA smoothing
   factor ``lambda`` (default: ``0.2``)
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

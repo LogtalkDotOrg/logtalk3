@@ -311,7 +311,10 @@
              
   <section id="hierarchical-clustering">
 <span id="library-hierarchical-clustering"></span><h1><code class="docutils literal notranslate"><span class="pre">hierarchical_clustering</span></code><a class="headerlink" href="#hierarchical-clustering" title="Link to this heading"></a></h1>
-<p>Hierarchical clusterer.</p>
+<p>Hierarchical clusterer. Supports continuous attributes only. It builds
+the full bottom-up agglomerative hierarchy and derives the requested
+partition by cutting the learned dendrogram at the largest remaining
+merge distances.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 full agglomerative hierarchy from a dataset, deriving a <code class="docutils literal notranslate"><span class="pre">k</span></code>-cluster
@@ -356,8 +359,7 @@ clusters by repeatedly splitting the highest remaining merge.</p></li>
 attributes.</p></li>
 <li><p><strong>Linkage Strategies</strong>: Supports <code class="docutils literal notranslate"><span class="pre">single</span></code>, <code class="docutils literal notranslate"><span class="pre">complete</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">average</span></code> linkage.</p></li>
-<li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
-distances.</p></li>
+<li><p><strong>Distance Metrics</strong>: Supports Euclidean and Manhattan distances.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Linkage-Aware Prediction</strong>: New instances are assigned to the

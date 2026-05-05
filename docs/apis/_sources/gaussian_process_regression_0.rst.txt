@@ -15,7 +15,7 @@ Gaussian process regression regressor supporting continuous and mixed-feature da
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-04
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,14 +32,7 @@ Gaussian process regression regressor supporting continuous and mixed-feature da
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Uses exact Gaussian process regression with a mixed covariance kernel: an automatic-relevance-determination squared-exponential component over continuous encoded features and a field-wise categorical overlap component over categorical attributes. Hyperparameters are selected by maximizing the log marginal likelihood using a deterministic coordinate search in log space.
-   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and missing values are encoded using explicit missing-value indicator features.
-   - Uncertainty estimates: In addition to mean predictions, the library can return the posterior predictive Gaussian distribution for a new instance, including observation noise variance. Small negative posterior variances caused by floating-point roundoff are clipped to zero while larger negative values raise an error.
-   - Numerical stability: Covariance factorization uses adaptive jitter escalation and raises a domain error when the covariance matrix cannot be made positive definite within the configured retry budget.
-   - Memory-based representation: The learned regressor stores the encoded training rows together with the cached Cholesky factor and dual coefficients required for exact posterior prediction.
-   - Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
-   - Regressor representation: The learned regressor is represented by default as ``gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics)`` where ``Encoders`` stores feature encoding metadata, ``TrainingFeatures`` stores the encoded training rows, ``TargetMean`` stores the centered-mean offset, ``Alpha`` stores the cached dual coefficients, ``CholeskyFactor`` stores the lower-triangular covariance factor, ``Kernel`` stores the learned mixed-kernel hyperparameters including one continuous length scale per encoded continuous feature and one categorical penalty per categorical attribute, and ``Diagnostics`` stores training metadata including the effective options and learned hyperparameters.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  

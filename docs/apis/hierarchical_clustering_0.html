@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -368,19 +368,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds the full bottom-up agglomerative hierarchy and derives the requested partition by cutting the learned dendrogram at the largest remaining merge distances.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.</p></li>
-<li><p>Linkage strategies: Supports <code class="docutils literal notranslate"><span class="pre">single</span></code>, <code class="docutils literal notranslate"><span class="pre">complete</span></code>, and <code class="docutils literal notranslate"><span class="pre">average</span></code> linkage.</p></li>
-<li><p>Distance metrics: Supports Euclidean and Manhattan distances.</p></li>
-<li><p>Re-cutting: Supports re-cutting a learned hierarchy to a different number of clusters using <code class="docutils literal notranslate"><span class="pre">cut/3</span></code> without retraining.</p></li>
-<li><p>Tie-breaking: When merge distances or cut heights are equal, the implementation deterministically prefers the smallest node-id pair.</p></li>
-<li><p>Prediction: New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric.</p></li>
-<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">hierarchical_clustering_clusterer(Encoders,</span> <span class="pre">hierarchy(RootState,</span> <span class="pre">MergeRecords,</span> <span class="pre">Dendrogram),</span> <span class="pre">Clusters,</span> <span class="pre">Prototypes,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">hierarchy(...)</span></code> stores the reusable merge state for re-cutting, <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> stores the partition obtained by cutting the hierarchy to <code class="docutils literal notranslate"><span class="pre">k</span></code> clusters, <code class="docutils literal notranslate"><span class="pre">Prototypes</span></code> stores average vectors for display and export metadata, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores the effective options and training metadata.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

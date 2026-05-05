@@ -21,7 +21,9 @@ ________________________________________________________________________
 `hierarchical_clustering`
 =========================
 
-Hierarchical clusterer.
+Hierarchical clusterer. Supports continuous attributes only. It builds the
+full bottom-up agglomerative hierarchy and derives the requested partition
+by cutting the learned dendrogram at the largest remaining merge distances.
 
 The library implements the `clusterer_protocol` defined in the
 `clustering_protocols` library. It provides predicates for learning a
@@ -69,7 +71,7 @@ Features
 - **Deterministic Dendrogram Cutting**: Produces the final `k` clusters by repeatedly splitting the highest remaining merge.
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
 - **Linkage Strategies**: Supports `single`, `complete`, and `average` linkage.
-- **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
+- **Distance Metrics**: Supports Euclidean and Manhattan distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Linkage-Aware Prediction**: New instances are assigned to the nearest learned cluster using the selected linkage strategy and distance metric rather than a prototype shortcut.
 - **Incremental Distance Updates**: Training caches singleton pair distances once and updates merge distances incrementally for `single`, `complete`, and `average` linkage instead of recomputing all member-pair distances after every merge.
