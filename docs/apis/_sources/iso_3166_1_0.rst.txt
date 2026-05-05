@@ -1,0 +1,76 @@
+.. index:: single: iso_3166_1
+.. _iso_3166_1/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_3166_1``
+==============
+
+Generated ISO 3166-1 country facts extracted from the UN M49 overview page, which republishes ISO alpha-2 and alpha-3 codes together with M49 numeric codes.
+
+| **Availability:** 
+|    ``logtalk_load(iso_3166(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Source URL: https://unstats.un.org/unsd/methodology/m49/overview/
+   - Generated entries: 248
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: country/4
+.. _iso_3166_1/0::country/4:
+
+``country/4``
+^^^^^^^^^^^^^
+
+Generated ISO 3166-1 country fact table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``country(Alpha2,Alpha3,Numeric,Name)``
+| **Mode and number of proofs:**
+|    ``country(?atom,?atom,?integer,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

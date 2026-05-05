@@ -107,6 +107,11 @@ directory in the ``NOTES.md`` file.
    ids
    intervals
    iqr
+   iso_639
+   iso_3166
+   iso_4217
+   iso_9362
+   iso_13616
    isolation_forest
    java
    json

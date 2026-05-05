@@ -311,6 +311,21 @@ libraries, allowing more detailed exports.
 distribution tests in a CI/CD pipeline without generating code coverage stats
 for faster run times.
 
+* ADDED: New `iso_639` implementing the ISO 639 standard for language codes.
+Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_3166` implementing the ISO 3166 standard for country codes.
+Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_4217` implementing the ISO 4217 standard for currency codes.
+Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_9362` implementing the ISO 9362 standard for BIC/SWIFT codes.
+Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_13616` implementing the ISO 13616 standard for IBAN strings.
+Requires a backend supporting Unicode and the `encoding/1` directive.
+
 * IMPROVED: Code refactoring of the classifier libraries by introducing a new
 `classifier_common` category with shared code.
 

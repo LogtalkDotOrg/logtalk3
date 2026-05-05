@@ -201,6 +201,11 @@
 		command_line_options(loader),
 		simulated_annealing(loader),
 		mcp_server(loader),
+		iso_639(loader),
+		iso_3166(loader),
+		iso_4217(loader),
+		iso_9362(loader),
+		iso_13616(loader),
 		cloning,
 		counters,
 		streamvars

@@ -1,0 +1,76 @@
+.. index:: single: iso_3166_2
+.. _iso_3166_2/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_3166_2``
+==============
+
+Generated ISO 3166-2 subdivision facts extracted from the Debian iso-codes machine-readable JSON snapshot.
+
+| **Availability:** 
+|    ``logtalk_load(iso_3166(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Source URL: https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-2.json
+   - Generated entries: 5046
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: subdivision/4
+.. _iso_3166_2/0::subdivision/4:
+
+``subdivision/4``
+^^^^^^^^^^^^^^^^^
+
+Generated ISO 3166-2 subdivision fact table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subdivision(Code,CountryAlpha2,Name,Category)``
+| **Mode and number of proofs:**
+|    ``subdivision(?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

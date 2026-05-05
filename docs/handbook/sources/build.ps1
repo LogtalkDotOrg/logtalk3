@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 3, 2026
+##   Last updated on May 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -157,6 +157,11 @@ Foreach-Object {
 (Get-Content ../../../library/ids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ids.rst
 (Get-Content ../../../library/intervals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/intervals.rst
 (Get-Content ../../../library/iqr/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iqr.rst
+(Get-Content ../../../library/iso_639/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_639.rst
+(Get-Content ../../../library/iso_3166/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_3166.rst
+(Get-Content ../../../library/iso_4217/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_4217.rst
+(Get-Content ../../../library/iso_9362/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_9362.rst
+(Get-Content ../../../library/iso_13616/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_13616.rst
 (Get-Content ../../../library/isolation_forest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/isolation_forest.rst
 (Get-Content ../../../library/java/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/java.rst
 (Get-Content ../../../library/json/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json.rst

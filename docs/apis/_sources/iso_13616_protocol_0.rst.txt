@@ -1,0 +1,112 @@
+.. index:: single: iso_13616_protocol
+.. _iso_13616_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``iso_13616_protocol``
+======================
+
+Protocol for ISO 13616 IBAN structure parsing, checksum validation, and normalization.
+
+| **Availability:** 
+|    ``logtalk_load(iso_13616(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: iban/4
+.. _iso_13616_protocol/0::iban/4:
+
+``iban/4``
+^^^^^^^^^^
+
+Parses and validates an ISO 13616 IBAN atom into ISO 3166-1 alpha-2 country code, two-character check digits, and BBAN atom. Input may use lowercase letters and embedded spaces; successful results are normalized to uppercase compact components.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``iban(IBAN,CountryAlpha2,CheckDigits,BBAN)``
+| **Mode and number of proofs:**
+|    ``iban(+atom,?atom,?atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: canonical_iban/2
+.. _iso_13616_protocol/0::canonical_iban/2:
+
+``canonical_iban/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the canonical electronic-format IBAN for a valid input by removing spaces and converting letters to uppercase.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_iban(IBAN,Canonical)``
+| **Mode and number of proofs:**
+|    ``canonical_iban(+atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: formatted_iban/2
+.. _iso_13616_protocol/0::formatted_iban/2:
+
+``formatted_iban/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a valid IBAN formatted in groups of four characters separated by spaces.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``formatted_iban(IBAN,Formatted)``
+| **Mode and number of proofs:**
+|    ``formatted_iban(+atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,93 @@
+.. index:: single: iso_3166_protocol
+.. _iso_3166_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``iso_3166_protocol``
+=====================
+
+Protocol for ISO 3166 country and subdivision registry lookups.
+
+| **Availability:** 
+|    ``logtalk_load(iso_3166(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: country/4
+.. _iso_3166_protocol/0::country/4:
+
+``country/4``
+^^^^^^^^^^^^^
+
+Enumerates ISO 3166-1 country entries as alpha-2, alpha-3, numeric, and English short name tuples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``country(Alpha2,Alpha3,Numeric,Name)``
+| **Mode and number of proofs:**
+|    ``country(?atom,?atom,?integer,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: subdivision/4
+.. _iso_3166_protocol/0::subdivision/4:
+
+``subdivision/4``
+^^^^^^^^^^^^^^^^^
+
+Enumerates ISO 3166-2 subdivision entries as code, parent alpha-2 country code, name, and category tuples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subdivision(Code,CountryAlpha2,Name,Category)``
+| **Mode and number of proofs:**
+|    ``subdivision(?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

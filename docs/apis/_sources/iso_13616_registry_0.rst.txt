@@ -1,0 +1,74 @@
+.. index:: single: iso_13616_registry
+.. _iso_13616_registry/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_13616_registry``
+======================
+
+Public SWIFT IBAN registry snapshot facts for ISO 13616 country-specific validation using a derived Prolog BBAN segment representation.
+
+| **Availability:** 
+|    ``logtalk_load(iso_13616(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: country_spec/3
+.. _iso_13616_registry/0::country_spec/3:
+
+``country_spec/3``
+^^^^^^^^^^^^^^^^^^
+
+Maps an IBAN country code to the registered total IBAN length and a derived BBAN structure term. BBANPattern is a list of ``Type-Count`` pairs, where Type is ``a`` for uppercase letters, ``n`` for digits, and ``c`` for uppercase alphanumeric characters. For example, ``[a-4, n-6, n-8]`` denotes four letters followed by six digits and then eight digits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``country_spec(CountryAlpha2,IBANLength,BBANPattern)``
+| **Mode and number of proofs:**
+|    ``country_spec(?atom,?integer,?list)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

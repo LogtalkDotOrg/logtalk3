@@ -1,0 +1,58 @@
+.. index:: single: iso_9362
+.. _iso_9362/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_9362``
+============
+
+ISO 9362 BIC parser and normalizer based on the public Swift and ISO 9362 structure definitions.
+
+| **Availability:** 
+|    ``logtalk_load(iso_9362(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`iso_9362_protocol <iso_9362_protocol/0>`
+| **Uses:**
+|    :ref:`iso_3166 <iso_3166/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`iso_9362_protocol/0::bic/5`  :ref:`iso_9362_protocol/0::canonical_bic/2`  :ref:`iso_9362_protocol/0::primary_office_bic/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

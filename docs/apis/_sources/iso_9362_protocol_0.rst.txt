@@ -1,0 +1,112 @@
+.. index:: single: iso_9362_protocol
+.. _iso_9362_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``iso_9362_protocol``
+=====================
+
+Protocol for ISO 9362 BIC structure parsing and normalization.
+
+| **Availability:** 
+|    ``logtalk_load(iso_9362(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: bic/5
+.. _iso_9362_protocol/0::bic/5:
+
+``bic/5``
+^^^^^^^^^
+
+Parses and validates an ISO 9362 BIC atom into business party prefix, ISO 3166-1 alpha-2 country code, business party suffix, and branch identifier. Eight-character BICs are normalized to the primary-office branch code ``XXX``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bic(BIC,Prefix,CountryAlpha2,Suffix,Branch)``
+| **Mode and number of proofs:**
+|    ``bic(+atom,?atom,?atom,?atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: canonical_bic/2
+.. _iso_9362_protocol/0::canonical_bic/2:
+
+``canonical_bic/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the canonical 11-character form of a valid ISO 9362 BIC, using the branch code ``XXX`` when the input is an eight-character primary-office BIC.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_bic(BIC,Canonical)``
+| **Mode and number of proofs:**
+|    ``canonical_bic(+atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: primary_office_bic/1
+.. _iso_9362_protocol/0::primary_office_bic/1:
+
+``primary_office_bic/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a valid ISO 9362 BIC denotes the primary office, either because it is eight characters long or because its branch identifier is ``XXX``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``primary_office_bic(BIC)``
+| **Mode and number of proofs:**
+|    ``primary_office_bic(+atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

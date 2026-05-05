@@ -1,0 +1,95 @@
+.. index:: single: iso_4217
+.. _iso_4217/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_4217``
+============
+
+Generated ISO 4217 active currency and fund facts extracted from the SIX list-one.xml snapshot.
+
+| **Availability:** 
+|    ``logtalk_load(iso_4217(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`iso_4217_protocol <iso_4217_protocol/0>`
+
+| **Remarks:**
+
+   - Source publication: 2026-01-01
+   - Generated currency entries: 269
+   - Generated fund entries: 8
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: currency/5
+.. _iso_4217/0::currency/5:
+
+``currency/5``
+^^^^^^^^^^^^^^
+
+Generated ISO 4217 active non-fund currency fact table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``currency(Alphabetic,Numeric,MinorUnit,Name,Entity)``
+| **Mode and number of proofs:**
+|    ``currency(?atom,?integer,?term,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: fund_currency/5
+.. _iso_4217/0::fund_currency/5:
+
+``fund_currency/5``
+^^^^^^^^^^^^^^^^^^^
+
+Generated ISO 4217 active fund currency fact table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fund_currency(Alphabetic,Numeric,MinorUnit,Name,Entity)``
+| **Mode and number of proofs:**
+|    ``fund_currency(?atom,?integer,?term,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

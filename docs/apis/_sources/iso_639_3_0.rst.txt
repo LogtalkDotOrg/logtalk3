@@ -1,0 +1,77 @@
+.. index:: single: iso_639_3
+.. _iso_639_3/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_639_3``
+=============
+
+Generated ISO 639-3 fact table.
+
+| **Availability:** 
+|    ``logtalk_load(iso_639(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Source update: 2026-04-15
+   - Generated entries: 7929
+   - Source: SIL ISO 639-3 tab-delimited code set
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: language/5
+.. _iso_639_3/0::language/5:
+
+``language/5``
+^^^^^^^^^^^^^^
+
+Generated ISO 639-3 fact table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language(Alpha3,Alpha2,Scope,Type,Name)``
+| **Mode and number of proofs:**
+|    ``language(?atom,?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

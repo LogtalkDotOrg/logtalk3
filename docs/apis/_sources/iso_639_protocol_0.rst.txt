@@ -1,0 +1,131 @@
+.. index:: single: iso_639_protocol
+.. _iso_639_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``iso_639_protocol``
+====================
+
+Protocol for ISO 639 language and language-group lookups.
+
+| **Availability:** 
+|    ``logtalk_load(iso_639(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: language/3
+.. _iso_639_protocol/0::language/3:
+
+``language/3``
+^^^^^^^^^^^^^^
+
+Enumerates ISO 639-1 entries as alpha-2, alpha-3, and English name tuples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language(Alpha2,Alpha3,Name)``
+| **Mode and number of proofs:**
+|    ``language(?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: language_code/5
+.. _iso_639_protocol/0::language_code/5:
+
+``language_code/5``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates ISO 639-2 entries as bibliographic code, terminologic code, alpha-2 code, English name, and class tuples. The class is one of ``individual``, ``macrolanguage``, ``collective``, ``special``, or ``local_use``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language_code(Bibliographic,Terminologic,Alpha2,Name,Class)``
+| **Mode and number of proofs:**
+|    ``language_code(?atom,?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: language/5
+.. _iso_639_protocol/0::language/5:
+
+``language/5``
+^^^^^^^^^^^^^^
+
+Enumerates ISO 639-3 entries as alpha-3 code, alpha-2 code, scope, type, and English name tuples. The scope is one of ``individual``, ``macrolanguage``, ``collective``, or ``special`` and the type is one of ``living``, ``extinct``, ``ancient``, ``constructed``, or ``special``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language(Alpha3,Alpha2,Scope,Type,Name)``
+| **Mode and number of proofs:**
+|    ``language(?atom,?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: language_group/2
+.. _iso_639_protocol/0::language_group/2:
+
+``language_group/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Enumerates ISO 639-5 entries as group code and English name tuples.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language_group(Code,Name)``
+| **Mode and number of proofs:**
+|    ``language_group(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

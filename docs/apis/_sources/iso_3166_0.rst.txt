@@ -1,0 +1,59 @@
+.. index:: single: iso_3166
+.. _iso_3166/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_3166``
+============
+
+Facade object for ISO 3166 code queries.
+
+| **Availability:** 
+|    ``logtalk_load(iso_3166(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`iso_3166_protocol <iso_3166_protocol/0>`
+| **Uses:**
+|    :ref:`iso_3166_1 <iso_3166_1/0>`
+|    :ref:`iso_3166_2 <iso_3166_2/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`iso_3166_protocol/0::country/4`  :ref:`iso_3166_protocol/0::subdivision/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

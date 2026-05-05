@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 3, 2026
+##   Last updated on May 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -157,6 +157,11 @@ sed '1,19d' ../../../library/ica/NOTES.md | pandoc -f gfm -t rst -o libraries/ic
 sed '1,19d' ../../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.rst
 sed '1,19d' ../../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
 sed '1,19d' ../../../library/iqr/NOTES.md | pandoc -f gfm -t rst -o libraries/iqr.rst
+sed '1,19d' ../../../library/iso_639/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_639.rst
+sed '1,19d' ../../../library/iso_3166/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_3166.rst
+sed '1,19d' ../../../library/iso_4217/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_4217.rst
+sed '1,19d' ../../../library/iso_9362/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_9362.rst
+sed '1,19d' ../../../library/iso_13616/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_13616.rst
 sed '1,19d' ../../../library/isolation_forest/NOTES.md | pandoc -f gfm -t rst -o libraries/isolation_forest.rst
 sed '1,19d' ../../../library/java/NOTES.md | pandoc -f gfm -t rst -o libraries/java.rst
 sed '1,19d' ../../../library/json/NOTES.md | pandoc -f gfm -t rst -o libraries/json.rst

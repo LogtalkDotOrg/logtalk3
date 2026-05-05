@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 4, 2026
+%  Last updated on May 5, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -186,6 +186,11 @@ logtalk_library_path(ica, library('ica/')).
 logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(iqr, library('iqr/')).
+logtalk_library_path(iso_639, library('iso_639/')).
+logtalk_library_path(iso_3166, library('iso_3166/')).
+logtalk_library_path(iso_4217, library('iso_4217/')).
+logtalk_library_path(iso_9362, library('iso_9362/')).
+logtalk_library_path(iso_13616, library('iso_13616/')).
 logtalk_library_path(isolation_forest, library('isolation_forest/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).

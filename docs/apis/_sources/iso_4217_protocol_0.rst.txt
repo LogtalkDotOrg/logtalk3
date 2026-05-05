@@ -1,0 +1,93 @@
+.. index:: single: iso_4217_protocol
+.. _iso_4217_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``iso_4217_protocol``
+=====================
+
+Protocol for ISO 4217 active currency and fund code lookups.
+
+| **Availability:** 
+|    ``logtalk_load(iso_4217(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: currency/5
+.. _iso_4217_protocol/0::currency/5:
+
+``currency/5``
+^^^^^^^^^^^^^^
+
+Enumerates ISO 4217 active non-fund entries as alphabetic code, numeric code, minor unit, currency name, and entity tuples. The minor unit is either an integer or the atom ``na`` when the standard lists ``N.A.``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``currency(Alphabetic,Numeric,MinorUnit,Name,Entity)``
+| **Mode and number of proofs:**
+|    ``currency(?atom,?integer,?term,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: fund_currency/5
+.. _iso_4217_protocol/0::fund_currency/5:
+
+``fund_currency/5``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates ISO 4217 active fund entries as alphabetic code, numeric code, minor unit, currency name, and entity tuples. The minor unit is either an integer or the atom ``na`` when the standard lists ``N.A.``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fund_currency(Alphabetic,Numeric,MinorUnit,Name,Entity)``
+| **Mode and number of proofs:**
+|    ``fund_currency(?atom,?integer,?term,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,77 @@
+.. index:: single: iso_639_2
+.. _iso_639_2/0:
+
+.. rst-class:: right
+
+**object**
+
+``iso_639_2``
+=============
+
+Generated ISO 639-2 fact table.
+
+| **Availability:** 
+|    ``logtalk_load(iso_639(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Source update: 2026-01-15
+   - Generated entries: 487
+   - Source: Library of Congress ISO 639-2 code list
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: language_code/5
+.. _iso_639_2/0::language_code/5:
+
+``language_code/5``
+^^^^^^^^^^^^^^^^^^^
+
+Generated ISO 639-2 fact table.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language_code(Bibliographic,Terminologic,Alpha2,Name,Class)``
+| **Mode and number of proofs:**
+|    ``language_code(?atom,?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
