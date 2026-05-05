@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-05,
 		comment is 'Ridge regression regressor supporting continuous and mixed-feature datasets using a direct weighted linear-system solve with L2 regularization. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		remarks is [
 			'Algorithm' - 'Uses the shared regression encoding core to solve the weighted ridge normal equations directly with partial pivoting. The intercept is left unpenalized while encoded feature columns are penalized using scale-aware weights equivalent to standardizing penalized columns before applying the L2 penalty.',
@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		append/3
+		append/3, memberchk/2
 	]).
 
 	:- uses(numberlist, [
