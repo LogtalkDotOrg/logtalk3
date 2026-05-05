@@ -25,17 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Kemeny-Young pairwise preference ranker. Learns one deterministic consensus order from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by maximizing the total agreeing pairwise preference weight over all linear orders and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Aggregates head-to-head preference weights, then performs an exact branch-and-bound search over linear orders to maximize the total pairwise agreement score under the Kemeny-Young criterion.',
-			'Tie-breaking' - 'When multiple optimal Kemeny orders exist, the ``tie_breaking/1`` option selects the deterministic search order used to choose one representative consensus ranking.',
-			'Consensus access' - 'The ``consensus_ranking/2`` predicate returns the learned full-item Kemeny order, while ``consensus_score/2`` returns its maximum total pairwise agreement score.',
-			'Score semantics' - 'The learned score for each item is its reverse position in the selected consensus ranking, ranging from ``N-1`` for the first ranked item down to ``0`` for the last ranked item.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain part of a single comparison graph.',
-			'Complexity' - 'Kemeny-Young optimization is NP-hard in general. This implementation uses exact search with pruning and is intended for small to moderate item sets.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``kemeny_young_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the selected consensus ranking, its agreement score, the effective tie-breaking mode, and the training dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, ranked_pairs, schulze]
 	]).
 

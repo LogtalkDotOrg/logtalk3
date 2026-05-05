@@ -24,8 +24,9 @@ ________________________________________________________________________
 Principal Component Analysis reducer for continuous datasets. The
 library implements the `dimension_reducer_protocol` defined in the
 `dimension_reduction_protocols` library and learns a linear projection
-using a portable power-iteration eigensolver over the covariance
-matrix.
+by centering the training data, optionally standardizing continuous
+attributes, computing the covariance matrix, and extracting principal
+components using deterministic power iteration with deflation.
 
 
 API documentation
@@ -59,6 +60,7 @@ Features
 - **Portable Eigensolver**: Uses deterministic power iteration with deflation instead of backend-specific linear algebra libraries.
 - **Projection API**: Transforms a new instance into a list of `component_N-Value` pairs.
 - **Model Export**: Learned reducers can be exported as predicate clauses or written to a file.
+- **Missing Values**: Missing or nonnumeric values are rejected.
 
 
 Options

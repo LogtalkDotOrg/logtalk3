@@ -49,7 +49,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "ranked_pairs" library.'
 	]).
 
@@ -210,6 +210,7 @@
 		ranked_pairs::locked_pairs(fake_ranker([alpha], [alpha-0], [model(fake)]), _LockedPairs).
 
 	test(ranked_pairs_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		ranked_pairs::learn(regular_head_to_head, Ranker),
 		ranked_pairs::print_ranker(Ranker).
 

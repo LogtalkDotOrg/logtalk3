@@ -343,6 +343,8 @@
 		sample_anomaly_detector::learn(gaussian_anomalies, Detector),
 		sample_anomaly_detector::print_anomaly_detector(Detector).
 
+	% auxiliary predicates
+
 	header_lines(File, Lines) :-
 		open(File, read, Stream),
 		read_line_atom(Stream, Line1),

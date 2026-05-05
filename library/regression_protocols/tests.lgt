@@ -156,6 +156,8 @@
 	test(sample_regressor_learn_2_duplicate_attribute, error(domain_error(attribute_occurrences, x))) :-
 		sample_regressor::learn(duplicate_attribute_example, _Regressor).
 
+	% auxiliary predicates
+
 	header_lines(File, Lines) :-
 		open(File, read, Stream),
 		read_header_lines(Stream, Lines),

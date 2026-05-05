@@ -171,6 +171,8 @@
 		sample_clusterer::learn(two_blobs, Clusterer),
 		sample_clusterer::print_clusterer(Clusterer).
 
+	% auxiliary predicates
+
 	header_lines(File, Lines) :-
 		open(File, read, Stream),
 		reader::line_to_codes(Stream, Codes),

@@ -388,6 +388,8 @@
 		sample_ranker::learn(head_to_head, Ranker),
 		sample_ranker::print_ranker(Ranker).
 
+	% auxiliary predicates
+
 	header_lines(File, Lines) :-
 		open(File, read, Stream),
 		read_line_atom(Stream, Line1),

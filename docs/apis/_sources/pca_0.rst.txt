@@ -15,7 +15,7 @@ Principal Component Analysis reducer for continuous datasets using a portable po
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-04
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,10 +32,7 @@ Principal Component Analysis reducer for continuous datasets using a portable po
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Centers the training data, optionally standardizes continuous attributes, computes the covariance matrix, and extracts principal components using deterministic power iteration with deflation.
-   - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
-   - Dimension reducer representation: The learned reducer is represented by default as ``pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the principal direction vectors, and ``Diagnostics`` records the learned model metadata and effective options.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

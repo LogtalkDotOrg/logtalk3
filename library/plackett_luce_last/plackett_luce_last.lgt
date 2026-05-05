@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-26,
+		date is 2026-05-05,
 		comment is 'Tie-aware Plackett-Luce-last grouped-ranking ranker. Learns one positive preference strength parameter per item from a dataset object implementing the ``ranking_dataset_protocol`` protocol by fitting a last-choice Plackett-Luce model to grouped tie blocks, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Processes each group as a sequence of last-choice eliminations from lowest relevance to highest relevance, using grouped tie blocks and a deterministic fixed-point update on positive item strengths.',
-			'Tie handling' - 'Equal relevance judgments inside a group are treated as unordered tie blocks. Each tie block contributes a size-constrained last-choice likelihood term against the remaining higher-relevance items.',
-			'Dataset requirements' - 'The training dataset must declare each group once, use only declared groups and items in relevance judgments, assign non-negative integer relevance values, and induce a strongly connected directed strict-order graph across groups so that a finite Plackett-Luce-last maximum-likelihood estimate exists.',
-			'Missing relevance semantics' - 'Missing relevance facts are treated as zero by default using the ``missing_relevance(zero)`` option and can be rejected using ``missing_relevance(error)``.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``plackett_luce_last_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores normalized ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as convergence status, iteration count, and dataset summary.'
-		],
 		see_also is [ranking_dataset_protocol, ranker_protocol, borda]
 	]).
 

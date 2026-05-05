@@ -15,7 +15,7 @@ k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes,
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-02
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,13 +30,7 @@ k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes,
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.
-   - Distance metrics: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics over encoded numeric feature vectors.
-   - Weighting schemes: Supports uniform, distance-based, and Gaussian weighting of neighbors.
-   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.
-   - Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.
-   - Regressor representation: The learned regressor is represented by default as ``knn_regressor(Encoders, Rows, Diagnostics)`` where ``Rows`` stores encoded feature vectors paired with numeric targets and ``Diagnostics`` stores training metadata including the effective options.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  

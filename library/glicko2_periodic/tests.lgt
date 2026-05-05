@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "glicko2_periodic" library.'
 	]).
 
@@ -161,6 +161,7 @@
 		glicko2_periodic::valid_ranker(fake_ranker([alpha], [alpha-1500.0], [model(fake)])).
 
 	test(glicko2_periodic_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		glicko2_periodic::learn(temporal_two_period_chain, Ranker),
 		glicko2_periodic::print_ranker(Ranker).
 

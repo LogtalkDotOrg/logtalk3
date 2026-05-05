@@ -4,10 +4,19 @@
 ==================
 
 Linear Discriminant Analysis projection for labeled continuous datasets.
+Supports continuous attributes only.
+
 The library implements the ``dimension_reducer_protocol`` defined in the
 ``dimension_reduction_protocols`` library and learns discriminant
-directions from the supervised Fisher criterion using only portable
-Logtalk code.
+directions by centering the training data, optionally standardizing
+continuous attributes, building regularized within-class and
+between-class scatter matrices, whitening the Fisher criterion using a
+Cholesky factorization, and extracting discriminant directions using
+deterministic power iteration with deflation.
+
+Requires a dataset implementing
+``supervised_dimension_reduction_dataset_protocol`` and therefore uses
+class labels during training.
 
 API documentation
 -----------------
@@ -49,6 +58,7 @@ Features
   ``component_N-Value`` pairs.
 - **Model Export**: Learned reducers can be exported as predicate
   clauses or written to a file.
+- **Missing Values**: Missing or nonnumeric values are rejected.
 
 Options
 -------

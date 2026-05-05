@@ -4,10 +4,15 @@
 ====================
 
 Lasso regression regressor supporting continuous and mixed-feature
-datasets. The library implements the ``regressor_protocol`` defined in
-the ``regression_protocols`` library and learns a linear model using
-cyclic coordinate descent with L1 regularization and soft-thresholding
-updates.
+datasets. Uses cyclic coordinate descent with soft-thresholding updates
+for each encoded feature in order to minimize mean squared error plus an
+L1 penalty on the encoded coefficient vector.
+
+The library implements the ``regressor_protocol`` defined in the
+``regression_protocols`` library and learns a linear model using cyclic
+coordinate descent with L1 regularization and soft-thresholding updates
+for each encoded feature in order to minimize mean squared error plus an
+L1 penalty on the encoded coefficient vector.
 
 API documentation
 -----------------
@@ -45,11 +50,16 @@ Features
 --------
 
 - **Continuous and Mixed Features**: Supports continuous attributes and
-  categorical attributes encoded using one-hot vectors.
+  categorical attributes
+- **Categorical Attributes Encoding**: Uses reference-level dummy coding
+  derived from the declared dataset attribute values, with a
+  missing-value indicator, and the resulting encoded coefficients are
+  regularized independently.
 - **Feature Scaling**: Continuous attributes can be standardized using
   z-score scaling.
-- **Missing Values**: Missing numeric and categorical values are encoded
-  using explicit missing-value indicator features.
+- **Missing Values**: Missing numeric and categorical values represented
+  using anonymous variables are encoded using explicit missing-value
+  indicator features.
 - **Unknown Values**: Prediction requests containing categorical values
   that are not declared by the dataset raise a domain error.
 - **Coefficient-wise L1 Shrinkage**: Applies soft-thresholding updates
@@ -76,6 +86,11 @@ The learned regressor is represented by default as:
 The exported predicate clauses therefore use the shape:
 
 - ``Functor(Encoders, Bias, Weights, Diagnostics)``
+
+In this representation, ``Encoders`` stores the feature encoding
+metadata, ``Bias`` stores the intercept, ``Weights`` stores one
+coefficient per encoded feature, and ``Diagnostics`` stores training
+metadata including the effective options.
 
 Diagnostics syntax
 ------------------

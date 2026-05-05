@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Massey pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by solving the Massey linear system built from aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Builds the Massey coefficient matrix with diagonal entries ``games_i``, off-diagonal entries ``-games_ij``, and a final ``sum(ratings)=0`` anchoring row, then solves the linear system using deterministic Gaussian elimination with partial pivoting and residual validation.',
-			'Score semantics' - 'Learned ratings are zero-sum scores centered around ``0.0``. Positive values indicate above-average aggregate pairwise performance and negative values indicate below-average performance.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that learned rankings remain globally comparable across all ranked items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``massey_ranker(Items, Ratings, Diagnostics)`` where ``Ratings`` stores ``Item-Rating`` pairs and ``Diagnostics`` stores metadata such as the training dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, colley, elo]
 	]).
 

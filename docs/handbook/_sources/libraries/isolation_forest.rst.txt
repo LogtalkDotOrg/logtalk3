@@ -106,7 +106,7 @@ predicates:
   non-baseline examples. Supported values are ``reject`` (default) and
   ``filter``
 
-Detector Representation
+Detector representation
 -----------------------
 
 The learned detector is represented by default as:

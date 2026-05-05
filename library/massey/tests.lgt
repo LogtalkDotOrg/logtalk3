@@ -32,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "massey" library.'
 	]).
 
@@ -179,6 +179,7 @@
 		massey::scores(massey_ranker([alpha, beta], [alpha-foo, beta-0.0], [model(massey), options([]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(massey_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		massey::learn(regular_head_to_head, Ranker),
 		massey::print_ranker(Ranker).
 

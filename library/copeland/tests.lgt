@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "copeland" library.'
 	]).
 
@@ -149,6 +149,7 @@
 		copeland::scores(copeland_ranker([alpha, beta], [alpha-1.5, beta-0], [model(copeland), options([]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(copeland_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		copeland::learn(regular_head_to_head, Ranker),
 		copeland::print_ranker(Ranker).
 

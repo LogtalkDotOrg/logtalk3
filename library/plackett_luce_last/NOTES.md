@@ -19,9 +19,12 @@ ________________________________________________________________________
 
 
 `plackett_luce_last`
-=====================
+====================
 
-Tie-aware Plackett-Luce-last grouped-ranking ranker.
+Tie-aware Plackett-Luce-last grouped-ranking ranker. It processes each
+group as a sequence of last-choice eliminations from lowest relevance to
+highest relevance, using grouped tie blocks and a deterministic
+fixed-point update on positive item strengths.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +33,11 @@ as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `ranking_dataset_protocol` protocol from the `ranking_protocols` library.
-See the `test_datasets` directory for examples.
+See the `test_datasets` directory for examples. The training dataset must
+declare each group once, use only declared groups and items in relevance
+judgments, assign non-negative integer relevance values, and induce a
+strongly connected directed strict-order graph across groups so that a
+finite Plackett-Luce-last maximum-likelihood estimate exists.
 
 
 API documentation
@@ -64,7 +71,8 @@ Features
   relevance.
 - **Tie-Aware Likelihood**: Uses grouped tie blocks so equal relevance
   judgments are handled as unordered last-choice blocks instead of being
-  broken arbitrarily.
+  broken arbitrarily. Each tie block contributes a size-constrained
+  last-choice likelihood term against the remaining higher-relevance items.
 - **Deterministic Ranking**: Orders candidate items by learned strength with
   deterministic tie-breaking.
 - **Strict Dataset Validation**: Rejects malformed grouped datasets,
@@ -72,6 +80,9 @@ Features
 - **Regular MLE Fidelity**: Rejects grouped datasets whose strict-order graph
   does not admit a finite Plackett-Luce-last maximum-likelihood estimate
   instead of masking non-identifiability with implicit regularization.
+- **Missing relevance semantics**: Missing relevance facts are treated
+  as zero by default using the `missing_relevance(zero)` option and can
+  be rejected using `missing_relevance(error)`.
 - **Training Diagnostics**: Learned rankers include convergence, iteration,
   final update delta, and dataset summary metadata accessible using the
   `diagnostics/2` predicate.

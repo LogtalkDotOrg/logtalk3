@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -368,20 +368,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.</p></li>
-<li><p>Baseline training selection: The learn-time <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> option declares which class labels are admissible for fitting the forest. The default is <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>. The <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> option then controls how non-baseline examples are handled. The default <code class="docutils literal notranslate"><span class="pre">reject</span></code> policy throws an error when any non-baseline example is found, while <code class="docutils literal notranslate"><span class="pre">filter</span></code> removes them before training.</p></li>
-<li><p>Extended vs Original: The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.</p></li>
-<li><p>Extension level: The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">-</span> <span class="pre">1</span></code> (fully extended) where <code class="docutils literal notranslate"><span class="pre">d</span></code> is the number of dimensions.</p></li>
-<li><p>Prediction: The <code class="docutils literal notranslate"><span class="pre">predict/3</span></code> predicate returns <code class="docutils literal notranslate"><span class="pre">anomaly</span></code> if the anomaly score is above the threshold (default: 0.5) and <code class="docutils literal notranslate"><span class="pre">normal</span></code> otherwise. The <code class="docutils literal notranslate"><span class="pre">score_all/3</span></code> predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the <code class="docutils literal notranslate"><span class="pre">anomaly_threshold/1</span></code> option.</p></li>
-<li><p>Anomaly score: The anomaly score <code class="docutils literal notranslate"><span class="pre">s(x)</span></code> is computed as <code class="docutils literal notranslate"><span class="pre">s(x)</span> <span class="pre">=</span> <span class="pre">2^(-E(h(x))/c(psi))</span></code> where <code class="docutils literal notranslate"><span class="pre">E(h(x))</span></code> is the average path length across all trees, <code class="docutils literal notranslate"><span class="pre">c(psi)</span></code> is the average path length of unsuccessful searches in a BST, and <code class="docutils literal notranslate"><span class="pre">psi</span></code> is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.</p></li>
-<li><p>Discrete attributes: Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.</p></li>
-<li><p>Missing values: Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values use node-local bounds stored in each tree split to decide whether a split is forced or genuinely ambiguous; ambiguous splits are evaluated down both branches and combined using subtree-size weights.</p></li>
-<li><p>Anomaly detector representation: The learned model is represented as an <code class="docutils literal notranslate"><span class="pre">if_model(Trees,</span> <span class="pre">SubsampleSize,</span> <span class="pre">AttributeNames,</span> <span class="pre">Attributes,</span> <span class="pre">Ranges,</span> <span class="pre">Diagnostics)</span></code> compound term where <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores the learned metadata, including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

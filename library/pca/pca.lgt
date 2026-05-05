@@ -25,13 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver.',
-		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, computes the covariance matrix, and extracts principal components using deterministic power iteration with deflation.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the principal direction vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
-		],
 		see_also is [lda_projection, random_projection]
 	]).
 

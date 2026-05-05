@@ -19,9 +19,13 @@ ________________________________________________________________________
 
 
 `massey`
-==========
+========
 
-Massey pairwise preference ranker.
+Massey pairwise preference ranker. It builds the Massey coefficient
+matrix with diagonal entries `games_i`, off-diagonal entries
+`-games_ij`, and a final `sum(ratings)=0` anchoring row, then solves the
+linear system using deterministic Gaussian elimination with partial
+pivoting and residual validation.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +34,9 @@ it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `pairwise_ranking_dataset_protocol` protocol from the `ranking_protocols`
-library. See the `test_datasets` directory for examples.
+library. See the `test_datasets` directory for examples. The current
+implementation requires a well-formed connected pairwise dataset so
+that learned rankings remain globally comparable across all ranked items.
 
 
 API documentation

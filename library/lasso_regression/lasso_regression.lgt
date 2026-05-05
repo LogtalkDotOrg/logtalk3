@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-05,
 		comment is 'Lasso regression regressor supporting continuous and mixed-feature datasets using coordinate descent with coefficient-wise L1 shrinkage. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses cyclic coordinate descent with soft-thresholding updates for each encoded feature in order to minimize mean squared error plus an L1 penalty on the encoded coefficient vector.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values and regularized coefficient-wise like any other encoded feature.',
-			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
-			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``lasso_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.'
-		],
 		see_also is [
 			linear_regression, ridge_regression, knn_regression, regression_tree, random_forest_regression,
 			gradient_boosting_regression

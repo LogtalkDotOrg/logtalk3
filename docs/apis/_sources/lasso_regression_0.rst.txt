@@ -15,7 +15,7 @@ Lasso regression regressor supporting continuous and mixed-feature datasets usin
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-02
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,12 +30,7 @@ Lasso regression regressor supporting continuous and mixed-feature datasets usin
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Uses cyclic coordinate descent with soft-thresholding updates for each encoded feature in order to minimize mean squared error plus an L1 penalty on the encoded coefficient vector.
-   - Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values and regularized coefficient-wise like any other encoded feature.
-   - Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.
-   - Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
-   - Regressor representation: The learned regressor is represented by default as ``lasso_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`regressor_protocol/0::check_regressor/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`regressor_protocol/0::diagnostic/2`  :ref:`regressor_protocol/0::diagnostics/2`  :ref:`regressor_protocol/0::export_to_clauses/4`  :ref:`regressor_protocol/0::export_to_file/4`  :ref:`regressor_protocol/0::learn/2`  :ref:`regressor_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`regressor_protocol/0::predict/3`  :ref:`regressor_protocol/0::print_regressor/1`  :ref:`regressor_protocol/0::regressor_options/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`regressor_protocol/0::valid_regressor/1`  

@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Linear Discriminant Analysis projection for labeled continuous datasets using a portable regularized Fisher eigensolver.',
-		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Supervision' - 'Requires a dataset implementing ``supervised_dimension_reduction_dataset_protocol`` and therefore uses class labels during training.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``lda_projection_reducer(Encoders, Components, ClassValues, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the learned discriminant vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
-		],
 		see_also is [
 			pca, random_projection
 		]

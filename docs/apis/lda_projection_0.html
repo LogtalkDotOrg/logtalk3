@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-04</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,15 +366,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, builds regularized within-class and between-class scatter matrices, whitens the Fisher criterion using a Cholesky factorization, and extracts discriminant directions using deterministic power iteration with deflation.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.</p></li>
-<li><p>Supervision: Requires a dataset implementing <code class="docutils literal notranslate"><span class="pre">supervised_dimension_reduction_dataset_protocol</span></code> and therefore uses class labels during training.</p></li>
-<li><p>Dimension reducer representation: The learned reducer is represented by default as <code class="docutils literal notranslate"><span class="pre">lda_projection_reducer(Encoders,</span> <span class="pre">Components,</span> <span class="pre">ClassValues,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores attribute centering/scaling metadata, <code class="docutils literal notranslate"><span class="pre">Components</span></code> stores the learned discriminant vectors, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> records the learned model metadata and effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

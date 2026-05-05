@@ -311,7 +311,10 @@
              
   <section id="schulze">
 <span id="library-schulze"></span><h1><code class="docutils literal notranslate"><span class="pre">schulze</span></code><a class="headerlink" href="#schulze" title="Link to this heading"></a></h1>
-<p>Schulze pairwise preference ranker.</p>
+<p>Schulze pairwise preference ranker. It builds the direct pairwise
+strength graph from aggregated matchups and applies the Schulze
+strongest-path dynamic program to derive the final pairwise preference
+relation.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preferences, using it to order candidate items, and
@@ -319,7 +322,9 @@ exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that all ranked items remain comparable in the
+aggregated matchup graph.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -349,11 +354,16 @@ item from aggregated pairwise outcomes.</p></li>
 the Schulze strongest-path dynamic program over aggregated
 head-to-head data.</p></li>
 <li><p><strong>Configurable Direct Edge Semantics</strong>: Supports both winning-votes
-and victory-margins victory-strength modes.</p></li>
+and victory-margins victory-strength modes. The <code class="docutils literal notranslate"><span class="pre">victory_strength/1</span></code>
+option selects whether direct edges use winning votes or victory
+margins before strongest-path propagation.</p></li>
 <li><p><strong>Strongest-Path Access</strong>: Exposes the labeled strongest-path relation
 for ordered item pairs using the <code class="docutils literal notranslate"><span class="pre">strongest_paths/2</span></code> predicate.</p></li>
 <li><p><strong>Deterministic Ranking</strong>: Orders candidate items by final Schulze
 relation win counts with deterministic tie-breaking.</p></li>
+<li><p><strong>Tie-breaking</strong>: Items tied in the final Schulze relation receive the
+same learned score, and ranking ties are then broken deterministically
+using the standard term order of the item identifiers.</p></li>
 <li><p><strong>Strict Dataset Validation</strong>: Rejects duplicate items, undeclared
 items, self-preferences, non-positive weights, and disconnected
 comparison graphs.</p></li>

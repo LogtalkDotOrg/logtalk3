@@ -44,7 +44,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "elo" library.'
 	]).
 
@@ -157,6 +157,7 @@
 		elo::scores(elo_ranker([alpha, beta], [alpha-high, beta-1400.0], [model(elo), options([initial_rating(1500.0), k_factor(32.0), rating_scale(400.0)]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(elo_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		elo::learn(regular_head_to_head, Ranker),
 		elo::print_ranker(Ranker).
 

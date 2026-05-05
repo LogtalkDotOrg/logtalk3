@@ -22,9 +22,13 @@ ________________________________________________________________________
 ================
 
 k-Nearest Neighbors regressor supporting continuous and mixed-feature
-datasets. The library implements the `regressor_protocol` defined in the
-`regression_protocols` library and predicts numeric targets using the
-weighted average of the nearest encoded neighbors.
+datasets. Learns lazily by storing encoded training rows and predicts
+targets as the weighted average of the k nearest neighbors.
+
+The library implements the `regressor_protocol` defined in the
+`regression_protocols` library, learns lazily by storing encoded
+training rows, and predicts numeric targets using the weighted average
+of the nearest encoded neighbors.
 
 
 API documentation
@@ -59,11 +63,11 @@ Features
 --------
 
 - **Distance-Based Regression**: Predicts targets using the weighted average of the nearest neighbors.
-- **Multiple Metrics**: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distances.
-- **Weighting Schemes**: Supports uniform, inverse-distance, and Gaussian weighting.
-- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using one-hot vectors.
+- **Multiple Metrics**: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics over encoded numeric feature vectors.
+- **Weighting Schemes**: Supports uniform, inverse-distance, and Gaussian weighting of neighbors.
+- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using one-hot vectors from the declared dataset attribute values.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
-- **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Missing Values**: Missing numeric and categorical values represented using anonymous variables are encoded using explicit missing-value indicator features.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for representative regression datasets.
@@ -79,6 +83,10 @@ The learned regressor is represented by default as:
 The exported predicate clauses therefore use the shape:
 
 - `Functor(Encoders, Rows, Diagnostics)`
+
+In this representation, `Rows` stores encoded feature vectors paired with
+numeric targets and `Diagnostics` stores training metadata including the
+effective options.
 
 
 Diagnostics syntax

@@ -322,14 +322,22 @@
              
   <section id="plackett-luce-last">
 <span id="library-plackett-luce-last"></span><h1><code class="docutils literal notranslate"><span class="pre">plackett_luce_last</span></code><a class="headerlink" href="#plackett-luce-last" title="Link to this heading"></a></h1>
-<p>Tie-aware Plackett-Luce-last grouped-ranking ranker.</p>
+<p>Tie-aware Plackett-Luce-last grouped-ranking ranker. It processes each
+group as a sequence of last-choice eliminations from lowest relevance to
+highest relevance, using grouped tie blocks and a deterministic
+fixed-point update on positive item strengths.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from grouped rankings, using it to order candidate items, and
 exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">ranking_dataset_protocol</span></code> protocol from the <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code>
-library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples.</p>
+library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for examples. The training
+dataset must declare each group once, use only declared groups and items
+in relevance judgments, assign non-negative integer relevance values,
+and induce a strongly connected directed strict-order graph across
+groups so that a finite Plackett-Luce-last maximum-likelihood estimate
+exists.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -358,7 +366,9 @@ grouped rankings by processing each group from lowest relevance to
 highest relevance.</p></li>
 <li><p><strong>Tie-Aware Likelihood</strong>: Uses grouped tie blocks so equal relevance
 judgments are handled as unordered last-choice blocks instead of being
-broken arbitrarily.</p></li>
+broken arbitrarily. Each tie block contributes a size-constrained
+last-choice likelihood term against the remaining higher-relevance
+items.</p></li>
 <li><p><strong>Deterministic Ranking</strong>: Orders candidate items by learned strength
 with deterministic tie-breaking.</p></li>
 <li><p><strong>Strict Dataset Validation</strong>: Rejects malformed grouped datasets,
@@ -367,6 +377,9 @@ unsupported options, duplicate candidates, and invalid ranker terms.</p></li>
 graph does not admit a finite Plackett-Luce-last maximum-likelihood
 estimate instead of masking non-identifiability with implicit
 regularization.</p></li>
+<li><p><strong>Missing relevance semantics</strong>: Missing relevance facts are treated
+as zero by default using the <code class="docutils literal notranslate"><span class="pre">missing_relevance(zero)</span></code> option and
+can be rejected using <code class="docutils literal notranslate"><span class="pre">missing_relevance(error)</span></code>.</p></li>
 <li><p><strong>Training Diagnostics</strong>: Learned rankers include convergence,
 iteration, final update delta, and dataset summary metadata accessible
 using the <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate.</p></li>

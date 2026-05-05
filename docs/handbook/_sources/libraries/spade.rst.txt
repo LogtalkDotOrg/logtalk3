@@ -11,6 +11,10 @@ patterns using Zaki's equivalence-class decomposition with temporal
 joins over vertical occurrence lists keyed by sequence and event
 identifiers.
 
+Requires a dataset implementing ``sequence_dataset_protocol`` with
+sequences represented as ordered lists of canonical sorted itemsets over
+a declared item domain.
+
 API documentation
 -----------------
 

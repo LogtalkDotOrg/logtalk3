@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		memberchk/2
 	]).
 
 	learn(Dataset, Ranker) :-

@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-05,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
-		remarks is [
-			'Algorithm' - 'Learns lazily by storing encoded training rows and predicts targets as the weighted average of the k nearest neighbors.',
-			'Distance metrics' - 'Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics over encoded numeric feature vectors.',
-			'Weighting schemes' - 'Supports uniform, distance-based, and Gaussian weighting of neighbors.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
-			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``knn_regressor(Encoders, Rows, Diagnostics)`` where ``Rows`` stores encoded feature vectors paired with numeric targets and ``Diagnostics`` stores training metadata including the effective options.'
-		],
 		see_also is [linear_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
 	]).
 

@@ -318,7 +318,11 @@
              
   <section id="massey">
 <span id="library-massey"></span><h1><code class="docutils literal notranslate"><span class="pre">massey</span></code><a class="headerlink" href="#massey" title="Link to this heading"></a></h1>
-<p>Massey pairwise preference ranker.</p>
+<p>Massey pairwise preference ranker. It builds the Massey coefficient
+matrix with diagonal entries <code class="docutils literal notranslate"><span class="pre">games_i</span></code>, off-diagonal entries
+<code class="docutils literal notranslate"><span class="pre">-games_ij</span></code>, and a final <code class="docutils literal notranslate"><span class="pre">sum(ratings)=0</span></code> anchoring row, then solves
+the linear system using deterministic Gaussian elimination with partial
+pivoting and residual validation.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preferences, using it to order candidate items, and
@@ -326,7 +330,9 @@ exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that learned rankings remain globally comparable
+across all ranked items.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

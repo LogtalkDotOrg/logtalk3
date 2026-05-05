@@ -43,7 +43,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "glicko2" library.'
 	]).
 
@@ -211,6 +211,7 @@
 		glicko2::scores(glicko2_ranker([alpha, beta], [alpha-high, beta-1400.0], [model(glicko2), options([initial_rating(1500.0), initial_deviation(350.0), initial_volatility(0.06), tau(0.5), volatility_tolerance(1.0e-6)]), rating_deviations([alpha-350.0, beta-350.0]), volatilities([alpha-0.06, beta-0.06]), dataset_summary([items(2), preferences(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(glicko2_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		glicko2::learn(regular_head_to_head, Ranker),
 		glicko2::print_ranker(Ranker).
 

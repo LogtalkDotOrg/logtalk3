@@ -3,7 +3,10 @@
 ``kemeny_young``
 ================
 
-Kemeny-Young pairwise preference ranker.
+Kemeny-Young pairwise preference ranker. It aggregates head-to-head
+preference weights, then performs an exact branch-and-bound search over
+linear orders to maximize the total pairwise agreement score under the
+Kemeny-Young criterion.
 
 The library implements the ``ranker_protocol`` defined in the
 ``ranking_protocols`` library. It provides predicates for learning an
@@ -14,7 +17,9 @@ score, and exporting it as a list of predicate clauses or to a file.
 Datasets are represented as objects implementing the
 ``pairwise_ranking_dataset_protocol`` protocol from the
 ``ranking_protocols`` library. See the ``test_datasets`` directory for
-examples.
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that all ranked items remain part of a single
+comparison graph.
 
 API documentation
 -----------------
@@ -55,7 +60,10 @@ Features
   and its maximum agreement score using the ``consensus_ranking/2`` and
   ``consensus_score/2`` predicates.
 - **Deterministic Ranking**: Orders candidate items by the selected
-  consensus order with deterministic tie-breaking.
+  consensus order with deterministic tie-breaking. When multiple optimal
+  Kemeny orders exist, the ``tie_breaking/1`` option selects the
+  deterministic search order used to choose one representative consensus
+  ranking.
 - **Strict Dataset Validation**: Rejects duplicate items, undeclared
   items, self-preferences, non-positive weights, and disconnected
   comparison graphs.

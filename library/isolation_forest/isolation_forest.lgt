@@ -25,19 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-05,
 		comment is 'Extended Isolation Forest (EIF) algorithm for anomaly detection. Implements the improved version described by Hariri et al. (2019) that uses random hyperplane cuts instead of axis-aligned cuts, eliminating score bias artifacts. Builds an ensemble of isolation trees from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol. Missing attribute values are represented using anonymous variables.',
-		remarks is [
-			'Algorithm' - 'The Extended Isolation Forest builds an ensemble of isolation trees (iTrees) by recursively partitioning the data using random hyperplanes. Anomalous points, being few and different, require fewer partitions (shorter path lengths) to be isolated.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the forest. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before training.',
-			'Extended vs Original' - 'The original Isolation Forest uses axis-aligned splits (random attribute + random value), which introduces bias in anomaly scores along coordinate axes. The extended version uses random hyperplane cuts with arbitrary slopes, producing more consistent and reliable anomaly scores.',
-			'Extension level' - 'The extension level controls the dimensionality of the random hyperplane cuts. Level 0 corresponds to the original axis-aligned Isolation Forest. The default level is ``d - 1`` (fully extended) where ``d`` is the number of dimensions.',
-			'Prediction' - 'The ``predict/3`` predicate returns ``anomaly`` if the anomaly score is above the threshold (default: 0.5) and ``normal`` otherwise. The ``score_all/3`` predicate returns a sorted list of all instances with their corresponding scores and class labels. Predictions use by default the learned model options but can override them using the ``anomaly_threshold/1`` option.',
-			'Anomaly score' - 'The anomaly score ``s(x)`` is computed as ``s(x) = 2^(-E(h(x))/c(psi))`` where ``E(h(x))`` is the average path length across all trees, ``c(psi)`` is the average path length of unsuccessful searches in a BST, and ``psi`` is the subsample size. Scores close to 1 indicate anomalies; scores below 0.5 indicate normal points.',
-			'Discrete attributes' - 'Discrete (categorical) attributes are mapped to numeric indices based on their position in the attribute value list declared by the dataset. This allows the algorithm to handle datasets with mixed attribute types.',
-			'Missing values' - 'Missing attribute values are represented using anonymous variables. During tree construction, missing values are replaced with random values drawn from the observed range of the corresponding attribute. During scoring, instances with missing values use node-local bounds stored in each tree split to decide whether a split is forced or genuinely ambiguous; ambiguous splits are evaluated down both branches and combined using subtree-size weights.',
-			'Anomaly detector representation' - 'The learned model is represented as an ``if_model(Trees, SubsampleSize, AttributeNames, Attributes, Ranges, Diagnostics)`` compound term where ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance, lof]
 	]).
 

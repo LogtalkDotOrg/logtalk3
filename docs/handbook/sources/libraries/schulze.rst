@@ -3,7 +3,10 @@
 ``schulze``
 ===========
 
-Schulze pairwise preference ranker.
+Schulze pairwise preference ranker. It builds the direct pairwise
+strength graph from aggregated matchups and applies the Schulze
+strongest-path dynamic program to derive the final pairwise preference
+relation.
 
 The library implements the ``ranker_protocol`` defined in the
 ``ranking_protocols`` library. It provides predicates for learning a
@@ -13,7 +16,9 @@ exporting it as a list of predicate clauses or to a file.
 Datasets are represented as objects implementing the
 ``pairwise_ranking_dataset_protocol`` protocol from the
 ``ranking_protocols`` library. See the ``test_datasets`` directory for
-examples.
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that all ranked items remain comparable in the
+aggregated matchup graph.
 
 API documentation
 -----------------
@@ -49,11 +54,16 @@ Features
   the Schulze strongest-path dynamic program over aggregated
   head-to-head data.
 - **Configurable Direct Edge Semantics**: Supports both winning-votes
-  and victory-margins victory-strength modes.
+  and victory-margins victory-strength modes. The ``victory_strength/1``
+  option selects whether direct edges use winning votes or victory
+  margins before strongest-path propagation.
 - **Strongest-Path Access**: Exposes the labeled strongest-path relation
   for ordered item pairs using the ``strongest_paths/2`` predicate.
 - **Deterministic Ranking**: Orders candidate items by final Schulze
   relation win counts with deterministic tie-breaking.
+- **Tie-breaking**: Items tied in the final Schulze relation receive the
+  same learned score, and ranking ties are then broken deterministically
+  using the standard term order of the item identifiers.
 - **Strict Dataset Validation**: Rejects duplicate items, undeclared
   items, self-preferences, non-positive weights, and disconnected
   comparison graphs.

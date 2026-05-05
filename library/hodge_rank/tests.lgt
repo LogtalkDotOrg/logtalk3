@@ -33,7 +33,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "hodge_rank" library.'
 	]).
 
@@ -184,6 +184,7 @@
 		hodge_rank::scores(hodge_rank_ranker([alpha, beta], [alpha-foo, beta-0.0], [model(hodge_rank), options([]), residuals([]), residual_norm(0.0), dataset_summary([items(2), measurements(1), connected_components(1), isolated_items([])])]), _Scores).
 
 	test(hodge_rank_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		hodge_rank::learn(regular_measurements, Ranker),
 		hodge_rank::print_ranker(Ranker).
 

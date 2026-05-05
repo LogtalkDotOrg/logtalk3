@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Schulze pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by computing strongest paths over aggregated head-to-head outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Builds the direct pairwise strength graph from aggregated matchups and applies the Schulze strongest-path dynamic program to derive the final pairwise preference relation.',
-			'Strongest-path access' - 'The ``strongest_paths/2`` predicate returns the labeled strongest-path matrix as ``path(Item1,Item2,Strength)`` terms for ordered pairs of distinct items, preserving the learned item order.',
-			'Victory-strength semantics' - 'The ``victory_strength/1`` option selects whether direct edges use winning votes or victory margins before strongest-path propagation.',
-			'Tie-breaking' - 'Items tied in the final Schulze relation receive the same learned score, and ranking ties are then broken deterministically using the standard term order of the item identifiers.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain comparable in the aggregated matchup graph.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``schulze_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the effective victory-strength mode, labeled strongest paths, and dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland, borda]
 	]).
 

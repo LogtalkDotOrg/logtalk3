@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Unit tests for the "borda" library.'
 	]).
 
@@ -165,6 +165,7 @@
 		borda::rank(fake_ranker([alpha], [alpha-1], [model(fake)]), [alpha], _Ranking).
 
 	test(borda_print_ranker_1, deterministic) :-
+		^^suppress_text_output,
 		borda::learn(ranked_ballots, Ranker),
 		borda::print_ranker(Ranker).
 

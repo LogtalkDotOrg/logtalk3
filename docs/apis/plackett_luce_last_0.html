@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-26</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -368,16 +368,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Processes each group as a sequence of last-choice eliminations from lowest relevance to highest relevance, using grouped tie blocks and a deterministic fixed-point update on positive item strengths.</p></li>
-<li><p>Tie handling: Equal relevance judgments inside a group are treated as unordered tie blocks. Each tie block contributes a size-constrained last-choice likelihood term against the remaining higher-relevance items.</p></li>
-<li><p>Dataset requirements: The training dataset must declare each group once, use only declared groups and items in relevance judgments, assign non-negative integer relevance values, and induce a strongly connected directed strict-order graph across groups so that a finite Plackett-Luce-last maximum-likelihood estimate exists.</p></li>
-<li><p>Missing relevance semantics: Missing relevance facts are treated as zero by default using the <code class="docutils literal notranslate"><span class="pre">missing_relevance(zero)</span></code> option and can be rejected using <code class="docutils literal notranslate"><span class="pre">missing_relevance(error)</span></code>.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">plackett_luce_last_ranker(Items,</span> <span class="pre">Strengths,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Strengths</span></code> stores normalized <code class="docutils literal notranslate"><span class="pre">Item-Strength</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as convergence status, iteration count, and dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
