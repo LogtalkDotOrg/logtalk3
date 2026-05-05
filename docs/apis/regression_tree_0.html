@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-02</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,15 +366,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds a binary regression tree by recursively selecting the encoded feature threshold that maximizes variance reduction.</p></li>
-<li><p>Feature handling: Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values.</p></li>
-<li><p>Missing values: Missing feature values represented using anonymous variables or omitted attribute-value pairs are encoded using explicit missing-value indicator features during both training and prediction.</p></li>
-<li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">regression_tree_regressor(Encoders,</span> <span class="pre">FeatureLabels,</span> <span class="pre">Tree,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Tree</span></code> is built from <code class="docutils literal notranslate"><span class="pre">leaf(Prediction)</span></code> and <code class="docutils literal notranslate"><span class="pre">node(Index,</span> <span class="pre">Threshold,</span> <span class="pre">FallbackPrediction,</span> <span class="pre">Left,</span> <span class="pre">Right)</span></code> terms and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

@@ -54,8 +54,8 @@ Features
 - **Weighting Schemes**: Supports uniform, inverse-distance, and
   Gaussian weighting of neighbors.
 - **Continuous and Mixed Features**: Supports continuous attributes and
-  categorical attributes encoded using one-hot vectors from the declared
-  dataset attribute values.
+  categorical attributes encoded using reference-level dummy coding
+  derived from the declared dataset attribute values.
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling.
 - **Missing Values**: Missing numeric and categorical values represented

@@ -319,8 +319,10 @@
 <p>Truncated singular value decomposition reducer for continuous datasets.
 The library implements the <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library and learns a low-rank linear
-projection using a portable two-sided power-iteration solver over the
-preprocessed data matrix.</p>
+projection by building a preprocessed data matrix using optional
+centering and scaling, extracting singular triplets using deterministic
+two-sided power iteration, and applying rank-one deflation directly to
+the data matrix.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -345,7 +347,7 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
-attributes.</p></li>
+attributes. Missing or nonnumeric values are rejected.</p></li>
 <li><p><strong>Low-Rank Projection</strong>: Extracts right singular vectors and singular
 values in descending order.</p></li>
 <li><p><strong>Portable SVD Solver</strong>: Uses deterministic two-sided power iteration

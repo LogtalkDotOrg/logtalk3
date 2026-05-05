@@ -47,22 +47,22 @@ Features
 --------
 
 - **Ensemble Learning**: Combines multiple C4.5 decision trees for
-  robust predictions
-- **Bootstrap Sampling**: Each tree is trained on a random sample with
-  replacement
+  robust predictions.
+- **Bootstrap Sampling**: Each tree is trained on a bootstrap sample
+  (random sample with replacement) of the training data.
 - **Feature Randomization**: Random subset of features selected for each
-  tree (default: sqrt(total_features))
+  tree (default: sqrt(TotalFeatures)).
 - **Portable Seeded Sampling**: Uses ``fast_random(xoshiro128pp)`` so
   bootstrap sampling and feature subset selection are portable and
-  reproducible
+  reproducible.
 - **Majority Voting**: Final predictions determined by voting across all
-  trees
+  trees.
 - **Probability Estimation**: Provides confidence scores based on vote
-  proportions
+  proportions.
 - **Configurable Options**: Number of trees, maximum features per tree,
-  and random seed via predicate options
+  and random seed via predicate options.
 - **Classifier Export**: Learned classifiers can be exported as
-  predicate clauses
+  predicate clauses.
 
 Options
 -------
@@ -72,7 +72,7 @@ The following options can be passed to the ``learn/3`` predicate:
 - ``number_of_trees(N)``: Number of trees in the forest (default:
   ``10``).
 - ``maximum_features_per_tree(N)``: Maximum number of features to
-  consider per tree (default: sqrt(total_features)).
+  consider per tree (default: sqrt(TotalFeatures)).
 - ``random_seed(N)``: Positive integer seed used by the portable
   ``fast_random(xoshiro128pp)`` pseudo-random generator when drawing
   bootstrap samples and random feature subsets. Using the same seed with

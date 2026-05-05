@@ -24,7 +24,8 @@ ________________________________________________________________________
 Random Forest regressor supporting continuous and mixed-feature datasets.
 The library implements the `regressor_protocol` defined in the
 `regression_protocols` library and learns an ensemble of regression
-trees trained on bootstrap samples and per-split random feature subsets.
+trees trained on bootstrap samples and per-split random feature subsets,
+predicting with the arithmetic mean of the individual tree predictions.
 
 
 API documentation
@@ -59,12 +60,21 @@ Features
 --------
 
 - **Bootstrap Ensembles**: Trains multiple regression trees on bootstrap samples.
+
 - **Random Feature Subsets**: Samples a random subset of the available dataset attributes at each split of every tree.
+
 - **Portable Seeded Sampling**: Uses `fast_random(xoshiro128pp)` so bootstrap and split-level feature sampling are portable and reproducible.
+
 - **Tree Averaging**: Predicts numeric targets using the arithmetic mean of the tree predictions.
+
 - **Tree Configuration**: Exposes the underlying regression-tree split-feature, depth, minimum-leaf, variance-reduction, and scaling options.
+
+- **Categorical Features Encoding**: Uses reference-level dummy coding derived from the declared dataset attribute values, with a missing-value indicator, and the resulting encoded features are treated as ordinary numeric split features by the tree learners.
+
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, attribute count, tree count, and effective options, accessible using the shared regression diagnostics predicates.
+
 - **Model Export**: Learned regressors can be exported as predicate clauses or written to a file.
+
 - **Reference Benchmarks**: Includes a dedicated performance suite reporting training time, RMSE, and MAE for representative regression datasets.
 
 

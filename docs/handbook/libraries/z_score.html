@@ -310,7 +310,13 @@
              
   <section id="z-score">
 <span id="library-z-score"></span><h1><code class="docutils literal notranslate"><span class="pre">z_score</span></code><a class="headerlink" href="#z-score" title="Link to this heading"></a></h1>
-<p>Statistical Z-score anomaly detector for continuous datasets.</p>
+<p>Statistical Z-score anomaly detector for continuous datasets. It is a
+statistical anomaly-detection method based on standard scores: the
+detector estimates a population mean and standard deviation for each
+continuous attribute and supports two learn-time score modes,
+<code class="docutils literal notranslate"><span class="pre">root_mean_square</span></code> for dense multivariate deviation scores and
+<code class="docutils literal notranslate"><span class="pre">any_feature_extreme</span></code> for the maximum absolute Z-score when sparse
+single-feature anomalies are more informative.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a detector from a
 continuous dataset, computes anomaly scores for new instances, predicts

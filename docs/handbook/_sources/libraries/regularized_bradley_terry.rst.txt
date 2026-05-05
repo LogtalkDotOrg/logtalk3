@@ -3,7 +3,10 @@
 ``regularized_bradley_terry``
 =============================
 
-Regularized Bradley-Terry MAP pairwise preference ranker.
+Regularized Bradley-Terry MAP pairwise preference ranker. It uses a
+deterministic MM-style posterior-mode update for a Bradley-Terry
+likelihood regularized by an explicit independent Gamma prior over item
+strengths.
 
 The library implements the ``ranker_protocol`` defined in the
 ``ranking_protocols`` library. It provides predicates for learning a
@@ -13,7 +16,11 @@ exporting it as a list of predicate clauses or to a file.
 Datasets are represented as objects implementing the
 ``pairwise_ranking_dataset_protocol`` protocol from the
 ``ranking_protocols`` library. See the ``test_datasets`` directory for
-examples.
+examples. The training dataset must declare each ranked item once,
+enumerate positive-weight pairwise preferences between distinct declared
+items, and induce a connected undirected comparison graph. Unlike the
+unregularized Bradley-Terry model, the directed win graph is not
+required to be strongly connected.
 
 API documentation
 -----------------
@@ -45,21 +52,28 @@ Features
 
 - **Pairwise Preference Learning**: Learns positive item strengths from
   weighted head-to-head outcomes.
+
 - **Explicit Gamma Prior**: Uses a separate MAP model with an explicit
   independent Gamma prior over item strengths.
+
 - **Finite Regularized Fit**: Admits connected pairwise datasets whose
   directed win graph is not strongly connected, instead of rejecting
   them as non-identifiable maximum-likelihood problems.
+
 - **Deterministic Ranking**: Orders candidate items by learned strength
   with deterministic tie-breaking.
+
 - **Strict Dataset Validation**: Rejects duplicate items, undeclared
   items, self-preferences, non-positive weights, and disconnected
   undirected comparison graphs.
+
 - **Training Diagnostics**: Learned rankers include the effective Gamma
   prior, convergence, iteration, and dataset summary metadata that can
   be accessed using the ``diagnostics/2`` predicate.
+
 - **Ranker Export**: Learned rankers can be exported as self-contained
   terms.
+
 - **Shared Pairwise Infrastructure**: Reuses the shared pairwise
   preprocessing and MM-iteration scaffolding from the
   ``ranking_protocols`` library.

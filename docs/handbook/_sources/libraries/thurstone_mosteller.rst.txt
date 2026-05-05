@@ -3,7 +3,11 @@
 ``thurstone_mosteller``
 =======================
 
-Thurstone-Mosteller Case V pairwise preference ranker.
+Thurstone-Mosteller Case V pairwise preference ranker. It aggregates
+pairwise outcomes into matchup probabilities, applies a fixed continuity
+correction to avoid infinite probit values, transforms them with the
+inverse standard normal CDF, and fits Case V latent utilities using a
+deterministic weighted least-squares linear solve.
 
 The library implements the ``ranker_protocol`` defined in the
 ``ranking_protocols`` library. It provides predicates for learning a
@@ -13,7 +17,9 @@ exporting it as a list of predicate clauses or to a file.
 Datasets are represented as objects implementing the
 ``pairwise_ranking_dataset_protocol`` protocol from the
 ``ranking_protocols`` library. See the ``test_datasets`` directory for
-examples.
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that all learned utilities remain comparable across
+the ranked items.
 
 API documentation
 -----------------

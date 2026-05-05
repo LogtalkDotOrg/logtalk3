@@ -3,7 +3,9 @@
 ``optics``
 ==========
 
-OPTICS clusterer.
+OPTICS clusterer. It uses deterministic OPTICS ordering with
+epsilon-based cluster extraction for the fixed clusterer protocol.
+Supports continuous attributes only.
 
 The library implements the ``clusterer_protocol`` defined in the
 ``clustering_protocols`` library. It provides predicates for learning a
@@ -59,8 +61,7 @@ Features
   explicitly.
 - **Continuous Datasets**: Accepts datasets containing only continuous
   attributes.
-- **Distance Metrics**: Supports ``euclidean`` and ``manhattan``
-  distances.
+- **Distance Metrics**: Supports Euclidean and Manhattan distances.
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling.
 - **Epsilon-Based Extraction**: Extracts clusters from the ordering

@@ -354,22 +354,22 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Ensemble Learning</strong>: Combines multiple C4.5 decision trees for
-robust predictions</p></li>
-<li><p><strong>Bootstrap Sampling</strong>: Each tree is trained on a random sample with
-replacement</p></li>
+robust predictions.</p></li>
+<li><p><strong>Bootstrap Sampling</strong>: Each tree is trained on a bootstrap sample
+(random sample with replacement) of the training data.</p></li>
 <li><p><strong>Feature Randomization</strong>: Random subset of features selected for each
-tree (default: sqrt(total_features))</p></li>
+tree (default: sqrt(TotalFeatures)).</p></li>
 <li><p><strong>Portable Seeded Sampling</strong>: Uses <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> so
 bootstrap sampling and feature subset selection are portable and
-reproducible</p></li>
+reproducible.</p></li>
 <li><p><strong>Majority Voting</strong>: Final predictions determined by voting across all
-trees</p></li>
+trees.</p></li>
 <li><p><strong>Probability Estimation</strong>: Provides confidence scores based on vote
-proportions</p></li>
+proportions.</p></li>
 <li><p><strong>Configurable Options</strong>: Number of trees, maximum features per tree,
-and random seed via predicate options</p></li>
+and random seed via predicate options.</p></li>
 <li><p><strong>Classifier Export</strong>: Learned classifiers can be exported as
-predicate clauses</p></li>
+predicate clauses.</p></li>
 </ul>
 </section>
 <section id="options">
@@ -379,7 +379,7 @@ predicate clauses</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">number_of_trees(N)</span></code>: Number of trees in the forest (default:
 <code class="docutils literal notranslate"><span class="pre">10</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">maximum_features_per_tree(N)</span></code>: Maximum number of features to
-consider per tree (default: sqrt(total_features)).</p></li>
+consider per tree (default: sqrt(TotalFeatures)).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">random_seed(N)</span></code>: Positive integer seed used by the portable
 <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> pseudo-random generator when drawing
 bootstrap samples and random feature subsets. Using the same seed with

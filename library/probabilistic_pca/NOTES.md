@@ -24,8 +24,12 @@ ________________________________________________________________________
 Probabilistic Principal Component Analysis reducer for continuous
 datasets. The library implements the `dimension_reducer_protocol`
 defined in the `dimension_reduction_protocols` library and learns a
-linear latent-variable projection using a portable covariance
-eigensolver and the closed-form maximum-likelihood PPCA solution.
+linear latent-variable projection by centering the training data,
+optionally standardizing continuous attributes, estimating the sample
+covariance matrix, extracting deterministic leading eigenvectors using
+portable power iteration with deflation, and converting them into the
+closed-form maximum-likelihood PPCA loading matrix and posterior latent
+projection.
 
 
 API documentation
@@ -54,7 +58,7 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Continuous Datasets**: Accepts datasets containing only continuous attributes.
+- **Continuous Datasets**: Accepts datasets containing only continuous attributes. Missing or nonnumeric values are rejected.
 - **Centering and Optional Scaling**: Centers all attributes and optionally standardizes them before fitting the covariance model.
 - **Probabilistic Latent Model**: Estimates the PPCA loading matrix and isotropic observation noise variance from the learned covariance eigensystem.
 - **Configurable Shortfall Handling**: Lets callers choose whether a numerical-rank shortfall raises an error or returns a truncated reducer with explicit diagnostics.

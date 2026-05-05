@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-04</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -368,16 +368,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses batch subgradient descent to train one linear hinge-loss model per class in a one-vs-rest configuration.</p></li>
-<li><p>Feature handling: Continuous features are standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.</p></li>
-<li><p>Missing values: Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.</p></li>
-<li><p>Unknown values: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.</p></li>
-<li><p>Classifier representation: The learned classifier is represented by default as <code class="docutils literal notranslate"><span class="pre">linear_svm_classifier(Classes,</span> <span class="pre">Encoders,</span> <span class="pre">Models,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata and <code class="docutils literal notranslate"><span class="pre">Models</span></code> stores one linear score model per class.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

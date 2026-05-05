@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-30</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -369,16 +369,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses deterministic OPTICS ordering with epsilon-based cluster extraction for the fixed clusterer protocol.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.</p></li>
-<li><p>Distance metrics: Supports Euclidean and Manhattan distances.</p></li>
-<li><p>Prediction: New instances are assigned to the cluster of the nearest reachable extracted core point within the extraction epsilon threshold; otherwise the atom <code class="docutils literal notranslate"><span class="pre">noise</span></code> is returned.</p></li>
-<li><p>Clusterer representation: The learned clusterer is represented by default as <code class="docutils literal notranslate"><span class="pre">optics_clusterer(Encoders,</span> <span class="pre">Ordering,</span> <span class="pre">Clusters,</span> <span class="pre">Noise,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding metadata, <code class="docutils literal notranslate"><span class="pre">Ordering</span></code> stores the OPTICS ordering, <code class="docutils literal notranslate"><span class="pre">Clusters</span></code> stores the extracted clusters, <code class="docutils literal notranslate"><span class="pre">Noise</span></code> stores extracted noise points, and <code class="docutils literal notranslate"><span class="pre">Options</span></code> stores the effective training options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

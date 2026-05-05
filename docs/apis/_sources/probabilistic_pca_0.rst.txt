@@ -15,7 +15,7 @@ Probabilistic Principal Component Analysis reducer for continuous datasets using
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-04
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,11 +32,7 @@ Probabilistic Principal Component Analysis reducer for continuous datasets using
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Centers the training data, optionally standardizes continuous attributes, estimates the sample covariance matrix, extracts deterministic leading eigenvectors using portable power iteration with deflation, and then converts them into the closed-form maximum-likelihood probabilistic PCA loading matrix and posterior latent projection.
-   - Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.
-   - Shortfall handling: Supports a ``shortfall_policy/1`` option for choosing whether a numerically rank-deficient covariance matrix raises an error or returns a truncated reducer with explicit diagnostics.
-   - Dimension reducer representation: The learned reducer is represented by default as ``probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores posterior latent projection vectors, ``Loadings`` stores the maximum-likelihood loading vectors, and ``Diagnostics`` records the learned model metadata, effective options, and any truncate-mode shortfall details.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`dimension_reducer_protocol/0::check_dimension_reducer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`dimension_reducer_protocol/0::diagnostic/2`  :ref:`dimension_reducer_protocol/0::diagnostics/2`  :ref:`dimension_reducer_protocol/0::dimension_reducer_options/2`  :ref:`dimension_reducer_protocol/0::export_to_clauses/4`  :ref:`dimension_reducer_protocol/0::export_to_file/4`  :ref:`dimension_reducer_protocol/0::learn/2`  :ref:`dimension_reducer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`dimension_reducer_protocol/0::print_dimension_reducer/1`  :ref:`dimension_reducer_protocol/0::transform/3`  :ref:`dimension_reducer_protocol/0::valid_dimension_reducer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

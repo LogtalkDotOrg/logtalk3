@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-04</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -367,15 +367,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, estimates the sample covariance matrix, extracts deterministic leading eigenvectors using portable power iteration with deflation, and then converts them into the closed-form maximum-likelihood probabilistic PCA loading matrix and posterior latent projection.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.</p></li>
-<li><p>Shortfall handling: Supports a <code class="docutils literal notranslate"><span class="pre">shortfall_policy/1</span></code> option for choosing whether a numerically rank-deficient covariance matrix raises an error or returns a truncated reducer with explicit diagnostics.</p></li>
-<li><p>Dimension reducer representation: The learned reducer is represented by default as <code class="docutils literal notranslate"><span class="pre">probabilistic_pca_reducer(Encoders,</span> <span class="pre">Components,</span> <span class="pre">Loadings,</span> <span class="pre">NoiseVariance,</span> <span class="pre">ExplainedVariances,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores preprocessing metadata, <code class="docutils literal notranslate"><span class="pre">Components</span></code> stores posterior latent projection vectors, <code class="docutils literal notranslate"><span class="pre">Loadings</span></code> stores the maximum-likelihood loading vectors, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> records the learned model metadata, effective options, and any truncate-mode shortfall details.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

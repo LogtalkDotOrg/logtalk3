@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-27</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,15 +366,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Uses a deterministic MM-style posterior-mode update for a Bradley-Terry likelihood regularized by an explicit independent Gamma prior over item strengths.</p></li>
-<li><p>Dataset requirements: The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, and induce a connected undirected comparison graph. Unlike the unregularized Bradley-Terry model, the directed win graph is not required to be strongly connected.</p></li>
-<li><p>Prior semantics: The <code class="docutils literal notranslate"><span class="pre">gamma_prior(gamma(Shape,</span> <span class="pre">Rate))</span></code> option specifies the Gamma prior hyperparameters. The implementation requires <code class="docutils literal notranslate"><span class="pre">Shape</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">Rate</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> so the posterior mode remains strictly positive for all items.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">regularized_bt_ranker(Items,</span> <span class="pre">Strengths,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Strengths</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Strength</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the effective Gamma prior, convergence status, iteration count, and dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

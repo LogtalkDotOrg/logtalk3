@@ -15,7 +15,7 @@ Statistical modified Z-score anomaly detector for continuous datasets. Learns pe
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-01
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,13 +32,7 @@ Statistical modified Z-score anomaly detector for continuous datasets. Learns pe
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: This is a statistical anomaly-detection method based on the modified Z-score defined by Iglewicz and Hoaglin (1993). For each known continuous attribute value ``x``, the detector computes ``0.6745 * (x - median) / mad`` where ``median`` is the learned sample median and ``mad`` is the learned median absolute deviation. The per-attribute modified Z-scores are then aggregated using the selected learn-time ``score_mode/1`` option.
-   - Baseline training selection: The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the per-attribute baseline statistics. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.
-   - Feature handling: Supports continuous attributes only. Missing values are ignored when fitting attribute statistics. During scoring, queries must contain at least one known value. The ``root_mean_square`` score mode normalizes the raw score by the number of known values so that scores remain comparable across different missing-value patterns.
-   - Predict-time options: The ``score_mode/1`` option is a learn-time option. ``predict/4`` always uses the score mode stored in the learned detector. If ``score_mode/1`` is passed to ``predict/4``, it is ignored.
-   - Score normalization: The raw multivariate modified Z-score is mapped to the interval ``[0.0,1.0)`` using ``Score = Raw / (1 + Raw)``. The default threshold ``0.7777777777777778`` corresponds to the classical raw cutoff ``3.5`` recommended by Iglewicz and Hoaglin (1993).
-   - Detector representation: The learned detector is represented as a ``modified_z_score_detector(TrainingDataset, Encoders, Diagnostics)`` term where ``Diagnostics`` stores the learned metadata, including the effective options.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`anomaly_detector_protocol/0::anomaly_detector_options/2`  :ref:`anomaly_detector_protocol/0::check_anomaly_detector/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`anomaly_detector_protocol/0::diagnostic/2`  :ref:`anomaly_detector_protocol/0::diagnostics/2`  :ref:`anomaly_detector_protocol/0::export_to_clauses/4`  :ref:`anomaly_detector_protocol/0::export_to_file/4`  :ref:`anomaly_detector_protocol/0::learn/2`  :ref:`anomaly_detector_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`anomaly_detector_protocol/0::predict/3`  :ref:`anomaly_detector_protocol/0::predict/4`  :ref:`anomaly_detector_protocol/0::print_anomaly_detector/1`  :ref:`anomaly_detector_protocol/0::score/3`  :ref:`anomaly_detector_protocol/0::score_all/3`  :ref:`anomaly_detector_protocol/0::valid_anomaly_detector/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

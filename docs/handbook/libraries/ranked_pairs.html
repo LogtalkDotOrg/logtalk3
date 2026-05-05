@@ -320,7 +320,10 @@
              
   <section id="ranked-pairs">
 <span id="library-ranked-pairs"></span><h1><code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code><a class="headerlink" href="#ranked-pairs" title="Link to this heading"></a></h1>
-<p>Ranked Pairs pairwise preference ranker.</p>
+<p>Ranked Pairs pairwise preference ranker. It builds the direct pairwise
+victory graph from aggregated matchups, considers victories in
+descending direct-victory strength order, and locks each victory unless
+it would create a directed cycle in the accepted lock graph.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preferences, using it to order candidate items, and
@@ -328,7 +331,9 @@ exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The current implementation requires a well-formed connected
+pairwise dataset so that all ranked items remain part of a single
+comparison graph.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

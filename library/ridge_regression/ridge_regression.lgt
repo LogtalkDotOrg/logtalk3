@@ -27,13 +27,6 @@
 		author is 'Paulo Moura',
 		date is 2026-05-05,
 		comment is 'Ridge regression regressor supporting continuous and mixed-feature datasets using a direct weighted linear-system solve with L2 regularization. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses the shared regression encoding core to solve the weighted ridge normal equations directly with partial pivoting. The intercept is left unpenalized while encoded feature columns are penalized using scale-aware weights equivalent to standardizing penalized columns before applying the L2 penalty.',
-			'Feature handling' - 'Continuous features may be standardized using z-score scaling. Categorical features are encoded using reference-level dummy coding from the declared dataset attribute values, and zero-variance encoded columns are dropped from the direct solve and assigned zero coefficients.',
-			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
-			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``ridge_regressor(Encoders, Bias, Weights, Diagnostics)`` where ``Encoders`` stores the feature encoding metadata, ``Bias`` stores the intercept, ``Weights`` stores one coefficient per encoded feature, and ``Diagnostics`` stores training metadata including the effective options.'
-		],
 		see_also is [linear_regression, knn_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
 	]).
 

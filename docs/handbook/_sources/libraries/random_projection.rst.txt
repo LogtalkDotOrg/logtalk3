@@ -7,7 +7,10 @@ Random projection reducer for continuous datasets. The library
 implements the ``dimension_reducer_protocol`` defined in the
 ``dimension_reduction_protocols`` library and learns a seeded dense
 Rademacher projection matrix using the portable ``fast_random``
-pseudo-random generator.
+pseudo-random generator after centering the training data, optionally
+standardizing continuous attributes, and sampling entries in
+``{-$1/sqrt(k)$, +$1/sqrt(k)$}`` where ``$k$`` is the requested reduced
+dimensionality.
 
 API documentation
 -----------------
@@ -38,7 +41,7 @@ Features
 --------
 
 - **Continuous Datasets**: Accepts datasets containing only continuous
-  attributes.
+  attributes. Missing or nonnumeric values are rejected.
 - **Centering and Optional Scaling**: Centers all attributes and
   optionally standardizes them before projection.
 - **Portable Seeded Sampling**: Uses ``fast_random(xoshiro128pp)`` so

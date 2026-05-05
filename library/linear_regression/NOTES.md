@@ -22,9 +22,14 @@ ________________________________________________________________________
 ===================
 
 Linear regression regressor supporting continuous and mixed-feature
-datasets. The library implements the `regressor_protocol` defined in the
-`regression_protocols` library and learns a linear model using a direct
-ordinary least-squares solve.
+datasets. The library implements the `regressor_protocol` defined in
+the `regression_protocols` library and learns a linear model using the
+shared regression encoding core to build a row-oriented design matrix
+with an explicit intercept column before delegating least-squares
+solving and rank estimation to the `linear_algebra` library. The
+intercept is always retained and encoded feature columns that are
+numerically dependent on the design matrix are assigned zero
+coefficients.
 
 
 API documentation
@@ -58,9 +63,10 @@ file:
 Features
 --------
 
-- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding.
+- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes.
+-**Categorical Attributes Encoding**: Uses reference-level dummy coding from the declared dataset attribute values. Encoded columns with no independent signal after accounting for the intercept and previously selected features are assigned zero coefficients.
 - **Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
-- **Missing Values**: Missing numeric and categorical values are encoded using explicit missing-value indicator features.
+- **Missing Values**: Missing numeric and categorical values represented using anonymous variables are encoded using explicit missing-value indicator features.
 - **Unknown Values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Rank Handling**: Encoded columns that are numerically dependent on the intercept or on earlier selected columns are dropped from the direct solve and assigned zero coefficients.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, solver name, residual sum of squares, effective rank, active feature count, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.
@@ -78,6 +84,11 @@ The learned regressor is represented by default as:
 The exported predicate clauses therefore use the shape:
 
 - `Functor(Encoders, Bias, Weights, Diagnostics)`
+
+In this representation, `Encoders` stores the feature encoding metadata,
+`Bias` stores the intercept, `Weights` stores one coefficient per encoded
+feature, and `Diagnostics` stores training metadata including the effective
+options.
 
 
 Diagnostics syntax

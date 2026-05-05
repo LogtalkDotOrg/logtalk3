@@ -21,7 +21,10 @@ ________________________________________________________________________
 `ranked_pairs`
 ===============
 
-Ranked Pairs pairwise preference ranker.
+Ranked Pairs pairwise preference ranker. It builds the direct pairwise
+victory graph from aggregated matchups, considers victories in
+descending direct-victory strength order, and locks each victory unless
+it would create a directed cycle in the accepted lock graph.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +33,9 @@ it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `pairwise_ranking_dataset_protocol` protocol from the `ranking_protocols`
-library. See the `test_datasets` directory for examples.
+library. See the `test_datasets` directory for examples. The current
+implementation requires a well-formed connected pairwise dataset so that
+all ranked items remain part of a single comparison graph.
 
 
 API documentation

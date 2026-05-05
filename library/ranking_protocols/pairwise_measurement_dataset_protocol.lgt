@@ -24,12 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
-		comment is 'Protocol for pairwise measurement datasets.',
-		remarks is [
-			'Validity requirements' - 'Datasets are expected to declare each item once, use only declared items in measurements, assign numeric measurement values, and assign a positive weight to each measurement between distinct items.',
-			'Semantics' - 'Each ``measurement(Item1, Item2, Value, Weight)`` fact describes a weighted signed scalar observation for the oriented edge ``Item1 -> Item2``. Positive values favor ``Item1`` over ``Item2``, negative values favor ``Item2`` over ``Item1``, and zero values denote neutral observations.'
-		]
+		date is 2026-05-05,
+		comment is 'Protocol for pairwise measurement datasets.'
 	]).
 
 	:- public(item/1).

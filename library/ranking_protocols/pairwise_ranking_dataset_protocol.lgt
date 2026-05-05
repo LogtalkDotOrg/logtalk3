@@ -24,12 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
-		comment is 'Protocol for pairwise ranking datasets.',
-		remarks is [
-			'Validity requirements' - 'Datasets are expected to declare each item once, use only declared items in preferences, and assign a positive weight to each preference between distinct items.',
-			'Identifiability' - 'Rankers such as Bradley-Terry may require stronger conditions than undirected connectedness, such as strong connectivity of the directed win graph, in order to admit finite maximum-likelihood estimates.'
-		]
+		date is 2026-05-05,
+		comment is 'Protocol for pairwise ranking datasets.'
 	]).
 
 	:- public(item/1).

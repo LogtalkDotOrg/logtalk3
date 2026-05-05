@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-05,
 		comment is 'Random Forest regression using regression trees as base learners trained on bootstrap samples and per-split random feature subsets.',
-		remarks is [
-			'Algorithm' - 'Builds an ensemble of regression trees trained on bootstrap samples and predicts using the arithmetic mean of the individual tree predictions. Each split samples a random subset of the available dataset attributes before selecting the best split among them.',
-			'Bootstrap sampling' - 'Each tree is trained on a bootstrap sample drawn with replacement from the original training examples.',
-			'Feature randomization' - 'Each split samples a random subset of the available dataset attributes. The default number of sampled attributes is the square root of the total number of dataset attributes.',
-			'Reproducibility' - 'Bootstrap samples and split-level random feature subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
-			'Regressor representation' - 'The learned regressor is represented by default as ``rf_regressor(Trees, Diagnostics)`` where ``Trees`` contains ``tree(TreeRegressor)`` terms and ``Diagnostics`` stores training metadata including the effective options.'
-		],
 		see_also is [linear_regression, knn_regression, regression_tree, gradient_boosting_regression]
 	]).
 

@@ -21,7 +21,12 @@ ________________________________________________________________________
 `rank_centrality`
 =================
 
-Rank Centrality pairwise preference ranker.
+Rank Centrality pairwise preference ranker. It uses the Rank
+Centrality transition rule where each observed opponent contributes an
+outgoing transition proportional to the empirical probability of
+beating the current item, scaled by the maximum comparison degree, and
+estimates the stationary distribution using deterministic power
+iteration.
 
 The library implements the `ranker_protocol` defined in the
 `ranking_protocols` library. It provides predicates for learning a ranker
@@ -30,7 +35,11 @@ it as a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 `pairwise_ranking_dataset_protocol` protocol from the `ranking_protocols`
-library. See the `test_datasets` directory for examples.
+library. See the `test_datasets` directory for examples. The training
+dataset must declare each ranked item once, enumerate positive-weight
+pairwise preferences between distinct declared items, induce a connected
+undirected comparison graph, and induce a strongly connected directed
+transition graph so that the learned stationary distribution is unique.
 
 
 API documentation

@@ -25,13 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Truncated singular value decomposition reducer for continuous datasets using a portable two-sided power-iteration solver over the data matrix.',
-		remarks is [
-			'Algorithm' - 'Builds a preprocessed data matrix using optional centering and scaling, extracts singular triplets using deterministic two-sided power iteration, and applies rank-one deflation directly to the data matrix.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``truncated_svd_reducer(Encoders, Components, SingularValues, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores right singular vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
-		],
 		see_also is [pca, random_projection]
 	]).
 

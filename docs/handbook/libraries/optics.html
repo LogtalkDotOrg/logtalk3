@@ -309,7 +309,9 @@
              
   <section id="optics">
 <span id="library-optics"></span><h1><code class="docutils literal notranslate"><span class="pre">optics</span></code><a class="headerlink" href="#optics" title="Link to this heading"></a></h1>
-<p>OPTICS clusterer.</p>
+<p>OPTICS clusterer. It uses deterministic OPTICS ordering with
+epsilon-based cluster extraction for the fixed clusterer protocol.
+Supports continuous attributes only.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
 clusterer from a dataset, assigning new instances to clusters, and
@@ -355,8 +357,7 @@ ordering construction. The search backend can also be selected
 explicitly.</p></li>
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes.</p></li>
-<li><p><strong>Distance Metrics</strong>: Supports <code class="docutils literal notranslate"><span class="pre">euclidean</span></code> and <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>
-distances.</p></li>
+<li><p><strong>Distance Metrics</strong>: Supports Euclidean and Manhattan distances.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
 standardized using z-score scaling.</p></li>
 <li><p><strong>Epsilon-Based Extraction</strong>: Extracts clusters from the ordering

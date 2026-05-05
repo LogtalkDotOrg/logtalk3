@@ -318,7 +318,8 @@
 <span id="library-linear-svm"></span><h1><code class="docutils literal notranslate"><span class="pre">linear_svm</span></code><a class="headerlink" href="#linear-svm" title="Link to this heading"></a></h1>
 <p>Linear support vector machine classifier supporting both binary and
 multiclass classification. Multiclass classification is implemented
-using a one-vs-rest scheme with one linear margin model per class.</p>
+using a one-vs-rest scheme with one linear margin model per class, and
+training uses batch subgradient descent to fit each hinge-loss model.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">classifier_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code> library. It provides predicates for
 learning a classifier from a dataset object, using it to make
@@ -365,7 +366,10 @@ scaling derived from the training data.</p></li>
 encoding based on the declared dataset attribute values and rejects
 unseen values with a domain error.</p></li>
 <li><p><strong>Missing Values</strong>: Encodes missing numeric and categorical values
-using explicit missing-value indicator features.</p></li>
+represented using anonymous variables using explicit missing-value
+indicator features.</p></li>
+<li><p><strong>Unknown values</strong>: Prediction requests containing categorical values
+that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Classifier Export</strong>: Learned classifiers can be exported as
 predicate clauses or written to a file.</p></li>
 <li><p><strong>Pretty Printing</strong>: Prints a compact summary of classes, encoders,

@@ -24,8 +24,10 @@ ________________________________________________________________________
 Kernel Principal Component Analysis reducer for continuous datasets. The
 library implements the `dimension_reducer_protocol` defined in the
 `dimension_reduction_protocols` library and learns a nonlinear
-projection using a portable power-iteration eigensolver over centered
-kernel Gram matrices.
+projection by centering the training data, optionally standardizing
+continuous attributes, building a centered kernel Gram matrix, and
+extracting deterministic principal directions in sample space using
+portable power iteration with deflation.
 
 
 API documentation
@@ -54,10 +56,10 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Continuous Datasets**: Accepts datasets containing only continuous attributes.
+- **Continuous Datasets**: Accepts datasets containing only continuous attributes. Missing or nonnumeric values are rejected.
 - **Centering and Optional Scaling**: Centers all attributes and optionally standardizes them before evaluating kernels.
 - **Configurable Shortfall Handling**: Lets callers choose whether a component-extraction shortfall raises an error or truncates the learned reducer with explicit diagnostics.
-- **Supported Kernels**: Supports `linear`, `polynomial(Degree, Gamma, Coef0)` with `Coef0 >= 0`, and `rbf(Gamma)` kernels.
+- **Supported Kernels**: Supports linear, polynomial with non-negative offset, and radial basis function kernels through the `kernel/1` option.
 - **Shared Gram-Centering Helpers**: Delegates training Gram-matrix centering and out-of-sample Gram-vector centering to the shared `linear_algebra` library.
 - **Portable Eigensolver**: Uses deterministic power iteration with deflation instead of backend-specific linear algebra libraries.
 - **Projection API**: Transforms a new instance into a list of `component_N-Value` pairs using centered kernel evaluations against the training rows.

@@ -15,7 +15,7 @@ OPTICS clusterer for continuous datasets. Learns an ordering from a dataset obje
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -34,12 +34,7 @@ OPTICS clusterer for continuous datasets. Learns an ordering from a dataset obje
 |    :ref:`type <type/0>`
 
 | **Remarks:**
-
-   - Algorithm: Uses deterministic OPTICS ordering with epsilon-based cluster extraction for the fixed clusterer protocol.
-   - Feature handling: Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.
-   - Distance metrics: Supports Euclidean and Manhattan distances.
-   - Prediction: New instances are assigned to the cluster of the nearest reachable extracted core point within the extraction epsilon threshold; otherwise the atom ``noise`` is returned.
-   - Clusterer representation: The learned clusterer is represented by default as ``optics_clusterer(Encoders, Ordering, Clusters, Noise, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Ordering`` stores the OPTICS ordering, ``Clusters`` stores the extracted clusters, ``Noise`` stores extracted noise points, and ``Options`` stores the effective training options.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

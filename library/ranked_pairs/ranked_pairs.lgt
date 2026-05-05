@@ -25,18 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-05-05,
 		comment is 'Ranked Pairs pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by locking direct pairwise victories in descending strength order while avoiding cycles and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Builds the direct pairwise victory graph from aggregated matchups, considers victories in descending direct-victory strength order, and locks each victory unless it would create a directed cycle in the accepted lock graph.',
-			'Victory ordering' - 'Victories are sorted by descending direct-victory strength. Equal-strength victories are processed deterministically using the selected ``tie_breaking/1`` option, either by standard term order or by dataset item declaration order.',
-			'Victory-strength semantics' - 'The ``victory_strength/1`` option selects whether direct victories are measured using winning votes or victory margins before the locking phase.',
-			'Equal-strength tie breaking' - 'The ``tie_breaking/1`` option selects how equal-strength victories are ordered before the locking phase. The default ``term_order`` mode preserves the current deterministic behavior, while ``declaration_order`` follows the ordered training items returned by the dataset helpers.',
-			'Locked-pair access' - 'The ``locked_pairs/2`` predicate returns the accepted lock graph in the exact order in which locks were accepted as ``lock(Item1,Item2,Strength)`` terms.',
-			'Score semantics' - 'The learned score for each item is the number of opponents reachable from that item in the final locked relation. Ranking ties are then broken deterministically using the standard term order of the item identifiers.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain part of a single comparison graph.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``ranked_pairs_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the effective victory-strength mode, locked pairs, and dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, schulze, copeland]
 	]).
 

@@ -321,7 +321,10 @@
              
   <section id="regularized-bradley-terry">
 <span id="library-regularized-bradley-terry"></span><h1><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry</span></code><a class="headerlink" href="#regularized-bradley-terry" title="Link to this heading"></a></h1>
-<p>Regularized Bradley-Terry MAP pairwise preference ranker.</p>
+<p>Regularized Bradley-Terry MAP pairwise preference ranker. It uses a
+deterministic MM-style posterior-mode update for a Bradley-Terry
+likelihood regularized by an explicit independent Gamma prior over item
+strengths.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. It provides predicates for learning a
 ranker from pairwise preferences, using it to order candidate items, and
@@ -329,7 +332,11 @@ exporting it as a list of predicate clauses or to a file.</p>
 <p>Datasets are represented as objects implementing the
 <code class="docutils literal notranslate"><span class="pre">pairwise_ranking_dataset_protocol</span></code> protocol from the
 <code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code> library. See the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory for
-examples.</p>
+examples. The training dataset must declare each ranked item once,
+enumerate positive-weight pairwise preferences between distinct declared
+items, and induce a connected undirected comparison graph. Unlike the
+unregularized Bradley-Terry model, the directed win graph is not
+required to be strongly connected.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

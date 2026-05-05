@@ -24,8 +24,10 @@ ________________________________________________________________________
 Truncated singular value decomposition reducer for continuous datasets.
 The library implements the `dimension_reducer_protocol` defined in the
 `dimension_reduction_protocols` library and learns a low-rank linear
-projection using a portable two-sided power-iteration solver over the
-preprocessed data matrix.
+projection by building a preprocessed data matrix using optional
+centering and scaling, extracting singular triplets using deterministic
+two-sided power iteration, and applying rank-one deflation directly to
+the data matrix.
 
 
 API documentation
@@ -54,7 +56,7 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Continuous Datasets**: Accepts datasets containing only continuous attributes.
+- **Continuous Datasets**: Accepts datasets containing only continuous attributes. Missing or nonnumeric values are rejected.
 - **Low-Rank Projection**: Extracts right singular vectors and singular values in descending order.
 - **Portable SVD Solver**: Uses deterministic two-sided power iteration with rank-one deflation over the data matrix instead of backend-specific linear algebra libraries.
 - **Optional Centering and Scaling**: Supports explicit control over whether training and transform inputs are centered and/or scaled.

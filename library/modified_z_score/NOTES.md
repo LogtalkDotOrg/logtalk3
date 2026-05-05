@@ -22,6 +22,13 @@ ________________________________________________________________________
 ==================
 
 Statistical modified Z-score anomaly detector for continuous datasets.
+It is a statistical anomaly-detection method based on the modified
+Z-score defined by Iglewicz and Hoaglin (1993): for each known
+continuous attribute value `x`, the detector computes
+`0.6745 * (x - median) / mad`, where `median` is the learned sample
+median and `mad` is the learned median absolute deviation, and then
+aggregates the per-attribute modified Z-scores using the selected
+learn-time `score_mode/1` option.
 
 The library implements the `anomaly_detector_protocol` defined in the
 `anomaly_detection_protocols` library. It learns a detector from a

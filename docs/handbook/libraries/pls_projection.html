@@ -319,9 +319,14 @@
 <p>Partial Least Squares projection reducer for target-valued continuous
 datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code>
 defined in the <code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library and learns a
-deterministic PLS1 projection using repeated cross-covariance
-maximization and sequential deflation, storing the resulting direct
+deterministic PLS1 projection by centering the training data, optionally
+standardizing continuous attributes, centering the numeric target,
+extracting latent directions using repeated cross-covariance
+maximization with sequential deflation, and storing the resulting direct
 projection rotations for future transforms.</p>
+<p>Requires a dataset implementing
+<code class="docutils literal notranslate"><span class="pre">target_supervised_dimension_reduction_dataset_protocol</span></code> and therefore
+uses a numeric target during training.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -347,7 +352,7 @@ link in a web browser.</p>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
 attributes and rejects datasets that also declare the target name as
-an input feature.</p></li>
+an input feature. Missing or nonnumeric values are also rejected.</p></li>
 <li><p><strong>Target-Supervised Learning</strong>: Uses a numeric target attribute
 declared by datasets implementing
 <code class="docutils literal notranslate"><span class="pre">target_supervised_dimension_reduction_dataset_protocol</span></code>.</p></li>

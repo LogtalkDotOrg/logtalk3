@@ -6,7 +6,8 @@
 Regression tree regressor supporting continuous and mixed-feature
 datasets. The library implements the ``regressor_protocol`` defined in
 the ``regression_protocols`` library and learns a binary regression tree
-using recursive variance-reduction splits.
+using recursive variance-reduction splits that select the encoded
+feature threshold maximizing variance reduction.
 
 API documentation
 -----------------
@@ -68,22 +69,36 @@ Features
 
 - **Variance-Reduction Splits**: Selects binary thresholds over encoded
   features to reduce target variance.
+
 - **Continuous and Mixed Features**: Supports continuous attributes and
-  categorical attributes encoded using one-hot vectors.
-- **Missing Values**: Missing numeric and categorical values are encoded
-  using explicit missing-value indicator features.
+  categorical attributes.
+
+- **Categorical Features Encoding**: Uses reference-level dummy coding
+  derived from the declared dataset attribute values, with a
+  missing-value indicator, and the resulting encoded features are
+  treated as ordinary numeric split features.
+
+- **Missing Values**: Missing feature values represented using anonymous
+  variables or omitted attribute-value pairs are encoded using explicit
+  missing-value indicator features during both training and prediction.
+
 - **Per-Split Feature Sampling**: Optionally samples a subset of dataset
   attributes at each split before searching for the best partition.
+
 - **Optional Feature Scaling**: Continuous attributes can be
   standardized using z-score scaling before tree induction.
+
 - **Diagnostics Metadata**: Learned regressors record model name,
   target, training example count, encoded feature count, and effective
   options, accessible using the shared regression diagnostics
   predicates.
+
 - **Model Export**: Learned regressors can be exported as predicate
   clauses or written to a file.
+
 - **Readable Trees**: Includes a pretty-printer for inspecting learned
   tree structure.
+
 - **Reference Benchmarks**: Includes a dedicated performance suite
   reporting training time, RMSE, and MAE for representative regression
   datasets.
@@ -94,6 +109,11 @@ Regressor representation
 The learned regressor is represented by default as:
 
 - ``regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics)``
+
+In this representation, ``Tree`` is built from ``leaf(Prediction)`` and
+``node(Index, Threshold, FallbackPrediction, Left, Right)`` terms and
+``Diagnostics`` stores training metadata including the effective
+options.
 
 Diagnostics syntax
 ------------------

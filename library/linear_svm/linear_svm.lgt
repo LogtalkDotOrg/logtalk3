@@ -25,15 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		remarks is [
-			'Algorithm' - 'Uses batch subgradient descent to train one linear hinge-loss model per class in a one-vs-rest configuration.',
-			'Feature handling' - 'Continuous features are standardized using z-score scaling. Categorical features are one-hot encoded from the declared dataset attribute values.',
-			'Missing values' - 'Missing feature values represented using anonymous variables are encoded using explicit missing-value indicator features.',
-			'Unknown values' - 'Prediction requests containing categorical values that are not declared by the dataset raise a domain error.',
-			'Classifier representation' - 'The learned classifier is represented by default as ``linear_svm_classifier(Classes, Encoders, Models, Options)`` where ``Encoders`` stores the feature encoding metadata and ``Models`` stores one linear score model per class.'
-		],
 		see_also is [dataset_protocol, logistic_regression, c45, knn, naive_bayes, nearest_centroid, random_forest, ada_boost]
 	]).
 

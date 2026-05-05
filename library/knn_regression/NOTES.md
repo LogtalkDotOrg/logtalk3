@@ -65,7 +65,7 @@ Features
 - **Distance-Based Regression**: Predicts targets using the weighted average of the nearest neighbors.
 - **Multiple Metrics**: Supports Euclidean, Manhattan, Chebyshev, and Minkowski distance metrics over encoded numeric feature vectors.
 - **Weighting Schemes**: Supports uniform, inverse-distance, and Gaussian weighting of neighbors.
-- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using one-hot vectors from the declared dataset attribute values.
+- **Continuous and Mixed Features**: Supports continuous attributes and categorical attributes encoded using reference-level dummy coding derived from the declared dataset attribute values.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Missing Values**: Missing numeric and categorical values represented using anonymous variables are encoded using explicit missing-value indicator features.
 - **Diagnostics Metadata**: Learned regressors record model name, target, training example count, encoded feature count, and effective options, accessible using the shared regression diagnostics predicates.

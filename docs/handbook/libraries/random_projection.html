@@ -320,7 +320,10 @@
 implements the <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library and learns a seeded dense
 Rademacher projection matrix using the portable <code class="docutils literal notranslate"><span class="pre">fast_random</span></code>
-pseudo-random generator.</p>
+pseudo-random generator after centering the training data, optionally
+standardizing continuous attributes, and sampling entries in
+<code class="docutils literal notranslate"><span class="pre">{-$1/sqrt(k)$,</span> <span class="pre">+$1/sqrt(k)$}</span></code> where <code class="docutils literal notranslate"><span class="pre">$k$</span></code> is the requested reduced
+dimensionality.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -345,7 +348,7 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
-attributes.</p></li>
+attributes. Missing or nonnumeric values are rejected.</p></li>
 <li><p><strong>Centering and Optional Scaling</strong>: Centers all attributes and
 optionally standardizes them before projection.</p></li>
 <li><p><strong>Portable Seeded Sampling</strong>: Uses <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> so

@@ -314,7 +314,8 @@
 datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in
 the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns an ensemble of
 regression trees trained on bootstrap samples and per-split random
-feature subsets.</p>
+feature subsets, predicting with the arithmetic mean of the individual
+tree predictions.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -355,6 +356,10 @@ of the tree predictions.</p></li>
 <li><p><strong>Tree Configuration</strong>: Exposes the underlying regression-tree
 split-feature, depth, minimum-leaf, variance-reduction, and scaling
 options.</p></li>
+<li><p><strong>Categorical Features Encoding</strong>: Uses reference-level dummy coding
+derived from the declared dataset attribute values, with a
+missing-value indicator, and the resulting encoded features are
+treated as ordinary numeric split features by the tree learners.</p></li>
 <li><p><strong>Diagnostics Metadata</strong>: Learned regressors record model name,
 target, training example count, attribute count, tree count, and
 effective options, accessible using the shared regression diagnostics

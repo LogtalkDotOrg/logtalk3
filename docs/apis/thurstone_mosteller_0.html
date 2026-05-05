@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-27</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -365,15 +365,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Aggregates pairwise outcomes into matchup probabilities, applies a fixed continuity correction to avoid infinite probit values, transforms them with the inverse standard normal CDF, and fits Case V latent utilities using a deterministic weighted least-squares linear solve.</p></li>
-<li><p>Score semantics: Learned scores are centered latent utilities on an arbitrary additive scale. Only utility differences matter for interpreting implied paired-comparison probabilities and ranking order.</p></li>
-<li><p>Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that all learned utilities remain comparable across the ranked items.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker(Items,</span> <span class="pre">Scores,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Scores</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the fitting method, continuity correction, and dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

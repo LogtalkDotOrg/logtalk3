@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Regularized Bradley-Terry MAP ranker. Learns one positive strength parameter per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol using a Bradley-Terry likelihood with an explicit independent Gamma prior, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Uses a deterministic MM-style posterior-mode update for a Bradley-Terry likelihood regularized by an explicit independent Gamma prior over item strengths.',
-			'Dataset requirements' - 'The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, and induce a connected undirected comparison graph. Unlike the unregularized Bradley-Terry model, the directed win graph is not required to be strongly connected.',
-			'Prior semantics' - 'The ``gamma_prior(gamma(Shape, Rate))`` option specifies the Gamma prior hyperparameters. The implementation requires ``Shape > 1`` and ``Rate > 0`` so the posterior mode remains strictly positive for all items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``regularized_bt_ranker(Items, Strengths, Diagnostics)`` where ``Strengths`` stores ``Item-Strength`` pairs and ``Diagnostics`` stores metadata such as the effective Gamma prior, convergence status, iteration count, and dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry]
 	]).
 

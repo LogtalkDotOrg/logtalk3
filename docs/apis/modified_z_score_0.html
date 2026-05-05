@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-01</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -367,17 +367,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: This is a statistical anomaly-detection method based on the modified Z-score defined by Iglewicz and Hoaglin (1993). For each known continuous attribute value <code class="docutils literal notranslate"><span class="pre">x</span></code>, the detector computes <code class="docutils literal notranslate"><span class="pre">0.6745</span> <span class="pre">*</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">median)</span> <span class="pre">/</span> <span class="pre">mad</span></code> where <code class="docutils literal notranslate"><span class="pre">median</span></code> is the learned sample median and <code class="docutils literal notranslate"><span class="pre">mad</span></code> is the learned median absolute deviation. The per-attribute modified Z-scores are then aggregated using the selected learn-time <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> option.</p></li>
-<li><p>Baseline training selection: The learn-time <code class="docutils literal notranslate"><span class="pre">baseline_class_values/1</span></code> option declares which class labels are admissible for fitting the per-attribute baseline statistics. The default is <code class="docutils literal notranslate"><span class="pre">[normal]</span></code>. The <code class="docutils literal notranslate"><span class="pre">baseline_selection_policy/1</span></code> option then controls how non-baseline examples are handled. The default <code class="docutils literal notranslate"><span class="pre">reject</span></code> policy throws an error when any non-baseline example is found, while <code class="docutils literal notranslate"><span class="pre">filter</span></code> removes them before fitting.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing values are ignored when fitting attribute statistics. During scoring, queries must contain at least one known value. The <code class="docutils literal notranslate"><span class="pre">root_mean_square</span></code> score mode normalizes the raw score by the number of known values so that scores remain comparable across different missing-value patterns.</p></li>
-<li><p>Predict-time options: The <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> option is a learn-time option. <code class="docutils literal notranslate"><span class="pre">predict/4</span></code> always uses the score mode stored in the learned detector. If <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> is passed to <code class="docutils literal notranslate"><span class="pre">predict/4</span></code>, it is ignored.</p></li>
-<li><p>Score normalization: The raw multivariate modified Z-score is mapped to the interval <code class="docutils literal notranslate"><span class="pre">[0.0,1.0)</span></code> using <code class="docutils literal notranslate"><span class="pre">Score</span> <span class="pre">=</span> <span class="pre">Raw</span> <span class="pre">/</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">Raw)</span></code>. The default threshold <code class="docutils literal notranslate"><span class="pre">0.7777777777777778</span></code> corresponds to the classical raw cutoff <code class="docutils literal notranslate"><span class="pre">3.5</span></code> recommended by Iglewicz and Hoaglin (1993).</p></li>
-<li><p>Detector representation: The learned detector is represented as a <code class="docutils literal notranslate"><span class="pre">modified_z_score_detector(TrainingDataset,</span> <span class="pre">Encoders,</span> <span class="pre">Diagnostics)</span></code> term where <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores the learned metadata, including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

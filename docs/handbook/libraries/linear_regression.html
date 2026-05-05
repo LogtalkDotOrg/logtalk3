@@ -312,8 +312,13 @@
 <span id="library-linear-regression"></span><h1><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code><a class="headerlink" href="#linear-regression" title="Link to this heading"></a></h1>
 <p>Linear regression regressor supporting continuous and mixed-feature
 datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in
-the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns a linear model using a
-direct ordinary least-squares solve.</p>
+the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns a linear model using the
+shared regression encoding core to build a row-oriented design matrix
+with an explicit intercept column before delegating least-squares
+solving and rank estimation to the <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library. The
+intercept is always retained and encoded feature columns that are
+numerically dependent on the design matrix are assigned zero
+coefficients.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -343,11 +348,16 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous and Mixed Features</strong>: Supports continuous attributes and
-categorical attributes encoded using reference-level dummy coding.</p></li>
+categorical attributes. -<strong>Categorical Attributes Encoding</strong>: Uses
+reference-level dummy coding from the declared dataset attribute
+values. Encoded columns with no independent signal after accounting
+for the intercept and previously selected features are assigned zero
+coefficients.</p></li>
 <li><p><strong>Feature Scaling</strong>: Continuous attributes can be standardized using
 z-score scaling.</p></li>
-<li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
-using explicit missing-value indicator features.</p></li>
+<li><p><strong>Missing Values</strong>: Missing numeric and categorical values represented
+using anonymous variables are encoded using explicit missing-value
+indicator features.</p></li>
 <li><p><strong>Unknown Values</strong>: Prediction requests containing categorical values
 that are not declared by the dataset raise a domain error.</p></li>
 <li><p><strong>Rank Handling</strong>: Encoded columns that are numerically dependent on
@@ -375,6 +385,10 @@ datasets.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Functor(Encoders,</span> <span class="pre">Bias,</span> <span class="pre">Weights,</span> <span class="pre">Diagnostics)</span></code></p></li>
 </ul>
+<p>In this representation, <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores the feature encoding
+metadata, <code class="docutils literal notranslate"><span class="pre">Bias</span></code> stores the intercept, <code class="docutils literal notranslate"><span class="pre">Weights</span></code> stores one
+coefficient per encoded feature, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training
+metadata including the effective options.</p>
 </section>
 <section id="diagnostics-syntax">
 <h2>Diagnostics syntax<a class="headerlink" href="#diagnostics-syntax" title="Link to this heading"></a></h2>

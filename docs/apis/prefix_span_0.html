@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-29</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -364,15 +364,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds frequent sequential patterns by recursively projecting the sequence database using both same-event itemset extensions and next-event sequence extensions.</p></li>
-<li><p>Dataset handling: Requires a dataset implementing <code class="docutils literal notranslate"><span class="pre">sequence_dataset_protocol</span></code> with sequences represented as ordered lists of canonical sorted itemsets over a declared item domain.</p></li>
-<li><p>Support thresholds: Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.</p></li>
-<li><p>Pattern miner representation: The mined result is represented by default as <code class="docutils literal notranslate"><span class="pre">prefix_span_pattern_miner(ItemDomain,</span> <span class="pre">Patterns,</span> <span class="pre">Options)</span></code> where <code class="docutils literal notranslate"><span class="pre">Patterns</span></code> stores <code class="docutils literal notranslate"><span class="pre">sequence_pattern(Pattern,</span> <span class="pre">SupportCount)</span></code> terms ordered first by total item count and then lexicographically.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

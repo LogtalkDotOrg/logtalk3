@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-05-05,
 		comment is 'PrefixSpan sequential pattern miner for sequence datasets using recursive projected databases.',
-		remarks is [
-			'Algorithm' - 'Builds frequent sequential patterns by recursively projecting the sequence database using both same-event itemset extensions and next-event sequence extensions.',
-			'Dataset handling' - 'Requires a dataset implementing ``sequence_dataset_protocol`` with sequences represented as ordered lists of canonical sorted itemsets over a declared item domain.',
-			'Support thresholds' - 'Supports minimum support specified either as a relative proportion or as an absolute count. When both are given, the absolute-count threshold takes precedence.',
-			'Pattern miner representation' - 'The mined result is represented by default as ``prefix_span_pattern_miner(ItemDomain, Patterns, Options)`` where ``Patterns`` stores ``sequence_pattern(Pattern, SupportCount)`` terms ordered first by total item count and then lexicographically.'
-		],
 		see_also is [pattern_miner_protocol, sequence_dataset_protocol]
 	]).
 

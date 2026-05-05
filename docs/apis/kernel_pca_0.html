@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-04</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -367,16 +367,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, builds a centered kernel Gram matrix, and extracts deterministic principal directions in sample space using portable power iteration with deflation.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.</p></li>
-<li><p>Shortfall handling: Supports a <cite>shortfall_policy/1</cite> option for choosing whether a component-extraction shortfall raises an error or returns a truncated reducer with explicit diagnostics.</p></li>
-<li><p>Kernels: Supports linear, polynomial with non-negative offset, and radial basis function kernels through the <cite>kernel/1</cite> option.</p></li>
-<li><p>Dimension reducer representation: The learned reducer is represented by default as <code class="docutils literal notranslate"><span class="pre">kernel_pca_reducer(Encoders,</span> <span class="pre">TrainingRows,</span> <span class="pre">RowMeans,</span> <span class="pre">TotalMean,</span> <span class="pre">Components,</span> <span class="pre">ExplainedVariances,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores attribute centering/scaling metadata, <code class="docutils literal notranslate"><span class="pre">TrainingRows</span></code> stores the encoded training rows, <code class="docutils literal notranslate"><span class="pre">RowMeans</span></code> and <code class="docutils literal notranslate"><span class="pre">TotalMean</span></code> store the kernel-centering statistics, <code class="docutils literal notranslate"><span class="pre">Components</span></code> stores the normalized dual projection vectors, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> records the learned model metadata, effective options, and any truncate-mode shortfall details.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

@@ -24,9 +24,15 @@ ________________________________________________________________________
 Partial Least Squares projection reducer for target-valued continuous
 datasets. The library implements the `dimension_reducer_protocol`
 defined in the `dimension_reduction_protocols` library and learns a
-deterministic PLS1 projection using repeated cross-covariance
-maximization and sequential deflation, storing the resulting direct
-projection rotations for future transforms.
+deterministic PLS1 projection by centering the training data,
+optionally standardizing continuous attributes, centering the numeric
+target, extracting latent directions using repeated cross-covariance
+maximization with sequential deflation, and storing the resulting
+direct projection rotations for future transforms.
+
+Requires a dataset implementing
+``target_supervised_dimension_reduction_dataset_protocol`` and therefore
+uses a numeric target during training.
 
 
 API documentation
@@ -55,7 +61,7 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Continuous Datasets**: Accepts datasets containing only continuous attributes and rejects datasets that also declare the target name as an input feature.
+- **Continuous Datasets**: Accepts datasets containing only continuous attributes and rejects datasets that also declare the target name as an input feature. Missing or nonnumeric values are also rejected.
 - **Target-Supervised Learning**: Uses a numeric target attribute declared by datasets implementing `target_supervised_dimension_reduction_dataset_protocol`.
 - **Centering and Optional Scaling**: Centers all attributes and optionally standardizes them before learning latent directions.
 - **Deterministic Components**: Learns components deterministically from feature-target cross-covariance without stochastic initialization.

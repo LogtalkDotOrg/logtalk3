@@ -10,6 +10,10 @@ implements the generic ``pattern_miner_protocol`` defined in the
 patterns using recursive projected databases with both same-event and
 next-event extensions.
 
+Requires a dataset implementing ``sequence_dataset_protocol`` with
+sequences represented as ordered lists of canonical sorted itemsets over
+a declared item domain.
+
 API documentation
 -----------------
 
@@ -44,8 +48,8 @@ Features
   itemset and appending a new singleton itemset.
 - **Canonical Sequences**: Validates that itemsets are sorted,
   duplicate-free, non-empty, and restricted to declared items.
-- **Flexible Support Thresholds**: Supports relative minimum support and
-  absolute minimum support count.
+- **Flexible Support Thresholds**: Supports minimum support specified
+  either as a relative proportion or as an absolute count.
 - **Model Export**: Mined pattern collections can be exported as
   predicate clauses or written to a file.
 

@@ -25,13 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Rank Centrality pairwise preference ranker. Learns one stationary probability score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying power iteration to the Rank Centrality Markov chain built from aggregated head-to-head outcomes, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Uses the Rank Centrality transition rule where each observed opponent contributes an outgoing transition proportional to the empirical probability of beating the current item, scaled by the maximum comparison degree, and estimates the stationary distribution using deterministic power iteration.',
-			'Dataset requirements' - 'The training dataset must declare each ranked item once, enumerate positive-weight pairwise preferences between distinct declared items, induce a connected undirected comparison graph, and induce a strongly connected directed transition graph so that the learned stationary distribution is unique.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``rank_centrality_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs summing to ``1.0`` and ``Diagnostics`` stores metadata such as convergence status, iteration count, maximum comparison degree, and dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry, copeland]
 	]).
 

@@ -3,7 +3,13 @@
 ``z_score``
 ===========
 
-Statistical Z-score anomaly detector for continuous datasets.
+Statistical Z-score anomaly detector for continuous datasets. It is a
+statistical anomaly-detection method based on standard scores: the
+detector estimates a population mean and standard deviation for each
+continuous attribute and supports two learn-time score modes,
+``root_mean_square`` for dense multivariate deviation scores and
+``any_feature_extreme`` for the maximum absolute Z-score when sparse
+single-feature anomalies are more informative.
 
 The library implements the ``anomaly_detector_protocol`` defined in the
 ``anomaly_detection_protocols`` library. It learns a detector from a

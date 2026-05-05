@@ -25,15 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-05,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
-		remarks is [
-			'Algorithm' - 'Random Forest is an ensemble learning method that constructs multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.',
-			'Bootstrap sampling' - 'Each tree is trained on a bootstrap sample (random sample with replacement) of the training data.',
-			'Feature randomization' - 'At each tree, a random subset of features is selected. The default number of features is sqrt(total_features).',
-			'Reproducibility' - 'Random subsets are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
-			'Classifier representation' - 'The learned classifier is represented by default as a ``rf_classifier(Trees, ClassValues, Options)`` term.'
-		],
 		see_also is [dataset_protocol, c45, isolation_forest, knn, naive_bayes, nearest_centroid, ada_boost]
 	]).
 

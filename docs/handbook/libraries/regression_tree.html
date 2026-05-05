@@ -314,7 +314,8 @@
 <p>Regression tree regressor supporting continuous and mixed-feature
 datasets. The library implements the <code class="docutils literal notranslate"><span class="pre">regressor_protocol</span></code> defined in
 the <code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code> library and learns a binary regression tree
-using recursive variance-reduction splits.</p>
+using recursive variance-reduction splits that select the encoded
+feature threshold maximizing variance reduction.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -365,9 +366,14 @@ the <code class="docutils literal notranslate"><span class="pre">predict/3</span
 <li><p><strong>Variance-Reduction Splits</strong>: Selects binary thresholds over encoded
 features to reduce target variance.</p></li>
 <li><p><strong>Continuous and Mixed Features</strong>: Supports continuous attributes and
-categorical attributes encoded using one-hot vectors.</p></li>
-<li><p><strong>Missing Values</strong>: Missing numeric and categorical values are encoded
-using explicit missing-value indicator features.</p></li>
+categorical attributes.</p></li>
+<li><p><strong>Categorical Features Encoding</strong>: Uses reference-level dummy coding
+derived from the declared dataset attribute values, with a
+missing-value indicator, and the resulting encoded features are
+treated as ordinary numeric split features.</p></li>
+<li><p><strong>Missing Values</strong>: Missing feature values represented using anonymous
+variables or omitted attribute-value pairs are encoded using explicit
+missing-value indicator features during both training and prediction.</p></li>
 <li><p><strong>Per-Split Feature Sampling</strong>: Optionally samples a subset of dataset
 attributes at each split before searching for the best partition.</p></li>
 <li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
@@ -391,6 +397,10 @@ datasets.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">regression_tree_regressor(Encoders,</span> <span class="pre">FeatureLabels,</span> <span class="pre">Tree,</span> <span class="pre">Diagnostics)</span></code></p></li>
 </ul>
+<p>In this representation, <code class="docutils literal notranslate"><span class="pre">Tree</span></code> is built from <code class="docutils literal notranslate"><span class="pre">leaf(Prediction)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">node(Index,</span> <span class="pre">Threshold,</span> <span class="pre">FallbackPrediction,</span> <span class="pre">Left,</span> <span class="pre">Right)</span></code> terms and
+<code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective
+options.</p>
 </section>
 <section id="diagnostics-syntax">
 <h2>Diagnostics syntax<a class="headerlink" href="#diagnostics-syntax" title="Link to this heading"></a></h2>

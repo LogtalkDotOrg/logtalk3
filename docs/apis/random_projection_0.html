@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-28</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,15 +366,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Centers the training data, optionally standardizes continuous attributes, and samples a dense Rademacher projection matrix with entries in {-$1/sqrt(k)$, +$1/sqrt(k)$} where $k$ is the requested reduced dimensionality.</p></li>
-<li><p>Feature handling: Supports continuous attributes only. Missing or nonnumeric values are rejected.</p></li>
-<li><p>Reproducibility: Projection matrices are generated using the portable <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> pseudo-random generator and can be reproduced by setting the <code class="docutils literal notranslate"><span class="pre">random_seed/1</span></code> option.</p></li>
-<li><p>Dimension reducer representation: The learned reducer is represented by default as <code class="docutils literal notranslate"><span class="pre">random_projection_reducer(Encoders,</span> <span class="pre">Components,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Encoders</span></code> stores attribute centering/scaling metadata, <code class="docutils literal notranslate"><span class="pre">Components</span></code> stores the sampled projection vectors, and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> records the learned model metadata and effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

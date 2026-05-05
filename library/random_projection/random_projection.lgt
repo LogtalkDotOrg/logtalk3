@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-05-05,
 		comment is 'Random projection reducer for continuous datasets using a portable seeded Rademacher projection matrix.',
-		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, and samples a dense Rademacher projection matrix with entries in {-$1/sqrt(k)$, +$1/sqrt(k)$} where $k$ is the requested reduced dimensionality.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Reproducibility' - 'Projection matrices are generated using the portable ``fast_random(xoshiro128pp)`` pseudo-random generator and can be reproduced by setting the ``random_seed/1`` option.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``random_projection_reducer(Encoders, Components, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``Components`` stores the sampled projection vectors, and ``Diagnostics`` records the learned model metadata and effective options.'
-		],
 		see_also is [lda_projection, pca]
 	]).
 

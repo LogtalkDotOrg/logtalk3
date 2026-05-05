@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Probabilistic Principal Component Analysis reducer for continuous datasets using a portable covariance eigensolver.',
-		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, estimates the sample covariance matrix, extracts deterministic leading eigenvectors using portable power iteration with deflation, and then converts them into the closed-form maximum-likelihood probabilistic PCA loading matrix and posterior latent projection.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Shortfall handling' - 'Supports a ``shortfall_policy/1`` option for choosing whether a numerically rank-deficient covariance matrix raises an error or returns a truncated reducer with explicit diagnostics.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics)`` where ``Encoders`` stores preprocessing metadata, ``Components`` stores posterior latent projection vectors, ``Loadings`` stores the maximum-likelihood loading vectors, and ``Diagnostics`` records the learned model metadata, effective options, and any truncate-mode shortfall details.'
-		],
 		see_also is [kernel_pca, pca, truncated_svd]
 	]).
 

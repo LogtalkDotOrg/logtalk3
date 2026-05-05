@@ -25,14 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-05,
 		comment is 'Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued latent utility per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by fitting continuity-corrected empirical paired-comparison probabilities with a deterministic weighted least-squares normal model, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		remarks is [
-			'Algorithm' - 'Aggregates pairwise outcomes into matchup probabilities, applies a fixed continuity correction to avoid infinite probit values, transforms them with the inverse standard normal CDF, and fits Case V latent utilities using a deterministic weighted least-squares linear solve.',
-			'Score semantics' - 'Learned scores are centered latent utilities on an arbitrary additive scale. Only utility differences matter for interpreting implied paired-comparison probabilities and ranking order.',
-			'Dataset requirements' - 'The current implementation requires a well-formed connected pairwise dataset so that all learned utilities remain comparable across the ranked items.',
-			'Ranker representation' - 'The learned ranker is represented by default as ``thurstone_mosteller_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the fitting method, continuity correction, and dataset summary.'
-		],
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry, regularized_bradley_terry]
 	]).
 

@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-01</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -367,16 +367,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds an ensemble of regression trees trained on bootstrap samples and predicts using the arithmetic mean of the individual tree predictions. Each split samples a random subset of the available dataset attributes before selecting the best split among them.</p></li>
-<li><p>Bootstrap sampling: Each tree is trained on a bootstrap sample drawn with replacement from the original training examples.</p></li>
-<li><p>Feature randomization: Each split samples a random subset of the available dataset attributes. The default number of sampled attributes is the square root of the total number of dataset attributes.</p></li>
-<li><p>Reproducibility: Bootstrap samples and split-level random feature subsets are generated using the portable <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> pseudo-random generator and can be reproduced by setting the <code class="docutils literal notranslate"><span class="pre">random_seed/1</span></code> option.</p></li>
-<li><p>Regressor representation: The learned regressor is represented by default as <code class="docutils literal notranslate"><span class="pre">rf_regressor(Trees,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Trees</span></code> contains <code class="docutils literal notranslate"><span class="pre">tree(TreeRegressor)</span></code> terms and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores training metadata including the effective options.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

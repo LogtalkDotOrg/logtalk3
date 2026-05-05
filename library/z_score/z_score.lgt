@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-05,
 		comment is 'Statistical Z-score anomaly detector for continuous datasets. Learns per-attribute population mean and standard deviation from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'This is a statistical anomaly-detection method based on standard scores. The detector estimates a population mean and standard deviation for each continuous attribute and supports two learn-time score modes: ``root_mean_square`` aggregates all known Z-scores into a dense multivariate deviation score while ``any_feature_extreme`` uses the maximum absolute Z-score to emphasize sparse single-feature anomalies.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the per-attribute baseline statistics. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.',
-			'Feature handling' - 'Supports continuous attributes only. Missing values are ignored when fitting attribute statistics. During scoring, queries must contain at least one known value. The ``root_mean_square`` score mode normalizes the raw score by the number of known values so that scores remain comparable across different missing-value patterns.',
-			'Predict-time options' - 'The ``score_mode/1`` option is a learn-time option. ``predict/4`` always uses the score mode stored in the learned detector. If ``score_mode/1`` is passed to ``predict/4``, it is ignored.',
-			'Score normalization' - 'The raw multivariate root-mean-square Z-score is mapped to the interval ``[0.0,1.0)`` using ``Score = Raw / (1 + Raw)``. With this normalization a raw score of ``3.0`` maps to ``0.75``.',
-			'Detector representation' - 'The learned detector is represented as a ``z_score_detector(TrainingDataset, Encoders, Diagnostics)`` term where ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, modified_z_score, isolation_forest, knn_distance, lof]
 	]).
 

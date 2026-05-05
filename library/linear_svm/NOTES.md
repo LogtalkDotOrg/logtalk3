@@ -23,7 +23,8 @@ ________________________________________________________________________
 
 Linear support vector machine classifier supporting both binary and
 multiclass classification. Multiclass classification is implemented
-using a one-vs-rest scheme with one linear margin model per class.
+using a one-vs-rest scheme with one linear margin model per class, and
+training uses batch subgradient descent to fit each hinge-loss model.
 
 The library implements the `classifier_protocol` defined in the
 `classification_protocols` library. It provides predicates for learning a
@@ -70,7 +71,8 @@ Features
 - **Binary and Multiclass Classification**: Learns one-vs-rest linear margin models and predicts the class with the highest score.
 - **Continuous Features**: Standardizes numeric attributes using z-score scaling derived from the training data.
 - **Categorical Features**: Expands discrete attributes using one-hot encoding based on the declared dataset attribute values and rejects unseen values with a domain error.
-- **Missing Values**: Encodes missing numeric and categorical values using explicit missing-value indicator features.
+- **Missing Values**: Encodes missing numeric and categorical values represented using anonymous variables using explicit missing-value indicator features.
+- **Unknown values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error.
 - **Classifier Export**: Learned classifiers can be exported as predicate clauses or written to a file.
 - **Pretty Printing**: Prints a compact summary of classes, encoders, and learned weight vector sizes.
 - **Reference Benchmarks**: Includes a dedicated performance suite covering the `weather`, `mixed`, `iris_small`, `missing_mixed`, and `breast_cancer` datasets with reported training time and training accuracy.

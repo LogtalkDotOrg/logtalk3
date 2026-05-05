@@ -25,16 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-01,
+		date is 2026-05-05,
 		comment is 'Statistical modified Z-score anomaly detector for continuous datasets. Learns per-attribute sample median and median absolute deviation from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
-		remarks is [
-			'Algorithm' - 'This is a statistical anomaly-detection method based on the modified Z-score defined by Iglewicz and Hoaglin (1993). For each known continuous attribute value ``x``, the detector computes ``0.6745 * (x - median) / mad`` where ``median`` is the learned sample median and ``mad`` is the learned median absolute deviation. The per-attribute modified Z-scores are then aggregated using the selected learn-time ``score_mode/1`` option.',
-			'Baseline training selection' - 'The learn-time ``baseline_class_values/1`` option declares which class labels are admissible for fitting the per-attribute baseline statistics. The default is ``[normal]``. The ``baseline_selection_policy/1`` option then controls how non-baseline examples are handled. The default ``reject`` policy throws an error when any non-baseline example is found, while ``filter`` removes them before fitting.',
-			'Feature handling' - 'Supports continuous attributes only. Missing values are ignored when fitting attribute statistics. During scoring, queries must contain at least one known value. The ``root_mean_square`` score mode normalizes the raw score by the number of known values so that scores remain comparable across different missing-value patterns.',
-			'Predict-time options' - 'The ``score_mode/1`` option is a learn-time option. ``predict/4`` always uses the score mode stored in the learned detector. If ``score_mode/1`` is passed to ``predict/4``, it is ignored.',
-			'Score normalization' - 'The raw multivariate modified Z-score is mapped to the interval ``[0.0,1.0)`` using ``Score = Raw / (1 + Raw)``. The default threshold ``0.7777777777777778`` corresponds to the classical raw cutoff ``3.5`` recommended by Iglewicz and Hoaglin (1993).',
-			'Detector representation' - 'The learned detector is represented as a ``modified_z_score_detector(TrainingDataset, Encoders, Diagnostics)`` term where ``Diagnostics`` stores the learned metadata, including the effective options.'
-		],
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, z_score, isolation_forest, knn_distance, lof]
 	]).
 

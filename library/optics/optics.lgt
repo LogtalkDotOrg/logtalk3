@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-05,
 		comment is 'OPTICS clusterer for continuous datasets. Learns an ordering from a dataset object implementing the ``clustering_dataset_protocol`` protocol and extracts clusters using an epsilon threshold so the result can be used with the standard clusterer protocol.',
-		remarks is [
-			'Algorithm' - 'Uses deterministic OPTICS ordering with epsilon-based cluster extraction for the fixed clusterer protocol.',
-			'Feature handling' - 'Supports continuous attributes only. Continuous attributes can be standardized using z-score scaling before clustering.',
-			'Distance metrics' - 'Supports Euclidean and Manhattan distances.',
-			'Prediction' - 'New instances are assigned to the cluster of the nearest reachable extracted core point within the extraction epsilon threshold; otherwise the atom ``noise`` is returned.',
-			'Clusterer representation' - 'The learned clusterer is represented by default as ``optics_clusterer(Encoders, Ordering, Clusters, Noise, Options)`` where ``Encoders`` stores the feature encoding metadata, ``Ordering`` stores the OPTICS ordering, ``Clusters`` stores the extracted clusters, ``Noise`` stores extracted noise points, and ``Options`` stores the effective training options.'
-		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, dbscan]
 	]).
 

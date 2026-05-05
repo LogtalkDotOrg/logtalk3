@@ -342,7 +342,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-28</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,19 +366,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Algorithm: Builds the direct pairwise victory graph from aggregated matchups, considers victories in descending direct-victory strength order, and locks each victory unless it would create a directed cycle in the accepted lock graph.</p></li>
-<li><p>Victory ordering: Victories are sorted by descending direct-victory strength. Equal-strength victories are processed deterministically using the selected <code class="docutils literal notranslate"><span class="pre">tie_breaking/1</span></code> option, either by standard term order or by dataset item declaration order.</p></li>
-<li><p>Victory-strength semantics: The <code class="docutils literal notranslate"><span class="pre">victory_strength/1</span></code> option selects whether direct victories are measured using winning votes or victory margins before the locking phase.</p></li>
-<li><p>Equal-strength tie breaking: The <code class="docutils literal notranslate"><span class="pre">tie_breaking/1</span></code> option selects how equal-strength victories are ordered before the locking phase. The default <code class="docutils literal notranslate"><span class="pre">term_order</span></code> mode preserves the current deterministic behavior, while <code class="docutils literal notranslate"><span class="pre">declaration_order</span></code> follows the ordered training items returned by the dataset helpers.</p></li>
-<li><p>Locked-pair access: The <code class="docutils literal notranslate"><span class="pre">locked_pairs/2</span></code> predicate returns the accepted lock graph in the exact order in which locks were accepted as <code class="docutils literal notranslate"><span class="pre">lock(Item1,Item2,Strength)</span></code> terms.</p></li>
-<li><p>Score semantics: The learned score for each item is the number of opponents reachable from that item in the final locked relation. Ranking ties are then broken deterministically using the standard term order of the item identifiers.</p></li>
-<li><p>Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that all ranked items remain part of a single comparison graph.</p></li>
-<li><p>Ranker representation: The learned ranker is represented by default as <code class="docutils literal notranslate"><span class="pre">ranked_pairs_ranker(Items,</span> <span class="pre">Scores,</span> <span class="pre">Diagnostics)</span></code> where <code class="docutils literal notranslate"><span class="pre">Scores</span></code> stores <code class="docutils literal notranslate"><span class="pre">Item-Score</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code> stores metadata such as the effective victory-strength mode, locked pairs, and dataset summary.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

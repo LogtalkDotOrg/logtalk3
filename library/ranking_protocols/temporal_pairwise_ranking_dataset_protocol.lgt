@@ -24,12 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
-		comment is 'Protocol for temporal pairwise ranking datasets with explicit rating periods and per-game outcomes.',
-		remarks is [
-			'Validity requirements' - 'Datasets are expected to declare each item and each period once, use only declared items and periods in games, use distinct game participants, and assign each game a score on the set {0.0, 0.5, 1.0}.',
-			'Game semantics' - 'A game ``game(Period, Item1, Item2, Score)`` records the observed result for ``Item1`` against ``Item2`` in the given rating period. The score for ``Item2`` is implicitly ``1.0 - Score``.'
-		]
+		date is 2026-05-05,
+		comment is 'Protocol for temporal pairwise ranking datasets with explicit rating periods and per-game outcomes.'
 	]).
 
 	:- public(item/1).

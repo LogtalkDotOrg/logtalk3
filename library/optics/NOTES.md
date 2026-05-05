@@ -19,9 +19,11 @@ ________________________________________________________________________
 
 
 `optics`
-==========
+========
 
-OPTICS clusterer.
+OPTICS clusterer. It uses deterministic OPTICS ordering with
+epsilon-based cluster extraction for the fixed clusterer protocol.
+Supports continuous attributes only.
 
 The library implements the `clusterer_protocol` defined in the
 `clustering_protocols` library. It provides predicates for learning a
@@ -32,6 +34,7 @@ file.
 Datasets are represented as objects implementing the
 `clustering_dataset_protocol` protocol from the `clustering_protocols`
 library.
+
 
 API documentation
 -----------------
@@ -65,7 +68,7 @@ Features
 - **OPTICS Ordering**: Learns a deterministic ordering using density-based reachability over continuous datasets.
 - **Adaptive Neighborhood Indexing**: Uses a low-dimensional epsilon-grid index when it is likely to be cheaper and otherwise falls back to a deterministic metric tree for neighborhood search during ordering construction. The search backend can also be selected explicitly.
 - **Continuous Datasets**: Accepts datasets containing only continuous attributes.
-- **Distance Metrics**: Supports `euclidean` and `manhattan` distances.
+- **Distance Metrics**: Supports Euclidean and Manhattan distances.
 - **Optional Feature Scaling**: Continuous attributes can be standardized using z-score scaling.
 - **Epsilon-Based Extraction**: Extracts clusters from the ordering using a configurable extraction epsilon threshold.
 - **Noise Detection**: New instances not reachable from an extracted core cluster within the extraction threshold are assigned to `noise`.

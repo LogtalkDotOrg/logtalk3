@@ -319,8 +319,10 @@
 <p>Kernel Principal Component Analysis reducer for continuous datasets. The
 library implements the <code class="docutils literal notranslate"><span class="pre">dimension_reducer_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code> library and learns a nonlinear
-projection using a portable power-iteration eigensolver over centered
-kernel Gram matrices.</p>
+projection by centering the training data, optionally standardizing
+continuous attributes, building a centered kernel Gram matrix, and
+extracting deterministic principal directions in sample space using
+portable power iteration with deflation.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -345,15 +347,15 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
-attributes.</p></li>
+attributes. Missing or nonnumeric values are rejected.</p></li>
 <li><p><strong>Centering and Optional Scaling</strong>: Centers all attributes and
 optionally standardizes them before evaluating kernels.</p></li>
 <li><p><strong>Configurable Shortfall Handling</strong>: Lets callers choose whether a
 component-extraction shortfall raises an error or truncates the
 learned reducer with explicit diagnostics.</p></li>
-<li><p><strong>Supported Kernels</strong>: Supports <code class="docutils literal notranslate"><span class="pre">linear</span></code>,
-<code class="docutils literal notranslate"><span class="pre">polynomial(Degree,</span> <span class="pre">Gamma,</span> <span class="pre">Coef0)</span></code> with <code class="docutils literal notranslate"><span class="pre">Coef0</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">rbf(Gamma)</span></code> kernels.</p></li>
+<li><p><strong>Supported Kernels</strong>: Supports linear, polynomial with non-negative
+offset, and radial basis function kernels through the <code class="docutils literal notranslate"><span class="pre">kernel/1</span></code>
+option.</p></li>
 <li><p><strong>Shared Gram-Centering Helpers</strong>: Delegates training Gram-matrix
 centering and out-of-sample Gram-vector centering to the shared
 <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library.</p></li>

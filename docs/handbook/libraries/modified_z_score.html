@@ -310,7 +310,14 @@
              
   <section id="modified-z-score">
 <span id="library-modified-z-score"></span><h1><code class="docutils literal notranslate"><span class="pre">modified_z_score</span></code><a class="headerlink" href="#modified-z-score" title="Link to this heading"></a></h1>
-<p>Statistical modified Z-score anomaly detector for continuous datasets.</p>
+<p>Statistical modified Z-score anomaly detector for continuous datasets.
+It is a statistical anomaly-detection method based on the modified
+Z-score defined by Iglewicz and Hoaglin (1993): for each known
+continuous attribute value <code class="docutils literal notranslate"><span class="pre">x</span></code>, the detector computes
+<code class="docutils literal notranslate"><span class="pre">0.6745</span> <span class="pre">*</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">median)</span> <span class="pre">/</span> <span class="pre">mad</span></code>, where <code class="docutils literal notranslate"><span class="pre">median</span></code> is the learned sample
+median and <code class="docutils literal notranslate"><span class="pre">mad</span></code> is the learned median absolute deviation, and then
+aggregates the per-attribute modified Z-scores using the selected
+learn-time <code class="docutils literal notranslate"><span class="pre">score_mode/1</span></code> option.</p>
 <p>The library implements the <code class="docutils literal notranslate"><span class="pre">anomaly_detector_protocol</span></code> defined in the
 <code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code> library. It learns a detector from a
 continuous dataset, computes anomaly scores for new instances, predicts

@@ -5,7 +5,8 @@
 
 Linear support vector machine classifier supporting both binary and
 multiclass classification. Multiclass classification is implemented
-using a one-vs-rest scheme with one linear margin model per class.
+using a one-vs-rest scheme with one linear margin model per class, and
+training uses batch subgradient descent to fit each hinge-loss model.
 
 The library implements the ``classifier_protocol`` defined in the
 ``classification_protocols`` library. It provides predicates for
@@ -62,7 +63,10 @@ Features
   encoding based on the declared dataset attribute values and rejects
   unseen values with a domain error.
 - **Missing Values**: Encodes missing numeric and categorical values
-  using explicit missing-value indicator features.
+  represented using anonymous variables using explicit missing-value
+  indicator features.
+- **Unknown values**: Prediction requests containing categorical values
+  that are not declared by the dataset raise a domain error.
 - **Classifier Export**: Learned classifiers can be exported as
   predicate clauses or written to a file.
 - **Pretty Printing**: Prints a compact summary of classes, encoders,

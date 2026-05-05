@@ -15,7 +15,7 @@ Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued la
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-27
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,11 +30,7 @@ Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued la
 |    :ref:`numberlist <numberlist/0>`
 
 | **Remarks:**
-
-   - Algorithm: Aggregates pairwise outcomes into matchup probabilities, applies a fixed continuity correction to avoid infinite probit values, transforms them with the inverse standard normal CDF, and fits Case V latent utilities using a deterministic weighted least-squares linear solve.
-   - Score semantics: Learned scores are centered latent utilities on an arbitrary additive scale. Only utility differences matter for interpreting implied paired-comparison probabilities and ranking order.
-   - Dataset requirements: The current implementation requires a well-formed connected pairwise dataset so that all learned utilities remain comparable across the ranked items.
-   - Ranker representation: The learned ranker is represented by default as ``thurstone_mosteller_ranker(Items, Scores, Diagnostics)`` where ``Scores`` stores ``Item-Score`` pairs and ``Diagnostics`` stores metadata such as the fitting method, continuity correction, and dataset summary.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`ranker_protocol/0::check_ranker/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_measurements/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_summary/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_games/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_games/3`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_periods/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_summary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranker_protocol/0::valid_ranker/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_measurement_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_measurement_dataset/2`  :ref:`ranking_dataset_common/0::validate_temporal_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_temporal_pairwise_dataset/2`  

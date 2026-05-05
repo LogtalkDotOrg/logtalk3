@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Kernel Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver over centered kernel Gram matrices.',
-		remarks is [
-			'Algorithm' - 'Centers the training data, optionally standardizes continuous attributes, builds a centered kernel Gram matrix, and extracts deterministic principal directions in sample space using portable power iteration with deflation.',
-			'Feature handling' - 'Supports continuous attributes only. Missing or nonnumeric values are rejected.',
-			'Shortfall handling' - 'Supports a `shortfall_policy/1` option for choosing whether a component-extraction shortfall raises an error or returns a truncated reducer with explicit diagnostics.',
-			'Kernels' - 'Supports linear, polynomial with non-negative offset, and radial basis function kernels through the `kernel/1` option.',
-			'Dimension reducer representation' - 'The learned reducer is represented by default as ``kernel_pca_reducer(Encoders, TrainingRows, RowMeans, TotalMean, Components, ExplainedVariances, Diagnostics)`` where ``Encoders`` stores attribute centering/scaling metadata, ``TrainingRows`` stores the encoded training rows, ``RowMeans`` and ``TotalMean`` store the kernel-centering statistics, ``Components`` stores the normalized dual projection vectors, and ``Diagnostics`` records the learned model metadata, effective options, and any truncate-mode shortfall details.'
-		],
 		see_also is [pca, random_projection]
 	]).
 
