@@ -240,7 +240,8 @@
 			BiasGradient1 = BiasGradient0,
 			WeightGradients1 = WeightGradients0
 		;   BiasGradient1 is BiasGradient0 - Sign,
-			add_scaled_vector(Features, -Sign, WeightGradients0, WeightGradients1)
+			NegativeSign is -Sign,
+			add_scaled_vector(Features, NegativeSign, WeightGradients0, WeightGradients1)
 		),
 		accumulate_binary_gradients(Rows, PositiveClass, Bias, Weights, BiasGradient1, BiasGradient, WeightGradients1, WeightGradients).
 

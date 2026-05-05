@@ -498,7 +498,7 @@
 	factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, Attempt, Kernel, JitterAttempts, CholeskyFactor) :-
 		update_kernel_jitter(Kernel0, JitterScaleFactor, Attempt, CandidateKernel),
 		build_covariance_matrix(TrainingFeatures, CandidateKernel, CovarianceMatrix),
-		(   catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(non_positive_definite_matrix(_Value), _Context), fail) ->
+		(   catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(domain_error(positive_definite_matrix, CovarianceMatrix), _Context), fail) ->
 			Kernel = CandidateKernel,
 			JitterAttempts = Attempt
 		;   NextAttempt is Attempt + 1,

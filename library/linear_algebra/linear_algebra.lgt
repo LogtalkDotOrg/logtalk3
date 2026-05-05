@@ -25,12 +25,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-05,
 		comment is 'Linear algebra predicates for numeric vectors and matrices implemented without dependencies on machine learning libraries.'
 	]).
 
 	:- uses(list, [
 		append/3, length/2, nth1/3, reverse/2
+	]).
+
+	:- uses(type, [
+		check/3
 	]).
 
 	:- uses(numberlist, [
@@ -39,12 +43,18 @@
 		manhattan_norm/2 as numberlist_manhattan_norm/2
 	]).
 
-	new_vector(0, _Value, []) :-
+	new_vector(Count, Value, Vector) :-
+		context(Context),
+		check(non_negative_integer, Count, Context),
+		check(number, Value, Context),
+		new_vector_checked(Count, Value, Vector).
+
+	new_vector_checked(0, _Value, []) :-
 		!.
-	new_vector(Count, Value, [Value| Values]) :-
+	new_vector_checked(Count, Value, [Value| Values]) :-
 		Count > 0,
 		RemainingCount is Count - 1,
-		new_vector(RemainingCount, Value, Values).
+		new_vector_checked(RemainingCount, Value, Values).
 
 	new_vector_like(Reference, Zeroes) :-
 		length(Reference, Count),
@@ -60,12 +70,19 @@
 		Value is Value1 - Value2,
 		subtract_vectors(Values1, Values2, Values).
 
-	add_scaled_vector([], _Scale, [], []).
-	add_scaled_vector([Value| Values], Scale, [Value0| Values0], [UpdatedValue| UpdatedValues]) :-
+	add_scaled_vector(Vector, Scale, Vector0, UpdatedVector) :-
+		context(Context),
+		check(number, Scale, Context),
+		add_scaled_vector_checked(Vector, Scale, Vector0, UpdatedVector).
+
+	add_scaled_vector_checked([], _Scale, [], []).
+	add_scaled_vector_checked([Value| Values], Scale, [Value0| Values0], [UpdatedValue| UpdatedValues]) :-
 		UpdatedValue is Value0 + Scale * Value,
-		add_scaled_vector(Values, Scale, Values0, UpdatedValues).
+		add_scaled_vector_checked(Values, Scale, Values0, UpdatedValues).
 
 	scale_vector(Vector, Scale, ScaledVector) :-
+		context(Context),
+		check(number, Scale, Context),
 		rescale(Vector, Scale, ScaledVector).
 
 	dot_product(Vector1, Vector2, Product) :-
@@ -75,14 +92,16 @@
 		numberlist_euclidean_norm(Vector, Norm).
 
 	vector_norm(Vector, Order, Norm) :-
-		(   number(Order) ->
-			vector_norm_for_order(Vector, Order, Norm)
-		;   Order == inf ->
-			numberlist_chebyshev_norm(Vector, Norm)
-		;   Order == infinity ->
-			numberlist_chebyshev_norm(Vector, Norm)
-		;   domain_error(positive_number_or_infinity, Order)
-		).
+		(   Order == inf
+		;   Order == infinity
+		),
+		!,
+		numberlist_chebyshev_norm(Vector, Norm).
+
+	vector_norm(Vector, Order, Norm) :-
+		context(Context),
+		check(number, Order, Context),
+		vector_norm_for_order(Vector, Order, Norm).
 
 	vector_norm_for_order(Vector, Order, Norm) :-
 		(   Order =:= 1 ->
@@ -105,37 +124,49 @@
 		vector_p_norm(Values, Order, Sum1, Norm).
 
 	basis_vector(Size, Index, Vector) :-
-		basis_vector(1, Size, Index, Vector).
+		context(Context),
+		check(positive_integer, Size, Context),
+		check(positive_integer, Index, Context),
+		basis_vector_checked(1, Size, Index, Vector).
 
-	basis_vector(Current, Size, _Index, []) :-
+	basis_vector_checked(Current, Size, _Index, []) :-
 		Current > Size,
 		!.
-	basis_vector(Index, Size, Index, [1.0| Vector]) :-
+	basis_vector_checked(Index, Size, Index, [1.0| Vector]) :-
 		!,
 		Next is Index + 1,
-		basis_vector(Next, Size, Index, Vector).
-	basis_vector(Current, Size, Index, [0.0| Vector]) :-
+		basis_vector_checked(Next, Size, Index, Vector).
+	basis_vector_checked(Current, Size, Index, [0.0| Vector]) :-
 		Next is Current + 1,
-		basis_vector(Next, Size, Index, Vector).
+		basis_vector_checked(Next, Size, Index, Vector).
 
-	new_matrix(0, _Columns, _Value, []) :-
+	new_matrix(Rows, Columns, Value, Matrix) :-
+		context(Context),
+		check(non_negative_integer, Rows, Context),
+		check(non_negative_integer, Columns, Context),
+		check(number, Value, Context),
+		new_matrix_checked(Rows, Columns, Value, Matrix).
+
+	new_matrix_checked(0, _Columns, _Value, []) :-
 		!.
-	new_matrix(Rows, Columns, Value, [Row| Matrix]) :-
+	new_matrix_checked(Rows, Columns, Value, [Row| Matrix]) :-
 		Rows > 0,
-		new_vector(Columns, Value, Row),
+		new_vector_checked(Columns, Value, Row),
 		NextRows is Rows - 1,
-		new_matrix(NextRows, Columns, Value, Matrix).
+		new_matrix_checked(NextRows, Columns, Value, Matrix).
 
 	identity_matrix(Size, Matrix) :-
-		identity_matrix(1, Size, Matrix).
+		context(Context),
+		check(non_negative_integer, Size, Context),
+		identity_matrix_checked(1, Size, Matrix).
 
-	identity_matrix(Index, Size, []) :-
+	identity_matrix_checked(Index, Size, []) :-
 		Index > Size,
 		!.
-	identity_matrix(Index, Size, [Row| Matrix]) :-
-		basis_vector(Size, Index, Row),
+	identity_matrix_checked(Index, Size, [Row| Matrix]) :-
+		basis_vector_checked(1, Size, Index, Row),
 		NextIndex is Index + 1,
-		identity_matrix(NextIndex, Size, Matrix).
+		identity_matrix_checked(NextIndex, Size, Matrix).
 
 	matrix_vector_product([], _Vector, []).
 	matrix_vector_product([Row| Rows], Vector, [Value| Values]) :-
@@ -237,25 +268,38 @@
 		extract_first_column(Rows, Column, RemainingRows).
 
 	vector_value(Vector, Index, Value) :-
+		context(Context),
+		check(positive_integer, Index, Context),
 		nth1(Index, Vector, Value).
 
 	matrix_row(Matrix, RowIndex, Row) :-
+		context(Context),
+		check(positive_integer, RowIndex, Context),
 		nth1(RowIndex, Matrix, Row).
 
-	matrix_column([], _ColumnIndex, []).
-	matrix_column([Row| Rows], ColumnIndex, [Value| Values]) :-
-		vector_value(Row, ColumnIndex, Value),
-		matrix_column(Rows, ColumnIndex, Values).
+	matrix_column(Matrix, ColumnIndex, Column) :-
+		context(Context),
+		check(positive_integer, ColumnIndex, Context),
+		matrix_column_checked(Matrix, ColumnIndex, Column).
+
+	matrix_column_checked([], _ColumnIndex, []).
+	matrix_column_checked([Row| Rows], ColumnIndex, [Value| Values]) :-
+		nth1(ColumnIndex, Row, Value),
+		matrix_column_checked(Rows, ColumnIndex, Values).
 
 	matrix_value(Matrix, RowIndex, ColumnIndex, Value) :-
-		matrix_row(Matrix, RowIndex, Row),
-		vector_value(Row, ColumnIndex, Value).
+		context(Context),
+		check(positive_integer, RowIndex, Context),
+		check(positive_integer, ColumnIndex, Context),
+		nth1(RowIndex, Matrix, Row),
+		nth1(ColumnIndex, Row, Value).
 
 	matrix_diagonal(Matrix, Diagonal) :-
 		matrix_diagonal(Matrix, 0, Diagonal).
 
 	matrix_diagonal(Matrix, Offset, Diagonal) :-
-		validate_integer(Offset),
+		context(Context),
+		check(integer, Offset, Context),
 		require_rectangular_matrix(Matrix, RowCount, ColumnCount),
 		diagonal_start_indices(Offset, RowIndex, ColumnIndex),
 		matrix_diagonal_from(RowCount, ColumnCount, Matrix, RowIndex, ColumnIndex, Diagonal).
@@ -276,14 +320,16 @@
 		diagonal_matrix(Diagonal, 0, Matrix).
 
 	diagonal_matrix(Diagonal, Offset, Matrix) :-
-		validate_integer(Offset),
+		context(Context),
+		check(integer, Offset, Context),
 		length(Diagonal, DiagonalLength),
 		minimum_diagonal_matrix_size(DiagonalLength, Offset, Size),
 		diagonal_matrix(Diagonal, Offset, Size, Matrix).
 
 	diagonal_matrix(Diagonal, Offset, Size, Matrix) :-
-		validate_integer(Offset),
-		validate_non_negative_integer(Size),
+		context(Context),
+		check(integer, Offset, Context),
+		check(non_negative_integer, Size, Context),
 		length(Diagonal, DiagonalLength),
 		minimum_diagonal_matrix_size(DiagonalLength, Offset, MinimumSize),
 		(   Size >= MinimumSize ->
@@ -326,13 +372,15 @@
 		numberlist_sum(Diagonal, Trace).
 
 	shift_matrix_diagonal(Matrix, Shift, ShiftedMatrix) :-
-		shift_matrix_diagonal(Matrix, Shift, 1, ShiftedMatrix).
+		context(Context),
+		check(number, Shift, Context),
+		shift_matrix_diagonal_checked(Matrix, Shift, 1, ShiftedMatrix).
 
-	shift_matrix_diagonal([], _Shift, _Index, []).
-	shift_matrix_diagonal([Row| Rows], Shift, Index, [ShiftedRow| ShiftedRows]) :-
+	shift_matrix_diagonal_checked([], _Shift, _Index, []).
+	shift_matrix_diagonal_checked([Row| Rows], Shift, Index, [ShiftedRow| ShiftedRows]) :-
 		shift_row_diagonal(Row, Shift, 1, Index, ShiftedRow),
 		NextIndex is Index + 1,
-		shift_matrix_diagonal(Rows, Shift, NextIndex, ShiftedRows).
+		shift_matrix_diagonal_checked(Rows, Shift, NextIndex, ShiftedRows).
 
 	shift_row_diagonal([], _Shift, _ColumnIndex, _DiagonalIndex, []).
 	shift_row_diagonal([Value| Values], Shift, DiagonalIndex, DiagonalIndex, [ShiftedValue| ShiftedValues]) :-
@@ -348,7 +396,8 @@
 		upper_triangular_part(Matrix, 0, UpperTriangular).
 
 	upper_triangular_part(Matrix, Offset, UpperTriangular) :-
-		validate_integer(Offset),
+		context(Context),
+		check(integer, Offset, Context),
 		require_rectangular_matrix(Matrix, _RowCount, _ColumnCount),
 		extract_upper_triangular_rows(Matrix, Offset, 1, UpperTriangular).
 
@@ -371,7 +420,8 @@
 		lower_triangular_part(Matrix, 0, LowerTriangular).
 
 	lower_triangular_part(Matrix, Offset, LowerTriangular) :-
-		validate_integer(Offset),
+		context(Context),
+		check(integer, Offset, Context),
 		require_rectangular_matrix(Matrix, _RowCount, _ColumnCount),
 		extract_lower_triangular_rows(Matrix, Offset, 1, LowerTriangular).
 
@@ -458,7 +508,8 @@
 		matrix_rank(Matrix, Tolerance, Rank).
 
 	matrix_rank(Matrix, Tolerance, Rank) :-
-		validate_non_negative_tolerance(Tolerance),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
 		require_rectangular_matrix(Matrix, _RowCount, _ColumnCount),
 		transpose_matrix(Matrix, Columns),
 		initialize_qr_candidates(Columns, 1, Candidates),
@@ -474,8 +525,9 @@
 		symmetric_eigen(Matrix, Tolerance, MaximumIterations, Eigenvectors, Eigenvalues).
 
 	symmetric_eigen(Matrix, Tolerance, MaximumIterations, Eigenvectors, Eigenvalues) :-
-		validate_non_negative_tolerance(Tolerance),
-		validate_positive_integer(MaximumIterations),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
+		check(positive_integer, MaximumIterations, Context),
 		require_square_matrix(Matrix, Size),
 		require_symmetric_matrix(Matrix, Tolerance),
 		(   Size =:= 0 ->
@@ -491,7 +543,8 @@
 		pseudo_inverse(Matrix, Tolerance, PseudoInverse).
 
 	pseudo_inverse(Matrix, Tolerance, PseudoInverse) :-
-		validate_non_negative_tolerance(Tolerance),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
 		require_rectangular_matrix(Matrix, _RowCount, _ColumnCount),
 		transpose_matrix(Matrix, Transpose),
 		matrix_matrix_product(Transpose, Matrix, GramMatrix),
@@ -504,7 +557,8 @@
 		null_space(Matrix, Tolerance, Basis).
 
 	null_space(Matrix, Tolerance, Basis) :-
-		validate_non_negative_tolerance(Tolerance),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
 		require_rectangular_matrix(Matrix, _RowCount, _ColumnCount),
 		transpose_matrix(Matrix, Transpose),
 		matrix_matrix_product(Transpose, Matrix, GramMatrix),
@@ -515,7 +569,8 @@
 		!.
 	extract_symmetric_eigenpairs(Matrix, Remaining, InitialVectors, Tolerance, MaximumIterations, Eigenvectors0, Eigenvalues0, Eigenvectors, Eigenvalues) :-
 		principal_symmetric_component(Matrix, Eigenvectors0, InitialVectors, Tolerance, MaximumIterations, Eigenvalue, Eigenvector),
-		add_scaled_outer_product(Eigenvector, -Eigenvalue, Matrix, DeflatedMatrix),
+		NegativeEigenvalue is -Eigenvalue,
+		add_scaled_outer_product(Eigenvector, NegativeEigenvalue, Matrix, DeflatedMatrix),
 		NextRemaining is Remaining - 1,
 		extract_symmetric_eigenpairs(DeflatedMatrix, NextRemaining, InitialVectors, Tolerance, MaximumIterations, [Eigenvector| Eigenvectors0], [Eigenvalue| Eigenvalues0], Eigenvectors, Eigenvalues).
 
@@ -587,7 +642,8 @@
 	orthogonalize_against_basis([], Vector, Vector).
 	orthogonalize_against_basis([Basis| Bases], Vector0, Vector) :-
 		dot_product(Basis, Vector0, Coefficient),
-		add_scaled_vector(Basis, -Coefficient, Vector0, Vector1),
+		NegativeCoefficient is -Coefficient,
+		add_scaled_vector(Basis, NegativeCoefficient, Vector0, Vector1),
 		orthogonalize_against_basis(Bases, Vector1, Vector).
 
 	collect_null_space_basis([], [], _Tolerance, []).
@@ -683,38 +739,13 @@
 
 	default_spectral_maximum_iterations(1000).
 
-	validate_positive_integer(MaximumIterations) :-
-		(   integer(MaximumIterations),
-			MaximumIterations > 0 ->
-			true
-		;   domain_error(positive_integer, MaximumIterations)
-		).
-
-	validate_integer(Integer) :-
-		(   integer(Integer) ->
-			true
-		;   domain_error(integer, Integer)
-		).
-
-	validate_non_negative_integer(Integer) :-
-		(   integer(Integer),
-			Integer >= 0 ->
-			true
-		;   domain_error(non_negative_integer, Integer)
-		).
-
-	validate_non_negative_tolerance(Tolerance) :-
-		(   Tolerance >= 0.0 ->
-			true
-		;   domain_error(non_negative_number, Tolerance)
-		).
-
 	normalize_vector(Vector, NormalizedVector) :-
 		default_numerical_tolerance(Tolerance),
 		normalize_vector(Vector, Tolerance, NormalizedVector).
 
 	normalize_vector(Vector, Tolerance, NormalizedVector) :-
-		validate_non_negative_tolerance(Tolerance),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
 		euclidean_norm(Vector, Norm),
 		(   Norm =< Tolerance ->
 			NormalizedVector = Vector
@@ -730,7 +761,8 @@
 		stabilize_vector_sign(Vector, Tolerance, StableVector).
 
 	stabilize_vector_sign(Vector, Tolerance, StableVector) :-
-		validate_non_negative_tolerance(Tolerance),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
 		(   first_significant_component(Vector, Tolerance, First),
 			First < 0.0 ->
 			rescale(Vector, -1.0, StableVector)
@@ -742,7 +774,8 @@
 		first_significant_component(Vector, Tolerance, First).
 
 	first_significant_component(Vector, Tolerance, First) :-
-		validate_non_negative_tolerance(Tolerance),
+		context(Context),
+		check(non_negative_number, Tolerance, Context),
 		first_significant_component_at_tolerance(Vector, Tolerance, First).
 
 	first_significant_component_at_tolerance([Value| _Values], Tolerance, Value) :-
@@ -753,13 +786,15 @@
 	first_significant_component_at_tolerance([], _Tolerance, 0.0).
 
 	add_scaled_outer_product(Vector, Scale, Matrix0, Matrix) :-
-		add_scaled_outer_product(Vector, Vector, Scale, Matrix0, Matrix).
+		context(Context),
+		check(number, Scale, Context),
+		add_scaled_outer_product_checked(Vector, Vector, Scale, Matrix0, Matrix).
 
-	add_scaled_outer_product([], _Vector, _Scale, [], []).
-	add_scaled_outer_product([Value| Values], Vector, Scale, [Row0| Rows0], [Row| Rows]) :-
+	add_scaled_outer_product_checked([], _Vector, _Scale, [], []).
+	add_scaled_outer_product_checked([Value| Values], Vector, Scale, [Row0| Rows0], [Row| Rows]) :-
 		ScaledValue is Scale * Value,
-		add_scaled_vector(Vector, ScaledValue, Row0, Row),
-		add_scaled_outer_product(Values, Vector, Scale, Rows0, Rows).
+		add_scaled_vector_checked(Vector, ScaledValue, Row0, Row),
+		add_scaled_outer_product_checked(Values, Vector, Scale, Rows0, Rows).
 
 	covariance_matrix([FirstRow| Rows], CovarianceMatrix) :-
 		length([FirstRow| Rows], Count),
@@ -789,36 +824,36 @@
 		!.
 	cholesky_decomposition(Index, Size, Matrix, PreviousRows, CholeskyFactor) :-
 		nth1(Index, Matrix, MatrixRow),
-		cholesky_row(1, Index, Size, MatrixRow, PreviousRows, [], CholeskyRow),
+		cholesky_row(1, Index, Size, Matrix, MatrixRow, PreviousRows, [], CholeskyRow),
 		append(PreviousRows, [CholeskyRow], NextRows),
 		NextIndex is Index + 1,
 		cholesky_decomposition(NextIndex, Size, Matrix, NextRows, CholeskyFactor).
 
-	cholesky_row(ColumnIndex, RowIndex, Size, _MatrixRow, _PreviousRows, Prefix, CholeskyRow) :-
+	cholesky_row(ColumnIndex, RowIndex, Size, _Matrix, _MatrixRow, _PreviousRows, Prefix, CholeskyRow) :-
 		ColumnIndex > RowIndex,
 		!,
 		Remaining is Size - RowIndex,
 		new_vector(Remaining, 0.0, Zeroes),
 		append(Prefix, Zeroes, CholeskyRow).
-	cholesky_row(ColumnIndex, RowIndex, Size, MatrixRow, PreviousRows, Prefix, CholeskyRow) :-
+	cholesky_row(ColumnIndex, RowIndex, Size, Matrix, MatrixRow, PreviousRows, Prefix, CholeskyRow) :-
 		nth1(ColumnIndex, MatrixRow, MatrixValue),
 		(   ColumnIndex =:= RowIndex ->
 			sum_squares(Prefix, Correction),
 			DiagonalValue0 is MatrixValue - Correction,
 			(   DiagonalValue0 > 1.0e-12 ->
 				DiagonalValue is sqrt(DiagonalValue0)
-			;   throw(error(non_positive_definite_matrix(DiagonalValue0), logtalk(cholesky_decomposition(MatrixRow), this)))
+			;   domain_error(positive_definite_matrix, Matrix)
 			),
 			append(Prefix, [DiagonalValue], NextPrefix),
 			NextColumnIndex is ColumnIndex + 1,
-			cholesky_row(NextColumnIndex, RowIndex, Size, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
+			cholesky_row(NextColumnIndex, RowIndex, Size, Matrix, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
 		;   nth1(ColumnIndex, PreviousRows, PreviousRow),
 			prefix_dot(Prefix, PreviousRow, 0.0, Correction),
 			nth1(ColumnIndex, PreviousRow, Diagonal),
 			Entry is (MatrixValue - Correction) / Diagonal,
 			append(Prefix, [Entry], NextPrefix),
 			NextColumnIndex is ColumnIndex + 1,
-			cholesky_row(NextColumnIndex, RowIndex, Size, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
+			cholesky_row(NextColumnIndex, RowIndex, Size, Matrix, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
 		).
 
 	solve_cholesky(CholeskyFactor, Values, Solution) :-
@@ -1107,7 +1142,8 @@
 	orthogonalize_qr_candidates([], _Basis, []).
 	orthogonalize_qr_candidates([candidate(Index, Residual0, Coefficients0)| Candidates0], Basis, [candidate(Index, Residual, Coefficients)| Candidates]) :-
 		dot_product(Basis, Residual0, Coefficient),
-		add_scaled_vector(Basis, -Coefficient, Residual0, Residual),
+		NegativeCoefficient is -Coefficient,
+		add_scaled_vector(Basis, NegativeCoefficient, Residual0, Residual),
 		append(Coefficients0, [Coefficient], Coefficients),
 		orthogonalize_qr_candidates(Candidates0, Basis, Candidates).
 
@@ -1255,8 +1291,9 @@
 		vector_value(MatrixRow, Index, LeadingValue),
 		vector_value(PivotMatrixRow, Index, PivotValue),
 		Factor is LeadingValue / PivotValue,
-		add_scaled_vector(PivotMatrixRow, -Factor, MatrixRow, UpdatedMatrixRow),
-		add_scaled_vector(PivotRightHandSideRow, -Factor, RightHandSideRow, UpdatedRightHandSideRow),
+		NegativeFactor is -Factor,
+		add_scaled_vector(PivotMatrixRow, NegativeFactor, MatrixRow, UpdatedMatrixRow),
+		add_scaled_vector(PivotRightHandSideRow, NegativeFactor, RightHandSideRow, UpdatedRightHandSideRow),
 		eliminate_system_rows(Rows, Index, row(PivotMatrixRow, PivotRightHandSideRow), UpdatedRows).
 
 	diagonal_product(Matrix, Product) :-

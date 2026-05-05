@@ -15,7 +15,7 @@ Linear algebra protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-04
+| **Date:** 2026-05-05
 
 | **Compilation flags:**
 |    ``static``
@@ -53,6 +53,18 @@ Constructs a numeric vector with the requested length, filled with the given val
 |    ``new_vector(Count,Value,Vector)``
 | **Mode and number of proofs:**
 |    ``new_vector(+integer,+number,-list(number))`` - ``one``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Value`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Value`` is neither a variable nor a number:
+|        ``type_error(number,Value)``
+|    ``Count`` is an integer that is less than zero:
+|        ``domain_error(non_negative_integer,Count)``
 
 
 ------------
@@ -130,6 +142,12 @@ Adds a scaled numeric vector to another numeric vector.
 | **Mode and number of proofs:**
 |    ``add_scaled_vector(+list(number),+number,+list(number),-list(number))`` - ``one``
 
+| **Exceptions:**
+|    ``Scale`` is a variable:
+|        ``instantiation_error``
+|    ``Scale`` is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+
 
 ------------
 
@@ -148,6 +166,12 @@ Scales a numeric vector by the given factor.
 |    ``scale_vector(Vector,Scale,ScaledVector)``
 | **Mode and number of proofs:**
 |    ``scale_vector(+list(number),+number,-list(number))`` - ``one``
+
+| **Exceptions:**
+|    ``Scale`` is a variable:
+|        ``instantiation_error``
+|    ``Scale`` is neither a variable nor a number:
+|        ``type_error(number,Scale)``
 
 
 ------------
@@ -206,6 +230,14 @@ Computes the norm of a numeric vector for a positive numeric order or the atoms 
 | **Mode and number of proofs:**
 |    ``vector_norm(+list(number),@term,-number)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Order`` is a variable:
+|        ``instantiation_error``
+|    ``Order`` is neither a variable, a number, nor one of the atoms ``inf`` and ``infinity``:
+|        ``type_error(number,Order)``
+|    ``Order`` is a number but not a valid positive_number_or_infinity:
+|        ``domain_error(positive_number_or_infinity,Order)``
+
 
 ------------
 
@@ -224,6 +256,20 @@ Constructs a numeric basis vector with value 1.0 at the given one-based index an
 |    ``basis_vector(Size,Index,Vector)``
 | **Mode and number of proofs:**
 |    ``basis_vector(+integer,+integer,-list(number))`` - ``one``
+
+| **Exceptions:**
+|    ``Size`` is a variable:
+|        ``instantiation_error``
+|    ``Index`` is a variable:
+|        ``instantiation_error``
+|    ``Size`` is neither a variable nor an integer:
+|        ``type_error(integer,Size)``
+|    ``Index`` is neither a variable nor an integer:
+|        ``type_error(integer,Index)``
+|    ``Size`` is an integer that is less than one:
+|        ``domain_error(positive_integer,Size)``
+|    ``Index`` is an integer that is less than one:
+|        ``domain_error(positive_integer,Index)``
 
 
 ------------
@@ -244,6 +290,24 @@ Constructs a numeric matrix with the requested row and column counts, filled wit
 | **Mode and number of proofs:**
 |    ``new_matrix(+integer,+integer,+number,-list(list(number)))`` - ``one``
 
+| **Exceptions:**
+|    ``Rows`` is a variable:
+|        ``instantiation_error``
+|    ``Columns`` is a variable:
+|        ``instantiation_error``
+|    ``Value`` is a variable:
+|        ``instantiation_error``
+|    ``Rows`` is neither a variable nor an integer:
+|        ``type_error(integer,Rows)``
+|    ``Columns`` is neither a variable nor an integer:
+|        ``type_error(integer,Columns)``
+|    ``Value`` is neither a variable nor a number:
+|        ``type_error(number,Value)``
+|    ``Rows`` is an integer that is less than zero:
+|        ``domain_error(non_negative_integer,Rows)``
+|    ``Columns`` is an integer that is less than zero:
+|        ``domain_error(non_negative_integer,Columns)``
+
 
 ------------
 
@@ -262,6 +326,14 @@ Constructs a square identity matrix with the requested size.
 |    ``identity_matrix(Size,Matrix)``
 | **Mode and number of proofs:**
 |    ``identity_matrix(+integer,-list(list(number)))`` - ``one``
+
+| **Exceptions:**
+|    ``Size`` is a variable:
+|        ``instantiation_error``
+|    ``Size`` is neither a variable nor an integer:
+|        ``type_error(integer,Size)``
+|    ``Size`` is an integer that is less than zero:
+|        ``domain_error(non_negative_integer,Size)``
 
 
 ------------
@@ -339,6 +411,10 @@ Computes the arithmetic mean of each row in a numeric matrix.
 | **Mode and number of proofs:**
 |    ``matrix_row_means(+list(list(number)),-list(number))`` - ``one``
 
+| **Exceptions:**
+|    ``Matrix`` contains an empty row ``Row``:
+|        ``domain_error(minimum_number_of_values(1),Row)``
+
 
 ------------
 
@@ -377,6 +453,12 @@ Double-centers a numeric Gram matrix and also returns its row means and total me
 | **Mode and number of proofs:**
 |    ``center_gram_matrix(+list(list(number)),-list(list(number)),-list(number),-number)`` - ``one``
 
+| **Exceptions:**
+|    ``GramMatrix`` is empty:
+|        ``domain_error(minimum_number_of_values(1),GramMatrix)``
+|    ``GramMatrix`` contains an empty row ``Row``:
+|        ``domain_error(minimum_number_of_values(1),Row)``
+
 
 ------------
 
@@ -395,6 +477,10 @@ Centers a numeric Gram vector using training row means and total mean.
 |    ``center_gram_vector(GramVector,RowMeans,TotalMean,CenteredGramVector)``
 | **Mode and number of proofs:**
 |    ``center_gram_vector(+list(number),+list(number),+number,-list(number))`` - ``one``
+
+| **Exceptions:**
+|    ``GramVector`` is empty:
+|        ``domain_error(minimum_number_of_values(1),GramVector)``
 
 
 ------------
@@ -491,6 +577,10 @@ Computes the Frobenius norm of a numeric matrix.
 | **Mode and number of proofs:**
 |    ``frobenius_norm(+list(list(number)),-float)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -529,6 +619,14 @@ Looks up a numeric vector element using a one-based index.
 | **Mode and number of proofs:**
 |    ``vector_value(+list(number),+integer,-number)`` - ``one``
 
+| **Exceptions:**
+|    ``Index`` is a variable:
+|        ``instantiation_error``
+|    ``Index`` is neither a variable nor an integer:
+|        ``type_error(integer,Index)``
+|    ``Index`` is an integer that is less than one:
+|        ``domain_error(positive_integer,Index)``
+
 
 ------------
 
@@ -547,6 +645,14 @@ Looks up a numeric matrix row using a one-based row index.
 |    ``matrix_row(Matrix,RowIndex,Row)``
 | **Mode and number of proofs:**
 |    ``matrix_row(+list(list(number)),+integer,-list(number))`` - ``one``
+
+| **Exceptions:**
+|    ``RowIndex`` is a variable:
+|        ``instantiation_error``
+|    ``RowIndex`` is neither a variable nor an integer:
+|        ``type_error(integer,RowIndex)``
+|    ``RowIndex`` is an integer that is less than one:
+|        ``domain_error(positive_integer,RowIndex)``
 
 
 ------------
@@ -567,6 +673,14 @@ Looks up a numeric matrix column using a one-based column index.
 | **Mode and number of proofs:**
 |    ``matrix_column(+list(list(number)),+integer,-list(number))`` - ``one``
 
+| **Exceptions:**
+|    ``ColumnIndex`` is a variable:
+|        ``instantiation_error``
+|    ``ColumnIndex`` is neither a variable nor an integer:
+|        ``type_error(integer,ColumnIndex)``
+|    ``ColumnIndex`` is an integer that is less than one:
+|        ``domain_error(positive_integer,ColumnIndex)``
+
 
 ------------
 
@@ -585,6 +699,20 @@ Looks up a numeric matrix element using one-based row and column indices.
 |    ``matrix_value(Matrix,RowIndex,ColumnIndex,Value)``
 | **Mode and number of proofs:**
 |    ``matrix_value(+list(list(number)),+integer,+integer,-number)`` - ``one``
+
+| **Exceptions:**
+|    ``RowIndex`` is a variable:
+|        ``instantiation_error``
+|    ``ColumnIndex`` is a variable:
+|        ``instantiation_error``
+|    ``RowIndex`` is neither a variable nor an integer:
+|        ``type_error(integer,RowIndex)``
+|    ``ColumnIndex`` is neither a variable nor an integer:
+|        ``type_error(integer,ColumnIndex)``
+|    ``RowIndex`` is an integer that is less than one:
+|        ``domain_error(positive_integer,RowIndex)``
+|    ``ColumnIndex`` is an integer that is less than one:
+|        ``domain_error(positive_integer,ColumnIndex)``
 
 
 ------------
@@ -605,6 +733,10 @@ Extracts the main diagonal of a numeric matrix as a vector.
 | **Mode and number of proofs:**
 |    ``matrix_diagonal(+list(list(number)),-list(number))`` - ``one``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -623,6 +755,14 @@ Extracts the diagonal of a numeric matrix at the given offset, where positive of
 |    ``matrix_diagonal(Matrix,Offset,Diagonal)``
 | **Mode and number of proofs:**
 |    ``matrix_diagonal(+list(list(number)),+integer,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Offset`` is a variable:
+|        ``instantiation_error``
+|    ``Offset`` is neither a variable nor an integer:
+|        ``type_error(integer,Offset)``
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
 
 
 ------------
@@ -662,6 +802,12 @@ Constructs the minimal square numeric matrix whose diagonal at the given offset 
 | **Mode and number of proofs:**
 |    ``diagonal_matrix(+list(number),+integer,-list(list(number)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Offset`` is a variable:
+|        ``instantiation_error``
+|    ``Offset`` is neither a variable nor an integer:
+|        ``type_error(integer,Offset)``
+
 
 ------------
 
@@ -680,6 +826,20 @@ Constructs a square numeric matrix of the requested size whose diagonal at the g
 |    ``diagonal_matrix(Diagonal,Offset,Size,Matrix)``
 | **Mode and number of proofs:**
 |    ``diagonal_matrix(+list(number),+integer,+integer,-list(list(number)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Offset`` is a variable:
+|        ``instantiation_error``
+|    ``Offset`` is neither a variable nor an integer:
+|        ``type_error(integer,Offset)``
+|    ``Size`` is a variable:
+|        ``instantiation_error``
+|    ``Size`` is neither a variable nor an integer:
+|        ``type_error(integer,Size)``
+|    ``Size`` is an integer that is less than zero:
+|        ``domain_error(non_negative_integer,Size)``
+|    ``Size`` is smaller than the minimum size required by ``Diagonal`` and ``Offset``:
+|        ``domain_error(minimum_matrix_size(A),Size)``
 
 
 ------------
@@ -700,6 +860,10 @@ Computes the trace of a numeric matrix by summing its main diagonal entries.
 | **Mode and number of proofs:**
 |    ``matrix_trace(+list(list(number)),-number)`` - ``one``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -718,6 +882,12 @@ Shifts the main diagonal of a numeric matrix by the given value.
 |    ``shift_matrix_diagonal(Matrix,Shift,ShiftedMatrix)``
 | **Mode and number of proofs:**
 |    ``shift_matrix_diagonal(+list(list(number)),+number,-list(list(number)))`` - ``one``
+
+| **Exceptions:**
+|    ``Shift`` is a variable:
+|        ``instantiation_error``
+|    ``Shift`` is neither a variable nor a number:
+|        ``type_error(number,Shift)``
 
 
 ------------
@@ -738,6 +908,10 @@ Returns the upper-triangular part of a numeric matrix including the main diagona
 | **Mode and number of proofs:**
 |    ``upper_triangular_part(+list(list(number)),-list(list(number)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -756,6 +930,14 @@ Returns the upper-triangular part of a numeric matrix using the given diagonal o
 |    ``upper_triangular_part(Matrix,Offset,UpperTriangular)``
 | **Mode and number of proofs:**
 |    ``upper_triangular_part(+list(list(number)),+integer,-list(list(number)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Offset`` is a variable:
+|        ``instantiation_error``
+|    ``Offset`` is neither a variable nor an integer:
+|        ``type_error(integer,Offset)``
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
 
 
 ------------
@@ -776,6 +958,10 @@ Returns the lower-triangular part of a numeric matrix including the main diagona
 | **Mode and number of proofs:**
 |    ``lower_triangular_part(+list(list(number)),-list(list(number)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -794,6 +980,14 @@ Returns the lower-triangular part of a numeric matrix using the given diagonal o
 |    ``lower_triangular_part(Matrix,Offset,LowerTriangular)``
 | **Mode and number of proofs:**
 |    ``lower_triangular_part(+list(list(number)),+integer,-list(list(number)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Offset`` is a variable:
+|        ``instantiation_error``
+|    ``Offset`` is neither a variable nor an integer:
+|        ``type_error(integer,Offset)``
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
 
 
 ------------
@@ -814,6 +1008,14 @@ Solves a non-singular square numeric linear system with a vector right-hand side
 | **Mode and number of proofs:**
 |    ``solve_linear_system(+list(list(number)),+list(number),-list(float))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``Values`` does not have the same length as the size of ``Matrix``:
+|        ``domain_error(vector_length(A),Values)``
+|    ``Matrix`` is singular:
+|        ``evaluation_error(zero_divisor)``
+
 
 ------------
 
@@ -832,6 +1034,14 @@ Solves a non-singular square numeric linear system with a matrix right-hand side
 |    ``solve_linear_systems(Matrix,RightHandSides,Solutions)``
 | **Mode and number of proofs:**
 |    ``solve_linear_systems(+list(list(number)),+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``RightHandSides`` does not have the same number of rows as the size of ``Matrix``:
+|        ``domain_error(matrix_row_count(A),RightHandSides)``
+|    ``Matrix`` is singular:
+|        ``evaluation_error(zero_divisor)``
 
 
 ------------
@@ -852,6 +1062,10 @@ Computes the determinant of a square numeric matrix.
 | **Mode and number of proofs:**
 |    ``determinant(+list(list(number)),-number)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+
 
 ------------
 
@@ -870,6 +1084,12 @@ Computes the inverse of a non-singular square numeric matrix by solving one line
 |    ``inverse_matrix(Matrix,Inverse)``
 | **Mode and number of proofs:**
 |    ``inverse_matrix(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``Matrix`` is singular:
+|        ``evaluation_error(zero_divisor)``
 
 
 ------------
@@ -890,6 +1110,10 @@ Computes a thin QR decomposition of a rectangular numeric matrix, returning orth
 | **Mode and number of proofs:**
 |    ``qr_decomposition(+list(list(number)),-list(list(float)),-list(list(float)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -908,6 +1132,12 @@ Computes a least-squares solution for a rectangular numeric linear system using 
 |    ``least_squares(Matrix,Values,Solution)``
 | **Mode and number of proofs:**
 |    ``least_squares(+list(list(number)),+list(number),-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+|    ``Values`` does not have the same length as the number of rows of ``Matrix``:
+|        ``domain_error(vector_length(A),Values)``
 
 
 ------------
@@ -928,6 +1158,10 @@ Estimates the rank of a numeric matrix using the default library numerical toler
 | **Mode and number of proofs:**
 |    ``matrix_rank(+list(list(number)),-integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -946,6 +1180,16 @@ Estimates the rank of a numeric matrix using the given non-negative numerical to
 |    ``matrix_rank(Matrix,Tolerance,Rank)``
 | **Mode and number of proofs:**
 |    ``matrix_rank(+list(list(number)),+number,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
 
 
 ------------
@@ -966,6 +1210,12 @@ Computes an orthonormal eigendecomposition of a real symmetric dense matrix usin
 | **Mode and number of proofs:**
 |    ``symmetric_eigen(+list(list(number)),-list(list(float)),-list(float))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``Matrix`` is not symmetric within the default numerical tolerance:
+|        ``domain_error(symmetric_matrix,Matrix)``
+
 
 ------------
 
@@ -984,6 +1234,18 @@ Computes an orthonormal eigendecomposition of a real symmetric dense matrix usin
 |    ``symmetric_eigen(Matrix,Tolerance,Eigenvectors,Eigenvalues)``
 | **Mode and number of proofs:**
 |    ``symmetric_eigen(+list(list(number)),+number,-list(list(float)),-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``Matrix`` is not symmetric within ``Tolerance``:
+|        ``domain_error(symmetric_matrix,Matrix)``
 
 
 ------------
@@ -1004,6 +1266,24 @@ Computes an orthonormal eigendecomposition of a real symmetric dense matrix usin
 | **Mode and number of proofs:**
 |    ``symmetric_eigen(+list(list(number)),+number,+integer,-list(list(float)),-list(float))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``MaximumIterations`` is a variable:
+|        ``instantiation_error``
+|    ``MaximumIterations`` is neither a variable nor an integer:
+|        ``type_error(integer,MaximumIterations)``
+|    ``MaximumIterations`` is an integer that is less than one:
+|        ``domain_error(positive_integer,MaximumIterations)``
+|    ``Matrix`` is not a square matrix:
+|        ``domain_error(square_matrix,Matrix)``
+|    ``Matrix`` is not symmetric within ``Tolerance``:
+|        ``domain_error(symmetric_matrix,Matrix)``
+
 
 ------------
 
@@ -1022,6 +1302,10 @@ Computes the Moore-Penrose pseudo-inverse of a rectangular numeric matrix using 
 |    ``pseudo_inverse(Matrix,PseudoInverse)``
 | **Mode and number of proofs:**
 |    ``pseudo_inverse(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
 
 
 ------------
@@ -1042,6 +1326,16 @@ Computes the Moore-Penrose pseudo-inverse of a rectangular numeric matrix using 
 | **Mode and number of proofs:**
 |    ``pseudo_inverse(+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -1061,6 +1355,10 @@ Computes an orthonormal basis for the right null space of a rectangular numeric 
 | **Mode and number of proofs:**
 |    ``null_space(+list(list(number)),-list(list(float)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
+
 
 ------------
 
@@ -1079,6 +1377,16 @@ Computes an orthonormal basis for the right null space of a rectangular numeric 
 |    ``null_space(Matrix,Tolerance,Basis)``
 | **Mode and number of proofs:**
 |    ``null_space(+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Matrix`` is not a rectangular matrix:
+|        ``domain_error(rectangular_matrix,Matrix)``
 
 
 ------------
@@ -1117,6 +1425,14 @@ Normalizes a numeric vector to unit length when its norm is above the given non-
 |    ``normalize_vector(Vector,Tolerance,NormalizedVector)``
 | **Mode and number of proofs:**
 |    ``normalize_vector(+list(number),+number,-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -1175,6 +1491,14 @@ Normalizes a vector sign convention by flipping vectors whose first significant 
 | **Mode and number of proofs:**
 |    ``stabilize_vector_sign(+list(number),+number,-list(number))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+
 
 ------------
 
@@ -1213,6 +1537,14 @@ Returns the first component whose absolute value exceeds the given non-negative 
 | **Mode and number of proofs:**
 |    ``first_significant_component(+list(number),+number,-number)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a number but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
+
 
 ------------
 
@@ -1231,6 +1563,12 @@ Adds a scaled outer product of a vector with itself to an accumulated matrix.
 |    ``add_scaled_outer_product(Vector,Scale,Matrix0,Matrix)``
 | **Mode and number of proofs:**
 |    ``add_scaled_outer_product(+list(number),+number,+list(list(number)),-list(list(number)))`` - ``one``
+
+| **Exceptions:**
+|    ``Scale`` is a variable:
+|        ``instantiation_error``
+|    ``Scale`` is neither a variable nor a number:
+|        ``type_error(number,Scale)``
 
 
 ------------
@@ -1251,6 +1589,10 @@ Computes the sample covariance matrix from a list of centered numeric row vector
 | **Mode and number of proofs:**
 |    ``covariance_matrix(+list(list(number)),-list(list(number)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Rows`` contains fewer than two rows:
+|        ``domain_error(minimum_number_of_rows(2),Rows)``
+
 
 ------------
 
@@ -1269,6 +1611,10 @@ Computes the lower-triangular Cholesky factor of a positive definite numeric mat
 |    ``cholesky_decomposition(Matrix,CholeskyFactor)``
 | **Mode and number of proofs:**
 |    ``cholesky_decomposition(+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Matrix`` is not numerically positive definite:
+|        ``domain_error(positive_definite_matrix,Matrix)``
 
 
 ------------

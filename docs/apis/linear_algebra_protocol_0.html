@@ -343,7 +343,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-04</div>
+<div class="line"><strong>Date:</strong> 2026-05-05</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -473,6 +473,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">new_vector(+integer,+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer that is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="new-vector-like-2">
@@ -557,6 +582,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">add_scaled_vector(+list(number),+number,+list(number),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Scale)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="scale-vector-3">
@@ -576,6 +614,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">scale_vector(+list(number),+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Scale)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -641,6 +692,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">vector_norm(+list(number),&#64;term,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Order</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Order</span></code> is neither a variable, a number, nor one of the atoms <code class="docutils literal notranslate"><span class="pre">inf</span></code> and <code class="docutils literal notranslate"><span class="pre">infinity</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Order)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Order</span></code> is a number but not a valid positive_number_or_infinity:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number_or_infinity,Order)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="basis-vector-3">
@@ -660,6 +728,35 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">basis_vector(+integer,+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Size)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Index)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Size)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Index)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -683,6 +780,43 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">new_matrix(+integer,+integer,+number,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Rows</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Columns</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Rows</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Rows)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Columns</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Columns)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Value)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Rows</span></code> is an integer that is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Rows)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Columns</span></code> is an integer that is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Columns)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="linear-algebra-protocol-0-identity-matrix-2">
@@ -702,6 +836,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">identity_matrix(+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Size)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is an integer that is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Size)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -788,6 +939,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_row_means(+list(list(number)),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> contains an empty row <code class="docutils literal notranslate"><span class="pre">Row</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Row)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="matrix-column-means-2">
@@ -830,6 +990,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">center_gram_matrix(+list(list(number)),-list(list(number)),-list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">GramMatrix</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),GramMatrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">GramMatrix</span></code> contains an empty row <code class="docutils literal notranslate"><span class="pre">Row</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Row)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="center-gram-vector-4">
@@ -849,6 +1022,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">center_gram_vector(+list(number),+list(number),+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">GramVector</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),GramVector)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -956,6 +1138,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">frobenius_norm(+list(list(number)),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="transpose-matrix-2">
@@ -998,6 +1189,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">vector_value(+list(number),+integer,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Index)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Index</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Index)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="matrix-row-3">
@@ -1017,6 +1225,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_row(+list(list(number)),+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RowIndex</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RowIndex</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,RowIndex)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RowIndex</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,RowIndex)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1040,6 +1265,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_column(+list(list(number)),+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ColumnIndex</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ColumnIndex</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,ColumnIndex)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ColumnIndex</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,ColumnIndex)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="matrix-value-4">
@@ -1059,6 +1301,35 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_value(+list(list(number)),+integer,+integer,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RowIndex</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ColumnIndex</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RowIndex</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,RowIndex)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ColumnIndex</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,ColumnIndex)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RowIndex</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,RowIndex)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ColumnIndex</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,ColumnIndex)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1082,6 +1353,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_diagonal(+list(list(number)),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="matrix-diagonal-3">
@@ -1101,6 +1381,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_diagonal(+list(list(number)),+integer,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Offset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1145,6 +1442,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">diagonal_matrix(+list(number),+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Offset)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="diagonal-matrix-4">
@@ -1164,6 +1474,35 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">diagonal_matrix(+list(number),+integer,+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Offset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Size)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is an integer that is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Size)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Size</span></code> is smaller than the minimum size required by <code class="docutils literal notranslate"><span class="pre">Diagonal</span></code> and <code class="docutils literal notranslate"><span class="pre">Offset</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_matrix_size(A),Size)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1187,6 +1526,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_trace(+list(list(number)),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="shift-matrix-diagonal-3">
@@ -1206,6 +1554,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">shift_matrix_diagonal(+list(list(number)),+number,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Shift</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Shift</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Shift)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1229,6 +1590,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">upper_triangular_part(+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="upper-triangular-part-3">
@@ -1248,6 +1618,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">upper_triangular_part(+list(list(number)),+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Offset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1271,6 +1658,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">lower_triangular_part(+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="lower-triangular-part-3">
@@ -1290,6 +1686,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">lower_triangular_part(+list(list(number)),+integer,-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offset</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Offset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1313,6 +1726,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">solve_linear_system(+list(list(number)),+list(number),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Values</span></code> does not have the same length as the size of <code class="docutils literal notranslate"><span class="pre">Matrix</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(vector_length(A),Values)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is singular:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(zero_divisor)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="solve-linear-systems-3">
@@ -1332,6 +1762,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">solve_linear_systems(+list(list(number)),+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RightHandSides</span></code> does not have the same number of rows as the size of <code class="docutils literal notranslate"><span class="pre">Matrix</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(matrix_row_count(A),RightHandSides)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is singular:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(zero_divisor)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1355,6 +1802,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">determinant(+list(list(number)),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="inverse-matrix-2">
@@ -1374,6 +1830,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">inverse_matrix(+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is singular:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">evaluation_error(zero_divisor)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1397,6 +1866,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">qr_decomposition(+list(list(number)),-list(list(float)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="least-squares-3">
@@ -1416,6 +1894,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">least_squares(+list(list(number)),+list(number),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Values</span></code> does not have the same length as the number of rows of <code class="docutils literal notranslate"><span class="pre">Matrix</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(vector_length(A),Values)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1439,6 +1930,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_rank(+list(list(number)),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="matrix-rank-3">
@@ -1458,6 +1958,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">matrix_rank(+list(list(number)),+number,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1481,6 +2002,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">symmetric_eigen(+list(list(number)),-list(list(float)),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not symmetric within the default numerical tolerance:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="symmetric-eigen-4">
@@ -1500,6 +2034,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">symmetric_eigen(+list(list(number)),+number,-list(list(float)),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not symmetric within <code class="docutils literal notranslate"><span class="pre">Tolerance</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1523,6 +2082,43 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">symmetric_eigen(+list(list(number)),+number,+integer,-list(list(float)),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MaximumIterations</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MaximumIterations</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,MaximumIterations)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MaximumIterations</span></code> is an integer that is less than one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,MaximumIterations)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a square matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(square_matrix,Matrix)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not symmetric within <code class="docutils literal notranslate"><span class="pre">Tolerance</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="pseudo-inverse-2">
@@ -1542,6 +2138,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pseudo_inverse(+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1565,6 +2170,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pseudo_inverse(+list(list(number)),+number,-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="null-space-2">
@@ -1586,6 +2212,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">null_space(+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="null-space-3">
@@ -1605,6 +2240,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">null_space(+list(list(number)),+number,-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not a rectangular matrix:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rectangular_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1647,6 +2303,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_vector(+list(number),+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1712,6 +2385,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">stabilize_vector_sign(+list(number),+number,-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="first-significant-component-2">
@@ -1754,6 +2444,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">first_significant_component(+list(number),+number,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a number but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="add-scaled-outer-product-4">
@@ -1773,6 +2480,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">add_scaled_outer_product(+list(number),+number,+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Scale)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1796,6 +2516,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">covariance_matrix(+list(list(number)),-list(list(number)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Rows</span></code> contains fewer than two rows:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_rows(2),Rows)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="cholesky-decomposition-2">
@@ -1815,6 +2544,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">cholesky_decomposition(+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Matrix</span></code> is not numerically positive definite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_definite_matrix,Matrix)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
