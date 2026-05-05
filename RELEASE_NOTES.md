@@ -405,6 +405,9 @@ and PowerShell scripts to make a sound on completion.
 * FIXED: The `dead_code_scanner` tool accidental requirement for backends
 supporting the `discontiguous/1` directive.
 
+* FIXED: The `dead_code_scanner` tool warning message for likely unused
+predicates/non-terminals breaking VSCode code actions.
+
 Examples
 --------
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2016-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2016-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2016 Barry Evans <barryevans@kyndi.com>
 %  SPDX-License-Identifier: Apache-2.0
 %

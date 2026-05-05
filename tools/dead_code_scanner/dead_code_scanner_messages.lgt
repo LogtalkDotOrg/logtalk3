@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2016-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2016-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2016 Barry Evans <barryevans@kyndi.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,9 +23,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-03-19,
+		date is 2026-05-05,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
 
@@ -112,13 +112,13 @@
 	likely_dead_predicate(local_dead_code, Object::Functor//Arity, Confidence, _Properties) -->
 		['Likely unused non-terminal: ~q [class: local_dead_code, confidence: ~q]'-[Object::Functor//Arity, Confidence], nl].
 	likely_dead_predicate(unused_use_module_resource, ':'(Module,Functor/Arity), Confidence, _Properties) -->
-		['Likely unused use_module/2 predicate: ~q [class: unused_use_module_resource, confidence: ~q]'-[':'(Module,Functor/Arity), Confidence], nl].
+		['Likely unused predicate: ~q [class: unused_use_module_resource, confidence: ~q]'-[':'(Module,Functor/Arity), Confidence], nl].
 	likely_dead_predicate(unused_use_module_resource, ':'(Module,Functor//Arity), Confidence, _Properties) -->
-		['Likely unused use_module/2 non-terminal: ~q [class: unused_use_module_resource, confidence: ~q]'-[':'(Module,Functor//Arity), Confidence], nl].
+		['Likely unused non-terminal: ~q [class: unused_use_module_resource, confidence: ~q]'-[':'(Module,Functor//Arity), Confidence], nl].
 	likely_dead_predicate(unused_uses_resource, Object::Functor/Arity, Confidence, _Properties) -->
-		['Likely unused uses/2 predicate: ~q [class: unused_uses_resource, confidence: ~q]'-[Object::Functor/Arity, Confidence], nl].
+		['Likely unused predicate: ~q [class: unused_uses_resource, confidence: ~q]'-[Object::Functor/Arity, Confidence], nl].
 	likely_dead_predicate(unused_uses_resource, Object::Functor//Arity, Confidence, _Properties) -->
-		['Likely unused uses/2 non-terminal: ~q [class: unused_uses_resource, confidence: ~q]'-[Object::Functor//Arity, Confidence], nl].
+		['Likely unused non-terminal: ~q [class: unused_uses_resource, confidence: ~q]'-[Object::Functor//Arity, Confidence], nl].
 	likely_dead_predicate(local_dead_code, Functor/Arity, Confidence, _Properties) -->
 		['Likely dead predicate: ~q [class: local_dead_code, confidence: ~q]'-[Functor/Arity, Confidence], nl].
 	likely_dead_predicate(local_dead_code, Functor//Arity, Confidence, _Properties) -->
