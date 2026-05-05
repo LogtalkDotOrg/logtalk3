@@ -24,9 +24,9 @@
 	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 0:18:1,
+		version is 0:18:2,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-05-05,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -188,8 +188,6 @@
 		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
-	:- discontiguous(predicate/5).
-
 	diagnostics_tool(dead_code_scanner, dead_code_scanner, Version, 'https://logtalk.org/', [
 		guid('91f50eb3-a092-43b5-b8e2-3c1f64bb7047'),
 		fingerprint_algorithm(canonical_finding_v1),
@@ -277,6 +275,13 @@
 
 	predicate(Entity, Predicate) :-
 		predicate(Entity, Predicate, []).
+
+	predicate(Entity, Predicate, File, Lines, Options) :-
+		local_dead_predicate(Entity, Predicate, File, Lines, Options).
+	predicate(Entity, Predicate, File, Lines, Options) :-
+		unused_uses_resource(Entity, _Object, Predicate, File, Lines, Options).
+	predicate(Entity, Predicate, File, Lines, Options) :-
+		unused_use_module_resource(Entity, _Module, Predicate, File, Lines, Options).
 
 	% local predicates not called, directly or indirectly, by scoped predicates
 	dead_code_finding(Kind, Entity, dead_predicate(Class, Confidence, Properties, Kind, Entity, Predicate, File, Lines), Options) :-
@@ -375,8 +380,6 @@
 		),
 		\+ excluded_predicate(Predicate, Options).
 
-	predicate(Entity, Predicate, File, Lines, Options) :-
-		local_dead_predicate(Entity, Predicate, File, Lines, Options).
 	% unused predicates and non-terminals listed in the uses/2 directives
 	unused_uses_resource(Entity, Object, Object::Resource, File, Start-End, Options) :-
 		entity_property(Entity, calls(Object::Original, CallsProperties)),
@@ -417,8 +420,6 @@
 		memberchk(lines(Start, End), CallsProperties),
 		\+ excluded_predicate(Object::Resource, Options).
 
-	predicate(Entity, Predicate, File, Lines, Options) :-
-		unused_uses_resource(Entity, _Object, Predicate, File, Lines, Options).
 	% unused predicates and non-terminals listed in the use_module/2 directives
 	unused_use_module_resource(Entity, Module, ':'(Module,Resource), File, Start-End, Options) :-
 		entity_property(Entity, calls(':'(Module,Original), CallsProperties)),
@@ -458,9 +459,6 @@
 		),
 		memberchk(lines(Start, End), CallsProperties),
 		\+ excluded_predicate(':'(Module,Resource), Options).
-
-	predicate(Entity, Predicate, File, Lines, Options) :-
-		unused_use_module_resource(Entity, _Module, Predicate, File, Lines, Options).
 
 	non_scoped_predicate(Entity, Alias, File, Start-End) :-
 		entity_property(Entity, defines(Alias, Properties)),

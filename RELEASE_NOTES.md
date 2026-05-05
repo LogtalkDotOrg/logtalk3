@@ -402,6 +402,9 @@ and PowerShell scripts to make a sound on completion.
 
 * FIXED: Deleted dead code in the `dead_code_scanner` tool.
 
+* FIXED: The `dead_code_scanner` tool accidental requirement for backends
+supporting the `discontiguous/1` directive.
+
 Examples
 --------
 
