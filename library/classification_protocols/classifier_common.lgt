@@ -26,8 +26,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
-		comment is 'Shared predicates for classifier diagnostics and export.'
+		date is 2026-05-06,
+		comment is 'Shared predicates for classifier diagnostics, mixed-feature distance calculations, and export.'
 	]).
 
 	:- uses(format, [
@@ -119,6 +119,13 @@
 		argnames is ['Model', 'Options', 'Diagnostics']
 	]).
 
+	:- protected(mixed_feature_distance/5).
+	:- mode(mixed_feature_distance(+term, +list, +list, +list, -float), one_or_error).
+	:- info(mixed_feature_distance/5, [
+		comment is 'Computes a distance between two mixed-feature vectors using the given feature types and one of the supported metrics ``euclidean``, ``manhattan``, ``chebyshev``, ``cosine``, or ``minkowski(Order)``.',
+		argnames is ['Metric', 'FeatureTypes', 'Values1', 'Values2', 'Distance']
+	]).
+
 	check_classifier(Classifier) :-
 		(	var(Classifier) ->
 			instantiation_error
@@ -174,6 +181,29 @@
 		valid_classifier_metadata(Model, Diagnostics),
 		memberchk(options(Options), Diagnostics),
 		catch(::check_options(Options), _Error, fail).
+
+	mixed_feature_distance(euclidean, FeatureTypes, Values1, Values2, Distance) :-
+		sum_squared_feature_differences(FeatureTypes, Values1, Values2, 0.0, SumSquares),
+		Distance is sqrt(SumSquares).
+	mixed_feature_distance(manhattan, FeatureTypes, Values1, Values2, Distance) :-
+		sum_absolute_feature_differences(FeatureTypes, Values1, Values2, 0.0, Distance).
+	mixed_feature_distance(chebyshev, FeatureTypes, Values1, Values2, Distance) :-
+		max_absolute_feature_difference(FeatureTypes, Values1, Values2, 0.0, Distance).
+	mixed_feature_distance(minkowski(Order), FeatureTypes, Values1, Values2, Distance) :-
+		(   Order > 0.0 ->
+			sum_powered_feature_differences(FeatureTypes, Values1, Values2, Order, 0.0, Sum),
+			Distance is Sum ** (1.0 / Order)
+		;   domain_error(positive_number, Order)
+		).
+	mixed_feature_distance(cosine, FeatureTypes, Values1, Values2, Distance) :-
+		numeric_feature_dot_product(FeatureTypes, Values1, Values2, 0.0, DotProduct),
+		numeric_feature_magnitude(FeatureTypes, Values1, Magnitude1),
+		numeric_feature_magnitude(FeatureTypes, Values2, Magnitude2),
+		(   (Magnitude1 =:= 0 ; Magnitude2 =:= 0) ->
+			Distance = 1.0
+		;   Similarity is float(DotProduct / (Magnitude1 * Magnitude2)),
+			Distance is float(1.0 - Similarity)
+		).
 
 	print_classifier_template(Classifier) :-
 		::classifier_term_template(Classifier, Template),
@@ -248,5 +278,63 @@
 		valid_discrete_values(Values),
 		\+ member(Attribute, SeenAttributes),
 		valid_linear_encoders_(Encoders, [Attribute| SeenAttributes]).
+
+	sum_squared_feature_differences([], [], [], SumSquares, SumSquares).
+	sum_squared_feature_differences([FeatureType| FeatureTypes], [Value1| Values1], [Value2| Values2], SumSquares0, SumSquares) :-
+		feature_distance_squared(FeatureType, Value1, Value2, DistanceSquared),
+		SumSquares1 is SumSquares0 + DistanceSquared,
+		sum_squared_feature_differences(FeatureTypes, Values1, Values2, SumSquares1, SumSquares).
+
+	sum_absolute_feature_differences([], [], [], SumDistances, SumDistances).
+	sum_absolute_feature_differences([FeatureType| FeatureTypes], [Value1| Values1], [Value2| Values2], SumDistances0, SumDistances) :-
+		feature_distance_absolute(FeatureType, Value1, Value2, Distance),
+		SumDistances1 is SumDistances0 + Distance,
+		sum_absolute_feature_differences(FeatureTypes, Values1, Values2, SumDistances1, SumDistances).
+
+	max_absolute_feature_difference([], [], [], MaxDistance, MaxDistance).
+	max_absolute_feature_difference([FeatureType| FeatureTypes], [Value1| Values1], [Value2| Values2], MaxDistance0, MaxDistance) :-
+		feature_distance_absolute(FeatureType, Value1, Value2, Distance),
+		MaxDistance1 is max(MaxDistance0, Distance),
+		max_absolute_feature_difference(FeatureTypes, Values1, Values2, MaxDistance1, MaxDistance).
+
+	sum_powered_feature_differences([], [], [], _Order, SumDistances, SumDistances).
+	sum_powered_feature_differences([FeatureType| FeatureTypes], [Value1| Values1], [Value2| Values2], Order, SumDistances0, SumDistances) :-
+		feature_distance_absolute(FeatureType, Value1, Value2, Distance),
+		PoweredDistance is Distance ** Order,
+		SumDistances1 is SumDistances0 + PoweredDistance,
+		sum_powered_feature_differences(FeatureTypes, Values1, Values2, Order, SumDistances1, SumDistances).
+
+	feature_distance_squared(numeric, Value1, Value2, DistanceSquared) :-
+		Difference is Value1 - Value2,
+		DistanceSquared is Difference * Difference.
+	feature_distance_squared(categorical, Value, Value, 0) :-
+		!.
+	feature_distance_squared(categorical, _, _, 1).
+
+	feature_distance_absolute(numeric, Value1, Value2, Distance) :-
+		Distance is abs(Value1 - Value2).
+	feature_distance_absolute(categorical, Value, Value, 0) :-
+		!.
+	feature_distance_absolute(categorical, _, _, 1).
+
+	numeric_feature_dot_product([], [], [], DotProduct, DotProduct).
+	numeric_feature_dot_product([numeric| FeatureTypes], [Value1| Values1], [Value2| Values2], DotProduct0, DotProduct) :-
+		!,
+		DotProduct1 is DotProduct0 + Value1 * Value2,
+		numeric_feature_dot_product(FeatureTypes, Values1, Values2, DotProduct1, DotProduct).
+	numeric_feature_dot_product([categorical| FeatureTypes], [_| Values1], [_| Values2], DotProduct0, DotProduct) :-
+		numeric_feature_dot_product(FeatureTypes, Values1, Values2, DotProduct0, DotProduct).
+
+	numeric_feature_magnitude(FeatureTypes, Values, Magnitude) :-
+		numeric_feature_sum_squares(FeatureTypes, Values, 0.0, SumSquares),
+		Magnitude is sqrt(SumSquares).
+
+	numeric_feature_sum_squares([], [], SumSquares, SumSquares).
+	numeric_feature_sum_squares([numeric| FeatureTypes], [Value| Values], SumSquares0, SumSquares) :-
+		!,
+		SumSquares1 is SumSquares0 + Value * Value,
+		numeric_feature_sum_squares(FeatureTypes, Values, SumSquares1, SumSquares).
+	numeric_feature_sum_squares([categorical| FeatureTypes], [_| Values], SumSquares0, SumSquares) :-
+		numeric_feature_sum_squares(FeatureTypes, Values, SumSquares0, SumSquares).
 
 :- end_category.

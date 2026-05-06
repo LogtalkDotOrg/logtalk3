@@ -25,5 +25,6 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(classification_protocols(loader)),
+	logtalk_load(linear_algebra(loader)),
 	logtalk_load(nearest_centroid, [optimize(on)])
 )).

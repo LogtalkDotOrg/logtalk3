@@ -22,6 +22,13 @@
 :- object(sample_classifier,
 	imports(classifier_common)).
 
+	:- public(mixed_feature_distance/5).
+	:- mode(mixed_feature_distance(+term, +list, +list, +list, -float), one_or_error).
+	:- info(mixed_feature_distance/5, [
+		comment is 'Testing wrapper for the shared mixed-feature distance helper.',
+		argnames is ['Metric', 'FeatureTypes', 'Values1', 'Values2', 'Distance']
+	]).
+
 	:- uses(list, [
 		memberchk/2
 	]).
@@ -53,6 +60,9 @@
 
 	classifier_term_template(sample_classifier(_DefaultClass, _Diagnostics), sample_classifier('DefaultClass', 'Diagnostics')).
 
+	mixed_feature_distance(Metric, FeatureTypes, Values1, Values2, Distance) :-
+		^^mixed_feature_distance(Metric, FeatureTypes, Values1, Values2, Distance).
+
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-
 		Clause =.. [Functor, Classifier].
 
@@ -69,7 +79,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-06,
 		comment is 'Smoke tests for the "classification_protocols" library.'
 	]).
 
@@ -114,6 +124,24 @@
 	test(sample_classifier_classifier_options_2, deterministic(Options == [])) :-
 		sample_classifier::learn(play_tennis, Classifier),
 		sample_classifier::classifier_options(Classifier, Options).
+
+	test(sample_classifier_mixed_feature_distance_euclidean_5, deterministic(Distance =:= sqrt(6.0))) :-
+		sample_classifier::mixed_feature_distance(euclidean, [numeric, categorical, numeric], [1.0, red, 2.0], [3.0, blue, 3.0], Distance).
+
+	test(sample_classifier_mixed_feature_distance_manhattan_5, deterministic(Distance =:= 4.0)) :-
+		sample_classifier::mixed_feature_distance(manhattan, [numeric, categorical, numeric], [1.0, red, 2.0], [3.0, blue, 3.0], Distance).
+
+	test(sample_classifier_mixed_feature_distance_chebyshev_5, deterministic(Distance =:= 2.0)) :-
+		sample_classifier::mixed_feature_distance(chebyshev, [numeric, categorical, numeric], [1.0, red, 2.0], [3.0, blue, 3.0], Distance).
+
+	test(sample_classifier_mixed_feature_distance_minkowski_5, deterministic(Distance =:= 10.0 ** (1.0 / 3.0))) :-
+		sample_classifier::mixed_feature_distance(minkowski(3.0), [numeric, categorical, numeric], [1.0, red, 2.0], [3.0, blue, 3.0], Distance).
+
+	test(sample_classifier_mixed_feature_distance_cosine_5, deterministic(abs(Distance - (1.0 - 1.0 / sqrt(5.0))) < 1.0e-12)) :-
+		sample_classifier::mixed_feature_distance(cosine, [numeric, categorical, numeric], [1.0, red, 2.0], [2.0, blue, 0.0], Distance).
+
+	test(sample_classifier_mixed_feature_distance_cosine_zero_numeric_5, deterministic(Distance =:= 1.0)) :-
+		sample_classifier::mixed_feature_distance(cosine, [categorical, categorical], [red, square], [blue, circle], Distance).
 
 	test(sample_classifier_export_to_clauses_4, deterministic(Clause == classifier(sample_classifier(yes, [model(sample_classifier), options([]), training_dataset(play_tennis)])))) :-
 		sample_classifier::learn(play_tennis, Classifier),

@@ -26,6 +26,7 @@
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(classification_protocols(loader)),
+	logtalk_load(linear_algebra(loader)),
 	logtalk_load([
 		classification_protocols('test_datasets/weather'),
 		classification_protocols('test_datasets/iris_small'),

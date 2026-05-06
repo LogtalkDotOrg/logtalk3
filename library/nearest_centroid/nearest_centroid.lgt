@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-06,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, isolation_forest, c45, knn, naive_bayes, random_forest, ada_boost]
 	]).
@@ -57,6 +57,10 @@
 
 	:- uses(list, [
 		length/2, member/2, memberchk/2, sort/4
+	]).
+
+	:- uses(linear_algebra, [
+		transpose_matrix/2
 	]).
 
 	:- uses(numberlist, [
@@ -135,19 +139,8 @@
 
     % Compute centroid (mean) of a set of instances
     compute_centroid(FeatureTypes, Instances, Centroid) :-
-        transpose(Instances, Features),
+		transpose_matrix(Instances, Features),
         compute_centroid_features(Features, FeatureTypes, Centroid).
-
-    % Transpose list of instances to list of features
-    transpose([], []) :- !.
-    transpose([[]|_], []) :- !.
-    transpose(Instances, [Column|RestColumns]) :-
-        extract_first_column(Instances, Column, Remaining),
-        transpose(Remaining, RestColumns).
-
-    extract_first_column([], [], []).
-    extract_first_column([[H|T]|Rest], [H|Column], [T|Remaining]) :-
-        extract_first_column(Rest, Column, Remaining).
 
     % Compute centroid for each feature
     compute_centroid_features([], [], []).
@@ -265,77 +258,11 @@
         normalize_weights(Rest, Total, NormRest).
 
 	compute_distance(euclidean, Types, Instance1, Instance2, Distance) :-
-		euclidean_distance(Types, Instance1, Instance2, Distance).
+		^^mixed_feature_distance(euclidean, Types, Instance1, Instance2, Distance).
 	compute_distance(manhattan, Types, Instance1, Instance2, Distance) :-
-		manhattan_distance(Types, Instance1, Instance2, Distance).
+		^^mixed_feature_distance(manhattan, Types, Instance1, Instance2, Distance).
 	compute_distance(cosine, Types, Instance1, Instance2, Distance) :-
-		cosine_distance(Types, Instance1, Instance2, Distance).
-
-	euclidean_distance(Types, Instance1, Instance2, Distance) :-
-		sum_squared_diffs(Types, Instance1, Instance2, 0, SumSq),
-		Distance is sqrt(SumSq).
-
-	manhattan_distance(Types, Instance1, Instance2, Distance) :-
-		sum_abs_diffs(Types, Instance1, Instance2, 0, Distance).
-
-    cosine_distance(_Types, Instance1, Instance2, Distance) :-
-        % Only works for numeric features
-        dot_product(Instance1, Instance2, 0, Dot),
-        vector_magnitude(Instance1, Mag1),
-        vector_magnitude(Instance2, Mag2),
-        (   (Mag1 =:= 0 ; Mag2 =:= 0) ->
-            Distance = 1.0
-        ;   Similarity is float(Dot / (Mag1 * Mag2)),
-            Distance is float(1.0 - Similarity)
-        ).
-
-    dot_product([], [], Dot, Dot).
-    dot_product([V1| V1s], [V2| V2s], Dot0, Dot) :-
-        (   number(V1), number(V2) ->
-            Dot1 is Dot0 + V1 * V2,
-            dot_product(V1s, V2s, Dot1, Dot)
-        ;   dot_product(V1s, V2s, Dot0, Dot)
-        ).
-
-    vector_magnitude(Vector, Magnitude) :-
-        sum_of_squares(Vector, 0, Sum),
-        Magnitude is sqrt(Sum).
-
-    sum_of_squares([], Sum, Sum).
-    sum_of_squares([V| Vs], Sum0, Sum) :-
-        (   number(V) ->
-            Sum1 is Sum0 + V * V,
-            sum_of_squares(Vs, Sum1, Sum)
-        ;   sum_of_squares(Vs, Sum0, Sum)
-        ).
-
-	sum_squared_diffs([], [], [], Sum, Sum).
-	sum_squared_diffs([Type| Types], [Value1| Values1], [Value2| Values2], Sum0, Sum) :-
-		feature_distance_squared(Type, Value1, Value2, DistanceSq),
-		Sum1 is Sum0 + DistanceSq,
-		sum_squared_diffs(Types, Values1, Values2, Sum1, Sum).
-
-	sum_abs_diffs([], [], [], Sum, Sum).
-	sum_abs_diffs([Type| Types], [Value1| Values1], [Value2| Values2], Sum0, Sum) :-
-		feature_distance_abs(Type, Value1, Value2, Distance),
-		Sum1 is Sum0 + Distance,
-		sum_abs_diffs(Types, Values1, Values2, Sum1, Sum).
-
-	% Feature-level distance
-	feature_distance_squared(numeric, Value1, Value2, DistanceSquared) :-
-		Difference is Value1 - Value2,
-		DistanceSquared is Difference * Difference.
-	feature_distance_squared(categorical, Value1, Value2, 0) :-
-		Value1 == Value2,
-		!.
-	feature_distance_squared(categorical, _, _, 1).
-
-	feature_distance_abs(numeric, Value1, Value2, Distance) :-
-		Distance is abs(Value1 - Value2).
-	feature_distance_abs(categorical, Value1, Value2, 0) :-
-		Value1 == Value2,
-		!.
-	feature_distance_abs(categorical, _, _, 1).
+		^^mixed_feature_distance(cosine, Types, Instance1, Instance2, Distance).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
 		classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),

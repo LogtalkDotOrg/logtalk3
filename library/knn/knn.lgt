@@ -59,10 +59,6 @@
 		length/2, member/2, memberchk/2, take/3
 	]).
 
-	:- uses(numberlist, [
-		minkowski_distance/4
-	]).
-
 	:- uses(pairs, [
 		keys/2
 	]).
@@ -154,69 +150,13 @@
 		compute_distance_with_metric(Metric, FeatureTypes, Instance1, Instance2, Distance).
 
 	compute_distance_with_metric(euclidean, Types, Instance1, Instance2, Distance) :-
-		euclidean_distance(Types, Instance1, Instance2, Distance).
+		^^mixed_feature_distance(euclidean, Types, Instance1, Instance2, Distance).
 	compute_distance_with_metric(manhattan, Types, Instance1, Instance2, Distance) :-
-		manhattan_distance(Types, Instance1, Instance2, Distance).
+		^^mixed_feature_distance(manhattan, Types, Instance1, Instance2, Distance).
 	compute_distance_with_metric(chebyshev, Types, Instance1, Instance2, Distance) :-
-		chebyshev_distance(Types, Instance1, Instance2, Distance).
+		^^mixed_feature_distance(chebyshev, Types, Instance1, Instance2, Distance).
 	compute_distance_with_metric(minkowski, Types, Instance1, Instance2, Distance) :-
-		feature_distances(Types, Instance1, Instance2, Distances),
-		zeroes(Distances, Zeroes),
-		minkowski_distance(Zeroes, Distances, 3, Distance).
-
-	% Distance metrics
-	euclidean_distance(Types, Instance1, Instance2, Distance) :-
-		sum_squared_diffs(Types, Instance1, Instance2, 0, SumSq),
-		Distance is sqrt(SumSq).
-
-	manhattan_distance(Types, Instance1, Instance2, Distance) :-
-		sum_abs_diffs(Types, Instance1, Instance2, 0, Distance).
-
-	chebyshev_distance(Types, Instance1, Instance2, Distance) :-
-		max_abs_diff(Types, Instance1, Instance2, 0, Distance).
-
-	sum_squared_diffs([], [], [], Sum, Sum).
-	sum_squared_diffs([Type| Types], [Value1| Values1], [Value2| Values2], Sum0, Sum) :-
-		feature_distance_squared(Type, Value1, Value2, DistanceSq),
-		Sum1 is Sum0 + DistanceSq,
-		sum_squared_diffs(Types, Values1, Values2, Sum1, Sum).
-
-	sum_abs_diffs([], [], [], Sum, Sum).
-	sum_abs_diffs([Type| Types], [Value1| Values1], [Value2| Values2], Sum0, Sum) :-
-		feature_distance_abs(Type, Value1, Value2, Distance),
-		Sum1 is Sum0 + Distance,
-		sum_abs_diffs(Types, Values1, Values2, Sum1, Sum).
-
-	max_abs_diff([], [], [], Max, Max).
-	max_abs_diff([Type| Types], [Value1| Values1], [Value2| Values2], Max0, Max) :-
-		feature_distance_abs(Type, Value1, Value2, Distance),
-		Max1 is max(Max0, Distance),
-		max_abs_diff(Types, Values1, Values2, Max1, Max).
-
-	feature_distances([], [], [], []).
-	feature_distances([Type| Types], [Value1| Values1], [Value2| Values2], [Distance| Distances]) :-
-		feature_distance_abs(Type, Value1, Value2, Distance),
-		feature_distances(Types, Values1, Values2, Distances).
-
-	zeroes([], []).
-	zeroes([_| Values], [0| Zeroes]) :-
-		zeroes(Values, Zeroes).
-
-	% Feature-level distance
-	feature_distance_squared(numeric, Value1, Value2, DistanceSquared) :-
-		Difference is Value1 - Value2,
-		DistanceSquared is Difference * Difference.
-	feature_distance_squared(categorical, Value1, Value2, 0) :-
-		Value1 == Value2,
-		!.
-	feature_distance_squared(categorical, _, _, 1).
-
-	feature_distance_abs(numeric, Value1, Value2, Distance) :-
-		Distance is abs(Value1 - Value2).
-	feature_distance_abs(categorical, Value1, Value2, 0) :-
-		Value1 == Value2,
-		!.
-	feature_distance_abs(categorical, _, _, 1).
+		^^mixed_feature_distance(minkowski(3.0), Types, Instance1, Instance2, Distance).
 
 	% Compute class weights from neighbors
 	compute_class_weights(Neighbors, Probabilities, Options) :-
