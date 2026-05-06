@@ -15,7 +15,7 @@ Ranked Pairs pairwise preference ranker. Learns one deterministic score per item
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-05
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -79,5 +79,5 @@ Operators
 
 .. seealso::
 
-   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`schulze <schulze/0>`, :ref:`copeland <copeland/0>`
+   :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`schulze_ranker <schulze_ranker/0>`, :ref:`copeland_ranker <copeland_ranker/0>`
 

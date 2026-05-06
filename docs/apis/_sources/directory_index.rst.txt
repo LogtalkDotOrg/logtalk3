@@ -116,15 +116,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    adaptive_boosting_classifier <adaptive_boosting_classifier_0>
 
-``library/agglomerative/``
---------------------------
+``library/agglomerative_clusterer/``
+------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   agglomerative <agglomerative_0>
+   agglomerative_clusterer <agglomerative_clusterer_0>
 
 ``library/amqp/``
 -----------------
@@ -160,15 +160,15 @@ To load an entity, always load the library that includes it using the goal ``log
    application_common <application_common_0>
    application_protocol <application_protocol_0>
 
-``library/apriori/``
---------------------
+``library/apriori_pattern_miner/``
+----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   apriori <apriori_0>
+   apriori_pattern_miner <apriori_pattern_miner_0>
 
 ``library/arbitrary/``
 ----------------------
@@ -252,35 +252,35 @@ To load an entity, always load the library that includes it using the goal ``log
 
    bayesian_ridge_regression <bayesian_ridge_regression_0>
 
-``library/borda/``
-------------------
+``library/borda_ranker/``
+-------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   borda <borda_0>
+   borda_ranker <borda_ranker_0>
 
-``library/bradley_terry/``
---------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   bradley_terry <bradley_terry_0>
-
-``library/c45/``
-----------------
+``library/bradley_terry_ranker/``
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   c45 <c45_0>
+   bradley_terry_ranker <bradley_terry_ranker_0>
+
+``library/c45_classifier/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   c45_classifier <c45_classifier_0>
 
 ``library/cbor/``
 -----------------
@@ -355,15 +355,15 @@ To load an entity, always load the library that includes it using the goal ``log
    classifier_protocol <classifier_protocol_0>
    dataset_protocol <dataset_protocol_0>
 
-``library/clo_span/``
----------------------
+``library/clo_span_pattern_miner/``
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   clo_span <clo_span_0>
+   clo_span_pattern_miner <clo_span_pattern_miner_0>
 
 ``library/clustering_protocols/``
 ---------------------------------
@@ -378,15 +378,15 @@ To load an entity, always load the library that includes it using the goal ``log
    clustering_dataset_protocol <clustering_dataset_protocol_0>
    search_indexing <search_indexing_0>
 
-``library/colley/``
--------------------
+``library/colley_ranker/``
+--------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   colley <colley_0>
+   colley_ranker <colley_ranker_0>
 
 ``library/combinations/``
 -------------------------
@@ -410,15 +410,15 @@ To load an entity, always load the library that includes it using the goal ``log
    command_line_option <command_line_option_0>
    command_line_options <command_line_options_0>
 
-``library/copeland/``
----------------------
+``library/copeland_ranker/``
+----------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   copeland <copeland_0>
+   copeland_ranker <copeland_ranker_0>
 
 ``library/coroutining/``
 ------------------------
@@ -456,15 +456,15 @@ To load an entity, always load the library that includes it using the goal ``log
    cuid2(Representation,Size,Alphabet) <cuid2_3>
    cuid2_protocol <cuid2_protocol_0>
 
-``library/cusum/``
-------------------
+``library/cusum_anomaly_detector/``
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   cusum <cusum_0>
+   cusum_anomaly_detector <cusum_anomaly_detector_0>
 
 ``library/datalog/``
 --------------------
@@ -501,15 +501,15 @@ To load an entity, always load the library that includes it using the goal ``log
    dates_tz <dates_tz_0>
    dates_tz_protocol <dates_tz_protocol_0>
 
-``library/dbscan/``
--------------------
+``library/dbscan_clusterer/``
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   dbscan <dbscan_0>
+   dbscan_clusterer <dbscan_clusterer_0>
 
 ``library/dependents/``
 -----------------------
@@ -572,15 +572,15 @@ To load an entity, always load the library that includes it using the goal ``log
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
    target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
 
-``library/eclat/``
-------------------
+``library/eclat_pattern_miner/``
+--------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   eclat <eclat_0>
+   eclat_pattern_miner <eclat_pattern_miner_0>
 
 ``library/edcg/``
 -----------------
@@ -602,15 +602,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    elastic_net_regression <elastic_net_regression_0>
 
-``library/elo/``
-----------------
+``library/elo_ranker/``
+-----------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   elo <elo_0>
+   elo_ranker <elo_ranker_0>
 
 ``library/events/``
 -------------------
@@ -627,15 +627,15 @@ To load an entity, always load the library that includes it using the goal ``log
    monitor <monitor_0>
    monitorp <monitorp_0>
 
-``library/ewma/``
------------------
+``library/ewma_anomaly_detector/``
+----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   ewma <ewma_0>
+   ewma_anomaly_detector <ewma_anomaly_detector_0>
 
 ``library/expand_library_alias_paths/``
 ---------------------------------------
@@ -669,15 +669,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    format <format_0>
 
-``library/fp_growth/``
-----------------------
+``library/fp_growth_pattern_miner/``
+------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   fp_growth <fp_growth_0>
+   fp_growth_pattern_miner <fp_growth_pattern_miner_0>
 
 ``library/frequent_pattern_mining_protocols/``
 ----------------------------------------------
@@ -690,15 +690,15 @@ To load an entity, always load the library that includes it using the goal ``log
    frequent_pattern_mining_common <frequent_pattern_mining_common_0>
    transaction_dataset_protocol <transaction_dataset_protocol_0>
 
-``library/gaussian_mixture/``
------------------------------
+``library/gaussian_mixture_clusterer/``
+---------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   gaussian_mixture <gaussian_mixture_0>
+   gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
 
 ``library/gaussian_process_regression/``
 ----------------------------------------
@@ -754,25 +754,25 @@ To load an entity, always load the library that includes it using the goal ``log
    git <git_0>
    git_protocol <git_protocol_0>
 
-``library/glicko2/``
---------------------
+``library/glicko2_periodic_ranker/``
+------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   glicko2 <glicko2_0>
+   glicko2_periodic_ranker <glicko2_periodic_ranker_0>
 
-``library/glicko2_periodic/``
------------------------------
+``library/glicko2_ranker/``
+---------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   glicko2_periodic <glicko2_periodic_0>
+   glicko2_ranker <glicko2_ranker_0>
 
 ``library/gradient_boosting_classifier/``
 -----------------------------------------
@@ -834,15 +834,15 @@ To load an entity, always load the library that includes it using the goal ``log
    weighted_undirected_graph <weighted_undirected_graph_0>
    weighted_undirected_graph(Dictionary) <weighted_undirected_graph_1>
 
-``library/gsp/``
-----------------
+``library/gsp_pattern_miner/``
+------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   gsp <gsp_0>
+   gsp_pattern_miner <gsp_pattern_miner_0>
 
 ``library/hashes/``
 -------------------
@@ -887,15 +887,15 @@ To load an entity, always load the library that includes it using the goal ``log
    siphash_2_4 <siphash_2_4_0>
    siphash_2_4(Key) <siphash_2_4_1>
 
-``library/hdbscan/``
---------------------
+``library/hdbscan_clusterer/``
+------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   hdbscan <hdbscan_0>
+   hdbscan_clusterer <hdbscan_clusterer_0>
 
 ``library/heaps/``
 ------------------
@@ -1008,15 +1008,15 @@ To load an entity, always load the library that includes it using the goal ``log
    html5 <html5_0>
    xhtml11 <xhtml11_0>
 
-``library/ica/``
-----------------
+``library/ica_projection/``
+---------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   ica <ica_0>
+   ica_projection <ica_projection_0>
 
 ``library/ids/``
 ----------------
@@ -1040,15 +1040,15 @@ To load an entity, always load the library that includes it using the goal ``log
    interval <interval_0>
    intervalp <intervalp_0>
 
-``library/iqr/``
-----------------
+``library/iqr_anomaly_detector/``
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   iqr <iqr_0>
+   iqr_anomaly_detector <iqr_anomaly_detector_0>
 
 ``library/iso_13616/``
 ----------------------
@@ -1112,15 +1112,15 @@ To load an entity, always load the library that includes it using the goal ``log
    iso_9362 <iso_9362_0>
    iso_9362_protocol <iso_9362_protocol_0>
 
-``library/isolation_forest/``
------------------------------
+``library/isolation_forest_anomaly_detector/``
+----------------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   isolation_forest <isolation_forest_0>
+   isolation_forest_anomaly_detector <isolation_forest_anomaly_detector_0>
 
 ``library/java/``
 -----------------
@@ -1199,35 +1199,35 @@ To load an entity, always load the library that includes it using the goal ``log
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    json_schema_protocol <json_schema_protocol_0>
 
-``library/kcenters/``
----------------------
+``library/kcenters_clusterer/``
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   kcenters <kcenters_0>
+   kcenters_clusterer <kcenters_clusterer_0>
 
-``library/kemeny_young/``
--------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   kemeny_young <kemeny_young_0>
-
-``library/kernel_pca/``
------------------------
+``library/kemeny_young_ranker/``
+--------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   kernel_pca <kernel_pca_0>
+   kemeny_young_ranker <kemeny_young_ranker_0>
+
+``library/kernel_pca_projection/``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kernel_pca_projection <kernel_pca_projection_0>
 
 ``library/kernel_svm_classifier/``
 ----------------------------------
@@ -1239,65 +1239,65 @@ To load an entity, always load the library that includes it using the goal ``log
 
    kernel_svm_classifier <kernel_svm_classifier_0>
 
-``library/kmeans/``
--------------------
+``library/kmeans_clusterer/``
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   kmeans <kmeans_0>
+   kmeans_clusterer <kmeans_clusterer_0>
 
-``library/kmedians/``
----------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   kmedians <kmedians_0>
-
-``library/kmedoids/``
----------------------
+``library/kmedians_clusterer/``
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   kmedoids <kmedoids_0>
+   kmedians_clusterer <kmedians_clusterer_0>
 
-``library/kmodes/``
--------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   kmodes <kmodes_0>
-
-``library/knn/``
-----------------
+``library/kmedoids_clusterer/``
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   knn <knn_0>
+   kmedoids_clusterer <kmedoids_clusterer_0>
 
-``library/knn_distance/``
--------------------------
+``library/kmodes_clusterer/``
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   knn_distance <knn_distance_0>
+   kmodes_clusterer <kmodes_clusterer_0>
+
+``library/knn_classifier/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn_classifier <knn_classifier_0>
+
+``library/knn_distance_anomaly_detector/``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>
 
 ``library/knn_regression/``
 ---------------------------
@@ -1309,15 +1309,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    knn_regression <knn_regression_0>
 
-``library/kprototypes/``
-------------------------
+``library/kprototypes_clusterer/``
+----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   kprototypes <kprototypes_0>
+   kprototypes_clusterer <kprototypes_clusterer_0>
 
 ``library/ksuid/``
 ------------------
@@ -1394,15 +1394,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    linear_regression <linear_regression_0>
 
-``library/linear_svm/``
------------------------
+``library/linear_svm_classifier/``
+----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   linear_svm <linear_svm_0>
+   linear_svm_classifier <linear_svm_classifier_0>
 
 ``library/listing/``
 --------------------
@@ -1414,15 +1414,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    listing <listing_0>
 
-``library/lof/``
-----------------
+``library/lof_anomaly_detector/``
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   lof <lof_0>
+   lof_anomaly_detector <lof_anomaly_detector_0>
 
 ``library/logging/``
 --------------------
@@ -1436,15 +1436,15 @@ To load an entity, always load the library that includes it using the goal ``log
    logging <logging_0>
    loggingp <loggingp_0>
 
-``library/logistic_regression/``
---------------------------------
+``library/logistic_regression_classifier/``
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   logistic_regression <logistic_regression_0>
+   logistic_regression_classifier <logistic_regression_classifier_0>
 
 ``library/loops/``
 ------------------
@@ -1457,15 +1457,15 @@ To load an entity, always load the library that includes it using the goal ``log
    loop <loop_0>
    loopp <loopp_0>
 
-``library/massey/``
--------------------
+``library/massey_ranker/``
+--------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   massey <massey_0>
+   massey_ranker <massey_ranker_0>
 
 ``library/mcp_server/``
 -----------------------
@@ -1521,15 +1521,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    mime_types <mime_types_0>
 
-``library/modified_z_score/``
------------------------------
+``library/modified_z_score_anomaly_detector/``
+----------------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   modified_z_score <modified_z_score_0>
+   modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
 
 ``library/mutations/``
 ----------------------
@@ -1547,15 +1547,15 @@ To load an entity, always load the library that includes it using the goal ``log
    mutations <mutations_0>
    mutations_store <mutations_store_0>
 
-``library/naive_bayes/``
-------------------------
+``library/naive_bayes_classifier/``
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   naive_bayes <naive_bayes_0>
+   naive_bayes_classifier <naive_bayes_classifier_0>
 
 ``library/nanoid/``
 -------------------
@@ -1569,15 +1569,15 @@ To load an entity, always load the library that includes it using the goal ``log
    nanoid(Representation,Size,Alphabet) <nanoid_3>
    nanoid_protocol <nanoid_protocol_0>
 
-``library/nearest_centroid/``
------------------------------
+``library/nearest_centroid_classifier/``
+----------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   nearest_centroid <nearest_centroid_0>
+   nearest_centroid_classifier <nearest_centroid_classifier_0>
 
 ``library/nested_dictionaries/``
 --------------------------------
@@ -1592,25 +1592,25 @@ To load an entity, always load the library that includes it using the goal ``log
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nrbtree <nrbtree_0>
 
-``library/nmf/``
-----------------
+``library/nmf_projection/``
+---------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   nmf <nmf_0>
+   nmf_projection <nmf_projection_0>
 
-``library/optics/``
--------------------
+``library/optics_clusterer/``
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   optics <optics_0>
+   optics_clusterer <optics_clusterer_0>
 
 ``library/optionals/``
 ----------------------
@@ -1658,15 +1658,15 @@ To load an entity, always load the library that includes it using the goal ``log
    pattern_miner_common <pattern_miner_common_0>
    pattern_miner_protocol <pattern_miner_protocol_0>
 
-``library/pca/``
-----------------
+``library/pca_projection/``
+---------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   pca <pca_0>
+   pca_projection <pca_projection_0>
 
 ``library/permutations/``
 -------------------------
@@ -1679,25 +1679,25 @@ To load an entity, always load the library that includes it using the goal ``log
    permutations <permutations_0>
    permutations_protocol <permutations_protocol_0>
 
-``library/plackett_luce/``
---------------------------
+``library/plackett_luce_last_ranker/``
+--------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   plackett_luce <plackett_luce_0>
+   plackett_luce_last_ranker <plackett_luce_last_ranker_0>
 
-``library/plackett_luce_last/``
--------------------------------
+``library/plackett_luce_ranker/``
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   plackett_luce_last <plackett_luce_last_0>
+   plackett_luce_ranker <plackett_luce_ranker_0>
 
 ``library/pls_projection/``
 ---------------------------
@@ -1709,25 +1709,25 @@ To load an entity, always load the library that includes it using the goal ``log
 
    pls_projection <pls_projection_0>
 
-``library/prefix_span/``
-------------------------
+``library/prefix_span_pattern_miner/``
+--------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   prefix_span <prefix_span_0>
+   prefix_span_pattern_miner <prefix_span_pattern_miner_0>
 
-``library/probabilistic_pca/``
-------------------------------
+``library/probabilistic_pca_projection/``
+-----------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   probabilistic_pca <probabilistic_pca_0>
+   probabilistic_pca_projection <probabilistic_pca_projection_0>
 
 ``library/process/``
 --------------------
@@ -1787,15 +1787,15 @@ To load an entity, always load the library that includes it using the goal ``log
    random_protocol <random_protocol_0>
    sampling_protocol <sampling_protocol_0>
 
-``library/random_forest/``
---------------------------
+``library/random_forest_classifier/``
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   random_forest <random_forest_0>
+   random_forest_classifier <random_forest_classifier_0>
 
 ``library/random_forest_regression/``
 -------------------------------------
@@ -1913,15 +1913,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    regression_tree <regression_tree_0>
 
-``library/regularized_bradley_terry/``
---------------------------------------
+``library/regularized_bradley_terry_ranker/``
+---------------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   regularized_bradley_terry <regularized_bradley_terry_0>
+   regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
 
 ``library/ridge_regression/``
 -----------------------------
@@ -1933,15 +1933,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    ridge_regression <ridge_regression_0>
 
-``library/schulze/``
---------------------
+``library/schulze_ranker/``
+---------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   schulze <schulze_0>
+   schulze_ranker <schulze_ranker_0>
 
 ``library/sequential_pattern_mining_protocols/``
 ------------------------------------------------
@@ -2017,15 +2017,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
    socket <socket_0>
 
-``library/spade/``
-------------------
+``library/spade_pattern_miner/``
+--------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   spade <spade_0>
+   spade_pattern_miner <spade_pattern_miner_0>
 
 ``library/statistics/``
 -----------------------
@@ -2104,15 +2104,15 @@ To load an entity, always load the library that includes it using the goal ``log
    term_io <term_io_0>
    term_io_protocol <term_io_protocol_0>
 
-``library/thurstone_mosteller/``
---------------------------------
+``library/thurstone_mosteller_ranker/``
+---------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   thurstone_mosteller <thurstone_mosteller_0>
+   thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
 
 ``library/time_scales/``
 ------------------------
@@ -2162,15 +2162,15 @@ To load an entity, always load the library that includes it using the goal ``log
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toon_protocol <toon_protocol_0>
 
-``library/truncated_svd/``
---------------------------
+``library/truncated_svd_projection/``
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   truncated_svd <truncated_svd_0>
+   truncated_svd_projection <truncated_svd_projection_0>
 
 ``library/tsv/``
 ----------------
@@ -2298,15 +2298,15 @@ To load an entity, always load the library that includes it using the goal ``log
    yaml <yaml_0>
    yaml_protocol <yaml_protocol_0>
 
-``library/z_score/``
---------------------
+``library/z_score_anomaly_detector/``
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   z_score <z_score_0>
+   z_score_anomaly_detector <z_score_anomaly_detector_0>
 
 ``library/zippers/``
 --------------------

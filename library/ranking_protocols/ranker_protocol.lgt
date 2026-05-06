@@ -24,9 +24,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-06,
 		comment is 'Protocol for machine learning rankers.',
-		see_also is [bradley_terry, ranking_dataset_protocol, pairwise_ranking_dataset_protocol]
+		see_also is [bradley_terry_ranker, ranking_dataset_protocol, pairwise_ranking_dataset_protocol]
 	]).
 
 	:- public(learn/3).

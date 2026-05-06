@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'Partial Least Squares projection for target-valued continuous datasets using deterministic PLS1 deflation.',
-		see_also is [lda_projection, pca]
+		see_also is [lda_projection, pca_projection]
 	]).
 
 	:- uses(format, [

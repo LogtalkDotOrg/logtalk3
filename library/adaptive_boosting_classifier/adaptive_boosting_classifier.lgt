@@ -25,9 +25,9 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-06,
 		comment is 'Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
-		see_also is [dataset_protocol, c45, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest]
+		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier]
 	]).
 
 	:- public(learn/3).
@@ -44,7 +44,7 @@
 		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
-	:- uses(c45, [
+	:- uses(c45_classifier, [
 		learn/2 as c45_learn/2,
 		predict/3 as c45_predict/3
 	]).
@@ -371,7 +371,7 @@
 		valid(positive_float, Alpha),
 		^^valid_attribute_names(AttributeNames),
 		AttributeNames \== [],
-		c45::valid_classifier(Tree),
+		c45_classifier::valid_classifier(Tree),
 		valid_weighted_trees(WeightedTrees).
 
 	classifier_data(Classifier, WeightedTrees, ClassValues, Options) :-

@@ -105,9 +105,9 @@ Objects
    a_star_interpreter(W) <a_star_interpreter_1>
    adaptive_boosting_classifier <adaptive_boosting_classifier_0>
    after_event_registry <after_event_registry_0>
-   agglomerative <agglomerative_0>
+   agglomerative_clusterer <agglomerative_clusterer_0>
    amqp <amqp_0>
-   apriori <apriori_0>
+   apriori_pattern_miner <apriori_pattern_miner_0>
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
    assertions <assertions_0>
    assertions(Mode) <assertions_1>
@@ -134,10 +134,10 @@ Objects
    bintree <bintree_0>
    blank_grammars(Format) <blank_grammars_1>
    body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
-   borda <borda_0>
-   bradley_terry <bradley_terry_0>
+   borda_ranker <borda_ranker_0>
+   bradley_terry_ranker <bradley_terry_ranker_0>
    bup_interpreter <bup_interpreter_0>
-   c45 <c45_0>
+   c45_classifier <c45_classifier_0>
    callable <callable_0>
    caller_diagram <caller_diagram_0>
    caller_diagram(Format) <caller_diagram_1>
@@ -148,15 +148,15 @@ Objects
    ccsds(SecondaryHeaderLength) <ccsds_1>
    character <character_0>
    clauses_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <clauses_reordering_5>
-   clo_span <clo_span_0>
+   clo_span_pattern_miner <clo_span_pattern_miner_0>
    cobertura_report <cobertura_report_0>
    code_metrics <code_metrics_0>
    cogc_metric <cogc_metric_0>
-   colley <colley_0>
+   colley_ranker <colley_ranker_0>
    combinations <combinations_0>
    command_line_options <command_line_options_0>
    compound <compound_0>
-   copeland <copeland_0>
+   copeland_ranker <copeland_ranker_0>
    coroutining <coroutining_0>
    counter <counter_0>
    coupling_metric <coupling_metric_0>
@@ -176,13 +176,13 @@ Objects
    ctrf_report <ctrf_report_0>
    cuid2 <cuid2_0>
    cuid2(Representation,Size,Alphabet) <cuid2_3>
-   cusum <cusum_0>
+   cusum_anomaly_detector <cusum_anomaly_detector_0>
    cytoscapejs_graph_language <cytoscapejs_graph_language_0>
    d2_graph_language <d2_graph_language_0>
    datalog <datalog_0>
    date <date_0>
    dates_tz <dates_tz_0>
-   dbscan <dbscan_0>
+   dbscan_clusterer <dbscan_clusterer_0>
    dead_code_scanner <dead_code_scanner_0>
    debug_expansion(Mode) <debug_expansion_1>
    debug_messages <debug_messages_0>
@@ -211,15 +211,15 @@ Objects
    doclet <doclet_0>
    dot_graph_language <dot_graph_language_0>
    dump_trace <dump_trace_0>
-   eclat <eclat_0>
+   eclat_pattern_miner <eclat_pattern_miner_0>
    edcg <edcg_0>
    either <either_0>
    elastic_net_regression <elastic_net_regression_0>
-   elo <elo_0>
+   elo_ranker <elo_ranker_0>
    entity_diagram <entity_diagram_0>
    entity_diagram(Format) <entity_diagram_1>
    event_registry <event_registry_0>
-   ewma <ewma_0>
+   ewma_anomaly_detector <ewma_anomaly_detector_0>
    expand_library_alias_paths <expand_library_alias_paths_0>
    expected <expected_0>
    expected(Expected) <expected_1>
@@ -237,25 +237,25 @@ Objects
    fnv1a_32 <fnv1a_32_0>
    fnv1a_64 <fnv1a_64_0>
    format <format_0>
-   fp_growth <fp_growth_0>
-   gaussian_mixture <gaussian_mixture_0>
+   fp_growth_pattern_miner <fp_growth_pattern_miner_0>
+   gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
    gaussian_process_regression <gaussian_process_regression_0>
    genint <genint_0>
    gensym <gensym_0>
    geospatial <geospatial_0>
    git <git_0>
-   glicko2 <glicko2_0>
-   glicko2_periodic <glicko2_periodic_0>
+   glicko2_periodic_ranker <glicko2_periodic_ranker_0>
+   glicko2_ranker <glicko2_ranker_0>
    gradient_boosting_classifier <gradient_boosting_classifier_0>
    gradient_boosting_regression <gradient_boosting_regression_0>
    grammar_rules_hook <grammar_rules_hook_0>
    graph_language_registry <graph_language_registry_0>
-   gsp <gsp_0>
+   gsp_pattern_miner <gsp_pattern_miner_0>
    halstead_metric <halstead_metric_0>
    halstead_metric(Stroud) <halstead_metric_1>
    hash_common_32 <hash_common_32_0>
    hash_common_64 <hash_common_64_0>
-   hdbscan <hdbscan_0>
+   hdbscan_clusterer <hdbscan_clusterer_0>
    head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_mutation_5>
    head_arguments_reordering(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <head_arguments_reordering_5>
    heap(Order) <heap_1>
@@ -267,7 +267,7 @@ Objects
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
    html5 <html5_0>
-   ica <ica_0>
+   ica_projection <ica_projection_0>
    iddfs_interpreter(Increment) <iddfs_interpreter_1>
    identity_hook <identity_hook_0>
    ids <ids_0>
@@ -277,7 +277,7 @@ Objects
    integer <integer_0>
    interval <interval_0>
    ip_grammars(Format) <ip_grammars_1>
-   iqr <iqr_0>
+   iqr_anomaly_detector <iqr_anomaly_detector_0>
    iso8601 <iso8601_0>
    iso_13616 <iso_13616_0>
    iso_13616_registry <iso_13616_registry_0>
@@ -301,7 +301,7 @@ Objects
    iso_8859_4 <iso_8859_4_0>
    iso_8859_9 <iso_8859_9_0>
    iso_9362 <iso_9362_0>
-   isolation_forest <isolation_forest_0>
+   isolation_forest_anomaly_detector <isolation_forest_anomaly_detector_0>
    issue_creator <issue_creator_0>
    java <java_0>
    java(Reference) <java_1>
@@ -320,18 +320,18 @@ Objects
    json_schema <json_schema_0>
    json_schema(StringRepresentation) <json_schema_1>
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
-   kcenters <kcenters_0>
-   kemeny_young <kemeny_young_0>
-   kernel_pca <kernel_pca_0>
+   kcenters_clusterer <kcenters_clusterer_0>
+   kemeny_young_ranker <kemeny_young_ranker_0>
+   kernel_pca_projection <kernel_pca_projection_0>
    kernel_svm_classifier <kernel_svm_classifier_0>
-   kmeans <kmeans_0>
-   kmedians <kmedians_0>
-   kmedoids <kmedoids_0>
-   kmodes <kmodes_0>
-   knn <knn_0>
-   knn_distance <knn_distance_0>
+   kmeans_clusterer <kmeans_clusterer_0>
+   kmedians_clusterer <kmedians_clusterer_0>
+   kmedoids_clusterer <kmedoids_clusterer_0>
+   kmodes_clusterer <kmodes_clusterer_0>
+   knn_classifier <knn_classifier_0>
+   knn_distance_anomaly_detector <knn_distance_anomaly_detector_0>
    knn_regression <knn_regression_0>
-   kprototypes <kprototypes_0>
+   kprototypes_clusterer <kprototypes_clusterer_0>
    ksuid <ksuid_0>
    ksuid(Representation,Alphabet) <ksuid_2>
    lasso_regression <lasso_regression_0>
@@ -348,20 +348,20 @@ Objects
    linda <linda_0>
    linear_algebra <linear_algebra_0>
    linear_regression <linear_regression_0>
-   linear_svm <linear_svm_0>
+   linear_svm_classifier <linear_svm_classifier_0>
    lines_metric <lines_metric_0>
    linter_reporter <linter_reporter_0>
    list <list_0>
    list(Type) <list_1>
-   lof <lof_0>
+   lof_anomaly_detector <lof_anomaly_detector_0>
    logger <logger_0>
-   logistic_regression <logistic_regression_0>
+   logistic_regression_classifier <logistic_regression_classifier_0>
    logtalk <logtalk_0>
    loop <loop_0>
    lovins_stemmer(Representation) <lovins_stemmer_1>
    magic <magic_0>
    magic_expansion(Mode) <magic_expansion_1>
-   massey <massey_0>
+   massey_ranker <massey_ranker_0>
    maxheap <maxheap_0>
    maybe <maybe_0>
    mcp_server <mcp_server_0>
@@ -376,21 +376,21 @@ Objects
    mime_types <mime_types_0>
    minheap <minheap_0>
    minimal_output <minimal_output_0>
-   modified_z_score <modified_z_score_0>
+   modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
    modules_diagram_support <modules_diagram_support_0>
    murmurhash3_x64_128 <murmurhash3_x64_128_0>
    murmurhash3_x86_128 <murmurhash3_x86_128_0>
    murmurhash3_x86_32 <murmurhash3_x86_32_0>
    mutation_testing <mutation_testing_0>
    mutations_store <mutations_store_0>
-   naive_bayes <naive_bayes_0>
+   naive_bayes_classifier <naive_bayes_classifier_0>
    nanoid <nanoid_0>
    nanoid(Representation,Size,Alphabet) <nanoid_3>
    natural <natural_0>
    navltree <navltree_0>
    nbintree <nbintree_0>
-   nearest_centroid <nearest_centroid_0>
-   nmf <nmf_0>
+   nearest_centroid_classifier <nearest_centroid_classifier_0>
+   nmf_projection <nmf_projection_0>
    noc_metric <noc_metric_0>
    nor_metric <nor_metric_0>
    nrbtree <nrbtree_0>
@@ -400,7 +400,7 @@ Objects
    object_wrapper_hook <object_wrapper_hook_0>
    object_wrapper_hook(Protocol) <object_wrapper_hook_1>
    object_wrapper_hook(Name,Relations) <object_wrapper_hook_2>
-   optics <optics_0>
+   optics_clusterer <optics_clusterer_0>
    optional <optional_0>
    optional(Optional) <optional_1>
    os <os_0>
@@ -410,20 +410,20 @@ Objects
    pairing_heap_max <pairing_heap_max_0>
    pairing_heap_min <pairing_heap_min_0>
    pairs <pairs_0>
-   pca <pca_0>
+   pca_projection <pca_projection_0>
    pddl <pddl_0>
    permutations <permutations_0>
-   plackett_luce <plackett_luce_0>
-   plackett_luce_last <plackett_luce_last_0>
+   plackett_luce_last_ranker <plackett_luce_last_ranker_0>
+   plackett_luce_ranker <plackett_luce_ranker_0>
    plantuml_graph_language <plantuml_graph_language_0>
    pls_projection <pls_projection_0>
    population <population_0>
    porter_stemmer(Representation) <porter_stemmer_1>
    ports_profiler <ports_profiler_0>
    predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
-   prefix_span <prefix_span_0>
+   prefix_span_pattern_miner <prefix_span_pattern_miner_0>
    print_goal_hook <print_goal_hook_0>
-   probabilistic_pca <probabilistic_pca_0>
+   probabilistic_pca_projection <probabilistic_pca_projection_0>
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
    protobuf <protobuf_0>
@@ -431,7 +431,7 @@ Objects
    queue <queue_0>
    random <random_0>
    random(Algorithm) <random_1>
-   random_forest <random_forest_0>
+   random_forest_classifier <random_forest_classifier_0>
    random_forest_regression <random_forest_regression_0>
    random_projection <random_projection_0>
    rank_centrality <rank_centrality_0>
@@ -443,7 +443,7 @@ Objects
    registries <registries_0>
    registry_loader_hook <registry_loader_hook_0>
    regression_tree <regression_tree_0>
-   regularized_bradley_terry <regularized_bradley_terry_0>
+   regularized_bradley_terry_ranker <regularized_bradley_terry_ranker_0>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    rfc_metric <rfc_metric_0>
    ridge_regression <ridge_regression_0>
@@ -451,7 +451,7 @@ Objects
    sample <sample_0>
    sarif <sarif_0>
    sbom <sbom_0>
-   schulze <schulze_0>
+   schulze_ranker <schulze_ranker_0>
    scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
    sdbm_32 <sdbm_32_0>
    sdbm_64 <sdbm_64_0>
@@ -484,7 +484,7 @@ Objects
    snowflakeid_twitter <snowflakeid_twitter_0>
    snowflakeid_twitter(Representation) <snowflakeid_twitter_1>
    socket <socket_0>
-   spade <spade_0>
+   spade_pattern_miner <spade_pattern_miner_0>
    splaytree <splaytree_0>
    stomp <stomp_0>
    streamvars <streamvars_0>
@@ -502,7 +502,7 @@ Objects
    tap_report <tap_report_0>
    term <term_0>
    term_io <term_io_0>
-   thurstone_mosteller <thurstone_mosteller_0>
+   thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
    time <time_0>
    time_scales <time_scales_0>
    time_scales_data <time_scales_data_0>
@@ -515,7 +515,7 @@ Objects
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toychrdb <toychrdb_0>
    treap_set <treap_set_0>
-   truncated_svd <truncated_svd_0>
+   truncated_svd_projection <truncated_svd_projection_0>
    truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
    tsv <tsv_0>
    tsv(Header) <tsv_1>
@@ -576,7 +576,7 @@ Objects
    xunit_output <xunit_output_0>
    xunit_report <xunit_report_0>
    yaml <yaml_0>
-   z_score <z_score_0>
+   z_score_anomaly_detector <z_score_anomaly_detector_0>
    zlist <zlist_0>
 
 Protocols

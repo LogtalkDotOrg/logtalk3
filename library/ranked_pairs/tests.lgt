@@ -49,7 +49,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'Unit tests for the "ranked_pairs" library.'
 	]).
 
@@ -133,8 +133,8 @@
 		ranked_pairs::locked_pairs(Ranker, LockedPairs).
 
 	test(condorcet_methods_divergence_rankings, deterministic((SchulzeRanking == [alpha, beta, delta, gamma], RankedPairsRanking == [alpha, delta, beta, gamma], SchulzeRanking \== RankedPairsRanking))) :-
-		schulze::learn(condorcet_divergence_pairwise, SchulzeRanker),
-		schulze::rank(SchulzeRanker, [gamma, beta, delta, alpha], SchulzeRanking),
+		schulze_ranker::learn(condorcet_divergence_pairwise, SchulzeRanker),
+		schulze_ranker::rank(SchulzeRanker, [gamma, beta, delta, alpha], SchulzeRanking),
 		ranked_pairs::learn(condorcet_divergence_pairwise, RankedPairsRanker),
 		ranked_pairs::rank(RankedPairsRanker, [gamma, beta, delta, alpha], RankedPairsRanking).
 

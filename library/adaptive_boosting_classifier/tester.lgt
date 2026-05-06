@@ -26,7 +26,7 @@
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load(classification_protocols(loader)),
-	logtalk_load(c45(loader)),
+	logtalk_load(c45_classifier(loader)),
 	logtalk_load(adaptive_boosting_classifier, [source_data(on), debug(on)]),
 	logtalk_load([
 		classification_protocols('test_datasets/play_tennis'),

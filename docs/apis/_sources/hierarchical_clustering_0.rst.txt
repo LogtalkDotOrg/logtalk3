@@ -8,14 +8,14 @@
 ``hierarchical_clustering``
 ===========================
 
-Hierarchical clusterer for continuous datasets. Learns a full agglomerative merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.
+Hierarchical clusterer for continuous datasets. Learns a full agglomerative_clusterer merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.
 
 | **Availability:** 
 |    ``logtalk_load(hierarchical_clustering(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-05
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -81,5 +81,5 @@ Operators
 
 .. seealso::
 
-   :ref:`clusterer_protocol <clusterer_protocol/0>`, :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`, :ref:`agglomerative <agglomerative/0>`
+   :ref:`clusterer_protocol <clusterer_protocol/0>`, :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`, :ref:`agglomerative_clusterer <agglomerative_clusterer/0>`
 

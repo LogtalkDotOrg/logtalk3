@@ -68,37 +68,37 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 	`linear_algebra`, `simulated_annealing`, and `statistics`.
 - Machine learning:
 	- Classification:
-		`classification_protocols`, `adaptive_boosting_classifier`, `c45`, `gradient_boosting_classifier`,
-        `kernel_svm_classifier`, `knn`, `lda_classifier`, `linear_svm`,
-		`logistic_regression`, `naive_bayes`, `nearest_centroid`, `qda_classifier`,
-		`random_forest`, and `sgd_classifier`.
+		`classification_protocols`, `adaptive_boosting_classifier`, `c45_classifier`, `gradient_boosting_classifier`,
+        `kernel_svm_classifier`, `knn_classifier`, `lda_classifier`, `linear_svm_classifier`,
+		`logistic_regression_classifier`, `naive_bayes_classifier`, `nearest_centroid_classifier`, `qda_classifier`,
+		`random_forest_classifier`, and `sgd_classifier`.
 	- Anomaly detection:
-		`anomaly_detection_protocols`, `cusum`, `ewma`, `iqr`, `isolation_forest`,
-		`knn_distance`, `lof`, `modified_z_score`, and `z_score`.
+		`anomaly_detection_protocols`, `cusum_anomaly_detector`, `ewma_anomaly_detector`, `iqr_anomaly_detector`, `isolation_forest_anomaly_detector`,
+		`knn_distance_anomaly_detector`, `lof_anomaly_detector`, `modified_z_score_anomaly_detector`, and `z_score_anomaly_detector`.
 	- Regression:
 		`regression_protocols`, `bayesian_ridge_regression`, `elastic_net_regression`,
         `gradient_boosting_regression`, `gaussian_process_regression`, `knn_regression`,
         `lasso_regression`, `linear_regression`, `random_forest_regression`,
         `regression_tree`, and `ridge_regression`.
 	- Ranking:
-		`ranking_protocols`, `borda`, `bradley_terry`, `colley`, `copeland`,
-	    `elo`, `glicko2`, `glicko2_periodic`, `hodge_rank`, `kemeny_young`,
-        `massey`, `plackett_luce`, `plackett_luce_last`, `rank_centrality`,
-        `ranked_pairs`, `regularized_bradley_terry`, `schulze`, and
-        `thurstone_mosteller`.
+		`ranking_protocols`, `borda_ranker`, `bradley_terry_ranker`, `colley_ranker`, `copeland_ranker`,
+	    `elo_ranker`, `glicko2_ranker`, `glicko2_periodic_ranker`, `hodge_rank`, `kemeny_young_ranker`,
+        `massey_ranker`, `plackett_luce_ranker`, `plackett_luce_last_ranker`, `rank_centrality`,
+        `ranked_pairs`, `regularized_bradley_terry_ranker`, `schulze_ranker`, and
+        `thurstone_mosteller_ranker`.
 	- Clustering:
-		`clustering_protocols`, `agglomerative`, `dbscan`,
-		`gaussian_mixture`, `hdbscan`, `hierarchical_clustering`,
-		`kcenters`, `kmeans`, `kmedians`, `kmedoids`, `kmodes`,
-		`kprototypes`, and `optics`.
+		`clustering_protocols`, `agglomerative_clusterer`, `dbscan_clusterer`,
+		`gaussian_mixture_clusterer`, `hdbscan_clusterer`, `hierarchical_clustering`,
+		`kcenters_clusterer`, `kmeans_clusterer`, `kmedians_clusterer`, `kmedoids_clusterer`, `kmodes_clusterer`,
+		`kprototypes_clusterer`, and `optics_clusterer`.
 	- Dimension reduction:
-		`dimension_reduction_protocols`, `ica`, `kernel_pca`, `lda_projection`,
-	    `nmf`, `pca`, `pls_projection`, `probabilistic_pca`, and
+		`dimension_reduction_protocols`, `ica_projection`, `kernel_pca_projection`, `lda_projection`,
+	    `nmf_projection`, `pca_projection`, `pls_projection`, `probabilistic_pca_projection`, and
 	    `random_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
-		`sequential_pattern_mining_protocols`, `apriori`, `clo_span`,
-		`eclat`, `fp_growth`, `gsp`, `prefix_span`, and `spade`.
+		`sequential_pattern_mining_protocols`, `apriori_pattern_miner`, `clo_span_pattern_miner`,
+		`eclat_pattern_miner`, `fp_growth_pattern_miner`, `gsp_pattern_miner`, `prefix_span_pattern_miner`, and `spade_pattern_miner`.
 
 In addition to the loader-based libraries, this directory also contains a
 small number of standalone reusable entities, namely `attributes`, `cloning`,

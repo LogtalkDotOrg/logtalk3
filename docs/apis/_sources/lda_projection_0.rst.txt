@@ -15,7 +15,7 @@ Linear Discriminant Analysis projection for labeled continuous datasets using a 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-05
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -62,5 +62,5 @@ Operators
 
 .. seealso::
 
-   :ref:`pca <pca/0>`, :ref:`random_projection <random_projection/0>`
+   :ref:`pca_projection <pca_projection/0>`, :ref:`random_projection <random_projection/0>`
 

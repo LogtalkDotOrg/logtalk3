@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'Random projection reducer for continuous datasets using a portable seeded Rademacher projection matrix.',
-		see_also is [lda_projection, pca]
+		see_also is [lda_projection, pca_projection]
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [

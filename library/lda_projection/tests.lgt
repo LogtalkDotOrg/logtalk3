@@ -87,7 +87,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-28,
+		date is 2026-05-06,
 		comment is 'Unit tests for the "lda_projection" library.'
 	]).
 

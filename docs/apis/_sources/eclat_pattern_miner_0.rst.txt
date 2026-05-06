@@ -1,0 +1,64 @@
+.. index:: single: eclat_pattern_miner
+.. _eclat_pattern_miner/0:
+
+.. rst-class:: right
+
+**object**
+
+``eclat_pattern_miner``
+=======================
+
+Eclat frequent itemset miner for transaction datasets using portable vertical tidsets and depth-first recursive prefix extension.
+
+| **Availability:** 
+|    ``logtalk_load(eclat_pattern_miner(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`frequent_pattern_mining_common <frequent_pattern_mining_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`pattern_miner_protocol/0::check_pattern_miner/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`pattern_miner_protocol/0::diagnostic/2`  :ref:`pattern_miner_protocol/0::diagnostics/2`  :ref:`pattern_miner_protocol/0::export_to_clauses/4`  :ref:`pattern_miner_protocol/0::export_to_file/4`  :ref:`pattern_miner_protocol/0::mine/2`  :ref:`pattern_miner_protocol/0::mine/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`pattern_miner_protocol/0::pattern_miner_options/2`  :ref:`pattern_miner_protocol/0::print_pattern_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`pattern_miner_protocol/0::valid_pattern_miner/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pattern_miner_protocol <pattern_miner_protocol/0>`, :ref:`transaction_dataset_protocol <transaction_dataset_protocol/0>`, :ref:`apriori_pattern_miner <apriori_pattern_miner/0>`, :ref:`fp_growth_pattern_miner <fp_growth_pattern_miner/0>`
+

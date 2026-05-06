@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'HodgeRank pairwise measurement ranker. Learns one deterministic zero-sum score per item from a dataset object implementing the ``pairwise_measurement_dataset_protocol`` protocol by solving the weighted graph-Laplacian least-squares system induced by signed edge measurements and returns a self-describing ranker term with diagnostics and residuals.',
-		see_also is [pairwise_measurement_dataset_protocol, ranker_protocol, massey]
+		see_also is [pairwise_measurement_dataset_protocol, ranker_protocol, massey_ranker]
 	]).
 
 	:- public(residuals/2).

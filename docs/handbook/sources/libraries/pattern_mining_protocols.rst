@@ -59,8 +59,9 @@ pattern length filtering:
 - ``minimum_pattern_length(1)`` sets the minimum pattern length retained
   in the mined result.
 
-The current ``apriori``, ``eclat``, ``fp_growth``, and ``prefix_span``
-libraries all use these shared defaults.
+The current ``apriori_pattern_miner``, ``eclat_pattern_miner``,
+``fp_growth_pattern_miner``, and ``prefix_span_pattern_miner`` libraries
+all use these shared defaults.
 
 Diagnostics
 -----------

@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-06,
 		comment is 'Quadratic Discriminant Analysis classifier for continuous datasets using class-specific regularized covariance models.',
-		see_also is [dataset_protocol, lda_classifier, nearest_centroid]
+		see_also is [dataset_protocol, lda_classifier, nearest_centroid_classifier]
 	]).
 
 	:- public(learn/3).

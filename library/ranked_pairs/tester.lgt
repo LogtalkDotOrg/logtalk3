@@ -23,7 +23,7 @@
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(ranking_protocols(loader)),
-	logtalk_load(schulze(loader)),
+	logtalk_load(schulze_ranker(loader)),
 	logtalk_load([
 		ranking_protocols('test_datasets/regular_head_to_head'),
 		ranking_protocols('test_datasets/head_to_head'),

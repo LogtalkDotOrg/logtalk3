@@ -1,0 +1,65 @@
+.. index:: single: glicko2_periodic_ranker
+.. _glicko2_periodic_ranker/0:
+
+.. rst-class:: right
+
+**object**
+
+``glicko2_periodic_ranker``
+===========================
+
+Multi-period Glicko-2 ranker over temporal pairwise game datasets with explicit rating periods and per-game results.
+
+| **Availability:** 
+|    ``logtalk_load(glicko2_periodic_ranker(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
+|    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
+|    ``public`` :ref:`glicko2_common <glicko2_common/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`ranker_protocol/0::check_ranker/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ranker_protocol/0::diagnostic/2`  :ref:`ranker_protocol/0::diagnostics/2`  :ref:`ranker_protocol/0::export_to_clauses/4`  :ref:`ranker_protocol/0::export_to_file/4`  :ref:`ranking_dataset_common/0::grouped_dataset_groups/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/2`  :ref:`ranking_dataset_common/0::grouped_dataset_items/3`  :ref:`ranking_dataset_common/0::grouped_dataset_summary/2`  :ref:`ranker_protocol/0::learn/2`  :ref:`ranker_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ranking_dataset_common/0::pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_matchups/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_preferences/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_summary/2`  :ref:`ranking_dataset_common/0::pairwise_dataset_win_totals/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_items/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_measurements/2`  :ref:`ranking_dataset_common/0::pairwise_measurement_dataset_summary/2`  :ref:`ranker_protocol/0::print_ranker/1`  :ref:`ranker_protocol/0::rank/3`  :ref:`ranker_protocol/0::ranker_options/2`  :ref:`ranker_protocol/0::scores/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_connected_components/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_declared_items/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_games/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_games/3`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_items/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_periods/2`  :ref:`ranking_dataset_common/0::temporal_pairwise_dataset_summary/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`ranker_protocol/0::valid_ranker/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/1`  :ref:`ranking_dataset_common/0::validate_grouped_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_dataset/2`  :ref:`ranking_dataset_common/0::validate_pairwise_measurement_dataset/1`  :ref:`ranking_dataset_common/0::validate_pairwise_measurement_dataset/2`  :ref:`ranking_dataset_common/0::validate_temporal_pairwise_dataset/1`  :ref:`ranking_dataset_common/0::validate_temporal_pairwise_dataset/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`glicko2_ranker <glicko2_ranker/0>`
+

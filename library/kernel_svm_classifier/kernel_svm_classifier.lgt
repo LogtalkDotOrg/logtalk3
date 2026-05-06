@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-06,
 		comment is 'Kernel support vector machine classifier using one-vs-rest dual margin models with linear, polynomial, and radial basis function kernels.',
-		see_also is [dataset_protocol, linear_svm, logistic_regression, kernel_pca]
+		see_also is [dataset_protocol, linear_svm_classifier, logistic_regression_classifier, kernel_pca_projection]
 	]).
 
 	:- public(learn/3).

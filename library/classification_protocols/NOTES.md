@@ -30,9 +30,9 @@ as objects implementing the `classifier_protocol` protocol.
 This library also provides reusable shared categories, smoke tests, and
 test datasets. See below for details.
 
-Logtalk currently provides several classifiers including `c45`, `knn`,
-`linear_svm`, `logistic_regression`, `naive_bayes`, `nearest_centroid`,
-and `random_forest`. See these libraries documentation for details.
+Logtalk currently provides several classifiers including `c45_classifier`, `knn_classifier`,
+`linear_svm_classifier`, `logistic_regression_classifier`, `naive_bayes_classifier`, `nearest_centroid_classifier`,
+and `random_forest_classifier`. See these libraries documentation for details.
 
 
 Shared category

@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'Rank Centrality pairwise preference ranker. Learns one stationary probability score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying power iteration to the Rank Centrality Markov chain built from aggregated head-to-head outcomes, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry, copeland]
+		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry_ranker, copeland_ranker]
 	]).
 
 	:- uses(format, [

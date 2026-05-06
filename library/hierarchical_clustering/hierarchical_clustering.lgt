@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
-		comment is 'Hierarchical clusterer for continuous datasets. Learns a full agglomerative merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.',
-		see_also is [clusterer_protocol, clustering_dataset_protocol, agglomerative]
+		date is 2026-05-06,
+		comment is 'Hierarchical clusterer for continuous datasets. Learns a full agglomerative_clusterer merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.',
+		see_also is [clusterer_protocol, clustering_dataset_protocol, agglomerative_clusterer]
 	]).
 
 	:- uses(format, [

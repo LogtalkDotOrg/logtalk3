@@ -25,10 +25,10 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'Linear Discriminant Analysis projection for labeled continuous datasets using a portable regularized Fisher eigensolver.',
 		see_also is [
-			pca, random_projection
+			pca_projection, random_projection
 		]
 	]).
 

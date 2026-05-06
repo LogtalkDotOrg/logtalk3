@@ -29,11 +29,11 @@ directory in the ``NOTES.md`` file.
 
    overview
    adaptive_boosting_classifier
-   agglomerative
+   agglomerative_clusterer
    amqp
    anomaly_detection_protocols
    application
-   apriori
+   apriori_pattern_miner
    arbitrary
    assignvars
    avro
@@ -43,59 +43,59 @@ directory in the ``NOTES.md`` file.
    base85
    basic_types
    bayesian_ridge_regression
-   borda
-   bradley_terry
-   c45
+   borda_ranker
+   bradley_terry_ranker
+   c45_classifier
    cbor
    character_sets
    ccsds
    classification_protocols
-   clo_span
+   clo_span_pattern_miner
    clustering_protocols
-   colley
+   colley_ranker
    combinations
    command_line_options
    core
-   copeland
+   copeland_ranker
    coroutining
    csv
    cuid2
-   cusum
+   cusum_anomaly_detector
    datalog
    dates
    dates_tz
-   dbscan
+   dbscan_clusterer
    dependents
    deques
    dictionaries
    dif
    dimension_reduction_protocols
-   eclat
+   eclat_pattern_miner
    edcg
    elastic_net_regression
-   elo
+   elo_ranker
    events
-   ewma
+   ewma_anomaly_detector
    expand_library_alias_paths
    expecteds
    format
-   fp_growth
+   fp_growth_pattern_miner
    frequent_pattern_mining_protocols
-   gaussian_mixture
+   gaussian_mixture_clusterer
    gaussian_process_regression
    genint
    gensym
    geospatial
    git
-   glicko2
-   glicko2_periodic
+   glicko2_ranker
+   glicko2_periodic_ranker
    gradient_boosting_classifier
    gradient_boosting_regression
    grammars
    graphs
-   gsp
+   gsp_pattern_miner
    hashes
-   hdbscan
+   hdbscan_clusterer
    heaps
    hierarchical_clustering
    hierarchies
@@ -104,34 +104,34 @@ directory in the ``NOTES.md`` file.
    hook_flows
    hook_objects
    html
-   ica
+   ica_projection
    ids
    intervals
-   iqr
+   iqr_anomaly_detector
    iso_639
    iso_3166
    iso_4217
    iso_9362
    iso_13616
-   isolation_forest
+   isolation_forest_anomaly_detector
    java
    json
    json_ld
    json_lines
    json_rpc
    json_schema
-   kcenters
-   kemeny_young
+   kcenters_clusterer
+   kemeny_young_ranker
    kernel_svm_classifier
-   kernel_pca
-   kmeans
-   kmedians
-   kmedoids
-   kmodes
-   knn
-   knn_distance
+   kernel_pca_projection
+   kmeans_clusterer
+   kmedians_clusterer
+   kmedoids_clusterer
+   kmodes_clusterer
+   knn_classifier
+   knn_distance_anomaly_detector
    knn_regression
-   kprototypes
+   kprototypes_clusterer
    ksuid
    lasso_regression
    lda_classifier
@@ -139,43 +139,43 @@ directory in the ``NOTES.md`` file.
    linda
    linear_algebra
    linear_regression
-   linear_svm
+   linear_svm_classifier
    listing
-   lof
+   lof_anomaly_detector
    logging
-   logistic_regression
+   logistic_regression_classifier
    loops
-   massey
+   massey_ranker
    mcp_server
    memcached
    meta
    meta_compiler
    mime_types
-   modified_z_score
+   modified_z_score_anomaly_detector
    mutations
    nanoid
-   naive_bayes
-   nearest_centroid
+   naive_bayes_classifier
+   nearest_centroid_classifier
    nested_dictionaries
-   nmf
-   optics
+   nmf_projection
+   optics_clusterer
    optionals
    options
    os
    pattern_mining_protocols
-   pca
+   pca_projection
    permutations
-   plackett_luce
-   plackett_luce_last
+   plackett_luce_ranker
+   plackett_luce_last_ranker
    pls_projection
-   prefix_span
-   probabilistic_pca
+   prefix_span_pattern_miner
+   probabilistic_pca_projection
    process
    protobuf
    qda_classifier
    queues
    random
-   random_forest
+   random_forest_classifier
    random_forest_regression
    random_projection
    rank_centrality
@@ -186,15 +186,15 @@ directory in the ``NOTES.md`` file.
    redis
    regression_protocols
    regression_tree
-   regularized_bradley_terry
+   regularized_bradley_terry_ranker
    ridge_regression
-   schulze
+   schulze_ranker
    sequential_pattern_mining_protocols
    sets
    sgd_classifier
    snowflakeid
    sockets
-   spade
+   spade_pattern_miner
    simulated_annealing
    statistics
    stemming
@@ -203,12 +203,12 @@ directory in the ``NOTES.md`` file.
    strings
    subsequences
    term_io
-   thurstone_mosteller
+   thurstone_mosteller_ranker
    time_scales
    timeout
    toml
    toon
-   truncated_svd
+   truncated_svd_projection
    tsv
    types
    tzif
@@ -219,5 +219,5 @@ directory in the ``NOTES.md`` file.
    uuid
    validations
    yaml
-   z_score
+   z_score_anomaly_detector
    zippers

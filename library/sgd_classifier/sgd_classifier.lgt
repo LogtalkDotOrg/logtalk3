@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-06,
 		comment is 'Stochastic gradient descent classifier supporting one-vs-rest linear models with configurable losses including ``log_loss``, ``hinge``, ``squared_hinge``, ``modified_huber``, and ``perceptron``.',
-		see_also is [dataset_protocol, logistic_regression, linear_svm, knn, nearest_centroid]
+		see_also is [dataset_protocol, logistic_regression_classifier, linear_svm_classifier, knn_classifier, nearest_centroid_classifier]
 	]).
 
 	:- public(learn/3).

@@ -15,7 +15,7 @@ HodgeRank pairwise measurement ranker. Learns one deterministic zero-sum score p
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-05
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -79,5 +79,5 @@ Operators
 
 .. seealso::
 
-   :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`massey <massey/0>`
+   :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0>`, :ref:`ranker_protocol <ranker_protocol/0>`, :ref:`massey_ranker <massey_ranker/0>`
 

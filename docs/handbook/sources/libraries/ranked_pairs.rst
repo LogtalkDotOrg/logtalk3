@@ -246,4 +246,4 @@ See also
 --------
 
 For the strongest-path Condorcet-family alternative sharing the same
-``victory_strength(...)`` option, see the ``schulze`` library.
+``victory_strength(...)`` option, see the ``schulze_ranker`` library.

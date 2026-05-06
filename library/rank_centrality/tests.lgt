@@ -50,7 +50,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-27,
+		date is 2026-05-06,
 		comment is 'Unit tests for the "rank_centrality" library.'
 	]).
 

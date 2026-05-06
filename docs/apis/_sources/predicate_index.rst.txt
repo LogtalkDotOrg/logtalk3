@@ -2360,7 +2360,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`gaussian_mixture <gaussian_mixture/0::cluster_probabilities/3>`
+* :ref:`gaussian_mixture_clusterer <gaussian_mixture_clusterer/0::cluster_probabilities/3>`
 
 ``clusterer_options/2``
 -----------------------
@@ -2764,7 +2764,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`kemeny_young <kemeny_young/0::consensus_ranking/2>`
+* :ref:`kemeny_young_ranker <kemeny_young_ranker/0::consensus_ranking/2>`
 
 ``consensus_score/2``
 ---------------------
@@ -2774,7 +2774,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`kemeny_young <kemeny_young/0::consensus_score/2>`
+* :ref:`kemeny_young_ranker <kemeny_young_ranker/0::consensus_score/2>`
 
 ``console/1``
 -------------
@@ -9400,15 +9400,15 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`gradient_boosting_classifier <gradient_boosting_classifier/0::learn/3>`
 * :ref:`kernel_svm_classifier <kernel_svm_classifier/0::learn/3>`
 * :ref:`lda_classifier <lda_classifier/0::learn/3>`
-* :ref:`linear_svm <linear_svm/0::learn/3>`
-* :ref:`logistic_regression <logistic_regression/0::learn/3>`
+* :ref:`linear_svm_classifier <linear_svm_classifier/0::learn/3>`
+* :ref:`logistic_regression_classifier <logistic_regression_classifier/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`qda_classifier <qda_classifier/0::learn/3>`
-* :ref:`random_forest <random_forest/0::learn/3>`
+* :ref:`random_forest_classifier <random_forest_classifier/0::learn/3>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
 * :ref:`sgd_classifier <sgd_classifier/0::learn/3>`
-* :ref:`truncated_svd <truncated_svd/0::learn/3>`
+* :ref:`truncated_svd_projection <truncated_svd_projection/0::learn/3>`
 
 ``learn_seq/2``
 ---------------
@@ -14015,8 +14015,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::predict/4>`
-* :ref:`knn <knn/0::predict/4>`
-* :ref:`nearest_centroid <nearest_centroid/0::predict/4>`
+* :ref:`knn_classifier <knn_classifier/0::predict/4>`
+* :ref:`nearest_centroid_classifier <nearest_centroid_classifier/0::predict/4>`
 
 ``predict_distribution/3``
 --------------------------
@@ -14040,11 +14040,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`adaptive_boosting_classifier <adaptive_boosting_classifier/0::predict_probabilities/3>`
 * :ref:`gradient_boosting_classifier <gradient_boosting_classifier/0::predict_probabilities/3>`
 * :ref:`kernel_svm_classifier <kernel_svm_classifier/0::predict_probabilities/3>`
-* :ref:`knn <knn/0::predict_probabilities/3>`
-* :ref:`logistic_regression <logistic_regression/0::predict_probabilities/3>`
-* :ref:`naive_bayes <naive_bayes/0::predict_probabilities/3>`
-* :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/3>`
-* :ref:`random_forest <random_forest/0::predict_probabilities/3>`
+* :ref:`knn_classifier <knn_classifier/0::predict_probabilities/3>`
+* :ref:`logistic_regression_classifier <logistic_regression_classifier/0::predict_probabilities/3>`
+* :ref:`naive_bayes_classifier <naive_bayes_classifier/0::predict_probabilities/3>`
+* :ref:`nearest_centroid_classifier <nearest_centroid_classifier/0::predict_probabilities/3>`
+* :ref:`random_forest_classifier <random_forest_classifier/0::predict_probabilities/3>`
 * :ref:`sgd_classifier <sgd_classifier/0::predict_probabilities/3>`
 
 ``predict_probabilities/4``
@@ -14055,8 +14055,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`knn <knn/0::predict_probabilities/4>`
-* :ref:`nearest_centroid <nearest_centroid/0::predict_probabilities/4>`
+* :ref:`knn_classifier <knn_classifier/0::predict_probabilities/4>`
+* :ref:`nearest_centroid_classifier <nearest_centroid_classifier/0::predict_probabilities/4>`
 
 ``predict_scores/3``
 --------------------
@@ -14480,7 +14480,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`c45 <c45/0::prune/3>`
+* :ref:`c45_classifier <c45_classifier/0::prune/3>`
 
 ``prune/5``
 -----------
@@ -14490,7 +14490,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`c45 <c45/0::prune/5>`
+* :ref:`c45_classifier <c45_classifier/0::prune/5>`
 
 ``pseudo_inverse/2``
 --------------------
@@ -16257,7 +16257,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score/3>`
-* :ref:`isolation_forest <isolation_forest/0::score/3>`
+* :ref:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector/0::score/3>`
 
 ``score_all/3``
 ---------------
@@ -16268,7 +16268,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::score_all/3>`
-* :ref:`isolation_forest <isolation_forest/0::score_all/3>`
+* :ref:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector/0::score_all/3>`
 
 ``scores/2``
 ------------
@@ -17594,7 +17594,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`schulze <schulze/0::strongest_paths/2>`
+* :ref:`schulze_ranker <schulze_ranker/0::strongest_paths/2>`
 
 ``strongly_connected_components/2``
 -----------------------------------

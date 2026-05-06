@@ -4,15 +4,15 @@
 ===========================
 
 Hierarchical clusterer. Supports continuous attributes only. It builds
-the full bottom-up agglomerative hierarchy and derives the requested
-partition by cutting the learned dendrogram at the largest remaining
-merge distances.
+the full bottom-up agglomerative_clusterer hierarchy and derives the
+requested partition by cutting the learned dendrogram at the largest
+remaining merge distances.
 
 The library implements the ``clusterer_protocol`` defined in the
 ``clustering_protocols`` library. It provides predicates for learning a
-full agglomerative hierarchy from a dataset, deriving a ``k``-cluster
-cut for prediction, and exporting the learned clusterer as a list of
-predicate clauses or to a file.
+full agglomerative_clusterer hierarchy from a dataset, deriving a
+``k``-cluster cut for prediction, and exporting the learned clusterer as
+a list of predicate clauses or to a file.
 
 Datasets are represented as objects implementing the
 ``clustering_dataset_protocol`` protocol from the

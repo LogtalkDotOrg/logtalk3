@@ -165,7 +165,7 @@ Several sample datasets are included in the ``test_datasets`` directory:
   non-transitive data.
 
 - ``condorcet_divergence_pairwise.lgt`` — A compact connected pairwise
-  fixture where the current ``schulze`` and ``ranked_pairs``
+  fixture where the current ``schulze_ranker`` and ``ranked_pairs``
   implementations produce different rankings, useful for cross-method
   regression tests.
 

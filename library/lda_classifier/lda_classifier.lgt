@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-06,
 		comment is 'Linear Discriminant Analysis classifier for continuous datasets using a pooled regularized covariance model.',
-		see_also is [dataset_protocol, qda_classifier, nearest_centroid, lda_projection]
+		see_also is [dataset_protocol, qda_classifier, nearest_centroid_classifier, lda_projection]
 	]).
 
 	:- public(learn/3).

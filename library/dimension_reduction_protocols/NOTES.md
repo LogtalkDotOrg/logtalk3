@@ -39,7 +39,7 @@ suite.
 
 Concrete dimension reduction algorithms are intentionally out of scope
 for this package. The goal is to provide a portable foundation for
-libraries such as `pca`, `truncated_svd`, `random_projection`, `nmf`,
+libraries such as `pca_projection`, `truncated_svd_projection`, `random_projection`, `nmf_projection`,
 `lda_projection`, and `pls_projection`, including shared reducer helpers
 for common tasks such as feature encoding, projection, reducer validation,
 diagnostics, export, and pretty-printing.
@@ -84,12 +84,12 @@ normalization before projection:
 - `feature_scaling(false)` only centers each continuous attribute using its
   training-set mean.
 
-The current `pca`, `random_projection`, `lda_projection`, and
+The current `pca_projection`, `random_projection`, `lda_projection`, and
 `pls_projection` libraries all define `feature_scaling(true)` as their
 default.
 
 Reducers can also specialize preprocessing behavior. For example, the
-`nmf` library only supports `center(false)` because the learned feature
+`nmf_projection` library only supports `center(false)` because the learned feature
 representation must remain non-negative.
 
 
@@ -118,7 +118,7 @@ Several sample datasets are included in the `test_datasets` directory:
 - `low_rank_rectangular.lgt` — A compact continuous dataset with 4
   examples and 3 continuous attributes whose third feature is the sum of
   the first two. It is intended for testing matrix-rank truncation and
-  singular-value-based reducers such as `truncated_svd`.
+  singular-value-based reducers such as `truncated_svd_projection`.
 
 - `labeled_measurements.lgt` — A compact labeled continuous dataset with 9
   examples, 4 continuous attributes (`length`, `width`, `height`,
@@ -128,7 +128,7 @@ Several sample datasets are included in the `test_datasets` directory:
 - `parts_based_measurements.lgt` — A compact non-negative continuous
   dataset with 5 examples and 4 continuous attributes (`f1` through
   `f4`) built from two latent additive parts. It is intended for testing
-  parts-based reducers such as `nmf`.
+  parts-based reducers such as `nmf_projection`.
 
 - `target_latent_measurements.lgt` — A compact target-valued continuous
   dataset with 6 examples, 4 continuous attributes (`f1` through `f4`),

@@ -16,7 +16,7 @@ and validation failures to be checked in one place.
 
 Concrete clustering algorithms are intentionally out of scope for this
 package. The goal is to provide a portable foundation for future
-libraries such as ``kmeans``.
+libraries such as ``kmeans_clusterer``.
 
 API documentation
 -----------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-05-06,
 		comment is 'Performance and heap-path benchmarks for the "hierarchical_clustering" library.'
 	]).
 

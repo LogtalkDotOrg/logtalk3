@@ -15,7 +15,7 @@ Protocol for machine learning rankers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static``
@@ -289,5 +289,5 @@ Operators
 
 .. seealso::
 
-   :ref:`bradley_terry <bradley_terry/0>`, :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0>`, :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`
+   :ref:`bradley_terry_ranker <bradley_terry_ranker/0>`, :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0>`, :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0>`
 

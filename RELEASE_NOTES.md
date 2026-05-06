@@ -44,13 +44,16 @@ Library
 * RENAMED: The `classifier_protocols` library to `classification_protocols`
 for more consistent naming with other machine learning libraries.
 
-* RENAMED: The `ada_boost` library to `adaptive_boosting_classifier`.
+* RENAMED: The `ada_boost`, `c45`, `knn`, `naive_bayes`, `nearest_centroid`,
+and `random_forest` libraries to `adaptive_boosting_classifier`,
+`c45_classifier`, `knn_classifier`, `naive_bayes_classifier`,
+`nearest_centroid_classifier`, and `random_forest_classifier`, respectively.
 
 * RENAMED: The export predicates for all classifier libraries to
 `export_to_clauses/4` and `export_to_file/4` for uniform naming
 across all machine learning libraries.
 
-* CHANGED: The `isolation_forest` library to depend on the new
+* CHANGED: The `isolation_forest_anomaly_detector` library to depend on the new
 `anomaly_detection_protocols` library instead of `classification_protocols`
 (functionality preserved but four export and print predicates were renamed
 with this change).
@@ -64,45 +67,45 @@ vectors and matrices.
 * ADDED: New `clustering_protocols` library providing protocols and datasets
 to support the implementation of clustering libraries.
 
-* ADDED: New `agglomerative` library implementing bottom-up
+* ADDED: New `agglomerative_clusterer` library implementing bottom-up
 agglomerative clustering for continuous datasets.
 
-* ADDED: New `dbscan` library implementing deterministic density-based
+* ADDED: New `dbscan_clusterer` library implementing deterministic density-based
 clustering for continuous datasets using epsilon neighborhoods and
 minimum point counts.
 
-* ADDED: New `gaussian_mixture` library implementing Gaussian mixture
+* ADDED: New `gaussian_mixture_clusterer` library implementing Gaussian mixture
 model clustering for continuous datasets using deterministic
 expectation-maximization with diagonal covariance matrices.
 
-* ADDED: New `hdbscan` library implementing a simplified deterministic
+* ADDED: New `hdbscan_clusterer` library implementing a simplified deterministic
 HDBSCAN-style clusterer for continuous datasets.
 
 * ADDED: New `hierarchical_clustering` library implementing full
 hierarchical clustering for continuous datasets with deterministic
 dendrogram cutting.
 
-* ADDED: New `kcenters` library implementing k-centers clustering for
-continuous datasets using a deterministic farthest-first center
-selection heuristic.
+* ADDED: New `kcenters_clusterer` library implementing k-centers clustering
+for continuous datasets using a deterministic farthest-first center selection
+heuristic.
 
-* ADDED: New `kmeans` library implementing k-means clustering for
+* ADDED: New `kmeans_clusterer` library implementing k-means clustering for
 continuous datasets using Lloyd's algorithm with deterministic
 initialization.
 
-* ADDED: New `kmedians` library implementing k-medians clustering for
-continuous datasets using iterative median updates.
+* ADDED: New `kmedians_clusterer` library implementing k-medians clustering
+for continuous datasets using iterative median updates.
 
-* ADDED: New `kmedoids` library implementing k-medoids clustering for
-continuous datasets using iterative medoid updates.
+* ADDED: New `kmedoids_clusterer` library implementing k-medoids clustering
+for continuous datasets using iterative medoid updates.
 
-* ADDED: New `kmodes` library implementing k-modes clustering for
+* ADDED: New `kmodes_clusterer` library implementing k-modes clustering for
 discrete datasets using iterative mode updates.
 
-* ADDED: New `kprototypes` library implementing k-prototypes clustering
-for mixed datasets with continuous and discrete attributes.
+* ADDED: New `kprototypes_clusterer` library implementing k-prototypes
+clustering for mixed datasets with continuous and discrete attributes.
 
-* ADDED: New `optics` library implementing deterministic OPTICS
+* ADDED: New `optics_clusterer` library implementing deterministic OPTICS
 clustering for continuous datasets with epsilon-based cluster
 extraction.
 
@@ -110,26 +113,26 @@ extraction.
 and `sequential_pattern_mining_protocols` libraries with protocols and datasets
 for use in the implementation of machine learning pattern-finding algorithms.
 
-* ADDED: New `apriori` library implementing Apriori frequent itemset
-mining for transaction datasets.
-
-* ADDED: New `eclat` library implementing Eclat frequent itemset
-mining for transaction datasets.
-
-* ADDED: New `fp_growth` library implementing FP-growth frequent
+* ADDED: New `apriori_pattern_miner` library implementing Apriori frequent
 itemset mining for transaction datasets.
 
-* ADDED: New `prefix_span` library implementing PrefixSpan sequential
+* ADDED: New `eclat_pattern_miner` library implementing Eclat frequent itemset
+mining for transaction datasets.
+
+* ADDED: New `fp_growth_pattern_miner` library implementing FP-growth frequent
+itemset mining for transaction datasets.
+
+* ADDED: New `prefix_span_pattern_miner` library implementing PrefixSpan
+sequential pattern mining for sequence datasets.
+
+* ADDED: New `clo_span_pattern_miner` library implementing CloSpan sequential
 pattern mining for sequence datasets.
 
-* ADDED: New `clo_span` library implementing CloSpan sequential
+* ADDED: New `gsp_pattern_miner` library implementing GSP sequential pattern
+mining for sequence datasets.
+
+* ADDED: New `spade_pattern_miner` library implementing SPADE sequential
 pattern mining for sequence datasets.
-
-* ADDED: New `gsp` library implementing GSP sequential pattern
-mining for sequence datasets.
-
-* ADDED: New `spade` library implementing SPADE sequential pattern
-mining for sequence datasets.
 
 * ADDED: New `regression_protocols`  library with protocols and datasets
 for use in the implementation of machine learning regression algorithms.
@@ -181,81 +184,84 @@ and random feature subsets.
 datasets for use in the implementation of machine learning dimension
 reduction algorithms.
 
-* ADDED: New `ica` library implementing Independent Component Analysis
-reducer for continuous datasets.
+* ADDED: New `ica_projection` library implementing Independent Component
+Analysis reducer for continuous datasets.
 
-* ADDED: New `kernel_pca` implementing Kernel Principal Component Analysis
-reducer for continuous datasets.
+* ADDED: New `kernel_pca_projection` library implementing Kernel Principal
+Component Analysis reducer for continuous datasets.
 
 * ADDED: New `lda_projection` library implementing Linear Discriminant
 Analysis projection for labeled continuous datasets.
 
-* ADDED: New `nmf` library implementing Non-negative Matrix Factorization
-dimension reduction for non-negative continuous datasets.
+* ADDED: New `nmf_projection` library implementing Non-negative Matrix
+Factorization dimension reduction for non-negative continuous datasets.
 
-* ADDED: New `pca` library implementing Principal Component Analysis
-dimension reduction for continuous datasets.
+* ADDED: New `pca_projection` library implementing Principal Component
+Analysis dimension reduction for continuous datasets.
 
 * ADDED: New `pls_projection` library implementing Partial Least Squares
 projection for target-valued continuous datasets.
 
-* ADDED: New `probabilistic_pca` library implementing Probabilistic Principal
-Component Analysis reducer for continuous datasets.
+* ADDED: New `probabilistic_pca_projection` library implementing Probabilistic
+Principal Component Analysis reducer for continuous datasets.
 
 * ADDED: New `random_projection` library implementing seeded random
 projection for continuous datasets.
 
-* ADDED: New `truncated_svd` library implementing Truncated Singular Value
-Decomposition dimension reduction for continuous datasets.
+* ADDED: New `truncated_svd_projection` library implementing Truncated
+Singular Value Decomposition dimension reduction for continuous datasets.
 
 * ADDED: New `anomaly_detection_protocols` library defining common protocols,
 benchmark datasets, and smoke tests for anomaly-detection algorithms.
 
-* ADDED: New `cusum` library implementing a configurable CUSUM (Cumulative
-Sum Control Chart) anomaly detector for continuous sequence-like datasets.
+* ADDED: New `cusum_anomaly_detector` library implementing a configurable
+CUSUM (Cumulative Sum Control Chart) anomaly detector for continuous
+sequence-like datasets.
 
-* ADDED: New `ewma` library implementing a configurable EWMA (Exponentially
-Weighted Moving Average) anomaly detector for continuous sequence-like
+* ADDED: New `ewma_anomaly_detector` library implementing a configurable EWMA
+(Exponentially Weighted Moving Average) anomaly detector for continuous
+sequence-like datasets.
+
+* ADDED: New `knn_distance_anomaly_detector` library implementing a portable
+k-nearest-neighbor distance anomaly detector with mixed-feature and
+missing-value support.
+
+* ADDED: New `lof_anomaly_detector` library implementing a portable Local
+Outlier Factor anomaly detector with mixed-feature and missing-value support.
+
+* ADDED: New `z_score_anomaly_detector` library implementing a configurable
+statistical Z-score anomaly detector for continuous datasets.
+
+* ADDED: New `modified_z_score_anomaly_detector` library implementing a
+configurable statistical modified Z-score anomaly detector for continuous
 datasets.
 
-* ADDED: New `knn_distance` library implementing a portable k-nearest-neighbor
-distance anomaly detector with mixed-feature and missing-value support.
-
-* ADDED: New `lof` library implementing a portable Local Outlier Factor
-anomaly detector with mixed-feature and missing-value support.
-
-* ADDED: New `z_score` library implementing a configurable statistical
-Z-score anomaly detector for continuous datasets.
-
-* ADDED: New `modified_z_score` library implementing a configurable
-statistical modified Z-score anomaly detector for continuous datasets.
-
-* ADDED: New `iqr` library implementing a configurable statistical
-interquartile-range anomaly detector for continuous datasets.
+* ADDED: New `iqr_anomaly_detector` library implementing a configurable
+statistical interquartile-range anomaly detector for continuous datasets.
 
 * ADDED: New `ranking_protocols` library defining common protocols, shared
 test datasets, and smoke tests for machine learning ranking algorithms.
 
-* ADDED: New `borda` library implementing grouped relevance ranking using the
-Borda count method.
+* ADDED: New `borda_ranker` library implementing grouped relevance ranking
+using the Borda count method.
 
-* ADDED: New `bradley_terry` library implementing pairwise preference ranking
-using the Bradley-Terry model.
+* ADDED: New `bradley_terry_ranker` library implementing pairwise preference
+ranking using the Bradley-Terry model.
 
-* ADDED: New `colley` library implementing pairwise preference ranking using
-the Colley matrix method.
+* ADDED: New `colley_ranker` library implementing pairwise preference ranking
+using the Colley matrix method.
 
-* ADDED: New `copeland` library implementing pairwise preference ranking
-using Copeland scores.
+* ADDED: New `copeland_ranker` library implementing pairwise preference
+ranking using Copeland scores.
 
-* ADDED: New `elo` library implementing pairwise preference ranking using
-deterministic batch Elo rating updates.
+* ADDED: New `elo_ranker` library implementing pairwise preference ranking
+using deterministic batch Elo rating updates.
 
-* ADDED: New `glicko2` library implementing pairwise preference ranking
+* ADDED: New `glicko2_ranker` library implementing pairwise preference ranking
 using a deterministic single-period Glicko-2 update over aggregated
 pairwise outcomes.
 
-* ADDED: New `glicko2_periodic` library implementing full multi-period
+* ADDED: New `glicko2_periodic_ranker` library implementing full multi-period
 Glicko-2 updates over temporal pairwise game datasets with explicit
 rating periods and support for draws and inactivity.
 
@@ -263,41 +269,41 @@ rating periods and support for draws and inactivity.
 using a weighted graph-Laplacian least-squares fit with explicit edge
 residual diagnostics.
 
-* ADDED: New `kemeny_young` library implementing exact pairwise preference
-consensus ranking using Kemeny-Young optimization with deterministic
-optimal-order tie breaking.
+* ADDED: New `kemeny_young_ranker` library implementing exact pairwise
+preference consensus ranking using Kemeny-Young optimization with
+deterministic optimal-order tie breaking.
 
-* ADDED: New `massey` library implementing pairwise preference ranking
+* ADDED: New `massey_ranker` library implementing pairwise preference ranking
 using the Massey matrix method.
 
-* ADDED: New `plackett_luce` library implementing grouped ranking using
+* ADDED: New `plackett_luce_ranker` library implementing grouped ranking using
 a tie-aware top-choice Plackett-Luce model.
 
-* ADDED: New `plackett_luce_last` library implementing grouped ranking
+* ADDED: New `plackett_luce_last_ranker` library implementing grouped ranking
 using a tie-aware Plackett-Luce-last model.
 
 * ADDED: New `rank_centrality` library implementing pairwise preference
 ranking using the Rank Centrality method.
 
-* ADDED: New `regularized_bradley_terry` library implementing pairwise
+* ADDED: New `regularized_bradley_terry_ranker` library implementing pairwise
 preference ranking using a regularized Bradley-Terry model.
 
-* ADDED: New `schulze` library implementing pairwise preference ranking
+* ADDED: New `schulze_ranker` library implementing pairwise preference ranking
 using the Schulze strongest-path method.
 
 * ADDED: New `ranked_pairs` library implementing pairwise preference
 ranking using the Ranked Pairs lock-graph method.
 
-* ADDED: New `thurstone_mosteller` library implementing pairwise preference
-ranking using a deterministic Thurstone-Mosteller Case V fit.
+* ADDED: New `thurstone_mosteller_ranker` library implementing pairwise
+preference ranking using a deterministic Thurstone-Mosteller Case V fit.
 
-* ADDED: New `logistic_regression` library implementing logistic regression
-for binary and multiclass classification on continuous and mixed-feature
-datasets using batch gradient descent.
+* ADDED: New `logistic_regression_classifier` library implementing logistic
+regression for binary and multiclass classification on continuous and
+mixed-feature datasets using batch gradient descent.
 
-* ADDED: New `linear_svm` library implementing linear support vector machine
-classification for binary and multiclass continuous and mixed-feature datasets
-using one-vs-rest hinge-loss training.
+* ADDED: New `linear_svm_classifier` library implementing linear support
+vector machine classification for binary and multiclass continuous and
+mixed-feature datasets using one-vs-rest hinge-loss training.
 
 * ADDED: New `gradient_boosting_classifier` library implementing gradient
 boosting classification using regression trees as additive base learners
@@ -377,7 +383,7 @@ tail-recursive.
 * IMPROVED: The `pairing_heap(_Order_)::top_next/5` library predicate to use a
 tail-recursive auxiliary predicate.
 
-* IMPROVED: Rewritten two `c45` library auxiliary predicates to be
+* IMPROVED: Rewritten two `c45_classifier` library auxiliary predicates to be
 tail-recursive.
 
 * IMPROVED: Rewritten two `graphs` library auxiliary predicates to be
@@ -389,10 +395,10 @@ tail-recursive.
 * IMPROVED: Rewritten `mime_types` library auxiliary predicate to be
 tail-recursive.
 
-* IMPROVED: Rewritten `naive_bayes` library auxiliary predicate to be
+* IMPROVED: Rewritten `naive_bayes_classifier` library auxiliary predicate to be
 tail-recursive.
 
-* IMPROVED: Rewritten `nearest_centroid` library auxiliary predicate to be
+* IMPROVED: Rewritten `nearest_centroid_classifier` library auxiliary predicate to be
 tail-recursive.
 
 * IMPROVED: Rewritten `toml` library auxiliary predicates to be tail-recursive.

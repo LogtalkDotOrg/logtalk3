@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'Ranked Pairs pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by locking direct pairwise victories in descending strength order while avoiding cycles and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
-		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, schulze, copeland]
+		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, schulze_ranker, copeland_ranker]
 	]).
 
 	:- public(locked_pairs/2).

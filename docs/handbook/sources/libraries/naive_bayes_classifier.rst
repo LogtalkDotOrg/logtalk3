@@ -1,0 +1,146 @@
+.. _library_naive_bayes_classifier:
+
+``naive_bayes_classifier``
+==========================
+
+Naive Bayes probabilistic classifier based on Bayes theorem with strong
+(naive) independence assumptions between features and supporting both
+categorical and continuous (Gaussian) features with Laplace smoothing.
+
+The library implements the ``classifier_protocol`` defined in the
+``classification_protocols`` library. It provides predicates for
+learning a classifier from a dataset, using it to make predications, and
+exporting it as a list of predicate clauses or to a file.
+
+Datasets are represented as objects implementing the
+``dataset_protocol`` protocol from the ``classification_protocols``
+library. See ``test_files`` directory for examples.
+
+API documentation
+-----------------
+
+Open the
+`../../docs/library_index.html#naive_bayes_classifier <../../docs/library_index.html#naive_bayes_classifier>`__
+link in a web browser.
+
+Loading
+-------
+
+To load this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(naive_bayes_classifier(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(naive_bayes_classifier(tester)).
+
+Features
+--------
+
+- **Categorical Features**: Handles discrete-valued features with
+  Laplace smoothing
+- **Continuous Features**: Uses Gaussian (normal) distribution for
+  numeric features
+- **Classifier Export**: Learned classifiers can be exported as
+  predicate clauses
+- **Probability Estimation**: Provides both class predictions and
+  probability distributions
+
+Usage
+-----
+
+Learning a Classifier
+~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   % Learn from a dataset object
+   | ?- naive_bayes_classifier::learn(my_dataset, Classifier).
+   ...
+
+Making Predictions
+~~~~~~~~~~~~~~~~~~
+
+::
+
+   % Predict class for a new instance and the probability distribution
+   | ?- Instance = [...],
+        naive_bayes_classifier::learn(my_dataset, Classifier),
+        naive_bayes_classifier::predict(Classifier, Instance, PredictedClass),
+        naive_bayes_classifier::predict_probability(Classifier, Instance, Probabilities).
+   PredictedClass = ...,
+   Probabilities = [...]
+   ...
+
+Exporting the Classifier
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Learned classifiers can be exported as a list of clauses or to a file
+for later use.
+
+::
+
+   % Export as predicate clauses
+   | ?- naive_bayes_classifier::learn(my_dataset, Classifier),
+        naive_bayes_classifier::export_to_clauses(Classifier, my_classifier, Clauses).
+   Clauses = [my_classifier(...)]
+   ...
+
+   % Export to a file
+   | ?- naive_bayes_classifier::learn(my_dataset, Classifier),
+        naive_bayes_classifier::export_to_file(Classifier, my_classifier, 'classifier.pl').
+   ...
+
+Using a learned classifier
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Learned and saved classifiers can later be used for predictions without
+needing to access the original training dataset.
+
+::
+
+   % Later, load the file and use the classifier
+   | ?- consult('classifier.pl'),
+        my_classifier(Classifier),
+        Instance = [...],
+        naive_bayes_classifier::predict(Classifier, Instance, Class).
+   Class = ...
+   ...
+
+Classifier representation
+-------------------------
+
+The learned classifier is represented as a compound term:
+
+::
+
+   nb_classifier(Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams)
+
+Where:
+
+- ``Classes``: List of class labels
+- ``ClassPriors``: List of ``Class-Prior`` probability pairs
+- ``AttributeNames``: List of attribute names in order
+- ``FeatureTypes``: List of types (``categorical`` or ``continuous``)
+- ``FeatureParams``: List of learned parameters for each feature
+
+When exported using ``export_to_clauses/4`` or ``export_to_file/4``,
+this classifier term is serialized directly as the single argument of
+the generated predicate clause so that the exported model can be loaded
+and reused as-is.
+
+References
+----------
+
+1. Rish, I. (2001). "An empirical study of the naive Bayes classifier".
+2. Russell, S. & Norvig, P. (2020). "Artificial Intelligence: A Modern
+   Approach".
+3. Mitchell, T. (1997). "Machine Learning". Chapter 6: Bayesian
+   Learning.
