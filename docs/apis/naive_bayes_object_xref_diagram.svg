@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1179.25 2270,-1179.25 2270,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object naive_bayes</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;06, 12:36</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;06, 15:34</text>
 <g id="clust1" class="cluster">
 <title>cluster_naive_bayes_object</title>
 <g id="a_clust1"><a xlink:title="naive_bayes">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2246,-54.25 2246,-54.25 2252,-54.25 2258,-60.25 2258,-66.25 2258,-66.25 2258,-1155.25 2258,-1155.25 2258,-1161.25 2252,-1167.25 2246,-1167.25 2246,-1167.25 20,-1167.25 20,-1167.25 14,-1167.25 8,-1161.25 8,-1155.25 8,-1155.25 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1149.5" font-family="Monospace" font-size="10.00" fill="dimgray">naive_bayes</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>predict_probabilities/3</title>
 <polygon fill="springgreen" stroke="black" points="199.88,-746 18.12,-746 18.12,-710 199.88,-710 199.88,-746"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-729.88" font-family="Monospace" font-size="11.00">predict_probabilities/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>extract_values/3</title>
 <polygon fill="cornsilk" stroke="black" points="332.25,-626.75 197.75,-626.75 197.75,-590.75 332.25,-590.75 332.25,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="205.75" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L87">
+<g id="a_node7_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="211" y="-610.62" font-family="Monospace" font-size="11.00">extract_values/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- predict_probabilities/3&#45;&gt;extract_values/3 -->
 <g id="edge23" class="edge">
 <title>predict_probabilities/3&#45;&gt;extract_values/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M132.02,-709.7C158.75,-689.61 203,-656.35 233.05,-633.76"/>
 <polygon fill="black" stroke="black" points="234.79,-636.84 240.68,-628.03 230.58,-631.24 234.79,-636.84"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L177">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="191.68" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>compute_posteriors/6</title>
 <polygon fill="cornsilk" stroke="black" points="179.75,-626.75 18.25,-626.75 18.25,-590.75 179.75,-590.75 179.75,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="26.25" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L182">
+<g id="a_node19_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="31.5" y="-610.62" font-family="Monospace" font-size="11.00">compute_posteriors/6</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- predict_probabilities/3&#45;&gt;compute_posteriors/6 -->
 <g id="edge24" class="edge">
 <title>predict_probabilities/3&#45;&gt;compute_posteriors/6</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="calls">
 <path fill="none" stroke="black" d="M107.52,-709.7C105.93,-691 103.36,-660.87 101.46,-638.58"/>
 <polygon fill="black" stroke="black" points="104.95,-638.3 100.61,-628.63 97.97,-638.89 104.95,-638.3"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L177">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="104.3" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>classifier_export_template/4</title>
 <polygon fill="cornsilk" stroke="black" points="565.75,-1128.5 350.25,-1128.5 350.25,-1092.5 565.75,-1092.5 565.75,-1128.5"/>
 <text xml:space="preserve" text-anchor="start" x="358.25" y="-1112.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L288">
+<g id="a_node2_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L288" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L288">
 <text xml:space="preserve" text-anchor="start" x="363.5" y="-1112.38" font-family="Monospace" font-size="11.00">classifier_export_template/4</text>
 </a>
 </g>
@@ -111,7 +111,7 @@
 <title>learn_continuous_stats/5</title>
 <polygon fill="cornsilk" stroke="black" points="539.25,-626.75 350.75,-626.75 350.75,-590.75 539.25,-590.75 539.25,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="358.75" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L161">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="364" y="-610.62" font-family="Monospace" font-size="11.00">learn_continuous_stats/5</text>
 </a>
 </g>
@@ -125,7 +125,7 @@
 <title>learn_continuous_stats_by_class/5</title>
 <polygon fill="cornsilk" stroke="black" points="529.62,-482.75 280.38,-482.75 280.38,-446.75 529.62,-446.75 529.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="288.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L164">
+<g id="a_node17_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="293.62" y="-466.62" font-family="Monospace" font-size="11.00">learn_continuous_stats_by_class/5</text>
 </a>
 </g>
@@ -137,12 +137,12 @@
 <!-- learn_continuous_stats/5&#45;&gt;learn_continuous_stats_by_class/5 -->
 <g id="edge18" class="edge">
 <title>learn_continuous_stats/5&#45;&gt;learn_continuous_stats_by_class/5</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L161" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M440.1,-590.34C433.31,-566.25 420.99,-522.5 412.9,-493.78"/>
 <polygon fill="black" stroke="black" points="416.31,-492.99 410.23,-484.32 409.57,-494.89 416.31,-492.99"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L161">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="429.76" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -152,7 +152,7 @@
 <title>learn_feature_params/6</title>
 <polygon fill="cornsilk" stroke="black" points="545.5,-1009.25 370.5,-1009.25 370.5,-973.25 545.5,-973.25 545.5,-1009.25"/>
 <text xml:space="preserve" text-anchor="start" x="378.5" y="-993.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L124">
+<g id="a_node4_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="383.75" y="-993.12" font-family="Monospace" font-size="11.00">learn_feature_params/6</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <title>learn_feature_params_/7</title>
 <polygon fill="cornsilk" stroke="black" points="574.88,-865.25 393.12,-865.25 393.12,-829.25 574.88,-829.25 574.88,-865.25"/>
 <text xml:space="preserve" text-anchor="start" x="401.12" y="-849.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L127">
+<g id="a_node12_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L127" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L127">
 <text xml:space="preserve" text-anchor="start" x="406.38" y="-849.12" font-family="Monospace" font-size="11.00">learn_feature_params_/7</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- learn_feature_params/6&#45;&gt;learn_feature_params_/7 -->
 <g id="edge10" class="edge">
 <title>learn_feature_params/6&#45;&gt;learn_feature_params_/7</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L124" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M461.19,-972.84C465.58,-948.86 473.54,-905.39 478.8,-876.67"/>
 <polygon fill="black" stroke="black" points="482.24,-877.32 480.59,-866.85 475.35,-876.06 482.24,-877.32"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L124">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="474.09" y="-915.88" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -193,7 +193,7 @@
 <title>learn/2</title>
 <polygon fill="cornsilk" stroke="black" points="861.88,-1128.5 788.12,-1128.5 788.12,-1092.5 861.88,-1092.5 861.88,-1128.5"/>
 <text xml:space="preserve" text-anchor="start" x="796.12" y="-1112.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="801.38" y="-1112.38" font-family="Monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -205,12 +205,12 @@
 <!-- learn/2&#45;&gt;learn_feature_params/6 -->
 <g id="edge5" class="edge">
 <title>learn/2&#45;&gt;learn_feature_params/6</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M787.79,-1097.61C725.66,-1077.76 600.02,-1037.62 523.02,-1013.02"/>
 <polygon fill="black" stroke="black" points="524.52,-1009.83 513.93,-1010.12 522.39,-1016.5 524.52,-1009.83"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="652.5" y="-1047.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -220,7 +220,7 @@
 <title>examples_to_instances_labels/4</title>
 <polygon fill="cornsilk" stroke="black" points="461.5,-937.25 232.5,-937.25 232.5,-901.25 461.5,-901.25 461.5,-937.25"/>
 <text xml:space="preserve" text-anchor="start" x="240.5" y="-921.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L82">
+<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="245.75" y="-921.12" font-family="Monospace" font-size="11.00">examples_to_instances_labels/4</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- learn/2&#45;&gt;examples_to_instances_labels/4 -->
 <g id="edge2" class="edge">
 <title>learn/2&#45;&gt;examples_to_instances_labels/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M787.79,-1106.71C688.51,-1098.5 420.92,-1070.97 362,-1009.25 346.86,-993.39 343.79,-968.27 344.12,-948.76"/>
 <polygon fill="black" stroke="black" points="347.6,-949.14 344.61,-938.98 340.61,-948.79 347.6,-949.14"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="461.02" y="-1047.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -247,7 +247,7 @@
 <title>determine_feature_types_from_dataset/2</title>
 <polygon fill="cornsilk" stroke="black" points="846.5,-1009.25 563.5,-1009.25 563.5,-973.25 846.5,-973.25 846.5,-1009.25"/>
 <text xml:space="preserve" text-anchor="start" x="571.5" y="-993.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L93">
+<g id="a_node8_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L93">
 <text xml:space="preserve" text-anchor="start" x="576.75" y="-993.12" font-family="Monospace" font-size="11.00">determine_feature_types_from_dataset/2</text>
 </a>
 </g>
@@ -259,12 +259,12 @@
 <!-- learn/2&#45;&gt;determine_feature_types_from_dataset/2 -->
 <g id="edge3" class="edge">
 <title>learn/2&#45;&gt;determine_feature_types_from_dataset/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M807.29,-1092.2C787.09,-1072.46 753.86,-1039.99 730.78,-1017.44"/>
 <polygon fill="black" stroke="black" points="733.46,-1015.16 723.86,-1010.68 728.57,-1020.17 733.46,-1015.16"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="768.6" y="-1047.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -274,7 +274,7 @@
 <title>learn_class_priors/3</title>
 <polygon fill="cornsilk" stroke="black" points="1025.75,-1009.25 864.25,-1009.25 864.25,-973.25 1025.75,-973.25 1025.75,-1009.25"/>
 <text xml:space="preserve" text-anchor="start" x="872.25" y="-993.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102">
+<g id="a_node9_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="877.5" y="-993.12" font-family="Monospace" font-size="11.00">learn_class_priors/3</text>
 </a>
 </g>
@@ -286,12 +286,12 @@
 <!-- learn/2&#45;&gt;learn_class_priors/3 -->
 <g id="edge4" class="edge">
 <title>learn/2&#45;&gt;learn_class_priors/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M842.71,-1092.2C862.91,-1072.46 896.14,-1039.99 919.22,-1017.44"/>
 <polygon fill="black" stroke="black" points="921.43,-1020.17 926.14,-1010.68 916.54,-1015.16 921.43,-1020.17"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="888.6" y="-1047.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -301,7 +301,7 @@
 <title>dataset_attributes/2</title>
 <polygon fill="cornsilk" stroke="black" points="1205.75,-1009.25 1044.25,-1009.25 1044.25,-973.25 1205.75,-973.25 1205.75,-1009.25"/>
 <text xml:space="preserve" text-anchor="start" x="1052.25" y="-993.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L256">
+<g id="a_node28_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="1057.5" y="-993.12" font-family="Monospace" font-size="11.00">dataset_attributes/2</text>
 </a>
 </g>
@@ -313,12 +313,12 @@
 <!-- learn/2&#45;&gt;dataset_attributes/2 -->
 <g id="edge1" class="edge">
 <title>learn/2&#45;&gt;dataset_attributes/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M862.09,-1095.01C914.22,-1074.63 1009.54,-1037.38 1069.95,-1013.76"/>
 <polygon fill="black" stroke="black" points="1070.99,-1017.12 1079.03,-1010.22 1068.44,-1010.6 1070.99,-1017.12"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="984" y="-1047.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -340,12 +340,12 @@
 <!-- learn/2&#45;&gt;pairs::keys/2 -->
 <g id="edge49" class="edge">
 <title>learn/2&#45;&gt;pairs::keys/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M862.11,-1099.97C929.61,-1082.63 1077.29,-1044.68 1212.46,-1009.9"/>
 <polygon fill="black" stroke="black" points="1213.13,-1013.34 1221.94,-1007.46 1211.39,-1006.57 1213.13,-1013.34"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L60">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="1064.92" y="-1047.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -353,12 +353,12 @@
 <!-- examples_to_instances_labels/4&#45;&gt;extract_values/3 -->
 <g id="edge6" class="edge">
 <title>examples_to_instances_labels/4&#45;&gt;extract_values/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L83" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M354.32,-900.95C368.74,-864.15 397.09,-776.08 369,-710 355.49,-678.21 326.42,-651.61 302.44,-633.82"/>
 <polygon fill="black" stroke="black" points="304.6,-631.07 294.44,-628.09 300.53,-636.76 304.6,-631.07"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L83">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="380.83" y="-784.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -380,12 +380,12 @@
 <!-- extract_values/3&#45;&gt;list::memberchk/2 -->
 <g id="edge50" class="edge">
 <title>extract_values/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L88" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M261.09,-590.47C249.17,-535.77 215.98,-367.7 249,-327.5 266.46,-306.24 631.07,-243.62 797.93,-215.93"/>
 <polygon fill="black" stroke="black" points="798.32,-219.41 807.62,-214.33 797.18,-212.51 798.32,-219.41"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L88">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="235" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -395,7 +395,7 @@
 <title>remove_duplicates_sorted/2</title>
 <polygon fill="cornsilk" stroke="black" points="927,-865.25 725,-865.25 725,-829.25 927,-829.25 927,-865.25"/>
 <text xml:space="preserve" text-anchor="start" x="733" y="-849.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L108">
+<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="738.25" y="-849.12" font-family="Monospace" font-size="11.00">remove_duplicates_sorted/2</text>
 </a>
 </g>
@@ -407,12 +407,12 @@
 <!-- learn_class_priors/3&#45;&gt;remove_duplicates_sorted/2 -->
 <g id="edge7" class="edge">
 <title>learn_class_priors/3&#45;&gt;remove_duplicates_sorted/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M930.41,-972.84C909.69,-948.11 871.59,-902.66 847.6,-874.02"/>
 <polygon fill="black" stroke="black" points="850.42,-871.94 841.31,-866.52 845.05,-876.43 850.42,-871.94"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="899.66" y="-915.88" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -422,7 +422,7 @@
 <title>compute_priors_list/4</title>
 <polygon fill="cornsilk" stroke="black" points="1133.12,-865.25 964.88,-865.25 964.88,-829.25 1133.12,-829.25 1133.12,-865.25"/>
 <text xml:space="preserve" text-anchor="start" x="972.88" y="-849.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L117">
+<g id="a_node11_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="978.12" y="-849.12" font-family="Monospace" font-size="11.00">compute_priors_list/4</text>
 </a>
 </g>
@@ -434,12 +434,12 @@
 <!-- learn_class_priors/3&#45;&gt;compute_priors_list/4 -->
 <g id="edge8" class="edge">
 <title>learn_class_priors/3&#45;&gt;compute_priors_list/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M957.75,-972.84C975.78,-948.22 1008.87,-903.05 1029.85,-874.39"/>
 <polygon fill="black" stroke="black" points="1032.49,-876.72 1035.57,-866.58 1026.84,-872.58 1032.49,-876.72"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1009.37" y="-915.88" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -461,12 +461,12 @@
 <!-- learn_class_priors/3&#45;&gt;list::length/2 -->
 <g id="edge51" class="edge">
 <title>learn_class_priors/3&#45;&gt;list::length/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M947.23,-973.14C950.48,-942.99 954.29,-878.9 936,-829.25 892.38,-710.85 720.02,-700.65 782,-590.75 853.24,-464.44 1018.98,-396.05 1114.57,-365.86"/>
 <polygon fill="black" stroke="black" points="1115.34,-369.29 1123.86,-362.99 1113.27,-362.6 1115.34,-369.29"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="783.18" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -488,12 +488,12 @@
 <!-- learn_class_priors/3&#45;&gt;list::msort/2 -->
 <g id="edge52" class="edge">
 <title>learn_class_priors/3&#45;&gt;list::msort/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M908.83,-972.84C855.27,-947.06 754.9,-898.74 696.12,-870.45"/>
 <polygon fill="black" stroke="black" points="697.9,-867.42 687.37,-866.24 694.86,-873.73 697.9,-867.42"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L102">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="832.6" y="-915.88" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -503,7 +503,7 @@
 <title>count_occurrences/3</title>
 <polygon fill="cornsilk" stroke="black" points="1126.38,-746 971.62,-746 971.62,-710 1126.38,-710 1126.38,-746"/>
 <text xml:space="preserve" text-anchor="start" x="979.62" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L218">
+<g id="a_node23_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="984.88" y="-729.88" font-family="Monospace" font-size="11.00">count_occurrences/3</text>
 </a>
 </g>
@@ -515,12 +515,12 @@
 <!-- compute_priors_list/4&#45;&gt;count_occurrences/3 -->
 <g id="edge9" class="edge">
 <title>compute_priors_list/4&#45;&gt;count_occurrences/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L118" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L118" xlink:title="calls">
 <path fill="none" stroke="black" d="M1049,-828.95C1049,-810.25 1049,-780.12 1049,-757.83"/>
 <polygon fill="black" stroke="black" points="1052.5,-757.89 1049,-747.89 1045.5,-757.89 1052.5,-757.89"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L118">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="1049" y="-784.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -530,7 +530,7 @@
 <title>learn_feature_param/8</title>
 <polygon fill="cornsilk" stroke="black" points="568.12,-746 399.88,-746 399.88,-710 568.12,-710 568.12,-746"/>
 <text xml:space="preserve" text-anchor="start" x="407.88" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L134">
+<g id="a_node13_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="413.12" y="-729.88" font-family="Monospace" font-size="11.00">learn_feature_param/8</text>
 </a>
 </g>
@@ -542,12 +542,12 @@
 <!-- learn_feature_params_/7&#45;&gt;learn_feature_param/8 -->
 <g id="edge11" class="edge">
 <title>learn_feature_params_/7&#45;&gt;learn_feature_param/8</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L129" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M484,-828.95C484,-810.25 484,-780.12 484,-757.83"/>
 <polygon fill="black" stroke="black" points="487.5,-757.89 484,-747.89 480.5,-757.89 487.5,-757.89"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L129">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="484" y="-784.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -555,12 +555,12 @@
 <!-- learn_feature_param/8&#45;&gt;learn_continuous_stats/5 -->
 <g id="edge13" class="edge">
 <title>learn_feature_param/8&#45;&gt;learn_continuous_stats/5</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L136" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L136" xlink:title="calls">
 <path fill="none" stroke="black" d="M478.25,-709.7C471.97,-690.82 461.82,-660.31 454.38,-637.96"/>
 <polygon fill="black" stroke="black" points="457.73,-636.94 451.26,-628.56 451.09,-639.15 457.73,-636.94"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L136">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="465.67" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -570,7 +570,7 @@
 <title>learn_categorical_probs/6</title>
 <polygon fill="cornsilk" stroke="black" points="752.62,-626.75 557.38,-626.75 557.38,-590.75 752.62,-590.75 752.62,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="565.38" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140">
+<g id="a_node14_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="570.62" y="-610.62" font-family="Monospace" font-size="11.00">learn_categorical_probs/6</text>
 </a>
 </g>
@@ -582,12 +582,12 @@
 <!-- learn_feature_param/8&#45;&gt;learn_categorical_probs/6 -->
 <g id="edge12" class="edge">
 <title>learn_feature_param/8&#45;&gt;learn_categorical_probs/6</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L134" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M509.23,-709.7C538.66,-689.52 587.46,-656.06 620.41,-633.47"/>
 <polygon fill="black" stroke="black" points="622.15,-636.52 628.42,-627.98 618.19,-630.75 622.15,-636.52"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L134">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L134">
 <text xml:space="preserve" text-anchor="start" x="574.63" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -597,7 +597,7 @@
 <title>learn_categorical_probs_by_class/7</title>
 <polygon fill="cornsilk" stroke="black" points="804,-482.75 548,-482.75 548,-446.75 804,-446.75 804,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="556" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L144">
+<g id="a_node15_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="561.25" y="-466.62" font-family="Monospace" font-size="11.00">learn_categorical_probs_by_class/7</text>
 </a>
 </g>
@@ -609,12 +609,12 @@
 <!-- learn_categorical_probs/6&#45;&gt;learn_categorical_probs_by_class/7 -->
 <g id="edge14" class="edge">
 <title>learn_categorical_probs/6&#45;&gt;learn_categorical_probs_by_class/7</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M657.58,-590.34C661.12,-566.36 667.55,-522.89 671.8,-494.17"/>
 <polygon fill="black" stroke="black" points="675.25,-494.76 673.25,-484.36 668.32,-493.74 675.25,-494.76"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="668" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -622,12 +622,12 @@
 <!-- learn_categorical_probs/6&#45;&gt;list::length/2 -->
 <g id="edge53" class="edge">
 <title>learn_categorical_probs/6&#45;&gt;list::length/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M680.51,-590.29C712.98,-567.46 770.03,-525.36 813,-482.75 846.72,-449.31 838.84,-423.19 880,-399.5 968.91,-348.33 1009.19,-381.65 1114.3,-363.61"/>
 <polygon fill="black" stroke="black" points="1114.68,-367.1 1123.88,-361.84 1113.41,-360.22 1114.68,-367.1"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L140">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="838.8" y="-461.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -637,7 +637,7 @@
 <title>compute_value_probs_list/6</title>
 <polygon fill="cornsilk" stroke="black" points="1107,-363.5 905,-363.5 905,-327.5 1107,-327.5 1107,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="913" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L152">
+<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="918.25" y="-347.38" font-family="Monospace" font-size="11.00">compute_value_probs_list/6</text>
 </a>
 </g>
@@ -649,12 +649,12 @@
 <!-- learn_categorical_probs_by_class/7&#45;&gt;compute_value_probs_list/6 -->
 <g id="edge16" class="edge">
 <title>learn_categorical_probs_by_class/7&#45;&gt;compute_value_probs_list/6</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M691.69,-446.25C705.91,-431.5 728.2,-411.01 751.75,-399.5 776.96,-387.18 837.75,-374.32 893.56,-364.34"/>
 <polygon fill="black" stroke="black" points="893.92,-367.84 903.16,-362.65 892.7,-360.94 893.92,-367.84"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="751.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -664,7 +664,7 @@
 <title>get_instances_for_class/4</title>
 <polygon fill="cornsilk" stroke="black" points="886.62,-363.5 691.38,-363.5 691.38,-327.5 886.62,-327.5 886.62,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="699.38" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L231" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L231">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L231" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L231">
 <text xml:space="preserve" text-anchor="start" x="704.62" y="-347.38" font-family="Monospace" font-size="11.00">get_instances_for_class/4</text>
 </a>
 </g>
@@ -676,12 +676,12 @@
 <!-- learn_categorical_probs_by_class/7&#45;&gt;get_instances_for_class/4 -->
 <g id="edge15" class="edge">
 <title>learn_categorical_probs_by_class/7&#45;&gt;get_instances_for_class/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M674.54,-446.33C674.26,-432.41 676,-413.06 685.75,-399.5 694.98,-386.67 708.25,-376.72 722.22,-369.1"/>
 <polygon fill="black" stroke="black" points="723.75,-372.25 731.11,-364.63 720.61,-365.99 723.75,-372.25"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="685.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -689,12 +689,12 @@
 <!-- learn_categorical_probs_by_class/7&#45;&gt;list::length/2 -->
 <g id="edge54" class="edge">
 <title>learn_categorical_probs_by_class/7&#45;&gt;list::length/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M708.8,-446.31C741.26,-429.34 788.9,-405.29 808.75,-399.5 937.26,-362.03 978.5,-386.4 1113.81,-363.72"/>
 <polygon fill="black" stroke="black" points="1114.27,-367.2 1123.52,-362.03 1113.07,-360.3 1114.27,-367.2"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L146">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="808.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -704,7 +704,7 @@
 <title>count_feature_value/4</title>
 <polygon fill="cornsilk" stroke="black" points="442.12,-219.5 273.88,-219.5 273.88,-183.5 442.12,-183.5 442.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="281.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L239">
+<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="287.12" y="-203.38" font-family="Monospace" font-size="11.00">count_feature_value/4</text>
 </a>
 </g>
@@ -716,12 +716,12 @@
 <!-- compute_value_probs_list/6&#45;&gt;count_feature_value/4 -->
 <g id="edge17" class="edge">
 <title>compute_value_probs_list/6&#45;&gt;count_feature_value/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L154" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M926.22,-327.02C805.29,-300.52 576.25,-250.33 449,-222.44"/>
 <polygon fill="black" stroke="black" points="449.76,-219.02 439.24,-220.3 448.26,-225.86 449.76,-219.02"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L154">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="759.1" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -731,7 +731,7 @@
 <title>get_feature_column/3</title>
 <polygon fill="cornsilk" stroke="black" points="295.75,-291.5 134.25,-291.5 134.25,-255.5 295.75,-255.5 295.75,-291.5"/>
 <text xml:space="preserve" text-anchor="start" x="142.25" y="-275.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L226">
+<g id="a_node24_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L226">
 <text xml:space="preserve" text-anchor="start" x="147.5" y="-275.38" font-family="Monospace" font-size="11.00">get_feature_column/3</text>
 </a>
 </g>
@@ -743,12 +743,12 @@
 <!-- learn_continuous_stats_by_class/5&#45;&gt;get_feature_column/3 -->
 <g id="edge20" class="edge">
 <title>learn_continuous_stats_by_class/5&#45;&gt;get_feature_column/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M363.96,-446.36C329.07,-429.7 279.86,-401.48 249,-363.5 234.73,-345.94 226,-321.72 220.97,-302.99"/>
 <polygon fill="black" stroke="black" points="224.38,-302.21 218.59,-293.33 217.58,-303.88 224.38,-302.21"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="299.7" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -756,12 +756,12 @@
 <!-- learn_continuous_stats_by_class/5&#45;&gt;get_instances_for_class/4 -->
 <g id="edge19" class="edge">
 <title>learn_continuous_stats_by_class/5&#45;&gt;get_instances_for_class/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M462.07,-446.32C531.13,-425.24 647.28,-389.77 720.93,-367.28"/>
 <polygon fill="black" stroke="black" points="721.94,-370.64 730.48,-364.37 719.89,-363.94 721.94,-370.64"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="608.51" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -783,12 +783,12 @@
 <!-- learn_continuous_stats_by_class/5&#45;&gt;population::arithmetic_mean/2 -->
 <g id="edge55" class="edge">
 <title>learn_continuous_stats_by_class/5&#45;&gt;population::arithmetic_mean/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M399.69,-446.45C393.89,-427.57 384.52,-397.06 377.66,-374.71"/>
 <polygon fill="black" stroke="black" points="381.06,-373.85 374.78,-365.32 374.37,-375.91 381.06,-373.85"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="388.08" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -810,12 +810,12 @@
 <!-- learn_continuous_stats_by_class/5&#45;&gt;population::variance/2 -->
 <g id="edge56" class="edge">
 <title>learn_continuous_stats_by_class/5&#45;&gt;population::variance/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="calls">
 <path fill="none" stroke="black" d="M431.71,-446.45C462.99,-426.19 514.95,-392.52 549.83,-369.93"/>
 <polygon fill="black" stroke="black" points="551.42,-373.07 557.91,-364.69 547.62,-367.19 551.42,-373.07"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L166">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="500.93" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -825,7 +825,7 @@
 <title>predict/3</title>
 <polygon fill="cornsilk" stroke="black" points="264.62,-865.25 177.38,-865.25 177.38,-829.25 264.62,-829.25 264.62,-865.25"/>
 <text xml:space="preserve" text-anchor="start" x="185.38" y="-849.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173">
+<g id="a_node18_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="190.62" y="-849.12" font-family="Monospace" font-size="11.00">predict/3</text>
 </a>
 </g>
@@ -837,12 +837,12 @@
 <!-- predict/3&#45;&gt;predict_probabilities/3 -->
 <g id="edge21" class="edge">
 <title>predict/3&#45;&gt;predict_probabilities/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M204.47,-828.95C185.7,-809.29 154.87,-777.02 133.35,-754.49"/>
 <polygon fill="black" stroke="black" points="136.08,-752.28 126.64,-747.47 131.02,-757.11 136.08,-752.28"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="168.36" y="-784.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -852,7 +852,7 @@
 <title>max_probability/3</title>
 <polygon fill="cornsilk" stroke="black" points="359.62,-746 218.38,-746 218.38,-710 359.62,-710 359.62,-746"/>
 <text xml:space="preserve" text-anchor="start" x="226.38" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L248">
+<g id="a_node27_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L248">
 <text xml:space="preserve" text-anchor="start" x="231.62" y="-729.88" font-family="Monospace" font-size="11.00">max_probability/3</text>
 </a>
 </g>
@@ -864,12 +864,12 @@
 <!-- predict/3&#45;&gt;max_probability/3 -->
 <g id="edge22" class="edge">
 <title>predict/3&#45;&gt;max_probability/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M231.03,-828.95C242.13,-809.81 260.16,-778.72 273.17,-756.29"/>
 <polygon fill="black" stroke="black" points="276.18,-758.09 278.17,-747.68 270.12,-754.58 276.18,-758.09"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L173">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="257.04" y="-784.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -879,7 +879,7 @@
 <title>compute_likelihood/7</title>
 <polygon fill="cornsilk" stroke="black" points="179.75,-482.75 18.25,-482.75 18.25,-446.75 179.75,-446.75 179.75,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="26.25" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L190">
+<g id="a_node20_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L190">
 <text xml:space="preserve" text-anchor="start" x="31.5" y="-466.62" font-family="Monospace" font-size="11.00">compute_likelihood/7</text>
 </a>
 </g>
@@ -891,12 +891,12 @@
 <!-- compute_posteriors/6&#45;&gt;compute_likelihood/7 -->
 <g id="edge25" class="edge">
 <title>compute_posteriors/6&#45;&gt;compute_likelihood/7</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M99,-590.34C99,-566.36 99,-522.89 99,-494.17"/>
 <polygon fill="black" stroke="black" points="102.5,-494.37 99,-484.37 95.5,-494.37 102.5,-494.37"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L184">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="99" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -904,12 +904,12 @@
 <!-- compute_posteriors/6&#45;&gt;list::memberchk/2 -->
 <g id="edge57" class="edge">
 <title>compute_posteriors/6&#45;&gt;list::memberchk/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M115.49,-590.26C136.07,-567.4 170.75,-525.26 189,-482.75 217.29,-416.85 177.92,-373.43 233,-327.5 317.92,-256.69 643.44,-221.55 797.83,-208.58"/>
 <polygon fill="black" stroke="black" points="797.91,-212.09 807.59,-207.77 797.33,-205.11 797.91,-212.09"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L184">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="200.91" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -919,7 +919,7 @@
 <title>feature_likelihood/5</title>
 <polygon fill="cornsilk" stroke="black" points="179.75,-363.5 18.25,-363.5 18.25,-327.5 179.75,-327.5 179.75,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="26.25" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L197">
+<g id="a_node21_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="31.5" y="-347.38" font-family="Monospace" font-size="11.00">feature_likelihood/5</text>
 </a>
 </g>
@@ -931,12 +931,12 @@
 <!-- compute_likelihood/7&#45;&gt;feature_likelihood/5 -->
 <g id="edge26" class="edge">
 <title>compute_likelihood/7&#45;&gt;feature_likelihood/5</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L191" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L191" xlink:title="calls">
 <path fill="none" stroke="black" d="M99,-446.45C99,-427.75 99,-397.62 99,-375.33"/>
 <polygon fill="black" stroke="black" points="102.5,-375.39 99,-365.39 95.5,-375.39 102.5,-375.39"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L191">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="99" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -946,7 +946,7 @@
 <title>gaussian_probability/4</title>
 <polygon fill="cornsilk" stroke="black" points="193.5,-219.5 18.5,-219.5 18.5,-183.5 193.5,-183.5 193.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L209">
+<g id="a_node22_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-203.38" font-family="Monospace" font-size="11.00">gaussian_probability/4</text>
 </a>
 </g>
@@ -958,12 +958,12 @@
 <!-- feature_likelihood/5&#45;&gt;gaussian_probability/4 -->
 <g id="edge27" class="edge">
 <title>feature_likelihood/5&#45;&gt;gaussian_probability/4</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L204" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L204" xlink:title="calls">
 <path fill="none" stroke="black" d="M79.42,-327.44C70.02,-317.93 59.73,-305.25 54.75,-291.5 49.3,-276.46 48.75,-270.33 54.75,-255.5 58.95,-245.11 66.28,-235.62 74.1,-227.64"/>
 <polygon fill="black" stroke="black" points="76.34,-230.34 81.21,-220.93 71.54,-225.25 76.34,-230.34"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L204">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L204">
 <text xml:space="preserve" text-anchor="start" x="54.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -971,12 +971,12 @@
 <!-- feature_likelihood/5&#45;&gt;list::memberchk/2 -->
 <g id="edge58" class="edge">
 <title>feature_likelihood/5&#45;&gt;list::memberchk/2</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L197" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M92.76,-327.26C86.74,-307.25 80.92,-274.58 98.75,-255.5 122.35,-230.24 601.86,-211.66 797.73,-205.09"/>
 <polygon fill="black" stroke="black" points="797.7,-208.59 807.58,-204.76 797.47,-201.6 797.7,-208.59"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L197">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="98.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -998,12 +998,12 @@
 <!-- get_feature_column/3&#45;&gt;list::nth1/3 -->
 <g id="edge59" class="edge">
 <title>get_feature_column/3&#45;&gt;list::nth1/3</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L227" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M219.52,-255.07C224.22,-237.11 231.82,-208.3 238.75,-183.5 245.56,-159.12 253.64,-131.52 259.58,-111.46"/>
 <polygon fill="black" stroke="black" points="262.88,-112.63 262.37,-102.05 256.17,-110.64 262.88,-112.63"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L227">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L227">
 <text xml:space="preserve" text-anchor="start" x="238.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1011,12 +1011,12 @@
 <!-- count_feature_value/4&#45;&gt;list::nth1/3 -->
 <g id="edge60" class="edge">
 <title>count_feature_value/4&#45;&gt;list::nth1/3</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L240" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L240" xlink:title="calls">
 <path fill="none" stroke="black" d="M344.72,-183.2C329.83,-163.8 305.52,-132.13 288.25,-109.64"/>
 <polygon fill="black" stroke="black" points="291.12,-107.62 282.26,-101.82 285.57,-111.89 291.12,-107.62"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L240">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L240" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L240">
 <text xml:space="preserve" text-anchor="start" x="315.7" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1026,7 +1026,7 @@
 <title>classifier_diagnostics_data/2</title>
 <polygon fill="cornsilk" stroke="black" points="1856.12,-746 1633.88,-746 1633.88,-710 1856.12,-710 1856.12,-746"/>
 <text xml:space="preserve" text-anchor="start" x="1641.88" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L263">
+<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="1647.12" y="-729.88" font-family="Monospace" font-size="11.00">classifier_diagnostics_data/2</text>
 </a>
 </g>
@@ -1040,7 +1040,7 @@
 <title>classifier_data/6</title>
 <polygon fill="cornsilk" stroke="black" points="1815.62,-626.75 1674.38,-626.75 1674.38,-590.75 1815.62,-590.75 1815.62,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="1682.38" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node41_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L350">
+<g id="a_node41_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L350">
 <text xml:space="preserve" text-anchor="start" x="1687.62" y="-610.62" font-family="Monospace" font-size="11.00">classifier_data/6</text>
 </a>
 </g>
@@ -1052,12 +1052,12 @@
 <!-- classifier_diagnostics_data/2&#45;&gt;classifier_data/6 -->
 <g id="edge28" class="edge">
 <title>classifier_diagnostics_data/2&#45;&gt;classifier_data/6</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L263" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L263" xlink:title="calls">
 <path fill="none" stroke="black" d="M1745,-709.7C1745,-691 1745,-660.87 1745,-638.58"/>
 <polygon fill="black" stroke="black" points="1748.5,-638.64 1745,-628.64 1741.5,-638.64 1748.5,-638.64"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L263">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="1745" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1067,7 +1067,7 @@
 <title>check_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="1387,-746 1239,-746 1239,-710 1387,-710 1387,-746"/>
 <text xml:space="preserve" text-anchor="start" x="1247" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_node30_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1252.25" y="-729.88" font-family="Monospace" font-size="11.00">check_classifier/1</text>
 </a>
 </g>
@@ -1081,7 +1081,7 @@
 <title>valid_class_priors/2</title>
 <polygon fill="cornsilk" stroke="black" points="1801.75,-482.75 1640.25,-482.75 1640.25,-446.75 1801.75,-446.75 1801.75,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1648.25" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293">
+<g id="a_node33_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="1653.5" y="-466.62" font-family="Monospace" font-size="11.00">valid_class_priors/2</text>
 </a>
 </g>
@@ -1093,12 +1093,12 @@
 <!-- check_classifier/1&#45;&gt;valid_class_priors/2 -->
 <g id="edge30" class="edge">
 <title>check_classifier/1&#45;&gt;valid_class_priors/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1329.71,-709.64C1364.08,-673.99 1440.05,-595.45 1446.75,-590.75 1513.21,-544.18 1599.81,-508.16 1657.74,-487"/>
 <polygon fill="black" stroke="black" points="1658.57,-490.42 1666.79,-483.73 1656.2,-483.83 1658.57,-490.42"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1446.75" y="-605.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1108,7 +1108,7 @@
 <title>valid_feature_params/4</title>
 <polygon fill="cornsilk" stroke="black" points="1400.5,-626.75 1225.5,-626.75 1225.5,-590.75 1400.5,-590.75 1400.5,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="1233.5" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node35_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L308">
+<g id="a_node35_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L308">
 <text xml:space="preserve" text-anchor="start" x="1238.75" y="-610.62" font-family="Monospace" font-size="11.00">valid_feature_params/4</text>
 </a>
 </g>
@@ -1120,12 +1120,12 @@
 <!-- check_classifier/1&#45;&gt;valid_feature_params/4 -->
 <g id="edge31" class="edge">
 <title>check_classifier/1&#45;&gt;valid_feature_params/4</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1313,-709.7C1313,-691 1313,-660.87 1313,-638.58"/>
 <polygon fill="black" stroke="black" points="1316.5,-638.64 1313,-628.64 1309.5,-638.64 1316.5,-638.64"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1313" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1133,12 +1133,12 @@
 <!-- check_classifier/1&#45;&gt;classifier_data/6 -->
 <g id="edge29" class="edge">
 <title>check_classifier/1&#45;&gt;classifier_data/6</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1377.21,-709.57C1455.3,-688.38 1586.9,-652.66 1669.69,-630.19"/>
 <polygon fill="black" stroke="black" points="1670.6,-633.57 1679.33,-627.57 1668.76,-626.81 1670.6,-633.57"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1541.95" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1146,12 +1146,12 @@
 <!-- check_classifier/1&#45;&gt;list::length/2 -->
 <g id="edge61" class="edge">
 <title>check_classifier/1&#45;&gt;list::length/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1289.08,-709.68C1266.32,-691.73 1233.21,-661.47 1217,-626.75 1177.49,-542.17 1179.64,-428.08 1183.31,-375.38"/>
 <polygon fill="black" stroke="black" points="1186.8,-375.69 1184.08,-365.45 1179.82,-375.15 1186.8,-375.69"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1193.41" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1170,12 +1170,12 @@
 <!-- check_classifier/1&#45;&gt;^^valid_class_values/1 -->
 <g id="edge45" class="edge">
 <title>check_classifier/1&#45;&gt;^^valid_class_values/1</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1357.85,-709.58C1382.83,-699.63 1414.37,-686.64 1442,-674 1470.41,-661 1501.74,-645.17 1526.17,-632.48"/>
 <polygon fill="black" stroke="black" points="1527.6,-635.67 1534.85,-627.94 1524.36,-629.47 1527.6,-635.67"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1463.08" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1194,12 +1194,12 @@
 <!-- check_classifier/1&#45;&gt;^^valid_attribute_names/1 -->
 <g id="edge46" class="edge">
 <title>check_classifier/1&#45;&gt;^^valid_attribute_names/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1249.98,-709.57C1173.26,-688.36 1043.91,-652.59 962.66,-630.12"/>
 <polygon fill="black" stroke="black" points="964.05,-626.87 953.48,-627.58 962.18,-633.62 964.05,-626.87"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1113.71" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1218,12 +1218,12 @@
 <!-- check_classifier/1&#45;&gt;^^valid_feature_types/2 -->
 <g id="edge47" class="edge">
 <title>check_classifier/1&#45;&gt;^^valid_feature_types/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="calls">
 <path fill="none" stroke="black" d="M1255.64,-709.61C1230.03,-700.7 1199.99,-688.63 1174.75,-674 1155.91,-663.08 1136.94,-647.76 1122.34,-634.82"/>
 <polygon fill="black" stroke="black" points="1124.73,-632.27 1114.97,-628.15 1120.03,-637.46 1124.73,-632.27"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L271">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="1174.75" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1233,7 +1233,7 @@
 <title>export_to_clauses/4</title>
 <polygon fill="cornsilk" stroke="black" points="1594.38,-1128.5 1439.62,-1128.5 1439.62,-1092.5 1594.38,-1092.5 1594.38,-1128.5"/>
 <text xml:space="preserve" text-anchor="start" x="1447.62" y="-1112.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L285" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L285">
+<g id="a_node31_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L285" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L285">
 <text xml:space="preserve" text-anchor="start" x="1452.88" y="-1112.38" font-family="Monospace" font-size="11.00">export_to_clauses/4</text>
 </a>
 </g>
@@ -1247,7 +1247,7 @@
 <title>classifier_term_template/2</title>
 <polygon fill="cornsilk" stroke="black" points="2094,-1128.5 1892,-1128.5 1892,-1092.5 2094,-1092.5 2094,-1128.5"/>
 <text xml:space="preserve" text-anchor="start" x="1900" y="-1112.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L291">
+<g id="a_node32_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="1905.25" y="-1112.38" font-family="Monospace" font-size="11.00">classifier_term_template/2</text>
 </a>
 </g>
@@ -1261,7 +1261,7 @@
 <title>valid_class_priors/5</title>
 <polygon fill="cornsilk" stroke="black" points="1845.75,-363.5 1684.25,-363.5 1684.25,-327.5 1845.75,-327.5 1845.75,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1692.25" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L300">
+<g id="a_node34_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L300" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L300">
 <text xml:space="preserve" text-anchor="start" x="1697.5" y="-347.38" font-family="Monospace" font-size="11.00">valid_class_priors/5</text>
 </a>
 </g>
@@ -1273,12 +1273,12 @@
 <!-- valid_class_priors/2&#45;&gt;valid_class_priors/5 -->
 <g id="edge32" class="edge">
 <title>valid_class_priors/2&#45;&gt;valid_class_priors/5</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="calls">
 <path fill="none" stroke="black" d="M1727.49,-446.45C1734.61,-427.49 1746.13,-396.78 1754.53,-374.4"/>
 <polygon fill="black" stroke="black" points="1757.71,-375.88 1757.95,-365.29 1751.16,-373.42 1757.71,-375.88"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="1744.32" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1286,12 +1286,12 @@
 <!-- valid_class_priors/2&#45;&gt;list::length/2 -->
 <g id="edge62" class="edge">
 <title>valid_class_priors/2&#45;&gt;list::length/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="calls">
 <path fill="none" stroke="black" d="M1639.8,-446.91C1549.24,-427.98 1398.14,-395.94 1257.64,-363.85"/>
 <polygon fill="black" stroke="black" points="1258.69,-360.5 1248.16,-361.68 1257.13,-367.32 1258.69,-360.5"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L293">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="1459.85" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1299,12 +1299,12 @@
 <!-- valid_class_priors/5&#45;&gt;list::memberchk/2 -->
 <g id="edge63" class="edge">
 <title>valid_class_priors/5&#45;&gt;list::memberchk/2</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="calls">
 <path fill="none" stroke="black" d="M1735.53,-327.19C1691.57,-301.38 1613.84,-255.76 1613,-255.5 1552.23,-236.64 1141.04,-214.99 962.49,-206.35"/>
 <polygon fill="black" stroke="black" points="962.74,-202.86 952.58,-205.87 962.4,-209.85 962.74,-202.86"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301">
 <text xml:space="preserve" text-anchor="start" x="1671.41" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1326,12 +1326,12 @@
 <!-- valid_class_priors/5&#45;&gt;list::member/2 -->
 <g id="edge64" class="edge">
 <title>valid_class_priors/5&#45;&gt;list::member/2</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="calls">
 <path fill="none" stroke="black" d="M1753.11,-327.09C1736.36,-302.58 1705.7,-257.69 1686.11,-229.02"/>
 <polygon fill="black" stroke="black" points="1689.07,-227.14 1680.54,-220.86 1683.29,-231.09 1689.07,-227.14"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301">
 <text xml:space="preserve" text-anchor="start" x="1728.04" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1353,12 +1353,12 @@
 <!-- valid_class_priors/5&#45;&gt;type::valid/2 -->
 <g id="edge65" class="edge">
 <title>valid_class_priors/5&#45;&gt;type::valid/2</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="calls">
 <path fill="none" stroke="black" d="M1767.57,-327.19C1771.36,-294.66 1774.47,-224.07 1738,-183.5 1690.25,-130.38 1610.67,-105.04 1553.51,-93.19"/>
 <polygon fill="black" stroke="black" points="1554.36,-89.79 1543.87,-91.29 1553.01,-96.66 1554.36,-89.79"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L301">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L301">
 <text xml:space="preserve" text-anchor="start" x="1758.61" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1368,7 +1368,7 @@
 <title>valid_categorical_probs/2</title>
 <polygon fill="cornsilk" stroke="black" points="1622.62,-482.75 1427.38,-482.75 1427.38,-446.75 1622.62,-446.75 1622.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1435.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node36_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316">
+<g id="a_node36_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="1440.62" y="-466.62" font-family="Monospace" font-size="11.00">valid_categorical_probs/2</text>
 </a>
 </g>
@@ -1380,12 +1380,12 @@
 <!-- valid_feature_params/4&#45;&gt;valid_categorical_probs/2 -->
 <g id="edge33" class="edge">
 <title>valid_feature_params/4&#45;&gt;valid_categorical_probs/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L309" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L309" xlink:title="calls">
 <path fill="none" stroke="black" d="M1327.62,-590.49C1344.77,-571.07 1374.81,-539.53 1405.75,-518.75 1424,-506.49 1445.56,-495.91 1465.28,-487.49"/>
 <polygon fill="black" stroke="black" points="1466.42,-490.81 1474.32,-483.75 1463.74,-484.35 1466.42,-490.81"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L309">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L309">
 <text xml:space="preserve" text-anchor="start" x="1405.75" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1395,7 +1395,7 @@
 <title>valid_continuous_stats/2</title>
 <polygon fill="cornsilk" stroke="black" points="1409.25,-482.75 1220.75,-482.75 1220.75,-446.75 1409.25,-446.75 1409.25,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1228.75" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node39_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337">
+<g id="a_node39_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337">
 <text xml:space="preserve" text-anchor="start" x="1234" y="-466.62" font-family="Monospace" font-size="11.00">valid_continuous_stats/2</text>
 </a>
 </g>
@@ -1407,12 +1407,12 @@
 <!-- valid_feature_params/4&#45;&gt;valid_continuous_stats/2 -->
 <g id="edge34" class="edge">
 <title>valid_feature_params/4&#45;&gt;valid_continuous_stats/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L312" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L312" xlink:title="calls">
 <path fill="none" stroke="black" d="M1313.25,-590.34C1313.58,-566.36 1314.2,-522.89 1314.6,-494.17"/>
 <polygon fill="black" stroke="black" points="1318.1,-494.42 1314.74,-484.37 1311.1,-494.32 1318.1,-494.42"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L312">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L312">
 <text xml:space="preserve" text-anchor="start" x="1314.24" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1422,7 +1422,7 @@
 <title>valid_categorical_probs/3</title>
 <polygon fill="cornsilk" stroke="black" points="1666.62,-363.5 1471.38,-363.5 1471.38,-327.5 1666.62,-327.5 1666.62,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1479.38" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node37_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L321">
+<g id="a_node37_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L321">
 <text xml:space="preserve" text-anchor="start" x="1484.62" y="-347.38" font-family="Monospace" font-size="11.00">valid_categorical_probs/3</text>
 </a>
 </g>
@@ -1434,12 +1434,12 @@
 <!-- valid_categorical_probs/2&#45;&gt;valid_categorical_probs/3 -->
 <g id="edge35" class="edge">
 <title>valid_categorical_probs/2&#45;&gt;valid_categorical_probs/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="calls">
 <path fill="none" stroke="black" d="M1531.49,-446.45C1538.61,-427.49 1550.13,-396.78 1558.53,-374.4"/>
 <polygon fill="black" stroke="black" points="1561.71,-375.88 1561.95,-365.29 1555.16,-373.42 1561.71,-375.88"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="1548.32" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1447,12 +1447,12 @@
 <!-- valid_categorical_probs/2&#45;&gt;list::length/2 -->
 <g id="edge66" class="edge">
 <title>valid_categorical_probs/2&#45;&gt;list::length/2</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="calls">
 <path fill="none" stroke="black" d="M1429.78,-446.28C1390.66,-437.68 1345.35,-425.87 1305.75,-410.75 1289.98,-404.73 1254.41,-385.36 1226.11,-369.44"/>
 <polygon fill="black" stroke="black" points="1228.2,-366.6 1217.77,-364.73 1224.76,-372.7 1228.2,-366.6"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L316">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L316">
 <text xml:space="preserve" text-anchor="start" x="1305.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1462,7 +1462,7 @@
 <title>valid_value_probabilities/3</title>
 <polygon fill="cornsilk" stroke="black" points="1589.38,-219.5 1380.62,-219.5 1380.62,-183.5 1589.38,-183.5 1589.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1388.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node38_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L330">
+<g id="a_node38_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L330">
 <text xml:space="preserve" text-anchor="start" x="1393.88" y="-203.38" font-family="Monospace" font-size="11.00">valid_value_probabilities/3</text>
 </a>
 </g>
@@ -1474,12 +1474,12 @@
 <!-- valid_categorical_probs/3&#45;&gt;valid_value_probabilities/3 -->
 <g id="edge36" class="edge">
 <title>valid_categorical_probs/3&#45;&gt;valid_value_probabilities/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="calls">
 <path fill="none" stroke="black" d="M1554.7,-327.44C1546.58,-317.33 1536.52,-304.08 1528.75,-291.5 1516.54,-271.73 1505.04,-248.06 1496.9,-230.1"/>
 <polygon fill="black" stroke="black" points="1500.17,-228.84 1492.9,-221.13 1493.78,-231.69 1500.17,-228.84"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322">
 <text xml:space="preserve" text-anchor="start" x="1528.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1487,12 +1487,12 @@
 <!-- valid_categorical_probs/3&#45;&gt;list::memberchk/2 -->
 <g id="edge67" class="edge">
 <title>valid_categorical_probs/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="calls">
 <path fill="none" stroke="black" d="M1539.76,-327.17C1497.94,-302.51 1424.58,-259.79 1411,-255.5 1329.54,-229.74 1089.84,-213.59 962.19,-206.57"/>
 <polygon fill="black" stroke="black" points="962.64,-203.09 952.46,-206.04 962.26,-210.08 962.64,-203.09"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322">
 <text xml:space="preserve" text-anchor="start" x="1474.92" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1500,12 +1500,12 @@
 <!-- valid_categorical_probs/3&#45;&gt;list::member/2 -->
 <g id="edge68" class="edge">
 <title>valid_categorical_probs/3&#45;&gt;list::member/2</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="calls">
 <path fill="none" stroke="black" d="M1568.6,-327.27C1568.98,-308.15 1572.09,-277.16 1586.75,-255.5 1594.87,-243.5 1606.7,-233.58 1618.84,-225.7"/>
 <polygon fill="black" stroke="black" points="1620.53,-228.77 1627.28,-220.6 1616.91,-222.78 1620.53,-228.77"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L322">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L322">
 <text xml:space="preserve" text-anchor="start" x="1586.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1513,12 +1513,12 @@
 <!-- valid_value_probabilities/3&#45;&gt;type::valid/2 -->
 <g id="edge69" class="edge">
 <title>valid_value_probabilities/3&#45;&gt;type::valid/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L331" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L331" xlink:title="calls">
 <path fill="none" stroke="black" d="M1485,-183.2C1485,-164.5 1485,-134.37 1485,-112.08"/>
 <polygon fill="black" stroke="black" points="1488.5,-112.14 1485,-102.14 1481.5,-112.14 1488.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L331">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L331" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L331">
 <text xml:space="preserve" text-anchor="start" x="1485" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1528,7 +1528,7 @@
 <title>valid_continuous_stats/3</title>
 <polygon fill="cornsilk" stroke="black" points="1453.25,-363.5 1264.75,-363.5 1264.75,-327.5 1453.25,-327.5 1453.25,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1272.75" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node40_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L342">
+<g id="a_node40_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L342" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L342">
 <text xml:space="preserve" text-anchor="start" x="1278" y="-347.38" font-family="Monospace" font-size="11.00">valid_continuous_stats/3</text>
 </a>
 </g>
@@ -1540,12 +1540,12 @@
 <!-- valid_continuous_stats/2&#45;&gt;valid_continuous_stats/3 -->
 <g id="edge37" class="edge">
 <title>valid_continuous_stats/2&#45;&gt;valid_continuous_stats/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="calls">
 <path fill="none" stroke="black" d="M1321.49,-446.45C1328.61,-427.49 1340.13,-396.78 1348.53,-374.4"/>
 <polygon fill="black" stroke="black" points="1351.71,-375.88 1351.95,-365.29 1345.16,-373.42 1351.71,-375.88"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337">
 <text xml:space="preserve" text-anchor="start" x="1338.32" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1553,12 +1553,12 @@
 <!-- valid_continuous_stats/2&#45;&gt;list::length/2 -->
 <g id="edge70" class="edge">
 <title>valid_continuous_stats/2&#45;&gt;list::length/2</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="calls">
 <path fill="none" stroke="black" d="M1294.38,-446.31C1282.4,-436.08 1267.09,-422.83 1253.75,-410.75 1239.79,-398.1 1224.55,-383.7 1212.06,-371.74"/>
 <polygon fill="black" stroke="black" points="1214.63,-369.36 1205,-364.96 1209.78,-374.41 1214.63,-369.36"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L337">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L337">
 <text xml:space="preserve" text-anchor="start" x="1253.75" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1566,12 +1566,12 @@
 <!-- valid_continuous_stats/3&#45;&gt;list::memberchk/2 -->
 <g id="edge71" class="edge">
 <title>valid_continuous_stats/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="calls">
 <path fill="none" stroke="black" d="M1300.27,-327.09C1211.71,-300.84 1044.34,-251.22 949.73,-223.17"/>
 <polygon fill="black" stroke="black" points="950.87,-219.86 940.29,-220.37 948.88,-226.57 950.87,-219.86"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="1176.49" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1579,12 +1579,12 @@
 <!-- valid_continuous_stats/3&#45;&gt;list::member/2 -->
 <g id="edge72" class="edge">
 <title>valid_continuous_stats/3&#45;&gt;list::member/2</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="calls">
 <path fill="none" stroke="black" d="M1358.86,-327.28C1359.68,-306.97 1364.34,-273.7 1384.75,-255.5 1453.83,-193.9 1500.3,-235.5 1596.06,-219.61"/>
 <polygon fill="black" stroke="black" points="1596.67,-223.06 1605.86,-217.78 1595.39,-216.17 1596.67,-223.06"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="1384.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1592,12 +1592,12 @@
 <!-- valid_continuous_stats/3&#45;&gt;type::valid/2 -->
 <g id="edge73" class="edge">
 <title>valid_continuous_stats/3&#45;&gt;type::valid/2</title>
-<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="calls">
+<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="calls">
 <path fill="none" stroke="black" d="M1351.97,-327.37C1340.52,-296.64 1321.46,-230.93 1345.75,-183.5 1363.95,-147.97 1401.25,-122.17 1432.67,-105.65"/>
 <polygon fill="black" stroke="black" points="1433.93,-108.93 1441.28,-101.29 1430.77,-102.68 1433.93,-108.93"/>
 </a>
 </g>
-<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L343">
+<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="1345.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1607,7 +1607,7 @@
 <title>print_classifier/1</title>
 <polygon fill="cornsilk" stroke="black" points="2061,-746 1913,-746 1913,-710 2061,-710 2061,-746"/>
 <text xml:space="preserve" text-anchor="start" x="1921" y="-730.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node42_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353">
+<g id="a_node42_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="1926.25" y="-729.88" font-family="Monospace" font-size="11.00">print_classifier/1</text>
 </a>
 </g>
@@ -1619,12 +1619,12 @@
 <!-- print_classifier/1&#45;&gt;classifier_data/6 -->
 <g id="edge38" class="edge">
 <title>print_classifier/1&#45;&gt;classifier_data/6</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
 <path fill="none" stroke="black" d="M1951.03,-709.57C1908.43,-688.93 1837.4,-654.52 1790.88,-631.98"/>
 <polygon fill="black" stroke="black" points="1792.66,-628.95 1782.13,-627.74 1789.61,-635.25 1792.66,-628.95"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="1873.26" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1634,7 +1634,7 @@
 <title>print_priors/1</title>
 <polygon fill="cornsilk" stroke="black" points="2247.5,-554.75 2126.5,-554.75 2126.5,-518.75 2247.5,-518.75 2247.5,-554.75"/>
 <text xml:space="preserve" text-anchor="start" x="2134.5" y="-539" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node43_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L364">
+<g id="a_node43_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L364">
 <text xml:space="preserve" text-anchor="start" x="2139.75" y="-538.62" font-family="Monospace" font-size="11.00">print_priors/1</text>
 </a>
 </g>
@@ -1646,12 +1646,12 @@
 <!-- print_classifier/1&#45;&gt;print_priors/1 -->
 <g id="edge39" class="edge">
 <title>print_classifier/1&#45;&gt;print_priors/1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
 <path fill="none" stroke="black" d="M2061.35,-719.29C2119.94,-708.87 2198.03,-684.37 2237,-626.75 2251.04,-606 2234.33,-581.03 2216.55,-562.83"/>
 <polygon fill="black" stroke="black" points="2219.13,-560.45 2209.5,-556.03 2214.27,-565.49 2219.13,-560.45"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="2202.03" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1661,7 +1661,7 @@
 <title>print_features/3</title>
 <polygon fill="cornsilk" stroke="black" points="1968.25,-626.75 1833.75,-626.75 1833.75,-590.75 1968.25,-590.75 1968.25,-626.75"/>
 <text xml:space="preserve" text-anchor="start" x="1841.75" y="-611" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node44_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L370">
+<g id="a_node44_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L370" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L370">
 <text xml:space="preserve" text-anchor="start" x="1847" y="-610.62" font-family="Monospace" font-size="11.00">print_features/3</text>
 </a>
 </g>
@@ -1673,12 +1673,12 @@
 <!-- print_classifier/1&#45;&gt;print_features/3 -->
 <g id="edge40" class="edge">
 <title>print_classifier/1&#45;&gt;print_features/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
 <path fill="none" stroke="black" d="M1974.31,-709.7C1960.08,-690.3 1936.85,-658.63 1920.35,-636.14"/>
 <polygon fill="black" stroke="black" points="1923.37,-634.34 1914.64,-628.34 1917.73,-638.48 1923.37,-634.34"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="1946.58" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1700,12 +1700,12 @@
 <!-- print_classifier/1&#45;&gt;format::format/2 -->
 <g id="edge74" class="edge">
 <title>print_classifier/1&#45;&gt;format::format/2</title>
-<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
+<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
 <path fill="none" stroke="black" d="M1985.41,-709.63C1983.61,-683.14 1982.59,-631.44 1997,-590.75 2038.07,-474.8 2118.2,-480.88 2155,-363.5 2183.09,-273.88 2144.42,-162.37 2122.82,-111.24"/>
 <polygon fill="black" stroke="black" points="2126.04,-109.88 2118.85,-102.1 2119.62,-112.66 2126.04,-109.88"/>
 </a>
 </g>
-<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353">
+<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="2140.16" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1724,12 +1724,12 @@
 <!-- print_classifier/1&#45;&gt;^^print_classifier_template/1 -->
 <g id="edge48" class="edge">
 <title>print_classifier/1&#45;&gt;^^print_classifier_template/1</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="calls">
 <path fill="none" stroke="black" d="M2006.18,-709.7C2028.17,-689.87 2064.38,-657.2 2089.4,-634.64"/>
 <polygon fill="black" stroke="black" points="2091.53,-637.43 2096.62,-628.14 2086.85,-632.23 2091.53,-637.43"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L353">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L353">
 <text xml:space="preserve" text-anchor="start" x="2055.9" y="-665" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1737,12 +1737,12 @@
 <!-- print_priors/1&#45;&gt;format::format/2 -->
 <g id="edge75" class="edge">
 <title>print_priors/1&#45;&gt;format::format/2</title>
-<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L365" xlink:title="calls">
+<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L365" xlink:title="calls">
 <path fill="none" stroke="black" d="M2189.17,-518.59C2192.11,-493.8 2197,-446.53 2197,-406.12 2197,-406.12 2197,-406.12 2197,-200.5 2197,-162.8 2167.63,-129.33 2143.02,-107.9"/>
 <polygon fill="black" stroke="black" points="2145.32,-105.25 2135.4,-101.53 2140.83,-110.63 2145.32,-105.25"/>
 </a>
 </g>
-<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L365">
+<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L365">
 <text xml:space="preserve" text-anchor="start" x="2197" y="-342.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1752,7 +1752,7 @@
 <title>print_feature_param/2</title>
 <polygon fill="cornsilk" stroke="black" points="2045.12,-482.75 1876.88,-482.75 1876.88,-446.75 2045.12,-446.75 2045.12,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="1884.88" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node45_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L376">
+<g id="a_node45_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L376">
 <text xml:space="preserve" text-anchor="start" x="1890.12" y="-466.62" font-family="Monospace" font-size="11.00">print_feature_param/2</text>
 </a>
 </g>
@@ -1764,12 +1764,12 @@
 <!-- print_features/3&#45;&gt;print_feature_param/2 -->
 <g id="edge41" class="edge">
 <title>print_features/3&#45;&gt;print_feature_param/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M1908.36,-590.34C1918.58,-566.15 1937.18,-522.11 1949.32,-493.4"/>
 <polygon fill="black" stroke="black" points="1952.51,-494.83 1953.18,-484.26 1946.06,-492.1 1952.51,-494.83"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L371">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L371">
 <text xml:space="preserve" text-anchor="start" x="1938.14" y="-533.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1777,12 +1777,12 @@
 <!-- print_features/3&#45;&gt;format::format/2 -->
 <g id="edge76" class="edge">
 <title>print_features/3&#45;&gt;format::format/2</title>
-<g id="a_edge76"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="calls">
+<g id="a_edge76"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M1923.15,-590.48C1936.26,-580.19 1953.16,-566.83 1968,-554.75 2006.66,-523.28 2024.34,-522.82 2054,-482.75 2108.92,-408.56 2116.63,-381.96 2135,-291.5 2147.93,-227.84 2130.7,-151.78 2119.06,-111.51"/>
 <polygon fill="black" stroke="black" points="2122.48,-110.7 2116.25,-102.13 2115.77,-112.71 2122.48,-110.7"/>
 </a>
 </g>
-<g id="a_edge76&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L371">
+<g id="a_edge76&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L371">
 <text xml:space="preserve" text-anchor="start" x="2127.4" y="-342.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1792,7 +1792,7 @@
 <title>print_categorical_probs/1</title>
 <polygon fill="cornsilk" stroke="black" points="2058.62,-363.5 1863.38,-363.5 1863.38,-327.5 2058.62,-327.5 2058.62,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="1871.38" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node46_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L381">
+<g id="a_node46_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L381" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L381">
 <text xml:space="preserve" text-anchor="start" x="1876.62" y="-347.38" font-family="Monospace" font-size="11.00">print_categorical_probs/1</text>
 </a>
 </g>
@@ -1804,12 +1804,12 @@
 <!-- print_feature_param/2&#45;&gt;print_categorical_probs/1 -->
 <g id="edge42" class="edge">
 <title>print_feature_param/2&#45;&gt;print_categorical_probs/1</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L376" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L376" xlink:title="calls">
 <path fill="none" stroke="black" d="M1961,-446.45C1961,-427.75 1961,-397.62 1961,-375.33"/>
 <polygon fill="black" stroke="black" points="1964.5,-375.39 1961,-365.39 1957.5,-375.39 1964.5,-375.39"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L376">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L376" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L376">
 <text xml:space="preserve" text-anchor="start" x="1961" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1819,7 +1819,7 @@
 <title>print_continuous_stats/1</title>
 <polygon fill="cornsilk" stroke="black" points="2134.25,-291.5 1945.75,-291.5 1945.75,-255.5 2134.25,-255.5 2134.25,-291.5"/>
 <text xml:space="preserve" text-anchor="start" x="1953.75" y="-275.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node48_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L393" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L393">
+<g id="a_node48_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L393" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L393">
 <text xml:space="preserve" text-anchor="start" x="1959" y="-275.38" font-family="Monospace" font-size="11.00">print_continuous_stats/1</text>
 </a>
 </g>
@@ -1831,12 +1831,12 @@
 <!-- print_feature_param/2&#45;&gt;print_continuous_stats/1 -->
 <g id="edge43" class="edge">
 <title>print_feature_param/2&#45;&gt;print_continuous_stats/1</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L378" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L378" xlink:title="calls">
 <path fill="none" stroke="black" d="M1990.25,-446.32C2016.16,-429 2052.26,-399.82 2068,-363.5 2076.72,-343.37 2068.38,-319.64 2058.59,-301.74"/>
 <polygon fill="black" stroke="black" points="2061.66,-300.06 2053.55,-293.25 2055.64,-303.63 2061.66,-300.06"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L378">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L378">
 <text xml:space="preserve" text-anchor="start" x="2043.21" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1846,7 +1846,7 @@
 <title>print_value_probs/1</title>
 <polygon fill="cornsilk" stroke="black" points="1964.38,-219.5 1809.62,-219.5 1809.62,-183.5 1964.38,-183.5 1964.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1817.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node47_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L387" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L387">
+<g id="a_node47_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L387" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L387">
 <text xml:space="preserve" text-anchor="start" x="1822.88" y="-203.38" font-family="Monospace" font-size="11.00">print_value_probs/1</text>
 </a>
 </g>
@@ -1858,12 +1858,12 @@
 <!-- print_categorical_probs/1&#45;&gt;print_value_probs/1 -->
 <g id="edge44" class="edge">
 <title>print_categorical_probs/1&#45;&gt;print_value_probs/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M1939.09,-327.22C1928.46,-317.74 1916.37,-305.15 1908.75,-291.5 1898.37,-272.9 1892.9,-249.41 1890.04,-231.24"/>
 <polygon fill="black" stroke="black" points="1893.52,-230.83 1888.69,-221.4 1886.58,-231.78 1893.52,-230.83"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L382">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L382">
 <text xml:space="preserve" text-anchor="start" x="1908.75" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1871,12 +1871,12 @@
 <!-- print_categorical_probs/1&#45;&gt;format::format/2 -->
 <g id="edge77" class="edge">
 <title>print_categorical_probs/1&#45;&gt;format::format/2</title>
-<g id="a_edge77"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="calls">
+<g id="a_edge77"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M1952.42,-327.2C1944.56,-308.83 1935.46,-279.25 1945,-255.5 1952.3,-237.31 2039.03,-151.84 2083.72,-108.53"/>
 <polygon fill="black" stroke="black" points="2085.96,-111.23 2090.72,-101.77 2081.1,-106.2 2085.96,-111.23"/>
 </a>
 </g>
-<g id="a_edge77&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L382">
+<g id="a_edge77&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L382">
 <text xml:space="preserve" text-anchor="start" x="2007.35" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1884,12 +1884,12 @@
 <!-- print_value_probs/1&#45;&gt;format::format/2 -->
 <g id="edge78" class="edge">
 <title>print_value_probs/1&#45;&gt;format::format/2</title>
-<g id="a_edge78"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L388" xlink:title="calls">
+<g id="a_edge78"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L388" xlink:title="calls">
 <path fill="none" stroke="black" d="M1905.62,-183.12C1921.46,-169.04 1945.31,-149.44 1968.75,-136.25 1991.22,-123.61 2017.29,-112.85 2040.87,-104.4"/>
 <polygon fill="black" stroke="black" points="2041.79,-107.79 2050.08,-101.18 2039.48,-101.18 2041.79,-107.79"/>
 </a>
 </g>
-<g id="a_edge78&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L388">
+<g id="a_edge78&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="1968.75" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1897,12 +1897,12 @@
 <!-- print_continuous_stats/1&#45;&gt;format::format/2 -->
 <g id="edge79" class="edge">
 <title>print_continuous_stats/1&#45;&gt;format::format/2</title>
-<g id="a_edge79"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L394" xlink:title="calls">
+<g id="a_edge79"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L394" xlink:title="calls">
 <path fill="none" stroke="black" d="M2046.46,-255.04C2058.6,-222.22 2084.9,-151.1 2099.58,-111.43"/>
 <polygon fill="black" stroke="black" points="2102.84,-112.69 2103.03,-102.09 2096.28,-110.26 2102.84,-112.69"/>
 </a>
 </g>
-<g id="a_edge79&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L394" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2fe1fb96911cc5b42d4b30b848aa4fae4de850d1/library/naive_bayes/naive_bayes.lgt#L394">
+<g id="a_edge79&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L394" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e29f0945326d9b7d2433878d6f6d6e3206e4796f/library/naive_bayes/naive_bayes.lgt#L394">
 <text xml:space="preserve" text-anchor="start" x="2072" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
