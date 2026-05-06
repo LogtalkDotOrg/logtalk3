@@ -8,14 +8,14 @@
 ``classifier_common``
 =====================
 
-Shared predicates for classifier diagnostics and export.
+Shared predicates for classifier diagnostics, mixed-feature distance calculations, and export.
 
 | **Availability:** 
 |    ``logtalk_load(classification_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-04-30
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static``
@@ -28,6 +28,7 @@ Shared predicates for classifier diagnostics and export.
 | **Uses:**
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`population <population/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -219,6 +220,120 @@ True when a list of encoders only contains valid ``continuous/3`` or ``categoric
 
 ------------
 
+.. index:: dataset_attributes/2
+.. _classifier_common/0::dataset_attributes/2:
+
+``dataset_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the declared dataset attributes and their value domains.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_attributes(Dataset,Attributes)``
+| **Mode and number of proofs:**
+|    ``dataset_attributes(+object_identifier,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: dataset_examples/2
+.. _classifier_common/0::dataset_examples/2:
+
+``dataset_examples/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the dataset training examples as ``Id-Class-AttributeValues`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dataset_examples(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``dataset_examples(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: build_linear_encoders/4
+.. _classifier_common/0::build_linear_encoders/4:
+
+``build_linear_encoders/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds linear-model encoders for continuous and categorical attributes. Continuous encoders optionally standardize features when ``FeatureScaling`` is true.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_linear_encoders(Attributes,Examples,FeatureScaling,Encoders)``
+| **Mode and number of proofs:**
+|    ``build_linear_encoders(+list(pair),+list(compound),+boolean,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: examples_to_linear_rows/3
+.. _classifier_common/0::examples_to_linear_rows/3:
+
+``examples_to_linear_rows/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes examples into ``Features-Class`` rows using the given linear encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``examples_to_linear_rows(Examples,Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``examples_to_linear_rows(+list(compound),+list(compound),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: encode_linear_instance/3
+.. _classifier_common/0::encode_linear_instance/3:
+
+``encode_linear_instance/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an instance into a numeric feature vector using the given linear encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_linear_instance(Encoders,Instance,Features)``
+| **Mode and number of proofs:**
+|    ``encode_linear_instance(+list(compound),+list(pair),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: linear_encoders_feature_count/2
+.. _classifier_common/0::linear_encoders_feature_count/2:
+
+``linear_encoders_feature_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the number of numeric features produced by a set of linear encoders.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``linear_encoders_feature_count(Encoders,Count)``
+| **Mode and number of proofs:**
+|    ``linear_encoders_feature_count(+list(compound),-integer)`` - ``one``
+
+
+------------
+
 .. index:: valid_classifier_metadata/2
 .. _classifier_common/0::valid_classifier_metadata/2:
 
@@ -253,6 +368,25 @@ True when diagnostics metadata contains the expected model term and records the 
 |    ``valid_classifier_metadata(Model,Options,Diagnostics)``
 | **Mode and number of proofs:**
 |    ``valid_classifier_metadata(+atom,+list(compound),+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: mixed_feature_distance/5
+.. _classifier_common/0::mixed_feature_distance/5:
+
+``mixed_feature_distance/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes a distance between two mixed-feature vectors using the given feature types and one of the supported metrics ``euclidean``, ``manhattan``, ``chebyshev``, ``cosine``, or ``minkowski(Order)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mixed_feature_distance(Metric,FeatureTypes,Values1,Values2,Distance)``
+| **Mode and number of proofs:**
+|    ``mixed_feature_distance(+term,+list,+list,+list,-float)`` - ``one_or_error``
 
 
 ------------

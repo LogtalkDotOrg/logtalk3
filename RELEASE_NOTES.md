@@ -297,6 +297,26 @@ datasets using batch gradient descent.
 classification for binary and multiclass continuous and mixed-feature datasets
 using one-vs-rest hinge-loss training.
 
+* ADDED: New `gradient_boosting_classifier` library implementing gradient
+boosting classification using regression trees as additive base learners
+fitted to softmax residuals.
+
+* ADDED: New `kernel_svm_classifier` library implementing kernel support
+vector machine classification for binary and multiclass continuous and
+mixed-feature datasets using one-vs-rest dual training.
+
+* ADDED: New `lda_classifier` library implementing Linear Discriminant
+Analysis classification for labeled continuous datasets using pooled
+covariance estimates and regularized discriminant scores.
+
+* ADDED: New `qda_classifier` library implementing Quadratic Discriminant
+Analysis classification for labeled continuous datasets using class-specific
+covariance estimates and regularized discriminant scores.
+
+* ADDED: New `sgd_classifier` library implementing stochastic gradient
+descent classification for binary and multiclass continuous and mixed-feature
+datasets using one-vs-rest linear models with configurable losses.
+
 * ADDED: New `hmac` library providing a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104.
 

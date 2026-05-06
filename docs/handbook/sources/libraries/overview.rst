@@ -46,8 +46,11 @@ multiple areas):
 - Machine learning:
 
   - Classification: ``classification_protocols``, ``ada_boost``,
-    ``c45``, ``knn``, ``linear_svm``, ``logistic_regression``,
-    ``naive_bayes``, ``nearest_centroid``, and ``random_forest``.
+    ``c45``, ``gradient_boosting_classifier``,
+    ``kernel_svm_classifier``, ``knn``, ``lda_classifier``,
+    ``linear_svm``, ``logistic_regression``, ``naive_bayes``,
+    ``nearest_centroid``, ``qda_classifier``, ``random_forest``, and
+    ``sgd_classifier``.
   - Anomaly detection: ``anomaly_detection_protocols``, ``cusum``,
     ``ewma``, ``iqr``, ``isolation_forest``, ``knn_distance``, ``lof``,
     ``modified_z_score``, and ``z_score``.

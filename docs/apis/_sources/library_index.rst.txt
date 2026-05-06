@@ -843,6 +843,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    glicko2_periodic <glicko2_periodic_0>
 
+:ref:`gradient_boosting_classifier <library_gradient_boosting_classifier>`
+--------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gradient_boosting_classifier <gradient_boosting_classifier_0>
+
 :ref:`gradient_boosting_regression <library_gradient_boosting_regression>`
 --------------------------------------------------------------------------
 
@@ -1318,6 +1328,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    kernel_pca <kernel_pca_0>
 
+:ref:`kernel_svm_classifier <library_kernel_svm_classifier>`
+------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kernel_svm_classifier <kernel_svm_classifier_0>
+
 :ref:`kmeans <library_kmeans>`
 ------------------------------
 
@@ -1419,6 +1439,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    lasso_regression <lasso_regression_0>
+
+:ref:`lda_classifier <library_lda_classifier>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lda_classifier <lda_classifier_0>
 
 :ref:`lda_projection <library_lda_projection>`
 ----------------------------------------------
@@ -1957,6 +1987,16 @@ To load any library (including developer tools, ports, and contributions), use t
 
    protobuf <protobuf_0>
 
+:ref:`qda_classifier <library_qda_classifier>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   qda_classifier <qda_classifier_0>
+
 :ref:`queues <library_queues>`
 ------------------------------
 
@@ -2184,6 +2224,16 @@ To load any library (including developer tools, ports, and contributions), use t
    set(Type) <set_1>
    setp <setp_0>
    treap_set <treap_set_0>
+
+:ref:`sgd_classifier <library_sgd_classifier>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sgd_classifier <sgd_classifier_0>
 
 :ref:`simulated_annealing <library_simulated_annealing>`
 --------------------------------------------------------

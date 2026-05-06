@@ -35,7 +35,11 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		append/3, length/2, member/2, memberchk/2
+	]).
+
+	:- uses(population, [
+		arithmetic_mean/2, variance/2
 	]).
 
 	:- uses(type, [
@@ -105,6 +109,48 @@
 		argnames is ['Encoders']
 	]).
 
+	:- protected(dataset_attributes/2).
+	:- mode(dataset_attributes(+object_identifier, -list(pair)), one).
+	:- info(dataset_attributes/2, [
+		comment is 'Collects the declared dataset attributes and their value domains.',
+		argnames is ['Dataset', 'Attributes']
+	]).
+
+	:- protected(dataset_examples/2).
+	:- mode(dataset_examples(+object_identifier, -list(compound)), one).
+	:- info(dataset_examples/2, [
+		comment is 'Collects the dataset training examples as ``Id-Class-AttributeValues`` terms.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
+	:- protected(build_linear_encoders/4).
+	:- mode(build_linear_encoders(+list(pair), +list(compound), +boolean, -list(compound)), one).
+	:- info(build_linear_encoders/4, [
+		comment is 'Builds linear-model encoders for continuous and categorical attributes. Continuous encoders optionally standardize features when ``FeatureScaling`` is true.',
+		argnames is ['Attributes', 'Examples', 'FeatureScaling', 'Encoders']
+	]).
+
+	:- protected(examples_to_linear_rows/3).
+	:- mode(examples_to_linear_rows(+list(compound), +list(compound), -list(pair)), one).
+	:- info(examples_to_linear_rows/3, [
+		comment is 'Encodes examples into ``Features-Class`` rows using the given linear encoders.',
+		argnames is ['Examples', 'Encoders', 'Rows']
+	]).
+
+	:- protected(encode_linear_instance/3).
+	:- mode(encode_linear_instance(+list(compound), +list(pair), -list(float)), one).
+	:- info(encode_linear_instance/3, [
+		comment is 'Encodes an instance into a numeric feature vector using the given linear encoders.',
+		argnames is ['Encoders', 'Instance', 'Features']
+	]).
+
+	:- protected(linear_encoders_feature_count/2).
+	:- mode(linear_encoders_feature_count(+list(compound), -integer), one).
+	:- info(linear_encoders_feature_count/2, [
+		comment is 'Computes the number of numeric features produced by a set of linear encoders.',
+		argnames is ['Encoders', 'Count']
+	]).
+
 	:- protected(valid_classifier_metadata/2).
 	:- mode(valid_classifier_metadata(+atom, +list(compound)), zero_or_one).
 	:- info(valid_classifier_metadata/2, [
@@ -172,6 +218,58 @@
 	valid_linear_encoders(Encoders) :-
 		valid(list(compound), Encoders),
 		valid_linear_encoders_(Encoders, []).
+
+	dataset_attributes(Dataset, Attributes) :-
+		findall(
+			Attribute-Values,
+			Dataset::attribute_values(Attribute, Values),
+			Attributes
+		).
+
+	dataset_examples(Dataset, Examples) :-
+		findall(
+			Id-Class-AttributeValues,
+			Dataset::example(Id, Class, AttributeValues),
+			Examples
+		).
+
+	build_linear_encoders([], _, _FeatureScaling, []).
+	build_linear_encoders([Attribute-Values| Rest], Examples, FeatureScaling, [Encoder| Encoders]) :-
+		(   Values == continuous ->
+			continuous_stats(Attribute, Examples, FeatureScaling, Mean, Scale),
+			Encoder = continuous(Attribute, Mean, Scale)
+		;   Encoder = categorical(Attribute, Values)
+		),
+		build_linear_encoders(Rest, Examples, FeatureScaling, Encoders).
+
+	examples_to_linear_rows([], _Encoders, []).
+	examples_to_linear_rows([_-Class-AttributeValues| Examples], Encoders, [Features-Class| Rows]) :-
+		encode_linear_instance(Encoders, AttributeValues, Features),
+		examples_to_linear_rows(Examples, Encoders, Rows).
+
+	encode_linear_instance([], _, []).
+	encode_linear_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features]) :-
+		!,
+		(   memberchk(Attribute-Value, AttributeValues),
+			nonvar(Value) ->
+			normalize_continuous(Value, Mean, Scale, Feature),
+			Missing = 0.0
+		;   Feature = 0.0,
+			Missing = 1.0
+		),
+		encode_linear_instance(Encoders, AttributeValues, Features).
+	encode_linear_instance([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
+		(   memberchk(Attribute-Value, AttributeValues),
+			nonvar(Value) ->
+			check_categorical_value(Attribute, Values, Value),
+			one_hot_encode(Values, Value, Encoded)
+		;   missing_one_hot_encode(Values, Encoded)
+		),
+		append(Encoded, RestFeatures, Features),
+		encode_linear_instance(Encoders, AttributeValues, RestFeatures).
+
+	linear_encoders_feature_count(Encoders, Count) :-
+		linear_encoders_feature_count(Encoders, 0, Count).
 
 	valid_classifier_metadata(Model, Diagnostics) :-
 		valid(list(compound), Diagnostics),
@@ -278,6 +376,70 @@
 		valid_discrete_values(Values),
 		\+ member(Attribute, SeenAttributes),
 		valid_linear_encoders_(Encoders, [Attribute| SeenAttributes]).
+
+	continuous_stats(Attribute, Examples, FeatureScaling, Mean, Scale) :-
+		known_attribute_values(Examples, Attribute, Values),
+		(   Values == [] ->
+			Mean = 0.0,
+			Scale = 1.0
+		;   FeatureScaling == true ->
+			arithmetic_mean(Values, Mean),
+			length(Values, Count),
+			(   Count > 1 ->
+				variance(Values, Variance)
+			;   Variance = 0.0
+			),
+			(   Variance > 0.0 ->
+				Scale is sqrt(Variance)
+			;   Scale = 1.0
+			)
+		;   Mean = 0.0,
+			Scale = 1.0
+		).
+
+	known_attribute_values([], _, []).
+	known_attribute_values([_-_-AttributeValues| Examples], Attribute, Values) :-
+		(   memberchk(Attribute-Value, AttributeValues),
+			nonvar(Value) ->
+			Values = [Value| Rest]
+		;   Values = Rest
+		),
+		known_attribute_values(Examples, Attribute, Rest).
+
+	normalize_continuous(Value, Mean, Scale, Feature) :-
+		(   number(Value) ->
+			true
+		;   type_error(number, Value)
+		),
+		Feature is (Value - Mean) / Scale.
+
+	one_hot_encode([], _, [0.0]).
+	one_hot_encode([Category| Categories], Value, [Feature| Features]) :-
+		(   Value == Category ->
+			Feature = 1.0
+		;   Feature = 0.0
+		),
+		one_hot_encode(Categories, Value, Features).
+
+	missing_one_hot_encode([], [1.0]).
+	missing_one_hot_encode([_| Values], [0.0| Zeroes]) :-
+		missing_one_hot_encode(Values, Zeroes).
+
+	check_categorical_value(Attribute, Values, Value) :-
+		(   member(Value, Values) ->
+			true
+		;   domain_error(attribute_value(Attribute, Values), Value)
+		).
+
+	linear_encoders_feature_count([], Count, Count).
+	linear_encoders_feature_count([continuous(_, _, _)| Encoders], Count0, Count) :-
+		!,
+		Count1 is Count0 + 2,
+		linear_encoders_feature_count(Encoders, Count1, Count).
+	linear_encoders_feature_count([categorical(_, Values)| Encoders], Count0, Count) :-
+		length(Values, ValueCount),
+		Count1 is Count0 + ValueCount + 1,
+		linear_encoders_feature_count(Encoders, Count1, Count).
 
 	sum_squared_feature_differences([], [], [], SumSquares, SumSquares).
 	sum_squared_feature_differences([FeatureType| FeatureTypes], [Value1| Values1], [Value2| Values2], SumSquares0, SumSquares) :-

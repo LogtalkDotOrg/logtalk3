@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on May 5, 2026
+%  Last updated on May 6, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -93,6 +93,7 @@ logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).
 logtalk_library_path(glicko2, library('glicko2/')).
 logtalk_library_path(glicko2_periodic, library('glicko2_periodic/')).
+logtalk_library_path(gradient_boosting_classifier, library('gradient_boosting_classifier/')).
 logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
 logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(graphs, library('graphs/')).
@@ -125,6 +126,7 @@ logtalk_library_path(json_rpc, library('json_rpc/')).
 logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(kcenters, library('kcenters/')).
 logtalk_library_path(kemeny_young, library('kemeny_young/')).
+logtalk_library_path(kernel_svm_classifier, library('kernel_svm_classifier/')).
 logtalk_library_path(kernel_pca, library('kernel_pca/')).
 logtalk_library_path(kmeans, library('kmeans/')).
 logtalk_library_path(kmedians, library('kmedians/')).
@@ -136,6 +138,7 @@ logtalk_library_path(knn_regression, library('knn_regression/')).
 logtalk_library_path(kprototypes, library('kprototypes/')).
 logtalk_library_path(ksuid, library('ksuid/')).
 logtalk_library_path(lasso_regression, library('lasso_regression/')).
+logtalk_library_path(lda_classifier, library('lda_classifier/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).
 logtalk_library_path(linda, library('linda/')).
 logtalk_library_path(linear_algebra, library('linear_algebra/')).
@@ -173,6 +176,7 @@ logtalk_library_path(prefix_span, library('prefix_span/')).
 logtalk_library_path(probabilistic_pca, library('probabilistic_pca/')).
 logtalk_library_path(process, library('process/')).
 logtalk_library_path(protobuf, library('protobuf/')).
+logtalk_library_path(qda_classifier, library('qda_classifier/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(random_forest, library('random_forest/')).
@@ -191,6 +195,7 @@ logtalk_library_path(ridge_regression, library('ridge_regression/')).
 logtalk_library_path(schulze, library('schulze/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
 logtalk_library_path(sets, library('sets/')).
+logtalk_library_path(sgd_classifier, library('sgd_classifier/')).
 logtalk_library_path(simulated_annealing, library('simulated_annealing/')).
 logtalk_library_path(snowflakeid, library('snowflakeid/')).
 logtalk_library_path(sockets, library('sockets/')).

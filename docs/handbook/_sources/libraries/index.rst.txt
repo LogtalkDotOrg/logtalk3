@@ -89,6 +89,7 @@ directory in the ``NOTES.md`` file.
    git
    glicko2
    glicko2_periodic
+   gradient_boosting_classifier
    gradient_boosting_regression
    grammars
    graphs
@@ -121,6 +122,7 @@ directory in the ``NOTES.md`` file.
    json_schema
    kcenters
    kemeny_young
+   kernel_svm_classifier
    kernel_pca
    kmeans
    kmedians
@@ -132,6 +134,7 @@ directory in the ``NOTES.md`` file.
    kprototypes
    ksuid
    lasso_regression
+   lda_classifier
    lda_projection
    linda
    linear_algebra
@@ -169,6 +172,7 @@ directory in the ``NOTES.md`` file.
    probabilistic_pca
    process
    protobuf
+   qda_classifier
    queues
    random
    random_forest
@@ -187,6 +191,7 @@ directory in the ``NOTES.md`` file.
    schulze
    sequential_pattern_mining_protocols
    sets
+   sgd_classifier
    snowflakeid
    sockets
    spade

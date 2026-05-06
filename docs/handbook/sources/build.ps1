@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 5, 2026
+##   Last updated on May 6, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -139,6 +139,7 @@ Foreach-Object {
 (Get-Content ../../../library/git/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/git.rst
 (Get-Content ../../../library/glicko2/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/glicko2.rst
 (Get-Content ../../../library/glicko2_periodic/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/glicko2_periodic.rst
+(Get-Content ../../../library/gradient_boosting_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gradient_boosting_classifier.rst
 (Get-Content ../../../library/gradient_boosting_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 (Get-Content ../../../library/grammars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/grammars.rst
 (Get-Content ../../../library/graphs/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/graphs.rst
@@ -171,6 +172,7 @@ Foreach-Object {
 (Get-Content ../../../library/json_schema/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_schema.rst
 (Get-Content ../../../library/kcenters/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kcenters.rst
 (Get-Content ../../../library/kemeny_young/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kemeny_young.rst
+(Get-Content ../../../library/kernel_svm_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kernel_svm_classifier.rst
 (Get-Content ../../../library/kmeans/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmeans.rst
 (Get-Content ../../../library/kernel_pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kernel_pca.rst
 (Get-Content ../../../library/kmedians/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kmedians.rst
@@ -182,6 +184,7 @@ Foreach-Object {
 (Get-Content ../../../library/kprototypes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kprototypes.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
 (Get-Content ../../../library/lasso_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
+(Get-Content ../../../library/lda_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 (Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
 (Get-Content ../../../library/linear_algebra/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_algebra.rst
@@ -219,6 +222,7 @@ Foreach-Object {
 (Get-Content ../../../library/probabilistic_pca/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/probabilistic_pca.rst
 (Get-Content ../../../library/process/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/process.rst
 (Get-Content ../../../library/protobuf/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/protobuf.rst
+(Get-Content ../../../library/qda_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/qda_classifier.rst
 (Get-Content ../../../library/queues/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/queues.rst
 (Get-Content ../../../library/random/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random.rst
 (Get-Content ../../../library/random_forest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/random_forest.rst
@@ -237,6 +241,7 @@ Foreach-Object {
 (Get-Content ../../../library/schulze/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/schulze.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst
+(Get-Content ../../../library/sgd_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sgd_classifier.rst
 (Get-Content ../../../library/simulated_annealing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/simulated_annealing.rst
 (Get-Content ../../../library/snowflakeid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 (Get-Content ../../../library/sockets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sockets.rst

@@ -246,6 +246,7 @@ Objects
    git <git_0>
    glicko2 <glicko2_0>
    glicko2_periodic <glicko2_periodic_0>
+   gradient_boosting_classifier <gradient_boosting_classifier_0>
    gradient_boosting_regression <gradient_boosting_regression_0>
    grammar_rules_hook <grammar_rules_hook_0>
    graph_language_registry <graph_language_registry_0>
@@ -322,6 +323,7 @@ Objects
    kcenters <kcenters_0>
    kemeny_young <kemeny_young_0>
    kernel_pca <kernel_pca_0>
+   kernel_svm_classifier <kernel_svm_classifier_0>
    kmeans <kmeans_0>
    kmedians <kmedians_0>
    kmedoids <kmedoids_0>
@@ -335,6 +337,7 @@ Objects
    lasso_regression <lasso_regression_0>
    lcom_metric <lcom_metric_0>
    lcov_report <lcov_report_0>
+   lda_classifier <lda_classifier_0>
    lda_projection <lda_projection_0>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
@@ -424,6 +427,7 @@ Objects
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
    protobuf <protobuf_0>
+   qda_classifier <qda_classifier_0>
    queue <queue_0>
    random <random_0>
    random(Algorithm) <random_1>
@@ -454,6 +458,7 @@ Objects
    sequence_grammars <sequence_grammars_0>
    set <set_0>
    set(Type) <set_1>
+   sgd_classifier <sgd_classifier_0>
    sha1 <sha1_0>
    sha256 <sha256_0>
    sha3_224 <sha3_224_0>

@@ -774,6 +774,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    glicko2_periodic <glicko2_periodic_0>
 
+``library/gradient_boosting_classifier/``
+-----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gradient_boosting_classifier <gradient_boosting_classifier_0>
+
 ``library/gradient_boosting_regression/``
 -----------------------------------------
 
@@ -1219,6 +1229,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    kernel_pca <kernel_pca_0>
 
+``library/kernel_svm_classifier/``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   kernel_svm_classifier <kernel_svm_classifier_0>
+
 ``library/kmeans/``
 -------------------
 
@@ -1320,6 +1340,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    lasso_regression <lasso_regression_0>
+
+``library/lda_classifier/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lda_classifier <lda_classifier_0>
 
 ``library/lda_projection/``
 ---------------------------
@@ -1719,6 +1749,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    protobuf <protobuf_0>
 
+``library/qda_classifier/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   qda_classifier <qda_classifier_0>
+
 ``library/queues/``
 -------------------
 
@@ -1926,6 +1966,16 @@ To load an entity, always load the library that includes it using the goal ``log
    set(Type) <set_1>
    setp <setp_0>
    treap_set <treap_set_0>
+
+``library/sgd_classifier/``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sgd_classifier <sgd_classifier_0>
 
 ``library/simulated_annealing/``
 --------------------------------

@@ -1,0 +1,102 @@
+.. index:: single: sgd_classifier
+.. _sgd_classifier/0:
+
+.. rst-class:: right
+
+**object**
+
+``sgd_classifier``
+==================
+
+Stochastic gradient descent classifier supporting one-vs-rest linear models with configurable losses including ``log_loss``, ``hinge``, ``squared_hinge``, ``modified_huber``, and ``perceptron``.
+
+| **Availability:** 
+|    ``logtalk_load(sgd_classifier(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`classifier_common <classifier_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _sgd_classifier/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a classifier from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Classifier,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: predict_probabilities/3
+.. _sgd_classifier/0::predict_probabilities/3:
+
+``predict_probabilities/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Predicts class probabilities for a new instance using a softmax over one-vs-rest decision scores.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_probabilities(Classifier,Instance,Probabilities)``
+| **Mode and number of proofs:**
+|    ``predict_probabilities(+compound,+list,-list)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`logistic_regression <logistic_regression/0>`, :ref:`linear_svm <linear_svm/0>`, :ref:`knn <knn/0>`, :ref:`nearest_centroid <nearest_centroid/0>`
+

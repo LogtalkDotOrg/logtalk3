@@ -1,0 +1,102 @@
+.. index:: single: lda_classifier
+.. _lda_classifier/0:
+
+.. rst-class:: right
+
+**object**
+
+``lda_classifier``
+==================
+
+Linear Discriminant Analysis classifier for continuous datasets using a pooled regularized covariance model.
+
+| **Availability:** 
+|    ``logtalk_load(lda_classifier(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`classifier_common <classifier_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/3
+.. _lda_classifier/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a classifier from the given continuous dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Classifier,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: predict_scores/3
+.. _lda_classifier/0::predict_scores/3:
+
+``predict_scores/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Predicts class discriminant scores for a new instance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_scores(Classifier,Instance,Scores)``
+| **Mode and number of proofs:**
+|    ``predict_scores(+compound,+list,-list)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`dataset_protocol <dataset_protocol/0>`, :ref:`qda_classifier <qda_classifier/0>`, :ref:`nearest_centroid <nearest_centroid/0>`, :ref:`lda_projection <lda_projection/0>`
+

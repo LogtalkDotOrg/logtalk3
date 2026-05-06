@@ -24,9 +24,9 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-05-06,
 		comment is 'Protocol for machine learning classifiers.',
-		see_also is [c45, isolation_forest, knn, linear_svm, logistic_regression, naive_bayes, nearest_centroid, random_forest]
+		see_also is [ada_boost, c45, gradient_boosting_classifier, isolation_forest, kernel_svm_classifier, knn, lda_classifier, linear_svm, logistic_regression, naive_bayes, nearest_centroid, qda_classifier, random_forest, sgd_classifier]
 	]).
 
 	:- public(learn/2).
