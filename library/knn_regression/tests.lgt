@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-06,
 		comment is 'Unit tests for the "knn_regression" library.'
 	]).
 
@@ -65,6 +65,10 @@
 	test(knn_regression_predict_3_intercept_only, deterministic(Prediction =~= 7.0)) :-
 		knn_regression::learn(intercept_only, Regressor, [k(3)]),
 		knn_regression::predict(Regressor, [dummy-0], Prediction).
+
+	test(knn_regression_predict_3_step_signal_minkowski, deterministic(Prediction =~= 10.0)) :-
+		knn_regression::learn(step_signal, Regressor, [k(1), distance_metric(minkowski), minkowski_power(3.0), feature_scaling(false)]),
+		knn_regression::predict(Regressor, [x-1.5], Prediction).
 
 	test(knn_regression_predict_3_mixed_signal_exact_neighbor, deterministic(Prediction =~= 175.0)) :-
 		knn_regression::learn(mixed_signal, Regressor, [k(1)]),

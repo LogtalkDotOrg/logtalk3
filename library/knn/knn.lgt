@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-06,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, c45, isolation_forest, naive_bayes, nearest_centroid, random_forest, ada_boost]
 	]).
@@ -57,6 +57,10 @@
 
 	:- uses(list, [
 		length/2, member/2, memberchk/2, take/3
+	]).
+
+	:- uses(numberlist, [
+		minkowski_distance/4
 	]).
 
 	:- uses(pairs, [
@@ -156,7 +160,9 @@
 	compute_distance_with_metric(chebyshev, Types, Instance1, Instance2, Distance) :-
 		chebyshev_distance(Types, Instance1, Instance2, Distance).
 	compute_distance_with_metric(minkowski, Types, Instance1, Instance2, Distance) :-
-		minkowski_distance(Types, Instance1, Instance2, 3, Distance).
+		feature_distances(Types, Instance1, Instance2, Distances),
+		zeroes(Distances, Zeroes),
+		minkowski_distance(Zeroes, Distances, 3, Distance).
 
 	% Distance metrics
 	euclidean_distance(Types, Instance1, Instance2, Distance) :-
@@ -168,10 +174,6 @@
 
 	chebyshev_distance(Types, Instance1, Instance2, Distance) :-
 		max_abs_diff(Types, Instance1, Instance2, 0, Distance).
-
-	minkowski_distance(Types, Instance1, Instance2, P, Distance) :-
-		sum_powered_diffs(Types, Instance1, Instance2, P, 0, Sum),
-		Distance is Sum ** (1/P).
 
 	sum_squared_diffs([], [], [], Sum, Sum).
 	sum_squared_diffs([Type| Types], [Value1| Values1], [Value2| Values2], Sum0, Sum) :-
@@ -191,12 +193,14 @@
 		Max1 is max(Max0, Distance),
 		max_abs_diff(Types, Values1, Values2, Max1, Max).
 
-	sum_powered_diffs([], [], [], _, Sum, Sum).
-	sum_powered_diffs([Type| Types], [Value1| Values1], [Value2| Values2], P, Sum0, Sum) :-
+	feature_distances([], [], [], []).
+	feature_distances([Type| Types], [Value1| Values1], [Value2| Values2], [Distance| Distances]) :-
 		feature_distance_abs(Type, Value1, Value2, Distance),
-		Powered is Distance ** P,
-		Sum1 is Sum0 + Powered,
-		sum_powered_diffs(Types, Values1, Values2, P, Sum1, Sum).
+		feature_distances(Types, Values1, Values2, Distances).
+
+	zeroes([], []).
+	zeroes([_| Values], [0| Zeroes]) :-
+		zeroes(Values, Zeroes).
 
 	% Feature-level distance
 	feature_distance_squared(numeric, Value1, Value2, DistanceSquared) :-

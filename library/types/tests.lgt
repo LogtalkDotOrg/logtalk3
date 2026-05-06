@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:23:0,
 		author is 'Paulo Moura',
-		date is 2026-04-15,
+		date is 2026-05-06,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -259,6 +259,18 @@
 
 	test(numberlist_euclidean_norm_2_01, true(Norm =~= 119.0)) :-
 		numberlist::euclidean_norm([35,36,46,68,70], Norm).
+
+	test(numberlist_euclidean_distance_3_01, true(Distance =~= 5.0)) :-
+		numberlist::euclidean_distance([0,0], [3,4], Distance).
+
+	test(numberlist_chebyshev_distance_3_01, true(Distance == 4)) :-
+		numberlist::chebyshev_distance([0,0], [3,4], Distance).
+
+	test(numberlist_manhattan_distance_3_01, true(Distance == 7)) :-
+		numberlist::manhattan_distance([0,0], [3,4], Distance).
+
+	test(numberlist_minkowski_distance_4_01, true(Distance =~= 4.497941445275415)) :-
+		numberlist::minkowski_distance([0,0], [3,4], 3.0, Distance).
 
 	test(numberlist_sum_2_01, true(Sum == 15)) :-
 		numberlist::sum([1,2,3,4,5], Sum).

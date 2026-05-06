@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:19:1,
+		version is 1:20:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-06,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -215,6 +215,16 @@
 	manhattan_distance([X| Xs], [Y| Ys], Distance0, Distance) :-
 		Distance1 is Distance0 + abs(X - Y),
 		manhattan_distance(Xs, Ys, Distance1, Distance).
+
+	minkowski_distance([X| Xs], [Y| Ys], Power, Distance) :-
+		Sum0 is abs(X - Y) ** Power,
+		minkowski_distance(Xs, Ys, Power, Sum0, Distance).
+
+	minkowski_distance([], [], Power, Sum, Distance) :-
+		Distance is Sum ** (1.0 / Power).
+	minkowski_distance([X| Xs], [Y| Ys], Power, Sum0, Distance) :-
+		Sum1 is Sum0 + abs(X - Y) ** Power,
+		minkowski_distance(Xs, Ys, Power, Sum1, Distance).
 
 	scalar_product([X| Xs], [Y| Ys], Product) :-
 		Product0 is X * Y,

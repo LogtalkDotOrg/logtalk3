@@ -22,9 +22,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:13:0,
 		author is 'Paulo Moura',
-		date is 2026-04-15,
+		date is 2026-05-06,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).
@@ -129,6 +129,13 @@
 	:- info(manhattan_distance/3, [
 		comment is 'Calculates the Manhattan distance between two lists of numbers. Fails if the two lists are empty or not of the same length.',
 		argnames is ['List1', 'List2', 'Distance']
+	]).
+
+	:- public(minkowski_distance/4).
+	:- mode(minkowski_distance(+list(number), +list(number), +number, -float), zero_or_one).
+	:- info(minkowski_distance/4, [
+		comment is 'Calculates the Minkowski distance between two lists of numbers given a positive power. Fails if the two lists are empty or not of the same length.',
+		argnames is ['List1', 'List2', 'Power', 'Distance']
 	]).
 
 	:- public(scalar_product/3).

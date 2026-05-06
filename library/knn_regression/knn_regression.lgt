@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-06,
 		comment is 'k-Nearest Neighbors regressor with multiple distance metrics, weighting schemes, optional feature scaling, and mixed-feature support.',
 		see_also is [linear_regression, regression_tree, random_forest_regression, gradient_boosting_regression]
 	]).
@@ -39,7 +39,7 @@
 	]).
 
 	:- uses(numberlist, [
-		chebyshev_distance/3, euclidean_distance/3, manhattan_distance/3
+		chebyshev_distance/3, euclidean_distance/3, manhattan_distance/3, minkowski_distance/4
 	]).
 
 	:- uses(type, [
@@ -100,16 +100,6 @@
 		;   ^^option(minkowski_power(Power), Options),
 			minkowski_distance(Features1, Features2, Power, Distance)
 		).
-
-	minkowski_distance(Features1, Features2, Power, Distance) :-
-		sum_powered_diffs(Features1, Features2, Power, 0.0, Sum),
-		Distance is Sum ** (1.0 / Power).
-
-	sum_powered_diffs([], [], _Power, Sum, Sum).
-	sum_powered_diffs([Feature1| Features1], [Feature2| Features2], Power, Sum0, Sum) :-
-		Difference is abs(Feature1 - Feature2),
-		Sum1 is Sum0 + Difference ** Power,
-		sum_powered_diffs(Features1, Features2, Power, Sum1, Sum).
 
 	predict_from_neighbors(Neighbors, Options, Target) :-
 		^^option(weight_scheme(Scheme), Options),

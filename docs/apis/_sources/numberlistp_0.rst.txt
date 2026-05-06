@@ -14,8 +14,8 @@ List of numbers protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:12:0
-| **Date:** 2026-04-15
+| **Version:** 1:13:0
+| **Date:** 2026-05-06
 
 | **Compilation flags:**
 |    ``static``
@@ -304,6 +304,25 @@ Calculates the Manhattan distance between two lists of numbers. Fails if the two
 | **Mode and number of proofs:**
 |    ``manhattan_distance(+list(integer),+list(integer),-integer)`` - ``zero_or_one``
 |    ``manhattan_distance(+list(float),+list(float),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: minkowski_distance/4
+.. _numberlistp/0::minkowski_distance/4:
+
+``minkowski_distance/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Calculates the Minkowski distance between two lists of numbers given a positive power. Fails if the two lists are empty or not of the same length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``minkowski_distance(List1,List2,Power,Distance)``
+| **Mode and number of proofs:**
+|    ``minkowski_distance(+list(number),+list(number),+number,-float)`` - ``zero_or_one``
 
 
 ------------

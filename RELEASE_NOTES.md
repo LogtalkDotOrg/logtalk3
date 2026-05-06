@@ -326,6 +326,8 @@ Requires a backend supporting Unicode and the `encoding/1` directive.
 * ADDED: New `iso_13616` implementing the ISO 13616 standard for IBAN strings.
 Requires a backend supporting Unicode and the `encoding/1` directive.
 
+* ADDED: New `minkowski_distance/4` predicate to the `types` library.
+
 * IMPROVED: Code refactoring of the classifier libraries by introducing a new
 `classifier_common` category with shared code.
 
