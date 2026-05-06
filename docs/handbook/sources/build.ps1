@@ -79,7 +79,7 @@ Foreach-Object {
 }
 
 (Get-Content ../../../library/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/overview.rst
-(Get-Content ../../../library/ada_boost/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ada_boost.rst
+(Get-Content ../../../library/adaptive_boosting_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/adaptive_boosting_classifier.rst
 (Get-Content ../../../library/agglomerative/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/agglomerative.rst
 (Get-Content ../../../library/amqp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/amqp.rst
 (Get-Content ../../../library/anomaly_detection_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/anomaly_detection_protocols.rst

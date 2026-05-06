@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-06,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		see_also is [dataset_protocol, c45, isolation_forest, naive_bayes, nearest_centroid, random_forest, ada_boost]
+		see_also is [dataset_protocol, c45, isolation_forest, naive_bayes, nearest_centroid, random_forest, adaptive_boosting_classifier]
 	]).
 
 	:- public(predict/4).

@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-06,
 		comment is 'Gradient boosting classifier using multinomial additive models fitted by regression trees to softmax residuals.',
-		see_also is [dataset_protocol, regression_tree, gradient_boosting_regression, ada_boost, random_forest]
+		see_also is [dataset_protocol, regression_tree, gradient_boosting_regression, adaptive_boosting_classifier, random_forest]
 	]).
 
 	:- public(learn/3).

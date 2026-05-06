@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-05,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
-		see_also is [dataset_protocol, c45, isolation_forest, knn, naive_bayes, nearest_centroid, ada_boost]
+		see_also is [dataset_protocol, c45, isolation_forest, knn, naive_bayes, nearest_centroid, adaptive_boosting_classifier]
 	]).
 
 	:- public(learn/3).

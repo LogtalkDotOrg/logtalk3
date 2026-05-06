@@ -45,12 +45,12 @@ multiple areas):
   ``simulated_annealing``, and ``statistics``.
 - Machine learning:
 
-  - Classification: ``classification_protocols``, ``ada_boost``,
-    ``c45``, ``gradient_boosting_classifier``,
-    ``kernel_svm_classifier``, ``knn``, ``lda_classifier``,
-    ``linear_svm``, ``logistic_regression``, ``naive_bayes``,
-    ``nearest_centroid``, ``qda_classifier``, ``random_forest``, and
-    ``sgd_classifier``.
+  - Classification: ``classification_protocols``,
+    ``adaptive_boosting_classifier``, ``c45``,
+    ``gradient_boosting_classifier``, ``kernel_svm_classifier``,
+    ``knn``, ``lda_classifier``, ``linear_svm``,
+    ``logistic_regression``, ``naive_bayes``, ``nearest_centroid``,
+    ``qda_classifier``, ``random_forest``, and ``sgd_classifier``.
   - Anomaly detection: ``anomaly_detection_protocols``, ``cusum``,
     ``ewma``, ``iqr``, ``isolation_forest``, ``knn_distance``, ``lof``,
     ``modified_z_score``, and ``z_score``.

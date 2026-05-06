@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ada_boost &mdash; Logtalk 3.100.0</title>
+  <title>adaptive_boosting_classifier &mdash; Logtalk 3.100.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -70,7 +70,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">adaptive_boosting_classifier</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -311,9 +311,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">adaptive_boosting_classifier</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/ada_boost.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/adaptive_boosting_classifier.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -321,9 +321,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ada-boost">
-<span id="library-ada-boost"></span><h1><code class="docutils literal notranslate"><span class="pre">ada_boost</span></code><a class="headerlink" href="#ada-boost" title="Link to this heading"></a></h1>
-<p>AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as
+  <section id="adaptive-boosting-classifier">
+<span id="library-adaptive-boosting-classifier"></span><h1><code class="docutils literal notranslate"><span class="pre">adaptive_boosting_classifier</span></code><a class="headerlink" href="#adaptive-boosting-classifier" title="Link to this heading"></a></h1>
+<p>Adaptive Boosting (aka AdaBoost) classifier using C4.5 decision trees as
 base learners. Implements the SAMME (Stagewise Additive Modeling using a
 Multi-class Exponential loss function) variant, which supports
 multi-class classification by adjusting the weight update formula to
@@ -343,20 +343,20 @@ library. See <code class="docutils literal notranslate"><span class="pre">test_f
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
-<a class="reference external" href="../../docs/library_index.html#ada_boost">../../docs/library_index.html#ada_boost</a>
+<a class="reference external" href="../../docs/library_index.html#adaptive_boosting_classifier">../../docs/library_index.html#adaptive_boosting_classifier</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ada_boost(loader)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(adaptive_boosting_classifier(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ada_boost(tester)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(adaptive_boosting_classifier(tester)).
 </pre></div>
 </div>
 </section>
@@ -424,11 +424,11 @@ Kaufmann.</p></li>
 <section id="learning-a-classifier">
 <h3>Learning a Classifier<a class="headerlink" href="#learning-a-classifier" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Learn an AdaBoost classifier with default options (10 estimators)</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>).
 ...
 
 <span class="c">% Learn with custom options</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>, [number_of_estimators(<span class="m">20</span>)]).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>, [number_of_estimators(<span class="m">20</span>)]).
 ...
 </pre></div>
 </div>
@@ -436,14 +436,14 @@ Kaufmann.</p></li>
 <section id="making-predictions">
 <h3>Making Predictions<a class="headerlink" href="#making-predictions" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Predict class for a new instance</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     ada_boost<span class="o">::</span>predict(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>hot, humidity<span class="o">-</span>high, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     adaptive_boosting_classifier<span class="o">::</span>predict(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>hot, humidity<span class="o">-</span>high, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
 <span class="nv">Class</span> <span class="o">=</span> no
 ...
 
 <span class="c">% Get probability distribution from weighted voting</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     ada_boost<span class="o">::</span>predict_probabilities(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>overcast, temperature<span class="o">-</span>mild, humidity<span class="o">-</span>normal, wind<span class="o">-</span>weak], <span class="nv">Probabilities</span>).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     adaptive_boosting_classifier<span class="o">::</span>predict_probabilities(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>overcast, temperature<span class="o">-</span>mild, humidity<span class="o">-</span>normal, wind<span class="o">-</span>weak], <span class="nv">Probabilities</span>).
 <span class="nv">Probabilities</span> <span class="o">=</span> [yes<span class="o">-</span><span class="m">0.9</span>, no<span class="o">-</span><span class="m">0.1</span>]
 ...
 </pre></div>
@@ -452,13 +452,13 @@ Kaufmann.</p></li>
 <section id="exporting-the-classifier">
 <h3>Exporting the Classifier<a class="headerlink" href="#exporting-the-classifier" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Export as predicate clauses</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     ada_boost<span class="o">::</span>export_to_clauses(play_tennis, <span class="nv">Classifier</span>, my_boost, <span class="nv">Clauses</span>).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     adaptive_boosting_classifier<span class="o">::</span>export_to_clauses(play_tennis, <span class="nv">Classifier</span>, my_boost, <span class="nv">Clauses</span>).
 ...
 
 <span class="c">% Export to a file</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     ada_boost<span class="o">::</span>export_to_file(play_tennis, <span class="nv">Classifier</span>, my_boost, <span class="s">&#39;boost.pl&#39;</span>).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     adaptive_boosting_classifier<span class="o">::</span>export_to_file(play_tennis, <span class="nv">Classifier</span>, my_boost, <span class="s">&#39;boost.pl&#39;</span>).
 ...
 </pre></div>
 </div>
@@ -468,7 +468,7 @@ Kaufmann.</p></li>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Load and use a previously saved classifier</span>
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;boost.pl&#39;</span>),
      my_boost(<span class="nv">Classifier</span>),
-     ada_boost<span class="o">::</span>predict(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>cool, humidity<span class="o">-</span>normal, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
+     adaptive_boosting_classifier<span class="o">::</span>predict(<span class="nv">Classifier</span>, [outlook<span class="o">-</span>sunny, temperature<span class="o">-</span>cool, humidity<span class="o">-</span>normal, wind<span class="o">-</span>weak], <span class="nv">Class</span>).
 <span class="nv">Class</span> <span class="o">=</span> yes
 ...
 </pre></div>
@@ -477,8 +477,8 @@ Kaufmann.</p></li>
 <section id="printing-the-classifier">
 <h3>Printing the Classifier<a class="headerlink" href="#printing-the-classifier" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Print a summary of the AdaBoost classifier</span>
-| <span class="o">?-</span> ada_boost<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
-     ada_boost<span class="o">::</span>print_classifier(<span class="nv">Classifier</span>).
+| <span class="o">?-</span> adaptive_boosting_classifier<span class="o">::</span>learn(play_tennis, <span class="nv">Classifier</span>),
+     adaptive_boosting_classifier<span class="o">::</span>print_classifier(<span class="nv">Classifier</span>).
 
 <span class="nv">AdaBoost</span> <span class="nv">Classifier</span>
 <span class="o">===================</span>

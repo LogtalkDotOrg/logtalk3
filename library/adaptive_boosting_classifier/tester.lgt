@@ -20,11 +20,24 @@
 
 
 :- initialization((
+	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load(classification_protocols(loader)),
 	logtalk_load(c45(loader)),
-	logtalk_load(ada_boost, [optimize(on)])
+	logtalk_load(adaptive_boosting_classifier, [source_data(on), debug(on)]),
+	logtalk_load([
+		classification_protocols('test_datasets/play_tennis'),
+		classification_protocols('test_datasets/contact_lenses'),
+		classification_protocols('test_datasets/iris'),
+		classification_protocols('test_datasets/breast_cancer')
+	], [
+		source_data(on),
+		debug(on)
+	]),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
 )).

@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(ada_boost,
+:- object(adaptive_boosting_classifier,
 	imports(classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-04,
-		comment is 'AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
+		comment is 'Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		see_also is [dataset_protocol, c45, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest]
 	]).
 
@@ -338,7 +338,7 @@
 		classifier_data(Classifier, WeightedTrees, ClassValues, Options),
 		length(WeightedTrees, EstimatorCount),
 		Diagnostics = [
-			model(ada_boost),
+			model(adaptive_boosting_classifier),
 			classes(ClassValues),
 			estimators(EstimatorCount),
 			options(Options)

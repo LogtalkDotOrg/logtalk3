@@ -1,17 +1,17 @@
-.. index:: single: ada_boost
-.. _ada_boost/0:
+.. index:: single: adaptive_boosting_classifier
+.. _adaptive_boosting_classifier/0:
 
 .. rst-class:: right
 
 **object**
 
-``ada_boost``
-=============
+``adaptive_boosting_classifier``
+================================
 
-AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.
+Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.
 
 | **Availability:** 
-|    ``logtalk_load(ada_boost(loader))``
+|    ``logtalk_load(adaptive_boosting_classifier(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
@@ -45,7 +45,7 @@ Public predicates
 -----------------
 
 .. index:: learn/3
-.. _ada_boost/0::learn/3:
+.. _adaptive_boosting_classifier/0::learn/3:
 
 ``learn/3``
 ^^^^^^^^^^^
@@ -64,7 +64,7 @@ Learns a classifier from the given dataset object using the specified options.
 ------------
 
 .. index:: predict_probabilities/3
-.. _ada_boost/0::predict_probabilities/3:
+.. _adaptive_boosting_classifier/0::predict_probabilities/3:
 
 ``predict_probabilities/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

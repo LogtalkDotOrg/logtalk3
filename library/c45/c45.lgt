@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-04,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
-		see_also is [dataset_protocol, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest, ada_boost]
+		see_also is [dataset_protocol, isolation_forest, knn, naive_bayes, nearest_centroid, random_forest, adaptive_boosting_classifier]
 	]).
 
 	:- public(prune/5).

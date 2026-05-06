@@ -99,7 +99,7 @@
 		classification_protocols(loader),
 		c45(loader),
 		random_forest(loader),
-		ada_boost(loader),
+		adaptive_boosting_classifier(loader),
 		gradient_boosting_classifier(loader),
 		kernel_svm_classifier(loader),
 		knn(loader),

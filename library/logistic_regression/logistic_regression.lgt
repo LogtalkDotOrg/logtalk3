@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-04,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
-		see_also is [dataset_protocol, c45, knn, naive_bayes, nearest_centroid, random_forest, ada_boost]
+		see_also is [dataset_protocol, c45, knn, naive_bayes, nearest_centroid, random_forest, adaptive_boosting_classifier]
 	]).
 
 	:- public(learn/3).

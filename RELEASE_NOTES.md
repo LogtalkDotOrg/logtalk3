@@ -44,6 +44,8 @@ Library
 * RENAMED: The `classifier_protocols` library to `classification_protocols`
 for more consistent naming with other machine learning libraries.
 
+* RENAMED: The `ada_boost` library to `adaptive_boosting_classifier`.
+
 * RENAMED: The export predicates for all classifier libraries to
 `export_to_clauses/4` and `export_to_file/4` for uniform naming
 across all machine learning libraries.

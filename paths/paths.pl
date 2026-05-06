@@ -108,7 +108,7 @@ logtalk_library_path(tutor, tools('tutor/')).
 logtalk_library_path(wrapper, tools('wrapper/')).
 
 % libraries
-logtalk_library_path(ada_boost, library('ada_boost/')).
+logtalk_library_path(adaptive_boosting_classifier, library('adaptive_boosting_classifier/')).
 logtalk_library_path(agglomerative, library('agglomerative/')).
 logtalk_library_path(amqp, library('amqp/')).
 logtalk_library_path(anomaly_detection_protocols, library('anomaly_detection_protocols/')).

@@ -1,9 +1,9 @@
-.. _library_ada_boost:
+.. _library_adaptive_boosting_classifier:
 
-``ada_boost``
-=============
+``adaptive_boosting_classifier``
+================================
 
-AdaBoost (Adaptive Boosting) classifier using C4.5 decision trees as
+Adaptive Boosting (aka AdaBoost) classifier using C4.5 decision trees as
 base learners. Implements the SAMME (Stagewise Additive Modeling using a
 Multi-class Exponential loss function) variant, which supports
 multi-class classification by adjusting the weight update formula to
@@ -27,7 +27,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#ada_boost <../../docs/library_index.html#ada_boost>`__
+`../../docs/library_index.html#adaptive_boosting_classifier <../../docs/library_index.html#adaptive_boosting_classifier>`__
 link in a web browser.
 
 Loading
@@ -37,7 +37,7 @@ To load all entities in this library, load the ``loader.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(ada_boost(loader)).
+   | ?- logtalk_load(adaptive_boosting_classifier(loader)).
 
 Testing
 -------
@@ -46,7 +46,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(ada_boost(tester)).
+   | ?- logtalk_load(adaptive_boosting_classifier(tester)).
 
 Features
 --------
@@ -117,11 +117,11 @@ Learning a Classifier
 ::
 
    % Learn an AdaBoost classifier with default options (10 estimators)
-   | ?- ada_boost::learn(play_tennis, Classifier).
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier).
    ...
 
    % Learn with custom options
-   | ?- ada_boost::learn(play_tennis, Classifier, [number_of_estimators(20)]).
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier, [number_of_estimators(20)]).
    ...
 
 Making Predictions
@@ -130,14 +130,14 @@ Making Predictions
 ::
 
    % Predict class for a new instance
-   | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::predict(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Class).
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier),
+        adaptive_boosting_classifier::predict(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Class).
    Class = no
    ...
 
    % Get probability distribution from weighted voting
-   | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::predict_probabilities(Classifier, [outlook-overcast, temperature-mild, humidity-normal, wind-weak], Probabilities).
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier),
+        adaptive_boosting_classifier::predict_probabilities(Classifier, [outlook-overcast, temperature-mild, humidity-normal, wind-weak], Probabilities).
    Probabilities = [yes-0.9, no-0.1]
    ...
 
@@ -147,13 +147,13 @@ Exporting the Classifier
 ::
 
    % Export as predicate clauses
-   | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::export_to_clauses(play_tennis, Classifier, my_boost, Clauses).
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier),
+        adaptive_boosting_classifier::export_to_clauses(play_tennis, Classifier, my_boost, Clauses).
    ...
 
    % Export to a file
-   | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::export_to_file(play_tennis, Classifier, my_boost, 'boost.pl').
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier),
+        adaptive_boosting_classifier::export_to_file(play_tennis, Classifier, my_boost, 'boost.pl').
    ...
 
 Using a Saved Classifier
@@ -164,7 +164,7 @@ Using a Saved Classifier
    % Load and use a previously saved classifier
    | ?- logtalk_load('boost.pl'),
         my_boost(Classifier),
-        ada_boost::predict(Classifier, [outlook-sunny, temperature-cool, humidity-normal, wind-weak], Class).
+        adaptive_boosting_classifier::predict(Classifier, [outlook-sunny, temperature-cool, humidity-normal, wind-weak], Class).
    Class = yes
    ...
 
@@ -174,8 +174,8 @@ Printing the Classifier
 ::
 
    % Print a summary of the AdaBoost classifier
-   | ?- ada_boost::learn(play_tennis, Classifier),
-        ada_boost::print_classifier(Classifier).
+   | ?- adaptive_boosting_classifier::learn(play_tennis, Classifier),
+        adaptive_boosting_classifier::print_classifier(Classifier).
 
    AdaBoost Classifier
    ===================
