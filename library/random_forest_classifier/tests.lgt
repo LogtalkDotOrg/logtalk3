@@ -25,12 +25,12 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "random_forest_classifier" library.'
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(type, [
@@ -72,8 +72,9 @@
 		Classifier = rf_classifier(Trees, _, _),
 		length(Trees, NumTrees).
 
-	test(random_forest_learn_3_random_seed_option, deterministic(list::memberchk(random_seed(17), Options))) :-
-		random_forest_classifier::learn(play_tennis, rf_classifier(_Trees, _ClassValues, Options), [number_of_trees(5), random_seed(17)]).
+	test(random_forest_learn_3_random_seed_option, deterministic(RandomSeed == 17)) :-
+		random_forest_classifier::learn(play_tennis, rf_classifier(_Trees, _ClassValues, Options), [number_of_trees(5), random_seed(17)]),
+		memberchk(random_seed(RandomSeed), Options).
 
 	test(random_forest_learn_3_same_seed_same_classifier, deterministic(Classifier1 == Classifier2)) :-
 		random_forest_classifier::learn(play_tennis, Classifier1, [number_of_trees(5), random_seed(19)]),
@@ -96,50 +97,50 @@
 		% Just verify the structure - each tree has associated feature names
 		^^assertion(length(Trees, 3)),
 		forall(
-			(memberchk(tree(_Tree, FeatureNames), Trees), length(FeatureNames, Max)),
+			(member(tree(_Tree, FeatureNames), Trees), length(FeatureNames, Max)),
 			^^assertion(Max =< 2)
 		).
 
 	% predict/3 tests - ensemble predictions
 
-	test(random_forest_predict_3_play_tennis, true(ground(Class))) :-
+	test(random_forest_predict_3_play_tennis, deterministic(ground(Class))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::predict(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Class).
 
-	test(random_forest_predict_3_play_tennis_overcast_yes, true(Class == yes)) :-
+	test(random_forest_predict_3_play_tennis_overcast_yes, deterministic(Class == yes)) :-
 		% Overcast should strongly predict "yes" even with ensemble
 		random_forest_classifier::learn(play_tennis, Classifier, [number_of_trees(5), random_seed(17)]),
 		random_forest_classifier::predict(Classifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Class).
 
-	test(random_forest_predict_3_contact_lenses, true(ground(Class))) :-
+	test(random_forest_predict_3_contact_lenses, deterministic(ground(Class))) :-
 		random_forest_classifier::learn(contact_lenses, Classifier),
 		random_forest_classifier::predict(Classifier, [age-young, spectacle_prescription-myope, astigmatism-no, tear_production_rate-reduced], Class).
 
-	test(random_forest_predict_3_iris_setosa, true(Class == setosa)) :-
+	test(random_forest_predict_3_iris_setosa, deterministic(Class == setosa)) :-
 		% Setosa is well-separated, ensemble should agree
 		random_forest_classifier::learn(iris, Classifier, [number_of_trees(5), random_seed(17)]),
 		random_forest_classifier::predict(Classifier, [sepal_length-5.0, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Class).
 
-	test(random_forest_predict_3_iris_virginica, true(Class == virginica)) :-
+	test(random_forest_predict_3_iris_virginica, deterministic(Class == virginica)) :-
 		random_forest_classifier::learn(iris, Classifier, [number_of_trees(5), random_seed(17)]),
 		random_forest_classifier::predict(Classifier, [sepal_length-6.5, sepal_width-3.0, petal_length-5.5, petal_width-2.0], Class).
 
 	% predict_probabilities/3 tests - verify voting behavior
 
-	test(random_forest_predict_probabilities_3_structure, true(check(list(pair(atom, probability)), Probabilities))) :-
+	test(random_forest_predict_probabilities_3_structure, deterministic(check(list(pair(atom, probability)), Probabilities))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::predict_probabilities(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Probabilities).
 
-	test(random_forest_predict_probabilities_3_sum_to_one, true(abs(Sum - 1.0) < 0.001)) :-
+	test(random_forest_predict_probabilities_3_sum_to_one, deterministic(abs(Sum - 1.0) < 0.001)) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::predict_probabilities(Classifier, [outlook-overcast, temperature-mild, humidity-normal, wind-weak], Probabilities),
 		sum_probabilities(Probabilities, 0, Sum).
 
-	test(random_forest_predict_probabilities_3_all_classes_present, true) :-
+	test(random_forest_predict_probabilities_3_all_classes_present, deterministic(ground(Yes-No))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::predict_probabilities(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Probabilities),
-		memberchk(yes-_, Probabilities),
-		memberchk(no-_, Probabilities).
+		memberchk(yes-Yes, Probabilities),
+		memberchk(no-No, Probabilities).
 
 	test(random_forest_predict_probabilities_3_iris, true(check(list(pair(atom, probability)), Probabilities))) :-
 		random_forest_classifier::learn(iris, Classifier),
@@ -147,15 +148,15 @@
 
 	% export_to_clauses/4 tests
 
-	test(rf_export_to_clauses_4, true(length(Clauses, 1))) :-
+	test(rf_export_to_clauses_4, deterministic(length(Clauses, 1))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::export_to_clauses(play_tennis, Classifier, classify, Clauses).
 
-	test(rf_export_to_clauses_4_structure, true(functor(Clause, my_forest, 1))) :-
+	test(rf_export_to_clauses_4_structure, deterministic(functor(Clause, my_forest, 1))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::export_to_clauses(play_tennis, Classifier, my_forest, [Clause]).
 
-	test(rf_export_to_clauses_4_usable, true(ground(Prediction))) :-
+	test(rf_export_to_clauses_4_usable, deterministic(ground(Prediction))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::export_to_clauses(_Dataset, Classifier, classifier, [classifier(ExportedClassifier)]),
 		random_forest_classifier::predict(ExportedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
@@ -175,7 +176,7 @@
 		{classifier(LoadedClassifier)},
 		random_forest_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Prediction).
 
-	test(random_forest_diagnostics_2, deterministic((list::memberchk(model(random_forest_classifier), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
+	test(random_forest_diagnostics_2, deterministic((memberchk(model(random_forest_classifier), Diagnostics), memberchk(options(Options), Diagnostics)))) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		random_forest_classifier::diagnostics(Classifier, Diagnostics),
 		random_forest_classifier::classifier_options(Classifier, Options).
@@ -194,18 +195,18 @@
 
 	% Robustness tests with different datasets
 
-	test(random_forest_learn_2_contact_lenses, true(ground(Classifier))) :-
+	test(random_forest_learn_2_contact_lenses, deterministic(ground(Classifier))) :-
 		random_forest_classifier::learn(contact_lenses, Classifier).
 
-	test(random_forest_learn_2_iris, true(ground(Classifier))) :-
+	test(random_forest_learn_2_iris, deterministic(ground(Classifier))) :-
 		random_forest_classifier::learn(iris, Classifier).
 
-	test(random_forest_learn_2_breast_cancer, true(ground(Classifier))) :-
+	test(random_forest_learn_2_breast_cancer, deterministic(ground(Classifier))) :-
 		random_forest_classifier::learn(breast_cancer, Classifier).
 
 	% Prediction consistency tests
 
-	test(random_forest_predict_consistent_with_probabilities, true(PredictedClass == MaxProbClass)) :-
+	test(random_forest_predict_consistent_with_probabilities, deterministic(PredictedClass == MaxProbClass)) :-
 		random_forest_classifier::learn(play_tennis, Classifier),
 		Instance = [outlook-sunny, temperature-cool, humidity-normal, wind-weak],
 		random_forest_classifier::predict(Classifier, Instance, PredictedClass),
@@ -220,6 +221,7 @@
 		sum_probabilities(Rest, Sum1, Sum).
 
 	max_probability_class([Class-Probability], Class) :-
+		!,
 		Probability >= 0.
 	max_probability_class([Class1-Probability1, Class2-Probability2| Rest], Class) :-
 		(	Probability1 >= Probability2 ->

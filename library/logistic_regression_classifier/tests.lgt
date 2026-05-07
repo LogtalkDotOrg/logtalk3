@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "logistic_regression_classifier" library.'
 	]).
 
@@ -93,8 +93,12 @@
 		logistic_regression_classifier::learn(mixed, Classifier),
 		logistic_regression_classifier::predict(Classifier, [age-40, income-50000, student-yes, credit_rating-poor], _Prediction).
 
-	test(logistic_regression_learn_3_custom_options, deterministic((memberchk(learning_rate(0.05), Options), memberchk(maximum_iterations(1500), Options), memberchk(tolerance(1.0e-6), Options), memberchk(l2_regularization(0.01), Options)))) :-
-		logistic_regression_classifier::learn(weather, lr_classifier(_Classes, _Encoders, _Models, Options), [learning_rate(0.05), maximum_iterations(1500), l2_regularization(0.01)]).
+	test(logistic_regression_learn_3_custom_options, deterministic([LearningRate, MaximumIterations, Tolerance, L2Regularization] == [0.05, 1500, 1.0e-6, 0.01])) :-
+		logistic_regression_classifier::learn(weather, lr_classifier(_Classes, _Encoders, _Models, Options), [learning_rate(0.05), maximum_iterations(1500), l2_regularization(0.01)]),
+		memberchk(learning_rate(LearningRate), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(l2_regularization(L2Regularization), Options).
 
 	test(logistic_regression_learn_2_iris_small, deterministic(ground(Classifier))) :-
 		logistic_regression_classifier::learn(iris_small, Classifier).
@@ -134,10 +138,12 @@
 		{classifier(LoadedClassifier)},
 		logistic_regression_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	test(logistic_regression_diagnostics_2, deterministic((list::memberchk(model(logistic_regression_classifier), Diagnostics), list::memberchk(options(Options), Diagnostics)))) :-
+	test(logistic_regression_diagnostics_2, deterministic((Model == logistic_regression_classifier, Options1 == Options2))) :-
 		logistic_regression_classifier::learn(weather, Classifier),
 		logistic_regression_classifier::diagnostics(Classifier, Diagnostics),
-		logistic_regression_classifier::classifier_options(Classifier, Options).
+		logistic_regression_classifier::classifier_options(Classifier, Options1),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options2), Diagnostics).
 
 	test(logistic_regression_print_classifier_1, deterministic) :-
 		^^suppress_text_output,

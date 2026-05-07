@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "naive_bayes_classifier" library.'
 	]).
 
@@ -150,9 +150,11 @@
 		{classifier(LoadedClassifier)},
 		naive_bayes_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	test(naive_bayes_diagnostics_2, deterministic((list::memberchk(model(naive_bayes_classifier), Diagnostics), list::memberchk(classes(_), Diagnostics)))) :-
+	test(naive_bayes_diagnostics_2, deterministic((Model == naive_bayes_classifier, ground(Classes)))) :-
 		naive_bayes_classifier::learn(weather, Classifier),
-		naive_bayes_classifier::diagnostics(Classifier, Diagnostics).
+		naive_bayes_classifier::diagnostics(Classifier, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(classes(Classes), Diagnostics).
 
 	% Test print_classifier/1 (just ensure it doesn't fail)
 	test(naive_bayes_print_classifier_1, true) :-

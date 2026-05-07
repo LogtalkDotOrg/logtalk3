@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "sgd_classifier" library.'
 	]).
 
@@ -85,8 +85,12 @@
 		sgd_classifier::learn(iris_small, Classifier),
 		sgd_classifier::predict(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Prediction).
 
-	test(sgd_classifier_learn_3_custom_options, deterministic((memberchk(loss(hinge), Options), memberchk(learning_rate(0.02), Options), memberchk(learning_schedule(inverse_scaling(0.5)), Options), memberchk(l2_regularization(0.001), Options)))) :-
-		sgd_classifier::learn(weather, sgd_classifier(_Classes, _Encoders, _Loss, _Models, Options), [loss(hinge), learning_rate(0.02), learning_schedule(inverse_scaling(0.5)), l2_regularization(0.001)]).
+	test(sgd_classifier_learn_3_custom_options, deterministic([Loss, LearningRate, LearningSchedule, L2Regularization] == [hinge, 0.02, inverse_scaling(0.5), 0.001])) :-
+		sgd_classifier::learn(weather, sgd_classifier(_Classes, _Encoders, _Loss, _Models, Options), [loss(hinge), learning_rate(0.02), learning_schedule(inverse_scaling(0.5)), l2_regularization(0.001)]),
+		memberchk(loss(Loss), Options),
+		memberchk(learning_rate(LearningRate), Options),
+		memberchk(learning_schedule(LearningSchedule), Options),
+		memberchk(l2_regularization(L2Regularization), Options).
 
 	test(sgd_classifier_export_to_clauses_4, deterministic(Prediction == yes)) :-
 		sgd_classifier::learn(weather, Classifier),
@@ -106,9 +110,12 @@
 		{classifier(LoadedClassifier)},
 		sgd_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	test(sgd_classifier_diagnostics_2, deterministic((memberchk(model(sgd_classifier), Diagnostics), memberchk(loss(log_loss), Diagnostics), memberchk(options(_), Diagnostics)))) :-
+	test(sgd_classifier_diagnostics_2, deterministic((Model == sgd_classifier, Loss == log_loss, ground(Options)))) :-
 		sgd_classifier::learn(weather, Classifier),
-		sgd_classifier::diagnostics(Classifier, Diagnostics).
+		sgd_classifier::diagnostics(Classifier, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(loss(Loss), Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	test(sgd_classifier_print_classifier_1, deterministic) :-
 		^^suppress_text_output,

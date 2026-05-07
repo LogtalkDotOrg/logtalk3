@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "qda_classifier" library.'
 	]).
 
@@ -52,12 +52,14 @@
 		qda_classifier::learn(iris_small, Classifier),
 		qda_classifier::predict(Classifier, [sepal_length-6.4, sepal_width-3.0, petal_length-5.8, petal_width-2.2], Prediction).
 
-	test(qda_predict_scores_3, deterministic(memberchk(setosa-_, Scores))) :-
+	test(qda_predict_scores_3, deterministic((ground(Scores), memberchk(setosa-_, Scores)))) :-
 		qda_classifier::learn(iris_small, Classifier),
 		qda_classifier::predict_scores(Classifier, [sepal_length-5.0, sepal_width-3.4, petal_length-1.4, petal_width-0.2], Scores).
 
-	test(qda_learn_3_custom_options, deterministic((memberchk(feature_scaling(false), Options), memberchk(regularization(1.0e-4), Options)))) :-
-		qda_classifier::learn(iris_small, qda_classifier(_Encoders, _Models, Options), [feature_scaling(false), regularization(1.0e-4)]).
+	test(qda_learn_3_custom_options, deterministic(FeatureScaling-Regularization == false-1.0e-4)) :-
+		qda_classifier::learn(iris_small, qda_classifier(_Encoders, _Models, Options), [feature_scaling(false), regularization(1.0e-4)]),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(regularization(Regularization), Options).
 
 	test(qda_export_to_clauses_4, deterministic(Prediction == setosa)) :-
 		qda_classifier::learn(iris_small, Classifier),
@@ -77,9 +79,11 @@
 		{classifier(LoadedClassifier)},
 		qda_classifier::predict(LoadedClassifier, [sepal_length-5.0, sepal_width-3.4, petal_length-1.4, petal_width-0.2], Prediction).
 
-	test(qda_diagnostics_2, deterministic((memberchk(model(qda_classifier), Diagnostics), memberchk(options(_), Diagnostics)))) :-
+	test(qda_diagnostics_2, deterministic((Model == qda_classifier, ground(Options)))) :-
 		qda_classifier::learn(iris_small, Classifier),
-		qda_classifier::diagnostics(Classifier, Diagnostics).
+		qda_classifier::diagnostics(Classifier, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	test(qda_print_classifier_1, deterministic) :-
 		^^suppress_text_output,

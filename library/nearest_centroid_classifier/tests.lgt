@@ -79,7 +79,7 @@
 		nearest_centroid_classifier::learn(iris_small, Classifier),
 		nearest_centroid_classifier::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Probabilities).
 
-	test(nearest_centroid_predict_probabilities_3_iris_setosa_prob, true(memberchk(setosa-_, Probabilities))) :-
+	test(nearest_centroid_predict_probabilities_3_iris_setosa_prob, true((ground(Probabilities), memberchk(setosa-_, Probabilities)))) :-
 		nearest_centroid_classifier::learn(iris_small, Classifier),
 		nearest_centroid_classifier::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Probabilities).
 
@@ -122,9 +122,11 @@
 		{classifier(LoadedClassifier)},
 		nearest_centroid_classifier::predict(LoadedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
-	test(nearest_centroid_diagnostics_2, deterministic((list::memberchk(model(nearest_centroid_classifier), Diagnostics), list::memberchk(centroids(_), Diagnostics)))) :-
+	test(nearest_centroid_diagnostics_2, deterministic((Model == nearest_centroid_classifier, ground(Centroids)))) :-
 		nearest_centroid_classifier::learn(iris_small, Classifier),
-		nearest_centroid_classifier::diagnostics(Classifier, Diagnostics).
+		nearest_centroid_classifier::diagnostics(Classifier, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(centroids(Centroids), Diagnostics).
 
 	% Test print_classifier/1 (just ensure it doesn't fail)
 	test(nearest_centroid_print_classifier_1, true) :-
