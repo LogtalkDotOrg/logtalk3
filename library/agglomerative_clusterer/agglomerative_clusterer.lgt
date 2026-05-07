@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Agglomerative clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kcenters_clusterer, kmeans_clusterer, kmedoids_clusterer]
 	]).
@@ -43,7 +43,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2
+		append/3, length/2, member/2
 	]).
 
 	:- uses(numberlist, [
@@ -85,8 +85,7 @@
 		states_to_clusters(FinalStates, 1, Clusters, Prototypes),
 		pair_queue_max(FinalPairQueue, MaximumHeapSize),
 		build_diagnostics(Clusters, Prototypes, Count, Options, RuntimeStats, MaximumHeapSize, Diagnostics),
-		Clusterer = agglomerative_clusterer(Encoders, Clusters, Prototypes, Options, Diagnostics),
-		!.
+		Clusterer = agglomerative_clusterer(Encoders, Clusters, Prototypes, Options, Diagnostics).
 
 	cluster(Clusterer, Instance, Cluster) :-
 		clusterer_data(Clusterer, Encoders, Clusters, _Prototypes, Options, _Diagnostics),
@@ -289,11 +288,11 @@
 		MergedState = cluster_state(NextNodeId, MergedMembers, MergedSize),
 		merge_states_by_node_ids(States, LeftNodeId, RightNodeId, MergedState, false, MergedStates).
 
+	state_by_node_id([], NodeId, _FoundState) :-
+		existence_error(cluster_state, NodeId).
 	state_by_node_id([State| _States], NodeId, State) :-
 		state_node_id(State, NodeId),
 		!.
-	state_by_node_id([], NodeId, _FoundState) :-
-		existence_error(cluster_state, NodeId).
 	state_by_node_id([_State| States], NodeId, FoundState) :-
 		state_by_node_id(States, NodeId, FoundState).
 
@@ -365,17 +364,17 @@
 
 	order_cluster_states([], OrderedStates, OrderedStates).
 	order_cluster_states([State| States], OrderedStates0, OrderedStates) :-
-		insert_cluster_state(State, OrderedStates0, OrderedStates1),
+		insert_cluster_state(OrderedStates0, State, OrderedStates1),
 		order_cluster_states(States, OrderedStates1, OrderedStates).
 
-	insert_cluster_state(State, [], [State]).
-	insert_cluster_state(State, [OtherState| States], [State, OtherState| States]) :-
+	insert_cluster_state([], State, [State]).
+	insert_cluster_state([OtherState| States], State, [State, OtherState| States]) :-
 		state_order_key(State, Key),
 		state_order_key(OtherState, OtherKey),
 		Key @=< OtherKey,
 		!.
-	insert_cluster_state(State, [OtherState| States], [OtherState| OrderedStates]) :-
-		insert_cluster_state(State, States, OrderedStates).
+	insert_cluster_state([OtherState| States], State, [OtherState| OrderedStates]) :-
+		insert_cluster_state(States, State, OrderedStates).
 
 	state_order_key(cluster_state(NodeId, Members, _Size), MinimumId-NodeId) :-
 		members_minimum_id(Members, MinimumId).

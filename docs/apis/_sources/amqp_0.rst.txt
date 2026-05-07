@@ -15,7 +15,7 @@ Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-04-17
+| **Date:** 2026-05-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -917,7 +917,17 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: decode_field_value/3
+.. _amqp/0::decode_field_value/3:
+
+``decode_field_value/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
 
 Operators
 ---------

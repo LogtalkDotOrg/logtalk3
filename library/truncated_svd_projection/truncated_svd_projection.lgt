@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Truncated singular value decomposition reducer for continuous datasets using a portable two-sided power-iteration solver over the data matrix.',
 		see_also is [pca_projection, random_projection]
 	]).
@@ -46,7 +46,7 @@
 	]).
 
 	:- uses(numberlist, [
-		euclidean_norm/2, rescale/3, scalar_product/3 as dot_product/3
+		euclidean_norm/2, rescale/3
 	]).
 
 	:- uses(pairs, [

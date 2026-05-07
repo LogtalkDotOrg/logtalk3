@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Schulze pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by computing strongest paths over aggregated head-to-head outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland_ranker, borda_ranker]
 	]).
@@ -38,7 +38,7 @@
 	]).
 
 	:- uses(avltree, [
-		as_dictionary/2, lookup/3 as dictionary_lookup/3
+		as_dictionary/2
 	]).
 
 	:- uses(list, [

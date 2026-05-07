@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-05-07,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -1489,7 +1489,9 @@
 	decode_field_value(84, Bytes, timestamp(Value), Rest) :-
 		decode_longlong(Bytes, Value, Rest).
 
-	% For testing
+	% For testing; called using the (<<)/2 control construct;
+	% declared privatr to avoid dead code scanner warnings
+	:- private(decode_field_value/3).
 	decode_field_value([Byte| Bytes], Value, Rest) :-
 		decode_field_value(Byte, Bytes, Value, Rest).
 

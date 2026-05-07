@@ -87,7 +87,6 @@
 
 	predict_tree(leaf(Class), _, Class).
 	predict_tree(tree(Attribute, threshold(Threshold), LeftTree, RightTree), Instance, Class) :-
-		!,
 		memberchk(Attribute-Value, Instance),
 		(	var(Value) ->
 			% Missing value: use majority voting from both branches

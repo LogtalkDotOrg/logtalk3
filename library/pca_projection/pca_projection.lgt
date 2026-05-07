@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver.',
 		see_also is [lda_projection, random_projection]
 	]).
@@ -35,11 +35,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, reverse/2
-	]).
-
-	:- uses(numberlist, [
-		scalar_product/3 as dot_product/3
+		length/2
 	]).
 
 	:- uses(pairs, [
@@ -70,8 +66,7 @@
 		covariance_matrix(Rows, CovarianceMatrix),
 		^^extract_components(CovarianceMatrix, ComponentCount, Options, Components, ExplainedVariances),
 		build_diagnostics(AttributeNames, Components, ExplainedVariances, Options, Diagnostics),
-		DimensionReducer = pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics),
-		!.
+		DimensionReducer = pca_reducer(Encoders, Components, ExplainedVariances, Diagnostics).
 
 	check_examples(Dataset, AttributeNames, Examples) :-
 		^^check_examples_non_empty(Dataset, Examples),

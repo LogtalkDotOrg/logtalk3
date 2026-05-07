@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "gradient_boosting_classifier" library.'
 	]).
 
@@ -71,8 +71,11 @@
 		memberchk(no-No, Probabilities),
 		Total is Yes + No.
 
-	test(gradient_boosting_learn_3_custom_options, deterministic((memberchk(number_of_estimators(5), Options), memberchk(learning_rate(0.3), Options), memberchk(maximum_depth(2), Options)))) :-
-		gradient_boosting_classifier::learn(weather, gradient_boosting_classifier(_Classes, _InitialScores, _StageTrees, Options), [number_of_estimators(5), learning_rate(0.3), maximum_depth(2)]).
+	test(gradient_boosting_learn_3_custom_options, deterministic([NumberOfEstimators, LearningRate, MaximumDepth] == [5, 0.3, 2])) :-
+		gradient_boosting_classifier::learn(weather, gradient_boosting_classifier(_Classes, _InitialScores, _StageTrees, Options), [number_of_estimators(5), learning_rate(0.3), maximum_depth(2)]),
+		memberchk(number_of_estimators(NumberOfEstimators), Options),
+		memberchk(learning_rate(LearningRate), Options),
+		memberchk(maximum_depth(MaximumDepth), Options).
 
 	test(gradient_boosting_export_to_clauses_4, deterministic(Prediction == yes)) :-
 		gradient_boosting_classifier::learn(weather, Classifier, [number_of_estimators(10), learning_rate(0.5), maximum_depth(2)]),
@@ -92,9 +95,11 @@
 		{classifier(LoadedClassifier)},
 		gradient_boosting_classifier::predict(LoadedClassifier, [outlook-overcast, temperature-hot, humidity-normal, wind-weak], Prediction).
 
-	test(gradient_boosting_diagnostics_2, deterministic((memberchk(model(gradient_boosting_classifier), Diagnostics), memberchk(stage_count(StageCount), Diagnostics), StageCount >= 0))) :-
+	test(gradient_boosting_diagnostics_2, deterministic(StageCount >= 0)) :-
 		gradient_boosting_classifier::learn(weather, Classifier),
-		gradient_boosting_classifier::diagnostics(Classifier, Diagnostics).
+		gradient_boosting_classifier::diagnostics(Classifier, Diagnostics),
+		memberchk(model(gradient_boosting_classifier), Diagnostics),
+		memberchk(stage_count(StageCount), Diagnostics).
 
 	test(gradient_boosting_print_classifier_1, deterministic) :-
 		^^suppress_text_output,

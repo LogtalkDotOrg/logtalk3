@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(linear_algebra, [
-		add_scaled_vector/4, dot_product/3, new_vector/3
+		dot_product/3, new_vector/3
 	]).
 
 	:- uses(list, [

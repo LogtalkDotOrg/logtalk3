@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "knn_classifier" library.'
 	]).
 
@@ -79,7 +79,7 @@
 		knn_classifier::learn(iris_small, Classifier),
 		knn_classifier::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Probabilities).
 
-	test(knn_predict_probabilities_3_iris_setosa_prob, true(memberchk(setosa-_, Probabilities))) :-
+	test(knn_predict_probabilities_3_iris_setosa_prob, true((ground(Probabilities), memberchk(setosa-_, Probabilities)))) :-
 		knn_classifier::learn(iris_small, Classifier),
 		knn_classifier::predict_probabilities(Classifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Probabilities).
 
@@ -135,9 +135,11 @@
 		{classifier(LoadedClassifier)},
 		knn_classifier::predict(LoadedClassifier, [sepal_length-5.0, sepal_width-3.3, petal_length-1.4, petal_width-0.2], Prediction).
 
-	test(knn_diagnostics_2, deterministic((list::memberchk(model(knn_classifier), Diagnostics), list::memberchk(training_examples(_), Diagnostics)))) :-
+	test(knn_diagnostics_2, deterministic((Model == knn_classifier, ground(TrainingExamples)))) :-
 		knn_classifier::learn(iris_small, Classifier),
-		knn_classifier::diagnostics(Classifier, Diagnostics).
+		knn_classifier::diagnostics(Classifier, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_examples(TrainingExamples), Diagnostics).
 
 	% Test print_classifier/1 (just ensure it doesn't fail)
 	test(knn_print_classifier_1, true) :-

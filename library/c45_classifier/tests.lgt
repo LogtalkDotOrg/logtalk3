@@ -25,8 +25,12 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "c45_classifier" library.'
+	]).
+
+	:- uses(list, [
+		length/2, member/2, memberchk/2
 	]).
 
 	cover(c45_classifier).
@@ -48,9 +52,9 @@
 	test(c45_learn_2_play_tennis_root_is_tree, true(Attribute == outlook)) :-
 		c45_classifier::learn(play_tennis, tree(Attribute, _)).
 
-	test(c45_learn_2_play_tennis_overcast_is_leaf, true(Class == yes)) :-
+	test(c45_learn_2_play_tennis_overcast_is_leaf, deterministic(Class == yes)) :-
 		c45_classifier::learn(play_tennis, tree(outlook, Subtrees)),
-		list::member(overcast-leaf(Class), Subtrees).
+		memberchk(overcast-leaf(Class), Subtrees).
 
 	% learn/2 tests - contact_lenses dataset
 
@@ -60,29 +64,29 @@
 	test(c45_learn_2_contact_lenses_root_is_tree, true) :-
 		c45_classifier::learn(contact_lenses, tree(_, _)).
 
-	test(c45_learn_2_contact_lenses_reduced_tears_none, true(Class == none)) :-
+	test(c45_learn_2_contact_lenses_reduced_tears_none, deterministic(Class == none)) :-
 		c45_classifier::learn(contact_lenses, tree(tear_production_rate, Subtrees)),
-		list::member(reduced-leaf(Class), Subtrees).
+		memberchk(reduced-leaf(Class), Subtrees).
 
 	% export_to_clauses/4 tests
 
-	test(c45_export_to_clauses_4_play_tennis, true(N > 0)) :-
+	test(c45_export_to_clauses_4_play_tennis, deterministic(N > 0)) :-
 		c45_classifier::learn(play_tennis, Tree),
 		c45_classifier::export_to_clauses(play_tennis, Tree, classify, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
-	test(c45_export_to_clauses_4_clauses_are_ground, true) :-
+	test(c45_export_to_clauses_4_clauses_are_ground, deterministic) :-
 		c45_classifier::learn(play_tennis, Tree),
 		c45_classifier::export_to_clauses(play_tennis, Tree, classify, Clauses),
 		forall(
-			list::member(Clause, Clauses),
-			(Clause =.. [classify| Arguments], list::length(Arguments, 5))
+			member(Clause, Clauses),
+			(Clause =.. [classify| Arguments], length(Arguments, 5))
 		).
 
-	test(c45_export_to_clauses_4_contact_lenses, true(N > 0)) :-
+	test(c45_export_to_clauses_4_contact_lenses, deterministic(N > 0)) :-
 		c45_classifier::learn(contact_lenses, Tree),
 		c45_classifier::export_to_clauses(contact_lenses, Tree, recommend, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
 	% export_to_file/4 tests
 
@@ -116,15 +120,15 @@
 	test(c45_learn_2_iris, deterministic(ground(Tree))) :-
 		c45_classifier::learn(iris, Tree).
 
-	test(c45_learn_2_iris_root_is_continuous, true) :-
+	test(c45_learn_2_iris_root_is_continuous, deterministic) :-
 		c45_classifier::learn(iris, tree(_, threshold(_), _, _)).
 
 	% export_to_clauses/4 tests - iris dataset
 
-	test(c45_export_to_clauses_4_iris, true(N > 0)) :-
+	test(c45_export_to_clauses_4_iris, deterministic(N > 0)) :-
 		c45_classifier::learn(iris, Tree),
 		c45_classifier::export_to_clauses(iris, Tree, classify, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
 	% print_classifier/1 tests - iris dataset
 
@@ -143,10 +147,10 @@
 
 	% export_to_clauses/4 tests - breast_cancer dataset
 
-	test(c45_export_to_clauses_4_breast_cancer, true(N > 0)) :-
+	test(c45_export_to_clauses_4_breast_cancer, deterministic(N > 0)) :-
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::export_to_clauses(breast_cancer, Tree, classify, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
 	% print_classifier/1 tests - breast_cancer dataset
 
@@ -161,11 +165,11 @@
 		c45_classifier::learn(play_tennis, Tree),
 		c45_classifier::prune(play_tennis, Tree, PrunedTree).
 
-	test(c45_prune_3_play_tennis_clauses, true(N > 0)) :-
+	test(c45_prune_3_play_tennis_clauses, deterministic(N > 0)) :-
 		c45_classifier::learn(play_tennis, Tree),
 		c45_classifier::prune(play_tennis, Tree, PrunedTree),
 		c45_classifier::export_to_clauses(play_tennis, PrunedTree, classify, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
 	% prune/3 tests - breast_cancer dataset (larger, more likely to be pruned)
 
@@ -173,15 +177,15 @@
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::prune(breast_cancer, Tree, PrunedTree).
 
-	test(c45_prune_3_breast_cancer_different, true(Tree \== PrunedTree)) :-
+	test(c45_prune_3_breast_cancer_different, deterministic(Tree \== PrunedTree)) :-
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::prune(breast_cancer, Tree, PrunedTree).
 
-	test(c45_prune_3_breast_cancer_clauses, true(N > 0)) :-
+	test(c45_prune_3_breast_cancer_clauses, deterministic(N > 0)) :-
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::prune(breast_cancer, Tree, PrunedTree),
 		c45_classifier::export_to_clauses(breast_cancer, PrunedTree, classify, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
 	% prune/3 tests - iris dataset (continuous attributes)
 
@@ -189,11 +193,11 @@
 		c45_classifier::learn(iris, Tree),
 		c45_classifier::prune(iris, Tree, PrunedTree).
 
-	test(c45_prune_3_iris_clauses, true(N > 0)) :-
+	test(c45_prune_3_iris_clauses, deterministic(N > 0)) :-
 		c45_classifier::learn(iris, Tree),
 		c45_classifier::prune(iris, Tree, PrunedTree),
 		c45_classifier::export_to_clauses(iris, PrunedTree, classify, Clauses),
-		list::length(Clauses, N).
+		length(Clauses, N).
 
 	% prune/5 tests - custom confidence factor and minimum instances
 
@@ -221,7 +225,7 @@
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::prune(breast_cancer, Tree, 0.5, 2, PrunedTree).
 
-	test(c45_prune_5_low_cf_more_aggressive, true(N1 =< N2)) :-
+	test(c45_prune_5_low_cf_more_aggressive, deterministic(N1 =< N2)) :-
 		% Lower confidence factor should result in more aggressive pruning
 		% More aggressive pruning means fewer or equal clauses
 		c45_classifier::learn(breast_cancer, Tree),
@@ -229,8 +233,8 @@
 		c45_classifier::prune(breast_cancer, Tree, 0.5,  2, PrunedTree2),
 		c45_classifier::export_to_clauses(breast_cancer, PrunedTree1, classify, Clauses1),
 		c45_classifier::export_to_clauses(breast_cancer, PrunedTree2, classify, Clauses2),
-		list::length(Clauses1, N1),
-		list::length(Clauses2, N2).
+		length(Clauses1, N1),
+		length(Clauses2, N2).
 
 	% Classification verification tests - play_tennis dataset
 	% These tests verify that generated clauses correctly classify training examples
@@ -307,42 +311,42 @@
 
 	% predict/3 tests
 
-	test(c45_predict_3_play_tennis_no, true(Class == no)) :-
+	test(c45_predict_3_play_tennis_no, deterministic(Class == no)) :-
 		% Example 1: outlook=sunny, temperature=hot, humidity=high, wind=weak -> no
 		c45_classifier::learn(play_tennis, Tree),
 		c45_classifier::predict(Tree, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Class).
 
-	test(c45_predict_3_play_tennis_yes, true(Class == yes)) :-
+	test(c45_predict_3_play_tennis_yes, deterministic(Class == yes)) :-
 		% Example 3: outlook=overcast, temperature=hot, humidity=high, wind=weak -> yes
 		c45_classifier::learn(play_tennis, Tree),
 		c45_classifier::predict(Tree, [outlook-overcast, temperature-hot, humidity-high, wind-weak], Class).
 
-	test(c45_predict_3_contact_lenses_none, true(Class == none)) :-
+	test(c45_predict_3_contact_lenses_none, deterministic(Class == none)) :-
 		% Example 2: age=young, spectacle_prescription=myope, astigmatism=no, tear_production_rate=reduced -> none
 		c45_classifier::learn(contact_lenses, Tree),
 		c45_classifier::predict(Tree, [age-young, spectacle_prescription-myope, astigmatism-no, tear_production_rate-reduced], Class).
 
-	test(c45_predict_3_contact_lenses_soft, true(Class == soft)) :-
+	test(c45_predict_3_contact_lenses_soft, deterministic(Class == soft)) :-
 		% Example 5: age=young, spectacle_prescription=hypermetrope, astigmatism=no, tear_production_rate=normal -> soft
 		c45_classifier::learn(contact_lenses, Tree),
 		c45_classifier::predict(Tree, [age-young, spectacle_prescription-hypermetrope, astigmatism-no, tear_production_rate-normal], Class).
 
-	test(c45_predict_3_iris_setosa, true(Class == setosa)) :-
+	test(c45_predict_3_iris_setosa, deterministic(Class == setosa)) :-
 		% Example 1: sepal_length=5.1, sepal_width=3.5, petal_length=1.4, petal_width=0.2 -> setosa
 		c45_classifier::learn(iris, Tree),
 		c45_classifier::predict(Tree, [sepal_length-5.1, sepal_width-3.5, petal_length-1.4, petal_width-0.2], Class).
 
-	test(c45_predict_3_iris_virginica, true(Class == virginica)) :-
+	test(c45_predict_3_iris_virginica, deterministic(Class == virginica)) :-
 		% Example 150: sepal_length=5.9, sepal_width=3.0, petal_length=5.1, petal_width=1.8 -> virginica
 		c45_classifier::learn(iris, Tree),
 		c45_classifier::predict(Tree, [sepal_length-5.9, sepal_width-3.0, petal_length-5.1, petal_width-1.8], Class).
 
-	test(c45_predict_3_breast_cancer_no_recurrence, true(Class == no_recurrence_events)) :-
+	test(c45_predict_3_breast_cancer_no_recurrence, deterministic(Class == no_recurrence_events)) :-
 		% Example 1: 30_39, premeno, 30_34, 0_2, no, 3, left, left_low, no -> no_recurrence_events
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::predict(Tree, [age-'30_39', menopause-premeno, tumor_size-'30_34', inv_nodes-'0_2', node_caps-no, deg_malig-'3', breast-left, breast_quad-left_low, irradiat-no], Class).
 
-	test(c45_predict_3_breast_cancer_recurrence, true(Class == recurrence_events)) :-
+	test(c45_predict_3_breast_cancer_recurrence, deterministic(Class == recurrence_events)) :-
 		% Example 225: 30_39, premeno, 25_29, 3_5, yes, 3, left, left_low, yes -> recurrence_events
 		c45_classifier::learn(breast_cancer, Tree),
 		c45_classifier::predict(Tree, [age-'30_39', menopause-premeno, tumor_size-'25_29', inv_nodes-'3_5', node_caps-yes, deg_malig-'3', breast-left, breast_quad-left_low, irradiat-yes], Class).

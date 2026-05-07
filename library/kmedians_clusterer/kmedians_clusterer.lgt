@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'k-Medians clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, kmedoids_clusterer]
 	]).
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, msort/2, nth1/3
+		length/2, msort/2
 	]).
 
 	:- uses(numberlist, [
@@ -71,8 +71,7 @@
 		initialize_medians(Initialization, K, Rows, InitialMedians),
 		optimize_medians(Rows, Options, 0, 0.0, InitialMedians, Medians, Convergence, Iterations, FinalShift),
 		build_diagnostics(Count, Medians, Options, Convergence, Iterations, FinalShift, Diagnostics),
-		Clusterer = kmedians_clusterer(Encoders, Medians, Options, Diagnostics),
-		!.
+		Clusterer = kmedians_clusterer(Encoders, Medians, Options, Diagnostics).
 
 	cluster(Clusterer, Instance, Cluster) :-
 		clusterer_data(Clusterer, Encoders, Medians, _Options, _Diagnostics),

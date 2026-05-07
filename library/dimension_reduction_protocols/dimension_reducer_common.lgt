@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-07,
 		comment is 'Shared predicates for dimension reducer learning defaults, dataset helpers, transformation, export, and printing.'
 	]).
 
@@ -248,11 +248,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, last/2, length/2, member/2, memberchk/2, reverse/2
+		append/3, last/2, length/2, member/2, memberchk/2
 	]).
 
 	:- uses(linear_algebra, [
-		basis_vector/3, new_vector/3, symmetric_eigen/4, symmetric_eigen/5
+		basis_vector/3, new_vector/3, symmetric_eigen/5
 	]).
 
 	:- uses(numberlist, [

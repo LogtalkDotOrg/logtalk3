@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Local Outlier Factor anomaly detector with multiple distance metrics, mixed-feature support, and missing-value handling. Learns from baseline training examples selected from a dataset object implementing the ``anomaly_dataset_protocol`` protocol and returns a detector term that can be used for scoring, prediction, and export.',
 		see_also is [anomaly_dataset_protocol, anomaly_detector_protocol, knn_distance_anomaly_detector, isolation_forest_anomaly_detector]
 	]).
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		last/2 as last_neighbor_distance/2, length/2, member/2, memberchk/2, msort/2, nth1/3, reverse/2, take/3
+		last/2 as last_neighbor_distance/2, length/2, member/2, memberchk/2, msort/2, reverse/2, take/3
 	]).
 
 	:- uses(numberlist, [

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-07,
 		comment is 'Bayesian ridge regression regressor supporting continuous and mixed-feature datasets using evidence maximization and posterior uncertainty over coefficients. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, gaussian_process_regression,
@@ -52,13 +52,13 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, memberchk/2, nth1/3, reverse/2
+		append/3, length/2, memberchk/2
 	]).
 
 	:- uses(linear_algebra, [
 		add_scaled_outer_product/4, add_scaled_vector/4, cholesky_decomposition/2, invert_from_cholesky/2,
 		gram_matrix/2, matrix_diagonal/2, matrix_value/4, matrix_vector_product/3, new_matrix/4, new_vector/3,
-		scale_vector/3, shift_matrix_diagonal/3, solve_cholesky/3, symmetric_eigen/4, symmetric_eigen/5,
+		scale_vector/3, shift_matrix_diagonal/3, solve_cholesky/3, symmetric_eigen/5,
 		subtract_vectors/3, new_vector_like/2
 	]).
 
