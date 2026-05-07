@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "optics_clusterer" library.'
 	]).
 
@@ -124,8 +124,13 @@
 		training_assignments(two_blobs, ManhattanClusterer, ManhattanAssignments),
 		same_partition(two_blobs, EuclideanAssignments, ManhattanAssignments).
 
-	test(optics_learn_3_custom_options, deterministic((memberchk(ordering_and_extraction_epsilons(1.0, 1.0), Options), memberchk(search_index(metric_tree), Options), memberchk(minimum_points(2), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(two_blobs, optics_clusterer(_Encoders, _Ordering, _Clusters, _Noise, Options), [ordering_and_extraction_epsilons(1.0, 1.0), search_index(metric_tree), minimum_points(2), distance_metric(manhattan), feature_scaling(off)]).
+	test(optics_learn_3_custom_options, deterministic([OrderingEpsilon, ExtractionEpsilon, SearchIndex, MinimumPoints, DistanceMetric, FeatureScaling] == [1.0, 1.0, metric_tree, 2, manhattan, off])) :-
+		learn(two_blobs, optics_clusterer(_Encoders, _Ordering, _Clusters, _Noise, Options), [ordering_and_extraction_epsilons(1.0, 1.0), search_index(metric_tree), minimum_points(2), distance_metric(manhattan), feature_scaling(off)]),
+		memberchk(ordering_and_extraction_epsilons(OrderingEpsilon, ExtractionEpsilon), Options),
+		memberchk(search_index(SearchIndex), Options),
+		memberchk(minimum_points(MinimumPoints), Options),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
 	test(optics_learn_3_invalid_search_index, error(domain_error(option, search_index(foo)))) :-
 		learn(two_blobs, _Clusterer, [search_index(foo)]).
@@ -158,6 +163,8 @@
 
 	test(optics_learn_3_mixed_profiles, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
 		learn(mixed_profiles, _Clusterer).
+
+	% auxiliary predicates
 
 	training_assignments(Dataset, Clusterer, Assignments) :-
 		findall(

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "linear_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		member/2, memberchk/2
 	]).
 
 	cover(linear_regression).
@@ -76,26 +76,50 @@
 		linear_regression::learn(intercept_only, Regressor),
 		linear_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(linear_regression_learn_3_custom_options, deterministic((member(feature_scaling(false), Options), \+ member(learning_rate(_), Options), \+ member(maximum_iterations(_), Options), \+ member(tolerance(_), Options), \+ member(regularization(_), Options)))) :-
+	test(linear_regression_learn_3_custom_options, deterministic(FeatureScaling == false)) :-
 		linear_regression::learn(simple_line, Regressor, [feature_scaling(false)]),
-		linear_regression::regressor_options(Regressor, Options).
+		linear_regression::regressor_options(Regressor, Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		\+ member(learning_rate(_), Options),
+		\+ member(maximum_iterations(_), Options),
+		\+ member(tolerance(_), Options),
+		\+ member(regularization(_), Options).
 
-	test(linear_regression_diagnostics_2, deterministic((member(model(linear_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(solver(modified_gram_schmidt_column_pivoting), Diagnostics), member(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics), ResidualSumOfSquares =< 1.0e-8, member(effective_rank(2), Diagnostics), member(active_feature_count(1), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(feature_scaling(true), Options)))) :-
+	test(linear_regression_diagnostics_2, deterministic((ResidualSumOfSquares =< 1.0e-8, [Model, TrainingExampleCount, Solver, EffectiveRank, ActiveFeatureCount, EncodedFeatureCount, FeatureScaling] == [linear_regression, 5, modified_gram_schmidt_column_pivoting, 2, 1, 2, true]))) :-
 		linear_regression::learn(simple_line, Regressor),
-		linear_regression::diagnostics(Regressor, Diagnostics).
+		linear_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(solver(Solver), Diagnostics),
+		memberchk(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics),
+		memberchk(effective_rank(EffectiveRank), Diagnostics),
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(linear_regression_mixed_signal_encoded_feature_count, deterministic(member(encoded_feature_count(6), Diagnostics))) :-
+	test(linear_regression_mixed_signal_encoded_feature_count, deterministic(EncodedFeatureCount == 6)) :-
 		linear_regression::learn(mixed_signal, Regressor),
-		linear_regression::diagnostics(Regressor, Diagnostics).
+		linear_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics).
 
-	test(linear_regression_collinear_line_rank_handling, deterministic((Prediction =~= 27.0, member(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics), ResidualSumOfSquares =< 1.0e-8, member(effective_rank(2), Diagnostics), member(active_feature_count(1), Diagnostics), member(encoded_feature_count(4), Diagnostics)))) :-
+	test(linear_regression_collinear_line_rank_handling, deterministic((Prediction =~= 27.0, ResidualSumOfSquares =< 1.0e-8, [EffectiveRank, ActiveFeatureCount, EncodedFeatureCount] == [2, 1, 4]))) :-
 		linear_regression::learn(collinear_line, Regressor, [feature_scaling(false)]),
 		linear_regression::predict(Regressor, [x1-6, x2-12], Prediction),
-		linear_regression::diagnostics(Regressor, Diagnostics).
+		linear_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics),
+		memberchk(effective_rank(EffectiveRank), Diagnostics),
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics).
 
-	test(linear_regression_intercept_only_diagnostics, deterministic((member(solver(modified_gram_schmidt_column_pivoting), Diagnostics), member(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics), ResidualSumOfSquares =< 1.0e-8, member(effective_rank(1), Diagnostics), member(active_feature_count(0), Diagnostics), member(encoded_feature_count(2), Diagnostics)))) :-
+	test(linear_regression_intercept_only_diagnostics, deterministic((ResidualSumOfSquares =< 1.0e-8, [Solver, EffectiveRank, ActiveFeatureCount, EncodedFeatureCount] == [modified_gram_schmidt_column_pivoting, 1, 0, 2]))) :-
 		linear_regression::learn(intercept_only, Regressor),
-		linear_regression::diagnostics(Regressor, Diagnostics).
+		linear_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(solver(Solver), Diagnostics),
+		memberchk(residual_sum_of_squares(ResidualSumOfSquares), Diagnostics),
+		memberchk(effective_rank(EffectiveRank), Diagnostics),
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics).
 
 	test(linear_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
 		linear_regression::learn(simple_line, Regressor),

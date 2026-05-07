@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "borda_ranker" library.'
 	]).
 
@@ -45,8 +45,11 @@
 	test(borda_learn_3_empty_options, deterministic(ground(Ranker))) :-
 		borda_ranker::learn(ranked_ballots, Ranker, []).
 
-	test(borda_learn_3_custom_options, deterministic((memberchk(options(Options), Diagnostics), memberchk(missing_relevance(error), Options), memberchk(tie_scoring(fractional), Options)))) :-
-		borda_ranker::learn(tied_grouped, borda_ranker(_Items, _Scores, Diagnostics), [missing_relevance(error), tie_scoring(fractional)]).
+		test(borda_learn_3_custom_options, deterministic([MissingRelevance, TieScoring] == [error, fractional])) :-
+		borda_ranker::learn(tied_grouped, borda_ranker(_Items, _Scores, Diagnostics), [missing_relevance(error), tie_scoring(fractional)]),
+		memberchk(options(Options), Diagnostics),
+				memberchk(missing_relevance(MissingRelevance), Options),
+				memberchk(tie_scoring(TieScoring), Options).
 
 	test(borda_learn_3_unsupported_tie_scoring_error, error(domain_error(option, tie_scoring(ceiling)))) :-
 		borda_ranker::learn(ranked_ballots, _Ranker, [tie_scoring(ceiling)]).
@@ -68,25 +71,37 @@
 		borda_ranker::learn(search_results, Ranker),
 		borda_ranker::rank(Ranker, [doc_zeta, doc_alpha, doc_beta, doc_delta, doc_epsilon, doc_gamma], Ranking).
 
-	test(borda_scores_2, deterministic((memberchk(alpha-2, Scores), memberchk(beta-3, Scores), memberchk(gamma-1, Scores)))) :-
+		test(borda_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [2, 3, 1])) :-
 		borda_ranker::learn(ranked_ballots, Ranker),
-		borda_ranker::scores(Ranker, Scores).
+		borda_ranker::scores(Ranker, Scores),
+				memberchk(alpha-AlphaScore, Scores),
+				memberchk(beta-BetaScore, Scores),
+				memberchk(gamma-GammaScore, Scores).
 
-	test(borda_tied_grouped_scores_2, deterministic((memberchk(alpha-1, Scores), memberchk(beta-1, Scores), memberchk(gamma-0, Scores)))) :-
+		test(borda_tied_grouped_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [1, 1, 0])) :-
 		borda_ranker::learn(tied_grouped, Ranker),
-		borda_ranker::scores(Ranker, Scores).
+		borda_ranker::scores(Ranker, Scores),
+				memberchk(alpha-AlphaScore, Scores),
+				memberchk(beta-BetaScore, Scores),
+				memberchk(gamma-GammaScore, Scores).
 
-	test(borda_fractional_tied_grouped_scores_2, deterministic((memberchk(alpha-1.5, Scores), memberchk(beta-1.5, Scores), memberchk(gamma-0.0, Scores)))) :-
+		test(borda_fractional_tied_grouped_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [1.5, 1.5, 0.0])) :-
 		borda_ranker::learn(tied_grouped, Ranker, [tie_scoring(fractional)]),
-		borda_ranker::scores(Ranker, Scores).
+		borda_ranker::scores(Ranker, Scores),
+				memberchk(alpha-AlphaScore, Scores),
+				memberchk(beta-BetaScore, Scores),
+				memberchk(gamma-GammaScore, Scores).
 
 	test(borda_fractional_tied_grouped_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		borda_ranker::learn(tied_grouped, Ranker, [tie_scoring(fractional)]),
 		borda_ranker::rank(Ranker, [gamma, beta, alpha], Ranking).
 
-	test(borda_sparse_grouped_default_zero_2, deterministic((memberchk(alpha-2, Scores), memberchk(beta-1, Scores), memberchk(gamma-0, Scores)))) :-
+		test(borda_sparse_grouped_default_zero_2, deterministic([AlphaScore, BetaScore, GammaScore] == [2, 1, 0])) :-
 		borda_ranker::learn(sparse_grouped_relevance, Ranker),
-		borda_ranker::scores(Ranker, Scores).
+		borda_ranker::scores(Ranker, Scores),
+				memberchk(alpha-AlphaScore, Scores),
+				memberchk(beta-BetaScore, Scores),
+				memberchk(gamma-GammaScore, Scores).
 
 	test(borda_sparse_grouped_missing_relevance_error, error(existence_error(relevance, ballot_one-gamma))) :-
 		borda_ranker::learn(sparse_grouped_relevance, _Ranker, [missing_relevance(error)]).
@@ -95,21 +110,29 @@
 		borda_ranker::learn(reordered_grouped_items, Ranker),
 		borda_ranker::scores(Ranker, Scores).
 
-	test(borda_diagnostics_2, deterministic((memberchk(model(borda_ranker), Diagnostics), memberchk(options(Options), Diagnostics), memberchk(missing_relevance(zero), Options), memberchk(tie_scoring(standard), Options)))) :-
+		test(borda_diagnostics_2, deterministic([Model, MissingRelevance, TieScoring] == [borda_ranker, zero, standard])) :-
 		borda_ranker::learn(ranked_ballots, Ranker),
-		borda_ranker::diagnostics(Ranker, Diagnostics).
+		borda_ranker::diagnostics(Ranker, Diagnostics),
+				memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+				memberchk(missing_relevance(MissingRelevance), Options),
+				memberchk(tie_scoring(TieScoring), Options).
 
 	test(borda_diagnostic_2, true) :-
 		borda_ranker::learn(ranked_ballots, Ranker),
 		borda_ranker::diagnostic(Ranker, model(borda_ranker)).
 
-	test(borda_ranker_options_2, deterministic((memberchk(missing_relevance(zero), Options), memberchk(tie_scoring(standard), Options)))) :-
+		test(borda_ranker_options_2, deterministic([MissingRelevance, TieScoring] == [zero, standard])) :-
 		borda_ranker::learn(ranked_ballots, Ranker),
-		borda_ranker::ranker_options(Ranker, Options).
+		borda_ranker::ranker_options(Ranker, Options),
+				memberchk(missing_relevance(MissingRelevance), Options),
+				memberchk(tie_scoring(TieScoring), Options).
 
-	test(borda_ranker_options_fractional_2, deterministic((memberchk(missing_relevance(error), Options), memberchk(tie_scoring(fractional), Options)))) :-
+		test(borda_ranker_options_fractional_2, deterministic([MissingRelevance, TieScoring] == [error, fractional])) :-
 		borda_ranker::learn(tied_grouped, Ranker, [missing_relevance(error), tie_scoring(fractional)]),
-		borda_ranker::ranker_options(Ranker, Options).
+		borda_ranker::ranker_options(Ranker, Options),
+				memberchk(missing_relevance(MissingRelevance), Options),
+				memberchk(tie_scoring(TieScoring), Options).
 
 	test(borda_export_to_clauses_4, deterministic(ground(Clause))) :-
 		borda_ranker::learn(ranked_ballots, Ranker),

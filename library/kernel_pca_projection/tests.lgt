@@ -123,7 +123,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "kernel_pca_projection" library.'
 	]).
 
@@ -149,7 +149,7 @@
 	test(kernel_pca_learn_2_structure, deterministic(functor(DimensionReducer, kernel_pca_reducer, 7))) :-
 		kernel_pca_projection::learn(correlated_plane, DimensionReducer).
 
-	test(kernel_pca_learn_3_custom_options, deterministic) :-
+	test(kernel_pca_learn_3_custom_options, deterministic([NComponents, FeatureScaling, ShortfallPolicy, Kernel, MaximumIterations, Tolerance, Model] == [1, false, error, polynomial(2, 0.5, 1.0), 200, 1.0e-7, kernel_pca_projection])) :-
 		kernel_pca_projection::learn(correlated_plane, kernel_pca_reducer(_Encoders, _TrainingRows, _RowMeans, _TotalMean, Components, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false), shortfall_policy(error), kernel(polynomial(2, 0.5, 1.0)), maximum_iterations(200), tolerance(1.0e-7)]),
 		assertion(ground(Components)),
 		assertion(length(Components, 1)),
@@ -157,24 +157,22 @@
 		assertion(Variance > 0.0),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(n_components(1), Options)),
-		assertion(memberchk(feature_scaling(false), Options)),
-		assertion(memberchk(shortfall_policy(error), Options)),
-		assertion(memberchk(kernel(polynomial(2, 0.5, 1.0)), Options)),
-		assertion(memberchk(maximum_iterations(200), Options)),
-		assertion(memberchk(tolerance(1.0e-7), Options)),
-		assertion(memberchk(model(kernel_pca_projection), Diagnostics)).
+		memberchk(n_components(NComponents), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(shortfall_policy(ShortfallPolicy), Options),
+		memberchk(kernel(Kernel), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(model(Model), Diagnostics).
 
-	test(kernel_pca_learn_3_shortfall_policy_truncate, deterministic) :-
+	test(kernel_pca_learn_3_shortfall_policy_truncate, deterministic([ComponentCount, ShortfallPolicy, RequestedComponentCount, LearnedComponentCount] == [0, truncate, 1, 0])) :-
 		kernel_pca_projection::learn(shortfall_kernel_pca_dataset, kernel_pca_reducer(_Encoders, _TrainingRows, _RowMeans, _TotalMean, Components, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false), shortfall_policy(truncate), kernel(linear)]),
 		assertion(Components == []),
 		assertion(ExplainedVariances == []),
-		assertion(memberchk(component_count(0), Diagnostics)),
+		memberchk(component_count(ComponentCount), Diagnostics),
 		memberchk(options(Options), Diagnostics),
-		assertion(memberchk(shortfall_policy(truncate), Options)),
+		memberchk(shortfall_policy(ShortfallPolicy), Options),
 		memberchk(shortfall(truncated(RequestedComponentCount, LearnedComponentCount, ResidualEigenvalue, Tolerance)), Diagnostics),
-		assertion(RequestedComponentCount == 1),
-		assertion(LearnedComponentCount == 0),
 		assertion(ResidualEigenvalue >= 0.0),
 		assertion(Tolerance =:= 1.0e-8).
 
@@ -188,16 +186,17 @@
 		kernel_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		kernel_pca_projection::check_dimension_reducer(DimensionReducer).
 
-	test(kernel_pca_diagnostics_2, deterministic) :-
+	test(kernel_pca_diagnostics_2, deterministic([Model, SampleCount, ComponentCount, Preprocessing, ShortfallPolicy] == [kernel_pca_projection, 8, 1, [center(true), feature_scaling(true)], truncate])) :-
 		kernel_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		kernel_pca_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(model(kernel_pca_projection), Diagnostics)),
-		assertion(memberchk(sample_count(8), Diagnostics)),
-		assertion(memberchk(component_count(1), Diagnostics)),
-		assertion(memberchk(explained_variances([_]), Diagnostics)),
-		assertion(memberchk(preprocessing([center(true), feature_scaling(true)]), Diagnostics)),
+		memberchk(model(Model), Diagnostics),
+		memberchk(sample_count(SampleCount), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics),
+		memberchk(explained_variances([ExplainedVariance]), Diagnostics),
+		assertion(nonvar(ExplainedVariance)),
+		memberchk(preprocessing(Preprocessing), Diagnostics),
 		memberchk(options(Options), Diagnostics),
-		assertion(memberchk(shortfall_policy(truncate), Options)),
+		memberchk(shortfall_policy(ShortfallPolicy), Options),
 		assertion(\+ memberchk(shortfall(_), Diagnostics)).
 
 	test(kernel_pca_learn_2_component_count_exceeds_sample_rank, error(domain_error(component_count, 8-7))) :-
@@ -207,8 +206,10 @@
 		kernel_pca_projection::learn(high_dimensional_measurements, DimensionReducer),
 		kernel_pca_projection::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance),
 		assertion(length(ReducedInstance, 2)),
-		assertion(memberchk(component_1-_, ReducedInstance)),
-		assertion(memberchk(component_2-_, ReducedInstance)).
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(kernel_pca_transform_3_monotonic_component, deterministic) :-
 		kernel_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1), kernel(linear)]),
@@ -224,8 +225,10 @@
 		kernel_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(2), kernel(rbf(0.25))]),
 		kernel_pca_projection::transform(DimensionReducer, [x-2.0, y-4.0, z-6.0], ReducedInstance),
 		assertion(length(ReducedInstance, 2)),
-		assertion(memberchk(component_1-_, ReducedInstance)),
-		assertion(memberchk(component_2-_, ReducedInstance)).
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(kernel_pca_transform_3_rbf_concentric_circles_radius_response, deterministic) :-
 		kernel_pca_projection::learn(concentric_circles_kernel_pca_dataset, DimensionReducer, [n_components(2), feature_scaling(false), kernel(rbf(0.5))]),
@@ -269,13 +272,15 @@
 		ExplainedVariances = [Variance],
 		assertion(Variance > 0.0).
 
-	test(kernel_pca_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
+	test(kernel_pca_transform_3_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),
 		kernel_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1), kernel(rbf(0.25))]),
 		kernel_pca_projection::export_to_file(correlated_plane, DimensionReducer, reducer, File),
 		logtalk_load(File, [reload(always)]),
 		{reducer(Reducer)},
-		kernel_pca_projection::transform(Reducer, [x-1.0, y-2.0, z-3.0], ReducedInstance).
+		kernel_pca_projection::transform(Reducer, [x-1.0, y-2.0, z-3.0], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		assertion(nonvar(Component1Score)).
 
 	test(kernel_pca_print_dimension_reducer_1, deterministic) :-
 		^^suppress_text_output,

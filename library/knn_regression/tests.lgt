@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "knn_regression" library.'
 	]).
 
@@ -33,7 +33,7 @@
 		op(700, xfx, =~=), (=~=)/2
 	]).
 	:- uses(list, [
-		member/2
+		memberchk/2
 	]).
 
 	cover(knn_regression).
@@ -78,13 +78,22 @@
 		knn_regression::learn(sparse_mixed_signal, Regressor, [k(1), feature_scaling(false)]),
 		knn_regression::predict(Regressor, [age-20], Prediction).
 
-	test(knn_regression_learn_3_custom_options, deterministic((member(k(5), Options), member(distance_metric(manhattan), Options), member(weight_scheme(distance), Options), member(minkowski_power(4.0), Options), member(feature_scaling(false), Options)))) :-
+	test(knn_regression_learn_3_custom_options, deterministic([K, DistanceMetric, WeightScheme, MinkowskiPower, FeatureScaling] == [5, manhattan, distance, 4.0, false])) :-
 		knn_regression::learn(step_signal, Regressor, [k(5), distance_metric(manhattan), weight_scheme(distance), minkowski_power(4.0), feature_scaling(false)]),
-		knn_regression::regressor_options(Regressor, Options).
+		knn_regression::regressor_options(Regressor, Options),
+		memberchk(k(K), Options),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(weight_scheme(WeightScheme), Options),
+		memberchk(minkowski_power(MinkowskiPower), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(knn_regression_diagnostics_2, deterministic((member(model(knn_regression), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(k(3), Options)))) :-
+	test(knn_regression_diagnostics_2, deterministic([Model, EncodedFeatureCount, K] == [knn_regression, 2, 3])) :-
 		knn_regression::learn(step_signal, Regressor),
-		knn_regression::diagnostics(Regressor, Diagnostics).
+		knn_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(k(K), Options).
 
 	test(knn_regression_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-
 		knn_regression::learn(step_signal, Regressor, [k(1), feature_scaling(false)]),

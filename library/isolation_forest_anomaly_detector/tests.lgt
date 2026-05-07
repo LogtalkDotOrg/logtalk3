@@ -57,7 +57,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "isolation_forest_anomaly_detector" library.'
 	]).
 
@@ -95,13 +95,19 @@
 	test(isolation_forest_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [model(isolation_forest_anomaly_detector), tree_count(1), subsample_size(2), attribute_names([x]), feature_count(1), options([number_of_trees(10)])])))) :-
 		isolation_forest_anomaly_detector::check_anomaly_detector(if_model([external(0)], 2, [x], [x-continuous], [0.0-1.0], [model(isolation_forest_anomaly_detector), tree_count(1), subsample_size(2), attribute_names([x]), feature_count(1), options([number_of_trees(10)])])).
 
-	test(isolation_forest_diagnostics_2, deterministic((memberchk(model(isolation_forest_anomaly_detector), Diagnostics), memberchk(tree_count(50), Diagnostics), memberchk(subsample_size(40), Diagnostics), memberchk(feature_count(2), Diagnostics)))) :-
+	test(isolation_forest_diagnostics_2, deterministic([ModelName, TreeCount, SubsampleSize, FeatureCount] == [isolation_forest_anomaly_detector, 50, 40, 2])) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
-		isolation_forest_anomaly_detector::diagnostics(Model, Diagnostics).
+		isolation_forest_anomaly_detector::diagnostics(Model, Diagnostics),
+		memberchk(model(ModelName), Diagnostics),
+		memberchk(tree_count(TreeCount), Diagnostics),
+		memberchk(subsample_size(SubsampleSize), Diagnostics),
+		memberchk(feature_count(FeatureCount), Diagnostics).
 
-	test(isolation_forest_anomaly_detector_options_2, deterministic((memberchk(number_of_trees(50), Options), memberchk(baseline_selection_policy(filter), Options)))) :-
+	test(isolation_forest_anomaly_detector_options_2, deterministic([NumberOfTrees, BaselineSelectionPolicy] == [50, filter])) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),
-		isolation_forest_anomaly_detector::anomaly_detector_options(Model, Options).
+		isolation_forest_anomaly_detector::anomaly_detector_options(Model, Options),
+		memberchk(number_of_trees(NumberOfTrees), Options),
+		memberchk(baseline_selection_policy(BaselineSelectionPolicy), Options).
 
 	test(isolation_forest_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
 		learn_filtered(gaussian_anomalies, [number_of_trees(50)], Model),

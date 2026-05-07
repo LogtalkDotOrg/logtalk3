@@ -50,7 +50,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "random_projection" library.'
 	]).
 
@@ -73,26 +73,26 @@
 	test(random_projection_learn_2_structure, deterministic(functor(DimensionReducer, random_projection_reducer, 3))) :-
 		random_projection::learn(correlated_plane, DimensionReducer).
 
-	test(random_projection_learn_3_custom_options, deterministic) :-
+	test(random_projection_learn_3_custom_options, deterministic([NComponents, FeatureScaling, RandomSeed, Model] == [1, false, 17, random_projection])) :-
 		random_projection::learn(correlated_plane, random_projection_reducer(_Encoders, Components, Diagnostics), [n_components(1), feature_scaling(false), random_seed(17)]),
 		assertion(ground(Components)),
 		assertion(length(Components, 1)),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(n_components(1), Options)),
-		assertion(memberchk(feature_scaling(false), Options)),
-		assertion(memberchk(random_seed(17), Options)),
-		assertion(memberchk(model(random_projection), Diagnostics)).
+		memberchk(n_components(NComponents), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(random_seed(RandomSeed), Options),
+		memberchk(model(Model), Diagnostics).
 
 	test(random_projection_check_dimension_reducer_1, deterministic) :-
 		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(17)]),
 		random_projection::check_dimension_reducer(DimensionReducer).
 
-	test(random_projection_diagnostics_2, deterministic) :-
+	test(random_projection_diagnostics_2, deterministic([Model, ComponentCount] == [random_projection, 1])) :-
 		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(17)]),
 		random_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(model(random_projection), Diagnostics)),
-		assertion(memberchk(component_count(1), Diagnostics)).
+		memberchk(model(Model), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics).
 
 	test(random_projection_learn_2_component_count_exceeds_feature_count, error(domain_error(component_count, 4-3))) :-
 		random_projection::learn(correlated_plane, _DimensionReducer, [n_components(4), random_seed(17)]).
@@ -101,8 +101,10 @@
 		random_projection::learn(high_dimensional_measurements, DimensionReducer, [random_seed(11)]),
 		random_projection::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance),
 		assertion(length(ReducedInstance, 2)),
-		assertion(memberchk(component_1-_, ReducedInstance)),
-		assertion(memberchk(component_2-_, ReducedInstance)).
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(random_projection_same_seed_reproducible, deterministic(DimensionReducer1 == DimensionReducer2)) :-
 		random_projection::learn(correlated_plane, DimensionReducer1, [random_seed(19)]),
@@ -126,13 +128,15 @@
 		assertion(ground(Components)),
 		assertion(length(Components, 1)).
 
-	test(random_projection_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
+	test(random_projection_transform_3_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),
 		random_projection::learn(correlated_plane, DimensionReducer, [n_components(1), random_seed(29)]),
 		random_projection::export_to_file(correlated_plane, DimensionReducer, reducer, File),
 		logtalk_load(File),
 		{reducer(Reducer)},
-		random_projection::transform(Reducer, [x-1.0, y-2.0, z-3.0], ReducedInstance).
+		random_projection::transform(Reducer, [x-1.0, y-2.0, z-3.0], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		assertion(nonvar(Component1Score)).
 
 	test(random_projection_print_dimension_reducer_1, deterministic) :-
 		^^suppress_text_output,

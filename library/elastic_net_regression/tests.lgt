@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "elastic_net_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		memberchk/2
 	]).
 
 	cover(elastic_net_regression).
@@ -66,9 +66,11 @@
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _UnregularizedBias, [UnregularizedWeight, _UnregularizedMissingWeight], _UnregularizedDiagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _ShrunkBias, [ShrunkWeight, _ShrunkMissingWeight], _ShrunkDiagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.1), l1_ratio(0.5)]).
 
-	test(elastic_net_regression_ridge_endpoint_shrinks_weight, deterministic((abs(RidgeWeight) < abs(UnregularizedWeight), abs(RidgeWeight) > 0.0, member(options(Options), Diagnostics), member(l1_ratio(0.0), Options)))) :-
+	test(elastic_net_regression_ridge_endpoint_shrinks_weight, deterministic((abs(RidgeWeight) < abs(UnregularizedWeight), abs(RidgeWeight) > 0.0, L1Ratio == 0.0))) :-
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _UnregularizedBias, [UnregularizedWeight, _UnregularizedMissingWeight], _UnregularizedDiagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
-		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _RidgeBias, [RidgeWeight, _RidgeMissingWeight], Diagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.1), l1_ratio(0.0)]).
+		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _RidgeBias, [RidgeWeight, _RidgeMissingWeight], Diagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.1), l1_ratio(0.0)]),
+		memberchk(options(Options), Diagnostics),
+		memberchk(l1_ratio(L1Ratio), Options).
 
 	test(elastic_net_regression_regularization_sets_irrelevant_weight_to_zero, deterministic((NoiseWeight =:= 0.0, abs(SignalWeight) > 0.0))) :-
 		elastic_net_regression::learn(sparse_signal, elastic_net_regressor([continuous(signal, 0.0, 1.0), continuous(noise, 0.0, 1.0)], _Bias, [SignalWeight, _SignalMissingWeight, NoiseWeight, _NoiseMissingWeight], _Diagnostics), [feature_scaling(false), maximum_iterations(500), tolerance(1.0e-10), regularization(0.5), l1_ratio(1.0)]).
@@ -92,21 +94,42 @@
 		elastic_net_regression::learn(intercept_only, Regressor, [maximum_iterations(5000), tolerance(1.0e-9)]),
 		elastic_net_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(elastic_net_regression_learn_3_custom_options, deterministic((member(maximum_iterations(1500), Options), member(tolerance(1.0e-6), Options), member(regularization(0.02), Options), member(l1_ratio(0.75), Options), member(feature_scaling(false), Options)))) :-
+		test(elastic_net_regression_learn_3_custom_options, deterministic([MaximumIterations, Tolerance, Regularization, L1Ratio, FeatureScaling] == [1500, 1.0e-6, 0.02, 0.75, false])) :-
 		elastic_net_regression::learn(simple_line, Regressor, [maximum_iterations(1500), tolerance(1.0e-6), regularization(0.02), l1_ratio(0.75), feature_scaling(false)]),
-		elastic_net_regression::regressor_options(Regressor, Options).
+		elastic_net_regression::regressor_options(Regressor, Options),
+				memberchk(maximum_iterations(MaximumIterations), Options),
+				memberchk(tolerance(Tolerance), Options),
+				memberchk(regularization(Regularization), Options),
+				memberchk(l1_ratio(L1Ratio), Options),
+				memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(elastic_net_regression_diagnostics_2, deterministic((member(model(elastic_net_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(convergence(Convergence), Diagnostics), member(Convergence, [tolerance, maximum_iterations_exhausted]), member(iterations(Iterations), Diagnostics), Iterations >= 1, member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0, member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(regularization(0.01), Options), member(l1_ratio(0.5), Options)))) :-
+	test(elastic_net_regression_diagnostics_2, deterministic((Iterations >= 1, FinalDelta >= 0.0, [Model, TrainingExampleCount, EncodedFeatureCount, Regularization, L1Ratio] == [elastic_net_regression, 5, 2, 0.01, 0.5]))) :-
 		elastic_net_regression::learn(simple_line, Regressor),
-		elastic_net_regression::diagnostics(Regressor, Diagnostics).
+		elastic_net_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(Convergence, [tolerance, maximum_iterations_exhausted]),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(regularization(Regularization), Options),
+		memberchk(l1_ratio(L1Ratio), Options).
 
-	test(elastic_net_regression_learn_3_maximum_iterations_diagnostics, deterministic((member(convergence(maximum_iterations_exhausted), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta > 0.0))) :-
+	test(elastic_net_regression_learn_3_maximum_iterations_diagnostics, deterministic((FinalDelta > 0.0, Convergence == maximum_iterations_exhausted, Iterations == 1))) :-
 		elastic_net_regression::learn(simple_line, Regressor, [feature_scaling(false), maximum_iterations(1), tolerance(1.0e-12), regularization(0.0)]),
-		elastic_net_regression::diagnostics(Regressor, Diagnostics).
+		elastic_net_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
-	test(elastic_net_regression_learn_3_tolerance_diagnostics, deterministic((member(convergence(tolerance), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0, FinalDelta =< 100.0))) :-
+	test(elastic_net_regression_learn_3_tolerance_diagnostics, deterministic((FinalDelta >= 0.0, FinalDelta =< 100.0, Convergence == tolerance, Iterations == 1))) :-
 		elastic_net_regression::learn(simple_line, Regressor, [feature_scaling(false), maximum_iterations(8000), tolerance(100.0), regularization(0.01), l1_ratio(0.5)]),
-		elastic_net_regression::diagnostics(Regressor, Diagnostics).
+		elastic_net_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
 	test(elastic_net_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
 		elastic_net_regression::learn(simple_line, Regressor, [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),

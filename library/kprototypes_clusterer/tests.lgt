@@ -53,8 +53,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "kprototypes_clusterer" library.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -88,8 +92,14 @@
 		learn(mixed_profiles, Clusterer, [k(2), initialization(spread), gamma(1.0)]),
 		cluster(Clusterer, [age-53, income-80000, channel-retail, region-south], Cluster).
 
-	test(kprototypes_learn_3_custom_options, deterministic((memberchk(k(2), Options), memberchk(maximum_iterations(40), Options), memberchk(tolerance(1.0e-5), Options), memberchk(initialization(first_k), Options), memberchk(gamma(1.5), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(mixed_profiles, kprototypes_clusterer(_Encoders, _Prototypes, Options, _Diagnostics), [k(2), maximum_iterations(40), tolerance(1.0e-5), initialization(first_k), gamma(1.5), feature_scaling(off)]).
+	test(kprototypes_learn_3_custom_options, deterministic([K, MaximumIterations, Tolerance, Initialization, Gamma, FeatureScaling] == [2, 40, 1.0e-5, first_k, 1.5, off])) :-
+		learn(mixed_profiles, kprototypes_clusterer(_Encoders, _Prototypes, Options, _Diagnostics), [k(2), maximum_iterations(40), tolerance(1.0e-5), initialization(first_k), gamma(1.5), feature_scaling(off)]),
+		memberchk(k(K), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(initialization(Initialization), Options),
+		memberchk(gamma(Gamma), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
 	test(kprototypes_cluster_3_two_blobs_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(two_blobs, Clusterer, [k(2), initialization(spread), feature_scaling(off)]),
@@ -119,17 +129,32 @@
 		learn(mixed_profiles, Clusterer),
 		print_clusterer(Clusterer).
 
-	test(kprototypes_diagnostics_2_rich, deterministic((memberchk(model(kprototypes_clusterer), Diagnostics), memberchk(prototype_count(2), Diagnostics), memberchk(training_example_count(6), Diagnostics), memberchk(convergence(_), Diagnostics), memberchk(iterations(Iterations), Diagnostics), Iterations > 0, memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0, memberchk(options(Options), Diagnostics), memberchk(gamma(1.0), Options)))) :-
+	test(kprototypes_diagnostics_2_rich, deterministic((Iterations > 0, FinalShift >= 0.0, [Model, PrototypeCount, TrainingExampleCount, Gamma] == [kprototypes_clusterer, 2, 6, 1.0]))) :-
 		learn(mixed_profiles, Clusterer, [k(2), initialization(spread), gamma(1.0)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(prototype_count(PrototypeCount), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		assertion(nonvar(Convergence)),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(gamma(Gamma), Options).
 
-	test(kprototypes_learn_3_maximum_iterations_termination, deterministic((memberchk(convergence(maximum_iterations), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift > 0.0))) :-
+	test(kprototypes_learn_3_maximum_iterations_termination, deterministic((FinalShift > 0.0, Convergence == maximum_iterations, Iterations == 1))) :-
 		learn(mixed_profiles, Clusterer, [k(2), initialization(first_k), gamma(1.0), feature_scaling(off), maximum_iterations(1), tolerance(1.0e-9)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics).
 
-	test(kprototypes_learn_3_tolerance_termination, deterministic((memberchk(convergence(tolerance), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift > 0.0))) :-
+	test(kprototypes_learn_3_tolerance_termination, deterministic((FinalShift > 0.0, Convergence == tolerance, Iterations == 1))) :-
 		learn(mixed_profiles, Clusterer, [k(2), initialization(first_k), gamma(1.0), feature_scaling(off), maximum_iterations(50), tolerance(1.0e12)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics).
 
 	test(kprototypes_cluster_3_invalid_discrete_value, error(domain_error(attribute_value(channel, [online, retail]), phone))) :-
 		learn(mixed_profiles, Clusterer),

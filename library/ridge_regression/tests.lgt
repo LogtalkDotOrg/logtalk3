@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "ridge_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		memberchk/2
 	]).
 
 	cover(ridge_regression).
@@ -86,17 +86,30 @@
 		ridge_regression::learn(intercept_only, Regressor),
 		ridge_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(ridge_regression_learn_3_custom_options, deterministic((member(regularization(0.02), Options), member(feature_scaling(false), Options)))) :-
+		test(ridge_regression_learn_3_custom_options, deterministic([Regularization, FeatureScaling] == [0.02, false])) :-
 		ridge_regression::learn(simple_line, Regressor, [regularization(0.02), feature_scaling(false)]),
-		ridge_regression::regressor_options(Regressor, Options).
+		ridge_regression::regressor_options(Regressor, Options),
+		memberchk(regularization(Regularization), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(ridge_regression_diagnostics_2, deterministic((member(model(ridge_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(solver(pivoted_gaussian_elimination), Diagnostics), member(linear_system_residual(Residual), Diagnostics), Residual =< 1.0e-8, member(active_feature_count(1), Diagnostics), member(penalty_scaling(encoded_feature_standardization), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(regularization(0.01), Options)))) :-
+	test(ridge_regression_diagnostics_2, deterministic((Residual =< 1.0e-8, [Model, TrainingExampleCount, Solver, ActiveFeatureCount, PenaltyScaling, EncodedFeatureCount, Regularization] == [ridge_regression, 5, pivoted_gaussian_elimination, 1, encoded_feature_standardization, 2, 0.01]))) :-
 		ridge_regression::learn(simple_line, Regressor),
-		ridge_regression::diagnostics(Regressor, Diagnostics).
+		ridge_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(solver(Solver), Diagnostics),
+		memberchk(linear_system_residual(Residual), Diagnostics),
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics),
+		memberchk(penalty_scaling(PenaltyScaling), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(regularization(Regularization), Options).
 
-	test(ridge_regression_mixed_signal_encoded_feature_count, deterministic((member(encoded_feature_count(6), Diagnostics), member(active_feature_count(3), Diagnostics)))) :-
+	test(ridge_regression_mixed_signal_encoded_feature_count, deterministic([EncodedFeatureCount, ActiveFeatureCount] == [6, 3])) :-
 		ridge_regression::learn(mixed_signal, Regressor),
-		ridge_regression::diagnostics(Regressor, Diagnostics).
+		ridge_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(active_feature_count(ActiveFeatureCount), Diagnostics).
 
 	test(ridge_regression_simple_line_zero_variance_missing_weight_is_zero, deterministic(MissingWeight =~= 0.0)) :-
 		ridge_regression::learn(simple_line, ridge_regressor(_Encoders, _Bias, [_Weight, MissingWeight], _Diagnostics), [feature_scaling(false), regularization(0.0)]).

@@ -139,7 +139,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "ewma_anomaly_detector" library.'
 	]).
 
@@ -173,9 +173,10 @@
 	test(ewma_learn_3_shift_sequences_filter, true(ground(Detector))) :-
 		learn_filtered_shift_sequences(Detector).
 
-	test(ewma_learn_3_custom_baseline_class_values_filter, deterministic(memberchk(example_count(3), Diagnostics))) :-
+	test(ewma_learn_3_custom_baseline_class_values_filter, deterministic(ExampleCount == 3)) :-
 		learn(ewma_status_sequences, Detector, [baseline_class_values([stable]), baseline_selection_policy(filter)]),
-		diagnostics(Detector, Diagnostics).
+		diagnostics(Detector, Diagnostics),
+		memberchk(example_count(ExampleCount), Diagnostics).
 
 	test(ewma_learn_3_custom_baseline_class_values_reject_error, error(domain_error(baseline_only_training_data, ewma_status_sequences))) :-
 		learn(ewma_status_sequences, _Detector, [baseline_class_values([stable]), baseline_selection_policy(reject)]).
@@ -281,21 +282,32 @@
 	test(ewma_invalid_anomaly_detector_1_missing_effective_option, error(domain_error(anomaly_detector, ewma_detector(ewma_singleton_sequences, attribute_schema([t1], [t1-1]), [ewma_encoder(t1, 1.0, 1.0)], [model(ewma_anomaly_detector), training_dataset(ewma_singleton_sequences), attribute_names([t1]), feature_count(1), example_count(1), options([anomaly_threshold(0.5), baseline_class_values([normal]), baseline_selection_policy(reject), control_limit_multiplier(3.0)])])))) :-
 		check_anomaly_detector(ewma_detector(ewma_singleton_sequences, attribute_schema([t1], [t1-1]), [ewma_encoder(t1, 1.0, 1.0)], [model(ewma_anomaly_detector), training_dataset(ewma_singleton_sequences), attribute_names([t1]), feature_count(1), example_count(1), options([anomaly_threshold(0.5), baseline_class_values([normal]), baseline_selection_policy(reject), control_limit_multiplier(3.0)])])).
 
-	test(ewma_diagnostics_2, deterministic((memberchk(model(ewma_anomaly_detector), Diagnostics), memberchk(training_dataset(ewma_shift_sequences), Diagnostics), memberchk(feature_count(6), Diagnostics), memberchk(example_count(8), Diagnostics)))) :-
+	test(ewma_diagnostics_2, deterministic([Model, TrainingDataset, FeatureCount, ExampleCount] == [ewma_anomaly_detector, ewma_shift_sequences, 6, 8])) :-
 		learn_filtered_shift_sequences(Detector),
-		diagnostics(Detector, Diagnostics).
+		diagnostics(Detector, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_dataset(TrainingDataset), Diagnostics),
+		memberchk(feature_count(FeatureCount), Diagnostics),
+		memberchk(example_count(ExampleCount), Diagnostics).
 
-	test(ewma_anomaly_detector_options_2, deterministic((memberchk(anomaly_threshold(0.5), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options), memberchk(control_limit_multiplier(3.0), Options), memberchk(smoothing_factor(0.2), Options)))) :-
+	test(ewma_anomaly_detector_options_2, deterministic([AnomalyThreshold, BaselineClassValues, BaselineSelectionPolicy, ControlLimitMultiplier, SmoothingFactor] == [0.5, [normal], filter, 3.0, 0.2])) :-
 		learn_filtered_shift_sequences(Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(anomaly_threshold(AnomalyThreshold), Options),
+		memberchk(baseline_class_values(BaselineClassValues), Options),
+		memberchk(baseline_selection_policy(BaselineSelectionPolicy), Options),
+		memberchk(control_limit_multiplier(ControlLimitMultiplier), Options),
+		memberchk(smoothing_factor(SmoothingFactor), Options).
 
-	test(ewma_anomaly_detector_options_2_custom_control_limit_multiplier, deterministic(memberchk(control_limit_multiplier(5.0), Options))) :-
+	test(ewma_anomaly_detector_options_2_custom_control_limit_multiplier, deterministic(ControlLimitMultiplier == 5.0)) :-
 		learn_filtered_shift_sequences([control_limit_multiplier(5.0)], Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(control_limit_multiplier(ControlLimitMultiplier), Options).
 
-	test(ewma_anomaly_detector_options_2_custom_smoothing_factor, deterministic(memberchk(smoothing_factor(0.4), Options))) :-
+	test(ewma_anomaly_detector_options_2_custom_smoothing_factor, deterministic(SmoothingFactor == 0.4)) :-
 		learn_filtered_shift_sequences([smoothing_factor(0.4)], Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(smoothing_factor(SmoothingFactor), Options).
 
 	test(ewma_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
 		learn_filtered_shift_sequences(Detector),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "copeland_ranker" library.'
 	]).
 
@@ -58,17 +58,23 @@
 		copeland_ranker::learn(head_to_head, Ranker),
 		copeland_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(copeland_scores_2, deterministic((memberchk(alpha-3, Scores), memberchk(beta-1, Scores), memberchk(gamma- -1, Scores), memberchk(delta- -3, Scores)))) :-
+		test(copeland_scores_2, deterministic([AlphaScore, BetaScore, GammaScore, DeltaScore] == [3, 1, -1, -3])) :-
 		copeland_ranker::learn(regular_head_to_head, Ranker),
-		copeland_ranker::scores(Ranker, Scores).
+		copeland_ranker::scores(Ranker, Scores),
+				memberchk(alpha-AlphaScore, Scores),
+				memberchk(beta-BetaScore, Scores),
+				memberchk(gamma-GammaScore, Scores),
+				memberchk(delta-DeltaScore, Scores).
 
 	test(copeland_cyclic_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		copeland_ranker::learn(cyclic_pairwise, Ranker),
 		copeland_ranker::rank(Ranker, [gamma, alpha, beta], Ranking).
 
-	test(copeland_diagnostics_2, deterministic((memberchk(model(copeland_ranker), Diagnostics), memberchk(options([]), Diagnostics)))) :-
+		test(copeland_diagnostics_2, deterministic([Model, Options] == [copeland_ranker, []])) :-
 		copeland_ranker::learn(regular_head_to_head, Ranker),
-		copeland_ranker::diagnostics(Ranker, Diagnostics).
+		copeland_ranker::diagnostics(Ranker, Diagnostics),
+				memberchk(model(Model), Diagnostics),
+				memberchk(options(Options), Diagnostics).
 
 	test(copeland_diagnostic_2, true) :-
 		copeland_ranker::learn(regular_head_to_head, Ranker),

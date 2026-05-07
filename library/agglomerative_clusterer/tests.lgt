@@ -37,7 +37,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "agglomerative_clusterer" library.'
 	]).
 
@@ -104,12 +104,24 @@
 		cluster(Clusterer, [x-0.0, y-0.0], Cluster1),
 		cluster(Clusterer, [x-5.0, y-5.0], Cluster2).
 
-	test(agglomerative_diagnostics_2_rich, deterministic((memberchk(training_example_count(8), Diagnostics), memberchk(merge_count(6), Diagnostics), memberchk(initial_pair_count(28), Diagnostics), memberchk(maximum_heap_size(MaximumHeapSize), Diagnostics), memberchk(stale_pair_discard_count(StalePairDiscardCount), Diagnostics), memberchk(pair_selection(priority_queue), Diagnostics), memberchk(prediction_strategy(cluster_member_linkage_distance), Diagnostics), memberchk(tie_breaking(node_id_order), Diagnostics), MaximumHeapSize > 0, StalePairDiscardCount >= 0))) :-
+	test(agglomerative_diagnostics_2_rich, deterministic((MaximumHeapSize > 0, StalePairDiscardCount >= 0, [TrainingExampleCount, MergeCount, InitialPairCount, PairSelection, PredictionStrategy, TieBreaking] == [8, 6, 28, priority_queue, cluster_member_linkage_distance, node_id_order]))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(merge_count(MergeCount), Diagnostics),
+		memberchk(initial_pair_count(InitialPairCount), Diagnostics),
+		memberchk(maximum_heap_size(MaximumHeapSize), Diagnostics),
+		memberchk(stale_pair_discard_count(StalePairDiscardCount), Diagnostics),
+		memberchk(pair_selection(PairSelection), Diagnostics),
+		memberchk(prediction_strategy(PredictionStrategy), Diagnostics),
+		memberchk(tie_breaking(TieBreaking), Diagnostics).
 
-	test(agglomerative_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(linkage(complete), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(iris_unlabeled, agglomerative_clusterer(_Encoders, _Clusters, _Prototypes, Options, _Diagnostics), [k(3), linkage(complete), distance_metric(manhattan), feature_scaling(off)]).
+		test(agglomerative_learn_3_custom_options, deterministic([K, Linkage, DistanceMetric, FeatureScaling] == [3, complete, manhattan, off])) :-
+		learn(iris_unlabeled, agglomerative_clusterer(_Encoders, _Clusters, _Prototypes, Options, _Diagnostics), [k(3), linkage(complete), distance_metric(manhattan), feature_scaling(off)]),
+				memberchk(k(K), Options),
+				memberchk(linkage(Linkage), Options),
+				memberchk(distance_metric(DistanceMetric), Options),
+				memberchk(feature_scaling(FeatureScaling), Options).
 
 	test(agglomerative_cluster_3_iris_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(iris_unlabeled, Clusterer, [k(3)]),

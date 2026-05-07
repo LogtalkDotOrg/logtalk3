@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "lasso_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		memberchk/2
 	]).
 
 	cover(lasso_regression).
@@ -88,21 +88,40 @@
 		lasso_regression::learn(intercept_only, Regressor, [maximum_iterations(5000), tolerance(1.0e-9)]),
 		lasso_regression::predict(Regressor, [dummy-0], Prediction).
 
-	test(lasso_regression_learn_3_custom_options, deterministic((member(maximum_iterations(1500), Options), member(tolerance(1.0e-6), Options), member(regularization(0.02), Options), member(feature_scaling(false), Options)))) :-
+	test(lasso_regression_learn_3_custom_options, deterministic([MaximumIterations, Tolerance, Regularization, FeatureScaling] == [1500, 1.0e-6, 0.02, false])) :-
 		lasso_regression::learn(simple_line, Regressor, [maximum_iterations(1500), tolerance(1.0e-6), regularization(0.02), feature_scaling(false)]),
-		lasso_regression::regressor_options(Regressor, Options).
+		lasso_regression::regressor_options(Regressor, Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(regularization(Regularization), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(lasso_regression_diagnostics_2, deterministic((member(model(lasso_regression), Diagnostics), member(training_example_count(5), Diagnostics), member(convergence(Convergence), Diagnostics), member(Convergence, [tolerance, maximum_iterations_exhausted]), member(iterations(Iterations), Diagnostics), Iterations >= 1, member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0, member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(regularization(0.01), Options)))) :-
+	test(lasso_regression_diagnostics_2, deterministic((Iterations >= 1, FinalDelta >= 0.0, [Model, TrainingExampleCount, EncodedFeatureCount, Regularization] == [lasso_regression, 5, 2, 0.01]))) :-
 		lasso_regression::learn(simple_line, Regressor),
-		lasso_regression::diagnostics(Regressor, Diagnostics).
+		lasso_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(Convergence, [tolerance, maximum_iterations_exhausted]),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(regularization(Regularization), Options).
 
-	test(lasso_regression_learn_3_maximum_iterations_diagnostics, deterministic((member(convergence(maximum_iterations_exhausted), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta > 0.0))) :-
+	test(lasso_regression_learn_3_maximum_iterations_diagnostics, deterministic((FinalDelta > 0.0, Convergence == maximum_iterations_exhausted, Iterations == 1))) :-
 		lasso_regression::learn(simple_line, Regressor, [feature_scaling(false), maximum_iterations(1), tolerance(1.0e-12), regularization(0.0)]),
-		lasso_regression::diagnostics(Regressor, Diagnostics).
+		lasso_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
-	test(lasso_regression_learn_3_tolerance_diagnostics, deterministic((member(convergence(tolerance), Diagnostics), member(iterations(1), Diagnostics), member(final_delta(FinalDelta), Diagnostics), FinalDelta >= 0.0, FinalDelta =< 100.0))) :-
+	test(lasso_regression_learn_3_tolerance_diagnostics, deterministic((FinalDelta >= 0.0, FinalDelta =< 100.0, Convergence == tolerance, Iterations == 1))) :-
 		lasso_regression::learn(simple_line, Regressor, [feature_scaling(false), maximum_iterations(8000), tolerance(100.0), regularization(0.01)]),
-		lasso_regression::diagnostics(Regressor, Diagnostics).
+		lasso_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
 	test(lasso_regression_export_to_clauses_4, deterministic(Prediction =~= 13.0)) :-
 		lasso_regression::learn(simple_line, Regressor, [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),

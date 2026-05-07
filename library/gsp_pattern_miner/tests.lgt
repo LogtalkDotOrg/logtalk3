@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "gsp_pattern_miner" library.'
 	]).
 
@@ -44,21 +44,31 @@
 	test(gsp_mine_3_prefix_ladder_baseline, deterministic(Patterns == [sequence_pattern([[a]], 5), sequence_pattern([[b]], 4), sequence_pattern([[a], [b]], 4)])) :-
 		gsp_pattern_miner::mine(prefix_ladder_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), maximum_pattern_length(2)]).
 
-	test(gsp_mine_3_same_event_and_next_event_extensions, deterministic((memberchk(sequence_pattern([[a, b]], 3), Patterns), memberchk(sequence_pattern([[a], [b]], 3), Patterns)))) :-
-		gsp_pattern_miner::mine(same_event_vs_next_event_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(2)]).
+	test(gsp_mine_3_same_event_and_next_event_extensions, deterministic([SameEventSupport, NextEventSupport] == [3, 3])) :-
+		gsp_pattern_miner::mine(same_event_vs_next_event_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(2)]),
+		memberchk(sequence_pattern([[a, b]], SameEventSupport), Patterns),
+		memberchk(sequence_pattern([[a], [b]], NextEventSupport), Patterns).
 
-	test(gsp_mine_3_repeated_embedding_support, deterministic((memberchk(sequence_pattern([[a], [b]], 2), Patterns), memberchk(sequence_pattern([[a], [b], [c]], 2), Patterns)))) :-
-		gsp_pattern_miner::mine(repeated_embedding_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]).
+	test(gsp_mine_3_repeated_embedding_support, deterministic([TwoStepSupport, ThreeStepSupport] == [2, 2])) :-
+		gsp_pattern_miner::mine(repeated_embedding_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]),
+		memberchk(sequence_pattern([[a], [b]], TwoStepSupport), Patterns),
+		memberchk(sequence_pattern([[a], [b], [c]], ThreeStepSupport), Patterns).
 
-	test(gsp_mine_3_dense_overlap_support, deterministic(memberchk(sequence_pattern([[b], [d]], 6), Patterns))) :-
-		gsp_pattern_miner::mine(dense_overlap_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]).
+	test(gsp_mine_3_dense_overlap_support, deterministic(Support == 6)) :-
+		gsp_pattern_miner::mine(dense_overlap_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]),
+		memberchk(sequence_pattern([[b], [d]], Support), Patterns).
 
-	test(gsp_mine_3_branching_patterns, deterministic((memberchk(sequence_pattern([[start], [a], [end]], 3), Patterns), memberchk(sequence_pattern([[start], [b], [end]], 3), Patterns)))) :-
-		gsp_pattern_miner::mine(branching_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]).
+	test(gsp_mine_3_branching_patterns, deterministic([BranchASupport, BranchBSupport] == [3, 3])) :-
+		gsp_pattern_miner::mine(branching_sequences, gsp_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]),
+		memberchk(sequence_pattern([[start], [a], [end]], BranchASupport), Patterns),
+		memberchk(sequence_pattern([[start], [b], [end]], BranchBSupport), Patterns).
 
-	test(gsp_diagnostics_2, deterministic((memberchk(model(gsp_pattern_miner), Diagnostics), memberchk(candidate_generation(sequential_join_prune), Diagnostics), memberchk(support_layout(horizontal_sequences), Diagnostics)))) :-
+	test(gsp_diagnostics_2, deterministic([Model, CandidateGeneration, SupportLayout] == [gsp_pattern_miner, sequential_join_prune, horizontal_sequences])) :-
 		gsp_pattern_miner::mine(prefix_ladder_sequences, PatternMiner, [minimum_support_count(4), maximum_pattern_length(2)]),
-		gsp_pattern_miner::diagnostics(PatternMiner, Diagnostics).
+		gsp_pattern_miner::diagnostics(PatternMiner, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(candidate_generation(CandidateGeneration), Diagnostics),
+		memberchk(support_layout(SupportLayout), Diagnostics).
 
 	test(gsp_valid_pattern_miner_1, deterministic) :-
 		gsp_pattern_miner::mine(prefix_ladder_sequences, PatternMiner, [minimum_support_count(4), maximum_pattern_length(2)]),
@@ -72,12 +82,13 @@
 		gsp_pattern_miner::mine(prefix_ladder_sequences, PatternMiner, [minimum_support_count(4), maximum_pattern_length(2)]),
 		gsp_pattern_miner::export_to_clauses(prefix_ladder_sequences, PatternMiner, mined_patterns, [Clause]).
 
-	test(gsp_export_to_file_4, deterministic(memberchk(sequence_pattern([[a]], 5), Patterns))) :-
+	test(gsp_export_to_file_4, deterministic(Support == 5)) :-
 		^^file_path('test_output.pl', File),
 		gsp_pattern_miner::mine(prefix_ladder_sequences, PatternMiner, [minimum_support_count(4), maximum_pattern_length(2)]),
 		gsp_pattern_miner::export_to_file(prefix_ladder_sequences, PatternMiner, gsp_exported_patterns, File),
 		logtalk_load(File),
-		{gsp_exported_patterns(_ItemDomain, Patterns, _Options)}.
+		{gsp_exported_patterns(_ItemDomain, Patterns, _Options)},
+		memberchk(sequence_pattern([[a]], Support), Patterns).
 
 	test(gsp_print_pattern_miner_1, deterministic) :-
 		^^suppress_text_output,

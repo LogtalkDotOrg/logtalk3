@@ -87,7 +87,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "iqr_anomaly_detector" library.'
 	]).
 
@@ -232,21 +232,33 @@
 	test(iqr_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, iqr_detector(gaussian_anomalies, attribute_schema([x], [x-1]), [iqr_anomaly_detector(x, 0.0, 1.0, 1.0)], [model(iqr_anomaly_detector), training_dataset(gaussian_anomalies), attribute_names([x]), feature_count(1), example_count(0), options([anomaly_threshold(0.5), baseline_class_values([normal]), baseline_selection_policy(reject), fence_multiplier(1.5), score_mode(root_mean_square)])])))) :-
 		check_anomaly_detector(iqr_detector(gaussian_anomalies, attribute_schema([x], [x-1]), [iqr_anomaly_detector(x, 0.0, 1.0, 1.0)], [model(iqr_anomaly_detector), training_dataset(gaussian_anomalies), attribute_names([x]), feature_count(1), example_count(0), options([anomaly_threshold(0.5), baseline_class_values([normal]), baseline_selection_policy(reject), fence_multiplier(1.5), score_mode(root_mean_square)])])).
 
-	test(iqr_diagnostics_2, deterministic((memberchk(model(iqr_anomaly_detector), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(feature_count(2), Diagnostics), memberchk(example_count(40), Diagnostics)))) :-
+	test(iqr_diagnostics_2, deterministic([Model, TrainingDataset, FeatureCount, ExampleCount] == [iqr_anomaly_detector, gaussian_anomalies, 2, 40])) :-
 		learn_filtered_gaussian_anomalies(Detector),
-		diagnostics(Detector, Diagnostics).
+		diagnostics(Detector, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_dataset(TrainingDataset), Diagnostics),
+		memberchk(feature_count(FeatureCount), Diagnostics),
+		memberchk(example_count(ExampleCount), Diagnostics).
 
-	test(iqr_anomaly_detector_options_2, deterministic((memberchk(anomaly_threshold(0.5), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options), memberchk(fence_multiplier(1.5), Options), memberchk(score_mode(root_mean_square), Options)))) :-
+	test(iqr_anomaly_detector_options_2, deterministic([AnomalyThreshold, BaselineClassValues, BaselineSelectionPolicy, FenceMultiplier, ScoreMode] == [0.5, [normal], filter, 1.5, root_mean_square])) :-
 		learn_filtered_gaussian_anomalies(Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(anomaly_threshold(AnomalyThreshold), Options),
+		memberchk(baseline_class_values(BaselineClassValues), Options),
+		memberchk(baseline_selection_policy(BaselineSelectionPolicy), Options),
+		memberchk(fence_multiplier(FenceMultiplier), Options),
+		memberchk(score_mode(ScoreMode), Options).
 
-	test(iqr_anomaly_detector_options_2_custom_fence_multiplier, deterministic((memberchk(anomaly_threshold(0.5), Options), memberchk(fence_multiplier(3.0), Options)))) :-
+	test(iqr_anomaly_detector_options_2_custom_fence_multiplier, deterministic([AnomalyThreshold, FenceMultiplier] == [0.5, 3.0])) :-
 		learn_filtered_gaussian_anomalies([fence_multiplier(3.0)], Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(anomaly_threshold(AnomalyThreshold), Options),
+		memberchk(fence_multiplier(FenceMultiplier), Options).
 
-	test(iqr_anomaly_detector_options_2_any_feature_extreme, deterministic(memberchk(score_mode(any_feature_extreme), Options))) :-
+	test(iqr_anomaly_detector_options_2_any_feature_extreme, deterministic(ScoreMode == any_feature_extreme)) :-
 		learn_filtered_gaussian_anomalies([score_mode(any_feature_extreme)], Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(score_mode(ScoreMode), Options).
 
 	test(iqr_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
 		learn_filtered_gaussian_anomalies(Detector),
@@ -274,6 +286,8 @@
 		^^suppress_text_output,
 		learn_filtered_gaussian_anomalies(Detector),
 		print_anomaly_detector(Detector).
+
+	% auxiliary predicates
 
 	count_class([], _Class, 0).
 	count_class([_-Class-_| Scores], Class, Count) :-

@@ -44,7 +44,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "elo_ranker" library.'
 	]).
 
@@ -60,8 +60,12 @@
 	test(elo_learn_2, deterministic(ground(Ranker))) :-
 		elo_ranker::learn(regular_head_to_head, Ranker).
 
-	test(elo_learn_3_custom_options, deterministic((memberchk(options(Options), Diagnostics), memberchk(initial_rating(1400.0), Options), memberchk(k_factor(24.0), Options), memberchk(rating_scale(200.0), Options)))) :-
-		elo_ranker::learn(regular_head_to_head, elo_ranker(_Items, _Ratings, Diagnostics), [initial_rating(1400.0), k_factor(24.0), rating_scale(200.0)]).
+		test(elo_learn_3_custom_options, deterministic([InitialRating, KFactor, RatingScale] == [1400.0, 24.0, 200.0])) :-
+		elo_ranker::learn(regular_head_to_head, elo_ranker(_Items, _Ratings, Diagnostics), [initial_rating(1400.0), k_factor(24.0), rating_scale(200.0)]),
+		memberchk(options(Options), Diagnostics),
+				memberchk(initial_rating(InitialRating), Options),
+				memberchk(k_factor(KFactor), Options),
+				memberchk(rating_scale(RatingScale), Options).
 
 	test(elo_singleton_scores_2, deterministic(Scores == [alpha-1500.0])) :-
 		elo_ranker::learn(singleton_pairwise, Ranker),
@@ -75,21 +79,31 @@
 		elo_ranker::learn(head_to_head, Ranker),
 		elo_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(elo_two_item_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 1523.8009426289977) =< 1.0e-6, abs(Beta - 1476.1990573710023) =< 1.0e-6))) :-
+	test(elo_two_item_scores_2, deterministic((abs(Alpha - 1523.8009426289977) =< 1.0e-6, abs(Beta - 1476.1990573710023) =< 1.0e-6))) :-
 		elo_ranker::learn(two_item_head_to_head, Ranker),
-		elo_ranker::scores(Ranker, Scores).
+		elo_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores).
 
-	test(elo_diagnostics_2, deterministic((memberchk(model(elo_ranker), Diagnostics), memberchk(options(Options), Diagnostics), memberchk(initial_rating(1500.0), Options), memberchk(k_factor(32.0), Options), memberchk(rating_scale(400.0), Options)))) :-
+		test(elo_diagnostics_2, deterministic([Model, InitialRating, KFactor, RatingScale] == [elo_ranker, 1500.0, 32.0, 400.0])) :-
 		elo_ranker::learn(regular_head_to_head, Ranker),
-		elo_ranker::diagnostics(Ranker, Diagnostics).
+		elo_ranker::diagnostics(Ranker, Diagnostics),
+				memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+				memberchk(initial_rating(InitialRating), Options),
+				memberchk(k_factor(KFactor), Options),
+				memberchk(rating_scale(RatingScale), Options).
 
 	test(elo_diagnostic_2, true) :-
 		elo_ranker::learn(regular_head_to_head, Ranker),
 		elo_ranker::diagnostic(Ranker, model(elo_ranker)).
 
-	test(elo_ranker_options_2, deterministic((memberchk(initial_rating(1500.0), Options), memberchk(k_factor(32.0), Options), memberchk(rating_scale(400.0), Options)))) :-
+		test(elo_ranker_options_2, deterministic([InitialRating, KFactor, RatingScale] == [1500.0, 32.0, 400.0])) :-
 		elo_ranker::learn(regular_head_to_head, Ranker),
-		elo_ranker::ranker_options(Ranker, Options).
+		elo_ranker::ranker_options(Ranker, Options),
+				memberchk(initial_rating(InitialRating), Options),
+				memberchk(k_factor(KFactor), Options),
+				memberchk(rating_scale(RatingScale), Options).
 
 	test(elo_export_to_clauses_4, deterministic(ground(Clause))) :-
 		elo_ranker::learn(regular_head_to_head, Ranker),

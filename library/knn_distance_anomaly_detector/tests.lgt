@@ -68,7 +68,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "knn_distance_anomaly_detector" library.'
 	]).
 
@@ -154,13 +154,20 @@
 	test(knn_distance_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [model(knn_distance_anomaly_detector), training_dataset(knn_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(1), options([k(1)])])))) :-
 		check_anomaly_detector(knn_distance_detector(knn_singleton_anomalies, [x], [numeric], [0.0], [1-normal-[1.0]], [0.0], [model(knn_distance_anomaly_detector), training_dataset(knn_singleton_anomalies), attribute_names([x]), feature_types([numeric]), example_count(1), reference_score_count(1), options([k(1)])])).
 
-	test(knn_distance_diagnostics_2, deterministic((memberchk(model(knn_distance_anomaly_detector), Diagnostics), memberchk(training_dataset(gaussian_anomalies), Diagnostics), memberchk(example_count(40), Diagnostics), memberchk(reference_score_count(40), Diagnostics)))) :-
+	test(knn_distance_diagnostics_2, deterministic([Model, TrainingDataset, ExampleCount, ReferenceScoreCount] == [knn_distance_anomaly_detector, gaussian_anomalies, 40, 40])) :-
 		learn_filtered(gaussian_anomalies, [k(5)], Detector),
-		diagnostics(Detector, Diagnostics).
+		diagnostics(Detector, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_dataset(TrainingDataset), Diagnostics),
+		memberchk(example_count(ExampleCount), Diagnostics),
+		memberchk(reference_score_count(ReferenceScoreCount), Diagnostics).
 
-	test(knn_distance_anomaly_detector_options_2, deterministic((memberchk(k(5), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options)))) :-
+	test(knn_distance_anomaly_detector_options_2, deterministic([K, BaselineClassValues, BaselineSelectionPolicy] == [5, [normal], filter])) :-
 		learn_filtered(gaussian_anomalies, [k(5)], Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(k(K), Options),
+		memberchk(baseline_class_values(BaselineClassValues), Options),
+		memberchk(baseline_selection_policy(BaselineSelectionPolicy), Options).
 
 	test(knn_distance_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
 		learn_filtered(gaussian_anomalies, [k(5)], Detector),
@@ -227,6 +234,8 @@
 		^^suppress_text_output,
 		learn_filtered(gaussian_anomalies, [k(5)], Detector),
 		print_anomaly_detector(Detector).
+
+	% auxiliary predicates
 
 	count_class([], _Class, 0).
 	count_class([_-Class-_| Scores], Class, Count) :-

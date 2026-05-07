@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "regression_tree" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		memberchk/2
 	]).
 
 	cover(regression_tree).
@@ -76,21 +76,31 @@
 		regression_tree::learn(sparse_mixed_signal, Regressor, [feature_scaling(false)]),
 		regression_tree::predict(Regressor, [age-20], Prediction).
 
-	test(regression_tree_learn_3_default_maximum_features_per_split, deterministic(member(maximum_features_per_split(all), Options))) :-
+	test(regression_tree_learn_3_default_maximum_features_per_split, deterministic(MaximumFeaturesPerSplit == all)) :-
 		regression_tree::learn(step_signal, Regressor),
-		regression_tree::regressor_options(Regressor, Options).
+		regression_tree::regressor_options(Regressor, Options),
+		memberchk(maximum_features_per_split(MaximumFeaturesPerSplit), Options).
 
-	test(regression_tree_learn_3_custom_maximum_features_per_split, deterministic((member(maximum_features_per_split(1), Options), regression_tree::valid_regressor(Regressor)))) :-
+	test(regression_tree_learn_3_custom_maximum_features_per_split, deterministic((regression_tree::valid_regressor(Regressor), MaximumFeaturesPerSplit == 1))) :-
 		regression_tree::learn(mixed_signal, Regressor, [maximum_features_per_split(1), feature_scaling(false)]),
-		regression_tree::regressor_options(Regressor, Options).
+		regression_tree::regressor_options(Regressor, Options),
+		memberchk(maximum_features_per_split(MaximumFeaturesPerSplit), Options).
 
-	test(regression_tree_learn_3_custom_options, deterministic((member(maximum_depth(4), Options), member(minimum_samples_leaf(2), Options), member(minimum_variance_reduction(0.1), Options), member(feature_scaling(true), Options)))) :-
+	test(regression_tree_learn_3_custom_options, deterministic([MaximumDepth, MinimumSamplesLeaf, MinimumVarianceReduction, FeatureScaling] == [4, 2, 0.1, true])) :-
 		regression_tree::learn(step_signal, Regressor, [maximum_depth(4), minimum_samples_leaf(2), minimum_variance_reduction(0.1), feature_scaling(true)]),
-		regression_tree::regressor_options(Regressor, Options).
+		regression_tree::regressor_options(Regressor, Options),
+		memberchk(maximum_depth(MaximumDepth), Options),
+		memberchk(minimum_samples_leaf(MinimumSamplesLeaf), Options),
+		memberchk(minimum_variance_reduction(MinimumVarianceReduction), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(regression_tree_diagnostics_2, deterministic((member(model(regression_tree), Diagnostics), member(encoded_feature_count(2), Diagnostics), member(options(Options), Diagnostics), member(maximum_features_per_split(all), Options)))) :-
+	test(regression_tree_diagnostics_2, deterministic([Model, EncodedFeatureCount, MaximumFeaturesPerSplit] == [regression_tree, 2, all])) :-
 		regression_tree::learn(step_signal, Regressor),
-		regression_tree::diagnostics(Regressor, Diagnostics).
+		regression_tree::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(encoded_feature_count(EncodedFeatureCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(maximum_features_per_split(MaximumFeaturesPerSplit), Options).
 
 	test(regression_tree_export_to_clauses_4, deterministic(Prediction =~= 20.0)) :-
 		regression_tree::learn(step_signal, Regressor),

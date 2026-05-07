@@ -132,7 +132,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "ica_projection" library.'
 	]).
 
@@ -155,27 +155,27 @@
 	test(ica_learn_2_structure, deterministic(functor(DimensionReducer, ica_reducer, 3))) :-
 		ica_projection::learn(mixed_independent_sources, DimensionReducer).
 
-	test(ica_learn_3_custom_options, deterministic) :-
+	test(ica_learn_3_custom_options, deterministic([NComponents, FeatureScaling, MaximumIterations, Tolerance, Model] == [1, true, 200, 1.0e-7, ica_projection])) :-
 		ica_projection::learn(mixed_independent_sources, ica_reducer(_Encoders, Components, Diagnostics), [n_components(1), feature_scaling(true), maximum_iterations(200), tolerance(1.0e-7)]),
 		assertion(ground(Components)),
 		assertion(length(Components, 1)),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(n_components(1), Options)),
-		assertion(memberchk(feature_scaling(true), Options)),
-		assertion(memberchk(maximum_iterations(200), Options)),
-		assertion(memberchk(tolerance(1.0e-7), Options)),
-		assertion(memberchk(model(ica_projection), Diagnostics)).
+		memberchk(n_components(NComponents), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(model(Model), Diagnostics).
 
 	test(ica_check_dimension_reducer_1, deterministic) :-
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
 		ica_projection::check_dimension_reducer(DimensionReducer).
 
-	test(ica_diagnostics_2, deterministic) :-
+	test(ica_diagnostics_2, deterministic([Model, ComponentCount] == [ica_projection, 2])) :-
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
 		ica_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(model(ica_projection), Diagnostics)),
-		assertion(memberchk(component_count(2), Diagnostics)),
+		memberchk(model(Model), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics),
 		memberchk(whitening_eigenvalues([FirstEigenvalue, SecondEigenvalue]), Diagnostics),
 		assertion(FirstEigenvalue >= SecondEigenvalue),
 		assertion(SecondEigenvalue > 0.0),
@@ -189,16 +189,17 @@
 		assertion(ground(FinalDeltas)),
 		assertion(length(FinalDeltas, 2)).
 
-	test(ica_diagnostics_2_maximum_iterations, deterministic) :-
+	test(ica_diagnostics_2_maximum_iterations, deterministic([MaximumIterations, Tolerance] == [1, 1.0e-30])) :-
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2), maximum_iterations(1), tolerance(1.0e-30)]),
 		ica_projection::diagnostics(DimensionReducer, Diagnostics),
 		memberchk(convergence(Convergences), Diagnostics),
 		assertion(ground(Convergences)),
-		assertion(memberchk(maximum_iterations_exhausted, Convergences)),
+		memberchk(Convergence, Convergences),
+		assertion(Convergence == maximum_iterations_exhausted),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(maximum_iterations(1), Options)),
-		assertion(memberchk(tolerance(1.0e-30), Options)).
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options).
 
 	test(ica_learn_2_component_count_exceeds_rank, error(domain_error(component_count, 3-2))) :-
 		ica_projection::learn(mixed_independent_sources, _DimensionReducer, [n_components(3)]).
@@ -210,8 +211,10 @@
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
 		ica_projection::transform(DimensionReducer, [x1-(-5.0), x2-(-4.0), x3-(-4.0)], ReducedInstance),
 		assertion(length(ReducedInstance, 2)),
-		assertion(memberchk(component_1-_, ReducedInstance)),
-		assertion(memberchk(component_2-_, ReducedInstance)).
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(ica_transform_3_separates_sources, deterministic) :-
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
@@ -226,10 +229,10 @@
 		assertion(Source1SmallDelta * 4.0 < Source1LargeDelta),
 		assertion(Source2SmallDelta * 4.0 < Source2LargeDelta).
 
-	test(ica_diagnostics_2_near_singular_covariance, deterministic) :-
+	test(ica_diagnostics_2_near_singular_covariance, deterministic(ComponentCount == 3)) :-
 		ica_projection::learn(near_singular_ica_dataset, DimensionReducer, [n_components(3), maximum_iterations(1500), tolerance(1.0e-10)]),
 		ica_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(component_count(3), Diagnostics)),
+		memberchk(component_count(ComponentCount), Diagnostics),
 		memberchk(whitening_eigenvalues([FirstEigenvalue, SecondEigenvalue, ThirdEigenvalue]), Diagnostics),
 		assertion(FirstEigenvalue >= SecondEigenvalue),
 		assertion(SecondEigenvalue >= ThirdEigenvalue),
@@ -259,7 +262,7 @@
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
 		ica_projection::export_to_clauses(mixed_independent_sources, DimensionReducer, reduced, [Clause]).
 
-	test(ica_export_to_file_4, deterministic) :-
+	test(ica_export_to_file_4, deterministic(Model == ica_projection)) :-
 		^^file_path('test_output.pl', File),
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
 		ica_projection::export_to_file(mixed_independent_sources, DimensionReducer, reducer, File),
@@ -269,15 +272,17 @@
 		assertion(ground(Components)),
 		assertion(ground(Diagnostics)),
 		assertion(length(Components, 2)),
-		assertion(memberchk(model(ica_projection), Diagnostics)).
+		memberchk(model(Model), Diagnostics).
 
-	test(ica_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
+	test(ica_transform_3_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),
 		ica_projection::learn(mixed_independent_sources, DimensionReducer, [n_components(2)]),
 		ica_projection::export_to_file(mixed_independent_sources, DimensionReducer, reducer, File),
 		logtalk_load(File),
 		{reducer(Reducer)},
-		ica_projection::transform(Reducer, [x1-(-5.0), x2-(-4.0), x3-(-4.0)], ReducedInstance).
+		ica_projection::transform(Reducer, [x1-(-5.0), x2-(-4.0), x3-(-4.0)], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		assertion(nonvar(Component1Score)).
 
 	test(ica_print_dimension_reducer_1, deterministic) :-
 		^^suppress_text_output,

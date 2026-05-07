@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "hdbscan_clusterer" library.'
 	]).
 
@@ -82,8 +82,13 @@
 		learn(bridge_noise, Clusterer, [minimum_points(3), minimum_cluster_size(4), feature_scaling(off)]),
 		cluster(Clusterer, [x-2.5, y-0.0], Cluster).
 
-	test(hdbscan_learn_3_custom_options, deterministic((memberchk(minimum_points(2), Options), memberchk(minimum_cluster_size(3), Options), memberchk(cluster_selection_method(leaf), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(two_blobs, hdbscan_clusterer(_Encoders, _Clusters, _Noise, Options), [minimum_points(2), minimum_cluster_size(3), cluster_selection_method(leaf), distance_metric(manhattan), feature_scaling(off)]).
+		test(hdbscan_learn_3_custom_options, deterministic([MinimumPoints, MinimumClusterSize, ClusterSelectionMethod, DistanceMetric, FeatureScaling] == [2, 3, leaf, manhattan, off])) :-
+		learn(two_blobs, hdbscan_clusterer(_Encoders, _Clusters, _Noise, Options), [minimum_points(2), minimum_cluster_size(3), cluster_selection_method(leaf), distance_metric(manhattan), feature_scaling(off)]),
+				memberchk(minimum_points(MinimumPoints), Options),
+				memberchk(minimum_cluster_size(MinimumClusterSize), Options),
+				memberchk(cluster_selection_method(ClusterSelectionMethod), Options),
+				memberchk(distance_metric(DistanceMetric), Options),
+				memberchk(feature_scaling(FeatureScaling), Options).
 
 	test(hdbscan_export_to_clauses_4, deterministic(Cluster == 1)) :-
 		learn(two_blobs, Clusterer, [minimum_points(2), minimum_cluster_size(3), feature_scaling(off)]),

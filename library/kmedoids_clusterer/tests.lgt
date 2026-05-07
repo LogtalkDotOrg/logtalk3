@@ -38,8 +38,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "kmedoids_clusterer" library.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -73,20 +77,42 @@
 		learn(two_blobs, Clusterer, [k(2), initialization(spread), feature_scaling(off)]),
 		cluster(Clusterer, [x-5.1, y-5.0], Cluster).
 
-	test(kmedoids_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(maximum_iterations(40), Options), memberchk(tolerance(1.0e-5), Options), memberchk(initialization(first_k), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(iris_unlabeled, kmedoids_clusterer(_Encoders, _Medoids, Options, _Diagnostics), [k(3), maximum_iterations(40), tolerance(1.0e-5), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]).
+	test(kmedoids_learn_3_custom_options, deterministic([K, MaximumIterations, Tolerance, Initialization, DistanceMetric, FeatureScaling] == [3, 40, 1.0e-5, first_k, manhattan, off])) :-
+		learn(iris_unlabeled, kmedoids_clusterer(_Encoders, _Medoids, Options, _Diagnostics), [k(3), maximum_iterations(40), tolerance(1.0e-5), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]),
+		memberchk(k(K), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(initialization(Initialization), Options),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(kmedoids_diagnostics_2_rich_metadata, deterministic((memberchk(model(kmedoids_clusterer), Diagnostics), memberchk(medoid_count(2), Diagnostics), memberchk(training_example_count(8), Diagnostics), memberchk(convergence(_), Diagnostics), memberchk(iterations(Iterations), Diagnostics), Iterations >= 1, memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0, memberchk(options(Options), Diagnostics), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
+	test(kmedoids_diagnostics_2_rich_metadata, deterministic((Iterations >= 1, FinalShift >= 0.0, [Model, MedoidCount, TrainingExampleCount, DistanceMetric, FeatureScaling] == [kmedoids_clusterer, 2, 8, manhattan, off]))) :-
 		learn(two_blobs, Clusterer, [k(2), initialization(spread), distance_metric(manhattan), feature_scaling(off)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(medoid_count(MedoidCount), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		assertion(nonvar(Convergence)),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(kmedoids_learn_3_maximum_iterations_termination, deterministic((memberchk(convergence(maximum_iterations), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift > 0.0))) :-
+	test(kmedoids_learn_3_maximum_iterations_termination, deterministic((FinalShift > 0.0, Convergence == maximum_iterations, Iterations == 1))) :-
 		learn(two_blobs, Clusterer, [k(2), maximum_iterations(1), tolerance(0.0), initialization(first_k), distance_metric(euclidean), feature_scaling(off)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics).
 
-	test(kmedoids_learn_3_tolerance_termination, deterministic((memberchk(convergence(tolerance), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0))) :-
+	test(kmedoids_learn_3_tolerance_termination, deterministic((FinalShift >= 0.0, Convergence == tolerance, Iterations == 1))) :-
 		learn(two_blobs, Clusterer, [k(2), maximum_iterations(40), tolerance(1000.0), initialization(first_k), distance_metric(euclidean), feature_scaling(off)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics).
 
 	test(kmedoids_cluster_3_iris_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(iris_unlabeled, Clusterer, [k(3)]),

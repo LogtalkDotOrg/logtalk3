@@ -139,7 +139,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "cusum_anomaly_detector" library.'
 	]).
 
@@ -173,9 +173,10 @@
 	test(cusum_learn_3_shift_sequences_filter, true(ground(Detector))) :-
 		learn_filtered_shift_sequences(Detector).
 
-	test(cusum_learn_3_custom_baseline_class_values_filter, deterministic(memberchk(example_count(3), Diagnostics))) :-
+	test(cusum_learn_3_custom_baseline_class_values_filter, deterministic(ExamppleCount == 3)) :-
 		learn(cusum_status_sequences, Detector, [baseline_class_values([stable]), baseline_selection_policy(filter)]),
-		diagnostics(Detector, Diagnostics).
+		diagnostics(Detector, Diagnostics),
+		memberchk(example_count(ExamppleCount), Diagnostics).
 
 	test(cusum_learn_3_custom_baseline_class_values_reject_error, error(domain_error(baseline_only_training_data, cusum_status_sequences))) :-
 		learn(cusum_status_sequences, _Detector, [baseline_class_values([stable]), baseline_selection_policy(reject)]).
@@ -267,17 +268,30 @@
 	test(cusum_invalid_anomaly_detector_1, error(domain_error(anomaly_detector, cusum_detector(cusum_shift_sequences, attribute_schema([t2], [t2-1]), [cusum_encoder(t1, 0.0, 1.0)], [model(cusum_anomaly_detector), training_dataset(cusum_shift_sequences), attribute_names([t1]), feature_count(1), example_count(0), options([anomaly_threshold(0.8333333333333334), allowance(0.5), baseline_class_values([normal]), baseline_selection_policy(reject), decision_interval(5.0)])])))) :-
 		check_anomaly_detector(cusum_detector(cusum_shift_sequences, attribute_schema([t2], [t2-1]), [cusum_encoder(t1, 0.0, 1.0)], [model(cusum_anomaly_detector), training_dataset(cusum_shift_sequences), attribute_names([t1]), feature_count(1), example_count(0), options([anomaly_threshold(0.8333333333333334), allowance(0.5), baseline_class_values([normal]), baseline_selection_policy(reject), decision_interval(5.0)])])).
 
-	test(cusum_diagnostics_2, deterministic((memberchk(model(cusum_anomaly_detector), Diagnostics), memberchk(training_dataset(cusum_shift_sequences), Diagnostics), memberchk(feature_count(6), Diagnostics), memberchk(example_count(8), Diagnostics)))) :-
+	test(cusum_diagnostics_2, deterministic([Model, TrainingDataset, FeatureCount, ExampleCount] == [cusum_anomaly_detector, cusum_shift_sequences, 6, 8])) :-
 		learn_filtered_shift_sequences(Detector),
-		diagnostics(Detector, Diagnostics).
+		diagnostics(Detector, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_dataset(TrainingDataset), Diagnostics),
+		memberchk(feature_count(FeatureCount), Diagnostics),
+		memberchk(example_count(ExampleCount), Diagnostics).
 
-	test(cusum_anomaly_detector_options_2, deterministic((memberchk(anomaly_threshold(0.8333333333333334), Options), memberchk(allowance(0.5), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options), memberchk(decision_interval(5.0), Options)))) :-
+	test(cusum_anomaly_detector_options_2, deterministic([Threshold, Allowance, Values, Policy, Interval] == [0.8333333333333334, 0.5, [normal], filter, 5.0])) :-
 		learn_filtered_shift_sequences(Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+		memberchk(anomaly_threshold(Threshold), Options),
+		memberchk(allowance(Allowance), Options),
+		memberchk(baseline_class_values(Values), Options),
+		memberchk(baseline_selection_policy(Policy), Options),
+		memberchk(decision_interval(Interval), Options).
 
-	test(cusum_anomaly_detector_options_2_custom_decision_interval, deterministic((memberchk(anomaly_threshold(0.7777777777777778), Options), memberchk(baseline_class_values([normal]), Options), memberchk(baseline_selection_policy(filter), Options), memberchk(decision_interval(3.5), Options)))) :-
+		test(cusum_anomaly_detector_options_2_custom_decision_interval, deterministic([AnomalyThreshold, BaselineClassValues, BaselineSelectionPolicy, DecisionInterval] == [0.7777777777777778, [normal], filter, 3.5])) :-
 		learn_filtered_shift_sequences([decision_interval(3.5)], Detector),
-		anomaly_detector_options(Detector, Options).
+		anomaly_detector_options(Detector, Options),
+				memberchk(anomaly_threshold(AnomalyThreshold), Options),
+				memberchk(baseline_class_values(BaselineClassValues), Options),
+				memberchk(baseline_selection_policy(BaselineSelectionPolicy), Options),
+				memberchk(decision_interval(DecisionInterval), Options).
 
 	test(cusum_diagnostic_2, deterministic(Diagnostics == Enumerated)) :-
 		learn_filtered_shift_sequences(Detector),

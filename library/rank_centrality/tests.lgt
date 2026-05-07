@@ -50,7 +50,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "rank_centrality" library.'
 	]).
 
@@ -70,12 +70,17 @@
 		rank_centrality::learn(singleton_pairwise, Ranker),
 		rank_centrality::scores(Ranker, Scores).
 
-	test(rank_centrality_singleton_diagnostics_2, deterministic((memberchk(convergence(converged), Diagnostics), memberchk(iterations(0), Diagnostics), memberchk(final_delta(0.0), Diagnostics), memberchk(maximum_degree(0), Diagnostics)))) :-
+	test(rank_centrality_singleton_diagnostics_2, deterministic([Convergence, Iterations, FinalDelta, MaximumDegree] == [converged, 0, 0.0, 0])) :-
 		rank_centrality::learn(singleton_pairwise, Ranker),
-		rank_centrality::diagnostics(Ranker, Diagnostics).
+		rank_centrality::diagnostics(Ranker, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics),
+		memberchk(maximum_degree(MaximumDegree), Diagnostics).
 
-	test(rank_centrality_learn_3_custom_options, deterministic(memberchk(options([maximum_iterations(50), tolerance(1.0e-9)]), Diagnostics))) :-
-		rank_centrality::learn(regular_head_to_head, rank_centrality_ranker(_Items, _Scores, Diagnostics), [maximum_iterations(50), tolerance(1.0e-9)]).
+	test(rank_centrality_learn_3_custom_options, deterministic(Options == [maximum_iterations(50), tolerance(1.0e-9)])) :-
+		rank_centrality::learn(regular_head_to_head, rank_centrality_ranker(_Items, _Scores, Diagnostics), [maximum_iterations(50), tolerance(1.0e-9)]),
+		memberchk(options(Options), Diagnostics).
 
 	test(rank_centrality_learn_3_unknown_option_error, error(domain_error(option, tie_policy(ignore_missing)))) :-
 		rank_centrality::learn(regular_head_to_head, _Ranker, [tie_policy(ignore_missing)]).
@@ -91,29 +96,44 @@
 		rank_centrality::learn(regular_head_to_head, Ranker),
 		rank_centrality::rank(Ranker, [gamma, delta, alpha], Ranking).
 
-	test(rank_centrality_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), memberchk(delta-Delta, Scores), Alpha > Beta, Beta > Gamma, Gamma > Delta, Sum is Alpha + Beta + Gamma + Delta, abs(Sum - 1.0) =< 1.0e-6))) :-
+	test(rank_centrality_scores_2, deterministic((Alpha > Beta, Beta > Gamma, Gamma > Delta, Sum is Alpha + Beta + Gamma + Delta, abs(Sum - 1.0) =< 1.0e-6))) :-
 		rank_centrality::learn(regular_head_to_head, Ranker),
-		rank_centrality::scores(Ranker, Scores).
+		rank_centrality::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores),
+		memberchk(delta-Delta, Scores).
 
-	test(rank_centrality_two_item_closed_form_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 0.75) =< 1.0e-6, abs(Beta - 0.25) =< 1.0e-6))) :-
+	test(rank_centrality_two_item_closed_form_scores_2, deterministic((abs(Alpha - 0.75) =< 1.0e-6, abs(Beta - 0.25) =< 1.0e-6))) :-
 		rank_centrality::learn(two_item_head_to_head, Ranker),
-		rank_centrality::scores(Ranker, Scores).
+		rank_centrality::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores).
 
-	test(rank_centrality_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6, abs(Gamma - (1.0/3.0)) =< 1.0e-6))) :-
+	test(rank_centrality_cyclic_pairwise_scores_2, deterministic((abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6, abs(Gamma - (1.0/3.0)) =< 1.0e-6))) :-
 		rank_centrality::learn(cyclic_pairwise, Ranker),
-		rank_centrality::scores(Ranker, Scores).
+		rank_centrality::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores).
 
 	test(rank_centrality_cyclic_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		rank_centrality::learn(cyclic_pairwise, Ranker),
 		rank_centrality::rank(Ranker, [gamma, alpha, beta], Ranking).
 
-	test(rank_centrality_asymmetric_pairwise_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - 0.7383177570) =< 1.0e-6, abs(Beta - 0.1214953271) =< 1.0e-6, abs(Gamma - 0.1401869159) =< 1.0e-6, Alpha > Gamma, Gamma > Beta))) :-
+	test(rank_centrality_asymmetric_pairwise_scores_2, deterministic((abs(Alpha - 0.7383177570) =< 1.0e-6, abs(Beta - 0.1214953271) =< 1.0e-6, abs(Gamma - 0.1401869159) =< 1.0e-6, Alpha > Gamma, Gamma > Beta))) :-
 		rank_centrality::learn(asymmetric_pairwise, Ranker),
-		rank_centrality::scores(Ranker, Scores).
+		rank_centrality::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores).
 
-	test(rank_centrality_diagnostics_2, deterministic((memberchk(model(rank_centrality), Diagnostics), memberchk(convergence(converged), Diagnostics), memberchk(maximum_degree(3), Diagnostics)))) :-
+	test(rank_centrality_diagnostics_2, deterministic([Model, Convergence, MaximumDegree] == [rank_centrality, converged, 3])) :-
 		rank_centrality::learn(regular_head_to_head, Ranker),
-		rank_centrality::diagnostics(Ranker, Diagnostics).
+		rank_centrality::diagnostics(Ranker, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(maximum_degree(MaximumDegree), Diagnostics).
 
 	test(rank_centrality_diagnostic_2_enumerates, deterministic(Enumerated == Diagnostics)) :-
 		rank_centrality::learn(regular_head_to_head, Ranker),
@@ -124,9 +144,13 @@
 		rank_centrality::learn(regular_head_to_head, Ranker),
 		rank_centrality::ranker_options(Ranker, Options).
 
-	test(rank_centrality_maximum_iterations_exhausted_diagnostics_2, deterministic((memberchk(convergence(maximum_iterations_exhausted), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_delta(FinalDelta), Diagnostics), FinalDelta > 0.0, memberchk(options([maximum_iterations(1), tolerance(1.0e-12)]), Diagnostics)))) :-
+	test(rank_centrality_maximum_iterations_exhausted_diagnostics_2, deterministic((FinalDelta > 0.0, Convergence == maximum_iterations_exhausted, Iterations == 1, Options == [maximum_iterations(1), tolerance(1.0e-12)]))) :-
 		rank_centrality::learn(asymmetric_pairwise, Ranker, [maximum_iterations(1), tolerance(1.0e-12)]),
-		rank_centrality::diagnostics(Ranker, Diagnostics).
+		rank_centrality::diagnostics(Ranker, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	test(rank_centrality_export_to_clauses_4, deterministic(ground(Clause))) :-
 		rank_centrality::learn(regular_head_to_head, Ranker),

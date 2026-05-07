@@ -64,8 +64,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "kmodes_clusterer" library.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -99,20 +103,39 @@
 		learn(shopping_profiles, Clusterer, [k(2), initialization(spread)]),
 		cluster(Clusterer, [channel-retail, region-south, loyalty-premium, device-desktop], Cluster).
 
-	test(kmodes_learn_3_custom_options, deterministic((memberchk(k(2), Options), memberchk(maximum_iterations(40), Options), memberchk(tolerance(0.0), Options), memberchk(initialization(first_k), Options)))) :-
-		learn(shopping_profiles, kmodes_clusterer(_Encoders, _Modes, Options, _Diagnostics), [k(2), maximum_iterations(40), tolerance(0.0), initialization(first_k)]).
+	test(kmodes_learn_3_custom_options, deterministic([K, MaximumIterations, Tolerance, Initialization] == [2, 40, 0.0, first_k])) :-
+		learn(shopping_profiles, kmodes_clusterer(_Encoders, _Modes, Options, _Diagnostics), [k(2), maximum_iterations(40), tolerance(0.0), initialization(first_k)]),
+		memberchk(k(K), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(initialization(Initialization), Options).
 
-	test(kmodes_diagnostics_2_rich_metadata, deterministic((memberchk(model(kmodes_clusterer), Diagnostics), memberchk(mode_count(2), Diagnostics), memberchk(training_example_count(6), Diagnostics), memberchk(convergence(_), Diagnostics), memberchk(iterations(Iterations), Diagnostics), Iterations >= 1, memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0, memberchk(options(Options), Diagnostics), memberchk(initialization(spread), Options)))) :-
+	test(kmodes_diagnostics_2_rich_metadata, deterministic((Iterations >= 1, FinalShift >= 0.0, [Model, ModeCount, TrainingExampleCount, Initialization] == [kmodes_clusterer, 2, 6, spread]))) :-
 		learn(shopping_profiles, Clusterer, [k(2), initialization(spread)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(mode_count(ModeCount), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		assertion(nonvar(Convergence)),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(initialization(Initialization), Options).
 
-	test(kmodes_learn_3_maximum_iterations_termination, deterministic((memberchk(convergence(maximum_iterations), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift > 0.0))) :-
+	test(kmodes_learn_3_maximum_iterations_termination, deterministic((FinalShift > 0.0, Convergence == maximum_iterations, Iterations == 1))) :-
 		learn(unstable_profiles, Clusterer, [k(1), maximum_iterations(1), tolerance(0.0), initialization(first_k)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics).
 
-	test(kmodes_learn_3_tolerance_termination, deterministic((memberchk(convergence(tolerance), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_shift(FinalShift), Diagnostics), FinalShift >= 0.0))) :-
+	test(kmodes_learn_3_tolerance_termination, deterministic((FinalShift >= 0.0, Convergence == tolerance, Iterations == 1))) :-
 		learn(shopping_profiles, Clusterer, [k(2), maximum_iterations(40), tolerance(1000.0), initialization(first_k)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_shift(FinalShift), Diagnostics).
 
 	test(kmodes_export_to_clauses_4, deterministic(Cluster == 1)) :-
 		learn(shopping_profiles, Clusterer, [k(2), initialization(spread)]),

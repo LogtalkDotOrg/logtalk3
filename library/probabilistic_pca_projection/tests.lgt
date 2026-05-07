@@ -99,7 +99,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "probabilistic_pca_projection" library.'
 	]).
 
@@ -122,7 +122,7 @@
 	test(probabilistic_pca_learn_2_structure, deterministic(functor(DimensionReducer, probabilistic_pca_reducer, 6))) :-
 		probabilistic_pca_projection::learn(correlated_plane, DimensionReducer).
 
-	test(probabilistic_pca_learn_3_custom_options, deterministic) :-
+	test(probabilistic_pca_learn_3_custom_options, deterministic([NComponents, FeatureScaling, ShortfallPolicy, MaximumIterations, Tolerance, Model] == [1, false, error, 200, 1.0e-7, probabilistic_pca_projection])) :-
 		probabilistic_pca_projection::learn(correlated_plane, probabilistic_pca_reducer(_Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false), shortfall_policy(error), maximum_iterations(200), tolerance(1.0e-7)]),
 		assertion(length(Components, 1)),
 		assertion(length(Loadings, 1)),
@@ -130,24 +130,26 @@
 		assertion(Variance > 0.0),
 		assertion(NoiseVariance >= 0.0),
 		memberchk(options(Options), Diagnostics),
-		assertion(memberchk(n_components(1), Options)),
-		assertion(memberchk(feature_scaling(false), Options)),
-		assertion(memberchk(shortfall_policy(error), Options)),
-		assertion(memberchk(maximum_iterations(200), Options)),
-		assertion(memberchk(tolerance(1.0e-7), Options)),
-		assertion(memberchk(model(probabilistic_pca_projection), Diagnostics)).
+		memberchk(n_components(NComponents), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(shortfall_policy(ShortfallPolicy), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(model(Model), Diagnostics).
 
 	test(probabilistic_pca_check_dimension_reducer_1, deterministic) :-
 		probabilistic_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		probabilistic_pca_projection::check_dimension_reducer(DimensionReducer).
 
-	test(probabilistic_pca_diagnostics_2, deterministic) :-
+	test(probabilistic_pca_diagnostics_2, deterministic([Model, ComponentCount] == [probabilistic_pca_projection, 1])) :-
 		probabilistic_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		probabilistic_pca_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(model(probabilistic_pca_projection), Diagnostics)),
-		assertion(memberchk(component_count(1), Diagnostics)),
-		assertion(memberchk(explained_variances([_]), Diagnostics)),
-		assertion(memberchk(noise_variance(_), Diagnostics)).
+		memberchk(model(Model), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics),
+		memberchk(explained_variances([ExplainedVariance]), Diagnostics),
+		memberchk(noise_variance(NoiseVariance), Diagnostics),
+		assertion(nonvar(ExplainedVariance)),
+		assertion(nonvar(NoiseVariance)).
 
 	test(probabilistic_pca_learn_2_component_count_exceeds_feature_count, error(domain_error(component_count, 4-3))) :-
 		probabilistic_pca_projection::learn(correlated_plane, _DimensionReducer, [n_components(4)]).
@@ -155,26 +157,24 @@
 	test(probabilistic_pca_learn_2_component_count_exceeds_centered_sample_rank, error(domain_error(component_count, 2-1))) :-
 		probabilistic_pca_projection::learn(two_example_probabilistic_pca_dataset, _DimensionReducer, [n_components(2)]).
 
-	test(probabilistic_pca_learn_2_one_attribute_noise_variance, deterministic) :-
+	test(probabilistic_pca_learn_2_one_attribute_noise_variance, deterministic(NoiseVarianceDiagnostic == 0.0)) :-
 		probabilistic_pca_projection::learn(one_attribute_probabilistic_pca_dataset, probabilistic_pca_reducer(_Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics), [n_components(1), feature_scaling(false)]),
 		assertion(length(Components, 1)),
 		assertion(length(Loadings, 1)),
 		ExplainedVariances = [Variance],
 		assertion(Variance > 0.0),
 		assertion(NoiseVariance =:= 0.0),
-		assertion(memberchk(noise_variance(0.0), Diagnostics)).
+		memberchk(noise_variance(NoiseVarianceDiagnostic), Diagnostics).
 
-	test(probabilistic_pca_learn_3_shortfall_policy_truncate, deterministic) :-
+	test(probabilistic_pca_learn_3_shortfall_policy_truncate, deterministic([ShortfallPolicy, RequestedComponentCount, LearnedComponentCount] == [truncate, 3, 2])) :-
 		probabilistic_pca_projection::learn(low_rank_rectangular, probabilistic_pca_reducer(_Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics), [n_components(3), feature_scaling(false), shortfall_policy(truncate)]),
 		assertion(length(Components, 2)),
 		assertion(length(Loadings, 2)),
 		assertion(length(ExplainedVariances, 2)),
 		assertion(NoiseVariance >= 0.0),
 		memberchk(options(Options), Diagnostics),
-		assertion(memberchk(shortfall_policy(truncate), Options)),
+		memberchk(shortfall_policy(ShortfallPolicy), Options),
 		memberchk(shortfall(truncated(RequestedComponentCount, LearnedComponentCount, ResidualEigenvalue, Tolerance)), Diagnostics),
-		assertion(RequestedComponentCount == 3),
-		assertion(LearnedComponentCount == 2),
 		assertion(ResidualEigenvalue >= 0.0),
 		assertion(Tolerance > 0.0).
 
@@ -188,8 +188,10 @@
 		probabilistic_pca_projection::learn(high_dimensional_measurements, DimensionReducer),
 		probabilistic_pca_projection::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance),
 		assertion(length(ReducedInstance, 2)),
-		assertion(memberchk(component_1-_, ReducedInstance)),
-		assertion(memberchk(component_2-_, ReducedInstance)).
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(probabilistic_pca_transform_3_monotonic_component, deterministic(Score1 < Score2)) :-
 		probabilistic_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
@@ -213,13 +215,15 @@
 		ExplainedVariances = [Variance],
 		assertion(Variance > 0.0).
 
-	test(probabilistic_pca_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
+	test(probabilistic_pca_transform_3_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),
 		probabilistic_pca_projection::learn(correlated_plane, DimensionReducer, [n_components(1)]),
 		probabilistic_pca_projection::export_to_file(correlated_plane, DimensionReducer, reducer, File),
 		logtalk_load(File),
 		{reducer(Reducer)},
-		probabilistic_pca_projection::transform(Reducer, [x-1.0, y-2.0, z-3.0], ReducedInstance).
+		probabilistic_pca_projection::transform(Reducer, [x-1.0, y-2.0, z-3.0], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		assertion(nonvar(Component1Score)).
 
 	test(probabilistic_pca_print_dimension_reducer_1, deterministic) :-
 		^^suppress_text_output,

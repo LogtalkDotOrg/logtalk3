@@ -89,7 +89,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "plackett_luce_ranker" library.'
 	]).
 
@@ -109,15 +109,22 @@
 		plackett_luce_ranker::learn(singleton_grouped, Ranker),
 		plackett_luce_ranker::scores(Ranker, Scores).
 
-	test(plackett_luce_singleton_diagnostics_2, deterministic((memberchk(convergence(converged), Diagnostics), memberchk(iterations(0), Diagnostics), memberchk(final_delta(0.0), Diagnostics)))) :-
+	test(plackett_luce_singleton_diagnostics_2, deterministic([Convergence, Iterations, FinalDelta] == [converged, 0, 0.0])) :-
 		plackett_luce_ranker::learn(singleton_grouped, Ranker),
-		plackett_luce_ranker::diagnostics(Ranker, Diagnostics).
+		plackett_luce_ranker::diagnostics(Ranker, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
 	test(plackett_luce_singleton_missing_relevance_error, error(existence_error(relevance, ballot_one-alpha))) :-
 		plackett_luce_ranker::learn(singleton_grouped_missing_relevance, _Ranker, [missing_relevance(error)]).
 
-	test(plackett_luce_learn_3_custom_options, deterministic((memberchk(options(Options), Diagnostics), memberchk(maximum_iterations(50), Options), memberchk(tolerance(1.0e-7), Options), memberchk(missing_relevance(error), Options)))) :-
-		plackett_luce_ranker::learn(ranked_ballots, plackett_luce_ranker(_Items, _Strengths, Diagnostics), [maximum_iterations(50), tolerance(1.0e-7), missing_relevance(error)]).
+	test(plackett_luce_learn_3_custom_options, deterministic([MaximumIterations, Tolerance, MissingRelevance] == [50, 1.0e-7, error])) :-
+		plackett_luce_ranker::learn(ranked_ballots, plackett_luce_ranker(_Items, _Strengths, Diagnostics), [maximum_iterations(50), tolerance(1.0e-7), missing_relevance(error)]),
+		memberchk(options(Options), Diagnostics),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(missing_relevance(MissingRelevance), Options).
 
 	test(plackett_luce_rank_3, deterministic(Best == beta)) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),
@@ -127,30 +134,46 @@
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),
 		plackett_luce_ranker::rank(Ranker, [gamma, beta], Ranking).
 
-	test(plackett_luce_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), Beta > Alpha, Beta > Gamma, Sum is Alpha + Beta + Gamma, abs(Sum - 1.0) =< 1.0e-6))) :-
+	test(plackett_luce_scores_2, deterministic((Beta > Alpha, Beta > Gamma, Sum is Alpha + Beta + Gamma, abs(Sum - 1.0) =< 1.0e-6))) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),
-		plackett_luce_ranker::scores(Ranker, Scores).
+		plackett_luce_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores).
 
-	test(plackett_luce_regular_tied_grouped_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6, abs(Gamma - (1.0/3.0)) =< 1.0e-6))) :-
+	test(plackett_luce_regular_tied_grouped_scores_2, deterministic((abs(Alpha - Beta) =< 1.0e-6, abs(Beta - Gamma) =< 1.0e-6, abs(Gamma - (1.0/3.0)) =< 1.0e-6))) :-
 		plackett_luce_ranker::learn(regular_tied_grouped, Ranker),
-		plackett_luce_ranker::scores(Ranker, Scores).
+		plackett_luce_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores).
 
-	test(plackett_luce_diagnostics_2, deterministic((memberchk(model(plackett_luce_ranker), Diagnostics), memberchk(convergence(converged), Diagnostics), memberchk(dataset_summary(Summary), Diagnostics), memberchk(groups(2), Summary)))) :-
+	test(plackett_luce_diagnostics_2, deterministic([Model, Convergence, Groups] == [plackett_luce_ranker, converged, 2])) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),
-		plackett_luce_ranker::diagnostics(Ranker, Diagnostics).
+		plackett_luce_ranker::diagnostics(Ranker, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(dataset_summary(Summary), Diagnostics),
+		memberchk(groups(Groups), Summary).
 
 	test(plackett_luce_diagnostic_2_enumerates, deterministic(Enumerated == Diagnostics)) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),
 		plackett_luce_ranker::diagnostics(Ranker, Diagnostics),
 		findall(Diagnostic, plackett_luce_ranker::diagnostic(Ranker, Diagnostic), Enumerated).
 
-	test(plackett_luce_ranker_options_2, deterministic((memberchk(maximum_iterations(5000), Options), memberchk(tolerance(1.0e-6), Options), memberchk(missing_relevance(zero), Options)))) :-
+	test(plackett_luce_ranker_options_2, deterministic([MaximumIterations, Tolerance, MissingRelevance] == [5000, 1.0e-6, zero])) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),
-		plackett_luce_ranker::ranker_options(Ranker, Options).
+		plackett_luce_ranker::ranker_options(Ranker, Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(missing_relevance(MissingRelevance), Options).
 
-	test(plackett_luce_maximum_iterations_exhausted_diagnostics_2, deterministic((memberchk(convergence(maximum_iterations_exhausted), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_delta(FinalDelta), Diagnostics), FinalDelta > 0.0))) :-
+	test(plackett_luce_maximum_iterations_exhausted_diagnostics_2, deterministic((FinalDelta > 0.0, Convergence == maximum_iterations_exhausted, Iterations == 1))) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker, [maximum_iterations(1), tolerance(1.0e-12)]),
-		plackett_luce_ranker::diagnostics(Ranker, Diagnostics).
+		plackett_luce_ranker::diagnostics(Ranker, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
 	test(plackett_luce_export_to_clauses_4, deterministic(ground(Clause))) :-
 		plackett_luce_ranker::learn(ranked_ballots, Ranker),

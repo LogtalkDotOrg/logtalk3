@@ -49,7 +49,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "ranked_pairs" library.'
 	]).
 
@@ -73,11 +73,13 @@
 		ranked_pairs::learn(singleton_pairwise, Ranker),
 		ranked_pairs::locked_pairs(Ranker, LockedPairs).
 
-	test(ranked_pairs_learn_3_custom_options, deterministic(memberchk(options([victory_strength(margins), tie_breaking(term_order)]), Diagnostics))) :-
-		ranked_pairs::learn(regular_head_to_head, ranked_pairs_ranker(_Items, _Scores, Diagnostics), [victory_strength(margins)]).
+	test(ranked_pairs_learn_3_custom_options, deterministic(Options == [victory_strength(margins), tie_breaking(term_order)])) :-
+		ranked_pairs::learn(regular_head_to_head, ranked_pairs_ranker(_Items, _Scores, Diagnostics), [victory_strength(margins)]),
+		memberchk(options(Options), Diagnostics).
 
-	test(ranked_pairs_learn_3_tie_breaking_option, deterministic(memberchk(options([tie_breaking(declaration_order), victory_strength(winning_votes)]), Diagnostics))) :-
-		ranked_pairs::learn(regular_head_to_head, ranked_pairs_ranker(_Items, _Scores, Diagnostics), [tie_breaking(declaration_order)]).
+	test(ranked_pairs_learn_3_tie_breaking_option, deterministic(Options == [tie_breaking(declaration_order), victory_strength(winning_votes)])) :-
+		ranked_pairs::learn(regular_head_to_head, ranked_pairs_ranker(_Items, _Scores, Diagnostics), [tie_breaking(declaration_order)]),
+		memberchk(options(Options), Diagnostics).
 
 	test(ranked_pairs_learn_3_unknown_option_error, error(domain_error(option, tie_policy(ignore_missing)))) :-
 		ranked_pairs::learn(regular_head_to_head, _Ranker, [tie_policy(ignore_missing)]).
@@ -96,17 +98,23 @@
 		ranked_pairs::learn(head_to_head, Ranker),
 		ranked_pairs::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(ranked_pairs_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-2, Scores), memberchk(beta-1, Scores), memberchk(gamma-0, Scores)))) :-
+	test(ranked_pairs_cyclic_pairwise_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [2, 1, 0])) :-
 		ranked_pairs::learn(cyclic_pairwise, Ranker),
-		ranked_pairs::scores(Ranker, Scores).
+		ranked_pairs::scores(Ranker, Scores),
+		memberchk(alpha-AlphaScore, Scores),
+		memberchk(beta-BetaScore, Scores),
+		memberchk(gamma-GammaScore, Scores).
 
 	test(ranked_pairs_cyclic_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		ranked_pairs::learn(cyclic_pairwise, Ranker),
 		ranked_pairs::rank(Ranker, [gamma, alpha, beta], Ranking).
 
-	test(ranked_pairs_strong_path_pairwise_scores_2, deterministic((memberchk(alpha-2, Scores), memberchk(beta-1, Scores), memberchk(gamma-0, Scores)))) :-
+	test(ranked_pairs_strong_path_pairwise_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [2, 1, 0])) :-
 		ranked_pairs::learn(strong_path_pairwise, Ranker),
-		ranked_pairs::scores(Ranker, Scores).
+		ranked_pairs::scores(Ranker, Scores),
+		memberchk(alpha-AlphaScore, Scores),
+		memberchk(beta-BetaScore, Scores),
+		memberchk(gamma-GammaScore, Scores).
 
 	test(ranked_pairs_strong_path_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		ranked_pairs::learn(strong_path_pairwise, Ranker),
@@ -138,9 +146,11 @@
 		ranked_pairs::learn(condorcet_divergence_pairwise, RankedPairsRanker),
 		ranked_pairs::rank(RankedPairsRanker, [gamma, beta, delta, alpha], RankedPairsRanking).
 
-	test(ranked_pairs_diagnostics_2, deterministic((memberchk(model(ranked_pairs), Diagnostics), memberchk(options([victory_strength(winning_votes), tie_breaking(term_order)]), Diagnostics)))) :-
+	test(ranked_pairs_diagnostics_2, deterministic([Model, Options] == [ranked_pairs, [victory_strength(winning_votes), tie_breaking(term_order)]])) :-
 		ranked_pairs::learn(regular_head_to_head, Ranker),
-		ranked_pairs::diagnostics(Ranker, Diagnostics).
+		ranked_pairs::diagnostics(Ranker, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	test(ranked_pairs_diagnostic_2, true) :-
 		ranked_pairs::learn(regular_head_to_head, Ranker),

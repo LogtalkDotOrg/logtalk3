@@ -37,8 +37,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "gaussian_mixture_clusterer" library.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -109,33 +113,59 @@
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
 		cluster(Clusterer, [x-_, y-1.0], _Cluster).
 
-	test(gaussian_mixture_learn_3_single_blob_k_1, deterministic((Cluster == 1, memberchk(components(1), Diagnostics), memberchk(convergence(tolerance), Diagnostics)))) :-
+	test(gaussian_mixture_learn_3_single_blob_k_1, deterministic((Cluster == 1, Components == 1, Convergence == tolerance))) :-
 		learn(single_blob, Clusterer, [k(1), feature_scaling(off)]),
 		cluster(Clusterer, [x-1.0, y-1.0], Cluster),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(components(Components), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics).
 
-	test(gaussian_mixture_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(initialization(first_k), Options), memberchk(feature_scaling(off), Options), memberchk(maximum_iterations(50), Options), memberchk(tolerance(0.0001), Options), memberchk(covariance_regularization(0.001), Options), memberchk(dead_component_policy(reseed), Options)))) :-
-		learn(iris_unlabeled, gaussian_mixture_clusterer(_Encoders, _Components, _Weights, Options, _Diagnostics), [k(3), initialization(first_k), feature_scaling(off), maximum_iterations(50), tolerance(0.0001), covariance_regularization(0.001), dead_component_policy(reseed)]).
+	test(gaussian_mixture_learn_3_custom_options, deterministic([K, Initialization, FeatureScaling, MaximumIterations, Tolerance, CovarianceRegularization, DeadComponentPolicy] == [3, first_k, off, 50, 0.0001, 0.001, reseed])) :-
+		learn(iris_unlabeled, gaussian_mixture_clusterer(_Encoders, _Components, _Weights, Options, _Diagnostics), [k(3), initialization(first_k), feature_scaling(off), maximum_iterations(50), tolerance(0.0001), covariance_regularization(0.001), dead_component_policy(reseed)]),
+		memberchk(k(K), Options),
+		memberchk(initialization(Initialization), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options),
+		memberchk(covariance_regularization(CovarianceRegularization), Options),
+		memberchk(dead_component_policy(DeadComponentPolicy), Options).
 
-	test(gaussian_mixture_diagnostics_2, deterministic((memberchk(model(gaussian_mixture_clusterer), Diagnostics), memberchk(training_examples(8), Diagnostics), memberchk(convergence(_), Diagnostics), memberchk(iterations(Iterations), Diagnostics), Iterations > 0, memberchk(average_log_likelihood(_), Diagnostics), memberchk(final_delta(_), Diagnostics), memberchk(options(Options), Diagnostics), memberchk(dead_component_policy(zero_weight), Options)))) :-
+	test(gaussian_mixture_diagnostics_2, deterministic((Iterations > 0, Model == gaussian_mixture_clusterer, TrainingExamples == 8, FeatureScaling == off, DeadComponentPolicy == zero_weight))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
 		diagnostics(Clusterer, Diagnostics),
-		clusterer_options(Clusterer, Options).
+		clusterer_options(Clusterer, Options),
+		memberchk(model(Model), Diagnostics),
+		memberchk(training_examples(TrainingExamples), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		assertion(nonvar(Convergence)),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(average_log_likelihood(AverageLogLikelihood), Diagnostics),
+		assertion(nonvar(AverageLogLikelihood)),
+		memberchk(final_delta(FinalDelta), Diagnostics),
+		assertion(nonvar(FinalDelta)),
+		memberchk(options(Options), Diagnostics),
+		memberchk(dead_component_policy(DeadComponentPolicy), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(gaussian_mixture_learn_3_dead_component_policy_reseed, deterministic(memberchk(dead_component_policy(reseed), Options))) :-
+		test(gaussian_mixture_learn_3_dead_component_policy_reseed, deterministic(DeadComponentPolicy == reseed)) :-
 		learn(imbalanced_three_modes, Clusterer, [k(4), initialization(first_k), feature_scaling(off), dead_component_policy(reseed)]),
-		clusterer_options(Clusterer, Options).
+		clusterer_options(Clusterer, Options),
+		memberchk(dead_component_policy(DeadComponentPolicy), Options).
 
-	test(gaussian_mixture_learn_3_dead_component_policy_runtime_difference, deterministic((memberchk(0.0, ZeroWeights), \+ member(0.0, ReseedWeights), ZeroWeights \== ReseedWeights, ZeroAssignments == ReseedAssignments, memberchk(dead_component_policy(zero_weight), ZeroOptions), memberchk(dead_component_policy(reseed), ReseedOptions)))) :-
+	test(gaussian_mixture_learn_3_dead_component_policy_runtime_difference, deterministic((ZeroWeights \== ReseedWeights, ZeroAssignments == ReseedAssignments, ZeroPolicy == zero_weight, ReseedPolicy == reseed))) :-
 		Options = [k(3), initialization(first_k), feature_scaling(off), maximum_iterations(50), covariance_regularization(1.0e-12)],
 		learn(dead_component_blobs, ZeroClusterer, [dead_component_policy(zero_weight)| Options]),
 		learn(dead_component_blobs, ReseedClusterer, [dead_component_policy(reseed)| Options]),
 		ZeroClusterer = gaussian_mixture_clusterer(_ZeroEncoders, _ZeroComponents, ZeroWeights, _ZeroEffectiveOptions, _ZeroDiagnostics),
 		ReseedClusterer = gaussian_mixture_clusterer(_ReseedEncoders, _ReseedComponents, ReseedWeights, _ReseedEffectiveOptions, _ReseedDiagnostics),
+		assertion(\+ (member(ReseedWeight, ReseedWeights), ReseedWeight == 0.0)),
 		training_assignments(dead_component_blobs, ZeroClusterer, ZeroAssignments),
 		training_assignments(dead_component_blobs, ReseedClusterer, ReseedAssignments),
 		clusterer_options(ZeroClusterer, ZeroOptions),
-		clusterer_options(ReseedClusterer, ReseedOptions).
+		clusterer_options(ReseedClusterer, ReseedOptions),
+		assertion((member(ZeroWeight, ZeroWeights), ZeroWeight == 0.0)),
+		memberchk(dead_component_policy(ZeroPolicy), ZeroOptions),
+		memberchk(dead_component_policy(ReseedPolicy), ReseedOptions).
 
 	test(gaussian_mixture_diagnostic_2_enumerates, deterministic(Enumerated == Diagnostics)) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
@@ -189,13 +219,19 @@
 	test(gaussian_mixture_learn_3_duplicate_points_oversized_k, error(domain_error(cluster_count(1, 6), 7))) :-
 		learn(duplicate_points, _Clusterer, [k(7), feature_scaling(off)]).
 
-	test(gaussian_mixture_learn_3_maximum_iterations_termination, deterministic((memberchk(convergence(maximum_iterations), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_delta(Delta), Diagnostics), Delta > 0.0))) :-
+	test(gaussian_mixture_learn_3_maximum_iterations_termination, deterministic((Delta > 0.0, Convergence == maximum_iterations, Iterations == 1))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off), maximum_iterations(1), tolerance(1.0e-9)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(Delta), Diagnostics).
 
-	test(gaussian_mixture_learn_3_tolerance_termination, deterministic((memberchk(convergence(tolerance), Diagnostics), memberchk(iterations(1), Diagnostics), memberchk(final_delta(Delta), Diagnostics), Delta > 0.0))) :-
+	test(gaussian_mixture_learn_3_tolerance_termination, deterministic((Delta > 0.0, Convergence == tolerance, Iterations == 1))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off), maximum_iterations(50), tolerance(1000.0)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(Delta), Diagnostics).
 
 	test(gaussian_mixture_learn_3_mixed_profiles, error(domain_error(continuous_attribute(channel), [online, retail]))) :-
 		learn(mixed_profiles, _Clusterer).

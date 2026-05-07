@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "dbscan_clusterer" library.'
 	]).
 
@@ -100,8 +100,13 @@
 		training_assignments(two_blobs, ManhattanClusterer, ManhattanAssignments),
 		same_partition(two_blobs, EuclideanAssignments, ManhattanAssignments).
 
-	test(dbscan_learn_3_custom_options, deterministic((memberchk(epsilon(1.0), Options), memberchk(minimum_points(2), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options), memberchk(pivot_scoring(exact), Options)))) :-
-		learn(two_blobs, dbscan_clusterer(_Encoders, _Clusters, _Noise, Options), [epsilon(1.0), minimum_points(2), distance_metric(manhattan), feature_scaling(off), pivot_scoring(exact)]).
+	test(dbscan_learn_3_custom_options, deterministic([Epsilon, MinimumPoints, DistanceMetric, FeatureScaling, PivotScoring] == [1.0, 2, manhattan, off, exact])) :-
+		learn(two_blobs, dbscan_clusterer(_Encoders, _Clusters, _Noise, Options), [epsilon(1.0), minimum_points(2), distance_metric(manhattan), feature_scaling(off), pivot_scoring(exact)]),
+		memberchk(epsilon(Epsilon), Options),
+		memberchk(minimum_points(MinimumPoints), Options),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(pivot_scoring(PivotScoring), Options).
 
 	test(dbscan_learn_3_pivot_scoring_parity_two_blobs, deterministic) :-
 		learn(two_blobs, ExactClusterer, [epsilon(0.6), minimum_points(2), feature_scaling(off), pivot_scoring(exact)]),

@@ -32,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "thurstone_mosteller_ranker" library.'
 	]).
 
@@ -61,9 +61,11 @@
 		thurstone_mosteller_ranker::learn(singleton_pairwise, Ranker),
 		thurstone_mosteller_ranker::scores(Ranker, Scores).
 
-	test(thurstone_mosteller_two_item_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 0.26220025635) =< 1.0e-6, abs(Beta + 0.26220025635) =< 1.0e-6))) :-
+	test(thurstone_mosteller_two_item_scores_2, deterministic((abs(Alpha - 0.26220025635) =< 1.0e-6, abs(Beta + 0.26220025635) =< 1.0e-6))) :-
 		thurstone_mosteller_ranker::learn(two_item_head_to_head, Ranker),
-		thurstone_mosteller_ranker::scores(Ranker, Scores).
+		thurstone_mosteller_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores).
 
 	test(thurstone_mosteller_rank_3, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		thurstone_mosteller_ranker::learn(regular_head_to_head, Ranker),
@@ -73,17 +75,24 @@
 		thurstone_mosteller_ranker::learn(head_to_head, Ranker),
 		thurstone_mosteller_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(thurstone_mosteller_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha) =< 1.0e-6, abs(Beta) =< 1.0e-6, abs(Gamma) =< 1.0e-6))) :-
+	test(thurstone_mosteller_cyclic_pairwise_scores_2, deterministic((abs(Alpha) =< 1.0e-6, abs(Beta) =< 1.0e-6, abs(Gamma) =< 1.0e-6))) :-
 		thurstone_mosteller_ranker::learn(cyclic_pairwise, Ranker),
-		thurstone_mosteller_ranker::scores(Ranker, Scores).
+		thurstone_mosteller_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores).
 
 	test(thurstone_mosteller_cyclic_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		thurstone_mosteller_ranker::learn(cyclic_pairwise, Ranker),
 		thurstone_mosteller_ranker::rank(Ranker, [gamma, alpha, beta], Ranking).
 
-	test(thurstone_mosteller_diagnostics_2, deterministic((memberchk(model(thurstone_mosteller_ranker), Diagnostics), memberchk(options([]), Diagnostics), memberchk(fit(weighted_least_squares), Diagnostics), memberchk(continuity_correction(0.5), Diagnostics)))) :-
+	test(thurstone_mosteller_diagnostics_2, deterministic([Model, Options, Fit, ContinuityCorrection] == [thurstone_mosteller_ranker, [], weighted_least_squares, 0.5])) :-
 		thurstone_mosteller_ranker::learn(regular_head_to_head, Ranker),
-		thurstone_mosteller_ranker::diagnostics(Ranker, Diagnostics).
+		thurstone_mosteller_ranker::diagnostics(Ranker, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(fit(Fit), Diagnostics),
+		memberchk(continuity_correction(ContinuityCorrection), Diagnostics).
 
 	test(thurstone_mosteller_diagnostic_2, true) :-
 		thurstone_mosteller_ranker::learn(regular_head_to_head, Ranker),

@@ -38,7 +38,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "kcenters_clusterer" library.'
 	]).
 
@@ -73,12 +73,23 @@
 		learn(two_blobs, Clusterer, [k(2), initialization(spread), feature_scaling(off)]),
 		cluster(Clusterer, [x-5.1, y-5.0], Cluster).
 
-	test(kcenters_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(initialization(first_k), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
-		learn(iris_unlabeled, kcenters_clusterer(_Encoders, _Centers, Options, _Diagnostics), [k(3), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]).
+	test(kcenters_learn_3_custom_options, deterministic([K, Initialization, DistanceMetric, FeatureScaling] == [3, first_k, manhattan, off])) :-
+		learn(iris_unlabeled, kcenters_clusterer(_Encoders, _Centers, Options, _Diagnostics), [k(3), initialization(first_k), distance_metric(manhattan), feature_scaling(off)]),
+		memberchk(k(K), Options),
+		memberchk(initialization(Initialization), Options),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(kcenters_diagnostics_2_rich_metadata, deterministic((memberchk(model(kcenters_clusterer), Diagnostics), memberchk(center_count(2), Diagnostics), memberchk(training_example_count(8), Diagnostics), memberchk(selection_strategy(deterministic_farthest_first), Diagnostics), memberchk(options(Options), Diagnostics), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
+	test(kcenters_diagnostics_2_rich_metadata, deterministic([Model, CenterCount, TrainingExampleCount, SelectionStrategy, DistanceMetric, FeatureScaling] == [kcenters_clusterer, 2, 8, deterministic_farthest_first, manhattan, off])) :-
 		learn(two_blobs, Clusterer, [k(2), initialization(spread), distance_metric(manhattan), feature_scaling(off)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(center_count(CenterCount), Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(selection_strategy(SelectionStrategy), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
 	test(kcenters_cluster_3_iris_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(iris_unlabeled, Clusterer, [k(3)]),

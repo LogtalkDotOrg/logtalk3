@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "eclat_pattern_miner" library.'
 	]).
 
@@ -53,24 +53,25 @@
 	test(eclat_mine_3_pattern_length_filters, deterministic(Patterns == [itemset([bread, milk], 4)])) :-
 		eclat_pattern_miner::mine(market_basket_basics, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), minimum_pattern_length(2), maximum_pattern_length(2)]).
 
-	test(eclat_mine_3_layered_baskets_pair, deterministic(memberchk(itemset([bread, diapers], 4), Patterns))) :-
-		eclat_pattern_miner::mine(layered_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]).
+		test(eclat_mine_3_layered_baskets_pair, deterministic(Support == 4)) :-
+		eclat_pattern_miner::mine(layered_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]),
+				memberchk(itemset([bread, diapers], Support), Patterns).
 
 	test(eclat_mine_3_non_monotone_transaction_ids, deterministic(Patterns == [itemset([bread], 5), itemset([butter], 4), itemset([milk], 5), itemset([bread, butter], 3), itemset([bread, milk], 4), itemset([butter, milk], 3)])) :-
 		eclat_pattern_miner::mine(non_monotone_id_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options)).
 
-	test(eclat_mine_3_deep_intersection_quadruple, deterministic(memberchk(itemset([alpha, beta, delta, gamma], 4), Patterns))) :-
-		eclat_pattern_miner::mine(deep_intersection_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4)]).
+		test(eclat_mine_3_deep_intersection_quadruple, deterministic(Support == 4)) :-
+		eclat_pattern_miner::mine(deep_intersection_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4)]),
+				memberchk(itemset([alpha, beta, delta, gamma], Support), Patterns).
 
 	test(eclat_mine_3_deep_intersection_maximum_length, deterministic(Patterns == [itemset([alpha, beta, delta, gamma], 4)])) :-
 		eclat_pattern_miner::mine(deep_intersection_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), minimum_pattern_length(4), maximum_pattern_length(4)]).
 
-	test(eclat_mine_3_dense_shared_prefix_quads, deterministic((
-		memberchk(itemset([alpha, beta, delta, epsilon], 5), Patterns),
-		memberchk(itemset([alpha, beta, delta, gamma], 5), Patterns),
-		memberchk(itemset([alpha, beta, epsilon, gamma], 5), Patterns)
-	))) :-
-		eclat_pattern_miner::mine(dense_shared_prefix_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(5)]).
+	test(eclat_mine_3_dense_shared_prefix_quads, deterministic([Support1, Support2, Support3] == [5, 5, 5])) :-
+		eclat_pattern_miner::mine(dense_shared_prefix_baskets, eclat_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(5)]),
+		memberchk(itemset([alpha, beta, delta, epsilon], Support1), Patterns),
+		memberchk(itemset([alpha, beta, delta, gamma], Support2), Patterns),
+		memberchk(itemset([alpha, beta, epsilon, gamma], Support3), Patterns).
 
 	test(eclat_matches_apriori, deterministic(EclatPatterns == AprioriPatterns)) :-
 		eclat_pattern_miner::mine(market_basket_basics, eclat_pattern_miner(_ItemDomain, EclatPatterns, _Options), [minimum_support_count(3)]),
@@ -90,9 +91,12 @@
 		eclat_pattern_miner::mine(layered_baskets, eclat_pattern_miner(_ItemDomain, EclatPatterns, _Options), [minimum_support_count(3)]),
 		fp_growth_pattern_miner::mine(layered_baskets, fp_growth_pattern_miner(_FPGrowthDomain, FPGrowthPatterns, _FPGrowthOptions), [minimum_support_count(3)]).
 
-	test(eclat_diagnostics_2, deterministic((memberchk(model(eclat_pattern_miner), Diagnostics), memberchk(extension_operator(tidset_intersection), Diagnostics), memberchk(support_layout(vertical_tidsets), Diagnostics)))) :-
+		test(eclat_diagnostics_2, deterministic([Model, ExtensionOperator, SupportLayout] == [eclat_pattern_miner, tidset_intersection, vertical_tidsets])) :-
 		eclat_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
-		eclat_pattern_miner::diagnostics(PatternMiner, Diagnostics).
+		eclat_pattern_miner::diagnostics(PatternMiner, Diagnostics),
+				memberchk(model(Model), Diagnostics),
+				memberchk(extension_operator(ExtensionOperator), Diagnostics),
+				memberchk(support_layout(SupportLayout), Diagnostics).
 
 	test(eclat_valid_pattern_miner_1, deterministic) :-
 		eclat_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
@@ -106,12 +110,13 @@
 		eclat_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
 		eclat_pattern_miner::export_to_clauses(market_basket_basics, PatternMiner, mined_patterns, [Clause]).
 
-	test(eclat_export_to_file_4, deterministic(memberchk(itemset([bread, milk], 4), Patterns))) :-
+		test(eclat_export_to_file_4, deterministic(Support == 4)) :-
 		^^file_path('test_output.pl', File),
 		eclat_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
 		eclat_pattern_miner::export_to_file(market_basket_basics, PatternMiner, eclat_exported_patterns, File),
 		logtalk_load(File),
-		{eclat_exported_patterns(_ItemDomain, Patterns, _Options)}.
+		{eclat_exported_patterns(_ItemDomain, Patterns, _Options)},
+				memberchk(itemset([bread, milk], Support), Patterns).
 
 	test(eclat_print_pattern_miner_1, deterministic) :-
 		^^suppress_text_output,

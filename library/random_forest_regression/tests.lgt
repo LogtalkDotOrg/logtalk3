@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "random_forest_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2
+		length/2, memberchk/2
 	]).
 
 	cover(random_forest_regression).
@@ -55,28 +55,39 @@
 	test(random_forest_regression_learn_2_structure, deterministic(functor(Regressor, rf_regressor, 2))) :-
 		random_forest_regression::learn(step_signal, Regressor).
 
-	test(random_forest_regression_learn_3_custom_num_trees, deterministic((length(Trees, 5), member(number_of_trees(5), Options), member(maximum_depth(4), Options), member(minimum_samples_leaf(2), Options), member(feature_scaling(true), Options), member(random_seed(17), Options)))) :-
+	test(random_forest_regression_learn_3_custom_num_trees, deterministic((length(Trees, 5), [NumberOfTrees, MaximumDepth, MinimumSamplesLeaf, FeatureScaling, RandomSeed] == [5, 4, 2, true, 17]))) :-
 		random_forest_regression::learn(step_signal, Regressor, [number_of_trees(5), maximum_depth(4), minimum_samples_leaf(2), feature_scaling(true), random_seed(17)]),
 		Regressor = rf_regressor(Trees, _Diagnostics),
-		random_forest_regression::regressor_options(Regressor, Options).
+		random_forest_regression::regressor_options(Regressor, Options),
+		memberchk(number_of_trees(NumberOfTrees), Options),
+		memberchk(maximum_depth(MaximumDepth), Options),
+		memberchk(minimum_samples_leaf(MinimumSamplesLeaf), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(random_seed(RandomSeed), Options).
 
 	test(random_forest_regression_learn_3_same_seed_same_regressor, deterministic(Regressor1 == Regressor2)) :-
 		random_forest_regression::learn(step_signal, Regressor1, [number_of_trees(5), random_seed(19)]),
 		random_forest_regression::learn(step_signal, Regressor2, [number_of_trees(5), random_seed(19)]).
 
-	test(random_forest_regression_trees_respect_max_features, deterministic(member(maximum_features_per_split(2), TreeOptions))) :-
+	test(random_forest_regression_trees_respect_max_features, deterministic(MaximumFeaturesPerSplit == 2)) :-
 		random_forest_regression::learn(mixed_signal, rf_regressor(Trees, _Diagnostics), [number_of_trees(4), maximum_features_per_split(2)]),
 		memberchk(tree(TreeRegressor), Trees),
-		regression_tree::regressor_options(TreeRegressor, TreeOptions).
+		regression_tree::regressor_options(TreeRegressor, TreeOptions),
+		memberchk(maximum_features_per_split(MaximumFeaturesPerSplit), TreeOptions).
 
-	test(random_forest_regression_trees_accept_all_features_per_split, deterministic(member(maximum_features_per_split(all), TreeOptions))) :-
+	test(random_forest_regression_trees_accept_all_features_per_split, deterministic(MaximumFeaturesPerSplit == all)) :-
 		random_forest_regression::learn(mixed_signal, rf_regressor(Trees, _Diagnostics), [number_of_trees(2), maximum_features_per_split(all)]),
 		memberchk(tree(TreeRegressor), Trees),
-		regression_tree::regressor_options(TreeRegressor, TreeOptions).
+		regression_tree::regressor_options(TreeRegressor, TreeOptions),
+		memberchk(maximum_features_per_split(MaximumFeaturesPerSplit), TreeOptions).
 
-	test(random_forest_regression_diagnostics_2, deterministic((member(model(random_forest_regression), Diagnostics), member(tree_count(3), Diagnostics), member(options(Options), Diagnostics), member(number_of_trees(3), Options)))) :-
+	test(random_forest_regression_diagnostics_2, deterministic([Model, TreeCount, NumberOfTrees] == [random_forest_regression, 3, 3])) :-
 		random_forest_regression::learn(intercept_only, Regressor, [number_of_trees(3)]),
-		random_forest_regression::diagnostics(Regressor, Diagnostics).
+		random_forest_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(tree_count(TreeCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(number_of_trees(NumberOfTrees), Options).
 
 	test(random_forest_regression_predict_3_intercept_only, deterministic(Prediction =~= 7.0)) :-
 		random_forest_regression::learn(intercept_only, Regressor, [number_of_trees(5)]),

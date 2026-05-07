@@ -33,7 +33,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "colley_ranker" library.'
 	]).
 
@@ -59,9 +59,11 @@
 		colley_ranker::learn(singleton_pairwise, Ranker),
 		colley_ranker::scores(Ranker, Scores).
 
-	test(colley_two_item_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), abs(Alpha - 0.6) =< 1.0e-6, abs(Beta - 0.4) =< 1.0e-6))) :-
+	test(colley_two_item_scores_2, deterministic((abs(Alpha - 0.6) =< 1.0e-6, abs(Beta - 0.4) =< 1.0e-6))) :-
 		colley_ranker::learn(two_item_head_to_head, Ranker),
-		colley_ranker::scores(Ranker, Scores).
+		colley_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores).
 
 	test(colley_rank_3, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		colley_ranker::learn(regular_head_to_head, Ranker),
@@ -71,13 +73,18 @@
 		colley_ranker::learn(head_to_head, Ranker),
 		colley_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(colley_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-Alpha, Scores), memberchk(beta-Beta, Scores), memberchk(gamma-Gamma, Scores), abs(Alpha - 0.5) =< 1.0e-6, abs(Beta - 0.5) =< 1.0e-6, abs(Gamma - 0.5) =< 1.0e-6))) :-
+	test(colley_cyclic_pairwise_scores_2, deterministic((abs(Alpha - 0.5) =< 1.0e-6, abs(Beta - 0.5) =< 1.0e-6, abs(Gamma - 0.5) =< 1.0e-6))) :-
 		colley_ranker::learn(cyclic_pairwise, Ranker),
-		colley_ranker::scores(Ranker, Scores).
+		colley_ranker::scores(Ranker, Scores),
+		memberchk(alpha-Alpha, Scores),
+		memberchk(beta-Beta, Scores),
+		memberchk(gamma-Gamma, Scores).
 
-	test(colley_diagnostics_2, deterministic((memberchk(model(colley_ranker), Diagnostics), memberchk(options([]), Diagnostics)))) :-
+		test(colley_diagnostics_2, deterministic([Model, Options] == [colley_ranker, []])) :-
 		colley_ranker::learn(regular_head_to_head, Ranker),
-		colley_ranker::diagnostics(Ranker, Diagnostics).
+		colley_ranker::diagnostics(Ranker, Diagnostics),
+				memberchk(model(Model), Diagnostics),
+				memberchk(options(Options), Diagnostics).
 
 	test(colley_diagnostic_2, true) :-
 		colley_ranker::learn(regular_head_to_head, Ranker),

@@ -47,7 +47,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "kemeny_young_ranker" library.'
 	]).
 
@@ -75,8 +75,9 @@
 		kemeny_young_ranker::learn(singleton_pairwise, Ranker),
 		kemeny_young_ranker::consensus_score(Ranker, ConsensusScore).
 
-	test(kemeny_young_learn_3_custom_options, deterministic(memberchk(options([tie_breaking(declaration_order)]), Diagnostics))) :-
-		kemeny_young_ranker::learn(regular_head_to_head, kemeny_young_ranker(_Items, _Scores, Diagnostics), [tie_breaking(declaration_order)]).
+	test(kemeny_young_learn_3_custom_options, deterministic(Options == [tie_breaking(declaration_order)])) :-
+		kemeny_young_ranker::learn(regular_head_to_head, kemeny_young_ranker(_Items, _Scores, Diagnostics), [tie_breaking(declaration_order)]),
+		memberchk(options(Options), Diagnostics).
 
 	test(kemeny_young_learn_3_unknown_option_error, error(domain_error(option, tie_policy(ignore_missing)))) :-
 		kemeny_young_ranker::learn(regular_head_to_head, _Ranker, [tie_policy(ignore_missing)]).
@@ -91,9 +92,13 @@
 		kemeny_young_ranker::learn(regular_head_to_head, Ranker),
 		kemeny_young_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(kemeny_young_regular_head_to_head_scores_2, deterministic((memberchk(alpha-3, Scores), memberchk(beta-2, Scores), memberchk(gamma-1, Scores), memberchk(delta-0, Scores)))) :-
+	test(kemeny_young_regular_head_to_head_scores_2, deterministic([AlphaScore, BetaScore, GammaScore, DeltaScore] == [3, 2, 1, 0])) :-
 		kemeny_young_ranker::learn(regular_head_to_head, Ranker),
-		kemeny_young_ranker::scores(Ranker, Scores).
+		kemeny_young_ranker::scores(Ranker, Scores),
+		memberchk(alpha-AlphaScore, Scores),
+		memberchk(beta-BetaScore, Scores),
+		memberchk(gamma-GammaScore, Scores),
+		memberchk(delta-DeltaScore, Scores).
 
 	test(kemeny_young_head_to_head_rank_3, deterministic(Ranking == [alpha, beta, gamma, delta])) :-
 		kemeny_young_ranker::learn(head_to_head, Ranker),
@@ -127,9 +132,13 @@
 		kemeny_young_ranker::learn(declaration_tie_pairwise, Ranker, [tie_breaking(declaration_order)]),
 		kemeny_young_ranker::consensus_ranking(Ranker, ConsensusRanking).
 
-	test(kemeny_young_diagnostics_2, deterministic((memberchk(model(kemeny_young_ranker), Diagnostics), memberchk(options([tie_breaking(term_order)]), Diagnostics), memberchk(consensus_ranking([alpha, beta, gamma, delta]), Diagnostics), memberchk(consensus_score(35), Diagnostics)))) :-
+	test(kemeny_young_diagnostics_2, deterministic([Model, Options, ConsensusRanking, ConsensusScore] == [kemeny_young_ranker, [tie_breaking(term_order)], [alpha, beta, gamma, delta], 35])) :-
 		kemeny_young_ranker::learn(regular_head_to_head, Ranker),
-		kemeny_young_ranker::diagnostics(Ranker, Diagnostics).
+		kemeny_young_ranker::diagnostics(Ranker, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(consensus_ranking(ConsensusRanking), Diagnostics),
+		memberchk(consensus_score(ConsensusScore), Diagnostics).
 
 	test(kemeny_young_diagnostic_2, true) :-
 		kemeny_young_ranker::learn(regular_head_to_head, Ranker),

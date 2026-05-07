@@ -86,7 +86,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "nmf_projection" library.'
 	]).
 
@@ -109,16 +109,16 @@
 	test(nmf_learn_2_structure, deterministic(functor(DimensionReducer, nmf_reducer, 3))) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer).
 
-	test(nmf_learn_3_custom_options, deterministic) :-
+	test(nmf_learn_3_custom_options, deterministic([NComponents, Center, FeatureScaling, Model] == [1, false, true, nmf_projection])) :-
 		nmf_projection::learn(parts_based_measurements, nmf_reducer(_Encoders, Components, Diagnostics), [n_components(1), center(false), feature_scaling(true), maximum_iterations(250), tolerance(1.0e-7)]),
 		assertion(ground(Components)),
 		assertion(length(Components, 1)),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(n_components(1), Options)),
-		assertion(memberchk(center(false), Options)),
-		assertion(memberchk(feature_scaling(true), Options)),
-		assertion(memberchk(model(nmf_projection), Diagnostics)).
+		memberchk(n_components(NComponents), Options),
+		memberchk(center(Center), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(model(Model), Diagnostics).
 
 	test(nmf_check_dimension_reducer_1, deterministic) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2)]),
@@ -128,12 +128,13 @@
 		nmf_projection::learn(parts_based_measurements, nmf_reducer(Encoders, [_Component| Components], Diagnostics), [n_components(2)]),
 		nmf_projection::valid_dimension_reducer(nmf_reducer(Encoders, [[-1.0, 0.0, 0.0, 0.0]| Components], Diagnostics)).
 
-	test(nmf_diagnostics_2, deterministic) :-
+	test(nmf_diagnostics_2, deterministic([Model, ComponentCount] == [nmf_projection, 2])) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2)]),
 		nmf_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(model(nmf_projection), Diagnostics)),
-		assertion(memberchk(component_count(2), Diagnostics)),
-		assertion(memberchk(convergence(_), Diagnostics)),
+		memberchk(model(Model), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		assertion(nonvar(Convergence)),
 		memberchk(iterations(Iterations), Diagnostics),
 		assertion(ground(Iterations)),
 		assertion(Iterations >= 1),
@@ -142,48 +143,50 @@
 		memberchk(reconstruction_error(ReconstructionError), Diagnostics),
 		assertion(ReconstructionError >= 0.0).
 
-	test(nmf_diagnostics_2_maximum_iterations, deterministic) :-
+	test(nmf_diagnostics_2_maximum_iterations, deterministic([Convergence, Iterations, MaximumIterations, Tolerance] == [maximum_iterations_exhausted, 1, 1, 1.0e-12])) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2), maximum_iterations(1), tolerance(1.0e-12)]),
 		nmf_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(convergence(maximum_iterations_exhausted), Diagnostics)),
-		assertion(memberchk(iterations(1), Diagnostics)),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
 		memberchk(final_delta(FinalDelta), Diagnostics),
 		assertion(FinalDelta > 0.0),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(maximum_iterations(1), Options)),
-		assertion(memberchk(tolerance(1.0e-12), Options)).
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options).
 
-	test(nmf_diagnostics_2_tolerance_convergence, deterministic) :-
+	test(nmf_diagnostics_2_tolerance_convergence, deterministic([Convergence, Iterations, MaximumIterations, Tolerance] == [tolerance, 1, 25, 10.0])) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2), maximum_iterations(25), tolerance(10.0)]),
 		nmf_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(convergence(tolerance), Diagnostics)),
-		assertion(memberchk(iterations(1), Diagnostics)),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
 		memberchk(final_delta(FinalDelta), Diagnostics),
 		assertion(FinalDelta =< 10.0),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(maximum_iterations(25), Options)),
-		assertion(memberchk(tolerance(10.0), Options)).
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options).
 
-	test(nmf_diagnostics_2_respects_training_iterations, deterministic) :-
+	test(nmf_diagnostics_2_respects_training_iterations, deterministic([Convergence, Iterations, MaximumIterations, Tolerance] == [maximum_iterations_exhausted, 2, 2, 1.0e-30])) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2), maximum_iterations(2), tolerance(1.0e-30)]),
 		nmf_projection::diagnostics(DimensionReducer, Diagnostics),
-		assertion(memberchk(convergence(maximum_iterations_exhausted), Diagnostics)),
-		assertion(memberchk(iterations(2), Diagnostics)),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
 		memberchk(final_delta(FinalDelta), Diagnostics),
 		assertion(FinalDelta > 0.0),
 		memberchk(options(Options), Diagnostics),
 		assertion(ground(Options)),
-		assertion(memberchk(maximum_iterations(2), Options)),
-		assertion(memberchk(tolerance(1.0e-30), Options)).
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options).
 
 	test(nmf_transform_3_component_names, deterministic) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2)]),
 		nmf_projection::transform(DimensionReducer, [f1-3.0, f2-0.0, f3-1.5, f4-0.0], ReducedInstance),
 		assertion(length(ReducedInstance, 2)),
-		assertion(memberchk(component_1-_, ReducedInstance)),
-		assertion(memberchk(component_2-_, ReducedInstance)).
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(nmf_transform_3_distinguishes_parts, deterministic) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2)]),
@@ -192,10 +195,10 @@
 		assertion(FirstA > SecondA),
 		assertion(FirstB < SecondB).
 
-	test(nmf_learn_2_singleton_dataset, deterministic) :-
+	test(nmf_learn_2_singleton_dataset, deterministic([Model, ComponentCount] == [nmf_projection, 1])) :-
 		nmf_projection::learn(singleton_measurement, nmf_reducer(_Encoders, _Components, Diagnostics), [n_components(1)]),
-		assertion(memberchk(model(nmf_projection), Diagnostics)),
-		assertion(memberchk(component_count(1), Diagnostics)).
+		memberchk(model(Model), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics).
 
 	test(nmf_export_to_clauses_4, deterministic(Clause == reduced(DimensionReducer))) :-
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2)]),
@@ -211,13 +214,15 @@
 		assertion(ground(Components)),
 		assertion(length(Components, 2)).
 
-	test(nmf_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
+	test(nmf_transform_3_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),
 		nmf_projection::learn(parts_based_measurements, DimensionReducer, [n_components(2)]),
 		nmf_projection::export_to_file(parts_based_measurements, DimensionReducer, reducer, File),
 		logtalk_load(File),
 		{reducer(Reducer)},
-		nmf_projection::transform(Reducer, [f1-3.0, f2-0.0, f3-1.5, f4-0.0], ReducedInstance).
+		nmf_projection::transform(Reducer, [f1-3.0, f2-0.0, f3-1.5, f4-0.0], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		assertion(nonvar(Component1Score)).
 
 	test(nmf_transform_3_feature_scaling_true_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),

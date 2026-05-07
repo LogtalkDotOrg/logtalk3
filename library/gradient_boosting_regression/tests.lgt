@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-02,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "gradient_boosting_regression" library.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, memberchk/2
 	]).
 
 	cover(gradient_boosting_regression).
@@ -58,14 +58,23 @@
 	test(gradient_boosting_regression_learn_2_structure, deterministic(functor(Regressor, gradient_boosting_regressor, 3))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor).
 
-	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, member(number_of_estimators(5), Options), member(learning_rate(1.0), Options), member(maximum_depth(3), Options), member(minimum_samples_leaf(2), Options), member(feature_scaling(false), Options)))) :-
+	test(gradient_boosting_regression_learn_3_custom_options, deterministic((length(WeightedTrees, StageCount), StageCount >= 1, StageCount =< 5, [NumberOfEstimators, LearningRate, MaximumDepth, MinimumSamplesLeaf, FeatureScaling] == [5, 1.0, 3, 2, false]))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(3), minimum_samples_leaf(2), feature_scaling(false)]),
 		Regressor = gradient_boosting_regressor(_InitialPrediction, WeightedTrees, _Diagnostics),
-		gradient_boosting_regression::regressor_options(Regressor, Options).
+		gradient_boosting_regression::regressor_options(Regressor, Options),
+		memberchk(number_of_estimators(NumberOfEstimators), Options),
+		memberchk(learning_rate(LearningRate), Options),
+		memberchk(maximum_depth(MaximumDepth), Options),
+		memberchk(minimum_samples_leaf(MinimumSamplesLeaf), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
-	test(gradient_boosting_regression_diagnostics_2, deterministic((member(model(gradient_boosting_regression), Diagnostics), member(stage_count(StageCount), Diagnostics), StageCount >= 1, member(options(Options), Diagnostics), member(number_of_estimators(5), Options)))) :-
+	test(gradient_boosting_regression_diagnostics_2, deterministic((StageCount >= 1, Model == gradient_boosting_regression, NumberOfEstimators == 5))) :-
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),
-		gradient_boosting_regression::diagnostics(Regressor, Diagnostics).
+		gradient_boosting_regression::diagnostics(Regressor, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(stage_count(StageCount), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(number_of_estimators(NumberOfEstimators), Options).
 
 	test(gradient_boosting_regression_predict_3_step_signal_left_band, deterministic(Prediction =~= 10.0)) :-
 		gradient_boosting_regression::learn(step_signal, Regressor, [number_of_estimators(5), learning_rate(1.0), maximum_depth(2)]),

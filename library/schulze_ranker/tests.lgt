@@ -49,7 +49,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "schulze_ranker" library.'
 	]).
 
@@ -73,8 +73,9 @@
 		schulze_ranker::learn(singleton_pairwise, Ranker),
 		schulze_ranker::strongest_paths(Ranker, StrongestPaths).
 
-	test(schulze_learn_3_custom_options, deterministic(memberchk(options([victory_strength(margins)]), Diagnostics))) :-
-		schulze_ranker::learn(regular_head_to_head, schulze_ranker(_Items, _Scores, Diagnostics), [victory_strength(margins)]).
+	test(schulze_learn_3_custom_options, deterministic(Options == [victory_strength(margins)])) :-
+		schulze_ranker::learn(regular_head_to_head, schulze_ranker(_Items, _Scores, Diagnostics), [victory_strength(margins)]),
+		memberchk(options(Options), Diagnostics).
 
 	test(schulze_learn_3_unknown_option_error, error(domain_error(option, tie_policy(ignore_missing)))) :-
 		schulze_ranker::learn(regular_head_to_head, _Ranker, [tie_policy(ignore_missing)]).
@@ -90,29 +91,43 @@
 		schulze_ranker::learn(head_to_head, Ranker),
 		schulze_ranker::rank(Ranker, [alpha, beta, gamma, delta], Ranking).
 
-	test(schulze_cyclic_pairwise_scores_2, deterministic((memberchk(alpha-0, Scores), memberchk(beta-0, Scores), memberchk(gamma-0, Scores)))) :-
+	test(schulze_cyclic_pairwise_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [0, 0, 0])) :-
 		schulze_ranker::learn(cyclic_pairwise, Ranker),
-		schulze_ranker::scores(Ranker, Scores).
+		schulze_ranker::scores(Ranker, Scores),
+		memberchk(alpha-AlphaScore, Scores),
+		memberchk(beta-BetaScore, Scores),
+		memberchk(gamma-GammaScore, Scores).
 
 	test(schulze_cyclic_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		schulze_ranker::learn(cyclic_pairwise, Ranker),
 		schulze_ranker::rank(Ranker, [gamma, alpha, beta], Ranking).
 
-	test(schulze_strong_path_pairwise_scores_2, deterministic((memberchk(alpha-2, Scores), memberchk(beta-1, Scores), memberchk(gamma-0, Scores)))) :-
+	test(schulze_strong_path_pairwise_scores_2, deterministic([AlphaScore, BetaScore, GammaScore] == [2, 1, 0])) :-
 		schulze_ranker::learn(strong_path_pairwise, Ranker),
-		schulze_ranker::scores(Ranker, Scores).
+		schulze_ranker::scores(Ranker, Scores),
+		memberchk(alpha-AlphaScore, Scores),
+		memberchk(beta-BetaScore, Scores),
+		memberchk(gamma-GammaScore, Scores).
 
 	test(schulze_strong_path_pairwise_rank_3, deterministic(Ranking == [alpha, beta, gamma])) :-
 		schulze_ranker::learn(strong_path_pairwise, Ranker),
 		schulze_ranker::rank(Ranker, [gamma, alpha, beta], Ranking).
 
-	test(schulze_strongest_paths_2, deterministic((memberchk(path(alpha, beta, 10), StrongestPaths), memberchk(path(alpha, gamma, 10), StrongestPaths), memberchk(path(beta, alpha, 6), StrongestPaths), memberchk(path(beta, gamma, 10), StrongestPaths), memberchk(path(gamma, alpha, 6), StrongestPaths), memberchk(path(gamma, beta, 6), StrongestPaths)))) :-
+	test(schulze_strongest_paths_2, deterministic([AlphaBetaStrength, AlphaGammaStrength, BetaAlphaStrength, BetaGammaStrength, GammaAlphaStrength, GammaBetaStrength] == [10, 10, 6, 10, 6, 6])) :-
 		schulze_ranker::learn(strong_path_pairwise, Ranker),
-		schulze_ranker::strongest_paths(Ranker, StrongestPaths).
+		schulze_ranker::strongest_paths(Ranker, StrongestPaths),
+		memberchk(path(alpha, beta, AlphaBetaStrength), StrongestPaths),
+		memberchk(path(alpha, gamma, AlphaGammaStrength), StrongestPaths),
+		memberchk(path(beta, alpha, BetaAlphaStrength), StrongestPaths),
+		memberchk(path(beta, gamma, BetaGammaStrength), StrongestPaths),
+		memberchk(path(gamma, alpha, GammaAlphaStrength), StrongestPaths),
+		memberchk(path(gamma, beta, GammaBetaStrength), StrongestPaths).
 
-	test(schulze_diagnostics_2, deterministic((memberchk(model(schulze_ranker), Diagnostics), memberchk(options([victory_strength(winning_votes)]), Diagnostics)))) :-
+	test(schulze_diagnostics_2, deterministic([Model, Options] == [schulze_ranker, [victory_strength(winning_votes)]])) :-
 		schulze_ranker::learn(regular_head_to_head, Ranker),
-		schulze_ranker::diagnostics(Ranker, Diagnostics).
+		schulze_ranker::diagnostics(Ranker, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(options(Options), Diagnostics).
 
 	test(schulze_diagnostic_2, true) :-
 		schulze_ranker::learn(regular_head_to_head, Ranker),

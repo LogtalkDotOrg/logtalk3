@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "fp_growth_pattern_miner" library.'
 	]).
 
@@ -53,24 +53,28 @@
 	test(fp_growth_mine_3_pattern_length_filters, deterministic(Patterns == [itemset([bread, milk], 4)])) :-
 		fp_growth_pattern_miner::mine(market_basket_basics, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), minimum_pattern_length(2), maximum_pattern_length(2)]).
 
-	test(fp_growth_mine_3_layered_baskets_pair, deterministic(memberchk(itemset([bread, diapers], 4), Patterns))) :-
-		fp_growth_pattern_miner::mine(layered_baskets, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]).
+	test(fp_growth_mine_3_layered_baskets_pair, deterministic(Support == 4)) :-
+		fp_growth_pattern_miner::mine(layered_baskets, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(3), maximum_pattern_length(2)]),
+		memberchk(itemset([bread, diapers], Support), Patterns).
 
-	test(fp_growth_mine_3_dense_shared_prefix_quads, deterministic((
-		memberchk(itemset([alpha, beta, delta, epsilon], 5), Patterns),
-		memberchk(itemset([alpha, beta, delta, gamma], 5), Patterns),
-		memberchk(itemset([alpha, beta, epsilon, gamma], 5), Patterns)
-	))) :-
-		fp_growth_pattern_miner::mine(dense_shared_prefix_baskets, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(5)]).
+	test(fp_growth_mine_3_dense_shared_prefix_quads, deterministic([Support1, Support2, Support3] == [5, 5, 5])) :-
+		fp_growth_pattern_miner::mine(dense_shared_prefix_baskets, fp_growth_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(5)]),
+		memberchk(itemset([alpha, beta, delta, epsilon], Support1), Patterns),
+		memberchk(itemset([alpha, beta, delta, gamma], Support2), Patterns),
+		memberchk(itemset([alpha, beta, epsilon, gamma], Support3), Patterns).
 
 	test(fp_growth_matches_apriori_dense_shared_prefix, deterministic(FPGrowthPatterns == AprioriPatterns)) :-
 		Options = [minimum_support_count(5)],
 		fp_growth_pattern_miner::mine(dense_shared_prefix_baskets, fp_growth_pattern_miner(_ItemDomain, FPGrowthPatterns, _Options), Options),
 		apriori_pattern_miner::mine(dense_shared_prefix_baskets, apriori_pattern_miner(_AprioriDomain, AprioriPatterns, _AprioriOptions), Options).
 
-	test(fp_growth_diagnostics_2, deterministic((memberchk(model(fp_growth_pattern_miner), Diagnostics), memberchk(compression(prefix_tree_sharing), Diagnostics), memberchk(support_layout(fp_tree), Diagnostics), memberchk(projection_access(header_table_parent_links), Diagnostics)))) :-
+	test(fp_growth_diagnostics_2, deterministic([Model, Compression, SupportLayout, ProjectionAccess] == [fp_growth_pattern_miner, prefix_tree_sharing, fp_tree, header_table_parent_links])) :-
 		fp_growth_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
-		fp_growth_pattern_miner::diagnostics(PatternMiner, Diagnostics).
+		fp_growth_pattern_miner::diagnostics(PatternMiner, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(compression(Compression), Diagnostics),
+		memberchk(support_layout(SupportLayout), Diagnostics),
+		memberchk(projection_access(ProjectionAccess), Diagnostics).
 
 	test(fp_growth_valid_pattern_miner_1, deterministic) :-
 		fp_growth_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
@@ -84,12 +88,13 @@
 		fp_growth_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
 		fp_growth_pattern_miner::export_to_clauses(market_basket_basics, PatternMiner, mined_patterns, [Clause]).
 
-	test(fp_growth_export_to_file_4, deterministic(memberchk(itemset([bread, milk], 4), Patterns))) :-
+		test(fp_growth_export_to_file_4, deterministic(Support == 4)) :-
 		^^file_path('test_output.pl', File),
 		fp_growth_pattern_miner::mine(market_basket_basics, PatternMiner, [minimum_support_count(4)]),
 		fp_growth_pattern_miner::export_to_file(market_basket_basics, PatternMiner, fp_growth_exported_patterns, File),
 		logtalk_load(File),
-		{fp_growth_exported_patterns(_ItemDomain, Patterns, _Options)}.
+		{fp_growth_exported_patterns(_ItemDomain, Patterns, _Options)},
+		memberchk(itemset([bread, milk], Support), Patterns).
 
 	test(fp_growth_print_pattern_miner_1, deterministic) :-
 		^^suppress_text_output,

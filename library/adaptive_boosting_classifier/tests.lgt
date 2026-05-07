@@ -117,8 +117,10 @@
 	test(adaptive_boosting_classifier_predict_probabilities_3_all_classes_present, deterministic) :-
 		adaptive_boosting_classifier::learn(play_tennis, Classifier),
 		adaptive_boosting_classifier::predict_probabilities(Classifier, [outlook-sunny, temperature-hot, humidity-high, wind-weak], Probabilities),
-		memberchk(yes-_, Probabilities),
-		memberchk(no-_, Probabilities).
+				memberchk(yes-YesProbability, Probabilities),
+				memberchk(no-NoProbability, Probabilities),
+				^^assertion(number(YesProbability)),
+				^^assertion(number(NoProbability)).
 
 	test(adaptive_boosting_classifier_predict_probabilities_3_iris, deterministic(type::check(list(pair(atom, probability)), Probabilities))) :-
 		adaptive_boosting_classifier::learn(iris, Classifier),
@@ -199,6 +201,7 @@
 		sum_probabilities(Rest, Sum1, Sum).
 
 	max_probability_class([Class-Probability], Class) :-
+		!,
 		Probability >= 0.
 	max_probability_class([Class1-Probability1, Class2-Probability2| Rest], Class) :-
 		(	Probability1 >= Probability2 ->

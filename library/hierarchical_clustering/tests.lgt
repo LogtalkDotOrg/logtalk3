@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "hierarchical_clustering" library.'
 	]).
 
@@ -114,14 +114,25 @@
 		length(ClusterIds, UniqueClusterCount),
 		( singleton_clusters_match_prototypes(Clusters, Prototypes) -> SingletonPrototypes = true ; SingletonPrototypes = false ).
 
-	test(hierarchical_clustering_diagnostics_2_rich, deterministic((memberchk(training_example_count(8), Diagnostics), memberchk(merge_count(7), Diagnostics), memberchk(heap_rebuild_count(HeapRebuildCount), Diagnostics), memberchk(scan_fallback_count(0), Diagnostics), memberchk(tie_breaking(node_id_order), Diagnostics), memberchk(maximum_heap_size(MaximumHeapSize), Diagnostics), memberchk(dendrogram_height(Height), Diagnostics), HeapRebuildCount >= 0, MaximumHeapSize > 0, Height > 0.0))) :-
+	test(hierarchical_clustering_diagnostics_2_rich, deterministic((HeapRebuildCount >= 0, MaximumHeapSize > 0, Height > 0.0, [TrainingExampleCount, MergeCount, ScanFallbackCount, TieBreaking] == [8, 7, 0, node_id_order]))) :-
 		learn(two_blobs, Clusterer, [feature_scaling(off)]),
-		diagnostics(Clusterer, Diagnostics).
+		diagnostics(Clusterer, Diagnostics),
+		memberchk(training_example_count(TrainingExampleCount), Diagnostics),
+		memberchk(merge_count(MergeCount), Diagnostics),
+		memberchk(heap_rebuild_count(HeapRebuildCount), Diagnostics),
+		memberchk(scan_fallback_count(ScanFallbackCount), Diagnostics),
+		memberchk(tie_breaking(TieBreaking), Diagnostics),
+		memberchk(maximum_heap_size(MaximumHeapSize), Diagnostics),
+		memberchk(dendrogram_height(Height), Diagnostics).
 
-	test(hierarchical_clustering_learn_3_custom_options, deterministic((memberchk(k(3), Options), memberchk(linkage(complete), Options), memberchk(distance_metric(manhattan), Options), memberchk(feature_scaling(off), Options)))) :-
+	test(hierarchical_clustering_learn_3_custom_options, deterministic([K, Linkage, DistanceMetric, FeatureScaling] == [3, complete, manhattan, off])) :-
 		learn(iris_unlabeled, Clusterer, [k(3), linkage(complete), distance_metric(manhattan), feature_scaling(off)]),
 		diagnostics(Clusterer, Diagnostics),
-		memberchk(options(Options), Diagnostics).
+		memberchk(options(Options), Diagnostics),
+		memberchk(k(K), Options),
+		memberchk(linkage(Linkage), Options),
+		memberchk(distance_metric(DistanceMetric), Options),
+		memberchk(feature_scaling(FeatureScaling), Options).
 
 	test(hierarchical_clustering_cluster_3_iris_extremes, deterministic(Cluster1 \== Cluster2)) :-
 		learn(iris_unlabeled, Clusterer, [k(3)]),
@@ -156,6 +167,8 @@
 
 	test(hierarchical_clustering_learn_3_invalid_cluster_count, error(domain_error(cluster_count(1, 8), 9))) :-
 		learn(two_blobs, _Clusterer, [k(9)]).
+
+	% auxiliary predicates
 
 	training_assignments(Dataset, Clusterer, Assignments) :-
 		findall(

@@ -88,8 +88,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Unit tests for the "truncated_svd_projection" library.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -107,8 +111,12 @@
 	test(truncated_svd_learn_2_structure, deterministic(functor(DimensionReducer, truncated_svd_reducer, 4))) :-
 		truncated_svd_projection::learn(low_rank_rectangular, DimensionReducer).
 
-	test(truncated_svd_learn_3_custom_options, deterministic((length(Components, 1), SingularValues = [SingularValue], SingularValue > 0.0, memberchk(options(Options), Diagnostics), memberchk(center(false), Options), memberchk(feature_scaling(true), Options), memberchk(model(truncated_svd_projection), Diagnostics)))) :-
-		truncated_svd_projection::learn(low_rank_rectangular, truncated_svd_reducer(_Encoders, Components, SingularValues, Diagnostics), [n_components(1), center(false), feature_scaling(true), maximum_iterations(200), tolerance(1.0e-7)]).
+	test(truncated_svd_learn_3_custom_options, deterministic((length(Components, 1), SingularValues = [SingularValue], SingularValue > 0.0, [Center, FeatureScaling, Model] == [false, true, truncated_svd_projection]))) :-
+		truncated_svd_projection::learn(low_rank_rectangular, truncated_svd_reducer(_Encoders, Components, SingularValues, Diagnostics), [n_components(1), center(false), feature_scaling(true), maximum_iterations(200), tolerance(1.0e-7)]),
+		memberchk(options(Options), Diagnostics),
+		memberchk(center(Center), Options),
+		memberchk(feature_scaling(FeatureScaling), Options),
+		memberchk(model(Model), Diagnostics).
 
 	test(truncated_svd_check_dimension_reducer_1, deterministic) :-
 		truncated_svd_projection::learn(low_rank_rectangular, DimensionReducer, [n_components(1)]),
@@ -123,13 +131,27 @@
 		Ascending is First + Second,
 		truncated_svd_projection::valid_dimension_reducer(truncated_svd_reducer(Encoders, Components, [Second, Ascending], Diagnostics)).
 
-	test(truncated_svd_diagnostics_2, deterministic((memberchk(model(truncated_svd_projection), Diagnostics), memberchk(component_count(1), Diagnostics), memberchk(singular_values([_]), Diagnostics), memberchk(convergence([_]), Diagnostics), memberchk(iterations([Iterations]), Diagnostics), Iterations >= 0, memberchk(final_delta([FinalDelta]), Diagnostics), FinalDelta >= 0.0))) :-
+	test(truncated_svd_diagnostics_2, deterministic((Iterations >= 0, FinalDelta >= 0.0, [Model, ComponentCount] == [truncated_svd_projection, 1]))) :-
 		truncated_svd_projection::learn(low_rank_rectangular, DimensionReducer, [n_components(1)]),
-		truncated_svd_projection::diagnostics(DimensionReducer, Diagnostics).
+		truncated_svd_projection::diagnostics(DimensionReducer, Diagnostics),
+		memberchk(model(Model), Diagnostics),
+		memberchk(component_count(ComponentCount), Diagnostics),
+		memberchk(singular_values([SingularValue]), Diagnostics),
+		assertion(nonvar(SingularValue)),
+		memberchk(convergence([Convergence]), Diagnostics),
+		assertion(nonvar(Convergence)),
+		memberchk(iterations([Iterations]), Diagnostics),
+		memberchk(final_delta([FinalDelta]), Diagnostics).
 
-	test(truncated_svd_diagnostics_2_maximum_iterations, deterministic((memberchk(convergence([maximum_iterations_exhausted]), Diagnostics), memberchk(iterations([1]), Diagnostics), memberchk(final_delta([FinalDelta]), Diagnostics), FinalDelta > 0.0, memberchk(options(Options), Diagnostics), memberchk(maximum_iterations(1), Options), memberchk(tolerance(1.0e-12), Options)))) :-
+	test(truncated_svd_diagnostics_2_maximum_iterations, deterministic((FinalDelta > 0.0, Convergence == maximum_iterations_exhausted, Iterations == 1, MaximumIterations == 1, Tolerance == 1.0e-12))) :-
 		truncated_svd_projection::learn(high_dimensional_measurements, DimensionReducer, [n_components(1), maximum_iterations(1), tolerance(1.0e-12)]),
-		truncated_svd_projection::diagnostics(DimensionReducer, Diagnostics).
+		truncated_svd_projection::diagnostics(DimensionReducer, Diagnostics),
+		memberchk(convergence([Convergence]), Diagnostics),
+		memberchk(iterations([Iterations]), Diagnostics),
+		memberchk(final_delta([FinalDelta]), Diagnostics),
+		memberchk(options(Options), Diagnostics),
+		memberchk(maximum_iterations(MaximumIterations), Options),
+		memberchk(tolerance(Tolerance), Options).
 
 	test(truncated_svd_learn_2_exact_rank_request, deterministic((length(Components, 2), SingularValues = [First, Second], First >= Second, Second > 0.0))) :-
 		truncated_svd_projection::learn(low_rank_rectangular, truncated_svd_reducer(_Encoders, Components, SingularValues, _Diagnostics), [n_components(2)]).
@@ -137,9 +159,13 @@
 	test(truncated_svd_learn_2_rank_deficient_request, error(domain_error(component_count, 3-2))) :-
 		truncated_svd_projection::learn(low_rank_rectangular, _DimensionReducer, [n_components(3)]).
 
-	test(truncated_svd_transform_3_component_names, deterministic((length(ReducedInstance, 2), memberchk(component_1-_, ReducedInstance), memberchk(component_2-_, ReducedInstance)))) :-
+	test(truncated_svd_transform_3_component_names, deterministic(length(ReducedInstance, 2))) :-
 		truncated_svd_projection::learn(high_dimensional_measurements, DimensionReducer, [n_components(2)]),
-		truncated_svd_projection::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance).
+		truncated_svd_projection::transform(DimensionReducer, [f1-0.9, f2-1.1, f3-1.0, f4-2.0, f5-2.2, f6-2.1], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		memberchk(component_2-Component2Score, ReducedInstance),
+		assertion(nonvar(Component1Score)),
+		assertion(nonvar(Component2Score)).
 
 	test(truncated_svd_transform_3_distinguishes_rank_rows, deterministic(Score1 =\= Score2)) :-
 		truncated_svd_projection::learn(low_rank_rectangular, DimensionReducer, [n_components(1), center(false)]),
@@ -152,9 +178,12 @@
 	test(truncated_svd_learn_2_singleton_dataset, deterministic((SingularValues = [SingularValue], SingularValue > 0.0))) :-
 		truncated_svd_projection::learn(singleton_measurement, truncated_svd_reducer(_Encoders, _Components, SingularValues, _Diagnostics), [n_components(1), center(false)]).
 
-	test(truncated_svd_diagnostics_2_singleton_tolerance, deterministic((memberchk(convergence([tolerance]), Diagnostics), memberchk(iterations([1]), Diagnostics), memberchk(final_delta([0.0]), Diagnostics)))) :-
+	test(truncated_svd_diagnostics_2_singleton_tolerance, deterministic([Convergence, Iterations, FinalDelta] == [[tolerance], [1], [0.0]])) :-
 		truncated_svd_projection::learn(singleton_measurement, DimensionReducer, [n_components(1), center(false)]),
-		truncated_svd_projection::diagnostics(DimensionReducer, Diagnostics).
+		truncated_svd_projection::diagnostics(DimensionReducer, Diagnostics),
+		memberchk(convergence(Convergence), Diagnostics),
+		memberchk(iterations(Iterations), Diagnostics),
+		memberchk(final_delta(FinalDelta), Diagnostics).
 
 	test(truncated_svd_learn_2_centered_singleton_dataset, error(domain_error(component_count, 1-0))) :-
 		truncated_svd_projection::learn(singleton_measurement, _DimensionReducer, [n_components(1), center(true)]).
@@ -175,13 +204,15 @@
 		logtalk_load(File),
 		{reducer(Reducer)}.
 
-	test(truncated_svd_transform_3_exported_functor, deterministic(memberchk(component_1-_, ReducedInstance))) :-
+	test(truncated_svd_transform_3_exported_functor, deterministic) :-
 		^^file_path('test_output.pl', File),
 		truncated_svd_projection::learn(low_rank_rectangular, DimensionReducer, [n_components(1)]),
 		truncated_svd_projection::export_to_file(low_rank_rectangular, DimensionReducer, reducer, File),
 		logtalk_load(File),
 		{reducer(Reducer)},
-		truncated_svd_projection::transform(Reducer, [f1-1.0, f2-1.0, f3-2.0], ReducedInstance).
+		truncated_svd_projection::transform(Reducer, [f1-1.0, f2-1.0, f3-2.0], ReducedInstance),
+		memberchk(component_1-Component1Score, ReducedInstance),
+		assertion(nonvar(Component1Score)).
 
 	test(truncated_svd_print_dimension_reducer_1, deterministic) :-
 		^^suppress_text_output,
