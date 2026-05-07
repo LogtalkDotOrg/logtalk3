@@ -20,28 +20,14 @@
 
 
 :- object(adaptive_boosting_classifier,
-	imports(classifier_common)).
+	imports(probabilistic_classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
-	]).
-
-	:- public(predict_probabilities/3).
-	:- mode(predict_probabilities(+compound, +list, -list), one).
-	:- info(predict_probabilities/3, [
-		comment is 'Predicts class probabilities for a new instance using the learned classifier. Returns a list of ``Class-Probability`` pairs sorted by descending probability. Probabilities are derived from the weighted votes of all base learners.',
-		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
 	:- uses(c45_classifier, [
@@ -68,10 +54,6 @@
 	:- uses(type, [
 		valid/2
 	]).
-
-	% learn/2 - learns a classifier with default options
-	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
 
 	% learn/3 - learns a classifier with specified options
 	learn(Dataset, Classifier, UserOptions) :-
@@ -277,8 +259,7 @@
 
 	% predict/3 - predicts the class using weighted majority voting
 	predict(Classifier, Instance, Class) :-
-		predict_probabilities(Classifier, Instance, Probabilities),
-		max_probability(Probabilities, Class, _).
+		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	% predict_probabilities/3 - returns class probabilities based on weighted votes
 	predict_probabilities(Classifier, Instance, Probabilities) :-
@@ -325,14 +306,6 @@
 		;	Probability is 0.0
 		),
 		normalize_votes(Votes, Total, Probs).
-
-	max_probability([Class-Probability], Class, Probability) :-
-		!.
-	max_probability([Class1-Prob1, Class2-Prob2| Rest], MaxClass, MaxProb) :-
-		(	Prob1 >= Prob2 ->
-			max_probability([Class1-Prob1| Rest], MaxClass, MaxProb)
-		;	max_probability([Class2-Prob2| Rest], MaxClass, MaxProb)
-		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
 		classifier_data(Classifier, WeightedTrees, ClassValues, Options),

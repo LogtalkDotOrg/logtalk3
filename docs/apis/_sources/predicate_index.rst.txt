@@ -9393,21 +9393,13 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`adaptive_boosting_classifier <adaptive_boosting_classifier/0::learn/3>`
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::learn/3>`
+* :ref:`classifier_protocol <classifier_protocol/0::learn/3>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::learn/3>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::learn/3>`
-* :ref:`gradient_boosting_classifier <gradient_boosting_classifier/0::learn/3>`
-* :ref:`kernel_svm_classifier <kernel_svm_classifier/0::learn/3>`
-* :ref:`lda_classifier <lda_classifier/0::learn/3>`
-* :ref:`linear_svm_classifier <linear_svm_classifier/0::learn/3>`
-* :ref:`logistic_regression_classifier <logistic_regression_classifier/0::learn/3>`
 * :ref:`metagol <metagol/0::learn/3>`
-* :ref:`qda_classifier <qda_classifier/0::learn/3>`
-* :ref:`random_forest_classifier <random_forest_classifier/0::learn/3>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
-* :ref:`sgd_classifier <sgd_classifier/0::learn/3>`
 * :ref:`truncated_svd_projection <truncated_svd_projection/0::learn/3>`
 
 ``learn_seq/2``
@@ -14037,15 +14029,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`adaptive_boosting_classifier <adaptive_boosting_classifier/0::predict_probabilities/3>`
-* :ref:`gradient_boosting_classifier <gradient_boosting_classifier/0::predict_probabilities/3>`
-* :ref:`kernel_svm_classifier <kernel_svm_classifier/0::predict_probabilities/3>`
-* :ref:`knn_classifier <knn_classifier/0::predict_probabilities/3>`
-* :ref:`logistic_regression_classifier <logistic_regression_classifier/0::predict_probabilities/3>`
-* :ref:`naive_bayes_classifier <naive_bayes_classifier/0::predict_probabilities/3>`
-* :ref:`nearest_centroid_classifier <nearest_centroid_classifier/0::predict_probabilities/3>`
-* :ref:`random_forest_classifier <random_forest_classifier/0::predict_probabilities/3>`
-* :ref:`sgd_classifier <sgd_classifier/0::predict_probabilities/3>`
+* :ref:`probabilistic_classifier_protocol <probabilistic_classifier_protocol/0::predict_probabilities/3>`
 
 ``predict_probabilities/4``
 ---------------------------

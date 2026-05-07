@@ -25,16 +25,9 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Linear support vector machine classifier supporting binary and multiclass classification using one-vs-rest margin models. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, logistic_regression_classifier, c45_classifier, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
 	]).
 
 	:- uses(format, [
@@ -64,9 +57,6 @@
 	:- uses(type, [
 		valid/2
 	]).
-
-	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
 
 	learn(Dataset, Classifier, UserOptions) :-
 		^^check_options(UserOptions),

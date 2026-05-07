@@ -20,12 +20,12 @@
 
 
 :- object(knn_classifier,
-	imports(classifier_common)).
+	imports(probabilistic_classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'k-Nearest Neighbors classifier with multiple distance metrics and weighting options. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -35,13 +35,6 @@
 	:- info(predict/4, [
 		comment is 'Predicts the class label for a new instance using the learned classifier and the given options. The instance is a list of ``Attribute-Value`` pairs.',
 		argnames is ['Classifier', 'Instance', 'Class', 'Options']
-	]).
-
-	:- public(predict_probabilities/3).
-	:- mode(predict_probabilities(+compound, +list, -list), one).
-	:- info(predict_probabilities/3, [
-		comment is 'Predicts class probabilities for a new instance using the learned classifier and default options. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.',
-		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
 	:- public(predict_probabilities/4).
@@ -67,7 +60,7 @@
 		valid/2
 	]).
 
-	learn(Dataset, Classifier) :-
+	learn(Dataset, Classifier, []) :-
 		% Get attribute information from dataset
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
@@ -116,7 +109,7 @@
 
 	predict(Classifier, Instance, Class, UserOptions) :-
 		predict_probabilities(Classifier, Instance, Probabilities, UserOptions),
-		max_probability(Probabilities, Class, _).
+		^^max_probability(Probabilities, Class, _).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
 		predict_probabilities(Classifier, Instance, Probabilities, []).
@@ -227,14 +220,6 @@
 	normalize_weights([Class-Weight| ClassWeights], Total, [Class-Probability| ClassProbabilities]) :-
 		Probability is float(Weight / Total),
 		normalize_weights(ClassWeights, Total, ClassProbabilities).
-
-	max_probability([Class-Probability], Class, Probability) :-
-		!.
-	max_probability([Class1-Probability1, Class2-Probability2| ClassProbabilities], MaxClass, MaxProbability) :-
-		(	Probability1 >= Probability2 ->
-			max_probability([Class1-Probability1| ClassProbabilities], MaxClass, MaxProbability)
-		;	max_probability([Class2-Probability2| ClassProbabilities], MaxClass, MaxProbability)
-		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
 		classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),

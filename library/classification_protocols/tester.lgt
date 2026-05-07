@@ -28,7 +28,9 @@
 	logtalk_load([
 		dataset_protocol,
 		classifier_protocol,
-		classifier_common
+		probabilistic_classifier_protocol,
+		classifier_common,
+		probabilistic_classifier_common
 	], [
 		source_data(on),
 		debug(on)

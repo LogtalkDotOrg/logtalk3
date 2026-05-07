@@ -24,15 +24,22 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Protocol for machine learning classifiers.',
 		see_also is [adaptive_boosting_classifier, c45_classifier, gradient_boosting_classifier, isolation_forest_anomaly_detector, kernel_svm_classifier, knn_classifier, lda_classifier, linear_svm_classifier, logistic_regression_classifier, naive_bayes_classifier, nearest_centroid_classifier, qda_classifier, random_forest_classifier, sgd_classifier]
+	]).
+
+	:- public(learn/3).
+	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
+	:- info(learn/3, [
+		comment is 'Learns a classifier from the given dataset object using the specified options.',
+		argnames is ['Dataset', 'Classifier', 'Options']
 	]).
 
 	:- public(learn/2).
 	:- mode(learn(+object_identifier, -compound), one).
 	:- info(learn/2, [
-		comment is 'Learns a classifier from the given dataset object.',
+		comment is 'Learns a classifier from the given dataset object using default options.',
 		argnames is ['Dataset', 'Classifier']
 	]).
 

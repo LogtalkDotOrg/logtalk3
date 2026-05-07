@@ -25,16 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Linear Discriminant Analysis classifier for continuous datasets using a pooled regularized covariance model.',
 		see_also is [dataset_protocol, qda_classifier, nearest_centroid_classifier, lda_projection]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given continuous dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
 	]).
 
 	:- public(predict_scores/3).
@@ -65,9 +58,6 @@
 	:- uses(pairs, [
 		values/2
 	]).
-
-	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
 
 	learn(Dataset, Classifier, UserOptions) :-
 		^^check_options(UserOptions),

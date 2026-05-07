@@ -1,0 +1,94 @@
+.. index:: single: probabilistic_classifier_common
+.. _probabilistic_classifier_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``probabilistic_classifier_common``
+===================================
+
+Shared predicates for probabilistic classifiers.
+
+| **Availability:** 
+|    ``logtalk_load(classification_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`probabilistic_classifier_protocol <probabilistic_classifier_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`classifier_common <classifier_common/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`probabilistic_classifier_protocol/0::predict_probabilities/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: predict_from_probabilities/3
+.. _probabilistic_classifier_common/0::predict_from_probabilities/3:
+
+``predict_from_probabilities/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Predicts the class label for a new instance by selecting the maximum-probability class returned by ``predict_probabilities/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``predict_from_probabilities(Classifier,Instance,Class)``
+| **Mode and number of proofs:**
+|    ``predict_from_probabilities(+compound,+list,-atom)`` - ``one``
+
+
+------------
+
+.. index:: max_probability/3
+.. _probabilistic_classifier_common/0::max_probability/3:
+
+``max_probability/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Selects the class-probability pair with maximum probability from a non-empty list of ``Class-Probability`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``max_probability(Probabilities,Class,Probability)``
+| **Mode and number of proofs:**
+|    ``max_probability(+list(pair),-atom,-float)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

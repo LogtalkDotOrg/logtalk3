@@ -20,21 +20,14 @@
 
 
 :- object(naive_bayes_classifier,
-	imports(classifier_common)).
+	imports(probabilistic_classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, c45_classifier, knn_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
-	]).
-
-	:- public(predict_probabilities/3).
-	:- mode(predict_probabilities(+compound, +list, -list), one).
-	:- info(predict_probabilities/3, [
-		comment is 'Predicts class probabilities for a new instance using the learned classifier. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.',
-		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
 	:- uses(list, [
@@ -57,7 +50,7 @@
 		valid/2
 	]).
 
-	learn(Dataset, Classifier) :-
+	learn(Dataset, Classifier, []) :-
 		% Get attribute information from dataset
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
@@ -171,8 +164,7 @@
 		learn_continuous_stats_by_class(Index, Classes, Instances, Labels, Pairs).
 
 	predict(Classifier, Instance, Class) :-
-		predict_probabilities(Classifier, Instance, Probabilities),
-		max_probability(Probabilities, Class, _).
+		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
 		Classifier =.. [_, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams],
@@ -243,14 +235,6 @@
 			count_feature_value(Instances, Index, Value, RestCount),
 			Count is RestCount + 1
 		;	count_feature_value(Instances, Index, Value, Count)
-		).
-
-	max_probability([Class-Probability], Class, Probability) :-
-		!.
-	max_probability([Class1-Probability1, Class2-Probability2| Pairs], MaxClass, MaxProbability) :-
-		(	Probability1 >= Probability2 ->
-			max_probability([Class1-Probability1| Pairs], MaxClass, MaxProbability)
-		;	max_probability([Class2-Probability2| Pairs], MaxClass, MaxProbability)
 		).
 
 	dataset_attributes(Dataset, Attributes) :-

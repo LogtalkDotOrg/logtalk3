@@ -15,7 +15,7 @@ Protocol for machine learning classifiers.
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-05-06
+| **Date:** 2026-05-07
 
 | **Compilation flags:**
 |    ``static``
@@ -38,13 +38,32 @@ Protocol for machine learning classifiers.
 Public predicates
 -----------------
 
+.. index:: learn/3
+.. _classifier_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a classifier from the given dataset object using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Dataset,Classifier,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: learn/2
 .. _classifier_protocol/0::learn/2:
 
 ``learn/2``
 ^^^^^^^^^^^
 
-Learns a classifier from the given dataset object.
+Learns a classifier from the given dataset object using default options.
 
 | **Compilation flags:**
 |    ``static``

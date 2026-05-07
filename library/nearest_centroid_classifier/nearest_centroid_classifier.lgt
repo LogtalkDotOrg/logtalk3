@@ -20,12 +20,12 @@
 
 
 :- object(nearest_centroid_classifier,
-	imports(classifier_common)).
+	imports(probabilistic_classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Nearest Centroid classifier with multiple distance metrics. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, c45_classifier, knn_classifier, naive_bayes_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -35,13 +35,6 @@
 	:- info(predict/4, [
 		comment is 'Predicts the class label for a new instance using the learned classifier and the given options. The instance is a list of ``Attribute-Value`` pairs.',
 		argnames is ['Classifier', 'Instance', 'Class', 'Options']
-	]).
-
-	:- public(predict_probabilities/3).
-	:- mode(predict_probabilities(+compound, +list, -list), one).
-	:- info(predict_probabilities/3, [
-		comment is 'Predicts class probabilities for a new instance using the learned classifier and default options. Returns a list of ``Class-Probability`` pairs. The instance is a list of ``Attribute-Value`` pairs.',
-		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
 	:- public(predict_probabilities/4).
@@ -75,7 +68,7 @@
 		valid/2
 	]).
 
-	learn(Dataset, Classifier) :-
+	learn(Dataset, Classifier, []) :-
 		% Get attribute information from dataset
 		dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),

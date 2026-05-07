@@ -15,14 +15,14 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-05-06
+| **Date:** 2026-05-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
-|    ``public`` :ref:`classifier_common <classifier_common/0>`
+|    ``public`` :ref:`probabilistic_classifier_common <probabilistic_classifier_common/0>`
 | **Uses:**
 |    :ref:`c45_classifier <c45_classifier/0>`
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
@@ -35,7 +35,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`classifier_protocol/0::check_classifier/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`classifier_protocol/0::classifier_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`classifier_protocol/0::diagnostic/2`  :ref:`classifier_protocol/0::diagnostics/2`  :ref:`classifier_protocol/0::export_to_clauses/4`  :ref:`classifier_protocol/0::export_to_file/4`  :ref:`classifier_protocol/0::learn/2`  :ref:`classifier_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`classifier_protocol/0::predict/3`  :ref:`probabilistic_classifier_protocol/0::predict_probabilities/3`  :ref:`classifier_protocol/0::print_classifier/1`  :ref:`classifier_protocol/0::valid_classifier/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -44,43 +44,7 @@ Random Forest classifier using C4.5 decision trees as base learners. Builds an e
 Public predicates
 -----------------
 
-.. index:: learn/3
-.. _random_forest_classifier/0::learn/3:
-
-``learn/3``
-^^^^^^^^^^^
-
-Learns a classifier from the given dataset object using the specified options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``learn(Dataset,Classifier,Options)``
-| **Mode and number of proofs:**
-|    ``learn(+object_identifier,-compound,+list(compound))`` - ``one``
-
-
-------------
-
-.. index:: predict_probabilities/3
-.. _random_forest_classifier/0::predict_probabilities/3:
-
-``predict_probabilities/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Predicts class probabilities for a new instance using the learned classifier. Returns a list of ``Class-Probability`` pairs sorted by descending probability. The instance is a list of ``Attribute-Value`` pairs.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``predict_probabilities(Classifier,Instance,Probabilities)``
-| **Mode and number of proofs:**
-|    ``predict_probabilities(+compound,+list,-list)`` - ``one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

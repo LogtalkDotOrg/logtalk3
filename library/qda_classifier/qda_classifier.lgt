@@ -25,16 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Quadratic Discriminant Analysis classifier for continuous datasets using class-specific regularized covariance models.',
 		see_also is [dataset_protocol, lda_classifier, nearest_centroid_classifier]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given continuous dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
 	]).
 
 	:- public(predict_scores/3).
@@ -61,9 +54,6 @@
 	:- uses(type, [
 		valid/2
 	]).
-
-	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
 
 	learn(Dataset, Classifier, UserOptions) :-
 		^^check_options(UserOptions),

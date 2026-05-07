@@ -26,7 +26,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Shared predicates for classifier diagnostics, mixed-feature distance calculations, and export.'
 	]).
 
@@ -171,6 +171,9 @@
 		comment is 'Computes a distance between two mixed-feature vectors using the given feature types and one of the supported metrics ``euclidean``, ``manhattan``, ``chebyshev``, ``cosine``, or ``minkowski(Order)``.',
 		argnames is ['Metric', 'FeatureTypes', 'Values1', 'Values2', 'Distance']
 	]).
+
+	learn(Dataset, Classifier) :-
+		::learn(Dataset, Classifier, []).
 
 	check_classifier(Classifier) :-
 		(	var(Classifier) ->

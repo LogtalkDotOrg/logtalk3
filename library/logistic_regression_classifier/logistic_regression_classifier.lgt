@@ -20,28 +20,14 @@
 
 
 :- object(logistic_regression_classifier,
-	imports(classifier_common)).
+	imports(probabilistic_classifier_common)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, c45_classifier, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
-	]).
-
-	:- public(predict_probabilities/3).
-	:- mode(predict_probabilities(+compound, +list, -list), one).
-	:- info(predict_probabilities/3, [
-		comment is 'Predicts class probabilities for a new instance using the learned classifier. Returns a list of ``Class-Probability`` pairs.',
-		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
 	:- uses(format, [
@@ -72,9 +58,6 @@
 		valid/2
 	]).
 
-	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
-
 	learn(Dataset, Classifier, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -93,8 +76,7 @@
 		Classifier = lr_classifier(Classes, Encoders, Models, Options).
 
 	predict(Classifier, Instance, Class) :-
-		predict_probabilities(Classifier, Instance, Probabilities),
-		max_probability(Probabilities, Class, _).
+		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
 		Classifier =.. [_, _Classes, Encoders, Models, _Options],
@@ -323,14 +305,6 @@
 	normalize_shifted([Class-ShiftedExp| Shifted], SumExp, [Class-Probability| Probabilities]) :-
 		Probability is ShiftedExp / SumExp,
 		normalize_shifted(Shifted, SumExp, Probabilities).
-
-	max_probability([Class-Probability], Class, Probability) :-
-		!.
-	max_probability([Class1-Probability1, Class2-Probability2| Probabilities], Class, Probability) :-
-		(   Probability1 >= Probability2 ->
-			max_probability([Class1-Probability1| Probabilities], Class, Probability)
-		;   max_probability([Class2-Probability2| Probabilities], Class, Probability)
-		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
 		classifier_data(Classifier, Classes, Encoders, Models, Options),

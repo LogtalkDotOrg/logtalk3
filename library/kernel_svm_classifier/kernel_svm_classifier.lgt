@@ -20,28 +20,14 @@
 
 
 :- object(kernel_svm_classifier,
-	imports(classifier_common)).
+	imports(probabilistic_classifier_common)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-07,
 		comment is 'Kernel support vector machine classifier using one-vs-rest dual margin models with linear, polynomial, and radial basis function kernels.',
 		see_also is [dataset_protocol, linear_svm_classifier, logistic_regression_classifier, kernel_pca_projection]
-	]).
-
-	:- public(learn/3).
-	:- mode(learn(+object_identifier, -compound, +list(compound)), one).
-	:- info(learn/3, [
-		comment is 'Learns a classifier from the given dataset object using the specified options.',
-		argnames is ['Dataset', 'Classifier', 'Options']
-	]).
-
-	:- public(predict_probabilities/3).
-	:- mode(predict_probabilities(+compound, +list, -list), one).
-	:- info(predict_probabilities/3, [
-		comment is 'Predicts class probabilities for a new instance using a softmax over kernel decision scores.',
-		argnames is ['Classifier', 'Instance', 'Probabilities']
 	]).
 
 	:- uses(format, [
@@ -68,9 +54,6 @@
 		keys/2
 	]).
 
-	learn(Dataset, Classifier) :-
-		learn(Dataset, Classifier, []).
-
 	learn(Dataset, Classifier, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -87,8 +70,7 @@
 		Classifier = kernel_svm_classifier(Classes, Encoders, Kernel, TrainingRows, Models, Options).
 
 	predict(Classifier, Instance, Class) :-
-		predict_probabilities(Classifier, Instance, Probabilities),
-		max_probability(Probabilities, Class, _).
+		^^predict_from_probabilities(Classifier, Instance, Class).
 
 	predict_probabilities(Classifier, Instance, Probabilities) :-
 		Classifier = kernel_svm_classifier(Classes, Encoders, Kernel, TrainingRows, Models, _Options),
@@ -226,14 +208,6 @@
 	zip_probabilities([], [], []).
 	zip_probabilities([Class| Classes], [Probability| Probabilities0], [Class-Probability| Probabilities]) :-
 		zip_probabilities(Classes, Probabilities0, Probabilities).
-
-	max_probability([Class-Probability], Class, Probability) :-
-		!.
-	max_probability([Class1-Probability1, Class2-Probability2| Probabilities], Class, Probability) :-
-		(   Probability1 >= Probability2 ->
-			max_probability([Class1-Probability1| Probabilities], Class, Probability)
-		;   max_probability([Class2-Probability2| Probabilities], Class, Probability)
-		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
 		classifier_data(Classifier, Classes, Encoders, Kernel, TrainingRows, Models, Options),
