@@ -72,6 +72,11 @@ elements as terms:
   ``@infinity``, ``@negative_infinity``, and ``@not_a_number`` compound
   terms.
 
+- Only some backends distinguish between positive zero and negative
+  zero. The decoder produces the ``0.0`` and ``-0.0`` floats, but
+  backends that normalize both values to ``0.0`` cannot preserve the
+  sign of zero when re-encoding.
+
 The following table exemplifies the term equivalents of common
 MessagePack elements when using ``message_pack(atom)``:
 

@@ -135,6 +135,7 @@ sed '1,19d' ../../../library/gaussian_mixture_clusterer/NOTES.md | pandoc -f gfm
 sed '1,19d' ../../../library/gaussian_process_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gaussian_process_regression.rst
 sed '1,19d' ../../../library/genint/NOTES.md | pandoc -f gfm -t rst -o libraries/genint.rst
 sed '1,19d' ../../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries/gensym.rst
+sed '1,19d' ../../../library/geo_json/NOTES.md | pandoc -f gfm -t rst -o libraries/geo_json.rst
 sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libraries/geospatial.rst
 sed '1,19d' ../../../library/git/NOTES.md | pandoc -f gfm -t rst -o libraries/git.rst
 sed '1,19d' ../../../library/glicko2_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/glicko2_ranker.rst

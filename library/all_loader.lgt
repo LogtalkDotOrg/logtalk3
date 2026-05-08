@@ -83,6 +83,7 @@
 		tzif(loader),
 		dates_tz(loader),
 		geospatial(loader),
+		geo_json(loader),
 		git(loader),
 		grammars(loader),
 		csv(loader),

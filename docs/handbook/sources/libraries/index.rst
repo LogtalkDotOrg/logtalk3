@@ -85,6 +85,7 @@ directory in the ``NOTES.md`` file.
    gaussian_process_regression
    genint
    gensym
+   geo_json
    geospatial
    git
    glicko2_ranker

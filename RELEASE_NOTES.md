@@ -325,6 +325,8 @@ covariance estimates and regularized discriminant scores.
 descent classification for binary and multiclass continuous and mixed-feature
 datasets using one-vs-rest linear models with configurable losses.
 
+* ADDED: New `geo_json` library implementing the GeoJSON (RFC 7946) standard.
+
 * ADDED: New `hmac` library providing a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104.
 

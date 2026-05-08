@@ -243,6 +243,8 @@ Objects
    gaussian_process_regression <gaussian_process_regression_0>
    genint <genint_0>
    gensym <gensym_0>
+   geo_json <geo_json_0>
+   geo_json(ObjectRepresentation,PairRepresentation,StringRepresentation) <geo_json_3>
    geospatial <geospatial_0>
    git <git_0>
    glicko2_periodic_ranker <glicko2_periodic_ranker_0>
@@ -621,6 +623,7 @@ Protocols
    expanding <expanding_0>
    flags_validator <flags_validator_0>
    forwarding <forwarding_0>
+   geo_json_protocol <geo_json_protocol_0>
    geospatial_protocol <geospatial_protocol_0>
    git_protocol <git_protocol_0>
    graph_language_protocol <graph_language_protocol_0>

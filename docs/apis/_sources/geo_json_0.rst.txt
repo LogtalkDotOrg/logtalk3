@@ -1,0 +1,56 @@
+.. index:: single: geo_json
+.. _geo_json/0:
+
+.. rst-class:: right
+
+**object**
+
+``geo_json``
+============
+
+GeoJSON parser, generator, and validator using default JSON term representations.
+
+| **Availability:** 
+|    ``logtalk_load(geo_json(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`geo_json(curly,dash,atom) <geo_json/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`geo_json_protocol/0::generate/2`  :ref:`geo_json_protocol/0::geo_json_to_json/2`  :ref:`geo_json_protocol/0::json_to_geo_json/2`  :ref:`geo_json_protocol/0::parse/2`  :ref:`geo_json_protocol/0::validate/1`  :ref:`geo_json_protocol/0::validate/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

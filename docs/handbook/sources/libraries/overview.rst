@@ -24,7 +24,7 @@ multiple areas):
 - Portability: ``coroutining``, ``dif``, ``format``, ``process``,
   ``recorded_database``, and ``timeout``.
 - Dates, time, and geospatial data: ``ccsds``, ``dates``, ``dates_tz``,
-  ``geospatial``, ``time_scales``, and ``tzif``.
+  ``geo_json``, ``geospatial``, ``time_scales``, and ``tzif``.
 - Text and NLP: ``character_sets``, ``grammars``, ``stemming``,
   ``string_distance``, and ``strings``.
 - Web: ``html``, ``mime_types``, and ``url``.

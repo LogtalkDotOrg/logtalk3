@@ -6813,6 +6813,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base85 <base85/0::generate/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::generate/2>`
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::generate/2>`
+* :ref:`geo_json_protocol <geo_json_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
@@ -6888,6 +6889,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`gensym_core <gensym_core/0::gensym/2>`
+
+``geo_json_to_json/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geo_json_protocol <geo_json_protocol/0::geo_json_to_json/2>`
 
 ``geometric/2``
 ---------------
@@ -8990,6 +9001,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`queuep <queuep/0::join_all/3>`
+
+``json_to_geo_json/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geo_json_protocol <geo_json_protocol/0::json_to_geo_json/2>`
 
 ``jump/3``
 ----------
@@ -13267,6 +13288,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base85 <base85/0::parse/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::parse/2>`
 * :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::parse/2>`
+* :ref:`geo_json_protocol <geo_json_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
@@ -19393,6 +19415,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`flags_validator <flags_validator/0::validate/1>`
+* :ref:`geo_json_protocol <geo_json_protocol/0::validate/1>`
 
 ``validate/2``
 --------------
@@ -19402,6 +19425,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`geo_json_protocol <geo_json_protocol/0::validate/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/2>`
 
 ``validate/3``

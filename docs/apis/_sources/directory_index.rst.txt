@@ -734,6 +734,18 @@ To load an entity, always load the library that includes it using the goal ``log
    gensym <gensym_0>
    gensym_core <gensym_core_0>
 
+``library/geo_json/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   geo_json <geo_json_0>
+   geo_json(ObjectRepresentation,PairRepresentation,StringRepresentation) <geo_json_3>
+   geo_json_protocol <geo_json_protocol_0>
+
 ``library/geospatial/``
 -----------------------
 
