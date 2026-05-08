@@ -112,7 +112,11 @@
 		parse([0xca, 0x00, 0x00, 0x00, 0x00], Term),
 		generate(Term, Bytes).
 
-	test(message_pack_parse_2_15b, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00])) :-
+	test(message_pack_parse_2_15b, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00]), [condition(-0.0 \== 0.0)]) :-
+		parse([0xca, 0x80, 0x00, 0x00, 0x00], Term),
+		generate(Term, Bytes).
+
+	test(message_pack_parse_2_15b_backend_zero, true(Bytes == [0xca, 0x00, 0x00, 0x00, 0x00]), [condition(-0.0 == 0.0)]) :-
 		parse([0xca, 0x80, 0x00, 0x00, 0x00], Term),
 		generate(Term, Bytes).
 
@@ -153,7 +157,11 @@
 		parse([0xcb, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Term),
 		generate(Term, Bytes).
 
-	test(message_pack_parse_2_22b, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00])) :-
+	test(message_pack_parse_2_22b, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00]), [condition(-0.0 \== 0.0)]) :-
+		parse([0xcb, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Term),
+		generate(Term, Bytes).
+
+	test(message_pack_parse_2_22b_backend_zero, true(Bytes == [0xca, 0x00, 0x00, 0x00, 0x00]), [condition(-0.0 == 0.0)]) :-
 		parse([0xcb, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Term),
 		generate(Term, Bytes).
 
@@ -383,7 +391,10 @@
 		repeated_byte_list(65536, 0xaa, Payload),
 		generate(ext(42, bytes(Payload)), Bytes).
 
-	test(message_pack_generate_2_28, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00])) :-
+	test(message_pack_generate_2_28, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00]), [condition(-0.0 \== 0.0)]) :-
+		generate(-0.0, Bytes).
+
+	test(message_pack_generate_2_28_backend_zero, true(Bytes == [0xca, 0x00, 0x00, 0x00, 0x00]), [condition(-0.0 == 0.0)]) :-
 		generate(-0.0, Bytes).
 
 	test(message_pack_generate_2_29, error(instantiation_error)) :-
@@ -432,7 +443,11 @@
 		generate(Map, Bytes),
 		parse(Bytes, Decoded).
 
-	test(message_pack_roundtrip_2_06, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00])) :-
+	test(message_pack_roundtrip_2_06, true(Bytes == [0xca, 0x80, 0x00, 0x00, 0x00]), [condition(-0.0 \== 0.0)]) :-
+		parse([0xca, 0x80, 0x00, 0x00, 0x00], NegativeZero),
+		generate(NegativeZero, Bytes).
+
+	test(message_pack_roundtrip_2_06_backend_zero, true(Bytes == [0xca, 0x00, 0x00, 0x00, 0x00]), [condition(-0.0 == 0.0)]) :-
 		parse([0xca, 0x80, 0x00, 0x00, 0x00], NegativeZero),
 		generate(NegativeZero, Bytes).
 
