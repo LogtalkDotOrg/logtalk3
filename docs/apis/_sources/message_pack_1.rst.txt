@@ -1,0 +1,96 @@
+.. index:: single: message_pack(StringRepresentation)
+.. _message_pack/1:
+
+.. rst-class:: right
+
+**object**
+
+``message_pack(StringRepresentation)``
+======================================
+
+* ``StringRepresentation`` - Text representation to be used when decoding MessagePack strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+MessagePack format exporter and importer.
+
+| **Availability:** 
+|    ``logtalk_load(message_pack(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _message_pack/1::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a list of bytes in the MessagePack format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Bytes,Term)``
+| **Mode and number of proofs:**
+|    ``parse(@list(byte),-ground)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/2
+.. _message_pack/1::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a list of bytes in the MessagePack format representing the given term. Throws an error when generating is not possible (usually due to a term with no corresponding MessagePack representation).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Term,Bytes)``
+| **Mode and number of proofs:**
+|    ``generate(@ground,-list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

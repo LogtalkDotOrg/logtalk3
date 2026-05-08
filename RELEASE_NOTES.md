@@ -328,6 +328,9 @@ datasets using one-vs-rest linear models with configurable losses.
 * ADDED: New `hmac` library providing a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104.
 
+* ADDED: New `message_pack` library implementing the MessagePack binary data
+format.
+
 * ADDED: Support to the `hashes` library for computing keyed digests and
 access metadata for fixed-size cryptographic hash objects that can be safely
 used with HMAC.

@@ -148,6 +148,7 @@ directory in the ``NOTES.md`` file.
    massey_ranker
    mcp_server
    memcached
+   message_pack
    meta
    meta_compiler
    mime_types

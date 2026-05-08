@@ -6817,6 +6817,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
+* :ref:`message_pack(StringRepresentation) <message_pack/1::generate/2>`
 * :ref:`sarif <sarif/0::generate/2>`
 * :ref:`toml_protocol <toml_protocol/0::generate/2>`
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
@@ -13270,6 +13271,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`
+* :ref:`message_pack(StringRepresentation) <message_pack/1::parse/2>`
 * :ref:`protobuf <protobuf/0::parse/2>`
 * :ref:`toml_protocol <toml_protocol/0::parse/2>`
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`

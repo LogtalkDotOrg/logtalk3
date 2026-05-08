@@ -143,6 +143,7 @@
 		kprototypes_clusterer(loader),
 		optics_clusterer(loader),
 		cbor(loader),
+		message_pack(loader),
 		ccsds(loader),
 		avro(loader),
 		protobuf(loader),

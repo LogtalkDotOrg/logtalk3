@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on May 6, 2026
+%  Last updated on May 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -152,6 +152,7 @@ logtalk_library_path(loops, library('loops/')).
 logtalk_library_path(massey_ranker, library('massey_ranker/')).
 logtalk_library_path(mcp_server, library('mcp_server/')).
 logtalk_library_path(memcached, library('memcached/')).
+logtalk_library_path(message_pack, library('message_pack/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(mime_types, library('mime_types/')).
