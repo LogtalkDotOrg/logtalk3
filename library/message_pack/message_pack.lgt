@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-08,
+		date is 2026-05-09,
 		comment is 'MessagePack format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding MessagePack strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -83,9 +83,9 @@
 	encode_literal(false) --> [0xc2].
 	encode_literal(true) --> [0xc3].
 	encode_literal(null) --> [0xc0].
-	encode_literal(infinity) --> [0xca, 0x7f, 0x80, 0x00, 0x00].
-	encode_literal(negative_infinity) --> [0xca, 0xff, 0x80, 0x00, 0x00].
-	encode_literal(not_a_number) --> [0xca, 0x7f, 0xc0, 0x00, 0x00].
+	encode_literal(infinity) --> {ieee_754(single, big, canonical)::generate(@infinity, Bytes, [])}, [0xca], bytes(Bytes).
+	encode_literal(negative_infinity) --> {ieee_754(single, big, canonical)::generate(@negative_infinity, Bytes, [])}, [0xca], bytes(Bytes).
+	encode_literal(not_a_number) --> {ieee_754(single, big, canonical)::generate(@not_a_number, Bytes, [])}, [0xca], bytes(Bytes).
 
 	encode_integer(Integer) -->
 		(   {0 =< Integer} ->
@@ -154,12 +154,11 @@
 		bytes(Bytes).
 
 	encode_float_bytes(Float, [0xca| Bytes]) :-
-		encode_ieee754_single(Float, Bytes),
-		decode_ieee754_single(Bytes, Roundtrip),
-		Roundtrip =:= Float,
+		ieee_754(single, big, canonical)::exactly_representable(Float),
+		ieee_754(single, big, canonical)::generate(Float, Bytes, []),
 		!.
 	encode_float_bytes(Float, [0xcb| Bytes]) :-
-		encode_ieee754_double(Float, Bytes).
+		ieee_754(double, big, canonical)::generate(Float, Bytes, []).
 
 	encode_binary_term(Bytes) -->
 		{valid(list(byte), Bytes), length(Bytes, Length)},
@@ -344,8 +343,8 @@
 	decode(0xc7, Extension) --> !, [Length], decode_extension(Length, Extension).
 	decode(0xc8, Extension) --> !, unsigned_integer(2, Length), decode_extension(Length, Extension).
 	decode(0xc9, Extension) --> !, unsigned_integer(4, Length), decode_extension(Length, Extension).
-	decode(0xca, Float) --> !, bytes(4, Bytes), {decode_ieee754_single(Bytes, Float)}.
-	decode(0xcb, Float) --> !, bytes(8, Bytes), {decode_ieee754_double(Bytes, Float)}.
+	decode(0xca, Float) --> !, bytes(4, Bytes), {ieee_754(single, big, canonical)::parse(bytes(Bytes), Float)}.
+	decode(0xcb, Float) --> !, bytes(8, Bytes), {ieee_754(double, big, canonical)::parse(bytes(Bytes), Float)}.
 	decode(0xcc, Integer) --> !, [Integer].
 	decode(0xcd, Integer) --> !, unsigned_integer(2, Integer).
 	decode(0xce, Integer) --> !, unsigned_integer(4, Integer).
@@ -509,185 +508,5 @@
 	chars_to_codes([Char| Chars], [Code| Codes0], Codes) :-
 		char_code(Char, Code),
 		chars_to_codes(Chars, Codes0, Codes).
-
-	encode_ieee754_single(0.0, [0x00, 0x00, 0x00, 0x00]) :- !.
-	encode_ieee754_single(Value, [0x80, 0x00, 0x00, 0x00]) :-
-		Value = -0.0,
-		!.
-	encode_ieee754_single(Value, Bytes) :-
-		float_to_ieee754_single(Value, Bits),
-		integer_to_bytes(4, Bits, Bytes).
-
-	encode_ieee754_double(0.0, [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]) :- !.
-	encode_ieee754_double(Value, [0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]) :-
-		Value = -0.0,
-		!.
-	encode_ieee754_double(Value, Bytes) :-
-		float_to_ieee754_double(Value, Bits),
-		integer_to_bytes(8, Bits, Bytes).
-
-	float_to_ieee754_single(Value, Bits) :-
-		float_sign_and_abs(Value, Sign, AbsValue),
-		normalize_binary_float(AbsValue, Significand, Exponent),
-		encode_ieee754_single_finite(Significand, Exponent, ExponentBits, MantissaBits),
-		Bits is (Sign << 31) \/ (ExponentBits << 23) \/ MantissaBits.
-
-	float_to_ieee754_double(Value, Bits) :-
-		float_sign_and_abs(Value, Sign, AbsValue),
-		normalize_binary_float(AbsValue, Significand, Exponent),
-		encode_ieee754_double_finite(Significand, Exponent, ExponentBits, MantissaBits),
-		Bits is (Sign << 63) \/ (ExponentBits << 52) \/ MantissaBits.
-
-	float_sign_and_abs(Value, 1, AbsValue) :-
-		Value < 0.0,
-		!,
-		AbsValue is -Value.
-	float_sign_and_abs(Value, 0, Value).
-
-	normalize_binary_float(Value, Significand, Exponent) :-
-		(   Value >= 1.0 ->
-			normalize_binary_float_down(Value, 0, Significand, Exponent)
-		;   normalize_binary_float_up(Value, 0, Significand, Exponent)
-		).
-
-	normalize_binary_float_down(Value, Exponent0, Significand, Exponent) :-
-		(   Value < 2.0 ->
-			Significand = Value,
-			Exponent = Exponent0
-		;   NextValue is Value / 2.0,
-			NextExponent is Exponent0 + 1,
-			normalize_binary_float_down(NextValue, NextExponent, Significand, Exponent)
-		).
-
-	normalize_binary_float_up(Value, Exponent0, Significand, Exponent) :-
-		(   Value >= 1.0 ->
-			Significand = Value,
-			Exponent = Exponent0
-		;   NextValue is Value * 2.0,
-			NextExponent is Exponent0 - 1,
-			normalize_binary_float_up(NextValue, NextExponent, Significand, Exponent)
-		).
-
-	encode_ieee754_single_finite(Significand, Exponent, ExponentBits, MantissaBits) :-
-		(   Exponent > 127 ->
-			fail
-		;   Exponent >= -126 ->
-			significand_fraction_bits(Significand, 23, MantissaBits, Remainder),
-			Remainder = 0.0,
-			ExponentBits is Exponent + 127
-		;   Exponent >= -149 ->
-			Shift is Exponent + 149,
-			scaled_significand_bits(Significand, Shift, MantissaBits, Remainder),
-			Remainder = 0.0,
-			ExponentBits = 0
-		;   fail
-		).
-
-	encode_ieee754_double_finite(Significand, Exponent, ExponentBits, MantissaBits) :-
-		(   Exponent > 1023 ->
-			fail
-		;   Exponent >= -1022 ->
-			significand_fraction_bits(Significand, 52, MantissaBits, Remainder),
-			Remainder = 0.0,
-			ExponentBits is Exponent + 1023
-		;   Exponent >= -1074 ->
-			Shift is Exponent + 1074,
-			scaled_significand_bits(Significand, Shift, MantissaBits, Remainder),
-			Remainder = 0.0,
-			ExponentBits = 0
-		;   fail
-		).
-
-	significand_fraction_bits(Significand, Precision, Bits, Remainder) :-
-		Fraction is Significand - 1.0,
-		fraction_bits(Precision, Fraction, 0, Bits, Remainder).
-
-	fraction_bits(0, Fraction, Bits, Bits, Fraction) :-
-		!.
-	fraction_bits(Precision, Fraction0, Bits0, Bits, Fraction) :-
-		Precision > 0,
-		Twice is Fraction0 * 2.0,
-		(   Twice >= 1.0 ->
-			Bit = 1,
-			Fraction1 is Twice - 1.0
-		;   Bit = 0,
-			Fraction1 = Twice
-		),
-		Bits1 is (Bits0 << 1) \/ Bit,
-		NextPrecision is Precision - 1,
-		fraction_bits(NextPrecision, Fraction1, Bits1, Bits, Fraction).
-
-	scaled_significand_bits(Significand, Shift, Bits, Remainder) :-
-		Fraction is Significand - 1.0,
-		scaled_bits(Shift, Fraction, 1, Bits, Remainder).
-
-	scaled_bits(0, Fraction, Bits, Bits, Fraction) :-
-		!.
-	scaled_bits(Shift, Fraction0, Bits0, Bits, Fraction) :-
-		Shift > 0,
-		Twice is Fraction0 * 2.0,
-		(   Twice >= 1.0 ->
-			Bit = 1,
-			Fraction1 is Twice - 1.0
-		;   Bit = 0,
-			Fraction1 = Twice
-		),
-		Bits1 is (Bits0 << 1) \/ Bit,
-		NextShift is Shift - 1,
-		scaled_bits(NextShift, Fraction1, Bits1, Bits, Fraction).
-
-	decode_ieee754_single(Bytes, Term) :-
-		bytes_to_unsigned_integer(Bytes, Bits),
-		ieee754_single_to_term(Bits, Term).
-
-	decode_ieee754_double(Bytes, Term) :-
-		bytes_to_unsigned_integer(Bytes, Bits),
-		ieee754_double_to_term(Bits, Term).
-
-	ieee754_single_to_term(Bits, Term) :-
-		Sign is (Bits >> 31) /\ 0x01,
-		ExponentBits is (Bits >> 23) /\ 0xff,
-		MantissaBits is Bits /\ 0x7fffff,
-		decode_ieee754_term(Sign, ExponentBits, MantissaBits, 23, 127, -149, Term).
-
-	ieee754_double_to_term(Bits, Term) :-
-		Sign is (Bits >> 63) /\ 0x01,
-		ExponentBits is (Bits >> 52) /\ 0x7ff,
-		MantissaBits is Bits /\ 0xfffffffffffff,
-		decode_ieee754_term(Sign, ExponentBits, MantissaBits, 52, 1023, -1074, Term).
-
-	decode_ieee754_term(Sign, 0, 0, _Precision, _Bias, _SubnormalExponent, Term) :-
-		!,
-		zero_from_sign(Sign, Term).
-	decode_ieee754_term(Sign, 0, MantissaBits, _Precision, _Bias, SubnormalExponent, Term) :-
-		!,
-		Magnitude is MantissaBits * (2.0 ** SubnormalExponent),
-		apply_float_sign(Sign, Magnitude, Term).
-	decode_ieee754_term(0, ExponentBits, 0, _Precision, _Bias, _SubnormalExponent, @infinity) :-
-		all_one_bits(ExponentBits),
-		!.
-	decode_ieee754_term(1, ExponentBits, 0, _Precision, _Bias, _SubnormalExponent, @negative_infinity) :-
-		all_one_bits(ExponentBits),
-		!.
-	decode_ieee754_term(_Sign, ExponentBits, MantissaBits, _Precision, _Bias, _SubnormalExponent, @not_a_number) :-
-		all_one_bits(ExponentBits),
-		MantissaBits =\= 0,
-		!.
-	decode_ieee754_term(Sign, ExponentBits, MantissaBits, Precision, Bias, _SubnormalExponent, Term) :-
-		Scale is 2.0 ** Precision,
-		Exponent is ExponentBits - Bias,
-		Magnitude is (1.0 + MantissaBits / Scale) * (2.0 ** Exponent),
-		apply_float_sign(Sign, Magnitude, Term).
-
-	all_one_bits(0xff).
-	all_one_bits(0x7ff).
-
-	zero_from_sign(0, 0.0).
-	zero_from_sign(1, NegativeZero) :-
-		NegativeZero is -0.0.
-
-	apply_float_sign(0, Magnitude, Magnitude).
-	apply_float_sign(1, Magnitude, Term) :-
-		Term is -Magnitude.
 
 :- end_object.

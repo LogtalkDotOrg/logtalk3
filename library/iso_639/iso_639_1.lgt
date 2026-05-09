@@ -31,7 +31,7 @@
 		remarks is [
 			'Source update' - '2026-01-15',
 			'Generated entries' - '183',
-			'Source' - 'Library of Congress ISO 639-2 code list'
+			'Source' - 'Library of Congress ISO 639-2 code list.'
 		]
 	]).
 

@@ -30,6 +30,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load(reader(loader)),
 		logtalk_load(json(loader)),
+		logtalk_load(ieee_754(loader)),
 		logtalk_load(protobuf, [source_data(on), debug(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load('test_files/tests', [hook(lgtunit)]),

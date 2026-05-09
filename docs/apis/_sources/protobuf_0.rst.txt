@@ -14,14 +14,15 @@ Google Protocol Buffers binary format parser and generator.
 |    ``logtalk_load(protobuf(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-04
+| **Version:** 1:1:0
+| **Date:** 2026-05-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Uses:**
+|    :ref:`ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754/3>`
 |    :ref:`json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json/3>`
 |    :ref:`list <list/0>`
 |    :ref:`reader <reader/0>`

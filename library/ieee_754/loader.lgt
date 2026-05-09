@@ -23,7 +23,15 @@
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
-		logtalk_load([ieee_754_protocol, ieee_754_fields_protocol, ieee_754_common, ieee_754, ieee_754_fields], [optimize(on)])
+		logtalk_load([
+			ieee_754_protocol,
+			ieee_754_fields_protocol,
+			ieee_754_common,
+			ieee_754,
+			ieee_754_fields
+		], [
+			optimize(on)
+		])
 	)).
 
 :- else.

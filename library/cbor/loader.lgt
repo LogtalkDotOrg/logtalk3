@@ -23,6 +23,7 @@
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
+		logtalk_load(ieee_754(loader)),
 		logtalk_load(cbor, [optimize(on)])
 	)).
 

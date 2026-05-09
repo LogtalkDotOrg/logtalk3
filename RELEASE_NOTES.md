@@ -431,6 +431,9 @@ tail-recursive.
 * IMPROVED: Rewritten two `yaml` library auxiliary predicates to be
 tail-recursive.
 
+* UPDATED: The `avro`, `cbor`, and `protobuf` libraries to reuse the new
+`ieee_754` library.
+
 * FIXED: The `linda`, `tzif`, `ulid`, `url`, and `yaml` libraries to compile
 all their entities in optimal mode.
 

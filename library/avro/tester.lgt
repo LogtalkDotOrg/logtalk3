@@ -31,6 +31,7 @@
 		logtalk_load(reader(loader)),
 		logtalk_load(json(loader)),
 		logtalk_load(json_lines(loader)),
+		logtalk_load(ieee_754(loader)),
 		logtalk_load(avro, [source_data(on), debug(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load('test_files/tests', [hook(lgtunit)]),

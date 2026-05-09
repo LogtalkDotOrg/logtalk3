@@ -22,9 +22,9 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:11:1,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2021-12-06,
+		date is 2026-05-09,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -255,10 +255,6 @@
 	decode(0xf5, @true) --> !.
 	decode(0xf6, @null) --> !.
 	decode(0xf7, @undefined) --> !.
-	decode(0xf9, @infinity) --> [0x7c, 0x00], !.
-	decode(0xf9, @negative_infinity) --> [0xfc, 0x00], !.
-	decode(0xf9, @not_a_number) --> [0x7e, 0x00], !.
-
 	% unsigned integer 0x00..0x17 (0..23)
 	decode(Integer, Integer) -->
 		{0x00 =< Integer, Integer =< 0x17}, !.
@@ -549,15 +545,15 @@
 
 	decode_halt_precision_float(Float) -->
 		[Byte1, Byte0],
-		{half_precision_to_float(Byte1, Byte0, Float)}.
+		{ieee_754(half, big, canonical)::parse(bytes([Byte1, Byte0]), Float)}.
 
 	decode_single_precision_float(Float) -->
 		[Byte3, Byte2, Byte1, Byte0],
-		{single_precision_to_float(Byte3, Byte2, Byte1, Byte0, Float)}.
+		{ieee_754(single, big, canonical)::parse(bytes([Byte3, Byte2, Byte1, Byte0]), Float)}.
 
 	decode_double_precision_float(Float) -->
 		[Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0],
-		{double_precision_to_float(Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0, Float)}.
+		{ieee_754(double, big, canonical)::parse(bytes([Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0]), Float)}.
 
 	% auxiliary non-terminals
 
@@ -658,48 +654,6 @@
 
 	mantissa_and_exponent_to_float(Mantissa, Exponent, Float) :-
 		Float is float(Mantissa * 10**Exponent).
-
-	half_precision_to_float(0x00, 0x00, 0.0) :- !.
-	half_precision_to_float(0x80, 0x00, -0.0) :- !.
-	half_precision_to_float(0x7c, 0x00, @infinity) :- !.
-	half_precision_to_float(0x7e, 0x00, @not_a_number) :- !.
-	half_precision_to_float(0xfc, 0x00, @negative_infinity) :- !.
-	half_precision_to_float(Byte1, Byte0, Float) :-
-		Sign is Byte1 >> 7,
-		Exponent is Byte1 >> 2 /\ 0x1f,
-		Significand is (Byte1 /\ 0x03) << 8 + Byte0,
-		(	Exponent =:= 0 ->
-			Float is (-1) ** Sign * 2 ** (Exponent - 14) * (Significand / 1024.0)
-		;	Float is (-1) ** Sign * 2 ** (Exponent - 15) * (1 + Significand / 1024.0)
-		).
-
-	single_precision_to_float(0x00, 0x00, 0x00, 0x00, 0.0) :- !.
-	single_precision_to_float(0x10, 0x00, 0x00, 0x00, -0.0) :- !.
-	single_precision_to_float(0x7f, 0x80, 0x00, 0x00, @infinity) :- !.
-	single_precision_to_float(0x7f, 0xc0, 0x00, 0x00, @not_a_number) :- !.
-	single_precision_to_float(0xff, 0x80, 0x00, 0x00, @negative_infinity) :- !.
-	single_precision_to_float(Byte3, Byte2, Byte1, Byte0, Float) :-
-		Sign is Byte3 >> 7,
-		Exponent is (Byte3 /\ 0x7f) << 1 + Byte2 >> 7,
-		Significand is (Byte2 /\ 0x7f) << 16 + Byte1 << 8 + Byte0,
-		(	Exponent =:= 0 ->
-			Float is (-1) ** Sign * (Significand * 2 ** -23) * 2 ** (Exponent - 127)
-		;	Float is (-1) ** Sign * (1 + Significand * 2 ** -23) * 2 ** (Exponent - 127)
-		).
-
-	double_precision_to_float(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0.0) :- !.
-	double_precision_to_float(0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, -0.0) :- !.
-	double_precision_to_float(0x7f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, @infinity) :- !.
-	double_precision_to_float(0x7f, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, @not_a_number) :- !.
-	double_precision_to_float(0xff, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, @negative_infinity) :- !.
-	double_precision_to_float(Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0, Float) :-
-		Sign is Byte7 >> 7,
-		Exponent is (Byte7 /\ 0x7f) << 4 + Byte6 >> 4,
-		Significand is (Byte6 /\ 0x0f) << 48 + Byte5 << 40 + Byte4 << 32 + Byte3 << 24 + Byte2 << 16 + Byte1 << 8 + Byte0,
-		(	Exponent =:= 0 ->
-			Float is (-1) ** Sign * (Significand * 2 ** -52) * 2 ** (Exponent - 1023)
-		;	Float is (-1) ** Sign * (1 + Significand * 2 ** -52) * 2 ** (Exponent - 1023)
-		).
 
 	utf_8_chars_to_bytes([], [], Length, Length).
 	utf_8_chars_to_bytes([Char| Chars], [Code| Bytes], Length0, Length) :-

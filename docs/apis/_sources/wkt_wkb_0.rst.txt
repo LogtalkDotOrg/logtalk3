@@ -24,6 +24,8 @@ Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, an
 | **Implements:**
 |    ``public`` :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0>`
 | **Uses:**
+|    :ref:`ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754/3>`
+|    :ref:`ieee_754_fields(Precision,ByteOrder) <ieee_754_fields/2>`
 |    :ref:`list <list/0>`
 |    :ref:`reader <reader/0>`
 

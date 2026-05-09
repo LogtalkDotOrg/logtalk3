@@ -22,9 +22,9 @@
 :- object(protobuf).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-04,
+		date is 2026-05-09,
 		comment is 'Google Protocol Buffers binary format parser and generator.'
 	]).
 
@@ -617,40 +617,21 @@
 
 	% float (32-bit IEEE 754)
 	encode_float(Float) -->
-		{	float_to_ieee754_32(Float, Bits),
-			B0 is Bits /\ 0xff,
-			B1 is (Bits >> 8) /\ 0xff,
-			B2 is (Bits >> 16) /\ 0xff,
-			B3 is (Bits >> 24) /\ 0xff
-		},
-		[B0, B1, B2, B3].
+		{	ieee_754(single, little, canonical)::generate(Float, Bytes, [])},
+		Bytes.
 
 	decode_float(Float) -->
 		[B0, B1, B2, B3],
-		{	Bits is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24),
-			ieee754_32_to_float(Bits, Float)
-		}.
+		{	ieee_754(single, little, canonical)::parse(bytes([B0, B1, B2, B3]), Float)}.
 
 	% double (64-bit IEEE 754)
 	encode_double(Double) -->
-		{	float_to_ieee754_64(Double, Bits),
-			B0 is Bits /\ 0xff,
-			B1 is (Bits >> 8) /\ 0xff,
-			B2 is (Bits >> 16) /\ 0xff,
-			B3 is (Bits >> 24) /\ 0xff,
-			B4 is (Bits >> 32) /\ 0xff,
-			B5 is (Bits >> 40) /\ 0xff,
-			B6 is (Bits >> 48) /\ 0xff,
-			B7 is (Bits >> 56) /\ 0xff
-		},
-		[B0, B1, B2, B3, B4, B5, B6, B7].
+		{	ieee_754(double, little, canonical)::generate(Double, Bytes, [])},
+		Bytes.
 
 	decode_double(Double) -->
 		[B0, B1, B2, B3, B4, B5, B6, B7],
-		{	Bits is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24) \/
-			        (B4 << 32) \/ (B5 << 40) \/ (B6 << 48) \/ (B7 << 56),
-			ieee754_64_to_float(Bits, Double)
-		}.
+		{	ieee_754(double, little, canonical)::parse(bytes([B0, B1, B2, B3, B4, B5, B6, B7]), Double)}.
 
 	% =========================================================================
 	% String/Bytes encoding/decoding DCGs
@@ -696,63 +677,5 @@
 		[].
 	bytes_rest([Byte| Bytes]) -->
 		[Byte], bytes_rest(Bytes).
-
-	% =========================================================================
-	% IEEE 754 conversions (auxiliary predicates)
-	% =========================================================================
-
-	float_to_ieee754_32(Float, Bits) :-
-		(	Float =:= 0 ->
-			Bits = 0
-		;	Float < 0 ->
-			AbsFloat is -Float,
-			float_to_ieee754_32_unsigned(AbsFloat, UBits),
-			Bits is UBits \/ 0x80000000
-		;	float_to_ieee754_32_unsigned(Float, Bits)
-		).
-
-	float_to_ieee754_32_unsigned(Float, Bits) :-
-		LogFloat is log(Float) / log(2),
-		Exponent is floor(LogFloat),
-		BiasedExp is Exponent + 127,
-		Mantissa is Float / (2 ** Exponent) - 1,
-		MantissaBits is round(Mantissa * 8388608), % 2^23
-		Bits is (BiasedExp << 23) \/ MantissaBits.
-
-	ieee754_32_to_float(0, 0.0) :-
-		!.
-	ieee754_32_to_float(Bits, Float) :-
-		Sign is (Bits >> 31) /\ 1,
-		Exponent is ((Bits >> 23) /\ 0xff) - 127,
-		Mantissa is (Bits /\ 0x7fffff) / 8388608 + 1,
-		UFloat is Mantissa * (2 ** Exponent),
-		(Sign =:= 1 -> Float is -UFloat ; Float = UFloat).
-
-	float_to_ieee754_64(Float, Bits) :-
-		(	Float =:= 0 ->
-			Bits = 0
-		;	Float < 0 ->
-			AbsFloat is -Float,
-			float_to_ieee754_64_unsigned(AbsFloat, UBits),
-			Bits is UBits \/ 0x8000000000000000
-		;	float_to_ieee754_64_unsigned(Float, Bits)
-		).
-
-	float_to_ieee754_64_unsigned(Float, Bits) :-
-		LogFloat is log(Float) / log(2),
-		Exponent is floor(LogFloat),
-		BiasedExp is Exponent + 1023,
-		Mantissa is Float / (2 ** Exponent) - 1,
-		MantissaBits is round(Mantissa * 4503599627370496), % 2^52
-		Bits is (BiasedExp << 52) \/ MantissaBits.
-
-	ieee754_64_to_float(0, 0.0) :-
-		!.
-	ieee754_64_to_float(Bits, Float) :-
-		Sign is (Bits >> 63) /\ 1,
-		Exponent is ((Bits >> 52) /\ 0x7ff) - 1023,
-		Mantissa is (Bits /\ 0xfffffffffffff) / 4503599627370496 + 1,
-		UFloat is Mantissa * (2 ** Exponent),
-		(Sign =:= 1 -> Float is -UFloat ; Float = UFloat).
 
 :- end_object.
