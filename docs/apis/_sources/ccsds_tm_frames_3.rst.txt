@@ -1,0 +1,272 @@
+.. index:: single: ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF)
+.. _ccsds_tm_frames/3:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF)``
+==============================================================
+
+* ``FrameLength`` - Fixed telemetry transfer frame length in octets.
+* ``SecondaryHeaderLength`` - Length in octets of the telemetry transfer frame secondary header when present.
+* ``HasFECF`` - Boolean indicating if frames include the frame error control field.
+
+
+CCSDS telemetry transfer frame parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_frames(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ccsds_frame_protocol/0::data_field/2`  :ref:`ccsds_frame_protocol/0::fecf/2`  :ref:`ccsds_frame_protocol/0::frame_type/2`  :ref:`ccsds_frame_protocol/0::generate/2`  :ref:`ccsds_frame_protocol/0::generate/3`  :ref:`ccsds_frame_protocol/0::ocf/2`  :ref:`ccsds_frame_protocol/0::parse/2`  :ref:`ccsds_frame_protocol/0::spacecraft_id/2`  :ref:`ccsds_frame_protocol/0::valid/1`  :ref:`ccsds_frame_protocol/0::version/2`  :ref:`ccsds_frame_protocol/0::virtual_channel_id/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: ocf_flag/2
+.. _ccsds_tm_frames/3::ocf_flag/2:
+
+``ocf_flag/2``
+^^^^^^^^^^^^^^
+
+Extracts the operational control field flag. Returns ``absent`` or ``present``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ocf_flag(Frame,Flag)``
+| **Mode and number of proofs:**
+|    ``ocf_flag(+compound,-atom)`` - ``one``
+
+
+------------
+
+.. index:: master_channel_frame_count/2
+.. _ccsds_tm_frames/3::master_channel_frame_count/2:
+
+``master_channel_frame_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the master channel frame count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``master_channel_frame_count(Frame,Count)``
+| **Mode and number of proofs:**
+|    ``master_channel_frame_count(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: virtual_channel_frame_count/2
+.. _ccsds_tm_frames/3::virtual_channel_frame_count/2:
+
+``virtual_channel_frame_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the virtual channel frame count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``virtual_channel_frame_count(Frame,Count)``
+| **Mode and number of proofs:**
+|    ``virtual_channel_frame_count(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: secondary_header_flag/2
+.. _ccsds_tm_frames/3::secondary_header_flag/2:
+
+``secondary_header_flag/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the telemetry transfer frame secondary header flag. Returns ``absent`` or ``present``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``secondary_header_flag(Frame,Flag)``
+| **Mode and number of proofs:**
+|    ``secondary_header_flag(+compound,-atom)`` - ``one``
+
+
+------------
+
+.. index:: synchronization_flag/2
+.. _ccsds_tm_frames/3::synchronization_flag/2:
+
+``synchronization_flag/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the synchronization flag value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``synchronization_flag(Frame,Flag)``
+| **Mode and number of proofs:**
+|    ``synchronization_flag(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: packet_order_flag/2
+.. _ccsds_tm_frames/3::packet_order_flag/2:
+
+``packet_order_flag/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the packet order flag value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packet_order_flag(Frame,Flag)``
+| **Mode and number of proofs:**
+|    ``packet_order_flag(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: segment_length_identifier/2
+.. _ccsds_tm_frames/3::segment_length_identifier/2:
+
+``segment_length_identifier/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the segment length identifier value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``segment_length_identifier(Frame,Identifier)``
+| **Mode and number of proofs:**
+|    ``segment_length_identifier(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: first_header_pointer/2
+.. _ccsds_tm_frames/3::first_header_pointer/2:
+
+``first_header_pointer/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the first header pointer value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``first_header_pointer(Frame,Pointer)``
+| **Mode and number of proofs:**
+|    ``first_header_pointer(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: secondary_header/2
+.. _ccsds_tm_frames/3::secondary_header/2:
+
+``secondary_header/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the telemetry transfer frame secondary header. Returns ``none`` when absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``secondary_header(Frame,SecondaryHeader)``
+| **Mode and number of proofs:**
+|    ``secondary_header(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: update_fecf/2
+.. _ccsds_tm_frames/3::update_fecf/2:
+
+``update_fecf/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the correct telemetry transfer frame FECF for the selected object configuration and returns the corresponding updated frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_fecf(Frame,UpdatedFrame)``
+| **Mode and number of proofs:**
+|    ``update_fecf(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: verify_fecf/1
+.. _ccsds_tm_frames/3::verify_fecf/1:
+
+``verify_fecf/1``
+^^^^^^^^^^^^^^^^^
+
+True if the telemetry transfer frame term contains the correct FECF for the selected object configuration.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_fecf(Frame)``
+| **Mode and number of proofs:**
+|    ``verify_fecf(@compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

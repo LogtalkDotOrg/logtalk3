@@ -1,0 +1,159 @@
+.. index:: single: ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF)
+.. _ccsds_aos_frames/4:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF)``
+=================================================================
+
+* ``FrameLength`` - Fixed AOS transfer frame length in octets.
+* ``InsertZoneLength`` - Length in octets of the optional insert zone when present.
+* ``HasOCF`` - Boolean indicating if frames include the operational control field.
+* ``HasFECF`` - Boolean indicating if frames include the frame error control field.
+
+
+CCSDS advanced orbiting systems transfer frame parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_frames(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ccsds_frame_protocol/0::data_field/2`  :ref:`ccsds_frame_protocol/0::fecf/2`  :ref:`ccsds_frame_protocol/0::frame_type/2`  :ref:`ccsds_frame_protocol/0::generate/2`  :ref:`ccsds_frame_protocol/0::generate/3`  :ref:`ccsds_frame_protocol/0::ocf/2`  :ref:`ccsds_frame_protocol/0::parse/2`  :ref:`ccsds_frame_protocol/0::spacecraft_id/2`  :ref:`ccsds_frame_protocol/0::valid/1`  :ref:`ccsds_frame_protocol/0::version/2`  :ref:`ccsds_frame_protocol/0::virtual_channel_id/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: virtual_channel_frame_count/2
+.. _ccsds_aos_frames/4::virtual_channel_frame_count/2:
+
+``virtual_channel_frame_count/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the virtual channel frame count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``virtual_channel_frame_count(Frame,Count)``
+| **Mode and number of proofs:**
+|    ``virtual_channel_frame_count(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: signaling_field/2
+.. _ccsds_aos_frames/4::signaling_field/2:
+
+``signaling_field/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the signaling field term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``signaling_field(Frame,SignalingField)``
+| **Mode and number of proofs:**
+|    ``signaling_field(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: insert_zone/2
+.. _ccsds_aos_frames/4::insert_zone/2:
+
+``insert_zone/2``
+^^^^^^^^^^^^^^^^^
+
+Extracts the optional insert zone. Returns ``none`` when absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_zone(Frame,InsertZone)``
+| **Mode and number of proofs:**
+|    ``insert_zone(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: update_fecf/2
+.. _ccsds_aos_frames/4::update_fecf/2:
+
+``update_fecf/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the correct AOS transfer frame FECF for the selected object configuration and returns the corresponding updated frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_fecf(Frame,UpdatedFrame)``
+| **Mode and number of proofs:**
+|    ``update_fecf(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: verify_fecf/1
+.. _ccsds_aos_frames/4::verify_fecf/1:
+
+``verify_fecf/1``
+^^^^^^^^^^^^^^^^^
+
+True if the AOS transfer frame term contains the correct FECF for the selected object configuration.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_fecf(Frame)``
+| **Mode and number of proofs:**
+|    ``verify_fecf(@compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

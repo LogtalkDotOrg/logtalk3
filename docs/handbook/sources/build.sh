@@ -100,7 +100,14 @@ sed '1,19d' ../../../library/c45_classifier/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
-sed '1,19d' ../../../library/ccsds/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds.rst
+sed '1,19d' ../../../library/ccsds_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_frames.rst
+sed '1,19d' ../../../library/ccsds_link_profiles/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_link_profiles.rst
+sed '1,19d' ../../../library/ccsds_packetization/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_packetization.rst
+sed '1,19d' ../../../library/ccsds_packets/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_packets.rst
+sed '1,19d' ../../../library/ccsds_packet_services/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_packet_services.rst
+sed '1,19d' ../../../library/ccsds_tc_services/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_tc_services.rst
+sed '1,19d' ../../../library/ccsds_time_codes/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_time_codes.rst
+sed '1,19d' ../../../library/ccsds_time_fields/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_time_fields.rst
 sed '1,19d' ../../../library/character_sets/NOTES.md | pandoc -f gfm -t rst -o libraries/character_sets.rst
 sed '1,19d' ../../../library/classification_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 sed '1,19d' ../../../library/clo_span_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst

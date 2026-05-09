@@ -1,0 +1,119 @@
+.. index:: single: ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch)
+.. _ccsds_cds/3:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch)``
+==========================================================
+
+* ``DaySegmentOctets`` - Number of day segment octets. Supported values are ``2`` and ``3``.
+* ``SubmillisecondOctets`` - Number of submillisecond octets. Supported values are ``0``, ``2``, and ``4``.
+* ``Epoch`` - Epoch used when converting to and from Unix seconds. Supported values are ``ccsds_epoch`` and ``unix_epoch``.
+
+
+CCSDS day segmented time code parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_time_codes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0>`
+| **Uses:**
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ccsds_time_code_protocol/0::epoch/1`  :ref:`ccsds_time_code_protocol/0::format/1`  :ref:`ccsds_time_code_protocol/0::from_unix_seconds/2`  :ref:`ccsds_time_code_protocol/0::generate/2`  :ref:`ccsds_time_code_protocol/0::generate/3`  :ref:`ccsds_time_code_protocol/0::parse/2`  :ref:`ccsds_time_code_protocol/0::unix_seconds/2`  :ref:`ccsds_time_code_protocol/0::valid/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: days/2
+.. _ccsds_cds/3::days/2:
+
+``days/2``
+^^^^^^^^^^
+
+Extracts the day segment value from a CDS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``days(TimeCode,Days)``
+| **Mode and number of proofs:**
+|    ``days(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: milliseconds/2
+.. _ccsds_cds/3::milliseconds/2:
+
+``milliseconds/2``
+^^^^^^^^^^^^^^^^^^
+
+Extracts the millisecond-of-day value from a CDS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``milliseconds(TimeCode,Milliseconds)``
+| **Mode and number of proofs:**
+|    ``milliseconds(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: submilliseconds/2
+.. _ccsds_cds/3::submilliseconds/2:
+
+``submilliseconds/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the optional submillisecond value from a CDS time term. Two-octet objects use microseconds; four-octet objects use picoseconds within the millisecond.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``submilliseconds(TimeCode,Submilliseconds)``
+| **Mode and number of proofs:**
+|    ``submilliseconds(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

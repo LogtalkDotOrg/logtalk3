@@ -1,0 +1,93 @@
+.. index:: single: ccsds_time_codes
+.. _ccsds_time_codes/0:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_time_codes``
+====================
+
+Helpers for introspecting CCSDS time code terms.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_time_codes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid/1
+.. _ccsds_time_codes/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+True if the argument is a known CCSDS time code term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(TimeCode)``
+| **Mode and number of proofs:**
+|    ``valid(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: format/2
+.. _ccsds_time_codes/0::format/2:
+
+``format/2``
+^^^^^^^^^^^^
+
+Returns the CCSDS time code format for a known time code term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format(TimeCode,Format)``
+| **Mode and number of proofs:**
+|    ``format(+compound,-atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

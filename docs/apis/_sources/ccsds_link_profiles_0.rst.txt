@@ -1,0 +1,449 @@
+.. index:: single: ccsds_link_profiles
+.. _ccsds_link_profiles/0:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_link_profiles``
+=======================
+
+Ergonomic wrappers around the CCSDS TM, TC, and AOS frame objects using explicit profile terms.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_link_profiles(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`ccsds_packet_services <ccsds_packet_services/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_profile/1
+.. _ccsds_link_profiles/0::valid_profile/1:
+
+``valid_profile/1``
+^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a supported CCSDS link profile term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_profile(Profile)``
+| **Mode and number of proofs:**
+|    ``valid_profile(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_frame/3
+.. _ccsds_link_profiles/0::parse_frame/3:
+
+``parse_frame/3``
+^^^^^^^^^^^^^^^^^
+
+Parses exactly one CCSDS transfer frame from a source using a link profile term. Supported source terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_frame(Source,Profile,Frame)``
+| **Mode and number of proofs:**
+|    ``parse_frame(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is neither a variable nor a supported link profile term:
+|        ``domain_error(ccsds_link_profile,Profile)``
+|    ``Source`` does not contain exactly one frame for the selected profile:
+|        ``domain_error(ccsds_single_frame_source,Source)``
+
+
+------------
+
+.. index:: parse_frames/3
+.. _ccsds_link_profiles/0::parse_frames/3:
+
+``parse_frames/3``
+^^^^^^^^^^^^^^^^^^
+
+Parses zero or more CCSDS transfer frames from a source using a link profile term. Supported source terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_frames(Source,Profile,Frames)``
+| **Mode and number of proofs:**
+|    ``parse_frames(+compound,+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is neither a variable nor a supported link profile term:
+|        ``domain_error(ccsds_link_profile,Profile)``
+
+
+------------
+
+.. index:: generate_frame/3
+.. _ccsds_link_profiles/0::generate_frame/3:
+
+``generate_frame/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates exactly one CCSDS transfer frame to a sink using a link profile term. Supported sink terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_frame(Sink,Profile,Frame)``
+| **Mode and number of proofs:**
+|    ``generate_frame(+compound,+compound,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is neither a variable nor a supported link profile term:
+|        ``domain_error(ccsds_link_profile,Profile)``
+|    ``Frame`` is neither a variable nor a valid frame term for the selected profile:
+|        ``domain_error(ccsds_frame_term,Frame)``
+
+
+------------
+
+.. index:: generate_frames/3
+.. _ccsds_link_profiles/0::generate_frames/3:
+
+``generate_frames/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Generates zero or more CCSDS transfer frames to a sink using a link profile term. Supported sink terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_frames(Sink,Profile,Frames)``
+| **Mode and number of proofs:**
+|    ``generate_frames(+compound,+compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is a variable:
+|        ``instantiation_error``
+|    ``Frames`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is neither a variable nor a supported link profile term:
+|        ``domain_error(ccsds_link_profile,Profile)``
+|    ``Frames`` is neither a variable nor a list of valid frame terms for the selected profile:
+|        ``domain_error(ccsds_frame_terms,Frames)``
+
+
+------------
+
+.. index:: valid_reassembly_state/1
+.. _ccsds_link_profiles/0::valid_reassembly_state/1:
+
+``valid_reassembly_state/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a valid TM/AOS channel packet reassembly state term for the profile-level packet reassembly predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_reassembly_state(State)``
+| **Mode and number of proofs:**
+|    ``valid_reassembly_state(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: initial_reassembly_state/1
+.. _ccsds_link_profiles/0::initial_reassembly_state/1:
+
+``initial_reassembly_state/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the initial TM/AOS channel packet reassembly state for the profile-level packet reassembly predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_reassembly_state(State)``
+| **Mode and number of proofs:**
+|    ``initial_reassembly_state(-compound)`` - ``one``
+
+
+------------
+
+.. index:: pending_fragments/2
+.. _ccsds_link_profiles/0::pending_fragments/2:
+
+``pending_fragments/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the non-empty pending packet fragments currently buffered per TM or AOS virtual channel.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pending_fragments(State,PendingFragments)``
+| **Mode and number of proofs:**
+|    ``pending_fragments(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: valid_discontinuity_policy/1
+.. _ccsds_link_profiles/0::valid_discontinuity_policy/1:
+
+``valid_discontinuity_policy/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a valid packet reassembly discontinuity recovery policy atom. Valid values are ``throw``, ``drop``, and ``resynchronize``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_discontinuity_policy(Policy)``
+| **Mode and number of proofs:**
+|    ``valid_discontinuity_policy(@atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: extract_packets/4
+.. _ccsds_link_profiles/0::extract_packets/4:
+
+``extract_packets/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the TM first-header-pointer packet zone or the AOS M_PDU packet zone from a TM or AOS frame using the selected link profile and packet secondary header length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``extract_packets(Profile,SecondaryHeaderLength,Frame,PacketZone)``
+| **Mode and number of proofs:**
+|    ``extract_packets(+compound,+integer,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Profile`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is neither a variable nor a supported link profile term:
+|        ``domain_error(ccsds_link_profile,Profile)``
+|    ``Profile`` is a telecommand profile and therefore does not support packet extraction:
+|        ``domain_error(ccsds_packet_link_profile,Profile)``
+|    ``Frame`` is neither a variable nor a valid frame term for the selected profile:
+|        ``domain_error(ccsds_frame_term,Frame)``
+
+
+------------
+
+.. index:: insert_packets/5
+.. _ccsds_link_profiles/0::insert_packets/5:
+
+``insert_packets/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Regenerates the TM first-header-pointer packet zone or the AOS M_PDU packet zone for a TM or AOS frame using the selected link profile and packet secondary header length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_packets(Profile,SecondaryHeaderLength,PacketZone,Frame,UpdatedFrame)``
+| **Mode and number of proofs:**
+|    ``insert_packets(+compound,+integer,+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Profile`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``PacketZone`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Profile`` is neither a variable nor a supported link profile term:
+|        ``domain_error(ccsds_link_profile,Profile)``
+|    ``Profile`` is a telecommand profile and therefore does not support packet insertion:
+|        ``domain_error(ccsds_packet_link_profile,Profile)``
+|    ``Frame`` is neither a variable nor a valid frame term for the selected profile:
+|        ``domain_error(ccsds_frame_term,Frame)``
+
+
+------------
+
+.. index:: reassemble_packets/6
+.. _ccsds_link_profiles/0::reassemble_packets/6:
+
+``reassemble_packets/6``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reassembles complete packets from a single TM or AOS transfer frame using the default ``throw`` discontinuity recovery policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reassemble_packets(Profile,SecondaryHeaderLength,Frame,State,Packets,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``reassemble_packets(+compound,+integer,+compound,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: reassemble_packets/7
+.. _ccsds_link_profiles/0::reassemble_packets/7:
+
+``reassemble_packets/7``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reassembles complete packets from a single TM or AOS transfer frame using the selected discontinuity recovery policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reassemble_packets(Profile,SecondaryHeaderLength,Frame,Policy,State,Packets,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``reassemble_packets(+compound,+integer,+compound,+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: reassemble_packets/8
+.. _ccsds_link_profiles/0::reassemble_packets/8:
+
+``reassemble_packets/8``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reassembles complete packets from a single TM or AOS transfer frame using the selected discontinuity recovery policy and returns any recovery events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reassemble_packets(Profile,SecondaryHeaderLength,Frame,Policy,State,Packets,UpdatedState,Events)``
+| **Mode and number of proofs:**
+|    ``reassemble_packets(+compound,+integer,+compound,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: reassemble_frames/6
+.. _ccsds_link_profiles/0::reassemble_frames/6:
+
+``reassemble_frames/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Reassembles complete packets across a sequence of TM or AOS transfer frames using the default ``throw`` discontinuity recovery policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reassemble_frames(Profile,SecondaryHeaderLength,Frames,State,Packets,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``reassemble_frames(+compound,+integer,+list(compound),+compound,-list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: reassemble_frames/7
+.. _ccsds_link_profiles/0::reassemble_frames/7:
+
+``reassemble_frames/7``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Reassembles complete packets across a sequence of TM or AOS transfer frames using the selected discontinuity recovery policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reassemble_frames(Profile,SecondaryHeaderLength,Frames,Policy,State,Packets,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``reassemble_frames(+compound,+integer,+list(compound),+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: reassemble_frames/8
+.. _ccsds_link_profiles/0::reassemble_frames/8:
+
+``reassemble_frames/8``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Reassembles complete packets across a sequence of TM or AOS transfer frames using the selected discontinuity recovery policy and returns any recovery events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reassemble_frames(Profile,SecondaryHeaderLength,Frames,Policy,State,Packets,UpdatedState,Events)``
+| **Mode and number of proofs:**
+|    ``reassemble_frames(+compound,+integer,+list(compound),+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

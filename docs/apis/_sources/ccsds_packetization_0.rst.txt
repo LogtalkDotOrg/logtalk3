@@ -1,0 +1,265 @@
+.. index:: single: ccsds_packetization
+.. _ccsds_packetization/0:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_packetization``
+=======================
+
+Helpers for packetizing CCSDS space packets into TM and AOS service-data regions with cross-frame carryover and idle fill generation.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_packetization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initial_state/1
+.. _ccsds_packetization/0::initial_state/1:
+
+``initial_state/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the initial packetizer state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_state(State)``
+| **Mode and number of proofs:**
+|    ``initial_state(-compound)`` - ``one``
+
+
+------------
+
+.. index:: pending_packets/2
+.. _ccsds_packetization/0::pending_packets/2:
+
+``pending_packets/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the non-empty queued packets and pending trailing packet bytes buffered per frame type, spacecraft identifier, and virtual channel identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pending_packets(State,PendingPackets)``
+| **Mode and number of proofs:**
+|    ``pending_packets(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_tm_packets/6
+.. _ccsds_packetization/0::packetize_tm_packets/6:
+
+``packetize_tm_packets/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets into the packet service region of a TM transfer frame, preserving any still-pending trailing packet bytes and queuing packets that do not fully fit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_tm_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedFrame,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``packetize_tm_packets(+compound,+integer,+compound,+list(compound),-compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_tm_packets/7
+.. _ccsds_packetization/0::packetize_tm_packets/7:
+
+``packetize_tm_packets/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets into the packet service region of a TM transfer frame and also returns explicit packetization events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_tm_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedFrame,UpdatedState,Events)``
+| **Mode and number of proofs:**
+|    ``packetize_tm_packets(+compound,+integer,+compound,+list(compound),-compound,-compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_aos_packets/6
+.. _ccsds_packetization/0::packetize_aos_packets/6:
+
+``packetize_aos_packets/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets into the packet service region of an AOS transfer frame, preserving any still-pending trailing packet bytes and queuing packets that do not fully fit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_aos_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedFrame,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``packetize_aos_packets(+compound,+integer,+compound,+list(compound),-compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_aos_packets/7
+.. _ccsds_packetization/0::packetize_aos_packets/7:
+
+``packetize_aos_packets/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets into the packet service region of an AOS transfer frame and also returns explicit packetization events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_aos_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedFrame,UpdatedState,Events)``
+| **Mode and number of proofs:**
+|    ``packetize_aos_packets(+compound,+integer,+compound,+list(compound),-compound,-compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_tm_frames/7
+.. _ccsds_packetization/0::packetize_tm_frames/7:
+
+``packetize_tm_frames/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets across a sequence of TM transfer frames. Packets that remain queued for the first frame channel are also returned.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_tm_frames(Frames,SecondaryHeaderLength,State,Packets,UpdatedFrames,RemainingPackets,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``packetize_tm_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_tm_frames/8
+.. _ccsds_packetization/0::packetize_tm_frames/8:
+
+``packetize_tm_frames/8``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets across a sequence of TM transfer frames and also returns explicit packetization events in frame order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_tm_frames(Frames,SecondaryHeaderLength,State,Packets,UpdatedFrames,RemainingPackets,UpdatedState,Events)``
+| **Mode and number of proofs:**
+|    ``packetize_tm_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_aos_frames/7
+.. _ccsds_packetization/0::packetize_aos_frames/7:
+
+``packetize_aos_frames/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets across a sequence of AOS transfer frames. Packets that remain queued for the first frame channel are also returned.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_aos_frames(Frames,SecondaryHeaderLength,State,Packets,UpdatedFrames,RemainingPackets,UpdatedState)``
+| **Mode and number of proofs:**
+|    ``packetize_aos_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: packetize_aos_frames/8
+.. _ccsds_packetization/0::packetize_aos_frames/8:
+
+``packetize_aos_frames/8``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Packetizes packets across a sequence of AOS transfer frames and also returns explicit packetization events in frame order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packetize_aos_frames(Frames,SecondaryHeaderLength,State,Packets,UpdatedFrames,RemainingPackets,UpdatedState,Events)``
+| **Mode and number of proofs:**
+|    ``packetize_aos_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_idle_packet/4
+.. _ccsds_packetization/0::generate_idle_packet/4:
+
+``generate_idle_packet/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a telemetry idle packet using APID 2047, the given packet secondary header length, sequence count, and user-data length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_idle_packet(SecondaryHeaderLength,SequenceCount,UserDataLength,Packet)``
+| **Mode and number of proofs:**
+|    ``generate_idle_packet(+integer,+integer,+integer,-compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

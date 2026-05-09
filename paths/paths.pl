@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 8, 2026
+%  Last updated on May 9, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -136,7 +136,14 @@ logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(colley_ranker, library('colley_ranker/')).
 logtalk_library_path(copeland_ranker, library('copeland_ranker/')).
 logtalk_library_path(coroutining, library('coroutining/')).
-logtalk_library_path(ccsds, library('ccsds/')).
+logtalk_library_path(ccsds_frames, library('ccsds_frames/')).
+logtalk_library_path(ccsds_link_profiles, library('ccsds_link_profiles/')).
+logtalk_library_path(ccsds_packet_services, library('ccsds_packet_services/')).
+logtalk_library_path(ccsds_packetization, library('ccsds_packetization/')).
+logtalk_library_path(ccsds_packets, library('ccsds_packets/')).
+logtalk_library_path(ccsds_tc_services, library('ccsds_tc_services/')).
+logtalk_library_path(ccsds_time_codes, library('ccsds_time_codes/')).
+logtalk_library_path(ccsds_time_fields, library('ccsds_time_fields/')).
 logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(cuid2, library('cuid2/')).
 logtalk_library_path(cusum_anomaly_detector, library('cusum_anomaly_detector/')).

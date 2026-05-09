@@ -293,17 +293,97 @@ To load an entity, always load the library that includes it using the goal ``log
    cbor <cbor_0>
    cbor(StringRepresentation) <cbor_1>
 
-``library/ccsds/``
-------------------
+``library/ccsds_frames/``
+-------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   ccsds <ccsds_0>
-   ccsds(SecondaryHeaderLength) <ccsds_1>
-   ccsds_types <ccsds_types_0>
+   ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames_4>
+   ccsds_frame_protocol <ccsds_frame_protocol_0>
+   ccsds_frames <ccsds_frames_0>
+   ccsds_frames_types <ccsds_frames_types_0>
+   ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames_3>
+   ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames_3>
+
+``library/ccsds_link_profiles/``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_link_profiles <ccsds_link_profiles_0>
+
+``library/ccsds_packet_services/``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_packet_services <ccsds_packet_services_0>
+
+``library/ccsds_packetization/``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_packetization <ccsds_packetization_0>
+
+``library/ccsds_packets/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_packets <ccsds_packets_0>
+   ccsds_packets(SecondaryHeaderLength) <ccsds_packets_1>
+   ccsds_packets_types <ccsds_packets_types_0>
+
+``library/ccsds_tc_services/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_tc_services <ccsds_tc_services_0>
+
+``library/ccsds_time_codes/``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs_2>
+   ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds_3>
+   ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc_3>
+   ccsds_time_code_protocol <ccsds_time_code_protocol_0>
+   ccsds_time_codes <ccsds_time_codes_0>
+   ccsds_time_codes_types <ccsds_time_codes_types_0>
+
+``library/ccsds_time_fields/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ccsds_time_fields <ccsds_time_fields_0>
 
 ``library/character_sets/``
 ---------------------------

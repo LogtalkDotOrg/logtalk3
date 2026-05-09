@@ -1,0 +1,241 @@
+.. index:: single: ccsds_time_code_protocol
+.. _ccsds_time_code_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ccsds_time_code_protocol``
+============================
+
+CCSDS time code parser and generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_time_codes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _ccsds_time_code_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a CCSDS time code from a source term. Supported source terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,TimeCode)``
+| **Mode and number of proofs:**
+|    ``parse(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(ccsds_time_code_source,Source)``
+|    ``Source`` contents are not a valid encoding for the selected time code object:
+|        ``domain_error(ccsds_time_code_byte_sequence,Bytes)``
+
+
+------------
+
+.. index:: generate/2
+.. _ccsds_time_code_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a CCSDS time code to a sink term. Supported sink terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,TimeCode)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid sink:
+|        ``domain_error(ccsds_time_code_sink,Sink)``
+|    ``TimeCode`` is neither a variable nor a valid time code term for the selected object:
+|        ``domain_error(ccsds_time_code_term,TimeCode)``
+
+
+------------
+
+.. index:: generate/3
+.. _ccsds_time_code_protocol/0::generate/3:
+
+``generate/3``
+^^^^^^^^^^^^^^
+
+Generates a list of bytes from a CCSDS time code term with an open tail. Mainly used when generating arbitrary values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(TimeCode,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,-list(byte),--variable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``TimeCode`` is a variable:
+|        ``instantiation_error``
+|    ``TimeCode`` is neither a variable nor a valid time code term for the selected object:
+|        ``domain_error(ccsds_time_code_term,TimeCode)``
+
+
+------------
+
+.. index:: valid/1
+.. _ccsds_time_code_protocol/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+True if the argument is a valid time code term for the selected object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(TimeCode)``
+| **Mode and number of proofs:**
+|    ``valid(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: format/1
+.. _ccsds_time_code_protocol/0::format/1:
+
+``format/1``
+^^^^^^^^^^^^
+
+Returns the CCSDS time code format handled by the object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format(Format)``
+| **Mode and number of proofs:**
+|    ``format(-atom)`` - ``one``
+
+
+------------
+
+.. index:: epoch/1
+.. _ccsds_time_code_protocol/0::epoch/1:
+
+``epoch/1``
+^^^^^^^^^^^
+
+Returns the epoch used by the object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``epoch(Epoch)``
+| **Mode and number of proofs:**
+|    ``epoch(-atom)`` - ``one``
+
+
+------------
+
+.. index:: unix_seconds/2
+.. _ccsds_time_code_protocol/0::unix_seconds/2:
+
+``unix_seconds/2``
+^^^^^^^^^^^^^^^^^^
+
+Converts a time code term into a Unix timestamp in seconds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unix_seconds(TimeCode,Seconds)``
+| **Mode and number of proofs:**
+|    ``unix_seconds(+compound,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``TimeCode`` is a variable:
+|        ``instantiation_error``
+|    ``TimeCode`` is neither a variable nor a valid time code term for the selected object:
+|        ``domain_error(ccsds_time_code_term,TimeCode)``
+
+
+------------
+
+.. index:: from_unix_seconds/2
+.. _ccsds_time_code_protocol/0::from_unix_seconds/2:
+
+``from_unix_seconds/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a Unix timestamp in seconds into a time code term for the selected object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_unix_seconds(Seconds,TimeCode)``
+| **Mode and number of proofs:**
+|    ``from_unix_seconds(+number,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Seconds`` is a variable:
+|        ``instantiation_error``
+|    ``Seconds`` cannot be represented using the selected object:
+|        ``domain_error(ccsds_time_code_unix_seconds,Seconds)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

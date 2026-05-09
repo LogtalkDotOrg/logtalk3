@@ -1,0 +1,172 @@
+.. index:: single: ccsds_time_fields
+.. _ccsds_time_fields/0:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_time_fields``
+=====================
+
+Helpers for parsing and generating self-describing CCSDS time fields using descriptor terms and the existing CCSDS time-code objects.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_time_fields(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_descriptor/1
+.. _ccsds_time_fields/0::valid_descriptor/1:
+
+``valid_descriptor/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the argument is a supported CCSDS time-field descriptor term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_descriptor(Descriptor)``
+| **Mode and number of proofs:**
+|    ``valid_descriptor(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse/3
+.. _ccsds_time_fields/0::parse/3:
+
+``parse/3``
+^^^^^^^^^^^
+
+Parses a self-describing CCSDS time field from a source term into a descriptor term and a time-code term. Supported source terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Descriptor,TimeCode)``
+| **Mode and number of proofs:**
+|    ``parse(+compound,?compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(ccsds_time_field_source,Source)``
+|    ``Source`` contents are not a supported CCSDS time field:
+|        ``domain_error(ccsds_time_field_byte_sequence,Bytes)``
+
+
+------------
+
+.. index:: generate/3
+.. _ccsds_time_fields/0::generate/3:
+
+``generate/3``
+^^^^^^^^^^^^^^
+
+Generates a self-describing CCSDS time field to a sink term from a descriptor term and a time-code term. Supported sink terms are ``file(File)``, ``stream(Stream)``, and ``bytes(Bytes)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Descriptor,TimeCode)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,+compound,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Descriptor`` is a variable:
+|        ``instantiation_error``
+|    ``TimeCode`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid sink:
+|        ``domain_error(ccsds_time_field_sink,Sink)``
+|    ``Descriptor`` is neither a variable nor a supported descriptor term:
+|        ``domain_error(ccsds_time_field_descriptor,Descriptor)``
+|    ``TimeCode`` is neither a variable nor a valid time code term for the selected descriptor:
+|        ``domain_error(ccsds_time_code_term,TimeCode)``
+
+
+------------
+
+.. index:: format/2
+.. _ccsds_time_fields/0::format/2:
+
+``format/2``
+^^^^^^^^^^^^
+
+Returns the CCSDS time-code format selected by a descriptor term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format(Descriptor,Format)``
+| **Mode and number of proofs:**
+|    ``format(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: epoch/2
+.. _ccsds_time_fields/0::epoch/2:
+
+``epoch/2``
+^^^^^^^^^^^
+
+Returns the epoch selected by a descriptor term. Calendar segmented descriptors return ``none``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``epoch(Descriptor,Epoch)``
+| **Mode and number of proofs:**
+|    ``epoch(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

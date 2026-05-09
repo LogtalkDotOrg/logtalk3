@@ -1,0 +1,100 @@
+.. index:: single: ccsds_cuc(CoarseOctets,FineOctets,Epoch)
+.. _ccsds_cuc/3:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_cuc(CoarseOctets,FineOctets,Epoch)``
+============================================
+
+* ``CoarseOctets`` - Number of coarse time octets.
+* ``FineOctets`` - Number of fine time octets.
+* ``Epoch`` - Epoch used when converting to and from Unix seconds. Supported values are ``ccsds_epoch`` and ``unix_epoch``.
+
+
+CCSDS unsegmented time code parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_time_codes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ccsds_time_code_protocol/0::epoch/1`  :ref:`ccsds_time_code_protocol/0::format/1`  :ref:`ccsds_time_code_protocol/0::from_unix_seconds/2`  :ref:`ccsds_time_code_protocol/0::generate/2`  :ref:`ccsds_time_code_protocol/0::generate/3`  :ref:`ccsds_time_code_protocol/0::parse/2`  :ref:`ccsds_time_code_protocol/0::unix_seconds/2`  :ref:`ccsds_time_code_protocol/0::valid/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: coarse/2
+.. _ccsds_cuc/3::coarse/2:
+
+``coarse/2``
+^^^^^^^^^^^^
+
+Extracts the coarse field from a CUC time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``coarse(TimeCode,Coarse)``
+| **Mode and number of proofs:**
+|    ``coarse(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: fine/2
+.. _ccsds_cuc/3::fine/2:
+
+``fine/2``
+^^^^^^^^^^
+
+Extracts the fine field from a CUC time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fine(TimeCode,Fine)``
+| **Mode and number of proofs:**
+|    ``fine(+compound,-integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 8, 2026
+##   Last updated on May 9, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -98,7 +98,14 @@ Foreach-Object {
 (Get-Content ../../../library/bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
 (Get-Content ../../../library/c45_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
 (Get-Content ../../../library/cbor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cbor.rst
-(Get-Content ../../../library/ccsds/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds.rst
+(Get-Content ../../../library/ccsds_frames/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_frames.rst
+(Get-Content ../../../library/ccsds_link_profiles/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_link_profiles.rst
+(Get-Content ../../../library/ccsds_packetization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_packetization.rst
+(Get-Content ../../../library/ccsds_packets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_packets.rst
+(Get-Content ../../../library/ccsds_packet_services/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_packet_services.rst
+(Get-Content ../../../library/ccsds_tc_services/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_tc_services.rst
+(Get-Content ../../../library/ccsds_time_codes/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_time_codes.rst
+(Get-Content ../../../library/ccsds_time_fields/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_time_fields.rst
 (Get-Content ../../../library/character_sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/character_sets.rst
 (Get-Content ../../../library/classification_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 (Get-Content ../../../library/clo_span_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst

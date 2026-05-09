@@ -41,6 +41,9 @@ Documentation
 Library
 -------
 
+* RENAMED: The `ccsds` library to `ccsds_packets` for consistent naming after
+the new CCSDS libraries added in this release.
+
 * RENAMED: The `classifier_protocols` library to `classification_protocols`
 for more consistent naming with other machine learning libraries.
 
@@ -324,6 +327,10 @@ covariance estimates and regularized discriminant scores.
 * ADDED: New `sgd_classifier` library implementing stochastic gradient
 descent classification for binary and multiclass continuous and mixed-feature
 datasets using one-vs-rest linear models with configurable losses.
+
+* ADDED: New `ccsds_frames`, `ccsds_link_profiles`, `ccsds_packet_services`,
+`ccsds_packetization`, `ccsds_tc_services`, `ccsds_time_codes`, and
+`ccsds_time_fields` libraries.
 
 * ADDED: New `geo_json` library implementing the GeoJSON (RFC 7946) standard.
 

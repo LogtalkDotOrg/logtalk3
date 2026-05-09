@@ -48,7 +48,14 @@ directory in the ``NOTES.md`` file.
    c45_classifier
    cbor
    character_sets
-   ccsds
+   ccsds_frames
+   ccsds_link_profiles
+   ccsds_packet_services
+   ccsds_packetization
+   ccsds_packets
+   ccsds_tc_services
+   ccsds_time_codes
+   ccsds_time_fields
    classification_protocols
    clo_span_pattern_miner
    clustering_protocols

@@ -649,7 +649,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::apid/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::apid/2>`
 
 ``apis/0``
 ----------
@@ -1561,6 +1561,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`help <help/0::built_in_predicate/4>`
 
+``bypass_flag/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::bypass_flag/2>`
+
 ``bytes_hex/2``
 ---------------
 
@@ -2372,6 +2382,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`clusterer_protocol <clusterer_protocol/0::clusterer_options/2>`
 
+``coarse/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc/3::coarse/2>`
+
 ``codes_to_bytes/2``
 --------------------
 
@@ -2806,6 +2826,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::control//0>`
 
+``control_command_flag/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::control_command_flag/2>`
+
 ``control_construct/4``
 -----------------------
 
@@ -3171,6 +3201,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ports_profiler <ports_profiler/0::data/2>`
 
+``data_field/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::data_field/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::data_field/2>`
+
 ``data_length/2``
 -----------------
 
@@ -3179,7 +3220,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::data_length/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::data_length/2>`
 
 ``date/4``
 ----------
@@ -3261,6 +3302,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::date_time_to_unix/2>`
 
+``day/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs/2::day/2>`
+
 ``day_of_year/2``
 -----------------
 
@@ -3269,6 +3320,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs/2::day_of_year/2>`
 * :ref:`datep <datep/0::day_of_year/2>`
 
 ``day_of_year_date/3``
@@ -3310,6 +3362,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`tzif_protocol <tzif_protocol/0::daylight_saving_time/4>`
+
+``days/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds/3::days/2>`
 
 ``days_in_month/3``
 -------------------
@@ -4619,6 +4681,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`union_find_protocol <union_find_protocol/0::disjoint_sets/2>`
 
+``dispatch_map_id/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::dispatch_map_id/2>`
+
+``dispatch_service_units/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::dispatch_service_units/2>`
+
+``dispatch_service_units_by_map/2``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::dispatch_service_units_by_map/2>`
+
+``dispatch_service_units_by_map/3``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::dispatch_service_units_by_map/3>`
+
 ``distance/4``
 --------------
 
@@ -5229,6 +5331,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::environment_variable/2>`
 
+``epoch/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::epoch/1>`
+
+``epoch/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_time_fields <ccsds_time_fields/0::epoch/2>`
+
 ``epsilon/1``
 -------------
 
@@ -5669,6 +5791,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`application_protocol <application_protocol/0::external_reference/2>`
 
+``extract_aos_packets/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::extract_aos_packets/3>`
+
+``extract_packets/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frames <ccsds_frames/0::extract_packets/3>`
+
+``extract_packets/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::extract_packets/4>`
+
+``extract_tc_segment/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::extract_tc_segment/2>`
+
+``extract_tm_packets/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::extract_tm_packets/3>`
+
 ``factorial/2``
 ---------------
 
@@ -5718,6 +5890,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`fcube <fcube/0::fcube/0>`
+
+``fecf/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::fecf/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::fecf/2>`
 
 ``file/1``
 ----------
@@ -6065,6 +6248,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linda_client <linda_client/0::findall_rd_noblock/4>`
 
+``fine/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc/3::fine/2>`
+
 ``finished_by/2``
 -----------------
 
@@ -6084,6 +6277,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::finishes/2>`
+
+``first_header_pointer/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::first_header_pointer/2>`
 
 ``first_significant_component/2``
 ---------------------------------
@@ -6291,6 +6494,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`loopp <loopp/0::foreach/4>`
 
+``format/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::format/1>`
+
 ``format/2``
 ------------
 
@@ -6299,6 +6512,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ccsds_time_codes <ccsds_time_codes/0::format/2>`
+* :ref:`ccsds_time_fields <ccsds_time_fields/0::format/2>`
 * :ref:`format <format/0::format/2>`
 
 ``format/3``
@@ -6551,6 +6766,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`stomp <stomp/0::frame_headers/2>`
 
+``frame_type/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::frame_type/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::frame_type/2>`
+
 ``freeze/2``
 ------------
 
@@ -6692,6 +6918,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`expected <expected/0::from_optional/3>`
 * :ref:`validation <validation/0::from_optional/3>`
 
+``from_unix_seconds/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::from_unix_seconds/2>`
+
 ``frozen/2``
 ------------
 
@@ -6812,7 +7048,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base64url <base64url/0::generate/2>`
 * :ref:`base85 <base85/0::generate/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::generate/2>`
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::generate/2>`
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/2>`
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
 * :ref:`geo_json_protocol <geo_json_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
@@ -6835,7 +7073,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`avro <avro/0::generate/3>`
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::generate/3>`
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/3>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/3>`
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/3>`
+* :ref:`ccsds_time_fields <ccsds_time_fields/0::generate/3>`
 * :ref:`protobuf <protobuf/0::generate/3>`
 
 ``generate/4``
@@ -6869,6 +7110,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`yaml_protocol <yaml_protocol/0::generate_all/2>`
+
+``generate_frame/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::generate_frame/3>`
+
+``generate_frames/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::generate_frames/3>`
+
+``generate_idle_packet/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::generate_idle_packet/4>`
 
 ``genint/2``
 ------------
@@ -7955,6 +8226,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::initial_bearing/3>`
 
+``initial_channel_reassembly_state/1``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::initial_channel_reassembly_state/1>`
+
+``initial_reassembly_state/1``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::initial_reassembly_state/1>`
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::initial_reassembly_state/1>`
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::initial_reassembly_state/1>`
+
 ``initial_state/1``
 -------------------
 
@@ -7963,6 +8256,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ccsds_packetization <ccsds_packetization/0::initial_state/1>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::initial_state/1>`
 
 ``initial_temperature/1``
@@ -8057,6 +8351,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`heap_protocol <heap_protocol/0::insert_all/3>`
 * :ref:`setp <setp/0::insert_all/3>`
 
+``insert_aos_packets/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::insert_aos_packets/4>`
+
 ``insert_before/3``
 -------------------
 
@@ -8076,6 +8380,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::insert_in/4>`
+
+``insert_packets/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frames <ccsds_frames/0::insert_packets/4>`
+
+``insert_packets/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::insert_packets/5>`
+
+``insert_tc_segment/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::insert_tc_segment/3>`
+
+``insert_tm_packets/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::insert_tm_packets/4>`
+
+``insert_zone/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::insert_zone/2>`
 
 ``install/1``
 -------------
@@ -9001,6 +9355,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`queuep <queuep/0::join_all/3>`
+
+``join_aos_packet_zone/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::join_aos_packet_zone/3>`
+
+``join_packet_zone/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::join_packet_zone/4>`
 
 ``json_to_geo_json/2``
 ----------------------
@@ -10886,6 +11260,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::map_element/2>`
 
+``map_id/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::map_id/2>`
+
 ``map_invalid/2``
 -----------------
 
@@ -10947,6 +11331,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`hash_common_64 <hash_common_64/0::mask64/1>`
+
+``master_channel_frame_count/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::master_channel_frame_count/2>`
 
 ``materialize/0``
 -----------------
@@ -11546,6 +11940,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::midpoint/3>`
 
+``milliseconds/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds/3::milliseconds/2>`
+
 ``min/2``
 ---------
 
@@ -11769,6 +12173,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`event_registryp <event_registryp/0::monitors/1>`
+
+``month/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs/2::month/2>`
 
 ``month_weekday_date/5``
 ------------------------
@@ -12618,6 +13032,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`termp <termp/0::occurs/2>`
 
+``ocf/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::ocf/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::ocf/2>`
+
+``ocf_flag/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::ocf_flag/2>`
+
 ``of/2``
 --------
 
@@ -13102,6 +13537,106 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`application_protocol <application_protocol/0::package/1>`
 
+``packet_order_flag/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::packet_order_flag/2>`
+
+``packetize_aos_frames/7``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_aos_frames/7>`
+
+``packetize_aos_frames/8``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_aos_frames/8>`
+
+``packetize_aos_packets/6``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_aos_packets/6>`
+
+``packetize_aos_packets/7``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_aos_packets/7>`
+
+``packetize_tm_frames/7``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_tm_frames/7>`
+
+``packetize_tm_frames/8``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_tm_frames/8>`
+
+``packetize_tm_packets/6``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_tm_packets/6>`
+
+``packetize_tm_packets/7``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::packetize_tm_packets/7>`
+
+``packets/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::packets/2>`
+
 ``pad_md/4``
 ------------
 
@@ -13287,7 +13822,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base64url <base64url/0::parse/2>`
 * :ref:`base85 <base85/0::parse/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::parse/2>`
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::parse/2>`
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
 * :ref:`geo_json_protocol <geo_json_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
@@ -13310,6 +13847,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`avro <avro/0::parse/3>`
+* :ref:`ccsds_time_fields <ccsds_time_fields/0::parse/3>`
 * :ref:`protobuf <protobuf/0::parse/3>`
 * :ref:`xml <xml/0::parse/3>`
 
@@ -13372,6 +13910,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::parse_error/1>`
+
+``parse_frame/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::parse_frame/3>`
+
+``parse_frames/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::parse_frames/3>`
 
 ``parse_problem/2``
 -------------------
@@ -13493,6 +14051,38 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`deque_protocol <deque_protocol/0::peek_front/2>`
+
+``pending_data/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::pending_data/2>`
+
+``pending_fragments/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::pending_fragments/2>`
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::pending_fragments/2>`
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::pending_fragments/2>`
+
+``pending_packets/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packetization <ccsds_packetization/0::pending_packets/2>`
 
 ``percentile/3``
 ----------------
@@ -14137,6 +14727,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::prefix/3>`
+
+``prefix_data/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::prefix_data/2>`
 
 ``preorder/2``
 --------------
@@ -15190,6 +15790,296 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs_common <packs_common/0::readme/2>`
+
+``reassemble_aos_frames/5``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_aos_frames/5>`
+
+``reassemble_aos_frames/6``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_aos_frames/6>`
+
+``reassemble_aos_frames/7``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_aos_frames/7>`
+
+``reassemble_aos_packets/5``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_aos_packets/5>`
+
+``reassemble_aos_packets/6``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_aos_packets/6>`
+
+``reassemble_aos_packets/7``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_aos_packets/7>`
+
+``reassemble_frames/6``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::reassemble_frames/6>`
+
+``reassemble_frames/7``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::reassemble_frames/7>`
+
+``reassemble_frames/8``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::reassemble_frames/8>`
+
+``reassemble_packet_zone/5``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_packet_zone/5>`
+
+``reassemble_packets/6``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::reassemble_packets/6>`
+
+``reassemble_packets/7``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::reassemble_packets/7>`
+
+``reassemble_packets/8``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::reassemble_packets/8>`
+
+``reassemble_tc_frame/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frame/4>`
+
+``reassemble_tc_frame/5``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frame/5>`
+
+``reassemble_tc_frame/6``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frame/6>`
+
+``reassemble_tc_frame_with_provenance/5``
+-----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frame_with_provenance/5>`
+
+``reassemble_tc_frame_with_provenance/6``
+-----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frame_with_provenance/6>`
+
+``reassemble_tc_frames/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frames/4>`
+
+``reassemble_tc_frames/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frames/5>`
+
+``reassemble_tc_frames/6``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frames/6>`
+
+``reassemble_tc_frames_with_provenance/5``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frames_with_provenance/5>`
+
+``reassemble_tc_frames_with_provenance/6``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::reassemble_tc_frames_with_provenance/6>`
+
+``reassemble_tm_frames/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_frames/5>`
+
+``reassemble_tm_frames/6``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_frames/6>`
+
+``reassemble_tm_frames/7``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_frames/7>`
+
+``reassemble_tm_packets/5``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_packets/5>`
+
+``reassemble_tm_packets/6``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_packets/6>`
+
+``reassemble_tm_packets/7``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_packets/7>`
 
 ``receive/3``
 -------------
@@ -16306,7 +17196,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::secondary_header/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::secondary_header/2>`
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::secondary_header/2>`
 
 ``secondary_header_flag/2``
 ---------------------------
@@ -16316,9 +17207,10 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::secondary_header_flag/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::secondary_header_flag/2>`
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::secondary_header_flag/2>`
 
-``secondary_header_time/2``
+``secondary_header_time/3``
 ---------------------------
 
 .. toctree::
@@ -16326,7 +17218,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::secondary_header_time/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::secondary_header_time/3>`
+
+``segment_data/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::segment_data/2>`
+
+``segment_header/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::segment_header/2>`
+
+``segment_header_suffix/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::segment_header_suffix/2>`
+
+``segment_header_suffixes/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::segment_header_suffixes/2>`
+
+``segment_length_identifier/2``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::segment_length_identifier/2>`
 
 ``select/3``
 ------------
@@ -16457,7 +17399,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::sequence_count/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::sequence_count/2>`
 
 ``sequence_flags/2``
 --------------------
@@ -16467,7 +17409,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::sequence_flags/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::sequence_flags/2>`
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::sequence_flags/2>`
+
+``sequence_number/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::sequence_number/2>`
 
 ``sequential_occurrences/2``
 ----------------------------
@@ -16821,6 +17774,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::sign//1>`
 
+``signaling_field/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::signaling_field/2>`
+
 ``singletons/2``
 ----------------
 
@@ -17053,6 +18016,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::space//0>`
 
+``spacecraft_id/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::spacecraft_id/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::spacecraft_id/2>`
+
 ``spaces//0``
 -------------
 
@@ -17082,6 +18056,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::split/4>`
+
+``split_aos_packet_zone/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::split_aos_packet_zone/3>`
+
+``split_packet_zone/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::split_packet_zone/4>`
 
 ``split_string/4``
 ------------------
@@ -17666,6 +18660,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::sublist/2>`
 * :ref:`varlistp <varlistp/0::sublist/2>`
 
+``submilliseconds/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch) <ccsds_cds/3::submilliseconds/2>`
+
 ``subscribe/4``
 ---------------
 
@@ -17891,6 +18895,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mime_types <mime_types/0::suffix_alias/2>`
 
+``suffix_data/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::suffix_data/2>`
+
 ``sum/2``
 ---------
 
@@ -18052,6 +19066,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::symmetric_eigen/5>`
+
+``synchronization_flag/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::synchronization_flag/2>`
 
 ``tab//0``
 ----------
@@ -18313,6 +19337,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`lgtunit <lgtunit/0::test/1>`
+
+``time_of_day/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs/2::time_of_day/4>`
 
 ``time_stamp/1``
 ----------------
@@ -18798,7 +19832,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::type/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::type/2>`
 
 ``type/3``
 ----------
@@ -18923,6 +19957,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`union_find_protocol <union_find_protocol/0::union_all/3>`
 
+``unix_seconds/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::unix_seconds/2>`
+
 ``unix_to_date_time/2``
 -----------------------
 
@@ -19040,6 +20084,20 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::update/5>`
 
+``update_fecf/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::update_fecf/2>`
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::update_fecf/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::update_fecf/2>`
+* :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::update_fecf/2>`
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::update_fecf/2>`
+
 ``update_in/4``
 ---------------
 
@@ -19088,7 +20146,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::user_data/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::user_data/2>`
 
 ``utc_date_time_to_instant/2``
 ------------------------------
@@ -19218,6 +20276,11 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::valid/1>`
+* :ref:`ccsds_frames <ccsds_frames/0::valid/1>`
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::valid/1>`
+* :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::valid/1>`
+* :ref:`ccsds_time_codes <ccsds_time_codes/0::valid/1>`
 * :ref:`intervalp <intervalp/0::valid/1>`
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
@@ -19255,6 +20318,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::valid_anomaly_detector/1>`
+
+``valid_channel_reassembly_state/1``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::valid_channel_reassembly_state/1>`
 
 ``valid_classifier/1``
 ----------------------
@@ -19316,6 +20389,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::valid_date_time/1>`
 
+``valid_descriptor/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_time_fields <ccsds_time_fields/0::valid_descriptor/1>`
+
 ``valid_dimension_reducer/1``
 -----------------------------
 
@@ -19326,6 +20409,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::valid_dimension_reducer/1>`
 
+``valid_discontinuity_policy/1``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::valid_discontinuity_policy/1>`
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::valid_discontinuity_policy/1>`
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_discontinuity_policy/1>`
+
 ``valid_instant/1``
 -------------------
 
@@ -19335,6 +20430,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::valid_instant/1>`
+
+``valid_map_dispatch/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_map_dispatch/1>`
 
 ``valid_option/1``
 ------------------
@@ -19366,6 +20471,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::valid_pattern_miner/1>`
 
+``valid_profile/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::valid_profile/1>`
+
 ``valid_ranker/1``
 ------------------
 
@@ -19375,6 +20490,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranker_protocol <ranker_protocol/0::valid_ranker/1>`
+
+``valid_reassembled_segment/1``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_reassembled_segment/1>`
+
+``valid_reassembly_state/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_link_profiles <ccsds_link_profiles/0::valid_reassembly_state/1>`
+* :ref:`ccsds_packet_services <ccsds_packet_services/0::valid_reassembly_state/1>`
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_reassembly_state/1>`
 
 ``valid_regressor/1``
 ---------------------
@@ -19395,6 +20532,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::valid_scale/1>`
+
+``valid_segment/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_segment/1>`
 
 ``valid_until_date/1``
 ----------------------
@@ -19650,6 +20797,20 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs_common <packs_common/0::verify_commands_availability/0>`
 
+``verify_fecf/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::verify_fecf/1>`
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::verify_fecf/1>`
+* :ref:`ccsds_frames <ccsds_frames/0::verify_fecf/1>`
+* :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::verify_fecf/1>`
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::verify_fecf/1>`
+
 ``version/1``
 -------------
 
@@ -19668,7 +20829,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`ccsds(SecondaryHeaderLength) <ccsds/1::version/2>`
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::version/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::version/2>`
+* :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::version/2>`
 * :ref:`memcached <memcached/0::version/2>`
 
 ``version/6``
@@ -19710,6 +20873,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::vincenty_distance/3>`
+
+``virtual_channel_frame_count/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::virtual_channel_frame_count/2>`
+* :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::virtual_channel_frame_count/2>`
+
+``virtual_channel_id/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::virtual_channel_id/2>`
+* :ref:`ccsds_frames <ccsds_frames/0::virtual_channel_id/2>`
 
 ``void/1``
 ----------
@@ -20122,6 +21307,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`hash_common_64 <hash_common_64/0::xor64/3>`
+
+``year/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ccsds_ccs(CalendarVariant,FractionOctets) <ccsds_ccs/2::year/2>`
 
 ``z_normalization/2``
 ---------------------

@@ -149,10 +149,48 @@
 <li class="toctree-l3"><a class="reference internal" href="cbor_1.html">cbor(StringRepresentation)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#ccsds"><span class="xref std std-ref">ccsds</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ccsds_0.html">ccsds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ccsds_1.html">ccsds(SecondaryHeaderLength)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ccsds_types_0.html">ccsds_types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-frames"><span class="xref std std-ref">ccsds_frames</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_aos_frames_4.html">ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_frame_protocol_0.html">ccsds_frame_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_frames_0.html">ccsds_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_frames_types_0.html">ccsds_frames_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_tc_frames_3.html">ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_tm_frames_3.html">ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-link-profiles"><span class="xref std std-ref">ccsds_link_profiles</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_link_profiles_0.html">ccsds_link_profiles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-packet-services"><span class="xref std std-ref">ccsds_packet_services</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_packet_services_0.html">ccsds_packet_services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-packetization"><span class="xref std std-ref">ccsds_packetization</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_packetization_0.html">ccsds_packetization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-packets"><span class="xref std std-ref">ccsds_packets</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_packets_0.html">ccsds_packets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_packets_1.html">ccsds_packets(SecondaryHeaderLength)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_packets_types_0.html">ccsds_packets_types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-tc-services"><span class="xref std std-ref">ccsds_tc_services</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_tc_services_0.html">ccsds_tc_services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-time-codes"><span class="xref std std-ref">ccsds_time_codes</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_ccs_2.html">ccsds_ccs(CalendarVariant,FractionOctets)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_cds_3.html">ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_cuc_3.html">ccsds_cuc(CoarseOctets,FineOctets,Epoch)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_time_code_protocol_0.html">ccsds_time_code_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_time_codes_0.html">ccsds_time_codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_time_codes_types_0.html">ccsds_time_codes_types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsds-time-fields"><span class="xref std std-ref">ccsds_time_fields</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ccsds_time_fields_0.html">ccsds_time_fields</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#character-sets"><span class="xref std std-ref">character_sets</span></a><ul>
@@ -1616,13 +1654,79 @@
 </ul>
 </div>
 </section>
-<section id="ccsds">
-<h2><a class="reference external" href="../handbook/libraries/ccsds.html#library-ccsds" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds</span></a><a class="headerlink" href="#ccsds" title="Link to this heading"></a></h2>
+<section id="ccsds-frames">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_frames.html#library-ccsds-frames" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_frames</span></a><a class="headerlink" href="#ccsds-frames" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ccsds_0.html">ccsds</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ccsds_1.html">ccsds(SecondaryHeaderLength)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ccsds_types_0.html">ccsds_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_aos_frames_4.html">ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_frame_protocol_0.html">ccsds_frame_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_frames_0.html">ccsds_frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_frames_types_0.html">ccsds_frames_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_tc_frames_3.html">ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_tm_frames_3.html">ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF)</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-link-profiles">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_link_profiles.html#library-ccsds-link-profiles" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_link_profiles</span></a><a class="headerlink" href="#ccsds-link-profiles" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_link_profiles_0.html">ccsds_link_profiles</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-packet-services">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_packet_services.html#library-ccsds-packet-services" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_packet_services</span></a><a class="headerlink" href="#ccsds-packet-services" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_packet_services_0.html">ccsds_packet_services</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-packetization">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_packetization.html#library-ccsds-packetization" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_packetization</span></a><a class="headerlink" href="#ccsds-packetization" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_packetization_0.html">ccsds_packetization</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-packets">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_packets.html#library-ccsds-packets" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_packets</span></a><a class="headerlink" href="#ccsds-packets" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_packets_0.html">ccsds_packets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_packets_1.html">ccsds_packets(SecondaryHeaderLength)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_packets_types_0.html">ccsds_packets_types</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-tc-services">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_tc_services.html#library-ccsds-tc-services" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_tc_services</span></a><a class="headerlink" href="#ccsds-tc-services" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_tc_services_0.html">ccsds_tc_services</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-time-codes">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_time_codes.html#library-ccsds-time-codes" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_time_codes</span></a><a class="headerlink" href="#ccsds-time-codes" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_ccs_2.html">ccsds_ccs(CalendarVariant,FractionOctets)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_cds_3.html">ccsds_cds(DaySegmentOctets,SubmillisecondOctets,Epoch)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_cuc_3.html">ccsds_cuc(CoarseOctets,FineOctets,Epoch)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_time_code_protocol_0.html">ccsds_time_code_protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_time_codes_0.html">ccsds_time_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_time_codes_types_0.html">ccsds_time_codes_types</a></li>
+</ul>
+</div>
+</section>
+<section id="ccsds-time-fields">
+<h2><a class="reference external" href="../handbook/libraries/ccsds_time_fields.html#library-ccsds-time-fields" title="(in The Logtalk Handbook v3.100.0)"><span class="xref std std-ref">ccsds_time_fields</span></a><a class="headerlink" href="#ccsds-time-fields" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ccsds_time_fields_0.html">ccsds_time_fields</a></li>
 </ul>
 </div>
 </section>

@@ -1,0 +1,156 @@
+.. index:: single: ccsds_ccs(CalendarVariant,FractionOctets)
+.. _ccsds_ccs/2:
+
+.. rst-class:: right
+
+**object**
+
+``ccsds_ccs(CalendarVariant,FractionOctets)``
+=============================================
+
+* ``CalendarVariant`` - Calendar representation. Supported values are ``calendar`` and ``day_of_year``.
+* ``FractionOctets`` - Number of BCD fraction octets. Supported values are non-negative integers.
+
+
+CCSDS calendar segmented time code parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(ccsds_time_codes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0>`
+| **Uses:**
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ccsds_time_code_protocol/0::epoch/1`  :ref:`ccsds_time_code_protocol/0::format/1`  :ref:`ccsds_time_code_protocol/0::from_unix_seconds/2`  :ref:`ccsds_time_code_protocol/0::generate/2`  :ref:`ccsds_time_code_protocol/0::generate/3`  :ref:`ccsds_time_code_protocol/0::parse/2`  :ref:`ccsds_time_code_protocol/0::unix_seconds/2`  :ref:`ccsds_time_code_protocol/0::valid/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: year/2
+.. _ccsds_ccs/2::year/2:
+
+``year/2``
+^^^^^^^^^^
+
+Extracts the year value from a CCS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``year(TimeCode,Year)``
+| **Mode and number of proofs:**
+|    ``year(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: day_of_year/2
+.. _ccsds_ccs/2::day_of_year/2:
+
+``day_of_year/2``
+^^^^^^^^^^^^^^^^^
+
+Extracts the day of year from an ordinal CCS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``day_of_year(TimeCode,DayOfYear)``
+| **Mode and number of proofs:**
+|    ``day_of_year(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: month/2
+.. _ccsds_ccs/2::month/2:
+
+``month/2``
+^^^^^^^^^^^
+
+Extracts the month from a calendar CCS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``month(TimeCode,Month)``
+| **Mode and number of proofs:**
+|    ``month(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: day/2
+.. _ccsds_ccs/2::day/2:
+
+``day/2``
+^^^^^^^^^
+
+Extracts the day of month from a calendar CCS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``day(TimeCode,Day)``
+| **Mode and number of proofs:**
+|    ``day(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: time_of_day/4
+.. _ccsds_ccs/2::time_of_day/4:
+
+``time_of_day/4``
+^^^^^^^^^^^^^^^^^
+
+Extracts the hour, minute, and seconds-with-fraction from a CCS time term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``time_of_day(TimeCode,Hour,Minute,Seconds)``
+| **Mode and number of proofs:**
+|    ``time_of_day(+compound,-integer,-integer,-number)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

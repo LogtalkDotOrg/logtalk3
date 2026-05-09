@@ -104,7 +104,7 @@ Inspect validation errors:
 ::
 
    | ?- geo_json::validate(polygon([[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0]]]), Errors).
-   Errors = [error([coordinates,0], ring_not_closed)]
+   Errors = [ring_not_closed([coordinates,0])]
    yes
 
 Convert between JSON terms and native GeoJSON terms:
