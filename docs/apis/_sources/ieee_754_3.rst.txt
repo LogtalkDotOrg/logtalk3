@@ -1,0 +1,63 @@
+.. index:: single: ieee_754(Precision,ByteOrder,NaNRepresentation)
+.. _ieee_754/3:
+
+.. rst-class:: right
+
+**object**
+
+``ieee_754(Precision,ByteOrder,NaNRepresentation)``
+===================================================
+
+* ``Precision`` - Floating-point format precision. Supported values are ``half``, ``single``, and ``double``.
+* ``ByteOrder`` - Byte order used when parsing and generating byte sequences. Supported values are ``big`` and ``little``.
+* ``NaNRepresentation`` - NaN decoding and generation policy. Supported values are ``canonical`` and ``payloads``.
+
+
+IEEE 754 floating-point encoder and decoder.
+
+| **Availability:** 
+|    ``logtalk_load(ieee_754(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ieee_754_protocol <ieee_754_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`ieee_754_common(Precision,ByteOrder) <ieee_754_common/2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ieee_754_protocol/0::byte_count/1`  :ref:`ieee_754_protocol/0::exactly_representable/1`  :ref:`ieee_754_protocol/0::generate/2`  :ref:`ieee_754_protocol/0::generate/3`  :ref:`ieee_754_protocol/0::nan_representation/1`  :ref:`ieee_754_protocol/0::order/1`  :ref:`ieee_754_protocol/0::parse/2`  :ref:`ieee_754_protocol/0::precision/1`  :ref:`ieee_754_protocol/0::valid/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

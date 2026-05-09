@@ -1123,6 +1123,20 @@ To load an entity, always load the library that includes it using the goal ``log
    ids <ids_0>
    ids(Representation,Bytes) <ids_2>
 
+``library/ieee_754/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754_3>
+   ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
+   ieee_754_fields(Precision,ByteOrder) <ieee_754_fields_2>
+   ieee_754_fields_protocol <ieee_754_fields_protocol_0>
+   ieee_754_protocol <ieee_754_protocol_0>
+
 ``library/intervals/``
 ----------------------
 

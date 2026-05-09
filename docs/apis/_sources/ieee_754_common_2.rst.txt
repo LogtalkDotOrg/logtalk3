@@ -1,0 +1,434 @@
+.. index:: single: ieee_754_common(Precision,ByteOrder)
+.. _ieee_754_common/2:
+
+.. rst-class:: right
+
+**category**
+
+``ieee_754_common(Precision,ByteOrder)``
+========================================
+
+Shared IEEE 754 exact bit and byte handling predicates for the high-level codec and low-level field inspection objects.
+
+| **Availability:** 
+|    ``logtalk_load(ieee_754(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: source_bits/2
+.. _ieee_754_common/2::source_bits/2:
+
+``source_bits/2``
+^^^^^^^^^^^^^^^^^
+
+Validates and normalizes a source term into canonical-order unsigned integer bits for the selected precision and byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``source_bits(Source,Bits)``
+| **Mode and number of proofs:**
+|    ``source_bits(++compound,--integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: bits_fields/5
+.. _ieee_754_common/2::bits_fields/5:
+
+``bits_fields/5``
+^^^^^^^^^^^^^^^^^
+
+Extracts exact IEEE 754 sign, exponent bits, mantissa bits, and a class atom from a validated bit pattern.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bits_fields(Bits,Sign,ExponentBits,MantissaBits,Class)``
+| **Mode and number of proofs:**
+|    ``bits_fields(+integer,-integer,-integer,-integer,-atom)`` - ``one``
+
+
+------------
+
+.. index:: bits_finite_binary_rational/4
+.. _ieee_754_common/2::bits_finite_binary_rational/4:
+
+``bits_finite_binary_rational/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts an exact finite IEEE 754 value from a validated bit pattern as ``(-1)^Sign * Significand * 2^Exponent``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bits_finite_binary_rational(Bits,Sign,Significand,Exponent)``
+| **Mode and number of proofs:**
+|    ``bits_finite_binary_rational(+integer,-integer,-integer,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bits_nan_payload/2
+.. _ieee_754_common/2::bits_nan_payload/2:
+
+``bits_nan_payload/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the raw NaN mantissa payload bits from a validated bit pattern.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bits_nan_payload(Bits,PayloadBits)``
+| **Mode and number of proofs:**
+|    ``bits_nan_payload(+integer,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bits_nan_kind/2
+.. _ieee_754_common/2::bits_nan_kind/2:
+
+``bits_nan_kind/2``
+^^^^^^^^^^^^^^^^^^^
+
+Classifies a validated NaN bit pattern as ``quiet`` or ``signaling`` using the quiet/signaling discriminator bit for the selected precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bits_nan_kind(Bits,Kind)``
+| **Mode and number of proofs:**
+|    ``bits_nan_kind(+integer,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: canonical_nan_bits/1
+.. _ieee_754_common/2::canonical_nan_bits/1:
+
+``canonical_nan_bits/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the canonical quiet NaN bit pattern for the selected precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_nan_bits(Bits)``
+| **Mode and number of proofs:**
+|    ``canonical_nan_bits(-integer)`` - ``one``
+
+
+------------
+
+.. index:: nan_bits/1
+.. _ieee_754_common/2::nan_bits/1:
+
+``nan_bits/1``
+^^^^^^^^^^^^^^
+
+True when the validated bit pattern encodes a NaN value for the selected precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nan_bits(Bits)``
+| **Mode and number of proofs:**
+|    ``nan_bits(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_bits/1
+.. _ieee_754_common/2::valid_bits/1:
+
+``valid_bits/1``
+^^^^^^^^^^^^^^^^
+
+True when the integer fits in the selected precision bit width.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_bits(Bits)``
+| **Mode and number of proofs:**
+|    ``valid_bits(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_bytes/2
+.. _ieee_754_common/2::valid_bytes/2:
+
+``valid_bytes/2``
+^^^^^^^^^^^^^^^^^
+
+True when the byte list has the expected length and all elements are valid bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_bytes(Bytes,Count)``
+| **Mode and number of proofs:**
+|    ``valid_bytes(+list(integer),+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_bytes/3
+.. _ieee_754_common/2::valid_bytes/3:
+
+``valid_bytes/3``
+^^^^^^^^^^^^^^^^^
+
+Worker predicate for validating byte lists with an explicit processed count.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_bytes(Bytes,Count,Count0)``
+| **Mode and number of proofs:**
+|    ``valid_bytes(+list(integer),+integer,+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: canonical_order_bytes/3
+.. _ieee_754_common/2::canonical_order_bytes/3:
+
+``canonical_order_bytes/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts byte lists from the selected byte order to canonical big-endian order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_order_bytes(ByteOrder,Bytes,CanonicalBytes)``
+| **Mode and number of proofs:**
+|    ``canonical_order_bytes(+atom,+list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: order_bytes/3
+.. _ieee_754_common/2::order_bytes/3:
+
+``order_bytes/3``
+^^^^^^^^^^^^^^^^^
+
+Converts canonical big-endian bytes to the selected byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``order_bytes(ByteOrder,CanonicalBytes,Bytes)``
+| **Mode and number of proofs:**
+|    ``order_bytes(+atom,+list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: bytes_tail/3
+.. _ieee_754_common/2::bytes_tail/3:
+
+``bytes_tail/3``
+^^^^^^^^^^^^^^^^
+
+Builds a difference list from a byte list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_tail(Bytes,DifferenceList,Tail)``
+| **Mode and number of proofs:**
+|    ``bytes_tail(+list(integer),-list(integer),?list(integer))`` - ``one``
+
+
+------------
+
+.. index:: bytes_to_unsigned_integer/2
+.. _ieee_754_common/2::bytes_to_unsigned_integer/2:
+
+``bytes_to_unsigned_integer/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts canonical-order bytes into an unsigned integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_unsigned_integer(Bytes,Integer)``
+| **Mode and number of proofs:**
+|    ``bytes_to_unsigned_integer(+list(integer),-integer)`` - ``one``
+
+
+------------
+
+.. index:: bytes_to_unsigned_integer/3
+.. _ieee_754_common/2::bytes_to_unsigned_integer/3:
+
+``bytes_to_unsigned_integer/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Worker predicate for converting canonical-order bytes into an unsigned integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_unsigned_integer(Bytes,Integer0,Integer)``
+| **Mode and number of proofs:**
+|    ``bytes_to_unsigned_integer(+list(integer),+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: integer_to_bytes/3
+.. _ieee_754_common/2::integer_to_bytes/3:
+
+``integer_to_bytes/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Converts an unsigned integer into a canonical-order byte list with the requested length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_bytes(Count,Integer,Bytes)``
+| **Mode and number of proofs:**
+|    ``integer_to_bytes(+integer,+integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: zero_bits/2
+.. _ieee_754_common/2::zero_bits/2:
+
+``zero_bits/2``
+^^^^^^^^^^^^^^^
+
+Returns the zero encoding bits with the requested sign bit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_bits(Sign,Bits)``
+| **Mode and number of proofs:**
+|    ``zero_bits(+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: zero_from_sign/2
+.. _ieee_754_common/2::zero_from_sign/2:
+
+``zero_from_sign/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a positive or negative floating-point zero from a sign bit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_from_sign(Sign,Zero)``
+| **Mode and number of proofs:**
+|    ``zero_from_sign(+integer,-float)`` - ``one``
+
+
+------------
+
+.. index:: apply_float_sign/3
+.. _ieee_754_common/2::apply_float_sign/3:
+
+``apply_float_sign/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Applies a sign bit to a positive floating-point magnitude.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``apply_float_sign(Sign,Magnitude,Value)``
+| **Mode and number of proofs:**
+|    ``apply_float_sign(+integer,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: precision_spec/5
+.. _ieee_754_common/2::precision_spec/5:
+
+``precision_spec/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the exponent width, mantissa width, exponent bias, and byte count for a supported IEEE 754 precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``precision_spec(Precision,ExponentWidth,MantissaWidth,Bias,ByteCount)``
+| **Mode and number of proofs:**
+|    ``precision_spec(+atom,-integer,-integer,-integer,-integer)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

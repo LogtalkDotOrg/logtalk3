@@ -46,8 +46,8 @@ multiple areas):
 - Logic and symbolic computing: ``datalog``.
 - Security and integrity: ``hashes`` and ``hmac``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
-- Mathematics, statistics, and optimization: ``linear_algebra``,
-  ``simulated_annealing``, and ``statistics``.
+- Mathematics, statistics, and optimization: ``ieee_754``,
+  ``linear_algebra``, ``simulated_annealing``, and ``statistics``.
 - Machine learning:
 
   - Classification: ``classification_protocols``,

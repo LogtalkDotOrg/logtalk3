@@ -1202,6 +1202,20 @@ To load any library (including developer tools, ports, and contributions), use t
    ids <ids_0>
    ids(Representation,Bytes) <ids_2>
 
+:ref:`ieee_754 <library_ieee_754>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754_3>
+   ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
+   ieee_754_fields(Precision,ByteOrder) <ieee_754_fields_2>
+   ieee_754_fields_protocol <ieee_754_fields_protocol_0>
+   ieee_754_protocol <ieee_754_protocol_0>
+
 :ref:`intervals <library_intervals>`
 ------------------------------------
 

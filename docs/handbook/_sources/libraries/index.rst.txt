@@ -114,6 +114,7 @@ directory in the ``NOTES.md`` file.
    html
    ica_projection
    ids
+   ieee_754
    intervals
    iqr_anomaly_detector
    iso_639

@@ -1571,6 +1571,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::bypass_flag/2>`
 
+``byte_count/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::byte_count/1>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::byte_count/1>`
+
 ``bytes_hex/2``
 ---------------
 
@@ -2146,6 +2157,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`classifier_protocol <classifier_protocol/0::classifier_options/2>`
+
+``classify/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::classify/2>`
 
 ``clause/5``
 ------------
@@ -5514,6 +5535,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::euclidean_norm/2>`
 * :ref:`numberlistp <numberlistp/0::euclidean_norm/2>`
 
+``exactly_representable/1``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::exactly_representable/1>`
+
 ``example/2``
 -------------
 
@@ -5902,6 +5933,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::fecf/2>`
 * :ref:`ccsds_frames <ccsds_frames/0::fecf/2>`
 
+``fields/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::fields/5>`
+
 ``file/1``
 ----------
 
@@ -6277,6 +6318,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::finishes/2>`
+
+``finite_binary_rational/4``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::finite_binary_rational/4>`
 
 ``first_header_pointer/2``
 --------------------------
@@ -7053,6 +7104,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
 * :ref:`geo_json_protocol <geo_json_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
@@ -7078,6 +7130,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/3>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/3>`
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::generate/3>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/3>`
 * :ref:`protobuf <protobuf/0::generate/3>`
 
 ``generate/4``
@@ -12310,6 +12363,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::name_of_month/3>`
 
+``nan_kind/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::nan_kind/2>`
+
+``nan_payload/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::nan_payload/2>`
+
+``nan_representation/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::nan_representation/1>`
+
 ``natural//1``
 --------------
 
@@ -13328,6 +13411,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`optional(Optional) <optional/1::or_else_throw/2>`
 * :ref:`validation(Validation) <validation/1::or_else_throw/2>`
 
+``order/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::order/1>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::order/1>`
+
 ``originator/1``
 ----------------
 
@@ -13827,6 +13921,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
 * :ref:`geo_json_protocol <geo_json_protocol/0::parse/2>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
@@ -14478,6 +14573,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metagol <metagol/0::pprint/1>`
+
+``precision/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::precision/1>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::precision/1>`
 
 ``predicate/1``
 ---------------
@@ -20283,6 +20389,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::valid/1>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::valid/1>`
 * :ref:`ccsds_time_codes <ccsds_time_codes/0::valid/1>`
+* :ref:`ieee_754_protocol <ieee_754_protocol/0::valid/1>`
 * :ref:`intervalp <intervalp/0::valid/1>`
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`

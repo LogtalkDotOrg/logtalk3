@@ -1,0 +1,253 @@
+.. index:: single: ieee_754_fields_protocol
+.. _ieee_754_fields_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ieee_754_fields_protocol``
+============================
+
+IEEE 754 exact bit-field support library protocol. Intended to be implemented by parameterized objects such as ``ieee_754_fields(Precision, ByteOrder)``.
+
+| **Availability:** 
+|    ``logtalk_load(ieee_754(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: classify/2
+.. _ieee_754_fields_protocol/0::classify/2:
+
+``classify/2``
+^^^^^^^^^^^^^^
+
+Classifies an IEEE 754 encoding source term as ``zero``, ``subnormal``, ``normal``, ``infinity``, or ``not_a_number`` for the selected precision and byte order. Supported source terms are ``bytes(Bytes)`` and ``bits(Bits)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classify(Source,Class)``
+| **Mode and number of proofs:**
+|    ``classify(++compound,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source term:
+|        ``domain_error(ieee_754_source,Source)``
+|    ``Source`` does not contain a valid encoding for the selected object:
+|        ``domain_error(ieee_754_encoding,Source)``
+
+
+------------
+
+.. index:: fields/5
+.. _ieee_754_fields_protocol/0::fields/5:
+
+``fields/5``
+^^^^^^^^^^^^
+
+Extracts the exact IEEE 754 sign bit, exponent bits, mantissa bits, and classification from a source term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fields(Source,Sign,ExponentBits,MantissaBits,Class)``
+| **Mode and number of proofs:**
+|    ``fields(++compound,--integer,--integer,--integer,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source term:
+|        ``domain_error(ieee_754_source,Source)``
+|    ``Source`` does not contain a valid encoding for the selected object:
+|        ``domain_error(ieee_754_encoding,Source)``
+
+
+------------
+
+.. index:: finite_binary_rational/4
+.. _ieee_754_fields_protocol/0::finite_binary_rational/4:
+
+``finite_binary_rational/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the exact finite IEEE 754 value as ``(-1)^Sign * Significand * 2^Exponent`` from a source term. Zero encodings return a zero significand and exponent ``0``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finite_binary_rational(Source,Sign,Significand,Exponent)``
+| **Mode and number of proofs:**
+|    ``finite_binary_rational(++compound,--integer,--integer,--integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source term:
+|        ``domain_error(ieee_754_source,Source)``
+|    ``Source`` does not contain a valid encoding for the selected object:
+|        ``domain_error(ieee_754_encoding,Source)``
+|    ``Source`` does not encode a finite IEEE 754 value:
+|        ``domain_error(ieee_754_finite_encoding,Source)``
+
+
+------------
+
+.. index:: nan_payload/2
+.. _ieee_754_fields_protocol/0::nan_payload/2:
+
+``nan_payload/2``
+^^^^^^^^^^^^^^^^^
+
+Extracts the raw NaN mantissa payload bits from a source term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nan_payload(Source,PayloadBits)``
+| **Mode and number of proofs:**
+|    ``nan_payload(++compound,--integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source term:
+|        ``domain_error(ieee_754_source,Source)``
+|    ``Source`` does not contain a valid encoding for the selected object:
+|        ``domain_error(ieee_754_encoding,Source)``
+|    ``Source`` does not encode a NaN value:
+|        ``domain_error(ieee_754_nan_encoding,Source)``
+
+
+------------
+
+.. index:: nan_kind/2
+.. _ieee_754_fields_protocol/0::nan_kind/2:
+
+``nan_kind/2``
+^^^^^^^^^^^^^^
+
+Classifies a NaN source term as ``quiet`` or ``signaling`` using the exact IEEE 754 quiet/signaling discriminator bit for the selected precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nan_kind(Source,Kind)``
+| **Mode and number of proofs:**
+|    ``nan_kind(++compound,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source term:
+|        ``domain_error(ieee_754_source,Source)``
+|    ``Source`` does not contain a valid encoding for the selected object:
+|        ``domain_error(ieee_754_encoding,Source)``
+|    ``Source`` does not encode a NaN value:
+|        ``domain_error(ieee_754_nan_encoding,Source)``
+
+
+------------
+
+.. index:: precision/1
+.. _ieee_754_fields_protocol/0::precision/1:
+
+``precision/1``
+^^^^^^^^^^^^^^^
+
+Returns the selected IEEE 754 precision. Expected values are ``half``, ``single``, or ``double``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``precision(Precision)``
+| **Mode and number of proofs:**
+|    ``precision(-atom)`` - ``one``
+
+
+------------
+
+.. index:: order/1
+.. _ieee_754_fields_protocol/0::order/1:
+
+``order/1``
+^^^^^^^^^^^
+
+Returns the selected byte order. Expected values are ``big`` or ``little``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``order(ByteOrder)``
+| **Mode and number of proofs:**
+|    ``order(-atom)`` - ``one``
+
+
+------------
+
+.. index:: byte_count/1
+.. _ieee_754_fields_protocol/0::byte_count/1:
+
+``byte_count/1``
+^^^^^^^^^^^^^^^^
+
+Returns the number of bytes used by the selected precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``byte_count(ByteCount)``
+| **Mode and number of proofs:**
+|    ``byte_count(-integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

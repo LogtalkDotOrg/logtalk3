@@ -154,6 +154,7 @@
 		ccsds_packets(loader),
 		ccsds_packetization(loader),
 		ccsds_packet_services(loader),
+		ieee_754(loader),
 		avro(loader),
 		protobuf(loader),
 		character_sets(loader),

@@ -164,6 +164,7 @@ Foreach-Object {
 (Get-Content ../../../library/html/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/html.rst
 (Get-Content ../../../library/ica_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ica_projection.rst
 (Get-Content ../../../library/ids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ids.rst
+(Get-Content ../../../library/ieee_754/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ieee_754.rst
 (Get-Content ../../../library/intervals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/intervals.rst
 (Get-Content ../../../library/iqr_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iqr_anomaly_detector.rst
 (Get-Content ../../../library/iso_639/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_639.rst

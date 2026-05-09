@@ -118,6 +118,7 @@ logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
 logtalk_library_path(ica_projection, library('ica_projection/')).
 logtalk_library_path(ids, library('ids/')).
+logtalk_library_path(ieee_754, library('ieee_754/')).
 logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(iqr_anomaly_detector, library('iqr_anomaly_detector/')).
 logtalk_library_path(iso_639, library('iso_639/')).

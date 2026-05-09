@@ -1,0 +1,250 @@
+.. index:: single: ieee_754_protocol
+.. _ieee_754_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ieee_754_protocol``
+=====================
+
+IEEE 754 floating-point support library protocol. Intended to be implemented by parameterized objects such as ``ieee_754(Precision, ByteOrder, NaNRepresentation)``.
+
+| **Availability:** 
+|    ``logtalk_load(ieee_754(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _ieee_754_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses an IEEE 754 value from a source term for the selected precision, byte order, and NaN representation policy. Supported source terms are ``bytes(Bytes)`` and ``bits(Bits)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Value)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source term:
+|        ``domain_error(ieee_754_source,Source)``
+|    ``Source`` does not contain a valid encoding for the selected object:
+|        ``domain_error(ieee_754_encoding,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _ieee_754_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates an IEEE 754 encoding for a value term using the selected precision and byte order. Supported sink terms are ``bytes(Bytes)`` and ``bits(Bits)``. Finite values are encoded using the selected precision rounding semantics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Value)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid sink term:
+|        ``domain_error(ieee_754_sink,Sink)``
+|    ``Value`` is neither a valid finite float nor a supported IEEE 754 special value term:
+|        ``domain_error(ieee_754_value,Value)``
+|    ``Value`` cannot be represented in the selected precision:
+|        ``domain_error(ieee_754_representation,Value)``
+
+
+------------
+
+.. index:: generate/3
+.. _ieee_754_protocol/0::generate/3:
+
+``generate/3``
+^^^^^^^^^^^^^^
+
+Generates an IEEE 754 encoding as a list of bytes with an open tail. Intended for use by libraries that build larger binary payloads using difference lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Value,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``generate(+term,-list(byte),--variable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is neither a valid finite float nor a supported IEEE 754 special value term:
+|        ``domain_error(ieee_754_value,Value)``
+|    ``Value`` cannot be represented in the selected precision:
+|        ``domain_error(ieee_754_representation,Value)``
+
+
+------------
+
+.. index:: valid/1
+.. _ieee_754_protocol/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+True iff the argument is a valid value term for the selected object. Valid terms are finite floats plus the special values supported by the selected NaN representation policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Value)``
+| **Mode and number of proofs:**
+|    ``valid(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: exactly_representable/1
+.. _ieee_754_protocol/0::exactly_representable/1:
+
+``exactly_representable/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the argument can be encoded in the selected precision and decoded again without loss of value information under the selected NaN representation policy. Intended for callers such as MessagePack that choose the smallest exact binary format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exactly_representable(Value)``
+| **Mode and number of proofs:**
+|    ``exactly_representable(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: precision/1
+.. _ieee_754_protocol/0::precision/1:
+
+``precision/1``
+^^^^^^^^^^^^^^^
+
+Returns the selected IEEE 754 precision. Expected values are ``half``, ``single``, or ``double``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``precision(Precision)``
+| **Mode and number of proofs:**
+|    ``precision(-atom)`` - ``one``
+
+
+------------
+
+.. index:: order/1
+.. _ieee_754_protocol/0::order/1:
+
+``order/1``
+^^^^^^^^^^^
+
+Returns the selected byte order. Expected values are ``big`` or ``little``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``order(ByteOrder)``
+| **Mode and number of proofs:**
+|    ``order(-atom)`` - ``one``
+
+
+------------
+
+.. index:: nan_representation/1
+.. _ieee_754_protocol/0::nan_representation/1:
+
+``nan_representation/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the selected NaN representation policy. Expected values are ``canonical`` and ``payloads``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nan_representation(NaNRepresentation)``
+| **Mode and number of proofs:**
+|    ``nan_representation(-atom)`` - ``one``
+
+
+------------
+
+.. index:: byte_count/1
+.. _ieee_754_protocol/0::byte_count/1:
+
+``byte_count/1``
+^^^^^^^^^^^^^^^^
+
+Returns the number of bytes used by the selected precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``byte_count(ByteCount)``
+| **Mode and number of proofs:**
+|    ``byte_count(-integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

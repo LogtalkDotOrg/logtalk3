@@ -54,6 +54,7 @@ Categories
    graph_types <graph_types_0>
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    html <html_0>
+   ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
    lgtdoc_messages <lgtdoc_messages_0>
    lgtunit_messages <lgtunit_messages_0>
    library_diagram(Format) <library_diagram_1>
@@ -290,6 +291,8 @@ Objects
    identity_hook <identity_hook_0>
    ids <ids_0>
    ids(Representation,Bytes) <ids_2>
+   ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754_3>
+   ieee_754_fields(Precision,ByteOrder) <ieee_754_fields_2>
    inheritance_diagram <inheritance_diagram_0>
    inheritance_diagram(Format) <inheritance_diagram_1>
    integer <integer_0>
@@ -652,6 +655,8 @@ Protocols
    heapp <heapp_0>
    hierarchyp <hierarchyp_0>
    hmac_protocol <hmac_protocol_0>
+   ieee_754_fields_protocol <ieee_754_fields_protocol_0>
+   ieee_754_protocol <ieee_754_protocol_0>
    interpreterp <interpreterp_0>
    intervalp <intervalp_0>
    iso_13616_protocol <iso_13616_protocol_0>

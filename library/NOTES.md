@@ -71,7 +71,7 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 - Randomness:
 	`arbitrary`, `mutations`, and `random`.
 - Mathematics, statistics, and optimization:
-	`linear_algebra`, `simulated_annealing`, and `statistics`.
+	`ieee_754`, `linear_algebra`, `simulated_annealing`, and `statistics`.
 - Machine learning:
 	- Classification:
 		`classification_protocols`, `adaptive_boosting_classifier`, `c45_classifier`, `gradient_boosting_classifier`,

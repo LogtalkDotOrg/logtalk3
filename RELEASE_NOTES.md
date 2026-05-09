@@ -332,6 +332,9 @@ datasets using one-vs-rest linear models with configurable losses.
 `ccsds_packetization`, `ccsds_tc_services`, `ccsds_time_codes`, and
 `ccsds_time_fields` libraries.
 
+* ADDED: New `ieee_754` library supporting parsing and generating IEEE 754
+floating-point encodings.
+
 * ADDED: New `geo_json` library implementing the GeoJSON (RFC 7946) standard.
 
 * ADDED: New `hmac` library providing a portable implementation of HMAC

@@ -164,6 +164,7 @@ sed '1,19d' ../../../library/hook_objects/NOTES.md | pandoc -f gfm -t rst -o lib
 sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/html.rst
 sed '1,19d' ../../../library/ica_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/ica_projection.rst
 sed '1,19d' ../../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.rst
+sed '1,19d' ../../../library/ieee_754/NOTES.md | pandoc -f gfm -t rst -o libraries/ieee_754.rst
 sed '1,19d' ../../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
 sed '1,19d' ../../../library/iqr_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/iqr_anomaly_detector.rst
 sed '1,19d' ../../../library/iso_639/NOTES.md | pandoc -f gfm -t rst -o libraries/iso_639.rst
