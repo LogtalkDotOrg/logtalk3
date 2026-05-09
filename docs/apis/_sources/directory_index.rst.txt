@@ -2391,6 +2391,17 @@ To load an entity, always load the library that includes it using the goal ``log
    validation <validation_0>
    validation(Validation) <validation_1>
 
+``library/wkt_wkb/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   wkt_wkb <wkt_wkb_0>
+   wkt_wkb_protocol <wkt_wkb_protocol_0>
+
 ``library/yaml/``
 -----------------
 

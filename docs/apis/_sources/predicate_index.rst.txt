@@ -7062,6 +7062,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
 * :ref:`ulid_protocol <ulid_protocol/0::generate/2>`
 * :ref:`url(Representation) <url/1::generate/2>`
+* :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::generate/2>`
 * :ref:`yaml_protocol <yaml_protocol/0::generate/2>`
 
 ``generate/3``
@@ -13835,6 +13836,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`toml_protocol <toml_protocol/0::parse/2>`
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`
 * :ref:`url(Representation) <url/1::parse/2>`
+* :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::parse/2>`
 * :ref:`xml <xml/0::parse/2>`
 * :ref:`yaml_protocol <yaml_protocol/0::parse/2>`
 
@@ -20563,6 +20565,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`flags_validator <flags_validator/0::validate/1>`
 * :ref:`geo_json_protocol <geo_json_protocol/0::validate/1>`
+* :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/1>`
 
 ``validate/2``
 --------------
@@ -20574,6 +20577,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geo_json_protocol <geo_json_protocol/0::validate/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/2>`
+* :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/2>`
 
 ``validate/3``
 --------------

@@ -227,6 +227,7 @@ directory in the ``NOTES.md`` file.
    url
    uuid
    validations
+   wkt_wkb
    yaml
    z_score_anomaly_detector
    zippers

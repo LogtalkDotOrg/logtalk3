@@ -1,0 +1,63 @@
+.. index:: single: wkt_wkb
+.. _wkt_wkb/0:
+
+.. rst-class:: right
+
+**object**
+
+``wkt_wkb``
+===========
+
+Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.
+
+| **Availability:** 
+|    ``logtalk_load(wkt_wkb(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`wkt_wkb_protocol/0::generate/2`  :ref:`wkt_wkb_protocol/0::parse/2`  :ref:`wkt_wkb_protocol/0::validate/1`  :ref:`wkt_wkb_protocol/0::validate/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0>`, :ref:`geo_json <geo_json/0>`, :ref:`geospatial <geospatial/0>`, :ref:`cbor <cbor/0>`, :ref:`message_pack(StringRepresentation) <message_pack/1>`
+

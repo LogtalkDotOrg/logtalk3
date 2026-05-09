@@ -340,6 +340,9 @@ datasets using one-vs-rest linear models with configurable losses.
 * ADDED: New `message_pack` library implementing the MessagePack binary data
 format.
 
+* ADDED: New `wkt_wkb` library implementing the Well-Known Text and Well-Known
+Binary geometry interchange format.
+
 * ADDED: Support to the `hashes` library for computing keyed digests and
 access metadata for fixed-size cryptographic hash objects that can be safely
 used with HMAC.

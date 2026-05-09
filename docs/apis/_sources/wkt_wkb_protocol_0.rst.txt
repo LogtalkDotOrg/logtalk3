@@ -1,0 +1,170 @@
+.. index:: single: wkt_wkb_protocol
+.. _wkt_wkb_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``wkt_wkb_protocol``
+====================
+
+Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(wkt_wkb(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-09
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _wkt_wkb_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a geometry from the given source. Supported sources are ``wkt(file(Path))``, ``wkt(stream(Stream))``, ``wkt(atom(Atom))``, ``wkt(chars(List))``, ``wkt(codes(List))``, ``wkb(file(Path))``, ``wkb(stream(Stream))``, ``wkb(bytes(List))``, ``wkb(hex(atom(Atom)))``, ``wkb(hex(chars(List)))``, and ``wkb(hex(codes(List)))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Geometry)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(wkt_wkb_source,Source)``
+|    ``Source`` data does not represent a valid WKT or WKB geometry:
+|        ``domain_error(wkt_wkb,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _wkt_wkb_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates WKT or WKB content using the representation specified in the first argument from a native geometry term. Supported sinks are ``wkt(file(Path))``, ``wkt(stream(Stream))``, ``wkt(atom(Atom))``, ``wkt(chars(List))``, ``wkt(codes(List))``, ``wkb(file(Path))``, ``wkb(stream(Stream))``, ``wkb(bytes(List))``, ``wkb(hex(atom(Atom)))``, ``wkb(hex(chars(List)))``, ``wkb(hex(codes(List)))``, and the same WKB sink wrappers wrapped as ``wkb(Sink, Order)`` where ``Order`` is ``little`` or ``big``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Geometry)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid sink:
+|        ``domain_error(wkt_wkb_sink,Sink)``
+|    ``Geometry`` is not a valid native geometry term:
+|        ``domain_error(wkt_wkb,Geometry)``
+|    ``Geometry`` is valid but cannot be represented in WKT due to special ordinates:
+|        ``domain_error(wkt_wkb_representation,wkt(Geometry))``
+
+
+------------
+
+.. index:: validate/1
+.. _wkt_wkb_protocol/0::validate/1:
+
+``validate/1``
+^^^^^^^^^^^^^^
+
+True iff the argument is a valid native WKT/WKB geometry term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate(Geometry)``
+| **Mode and number of proofs:**
+|    ``validate(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate/2
+.. _wkt_wkb_protocol/0::validate/2:
+
+``validate/2``
+^^^^^^^^^^^^^^
+
+Validates a native geometry term returning a list of reason terms whose final argument is the failing path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate(Geometry,Errors)``
+| **Mode and number of proofs:**
+|    ``validate(@term,-list(compound))`` - ``one_or_error``
+
+| **Remarks:**
+
+    - invalid_geometry_term(Path): The term is not any supported geometry representation.
+    - invalid_options(Path): The options argument is not a list.
+    - unknown_option(Option, Path): An option term is not recognized.
+    - duplicate_option(Name, Path): The same option name occurs more than once.
+    - invalid_dimensions(Path): A ``dimensions/1`` option does not use one of the supported values ``xy``, ``z``, ``m``, or ``zm``.
+    - invalid_position(Path): A position is not a list of numeric or supported special IEEE-754 coordinates with the expected dimensionality.
+    - invalid_position_array(Path): A coordinate array expected to contain positions is not a list.
+    - mixed_coordinate_dimension(Path): Coordinates in the same geometry do not all have the same dimensionality.
+    - coordinate_dimension_mismatch(Actual, Expected, Path): The coordinates dimensionality does not match the ``dimensions/1`` option.
+    - insufficient_positions(MinimumLength, Path): A coordinate array contains fewer positions than required for the enclosing geometry.
+    - ring_not_closed(Path): A polygon ring does not repeat its first position as its last position.
+    - invalid_polygon(Path): A polygon coordinate structure is invalid.
+    - invalid_multi_polygon(Path): A multi-polygon coordinate structure is invalid.
+    - invalid_geometry_collection(Path): A geometry collection member is not a list of valid geometry terms.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`wkt_wkb <wkt_wkb/0>`, :ref:`geo_json <geo_json/0>`, :ref:`geospatial <geospatial/0>`
+

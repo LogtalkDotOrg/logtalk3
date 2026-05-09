@@ -230,6 +230,7 @@ logtalk_library_path(union_find, library('union_find/')).
 logtalk_library_path(url, library('url/')).
 logtalk_library_path(uuid, library('uuid/')).
 logtalk_library_path(validations, library('validations/')).
+logtalk_library_path(wkt_wkb, library('wkt_wkb/')).
 logtalk_library_path(yaml, library('yaml/')).
 logtalk_library_path(z_score_anomaly_detector, library('z_score_anomaly_detector/')).
 logtalk_library_path(zippers, library('zippers/')).

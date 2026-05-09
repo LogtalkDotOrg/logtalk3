@@ -277,6 +277,7 @@ Foreach-Object {
 (Get-Content ../../../library/url/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/url.rst
 (Get-Content ../../../library/uuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/uuid.rst
 (Get-Content ../../../library/validations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/validations.rst
+(Get-Content ../../../library/wkt_wkb/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/wkt_wkb.rst
 (Get-Content ../../../library/yaml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/yaml.rst
 (Get-Content ../../../library/z_score_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/z_score_anomaly_detector.rst
 (Get-Content ../../../library/zippers/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/zippers.rst

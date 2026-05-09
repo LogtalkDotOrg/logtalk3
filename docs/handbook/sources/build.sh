@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 8, 2026
+##   Last updated on May 9, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -277,6 +277,7 @@ sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
 sed '1,19d' ../../../library/validations/NOTES.md | pandoc -f gfm -t rst -o libraries/validations.rst
+sed '1,19d' ../../../library/wkt_wkb/NOTES.md | pandoc -f gfm -t rst -o libraries/wkt_wkb.rst
 sed '1,19d' ../../../library/yaml/NOTES.md | pandoc -f gfm -t rst -o libraries/yaml.rst
 sed '1,19d' ../../../library/z_score_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/z_score_anomaly_detector.rst
 sed '1,19d' ../../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
