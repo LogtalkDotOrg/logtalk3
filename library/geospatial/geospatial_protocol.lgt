@@ -22,9 +22,9 @@
 :- protocol(geospatial_protocol).
 
 	:- info([
-		version is 0:2:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-25,
+		date is 2026-05-10,
 		comment is 'Geospatial predicates protocol.',
 		see_also is [geospatial, numberlistp, listp]
 	]).
@@ -32,7 +32,7 @@
 	:- public(valid_coordinate/1).
 	:- mode(valid_coordinate(@compound), zero_or_one).
 	:- info(valid_coordinate/1, [
-		comment is 'True if the argument is a valid geographic coordinate represented as ``(Latitude,Longitude)`` with latitude in the ``[-90.0,90.0]`` range and longitude in the ``[-180.0,180.0]`` range.',
+		comment is 'True if the argument is a valid geographic coordinate represented as ``geographic(Latitude,Longitude)`` with latitude in the ``[-90.0,90.0]`` range and longitude in the ``[-180.0,180.0]`` range.',
 		argnames is ['Coordinate']
 	]).
 
@@ -284,7 +284,7 @@
 	:- public(bbox_contains/2).
 	:- mode(bbox_contains(+compound, +compound), zero_or_one).
 	:- info(bbox_contains/2, [
-		comment is 'True when a coordinate is inside or on the boundary of a bounding box term ``bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))``.',
+		comment is 'True when a coordinate is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.',
 		argnames is ['BoundingBox', 'Coordinate']
 	]).
 
@@ -396,7 +396,7 @@
 	:- public(bounding_box/3).
 	:- mode(bounding_box(+compound, +positive_number, -compound), zero_or_one).
 	:- info(bounding_box/3, [
-		comment is 'Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is ``bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))``.',
+		comment is 'Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.',
 		argnames is ['Center', 'Radius', 'BoundingBox']
 	]).
 

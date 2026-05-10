@@ -65,6 +65,7 @@ directory in the ``NOTES.md`` file.
    core
    copeland_ranker
    coroutining
+   crs_projections
    csv
    cuid2
    cusum_anomaly_detector

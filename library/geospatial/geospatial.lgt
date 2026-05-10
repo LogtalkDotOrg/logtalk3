@@ -23,10 +23,10 @@
 	implements(geospatial_protocol)).
 
 	:- info([
-		version is 0:3:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
-		comment is 'Geospatial predicates over geographic coordinates represented as ``(Latitude,Longitude)``.',
+		date is 2026-05-10,
+		comment is 'Geospatial predicates over geographic coordinates represented as ``geographic(Latitude,Longitude)``.',
 		remarks is [
 			'Distance unit' - 'Kilometers.',
 			'Coordinate ranges' - 'Latitude values must be in the ``[-90.0,90.0]`` range and longitude values in the ``[-180.0,180.0]`` range.'
@@ -51,7 +51,7 @@
 		argnames is ['Coordinate1', 'Coordinate2', 'Metric', 'Unit', 'Distance']
 	]).
 
-	valid_coordinate((Latitude, Longitude)) :-
+	valid_coordinate(geographic(Latitude, Longitude)) :-
 		number(Latitude),
 		number(Longitude),
 		Latitude >= -90.0,
@@ -59,7 +59,7 @@
 		Longitude >= -180.0,
 		Longitude =< 180.0.
 
-	normalize_coordinate((Latitude0, Longitude0), (Latitude, Longitude)) :-
+	normalize_coordinate(geographic(Latitude0, Longitude0), geographic(Latitude, Longitude)) :-
 		number(Latitude0),
 		number(Longitude0),
 		normalize_coordinate_angles(Latitude0, Longitude0, Latitude1, Longitude1),
@@ -87,7 +87,7 @@
 		normalize_longitude(LongitudeRadians0, LongitudeRadians),
 		Latitude is LatitudeRadians * 180.0 / pi,
 		Longitude is LongitudeRadians * 180.0 / pi,
-		normalize_coordinate((Latitude, Longitude), Coordinate).
+		normalize_coordinate(geographic(Latitude, Longitude), Coordinate).
 
 	haversine_distance(Coordinate1, Coordinate2, Distance) :-
 		mean_earth_radius_km(MeanEarthRadiusKm),
@@ -191,7 +191,7 @@
 		normalize_longitude(Longitude2_0, Longitude2),
 		LatitudeDegrees is Latitude2 * 180.0 / pi,
 		LongitudeDegrees is Longitude2 * 180.0 / pi,
-		normalize_coordinate((LatitudeDegrees, LongitudeDegrees), Destination).
+		normalize_coordinate(geographic(LatitudeDegrees, LongitudeDegrees), Destination).
 
 	interpolate_rhumb(Coordinate1, Coordinate2, Fraction, Coordinate) :-
 		number(Fraction),
@@ -257,7 +257,7 @@
 		normalize_longitude(Longitude3_0, Longitude3),
 		Latitude3Degrees is Latitude3 * 180.0 / pi,
 		Longitude3Degrees is Longitude3 * 180.0 / pi,
-		Midpoint = (Latitude3Degrees, Longitude3Degrees).
+		Midpoint = geographic(Latitude3Degrees, Longitude3Degrees).
 
 	destination_point(Start, Bearing, Distance, Destination) :-
 		mean_earth_radius_km(MeanEarthRadiusKm),
@@ -275,7 +275,7 @@
 		normalize_longitude(Longitude2_0, Longitude2),
 		Latitude2Degrees is Latitude2 * 180.0 / pi,
 		Longitude2Degrees is Longitude2 * 180.0 / pi,
-		Destination = (Latitude2Degrees, Longitude2Degrees).
+		Destination = geographic(Latitude2Degrees, Longitude2Degrees).
 
 	interpolate_great_circle(Coordinate1, Coordinate2, Fraction, Coordinate) :-
 		number(Fraction),
@@ -299,7 +299,7 @@
 			normalize_longitude(Longitude0, Longitude),
 			LatitudeDegrees is Latitude * 180.0 / pi,
 			LongitudeDegrees is Longitude * 180.0 / pi,
-			Coordinate = (LatitudeDegrees, LongitudeDegrees)
+			Coordinate = geographic(LatitudeDegrees, LongitudeDegrees)
 		).
 
 	cross_track_distance(Coordinate, Start, End, Distance) :-
@@ -360,9 +360,9 @@
 
 	mean_center([Coordinate| Coordinates], Center) :-
 		valid_coordinate(Coordinate),
-		Coordinate = (Latitude0, Longitude0),
+		Coordinate = geographic(Latitude0, Longitude0),
 		mean_center(Coordinates, Latitude0, Longitude0, 1, Latitude, Longitude),
-		Center = (Latitude, Longitude).
+		Center = geographic(Latitude, Longitude).
 
 	minimum_enclosing_circle([Coordinate| Coordinates], Center, Radius) :-
 		all_valid_coordinates([Coordinate| Coordinates]),
@@ -374,9 +374,9 @@
 
 	coordinates_bounding_box([Coordinate| Coordinates], BoundingBox) :-
 		valid_coordinate(Coordinate),
-		Coordinate = (MinLatitude0, MinLongitude0),
+		Coordinate = geographic(MinLatitude0, MinLongitude0),
 		coordinates_min_max(Coordinates, MinLatitude0, MinLongitude0, MinLatitude0, MinLongitude0, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude),
-		BoundingBox = bbox((MinLatitude, MinLongitude), (MaxLatitude, MaxLongitude)).
+		BoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)).
 
 	point_in_polygon(Point, Polygon) :-
 		valid_coordinate(Point),
@@ -407,12 +407,12 @@
 		normalize_longitude(LongitudeRadians, NormalizedLongitude),
 		Latitude is LatitudeRadians * 180.0 / pi,
 		Longitude is NormalizedLongitude * 180.0 / pi,
-		Centroid = (Latitude, Longitude).
+		Centroid = geographic(Latitude, Longitude).
 
 	polygon_bounding_box(Polygon, BoundingBox) :-
-		normalize_polygon(Polygon, [(MinLatitude0, MinLongitude0)| Coordinates]),
+		normalize_polygon(Polygon, [geographic(MinLatitude0, MinLongitude0)| Coordinates]),
 		polygon_min_max(Coordinates, MinLatitude0, MinLongitude0, MinLatitude0, MinLongitude0, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude),
-		BoundingBox = bbox((MinLatitude, MinLongitude), (MaxLatitude, MaxLongitude)).
+		BoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)).
 
 	close_polygon(Polygon, ClosedPolygon) :-
 		normalize_polygon(Polygon, NormalizedPolygon),
@@ -460,18 +460,18 @@
 
 	bbox_contains(BoundingBox, Coordinate) :-
 		valid_coordinate(Coordinate),
-		BoundingBox = bbox((MinLatitude, MinLongitude), (MaxLatitude, MaxLongitude)),
+		BoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)),
 		number(MinLatitude), number(MinLongitude),
 		number(MaxLatitude), number(MaxLongitude),
-		Coordinate = (Latitude, Longitude),
+		Coordinate = geographic(Latitude, Longitude),
 		Latitude >= MinLatitude,
 		Latitude =< MaxLatitude,
 		Longitude >= MinLongitude,
 		Longitude =< MaxLongitude.
 
 	bbox_intersects(BoundingBox1, BoundingBox2) :-
-		BoundingBox1 = bbox((MinLatitude1, MinLongitude1), (MaxLatitude1, MaxLongitude1)),
-		BoundingBox2 = bbox((MinLatitude2, MinLongitude2), (MaxLatitude2, MaxLongitude2)),
+		BoundingBox1 = bbox(geographic(MinLatitude1, MinLongitude1), geographic(MaxLatitude1, MaxLongitude1)),
+		BoundingBox2 = bbox(geographic(MinLatitude2, MinLongitude2), geographic(MaxLatitude2, MaxLongitude2)),
 		number(MinLatitude1), number(MinLongitude1), number(MaxLatitude1), number(MaxLongitude1),
 		number(MinLatitude2), number(MinLongitude2), number(MaxLatitude2), number(MaxLongitude2),
 		MaxLatitude1 >= MinLatitude2,
@@ -480,18 +480,18 @@
 		MaxLongitude2 >= MinLongitude1.
 
 	bbox_union(BoundingBox1, BoundingBox2, BoundingBox) :-
-		BoundingBox1 = bbox((MinLatitude1, MinLongitude1), (MaxLatitude1, MaxLongitude1)),
-		BoundingBox2 = bbox((MinLatitude2, MinLongitude2), (MaxLatitude2, MaxLongitude2)),
+		BoundingBox1 = bbox(geographic(MinLatitude1, MinLongitude1), geographic(MaxLatitude1, MaxLongitude1)),
+		BoundingBox2 = bbox(geographic(MinLatitude2, MinLongitude2), geographic(MaxLatitude2, MaxLongitude2)),
 		number(MinLatitude1), number(MinLongitude1), number(MaxLatitude1), number(MaxLongitude1),
 		number(MinLatitude2), number(MinLongitude2), number(MaxLatitude2), number(MaxLongitude2),
 		MinLatitude is min(MinLatitude1, MinLatitude2),
 		MinLongitude is min(MinLongitude1, MinLongitude2),
 		MaxLatitude is max(MaxLatitude1, MaxLatitude2),
 		MaxLongitude is max(MaxLongitude1, MaxLongitude2),
-		BoundingBox = bbox((MinLatitude, MinLongitude), (MaxLatitude, MaxLongitude)).
+		BoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)).
 
 	bbox_expand(BoundingBox, Distance, ExpandedBoundingBox) :-
-		BoundingBox = bbox((MinLatitude0, MinLongitude0), (MaxLatitude0, MaxLongitude0)),
+		BoundingBox = bbox(geographic(MinLatitude0, MinLongitude0), geographic(MaxLatitude0, MaxLongitude0)),
 		number(MinLatitude0), number(MinLongitude0), number(MaxLatitude0), number(MaxLongitude0),
 		number(Distance),
 		Distance >= 0.0,
@@ -506,9 +506,9 @@
 		MaxLatitude is min(90.0, MaxLatitude0 + LatitudeDelta),
 		MinLongitudePre is MinLongitude0 - LongitudeDelta,
 		MaxLongitudePre is MaxLongitude0 + LongitudeDelta,
-		normalize_coordinate((MeanLatitude, MinLongitudePre), (_, MinLongitude)),
-		normalize_coordinate((MeanLatitude, MaxLongitudePre), (_, MaxLongitude)),
-		ExpandedBoundingBox = bbox((MinLatitude, MinLongitude), (MaxLatitude, MaxLongitude)).
+		normalize_coordinate(geographic(MeanLatitude, MinLongitudePre), geographic(_, MinLongitude)),
+		normalize_coordinate(geographic(MeanLatitude, MaxLongitudePre), geographic(_, MaxLongitude)),
+		ExpandedBoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)).
 
 	bbox_from_coordinates(Coordinates, BoundingBox) :-
 		coordinates_bounding_box(Coordinates, BoundingBox).
@@ -586,7 +586,7 @@
 		Radius > 0.0,
 		HalfEarthCircumference is pi * MeanEarthRadiusKm,
 		(	Radius >= HalfEarthCircumference ->
-			BoundingBox = bbox((-90.0, -180.0), (90.0, 180.0))
+			BoundingBox = bbox(geographic(-90.0, -180.0), geographic(90.0, 180.0))
 		;	AngularRadius is Radius / MeanEarthRadiusKm,
 			MinLatitude0 is Latitude - AngularRadius,
 			MaxLatitude0 is Latitude + AngularRadius,
@@ -606,8 +606,8 @@
 			MinLongitudeDegrees is MinLongitude * 180.0 / pi,
 			MaxLongitudeDegrees is MaxLongitude * 180.0 / pi,
 			BoundingBox = bbox(
-				(MinLatitudeDegrees, MinLongitudeDegrees),
-				(MaxLatitudeDegrees, MaxLongitudeDegrees)
+				geographic(MinLatitudeDegrees, MinLongitudeDegrees),
+				geographic(MaxLatitudeDegrees, MaxLongitudeDegrees)
 			)
 		).
 
@@ -682,7 +682,7 @@
 		Longitude is SumLongitude / Count.
 	mean_center([Coordinate| Coordinates], SumLatitude0, SumLongitude0, Count0, Latitude, Longitude) :-
 		valid_coordinate(Coordinate),
-		Coordinate = (CoordinateLatitude, CoordinateLongitude),
+		Coordinate = geographic(CoordinateLatitude, CoordinateLongitude),
 		SumLatitude1 is SumLatitude0 + CoordinateLatitude,
 		SumLongitude1 is SumLongitude0 + CoordinateLongitude,
 		Count1 is Count0 + 1,
@@ -691,7 +691,7 @@
 	coordinates_min_max([], MinLatitude, MinLongitude, MaxLatitude, MaxLongitude, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude).
 	coordinates_min_max([Coordinate| Coordinates], MinLatitude0, MinLongitude0, MaxLatitude0, MaxLongitude0, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude) :-
 		valid_coordinate(Coordinate),
-		Coordinate = (CoordinateLatitude, CoordinateLongitude),
+		Coordinate = geographic(CoordinateLatitude, CoordinateLongitude),
 		MinLatitude1 is min(MinLatitude0, CoordinateLatitude),
 		MinLongitude1 is min(MinLongitude0, CoordinateLongitude),
 		MaxLatitude1 is max(MaxLatitude0, CoordinateLatitude),
@@ -849,7 +849,7 @@
 			equirectangular_inverse(ClosestX, ClosestY, ReferenceLatitude, ProjectionPoint)
 		).
 
-	segment_reference_latitude((Latitude1, _), (Latitude2, _), ReferenceLatitude) :-
+	segment_reference_latitude(geographic(Latitude1, _), geographic(Latitude2, _), ReferenceLatitude) :-
 		ReferenceLatitude is (Latitude1 + Latitude2) / 2.0.
 
 	polygon_perimeter([], _, _, Perimeter, Perimeter).
@@ -889,7 +889,7 @@
 		;	O4 =:= 0, point_on_segment(Q1, P2, Q2)
 		).
 
-	orientation((Y1, X1), (Y2, X2), (Y3, X3), Orientation) :-
+	orientation(geographic(Y1, X1), geographic(Y2, X2), geographic(Y3, X3), Orientation) :-
 		Value is (X2 - X1) * (Y3 - Y1) - (Y2 - Y1) * (X3 - X1),
 		(	abs(Value) =< 1.0e-12 ->
 			Orientation = 0
@@ -950,7 +950,7 @@
 		;	point_on_polygon_boundary(Coordinates, Coordinate, Point)
 		).
 
-	point_on_segment((Latitude, Longitude), (Latitude1, Longitude1), (Latitude2, Longitude2)) :-
+	point_on_segment(geographic(Latitude, Longitude), geographic(Latitude1, Longitude1), geographic(Latitude2, Longitude2)) :-
 		Cross is (Longitude - Longitude1) * (Latitude2 - Latitude1) - (Latitude - Latitude1) * (Longitude2 - Longitude1),
 		abs(Cross) =< 1.0e-12,
 		MinLatitude is min(Latitude1, Latitude2),
@@ -974,7 +974,7 @@
 		),
 		count_polygon_ray_crossings(Coordinates, Coordinate, Point, Crossings1, Crossings).
 
-	edge_crosses_ray((Latitude, Longitude), (Latitude1, Longitude1), (Latitude2, Longitude2)) :-
+	edge_crosses_ray(geographic(Latitude, Longitude), geographic(Latitude1, Longitude1), geographic(Latitude2, Longitude2)) :-
 		(	Latitude1 > Latitude, Latitude2 =< Latitude
 		;	Latitude2 > Latitude, Latitude1 =< Latitude
 		),
@@ -986,13 +986,13 @@
 		MeanLatitude is SumLatitudes / Count.
 
 	sum_latitudes([], SumLatitudes, Count, SumLatitudes, Count).
-	sum_latitudes([(Latitude, _)| Coordinates], SumLatitudes0, Count0, SumLatitudes, Count) :-
+	sum_latitudes([geographic(Latitude, _)| Coordinates], SumLatitudes0, Count0, SumLatitudes, Count) :-
 		SumLatitudes1 is SumLatitudes0 + Latitude,
 		Count1 is Count0 + 1,
 		sum_latitudes(Coordinates, SumLatitudes1, Count1, SumLatitudes, Count).
 
 	project_coordinates([], _, []).
-	project_coordinates([(Latitude, Longitude)| Coordinates], MeanLatitude, [X-Y| ProjectedCoordinates]) :-
+	project_coordinates([geographic(Latitude, Longitude)| Coordinates], MeanLatitude, [X-Y| ProjectedCoordinates]) :-
 		mean_earth_radius_km(MeanEarthRadiusKm),
 		LatitudeRadians is Latitude * pi / 180.0,
 		LongitudeRadians is Longitude * pi / 180.0,
@@ -1026,7 +1026,7 @@
 		polygon_centroid_projected(Coordinates, X-Y, Area1, SumX1, SumY1, Area, SumX, SumY).
 
 	polygon_min_max([], MinLatitude, MinLongitude, MaxLatitude, MaxLongitude, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude).
-	polygon_min_max([(Latitude, Longitude)| Coordinates], MinLatitude0, MinLongitude0, MaxLatitude0, MaxLongitude0, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude) :-
+	polygon_min_max([geographic(Latitude, Longitude)| Coordinates], MinLatitude0, MinLongitude0, MaxLatitude0, MaxLongitude0, MinLatitude, MinLongitude, MaxLatitude, MaxLongitude) :-
 		MinLatitude1 is min(MinLatitude0, Latitude),
 		MinLongitude1 is min(MinLongitude0, Longitude),
 		MaxLatitude1 is max(MaxLatitude0, Latitude),
@@ -1035,7 +1035,7 @@
 
 	coordinate_radians(Coordinate, Latitude, Longitude) :-
 		valid_coordinate(Coordinate),
-		Coordinate = (LatitudeDegrees, LongitudeDegrees),
+		Coordinate = geographic(LatitudeDegrees, LongitudeDegrees),
 		Latitude is LatitudeDegrees * pi / 180.0,
 		Longitude is LongitudeDegrees * pi / 180.0.
 

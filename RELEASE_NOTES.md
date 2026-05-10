@@ -61,6 +61,9 @@ across all machine learning libraries.
 (functionality preserved but four export and print predicates were renamed
 with this change).
 
+* CHANGED: The `geospatial` library geographic coordinate representation from
+`(Latitude,Longitude)` pairs to `geographic(Latitude,Longitude)` terms.
+
 * ADDED: New `linear_algebra` library implementing predicates for numeric
 vectors and matrices.
 
@@ -342,6 +345,11 @@ floating-point encodings.
 
 * ADDED: New `message_pack` library implementing the MessagePack binary data
 format.
+
+* ADDED: New `crs_projections` library implementing common coordinate
+reference systems and transformations for 2D and 3D WGS84 geodetic
+coordinates, Web Mercator, World Mercator, ECEF, local ENU tangent-plane,
+Lambert azimuthal equal-area, and UTM.
 
 * ADDED: New `wkt_wkb` library implementing the Well-Known Text and Well-Known
 Binary geometry interchange format.

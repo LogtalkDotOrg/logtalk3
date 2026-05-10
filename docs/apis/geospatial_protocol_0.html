@@ -102,6 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#copeland-ranker"><span class="xref std std-ref">copeland_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#crs-projections"><span class="xref std std-ref">crs_projections</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cuid2"><span class="xref std std-ref">cuid2</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cusum-anomaly-detector"><span class="xref std std-ref">cusum_anomaly_detector</span></a></li>
@@ -358,8 +359,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:2:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-25</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-05-10</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -456,7 +457,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="valid-coordinate-1">
 <span id="geospatial-protocol-0-valid-coordinate-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_coordinate/1</span></code></a><a class="headerlink" href="#valid-coordinate-1" title="Link to this heading"></a></h3>
-<p>True if the argument is a valid geographic coordinate represented as <code class="docutils literal notranslate"><span class="pre">(Latitude,Longitude)</span></code> with latitude in the <code class="docutils literal notranslate"><span class="pre">[-90.0,90.0]</span></code> range and longitude in the <code class="docutils literal notranslate"><span class="pre">[-180.0,180.0]</span></code> range.</p>
+<p>True if the argument is a valid geographic coordinate represented as <code class="docutils literal notranslate"><span class="pre">geographic(Latitude,Longitude)</span></code> with latitude in the <code class="docutils literal notranslate"><span class="pre">[-90.0,90.0]</span></code> range and longitude in the <code class="docutils literal notranslate"><span class="pre">[-180.0,180.0]</span></code> range.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1212,7 +1213,7 @@
 </section>
 <section id="bbox-contains-2">
 <span id="geospatial-protocol-0-bbox-contains-2"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_contains/2</span></code></a><a class="headerlink" href="#bbox-contains-2" title="Link to this heading"></a></h3>
-<p>True when a coordinate is inside or on the boundary of a bounding box term <code class="docutils literal notranslate"><span class="pre">bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))</span></code>.</p>
+<p>True when a coordinate is inside or on the boundary of a bounding box term <code class="docutils literal notranslate"><span class="pre">bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1548,7 +1549,7 @@
 </section>
 <section id="bounding-box-3">
 <span id="geospatial-protocol-0-bounding-box-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a><a class="headerlink" href="#bounding-box-3" title="Link to this heading"></a></h3>
-<p>Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is <code class="docutils literal notranslate"><span class="pre">bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))</span></code>.</p>
+<p>Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is <code class="docutils literal notranslate"><span class="pre">bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

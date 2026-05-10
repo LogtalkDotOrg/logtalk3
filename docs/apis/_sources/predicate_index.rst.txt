@@ -3130,6 +3130,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::cross_track_distance/4>`
 
+``crs_dimensions/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::crs_dimensions/2>`
+
+``crs_epsg/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::crs_epsg/2>`
+
+``crs_kind/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::crs_kind/2>`
+
+``crs_name/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::crs_name/2>`
+
+``crs_units/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::crs_units/2>`
+
 ``currency/5``
 --------------
 
@@ -5371,6 +5421,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::epoch/2>`
+
+``epsg_crs/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::epsg_crs/2>`
 
 ``epsilon/1``
 -------------
@@ -9621,6 +9681,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::kurtosis/2>`
 
+``lambert_azimuthal_equal_area/3``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::lambert_azimuthal_equal_area/3>`
+
+``lambert_azimuthal_equal_area_inverse/3``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::lambert_azimuthal_equal_area_inverse/3>`
+
 ``language/3``
 --------------
 
@@ -10688,6 +10768,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`tzif_protocol <tzif_protocol/0::local_offset_with_resolution/5>`
+
+``local_tangent_plane/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::local_tangent_plane/3>`
+
+``local_tangent_plane_inverse/3``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::local_tangent_plane_inverse/3>`
 
 ``local_time_type/2``
 ---------------------
@@ -19728,6 +19828,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::transform/3>`
 
+``transform/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::transform/4>`
+
 ``transitive_closure/2``
 ------------------------
 
@@ -20286,6 +20396,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dates_tz_protocol <dates_tz_protocol/0::utc_to_local_tz/3>`
 
+``utm_crs/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::utm_crs/2>`
+
+``utm_zone/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::utm_zone/2>`
+
 ``uuid_max/1``
 --------------
 
@@ -20477,6 +20607,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::valid_coordinate/1>`
+
+``valid_coordinate/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::valid_coordinate/2>`
+
+``valid_crs/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crs_projections_protocol <crs_projections_protocol/0::valid_crs/1>`
 
 ``valid_date/3``
 ----------------

@@ -1,0 +1,344 @@
+.. index:: single: crs_projections_protocol
+.. _crs_projections_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``crs_projections_protocol``
+============================
+
+Coordinate reference systems and coordinate transformation predicates protocol.
+
+| **Availability:** 
+|    ``logtalk_load(crs_projections(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-10
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_crs/1
+.. _crs_projections_protocol/0::valid_crs/1:
+
+``valid_crs/1``
+^^^^^^^^^^^^^^^
+
+True when the argument is a supported coordinate reference system. Supported values are ``wgs84``, ``wgs84_3d``, ``web_mercator``, ``world_mercator``, ``ecef``, ``enu(OriginCoordinate)``, ``lambert_azimuthal_equal_area(OriginCoordinate)``, and ``utm(Zone,Hemisphere)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_crs(CRS)``
+| **Mode and number of proofs:**
+|    ``valid_crs(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: crs_name/2
+.. _crs_projections_protocol/0::crs_name/2:
+
+``crs_name/2``
+^^^^^^^^^^^^^^
+
+Maps a supported coordinate reference system to a human-readable name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crs_name(CRS,Name)``
+| **Mode and number of proofs:**
+|    ``crs_name(+term,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: crs_kind/2
+.. _crs_projections_protocol/0::crs_kind/2:
+
+``crs_kind/2``
+^^^^^^^^^^^^^^
+
+Classifies a supported coordinate reference system as ``geographic``, ``projected``, ``geocentric``, or ``local_tangent_plane``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crs_kind(CRS,Kind)``
+| **Mode and number of proofs:**
+|    ``crs_kind(+term,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: crs_units/2
+.. _crs_projections_protocol/0::crs_units/2:
+
+``crs_units/2``
+^^^^^^^^^^^^^^^
+
+Returns the coordinate axis units used by a supported coordinate reference system. Supported values are ``degrees``, ``meters``, and ``[degrees,degrees,meters]``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crs_units(CRS,Units)``
+| **Mode and number of proofs:**
+|    ``crs_units(+term,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: crs_dimensions/2
+.. _crs_projections_protocol/0::crs_dimensions/2:
+
+``crs_dimensions/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the coordinate dimensionality for a supported coordinate reference system.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crs_dimensions(CRS,Dimensions)``
+| **Mode and number of proofs:**
+|    ``crs_dimensions(+term,-positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: crs_epsg/2
+.. _crs_projections_protocol/0::crs_epsg/2:
+
+``crs_epsg/2``
+^^^^^^^^^^^^^^
+
+Maps a supported coordinate reference system to the corresponding EPSG code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crs_epsg(CRS,EPSG)``
+| **Mode and number of proofs:**
+|    ``crs_epsg(+term,-positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: epsg_crs/2
+.. _crs_projections_protocol/0::epsg_crs/2:
+
+``epsg_crs/2``
+^^^^^^^^^^^^^^
+
+Maps a supported EPSG code to the corresponding coordinate reference system term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``epsg_crs(EPSG,CRS)``
+| **Mode and number of proofs:**
+|    ``epsg_crs(+positive_integer,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_coordinate/2
+.. _crs_projections_protocol/0::valid_coordinate/2:
+
+``valid_coordinate/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when the coordinate is valid for the given coordinate reference system. ``wgs84`` coordinates are represented as ``geographic(Latitude,Longitude)`` in degrees, ``wgs84_3d`` coordinates as ``geographic(Latitude,Longitude,EllipsoidalHeight)`` in degrees and meters, ``web_mercator``, ``world_mercator``, and ``lambert_azimuthal_equal_area(OriginCoordinate)`` coordinates as ``projected(X,Y)`` pairs in meters, ``ecef`` coordinates as ``ecef(X,Y,Z)`` triples in meters, ``enu(OriginCoordinate)`` coordinates as ``enu(East,North,Up)`` triples in meters, and ``utm(Zone,Hemisphere)`` coordinates as ``grid(Easting,Northing)`` pairs in meters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_coordinate(CRS,Coordinate)``
+| **Mode and number of proofs:**
+|    ``valid_coordinate(+term,@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_tangent_plane/3
+.. _crs_projections_protocol/0::local_tangent_plane/3:
+
+``local_tangent_plane/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Projects a WGS84 geographic coordinate to local ``enu(East,North,Up)`` coordinates in meters using an origin coordinate. For height-preserving 3D geodetic workflows, use ``transform/4`` with ``wgs84_3d``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_tangent_plane(Origin,Coordinate,LocalCoordinate)``
+| **Mode and number of proofs:**
+|    ``local_tangent_plane(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: local_tangent_plane_inverse/3
+.. _crs_projections_protocol/0::local_tangent_plane_inverse/3:
+
+``local_tangent_plane_inverse/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts local ``enu(East,North,Up)`` coordinates in meters back to a WGS84 geographic coordinate using an origin coordinate. For height-preserving 3D geodetic workflows, use ``transform/4`` with ``wgs84_3d``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_tangent_plane_inverse(Origin,LocalCoordinate,Coordinate)``
+| **Mode and number of proofs:**
+|    ``local_tangent_plane_inverse(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: lambert_azimuthal_equal_area/3
+.. _crs_projections_protocol/0::lambert_azimuthal_equal_area/3:
+
+``lambert_azimuthal_equal_area/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Projects a WGS84 geographic coordinate to a Lambert azimuthal equal-area plane centered on an origin coordinate, returning ``projected(X,Y)`` coordinates in meters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lambert_azimuthal_equal_area(Origin,Coordinate,ProjectedCoordinate)``
+| **Mode and number of proofs:**
+|    ``lambert_azimuthal_equal_area(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: lambert_azimuthal_equal_area_inverse/3
+.. _crs_projections_protocol/0::lambert_azimuthal_equal_area_inverse/3:
+
+``lambert_azimuthal_equal_area_inverse/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts Lambert azimuthal equal-area ``projected(X,Y)`` coordinates back to a WGS84 geographic coordinate using an origin coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lambert_azimuthal_equal_area_inverse(Origin,ProjectedCoordinate,Coordinate)``
+| **Mode and number of proofs:**
+|    ``lambert_azimuthal_equal_area_inverse(+compound,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: utm_zone/2
+.. _crs_projections_protocol/0::utm_zone/2:
+
+``utm_zone/2``
+^^^^^^^^^^^^^^
+
+Infers the UTM longitudinal zone for a WGS84 ``geographic(Latitude,Longitude)`` coordinate. Uses the standard Norway and Svalbard special-zone rules and only succeeds for coordinates within the UTM latitude coverage.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``utm_zone(Coordinate,Zone)``
+| **Mode and number of proofs:**
+|    ``utm_zone(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: utm_crs/2
+.. _crs_projections_protocol/0::utm_crs/2:
+
+``utm_crs/2``
+^^^^^^^^^^^^^
+
+Infers the native UTM coordinate reference system term ``utm(Zone,Hemisphere)`` for a WGS84 ``geographic(Latitude,Longitude)`` coordinate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``utm_crs(Coordinate,CRS)``
+| **Mode and number of proofs:**
+|    ``utm_crs(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: transform/4
+.. _crs_projections_protocol/0::transform/4:
+
+``transform/4``
+^^^^^^^^^^^^^^^
+
+Transforms a coordinate between supported coordinate reference systems. Transformations between projected systems are computed by converting through ``wgs84``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transform(SourceCRS,TargetCRS,Coordinate,TransformedCoordinate)``
+| **Mode and number of proofs:**
+|    ``transform(+term,+term,+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`crs_projections <crs_projections/0>`, :ref:`geospatial_protocol <geospatial_protocol/0>`
+

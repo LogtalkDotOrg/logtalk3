@@ -1,0 +1,68 @@
+.. index:: single: crs_projections
+.. _crs_projections/0:
+
+.. rst-class:: right
+
+**object**
+
+``crs_projections``
+===================
+
+Coordinate reference systems and common transformations for 2D and 3D WGS84 geodetic coordinates, Web Mercator, World Mercator, ECEF, local ENU tangent-plane, Lambert azimuthal equal-area, and UTM coordinates.
+
+| **Availability:** 
+|    ``logtalk_load(crs_projections(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-10
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`crs_projections_protocol <crs_projections_protocol/0>`
+| **Uses:**
+|    :ref:`geospatial <geospatial/0>`
+
+| **Remarks:**
+
+   - Geographic coordinates: WGS84 coordinates are represented as ``geographic(Latitude,Longitude)`` in degrees.
+   - 3D geodetic coordinates: WGS84 3D coordinates are represented as ``geographic(Latitude,Longitude,EllipsoidalHeight)`` using degrees for angular axes and meters for height.
+   - Projected coordinates: Web Mercator, World Mercator, and Lambert azimuthal equal-area coordinates are represented as meter-based ``projected(X,Y)`` pairs. UTM coordinates are represented as ``grid(Easting,Northing)`` pairs.
+   - Geocentric coordinates: ECEF coordinates are represented as ``ecef(X,Y,Z)`` triples in meters.
+   - Local tangent-plane coordinates: ENU coordinates are represented as ``enu(East,North,Up)`` triples in meters relative to an origin coordinate.
+   - UTM coverage: UTM helpers and transformations only succeed for latitudes in the ``[-80.0,84.0[`` range.
+
+| **Inherited public predicates:**
+|     :ref:`crs_projections_protocol/0::crs_dimensions/2`  :ref:`crs_projections_protocol/0::crs_epsg/2`  :ref:`crs_projections_protocol/0::crs_kind/2`  :ref:`crs_projections_protocol/0::crs_name/2`  :ref:`crs_projections_protocol/0::crs_units/2`  :ref:`crs_projections_protocol/0::epsg_crs/2`  :ref:`crs_projections_protocol/0::lambert_azimuthal_equal_area/3`  :ref:`crs_projections_protocol/0::lambert_azimuthal_equal_area_inverse/3`  :ref:`crs_projections_protocol/0::local_tangent_plane/3`  :ref:`crs_projections_protocol/0::local_tangent_plane_inverse/3`  :ref:`crs_projections_protocol/0::transform/4`  :ref:`crs_projections_protocol/0::utm_crs/2`  :ref:`crs_projections_protocol/0::utm_zone/2`  :ref:`crs_projections_protocol/0::valid_coordinate/2`  :ref:`crs_projections_protocol/0::valid_crs/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`crs_projections_protocol <crs_projections_protocol/0>`, :ref:`geospatial <geospatial/0>`
+

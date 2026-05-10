@@ -84,6 +84,7 @@
 		dates_tz(loader),
 		message_pack(loader),
 		geospatial(loader),
+		crs_projections(loader),
 		geo_json(loader),
 		wkt_wkb(loader),
 		git(loader),

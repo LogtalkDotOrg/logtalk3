@@ -8,14 +8,14 @@
 ``geospatial``
 ==============
 
-Geospatial predicates over geographic coordinates represented as ``(Latitude,Longitude)``.
+Geospatial predicates over geographic coordinates represented as ``geographic(Latitude,Longitude)``.
 
 | **Availability:** 
 |    ``logtalk_load(geospatial(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:3:0
-| **Date:** 2026-04-20
+| **Version:** 1:0:0
+| **Date:** 2026-05-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

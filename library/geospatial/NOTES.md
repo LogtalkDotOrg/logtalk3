@@ -23,7 +23,7 @@ ________________________________________________________________________
 
 This library provides a `geospatial_protocol` protocol and a `geospatial`
 object for common geographic computations over coordinates represented as
-`(Latitude,Longitude)`. By default, distances are returned in kilometers.
+`geographic(Latitude,Longitude)`. By default, distances are returned in kilometers.
 
 
 API documentation
@@ -106,95 +106,95 @@ Load the library:
 
 Validate a coordinate:
 
-	| ?- geospatial::valid_coordinate((38.7223, -9.1393)).
+	| ?- geospatial::valid_coordinate(geographic(38.7223, -9.1393)).
 
 Normalize coordinates and convert to/from local planar coordinates:
 
-	| ?- geospatial::normalize_coordinate((95.0, 10.0), Normalized).
-	| ?- geospatial::equirectangular_projection((38.7223, -9.1393), 38.0, X, Y).
+	| ?- geospatial::normalize_coordinate(geographic(95.0, 10.0), Normalized).
+	| ?- geospatial::equirectangular_projection(geographic(38.7223, -9.1393), 38.0, X, Y).
 	| ?- geospatial::equirectangular_inverse(X, Y, 38.0, Coordinate).
 
 Compute default distance in kilometers (Haversine):
 
-	| ?- geospatial::distance((38.7223, -9.1393), (41.1579, -8.6291), haversine, Distance).
-	| ?- geospatial::rhumb_distance((38.7223, -9.1393), (41.1579, -8.6291), Distance).
-	| ?- geospatial::rhumb_bearing((38.7223, -9.1393), (41.1579, -8.6291), Bearing).
-	| ?- geospatial::rhumb_destination_point((38.7223, -9.1393), 45.0, 50.0, Destination).
-	| ?- geospatial::interpolate_rhumb((38.7223, -9.1393), (41.1579, -8.6291), 0.5, Intermediate).
-	| ?- geospatial::rhumb_midpoint((38.7223, -9.1393), (41.1579, -8.6291), Midpoint).
+	| ?- geospatial::distance(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), haversine, Distance).
+	| ?- geospatial::rhumb_distance(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), Distance).
+	| ?- geospatial::rhumb_bearing(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), Bearing).
+	| ?- geospatial::rhumb_destination_point(geographic(38.7223, -9.1393), 45.0, 50.0, Destination).
+	| ?- geospatial::interpolate_rhumb(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), 0.5, Intermediate).
+	| ?- geospatial::rhumb_midpoint(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), Midpoint).
 
 Compute distance with explicit unit (`meters`, `miles`, or `nautical_miles`):
 
-	| ?- geospatial::distance((38.7223, -9.1393), (41.1579, -8.6291), vincenty, miles, Distance).
+	| ?- geospatial::distance(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), vincenty, miles, Distance).
 
 Compute route distance using the default metric (`haversine`) in kilometers:
 
-	| ?- geospatial::route_distance([(38.7223, -9.1393), (39.7440, -8.8070), (41.1579, -8.6291)], Distance).
+	| ?- geospatial::route_distance([geographic(38.7223, -9.1393), geographic(39.7440, -8.8070), geographic(41.1579, -8.6291)], Distance).
 
 Compute route distance with explicit metric and unit:
 
-	| ?- geospatial::route_distance([(38.7223, -9.1393), (39.7440, -8.8070), (41.1579, -8.6291)], vincenty, nautical_miles, Distance).
+	| ?- geospatial::route_distance([geographic(38.7223, -9.1393), geographic(39.7440, -8.8070), geographic(41.1579, -8.6291)], vincenty, nautical_miles, Distance).
 
 Compute midpoint and destination point:
 
-	| ?- geospatial::midpoint((38.7223, -9.1393), (41.1579, -8.6291), Midpoint).
-	| ?- geospatial::destination_point((38.7223, -9.1393), 45.0, 50.0, Destination).
-	| ?- geospatial::interpolate_great_circle((38.7223, -9.1393), (41.1579, -8.6291), 0.5, Intermediate).
-	| ?- geospatial::cross_track_distance((40.0, -9.0), (38.7223, -9.1393), (41.1579, -8.6291), CrossTrackKm).
-	| ?- geospatial::along_track_distance((40.0, -9.0), (38.7223, -9.1393), (41.1579, -8.6291), AlongTrackKm).
+	| ?- geospatial::midpoint(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), Midpoint).
+	| ?- geospatial::destination_point(geographic(38.7223, -9.1393), 45.0, 50.0, Destination).
+	| ?- geospatial::interpolate_great_circle(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), 0.5, Intermediate).
+	| ?- geospatial::cross_track_distance(geographic(40.0, -9.0), geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), CrossTrackKm).
+	| ?- geospatial::along_track_distance(geographic(40.0, -9.0), geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), AlongTrackKm).
 
 Compute final bearing and proximity checks:
 
-	| ?- geospatial::final_bearing((38.7223, -9.1393), (41.1579, -8.6291), Bearing).
-	| ?- geospatial::within_distance((38.7223, -9.1393), (41.1579, -8.6291), 300.0, haversine).
+	| ?- geospatial::final_bearing(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), Bearing).
+	| ?- geospatial::within_distance(geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), 300.0, haversine).
 
 Find the nearest coordinate from a list:
 
-	| ?- geospatial::nearest_coordinate((38.7223, -9.1393), [(37.7749, -122.4194), (41.1579, -8.6291), (40.4168, -3.7038)], vincenty, Nearest, Distance).
+	| ?- geospatial::nearest_coordinate(geographic(38.7223, -9.1393), [geographic(37.7749, -122.4194), geographic(41.1579, -8.6291), geographic(40.4168, -3.7038)], vincenty, Nearest, Distance).
 
 Compute center and coordinate-list bounding boxes:
 
-	| ?- geospatial::mean_center([(38.7223, -9.1393), (41.1579, -8.6291), (40.4168, -3.7038)], Center).
-	| ?- geospatial::minimum_enclosing_circle([(38.7223, -9.1393), (41.1579, -8.6291), (40.4168, -3.7038)], Center, Radius).
-	| ?- geospatial::coordinates_bounding_box([(38.7223, -9.1393), (41.1579, -8.6291), (40.4168, -3.7038)], BoundingBox).
-	| ?- geospatial::bbox_from_coordinates([(38.7223, -9.1393), (41.1579, -8.6291), (40.4168, -3.7038)], BoundingBox).
+	| ?- geospatial::mean_center([geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), geographic(40.4168, -3.7038)], Center).
+	| ?- geospatial::minimum_enclosing_circle([geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), geographic(40.4168, -3.7038)], Center, Radius).
+	| ?- geospatial::coordinates_bounding_box([geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), geographic(40.4168, -3.7038)], BoundingBox).
+	| ?- geospatial::bbox_from_coordinates([geographic(38.7223, -9.1393), geographic(41.1579, -8.6291), geographic(40.4168, -3.7038)], BoundingBox).
 
 Work with polygons:
 
-	| ?- geospatial::point_in_polygon((0.5, 0.5), [(0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)]).
-	| ?- geospatial::polygon_area([(0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)], Area).
-	| ?- geospatial::polygon_centroid([(0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)], Centroid).
-	| ?- geospatial::polygon_bounding_box([(1.0, -2.0), (0.0, 1.0), (-1.0, -1.0)], BoundingBox).
-	| ?- geospatial::close_polygon([(0.0, 0.0), (0.0, 1.0), (1.0, 0.0)], ClosedPolygon).
-	| ?- geospatial::polygon_orientation([(0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.0, 1.0)], Orientation).
-	| ?- geospatial::is_clockwise_polygon([(0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.0, 1.0)]).
-	| ?- geospatial::normalize_polygon_orientation([(0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)], clockwise, Oriented).
-	| ?- geospatial::clockwise_polygon([(0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)], Clockwise).
-	| ?- geospatial::counterclockwise_polygon([(0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.0, 1.0)], Counterclockwise).
-	| ?- geospatial::is_valid_polygon([(0.0, 0.0), (0.0, 1.0), (1.0, 0.0)]).
+	| ?- geospatial::point_in_polygon(geographic(0.5, 0.5), [geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 1.0), geographic(1.0, 0.0)]).
+	| ?- geospatial::polygon_area([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 1.0), geographic(1.0, 0.0)], Area).
+	| ?- geospatial::polygon_centroid([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 1.0), geographic(1.0, 0.0)], Centroid).
+	| ?- geospatial::polygon_bounding_box([geographic(1.0, -2.0), geographic(0.0, 1.0), geographic(-1.0, -1.0)], BoundingBox).
+	| ?- geospatial::close_polygon([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 0.0)], ClosedPolygon).
+	| ?- geospatial::polygon_orientation([geographic(0.0, 0.0), geographic(1.0, 0.0), geographic(1.0, 1.0), geographic(0.0, 1.0)], Orientation).
+	| ?- geospatial::is_clockwise_polygon([geographic(0.0, 0.0), geographic(1.0, 0.0), geographic(1.0, 1.0), geographic(0.0, 1.0)]).
+	| ?- geospatial::normalize_polygon_orientation([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 1.0), geographic(1.0, 0.0)], clockwise, Oriented).
+	| ?- geospatial::clockwise_polygon([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 1.0), geographic(1.0, 0.0)], Clockwise).
+	| ?- geospatial::counterclockwise_polygon([geographic(0.0, 0.0), geographic(1.0, 0.0), geographic(1.0, 1.0), geographic(0.0, 1.0)], Counterclockwise).
+	| ?- geospatial::is_valid_polygon([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 0.0)]).
 
 Work with bounding boxes:
 
-	| ?- geospatial::bbox_contains(bbox((-1.0, -1.0), (1.0, 1.0)), (0.5, 0.5)).
-	| ?- geospatial::bbox_intersects(bbox((0.0, 0.0), (1.0, 1.0)), bbox((0.5, 0.5), (2.0, 2.0))).
-	| ?- geospatial::bbox_union(bbox((0.0, 0.0), (1.0, 1.0)), bbox((-1.0, 0.5), (0.5, 2.0)), BoundingBox).
-	| ?- geospatial::bbox_expand(bbox((0.0, 0.0), (0.0, 0.0)), 111.195, ExpandedBoundingBox).
+	| ?- geospatial::bbox_contains(bbox(geographic(-1.0, -1.0), geographic(1.0, 1.0)), geographic(0.5, 0.5)).
+	| ?- geospatial::bbox_intersects(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(0.5, 0.5), geographic(2.0, 2.0))).
+	| ?- geospatial::bbox_union(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(-1.0, 0.5), geographic(0.5, 2.0)), BoundingBox).
+	| ?- geospatial::bbox_expand(bbox(geographic(0.0, 0.0), geographic(0.0, 0.0)), 111.195, ExpandedBoundingBox).
 
 Compute nearest points and distances to paths:
 
-	| ?- geospatial::nearest_point_on_segment((1.0, 1.0), (0.0, 0.0), (0.0, 2.0), Nearest).
-	| ?- geospatial::nearest_point_on_polyline((1.0, 1.0), [(0.0, 0.0), (0.0, 2.0), (2.0, 2.0)], Nearest, Distance).
-	| ?- geospatial::point_to_polyline_distance((1.0, 1.0), [(0.0, 0.0), (0.0, 2.0)], Distance).
+	| ?- geospatial::nearest_point_on_segment(geographic(1.0, 1.0), geographic(0.0, 0.0), geographic(0.0, 2.0), Nearest).
+	| ?- geospatial::nearest_point_on_polyline(geographic(1.0, 1.0), [geographic(0.0, 0.0), geographic(0.0, 2.0), geographic(2.0, 2.0)], Nearest, Distance).
+	| ?- geospatial::point_to_polyline_distance(geographic(1.0, 1.0), [geographic(0.0, 0.0), geographic(0.0, 2.0)], Distance).
 
 Compute polyline and polygon lengths:
 
-	| ?- geospatial::polyline_length([(0.0, 0.0), (0.0, 1.0), (0.0, 2.0)], Length).
-	| ?- geospatial::polyline_length([(0.0, 0.0), (0.0, 1.0)], vincenty, Length).
-	| ?- geospatial::polyline_simplify([(0.0, 0.0), (0.5, 0.1), (1.0, 0.0)], 20.0, Simplified).
-	| ?- geospatial::polyline_split_at_distance([(0.0, 0.0), (0.0, 1.0), (0.0, 2.0)], 111.195, Left, Right).
-	| ?- geospatial::polyline_resample([(0.0, 0.0), (0.0, 1.0), (0.0, 2.0)], 50.0, Resampled).
-	| ?- geospatial::polygon_perimeter([(0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)], Perimeter).
+	| ?- geospatial::polyline_length([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(0.0, 2.0)], Length).
+	| ?- geospatial::polyline_length([geographic(0.0, 0.0), geographic(0.0, 1.0)], vincenty, Length).
+	| ?- geospatial::polyline_simplify([geographic(0.0, 0.0), geographic(0.5, 0.1), geographic(1.0, 0.0)], 20.0, Simplified).
+	| ?- geospatial::polyline_split_at_distance([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(0.0, 2.0)], 111.195, Left, Right).
+	| ?- geospatial::polyline_resample([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(0.0, 2.0)], 50.0, Resampled).
+	| ?- geospatial::polygon_perimeter([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(1.0, 1.0), geographic(1.0, 0.0)], Perimeter).
 
 Check polygon intersections:
 
-	| ?- geospatial::polygons_intersect([(0.0, 0.0), (0.0, 2.0), (2.0, 2.0), (2.0, 0.0)], [(1.0, 1.0), (1.0, 3.0), (3.0, 3.0), (3.0, 1.0)]).
+	| ?- geospatial::polygons_intersect([geographic(0.0, 0.0), geographic(0.0, 2.0), geographic(2.0, 2.0), geographic(2.0, 0.0)], [geographic(1.0, 1.0), geographic(1.0, 3.0), geographic(3.0, 3.0), geographic(3.0, 1.0)]).

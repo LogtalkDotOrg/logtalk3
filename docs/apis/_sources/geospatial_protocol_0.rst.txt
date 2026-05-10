@@ -14,8 +14,8 @@ Geospatial predicates protocol.
 |    ``logtalk_load(geospatial(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2026-02-25
+| **Version:** 1:0:0
+| **Date:** 2026-05-10
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``valid_coordinate/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-True if the argument is a valid geographic coordinate represented as ``(Latitude,Longitude)`` with latitude in the ``[-90.0,90.0]`` range and longitude in the ``[-180.0,180.0]`` range.
+True if the argument is a valid geographic coordinate represented as ``geographic(Latitude,Longitude)`` with latitude in the ``[-90.0,90.0]`` range and longitude in the ``[-180.0,180.0]`` range.
 
 | **Compilation flags:**
 |    ``static``
@@ -728,7 +728,7 @@ True when a polygon has at least three valid coordinates after normalizing optio
 ``bbox_contains/2``
 ^^^^^^^^^^^^^^^^^^^
 
-True when a coordinate is inside or on the boundary of a bounding box term ``bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))``.
+True when a coordinate is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.
 
 | **Compilation flags:**
 |    ``static``
@@ -1032,7 +1032,7 @@ True when two polygons intersect or one polygon is contained in the other.
 ``bounding_box/3``
 ^^^^^^^^^^^^^^^^^^
 
-Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is ``bbox((MinLatitude,MinLongitude),(MaxLatitude,MaxLongitude))``.
+Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.
 
 | **Compilation flags:**
 |    ``static``

@@ -186,6 +186,7 @@ Objects
    crc32mpeg2 <crc32mpeg2_0>
    crc32posix <crc32posix_0>
    crc32q <crc32q_0>
+   crs_projections <crs_projections_0>
    csv <csv_0>
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
@@ -626,6 +627,7 @@ Protocols
    clustering_dataset_protocol <clustering_dataset_protocol_0>
    combinations_protocol <combinations_protocol_0>
    comparingp <comparingp_0>
+   crs_projections_protocol <crs_projections_protocol_0>
    csv_protocol <csv_protocol_0>
    cuid2_protocol <cuid2_protocol_0>
    databasep <databasep_0>
