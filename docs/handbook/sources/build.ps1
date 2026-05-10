@@ -218,6 +218,7 @@ Foreach-Object {
 (Get-Content ../../../library/naive_bayes_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
 (Get-Content ../../../library/nearest_centroid_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nearest_centroid_classifier.rst
 (Get-Content ../../../library/nested_dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
+(Get-Content ../../../library/nmea/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmea.rst
 (Get-Content ../../../library/nmf_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 (Get-Content ../../../library/optics_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst

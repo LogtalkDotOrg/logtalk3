@@ -168,6 +168,7 @@ directory in the ``NOTES.md`` file.
    naive_bayes_classifier
    nearest_centroid_classifier
    nested_dictionaries
+   nmea
    nmf_projection
    optics_clusterer
    optionals

@@ -172,6 +172,7 @@ logtalk_library_path(naive_bayes_classifier, library('naive_bayes_classifier/'))
 logtalk_library_path(nanoid, library('nanoid/')).
 logtalk_library_path(nearest_centroid_classifier, library('nearest_centroid_classifier/')).
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
+logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).

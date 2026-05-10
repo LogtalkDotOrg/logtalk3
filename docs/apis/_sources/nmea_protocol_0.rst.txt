@@ -1,0 +1,188 @@
+.. index:: single: nmea_protocol
+.. _nmea_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``nmea_protocol``
+=================
+
+Protocol for parsing NMEA 0183 sentences and projecting supported sentence types into typed semantic terms.
+
+| **Availability:** 
+|    ``logtalk_load(nmea(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-10
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _nmea_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses NMEA sentences from a source specification into canonical raw sentence terms. Supported source specifications are ``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, and ``file(Path)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Sentences)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse/3
+.. _nmea_protocol/0::parse/3:
+
+``parse/3``
+^^^^^^^^^^^
+
+Parses NMEA sentences from a source specification using parser options. Supported options are ``checksum(required)``, ``checksum(optional)``, ``checksum(ignore)``, ``unknown_type(keep)``, and ``unknown_type(error)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Options,Sentences)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,++list(compound),--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: talker/2
+.. _nmea_protocol/0::talker/2:
+
+``talker/2``
+^^^^^^^^^^^^
+
+Returns the normalized talker identifier for a parsed sentence. Proprietary sentences use the atom ``proprietary``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``talker(Sentence,Talker)``
+| **Mode and number of proofs:**
+|    ``talker(+compound,-atom)`` - ``one``
+
+
+------------
+
+.. index:: sentence_type/2
+.. _nmea_protocol/0::sentence_type/2:
+
+``sentence_type/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the normalized sentence type identifier for a parsed sentence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sentence_type(Sentence,Type)``
+| **Mode and number of proofs:**
+|    ``sentence_type(+compound,-atom)`` - ``one``
+
+
+------------
+
+.. index:: fields/2
+.. _nmea_protocol/0::fields/2:
+
+``fields/2``
+^^^^^^^^^^^^
+
+Returns the lossless ordered list of sentence fields after the sentence identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fields(Sentence,Fields)``
+| **Mode and number of proofs:**
+|    ``fields(+compound,-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: checksum/2
+.. _nmea_protocol/0::checksum/2:
+
+``checksum/2``
+^^^^^^^^^^^^^^
+
+Returns the checksum information as ``checksum(Provided,Computed)`` where ``Provided`` is either a normalized two-digit hexadecimal atom or ``missing``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``checksum(Sentence,Checksum)``
+| **Mode and number of proofs:**
+|    ``checksum(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: data/2
+.. _nmea_protocol/0::data/2:
+
+``data/2``
+^^^^^^^^^^
+
+Projects a parsed sentence into a typed semantic term for the supported sentence types ``gga``, ``rmc``, ``gsa``, ``gsv``, ``vtg``, and ``gll``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``data(Sentence,Data)``
+| **Mode and number of proofs:**
+|    ``data(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

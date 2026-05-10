@@ -218,6 +218,7 @@
 		command_line_options(loader),
 		simulated_annealing(loader),
 		mcp_server(loader),
+		nmea(loader),
 		iso_639(loader),
 		iso_3166(loader),
 		iso_4217(loader),

@@ -351,6 +351,9 @@ reference systems and transformations for 2D and 3D WGS84 geodetic
 coordinates, Web Mercator, World Mercator, ECEF, local ENU tangent-plane,
 Lambert azimuthal equal-area, and UTM.
 
+* ADDED: New `nmea` library implementing parsing of NMEA 0183 sentences from
+GPS/GNSS receivers with typed semantic decoding for common sentence types.
+
 * ADDED: New `wkt_wkb` library implementing the Well-Known Text and Well-Known
 Binary geometry interchange format.
 

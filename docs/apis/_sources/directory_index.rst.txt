@@ -1721,6 +1721,17 @@ To load an entity, always load the library that includes it using the goal ``log
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nrbtree <nrbtree_0>
 
+``library/nmea/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   nmea <nmea_0>
+   nmea_protocol <nmea_protocol_0>
+
 ``library/nmf_projection/``
 ---------------------------
 

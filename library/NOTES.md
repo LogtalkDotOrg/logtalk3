@@ -44,7 +44,7 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 - Dates and time:
     `dates`, `dates_tz`, `time_scales`, and `tzif`.
 - Geospatial data:
-	`crs_projections`, `geo_json`, `geospatial`, and `wkt_wkb`
+	`crs_projections`, `geo_json`, `geospatial`, `nmea`, and `wkt_wkb`
 - Space communications and telemetry:
 	`ccsds_frames`, `ccsds_link_profiles`, `ccsds_packet_services`, `ccsds_packetization`,
 	`ccsds_packets`, `ccsds_tc_services`, `ccsds_time_codes`, `ccsds_time_fields`,

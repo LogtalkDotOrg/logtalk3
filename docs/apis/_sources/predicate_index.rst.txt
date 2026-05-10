@@ -2003,6 +2003,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`regressor_protocol <regressor_protocol/0::check_regressor/1>`
 
+``checksum/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nmea_protocol <nmea_protocol/0::checksum/2>`
+
 ``chi_squared/2``
 -----------------
 
@@ -3270,6 +3280,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`nmea_protocol <nmea_protocol/0::data/2>`
 * :ref:`ports_profiler <ports_profiler/0::data/2>`
 
 ``data_field/2``
@@ -5992,6 +6003,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::fecf/2>`
 * :ref:`ccsds_frames <ccsds_frames/0::fecf/2>`
+
+``fields/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nmea_protocol <nmea_protocol/0::fields/2>`
 
 ``fields/5``
 ------------
@@ -14027,6 +14048,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_protocol <json_protocol/0::parse/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`
 * :ref:`message_pack(StringRepresentation) <message_pack/1::parse/2>`
+* :ref:`nmea_protocol <nmea_protocol/0::parse/2>`
 * :ref:`protobuf <protobuf/0::parse/2>`
 * :ref:`toml_protocol <toml_protocol/0::parse/2>`
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`
@@ -14045,6 +14067,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`avro <avro/0::parse/3>`
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::parse/3>`
+* :ref:`nmea_protocol <nmea_protocol/0::parse/3>`
 * :ref:`protobuf <protobuf/0::parse/3>`
 * :ref:`xml <xml/0::parse/3>`
 
@@ -17554,6 +17577,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`amqp <amqp/0::send_heartbeat/1>`
 * :ref:`stomp <stomp/0::send_heartbeat/1>`
 
+``sentence_type/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nmea_protocol <nmea_protocol/0::sentence_type/2>`
+
 ``sequence/2``
 --------------
 
@@ -19374,6 +19407,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::take/4>`
+
+``talker/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nmea_protocol <nmea_protocol/0::talker/2>`
 
 ``target/1``
 ------------

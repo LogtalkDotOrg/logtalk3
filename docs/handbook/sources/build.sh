@@ -218,6 +218,7 @@ sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/naive_bayes_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
 sed '1,19d' ../../../library/nearest_centroid_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/nearest_centroid_classifier.rst
 sed '1,19d' ../../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
+sed '1,19d' ../../../library/nmea/NOTES.md | pandoc -f gfm -t rst -o libraries/nmea.rst
 sed '1,19d' ../../../library/nmf_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 sed '1,19d' ../../../library/optics_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
