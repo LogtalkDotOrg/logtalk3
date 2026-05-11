@@ -20,7 +20,7 @@ IEEE 754 floating-point encoder and decoder.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-09
+| **Date:** 2026-05-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,6 +30,8 @@ IEEE 754 floating-point encoder and decoder.
 |    ``public`` :ref:`ieee_754_protocol <ieee_754_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`ieee_754_common(Precision,ByteOrder) <ieee_754_common/2>`
+| **Uses:**
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)

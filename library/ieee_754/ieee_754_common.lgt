@@ -24,13 +24,17 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-05-11,
 		comment is 'Shared IEEE 754 exact bit and byte handling predicates for the high-level codec and low-level field inspection objects.',
 		parnames is ['Precision', 'ByteOrder']
 	]).
 
 	:- uses(list, [
 		reverse/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	:- protected(source_bits/2).
@@ -87,20 +91,6 @@
 	:- info(valid_bits/1, [
 		comment is 'True when the integer fits in the selected precision bit width.',
 		argnames is ['Bits']
-	]).
-
-	:- protected(valid_bytes/2).
-	:- mode(valid_bytes(+list(integer), +integer), zero_or_one).
-	:- info(valid_bytes/2, [
-		comment is 'True when the byte list has the expected length and all elements are valid bytes.',
-		argnames is ['Bytes', 'Count']
-	]).
-
-	:- protected(valid_bytes/3).
-	:- mode(valid_bytes(+list(integer), +integer, +integer), zero_or_one).
-	:- info(valid_bytes/3, [
-		comment is 'Worker predicate for validating byte lists with an explicit processed count.',
-		argnames is ['Bytes', 'Count', 'Count0']
 	]).
 
 	:- protected(canonical_order_bytes/3).
@@ -180,7 +170,7 @@
 	source_bits(bytes(Bytes), Bits) :-
 		!,
 		precision_spec(_Precision_, _, _, _, Count),
-		(   valid_bytes(Bytes, Count) ->
+		(   valid(list(byte, Count), Bytes) ->
 			canonical_order_bytes(_ByteOrder_, Bytes, CanonicalBytes),
 			bytes_to_unsigned_integer(CanonicalBytes, Bits)
 		;   domain_error(ieee_754_encoding, bytes(Bytes))
@@ -256,18 +246,6 @@
 		precision_spec(_Precision_, _, _, _, Count),
 		BitCount is Count * 8,
 		Bits < (1 << BitCount).
-
-	valid_bytes(Bytes, Count) :-
-		valid_bytes(Bytes, Count, 0).
-
-	valid_bytes([], Count, Count).
-	valid_bytes([Byte| Bytes], Count, Count0) :-
-		Count0 < Count,
-		integer(Byte),
-		0 =< Byte,
-		Byte =< 255,
-		Count1 is Count0 + 1,
-		valid_bytes(Bytes, Count, Count1).
 
 	canonical_order_bytes(big, Bytes, Bytes).
 	canonical_order_bytes(little, Bytes, CanonicalBytes) :-

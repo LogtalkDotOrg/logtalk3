@@ -26,13 +26,17 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-05-11,
 		comment is 'IEEE 754 floating-point encoder and decoder.',
 		parameters is [
 			'Precision' - 'Floating-point format precision. Supported values are ``half``, ``single``, and ``double``.',
 			'ByteOrder' - 'Byte order used when parsing and generating byte sequences. Supported values are ``big`` and ``little``.',
 			'NaNRepresentation' - 'NaN decoding and generation policy. Supported values are ``canonical`` and ``payloads``.'
 		]
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	parse(Source, Value) :-
@@ -295,7 +299,7 @@
 
 	valid_nan_bytes(Bytes) :-
 		byte_count(Count),
-		^^valid_bytes(Bytes, Count),
+		valid(list(byte, Count), Bytes),
 		^^bytes_to_unsigned_integer(Bytes, Bits),
 		^^nan_bits(Bits).
 

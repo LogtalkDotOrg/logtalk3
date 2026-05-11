@@ -15,7 +15,7 @@ Shared IEEE 754 exact bit and byte handling predicates for the high-level codec 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-09
+| **Date:** 2026-05-11
 
 | **Compilation flags:**
 |    ``static``
@@ -23,6 +23,7 @@ Shared IEEE 754 exact bit and byte handling predicates for the high-level codec 
 
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
@@ -190,44 +191,6 @@ True when the integer fits in the selected precision bit width.
 |    ``valid_bits(Bits)``
 | **Mode and number of proofs:**
 |    ``valid_bits(+integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: valid_bytes/2
-.. _ieee_754_common/2::valid_bytes/2:
-
-``valid_bytes/2``
-^^^^^^^^^^^^^^^^^
-
-True when the byte list has the expected length and all elements are valid bytes.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``valid_bytes(Bytes,Count)``
-| **Mode and number of proofs:**
-|    ``valid_bytes(+list(integer),+integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: valid_bytes/3
-.. _ieee_754_common/2::valid_bytes/3:
-
-``valid_bytes/3``
-^^^^^^^^^^^^^^^^^
-
-Worker predicate for validating byte lists with an explicit processed count.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``valid_bytes(Bytes,Count,Count0)``
-| **Mode and number of proofs:**
-|    ``valid_bytes(+list(integer),+integer,+integer)`` - ``zero_or_one``
 
 
 ------------
