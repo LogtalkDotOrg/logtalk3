@@ -270,6 +270,7 @@ sed '1,19d' ../../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o librarie
 sed '1,19d' ../../../library/thurstone_mosteller_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
+sed '1,19d' ../../../library/tle_orbits/NOTES.md | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
 sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/toml.rst
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
 sed '1,19d' ../../../library/truncated_svd_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/truncated_svd_projection.rst

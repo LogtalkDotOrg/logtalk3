@@ -1,0 +1,154 @@
+.. index:: single: tle_orbits_protocol
+.. _tle_orbits_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``tle_orbits_protocol``
+=======================
+
+Protocol for parsing Two-Line Element sets and performing basic orbit propagation and ground-track sampling.
+
+| **Availability:** 
+|    ``logtalk_load(tle_orbits(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-11
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _tle_orbits_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses one or more TLE records from a source specification into canonical ``tle(...)`` terms. Supported source specifications are ``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, and ``file(Path)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,TLEs)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_lines/4
+.. _tle_orbits_protocol/0::parse_lines/4:
+
+``parse_lines/4``
+^^^^^^^^^^^^^^^^^
+
+Parses a single TLE record given an optional name atom or the atom ``none`` plus the two raw TLE lines.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_lines(Name,Line1,Line2,TLE)``
+| **Mode and number of proofs:**
+|    ``parse_lines(++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: propagate/3
+.. _tle_orbits_protocol/0::propagate/3:
+
+``propagate/3``
+^^^^^^^^^^^^^^^
+
+Propagates a parsed TLE using a basic two-body model and returns a ``geographic(Latitude,Longitude,Height)`` coordinate. Supported time specifications are ``date_time(Year,Month,Day,Hours,Minutes,Seconds)``, ``julian_date(JulianDate)``, and ``offset_seconds(SecondsSinceEpoch)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate(TLE,Time,Coordinate)``
+| **Mode and number of proofs:**
+|    ``propagate(++compound,++nonvar,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: propagate/4
+.. _tle_orbits_protocol/0::propagate/4:
+
+``propagate/4``
+^^^^^^^^^^^^^^^
+
+Propagates a parsed TLE using a basic two-body model and returns coordinates in the requested frame. Supported frames are ``eci`` returning ``eci(X,Y,Z)``, ``ecef`` returning ``ecef(X,Y,Z)``, and ``wgs84_3d`` returning ``geographic(Latitude,Longitude,Height)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate(TLE,Time,Frame,Coordinate)``
+| **Mode and number of proofs:**
+|    ``propagate(++compound,++nonvar,++atom,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: ground_track/5
+.. _tle_orbits_protocol/0::ground_track/5:
+
+``ground_track/5``
+^^^^^^^^^^^^^^^^^^
+
+Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds, returning ``sample(DateTime, geographic(Latitude,Longitude,Height))`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ground_track(TLE,StartDateTime,EndDateTime,StepSeconds,Samples)``
+| **Mode and number of proofs:**
+|    ``ground_track(++compound,++compound,++compound,++number,--list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`tle_orbits <tle_orbits/0>`, :ref:`crs_projections_protocol <crs_projections_protocol/0>`
+

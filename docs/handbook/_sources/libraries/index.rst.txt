@@ -219,6 +219,7 @@ directory in the ``NOTES.md`` file.
    thurstone_mosteller_ranker
    time_scales
    timeout
+   tle_orbits
    toml
    toon
    truncated_svd_projection

@@ -2299,6 +2299,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    timeout <timeout_0>
 
+``library/tle_orbits/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tle_orbits <tle_orbits_0>
+   tle_orbits_protocol <tle_orbits_protocol_0>
+
 ``library/toml/``
 -----------------
 

@@ -26,7 +26,7 @@ multiple areas):
 - Dates and time: ``dates``, ``dates_tz``, ``time_scales``, and
   ``tzif``.
 - Geospatial data: ``crs_projections``, ``geojson``, ``geohash``,
-  ``geospatial``, ``nmea``, and ``wkt_wkb``
+  ``geospatial``, ``nmea``, ``tle_orbits``, and ``wkt_wkb``
 - Space communications and telemetry: ``ccsds_frames``,
   ``ccsds_link_profiles``, ``ccsds_packet_services``,
   ``ccsds_packetization``, ``ccsds_packets``, ``ccsds_tc_services``,

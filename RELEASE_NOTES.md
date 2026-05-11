@@ -355,6 +355,13 @@ Lambert azimuthal equal-area, and UTM.
 * ADDED: New `nmea` library implementing parsing of NMEA 0183 sentences from
 GPS/GNSS receivers with typed semantic decoding for common sentence types.
 
+* ADDED: New `tle_orbits` library implementing parsing of Two-Line Element
+sets plus approximate portable orbit propagation with low-order B* drag handling,
+near-earth short-period corrections, automatic deep-space branching,
+a separate deep-space approximation, propagated state and
+velocity queries, a two-body baseline model, and ground-track
+generation with ECI, ECEF, and WGS84 3D outputs.
+
 * ADDED: New `geohash` library implementing GeoHash encoding and decoding,
 adjacency and neighborhood queries, fixed and adaptive bounding-box covering,
 hierarchy navigation and compression, integer-backed and bit-precision

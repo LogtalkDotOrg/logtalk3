@@ -1,0 +1,63 @@
+.. index:: single: tle_orbits
+.. _tle_orbits/0:
+
+.. rst-class:: right
+
+**object**
+
+``tle_orbits``
+==============
+
+Parser for Two-Line Element sets with basic two-body propagation and ground-track sampling.
+
+| **Availability:** 
+|    ``logtalk_load(tle_orbits(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`tle_orbits_protocol <tle_orbits_protocol/0>`
+| **Uses:**
+|    :ref:`crs_projections <crs_projections/0>`
+|    :ref:`date <date/0>`
+|    :ref:`iso8601 <iso8601/0>`
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`time <time/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`tle_orbits_protocol/0::ground_track/5`  :ref:`tle_orbits_protocol/0::parse/2`  :ref:`tle_orbits_protocol/0::parse_lines/4`  :ref:`tle_orbits_protocol/0::propagate/3`  :ref:`tle_orbits_protocol/0::propagate/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

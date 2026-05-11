@@ -7752,6 +7752,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`termp <termp/0::ground/1>`
 
+``ground_track/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tle_orbits_protocol <tle_orbits_protocol/0::ground_track/5>`
+
 ``group/1``
 -----------
 
@@ -14355,6 +14365,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`message_pack(StringRepresentation) <message_pack/1::parse/2>`
 * :ref:`nmea_protocol <nmea_protocol/0::parse/2>`
 * :ref:`protobuf <protobuf/0::parse/2>`
+* :ref:`tle_orbits_protocol <tle_orbits_protocol/0::parse/2>`
 * :ref:`toml_protocol <toml_protocol/0::parse/2>`
 * :ref:`toon_protocol <toon_protocol/0::parse/2>`
 * :ref:`url(Representation) <url/1::parse/2>`
@@ -14465,6 +14476,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_link_profiles <ccsds_link_profiles/0::parse_frames/3>`
+
+``parse_lines/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tle_orbits_protocol <tle_orbits_protocol/0::parse_lines/4>`
 
 ``parse_problem/2``
 -------------------
@@ -15565,6 +15586,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_prompt_protocol <mcp_prompt_protocol/0::prompts/1>`
+
+``propagate/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tle_orbits_protocol <tle_orbits_protocol/0::propagate/3>`
+
+``propagate/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tle_orbits_protocol <tle_orbits_protocol/0::propagate/4>`
 
 ``proper_prefix/2``
 -------------------
