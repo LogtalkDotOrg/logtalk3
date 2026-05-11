@@ -86,7 +86,7 @@
 		geospatial(loader),
 		geohash(loader),
 		crs_projections(loader),
-		geo_json(loader),
+		geojson(loader),
 		wkt_wkb(loader),
 		git(loader),
 		grammars(loader),

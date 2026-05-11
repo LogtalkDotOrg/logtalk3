@@ -1,10 +1,10 @@
-.. _library_geo_json:
+.. _library_geojson:
 
-``geo_json``
-============
+``geojson``
+===========
 
-The ``geo_json`` library provides predicates for parsing, generating,
-and validating GeoJSON documents as specified by RFC 7946:
+The ``geojson`` library provides predicates for parsing, generating, and
+validating GeoJSON documents as specified by RFC 7946:
 
 - https://www.rfc-editor.org/rfc/rfc7946
 
@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#geo_json <../../apis/library_index.html#geo_json>`__
+`../../apis/library_index.html#geojson <../../apis/library_index.html#geojson>`__
 link in a web browser.
 
 Loading
@@ -26,7 +26,7 @@ To load all entities in this library, load the ``loader.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(geo_json(loader)).
+   | ?- logtalk_load(geojson(loader)).
 
 Testing
 -------
@@ -35,7 +35,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(geo_json(tester)).
+   | ?- logtalk_load(geojson(tester)).
 
 Representation
 --------------
@@ -80,7 +80,7 @@ Parse a point document:
 
 ::
 
-   | ?- geo_json::parse(atom('{"type":"Point","coordinates":[100.0,0.0]}'), GeoJSON).
+   | ?- geojson::parse(atom('{"type":"Point","coordinates":[100.0,0.0]}'), GeoJSON).
    GeoJSON = point([100.0, 0.0])
    yes
 
@@ -88,7 +88,7 @@ Generate a GeoJSON feature collection:
 
 ::
 
-   | ?- geo_json::generate(atom(JSON), feature_collection([
+   | ?- geojson::generate(atom(JSON), feature_collection([
        feature(point([102.0, 0.5]), {prop0-value0}),
        feature(@null, @null)
    ], [bbox([100.0, 0.0, 105.0, 1.0])])).
@@ -97,13 +97,13 @@ Validate a native GeoJSON term:
 
 ::
 
-   | ?- geo_json::validate(polygon([[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]])).
+   | ?- geojson::validate(polygon([[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]])).
 
 Inspect validation errors:
 
 ::
 
-   | ?- geo_json::validate(polygon([[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0]]]), Errors).
+   | ?- geojson::validate(polygon([[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0]]]), Errors).
    Errors = [ring_not_closed([coordinates,0])]
    yes
 
@@ -111,11 +111,11 @@ Convert between JSON terms and native GeoJSON terms:
 
 ::
 
-   | ?- geo_json::json_to_geo_json({type-'Point', coordinates-[1,2]}, GeoJSON).
+   | ?- geojson::json_to_geojson({type-'Point', coordinates-[1,2]}, GeoJSON).
    GeoJSON = point([1,2])
    yes
 
-   | ?- geo_json::geo_json_to_json(feature(@null, @null, [id(1)]), JSON).
+   | ?- geojson::geojson_to_json(feature(@null, @null, [id(1)]), JSON).
    JSON = {type-'Feature', geometry-@null, properties-@null, id-1}
    yes
 
@@ -145,6 +145,6 @@ Notes
 - Foreign members are preserved but reserved GeoJSON member names are
   rejected when used as foreign member keys, regardless of whether the
   foreign members are supplied as pair lists or embedded object terms.
-- The ``geo_json/3`` parametric object mirrors the ``json/3``
+- The ``geojson/3`` parametric object mirrors the ``json/3``
   customization parameters for embedded object, pair, and string
   representations.

@@ -825,18 +825,6 @@ To load an entity, always load the library that includes it using the goal ``log
    gensym <gensym_0>
    gensym_core <gensym_core_0>
 
-``library/geo_json/``
----------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   geo_json <geo_json_0>
-   geo_json(ObjectRepresentation,PairRepresentation,StringRepresentation) <geo_json_3>
-   geo_json_protocol <geo_json_protocol_0>
-
 ``library/geohash/``
 --------------------
 
@@ -847,6 +835,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
    geohash <geohash_0>
    geohash_protocol <geohash_protocol_0>
+
+``library/geojson/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   geojson <geojson_0>
+   geojson(ObjectRepresentation,PairRepresentation,StringRepresentation) <geojson_3>
+   geojson_protocol <geojson_protocol_0>
 
 ``library/geospatial/``
 -----------------------

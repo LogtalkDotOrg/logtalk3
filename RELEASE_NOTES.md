@@ -349,7 +349,7 @@ reference systems and transformations for 2D and 3D WGS84 geodetic
 coordinates, Web Mercator, World Mercator, ECEF, local ENU tangent-plane,
 Lambert azimuthal equal-area, and UTM.
 
-* ADDED: New `geo_json` library implementing the GeoJSON (RFC 7946) standard.
+* ADDED: New `geojson` library implementing the GeoJSON (RFC 7946) standard.
 
 * ADDED: New `nmea` library implementing parsing of NMEA 0183 sentences from
 GPS/GNSS receivers with typed semantic decoding for common sentence types.

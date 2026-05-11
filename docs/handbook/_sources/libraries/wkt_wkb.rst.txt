@@ -7,7 +7,7 @@ The ``wkt_wkb`` library provides predicates for parsing, generating, and
 validating geometries represented using the Well-Known Text (WKT) and
 Well-Known Binary (WKB) interchange formats.
 
-It complements the ``geo_json`` and ``geospatial`` libraries by reusing
+It complements the ``geojson`` and ``geospatial`` libraries by reusing
 the same geometry constructors while adding support for the standard
 text and binary geometry encodings widely used by spatial databases and
 GIS tooling.
@@ -41,7 +41,7 @@ Representation
 --------------
 
 The library uses the same native geometry constructors as the
-``geo_json`` library for geometry values:
+``geojson`` library for geometry values:
 
 - ``point(Position)`` or ``point(Position, Options)``
 - ``multi_point(Positions)`` or ``multi_point(Positions, Options)``

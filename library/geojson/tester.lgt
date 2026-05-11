@@ -23,7 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(json(loader)),
-	logtalk_load([geo_json_protocol, geo_json], [source_data(on), debug(on)]),
+	logtalk_load([geojson_protocol, geojson], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

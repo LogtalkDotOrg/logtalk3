@@ -31,7 +31,7 @@
 		remarks is [
 			'Source update' - '2026-04-15',
 			'Generated entries' - '7929',
-			'Source' - 'SIL ISO 639-3 tab-delimited code set'
+			'Source' - 'SIL ISO 639-3 tab-delimited code set.'
 		]
 	]).
 

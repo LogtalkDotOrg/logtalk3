@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(geo_json_protocol).
+:- protocol(geojson_protocol).
 
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2026-05-08,
 		comment is 'GeoJSON (RFC 7946) parser, generator, and validator protocol.',
-		see_also is [geo_json, json, geospatial]
+		see_also is [geojson, json, geospatial]
 	]).
 
 	:- public(parse/2).
@@ -36,8 +36,8 @@
 		argnames is ['Source', 'Term'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
-			'``Source`` is neither a variable nor a valid source' - domain_error(geo_json_source, 'Source'),
-			'Parsed JSON does not represent a valid GeoJSON document' - domain_error(geo_json, 'Document')
+			'``Source`` is neither a variable nor a valid source' - domain_error(geojson_source, 'Source'),
+			'Parsed JSON does not represent a valid GeoJSON document' - domain_error(geojson, 'Document')
 		]
 	]).
 
@@ -48,8 +48,8 @@
 		argnames is ['Sink', 'Term'],
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
-			'``Sink`` is neither a variable nor a valid sink' - domain_error(geo_json_sink, 'Sink'),
-			'``Term`` is not a valid GeoJSON term' - domain_error(geo_json, 'Term')
+			'``Sink`` is neither a variable nor a valid sink' - domain_error(geojson_sink, 'Sink'),
+			'``Term`` is not a valid GeoJSON term' - domain_error(geojson, 'Term')
 		]
 	]).
 
@@ -66,7 +66,7 @@
 		comment is 'Validates a native GeoJSON term returning a list of reason terms whose final argument is the failing path.',
 		argnames is ['Term', 'Errors'],
 		remarks is [
-			'invalid_geo_json_term(Path)' - 'The term is not any supported GeoJSON geometry, feature, or feature collection representation.',
+			'invalid_geojson_term(Path)' - 'The term is not any supported GeoJSON geometry, feature, or feature collection representation.',
 			'invalid_geometry(Path)' - 'A geometry member is neither a valid geometry term nor ``@null`` where ``@null`` is allowed.',
 			'invalid_properties(Path)' - 'A feature properties member is neither ``@null`` nor a valid JSON object term in the selected representation.',
 			'invalid_options(Path)' - 'The options argument is not a list.',
@@ -103,25 +103,25 @@
 		]
 	]).
 
-	:- public(json_to_geo_json/2).
-	:- mode(json_to_geo_json(+term, -term), one_or_error).
-	:- info(json_to_geo_json/2, [
+	:- public(json_to_geojson/2).
+	:- mode(json_to_geojson(+term, -term), one_or_error).
+	:- info(json_to_geojson/2, [
 		comment is 'Converts a JSON term, as returned by the ``json`` library, into a native GeoJSON term.',
 		argnames is ['JSON', 'GeoJSON'],
 		exceptions is [
 			'``JSON`` is a variable' - instantiation_error,
-			'``JSON`` is not a valid GeoJSON JSON term' - domain_error(geo_json, 'JSON')
+			'``JSON`` is not a valid GeoJSON JSON term' - domain_error(geojson, 'JSON')
 		]
 	]).
 
-	:- public(geo_json_to_json/2).
-	:- mode(geo_json_to_json(+term, -term), one_or_error).
-	:- info(geo_json_to_json/2, [
+	:- public(geojson_to_json/2).
+	:- mode(geojson_to_json(+term, -term), one_or_error).
+	:- info(geojson_to_json/2, [
 		comment is 'Converts a native GeoJSON term into a JSON term suitable for the ``json`` library.',
 		argnames is ['GeoJSON', 'JSON'],
 		exceptions is [
 			'``GeoJSON`` is a variable' - instantiation_error,
-			'``GeoJSON`` is not a valid GeoJSON term' - domain_error(geo_json, 'GeoJSON')
+			'``GeoJSON`` is not a valid GeoJSON term' - domain_error(geojson, 'GeoJSON')
 		]
 	]).
 

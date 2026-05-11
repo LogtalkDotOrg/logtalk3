@@ -7406,7 +7406,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/2>`
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
-* :ref:`geo_json_protocol <geo_json_protocol/0::generate/2>`
+* :ref:`geojson_protocol <geojson_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
@@ -7519,16 +7519,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`gensym_core <gensym_core/0::gensym/2>`
 
-``geo_json_to_json/2``
-----------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`geo_json_protocol <geo_json_protocol/0::geo_json_to_json/2>`
-
 ``geohash_to_int/2``
 --------------------
 
@@ -7538,6 +7528,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geohash_protocol <geohash_protocol/0::geohash_to_int/2>`
+
+``geojson_to_json/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geojson_protocol <geojson_protocol/0::geojson_to_json/2>`
 
 ``geometric/2``
 ---------------
@@ -9754,15 +9754,15 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::join_packet_zone/4>`
 
-``json_to_geo_json/2``
-----------------------
+``json_to_geojson/2``
+---------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-* :ref:`geo_json_protocol <geo_json_protocol/0::json_to_geo_json/2>`
+* :ref:`geojson_protocol <geojson_protocol/0::json_to_geojson/2>`
 
 ``jump/3``
 ----------
@@ -14324,7 +14324,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
-* :ref:`geo_json_protocol <geo_json_protocol/0::parse/2>`
+* :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
@@ -21187,7 +21187,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`flags_validator <flags_validator/0::validate/1>`
-* :ref:`geo_json_protocol <geo_json_protocol/0::validate/1>`
+* :ref:`geojson_protocol <geojson_protocol/0::validate/1>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/1>`
 
 ``validate/2``
@@ -21198,7 +21198,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`geo_json_protocol <geo_json_protocol/0::validate/2>`
+* :ref:`geojson_protocol <geojson_protocol/0::validate/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/2>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/2>`
 

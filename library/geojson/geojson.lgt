@@ -12,15 +12,15 @@
 %
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
-%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.geo
 %  See the License for the specific language governing permissions and
 %  limitations under the License.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(geo_json(_ObjectRepresentation_, _PairRepresentation_, _StringRepresentation_),
-	implements(geo_json_protocol)).
+:- object(geojson(_ObjectRepresentation_, _PairRepresentation_, _StringRepresentation_),
+	implements(geojson_protocol)).
 
 	:- info([
 		version is 1:0:0,
@@ -49,13 +49,13 @@
 	parse(Source, GeoJSON) :-
 		catch(parse_source_json(Source, JSON), error(domain_error(json_source, _), _), fail),
 		!,
-		json_to_geo_json(JSON, GeoJSON).
+		json_to_geojson(JSON, GeoJSON).
 	parse(Source, _) :-
 		valid_source(Source),
 		!,
-		domain_error(geo_json, Source).
+		domain_error(geojson, Source).
 	parse(Source, _) :-
-		domain_error(geo_json_source, Source).
+		domain_error(geojson_source, Source).
 
 	parse_source_json(file(File), JSON) :-
 		json_parse(file(File), JSON),
@@ -88,28 +88,28 @@
 	generate(Sink, GeoJSON) :-
 		valid_sink(Sink),
 		!,
-		domain_error(geo_json, GeoJSON).
+		domain_error(geojson, GeoJSON).
 	generate(Sink, _) :-
-		domain_error(geo_json_sink, Sink).
+		domain_error(geojson_sink, Sink).
 
 	generate_sink_json(file(File), GeoJSON) :-
-		geo_json_to_json(GeoJSON, JSON),
+		geojson_to_json(GeoJSON, JSON),
 		json_generate(file(File), JSON),
 		!.
 	generate_sink_json(stream(Stream), GeoJSON) :-
-		geo_json_to_json(GeoJSON, JSON),
+		geojson_to_json(GeoJSON, JSON),
 		json_generate(stream(Stream), JSON),
 		!.
 	generate_sink_json(codes(Codes), GeoJSON) :-
-		geo_json_to_json(GeoJSON, JSON),
+		geojson_to_json(GeoJSON, JSON),
 		json_generate(codes(Codes), JSON),
 		!.
 	generate_sink_json(chars(Chars), GeoJSON) :-
-		geo_json_to_json(GeoJSON, JSON),
+		geojson_to_json(GeoJSON, JSON),
 		json_generate(chars(Chars), JSON),
 		!.
 	generate_sink_json(atom(Atom), GeoJSON) :-
-		geo_json_to_json(GeoJSON, JSON),
+		geojson_to_json(GeoJSON, JSON),
 		json_generate(atom(Atom), JSON),
 		!.
 
@@ -127,74 +127,74 @@
 		var(Term),
 		instantiation_error.
 	validate(Term, Errors) :-
-		validate_geo_json(Term, [], Errors).
+		validate_geojson(Term, [], Errors).
 
-	json_to_geo_json(JSON, _) :-
+	json_to_geojson(JSON, _) :-
 		var(JSON),
 		instantiation_error.
-	json_to_geo_json(JSON, GeoJSON) :-
+	json_to_geojson(JSON, GeoJSON) :-
 		json_object_pairs(JSON, Pairs),
-		convert_geo_json_object(Pairs, GeoJSON),
+		convert_geojson_object(Pairs, GeoJSON),
 		validate(GeoJSON),
 		!.
-	json_to_geo_json(JSON, _) :-
-		domain_error(geo_json, JSON).
+	json_to_geojson(JSON, _) :-
+		domain_error(geojson, JSON).
 
-	geo_json_to_json(GeoJSON, _) :-
+	geojson_to_json(GeoJSON, _) :-
 		var(GeoJSON),
 		instantiation_error.
-	geo_json_to_json(GeoJSON, JSON) :-
+	geojson_to_json(GeoJSON, JSON) :-
 		validate(GeoJSON),
-		geo_json_term_json(GeoJSON, JSON),
+		geojson_term_json(GeoJSON, JSON),
 		!.
-	geo_json_to_json(GeoJSON, _) :-
-		domain_error(geo_json, GeoJSON).
+	geojson_to_json(GeoJSON, _) :-
+		domain_error(geojson, GeoJSON).
 
-	convert_geo_json_object(Pairs, GeoJSON) :-
+	convert_geojson_object(Pairs, GeoJSON) :-
 		get_pair_value(type, Pairs, TypeValue),
 		string_term_to_atom(TypeValue, Type),
-		convert_geo_json_object(Type, Pairs, GeoJSON).
-	convert_geo_json_object('Point', Pairs, GeoJSON) :-
+		convert_geojson_object(Type, Pairs, GeoJSON).
+	convert_geojson_object('Point', Pairs, GeoJSON) :-
 		get_pair_value(coordinates, Pairs, Coordinates),
 		geometry_options_from_pairs(Pairs, [type, coordinates], Options),
 		term_with_options(point(Coordinates), Options, GeoJSON).
-	convert_geo_json_object('MultiPoint', Pairs, GeoJSON) :-
+	convert_geojson_object('MultiPoint', Pairs, GeoJSON) :-
 		get_pair_value(coordinates, Pairs, Coordinates),
 		geometry_options_from_pairs(Pairs, [type, coordinates], Options),
 		term_with_options(multi_point(Coordinates), Options, GeoJSON).
-	convert_geo_json_object('LineString', Pairs, GeoJSON) :-
+	convert_geojson_object('LineString', Pairs, GeoJSON) :-
 		get_pair_value(coordinates, Pairs, Coordinates),
 		geometry_options_from_pairs(Pairs, [type, coordinates], Options),
 		term_with_options(line_string(Coordinates), Options, GeoJSON).
-	convert_geo_json_object('MultiLineString', Pairs, GeoJSON) :-
+	convert_geojson_object('MultiLineString', Pairs, GeoJSON) :-
 		get_pair_value(coordinates, Pairs, Coordinates),
 		geometry_options_from_pairs(Pairs, [type, coordinates], Options),
 		term_with_options(multi_line_string(Coordinates), Options, GeoJSON).
-	convert_geo_json_object('Polygon', Pairs, GeoJSON) :-
+	convert_geojson_object('Polygon', Pairs, GeoJSON) :-
 		get_pair_value(coordinates, Pairs, Coordinates),
 		geometry_options_from_pairs(Pairs, [type, coordinates], Options),
 		term_with_options(polygon(Coordinates), Options, GeoJSON).
-	convert_geo_json_object('MultiPolygon', Pairs, GeoJSON) :-
+	convert_geojson_object('MultiPolygon', Pairs, GeoJSON) :-
 		get_pair_value(coordinates, Pairs, Coordinates),
 		geometry_options_from_pairs(Pairs, [type, coordinates], Options),
 		term_with_options(multi_polygon(Coordinates), Options, GeoJSON).
-	convert_geo_json_object('GeometryCollection', Pairs, GeoJSON) :-
+	convert_geojson_object('GeometryCollection', Pairs, GeoJSON) :-
 		get_pair_value(geometries, Pairs, GeometryJSON),
 		convert_geometry_list(GeometryJSON, Geometries),
 		geometry_options_from_pairs(Pairs, [type, geometries], Options),
 		term_with_options(geometry_collection(Geometries), Options, GeoJSON).
-	convert_geo_json_object('Feature', Pairs, GeoJSON) :-
+	convert_geojson_object('Feature', Pairs, GeoJSON) :-
 		get_pair_value(geometry, Pairs, GeometryJSON),
 		(	GeometryJSON == @null ->
 			Geometry = @null
 		;	json_object_pairs(GeometryJSON, GeometryPairs),
-			convert_geo_json_object(GeometryPairs, Geometry),
+			convert_geojson_object(GeometryPairs, Geometry),
 			is_geometry_term(Geometry)
 		),
 		get_pair_value(properties, Pairs, Properties),
 		feature_options_from_pairs(Pairs, Options),
 		term_with_options(feature(Geometry, Properties), Options, GeoJSON).
-	convert_geo_json_object('FeatureCollection', Pairs, GeoJSON) :-
+	convert_geojson_object('FeatureCollection', Pairs, GeoJSON) :-
 		get_pair_value(features, Pairs, FeaturesJSON),
 		convert_feature_list(FeaturesJSON, Features),
 		collection_options_from_pairs(Pairs, [type, features], Options),
@@ -203,14 +203,14 @@
 	convert_geometry_list([], []).
 	convert_geometry_list([GeometryJSON| GeometryJSONs], [Geometry| Geometries]) :-
 		json_object_pairs(GeometryJSON, GeometryPairs),
-		convert_geo_json_object(GeometryPairs, Geometry),
+		convert_geojson_object(GeometryPairs, Geometry),
 		is_geometry_term(Geometry),
 		convert_geometry_list(GeometryJSONs, Geometries).
 
 	convert_feature_list([], []).
 	convert_feature_list([FeatureJSON| FeatureJSONs], [Feature| Features]) :-
 		json_object_pairs(FeatureJSON, FeaturePairs),
-		convert_geo_json_object(FeaturePairs, Feature),
+		convert_geojson_object(FeaturePairs, Feature),
 		is_feature_term(Feature),
 		convert_feature_list(FeatureJSONs, Features).
 
@@ -264,63 +264,63 @@
 		append(Arguments, [Options], ArgumentsWithOptions),
 		TermWithOptions =.. [Functor| ArgumentsWithOptions].
 
-	geo_json_term_json(point(Position), JSON) :-
+	geojson_term_json(point(Position), JSON) :-
 		!,
 		pairs_to_object([type-'Point', coordinates-Position], JSON).
-	geo_json_term_json(point(Position, Options), JSON) :-
+	geojson_term_json(point(Position, Options), JSON) :-
 		!,
 		options_pairs(Options, [type-'Point', coordinates-Position], JSON).
-	geo_json_term_json(multi_point(Positions), JSON) :-
+	geojson_term_json(multi_point(Positions), JSON) :-
 		!,
 		pairs_to_object([type-'MultiPoint', coordinates-Positions], JSON).
-	geo_json_term_json(multi_point(Positions, Options), JSON) :-
+	geojson_term_json(multi_point(Positions, Options), JSON) :-
 		!,
 		options_pairs(Options, [type-'MultiPoint', coordinates-Positions], JSON).
-	geo_json_term_json(line_string(Positions), JSON) :-
+	geojson_term_json(line_string(Positions), JSON) :-
 		!,
 		pairs_to_object([type-'LineString', coordinates-Positions], JSON).
-	geo_json_term_json(line_string(Positions, Options), JSON) :-
+	geojson_term_json(line_string(Positions, Options), JSON) :-
 		!,
 		options_pairs(Options, [type-'LineString', coordinates-Positions], JSON).
-	geo_json_term_json(multi_line_string(LineStrings), JSON) :-
+	geojson_term_json(multi_line_string(LineStrings), JSON) :-
 		!,
 		pairs_to_object([type-'MultiLineString', coordinates-LineStrings], JSON).
-	geo_json_term_json(multi_line_string(LineStrings, Options), JSON) :-
+	geojson_term_json(multi_line_string(LineStrings, Options), JSON) :-
 		!,
 		options_pairs(Options, [type-'MultiLineString', coordinates-LineStrings], JSON).
-	geo_json_term_json(polygon(Rings), JSON) :-
+	geojson_term_json(polygon(Rings), JSON) :-
 		!,
 		pairs_to_object([type-'Polygon', coordinates-Rings], JSON).
-	geo_json_term_json(polygon(Rings, Options), JSON) :-
+	geojson_term_json(polygon(Rings, Options), JSON) :-
 		!,
 		options_pairs(Options, [type-'Polygon', coordinates-Rings], JSON).
-	geo_json_term_json(multi_polygon(Polygons), JSON) :-
+	geojson_term_json(multi_polygon(Polygons), JSON) :-
 		!,
 		pairs_to_object([type-'MultiPolygon', coordinates-Polygons], JSON).
-	geo_json_term_json(multi_polygon(Polygons, Options), JSON) :-
+	geojson_term_json(multi_polygon(Polygons, Options), JSON) :-
 		!,
 		options_pairs(Options, [type-'MultiPolygon', coordinates-Polygons], JSON).
-	geo_json_term_json(geometry_collection(Geometries), JSON) :-
+	geojson_term_json(geometry_collection(Geometries), JSON) :-
 		!,
 		geometry_terms_json(Geometries, GeometryJSON),
 		pairs_to_object([type-'GeometryCollection', geometries-GeometryJSON], JSON).
-	geo_json_term_json(geometry_collection(Geometries, Options), JSON) :-
+	geojson_term_json(geometry_collection(Geometries, Options), JSON) :-
 		!,
 		geometry_terms_json(Geometries, GeometryJSON),
 		options_pairs(Options, [type-'GeometryCollection', geometries-GeometryJSON], JSON).
-	geo_json_term_json(feature(Geometry, Properties), JSON) :-
+	geojson_term_json(feature(Geometry, Properties), JSON) :-
 		!,
 		feature_geometry_json(Geometry, GeometryJSON),
 		pairs_to_object([type-'Feature', geometry-GeometryJSON, properties-Properties], JSON).
-	geo_json_term_json(feature(Geometry, Properties, Options), JSON) :-
+	geojson_term_json(feature(Geometry, Properties, Options), JSON) :-
 		!,
 		feature_geometry_json(Geometry, GeometryJSON),
 		options_pairs(Options, [type-'Feature', geometry-GeometryJSON, properties-Properties], JSON).
-	geo_json_term_json(feature_collection(Features), JSON) :-
+	geojson_term_json(feature_collection(Features), JSON) :-
 		!,
 		feature_terms_json(Features, FeaturesJSON),
 		pairs_to_object([type-'FeatureCollection', features-FeaturesJSON], JSON).
-	geo_json_term_json(feature_collection(Features, Options), JSON) :-
+	geojson_term_json(feature_collection(Features, Options), JSON) :-
 		!,
 		feature_terms_json(Features, FeaturesJSON),
 		options_pairs(Options, [type-'FeatureCollection', features-FeaturesJSON], JSON).
@@ -328,16 +328,16 @@
 	feature_geometry_json(@null, @null) :-
 		!.
 	feature_geometry_json(Geometry, GeometryJSON) :-
-		geo_json_term_json(Geometry, GeometryJSON).
+		geojson_term_json(Geometry, GeometryJSON).
 
 	geometry_terms_json([], []).
 	geometry_terms_json([Geometry| Geometries], [GeometryJSON| GeometryJSONs]) :-
-		geo_json_term_json(Geometry, GeometryJSON),
+		geojson_term_json(Geometry, GeometryJSON),
 		geometry_terms_json(Geometries, GeometryJSONs).
 
 	feature_terms_json([], []).
 	feature_terms_json([Feature| Features], [FeatureJSON| FeatureJSONs]) :-
-		geo_json_term_json(Feature, FeatureJSON),
+		geojson_term_json(Feature, FeatureJSON),
 		feature_terms_json(Features, FeatureJSONs).
 
 	options_pairs(Options, BasePairs, JSON) :-
@@ -361,91 +361,91 @@
 	option_pairs([_| Options], Pairs, ForeignPairs) :-
 		option_pairs(Options, Pairs, ForeignPairs).
 
-	validate_geo_json(point(Position), Path, Errors) :-
+	validate_geojson(point(Position), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_position(Position, CoordinatesPath, Errors).
-	validate_geo_json(point(Position, Options), Path, Errors) :-
+	validate_geojson(point(Position, Options), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_position(Position, CoordinatesPath, PositionErrors),
 		bbox_length_context(point(Position), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(PositionErrors, OptionErrors, Errors).
-	validate_geo_json(multi_point(Positions), Path, Errors) :-
+	validate_geojson(multi_point(Positions), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_position_array(Positions, 1, CoordinatesPath, Errors).
-	validate_geo_json(multi_point(Positions, Options), Path, Errors) :-
+	validate_geojson(multi_point(Positions, Options), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_position_array(Positions, 1, CoordinatesPath, PositionErrors),
 		bbox_length_context(multi_point(Positions), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(PositionErrors, OptionErrors, Errors).
-	validate_geo_json(line_string(Positions), Path, Errors) :-
+	validate_geojson(line_string(Positions), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_position_array(Positions, 2, CoordinatesPath, Errors).
-	validate_geo_json(line_string(Positions, Options), Path, Errors) :-
+	validate_geojson(line_string(Positions, Options), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_position_array(Positions, 2, CoordinatesPath, PositionErrors),
 		bbox_length_context(line_string(Positions), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(PositionErrors, OptionErrors, Errors).
-	validate_geo_json(multi_line_string(LineStrings), Path, Errors) :-
+	validate_geojson(multi_line_string(LineStrings), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_line_strings(LineStrings, CoordinatesPath, Errors).
-	validate_geo_json(multi_line_string(LineStrings, Options), Path, Errors) :-
+	validate_geojson(multi_line_string(LineStrings, Options), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_line_strings(LineStrings, CoordinatesPath, LineErrors),
 		bbox_length_context(multi_line_string(LineStrings), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(LineErrors, OptionErrors, Errors).
-	validate_geo_json(polygon(Rings), Path, Errors) :-
+	validate_geojson(polygon(Rings), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_polygon_rings(Rings, CoordinatesPath, Errors).
-	validate_geo_json(polygon(Rings, Options), Path, Errors) :-
+	validate_geojson(polygon(Rings, Options), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_polygon_rings(Rings, CoordinatesPath, RingErrors),
 		bbox_length_context(polygon(Rings), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(RingErrors, OptionErrors, Errors).
-	validate_geo_json(multi_polygon(Polygons), Path, Errors) :-
+	validate_geojson(multi_polygon(Polygons), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_multi_polygon(Polygons, CoordinatesPath, Errors).
-	validate_geo_json(multi_polygon(Polygons, Options), Path, Errors) :-
+	validate_geojson(multi_polygon(Polygons, Options), Path, Errors) :-
 		!,
 		path_push(coordinates, Path, CoordinatesPath),
 		validate_multi_polygon(Polygons, CoordinatesPath, PolygonErrors),
 		bbox_length_context(multi_polygon(Polygons), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(PolygonErrors, OptionErrors, Errors).
-	validate_geo_json(geometry_collection(Geometries), Path, Errors) :-
+	validate_geojson(geometry_collection(Geometries), Path, Errors) :-
 		!,
 		path_push(geometries, Path, GeometriesPath),
 		validate_geometry_list(Geometries, GeometriesPath, Errors).
-	validate_geo_json(geometry_collection(Geometries, Options), Path, Errors) :-
+	validate_geojson(geometry_collection(Geometries, Options), Path, Errors) :-
 		!,
 		path_push(geometries, Path, GeometriesPath),
 		validate_geometry_list(Geometries, GeometriesPath, GeometryErrors),
 		bbox_length_context(geometry_collection(Geometries), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(GeometryErrors, OptionErrors, Errors).
-	validate_geo_json(feature(Geometry, Properties), Path, Errors) :-
+	validate_geojson(feature(Geometry, Properties), Path, Errors) :-
 		!,
 		path_push(geometry, Path, GeometryPath),
 		validate_nullable_geometry(Geometry, GeometryPath, GeometryErrors),
 		path_push(properties, Path, PropertiesPath),
 		validate_properties(Properties, PropertiesPath, PropertyErrors),
 		append(GeometryErrors, PropertyErrors, Errors).
-	validate_geo_json(feature(Geometry, Properties, Options), Path, Errors) :-
+	validate_geojson(feature(Geometry, Properties, Options), Path, Errors) :-
 		!,
 		path_push(geometry, Path, GeometryPath),
 		validate_nullable_geometry(Geometry, GeometryPath, GeometryErrors),
@@ -455,25 +455,25 @@
 		validate_options(Options, Path, [bbox, id, foreign_members], BBoxLength, OptionErrors),
 		append(GeometryErrors, PropertyErrors, Errors0),
 		append(Errors0, OptionErrors, Errors).
-	validate_geo_json(feature_collection(Features), Path, Errors) :-
+	validate_geojson(feature_collection(Features), Path, Errors) :-
 		!,
 		path_push(features, Path, FeaturesPath),
 		validate_feature_list(Features, FeaturesPath, Errors).
-	validate_geo_json(feature_collection(Features, Options), Path, Errors) :-
+	validate_geojson(feature_collection(Features, Options), Path, Errors) :-
 		!,
 		path_push(features, Path, FeaturesPath),
 		validate_feature_list(Features, FeaturesPath, FeatureErrors),
 		bbox_length_context(feature_collection(Features), BBoxLength),
 		validate_options(Options, Path, [bbox, foreign_members], BBoxLength, OptionErrors),
 		append(FeatureErrors, OptionErrors, Errors).
-	validate_geo_json(_, Path, [Error]) :-
-		path_error(Path, invalid_geo_json_term, Error).
+	validate_geojson(_, Path, [Error]) :-
+		path_error(Path, invalid_geojson_term, Error).
 
 	validate_nullable_geometry(@null, _, []) :-
 		!.
 	validate_nullable_geometry(Geometry, Path, Errors) :-
 		(	is_geometry_term(Geometry) ->
-			validate_geo_json(Geometry, Path, Errors)
+			validate_geojson(Geometry, Path, Errors)
 		;	path_error(Path, invalid_geometry, Error),
 			Errors = [Error]
 		).
@@ -996,7 +996,7 @@
 	validate_feature_list([Feature| Features], Index, Path, Errors) :-
 		path_push(Index, Path, FeaturePath),
 		(	is_feature_term(Feature) ->
-			validate_geo_json(Feature, FeaturePath, FeatureErrors)
+			validate_geojson(Feature, FeaturePath, FeatureErrors)
 		;	path_error(FeaturePath, invalid_feature, Error),
 			FeatureErrors = [Error]
 		),
@@ -1186,8 +1186,8 @@
 :- end_object.
 
 
-:- object(geo_json,
-	extends(geo_json(curly, dash, atom))).
+:- object(geojson,
+	extends(geojson(curly, dash, atom))).
 
 	:- info([
 		version is 1:0:0,

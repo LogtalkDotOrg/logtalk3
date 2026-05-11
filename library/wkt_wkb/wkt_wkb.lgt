@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-05-09,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
-		see_also is [wkt_wkb_protocol, geo_json, geospatial, cbor, message_pack(_)]
+		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
 	]).
 
 	:- uses(reader, [

@@ -97,7 +97,7 @@ logtalk_library_path(gaussian_mixture_clusterer, library('gaussian_mixture_clust
 logtalk_library_path(gaussian_process_regression, library('gaussian_process_regression/')).
 logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(gensym, library('gensym/')).
-logtalk_library_path(geo_json, library('geo_json/')).
+logtalk_library_path(geojson, library('geojson/')).
 logtalk_library_path(geohash, library('geohash/')).
 logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).

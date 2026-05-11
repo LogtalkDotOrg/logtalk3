@@ -894,18 +894,6 @@ To load any library (including developer tools, ports, and contributions), use t
    gensym <gensym_0>
    gensym_core <gensym_core_0>
 
-:ref:`geo_json <library_geo_json>`
-----------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   geo_json <geo_json_0>
-   geo_json(ObjectRepresentation,PairRepresentation,StringRepresentation) <geo_json_3>
-   geo_json_protocol <geo_json_protocol_0>
-
 :ref:`geohash <library_geohash>`
 --------------------------------
 
@@ -916,6 +904,18 @@ To load any library (including developer tools, ports, and contributions), use t
 
    geohash <geohash_0>
    geohash_protocol <geohash_protocol_0>
+
+:ref:`geojson <library_geojson>`
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   geojson <geojson_0>
+   geojson(ObjectRepresentation,PairRepresentation,StringRepresentation) <geojson_3>
+   geojson_protocol <geojson_protocol_0>
 
 :ref:`geospatial <library_geospatial>`
 --------------------------------------

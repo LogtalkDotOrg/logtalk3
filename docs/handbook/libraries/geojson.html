@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>geo_json &mdash; Logtalk 3.100.0</title>
+  <title>geojson &mdash; Logtalk 3.100.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -135,7 +135,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gaussian_process_regression.html"><code class="docutils literal notranslate"><span class="pre">gaussian_process_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">geo_json</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">geojson</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -318,9 +318,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">geo_json</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">geojson</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/geo_json.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/geojson.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -328,10 +328,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="geo-json">
-<span id="library-geo-json"></span><h1><code class="docutils literal notranslate"><span class="pre">geo_json</span></code><a class="headerlink" href="#geo-json" title="Link to this heading"></a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">geo_json</span></code> library provides predicates for parsing, generating,
-and validating GeoJSON documents as specified by RFC 7946:</p>
+  <section id="geojson">
+<span id="library-geojson"></span><h1><code class="docutils literal notranslate"><span class="pre">geojson</span></code><a class="headerlink" href="#geojson" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">geojson</span></code> library provides predicates for parsing, generating, and
+validating GeoJSON documents as specified by RFC 7946:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.rfc-editor.org/rfc/rfc7946">https://www.rfc-editor.org/rfc/rfc7946</a></p></li>
 </ul>
@@ -341,20 +341,20 @@ interchange format for geometry, features, and feature collections.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
-<a class="reference external" href="../../apis/library_index.html#geo_json">../../apis/library_index.html#geo_json</a>
+<a class="reference external" href="../../apis/library_index.html#geojson">../../apis/library_index.html#geojson</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(geo_json(loader)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(geojson(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(geo_json(tester)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(geojson(tester)).
 </pre></div>
 </div>
 </section>
@@ -395,34 +395,34 @@ object term using the selected object representation</p></li>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>Parse a point document:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geo_json<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[100.0,0.0]}&#39;</span>), <span class="nv">GeoJSON</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geojson<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:[100.0,0.0]}&#39;</span>), <span class="nv">GeoJSON</span>).
 <span class="nv">GeoJSON</span> <span class="o">=</span> point([<span class="m">100.0</span>, <span class="m">0.0</span>])
 yes
 </pre></div>
 </div>
 <p>Generate a GeoJSON feature collection:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geo_json<span class="o">::</span>generate(<span class="k">atom</span>(<span class="nv">JSON</span>), feature_collection([
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geojson<span class="o">::</span>generate(<span class="k">atom</span>(<span class="nv">JSON</span>), feature_collection([
     feature(point([<span class="m">102.0</span>, <span class="m">0.5</span>]), <span class="k">{</span>prop0<span class="o">-</span>value0<span class="k">}</span>),
     feature(<span class="o">@</span>null, <span class="o">@</span>null)
 ], [bbox([<span class="m">100.0</span>, <span class="m">0.0</span>, <span class="m">105.0</span>, <span class="m">1.0</span>])])).
 </pre></div>
 </div>
 <p>Validate a native GeoJSON term:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geo_json<span class="o">::</span>validate(polygon([[[<span class="m">100.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">1.0</span>],[<span class="m">100.0</span>,<span class="m">1.0</span>],[<span class="m">100.0</span>,<span class="m">0.0</span>]]])).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geojson<span class="o">::</span>validate(polygon([[[<span class="m">100.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">1.0</span>],[<span class="m">100.0</span>,<span class="m">1.0</span>],[<span class="m">100.0</span>,<span class="m">0.0</span>]]])).
 </pre></div>
 </div>
 <p>Inspect validation errors:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geo_json<span class="o">::</span>validate(polygon([[[<span class="m">100.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">1.0</span>],[<span class="m">100.0</span>,<span class="m">1.0</span>]]]), <span class="nv">Errors</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geojson<span class="o">::</span>validate(polygon([[[<span class="m">100.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">0.0</span>],[<span class="m">101.0</span>,<span class="m">1.0</span>],[<span class="m">100.0</span>,<span class="m">1.0</span>]]]), <span class="nv">Errors</span>).
 <span class="nv">Errors</span> <span class="o">=</span> [ring_not_closed([coordinates,<span class="m">0</span>])]
 yes
 </pre></div>
 </div>
 <p>Convert between JSON terms and native GeoJSON terms:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geo_json<span class="o">::</span>json_to_geo_json(<span class="k">{</span>type<span class="o">-</span><span class="s">&#39;Point&#39;</span>, coordinates<span class="o">-</span>[<span class="m">1</span>,<span class="m">2</span>]<span class="k">}</span>, <span class="nv">GeoJSON</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geojson<span class="o">::</span>json_to_geojson(<span class="k">{</span>type<span class="o">-</span><span class="s">&#39;Point&#39;</span>, coordinates<span class="o">-</span>[<span class="m">1</span>,<span class="m">2</span>]<span class="k">}</span>, <span class="nv">GeoJSON</span>).
 <span class="nv">GeoJSON</span> <span class="o">=</span> point([<span class="m">1</span>,<span class="m">2</span>])
 yes
 
-| <span class="o">?-</span> geo_json<span class="o">::</span>geo_json_to_json(feature(<span class="o">@</span>null, <span class="o">@</span>null, [id(<span class="m">1</span>)]), <span class="nv">JSON</span>).
+| <span class="o">?-</span> geojson<span class="o">::</span>geojson_to_json(feature(<span class="o">@</span>null, <span class="o">@</span>null, [id(<span class="m">1</span>)]), <span class="nv">JSON</span>).
 <span class="nv">JSON</span> <span class="o">=</span> <span class="k">{</span>type<span class="o">-</span><span class="s">&#39;Feature&#39;</span>, geometry<span class="o">-@</span>null, properties<span class="o">-@</span>null, id<span class="o">-</span><span class="m">1</span><span class="k">}</span>
 yes
 </pre></div>
@@ -454,7 +454,7 @@ terms are validated as proper character or character-code lists.</p></li>
 <li><p>Foreign members are preserved but reserved GeoJSON member names are
 rejected when used as foreign member keys, regardless of whether the
 foreign members are supplied as pair lists or embedded object terms.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">geo_json/3</span></code> parametric object mirrors the <code class="docutils literal notranslate"><span class="pre">json/3</span></code>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">geojson/3</span></code> parametric object mirrors the <code class="docutils literal notranslate"><span class="pre">json/3</span></code>
 customization parameters for embedded object, pair, and string
 representations.</p></li>
 </ul>
