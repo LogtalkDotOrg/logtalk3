@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Logistic regression classifier supporting binary and multiclass classification using joint softmax training. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, c45_classifier, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -61,13 +61,10 @@
 	learn(Dataset, Classifier, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		dataset_attributes(Dataset, Attributes),
+		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, _AttributeNames),
-		findall(
-			Id-Class-AttributeValues,
-			Dataset::example(Id, Class, AttributeValues),
-			Examples
-		),
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples(Dataset, Examples),
 		Dataset::class_values(Classes),
 		build_encoders(Attributes, Examples, Encoders),
 		examples_to_rows(Examples, Encoders, Rows),

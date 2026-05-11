@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Adaptive Boosting classifier using C4.5 decision trees as base learners. Implements the SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function) variant, which supports multi-class classification. Builds an ensemble of weighted decision trees where each subsequent tree focuses on the examples misclassified by previous trees.',
 		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier]
 	]).
@@ -61,17 +61,14 @@
 		^^merge_options(UserOptions, Options),
 		^^option(number_of_estimators(NumEstimators), Options),
 		% Get attribute information from dataset
-		dataset_attributes(Dataset, Attributes),
+		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		% Get class values
 		Dataset::class_values(ClassValues),
 		length(ClassValues, NumClasses),
 		% Get all examples
-		findall(
-			Id-Class-AVs,
-			Dataset::example(Id, Class, AVs),
-			Examples
-		),
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples(Dataset, Examples),
 		length(Examples, N),
 		% Initialize uniform weights
 		InitWeight is 1.0 / N,

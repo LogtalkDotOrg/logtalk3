@@ -22,6 +22,34 @@
 :- object(sample_classifier,
 	imports(classifier_common)).
 
+	:- public(validate_attributes/1).
+	:- mode(validate_attributes(+object_identifier), one_or_error).
+	:- info(validate_attributes/1, [
+		comment is 'Testing wrapper for the shared dataset attribute validation helper.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_examples/1).
+	:- mode(validate_examples(+object_identifier), one_or_error).
+	:- info(validate_examples/1, [
+		comment is 'Testing wrapper for the shared example validation helper that allows missing attribute bindings.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_complete_examples/1).
+	:- mode(validate_complete_examples(+object_identifier), one_or_error).
+	:- info(validate_complete_examples/1, [
+		comment is 'Testing wrapper for the shared complete-example validation helper that allows missing values represented by variables.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_complete_examples_nonvar/1).
+	:- mode(validate_complete_examples_nonvar(+object_identifier), one_or_error).
+	:- info(validate_complete_examples_nonvar/1, [
+		comment is 'Testing wrapper for the shared complete-example validation helper that requires all attribute values to be instantiated.',
+		argnames is ['Dataset']
+	]).
+
 	:- public(mixed_feature_distance/5).
 	:- mode(mixed_feature_distance(+term, +list, +list, +list, -float), one_or_error).
 	:- info(mixed_feature_distance/5, [
@@ -34,6 +62,9 @@
 	]).
 
 	learn(Dataset, sample_classifier(DefaultClass, Diagnostics)) :-
+		^^dataset_attributes(Dataset, _),
+		^^dataset_examples(Dataset, Examples),
+		^^check_examples(Dataset, Examples),
 		Dataset::class_values([DefaultClass| _]),
 		Diagnostics = [
 			model(sample_classifier),
@@ -60,6 +91,21 @@
 
 	classifier_term_template(sample_classifier(_DefaultClass, _Diagnostics), sample_classifier('DefaultClass', 'Diagnostics')).
 
+	validate_attributes(Dataset) :-
+		^^dataset_attributes(Dataset, _).
+
+	validate_examples(Dataset) :-
+		^^dataset_examples(Dataset, Examples),
+		^^check_examples(Dataset, Examples).
+
+	validate_complete_examples(Dataset) :-
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples(Dataset, Examples).
+
+	validate_complete_examples_nonvar(Dataset) :-
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples_nonvar(Dataset, Examples).
+
 	mixed_feature_distance(Metric, FeatureTypes, Values1, Values2, Distance) :-
 		^^mixed_feature_distance(Metric, FeatureTypes, Values1, Values2, Distance).
 
@@ -73,13 +119,114 @@
 :- end_object.
 
 
+:- object(duplicate_attribute_declarations,
+	implements(dataset_protocol)).
+
+	attribute_values(outlook, [sunny, rainy]).
+	attribute_values(outlook, [overcast]).
+
+	class(play).
+
+	class_values([yes, no]).
+
+	example(1, yes, [outlook-sunny]).
+
+:- end_object.
+
+
+:- object(invalid_class_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(age, continuous).
+
+	class(label).
+
+	class_values([yes, no]).
+
+	example(1, maybe, [age-30]).
+
+:- end_object.
+
+
+:- object(undeclared_attribute_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(age, continuous).
+
+	class(label).
+
+	class_values([yes, no]).
+
+	example(1, yes, [age-30, income-50000]).
+
+:- end_object.
+
+
+:- object(invalid_continuous_value_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(age, continuous).
+
+	class(label).
+
+	class_values([yes, no]).
+
+	example(1, yes, [age-young]).
+
+:- end_object.
+
+
+:- object(invalid_categorical_value_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(student, [yes, no]).
+
+	class(label).
+
+	class_values([yes, no]).
+
+	example(1, yes, [student-maybe]).
+
+:- end_object.
+
+
+:- object(duplicate_example_attribute_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(age, continuous).
+	attribute_values(student, [yes, no]).
+
+	class(label).
+
+	class_values([yes, no]).
+
+	example(1, yes, [age-30, age-31, student-yes]).
+
+:- end_object.
+
+
+:- object(incomplete_example_dataset,
+	implements(dataset_protocol)).
+
+	attribute_values(age, continuous).
+	attribute_values(student, [yes, no]).
+
+	class(label).
+
+	class_values([yes, no]).
+
+	example(1, yes, [age-30]).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-11,
 		comment is 'Smoke tests for the "classification_protocols" library.'
 	]).
 
@@ -101,6 +248,42 @@
 
 	test(sample_classifier_learn_2, deterministic(ground(Classifier))) :-
 		sample_classifier::learn(play_tennis, Classifier).
+
+	test(sample_classifier_validate_examples_1, deterministic) :-
+		sample_classifier::validate_examples(mixed).
+
+	test(sample_classifier_validate_examples_missing_values_1, deterministic) :-
+		sample_classifier::validate_examples(missing_mixed).
+
+	test(sample_classifier_validate_complete_examples_1, deterministic) :-
+		sample_classifier::validate_complete_examples(mixed).
+
+	test(sample_classifier_validate_complete_examples_missing_values_1, deterministic) :-
+		sample_classifier::validate_complete_examples(missing_mixed).
+
+	test(sample_classifier_validate_complete_examples_nonvar_1, error(instantiation_error)) :-
+		sample_classifier::validate_complete_examples_nonvar(missing_mixed).
+
+	test(sample_classifier_validate_attributes_duplicate_declaration_1, error(domain_error(attribute_declarations, outlook))) :-
+		sample_classifier::validate_attributes(duplicate_attribute_declarations).
+
+	test(sample_classifier_validate_examples_invalid_class_1, error(existence_error(class_value, maybe))) :-
+		sample_classifier::validate_examples(invalid_class_dataset).
+
+	test(sample_classifier_validate_examples_undeclared_attribute_1, error(domain_error(declared_attribute([age]), income))) :-
+		sample_classifier::validate_examples(undeclared_attribute_dataset).
+
+	test(sample_classifier_validate_examples_invalid_continuous_value_1, error(type_error(number, young))) :-
+		sample_classifier::validate_examples(invalid_continuous_value_dataset).
+
+	test(sample_classifier_validate_examples_invalid_categorical_value_1, error(domain_error(attribute_value(student, [yes, no]), maybe))) :-
+		sample_classifier::validate_examples(invalid_categorical_value_dataset).
+
+	test(sample_classifier_validate_examples_duplicate_attribute_1, error(domain_error(attribute_occurrences(age, 1), 2))) :-
+		sample_classifier::validate_examples(duplicate_example_attribute_dataset).
+
+	test(sample_classifier_validate_complete_examples_missing_attribute_1, error(existence_error(attribute, student))) :-
+		sample_classifier::validate_complete_examples(incomplete_example_dataset).
 
 	test(sample_classifier_predict_3, deterministic(Class == yes)) :-
 		sample_classifier::learn(play_tennis, Classifier),

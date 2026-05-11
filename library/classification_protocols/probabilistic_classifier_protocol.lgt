@@ -19,32 +19,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(statistics(loader)),
-	logtalk_load([
-		dataset_protocol,
-		classifier_protocol,
-		probabilistic_classifier_protocol,
-		classifier_common,
-		probabilistic_classifier_common
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load([
-		'test_datasets/play_tennis',
-		'test_datasets/contact_lenses',
-		'test_datasets/mixed',
-		'test_datasets/missing_mixed'
-	], [
-		source_data(on),
-		debug(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- protocol(probabilistic_classifier_protocol,
+	extends(classifier_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-11,
+		comment is 'Protocol for classifiers that can estimate class probabilities.',
+		see_also is [classifier_protocol, adaptive_boosting_classifier, gradient_boosting_classifier, kernel_svm_classifier, knn_classifier, logistic_regression_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, sgd_classifier]
+	]).
+
+	:- public(predict_probabilities/3).
+	:- mode(predict_probabilities(+compound, +list, -list), one).
+	:- info(predict_probabilities/3, [
+		comment is 'Predicts class probabilities for a new instance using the learned classifier. The instance is a list of ``Attribute-Value`` pairs.',
+		argnames is ['Classifier', 'Instance', 'Probabilities']
+	]).
+
+:- end_protocol.

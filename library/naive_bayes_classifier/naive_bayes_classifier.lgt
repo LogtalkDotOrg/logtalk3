@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Naive Bayes classifier with Laplace smoothing and Gaussian distribution support. Learns from a dataset object implementing the ``dataset_protocol`` protocol and returns a classifier term that can be used for prediction and exported as predicate clauses.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, c45_classifier, knn_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -52,14 +52,11 @@
 
 	learn(Dataset, Classifier, []) :-
 		% Get attribute information from dataset
-		dataset_attributes(Dataset, Attributes),
+		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
 		% Get all examples from dataset
-		findall(
-			Id-Class-AttributeValues,
-			Dataset::example(Id, Class, AttributeValues),
-			Examples
-		),
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples_nonvar(Dataset, Examples),
 		% Extract instances and labels
 		examples_to_instances_labels(Examples, AttributeNames, Instances, Labels),
 		% Determine feature types from dataset attributes

@@ -26,8 +26,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
-		comment is 'Shared predicates for classifier diagnostics, mixed-feature distance calculations, and export.'
+		date is 2026-05-11,
+		comment is 'Shared predicates for classifier diagnostics, dataset validation, mixed-feature distance calculations, and export.'
 	]).
 
 	:- uses(format, [
@@ -120,6 +120,34 @@
 	:- mode(dataset_examples(+object_identifier, -list(compound)), one).
 	:- info(dataset_examples/2, [
 		comment is 'Collects the dataset training examples as ``Id-Class-AttributeValues`` terms.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
+	:- protected(check_examples_non_empty/2).
+	:- mode(check_examples_non_empty(+object_identifier, +list), one).
+	:- info(check_examples_non_empty/2, [
+		comment is 'Checks that a training example collection is not empty.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
+	:- protected(check_examples/2).
+	:- mode(check_examples(+object_identifier, +list), one_or_error).
+	:- info(check_examples/2, [
+		comment is 'Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that provided attribute bindings use declared attributes with values matching the declared domains. Missing attribute bindings are allowed.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
+	:- protected(check_complete_examples/2).
+	:- mode(check_complete_examples(+object_identifier, +list), one_or_error).
+	:- info(check_complete_examples/2, [
+		comment is 'Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with values matching the declared domains. Missing values represented using variables are allowed.',
+		argnames is ['Dataset', 'Examples']
+	]).
+
+	:- protected(check_complete_examples_nonvar/2).
+	:- mode(check_complete_examples_nonvar(+object_identifier, +list), one_or_error).
+	:- info(check_complete_examples_nonvar/2, [
+		comment is 'Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with non-variable values matching the declared domains.',
 		argnames is ['Dataset', 'Examples']
 	]).
 
@@ -227,7 +255,8 @@
 			Attribute-Values,
 			Dataset::attribute_values(Attribute, Values),
 			Attributes
-		).
+		),
+		check_attribute_declarations(Attributes).
 
 	dataset_examples(Dataset, Examples) :-
 		findall(
@@ -235,6 +264,42 @@
 			Dataset::example(Id, Class, AttributeValues),
 			Examples
 		).
+
+	check_examples_non_empty(Dataset, Examples) :-
+		(   Examples == [] ->
+			domain_error(non_empty_dataset, Dataset)
+		;   true
+		).
+
+	check_examples(Dataset, Examples) :-
+		::check_examples_non_empty(Dataset, Examples),
+		Dataset::class_values(ClassValues),
+		(   valid_class_values(ClassValues) ->
+			true
+		;   domain_error(class_values, ClassValues)
+		),
+		::dataset_attributes(Dataset, Attributes),
+		check_examples(Examples, ClassValues, Attributes).
+
+	check_complete_examples(Dataset, Examples) :-
+		::check_examples_non_empty(Dataset, Examples),
+		Dataset::class_values(ClassValues),
+		(   valid_class_values(ClassValues) ->
+			true
+		;   domain_error(class_values, ClassValues)
+		),
+		::dataset_attributes(Dataset, Attributes),
+		check_complete_examples(Examples, ClassValues, Attributes).
+
+	check_complete_examples_nonvar(Dataset, Examples) :-
+		::check_examples_non_empty(Dataset, Examples),
+		Dataset::class_values(ClassValues),
+		(   valid_class_values(ClassValues) ->
+			true
+		;   domain_error(class_values, ClassValues)
+		),
+		::dataset_attributes(Dataset, Attributes),
+		check_complete_examples_nonvar(Examples, ClassValues, Attributes).
 
 	build_linear_encoders([], _, _FeatureScaling, []).
 	build_linear_encoders([Attribute-Values| Rest], Examples, FeatureScaling, [Encoder| Encoders]) :-
@@ -362,6 +427,135 @@
 		\+ member(Term, Terms),
 		valid_distinct_terms(Terms).
 
+	check_attribute_declarations([]).
+	check_attribute_declarations([Attribute-Values| Attributes]) :-
+		(   atom(Attribute),
+			\+ member(Attribute-_, Attributes),
+			(   Values == continuous
+			;   valid_discrete_values(Values)
+			) ->
+			true
+		;   domain_error(attribute_declarations, Attribute)
+		),
+		check_attribute_declarations(Attributes).
+
+	check_examples([], _ClassValues, _Attributes).
+	check_examples([_-Class-AttributeValues| Examples], ClassValues, Attributes) :-
+		check_example_class(Class, ClassValues),
+		check_example_attributes(Attributes, AttributeValues),
+		check_examples(Examples, ClassValues, Attributes).
+
+	check_complete_examples([], _ClassValues, _Attributes).
+	check_complete_examples([_-Class-AttributeValues| Examples], ClassValues, Attributes) :-
+		check_example_class(Class, ClassValues),
+		check_complete_example_attributes(Attributes, AttributeValues),
+		check_complete_examples(Examples, ClassValues, Attributes).
+
+	check_complete_examples_nonvar([], _ClassValues, _Attributes).
+	check_complete_examples_nonvar([_-Class-AttributeValues| Examples], ClassValues, Attributes) :-
+		check_example_class(Class, ClassValues),
+		check_complete_example_attributes_nonvar(Attributes, AttributeValues),
+		check_complete_examples_nonvar(Examples, ClassValues, Attributes).
+
+	check_example_class(Class, ClassValues) :-
+		(   atom(Class) ->
+			(   member(Class, ClassValues) ->
+				true
+			;   existence_error(class_value, Class)
+			)
+		;   type_error(atom, Class)
+		).
+
+	check_example_attributes(Attributes, AttributeValues) :-
+		declared_attribute_names(Attributes, AttributeNames),
+		check_attribute_bindings(AttributeNames, AttributeValues),
+		check_attribute_values(AttributeValues, Attributes).
+
+	check_complete_example_attributes(Attributes, AttributeValues) :-
+		declared_attribute_names(Attributes, AttributeNames),
+		check_complete_attribute_bindings(AttributeNames, AttributeValues),
+		check_attribute_values(AttributeValues, Attributes).
+
+	check_complete_example_attributes_nonvar(Attributes, AttributeValues) :-
+		declared_attribute_names(Attributes, AttributeNames),
+		check_complete_attribute_bindings(AttributeNames, AttributeValues),
+		check_nonvar_attribute_values(AttributeValues, Attributes).
+
+	check_attribute_bindings(AttributeNames, AttributeValues) :-
+		check_declared_attribute_bindings(AttributeNames, AttributeValues),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	check_complete_attribute_bindings(AttributeNames, AttributeValues) :-
+		check_required_attribute_bindings(AttributeNames, AttributeValues),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	check_declared_attribute_bindings([], _AttributeValues).
+	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
+		attribute_occurrences(AttributeValues, Attribute, 0, Count),
+		(   Count =< 1 ->
+			true
+		;   domain_error(attribute_occurrences(Attribute, 1), Count)
+		),
+		check_declared_attribute_bindings(Attributes, AttributeValues).
+
+	check_required_attribute_bindings([], _AttributeValues).
+	check_required_attribute_bindings([Attribute| Attributes], AttributeValues) :-
+		attribute_occurrences(AttributeValues, Attribute, 0, Count),
+		(   Count == 1 ->
+			true
+		;   Count == 0 ->
+			existence_error(attribute, Attribute)
+		;   domain_error(attribute_occurrences(Attribute, 1), Count)
+		),
+		check_required_attribute_bindings(Attributes, AttributeValues).
+
+	check_undeclared_attribute_bindings([], _AttributeNames).
+	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
+		(   member(Attribute, AttributeNames) ->
+			true
+		;   domain_error(declared_attribute(AttributeNames), Attribute)
+		),
+		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
+
+	check_attribute_values([], _Attributes).
+	check_attribute_values([Attribute-Value| AttributeValues], Attributes) :-
+		memberchk(Attribute-Values, Attributes),
+		(   nonvar(Value) ->
+			check_attribute_value(Values, Attribute, Value)
+		;   true
+		),
+		check_attribute_values(AttributeValues, Attributes).
+
+	check_nonvar_attribute_values([], _Attributes).
+	check_nonvar_attribute_values([Attribute-Value| AttributeValues], Attributes) :-
+		memberchk(Attribute-Values, Attributes),
+		(   nonvar(Value) ->
+			check_attribute_value(Values, Attribute, Value)
+		;   instantiation_error
+		),
+		check_nonvar_attribute_values(AttributeValues, Attributes).
+
+	check_attribute_value(continuous, _Attribute, Value) :-
+		!,
+		(   number(Value) ->
+			true
+		;   type_error(number, Value)
+		).
+	check_attribute_value(Values, Attribute, Value) :-
+		check_categorical_value(Attribute, Values, Value).
+
+	declared_attribute_names([], []).
+	declared_attribute_names([Attribute-_| Attributes], [Attribute| AttributeNames]) :-
+		declared_attribute_names(Attributes, AttributeNames).
+
+	attribute_occurrences([], _Attribute, Count, Count).
+	attribute_occurrences([Attribute-_Value| AttributeValues], Attribute, Count0, Count) :-
+		!,
+		Count1 is Count0 + 1,
+		attribute_occurrences(AttributeValues, Attribute, Count1, Count).
+	attribute_occurrences([_OtherAttribute-_Value| AttributeValues], Attribute, Count0, Count) :-
+		attribute_occurrences(AttributeValues, Attribute, Count0, Count).
+
 	valid_feature_types_([], _AllowedTypes).
 	valid_feature_types_([FeatureType| FeatureTypes], AllowedTypes) :-
 		memberchk(FeatureType, AllowedTypes),
@@ -369,6 +563,7 @@
 
 	valid_linear_encoders_([], _SeenAttributes).
 	valid_linear_encoders_([continuous(Attribute, Mean, Scale)| Encoders], SeenAttributes) :-
+		!,
 		atom(Attribute),
 		valid(float, Mean),
 		valid(positive_float, Scale),

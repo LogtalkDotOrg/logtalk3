@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Stochastic gradient descent classifier supporting one-vs-rest linear models with configurable losses including ``log_loss``, ``hinge``, ``squared_hinge``, ``modified_huber``, and ``perceptron``.',
 		see_also is [dataset_protocol, logistic_regression_classifier, linear_svm_classifier, knn_classifier, nearest_centroid_classifier]
 	]).
@@ -55,6 +55,7 @@
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		^^dataset_examples(Dataset, Examples),
+		^^check_examples(Dataset, Examples),
 		Dataset::class_values(Classes),
 		^^option(feature_scaling(FeatureScaling), Options),
 		^^build_linear_encoders(Attributes, Examples, FeatureScaling, Encoders),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'C4.5 decision tree learning algorithm. Builds a decision tree from a dataset object implementing the ``dataset_protocol`` protocol and provides predicates for exporting the learned tree as a list of predicate clauses or to a file. Supports both discrete and continuous attributes, handles missing values, and supports tree pruning.',
 		see_also is [dataset_protocol, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, adaptive_boosting_classifier]
 	]).
@@ -73,13 +73,10 @@
 	]).
 
 	learn(Dataset, Tree, []) :-
-		dataset_attributes(Dataset, Attributes),
+		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
-		findall(
-			Id-Class-AVs,
-			Dataset::example(Id, Class, AVs),
-			Examples
-		),
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples(Dataset, Examples),
 		build_tree(Examples, AttributeNames, Attributes, Tree).
 
 	predict(Tree, Instance, Class) :-

@@ -355,7 +355,7 @@
   <p class="right" id="classifier-common-0"><span id="index-0"></span><strong>category</strong></p>
 <section id="classifier-common">
 <h1><code class="docutils literal notranslate"><span class="pre">classifier_common</span></code><a class="headerlink" href="#classifier-common" title="Link to this heading"></a></h1>
-<p>Shared predicates for classifier diagnostics, mixed-feature distance calculations, and export.</p>
+<p>Shared predicates for classifier diagnostics, dataset validation, mixed-feature distance calculations, and export.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -365,7 +365,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-07</div>
+<div class="line"><strong>Date:</strong> 2026-05-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -418,17 +418,21 @@
 <li><p><a class="reference internal" href="#valid-linear-encoders-1" id="id11"><code class="docutils literal notranslate"><span class="pre">valid_linear_encoders/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#dataset-attributes-2" id="id12"><code class="docutils literal notranslate"><span class="pre">dataset_attributes/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#dataset-examples-2" id="id13"><code class="docutils literal notranslate"><span class="pre">dataset_examples/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#build-linear-encoders-4" id="id14"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#examples-to-linear-rows-3" id="id15"><code class="docutils literal notranslate"><span class="pre">examples_to_linear_rows/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encode-linear-instance-3" id="id16"><code class="docutils literal notranslate"><span class="pre">encode_linear_instance/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#linear-encoders-feature-count-2" id="id17"><code class="docutils literal notranslate"><span class="pre">linear_encoders_feature_count/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-classifier-metadata-2" id="id18"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-classifier-metadata-3" id="id19"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mixed-feature-distance-5" id="id20"><code class="docutils literal notranslate"><span class="pre">mixed_feature_distance/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-examples-non-empty-2" id="id14"><code class="docutils literal notranslate"><span class="pre">check_examples_non_empty/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-examples-2" id="id15"><code class="docutils literal notranslate"><span class="pre">check_examples/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-complete-examples-2" id="id16"><code class="docutils literal notranslate"><span class="pre">check_complete_examples/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-complete-examples-nonvar-2" id="id17"><code class="docutils literal notranslate"><span class="pre">check_complete_examples_nonvar/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#build-linear-encoders-4" id="id18"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#examples-to-linear-rows-3" id="id19"><code class="docutils literal notranslate"><span class="pre">examples_to_linear_rows/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encode-linear-instance-3" id="id20"><code class="docutils literal notranslate"><span class="pre">encode_linear_instance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#linear-encoders-feature-count-2" id="id21"><code class="docutils literal notranslate"><span class="pre">linear_encoders_feature_count/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-classifier-metadata-2" id="id22"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-classifier-metadata-3" id="id23"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#mixed-feature-distance-5" id="id24"><code class="docutils literal notranslate"><span class="pre">mixed_feature_distance/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id25">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id26">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -668,8 +672,92 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="check-examples-non-empty-2">
+<span id="classifier-common-0-check-examples-non-empty-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_examples_non_empty/2</span></code></a><a class="headerlink" href="#check-examples-non-empty-2" title="Link to this heading"></a></h3>
+<p>Checks that a training example collection is not empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples_non_empty(Dataset,Examples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples_non_empty(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-examples-2">
+<span id="classifier-common-0-check-examples-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_examples/2</span></code></a><a class="headerlink" href="#check-examples-2" title="Link to this heading"></a></h3>
+<p>Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that provided attribute bindings use declared attributes with values matching the declared domains. Missing attribute bindings are allowed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples(Dataset,Examples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-complete-examples-2">
+<span id="classifier-common-0-check-complete-examples-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_complete_examples/2</span></code></a><a class="headerlink" href="#check-complete-examples-2" title="Link to this heading"></a></h3>
+<p>Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with values matching the declared domains. Missing values represented using variables are allowed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_complete_examples(Dataset,Examples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_complete_examples(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="check-complete-examples-nonvar-2">
+<span id="classifier-common-0-check-complete-examples-nonvar-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_complete_examples_nonvar/2</span></code></a><a class="headerlink" href="#check-complete-examples-nonvar-2" title="Link to this heading"></a></h3>
+<p>Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with non-variable values matching the declared domains.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_complete_examples_nonvar(Dataset,Examples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">check_complete_examples_nonvar(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="build-linear-encoders-4">
-<span id="classifier-common-0-build-linear-encoders-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders/4</span></code></a><a class="headerlink" href="#build-linear-encoders-4" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-build-linear-encoders-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_linear_encoders/4</span></code></a><a class="headerlink" href="#build-linear-encoders-4" title="Link to this heading"></a></h3>
 <p>Builds linear-model encoders for continuous and categorical attributes. Continuous encoders optionally standardize features when <code class="docutils literal notranslate"><span class="pre">FeatureScaling</span></code> is true.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -690,7 +778,7 @@
 <hr class="docutils" />
 </section>
 <section id="examples-to-linear-rows-3">
-<span id="classifier-common-0-examples-to-linear-rows-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">examples_to_linear_rows/3</span></code></a><a class="headerlink" href="#examples-to-linear-rows-3" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-examples-to-linear-rows-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">examples_to_linear_rows/3</span></code></a><a class="headerlink" href="#examples-to-linear-rows-3" title="Link to this heading"></a></h3>
 <p>Encodes examples into <code class="docutils literal notranslate"><span class="pre">Features-Class</span></code> rows using the given linear encoders.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -711,7 +799,7 @@
 <hr class="docutils" />
 </section>
 <section id="encode-linear-instance-3">
-<span id="classifier-common-0-encode-linear-instance-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_linear_instance/3</span></code></a><a class="headerlink" href="#encode-linear-instance-3" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-encode-linear-instance-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_linear_instance/3</span></code></a><a class="headerlink" href="#encode-linear-instance-3" title="Link to this heading"></a></h3>
 <p>Encodes an instance into a numeric feature vector using the given linear encoders.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -732,7 +820,7 @@
 <hr class="docutils" />
 </section>
 <section id="linear-encoders-feature-count-2">
-<span id="classifier-common-0-linear-encoders-feature-count-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_encoders_feature_count/2</span></code></a><a class="headerlink" href="#linear-encoders-feature-count-2" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-linear-encoders-feature-count-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">linear_encoders_feature_count/2</span></code></a><a class="headerlink" href="#linear-encoders-feature-count-2" title="Link to this heading"></a></h3>
 <p>Computes the number of numeric features produced by a set of linear encoders.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -753,7 +841,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-classifier-metadata-2">
-<span id="classifier-common-0-valid-classifier-metadata-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/2</span></code></a><a class="headerlink" href="#valid-classifier-metadata-2" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-valid-classifier-metadata-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/2</span></code></a><a class="headerlink" href="#valid-classifier-metadata-2" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata contains the expected model term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -774,7 +862,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-classifier-metadata-3">
-<span id="classifier-common-0-valid-classifier-metadata-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/3</span></code></a><a class="headerlink" href="#valid-classifier-metadata-3" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-valid-classifier-metadata-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid_classifier_metadata/3</span></code></a><a class="headerlink" href="#valid-classifier-metadata-3" title="Link to this heading"></a></h3>
 <p>True when diagnostics metadata contains the expected model term and records the given effective options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -795,7 +883,7 @@
 <hr class="docutils" />
 </section>
 <section id="mixed-feature-distance-5">
-<span id="classifier-common-0-mixed-feature-distance-5"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mixed_feature_distance/5</span></code></a><a class="headerlink" href="#mixed-feature-distance-5" title="Link to this heading"></a></h3>
+<span id="classifier-common-0-mixed-feature-distance-5"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mixed_feature_distance/5</span></code></a><a class="headerlink" href="#mixed-feature-distance-5" title="Link to this heading"></a></h3>
 <p>Computes a distance between two mixed-feature vectors using the given feature types and one of the supported metrics <code class="docutils literal notranslate"><span class="pre">euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">manhattan</span></code>, <code class="docutils literal notranslate"><span class="pre">chebyshev</span></code>, <code class="docutils literal notranslate"><span class="pre">cosine</span></code>, or <code class="docutils literal notranslate"><span class="pre">minkowski(Order)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

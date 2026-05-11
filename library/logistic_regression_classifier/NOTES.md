@@ -73,7 +73,7 @@ Features
 - **Binary and Multiclass Classification**: Learns a joint softmax logistic model with one parameter vector per class.
 - **Continuous Features**: Standardizes numeric attributes using z-score scaling derived from the training data.
 - **Categorical Features**: Expands discrete attributes using one-hot encoding based on the declared dataset attribute values and rejects unseen values with a domain error.
-- **Missing Values**: Encodes missing numeric and categorical values using explicit missing-value indicator features instead of being conflated with baseline feature values.
+- **Missing Values**: Encodes missing numeric and categorical values represented using anonymous variables using explicit missing-value indicator features instead of being conflated with baseline feature values.
 - **Unknown values**: Prediction requests containing categorical values that are not declared by the dataset raise a domain error instead of being silently mapped into an existing feature bucket.
 - **Probability Estimation**: Provides class probability distributions in addition to class predictions.
 - **Classifier Export**: Learned classifiers can be exported as predicate clauses or written to a file.

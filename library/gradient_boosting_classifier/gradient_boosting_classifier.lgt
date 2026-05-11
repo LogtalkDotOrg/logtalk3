@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Gradient boosting classifier using multinomial additive models fitted by regression trees to softmax residuals.',
 		see_also is [dataset_protocol, regression_tree, gradient_boosting_regression, adaptive_boosting_classifier, random_forest_classifier]
 	]).
@@ -55,6 +55,7 @@
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		^^dataset_examples(Dataset, Examples),
+		^^check_examples(Dataset, Examples),
 		Dataset::class_values(Classes),
 		initial_scores(Classes, Examples, InitialScores),
 		initialize_score_vectors(Examples, InitialScores, ScoreVectors0),

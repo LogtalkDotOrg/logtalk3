@@ -8,14 +8,14 @@
 ``classifier_common``
 =====================
 
-Shared predicates for classifier diagnostics, mixed-feature distance calculations, and export.
+Shared predicates for classifier diagnostics, dataset validation, mixed-feature distance calculations, and export.
 
 | **Availability:** 
 |    ``logtalk_load(classification_protocols(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-05-07
+| **Date:** 2026-05-11
 
 | **Compilation flags:**
 |    ``static``
@@ -254,6 +254,82 @@ Collects the dataset training examples as ``Id-Class-AttributeValues`` terms.
 |    ``dataset_examples(Dataset,Examples)``
 | **Mode and number of proofs:**
 |    ``dataset_examples(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: check_examples_non_empty/2
+.. _classifier_common/0::check_examples_non_empty/2:
+
+``check_examples_non_empty/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a training example collection is not empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples_non_empty(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples_non_empty(+object_identifier,+list)`` - ``one``
+
+
+------------
+
+.. index:: check_examples/2
+.. _classifier_common/0::check_examples/2:
+
+``check_examples/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that provided attribute bindings use declared attributes with values matching the declared domains. Missing attribute bindings are allowed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_examples(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_examples(+object_identifier,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: check_complete_examples/2
+.. _classifier_common/0::check_complete_examples/2:
+
+``check_complete_examples/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with values matching the declared domains. Missing values represented using variables are allowed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_complete_examples(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_complete_examples(+object_identifier,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: check_complete_examples_nonvar/2
+.. _classifier_common/0::check_complete_examples_nonvar/2:
+
+``check_complete_examples_nonvar/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with non-variable values matching the declared domains.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_complete_examples_nonvar(Dataset,Examples)``
+| **Mode and number of proofs:**
+|    ``check_complete_examples_nonvar(+object_identifier,+list)`` - ``one_or_error``
 
 
 ------------

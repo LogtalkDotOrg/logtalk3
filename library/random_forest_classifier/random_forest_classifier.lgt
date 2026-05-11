@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Random Forest classifier using C4.5 decision trees as base learners. Builds an ensemble of decision trees trained on bootstrap samples with random feature subsets and combines their predictions through majority voting.',
 		see_also is [dataset_protocol, c45_classifier, isolation_forest_anomaly_detector, knn_classifier, naive_bayes_classifier, nearest_centroid_classifier, adaptive_boosting_classifier]
 	]).
@@ -61,8 +61,10 @@
 		^^merge_options(UserOptions, Options),
 		^^option(number_of_trees(NumTrees), Options),
 		% Get attribute information from dataset
-		dataset_attributes(Dataset, Attributes),
+		^^dataset_attributes(Dataset, Attributes),
 		keys(Attributes, AttributeNames),
+		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples(Dataset, Examples),
 		length(AttributeNames, NumFeatures),
 		% Get class values
 		Dataset::class_values(ClassValues),

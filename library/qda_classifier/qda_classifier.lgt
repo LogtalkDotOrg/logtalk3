@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Quadratic Discriminant Analysis classifier for continuous datasets using class-specific regularized covariance models.',
 		see_also is [dataset_protocol, lda_classifier, nearest_centroid_classifier]
 	]).
@@ -61,8 +61,8 @@
 		^^dataset_attributes(Dataset, Attributes),
 		check_continuous_attributes(Attributes, AttributeNames),
 		^^dataset_examples(Dataset, Examples),
+		^^check_complete_examples_nonvar(Dataset, Examples),
 		Dataset::class_values(Classes),
-		check_examples(Examples, AttributeNames, Classes),
 		^^option(feature_scaling(FeatureScaling), Options),
 		^^build_linear_encoders(Attributes, Examples, FeatureScaling, Encoders),
 		examples_to_rows(Examples, Encoders, Rows),
@@ -94,51 +94,6 @@
 	attribute_names([], []).
 	attribute_names([Attribute-_| Attributes], [Attribute| AttributeNames]) :-
 		attribute_names(Attributes, AttributeNames).
-
-	check_examples([], _AttributeNames, _Classes).
-	check_examples([_-Class-AttributeValues| Examples], AttributeNames, Classes) :-
-		memberchk(Class, Classes),
-		check_attribute_values(AttributeNames, AttributeValues),
-		check_examples(Examples, AttributeNames, Classes).
-
-	check_attribute_values(AttributeNames, AttributeValues) :-
-		attribute_value_names(AttributeValues, Names),
-		(   ^^valid_attribute_names(Names) ->
-			true
-		;   duplicate_attribute_name(Names, Duplicate),
-			domain_error(attribute_occurrences, Duplicate)
-		),
-		check_declared_attributes(Names, AttributeNames),
-		check_required_attributes(AttributeNames, AttributeValues).
-
-	attribute_value_names([], []).
-	attribute_value_names([Attribute-_| AttributeValues], [Attribute| Attributes]) :-
-		attribute_value_names(AttributeValues, Attributes).
-
-	duplicate_attribute_name([Attribute| Attributes], Attribute) :-
-		memberchk(Attribute, Attributes),
-		!.
-	duplicate_attribute_name([_| Attributes], Attribute) :-
-		duplicate_attribute_name(Attributes, Attribute).
-
-	check_declared_attributes([], _AttributeNames).
-	check_declared_attributes([Attribute| Attributes], AttributeNames) :-
-		(   memberchk(Attribute, AttributeNames) ->
-			true
-		;   domain_error(declared_attribute, Attribute)
-		),
-		check_declared_attributes(Attributes, AttributeNames).
-
-	check_required_attributes([], _AttributeValues).
-	check_required_attributes([Attribute| AttributeNames], AttributeValues) :-
-		(   memberchk(Attribute-Value, AttributeValues) ->
-			(   number(Value) ->
-				true
-			;   type_error(number, Value)
-			)
-		;   existence_error(attribute, Attribute)
-		),
-		check_required_attributes(AttributeNames, AttributeValues).
 
 	examples_to_rows([], _Encoders, []).
 	examples_to_rows([_-Class-AttributeValues| Examples], Encoders, [Class-Features| Rows]) :-

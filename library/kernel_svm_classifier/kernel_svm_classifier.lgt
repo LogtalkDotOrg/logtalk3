@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-11,
 		comment is 'Kernel support vector machine classifier using one-vs-rest dual margin models with linear, polynomial, and radial basis function kernels.',
 		see_also is [dataset_protocol, linear_svm_classifier, logistic_regression_classifier, kernel_pca_projection]
 	]).
@@ -59,6 +59,7 @@
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		^^dataset_examples(Dataset, Examples),
+		^^check_examples(Dataset, Examples),
 		Dataset::class_values(Classes),
 		^^option(feature_scaling(FeatureScaling), Options),
 		^^build_linear_encoders(Attributes, Examples, FeatureScaling, Encoders),
