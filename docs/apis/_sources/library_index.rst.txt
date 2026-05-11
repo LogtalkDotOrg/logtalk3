@@ -1405,6 +1405,18 @@ To load any library (including developer tools, ports, and contributions), use t
    json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>
    json_lines_protocol <json_lines_protocol_0>
 
+:ref:`json_pointer <library_json_pointer>`
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   json_pointer <json_pointer_0>
+   json_pointer(StringRepresentation) <json_pointer_1>
+   json_pointer_protocol <json_pointer_protocol_0>
+
 :ref:`json_rpc <library_json_rpc>`
 ----------------------------------
 

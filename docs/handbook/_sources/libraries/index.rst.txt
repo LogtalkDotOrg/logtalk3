@@ -128,6 +128,7 @@ directory in the ``NOTES.md`` file.
    json
    json_ld
    json_lines
+   json_pointer
    json_rpc
    json_schema
    kcenters_clusterer

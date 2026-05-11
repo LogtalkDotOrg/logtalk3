@@ -360,6 +360,24 @@ adjacency and neighborhood queries, fixed and adaptive bounding-box covering,
 hierarchy navigation and compression, integer-backed and bit-precision
 representations, and polygon and polyline covering predicates.
 
+* ADDED: New `iso_639` library implementing the ISO 639 standard for language
+codes. Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_3166` library implementing the ISO 3166 standard for country
+codes. Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_4217` library implementing the ISO 4217 standard for currency
+codes. Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `iso_9362` library implementing the ISO 9362 standard for
+BIC/SWIFT codes. Requires a backend supporting Unicode and the `encoding/1`
+directive.
+
+* ADDED: New `iso_13616` library implementing the ISO 13616 standard for IBAN
+strings. Requires a backend supporting Unicode and the `encoding/1` directive.
+
+* ADDED: New `json_pointer` library implementing the RFC 6901 standard.
+
 * ADDED: New `wkt_wkb` library implementing the Well-Known Text and Well-Known
 Binary geometry interchange format.
 
@@ -373,21 +391,6 @@ libraries, allowing more detailed exports.
 * ADDED: New `skip_code_coverage.lgt` file with a hack for running the Logtalk
 distribution tests in a CI/CD pipeline without generating code coverage stats
 for faster run times.
-
-* ADDED: New `iso_639` implementing the ISO 639 standard for language codes.
-Requires a backend supporting Unicode and the `encoding/1` directive.
-
-* ADDED: New `iso_3166` implementing the ISO 3166 standard for country codes.
-Requires a backend supporting Unicode and the `encoding/1` directive.
-
-* ADDED: New `iso_4217` implementing the ISO 4217 standard for currency codes.
-Requires a backend supporting Unicode and the `encoding/1` directive.
-
-* ADDED: New `iso_9362` implementing the ISO 9362 standard for BIC/SWIFT codes.
-Requires a backend supporting Unicode and the `encoding/1` directive.
-
-* ADDED: New `iso_13616` implementing the ISO 13616 standard for IBAN strings.
-Requires a backend supporting Unicode and the `encoding/1` directive.
 
 * ADDED: New `minkowski_distance/4` predicate to the `types` library.
 
@@ -452,6 +455,8 @@ tail-recursive.
 
 * IMPROVED: Rewritten two `yaml` library auxiliary predicates to be
 tail-recursive.
+
+* UPDATED: The `json_schema` library to reuse the new `json_pointer` library.
 
 * UPDATED: The `avro`, `cbor`, and `protobuf` libraries to reuse the new
 `ieee_754` library.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-03-23,
+		date is 2026-05-11,
 		comment is 'Tests for the json_schema library.'
 	]).
 
@@ -449,6 +449,15 @@
 	test(validate_ref_unresolved, true(Errors \== [])) :-
 		parse(atom('{"properties": {"x": {"$ref": "#/$defs/nonexistent"}}}'), Schema),
 		validate(Schema, {x-1}, Errors).
+
+	% $ref can target any local schema location, not only $defs or definitions
+	test(validate_ref_local_schema_location_valid, true) :-
+		parse(atom('{"properties": {"name": {"type": "string"}, "alias": {"$ref": "#/properties/name"}}}'), Schema),
+		validate(Schema, {alias-hello}).
+
+	test(validate_ref_local_schema_location_invalid, false) :-
+		parse(atom('{"properties": {"name": {"type": "string"}, "alias": {"$ref": "#/properties/name"}}}'), Schema),
+		validate(Schema, {alias-42}).
 
 	% $ref to a local file root schema
 	test(validate_ref_local_file_valid, true) :-

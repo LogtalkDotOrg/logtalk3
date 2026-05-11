@@ -1306,6 +1306,18 @@ To load an entity, always load the library that includes it using the goal ``log
    json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>
    json_lines_protocol <json_lines_protocol_0>
 
+``library/json_pointer/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   json_pointer <json_pointer_0>
+   json_pointer(StringRepresentation) <json_pointer_1>
+   json_pointer_protocol <json_pointer_protocol_0>
+
 ``library/json_rpc/``
 ---------------------
 

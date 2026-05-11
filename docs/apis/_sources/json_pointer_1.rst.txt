@@ -1,0 +1,62 @@
+.. index:: single: json_pointer(StringRepresentation)
+.. _json_pointer/1:
+
+.. rst-class:: right
+
+**object**
+
+``json_pointer(StringRepresentation)``
+======================================
+
+* ``StringRepresentation`` - Text representation to be used for reference tokens. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+JSON Pointer (RFC 6901) parser, generator, and evaluator.
+
+| **Availability:** 
+|    ``logtalk_load(json_pointer(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`json_pointer_protocol <json_pointer_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_pointer_protocol/0::evaluate/3`  :ref:`json_pointer_protocol/0::generate/2`  :ref:`json_pointer_protocol/0::generate_fragment/2`  :ref:`json_pointer_protocol/0::parse/2`  :ref:`json_pointer_protocol/0::parse_fragment/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

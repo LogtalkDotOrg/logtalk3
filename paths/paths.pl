@@ -208,6 +208,7 @@ logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
 logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(json_lines, library('json_lines/')).
+logtalk_library_path(json_pointer, library('json_pointer/')).
 logtalk_library_path(json_rpc, library('json_rpc/')).
 logtalk_library_path(json_schema, library('json_schema/')).
 logtalk_library_path(kcenters_clusterer, library('kcenters_clusterer/')).

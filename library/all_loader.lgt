@@ -95,6 +95,7 @@
 		json(loader),
 		json_rpc(loader),
 		json_lines(loader),
+		json_pointer(loader),
 		json_schema(loader),
 		ksuid(loader),
 		json_ld(loader),

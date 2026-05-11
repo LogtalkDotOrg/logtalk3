@@ -23,9 +23,9 @@
 	implements(json_schema_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-05-11,
 		comment is 'JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/draft-2020-12.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation used for JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -36,6 +36,10 @@
 
 	:- uses(json(_ObjectRepresentation_, _PairRepresentation_, _StringRepresentation_), [
 		parse/2 as json_parse/2
+	]).
+
+	:- uses(json_pointer(atom), [
+		parse_fragment/2 as parse_json_pointer_fragment/2, evaluate/3 as evaluate_json_pointer/3
 	]).
 
 	:- uses(os, [
@@ -57,14 +61,19 @@
 	normalize_schema(Schema, Schema) :-
 		is_schema_object(Schema),
 		!.
-	normalize_schema(@true, @true) :- !.
-	normalize_schema(@false, @false) :- !.
+	normalize_schema(@true, @true) :-
+		!.
+	normalize_schema(@false, @false) :-
+		!.
 	normalize_schema(Schema, _) :-
 		domain_error(json_schema, Schema).
 
-	is_schema_object({}) :- !.
-	is_schema_object({_}) :- !.
-	is_schema_object(json(_)) :- !.
+	is_schema_object({}) :-
+		!.
+	is_schema_object({_}) :-
+		!.
+	is_schema_object(json(_)) :-
+		!.
 
 	% Validate JSON against schema (deterministic, fails if invalid)
 	validate(Schema, JSON) :-
@@ -92,12 +101,12 @@
 		decompose_file_name(ExpandedPath, BaseDirectory, _).
 	schema_source_directory(_, _).
 
-	schema_resource(Schema, Defs, resource(Defs, BaseDirectory)) :-
+	schema_resource(Schema, Defs, resource(Schema, Defs, BaseDirectory)) :-
 		is_schema_object(Schema),
 		schema_to_pairs(Schema, Pairs),
 		get_pair_value('$logtalk_source_path$', Pairs, BaseDirectory),
 		!.
-	schema_resource(_, Defs, resource(Defs, '')).
+	schema_resource(Schema, Defs, resource(Schema, Defs, '')).
 
 	pair_term(Name, Value, Name-Value) :-
 		_PairRepresentation_ == dash,
@@ -107,8 +116,10 @@
 		!.
 	pair_term(Name, Value, ':'(Name, Value)).
 
-	add_pair_to_schema({}, Pair, {Pair}) :- !.
-	add_pair_to_schema({Pairs}, Pair, {(Pair, Pairs)}) :- !.
+	add_pair_to_schema({}, Pair, {Pair}) :-
+		!.
+	add_pair_to_schema({Pairs}, Pair, {(Pair, Pairs)}) :-
+		!.
 	add_pair_to_schema(json(Pairs), Pair, json([Pair| Pairs])).
 
 	% Extract $defs or definitions from a schema
@@ -126,12 +137,16 @@
 		).
 
 	% Boolean schemas
-	validate_value(@true, _, _, _, []) :- !.
-	validate_value(@false, _, Path, _, [error(Path, 'Schema is false, always fails')]) :- !.
+	validate_value(@true, _, _, _, []) :-
+		!.
+	validate_value(@false, _, Path, _, [error(Path, 'Schema is false, always fails')]) :-
+		!.
 
 	% Empty schema matches everything
-	validate_value({}, _, _, _, []) :- !.
-	validate_value(json([]), _, _, _, []) :- !.
+	validate_value({}, _, _, _, []) :-
+		!.
+	validate_value(json([]), _, _, _, []) :-
+		!.
 
 	% Object schema validation
 	validate_value(Schema, JSON, Path, Defs, Errors) :-
@@ -142,7 +157,8 @@
 	schema_to_pairs({Pairs}, PairsList) :-
 		!,
 		curly_pairs_to_list(Pairs, PairsList).
-	schema_to_pairs(json(Pairs), Pairs) :- !.
+	schema_to_pairs(json(Pairs), Pairs) :-
+		!.
 
 	curly_pairs_to_list((Pair, Rest), [Pair| RestList]) :-
 		!,
@@ -286,9 +302,12 @@
 		validate_not(Schema, JSON, Path, Defs, Errors).
 
 	% Conditional keywords
-	validate_keyword(if, _, _, _, _, []) :- !.  % Handled with then/else
-	validate_keyword(then, _, _, _, _, []) :- !.
-	validate_keyword(else, _, _, _, _, []) :- !.
+	validate_keyword(if, _, _, _, _, []) :-
+		!.  % Handled with then/else
+	validate_keyword(then, _, _, _, _, []) :-
+		!.
+	validate_keyword(else, _, _, _, _, []) :-
+		!.
 
 	% Schema reference
 	validate_keyword('$ref', Ref, JSON, Path, Defs, Errors) :-
@@ -296,19 +315,32 @@
 		validate_ref(Ref, JSON, Path, Defs, Errors).
 
 	% Annotation keywords (no validation)
-	validate_keyword('$schema', _, _, _, _, []) :- !.
-	validate_keyword('$id', _, _, _, _, []) :- !.
-	validate_keyword(title, _, _, _, _, []) :- !.
-	validate_keyword(description, _, _, _, _, []) :- !.
-	validate_keyword(default, _, _, _, _, []) :- !.
-	validate_keyword(examples, _, _, _, _, []) :- !.
-	validate_keyword(deprecated, _, _, _, _, []) :- !.
-	validate_keyword(readOnly, _, _, _, _, []) :- !.
-	validate_keyword(writeOnly, _, _, _, _, []) :- !.
-	validate_keyword('$comment', _, _, _, _, []) :- !.
-	validate_keyword(definitions, _, _, _, _, []) :- !.
-	validate_keyword('$defs', _, _, _, _, []) :- !.
-	validate_keyword('$logtalk_source_path$', _, _, _, _, []) :- !.
+	validate_keyword('$schema', _, _, _, _, []) :-
+		!.
+	validate_keyword('$id', _, _, _, _, []) :-
+		!.
+	validate_keyword(title, _, _, _, _, []) :-
+		!.
+	validate_keyword(description, _, _, _, _, []) :-
+		!.
+	validate_keyword(default, _, _, _, _, []) :-
+		!.
+	validate_keyword(examples, _, _, _, _, []) :-
+		!.
+	validate_keyword(deprecated, _, _, _, _, []) :-
+		!.
+	validate_keyword(readOnly, _, _, _, _, []) :-
+		!.
+	validate_keyword(writeOnly, _, _, _, _, []) :-
+		!.
+	validate_keyword('$comment', _, _, _, _, []) :-
+		!.
+	validate_keyword(definitions, _, _, _, _, []) :-
+		!.
+	validate_keyword('$defs', _, _, _, _, []) :-
+		!.
+	validate_keyword('$logtalk_source_path$', _, _, _, _, []) :-
+		!.
 
 	% Format keyword (optional validation for portable formats)
 	validate_keyword(format, Format, JSON, Path, _Defs, Errors) :-
@@ -336,18 +368,30 @@
 		;	Errors = [error(Path, expected_one_of_types(Types))]
 		).
 
-	check_type(null, @null) :- !.
-	check_type(boolean, @true) :- !.
-	check_type(boolean, @false) :- !.
-	check_type(string, Value) :- atom(Value), !.
-	check_type(string, chars(_)) :- !.
-	check_type(string, codes(_)) :- !.
-	check_type(integer, Value) :- integer(Value), !.
-	check_type(number, Value) :- number(Value), !.
-	check_type(array, Value) :- is_list(Value), !.
-	check_type(object, {}) :- !.
-	check_type(object, {_}) :- !.
-	check_type(object, json(_)) :- !.
+	check_type(null, @null) :-
+		!.
+	check_type(boolean, @true) :-
+		!.
+	check_type(boolean, @false) :-
+		!.
+	check_type(string, Value) :-
+		atom(Value), !.
+	check_type(string, chars(_)) :-
+		!.
+	check_type(string, codes(_)) :-
+		!.
+	check_type(integer, Value) :-
+		integer(Value), !.
+	check_type(number, Value) :-
+		number(Value), !.
+	check_type(array, Value) :-
+		is_list(Value), !.
+	check_type(object, {}) :-
+		!.
+	check_type(object, {_}) :-
+		!.
+	check_type(object, json(_)) :-
+		!.
 
 	% =============== Enum validation ===============
 
@@ -387,13 +431,19 @@
 
 	validate_pattern(_, _, _, []).  % Pattern matching requires regex support
 
-	is_json_string(Value) :- atom(Value), !.
-	is_json_string(chars(_)) :- !.
-	is_json_string(codes(_)) :- !.
+	is_json_string(Value) :-
+		atom(Value), !.
+	is_json_string(chars(_)) :-
+		!.
+	is_json_string(codes(_)) :-
+		!.
 
-	json_string_length(Atom, Len) :- atom(Atom), !, atom_length(Atom, Len).
-	json_string_length(chars(Chars), Len) :- !, length(Chars, Len).
-	json_string_length(codes(Codes), Len) :- length(Codes, Len).
+	json_string_length(Atom, Len) :-
+		atom(Atom), !, atom_length(Atom, Len).
+	json_string_length(chars(Chars), Len) :-
+		!, length(Chars, Len).
+	json_string_length(codes(Codes), Len) :-
+		length(Codes, Len).
 
 	% =============== Numeric constraints ===============
 
@@ -448,7 +498,8 @@
 		;	validate_all_items(ItemSchema, JSON, Path, Defs, 0, Errors)
 		).
 
-	validate_all_items(_, [], _, _, _, []) :- !.
+	validate_all_items(_, [], _, _, _, []) :-
+		!.
 	validate_all_items(Schema, [Item| Items], Path, Defs, Index, Errors) :-
 		append(Path, [Index], ItemPath),
 		validate_value(Schema, Item, ItemPath, Defs, ItemErrors),
@@ -462,8 +513,10 @@
 		;	validate_prefix_items_list(Schemas, JSON, Path, Defs, 0, Errors)
 		).
 
-	validate_prefix_items_list([], _, _, _, _, []) :- !.
-	validate_prefix_items_list(_, [], _, _, _, []) :- !.
+	validate_prefix_items_list([], _, _, _, _, []) :-
+		!.
+	validate_prefix_items_list(_, [], _, _, _, []) :-
+		!.
 	validate_prefix_items_list([Schema| Schemas], [Item| Items], Path, Defs, Index, Errors) :-
 		append(Path, [Index], ItemPath),
 		validate_value(Schema, Item, ItemPath, Defs, ItemErrors),
@@ -497,7 +550,8 @@
 		;	Errors = [error(Path, items_not_unique)]
 		).
 
-	all_unique([]) :- !.
+	all_unique([]) :-
+		!.
 	all_unique([H| T]) :-
 		\+ member(H, T),
 		all_unique(T).
@@ -521,7 +575,8 @@
 			validate_defined_properties(PropDefs, Pairs, Path, Defs, Errors)
 		).
 
-	validate_defined_properties([], _, _, _, []) :- !.
+	validate_defined_properties([], _, _, _, []) :-
+		!.
 	validate_defined_properties([PropName-PropSchema| RestDefs], Pairs, Path, Defs, Errors) :-
 		(	get_pair_value(PropName, Pairs, Value) ->
 			append(Path, [PropName], PropPath),
@@ -538,7 +593,8 @@
 			validate_required_list(ReqList, Pairs, Path, Errors)
 		).
 
-	validate_required_list([], _, _, []) :- !.
+	validate_required_list([], _, _, []) :-
+		!.
 	validate_required_list([Prop| Props], Pairs, Path, Errors) :-
 		(	get_pair_value(Prop, Pairs, _) ->
 			PropErrors = []
@@ -583,7 +639,8 @@
 			validate_all_property_names(Schema, Pairs, Path, Defs, Errors)
 		).
 
-	validate_all_property_names(_, [], _, _, []) :- !.
+	validate_all_property_names(_, [], _, _, []) :-
+		!.
 	validate_all_property_names(Schema, [Name-_| Rest], Path, Defs, Errors) :-
 		validate_value(Schema, Name, Path, Defs, NameErrors),
 		append(NameErrors, RestErrors, Errors),
@@ -592,15 +649,20 @@
 	validate_pattern_properties(_, _, _, []).  % Requires regex support
 
 	% Object helper predicates
-	is_json_object({}) :- !.
-	is_json_object({_}) :- !.
-	is_json_object(json(_)) :- !.
+	is_json_object({}) :-
+		!.
+	is_json_object({_}) :-
+		!.
+	is_json_object(json(_)) :-
+		!.
 
-	json_object_pairs({}, []) :- !.
+	json_object_pairs({}, []) :-
+		!.
 	json_object_pairs({Pairs}, PairsList) :-
 		!,
 		curly_pairs_to_list(Pairs, PairsList).
-	json_object_pairs(json(Pairs), Pairs) :- !.
+	json_object_pairs(json(Pairs), Pairs) :-
+		!.
 
 	get_pair_value(Name, Pairs, Value) :-
 		member(Name-Value, Pairs), !.
@@ -614,7 +676,8 @@
 	validate_all_of(Schemas, JSON, Path, Defs, Errors) :-
 		validate_all_of_list(Schemas, JSON, Path, Defs, Errors).
 
-	validate_all_of_list([], _, _, _, []) :- !.
+	validate_all_of_list([], _, _, _, []) :-
+		!.
 	validate_all_of_list([Schema| Schemas], JSON, Path, Defs, Errors) :-
 		validate_value(Schema, JSON, Path, Defs, SchemaErrors),
 		append(SchemaErrors, RestErrors, Errors),
@@ -655,21 +718,21 @@
 		).
 
 	% Resolve a local or external reference to a schema
-	resolve_ref(Ref, resource(Defs, BaseDirectory), Schema, Resource) :-
+	resolve_ref(Ref, resource(RootSchema, Defs, BaseDirectory), Schema, Resource) :-
 		atom(Ref),
 		split_ref_uri(Ref, FilePart, Fragment),
 		(	FilePart == '' ->
-			resolve_local_ref(Fragment, Defs, Schema),
-			Resource = resource(Defs, BaseDirectory)
+			resolve_local_ref(Fragment, RootSchema, Schema),
+			Resource = resource(RootSchema, Defs, BaseDirectory)
 		;	resolve_external_ref(FilePart, Fragment, BaseDirectory, Schema, Resource)
 		).
 
-	resolve_external_ref(FilePart, Fragment, BaseDirectory, Schema, resource(Defs, ResolvedBaseDirectory)) :-
+	resolve_external_ref(FilePart, Fragment, BaseDirectory, Schema, resource(RootSchema, Defs, ResolvedBaseDirectory)) :-
 		resolve_ref_file(FilePart, BaseDirectory, FilePath),
 		catch(parse(file(FilePath), RootSchema), _, fail),
 		extract_definitions(RootSchema, Defs),
-		schema_resource(RootSchema, Defs, resource(Defs, ResolvedBaseDirectory)),
-		resolve_external_fragment(Fragment, RootSchema, Defs, Schema).
+		schema_resource(RootSchema, Defs, resource(RootSchema, Defs, ResolvedBaseDirectory)),
+		resolve_local_ref(Fragment, RootSchema, Schema).
 
 	resolve_ref_file(FilePart, '', FilePath) :-
 		!,
@@ -686,53 +749,9 @@
 			Fragment = '#'
 		).
 
-	resolve_local_ref(Fragment, Defs, Schema) :-
-		atom_codes(Fragment, Codes),
-		parse_json_pointer(Codes, Segments),
-		resolve_pointer_segments(Segments, Defs, Schema).
-
-	resolve_external_fragment('#', RootSchema, _, RootSchema) :- !.
-	resolve_external_fragment(Fragment, _, Defs, Schema) :-
-		resolve_local_ref(Fragment, Defs, Schema).
-
-	% Parse JSON Pointer fragments
-	parse_json_pointer([0'#, 0'/| Rest], Segments) :-
-		!,
-		split_by_slash(Rest, Segments).
-	parse_json_pointer([0'#], []) :- !.  % Root reference
-	parse_json_pointer(_, []) :- fail.  % Invalid pointer
-
-	% Split path by / character
-	split_by_slash([], []) :- !.
-	split_by_slash(Codes, [Segment| Rest]) :-
-		split_segment(Codes, SegmentCodes, Remaining),
-		decode_pointer_segment_codes(SegmentCodes, DecodedCodes),
-		atom_codes(Segment, DecodedCodes),
-		split_by_slash(Remaining, Rest).
-
-	split_segment([], [], []) :- !.
-	split_segment([0'/| Rest], [], Rest) :- !.
-	split_segment([C| Cs], [C| Segment], Rest) :-
-		split_segment(Cs, Segment, Rest).
-
-	decode_pointer_segment_codes([], []) :- !.
-	decode_pointer_segment_codes([0'~, 0'0| Codes], [0'~| DecodedCodes]) :-
-		!,
-		decode_pointer_segment_codes(Codes, DecodedCodes).
-	decode_pointer_segment_codes([0'~, 0'1| Codes], [0'/| DecodedCodes]) :-
-		!,
-		decode_pointer_segment_codes(Codes, DecodedCodes).
-	decode_pointer_segment_codes([Code| Codes], [Code| DecodedCodes]) :-
-		decode_pointer_segment_codes(Codes, DecodedCodes).
-
-	% Resolve pointer segments against schema definitions
-	resolve_pointer_segments(['$defs', Name], Defs, Schema) :-
-		!,
-		get_pair_value(Name, Defs, Schema).
-	resolve_pointer_segments([definitions, Name], Defs, Schema) :-
-		!,
-		get_pair_value(Name, Defs, Schema).
-	resolve_pointer_segments([], _, @true) :- !.  % Empty ref = root = accept all
+	resolve_local_ref(Fragment, RootSchema, Schema) :-
+		parse_json_pointer_fragment(atom(Fragment), Segments),
+		evaluate_json_pointer(Segments, RootSchema, Schema).
 
 	% =============== Format validation ===============
 
@@ -895,7 +914,8 @@
 		number_codes(IntPart, IntCodes),
 		parse_seconds_rest(Rest, IntPart, Second).
 
-	parse_seconds_rest([], IntPart, IntPart) :- !.
+	parse_seconds_rest([], IntPart, IntPart) :-
+		!.
 	parse_seconds_rest([0'.| FracAndTZ], IntPart, Second) :-
 		!,
 		parse_fraction_and_tz(FracAndTZ, Frac, _TZ),
@@ -907,7 +927,8 @@
 		split_at_timezone(Codes, FracCodes, TZ),
 		compute_fraction(FracCodes, Frac).
 
-	compute_fraction([], 0) :- !.
+	compute_fraction([], 0) :-
+		!.
 	compute_fraction(FracCodes, Frac) :-
 		all_digits(FracCodes),
 		length(FracCodes, Len),
@@ -974,7 +995,8 @@
 		valid_ipv4_octet(Octet),
 		all_valid_ipv4_octets(Octets).
 
-	split_by_dot([], [[]]) :- !.
+	split_by_dot([], [[]]) :-
+		!.
 	split_by_dot([0'.| Rest], [[]| Parts]) :-
 		!,
 		split_by_dot(Rest, Parts).
@@ -1026,7 +1048,8 @@
 		valid_ipv6_group(Group),
 		all_valid_ipv6_groups(Groups).
 
-	split_by_colon([], [[]]) :- !.
+	split_by_colon([], [[]]) :-
+		!.
 	split_by_colon([0':| Rest], [[]| Parts]) :-
 		!,
 		split_by_colon(Rest, Parts).
@@ -1044,9 +1067,12 @@
 		is_hex_digit(C),
 		all_hex_digits(Cs).
 
-	is_hex_digit(C) :- C >= 0'0, C =< 0'9, !.
-	is_hex_digit(C) :- C >= 0'a, C =< 0'f, !.
-	is_hex_digit(C) :- C >= 0'A, C =< 0'F.
+	is_hex_digit(C) :-
+		C >= 0'0, C =< 0'9, !.
+	is_hex_digit(C) :-
+		C >= 0'a, C =< 0'f, !.
+	is_hex_digit(C) :-
+		C >= 0'A, C =< 0'F.
 
 	% =============== UUID format validation ===============
 	% Pattern: 8-4-4-4-12 hex digits

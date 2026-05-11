@@ -57,7 +57,7 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 	`ulid`, and `uuid`.
 - Interchange formats and wire protocols:
 	`amqp`, `avro`, `base32`, `base58`, `base64`, `base85`, `cbor`,
-	`csv`, `json`, `json_ld`, `json_lines`, `json_rpc`, `json_schema`,
+	`csv`, `json`, `json_ld`, `json_lines`, `json_pointer`, `json_rpc`, `json_schema`,
 	`message_pack`, `mcp_server`, `protobuf`, `stomp`, `toml`, `toon`,
 	`tsv`, and `yaml`.
 - Coordination and data stores:
