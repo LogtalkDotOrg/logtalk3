@@ -59,7 +59,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
-		check_continuous_attributes(Attributes, AttributeNames),
+		check_continuous_attributes(Attributes),
 		^^dataset_examples(Dataset, Examples),
 		^^check_complete_examples_nonvar(Dataset, Examples),
 		Dataset::class_values(Classes),
@@ -78,22 +78,13 @@
 		encode_instance(Encoders, Instance, Features),
 		model_scores(Models, Features, Scores).
 
-	check_continuous_attributes(Attributes, AttributeNames) :-
-		attributes_are_continuous(Attributes),
-		attribute_names(Attributes, AttributeNames),
-		^^valid_attribute_names(AttributeNames).
-
-	attributes_are_continuous([]).
-	attributes_are_continuous([Attribute-Values| Attributes]) :-
+	check_continuous_attributes([]).
+	check_continuous_attributes([Attribute-Values| Attributes]) :-
 		(   Values == continuous ->
 			true
 		;   domain_error(continuous_attribute, Attribute)
 		),
-		attributes_are_continuous(Attributes).
-
-	attribute_names([], []).
-	attribute_names([Attribute-_| Attributes], [Attribute| AttributeNames]) :-
-		attribute_names(Attributes, AttributeNames).
+		check_continuous_attributes(Attributes).
 
 	examples_to_rows([], _Encoders, []).
 	examples_to_rows([_-Class-AttributeValues| Examples], Encoders, [Class-Features| Rows]) :-

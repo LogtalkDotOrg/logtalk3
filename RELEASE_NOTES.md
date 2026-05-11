@@ -68,7 +68,8 @@ with this change).
 vectors and matrices.
 
 * ADDED: Predicates `check_classifier/1` and `valid_classifier/1` to the
-`classification_protocols` library.
+`classification_protocols` library. Also added protected predicates for
+training dataset validation used by the classifier libraries.
 
 * ADDED: New `clustering_protocols` library providing protocols and datasets
 to support the implementation of clustering libraries.
