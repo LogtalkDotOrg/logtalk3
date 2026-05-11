@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-05-11,
 		comment is 'Unit tests for the "nmea" library.'
 	]).
 
@@ -34,6 +34,10 @@
 	]).
 
 	cover(nmea).
+
+	cleanup :-
+		^^clean_file('test_nmea_input.txt'),
+		^^clean_file('test_nmea_stream.txt').
 
 	test(nmea_parse_empty_01, deterministic(Sentences == [])) :-
 		parse(atom(''), Sentences).
@@ -53,15 +57,17 @@
 		talker(Sentence, Talker),
 		sentence_type(Sentence, Type).
 
-	test(nmea_parse_file_source_01, deterministic(Talker-Type == gp-rmc), [cleanup(^^clean_file('test_nmea_input.txt'))]) :-
-		^^create_text_file('test_nmea_input.txt',  '$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W,A*07'),
-		parse(file('test_nmea_input.txt'), [Sentence]),
+	test(nmea_parse_file_source_01, deterministic(Talker-Type == gp-rmc)) :-
+		^^file_path('test_nmea_input.txt', Path),
+		^^create_text_file(Path, '$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W,A*07'),
+		parse(file(Path), [Sentence]),
 		talker(Sentence, Talker),
 		sentence_type(Sentence, Type).
 
-	test(nmea_parse_stream_source_01, deterministic(Talker-Type == gp-gsa), [cleanup(^^clean_file('test_nmea_stream.txt'))]) :-
-		^^create_text_file('test_nmea_stream.txt', '$GPGSA,A,3,04,05,09,12,,,,,,,,,1.8,1.0,1.5*35'),
-		open('test_nmea_stream.txt', read, Input),
+	test(nmea_parse_stream_source_01, deterministic(Talker-Type == gp-gsa)) :-
+		^^file_path('test_nmea_stream.txt', Path),
+		^^create_text_file(Path, '$GPGSA,A,3,04,05,09,12,,,,,,,,,1.8,1.0,1.5*35'),
+		open(Path, read, Input),
 		parse(stream(Input), [Sentence]),
 		close(Input),
 		talker(Sentence, Talker),

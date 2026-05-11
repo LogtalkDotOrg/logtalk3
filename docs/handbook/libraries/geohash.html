@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>geohash &mdash; Logtalk 3.100.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=da5c6007"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.100.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">geohash</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/geohash.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="geohash">
+<span id="library-geohash"></span><h1><code class="docutils literal notranslate"><span class="pre">geohash</span></code><a class="headerlink" href="#geohash" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">geohash</span></code> library provides a <code class="docutils literal notranslate"><span class="pre">geohash_protocol</span></code> protocol and a
+<code class="docutils literal notranslate"><span class="pre">geohash</span></code> object for encoding and decoding geographic coordinates
+using the standard geohash algorithm.</p>
+<p>It uses the standard geohash base-32 alphabet:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0123456789bcdefghjkmnpqrstuvwxyz</span></code></p></li>
+</ul>
+<p>The library complements the <code class="docutils literal notranslate"><span class="pre">geospatial</span></code> library and uses the same
+<code class="docutils literal notranslate"><span class="pre">geographic(Latitude,Longitude)</span></code> coordinate representation and
+<code class="docutils literal notranslate"><span class="pre">bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))</span></code>
+bounding-box representation.</p>
+<p>For encoding, longitudes are canonicalized to the <code class="docutils literal notranslate"><span class="pre">[-180.0,180.0[</span></code>
+range so that <code class="docutils literal notranslate"><span class="pre">geographic(Latitude,180.0)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">geographic(Latitude,-180.0)</span></code> encode to the same geohash.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#geohash">../../apis/library_index.html#geohash</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(geohash(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(geohash(tester)).
+</pre></div>
+</div>
+</section>
+<section id="supported-operations">
+<h2>Supported operations<a class="headerlink" href="#supported-operations" title="Link to this heading"></a></h2>
+<p>The library provides predicates for:</p>
+<ul class="simple">
+<li><p>validating geohash atoms</p></li>
+<li><p>encoding coordinates at a requested precision</p></li>
+<li><p>decoding a geohash to its cell center</p></li>
+<li><p>decoding a geohash to its cell bounding box</p></li>
+<li><p>querying the nominal latitude and longitude precision of a geohash
+length</p></li>
+<li><p>querying cell dimensions for a geohash length</p></li>
+<li><p>computing adjacent and neighboring cells</p></li>
+<li><p>covering a geographic bounding box with geohashes of a fixed precision</p></li>
+<li><p>covering a geographic bounding box using fixed-depth or adaptive
+mixed-depth covers</p></li>
+<li><p>compressing complete sibling sets into parent prefixes</p></li>
+<li><p>navigating geohash parent-child relationships and shared prefixes</p></li>
+<li><p>converting between atom geohashes and integer-backed 5-bit packed
+representations</p></li>
+<li><p>converting between atom and integer geohash representations explicitly</p></li>
+<li><p>encoding and decoding integer geohashes using bit precision</p></li>
+<li><p>expanding a geohash to the center cell plus neighbors</p></li>
+<li><p>covering polygons and polylines with geohashes</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Encode a coordinate at a selected precision:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>encode(geographic(<span class="m">42.6</span>, <span class="o">-</span><span class="m">5.6</span>), <span class="m">5</span>, <span class="nv">Geohash</span>).
+<span class="nv">Geohash</span> <span class="o">=</span> <span class="s">&#39;ezs42&#39;</span>
+yes
+
+| <span class="o">?-</span> geohash<span class="o">::</span>encode(geographic(<span class="m">57.64911</span>, <span class="m">10.40744</span>), <span class="m">11</span>, <span class="nv">Geohash</span>).
+<span class="nv">Geohash</span> <span class="o">=</span> <span class="s">&#39;u4pruydqqvj&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Decode a geohash to its center coordinate and bounding box:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>decode(<span class="s">&#39;ezs42&#39;</span>, <span class="nv">Coordinate</span>).
+<span class="nv">Coordinate</span> <span class="o">=</span> geographic(<span class="m">42.60498046875</span>, <span class="o">-</span><span class="m">5.60302734375</span>)
+yes
+
+| <span class="o">?-</span> geohash<span class="o">::</span>bounding_box(<span class="s">&#39;ezs42&#39;</span>, <span class="nv">BoundingBox</span>).
+<span class="nv">BoundingBox</span> <span class="o">=</span> bbox(geographic(<span class="m">42.5830078125</span>, <span class="o">-</span><span class="m">5.625</span>), geographic(<span class="m">42.626953125</span>, <span class="o">-</span><span class="m">5.5810546875</span>))
+yes
+</pre></div>
+</div>
+<p>Inspect cell precision metadata:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>precision(<span class="m">5</span>, <span class="nv">LatitudeError</span>, <span class="nv">LongitudeError</span>).
+| <span class="o">?-</span> geohash<span class="o">::</span>cell_dimensions(<span class="m">5</span>, <span class="nv">LatitudeSpan</span>, <span class="nv">LongitudeSpan</span>).
+</pre></div>
+</div>
+<p>Compute adjacent cells and neighbors:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>adjacent(<span class="s">&#39;ezs42&#39;</span>, north, <span class="nv">North</span>).
+| <span class="o">?-</span> geohash<span class="o">::</span>neighbors(<span class="s">&#39;ezs42&#39;</span>, <span class="nv">Neighbors</span>).
+</pre></div>
+</div>
+<p>Cover a bounding box with geohashes of a fixed precision:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>covering(bbox(geographic(<span class="m">42.58</span>, <span class="o">-</span><span class="m">5.63</span>), geographic(<span class="m">42.63</span>, <span class="o">-</span><span class="m">5.58</span>)), <span class="m">5</span>, <span class="nv">Geohashes</span>).
+</pre></div>
+</div>
+<p>Compute adaptive and compact covers:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>covering(bbox(geographic(<span class="m">42.58</span>, <span class="o">-</span><span class="m">5.63</span>), geographic(<span class="m">42.63</span>, <span class="o">-</span><span class="m">5.58</span>)), max_precision(<span class="m">6</span>), <span class="nv">Geohashes</span>, []).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>covering(bbox(geographic(<span class="m">42.58</span>, <span class="o">-</span><span class="m">5.63</span>), geographic(<span class="m">42.63</span>, <span class="o">-</span><span class="m">5.58</span>)), precision(<span class="m">6</span>), <span class="nv">Geohashes</span>, [compact(<span class="k">true</span>), min_precision(<span class="m">4</span>)]).
+</pre></div>
+</div>
+<p>Inspect hierarchy and integer representations:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>parent(<span class="s">&#39;ezs42&#39;</span>, <span class="nv">Parent</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>children(<span class="s">&#39;ezs4&#39;</span>, <span class="nv">Children</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>encode_int(geographic(<span class="m">42.6</span>, <span class="o">-</span><span class="m">5.6</span>), <span class="m">5</span>, <span class="nv">HashInteger</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>bounding_box_int(<span class="nv">HashInteger</span>, <span class="m">5</span>, <span class="nv">BoundingBox</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>geohash_to_int(<span class="s">&#39;ezs42&#39;</span>, <span class="nv">HashInteger</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>int_to_geohash(<span class="nv">HashInteger</span>, <span class="m">5</span>, <span class="nv">Geohash</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>encode_bits(geographic(<span class="m">42.6</span>, <span class="o">-</span><span class="m">5.6</span>), <span class="m">25</span>, <span class="nv">HashInteger</span>).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>expand(<span class="s">&#39;ezs42&#39;</span>, <span class="nv">ExpandedGeohashes</span>).
+</pre></div>
+</div>
+<p>Cover polygons and polylines:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geohash<span class="o">::</span>polygon_covering(
+|       [geographic(<span class="m">42.5830078125</span>, <span class="o">-</span><span class="m">5.625</span>), geographic(<span class="m">42.626953125</span>, <span class="o">-</span><span class="m">5.625</span>), geographic(<span class="m">42.626953125</span>, <span class="o">-</span><span class="m">5.5810546875</span>), geographic(<span class="m">42.5830078125</span>, <span class="o">-</span><span class="m">5.5810546875</span>)],
+|       precision(<span class="m">5</span>),
+|       <span class="nv">Geohashes</span>,
+|       []
+|   ).
+
+| <span class="o">?-</span> geohash<span class="o">::</span>polyline_covering(
+|       [geographic(<span class="m">42.60498046875</span>, <span class="o">-</span><span class="m">5.60302734375</span>), geographic(<span class="m">42.60498046875</span>, <span class="o">-</span><span class="m">5.55</span>)],
+|       precision(<span class="m">5</span>),
+|       <span class="nv">Geohashes</span>,
+|       [buffer(<span class="m">0.1</span>)]
+|   ).
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Geohash cell width and height alternate between equal and unequal
+angular resolution depending on whether the geohash length is even or
+odd.</p></li>
+<li><p>Encoding canonicalizes longitude <code class="docutils literal notranslate"><span class="pre">180.0</span></code> to <code class="docutils literal notranslate"><span class="pre">-180.0</span></code> so
+dateline-equivalent coordinates map to the same hash.</p></li>
+<li><p>Neighbor and covering computations use decoded cell dimensions and
+therefore handle antimeridian wrapping for eastward and westward
+movement.</p></li>
+<li><p>Northward adjacency from the northernmost cells and southward
+adjacency from the southernmost cells fails because there is no cell
+beyond the poles.</p></li>
+<li><p>Bounding-box covering accepts antimeridian-crossing boxes by allowing
+the minimum longitude to be greater than the maximum longitude.</p></li>
+<li><p>Degenerate point bounding boxes are accepted by <code class="docutils literal notranslate"><span class="pre">covering/3</span></code> and
+return the single geohash cell containing the point.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">covering/4</span></code> keeps <code class="docutils literal notranslate"><span class="pre">covering/3</span></code> as the fixed-precision shorthand
+while adding a <code class="docutils literal notranslate"><span class="pre">CoverSpec</span></code> argument with <code class="docutils literal notranslate"><span class="pre">precision(Precision)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">max_precision(MaxPrecision)</span></code> forms.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geohash</span></code> now imports the shared <code class="docutils literal notranslate"><span class="pre">options</span></code> library and uses it to
+validate and merge covering options.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">covering/4</span></code> and <code class="docutils literal notranslate"><span class="pre">polygon_covering/4</span></code> accept <code class="docutils literal notranslate"><span class="pre">compact(Boolean)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">min_precision(PositiveInteger)</span></code> options. Compact covers never
+compress below the selected minimum precision.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">polyline_covering/4</span></code> also accepts a <code class="docutils literal notranslate"><span class="pre">buffer(Distance)</span></code> option
+where the distance is expressed in kilometers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compress/2</span></code> operates on complete sibling sets only, replacing them
+with parent prefixes while preserving the covered area.</p></li>
+<li><p>Integer-backed predicates mirror the string predicates and keep the
+precision argument explicit, avoiding any hidden dependence on integer
+bit width.</p></li>
+<li><p>Bit-precision predicates provide the same packed integer
+representation while measuring precision directly in bits instead of
+characters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">polygon_covering/4</span></code> and <code class="docutils literal notranslate"><span class="pre">polyline_covering/4</span></code> rely on generic
+<code class="docutils literal notranslate"><span class="pre">geospatial</span></code> geometry predicates and currently do not support
+antimeridian-crossing input geometries.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Geohash">https://en.wikipedia.org/wiki/Geohash</a></p></li>
+<li><p><a class="reference external" href="https://geohash.org/">https://geohash.org/</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

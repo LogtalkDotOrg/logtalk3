@@ -23,7 +23,8 @@ ________________________________________________________________________
 
 This library provides a `geospatial_protocol` protocol and a `geospatial`
 object for common geographic computations over coordinates represented as
-`geographic(Latitude,Longitude)`. By default, distances are returned in kilometers.
+`geographic(Latitude,Longitude)`. By default, distances are returned in
+kilometers.
 
 
 API documentation
@@ -55,29 +56,31 @@ Available predicates
 The library currently includes predicates for:
 
 - Coordinate validation
-- Coordinate normalization helpers
+- Coordinate normalization
 - Point-to-point distances (`haversine` and `vincenty`)
 - Rhumb-line distance, bearing, and destination predicates
-- Rhumb-line interpolation and midpoint helpers
+- Rhumb-line interpolation and midpoint
 - Generic distance dispatch (`distance/4` and `distance/5`)
 - Initial and final bearings
 - Midpoint and destination point computations
-- Great-circle interpolation and track-distance helpers
+- Great-circle interpolation and track-distance
 - Proximity checks and nearest coordinate search
 - Mean center and coordinates bounding boxes
-- Minimum enclosing circle helper
-- Coordinates-to-bounding-box conversion helper
-- Equirectangular projection and inverse helpers
+- Minimum enclosing circle
+- Coordinates-to-bounding-box conversion
+- Equirectangular projection and inverse
 - Point-in-polygon checks
 - Polygon area, polygon centroid, and polygon bounding boxes
-- Polygon closure and orientation helpers
-- Polygon orientation normalization helpers
+- Polygon closure and orientation
+- Polygon orientation normalization
 - Polygon validity checks
 - Bounding-box utilities
-- Nearest-point and point-to-polyline distance helpers
+- Strict bounding-box overlap checks
+- Bounding-box and polygon/polyline relation
+- Nearest-point and point-to-polyline distance
 - Polyline length and polygon perimeter
 - Polyline simplification by tolerance
-- Polyline split and resampling helpers
+- Polyline split and resampling
 - Polygon intersection checks
 - Spherical bounding boxes
 - Route distance accumulation (`route_distance/2`, `route_distance/3`, and `route_distance/4`)
@@ -176,7 +179,12 @@ Work with polygons:
 Work with bounding boxes:
 
 	| ?- geospatial::bbox_contains(bbox(geographic(-1.0, -1.0), geographic(1.0, 1.0)), geographic(0.5, 0.5)).
+	| ?- geospatial::bbox_contains(bbox(geographic(-1.0, 170.0), geographic(1.0, -170.0)), bbox(geographic(-0.5, 175.0), geographic(0.5, -175.0))).
 	| ?- geospatial::bbox_intersects(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(0.5, 0.5), geographic(2.0, 2.0))).
+	| ?- geospatial::bbox_overlaps(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(0.5, 0.5), geographic(2.0, 2.0))).
+	| ?- geospatial::bbox_intersects_polygon(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), [geographic(0.5, 0.5), geographic(0.5, 1.5), geographic(1.5, 1.5), geographic(1.5, 0.5)]).
+	| ?- geospatial::bbox_contains_polygon(bbox(geographic(0.0, 0.0), geographic(2.0, 2.0)), [geographic(0.5, 0.5), geographic(0.5, 1.5), geographic(1.5, 1.5), geographic(1.5, 0.5)]).
+	| ?- geospatial::bbox_intersects_polyline(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), [geographic(-1.0, 0.5), geographic(2.0, 0.5)]).
 	| ?- geospatial::bbox_union(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(-1.0, 0.5), geographic(0.5, 2.0)), BoundingBox).
 	| ?- geospatial::bbox_expand(bbox(geographic(0.0, 0.0), geographic(0.0, 0.0)), 111.195, ExpandedBoundingBox).
 

@@ -837,6 +837,17 @@ To load an entity, always load the library that includes it using the goal ``log
    geo_json(ObjectRepresentation,PairRepresentation,StringRepresentation) <geo_json_3>
    geo_json_protocol <geo_json_protocol_0>
 
+``library/geohash/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   geohash <geohash_0>
+   geohash_protocol <geohash_protocol_0>
+
 ``library/geospatial/``
 -----------------------
 

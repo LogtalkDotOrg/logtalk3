@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 10, 2026
+%  Last updated on May 11, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -173,6 +173,7 @@ logtalk_library_path(gaussian_process_regression, library('gaussian_process_regr
 logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(geo_json, library('geo_json/')).
+logtalk_library_path(geohash, library('geohash/')).
 logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).
 logtalk_library_path(glicko2_ranker, library('glicko2_ranker/')).

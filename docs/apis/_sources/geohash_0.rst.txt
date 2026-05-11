@@ -1,0 +1,73 @@
+.. index:: single: geohash
+.. _geohash/0:
+
+.. rst-class:: right
+
+**object**
+
+``geohash``
+===========
+
+Geohash encoder, decoder, adjacency, covering, hierarchy, integer conversion, bit-precision, and geometry covering predicates for ``geographic(Latitude,Longitude)`` coordinates.
+
+| **Availability:** 
+|    ``logtalk_load(geohash(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:2:0
+| **Date:** 2026-05-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`geohash_protocol <geohash_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`geospatial <geospatial/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Alphabet: Uses the standard geohash base-32 alphabet ``0123456789bcdefghjkmnpqrstuvwxyz``.
+   - Encoding canonicalization: Encoding canonicalizes longitudes to the ``[-180.0,180.0[`` range, treating ``180.0`` as ``-180.0`` so equivalent dateline coordinates map to the same geohash.
+   - Bounding boxes: Decoded cells are represented using ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.
+   - Coverage: Bounding-box coverage accepts antimeridian-crossing boxes where the minimum longitude is greater than the maximum longitude.
+   - Adaptive covering: Adaptive covers use ``max_precision/1`` together with ``compact/1`` and ``min_precision/1`` options.
+   - Integer representation: Integer geohashes are 5-bit packed base-32 values with an explicit precision argument preserving leading zero groups.
+   - Geometry covering: Polygon and polyline covering predicates rely on generic ``geospatial`` geometry predicates and do not support antimeridian-crossing input geometries.
+
+| **Inherited public predicates:**
+|     :ref:`geohash_protocol/0::adjacent/3`  :ref:`geohash_protocol/0::adjacent_bits/4`  :ref:`geohash_protocol/0::adjacent_int/4`  :ref:`geohash_protocol/0::bounding_box/2`  :ref:`geohash_protocol/0::bounding_box_bits/3`  :ref:`geohash_protocol/0::bounding_box_int/3`  :ref:`geohash_protocol/0::cell_dimensions/3`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`geohash_protocol/0::children/2`  :ref:`geohash_protocol/0::common_prefix/3`  :ref:`geohash_protocol/0::compress/2`  :ref:`geohash_protocol/0::covering/3`  :ref:`geohash_protocol/0::covering/4`  :ref:`geohash_protocol/0::decode/2`  :ref:`geohash_protocol/0::decode_bits/3`  :ref:`geohash_protocol/0::decode_int/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`geohash_protocol/0::encode/3`  :ref:`geohash_protocol/0::encode_bits/3`  :ref:`geohash_protocol/0::encode_int/3`  :ref:`geohash_protocol/0::expand/2`  :ref:`geohash_protocol/0::expand_int/3`  :ref:`geohash_protocol/0::geohash_to_int/2`  :ref:`geohash_protocol/0::int_to_geohash/3`  :ref:`geohash_protocol/0::neighbors/2`  :ref:`geohash_protocol/0::neighbors_bits/3`  :ref:`geohash_protocol/0::neighbors_int/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`geohash_protocol/0::parent/2`  :ref:`geohash_protocol/0::polygon_covering/4`  :ref:`geohash_protocol/0::polyline_covering/4`  :ref:`geohash_protocol/0::precision/3`  :ref:`geohash_protocol/0::valid_geohash/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`geohash_protocol <geohash_protocol/0>`, :ref:`geospatial <geospatial/0>`
+

@@ -1,0 +1,629 @@
+.. index:: single: geohash_protocol
+.. _geohash_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``geohash_protocol``
+====================
+
+Geohash predicates protocol.
+
+| **Availability:** 
+|    ``logtalk_load(geohash(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:2:0
+| **Date:** 2026-05-11
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_geohash/1
+.. _geohash_protocol/0::valid_geohash/1:
+
+``valid_geohash/1``
+^^^^^^^^^^^^^^^^^^^
+
+True when the argument is a non-empty geohash atom using the standard geohash base-32 alphabet ``0123456789bcdefghjkmnpqrstuvwxyz``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_geohash(Geohash)``
+| **Mode and number of proofs:**
+|    ``valid_geohash(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: encode/3
+.. _geohash_protocol/0::encode/3:
+
+``encode/3``
+^^^^^^^^^^^^
+
+Encodes a geographic coordinate represented as ``geographic(Latitude,Longitude)`` into a geohash atom with the given precision in characters. Longitude is canonicalized to the ``[-180.0,180.0[`` range, so ``180.0`` is treated as ``-180.0``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode(Coordinate,Precision,Geohash)``
+| **Mode and number of proofs:**
+|    ``encode(+compound,+positive_integer,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: decode/2
+.. _geohash_protocol/0::decode/2:
+
+``decode/2``
+^^^^^^^^^^^^
+
+Decodes a geohash atom into the center geographic coordinate of the represented cell.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Geohash,Coordinate)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bounding_box/2
+.. _geohash_protocol/0::bounding_box/2:
+
+``bounding_box/2``
+^^^^^^^^^^^^^^^^^^
+
+Decodes a geohash atom into its geographic bounding box represented as ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bounding_box(Geohash,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``bounding_box(+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: precision/3
+.. _geohash_protocol/0::precision/3:
+
+``precision/3``
+^^^^^^^^^^^^^^^
+
+Returns the maximum latitude and longitude errors in degrees for geohashes of the given precision in characters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``precision(Precision,LatitudeError,LongitudeError)``
+| **Mode and number of proofs:**
+|    ``precision(+positive_integer,-float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cell_dimensions/3
+.. _geohash_protocol/0::cell_dimensions/3:
+
+``cell_dimensions/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the latitude and longitude spans in degrees of a geohash cell for the given precision in characters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cell_dimensions(Precision,LatitudeSpan,LongitudeSpan)``
+| **Mode and number of proofs:**
+|    ``cell_dimensions(+positive_integer,-float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: adjacent/3
+.. _geohash_protocol/0::adjacent/3:
+
+``adjacent/3``
+^^^^^^^^^^^^^^
+
+Returns the adjacent geohash in the given direction. Supported directions are ``north``, ``south``, ``east``, ``west``, ``north_east``, ``north_west``, ``south_east``, and ``south_west``. Eastward and westward adjacency wraps across the antimeridian using the same longitude canonicalization as ``encode/3``. Northward and southward adjacency fails when there is no neighboring cell beyond the poles.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``adjacent(Geohash,Direction,AdjacentGeohash)``
+| **Mode and number of proofs:**
+|    ``adjacent(+atom,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: neighbors/2
+.. _geohash_protocol/0::neighbors/2:
+
+``neighbors/2``
+^^^^^^^^^^^^^^^
+
+Returns the available neighboring geohashes as ``Direction-Geohash`` pairs in clockwise order starting at north.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbors(Geohash,Neighbors)``
+| **Mode and number of proofs:**
+|    ``neighbors(+atom,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: covering/3
+.. _geohash_protocol/0::covering/3:
+
+``covering/3``
+^^^^^^^^^^^^^^
+
+Returns the list of geohashes at the given precision whose cells cover a geographic bounding box represented as ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``. Degenerate point bounding boxes and exact cell-aligned boundaries are accepted. Antimeridian-crossing bounding boxes are accepted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``covering(BoundingBox,Precision,Geohashes)``
+| **Mode and number of proofs:**
+|    ``covering(+compound,+positive_integer,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: covering/4
+.. _geohash_protocol/0::covering/4:
+
+``covering/4``
+^^^^^^^^^^^^^^
+
+Returns a geohash cover for a geographic bounding box. ``CoverSpec`` is either ``precision(Precision)`` for a fixed-depth cover or ``max_precision(MaxPrecision)`` for an adaptive mixed-depth cover. ``Options`` may include ``compact(Boolean)`` and ``min_precision(PositiveInteger)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``covering(BoundingBox,CoverSpec,Geohashes,Options)``
+| **Mode and number of proofs:**
+|    ``covering(+compound,+compound,-list(atom),++list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: compress/2
+.. _geohash_protocol/0::compress/2:
+
+``compress/2``
+^^^^^^^^^^^^^^
+
+Compresses a list of geohashes by replacing complete sibling sets with their parent prefix while preserving the covered area.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compress(Geohashes,CompressedGeohashes)``
+| **Mode and number of proofs:**
+|    ``compress(+list(atom),-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parent/2
+.. _geohash_protocol/0::parent/2:
+
+``parent/2``
+^^^^^^^^^^^^
+
+Returns the immediate parent prefix of a geohash. Fails for precision-1 geohashes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parent(Geohash,Parent)``
+| **Mode and number of proofs:**
+|    ``parent(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: children/2
+.. _geohash_protocol/0::children/2:
+
+``children/2``
+^^^^^^^^^^^^^^
+
+Returns the 32 child geohashes of a geohash in standard geohash base-32 order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``children(Geohash,Children)``
+| **Mode and number of proofs:**
+|    ``children(+atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: common_prefix/3
+.. _geohash_protocol/0::common_prefix/3:
+
+``common_prefix/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the longest common geohash prefix shared by two geohashes. The prefix may be the empty atom when the geohashes share no leading characters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``common_prefix(Geohash1,Geohash2,Prefix)``
+| **Mode and number of proofs:**
+|    ``common_prefix(+atom,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: encode_int/3
+.. _geohash_protocol/0::encode_int/3:
+
+``encode_int/3``
+^^^^^^^^^^^^^^^^
+
+Encodes a geographic coordinate into an integer geohash representation at the given precision in characters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_int(Coordinate,Precision,HashInteger)``
+| **Mode and number of proofs:**
+|    ``encode_int(+compound,+positive_integer,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: decode_int/3
+.. _geohash_protocol/0::decode_int/3:
+
+``decode_int/3``
+^^^^^^^^^^^^^^^^
+
+Decodes an integer geohash representation at the given precision into the center geographic coordinate of the represented cell.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_int(HashInteger,Precision,Coordinate)``
+| **Mode and number of proofs:**
+|    ``decode_int(+integer,+positive_integer,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bounding_box_int/3
+.. _geohash_protocol/0::bounding_box_int/3:
+
+``bounding_box_int/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an integer geohash representation at the given precision into its geographic bounding box.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bounding_box_int(HashInteger,Precision,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``bounding_box_int(+integer,+positive_integer,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: adjacent_int/4
+.. _geohash_protocol/0::adjacent_int/4:
+
+``adjacent_int/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the adjacent integer geohash at the same precision in the given direction.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``adjacent_int(HashInteger,Precision,Direction,AdjacentHashInteger)``
+| **Mode and number of proofs:**
+|    ``adjacent_int(+integer,+positive_integer,+atom,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: neighbors_int/3
+.. _geohash_protocol/0::neighbors_int/3:
+
+``neighbors_int/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the available neighboring integer geohashes as ``Direction-HashInteger`` pairs in clockwise order starting at north.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbors_int(HashInteger,Precision,Neighbors)``
+| **Mode and number of proofs:**
+|    ``neighbors_int(+integer,+positive_integer,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: geohash_to_int/2
+.. _geohash_protocol/0::geohash_to_int/2:
+
+``geohash_to_int/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a geohash atom to its packed integer representation using five bits per character.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``geohash_to_int(Geohash,HashInteger)``
+| **Mode and number of proofs:**
+|    ``geohash_to_int(+atom,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: int_to_geohash/3
+.. _geohash_protocol/0::int_to_geohash/3:
+
+``int_to_geohash/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a packed integer geohash representation and an explicit precision in characters to a geohash atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``int_to_geohash(HashInteger,Precision,Geohash)``
+| **Mode and number of proofs:**
+|    ``int_to_geohash(+integer,+positive_integer,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: encode_bits/3
+.. _geohash_protocol/0::encode_bits/3:
+
+``encode_bits/3``
+^^^^^^^^^^^^^^^^^
+
+Encodes a geographic coordinate into an integer geohash representation using the given bit precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_bits(Coordinate,Bits,HashInteger)``
+| **Mode and number of proofs:**
+|    ``encode_bits(+compound,+positive_integer,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: decode_bits/3
+.. _geohash_protocol/0::decode_bits/3:
+
+``decode_bits/3``
+^^^^^^^^^^^^^^^^^
+
+Decodes an integer geohash representation at the given bit precision into the center geographic coordinate of the represented cell.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_bits(HashInteger,Bits,Coordinate)``
+| **Mode and number of proofs:**
+|    ``decode_bits(+integer,+positive_integer,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bounding_box_bits/3
+.. _geohash_protocol/0::bounding_box_bits/3:
+
+``bounding_box_bits/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an integer geohash representation at the given bit precision into its geographic bounding box.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bounding_box_bits(HashInteger,Bits,BoundingBox)``
+| **Mode and number of proofs:**
+|    ``bounding_box_bits(+integer,+positive_integer,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: adjacent_bits/4
+.. _geohash_protocol/0::adjacent_bits/4:
+
+``adjacent_bits/4``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the adjacent integer geohash at the same bit precision in the given direction.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``adjacent_bits(HashInteger,Bits,Direction,AdjacentHashInteger)``
+| **Mode and number of proofs:**
+|    ``adjacent_bits(+integer,+positive_integer,+atom,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: neighbors_bits/3
+.. _geohash_protocol/0::neighbors_bits/3:
+
+``neighbors_bits/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the available neighboring integer geohashes as ``Direction-HashInteger`` pairs in clockwise order starting at north for the given bit precision.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbors_bits(HashInteger,Bits,Neighbors)``
+| **Mode and number of proofs:**
+|    ``neighbors_bits(+integer,+positive_integer,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: expand/2
+.. _geohash_protocol/0::expand/2:
+
+``expand/2``
+^^^^^^^^^^^^
+
+Returns the geohash followed by its available neighbors in clockwise order starting at north.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand(Geohash,ExpandedGeohashes)``
+| **Mode and number of proofs:**
+|    ``expand(+atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: expand_int/3
+.. _geohash_protocol/0::expand_int/3:
+
+``expand_int/3``
+^^^^^^^^^^^^^^^^
+
+Returns the integer geohash followed by its available neighboring integer geohashes in clockwise order starting at north.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand_int(HashInteger,Precision,ExpandedHashes)``
+| **Mode and number of proofs:**
+|    ``expand_int(+integer,+positive_integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polygon_covering/4
+.. _geohash_protocol/0::polygon_covering/4:
+
+``polygon_covering/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a geohash cover for a polygon represented as a list of geographic coordinates. ``CoverSpec`` is either ``precision(Precision)`` for a fixed-depth cover or ``max_precision(MaxPrecision)`` for an adaptive mixed-depth cover. ``Options`` may include ``compact(Boolean)`` and ``min_precision(PositiveInteger)``. Antimeridian-crossing polygons are not supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polygon_covering(Polygon,CoverSpec,Geohashes,Options)``
+| **Mode and number of proofs:**
+|    ``polygon_covering(+list(compound),+compound,-list(atom),++list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: polyline_covering/4
+.. _geohash_protocol/0::polyline_covering/4:
+
+``polyline_covering/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a geohash cover for a polyline represented as a list of two or more geographic coordinates. ``CoverSpec`` is either ``precision(Precision)`` for a fixed-depth cover or ``max_precision(MaxPrecision)`` for an adaptive mixed-depth cover. ``Options`` may include ``compact(Boolean)``, ``min_precision(PositiveInteger)``, and ``buffer(Distance)`` where the buffer distance is given in kilometers. Antimeridian-crossing polylines are not supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``polyline_covering(Polyline,CoverSpec,Geohashes,Options)``
+| **Mode and number of proofs:**
+|    ``polyline_covering(+list(compound),+compound,-list(atom),++list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`geohash <geohash/0>`, :ref:`geospatial <geospatial/0>`
+

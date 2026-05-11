@@ -338,8 +338,6 @@ datasets using one-vs-rest linear models with configurable losses.
 * ADDED: New `ieee_754` library supporting parsing and generating IEEE 754
 floating-point encodings.
 
-* ADDED: New `geo_json` library implementing the GeoJSON (RFC 7946) standard.
-
 * ADDED: New `hmac` library providing a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104.
 
@@ -351,8 +349,15 @@ reference systems and transformations for 2D and 3D WGS84 geodetic
 coordinates, Web Mercator, World Mercator, ECEF, local ENU tangent-plane,
 Lambert azimuthal equal-area, and UTM.
 
+* ADDED: New `geo_json` library implementing the GeoJSON (RFC 7946) standard.
+
 * ADDED: New `nmea` library implementing parsing of NMEA 0183 sentences from
 GPS/GNSS receivers with typed semantic decoding for common sentence types.
+
+* ADDED: New `geohash` library implementing GeoHash encoding and decoding,
+adjacency and neighborhood queries, fixed and adaptive bounding-box covering,
+hierarchy navigation and compression, integer-backed and bit-precision
+representations, and polygon and polyline covering predicates.
 
 * ADDED: New `wkt_wkb` library implementing the Well-Known Text and Well-Known
 Binary geometry interchange format.
@@ -384,6 +389,11 @@ Requires a backend supporting Unicode and the `encoding/1` directive.
 Requires a backend supporting Unicode and the `encoding/1` directive.
 
 * ADDED: New `minkowski_distance/4` predicate to the `types` library.
+
+* ADDED: New predicates `bbox_overlaps/2`, `bbox_intersects_polygon/2`,
+`bbox_contains_polygon/2`, and `bbox_intersects_polyline/2` to the `geospatial`
+library. Also extended the `bbox_contains/2` predicate to support bounding-box
+containment checks.
 
 * IMPROVED: Code refactoring of the classifier libraries by introducing a new
 `classifier_common` category with shared code.

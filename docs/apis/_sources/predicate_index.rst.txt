@@ -442,6 +442,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::add_vertices/3>`
 
+``adjacent/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::adjacent/3>`
+
+``adjacent_bits/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::adjacent_bits/4>`
+
+``adjacent_int/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::adjacent_int/4>`
+
 ``after/2``
 -----------
 
@@ -1198,6 +1228,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::bbox_contains/2>`
 
+``bbox_contains_polygon/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_contains_polygon/2>`
+
 ``bbox_expand/3``
 -----------------
 
@@ -1227,6 +1267,37 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::bbox_intersects/2>`
+
+``bbox_intersects_polygon/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_intersects_polygon/2>`
+
+``bbox_intersects_polyline/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_intersects_polyline/2>`
+
+``bbox_overlaps/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geospatial <geospatial/0::bbox_overlaps/2>`
+* :ref:`geospatial_protocol <geospatial_protocol/0::bbox_overlaps/2>`
 
 ``bbox_union/3``
 ----------------
@@ -1461,6 +1532,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::body_pred/1>`
 
+``bounding_box/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::bounding_box/2>`
+
 ``bounding_box/3``
 ------------------
 
@@ -1470,6 +1551,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::bounding_box/3>`
+
+``bounding_box_bits/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::bounding_box_bits/3>`
+
+``bounding_box_int/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::bounding_box_int/3>`
 
 ``branch/2``
 ------------
@@ -1721,6 +1822,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`maybe <maybe/0::cat/2>`
+
+``cell_dimensions/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::cell_dimensions/3>`
 
 ``center_gram_matrix/4``
 ------------------------
@@ -2022,6 +2133,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::chi_squared/2>`
+
+``children/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::children/2>`
 
 ``cholesky_decomposition/2``
 ----------------------------
@@ -2623,6 +2744,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`stomp <stomp/0::commit_transaction/3>`
 
+``common_prefix/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::common_prefix/3>`
+
 ``common_subsequence/3``
 ------------------------
 
@@ -2732,6 +2863,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::compose/3>`
+
+``compress/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::compress/2>`
 
 ``confirm_select/1``
 --------------------
@@ -3098,6 +3239,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mutator_protocol <mutator_protocol/0::coverage_clause_mutator/0>`
+
+``covering/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::covering/3>`
+
+``covering/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::covering/4>`
 
 ``cpu_time/1``
 --------------
@@ -3553,7 +3714,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`geohash_protocol <geohash_protocol/0::decode/2>`
 * :ref:`json_rpc <json_rpc/0::decode/2>`
+
+``decode_bits/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::decode_bits/3>`
 
 ``decode_exception/2``
 ----------------------
@@ -3584,6 +3756,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::decode_frame/2>`
+
+``decode_int/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::decode_int/3>`
 
 ``decompile_predicate_heads/4``
 -------------------------------
@@ -5257,6 +5439,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`json_rpc <json_rpc/0::encode/2>`
 
+``encode/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::encode/3>`
+
+``encode_bits/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::encode_bits/3>`
+
 ``encode_frame/2``
 ------------------
 
@@ -5266,6 +5468,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::encode_frame/2>`
+
+``encode_int/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::encode_int/3>`
 
 ``encoding_suffix/2``
 ---------------------
@@ -5719,7 +5931,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`geohash_protocol <geohash_protocol/0::expand/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::expand/2>`
+
+``expand_int/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::expand_int/3>`
 
 ``expand_library_path/2``
 -------------------------
@@ -7306,6 +7529,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geo_json_protocol <geo_json_protocol/0::geo_json_to_json/2>`
 
+``geohash_to_int/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::geohash_to_int/2>`
+
 ``geometric/2``
 ---------------
 
@@ -8685,6 +8918,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::instant_to_utc_date_time/2>`
+
+``int_to_geohash/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::int_to_geohash/3>`
 
 ``integer//1``
 --------------
@@ -12574,6 +12817,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::neighbor_state/3>`
 
+``neighbors/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::neighbors/2>`
+
 ``neighbors/3``
 ---------------
 
@@ -12583,6 +12836,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`graph_protocol <graph_protocol/0::neighbors/3>`
+
+``neighbors_bits/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::neighbors_bits/3>`
+
+``neighbors_int/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::neighbors_int/3>`
 
 ``new/1``
 ---------
@@ -14003,6 +14276,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`proto_hierarchyp <proto_hierarchyp/0::parent/1>`
 
+``parent/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::parent/2>`
+
 ``parenthesis/2``
 -----------------
 
@@ -14497,6 +14780,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::polygon_centroid/2>`
 
+``polygon_covering/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::polygon_covering/4>`
+
 ``polygon_orientation/2``
 -------------------------
 
@@ -14536,6 +14829,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::polygons_intersect/2>`
+
+``polyline_covering/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::polyline_covering/4>`
 
 ``polyline_length/2``
 ---------------------
@@ -14707,6 +15010,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::precision/1>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::precision/1>`
+
+``precision/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::precision/3>`
 
 ``predicate/1``
 ---------------
@@ -20722,6 +21035,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_link_profiles <ccsds_link_profiles/0::valid_discontinuity_policy/1>`
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::valid_discontinuity_policy/1>`
 * :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_discontinuity_policy/1>`
+
+``valid_geohash/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`geohash_protocol <geohash_protocol/0::valid_geohash/1>`
 
 ``valid_instant/1``
 -------------------

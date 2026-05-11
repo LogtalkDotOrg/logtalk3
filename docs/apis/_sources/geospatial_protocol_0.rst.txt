@@ -14,8 +14,8 @@ Geospatial predicates protocol.
 |    ``logtalk_load(geospatial(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-10
+| **Version:** 1:1:0
+| **Date:** 2026-05-11
 
 | **Compilation flags:**
 |    ``static``
@@ -728,13 +728,13 @@ True when a polygon has at least three valid coordinates after normalizing optio
 ``bbox_contains/2``
 ^^^^^^^^^^^^^^^^^^^
 
-True when a coordinate is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.
+True when a coordinate or bounding box is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``. Antimeridian-crossing bounding boxes are supported.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``bbox_contains(BoundingBox,Coordinate)``
+|    ``bbox_contains(BoundingBox,Contained)``
 | **Mode and number of proofs:**
 |    ``bbox_contains(+compound,+compound)`` - ``zero_or_one``
 
@@ -747,7 +747,7 @@ True when a coordinate is inside or on the boundary of a bounding box term ``bbo
 ``bbox_intersects/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-True when two bounding boxes intersect or touch.
+True when two bounding boxes intersect or touch. Antimeridian-crossing bounding boxes are supported.
 
 | **Compilation flags:**
 |    ``static``
@@ -756,6 +756,25 @@ True when two bounding boxes intersect or touch.
 |    ``bbox_intersects(BoundingBox1,BoundingBox2)``
 | **Mode and number of proofs:**
 |    ``bbox_intersects(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_overlaps/2
+.. _geospatial_protocol/0::bbox_overlaps/2:
+
+``bbox_overlaps/2``
+^^^^^^^^^^^^^^^^^^^
+
+True when two bounding boxes have a strict positive-area overlap. Touching only at an edge or corner fails. Antimeridian-crossing bounding boxes are supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_overlaps(BoundingBox1,BoundingBox2)``
+| **Mode and number of proofs:**
+|    ``bbox_overlaps(+compound,+compound)`` - ``zero_or_one``
 
 
 ------------
@@ -798,6 +817,44 @@ Expands a bounding box by a distance in kilometers on all sides using a local sp
 
 ------------
 
+.. index:: bbox_intersects_polygon/2
+.. _geospatial_protocol/0::bbox_intersects_polygon/2:
+
+``bbox_intersects_polygon/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a bounding box intersects a polygon or either contains the other. Antimeridian-crossing bounding boxes are supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_intersects_polygon(BoundingBox,Polygon)``
+| **Mode and number of proofs:**
+|    ``bbox_intersects_polygon(+compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_contains_polygon/2
+.. _geospatial_protocol/0::bbox_contains_polygon/2:
+
+``bbox_contains_polygon/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a bounding box fully contains a polygon, including polygon vertices on the boundary. Antimeridian-crossing bounding boxes are supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_contains_polygon(BoundingBox,Polygon)``
+| **Mode and number of proofs:**
+|    ``bbox_contains_polygon(+compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: bbox_from_coordinates/2
 .. _geospatial_protocol/0::bbox_from_coordinates/2:
 
@@ -813,6 +870,25 @@ Computes a bounding box from a list of one or more coordinates.
 |    ``bbox_from_coordinates(Coordinates,BoundingBox)``
 | **Mode and number of proofs:**
 |    ``bbox_from_coordinates(+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: bbox_intersects_polyline/2
+.. _geospatial_protocol/0::bbox_intersects_polyline/2:
+
+``bbox_intersects_polyline/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when a bounding box intersects or touches a polyline with two or more coordinates. Antimeridian-crossing bounding boxes are supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bbox_intersects_polyline(BoundingBox,Polyline)``
+| **Mode and number of proofs:**
+|    ``bbox_intersects_polyline(+compound,+list(compound))`` - ``zero_or_one``
 
 
 ------------

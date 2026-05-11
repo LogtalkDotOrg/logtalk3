@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-05-11,
 		comment is 'Geospatial predicates over geographic coordinates represented as ``geographic(Latitude,Longitude)``.',
 		remarks is [
 			'Distance unit' - 'Kilometers.',
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, reverse/2
+		append/3, length/2, memberchk/2, reverse/2
 	]).
 
 	:- public(distance/4).
@@ -49,6 +49,13 @@
 	:- info(distance/5, [
 		comment is 'Computes the distance between two coordinates using a selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.',
 		argnames is ['Coordinate1', 'Coordinate2', 'Metric', 'Unit', 'Distance']
+	]).
+
+	:- public(bbox_overlaps/2).
+	:- mode(bbox_overlaps(+compound, +compound), zero_or_one).
+	:- info(bbox_overlaps/2, [
+		comment is 'True when two bounding boxes have a strict positive-area overlap. Touching only at an edge or corner fails. Antimeridian-crossing bounding boxes are supported.',
+		argnames is ['BoundingBox1', 'BoundingBox2']
 	]).
 
 	valid_coordinate(geographic(Latitude, Longitude)) :-
@@ -458,26 +465,47 @@
 	is_valid_polygon(Polygon) :-
 		normalize_polygon(Polygon, _).
 
-	bbox_contains(BoundingBox, Coordinate) :-
-		valid_coordinate(Coordinate),
+	bbox_contains(BoundingBox, geographic(Latitude, Longitude)) :-
+		!,
+		valid_bbox(BoundingBox),
+		valid_coordinate(geographic(Latitude, Longitude)),
 		BoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)),
-		number(MinLatitude), number(MinLongitude),
-		number(MaxLatitude), number(MaxLongitude),
-		Coordinate = geographic(Latitude, Longitude),
 		Latitude >= MinLatitude,
 		Latitude =< MaxLatitude,
-		Longitude >= MinLongitude,
-		Longitude =< MaxLongitude.
+		bbox_longitude_segments(MinLongitude, MaxLongitude, Segments),
+		longitude_in_segments(Longitude, Segments).
+	bbox_contains(OuterBoundingBox, InnerBoundingBox) :-
+		valid_bbox(OuterBoundingBox),
+		valid_bbox(InnerBoundingBox),
+		OuterBoundingBox = bbox(geographic(OuterMinLatitude, OuterMinLongitude), geographic(OuterMaxLatitude, OuterMaxLongitude)),
+		InnerBoundingBox = bbox(geographic(InnerMinLatitude, InnerMinLongitude), geographic(InnerMaxLatitude, InnerMaxLongitude)),
+		OuterMinLatitude =< InnerMinLatitude,
+		InnerMaxLatitude =< OuterMaxLatitude,
+		bbox_longitude_segments(OuterMinLongitude, OuterMaxLongitude, OuterSegments),
+		bbox_longitude_segments(InnerMinLongitude, InnerMaxLongitude, InnerSegments),
+		longitude_segments_contained(InnerSegments, OuterSegments).
 
 	bbox_intersects(BoundingBox1, BoundingBox2) :-
+		valid_bbox(BoundingBox1),
+		valid_bbox(BoundingBox2),
 		BoundingBox1 = bbox(geographic(MinLatitude1, MinLongitude1), geographic(MaxLatitude1, MaxLongitude1)),
 		BoundingBox2 = bbox(geographic(MinLatitude2, MinLongitude2), geographic(MaxLatitude2, MaxLongitude2)),
-		number(MinLatitude1), number(MinLongitude1), number(MaxLatitude1), number(MaxLongitude1),
-		number(MinLatitude2), number(MinLongitude2), number(MaxLatitude2), number(MaxLongitude2),
 		MaxLatitude1 >= MinLatitude2,
 		MaxLatitude2 >= MinLatitude1,
-		MaxLongitude1 >= MinLongitude2,
-		MaxLongitude2 >= MinLongitude1.
+		bbox_longitude_segments(MinLongitude1, MaxLongitude1, Segments1),
+		bbox_longitude_segments(MinLongitude2, MaxLongitude2, Segments2),
+		longitude_segments_intersect(Segments1, Segments2, inclusive).
+
+	bbox_overlaps(BoundingBox1, BoundingBox2) :-
+		valid_bbox(BoundingBox1),
+		valid_bbox(BoundingBox2),
+		BoundingBox1 = bbox(geographic(MinLatitude1, MinLongitude1), geographic(MaxLatitude1, MaxLongitude1)),
+		BoundingBox2 = bbox(geographic(MinLatitude2, MinLongitude2), geographic(MaxLatitude2, MaxLongitude2)),
+		MinLatitude1 < MaxLatitude2,
+		MinLatitude2 < MaxLatitude1,
+		bbox_longitude_segments(MinLongitude1, MaxLongitude1, Segments1),
+		bbox_longitude_segments(MinLongitude2, MaxLongitude2, Segments2),
+		longitude_segments_intersect(Segments1, Segments2, strict).
 
 	bbox_union(BoundingBox1, BoundingBox2, BoundingBox) :-
 		BoundingBox1 = bbox(geographic(MinLatitude1, MinLongitude1), geographic(MaxLatitude1, MaxLongitude1)),
@@ -510,8 +538,109 @@
 		normalize_coordinate(geographic(MeanLatitude, MaxLongitudePre), geographic(_, MaxLongitude)),
 		ExpandedBoundingBox = bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)).
 
+	bbox_intersects_polygon(BoundingBox, Polygon) :-
+		valid_bbox(BoundingBox),
+		bbox_polygon(BoundingBox, BBoxPolygon),
+		polygons_intersect(BBoxPolygon, Polygon).
+
+	bbox_contains_polygon(BoundingBox, Polygon) :-
+		valid_bbox(BoundingBox),
+		normalize_polygon(Polygon, NormalizedPolygon),
+		all_bbox_contains(NormalizedPolygon, BoundingBox).
+
 	bbox_from_coordinates(Coordinates, BoundingBox) :-
 		coordinates_bounding_box(Coordinates, BoundingBox).
+
+	bbox_intersects_polyline(BoundingBox, [Coordinate1, Coordinate2| Coordinates]) :-
+		valid_bbox(BoundingBox),
+		valid_coordinate(Coordinate1),
+		valid_coordinate(Coordinate2),
+		( 	bbox_contains(BoundingBox, Coordinate1) ->
+			true
+		; 	bbox_segment_intersects(BoundingBox, Coordinate1, Coordinate2) ->
+			true
+		; 	bbox_intersects_polyline(BoundingBox, Coordinate2, Coordinates)
+		).
+
+	valid_bbox(bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))) :-
+		number(MinLatitude), number(MinLongitude), number(MaxLatitude), number(MaxLongitude),
+		MinLatitude =< MaxLatitude,
+		MinLatitude >= -90.0,
+		MaxLatitude =< 90.0,
+		MinLongitude >= -180.0,
+		MinLongitude =< 180.0,
+		MaxLongitude >= -180.0,
+		MaxLongitude =< 180.0.
+
+	bbox_longitude_segments(MinLongitude, MaxLongitude, [MinLongitude-MaxLongitude]) :-
+		MinLongitude =< MaxLongitude,
+		!.
+	bbox_longitude_segments(MinLongitude, MaxLongitude, [MinLongitude-180.0, -180.0-MaxLongitude]).
+
+	longitude_in_segments(Longitude, [Start-End| _]) :-
+		Start =< Longitude,
+		Longitude =< End,
+		!.
+	longitude_in_segments(Longitude, [_| Segments]) :-
+		longitude_in_segments(Longitude, Segments).
+
+	longitude_segments_intersect(Segments1, Segments2, inclusive) :-
+		memberchk(Start1-End1, Segments1),
+		memberchk(Start2-End2, Segments2),
+		Start1 =< End2,
+		Start2 =< End1,
+		!.
+	longitude_segments_intersect(Segments1, Segments2, strict) :-
+		memberchk(Start1-End1, Segments1),
+		memberchk(Start2-End2, Segments2),
+		Start1 < End2,
+		Start2 < End1,
+		!.
+
+	longitude_segments_contained([], _OuterSegments).
+	longitude_segments_contained([Start-End| Segments], OuterSegments) :-
+		memberchk(OuterStart-OuterEnd, OuterSegments),
+		OuterStart =< Start,
+		End =< OuterEnd,
+		!,
+		longitude_segments_contained(Segments, OuterSegments).
+
+	all_bbox_contains([], _).
+	all_bbox_contains([Coordinate| Coordinates], BoundingBox) :-
+		bbox_contains(BoundingBox, Coordinate),
+		all_bbox_contains(Coordinates, BoundingBox).
+
+	bbox_polygon(
+		bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude)),
+		[
+			geographic(MinLatitude, MinLongitude),
+			geographic(MaxLatitude, MinLongitude),
+			geographic(MaxLatitude, MaxLongitude),
+			geographic(MinLatitude, MaxLongitude)
+		]
+	).
+
+	bbox_intersects_polyline(_BoundingBox, _Previous, []) :-
+		fail.
+	bbox_intersects_polyline(BoundingBox, Previous, [Coordinate| Coordinates]) :-
+		valid_coordinate(Coordinate),
+		( 	bbox_contains(BoundingBox, Coordinate) ->
+			true
+		; 	bbox_segment_intersects(BoundingBox, Previous, Coordinate) ->
+			true
+		; 	bbox_intersects_polyline(BoundingBox, Coordinate, Coordinates)
+		).
+
+	bbox_segment_intersects(BoundingBox, Coordinate1, Coordinate2) :-
+		bbox_polygon(BoundingBox, [Corner1, Corner2, Corner3, Corner4]),
+		( 	segments_intersect(Coordinate1, Coordinate2, Corner1, Corner2) ->
+			true
+		; 	segments_intersect(Coordinate1, Coordinate2, Corner2, Corner3) ->
+			true
+		; 	segments_intersect(Coordinate1, Coordinate2, Corner3, Corner4) ->
+			true
+		; 	segments_intersect(Coordinate1, Coordinate2, Corner4, Corner1)
+		).
 
 	point_to_polyline_distance(Point, [Coordinate1, Coordinate2| Coordinates], Distance) :-
 		valid_coordinate(Point),

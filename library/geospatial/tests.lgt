@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-05-11,
 		comment is 'Unit tests for the "geospatial" library.'
 	]).
 
@@ -73,9 +73,13 @@
 		is_valid_polygon/1,
 		bbox_contains/2,
 		bbox_intersects/2,
+		bbox_overlaps/2,
 		bbox_union/3,
 		bbox_expand/3,
+		bbox_intersects_polygon/2,
+		bbox_contains_polygon/2,
 		point_to_polyline_distance/3,
+		bbox_intersects_polyline/2,
 		nearest_point_on_segment/4,
 		nearest_point_on_polyline/4,
 		polyline_length/2,
@@ -320,11 +324,41 @@
 	test(geospatial_bbox_contains_2_02, fail) :-
 		bbox_contains(bbox(geographic(-1.0, -1.0), geographic(1.0, 1.0)), geographic(2.0, 0.5)).
 
+	test(geospatial_bbox_contains_2_03, deterministic) :-
+		bbox_contains(
+			bbox(geographic(-1.0, -1.0), geographic(1.0, 1.0)),
+			bbox(geographic(-0.5, -0.5), geographic(0.5, 0.5))
+		).
+
+	test(geospatial_bbox_contains_2_04, deterministic) :-
+		bbox_contains(
+			bbox(geographic(-1.0, 170.0), geographic(1.0, -170.0)),
+			geographic(0.0, 179.0)
+		).
+
 	test(geospatial_bbox_intersects_2_01, deterministic) :-
 		bbox_intersects(bbox(geographic(0.0, 0.0), geographic(2.0, 2.0)), bbox(geographic(1.0, 1.0), geographic(3.0, 3.0))).
 
 	test(geospatial_bbox_intersects_2_02, fail) :-
 		bbox_intersects(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(2.0, 2.0), geographic(3.0, 3.0))).
+
+	test(geospatial_bbox_intersects_2_03, deterministic) :-
+		bbox_intersects(
+			bbox(geographic(-1.0, 170.0), geographic(1.0, -170.0)),
+			bbox(geographic(-0.5, 175.0), geographic(0.5, 178.0))
+		).
+
+	test(geospatial_bbox_overlaps_2_01, deterministic) :-
+		bbox_overlaps(bbox(geographic(0.0, 0.0), geographic(2.0, 2.0)), bbox(geographic(1.0, 1.0), geographic(3.0, 3.0))).
+
+	test(geospatial_bbox_overlaps_2_02, fail) :-
+		bbox_overlaps(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(1.0, 1.0), geographic(2.0, 2.0))).
+
+	test(geospatial_bbox_overlaps_2_03, deterministic) :-
+		bbox_overlaps(
+			bbox(geographic(-1.0, 170.0), geographic(1.0, -170.0)),
+			bbox(geographic(-0.5, 175.0), geographic(0.5, -175.0))
+		).
 
 	test(geospatial_bbox_union_3_01, deterministic) :-
 		bbox_union(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(-1.0, 0.5), geographic(0.5, 2.0)), bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))),
@@ -343,6 +377,42 @@
 		^^assertion(MinLongitude < -0.99),
 		^^assertion(MaxLongitude > 0.99),
 		^^assertion(MaxLongitude < 1.01).
+
+	test(geospatial_bbox_intersects_polygon_2_01, deterministic) :-
+		bbox_intersects_polygon(
+			bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)),
+			[geographic(0.5, 0.5), geographic(0.5, 1.5), geographic(1.5, 1.5), geographic(1.5, 0.5)]
+		).
+
+	test(geospatial_bbox_intersects_polygon_2_02, fail) :-
+		bbox_intersects_polygon(
+			bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)),
+			[geographic(2.0, 2.0), geographic(2.0, 3.0), geographic(3.0, 3.0), geographic(3.0, 2.0)]
+		).
+
+	test(geospatial_bbox_contains_polygon_2_01, deterministic) :-
+		bbox_contains_polygon(
+			bbox(geographic(0.0, 0.0), geographic(2.0, 2.0)),
+			[geographic(0.5, 0.5), geographic(0.5, 1.5), geographic(1.5, 1.5), geographic(1.5, 0.5)]
+		).
+
+	test(geospatial_bbox_contains_polygon_2_02, fail) :-
+		bbox_contains_polygon(
+			bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)),
+			[geographic(0.5, 0.5), geographic(0.5, 1.5), geographic(1.5, 1.5), geographic(1.5, 0.5)]
+		).
+
+	test(geospatial_bbox_intersects_polyline_2_01, deterministic) :-
+		bbox_intersects_polyline(
+			bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)),
+			[geographic(-1.0, 0.5), geographic(2.0, 0.5)]
+		).
+
+	test(geospatial_bbox_intersects_polyline_2_02, fail) :-
+		bbox_intersects_polyline(
+			bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)),
+			[geographic(-1.0, 2.0), geographic(2.0, 2.0)]
+		).
 
 	test(geospatial_point_to_polyline_distance_3_01, deterministic((Distance > 111.1, Distance < 111.3))) :-
 		point_to_polyline_distance(geographic(1.0, 1.0), [geographic(0.0, 0.0), geographic(0.0, 2.0)], Distance).

@@ -138,6 +138,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#geo-json"><span class="xref std std-ref">geo_json</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#geohash"><span class="xref std std-ref">geohash</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#geospatial"><span class="xref std std-ref">geospatial</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="geospatial_0.html">geospatial</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">geospatial_protocol</a></li>
@@ -360,8 +361,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-10</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-05-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -429,29 +430,33 @@
 <li><p><a class="reference internal" href="#is-valid-polygon-1" id="id37"><code class="docutils literal notranslate"><span class="pre">is_valid_polygon/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#bbox-contains-2" id="id38"><code class="docutils literal notranslate"><span class="pre">bbox_contains/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#bbox-intersects-2" id="id39"><code class="docutils literal notranslate"><span class="pre">bbox_intersects/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#bbox-union-3" id="id40"><code class="docutils literal notranslate"><span class="pre">bbox_union/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#bbox-expand-3" id="id41"><code class="docutils literal notranslate"><span class="pre">bbox_expand/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#bbox-from-coordinates-2" id="id42"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#point-to-polyline-distance-3" id="id43"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nearest-point-on-segment-4" id="id44"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nearest-point-on-polyline-4" id="id45"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polyline-length-2" id="id46"><code class="docutils literal notranslate"><span class="pre">polyline_length/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polyline-length-3" id="id47"><code class="docutils literal notranslate"><span class="pre">polyline_length/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polyline-simplify-3" id="id48"><code class="docutils literal notranslate"><span class="pre">polyline_simplify/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polyline-split-at-distance-4" id="id49"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polyline-resample-3" id="id50"><code class="docutils literal notranslate"><span class="pre">polyline_resample/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polygon-perimeter-2" id="id51"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polygon-perimeter-3" id="id52"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#polygons-intersect-2" id="id53"><code class="docutils literal notranslate"><span class="pre">polygons_intersect/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#bounding-box-3" id="id54"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-distance-2" id="id55"><code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-distance-3" id="id56"><code class="docutils literal notranslate"><span class="pre">route_distance/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-distance-4" id="id57"><code class="docutils literal notranslate"><span class="pre">route_distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-overlaps-2" id="id40"><code class="docutils literal notranslate"><span class="pre">bbox_overlaps/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-union-3" id="id41"><code class="docutils literal notranslate"><span class="pre">bbox_union/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-expand-3" id="id42"><code class="docutils literal notranslate"><span class="pre">bbox_expand/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-intersects-polygon-2" id="id43"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polygon/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-contains-polygon-2" id="id44"><code class="docutils literal notranslate"><span class="pre">bbox_contains_polygon/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-from-coordinates-2" id="id45"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bbox-intersects-polyline-2" id="id46"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polyline/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#point-to-polyline-distance-3" id="id47"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nearest-point-on-segment-4" id="id48"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nearest-point-on-polyline-4" id="id49"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-length-2" id="id50"><code class="docutils literal notranslate"><span class="pre">polyline_length/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-length-3" id="id51"><code class="docutils literal notranslate"><span class="pre">polyline_length/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-simplify-3" id="id52"><code class="docutils literal notranslate"><span class="pre">polyline_simplify/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-split-at-distance-4" id="id53"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polyline-resample-3" id="id54"><code class="docutils literal notranslate"><span class="pre">polyline_resample/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-perimeter-2" id="id55"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygon-perimeter-3" id="id56"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#polygons-intersect-2" id="id57"><code class="docutils literal notranslate"><span class="pre">polygons_intersect/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bounding-box-3" id="id58"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-distance-2" id="id59"><code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-distance-3" id="id60"><code class="docutils literal notranslate"><span class="pre">route_distance/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-distance-4" id="id61"><code class="docutils literal notranslate"><span class="pre">route_distance/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id58">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id59">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id60">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id62">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id63">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id64">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -1214,7 +1219,7 @@
 </section>
 <section id="bbox-contains-2">
 <span id="geospatial-protocol-0-bbox-contains-2"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_contains/2</span></code></a><a class="headerlink" href="#bbox-contains-2" title="Link to this heading"></a></h3>
-<p>True when a coordinate is inside or on the boundary of a bounding box term <code class="docutils literal notranslate"><span class="pre">bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))</span></code>.</p>
+<p>True when a coordinate or bounding box is inside or on the boundary of a bounding box term <code class="docutils literal notranslate"><span class="pre">bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))</span></code>. Antimeridian-crossing bounding boxes are supported.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1224,7 +1229,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_contains(BoundingBox,Coordinate)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_contains(BoundingBox,Contained)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -1235,7 +1240,7 @@
 </section>
 <section id="bbox-intersects-2">
 <span id="geospatial-protocol-0-bbox-intersects-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_intersects/2</span></code></a><a class="headerlink" href="#bbox-intersects-2" title="Link to this heading"></a></h3>
-<p>True when two bounding boxes intersect or touch.</p>
+<p>True when two bounding boxes intersect or touch. Antimeridian-crossing bounding boxes are supported.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1254,8 +1259,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="bbox-overlaps-2">
+<span id="geospatial-protocol-0-bbox-overlaps-2"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_overlaps/2</span></code></a><a class="headerlink" href="#bbox-overlaps-2" title="Link to this heading"></a></h3>
+<p>True when two bounding boxes have a strict positive-area overlap. Touching only at an edge or corner fails. Antimeridian-crossing bounding boxes are supported.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_overlaps(BoundingBox1,BoundingBox2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_overlaps(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="bbox-union-3">
-<span id="geospatial-protocol-0-bbox-union-3"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_union/3</span></code></a><a class="headerlink" href="#bbox-union-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-bbox-union-3"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_union/3</span></code></a><a class="headerlink" href="#bbox-union-3" title="Link to this heading"></a></h3>
 <p>Computes the minimal bounding box containing two bounding boxes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1276,7 +1302,7 @@
 <hr class="docutils" />
 </section>
 <section id="bbox-expand-3">
-<span id="geospatial-protocol-0-bbox-expand-3"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_expand/3</span></code></a><a class="headerlink" href="#bbox-expand-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-bbox-expand-3"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_expand/3</span></code></a><a class="headerlink" href="#bbox-expand-3" title="Link to this heading"></a></h3>
 <p>Expands a bounding box by a distance in kilometers on all sides using a local spherical approximation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1296,8 +1322,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="bbox-intersects-polygon-2">
+<span id="geospatial-protocol-0-bbox-intersects-polygon-2"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polygon/2</span></code></a><a class="headerlink" href="#bbox-intersects-polygon-2" title="Link to this heading"></a></h3>
+<p>True when a bounding box intersects a polygon or either contains the other. Antimeridian-crossing bounding boxes are supported.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polygon(BoundingBox,Polygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polygon(+compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="bbox-contains-polygon-2">
+<span id="geospatial-protocol-0-bbox-contains-polygon-2"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_contains_polygon/2</span></code></a><a class="headerlink" href="#bbox-contains-polygon-2" title="Link to this heading"></a></h3>
+<p>True when a bounding box fully contains a polygon, including polygon vertices on the boundary. Antimeridian-crossing bounding boxes are supported.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_contains_polygon(BoundingBox,Polygon)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_contains_polygon(+compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="bbox-from-coordinates-2">
-<span id="geospatial-protocol-0-bbox-from-coordinates-2"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates/2</span></code></a><a class="headerlink" href="#bbox-from-coordinates-2" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-bbox-from-coordinates-2"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_from_coordinates/2</span></code></a><a class="headerlink" href="#bbox-from-coordinates-2" title="Link to this heading"></a></h3>
 <p>Computes a bounding box from a list of one or more coordinates.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1317,8 +1385,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="bbox-intersects-polyline-2">
+<span id="geospatial-protocol-0-bbox-intersects-polyline-2"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polyline/2</span></code></a><a class="headerlink" href="#bbox-intersects-polyline-2" title="Link to this heading"></a></h3>
+<p>True when a bounding box intersects or touches a polyline with two or more coordinates. Antimeridian-crossing bounding boxes are supported.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polyline(BoundingBox,Polyline)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bbox_intersects_polyline(+compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="point-to-polyline-distance-3">
-<span id="geospatial-protocol-0-point-to-polyline-distance-3"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance/3</span></code></a><a class="headerlink" href="#point-to-polyline-distance-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-point-to-polyline-distance-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">point_to_polyline_distance/3</span></code></a><a class="headerlink" href="#point-to-polyline-distance-3" title="Link to this heading"></a></h3>
 <p>Computes the minimum distance in kilometers from a coordinate to a polyline with two or more coordinates.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1339,7 +1428,7 @@
 <hr class="docutils" />
 </section>
 <section id="nearest-point-on-segment-4">
-<span id="geospatial-protocol-0-nearest-point-on-segment-4"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment/4</span></code></a><a class="headerlink" href="#nearest-point-on-segment-4" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-nearest-point-on-segment-4"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_segment/4</span></code></a><a class="headerlink" href="#nearest-point-on-segment-4" title="Link to this heading"></a></h3>
 <p>Computes the nearest coordinate on a segment to a coordinate using a local equirectangular approximation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1360,7 +1449,7 @@
 <hr class="docutils" />
 </section>
 <section id="nearest-point-on-polyline-4">
-<span id="geospatial-protocol-0-nearest-point-on-polyline-4"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline/4</span></code></a><a class="headerlink" href="#nearest-point-on-polyline-4" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-nearest-point-on-polyline-4"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nearest_point_on_polyline/4</span></code></a><a class="headerlink" href="#nearest-point-on-polyline-4" title="Link to this heading"></a></h3>
 <p>Computes the nearest coordinate on a polyline to a coordinate and the corresponding distance in kilometers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1381,7 +1470,7 @@
 <hr class="docutils" />
 </section>
 <section id="polyline-length-2">
-<span id="geospatial-protocol-0-polyline-length-2"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_length/2</span></code></a><a class="headerlink" href="#polyline-length-2" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polyline-length-2"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_length/2</span></code></a><a class="headerlink" href="#polyline-length-2" title="Link to this heading"></a></h3>
 <p>Computes the polyline length in kilometers for a list of two or more coordinates using the default <code class="docutils literal notranslate"><span class="pre">haversine</span></code> metric.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1402,7 +1491,7 @@
 <hr class="docutils" />
 </section>
 <section id="polyline-length-3">
-<span id="geospatial-protocol-0-polyline-length-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_length/3</span></code></a><a class="headerlink" href="#polyline-length-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polyline-length-3"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_length/3</span></code></a><a class="headerlink" href="#polyline-length-3" title="Link to this heading"></a></h3>
 <p>Computes the polyline length in kilometers for a list of two or more coordinates using the selected metric.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1423,7 +1512,7 @@
 <hr class="docutils" />
 </section>
 <section id="polyline-simplify-3">
-<span id="geospatial-protocol-0-polyline-simplify-3"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_simplify/3</span></code></a><a class="headerlink" href="#polyline-simplify-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polyline-simplify-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_simplify/3</span></code></a><a class="headerlink" href="#polyline-simplify-3" title="Link to this heading"></a></h3>
 <p>Simplifies a polyline using the Douglas-Peucker algorithm with a tolerance in kilometers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1444,7 +1533,7 @@
 <hr class="docutils" />
 </section>
 <section id="polyline-split-at-distance-4">
-<span id="geospatial-protocol-0-polyline-split-at-distance-4"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance/4</span></code></a><a class="headerlink" href="#polyline-split-at-distance-4" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polyline-split-at-distance-4"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_split_at_distance/4</span></code></a><a class="headerlink" href="#polyline-split-at-distance-4" title="Link to this heading"></a></h3>
 <p>Splits a polyline at a distance in kilometers from its first coordinate, returning left and right polylines that share the split coordinate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1465,7 +1554,7 @@
 <hr class="docutils" />
 </section>
 <section id="polyline-resample-3">
-<span id="geospatial-protocol-0-polyline-resample-3"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_resample/3</span></code></a><a class="headerlink" href="#polyline-resample-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polyline-resample-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polyline_resample/3</span></code></a><a class="headerlink" href="#polyline-resample-3" title="Link to this heading"></a></h3>
 <p>Resamples a polyline using a fixed step in kilometers, preserving first and last coordinates.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1486,7 +1575,7 @@
 <hr class="docutils" />
 </section>
 <section id="polygon-perimeter-2">
-<span id="geospatial-protocol-0-polygon-perimeter-2"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/2</span></code></a><a class="headerlink" href="#polygon-perimeter-2" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polygon-perimeter-2"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/2</span></code></a><a class="headerlink" href="#polygon-perimeter-2" title="Link to this heading"></a></h3>
 <p>Computes the polygon perimeter in kilometers using the default <code class="docutils literal notranslate"><span class="pre">haversine</span></code> metric.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1507,7 +1596,7 @@
 <hr class="docutils" />
 </section>
 <section id="polygon-perimeter-3">
-<span id="geospatial-protocol-0-polygon-perimeter-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/3</span></code></a><a class="headerlink" href="#polygon-perimeter-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polygon-perimeter-3"></span><span id="index-55"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygon_perimeter/3</span></code></a><a class="headerlink" href="#polygon-perimeter-3" title="Link to this heading"></a></h3>
 <p>Computes the polygon perimeter in kilometers using the selected metric.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1528,7 +1617,7 @@
 <hr class="docutils" />
 </section>
 <section id="polygons-intersect-2">
-<span id="geospatial-protocol-0-polygons-intersect-2"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygons_intersect/2</span></code></a><a class="headerlink" href="#polygons-intersect-2" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-polygons-intersect-2"></span><span id="index-56"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">polygons_intersect/2</span></code></a><a class="headerlink" href="#polygons-intersect-2" title="Link to this heading"></a></h3>
 <p>True when two polygons intersect or one polygon is contained in the other.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1549,7 +1638,7 @@
 <hr class="docutils" />
 </section>
 <section id="bounding-box-3">
-<span id="geospatial-protocol-0-bounding-box-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a><a class="headerlink" href="#bounding-box-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-bounding-box-3"></span><span id="index-57"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bounding_box/3</span></code></a><a class="headerlink" href="#bounding-box-3" title="Link to this heading"></a></h3>
 <p>Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is <code class="docutils literal notranslate"><span class="pre">bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1570,7 +1659,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-distance-2">
-<span id="geospatial-protocol-0-route-distance-2"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code></a><a class="headerlink" href="#route-distance-2" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-route-distance-2"></span><span id="index-58"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code></a><a class="headerlink" href="#route-distance-2" title="Link to this heading"></a></h3>
 <p>Computes the route distance in kilometers for a list of two or more coordinates using the default <code class="docutils literal notranslate"><span class="pre">haversine</span></code> metric.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1591,7 +1680,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-distance-3">
-<span id="geospatial-protocol-0-route-distance-3"></span><span id="index-55"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/3</span></code></a><a class="headerlink" href="#route-distance-3" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-route-distance-3"></span><span id="index-59"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/3</span></code></a><a class="headerlink" href="#route-distance-3" title="Link to this heading"></a></h3>
 <p>Computes the route distance in kilometers for a list of two or more coordinates using the selected metric. Supported metrics are <code class="docutils literal notranslate"><span class="pre">haversine</span></code>, <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>, and <code class="docutils literal notranslate"><span class="pre">rhumb</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1612,7 +1701,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-distance-4">
-<span id="geospatial-protocol-0-route-distance-4"></span><span id="index-56"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/4</span></code></a><a class="headerlink" href="#route-distance-4" title="Link to this heading"></a></h3>
+<span id="geospatial-protocol-0-route-distance-4"></span><span id="index-60"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_distance/4</span></code></a><a class="headerlink" href="#route-distance-4" title="Link to this heading"></a></h3>
 <p>Computes the route distance for a list of two or more coordinates using the selected metric and output unit. Supported metrics are <code class="docutils literal notranslate"><span class="pre">haversine</span></code>, <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>, and <code class="docutils literal notranslate"><span class="pre">rhumb</span></code>. Valid <code class="docutils literal notranslate"><span class="pre">Unit</span></code> argument values are <code class="docutils literal notranslate"><span class="pre">kilometers</span></code>, <code class="docutils literal notranslate"><span class="pre">meters</span></code>, <code class="docutils literal notranslate"><span class="pre">miles</span></code>, and <code class="docutils literal notranslate"><span class="pre">nautical_miles</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

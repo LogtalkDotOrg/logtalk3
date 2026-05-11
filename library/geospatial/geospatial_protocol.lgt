@@ -22,9 +22,9 @@
 :- protocol(geospatial_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-05-11,
 		comment is 'Geospatial predicates protocol.',
 		see_also is [geospatial, numberlistp, listp]
 	]).
@@ -284,14 +284,21 @@
 	:- public(bbox_contains/2).
 	:- mode(bbox_contains(+compound, +compound), zero_or_one).
 	:- info(bbox_contains/2, [
-		comment is 'True when a coordinate is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.',
-		argnames is ['BoundingBox', 'Coordinate']
+		comment is 'True when a coordinate or bounding box is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``. Antimeridian-crossing bounding boxes are supported.',
+		argnames is ['BoundingBox', 'Contained']
 	]).
 
 	:- public(bbox_intersects/2).
 	:- mode(bbox_intersects(+compound, +compound), zero_or_one).
 	:- info(bbox_intersects/2, [
-		comment is 'True when two bounding boxes intersect or touch.',
+		comment is 'True when two bounding boxes intersect or touch. Antimeridian-crossing bounding boxes are supported.',
+		argnames is ['BoundingBox1', 'BoundingBox2']
+	]).
+
+	:- public(bbox_overlaps/2).
+	:- mode(bbox_overlaps(+compound, +compound), zero_or_one).
+	:- info(bbox_overlaps/2, [
+		comment is 'True when two bounding boxes have a strict positive-area overlap. Touching only at an edge or corner fails. Antimeridian-crossing bounding boxes are supported.',
 		argnames is ['BoundingBox1', 'BoundingBox2']
 	]).
 
@@ -309,11 +316,32 @@
 		argnames is ['BoundingBox', 'Distance', 'ExpandedBoundingBox']
 	]).
 
+	:- public(bbox_intersects_polygon/2).
+	:- mode(bbox_intersects_polygon(+compound, +list(compound)), zero_or_one).
+	:- info(bbox_intersects_polygon/2, [
+		comment is 'True when a bounding box intersects a polygon or either contains the other. Antimeridian-crossing bounding boxes are supported.',
+		argnames is ['BoundingBox', 'Polygon']
+	]).
+
+	:- public(bbox_contains_polygon/2).
+	:- mode(bbox_contains_polygon(+compound, +list(compound)), zero_or_one).
+	:- info(bbox_contains_polygon/2, [
+		comment is 'True when a bounding box fully contains a polygon, including polygon vertices on the boundary. Antimeridian-crossing bounding boxes are supported.',
+		argnames is ['BoundingBox', 'Polygon']
+	]).
+
 	:- public(bbox_from_coordinates/2).
 	:- mode(bbox_from_coordinates(+list(compound), -compound), zero_or_one).
 	:- info(bbox_from_coordinates/2, [
 		comment is 'Computes a bounding box from a list of one or more coordinates.',
 		argnames is ['Coordinates', 'BoundingBox']
+	]).
+
+	:- public(bbox_intersects_polyline/2).
+	:- mode(bbox_intersects_polyline(+compound, +list(compound)), zero_or_one).
+	:- info(bbox_intersects_polyline/2, [
+		comment is 'True when a bounding box intersects or touches a polyline with two or more coordinates. Antimeridian-crossing bounding boxes are supported.',
+		argnames is ['BoundingBox', 'Polyline']
 	]).
 
 	:- public(point_to_polyline_distance/3).

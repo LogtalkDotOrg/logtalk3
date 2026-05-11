@@ -359,29 +359,31 @@ link in a web browser.</p>
 <p>The library currently includes predicates for:</p>
 <ul class="simple">
 <li><p>Coordinate validation</p></li>
-<li><p>Coordinate normalization helpers</p></li>
+<li><p>Coordinate normalization</p></li>
 <li><p>Point-to-point distances (<code class="docutils literal notranslate"><span class="pre">haversine</span></code> and <code class="docutils literal notranslate"><span class="pre">vincenty</span></code>)</p></li>
 <li><p>Rhumb-line distance, bearing, and destination predicates</p></li>
-<li><p>Rhumb-line interpolation and midpoint helpers</p></li>
+<li><p>Rhumb-line interpolation and midpoint</p></li>
 <li><p>Generic distance dispatch (<code class="docutils literal notranslate"><span class="pre">distance/4</span></code> and <code class="docutils literal notranslate"><span class="pre">distance/5</span></code>)</p></li>
 <li><p>Initial and final bearings</p></li>
 <li><p>Midpoint and destination point computations</p></li>
-<li><p>Great-circle interpolation and track-distance helpers</p></li>
+<li><p>Great-circle interpolation and track-distance</p></li>
 <li><p>Proximity checks and nearest coordinate search</p></li>
 <li><p>Mean center and coordinates bounding boxes</p></li>
-<li><p>Minimum enclosing circle helper</p></li>
-<li><p>Coordinates-to-bounding-box conversion helper</p></li>
-<li><p>Equirectangular projection and inverse helpers</p></li>
+<li><p>Minimum enclosing circle</p></li>
+<li><p>Coordinates-to-bounding-box conversion</p></li>
+<li><p>Equirectangular projection and inverse</p></li>
 <li><p>Point-in-polygon checks</p></li>
 <li><p>Polygon area, polygon centroid, and polygon bounding boxes</p></li>
-<li><p>Polygon closure and orientation helpers</p></li>
-<li><p>Polygon orientation normalization helpers</p></li>
+<li><p>Polygon closure and orientation</p></li>
+<li><p>Polygon orientation normalization</p></li>
 <li><p>Polygon validity checks</p></li>
 <li><p>Bounding-box utilities</p></li>
-<li><p>Nearest-point and point-to-polyline distance helpers</p></li>
+<li><p>Strict bounding-box overlap checks</p></li>
+<li><p>Bounding-box and polygon/polyline relation</p></li>
+<li><p>Nearest-point and point-to-polyline distance</p></li>
 <li><p>Polyline length and polygon perimeter</p></li>
 <li><p>Polyline simplification by tolerance</p></li>
-<li><p>Polyline split and resampling helpers</p></li>
+<li><p>Polyline split and resampling</p></li>
 <li><p>Polygon intersection checks</p></li>
 <li><p>Spherical bounding boxes</p></li>
 <li><p>Route distance accumulation (<code class="docutils literal notranslate"><span class="pre">route_distance/2</span></code>,
@@ -478,7 +480,12 @@ kilometers:</p>
 </div>
 <p>Work with bounding boxes:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> geospatial<span class="o">::</span>bbox_contains(bbox(geographic(<span class="o">-</span><span class="m">1.0</span>, <span class="o">-</span><span class="m">1.0</span>), geographic(<span class="m">1.0</span>, <span class="m">1.0</span>)), geographic(<span class="m">0.5</span>, <span class="m">0.5</span>)).
+| <span class="o">?-</span> geospatial<span class="o">::</span>bbox_contains(bbox(geographic(<span class="o">-</span><span class="m">1.0</span>, <span class="m">170.0</span>), geographic(<span class="m">1.0</span>, <span class="o">-</span><span class="m">170.0</span>)), bbox(geographic(<span class="o">-</span><span class="m">0.5</span>, <span class="m">175.0</span>), geographic(<span class="m">0.5</span>, <span class="o">-</span><span class="m">175.0</span>))).
 | <span class="o">?-</span> geospatial<span class="o">::</span>bbox_intersects(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">1.0</span>, <span class="m">1.0</span>)), bbox(geographic(<span class="m">0.5</span>, <span class="m">0.5</span>), geographic(<span class="m">2.0</span>, <span class="m">2.0</span>))).
+| <span class="o">?-</span> geospatial<span class="o">::</span>bbox_overlaps(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">1.0</span>, <span class="m">1.0</span>)), bbox(geographic(<span class="m">0.5</span>, <span class="m">0.5</span>), geographic(<span class="m">2.0</span>, <span class="m">2.0</span>))).
+| <span class="o">?-</span> geospatial<span class="o">::</span>bbox_intersects_polygon(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">1.0</span>, <span class="m">1.0</span>)), [geographic(<span class="m">0.5</span>, <span class="m">0.5</span>), geographic(<span class="m">0.5</span>, <span class="m">1.5</span>), geographic(<span class="m">1.5</span>, <span class="m">1.5</span>), geographic(<span class="m">1.5</span>, <span class="m">0.5</span>)]).
+| <span class="o">?-</span> geospatial<span class="o">::</span>bbox_contains_polygon(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">2.0</span>, <span class="m">2.0</span>)), [geographic(<span class="m">0.5</span>, <span class="m">0.5</span>), geographic(<span class="m">0.5</span>, <span class="m">1.5</span>), geographic(<span class="m">1.5</span>, <span class="m">1.5</span>), geographic(<span class="m">1.5</span>, <span class="m">0.5</span>)]).
+| <span class="o">?-</span> geospatial<span class="o">::</span>bbox_intersects_polyline(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">1.0</span>, <span class="m">1.0</span>)), [geographic(<span class="o">-</span><span class="m">1.0</span>, <span class="m">0.5</span>), geographic(<span class="m">2.0</span>, <span class="m">0.5</span>)]).
 | <span class="o">?-</span> geospatial<span class="o">::</span>bbox_union(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">1.0</span>, <span class="m">1.0</span>)), bbox(geographic(<span class="o">-</span><span class="m">1.0</span>, <span class="m">0.5</span>), geographic(<span class="m">0.5</span>, <span class="m">2.0</span>)), <span class="nv">BoundingBox</span>).
 | <span class="o">?-</span> geospatial<span class="o">::</span>bbox_expand(bbox(geographic(<span class="m">0.0</span>, <span class="m">0.0</span>), geographic(<span class="m">0.0</span>, <span class="m">0.0</span>)), <span class="m">111.195</span>, <span class="nv">ExpandedBoundingBox</span>).
 </pre></div>

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 10, 2026
+##   Last updated on May 11, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -144,6 +144,7 @@ sed '1,19d' ../../../library/gaussian_process_regression/NOTES.md | pandoc -f gf
 sed '1,19d' ../../../library/genint/NOTES.md | pandoc -f gfm -t rst -o libraries/genint.rst
 sed '1,19d' ../../../library/gensym/NOTES.md | pandoc -f gfm -t rst -o libraries/gensym.rst
 sed '1,19d' ../../../library/geo_json/NOTES.md | pandoc -f gfm -t rst -o libraries/geo_json.rst
+sed '1,19d' ../../../library/geohash/NOTES.md | pandoc -f gfm -t rst -o libraries/geohash.rst
 sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libraries/geospatial.rst
 sed '1,19d' ../../../library/git/NOTES.md | pandoc -f gfm -t rst -o libraries/git.rst
 sed '1,19d' ../../../library/glicko2_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/glicko2_ranker.rst
