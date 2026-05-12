@@ -116,6 +116,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#debugger"><span class="xref std std-ref">debugger</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><span class="xref std std-ref">dependents</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#deques"><span class="xref std std-ref">deques</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#derangements"><span class="xref std std-ref">derangements</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#diagrams"><span class="xref std std-ref">diagrams</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dictionaries"><span class="xref std std-ref">dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dif"><span class="xref std std-ref">dif</span></a></li>
@@ -408,28 +409,25 @@
 <li><p><a class="reference internal" href="#k-permutation-3" id="id11"><code class="docutils literal notranslate"><span class="pre">k_permutation/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#k-permutations-4" id="id12"><code class="docutils literal notranslate"><span class="pre">k_permutations/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#k-permutation-4" id="id13"><code class="docutils literal notranslate"><span class="pre">k_permutation/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#derangements-2" id="id14"><code class="docutils literal notranslate"><span class="pre">derangements/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#derangement-2" id="id15"><code class="docutils literal notranslate"><span class="pre">derangement/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#count-derangements-2" id="id16"><code class="docutils literal notranslate"><span class="pre">count_derangements/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#next-permutation-2" id="id17"><code class="docutils literal notranslate"><span class="pre">next_permutation/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#previous-permutation-2" id="id18"><code class="docutils literal notranslate"><span class="pre">previous_permutation/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth-permutation-3" id="id19"><code class="docutils literal notranslate"><span class="pre">nth_permutation/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth-permutation-4" id="id20"><code class="docutils literal notranslate"><span class="pre">nth_permutation/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#permutation-index-3" id="id21"><code class="docutils literal notranslate"><span class="pre">permutation_index/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#permutation-index-4" id="id22"><code class="docutils literal notranslate"><span class="pre">permutation_index/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#count-permutations-2" id="id23"><code class="docutils literal notranslate"><span class="pre">count_permutations/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#count-distinct-permutations-2" id="id24"><code class="docutils literal notranslate"><span class="pre">count_distinct_permutations/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#nth-distinct-permutation-3" id="id25"><code class="docutils literal notranslate"><span class="pre">nth_distinct_permutation/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#distinct-permutation-index-3" id="id26"><code class="docutils literal notranslate"><span class="pre">distinct_permutation_index/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#random-permutation-2" id="id27"><code class="docutils literal notranslate"><span class="pre">random_permutation/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#sample-permutations-3" id="id28"><code class="docutils literal notranslate"><span class="pre">sample_permutations/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#random-distinct-permutation-2" id="id29"><code class="docutils literal notranslate"><span class="pre">random_distinct_permutation/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#sample-distinct-permutations-3" id="id30"><code class="docutils literal notranslate"><span class="pre">sample_distinct_permutations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#next-permutation-2" id="id14"><code class="docutils literal notranslate"><span class="pre">next_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#previous-permutation-2" id="id15"><code class="docutils literal notranslate"><span class="pre">previous_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth-permutation-3" id="id16"><code class="docutils literal notranslate"><span class="pre">nth_permutation/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth-permutation-4" id="id17"><code class="docutils literal notranslate"><span class="pre">nth_permutation/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutation-index-3" id="id18"><code class="docutils literal notranslate"><span class="pre">permutation_index/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#permutation-index-4" id="id19"><code class="docutils literal notranslate"><span class="pre">permutation_index/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#count-permutations-2" id="id20"><code class="docutils literal notranslate"><span class="pre">count_permutations/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#count-distinct-permutations-2" id="id21"><code class="docutils literal notranslate"><span class="pre">count_distinct_permutations/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nth-distinct-permutation-3" id="id22"><code class="docutils literal notranslate"><span class="pre">nth_distinct_permutation/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#distinct-permutation-index-3" id="id23"><code class="docutils literal notranslate"><span class="pre">distinct_permutation_index/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-permutation-2" id="id24"><code class="docutils literal notranslate"><span class="pre">random_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sample-permutations-3" id="id25"><code class="docutils literal notranslate"><span class="pre">sample_permutations/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-distinct-permutation-2" id="id26"><code class="docutils literal notranslate"><span class="pre">random_distinct_permutation/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sample-distinct-permutations-3" id="id27"><code class="docutils literal notranslate"><span class="pre">sample_distinct_permutations/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id31">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id32">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id33">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id28">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id29">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id30">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -686,71 +684,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="derangements-2">
-<span id="permutations-protocol-0-derangements-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">derangements/2</span></code></a><a class="headerlink" href="#derangements-2" title="Link to this heading"></a></h3>
-<p>Generates all derangements of a list.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">derangements(List,Derangements)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">derangements(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="derangement-2">
-<span id="permutations-protocol-0-derangement-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">derangement/2</span></code></a><a class="headerlink" href="#derangement-2" title="Link to this heading"></a></h3>
-<p>True iff the second argument is a derangement of the first argument.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">derangement(List,Derangement)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">derangement(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="count-derangements-2">
-<span id="permutations-protocol-0-count-derangements-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_derangements/2</span></code></a><a class="headerlink" href="#count-derangements-2" title="Link to this heading"></a></h3>
-<p>Counts the number of derangements of a list.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">count_derangements(List,Count)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">count_derangements(+list,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="next-permutation-2">
-<span id="permutations-protocol-0-next-permutation-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next_permutation/2</span></code></a><a class="headerlink" href="#next-permutation-2" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-next-permutation-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next_permutation/2</span></code></a><a class="headerlink" href="#next-permutation-2" title="Link to this heading"></a></h3>
 <p>Returns the next permutation value in lexicographic order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -771,7 +706,7 @@
 <hr class="docutils" />
 </section>
 <section id="previous-permutation-2">
-<span id="permutations-protocol-0-previous-permutation-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">previous_permutation/2</span></code></a><a class="headerlink" href="#previous-permutation-2" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-previous-permutation-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">previous_permutation/2</span></code></a><a class="headerlink" href="#previous-permutation-2" title="Link to this heading"></a></h3>
 <p>Returns the previous permutation value in lexicographic order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -792,7 +727,7 @@
 <hr class="docutils" />
 </section>
 <section id="nth-permutation-3">
-<span id="permutations-protocol-0-nth-permutation-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_permutation/3</span></code></a><a class="headerlink" href="#nth-permutation-3" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-nth-permutation-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_permutation/3</span></code></a><a class="headerlink" href="#nth-permutation-3" title="Link to this heading"></a></h3>
 <p>Returns the permutation at a given zero-based index using default order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -813,7 +748,7 @@
 <hr class="docutils" />
 </section>
 <section id="nth-permutation-4">
-<span id="permutations-protocol-0-nth-permutation-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_permutation/4</span></code></a><a class="headerlink" href="#nth-permutation-4" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-nth-permutation-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_permutation/4</span></code></a><a class="headerlink" href="#nth-permutation-4" title="Link to this heading"></a></h3>
 <p>Returns the permutation at a given zero-based index in the given order: <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -834,7 +769,7 @@
 <hr class="docutils" />
 </section>
 <section id="permutation-index-3">
-<span id="permutations-protocol-0-permutation-index-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutation_index/3</span></code></a><a class="headerlink" href="#permutation-index-3" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-permutation-index-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutation_index/3</span></code></a><a class="headerlink" href="#permutation-index-3" title="Link to this heading"></a></h3>
 <p>Returns the zero-based index of a permutation using default order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -855,7 +790,7 @@
 <hr class="docutils" />
 </section>
 <section id="permutation-index-4">
-<span id="permutations-protocol-0-permutation-index-4"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutation_index/4</span></code></a><a class="headerlink" href="#permutation-index-4" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-permutation-index-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">permutation_index/4</span></code></a><a class="headerlink" href="#permutation-index-4" title="Link to this heading"></a></h3>
 <p>Returns the zero-based index of a permutation in the given order: <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">lexicographic</span></code>, or <code class="docutils literal notranslate"><span class="pre">shortlex</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -876,7 +811,7 @@
 <hr class="docutils" />
 </section>
 <section id="count-permutations-2">
-<span id="permutations-protocol-0-count-permutations-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_permutations/2</span></code></a><a class="headerlink" href="#count-permutations-2" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-count-permutations-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_permutations/2</span></code></a><a class="headerlink" href="#count-permutations-2" title="Link to this heading"></a></h3>
 <p>Counts the number of permutations of a list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -897,7 +832,7 @@
 <hr class="docutils" />
 </section>
 <section id="count-distinct-permutations-2">
-<span id="permutations-protocol-0-count-distinct-permutations-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_distinct_permutations/2</span></code></a><a class="headerlink" href="#count-distinct-permutations-2" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-count-distinct-permutations-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count_distinct_permutations/2</span></code></a><a class="headerlink" href="#count-distinct-permutations-2" title="Link to this heading"></a></h3>
 <p>Counts the number of distinct permutations of a list (deduplicating equal-valued permutations).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -918,7 +853,7 @@
 <hr class="docutils" />
 </section>
 <section id="nth-distinct-permutation-3">
-<span id="permutations-protocol-0-nth-distinct-permutation-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_distinct_permutation/3</span></code></a><a class="headerlink" href="#nth-distinct-permutation-3" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-nth-distinct-permutation-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nth_distinct_permutation/3</span></code></a><a class="headerlink" href="#nth-distinct-permutation-3" title="Link to this heading"></a></h3>
 <p>Returns the distinct permutation at a given zero-based index in default generation order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -939,7 +874,7 @@
 <hr class="docutils" />
 </section>
 <section id="distinct-permutation-index-3">
-<span id="permutations-protocol-0-distinct-permutation-index-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">distinct_permutation_index/3</span></code></a><a class="headerlink" href="#distinct-permutation-index-3" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-distinct-permutation-index-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">distinct_permutation_index/3</span></code></a><a class="headerlink" href="#distinct-permutation-index-3" title="Link to this heading"></a></h3>
 <p>Returns the zero-based index of a distinct permutation in default generation order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -960,7 +895,7 @@
 <hr class="docutils" />
 </section>
 <section id="random-permutation-2">
-<span id="permutations-protocol-0-random-permutation-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_permutation/2</span></code></a><a class="headerlink" href="#random-permutation-2" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-random-permutation-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_permutation/2</span></code></a><a class="headerlink" href="#random-permutation-2" title="Link to this heading"></a></h3>
 <p>Returns a random permutation of a list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -981,7 +916,7 @@
 <hr class="docutils" />
 </section>
 <section id="sample-permutations-3">
-<span id="permutations-protocol-0-sample-permutations-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sample_permutations/3</span></code></a><a class="headerlink" href="#sample-permutations-3" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-sample-permutations-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sample_permutations/3</span></code></a><a class="headerlink" href="#sample-permutations-3" title="Link to this heading"></a></h3>
 <p>Returns SampleCount random permutations of a list, sampled with replacement.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1002,7 +937,7 @@
 <hr class="docutils" />
 </section>
 <section id="random-distinct-permutation-2">
-<span id="permutations-protocol-0-random-distinct-permutation-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_distinct_permutation/2</span></code></a><a class="headerlink" href="#random-distinct-permutation-2" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-random-distinct-permutation-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_distinct_permutation/2</span></code></a><a class="headerlink" href="#random-distinct-permutation-2" title="Link to this heading"></a></h3>
 <p>Returns a random distinct permutation of a list (deduplicating equal-valued permutations).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1023,7 +958,7 @@
 <hr class="docutils" />
 </section>
 <section id="sample-distinct-permutations-3">
-<span id="permutations-protocol-0-sample-distinct-permutations-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sample_distinct_permutations/3</span></code></a><a class="headerlink" href="#sample-distinct-permutations-3" title="Link to this heading"></a></h3>
+<span id="permutations-protocol-0-sample-distinct-permutations-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sample_distinct_permutations/3</span></code></a><a class="headerlink" href="#sample-distinct-permutations-3" title="Link to this heading"></a></h3>
 <p>Returns SampleCount random distinct permutations of a list, sampled with replacement after deduplicating equal-valued permutations.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

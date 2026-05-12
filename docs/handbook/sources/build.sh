@@ -126,6 +126,7 @@ sed '1,19d' ../../../library/dates_tz/NOTES.md | pandoc -f gfm -t rst -o librari
 sed '1,19d' ../../../library/dbscan_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/dbscan_clusterer.rst
 sed '1,19d' ../../../library/dependents/NOTES.md | pandoc -f gfm -t rst -o libraries/dependents.rst
 sed '1,19d' ../../../library/deques/NOTES.md | pandoc -f gfm -t rst -o libraries/deques.rst
+sed '1,19d' ../../../library/derangements/NOTES.md | pandoc -f gfm -t rst -o libraries/derangements.rst
 sed '1,19d' ../../../library/dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/dictionaries.rst
 sed '1,19d' ../../../library/dif/NOTES.md | pandoc -f gfm -t rst -o libraries/dif.rst
 sed '1,19d' ../../../library/dimension_reduction_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst

@@ -91,22 +91,6 @@
 		k_permutation(K, List, Permutation0),
 		apply_order(Order, [Permutation0], [Permutation]).
 
-	derangements(List, Derangements) :-
-		findall(Derangement, derangement(List, Derangement), Derangements).
-
-	derangement(List, Derangement) :-
-		permutation(List, Derangement),
-		is_derangement(List, Derangement).
-
-	count_derangements(List, Count) :-
-		derangements(List, Derangements),
-		length(Derangements, Count).
-
-	is_derangement([], []).
-	is_derangement([Head1| Tail1], [Head2| Tail2]) :-
-		Head1 \== Head2,
-		is_derangement(Tail1, Tail2).
-
 	next_permutation(Permutation, Next) :-
 		append(Prefix, [Pivot| Suffix], Permutation),
 		Suffix \= [],

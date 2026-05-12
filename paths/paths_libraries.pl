@@ -80,6 +80,7 @@ logtalk_library_path(dates_tz, library('dates_tz/')).
 logtalk_library_path(dbscan_clusterer, library('dbscan_clusterer/')).
 logtalk_library_path(dependents, library('dependents/')).
 logtalk_library_path(deques, library('deques/')).
+logtalk_library_path(derangements, library('derangements/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
 logtalk_library_path(dif, library('dif/')).
 logtalk_library_path(dimension_reduction_protocols, library('dimension_reduction_protocols/')).

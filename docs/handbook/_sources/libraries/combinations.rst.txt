@@ -22,10 +22,10 @@ provided:
 - **Stepping operations** - Predicates for moving to the next or
   previous combination in lexicographic order.
 
-Dedicated ``arrangements``, ``subsequences``, and ``permutations``
-libraries are also available for focused APIs on related operations. The
-``multisets`` library is the repetition-allowed counterpart to this
-library.
+Dedicated ``arrangements``, ``multisets``, ``permutations``,
+``derangements``, and ``subsequences`` libraries are also available for
+focused APIs on related operations. The ``multisets`` library is the
+repetition-allowed counterpart to this library.
 
 API documentation
 -----------------

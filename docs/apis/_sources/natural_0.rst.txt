@@ -14,8 +14,8 @@ Natural numbers data type predicates.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-02-02
+| **Version:** 2:1:0
+| **Date:** 2026-05-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -52,6 +52,25 @@ Computes the factorial of a non-negative integer.
 |    ``factorial(N,Factorial)``
 | **Mode and number of proofs:**
 |    ``factorial(+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: subfactorial/2
+.. _natural/0::subfactorial/2:
+
+``subfactorial/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes the subfactorial of a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subfactorial(N,Subfactorial)``
+| **Mode and number of proofs:**
+|    ``subfactorial(+non_negative_integer,-non_negative_integer)`` - ``one``
 
 
 ------------

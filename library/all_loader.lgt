@@ -32,6 +32,7 @@
 		combinations(loader),
 		multisets(loader),
 		permutations(loader),
+		derangements(loader),
 		arrangements(loader),
 		os(loader),
 		process(loader),

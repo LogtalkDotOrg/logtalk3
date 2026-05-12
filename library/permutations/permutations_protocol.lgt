@@ -112,27 +112,6 @@
 		argnames is ['K', 'List', 'Order', 'Permutation']
 	]).
 
-	:- public(derangements/2).
-	:- mode(derangements(+list, -list), one).
-	:- info(derangements/2, [
-		comment is 'Generates all derangements of a list.',
-		argnames is ['List', 'Derangements']
-	]).
-
-	:- public(derangement/2).
-	:- mode(derangement(+list, -list), one_or_more).
-	:- info(derangement/2, [
-		comment is 'True iff the second argument is a derangement of the first argument.',
-		argnames is ['List', 'Derangement']
-	]).
-
-	:- public(count_derangements/2).
-	:- mode(count_derangements(+list, -integer), one).
-	:- info(count_derangements/2, [
-		comment is 'Counts the number of derangements of a list.',
-		argnames is ['List', 'Count']
-	]).
-
 	:- public(next_permutation/2).
 	:- mode(next_permutation(+list, -list), zero_or_one).
 	:- info(next_permutation/2, [

@@ -14,8 +14,6 @@ provided:
   controlling output order.
 - **Distinct-value generation** - Predicates for generating permutations
   while deduplicating equal-valued results.
-- **Derangement operations** - Predicates for generating, testing, and
-  counting derangements.
 - **Lexicographic stepping** - Predicates for navigating permutations in
   lexicographic order.
 - **Indexed access** - Predicates for direct access to permutations at
@@ -25,10 +23,10 @@ provided:
 - **Random selection** - Predicates for randomly selecting and sampling
   permutations and distinct permutations.
 
-Dedicated ``arrangements``, ``combinations``, and ``subsequences``
-libraries are also available for focused APIs on related operations. The
-``arrangements`` library is the repetition-allowed counterpart to this
-library.
+Dedicated ``arrangements``, ``combinations``, ``derangements``,
+``multisets``, ``derangements``, and ``subsequences`` libraries are also
+available for focused APIs on related operations. The ``arrangements``
+library is the repetition-allowed counterpart to this library.
 
 API documentation
 -----------------

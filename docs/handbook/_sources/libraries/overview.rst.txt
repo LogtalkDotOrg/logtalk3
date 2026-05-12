@@ -6,15 +6,16 @@ protocols. The currently available libraries can be grouped by scope as
 follows (the grouping is thematic only, as some libraries naturally span
 multiple areas):
 
-- Application metadata, configuration., and logging: ``application``,
+- Application metadata, configuration, and logging: ``application``,
   ``expand_library_alias_paths``, ``command_line_options``, ``logging``,
   and ``options``.
-- Types, collections, combinatorics, and generic data processing:
-  ``basic_types``, ``types``, ``assignvars``, ``arrangements``,
-  ``combinations``, ``deques``, ``dictionaries``,
+- Types, collections and generic data processing: ``basic_types``,
+  ``types``, ``assignvars``, ``deques``, ``dictionaries``,
   ``nested_dictionaries``, ``graphs``, ``heaps``, ``hierarchies``,
-  ``intervals``, ``multisets``, ``permutations``, ``queues``, ``sets``,
-  ``subsequences``, ``union_find``, and ``zippers``.
+  ``intervals``, ``queues``, ``sets``, ``subsequences``, ``union_find``,
+  and ``zippers``.
+- Combinatorics: ``arrangements``, ``combinations``, ``derangements``,
+  ``multisets``, and ``permutations``.
 - Meta-programming: ``meta`` and ``meta_compiler``
 - Monoid implementations: ``expecteds``, ``optionals``, and
   ``validations``.

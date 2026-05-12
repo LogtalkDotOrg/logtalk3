@@ -36,8 +36,9 @@ and random selection. The following categories of predicates are provided:
 * **Constrained operations** - Predicates for generating subsequences with specific constraints.
 * **Utility predicates** - Predicates that support subsequence operations.
 
-Dedicated `arrangements`, `combinations`, and `permutations` libraries are also
-available for focused APIs on related operations.
+Dedicated `arrangements`, `derangements`, `combinations`, `multisets`, and
+`permutations` libraries are also available for focused APIs on related
+operations.
 
 
 API documentation

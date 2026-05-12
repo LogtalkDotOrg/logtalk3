@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:24:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-12,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -127,6 +127,18 @@
 
 	test(integer_power_sequence_4_02, true(Sequence == [1, 3, 9, 27, 81, 243])) :-
 		integer::power_sequence(0, 5, 3, Sequence).
+
+	test(natural_subfactorial_2_01, deterministic(Subfactorial == 1)) :-
+		natural::subfactorial(0, Subfactorial).
+
+	test(natural_subfactorial_2_02, deterministic(Subfactorial == 0)) :-
+		natural::subfactorial(1, Subfactorial).
+
+	test(natural_subfactorial_2_03, deterministic(Subfactorial == 9)) :-
+		natural::subfactorial(4, Subfactorial).
+
+	test(natural_subfactorial_2_04, fail) :-
+		natural::subfactorial(-1, _).
 
 	test(float_between_4_01, true(Floats =~= [0.0, 0.0, 0.0, 0.0, 0.0])) :-
 		findall(Float, float::between(0.0, 0.0, 5, Float), Floats).

@@ -23,9 +23,9 @@
 	extends(integer)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-02,
+		date is 2026-05-12,
 		comment is 'Natural numbers data type predicates.'
 	]).
 
@@ -34,6 +34,13 @@
 	:- info(factorial/2, [
 		comment is 'Computes the factorial of a non-negative integer.',
 		argnames is ['N', 'Factorial']
+	]).
+
+	:- public(subfactorial/2).
+	:- mode(subfactorial(+non_negative_integer, -non_negative_integer), one).
+	:- info(subfactorial/2, [
+		comment is 'Computes the subfactorial of a non-negative integer.',
+		argnames is ['N', 'Subfactorial']
 	]).
 
 	:- public(binomial/3).
@@ -48,12 +55,29 @@
 		N >= 0,
 		factorial(N, 1, Factorial).
 
+	subfactorial(0, 1) :-
+		!.
+	subfactorial(1, 0) :-
+		!.
+	subfactorial(N, Subfactorial) :-
+		integer(N),
+		N > 1,
+		subfactorial_loop(2, N, 1, 0, Subfactorial).
+
 	factorial(0, Factorial, Factorial) :-
 		!.
 	factorial(N, Factorial0, Factorial) :-
 		N1 is N - 1,
 		Factorial1 is Factorial0 * N,
 		factorial(N1, Factorial1, Factorial).
+
+	subfactorial_loop(I, N, Previous2, Previous1, Subfactorial) :-
+		Current is (I - 1) * (Previous1 + Previous2),
+		(   I =:= N ->
+			Subfactorial = Current
+		;   I1 is I + 1,
+			subfactorial_loop(I1, N, Previous1, Current, Subfactorial)
+		).
 
 	binomial(N, K, Binomial) :-
 		K =< N,

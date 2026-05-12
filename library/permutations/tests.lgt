@@ -74,15 +74,6 @@
 	test(k_permutation_4_lexicographic_single, true(Permutation == [c,b])) :-
 		permutations::k_permutation(2, [c,b,a], lexicographic, Permutation).
 
-	test(derangements_2_of_three, deterministic(Derangements == [[b,c,a],[c,a,b]])) :-
-		permutations::derangements([a,b,c], Derangements).
-
-	test(derangement_2_exists, exists(Derangement == [c,a,b])) :-
-		permutations::derangement([a,b,c], Derangement).
-
-	test(count_derangements_2, deterministic(Count == 9)) :-
-		permutations::count_derangements([a,b,c,d], Count).
-
 	test(next_permutation_2, deterministic(Next == [1,3,2])) :-
 		permutations::next_permutation([1,2,3], Next).
 

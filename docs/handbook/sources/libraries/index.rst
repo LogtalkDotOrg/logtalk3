@@ -76,6 +76,7 @@ directory in the ``NOTES.md`` file.
    dbscan_clusterer
    dependents
    deques
+   derangements
    dictionaries
    dif
    dimension_reduction_protocols
