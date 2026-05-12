@@ -84,34 +84,6 @@
 		argnames is ['K', 'List', 'Order', 'Arrangement']
 	]).
 
-	:- public(cartesian_product/2).
-	:- mode(cartesian_product(+list(list), -list), one).
-	:- info(cartesian_product/2, [
-		comment is 'Generates the generalized Cartesian product of a list of lists by selecting one element from each list using default order.',
-		argnames is ['Lists', 'Product']
-	]).
-
-	:- public(cartesian_tuple/2).
-	:- mode(cartesian_tuple(+list(list), -list), one_or_more).
-	:- info(cartesian_tuple/2, [
-		comment is 'True iff the second argument is a tuple obtained by selecting one element from each list in the first argument using default order.',
-		argnames is ['Lists', 'Tuple']
-	]).
-
-	:- public(cartesian_product/3).
-	:- mode(cartesian_product(+list(list), +atom, -list), one).
-	:- info(cartesian_product/3, [
-		comment is 'Generates the generalized Cartesian product with the given order: ``default`` or ``lexicographic``.',
-		argnames is ['Lists', 'Order', 'Product']
-	]).
-
-	:- public(cartesian_tuple/3).
-	:- mode(cartesian_tuple(+list(list), +atom, -list), one_or_more).
-	:- info(cartesian_tuple/3, [
-		comment is 'True iff the third argument is a Cartesian-product tuple with the given order: ``default`` or ``lexicographic``.',
-		argnames is ['Lists', 'Order', 'Tuple']
-	]).
-
 	:- public(nth_arrangement/4).
 	:- mode(nth_arrangement(+integer, +list, +integer, -list), zero_or_one).
 	:- info(nth_arrangement/4, [

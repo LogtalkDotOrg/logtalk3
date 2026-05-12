@@ -14,8 +14,9 @@ multiple areas):
   ``nested_dictionaries``, ``graphs``, ``heaps``, ``hierarchies``,
   ``intervals``, ``queues``, ``sets``, ``subsequences``, ``union_find``,
   and ``zippers``.
-- Combinatorics: ``arrangements``, ``combinations``, ``derangements``,
-  ``multisets``, ``partitions``, and ``permutations``.
+- Combinatorics: ``arrangements``, ``cartesian_products``,
+  ``combinations``, ``derangements``, ``multisets``, ``partitions``, and
+  ``permutations``.
 - Meta-programming: ``meta`` and ``meta_compiler``
 - Monoid implementations: ``expecteds``, ``optionals``, and
   ``validations``.

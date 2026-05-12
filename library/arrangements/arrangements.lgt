@@ -71,22 +71,6 @@
 		distinct_arrangements(K, List, Order, Arrangements),
 		member(Arrangement, Arrangements).
 
-	cartesian_product(Lists, Product) :-
-		findall(Tuple, cartesian_tuple(Lists, Tuple), Product).
-
-	cartesian_tuple([], []).
-	cartesian_tuple([List| Lists], [Element| Tuple]) :-
-		member(Element, List),
-		cartesian_tuple(Lists, Tuple).
-
-	cartesian_product(Lists, Order, Product) :-
-		findall(Tuple, cartesian_tuple(Lists, Tuple), Product0),
-		apply_order(Order, Product0, Product).
-
-	cartesian_tuple(Lists, Order, Tuple) :-
-		cartesian_product(Lists, Order, Product),
-		member(Tuple, Product).
-
 	nth_arrangement(K, List, Index, Arrangement) :-
 		length(List, N),
 		Index >= 0,

@@ -23,8 +23,8 @@ provided:
 - **Random selection** - Predicates for randomly selecting and sampling
   permutations and distinct permutations.
 
-Dedicated ``arrangements``, ``combinations``, ``derangements``,
-``multisets``, ``derangements``, ``partitions``, and ``subsequences``
+Dedicated ``arrangements``, ``cartesian_products``, ``combinations``,
+``derangements``, ``multisets``, ``partitions``, and ``subsequences``
 libraries are also available for focused APIs on related operations. The
 ``arrangements`` library is the repetition-allowed counterpart to this
 library.

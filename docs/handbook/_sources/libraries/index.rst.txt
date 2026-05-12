@@ -47,6 +47,7 @@ directory in the ``NOTES.md`` file.
    borda_ranker
    bradley_terry_ranker
    c45_classifier
+   cartesian_products
    cbor
    character_sets
    ccsds_frames

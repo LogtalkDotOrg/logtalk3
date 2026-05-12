@@ -64,21 +64,6 @@
 	test(distinct_arrangement_4_default_exists, exists(Arrangement == [b,a])) :-
 		arrangements::distinct_arrangement(2, [a,a,b], default, Arrangement).
 
-	test(cartesian_product_2_two_lists, deterministic(Product == [[a,1],[a,2],[b,1],[b,2]])) :-
-		arrangements::cartesian_product([[a,b],[1,2]], Product).
-
-	test(cartesian_product_3_zero_lists, deterministic(Product == [[]])) :-
-		arrangements::cartesian_product([], Product).
-
-	test(cartesian_product_3_lexicographic, deterministic(Product == [[a,1],[a,2],[b,1],[b,2]])) :-
-		arrangements::cartesian_product([[b,a],[2,1]], lexicographic, Product).
-
-	test(cartesian_tuple_3_all, true(Product == [[a,1],[a,2],[b,1],[b,2]])) :-
-		findall(Tuple, arrangements::cartesian_tuple([[a,b],[1,2]], Tuple), Product).
-
-	test(cartesian_tuple_3_lexicographic_all, true(Product == [[a,1],[a,2],[b,1],[b,2]])) :-
-		findall(Tuple, arrangements::cartesian_tuple([[b,a],[2,1]], lexicographic, Tuple), Product).
-
 	test(count_arrangements_3_two_of_four, deterministic(Count == 16)) :-
 		arrangements::count_arrangements(2, [a,b,c,d], Count).
 

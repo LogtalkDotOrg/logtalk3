@@ -82,6 +82,10 @@ from the `combinations` library to the new `multisets` library. The former
 counting, indexing, and randomly selecting ordered selections with
 replacement.
 
+* ADDED: New `cartesian_products` library implementing predicates for
+generating, counting, indexing, lexicographic stepping, and randomly
+selecting Cartesian-product tuples, including distinct-value variants.
+
 * ADDED: New `derangements` library implementing predicates for generating,
 counting, indexing, and randomly selecting fixed-point-free permutations.
 

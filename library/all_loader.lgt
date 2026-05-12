@@ -35,6 +35,7 @@
 		permutations(loader),
 		derangements(loader),
 		arrangements(loader),
+		cartesian_products(loader),
 		os(loader),
 		process(loader),
 		sockets(loader),

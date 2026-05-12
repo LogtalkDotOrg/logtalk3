@@ -1871,7 +1871,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`arrangements_protocol <arrangements_protocol/0::cartesian_product/2>`
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::cartesian_product/2>`
 
 ``cartesian_product/3``
 -----------------------
@@ -1881,7 +1881,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`arrangements_protocol <arrangements_protocol/0::cartesian_product/3>`
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::cartesian_product/3>`
 
 ``cartesian_tuple/2``
 ---------------------
@@ -1891,7 +1891,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`arrangements_protocol <arrangements_protocol/0::cartesian_tuple/2>`
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::cartesian_tuple/2>`
 
 ``cartesian_tuple/3``
 ---------------------
@@ -1901,7 +1901,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`arrangements_protocol <arrangements_protocol/0::cartesian_tuple/3>`
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::cartesian_tuple/3>`
+
+``cartesian_tuple_index/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::cartesian_tuple_index/3>`
+
+``cartesian_tuple_index/4``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::cartesian_tuple_index/4>`
 
 ``cas/6``
 ---------
@@ -3188,6 +3208,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::count_arrangements/3>`
 
+``count_cartesian_product/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::count_cartesian_product/2>`
+
 ``count_combinations/3``
 ------------------------
 
@@ -3217,6 +3247,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::count_distinct_arrangements/3>`
+
+``count_distinct_cartesian_product/2``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::count_distinct_cartesian_product/2>`
 
 ``count_distinct_combinations/3``
 ---------------------------------
@@ -5286,6 +5326,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::distinct_arrangements/4>`
+
+``distinct_cartesian_product/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::distinct_cartesian_product/2>`
+
+``distinct_cartesian_product/3``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::distinct_cartesian_product/3>`
+
+``distinct_cartesian_tuple/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::distinct_cartesian_tuple/2>`
+
+``distinct_cartesian_tuple/3``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::distinct_cartesian_tuple/3>`
+
+``distinct_cartesian_tuple_index/3``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::distinct_cartesian_tuple_index/3>`
 
 ``distinct_combination/3``
 --------------------------
@@ -13576,6 +13666,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::next_arrangement/3>`
 
+``next_cartesian_tuple/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::next_cartesian_tuple/3>`
+
 ``next_combination/3``
 ----------------------
 
@@ -14021,6 +14121,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::nth_arrangement/5>`
 
+``nth_cartesian_tuple/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::nth_cartesian_tuple/3>`
+
+``nth_cartesian_tuple/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::nth_cartesian_tuple/4>`
+
 ``nth_combination/4``
 ---------------------
 
@@ -14070,6 +14190,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::nth_distinct_arrangement/4>`
+
+``nth_distinct_cartesian_tuple/3``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::nth_distinct_cartesian_tuple/3>`
 
 ``nth_distinct_combination/4``
 ------------------------------
@@ -16287,6 +16417,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::previous_arrangement/3>`
 
+``previous_cartesian_tuple/3``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::previous_cartesian_tuple/3>`
+
 ``previous_combination/3``
 --------------------------
 
@@ -16909,6 +17049,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::random_arrangement/3>`
 
+``random_cartesian_tuple/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::random_cartesian_tuple/2>`
+
 ``random_combination/3``
 ------------------------
 
@@ -16938,6 +17088,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::random_distinct_arrangement/3>`
+
+``random_distinct_cartesian_tuple/2``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::random_distinct_cartesian_tuple/2>`
 
 ``random_distinct_combination/3``
 ---------------------------------
@@ -18740,6 +18900,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::sample_arrangements/4>`
 
+``sample_cartesian_tuples/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::sample_cartesian_tuples/3>`
+
 ``sample_combinations/4``
 -------------------------
 
@@ -18769,6 +18939,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::sample_distinct_arrangements/4>`
+
+``sample_distinct_cartesian_tuples/3``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cartesian_products_protocol <cartesian_products_protocol/0::sample_distinct_cartesian_tuples/3>`
 
 ``sample_distinct_combinations/4``
 ----------------------------------

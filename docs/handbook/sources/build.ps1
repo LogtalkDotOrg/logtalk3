@@ -98,6 +98,7 @@ Foreach-Object {
 (Get-Content ../../../library/borda_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/borda_ranker.rst
 (Get-Content ../../../library/bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
 (Get-Content ../../../library/c45_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
+(Get-Content ../../../library/cartesian_products/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
 (Get-Content ../../../library/cbor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cbor.rst
 (Get-Content ../../../library/ccsds_frames/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_frames.rst
 (Get-Content ../../../library/ccsds_link_profiles/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ccsds_link_profiles.rst

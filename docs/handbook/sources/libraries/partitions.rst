@@ -40,9 +40,9 @@ The counting predicates are connected to Bell numbers (for all
 partitions of an N-element list) and Stirling numbers of the second kind
 (for partitions with an exact number of blocks).
 
-Dedicated ``arrangements``, ``combinations``, ``derangements``,
-``multisets``, ``permutations``, and ``subsequences`` libraries are also
-available for focused APIs on related operations.
+Dedicated ``arrangements``, ``cartesian_products``, ``combinations``,
+``derangements``, ``multisets``, ``permutations``, and ``subsequences``
+libraries are also available for focused APIs on related operations.
 
 API documentation
 -----------------

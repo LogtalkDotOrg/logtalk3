@@ -27,7 +27,6 @@ element repetition allowed. The following categories of predicates are
 provided:
 
 * **Generation operations** - Predicates for generating arrangements.
-* **Generalized Cartesian products** - Predicates for generating tuples by selecting one element from each of several lists.
 * **Ordering variants** - Predicates that support an additional order argument (`default` or `lexicographic`) for controlling output order.
 * **Distinct-value generation** - Predicates for generating arrangements while deduplicating equal-valued results.
 * **Indexed access** - Predicates for direct access to arrangements at specific positions, including distinct arrangements.
@@ -35,9 +34,9 @@ provided:
 * **Counting operations** - Predicates for counting arrangements and distinct arrangements.
 * **Random selection** - Predicates for randomly selecting and sampling arrangements and distinct arrangements.
 
-Dedicated `permutations`, `combinations`, `multisets`, `derangements`,
-`partitions`, and `subsequences` libraries are also available for
-focused APIs on related operations.
+Dedicated `cartesian_products`, `permutations`, `combinations`,
+`multisets`, `derangements`, `partitions`, and `subsequences`
+libraries are also available for focused APIs on related operations.
 
 
 API documentation

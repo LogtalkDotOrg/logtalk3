@@ -33,9 +33,9 @@ repetition allowed. The following categories of predicates are provided:
 * **Random selection** - Predicates for randomly selecting and sampling multisets and distinct multisets.
 * **Lexicographic stepping** - Predicates for stepping to the next or previous multiset in lexicographic order.
 
-Dedicated `arrangements`, `combinations`, `permutations`, `derangements`,
-`partitions`, and `subsequences` libraries are also available for focused
-APIs on related operations.
+Dedicated `arrangements`, `cartesian_products`, `combinations`,
+`permutations`, `derangements`, `partitions`, and `subsequences`
+libraries are also available for focused APIs on related operations.
 
 
 API documentation

@@ -23,9 +23,9 @@ provided:
 - **Lexicographic stepping** - Predicates for stepping to the next or
   previous multiset in lexicographic order.
 
-Dedicated ``arrangements``, ``combinations``, ``permutations``,
-``derangements``, ``partitions``, and ``subsequences`` libraries are
-also available for focused APIs on related operations.
+Dedicated ``arrangements``, ``cartesian_products``, ``combinations``,
+``permutations``, ``derangements``, ``partitions``, and ``subsequences``
+libraries are also available for focused APIs on related operations.
 
 API documentation
 -----------------

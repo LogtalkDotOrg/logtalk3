@@ -29,9 +29,9 @@ of predicates are provided:
 - **Utility predicates** - Predicates that support subsequence
   operations.
 
-Dedicated ``arrangements``, ``derangements``, ``combinations``,
-``multisets``, and ``permutations`` libraries are also available for
-focused APIs on related operations.
+Dedicated ``arrangements``, ``cartesian_products``, ``derangements``,
+``combinations``, ``multisets``, and ``permutations`` libraries are also
+available for focused APIs on related operations.
 
 API documentation
 -----------------

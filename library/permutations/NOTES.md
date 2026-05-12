@@ -32,10 +32,11 @@ over lists. The following categories of predicates are provided:
 * **Counting operations** - Predicates for counting permutations and distinct permutations.
 * **Random selection** - Predicates for randomly selecting and sampling permutations and distinct permutations.
 
-Dedicated `arrangements`, `combinations`, `derangements`, `multisets`,
-`derangements`, `partitions`, and `subsequences` libraries are also
-available for focused APIs on related operations. The `arrangements`
-library is the repetition-allowed counterpart to this library.
+Dedicated `arrangements`, `cartesian_products`, `combinations`,
+`derangements`, `multisets`, `partitions`, and `subsequences`
+libraries are also available for focused APIs on related operations.
+The `arrangements` library is the repetition-allowed counterpart to
+this library.
 
 
 API documentation
