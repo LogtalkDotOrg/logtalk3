@@ -43,11 +43,33 @@
 		argnames is ['N', 'Subfactorial']
 	]).
 
+	:- public(bell/2).
+	:- mode(bell(+non_negative_integer, -non_negative_integer), one).
+	:- info(bell/2, [
+		comment is 'Computes the Bell number of a non-negative integer.',
+		argnames is ['N', 'Bell']
+	]).
+
+	:- public(stirling_second/3).
+	:- mode(stirling_second(+non_negative_integer, +non_negative_integer, -non_negative_integer), zero_or_one).
+	:- info(stirling_second/3, [
+		comment is 'Computes the Stirling number of the second kind. ``N`` must be greater than or equal to ``K`` (fails otherwise).',
+		argnames is ['N', 'K', 'Stirling']
+	]).
+
 	:- public(binomial/3).
 	:- mode(binomial(+non_negative_integer, +non_negative_integer, -non_negative_integer), zero_or_one).
 	:- info(binomial/3, [
 		comment is 'Computes the binomial coefficient. ``N`` must be greater than or equal to ``K`` (fails otherwise).',
 		argnames is ['N', 'K', 'Binomial']
+	]).
+
+	:- uses(list, [
+		nth0/3
+	]).
+
+	:- uses(numberlist, [
+		sum/2
 	]).
 
 	factorial(N, Factorial) :-
@@ -64,6 +86,21 @@
 		N > 1,
 		subfactorial_loop(2, N, 1, 0, Subfactorial).
 
+	bell(N, Bell) :-
+		integer(N),
+		N >= 0,
+		stirling_row(N, Row),
+		sum(Row, Bell).
+
+	stirling_second(N, K, Stirling) :-
+		integer(N),
+		N >= 0,
+		integer(K),
+		K >= 0,
+		K =< N,
+		stirling_row(N, Row),
+		nth0(K, Row, Stirling).
+
 	factorial(0, Factorial, Factorial) :-
 		!.
 	factorial(N, Factorial0, Factorial) :-
@@ -79,6 +116,29 @@
 			subfactorial_loop(I1, N, Previous1, Current, Subfactorial)
 		).
 
+	stirling_row(0, [1]) :-
+		!.
+	stirling_row(N, Row) :-
+		stirling_row_loop(0, N, [1], Row).
+
+	stirling_row_loop(N, N, Row, Row) :-
+		!.
+	stirling_row_loop(Current, N, PreviousRow, Row) :-
+		Next is Current + 1,
+		stirling_next_row(Next, PreviousRow, NextRow),
+		stirling_row_loop(Next, N, NextRow, Row).
+
+	stirling_next_row(N, PreviousRow, [0| RowTail]) :-
+		stirling_next_row_entries(1, N, PreviousRow, RowTail).
+
+	stirling_next_row_entries(K, K, [_], [1]) :-
+		!.
+	stirling_next_row_entries(K, N, [Previous0, Previous1| Previouss], [Current| RowTail]) :-
+		K < N,
+		Current is K * Previous1 + Previous0,
+		K1 is K + 1,
+		stirling_next_row_entries(K1, N, [Previous1| Previouss], RowTail).
+
 	binomial(N, K, Binomial) :-
 		K =< N,
 		K >= 0,
@@ -87,7 +147,7 @@
 
 	% take advantage of the fact that C(n,k) = C(n,n-k)
 	min_k(N, K, K_opt) :-
-    	(	K > N - K
+		(	K > N - K
 		->	K_opt is N - K
 		;	K_opt = K
 		).

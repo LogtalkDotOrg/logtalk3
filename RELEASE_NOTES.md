@@ -440,7 +440,8 @@ for faster run times.
 * ADDED: New `numberlist::minkowski_distance/4` predicate to the `types`
 library.
 
-* ADDED: New `natural::subfactorial/2` predicate to the `types` library.
+* ADDED: New `bell/2`, `stirling_second/3`, and `subfactorial/2` predicates to
+the `types` library `natural` object.
 
 * ADDED: New predicates `bbox_overlaps/2`, `bbox_intersects_polygon/2`,
 `bbox_contains_polygon/2`, and `bbox_intersects_polyline/2` to the `geospatial`

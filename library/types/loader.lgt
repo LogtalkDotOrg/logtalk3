@@ -26,13 +26,14 @@
 		atomic,
 		atom, callable,
 		characterp, character,
-		number, float, integer, natural,
+		number, float, integer,
 		compound,
 		pairs,
 		listp, list, list1,
 		difflist,
 		numberlistp, numberlist,
 		varlistp, varlist,
+		natural,
 		type
 	], [
 		optimize(on)

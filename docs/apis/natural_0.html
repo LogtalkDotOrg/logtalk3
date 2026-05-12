@@ -401,6 +401,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="integer_0.html#integer-0"><span class="std std-ref">integer</span></a></div>
 </div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
+</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
@@ -420,12 +425,14 @@
 <ul>
 <li><p><a class="reference internal" href="#factorial-2" id="id2"><code class="docutils literal notranslate"><span class="pre">factorial/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#subfactorial-2" id="id3"><code class="docutils literal notranslate"><span class="pre">subfactorial/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#binomial-3" id="id4"><code class="docutils literal notranslate"><span class="pre">binomial/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bell-2" id="id4"><code class="docutils literal notranslate"><span class="pre">bell/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#stirling-second-3" id="id5"><code class="docutils literal notranslate"><span class="pre">stirling_second/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#binomial-3" id="id6"><code class="docutils literal notranslate"><span class="pre">binomial/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -472,8 +479,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="bell-2">
+<span id="natural-0-bell-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bell/2</span></code></a><a class="headerlink" href="#bell-2" title="Link to this heading"></a></h3>
+<p>Computes the Bell number of a non-negative integer.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bell(N,Bell)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bell(+non_negative_integer,-non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="stirling-second-3">
+<span id="natural-0-stirling-second-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">stirling_second/3</span></code></a><a class="headerlink" href="#stirling-second-3" title="Link to this heading"></a></h3>
+<p>Computes the Stirling number of the second kind. <code class="docutils literal notranslate"><span class="pre">N</span></code> must be greater than or equal to <code class="docutils literal notranslate"><span class="pre">K</span></code> (fails otherwise).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stirling_second(N,K,Stirling)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stirling_second(+non_negative_integer,+non_negative_integer,-non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="binomial-3">
-<span id="natural-0-binomial-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">binomial/3</span></code></a><a class="headerlink" href="#binomial-3" title="Link to this heading"></a></h3>
+<span id="natural-0-binomial-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">binomial/3</span></code></a><a class="headerlink" href="#binomial-3" title="Link to this heading"></a></h3>
 <p>Computes the binomial coefficient. <code class="docutils literal notranslate"><span class="pre">N</span></code> must be greater than or equal to <code class="docutils literal notranslate"><span class="pre">K</span></code> (fails otherwise).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

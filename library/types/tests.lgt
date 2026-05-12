@@ -140,6 +140,30 @@
 	test(natural_subfactorial_2_04, fail) :-
 		natural::subfactorial(-1, _).
 
+	test(natural_bell_2_01, deterministic(Bell == 1)) :-
+		natural::bell(0, Bell).
+
+	test(natural_bell_2_02, deterministic(Bell == 5)) :-
+		natural::bell(3, Bell).
+
+	test(natural_bell_2_03, fail) :-
+		natural::bell(-1, _).
+
+	test(natural_stirling_second_3_01, deterministic(Stirling == 1)) :-
+		natural::stirling_second(0, 0, Stirling).
+
+	test(natural_stirling_second_3_02, deterministic(Stirling == 3)) :-
+		natural::stirling_second(3, 2, Stirling).
+
+	test(natural_stirling_second_3_03, deterministic(Stirling == 0)) :-
+		natural::stirling_second(3, 0, Stirling).
+
+	test(natural_stirling_second_3_04, deterministic(Stirling == 7)) :-
+		natural::stirling_second(4, 2, Stirling).
+
+	test(natural_stirling_second_3_05, fail) :-
+		natural::stirling_second(3, 4, _).
+
 	test(float_between_4_01, true(Floats =~= [0.0, 0.0, 0.0, 0.0, 0.0])) :-
 		findall(Float, float::between(0.0, 0.0, 5, Float), Floats).
 
