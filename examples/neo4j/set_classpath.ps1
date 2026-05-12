@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Set CLASSPATH environment variable
-##   Last updated on May 28, 2025
+##   Last updated on May 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -23,16 +23,26 @@
 
 #Requires -Version 7.3
 
-$first = $true
+$neo4j = neo4j status --verbose |
+    Select-String -Pattern '-Dapp.home=([^,]+)' |
+    ForEach-Object { $_.Matches[0].Groups[1].Value } |
+    Select-Object -First 1
 
-Get-ChildItem -Path C:\Program` Files\Neo4j` Desktop\lib\jars\* -Filter *.jar |
-Foreach-Object {
-    if ($first) {
-        $classpath = $_.FullName
-        $first = $false
-    } else {
-        $classpath += ";" + $_.FullName
-    }
+$jarPatterns = @(
+    'neo4j-java-driver-*.jar',
+    'neo4j-bolt-connection*.jar',
+    'netty-*.jar',
+    'reactive-streams-*.jar',
+    'reactor-*.jar',
+    'slf4j-api-*.jar'
+)
+
+$jars = foreach ($pattern in $jarPatterns) {
+    Get-ChildItem -Path (Join-Path $neo4j lib) -Filter $pattern |
+        Sort-Object -Property Name |
+        ForEach-Object { $_.FullName }
 }
+
+$classpath = @($jars) -join [IO.Path]::PathSeparator
 
 [System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath, "Process")

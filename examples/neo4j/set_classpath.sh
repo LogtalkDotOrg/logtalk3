@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Set CLASSPATH environment variable
-##   Last updated on June 19, 2024
+##   Last updated on May 12, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -24,9 +24,28 @@
 
 
 NEO4J="$(neo4j status --verbose | grep 'app.home' | sed 's/.*-Dapp.home=\(.*\),.*/\1/')"
+CLASSPATH=
 
-for jar in "$NEO4J"/lib/*.jar; do
-	CLASSPATH="$jar":$CLASSPATH
+# Only use the client-side driver jars. Loading the full server lib directory
+# pulls in server classes that may target a newer JVM than the one used by the
+# Prolog Java bridge, causing UnsupportedClassVersionError exceptions.
+for pattern in \
+	'neo4j-java-driver-*.jar' \
+	'neo4j-bolt-connection*.jar' \
+	'netty-*.jar' \
+	'reactive-streams-*.jar' \
+	'reactor-*.jar' \
+	'slf4j-api-*.jar'
+do
+	for jar in "$NEO4J"/lib/$pattern; do
+		if [ -e "$jar" ]; then
+			if [ -n "$CLASSPATH" ]; then
+				CLASSPATH="$CLASSPATH:$jar"
+			else
+				CLASSPATH="$jar"
+			fi
+		fi
+	done
 done
 
 export CLASSPATH

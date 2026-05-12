@@ -84,6 +84,11 @@ Save the edit file and start (or restart) Neo4j:
 $ neo4j start
 ```
 
+Recent Neo4j releases ship both client and server JAR files in the installation
+`lib` directory. When using the Logtalk `java` library, only the client-side
+driver JAR files should be added to the Java `CLASSPATH`. Loading the full
+server classpath can trigger `UnsupportedClassVersionError` exceptions.
+
 When running this example on Windows, check first the Neo4j installation
 directory path used in the `set_classpath_*.ps1` scripts and adjust it if
 required.
@@ -100,7 +105,7 @@ Prolog systems are supported: SWI-Prolog, XVM, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
 ```text
-$ cd "$LOGTALKUSER/examples/document_converter"
+$ cd "$LOGTALKUSER/examples/neo4j"
 $ . set_classpath.sh
 ```
 
@@ -112,11 +117,26 @@ Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 %versions
 ```
 
-Set the required environment variables (edit for the location of the Neo4j JAR files in your system):
+Set the required environment variables (edit for the location of the Neo4j JAR
+files in your system and only include the driver client JARs):
 
 ```logtalk
-os::directory_files('/usr/local/Cellar/neo4j/5.26.1/libexec/lib', _JARs, [paths(absolute), extensions(['.jar'])]),
-atomic_list_concat(_JARs, ':', _CLASSPATH),
+os::directory_files('/usr/local/Cellar/neo4j/5.26.1/libexec/lib', _JARs, [paths(absolute)]),
+findall(
+  _JAR,
+  (
+    member(_JAR, _JARs),
+    ( sub_atom(_JAR, _, _, _, '/neo4j-java-driver-')
+    ; sub_atom(_JAR, _, _, _, '/neo4j-bolt-connection')
+    ; sub_atom(_JAR, _, _, _, '/netty-')
+    ; sub_atom(_JAR, _, _, _, '/reactive-streams-')
+    ; sub_atom(_JAR, _, _, _, '/reactor-')
+    ; sub_atom(_JAR, _, _, _, '/slf4j-api-')
+    )
+  ),
+  _ClientJARs
+),
+atomic_list_concat(_ClientJARs, ':', _CLASSPATH),
 setenv('CLASSPATH', _CLASSPATH).
 ```
 
