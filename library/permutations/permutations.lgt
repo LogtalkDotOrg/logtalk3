@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-05-12,
 		comment is 'Implementation of permutations operations over lists.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, msort/2, nth0/4, remove_duplicates/2, reverse/2, select/3
+		append/3, length/2, member/2, msort/2, nth0/3, nth0/4, remove_duplicates/2, reverse/2, select/3
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -91,22 +91,16 @@
 		k_permutation(K, List, Permutation0),
 		apply_order(Order, [Permutation0], [Permutation]).
 
-	cartesian_product(K, List, Tuples) :-
-		findall(Tuple, cartesian_tuple(K, List, Tuple), Tuples).
-
-	cartesian_tuple(0, _, []).
-	cartesian_tuple(K, List, [Head| Tuple]) :-
-		K > 0,
-		K1 is K - 1,
-		member(Head, List),
-		cartesian_tuple(K1, List, Tuple).
-
 	derangements(List, Derangements) :-
 		findall(Derangement, derangement(List, Derangement), Derangements).
 
 	derangement(List, Derangement) :-
 		permutation(List, Derangement),
 		is_derangement(List, Derangement).
+
+	count_derangements(List, Count) :-
+		derangements(List, Derangements),
+		length(Derangements, Count).
 
 	is_derangement([], []).
 	is_derangement([Head1| Tail1], [Head2| Tail2]) :-
@@ -145,15 +139,15 @@
 		( 	Head @> Pivot ->
 			Swap = Head,
 			reverse(Tail, SuffixWithoutSwap)
-		;	find_rightmost_greater_helper(Pivot, RevSuffix, Swap, RevNewSuffix),
+		;	find_rightmost_greater_aux(Pivot, RevSuffix, Swap, RevNewSuffix),
 			reverse(RevNewSuffix, SuffixWithoutSwap)
 		).
 
-	find_rightmost_greater_helper(Pivot, [Head| Tail], Swap, [Head| Rest]) :-
+	find_rightmost_greater_aux(Pivot, [Head| Tail], Swap, [Head| Rest]) :-
 		Head @=< Pivot,
 		!,
-		find_rightmost_greater_helper(Pivot, Tail, Swap, Rest).
-	find_rightmost_greater_helper(Pivot, [Head| Tail], Head, Tail) :-
+		find_rightmost_greater_aux(Pivot, Tail, Swap, Rest).
+	find_rightmost_greater_aux(Pivot, [Head| Tail], Head, Tail) :-
 		Head @> Pivot.
 
 	previous_permutation(Permutation, Previous) :-
@@ -198,50 +192,132 @@
 		factorial(N, Total),
 		Index >= 0,
 		Index < Total,
-		nth_permutation_helper(List, Index, Permutation).
+		nth_permutation_default(List, Index, Permutation).
 
-	nth_permutation_helper([], _, []) :-
+	nth_permutation(List, default, Index, Permutation) :-
+		!,
+		nth_permutation(List, Index, Permutation).
+	nth_permutation(List, lexicographic, Index, Permutation) :-
+		!,
+		Index >= 0,
+		permutations(List, lexicographic, Permutations),
+		nth0(Index, Permutations, Permutation),
 		!.
-	nth_permutation_helper(List, Index, [Head| Permutation]) :-
+	nth_permutation(List, shortlex, Index, Permutation) :-
+		Index >= 0,
+		permutations(List, shortlex, Permutations),
+		nth0(Index, Permutations, Permutation),
+		!.
+
+	nth_permutation_default([], _, []) :-
+		!.
+	nth_permutation_default(List, Index, [Head| Permutation]) :-
 		length(List, N),
 		N1 is N - 1,
 		factorial(N1, F),
 		Pos is Index // F,
 		nth0(Pos, List, Head, Rest),
 		Index1 is Index mod F,
-		nth_permutation_helper(Rest, Index1, Permutation).
+		nth_permutation_default(Rest, Index1, Permutation).
 
 	permutation_index(List, Permutation, Index) :-
 		length(List, N),
 		length(Permutation, N),
-		permutation_index_helper(List, Permutation, 0, Index).
+		permutation_index_default(List, Permutation, 0, Index).
 
-	permutation_index_helper([], [], Index, Index) :-
+	permutation_index(List, default, Permutation, Index) :-
+		!,
+		permutation_index(List, Permutation, Index).
+	permutation_index(List, lexicographic, Permutation, Index) :-
+		!,
+		length(List, N),
+		length(Permutation, N),
+		permutations(List, lexicographic, Permutations),
+		nth0(Index, Permutations, Permutation),
 		!.
-	permutation_index_helper(List, [Head| Permutation], Index0, Index) :-
+	permutation_index(List, shortlex, Permutation, Index) :-
+		length(List, N),
+		length(Permutation, N),
+		permutations(List, shortlex, Permutations),
+		nth0(Index, Permutations, Permutation),
+		!.
+
+	permutation_index_default([], [], Index, Index) :-
+		!.
+	permutation_index_default(List, [Head| Permutation], Index0, Index) :-
 		List \= [],
 		length(List, N),
-		once(nth0(Pos, List, Head, Rest)),
+		nth0(Pos, List, Head, Rest),
+		!,
 		N1 is N - 1,
 		factorial(N1, F),
 		Index1 is Index0 + Pos * F,
-		permutation_index_helper(Rest, Permutation, Index1, Index).
+		permutation_index_default(Rest, Permutation, Index1, Index).
 
 	count_permutations(List, Count) :-
 		length(List, N),
 		factorial(N, Count).
 
-	random_permutation(List, Permutation) :-
-		random_permutation_helper(List, [], Permutation).
+	count_distinct_permutations(List, Count) :-
+		distinct_permutations(List, Permutations),
+		length(Permutations, Count).
 
-	random_permutation_helper([], Permutation, Permutation) :-
+	nth_distinct_permutation(List, Index, Permutation) :-
+		distinct_permutations(List, Permutations),
+		nth0(Index, Permutations, Permutation),
 		!.
-	random_permutation_helper(List, Permutation0, Permutation) :-
+
+	distinct_permutation_index(List, Permutation, Index) :-
+		distinct_permutations(List, Permutations),
+		nth0(Index, Permutations, Permutation),
+		!.
+
+	random_permutation(List, Permutation) :-
+		random_permutation(List, [], Permutation).
+
+	sample_permutations(List, SampleCount, Samples) :-
+		SampleCount >= 0,
+		sample_permutations_loop(SampleCount, List, [], Samples0),
+		reverse(Samples0, Samples).
+
+	sample_permutations_loop(0, _, Samples, Samples) :-
+		!.
+	sample_permutations_loop(SampleCount, List, Samples0, Samples) :-
+		SampleCount > 0,
+		random_permutation(List, Permutation),
+		SampleCount1 is SampleCount - 1,
+		sample_permutations_loop(SampleCount1, List, [Permutation| Samples0], Samples).
+
+	random_distinct_permutation(List, Permutation) :-
+		distinct_permutations(List, DistinctPermutations),
+		length(DistinctPermutations, Count),
+		Count > 0,
+		Count1 is Count - 1,
+		random_between(0, Count1, Index),
+		nth0(Index, DistinctPermutations, Permutation),
+		!.
+
+	sample_distinct_permutations(List, SampleCount, Samples) :-
+		SampleCount >= 0,
+		sample_distinct_permutations_loop(SampleCount, List, [], Samples0),
+		reverse(Samples0, Samples).
+
+	sample_distinct_permutations_loop(0, _, Samples, Samples) :-
+		!.
+	sample_distinct_permutations_loop(SampleCount, List, Samples0, Samples) :-
+		SampleCount > 0,
+		random_distinct_permutation(List, Permutation),
+		SampleCount1 is SampleCount - 1,
+		sample_distinct_permutations_loop(SampleCount1, List, [Permutation| Samples0], Samples).
+
+	random_permutation([], Permutation, Permutation) :-
+		!.
+	random_permutation(List, Permutation0, Permutation) :-
 		length(List, N),
 		N1 is N - 1,
 		random_between(0, N1, Index),
 		nth0(Index, List, Element, Rest),
-		random_permutation_helper(Rest, [Element| Permutation0], Permutation).
+		random_permutation(Rest, [Element| Permutation0], Permutation).
 
 	apply_order(default, List, List).
 	apply_order(lexicographic, List, Sorted) :-

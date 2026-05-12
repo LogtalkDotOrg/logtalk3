@@ -35,6 +35,7 @@ directory in the ``NOTES.md`` file.
    application
    apriori_pattern_miner
    arbitrary
+   arrangements
    assignvars
    avro
    base32
@@ -165,6 +166,7 @@ directory in the ``NOTES.md`` file.
    mime_types
    modified_z_score_anomaly_detector
    mutations
+   multisets
    nanoid
    naive_bayes_classifier
    nearest_centroid_classifier

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-05-12,
 		comment is 'Unit tests for the "permutations" library.'
 	]).
 
@@ -48,7 +48,7 @@
 		permutations::permutations([c,b,a], shortlex, Permutations).
 
 	test(permutation_3_lexicographic_single, true(Permutation == [c,b,a])) :-
-		once(permutations::permutation([c,b,a], lexicographic, Permutation)).
+		permutations::permutation([c,b,a], lexicographic, Permutation).
 
 	test(distinct_permutations_2_with_duplicates, deterministic(Permutations == [[a,a,b],[a,b,a],[b,a,a]])) :-
 		permutations::distinct_permutations([a,a,b], Permutations).
@@ -72,25 +72,16 @@
 		permutations::k_permutations(2, [c,b,a], lexicographic, Permutations).
 
 	test(k_permutation_4_lexicographic_single, true(Permutation == [c,b])) :-
-		once(permutations::k_permutation(2, [c,b,a], lexicographic, Permutation)).
-
-	test(cartesian_product_3_two_of_two, deterministic(Tuples == [[a,a],[a,b],[b,a],[b,b]])) :-
-		permutations::cartesian_product(2, [a,b], Tuples).
-
-	test(cartesian_product_3_zero_of_any, deterministic(Tuples == [[]])) :-
-		permutations::cartesian_product(0, [a,b,c], Tuples).
-
-	test(cartesian_product_3_one_of_three, deterministic(Tuples == [[a],[b],[c]])) :-
-		permutations::cartesian_product(1, [a,b,c], Tuples).
-
-	test(cartesian_product_3_three_of_two, true(length(Tuples, 8))) :-
-		permutations::cartesian_product(3, [a,b], Tuples).
+		permutations::k_permutation(2, [c,b,a], lexicographic, Permutation).
 
 	test(derangements_2_of_three, deterministic(Derangements == [[b,c,a],[c,a,b]])) :-
 		permutations::derangements([a,b,c], Derangements).
 
 	test(derangement_2_exists, exists(Derangement == [c,a,b])) :-
 		permutations::derangement([a,b,c], Derangement).
+
+	test(count_derangements_2, deterministic(Count == 9)) :-
+		permutations::count_derangements([a,b,c,d], Count).
 
 	test(next_permutation_2, deterministic(Next == [1,3,2])) :-
 		permutations::next_permutation([1,2,3], Next).
@@ -107,13 +98,55 @@
 	test(nth_permutation_3_third, deterministic(Permutation == [2,1,3])) :-
 		permutations::nth_permutation([1,2,3], 2, Permutation).
 
+	test(nth_permutation_4_default_third, deterministic(Permutation == [2,1,3])) :-
+		permutations::nth_permutation([1,2,3], default, 2, Permutation).
+
+	test(nth_permutation_4_lexicographic_third, deterministic(Permutation == [2,1,3])) :-
+		permutations::nth_permutation([3,2,1], lexicographic, 2, Permutation).
+
+	test(nth_permutation_4_shortlex_third, deterministic(Permutation == [2,1,3])) :-
+		permutations::nth_permutation([3,2,1], shortlex, 2, Permutation).
+
 	test(permutation_index_3_third, deterministic(Index == 2)) :-
 		permutations::permutation_index([1,2,3], [2,1,3], Index).
+
+	test(permutation_index_4_default_third, deterministic(Index == 2)) :-
+		permutations::permutation_index([1,2,3], default, [2,1,3], Index).
+
+	test(permutation_index_4_lexicographic_third, deterministic(Index == 2)) :-
+		permutations::permutation_index([3,2,1], lexicographic, [2,1,3], Index).
+
+	test(permutation_index_4_shortlex_third, deterministic(Index == 2)) :-
+		permutations::permutation_index([3,2,1], shortlex, [2,1,3], Index).
 
 	test(count_permutations_2, deterministic(Count == 24)) :-
 		permutations::count_permutations([a,b,c,d], Count).
 
+	test(count_distinct_permutations_2_with_duplicates, deterministic(Count == 3)) :-
+		permutations::count_distinct_permutations([a,a,b], Count).
+
+	test(nth_distinct_permutation_3_second, deterministic(Permutation == [a,b,a])) :-
+		permutations::nth_distinct_permutation([a,a,b], 1, Permutation).
+
+	test(distinct_permutation_index_3_second, deterministic(Index == 1)) :-
+		permutations::distinct_permutation_index([a,a,b], [a,b,a], Index).
+
 	test(random_permutation_2_length, true(length(Permutation, 4))) :-
 		permutations::random_permutation([a,b,c,d], Permutation).
+
+	test(sample_permutations_3_zero, deterministic(Samples == [])) :-
+		permutations::sample_permutations([a,b,c], 0, Samples).
+
+	test(sample_permutations_3_count, true((length(Samples, 3), forall(list::member(Sample, Samples), permutations::permutation([a,b,c], Sample))))) :-
+		permutations::sample_permutations([a,b,c], 3, Samples).
+
+	test(random_distinct_permutation_2_exists, true(permutations::distinct_permutation([a,a,b], Permutation))) :-
+		permutations::random_distinct_permutation([a,a,b], Permutation).
+
+	test(sample_distinct_permutations_3_zero, deterministic(Samples == [])) :-
+		permutations::sample_distinct_permutations([a,a,b], 0, Samples).
+
+	test(sample_distinct_permutations_3_count, true((length(Samples, 3), forall(list::member(Sample, Samples), permutations::distinct_permutation([a,a,b], Sample))))) :-
+		permutations::sample_distinct_permutations([a,a,b], 3, Samples).
 
 :- end_object.

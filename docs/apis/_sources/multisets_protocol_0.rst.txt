@@ -1,0 +1,473 @@
+.. index:: single: multisets_protocol
+.. _multisets_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``multisets_protocol``
+======================
+
+Protocol for multiset operations over lists.
+
+| **Availability:** 
+|    ``logtalk_load(multisets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: multisets/3
+.. _multisets_protocol/0::multisets/3:
+
+``multisets/3``
+^^^^^^^^^^^^^^^
+
+Generates all K-multisets (unordered K-element selections with replacement) of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multisets(K,List,Multisets)``
+| **Mode and number of proofs:**
+|    ``multisets(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: multiset/3
+.. _multisets_protocol/0::multiset/3:
+
+``multiset/3``
+^^^^^^^^^^^^^^
+
+True iff the third argument is a K-multiset with replacement of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiset(K,List,Multiset)``
+| **Mode and number of proofs:**
+|    ``multiset(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: multisets/4
+.. _multisets_protocol/0::multisets/4:
+
+``multisets/4``
+^^^^^^^^^^^^^^^
+
+Generates all K-multisets with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multisets(K,List,Order,Multisets)``
+| **Mode and number of proofs:**
+|    ``multisets(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: multiset/4
+.. _multisets_protocol/0::multiset/4:
+
+``multiset/4``
+^^^^^^^^^^^^^^
+
+True iff the fourth argument is a K-multiset with replacement with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiset(K,List,Order,Multiset)``
+| **Mode and number of proofs:**
+|    ``multiset(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_multisets/3
+.. _multisets_protocol/0::distinct_multisets/3:
+
+``distinct_multisets/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct K-multisets (deduplicating repeated values in the input list) using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_multisets(K,List,Multisets)``
+| **Mode and number of proofs:**
+|    ``distinct_multisets(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_multiset/3
+.. _multisets_protocol/0::distinct_multiset/3:
+
+``distinct_multiset/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a distinct K-multiset with replacement of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_multiset(K,List,Multiset)``
+| **Mode and number of proofs:**
+|    ``distinct_multiset(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_multisets/4
+.. _multisets_protocol/0::distinct_multisets/4:
+
+``distinct_multisets/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct K-multisets with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_multisets(K,List,Order,Multisets)``
+| **Mode and number of proofs:**
+|    ``distinct_multisets(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_multiset/4
+.. _multisets_protocol/0::distinct_multiset/4:
+
+``distinct_multiset/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a distinct K-multiset with replacement with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_multiset(K,List,Order,Multiset)``
+| **Mode and number of proofs:**
+|    ``distinct_multiset(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: nth_multiset/4
+.. _multisets_protocol/0::nth_multiset/4:
+
+``nth_multiset/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the K-multiset at a given zero-based index using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_multiset(K,List,Index,Multiset)``
+| **Mode and number of proofs:**
+|    ``nth_multiset(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nth_multiset/5
+.. _multisets_protocol/0::nth_multiset/5:
+
+``nth_multiset/5``
+^^^^^^^^^^^^^^^^^^
+
+Returns the K-multiset at a given zero-based index in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_multiset(K,List,Order,Index,Multiset)``
+| **Mode and number of proofs:**
+|    ``nth_multiset(+integer,+list,+atom,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: multiset_index/4
+.. _multisets_protocol/0::multiset_index/4:
+
+``multiset_index/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a K-multiset using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiset_index(K,List,Multiset,Index)``
+| **Mode and number of proofs:**
+|    ``multiset_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: multiset_index/5
+.. _multisets_protocol/0::multiset_index/5:
+
+``multiset_index/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a K-multiset in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiset_index(K,List,Order,Multiset,Index)``
+| **Mode and number of proofs:**
+|    ``multiset_index(+integer,+list,+atom,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: count_multisets/3
+.. _multisets_protocol/0::count_multisets/3:
+
+``count_multisets/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of K-multisets with replacement of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_multisets(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_multisets(+integer,+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: count_distinct_multisets/3
+.. _multisets_protocol/0::count_distinct_multisets/3:
+
+``count_distinct_multisets/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of distinct K-multisets with replacement of a list (deduplicating repeated values in the input list).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_distinct_multisets(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_distinct_multisets(+integer,+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: nth_distinct_multiset/4
+.. _multisets_protocol/0::nth_distinct_multiset/4:
+
+``nth_distinct_multiset/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the distinct K-multiset at a given zero-based index in default generation order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_distinct_multiset(K,List,Index,Multiset)``
+| **Mode and number of proofs:**
+|    ``nth_distinct_multiset(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distinct_multiset_index/4
+.. _multisets_protocol/0::distinct_multiset_index/4:
+
+``distinct_multiset_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a distinct K-multiset in default generation order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_multiset_index(K,List,Multiset,Index)``
+| **Mode and number of proofs:**
+|    ``distinct_multiset_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: random_multiset/3
+.. _multisets_protocol/0::random_multiset/3:
+
+``random_multiset/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random K-multiset with replacement of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_multiset(K,List,Multiset)``
+| **Mode and number of proofs:**
+|    ``random_multiset(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_multisets/4
+.. _multisets_protocol/0::sample_multisets/4:
+
+``sample_multisets/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random K-multisets with replacement of a list, sampled with replacement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_multisets(K,List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_multisets(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: random_distinct_multiset/3
+.. _multisets_protocol/0::random_distinct_multiset/3:
+
+``random_distinct_multiset/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random distinct K-multiset with replacement of a list (deduplicating repeated values in the input list).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_distinct_multiset(K,List,Multiset)``
+| **Mode and number of proofs:**
+|    ``random_distinct_multiset(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_distinct_multisets/4
+.. _multisets_protocol/0::sample_distinct_multisets/4:
+
+``sample_distinct_multisets/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random distinct K-multisets with replacement of a list, sampled with replacement after deduplicating repeated values in the input list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_distinct_multisets(K,List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_distinct_multisets(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: next_multiset/3
+.. _multisets_protocol/0::next_multiset/3:
+
+``next_multiset/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the next distinct multiset value in lexicographic order induced by the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next_multiset(List,Multiset,Next)``
+| **Mode and number of proofs:**
+|    ``next_multiset(+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: previous_multiset/3
+.. _multisets_protocol/0::previous_multiset/3:
+
+``previous_multiset/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the previous distinct multiset value in lexicographic order induced by the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous_multiset(List,Multiset,Previous)``
+| **Mode and number of proofs:**
+|    ``previous_multiset(+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

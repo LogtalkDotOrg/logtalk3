@@ -24,17 +24,18 @@ ________________________________________________________________________
 This library provides predicates for generating and querying permutations over
 lists. The following categories of predicates are provided:
 
-* **Generation operations** - Predicates for generating permutations, k-permutations, and Cartesian products.
+* **Generation operations** - Predicates for generating permutations and k-permutations.
 * **Ordering variants** - Predicates that support an additional order argument (`default`, `lexicographic`, or `shortlex`) for controlling output order.
 * **Distinct-value generation** - Predicates for generating permutations while deduplicating equal-valued results.
-* **Derangement operations** - Predicates for generating and testing derangements.
+* **Derangement operations** - Predicates for generating, testing, and counting derangements.
 * **Lexicographic stepping** - Predicates for navigating permutations in lexicographic order.
-* **Indexed access** - Predicates for direct access to permutations at specific positions.
-* **Counting operations** - Predicates for counting permutations.
-* **Random selection** - Predicates for randomly selecting permutations.
+* **Indexed access** - Predicates for direct access to permutations at specific positions, including distinct permutations.
+* **Counting operations** - Predicates for counting permutations and distinct permutations.
+* **Random selection** - Predicates for randomly selecting and sampling permutations and distinct permutations.
 
-Dedicated `combinations` and `subsequences` libraries are also available for
-focused APIs on those operations.
+Dedicated `arrangements`, `combinations`, and `subsequences` libraries are also
+available for focused APIs on related operations. The `arrangements` library is
+the repetition-allowed counterpart to this library.
 
 
 API documentation

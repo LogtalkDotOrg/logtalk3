@@ -1,0 +1,59 @@
+.. index:: single: arrangements
+.. _arrangements/0:
+
+.. rst-class:: right
+
+**object**
+
+``arrangements``
+================
+
+Implementation of arrangements operations with repetition over lists.
+
+| **Availability:** 
+|    ``logtalk_load(arrangements(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`arrangements_protocol <arrangements_protocol/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`arrangements_protocol/0::arrangement/3`  :ref:`arrangements_protocol/0::arrangement/4`  :ref:`arrangements_protocol/0::arrangement_index/4`  :ref:`arrangements_protocol/0::arrangement_index/5`  :ref:`arrangements_protocol/0::arrangements/3`  :ref:`arrangements_protocol/0::arrangements/4`  :ref:`arrangements_protocol/0::cartesian_product/2`  :ref:`arrangements_protocol/0::cartesian_product/3`  :ref:`arrangements_protocol/0::cartesian_tuple/2`  :ref:`arrangements_protocol/0::cartesian_tuple/3`  :ref:`arrangements_protocol/0::count_arrangements/3`  :ref:`arrangements_protocol/0::count_distinct_arrangements/3`  :ref:`arrangements_protocol/0::distinct_arrangement/3`  :ref:`arrangements_protocol/0::distinct_arrangement/4`  :ref:`arrangements_protocol/0::distinct_arrangement_index/4`  :ref:`arrangements_protocol/0::distinct_arrangements/3`  :ref:`arrangements_protocol/0::distinct_arrangements/4`  :ref:`arrangements_protocol/0::next_arrangement/3`  :ref:`arrangements_protocol/0::nth_arrangement/4`  :ref:`arrangements_protocol/0::nth_arrangement/5`  :ref:`arrangements_protocol/0::nth_distinct_arrangement/4`  :ref:`arrangements_protocol/0::previous_arrangement/3`  :ref:`arrangements_protocol/0::random_arrangement/3`  :ref:`arrangements_protocol/0::random_distinct_arrangement/3`  :ref:`arrangements_protocol/0::sample_arrangements/4`  :ref:`arrangements_protocol/0::sample_distinct_arrangements/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

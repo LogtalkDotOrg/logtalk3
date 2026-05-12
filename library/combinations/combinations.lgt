@@ -23,9 +23,9 @@
 	implements(combinations_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-05-12,
 		comment is 'Implementation of combinations operations over lists.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, drop/3, length/2, member/2, msort/2, nth0/4, nth1/3, remove_duplicates/2
+		append/3, drop/3, length/2, member/2, msort/2, nth0/3, nth1/3, remove_duplicates/2, reverse/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -61,24 +61,6 @@
 		combination(K, List, Combination0),
 		apply_order(Order, [Combination0], [Combination]).
 
-	combinations_with_replacement(K, List, Combinations) :-
-		findall(Combination, combination_with_replacement(K, List, Combination), Combinations).
-
-	combinations_with_replacement(K, List, Order, Combinations) :-
-		findall(Combination, combination_with_replacement(K, List, Combination), Combinations0),
-		apply_order(Order, Combinations0, Combinations).
-
-	combination_with_replacement(0, _, []).
-	combination_with_replacement(K, List, [Head| Combination]) :-
-		K > 0,
-		K1 is K - 1,
-		append(_, [Head| Tail], List),
-		combination_with_replacement(K1, [Head| Tail], Combination).
-
-	combination_with_replacement(K, List, Order, Combination) :-
-		combination_with_replacement(K, List, Combination0),
-		apply_order(Order, [Combination0], [Combination]).
-
 	distinct_combinations(K, List, Combinations) :-
 		distinct_combinations(K, List, default, Combinations).
 
@@ -99,19 +81,32 @@
 		Index >= 0,
 		binomial(N, K, Total),
 		Index < Total,
-		nth_combination_helper(K, List, Index, Combination).
+		nth_combination_default(K, List, Index, Combination).
 
-	nth_combination_helper(0, _, _, []) :-
+	nth_combination(K, List, default, Index, Combination) :-
+		!,
+		nth_combination(K, List, Index, Combination).
+	nth_combination(K, List, lexicographic, Index, Combination) :-
+		!,
+		Index >= 0,
+		combinations(K, List, lexicographic, Combinations),
+		nth0(Index, Combinations, Combination).
+	nth_combination(K, List, shortlex, Index, Combination) :-
+		Index >= 0,
+		combinations(K, List, shortlex, Combinations),
+		nth0(Index, Combinations, Combination).
+
+	nth_combination_default(0, _, _, []) :-
 		!.
-	nth_combination_helper(K, List, Index, [Head| Comb]) :-
+	nth_combination_default(K, List, Index, [Head| Comb]) :-
 		K > 0,
 		length(List, N),
 		find_comb_position(N, K, Index, C, IndexRemainder),
-		nth0(C, List, Head, _),
+		nth0(C, List, Head),
 		C1 is C + 1,
 		drop(C1, List, Rest),
 		K1 is K - 1,
-		nth_combination_helper(K1, Rest, IndexRemainder, Comb).
+		nth_combination_default(K1, Rest, IndexRemainder, Comb).
 
 	find_comb_position(N, K, Index, C, IndexRemainder) :-
 		find_comb_position_loop(0, N, K, Index, 0, C, IndexRemainder).
@@ -136,22 +131,37 @@
 
 	combination_index(K, List, Combination, Index) :-
 		length(Combination, K),
-		combination_index_helper(K, List, Combination, 0, Index).
+		combination_index_default(K, List, Combination, 0, Index).
 
-	combination_index_helper(0, _, [], Index, Index) :-
+	combination_index(K, List, default, Combination, Index) :-
+		!,
+		combination_index(K, List, Combination, Index).
+	combination_index(K, List, lexicographic, Combination, Index) :-
+		!,
+		length(Combination, K),
+		combinations(K, List, lexicographic, Combinations),
+		nth0(Index, Combinations, Combination),
 		!.
-	combination_index_helper(K, [Head| Tail], [Head| Comb], Index0, Index) :-
+	combination_index(K, List, shortlex, Combination, Index) :-
+		length(Combination, K),
+		combinations(K, List, shortlex, Combinations),
+		nth0(Index, Combinations, Combination),
+		!.
+
+	combination_index_default(0, _, [], Index, Index) :-
+		!.
+	combination_index_default(K, [Head| Tail], [Head| Comb], Index0, Index) :-
 		K > 0,
 		!,
 		K1 is K - 1,
-		combination_index_helper(K1, Tail, Comb, Index0, Index).
-	combination_index_helper(K, [_| Tail], Combination, Index0, Index) :-
+		combination_index_default(K1, Tail, Comb, Index0, Index).
+	combination_index_default(K, [_| Tail], Combination, Index0, Index) :-
 		K > 0,
 		length(Tail, N),
 		K1 is K - 1,
 		binomial(N, K1, Skip),
 		Index1 is Index0 + Skip,
-		combination_index_helper(K, Tail, Combination, Index1, Index).
+		combination_index_default(K, Tail, Combination, Index1, Index).
 
 	count_combinations(K, List, Count) :-
 		length(List, N),
@@ -160,21 +170,78 @@
 		;	Count = 0
 		).
 
-	count_combinations_with_replacement(K, List, Count) :-
-		length(List, N),
-		( 	K < 0 ->
-			Count = 0
-		; 	N =:= 0 ->
-			( 	K =:= 0 -> Count = 1 ; Count = 0 )
-		; 	NK1 is N + K - 1,
-			binomial(NK1, K, Count)
-		).
+	count_distinct_combinations(K, List, Count) :-
+		distinct_combinations(K, List, DistinctCombinations),
+		length(DistinctCombinations, Count).
+
+	nth_distinct_combination(K, List, Index, Combination) :-
+		distinct_combinations(K, List, DistinctCombinations),
+		nth0(Index, DistinctCombinations, Combination),
+		!.
+
+	distinct_combination_index(K, List, Combination, Index) :-
+		distinct_combinations(K, List, DistinctCombinations),
+		nth0(Index, DistinctCombinations, Combination),
+		!.
 
 	random_combination(K, List, Combination) :-
 		length(List, N),
 		K =< N,
 		random_set(K, 1, N, Indices),
 		select_by_indices(Indices, List, Combination).
+
+	sample_combinations(K, List, SampleCount, Samples) :-
+		SampleCount >= 0,
+		sample_combinations_loop(SampleCount, K, List, [], Samples0),
+		reverse(Samples0, Samples).
+
+	sample_combinations_loop(0, _, _, Samples, Samples) :-
+		!.
+	sample_combinations_loop(SampleCount, K, List, Samples0, Samples) :-
+		SampleCount > 0,
+		random_combination(K, List, Combination),
+		SampleCount1 is SampleCount - 1,
+		sample_combinations_loop(SampleCount1, K, List, [Combination| Samples0], Samples).
+
+	random_distinct_combination(K, List, Combination) :-
+		distinct_combinations(K, List, DistinctCombinations),
+		length(DistinctCombinations, Count),
+		Count > 0,
+		random_set(1, 1, Count, [Index]),
+		nth1(Index, DistinctCombinations, Combination).
+
+	sample_distinct_combinations(K, List, SampleCount, Samples) :-
+		SampleCount >= 0,
+		sample_distinct_combinations_loop(SampleCount, K, List, [], Samples0),
+		reverse(Samples0, Samples).
+
+	sample_distinct_combinations_loop(0, _, _, Samples, Samples) :-
+		!.
+	sample_distinct_combinations_loop(SampleCount, K, List, Samples0, Samples) :-
+		SampleCount > 0,
+		random_distinct_combination(K, List, Combination),
+		SampleCount1 is SampleCount - 1,
+		sample_distinct_combinations_loop(SampleCount1, K, List, [Combination| Samples0], Samples).
+
+	next_combination(List, Combination, Next) :-
+		length(Combination, K),
+		canonical_lexicographic_combinations(K, List, Combinations),
+		nth0(Index, Combinations, Combination),
+		!,
+		NextIndex is Index + 1,
+		nth0(NextIndex, Combinations, Next).
+
+	previous_combination(List, Combination, Previous) :-
+		length(Combination, K),
+		canonical_lexicographic_combinations(K, List, Combinations),
+		nth0(Index, Combinations, Combination),
+		!,
+		Index > 0,
+		PreviousIndex is Index - 1,
+		nth0(PreviousIndex, Combinations, Previous).
+
+	canonical_lexicographic_combinations(K, List, Combinations) :-
+		distinct_combinations(K, List, lexicographic, Combinations).
 
 	select_by_indices([], _, []).
 	select_by_indices([Indice| Indices], List, [Element| Elements]) :-

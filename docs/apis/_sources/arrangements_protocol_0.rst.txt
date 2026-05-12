@@ -1,0 +1,549 @@
+.. index:: single: arrangements_protocol
+.. _arrangements_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``arrangements_protocol``
+=========================
+
+Protocol for arrangements operations over lists.
+
+| **Availability:** 
+|    ``logtalk_load(arrangements(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: arrangements/3
+.. _arrangements_protocol/0::arrangements/3:
+
+``arrangements/3``
+^^^^^^^^^^^^^^^^^^
+
+Generates all K-arrangements (ordered K-element selections with replacement) of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arrangements(K,List,Arrangements)``
+| **Mode and number of proofs:**
+|    ``arrangements(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: arrangement/3
+.. _arrangements_protocol/0::arrangement/3:
+
+``arrangement/3``
+^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a K-arrangement with replacement of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arrangement(K,List,Arrangement)``
+| **Mode and number of proofs:**
+|    ``arrangement(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: arrangements/4
+.. _arrangements_protocol/0::arrangements/4:
+
+``arrangements/4``
+^^^^^^^^^^^^^^^^^^
+
+Generates all K-arrangements with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arrangements(K,List,Order,Arrangements)``
+| **Mode and number of proofs:**
+|    ``arrangements(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: arrangement/4
+.. _arrangements_protocol/0::arrangement/4:
+
+``arrangement/4``
+^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a K-arrangement with replacement with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arrangement(K,List,Order,Arrangement)``
+| **Mode and number of proofs:**
+|    ``arrangement(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_arrangements/3
+.. _arrangements_protocol/0::distinct_arrangements/3:
+
+``distinct_arrangements/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct K-arrangements (deduplicating repeated values in the input list) using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_arrangements(K,List,Arrangements)``
+| **Mode and number of proofs:**
+|    ``distinct_arrangements(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_arrangement/3
+.. _arrangements_protocol/0::distinct_arrangement/3:
+
+``distinct_arrangement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a distinct K-arrangement with replacement of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_arrangement(K,List,Arrangement)``
+| **Mode and number of proofs:**
+|    ``distinct_arrangement(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_arrangements/4
+.. _arrangements_protocol/0::distinct_arrangements/4:
+
+``distinct_arrangements/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct K-arrangements with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_arrangements(K,List,Order,Arrangements)``
+| **Mode and number of proofs:**
+|    ``distinct_arrangements(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_arrangement/4
+.. _arrangements_protocol/0::distinct_arrangement/4:
+
+``distinct_arrangement/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a distinct K-arrangement with replacement with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_arrangement(K,List,Order,Arrangement)``
+| **Mode and number of proofs:**
+|    ``distinct_arrangement(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: cartesian_product/2
+.. _arrangements_protocol/0::cartesian_product/2:
+
+``cartesian_product/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates the generalized Cartesian product of a list of lists by selecting one element from each list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cartesian_product(Lists,Product)``
+| **Mode and number of proofs:**
+|    ``cartesian_product(+list(list),-list)`` - ``one``
+
+
+------------
+
+.. index:: cartesian_tuple/2
+.. _arrangements_protocol/0::cartesian_tuple/2:
+
+``cartesian_tuple/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+True iff the second argument is a tuple obtained by selecting one element from each list in the first argument using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cartesian_tuple(Lists,Tuple)``
+| **Mode and number of proofs:**
+|    ``cartesian_tuple(+list(list),-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: cartesian_product/3
+.. _arrangements_protocol/0::cartesian_product/3:
+
+``cartesian_product/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates the generalized Cartesian product with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cartesian_product(Lists,Order,Product)``
+| **Mode and number of proofs:**
+|    ``cartesian_product(+list(list),+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: cartesian_tuple/3
+.. _arrangements_protocol/0::cartesian_tuple/3:
+
+``cartesian_tuple/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a Cartesian-product tuple with the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cartesian_tuple(Lists,Order,Tuple)``
+| **Mode and number of proofs:**
+|    ``cartesian_tuple(+list(list),+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: nth_arrangement/4
+.. _arrangements_protocol/0::nth_arrangement/4:
+
+``nth_arrangement/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the K-arrangement at a given zero-based index using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_arrangement(K,List,Index,Arrangement)``
+| **Mode and number of proofs:**
+|    ``nth_arrangement(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nth_arrangement/5
+.. _arrangements_protocol/0::nth_arrangement/5:
+
+``nth_arrangement/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the K-arrangement at a given zero-based index in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_arrangement(K,List,Order,Index,Arrangement)``
+| **Mode and number of proofs:**
+|    ``nth_arrangement(+integer,+list,+atom,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: arrangement_index/4
+.. _arrangements_protocol/0::arrangement_index/4:
+
+``arrangement_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a K-arrangement using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arrangement_index(K,List,Arrangement,Index)``
+| **Mode and number of proofs:**
+|    ``arrangement_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: arrangement_index/5
+.. _arrangements_protocol/0::arrangement_index/5:
+
+``arrangement_index/5``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a K-arrangement in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arrangement_index(K,List,Order,Arrangement,Index)``
+| **Mode and number of proofs:**
+|    ``arrangement_index(+integer,+list,+atom,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: count_arrangements/3
+.. _arrangements_protocol/0::count_arrangements/3:
+
+``count_arrangements/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of K-arrangements with replacement of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_arrangements(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_arrangements(+integer,+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: count_distinct_arrangements/3
+.. _arrangements_protocol/0::count_distinct_arrangements/3:
+
+``count_distinct_arrangements/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of distinct K-arrangements with replacement of a list (deduplicating repeated values in the input list).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_distinct_arrangements(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_distinct_arrangements(+integer,+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: nth_distinct_arrangement/4
+.. _arrangements_protocol/0::nth_distinct_arrangement/4:
+
+``nth_distinct_arrangement/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the distinct K-arrangement at a given zero-based index in default generation order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_distinct_arrangement(K,List,Index,Arrangement)``
+| **Mode and number of proofs:**
+|    ``nth_distinct_arrangement(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distinct_arrangement_index/4
+.. _arrangements_protocol/0::distinct_arrangement_index/4:
+
+``distinct_arrangement_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a distinct K-arrangement in default generation order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_arrangement_index(K,List,Arrangement,Index)``
+| **Mode and number of proofs:**
+|    ``distinct_arrangement_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: random_arrangement/3
+.. _arrangements_protocol/0::random_arrangement/3:
+
+``random_arrangement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random K-arrangement with replacement of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_arrangement(K,List,Arrangement)``
+| **Mode and number of proofs:**
+|    ``random_arrangement(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_arrangements/4
+.. _arrangements_protocol/0::sample_arrangements/4:
+
+``sample_arrangements/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random K-arrangements with replacement of a list, sampled with replacement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_arrangements(K,List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_arrangements(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: random_distinct_arrangement/3
+.. _arrangements_protocol/0::random_distinct_arrangement/3:
+
+``random_distinct_arrangement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random distinct K-arrangement with replacement of a list (deduplicating repeated values in the input list).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_distinct_arrangement(K,List,Arrangement)``
+| **Mode and number of proofs:**
+|    ``random_distinct_arrangement(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_distinct_arrangements/4
+.. _arrangements_protocol/0::sample_distinct_arrangements/4:
+
+``sample_distinct_arrangements/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random distinct K-arrangements with replacement of a list, sampled with replacement after deduplicating repeated values in the input list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_distinct_arrangements(K,List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_distinct_arrangements(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: next_arrangement/3
+.. _arrangements_protocol/0::next_arrangement/3:
+
+``next_arrangement/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the next distinct arrangement value in lexicographic order induced by the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next_arrangement(List,Arrangement,Next)``
+| **Mode and number of proofs:**
+|    ``next_arrangement(+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: previous_arrangement/3
+.. _arrangements_protocol/0::previous_arrangement/3:
+
+``previous_arrangement/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the previous distinct arrangement value in lexicographic order induced by the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous_arrangement(List,Arrangement,Previous)``
+| **Mode and number of proofs:**
+|    ``previous_arrangement(+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

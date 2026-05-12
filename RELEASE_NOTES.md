@@ -64,6 +64,38 @@ with this change).
 * CHANGED: The `geospatial` library geographic coordinate representation from
 `(Latitude,Longitude)` pairs to `geographic(Latitude,Longitude)` terms.
 
+* CHANGED: The repetition-allowed ordered-selection functionality was moved
+from the `permutations` library to the new `arrangements` library. The former
+`cartesian_product/3` predicate is replaced by the `arrangements/3-4` and
+`arrangement/3-4` predicates.
+
+* CHANGED: The repetition-allowed unordered-selection functionality was moved
+from the `combinations` library to the new `multisets` library. The former
+`combinations_with_replacement/3-4`, `combination_with_replacement/3-4`, and
+`count_combinations_with_replacement/3` predicates are replaced by the
+`multisets/3-4`, `multiset/3-4`, and `count_multisets/3` predicates.
+
+* ADDED: New `arrangements` library implementing predicates for generating,
+counting, indexing, and randomly selecting ordered selections with
+replacement.
+
+* ADDED: New `multisets` library implementing predicates for generating,
+counting, indexing, and randomly selecting unordered selections with
+replacement.
+
+* ADDED: Predicates `nth_combination/5`, `combination_index/5`,
+`count_distinct_combinations/3`, `nth_distinct_combination/4`,
+`distinct_combination_index/4`, `random_distinct_combination/3`,
+`sample_combinations/4`, `sample_distinct_combinations/4`,
+`next_combination/3`, and `previous_combination/3` to the `combinations`
+library.
+
+* ADDED: Predicates `nth_permutation/4`, `permutation_index/4`,
+`count_distinct_permutations/2`, `nth_distinct_permutation/3`,
+`distinct_permutation_index/3`, `random_distinct_permutation/2`,
+`sample_permutations/3`, `sample_distinct_permutations/3`, and 
+`count_derangements/2` to the `permutations` library.
+
 * ADDED: New `linear_algebra` library implementing predicates for numeric
 vectors and matrices.
 

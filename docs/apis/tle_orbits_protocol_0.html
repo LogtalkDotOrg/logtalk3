@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#application"><span class="xref std std-ref">application</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#apriori-pattern-miner"><span class="xref std std-ref">apriori_pattern_miner</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><span class="xref std std-ref">arbitrary</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#arrangements"><span class="xref std std-ref">arrangements</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#assertions"><span class="xref std std-ref">assertions</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#assignvars"><span class="xref std std-ref">assignvars</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#avro"><span class="xref std std-ref">avro</span></a></li>
@@ -217,6 +218,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#mime-types"><span class="xref std std-ref">mime_types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#modified-z-score-anomaly-detector"><span class="xref std std-ref">modified_z_score_anomaly_detector</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#multisets"><span class="xref std std-ref">multisets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#mutation-testing"><span class="xref std std-ref">mutation_testing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#naive-bayes-classifier"><span class="xref std std-ref">naive_bayes_classifier</span></a></li>
@@ -354,7 +356,7 @@
   <p class="right" id="tle-orbits-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="tle-orbits-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">tle_orbits_protocol</span></code><a class="headerlink" href="#tle-orbits-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for parsing Two-Line Element sets and performing basic orbit propagation and ground-track sampling.</p>
+<p>Protocol for parsing Two-Line Element sets and performing approximate portable orbit propagation with near-earth and deep-space variants plus ground-track sampling.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -398,12 +400,16 @@
 <li><p><a class="reference internal" href="#parse-lines-4" id="id3"><code class="docutils literal notranslate"><span class="pre">parse_lines/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#propagate-3" id="id4"><code class="docutils literal notranslate"><span class="pre">propagate/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#propagate-4" id="id5"><code class="docutils literal notranslate"><span class="pre">propagate/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ground-track-5" id="id6"><code class="docutils literal notranslate"><span class="pre">ground_track/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagate-5" id="id6"><code class="docutils literal notranslate"><span class="pre">propagate/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagate-state-4" id="id7"><code class="docutils literal notranslate"><span class="pre">propagate_state/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagate-state-5" id="id8"><code class="docutils literal notranslate"><span class="pre">propagate_state/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ground-track-5" id="id9"><code class="docutils literal notranslate"><span class="pre">ground_track/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ground-track-6" id="id10"><code class="docutils literal notranslate"><span class="pre">ground_track/6</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -452,7 +458,7 @@
 </section>
 <section id="propagate-3">
 <span id="tle-orbits-protocol-0-propagate-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate/3</span></code></a><a class="headerlink" href="#propagate-3" title="Link to this heading"></a></h3>
-<p>Propagates a parsed TLE using a basic two-body model and returns a <code class="docutils literal notranslate"><span class="pre">geographic(Latitude,Longitude,Height)</span></code> coordinate. Supported time specifications are <code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">julian_date(JulianDate)</span></code>, and <code class="docutils literal notranslate"><span class="pre">offset_seconds(SecondsSinceEpoch)</span></code>.</p>
+<p>Propagates a parsed TLE using the default <code class="docutils literal notranslate"><span class="pre">approximate</span></code> model and returns a <code class="docutils literal notranslate"><span class="pre">geographic(Latitude,Longitude,Height)</span></code> coordinate. Supported time specifications are <code class="docutils literal notranslate"><span class="pre">date_time(Year,Month,Day,Hours,Minutes,Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">julian_date(JulianDate)</span></code>, and <code class="docutils literal notranslate"><span class="pre">offset_seconds(SecondsSinceEpoch)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -473,7 +479,7 @@
 </section>
 <section id="propagate-4">
 <span id="tle-orbits-protocol-0-propagate-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate/4</span></code></a><a class="headerlink" href="#propagate-4" title="Link to this heading"></a></h3>
-<p>Propagates a parsed TLE using a basic two-body model and returns coordinates in the requested frame. Supported frames are <code class="docutils literal notranslate"><span class="pre">eci</span></code> returning <code class="docutils literal notranslate"><span class="pre">eci(X,Y,Z)</span></code>, <code class="docutils literal notranslate"><span class="pre">ecef</span></code> returning <code class="docutils literal notranslate"><span class="pre">ecef(X,Y,Z)</span></code>, and <code class="docutils literal notranslate"><span class="pre">wgs84_3d</span></code> returning <code class="docutils literal notranslate"><span class="pre">geographic(Latitude,Longitude,Height)</span></code>.</p>
+<p>Propagates a parsed TLE using the default <code class="docutils literal notranslate"><span class="pre">approximate</span></code> model and returns coordinates in the requested frame. Supported frames are <code class="docutils literal notranslate"><span class="pre">eci</span></code> returning <code class="docutils literal notranslate"><span class="pre">eci(X,Y,Z)</span></code>, <code class="docutils literal notranslate"><span class="pre">ecef</span></code> returning <code class="docutils literal notranslate"><span class="pre">ecef(X,Y,Z)</span></code>, and <code class="docutils literal notranslate"><span class="pre">wgs84_3d</span></code> returning <code class="docutils literal notranslate"><span class="pre">geographic(Latitude,Longitude,Height)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -492,9 +498,72 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="propagate-5">
+<span id="tle-orbits-protocol-0-propagate-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate/5</span></code></a><a class="headerlink" href="#propagate-5" title="Link to this heading"></a></h3>
+<p>Propagates a parsed TLE using the requested propagation model and returns coordinates in the requested frame. Supported models are <code class="docutils literal notranslate"><span class="pre">approximate</span></code> for automatic near-earth versus deep-space dispatch, <code class="docutils literal notranslate"><span class="pre">approximate_near_earth</span></code> for the low-period approximate branch with J2 secular and short-period corrections plus low-order B* drag handling, <code class="docutils literal notranslate"><span class="pre">approximate_deep_space</span></code> for the dedicated deep-space approximate branch with resonance-aware long-period corrections, and <code class="docutils literal notranslate"><span class="pre">two_body</span></code> for the legacy Keplerian approximation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate(TLE,Time,Frame,Model,Coordinate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate(++compound,++nonvar,++atom,++atom,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="propagate-state-4">
+<span id="tle-orbits-protocol-0-propagate-state-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate_state/4</span></code></a><a class="headerlink" href="#propagate-state-4" title="Link to this heading"></a></h3>
+<p>Propagates a parsed TLE using the default <code class="docutils literal notranslate"><span class="pre">approximate</span></code> model and returns <code class="docutils literal notranslate"><span class="pre">state(Position,Velocity)</span></code> in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported frames are <code class="docutils literal notranslate"><span class="pre">eci</span></code> returning <code class="docutils literal notranslate"><span class="pre">state(eci(X,Y,Z),</span> <span class="pre">eci(VX,VY,VZ))</span></code>, <code class="docutils literal notranslate"><span class="pre">ecef</span></code> returning <code class="docutils literal notranslate"><span class="pre">state(ecef(X,Y,Z),</span> <span class="pre">ecef(VX,VY,VZ))</span></code>, and <code class="docutils literal notranslate"><span class="pre">wgs84_3d</span></code> returning <code class="docutils literal notranslate"><span class="pre">state(geographic(Latitude,Longitude,Height),</span> <span class="pre">enu(East,North,Up))</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate_state(TLE,Time,Frame,State)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate_state(++compound,++nonvar,++atom,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="propagate-state-5">
+<span id="tle-orbits-protocol-0-propagate-state-5"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate_state/5</span></code></a><a class="headerlink" href="#propagate-state-5" title="Link to this heading"></a></h3>
+<p>Propagates a parsed TLE using the requested propagation model and returns <code class="docutils literal notranslate"><span class="pre">state(Position,Velocity)</span></code> in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported models are <code class="docutils literal notranslate"><span class="pre">approximate</span></code>, <code class="docutils literal notranslate"><span class="pre">approximate_near_earth</span></code>, <code class="docutils literal notranslate"><span class="pre">approximate_deep_space</span></code>, and <code class="docutils literal notranslate"><span class="pre">two_body</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate_state(TLE,Time,Frame,Model,State)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate_state(++compound,++nonvar,++atom,++atom,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="ground-track-5">
-<span id="tle-orbits-protocol-0-ground-track-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ground_track/5</span></code></a><a class="headerlink" href="#ground-track-5" title="Link to this heading"></a></h3>
-<p>Samples the propagated sub-satellite ground track between two UTC <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> instants separated by a positive step size in seconds, returning <code class="docutils literal notranslate"><span class="pre">sample(DateTime,</span> <span class="pre">geographic(Latitude,Longitude,Height))</span></code> terms.</p>
+<span id="tle-orbits-protocol-0-ground-track-5"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ground_track/5</span></code></a><a class="headerlink" href="#ground-track-5" title="Link to this heading"></a></h3>
+<p>Samples the propagated sub-satellite ground track between two UTC <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> instants separated by a positive step size in seconds using the default <code class="docutils literal notranslate"><span class="pre">approximate</span></code> model, returning <code class="docutils literal notranslate"><span class="pre">sample(DateTime,</span> <span class="pre">geographic(Latitude,Longitude,Height))</span></code> terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -509,6 +578,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ground_track(++compound,++compound,++compound,++number,--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ground-track-6">
+<span id="tle-orbits-protocol-0-ground-track-6"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ground_track/6</span></code></a><a class="headerlink" href="#ground-track-6" title="Link to this heading"></a></h3>
+<p>Samples the propagated sub-satellite ground track between two UTC <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> instants separated by a positive step size in seconds using the requested propagation model. Supported models are <code class="docutils literal notranslate"><span class="pre">approximate</span></code>, <code class="docutils literal notranslate"><span class="pre">approximate_near_earth</span></code>, <code class="docutils literal notranslate"><span class="pre">approximate_deep_space</span></code>, and <code class="docutils literal notranslate"><span class="pre">two_body</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ground_track(TLE,StartDateTime,EndDateTime,StepSeconds,Model,Samples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ground_track(++compound,++compound,++compound,++number,++atom,--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 </section>

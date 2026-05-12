@@ -1,0 +1,60 @@
+.. index:: single: multisets
+.. _multisets/0:
+
+.. rst-class:: right
+
+**object**
+
+``multisets``
+=============
+
+Implementation of multiset operations with repetition over lists.
+
+| **Availability:** 
+|    ``logtalk_load(multisets(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`multisets_protocol <multisets_protocol/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`natural <natural/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`multisets_protocol/0::count_distinct_multisets/3`  :ref:`multisets_protocol/0::count_multisets/3`  :ref:`multisets_protocol/0::distinct_multiset/3`  :ref:`multisets_protocol/0::distinct_multiset/4`  :ref:`multisets_protocol/0::distinct_multiset_index/4`  :ref:`multisets_protocol/0::distinct_multisets/3`  :ref:`multisets_protocol/0::distinct_multisets/4`  :ref:`multisets_protocol/0::multiset/3`  :ref:`multisets_protocol/0::multiset/4`  :ref:`multisets_protocol/0::multiset_index/4`  :ref:`multisets_protocol/0::multiset_index/5`  :ref:`multisets_protocol/0::multisets/3`  :ref:`multisets_protocol/0::multisets/4`  :ref:`multisets_protocol/0::next_multiset/3`  :ref:`multisets_protocol/0::nth_distinct_multiset/4`  :ref:`multisets_protocol/0::nth_multiset/4`  :ref:`multisets_protocol/0::nth_multiset/5`  :ref:`multisets_protocol/0::previous_multiset/3`  :ref:`multisets_protocol/0::random_distinct_multiset/3`  :ref:`multisets_protocol/0::random_multiset/3`  :ref:`multisets_protocol/0::sample_distinct_multisets/4`  :ref:`multisets_protocol/0::sample_multisets/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

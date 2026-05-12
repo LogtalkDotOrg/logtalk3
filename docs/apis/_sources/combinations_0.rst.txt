@@ -14,8 +14,8 @@ Implementation of combinations operations over lists.
 |    ``logtalk_load(combinations(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 2:0:0
+| **Date:** 2026-05-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,7 @@ Implementation of combinations operations over lists.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`combinations_protocol/0::combination/3`  :ref:`combinations_protocol/0::combination/4`  :ref:`combinations_protocol/0::combination_index/4`  :ref:`combinations_protocol/0::combination_with_replacement/3`  :ref:`combinations_protocol/0::combination_with_replacement/4`  :ref:`combinations_protocol/0::combinations/3`  :ref:`combinations_protocol/0::combinations/4`  :ref:`combinations_protocol/0::combinations_with_replacement/3`  :ref:`combinations_protocol/0::combinations_with_replacement/4`  :ref:`combinations_protocol/0::count_combinations/3`  :ref:`combinations_protocol/0::count_combinations_with_replacement/3`  :ref:`combinations_protocol/0::distinct_combination/3`  :ref:`combinations_protocol/0::distinct_combination/4`  :ref:`combinations_protocol/0::distinct_combinations/3`  :ref:`combinations_protocol/0::distinct_combinations/4`  :ref:`combinations_protocol/0::nth_combination/4`  :ref:`combinations_protocol/0::random_combination/3`  
+|     :ref:`combinations_protocol/0::combination/3`  :ref:`combinations_protocol/0::combination/4`  :ref:`combinations_protocol/0::combination_index/4`  :ref:`combinations_protocol/0::combination_index/5`  :ref:`combinations_protocol/0::combinations/3`  :ref:`combinations_protocol/0::combinations/4`  :ref:`combinations_protocol/0::count_combinations/3`  :ref:`combinations_protocol/0::count_distinct_combinations/3`  :ref:`combinations_protocol/0::distinct_combination/3`  :ref:`combinations_protocol/0::distinct_combination/4`  :ref:`combinations_protocol/0::distinct_combination_index/4`  :ref:`combinations_protocol/0::distinct_combinations/3`  :ref:`combinations_protocol/0::distinct_combinations/4`  :ref:`combinations_protocol/0::next_combination/3`  :ref:`combinations_protocol/0::nth_combination/4`  :ref:`combinations_protocol/0::nth_combination/5`  :ref:`combinations_protocol/0::nth_distinct_combination/4`  :ref:`combinations_protocol/0::previous_combination/3`  :ref:`combinations_protocol/0::random_combination/3`  :ref:`combinations_protocol/0::random_distinct_combination/3`  :ref:`combinations_protocol/0::sample_combinations/4`  :ref:`combinations_protocol/0::sample_distinct_combinations/4`  
 
 .. contents::
    :local:

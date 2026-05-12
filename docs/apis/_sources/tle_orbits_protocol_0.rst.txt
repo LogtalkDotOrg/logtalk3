@@ -8,7 +8,7 @@
 ``tle_orbits_protocol``
 =======================
 
-Protocol for parsing Two-Line Element sets and performing basic orbit propagation and ground-track sampling.
+Protocol for parsing Two-Line Element sets and performing approximate portable orbit propagation with near-earth and deep-space variants plus ground-track sampling.
 
 | **Availability:** 
 |    ``logtalk_load(tle_orbits(loader))``
@@ -82,7 +82,7 @@ Parses a single TLE record given an optional name atom or the atom ``none`` plus
 ``propagate/3``
 ^^^^^^^^^^^^^^^
 
-Propagates a parsed TLE using a basic two-body model and returns a ``geographic(Latitude,Longitude,Height)`` coordinate. Supported time specifications are ``date_time(Year,Month,Day,Hours,Minutes,Seconds)``, ``julian_date(JulianDate)``, and ``offset_seconds(SecondsSinceEpoch)``.
+Propagates a parsed TLE using the default ``approximate`` model and returns a ``geographic(Latitude,Longitude,Height)`` coordinate. Supported time specifications are ``date_time(Year,Month,Day,Hours,Minutes,Seconds)``, ``julian_date(JulianDate)``, and ``offset_seconds(SecondsSinceEpoch)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -101,7 +101,7 @@ Propagates a parsed TLE using a basic two-body model and returns a ``geographic(
 ``propagate/4``
 ^^^^^^^^^^^^^^^
 
-Propagates a parsed TLE using a basic two-body model and returns coordinates in the requested frame. Supported frames are ``eci`` returning ``eci(X,Y,Z)``, ``ecef`` returning ``ecef(X,Y,Z)``, and ``wgs84_3d`` returning ``geographic(Latitude,Longitude,Height)``.
+Propagates a parsed TLE using the default ``approximate`` model and returns coordinates in the requested frame. Supported frames are ``eci`` returning ``eci(X,Y,Z)``, ``ecef`` returning ``ecef(X,Y,Z)``, and ``wgs84_3d`` returning ``geographic(Latitude,Longitude,Height)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -114,13 +114,70 @@ Propagates a parsed TLE using a basic two-body model and returns coordinates in 
 
 ------------
 
+.. index:: propagate/5
+.. _tle_orbits_protocol/0::propagate/5:
+
+``propagate/5``
+^^^^^^^^^^^^^^^
+
+Propagates a parsed TLE using the requested propagation model and returns coordinates in the requested frame. Supported models are ``approximate`` for automatic near-earth versus deep-space dispatch, ``approximate_near_earth`` for the low-period approximate branch with J2 secular and short-period corrections plus low-order B* drag handling, ``approximate_deep_space`` for the dedicated deep-space approximate branch with resonance-aware long-period corrections, and ``two_body`` for the legacy Keplerian approximation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate(TLE,Time,Frame,Model,Coordinate)``
+| **Mode and number of proofs:**
+|    ``propagate(++compound,++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: propagate_state/4
+.. _tle_orbits_protocol/0::propagate_state/4:
+
+``propagate_state/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Propagates a parsed TLE using the default ``approximate`` model and returns ``state(Position,Velocity)`` in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported frames are ``eci`` returning ``state(eci(X,Y,Z), eci(VX,VY,VZ))``, ``ecef`` returning ``state(ecef(X,Y,Z), ecef(VX,VY,VZ))``, and ``wgs84_3d`` returning ``state(geographic(Latitude,Longitude,Height), enu(East,North,Up))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate_state(TLE,Time,Frame,State)``
+| **Mode and number of proofs:**
+|    ``propagate_state(++compound,++nonvar,++atom,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: propagate_state/5
+.. _tle_orbits_protocol/0::propagate_state/5:
+
+``propagate_state/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Propagates a parsed TLE using the requested propagation model and returns ``state(Position,Velocity)`` in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported models are ``approximate``, ``approximate_near_earth``, ``approximate_deep_space``, and ``two_body``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate_state(TLE,Time,Frame,Model,State)``
+| **Mode and number of proofs:**
+|    ``propagate_state(++compound,++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
+
+
+------------
+
 .. index:: ground_track/5
 .. _tle_orbits_protocol/0::ground_track/5:
 
 ``ground_track/5``
 ^^^^^^^^^^^^^^^^^^
 
-Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds, returning ``sample(DateTime, geographic(Latitude,Longitude,Height))`` terms.
+Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds using the default ``approximate`` model, returning ``sample(DateTime, geographic(Latitude,Longitude,Height))`` terms.
 
 | **Compilation flags:**
 |    ``static``
@@ -129,6 +186,25 @@ Samples the propagated sub-satellite ground track between two UTC ``date_time/6`
 |    ``ground_track(TLE,StartDateTime,EndDateTime,StepSeconds,Samples)``
 | **Mode and number of proofs:**
 |    ``ground_track(++compound,++compound,++compound,++number,--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: ground_track/6
+.. _tle_orbits_protocol/0::ground_track/6:
+
+``ground_track/6``
+^^^^^^^^^^^^^^^^^^
+
+Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds using the requested propagation model. Supported models are ``approximate``, ``approximate_near_earth``, ``approximate_deep_space``, and ``two_body``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ground_track(TLE,StartDateTime,EndDateTime,StepSeconds,Model,Samples)``
+| **Mode and number of proofs:**
+|    ``ground_track(++compound,++compound,++compound,++number,++atom,--list(compound))`` - ``one_or_error``
 
 
 ------------

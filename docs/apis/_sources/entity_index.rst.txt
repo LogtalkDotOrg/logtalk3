@@ -113,6 +113,7 @@ Objects
    amqp <amqp_0>
    apriori_pattern_miner <apriori_pattern_miner_0>
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
+   arrangements <arrangements_0>
    assertions <assertions_0>
    assertions(Mode) <assertions_1>
    assignvars <assignvars_0>
@@ -404,6 +405,7 @@ Objects
    minimal_output <minimal_output_0>
    modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
    modules_diagram_support <modules_diagram_support_0>
+   multisets <multisets_0>
    murmurhash3_x64_128 <murmurhash3_x64_128_0>
    murmurhash3_x86_128 <murmurhash3_x86_128_0>
    murmurhash3_x86_32 <murmurhash3_x86_32_0>
@@ -619,6 +621,7 @@ Protocols
    anomaly_dataset_protocol <anomaly_dataset_protocol_0>
    anomaly_detector_protocol <anomaly_detector_protocol_0>
    application_protocol <application_protocol_0>
+   arrangements_protocol <arrangements_protocol_0>
    assignvarsp <assignvarsp_0>
    ccsds_frame_protocol <ccsds_frame_protocol_0>
    ccsds_time_code_protocol <ccsds_time_code_protocol_0>
@@ -692,6 +695,7 @@ Protocols
    metap <metap_0>
    monitoring <monitoring_0>
    monitorp <monitorp_0>
+   multisets_protocol <multisets_protocol_0>
    mutator_protocol <mutator_protocol_0>
    nanoid_protocol <nanoid_protocol_0>
    nested_dictionary_protocol <nested_dictionary_protocol_0>

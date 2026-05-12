@@ -8,7 +8,7 @@
 ``tle_orbits``
 ==============
 
-Parser for Two-Line Element sets with basic two-body propagation and ground-track sampling.
+Parser for Two-Line Element sets with an approximate portable propagator featuring automatic branching between near-earth and deep-space variants, a legacy two-body fallback model, and ground-track sampling.
 
 | **Availability:** 
 |    ``logtalk_load(tle_orbits(loader))``
@@ -35,7 +35,7 @@ Parser for Two-Line Element sets with basic two-body propagation and ground-trac
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`tle_orbits_protocol/0::ground_track/5`  :ref:`tle_orbits_protocol/0::parse/2`  :ref:`tle_orbits_protocol/0::parse_lines/4`  :ref:`tle_orbits_protocol/0::propagate/3`  :ref:`tle_orbits_protocol/0::propagate/4`  
+|     :ref:`tle_orbits_protocol/0::ground_track/5`  :ref:`tle_orbits_protocol/0::ground_track/6`  :ref:`tle_orbits_protocol/0::parse/2`  :ref:`tle_orbits_protocol/0::parse_lines/4`  :ref:`tle_orbits_protocol/0::propagate/3`  :ref:`tle_orbits_protocol/0::propagate/4`  :ref:`tle_orbits_protocol/0::propagate/5`  :ref:`tle_orbits_protocol/0::propagate_state/4`  :ref:`tle_orbits_protocol/0::propagate_state/5`  
 
 .. contents::
    :local:

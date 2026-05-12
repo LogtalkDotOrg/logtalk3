@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-05-12,
 		comment is 'Unit tests for the "combinations" library.'
 	]).
 
@@ -50,19 +50,7 @@
 		combinations::combinations(2, [b,d,a,c], shortlex, Combinations).
 
 	test(combination_4_lexicographic_single, true(Combination == [b,d])) :-
-		once(combinations::combination(2, [b,d,a,c], lexicographic, Combination)).
-
-	test(combinations_with_replacement_3_two_of_two, deterministic(Combinations == [[a,a],[a,b],[b,b]])) :-
-		combinations::combinations_with_replacement(2, [a,b], Combinations).
-
-	test(combinations_with_replacement_4_lexicographic, deterministic(Combinations == [[a,a],[b,a],[b,b]])) :-
-		combinations::combinations_with_replacement(2, [b,a], lexicographic, Combinations).
-
-	test(combination_with_replacement_3_all, true(Combinations == [[a,a],[a,b],[b,b]])) :-
-		findall(Combination, combinations::combination_with_replacement(2, [a,b], Combination), Combinations).
-
-	test(combination_with_replacement_4_exists, exists(Combination == [a,b])) :-
-		combinations::combination_with_replacement(2, [a,b], default, Combination).
+		combinations::combination(2, [b,d,a,c], lexicographic, Combination).
 
 	test(distinct_combinations_3_with_duplicates, deterministic(Combinations == [[a,a],[a,b]])) :-
 		combinations::distinct_combinations(2, [a,a,b], Combinations).
@@ -79,17 +67,74 @@
 	test(count_combinations_3_two_of_five, deterministic(Count == 10)) :-
 		combinations::count_combinations(2, [a,b,c,d,e], Count).
 
-	test(count_combinations_with_replacement_3_two_of_two, deterministic(Count == 3)) :-
-		combinations::count_combinations_with_replacement(2, [a,b], Count).
+	test(count_distinct_combinations_3_with_duplicates, deterministic(Count == 4)) :-
+		combinations::count_distinct_combinations(2, [a,a,b,c], Count).
+
+	test(nth_distinct_combination_4_third, deterministic(Combination == [a,c])) :-
+		combinations::nth_distinct_combination(2, [a,a,b,c], 2, Combination).
+
+	test(distinct_combination_index_4_third, deterministic(Index == 2)) :-
+		combinations::distinct_combination_index(2, [a,a,b,c], [a,c], Index).
 
 	test(random_combination_3_length, true(list::length(Combination, 2))) :-
 		combinations::random_combination(2, [a,b,c,d], Combination).
 
+	test(sample_combinations_4_zero, deterministic(Samples == [])) :-
+		combinations::sample_combinations(2, [a,b,c,d], 0, Samples).
+
+	test(sample_combinations_4_count, true((list::length(Samples, 3), forall(list::member(Sample, Samples), combinations::combination(2, [a,b,c,d], Sample))))) :-
+		combinations::sample_combinations(2, [a,b,c,d], 3, Samples).
+
+	test(random_distinct_combination_3_exists, true(combinations::distinct_combination(2, [a,a,b,c], Combination))) :-
+		combinations::random_distinct_combination(2, [a,a,b,c], Combination).
+
+	test(sample_distinct_combinations_4_zero, deterministic(Samples == [])) :-
+		combinations::sample_distinct_combinations(2, [a,a,b,c], 0, Samples).
+
+	test(sample_distinct_combinations_4_count, true((list::length(Samples, 3), forall(list::member(Sample, Samples), combinations::distinct_combination(2, [a,a,b,c], Sample))))) :-
+		combinations::sample_distinct_combinations(2, [a,a,b,c], 3, Samples).
+
+	test(next_combination_3, deterministic(Next == [b,c])) :-
+		combinations::next_combination([b,d,a,c], [b,a], Next).
+
+	test(next_combination_3_duplicates, deterministic(Next == [a,b])) :-
+		combinations::next_combination([a,a,b,c], [a,a], Next).
+
+	test(next_combination_3_last, fail) :-
+		combinations::next_combination([b,d,a,c], [d,c], _).
+
+	test(previous_combination_3, deterministic(Previous == [b,a])) :-
+		combinations::previous_combination([b,d,a,c], [b,c], Previous).
+
+	test(previous_combination_3_duplicates, deterministic(Previous == [a,b])) :-
+		combinations::previous_combination([a,a,b,c], [a,c], Previous).
+
+	test(previous_combination_3_first, fail) :-
+		combinations::previous_combination([b,d,a,c], [a,c], _).
+
 	test(nth_combination_4_second, deterministic(Combination == [a,c])) :-
 		combinations::nth_combination(2, [a,b,c], 1, Combination).
 
+	test(nth_combination_5_default_second, deterministic(Combination == [a,c])) :-
+		combinations::nth_combination(2, [a,b,c], default, 1, Combination).
+
+	test(nth_combination_5_lexicographic_second, deterministic(Combination == [b,a])) :-
+		combinations::nth_combination(2, [b,d,a,c], lexicographic, 1, Combination).
+
+	test(nth_combination_5_shortlex_second, deterministic(Combination == [b,a])) :-
+		combinations::nth_combination(2, [b,d,a,c], shortlex, 1, Combination).
+
 	test(combination_index_4_second, deterministic(Index == 1)) :-
 		combinations::combination_index(2, [a,b,c], [a,c], Index).
+
+	test(combination_index_5_default_second, deterministic(Index == 1)) :-
+		combinations::combination_index(2, [a,b,c], default, [a,c], Index).
+
+	test(combination_index_5_lexicographic_second, deterministic(Index == 1)) :-
+		combinations::combination_index(2, [b,d,a,c], lexicographic, [b,a], Index).
+
+	test(combination_index_5_shortlex_second, deterministic(Index == 1)) :-
+		combinations::combination_index(2, [b,d,a,c], shortlex, [b,a], Index).
 
 	test(nth_combination_combination_index_roundtrip, deterministic(Index == 2)) :-
 		combinations::nth_combination(2, [a,b,c,d], 2, Combination),

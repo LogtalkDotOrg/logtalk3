@@ -10,11 +10,11 @@ multiple areas):
   ``expand_library_alias_paths``, ``command_line_options``, ``logging``,
   and ``options``.
 - Types, collections, combinatorics, and generic data processing:
-  ``basic_types``, ``types``, ``assignvars``, ``combinations``,
-  ``deques``, ``dictionaries``, ``nested_dictionaries``, ``graphs``,
-  ``heaps``, ``hierarchies``, ``intervals``, ``permutations``,
-  ``queues``, ``sets``, ``subsequences``, ``union_find``, and
-  ``zippers``.
+  ``basic_types``, ``types``, ``assignvars``, ``arrangements``,
+  ``combinations``, ``deques``, ``dictionaries``,
+  ``nested_dictionaries``, ``graphs``, ``heaps``, ``hierarchies``,
+  ``intervals``, ``multisets``, ``permutations``, ``queues``, ``sets``,
+  ``subsequences``, ``union_find``, and ``zippers``.
 - Meta-programming: ``meta`` and ``meta_compiler``
 - Monoid implementations: ``expecteds``, ``optionals``, and
   ``validations``.

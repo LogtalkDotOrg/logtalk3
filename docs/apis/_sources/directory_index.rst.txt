@@ -180,6 +180,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    arbitrary <arbitrary_0>
 
+``library/arrangements/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   arrangements <arrangements_0>
+   arrangements_protocol <arrangements_protocol_0>
+
 ``library/assignvars/``
 -----------------------
 
@@ -1682,6 +1693,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
+
+``library/multisets/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   multisets <multisets_0>
+   multisets_protocol <multisets_protocol_0>
 
 ``library/mutations/``
 ----------------------

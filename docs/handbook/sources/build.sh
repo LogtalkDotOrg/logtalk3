@@ -86,6 +86,7 @@ sed '1,19d' ../../../library/anomaly_detection_protocols/NOTES.md | pandoc -f gf
 sed '1,19d' ../../../library/application/NOTES.md | pandoc -f gfm -t rst -o libraries/application.rst
 sed '1,19d' ../../../library/apriori_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/apriori_pattern_miner.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
+sed '1,19d' ../../../library/arrangements/NOTES.md | pandoc -f gfm -t rst -o libraries/arrangements.rst
 sed '1,19d' ../../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,19d' ../../../library/avro/NOTES.md | pandoc -f gfm -t rst -o libraries/avro.rst
 sed '1,19d' ../../../library/base32/NOTES.md | pandoc -f gfm -t rst -o libraries/base32.rst
@@ -216,6 +217,7 @@ sed '1,19d' ../../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o li
 sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libraries/mime_types.rst
 sed '1,19d' ../../../library/modified_z_score_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
+sed '1,19d' ../../../library/multisets/NOTES.md | pandoc -f gfm -t rst -o libraries/multisets.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
 sed '1,19d' ../../../library/nearest_centroid_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/nearest_centroid_classifier.rst
