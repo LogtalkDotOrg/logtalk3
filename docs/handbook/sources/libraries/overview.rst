@@ -15,7 +15,7 @@ multiple areas):
   ``intervals``, ``queues``, ``sets``, ``subsequences``, ``union_find``,
   and ``zippers``.
 - Combinatorics: ``arrangements``, ``combinations``, ``derangements``,
-  ``multisets``, and ``permutations``.
+  ``multisets``, ``partitions``, and ``permutations``.
 - Meta-programming: ``meta`` and ``meta_compiler``
 - Monoid implementations: ``expecteds``, ``optionals``, and
   ``validations``.

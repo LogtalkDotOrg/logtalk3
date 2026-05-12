@@ -24,8 +24,8 @@ provided:
   previous multiset in lexicographic order.
 
 Dedicated ``arrangements``, ``combinations``, ``permutations``,
-``derangements``, and ``subsequences`` libraries are also available for
-focused APIs on related operations.
+``derangements``, ``partitions``, and ``subsequences`` libraries are
+also available for focused APIs on related operations.
 
 API documentation
 -----------------

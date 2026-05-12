@@ -26,8 +26,8 @@ predicates are provided:
   arrangements and distinct arrangements.
 
 Dedicated ``permutations``, ``combinations``, ``multisets``,
-``derangements`` and ``subsequences`` libraries are also available for
-focused APIs on related operations.
+``derangements``, ``partitions``, and ``subsequences`` libraries are
+also available for focused APIs on related operations.
 
 API documentation
 -----------------

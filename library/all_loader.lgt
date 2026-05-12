@@ -31,6 +31,7 @@
 		subsequences(loader),
 		combinations(loader),
 		multisets(loader),
+		partitions(loader),
 		permutations(loader),
 		derangements(loader),
 		arrangements(loader),

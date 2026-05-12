@@ -178,6 +178,7 @@ directory in the ``NOTES.md`` file.
    optionals
    options
    os
+   partitions
    pattern_mining_protocols
    pca_projection
    permutations

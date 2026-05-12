@@ -35,9 +35,9 @@ provided:
 * **Counting operations** - Predicates for counting arrangements and distinct arrangements.
 * **Random selection** - Predicates for randomly selecting and sampling arrangements and distinct arrangements.
 
-Dedicated `permutations`, `combinations`, `multisets`, `derangements` and
-`subsequences` libraries are also available for focused APIs on related
-operations.
+Dedicated `permutations`, `combinations`, `multisets`, `derangements`,
+`partitions`, and `subsequences` libraries are also available for
+focused APIs on related operations.
 
 
 API documentation

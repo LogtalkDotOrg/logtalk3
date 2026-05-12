@@ -24,9 +24,10 @@ provided:
   permutations and distinct permutations.
 
 Dedicated ``arrangements``, ``combinations``, ``derangements``,
-``multisets``, ``derangements``, and ``subsequences`` libraries are also
-available for focused APIs on related operations. The ``arrangements``
-library is the repetition-allowed counterpart to this library.
+``multisets``, ``derangements``, ``partitions``, and ``subsequences``
+libraries are also available for focused APIs on related operations. The
+``arrangements`` library is the repetition-allowed counterpart to this
+library.
 
 API documentation
 -----------------

@@ -21,8 +21,8 @@ ________________________________________________________________________
 `permutations`
 ==============
 
-This library provides predicates for generating and querying permutations over
-lists. The following categories of predicates are provided:
+This library provides predicates for generating and querying permutations
+over lists. The following categories of predicates are provided:
 
 * **Generation operations** - Predicates for generating permutations and k-permutations.
 * **Ordering variants** - Predicates that support an additional order argument (`default`, `lexicographic`, or `shortlex`) for controlling output order.
@@ -33,9 +33,9 @@ lists. The following categories of predicates are provided:
 * **Random selection** - Predicates for randomly selecting and sampling permutations and distinct permutations.
 
 Dedicated `arrangements`, `combinations`, `derangements`, `multisets`,
-`derangements`, and `subsequences` libraries are also available for
-focused APIs on related operations. The `arrangements` library is the
-repetition-allowed counterpart to this library.
+`derangements`, `partitions`, and `subsequences` libraries are also
+available for focused APIs on related operations. The `arrangements`
+library is the repetition-allowed counterpart to this library.
 
 
 API documentation

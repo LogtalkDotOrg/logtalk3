@@ -89,6 +89,10 @@ counting, indexing, and randomly selecting fixed-point-free permutations.
 counting, indexing, and randomly selecting unordered selections with
 replacement.
 
+* ADDED: New `partitions` library implementing predicates for generating,
+counting, indexing, random selection, lexicographic stepping, and
+deduplicating set partitions of lists, including exact-block counts.
+
 * ADDED: Predicates `nth_combination/5`, `combination_index/5`,
 `count_distinct_combinations/3`, `nth_distinct_combination/4`,
 `distinct_combination_index/4`, `random_distinct_combination/3`,

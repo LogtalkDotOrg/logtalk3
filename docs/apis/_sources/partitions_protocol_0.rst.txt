@@ -1,0 +1,823 @@
+.. index:: single: partitions_protocol
+.. _partitions_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``partitions_protocol``
+=======================
+
+Protocol for set partition operations over lists.
+
+| **Availability:** 
+|    ``logtalk_load(partitions(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: partitions/2
+.. _partitions_protocol/0::partitions/2:
+
+``partitions/2``
+^^^^^^^^^^^^^^^^
+
+Generates all set partitions of a list using default order. Partitions are represented as lists of non-empty blocks. The empty list has one partition, represented by the empty list of blocks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partitions(List,Partitions)``
+| **Mode and number of proofs:**
+|    ``partitions(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: partition/2
+.. _partitions_protocol/0::partition/2:
+
+``partition/2``
+^^^^^^^^^^^^^^^
+
+True iff the second argument is a set partition of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(List,Partition)``
+| **Mode and number of proofs:**
+|    ``partition(+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: partitions/3
+.. _partitions_protocol/0::partitions/3:
+
+``partitions/3``
+^^^^^^^^^^^^^^^^
+
+Generates either all set partitions with the given order (when the second argument is ``default`` or ``lexicographic``) or all set partitions with an exact number of blocks using default order (when the first argument is an integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partitions(ListOrK,OrderOrList,Partitions)``
+| **Mode and number of proofs:**
+|    ``partitions(+list,+atom,-list)`` - ``one``
+|    ``partitions(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: partition/3
+.. _partitions_protocol/0::partition/3:
+
+``partition/3``
+^^^^^^^^^^^^^^^
+
+True iff the third argument is a set partition generated either in the given order or with the given exact number of blocks using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(ListOrK,OrderOrList,Partition)``
+| **Mode and number of proofs:**
+|    ``partition(+list,+atom,-list)`` - ``one_or_more``
+|    ``partition(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: partitions/4
+.. _partitions_protocol/0::partitions/4:
+
+``partitions/4``
+^^^^^^^^^^^^^^^^
+
+Generates all set partitions with an exact number of blocks and the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partitions(K,List,Order,Partitions)``
+| **Mode and number of proofs:**
+|    ``partitions(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: partition/4
+.. _partitions_protocol/0::partition/4:
+
+``partition/4``
+^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a set partition with an exact number of blocks and the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(K,List,Order,Partition)``
+| **Mode and number of proofs:**
+|    ``partition(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_partitions/2
+.. _partitions_protocol/0::distinct_partitions/2:
+
+``distinct_partitions/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct set partitions of a list (deduplicating equal-valued partitions after canonicalizing block order) using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partitions(List,Partitions)``
+| **Mode and number of proofs:**
+|    ``distinct_partitions(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_partition/2
+.. _partitions_protocol/0::distinct_partition/2:
+
+``distinct_partition/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the second argument is a distinct set partition of a list using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partition(List,Partition)``
+| **Mode and number of proofs:**
+|    ``distinct_partition(+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_partitions/3
+.. _partitions_protocol/0::distinct_partitions/3:
+
+``distinct_partitions/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates either all distinct set partitions with the given order (when the second argument is ``default`` or ``lexicographic``) or all distinct set partitions with an exact number of blocks using default order (when the first argument is an integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partitions(ListOrK,OrderOrList,Partitions)``
+| **Mode and number of proofs:**
+|    ``distinct_partitions(+list,+atom,-list)`` - ``one``
+|    ``distinct_partitions(+integer,+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_partition/3
+.. _partitions_protocol/0::distinct_partition/3:
+
+``distinct_partition/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the third argument is a distinct set partition generated either in the given order or with the given exact number of blocks using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partition(ListOrK,OrderOrList,Partition)``
+| **Mode and number of proofs:**
+|    ``distinct_partition(+list,+atom,-list)`` - ``one_or_more``
+|    ``distinct_partition(+integer,+list,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: distinct_partitions/4
+.. _partitions_protocol/0::distinct_partitions/4:
+
+``distinct_partitions/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates all distinct set partitions with an exact number of blocks and the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partitions(K,List,Order,Partitions)``
+| **Mode and number of proofs:**
+|    ``distinct_partitions(+integer,+list,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: distinct_partition/4
+.. _partitions_protocol/0::distinct_partition/4:
+
+``distinct_partition/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the fourth argument is a distinct set partition with an exact number of blocks and the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partition(K,List,Order,Partition)``
+| **Mode and number of proofs:**
+|    ``distinct_partition(+integer,+list,+atom,-list)`` - ``one_or_more``
+
+
+------------
+
+.. index:: count_partitions/2
+.. _partitions_protocol/0::count_partitions/2:
+
+``count_partitions/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of set partitions of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_partitions(List,Count)``
+| **Mode and number of proofs:**
+|    ``count_partitions(+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: nth_partition/3
+.. _partitions_protocol/0::nth_partition/3:
+
+``nth_partition/3``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the set partition at a given zero-based index using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_partition(List,Index,Partition)``
+| **Mode and number of proofs:**
+|    ``nth_partition(+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nth_partition/4
+.. _partitions_protocol/0::nth_partition/4:
+
+``nth_partition/4``
+^^^^^^^^^^^^^^^^^^^
+
+Returns either the set partition at a given zero-based index in the given order (when the second argument is ``default`` or ``lexicographic``) or the set partition with an exact number of blocks at a given zero-based index using default order (when the first argument is an integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_partition(ListOrK,OrderOrList,Index,Partition)``
+| **Mode and number of proofs:**
+|    ``nth_partition(+list,+atom,+integer,-list)`` - ``zero_or_one``
+|    ``nth_partition(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nth_partition/5
+.. _partitions_protocol/0::nth_partition/5:
+
+``nth_partition/5``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the set partition with an exact number of blocks at a given zero-based index in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_partition(K,List,Order,Index,Partition)``
+| **Mode and number of proofs:**
+|    ``nth_partition(+integer,+list,+atom,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: partition_index/3
+.. _partitions_protocol/0::partition_index/3:
+
+``partition_index/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a set partition using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition_index(List,Partition,Index)``
+| **Mode and number of proofs:**
+|    ``partition_index(+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: partition_index/4
+.. _partitions_protocol/0::partition_index/4:
+
+``partition_index/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns either the zero-based index of a set partition in the given order (when the second argument is ``default`` or ``lexicographic``) or the zero-based index of a set partition with an exact number of blocks using default order (when the first argument is an integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition_index(ListOrK,OrderOrList,Partition,Index)``
+| **Mode and number of proofs:**
+|    ``partition_index(+list,+atom,+list,-integer)`` - ``zero_or_one``
+|    ``partition_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: partition_index/5
+.. _partitions_protocol/0::partition_index/5:
+
+``partition_index/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a set partition with an exact number of blocks in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition_index(K,List,Order,Partition,Index)``
+| **Mode and number of proofs:**
+|    ``partition_index(+integer,+list,+atom,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: count_partitions/3
+.. _partitions_protocol/0::count_partitions/3:
+
+``count_partitions/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of set partitions of a list with an exact number of blocks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_partitions(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_partitions(+integer,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: count_distinct_partitions/2
+.. _partitions_protocol/0::count_distinct_partitions/2:
+
+``count_distinct_partitions/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of distinct set partitions of a list (deduplicating equal-valued partitions).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_distinct_partitions(List,Count)``
+| **Mode and number of proofs:**
+|    ``count_distinct_partitions(+list,-integer)`` - ``one``
+
+
+------------
+
+.. index:: nth_distinct_partition/3
+.. _partitions_protocol/0::nth_distinct_partition/3:
+
+``nth_distinct_partition/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the distinct set partition at a given zero-based index using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_distinct_partition(List,Index,Partition)``
+| **Mode and number of proofs:**
+|    ``nth_distinct_partition(+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nth_distinct_partition/4
+.. _partitions_protocol/0::nth_distinct_partition/4:
+
+``nth_distinct_partition/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns either the distinct set partition at a given zero-based index in the given order (when the second argument is ``default`` or ``lexicographic``) or the distinct set partition with an exact number of blocks at a given zero-based index using default order (when the first argument is an integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_distinct_partition(ListOrK,OrderOrList,Index,Partition)``
+| **Mode and number of proofs:**
+|    ``nth_distinct_partition(+list,+atom,+integer,-list)`` - ``zero_or_one``
+|    ``nth_distinct_partition(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nth_distinct_partition/5
+.. _partitions_protocol/0::nth_distinct_partition/5:
+
+``nth_distinct_partition/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the distinct set partition with an exact number of blocks at a given zero-based index in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nth_distinct_partition(K,List,Order,Index,Partition)``
+| **Mode and number of proofs:**
+|    ``nth_distinct_partition(+integer,+list,+atom,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distinct_partition_index/3
+.. _partitions_protocol/0::distinct_partition_index/3:
+
+``distinct_partition_index/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a distinct set partition using default order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partition_index(List,Partition,Index)``
+| **Mode and number of proofs:**
+|    ``distinct_partition_index(+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distinct_partition_index/4
+.. _partitions_protocol/0::distinct_partition_index/4:
+
+``distinct_partition_index/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns either the zero-based index of a distinct set partition in the given order (when the second argument is ``default`` or ``lexicographic``) or the zero-based index of a distinct set partition with an exact number of blocks using default order (when the first argument is an integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partition_index(ListOrK,OrderOrList,Partition,Index)``
+| **Mode and number of proofs:**
+|    ``distinct_partition_index(+list,+atom,+list,-integer)`` - ``zero_or_one``
+|    ``distinct_partition_index(+integer,+list,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: distinct_partition_index/5
+.. _partitions_protocol/0::distinct_partition_index/5:
+
+``distinct_partition_index/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the zero-based index of a distinct set partition with an exact number of blocks in the given order: ``default`` or ``lexicographic``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``distinct_partition_index(K,List,Order,Partition,Index)``
+| **Mode and number of proofs:**
+|    ``distinct_partition_index(+integer,+list,+atom,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: count_distinct_partitions/3
+.. _partitions_protocol/0::count_distinct_partitions/3:
+
+``count_distinct_partitions/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of distinct set partitions of a list with an exact number of blocks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count_distinct_partitions(K,List,Count)``
+| **Mode and number of proofs:**
+|    ``count_distinct_partitions(+integer,+list,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: random_partition/2
+.. _partitions_protocol/0::random_partition/2:
+
+``random_partition/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random set partition of a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_partition(List,Partition)``
+| **Mode and number of proofs:**
+|    ``random_partition(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: random_partition/3
+.. _partitions_protocol/0::random_partition/3:
+
+``random_partition/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random set partition of a list with an exact number of blocks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_partition(K,List,Partition)``
+| **Mode and number of proofs:**
+|    ``random_partition(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_partitions/3
+.. _partitions_protocol/0::sample_partitions/3:
+
+``sample_partitions/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random set partitions of a list, sampled with replacement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_partitions(List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_partitions(+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_partitions/4
+.. _partitions_protocol/0::sample_partitions/4:
+
+``sample_partitions/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random set partitions of a list with an exact number of blocks, sampled with replacement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_partitions(K,List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_partitions(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: random_distinct_partition/2
+.. _partitions_protocol/0::random_distinct_partition/2:
+
+``random_distinct_partition/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random distinct set partition of a list (deduplicating equal-valued partitions).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_distinct_partition(List,Partition)``
+| **Mode and number of proofs:**
+|    ``random_distinct_partition(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: random_distinct_partition/3
+.. _partitions_protocol/0::random_distinct_partition/3:
+
+``random_distinct_partition/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a random distinct set partition of a list with an exact number of blocks (deduplicating equal-valued partitions).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_distinct_partition(K,List,Partition)``
+| **Mode and number of proofs:**
+|    ``random_distinct_partition(+integer,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_distinct_partitions/3
+.. _partitions_protocol/0::sample_distinct_partitions/3:
+
+``sample_distinct_partitions/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random distinct set partitions of a list, sampled with replacement after deduplicating equal-valued partitions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_distinct_partitions(List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_distinct_partitions(+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sample_distinct_partitions/4
+.. _partitions_protocol/0::sample_distinct_partitions/4:
+
+``sample_distinct_partitions/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns SampleCount random distinct set partitions of a list with an exact number of blocks, sampled with replacement after deduplicating equal-valued partitions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sample_distinct_partitions(K,List,SampleCount,Samples)``
+| **Mode and number of proofs:**
+|    ``sample_distinct_partitions(+integer,+list,+integer,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: next_partition/3
+.. _partitions_protocol/0::next_partition/3:
+
+``next_partition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the next distinct set partition value in lexicographic order induced by the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next_partition(List,Partition,Next)``
+| **Mode and number of proofs:**
+|    ``next_partition(+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: next_partition/4
+.. _partitions_protocol/0::next_partition/4:
+
+``next_partition/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the next distinct set partition value with an exact number of blocks in lexicographic order induced by the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next_partition(K,List,Partition,Next)``
+| **Mode and number of proofs:**
+|    ``next_partition(+integer,+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: previous_partition/3
+.. _partitions_protocol/0::previous_partition/3:
+
+``previous_partition/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the previous distinct set partition value in lexicographic order induced by the first argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous_partition(List,Partition,Previous)``
+| **Mode and number of proofs:**
+|    ``previous_partition(+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: previous_partition/4
+.. _partitions_protocol/0::previous_partition/4:
+
+``previous_partition/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the previous distinct set partition value with an exact number of blocks in lexicographic order induced by the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``previous_partition(K,List,Partition,Previous)``
+| **Mode and number of proofs:**
+|    ``previous_partition(+integer,+list,+list,-list)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

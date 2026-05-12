@@ -258,6 +258,7 @@ logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
+logtalk_library_path(partitions, library('partitions/')).
 logtalk_library_path(pattern_mining_protocols, library('pattern_mining_protocols/')).
 logtalk_library_path(pca_projection, library('pca_projection/')).
 logtalk_library_path(pls_projection, library('pls_projection/')).
