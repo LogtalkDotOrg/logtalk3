@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 378,-151 378,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol hash_digest_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;13, 12:23</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;13, 23:28</text>
 <g id="clust1" class="cluster">
 <title>cluster_hash_digest_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="hash_digest_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 354,-54.25 354,-54.25 360,-54.25 366,-60.25 366,-66.25 366,-66.25 366,-127 366,-127 366,-133 360,-139 354,-139 354,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">hash_digest_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>digest/2</title>
 <polygon fill="springgreen" stroke="black" points="98.25,-100.25 17.75,-100.25 17.75,-64.25 98.25,-64.25 98.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31" y="-84.12" font-family="Monospace" font-size="11.00">digest/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>digest_size/1</title>
 <polygon fill="springgreen" stroke="black" points="230.12,-100.25 115.88,-100.25 115.88,-64.25 230.12,-64.25 230.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="123.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="129.12" y="-84.12" font-family="Monospace" font-size="11.00">digest_size/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>block_size/1</title>
 <polygon fill="springgreen" stroke="black" points="355.75,-100.25 248.25,-100.25 248.25,-64.25 355.75,-64.25 355.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="256.25" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/hashes/hash_digest_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/910e15e32ca95e0b7fde9d6c589a54ca6b4aa22e/library/hashes/hash_digest_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="261.5" y="-84.12" font-family="Monospace" font-size="11.00">block_size/1</text>
 </a>
 </g>
