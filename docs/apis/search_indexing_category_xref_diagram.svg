@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-866.5 2698,-866.5 2698,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category search_indexing</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;12, 23:05</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;13, 12:23</text>
 <g id="clust1" class="cluster">
 <title>cluster_search_indexing_category</title>
 <g id="a_clust1"><a xlink:title="search_indexing">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2674,-54.25 2674,-54.25 2680,-54.25 2686,-60.25 2686,-66.25 2686,-66.25 2686,-842.5 2686,-842.5 2686,-848.5 2680,-854.5 2674,-854.5 2674,-854.5 20,-854.5 20,-854.5 14,-854.5 8,-848.5 8,-842.5 8,-842.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-836.75" font-family="Monospace" font-size="10.00" fill="dimgray">search_indexing</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>build_auto_search_index/3</title>
 <polygon fill="yellow" stroke="black" points="456.62,-696.5 261.38,-696.5 261.38,-660.5 456.62,-660.5 456.62,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="269.38" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="274.62" y="-680.38" font-family="Monospace" font-size="11.00">build_auto_search_index/3</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>build_metric_tree/3</title>
 <polygon fill="yellow" stroke="black" points="372.38,-577.25 217.62,-577.25 217.62,-541.25 372.38,-541.25 372.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="225.62" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="230.88" y="-561.12" font-family="Monospace" font-size="11.00">build_metric_tree/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- build_auto_search_index/3&#45;&gt;build_metric_tree/3 -->
 <g id="edge4" class="edge">
 <title>build_auto_search_index/3&#45;&gt;build_metric_tree/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M349.56,-660.2C339.11,-641.06 322.14,-609.97 309.9,-587.54"/>
 <polygon fill="black" stroke="black" points="313.07,-586.05 305.21,-578.95 306.93,-589.4 313.07,-586.05"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="328.92" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>build_grid_index/3</title>
 <polygon fill="yellow" stroke="black" points="807,-577.25 659,-577.25 659,-541.25 807,-541.25 807,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="667" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L45">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="672.25" y="-561.12" font-family="Monospace" font-size="11.00">build_grid_index/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- build_auto_search_index/3&#45;&gt;build_grid_index/3 -->
 <g id="edge3" class="edge">
 <title>build_auto_search_index/3&#45;&gt;build_grid_index/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M414.59,-660.07C481.85,-638.99 594.97,-603.52 666.7,-581.03"/>
 <polygon fill="black" stroke="black" points="667.47,-584.46 675.97,-578.13 665.38,-577.78 667.47,-584.46"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="557.21" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>row_count_and_dimension/3</title>
 <polygon fill="cornsilk" stroke="black" points="725.62,-338.75 530.38,-338.75 530.38,-302.75 725.62,-302.75 725.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="538.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L120">
+<g id="a_node14_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="543.62" y="-322.62" font-family="Monospace" font-size="11.00">row_count_and_dimension/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- build_auto_search_index/3&#45;&gt;row_count_and_dimension/3 -->
 <g id="edge1" class="edge">
 <title>build_auto_search_index/3&#45;&gt;row_count_and_dimension/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M363.25,-660.2C368.03,-640.29 375.81,-606.55 381,-577.25 393.14,-508.69 360.2,-477.69 402,-422 432.35,-381.56 482.63,-357.11 528.07,-342.5"/>
 <polygon fill="black" stroke="black" points="528.91,-345.9 537.44,-339.61 526.85,-339.21 528.91,-345.9"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="381.17" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>grid_index_applicable/2</title>
 <polygon fill="cornsilk" stroke="black" points="199.88,-577.25 18.12,-577.25 18.12,-541.25 199.88,-541.25 199.88,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L124">
+<g id="a_node15_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L124">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-561.12" font-family="Monospace" font-size="11.00">grid_index_applicable/2</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- build_auto_search_index/3&#45;&gt;grid_index_applicable/2 -->
 <g id="edge2" class="edge">
 <title>build_auto_search_index/3&#45;&gt;grid_index_applicable/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M321.84,-660.07C277.74,-639.39 204.15,-604.88 156.1,-582.34"/>
 <polygon fill="black" stroke="black" points="157.86,-579.3 147.32,-578.22 154.89,-585.64 157.86,-579.3"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L92">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="241.5" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>build_metric_tree/4</title>
 <polygon fill="cornsilk" stroke="black" points="172.38,-458 17.62,-458 17.62,-422 172.38,-422 172.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="25.62" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L104">
+<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="30.88" y="-441.88" font-family="Monospace" font-size="11.00">build_metric_tree/4</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- build_metric_tree/3&#45;&gt;build_metric_tree/4 -->
 <g id="edge6" class="edge">
 <title>build_metric_tree/3&#45;&gt;build_metric_tree/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M265.49,-540.95C230.78,-520.6 173.01,-486.73 134.47,-464.14"/>
 <polygon fill="black" stroke="black" points="136.33,-461.18 125.94,-459.14 132.79,-467.21 136.33,-461.18"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L100">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="201" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>metric_tree_leaf_size/2</title>
 <polygon fill="cornsilk" stroke="black" points="371.88,-458 190.12,-458 190.12,-422 371.88,-422 371.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="198.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L115">
+<g id="a_node13_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="203.38" y="-441.88" font-family="Monospace" font-size="11.00">metric_tree_leaf_size/2</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- build_metric_tree/3&#45;&gt;metric_tree_leaf_size/2 -->
 <g id="edge5" class="edge">
 <title>build_metric_tree/3&#45;&gt;metric_tree_leaf_size/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M292.93,-540.95C290.69,-522.16 287.07,-491.84 284.41,-469.52"/>
 <polygon fill="black" stroke="black" points="287.91,-469.39 283.25,-459.87 280.96,-470.22 287.91,-469.39"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L100">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="288.42" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <title>position_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="897.88,-458 770.12,-458 770.12,-422 897.88,-422 897.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="778.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L135">
+<g id="a_node16_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L135">
 <text xml:space="preserve" text-anchor="start" x="783.38" y="-441.88" font-family="Monospace" font-size="11.00">position_rows/3</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- build_grid_index/3&#45;&gt;position_rows/3 -->
 <g id="edge9" class="edge">
 <title>build_grid_index/3&#45;&gt;position_rows/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
 <path fill="none" stroke="black" d="M747.9,-540.95C764.69,-521.47 792.14,-489.59 811.53,-467.08"/>
 <polygon fill="black" stroke="black" points="814.17,-469.38 818.05,-459.52 808.87,-464.81 814.17,-469.38"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="786.53" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>build_grid_cells/4</title>
 <polygon fill="cornsilk" stroke="black" points="1210,-458 1062,-458 1062,-422 1210,-422 1210,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1070" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L140">
+<g id="a_node17_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="1075.25" y="-441.88" font-family="Monospace" font-size="11.00">build_grid_cells/4</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- build_grid_index/3&#45;&gt;build_grid_cells/4 -->
 <g id="edge10" class="edge">
 <title>build_grid_index/3&#45;&gt;build_grid_cells/4</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
 <path fill="none" stroke="black" d="M792.9,-540.82C865.67,-519.65 988.27,-483.98 1065.51,-461.51"/>
 <polygon fill="black" stroke="black" points="1066.03,-465 1074.65,-458.85 1064.07,-458.28 1066.03,-465"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="946.58" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- build_grid_index/3&#45;&gt;list::reverse/2 -->
 <g id="edge39" class="edge">
 <title>build_grid_index/3&#45;&gt;list::reverse/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
 <path fill="none" stroke="black" d="M769.71,-540.82C813.19,-520.18 885.69,-485.77 933.17,-463.23"/>
 <polygon fill="black" stroke="black" points="934.59,-466.43 942.12,-458.98 931.59,-460.11 934.59,-466.43"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="863.91" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- build_grid_index/3&#45;&gt;avltree::new/1 -->
 <g id="edge40" class="edge">
 <title>build_grid_index/3&#45;&gt;avltree::new/1</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
 <path fill="none" stroke="black" d="M694.06,-540.82C647.75,-520.1 570.39,-485.48 520.04,-462.95"/>
 <polygon fill="black" stroke="black" points="521.67,-459.84 511.11,-458.95 518.81,-466.23 521.67,-459.84"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="609.86" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -322,12 +322,12 @@
 <!-- build_grid_index/3&#45;&gt;::search_index_cell_size/2 -->
 <g id="edge33" class="edge">
 <title>build_grid_index/3&#45;&gt;::search_index_cell_size/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="calls">
 <path fill="none" stroke="black" d="M720.9,-540.95C707.4,-521.64 685.38,-490.16 669.66,-467.69"/>
 <polygon fill="black" stroke="black" points="672.62,-465.8 664.02,-459.61 666.88,-469.81 672.62,-465.8"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L128">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="694.46" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <title>range_query/5</title>
 <polygon fill="yellow" stroke="black" points="1659.12,-815.75 1544.88,-815.75 1544.88,-779.75 1659.12,-779.75 1659.12,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1552.88" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L52">
+<g id="a_node4_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="1558.12" y="-799.62" font-family="Monospace" font-size="11.00">range_query/5</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <title>metric_range_query/5</title>
 <polygon fill="cornsilk" stroke="black" points="1852.75,-696.5 1691.25,-696.5 1691.25,-660.5 1852.75,-660.5 1852.75,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1699.25" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L205">
+<g id="a_node9_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L205">
 <text xml:space="preserve" text-anchor="start" x="1704.5" y="-680.38" font-family="Monospace" font-size="11.00">metric_range_query/5</text>
 </a>
 </g>
@@ -363,12 +363,12 @@
 <!-- range_query/5&#45;&gt;metric_range_query/5 -->
 <g id="edge12" class="edge">
 <title>range_query/5&#45;&gt;metric_range_query/5</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L154" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L154" xlink:title="calls">
 <path fill="none" stroke="black" d="M1627.08,-779.45C1656.34,-759.27 1704.86,-725.81 1737.61,-703.22"/>
 <polygon fill="black" stroke="black" points="1739.32,-706.29 1745.57,-697.73 1735.35,-700.53 1739.32,-706.29"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L154">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="1692.1" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -378,7 +378,7 @@
 <title>grid_range_query/6</title>
 <polygon fill="cornsilk" stroke="black" points="1629,-696.5 1481,-696.5 1481,-660.5 1629,-660.5 1629,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="1489" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node19_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159">
+<g id="a_node19_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1494.25" y="-680.38" font-family="Monospace" font-size="11.00">grid_range_query/6</text>
 </a>
 </g>
@@ -390,12 +390,12 @@
 <!-- range_query/5&#45;&gt;grid_range_query/6 -->
 <g id="edge13" class="edge">
 <title>range_query/5&#45;&gt;grid_range_query/6</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L156" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L156" xlink:title="calls">
 <path fill="none" stroke="black" d="M1595.06,-779.45C1587.46,-760.49 1575.16,-729.78 1566.19,-707.4"/>
 <polygon fill="black" stroke="black" points="1569.5,-706.26 1562.53,-698.28 1563,-708.86 1569.5,-706.26"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L156">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L156">
 <text xml:space="preserve" text-anchor="start" x="1579.91" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -405,7 +405,7 @@
 <title>search_index_cell_size/2</title>
 <polygon fill="yellow" stroke="black" points="2145.25,-815.75 1956.75,-815.75 1956.75,-779.75 2145.25,-779.75 2145.25,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="1964.75" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L59">
+<g id="a_node5_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="1970" y="-799.62" font-family="Monospace" font-size="11.00">search_index_cell_size/2</text>
 </a>
 </g>
@@ -419,7 +419,7 @@
 <title>select_metric_pivot/4</title>
 <polygon fill="yellow" stroke="black" points="2471.12,-815.75 2302.88,-815.75 2302.88,-779.75 2471.12,-779.75 2471.12,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="2310.88" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L66">
+<g id="a_node6_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="2316.12" y="-799.62" font-family="Monospace" font-size="11.00">select_metric_pivot/4</text>
 </a>
 </g>
@@ -433,7 +433,7 @@
 <title>distance/4</title>
 <polygon fill="yellow" stroke="black" points="2653,-815.75 2559,-815.75 2559,-779.75 2653,-779.75 2653,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="2567" y="-800" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L73">
+<g id="a_node7_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="2572.25" y="-799.62" font-family="Monospace" font-size="11.00">distance/4</text>
 </a>
 </g>
@@ -447,7 +447,7 @@
 <title>split_sorted_rows/5</title>
 <polygon fill="yellow" stroke="black" points="241.38,-338.75 86.62,-338.75 86.62,-302.75 241.38,-302.75 241.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="94.62" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L80">
+<g id="a_node8_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="99.88" y="-322.62" font-family="Monospace" font-size="11.00">split_sorted_rows/5</text>
 </a>
 </g>
@@ -461,7 +461,7 @@
 <title>take_first_n_decorated/4</title>
 <polygon fill="cornsilk" stroke="black" points="593.25,-219.5 404.75,-219.5 404.75,-183.5 593.25,-183.5 593.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="412.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node30_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L256">
+<g id="a_node30_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="418" y="-203.38" font-family="Monospace" font-size="11.00">take_first_n_decorated/4</text>
 </a>
 </g>
@@ -473,12 +473,12 @@
 <!-- split_sorted_rows/5&#45;&gt;take_first_n_decorated/4 -->
 <g id="edge27" class="edge">
 <title>split_sorted_rows/5&#45;&gt;take_first_n_decorated/4</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M170.34,-302.39C176.7,-287.52 187.98,-266.78 204.75,-255.5 208.82,-252.77 310.54,-234.8 393.25,-220.54"/>
 <polygon fill="black" stroke="black" points="393.77,-224 403.03,-218.85 392.58,-217.1 393.77,-224"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="204.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -488,7 +488,7 @@
 <title>undecorate_rows/2</title>
 <polygon fill="cornsilk" stroke="black" points="752.62,-219.5 611.38,-219.5 611.38,-183.5 752.62,-183.5 752.62,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="619.38" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node31_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L263">
+<g id="a_node31_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="624.62" y="-203.38" font-family="Monospace" font-size="11.00">undecorate_rows/2</text>
 </a>
 </g>
@@ -500,12 +500,12 @@
 <!-- split_sorted_rows/5&#45;&gt;undecorate_rows/2 -->
 <g id="edge28" class="edge">
 <title>split_sorted_rows/5&#45;&gt;undecorate_rows/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M185.54,-302.35C207.15,-285.27 239.24,-261 253.75,-255.5 395.85,-201.66 445.94,-241.73 599.72,-219.7"/>
 <polygon fill="black" stroke="black" points="600.11,-223.18 609.48,-218.23 599.07,-216.26 600.11,-223.18"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="253.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -515,7 +515,7 @@
 <title>upper_bound_distance/2</title>
 <polygon fill="cornsilk" stroke="black" points="193.5,-219.5 18.5,-219.5 18.5,-183.5 193.5,-183.5 193.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node32_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L267">
+<g id="a_node32_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L267">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-203.38" font-family="Monospace" font-size="11.00">upper_bound_distance/2</text>
 </a>
 </g>
@@ -527,12 +527,12 @@
 <!-- split_sorted_rows/5&#45;&gt;upper_bound_distance/2 -->
 <g id="edge29" class="edge">
 <title>split_sorted_rows/5&#45;&gt;upper_bound_distance/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M137.08,-302.42C125.48,-293.34 113.13,-281.11 106.75,-266.75 101.88,-255.78 100.97,-242.68 101.55,-231.17"/>
 <polygon fill="black" stroke="black" points="105.02,-231.71 102.46,-221.43 98.05,-231.07 105.02,-231.71"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="106.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -542,7 +542,7 @@
 <title>lower_bound_distance/2</title>
 <polygon fill="cornsilk" stroke="black" points="386.5,-219.5 211.5,-219.5 211.5,-183.5 386.5,-183.5 386.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="219.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node34_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L275">
+<g id="a_node34_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L275">
 <text xml:space="preserve" text-anchor="start" x="224.75" y="-203.38" font-family="Monospace" font-size="11.00">lower_bound_distance/2</text>
 </a>
 </g>
@@ -554,12 +554,12 @@
 <!-- split_sorted_rows/5&#45;&gt;lower_bound_distance/2 -->
 <g id="edge30" class="edge">
 <title>split_sorted_rows/5&#45;&gt;lower_bound_distance/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M155.76,-302.39C150.48,-288.5 146.24,-269.16 155.75,-255.5 166.77,-239.67 183.09,-228.56 200.81,-220.76"/>
 <polygon fill="black" stroke="black" points="201.98,-224.06 209.97,-217.11 199.38,-217.56 201.98,-224.06"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="155.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -581,12 +581,12 @@
 <!-- split_sorted_rows/5&#45;&gt;list::length/2 -->
 <g id="edge44" class="edge">
 <title>split_sorted_rows/5&#45;&gt;list::length/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M203.07,-302.26C225.63,-292.07 254.51,-278.87 280,-266.75 290.19,-261.91 291.88,-258.49 302.75,-255.5 496.57,-202.12 557.67,-250.29 758.91,-219.82"/>
 <polygon fill="black" stroke="black" points="759.32,-223.3 768.66,-218.3 758.24,-216.39 759.32,-223.3"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L247">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="302.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -596,7 +596,7 @@
 <title>metric_range_query/6</title>
 <polygon fill="cornsilk" stroke="black" points="2340.75,-577.25 2179.25,-577.25 2179.25,-541.25 2340.75,-541.25 2340.75,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="2187.25" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node25_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L208">
+<g id="a_node25_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L208">
 <text xml:space="preserve" text-anchor="start" x="2192.5" y="-561.12" font-family="Monospace" font-size="11.00">metric_range_query/6</text>
 </a>
 </g>
@@ -608,12 +608,12 @@
 <!-- metric_range_query/5&#45;&gt;metric_range_query/6 -->
 <g id="edge22" class="edge">
 <title>metric_range_query/5&#45;&gt;metric_range_query/6</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L205" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L205" xlink:title="calls">
 <path fill="none" stroke="black" d="M1844.79,-660.01C1933.52,-638.69 2083.12,-602.75 2176.46,-580.32"/>
 <polygon fill="black" stroke="black" points="2177.18,-583.75 2186.08,-578.01 2175.54,-576.94 2177.18,-583.75"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L205">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L205">
 <text xml:space="preserve" text-anchor="start" x="2030.63" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -623,7 +623,7 @@
 <title>filter_grid_candidates/5</title>
 <polygon fill="cornsilk" stroke="black" points="1845.25,-577.25 1656.75,-577.25 1656.75,-541.25 1845.25,-541.25 1845.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1664.75" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L193">
+<g id="a_node10_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="1670" y="-561.12" font-family="Monospace" font-size="11.00">filter_grid_candidates/5</text>
 </a>
 </g>
@@ -637,7 +637,7 @@
 <title>filter_grid_candidates/6</title>
 <polygon fill="cornsilk" stroke="black" points="1862.25,-458 1673.75,-458 1673.75,-422 1862.25,-422 1862.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1681.75" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node24_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L196">
+<g id="a_node24_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="1687" y="-441.88" font-family="Monospace" font-size="11.00">filter_grid_candidates/6</text>
 </a>
 </g>
@@ -649,12 +649,12 @@
 <!-- filter_grid_candidates/5&#45;&gt;filter_grid_candidates/6 -->
 <g id="edge21" class="edge">
 <title>filter_grid_candidates/5&#45;&gt;filter_grid_candidates/6</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L193" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L193" xlink:title="calls">
 <path fill="none" stroke="black" d="M1753.51,-540.95C1756.23,-522.16 1760.63,-491.84 1763.86,-469.52"/>
 <polygon fill="black" stroke="black" points="1767.29,-470.27 1765.26,-459.87 1760.37,-469.26 1767.29,-470.27"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L193">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="1760.01" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -664,7 +664,7 @@
 <title>grid_candidate_entries/3</title>
 <polygon fill="cornsilk" stroke="black" points="1448.25,-577.25 1259.75,-577.25 1259.75,-541.25 1448.25,-541.25 1448.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1267.75" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L178">
+<g id="a_node11_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1273" y="-561.12" font-family="Monospace" font-size="11.00">grid_candidate_entries/3</text>
 </a>
 </g>
@@ -678,7 +678,7 @@
 <title>grid_candidate_entries/4</title>
 <polygon fill="cornsilk" stroke="black" points="1436.25,-458 1247.75,-458 1247.75,-422 1436.25,-422 1436.25,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1255.75" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node22_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L181">
+<g id="a_node22_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L181">
 <text xml:space="preserve" text-anchor="start" x="1261" y="-441.88" font-family="Monospace" font-size="11.00">grid_candidate_entries/4</text>
 </a>
 </g>
@@ -690,12 +690,12 @@
 <!-- grid_candidate_entries/3&#45;&gt;grid_candidate_entries/4 -->
 <g id="edge19" class="edge">
 <title>grid_candidate_entries/3&#45;&gt;grid_candidate_entries/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L178" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L178" xlink:title="calls">
 <path fill="none" stroke="black" d="M1352.23,-540.95C1350.31,-522.16 1347.2,-491.84 1344.92,-469.52"/>
 <polygon fill="black" stroke="black" points="1348.43,-469.47 1343.93,-459.88 1341.47,-470.18 1348.43,-469.47"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L178">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="1348.36" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -703,12 +703,12 @@
 <!-- build_metric_tree/4&#45;&gt;split_sorted_rows/5 -->
 <g id="edge7" class="edge">
 <title>build_metric_tree/4&#45;&gt;split_sorted_rows/5</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M105.18,-421.7C116.44,-402.56 134.74,-371.47 147.94,-349.04"/>
 <polygon fill="black" stroke="black" points="150.95,-350.82 153.01,-340.43 144.92,-347.27 150.95,-350.82"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L109">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="131.57" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -716,12 +716,12 @@
 <!-- build_metric_tree/4&#45;&gt;list::length/2 -->
 <g id="edge37" class="edge">
 <title>build_metric_tree/4&#45;&gt;list::length/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L105" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M123.87,-421.57C155.46,-402.22 207.27,-369.63 250,-338.75 270.69,-323.8 271.51,-313.32 294.75,-302.75 483.38,-216.95 553.19,-261.61 758.92,-220.05"/>
 <polygon fill="black" stroke="black" points="759.53,-223.5 768.61,-218.04 758.11,-216.64 759.53,-223.5"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L105">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="294.75" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -740,12 +740,12 @@
 <!-- build_metric_tree/4&#45;&gt;::select_metric_pivot/4 -->
 <g id="edge32" class="edge">
 <title>build_metric_tree/4&#45;&gt;::select_metric_pivot/4</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M171.7,-421.53C207.54,-412.46 250.49,-400.27 288,-386 298.54,-381.99 300.61,-379.69 310.75,-374.75 331.62,-364.57 354.78,-353.42 374.46,-343.98"/>
 <polygon fill="black" stroke="black" points="375.83,-347.21 383.34,-339.73 372.81,-340.89 375.83,-347.21"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L109">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="310.75" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -753,12 +753,12 @@
 <!-- metric_tree_leaf_size/2&#45;&gt;row_count_and_dimension/3 -->
 <g id="edge8" class="edge">
 <title>metric_tree_leaf_size/2&#45;&gt;row_count_and_dimension/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L115" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M297.12,-421.75C311.96,-406.95 335.32,-386.24 359.75,-374.75 374.55,-367.79 451.17,-352.96 518.75,-340.75"/>
 <polygon fill="black" stroke="black" points="519.23,-344.22 528.45,-339.01 517.99,-337.33 519.23,-344.22"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L115">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="359.75" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -766,12 +766,12 @@
 <!-- row_count_and_dimension/3&#45;&gt;list::length/2 -->
 <g id="edge38" class="edge">
 <title>row_count_and_dimension/3&#45;&gt;list::length/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L120" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M657.95,-302.45C693.26,-282.06 752.07,-248.09 791.18,-225.5"/>
 <polygon fill="black" stroke="black" points="792.7,-228.66 799.61,-220.63 789.2,-222.6 792.7,-228.66"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L120">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="735.59" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -781,7 +781,7 @@
 <title>grid_cell_coordinates/3</title>
 <polygon fill="cornsilk" stroke="black" points="1242.88,-338.75 1061.12,-338.75 1061.12,-302.75 1242.88,-302.75 1242.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1069.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node18_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L149">
+<g id="a_node18_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="1074.38" y="-322.62" font-family="Monospace" font-size="11.00">grid_cell_coordinates/3</text>
 </a>
 </g>
@@ -793,12 +793,12 @@
 <!-- build_grid_cells/4&#45;&gt;grid_cell_coordinates/3 -->
 <g id="edge11" class="edge">
 <title>build_grid_cells/4&#45;&gt;grid_cell_coordinates/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M1138.36,-421.7C1140.93,-402.91 1145.06,-372.59 1148.11,-350.27"/>
 <polygon fill="black" stroke="black" points="1151.54,-351 1149.42,-340.62 1144.6,-350.06 1151.54,-351"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141">
 <text xml:space="preserve" text-anchor="start" x="1144.48" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -820,12 +820,12 @@
 <!-- build_grid_cells/4&#45;&gt;avltree::lookup/3 -->
 <g id="edge41" class="edge">
 <title>build_grid_cells/4&#45;&gt;avltree::lookup/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M1164.92,-421.7C1198.94,-401.35 1255.55,-367.48 1293.32,-344.89"/>
 <polygon fill="black" stroke="black" points="1294.88,-348.04 1301.66,-339.9 1291.28,-342.03 1294.88,-348.04"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141">
 <text xml:space="preserve" text-anchor="start" x="1239.88" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -847,12 +847,12 @@
 <!-- build_grid_cells/4&#45;&gt;avltree::insert/4 -->
 <g id="edge42" class="edge">
 <title>build_grid_cells/4&#45;&gt;avltree::insert/4</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M1111.8,-421.7C1083.7,-401.61 1037.18,-368.35 1005.59,-345.76"/>
 <polygon fill="black" stroke="black" points="1007.7,-342.97 997.53,-340 1003.63,-348.67 1007.7,-342.97"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L141">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L141">
 <text xml:space="preserve" text-anchor="start" x="1058.92" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -860,12 +860,12 @@
 <!-- grid_range_query/6&#45;&gt;filter_grid_candidates/5 -->
 <g id="edge17" class="edge">
 <title>grid_range_query/6&#45;&gt;filter_grid_candidates/5</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M1583.92,-660.2C1617.94,-639.85 1674.55,-605.98 1712.32,-583.39"/>
 <polygon fill="black" stroke="black" points="1713.88,-586.54 1720.66,-578.4 1710.28,-580.53 1713.88,-586.54"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1658.88" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -873,12 +873,12 @@
 <!-- grid_range_query/6&#45;&gt;grid_candidate_entries/3 -->
 <g id="edge16" class="edge">
 <title>grid_range_query/6&#45;&gt;grid_candidate_entries/3</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M1525.34,-660.2C1490.46,-639.85 1432.4,-605.98 1393.67,-583.39"/>
 <polygon fill="black" stroke="black" points="1395.49,-580.4 1385.09,-578.38 1391.96,-586.45 1395.49,-580.4"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1460.53" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -886,12 +886,12 @@
 <!-- grid_range_query/6&#45;&gt;grid_cell_coordinates/3 -->
 <g id="edge14" class="edge">
 <title>grid_range_query/6&#45;&gt;grid_cell_coordinates/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M1480.77,-674.46C1410.37,-667.32 1307.23,-645.05 1251,-577.25 1222.02,-542.31 1247.12,-413.82 1224,-374.75 1217.21,-363.28 1206.88,-353.55 1196.14,-345.67"/>
 <polygon fill="black" stroke="black" points="1198.17,-342.81 1187.94,-340.08 1194.23,-348.6 1198.17,-342.81"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1235.69" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -901,7 +901,7 @@
 <title>neighboring_cells/2</title>
 <polygon fill="cornsilk" stroke="black" points="1632.38,-577.25 1477.62,-577.25 1477.62,-541.25 1632.38,-541.25 1632.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1485.62" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node20_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L166">
+<g id="a_node20_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L166">
 <text xml:space="preserve" text-anchor="start" x="1490.88" y="-561.12" font-family="Monospace" font-size="11.00">neighboring_cells/2</text>
 </a>
 </g>
@@ -913,12 +913,12 @@
 <!-- grid_range_query/6&#45;&gt;neighboring_cells/2 -->
 <g id="edge15" class="edge">
 <title>grid_range_query/6&#45;&gt;neighboring_cells/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M1555,-660.2C1555,-641.5 1555,-611.37 1555,-589.08"/>
 <polygon fill="black" stroke="black" points="1558.5,-589.14 1555,-579.14 1551.5,-589.14 1558.5,-589.14"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L159">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1555" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -928,7 +928,7 @@
 <title>prepend_neighbor_offsets/3</title>
 <polygon fill="cornsilk" stroke="black" points="1656,-458 1454,-458 1454,-422 1656,-422 1656,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1462" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node21_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L171">
+<g id="a_node21_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1467.25" y="-441.88" font-family="Monospace" font-size="11.00">prepend_neighbor_offsets/3</text>
 </a>
 </g>
@@ -940,12 +940,12 @@
 <!-- neighboring_cells/2&#45;&gt;prepend_neighbor_offsets/3 -->
 <g id="edge18" class="edge">
 <title>neighboring_cells/2&#45;&gt;prepend_neighbor_offsets/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L167" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M1555,-540.95C1555,-522.25 1555,-492.12 1555,-469.83"/>
 <polygon fill="black" stroke="black" points="1558.5,-469.89 1555,-459.89 1551.5,-469.89 1558.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L167">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="1555" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -955,7 +955,7 @@
 <title>append_positioned_rows/3</title>
 <polygon fill="cornsilk" stroke="black" points="1609.25,-338.75 1420.75,-338.75 1420.75,-302.75 1609.25,-302.75 1609.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1428.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node23_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L189">
+<g id="a_node23_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L189">
 <text xml:space="preserve" text-anchor="start" x="1434" y="-322.62" font-family="Monospace" font-size="11.00">append_positioned_rows/3</text>
 </a>
 </g>
@@ -967,12 +967,12 @@
 <!-- grid_candidate_entries/4&#45;&gt;append_positioned_rows/3 -->
 <g id="edge20" class="edge">
 <title>grid_candidate_entries/4&#45;&gt;append_positioned_rows/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M1367.53,-421.7C1397.3,-401.52 1446.67,-368.06 1480,-345.47"/>
 <polygon fill="black" stroke="black" points="1481.8,-348.48 1488.12,-339.97 1477.87,-342.68 1481.8,-348.48"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L182">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="1433.69" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -980,12 +980,12 @@
 <!-- grid_candidate_entries/4&#45;&gt;avltree::lookup/3 -->
 <g id="edge43" class="edge">
 <title>grid_candidate_entries/4&#45;&gt;avltree::lookup/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M1340.52,-421.7C1338.93,-403 1336.36,-372.87 1334.46,-350.58"/>
 <polygon fill="black" stroke="black" points="1337.95,-350.3 1333.61,-340.63 1330.97,-350.89 1337.95,-350.3"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L182">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="1337.3" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1004,12 +1004,12 @@
 <!-- filter_grid_candidates/6&#45;&gt;::distance/4 -->
 <g id="edge34" class="edge">
 <title>filter_grid_candidates/6&#45;&gt;::distance/4</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L197" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L197" xlink:title="calls">
 <path fill="none" stroke="black" d="M1798.99,-421.7C1835.59,-401.26 1896.6,-367.2 1937.07,-344.6"/>
 <polygon fill="black" stroke="black" points="1938.54,-347.79 1945.57,-339.86 1935.13,-341.68 1938.54,-347.79"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L197">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L197" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L197">
 <text xml:space="preserve" text-anchor="start" x="1879.3" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1019,7 +1019,7 @@
 <title>metric_range_query_leaf/6</title>
 <polygon fill="cornsilk" stroke="black" points="2075.62,-458 1880.38,-458 1880.38,-422 2075.62,-422 2075.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1888.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node26_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L223">
+<g id="a_node26_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L223" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L223">
 <text xml:space="preserve" text-anchor="start" x="1893.62" y="-441.88" font-family="Monospace" font-size="11.00">metric_range_query_leaf/6</text>
 </a>
 </g>
@@ -1031,12 +1031,12 @@
 <!-- metric_range_query/6&#45;&gt;metric_range_query_leaf/6 -->
 <g id="edge23" class="edge">
 <title>metric_range_query/6&#45;&gt;metric_range_query_leaf/6</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L209" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M2218.09,-540.82C2168.03,-520.01 2084.28,-485.19 2030.11,-462.66"/>
 <polygon fill="black" stroke="black" points="2031.66,-459.52 2021.08,-458.91 2028.97,-465.98 2031.66,-459.52"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L209">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L209">
 <text xml:space="preserve" text-anchor="start" x="2127.46" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1046,7 +1046,7 @@
 <title>search_inner_branch/3</title>
 <polygon fill="cornsilk" stroke="black" points="2262.12,-458 2093.88,-458 2093.88,-422 2262.12,-422 2262.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2101.88" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node27_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L232">
+<g id="a_node27_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L232" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L232">
 <text xml:space="preserve" text-anchor="start" x="2107.12" y="-441.88" font-family="Monospace" font-size="11.00">search_inner_branch/3</text>
 </a>
 </g>
@@ -1058,12 +1058,12 @@
 <!-- metric_range_query/6&#45;&gt;search_inner_branch/3 -->
 <g id="edge25" class="edge">
 <title>metric_range_query/6&#45;&gt;search_inner_branch/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M2247.9,-540.95C2234.4,-521.64 2212.38,-490.16 2196.66,-467.69"/>
 <polygon fill="black" stroke="black" points="2199.62,-465.8 2191.02,-459.61 2193.88,-469.81 2199.62,-465.8"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="2221.46" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1073,7 +1073,7 @@
 <title>search_outer_branch/3</title>
 <polygon fill="cornsilk" stroke="black" points="2510.12,-458 2341.88,-458 2341.88,-422 2510.12,-422 2510.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2349.88" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node28_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L237">
+<g id="a_node28_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L237">
 <text xml:space="preserve" text-anchor="start" x="2355.12" y="-441.88" font-family="Monospace" font-size="11.00">search_outer_branch/3</text>
 </a>
 </g>
@@ -1085,12 +1085,12 @@
 <!-- metric_range_query/6&#45;&gt;search_outer_branch/3 -->
 <g id="edge26" class="edge">
 <title>metric_range_query/6&#45;&gt;search_outer_branch/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M2284.49,-540.95C2312.94,-520.86 2360.03,-487.6 2392,-465.01"/>
 <polygon fill="black" stroke="black" points="2394.02,-467.87 2400.17,-459.24 2389.98,-462.16 2394.02,-467.87"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="2347.98" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1100,7 +1100,7 @@
 <title>current_neighbor/6</title>
 <polygon fill="cornsilk" stroke="black" points="2676,-458 2528,-458 2528,-422 2676,-422 2676,-458"/>
 <text xml:space="preserve" text-anchor="start" x="2536" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node29_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L242">
+<g id="a_node29_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L242">
 <text xml:space="preserve" text-anchor="start" x="2541.25" y="-441.88" font-family="Monospace" font-size="11.00">current_neighbor/6</text>
 </a>
 </g>
@@ -1112,12 +1112,12 @@
 <!-- metric_range_query/6&#45;&gt;current_neighbor/6 -->
 <g id="edge24" class="edge">
 <title>metric_range_query/6&#45;&gt;current_neighbor/6</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M2310.83,-540.82C2372.08,-519.82 2474.93,-484.56 2540.57,-462.06"/>
 <polygon fill="black" stroke="black" points="2541.41,-465.47 2549.74,-458.92 2539.14,-458.85 2541.41,-465.47"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="2441.25" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1125,12 +1125,12 @@
 <!-- metric_range_query/6&#45;&gt;::distance/4 -->
 <g id="edge35" class="edge">
 <title>metric_range_query/6&#45;&gt;::distance/4</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="calls">
 <path fill="none" stroke="black" d="M2267.96,-540.86C2279.42,-512.97 2296.53,-457.72 2271,-422 2219.47,-349.91 2112.84,-329.09 2043.42,-323.41"/>
 <polygon fill="black" stroke="black" points="2043.92,-319.93 2033.69,-322.7 2043.41,-326.92 2043.92,-319.93"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L211">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L211">
 <text xml:space="preserve" text-anchor="start" x="2283.66" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1138,12 +1138,12 @@
 <!-- metric_range_query_leaf/6&#45;&gt;::distance/4 -->
 <g id="edge36" class="edge">
 <title>metric_range_query_leaf/6&#45;&gt;::distance/4</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L224" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M1978,-421.7C1978,-403 1978,-372.87 1978,-350.58"/>
 <polygon fill="black" stroke="black" points="1981.5,-350.64 1978,-340.64 1974.5,-350.64 1981.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L224">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="1978" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1153,7 +1153,7 @@
 <title>upper_bound_distance/3</title>
 <polygon fill="cornsilk" stroke="black" points="193.5,-100.25 18.5,-100.25 18.5,-64.25 193.5,-64.25 193.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node33_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L271">
+<g id="a_node33_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L271" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L271">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-84.12" font-family="Monospace" font-size="11.00">upper_bound_distance/3</text>
 </a>
 </g>
@@ -1165,12 +1165,12 @@
 <!-- upper_bound_distance/2&#45;&gt;upper_bound_distance/3 -->
 <g id="edge31" class="edge">
 <title>upper_bound_distance/2&#45;&gt;upper_bound_distance/3</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L268" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L268" xlink:title="calls">
 <path fill="none" stroke="black" d="M106,-183.2C106,-164.5 106,-134.37 106,-112.08"/>
 <polygon fill="black" stroke="black" points="109.5,-112.14 106,-102.14 102.5,-112.14 109.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fca607f5c2b312ded484704f6a38400882bebc63/library/clustering_protocols/search_indexing.lgt#L268">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/964236cb8ea97ba5a638cdb2becbb896c2645e43/library/clustering_protocols/search_indexing.lgt#L268">
 <text xml:space="preserve" text-anchor="start" x="106" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
