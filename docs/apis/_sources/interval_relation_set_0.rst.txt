@@ -1,0 +1,59 @@
+.. index:: single: interval_relation_set
+.. _interval_relation_set/0:
+
+.. rst-class:: right
+
+**object**
+
+``interval_relation_set``
+=========================
+
+Allen interval relation-set operations using canonical ordered duplicate-free lists of base relation atoms.
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0>`
+| **Uses:**
+|    :ref:`interval_algebra <interval_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`interval_relation_set_protocol/0::compose/3`  :ref:`interval_relation_set_protocol/0::converse/2`  :ref:`interval_relation_set_protocol/0::empty/1`  :ref:`interval_relation_set_protocol/0::intersection/3`  :ref:`interval_relation_set_protocol/0::member/2`  :ref:`interval_relation_set_protocol/0::normalize/2`  :ref:`interval_relation_set_protocol/0::relation_set/1`  :ref:`interval_relation_set_protocol/0::singleton/2`  :ref:`interval_relation_set_protocol/0::subset/2`  :ref:`interval_relation_set_protocol/0::union/3`  :ref:`interval_relation_set_protocol/0::universal/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

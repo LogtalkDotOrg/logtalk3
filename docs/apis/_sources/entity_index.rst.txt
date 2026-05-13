@@ -302,6 +302,9 @@ Objects
    inheritance_diagram(Format) <inheritance_diagram_1>
    integer <integer_0>
    interval <interval_0>
+   interval_algebra <interval_algebra_0>
+   interval_constraint_network <interval_constraint_network_0>
+   interval_relation_set <interval_relation_set_0>
    ip_grammars(Format) <ip_grammars_1>
    iqr_anomaly_detector <iqr_anomaly_detector_0>
    iso8601 <iso8601_0>
@@ -674,7 +677,10 @@ Protocols
    ieee_754_fields_protocol <ieee_754_fields_protocol_0>
    ieee_754_protocol <ieee_754_protocol_0>
    interpreterp <interpreterp_0>
-   intervalp <intervalp_0>
+   interval_algebra_protocol <interval_algebra_protocol_0>
+   interval_constraint_network_protocol <interval_constraint_network_protocol_0>
+   interval_protocol <interval_protocol_0>
+   interval_relation_set_protocol <interval_relation_set_protocol_0>
    iso_13616_protocol <iso_13616_protocol_0>
    iso_3166_protocol <iso_3166_protocol_0>
    iso_4217_protocol <iso_4217_protocol_0>

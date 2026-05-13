@@ -1,0 +1,59 @@
+.. index:: single: interval_constraint_network
+.. _interval_constraint_network/0:
+
+.. rst-class:: right
+
+**object**
+
+``interval_constraint_network``
+===============================
+
+Allen interval constraint-network operations built on canonical relation sets, intended for small-to-medium symbolic networks.
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0>`
+| **Uses:**
+|    :ref:`interval_relation_set <interval_relation_set/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`interval_constraint_network_protocol/0::consistent/1`  :ref:`interval_constraint_network_protocol/0::constraints/2`  :ref:`interval_constraint_network_protocol/0::contradiction/2`  :ref:`interval_constraint_network_protocol/0::contradiction_explanations/2`  :ref:`interval_constraint_network_protocol/0::entailment_explanations/5`  :ref:`interval_constraint_network_protocol/0::entails/4`  :ref:`interval_constraint_network_protocol/0::entails/5`  :ref:`interval_constraint_network_protocol/0::equivalent/2`  :ref:`interval_constraint_network_protocol/0::excluded/4`  :ref:`interval_constraint_network_protocol/0::network/1`  :ref:`interval_constraint_network_protocol/0::new/2`  :ref:`interval_constraint_network_protocol/0::nodes/2`  :ref:`interval_constraint_network_protocol/0::path_consistency/2`  :ref:`interval_constraint_network_protocol/0::possible/4`  :ref:`interval_constraint_network_protocol/0::propagate/2`  :ref:`interval_constraint_network_protocol/0::propagate/3`  :ref:`interval_constraint_network_protocol/0::propagation_triple/2`  :ref:`interval_constraint_network_protocol/0::propagation_triples/2`  :ref:`interval_constraint_network_protocol/0::refine/5`  :ref:`interval_constraint_network_protocol/0::refine_propagate/3`  :ref:`interval_constraint_network_protocol/0::refine_propagate/4`  :ref:`interval_constraint_network_protocol/0::refine_propagate/5`  :ref:`interval_constraint_network_protocol/0::refine_propagate/6`  :ref:`interval_constraint_network_protocol/0::relation/4`  :ref:`interval_constraint_network_protocol/0::subsumes/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

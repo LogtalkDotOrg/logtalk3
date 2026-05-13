@@ -19,6 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([intervalp, interval], [optimize(on)])
-).
+:- initialization((
+	logtalk_load(basic_types(loader)),
+	logtalk_load([
+		interval_protocol,
+		interval_algebra_protocol,
+		interval_relation_set_protocol,
+		interval_constraint_network_protocol,
+		interval,
+		interval_algebra,
+		interval_relation_set,
+		interval_constraint_network
+	], [
+		optimize(on)
+	])
+)).

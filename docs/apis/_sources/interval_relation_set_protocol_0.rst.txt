@@ -1,0 +1,268 @@
+.. index:: single: interval_relation_set_protocol
+.. _interval_relation_set_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``interval_relation_set_protocol``
+==================================
+
+Allen interval relation-set protocol using canonical ordered duplicate-free lists of base relation atoms.
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: relation_set/1
+.. _interval_relation_set_protocol/0::relation_set/1:
+
+``relation_set/1``
+^^^^^^^^^^^^^^^^^^
+
+True if RelationSet is a canonical ordered duplicate-free list of Allen base relation atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relation_set(RelationSet)``
+| **Mode and number of proofs:**
+|    ``relation_set(?list(atom))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: empty/1
+.. _interval_relation_set_protocol/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+Returns the empty Allen relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(RelationSet)``
+| **Mode and number of proofs:**
+|    ``empty(?list(atom))`` - ``one``
+
+
+------------
+
+.. index:: universal/1
+.. _interval_relation_set_protocol/0::universal/1:
+
+``universal/1``
+^^^^^^^^^^^^^^^
+
+Returns the universal Allen relation set containing all 13 base relation atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``universal(RelationSet)``
+| **Mode and number of proofs:**
+|    ``universal(?list(atom))`` - ``one``
+
+
+------------
+
+.. index:: singleton/2
+.. _interval_relation_set_protocol/0::singleton/2:
+
+``singleton/2``
+^^^^^^^^^^^^^^^
+
+Relates an Allen base relation atom with its singleton relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``singleton(Relation,RelationSet)``
+| **Mode and number of proofs:**
+|    ``singleton(?atom,?list(atom))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: normalize/2
+.. _interval_relation_set_protocol/0::normalize/2:
+
+``normalize/2``
+^^^^^^^^^^^^^^^
+
+Normalizes a list of Allen base relation atoms into canonical ordered duplicate-free form.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize(Relations,RelationSet)``
+| **Mode and number of proofs:**
+|    ``normalize(+list(atom),-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: member/2
+.. _interval_relation_set_protocol/0::member/2:
+
+``member/2``
+^^^^^^^^^^^^
+
+True if Relation is a member of RelationSet.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``member(Relation,RelationSet)``
+| **Mode and number of proofs:**
+|    ``member(?atom,+list(atom))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: subset/2
+.. _interval_relation_set_protocol/0::subset/2:
+
+``subset/2``
+^^^^^^^^^^^^
+
+True if RelationSet1 is a subset of RelationSet2.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subset(RelationSet1,RelationSet2)``
+| **Mode and number of proofs:**
+|    ``subset(+list(atom),+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: intersection/3
+.. _interval_relation_set_protocol/0::intersection/3:
+
+``intersection/3``
+^^^^^^^^^^^^^^^^^^
+
+Computes the intersection of two relation sets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``intersection(RelationSet1,RelationSet2,Intersection)``
+| **Mode and number of proofs:**
+|    ``intersection(+list(atom),+list(atom),-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: union/3
+.. _interval_relation_set_protocol/0::union/3:
+
+``union/3``
+^^^^^^^^^^^
+
+Computes the union of two relation sets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``union(RelationSet1,RelationSet2,Union)``
+| **Mode and number of proofs:**
+|    ``union(+list(atom),+list(atom),-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: converse/2
+.. _interval_relation_set_protocol/0::converse/2:
+
+``converse/2``
+^^^^^^^^^^^^^^
+
+Maps a relation set to the canonical ordered set of converse relations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``converse(RelationSet,ConverseSet)``
+| **Mode and number of proofs:**
+|    ``converse(+list(atom),-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: compose/3
+.. _interval_relation_set_protocol/0::compose/3:
+
+``compose/3``
+^^^^^^^^^^^^^
+
+Computes the canonical ordered relation set resulting from composing two relation sets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compose(RelationSet1,RelationSet2,Composition)``
+| **Mode and number of proofs:**
+|    ``compose(+list(atom),+list(atom),-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`interval_algebra_protocol <interval_algebra_protocol/0>`, :ref:`interval_algebra <interval_algebra/0>`, :ref:`interval_relation_set <interval_relation_set/0>`
+

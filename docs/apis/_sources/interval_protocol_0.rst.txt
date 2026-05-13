@@ -1,0 +1,363 @@
+.. index:: single: interval_protocol
+.. _interval_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``interval_protocol``
+=====================
+
+Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:2:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/3
+.. _interval_protocol/0::new/3:
+
+``new/3``
+^^^^^^^^^
+
+Constructs a new interval given start and end points. The start point must strictly precede the end point.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Start,End,Interval)``
+| **Mode and number of proofs:**
+|    ``new(@ground,@ground,-interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid/1
+.. _interval_protocol/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+True if Interval is a valid interval.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Interval)``
+| **Mode and number of proofs:**
+|    ``valid(@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: relation/3
+.. _interval_protocol/0::relation/3:
+
+``relation/3``
+^^^^^^^^^^^^^^
+
+Classifies two valid intervals according to their unique Allen base relation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relation(Interval1,Interval2,Relation)``
+| **Mode and number of proofs:**
+|    ``relation(@interval,@interval,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: before/2
+.. _interval_protocol/0::before/2:
+
+``before/2``
+^^^^^^^^^^^^
+
+True if ``Interval1`` takes place before ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``before(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``before(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: after/2
+.. _interval_protocol/0::after/2:
+
+``after/2``
+^^^^^^^^^^^
+
+True if ``Interval1`` takes place after ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``after(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``after(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: meets/2
+.. _interval_protocol/0::meets/2:
+
+``meets/2``
+^^^^^^^^^^^
+
+True if ``Interval1`` meets ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``meets(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``meets(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: met_by/2
+.. _interval_protocol/0::met_by/2:
+
+``met_by/2``
+^^^^^^^^^^^^
+
+True if ``Interval1`` is met by ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``met_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``met_by(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: overlaps/2
+.. _interval_protocol/0::overlaps/2:
+
+``overlaps/2``
+^^^^^^^^^^^^^^
+
+True if ``Interval1`` overlaps with ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``overlaps(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``overlaps(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: overlapped_by/2
+.. _interval_protocol/0::overlapped_by/2:
+
+``overlapped_by/2``
+^^^^^^^^^^^^^^^^^^^
+
+True if ``Interval1`` is overlapped by ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``overlapped_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``overlapped_by(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: starts/2
+.. _interval_protocol/0::starts/2:
+
+``starts/2``
+^^^^^^^^^^^^
+
+True if ``Interval1`` starts ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``starts(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``starts(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: started_by/2
+.. _interval_protocol/0::started_by/2:
+
+``started_by/2``
+^^^^^^^^^^^^^^^^
+
+True if ``Interval1`` is started by ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``started_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``started_by(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: during/2
+.. _interval_protocol/0::during/2:
+
+``during/2``
+^^^^^^^^^^^^
+
+True if ``Interval1`` occurs during ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``during(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``during(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: contains/2
+.. _interval_protocol/0::contains/2:
+
+``contains/2``
+^^^^^^^^^^^^^^
+
+True if ``Interval1`` contains ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contains(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``contains(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: finishes/2
+.. _interval_protocol/0::finishes/2:
+
+``finishes/2``
+^^^^^^^^^^^^^^
+
+True if ``Interval1`` finishes ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finishes(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``finishes(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: finished_by/2
+.. _interval_protocol/0::finished_by/2:
+
+``finished_by/2``
+^^^^^^^^^^^^^^^^^
+
+True if ``Interval1`` is finished by ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finished_by(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``finished_by(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: equal/2
+.. _interval_protocol/0::equal/2:
+
+``equal/2``
+^^^^^^^^^^^
+
+True if ``Interval1`` is equal to ``Interval2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equal(Interval1,Interval2)``
+| **Mode and number of proofs:**
+|    ``equal(@interval,@interval)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`interval <interval/0>`, :ref:`interval_algebra_protocol <interval_algebra_protocol/0>`, :ref:`interval_algebra <interval_algebra/0>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0>`, :ref:`interval_relation_set <interval_relation_set/0>`
+

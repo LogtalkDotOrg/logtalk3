@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iqr_anomaly_detector &mdash; Logtalk 3.100.0</title>
+  <title>interval_constraint_network_protocol &mdash; Logtalk 3.100.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="iso8601" href="iso8601_0.html" />
-    <link rel="prev" title="interval_relation_set_protocol" href="interval_relation_set_protocol_0.html" />
+    <link rel="next" title="interval_protocol" href="interval_protocol_0.html" />
+    <link rel="prev" title="interval_constraint_network" href="interval_constraint_network_0.html" />
    
 </head>
 
@@ -165,11 +165,18 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ica-projection"><span class="xref std std-ref">ica_projection</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ieee-754"><span class="xref std std-ref">ieee_754</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#iqr-anomaly-detector"><span class="xref std std-ref">iqr_anomaly_detector</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">iqr_anomaly_detector</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_algebra_0.html">interval_algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_algebra_protocol_0.html">interval_algebra_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_constraint_network_0.html">interval_constraint_network</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">interval_constraint_network_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_protocol_0.html">interval_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_relation_set_0.html">interval_relation_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_relation_set_protocol_0.html">interval_relation_set_protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#iqr-anomaly-detector"><span class="xref std std-ref">iqr_anomaly_detector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><span class="xref std std-ref">iso8601</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso-13616"><span class="xref std std-ref">iso_13616</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso-3166"><span class="xref std std-ref">iso_3166</span></a></li>
@@ -345,9 +352,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">iqr_anomaly_detector</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">interval_constraint_network_protocol</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/iqr_anomaly_detector_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/interval_constraint_network_protocol_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -355,40 +362,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="iqr-anomaly-detector-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="iqr-anomaly-detector">
-<h1><code class="docutils literal notranslate"><span class="pre">iqr_anomaly_detector</span></code><a class="headerlink" href="#iqr-anomaly-detector" title="Link to this heading"></a></h1>
-<p>Statistical interquartile-range anomaly detector for continuous datasets. Learns per-attribute quartiles and interquartile ranges from baseline training examples selected from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">anomaly_dataset_protocol</span></code> protocol and returns a detector term that can be used for scoring, prediction, and export.</p>
+  <p class="right" id="interval-constraint-network-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="interval-constraint-network-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">interval_constraint_network_protocol</span></code><a class="headerlink" href="#interval-constraint-network-protocol" title="Link to this heading"></a></h1>
+<p>Allen interval constraint-network protocol built on canonical relation sets, intended for small-to-medium symbolic networks.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(iqr_anomaly_detector(loader))</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(intervals(loader))</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-06</div>
+<div class="line"><strong>Date:</strong> 2026-05-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Imports:</strong></div>
+<div class="line"><strong>Dependencies:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="anomaly_detector_common_0.html#anomaly-detector-common-0"><span class="std std-ref">anomaly_detector_common</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="numberlist_0.html#numberlist-0"><span class="std std-ref">numberlist</span></a></div>
-<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
-<div class="line"><a class="reference internal" href="sample_0.html#sample-0"><span class="std std-ref">sample</span></a></div>
-<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <div class="line-block">
@@ -400,35 +398,587 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-anomaly-detector-options-2"><span class="std std-ref">anomaly_detector_options/2</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-check-anomaly-detector-1"><span class="std std-ref">check_anomaly_detector/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-diagnostic-2"><span class="std std-ref">diagnostic/2</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-diagnostics-2"><span class="std std-ref">diagnostics/2</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-export-to-clauses-4"><span class="std std-ref">export_to_clauses/4</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-export-to-file-4"><span class="std std-ref">export_to_file/4</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-learn-2"><span class="std std-ref">learn/2</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-learn-3"><span class="std std-ref">learn/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-predict-3"><span class="std std-ref">predict/3</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-predict-4"><span class="std std-ref">predict/4</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-print-anomaly-detector-1"><span class="std std-ref">print_anomaly_detector/1</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-score-3"><span class="std std-ref">score/3</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-score-all-3"><span class="std std-ref">score_all/3</span></a>  <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-valid-anomaly-detector-1"><span class="std std-ref">valid_anomaly_detector/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#network-1" id="id2"><code class="docutils literal notranslate"><span class="pre">network/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#new-2" id="id3"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nodes-2" id="id4"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#relation-4" id="id5"><code class="docutils literal notranslate"><span class="pre">relation/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entails-4" id="id6"><code class="docutils literal notranslate"><span class="pre">entails/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entails-5" id="id7"><code class="docutils literal notranslate"><span class="pre">entails/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#possible-4" id="id8"><code class="docutils literal notranslate"><span class="pre">possible/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#excluded-4" id="id9"><code class="docutils literal notranslate"><span class="pre">excluded/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#contradiction-2" id="id10"><code class="docutils literal notranslate"><span class="pre">contradiction/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entailment-explanations-5" id="id11"><code class="docutils literal notranslate"><span class="pre">entailment_explanations/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#contradiction-explanations-2" id="id12"><code class="docutils literal notranslate"><span class="pre">contradiction_explanations/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#refine-5" id="id13"><code class="docutils literal notranslate"><span class="pre">refine/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#consistent-1" id="id14"><code class="docutils literal notranslate"><span class="pre">consistent/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagate-2" id="id15"><code class="docutils literal notranslate"><span class="pre">propagate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagate-3" id="id16"><code class="docutils literal notranslate"><span class="pre">propagate/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#refine-propagate-5" id="id17"><code class="docutils literal notranslate"><span class="pre">refine_propagate/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#refine-propagate-6" id="id18"><code class="docutils literal notranslate"><span class="pre">refine_propagate/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#refine-propagate-3" id="id19"><code class="docutils literal notranslate"><span class="pre">refine_propagate/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#refine-propagate-4" id="id20"><code class="docutils literal notranslate"><span class="pre">refine_propagate/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagation-triple-2" id="id21"><code class="docutils literal notranslate"><span class="pre">propagation_triple/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#propagation-triples-2" id="id22"><code class="docutils literal notranslate"><span class="pre">propagation_triples/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#path-consistency-2" id="id23"><code class="docutils literal notranslate"><span class="pre">path_consistency/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#constraints-2" id="id24"><code class="docutils literal notranslate"><span class="pre">constraints/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#subsumes-2" id="id25"><code class="docutils literal notranslate"><span class="pre">subsumes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#equivalent-2" id="id26"><code class="docutils literal notranslate"><span class="pre">equivalent/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id27">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id28">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id29">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="network-1">
+<span id="interval-constraint-network-protocol-0-network-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">network/1</span></code></a><a class="headerlink" href="#network-1" title="Link to this heading"></a></h3>
+<p>True if Network is a valid interval constraint network represented as a network(Nodes, Constraints) term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">network(Network)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">network(?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="new-2">
+<span id="interval-constraint-network-protocol-0-new-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a><a class="headerlink" href="#new-2" title="Link to this heading"></a></h3>
+<p>Constructs a new network for a list of distinct nodes. Distinct node pairs are initialized with the universal relation set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(Nodes,Network)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new(+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="nodes-2">
+<span id="interval-constraint-network-protocol-0-nodes-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nodes/2</span></code></a><a class="headerlink" href="#nodes-2" title="Link to this heading"></a></h3>
+<p>Returns the list of nodes in a network.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nodes(Network,Nodes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nodes(+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="relation-4">
+<span id="interval-constraint-network-protocol-0-relation-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">relation/4</span></code></a><a class="headerlink" href="#relation-4" title="Link to this heading"></a></h3>
+<p>Returns the current relation set between two nodes in a network. A node is always equal to itself.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relation(Network,Node1,Node2,RelationSet)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">relation(+compound,&#64;term,&#64;term,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="entails-4">
+<span id="interval-constraint-network-protocol-0-entails-4"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entails/4</span></code></a><a class="headerlink" href="#entails-4" title="Link to this heading"></a></h3>
+<p>True if the current relation set between two nodes is a subset of a queried relation set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entails(Network,Node1,Node2,RelationSet)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entails(+compound,&#64;term,&#64;term,+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="entails-5">
+<span id="interval-constraint-network-protocol-0-entails-5"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entails/5</span></code></a><a class="headerlink" href="#entails-5" title="Link to this heading"></a></h3>
+<p>True if the current relation set between two nodes is a subset of a queried relation set and returns an explanation term describing either a direct constraint or a supporting propagation path.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entails(Network,Node1,Node2,RelationSet,Explanation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entails(+compound,&#64;term,&#64;term,+list(atom),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="possible-4">
+<span id="interval-constraint-network-protocol-0-possible-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">possible/4</span></code></a><a class="headerlink" href="#possible-4" title="Link to this heading"></a></h3>
+<p>True if the current relation set between two nodes intersects a queried relation set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">possible(Network,Node1,Node2,RelationSet)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">possible(+compound,&#64;term,&#64;term,+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="excluded-4">
+<span id="interval-constraint-network-protocol-0-excluded-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">excluded/4</span></code></a><a class="headerlink" href="#excluded-4" title="Link to this heading"></a></h3>
+<p>True if the current relation set between two nodes is disjoint from a queried relation set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">excluded(Network,Node1,Node2,RelationSet)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">excluded(+compound,&#64;term,&#64;term,+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="contradiction-2">
+<span id="interval-constraint-network-protocol-0-contradiction-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contradiction/2</span></code></a><a class="headerlink" href="#contradiction-2" title="Link to this heading"></a></h3>
+<p>Returns a simple contradiction explanation for an inconsistent network as contradiction(Node1, Node2, Cause).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">contradiction(Network,Explanation)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">contradiction(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="entailment-explanations-5">
+<span id="interval-constraint-network-protocol-0-entailment-explanations-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entailment_explanations/5</span></code></a><a class="headerlink" href="#entailment-explanations-5" title="Link to this heading"></a></h3>
+<p>Returns the list of immediate explanations supporting an entailed relation query, using identity, direct, and propagated explanation terms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entailment_explanations(Network,Node1,Node2,RelationSet,Explanations)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">entailment_explanations(+compound,&#64;term,&#64;term,+list(atom),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="contradiction-explanations-2">
+<span id="interval-constraint-network-protocol-0-contradiction-explanations-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">contradiction_explanations/2</span></code></a><a class="headerlink" href="#contradiction-explanations-2" title="Link to this heading"></a></h3>
+<p>Returns the list of contradiction explanations for all empty explicit pair constraints in a network.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">contradiction_explanations(Network,Explanations)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">contradiction_explanations(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="refine-5">
+<span id="interval-constraint-network-protocol-0-refine-5"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">refine/5</span></code></a><a class="headerlink" href="#refine-5" title="Link to this heading"></a></h3>
+<p>Refines the relation set between two distinct nodes by intersecting it with a new relation set.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine(Network,Node1,Node2,RelationSet,RefinedNetwork)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine(+compound,&#64;term,&#64;term,+list(atom),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="consistent-1">
+<span id="interval-constraint-network-protocol-0-consistent-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">consistent/1</span></code></a><a class="headerlink" href="#consistent-1" title="Link to this heading"></a></h3>
+<p>True if all explicit pair constraints in a network are non-empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistent(Network)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistent(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="propagate-2">
+<span id="interval-constraint-network-protocol-0-propagate-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate/2</span></code></a><a class="headerlink" href="#propagate-2" title="Link to this heading"></a></h3>
+<p>Computes a path-consistency closure and succeeds only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate(Network,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="propagate-3">
+<span id="interval-constraint-network-protocol-0-propagate-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagate/3</span></code></a><a class="headerlink" href="#propagate-3" title="Link to this heading"></a></h3>
+<p>Computes a path-consistency closure, returns the list of propagated changes, and succeeds only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate(Network,Closure,Changes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagate(+compound,-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="refine-propagate-5">
+<span id="interval-constraint-network-protocol-0-refine-propagate-5"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">refine_propagate/5</span></code></a><a class="headerlink" href="#refine-propagate-5" title="Link to this heading"></a></h3>
+<p>Refines the relation set between two distinct nodes and then propagates the consequences, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(Network,Node1,Node2,RelationSet,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(+compound,&#64;term,&#64;term,+list(atom),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="refine-propagate-6">
+<span id="interval-constraint-network-protocol-0-refine-propagate-6"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">refine_propagate/6</span></code></a><a class="headerlink" href="#refine-propagate-6" title="Link to this heading"></a></h3>
+<p>Refines the relation set between two distinct nodes, propagates the consequences incrementally, and returns the list of direct and propagated changes, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(Network,Node1,Node2,RelationSet,Closure,Changes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(+compound,&#64;term,&#64;term,+list(atom),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="refine-propagate-3">
+<span id="interval-constraint-network-protocol-0-refine-propagate-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">refine_propagate/3</span></code></a><a class="headerlink" href="#refine-propagate-3" title="Link to this heading"></a></h3>
+<p>Applies a batch of relation-set refinements represented as constraint(Node1, Node2, RelationSet) terms and then propagates the combined consequences, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(Network,Constraints,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="refine-propagate-4">
+<span id="interval-constraint-network-protocol-0-refine-propagate-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">refine_propagate/4</span></code></a><a class="headerlink" href="#refine-propagate-4" title="Link to this heading"></a></h3>
+<p>Applies a batch of relation-set refinements, propagates the combined consequences incrementally, and returns the list of direct and propagated changes, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(Network,Constraints,Closure,Changes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refine_propagate(+compound,+list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="propagation-triple-2">
+<span id="interval-constraint-network-protocol-0-propagation-triple-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagation_triple/2</span></code></a><a class="headerlink" href="#propagation-triple-2" title="Link to this heading"></a></h3>
+<p>Extracts the causing node triple triple(Node1, Node3, Node2) from a propagated change term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagation_triple(Change,Triple)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagation_triple(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="propagation-triples-2">
+<span id="interval-constraint-network-protocol-0-propagation-triples-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">propagation_triples/2</span></code></a><a class="headerlink" href="#propagation-triples-2" title="Link to this heading"></a></h3>
+<p>Collects the unique node triples that caused propagated refinements in a list of change terms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagation_triples(Changes,Triples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">propagation_triples(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="path-consistency-2">
+<span id="interval-constraint-network-protocol-0-path-consistency-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">path_consistency/2</span></code></a><a class="headerlink" href="#path-consistency-2" title="Link to this heading"></a></h3>
+<p>Computes the path-consistency closure of a network by iterative refinement using relation-set composition and intersection. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_consistency(Network,Closure)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_consistency(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="constraints-2">
+<span id="interval-constraint-network-protocol-0-constraints-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constraints/2</span></code></a><a class="headerlink" href="#constraints-2" title="Link to this heading"></a></h3>
+<p>Returns the explicit pair constraints in canonical storage order using constraint(Node1, Node2, RelationSet) terms.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">constraints(Network,Constraints)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">constraints(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="subsumes-2">
+<span id="interval-constraint-network-protocol-0-subsumes-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subsumes/2</span></code></a><a class="headerlink" href="#subsumes-2" title="Link to this heading"></a></h3>
+<p>True if the first network is at least as general as the second network, i.e. every pair relation set in the second network is a subset of the corresponding relation set in the first network.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsumes(Network1,Network2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">subsumes(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="equivalent-2">
+<span id="interval-constraint-network-protocol-0-equivalent-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">equivalent/2</span></code></a><a class="headerlink" href="#equivalent-2" title="Link to this heading"></a></h3>
+<p>True if two networks contain the same nodes and mutually subsume each other.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equivalent(Network1,Network2)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">equivalent(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<p>(none)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<p>(none)</p>
 </section>
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="anomaly_dataset_protocol_0.html#anomaly-dataset-protocol-0"><span class="std std-ref">anomaly_dataset_protocol</span></a>, <a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0"><span class="std std-ref">anomaly_detector_protocol</span></a>, <a class="reference internal" href="modified_z_score_anomaly_detector_0.html#modified-z-score-anomaly-detector-0"><span class="std std-ref">modified_z_score_anomaly_detector</span></a>, <a class="reference internal" href="z_score_anomaly_detector_0.html#z-score-anomaly-detector-0"><span class="std std-ref">z_score_anomaly_detector</span></a>, <a class="reference internal" href="isolation_forest_anomaly_detector_0.html#isolation-forest-anomaly-detector-0"><span class="std std-ref">isolation_forest_anomaly_detector</span></a>, <a class="reference internal" href="knn_distance_anomaly_detector_0.html#knn-distance-anomaly-detector-0"><span class="std std-ref">knn_distance_anomaly_detector</span></a>, <a class="reference internal" href="lof_anomaly_detector_0.html#lof-anomaly-detector-0"><span class="std std-ref">lof_anomaly_detector</span></a></p>
+<p><a class="reference internal" href="interval_relation_set_protocol_0.html#interval-relation-set-protocol-0"><span class="std std-ref">interval_relation_set_protocol</span></a>, <a class="reference internal" href="interval_relation_set_0.html#interval-relation-set-0"><span class="std std-ref">interval_relation_set</span></a>, <a class="reference internal" href="interval_algebra_protocol_0.html#interval-algebra-protocol-0"><span class="std std-ref">interval_algebra_protocol</span></a>, <a class="reference internal" href="interval_algebra_0.html#interval-algebra-0"><span class="std std-ref">interval_algebra</span></a></p>
 </div>
 </section>
 </section>
@@ -437,8 +987,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="interval_relation_set_protocol_0.html" class="btn btn-neutral float-left" title="interval_relation_set_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="iso8601_0.html" class="btn btn-neutral float-right" title="iso8601" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="interval_constraint_network_0.html" class="btn btn-neutral float-left" title="interval_constraint_network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interval_protocol_0.html" class="btn btn-neutral float-right" title="interval_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

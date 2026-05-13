@@ -1,0 +1,116 @@
+.. index:: single: interval_algebra_protocol
+.. _interval_algebra_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``interval_algebra_protocol``
+=============================
+
+Allen interval algebra protocol over the 13 base relation atoms.
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: relation/1
+.. _interval_algebra_protocol/0::relation/1:
+
+``relation/1``
+^^^^^^^^^^^^^^
+
+Enumerates valid Allen base relation atoms in canonical order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relation(Relation)``
+| **Mode and number of proofs:**
+|    ``relation(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: converse/2
+.. _interval_algebra_protocol/0::converse/2:
+
+``converse/2``
+^^^^^^^^^^^^^^
+
+Relates an Allen base relation atom with its converse relation atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``converse(Relation,Converse)``
+| **Mode and number of proofs:**
+|    ``converse(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: compose/3
+.. _interval_algebra_protocol/0::compose/3:
+
+``compose/3``
+^^^^^^^^^^^^^
+
+Returns the canonical ordered list of Allen base relation atoms resulting from composing two Allen base relation atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compose(Relation1,Relation2,Relations)``
+| **Mode and number of proofs:**
+|    ``compose(+atom,+atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`interval_protocol <interval_protocol/0>`, :ref:`interval <interval/0>`, :ref:`interval_algebra <interval_algebra/0>`, :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0>`, :ref:`interval_relation_set <interval_relation_set/0>`
+

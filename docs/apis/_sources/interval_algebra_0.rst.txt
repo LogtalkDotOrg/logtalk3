@@ -1,0 +1,56 @@
+.. index:: single: interval_algebra
+.. _interval_algebra/0:
+
+.. rst-class:: right
+
+**object**
+
+``interval_algebra``
+====================
+
+Allen interval algebra over the 13 base relation atoms. Composition results are returned as canonical ordered duplicate-free lists.
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`interval_algebra_protocol <interval_algebra_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`interval_algebra_protocol/0::compose/3`  :ref:`interval_algebra_protocol/0::converse/2`  :ref:`interval_algebra_protocol/0::relation/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

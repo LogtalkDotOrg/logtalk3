@@ -21,21 +21,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load([
-		interval_protocol,
-		interval_algebra_protocol,
-		interval_relation_set_protocol,
-		interval_constraint_network_protocol,
-		interval,
-		interval_algebra,
-		interval_relation_set,
-		interval_constraint_network
-	], [
-		source_data(on),
-		debug(on)
-	]),
+	logtalk_load(loader),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load(tests_performance, [optimize(on), hook(lgtunit)]),
+	tests_performance::run
 )).

@@ -481,7 +481,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::after/2>`
-* :ref:`intervalp <intervalp/0::after/2>`
+* :ref:`interval_protocol <interval_protocol/0::after/2>`
 
 ``after/3``
 -----------
@@ -1378,7 +1378,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::before/2>`
-* :ref:`intervalp <intervalp/0::before/2>`
+* :ref:`interval_protocol <interval_protocol/0::before/2>`
 
 ``before/3``
 ------------
@@ -2962,6 +2962,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_algebra_protocol <interval_algebra_protocol/0::compose/3>`
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::compose/3>`
 * :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::compose/3>`
 
 ``compress/2``
@@ -3068,6 +3070,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`kemeny_young_ranker <kemeny_young_ranker/0::consensus_score/2>`
 
+``consistent/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::consistent/1>`
+
 ``console/1``
 -------------
 
@@ -3078,6 +3090,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::console/1>`
 
+``constraints/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::constraints/2>`
+
 ``contains/2``
 --------------
 
@@ -3086,7 +3108,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::contains/2>`
+* :ref:`interval_protocol <interval_protocol/0::contains/2>`
+
+``contradiction/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::contradiction/2>`
+
+``contradiction_explanations/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::contradiction_explanations/2>`
 
 ``control//0``
 --------------
@@ -3127,6 +3169,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::controls//0>`
+
+``converse/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_algebra_protocol <interval_algebra_protocol/0::converse/2>`
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::converse/2>`
 
 ``convert/4``
 -------------
@@ -5805,7 +5858,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::during/2>`
+* :ref:`interval_protocol <interval_protocol/0::during/2>`
 
 ``dut1_entries/1``
 ------------------
@@ -5951,6 +6004,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::empty/1>`
 * :ref:`graph_protocol <graph_protocol/0::empty/1>`
 * :ref:`heap_protocol <heap_protocol/0::empty/1>`
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::empty/1>`
 * :ref:`listp <listp/0::empty/1>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`
 * :ref:`optional <optional/0::empty/1>`
@@ -6098,6 +6152,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::ensure_file/1>`
+
+``entailment_explanations/5``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entailment_explanations/5>`
+
+``entails/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/4>`
+
+``entails/5``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::entails/5>`
 
 ``entity/1``
 ------------
@@ -6263,7 +6347,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::equal/2>`
+* :ref:`interval_protocol <interval_protocol/0::equal/2>`
 * :ref:`setp <setp/0::equal/2>`
 
 ``equirectangular_inverse/4``
@@ -6285,6 +6369,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::equirectangular_projection/4>`
+
+``equivalent/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::equivalent/2>`
 
 ``erase/1``
 -----------
@@ -6502,6 +6596,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::exclude/3>`
+
+``excluded/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::excluded/4>`
 
 ``execution_context/7``
 -----------------------
@@ -7231,7 +7335,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::finished_by/2>`
+* :ref:`interval_protocol <interval_protocol/0::finished_by/2>`
 
 ``finishes/2``
 --------------
@@ -7241,7 +7345,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::finishes/2>`
+* :ref:`interval_protocol <interval_protocol/0::finishes/2>`
 
 ``finite_binary_rational/4``
 ----------------------------
@@ -9699,6 +9803,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::intersection/3>`
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::intersection/3>`
 * :ref:`setp <setp/0::intersection/3>`
 
 ``intersection/4``
@@ -12762,7 +12867,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::meets/2>`
+* :ref:`interval_protocol <interval_protocol/0::meets/2>`
 
 ``member/2``
 ------------
@@ -12772,6 +12877,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::member/2>`
 * :ref:`listp <listp/0::member/2>`
 * :ref:`random_protocol <random_protocol/0::member/2>`
 * :ref:`setp <setp/0::member/2>`
@@ -12906,7 +13012,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::met_by/2>`
+* :ref:`interval_protocol <interval_protocol/0::met_by/2>`
 
 ``meta/1``
 ----------
@@ -13588,6 +13694,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geohash_protocol <geohash_protocol/0::neighbors_int/3>`
 
+``network/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::network/1>`
+
 ``new/1``
 ---------
 
@@ -13611,6 +13727,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`graph_protocol <graph_protocol/0::new/2>`
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`
 * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
 * :ref:`streamvars <streamvars/0::new/2>`
 * :ref:`union_find_protocol <union_find_protocol/0::new/2>`
@@ -13624,7 +13741,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`graph_protocol <graph_protocol/0::new/3>`
-* :ref:`intervalp <intervalp/0::new/3>`
+* :ref:`interval_protocol <interval_protocol/0::new/3>`
 
 ``new_line//0``
 ---------------
@@ -13817,6 +13934,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`debuggerp <debuggerp/0::nodebug/0>`
 
+``nodes/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::nodes/2>`
+
 ``nolog/3``
 -----------
 
@@ -13905,6 +14032,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::normalize/2>`
 * :ref:`url(Representation) <url/1::normalize/2>`
 
 ``normalize_coordinate/2``
@@ -14985,7 +15113,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::overlapped_by/2>`
+* :ref:`interval_protocol <interval_protocol/0::overlapped_by/2>`
 
 ``overlaps/2``
 --------------
@@ -14995,7 +15123,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::overlaps/2>`
+* :ref:`interval_protocol <interval_protocol/0::overlaps/2>`
 
 ``pack_dependency/6``
 ---------------------
@@ -15650,6 +15778,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::path_concat/3>`
 
+``path_consistency/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::path_consistency/2>`
+
 ``pattern_miner_options/2``
 ---------------------------
 
@@ -16064,6 +16202,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listing <listing/0::portray_clause/1>`
+
+``possible/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::possible/4>`
 
 ``postorder/2``
 ---------------
@@ -16739,6 +16887,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mcp_prompt_protocol <mcp_prompt_protocol/0::prompts/1>`
 
+``propagate/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::propagate/2>`
+
 ``propagate/3``
 ---------------
 
@@ -16747,6 +16905,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::propagate/3>`
 * :ref:`tle_orbits_protocol <tle_orbits_protocol/0::propagate/3>`
 
 ``propagate/4``
@@ -16788,6 +16947,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`tle_orbits_protocol <tle_orbits_protocol/0::propagate_state/5>`
+
+``propagation_triple/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::propagation_triple/2>`
+
+``propagation_triples/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::propagation_triples/2>`
 
 ``proper_prefix/2``
 -------------------
@@ -18091,6 +18270,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`recorded_database_core <recorded_database_core/0::recordz/3>`
 
+``refine/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine/5>`
+
+``refine_propagate/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine_propagate/3>`
+
+``refine_propagate/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine_propagate/4>`
+
+``refine_propagate/5``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine_propagate/5>`
+
+``refine_propagate/6``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine_propagate/6>`
+
 ``regressor_options/2``
 -----------------------
 
@@ -18100,6 +18329,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`regressor_protocol <regressor_protocol/0::regressor_options/2>`
+
+``relation/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_algebra_protocol <interval_algebra_protocol/0::relation/1>`
+
+``relation/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_protocol <interval_protocol/0::relation/3>`
+
+``relation/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::relation/4>`
+
+``relation_set/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::relation_set/1>`
 
 ``relative_standard_deviation/2``
 ---------------------------------
@@ -19903,6 +20172,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::signaling_field/2>`
 
+``singleton/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::singleton/2>`
+
 ``singletons/2``
 ----------------
 
@@ -20445,7 +20724,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::started_by/2>`
+* :ref:`interval_protocol <interval_protocol/0::started_by/2>`
 
 ``starts/2``
 ------------
@@ -20455,7 +20734,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`intervalp <intervalp/0::starts/2>`
+* :ref:`interval_protocol <interval_protocol/0::starts/2>`
 
 ``state_energy/2``
 ------------------
@@ -20918,6 +21197,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::subset/2>`
 * :ref:`setp <setp/0::subset/2>`
 
 ``subslices/2``
@@ -20948,6 +21228,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::subsumes/2>`
 * :ref:`termp <termp/0::subsumes/2>`
 
 ``subterm/2``
@@ -22101,6 +22382,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::union/3>`
 * :ref:`setp <setp/0::union/3>`
 * :ref:`two3tree <two3tree/0::union/3>`
 * :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::union/3>`
@@ -22125,6 +22407,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`union_find_protocol <union_find_protocol/0::union_all/3>`
+
+``universal/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::universal/1>`
 
 ``unix_seconds/2``
 ------------------
@@ -22471,7 +22763,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::valid/1>`
 * :ref:`ccsds_time_codes <ccsds_time_codes/0::valid/1>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::valid/1>`
-* :ref:`intervalp <intervalp/0::valid/1>`
+* :ref:`interval_protocol <interval_protocol/0::valid/1>`
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
 * :ref:`url(Representation) <url/1::valid/1>`

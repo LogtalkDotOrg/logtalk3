@@ -1,0 +1,534 @@
+.. index:: single: interval_constraint_network_protocol
+.. _interval_constraint_network_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``interval_constraint_network_protocol``
+========================================
+
+Allen interval constraint-network protocol built on canonical relation sets, intended for small-to-medium symbolic networks.
+
+| **Availability:** 
+|    ``logtalk_load(intervals(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-13
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: network/1
+.. _interval_constraint_network_protocol/0::network/1:
+
+``network/1``
+^^^^^^^^^^^^^
+
+True if Network is a valid interval constraint network represented as a network(Nodes, Constraints) term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``network(Network)``
+| **Mode and number of proofs:**
+|    ``network(?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: new/2
+.. _interval_constraint_network_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Constructs a new network for a list of distinct nodes. Distinct node pairs are initialized with the universal relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Nodes,Network)``
+| **Mode and number of proofs:**
+|    ``new(+list,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: nodes/2
+.. _interval_constraint_network_protocol/0::nodes/2:
+
+``nodes/2``
+^^^^^^^^^^^
+
+Returns the list of nodes in a network.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nodes(Network,Nodes)``
+| **Mode and number of proofs:**
+|    ``nodes(+compound,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: relation/4
+.. _interval_constraint_network_protocol/0::relation/4:
+
+``relation/4``
+^^^^^^^^^^^^^^
+
+Returns the current relation set between two nodes in a network. A node is always equal to itself.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relation(Network,Node1,Node2,RelationSet)``
+| **Mode and number of proofs:**
+|    ``relation(+compound,@term,@term,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entails/4
+.. _interval_constraint_network_protocol/0::entails/4:
+
+``entails/4``
+^^^^^^^^^^^^^
+
+True if the current relation set between two nodes is a subset of a queried relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entails(Network,Node1,Node2,RelationSet)``
+| **Mode and number of proofs:**
+|    ``entails(+compound,@term,@term,+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: entails/5
+.. _interval_constraint_network_protocol/0::entails/5:
+
+``entails/5``
+^^^^^^^^^^^^^
+
+True if the current relation set between two nodes is a subset of a queried relation set and returns an explanation term describing either a direct constraint or a supporting propagation path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entails(Network,Node1,Node2,RelationSet,Explanation)``
+| **Mode and number of proofs:**
+|    ``entails(+compound,@term,@term,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: possible/4
+.. _interval_constraint_network_protocol/0::possible/4:
+
+``possible/4``
+^^^^^^^^^^^^^^
+
+True if the current relation set between two nodes intersects a queried relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``possible(Network,Node1,Node2,RelationSet)``
+| **Mode and number of proofs:**
+|    ``possible(+compound,@term,@term,+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: excluded/4
+.. _interval_constraint_network_protocol/0::excluded/4:
+
+``excluded/4``
+^^^^^^^^^^^^^^
+
+True if the current relation set between two nodes is disjoint from a queried relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``excluded(Network,Node1,Node2,RelationSet)``
+| **Mode and number of proofs:**
+|    ``excluded(+compound,@term,@term,+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: contradiction/2
+.. _interval_constraint_network_protocol/0::contradiction/2:
+
+``contradiction/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns a simple contradiction explanation for an inconsistent network as contradiction(Node1, Node2, Cause).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contradiction(Network,Explanation)``
+| **Mode and number of proofs:**
+|    ``contradiction(+compound,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: entailment_explanations/5
+.. _interval_constraint_network_protocol/0::entailment_explanations/5:
+
+``entailment_explanations/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the list of immediate explanations supporting an entailed relation query, using identity, direct, and propagated explanation terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``entailment_explanations(Network,Node1,Node2,RelationSet,Explanations)``
+| **Mode and number of proofs:**
+|    ``entailment_explanations(+compound,@term,@term,+list(atom),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: contradiction_explanations/2
+.. _interval_constraint_network_protocol/0::contradiction_explanations/2:
+
+``contradiction_explanations/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the list of contradiction explanations for all empty explicit pair constraints in a network.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``contradiction_explanations(Network,Explanations)``
+| **Mode and number of proofs:**
+|    ``contradiction_explanations(+compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: refine/5
+.. _interval_constraint_network_protocol/0::refine/5:
+
+``refine/5``
+^^^^^^^^^^^^
+
+Refines the relation set between two distinct nodes by intersecting it with a new relation set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``refine(Network,Node1,Node2,RelationSet,RefinedNetwork)``
+| **Mode and number of proofs:**
+|    ``refine(+compound,@term,@term,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: consistent/1
+.. _interval_constraint_network_protocol/0::consistent/1:
+
+``consistent/1``
+^^^^^^^^^^^^^^^^
+
+True if all explicit pair constraints in a network are non-empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``consistent(Network)``
+| **Mode and number of proofs:**
+|    ``consistent(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: propagate/2
+.. _interval_constraint_network_protocol/0::propagate/2:
+
+``propagate/2``
+^^^^^^^^^^^^^^^
+
+Computes a path-consistency closure and succeeds only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate(Network,Closure)``
+| **Mode and number of proofs:**
+|    ``propagate(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: propagate/3
+.. _interval_constraint_network_protocol/0::propagate/3:
+
+``propagate/3``
+^^^^^^^^^^^^^^^
+
+Computes a path-consistency closure, returns the list of propagated changes, and succeeds only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagate(Network,Closure,Changes)``
+| **Mode and number of proofs:**
+|    ``propagate(+compound,-compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: refine_propagate/5
+.. _interval_constraint_network_protocol/0::refine_propagate/5:
+
+``refine_propagate/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Refines the relation set between two distinct nodes and then propagates the consequences, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``refine_propagate(Network,Node1,Node2,RelationSet,Closure)``
+| **Mode and number of proofs:**
+|    ``refine_propagate(+compound,@term,@term,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: refine_propagate/6
+.. _interval_constraint_network_protocol/0::refine_propagate/6:
+
+``refine_propagate/6``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Refines the relation set between two distinct nodes, propagates the consequences incrementally, and returns the list of direct and propagated changes, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``refine_propagate(Network,Node1,Node2,RelationSet,Closure,Changes)``
+| **Mode and number of proofs:**
+|    ``refine_propagate(+compound,@term,@term,+list(atom),-compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: refine_propagate/3
+.. _interval_constraint_network_protocol/0::refine_propagate/3:
+
+``refine_propagate/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Applies a batch of relation-set refinements represented as constraint(Node1, Node2, RelationSet) terms and then propagates the combined consequences, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``refine_propagate(Network,Constraints,Closure)``
+| **Mode and number of proofs:**
+|    ``refine_propagate(+compound,+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: refine_propagate/4
+.. _interval_constraint_network_protocol/0::refine_propagate/4:
+
+``refine_propagate/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Applies a batch of relation-set refinements, propagates the combined consequences incrementally, and returns the list of direct and propagated changes, succeeding only if the resulting network is consistent. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``refine_propagate(Network,Constraints,Closure,Changes)``
+| **Mode and number of proofs:**
+|    ``refine_propagate(+compound,+list(compound),-compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: propagation_triple/2
+.. _interval_constraint_network_protocol/0::propagation_triple/2:
+
+``propagation_triple/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the causing node triple triple(Node1, Node3, Node2) from a propagated change term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagation_triple(Change,Triple)``
+| **Mode and number of proofs:**
+|    ``propagation_triple(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: propagation_triples/2
+.. _interval_constraint_network_protocol/0::propagation_triples/2:
+
+``propagation_triples/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique node triples that caused propagated refinements in a list of change terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``propagation_triples(Changes,Triples)``
+| **Mode and number of proofs:**
+|    ``propagation_triples(+list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: path_consistency/2
+.. _interval_constraint_network_protocol/0::path_consistency/2:
+
+``path_consistency/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the path-consistency closure of a network by iterative refinement using relation-set composition and intersection. Intended for small-to-medium symbolic networks; not a large-scale temporal CSP solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_consistency(Network,Closure)``
+| **Mode and number of proofs:**
+|    ``path_consistency(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: constraints/2
+.. _interval_constraint_network_protocol/0::constraints/2:
+
+``constraints/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the explicit pair constraints in canonical storage order using constraint(Node1, Node2, RelationSet) terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``constraints(Network,Constraints)``
+| **Mode and number of proofs:**
+|    ``constraints(+compound,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: subsumes/2
+.. _interval_constraint_network_protocol/0::subsumes/2:
+
+``subsumes/2``
+^^^^^^^^^^^^^^
+
+True if the first network is at least as general as the second network, i.e. every pair relation set in the second network is a subset of the corresponding relation set in the first network.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subsumes(Network1,Network2)``
+| **Mode and number of proofs:**
+|    ``subsumes(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: equivalent/2
+.. _interval_constraint_network_protocol/0::equivalent/2:
+
+``equivalent/2``
+^^^^^^^^^^^^^^^^
+
+True if two networks contain the same nodes and mutually subsume each other.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equivalent(Network1,Network2)``
+| **Mode and number of proofs:**
+|    ``equivalent(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0>`, :ref:`interval_relation_set <interval_relation_set/0>`, :ref:`interval_algebra_protocol <interval_algebra_protocol/0>`, :ref:`interval_algebra <interval_algebra/0>`
+

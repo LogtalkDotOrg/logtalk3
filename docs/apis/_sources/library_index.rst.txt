@@ -1280,7 +1280,13 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    interval <interval_0>
-   intervalp <intervalp_0>
+   interval_algebra <interval_algebra_0>
+   interval_algebra_protocol <interval_algebra_protocol_0>
+   interval_constraint_network <interval_constraint_network_0>
+   interval_constraint_network_protocol <interval_constraint_network_protocol_0>
+   interval_protocol <interval_protocol_0>
+   interval_relation_set <interval_relation_set_0>
+   interval_relation_set_protocol <interval_relation_set_protocol_0>
 
 :ref:`iqr_anomaly_detector <library_iqr_anomaly_detector>`
 ----------------------------------------------------------

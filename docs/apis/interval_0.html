@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="intervalp" href="intervalp_0.html" />
+    <link rel="next" title="interval_algebra" href="interval_algebra_0.html" />
     <link rel="prev" title="ieee_754_protocol" href="ieee_754_protocol_0.html" />
    
 </head>
@@ -167,7 +167,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ieee-754"><span class="xref std std-ref">ieee_754</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">interval</a></li>
-<li class="toctree-l3"><a class="reference internal" href="intervalp_0.html">intervalp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_algebra_0.html">interval_algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_algebra_protocol_0.html">interval_algebra_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_constraint_network_0.html">interval_constraint_network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_constraint_network_protocol_0.html">interval_constraint_network_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_protocol_0.html">interval_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_relation_set_0.html">interval_relation_set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interval_relation_set_protocol_0.html">interval_relation_set_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iqr-anomaly-detector"><span class="xref std std-ref">iqr_anomaly_detector</span></a></li>
@@ -368,8 +374,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:2:1</div>
-<div class="line"><strong>Date:</strong> 2022-01-15</div>
+<div class="line"><strong>Version:</strong> 1:3:0</div>
+<div class="line"><strong>Date:</strong> 2026-05-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -380,23 +386,23 @@
 <div class="line-block">
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="intervalp_0.html#intervalp-0"><span class="std std-ref">intervalp</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0"><span class="std std-ref">interval_protocol</span></a></div>
 </div>
 <div class="line"><strong>Aliases:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">before/2</span></code> as <code class="docutils literal notranslate"><span class="pre">b/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">after/2</span></code> as <code class="docutils literal notranslate"><span class="pre">bi/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">meets/2</span></code> as <code class="docutils literal notranslate"><span class="pre">m/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">met_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">mi/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">overlaps/2</span></code> as <code class="docutils literal notranslate"><span class="pre">o/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">overlapped_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">oi/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">starts/2</span></code> as <code class="docutils literal notranslate"><span class="pre">s/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">started_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">si/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">during/2</span></code> as <code class="docutils literal notranslate"><span class="pre">d/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">contains/2</span></code> as <code class="docutils literal notranslate"><span class="pre">di/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">finishes/2</span></code> as <code class="docutils literal notranslate"><span class="pre">f/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">finished_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">fi/2</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">intervalp</span></code> <code class="docutils literal notranslate"><span class="pre">equal/2</span></code> as <code class="docutils literal notranslate"><span class="pre">eq/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">before/2</span></code> as <code class="docutils literal notranslate"><span class="pre">b/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">after/2</span></code> as <code class="docutils literal notranslate"><span class="pre">bi/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">meets/2</span></code> as <code class="docutils literal notranslate"><span class="pre">m/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">met_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">mi/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">overlaps/2</span></code> as <code class="docutils literal notranslate"><span class="pre">o/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">overlapped_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">oi/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">starts/2</span></code> as <code class="docutils literal notranslate"><span class="pre">s/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">started_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">si/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">during/2</span></code> as <code class="docutils literal notranslate"><span class="pre">d/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">contains/2</span></code> as <code class="docutils literal notranslate"><span class="pre">di/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">finishes/2</span></code> as <code class="docutils literal notranslate"><span class="pre">f/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">finished_by/2</span></code> as <code class="docutils literal notranslate"><span class="pre">fi/2</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> <code class="docutils literal notranslate"><span class="pre">equal/2</span></code> as <code class="docutils literal notranslate"><span class="pre">eq/2</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -408,7 +414,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="intervalp_0.html#intervalp-0-after-2"><span class="std std-ref">after/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-before-2"><span class="std std-ref">before/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-contains-2"><span class="std std-ref">contains/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-during-2"><span class="std std-ref">during/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-equal-2"><span class="std std-ref">equal/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-finished-by-2"><span class="std std-ref">finished_by/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-finishes-2"><span class="std std-ref">finishes/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-meets-2"><span class="std std-ref">meets/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-met-by-2"><span class="std std-ref">met_by/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-new-3"><span class="std std-ref">new/3</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-overlapped-by-2"><span class="std std-ref">overlapped_by/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-overlaps-2"><span class="std std-ref">overlaps/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-started-by-2"><span class="std std-ref">started_by/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-starts-2"><span class="std std-ref">starts/2</span></a>  <a class="reference internal" href="intervalp_0.html#intervalp-0-valid-1"><span class="std std-ref">valid/1</span></a></div>
+<div class="line"> <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-after-2"><span class="std std-ref">after/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-before-2"><span class="std std-ref">before/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-contains-2"><span class="std std-ref">contains/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-during-2"><span class="std std-ref">during/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-equal-2"><span class="std std-ref">equal/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-finished-by-2"><span class="std std-ref">finished_by/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-finishes-2"><span class="std std-ref">finishes/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-meets-2"><span class="std std-ref">meets/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-met-by-2"><span class="std std-ref">met_by/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-new-3"><span class="std std-ref">new/3</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-overlapped-by-2"><span class="std std-ref">overlapped_by/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-overlaps-2"><span class="std std-ref">overlaps/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-relation-3"><span class="std std-ref">relation/3</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-started-by-2"><span class="std std-ref">started_by/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-starts-2"><span class="std std-ref">starts/2</span></a>  <a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-valid-1"><span class="std std-ref">valid/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -442,7 +448,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ieee_754_protocol_0.html" class="btn btn-neutral float-left" title="ieee_754_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="intervalp_0.html" class="btn btn-neutral float-right" title="intervalp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="interval_algebra_0.html" class="btn btn-neutral float-right" title="interval_algebra" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

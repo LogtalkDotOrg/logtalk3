@@ -20,12 +20,12 @@
 
 
 :- object(interval,
-	implements(intervalp)).
+	implements(interval_protocol)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-01-15,
+		date is 2026-05-13,
 		comment is 'Basic temporal interval relations. An interval is represented by a compound term, ``i/2``, with two ground arguments, the start and end points.'
 	]).
 
@@ -39,6 +39,38 @@
 		ground(Start),
 		ground(End),
 		Start @< End.
+
+	relation(Interval1, Interval2, Relation) :-
+		valid(Interval1),
+		valid(Interval2),
+		(	before(Interval1, Interval2) ->
+			Relation = before
+		;	after(Interval1, Interval2) ->
+			Relation = after
+		;	meets(Interval1, Interval2) ->
+			Relation = meets
+		;	met_by(Interval1, Interval2) ->
+			Relation = met_by
+		;	overlaps(Interval1, Interval2) ->
+			Relation = overlaps
+		;	overlapped_by(Interval1, Interval2) ->
+			Relation = overlapped_by
+		;	starts(Interval1, Interval2) ->
+			Relation = starts
+		;	started_by(Interval1, Interval2) ->
+			Relation = started_by
+		;	during(Interval1, Interval2) ->
+			Relation = during
+		;	contains(Interval1, Interval2) ->
+			Relation = contains
+		;	finishes(Interval1, Interval2) ->
+			Relation = finishes
+		;	finished_by(Interval1, Interval2) ->
+			Relation = finished_by
+		;	equal(Interval1, Interval2) ->
+			Relation = equal
+		;	fail
+		).
 
 	before(i(_, End1), i(Start2, _)) :-
 		End1 @< Start2.
@@ -80,7 +112,7 @@
 
 	equal(Interval, Interval).
 
-	:- alias(intervalp, [
+	:- alias(interval_protocol, [
 		before/2 as        b/2,
 		after/2 as         bi/2,
 		meets/2 as         m/2,

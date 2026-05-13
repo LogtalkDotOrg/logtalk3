@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(intervalp).
+:- protocol(interval_protocol).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2014-04-26,
+		date is 2026-05-13,
 		comment is 'Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).',
-		see_also is [interval]
+		see_also is [interval, interval_algebra_protocol, interval_algebra, interval_relation_set_protocol, interval_relation_set]
 	]).
 
 	:- public(new/3).
@@ -41,6 +41,13 @@
 	:- info(valid/1, [
 		comment is 'True if Interval is a valid interval.',
 		argnames is ['Interval']
+	]).
+
+	:- public(relation/3).
+	:- mode(relation(@interval, @interval, ?atom), zero_or_one).
+	:- info(relation/3, [
+		comment is 'Classifies two valid intervals according to their unique Allen base relation.',
+		argnames is ['Interval1', 'Interval2', 'Relation']
 	]).
 
 	:- public(before/2).

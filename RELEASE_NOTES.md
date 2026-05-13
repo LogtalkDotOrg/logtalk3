@@ -458,6 +458,12 @@ the `types` library `natural` object.
 library. Also extended the `bbox_contains/2` predicate to support bounding-box
 containment checks.
 
+* ADDED: New `intervals` library functionality implementing James F. Allen
+interval relations over concrete intervals, relation algebra and canonical
+relation-set predicates, and symbolic interval constraint networks with
+path-consistency propagation, explanations, and inspection/comparison
+predicates.
+
 * IMPROVED: Code refactoring of the classifier libraries by introducing a new
 `classifier_common` category with shared code.
 

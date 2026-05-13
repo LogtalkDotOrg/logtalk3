@@ -162,9 +162,11 @@
 <li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ieee_754.html"><code class="docutils literal notranslate"><span class="pre">ieee_754</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#practical-limits">Practical limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="iqr_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">iqr_anomaly_detector</span></code></a></li>
@@ -334,9 +336,56 @@
              
   <section id="intervals">
 <span id="library-intervals"></span><h1><code class="docutils literal notranslate"><span class="pre">intervals</span></code><a class="headerlink" href="#intervals" title="Link to this heading"></a></h1>
-<p>This library provides an <code class="docutils literal notranslate"><span class="pre">intervalp</span></code> protocol and an <code class="docutils literal notranslate"><span class="pre">interval</span></code>
-object that implement basic temporal interval relations protocol (based
-on the James F. Allen Interval Algebra work).</p>
+<p>This library provides:</p>
+<ul class="simple">
+<li><p>an <code class="docutils literal notranslate"><span class="pre">interval_protocol</span></code> protocol and an <code class="docutils literal notranslate"><span class="pre">interval</span></code> object
+implementing the 13 Allen base interval relations plus interval pair
+classification using <code class="docutils literal notranslate"><span class="pre">relation/3</span></code></p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">interval_algebra_protocol</span></code> protocol and an <code class="docutils literal notranslate"><span class="pre">interval_algebra</span></code>
+object implementing Allen relation algebra predicates over the 13 base
+relation atoms</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">interval_relation_set_protocol</span></code> protocol and an
+<code class="docutils literal notranslate"><span class="pre">interval_relation_set</span></code> object implementing canonical relation-set
+operations over Allen base relation atoms</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">interval_constraint_network_protocol</span></code> protocol and an
+<code class="docutils literal notranslate"><span class="pre">interval_constraint_network</span></code> object implementing first interval
+constraint-network predicates over canonical relation sets, including
+batch refinement, explanation lists, and network inspection/comparison
+helpers</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">interval</span></code> object works on interval terms represented as
+<code class="docutils literal notranslate"><span class="pre">i(Start,</span> <span class="pre">End)</span></code>. The <code class="docutils literal notranslate"><span class="pre">interval_algebra</span></code> object works on relation
+atoms such as <code class="docutils literal notranslate"><span class="pre">before</span></code>, <code class="docutils literal notranslate"><span class="pre">overlaps</span></code>, and <code class="docutils literal notranslate"><span class="pre">contains</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">interval_relation_set</span></code> object works on canonical ordered
+duplicate-free lists of relation atoms. The
+<code class="docutils literal notranslate"><span class="pre">interval_constraint_network</span></code> object works on
+<code class="docutils literal notranslate"><span class="pre">network(Nodes,</span> <span class="pre">Constraints)</span></code> terms whose pair constraints are
+relation sets. Internally, the <code class="docutils literal notranslate"><span class="pre">interval_constraint_network</span></code> object
+compiles that public representation to an a dense indexed form for
+propagation and for most query operations, while still returning
+ordinary <code class="docutils literal notranslate"><span class="pre">network/2</span></code> terms at the API boundary.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">interval_algebra::compose/3</span></code> predicate returns canonical ordered
+duplicate-free lists of base relation atoms.</p>
+<section id="practical-limits">
+<h2>Practical limits<a class="headerlink" href="#practical-limits" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">interval_constraint_network</span></code> object is intended for
+small-to-medium symbolic networks. It uses a complete
+<code class="docutils literal notranslate"><span class="pre">network(Nodes,</span> <span class="pre">Constraints)</span></code> representation, so the number of stored
+pair constraints grows quadratically with the number of nodes.
+Propagation is based on path consistency and now uses an internal dense
+indexed representation with direct pair access, a reverse node-to-index
+table, and scheduled-pair tracking to avoid repeated linear worklist
+duplicate checks. This substantially reduces overhead relative to a
+purely list-based implementation, but the representation is still dense
+and updates still rebuild parts of the internal matrix before the result
+is decompiled back to a public <code class="docutils literal notranslate"><span class="pre">network/2</span></code> term.</p>
+<p>In practice, the network predicates are suitable for moderate
+qualitative temporal reasoning workloads, but they should not be treated
+as a large-scale or latency-sensitive temporal CSP solver. Exact limits
+depend on the Prolog backend, network density, how often closure is
+recomputed, and how often callers invoke single-step API operations that
+must compile or decompile the public network representation.</p>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -354,6 +403,92 @@ link in a web browser.</p>
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(intervals(tester)).
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Classify two valid intervals according to their unique Allen base
+relation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval<span class="o">::</span>new(<span class="m">1</span>, <span class="m">3</span>, <span class="nv">I1</span>), interval<span class="o">::</span>new(<span class="m">3</span>, <span class="m">5</span>, <span class="nv">I2</span>), interval<span class="o">::</span>relation(<span class="nv">I1</span>, <span class="nv">I2</span>, <span class="nv">Relation</span>).
+<span class="nv">Relation</span> <span class="o">=</span> meets.
+</pre></div>
+</div>
+<p>Compose two Allen base relation atoms:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_algebra<span class="o">::</span>compose(meets, met_by, <span class="nv">Relations</span>).
+<span class="nv">Relations</span> <span class="o">=</span> [finishes, finished_by, equal].
+</pre></div>
+</div>
+<p>Normalize an Allen relation set:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_relation_set<span class="o">::</span>normalize([during, before, during], <span class="nv">RelationSet</span>).
+<span class="nv">RelationSet</span> <span class="o">=</span> [before, during].
+</pre></div>
+</div>
+<p>Propagate interval constraints across a small symbolic network:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>new([a, b, c], <span class="nv">Network0</span>),
+     interval_constraint_network<span class="o">::</span>refine(<span class="nv">Network0</span>, a, b, [before], <span class="nv">Network1</span>),
+     interval_constraint_network<span class="o">::</span>refine(<span class="nv">Network1</span>, b, c, [before], <span class="nv">Network2</span>),
+     interval_constraint_network<span class="o">::</span>path_consistency(<span class="nv">Network2</span>, <span class="nv">Network3</span>),
+     interval_constraint_network<span class="o">::</span>relation(<span class="nv">Network3</span>, a, c, <span class="nv">RelationSet</span>).
+<span class="nv">RelationSet</span> <span class="o">=</span> [before].
+</pre></div>
+</div>
+<p>Check whether a query is entailed by the current symbolic constraints:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>entails(<span class="nv">Network3</span>, a, c, [before, meets]).
+<span class="k">true</span>.
+</pre></div>
+</div>
+<p>Inspect a simple explanation for an entailed relation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>entails(<span class="nv">Network3</span>, a, c, [before], <span class="nv">Explanation</span>).
+<span class="nv">Explanation</span> <span class="o">=</span> propagated(b, [before], [before], [before]).
+</pre></div>
+</div>
+<p>Inspect a simple contradiction explanation after closure:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>contradiction(<span class="nv">Closure</span>, <span class="nv">Explanation</span>).
+<span class="nv">Explanation</span> <span class="o">=</span> contradiction(a, c, propagated(b, [before], [before], [before])).
+</pre></div>
+</div>
+<p>Refine and propagate in a single operation that fails on contradiction:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>new([a, b, c], <span class="nv">Network0</span>),
+     interval_constraint_network<span class="o">::</span>refine_propagate(<span class="nv">Network0</span>, a, b, [before], <span class="nv">Network1</span>).
+<span class="nv">Network1</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+<p>Post a batch of constraints and propagate them in one step:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>refine_propagate(<span class="nv">Network0</span>, [constraint(a, b, [before]), constraint(b, c, [before])], <span class="nv">Network1</span>).
+<span class="nv">Network1</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+<p>Collect direct and propagated changes while propagating:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>propagate(<span class="nv">Network2</span>, <span class="nv">Network3</span>, <span class="nv">Changes</span>).
+<span class="nv">Changes</span> <span class="o">=</span> [...].
+</pre></div>
+</div>
+<p>Query which node triples caused the propagated refinements:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>propagation_triples(<span class="nv">Changes</span>, <span class="nv">Triples</span>).
+<span class="nv">Triples</span> <span class="o">=</span> [triple(a, b, c)].
+</pre></div>
+</div>
+<p>List all immediate explanations supporting an entailed query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>entailment_explanations(<span class="nv">Network3</span>, a, c, [before, meets], <span class="nv">Explanations</span>).
+<span class="nv">Explanations</span> <span class="o">=</span> [propagated(b, [before], [before], [before])].
+</pre></div>
+</div>
+<p>List all contradiction explanations currently present in an inconsistent
+network:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>contradiction_explanations(<span class="nv">Closure</span>, <span class="nv">Explanations</span>).
+<span class="nv">Explanations</span> <span class="o">=</span> [...].
+</pre></div>
+</div>
+<p>Inspect a closure and compare networks by generality or equivalence:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>constraints(<span class="nv">Network3</span>, <span class="nv">Constraints</span>).
+<span class="nv">Constraints</span> <span class="o">=</span> [constraint(a, b, [before]), constraint(a, c, [before]), constraint(b, c, [before])].
+
+| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>subsumes(<span class="nv">Network0</span>, <span class="nv">Network3</span>).
+<span class="k">true</span>.
+
+| <span class="o">?-</span> interval_constraint_network<span class="o">::</span>equivalent(<span class="nv">Network3</span>, <span class="nv">Network5</span>).
+<span class="k">true</span>.
 </pre></div>
 </div>
 </section>
