@@ -557,6 +557,8 @@ Examples
 * ADDED: New `eclipse_tests_dsl` example illustrating how to run tests written
 using the ECLiPSE tests dialect using the `lgtunit` tool.
 
+* UPDATED: The `philosophers` multi-threading example tests for faster runtime.
+
 * FIXED: The `neo4j` example classpath scripts and notes to only load the
 client-side Neo4j Java driver JARs, fixing test failures with recent Neo4j
 releases.
