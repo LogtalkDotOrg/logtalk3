@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2026-05-12,
+		date is 2026-05-13,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -128,6 +128,57 @@
 	test(integer_power_sequence_4_02, true(Sequence == [1, 3, 9, 27, 81, 243])) :-
 		integer::power_sequence(0, 5, 3, Sequence).
 
+	test(natural_fibonacci_2_01, deterministic(Fibonacci == 0)) :-
+		natural::fibonacci(0, Fibonacci).
+
+	test(natural_fibonacci_2_02, deterministic(Fibonacci == 55)) :-
+		natural::fibonacci(10, Fibonacci).
+
+	test(natural_fibonacci_2_03, fail) :-
+		natural::fibonacci(-1, _).
+
+	test(natural_lucas_2_01, deterministic(Lucas == 2)) :-
+		natural::lucas(0, Lucas).
+
+	test(natural_lucas_2_02, deterministic(Lucas == 11)) :-
+		natural::lucas(5, Lucas).
+
+	test(natural_lucas_2_03, fail) :-
+		natural::lucas(-1, _).
+
+	test(natural_falling_factorial_3_01, deterministic(FallingFactorial == 1)) :-
+		natural::falling_factorial(4, 0, FallingFactorial).
+
+	test(natural_falling_factorial_3_02, deterministic(FallingFactorial == 20)) :-
+		natural::falling_factorial(5, 2, FallingFactorial).
+
+	test(natural_falling_factorial_3_03, deterministic(FallingFactorial == 120)) :-
+		natural::falling_factorial(5, 5, FallingFactorial).
+
+	test(natural_falling_factorial_3_04, fail) :-
+		natural::falling_factorial(3, 4, _).
+
+	test(natural_rising_factorial_3_01, deterministic(RisingFactorial == 1)) :-
+		natural::rising_factorial(4, 0, RisingFactorial).
+
+	test(natural_rising_factorial_3_02, deterministic(RisingFactorial == 30)) :-
+		natural::rising_factorial(5, 2, RisingFactorial).
+
+	test(natural_rising_factorial_3_03, deterministic(RisingFactorial == 0)) :-
+		natural::rising_factorial(0, 3, RisingFactorial).
+
+	test(natural_rising_factorial_3_04, fail) :-
+		natural::rising_factorial(-1, 2, _).
+
+	test(natural_catalan_2_01, deterministic(Catalan == 1)) :-
+		natural::catalan(0, Catalan).
+
+	test(natural_catalan_2_02, deterministic(Catalan == 14)) :-
+		natural::catalan(4, Catalan).
+
+	test(natural_catalan_2_03, fail) :-
+		natural::catalan(-1, _).
+
 	test(natural_subfactorial_2_01, deterministic(Subfactorial == 1)) :-
 		natural::subfactorial(0, Subfactorial).
 
@@ -149,6 +200,18 @@
 	test(natural_bell_2_03, fail) :-
 		natural::bell(-1, _).
 
+	test(natural_stirling_first_3_01, deterministic(Stirling == 1)) :-
+		natural::stirling_first(0, 0, Stirling).
+
+	test(natural_stirling_first_3_02, deterministic(Stirling == 11)) :-
+		natural::stirling_first(4, 2, Stirling).
+
+	test(natural_stirling_first_3_03, deterministic(Stirling == 0)) :-
+		natural::stirling_first(3, 0, Stirling).
+
+	test(natural_stirling_first_3_04, fail) :-
+		natural::stirling_first(3, 4, _).
+
 	test(natural_stirling_second_3_01, deterministic(Stirling == 1)) :-
 		natural::stirling_second(0, 0, Stirling).
 
@@ -163,6 +226,30 @@
 
 	test(natural_stirling_second_3_05, fail) :-
 		natural::stirling_second(3, 4, _).
+
+	test(natural_partition_number_2_01, deterministic(PartitionNumber == 1)) :-
+		natural::partition_number(0, PartitionNumber).
+
+	test(natural_partition_number_2_02, deterministic(PartitionNumber == 7)) :-
+		natural::partition_number(5, PartitionNumber).
+
+	test(natural_partition_number_2_03, deterministic(PartitionNumber == 42)) :-
+		natural::partition_number(10, PartitionNumber).
+
+	test(natural_partition_number_2_04, fail) :-
+		natural::partition_number(-1, _).
+
+	test(natural_multinomial_2_01, deterministic(Multinomial == 1)) :-
+		natural::multinomial([], Multinomial).
+
+	test(natural_multinomial_2_02, deterministic(Multinomial == 12)) :-
+		natural::multinomial([2,1,1], Multinomial).
+
+	test(natural_multinomial_2_03, deterministic(Multinomial == 3)) :-
+		natural::multinomial([0,2,1], Multinomial).
+
+	test(natural_multinomial_2_04, fail) :-
+		natural::multinomial([1,-1], _).
 
 	test(float_between_4_01, true(Floats =~= [0.0, 0.0, 0.0, 0.0, 0.0])) :-
 		findall(Float, float::between(0.0, 0.0, 5, Float), Floats).

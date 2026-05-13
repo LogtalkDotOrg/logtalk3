@@ -14,8 +14,8 @@ Natural numbers data type predicates.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:1:0
-| **Date:** 2026-05-12
+| **Version:** 2:3:0
+| **Date:** 2026-05-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,6 +59,101 @@ Computes the factorial of a non-negative integer.
 
 ------------
 
+.. index:: fibonacci/2
+.. _natural/0::fibonacci/2:
+
+``fibonacci/2``
+^^^^^^^^^^^^^^^
+
+Computes the Fibonacci number of a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fibonacci(N,Fibonacci)``
+| **Mode and number of proofs:**
+|    ``fibonacci(+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: lucas/2
+.. _natural/0::lucas/2:
+
+``lucas/2``
+^^^^^^^^^^^
+
+Computes the Lucas number of a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lucas(N,Lucas)``
+| **Mode and number of proofs:**
+|    ``lucas(+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: falling_factorial/3
+.. _natural/0::falling_factorial/3:
+
+``falling_factorial/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the falling factorial. ``N`` must be greater than or equal to ``K`` (fails otherwise).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``falling_factorial(N,K,FallingFactorial)``
+| **Mode and number of proofs:**
+|    ``falling_factorial(+non_negative_integer,+non_negative_integer,-non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rising_factorial/3
+.. _natural/0::rising_factorial/3:
+
+``rising_factorial/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the rising factorial.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rising_factorial(N,K,RisingFactorial)``
+| **Mode and number of proofs:**
+|    ``rising_factorial(+non_negative_integer,+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: catalan/2
+.. _natural/0::catalan/2:
+
+``catalan/2``
+^^^^^^^^^^^^^
+
+Computes the Catalan number of a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``catalan(N,Catalan)``
+| **Mode and number of proofs:**
+|    ``catalan(+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
 .. index:: subfactorial/2
 .. _natural/0::subfactorial/2:
 
@@ -97,6 +192,25 @@ Computes the Bell number of a non-negative integer.
 
 ------------
 
+.. index:: stirling_first/3
+.. _natural/0::stirling_first/3:
+
+``stirling_first/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the unsigned Stirling number of the first kind. ``N`` must be greater than or equal to ``K`` (fails otherwise).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stirling_first(N,K,Stirling)``
+| **Mode and number of proofs:**
+|    ``stirling_first(+non_negative_integer,+non_negative_integer,-non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: stirling_second/3
 .. _natural/0::stirling_second/3:
 
@@ -116,6 +230,25 @@ Computes the Stirling number of the second kind. ``N`` must be greater than or e
 
 ------------
 
+.. index:: partition_number/2
+.. _natural/0::partition_number/2:
+
+``partition_number/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the partition number of a non-negative integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition_number(N,PartitionNumber)``
+| **Mode and number of proofs:**
+|    ``partition_number(+non_negative_integer,-non_negative_integer)`` - ``one``
+
+
+------------
+
 .. index:: binomial/3
 .. _natural/0::binomial/3:
 
@@ -131,6 +264,25 @@ Computes the binomial coefficient. ``N`` must be greater than or equal to ``K`` 
 |    ``binomial(N,K,Binomial)``
 | **Mode and number of proofs:**
 |    ``binomial(+non_negative_integer,+non_negative_integer,-non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: multinomial/2
+.. _natural/0::multinomial/2:
+
+``multinomial/2``
+^^^^^^^^^^^^^^^^^
+
+Computes the multinomial coefficient for a list of non-negative integers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multinomial(Integers,Multinomial)``
+| **Mode and number of proofs:**
+|    ``multinomial(+list(non_negative_integer),-non_negative_integer)`` - ``one``
 
 
 ------------
