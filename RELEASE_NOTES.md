@@ -30,6 +30,8 @@ Prolog adapter and integration files
 
 * FIXED: The integration scripts check for an outdated Logtalk user directory.
 
+* FIXED: The Windows installer check for an outdated Logtalk user directory.
+
 
 3.100.0 - May 14, 2026
 ======================

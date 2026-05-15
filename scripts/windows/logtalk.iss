@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on December 6, 2025
+; Last updated on May 15, 2026
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 #define MyAppRegUrlName "Logtalk Registration.url"
 
 #define MyBaseDir "C:\lgt3git"
-#define MyAppVer StringChange(FileRead(FileOpen(MyBaseDir + "\VERSION.txt")), '-stable', '')
+#define MyAppVer FileRead(FileOpen(MyBaseDir + "\VERSION.txt"))
 
 #define MyBackupFolderDate GetDateTimeString('yyyy-mm-dd-hhnnss', '-', ':')
 
@@ -853,6 +853,64 @@ begin
   end;
 end;
 
+function PackLogtalkVersion(const Version: String): Int64;
+var
+  Major, Minor, Patch, Build: Word;
+  MajorEnd, MinorEnd, PatchEnd: Integer;
+  NumericVersion: String;
+begin
+  NumericVersion := Version;
+  PatchEnd := Pos('-', NumericVersion);
+  if PatchEnd <> 0 then
+    NumericVersion := Copy(NumericVersion, 1, PatchEnd - 1);
+
+  MajorEnd := Pos('.', NumericVersion);
+  MinorEnd := Pos('.', Copy(NumericVersion, MajorEnd + 1, Length(NumericVersion)));
+  MinorEnd := MajorEnd + MinorEnd;
+  PatchEnd := Pos('.', Copy(NumericVersion, MinorEnd + 1, Length(NumericVersion)));
+
+  if PatchEnd = 0 then
+    PatchEnd := Length(NumericVersion) + 1
+  else
+    PatchEnd := MinorEnd + PatchEnd;
+
+  Major := StrToInt(Copy(NumericVersion, 1, MajorEnd - 1));
+  Minor := StrToInt(Copy(NumericVersion, MajorEnd + 1, MinorEnd - MajorEnd - 1));
+  Patch := StrToInt(Copy(NumericVersion, MinorEnd + 1, PatchEnd - MinorEnd - 1));
+  Build := 0;
+
+  Result := PackVersionComponents(Major, Minor, Patch, Build);
+end;
+
+function GetLogtalkVersionSuffix(const Version: String): String;
+var
+  SuffixStart: Integer;
+begin
+  SuffixStart := Pos('-', Version);
+  Result := Copy(Version, SuffixStart + 1, Length(Version));
+end;
+
+function InstalledVersionIsOlder(const InstalledVersion: String): Boolean;
+var
+  InstalledPackedVersion, CurrentPackedVersion: Int64;
+  InstalledVersionSuffix, CurrentVersionSuffix: String;
+  Comparison: Integer;
+begin
+  InstalledPackedVersion := PackLogtalkVersion(InstalledVersion);
+  CurrentPackedVersion := PackLogtalkVersion(ExpandConstant('{#MyAppVer}'));
+  Comparison := ComparePackedVersion(InstalledPackedVersion, CurrentPackedVersion);
+
+  if Comparison < 0 then
+    Result := True
+  else if Comparison > 0 then
+    Result := False
+  else begin
+    InstalledVersionSuffix := GetLogtalkVersionSuffix(InstalledVersion);
+    CurrentVersionSuffix := GetLogtalkVersionSuffix(ExpandConstant('{#MyAppVer}'));
+    Result := CompareStr(InstalledVersionSuffix, CurrentVersionSuffix) < 0;
+  end;
+end;
+
 procedure InitializeWizard;
 var
   Version, InstalledVersion: String;
@@ -908,7 +966,7 @@ begin
     InstalledVersion := 'no_installed'
   else
     InstalledVersion := 'no_installed';
-  if (CompareStr(InstalledVersion, 'no_installed') <> 0) and (CompareStr(InstalledVersion, ExpandConstant('{#MyAppVer}')) < 0) then
+  if (CompareStr(InstalledVersion, 'no_installed') <> 0) and InstalledVersionIsOlder(InstalledVersion) then
   begin
     Warning := 'Your Logtalk user directory is outdated: ' + InstalledVersion + ' < ' + ExpandConstant('{#MyAppVer}')
                + Chr(13) + Chr(13)
