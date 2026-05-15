@@ -26,7 +26,7 @@
 #define MyAppRegUrlName "Logtalk Registration.url"
 
 #define MyBaseDir "C:\lgt3git"
-#define MyAppVer FileRead(FileOpen(MyBaseDir + "\VERSION.txt"))
+#define MyAppVer StringChange(FileRead(FileOpen(MyBaseDir + "\VERSION.txt")), '-stable', '')
 
 #define MyBackupFolderDate GetDateTimeString('yyyy-mm-dd-hhnnss', '-', ':')
 
@@ -853,62 +853,53 @@ begin
   end;
 end;
 
-function PackLogtalkVersion(const Version: String): Int64;
+procedure ParseLogtalkVersion(const Version: String; var Major, Minor, Patch: Integer; var Suffix: String);
 var
-  Major, Minor, Patch, Build: Word;
-  MajorEnd, MinorEnd, PatchEnd: Integer;
-  NumericVersion: String;
+  NumericVersion, MinorAndPatch: String;
+  SuffixStart, MajorEnd, MinorEnd: Integer;
 begin
   NumericVersion := Version;
-  PatchEnd := Pos('-', NumericVersion);
-  if PatchEnd <> 0 then
-    NumericVersion := Copy(NumericVersion, 1, PatchEnd - 1);
+  Suffix := '';
+
+  SuffixStart := Pos('-', NumericVersion);
+  if SuffixStart > 0 then
+  begin
+    Suffix := Copy(NumericVersion, SuffixStart + 1, Length(NumericVersion));
+    NumericVersion := Copy(NumericVersion, 1, SuffixStart - 1);
+  end;
 
   MajorEnd := Pos('.', NumericVersion);
-  MinorEnd := Pos('.', Copy(NumericVersion, MajorEnd + 1, Length(NumericVersion)));
-  MinorEnd := MajorEnd + MinorEnd;
-  PatchEnd := Pos('.', Copy(NumericVersion, MinorEnd + 1, Length(NumericVersion)));
-
-  if PatchEnd = 0 then
-    PatchEnd := Length(NumericVersion) + 1
-  else
-    PatchEnd := MinorEnd + PatchEnd;
+  MinorAndPatch := Copy(NumericVersion, MajorEnd + 1, Length(NumericVersion));
+  MinorEnd := Pos('.', MinorAndPatch);
 
   Major := StrToInt(Copy(NumericVersion, 1, MajorEnd - 1));
-  Minor := StrToInt(Copy(NumericVersion, MajorEnd + 1, MinorEnd - MajorEnd - 1));
-  Patch := StrToInt(Copy(NumericVersion, MinorEnd + 1, PatchEnd - MinorEnd - 1));
-  Build := 0;
-
-  Result := PackVersionComponents(Major, Minor, Patch, Build);
+  Minor := StrToInt(Copy(MinorAndPatch, 1, MinorEnd - 1));
+  Patch := StrToInt(Copy(MinorAndPatch, MinorEnd + 1, Length(MinorAndPatch)));
 end;
 
-function GetLogtalkVersionSuffix(const Version: String): String;
+function LogtalkVersionIsOlder(const InstalledVersion, CurrentVersion: String): Boolean;
 var
-  SuffixStart: Integer;
+  InstalledMajor, InstalledMinor, InstalledPatch: Integer;
+  CurrentMajor, CurrentMinor, CurrentPatch: Integer;
+  InstalledSuffix, CurrentSuffix: String;
 begin
-  SuffixStart := Pos('-', Version);
-  Result := Copy(Version, SuffixStart + 1, Length(Version));
-end;
+  ParseLogtalkVersion(InstalledVersion, InstalledMajor, InstalledMinor, InstalledPatch, InstalledSuffix);
+  ParseLogtalkVersion(CurrentVersion, CurrentMajor, CurrentMinor, CurrentPatch, CurrentSuffix);
 
-function InstalledVersionIsOlder(const InstalledVersion: String): Boolean;
-var
-  InstalledPackedVersion, CurrentPackedVersion: Int64;
-  InstalledVersionSuffix, CurrentVersionSuffix: String;
-  Comparison: Integer;
-begin
-  InstalledPackedVersion := PackLogtalkVersion(InstalledVersion);
-  CurrentPackedVersion := PackLogtalkVersion(ExpandConstant('{#MyAppVer}'));
-  Comparison := ComparePackedVersion(InstalledPackedVersion, CurrentPackedVersion);
-
-  if Comparison < 0 then
-    Result := True
-  else if Comparison > 0 then
-    Result := False
-  else begin
-    InstalledVersionSuffix := GetLogtalkVersionSuffix(InstalledVersion);
-    CurrentVersionSuffix := GetLogtalkVersionSuffix(ExpandConstant('{#MyAppVer}'));
-    Result := CompareStr(InstalledVersionSuffix, CurrentVersionSuffix) < 0;
-  end;
+  if InstalledMajor < CurrentMajor then
+    Result := true
+  else if InstalledMajor > CurrentMajor then
+    Result := false
+  else if InstalledMinor < CurrentMinor then
+    Result := true
+  else if InstalledMinor > CurrentMinor then
+    Result := false
+  else if InstalledPatch < CurrentPatch then
+    Result := true
+  else if InstalledPatch > CurrentPatch then
+    Result := false
+  else
+    Result := CompareStr(InstalledSuffix, CurrentSuffix) < 0;
 end;
 
 procedure InitializeWizard;
@@ -966,7 +957,7 @@ begin
     InstalledVersion := 'no_installed'
   else
     InstalledVersion := 'no_installed';
-  if (CompareStr(InstalledVersion, 'no_installed') <> 0) and InstalledVersionIsOlder(InstalledVersion) then
+  if (CompareStr(InstalledVersion, 'no_installed') <> 0) and LogtalkVersionIsOlder(InstalledVersion, ExpandConstant('{#MyAppVer}')) then
   begin
     Warning := 'Your Logtalk user directory is outdated: ' + InstalledVersion + ' < ' + ExpandConstant('{#MyAppVer}')
                + Chr(13) + Chr(13)
