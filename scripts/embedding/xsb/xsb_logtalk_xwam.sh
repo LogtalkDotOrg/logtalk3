@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.xwam file with a Logtalk
 ##   application
 ##
-##   Last updated on March 23, 2025
+##   Last updated on May 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -28,8 +28,42 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.20"
+	echo "$(basename "$0") 0.21"
 	exit 0
+}
+
+logtalk_version_is_older() {
+	local user_version
+	local system_version
+	local user_major user_minor user_patch user_suffix
+	local system_major system_minor system_patch system_suffix
+	local IFS='.-'
+
+	user_version=$(cat "$LOGTALKUSER/VERSION.txt")
+	system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+
+	read -r user_major user_minor user_patch user_suffix <<< "$user_version"
+	read -r system_major system_minor system_patch system_suffix <<< "$system_version"
+
+	if ((10#$user_major < 10#$system_major)); then
+		return 0
+	elif ((10#$user_major > 10#$system_major)); then
+		return 1
+	fi
+
+	if ((10#$user_minor < 10#$system_minor)); then
+		return 0
+	elif ((10#$user_minor > 10#$system_minor)); then
+		return 1
+	fi
+
+	if ((10#$user_patch < 10#$system_patch)); then
+		return 0
+	elif ((10#$user_patch > 10#$system_patch)); then
+		return 1
+	fi
+
+	[ "$user_suffix" \< "$system_suffix" ]
 }
 
 if ! [ "$LOGTALKHOME" ]; then
@@ -83,38 +117,9 @@ if [ -d "$LOGTALKUSER" ]; then
 		echo "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	else
-		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
-		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
-		if [ "$user_version" \< "$system_version" ]; then
-			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
-			echo "    $user_version < $system_version"
-			echo "Creating an up-to-date Logtalk user directory..."
-			logtalk_user_setup
-		fi
-	fi
-else
-	echo "Cannot find \$LOGTALKUSER directory! Creating a new Logtalk user directory"
-	echo "by running the \"logtalk_user_setup\" shell script:"
-	logtalk_user_setup
-fi
-
-if ! [ "$LOGTALKUSER" ]; then
-	echo "The environment variable LOGTALKUSER should be defined first, pointing"
-	echo "to your Logtalk user directory!"
-	echo "Trying the default location for the Logtalk user directory..."
-	echo
-	export LOGTALKUSER=$HOME/logtalk
-fi
-
-if [ -d "$LOGTALKUSER" ]; then
-	if ! [ -f "$LOGTALKUSER/VERSION.txt" ]; then
-		echo "Cannot find version information in the Logtalk user directory at $LOGTALKUSER!"
-		echo "Creating an up-to-date Logtalk user directory..."
-		logtalk_user_setup
-	else
-		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
-		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
-		if [ "$user_version" \< "$system_version" ]; then
+		if logtalk_version_is_older; then
+			system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+			user_version=$(cat "$LOGTALKUSER/VERSION.txt")
 			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
 			echo "    $user_version < $system_version"
 			echo "Creating an up-to-date Logtalk user directory..."

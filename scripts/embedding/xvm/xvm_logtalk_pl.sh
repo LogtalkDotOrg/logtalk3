@@ -5,7 +5,7 @@
 ##   This script creates a XVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ##
-##   Last updated on March 23, 2025
+##   Last updated on May 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -27,8 +27,42 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
+}
+
+logtalk_version_is_older() {
+	local user_version
+	local system_version
+	local user_major user_minor user_patch user_suffix
+	local system_major system_minor system_patch system_suffix
+	local IFS='.-'
+
+	user_version=$(cat "$LOGTALKUSER/VERSION.txt")
+	system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+
+	read -r user_major user_minor user_patch user_suffix <<< "$user_version"
+	read -r system_major system_minor system_patch system_suffix <<< "$system_version"
+
+	if ((10#$user_major < 10#$system_major)); then
+		return 0
+	elif ((10#$user_major > 10#$system_major)); then
+		return 1
+	fi
+
+	if ((10#$user_minor < 10#$system_minor)); then
+		return 0
+	elif ((10#$user_minor > 10#$system_minor)); then
+		return 1
+	fi
+
+	if ((10#$user_patch < 10#$system_patch)); then
+		return 0
+	elif ((10#$user_patch > 10#$system_patch)); then
+		return 1
+	fi
+
+	[ "$user_suffix" \< "$system_suffix" ]
 }
 
 if ! [ "$LOGTALKHOME" ]; then
@@ -82,9 +116,9 @@ if [ -d "$LOGTALKUSER" ]; then
 		echo "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	else
-		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
-		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
-		if [ "$user_version" \< "$system_version" ]; then
+		if logtalk_version_is_older; then
+			system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+			user_version=$(cat "$LOGTALKUSER/VERSION.txt")
 			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
 			echo "    $user_version < $system_version"
 			echo "Creating an up-to-date Logtalk user directory..."

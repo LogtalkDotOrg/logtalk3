@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on December 28, 2025
+##   Last updated on May 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -48,7 +48,41 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.5"
+	Write-Output "$myName 0.6"
+}
+
+function Test-LogtalkVersionIsOlder {
+	$user_version = Get-Content (Join-Path $env:LOGTALKUSER 'VERSION.txt')
+	$system_version = Get-Content (Join-Path $env:LOGTALKHOME 'VERSION.txt')
+
+	$user_major, $user_minor, $user_patch, $user_suffix = $user_version -split '[.-]', 4
+	$system_major, $system_minor, $system_patch, $system_suffix = $system_version -split '[.-]', 4
+
+	if ([int]$user_major -lt [int]$system_major) {
+		return $true
+	}
+
+	if ([int]$user_major -gt [int]$system_major) {
+		return $false
+	}
+
+	if ([int]$user_minor -lt [int]$system_minor) {
+		return $true
+	}
+
+	if ([int]$user_minor -gt [int]$system_minor) {
+		return $false
+	}
+
+	if ([int]$user_patch -lt [int]$system_patch) {
+		return $true
+	}
+
+	if ([int]$user_patch -gt [int]$system_patch) {
+		return $false
+	}
+
+	return ($user_suffix -lt $system_suffix)
 }
 
 function Get-Logtalkhome {
@@ -193,9 +227,9 @@ if (Test-Path $env:LOGTALKUSER) {
 		Write-Output "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	} else {
-		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
-		if ($user_version -lt $system_version) {
+		if (Test-LogtalkVersionIsOlder) {
+			$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
+			$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
 			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
 			Write-Output "    $user_version < $system_version"
 			Write-Output "Creating an up-to-date Logtalk user directory..."
