@@ -37,6 +37,8 @@ Installers and installation scripts
 
 * FIXED: The embedding scripts check for an outdated Logtalk user directory.
 
+* FIXED: The embedding script examples for a saved state goal parsing issue
+with the SICStus Prolog backend.
 
 3.100.0 - May 14, 2026
 ======================

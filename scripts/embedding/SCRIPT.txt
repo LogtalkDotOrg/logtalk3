@@ -46,7 +46,7 @@ $ swipl -g "[logtalk, application]"
 % create a SWI-Prolog saved state from the "spider" text adventure example:
 
 $ cd "$LOGTALKHOME/scripts/embedding/swipl/"
-$ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l "$LOGTALKUSER/examples/adventure/spider.lgt" -g "'::'(spider,start),halt"
+$ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l "$LOGTALKUSER/examples/adventure/spider.lgt" -g "('::'(spider,start),halt)"
 $ ~/collect/spider
 
 
@@ -62,7 +62,7 @@ $ sicstus --goal "load_files(['logtalk.po','application.po'])."
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:
 
 $ cd "$LOGTALKHOME/scripts/embedding/sicstus/"
-$ ./sicstus_logtalk_po.sh -c -x -d "$HOME"/collect -n sleepy -l "$LOGTALKUSER/examples/adventure/sleepy.lgt" -g "'::'(sleepy,start),halt"
+$ ./sicstus_logtalk_po.sh -c -x -d "$HOME"/collect -n sleepy -l "$LOGTALKUSER/examples/adventure/sleepy.lgt" -g "('::'(sleepy,start),halt)"
 $ cd ~/collect
 $ sicstus -r sleepy.sav
 
@@ -70,14 +70,14 @@ $ sicstus -r sleepy.sav
 % create a YAP saved state from the "wumpus" text adventure example:
 
 $ cd "$LOGTALKHOME/scripts/embedding/yap/"
-$ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "'::'(wumpus,main),halt"
+$ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "('::'(wumpus,main),halt)"
 $ ~/collect/wumpus
 
 
 % create XVM Prolog files for embedding the "wumpus" text adventure example:
 
 $ cd "$LOGTALKHOME/scripts/embedding/xvm/"
-$ ./xvm_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "'::'(wumpus,main),halt"
+$ ./xvm_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "('::'(wumpus,main),halt)"
 $ cd ~/collect/
 $ xvmpl -f loader.pl
 
@@ -85,7 +85,7 @@ $ xvmpl -f loader.pl
 % create Trealla Prolog files for embedding the "wumpus" text adventure example:
 
 $ cd "$LOGTALKHOME/scripts/embedding/trealla/"
-$ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "'::'(wumpus,main),halt"
+$ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "('::'(wumpus,main),halt)"
 $ cd ~/collect/
 $ tpl -l loader.pl
 
@@ -93,6 +93,6 @@ $ tpl -l loader.pl
 % create ECLiPSe files for embedding the "wumpus" text adventure example:
 
 $ cd "$LOGTALKHOME/scripts/embedding/eclipse/"
-$ ./eclipse_logtalk_eco.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "'::'(wumpus,main),halt"
+$ ./eclipse_logtalk_eco.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -g "('::'(wumpus,main),halt)"
 $ cd ~/collect/
 $ eclipse -L iso -t user -f loader.eco
