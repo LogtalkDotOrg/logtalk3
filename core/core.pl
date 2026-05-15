@@ -8994,7 +8994,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_clean_lookup_caches' :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		with_mutex('$lgt_caches', '$lgt_clean_lookup_caches_unguarded')
+		(	'$lgt_runtime_initialization_completed_' ->
+			with_mutex('$lgt_caches', '$lgt_clean_lookup_caches_unguarded')
+		;	'$lgt_clean_lookup_caches_unguarded'
+		)
 	;	'$lgt_clean_lookup_caches_unguarded'
 	).
 
@@ -9020,7 +9023,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_clean_lookup_caches'(Pred) :-
 	(	'$lgt_prolog_feature'(threads, supported) ->
-		with_mutex('$lgt_caches', '$lgt_clean_lookup_caches_unguarded'(Pred))
+		(	'$lgt_runtime_initialization_completed_' ->
+			with_mutex('$lgt_caches', '$lgt_clean_lookup_caches_unguarded'(Pred))
+		;	'$lgt_clean_lookup_caches_unguarded'(Pred)
+		)
 	;	'$lgt_clean_lookup_caches_unguarded'(Pred)
 	).
 

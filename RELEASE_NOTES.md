@@ -22,8 +22,14 @@ RELEASE NOTES
 =============
 
 
-3.100.1 - May 15, 2026
+3.100.1 - May 16, 2026
 ======================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Lookup cache handling bug breaking embedding scripts using a settings
+file with multi-threaded backends.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -37,8 +43,9 @@ Installers and installation scripts
 
 * FIXED: The embedding scripts check for an outdated Logtalk user directory.
 
-* FIXED: The embedding script examples for a saved state goal parsing issue
-with the SICStus Prolog backend.
+* FIXED: The embedding script examples with a startup goal for the embedded
+application.
+
 
 3.100.0 - May 14, 2026
 ======================
