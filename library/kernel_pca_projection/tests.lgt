@@ -123,7 +123,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-18,
 		comment is 'Unit tests for the "kernel_pca_projection" library.'
 	]).
 
@@ -132,7 +132,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	cover(kernel_pca_projection).
@@ -197,7 +197,7 @@
 		memberchk(preprocessing(Preprocessing), Diagnostics),
 		memberchk(options(Options), Diagnostics),
 		memberchk(shortfall_policy(ShortfallPolicy), Options),
-		assertion(\+ memberchk(shortfall(_), Diagnostics)).
+		assertion(\+ member(shortfall(_), Diagnostics)).
 
 	test(kernel_pca_learn_2_component_count_exceeds_sample_rank, error(domain_error(component_count, 8-7))) :-
 		kernel_pca_projection::learn(correlated_plane, _DimensionReducer, [n_components(8)]).

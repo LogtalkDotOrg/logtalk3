@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-05-18,
 		comment is 'Unit tests for the "clo_span_pattern_miner" library.'
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	cover(clo_span_pattern_miner).
@@ -44,14 +44,14 @@
 	test(clo_span_mine_3_closed_patterns, deterministic(Patterns == [sequence_pattern([[a], [b]], 5), sequence_pattern([[a], [b], [c]], 2)])) :-
 		clo_span_pattern_miner::mine(closure_sequences, clo_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]).
 
-		test(clo_span_mine_3_prefix_ladder_closed_pattern, deterministic(Support == 2)) :-
+	test(clo_span_mine_3_prefix_ladder_closed_pattern, deterministic(Support == 2)) :-
 		clo_span_pattern_miner::mine(prefix_ladder_sequences, clo_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(3)]),
-				memberchk(sequence_pattern([[a], [b], [c]], Support), Patterns).
+		memberchk(sequence_pattern([[a], [b], [c]], Support), Patterns).
 
-		test(clo_span_mine_3_same_event_and_next_event_extensions, deterministic([SameEventSupport, NextEventSupport] == [3, 3])) :-
+	test(clo_span_mine_3_same_event_and_next_event_extensions, deterministic([SameEventSupport, NextEventSupport] == [3, 3])) :-
 		clo_span_pattern_miner::mine(same_event_vs_next_event_sequences, clo_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(2), maximum_pattern_length(2)]),
-				memberchk(sequence_pattern([[a, b]], SameEventSupport), Patterns),
-				memberchk(sequence_pattern([[a], [b]], NextEventSupport), Patterns).
+		memberchk(sequence_pattern([[a, b]], SameEventSupport), Patterns),
+		memberchk(sequence_pattern([[a], [b]], NextEventSupport), Patterns).
 
 	test(clo_span_mine_3_minimum_pattern_length_filter, deterministic(Patterns == [sequence_pattern([[a], [b]], 4)])) :-
 		clo_span_pattern_miner::mine(prefix_ladder_sequences, clo_span_pattern_miner(_ItemDomain, Patterns, _Options), [minimum_support_count(4), maximum_pattern_length(2), minimum_pattern_length(2)]).
@@ -65,7 +65,7 @@
 	test(clo_span_prunes_projected_database_equivalent_branch, deterministic((
 		[PrefixSingleSupport, PrefixClosedSupport, ClosedSupport] == [5, 5, 5],
 		SignatureB == SignatureAB,
-		\+ memberchk(sequence_pattern([[b]], 5), ClosedPatterns)
+		\+ member(sequence_pattern([[b]], 5), ClosedPatterns)
 	))) :-
 		Options = [minimum_support_count(2), maximum_pattern_length(3)],
 		prefix_span_pattern_miner::mine(closure_sequences, prefix_span_pattern_miner(_PrefixDomain, PrefixPatterns, _PrefixOptions), Options),
@@ -82,13 +82,13 @@
 		prefix_span_pattern_miner::mine(dense_overlap_sequences, prefix_span_pattern_miner(_PrefixDomain, PrefixPatterns, _PrefixOptions), Options),
 		filter_closed_patterns(PrefixPatterns, FilteredPatterns).
 
-		test(clo_span_diagnostics_2, deterministic([Model, BackwardPruning, ClosureFilter, SupportLayout] == [clo_span_pattern_miner, projected_database_equivalence, projected_database_equivalence_and_same_support_frontier_pruning, projected_database])) :-
+	test(clo_span_diagnostics_2, deterministic([Model, BackwardPruning, ClosureFilter, SupportLayout] == [clo_span_pattern_miner, projected_database_equivalence, projected_database_equivalence_and_same_support_frontier_pruning, projected_database])) :-
 		clo_span_pattern_miner::mine(closure_sequences, PatternMiner, [minimum_support_count(2), maximum_pattern_length(3)]),
 		clo_span_pattern_miner::diagnostics(PatternMiner, Diagnostics),
-				memberchk(model(Model), Diagnostics),
-				memberchk(backward_pruning(BackwardPruning), Diagnostics),
-				memberchk(closure_filter(ClosureFilter), Diagnostics),
-				memberchk(support_layout(SupportLayout), Diagnostics).
+		memberchk(model(Model), Diagnostics),
+		memberchk(backward_pruning(BackwardPruning), Diagnostics),
+		memberchk(closure_filter(ClosureFilter), Diagnostics),
+		memberchk(support_layout(SupportLayout), Diagnostics).
 
 	test(clo_span_valid_pattern_miner_1, deterministic) :-
 		clo_span_pattern_miner::mine(closure_sequences, PatternMiner, [minimum_support_count(2), maximum_pattern_length(3)]),
@@ -121,6 +121,8 @@
 
 	test(clo_span_mine_2_invalid_duplicate_id_dataset, error(domain_error(unique_sequence_ids, [1, 1]))) :-
 		clo_span_pattern_miner::mine(invalid_duplicate_id_sequences, _PatternMiner).
+
+	% auxiliary predicates
 
 	projected_signature(Dataset, Pattern, Signature) :-
 		findall(projected(RemainingItemset, RemainingSequence),

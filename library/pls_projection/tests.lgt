@@ -149,7 +149,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-18,
 		comment is 'Unit tests for the "pls_projection" library.'
 	]).
 
@@ -158,7 +158,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	cover(pls_projection).
@@ -220,7 +220,7 @@
 		assertion(memberchk(shortfall_policy(truncate), Options)),
 		memberchk(target_loadings(TargetLoadings), Diagnostics),
 		assertion(length(TargetLoadings, 2)),
-		assertion(\+ memberchk(shortfall(_), Diagnostics)).
+		assertion(\+ member(shortfall(_), Diagnostics)).
 
 	test(pls_projection_transform_3_component_names, deterministic) :-
 		pls_projection::learn(target_latent_measurements, DimensionReducer),
