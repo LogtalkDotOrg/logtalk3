@@ -23,9 +23,9 @@
 	implements(toml_protocol)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-05-18,
 		comment is 'TOML parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding TOML tables. Possible values are ``compound`` (default) and ``curly``.',
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, length/2, member/2, memberchk/2, valid/1 as is_list/1
+		append/2, append/3, length/2, member/2, memberchk/2, reverse/2, valid/1 as is_list/1
 	]).
 
 	:- uses(reader, [
@@ -1279,22 +1279,15 @@
 		zero_codes(Next, Codes).
 
 	trim_trailing_zero_codes(Codes0, Codes) :-
-		reverse_codes(Codes0, Reversed0),
+		reverse(Codes0, Reversed0),
 		trim_leading_zero_codes(Reversed0, Reversed),
-		reverse_codes(Reversed, Codes).
+		reverse(Reversed, Codes).
 
 	trim_leading_zero_codes([0'0| Codes0], Codes) :-
 		Codes0 \== [],
 		!,
 		trim_leading_zero_codes(Codes0, Codes).
 	trim_leading_zero_codes(Codes, Codes).
-
-	reverse_codes(Codes, Reversed) :-
-		reverse_codes(Codes, [], Reversed).
-
-	reverse_codes([], Reversed, Reversed).
-	reverse_codes([Code| Codes], Acc, Reversed) :-
-		reverse_codes(Codes, [Code| Acc], Reversed).
 
 	encode_basic_string_content([], []).
 	encode_basic_string_content([0'"| StringCodes], [0'\\, 0'"| Codes]) :-
