@@ -25,7 +25,11 @@ RELEASE NOTES
 3.101.0 - May ??, 2026
 ======================
 
+Library
+-------
 
+* FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
+alphabet entries were swapped).
 
 
 3.100.1 - May 16, 2026
