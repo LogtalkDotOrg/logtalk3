@@ -28,6 +28,8 @@ RELEASE NOTES
 Library
 -------
 
+* ADDED: New `reader::line_to_bytes/2-3` library predicates.
+
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).
 

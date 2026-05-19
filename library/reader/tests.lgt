@@ -23,13 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2022-12-01,
+		date is 2026-05-19,
 		comment is 'Unit tests for the "reader" library.'
 	]).
 
 	cover(reader).
+
+	cleanup :-
+		^^clean_text_input,
+		^^clean_binary_input.
 
 	% file reader predicates
 
@@ -457,8 +461,51 @@
 		reader::line_to_codes(Stream, Codes, []),
 		close(Stream).
 
-	cleanup :-
-		^^clean_text_input.
+	test(reader_line_to_bytes_2_01, true(Bytes == end_of_file)) :-
+		binary_file_stream('test_files/empty', Stream),
+		reader::line_to_bytes(Stream, Bytes),
+		close(Stream).
+
+	test(reader_line_to_bytes_2_02, true(Bytes == [97,98,99])) :-
+		binary_file_stream('test_files/lines', Stream),
+		reader::line_to_bytes(Stream, Bytes),
+		close(Stream).
+
+	test(reader_line_to_bytes_2_03, true([Bytes1,Bytes2,Bytes3] == [[97,98,99],[100,101,102],[103,104,105]])) :-
+		binary_file_stream('test_files/lines', Stream),
+		reader::line_to_bytes(Stream, Bytes1),
+		reader::line_to_bytes(Stream, Bytes2),
+		reader::line_to_bytes(Stream, Bytes3),
+		close(Stream).
+
+	test(reader_line_to_bytes_2_04, true([Bytes1,Bytes2,Bytes3,Bytes4] == [[97,98,99],[100,101,102],[103,104,105],end_of_file])) :-
+		binary_file_stream('test_files/lines', Stream),
+		reader::line_to_bytes(Stream, Bytes1),
+		reader::line_to_bytes(Stream, Bytes2),
+		reader::line_to_bytes(Stream, Bytes3),
+		reader::line_to_bytes(Stream, Bytes4),
+		close(Stream).
+
+	test(reader_line_to_bytes_2_05, true([Bytes] == [[65,66,67,68,69,70]])) :-
+		binary_file_stream('test_files/bytes', Stream),
+		reader::line_to_bytes(Stream, Bytes),
+		close(Stream).
+
+	test(reader_line_to_bytes_2_06, true([Bytes1,Bytes2] == [[65,66,67,68,69,70],end_of_file])) :-
+		binary_file_stream('test_files/bytes', Stream),
+		reader::line_to_bytes(Stream, Bytes1),
+		reader::line_to_bytes(Stream, Bytes2),
+		close(Stream).
+
+	test(reader_line_to_bytes_3_01, true(Bytes == [])) :-
+		binary_file_stream('test_files/empty', Stream),
+		reader::line_to_bytes(Stream, Bytes, []),
+		close(Stream).
+
+	test(reader_line_to_bytes_3_02, true(Bytes == [97,98,99,10])) :-
+		binary_file_stream('test_files/lines', Stream),
+		reader::line_to_bytes(Stream, Bytes, []),
+		close(Stream).
 
 	% auxiliary predicates
 

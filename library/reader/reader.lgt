@@ -22,9 +22,9 @@
 :- object(reader).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2023-11-14,
+		date is 2026-05-19,
 		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.'
 	]).
 
@@ -172,6 +172,20 @@
 	:- info(line_to_codes/3, [
 		comment is 'Reads a line from a text stream into a list of character codes. Keeps the end-of-line marker normalized to the line feed control character code. The list is terminated by the given tail, which is unified with the empty list at the end of the file.',
 		argnames is ['Stream', 'Codes', 'Tail']
+	]).
+
+	:- public(line_to_bytes/2).
+	:- mode(line_to_bytes(+stream_or_alias, -types([atom,list(byte)])), one).
+	:- info(line_to_bytes/2, [
+		comment is 'Reads a line from a binary stream into a list of bytes. Discards the end-of-line bytes. Unifies ``Bytes`` with ``end_of_file`` at the end of the file.',
+		argnames is ['Stream', 'Bytes']
+	]).
+
+	:- public(line_to_bytes/3).
+	:- mode(line_to_bytes(+stream_or_alias, -list(byte), ?term), one).
+	:- info(line_to_bytes/3, [
+		comment is 'Reads a line from a binary stream into a list of bytes. Keeps the end-of-line marker normalized to the line feed control byte. The list is terminated by the given tail, which is unified with the empty list at the end of the file.',
+		argnames is ['Stream', 'Bytes', 'Tail']
 	]).
 
 	file_to_codes(File, Codes) :-
@@ -361,6 +375,55 @@
 	line_to_codes_tail(Code, Stream, [Code| Codes], Tail) :-
 		get_code(Stream, NextCode),
 		line_to_codes_tail(NextCode, Stream, Codes, Tail).
+
+	line_to_bytes(Stream, Bytes) :-
+		(	at_end_of_stream(Stream) ->
+			Bytes = end_of_file
+		;	get_byte(Stream, Byte),
+			(	Byte == -1 ->
+				Bytes = end_of_file
+			;	line_to_bytes_no_tail(Byte, Stream, Bytes)
+			)
+		).
+
+	line_to_bytes_no_tail(-1, _, []) :-
+		!.
+	line_to_bytes_no_tail(10, _, []) :-
+		!.
+	line_to_bytes_no_tail(13, Stream, []) :-
+		!,
+		(	peek_byte(Stream, 10) ->
+			get_byte(Stream, 10)
+		;	true
+		).
+	line_to_bytes_no_tail(Byte, Stream, [Byte| Bytes]) :-
+		get_byte(Stream, NextByte),
+		line_to_bytes_no_tail(NextByte, Stream, Bytes).
+
+	line_to_bytes(Stream, Bytes, Tail) :-
+		(	at_end_of_stream(Stream) ->
+			Bytes = Tail, Tail = []
+		;	get_byte(Stream, Byte),
+			(	Byte == -1 ->
+				Bytes = Tail, Tail = []
+			;	line_to_bytes_tail(Byte, Stream, Bytes, Tail)
+			)
+		).
+
+	line_to_bytes_tail(-1, _, Tail, Tail) :-
+		!,
+		Tail = [].
+	line_to_bytes_tail(10, _, [10| Tail], Tail) :-
+		!.
+	line_to_bytes_tail(13, Stream, [10| Tail], Tail) :-
+		!,
+		(	peek_byte(Stream, 10) ->
+			get_byte(Stream, 10)
+		;	true
+		).
+	line_to_bytes_tail(Byte, Stream, [Byte| Bytes], Tail) :-
+		get_byte(Stream, NextByte),
+		line_to_bytes_tail(NextByte, Stream, Bytes, Tail).
 
 	stream_to_terms(Stream, Terms) :-
 		stream_to_terms(Stream, Terms, []).
