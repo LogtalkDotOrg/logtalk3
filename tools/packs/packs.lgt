@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:89:0,
+		version is 0:90:0,
 		author is 'Paulo Moura',
-		date is 2026-03-24,
+		date is 2026-05-19,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -318,6 +318,15 @@
 	]).
 
 	:- public(search/1).
+	:- mode(search(+atom), one).
+	:- info(search/1, [
+		comment is 'Searches packs whose name or description includes the search term (case sensitive).',
+		argnames is ['Term'],
+		exceptions is [
+			'``Term`` is a variable' - instantiation_error,
+			'``Term`` is neither a variable nor an atom' - type_error(atom, 'Term')
+		]
+	]).
 
 	:- public(pack_dependency/6).
 	:- mode(pack_dependency(?atom, ?atom, ?compound, ?atom, ?atom, ?compound), zero_or_more).
@@ -358,15 +367,6 @@
 			'``DependencyVersion`` is neither a variable nor a compound term' - type_error(compound, 'DependencyVersion')
 		],
 		see_also is [pack_dependency/6, loaded_pack/3]
-	]).
-	:- mode(search(+atom), one).
-	:- info(search/1, [
-		comment is 'Searches packs whose name or description includes the search term (case sensitive).',
-		argnames is ['Term'],
-		exceptions is [
-			'``Term`` is a variable' - instantiation_error,
-			'``Term`` is neither a variable nor an atom' - type_error(atom, 'Term')
-		]
 	]).
 
 	:- public(install/4).
@@ -804,11 +804,7 @@
 	available(Registry, Pack) :-
 		check(var_or(atom), Registry),
 		check(var_or(atom), Pack),
-		(	ground(Registry-Pack) ->
-			registry_pack(Registry, Pack, _),
-			!
-		;	registry_pack(Registry, Pack, _)
-		).
+		registry_pack(Registry, Pack, _).
 
 	available(Registry) :-
 		check(atom, Registry),
@@ -1037,7 +1033,7 @@
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
 		;	registry_pack(Registry, Pack, PackObject) ->
-			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability),
+			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability) ->
 				print_message(comment, packs, installing_pack(Registry, Pack, Version)),
 				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 				check_portability(Portability, Options),
@@ -1255,7 +1251,11 @@
 		check(var_or(compound), Version),
 		check(var_or(compound), Metadata),
 		installed_pack(Registry, Pack, Version, Pinned),
-		registry_pack(Registry, Pack, PackObject),
+		(	atom(Registry), atom(Pack) ->
+			registry_pack(Registry, Pack, PackObject),
+			!
+		;	registry_pack(Registry, Pack, PackObject)
+		),
 		directory(Pack, Directory),
 		PackObject::name(Name),
 		(	PackObject::description(Description0) ->
@@ -1289,7 +1289,11 @@
 		check(var_or(compound), Version),
 		check(var_or(compound), Property),
 		pack_metadata(Registry, Pack, Version, Metadata),
-		pack_metadata_property(Metadata, Property).
+		(	var(Property) ->
+			pack_metadata_property(Metadata, Property)
+		;	pack_metadata_property(Metadata, Property),
+			!
+		).
 
 	loaded_pack(Registry, Pack, Version) :-
 		check(var_or(atom), Registry),
@@ -1488,7 +1492,7 @@
 			print_message(error, packs, orphaned_pack(Registry, Pack)),
 			fail
 		;	pack_object(Pack, PackObject),
-			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability),
+			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
 			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
 				check_availability(Registry, Pack, URL, CheckSum, Options),
 				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
@@ -1624,23 +1628,23 @@
 			PacksData0
 		),
 		sort(PacksData0, PacksData),
-		write_terms(Stream, PacksData),
+		write_terms(PacksData, Stream),
 		findall(
 			pinned_registry(Registry),
 			(member(Registry, SortedRegistries), registries::defined(Registry, _, _, true)),
 			PinnedRegistries0
 		),
 		sort(PinnedRegistries0, PinnedRegistries),
-		write_terms(Stream, PinnedRegistries),
+		write_terms(PinnedRegistries, Stream),
 		findall(
 			pinned_pack(Pack),
 			installed_pack(_, Pack, _, true),
 			PinnedPacks0
 		),
 		sort(PinnedPacks0, PinnedPacks),
-		write_terms(Stream, PinnedPacks),
+		write_terms(PinnedPacks, Stream),
 		( 	^^option(lock(true), Options) ->
-			write_terms(Stream, [lockfile_version(1)]),
+			write_terms([lockfile_version(1)], Stream),
 			findall(
 				lock_registry_commit(Registry, Commit),
 				(	member(Registry, SortedRegistries),
@@ -1651,7 +1655,7 @@
 				RegistryCommitFacts0
 			),
 			sort(RegistryCommitFacts0, RegistryCommitFacts),
-			write_terms(Stream, RegistryCommitFacts),
+			write_terms(RegistryCommitFacts, Stream),
 			findall(
 				lock_integrity(Registry, Pack, Version, Algorithm, Digest),
 				(	member(pack(Registry, Pack, Version), PacksData),
@@ -1660,7 +1664,7 @@
 				LockIntegrities0
 			),
 			sort(LockIntegrities0, LockIntegrities),
-			write_terms(Stream, LockIntegrities)
+			write_terms(LockIntegrities, Stream)
 		; 	true
 		),
 		close(Stream),
@@ -1699,14 +1703,17 @@
 			read_terms(Stream, Rest)
 		).
 
-	write_terms(_, []).
-	write_terms(Stream, [Term| Terms]) :-
+	write_terms([], _).
+	write_terms([Term| Terms], Stream) :-
 		writeq(Stream, Term), write(Stream, '.\n'),
-		write_terms(Stream, Terms).
+		write_terms(Terms, Stream).
 
 	restore_terms([], _).
 	restore_terms([Term| Terms], Options) :-
-		restore_term(Term, Options),
+		(	restore_term(Term, Options) ->
+			true
+		;	print_message(error, packs, invalid_requirements_file_term(Term))
+		),
 		restore_terms(Terms, Options).
 
 	restore_term(registry(Registry, URL), Options) :-
@@ -1737,9 +1744,6 @@
 	restore_term(lockfile_version(_), _).
 	restore_term(lock_registry_commit(_, _), _).
 	restore_term(lock_integrity(_, _, _, _, _), _).
-	restore_term(Term, _) :-
-		print_message(error, packs, invalid_requirements_file_term(Term)),
-		fail.
 
 	restore_locked(Terms, Options) :-
 		check_lockfile_version(Terms),
@@ -1747,7 +1751,10 @@
 
 	restore_locked_terms([], _, _).
 	restore_locked_terms([Term| Terms], LockTerms, Options) :-
-		restore_locked_term(Term, LockTerms, Options),
+		(	restore_locked_term(Term, LockTerms, Options) ->
+			true
+		;	print_message(error, packs, invalid_requirements_file_term(Term))
+		),
 		restore_locked_terms(Terms, LockTerms, Options).
 
 	restore_locked_term(registry(Registry, URL), LockTerms, Options) :-
@@ -1780,9 +1787,6 @@
 	restore_locked_term(lockfile_version(_), _, _).
 	restore_locked_term(lock_registry_commit(_, _), _, _).
 	restore_locked_term(lock_integrity(_, _, _, _, _), _, _).
-	restore_locked_term(Term, _, _) :-
-		print_message(error, packs, invalid_requirements_file_term(Term)),
-		fail.
 
 	check_lockfile_version(Terms) :-
 		findall(Version, member(lockfile_version(Version), Terms), Versions),
@@ -2552,12 +2556,13 @@
 		object_property(PackObject, file(_, Directory)).
 
 	pack_object(Pack, PackObject) :-
-		(	var(Pack) ->
+		check(var_or(atom), Pack),
+		(	atom(Pack) ->
 			implements_protocol(PackObject, pack_protocol),
-			PackObject::name(Pack)
-		;	implements_protocol(PackObject, pack_protocol),
-			PackObject::name(Pack) ->
+			PackObject::name(Pack),
 			!
+		;	implements_protocol(PackObject, pack_protocol),
+			PackObject::name(Pack)
 		;	print_message(error, packs, unknown_pack(Pack)),
 			fail
 		).
@@ -2566,13 +2571,20 @@
 		check(var_or(atom), Registry),
 		check(var_or(atom), Pack),
 		check(var_or(atom), PackObject),
-		registry_pack(Registry, Pack, PackObject).
+		(	atom(Registry), atom(Pack) ->
+			registry_pack(Registry, Pack, PackObject),
+			!
+		;	registry_pack(Registry, Pack, PackObject)
+		).
 
 	installed_pack(Registry, Pack, Version, Pinned) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, packs, Directory),
 		directory_files(Directory, Packs, [type(directory), dot_files(false), paths(relative)]),
-		member(Pack, Packs),
+		(	var(Pack) ->
+			member(Pack, Packs)
+		;	memberchk(Pack, Packs)
+		),
 		path_concat(Directory, Pack, Path),
 		read_version(Path, Version),
 		read_registry(Path, Registry),
@@ -2758,7 +2770,8 @@
 				delete_file(Archive),
 				print_message(error, packs, pack_archive_discarded(Pack)),
 				fail
-			)
+			) ->
+			true
 		;	atom_concat('file://', File, URL) ->
 			internal_os_path(File, OSFile),
 			(	operating_system_type(windows) ->
@@ -2772,7 +2785,8 @@
 				;	atomic_list_concat(['cp "', OSFile, '" "', Archive, '"'], Command)
 				)
 			),
-			^^command(Command, pack_archive_copy_failed(Pack, URL))
+			^^command(Command, pack_archive_copy_failed(Pack, URL)),
+			IsGitArchive = false
 		;	git_archive_url(URL, Remote, Tag) ->
 			^^option(git(GitExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
@@ -3017,6 +3031,7 @@
 	valid_option(compatible(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(status(CompatibleStatus)) :-
+		ground(CompatibleStatus),
 		once((CompatibleStatus == all; forall(member(Status, CompatibleStatus), memberchk(Status, [stable, rc, beta, alpha, experimental, deprecated])))).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).

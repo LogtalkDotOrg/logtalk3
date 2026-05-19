@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:1,
+		version is 0:65:0,
 		author is 'Paulo Moura',
-		date is 2026-03-21,
+		date is 2026-05-19,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -323,7 +323,10 @@
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, registries, Directory),
 		directory_files(Directory, Registries, [type(directory), dot_files(false), paths(relative)]),
-		member(Registry, Registries),
+		(	var(Registry) ->
+			member(Registry, Registries)
+		;	memberchk(Registry, Registries)
+		),
 		path_concat(Directory, Registry, Path),
 		read_url(Path, URL),
 		(	decompose_file_name(URL, _, _, '.git') ->
@@ -762,6 +765,7 @@
 	valid_option(compatible(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(status(CompatibleStatus)) :-
+		ground(CompatibleStatus),
 		once((CompatibleStatus == all; forall(member(Status, CompatibleStatus), memberchk(Status, [stable, rc, beta, alpha, experimental, deprecated])))).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).

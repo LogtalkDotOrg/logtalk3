@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:38:1,
+		version is 0:39:0,
 		author is 'Paulo Moura',
-		date is 2026-04-09,
+		date is 2026-05-19,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -79,42 +79,42 @@
 
 	% we start with no defined registries or installed packs
 
-	test(packs_registries_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
+	test(packs_registries_logtalk_packs_1_01, deterministic(LogtalkPacks == Storage)) :-
 		^^file_path('test_files/logtalk_packs/', Storage),
 		registries::logtalk_packs(LogtalkPacks).
 
-	test(packs_packs_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
+	test(packs_packs_logtalk_packs_1_01, deterministic(LogtalkPacks == Storage)) :-
 		^^file_path('test_files/logtalk_packs/', Storage),
 		packs::logtalk_packs(LogtalkPacks).
 
-	test(packs_registries_logtalk_packs_0_01, true) :-
+	test(packs_registries_logtalk_packs_0_01, deterministic) :-
 		registries::logtalk_packs.
 
-	test(packs_packs_logtalk_packs_0_02, true) :-
+	test(packs_packs_logtalk_packs_0_02, deterministic) :-
 		packs::logtalk_packs.
 
-	test(packs_registries_prefix_1_01, true(atom(Directory))) :-
+	test(packs_registries_prefix_1_01, deterministic(atom(Directory))) :-
 		registries::prefix(Directory).
 
-	test(packs_registries_prefix_0_01, true) :-
+	test(packs_registries_prefix_0_01, deterministic) :-
 		registries::prefix.
 
-	test(packs_packs_prefix_1_01, true(atom(Directory))) :-
+	test(packs_packs_prefix_1_01, deterministic(atom(Directory))) :-
 		packs::prefix(Directory).
 
-	test(packs_packs_prefix_0_01, true) :-
+	test(packs_packs_prefix_0_01, deterministic) :-
 		packs::prefix.
 
-	test(packs_registries_list_0_01, true) :-
+	test(packs_registries_list_0_01, deterministic) :-
 		registries::list.
 
 	test(packs_registries_defined_4_01, false) :-
 		registries::defined(_, _, _, _).
 
-	test(packs_packs_available_0_01, true) :-
+	test(packs_packs_available_0_01, deterministic) :-
 		packs::available.
 
-	test(packs_packs_installed_0_01, true) :-
+	test(packs_packs_installed_0_01, deterministic) :-
 		packs::installed.
 
 	test(packs_packs_installed_4_01, false) :-
@@ -123,43 +123,43 @@
 	test(packs_packs_installed_3_01, false) :-
 		packs::installed(_, _, _).
 
-	test(packs_packs_outdated_0_01, true) :-
+	test(packs_packs_outdated_0_01, deterministic) :-
 		packs::outdated.
 
 	test(packs_packs_outdated_4_01, false) :-
 		packs::outdated(_, _, _, _).
 
-	test(packs_packs_orphaned_0_01, true) :-
+	test(packs_packs_orphaned_0_01, deterministic) :-
 		packs::orphaned.
 
 	test(packs_packs_orphaned_2_01, false) :-
 		packs::orphaned(_, _).
 
-	test(packs_registries_clean_0_01, true) :-
+	test(packs_registries_clean_0_01, deterministic) :-
 		registries::clean.
 
-	test(packs_packs_clean_0_01, true) :-
+	test(packs_packs_clean_0_01, deterministic) :-
 		packs::clean.
 
-	test(packs_registries_lint_0_01, true) :-
+	test(packs_registries_lint_0_01, deterministic) :-
 		registries::lint.
 
-	test(packs_packs_lint_0_01, true) :-
+	test(packs_packs_lint_0_01, deterministic) :-
 		packs::lint.
 
-	test(packs_registries_update_0_01, true) :-
+	test(packs_registries_update_0_01, deterministic) :-
 		registries::update.
 
-	test(packs_packs_update_0_01, true) :-
+	test(packs_packs_update_0_01, deterministic) :-
 		packs::update.
 
-	test(packs_registries_help_0_01, true) :-
+	test(packs_registries_help_0_01, deterministic) :-
 		registries::help.
 
-	test(packs_packs_help_0_01, true) :-
+	test(packs_packs_help_0_01, deterministic) :-
 		packs::help.
 
-	test(packs_packs_verify_commands_availability_0_01, true) :-
+	test(packs_packs_verify_commands_availability_0_01, deterministic) :-
 		packs::verify_commands_availability.
 
 	% commit option validation
@@ -186,68 +186,68 @@
 
 	% now we add a local registry
 
-	test(packs_registries_add_1_01, true) :-
+	test(packs_registries_add_1_01, deterministic) :-
 		^^file_url('test_files/local_1_d', URL),
 		registries::add(URL).
 
-	test(packs_registries_add_3_01, true) :-
+	test(packs_registries_add_3_01, deterministic) :-
 		^^file_url('test_files/local_1_d', URL),
 		registries::add(local_1_d, URL, [update(true)]).
 
-	test(packs_registries_defined_4_02, true(Registries == [local_1_d])) :-
+	test(packs_registries_defined_4_02, deterministic(Registries == [local_1_d])) :-
 		findall(Registry, registries::defined(Registry, _, _, _), Registries).
 
-	test(packs_registries_lint_1_01, true) :-
+	test(packs_registries_lint_1_01, deterministic) :-
 		registries::lint(local_1_d).
 
 	% registry describe predicate
 
-	test(packs_registries_describe_1_01, true) :-
+	test(packs_registries_describe_1_01, deterministic) :-
 		registries::describe(local_1_d).
 
 	% registry directory
 
-	test(packs_registries_directory_2_01, true(atom(Directory))) :-
+	test(packs_registries_directory_2_01, deterministic(atom(Directory))) :-
 		registries::directory(local_1_d, Directory).
 
-	test(packs_registries_directory_1_01, true) :-
+	test(packs_registries_directory_1_01, deterministic) :-
 		registries::directory(local_1_d).
 
 	% registry readme
 
-	test(packs_registries_readme_2_01, true((Readme == FileUpperCase; Readme == FileLowerCase))) :-
+	test(packs_registries_readme_2_01, deterministic((Readme == FileUpperCase; Readme == FileLowerCase))) :-
 		^^file_path('test_files/logtalk_packs/registries/local_1_d/README.md', FileUpperCase),
 		% some backends convert paths to lower case on Windows
 		^^file_path('test_files/logtalk_packs/registries/local_1_d/readme.md', FileLowerCase),
 		registries::readme(local_1_d, Readme).
 
-	test(packs_registries_readme_1_01, true) :-
+	test(packs_registries_readme_1_01, deterministic) :-
 		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
+	test(packs_registries_provides_2_01, deterministic(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
-	test(packs_registries_update_1_01, true) :-
+	test(packs_registries_update_1_01, deterministic) :-
 		registries::update(local_1_d).
 
-	test(packs_registries_clean_1_01, true) :-
+	test(packs_registries_clean_1_01, deterministic) :-
 		registries::clean(local_1_d).
 
-	test(packs_registries_pin_1_01, true) :-
+	test(packs_registries_pin_1_01, deterministic) :-
 		registries::pin(local_1_d).
 
-	test(packs_registries_pin_1_02, true) :-
+	test(packs_registries_pin_1_02, deterministic) :-
 		registries::pin(local_1_d),
 		registries::pin(local_1_d).
 
-	test(packs_registries_unpin_1_01, true) :-
+	test(packs_registries_unpin_1_01, deterministic) :-
 		registries::unpin(local_1_d).
 
-	test(packs_registries_unpin_1_02, true) :-
+	test(packs_registries_unpin_1_02, deterministic) :-
 		registries::unpin(local_1_d),
 		registries::unpin(local_1_d).
 
-	test(packs_registries_pinned_1_01, true) :-
+	test(packs_registries_pinned_1_01, deterministic) :-
 		registries::pin(local_1_d),
 		registries::pinned(local_1_d).
 
@@ -255,101 +255,101 @@
 		registries::unpin(local_1_d),
 		registries::pinned(local_1_d).
 
-	test(packs_packs_lint_2_01, true) :-
+	test(packs_packs_lint_2_01, deterministic) :-
 		packs::lint(local_1_d, foo).
 
-	test(packs_packs_lint_1_01, true) :-
+	test(packs_packs_lint_1_01, deterministic) :-
 		packs::lint(foo).
 
-	test(packs_packs_versions_3_01, true(Versions == [3:0:0,2:0:0,1:0:0])) :-
+	test(packs_packs_versions_3_01, deterministic(Versions == [3:0:0,2:0:0,1:0:0])) :-
 		packs::versions(local_1_d, foo, Versions).
 
-	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
+	test(packs_packs_available_2_01, deterministic(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
-	test(packs_packs_available_1_01, true) :-
+	test(packs_packs_available_1_01, deterministic) :-
 		packs::available(local_1_d).
 
-	test(packs_packs_dependents_3_01, true(Dependents == [])) :-
+	test(packs_packs_dependents_3_01, deterministic(Dependents == [])) :-
 		packs::dependents(local_1_d, foo, Dependents).
 
-	test(packs_packs_dependents_2_01, true) :-
+	test(packs_packs_dependents_2_01, deterministic) :-
 		packs::dependents(local_1_d, foo).
 
-	test(packs_packs_dependents_1_01, true) :-
+	test(packs_packs_dependents_1_01, deterministic) :-
 		packs::dependents(foo).
 
-	test(packs_packs_install_1_01, true) :-
+	test(packs_packs_install_1_01, deterministic) :-
 		packs::install(bar).
 
-	test(packs_packs_install_1_02, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_1_02, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_1_d, bar, Version, Pinned).
 
-	test(packs_packs_uninstall_1_01, true) :-
+	test(packs_packs_uninstall_1_01, deterministic) :-
 		packs::uninstall(bar).
 
 	test(packs_packs_uninstall_1_02, false) :-
 		packs::installed(local_1_d, bar, _, _).
 
-	test(packs_packs_outdated_1_01, true) :-
+	test(packs_packs_outdated_1_01, deterministic) :-
 		packs::outdated(local_1_d).
 
 	% add a second local registry
 
-	test(packs_registries_add_2_01, true) :-
+	test(packs_registries_add_2_01, deterministic) :-
 		^^file_url('test_files/local_2_d.zip', URL),
 		registries::add(local_2_d, URL).
 
-	test(packs_registries_defined_4_03, true(Registries == [local_1_d, local_2_d])) :-
+	test(packs_registries_defined_4_03, deterministic(Registries == [local_1_d, local_2_d])) :-
 		findall(Registry, registries::defined(Registry, _, _, _), Registries0),
 		list::msort(Registries0, Registries).
 
-	test(packs_registries_unpin_0_01, true) :-
+	test(packs_registries_unpin_0_01, deterministic) :-
 		registries::unpin.
 
 	test(packs_registries_unpin_0_02, false) :-
 		registries::defined(_, _, _, true).
 
-	test(packs_registries_pin_0_01, true) :-
+	test(packs_registries_pin_0_01, deterministic) :-
 		registries::pin.
 
-	test(packs_registries_pin_0_02, true(Registries == [local_1_d, local_2_d])) :-
+	test(packs_registries_pin_0_02, deterministic(Registries == [local_1_d, local_2_d])) :-
 		findall(Registry, registries::defined(Registry, _, _, true), Registries0),
 		list::msort(Registries0, Registries).
 
-	test(packs_registries_provides_2_02, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
+	test(packs_registries_provides_2_02, deterministic(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
-	test(packs_packs_available_2_02, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar,local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
+	test(packs_packs_available_2_02, deterministic(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar,local_1_d-deprecated, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
 	% install packs with dependencies
 
-	test(packs_packs_install_4_01, true) :-
+	test(packs_packs_install_4_01, deterministic) :-
 		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]).
 
-	test(packs_packs_install_4_02, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_02, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_install_4_03, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_03, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
-	test(packs_packs_install_4_04, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_install_4_04, deterministic(Version-Pinned == (2:0:0)-false)) :-
 		packs::install(local_1_d, foo, 2:0:0, [update(true), compatible(false)]),
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_install_4_05, true) :-
+	test(packs_packs_install_4_05, deterministic) :-
 		packs::install(local_1_d, alt, 1:0:0, [compatible(false)]).
 
-	test(packs_packs_install_4_06, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_06, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_1_d, alt, Version, Pinned).
 
 	test(packs_packs_install_4_07, false) :-
 		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase wrong456')]).
 
-	test(packs_packs_install_4_08, true) :-
+	test(packs_packs_install_4_08, deterministic) :-
 		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase test123')]).
 
 	test(packs_packs_install_4_09, false) :-
@@ -357,12 +357,12 @@
 		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
 		packs::install(local_1_d, badsig, 1:0:0, [checksig(true), gpg(Homedir)]).
 
-	test(packs_packs_install_4_10, true) :-
+	test(packs_packs_install_4_10, deterministic) :-
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
 		packs::install(local_1_d, asc, 1:0:0, [checksig(true), gpg(Homedir)]).
 
-	test(packs_packs_install_4_11, true) :-
+	test(packs_packs_install_4_11, deterministic) :-
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
 		packs::install(local_1_d, sig, 1:0:0, [checksig(true), gpg(Homedir)]).
@@ -370,33 +370,33 @@
 	test(packs_packs_install_4_12, false) :-
 		packs::install(badcheck).
 
-	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
+	test(packs_packs_dependents_3_02, deterministic(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
 
 	test(packs_packs_install_2_01, false) :-
 		packs::install(local_1_d, deprecated).
 
-	test(packs_packs_install_3_01, true) :-
+	test(packs_packs_install_3_01, deterministic) :-
 		packs::install(local_1_d, deprecated, 1:0:0).
 
 	% print installed packs
 
-	test(packs_packs_installed_1_01, true) :-
+	test(packs_packs_installed_1_01, deterministic) :-
 		packs::installed(local_1_d).
 
 	% update all installed packs
 
-	test(packs_packs_update_2_01, true(OldVersion == NewVersion)) :-
+	test(packs_packs_update_2_01, deterministic(OldVersion == NewVersion)) :-
 		packs::installed(local_1_d, deprecated, OldVersion, _),
 		packs::update(deprecated, []),
 		packs::installed(local_1_d, deprecated, NewVersion, _).
 
-	test(packs_packs_update_2_02, true(OldVersion \== NewVersion)) :-
+	test(packs_packs_update_2_02, deterministic(OldVersion \== NewVersion)) :-
 		packs::installed(local_1_d, deprecated, OldVersion, _),
 		packs::update(deprecated, [status(all)]),
 		packs::installed(local_1_d, deprecated, NewVersion, _).
 
-	test(packs_packs_update_2_03, true(Version-Pinned == (3:0:0)-false)) :-
+	test(packs_packs_update_2_03, deterministic(Version-Pinned == (3:0:0)-false)) :-
 		packs::uninstall(foo),
 		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
 		packs::update(foo, [compatible(false)]),
@@ -404,60 +404,60 @@
 
 	% update packs
 
-	test(packs_packs_update_1_01, true) :-
+	test(packs_packs_update_1_01, deterministic) :-
 		packs::update(baz).
 
-	test(packs_packs_update_2_04, true) :-
+	test(packs_packs_update_2_04, deterministic) :-
 		packs::update(baz, [force(true)]).
 
-	test(packs_packs_update_3_01, true) :-
+	test(packs_packs_update_3_01, deterministic) :-
 		packs::uninstall(foo),
 		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
 		packs::update(foo, 2:0:0, [clean(true), compatible(false)]).
 
-	test(packs_packs_update_2_05, true(OldVersion == NewVersion)) :-
+	test(packs_packs_update_2_05, deterministic(OldVersion == NewVersion)) :-
 		packs::installed(local_1_d, foo, OldVersion, _),
 		packs::update(foo, [status(stable)]),
 		packs::installed(local_1_d, foo, NewVersion, _).
 
 	% clean pack archives
 
-	test(packs_packs_clean_2_01, true) :-
+	test(packs_packs_clean_2_01, deterministic) :-
 		packs::clean(local_2_d, baz).
 
-	test(packs_packs_clean_1_01, true) :-
+	test(packs_packs_clean_1_01, deterministic) :-
 		packs::clean(foo).
 
 	% pack directory
 
-	test(packs_packs_directory_2_01, true(atom(Directory))) :-
+	test(packs_packs_directory_2_01, deterministic(atom(Directory))) :-
 		packs::directory(foo, Directory).
 
-	test(packs_packs_directory_1_01, true) :-
+	test(packs_packs_directory_1_01, deterministic) :-
 		packs::directory(foo).
 
 	% pack readme file
 
-	test(packs_packs_readme_1_01, true) :-
+	test(packs_packs_readme_1_01, deterministic) :-
 		packs::readme(foo).
 
-	test(packs_packs_readme_2_01, true(os::file_exists(ReadMeFile))) :-
+	test(packs_packs_readme_2_01, deterministic(os::file_exists(ReadMeFile))) :-
 		packs::readme(foo, ReadMeFile).
 
 	% pack describe predicates
 
-	test(packs_packs_describe_2_01, true) :-
+	test(packs_packs_describe_2_01, deterministic) :-
 		packs::describe(local_1_d, foo).
 
-	test(packs_packs_describe_1_01, true) :-
+	test(packs_packs_describe_1_01, deterministic) :-
 		packs::describe(baz).
 
 	% pack query predicates
 
-	test(packs_packs_pack_object_3_01, true(PackObject == foo_pack)) :-
+	test(packs_packs_pack_object_3_01, deterministic(PackObject == foo_pack)) :-
 		packs::pack_object(local_1_d, foo, PackObject).
 
-	test(packs_packs_pack_metadata_4_01, true(atom(Directory))) :-
+	test(packs_packs_pack_metadata_4_01, deterministic(atom(Directory))) :-
 		packs::installed(local_1_d, foo, Version, Pinned),
 		packs::pack_metadata(local_1_d, foo, Version, metadata(Name, Description, License, Home, SourceURL, Checksum, Dependencies, Portability, Directory, Pinned, Installed, Loaded)),
 		^^assertion(Name == foo),
@@ -471,15 +471,15 @@
 		^^assertion(Installed == true),
 		^^assertion(Loaded == false).
 
-	test(packs_packs_pack_property_4_01, true) :-
+	test(packs_packs_pack_property_4_01, deterministic) :-
 		packs::installed(local_1_d, foo, Version, _),
 		packs::pack_property(local_1_d, foo, Version, license('Apache-2.0')).
 
-	test(packs_packs_pack_property_4_02, true) :-
+	test(packs_packs_pack_property_4_02, deterministic) :-
 		packs::installed(local_1_d, foo, Version, _),
 		packs::pack_property(local_1_d, foo, Version, loaded(false)).
 
-	test(packs_packs_loaded_pack_3_01, true) :-
+	test(packs_packs_loaded_pack_3_01, deterministic) :-
 		packs::directory(foo, Directory),
 		os::path_concat(Directory, 'loader.lgt', Loader),
 		logtalk_load(Loader),
@@ -492,11 +492,11 @@
 		packs::directory(foo, Directory),
 		^^assertion(sub_atom(File, 0, _, _, Directory)).
 
-	test(packs_packs_pack_property_4_03, true) :-
+	test(packs_packs_pack_property_4_03, deterministic) :-
 		packs::installed(local_1_d, foo, Version, _),
 		packs::pack_property(local_1_d, foo, Version, loaded(true)).
 
-	test(packs_packs_pack_dependency_6_01, true(Dependencies == [local_2_d-baz-(1:0:0)])) :-
+	test(packs_packs_pack_dependency_6_01, deterministic(Dependencies == [local_2_d-baz-(1:0:0)])) :-
 		findall(
 			DependencyRegistry-DependencyPack-DependencyVersion,
 			packs::pack_dependency(local_1_d, foo, 2:0:0, DependencyRegistry, DependencyPack, DependencyVersion),
@@ -504,7 +504,7 @@
 		),
 		msort(Dependencies0, Dependencies).
 
-	test(packs_packs_pack_dependency_6_02, true(Dependencies == [local_1_d-foo-(2:0:0)])) :-
+	test(packs_packs_pack_dependency_6_02, deterministic(Dependencies == [local_1_d-foo-(2:0:0)])) :-
 		findall(
 			DependencyRegistry-DependencyPack-DependencyVersion,
 			packs::pack_dependency(local_1_d, alt, 1:0:0, DependencyRegistry, DependencyPack, DependencyVersion),
@@ -512,7 +512,7 @@
 		),
 		msort(Dependencies0, Dependencies).
 
-	test(packs_packs_loaded_pack_dependency_6_01, true(Dependencies == [local_2_d-baz-(1:0:0)])) :-
+	test(packs_packs_loaded_pack_dependency_6_01, deterministic(Dependencies == [local_2_d-baz-(1:0:0)])) :-
 		packs::directory(baz, Directory),
 		os::path_concat(Directory, 'loader.lgt', Loader),
 		logtalk_load(Loader),
@@ -525,25 +525,25 @@
 
 	% pin and unpin packs
 
-	test(packs_packs_pin_1_01, true) :-
+	test(packs_packs_pin_1_01, deterministic) :-
 		packs::pin(foo).
 
-	test(packs_packs_pinned_1_01, true) :-
+	test(packs_packs_pinned_1_01, deterministic) :-
 		packs::pinned(foo).
 
-	test(packs_packs_unpin_1_01, true) :-
+	test(packs_packs_unpin_1_01, deterministic) :-
 		packs::unpin(foo).
 
 	test(packs_packs_pinned_1_02, false) :-
 		packs::pinned(foo).
 
-	test(packs_packs_pin_0_01, true) :-
+	test(packs_packs_pin_0_01, deterministic) :-
 		packs::pin.
 
 	test(packs_packs_pin_0_02, all(Pinned == true)) :-
 		packs::installed(_, _, _, Pinned).
 
-	test(packs_packs_unpin_0_01, true) :-
+	test(packs_packs_unpin_0_01, deterministic) :-
 		packs::unpin.
 
 	test(packs_packs_unpin_0_02, all(Pinned == false)) :-
@@ -551,18 +551,18 @@
 
 	% pack search predicates
 
-	test(packs_packs_search_1_01, true) :-
+	test(packs_packs_search_1_01, deterministic) :-
 		packs::search(local).
 
 	% save and restore setups
 
-	test(packs_packs_save_2_01, true(os::file_exists(Setup))) :-
+	test(packs_packs_save_2_01, deterministic(os::file_exists(Setup))) :-
 		% avoid asking for passphrase when restoring due to the gpg encrypted pack
 		packs::uninstall(gpg),
 		^^file_path('test_files/setup.txt', Setup),
 		packs::save(Setup).
 
-	test(packs_packs_restore_2_01, true) :-
+	test(packs_packs_restore_2_01, deterministic) :-
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
@@ -574,57 +574,57 @@
 	test(packs_packs_restore_2_03, false) :-
 		registries::defined(_, _, _, _).
 
-	test(packs_packs_restore_2_04, true) :-
+	test(packs_packs_restore_2_04, deterministic) :-
 		^^file_path('test_files/setup.txt', Setup),
 		packs::restore(Setup, [compatible(false)]).
 
-	test(packs_packs_restore_2_05, true(HowDefined-Pinned == directory-true)) :-
+	test(packs_packs_restore_2_05, deterministic(HowDefined-Pinned == directory-true)) :-
 		registries::defined(local_1_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_2_06, true(HowDefined-Pinned == archive-true)) :-
+	test(packs_packs_restore_2_06, deterministic(HowDefined-Pinned == archive-true)) :-
 		registries::defined(local_2_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_2_07, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_restore_2_07, deterministic(Version-Pinned == (2:0:0)-false)) :-
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_restore_2_08, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_restore_2_08, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
-	test(packs_packs_save_2_02, true(os::file_exists(Setup))) :-
+	test(packs_packs_save_2_02, deterministic(os::file_exists(Setup))) :-
 		^^file_path('test_files/setup_lock.txt', Setup),
 		packs::save(Setup, [lock(true)]).
 
-	test(packs_packs_restore_2_09, true) :-
+	test(packs_packs_restore_2_09, deterministic) :-
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
 		registries::clean.
 
-	test(packs_packs_restore_2_10, true) :-
+	test(packs_packs_restore_2_10, deterministic) :-
 		^^file_path('test_files/setup_lock.txt', Setup),
 		packs::restore(Setup, [lock(true), compatible(false)]).
 
-	test(packs_packs_restore_2_11, true(HowDefined-Pinned == directory-true)) :-
+	test(packs_packs_restore_2_11, deterministic(HowDefined-Pinned == directory-true)) :-
 		registries::defined(local_1_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_2_12, true(HowDefined-Pinned == archive-true)) :-
+	test(packs_packs_restore_2_12, deterministic(HowDefined-Pinned == archive-true)) :-
 		registries::defined(local_2_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_2_13, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_restore_2_13, deterministic(Version-Pinned == (2:0:0)-false)) :-
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_restore_2_14, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_restore_2_14, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
 	% git registry lockfile setup and restore
 
-	test(packs_packs_restore_2_15, true) :-
+	test(packs_packs_restore_2_15, deterministic) :-
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
 		registries::clean.
 
-	test(packs_registries_add_1_03, true(os::directory_exists(RepoDirectory))) :-
+	test(packs_registries_add_1_03, deterministic(os::directory_exists(RepoDirectory))) :-
 		^^file_path('test_files/logtalk_packs/repo_fixture', Destination),
 		(   os::directory_exists(Destination) ->
 			os::delete_directory_and_contents(Destination)
@@ -635,37 +635,37 @@
 		unzip_archive(Archive, Destination),
 		^^file_path('test_files/logtalk_packs/repo_fixture/repo', RepoDirectory).
 
-	test(packs_registries_add_3_07, true) :-
+	test(packs_registries_add_3_07, deterministic) :-
 		first_repo_commit(Commit),
 		^^file_url('test_files/logtalk_packs/repo_fixture/repo', URL),
 		registries::add(repo, URL, [commit(Commit)]).
 
-	test(packs_packs_install_1_03, true) :-
+	test(packs_packs_install_1_03, deterministic) :-
 		packs::install(repo).
 
-	test(packs_packs_install_4_13, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_13, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(repo, repo, Version, Pinned).
 
-	test(packs_packs_save_2_03, true(os::file_exists(Setup))) :-
+	test(packs_packs_save_2_03, deterministic(os::file_exists(Setup))) :-
 		^^file_path('test_files/setup_repo_lock.txt', Setup),
 		packs::save(Setup, [lock(true)]).
 
-	test(packs_packs_restore_2_16, true) :-
+	test(packs_packs_restore_2_16, deterministic) :-
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
 		registries::clean.
 
-	test(packs_packs_restore_2_17, true) :-
+	test(packs_packs_restore_2_17, deterministic) :-
 		^^file_path('test_files/setup_repo_lock.txt', Setup),
 		packs::restore(Setup, [lock(true)]).
 
-	test(packs_packs_restore_2_18, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_restore_2_18, deterministic(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(repo, repo, Version, Pinned).
 
 	% broken registry and pack specs
 
-	test(packs_registries_add_1_02, true) :-
+	test(packs_registries_add_1_02, deterministic) :-
 		^^file_url('test_files/broken_d', URL),
 		registries::add(URL).
 
@@ -677,7 +677,7 @@
 
 	% uninstall packs
 
-	test(packs_packs_uninstall_0_01, true) :-
+	test(packs_packs_uninstall_0_01, deterministic) :-
 		packs::uninstall.
 
 	test(packs_packs_uninstall_0_02, false) :-
@@ -685,10 +685,10 @@
 
 	% delete registries
 
-	test(packs_registries_unpin_0_03, true) :-
+	test(packs_registries_unpin_0_03, deterministic) :-
 		registries::unpin.
 
-	test(packs_registries_delete_1_01, true) :-
+	test(packs_registries_delete_1_01, deterministic) :-
 		(   registries::defined(local_1_d, _, _, _) ->
 			registries::delete(local_1_d)
 		;   true
