@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-20,
 		comment is 'Gaussian process regression regressor supporting continuous and mixed-feature datasets using an exact mixed Gaussian process with posterior uncertainty estimates. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, regression_tree,
@@ -50,6 +50,10 @@
 
 	:- uses(numberlist, [
 		scalar_product/3 as dot_product/3
+	]).
+
+	:- uses(pairs, [
+		keys_values/3
 	]).
 
 	:- uses(population, [
@@ -107,7 +111,7 @@
 		build_gaussian_process_encoders(Attributes, Examples, Options, Encoders),
 		build_feature_layout(Encoders, FeatureLayout, ContinuousFeatureCount, CategoricalFeatureCount),
 		^^examples_to_rows(Examples, Encoders, Rows),
-		rows_training_data(Rows, TrainingFeatures, Targets),
+		keys_values(Rows, TrainingFeatures, Targets),
 		length(TrainingFeatures, TrainingExampleCount),
 		arithmetic_mean(Targets, TargetMean),
 		center_targets(Targets, TargetMean, CenteredTargets),
@@ -164,15 +168,6 @@
 		;   Encoder = categorical(Attribute, Values)
 		),
 		build_gaussian_process_encoders(Attributes, Examples, Options, Encoders).
-
-	rows_training_data(Rows, TrainingFeatures, Targets) :-
-		rows_training_data(Rows, [], TrainingFeatures0, [], Targets0),
-		reverse(TrainingFeatures0, TrainingFeatures),
-		reverse(Targets0, Targets).
-
-	rows_training_data([], TrainingFeatures, TrainingFeatures, Targets, Targets).
-	rows_training_data([Features-Target| Rows], TrainingFeatures0, TrainingFeatures, Targets0, Targets) :-
-		rows_training_data(Rows, [Features| TrainingFeatures0], TrainingFeatures, [Target| Targets0], Targets).
 
 	center_targets([], _TargetMean, []).
 	center_targets([Target| Targets], TargetMean, [Centered| CenteredTargets]) :-
