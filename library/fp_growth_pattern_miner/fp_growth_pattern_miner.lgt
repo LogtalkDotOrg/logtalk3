@@ -23,9 +23,9 @@
 	imports(frequent_pattern_mining_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-20,
 		comment is 'FP-growth frequent itemset miner for transaction datasets using recursive conditional pattern-base projection over an FP-tree with header-table and parent-link navigation.',
 		see_also is [pattern_miner_protocol, transaction_dataset_protocol, apriori_pattern_miner]
 	]).
@@ -185,8 +185,7 @@
 
 	conditional_pattern_base(tree(_Children, Header), Item, PatternBase) :-
 		header_node_occurrences(Item, Header, NodeOccurrences),
-		conditional_pattern_base_from_nodes(NodeOccurrences, [], RevPatternBase),
-		reverse(RevPatternBase, PatternBase).
+		conditional_pattern_base_from_nodes(NodeOccurrences, PatternBase).
 
 	header_node_occurrences(Item, [item_nodes(Item, NodeOccurrences)| _Header], NodeOccurrences) :-
 		!.
@@ -195,13 +194,13 @@
 		header_node_occurrences(Item, Header, NodeOccurrences).
 	header_node_occurrences(_Item, [], []).
 
-	conditional_pattern_base_from_nodes([], PatternBase, PatternBase).
-	conditional_pattern_base_from_nodes([NodeOccurrence| NodeOccurrences], PatternBase0, PatternBase) :-
+	conditional_pattern_base_from_nodes([], []).
+	conditional_pattern_base_from_nodes([NodeOccurrence| NodeOccurrences], PatternBase) :-
 		(   node_prefix_path(NodeOccurrence, Count, Prefix) ->
-			PatternBase1 = [Count-Prefix| PatternBase0]
-		;   PatternBase1 = PatternBase0
+			PatternBase = [Count-Prefix| PatternBase0]
+		;   PatternBase = PatternBase0
 		),
-		conditional_pattern_base_from_nodes(NodeOccurrences, PatternBase1, PatternBase).
+		conditional_pattern_base_from_nodes(NodeOccurrences, PatternBase0).
 
 	node_prefix_path(node_occurrence(Count, Parent), Count, Prefix) :-
 		Parent \== root,
