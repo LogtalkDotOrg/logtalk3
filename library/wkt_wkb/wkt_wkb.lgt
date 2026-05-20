@@ -23,9 +23,9 @@
 	implements(wkt_wkb_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-05-20,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
 		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
 	]).
@@ -1176,14 +1176,20 @@
 
 	geometry_dimensions(Geometry, Dimensions) :-
 		geometry_term(Geometry, Type, Data, Options),
-		( geometry_option_dimensions(Options, Dimensions) ->
+		(	geometry_option_dimensions(Options, Dimensions) ->
 			true
-		; geometry_data_arity(Type, Data, Arity),
-			( Arity == none -> Dimensions = xy ; arity_default_dimensions(Arity, Dimensions) )
+		;	geometry_data_arity(Type, Data, Arity),
+			(	Arity == none ->
+				Dimensions = xy
+			;	arity_default_dimensions(Arity, Dimensions)
+			)
 		).
 
 	geometry_term_arity(Geometry, Arity) :-
-		( geometry_term(Geometry, Type, Data, _Options) -> geometry_data_arity(Type, Data, Arity) ; Arity = none ).
+		(	geometry_term(Geometry, Type, Data, _Options) ->
+			geometry_data_arity(Type, Data, Arity)
+		;	Arity = none
+		).
 
 	geometry_data_arity(point, [], none) :-
 		!.
@@ -1287,26 +1293,26 @@
 	wkb_type_code(geometry_collection, 7).
 
 	decode_wkb_type(TypeCode, Type, Dimensions) :-
-		( TypeCode >= 3000 ->
+		(	TypeCode >= 3000 ->
 			BaseTypeCode is TypeCode - 3000,
 			Dimensions = zm
-		; TypeCode >= 2000 ->
+		;	TypeCode >= 2000 ->
 			BaseTypeCode is TypeCode - 2000,
 			Dimensions = m
-		; TypeCode >= 1000 ->
+		;	TypeCode >= 1000 ->
 			BaseTypeCode is TypeCode - 1000,
 			Dimensions = z
-		; BaseTypeCode = TypeCode,
+		;	BaseTypeCode = TypeCode,
 			Dimensions = xy
 		),
 		wkb_type_code(Type, BaseTypeCode).
 
 	encode_wkb_type(Type, Dimensions, TypeCode) :-
 		wkb_type_code(Type, BaseTypeCode),
-		( Dimensions == zm -> TypeCode is BaseTypeCode + 3000
-		; Dimensions == m -> TypeCode is BaseTypeCode + 2000
-		; Dimensions == z -> TypeCode is BaseTypeCode + 1000
-		; TypeCode = BaseTypeCode
+		(	Dimensions == zm -> TypeCode is BaseTypeCode + 3000
+		;	Dimensions == m -> TypeCode is BaseTypeCode + 2000
+		;	Dimensions == z -> TypeCode is BaseTypeCode + 1000
+		;	TypeCode = BaseTypeCode
 		).
 
 	decode_byte_order(0, big).
@@ -1372,51 +1378,43 @@
 
 	tokenize_wkt([], Tokens, Tokens).
 	tokenize_wkt([Code| Codes], Tokens0, Tokens) :-
-		( whitespace_code(Code) ->
+		(	whitespace_code(Code) ->
 			tokenize_wkt(Codes, Tokens0, Tokens)
-		; Code =:= 0'( ->
+		;	Code =:= 0'( ->
 			Tokens0 = [lparen| RestTokens],
 			tokenize_wkt(Codes, RestTokens, Tokens)
-		; Code =:= 0') ->
+		;	Code =:= 0') ->
 			Tokens0 = [rparen| RestTokens],
 			tokenize_wkt(Codes, RestTokens, Tokens)
-		; Code =:= 0', ->
+		;	Code =:= 0', ->
 			Tokens0 = [comma| RestTokens],
 			tokenize_wkt(Codes, RestTokens, Tokens)
-		; identifier_start_code(Code) ->
+		;	identifier_start_code(Code) ->
 			identifier_codes([Code| Codes], IdentifierCodes, RestCodes),
 			atom_codes(Identifier, IdentifierCodes),
 			Tokens0 = [id(Identifier)| RestTokens],
 			tokenize_wkt(RestCodes, RestTokens, Tokens)
-		; number_start_code(Code) ->
+		;	number_start_code(Code) ->
 			number_codes_token([Code| Codes], NumberCodes, RestCodes),
 			number_codes(Number, NumberCodes),
 			Tokens0 = [number(Number)| RestTokens],
 			tokenize_wkt(RestCodes, RestTokens, Tokens)
-		; fail
+		;	fail
 		).
 
-	identifier_codes(Codes, IdentifierCodes, RestCodes) :-
-		identifier_codes(Codes, [], RevIdentifierCodes, RestCodes),
-		reverse(RevIdentifierCodes, IdentifierCodes).
-
-	identifier_codes([], IdentifierCodes, IdentifierCodes, []).
-	identifier_codes([Code| Codes], Codes0, IdentifierCodes, RestCodes) :-
+	identifier_codes([], [], []).
+	identifier_codes([Code| Codes], [Code| IdentifierCodes], RestCodes) :-
 		identifier_code(Code),
 		!,
-		identifier_codes(Codes, [Code| Codes0], IdentifierCodes, RestCodes).
-	identifier_codes(Codes, IdentifierCodes, IdentifierCodes, Codes).
+		identifier_codes(Codes, IdentifierCodes, RestCodes).
+	identifier_codes(Codes, [], Codes).
 
-	number_codes_token(Codes, NumberCodes, RestCodes) :-
-		number_codes_token(Codes, [], RevNumberCodes, RestCodes),
-		reverse(RevNumberCodes, NumberCodes).
-
-	number_codes_token([], NumberCodes, NumberCodes, []).
-	number_codes_token([Code| Codes], Codes0, NumberCodes, RestCodes) :-
+	number_codes_token([], [], []).
+	number_codes_token([Code| Codes], [Code| NumberCodes], RestCodes) :-
 		\+ token_delimiter_code(Code),
 		!,
-		number_codes_token(Codes, [Code| Codes0], NumberCodes, RestCodes).
-	number_codes_token(Codes, NumberCodes, NumberCodes, Codes).
+		number_codes_token(Codes, NumberCodes, RestCodes).
+	number_codes_token(Codes, [], Codes).
 
 	whitespace_code(32).
 	whitespace_code(0'\t).
@@ -1445,7 +1443,10 @@
 
 	uppercase_ascii_codes([], []).
 	uppercase_ascii_codes([Code| Codes], [UppercaseCode| UppercaseCodes]) :-
-		( 0'a =< Code, Code =< 0'z -> UppercaseCode is Code - 32 ; UppercaseCode = Code ),
+		(	0'a =< Code, Code =< 0'z ->
+			UppercaseCode is Code - 32
+		;	UppercaseCode = Code
+		),
 		uppercase_ascii_codes(Codes, UppercaseCodes).
 
 	write_codes([], _Stream).
