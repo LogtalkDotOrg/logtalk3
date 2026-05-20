@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, last/2, length/2, memberchk/2, reverse/2, take/4, valid/1 as is_list/1
+		last/2, length/2, memberchk/2, reverse/2, take/4, valid/1 as is_list/1
 	]).
 
 	parse(Source, _) :-

@@ -30,6 +30,9 @@ Library
 
 * ADDED: New `reader::line_to_bytes/2-3` library predicates.
 
+* IMPROVED: The `tle_orbits` library position-only propagation and ground-track
+queries to avoid computing and discarding velocity values.
+
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).
 

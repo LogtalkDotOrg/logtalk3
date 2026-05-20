@@ -23,9 +23,9 @@
 	implements(combinations_protocol)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-12,
+		date is 2026-05-20,
 		comment is 'Implementation of combinations operations over lists.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, drop/3, length/2, member/2, msort/2, nth0/3, nth1/3, remove_duplicates/2, reverse/2
+		drop/3, length/2, member/2, msort/2, nth0/3, nth1/3, remove_duplicates/2, reverse/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [

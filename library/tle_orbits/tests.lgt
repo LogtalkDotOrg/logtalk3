@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-05-20,
 		comment is 'Unit tests for the "tle_orbits" library.'
 	]).
 
@@ -220,6 +220,42 @@
 		deep_space_tle(TLE),
 		propagate_state(TLE, offset_seconds(0.0), eci, approximate_deep_space, state(eci(_, _, _), eci(VX, VY, VZ))),
 		Speed is sqrt(VX*VX + VY*VY + VZ*VZ).
+
+	test(tle_orbits_propagate_two_body_matches_state_position_01, deterministic(Delta < 1.0e-9)) :-
+		iss_tle(TLE),
+		propagate(TLE, offset_seconds(3600.0), eci, two_body, eci(X0, Y0, Z0)),
+		propagate_state(TLE, offset_seconds(3600.0), eci, two_body, state(eci(X1, Y1, Z1), _)),
+		DX is X0 - X1,
+		DY is Y0 - Y1,
+		DZ is Z0 - Z1,
+		Delta is sqrt(DX*DX + DY*DY + DZ*DZ).
+
+	test(tle_orbits_propagate_near_earth_matches_state_position_01, deterministic(Delta < 1.0e-9)) :-
+		iss_tle(TLE),
+		propagate(TLE, offset_seconds(5400.0), eci, approximate_near_earth, eci(X0, Y0, Z0)),
+		propagate_state(TLE, offset_seconds(5400.0), eci, approximate_near_earth, state(eci(X1, Y1, Z1), _)),
+		DX is X0 - X1,
+		DY is Y0 - Y1,
+		DZ is Z0 - Z1,
+		Delta is sqrt(DX*DX + DY*DY + DZ*DZ).
+
+	test(tle_orbits_propagate_deep_space_matches_state_position_01, deterministic(Delta < 1.0e-9)) :-
+		deep_space_tle(TLE),
+		propagate(TLE, offset_seconds(43200.0), eci, approximate_deep_space, eci(X0, Y0, Z0)),
+		propagate_state(TLE, offset_seconds(43200.0), eci, approximate_deep_space, state(eci(X1, Y1, Z1), _)),
+		DX is X0 - X1,
+		DY is Y0 - Y1,
+		DZ is Z0 - Z1,
+		Delta is sqrt(DX*DX + DY*DY + DZ*DZ).
+
+	test(tle_orbits_propagate_ecef_matches_state_position_01, deterministic(Delta < 1.0e-9)) :-
+		iss_tle(TLE),
+		propagate(TLE, offset_seconds(1200.0), ecef, approximate_near_earth, ecef(X0, Y0, Z0)),
+		propagate_state(TLE, offset_seconds(1200.0), ecef, approximate_near_earth, state(ecef(X1, Y1, Z1), _)),
+		DX is X0 - X1,
+		DY is Y0 - Y1,
+		DZ is Z0 - Z1,
+		Delta is sqrt(DX*DX + DY*DY + DZ*DZ).
 
 	% auxiliary predicates
 

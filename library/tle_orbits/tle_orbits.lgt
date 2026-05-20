@@ -23,9 +23,9 @@
 	implements(tle_orbits_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-05-20,
 		comment is 'Parser for Two-Line Element sets with an approximate portable propagator featuring automatic branching between near-earth and deep-space variants, a legacy two-body fallback model, and ground-track sampling.'
 	]).
 
@@ -467,8 +467,17 @@
 		eci_to_ecef(JulianDate, ECI, ECEF),
 		transform(ecef, wgs84_3d, ECEF, Geographic).
 
-	orbital_state_eci(Model, TLE, JulianDate, ECI) :-
-		orbital_state_eci(Model, TLE, JulianDate, ECI, _Velocity).
+	orbital_state_eci(approximate, TLE, JulianDate, ECI) :-
+		(   deep_space_tle(TLE) ->
+			orbital_state_eci(approximate_deep_space, TLE, JulianDate, ECI)
+		;   orbital_state_eci(approximate_near_earth, TLE, JulianDate, ECI)
+		).
+	orbital_state_eci(two_body, TLE, JulianDate, eci(X, Y, Z)) :-
+		two_body_position(TLE, JulianDate, X, Y, Z).
+	orbital_state_eci(approximate_near_earth, TLE, JulianDate, eci(X, Y, Z)) :-
+		approximate_near_earth_position(TLE, JulianDate, X, Y, Z).
+	orbital_state_eci(approximate_deep_space, TLE, JulianDate, eci(X, Y, Z)) :-
+		approximate_deep_space_position(TLE, JulianDate, X, Y, Z).
 
 	orbital_state_eci(approximate, TLE, JulianDate, ECI, Velocity) :-
 		(   deep_space_tle(TLE) ->
@@ -482,10 +491,15 @@
 	orbital_state_eci(approximate_deep_space, TLE, JulianDate, eci(X, Y, Z), eci(VX, VY, VZ)) :-
 		approximate_deep_space_state(TLE, JulianDate, X, Y, Z, VX, VY, VZ).
 
-	two_body_state(TLE, JulianDate, X, Y, Z) :-
-		two_body_state(TLE, JulianDate, X, Y, Z, _VX, _VY, _VZ).
+	two_body_position(TLE, JulianDate, X, Y, Z) :-
+		two_body_mean_elements(TLE, JulianDate, MeanElements),
+		mean_elements_position(MeanElements, X, Y, Z).
 
-	two_body_state(tle(_, _, epoch_julian_date(EpochJulianDate), _, orbit(InclinationDegrees, RightAscensionDegrees, Eccentricity, ArgumentOfPerigeeDegrees, MeanAnomalyDegrees, MeanMotionRevolutionsPerDay), _, _, _), JulianDate, X, Y, Z, VX, VY, VZ) :-
+	two_body_state(TLE, JulianDate, X, Y, Z, VX, VY, VZ) :-
+		two_body_mean_elements(TLE, JulianDate, MeanElements),
+		mean_elements_state(MeanElements, X, Y, Z, VX, VY, VZ).
+
+	two_body_mean_elements(tle(_, _, epoch_julian_date(EpochJulianDate), _, orbit(InclinationDegrees, RightAscensionDegrees, Eccentricity, ArgumentOfPerigeeDegrees, MeanAnomalyDegrees, MeanMotionRevolutionsPerDay), _, _, _), JulianDate, mean_elements(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, NormalizedMeanAnomaly, MeanMotionRadiansPerSecond)) :-
 		SecondsSinceEpoch is (JulianDate - EpochJulianDate) * 86400.0,
 		deg_to_rad(InclinationDegrees, Inclination),
 		deg_to_rad(RightAscensionDegrees, RightAscension),
@@ -495,13 +509,17 @@
 		mu_earth(Mu),
 		semi_major_axis(Mu, MeanMotionRadiansPerSecond, SemiMajorAxis),
 		MeanAnomaly is MeanAnomaly0 + MeanMotionRadiansPerSecond * SecondsSinceEpoch,
-		normalize_angle_radians(MeanAnomaly, NormalizedMeanAnomaly),
-		mean_elements_to_eci_state(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, NormalizedMeanAnomaly, MeanMotionRadiansPerSecond, X, Y, Z, VX, VY, VZ).
+		normalize_angle_radians(MeanAnomaly, NormalizedMeanAnomaly).
 
-	approximate_near_earth_state(TLE, JulianDate, X, Y, Z) :-
-		approximate_near_earth_state(TLE, JulianDate, X, Y, Z, _VX, _VY, _VZ).
+	approximate_near_earth_position(TLE, JulianDate, X, Y, Z) :-
+		approximate_near_earth_elements(TLE, JulianDate, ShortPeriodElements),
+		short_period_elements_position(ShortPeriodElements, X, Y, Z).
 
-	approximate_near_earth_state(tle(_, _, epoch_julian_date(EpochJulianDate), drag(MeanMotionDotField, MeanMotionDdotField, BStar), orbit(InclinationDegrees, RightAscensionDegrees, Eccentricity0, ArgumentOfPerigeeDegrees, MeanAnomalyDegrees, MeanMotionRevolutionsPerDay), _, _, _), JulianDate, X, Y, Z, VX, VY, VZ) :-
+	approximate_near_earth_state(TLE, JulianDate, X, Y, Z, VX, VY, VZ) :-
+		approximate_near_earth_elements(TLE, JulianDate, ShortPeriodElements),
+		short_period_elements_state(ShortPeriodElements, X, Y, Z, VX, VY, VZ).
+
+	approximate_near_earth_elements(tle(_, _, epoch_julian_date(EpochJulianDate), drag(MeanMotionDotField, MeanMotionDdotField, BStar), orbit(InclinationDegrees, RightAscensionDegrees, Eccentricity0, ArgumentOfPerigeeDegrees, MeanAnomalyDegrees, MeanMotionRevolutionsPerDay), _, _, _), JulianDate, short_period_elements(SemiMajorAxis, DraggedEccentricity, EccentricAnomaly, Inclination, NormalizedRightAscension, RightAscensionRate, NormalizedArgumentOfPerigee, ArgumentOfPerigeeRate, TrueAnomaly, CurrentMeanMotion)) :-
 		mu_earth(Mu),
 		SecondsSinceEpoch is (JulianDate - EpochJulianDate) * 86400.0,
 		deg_to_rad(InclinationDegrees, Inclination),
@@ -525,13 +543,17 @@
 		normalize_angle_radians(ArgumentOfPerigee, NormalizedArgumentOfPerigee),
 		normalize_angle_radians(MeanAnomaly, NormalizedMeanAnomaly),
 		solve_kepler_equation(NormalizedMeanAnomaly, DraggedEccentricity, EccentricAnomaly),
-		true_anomaly(EccentricAnomaly, DraggedEccentricity, TrueAnomaly),
-		short_period_corrected_state(SemiMajorAxis, DraggedEccentricity, EccentricAnomaly, Inclination, NormalizedRightAscension, RightAscensionRate, NormalizedArgumentOfPerigee, ArgumentOfPerigeeRate, TrueAnomaly, CurrentMeanMotion, X, Y, Z, VX, VY, VZ).
+		true_anomaly(EccentricAnomaly, DraggedEccentricity, TrueAnomaly).
 
-	approximate_deep_space_state(TLE, JulianDate, X, Y, Z) :-
-		approximate_deep_space_state(TLE, JulianDate, X, Y, Z, _VX, _VY, _VZ).
+	approximate_deep_space_position(TLE, JulianDate, X, Y, Z) :-
+		approximate_deep_space_mean_elements(TLE, JulianDate, MeanElements),
+		mean_elements_position(MeanElements, X, Y, Z).
 
-	approximate_deep_space_state(tle(_, _, epoch_julian_date(EpochJulianDate), drag(MeanMotionDotField, MeanMotionDdotField, BStar), orbit(InclinationDegrees, RightAscensionDegrees, Eccentricity0, ArgumentOfPerigeeDegrees, MeanAnomalyDegrees, MeanMotionRevolutionsPerDay), _, _, _), JulianDate, X, Y, Z, VX, VY, VZ) :-
+	approximate_deep_space_state(TLE, JulianDate, X, Y, Z, VX, VY, VZ) :-
+		approximate_deep_space_mean_elements(TLE, JulianDate, MeanElements),
+		mean_elements_state(MeanElements, X, Y, Z, VX, VY, VZ).
+
+	approximate_deep_space_mean_elements(tle(_, _, epoch_julian_date(EpochJulianDate), drag(MeanMotionDotField, MeanMotionDdotField, BStar), orbit(InclinationDegrees, RightAscensionDegrees, Eccentricity0, ArgumentOfPerigeeDegrees, MeanAnomalyDegrees, MeanMotionRevolutionsPerDay), _, _, _), JulianDate, mean_elements(SemiMajorAxis, CorrectedEccentricity, Inclination, NormalizedRightAscension, NormalizedArgumentOfPerigee, NormalizedMeanAnomaly, CurrentMeanMotion)) :-
 		mu_earth(Mu),
 		DaysSinceEpoch is JulianDate - EpochJulianDate,
 		SecondsSinceEpoch is DaysSinceEpoch * 86400.0,
@@ -555,8 +577,7 @@
 		Inclination is Inclination0 + DeltaInclination,
 		normalize_angle_radians(RightAscension, NormalizedRightAscension),
 		normalize_angle_radians(ArgumentOfPerigee, NormalizedArgumentOfPerigee),
-		normalize_angle_radians(MeanAnomaly, NormalizedMeanAnomaly),
-		mean_elements_to_eci_state(SemiMajorAxis, CorrectedEccentricity, Inclination, NormalizedRightAscension, NormalizedArgumentOfPerigee, NormalizedMeanAnomaly, CurrentMeanMotion, X, Y, Z, VX, VY, VZ).
+		normalize_angle_radians(MeanAnomaly, NormalizedMeanAnomaly).
 
 	mu_earth(398600441800000.0).
 
@@ -737,8 +758,8 @@
 	deg_to_rad(Degrees, Radians) :-
 		Radians is Degrees * pi / 180.0.
 
-	rad_to_deg(Radians, Degrees) :-
-		Degrees is Radians * 180.0 / pi.
+%	rad_to_deg(Radians, Degrees) :-
+%		Degrees is Radians * 180.0 / pi.
 
 	normalize_angle_radians(Angle, NormalizedAngle) :-
 		TwoPi is 2.0 * pi,
@@ -788,6 +809,9 @@
 		orbital_plane_coordinates(SemiMajorAxis, Eccentricity, EccentricAnomaly, PerifocalX, PerifocalY),
 		orbital_to_eci(PerifocalX, PerifocalY, RightAscension, Inclination, ArgumentOfPerigee, X, Y, Z).
 
+	mean_elements_position(mean_elements(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, _MeanMotion), X, Y, Z) :-
+		mean_elements_to_eci(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, X, Y, Z).
+
 	mean_elements_to_eci_state(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, MeanMotion, X, Y, Z, VX, VY, VZ) :-
 		solve_kepler_equation(MeanAnomaly, Eccentricity, EccentricAnomaly),
 		orbital_plane_coordinates(SemiMajorAxis, Eccentricity, EccentricAnomaly, PerifocalX, PerifocalY),
@@ -795,8 +819,8 @@
 		orbital_to_eci(PerifocalX, PerifocalY, RightAscension, Inclination, ArgumentOfPerigee, X, Y, Z),
 		orbital_to_eci(PerifocalVX, PerifocalVY, RightAscension, Inclination, ArgumentOfPerigee, VX, VY, VZ).
 
-	mean_elements_velocity_eci(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, MeanMotion, VX, VY, VZ) :-
-		mean_elements_to_eci_state(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, MeanMotion, _X, _Y, _Z, VX, VY, VZ).
+	mean_elements_state(mean_elements(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, MeanMotion), X, Y, Z, VX, VY, VZ) :-
+		mean_elements_to_eci_state(SemiMajorAxis, Eccentricity, Inclination, RightAscension, ArgumentOfPerigee, MeanAnomaly, MeanMotion, X, Y, Z, VX, VY, VZ).
 
 	orbital_plane_velocity(SemiMajorAxis, Eccentricity, EccentricAnomaly, MeanMotion, VX, VY) :-
 		RootTerm0 is 1.0 - Eccentricity * Eccentricity,
@@ -834,6 +858,9 @@
 		CorrectedRightAscension is RightAscension + 1.5 * Temp2 * CosInclination * Sin2U,
 		CorrectedInclination is Inclination + 1.5 * Temp2 * CosInclination * SinInclination * Cos2U,
 		short_period_position(CorrectedRadius, CorrectedArgumentOfLatitude, CorrectedRightAscension, CorrectedInclination, MeanMotion, X, Y, Z).
+
+	short_period_elements_position(short_period_elements(SemiMajorAxis, Eccentricity, EccentricAnomaly, Inclination, RightAscension, _RightAscensionRate, ArgumentOfPerigee, _ArgumentOfPerigeeRate, TrueAnomaly, MeanMotion), X, Y, Z) :-
+		short_period_corrected_position(SemiMajorAxis, Eccentricity, EccentricAnomaly, Inclination, RightAscension, ArgumentOfPerigee, TrueAnomaly, MeanMotion, X, Y, Z).
 
 	short_period_position(Radius, ArgumentOfLatitude, RightAscension, Inclination, _MeanMotion, X, Y, Z) :-
 		CosU is cos(ArgumentOfLatitude),
@@ -886,6 +913,9 @@
 		CorrectedRightAscensionRate is RightAscensionRate + 3.0 * Temp2 * CosInclination * Cos2U * ArgumentOfLatitudeRate,
 		CorrectedInclinationRate is -3.0 * Temp2 * CosInclination * SinInclination * Sin2U * ArgumentOfLatitudeRate,
 		short_period_velocity(CorrectedRadius, CorrectedRadiusRate, CorrectedArgumentOfLatitude, CorrectedArgumentOfLatitudeRate, CorrectedRightAscension, CorrectedRightAscensionRate, CorrectedInclination, CorrectedInclinationRate, VX, VY, VZ).
+
+	short_period_elements_state(short_period_elements(SemiMajorAxis, Eccentricity, EccentricAnomaly, Inclination, RightAscension, RightAscensionRate, ArgumentOfPerigee, ArgumentOfPerigeeRate, TrueAnomaly, MeanMotion), X, Y, Z, VX, VY, VZ) :-
+		short_period_corrected_state(SemiMajorAxis, Eccentricity, EccentricAnomaly, Inclination, RightAscension, RightAscensionRate, ArgumentOfPerigee, ArgumentOfPerigeeRate, TrueAnomaly, MeanMotion, X, Y, Z, VX, VY, VZ).
 
 	eccentric_anomaly_rate(Eccentricity, EccentricAnomaly, MeanMotion, EccentricAnomalyRate) :-
 		Denominator0 is 1.0 - Eccentricity * cos(EccentricAnomaly),
