@@ -23,14 +23,14 @@
 	implements(arrangements_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-12,
+		date is 2026-05-21,
 		comment is 'Implementation of arrangements operations with repetition over lists.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, msort/2, nth0/3, remove_duplicates/2, reverse/2
+		length/2, member/2, msort/2, nth0/3, remove_duplicates/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -155,16 +155,15 @@
 
 	sample_arrangements(K, List, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_arrangements_loop(SampleCount, K, List, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_arrangements_loop(SampleCount, K, List, Samples).
 
-	sample_arrangements_loop(0, _, _, Samples, Samples) :-
+	sample_arrangements_loop(0, _, _, []) :-
 		!.
-	sample_arrangements_loop(SampleCount, K, List, Samples0, Samples) :-
+	sample_arrangements_loop(SampleCount, K, List, [Arrangement| Samples]) :-
 		SampleCount > 0,
 		random_arrangement(K, List, Arrangement),
 		SampleCount1 is SampleCount - 1,
-		sample_arrangements_loop(SampleCount1, K, List, [Arrangement| Samples0], Samples).
+		sample_arrangements_loop(SampleCount1, K, List, Samples).
 
 	random_distinct_arrangement(K, List, Arrangement) :-
 		distinct_source(List, DistinctSource),
@@ -172,16 +171,15 @@
 
 	sample_distinct_arrangements(K, List, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_distinct_arrangements_loop(SampleCount, K, List, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_distinct_arrangements_loop(SampleCount, K, List, Samples).
 
-	sample_distinct_arrangements_loop(0, _, _, Samples, Samples) :-
+	sample_distinct_arrangements_loop(0, _, _, []) :-
 		!.
-	sample_distinct_arrangements_loop(SampleCount, K, List, Samples0, Samples) :-
+	sample_distinct_arrangements_loop(SampleCount, K, List, [Arrangement| Samples]) :-
 		SampleCount > 0,
 		random_distinct_arrangement(K, List, Arrangement),
 		SampleCount1 is SampleCount - 1,
-		sample_distinct_arrangements_loop(SampleCount1, K, List, [Arrangement| Samples0], Samples).
+		sample_distinct_arrangements_loop(SampleCount1, K, List, Samples).
 
 	next_arrangement(List, Arrangement, Next) :-
 		lexicographic_domain(List, Domain),
