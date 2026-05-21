@@ -36,8 +36,8 @@ queries to avoid computing and discarding velocity values.
 * IMPROVED: Performance of the `gradient_boosting_regression`, `geohash`,
 `nmea`, `wkt_wkb`, `message_pack`, `cartesian_products`, `multisets`,
 `arrangements`, `combinations`, `linear_algebra`, `tle_orbits`, `wkt_wkb`,
-`ica_projection`, `fp_growth_pattern_miner`, and `gaussian_process_regression`
-libraries.
+`ica_projection`, `fp_growth_pattern_miner`, `gaussian_process_regression`,
+and `lasso_regression` libraries.
 
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).
