@@ -23,9 +23,9 @@
 	implements(multisets_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-12,
+		date is 2026-05-21,
 		comment is 'Implementation of multiset operations with repetition over lists.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, drop/3, length/2, member/2, msort/2, nth0/3, remove_duplicates/2, reverse/2
+		append/3, drop/3, length/2, member/2, msort/2, nth0/3, remove_duplicates/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -190,16 +190,15 @@
 
 	sample_multisets(K, List, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_multisets_loop(SampleCount, K, List, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_multisets_loop(SampleCount, K, List, Samples).
 
-	sample_multisets_loop(0, _, _, Samples, Samples) :-
+	sample_multisets_loop(0, _, _, []) :-
 		!.
-	sample_multisets_loop(SampleCount, K, List, Samples0, Samples) :-
+	sample_multisets_loop(SampleCount, K, List, [Multiset| Samples]) :-
 		SampleCount > 0,
 		random_multiset(K, List, Multiset),
 		SampleCount1 is SampleCount - 1,
-		sample_multisets_loop(SampleCount1, K, List, [Multiset| Samples0], Samples).
+		sample_multisets_loop(SampleCount1, K, List, Samples).
 
 	random_distinct_multiset(K, List, Multiset) :-
 		distinct_source(List, DistinctSource),
@@ -207,16 +206,15 @@
 
 	sample_distinct_multisets(K, List, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_distinct_multisets_loop(SampleCount, K, List, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_distinct_multisets_loop(SampleCount, K, List, Samples).
 
-	sample_distinct_multisets_loop(0, _, _, Samples, Samples) :-
+	sample_distinct_multisets_loop(0, _, _, []) :-
 		!.
-	sample_distinct_multisets_loop(SampleCount, K, List, Samples0, Samples) :-
+	sample_distinct_multisets_loop(SampleCount, K, List, [Multiset| Samples]) :-
 		SampleCount > 0,
 		random_distinct_multiset(K, List, Multiset),
 		SampleCount1 is SampleCount - 1,
-		sample_distinct_multisets_loop(SampleCount1, K, List, [Multiset| Samples0], Samples).
+		sample_distinct_multisets_loop(SampleCount1, K, List, Samples).
 
 	next_multiset(List, Multiset, Next) :-
 		length(Multiset, K),
