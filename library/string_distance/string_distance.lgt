@@ -22,9 +22,9 @@
 :- object(string_distance(_Representation_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-05-21,
 		comment is 'String distance predicates.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -290,13 +290,12 @@
 	lev_rows([Code1| Codes1], Codes2, Row0, Row) :-
 		Row0 = [RowIdx0| RowVals],
 		RowIdx is RowIdx0 + 1,
-		lev_row(Codes2, Code1, RowVals, RowIdx, RowIdx0, [], RowCur0),
+		lev_row(Codes2, Code1, RowVals, RowIdx, RowIdx0, RowCur0),
 		RowCur = [RowIdx| RowCur0],
 		lev_rows(Codes1, Codes2, RowCur, Row).
 
-	lev_row([], _, _, _, _, Acc, Row) :-
-		reverse(Acc, Row).
-	lev_row([H2| T2], H1, [Above| AboveRest], Left, Diag, Acc, Row) :-
+	lev_row([], _, _, _, _, []).
+	lev_row([H2| T2], H1, [Above| AboveRest], Left, Diag, [Val| Row]) :-
 		(	H1 == H2
 		->	Cost = 0
 		;	Cost = 1
@@ -305,7 +304,7 @@
 		Ins is Above + 1,
 		Del is Left  + 1,
 		Val is min(Sub, min(Ins, Del)),
-		lev_row(T2, H1, AboveRest, Val, Above, [Val| Acc], Row).
+		lev_row(T2, H1, AboveRest, Val, Above, Row).
 
 	% -----------------------------------------------------------------
 	% Damerau-Levenshtein — optimal string alignment (OSA) variant.
@@ -343,13 +342,12 @@
 		->	RowPrevPrevVals = []
 		;	RowPrevPrev = [_| RowPrevPrevVals]
 		),
-		dl_row(Codes2, H1, PrevCode, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, [], RowCur0),
+		dl_row(Codes2, H1, PrevCode, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, RowCur0),
 		RowCur = [RowIdx|RowCur0],
 		dl_rows(T1, Codes2, RowCur, RowPrev, H1, RowFinal).
 
-	dl_row([], _, _, _, _, _, _, _, Acc, Row) :-
-		reverse(Acc, Row).
-	dl_row([H2| T2], H1, PrevCode, [Above| AboveRest], PrevPrevRow, Left, Diag, ColIdx, Acc, Row) :-
+	dl_row([], _, _, _, _, _, _, _, []).
+	dl_row([H2| T2], H1, PrevCode, [Above| AboveRest], PrevPrevRow, Left, Diag, ColIdx, [Val| Row]) :-
 		(	H1 == H2
 		->	Cost = 0
 		;	Cost = 1
@@ -373,7 +371,7 @@
 		;	Val = Val0
 		),
 		ColIdxNext is ColIdx + 1,
-		dl_row(T2, H1, PrevCode, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, [Val| Acc], Row).
+		dl_row(T2, H1, PrevCode, AboveRest, PrevPrevRow, Val, Above, ColIdxNext, Row).
 
 	% -----------------------------------------------------------------
 	% Hamming

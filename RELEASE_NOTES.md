@@ -37,7 +37,7 @@ queries to avoid computing and discarding velocity values.
 `nmea`, `wkt_wkb`, `message_pack`, `cartesian_products`, `multisets`,
 `arrangements`, `combinations`, `linear_algebra`, `tle_orbits`, `wkt_wkb`,
 `ica_projection`, `fp_growth_pattern_miner`, `gaussian_process_regression`,
-and `lasso_regression` libraries.
+`lasso_regression`, and `string_distance` libraries.
 
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).
