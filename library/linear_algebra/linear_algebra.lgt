@@ -23,14 +23,14 @@
 	implements(linear_algebra_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-21,
 		comment is 'Linear algebra predicates for numeric vectors and matrices implemented without dependencies on machine learning libraries.'
 	]).
 
 	:- uses(list, [
-		append/3, length/2, nth1/3, reverse/2
+		append/3, length/2, nth1/3
 	]).
 
 	:- uses(type, [
@@ -478,7 +478,7 @@
 		require_rectangular_matrix(Matrix, RowCount, _ColumnCount),
 		transpose_matrix(Matrix, Columns),
 		initialize_qr_candidates(Columns, 1, Candidates),
-		process_ordered_qr_candidates(Candidates, Tolerance, [], [], SelectedColumns, ProcessedColumns),
+		process_ordered_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns),
 		selected_column_count(SelectedColumns, Rank),
 		orthogonal_matrix_from_selected(SelectedColumns, RowCount, Orthogonal),
 		upper_triangular_factor(ProcessedColumns, Rank, UpperTriangular).
@@ -489,7 +489,7 @@
 		require_vector_length(Values, RowCount),
 		transpose_matrix(Matrix, Columns),
 		initialize_qr_candidates(Columns, 1, Candidates),
-		process_pivoted_qr_candidates(Candidates, Tolerance, [], [], SelectedColumns, ProcessedColumns),
+		process_pivoted_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns),
 		selected_column_count(SelectedColumns, Rank),
 		(   Rank =:= 0 ->
 			new_vector(ColumnCount, 0.0, Solution)
@@ -513,7 +513,7 @@
 		require_rectangular_matrix(Matrix, _RowCount, _ColumnCount),
 		transpose_matrix(Matrix, Columns),
 		initialize_qr_candidates(Columns, 1, Candidates),
-		process_pivoted_qr_candidates(Candidates, Tolerance, [], [], SelectedColumns, _ProcessedColumns),
+		process_pivoted_qr_candidates(Candidates, Tolerance, SelectedColumns, _ProcessedColumns),
 		selected_column_count(SelectedColumns, Rank).
 
 	symmetric_eigen(Matrix, Eigenvectors, Eigenvalues) :-
@@ -900,18 +900,17 @@
 		nth1(Index, UpperTriangular, Row),
 		nth1(Index, Row, Diagonal),
 		nth1(Index, Values, Value),
-		upper_correction(Row, Index, KnownSolutions0, 0.0, Correction),
+		upper_correction(KnownSolutions0, Row, Index, 0.0, Correction),
 		CurrentSolution is (Value - Correction) / Diagonal,
 		NextIndex is Index - 1,
 		solve_upper_triangular(NextIndex, UpperTriangular, Values, [CurrentSolution| KnownSolutions0], Solution).
 
-	upper_correction(_Row, _Index, [], Correction, Correction) :-
-		!.
-	upper_correction(Row, Index, [KnownSolution| KnownSolutions], Correction0, Correction) :-
+	upper_correction([], _Row, _Index, Correction, Correction).
+	upper_correction([KnownSolution| KnownSolutions], Row, Index, Correction0, Correction) :-
 		NextIndex is Index + 1,
 		nth1(NextIndex, Row, Coefficient),
 		Correction1 is Correction0 + Coefficient * KnownSolution,
-		upper_correction(Row, NextIndex, KnownSolutions, Correction1, Correction).
+		upper_correction(KnownSolutions, Row, NextIndex, Correction1, Correction).
 
 	solve_upper_triangular_matrix(UpperTriangular, Matrix, Solution) :-
 		transpose_matrix(Matrix, Columns),
@@ -1074,34 +1073,33 @@
 		NextIndex is Index + 1,
 		initialize_qr_candidates(Columns, NextIndex, Candidates).
 
-	process_ordered_qr_candidates([], _Tolerance, SelectedColumns0, ProcessedColumns0, SelectedColumns, ProcessedColumns) :-
-		reverse(SelectedColumns0, SelectedColumns),
-		reverse(ProcessedColumns0, ProcessedColumns).
-	process_ordered_qr_candidates([Candidate| Candidates], Tolerance, SelectedColumns0, ProcessedColumns0, SelectedColumns, ProcessedColumns) :-
+	process_ordered_qr_candidates([], _Tolerance, [], []).
+	process_ordered_qr_candidates([Candidate| Candidates], Tolerance, SelectedColumns, ProcessedColumns) :-
 		candidate_norm(Candidate, Norm),
 		(   Norm > Tolerance ->
 			promote_qr_candidate(Candidate, Norm, Basis, SelectedColumn, ProcessedColumn),
 			orthogonalize_qr_candidates(Candidates, Basis, OrthogonalCandidates),
-			process_ordered_qr_candidates(OrthogonalCandidates, Tolerance, [SelectedColumn| SelectedColumns0], [ProcessedColumn| ProcessedColumns0], SelectedColumns, ProcessedColumns)
+			SelectedColumns = [SelectedColumn| SelectedColumns0],
+			ProcessedColumns = [ProcessedColumn| ProcessedColumns0],
+			process_ordered_qr_candidates(OrthogonalCandidates, Tolerance, SelectedColumns0, ProcessedColumns0)
 		;   candidate_to_processed_column(Candidate, ProcessedColumn),
-			process_ordered_qr_candidates(Candidates, Tolerance, SelectedColumns0, [ProcessedColumn| ProcessedColumns0], SelectedColumns, ProcessedColumns)
+			ProcessedColumns = [ProcessedColumn| ProcessedColumns0],
+			process_ordered_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns0)
 		).
 
-	process_pivoted_qr_candidates([], _Tolerance, SelectedColumns0, ProcessedColumns0, SelectedColumns, ProcessedColumns) :-
-		!,
-		reverse(SelectedColumns0, SelectedColumns),
-		reverse(ProcessedColumns0, ProcessedColumns).
-	process_pivoted_qr_candidates(Candidates, Tolerance, SelectedColumns0, ProcessedColumns0, SelectedColumns, ProcessedColumns) :-
+	process_pivoted_qr_candidates([], _Tolerance, [], []) :-
+		!.
+	process_pivoted_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns) :-
 		select_best_candidate(Candidates, Candidate, RemainingCandidates),
 		candidate_norm(Candidate, Norm),
 		(   Norm > Tolerance ->
 			promote_qr_candidate(Candidate, Norm, Basis, SelectedColumn, ProcessedColumn),
 			orthogonalize_qr_candidates(RemainingCandidates, Basis, OrthogonalCandidates),
-			process_pivoted_qr_candidates(OrthogonalCandidates, Tolerance, [SelectedColumn| SelectedColumns0], [ProcessedColumn| ProcessedColumns0], SelectedColumns, ProcessedColumns)
-		;   candidates_to_processed_columns([Candidate| RemainingCandidates], RemainingProcessedColumns),
-			reverse_prepend(RemainingProcessedColumns, ProcessedColumns0, AllProcessedColumns0),
-			reverse(SelectedColumns0, SelectedColumns),
-			reverse(AllProcessedColumns0, ProcessedColumns)
+			SelectedColumns = [SelectedColumn| SelectedColumns0],
+			ProcessedColumns = [ProcessedColumn| ProcessedColumns0],
+			process_pivoted_qr_candidates(OrthogonalCandidates, Tolerance, SelectedColumns0, ProcessedColumns0)
+		;   SelectedColumns = [],
+			candidates_to_processed_columns([Candidate| RemainingCandidates], ProcessedColumns)
 		).
 
 	candidate_to_processed_column(candidate(Index, _Residual, Coefficients), processed_column(Index, Coefficients)).
@@ -1110,10 +1108,6 @@
 	candidates_to_processed_columns([Candidate| Candidates], [ProcessedColumn| ProcessedColumns]) :-
 		candidate_to_processed_column(Candidate, ProcessedColumn),
 		candidates_to_processed_columns(Candidates, ProcessedColumns).
-
-	reverse_prepend([], Accumulator, Accumulator).
-	reverse_prepend([Element| Elements], Accumulator0, Accumulator) :-
-		reverse_prepend(Elements, [Element| Accumulator0], Accumulator).
 
 	select_best_candidate([Candidate| Candidates], BestCandidate, RemainingCandidates) :-
 		select_best_candidate(Candidates, Candidate, [], BestCandidate, RemainingCandidates).
