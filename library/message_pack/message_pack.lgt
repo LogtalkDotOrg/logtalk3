@@ -22,9 +22,9 @@
 :- object(message_pack(_StringRepresentation_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-05-21,
 		comment is 'MessagePack format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding MessagePack strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -493,20 +493,14 @@
 		codes_to_chars(Codes, Chars).
 	message_pack_utf_8_string_to_term(codes, Codes, codes(Codes)).
 
-	codes_to_chars(Codes, Chars) :-
-		codes_to_chars(Codes, Chars, []).
-
-	codes_to_chars([], Chars, Chars).
-	codes_to_chars([Code| Codes], [Char| Chars0], Chars) :-
+	chars_to_codes([], []).
+	chars_to_codes([Char| Chars], [Code| Codes]) :-
 		char_code(Char, Code),
-		codes_to_chars(Codes, Chars0, Chars).
+		chars_to_codes(Chars, Codes).
 
-	chars_to_codes(Chars, Codes) :-
-		chars_to_codes(Chars, Codes, []).
-
-	chars_to_codes([], Codes, Codes).
-	chars_to_codes([Char| Chars], [Code| Codes0], Codes) :-
+	codes_to_chars([], []).
+	codes_to_chars([Code| Codes], [Char| Chars]) :-
 		char_code(Char, Code),
-		chars_to_codes(Chars, Codes0, Codes).
+		codes_to_chars(Codes, Chars).
 
 :- end_object.
