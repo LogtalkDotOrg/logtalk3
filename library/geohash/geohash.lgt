@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-05-21,
 		comment is 'Geohash encoder, decoder, adjacency, covering, hierarchy, integer conversion, bit-precision, and geometry covering predicates for ``geographic(Latitude,Longitude)`` coordinates.',
 		remarks is [
 			'Alphabet' - 'Uses the standard geohash base-32 alphabet ``0123456789bcdefghjkmnpqrstuvwxyz``.',
@@ -106,8 +106,7 @@
 
 	neighbors(Geohash, Neighbors) :-
 		valid_geohash(Geohash),
-		neighbors([north, north_east, east, south_east, south, south_west, west, north_west], Geohash, [], ReversedNeighbors),
-		reverse(ReversedNeighbors, Neighbors).
+		neighbors([north, north_east, east, south_east, south, south_west, west, north_west], Geohash, Neighbors).
 
 	covering(BoundingBox, Precision, Geohashes) :-
 		fixed_covering(BoundingBox, Precision, Geohashes).
@@ -215,8 +214,7 @@
 		encode_bits(geographic(NormalizedLatitude, NormalizedLongitude), Bits, AdjacentHashInteger).
 
 	neighbors_bits(HashInteger, Bits, Neighbors) :-
-		neighbors_bits([north, north_east, east, south_east, south, south_west, west, north_west], HashInteger, Bits, [], ReversedNeighbors),
-		reverse(ReversedNeighbors, Neighbors).
+		neighbors_bits([north, north_east, east, south_east, south, south_west, west, north_west], HashInteger, Bits, Neighbors).
 
 	expand(Geohash, ExpandedGeohashes) :-
 		neighbors(Geohash, Neighbors),
@@ -437,13 +435,13 @@
 	neighbor_hash_values([_-HashInteger| Neighbors], [HashInteger| Hashes]) :-
 		neighbor_hash_values(Neighbors, Hashes).
 
-	neighbors_bits([], _HashInteger, _Bits, Accumulator, Accumulator).
-	neighbors_bits([Direction| Directions], HashInteger, Bits, Accumulator0, Accumulator) :-
+	neighbors_bits([], _HashInteger, _Bits, []).
+	neighbors_bits([Direction| Directions], HashInteger, Bits, Neighbors) :-
 		(   adjacent_bits(HashInteger, Bits, Direction, Neighbor) ->
-			Accumulator1 = [Direction-Neighbor| Accumulator0]
-		;   Accumulator1 = Accumulator0
+			Neighbors = [Direction-Neighbor| Neighbors0]
+		;   Neighbors = Neighbors0
 		),
-		neighbors_bits(Directions, HashInteger, Bits, Accumulator1, Accumulator).
+		neighbors_bits(Directions, HashInteger, Bits, Neighbors0).
 
 	integer_hash_codes(HashInteger, Precision, Codes) :-
 		valid_hash_integer(HashInteger, Precision),
@@ -657,13 +655,13 @@
 			LatitudeMax = LatitudeMax0
 		).
 
-	neighbors([], _Geohash, Accumulator, Accumulator).
-	neighbors([Direction| Directions], Geohash, Accumulator0, Accumulator) :-
+	neighbors([], _Geohash, []).
+	neighbors([Direction| Directions], Geohash, Neighbors) :-
 		(   adjacent(Geohash, Direction, Neighbor) ->
-			Accumulator1 = [Direction-Neighbor| Accumulator0]
-		;   Accumulator1 = Accumulator0
+			Neighbors = [Direction-Neighbor| Neighbors0]
+		;   Neighbors = Neighbors0
 		),
-		neighbors(Directions, Geohash, Accumulator1, Accumulator).
+		neighbors(Directions, Geohash, Neighbors0).
 
 	direction_delta(north, 1, 0).
 	direction_delta(south, -1, 0).
