@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-05-21,
 		comment is 'Gradient boosting regression using regression trees as additive base learners fitted to successive residuals.',
 		see_also is [linear_regression, knn_regression, regression_tree, random_forest_regression]
 	]).
@@ -39,7 +39,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, memberchk/2, reverse/2
+		append/3, length/2, member/2, memberchk/2
 	]).
 
 	:- uses(population, [
@@ -91,23 +91,22 @@
 		^^option(feature_scaling(FeatureScaling), Options).
 
 	build_ensemble(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, WeightedTrees) :-
-		build_ensemble_(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, 1, [], ReversedWeightedTrees),
-		reverse(ReversedWeightedTrees, WeightedTrees).
+		build_ensemble_(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, 1, WeightedTrees).
 
-	build_ensemble_(_Attributes, _Examples, _Predictions, NumberOfEstimators, _LearningRate, _TreeOptions, Round, WeightedTrees, WeightedTrees) :-
+	build_ensemble_(_Attributes, _Examples, _Predictions, NumberOfEstimators, _LearningRate, _TreeOptions, Round, []) :-
 		Round > NumberOfEstimators,
 		!.
-	build_ensemble_(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, Round, WeightedTrees0, WeightedTrees) :-
+	build_ensemble_(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, Round, WeightedTrees) :-
 		create_residual_examples(Examples, Predictions, ResidualExamples, 0.0, ResidualSSE),
 		(   ResidualSSE =< 1.0e-12 ->
-			WeightedTrees = WeightedTrees0
+			WeightedTrees = []
 		;   create_residual_dataset(Attributes, ResidualExamples, ResidualDataset),
 			tree_learn(ResidualDataset, Tree, TreeOptions),
 			abolish_object(ResidualDataset),
 			update_predictions(Examples, Predictions, LearningRate, Tree, UpdatedPredictions),
-			WeightedTrees1 = [weighted_tree(LearningRate, Tree)| WeightedTrees0],
+			WeightedTrees = [weighted_tree(LearningRate, Tree)| WeightedTrees0],
 			NextRound is Round + 1,
-			build_ensemble_(Attributes, Examples, UpdatedPredictions, NumberOfEstimators, LearningRate, TreeOptions, NextRound, WeightedTrees1, WeightedTrees)
+			build_ensemble_(Attributes, Examples, UpdatedPredictions, NumberOfEstimators, LearningRate, TreeOptions, NextRound, WeightedTrees0)
 		).
 
 	create_residual_examples([], [], [], ResidualSSE, ResidualSSE).
