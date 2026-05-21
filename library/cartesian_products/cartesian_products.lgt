@@ -23,14 +23,14 @@
 	implements(cartesian_products_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-12,
+		date is 2026-05-21,
 		comment is 'Implementation of Cartesian-product operations over lists.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, msort/2, nth0/3, remove_duplicates/2, reverse/2
+		length/2, member/2, msort/2, nth0/3, remove_duplicates/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -142,16 +142,15 @@
 
 	sample_cartesian_tuples(Lists, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_cartesian_tuples(SampleCount, Lists, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_cartesian_tuples_loop(SampleCount, Lists, Samples).
 
-	sample_cartesian_tuples(0, _, Samples, Samples) :-
+	sample_cartesian_tuples_loop(0, _, []) :-
 		!.
-	sample_cartesian_tuples(SampleCount, Lists, Samples0, Samples) :-
+	sample_cartesian_tuples_loop(SampleCount, Lists, [Tuple| Samples]) :-
 		SampleCount > 0,
 		random_cartesian_tuple(Lists, Tuple),
 		SampleCount1 is SampleCount - 1,
-		sample_cartesian_tuples(SampleCount1, Lists, [Tuple| Samples0], Samples).
+		sample_cartesian_tuples_loop(SampleCount1, Lists, Samples).
 
 	random_distinct_cartesian_tuple(Lists, Tuple) :-
 		distinct_generator_order_source(default, Lists, DistinctLists),
@@ -159,16 +158,15 @@
 
 	sample_distinct_cartesian_tuples(Lists, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_distinct_cartesian_tuples(SampleCount, Lists, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_distinct_cartesian_tuples_loop(SampleCount, Lists, Samples).
 
-	sample_distinct_cartesian_tuples(0, _, Samples, Samples) :-
+	sample_distinct_cartesian_tuples_loop(0, _, []) :-
 		!.
-	sample_distinct_cartesian_tuples(SampleCount, Lists, Samples0, Samples) :-
+	sample_distinct_cartesian_tuples_loop(SampleCount, Lists, [Tuple| Samples]) :-
 		SampleCount > 0,
 		random_distinct_cartesian_tuple(Lists, Tuple),
 		SampleCount1 is SampleCount - 1,
-		sample_distinct_cartesian_tuples(SampleCount1, Lists, [Tuple| Samples0], Samples).
+		sample_distinct_cartesian_tuples_loop(SampleCount1, Lists, Samples).
 
 	next_cartesian_tuple(Lists, Tuple, Next) :-
 		canonical_lexicographic_factors(Lists, CanonicalLists),
