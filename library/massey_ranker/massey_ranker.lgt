@@ -23,9 +23,9 @@
 	imports([ranking_dataset_common, score_ranker_model_common, pairwise_strength_ranker_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-21,
 		comment is 'Massey pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by solving the Massey linear system built from aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, colley_ranker, elo_ranker]
 	]).
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, nth1/3, reverse/2
+		length/2, nth1/3
 	]).
 
 	:- uses(numberlist, [
@@ -207,21 +207,16 @@
 		NewCoefficient is Coefficient - Factor * PivotCoefficient,
 		scaled_row_difference(PivotTail, Tail, Factor, NewTail).
 
-	back_substitution(UpperRows, Scale, Solution) :-
-		reverse(UpperRows, ReversedRows),
-		back_substitution(ReversedRows, Scale, [], Solution).
-
-	back_substitution([], _Scale, Solution, Solution).
-	back_substitution([row([Diagonal], Value)| Rows], Scale, KnownSolutions0, KnownSolutions) :-
+	back_substitution([], _Scale, []).
+	back_substitution([row([Diagonal], Value)], Scale, [Solution]) :-
 		!,
 		ensure_non_zero(Diagonal, Scale),
-		Solution is Value / Diagonal,
-		back_substitution(Rows, Scale, [Solution| KnownSolutions0], KnownSolutions).
-	back_substitution([row([Diagonal| Tail], Value)| Rows], Scale, KnownSolutions0, KnownSolutions) :-
+		Solution is Value / Diagonal.
+	back_substitution([row([Diagonal| Tail], Value)| Rows], Scale, [Solution| KnownSolutions]) :-
+		back_substitution(Rows, Scale, KnownSolutions),
 		ensure_non_zero(Diagonal, Scale),
-		dot_product(Tail, KnownSolutions0, Correction),
-		Solution is (Value - Correction) / Diagonal,
-		back_substitution(Rows, Scale, [Solution| KnownSolutions0], KnownSolutions).
+		dot_product(Tail, KnownSolutions, Correction),
+		Solution is (Value - Correction) / Diagonal.
 
 	validate_solution(Matrix, Vector, Solution, Scale) :-
 		maximum_residual(Matrix, Vector, Solution, 0.0, MaximumResidual),

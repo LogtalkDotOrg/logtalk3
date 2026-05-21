@@ -24,9 +24,9 @@
 	extends(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-05-21,
 		comment is 'Shared predicates for regressor learning defaults, diagnostics, validation, dataset validation, export, and pretty-print helpers.'
 	]).
 
@@ -523,7 +523,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, last/2, member/2, memberchk/2, reverse/2
+		append/3, length/2, last/2, member/2, memberchk/2
 	]).
 
 	:- uses(linear_algebra, [
@@ -1124,21 +1124,16 @@
 		NewCoefficient is Coefficient - Factor * PivotCoefficient,
 		scaled_row_difference(PivotTail, Tail, Factor, NewTail).
 
-	back_substitution(UpperRows, Solution) :-
-		reverse(UpperRows, ReversedRows),
-		back_substitution(ReversedRows, [], Solution).
-
-	back_substitution([], Solution, Solution).
-	back_substitution([row([Diagonal], Value)| Rows], KnownSolutions0, KnownSolutions) :-
+	back_substitution([], []).
+	back_substitution([row([Diagonal], Value)], [Solution]) :-
 		!,
 		ensure_non_zero(Diagonal),
-		Solution is Value / Diagonal,
-		back_substitution(Rows, [Solution| KnownSolutions0], KnownSolutions).
-	back_substitution([row([Diagonal| Tail], Value)| Rows], KnownSolutions0, KnownSolutions) :-
+		Solution is Value / Diagonal.
+	back_substitution([row([Diagonal| Tail], Value)| Rows], [Solution| KnownSolutions]) :-
+		back_substitution(Rows, KnownSolutions),
 		ensure_non_zero(Diagonal),
-		dot_product(Tail, KnownSolutions0, Correction),
-		Solution is (Value - Correction) / Diagonal,
-		back_substitution(Rows, [Solution| KnownSolutions0], KnownSolutions).
+		dot_product(Tail, KnownSolutions, Correction),
+		Solution is (Value - Correction) / Diagonal.
 
 	maximum_linear_system_residual(Matrix, Vector, Solution, MaximumResidual) :-
 		maximum_linear_system_residual(Matrix, Vector, Solution, 0.0, MaximumResidual).
