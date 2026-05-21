@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-20,
+		date is 2026-05-21,
 		comment is 'Implementation of combinations operations over lists.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		drop/3, length/2, member/2, msort/2, nth0/3, nth1/3, remove_duplicates/2, reverse/2
+		drop/3, length/2, member/2, msort/2, nth0/3, nth1/3, remove_duplicates/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -192,16 +192,15 @@
 
 	sample_combinations(K, List, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_combinations_loop(SampleCount, K, List, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_combinations_loop(SampleCount, K, List, Samples).
 
-	sample_combinations_loop(0, _, _, Samples, Samples) :-
+	sample_combinations_loop(0, _, _, []) :-
 		!.
-	sample_combinations_loop(SampleCount, K, List, Samples0, Samples) :-
+	sample_combinations_loop(SampleCount, K, List, [Combination| Samples]) :-
 		SampleCount > 0,
 		random_combination(K, List, Combination),
 		SampleCount1 is SampleCount - 1,
-		sample_combinations_loop(SampleCount1, K, List, [Combination| Samples0], Samples).
+		sample_combinations_loop(SampleCount1, K, List, Samples).
 
 	random_distinct_combination(K, List, Combination) :-
 		distinct_combinations(K, List, DistinctCombinations),
@@ -212,16 +211,15 @@
 
 	sample_distinct_combinations(K, List, SampleCount, Samples) :-
 		SampleCount >= 0,
-		sample_distinct_combinations_loop(SampleCount, K, List, [], Samples0),
-		reverse(Samples0, Samples).
+		sample_distinct_combinations_loop(SampleCount, K, List, Samples).
 
-	sample_distinct_combinations_loop(0, _, _, Samples, Samples) :-
+	sample_distinct_combinations_loop(0, _, _, []) :-
 		!.
-	sample_distinct_combinations_loop(SampleCount, K, List, Samples0, Samples) :-
+	sample_distinct_combinations_loop(SampleCount, K, List, [Combination| Samples]) :-
 		SampleCount > 0,
 		random_distinct_combination(K, List, Combination),
 		SampleCount1 is SampleCount - 1,
-		sample_distinct_combinations_loop(SampleCount1, K, List, [Combination| Samples0], Samples).
+		sample_distinct_combinations_loop(SampleCount1, K, List, Samples).
 
 	next_combination(List, Combination, Next) :-
 		length(Combination, K),
