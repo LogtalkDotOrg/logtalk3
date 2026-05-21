@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-21,
 		comment is 'Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric eigendecomposition whitening.',
 		see_also is [nmf_projection, pca_projection, random_projection, truncated_svd_projection]
 	]).
@@ -140,17 +140,15 @@
 		whiten_rows(Rows, WhiteningRows, WhitenedRows).
 
 	extract_components(WhitenedRows, WhiteningRows, Requested, Options, Components, ComponentDiagnostics) :-
-		extract_components(WhitenedRows, WhiteningRows, Requested, Options, [], [], [], Components, ComponentDiagnostics).
+		extract_components(WhitenedRows, WhiteningRows, Requested, Options, [], Components, ComponentDiagnostics).
 
-	extract_components(_WhitenedRows, _WhiteningRows, 0, _Options, _PreviousWhitenedComponents, ComponentsAcc, DiagnosticsAcc, Components, ComponentDiagnostics) :-
-		!,
-		reverse(ComponentsAcc, Components),
-		reverse(DiagnosticsAcc, ComponentDiagnostics).
-	extract_components(WhitenedRows, WhiteningRows, Requested, Options, PreviousWhitenedComponents, ComponentsAcc, DiagnosticsAcc, Components, ComponentDiagnostics) :-
+	extract_components(_WhitenedRows, _WhiteningRows, 0, _Options, _PreviousWhitenedComponents, [], []) :-
+		!.
+	extract_components(WhitenedRows, WhiteningRows, Requested, Options, PreviousWhitenedComponents, [Component| Components], [component_diagnostics(Convergence, Iterations, FinalDelta)| ComponentDiagnostics]) :-
 		fastica_component(WhitenedRows, Options, PreviousWhitenedComponents, WhiteningVector, Convergence, Iterations, FinalDelta),
 		unmixing_component(WhiteningVector, WhiteningRows, Component),
 		NextRequested is Requested - 1,
-		extract_components(WhitenedRows, WhiteningRows, NextRequested, Options, [WhiteningVector| PreviousWhitenedComponents], [Component| ComponentsAcc], [component_diagnostics(Convergence, Iterations, FinalDelta)| DiagnosticsAcc], Components, ComponentDiagnostics).
+		extract_components(WhitenedRows, WhiteningRows, NextRequested, Options, [WhiteningVector| PreviousWhitenedComponents], Components, ComponentDiagnostics).
 
 	fastica_component(WhitenedRows, Options, PreviousWhitenedComponents, BestVector, Convergence, Iterations, FinalDelta) :-
 		WhitenedRows = [FirstRow| _],
