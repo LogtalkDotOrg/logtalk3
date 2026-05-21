@@ -22,9 +22,9 @@
 :- object(checkpoint).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2013-10-22,
+		date is 2016-05-21,
 		comment is 'Simple example of using a barrier as a checkpoint to synchronize a set of worker threads assembling a set of items.'
 	]).
 
@@ -43,6 +43,7 @@
 		comment is 'Assemble three items using a team of five workers with a maximum of 0.1 seconds per item assembly.'
 	]).
 
+	:- uses(format, [format/2]).
 	:- uses(integer, [between/3]).
 	:- uses(random,  [random/3]).
 
@@ -61,14 +62,14 @@
 
 	checkpoint_loop(_, 0) :-
 		!,
-		write('All assemblies done.'), nl.
+		format('All assemblies done.~n', []).
 	checkpoint_loop(Workers, Item) :-
 		% wait for all threads to reach the checkpoint
 		forall(
 			between(1, Workers, Worker),
 			threaded_wait(done(Worker, Item))
 		),
-		write('Assembly of item '), write(Item), write(' done.'), nl,
+		format('Assembly of item ~w done.~n', [Item]),
 		% signal the workers to proceed to the next assembly
 		NextItem is Item - 1,
 		forall(
@@ -81,8 +82,9 @@
 		!.
 	worker(Worker, Item, Time) :-
 		% the time necessary to assemble one item varies between 0.0 and Time seconds
-		random(0.0, Time, AssemblyTime), thread_sleep(AssemblyTime),
-		write('Worker '), write(Worker), write(' item '), write(Item), nl,
+		random(0.0, Time, AssemblyTime),
+		thread_sleep(AssemblyTime),
+		format('Worker ~w item ~w~n', [Worker, Item]),
 		% notify checkpoint that the worker have done his/her part of this item
 		threaded_notify(done(Worker, Item)),
 		% wait for green light to move to the next item

@@ -41,6 +41,12 @@ Tools
 
 * FIXED: Spurious choice-points in some of the `packs` tool public predicates.
 
+Examples
+--------
+
+* FIXED: The `checkpoint` multi-threading example test flakiness due to potential
+out-or-order output. Thanks to Andrew Davison for the bug report.
+
 
 3.100.1 - May 16, 2026
 ======================
