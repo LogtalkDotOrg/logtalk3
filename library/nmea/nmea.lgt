@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-05-21,
 		comment is 'Parser for NMEA 0183 sentences with typed semantic decoding for selected GPS/GNSS sentence types.'
 	]).
 
@@ -130,14 +130,10 @@
 	source_codes(Source, _) :-
 		domain_error(nmea_source, Source).
 
-	chars_to_codes(Chars, Codes) :-
-		chars_to_codes(Chars, [], RevCodes),
-		reverse(RevCodes, Codes).
-
-	chars_to_codes([], Codes, Codes).
-	chars_to_codes([Char| Chars], Codes0, Codes) :-
+	chars_to_codes([], []).
+	chars_to_codes([Char| Chars], [Code| Codes]) :-
 		char_code(Char, Code),
-		chars_to_codes(Chars, [Code| Codes0], Codes).
+		chars_to_codes(Chars, Codes).
 
 	sentences([Line| Lines]) -->
 		blank_lines,
@@ -183,14 +179,10 @@
 	line_end -->
 		[13].
 
-	lines_to_sentences(Lines, ChecksumPolicy, UnknownTypePolicy, Sentences) :-
-		lines_to_sentences(Lines, ChecksumPolicy, UnknownTypePolicy, [], RevSentences),
-		reverse(RevSentences, Sentences).
-
-	lines_to_sentences([], _, _, Sentences, Sentences).
-	lines_to_sentences([Line| Lines], ChecksumPolicy, UnknownTypePolicy, Sentences0, Sentences) :-
+	lines_to_sentences([], _, _, []).
+	lines_to_sentences([Line| Lines], ChecksumPolicy, UnknownTypePolicy, [Sentence| Sentences]) :-
 		line_sentence(Line, ChecksumPolicy, UnknownTypePolicy, Sentence),
-		lines_to_sentences(Lines, ChecksumPolicy, UnknownTypePolicy, [Sentence| Sentences0], Sentences).
+		lines_to_sentences(Lines, ChecksumPolicy, UnknownTypePolicy, Sentences).
 
 	line_sentence(LineCodes, ChecksumPolicy, UnknownTypePolicy, Sentence) :-
 		( 	parse_line(LineCodes, ChecksumPolicy, UnknownTypePolicy, Sentence) ->
@@ -341,17 +333,13 @@
 		alpha_code(ManufacturerCode3),
 		all_alnum_codes(FormatterCodes).
 
-	lowercase_codes(Codes, LowercaseCodes) :-
-		lowercase_codes(Codes, [], RevLowercaseCodes),
-		reverse(RevLowercaseCodes, LowercaseCodes).
-
-	lowercase_codes([], Codes, Codes).
-	lowercase_codes([Code| Codes], LowercaseCodes0, LowercaseCodes) :-
+	lowercase_codes([], []).
+	lowercase_codes([Code| Codes], [LowercaseCode| LowercaseCodes]) :-
 		( 	0'A =< Code, Code =< 0'Z ->
 			LowercaseCode is Code + 32
 		; 	LowercaseCode = Code
 		),
-		lowercase_codes(Codes, [LowercaseCode| LowercaseCodes0], LowercaseCodes).
+		lowercase_codes(Codes, LowercaseCodes).
 
 	accept_type(proprietary, _, _) :-
 		!.
@@ -813,18 +801,14 @@
 		0'0 =< Code,
 		Code =< 0'9.
 
-	satellite_ids(Fields, SatelliteIds) :-
-		satellite_ids(Fields, [], RevSatelliteIds),
-		reverse(RevSatelliteIds, SatelliteIds).
-
-	satellite_ids([], SatelliteIds, SatelliteIds).
-	satellite_ids([''| Fields], SatelliteIds0, SatelliteIds) :-
+	satellite_ids([], []).
+	satellite_ids([''| Fields], SatelliteIds) :-
 		!,
-		satellite_ids(Fields, SatelliteIds0, SatelliteIds).
-	satellite_ids([Field| Fields], SatelliteIds0, SatelliteIds) :-
+		satellite_ids(Fields, SatelliteIds).
+	satellite_ids([Field| Fields], [SatelliteId| SatelliteIds]) :-
 		integer_field(Field, SatelliteId),
 		SatelliteId > 0,
-		satellite_ids(Fields, [SatelliteId| SatelliteIds0], SatelliteIds).
+		satellite_ids(Fields, SatelliteIds).
 
 	satellite_entries([], []).
 	satellite_entries([PRNField, ElevationField, AzimuthField, SnrField| Fields], [satellite(PRN, Elevation, Azimuth, Snr)| Satellites]) :-
