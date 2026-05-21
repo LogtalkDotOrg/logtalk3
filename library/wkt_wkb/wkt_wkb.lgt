@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-20,
+		date is 2026-05-21,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
 		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
 	]).
@@ -1459,35 +1459,26 @@
 		put_byte(Stream, Byte),
 		write_bytes(Bytes, Stream).
 
-	chars_to_codes(Chars, Codes) :-
-		chars_to_codes(Chars, Codes, []).
-
-	chars_to_codes([], Codes, Codes).
-	chars_to_codes([Char| Chars], [Code| Codes0], Codes) :-
+	chars_to_codes([], []).
+	chars_to_codes([Char| Chars], [Code| Codes]) :-
 		char_code(Char, Code),
-		chars_to_codes(Chars, Codes0, Codes).
+		chars_to_codes(Chars, Codes).
 
-	codes_to_chars(Codes, Chars) :-
-		codes_to_chars(Codes, Chars, []).
-
-	codes_to_chars([], Chars, Chars).
-	codes_to_chars([Code| Codes], [Char| Chars0], Chars) :-
+	codes_to_chars([], []).
+	codes_to_chars([Code| Codes], [Char| Chars]) :-
 		char_code(Char, Code),
-		codes_to_chars(Codes, Chars0, Chars).
+		codes_to_chars(Codes, Chars).
 
-	hex_codes_bytes(Codes, Bytes) :-
-		hex_codes_bytes(Codes, Bytes, []).
-
-	hex_codes_bytes([], Bytes, Bytes).
-	hex_codes_bytes([Code| Codes], Bytes0, Bytes) :-
+	hex_codes_bytes([], []).
+	hex_codes_bytes([Code| Codes], Bytes) :-
 		whitespace_code(Code),
 		!,
-		hex_codes_bytes(Codes, Bytes0, Bytes).
-	hex_codes_bytes([HighCode, LowCode| Codes], [Byte| Bytes0], Bytes) :-
+		hex_codes_bytes(Codes, Bytes).
+	hex_codes_bytes([HighCode, LowCode| Codes], [Byte| Bytes]) :-
 		hex_digit_value(HighCode, High),
 		hex_digit_value(LowCode, Low),
 		Byte is (High << 4) \/ Low,
-		hex_codes_bytes(Codes, Bytes0, Bytes).
+		hex_codes_bytes(Codes, Bytes).
 
 	hex_digit_value(Code, Value) :-
 		0'0 =< Code,
