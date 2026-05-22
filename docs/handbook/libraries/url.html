@@ -283,6 +283,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
@@ -419,6 +420,56 @@ link in a web browser.</p>
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(url(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">valid/1</span></code> and <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicates are intended for absolute
+URLs:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> url(atom)<span class="o">::</span>valid(<span class="s">&#39;https://example.com/path?x=1#frag&#39;</span>).
+<span class="k">true</span>.
+
+| <span class="o">?-</span> url(atom)<span class="o">::</span>parse(<span class="s">&#39;https://example.com/path?x=1#frag&#39;</span>, <span class="nv">Components</span>).
+<span class="nv">Components</span> <span class="o">=</span> [scheme(https), authority(<span class="s">&#39;example.com&#39;</span>), path(<span class="s">&#39;/path&#39;</span>), query(<span class="s">&#39;x=1&#39;</span>), fragment(frag)].
+</pre></div>
+</div>
+<p>For RFC 3986 relative references, use <code class="docutils literal notranslate"><span class="pre">parse/3</span></code> or
+<code class="docutils literal notranslate"><span class="pre">reference_kind/2</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> url(atom)<span class="o">::</span>parse(<span class="s">&#39;../users/42?verbose=true#details&#39;</span>, <span class="nv">Components</span>, <span class="nv">Kind</span>).
+<span class="nv">Components</span> <span class="o">=</span> [path(<span class="s">&#39;../users/42&#39;</span>), query(<span class="s">&#39;verbose=true&#39;</span>), fragment(details)],
+<span class="nv">Kind</span> <span class="o">=</span> relative_path.
+
+| <span class="o">?-</span> url(atom)<span class="o">::</span>reference_kind(<span class="s">&#39;//example.com/v1&#39;</span>, <span class="nv">Kind</span>).
+<span class="nv">Kind</span> <span class="o">=</span> network_path.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> and <code class="docutils literal notranslate"><span class="pre">normalize/2</span></code> predicates work with both
+absolute URLs and relative references:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> url(atom)<span class="o">::</span>generate([authority(<span class="s">&#39;example.com&#39;</span>), path(<span class="s">&#39;/v1&#39;</span>)], <span class="nv">Reference</span>).
+<span class="nv">Reference</span> <span class="o">=</span> <span class="s">&#39;//example.com/v1&#39;</span>.
+
+| <span class="o">?-</span> url(atom)<span class="o">::</span>normalize(<span class="s">&#39;../users/./42&#39;</span>, <span class="nv">NormalizedReference</span>).
+<span class="nv">NormalizedReference</span> <span class="o">=</span> <span class="s">&#39;../users/42&#39;</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">resolve/3</span></code> predicate resolves a reference against an absolute
+base URL, while <code class="docutils literal notranslate"><span class="pre">relativize/3</span></code> computes a relative reference between
+compatible URLs:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> url(atom)<span class="o">::</span>resolve(<span class="s">&#39;http://example.com/a/b/c&#39;</span>, <span class="s">&#39;../d&#39;</span>, <span class="nv">Resolved</span>).
+<span class="nv">Resolved</span> <span class="o">=</span> <span class="s">&#39;http://example.com/a/d&#39;</span>.
+
+| <span class="o">?-</span> url(atom)<span class="o">::</span>relativize(<span class="s">&#39;http://example.com/a/b/c&#39;</span>, <span class="s">&#39;http://example.com/v1&#39;</span>, <span class="nv">Relative</span>).
+<span class="nv">Relative</span> <span class="o">=</span> <span class="s">&#39;../../v1&#39;</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">file_path_components/2</span></code> predicate converts file-system paths into
+file URL components and supports both POSIX and Windows paths:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> url(atom)<span class="o">::</span>file_path_components(<span class="s">&#39;/home/user/document.txt&#39;</span>, <span class="nv">Components</span>).
+<span class="nv">Components</span> <span class="o">=</span> [authority(<span class="s">&#39;&#39;</span>), path(<span class="s">&#39;/home/user/document.txt&#39;</span>)].
+
+| <span class="o">?-</span> url(atom)<span class="o">::</span>file_path_components(<span class="s">&#39;C:</span><span class="se">\\</span><span class="s">Temp</span><span class="se">\\</span><span class="s">app</span><span class="se">\\</span><span class="s">file.txt&#39;</span>, <span class="nv">Components</span>).
+<span class="nv">Components</span> <span class="o">=</span> [authority(<span class="s">&#39;&#39;</span>), path(<span class="s">&#39;/C:/Temp/app/file.txt&#39;</span>)].
 </pre></div>
 </div>
 </section>

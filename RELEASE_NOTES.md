@@ -28,6 +28,12 @@ RELEASE NOTES
 Library
 -------
 
+* CHANGED: The `url` library `generate/2` and `normalize/2` predicates to also
+accept relative reference arguments.
+
+* ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
+`relativize/3`, and `resolve/3` predicates.
+
 * ADDED: New `reader::line_to_bytes/2-3` library predicates.
 
 * IMPROVED: The `tle_orbits` library position-only propagation and ground-track

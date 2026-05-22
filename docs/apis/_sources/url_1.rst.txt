@@ -17,8 +17,8 @@ URL validating, parsing, and normalizing predicates following RFC3986 nomenclatu
 |    ``logtalk_load(url(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-04-17
+| **Version:** 2:0:0
+| **Date:** 2026-05-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -84,7 +84,7 @@ Parses a URL into a list of its components: ``[scheme(Scheme), authority(Authori
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates a normalized URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.
+Generates a normalized URL or RFC3986 relative reference from a list of components. Component lists headed by ``scheme/1`` generate absolute URLs; lists without ``scheme/1`` generate relative references.
 
 | **Compilation flags:**
 |    ``static``
@@ -97,19 +97,114 @@ Generates a normalized URL from a list of its components: ``[scheme(Scheme), aut
 
 ------------
 
+.. index:: parse/3
+.. _url/1::parse/3:
+
+``parse/3``
+^^^^^^^^^^^
+
+Parses a URL or RFC3986 relative reference into a list of its components and classifies it as one of ``url``, ``network_path``, ``absolute_path``, ``relative_path``, ``query``, or ``fragment``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Reference,Components,Kind)``
+| **Mode and number of proofs:**
+|    ``parse(++text,-list(compound),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: reference_kind/2
+.. _url/1::reference_kind/2:
+
+``reference_kind/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Classifies a valid reference as one of ``url``, ``network_path``, ``absolute_path``, ``relative_path``, ``query``, or ``fragment``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reference_kind(Reference,Kind)``
+| **Mode and number of proofs:**
+|    ``reference_kind(++text,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: equivalent/2
+.. _url/1::equivalent/2:
+
+``equivalent/2``
+^^^^^^^^^^^^^^^^
+
+True iff both arguments normalize to the same textual representation under the library normalization rules.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equivalent(Reference1,Reference2)``
+| **Mode and number of proofs:**
+|    ``equivalent(++text,++text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: relativize/3
+.. _url/1::relativize/3:
+
+``relativize/3``
+^^^^^^^^^^^^^^^^
+
+Relativizes a target absolute hierarchical URL against a base absolute hierarchical URL with the same scheme and authority, returning a non-empty relative reference accepted by the library. Fails when no such non-empty relative reference can be generated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relativize(Base,Target,Relative)``
+| **Mode and number of proofs:**
+|    ``relativize(++text,++text,-text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: resolve/3
+.. _url/1::resolve/3:
+
+``resolve/3``
+^^^^^^^^^^^^^
+
+Resolves a reference against a base absolute hierarchical URL and returns a normalized absolute URL. The first argument must be an absolute hierarchical URL suitable for use as a base. The second argument may be either a relative reference or an absolute URL; when it is already absolute, the result is that absolute URL normalized and returned unchanged apart from normalization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resolve(Base,Reference,Resolved)``
+| **Mode and number of proofs:**
+|    ``resolve(++text,++text,-text)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: normalize/2
 .. _url/1::normalize/2:
 
 ``normalize/2``
 ^^^^^^^^^^^^^^^
 
-Normalizes a URL by standardizing its components. Normalization includes converting the scheme to lowercase, percent-encoding characters that require escaping, ensuring proper path separators, and handling relative paths.
+Normalizes a URL or RFC3986 relative reference by standardizing its components. Normalization includes converting the scheme to lowercase when present, normalizing the authority, percent-encoding characters that require escaping, and simplifying path dot segments while preserving absolute and relative reference forms.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``normalize(URL,NormalizedURL)``
+|    ``normalize(Reference,NormalizedReference)``
 | **Mode and number of proofs:**
 |    ``normalize(++text,-text)`` - ``one``
 

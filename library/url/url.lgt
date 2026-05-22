@@ -22,9 +22,9 @@
 :- object(url(_Representation_)).
 
 	:- info([
-		version is 1:2:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-05-22,
 		comment is 'URL validating, parsing, and normalizing predicates following RFC3986 nomenclature.',
 		parameters is [
 			'Representation' - 'URL and is components representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -48,15 +48,50 @@
 	:- public(generate/2).
 	:- mode(generate(++list(compound), -text), zero_or_one).
 	:- info(generate/2, [
-		comment is 'Generates a normalized URL from a list of its components: ``[scheme(Scheme), authority(Authority), path(Path), query(Query), fragment(Fragment)]`` for standard URLs, or scheme-specific components for mailto, news, tel, and urn URLs. Fails if the components are invalid.',
+		comment is 'Generates a normalized URL or RFC3986 relative reference from a list of components. Component lists headed by ``scheme/1`` generate absolute URLs; lists without ``scheme/1`` generate relative references.',
 		argnames is ['Components', 'URL']
+	]).
+
+	:- public(parse/3).
+	:- mode(parse(++text, -list(compound), -atom), zero_or_one).
+	:- info(parse/3, [
+		comment is 'Parses a URL or RFC3986 relative reference into a list of its components and classifies it as one of ``url``, ``network_path``, ``absolute_path``, ``relative_path``, ``query``, or ``fragment``.',
+		argnames is ['Reference', 'Components', 'Kind']
+	]).
+
+	:- public(reference_kind/2).
+	:- mode(reference_kind(++text, -atom), zero_or_one).
+	:- info(reference_kind/2, [
+		comment is 'Classifies a valid reference as one of ``url``, ``network_path``, ``absolute_path``, ``relative_path``, ``query``, or ``fragment``.',
+		argnames is ['Reference', 'Kind']
+	]).
+
+	:- public(equivalent/2).
+	:- mode(equivalent(++text, ++text), zero_or_one).
+	:- info(equivalent/2, [
+		comment is 'True iff both arguments normalize to the same textual representation under the library normalization rules.',
+		argnames is ['Reference1', 'Reference2']
+	]).
+
+	:- public(relativize/3).
+	:- mode(relativize(++text, ++text, -text), zero_or_one).
+	:- info(relativize/3, [
+		comment is 'Relativizes a target absolute hierarchical URL against a base absolute hierarchical URL with the same scheme and authority, returning a non-empty relative reference accepted by the library. Fails when no such non-empty relative reference can be generated.',
+		argnames is ['Base', 'Target', 'Relative']
+	]).
+
+	:- public(resolve/3).
+	:- mode(resolve(++text, ++text, -text), zero_or_one).
+	:- info(resolve/3, [
+		comment is 'Resolves a reference against a base absolute hierarchical URL and returns a normalized absolute URL. The first argument must be an absolute hierarchical URL suitable for use as a base. The second argument may be either a relative reference or an absolute URL; when it is already absolute, the result is that absolute URL normalized and returned unchanged apart from normalization.',
+		argnames is ['Base', 'Reference', 'Resolved']
 	]).
 
 	:- public(normalize/2).
 	:- mode(normalize(++text, -text), one).
 	:- info(normalize/2, [
-		comment is 'Normalizes a URL by standardizing its components. Normalization includes converting the scheme to lowercase, percent-encoding characters that require escaping, ensuring proper path separators, and handling relative paths.',
-		argnames is ['URL', 'NormalizedURL']
+		comment is 'Normalizes a URL or RFC3986 relative reference by standardizing its components. Normalization includes converting the scheme to lowercase when present, normalizing the authority, percent-encoding characters that require escaping, and simplifying path dot segments while preserving absolute and relative reference forms.',
+		argnames is ['Reference', 'NormalizedReference']
 	]).
 
 	:- public(file_path_components/2).
@@ -71,7 +106,8 @@
 	]).
 
 	valid(URL) :-
-		valid(_Representation_, URL).
+		valid(_Representation_, URL),
+		!.
 
 	valid(atom, URL) :-
 		atom_codes(URL, Codes),
@@ -82,21 +118,85 @@
 	valid(codes, URL) :-
 		phrase(url, URL).
 
+	reference_kind(Reference, Kind) :-
+		parse(Reference, _, Kind).
+
+	equivalent(Reference1, Reference2) :-
+		normalize(Reference1, NormalizedReference1),
+		normalize(Reference2, NormalizedReference2),
+		NormalizedReference1 == NormalizedReference2.
+
+	relativize(Base, Target, Relative) :-
+		normalized_absolute_reference_components(Base, [scheme(Scheme), authority(Authority)| BaseComponents]),
+		normalized_absolute_reference_components(Target, [scheme(Scheme), authority(Authority)| TargetComponents]),
+		empty_text(Empty),
+		component_value_or_default(path, BaseComponents, Empty, BasePath),
+		component_value_or_default(query, BaseComponents, Empty, BaseQuery),
+		component_value_or_default(fragment, BaseComponents, Empty, BaseFragment),
+		component_value_or_default(path, TargetComponents, Empty, TargetPath),
+		component_value_or_default(query, TargetComponents, Empty, TargetQuery),
+		component_value_or_default(fragment, TargetComponents, Empty, TargetFragment),
+		relativize_reference_components(BasePath, BaseQuery, BaseFragment, TargetPath, TargetQuery, TargetFragment, Empty, RelativeComponents),
+		build_url_from_components(RelativeComponents, Relative),
+		Relative \== Empty,
+		!.
+
+	resolve(Base, Reference, Resolved) :-
+		empty_text(Empty),
+		parse(Base, [scheme(Scheme)| BaseComponents]),
+		parse_reference_for_resolution(Reference, ReferenceComponents),
+		resolve_reference_components(Scheme, BaseComponents, ReferenceComponents, Empty, ResolvedComponents),
+		build_url_from_components(ResolvedComponents, Resolved),
+		!.
+
 	url --> scheme, [0':,0'/,0'/], authority, path, query, fragment.
-	url --> file_scheme, [0':,0'/,0'/], path.
+	url --> file_scheme, [0':,0'/,0'/], file_authority, path.
 	url --> mailto_scheme, [0':], email_address.
 	url --> news_scheme, [0':], news_identifier.
 	url --> tel_scheme, [0':], phone_number.
 	url --> urn_scheme, [0':], urn_identifier.
 
+	non_empty_relative_reference --> non_empty_input, relative_reference.
+
+	non_empty_input, [Code] --> [Code].
+
+	relative_reference --> relative_part, query, fragment.
+
+	relative_part --> [0'/, 0'/], authority, path, !.
+	relative_part --> path_absolute_reference, !.
+	relative_part --> path_noscheme_reference, !.
+	relative_part --> [].
+
+	path_absolute_reference --> [0'/], path_absolute_reference_tail.
+
+	path_absolute_reference_tail --> relative_path_segment_nz, relative_path_segments.
+	path_absolute_reference_tail --> [].
+
+	path_noscheme_reference --> relative_path_segment_nz_nc, relative_path_segments.
+
+	relative_path_segments --> [0'/], !, relative_path_segment, relative_path_segments.
+	relative_path_segments --> [].
+
+	% RFC 3986 suffixes: _nz means non-zero length; _nc means no colon.
+
+	relative_path_segment_nz --> [Code], {path_code(Code)}, !, relative_path_segment.
+
+	relative_path_segment --> [Code], {path_code(Code)}, !, relative_path_segment.
+	relative_path_segment --> [].
+
+	relative_path_segment_nz_nc --> [Code], {path_noscheme_code(Code)}, !, relative_path_segment_nc.
+
+	relative_path_segment_nc --> [Code], {path_noscheme_code(Code)}, !, relative_path_segment_nc.
+	relative_path_segment_nc --> [].
+
 	% web protocols
-	scheme --> h, t, t, p.
 	scheme --> h, t, t, p, s.
-	scheme --> w, s.
+	scheme --> h, t, t, p.
 	scheme --> w, s, s.
+	scheme --> w, s.
 	% file transfer and version control
-	scheme --> f, t, p.
 	scheme --> f, t, p, s.
+	scheme --> f, t, p.
 	scheme --> s, f, t, p.
 	scheme --> g, i, t.
 	% media streaming
@@ -104,8 +204,8 @@
 	scheme --> r, t, s, p.
 	scheme --> r, t, m, p.
 	% directory services
-	scheme --> l, d, a, p.
 	scheme --> l, d, a, p, s.
+	scheme --> l, d, a, p.
 	% network services
 	scheme --> s, s, h.
 	scheme --> t, e, l, n, e, t.
@@ -155,7 +255,7 @@
 	phone_code(0'().
 	phone_code(0')).
 	phone_code(0'.).
-	phone_code(0' ).
+	phone_code(32).
 
 	% URN identifier (namespace-specific string)
 	urn_identifier --> [Code], {urn_code(Code)}, !, urn_identifier.
@@ -166,14 +266,57 @@
 	authority --> userinfo, [0'@], !, host, port.
 	authority --> host, port.
 
+	file_authority -->
+		host.
+
 	userinfo --> [Code], {userinfo_code(Code)}, !, userinfo.
 	userinfo --> [].
 
-	userinfo_code(Code) :- code(Code), !.
-	userinfo_code(0':).  % colon separates user and password
+	userinfo_code(Code) :-
+		pchar_code(Code),
+		Code =\= 0'@.
 
+	host --> ip_literal.
 	host --> ip_number.
-	host --> identifier, dot_identifiers.
+	host --> reg_name.
+
+	ip_literal --> [0'[], ipvfuture_literal, [0']].
+	ip_literal --> [0'[], ipv6_literal, [0']].
+
+	ipv6_literal --> [Code], {ipv6_literal_code(Code)}, !, ipv6_literal_rest.
+
+	ipv6_literal_rest --> [Code], {ipv6_literal_code(Code)}, !, ipv6_literal_rest.
+	ipv6_literal_rest --> [].
+
+	ipv6_literal_code(Code) :- hex_digit_code(Code), !.
+	ipv6_literal_code(0':).
+	ipv6_literal_code(0'.).
+
+	ipvfuture_literal --> ipvfuture_v, ipvfuture_hex_digits, [0'.], ipvfuture_body.
+
+	ipvfuture_v --> [0'v].
+	ipvfuture_v --> [0'V].
+
+	ipvfuture_hex_digits --> [Code], {hex_digit_code(Code)}, !, ipvfuture_hex_digits_rest.
+
+	ipvfuture_hex_digits_rest --> [Code], {hex_digit_code(Code)}, !, ipvfuture_hex_digits_rest.
+	ipvfuture_hex_digits_rest --> [].
+
+	ipvfuture_body --> [Code], {ipvfuture_body_code(Code)}, !, ipvfuture_body_rest.
+
+	ipvfuture_body_rest --> [Code], {ipvfuture_body_code(Code)}, !, ipvfuture_body_rest.
+	ipvfuture_body_rest --> [].
+
+	ipvfuture_body_code(Code) :- unreserved_code(Code), !.
+	ipvfuture_body_code(Code) :- sub_delimiter_code(Code), !.
+	ipvfuture_body_code(0':).
+
+	reg_name --> [Code], {reg_name_code(Code)}, !, reg_name.
+	reg_name --> [].
+
+	reg_name_code(Code) :- unreserved_code(Code), !.
+	reg_name_code(Code) :- sub_delimiter_code(Code), !.
+	reg_name_code(0'%).
 
 	ip_number --> ip_subnumber, [0'.], ip_subnumber, [0'.], ip_subnumber, [0'.], ip_subnumber.
 
@@ -227,6 +370,10 @@
 	path_code(0'=).   % equals
 	path_code(0'~).   % tilde
 
+	path_noscheme_code(Code) :-
+		path_code(Code),
+		Code =\= 0':.
+
 	dot_identifiers --> [0'.], !, identifier, dot_identifiers.
 	dot_identifiers --> [].
 
@@ -236,7 +383,7 @@
 	path_segment --> [Code], {path_code(Code)}, !, path_segment.
 	path_segment --> [].
 
-	query --> [0'?], query_codes.
+	query --> [0'?], !, query_codes.
 	query --> [].
 
 	query_codes --> [Code], {query_code(Code)}, !, query_codes.
@@ -244,7 +391,7 @@
 
 	query_code(Code) :- Code =\= 0'#, Code >= 32, Code =< 126.
 
-	fragment --> [0'#], fragment_codes.
+	fragment --> [0'#], !, fragment_codes.
 	fragment --> [].
 
 	fragment_codes --> [Code], {fragment_code(Code)}, !, fragment_codes.
@@ -253,23 +400,50 @@
 	fragment_code(Code) :- Code >= 32, Code =< 126.
 
 	parse(URL, Components) :-
-		parse(_Representation_, URL, Components).
+		parse_absolute(_Representation_, URL, Components).
 
-	parse(atom, URL, [scheme(Scheme)| Components]) :-
+	parse(Reference, Components, Kind) :-
+		parse_reference(_Representation_, Reference, Components, Kind).
+
+	parse_absolute(atom, URL, [scheme(Scheme)| Components]) :-
 		atom_codes(URL, Codes),
 		phrase(scheme(Scheme), Codes, Rest),
 		parse_url(Scheme, Rest, Components),
 		!.
-	parse(chars, URL, [scheme(Scheme)| Components]) :-
+	parse_absolute(chars, URL, [scheme(Scheme)| Components]) :-
 		chars_to_codes(URL, Codes),
 		phrase(scheme(Scheme), Codes, Rest),
 		atom_chars(SchemeAtom, Scheme),
 		parse_url(SchemeAtom, Rest, Components),
 		!.
-	parse(codes, URL, [scheme(Scheme)| Components]) :-
+	parse_absolute(codes, URL, [scheme(Scheme)| Components]) :-
 		phrase(scheme(Scheme), URL, Rest),
 		atom_codes(SchemeAtom, Scheme),
 		parse_url(SchemeAtom, Rest, Components),
+		!.
+
+	parse_reference(atom, URL, Components, url) :-
+		parse_absolute(atom, URL, Components),
+		!.
+	parse_reference(atom, URL, Components, Kind) :-
+		atom_codes(URL, Codes),
+		parse_relative_reference(Codes, Components),
+		components_reference_kind(Components, Kind),
+		!.
+	parse_reference(chars, URL, Components, url) :-
+		parse_absolute(chars, URL, Components),
+		!.
+	parse_reference(chars, URL, Components, Kind) :-
+		chars_to_codes(URL, Codes),
+		parse_relative_reference(Codes, Components),
+		components_reference_kind(Components, Kind),
+		!.
+	parse_reference(codes, URL, Components, url) :-
+		parse_absolute(codes, URL, Components),
+		!.
+	parse_reference(codes, URL, Components, Kind) :-
+		parse_relative_reference(URL, Components),
+		components_reference_kind(Components, Kind),
 		!.
 
 	parse_url(http, Codes, [authority(Authority), path(Path), query(Query), fragment(Fragment)]) :-
@@ -324,6 +498,64 @@
 		phrase(tel_components(Number), Codes).
 	parse_url(urn, Codes, [identifier(Identifier)]) :-
 		phrase(urn_components(Identifier), Codes).
+
+	parse_relative_reference(Codes, Components) :-
+		phrase(non_empty_relative_reference, Codes),
+		relative_reference_components(Codes, Components).
+
+	relative_reference_components(Codes, Components) :-
+		split_fragment_codes(Codes, ReferenceCodes, FragmentCodes),
+		split_query_codes(ReferenceCodes, MainCodes, QueryCodes),
+		relative_reference_main_components(MainCodes, MainComponents),
+		relative_reference_tail_components(QueryCodes, FragmentCodes, TailComponents),
+		append(MainComponents, TailComponents, Components).
+
+	relative_reference_main_components([0'/,0'/| AuthorityPathCodes], Components) :-
+		!,
+		split_authority_path_codes(AuthorityPathCodes, AuthorityCodes, PathCodes),
+		convert_to_text(_Representation_, AuthorityCodes, Authority),
+		( PathCodes == [] ->
+			Components = [authority(Authority)]
+		; 	convert_to_text(_Representation_, PathCodes, Path),
+			Components = [authority(Authority), path(Path)]
+		).
+	relative_reference_main_components(MainCodes, [path(Path)]) :-
+		MainCodes \== [],
+		!,
+		convert_to_text(_Representation_, MainCodes, Path).
+	relative_reference_main_components([], []).
+
+	relative_reference_tail_components(QueryCodes, FragmentCodes, Components) :-
+		convert_to_text(_Representation_, QueryCodes, Query),
+		convert_to_text(_Representation_, FragmentCodes, Fragment),
+		( QueryCodes == [] ->
+			( FragmentCodes == [] ->
+				Components = []
+			; 	Components = [fragment(Fragment)]
+			)
+		; 	( FragmentCodes == [] ->
+				Components = [query(Query)]
+			; 	Components = [query(Query), fragment(Fragment)]
+			)
+		).
+
+	split_fragment_codes(Codes, ReferenceCodes, FragmentCodes) :-
+		append(ReferenceCodes, [0'#| FragmentCodes], Codes),
+		\+ member(0'#, ReferenceCodes),
+		!.
+	split_fragment_codes(Codes, Codes, []).
+
+	split_query_codes(Codes, MainCodes, QueryCodes) :-
+		append(MainCodes, [0'?| QueryCodes], Codes),
+		\+ member(0'?, MainCodes),
+		!.
+	split_query_codes(Codes, Codes, []).
+
+	split_authority_path_codes(Codes, AuthorityCodes, [0'/| PathCodes]) :-
+		append(AuthorityCodes, [0'/| PathCodes], Codes),
+		\+ member(0'/, AuthorityCodes),
+		!.
+	split_authority_path_codes(Codes, Codes, []).
 
 	scheme(Scheme) -->
 		scheme_codes(SchemeCodes),
@@ -434,7 +666,7 @@
 		path_component(Path).
 
 	file_components(Authority, Path) -->
-		authority_component(Authority),
+		file_authority_component(Authority),
 		path_component(Path).
 
 	ldap_components(Authority, Path, Query) -->
@@ -459,8 +691,20 @@
 		urn_identifier_component(Identifier).
 
 	authority_component(Authority) -->
-		codes_until(0'/, AuthorityCodes),
+		authority_codes(AuthorityCodes),
 		{convert_to_text(_Representation_, AuthorityCodes, Authority)}.
+
+	file_authority_component(Authority) -->
+		authority_codes(AuthorityCodes),
+		{phrase(file_authority, AuthorityCodes), convert_to_text(_Representation_, AuthorityCodes, Authority)}.
+
+	authority_codes([Code| Codes]) -->
+		[Code],
+		{Code =\= 0'/, Code =\= 0'?, Code =\= 0'#},
+		!,
+		authority_codes(Codes).
+	authority_codes([]) -->
+		[].
 
 	path_component(Path) -->
 		[0'/], !,
@@ -549,7 +793,7 @@
 		!.
 
 	normalize(URL, NormalizedURL) :-
-		parse(URL, Components),
+		parse(URL, Components, _),
 		build_url_from_components(Components, NormalizedURL),
 		!.
 
@@ -560,10 +804,56 @@
 		convert_to_text(_Representation_, AuthorityCodes, Authority),
 		convert_to_text(_Representation_, PathCodes, Path).
 
+	normalize_authority(Authority, NormalizedAuthority) :-
+		convert_to_text(_Representation_, AuthorityCodes, Authority),
+		normalize_authority_codes(AuthorityCodes, NormalizedAuthorityCodes),
+		convert_to_text(_Representation_, NormalizedAuthorityCodes, NormalizedAuthority).
+
+	normalize_authority_codes(AuthorityCodes, NormalizedAuthorityCodes) :-
+		split_authority_userinfo_codes(AuthorityCodes, UserInfoCodes, HostPortCodes),
+		split_host_port_codes(HostPortCodes, HostCodes, PortCodes),
+		downcase_codes(HostCodes, NormalizedHostCodes),
+		append(UserInfoCodes, NormalizedHostCodes, NormalizedAuthorityCodes0),
+		append(NormalizedAuthorityCodes0, PortCodes, NormalizedAuthorityCodes).
+
+	split_authority_userinfo_codes(Codes, UserInfoCodes, HostPortCodes) :-
+		append(UserInfoCodes0, [0'@| HostPortCodes], Codes),
+		\+ member(0'@, HostPortCodes),
+		!,
+		append(UserInfoCodes0, [0'@], UserInfoCodes).
+	split_authority_userinfo_codes(Codes, [], Codes).
+
+	split_host_port_codes([0'[| Codes], HostCodes, PortCodes) :-
+		append(HostBodyCodes, [0']| RemainingCodes], Codes),
+		!,
+		append([0'[| HostBodyCodes], [0']], HostCodes),
+		( RemainingCodes = [0':| PortDigitCodes] ->
+			PortCodes = [0':| PortDigitCodes]
+		; 	PortCodes = []
+		).
+	split_host_port_codes(Codes, HostCodes, PortCodes) :-
+		append(HostCodes, [0':| PortDigitCodes], Codes),
+		PortDigitCodes \== [],
+		\+ member(0':, PortDigitCodes),
+		!,
+		PortCodes = [0':| PortDigitCodes].
+	split_host_port_codes(Codes, Codes, []).
+
+	normalize_path(Path, NormalizedPath) :-
+		convert_to_text(_Representation_, [0'/], Path),
+		!,
+		convert_to_text(_Representation_, [0'/], NormalizedPath).
 	normalize_path(Path, NormalizedPath) :-
 		convert_to_text(_Representation_, PathCodes, Path),
-		normalize_path_codes(PathCodes, NormalizedPathCodes),
+		normalize_path_codes(PathCodes, NormalizedPathCodes0),
+		preserve_absolute_path_codes(PathCodes, NormalizedPathCodes0, NormalizedPathCodes),
 		convert_to_text(_Representation_, NormalizedPathCodes, NormalizedPath).
+
+	preserve_absolute_path_codes([0'/|_], [0'/|_]= NormalizedPathCodes, NormalizedPathCodes) :-
+		!.
+	preserve_absolute_path_codes([0'/|_], NormalizedPathCodes, [0'/| NormalizedPathCodes]) :-
+		!.
+	preserve_absolute_path_codes(_, NormalizedPathCodes, NormalizedPathCodes).
 
 	normalize_file_path_codes([], []).
 	normalize_file_path_codes([0'\\| Codes0], [0'/| Codes]) :-
@@ -623,10 +913,14 @@
 			TrailingSlash = true
 		;	TrailingSlash = false
 		),
+		(	PathCodes = [0'/| _] ->
+			Absolute = true
+		;	Absolute = false
+		),
 		% Split path into segments
 		split_path(PathCodes, Segments),
 		% Process segments (remove '.', handle '..')
-		process_segments(Segments, ProcessedSegments),
+		process_segments(Segments, Absolute, ProcessedSegments),
 		encode_path_segments(ProcessedSegments, EncodedSegments),
 		% Join segments back into a path
 		join_segments(EncodedSegments, TrailingSlash, NormalizedPathCodes).
@@ -638,9 +932,19 @@
 
 	normalize_component_codes(_, [], []) :-
 		!.
+	normalize_component_codes(Component, [0'%, High0, Low0| Codes], [Code| NormalizedCodes]) :-
+		normalized_hex_code(High0, High),
+		normalized_hex_code(Low0, Low),
+		hex_digit_code_to_decimal(High, HighValue),
+		hex_digit_code_to_decimal(Low, LowValue),
+		Code is 16*HighValue + LowValue,
+		unreserved_code(Code),
+		allowed_component_code(Component, Code),
+		!,
+		normalize_component_codes(Component, Codes, NormalizedCodes).
 	normalize_component_codes(Component, [0'%, High0, Low0| Codes], [0'%, High, Low| NormalizedCodes]) :-
-		hexadecimal_code(High0, High),
-		hexadecimal_code(Low0, Low),
+		normalized_hex_code(High0, High),
+		normalized_hex_code(Low0, Low),
 		!,
 		normalize_component_codes(Component, Codes, NormalizedCodes).
 	normalize_component_codes(Component, [Code| Codes], [Code| NormalizedCodes]) :-
@@ -717,33 +1021,55 @@
 		Code >= 33,
 		Code =< 126.
 
-	hexadecimal_code(Code, Code) :-
+	normalized_hex_code(Code, Code) :-
 		Code >= 0'0,
 		Code =< 0'9,
 		!.
-	hexadecimal_code(Code, Code) :-
+	normalized_hex_code(Code, Code) :-
 		Code >= 0'A,
 		Code =< 0'F,
 		!.
-	hexadecimal_code(Code, UpperCode) :-
+	normalized_hex_code(Code, UpperCode) :-
 		Code >= 0'a,
 		Code =< 0'f,
 		UpperCode is Code - 32.
+
+	hex_digit_code_to_decimal(Code, Value) :-
+		Code >= 0'0,
+		Code =< 0'9,
+		!,
+		Value is Code - 0'0.
+	hex_digit_code_to_decimal(Code, Value) :-
+		Code >= 0'A,
+		Code =< 0'F,
+		Value is Code - 0'A + 10.
+
+	hex_digit_code(Code) :-
+		Code >= 0'0,
+		Code =< 0'9,
+		!.
+	hex_digit_code(Code) :-
+		Code >= 0'a,
+		Code =< 0'f,
+		!.
+	hex_digit_code(Code) :-
+		Code >= 0'A,
+		Code =< 0'F.
 
 	percent_encoded_byte(Code, High, Low) :-
 		Code >= 0,
 		Code =< 255,
 		HighNibble is Code // 16,
 		LowNibble is Code mod 16,
-		hexadecimal_digit_code(HighNibble, High),
-		hexadecimal_digit_code(LowNibble, Low).
+		decimal_to_hex_digit_code(HighNibble, High),
+		decimal_to_hex_digit_code(LowNibble, Low).
 
-	hexadecimal_digit_code(Value, Code) :-
+	decimal_to_hex_digit_code(Value, Code) :-
 		Value >= 0,
 		Value =< 9,
 		!,
 		Code is 0'0 + Value.
-	hexadecimal_digit_code(Value, Code) :-
+	decimal_to_hex_digit_code(Value, Code) :-
 		Code is 0'A + Value - 10.
 
 	split_path(PathCodes, Segments) :-
@@ -757,26 +1083,33 @@
 		append(CurrentSegment, [Code], NewSegment),
 		split_path(Rest, NewSegment, Segments).
 
-	process_segments(Segments, ProcessedSegments) :-
-		process_segments(Segments, [], ProcessedSegments).
+	process_segments(Segments, Absolute, ProcessedSegments) :-
+		process_segments(Segments, Absolute, [], ProcessedSegments).
 
-	process_segments([], Acc, Processed) :-
+	process_segments([], _, Acc, Processed) :-
 		reverse(Acc, Processed).
-	process_segments([[]|Segments], Acc, Processed) :-
+	process_segments([[]|Segments], Absolute, Acc, Processed) :-
 		!,
 		% Skip empty segments
-		process_segments(Segments, Acc, Processed).
-	process_segments([[0'., 0'.]|Segments], [_|Acc], Processed) :-
+		process_segments(Segments, Absolute, Acc, Processed).
+	process_segments([[0'., 0'.]|Segments], Absolute, Acc, Processed) :-
 		!,
-		% Handle '..' by removing the previous segment
-		process_segments(Segments, Acc, Processed).
-	process_segments([[0'.]|Segments], Acc, Processed) :-
+		process_parent_segment(Absolute, Acc, NextAcc),
+		process_segments(Segments, Absolute, NextAcc, Processed).
+	process_segments([[0'.]|Segments], Absolute, Acc, Processed) :-
 		!,
 		% Skip '.' segments
-		process_segments(Segments, Acc, Processed).
-	process_segments([Segment|Segments], Acc, Processed) :-
+		process_segments(Segments, Absolute, Acc, Processed).
+	process_segments([Segment|Segments], Absolute, Acc, Processed) :-
 		% Keep normal segments
-		process_segments(Segments, [Segment|Acc], Processed).
+		process_segments(Segments, Absolute, [Segment|Acc], Processed).
+
+	process_parent_segment(_, [Segment|Acc], Acc) :-
+		Segment \== [0'., 0'.],
+		!.
+	process_parent_segment(true, Acc, Acc) :-
+		!.
+	process_parent_segment(false, Acc, [[0'., 0'.]|Acc]).
 
 	join_segments(Segments, TrailingSlash, PathCodes) :-
 		join_segments(Segments, [], TrailingSlash, PathCodes).
@@ -796,14 +1129,33 @@
 		join_segments(Segments, Acc2, TrailingSlash, PathCodes).
 
 	build_url_from_components(Components, URL) :-
-		build_url_from_components(Components, [], URLCodes),
+		components_generation_kind(Components, Kind),
+		build_url_from_components(Kind, Components, [], URLCodes),
 		convert_to_text(_Representation_, URLCodes, URL).
+
+	components_generation_kind([scheme(_)|_], url) :-
+		!.
+	components_generation_kind(_, relative_reference).
+
+	components_reference_kind([scheme(_)|_], url) :-
+		!.
+	components_reference_kind([authority(_)|_], network_path) :-
+		!.
+	components_reference_kind([path(Path)|_], absolute_path) :-
+		absolute_path(Path),
+		!.
+	components_reference_kind([path(_)|_], relative_path) :-
+		!.
+	components_reference_kind([query(_)|_], query) :-
+		!.
+	components_reference_kind([fragment(_)|_], fragment).
 
 	component_output_codes(scheme(Scheme), SchemeCodes) :-
 		downcase_text(Scheme, NormalizedScheme),
 		convert_to_text(_Representation_, SchemeCodes, NormalizedScheme).
 	component_output_codes(authority(Authority), AuthorityCodes) :-
-		convert_to_text(_Representation_, AuthorityCodes, Authority).
+		normalize_authority(Authority, NormalizedAuthority),
+		convert_to_text(_Representation_, AuthorityCodes, NormalizedAuthority).
 	component_output_codes(path(Path), PathCodes) :-
 		normalize_path(Path, NormalizedPath),
 		convert_to_text(_Representation_, PathCodes, NormalizedPath).
@@ -823,42 +1175,48 @@
 		normalize_identifier(Identifier, NormalizedIdentifier),
 		convert_to_text(_Representation_, IdentifierCodes, NormalizedIdentifier).
 
-	build_url_from_components([], URLCodes, URLCodes).
+	build_url_from_components(_, [], URLCodes, URLCodes) :-
+		!.
 	% Handle schemes that use only colon (mailto, news, tel, urn)
-	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
+	build_url_from_components(url, [scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [address(_)| _],
 		!,
 		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':], Acc2),
-		build_url_from_components(Components, Acc2, URLCodes).
-	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
+		build_url_from_components(url, Components, Acc2, URLCodes).
+	build_url_from_components(url, [scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [number(_)| _],
 		!,
 		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':], Acc2),
-		build_url_from_components(Components, Acc2, URLCodes).
-	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
+		build_url_from_components(url, Components, Acc2, URLCodes).
+	build_url_from_components(url, [scheme(Scheme)| Components], Acc, URLCodes) :-
 		Components = [identifier(_)| _],
 		!,
 		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':], Acc2),
-		build_url_from_components(Components, Acc2, URLCodes).
+		build_url_from_components(url, Components, Acc2, URLCodes).
 	% Handle standard schemes with authority (http, https, ftp, etc.)
-	build_url_from_components([scheme(Scheme)| Components], Acc, URLCodes) :-
+	build_url_from_components(url, [scheme(Scheme)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(scheme(Scheme), SchemeCodes),
 		append(Acc, SchemeCodes, Acc1),
 		append(Acc1, [0':,0'/,0'/], Acc2),
-		build_url_from_components(Components, Acc2, URLCodes).
-	build_url_from_components([authority(Authority)| Components], Acc, URLCodes) :-
+		build_url_from_components(url, Components, Acc2, URLCodes).
+	build_url_from_components(relative_reference, [authority(Authority)| Components], Acc, URLCodes) :-
+		!,
+		component_output_codes(authority(Authority), AuthorityCodes),
+		append(Acc, [0'/,0'/| AuthorityCodes], Acc1),
+		build_url_from_components(relative_reference, Components, Acc1, URLCodes).
+	build_url_from_components(_, [authority(Authority)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(authority(Authority), AuthorityCodes),
 		append(Acc, AuthorityCodes, Acc1),
-		build_url_from_components(Components, Acc1, URLCodes).
-	build_url_from_components([path(Path)| Components], Acc, URLCodes) :-
+		build_url_from_components(url, Components, Acc1, URLCodes).
+	build_url_from_components(url, [path(Path)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(path(Path), PathCodes),
 		(	PathCodes \== [] ->
@@ -869,8 +1227,13 @@
 			)
 		;	Acc1 = Acc
 		),
-		build_url_from_components(Components, Acc1, URLCodes).
-	build_url_from_components([query(Query)| Components], Acc, URLCodes) :-
+		build_url_from_components(url, Components, Acc1, URLCodes).
+	build_url_from_components(relative_reference, [path(Path)| Components], Acc, URLCodes) :-
+		!,
+		component_output_codes(path(Path), PathCodes),
+		append_relative_reference_path_codes(Acc, PathCodes, Acc1),
+		build_url_from_components(relative_reference, Components, Acc1, URLCodes).
+	build_url_from_components(Type, [query(Query)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(query(Query), QueryCodes),
 		(	QueryCodes \== [] ->
@@ -878,8 +1241,8 @@
 			append(Acc0, QueryCodes, Acc1)
 		;	Acc1 = Acc
 		),
-		build_url_from_components(Components, Acc1, URLCodes).
-	build_url_from_components([fragment(Fragment)| Components], Acc, URLCodes) :-
+		build_url_from_components(Type, Components, Acc1, URLCodes).
+	build_url_from_components(Type, [fragment(Fragment)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(fragment(Fragment), FragmentCodes),
 		(	FragmentCodes \== [] ->
@@ -887,24 +1250,241 @@
 			append(Acc0, FragmentCodes, Acc1)
 		;	Acc1 = Acc
 		),
-		build_url_from_components(Components, Acc1, URLCodes).
+		build_url_from_components(Type, Components, Acc1, URLCodes).
 	% Handle mailto address component
-	build_url_from_components([address(Address)| Components], Acc, URLCodes) :-
+	build_url_from_components(Type, [address(Address)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(address(Address), AddressCodes),
 		append(Acc, AddressCodes, Acc1),
-		build_url_from_components(Components, Acc1, URLCodes).
+		build_url_from_components(Type, Components, Acc1, URLCodes).
 	% Handle tel number component
-	build_url_from_components([number(Number)| Components], Acc, URLCodes) :-
+	build_url_from_components(Type, [number(Number)| Components], Acc, URLCodes) :-
 		!,
 		component_output_codes(number(Number), NumberCodes),
 		append(Acc, NumberCodes, Acc1),
-		build_url_from_components(Components, Acc1, URLCodes).
+		build_url_from_components(Type, Components, Acc1, URLCodes).
 	% Handle news/urn identifier component
-	build_url_from_components([identifier(Identifier)| Components], Acc, URLCodes) :-
+	build_url_from_components(Type, [identifier(Identifier)| Components], Acc, URLCodes) :-
 		component_output_codes(identifier(Identifier), IdentifierCodes),
 		append(Acc, IdentifierCodes, Acc1),
-		build_url_from_components(Components, Acc1, URLCodes).
+		build_url_from_components(Type, Components, Acc1, URLCodes).
+
+	append_relative_reference_path_codes(Acc, [], Acc) :-
+		!.
+	append_relative_reference_path_codes([0'/,0'/|_]= Acc, [0'/|_]= PathCodes, Acc1) :-
+		!,
+		append(Acc, PathCodes, Acc1).
+	append_relative_reference_path_codes([0'/,0'/|_]= Acc, PathCodes, Acc1) :-
+		!,
+		append(Acc, [0'/| PathCodes], Acc1).
+	append_relative_reference_path_codes(Acc, PathCodes, Acc1) :-
+		append(Acc, PathCodes, Acc1).
+
+	normalized_absolute_reference_components(Reference, Components) :-
+		normalize(Reference, NormalizedReference),
+		parse(NormalizedReference, Components),
+		Components = [scheme(_), authority(_)| _].
+
+	relativize_reference_components(BasePath, BaseQuery, BaseFragment, TargetPath, TargetQuery, TargetFragment, Empty, [fragment(TargetFragment)]) :-
+		BasePath == TargetPath,
+		BaseQuery == TargetQuery,
+		TargetFragment \== Empty,
+		TargetFragment \== BaseFragment,
+		!.
+	relativize_reference_components(BasePath, BaseQuery, BaseFragment, TargetPath, TargetQuery, TargetFragment, Empty, RelativeComponents) :-
+		BasePath == TargetPath,
+		TargetQuery \== Empty,
+		( TargetQuery \== BaseQuery ; TargetFragment \== BaseFragment ),
+		!,
+		append_optional_fragment([query(TargetQuery)], TargetFragment, Empty, RelativeComponents).
+	relativize_reference_components(BasePath, _BaseQuery, _BaseFragment, TargetPath, TargetQuery, TargetFragment, Empty, RelativeComponents) :-
+		relativize_reference_path(BasePath, TargetPath, RelativePath),
+		RelativePath \== Empty,
+		append_optional_query_fragment([path(RelativePath)], TargetQuery, TargetFragment, Empty, RelativeComponents).
+
+	append_optional_query_fragment(Components0, Query, Fragment, Empty, Components) :-
+		append_optional_query(Components0, Query, Empty, Components1),
+		append_optional_fragment(Components1, Fragment, Empty, Components).
+
+	append_optional_query(Components0, Query, Empty, Components) :-
+		( Query == Empty ->
+			Components = Components0
+		; 	append(Components0, [query(Query)], Components)
+		).
+
+	append_optional_fragment(Components0, Fragment, Empty, Components) :-
+		( Fragment == Empty ->
+			Components = Components0
+		; 	append(Components0, [fragment(Fragment)], Components)
+		).
+
+	relativize_reference_path(BasePath, TargetPath, RelativePath) :-
+		convert_to_text(_Representation_, BasePathCodes, BasePath),
+		convert_to_text(_Representation_, TargetPathCodes, TargetPath),
+		relativize_reference_path_codes(BasePathCodes, TargetPathCodes, RelativePathCodes),
+		convert_to_text(_Representation_, RelativePathCodes, RelativePath).
+
+	relativize_reference_path_codes(BasePathCodes, TargetPathCodes, RelativePathCodes) :-
+		path_segments_codes(BasePathCodes, BaseSegments, BaseTrailingSlash),
+		path_segments_codes(TargetPathCodes, TargetSegments, TargetTrailingSlash),
+		base_directory_segments(BaseSegments, BaseTrailingSlash, BaseDirectorySegments),
+		split_common_path_prefix(BaseDirectorySegments, TargetSegments, BaseRemainderSegments, TargetRemainderSegments),
+		parent_path_segments(BaseRemainderSegments, ParentSegments),
+		append(ParentSegments, TargetRemainderSegments, RelativeSegments),
+		relative_path_codes(RelativeSegments, TargetTrailingSlash, TargetPathCodes, RelativePathCodes).
+
+	path_segments_codes([], [], false) :-
+		!.
+	path_segments_codes([0'/], [], true) :-
+		!.
+	path_segments_codes([0'/| PathCodes], Segments, TrailingSlash) :-
+		!,
+		split_path(PathCodes, Segments0),
+		remove_trailing_empty_segment(Segments0, Segments, TrailingSlash).
+	path_segments_codes(PathCodes, Segments, TrailingSlash) :-
+		split_path(PathCodes, Segments0),
+		remove_trailing_empty_segment(Segments0, Segments, TrailingSlash).
+
+	remove_trailing_empty_segment(Segments0, Segments, true) :-
+		append(Segments, [[]], Segments0),
+		!.
+	remove_trailing_empty_segment(Segments, Segments, false).
+
+	base_directory_segments(Segments, true, Segments) :-
+		!.
+	base_directory_segments(Segments, false, DirectorySegments) :-
+		remove_last_path_segment(Segments, DirectorySegments).
+
+	remove_last_path_segment([], []) :-
+		!.
+	remove_last_path_segment([_], []) :-
+		!.
+	remove_last_path_segment([Segment| Segments], [Segment| DirectorySegments]) :-
+		remove_last_path_segment(Segments, DirectorySegments).
+
+	split_common_path_prefix([Segment| BaseSegments], [Segment| TargetSegments], BaseRemainderSegments, TargetRemainderSegments) :-
+		!,
+		split_common_path_prefix(BaseSegments, TargetSegments, BaseRemainderSegments, TargetRemainderSegments).
+	split_common_path_prefix(BaseSegments, TargetSegments, BaseSegments, TargetSegments).
+
+	parent_path_segments([], []).
+	parent_path_segments([_| Segments], [[0'.,0'.]| ParentSegments]) :-
+		parent_path_segments(Segments, ParentSegments).
+
+	relative_path_codes([], _TargetTrailingSlash, _TargetPathCodes, []) :-
+		!,
+		fail.
+	relative_path_codes(RelativeSegments, TargetTrailingSlash, TargetPathCodes, RelativePathCodes) :-
+		RelativeSegments \== [],
+		join_segments(RelativeSegments, TargetTrailingSlash, RelativePathCodes0),
+		( 	relative_path_noscheme_codes(RelativePathCodes0) ->
+			RelativePathCodes = RelativePathCodes0
+		; 	TargetPathCodes = [0'/|_],
+			RelativePathCodes = TargetPathCodes
+		),
+		!.
+
+	relative_path_noscheme_codes(RelativePathCodes) :-
+		split_path(RelativePathCodes, [FirstSegment| _]),
+		\+ member(0':, FirstSegment).
+
+	parse_reference_for_resolution(Reference, []) :-
+		convert_to_text(_Representation_, [], Reference),
+		!.
+	parse_reference_for_resolution(Reference, Components) :-
+		parse(Reference, Components, _).
+
+	resolve_reference_components(_, _, ReferenceComponents, _, ReferenceComponents) :-
+		ReferenceComponents = [scheme(_)| _],
+		!.
+	resolve_reference_components(Scheme, BaseComponents, ReferenceComponents, Empty, ResolvedComponents) :-
+		hierarchical_base_components(BaseComponents, BaseAuthority, BasePath, BaseQuery),
+		resolve_relative_reference_components(Scheme, BaseAuthority, BasePath, BaseQuery, ReferenceComponents, Empty, ResolvedComponents).
+
+	hierarchical_base_components(BaseComponents, BaseAuthority, BasePath, BaseQuery) :-
+		component_value(authority, BaseComponents, BaseAuthority),
+		component_value_or_default(path, BaseComponents, '', BasePath),
+		component_value_or_default(query, BaseComponents, '', BaseQuery).
+
+	resolve_relative_reference_components(Scheme, _BaseAuthority, _BasePath, _BaseQuery, [authority(ReferenceAuthority)| ReferenceComponents], Empty, ResolvedComponents) :-
+		!,
+		component_value_or_default(path, ReferenceComponents, Empty, ReferencePath),
+		component_value_or_default(query, ReferenceComponents, Empty, ReferenceQuery),
+		component_value_or_default(fragment, ReferenceComponents, Empty, ReferenceFragment),
+		ResolvedComponents = [scheme(Scheme), authority(ReferenceAuthority), path(ReferencePath), query(ReferenceQuery), fragment(ReferenceFragment)].
+	resolve_relative_reference_components(Scheme, BaseAuthority, BasePath, _BaseQuery, ReferenceComponents, Empty, ResolvedComponents) :-
+		component_value(path, ReferenceComponents, ReferencePath),
+		!,
+		resolve_reference_path(BasePath, ReferencePath, ResolvedPath),
+		component_value_or_default(query, ReferenceComponents, Empty, ReferenceQuery),
+		component_value_or_default(fragment, ReferenceComponents, Empty, ReferenceFragment),
+		ResolvedComponents = [scheme(Scheme), authority(BaseAuthority), path(ResolvedPath), query(ReferenceQuery), fragment(ReferenceFragment)].
+	resolve_relative_reference_components(Scheme, BaseAuthority, BasePath, _BaseQuery, ReferenceComponents, Empty, ResolvedComponents) :-
+		component_present(query, ReferenceComponents),
+		!,
+		component_value(query, ReferenceComponents, ReferenceQuery),
+		component_value_or_default(fragment, ReferenceComponents, Empty, ReferenceFragment),
+		ResolvedComponents = [scheme(Scheme), authority(BaseAuthority), path(BasePath), query(ReferenceQuery), fragment(ReferenceFragment)].
+	resolve_relative_reference_components(Scheme, BaseAuthority, BasePath, BaseQuery, ReferenceComponents, Empty, ResolvedComponents) :-
+		component_value_or_default(fragment, ReferenceComponents, Empty, ReferenceFragment),
+		ResolvedComponents = [scheme(Scheme), authority(BaseAuthority), path(BasePath), query(BaseQuery), fragment(ReferenceFragment)].
+
+	empty_text(Empty) :-
+		convert_to_text(_Representation_, [], Empty).
+
+	resolve_reference_path(_BasePath, ReferencePath, ResolvedPath) :-
+		absolute_path(ReferencePath),
+		!,
+		normalize_path(ReferencePath, ResolvedPath).
+	resolve_reference_path(BasePath, ReferencePath, ResolvedPath) :-
+		merge_reference_path(BasePath, ReferencePath, MergedPath),
+		normalize_path(MergedPath, ResolvedPath).
+
+	absolute_path(Path) :-
+		convert_to_text(_Representation_, PathCodes, Path),
+		PathCodes = [0'/| _].
+
+	merge_reference_path(BasePath, ReferencePath, MergedPath) :-
+		convert_to_text(_Representation_, BasePathCodes, BasePath),
+		convert_to_text(_Representation_, ReferencePathCodes, ReferencePath),
+		merge_reference_path_codes(BasePathCodes, ReferencePathCodes, MergedPathCodes),
+		convert_to_text(_Representation_, MergedPathCodes, MergedPath).
+
+	merge_reference_path_codes([], ReferencePathCodes, [0'/| ReferencePathCodes]) :-
+		!.
+	merge_reference_path_codes(BasePathCodes, ReferencePathCodes, MergedPathCodes) :-
+		remove_last_segment_codes(BasePathCodes, BasePrefixCodes),
+		append(BasePrefixCodes, ReferencePathCodes, MergedPathCodes).
+
+	remove_last_segment_codes(PathCodes, PrefixCodes) :-
+		reverse(PathCodes, ReversedPathCodes),
+		drop_until_slash(ReversedPathCodes, ReversedPrefixCodes),
+		reverse(ReversedPrefixCodes, PrefixCodes).
+
+	drop_until_slash([0'/| ReversedPrefixCodes], [0'/| ReversedPrefixCodes]) :-
+		!.
+	drop_until_slash([_| ReversedPathCodes], ReversedPrefixCodes) :-
+		drop_until_slash(ReversedPathCodes, ReversedPrefixCodes).
+	drop_until_slash([], []).
+
+	component_present(Name, [Component| _]) :-
+		functor(Component, Name, 1),
+		!.
+	component_present(Name, [_| Components]) :-
+		component_present(Name, Components).
+
+	component_value(Name, [Component| _], Value) :-
+		functor(Component, Name, 1),
+		!,
+		arg(1, Component, Value).
+	component_value(Name, [_| Components], Value) :-
+		component_value(Name, Components, Value).
+
+	component_value_or_default(Name, Components, Default, Value) :-
+		(	component_value(Name, Components, Value) ->
+			true
+		; 	Value = Default
+		).
 
 	:- private(downcase_text/2).
 	:- mode(downcase_text(+text, -text), one).

@@ -98,3 +98,63 @@ To test this library predicates, load the ``tester.lgt`` file:
 ::
 
    | ?- logtalk_load(url(tester)).
+
+Usage
+-----
+
+The ``valid/1`` and ``parse/2`` predicates are intended for absolute
+URLs:
+
+::
+
+   | ?- url(atom)::valid('https://example.com/path?x=1#frag').
+   true.
+
+   | ?- url(atom)::parse('https://example.com/path?x=1#frag', Components).
+   Components = [scheme(https), authority('example.com'), path('/path'), query('x=1'), fragment(frag)].
+
+For RFC 3986 relative references, use ``parse/3`` or
+``reference_kind/2``:
+
+::
+
+   | ?- url(atom)::parse('../users/42?verbose=true#details', Components, Kind).
+   Components = [path('../users/42'), query('verbose=true'), fragment(details)],
+   Kind = relative_path.
+
+   | ?- url(atom)::reference_kind('//example.com/v1', Kind).
+   Kind = network_path.
+
+The ``generate/2`` and ``normalize/2`` predicates work with both
+absolute URLs and relative references:
+
+::
+
+   | ?- url(atom)::generate([authority('example.com'), path('/v1')], Reference).
+   Reference = '//example.com/v1'.
+
+   | ?- url(atom)::normalize('../users/./42', NormalizedReference).
+   NormalizedReference = '../users/42'.
+
+The ``resolve/3`` predicate resolves a reference against an absolute
+base URL, while ``relativize/3`` computes a relative reference between
+compatible URLs:
+
+::
+
+   | ?- url(atom)::resolve('http://example.com/a/b/c', '../d', Resolved).
+   Resolved = 'http://example.com/a/d'.
+
+   | ?- url(atom)::relativize('http://example.com/a/b/c', 'http://example.com/v1', Relative).
+   Relative = '../../v1'.
+
+The ``file_path_components/2`` predicate converts file-system paths into
+file URL components and supports both POSIX and Windows paths:
+
+::
+
+   | ?- url(atom)::file_path_components('/home/user/document.txt', Components).
+   Components = [authority(''), path('/home/user/document.txt')].
+
+   | ?- url(atom)::file_path_components('C:\\Temp\\app\\file.txt', Components).
+   Components = [authority(''), path('/C:/Temp/app/file.txt')].

@@ -6379,6 +6379,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::equivalent/2>`
+* :ref:`url(Representation) <url/1::equivalent/2>`
 
 ``erase/1``
 -----------
@@ -15523,6 +15524,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::parse/3>`
 * :ref:`nmea_protocol <nmea_protocol/0::parse/3>`
 * :ref:`protobuf <protobuf/0::parse/3>`
+* :ref:`url(Representation) <url/1::parse/3>`
 * :ref:`xml <xml/0::parse/3>`
 
 ``parse/4``
@@ -18290,6 +18292,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`recorded_database_core <recorded_database_core/0::recordz/3>`
 
+``reference_kind/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`url(Representation) <url/1::reference_kind/2>`
+
 ``refine/5``
 ------------
 
@@ -18399,6 +18411,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::relative_standard_deviation/2>`
+
+``relativize/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`url(Representation) <url/1::relativize/3>`
 
 ``release/1``
 -------------
@@ -18797,6 +18819,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp_pool <amqp_pool/0::resize/2>`
+
+``resolve/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`url(Representation) <url/1::resolve/3>`
 
 ``resource_read/3``
 -------------------
