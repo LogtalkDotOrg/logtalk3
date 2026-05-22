@@ -23,9 +23,9 @@
 	imports([clusterer_common, search_indexing])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-05-22,
 		comment is 'OPTICS clusterer for continuous datasets. Learns an ordering from a dataset object implementing the ``clustering_dataset_protocol`` protocol and extracts clusters using an epsilon threshold so the result can be used with the standard clusterer protocol.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, dbscan_clusterer]
 	]).
@@ -350,36 +350,25 @@
 
 	extract_clusters(Ordering, Options, Clusters, Noise) :-
 		^^option(ordering_and_extraction_epsilons(_, ExtractionEpsilon), Options),
-		scan_ordering(Ordering, ExtractionEpsilon, none, 0, [], [], ReverseClusters, ReverseNoise),
-		reverse(ReverseClusters, Clusters),
-		reverse(ReverseNoise, Noise).
+		scan_ordering(Ordering, ExtractionEpsilon, none, 0, Clusters, Noise).
 
-	scan_ordering([], _ExtractionEpsilon, none, _ClusterCount, Clusters, Noise, Clusters, Noise) :-
+	scan_ordering([], _ExtractionEpsilon, none, _ClusterCount, [], []) :-
 		!.
-	scan_ordering([], _ExtractionEpsilon, current(ClusterId, CorePoints, BorderPoints), _ClusterCount, Clusters0, Noise, Clusters, Noise) :-
-		build_cluster(ClusterId, CorePoints, BorderPoints, Cluster),
-		Clusters = [Cluster| Clusters0].
-	scan_ordering([ordered(_Id, Reachability, CoreDistance, Vector)| Ordering], ExtractionEpsilon, Current0, ClusterCount0, Clusters0, Noise0, Clusters, Noise) :-
+	scan_ordering([], _ExtractionEpsilon, current(ClusterId, CorePoints, BorderPoints), _ClusterCount, [Cluster], []) :-
+		build_cluster(ClusterId, CorePoints, BorderPoints, Cluster).
+	scan_ordering([ordered(_Id, Reachability, CoreDistance, Vector)| Ordering], ExtractionEpsilon, Current0, ClusterCount0, Clusters, Noise) :-
 		(   start_new_cluster(Reachability, CoreDistance, ExtractionEpsilon) ->
-			finalize_current(Current0, Clusters0, Clusters1),
-			ClusterCount1 is ClusterCount0 + 1,
-			Current1 = current(ClusterCount1, [Vector], []),
-			Noise1 = Noise0
-		;   assign_to_current(Current0, Reachability, ExtractionEpsilon) ->
-			Current0 = current(ClusterId, CorePoints0, BorderPoints0),
-			ClusterCount1 = ClusterCount0,
-			Clusters1 = Clusters0,
-			Noise1 = Noise0,
-			(   is_core(CoreDistance, ExtractionEpsilon) ->
-				Current1 = current(ClusterId, [Vector| CorePoints0], BorderPoints0)
-			;   Current1 = current(ClusterId, CorePoints0, [Vector| BorderPoints0])
-			)
-		;   finalize_current(Current0, Clusters0, Clusters1),
-			Current1 = none,
-			ClusterCount1 = ClusterCount0,
-			Noise1 = [Vector| Noise0]
-		),
-		scan_ordering(Ordering, ExtractionEpsilon, Current1, ClusterCount1, Clusters1, Noise1, Clusters, Noise).
+			ClusterId is ClusterCount0 + 1,
+			Current1 = current(ClusterId, [Vector], []),
+			scan_ordering(Ordering, ExtractionEpsilon, Current1, ClusterId, RemainingClusters, Noise),
+			prepend_finalized_cluster(Current0, RemainingClusters, Clusters)
+		;   continues_cluster(Current0, Reachability, ExtractionEpsilon) ->
+			add_current_point(Current0, CoreDistance, Vector, ExtractionEpsilon, Current1),
+			scan_ordering(Ordering, ExtractionEpsilon, Current1, ClusterCount0, Clusters, Noise)
+		;   Noise = [Vector| RemainingNoise],
+			scan_ordering(Ordering, ExtractionEpsilon, none, ClusterCount0, RemainingClusters, RemainingNoise),
+			prepend_finalized_cluster(Current0, RemainingClusters, Clusters)
+		).
 
 	start_new_cluster(Reachability, CoreDistance, ExtractionEpsilon) :-
 		is_core(CoreDistance, ExtractionEpsilon),
@@ -388,7 +377,7 @@
 		;	Reachability > ExtractionEpsilon
 		).
 
-	assign_to_current(current(_, _, _), Reachability, ExtractionEpsilon) :-
+	continues_cluster(current(_, _, _), Reachability, ExtractionEpsilon) :-
 		Reachability \== none,
 		Reachability =< ExtractionEpsilon.
 
@@ -396,10 +385,17 @@
 		CoreDistance \== none,
 		CoreDistance =< ExtractionEpsilon.
 
-	finalize_current(none, Clusters, Clusters).
-	finalize_current(current(ClusterId, CorePoints, BorderPoints), Clusters0, Clusters) :-
-		build_cluster(ClusterId, CorePoints, BorderPoints, Cluster),
-		Clusters = [Cluster| Clusters0].
+	add_current_point(current(ClusterId, CorePoints0, BorderPoints0), CoreDistance, Vector, ExtractionEpsilon, current(ClusterId, CorePoints, BorderPoints)) :-
+		(   is_core(CoreDistance, ExtractionEpsilon) ->
+			CorePoints = [Vector| CorePoints0],
+			BorderPoints = BorderPoints0
+		;   CorePoints = CorePoints0,
+			BorderPoints = [Vector| BorderPoints0]
+		).
+
+	prepend_finalized_cluster(none, Clusters, Clusters).
+	prepend_finalized_cluster(current(ClusterId, CorePoints, BorderPoints), Clusters, [Cluster| Clusters]) :-
+		build_cluster(ClusterId, CorePoints, BorderPoints, Cluster).
 
 	build_cluster(ClusterId, CorePoints, BorderPoints, cluster(ClusterId, CorePoints, BorderPoints, bounds(Minimums, Maximums))) :-
 		core_point_bounds(CorePoints, Minimums, Maximums).
