@@ -26,7 +26,11 @@
 	logtalk_load('../http_client/loader.lgt'),
 	logtalk_load('../http_socket/loader.lgt'),
 	logtalk_load('../http_websocket_messages/loader.lgt'),
-	logtalk_load(http_websocket_session_handler_protocol),
-	logtalk_load(http_websocket_session_registry),
-	logtalk_load(http_websocket_session, [optimize(on)])
+	logtalk_load([
+		http_websocket_session_handler_protocol,
+		http_websocket_session_registry,
+		http_websocket_session
+	], [
+		optimize(on)
+	])
 )).

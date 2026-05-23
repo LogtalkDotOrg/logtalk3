@@ -184,51 +184,91 @@
 
 	:- private(connection_pool_seed_/1).
 	:- dynamic(connection_pool_seed_/1).
+	:- mode(connection_pool_seed_(?positive_integer), zero_or_one).
+	:- info(connection_pool_seed_/1, [
+		comment is 'Last allocated connection pool identifier.',
+		argnames is ['PoolId']
+	]).
 
 	:- private(connection_pool_config_/6).
 	:- dynamic(connection_pool_config_/6).
+	:- mode(connection_pool_config_(?positive_integer, ?atom, ?integer, ?non_negative_integer, ?positive_integer, ?list), zero_or_more).
+	:- info(connection_pool_config_/6, [
+		comment is 'Stored connection pool configuration indexed by pool identifier.',
+		argnames is ['PoolId', 'Host', 'Port', 'MinSize', 'MaxSize', 'ConnectionOptions']
+	]).
 
 	:- private(connection_pool_available_/2).
 	:- dynamic(connection_pool_available_/2).
+	:- mode(connection_pool_available_(?positive_integer, ?compound), zero_or_more).
+	:- info(connection_pool_available_/2, [
+		comment is 'Reusable idle client connections indexed by pool identifier.',
+		argnames is ['PoolId', 'Connection']
+	]).
 
 	:- private(connection_pool_in_use_/2).
 	:- dynamic(connection_pool_in_use_/2).
+	:- mode(connection_pool_in_use_(?positive_integer, ?compound), zero_or_more).
+	:- info(connection_pool_in_use_/2, [
+		comment is 'Checked-out client connections indexed by pool identifier.',
+		argnames is ['PoolId', 'Connection']
+	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.
 
 		:- private(listener_shutdown_seed_/1).
 		:- dynamic(listener_shutdown_seed_/1).
+		:- mode(listener_shutdown_seed_(?positive_integer), zero_or_one).
+		:- info(listener_shutdown_seed_/1, [
+			comment is 'Last allocated shutdown run identifier for open-ended listener loops.',
+			argnames is ['RunId']
+		]).
 
 		:- private(listener_shutdown_control_/3).
 		:- dynamic(listener_shutdown_control_/3).
+		:- mode(listener_shutdown_control_(?nonvar, ?compound, ?positive_integer), zero_or_more).
+		:- info(listener_shutdown_control_/3, [
+			comment is 'Registered shutdown control terms and their associated listeners.',
+			argnames is ['Control', 'Listener', 'RunId']
+		]).
 
 		:- private(listener_shutdown_requested_/2).
 		:- dynamic(listener_shutdown_requested_/2).
+		:- mode(listener_shutdown_requested_(?nonvar, ?positive_integer), zero_or_more).
+		:- info(listener_shutdown_requested_/2, [
+			comment is 'Recorded shutdown requests indexed by control term and run identifier.',
+			argnames is ['Control', 'RunId']
+		]).
 
 		:- private(listener_active_worker_/3).
 		:- dynamic(listener_active_worker_/3).
+		:- mode(listener_active_worker_(?nonvar, ?positive_integer, ?compound), zero_or_more).
+		:- info(listener_active_worker_/3, [
+			comment is 'Active listener worker records indexed by control term and run identifier.',
+			argnames is ['Control', 'RunId', 'Worker']
+		]).
 
 		:- synchronized([
-			allocate_connection_pool_id_/1,
-			register_connection_pool_/7,
-			acquire_pool_connection_/2,
-			release_pool_connection_/3,
-			discard_pool_connection_/2,
-			close_connection_pool_state_/2,
-			connection_pool_stats_/2,
-			allocate_shutdown_run_id_/1,
-			register_shutdown_control_/3,
-			cleanup_shutdown_control_/2,
-			force_shutdown_control_/2,
-			register_active_worker_/3,
-			unregister_active_worker_/3,
-			current_active_workers_/3
+			allocate_connection_pool_id/1,
+			register_connection_pool/7,
+			acquire_pool_connection/2,
+			release_pool_connection/3,
+			discard_pool_connection/2,
+			close_connection_pool_state/2,
+			connection_pool_id_outcome/2,
+			allocate_shutdown_run_id/1,
+			register_shutdown_control/3,
+			cleanup_shutdown_control/2,
+			force_shutdown_control/2,
+			register_active_worker/3,
+			unregister_active_worker/3,
+			current_active_workers/3
 		]).
 	:- endif.
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
+		length/2, member/2, reverse/2, valid/1 as proper_list/1
 	]).
 
 	:- meta_predicate(call_with_catch_cleanup(0, 0)).
@@ -259,18 +299,18 @@
 		parse_connection_pool_options(Options, MinSize, MaxSize, ConnectionOptions),
 		normalize_connection_endpoint(Host, Port, NormalizedHost),
 		open_initial_pool_connections(MinSize, Host, Port, ConnectionOptions, [], ReversedConnections),
-		allocate_connection_pool_id_(PoolId),
-		register_connection_pool_(PoolId, NormalizedHost, Port, MinSize, MaxSize, ConnectionOptions, ReversedConnections),
+		allocate_connection_pool_id(PoolId),
+		register_connection_pool(PoolId, NormalizedHost, Port, MinSize, MaxSize, ConnectionOptions, ReversedConnections),
 		Pool = http_connection_pool(NormalizedHost, Port, PoolId).
 
 	close_connection_pool(Pool) :-
 		pool_id(Pool, PoolId),
-		close_connection_pool_state_(PoolId, Outcome),
+		close_connection_pool_state(PoolId, Outcome),
 		close_connection_pool_outcome(Outcome, Pool).
 
 	connection_pool_stats(Pool, Stats) :-
 		pool_id(Pool, PoolId),
-		connection_pool_stats_(PoolId, Outcome),
+		connection_pool_id_outcome(PoolId, Outcome),
 		connection_pool_stats_outcome(Outcome, Pool, Stats).
 
 	exchange(http_connection_pool(Host, Port, PoolId), Request, Response) :-
@@ -545,33 +585,33 @@
 		existence_error(http_socket_connection_pool, Pool).
 
 	acquire_managed_connection(Pool, PoolId, Connection) :-
-		acquire_pool_connection_(PoolId, Outcome),
-		acquire_pool_connection_outcome(Outcome, Pool, Connection).
+		acquire_pool_connection(PoolId, Outcome),
+		acquire_pool_connectionoutcome(Outcome, Pool, Connection).
 
-	acquire_pool_connection_outcome(connection(Connection), _Pool, Connection).
-	acquire_pool_connection_outcome(exhausted, _Pool, _Connection) :-
+	acquire_pool_connectionoutcome(connection(Connection), _Pool, Connection).
+	acquire_pool_connectionoutcome(exhausted, _Pool, _Connection) :-
 		resource_error(http_socket_connection_pool).
-	acquire_pool_connection_outcome(missing, Pool, _Connection) :-
+	acquire_pool_connectionoutcome(missing, Pool, _Connection) :-
 		existence_error(http_socket_connection_pool, Pool).
 
 	recycle_managed_connection(PoolId, Connection, Request, Response) :-
 		(	^^connection_persistent(Request, Response) ->
-			release_pool_connection_(PoolId, Connection, Action),
-			release_pool_connection_action(Action, Connection)
+			release_pool_connection(PoolId, Connection, Action),
+			release_pool_connectionaction(Action, Connection)
 		;	discard_managed_connection(PoolId, Connection)
 		).
 
 	discard_managed_connection(PoolId, Connection) :-
-		discard_pool_connection_(PoolId, Connection),
+		discard_pool_connection(PoolId, Connection),
 		catch(close_connection(Connection), _, true).
 
-	release_pool_connection_action(reused, _Connection).
-	release_pool_connection_action(closed, Connection) :-
+	release_pool_connectionaction(reused, _Connection).
+	release_pool_connectionaction(closed, Connection) :-
 		catch(close_connection(Connection), _, true).
 
 	pool_exchange_connection(PoolId, Pool, Requests, Responses) :-
 		( 	Requests == [] ->
-			connection_pool_stats_(PoolId, Outcome),
+			connection_pool_id_outcome(PoolId, Outcome),
 			connection_pool_stats_outcome(Outcome, Pool, _Stats),
 			Responses = []
 		;	acquire_managed_connection(Pool, PoolId, Connection),
@@ -643,14 +683,14 @@
 		register_shutdown_control(Control, Listener, RunId),
 		call_with_catch_cleanup(
 			serve_until_shutdown_with_workers(Workers, Listener, Handler, Control, RunId),
-			cleanup_shutdown_control_(Control, RunId)
+			cleanup_shutdown_control(Control, RunId)
 		).
 
 	request_shutdown_impl(Control) :-
 		( 	var(Control) ->
 			instantiation_error
 		; 	listener_shutdown_control_(Control, _Listener, RunId) ->
-			force_shutdown_control_(Control, RunId)
+			force_shutdown_control(Control, RunId)
 		; 	existence_error(http_socket_shutdown_control, Control)
 		).
 
@@ -669,7 +709,7 @@
 		reverse(ReversedClientInfos, ClientInfos).
 
 	serve_listener_with_workers_impl(pool(Size, rolling), Listener, Handler, Count, ClientInfos) :-
-		allocate_shutdown_run_id_(RunId),
+		allocate_shutdown_run_id(RunId),
 		catch(
 			serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, [], ReversedClientInfos, [], ReversedWorkers),
 			Error,
@@ -797,14 +837,14 @@
 
 	:- endif.
 
-	allocate_connection_pool_id_(PoolId) :-
+	allocate_connection_pool_id(PoolId) :-
 		( 	retract(connection_pool_seed_(CurrentPoolId)) ->
 			PoolId is CurrentPoolId + 1
 		;	PoolId = 1
 		),
 		assertz(connection_pool_seed_(PoolId)).
 
-	register_connection_pool_(PoolId, Host, Port, MinSize, MaxSize, ConnectionOptions, ReversedConnections) :-
+	register_connection_pool(PoolId, Host, Port, MinSize, MaxSize, ConnectionOptions, ReversedConnections) :-
 		assertz(connection_pool_config_(PoolId, Host, Port, MinSize, MaxSize, ConnectionOptions)),
 		register_pool_available_connections_(ReversedConnections, PoolId).
 
@@ -813,11 +853,11 @@
 		assertz(connection_pool_available_(PoolId, Connection)),
 		register_pool_available_connections_(Connections, PoolId).
 
-	acquire_pool_connection_(PoolId, connection(Connection)) :-
+	acquire_pool_connection(PoolId, connection(Connection)) :-
 		retract(connection_pool_available_(PoolId, Connection)),
 		!,
 		assertz(connection_pool_in_use_(PoolId, Connection)).
-	acquire_pool_connection_(PoolId, connection(Connection)) :-
+	acquire_pool_connection(PoolId, connection(Connection)) :-
 		connection_pool_config_(PoolId, Host, Port, _MinSize, MaxSize, ConnectionOptions),
 		connection_pool_connection_counts_(PoolId, Available, InUse),
 		Total is Available + InUse,
@@ -825,40 +865,40 @@
 		!,
 		open_connection(Host, Port, Connection, ConnectionOptions),
 		assertz(connection_pool_in_use_(PoolId, Connection)).
-	acquire_pool_connection_(PoolId, exhausted) :-
+	acquire_pool_connection(PoolId, exhausted) :-
 		connection_pool_config_(PoolId, _Host, _Port, _MinSize, _MaxSize, _ConnectionOptions),
 		!.
-	acquire_pool_connection_(_PoolId, missing).
+	acquire_pool_connection(_PoolId, missing).
 
-	release_pool_connection_(PoolId, Connection, reused) :-
+	release_pool_connection(PoolId, Connection, reused) :-
 		retract(connection_pool_in_use_(PoolId, Connection)),
 		connection_pool_config_(PoolId, _Host, _Port, _MinSize, _MaxSize, _ConnectionOptions),
 		!,
 		assertz(connection_pool_available_(PoolId, Connection)).
-	release_pool_connection_(PoolId, Connection, closed) :-
+	release_pool_connection(PoolId, Connection, closed) :-
 		retractall(connection_pool_in_use_(PoolId, Connection)).
 
-	discard_pool_connection_(PoolId, Connection) :-
+	discard_pool_connection(PoolId, Connection) :-
 		retractall(connection_pool_in_use_(PoolId, Connection)),
 		retractall(connection_pool_available_(PoolId, Connection)).
 
-	close_connection_pool_state_(PoolId, closed(Connections)) :-
+	close_connection_pool_state(PoolId, closed(Connections)) :-
 		connection_pool_config_(PoolId, _Host, _Port, _MinSize, _MaxSize, _ConnectionOptions),
 		\+ connection_pool_in_use_(PoolId, _Connection),
 		!,
 		retractall(connection_pool_config_(PoolId, _, _, _, _, _)),
 		findall(Connection, retract(connection_pool_available_(PoolId, Connection)), Connections).
-	close_connection_pool_state_(PoolId, in_use) :-
+	close_connection_pool_state(PoolId, in_use) :-
 		connection_pool_config_(PoolId, _Host, _Port, _MinSize, _MaxSize, _ConnectionOptions),
 		!.
-	close_connection_pool_state_(_PoolId, missing).
+	close_connection_pool_state(_PoolId, missing).
 
-	connection_pool_stats_(PoolId, stats(Available, InUse, Total, MinSize, MaxSize)) :-
+	connection_pool_id_outcome(PoolId, stats(Available, InUse, Total, MinSize, MaxSize)) :-
 		connection_pool_config_(PoolId, _Host, _Port, MinSize, MaxSize, _ConnectionOptions),
 		!,
 		connection_pool_connection_counts_(PoolId, Available, InUse),
 		Total is Available + InUse.
-	connection_pool_stats_(_PoolId, missing).
+	connection_pool_id_outcome(_PoolId, missing).
 
 	connection_pool_connection_counts_(PoolId, Available, InUse) :-
 		findall(Connection, connection_pool_available_(PoolId, Connection), AvailableConnections),
@@ -871,29 +911,26 @@
 	register_shutdown_control(Control, Listener, RunId) :-
 		(	var(Control) ->
 			instantiation_error
-		;	register_shutdown_control_(Control, Listener, RunId) ->
+		;	\+ listener_shutdown_control_(Control, _, _),
+			allocate_shutdown_run_id(RunId),
+			assertz(listener_shutdown_control_(Control, Listener, RunId)) ->
 			true
 		;	permission_error(reuse, http_socket_shutdown_control, Control)
 		).
 
-	allocate_shutdown_run_id_(RunId) :-
+	allocate_shutdown_run_id(RunId) :-
 		(	retract(listener_shutdown_seed_(CurrentRunId)) ->
 			RunId is CurrentRunId + 1
 		;	RunId = 1
 		),
 		assertz(listener_shutdown_seed_(RunId)).
 
-	register_shutdown_control_(Control, Listener, RunId) :-
-		\+ listener_shutdown_control_(Control, _, _),
-		allocate_shutdown_run_id_(RunId),
-		assertz(listener_shutdown_control_(Control, Listener, RunId)).
-
-	cleanup_shutdown_control_(Control, RunId) :-
+	cleanup_shutdown_control(Control, RunId) :-
 		retractall(listener_active_worker_(Control, RunId, _)),
 		retractall(listener_shutdown_requested_(Control, RunId)),
 		retractall(listener_shutdown_control_(Control, _, RunId)).
 
-	force_shutdown_control_(Control, RunId) :-
+	force_shutdown_control(Control, RunId) :-
 		(	listener_shutdown_requested_(Control, RunId) ->
 			true
 		;	assertz(listener_shutdown_requested_(Control, RunId))
@@ -914,7 +951,7 @@
 				Error,
 				(	shutdown_requested(Control, RunId) ->
 					true
-				;	force_shutdown_control_(Control, RunId),
+				;	force_shutdown_control(Control, RunId),
 					throw(Error)
 				)
 			),
@@ -959,7 +996,7 @@
 		!,
 		fail.
 	handle_accept_error(Control, RunId, Error) :-
-		force_shutdown_control_(Control, RunId),
+		force_shutdown_control(Control, RunId),
 		throw(Error).
 
 	spawn_open_connection_worker(Control, RunId, Input, Output, Handler) :-
@@ -967,7 +1004,7 @@
 			catch(
 				serve_accepted_connection(Input, Output, Handler),
 				Error,
-				(	force_shutdown_control_(Control, RunId),
+				(	force_shutdown_control(Control, RunId),
 					throw(Error)
 				)
 			),
@@ -976,24 +1013,24 @@
 		catch(
 			threaded_once(Goal, Tag),
 			Error,
-			(	force_shutdown_control_(Control, RunId),
+			(	force_shutdown_control(Control, RunId),
 				catch(socket::close(Input, Output), _, true),
 				throw(Error)
 			)
 		),
-		register_active_worker_(Control, RunId, worker(Tag, Goal)).
+		register_active_worker(Control, RunId, worker(Tag, Goal)).
 
-	register_active_worker_(Control, RunId, Worker) :-
+	register_active_worker(Control, RunId, Worker) :-
 		assertz(listener_active_worker_(Control, RunId, Worker)).
 
-	unregister_active_worker_(Control, RunId, Worker) :-
+	unregister_active_worker(Control, RunId, Worker) :-
 		retractall(listener_active_worker_(Control, RunId, Worker)).
 
-	current_active_workers_(Control, RunId, Workers) :-
+	current_active_workers(Control, RunId, Workers) :-
 		findall(Worker, listener_active_worker_(Control, RunId, Worker), Workers).
 
 	active_worker_count(Control, RunId, Count) :-
-		current_active_workers_(Control, RunId, Workers),
+		current_active_workers(Control, RunId, Workers),
 		length(Workers, Count).
 
 	check_finished_workers(Control, RunId) :-
@@ -1020,7 +1057,7 @@
 		).
 
 	collect_finished_workers(Control, RunId, Error0, Error) :-
-		current_active_workers_(Control, RunId, Workers),
+		current_active_workers(Control, RunId, Workers),
 		collect_finished_workers(Workers, Control, RunId, Error0, Error).
 
 	collect_finished_workers([], _Control, _RunId, Error, Error).
@@ -1030,7 +1067,7 @@
 
 	collect_finished_worker(Tag, Goal, Control, RunId, Error0, Error) :-
 		( 	catch(threaded_peek(Goal, Tag), _, fail) ->
-			unregister_active_worker_(Control, RunId, worker(Tag, Goal)),
+			unregister_active_worker(Control, RunId, worker(Tag, Goal)),
 			catch(threaded_exit(Goal, Tag), WorkerError, true),
 			remember_worker_error(Error0, WorkerError, Error)
 		;	Error = Error0

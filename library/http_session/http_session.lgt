@@ -108,9 +108,19 @@
 
 	:- private(session_seed_/1).
 	:- dynamic(session_seed_/1).
+	:- mode(session_seed_(?positive_integer), zero_or_one).
+	:- info(session_seed_/1, [
+		comment is 'Last allocated session identifier.',
+		argnames is ['SessionId']
+	]).
 
 	:- private(session_state_/2).
 	:- dynamic(session_state_/2).
+	:- mode(session_state_(?positive_integer, ?compound), zero_or_more).
+	:- info(session_state_/2, [
+		comment is 'Per-session stored cookie jar ownership and default request state.',
+		argnames is ['SessionId', 'State']
+	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([

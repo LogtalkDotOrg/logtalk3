@@ -107,23 +107,38 @@
 
 	:- private(registry_seed_/1).
 	:- dynamic(registry_seed_/1).
+	:- mode(registry_seed_(?positive_integer), zero_or_one).
+	:- info(registry_seed_/1, [
+		comment is 'Last allocated registry identifier.',
+		argnames is ['RegistryId']
+	]).
 
 	:- private(registry_state_/2).
 	:- dynamic(registry_state_/2).
+	:- mode(registry_state_(?positive_integer, ?non_negative_integer), zero_or_more).
+	:- info(registry_state_/2, [
+		comment is 'Per-registry next session identifier state.',
+		argnames is ['RegistryId', 'NextSessionId']
+	]).
 
 	:- private(registry_session_/3).
 	:- dynamic(registry_session_/3).
+	:- mode(registry_session_(?positive_integer, ?positive_integer, ?list(compound)), zero_or_more).
+	:- info(registry_session_/3, [
+		comment is 'Registered sessions and their queued outbound messages indexed by registry identifier.',
+		argnames is ['RegistryId', 'SessionId', 'Messages']
+	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
-			allocate_registry_id_/1,
-			open_registry_/1,
-			close_registry_/1,
-			register_session_/2,
-			unregister_session_/2,
-			queue_session_message_/3,
-			take_pending_messages_/3,
-			current_sessions_/2
+			allocate_registry_id/1,
+			open_registry/1,
+			close_registry/1,
+			register_session/2,
+			unregister_session/2,
+			queue_session_message/3,
+			take_pending_messages/3,
+			current_sessions/2
 		]).
 	:- endif.
 
@@ -132,44 +147,44 @@
 	]).
 
 	open(Registry) :-
-		open_registry_(Registry).
+		open_registry(Registry).
 
 	close(Registry) :-
-		close_registry_(Registry).
+		close_registry(Registry).
 
 	register(Registry, Session) :-
-		register_session_(Registry, Session).
+		register_session(Registry, Session).
 
 	unregister(Registry, Session) :-
-		unregister_session_(Registry, Session).
+		unregister_session(Registry, Session).
 
 	session(Registry, Session) :-
-		current_sessions_(Registry, Sessions),
+		current_sessions(Registry, Sessions),
 		member(Session, Sessions).
 
 	sessions(Registry, Sessions) :-
-		current_sessions_(Registry, Sessions).
+		current_sessions(Registry, Sessions).
 
 	session_count(Registry, Count) :-
-		current_sessions_(Registry, Sessions),
+		current_sessions(Registry, Sessions),
 		length(Sessions, Count).
 
 	send(Registry, Session, Message) :-
 		validate_registry_message(Message),
-		queue_session_message_(Registry, Session, Message).
+		queue_session_message(Registry, Session, Message).
 
 	broadcast(Registry, Message) :-
 		validate_registry_message(Message),
-		current_sessions_(Registry, Sessions),
+		current_sessions(Registry, Sessions),
 		broadcast_message(Sessions, Registry, Message).
 
 	broadcast_except(Registry, Session, Message) :-
 		validate_registry_message(Message),
-		current_sessions_(Registry, Sessions),
+		current_sessions(Registry, Sessions),
 		broadcast_except_message(Sessions, Registry, Session, Message).
 
 	take_pending(Registry, Session, Messages) :-
-		take_pending_messages_(Registry, Session, Messages).
+		take_pending_messages(Registry, Session, Messages).
 
 	validate_registry_message(Message) :-
 		( 	http_websocket_messages::is_message(Message) ->
@@ -179,29 +194,29 @@
 
 	broadcast_message([], _Registry, _Message).
 	broadcast_message([Session| Sessions], Registry, Message) :-
-		queue_session_message_(Registry, Session, Message),
+		queue_session_message(Registry, Session, Message),
 		broadcast_message(Sessions, Registry, Message).
 
 	broadcast_except_message([], _Registry, _ExceptSession, _Message).
 	broadcast_except_message([Session| Sessions], Registry, ExceptSession, Message) :-
 		( 	Session == ExceptSession ->
 			true
-		; 	queue_session_message_(Registry, Session, Message)
+		; 	queue_session_message(Registry, Session, Message)
 		),
 		broadcast_except_message(Sessions, Registry, ExceptSession, Message).
 
-	allocate_registry_id_(RegistryId) :-
+	allocate_registry_id(RegistryId) :-
 		( 	retract(registry_seed_(CurrentRegistryId)) ->
 			RegistryId is CurrentRegistryId + 1
 		; 	RegistryId = 1
 		),
 		assertz(registry_seed_(RegistryId)).
 
-	open_registry_(session_registry(RegistryId)) :-
-		allocate_registry_id_(RegistryId),
+	open_registry(session_registry(RegistryId)) :-
+		allocate_registry_id(RegistryId),
 		assertz(registry_state_(RegistryId, 0)).
 
-	close_registry_(Registry) :-
+	close_registry(Registry) :-
 		nonvar(Registry),
 		Registry = session_registry(RegistryId),
 		!,
@@ -210,13 +225,13 @@
 			true
 		; 	existence_error(http_websocket_session_registry, session_registry(RegistryId))
 		).
-	close_registry_(Registry) :-
+	close_registry(Registry) :-
 		( 	var(Registry) ->
 			instantiation_error
 		; 	domain_error(http_websocket_session_registry, Registry)
 		).
 
-	register_session_(Registry, websocket_session(RegistryId, SessionId)) :-
+	register_session(Registry, websocket_session(RegistryId, SessionId)) :-
 		nonvar(Registry),
 		Registry = session_registry(RegistryId),
 		!,
@@ -226,13 +241,13 @@
 			assertz(registry_session_(RegistryId, SessionId, []))
 		; 	existence_error(http_websocket_session_registry, session_registry(RegistryId))
 		).
-	register_session_(Registry, _Session) :-
+	register_session(Registry, _Session) :-
 		( 	var(Registry) ->
 			instantiation_error
 		; 	domain_error(http_websocket_session_registry, Registry)
 		).
 
-	unregister_session_(Registry, Session) :-
+	unregister_session(Registry, Session) :-
 		nonvar(Registry),
 		nonvar(Session),
 		Registry = session_registry(RegistryId),
@@ -242,7 +257,7 @@
 			true
 		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
-	unregister_session_(Registry, Session) :-
+	unregister_session(Registry, Session) :-
 		( 	var(Registry) ->
 			instantiation_error
 		; 	var(Session) ->
@@ -250,7 +265,7 @@
 		; 	domain_error(http_websocket_session_registry_session, Session)
 		).
 
-	queue_session_message_(Registry, Session, Message) :-
+	queue_session_message(Registry, Session, Message) :-
 		nonvar(Registry),
 		nonvar(Session),
 		Registry = session_registry(RegistryId),
@@ -261,7 +276,7 @@
 			assertz(registry_session_(RegistryId, SessionId, Messages))
 		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
-	queue_session_message_(Registry, Session, _Message) :-
+	queue_session_message(Registry, Session, _Message) :-
 		( 	var(Registry) ->
 			instantiation_error
 		; 	var(Session) ->
@@ -269,7 +284,7 @@
 		; 	domain_error(http_websocket_session_registry_session, Session)
 		).
 
-	take_pending_messages_(Registry, Session, Messages) :-
+	take_pending_messages(Registry, Session, Messages) :-
 		nonvar(Registry),
 		nonvar(Session),
 		Registry = session_registry(RegistryId),
@@ -280,7 +295,7 @@
 			assertz(registry_session_(RegistryId, SessionId, []))
 		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
-	take_pending_messages_(Registry, Session, _Messages) :-
+	take_pending_messages(Registry, Session, _Messages) :-
 		( 	var(Registry) ->
 			instantiation_error
 		; 	var(Session) ->
@@ -288,7 +303,7 @@
 		; 	domain_error(http_websocket_session_registry_session, Session)
 		).
 
-	current_sessions_(Registry, Sessions) :-
+	current_sessions(Registry, Sessions) :-
 		nonvar(Registry),
 		Registry = session_registry(RegistryId),
 		!,
@@ -296,7 +311,7 @@
 			findall(websocket_session(RegistryId, SessionId), registry_session_(RegistryId, SessionId, _Messages), Sessions)
 		; 	existence_error(http_websocket_session_registry, session_registry(RegistryId))
 		).
-	current_sessions_(Registry, _Sessions) :-
+	current_sessions(Registry, _Sessions) :-
 		( 	var(Registry) ->
 			instantiation_error
 		; 	domain_error(http_websocket_session_registry, Registry)

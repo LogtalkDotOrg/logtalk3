@@ -80,7 +80,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, memberchk/2, reverse/2
+		append/2, reverse/2
 	]).
 
 	valid_cookie(Cookie) :-

@@ -1253,24 +1253,44 @@
 
 		:- private(shutdown_seed_/1).
 		:- dynamic(shutdown_seed_/1).
+		:- mode(shutdown_seed_(?positive_integer), zero_or_one).
+		:- info(shutdown_seed_/1, [
+			comment is 'Last allocated shutdown run identifier for open-ended WebSocket server loops.',
+			argnames is ['RunId']
+		]).
 
 		:- private(shutdown_control_/3).
 		:- dynamic(shutdown_control_/3).
+		:- mode(shutdown_control_(?nonvar, ?compound, ?positive_integer), zero_or_more).
+		:- info(shutdown_control_/3, [
+			comment is 'Registered shutdown control terms and their associated listeners.',
+			argnames is ['Control', 'Listener', 'RunId']
+		]).
 
 		:- private(shutdown_requested_/2).
 		:- dynamic(shutdown_requested_/2).
+		:- mode(shutdown_requested_(?nonvar, ?positive_integer), zero_or_more).
+		:- info(shutdown_requested_/2, [
+			comment is 'Recorded shutdown requests indexed by control term and run identifier.',
+			argnames is ['Control', 'RunId']
+		]).
 
 		:- private(active_worker_/3).
 		:- dynamic(active_worker_/3).
+		:- mode(active_worker_(?nonvar, ?positive_integer, ?compound), zero_or_more).
+		:- info(active_worker_/3, [
+			comment is 'Active WebSocket session worker records indexed by control term and run identifier.',
+			argnames is ['Control', 'RunId', 'Worker']
+		]).
 
 		:- synchronized([
-			allocate_shutdown_run_id_/1,
-			register_shutdown_control_/3,
-			cleanup_shutdown_control_/2,
-			force_shutdown_control_/2,
-			register_active_worker_/3,
-			unregister_active_worker_/3,
-			current_active_workers_/3
+			allocate_shutdown_run_id/1,
+			register_shutdown_control/3,
+			cleanup_shutdown_control/2,
+			force_shutdown_control/2,
+			register_active_worker/3,
+			unregister_active_worker/3,
+			current_active_workers/3
 		]).
 
 		:- meta_predicate(collect_finished_worker(*, 0, *, *, *, *)).
@@ -1293,14 +1313,14 @@
 		register_shutdown_control(Control, Listener, RunId),
 		::run_once_with_cleanup_(
 			serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options),
-			cleanup_shutdown_control_(Control, RunId)
+			cleanup_shutdown_control(Control, RunId)
 		).
 
 	request_shutdown(Control) :-
 		( 	var(Control) ->
 			instantiation_error
 		; 	shutdown_control_(Control, _Listener, RunId) ->
-			force_shutdown_control_(Control, RunId)
+			force_shutdown_control(Control, RunId)
 		; 	existence_error(http_websocket_session_shutdown_control, Control)
 		).
 
@@ -1310,29 +1330,26 @@
 	register_shutdown_control(Control, Listener, RunId) :-
 		( 	var(Control) ->
 			instantiation_error
-		; 	register_shutdown_control_(Control, Listener, RunId) ->
+		; 	\+ shutdown_control_(Control, _, _),
+			allocate_shutdown_run_id(RunId),
+			assertz(shutdown_control_(Control, Listener, RunId)) ->
 			true
 		; 	permission_error(reuse, http_websocket_session_shutdown_control, Control)
 		).
 
-	allocate_shutdown_run_id_(RunId) :-
+	allocate_shutdown_run_id(RunId) :-
 		( 	retract(shutdown_seed_(CurrentRunId)) ->
 			RunId is CurrentRunId + 1
 		; 	RunId = 1
 		),
 		assertz(shutdown_seed_(RunId)).
 
-	register_shutdown_control_(Control, Listener, RunId) :-
-		\+ shutdown_control_(Control, _, _),
-		allocate_shutdown_run_id_(RunId),
-		assertz(shutdown_control_(Control, Listener, RunId)).
-
-	cleanup_shutdown_control_(Control, RunId) :-
+	cleanup_shutdown_control(Control, RunId) :-
 		retractall(active_worker_(Control, RunId, _Worker)),
 		retractall(shutdown_requested_(Control, RunId)),
 		retractall(shutdown_control_(Control, _Listener, RunId)).
 
-	force_shutdown_control_(Control, RunId) :-
+	force_shutdown_control(Control, RunId) :-
 		( 	shutdown_requested_(Control, RunId) ->
 			true
 		; 	assertz(shutdown_requested_(Control, RunId))
@@ -1367,7 +1384,7 @@
 			Outcome = shutdown
 		; 	recoverable_accept_error(Error) ->
 			Outcome = recoverable
-		; 	force_shutdown_control_(Control, RunId),
+		; 	force_shutdown_control(Control, RunId),
 			throw(Error)
 		).
 
@@ -1379,19 +1396,19 @@
 		catch(
 			threaded_once(Goal, Tag),
 			Error,
-			( 	force_shutdown_control_(Control, RunId),
+			( 	force_shutdown_control(Control, RunId),
 				catch(http_socket::close_connection(Connection), _, true),
 				throw(Error)
 			)
 		),
-		register_active_worker_(Control, RunId, worker(Tag, Goal)).
+		register_active_worker(Control, RunId, worker(Tag, Goal)).
 
 	serve_session_worker(Control, RunId, Connection, Registry, SessionHandler, Options) :-
 		::run_once_with_cleanup_(
 			catch(
 				serve_registered_session(Connection, Registry, SessionHandler, Options),
 				Error,
-				( 	force_shutdown_control_(Control, RunId),
+				( 	force_shutdown_control(Control, RunId),
 					throw(Error)
 				)
 			),
@@ -1409,17 +1426,17 @@
 			catch(http_socket::close_connection(Connection), _, true)
 		).
 
-	register_active_worker_(Control, RunId, Worker) :-
+	register_active_worker(Control, RunId, Worker) :-
 		assertz(active_worker_(Control, RunId, Worker)).
 
-	unregister_active_worker_(Control, RunId, Worker) :-
+	unregister_active_worker(Control, RunId, Worker) :-
 		retractall(active_worker_(Control, RunId, Worker)).
 
-	current_active_workers_(Control, RunId, Workers) :-
+	current_active_workers(Control, RunId, Workers) :-
 		findall(Worker, active_worker_(Control, RunId, Worker), Workers).
 
 	active_worker_count(Control, RunId, Count) :-
-		current_active_workers_(Control, RunId, Workers),
+		current_active_workers(Control, RunId, Workers),
 		length(Workers, Count).
 
 	check_finished_workers(Control, RunId) :-
@@ -1446,7 +1463,7 @@
 		).
 
 	collect_finished_workers(Control, RunId, Error0, Error) :-
-		current_active_workers_(Control, RunId, Workers),
+		current_active_workers(Control, RunId, Workers),
 		collect_finished_workers(Workers, Control, RunId, Error0, Error).
 
 	collect_finished_workers([], _Control, _RunId, Error, Error).
@@ -1456,7 +1473,7 @@
 
 	collect_finished_worker(Tag, Goal, Control, RunId, Error0, Error) :-
 		( 	catch(threaded_peek(Goal, Tag), _, fail) ->
-			unregister_active_worker_(Control, RunId, worker(Tag, Goal)),
+			unregister_active_worker(Control, RunId, worker(Tag, Goal)),
 			catch(threaded_exit(Goal, Tag), WorkerError, true),
 			remember_worker_error(Error0, WorkerError, Error)
 		; 	Error = Error0

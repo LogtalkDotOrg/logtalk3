@@ -50,7 +50,7 @@
 	]).
 
 	:- uses(user, [
-		atom_concat/3, sub_atom/5
+		atomic_concat/3
 	]).
 
 	:- public(document/2).
@@ -1742,9 +1742,6 @@
 		schema_descriptors_to_pairs(Descriptors, Pairs),
 		^^pairs_to_object(Pairs, Schemas).
 
-	provider_security_scheme_names(Provider, Names) :-
-		provider_security_scheme_pairs(Provider, _, Names).
-
 	provider_security_schemes_object(Provider, SecuritySchemes) :-
 		provider_security_scheme_pairs(Provider, Pairs, _),
 		^^pairs_to_object(Pairs, SecuritySchemes).
@@ -2212,12 +2209,6 @@
 	valid_component_member_name_code(0'_) :-
 		!.
 	valid_component_member_name_code(0'-).
-
-	validate_provider_url(Context, URL) :-
-		( 	valid_provider_url(URL) ->
-			true
-		; 	domain_error(Context, invalid_url(URL))
-		).
 
 	validate_provider_url_reference(Context, URL) :-
 		( 	valid_provider_url_reference(URL) ->

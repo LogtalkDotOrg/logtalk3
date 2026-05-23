@@ -2570,12 +2570,6 @@
 		token_list_codes(Tokens, RestCodes),
 		append([TokenCodes, [0',, 0' ], RestCodes], Codes).
 
-	token_list_contains_chunked(Tokens) :-
-		memberchk(chunked, Tokens).
-
-	parse_form_query_codes(QueryCodes, Pairs) :-
-		parse_www_form_codes(QueryCodes, Pairs).
-
 	websocket_accept_from_key(Key, Accept) :-
 		atom_codes(Key, KeyCodes),
 		atom_codes('258EAFA5-E914-47DA-95CA-C5AB0DC85B11', GuidCodes),

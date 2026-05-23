@@ -266,8 +266,15 @@ Private predicates
 ``session_seed_/1``
 ^^^^^^^^^^^^^^^^^^^
 
+Last allocated session identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``session_seed_(SessionId)``
+| **Mode and number of proofs:**
+|    ``session_seed_(?positive_integer)`` - ``zero_or_one``
 
 
 ------------
@@ -278,8 +285,15 @@ Private predicates
 ``session_state_/2``
 ^^^^^^^^^^^^^^^^^^^^
 
+Per-session stored cookie jar ownership and default request state.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``session_state_(SessionId,State)``
+| **Mode and number of proofs:**
+|    ``session_state_(?positive_integer,?compound)`` - ``zero_or_more``
 
 
 ------------

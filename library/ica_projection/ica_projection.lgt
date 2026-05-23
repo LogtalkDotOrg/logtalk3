@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-05-23,
 		comment is 'Independent Component Analysis reducer for continuous datasets using a portable FastICA-style solver with symmetric eigendecomposition whitening.',
 		see_also is [nmf_projection, pca_projection, random_projection, truncated_svd_projection]
 	]).
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2, reverse/2
+		length/2, memberchk/2
 	]).
 
 	:- uses(numberlist, [

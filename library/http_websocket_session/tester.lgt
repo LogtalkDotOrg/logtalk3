@@ -21,8 +21,20 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(loader),
-	logtalk_load(http_websocket_session, [debug(on), source_data(on)]),
+	logtalk_load(os(loader)),
+	logtalk_load(random(loader)),
+	logtalk_load(timeout(loader)),
+	logtalk_load('../http_client/loader.lgt'),
+	logtalk_load('../http_socket/loader.lgt'),
+	logtalk_load('../http_websocket_messages/loader.lgt'),
+	logtalk_load([
+		http_websocket_session_handler_protocol,
+		http_websocket_session_registry,
+		http_websocket_session
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(test_objects),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

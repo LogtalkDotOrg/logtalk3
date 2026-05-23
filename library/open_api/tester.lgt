@@ -25,7 +25,14 @@
 	logtalk_load(json(loader)),
 	logtalk_load(json_schema(loader)),
 	logtalk_load('../http/loader.lgt'),
-	logtalk_load([open_api_provider_protocol, sample_open_api_provider, open_api], [source_data(on), debug(on)]),
+	logtalk_load([
+		open_api_provider_protocol,
+		sample_open_api_provider,
+		open_api
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(test_objects),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

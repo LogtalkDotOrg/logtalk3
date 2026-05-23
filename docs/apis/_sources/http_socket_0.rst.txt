@@ -429,8 +429,15 @@ Private predicates
 ``connection_pool_seed_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Last allocated connection pool identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_seed_(PoolId)``
+| **Mode and number of proofs:**
+|    ``connection_pool_seed_(?positive_integer)`` - ``zero_or_one``
 
 
 ------------
@@ -441,8 +448,15 @@ Private predicates
 ``connection_pool_config_/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Stored connection pool configuration indexed by pool identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_config_(PoolId,Host,Port,MinSize,MaxSize,ConnectionOptions)``
+| **Mode and number of proofs:**
+|    ``connection_pool_config_(?positive_integer,?atom,?integer,?non_negative_integer,?positive_integer,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -453,8 +467,15 @@ Private predicates
 ``connection_pool_available_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Reusable idle client connections indexed by pool identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_available_(PoolId,Connection)``
+| **Mode and number of proofs:**
+|    ``connection_pool_available_(?positive_integer,?compound)`` - ``zero_or_more``
 
 
 ------------
@@ -465,8 +486,15 @@ Private predicates
 ``connection_pool_in_use_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Checked-out client connections indexed by pool identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_in_use_(PoolId,Connection)``
+| **Mode and number of proofs:**
+|    ``connection_pool_in_use_(?positive_integer,?compound)`` - ``zero_or_more``
 
 
 ------------
@@ -477,8 +505,15 @@ Private predicates
 ``listener_shutdown_seed_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Last allocated shutdown run identifier for open-ended listener loops.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``listener_shutdown_seed_(RunId)``
+| **Mode and number of proofs:**
+|    ``listener_shutdown_seed_(?positive_integer)`` - ``zero_or_one``
 
 
 ------------
@@ -489,8 +524,15 @@ Private predicates
 ``listener_shutdown_control_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Registered shutdown control terms and their associated listeners.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``listener_shutdown_control_(Control,Listener,RunId)``
+| **Mode and number of proofs:**
+|    ``listener_shutdown_control_(?nonvar,?compound,?positive_integer)`` - ``zero_or_more``
 
 
 ------------
@@ -501,8 +543,15 @@ Private predicates
 ``listener_shutdown_requested_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Recorded shutdown requests indexed by control term and run identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``listener_shutdown_requested_(Control,RunId)``
+| **Mode and number of proofs:**
+|    ``listener_shutdown_requested_(?nonvar,?positive_integer)`` - ``zero_or_more``
 
 
 ------------
@@ -513,8 +562,15 @@ Private predicates
 ``listener_active_worker_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Active listener worker records indexed by control term and run identifier.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``listener_active_worker_(Control,RunId,Worker)``
+| **Mode and number of proofs:**
+|    ``listener_active_worker_(?nonvar,?positive_integer,?compound)`` - ``zero_or_more``
 
 
 ------------

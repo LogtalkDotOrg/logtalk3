@@ -526,9 +526,9 @@
 		).
 
 	chars_to_codes([], []).
-	chars_to_codes([Character| Characters], [Code| Codes]) :-
-		char_code(Character, Code),
-		chars_to_codes(Characters, Codes).
+	chars_to_codes([Char| Chars], [Code| Codes]) :-
+		char_code(Char, Code),
+		chars_to_codes(Chars, Codes).
 
 	normalize_atom_text(Text, NormalizedText) :-
 		text_to_codes(Text, Codes),
