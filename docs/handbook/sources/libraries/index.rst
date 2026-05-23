@@ -116,6 +116,16 @@ directory in the ``NOTES.md`` file.
    hook_flows
    hook_objects
    html
+   http
+   http_client
+   http_cookies
+   http_multipart
+   http_router
+   http_server
+   http_socket
+   http_websocket
+   http_websocket_messages
+   http_websocket_session
    ica_projection
    ids
    ieee_754
@@ -175,6 +185,7 @@ directory in the ``NOTES.md`` file.
    nested_dictionaries
    nmea
    nmf_projection
+   open_api
    optics_clusterer
    optionals
    options

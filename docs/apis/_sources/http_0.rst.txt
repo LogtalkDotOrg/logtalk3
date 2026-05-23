@@ -1,0 +1,575 @@
+.. index:: single: http
+.. _http/0:
+
+.. rst-class:: right
+
+**object**
+
+``http``
+========
+
+Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.
+
+| **Availability:** 
+|    ``logtalk_load(http(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`base64 <base64/0>`
+|    :ref:`hash_common_32 <hash_common_32/0>`
+|    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`json <json/0>`
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: request/7
+.. _http/0::request/7:
+
+``request/7``
+^^^^^^^^^^^^^
+
+Constructs a validated normalized ``request/6`` term from the given method, target, version, headers, body, and properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(Method,Target,Version,Headers,Body,Properties,Request)``
+| **Mode and number of proofs:**
+|    ``request(+atom,+compound,+compound,+list(compound),+compound,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: response/6
+.. _http/0::response/6:
+
+``response/6``
+^^^^^^^^^^^^^^
+
+Constructs a validated normalized ``response/5`` term from the given version, status, headers, body, and properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response(Version,Status,Headers,Body,Properties,Response)``
+| **Mode and number of proofs:**
+|    ``response(+compound,+compound,+list(compound),+compound,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: is_request/1
+.. _http/0::is_request/1:
+
+``is_request/1``
+^^^^^^^^^^^^^^^^
+
+Succeeds if the given term is a structurally and semantically valid normalized ``request/6`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_request(Request)``
+| **Mode and number of proofs:**
+|    ``is_request(+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_response/1
+.. _http/0::is_response/1:
+
+``is_response/1``
+^^^^^^^^^^^^^^^^^
+
+Succeeds if the given term is a structurally and semantically valid normalized ``response/5`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_response(Response)``
+| **Mode and number of proofs:**
+|    ``is_response(+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_request/2
+.. _http/0::parse_request/2:
+
+``parse_request/2``
+^^^^^^^^^^^^^^^^^^^
+
+Parses a complete HTTP request message from the given source (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a normalized ``request/6`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_request(Source,Request)``
+| **Mode and number of proofs:**
+|    ``parse_request(++compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_request/2
+.. _http/0::generate_request/2:
+
+``generate_request/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a complete HTTP request message to the given sink (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a normalized ``request/6`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_request(Sink,Request)``
+| **Mode and number of proofs:**
+|    ``generate_request(+compound,++compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_response/2
+.. _http/0::parse_response/2:
+
+``parse_response/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Parses a complete HTTP response message from the given source (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a normalized ``response/5`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_response(Source,Response)``
+| **Mode and number of proofs:**
+|    ``parse_response(++compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_response/2
+.. _http/0::generate_response/2:
+
+``generate_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a complete HTTP response message to the given sink (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a normalized ``response/5`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_response(Sink,Response)``
+| **Mode and number of proofs:**
+|    ``generate_response(+compound,++compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_request_line/2
+.. _http/0::parse_request_line/2:
+
+``parse_request_line/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an HTTP request line from the given source (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a ``request_line(Method, Target, Version)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_request_line(Source,RequestLine)``
+| **Mode and number of proofs:**
+|    ``parse_request_line(++compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_request_line/2
+.. _http/0::generate_request_line/2:
+
+``generate_request_line/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates an HTTP request line to the given sink (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a ``request_line(Method, Target, Version)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_request_line(Sink,RequestLine)``
+| **Mode and number of proofs:**
+|    ``generate_request_line(+compound,++compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_status_line/2
+.. _http/0::parse_status_line/2:
+
+``parse_status_line/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an HTTP status line from the given source (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a ``status_line(Version, Status)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_status_line(Source,StatusLine)``
+| **Mode and number of proofs:**
+|    ``parse_status_line(++compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_status_line/2
+.. _http/0::generate_status_line/2:
+
+``generate_status_line/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates an HTTP status line to the given sink (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a ``status_line(Version, Status)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_status_line(Sink,StatusLine)``
+| **Mode and number of proofs:**
+|    ``generate_status_line(+compound,++compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_headers/2
+.. _http/0::parse_headers/2:
+
+``parse_headers/2``
+^^^^^^^^^^^^^^^^^^^
+
+Parses an HTTP header block from the given source (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into normalized header ``Name-Value`` pairs with typed values for recognized headers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_headers(Source,Headers)``
+| **Mode and number of proofs:**
+|    ``parse_headers(++compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_headers/2
+.. _http/0::generate_headers/2:
+
+``generate_headers/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Generates an HTTP header block to the given sink (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from normalized header ``Name-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_headers(Sink,Headers)``
+| **Mode and number of proofs:**
+|    ``generate_headers(+compound,++list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_body/4
+.. _http/0::parse_body/4:
+
+``parse_body/4``
+^^^^^^^^^^^^^^^^
+
+Parses a body payload from the given source (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) according to the given media type and options into a normalized body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_body(Source,MediaType,Options,Body)``
+| **Mode and number of proofs:**
+|    ``parse_body(++compound,++atom,+list(compound),--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_body/3
+.. _http/0::generate_body/3:
+
+``generate_body/3``
+^^^^^^^^^^^^^^^^^^^
+
+Generates a body payload to the given sink (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a normalized body term and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_body(Sink,Body,Options)``
+| **Mode and number of proofs:**
+|    ``generate_body(+compound,++compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_body/4
+.. _http/0::encode_body/4:
+
+``encode_body/4``
+^^^^^^^^^^^^^^^^^
+
+Encodes a semantic payload term using the registered concrete body codec for the given media type into a normalized body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_body(MediaType,Payload,Options,Body)``
+| **Mode and number of proofs:**
+|    ``encode_body(+atom,++term,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_body/4
+.. _http/0::decode_body/4:
+
+``decode_body/4``
+^^^^^^^^^^^^^^^^^
+
+Decodes a normalized body term using the registered concrete body codec for the given media type into a semantic payload term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_body(MediaType,Body,Options,Payload)``
+| **Mode and number of proofs:**
+|    ``decode_body(+atom,++compound,+list(compound),--term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: method/2
+.. _http/0::method/2:
+
+``method/2``
+^^^^^^^^^^^^
+
+Returns the request method from a normalized ``request/6`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``method(Request,Method)``
+| **Mode and number of proofs:**
+|    ``method(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: target/2
+.. _http/0::target/2:
+
+``target/2``
+^^^^^^^^^^^^
+
+Returns the request target from a normalized ``request/6`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target(Request,Target)``
+| **Mode and number of proofs:**
+|    ``target(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: version/2
+.. _http/0::version/2:
+
+``version/2``
+^^^^^^^^^^^^^
+
+Returns the HTTP version from a normalized request or response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``version(Message,Version)``
+| **Mode and number of proofs:**
+|    ``version(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: status/2
+.. _http/0::status/2:
+
+``status/2``
+^^^^^^^^^^^^
+
+Returns the response status from a normalized ``response/5`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``status(Response,Status)``
+| **Mode and number of proofs:**
+|    ``status(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: headers/2
+.. _http/0::headers/2:
+
+``headers/2``
+^^^^^^^^^^^^^
+
+Returns the normalized header list from a request or response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``headers(Message,Headers)``
+| **Mode and number of proofs:**
+|    ``headers(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: header/3
+.. _http/0::header/3:
+
+``header/3``
+^^^^^^^^^^^^
+
+Enumerates normalized header ``Name`` and ``Value`` pairs from a request or response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header(Message,Name,Value)``
+| **Mode and number of proofs:**
+|    ``header(+compound,?atom,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: body/2
+.. _http/0::body/2:
+
+``body/2``
+^^^^^^^^^^
+
+Returns the normalized body term from a request or response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``body(Message,Body)``
+| **Mode and number of proofs:**
+|    ``body(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: property/2
+.. _http/0::property/2:
+
+``property/2``
+^^^^^^^^^^^^^^
+
+Enumerates normalized derived or higher-layer properties from a request or response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``property(Message,Property)``
+| **Mode and number of proofs:**
+|    ``property(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: websocket_accept/2
+.. _http/0::websocket_accept/2:
+
+``websocket_accept/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the canonical ``Sec-WebSocket-Accept`` header value for a valid ``Sec-WebSocket-Key`` header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``websocket_accept(Key,Accept)``
+| **Mode and number of proofs:**
+|    ``websocket_accept(++term,--atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

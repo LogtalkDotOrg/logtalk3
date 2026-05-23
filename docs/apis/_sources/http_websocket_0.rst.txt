@@ -1,0 +1,271 @@
+.. index:: single: http_websocket
+.. _http_websocket/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket``
+==================
+
+Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: frame/5
+.. _http_websocket/0::frame/5:
+
+``frame/5``
+^^^^^^^^^^^
+
+Constructs a validated normalized WebSocket frame term from the fragmentation state atom, opcode atom, payload bytes, and frame properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame(Final,Opcode,Payload,Properties,Frame)``
+| **Mode and number of proofs:**
+|    ``frame(+atom,+atom,+list(byte),+list(compound),-compound)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Final atoms: Use ``final`` for FIN=1 and ``more`` for FIN=0.
+    - Opcode atoms: Supported opcodes are ``continuation``, ``text``, ``binary``, ``close``, ``ping``, and ``pong``.
+    - Property ``masking_key(Key)``: Requests masking on the wire using a list of four mask bytes.
+    - Property ``reserved_bits(Bits)``: Preserves reserved bits as an ordered list containing any of ``rsv1``, ``rsv2``, and ``rsv3``.
+
+
+------------
+
+.. index:: is_frame/1
+.. _http_websocket/0::is_frame/1:
+
+``is_frame/1``
+^^^^^^^^^^^^^^
+
+True when the argument is a valid normalized WebSocket frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_frame(Frame)``
+| **Mode and number of proofs:**
+|    ``is_frame(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse/2
+.. _http_websocket/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses one WebSocket frame from a source term. Supported sources are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``. Empty sources return ``end_of_file``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Frame)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/2
+.. _http_websocket/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates one validated WebSocket frame to a sink term. Supported sinks are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Frame)``
+| **Mode and number of proofs:**
+|    ``generate(++compound,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: read_frame/2
+.. _http_websocket/0::read_frame/2:
+
+``read_frame/2``
+^^^^^^^^^^^^^^^^
+
+Reads one WebSocket frame from a binary stream without requiring end-of-file. Returns ``end_of_file`` when the stream is already exhausted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_frame(Stream,Frame)``
+| **Mode and number of proofs:**
+|    ``read_frame(+stream_or_alias,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: write_frame/2
+.. _http_websocket/0::write_frame/2:
+
+``write_frame/2``
+^^^^^^^^^^^^^^^^^
+
+Writes one validated WebSocket frame to a binary stream and flushes the stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_frame(Stream,Frame)``
+| **Mode and number of proofs:**
+|    ``write_frame(+stream_or_alias,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: final/2
+.. _http_websocket/0::final/2:
+
+``final/2``
+^^^^^^^^^^^
+
+Returns the fragmentation state atom of a validated WebSocket frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``final(Frame,Final)``
+| **Mode and number of proofs:**
+|    ``final(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: opcode/2
+.. _http_websocket/0::opcode/2:
+
+``opcode/2``
+^^^^^^^^^^^^
+
+Returns the opcode atom of a validated WebSocket frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``opcode(Frame,Opcode)``
+| **Mode and number of proofs:**
+|    ``opcode(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: payload/2
+.. _http_websocket/0::payload/2:
+
+``payload/2``
+^^^^^^^^^^^^^
+
+Returns the payload byte list of a validated WebSocket frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``payload(Frame,Payload)``
+| **Mode and number of proofs:**
+|    ``payload(+compound,-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: properties/2
+.. _http_websocket/0::properties/2:
+
+``properties/2``
+^^^^^^^^^^^^^^^^
+
+Returns the normalized property list of a validated WebSocket frame term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``properties(Frame,Properties)``
+| **Mode and number of proofs:**
+|    ``properties(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: property/2
+.. _http_websocket/0::property/2:
+
+``property/2``
+^^^^^^^^^^^^^^
+
+True when the validated WebSocket frame term contains the given property. When the property argument is a variable, properties can be enumerated on backtracking.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``property(Frame,Property)``
+| **Mode and number of proofs:**
+|    ``property(+compound,?compound)`` - ``zero_or_one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

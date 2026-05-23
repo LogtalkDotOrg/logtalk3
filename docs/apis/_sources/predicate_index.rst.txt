@@ -171,6 +171,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::absolute_file_name/2>`
 
+``accept_websocket/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::accept_websocket/3>`
+
 ``ack/3``
 ---------
 
@@ -670,6 +680,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::anomaly_detector_options/2>`
+
+``api_info/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_router <http_router/0::api_info/1>`
+* :ref:`open_api_provider_protocol <open_api_provider_protocol/0::api_info/1>`
 
 ``apid/2``
 ----------
@@ -1592,6 +1613,37 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_digest_protocol <hash_digest_protocol/0::block_size/1>`
 
+``body/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_request_protocol <http_request_protocol/0::body/1>`
+* :ref:`http_response_protocol <http_response_protocol/0::body/1>`
+
+``body/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::body/2>`
+
+``body/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::body/3>`
+
 ``body_pred/1``
 ---------------
 
@@ -1671,6 +1723,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`undirected_graph_common <undirected_graph_common/0::bridges/2>`
+
+``broadcast/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::broadcast/2>`
+
+``broadcast_except/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::broadcast_except/3>`
 
 ``built_date/1``
 ----------------
@@ -2593,6 +2665,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::close/1>`
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::close/1>`
 
 ``close/2``
 -----------
@@ -2623,6 +2696,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linda_client <linda_client/0::close_client/1>`
+
+``close_connection/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::close_connection/1>`
+
+``close_connection_pool/1``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::close_connection_pool/1>`
+
+``close_listener/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::close_listener/1>`
 
 ``close_polygon/2``
 -------------------
@@ -3049,6 +3152,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::connection_alive/1>`
 * :ref:`stomp <stomp/0::connection_alive/1>`
+
+``connection_pool_stats/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::connection_pool_stats/2>`
+
+``connection_streams/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::connection_streams/3>`
 
 ``consensus_ranking/2``
 -----------------------
@@ -4020,6 +4143,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geohash_protocol <geohash_protocol/0::decode_bits/3>`
 
+``decode_body/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::decode_body/4>`
+* :ref:`http_body_codec_protocol <http_body_codec_protocol/0::decode_body/4>`
+
 ``decode_exception/2``
 ----------------------
 
@@ -4292,6 +4426,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_client <http_client/0::delete/3>`
 * :ref:`listp <listp/0::delete/3>`
 * :ref:`setp <setp/0::delete/3>`
 * :ref:`varlistp <varlistp/0::delete/3>`
@@ -4306,6 +4441,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::delete/4>`
 * :ref:`heap_protocol <heap_protocol/0::delete/4>`
+* :ref:`http_client <http_client/0::delete/4>`
 
 ``delete_all_after/2``
 ----------------------
@@ -5278,6 +5414,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`union_find_protocol <union_find_protocol/0::disjoint_sets/2>`
 
+``dispatch/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::dispatch/3>`
+
 ``dispatch_map_id/2``
 ---------------------
 
@@ -5768,6 +5914,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`open_api <open_api/0::document/2>`
 * :ref:`sbom <sbom/0::document/2>`
 
 ``dot//1``
@@ -6102,6 +6249,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geohash_protocol <geohash_protocol/0::encode_bits/3>`
+
+``encode_body/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::encode_body/4>`
+* :ref:`http_body_codec_protocol <http_body_codec_protocol/0::encode_body/4>`
 
 ``encode_frame/2``
 ------------------
@@ -6548,6 +6706,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol/0::example/3>`
 * :ref:`target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol/0::example/3>`
 
+``exchange/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::exchange/3>`
+
+``exchange/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client_core <http_client_core/0::exchange/4>`
+* :ref:`http_socket <http_socket/0::exchange/4>`
+
 ``exchange_bind/4``
 -------------------
 
@@ -6557,6 +6736,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::exchange_bind/4>`
+
+``exchange_connection/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::exchange_connection/3>`
+
+``exchange_connection/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client_core <http_client_core/0::exchange_connection/4>`
+* :ref:`http_socket <http_socket/0::exchange_connection/4>`
 
 ``exchange_declare/3``
 ----------------------
@@ -6952,6 +7152,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`natural <natural/0::fibonacci/2>`
 
+``field/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::field/3>`
+
+``field_part/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::field_part/3>`
+
 ``fields/2``
 ------------
 
@@ -6960,6 +7180,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_multipart <http_multipart/0::fields/2>`
 * :ref:`nmea_protocol <nmea_protocol/0::fields/2>`
 
 ``fields/5``
@@ -7000,6 +7221,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`lgtdocp <lgtdocp/0::file/2>`
 * :ref:`wrapper <wrapper/0::file/2>`
 
+``file/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::file/5>`
+
 ``file_exists/1``
 -----------------
 
@@ -7039,6 +7270,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::file_modification_time/2>`
+
+``file_part/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::file_part/5>`
 
 ``file_path_components/2``
 --------------------------
@@ -7193,6 +7434,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::files/2>`
 * :ref:`diagrams(Format) <diagrams/1::files/2>`
+* :ref:`http_multipart <http_multipart/0::files/2>`
 * :ref:`lgtdocp <lgtdocp/0::files/2>`
 * :ref:`wrapper <wrapper/0::files/2>`
 
@@ -7227,6 +7469,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::filter/3>`
 * :ref:`validation(Validation) <validation/1::filter/3>`
+
+``final/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::final/2>`
 
 ``final_bearing/3``
 -------------------
@@ -7574,6 +7826,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`loopp <loopp/0::foreach/4>`
 
+``form_data_body/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::form_data_body/2>`
+
 ``format/1``
 ------------
 
@@ -7805,6 +8067,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`statisticsp <statisticsp/0::fractile/3>`
+
+``frame/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::frame/5>`
 
 ``frame_body/2``
 ----------------
@@ -8133,12 +8405,14 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
+* :ref:`http_websocket <http_websocket/0::generate/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
 * :ref:`message_pack(StringRepresentation) <message_pack/1::generate/2>`
+* :ref:`open_api <open_api/0::generate/2>`
 * :ref:`sarif <sarif/0::generate/2>`
 * :ref:`toml_protocol <toml_protocol/0::generate/2>`
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
@@ -8160,6 +8434,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/3>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/3>`
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::generate/3>`
+* :ref:`http_multipart <http_multipart/0::generate/3>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/3>`
 * :ref:`protobuf <protobuf/0::generate/3>`
 
@@ -8195,6 +8470,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`yaml_protocol <yaml_protocol/0::generate_all/2>`
 
+``generate_body/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_body/3>`
+
+``generate_cookie/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::generate_cookie/2>`
+
 ``generate_fragment/2``
 -----------------------
 
@@ -8225,6 +8520,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_link_profiles <ccsds_link_profiles/0::generate_frames/3>`
 
+``generate_headers/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_headers/2>`
+
 ``generate_idle_packet/4``
 --------------------------
 
@@ -8234,6 +8539,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packetization <ccsds_packetization/0::generate_idle_packet/4>`
+
+``generate_request/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_request/2>`
+
+``generate_request_line/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_request_line/2>`
+
+``generate_response/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_response/2>`
+
+``generate_set_cookie/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::generate_set_cookie/4>`
+
+``generate_status_line/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_status_line/2>`
 
 ``genint/2``
 ------------
@@ -8313,6 +8668,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_client <http_client/0::get/3>`
 * :ref:`memcached <memcached/0::get/3>`
 * :ref:`redis <redis/0::get/3>`
 
@@ -8324,6 +8680,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_client <http_client/0::get/4>`
 * :ref:`memcached <memcached/0::get/4>`
 
 ``get_field/2``
@@ -8737,6 +9094,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`help <help/0::handbook/0>`
 
+``handle/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_handler_protocol <http_handler_protocol/0::handle/2>`
+* :ref:`http_router <http_router/0::handle/2>`
+* :ref:`http_websocket_session_handler_protocol <http_websocket_session_handler_protocol/0::handle/2>`
+
 ``harmonic_mean/2``
 -------------------
 
@@ -8818,6 +9187,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`queuep <queuep/0::head/2>`
 
+``head/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::head/3>`
+
+``head/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::head/4>`
+
 ``head_pred/1``
 ---------------
 
@@ -8827,6 +9216,48 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metagol <metagol/0::head_pred/1>`
+
+``header/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_request_protocol <http_request_protocol/0::header/2>`
+* :ref:`http_response_protocol <http_response_protocol/0::header/2>`
+
+``header/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::header/3>`
+
+``headers/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_request_protocol <http_request_protocol/0::headers/1>`
+* :ref:`http_response_protocol <http_response_protocol/0::headers/1>`
+
+``headers/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::headers/2>`
 
 ``help/0``
 ----------
@@ -9381,6 +9812,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packetization <ccsds_packetization/0::initial_state/1>`
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::initial_state/1>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::initial_state/1>`
 
 ``initial_temperature/1``
@@ -10007,6 +10439,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_protocol <graph_protocol/0::is_bipartite/1>`
 
+``is_body/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::is_body/1>`
+
 ``is_clockwise_polygon/1``
 --------------------------
 
@@ -10108,6 +10550,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::is_false/1>`
 
+``is_frame/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::is_frame/1>`
+
 ``is_hex_digit/1``
 ------------------
 
@@ -10158,6 +10610,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_lower_case/1>`
 
+``is_message/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::is_message/1>`
+
 ``is_newline/1``
 ----------------
 
@@ -10207,6 +10669,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_octal_digit/1>`
+
+``is_part/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::is_part/1>`
 
 ``is_period/1``
 ---------------
@@ -10266,6 +10738,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http <http/0::is_request/1>`
 * :ref:`json_rpc <json_rpc/0::is_request/1>`
 
 ``is_response/1``
@@ -10276,6 +10749,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http <http/0::is_response/1>`
 * :ref:`json_rpc <json_rpc/0::is_response/1>`
 
 ``is_sparse/1``
@@ -10287,6 +10761,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`graph_protocol <graph_protocol/0::is_sparse/1>`
+
+``is_state/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::is_state/1>`
 
 ``is_subsequence_of/2``
 -----------------------
@@ -12859,6 +13343,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::measurement/4>`
 
+``media_type/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::media_type/2>`
+
+``media_types/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_body_codec_protocol <http_body_codec_protocol/0::media_types/1>`
+
 ``median/2``
 ------------
 
@@ -12924,6 +13428,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`heap_protocol <heap_protocol/0::merge/3>`
+
+``message/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::message/3>`
 
 ``message_body/2``
 ------------------
@@ -13095,6 +13609,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::metarule_next_id/1>`
 
+``method/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_request_protocol <http_request_protocol/0::method/1>`
+
 ``method/2``
 ------------
 
@@ -13103,6 +13627,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http <http/0::method/2>`
 * :ref:`json_rpc <json_rpc/0::method/2>`
 
 ``method_not_found/2``
@@ -14822,6 +15347,86 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sequence_grammars <sequence_grammars/0::one_or_more//2>`
 
+``opcode/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::opcode/2>`
+
+``open/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::open/1>`
+
+``open/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_client_session <http_websocket_client_session/0::open/4>`
+
+``open/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_client_session <http_websocket_client_session/0::open/5>`
+
+``open_connection/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::open_connection/4>`
+
+``open_connection_pool/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::open_connection_pool/4>`
+
+``open_listener/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::open_listener/4>`
+
+``open_websocket/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::open_websocket/4>`
+
 ``operating_system_machine/1``
 ------------------------------
 
@@ -14861,6 +15466,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::operating_system_type/1>`
+
+``operation/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::operation/3>`
+
+``operations/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_router <http_router/0::operations/1>`
+* :ref:`open_api_provider_protocol <open_api_provider_protocol/0::operations/1>`
 
 ``option/2``
 ------------
@@ -15495,6 +16121,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
+* :ref:`http_websocket <http_websocket/0::parse/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
@@ -15503,6 +16130,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`
 * :ref:`message_pack(StringRepresentation) <message_pack/1::parse/2>`
 * :ref:`nmea_protocol <nmea_protocol/0::parse/2>`
+* :ref:`open_api <open_api/0::parse/2>`
 * :ref:`protobuf <protobuf/0::parse/2>`
 * :ref:`tle_orbits_protocol <tle_orbits_protocol/0::parse/2>`
 * :ref:`toml_protocol <toml_protocol/0::parse/2>`
@@ -15536,6 +16164,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`command_line_options <command_line_options/0::parse/4>`
+* :ref:`http_multipart <http_multipart/0::parse/4>`
 
 ``parse/5``
 -----------
@@ -15556,6 +16185,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`yaml_protocol <yaml_protocol/0::parse_all/2>`
+
+``parse_body/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::parse_body/4>`
+
+``parse_cookie/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::parse_cookie/2>`
 
 ``parse_domain/2``
 ------------------
@@ -15617,6 +16266,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_link_profiles <ccsds_link_profiles/0::parse_frames/3>`
 
+``parse_headers/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::parse_headers/2>`
+
 ``parse_lines/4``
 -----------------
 
@@ -15646,6 +16305,96 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pddl <pddl/0::parse_problem/3>`
+
+``parse_request/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::parse_request/2>`
+
+``parse_request_line/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::parse_request_line/2>`
+
+``parse_response/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::parse_response/2>`
+
+``parse_set_cookie/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::parse_set_cookie/4>`
+
+``parse_status_line/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::parse_status_line/2>`
+
+``part/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::part/4>`
+
+``part_body/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::part_body/2>`
+
+``part_headers/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::part_headers/2>`
+
+``part_properties/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::part_properties/2>`
 
 ``partial_map/4``
 -----------------
@@ -15780,6 +16529,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`partitions_protocol <partitions_protocol/0::partitions/4>`
 
+``parts/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_multipart <http_multipart/0::parts/2>`
+
+``patch/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::patch/4>`
+
+``patch/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::patch/5>`
+
 ``path/3``
 ----------
 
@@ -15819,6 +16598,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::pattern_miner_options/2>`
+
+``payload/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::payload/2>`
+* :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::payload/2>`
 
 ``peek_back/2``
 ---------------
@@ -16234,6 +17024,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::possible/4>`
+
+``post/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::post/4>`
+
+``post/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::post/5>`
 
 ``postorder/2``
 ---------------
@@ -17040,6 +17850,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::proper_suffix/3>`
 
+``properties/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::properties/2>`
+
 ``property/1``
 --------------
 
@@ -17049,6 +17869,19 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::property/1>`
+* :ref:`http_request_protocol <http_request_protocol/0::property/1>`
+* :ref:`http_response_protocol <http_response_protocol/0::property/1>`
+
+``property/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::property/2>`
+* :ref:`http_websocket <http_websocket/0::property/2>`
 
 ``prove/2``
 -----------
@@ -17139,6 +17972,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`deque_protocol <deque_protocol/0::push_front/3>`
+
+``put/4``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::put/4>`
+
+``put/5``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::put/5>`
 
 ``qr_decomposition/3``
 ----------------------
@@ -17747,6 +18600,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`csv_protocol <csv_protocol/0::read_file_by_line/3>`
 * :ref:`tsv_protocol <tsv_protocol/0::read_file_by_line/3>`
 
+``read_frame/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::read_frame/2>`
+
 ``read_framed_message/2``
 -------------------------
 
@@ -17795,7 +18658,38 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::read_message/2>`
 * :ref:`json_rpc <json_rpc/0::read_message/2>`
+
+``read_message/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::read_message/4>`
+
+``read_message/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::read_message/5>`
+
+``read_message/6``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::read_message/6>`
 
 ``read_mime_types/2``
 ---------------------
@@ -17816,6 +18710,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::read_only_device_path/1>`
+
+``read_request/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::read_request/2>`
+
+``read_response/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client_core <http_client_core/0::read_response/2>`
 
 ``read_stream/2``
 -----------------
@@ -18352,6 +19266,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine_propagate/6>`
 
+``register/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::register/2>`
+
 ``regressor_options/2``
 -----------------------
 
@@ -18661,7 +19585,39 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_client <http_client/0::request/4>`
 * :ref:`json_rpc <json_rpc/0::request/4>`
+
+``request/5``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client <http_client/0::request/5>`
+
+``request/7``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::request/7>`
+
+``request_shutdown/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::request_shutdown/1>`
+* :ref:`http_websocket_server_session <http_websocket_server_session/0::request_shutdown/1>`
 
 ``rescale/3``
 -------------
@@ -18859,6 +19815,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::response/3>`
+
+``response/6``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::response/6>`
 
 ``restore/1``
 -------------
@@ -19230,6 +20196,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`
 
+``run_session/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::run_session/3>`
+
+``run_session/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::run_session/4>`
+
 ``run_test_sets/1``
 -------------------
 
@@ -19576,6 +20562,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::scard/3>`
 
+``schema/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_router <http_router/0::schema/2>`
+* :ref:`open_api_provider_protocol <open_api_provider_protocol/0::schema/2>`
+
 ``score/3``
 -----------
 
@@ -19649,6 +20646,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::secondary_header_time/3>`
+
+``security/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_router <http_router/0::security/1>`
+* :ref:`open_api_provider_protocol <open_api_provider_protocol/0::security/1>`
+
+``security_scheme/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_router <http_router/0::security_scheme/2>`
+* :ref:`open_api_provider_protocol <open_api_provider_protocol/0::security_scheme/2>`
 
 ``segment_data/2``
 ------------------
@@ -19753,6 +20772,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::send/3>`
 * :ref:`redis <redis/0::send/3>`
 
 ``send/4``
@@ -19890,7 +20910,118 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::serve/3>`
 * :ref:`queuep <queuep/0::serve/3>`
+
+``serve_connection/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::serve_connection/3>`
+
+``serve_listener/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::serve_listener/4>`
+
+``serve_listener/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::serve_listener/5>`
+
+``serve_once/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::serve_once/3>`
+
+``serve_once/6``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_once/6>`
+
+``serve_once/7``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_once/7>`
+
+``serve_until_shutdown/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::serve_until_shutdown/4>`
+
+``serve_until_shutdown/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_until_shutdown/5>`
+
+``serve_until_shutdown/6``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_until_shutdown/6>`
+
+``serve_websocket/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::serve_websocket/4>`
+
+``serve_websocket_once/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket <http_socket/0::serve_websocket_once/5>`
 
 ``server_accept/4``
 -------------------
@@ -19951,6 +21082,47 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`socket <socket/0::server_open/4>`
+
+``servers/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_router <http_router/0::servers/1>`
+* :ref:`open_api_provider_protocol <open_api_provider_protocol/0::servers/1>`
+
+``session/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::session/2>`
+
+``session_count/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::session_count/2>`
+
+``sessions/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::sessions/2>`
 
 ``set/1``
 ---------
@@ -20828,6 +22000,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`memcached <memcached/0::stats/3>`
 
+``status/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_response_protocol <http_response_protocol/0::status/1>`
+
+``status/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::status/2>`
+
 ``stem/2``
 ----------
 
@@ -21649,6 +22841,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::take/4>`
 
+``take_pending/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::take_pending/3>`
+
 ``talker/2``
 ------------
 
@@ -21667,8 +22869,19 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_request_protocol <http_request_protocol/0::target/1>`
 * :ref:`regression_dataset_protocol <regression_dataset_protocol/0::target/1>`
 * :ref:`target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol/0::target/1>`
+
+``target/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::target/2>`
 
 ``tcb_minus_tdb_approx/3``
 --------------------------
@@ -22335,6 +23548,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::type/2>`
+* :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::type/2>`
 
 ``type/3``
 ----------
@@ -22509,6 +23723,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs_common <packs_common/0::unpin/1>`
+
+``unregister/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::unregister/2>`
 
 ``unsubscribe/3``
 -----------------
@@ -22893,6 +24117,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::valid_conversion/3>`
 
+``valid_cookie/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::valid_cookie/1>`
+
 ``valid_coordinate/1``
 ----------------------
 
@@ -23107,6 +24341,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_segment/1>`
 
+``valid_set_cookie/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::valid_set_cookie/1>`
+
 ``valid_until_date/1``
 ----------------------
 
@@ -23151,6 +24395,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/3>`
 
+``validate_document/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_document/1>`
+
+``validate_document/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_document/2>`
+
 ``validate_grouped_dataset/1``
 ------------------------------
 
@@ -23170,6 +24434,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_grouped_dataset/2>`
+
+``validate_http_request/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_http_request/3>`
+
+``validate_http_request/4``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_http_request/4>`
+
+``validate_http_response/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_http_response/3>`
+
+``validate_http_response/4``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_http_response/4>`
 
 ``validate_pairwise_dataset/1``
 -------------------------------
@@ -23210,6 +24514,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_pairwise_measurement_dataset/2>`
+
+``validate_request/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_request/3>`
+
+``validate_request/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_request/4>`
+
+``validate_response/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_response/3>`
+
+``validate_response/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::validate_response/4>`
 
 ``validate_temporal_pairwise_dataset/1``
 ----------------------------------------
@@ -23386,6 +24730,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::version/1>`
+* :ref:`http_request_protocol <http_request_protocol/0::version/1>`
+* :ref:`http_response_protocol <http_response_protocol/0::version/1>`
 
 ``version/2``
 -------------
@@ -23398,6 +24744,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::version/2>`
 * :ref:`ccsds_frames <ccsds_frames/0::version/2>`
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::version/2>`
+* :ref:`http <http/0::version/2>`
 * :ref:`memcached <memcached/0::version/2>`
 
 ``version/6``
@@ -23551,6 +24898,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`directed_graph_protocol <directed_graph_protocol/0::weakly_connected_components/2>`
+
+``websocket_accept/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::websocket_accept/2>`
 
 ``week_of_year_iso/2``
 ----------------------
@@ -23743,6 +25100,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`csv_protocol <csv_protocol/0::write_file/3>`
 * :ref:`tsv_protocol <tsv_protocol/0::write_file/3>`
 
+``write_frame/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::write_frame/2>`
+
 ``write_framed_message/2``
 --------------------------
 
@@ -23771,7 +25138,59 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::write_message/2>`
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::write_message/2>`
 * :ref:`json_rpc <json_rpc/0::write_message/2>`
+
+``write_message/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::write_message/3>`
+
+``write_message/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::write_message/4>`
+
+``write_message/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::write_message/5>`
+
+``write_request/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client_core <http_client_core/0::write_request/2>`
+
+``write_response/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::write_response/2>`
 
 ``write_stream/3``
 ------------------

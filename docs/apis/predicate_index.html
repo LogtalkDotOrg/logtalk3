@@ -114,6 +114,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#absolute-file-name-2"><code class="docutils literal notranslate"><span class="pre">absolute_file_name/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#accept-websocket-3"><code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#ack-3"><code class="docutils literal notranslate"><span class="pre">ack/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -259,6 +262,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#anomaly-detector-options-2"><code class="docutils literal notranslate"><span class="pre">anomaly_detector_options/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api-info-1"><code class="docutils literal notranslate"><span class="pre">api_info/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#apid-2"><code class="docutils literal notranslate"><span class="pre">apid/2</span></code></a><ul class="simple">
@@ -531,6 +537,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#block-size-1"><code class="docutils literal notranslate"><span class="pre">block_size/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#body-1"><code class="docutils literal notranslate"><span class="pre">body/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#body-2"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#body-3"><code class="docutils literal notranslate"><span class="pre">body/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#body-pred-1"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -553,6 +568,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#bridges-2"><code class="docutils literal notranslate"><span class="pre">bridges/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#broadcast-2"><code class="docutils literal notranslate"><span class="pre">broadcast/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#broadcast-except-3"><code class="docutils literal notranslate"><span class="pre">broadcast_except/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#built-date-1"><code class="docutils literal notranslate"><span class="pre">built_date/1</span></code></a><ul class="simple">
@@ -837,6 +858,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#close-client-1"><code class="docutils literal notranslate"><span class="pre">close_client/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#close-connection-1"><code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#close-connection-pool-1"><code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#close-listener-1"><code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#close-polygon-2"><code class="docutils literal notranslate"><span class="pre">close_polygon/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -961,6 +991,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#connection-alive-1"><code class="docutils literal notranslate"><span class="pre">connection_alive/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connection-pool-stats-2"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connection-streams-3"><code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#consensus-ranking-2"><code class="docutils literal notranslate"><span class="pre">consensus_ranking/2</span></code></a><ul class="simple">
@@ -1249,6 +1285,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#decode-bits-3"><code class="docutils literal notranslate"><span class="pre">decode_bits/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#decode-body-4"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#decode-exception-2"><code class="docutils literal notranslate"><span class="pre">decode_exception/2</span></code></a><ul class="simple">
@@ -1614,6 +1653,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#disjoint-sets-2"><code class="docutils literal notranslate"><span class="pre">disjoint_sets/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#dispatch-3"><code class="docutils literal notranslate"><span class="pre">dispatch/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#dispatch-map-id-2"><code class="docutils literal notranslate"><span class="pre">dispatch_map_id/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1857,6 +1899,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#encode-bits-3"><code class="docutils literal notranslate"><span class="pre">encode_bits/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#encode-body-4"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#encode-frame-2"><code class="docutils literal notranslate"><span class="pre">encode_frame/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1986,7 +2031,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#example-3"><code class="docutils literal notranslate"><span class="pre">example/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#exchange-3"><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exchange-4"><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#exchange-bind-4"><code class="docutils literal notranslate"><span class="pre">exchange_bind/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exchange-connection-3"><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exchange-connection-4"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#exchange-declare-3"><code class="docutils literal notranslate"><span class="pre">exchange_declare/3</span></code></a><ul class="simple">
@@ -2103,6 +2160,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#fibonacci-2"><code class="docutils literal notranslate"><span class="pre">fibonacci/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#field-3"><code class="docutils literal notranslate"><span class="pre">field/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#field-part-3"><code class="docutils literal notranslate"><span class="pre">field_part/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#fields-2"><code class="docutils literal notranslate"><span class="pre">fields/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2115,6 +2178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#file-2"><code class="docutils literal notranslate"><span class="pre">file/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#file-5"><code class="docutils literal notranslate"><span class="pre">file/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#file-exists-1"><code class="docutils literal notranslate"><span class="pre">file_exists/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2125,6 +2191,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#file-modification-time-2"><code class="docutils literal notranslate"><span class="pre">file_modification_time/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#file-part-5"><code class="docutils literal notranslate"><span class="pre">file_part/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#file-path-components-2"><code class="docutils literal notranslate"><span class="pre">file_path_components/2</span></code></a><ul class="simple">
@@ -2179,6 +2248,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#filter-3"><code class="docutils literal notranslate"><span class="pre">filter/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#final-2"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#final-bearing-3"><code class="docutils literal notranslate"><span class="pre">final_bearing/3</span></code></a><ul class="simple">
@@ -2283,6 +2355,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#foreach-4"><code class="docutils literal notranslate"><span class="pre">foreach/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#form-data-body-2"><code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#format-1"><code class="docutils literal notranslate"><span class="pre">format/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2350,6 +2425,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#fractile-3"><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frame-5"><code class="docutils literal notranslate"><span class="pre">frame/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#frame-body-2"><code class="docutils literal notranslate"><span class="pre">frame_body/2</span></code></a><ul class="simple">
@@ -2454,6 +2532,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#generate-all-2"><code class="docutils literal notranslate"><span class="pre">generate_all/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-body-3"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-cookie-2"><code class="docutils literal notranslate"><span class="pre">generate_cookie/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-fragment-2"><code class="docutils literal notranslate"><span class="pre">generate_fragment/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2463,7 +2547,25 @@
 <li class="toctree-l2"><a class="reference internal" href="#generate-frames-3"><code class="docutils literal notranslate"><span class="pre">generate_frames/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-headers-2"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-idle-packet-4"><code class="docutils literal notranslate"><span class="pre">generate_idle_packet/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-request-2"><code class="docutils literal notranslate"><span class="pre">generate_request/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-request-line-2"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-response-2"><code class="docutils literal notranslate"><span class="pre">generate_response/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-set-cookie-4"><code class="docutils literal notranslate"><span class="pre">generate_set_cookie/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-status-line-2"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#genint-2"><code class="docutils literal notranslate"><span class="pre">genint/2</span></code></a><ul class="simple">
@@ -2616,6 +2718,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#handbook-0"><code class="docutils literal notranslate"><span class="pre">handbook/0</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#handle-2"><code class="docutils literal notranslate"><span class="pre">handle/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#harmonic-mean-2"><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2640,7 +2745,25 @@
 <li class="toctree-l2"><a class="reference internal" href="#head-2"><code class="docutils literal notranslate"><span class="pre">head/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#head-3"><code class="docutils literal notranslate"><span class="pre">head/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#head-4"><code class="docutils literal notranslate"><span class="pre">head/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#head-pred-1"><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#header-2"><code class="docutils literal notranslate"><span class="pre">header/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#header-3"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#headers-1"><code class="docutils literal notranslate"><span class="pre">headers/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#headers-2"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#help-0"><code class="docutils literal notranslate"><span class="pre">help/0</span></code></a><ul class="simple">
@@ -2994,6 +3117,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#is-bipartite-1"><code class="docutils literal notranslate"><span class="pre">is_bipartite/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#is-body-1"><code class="docutils literal notranslate"><span class="pre">is_body/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#is-clockwise-polygon-1"><code class="docutils literal notranslate"><span class="pre">is_clockwise_polygon/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3024,6 +3150,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#is-false-1"><code class="docutils literal notranslate"><span class="pre">is_false/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#is-frame-1"><code class="docutils literal notranslate"><span class="pre">is_frame/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#is-hex-digit-1"><code class="docutils literal notranslate"><span class="pre">is_hex_digit/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3039,6 +3168,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#is-lower-case-1"><code class="docutils literal notranslate"><span class="pre">is_lower_case/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#is-message-1"><code class="docutils literal notranslate"><span class="pre">is_message/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#is-newline-1"><code class="docutils literal notranslate"><span class="pre">is_newline/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3052,6 +3184,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#is-octal-digit-1"><code class="docutils literal notranslate"><span class="pre">is_octal_digit/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#is-part-1"><code class="docutils literal notranslate"><span class="pre">is_part/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#is-period-1"><code class="docutils literal notranslate"><span class="pre">is_period/1</span></code></a><ul class="simple">
@@ -3076,6 +3211,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#is-sparse-1"><code class="docutils literal notranslate"><span class="pre">is_sparse/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#is-state-1"><code class="docutils literal notranslate"><span class="pre">is_state/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#is-subsequence-of-2"><code class="docutils literal notranslate"><span class="pre">is_subsequence_of/2</span></code></a><ul class="simple">
@@ -3828,6 +3966,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#measurement-4"><code class="docutils literal notranslate"><span class="pre">measurement/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#media-type-2"><code class="docutils literal notranslate"><span class="pre">media_type/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#media-types-1"><code class="docutils literal notranslate"><span class="pre">media_types/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#median-2"><code class="docutils literal notranslate"><span class="pre">median/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3844,6 +3988,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#merge-3"><code class="docutils literal notranslate"><span class="pre">merge/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#message-3"><code class="docutils literal notranslate"><span class="pre">message/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#message-body-2"><code class="docutils literal notranslate"><span class="pre">message_body/2</span></code></a><ul class="simple">
@@ -3895,6 +4042,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#metarule-next-id-1"><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#method-1"><code class="docutils literal notranslate"><span class="pre">method/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#method-2"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a><ul class="simple">
@@ -4407,6 +4557,30 @@
 <li class="toctree-l2"><a class="reference internal" href="#one-or-more-2"><code class="docutils literal notranslate"><span class="pre">one_or_more//2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#opcode-2"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-1"><code class="docutils literal notranslate"><span class="pre">open/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-4"><code class="docutils literal notranslate"><span class="pre">open/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-5"><code class="docutils literal notranslate"><span class="pre">open/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-connection-4"><code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-connection-pool-4"><code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-listener-4"><code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#open-websocket-4"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#operating-system-machine-1"><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4417,6 +4591,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#operating-system-type-1"><code class="docutils literal notranslate"><span class="pre">operating_system_type/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#operation-3"><code class="docutils literal notranslate"><span class="pre">operation/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#operations-1"><code class="docutils literal notranslate"><span class="pre">operations/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#option-2"><code class="docutils literal notranslate"><span class="pre">option/2</span></code></a><ul class="simple">
@@ -4614,6 +4794,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#parse-all-2"><code class="docutils literal notranslate"><span class="pre">parse_all/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-body-4"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-cookie-2"><code class="docutils literal notranslate"><span class="pre">parse_cookie/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#parse-domain-2"><code class="docutils literal notranslate"><span class="pre">parse_domain/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4632,6 +4818,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#parse-frames-3"><code class="docutils literal notranslate"><span class="pre">parse_frames/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-headers-2"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#parse-lines-4"><code class="docutils literal notranslate"><span class="pre">parse_lines/4</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4639,6 +4828,33 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#parse-problem-3"><code class="docutils literal notranslate"><span class="pre">parse_problem/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-request-2"><code class="docutils literal notranslate"><span class="pre">parse_request/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-request-line-2"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-response-2"><code class="docutils literal notranslate"><span class="pre">parse_response/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-set-cookie-4"><code class="docutils literal notranslate"><span class="pre">parse_set_cookie/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parse-status-line-2"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-4"><code class="docutils literal notranslate"><span class="pre">part/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-body-2"><code class="docutils literal notranslate"><span class="pre">part_body/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-headers-2"><code class="docutils literal notranslate"><span class="pre">part_headers/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-properties-2"><code class="docutils literal notranslate"><span class="pre">part_properties/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#partial-map-4"><code class="docutils literal notranslate"><span class="pre">partial_map/4</span></code></a><ul class="simple">
@@ -4680,6 +4896,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#partitions-4"><code class="docutils literal notranslate"><span class="pre">partitions/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#parts-2"><code class="docutils literal notranslate"><span class="pre">parts/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#patch-4"><code class="docutils literal notranslate"><span class="pre">patch/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#patch-5"><code class="docutils literal notranslate"><span class="pre">patch/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#path-3"><code class="docutils literal notranslate"><span class="pre">path/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4690,6 +4915,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#pattern-miner-options-2"><code class="docutils literal notranslate"><span class="pre">pattern_miner_options/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#payload-2"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#peek-back-2"><code class="docutils literal notranslate"><span class="pre">peek_back/2</span></code></a><ul class="simple">
@@ -4813,6 +5041,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#possible-4"><code class="docutils literal notranslate"><span class="pre">possible/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#post-4"><code class="docutils literal notranslate"><span class="pre">post/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#post-5"><code class="docutils literal notranslate"><span class="pre">post/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#postorder-2"><code class="docutils literal notranslate"><span class="pre">postorder/2</span></code></a><ul class="simple">
@@ -5052,7 +5286,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#proper-suffix-3"><code class="docutils literal notranslate"><span class="pre">proper_suffix/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#properties-2"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#property-1"><code class="docutils literal notranslate"><span class="pre">property/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#property-2"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#prove-2"><code class="docutils literal notranslate"><span class="pre">prove/2</span></code></a><ul class="simple">
@@ -5080,6 +5320,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#push-front-3"><code class="docutils literal notranslate"><span class="pre">push_front/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#put-4"><code class="docutils literal notranslate"><span class="pre">put/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#put-5"><code class="docutils literal notranslate"><span class="pre">put/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#qr-decomposition-3"><code class="docutils literal notranslate"><span class="pre">qr_decomposition/3</span></code></a><ul class="simple">
@@ -5259,6 +5505,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#read-file-by-line-3"><code class="docutils literal notranslate"><span class="pre">read_file_by_line/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#read-frame-2"><code class="docutils literal notranslate"><span class="pre">read_frame/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#read-framed-message-2"><code class="docutils literal notranslate"><span class="pre">read_framed_message/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5274,10 +5523,25 @@
 <li class="toctree-l2"><a class="reference internal" href="#read-message-2"><code class="docutils literal notranslate"><span class="pre">read_message/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#read-message-4"><code class="docutils literal notranslate"><span class="pre">read_message/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#read-message-5"><code class="docutils literal notranslate"><span class="pre">read_message/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#read-message-6"><code class="docutils literal notranslate"><span class="pre">read_message/6</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#read-mime-types-2"><code class="docutils literal notranslate"><span class="pre">read_mime_types/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#read-only-device-path-1"><code class="docutils literal notranslate"><span class="pre">read_only_device_path/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#read-request-2"><code class="docutils literal notranslate"><span class="pre">read_request/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#read-response-2"><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#read-stream-2"><code class="docutils literal notranslate"><span class="pre">read_stream/2</span></code></a><ul class="simple">
@@ -5439,6 +5703,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#refine-propagate-6"><code class="docutils literal notranslate"><span class="pre">refine_propagate/6</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#register-2"><code class="docutils literal notranslate"><span class="pre">register/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#regressor-options-2"><code class="docutils literal notranslate"><span class="pre">regressor_options/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5532,6 +5799,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#request-4"><code class="docutils literal notranslate"><span class="pre">request/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#request-5"><code class="docutils literal notranslate"><span class="pre">request/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#request-7"><code class="docutils literal notranslate"><span class="pre">request/7</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#request-shutdown-1"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#rescale-3"><code class="docutils literal notranslate"><span class="pre">rescale/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5587,6 +5863,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#response-3"><code class="docutils literal notranslate"><span class="pre">response/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#response-6"><code class="docutils literal notranslate"><span class="pre">response/6</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#restore-1"><code class="docutils literal notranslate"><span class="pre">restore/1</span></code></a><ul class="simple">
@@ -5697,6 +5976,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#run-4"><code class="docutils literal notranslate"><span class="pre">run/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#run-session-3"><code class="docutils literal notranslate"><span class="pre">run_session/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#run-session-4"><code class="docutils literal notranslate"><span class="pre">run_session/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#run-test-sets-1"><code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5799,6 +6084,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#scard-3"><code class="docutils literal notranslate"><span class="pre">scard/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#schema-2"><code class="docutils literal notranslate"><span class="pre">schema/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#score-3"><code class="docutils literal notranslate"><span class="pre">score/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5818,6 +6106,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#secondary-header-time-3"><code class="docutils literal notranslate"><span class="pre">secondary_header_time/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-1"><code class="docutils literal notranslate"><span class="pre">security/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-scheme-2"><code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#segment-data-2"><code class="docutils literal notranslate"><span class="pre">segment_data/2</span></code></a><ul class="simple">
@@ -5889,6 +6183,39 @@
 <li class="toctree-l2"><a class="reference internal" href="#serve-3"><code class="docutils literal notranslate"><span class="pre">serve/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-connection-3"><code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-listener-4"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-listener-5"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-once-3"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-once-6"><code class="docutils literal notranslate"><span class="pre">serve_once/6</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-once-7"><code class="docutils literal notranslate"><span class="pre">serve_once/7</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-until-shutdown-4"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-until-shutdown-5"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-until-shutdown-6"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/6</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-websocket-4"><code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serve-websocket-once-5"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#server-accept-4"><code class="docutils literal notranslate"><span class="pre">server_accept/4</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -5905,6 +6232,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#server-open-4"><code class="docutils literal notranslate"><span class="pre">server_open/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#servers-1"><code class="docutils literal notranslate"><span class="pre">servers/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#session-2"><code class="docutils literal notranslate"><span class="pre">session/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#session-count-2"><code class="docutils literal notranslate"><span class="pre">session_count/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sessions-2"><code class="docutils literal notranslate"><span class="pre">sessions/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#set-1"><code class="docutils literal notranslate"><span class="pre">set/1</span></code></a><ul class="simple">
@@ -6168,6 +6507,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#stats-3"><code class="docutils literal notranslate"><span class="pre">stats/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#status-1"><code class="docutils literal notranslate"><span class="pre">status/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#status-2"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#stem-2"><code class="docutils literal notranslate"><span class="pre">stem/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -6411,10 +6756,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#take-4"><code class="docutils literal notranslate"><span class="pre">take/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#take-pending-3"><code class="docutils literal notranslate"><span class="pre">take_pending/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#talker-2"><code class="docutils literal notranslate"><span class="pre">talker/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#target-1"><code class="docutils literal notranslate"><span class="pre">target/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#target-2"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tcb-minus-tdb-approx-3"><code class="docutils literal notranslate"><span class="pre">tcb_minus_tdb_approx/3</span></code></a><ul class="simple">
@@ -6666,6 +7017,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#unpin-1"><code class="docutils literal notranslate"><span class="pre">unpin/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#unregister-2"><code class="docutils literal notranslate"><span class="pre">unregister/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#unsubscribe-3"><code class="docutils literal notranslate"><span class="pre">unsubscribe/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -6774,6 +7128,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#valid-conversion-3"><code class="docutils literal notranslate"><span class="pre">valid_conversion/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-cookie-1"><code class="docutils literal notranslate"><span class="pre">valid_cookie/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-coordinate-1"><code class="docutils literal notranslate"><span class="pre">valid_coordinate/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -6837,6 +7194,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#valid-segment-1"><code class="docutils literal notranslate"><span class="pre">valid_segment/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-set-cookie-1"><code class="docutils literal notranslate"><span class="pre">valid_set_cookie/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-until-date-1"><code class="docutils literal notranslate"><span class="pre">valid_until_date/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -6849,10 +7209,28 @@
 <li class="toctree-l2"><a class="reference internal" href="#validate-3"><code class="docutils literal notranslate"><span class="pre">validate/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-document-1"><code class="docutils literal notranslate"><span class="pre">validate_document/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-document-2"><code class="docutils literal notranslate"><span class="pre">validate_document/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#validate-grouped-dataset-1"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#validate-grouped-dataset-2"><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-http-request-3"><code class="docutils literal notranslate"><span class="pre">validate_http_request/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-http-request-4"><code class="docutils literal notranslate"><span class="pre">validate_http_request/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-http-response-3"><code class="docutils literal notranslate"><span class="pre">validate_http_response/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-http-response-4"><code class="docutils literal notranslate"><span class="pre">validate_http_response/4</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#validate-pairwise-dataset-1"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_dataset/1</span></code></a><ul class="simple">
@@ -6865,6 +7243,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#validate-pairwise-measurement-dataset-2"><code class="docutils literal notranslate"><span class="pre">validate_pairwise_measurement_dataset/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-request-3"><code class="docutils literal notranslate"><span class="pre">validate_request/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-request-4"><code class="docutils literal notranslate"><span class="pre">validate_request/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-response-3"><code class="docutils literal notranslate"><span class="pre">validate_response/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validate-response-4"><code class="docutils literal notranslate"><span class="pre">validate_response/4</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#validate-temporal-pairwise-dataset-1"><code class="docutils literal notranslate"><span class="pre">validate_temporal_pairwise_dataset/1</span></code></a><ul class="simple">
@@ -6966,6 +7356,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#weakly-connected-components-2"><code class="docutils literal notranslate"><span class="pre">weakly_connected_components/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#websocket-accept-2"><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#week-of-year-iso-2"><code class="docutils literal notranslate"><span class="pre">week_of_year_iso/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -7023,6 +7416,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#write-file-3"><code class="docutils literal notranslate"><span class="pre">write_file/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#write-frame-2"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#write-framed-message-2"><code class="docutils literal notranslate"><span class="pre">write_framed_message/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -7030,6 +7426,21 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#write-message-2"><code class="docutils literal notranslate"><span class="pre">write_message/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#write-message-3"><code class="docutils literal notranslate"><span class="pre">write_message/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#write-message-4"><code class="docutils literal notranslate"><span class="pre">write_message/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#write-message-5"><code class="docutils literal notranslate"><span class="pre">write_message/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#write-request-2"><code class="docutils literal notranslate"><span class="pre">write_request/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#write-response-2"><code class="docutils literal notranslate"><span class="pre">write_response/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#write-stream-3"><code class="docutils literal notranslate"><span class="pre">write_stream/3</span></code></a><ul class="simple">
@@ -7291,6 +7702,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-absolute-file-name-2"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="accept-websocket-3">
+<h2><code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code><a class="headerlink" href="#accept-websocket-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-accept-websocket-3"><span class="std std-ref">http_server</span></a></p></li>
 </ul>
 </section>
 <section id="ack-3">
@@ -7693,6 +8112,15 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="anomaly_detector_protocol_0.html#anomaly-detector-protocol-0-anomaly-detector-options-2"><span class="std std-ref">anomaly_detector_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="api-info-1">
+<h2><code class="docutils literal notranslate"><span class="pre">api_info/1</span></code><a class="headerlink" href="#api-info-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-api-info-1"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_provider_protocol_0.html#open-api-provider-protocol-0-api-info-1"><span class="std std-ref">open_api_provider_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="apid-2">
@@ -8436,6 +8864,31 @@
 <li><p><a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-block-size-1"><span class="std std-ref">hash_digest_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="body-1">
+<h2><code class="docutils literal notranslate"><span class="pre">body/1</span></code><a class="headerlink" href="#body-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-body-1"><span class="std std-ref">http_request_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_response_protocol_0.html#http-response-protocol-0-body-1"><span class="std std-ref">http_response_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="body-2">
+<h2><code class="docutils literal notranslate"><span class="pre">body/2</span></code><a class="headerlink" href="#body-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-body-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="body-3">
+<h2><code class="docutils literal notranslate"><span class="pre">body/3</span></code><a class="headerlink" href="#body-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-body-3"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
 <section id="body-pred-1">
 <h2><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code><a class="headerlink" href="#body-pred-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -8498,6 +8951,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="undirected_graph_common_0.html#undirected-graph-common-0-bridges-2"><span class="std std-ref">undirected_graph_common</span></a></p></li>
+</ul>
+</section>
+<section id="broadcast-2">
+<h2><code class="docutils literal notranslate"><span class="pre">broadcast/2</span></code><a class="headerlink" href="#broadcast-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-broadcast-2"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
+</ul>
+</section>
+<section id="broadcast-except-3">
+<h2><code class="docutils literal notranslate"><span class="pre">broadcast_except/3</span></code><a class="headerlink" href="#broadcast-except-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-broadcast-except-3"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
 </ul>
 </section>
 <section id="built-date-1">
@@ -9238,6 +9707,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="amqp_0.html#amqp-0-close-1"><span class="std std-ref">amqp</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-close-1"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
 </ul>
 </section>
 <section id="close-2">
@@ -9262,6 +9732,30 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="linda_client_0.html#linda-client-0-close-client-1"><span class="std std-ref">linda_client</span></a></p></li>
+</ul>
+</section>
+<section id="close-connection-1">
+<h2><code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code><a class="headerlink" href="#close-connection-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-close-connection-1"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="close-connection-pool-1">
+<h2><code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code><a class="headerlink" href="#close-connection-pool-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-close-connection-pool-1"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="close-listener-1">
+<h2><code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code><a class="headerlink" href="#close-listener-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-close-listener-1"><span class="std std-ref">http_socket</span></a></p></li>
 </ul>
 </section>
 <section id="close-polygon-2">
@@ -9604,6 +10098,22 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="amqp_0.html#amqp-0-connection-alive-1"><span class="std std-ref">amqp</span></a></p></li>
 <li><p><a class="reference internal" href="stomp_0.html#stomp-0-connection-alive-1"><span class="std std-ref">stomp</span></a></p></li>
+</ul>
+</section>
+<section id="connection-pool-stats-2">
+<h2><code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code><a class="headerlink" href="#connection-pool-stats-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-connection-pool-stats-2"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="connection-streams-3">
+<h2><code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code><a class="headerlink" href="#connection-streams-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-connection-streams-3"><span class="std std-ref">http_socket</span></a></p></li>
 </ul>
 </section>
 <section id="consensus-ranking-2">
@@ -10384,6 +10894,15 @@
 <li><p><a class="reference internal" href="geohash_protocol_0.html#geohash-protocol-0-decode-bits-3"><span class="std std-ref">geohash_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="decode-body-4">
+<h2><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code><a class="headerlink" href="#decode-body-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-decode-body-4"><span class="std std-ref">http</span></a></p></li>
+<li><p><a class="reference internal" href="http_body_codec_protocol_0.html#http-body-codec-protocol-0-decode-body-4"><span class="std std-ref">http_body_codec_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="decode-exception-2">
 <h2><code class="docutils literal notranslate"><span class="pre">decode_exception/2</span></code><a class="headerlink" href="#decode-exception-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -10601,6 +11120,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-delete-3"><span class="std std-ref">http_client</span></a></p></li>
 <li><p><a class="reference internal" href="listp_0.html#listp-0-delete-3"><span class="std std-ref">listp</span></a></p></li>
 <li><p><a class="reference internal" href="setp_0.html#setp-0-delete-3"><span class="std std-ref">setp</span></a></p></li>
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-delete-3"><span class="std std-ref">varlistp</span></a></p></li>
@@ -10613,6 +11133,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-delete-4"><span class="std std-ref">dictionaryp</span></a></p></li>
 <li><p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-delete-4"><span class="std std-ref">heap_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-delete-4"><span class="std std-ref">http_client</span></a></p></li>
 </ul>
 </section>
 <section id="delete-all-after-2">
@@ -11400,6 +11921,14 @@
 <li><p><a class="reference internal" href="union_find_protocol_0.html#union-find-protocol-0-disjoint-sets-2"><span class="std std-ref">union_find_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="dispatch-3">
+<h2><code class="docutils literal notranslate"><span class="pre">dispatch/3</span></code><a class="headerlink" href="#dispatch-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-dispatch-3"><span class="std std-ref">http_server</span></a></p></li>
+</ul>
+</section>
 <section id="dispatch-map-id-2">
 <h2><code class="docutils literal notranslate"><span class="pre">dispatch_map_id/2</span></code><a class="headerlink" href="#dispatch-map-id-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -11791,6 +12320,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-document-2"><span class="std std-ref">open_api</span></a></p></li>
 <li><p><a class="reference internal" href="sbom_0.html#sbom-0-document-2"><span class="std std-ref">sbom</span></a></p></li>
 </ul>
 </section>
@@ -12061,6 +12591,15 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="geohash_protocol_0.html#geohash-protocol-0-encode-bits-3"><span class="std std-ref">geohash_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="encode-body-4">
+<h2><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code><a class="headerlink" href="#encode-body-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-encode-body-4"><span class="std std-ref">http</span></a></p></li>
+<li><p><a class="reference internal" href="http_body_codec_protocol_0.html#http-body-codec-protocol-0-encode-body-4"><span class="std std-ref">http_body_codec_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="encode-frame-2">
@@ -12422,12 +12961,46 @@
 <li><p><a class="reference internal" href="target_supervised_dimension_reduction_dataset_protocol_0.html#target-supervised-dimension-reduction-dataset-protocol-0-example-3"><span class="std std-ref">target_supervised_dimension_reduction_dataset_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="exchange-3">
+<h2><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code><a class="headerlink" href="#exchange-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-exchange-3"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="exchange-4">
+<h2><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code><a class="headerlink" href="#exchange-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_core_0.html#http-client-core-0-exchange-4"><span class="std std-ref">http_client_core</span></a></p></li>
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-exchange-4"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
 <section id="exchange-bind-4">
 <h2><code class="docutils literal notranslate"><span class="pre">exchange_bind/4</span></code><a class="headerlink" href="#exchange-bind-4" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="amqp_0.html#amqp-0-exchange-bind-4"><span class="std std-ref">amqp</span></a></p></li>
+</ul>
+</section>
+<section id="exchange-connection-3">
+<h2><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code><a class="headerlink" href="#exchange-connection-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-exchange-connection-3"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="exchange-connection-4">
+<h2><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code><a class="headerlink" href="#exchange-connection-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_core_0.html#http-client-core-0-exchange-connection-4"><span class="std std-ref">http_client_core</span></a></p></li>
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-exchange-connection-4"><span class="std std-ref">http_socket</span></a></p></li>
 </ul>
 </section>
 <section id="exchange-declare-3">
@@ -12748,11 +13321,28 @@
 <li><p><a class="reference internal" href="natural_0.html#natural-0-fibonacci-2"><span class="std std-ref">natural</span></a></p></li>
 </ul>
 </section>
+<section id="field-3">
+<h2><code class="docutils literal notranslate"><span class="pre">field/3</span></code><a class="headerlink" href="#field-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-field-3"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
+<section id="field-part-3">
+<h2><code class="docutils literal notranslate"><span class="pre">field_part/3</span></code><a class="headerlink" href="#field-part-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-field-part-3"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
 <section id="fields-2">
 <h2><code class="docutils literal notranslate"><span class="pre">fields/2</span></code><a class="headerlink" href="#fields-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-fields-2"><span class="std std-ref">http_multipart</span></a></p></li>
 <li><p><a class="reference internal" href="nmea_protocol_0.html#nmea-protocol-0-fields-2"><span class="std std-ref">nmea_protocol</span></a></p></li>
 </ul>
 </section>
@@ -12788,6 +13378,14 @@
 <li><p><a class="reference internal" href="wrapper_0.html#wrapper-0-file-2"><span class="std std-ref">wrapper</span></a></p></li>
 </ul>
 </section>
+<section id="file-5">
+<h2><code class="docutils literal notranslate"><span class="pre">file/5</span></code><a class="headerlink" href="#file-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-file-5"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
 <section id="file-exists-1">
 <h2><code class="docutils literal notranslate"><span class="pre">file_exists/1</span></code><a class="headerlink" href="#file-exists-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -12818,6 +13416,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-file-modification-time-2"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="file-part-5">
+<h2><code class="docutils literal notranslate"><span class="pre">file_part/5</span></code><a class="headerlink" href="#file-part-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-file-part-5"><span class="std std-ref">http_multipart</span></a></p></li>
 </ul>
 </section>
 <section id="file-path-components-2">
@@ -12942,6 +13548,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="diagram_1.html#diagram-1-files-2"><span class="std std-ref">diagram(Format)</span></a></p></li>
 <li><p><a class="reference internal" href="diagrams_1.html#diagrams-1-files-2"><span class="std std-ref">diagrams(Format)</span></a></p></li>
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-files-2"><span class="std std-ref">http_multipart</span></a></p></li>
 <li><p><a class="reference internal" href="lgtdocp_0.html#lgtdocp-0-files-2"><span class="std std-ref">lgtdocp</span></a></p></li>
 <li><p><a class="reference internal" href="wrapper_0.html#wrapper-0-files-2"><span class="std std-ref">wrapper</span></a></p></li>
 </ul>
@@ -12970,6 +13577,14 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="expected_1.html#expected-1-filter-3"><span class="std std-ref">expected(Expected)</span></a></p></li>
 <li><p><a class="reference internal" href="validation_1.html#validation-1-filter-3"><span class="std std-ref">validation(Validation)</span></a></p></li>
+</ul>
+</section>
+<section id="final-2">
+<h2><code class="docutils literal notranslate"><span class="pre">final/2</span></code><a class="headerlink" href="#final-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-final-2"><span class="std std-ref">http_websocket</span></a></p></li>
 </ul>
 </section>
 <section id="final-bearing-3">
@@ -13250,6 +13865,14 @@
 <li><p><a class="reference internal" href="loopp_0.html#loopp-0-foreach-4"><span class="std std-ref">loopp</span></a></p></li>
 </ul>
 </section>
+<section id="form-data-body-2">
+<h2><code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code><a class="headerlink" href="#form-data-body-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-form-data-body-2"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
 <section id="format-1">
 <h2><code class="docutils literal notranslate"><span class="pre">format/1</span></code><a class="headerlink" href="#format-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -13434,6 +14057,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="statisticsp_0.html#statisticsp-0-fractile-3"><span class="std std-ref">statisticsp</span></a></p></li>
+</ul>
+</section>
+<section id="frame-5">
+<h2><code class="docutils literal notranslate"><span class="pre">frame/5</span></code><a class="headerlink" href="#frame-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-frame-5"><span class="std std-ref">http_websocket</span></a></p></li>
 </ul>
 </section>
 <section id="frame-body-2">
@@ -13702,12 +14333,14 @@
 <li><p><a class="reference internal" href="ccsds_time_code_protocol_0.html#ccsds-time-code-protocol-0-generate-2"><span class="std std-ref">ccsds_time_code_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="geojson_protocol_0.html#geojson-protocol-0-generate-2"><span class="std std-ref">geojson_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="html_0.html#html-0-generate-2"><span class="std std-ref">html</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-generate-2"><span class="std std-ref">http_websocket</span></a></p></li>
 <li><p><a class="reference internal" href="ieee_754_protocol_0.html#ieee-754-protocol-0-generate-2"><span class="std std-ref">ieee_754_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="json_ld_protocol_0.html#json-ld-protocol-0-generate-2"><span class="std std-ref">json_ld_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="json_lines_protocol_0.html#json-lines-protocol-0-generate-2"><span class="std std-ref">json_lines_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="json_pointer_protocol_0.html#json-pointer-protocol-0-generate-2"><span class="std std-ref">json_pointer_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="json_protocol_0.html#json-protocol-0-generate-2"><span class="std std-ref">json_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="message_pack_1.html#message-pack-1-generate-2"><span class="std std-ref">message_pack(StringRepresentation)</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-generate-2"><span class="std std-ref">open_api</span></a></p></li>
 <li><p><a class="reference internal" href="sarif_0.html#sarif-0-generate-2"><span class="std std-ref">sarif</span></a></p></li>
 <li><p><a class="reference internal" href="toml_protocol_0.html#toml-protocol-0-generate-2"><span class="std std-ref">toml_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="toon_protocol_0.html#toon-protocol-0-generate-2"><span class="std std-ref">toon_protocol</span></a></p></li>
@@ -13727,6 +14360,7 @@
 <li><p><a class="reference internal" href="ccsds_packets_1.html#ccsds-packets-1-generate-3"><span class="std std-ref">ccsds_packets(SecondaryHeaderLength)</span></a></p></li>
 <li><p><a class="reference internal" href="ccsds_time_code_protocol_0.html#ccsds-time-code-protocol-0-generate-3"><span class="std std-ref">ccsds_time_code_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ccsds_time_fields_0.html#ccsds-time-fields-0-generate-3"><span class="std std-ref">ccsds_time_fields</span></a></p></li>
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-generate-3"><span class="std std-ref">http_multipart</span></a></p></li>
 <li><p><a class="reference internal" href="ieee_754_protocol_0.html#ieee-754-protocol-0-generate-3"><span class="std std-ref">ieee_754_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="protobuf_0.html#protobuf-0-generate-3"><span class="std std-ref">protobuf</span></a></p></li>
 </ul>
@@ -13757,6 +14391,22 @@
 <li><p><a class="reference internal" href="yaml_protocol_0.html#yaml-protocol-0-generate-all-2"><span class="std std-ref">yaml_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="generate-body-3">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code><a class="headerlink" href="#generate-body-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-generate-body-3"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="generate-cookie-2">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_cookie/2</span></code><a class="headerlink" href="#generate-cookie-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-generate-cookie-2"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
 <section id="generate-fragment-2">
 <h2><code class="docutils literal notranslate"><span class="pre">generate_fragment/2</span></code><a class="headerlink" href="#generate-fragment-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -13781,12 +14431,60 @@
 <li><p><a class="reference internal" href="ccsds_link_profiles_0.html#ccsds-link-profiles-0-generate-frames-3"><span class="std std-ref">ccsds_link_profiles</span></a></p></li>
 </ul>
 </section>
+<section id="generate-headers-2">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code><a class="headerlink" href="#generate-headers-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-generate-headers-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
 <section id="generate-idle-packet-4">
 <h2><code class="docutils literal notranslate"><span class="pre">generate_idle_packet/4</span></code><a class="headerlink" href="#generate-idle-packet-4" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_packetization_0.html#ccsds-packetization-0-generate-idle-packet-4"><span class="std std-ref">ccsds_packetization</span></a></p></li>
+</ul>
+</section>
+<section id="generate-request-2">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_request/2</span></code><a class="headerlink" href="#generate-request-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-generate-request-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="generate-request-line-2">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code><a class="headerlink" href="#generate-request-line-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-generate-request-line-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="generate-response-2">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_response/2</span></code><a class="headerlink" href="#generate-response-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-generate-response-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="generate-set-cookie-4">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_set_cookie/4</span></code><a class="headerlink" href="#generate-set-cookie-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-generate-set-cookie-4"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="generate-status-line-2">
+<h2><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code><a class="headerlink" href="#generate-status-line-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-generate-status-line-2"><span class="std std-ref">http</span></a></p></li>
 </ul>
 </section>
 <section id="genint-2">
@@ -13850,6 +14548,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-get-3"><span class="std std-ref">http_client</span></a></p></li>
 <li><p><a class="reference internal" href="memcached_0.html#memcached-0-get-3"><span class="std std-ref">memcached</span></a></p></li>
 <li><p><a class="reference internal" href="redis_0.html#redis-0-get-3"><span class="std std-ref">redis</span></a></p></li>
 </ul>
@@ -13859,6 +14558,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-get-4"><span class="std std-ref">http_client</span></a></p></li>
 <li><p><a class="reference internal" href="memcached_0.html#memcached-0-get-4"><span class="std std-ref">memcached</span></a></p></li>
 </ul>
 </section>
@@ -14191,6 +14891,16 @@
 <li><p><a class="reference internal" href="help_0.html#help-0-handbook-0"><span class="std std-ref">help</span></a></p></li>
 </ul>
 </section>
+<section id="handle-2">
+<h2><code class="docutils literal notranslate"><span class="pre">handle/2</span></code><a class="headerlink" href="#handle-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_handler_protocol_0.html#http-handler-protocol-0-handle-2"><span class="std std-ref">http_handler_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-handle-2"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_session_handler_protocol_0.html#http-websocket-session-handler-protocol-0-handle-2"><span class="std std-ref">http_websocket_session_handler_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="harmonic-mean-2">
 <h2><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code><a class="headerlink" href="#harmonic-mean-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -14256,12 +14966,62 @@
 <li><p><a class="reference internal" href="queuep_0.html#queuep-0-head-2"><span class="std std-ref">queuep</span></a></p></li>
 </ul>
 </section>
+<section id="head-3">
+<h2><code class="docutils literal notranslate"><span class="pre">head/3</span></code><a class="headerlink" href="#head-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-head-3"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
+<section id="head-4">
+<h2><code class="docutils literal notranslate"><span class="pre">head/4</span></code><a class="headerlink" href="#head-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-head-4"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
 <section id="head-pred-1">
 <h2><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code><a class="headerlink" href="#head-pred-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="metagol_0.html#metagol-0-head-pred-1"><span class="std std-ref">metagol</span></a></p></li>
+</ul>
+</section>
+<section id="header-2">
+<h2><code class="docutils literal notranslate"><span class="pre">header/2</span></code><a class="headerlink" href="#header-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-header-2"><span class="std std-ref">http_request_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_response_protocol_0.html#http-response-protocol-0-header-2"><span class="std std-ref">http_response_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="header-3">
+<h2><code class="docutils literal notranslate"><span class="pre">header/3</span></code><a class="headerlink" href="#header-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-header-3"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="headers-1">
+<h2><code class="docutils literal notranslate"><span class="pre">headers/1</span></code><a class="headerlink" href="#headers-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-headers-1"><span class="std std-ref">http_request_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_response_protocol_0.html#http-response-protocol-0-headers-1"><span class="std std-ref">http_response_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="headers-2">
+<h2><code class="docutils literal notranslate"><span class="pre">headers/2</span></code><a class="headerlink" href="#headers-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-headers-2"><span class="std std-ref">http</span></a></p></li>
 </ul>
 </section>
 <section id="help-0">
@@ -14706,6 +15466,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_packetization_0.html#ccsds-packetization-0-initial-state-1"><span class="std std-ref">ccsds_packetization</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-initial-state-1"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
 <li><p><a class="reference internal" href="simulated_annealing_protocol_0.html#simulated-annealing-protocol-0-initial-state-1"><span class="std std-ref">simulated_annealing_protocol</span></a></p></li>
 </ul>
 </section>
@@ -15209,6 +15970,14 @@
 <li><p><a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-bipartite-1"><span class="std std-ref">graph_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="is-body-1">
+<h2><code class="docutils literal notranslate"><span class="pre">is_body/1</span></code><a class="headerlink" href="#is-body-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-is-body-1"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
 <section id="is-clockwise-polygon-1">
 <h2><code class="docutils literal notranslate"><span class="pre">is_clockwise_polygon/1</span></code><a class="headerlink" href="#is-clockwise-polygon-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -15290,6 +16059,14 @@
 <li><p><a class="reference internal" href="java_utils_protocol_0.html#java-utils-protocol-0-is-false-1"><span class="std std-ref">java_utils_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="is-frame-1">
+<h2><code class="docutils literal notranslate"><span class="pre">is_frame/1</span></code><a class="headerlink" href="#is-frame-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-is-frame-1"><span class="std std-ref">http_websocket</span></a></p></li>
+</ul>
+</section>
 <section id="is-hex-digit-1">
 <h2><code class="docutils literal notranslate"><span class="pre">is_hex_digit/1</span></code><a class="headerlink" href="#is-hex-digit-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -15330,6 +16107,14 @@
 <li><p><a class="reference internal" href="characterp_0.html#characterp-0-is-lower-case-1"><span class="std std-ref">characterp</span></a></p></li>
 </ul>
 </section>
+<section id="is-message-1">
+<h2><code class="docutils literal notranslate"><span class="pre">is_message/1</span></code><a class="headerlink" href="#is-message-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-is-message-1"><span class="std std-ref">http_websocket_messages(TextRepresentation)</span></a></p></li>
+</ul>
+</section>
 <section id="is-newline-1">
 <h2><code class="docutils literal notranslate"><span class="pre">is_newline/1</span></code><a class="headerlink" href="#is-newline-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -15368,6 +16153,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="characterp_0.html#characterp-0-is-octal-digit-1"><span class="std std-ref">characterp</span></a></p></li>
+</ul>
+</section>
+<section id="is-part-1">
+<h2><code class="docutils literal notranslate"><span class="pre">is_part/1</span></code><a class="headerlink" href="#is-part-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-is-part-1"><span class="std std-ref">http_multipart</span></a></p></li>
 </ul>
 </section>
 <section id="is-period-1">
@@ -15415,6 +16208,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-is-request-1"><span class="std std-ref">http</span></a></p></li>
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-is-request-1"><span class="std std-ref">json_rpc</span></a></p></li>
 </ul>
 </section>
@@ -15423,6 +16217,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-is-response-1"><span class="std std-ref">http</span></a></p></li>
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-is-response-1"><span class="std std-ref">json_rpc</span></a></p></li>
 </ul>
 </section>
@@ -15432,6 +16227,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="graph_protocol_0.html#graph-protocol-0-is-sparse-1"><span class="std std-ref">graph_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="is-state-1">
+<h2><code class="docutils literal notranslate"><span class="pre">is_state/1</span></code><a class="headerlink" href="#is-state-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-is-state-1"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
 </ul>
 </section>
 <section id="is-subsequence-of-2">
@@ -17505,6 +18308,22 @@
 <li><p><a class="reference internal" href="pairwise_measurement_dataset_protocol_0.html#pairwise-measurement-dataset-protocol-0-measurement-4"><span class="std std-ref">pairwise_measurement_dataset_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="media-type-2">
+<h2><code class="docutils literal notranslate"><span class="pre">media_type/2</span></code><a class="headerlink" href="#media-type-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-media-type-2"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
+<section id="media-types-1">
+<h2><code class="docutils literal notranslate"><span class="pre">media_types/1</span></code><a class="headerlink" href="#media-types-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_body_codec_protocol_0.html#http-body-codec-protocol-0-media-types-1"><span class="std std-ref">http_body_codec_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="median-2">
 <h2><code class="docutils literal notranslate"><span class="pre">median/2</span></code><a class="headerlink" href="#median-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -17557,6 +18376,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-merge-3"><span class="std std-ref">heap_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="message-3">
+<h2><code class="docutils literal notranslate"><span class="pre">message/3</span></code><a class="headerlink" href="#message-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-message-3"><span class="std std-ref">http_websocket_messages(TextRepresentation)</span></a></p></li>
 </ul>
 </section>
 <section id="message-body-2">
@@ -17695,11 +18522,20 @@
 <li><p><a class="reference internal" href="metagol_0.html#metagol-0-metarule-next-id-1"><span class="std std-ref">metagol</span></a></p></li>
 </ul>
 </section>
+<section id="method-1">
+<h2><code class="docutils literal notranslate"><span class="pre">method/1</span></code><a class="headerlink" href="#method-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-method-1"><span class="std std-ref">http_request_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="method-2">
 <h2><code class="docutils literal notranslate"><span class="pre">method/2</span></code><a class="headerlink" href="#method-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-method-2"><span class="std std-ref">http</span></a></p></li>
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-method-2"><span class="std std-ref">json_rpc</span></a></p></li>
 </ul>
 </section>
@@ -19082,6 +19918,70 @@
 <li><p><a class="reference internal" href="sequence_grammars_0.html#sequence-grammars-0-one-or-more-2"><span class="std std-ref">sequence_grammars</span></a></p></li>
 </ul>
 </section>
+<section id="opcode-2">
+<h2><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code><a class="headerlink" href="#opcode-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-opcode-2"><span class="std std-ref">http_websocket</span></a></p></li>
+</ul>
+</section>
+<section id="open-1">
+<h2><code class="docutils literal notranslate"><span class="pre">open/1</span></code><a class="headerlink" href="#open-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-open-1"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
+</ul>
+</section>
+<section id="open-4">
+<h2><code class="docutils literal notranslate"><span class="pre">open/4</span></code><a class="headerlink" href="#open-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_client_session_0.html#http-websocket-client-session-0-open-4"><span class="std std-ref">http_websocket_client_session</span></a></p></li>
+</ul>
+</section>
+<section id="open-5">
+<h2><code class="docutils literal notranslate"><span class="pre">open/5</span></code><a class="headerlink" href="#open-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_client_session_0.html#http-websocket-client-session-0-open-5"><span class="std std-ref">http_websocket_client_session</span></a></p></li>
+</ul>
+</section>
+<section id="open-connection-4">
+<h2><code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code><a class="headerlink" href="#open-connection-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-open-connection-4"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="open-connection-pool-4">
+<h2><code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code><a class="headerlink" href="#open-connection-pool-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-open-connection-pool-4"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="open-listener-4">
+<h2><code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code><a class="headerlink" href="#open-listener-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-open-listener-4"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="open-websocket-4">
+<h2><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code><a class="headerlink" href="#open-websocket-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-open-websocket-4"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
 <section id="operating-system-machine-1">
 <h2><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code><a class="headerlink" href="#operating-system-machine-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -19112,6 +20012,23 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-operating-system-type-1"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="operation-3">
+<h2><code class="docutils literal notranslate"><span class="pre">operation/3</span></code><a class="headerlink" href="#operation-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-operation-3"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="operations-1">
+<h2><code class="docutils literal notranslate"><span class="pre">operations/1</span></code><a class="headerlink" href="#operations-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-operations-1"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_provider_protocol_0.html#open-api-provider-protocol-0-operations-1"><span class="std std-ref">open_api_provider_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="option-2">
@@ -19624,6 +20541,7 @@
 <li><p><a class="reference internal" href="ccsds_packets_1.html#ccsds-packets-1-parse-2"><span class="std std-ref">ccsds_packets(SecondaryHeaderLength)</span></a></p></li>
 <li><p><a class="reference internal" href="ccsds_time_code_protocol_0.html#ccsds-time-code-protocol-0-parse-2"><span class="std std-ref">ccsds_time_code_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="geojson_protocol_0.html#geojson-protocol-0-parse-2"><span class="std std-ref">geojson_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-parse-2"><span class="std std-ref">http_websocket</span></a></p></li>
 <li><p><a class="reference internal" href="ieee_754_protocol_0.html#ieee-754-protocol-0-parse-2"><span class="std std-ref">ieee_754_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="json_ld_protocol_0.html#json-ld-protocol-0-parse-2"><span class="std std-ref">json_ld_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="json_lines_protocol_0.html#json-lines-protocol-0-parse-2"><span class="std std-ref">json_lines_protocol</span></a></p></li>
@@ -19632,6 +20550,7 @@
 <li><p><a class="reference internal" href="json_schema_protocol_0.html#json-schema-protocol-0-parse-2"><span class="std std-ref">json_schema_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="message_pack_1.html#message-pack-1-parse-2"><span class="std std-ref">message_pack(StringRepresentation)</span></a></p></li>
 <li><p><a class="reference internal" href="nmea_protocol_0.html#nmea-protocol-0-parse-2"><span class="std std-ref">nmea_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-parse-2"><span class="std std-ref">open_api</span></a></p></li>
 <li><p><a class="reference internal" href="protobuf_0.html#protobuf-0-parse-2"><span class="std std-ref">protobuf</span></a></p></li>
 <li><p><a class="reference internal" href="tle_orbits_protocol_0.html#tle-orbits-protocol-0-parse-2"><span class="std std-ref">tle_orbits_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="toml_protocol_0.html#toml-protocol-0-parse-2"><span class="std std-ref">toml_protocol</span></a></p></li>
@@ -19661,6 +20580,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="command_line_options_0.html#command-line-options-0-parse-4"><span class="std std-ref">command_line_options</span></a></p></li>
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-parse-4"><span class="std std-ref">http_multipart</span></a></p></li>
 </ul>
 </section>
 <section id="parse-5">
@@ -19677,6 +20597,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="yaml_protocol_0.html#yaml-protocol-0-parse-all-2"><span class="std std-ref">yaml_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="parse-body-4">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code><a class="headerlink" href="#parse-body-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-parse-body-4"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="parse-cookie-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_cookie/2</span></code><a class="headerlink" href="#parse-cookie-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-parse-cookie-2"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="parse-domain-2">
@@ -19727,6 +20663,14 @@
 <li><p><a class="reference internal" href="ccsds_link_profiles_0.html#ccsds-link-profiles-0-parse-frames-3"><span class="std std-ref">ccsds_link_profiles</span></a></p></li>
 </ul>
 </section>
+<section id="parse-headers-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code><a class="headerlink" href="#parse-headers-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-parse-headers-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
 <section id="parse-lines-4">
 <h2><code class="docutils literal notranslate"><span class="pre">parse_lines/4</span></code><a class="headerlink" href="#parse-lines-4" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -19749,6 +20693,78 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="pddl_0.html#pddl-0-parse-problem-3"><span class="std std-ref">pddl</span></a></p></li>
+</ul>
+</section>
+<section id="parse-request-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_request/2</span></code><a class="headerlink" href="#parse-request-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-parse-request-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="parse-request-line-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code><a class="headerlink" href="#parse-request-line-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-parse-request-line-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="parse-response-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_response/2</span></code><a class="headerlink" href="#parse-response-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-parse-response-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="parse-set-cookie-4">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_set_cookie/4</span></code><a class="headerlink" href="#parse-set-cookie-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-parse-set-cookie-4"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="parse-status-line-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code><a class="headerlink" href="#parse-status-line-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-parse-status-line-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="part-4">
+<h2><code class="docutils literal notranslate"><span class="pre">part/4</span></code><a class="headerlink" href="#part-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-part-4"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
+<section id="part-body-2">
+<h2><code class="docutils literal notranslate"><span class="pre">part_body/2</span></code><a class="headerlink" href="#part-body-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-part-body-2"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
+<section id="part-headers-2">
+<h2><code class="docutils literal notranslate"><span class="pre">part_headers/2</span></code><a class="headerlink" href="#part-headers-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-part-headers-2"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
+<section id="part-properties-2">
+<h2><code class="docutils literal notranslate"><span class="pre">part_properties/2</span></code><a class="headerlink" href="#part-properties-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-part-properties-2"><span class="std std-ref">http_multipart</span></a></p></li>
 </ul>
 </section>
 <section id="partial-map-4">
@@ -19858,6 +20874,30 @@
 <li><p><a class="reference internal" href="partitions_protocol_0.html#partitions-protocol-0-partitions-4"><span class="std std-ref">partitions_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="parts-2">
+<h2><code class="docutils literal notranslate"><span class="pre">parts/2</span></code><a class="headerlink" href="#parts-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-parts-2"><span class="std std-ref">http_multipart</span></a></p></li>
+</ul>
+</section>
+<section id="patch-4">
+<h2><code class="docutils literal notranslate"><span class="pre">patch/4</span></code><a class="headerlink" href="#patch-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-patch-4"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
+<section id="patch-5">
+<h2><code class="docutils literal notranslate"><span class="pre">patch/5</span></code><a class="headerlink" href="#patch-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-patch-5"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
 <section id="path-3">
 <h2><code class="docutils literal notranslate"><span class="pre">path/3</span></code><a class="headerlink" href="#path-3" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -19888,6 +20928,15 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-pattern-miner-options-2"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="payload-2">
+<h2><code class="docutils literal notranslate"><span class="pre">payload/2</span></code><a class="headerlink" href="#payload-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-payload-2"><span class="std std-ref">http_websocket</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-payload-2"><span class="std std-ref">http_websocket_messages(TextRepresentation)</span></a></p></li>
 </ul>
 </section>
 <section id="peek-back-2">
@@ -20221,6 +21270,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-possible-4"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="post-4">
+<h2><code class="docutils literal notranslate"><span class="pre">post/4</span></code><a class="headerlink" href="#post-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-post-4"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
+<section id="post-5">
+<h2><code class="docutils literal notranslate"><span class="pre">post/5</span></code><a class="headerlink" href="#post-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-post-5"><span class="std std-ref">http_client</span></a></p></li>
 </ul>
 </section>
 <section id="postorder-2">
@@ -20870,12 +21935,31 @@
 <li><p><a class="reference internal" href="listp_0.html#listp-0-proper-suffix-3"><span class="std std-ref">listp</span></a></p></li>
 </ul>
 </section>
+<section id="properties-2">
+<h2><code class="docutils literal notranslate"><span class="pre">properties/2</span></code><a class="headerlink" href="#properties-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-properties-2"><span class="std std-ref">http_websocket</span></a></p></li>
+</ul>
+</section>
 <section id="property-1">
 <h2><code class="docutils literal notranslate"><span class="pre">property/1</span></code><a class="headerlink" href="#property-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="application_protocol_0.html#application-protocol-0-property-1"><span class="std std-ref">application_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-property-1"><span class="std std-ref">http_request_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_response_protocol_0.html#http-response-protocol-0-property-1"><span class="std std-ref">http_response_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="property-2">
+<h2><code class="docutils literal notranslate"><span class="pre">property/2</span></code><a class="headerlink" href="#property-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-property-2"><span class="std std-ref">http</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-property-2"><span class="std std-ref">http_websocket</span></a></p></li>
 </ul>
 </section>
 <section id="prove-2">
@@ -20948,6 +22032,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="deque_protocol_0.html#deque-protocol-0-push-front-3"><span class="std std-ref">deque_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="put-4">
+<h2><code class="docutils literal notranslate"><span class="pre">put/4</span></code><a class="headerlink" href="#put-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-put-4"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
+<section id="put-5">
+<h2><code class="docutils literal notranslate"><span class="pre">put/5</span></code><a class="headerlink" href="#put-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-put-5"><span class="std std-ref">http_client</span></a></p></li>
 </ul>
 </section>
 <section id="qr-decomposition-3">
@@ -21439,6 +22539,14 @@
 <li><p><a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-file-by-line-3"><span class="std std-ref">tsv_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="read-frame-2">
+<h2><code class="docutils literal notranslate"><span class="pre">read_frame/2</span></code><a class="headerlink" href="#read-frame-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-read-frame-2"><span class="std std-ref">http_websocket</span></a></p></li>
+</ul>
+</section>
 <section id="read-framed-message-2">
 <h2><code class="docutils literal notranslate"><span class="pre">read_framed_message/2</span></code><a class="headerlink" href="#read-framed-message-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -21476,7 +22584,32 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-read-message-2"><span class="std std-ref">http_websocket_messages(TextRepresentation)</span></a></p></li>
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-read-message-2"><span class="std std-ref">json_rpc</span></a></p></li>
+</ul>
+</section>
+<section id="read-message-4">
+<h2><code class="docutils literal notranslate"><span class="pre">read_message/4</span></code><a class="headerlink" href="#read-message-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-4"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
+<section id="read-message-5">
+<h2><code class="docutils literal notranslate"><span class="pre">read_message/5</span></code><a class="headerlink" href="#read-message-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-5"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
+<section id="read-message-6">
+<h2><code class="docutils literal notranslate"><span class="pre">read_message/6</span></code><a class="headerlink" href="#read-message-6" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-6"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
 </ul>
 </section>
 <section id="read-mime-types-2">
@@ -21493,6 +22626,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="osp_0.html#osp-0-read-only-device-path-1"><span class="std std-ref">osp</span></a></p></li>
+</ul>
+</section>
+<section id="read-request-2">
+<h2><code class="docutils literal notranslate"><span class="pre">read_request/2</span></code><a class="headerlink" href="#read-request-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-read-request-2"><span class="std std-ref">http_server</span></a></p></li>
+</ul>
+</section>
+<section id="read-response-2">
+<h2><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code><a class="headerlink" href="#read-response-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_core_0.html#http-client-core-0-read-response-2"><span class="std std-ref">http_client_core</span></a></p></li>
 </ul>
 </section>
 <section id="read-stream-2">
@@ -21924,6 +23073,14 @@
 <li><p><a class="reference internal" href="interval_constraint_network_protocol_0.html#interval-constraint-network-protocol-0-refine-propagate-6"><span class="std std-ref">interval_constraint_network_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="register-2">
+<h2><code class="docutils literal notranslate"><span class="pre">register/2</span></code><a class="headerlink" href="#register-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-register-2"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
+</ul>
+</section>
 <section id="regressor-options-2">
 <h2><code class="docutils literal notranslate"><span class="pre">regressor_options/2</span></code><a class="headerlink" href="#regressor-options-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -22170,7 +23327,33 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-request-4"><span class="std std-ref">http_client</span></a></p></li>
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-request-4"><span class="std std-ref">json_rpc</span></a></p></li>
+</ul>
+</section>
+<section id="request-5">
+<h2><code class="docutils literal notranslate"><span class="pre">request/5</span></code><a class="headerlink" href="#request-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_0.html#http-client-0-request-5"><span class="std std-ref">http_client</span></a></p></li>
+</ul>
+</section>
+<section id="request-7">
+<h2><code class="docutils literal notranslate"><span class="pre">request/7</span></code><a class="headerlink" href="#request-7" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-request-7"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
+<section id="request-shutdown-1">
+<h2><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code><a class="headerlink" href="#request-shutdown-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-request-shutdown-1"><span class="std std-ref">http_socket</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_server_session_0.html#http-websocket-server-session-0-request-shutdown-1"><span class="std std-ref">http_websocket_server_session</span></a></p></li>
 </ul>
 </section>
 <section id="rescale-3">
@@ -22330,6 +23513,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-response-3"><span class="std std-ref">json_rpc</span></a></p></li>
+</ul>
+</section>
+<section id="response-6">
+<h2><code class="docutils literal notranslate"><span class="pre">response/6</span></code><a class="headerlink" href="#response-6" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-response-6"><span class="std std-ref">http</span></a></p></li>
 </ul>
 </section>
 <section id="restore-1">
@@ -22630,6 +23821,22 @@
 <li><p><a class="reference internal" href="simulated_annealing_2.html#simulated-annealing-2-run-4"><span class="std std-ref">simulated_annealing(Problem,RandomAlgorithm)</span></a></p></li>
 </ul>
 </section>
+<section id="run-session-3">
+<h2><code class="docutils literal notranslate"><span class="pre">run_session/3</span></code><a class="headerlink" href="#run-session-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-run-session-3"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
+<section id="run-session-4">
+<h2><code class="docutils literal notranslate"><span class="pre">run_session/4</span></code><a class="headerlink" href="#run-session-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-run-session-4"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
 <section id="run-test-sets-1">
 <h2><code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code><a class="headerlink" href="#run-test-sets-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -22908,6 +24115,15 @@
 <li><p><a class="reference internal" href="redis_0.html#redis-0-scard-3"><span class="std std-ref">redis</span></a></p></li>
 </ul>
 </section>
+<section id="schema-2">
+<h2><code class="docutils literal notranslate"><span class="pre">schema/2</span></code><a class="headerlink" href="#schema-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-schema-2"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_provider_protocol_0.html#open-api-provider-protocol-0-schema-2"><span class="std std-ref">open_api_provider_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="score-3">
 <h2><code class="docutils literal notranslate"><span class="pre">score/3</span></code><a class="headerlink" href="#score-3" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -22966,6 +24182,24 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_packets_1.html#ccsds-packets-1-secondary-header-time-3"><span class="std std-ref">ccsds_packets(SecondaryHeaderLength)</span></a></p></li>
+</ul>
+</section>
+<section id="security-1">
+<h2><code class="docutils literal notranslate"><span class="pre">security/1</span></code><a class="headerlink" href="#security-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-security-1"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_provider_protocol_0.html#open-api-provider-protocol-0-security-1"><span class="std std-ref">open_api_provider_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="security-scheme-2">
+<h2><code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code><a class="headerlink" href="#security-scheme-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-security-scheme-2"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_provider_protocol_0.html#open-api-provider-protocol-0-security-scheme-2"><span class="std std-ref">open_api_provider_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="segment-data-2">
@@ -23050,6 +24284,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-send-3"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
 <li><p><a class="reference internal" href="redis_0.html#redis-0-send-3"><span class="std std-ref">redis</span></a></p></li>
 </ul>
 </section>
@@ -23161,7 +24396,96 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-serve-3"><span class="std std-ref">http_server</span></a></p></li>
 <li><p><a class="reference internal" href="queuep_0.html#queuep-0-serve-3"><span class="std std-ref">queuep</span></a></p></li>
+</ul>
+</section>
+<section id="serve-connection-3">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code><a class="headerlink" href="#serve-connection-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-serve-connection-3"><span class="std std-ref">http_server</span></a></p></li>
+</ul>
+</section>
+<section id="serve-listener-4">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code><a class="headerlink" href="#serve-listener-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-serve-listener-4"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="serve-listener-5">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code><a class="headerlink" href="#serve-listener-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-serve-listener-5"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="serve-once-3">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code><a class="headerlink" href="#serve-once-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-serve-once-3"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="serve-once-6">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_once/6</span></code><a class="headerlink" href="#serve-once-6" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_server_session_0.html#http-websocket-server-session-0-serve-once-6"><span class="std std-ref">http_websocket_server_session</span></a></p></li>
+</ul>
+</section>
+<section id="serve-once-7">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_once/7</span></code><a class="headerlink" href="#serve-once-7" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_server_session_0.html#http-websocket-server-session-0-serve-once-7"><span class="std std-ref">http_websocket_server_session</span></a></p></li>
+</ul>
+</section>
+<section id="serve-until-shutdown-4">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code><a class="headerlink" href="#serve-until-shutdown-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-serve-until-shutdown-4"><span class="std std-ref">http_socket</span></a></p></li>
+</ul>
+</section>
+<section id="serve-until-shutdown-5">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code><a class="headerlink" href="#serve-until-shutdown-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_server_session_0.html#http-websocket-server-session-0-serve-until-shutdown-5"><span class="std std-ref">http_websocket_server_session</span></a></p></li>
+</ul>
+</section>
+<section id="serve-until-shutdown-6">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/6</span></code><a class="headerlink" href="#serve-until-shutdown-6" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_server_session_0.html#http-websocket-server-session-0-serve-until-shutdown-6"><span class="std std-ref">http_websocket_server_session</span></a></p></li>
+</ul>
+</section>
+<section id="serve-websocket-4">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code><a class="headerlink" href="#serve-websocket-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-serve-websocket-4"><span class="std std-ref">http_server</span></a></p></li>
+</ul>
+</section>
+<section id="serve-websocket-once-5">
+<h2><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code><a class="headerlink" href="#serve-websocket-once-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_socket_0.html#http-socket-0-serve-websocket-once-5"><span class="std std-ref">http_socket</span></a></p></li>
 </ul>
 </section>
 <section id="server-accept-4">
@@ -23210,6 +24534,39 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="socket_0.html#socket-0-server-open-4"><span class="std std-ref">socket</span></a></p></li>
+</ul>
+</section>
+<section id="servers-1">
+<h2><code class="docutils literal notranslate"><span class="pre">servers/1</span></code><a class="headerlink" href="#servers-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_router_0.html#http-router-0-servers-1"><span class="std std-ref">http_router</span></a></p></li>
+<li><p><a class="reference internal" href="open_api_provider_protocol_0.html#open-api-provider-protocol-0-servers-1"><span class="std std-ref">open_api_provider_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="session-2">
+<h2><code class="docutils literal notranslate"><span class="pre">session/2</span></code><a class="headerlink" href="#session-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-session-2"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
+</ul>
+</section>
+<section id="session-count-2">
+<h2><code class="docutils literal notranslate"><span class="pre">session_count/2</span></code><a class="headerlink" href="#session-count-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-session-count-2"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
+</ul>
+</section>
+<section id="sessions-2">
+<h2><code class="docutils literal notranslate"><span class="pre">sessions/2</span></code><a class="headerlink" href="#sessions-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-sessions-2"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
 </ul>
 </section>
 <section id="set-1">
@@ -23914,6 +25271,22 @@
 <li><p><a class="reference internal" href="memcached_0.html#memcached-0-stats-3"><span class="std std-ref">memcached</span></a></p></li>
 </ul>
 </section>
+<section id="status-1">
+<h2><code class="docutils literal notranslate"><span class="pre">status/1</span></code><a class="headerlink" href="#status-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_response_protocol_0.html#http-response-protocol-0-status-1"><span class="std std-ref">http_response_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="status-2">
+<h2><code class="docutils literal notranslate"><span class="pre">status/2</span></code><a class="headerlink" href="#status-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-status-2"><span class="std std-ref">http</span></a></p></li>
+</ul>
+</section>
 <section id="stem-2">
 <h2><code class="docutils literal notranslate"><span class="pre">stem/2</span></code><a class="headerlink" href="#stem-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -24573,6 +25946,14 @@
 <li><p><a class="reference internal" href="listp_0.html#listp-0-take-4"><span class="std std-ref">listp</span></a></p></li>
 </ul>
 </section>
+<section id="take-pending-3">
+<h2><code class="docutils literal notranslate"><span class="pre">take_pending/3</span></code><a class="headerlink" href="#take-pending-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-take-pending-3"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
+</ul>
+</section>
 <section id="talker-2">
 <h2><code class="docutils literal notranslate"><span class="pre">talker/2</span></code><a class="headerlink" href="#talker-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -24586,8 +25967,17 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-target-1"><span class="std std-ref">http_request_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="regression_dataset_protocol_0.html#regression-dataset-protocol-0-target-1"><span class="std std-ref">regression_dataset_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="target_supervised_dimension_reduction_dataset_protocol_0.html#target-supervised-dimension-reduction-dataset-protocol-0-target-1"><span class="std std-ref">target_supervised_dimension_reduction_dataset_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="target-2">
+<h2><code class="docutils literal notranslate"><span class="pre">target/2</span></code><a class="headerlink" href="#target-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-target-2"><span class="std std-ref">http</span></a></p></li>
 </ul>
 </section>
 <section id="tcb-minus-tdb-approx-3">
@@ -25122,6 +26512,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_packets_1.html#ccsds-packets-1-type-2"><span class="std std-ref">ccsds_packets(SecondaryHeaderLength)</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-type-2"><span class="std std-ref">http_websocket_messages(TextRepresentation)</span></a></p></li>
 </ul>
 </section>
 <section id="type-3">
@@ -25262,6 +26653,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="packs_common_0.html#packs-common-0-unpin-1"><span class="std std-ref">packs_common</span></a></p></li>
+</ul>
+</section>
+<section id="unregister-2">
+<h2><code class="docutils literal notranslate"><span class="pre">unregister/2</span></code><a class="headerlink" href="#unregister-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0-unregister-2"><span class="std std-ref">http_websocket_session_registry</span></a></p></li>
 </ul>
 </section>
 <section id="unsubscribe-3">
@@ -25575,6 +26974,14 @@
 <li><p><a class="reference internal" href="time_scales_protocol_0.html#time-scales-protocol-0-valid-conversion-3"><span class="std std-ref">time_scales_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="valid-cookie-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_cookie/1</span></code><a class="headerlink" href="#valid-cookie-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-valid-cookie-1"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
 <section id="valid-coordinate-1">
 <h2><code class="docutils literal notranslate"><span class="pre">valid_coordinate/1</span></code><a class="headerlink" href="#valid-coordinate-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -25747,6 +27154,14 @@
 <li><p><a class="reference internal" href="ccsds_tc_services_0.html#ccsds-tc-services-0-valid-segment-1"><span class="std std-ref">ccsds_tc_services</span></a></p></li>
 </ul>
 </section>
+<section id="valid-set-cookie-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_set_cookie/1</span></code><a class="headerlink" href="#valid-set-cookie-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-valid-set-cookie-1"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
 <section id="valid-until-date-1">
 <h2><code class="docutils literal notranslate"><span class="pre">valid_until_date/1</span></code><a class="headerlink" href="#valid-until-date-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -25783,6 +27198,22 @@
 <li><p><a class="reference internal" href="json_schema_protocol_0.html#json-schema-protocol-0-validate-3"><span class="std std-ref">json_schema_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="validate-document-1">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_document/1</span></code><a class="headerlink" href="#validate-document-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-document-1"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-document-2">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_document/2</span></code><a class="headerlink" href="#validate-document-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-document-2"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
 <section id="validate-grouped-dataset-1">
 <h2><code class="docutils literal notranslate"><span class="pre">validate_grouped_dataset/1</span></code><a class="headerlink" href="#validate-grouped-dataset-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -25797,6 +27228,38 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ranking_dataset_common_0.html#ranking-dataset-common-0-validate-grouped-dataset-2"><span class="std std-ref">ranking_dataset_common</span></a></p></li>
+</ul>
+</section>
+<section id="validate-http-request-3">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_http_request/3</span></code><a class="headerlink" href="#validate-http-request-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-http-request-3"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-http-request-4">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_http_request/4</span></code><a class="headerlink" href="#validate-http-request-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-http-request-4"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-http-response-3">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_http_response/3</span></code><a class="headerlink" href="#validate-http-response-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-http-response-3"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-http-response-4">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_http_response/4</span></code><a class="headerlink" href="#validate-http-response-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-http-response-4"><span class="std std-ref">open_api</span></a></p></li>
 </ul>
 </section>
 <section id="validate-pairwise-dataset-1">
@@ -25829,6 +27292,38 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ranking_dataset_common_0.html#ranking-dataset-common-0-validate-pairwise-measurement-dataset-2"><span class="std std-ref">ranking_dataset_common</span></a></p></li>
+</ul>
+</section>
+<section id="validate-request-3">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_request/3</span></code><a class="headerlink" href="#validate-request-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-request-3"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-request-4">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_request/4</span></code><a class="headerlink" href="#validate-request-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-request-4"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-response-3">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_response/3</span></code><a class="headerlink" href="#validate-response-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-response-3"><span class="std std-ref">open_api</span></a></p></li>
+</ul>
+</section>
+<section id="validate-response-4">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_response/4</span></code><a class="headerlink" href="#validate-response-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="open_api_0.html#open-api-0-validate-response-4"><span class="std std-ref">open_api</span></a></p></li>
 </ul>
 </section>
 <section id="validate-temporal-pairwise-dataset-1">
@@ -25971,6 +27466,8 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="application_protocol_0.html#application-protocol-0-version-1"><span class="std std-ref">application_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_request_protocol_0.html#http-request-protocol-0-version-1"><span class="std std-ref">http_request_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="http_response_protocol_0.html#http-response-protocol-0-version-1"><span class="std std-ref">http_response_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="version-2">
@@ -25981,6 +27478,7 @@
 <li><p><a class="reference internal" href="ccsds_frame_protocol_0.html#ccsds-frame-protocol-0-version-2"><span class="std std-ref">ccsds_frame_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ccsds_frames_0.html#ccsds-frames-0-version-2"><span class="std std-ref">ccsds_frames</span></a></p></li>
 <li><p><a class="reference internal" href="ccsds_packets_1.html#ccsds-packets-1-version-2"><span class="std std-ref">ccsds_packets(SecondaryHeaderLength)</span></a></p></li>
+<li><p><a class="reference internal" href="http_0.html#http-0-version-2"><span class="std std-ref">http</span></a></p></li>
 <li><p><a class="reference internal" href="memcached_0.html#memcached-0-version-2"><span class="std std-ref">memcached</span></a></p></li>
 </ul>
 </section>
@@ -26104,6 +27602,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="directed_graph_protocol_0.html#directed-graph-protocol-0-weakly-connected-components-2"><span class="std std-ref">directed_graph_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="websocket-accept-2">
+<h2><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code><a class="headerlink" href="#websocket-accept-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_0.html#http-0-websocket-accept-2"><span class="std std-ref">http</span></a></p></li>
 </ul>
 </section>
 <section id="week-of-year-iso-2">
@@ -26259,6 +27765,14 @@
 <li><p><a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-write-file-3"><span class="std std-ref">tsv_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="write-frame-2">
+<h2><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code><a class="headerlink" href="#write-frame-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_0.html#http-websocket-0-write-frame-2"><span class="std std-ref">http_websocket</span></a></p></li>
+</ul>
+</section>
 <section id="write-framed-message-2">
 <h2><code class="docutils literal notranslate"><span class="pre">write_framed_message/2</span></code><a class="headerlink" href="#write-framed-message-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -26280,7 +27794,49 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-write-message-2"><span class="std std-ref">http_websocket_messages(TextRepresentation)</span></a></p></li>
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-2"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
 <li><p><a class="reference internal" href="json_rpc_0.html#json-rpc-0-write-message-2"><span class="std std-ref">json_rpc</span></a></p></li>
+</ul>
+</section>
+<section id="write-message-3">
+<h2><code class="docutils literal notranslate"><span class="pre">write_message/3</span></code><a class="headerlink" href="#write-message-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-3"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
+<section id="write-message-4">
+<h2><code class="docutils literal notranslate"><span class="pre">write_message/4</span></code><a class="headerlink" href="#write-message-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-4"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
+<section id="write-message-5">
+<h2><code class="docutils literal notranslate"><span class="pre">write_message/5</span></code><a class="headerlink" href="#write-message-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-5"><span class="std std-ref">http_websocket_session(Role,TextRepresentation)</span></a></p></li>
+</ul>
+</section>
+<section id="write-request-2">
+<h2><code class="docutils literal notranslate"><span class="pre">write_request/2</span></code><a class="headerlink" href="#write-request-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_client_core_0.html#http-client-core-0-write-request-2"><span class="std std-ref">http_client_core</span></a></p></li>
+</ul>
+</section>
+<section id="write-response-2">
+<h2><code class="docutils literal notranslate"><span class="pre">write_response/2</span></code><a class="headerlink" href="#write-response-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="http_server_0.html#http-server-0-write-response-2"><span class="std std-ref">http_server</span></a></p></li>
 </ul>
 </section>
 <section id="write-stream-3">

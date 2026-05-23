@@ -1237,6 +1237,123 @@ To load any library (including developer tools, ports, and contributions), use t
    html5 <html5_0>
    xhtml11 <xhtml11_0>
 
+:ref:`http <library_http>`
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http <http_0>
+   http_body_codec_protocol <http_body_codec_protocol_0>
+   http_form_body_codec <http_form_body_codec_0>
+   http_handler_protocol <http_handler_protocol_0>
+   http_json_body_codec <http_json_body_codec_0>
+   http_json_term_helpers <http_json_term_helpers_0>
+   http_message_helpers <http_message_helpers_0>
+   http_octet_stream_body_codec <http_octet_stream_body_codec_0>
+   http_request_protocol <http_request_protocol_0>
+   http_response_protocol <http_response_protocol_0>
+   http_text_body_codec <http_text_body_codec_0>
+   http_text_helpers <http_text_helpers_0>
+
+:ref:`http_client <library_http_client>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_client <http_client_0>
+   http_client_core <http_client_core_0>
+
+:ref:`http_cookies <library_http_cookies>`
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_cookies(Representation) <http_cookies_1>
+
+:ref:`http_multipart <library_http_multipart>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_multipart <http_multipart_0>
+
+:ref:`http_router <library_http_router>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_router <http_router_0>
+
+:ref:`http_server <library_http_server>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_server <http_server_0>
+
+:ref:`http_socket <library_http_socket>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_socket <http_socket_0>
+
+:ref:`http_websocket <library_http_websocket>`
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_websocket <http_websocket_0>
+
+:ref:`http_websocket_messages <library_http_websocket_messages>`
+----------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_websocket_messages <http_websocket_messages_0>
+   http_websocket_messages(TextRepresentation) <http_websocket_messages_1>
+
+:ref:`http_websocket_session <library_http_websocket_session>`
+--------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_websocket_client_session <http_websocket_client_session_0>
+   http_websocket_server_session <http_websocket_server_session_0>
+   http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
+   http_websocket_session_handler_protocol <http_websocket_session_handler_protocol_0>
+   http_websocket_session_registry <http_websocket_session_registry_0>
+
 :ref:`ica_projection <library_ica_projection>`
 ----------------------------------------------
 
@@ -2015,6 +2132,17 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    nmf_projection <nmf_projection_0>
+
+:ref:`open_api <library_open_api>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   open_api <open_api_0>
+   open_api_provider_protocol <open_api_provider_protocol_0>
 
 :ref:`optics_clusterer <library_optics_clusterer>`
 --------------------------------------------------

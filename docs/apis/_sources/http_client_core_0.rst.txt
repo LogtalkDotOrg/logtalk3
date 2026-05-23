@@ -1,0 +1,136 @@
+.. index:: single: http_client_core
+.. _http_client_core/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_client_core``
+====================
+
+Portable stream-based HTTP client core predicates.
+
+| **Availability:** 
+|    ``logtalk_load(http_client(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Binary streams: All stream predicates expect binary input and output streams.
+   - Per-message primitives: The ``write_request/2``, ``read_response/2``, and ``exchange/4`` predicates process a single HTTP exchange.
+   - Connection sequence: The ``exchange_connection/4`` predicate performs sequential exchanges on the same stream pair while HTTP persistence rules allow it.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: write_request/2
+.. _http_client_core/0::write_request/2:
+
+``write_request/2``
+^^^^^^^^^^^^^^^^^^^
+
+Writes exactly one normalized HTTP request term to a binary stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_request(Output,Request)``
+| **Mode and number of proofs:**
+|    ``write_request(+stream,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: read_response/2
+.. _http_client_core/0::read_response/2:
+
+``read_response/2``
+^^^^^^^^^^^^^^^^^^^
+
+Reads exactly one HTTP response from a binary stream and returns it as a normalized response term. Fails on clean end-of-file before reading any bytes. Responses may be status-bodyless, Content-Length framed, Transfer-Encoding chunked, or close-delimited by end-of-file. Close-delimited responses are annotated with a ``body_framing(close_delimited)`` property.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_response(Input,Response)``
+| **Mode and number of proofs:**
+|    ``read_response(+stream,--compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: exchange/4
+.. _http_client_core/0::exchange/4:
+
+``exchange/4``
+^^^^^^^^^^^^^^
+
+Writes one normalized request to a binary output stream and then reads one normalized response from a binary input stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(Input,Output,Request,Response)``
+| **Mode and number of proofs:**
+|    ``exchange(+stream,+stream,+compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: exchange_connection/4
+.. _http_client_core/0::exchange_connection/4:
+
+``exchange_connection/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Performs a sequence of request-response exchanges on the same binary stream pair. If additional requests remain when HTTP persistence rules require connection closure, an error is thrown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange_connection(Input,Output,Requests,Responses)``
+| **Mode and number of proofs:**
+|    ``exchange_connection(+stream,+stream,++list(compound),--list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

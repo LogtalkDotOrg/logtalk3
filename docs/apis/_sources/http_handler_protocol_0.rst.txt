@@ -1,0 +1,74 @@
+.. index:: single: http_handler_protocol
+.. _http_handler_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_handler_protocol``
+=========================
+
+Protocol for portable HTTP request handlers.
+
+| **Availability:** 
+|    ``logtalk_load(http(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: handle/2
+.. _http_handler_protocol/0::handle/2:
+
+``handle/2``
+^^^^^^^^^^^^
+
+Handles a normalized HTTP request term and returns a normalized HTTP response term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle(Request,Response)``
+| **Mode and number of proofs:**
+|    ``handle(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

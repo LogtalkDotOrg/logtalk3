@@ -1,0 +1,216 @@
+.. index:: single: http_websocket_messages(TextRepresentation)
+.. _http_websocket_messages/1:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_messages(TextRepresentation)``
+===============================================
+
+* ``TextRepresentation`` - Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+Transport-neutral WebSocket message predicates built on top of the http_websocket frame layer.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_messages(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`http_websocket <http_websocket/0>`
+|    :ref:`list <list/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: message/3
+.. _http_websocket_messages/1::message/3:
+
+``message/3``
+^^^^^^^^^^^^^
+
+Constructs a validated normalized WebSocket message term from the message type atom and payload term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``message(Type,Payload,Message)``
+| **Mode and number of proofs:**
+|    ``message(+atom,+term,-compound)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Type ``text``: Payload is text in the selected text representation.
+    - Type ``binary``: Payload is a list of bytes.
+    - Type ``ping`` or ``pong``: Payload is a list of bytes.
+    - Type ``close``: Payload is one of ``empty``, ``status(Code)``, or ``status(Code, Reason)``.
+
+
+------------
+
+.. index:: is_message/1
+.. _http_websocket_messages/1::is_message/1:
+
+``is_message/1``
+^^^^^^^^^^^^^^^^
+
+True when the argument is a valid normalized WebSocket message term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_message(Message)``
+| **Mode and number of proofs:**
+|    ``is_message(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: read_message/2
+.. _http_websocket_messages/1::read_message/2:
+
+``read_message/2``
+^^^^^^^^^^^^^^^^^^
+
+Reads one WebSocket message from a binary stream. Continuation frames are reassembled for text and binary messages. Returns ``end_of_file`` when the stream is already exhausted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_message(Stream,Message)``
+| **Mode and number of proofs:**
+|    ``read_message(+stream_or_alias,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: write_message/2
+.. _http_websocket_messages/1::write_message/2:
+
+``write_message/2``
+^^^^^^^^^^^^^^^^^^^
+
+Writes one validated WebSocket message as a single final frame to a binary stream and flushes the stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_message(Stream,Message)``
+| **Mode and number of proofs:**
+|    ``write_message(+stream_or_alias,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: type/2
+.. _http_websocket_messages/1::type/2:
+
+``type/2``
+^^^^^^^^^^
+
+Returns the type atom of a validated WebSocket message term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``type(Message,Type)``
+| **Mode and number of proofs:**
+|    ``type(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: payload/2
+.. _http_websocket_messages/1::payload/2:
+
+``payload/2``
+^^^^^^^^^^^^^
+
+Returns the payload term of a validated WebSocket message term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``payload(Message,Payload)``
+| **Mode and number of proofs:**
+|    ``payload(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: encode_message/4
+.. _http_websocket_messages/1::encode_message/4:
+
+``encode_message/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that normalizes a WebSocket message term and returns the normalized term together with the corresponding frame opcode and payload bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_message(Message,NormalizedMessage,Opcode,PayloadBytes)``
+| **Mode and number of proofs:**
+|    ``encode_message(+compound,-compound,-atom,-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_message/3
+.. _http_websocket_messages/1::decode_message/3:
+
+``decode_message/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that decodes payload bytes for the given message type atom into a normalized WebSocket message term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_message(Type,PayloadBytes,Message)``
+| **Mode and number of proofs:**
+|    ``decode_message(+atom,+list(byte),-compound)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,149 @@
+.. index:: single: http_text_helpers
+.. _http_text_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_text_helpers``
+=====================
+
+Internal shared helpers for ASCII case normalization and HTTP optional whitespace trimming.
+
+| **Availability:** 
+|    ``logtalk_load(http(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: ows_code/1
+.. _http_text_helpers/0::ows_code/1:
+
+``ows_code/1``
+^^^^^^^^^^^^^^
+
+Succeeds when the code is HTTP optional whitespace (SP or HTAB).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ows_code(Code)``
+| **Mode and number of proofs:**
+|    ``ows_code(+integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: lowercase_ascii_codes/2
+.. _http_text_helpers/0::lowercase_ascii_codes/2:
+
+``lowercase_ascii_codes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts uppercase ASCII letter codes in a list to lowercase, leaving all other codes unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lowercase_ascii_codes(Codes,LowercaseCodes)``
+| **Mode and number of proofs:**
+|    ``lowercase_ascii_codes(+list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: uppercase_ascii_codes/2
+.. _http_text_helpers/0::uppercase_ascii_codes/2:
+
+``uppercase_ascii_codes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts lowercase ASCII letter codes in a list to uppercase, leaving all other codes unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uppercase_ascii_codes(Codes,UppercaseCodes)``
+| **Mode and number of proofs:**
+|    ``uppercase_ascii_codes(+list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: trim_trailing_ows_codes/2
+.. _http_text_helpers/0::trim_trailing_ows_codes/2:
+
+``trim_trailing_ows_codes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes trailing HTTP optional whitespace codes from a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim_trailing_ows_codes(Codes,TrimmedCodes)``
+| **Mode and number of proofs:**
+|    ``trim_trailing_ows_codes(+list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: trim_ows_codes/2
+.. _http_text_helpers/0::trim_ows_codes/2:
+
+``trim_ows_codes/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Removes leading and trailing HTTP optional whitespace codes from a list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trim_ows_codes(Codes,TrimmedCodes)``
+| **Mode and number of proofs:**
+|    ``trim_ows_codes(+list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

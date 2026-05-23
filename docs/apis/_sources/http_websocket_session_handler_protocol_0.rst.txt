@@ -1,0 +1,74 @@
+.. index:: single: http_websocket_session_handler_protocol
+.. _http_websocket_session_handler_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_websocket_session_handler_protocol``
+===========================================
+
+Protocol for callback objects used by the higher-level WebSocket session loop.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: handle/2
+.. _http_websocket_session_handler_protocol/0::handle/2:
+
+``handle/2``
+^^^^^^^^^^^^
+
+Processes a received normalized WebSocket message and returns a list of zero or more session actions. Plain normalized messages are written back on the same session before the next read. When used with the registry-backed server helper, the list may also contain the action wrappers ``reply(Message)``, ``broadcast(Message)``, and ``broadcast_others(Message)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle(Message,Replies)``
+| **Mode and number of proofs:**
+|    ``handle(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

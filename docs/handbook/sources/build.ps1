@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 11, 2026
+##   Last updated on May 23, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -167,6 +167,16 @@ Foreach-Object {
 (Get-Content ../../../library/hook_flows/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_flows.rst
 (Get-Content ../../../library/hook_objects/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 (Get-Content ../../../library/html/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/html.rst
+(Get-Content ../../../library/http/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http.rst
+(Get-Content ../../../library/http_client/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_client.rst
+(Get-Content ../../../library/http_cookies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cookies.rst
+(Get-Content ../../../library/http_multipart/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_multipart.rst
+(Get-Content ../../../library/http_router/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_router.rst
+(Get-Content ../../../library/http_server/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_server.rst
+(Get-Content ../../../library/http_socket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_socket.rst
+(Get-Content ../../../library/http_websocket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket.rst
+(Get-Content ../../../library/http_websocket_messages/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_messages.rst
+(Get-Content ../../../library/http_websocket_session/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_session.rst
 (Get-Content ../../../library/ica_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ica_projection.rst
 (Get-Content ../../../library/ids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ids.rst
 (Get-Content ../../../library/ieee_754/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ieee_754.rst
@@ -226,6 +236,7 @@ Foreach-Object {
 (Get-Content ../../../library/nested_dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
 (Get-Content ../../../library/nmea/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmea.rst
 (Get-Content ../../../library/nmf_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
+(Get-Content ../../../library/open_api/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_api.rst
 (Get-Content ../../../library/optics_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst

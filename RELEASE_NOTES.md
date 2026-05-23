@@ -31,6 +31,10 @@ Library
 * CHANGED: The `url` library `generate/2` and `normalize/2` predicates to also
 accept relative reference arguments.
 
+* ADDED: New `http`, `http_client`, `http_cookies`, `http_multipart`,
+`http_router`, `http_server`, `http_socket`, `http_websocket`, 
+`http_websocket_messages`, `http_websocket_session`, and `open_api` libraries.
+
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
 `relativize/3`, and `resolve/3` predicates.
 
@@ -62,8 +66,11 @@ Tools
 Examples
 --------
 
-* FIXED: The `checkpoint` multi-threading example test flakiness due to potential
-out-or-order output. Thanks to Andrew Davison for the bug report.
+* ADDED: New `http_open_api` example illustrating the use of the new HTTP and
+OpenAPI libraries.
+
+* FIXED: The `checkpoint` multi-threading example test flakiness due to
+potential out-or-order output. Thanks to Andrew Davison for the bug report.
 
 
 3.100.1 - May 16, 2026

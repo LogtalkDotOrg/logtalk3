@@ -1,0 +1,339 @@
+.. index:: single: http_websocket_session(Role,TextRepresentation)
+.. _http_websocket_session/2:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_session(Role,TextRepresentation)``
+===================================================
+
+* ``Role`` - Peer role for masking policy. Possible values are ``client`` and ``server``.
+* ``TextRepresentation`` - Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and optionally run a higher-level callback loop on upgraded http_socket connections.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls, threaded``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1>`
+| **Uses:**
+|    :ref:`backend_random <backend_random/0>`
+|    :ref:`http_socket <http_socket/0>`
+|    :ref:`http_websocket <http_websocket/0>`
+|    :ref:`http_websocket_session_registry <http_websocket_session_registry/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_messages/1::type/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initial_state/1
+.. _http_websocket_session/2::initial_state/1:
+
+``initial_state/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the initial session state term to be threaded through stateful reads.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_state(State)``
+| **Mode and number of proofs:**
+|    ``initial_state(-compound)`` - ``one``
+
+
+------------
+
+.. index:: is_state/1
+.. _http_websocket_session/2::is_state/1:
+
+``is_state/1``
+^^^^^^^^^^^^^^
+
+True when the argument is a valid session state term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_state(State)``
+| **Mode and number of proofs:**
+|    ``is_state(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: read_message/4
+.. _http_websocket_session/2::read_message/4:
+
+``read_message/4``
+^^^^^^^^^^^^^^^^^^
+
+Reads the next session-level WebSocket message from a binary stream using the given input state. Fragmented text and binary messages are reassembled across calls, interleaved control frames are surfaced immediately, and close-message state transitions are tracked in the returned state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_message(Stream,State,UpdatedState,Message)``
+| **Mode and number of proofs:**
+|    ``read_message(+stream_or_alias,+compound,-compound,-term)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - End of file: Returns ``end_of_file`` only when the input state is idle and the stream is already exhausted.
+    - Masking policy: Incoming frame masking is validated against the session role: client sessions expect unmasked inbound frames and server sessions expect masked inbound frames.
+
+
+------------
+
+.. index:: read_message/5
+.. _http_websocket_session/2::read_message/5:
+
+``read_message/5``
+^^^^^^^^^^^^^^^^^^
+
+Reads the next session-level WebSocket message from a binary input stream using the given state and automatically orchestrates the close handshake on the given binary output stream when a close message is received.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_message(Input,Output,State,UpdatedState,Message)``
+| **Mode and number of proofs:**
+|    ``read_message(+stream_or_alias,+stream_or_alias,+compound,-compound,-term)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Close handshake: When a close message is received and no close message has yet been sent for the tracked session state, a matching close message is written automatically on the output stream and the returned state records the completed handshake.
+
+
+------------
+
+.. index:: read_message/6
+.. _http_websocket_session/2::read_message/6:
+
+``read_message/6``
+^^^^^^^^^^^^^^^^^^
+
+Reads the next session-level WebSocket message from a binary input stream using the given state, automatically orchestrates the close handshake on the given binary output stream, and applies optional automatic control-message policies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_message(Input,Output,State,UpdatedState,Message,Options)``
+| **Mode and number of proofs:**
+|    ``read_message(+stream_or_alias,+stream_or_alias,+compound,-compound,-term,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``auto_pong(on)``: Automatically writes a pong message with the same payload when a ping message is read while still returning the ping message to the caller.
+    - Option ``auto_pong(off)``: Disables automatic pong replies. This is the default.
+
+
+------------
+
+.. index:: write_message/2
+.. _http_websocket_session/2::write_message/2:
+
+``write_message/2``
+^^^^^^^^^^^^^^^^^^^
+
+Stateless convenience wrapper that writes one validated WebSocket message using the masking policy implied by the session role. Client sessions mask all outgoing frames; server sessions leave them unmasked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_message(Stream,Message)``
+| **Mode and number of proofs:**
+|    ``write_message(+stream_or_alias,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: write_message/3
+.. _http_websocket_session/2::write_message/3:
+
+``write_message/3``
+^^^^^^^^^^^^^^^^^^^
+
+Stateless convenience wrapper that writes one validated WebSocket message using the masking policy implied by the session role and the given write options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_message(Stream,Message,Options)``
+| **Mode and number of proofs:**
+|    ``write_message(+stream_or_alias,+compound,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``fragment_size(Size)``: When writing ``text`` or ``binary`` messages, split the payload into frames of at most ``Size`` bytes. Control messages always remain single final frames.
+
+
+------------
+
+.. index:: write_message/4
+.. _http_websocket_session/2::write_message/4:
+
+``write_message/4``
+^^^^^^^^^^^^^^^^^^^
+
+Writes one validated WebSocket message using the masking policy implied by the session role and updates the given session state with any close-handshake transition caused by the write.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_message(Stream,State,UpdatedState,Message)``
+| **Mode and number of proofs:**
+|    ``write_message(+stream_or_alias,+compound,-compound,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: write_message/5
+.. _http_websocket_session/2::write_message/5:
+
+``write_message/5``
+^^^^^^^^^^^^^^^^^^^
+
+Writes one validated WebSocket message using the masking policy implied by the session role and the given write options while updating the given session state with any close-handshake transition caused by the write.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_message(Stream,State,UpdatedState,Message,Options)``
+| **Mode and number of proofs:**
+|    ``write_message(+stream_or_alias,+compound,-compound,+compound,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``fragment_size(Size)``: When writing ``text`` or ``binary`` messages, split the payload into frames of at most ``Size`` bytes. Control messages always remain single final frames.
+
+
+------------
+
+.. index:: run_session/3
+.. _http_websocket_session/2::run_session/3:
+
+``run_session/3``
+^^^^^^^^^^^^^^^^^
+
+Runs a higher-level session loop on an upgraded http_socket WebSocket connection until the close handshake completes or the peer closes the stream, then closes the upgraded connection automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_session(Connection,Handler,State)``
+| **Mode and number of proofs:**
+|    ``run_session(+compound,+object_identifier,-compound)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Handler protocol: The handler object must conform to the ``http_websocket_session_handler_protocol`` protocol and return a list of normalized reply messages for each received message.
+    - Connection ownership: This predicate takes ownership of the upgraded connection and closes it before succeeding or rethrowing any exception.
+
+
+------------
+
+.. index:: run_session/4
+.. _http_websocket_session/2::run_session/4:
+
+``run_session/4``
+^^^^^^^^^^^^^^^^^
+
+Runs a higher-level session loop on an upgraded http_socket WebSocket connection using the given loop options, then closes the upgraded connection automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_session(Connection,Handler,State,Options)``
+| **Mode and number of proofs:**
+|    ``run_session(+compound,+object_identifier,-compound,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``auto_pong(on)``: Automatically writes pong replies while still forwarding ping messages to the handler.
+    - Option ``auto_pong(off)``: Disables automatic pong replies. This is the default.
+    - Option ``keepalive_interval(Seconds)``: When no inbound message is received for the given positive number of seconds, writes an empty ping message and continues the loop. This option requires backend thread support.
+    - Option ``idle_timeout(Seconds)``: When no inbound message is received for the given positive number of seconds, writes ``message(close, status(1001, idle_timeout))`` and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: run_session_connection/5
+.. _http_websocket_session/2::run_session_connection/5:
+
+``run_session_connection/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that runs the callback-driven session loop on an upgraded WebSocket connection starting from the given session state and using the given loop options. Connection ownership is handled by the caller.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_session_connection(Connection,HandlerDescriptor,State,UpdatedState,Options)``
+| **Mode and number of proofs:**
+|    ``run_session_connection(+compound,+compound,+compound,-compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: run_once_with_cleanup_/2
+.. _http_websocket_session/2::run_once_with_cleanup_/2:
+
+``run_once_with_cleanup_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Meta-predicate template:**
+|    ``run_once_with_cleanup_(0,0)``
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

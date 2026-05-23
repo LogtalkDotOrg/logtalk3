@@ -1,0 +1,195 @@
+.. index:: single: http_server
+.. _http_server/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_server``
+===============
+
+Portable stream-based HTTP server orchestration predicates.
+
+| **Availability:** 
+|    ``logtalk_load(http_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Binary streams: All stream predicates expect binary input and output streams.
+   - Per-message primitives: The read_request/2, write_response/2, dispatch/3, and serve/3 predicates process a single HTTP message.
+   - Connection loop: The serve_connection/3 predicate repeatedly serves requests on the same stream pair according to HTTP persistence rules.
+   - HEAD requests: The serve/3 and serve_connection/3 predicates suppress response body bytes on the wire for HEAD requests while preserving the generated response headers.
+   - WebSocket handshake responses: The accept_websocket/3 predicate validates a normalized opening-handshake request and builds the corresponding ``101 Switching Protocols`` response, but this stream layer does not yet hand upgraded connections off to a frame-processing layer.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: read_request/2
+.. _http_server/0::read_request/2:
+
+``read_request/2``
+^^^^^^^^^^^^^^^^^^
+
+Reads exactly one HTTP request from a binary stream and returns it as a normalized request term. Fails on clean end-of-file before reading any bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_request(Input,Request)``
+| **Mode and number of proofs:**
+|    ``read_request(+stream,--compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: write_response/2
+.. _http_server/0::write_response/2:
+
+``write_response/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Writes exactly one normalized HTTP response term to a binary stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_response(Output,Response)``
+| **Mode and number of proofs:**
+|    ``write_response(+stream,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: dispatch/3
+.. _http_server/0::dispatch/3:
+
+``dispatch/3``
+^^^^^^^^^^^^^^
+
+Dispatches a normalized HTTP request to a handler object implementing the http_handler_protocol protocol. Handler failures, exceptions, or invalid responses are converted to an internal server error response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dispatch(Handler,Request,Response)``
+| **Mode and number of proofs:**
+|    ``dispatch(+object_identifier,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve/3
+.. _http_server/0::serve/3:
+
+``serve/3``
+^^^^^^^^^^^
+
+Reads one request from a binary input stream, dispatches it to a handler object, and writes one response to a binary output stream. HEAD requests suppress response body bytes on the wire while preserving the generated response headers. Malformed requests are converted to bad request responses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(Input,Output,Handler)``
+| **Mode and number of proofs:**
+|    ``serve(+stream,+stream,+object_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: serve_connection/3
+.. _http_server/0::serve_connection/3:
+
+``serve_connection/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Repeatedly reads requests from a binary input stream, dispatches them to a handler object, and writes responses to a binary output stream until end-of-file, a ``101 Switching Protocols`` response, or connection-close semantics terminate the connection. HEAD requests suppress response body bytes on the wire while preserving the generated response headers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_connection(Input,Output,Handler)``
+| **Mode and number of proofs:**
+|    ``serve_connection(+stream,+stream,+object_identifier)`` - ``one_or_error``
+
+
+------------
+
+.. index:: accept_websocket/3
+.. _http_server/0::accept_websocket/3:
+
+``accept_websocket/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a normalized WebSocket opening-handshake request and builds a matching ``101 Switching Protocols`` response. The ``protocol(Protocol)`` option can be used to select a single offered subprotocol.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accept_websocket(Request,Response,Options)``
+| **Mode and number of proofs:**
+|    ``accept_websocket(+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_websocket/4
+.. _http_server/0::serve_websocket/4:
+
+``serve_websocket/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Reads one request from a binary input stream, dispatches it to a handler object, writes one response to a binary output stream, and returns ``accepted(Request, Response)`` when the exchange completed with a valid WebSocket opening-handshake response. Malformed requests and non-upgrade responses are written to the stream and reported as ``rejected(Response)``. Clean end-of-file before any bytes are read is reported as ``end_of_file``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_websocket(Input,Output,Handler,Outcome)``
+| **Mode and number of proofs:**
+|    ``serve_websocket(+stream,+stream,+object_identifier,--compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

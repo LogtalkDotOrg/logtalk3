@@ -1,0 +1,58 @@
+.. index:: single: http_text_body_codec
+.. _http_text_body_codec/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_text_body_codec``
+========================
+
+Concrete HTTP body codec for text payloads.
+
+| **Availability:** 
+|    ``logtalk_load(http(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_body_codec_protocol <http_body_codec_protocol/0>`
+| **Uses:**
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_body_codec_protocol/0::decode_body/4`  :ref:`http_body_codec_protocol/0::encode_body/4`  :ref:`http_body_codec_protocol/0::media_types/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
