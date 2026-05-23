@@ -1,7 +1,7 @@
 .. _library_http_server:
 
-About
------
+``http_server``
+===============
 
 The ``http_server`` library provides a portable stream-oriented server
 layer on top of the ``http`` core library. It is designed for the first

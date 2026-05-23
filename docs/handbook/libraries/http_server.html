@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About &mdash; Logtalk 3.101.0</title>
+  <title>http_server &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -163,16 +163,18 @@
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage-examples">Usage examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#current-scope">Current scope</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#framing-rules">Framing rules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#multipart-workflow">Multipart workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#websocket-handshake-workflow">WebSocket handshake workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-examples">Usage examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#framing-rules">Framing rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multipart-workflow">Multipart workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#websocket-handshake-workflow">WebSocket handshake workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
@@ -335,7 +337,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active">About</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/http_server.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -345,37 +347,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="about">
-<span id="library-http-server"></span><h1>About<a class="headerlink" href="#about" title="Link to this heading"></a></h1>
+  <section id="http-server">
+<span id="library-http-server"></span><h1><code class="docutils literal notranslate"><span class="pre">http_server</span></code><a class="headerlink" href="#http-server" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_server</span></code> library provides a portable stream-oriented server
 layer on top of the <code class="docutils literal notranslate"><span class="pre">http</span></code> core library. It is designed for the first
 orchestration step above the wire parser and generator: read exactly one
 request from an existing binary stream, dispatch it to a handler object
 implementing the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol, and write exactly
 one response.</p>
-</section>
 <section id="api-documentation">
-<h1>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h1>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the <a class="reference external" href="../../docs/index.html">../../docs/index.html</a> file in a web
 browser and choose the libraries index and then the <code class="docutils literal notranslate"><span class="pre">http_server</span></code>
 library.</p>
 </section>
 <section id="loading">
-<h1>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h1>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_server(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h1>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_server(tester)).
 </pre></div>
 </div>
 </section>
 <section id="usage-examples">
-<h1>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h1>
+<h2>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h2>
 <p>The examples below use in-memory streams or local files so they can be
 reproduced directly.</p>
 <p>Define a simple handler object once:</p>
@@ -458,7 +459,7 @@ of the underlying upgraded connection or streams. This library stops at
 the HTTP opening handshake.</p>
 </section>
 <section id="current-scope">
-<h1>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h1>
+<h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
 <p>The current slice provides seven predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">read_request/2</span></code> reads exactly one request from a binary stream
@@ -493,7 +494,7 @@ belong to higher layers or backend-specific integration built on top of
 this stream contract.</p>
 </section>
 <section id="framing-rules">
-<h1>Framing rules<a class="headerlink" href="#framing-rules" title="Link to this heading"></a></h1>
+<h2>Framing rules<a class="headerlink" href="#framing-rules" title="Link to this heading"></a></h2>
 <p>Request framing currently supports:</p>
 <ul class="simple">
 <li><p>header termination using <code class="docutils literal notranslate"><span class="pre">CRLF</span> <span class="pre">CRLF</span></code></p></li>
@@ -506,7 +507,7 @@ the request is read as having an empty body so that subsequent bytes
 remain available for the next request on the stream.</p>
 </section>
 <section id="multipart-workflow">
-<h1>Multipart workflow<a class="headerlink" href="#multipart-workflow" title="Link to this heading"></a></h1>
+<h2>Multipart workflow<a class="headerlink" href="#multipart-workflow" title="Link to this heading"></a></h2>
 <p>This library does not introduce a separate multipart server API.
 Multipart requests are exposed to handlers as the same normalized
 request bodies produced by <code class="docutils literal notranslate"><span class="pre">http::parse_request/2</span></code>, which means
@@ -514,7 +515,7 @@ handlers can use <code class="docutils literal notranslate"><span class="pre">ht
 <code class="docutils literal notranslate"><span class="pre">http_multipart::files/2</span></code> directly on the request body.</p>
 </section>
 <section id="websocket-handshake-workflow">
-<h1>WebSocket handshake workflow<a class="headerlink" href="#websocket-handshake-workflow" title="Link to this heading"></a></h1>
+<h2>WebSocket handshake workflow<a class="headerlink" href="#websocket-handshake-workflow" title="Link to this heading"></a></h2>
 <p>This layer now provides a focused helper for the HTTP opening handshake:</p>
 <ul class="simple">
 <li><p>Handlers can call <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> to validate an incoming
@@ -535,7 +536,7 @@ entry point for handshake plus callback-driven session execution.</p></li>
 </ul>
 </section>
 <section id="current-limitations">
-<h1>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h1>
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
 reading streamed request bodies.</p></li>
@@ -547,6 +548,7 @@ HTTP-request oriented.</p></li>
 pooling, or concurrency management.</p></li>
 <li><p>The library assumes binary streams for both input and output.</p></li>
 </ul>
+</section>
 </section>
 
 
