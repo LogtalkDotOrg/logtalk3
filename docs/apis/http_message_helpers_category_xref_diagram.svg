@@ -12,12 +12,20 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1105 986,-1105 986,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category http_message_helpers</text>
+<<<<<<< HEAD
 <text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;29, 02:42</text>
+=======
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;05&#45;23, 17:58</text>
+>>>>>>> 360963d039 (Update SVG diagrams)
 <g id="clust1" class="cluster">
 <title>cluster_http_message_helpers_category</title>
 <g id="a_clust1"><a xlink:title="http_message_helpers">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 962,-54.25 962,-54.25 968,-54.25 974,-60.25 974,-66.25 974,-66.25 974,-1081 974,-1081 974,-1087 968,-1093 962,-1093 962,-1093 20,-1093 20,-1093 14,-1093 8,-1087 8,-1081 8,-1081 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
+<<<<<<< HEAD
 <g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L22">
+=======
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L22">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="20" y="-1075.25" font-family="Monospace" font-size="10.00" fill="dimgray">http_message_helpers</text>
 </a>
 </g>
@@ -29,7 +37,11 @@
 <title>connection_persistent/2</title>
 <polygon fill="yellow" stroke="black" points="563.88,-1054.25 382.12,-1054.25 382.12,-1018.25 563.88,-1018.25 563.88,-1054.25"/>
 <text xml:space="preserve" text-anchor="start" x="390.12" y="-1038.5" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L41">
+=======
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L41">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="395.38" y="-1038.12" font-family="Monospace" font-size="11.00">connection_persistent/2</text>
 </a>
 </g>
@@ -43,7 +55,11 @@
 <title>request_persistent/1</title>
 <polygon fill="yellow" stroke="black" points="466.75,-935 305.25,-935 305.25,-899 466.75,-899 466.75,-935"/>
 <text xml:space="preserve" text-anchor="start" x="313.25" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L48">
+=======
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L48">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="318.5" y="-918.88" font-family="Monospace" font-size="11.00">request_persistent/1</text>
 </a>
 </g>
@@ -55,12 +71,20 @@
 <!-- connection_persistent/2&#45;&gt;request_persistent/1 -->
 <g id="edge1" class="edge">
 <title>connection_persistent/2&#45;&gt;request_persistent/1</title>
+<<<<<<< HEAD
 <g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L90" xlink:title="calls">
+=======
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L90" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M460.16,-1017.95C445.77,-998.55 422.27,-966.88 405.58,-944.39"/>
 <polygon fill="black" stroke="black" points="408.56,-942.53 399.79,-936.59 402.94,-946.7 408.56,-942.53"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L90">
+=======
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L90">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="432.11" y="-973.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +94,11 @@
 <title>response_persistent/1</title>
 <polygon fill="yellow" stroke="black" points="653.12,-935 484.88,-935 484.88,-899 653.12,-899 653.12,-935"/>
 <text xml:space="preserve" text-anchor="start" x="492.88" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L55">
+=======
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L55">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="498.12" y="-918.88" font-family="Monospace" font-size="11.00">response_persistent/1</text>
 </a>
 </g>
@@ -82,12 +110,20 @@
 <!-- connection_persistent/2&#45;&gt;response_persistent/1 -->
 <g id="edge2" class="edge">
 <title>connection_persistent/2&#45;&gt;response_persistent/1</title>
+<<<<<<< HEAD
 <g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L90" xlink:title="calls">
+=======
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L90" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M487.17,-1017.95C503.12,-998.47 529.21,-966.59 547.64,-944.08"/>
 <polygon fill="black" stroke="black" points="550.19,-946.5 553.82,-936.54 544.77,-942.06 550.19,-946.5"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L90">
+=======
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L90">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="523.88" y="-973.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +133,11 @@
 <title>version_persistent_by_default/1</title>
 <polygon fill="yellow" stroke="black" points="253.88,-815.75 18.12,-815.75 18.12,-779.75 253.88,-779.75 253.88,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-800" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L62">
+=======
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L62">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-799.62" font-family="Monospace" font-size="11.00">version_persistent_by_default/1</text>
 </a>
 </g>
@@ -109,12 +149,20 @@
 <!-- request_persistent/1&#45;&gt;version_persistent_by_default/1 -->
 <g id="edge4" class="edge">
 <title>request_persistent/1&#45;&gt;version_persistent_by_default/1</title>
+<<<<<<< HEAD
 <g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94" xlink:title="calls">
+=======
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M348.84,-898.57C304.74,-877.89 231.15,-843.38 183.1,-820.84"/>
 <polygon fill="black" stroke="black" points="184.86,-817.8 174.32,-816.72 181.89,-824.14 184.86,-817.8"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94">
+=======
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="268.5" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +172,11 @@
 <title>message_has_connection_token/2</title>
 <polygon fill="yellow" stroke="black" points="500.5,-815.75 271.5,-815.75 271.5,-779.75 500.5,-779.75 500.5,-815.75"/>
 <text xml:space="preserve" text-anchor="start" x="279.5" y="-800" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L69">
+=======
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L69">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="284.75" y="-799.62" font-family="Monospace" font-size="11.00">message_has_connection_token/2</text>
 </a>
 </g>
@@ -136,12 +188,20 @@
 <!-- request_persistent/1&#45;&gt;message_has_connection_token/2 -->
 <g id="edge3" class="edge">
 <title>request_persistent/1&#45;&gt;message_has_connection_token/2</title>
+<<<<<<< HEAD
 <g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94" xlink:title="calls">
+=======
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M386,-898.7C386,-880 386,-849.87 386,-827.58"/>
 <polygon fill="black" stroke="black" points="389.5,-827.64 386,-817.64 382.5,-827.64 389.5,-827.64"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94">
+=======
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="386" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,12 +223,20 @@
 <!-- request_persistent/1&#45;&gt;http::version/2 -->
 <g id="edge15" class="edge">
 <title>request_persistent/1&#45;&gt;http::version/2</title>
+<<<<<<< HEAD
 <g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94" xlink:title="calls">
+=======
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M410.04,-898.58C428.91,-885.19 456.02,-866.54 480.75,-851.75 498.54,-841.11 518.68,-830.32 536.28,-821.29"/>
 <polygon fill="black" stroke="black" points="537.64,-824.52 544.97,-816.87 534.47,-818.28 537.64,-824.52"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L94">
+=======
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L94">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="480.75" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -176,12 +244,20 @@
 <!-- response_persistent/1&#45;&gt;version_persistent_by_default/1 -->
 <g id="edge6" class="edge">
 <title>response_persistent/1&#45;&gt;version_persistent_by_default/1</title>
+<<<<<<< HEAD
 <g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+=======
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M521.29,-898.51C495.42,-888.7 463.04,-875.86 434.75,-863 424.84,-858.5 423.28,-855.31 413,-851.75 383.92,-841.69 316.64,-828.73 255.66,-818.15"/>
 <polygon fill="black" stroke="black" points="256.3,-814.71 245.85,-816.46 255.11,-821.6 256.3,-814.71"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102">
+=======
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="434.75" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -189,12 +265,20 @@
 <!-- response_persistent/1&#45;&gt;message_has_connection_token/2 -->
 <g id="edge5" class="edge">
 <title>response_persistent/1&#45;&gt;message_has_connection_token/2</title>
+<<<<<<< HEAD
 <g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+=======
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M556.63,-898.52C545.9,-884.37 529.24,-864.74 511,-851.75 493.18,-839.06 471.85,-828.6 451.89,-820.43"/>
 <polygon fill="black" stroke="black" points="453.29,-817.22 442.71,-816.8 450.72,-823.73 453.29,-817.22"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102">
+=======
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="523.83" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -202,12 +286,20 @@
 <!-- response_persistent/1&#45;&gt;http::version/2 -->
 <g id="edge16" class="edge">
 <title>response_persistent/1&#45;&gt;http::version/2</title>
+<<<<<<< HEAD
 <g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+=======
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M570.92,-898.7C573,-879.91 576.36,-849.59 578.84,-827.27"/>
 <polygon fill="black" stroke="black" points="582.28,-827.95 579.91,-817.63 575.33,-827.18 582.28,-827.95"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102">
+=======
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="575.89" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -229,12 +321,20 @@
 <!-- response_persistent/1&#45;&gt;http::property/2 -->
 <g id="edge17" class="edge">
 <title>response_persistent/1&#45;&gt;http::property/2</title>
+<<<<<<< HEAD
 <g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+=======
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M592.9,-898.7C620.66,-878.61 666.62,-845.35 697.82,-822.76"/>
 <polygon fill="black" stroke="black" points="699.72,-825.71 705.77,-817.01 695.62,-820.04 699.72,-825.71"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L102">
+=======
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L102">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="654.86" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -244,7 +344,11 @@
 <title>message_connection_tokens/2</title>
 <polygon fill="yellow" stroke="black" points="452.38,-696.5 243.62,-696.5 243.62,-660.5 452.38,-660.5 452.38,-696.5"/>
 <text xml:space="preserve" text-anchor="start" x="251.62" y="-680.75" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L76">
+=======
+<g id="a_node6_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L76">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="256.88" y="-680.38" font-family="Monospace" font-size="11.00">message_connection_tokens/2</text>
 </a>
 </g>
@@ -256,12 +360,20 @@
 <!-- message_has_connection_token/2&#45;&gt;message_connection_tokens/2 -->
 <g id="edge7" class="edge">
 <title>message_has_connection_token/2&#45;&gt;message_connection_tokens/2</title>
+<<<<<<< HEAD
 <g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L120" xlink:title="calls">
+=======
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L120" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M380.39,-779.45C374.27,-760.57 364.39,-730.06 357.14,-707.71"/>
 <polygon fill="black" stroke="black" points="360.51,-706.75 354.1,-698.31 353.85,-708.9 360.51,-706.75"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L120">
+=======
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L120">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="368.14" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -283,12 +395,20 @@
 <!-- message_has_connection_token/2&#45;&gt;list::memberchk/2 -->
 <g id="edge18" class="edge">
 <title>message_has_connection_token/2&#45;&gt;list::memberchk/2</title>
+<<<<<<< HEAD
 <g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L120" xlink:title="calls">
+=======
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L120" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M408.87,-779.45C435.31,-759.45 479.02,-726.38 508.87,-703.8"/>
 <polygon fill="black" stroke="black" points="510.96,-706.61 516.83,-697.78 506.74,-701.03 510.96,-706.61"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L120">
+=======
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L120">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="468.15" y="-734.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -298,7 +418,11 @@
 <title>connection_tokens/3</title>
 <polygon fill="cornsilk" stroke="black" points="425.38,-577.25 270.62,-577.25 270.62,-541.25 425.38,-541.25 425.38,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="278.62" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129">
+=======
+<g id="a_node8_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="283.88" y="-561.12" font-family="Monospace" font-size="11.00">connection_tokens/3</text>
 </a>
 </g>
@@ -310,12 +434,20 @@
 <!-- message_connection_tokens/2&#45;&gt;connection_tokens/3 -->
 <g id="edge8" class="edge">
 <title>message_connection_tokens/2&#45;&gt;connection_tokens/3</title>
+<<<<<<< HEAD
 <g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L124" xlink:title="calls">
+=======
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L124" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M348,-660.2C348,-641.5 348,-611.37 348,-589.08"/>
 <polygon fill="black" stroke="black" points="351.5,-589.14 348,-579.14 344.5,-589.14 351.5,-589.14"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L124">
+=======
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L124">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="348" y="-615.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -325,7 +457,11 @@
 <title>chunk_size_line_size/2</title>
 <polygon fill="yellow" stroke="black" points="908.5,-1054.25 733.5,-1054.25 733.5,-1018.25 908.5,-1018.25 908.5,-1054.25"/>
 <text xml:space="preserve" text-anchor="start" x="741.5" y="-1038.5" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L83">
+=======
+<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L83">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="746.75" y="-1038.12" font-family="Monospace" font-size="11.00">chunk_size_line_size/2</text>
 </a>
 </g>
@@ -339,7 +475,11 @@
 <title>chunk_size_codes/2</title>
 <polygon fill="cornsilk" stroke="black" points="825,-935 677,-935 677,-899 825,-899 825,-935"/>
 <text xml:space="preserve" text-anchor="start" x="685" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L163">
+=======
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L163">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="690.25" y="-918.88" font-family="Monospace" font-size="11.00">chunk_size_codes/2</text>
 </a>
 </g>
@@ -351,12 +491,20 @@
 <!-- chunk_size_line_size/2&#45;&gt;chunk_size_codes/2 -->
 <g id="edge12" class="edge">
 <title>chunk_size_line_size/2&#45;&gt;chunk_size_codes/2</title>
+<<<<<<< HEAD
 <g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L157" xlink:title="calls">
+=======
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L157" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M810.67,-1017.95C799.19,-998.73 780.52,-967.44 767.11,-944.99"/>
 <polygon fill="black" stroke="black" points="770.28,-943.46 762.15,-936.67 764.27,-947.05 770.28,-943.46"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L157">
+=======
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L157">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="788.1" y="-973.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -366,7 +514,11 @@
 <title>trim_ows/2</title>
 <polygon fill="cornsilk" stroke="black" points="937,-935 843,-935 843,-899 937,-899 937,-935"/>
 <text xml:space="preserve" text-anchor="start" x="851" y="-919.25" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L169">
+=======
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L169">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="856.25" y="-918.88" font-family="Monospace" font-size="11.00">trim_ows/2</text>
 </a>
 </g>
@@ -378,12 +530,20 @@
 <!-- chunk_size_line_size/2&#45;&gt;trim_ows/2 -->
 <g id="edge13" class="edge">
 <title>chunk_size_line_size/2&#45;&gt;trim_ows/2</title>
+<<<<<<< HEAD
 <g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L157" xlink:title="calls">
+=======
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L157" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M831.18,-1017.95C842.44,-998.81 860.74,-967.72 873.94,-945.29"/>
 <polygon fill="black" stroke="black" points="876.95,-947.07 879.01,-936.68 870.92,-943.52 876.95,-947.07"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L157">
+=======
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L157">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="857.57" y="-973.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -393,7 +553,11 @@
 <title>merge_unique_tokens/2</title>
 <polygon fill="cornsilk" stroke="black" points="385.12,-458 216.88,-458 216.88,-422 385.12,-422 385.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="224.88" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140">
+=======
+<g id="a_node9_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="230.12" y="-441.88" font-family="Monospace" font-size="11.00">merge_unique_tokens/2</text>
 </a>
 </g>
@@ -405,12 +569,20 @@
 <!-- connection_tokens/3&#45;&gt;merge_unique_tokens/2 -->
 <g id="edge9" class="edge">
 <title>connection_tokens/3&#45;&gt;merge_unique_tokens/2</title>
+<<<<<<< HEAD
 <g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129" xlink:title="calls">
+=======
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M341.06,-540.95C333.46,-521.99 321.16,-491.28 312.19,-468.9"/>
 <polygon fill="black" stroke="black" points="315.5,-467.76 308.53,-459.78 309,-470.36 315.5,-467.76"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129">
+=======
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="325.91" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -432,12 +604,20 @@
 <!-- connection_tokens/3&#45;&gt;list::member/2 -->
 <g id="edge19" class="edge">
 <title>connection_tokens/3&#45;&gt;list::member/2</title>
+<<<<<<< HEAD
 <g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129" xlink:title="calls">
+=======
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M362.42,-540.81C379.01,-518.93 404,-479.57 404,-441 404,-441 404,-441 404,-200.5 404,-161.54 371.95,-128.29 345.08,-107.25"/>
 <polygon fill="black" stroke="black" points="347.53,-104.71 337.43,-101.5 343.33,-110.31 347.53,-104.71"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L129">
+=======
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L129">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="404" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -447,7 +627,11 @@
 <title>merge_unique_tokens/3</title>
 <polygon fill="cornsilk" stroke="black" points="222.12,-338.75 53.88,-338.75 53.88,-302.75 222.12,-302.75 222.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="61.88" y="-323" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L144">
+=======
+<g id="a_node10_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L144">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="67.12" y="-322.62" font-family="Monospace" font-size="11.00">merge_unique_tokens/3</text>
 </a>
 </g>
@@ -459,12 +643,20 @@
 <!-- merge_unique_tokens/2&#45;&gt;merge_unique_tokens/3 -->
 <g id="edge10" class="edge">
 <title>merge_unique_tokens/2&#45;&gt;merge_unique_tokens/3</title>
+<<<<<<< HEAD
 <g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140" xlink:title="calls">
+=======
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M276.95,-421.7C249.02,-401.61 202.78,-368.35 171.38,-345.76"/>
 <polygon fill="black" stroke="black" points="173.54,-343 163.38,-340.01 169.45,-348.69 173.54,-343"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140">
+=======
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="224.39" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -486,12 +678,20 @@
 <!-- merge_unique_tokens/2&#45;&gt;list::reverse/2 -->
 <g id="edge20" class="edge">
 <title>merge_unique_tokens/2&#45;&gt;list::reverse/2</title>
+<<<<<<< HEAD
 <g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140" xlink:title="calls">
+=======
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M301.44,-421.7C301.92,-403 302.69,-372.87 303.26,-350.58"/>
 <polygon fill="black" stroke="black" points="306.76,-350.72 303.52,-340.63 299.76,-350.54 306.76,-350.72"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L140">
+=======
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L140">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="302.59" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -501,7 +701,11 @@
 <title>merge_unique_token_list/3</title>
 <polygon fill="cornsilk" stroke="black" points="310.62,-219.5 115.38,-219.5 115.38,-183.5 310.62,-183.5 310.62,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="123.38" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
+<<<<<<< HEAD
 <g id="a_node11_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L149">
+=======
+<g id="a_node11_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L149">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="128.62" y="-203.38" font-family="Monospace" font-size="11.00">merge_unique_token_list/3</text>
 </a>
 </g>
@@ -513,12 +717,20 @@
 <!-- merge_unique_tokens/3&#45;&gt;merge_unique_token_list/3 -->
 <g id="edge11" class="edge">
 <title>merge_unique_tokens/3&#45;&gt;merge_unique_token_list/3</title>
+<<<<<<< HEAD
 <g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L145" xlink:title="calls">
+=======
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L145" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M149.07,-302.45C161.36,-283.23 181.38,-251.94 195.74,-229.49"/>
 <polygon fill="black" stroke="black" points="198.63,-231.46 201.07,-221.15 192.74,-227.68 198.63,-231.46"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L145">
+=======
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L145">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="177.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -526,12 +738,20 @@
 <!-- merge_unique_token_list/3&#45;&gt;list::member/2 -->
 <g id="edge21" class="edge">
 <title>merge_unique_token_list/3&#45;&gt;list::member/2</title>
+<<<<<<< HEAD
 <g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L150" xlink:title="calls">
+=======
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L150" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M227.17,-183.2C243.12,-163.72 269.21,-131.84 287.64,-109.33"/>
 <polygon fill="black" stroke="black" points="290.19,-111.75 293.82,-101.79 284.77,-107.31 290.19,-111.75"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L150">
+=======
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L150">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="263.88" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -550,12 +770,20 @@
 <!-- trim_ows/2&#45;&gt;^^trim_ows_codes/2 -->
 <g id="edge14" class="edge">
 <title>trim_ows/2&#45;&gt;^^trim_ows_codes/2</title>
+<<<<<<< HEAD
 <g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L169" xlink:title="calls">
+=======
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L169" xlink:title="calls">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <path fill="none" stroke="black" d="M890,-898.7C890,-880 890,-849.87 890,-827.58"/>
 <polygon fill="black" stroke="black" points="893.5,-827.64 890,-817.64 886.5,-827.64 893.5,-827.64"/>
 </a>
 </g>
+<<<<<<< HEAD
 <g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27d3abc2f450b1f82f90820db23f25404134d26d/library/http/http_message_helpers.lgt#L169">
+=======
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/2a57135bf4074f39eab2e9fc1a1a9283ae79e0c8/library/http/http_message_helpers.lgt#L169">
+>>>>>>> 360963d039 (Update SVG diagrams)
 <text xml:space="preserve" text-anchor="start" x="890" y="-854" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
