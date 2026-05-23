@@ -1112,6 +1112,8 @@
 </li>
       <li><a href="datalog_protocol_0.html#index-1">clear/0</a>
 </li>
+      <li><a href="http_cookie_jar_0.html#index-4">clear/1</a>
+</li>
       <li><a href="tzif_protocol_0.html#index-6">clear_cache/0</a>
 </li>
       <li><a href="time_scales_data_0.html#index-7">clear_dut1_override/0</a>, <a href="time_scales_protocol_0.html#index-10">[1]</a>
@@ -1150,16 +1152,16 @@
 </li>
       <li><a href="cloning_0.html#index-0">cloning</a>
 </li>
-      <li><a href="amqp_0.html#index-2">close/1</a>, <a href="http_websocket_session_registry_0.html#index-2">[1]</a>
+      <li><a href="amqp_0.html#index-2">close/1</a>, <a href="http_cookie_jar_0.html#index-3">[1]</a>, <a href="http_session_0.html#index-3">[2]</a>, <a href="http_websocket_session_registry_0.html#index-2">[3]</a>
 </li>
       <li><a href="socket_0.html#index-9">close/2</a>
 </li>
       <li><a href="amqp_0.html#index-3">close/3</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="linda_client_0.html#index-3">close_client/1</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="http_socket_0.html#index-4">close_connection/1</a>
 </li>
       <li><a href="http_socket_0.html#index-7">close_connection_pool/1</a>
@@ -1367,6 +1369,12 @@
       <li><a href="dates_tz_protocol_0.html#index-4">convert_zones/4</a>
 </li>
       <li><a href="dates_tz_protocol_0.html#index-5">convert_zones_with_resolution/5</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-8">cookie_count/2</a>
+</li>
+      <li><a href="http_session_0.html#index-4">cookie_jar/2</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-7">cookies/2</a>
 </li>
       <li><a href="simulated_annealing_protocol_0.html#index-6">cooling_schedule/3</a>
 </li>
@@ -1758,7 +1766,7 @@
 </li>
       <li><a href="http_client_0.html#index-7">delete/3</a>, <a href="listp_0.html#index-3">[1]</a>, <a href="setp_0.html#index-3">[2]</a>, <a href="varlistp_0.html#index-2">[3]</a>
 </li>
-      <li><a href="dictionaryp_0.html#index-7">delete/4</a>, <a href="heap_protocol_0.html#index-3">[1]</a>, <a href="http_client_0.html#index-8">[2]</a>
+      <li><a href="dictionaryp_0.html#index-7">delete/4</a>, <a href="heap_protocol_0.html#index-3">[1]</a>, <a href="http_client_0.html#index-8">[2]</a>, <a href="http_session_0.html#index-8">[3]</a>
 </li>
       <li><a href="zipperp_0.html#index-22">delete_all_after/2</a>
 </li>
@@ -2906,7 +2914,7 @@
 </li>
       <li><a href="http_client_0.html#index-3">get/3</a>, <a href="memcached_0.html#index-11">[1]</a>, <a href="redis_0.html#index-6">[2]</a>
 </li>
-      <li><a href="http_client_0.html#index-4">get/4</a>, <a href="memcached_0.html#index-12">[1]</a>
+      <li><a href="http_client_0.html#index-4">get/4</a>, <a href="http_session_0.html#index-6">[1]</a>, <a href="memcached_0.html#index-12">[2]</a>
 </li>
       <li><a href="java_access_protocol_0.html#index-1">get_field/2</a>
 </li>
@@ -3076,7 +3084,7 @@
 </li>
       <li><a href="http_client_0.html#index-5">head/3</a>
 </li>
-      <li><a href="http_client_0.html#index-6">head/4</a>
+      <li><a href="http_client_0.html#index-6">head/4</a>, <a href="http_session_0.html#index-7">[1]</a>
 </li>
       <li><a href="head_arguments_mutation_5.html#index-0">head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a>
 </li>
@@ -3118,10 +3126,10 @@
 </li>
       <li><a href="number_grammars_1.html#index-6">hex_digits//1</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="redis_0.html#index-30">hexists/4</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="redis_0.html#index-27">hget/4</a>
 </li>
       <li><a href="redis_0.html#index-28">hgetall/3</a>
@@ -3164,6 +3172,8 @@
 </li>
       <li><a href="http_client_core_0.html#index-0">http_client_core</a>
 </li>
+      <li><a href="http_cookie_jar_0.html#index-0">http_cookie_jar</a>
+</li>
       <li><a href="http_cookies_1.html#index-0">http_cookies(Representation)</a>
 </li>
       <li><a href="http_form_body_codec_0.html#index-0">http_form_body_codec</a>
@@ -3187,6 +3197,8 @@
       <li><a href="http_router_0.html#index-0">http_router</a>
 </li>
       <li><a href="http_server_0.html#index-0">http_server</a>
+</li>
+      <li><a href="http_session_0.html#index-0">http_session</a>
 </li>
       <li><a href="http_socket_0.html#index-0">http_socket</a>
 </li>
@@ -3688,6 +3700,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="string_distance_1.html#index-12">jaccard_index/3</a>
 </li>
+      <li><a href="http_cookie_jar_0.html#index-13">jar_cookie_/10</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-11">jar_seed_/1</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-12">jar_state_/2</a>
+</li>
       <li><a href="string_distance_1.html#index-4">jaro/3</a>
 </li>
       <li><a href="string_distance_1.html#index-5">jaro_winkler/3</a>
@@ -3722,10 +3740,10 @@
 </li>
       <li><a href="json_ld_3.html#index-0">json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation)</a>
 </li>
-      <li><a href="json_ld_1.html#index-0">json_ld(StringRepresentation)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="json_ld_1.html#index-0">json_ld(StringRepresentation)</a>
+</li>
       <li><a href="json_ld_protocol_0.html#index-0">json_ld_protocol</a>
 </li>
       <li><a href="json_lines_0.html#index-0">json_lines</a>
@@ -4060,7 +4078,7 @@
 </li>
       <li><a href="mime_types_0.html#index-14">load/1</a>, <a href="tzif_protocol_0.html#index-1">[1]</a>
 </li>
-      <li><a href="mime_types_0.html#index-15">load/2</a>, <a href="tzif_protocol_0.html#index-2">[1]</a>
+      <li><a href="http_cookie_jar_0.html#index-10">load/2</a>, <a href="mime_types_0.html#index-15">[1]</a>, <a href="tzif_protocol_0.html#index-2">[2]</a>
 </li>
       <li><a href="subprocess_mutation_hook_0.html#index-1">load_config/1</a>
 </li>
@@ -5016,7 +5034,9 @@
 </li>
       <li><a href="http_websocket_0.html#index-8">opcode/2</a>
 </li>
-      <li><a href="http_websocket_session_registry_0.html#index-1">open/1</a>
+      <li><a href="http_cookie_jar_0.html#index-1">open/1</a>, <a href="http_session_0.html#index-1">[1]</a>, <a href="http_websocket_session_registry_0.html#index-1">[2]</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-2">open/2</a>, <a href="http_session_0.html#index-2">[1]</a>
 </li>
       <li><a href="http_websocket_client_session_0.html#index-1">open/4</a>
 </li>
@@ -5360,7 +5380,7 @@
 </li>
       <li><a href="http_client_0.html#index-13">patch/4</a>
 </li>
-      <li><a href="http_client_0.html#index-14">patch/5</a>
+      <li><a href="http_client_0.html#index-14">patch/5</a>, <a href="http_session_0.html#index-11">[1]</a>
 </li>
       <li><a href="graph_protocol_0.html#index-19">path/3</a>
 </li>
@@ -5500,7 +5520,7 @@
 </li>
       <li><a href="http_client_0.html#index-9">post/4</a>
 </li>
-      <li><a href="http_client_0.html#index-10">post/5</a>
+      <li><a href="http_client_0.html#index-10">post/5</a>, <a href="http_session_0.html#index-9">[1]</a>
 </li>
       <li><a href="bintree_0.html#index-3">postorder/2</a>
 </li>
@@ -5780,7 +5800,7 @@
 </li>
       <li><a href="http_client_0.html#index-11">put/4</a>
 </li>
-      <li><a href="http_client_0.html#index-12">put/5</a>
+      <li><a href="http_client_0.html#index-12">put/5</a>, <a href="http_session_0.html#index-10">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -6252,9 +6272,11 @@
 </li>
       <li><a href="http_client_0.html#index-1">request/4</a>, <a href="json_rpc_0.html#index-1">[1]</a>
 </li>
-      <li><a href="http_client_0.html#index-2">request/5</a>
+      <li><a href="http_client_0.html#index-2">request/5</a>, <a href="http_session_0.html#index-5">[1]</a>
 </li>
       <li><a href="http_0.html#index-1">request/7</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-6">request_cookies/3</a>
 </li>
       <li><a href="http_message_helpers_0.html#index-2">request_persistent/1</a>
 </li>
@@ -6498,7 +6520,7 @@
 </li>
       <li><a href="packs_0.html#index-41">save/1</a>, <a href="tzif_protocol_0.html#index-5">[1]</a>, <a href="wrapper_0.html#index-11">[2]</a>
 </li>
-      <li><a href="packs_0.html#index-40">save/2</a>, <a href="tzif_protocol_0.html#index-4">[1]</a>
+      <li><a href="http_cookie_jar_0.html#index-9">save/2</a>, <a href="packs_0.html#index-40">[1]</a>, <a href="tzif_protocol_0.html#index-4">[2]</a>
 </li>
       <li><a href="time_scales_data_0.html#index-10">save_dut1_entries/1</a>, <a href="time_scales_protocol_0.html#index-13">[1]</a>
 </li>
@@ -6689,6 +6711,10 @@
       <li><a href="http_websocket_session_registry_0.html#index-5">session/2</a>
 </li>
       <li><a href="http_websocket_session_registry_0.html#index-7">session_count/2</a>
+</li>
+      <li><a href="http_session_0.html#index-12">session_seed_/1</a>
+</li>
+      <li><a href="http_session_0.html#index-13">session_state_/2</a>
 </li>
       <li><a href="http_websocket_session_registry_0.html#index-6">sessions/2</a>
 </li>
@@ -7031,6 +7057,8 @@
       <li><a href="simulated_annealing_protocol_0.html#index-7">stop_condition/3</a>
 </li>
       <li><a href="dump_trace_0.html#index-2">stop_redirect_to_file/0</a>
+</li>
+      <li><a href="http_cookie_jar_0.html#index-5">store_set_cookies/3</a>
 </li>
       <li><a href="datalog_protocol_0.html#index-18">strata/1</a>
 </li>

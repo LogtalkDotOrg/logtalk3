@@ -1230,6 +1230,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    http_server <http_server_0>
 
+``library/http_session/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_cookie_jar <http_cookie_jar_0>
+   http_session <http_session_0>
+
 ``library/http_socket/``
 ------------------------
 

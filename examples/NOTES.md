@@ -308,6 +308,10 @@ Follows a short description of each included example (in alphabetical order):
 	solution for the Advent of Code 2023 Day 8 problem; illustrates the
 	use of the `dictionaries` and `grammars` libraries plus cyclic terms
 
+- `http_cookies_counter`  
+	small HTTP cookie example showing how a server preserves a visit
+	counter in the client
+
 - `http_open_api`  
 	small HTTP client and server example showing how to publish and consume
 	an OpenAPI contract

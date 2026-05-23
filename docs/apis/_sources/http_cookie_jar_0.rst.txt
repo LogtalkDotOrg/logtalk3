@@ -1,0 +1,307 @@
+.. index:: single: http_cookie_jar
+.. _http_cookie_jar/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_cookie_jar``
+===================
+
+HTTP cookie jar implementing explicit storage and request matching on top of the http_cookies parsing and generation predicates, with explicit save and load operations for persisting jar contents.
+
+| **Availability:** 
+|    ``logtalk_load(http_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`http <http/0>`
+|    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open/1
+.. _http_cookie_jar/0::open/1:
+
+``open/1``
+^^^^^^^^^^
+
+Opens a new empty cookie jar.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Jar)``
+| **Mode and number of proofs:**
+|    ``open(-compound)`` - ``one``
+
+
+------------
+
+.. index:: open/2
+.. _http_cookie_jar/0::open/2:
+
+``open/2``
+^^^^^^^^^^
+
+Opens a new cookie jar using the given options list. Supported options include ``cookies_file(File)`` for preloading previously persisted cookies from disk.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Jar,Options)``
+| **Mode and number of proofs:**
+|    ``open(-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: close/1
+.. _http_cookie_jar/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes a cookie jar and removes all stored cookies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Jar)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: clear/1
+.. _http_cookie_jar/0::clear/1:
+
+``clear/1``
+^^^^^^^^^^^
+
+Removes all currently stored cookies from a cookie jar while keeping the jar handle valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clear(Jar)``
+| **Mode and number of proofs:**
+|    ``clear(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: store_set_cookies/3
+.. _http_cookie_jar/0::store_set_cookies/3:
+
+``store_set_cookies/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Stores normalized Set-Cookie terms for the given absolute URL, replacing existing cookies with the same name, domain, and path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``store_set_cookies(Jar,URL,SetCookies)``
+| **Mode and number of proofs:**
+|    ``store_set_cookies(+compound,+atom,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: request_cookies/3
+.. _http_cookie_jar/0::request_cookies/3:
+
+``request_cookies/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the cookie name-value pairs currently applicable to the given absolute URL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_cookies(Jar,URL,Cookies)``
+| **Mode and number of proofs:**
+|    ``request_cookies(+compound,+atom,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: cookies/2
+.. _http_cookie_jar/0::cookies/2:
+
+``cookies/2``
+^^^^^^^^^^^^^
+
+Returns the currently stored cookies as cookie(Name, Value, Attributes) terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookies(Jar,Cookies)``
+| **Mode and number of proofs:**
+|    ``cookies(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: cookie_count/2
+.. _http_cookie_jar/0::cookie_count/2:
+
+``cookie_count/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the number of currently stored cookies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_count(Jar,Count)``
+| **Mode and number of proofs:**
+|    ``cookie_count(+compound,-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: save/2
+.. _http_cookie_jar/0::save/2:
+
+``save/2``
+^^^^^^^^^^
+
+Persists the currently stored cookies to a file using a canonical Logtalk term representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save(Jar,File)``
+| **Mode and number of proofs:**
+|    ``save(+compound,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: load/2
+.. _http_cookie_jar/0::load/2:
+
+``load/2``
+^^^^^^^^^^
+
+Loads previously persisted cookies from a file, replacing the current jar contents.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load(Jar,File)``
+| **Mode and number of proofs:**
+|    ``load(+compound,+atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: jar_seed_/1
+.. _http_cookie_jar/0::jar_seed_/1:
+
+``jar_seed_/1``
+^^^^^^^^^^^^^^^
+
+Last allocated cookie jar identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``jar_seed_(JarId)``
+| **Mode and number of proofs:**
+|    ``jar_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: jar_state_/2
+.. _http_cookie_jar/0::jar_state_/2:
+
+``jar_state_/2``
+^^^^^^^^^^^^^^^^
+
+Per-jar creation index counter state.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``jar_state_(JarId,CreationIndex)``
+| **Mode and number of proofs:**
+|    ``jar_state_(?positive_integer,?non_negative_integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: jar_cookie_/10
+.. _http_cookie_jar/0::jar_cookie_/10:
+
+``jar_cookie_/10``
+^^^^^^^^^^^^^^^^^^
+
+Stored cookie entries indexed by jar identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``jar_cookie_(JarId,Name,Domain,Path,Value,HostOnly,Secure,HttpOnly,Expiry,CreationIndex)``
+| **Mode and number of proofs:**
+|    ``jar_cookie_(?positive_integer,?atom,?atom,?atom,?atom,?boolean,?boolean,?boolean,?nonvar,?positive_integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

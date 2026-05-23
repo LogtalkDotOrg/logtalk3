@@ -122,6 +122,7 @@ directory in the ``NOTES.md`` file.
    http_multipart
    http_router
    http_server
+   http_session
    http_socket
    http_websocket
    http_websocket_messages

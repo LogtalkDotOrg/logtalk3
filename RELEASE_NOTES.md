@@ -32,7 +32,7 @@ Library
 accept relative reference arguments.
 
 * ADDED: New `http`, `http_client`, `http_cookies`, `http_multipart`,
-`http_router`, `http_server`, `http_socket`, `http_websocket`, 
+`http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
 `http_websocket_messages`, `http_websocket_session`, and `open_api` libraries.
 
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
@@ -65,6 +65,9 @@ Tools
 
 Examples
 --------
+
+* ADDED: New `http_cookies_counter` illustrating the use of the new HTTP
+libraries.
 
 * ADDED: New `http_open_api` example illustrating the use of the new HTTP and
 OpenAPI libraries.

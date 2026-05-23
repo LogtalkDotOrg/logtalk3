@@ -105,6 +105,9 @@ logtalk_library_path(hanoi, threads('hanoi/')).
 logtalk_library_path(haunted_wasteland, examples('haunted_wasteland/')).
 logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
+logtalk_library_path(http_cookies_counter, examples('http_cookies_counter/')).
+logtalk_library_path(http_open_api, examples('http_open_api/')).
+logtalk_library_path(http_websocket_echo, examples('http_websocket_echo/')).
 logtalk_library_path(includes, examples('includes/')).
 logtalk_library_path(inheritance, examples('inheritance/')).
 logtalk_library_path(inlining, examples('inlining/')).

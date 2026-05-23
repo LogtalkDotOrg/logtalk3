@@ -173,6 +173,7 @@ sed '1,19d' ../../../library/http_cookies/NOTES.md | pandoc -f gfm -t rst -o lib
 sed '1,19d' ../../../library/http_multipart/NOTES.md | pandoc -f gfm -t rst -o libraries/http_multipart.rst
 sed '1,19d' ../../../library/http_router/NOTES.md | pandoc -f gfm -t rst -o libraries/http_router.rst
 sed '1,19d' ../../../library/http_server/NOTES.md | pandoc -f gfm -t rst -o libraries/http_server.rst
+sed '1,19d' ../../../library/http_session/NOTES.md | pandoc -f gfm -t rst -o libraries/http_session.rst
 sed '1,19d' ../../../library/http_socket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket.rst
 sed '1,19d' ../../../library/http_websocket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket.rst
 sed '1,19d' ../../../library/http_websocket_messages/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_messages.rst

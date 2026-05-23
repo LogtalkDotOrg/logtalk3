@@ -505,7 +505,7 @@
 	components_path_query(Components, Path, Query) :-
 		(	member(path(Path0), Components) ->
 			normalize_request_path(Path0, Path)
-		;	Path = '/'
+		;	Path = ('/')
 		),
 		(	member(query(Query), Components) ->
 			true

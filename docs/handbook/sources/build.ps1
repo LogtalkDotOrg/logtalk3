@@ -173,6 +173,7 @@ Foreach-Object {
 (Get-Content ../../../library/http_multipart/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_multipart.rst
 (Get-Content ../../../library/http_router/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_router.rst
 (Get-Content ../../../library/http_server/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_server.rst
+(Get-Content ../../../library/http_session/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_session.rst
 (Get-Content ../../../library/http_socket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_socket.rst
 (Get-Content ../../../library/http_websocket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket.rst
 (Get-Content ../../../library/http_websocket_messages/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_messages.rst

@@ -218,6 +218,7 @@
 		http(loader),
 		http_client(loader),
 		http_cookies(loader),
+		http_session(loader),
 		http_multipart(loader),
 		http_router(loader),
 		http_server(loader),
