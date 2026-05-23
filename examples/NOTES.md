@@ -312,6 +312,10 @@ Follows a short description of each included example (in alphabetical order):
 	small HTTP client and server example showing how to publish and consume
 	an OpenAPI contract
 
+- `http_websocket_echo`  
+	small HTTP and WebSocket example showing the opening handshake and a
+	one-message echo exchange
+
 - `hello_world`  
 	the unavoidable "hello world" programming example
 
