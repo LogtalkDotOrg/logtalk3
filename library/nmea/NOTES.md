@@ -1,10 +1,56 @@
-# nmea
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>
+SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+SPDX-License-Identifier: Apache-2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+`nmea`
+======
 
 The `nmea` library parses NMEA 0183 sentences from GPS/GNSS receivers into
 canonical raw terms and provides typed semantic decoding for a selected set of
 common sentence types.
 
-## Public API
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#nmea](../../apis/library_index.html#nmea)
+link in a web browser.
+
+
+Loading
+-------
+
+To load this library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(nmea(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(nmea(tester)).
+
+
+Public API
+----------
 
 - `parse/2` parses sentences from `atom(Atom)`, `chars(List)`, `codes(List)`,
   `stream(Stream)`, or `file(Path)` sources.
@@ -20,7 +66,9 @@ common sentence types.
   the raw parsed term.
 - `data/2` maps supported sentence types into typed semantic terms.
 
-## Raw Sentence Representation
+
+Raw Sentence Representation
+---------------------------
 
 Parsed sentences are represented as:
 
@@ -37,7 +85,9 @@ Where:
 - `Computed` is the normalized uppercase hexadecimal checksum atom computed from
   the sentence payload
 
-## Typed `data/2` Results
+
+Typed `data/2` Results
+----------------------
 
 The library currently provides semantic decoding for these sentence types:
 
@@ -57,14 +107,18 @@ Shared semantic subterms include:
 - `satellite(PRN, ElevationDegrees, AzimuthDegrees, SnrDbHz)`
 - `missing`
 
-## Date Rule
+
+Date Rule
+---------
 
 Two-digit `RMC` years are expanded using a fixed GPS-era rule:
 
 - `80..99` map to `1980..1999`
 - `00..79` map to `2000..2079`
 
-## Current Scope
+
+Current Scope
+-------------
 
 Implemented in this first version:
 

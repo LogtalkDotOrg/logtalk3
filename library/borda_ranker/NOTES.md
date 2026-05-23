@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `borda_ranker`
-========
+==============
 
 Borda grouped-ranking ranker. Ranks each item by summing, across groups,
 the number of same-group items with strictly lower relevance.

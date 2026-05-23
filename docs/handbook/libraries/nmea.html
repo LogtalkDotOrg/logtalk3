@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raw Sentence Representation &mdash; Logtalk 3.101.0</title>
+  <title>nmea &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -215,10 +215,17 @@
 <li class="toctree-l2"><a class="reference internal" href="naive_bayes_classifier.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes_classifier</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nearest_centroid_classifier.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid_classifier</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Raw Sentence Representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#typed-data-2-results">Typed <code class="docutils literal notranslate"><span class="pre">data/2</span></code> Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#date-rule">Date Rule</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#current-scope">Current Scope</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">nmea</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#public-api">Public API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raw-sentence-representation">Raw Sentence Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#typed-data-2-results">Typed <code class="docutils literal notranslate"><span class="pre">data/2</span></code> Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#date-rule">Date Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-scope">Current Scope</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="nmf_projection.html"><code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="optics_clusterer.html"><code class="docutils literal notranslate"><span class="pre">optics_clusterer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
@@ -317,7 +324,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active">Raw Sentence Representation</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">nmea</span></code></li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/nmea.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -327,12 +334,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p id="library-nmea">the raw parsed term.</p>
+  <section id="nmea">
+<span id="library-nmea"></span><h1><code class="docutils literal notranslate"><span class="pre">nmea</span></code><a class="headerlink" href="#nmea" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">nmea</span></code> library parses NMEA 0183 sentences from GPS/GNSS receivers
+into canonical raw terms and provides typed semantic decoding for a
+selected set of common sentence types.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#nmea">../../apis/library_index.html#nmea</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(nmea(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(nmea(tester)).
+</pre></div>
+</div>
+</section>
+<section id="public-api">
+<h2>Public API<a class="headerlink" href="#public-api" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">parse/2</span></code> parses sentences from <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, or <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code> sources.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parse/3</span></code> accepts parser options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">checksum(required)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checksum(optional)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checksum(ignore)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unknown_type(keep)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unknown_type(error)</span></code></p></li>
+</ul>
+</li>
+<li><p>malformed sentence identifiers and malformed supported coordinate/date
+fields are rejected as invalid NMEA sentences during parsing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">talker/2</span></code>, <code class="docutils literal notranslate"><span class="pre">sentence_type/2</span></code>, <code class="docutils literal notranslate"><span class="pre">fields/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">checksum/2</span></code>
+access parts of the raw parsed term.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">data/2</span></code> maps supported sentence types into typed semantic terms.</p></li>
 </ul>
+</section>
 <section id="raw-sentence-representation">
-<h1>Raw Sentence Representation<a class="headerlink" href="#raw-sentence-representation" title="Link to this heading"></a></h1>
+<h2>Raw Sentence Representation<a class="headerlink" href="#raw-sentence-representation" title="Link to this heading"></a></h2>
 <p>Parsed sentences are represented as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>nmea_sentence(<span class="nv">Talker</span>, <span class="nv">Type</span>, <span class="nv">Fields</span>, checksum(<span class="nv">Provided</span>, <span class="nv">Computed</span>))
 </pre></div>
@@ -352,7 +401,7 @@ computed from the sentence payload</p></li>
 </ul>
 </section>
 <section id="typed-data-2-results">
-<h1>Typed <code class="docutils literal notranslate"><span class="pre">data/2</span></code> Results<a class="headerlink" href="#typed-data-2-results" title="Link to this heading"></a></h1>
+<h2>Typed <code class="docutils literal notranslate"><span class="pre">data/2</span></code> Results<a class="headerlink" href="#typed-data-2-results" title="Link to this heading"></a></h2>
 <p>The library currently provides semantic decoding for these sentence
 types:</p>
 <ul class="simple">
@@ -374,7 +423,7 @@ types:</p>
 </ul>
 </section>
 <section id="date-rule">
-<h1>Date Rule<a class="headerlink" href="#date-rule" title="Link to this heading"></a></h1>
+<h2>Date Rule<a class="headerlink" href="#date-rule" title="Link to this heading"></a></h2>
 <p>Two-digit <code class="docutils literal notranslate"><span class="pre">RMC</span></code> years are expanded using a fixed GPS-era rule:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">80..99</span></code> map to <code class="docutils literal notranslate"><span class="pre">1980..1999</span></code></p></li>
@@ -382,7 +431,7 @@ types:</p>
 </ul>
 </section>
 <section id="current-scope">
-<h1>Current Scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h1>
+<h2>Current Scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
 <p>Implemented in this first version:</p>
 <ul class="simple">
 <li><p>raw parsing from text sources</p></li>
@@ -400,6 +449,7 @@ types:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">GSV</span></code> multi-fragment aggregation</p></li>
 <li><p>typed proprietary sentence decoding</p></li>
 </ul>
+</section>
 </section>
 
 

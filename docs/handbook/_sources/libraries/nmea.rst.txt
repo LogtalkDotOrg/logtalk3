@@ -1,7 +1,54 @@
 .. _library_nmea:
 
-the raw parsed term.
+``nmea``
+========
 
+The ``nmea`` library parses NMEA 0183 sentences from GPS/GNSS receivers
+into canonical raw terms and provides typed semantic decoding for a
+selected set of common sentence types.
+
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#nmea <../../apis/library_index.html#nmea>`__
+link in a web browser.
+
+Loading
+-------
+
+To load this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(nmea(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(nmea(tester)).
+
+Public API
+----------
+
+- ``parse/2`` parses sentences from ``atom(Atom)``, ``chars(List)``,
+  ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` sources.
+- ``parse/3`` accepts parser options:
+
+  - ``checksum(required)``
+  - ``checksum(optional)``
+  - ``checksum(ignore)``
+  - ``unknown_type(keep)``
+  - ``unknown_type(error)``
+
+- malformed sentence identifiers and malformed supported coordinate/date
+  fields are rejected as invalid NMEA sentences during parsing
+- ``talker/2``, ``sentence_type/2``, ``fields/2``, and ``checksum/2``
+  access parts of the raw parsed term.
 - ``data/2`` maps supported sentence types into typed semantic terms.
 
 Raw Sentence Representation
