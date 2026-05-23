@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`http_client`
+=============
 
 The `http_client` library provides a request-oriented client layer on top of the
 `http`, `url`, and `http_socket` libraries. It is the request-oriented

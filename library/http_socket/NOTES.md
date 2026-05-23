@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`http_socket`
+=============
 
 The `http_socket` library is the first transport-aware layer on top of the
 `http_client_core`, `http_server`, and `sockets` libraries. It uses TCP sockets

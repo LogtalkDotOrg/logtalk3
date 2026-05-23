@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-About
------
+`http_router`
+=============
 
 The `http_router` library provides the first declarative routing layer on top of
 the `http` core library. It is implemented as a category so that router objects

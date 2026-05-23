@@ -1,7 +1,7 @@
 .. _library_http_router:
 
-About
------
+``http_router``
+===============
 
 The ``http_router`` library provides the first declarative routing layer
 on top of the ``http`` core library. It is implemented as a category so
