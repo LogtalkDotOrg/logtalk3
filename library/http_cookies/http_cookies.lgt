@@ -54,7 +54,7 @@
 	:- public(generate_cookie/2).
 	:- mode(generate_cookie(++list(compound), -text), zero_or_one).
 	:- info(generate_cookie/2, [
-		comment is 'Generates a canonical ``Cookie`` header field value from a list of ``Name-Value`` pairs using ``; `` as the separator.',
+		comment is 'Generates a canonical ``Cookie`` header field value from a list of ``Name-Value`` pairs using ``;`` as the separator.',
 		argnames is ['Pairs', 'Cookie']
 	]).
 

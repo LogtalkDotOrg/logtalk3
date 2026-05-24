@@ -14,12 +14,16 @@ live in the ``http_client_core`` object. That object remains the
 transport-neutral stream-processing layer used internally by
 ``http_socket``.
 
+This library can be used with backend Prolog systems that supports the
+``sockets`` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, and XVM.
+
 API documentation
 -----------------
 
-Open the `../../docs/index.html <../../docs/index.html>`__ file in a web
-browser and choose the libraries index and then the ``http_client``
-library.
+Open the
+`../../apis/library_index.html#http_client <../../apis/library_index.html#http_client>`__
+link in a web browser.
 
 Loading
 -------

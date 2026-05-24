@@ -19,15 +19,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(dates(loader)),
-	logtalk_load(http_client(loader)),
-	logtalk_load(http_cookies(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load([http_cookie_jar, http_session], [debug(on), source_data(on)]),
-	logtalk_load(test_objects),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(	Dialect == eclipse; Dialect == gnu;
+		Dialect == sicstus; Dialect == swi;
+		Dialect == trealla,
+		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+		v(Major, Minor, Patch) @>= v(2, 90, 3);
+		Dialect == xvm
+	)
 )).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(dates(loader)),
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_cookies(loader)),
+		logtalk_load(options(loader)),
+		logtalk_load([http_cookie_jar, http_session], [debug(on), source_data(on)]),
+		logtalk_load(test_objects),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.

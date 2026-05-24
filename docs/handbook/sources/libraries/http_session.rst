@@ -17,12 +17,16 @@ The design keeps the current ``http_client`` API stateless. Automatic
 cookie persistence is scoped to explicit session handles instead of
 using hidden process-global state.
 
+This library can be used with backend Prolog systems that supports the
+``sockets`` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, and XVM.
+
 API documentation
 -----------------
 
-Open the `../../docs/index.html <../../docs/index.html>`__ file in a web
-browser and choose the libraries index and then the ``http_session``
-library.
+Open the
+`../../apis/library_index.html#http_session <../../apis/library_index.html#http_session>`__
+link in a web browser.
 
 Loading
 -------

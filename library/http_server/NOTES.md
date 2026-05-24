@@ -31,8 +31,8 @@ protocol, and write exactly one response.
 API documentation
 -----------------
 
-Open the [../../docs/index.html](../../docs/index.html) file in a web browser and
-choose the libraries index and then the `http_server` library.
+Open the [../../apis/library_index.html#http_server](../../apis/library_index.html#http_server)
+link in a web browser.
 
 
 Loading

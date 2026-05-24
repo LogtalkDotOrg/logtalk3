@@ -12,9 +12,9 @@ logic.
 API documentation
 -----------------
 
-Open the `../../docs/index.html <../../docs/index.html>`__ file in a web
-browser and choose the libraries index and then the ``http_router``
-library.
+Open the
+`../../apis/library_index.html#http_router <../../apis/library_index.html#http_router>`__
+link in a web browser.
 
 Loading
 -------

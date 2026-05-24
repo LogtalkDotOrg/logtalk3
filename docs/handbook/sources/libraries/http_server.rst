@@ -13,9 +13,9 @@ one response.
 API documentation
 -----------------
 
-Open the `../../docs/index.html <../../docs/index.html>`__ file in a web
-browser and choose the libraries index and then the ``http_server``
-library.
+Open the
+`../../apis/library_index.html#http_server <../../apis/library_index.html#http_server>`__
+link in a web browser.
 
 Loading
 -------

@@ -30,8 +30,8 @@ terms plus binary frame parsing and generation.
 API documentation
 -----------------
 
-Open the [../../docs/index.html](../../docs/index.html) file in a web browser
-and choose the libraries index and then the `http_websocket` library.
+Open the [../../apis/library_index.html#http_websocket](../../apis/library_index.html#http_websocket)
+link in a web browser.
 
 
 Loading

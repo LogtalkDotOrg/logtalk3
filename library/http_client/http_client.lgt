@@ -4,6 +4,21 @@
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 :- object(http_client,
 	imports([options, http_message_helpers, http_text_helpers])).
 
@@ -14,10 +29,10 @@
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
-			'Request construction' - 'The request/4 and request/5 predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.',
-			'WebSocket opening handshake' - 'The open_websocket/4 predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.',
-			'Multipart form-data' - 'The body option and the post/4-5, put/4-5, and patch/4-5 predicates accept a ``form_data(Items)`` descriptor that is translated using the http_multipart library and annotated with a multipart boundary property before request construction.',
-			'Reusable transports' - 'The request/5 and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.',
+			'Request construction' - 'The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.',
+			'WebSocket opening handshake' - 'The ``open_websocket/4`` predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.',
+			'Multipart form-data' - 'The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a ``form_data(Items)`` descriptor that is translated using the ``http_multipart`` library and annotated with a multipart boundary property before request construction.',
+			'Reusable transports' - 'The ``request/5`` and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.',
 			'Low-level core' - 'The stream-based primitives are available from the ``http_client_core`` object.'
 		]
 	]).

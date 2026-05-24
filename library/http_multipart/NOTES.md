@@ -31,8 +31,8 @@ parsing and generation to the existing `http` predicates.
 API documentation
 -----------------
 
-Open the [../../docs/index.html](../../docs/index.html) file in a web browser
-and choose the libraries index and then the `http_multipart` library.
+Open the [../../apis/library_index.html#http_multipart](../../apis/library_index.html#http_multipart)
+link in a web browser.
 
 
 Loading

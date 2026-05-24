@@ -9,12 +9,16 @@ uses TCP sockets for connection management while delegating HTTP message
 framing and connection semantics to the existing stream core and server
 layers.
 
+This library can be used with backend Prolog systems that supports the
+``sockets`` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, and XVM.
+
 API documentation
 -----------------
 
-Open the `../../docs/index.html <../../docs/index.html>`__ file in a web
-browser and choose the libraries index and then the ``http_socket``
-library.
+Open the
+`../../apis/library_index.html#http_socket <../../apis/library_index.html#http_socket>`__
+link in a web browser.
 
 Loading
 -------

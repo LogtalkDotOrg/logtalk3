@@ -12,9 +12,9 @@ pong, and close messages.
 API documentation
 -----------------
 
-Open the `../../docs/index.html <../../docs/index.html>`__ file in a web
-browser and choose the libraries index and then the
-``http_websocket_messages`` library.
+Open the
+`../../apis/library_index.html#http_websocket_messages <../../apis/library_index.html#http_websocket_messages>`__
+link in a web browser.
 
 Loading
 -------
