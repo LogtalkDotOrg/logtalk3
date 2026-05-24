@@ -19,14 +19,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load('../http/loader.lgt'),
-	logtalk_load('../http_multipart/loader.lgt'),
-	logtalk_load('../http_socket/loader.lgt'),
-	logtalk_load(uuid(loader)),
-	logtalk_load([http_client_core, http_client], [debug(on), source_data(on)]),
-	logtalk_load(test_objects),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(	Dialect == eclipse; Dialect == gnu;
+		Dialect == sicstus; Dialect == swi;
+		Dialect == trealla,
+		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+		v(Major, Minor, Patch) @>= v(2, 90, 3);
+		Dialect == xvm
+	)
 )).
+
+	:- initialization((
+		logtalk_load('../http/loader.lgt'),
+		logtalk_load('../http_multipart/loader.lgt'),
+		logtalk_load('../http_socket/loader.lgt'),
+		logtalk_load(uuid(loader)),
+		logtalk_load([http_client_core, http_client], [debug(on), source_data(on)]),
+		logtalk_load(test_objects),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.

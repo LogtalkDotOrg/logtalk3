@@ -272,7 +272,7 @@
     test(normalize_2_19, deterministic(NormalizedURL == "#fragment%20with%20spaces%5B2%5D")) :-
         url::normalize("#fragment with spaces[2]", NormalizedURL).
 
-    test(normalize_2_20, deterministic(NormalizedURL == "/")) :-
+    test(normalize_2_20, deterministic(NormalizedURL == ("/"))) :-
         url::normalize("/", NormalizedURL).
 
     test(normalize_2_21, deterministic(NormalizedURL == "tel:+1%20816.555.1212")) :-

@@ -160,7 +160,7 @@
 		content_type-media_type('application/json', [charset-'utf-8']),
 		content_length-17,
 		cookie-[session-'abc'],
-		set_cookie-set_cookie('SID', '31d4d96e407aad42', [path-'/', secure-true]),
+		set_cookie-set_cookie('SID', '31d4d96e407aad42', [path-('/'), secure-true]),
 		host-host('example.com', 8080)
 	])) :-
 		parse_headers(
@@ -188,7 +188,7 @@
 				content_type-media_type('application/json', [charset-'utf-8']),
 				content_length-17,
 				cookie-[session-'abc'],
-				set_cookie-set_cookie('SID', '31d4d96e407aad42', [path-'/', secure-true]),
+				set_cookie-set_cookie('SID', '31d4d96e407aad42', [path-('/'), secure-true]),
 				host-host('example.com', 8080)
 			]
 		).
@@ -333,11 +333,11 @@
 		),
 		status(Response, status(201, 'Created')),
 		body(Response, content('text/plain', text(created))),
-		property(Response, set_cookies([set_cookie('SID', 'abc', [path-'/', http_only-true])])),
+		property(Response, set_cookies([set_cookie('SID', 'abc', [path-('/'), http_only-true])])),
 		property(Response, decoded_body(true)).
 
 	test(http_generate_response_2_01, deterministic(Message == 'HTTP/1.1 201 Created\r\ncontent-length: 7\r\ncontent-type: text/plain\r\nset-cookie: SID=abc; Path=/; HttpOnly\r\n\r\ncreated')) :-
-		Response = response(http(1, 1), status(201, 'Created'), [], content('text/plain', text(created)), [set_cookies([set_cookie('SID', 'abc', [path-'/', http_only-true])])]),
+		Response = response(http(1, 1), status(201, 'Created'), [], content('text/plain', text(created)), [set_cookies([set_cookie('SID', 'abc', [path-('/'), http_only-true])])]),
 		generate_response(atom(Message), Response).
 
 	test(http_generate_response_2_02, deterministic(Message == 'HTTP/1.1 200 OK\r\ncontent-type: text/plain\r\ntransfer-encoding: chunked\r\n\r\n5\r\nhello\r\n0\r\netag: abc\r\n\r\n')) :-

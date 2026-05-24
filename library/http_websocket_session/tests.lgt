@@ -238,22 +238,18 @@
 		http_websocket::payload(ReplyFrame, [0'!]),
 		\+ http_websocket::property(ReplyFrame, masking_key(_)).
 
-	test(http_websocket_session_registry_broadcast_except_3_01, deterministic) :-
+	test(http_websocket_session_registry_broadcast_except_3_01, deterministic, [cleanup(catch(http_websocket_session_registry::close(Registry), _, true))]) :-
 		http_websocket_session_registry::open(Registry),
-		call_cleanup(
-			( 	http_websocket_session_registry::register(Registry, Session1),
-				http_websocket_session_registry::register(Registry, Session2),
-				http_websocket_session_registry::send(Registry, Session1, message(text, direct)),
-				http_websocket_session_registry::broadcast_except(Registry, Session1, message(text, broadcast)),
-				http_websocket_session_registry::take_pending(Registry, Session1, Messages1),
-				http_websocket_session_registry::take_pending(Registry, Session2, Messages2),
-				http_websocket_session_registry::session_count(Registry, Count),
-				Messages1 == [message(text, direct)],
-				Messages2 == [message(text, broadcast)],
-				Count == 2
-			),
-			catch(http_websocket_session_registry::close(Registry), _, true)
-		).
+		http_websocket_session_registry::register(Registry, Session1),
+		http_websocket_session_registry::register(Registry, Session2),
+		http_websocket_session_registry::send(Registry, Session1, message(text, direct)),
+		http_websocket_session_registry::broadcast_except(Registry, Session1, message(text, broadcast)),
+		http_websocket_session_registry::take_pending(Registry, Session1, Messages1),
+		http_websocket_session_registry::take_pending(Registry, Session2, Messages2),
+		http_websocket_session_registry::session_count(Registry, Count),
+		Messages1 == [message(text, direct)],
+		Messages2 == [message(text, broadcast)],
+		Count == 2.
 
 	:- if(current_logtalk_flag(threads, supported)).
 

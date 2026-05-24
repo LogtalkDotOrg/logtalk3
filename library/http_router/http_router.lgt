@@ -801,8 +801,8 @@
 	normalize_produced_media_type(ProducedMediaType0, ProducedMediaType) :-
 		atom(ProducedMediaType0),
 		media_type_atom_parts(ProducedMediaType0, Type, Subtype),
-		Type \== '*',
-		Subtype \== '*',
+		Type \== ('*'),
+		Subtype \== ('*'),
 		!,
 		atom_codes(Type, TypeCodes),
 		atom_codes(Subtype, SubtypeCodes),
@@ -929,11 +929,11 @@
 	accept_range_specificity('*', '*', 0) :-
 		!.
 	accept_range_specificity(Type, '*', 1) :-
-		Type \== '*',
+		Type \== ('*'),
 		!.
 	accept_range_specificity(Type, Subtype, 2) :-
-		Type \== '*',
-		Subtype \== '*'.
+		Type \== ('*'),
+		Subtype \== ('*').
 
 	annotate_response_media_type(MediaType, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
 		remove_property_functor(Properties0, response_media_type, Properties1),

@@ -19,16 +19,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(sockets(loader)),
-	logtalk_load('../http_client/core_loader.lgt'),
-	logtalk_load('../http_server/loader.lgt'),
-	logtalk_load('../http_websocket/loader.lgt'),
-	logtalk_load('../http_websocket_messages/loader.lgt'),
-	logtalk_load('../http_websocket_session/loader.lgt'),
-	logtalk_load(http_socket, [debug(on), source_data(on)]),
-	logtalk_load(test_objects),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(	Dialect == eclipse; Dialect == gnu;
+		Dialect == sicstus; Dialect == swi;
+		Dialect == trealla,
+		current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+		v(Major, Minor, Patch) @>= v(2, 90, 3);
+		Dialect == xvm
+	)
 )).
+
+	:- initialization((
+		logtalk_load(sockets(loader)),
+		logtalk_load('../http_client/core_loader.lgt'),
+		logtalk_load('../http_server/loader.lgt'),
+		logtalk_load('../http_websocket/loader.lgt'),
+		logtalk_load('../http_websocket_messages/loader.lgt'),
+		logtalk_load('../http_websocket_session/loader.lgt'),
+		logtalk_load(http_socket, [debug(on), source_data(on)]),
+		logtalk_load(test_objects),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.
