@@ -119,6 +119,7 @@ directory in the ``NOTES.md`` file.
    http
    http_client
    http_cookies
+   http_cors
    http_multipart
    http_router
    http_server

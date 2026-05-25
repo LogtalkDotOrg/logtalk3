@@ -124,6 +124,7 @@ logtalk_library_path(html, library('html/')).
 logtalk_library_path(http, library('http/')).
 logtalk_library_path(http_client, library('http_client/')).
 logtalk_library_path(http_cookies, library('http_cookies/')).
+logtalk_library_path(http_cors, library('http_cors/')).
 logtalk_library_path(http_multipart, library('http_multipart/')).
 logtalk_library_path(http_router, library('http_router/')).
 logtalk_library_path(http_server, library('http_server/')).

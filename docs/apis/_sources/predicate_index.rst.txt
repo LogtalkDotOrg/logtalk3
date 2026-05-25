@@ -372,6 +372,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::add_matrices/3>`
 
+``add_response_headers/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cors <http_cors/0::add_response_headers/4>`
+
 ``add_rule/3``
 --------------
 
@@ -10535,6 +10545,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`characterp <characterp/0::is_control/1>`
 
+``is_cors_request/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cors <http_cors/0::is_cors_request/1>`
+
 ``is_dec_digit/1``
 ------------------
 
@@ -10744,6 +10764,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::is_prefix_of/2>`
+
+``is_preflight_request/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cors <http_cors/0::is_preflight_request/1>`
 
 ``is_present/0``
 ----------------
@@ -13474,6 +13504,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`heap_protocol <heap_protocol/0::merge/3>`
+
+``merged_options/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_session_loop_options <http_websocket_session_loop_options/0::merged_options/2>`
+* :ref:`http_websocket_session_read_options <http_websocket_session_read_options/0::merged_options/2>`
+* :ref:`http_websocket_session_write_options <http_websocket_session_write_options/0::merged_options/2>`
 
 ``message/3``
 -------------
@@ -17458,6 +17500,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::prefix_data/2>`
 
+``preflight_response/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cors <http_cors/0::preflight_response/3>`
+
 ``preorder/2``
 --------------
 
@@ -18672,6 +18724,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_websocket <http_websocket/0::read_frame/2>`
 
+``read_frame/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::read_frame/3>`
+
 ``read_framed_message/2``
 -------------------------
 
@@ -19680,6 +19742,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_cookie_jar <http_cookie_jar/0::request_cookies/3>`
+
+``request_origin/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cors <http_cors/0::request_origin/2>`
 
 ``request_shutdown/1``
 ----------------------

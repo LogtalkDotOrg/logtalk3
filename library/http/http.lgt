@@ -2001,16 +2001,34 @@
 	valid_header_name(Name) :-
 		atom(Name),
 		atom_codes(Name, [Code| Codes]),
-		lowercase_alpha(Code),
+		normalized_header_name_code(Code),
 		valid_header_name_codes(Codes).
 
 	valid_header_name_codes([]).
 	valid_header_name_codes([Code| Codes]) :-
-		( 	lowercase_alpha(Code)
-		; 	digit_code(Code)
-		; 	Code =:= 0'_
-		),
+		normalized_header_name_code(Code),
 		valid_header_name_codes(Codes).
+
+	normalized_header_name_code(Code) :-
+		lowercase_alpha(Code),
+		!.
+	normalized_header_name_code(Code) :-
+		digit_code(Code),
+		!.
+	normalized_header_name_code(0'_).
+	normalized_header_name_code(0'!).
+	normalized_header_name_code(0'#).
+	normalized_header_name_code(0'$).
+	normalized_header_name_code(0'%).
+	normalized_header_name_code(0'&).
+	normalized_header_name_code(39).
+	normalized_header_name_code(0'*).
+	normalized_header_name_code(0'+).
+	normalized_header_name_code(0'.).
+	normalized_header_name_code(0'^).
+	normalized_header_name_code(96).
+	normalized_header_name_code(0'|).
+	normalized_header_name_code(0'~).
 
 	validate_header_value(content_length, Value) :-
 		!,
@@ -2854,13 +2872,10 @@
 		token_code(Code).
 
 	header_name_code(Code) :-
-		lowercase_alpha(Code).
+		normalized_header_name_code(Code).
 	header_name_code(Code) :-
 		uppercase_alpha(Code).
-	header_name_code(Code) :-
-		digit_code(Code).
 	header_name_code(0'-).
-	header_name_code(0'_).
 
 	token_code(Code) :-
 		lowercase_alpha(Code).

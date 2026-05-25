@@ -165,6 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http"><span class="xref std std-ref">http</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
@@ -389,6 +390,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Imports:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+</div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
@@ -404,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -416,17 +421,18 @@
 <li><p><a class="reference internal" href="#parse-2" id="id4"><code class="docutils literal notranslate"><span class="pre">parse/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#generate-2" id="id5"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#read-frame-2" id="id6"><code class="docutils literal notranslate"><span class="pre">read_frame/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#write-frame-2" id="id7"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#final-2" id="id8"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#opcode-2" id="id9"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#payload-2" id="id10"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#properties-2" id="id11"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#property-2" id="id12"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#read-frame-3" id="id7"><code class="docutils literal notranslate"><span class="pre">read_frame/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#write-frame-2" id="id8"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#final-2" id="id9"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#opcode-2" id="id10"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#payload-2" id="id11"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#properties-2" id="id12"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#property-2" id="id13"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id15">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id16">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -547,8 +553,38 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="read-frame-3">
+<span id="http-websocket-0-read-frame-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">read_frame/3</span></code></a><a class="headerlink" href="#read-frame-3" title="Link to this heading"></a></h3>
+<p>Reads one WebSocket frame from a binary stream using the given read options. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> when the stream is already exhausted.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_frame(Stream,Frame,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_frame(+stream_or_alias,-term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Repeated options: When the same read option is given multiple times, the first occurrence is used.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Use a non-negative integer.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+</section>
 <section id="write-frame-2">
-<span id="http-websocket-0-write-frame-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a><a class="headerlink" href="#write-frame-2" title="Link to this heading"></a></h3>
+<span id="http-websocket-0-write-frame-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a><a class="headerlink" href="#write-frame-2" title="Link to this heading"></a></h3>
 <p>Writes one validated WebSocket frame to a binary stream and flushes the stream.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -569,7 +605,7 @@
 <hr class="docutils" />
 </section>
 <section id="final-2">
-<span id="http-websocket-0-final-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a><a class="headerlink" href="#final-2" title="Link to this heading"></a></h3>
+<span id="http-websocket-0-final-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a><a class="headerlink" href="#final-2" title="Link to this heading"></a></h3>
 <p>Returns the fragmentation state atom of a validated WebSocket frame term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -590,7 +626,7 @@
 <hr class="docutils" />
 </section>
 <section id="opcode-2">
-<span id="http-websocket-0-opcode-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a><a class="headerlink" href="#opcode-2" title="Link to this heading"></a></h3>
+<span id="http-websocket-0-opcode-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a><a class="headerlink" href="#opcode-2" title="Link to this heading"></a></h3>
 <p>Returns the opcode atom of a validated WebSocket frame term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -611,7 +647,7 @@
 <hr class="docutils" />
 </section>
 <section id="payload-2">
-<span id="http-websocket-0-payload-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a><a class="headerlink" href="#payload-2" title="Link to this heading"></a></h3>
+<span id="http-websocket-0-payload-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a><a class="headerlink" href="#payload-2" title="Link to this heading"></a></h3>
 <p>Returns the payload byte list of a validated WebSocket frame term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -632,7 +668,7 @@
 <hr class="docutils" />
 </section>
 <section id="properties-2">
-<span id="http-websocket-0-properties-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a><a class="headerlink" href="#properties-2" title="Link to this heading"></a></h3>
+<span id="http-websocket-0-properties-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a><a class="headerlink" href="#properties-2" title="Link to this heading"></a></h3>
 <p>Returns the normalized property list of a validated WebSocket frame term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -653,7 +689,7 @@
 <hr class="docutils" />
 </section>
 <section id="property-2">
-<span id="http-websocket-0-property-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
+<span id="http-websocket-0-property-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
 <p>True when the validated WebSocket frame term contains the given property. When the property argument is a variable, properties can be enumerated on backtracking.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -156,6 +156,10 @@ Validates a normalized WebSocket opening-handshake request and builds a matching
 | **Mode and number of proofs:**
 |    ``accept_websocket(+compound,--compound,+list)`` - ``one_or_error``
 
+| **Remarks:**
+
+    - Repeated options: When the same WebSocket acceptance option is given multiple times, the first occurrence is used.
+
 
 ------------
 

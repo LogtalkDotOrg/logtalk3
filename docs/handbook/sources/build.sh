@@ -170,6 +170,7 @@ sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/h
 sed '1,19d' ../../../library/http/NOTES.md | pandoc -f gfm -t rst -o libraries/http.rst
 sed '1,19d' ../../../library/http_client/NOTES.md | pandoc -f gfm -t rst -o libraries/http_client.rst
 sed '1,19d' ../../../library/http_cookies/NOTES.md | pandoc -f gfm -t rst -o libraries/http_cookies.rst
+sed '1,19d' ../../../library/http_cors/NOTES.md | pandoc -f gfm -t rst -o libraries/http_cors.rst
 sed '1,19d' ../../../library/http_multipart/NOTES.md | pandoc -f gfm -t rst -o libraries/http_multipart.rst
 sed '1,19d' ../../../library/http_router/NOTES.md | pandoc -f gfm -t rst -o libraries/http_router.rst
 sed '1,19d' ../../../library/http_server/NOTES.md | pandoc -f gfm -t rst -o libraries/http_server.rst

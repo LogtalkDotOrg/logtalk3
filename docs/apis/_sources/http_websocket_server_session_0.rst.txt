@@ -81,6 +81,7 @@ Accepts one incoming socket connection on the given listener, serves one WebSock
     - Option ``auto_pong(off)``: Disables automatic pong replies. This is the default.
     - Option ``keepalive_interval(Seconds)``: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.
     - Option ``idle_timeout(Seconds)``: Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.
+    - Option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.
 
 
 ------------
@@ -130,6 +131,7 @@ Accepts WebSocket opening handshakes on the given listener until request_shutdow
     - Option ``auto_pong(on|off)``: Controls automatic pong replies in each active session loop.
     - Option ``keepalive_interval(Seconds)``: Schedules empty ping messages when a peer stays silent for the given positive number of seconds.
     - Option ``idle_timeout(Seconds)``: Closes a session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message.
+    - Option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in each session loop. Use a non-negative integer.
 
 
 ------------

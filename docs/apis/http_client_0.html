@@ -169,6 +169,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
@@ -415,6 +416,7 @@
 <div><ul class="simple">
 <li><p>URL support: This initial facade currently supports only absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs. <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs are rejected until TLS support is added to the transport layer.</p></li>
 <li><p>Request construction: The <code class="docutils literal notranslate"><span class="pre">request/4-5</span></code> predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.</p></li>
+<li><p>Option precedence: When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.</p></li>
 <li><p>WebSocket opening handshake: The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate validates an absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the <code class="docutils literal notranslate"><span class="pre">101</span></code> response, and returns the upgraded connection handle together with the response. <code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
 <li><p>Multipart form-data: The body option and the <code class="docutils literal notranslate"><span class="pre">post/4-5</span></code>, <code class="docutils literal notranslate"><span class="pre">put/4-5</span></code>, and <code class="docutils literal notranslate"><span class="pre">patch/4-5</span></code> predicates accept a <code class="docutils literal notranslate"><span class="pre">form_data(Items)</span></code> descriptor that is translated using the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> library and annotated with a multipart boundary property before request construction.</p></li>
 <li><p>Reusable transports: The <code class="docutils literal notranslate"><span class="pre">request/5</span></code> and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.</p></li>

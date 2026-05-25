@@ -38,7 +38,7 @@ Declarative HTTP router category for objects implementing the http_handler_proto
    - Route declarations: Importing objects must define ``route/4`` clauses using the descriptor shape ``route(Id, Method, PathTemplate, Handler)``.
    - Path templates: Path-template atoms support literal segments, anonymous ``*`` wildcard segments, plain ``{name}`` placeholders, and typed placeholders such as ``{id:integer}`` and ``{score:number}``.
    - HEAD fallback: A ``HEAD`` request matches an exact ``head`` route first and otherwise falls back to a matching ``get`` route.
-   - OPTIONS handling: An ``OPTIONS`` request matches an explicit ``options`` route first and otherwise returns an automatic ``200 OK`` response with an ``Allow`` header listing the methods supported by the matched path.
+   - OPTIONS handling: An ``OPTIONS`` request matches an explicit ``options`` route first and otherwise returns an automatic response. Synthetic ``OPTIONS`` requests are annotated with ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, the router also annotates ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters, can be customized using ``route_automatic_options_response/3``, and still flows through response middleware.
    - Custom error responses: Importing objects can optionally define ``route_not_found_response/2`` and ``route_method_not_allowed_response/3`` predicates to customize ``404`` and ``405`` responses.
    - Custom negotiation failures: Importing objects can optionally define ``route_not_acceptable_response/3`` to customize ``406 Not Acceptable`` responses for route-level content negotiation failures.
    - Request annotations: Matched requests are annotated with the explicit properties ``route(Id)`` and ``path_params(Pairs)`` plus any additional metadata declared by ``route_metadata/2`` before the route handler is called.
@@ -59,7 +59,7 @@ Public predicates
 ``handle/2``
 ^^^^^^^^^^^^
 
-Routes a normalized HTTP request using the importing object ``route/4`` clauses. Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response, ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling, and ``route_metadata/2`` clauses whose metadata is merged into matched requests before the route handler is called. Importing objects can also optionally define ``route_produces/2`` clauses so the router negotiates the request ``Accept`` header and annotates matched requests with the negotiated ``response_media_type(MediaType)`` property. Matched requests are annotated with route metadata before calling the selected route handler predicate in the importing object. Importing objects can optionally define ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, and ``route_not_acceptable_response/3`` to customize ``404``, ``405``, and ``406`` handling. ``OPTIONS`` requests return an automatic ``200 OK`` response with an ``Allow`` header when no explicit ``options`` route is defined for the matched path. Path matches with unsupported methods return ``405 Method Not Allowed`` responses including an ``Allow`` header derived from the matching path templates. Negotiation failures return ``406 Not Acceptable``.
+Routes a normalized HTTP request using the importing object ``route/4`` clauses.
 
 | **Compilation flags:**
 |    ``static``
@@ -68,6 +68,15 @@ Routes a normalized HTTP request using the importing object ``route/4`` clauses.
 |    ``handle(Request,Response)``
 | **Mode and number of proofs:**
 |    ``handle(+compound,-compound)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Middleware: Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.
+    - Response middleware: Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.
+    - Request annotations: Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied.
+    - Automatic ``OPTIONS``: An explicit ``options`` route matches first. Otherwise the router builds an automatic response from a synthetic request carrying ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, that synthetic request also carries ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic ``OPTIONS`` responses still pass through response middleware and can be customized using ``route_automatic_options_response/3``.
+    - Custom responses: Importing objects can optionally define ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.
+    - Failure behavior: Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.
 
 
 ------------
@@ -451,6 +460,25 @@ Optional hook predicate that customizes ``405 Method Not Allowed`` responses. Wh
 |    ``route_method_not_allowed_response(Request,AllowedMethods,Response)``
 | **Mode and number of proofs:**
 |    ``route_method_not_allowed_response(+compound,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_automatic_options_response/3
+.. _http_router/0::route_automatic_options_response/3:
+
+``route_automatic_options_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes automatic ``OPTIONS`` responses when no explicit ``options`` route matches. When defined by the importing object, it is called with the annotated synthetic request, the effective allowed methods list as lowercase atoms, and must return the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_automatic_options_response(Request,EffectiveMethods,Response)``
+| **Mode and number of proofs:**
+|    ``route_automatic_options_response(+compound,+list(atom),-compound)`` - ``zero_or_one``
 
 
 ------------

@@ -21,6 +21,8 @@ Transport-neutral WebSocket frame predicates for constructing, parsing, generati
 |    ``static, context_switching_calls``
 
 
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`reader <reader/0>`
@@ -29,7 +31,7 @@ Transport-neutral WebSocket frame predicates for constructing, parsing, generati
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -136,6 +138,30 @@ Reads one WebSocket frame from a binary stream without requiring end-of-file. Re
 |    ``read_frame(Stream,Frame)``
 | **Mode and number of proofs:**
 |    ``read_frame(+stream_or_alias,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: read_frame/3
+.. _http_websocket/0::read_frame/3:
+
+``read_frame/3``
+^^^^^^^^^^^^^^^^
+
+Reads one WebSocket frame from a binary stream using the given read options. Returns ``end_of_file`` when the stream is already exhausted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_frame(Stream,Frame,Options)``
+| **Mode and number of proofs:**
+|    ``read_frame(+stream_or_alias,-term,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Repeated options: When the same read option is given multiple times, the first occurrence is used.
+    - Option ``max_payload_length(Bytes)``: Rejects frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Use a non-negative integer.
 
 
 ------------

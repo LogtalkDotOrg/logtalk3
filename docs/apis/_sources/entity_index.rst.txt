@@ -300,6 +300,7 @@ Objects
    http_client_core <http_client_core_0>
    http_cookie_jar <http_cookie_jar_0>
    http_cookies(Representation) <http_cookies_1>
+   http_cors <http_cors_0>
    http_form_body_codec <http_form_body_codec_0>
    http_json_body_codec <http_json_body_codec_0>
    http_multipart <http_multipart_0>
@@ -314,7 +315,10 @@ Objects
    http_websocket_messages(TextRepresentation) <http_websocket_messages_1>
    http_websocket_server_session <http_websocket_server_session_0>
    http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
+   http_websocket_session_loop_options <http_websocket_session_loop_options_0>
+   http_websocket_session_read_options <http_websocket_session_read_options_0>
    http_websocket_session_registry <http_websocket_session_registry_0>
+   http_websocket_session_write_options <http_websocket_session_write_options_0>
    ica_projection <ica_projection_0>
    iddfs_interpreter(Increment) <iddfs_interpreter_1>
    identity_hook <identity_hook_0>

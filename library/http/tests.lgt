@@ -95,6 +95,9 @@
 			_
 		).
 
+	test(http_request_7_06, deterministic(Request == request(get, origin('/users'), http(1, 1), ['foo!bar'-'baz'], empty, []))) :-
+		request(get, origin('/users'), http(1, 1), ['foo!bar'-'baz'], empty, [], Request).
+
 	test(http_response_6_01, deterministic(Response == response(http(1, 1), status(200, 'OK'), [content_type-'application/json'], content('application/json', json({ok- @true})), [decoded_body(true)]))) :-
 		response(http(1, 1), status(200, 'OK'), [content_type-'application/json'], content('application/json', json({ok- @true})), [decoded_body(true)], Response).
 
@@ -181,6 +184,12 @@
 			atom('Upgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Protocol: chat, superchat\r\nSec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\n'),
 			Headers
 		).
+
+	test(http_parse_headers_2_03, deterministic(Headers == ['foo!bar'-'baz'])) :-
+		parse_headers(
+			atom('Foo!Bar: baz\r\n'),
+			Headers
+		).
 	test(http_generate_headers_2_01, deterministic(HeaderBlock == 'content-type: application/json; charset=utf-8\r\ncontent-length: 17\r\ncookie: session=abc\r\nset-cookie: SID=31d4d96e407aad42; Path=/; Secure\r\nhost: example.com:8080\r\n')) :-
 		generate_headers(
 			atom(HeaderBlock),
@@ -204,6 +213,12 @@
 				sec_websocket_protocol-[chat, superchat],
 				sec_websocket_accept-'s3pPLMBiTxaQ9kYGzzhZRbK+xOo='
 			]
+		).
+
+	test(http_generate_headers_2_03, deterministic(HeaderBlock == 'foo!bar: baz\r\n')) :-
+		generate_headers(
+			atom(HeaderBlock),
+			['foo!bar'-'baz']
 		).
 
 	test(http_websocket_accept_2_01, deterministic(Accept == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo=')) :-

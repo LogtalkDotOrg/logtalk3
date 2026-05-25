@@ -299,13 +299,13 @@ Per-registry next session identifier state.
 ``registry_session_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Registered sessions and their queued outbound messages indexed by registry identifier.
+Registered sessions and their queued outbound messages indexed by registry identifier. Messages are stored in reverse order to make enqueue operations constant time.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``registry_session_(RegistryId,SessionId,Messages)``
+|    ``registry_session_(RegistryId,SessionId,QueuedMessagesReversed)``
 | **Mode and number of proofs:**
 |    ``registry_session_(?positive_integer,?positive_integer,?list(compound))`` - ``zero_or_more``
 

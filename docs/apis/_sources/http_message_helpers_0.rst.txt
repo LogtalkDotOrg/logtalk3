@@ -159,6 +159,25 @@ Returns the de-duplicated normalized Connection tokens exposed by a normalized H
 
 ------------
 
+.. index:: message_header_values/3
+.. _http_message_helpers/0::message_header_values/3:
+
+``message_header_values/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the stored header values for the given header name in message order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``message_header_values(Message,Name,Values)``
+| **Mode and number of proofs:**
+|    ``message_header_values(+compound,+atom,-list)`` - ``one``
+
+
+------------
+
 .. index:: chunk_size_line_size/2
 .. _http_message_helpers/0::chunk_size_line_size/2:
 

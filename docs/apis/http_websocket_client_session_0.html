@@ -165,6 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http"><span class="xref std std-ref">http</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
@@ -177,7 +178,10 @@
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_server_session_0.html">http_websocket_server_session</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_2.html">http_websocket_session(Role,TextRepresentation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_handler_protocol_0.html">http_websocket_session_handler_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_loop_options_0.html">http_websocket_session_loop_options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_read_options_0.html">http_websocket_session_read_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_registry_0.html">http_websocket_session_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_write_options_0.html">http_websocket_session_write_options</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ica-projection"><span class="xref std std-ref">ica_projection</span></a></li>
@@ -476,11 +480,13 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p>Repeated options: When the same handshake or session option is given multiple times, the first occurrence is used.</p></li>
 <li><p>Handshake options: The <cite>headers/1</cite>, <cite>query/1</cite>, <cite>version/1</cite>, <cite>protocols/1</cite>, <cite>key/1</cite>, and <cite>connection_options/1</cite> options are forwarded to <cite>http_client::open_websocket/4</cite>.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code>: Controls automatic pong replies during the session loop.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">initial_messages(Messages)</span></code>: Writes the given list of normalized outbound messages before entering the session loop.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">idle_timeout(Seconds)</span></code>: Closes the session with <code class="docutils literal notranslate"><span class="pre">status(1001,</span> <span class="pre">idle_timeout)</span></code> after the given positive number of seconds without an inbound message. This option requires backend thread support.</p></li>
+<li><p>Session option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Oversized frames are treated as <code class="docutils literal notranslate"><span class="pre">1009</span></code> close errors in the session loop. Use a non-negative integer.</p></li>
 </ul>
 </div></blockquote>
 </section>

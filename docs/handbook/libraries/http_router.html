@@ -161,6 +161,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
@@ -496,17 +497,34 @@ matched paths.</p>
 <p><code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> requests match explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> routes first. When no
 explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> route exists for a matched path, the router returns
 an automatic <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> response with the derived <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header and
-an empty body.</p>
+an empty body. The synthetic request used for this path is annotated
+with <code class="docutils literal notranslate"><span class="pre">automatic_options(true)</span></code> and <code class="docutils literal notranslate"><span class="pre">effective_methods(Methods)</span></code>.
+When the router can identify exactly one matching non-<code class="docutils literal notranslate"><span class="pre">options</span></code> route
+template, it also annotates that synthetic request with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>, and that route <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code> properties
+before response middleware runs. When multiple non-<code class="docutils literal notranslate"><span class="pre">options</span></code> routes
+match the same path, the synthetic request omits <code class="docutils literal notranslate"><span class="pre">route/1</span></code>, keeps
+<code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> only when all matches produce the same value, and
+preserves only metadata properties that are identical across all matched
+routes.</p>
 <p>Importing router objects can optionally customize error handling by
 defining:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">route_not_found_response(Request,</span> <span class="pre">Response)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response(Request,</span> <span class="pre">AllowedMethods,</span> <span class="pre">Response)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response(Request,</span> <span class="pre">EffectiveMethods,</span> <span class="pre">Response)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response(Request,</span> <span class="pre">ProducedMediaTypes,</span> <span class="pre">Response)</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">AllowedMethods</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook is the
 effective method list as lowercase atoms and already includes implicit
-<code class="docutils literal notranslate"><span class="pre">head</span></code> support for <code class="docutils literal notranslate"><span class="pre">get</span></code> routes and automatic <code class="docutils literal notranslate"><span class="pre">options</span></code> support.</p>
+<code class="docutils literal notranslate"><span class="pre">head</span></code> support for <code class="docutils literal notranslate"><span class="pre">get</span></code> routes and automatic <code class="docutils literal notranslate"><span class="pre">options</span></code> support.
+The <code class="docutils literal notranslate"><span class="pre">Request</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook and to response middleware is
+annotated with <code class="docutils literal notranslate"><span class="pre">matched_path(true)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">effective_methods(AllowedMethods)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">EffectiveMethods</span></code> argument passed to the automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>
+hook is the same effective method list. The <code class="docutils literal notranslate"><span class="pre">Request</span></code> passed to that
+hook and to response middleware is the annotated synthetic request
+described above.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ProducedMediaTypes</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">406</span></code> hook is the
 normalized list declared by <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> for the matched route.</p>
 </section>
@@ -518,8 +536,8 @@ middleware chaining, response post-processing middleware,
 route-specific metadata annotations, automatic OpenAPI provider
 derivation including best-effort request and successful response
 schema inference, method dispatch, route-level content negotiation,
-customizable <code class="docutils literal notranslate"><span class="pre">404</span></code>/<code class="docutils literal notranslate"><span class="pre">405</span></code>/<code class="docutils literal notranslate"><span class="pre">406</span></code> responses, and automatic
-<code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses.</p></li>
+customizable <code class="docutils literal notranslate"><span class="pre">404</span></code>/<code class="docutils literal notranslate"><span class="pre">405</span></code>/automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>/<code class="docutils literal notranslate"><span class="pre">406</span></code> responses,
+and automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses.</p></li>
 <li><p>Path templates support literal segments, anonymous <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcard
 segments, plain <code class="docutils literal notranslate"><span class="pre">{name}</span></code> placeholders, and typed placeholders such
 as <code class="docutils literal notranslate"><span class="pre">{id:integer}</span></code> and <code class="docutils literal notranslate"><span class="pre">{score:number}</span></code>.</p></li>

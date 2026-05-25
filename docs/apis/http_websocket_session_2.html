@@ -165,6 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http"><span class="xref std std-ref">http</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
@@ -177,7 +178,10 @@
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_server_session_0.html">http_websocket_server_session</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_session(Role,TextRepresentation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_handler_protocol_0.html">http_websocket_session_handler_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_loop_options_0.html">http_websocket_session_loop_options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_read_options_0.html">http_websocket_session_read_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_registry_0.html">http_websocket_session_registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_write_options_0.html">http_websocket_session_write_options</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ica-projection"><span class="xref std std-ref">ica_projection</span></a></li>
@@ -403,20 +407,25 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="backend_random_0.html#backend-random-0"><span class="std std-ref">backend_random</span></a></div>
+<div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
 <div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_0.html#http-websocket-0"><span class="std std-ref">http_websocket</span></a></div>
+<div class="line"><a class="reference internal" href="http_websocket_session_loop_options_0.html#http-websocket-session-loop-options-0"><span class="std std-ref">http_websocket_session_loop_options</span></a></div>
+<div class="line"><a class="reference internal" href="http_websocket_session_read_options_0.html#http-websocket-session-read-options-0"><span class="std std-ref">http_websocket_session_read_options</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0"><span class="std std-ref">http_websocket_session_registry</span></a></div>
+<div class="line"><a class="reference internal" href="http_websocket_session_write_options_0.html#http-websocket-session-write-options-0"><span class="std std-ref">http_websocket_session_write_options</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Option precedence: When the same read, write, or loop option is given multiple times, the first occurrence is used.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -444,10 +453,12 @@
 <ul>
 <li><p><a class="reference internal" href="#run-session-connection-5" id="id14"><code class="docutils literal notranslate"><span class="pre">run_session_connection/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#run-once-with-cleanup-2" id="id15"><code class="docutils literal notranslate"><span class="pre">run_once_with_cleanup_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-non-negative-integer-option-4" id="id16"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-masking-key-1" id="id17"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id16">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -520,6 +531,7 @@
 <div><ul class="simple">
 <li><p>End of file: Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> only when the input state is idle and the stream is already exhausted.</p></li>
 <li><p>Masking policy: Incoming frame masking is validated against the session role: client sessions expect unmasked inbound frames and server sessions expect masked inbound frames.</p></li>
+<li><p>Peer close: When a close frame is read, any fragmented data message in progress is discarded. Subsequent reads from the resulting <code class="docutils literal notranslate"><span class="pre">close_received/1</span></code> or <code class="docutils literal notranslate"><span class="pre">closed/2</span></code> state are rejected.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -579,6 +591,7 @@
 <div><ul class="simple">
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(on)</span></code>: Automatically writes a pong message with the same payload when a ping message is read while still returning the ping message to the caller.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(off)</span></code>: Disables automatic pong replies. This is the default.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Use a non-negative integer.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -652,6 +665,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_message(+stream_or_alias,+compound,-compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Closing state: After a peer close is recorded, only the matching close reply may be written. After a local close is recorded, further data messages are rejected.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="write-message-5">
@@ -741,6 +762,7 @@
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(off)</span></code>: Disables automatic pong replies. This is the default.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: When no inbound message is received for the given positive number of seconds, writes an empty ping message and continues the loop. This option requires backend thread support.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">idle_timeout(Seconds)</span></code>: When no inbound message is received for the given positive number of seconds, writes <code class="docutils literal notranslate"><span class="pre">message(close,</span> <span class="pre">status(1001,</span> <span class="pre">idle_timeout))</span></code> and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Oversized frames are treated as <code class="docutils literal notranslate"><span class="pre">1009</span></code> close errors in the session loop. Use a non-negative integer.</p></li>
 </ul>
 </div></blockquote>
 </section>
@@ -781,6 +803,48 @@
 <div class="line"><strong>Meta-predicate template:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">run_once_with_cleanup_(0,0)</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="validate-non-negative-integer-option-4">
+<span id="http-websocket-session-2-validate-non-negative-integer-option-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option/4</span></code></a><a class="headerlink" href="#validate-non-negative-integer-option-4" title="Link to this heading"></a></h3>
+<p>Validates a non-negative integer option value for the given domain and option name.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option(Domain,Name,Value,ValidatedValue)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option(+atom,+atom,&#64;term,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="generate-masking-key-1">
+<span id="http-websocket-session-2-generate-masking-key-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a><a class="headerlink" href="#generate-masking-key-1" title="Link to this heading"></a></h3>
+<p>Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation first tries to read four random bytes from <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> and falls back to a wall-time-seeded <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> generator.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_masking_key(Key)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_masking_key(-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

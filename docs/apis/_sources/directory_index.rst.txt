@@ -1200,6 +1200,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
    http_cookies(Representation) <http_cookies_1>
 
+``library/http_cors/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_cors <http_cors_0>
+
 ``library/http_multipart/``
 ---------------------------
 
@@ -1284,7 +1294,10 @@ To load an entity, always load the library that includes it using the goal ``log
    http_websocket_server_session <http_websocket_server_session_0>
    http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
    http_websocket_session_handler_protocol <http_websocket_session_handler_protocol_0>
+   http_websocket_session_loop_options <http_websocket_session_loop_options_0>
+   http_websocket_session_read_options <http_websocket_session_read_options_0>
    http_websocket_session_registry <http_websocket_session_registry_0>
+   http_websocket_session_write_options <http_websocket_session_write_options_0>
 
 ``library/ica_projection/``
 ---------------------------
