@@ -36,7 +36,7 @@
 			'Route declarations' - 'Importing objects must define ``route/4`` clauses using the descriptor shape ``route(Id, Method, PathTemplate, Handler)``.',
 			'Path templates' - 'Path-template atoms support literal segments, anonymous ``*`` wildcard segments, plain ``{name}`` placeholders, and typed placeholders such as ``{id:integer}`` and ``{score:number}``.',
 			'HEAD fallback' - 'A ``HEAD`` request matches an exact ``head`` route first and otherwise falls back to a matching ``get`` route.',
-			'OPTIONS handling' - 'An ``OPTIONS`` request matches an explicit ``options`` route first and otherwise returns an automatic ``200 OK`` response with an ``Allow`` header listing the methods supported by the matched path.',
+			'OPTIONS handling' - 'An ``OPTIONS`` request matches an explicit ``options`` route first and otherwise returns an automatic response. Synthetic ``OPTIONS`` requests are annotated with ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, the router also annotates ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters, can be customized using ``route_automatic_options_response/3``, and still flows through response middleware.',
 			'Custom error responses' - 'Importing objects can optionally define ``route_not_found_response/2`` and ``route_method_not_allowed_response/3`` predicates to customize ``404`` and ``405`` responses.',
 			'Custom negotiation failures' - 'Importing objects can optionally define ``route_not_acceptable_response/3`` to customize ``406 Not Acceptable`` responses for route-level content negotiation failures.',
 			'Request annotations' - 'Matched requests are annotated with the explicit properties ``route(Id)`` and ``path_params(Pairs)`` plus any additional metadata declared by ``route_metadata/2`` before the route handler is called.'
@@ -46,7 +46,15 @@
 	:- public(handle/2).
 	:- mode(handle(+compound, -compound), one_or_error).
 	:- info(handle/2, [
-		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses. Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response, ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling, and ``route_metadata/2`` clauses whose metadata is merged into matched requests before the route handler is called. Importing objects can also optionally define ``route_produces/2`` clauses so the router negotiates the request ``Accept`` header and annotates matched requests with the negotiated ``response_media_type(MediaType)`` property. Matched requests are annotated with route metadata before calling the selected route handler predicate in the importing object. Importing objects can optionally define ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, and ``route_not_acceptable_response/3`` to customize ``404``, ``405``, and ``406`` handling. ``OPTIONS`` requests return an automatic ``200 OK`` response with an ``Allow`` header when no explicit ``options`` route is defined for the matched path. Path matches with unsupported methods return ``405 Method Not Allowed`` responses including an ``Allow`` header derived from the matching path templates. Negotiation failures return ``406 Not Acceptable``.',
+		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses.',
+		remarks is [
+			'Middleware' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.',
+			'Response middleware' - 'Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.',
+			'Request annotations' - 'Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied.',
+			'Automatic ``OPTIONS``' - 'An explicit ``options`` route matches first. Otherwise the router builds an automatic response from a synthetic request carrying ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, that synthetic request also carries ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic ``OPTIONS`` responses still pass through response middleware and can be customized using ``route_automatic_options_response/3``.',
+			'Custom responses' - 'Importing objects can optionally define ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.',
+			'Failure behavior' - 'Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.'
+		],
 		argnames is ['Request', 'Response']
 	]).
 
@@ -188,6 +196,13 @@
 	:- info(route_method_not_allowed_response/3, [
 		comment is 'Optional hook predicate that customizes ``405 Method Not Allowed`` responses. When defined by the importing object, it is called with the request, the effective allowed methods list as lowercase atoms, and must return the response to send.',
 		argnames is ['Request', 'AllowedMethods', 'Response']
+	]).
+
+	:- protected(route_automatic_options_response/3).
+	:- mode(route_automatic_options_response(+compound, +list(atom), -compound), zero_or_one).
+	:- info(route_automatic_options_response/3, [
+		comment is 'Optional hook predicate that customizes automatic ``OPTIONS`` responses when no explicit ``options`` route matches. When defined by the importing object, it is called with the annotated synthetic request, the effective allowed methods list as lowercase atoms, and must return the response to send.',
+		argnames is ['Request', 'EffectiveMethods', 'Response']
 	]).
 
 	:- protected(route_not_acceptable_response/3).
@@ -758,11 +773,11 @@
 			( 	matched_route(Request, Path, RouteId, Handler, PathParams) ->
 				annotate_request(RouteId, PathParams, Request, RoutedRequest),
 				route_response(RouteId, Handler, RoutedRequest, EffectiveRequest, Response)
-			; 	automatic_options_response(Request, Path, Response) ->
-				EffectiveRequest = Request
+			; 	automatic_options_response(Request, Path, EffectiveRequest, Response) ->
+				true
 			; 	allowed_route_methods(Path, AllowedMethods) ->
-				EffectiveRequest = Request,
-				method_not_allowed_response(Request, AllowedMethods, Response)
+				annotate_method_not_allowed_request(Request, AllowedMethods, EffectiveRequest),
+				method_not_allowed_response(EffectiveRequest, AllowedMethods, Response)
 			; 	EffectiveRequest = Request,
 				not_found_response(Request, Response)
 			)
@@ -984,10 +999,17 @@
 		),
 		append_new_methods(Methods0, Methods2, Methods).
 
-	automatic_options_response(Request, Path, Response) :-
-		http::method(Request, options),
+	automatic_options_response(Request0, Path, Request, Response) :-
+		http::method(Request0, options),
 		allowed_route_methods(Path, AllowedMethods0),
 		effective_allowed_methods(AllowedMethods0, AllowedMethods),
+		annotate_automatic_options_request(Path, Request0, AllowedMethods, Request),
+		( 	::route_automatic_options_response(Request, AllowedMethods, Response) ->
+			true
+		; 	default_automatic_options_response(Request, AllowedMethods, Response)
+		).
+
+	default_automatic_options_response(Request, AllowedMethods, Response) :-
 		http::version(Request, Version),
 		allow_header_value(AllowedMethods, AllowValue),
 		http::response(Version, status(200, 'OK'), [allow-AllowValue], empty, [], Response).
@@ -1003,6 +1025,85 @@
 			true
 		; 	Path = ''
 		).
+
+	annotate_automatic_options_request(Path, Request0, AllowedMethods, Request) :-
+		automatic_options_route_matches(Path, RouteMatches),
+		annotate_automatic_options_route_matches(RouteMatches, Request0, Request1),
+		annotate_request_property(effective_methods(AllowedMethods), Request1, Request2),
+		annotate_request_property(automatic_options(true), Request2, Request).
+
+	automatic_options_route_matches(Path, RouteMatches) :-
+		findall(route_match(RouteId, PathParams, Metadata), automatic_options_route_match(Path, RouteId, PathParams, Metadata), RouteMatches).
+
+	automatic_options_route_match(Path, RouteId, PathParams, Metadata) :-
+		::route(RouteId, RouteMethod, Template, _Handler),
+		RouteMethod \== options,
+		template_matches(Template, Path, PathParams),
+		automatic_options_route_metadata(RouteId, Metadata).
+
+	automatic_options_route_metadata(RouteId, Metadata) :-
+		( 	::route_metadata(RouteId, Metadata0) ->
+			normalize_route_metadata(Metadata0, Metadata)
+		; 	Metadata = []
+		).
+
+	annotate_automatic_options_route_matches([], Request, Request).
+	annotate_automatic_options_route_matches([route_match(RouteId, PathParams, _Metadata)], Request0, Request) :-
+		!,
+		annotate_request(RouteId, PathParams, Request0, Request).
+	annotate_automatic_options_route_matches(RouteMatches, Request0, Request) :-
+		remove_request_property_functor(Request0, route, Request1),
+		remove_request_property_functor(Request1, path_params, Request2),
+		annotate_shared_automatic_options_path_params(RouteMatches, Request2, Request3),
+		annotate_shared_automatic_options_metadata(RouteMatches, Request3, Request).
+
+	annotate_shared_automatic_options_path_params(RouteMatches, Request0, Request) :-
+		( 	shared_automatic_options_path_params(RouteMatches, PathParams) ->
+			annotate_request_property(path_params(PathParams), Request0, Request)
+		; 	Request = Request0
+		).
+
+	shared_automatic_options_path_params([route_match(_RouteId, PathParams, _Metadata)| RouteMatches], PathParams) :-
+		shared_automatic_options_path_params(RouteMatches, PathParams).
+	shared_automatic_options_path_params([], _PathParams).
+	shared_automatic_options_path_params([route_match(_RouteId, PathParams0, _Metadata)| RouteMatches], PathParams) :-
+		PathParams0 == PathParams,
+		shared_automatic_options_path_params(RouteMatches, PathParams).
+
+	annotate_shared_automatic_options_metadata(RouteMatches, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
+		shared_automatic_options_metadata(RouteMatches, Metadata),
+		merge_route_metadata(Metadata, Properties0, Properties),
+		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+
+	shared_automatic_options_metadata([route_match(_RouteId, _PathParams, Metadata0)| RouteMatches], Metadata) :-
+		shared_automatic_options_metadata(Metadata0, RouteMatches, Metadata).
+	shared_automatic_options_metadata([], _RouteMatches, []).
+	shared_automatic_options_metadata([MetadataProperty| Metadata0], RouteMatches, Metadata) :-
+		( 	shared_automatic_options_metadata_property(MetadataProperty, RouteMatches) ->
+			Metadata = [MetadataProperty| Metadata1]
+		; 	Metadata = Metadata1
+		),
+		shared_automatic_options_metadata(Metadata0, RouteMatches, Metadata1).
+
+	shared_automatic_options_metadata_property(_MetadataProperty, []).
+	shared_automatic_options_metadata_property(MetadataProperty, [route_match(_RouteId, _PathParams, Metadata)| RouteMatches]) :-
+		memberchk(MetadataProperty, Metadata),
+		shared_automatic_options_metadata_property(MetadataProperty, RouteMatches).
+
+	annotate_method_not_allowed_request(Request0, AllowedMethods, Request) :-
+		effective_allowed_methods(AllowedMethods, EffectiveMethods),
+		annotate_request_property(effective_methods(EffectiveMethods), Request0, Request1),
+		annotate_request_property(matched_path(true), Request1, Request).
+
+	remove_request_property_functor(request(Method, Target, Version, Headers, Body, Properties0), Functor, Request) :-
+		remove_property_functor(Properties0, Functor, Properties),
+		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+
+	annotate_request_property(Property, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
+		functor(Property, Functor, _),
+		remove_property_functor(Properties0, Functor, Properties1),
+		Properties = [Property| Properties1],
+		http::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	annotate_request(RouteId, PathParams, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
 		route_metadata_properties(RouteId, Properties0, Properties1),
@@ -1042,6 +1143,9 @@
 	reserved_route_metadata_functor(route).
 	reserved_route_metadata_functor(path_params).
 	reserved_route_metadata_functor(response_media_type).
+	reserved_route_metadata_functor(automatic_options).
+	reserved_route_metadata_functor(effective_methods).
+	reserved_route_metadata_functor(matched_path).
 
 	merge_route_metadata([], Properties, Properties).
 	merge_route_metadata([MetadataProperty| Metadata], Properties0, Properties) :-

@@ -175,17 +175,33 @@ matching route descriptors. A `get` route implicitly contributes both `GET` and
 
 `OPTIONS` requests match explicit `options` routes first. When no explicit
 `options` route exists for a matched path, the router returns an automatic
-`200 OK` response with the derived `Allow` header and an empty body.
+`200 OK` response with the derived `Allow` header and an empty body. The
+synthetic request used for this path is annotated with
+`automatic_options(true)` and `effective_methods(Methods)`. When the router
+can identify exactly one matching non-`options` route template, it also
+annotates that synthetic request with `route(Id)`, `path_params(Pairs)`, and
+that route `route_metadata/2` properties before response middleware runs. When
+multiple non-`options` routes match the same path, the synthetic request omits
+`route/1`, keeps `path_params/1` only when all matches produce the same value,
+and preserves only metadata properties that are identical across all matched
+routes.
 
 Importing router objects can optionally customize error handling by defining:
 
 - `route_not_found_response(Request, Response)`
 - `route_method_not_allowed_response(Request, AllowedMethods, Response)`
+- `route_automatic_options_response(Request, EffectiveMethods, Response)`
 - `route_not_acceptable_response(Request, ProducedMediaTypes, Response)`
 
 The `AllowedMethods` argument passed to the `405` hook is the effective method
 list as lowercase atoms and already includes implicit `head` support for `get`
-routes and automatic `options` support.
+routes and automatic `options` support. The `Request` passed to the `405` hook
+and to response middleware is annotated with `matched_path(true)` and
+`effective_methods(AllowedMethods)`.
+
+The `EffectiveMethods` argument passed to the automatic `OPTIONS` hook is the
+same effective method list. The `Request` passed to that hook and to response
+middleware is the annotated synthetic request described above.
 
 The `ProducedMediaTypes` argument passed to the `406` hook is the normalized
 list declared by `route_produces/2` for the matched route.
@@ -199,8 +215,8 @@ Current limitations
   annotations, automatic OpenAPI provider derivation including best-effort
   request and successful response schema inference, method dispatch,
   route-level content negotiation,
-  customizable `404`/`405`/`406` responses, and automatic `OPTIONS`
-  responses.
+  customizable `404`/`405`/automatic `OPTIONS`/`406` responses, and automatic
+  `OPTIONS` responses.
 - Path templates support literal segments, anonymous `*` wildcard segments,
   plain `{name}` placeholders, and typed placeholders such as
   `{id:integer}` and `{score:number}`.

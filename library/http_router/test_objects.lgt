@@ -162,8 +162,154 @@
 
 	route_method_not_allowed_response(Request, AllowedMethods, Response) :-
 		AllowedMethods == [get, head, options],
+		http::property(Request, matched_path(true)),
+		http::property(Request, effective_methods([get, head, options])),
 		http::version(Request, Version),
 		http::response(Version, status(405, 'Method Not Allowed'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], content('text/plain', text(custom_method_not_allowed)), [], Response).
+
+:- end_object.
+
+
+:- object(automatic_options_http_router,
+	implements(http_handler_protocol),
+	imports(http_router)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-25,
+		comment is 'Router object used by the http_router tests to exercise automatic ``OPTIONS`` customization and annotated synthetic request context.'
+	]).
+
+	:- protected(route_metadata/2).
+	:- info(route_metadata/2, [
+		comment is 'Declares route metadata used by the automatic ``OPTIONS`` router test object.',
+		argnames is ['Id', 'Metadata']
+	]).
+
+	:- protected(route_automatic_options_response/3).
+	:- info(route_automatic_options_response/3, [
+		comment is 'Custom automatic ``OPTIONS`` response hook used by the router tests.',
+		argnames is ['Request', 'EffectiveMethods', 'Response']
+	]).
+
+	:- protected(add_router_stage/3).
+	:- info(add_router_stage/3, [
+		comment is 'Response middleware handler that tags whether a response originated from the automatic ``OPTIONS`` path.',
+		argnames is ['Request', 'Response0', 'Response']
+	]).
+
+	:- protected(show_page/2).
+	:- info(show_page/2, [
+		comment is 'Route handler used by the automatic ``OPTIONS`` router object for the ``/options/pages/{id}`` path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	response_middleware(add_router_stage, add_router_stage).
+
+	route(show_page, get, '/options/pages/{id}', show_page).
+
+	route_metadata(show_page, [summary('Show page options'), tags([options, pages])]).
+
+	route_automatic_options_response(Request, EffectiveMethods, Response) :-
+		EffectiveMethods == [get, head, options],
+		http::property(Request, automatic_options(true)),
+		http::property(Request, effective_methods(EffectiveMethods)),
+		http::property(Request, route(show_page)),
+		http::property(Request, path_params([id-'42'])),
+		http::property(Request, summary('Show page options')),
+		http::property(Request, tags([options, pages])),
+		http::version(Request, Version),
+		http::response(Version, status(204, 'No Content'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], empty, [], Response).
+
+	add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
+		( 	http::property(Request, automatic_options(true)) ->
+			Stage = automatic
+		; 	Stage = routed
+		),
+		http::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
+
+	show_page(Request, Response) :-
+		http::property(Request, route(show_page)),
+		http::property(Request, path_params([id-'42'])),
+		http::property(Request, summary('Show page options')),
+		http::property(Request, tags([options, pages])),
+		http::version(Request, Version),
+		http::response(Version, status(200, 'OK'), [], content('text/plain', text(automatic_options_page)), [], Response).
+
+:- end_object.
+
+
+:- object(multi_route_automatic_options_http_router,
+	implements(http_handler_protocol),
+	imports(http_router)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-25,
+		comment is 'Router object used by the http_router tests to exercise synthetic ``OPTIONS`` metadata when multiple same-path routes match.'
+	]).
+
+	:- protected(route_metadata/2).
+	:- info(route_metadata/2, [
+		comment is 'Declares route metadata used by the multi-route automatic ``OPTIONS`` router test object.',
+		argnames is ['Id', 'Metadata']
+	]).
+
+	:- protected(route_automatic_options_response/3).
+	:- info(route_automatic_options_response/3, [
+		comment is 'Custom automatic ``OPTIONS`` response hook used by the multi-route router tests.',
+		argnames is ['Request', 'EffectiveMethods', 'Response']
+	]).
+
+	:- protected(show_item/2).
+	:- info(show_item/2, [
+		comment is 'Route handler used by the multi-route automatic ``OPTIONS`` router object for ``GET /options/items/{id}`` requests.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(update_item/2).
+	:- info(update_item/2, [
+		comment is 'Route handler used by the multi-route automatic ``OPTIONS`` router object for ``POST /options/items/{id}`` requests.',
+		argnames is ['Request', 'Response']
+	]).
+
+	route(show_item, get, '/options/items/{id}', show_item).
+	route(update_item, post, '/options/items/{id}', update_item).
+
+	route_metadata(show_item, [summary('Show option item'), tags([items]), deprecated(false)]).
+	route_metadata(update_item, [summary('Update option item'), tags([items]), deprecated(false)]).
+
+	route_automatic_options_response(Request, EffectiveMethods, Response) :-
+		EffectiveMethods == [get, head, post, options],
+		http::property(Request, automatic_options(true)),
+		http::property(Request, effective_methods(EffectiveMethods)),
+		\+ http::property(Request, route(_)),
+		http::property(Request, path_params([id-'42'])),
+		http::property(Request, tags([items])),
+		http::property(Request, deprecated(false)),
+		\+ http::property(Request, summary(_)),
+		http::version(Request, Version),
+		http::response(Version, status(204, 'No Content'), [x_router-multi, allow-'GET, HEAD, POST, OPTIONS'], empty, [], Response).
+
+	show_item(Request, Response) :-
+		http::property(Request, route(show_item)),
+		http::property(Request, path_params([id-'42'])),
+		http::property(Request, summary('Show option item')),
+		http::property(Request, tags([items])),
+		http::property(Request, deprecated(false)),
+		http::version(Request, Version),
+		http::response(Version, status(200, 'OK'), [], content('text/plain', text(multi_options_show_item)), [], Response).
+
+	update_item(Request, Response) :-
+		http::property(Request, route(update_item)),
+		http::property(Request, path_params([id-'42'])),
+		http::property(Request, summary('Update option item')),
+		http::property(Request, tags([items])),
+		http::property(Request, deprecated(false)),
+		http::version(Request, Version),
+		http::response(Version, status(200, 'OK'), [], content('text/plain', text(multi_options_update_item)), [], Response).
 
 :- end_object.
 

@@ -104,6 +104,31 @@
 		header(Response, allow, 'HEAD, GET, OPTIONS'),
 		body(Response, empty).
 
+	test(http_router_handle_2_10a, deterministic) :-
+		Request = request(options, origin('/metadata/pages/42'), http(1, 1), [], empty, []),
+		route_metadata_http_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		header(Response, x_route_summary, 'Show page'),
+		body(Response, empty).
+
+	test(http_router_handle_2_10b, deterministic) :-
+		Request = request(options, origin('/options/pages/42'), http(1, 1), [], empty, []),
+		automatic_options_http_router::handle(Request, Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, x_router, custom),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		header(Response, x_router_stage, automatic),
+		body(Response, empty).
+
+	test(http_router_handle_2_10c, deterministic) :-
+		Request = request(options, origin('/options/items/42'), http(1, 1), [], empty, []),
+		multi_route_automatic_options_http_router::handle(Request, Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, x_router, multi),
+		header(Response, allow, 'GET, HEAD, POST, OPTIONS'),
+		body(Response, empty).
+
 	test(http_router_handle_2_11, deterministic) :-
 		Request = request(get, origin('/missing'), http(1, 1), [], empty, []),
 		custom_http_router::handle(Request, Response),
