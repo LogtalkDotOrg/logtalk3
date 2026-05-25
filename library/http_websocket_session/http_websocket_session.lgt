@@ -19,6 +19,91 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(http_websocket_session_read_options,
+	imports(options)).
+
+	:- public(merged_options/2).
+	:- mode(merged_options(+list(compound), -list(compound)), one).
+	:- info(merged_options/2, [
+		comment is 'Merges validated read options with the declared default options.',
+		argnames is ['UserOptions', 'MergedOptions']
+	]).
+
+	valid_option(auto_pong(on)).
+	valid_option(auto_pong(off)).
+	valid_option(max_payload_length(none)).
+	valid_option(max_payload_length(MaxPayloadLength)) :-
+		integer(MaxPayloadLength),
+		MaxPayloadLength >= 0.
+
+	default_option(auto_pong(off)).
+	default_option(max_payload_length(none)).
+
+	merged_options(UserOptions, MergedOptions) :-
+		^^merge_options(UserOptions, MergedOptions).
+
+:- end_object.
+
+
+:- object(http_websocket_session_loop_options,
+	imports(options)).
+
+	:- public(merged_options/2).
+	:- mode(merged_options(+list(compound), -list(compound)), one).
+	:- info(merged_options/2, [
+		comment is 'Merges validated session-loop options with the declared default options.',
+		argnames is ['UserOptions', 'MergedOptions']
+	]).
+
+	valid_option(auto_pong(on)).
+	valid_option(auto_pong(off)).
+	valid_option(keepalive_interval(none)).
+	valid_option(keepalive_interval(Interval)) :-
+		number(Interval),
+		Interval > 0.
+	valid_option(idle_timeout(none)).
+	valid_option(idle_timeout(Interval)) :-
+		number(Interval),
+		Interval > 0.
+	valid_option(max_payload_length(none)).
+	valid_option(max_payload_length(MaxPayloadLength)) :-
+		integer(MaxPayloadLength),
+		MaxPayloadLength >= 0.
+
+	default_option(auto_pong(off)).
+	default_option(keepalive_interval(none)).
+	default_option(idle_timeout(none)).
+	default_option(max_payload_length(none)).
+
+	merged_options(UserOptions, MergedOptions) :-
+		^^merge_options(UserOptions, MergedOptions).
+
+:- end_object.
+
+
+:- object(http_websocket_session_write_options,
+	imports(options)).
+
+	:- public(merged_options/2).
+	:- mode(merged_options(+list(compound), -list(compound)), one).
+	:- info(merged_options/2, [
+		comment is 'Merges validated write options with the declared default options.',
+		argnames is ['UserOptions', 'MergedOptions']
+	]).
+
+	valid_option(fragment_size(none)).
+	valid_option(fragment_size(Size)) :-
+		integer(Size),
+		Size > 0.
+
+	default_option(fragment_size(none)).
+
+	merged_options(UserOptions, MergedOptions) :-
+		^^merge_options(UserOptions, MergedOptions).
+
+:- end_object.
+
+
 :- object(http_websocket_session(_Role_, _TextRepresentation_),
 	extends(http_websocket_messages(_TextRepresentation_))).
 
@@ -30,6 +115,9 @@
 		parameters is [
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
 			'TextRepresentation' - 'Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
+		],
+		remarks is [
+			'Option precedence' - 'When the same read, write, or loop option is given multiple times, the first occurrence is used.'
 		]
 	]).
 
@@ -58,7 +146,8 @@
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message'],
 		remarks is [
 			'End of file' - 'Returns ``end_of_file`` only when the input state is idle and the stream is already exhausted.',
-			'Masking policy' - 'Incoming frame masking is validated against the session role: client sessions expect unmasked inbound frames and server sessions expect masked inbound frames.'
+			'Masking policy' - 'Incoming frame masking is validated against the session role: client sessions expect unmasked inbound frames and server sessions expect masked inbound frames.',
+			'Peer close' - 'When a close frame is read, any fragmented data message in progress is discarded. Subsequent reads from the resulting ``close_received/1`` or ``closed/2`` state are rejected.'
 		]
 	]).
 
@@ -79,7 +168,8 @@
 		argnames is ['Input', 'Output', 'State', 'UpdatedState', 'Message', 'Options'],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes a pong message with the same payload when a ping message is read while still returning the ping message to the caller.',
-			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.'
+			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.',
+			'Option ``max_payload_length(Bytes)``' - 'Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Use a non-negative integer.'
 		]
 	]).
 
@@ -104,7 +194,10 @@
 	:- mode(write_message(+stream_or_alias, +compound, -compound, +compound), one_or_error).
 	:- info(write_message/4, [
 		comment is 'Writes one validated WebSocket message using the masking policy implied by the session role and updates the given session state with any close-handshake transition caused by the write.',
-		argnames is ['Stream', 'State', 'UpdatedState', 'Message']
+		argnames is ['Stream', 'State', 'UpdatedState', 'Message'],
+		remarks is [
+			'Closing state' - 'After a peer close is recorded, only the matching close reply may be written. After a local close is recorded, further data messages are rejected.'
+		]
 	]).
 
 	:- public(write_message/5).
@@ -137,7 +230,8 @@
 			'Option ``auto_pong(on)``' - 'Automatically writes pong replies while still forwarding ping messages to the handler.',
 			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.',
 			'Option ``keepalive_interval(Seconds)``' - 'When no inbound message is received for the given positive number of seconds, writes an empty ping message and continues the loop. This option requires backend thread support.',
-			'Option ``idle_timeout(Seconds)``' - 'When no inbound message is received for the given positive number of seconds, writes ``message(close, status(1001, idle_timeout))`` and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.'
+			'Option ``idle_timeout(Seconds)``' - 'When no inbound message is received for the given positive number of seconds, writes ``message(close, status(1001, idle_timeout))`` and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.',
+			'Option ``max_payload_length(Bytes)``' - 'Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.'
 		]
 	]).
 
@@ -145,12 +239,12 @@
 		append/3, member/2, reverse/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(backend_random, [
-		between/3 as random_between/3
+	:- uses(fast_random(xoshiro128pp), [
+		randomize/1, sequence/4
 	]).
 
 	:- uses(os, [
-		sleep/1
+		sleep/1, wall_time/1
 	]).
 
 	initial_state(session_state(idle)).
@@ -163,7 +257,7 @@
 			instantiation_error
 		; 	validate_role,
 			validate_state(State0, Pending0, Close0),
-			read_message_state(Stream, Pending0, Close0, Pending, Close, Message),
+			read_message_state(Stream, Pending0, Close0, none, Pending, Close, Message),
 			output_state(Pending, Close, State)
 		).
 
@@ -176,9 +270,9 @@
 		; 	var(Output) ->
 			instantiation_error
 		; 	validate_role,
-			parse_read_options(Options, AutoPong),
+			parse_read_options(Options, AutoPong, MaxPayloadLength),
 			validate_state(State0, Pending0, Close0),
-			read_message_state(Input, Pending0, Close0, Pending1, Close1, Message),
+			read_message_state(Input, Pending0, Close0, MaxPayloadLength, Pending1, Close1, Message),
 			maybe_auto_control_message(Output, Pending1, Close1, Message, AutoPong, Pending, Close),
 			output_state(Pending, Close, State)
 		).
@@ -225,13 +319,13 @@
 	run_session_connection(Connection, HandlerDescriptor, State0, State, Options) :-
 		validate_role,
 		validate_handler_descriptor(HandlerDescriptor, HandlerMode, PollInterval),
-		parse_session_loop_options(Options, AutoPong, KeepaliveInterval, IdleTimeout),
+		parse_session_loop_options(Options, AutoPong, KeepaliveInterval, IdleTimeout, MaxPayloadLength),
 		validate_state(State0, _Pending0, _Close0),
 		ensure_timed_session_support(PollInterval, KeepaliveInterval, IdleTimeout),
 		initial_loop_timers(KeepaliveInterval, IdleTimeout, Timers0),
 		http_socket::connection_streams(Connection, Input, Output),
 		run_once_with_cleanup_(
-			run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, Timers0, State0, none, Reader, State),
+			run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers0, State0, none, Reader, State),
 			cancel_session_reader(Reader)
 		).
 
@@ -285,61 +379,42 @@
 	socket_library_supported_backend(trealla).
 	socket_library_supported_backend(xvm).
 
-	parse_session_loop_options(Options, AutoPong, KeepaliveInterval, IdleTimeout) :-
+	parse_session_loop_options(Options, AutoPong, KeepaliveInterval, IdleTimeout, MaxPayloadLength) :-
 		check_session_loop_options(Options),
-		reverse(Options, ReversedOptions),
-		( 	member(auto_pong(AutoPong0), ReversedOptions) ->
-			validate_auto_pong_option(AutoPong0, AutoPong)
-		; 	AutoPong = off
-		),
-		( 	member(keepalive_interval(Keepalive0), ReversedOptions) ->
-			validate_session_interval_option(keepalive_interval, Keepalive0, KeepaliveInterval)
-		; 	KeepaliveInterval = none
-		),
-		( 	member(idle_timeout(IdleTimeout0), ReversedOptions) ->
-			validate_session_interval_option(idle_timeout, IdleTimeout0, IdleTimeout)
-		; 	IdleTimeout = none
-		).
+		http_websocket_session_loop_options::merged_options(Options, MergedOptions),
+		http_websocket_session_loop_options::option(auto_pong(AutoPong), MergedOptions),
+		http_websocket_session_loop_options::option(keepalive_interval(KeepaliveInterval), MergedOptions),
+		http_websocket_session_loop_options::option(idle_timeout(IdleTimeout), MergedOptions),
+		http_websocket_session_loop_options::option(max_payload_length(MaxPayloadLength), MergedOptions).
 
 	check_session_loop_options(Options) :-
-		( 	var(Options) ->
-			instantiation_error
-		; 	proper_list(Options) ->
-			check_session_loop_option_list(Options)
-		; 	type_error(list, Options)
+		catch(
+			http_websocket_session_loop_options::check_options(Options),
+			error(domain_error(option, Option), _),
+			domain_error(http_websocket_session_loop_option, Option)
 		).
 
-	check_session_loop_option_list([]).
-	check_session_loop_option_list([Option| Options]) :-
-		check_session_loop_option(Option),
-		check_session_loop_option_list(Options).
+	:- protected(validate_non_negative_integer_option/4).
+	:- mode(validate_non_negative_integer_option(+atom, +atom, @term, -integer), one_or_error).
+	:- info(validate_non_negative_integer_option/4, [
+		comment is 'Validates a non-negative integer option value for the given domain and option name.',
+		argnames is ['Domain', 'Name', 'Value', 'ValidatedValue']
+	]).
 
-	check_session_loop_option(auto_pong(Option)) :-
-		!,
-		validate_auto_pong_option(Option, _AutoPong).
-	check_session_loop_option(keepalive_interval(Interval)) :-
-		!,
-		validate_session_interval_option(keepalive_interval, Interval, _ValidatedInterval).
-	check_session_loop_option(idle_timeout(Interval)) :-
-		!,
-		validate_session_interval_option(idle_timeout, Interval, _ValidatedInterval).
-	check_session_loop_option(Option) :-
-		domain_error(http_websocket_session_loop_option, Option).
+	:- protected(generate_masking_key/1).
+	:- mode(generate_masking_key(-list(byte)), one).
+	:- info(generate_masking_key/1, [
+		comment is 'Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation first tries to read four random bytes from ``/dev/urandom`` and falls back to a wall-time-seeded ``fast_random(xoshiro128pp)`` generator.',
+		argnames is ['Key']
+	]).
 
-	validate_auto_pong_option(on, on) :-
+	validate_non_negative_integer_option(_Domain, _Name, Value, Value) :-
+		integer(Value),
+		Value >= 0,
 		!.
-	validate_auto_pong_option(off, off) :-
-		!.
-	validate_auto_pong_option(Option, _AutoPong) :-
-		domain_error(http_websocket_session_loop_option, auto_pong(Option)).
-
-	validate_session_interval_option(_Name, Interval, Interval) :-
-		number(Interval),
-		Interval > 0,
-		!.
-	validate_session_interval_option(Name, Interval, _ValidatedInterval) :-
-		Option =.. [Name, Interval],
-		domain_error(http_websocket_session_loop_option, Option).
+	validate_non_negative_integer_option(Domain, Name, Value, _ValidatedValue) :-
+		Option =.. [Name, Value],
+		domain_error(Domain, Option).
 
 	validate_role :-
 		( 	_Role_ == client ->
@@ -413,31 +488,35 @@
 		!.
 	output_state(Pending, Close, session_state(Pending, Close)).
 
-	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, Timers0, State0, Reader0, Reader, State) :-
+	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers0, State0, Reader0, Reader, State) :-
 		flush_pending_session_messages(HandlerMode, Output, State0, State1),
 		preserve_loop_timers(State1, Timers0, Timers1),
 		( 	close_handshake_completed(State1) ->
 			Reader = Reader0,
 			State = State1
 		; 	ready_session_event(Reader0, Event, Reader1) ->
-			continue_after_session_event(Event, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State1, Timers1, Reader1, Reader, State)
+			continue_after_session_event(Event, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State1, Timers1, Reader1, Reader, State)
 		; 	pending_loop_timeout_action(Timers1) ->
 			handle_session_timeout(Output, KeepaliveInterval, IdleTimeout, 0.0, State1, Timers1, State2, Timers2, Outcome),
-			continue_after_timeout(Outcome, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State2, Timers2, Reader0, Reader, State)
+			continue_after_timeout(Outcome, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State2, Timers2, Reader0, Reader, State)
 		; 	next_loop_wait(Timers1, PollInterval, Wait),
-			read_session_event(Input, State1, Wait, Reader0, Event, Reader1),
-			continue_after_session_event(Event, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State1, Timers1, Reader1, Reader, State)
+			read_session_event(Input, State1, Wait, MaxPayloadLength, Reader0, Event, Reader1),
+			continue_after_session_event(Event, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State1, Timers1, Reader1, Reader, State)
 		).
 
-	continue_after_timeout(stop, _Input, _Output, _HandlerMode, _AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, State, _Timers, Reader, Reader, State).
-	continue_after_timeout(continue, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State0, Timers0, Reader0, Reader, State) :-
-		run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, Timers0, State0, Reader0, Reader, State).
+	continue_after_timeout(stop, _Input, _Output, _HandlerMode, _AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, _MaxPayloadLength, State, _Timers, Reader, Reader, State).
+	continue_after_timeout(continue, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State0, Timers0, Reader0, Reader, State) :-
+		run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers0, State0, Reader0, Reader, State).
 
-	read_session_event(Input, State0, blocking, _Reader0, read(Pending, Message), none) :-
+	read_session_event(Input, State0, blocking, MaxPayloadLength, _Reader0, Event, none) :-
 		!,
-		read_session_message(Input, State0, Pending, Message).
-	read_session_event(Input, State0, timed(Wait), Reader0, Event, Reader) :-
-		ensure_session_reader(Input, State0, Reader0, Reader1),
+		catch(read_session_message(Input, State0, MaxPayloadLength, Pending, Message), Error, Event = error(Error)),
+		( 	var(Event) ->
+			Event = read(Pending, Message)
+		; 	true
+		).
+	read_session_event(Input, State0, timed(Wait), MaxPayloadLength, Reader0, Event, Reader) :-
+		ensure_session_reader(Input, State0, MaxPayloadLength, Reader0, Reader1),
 		wait_for_session_reader_event(Wait, Reader1, Event, Reader).
 
 	wait_for_session_reader_event(Wait, Reader0, Event, Reader) :-
@@ -464,43 +543,65 @@
 
 	session_reader_poll_interval(0.01).
 
-	continue_after_session_event(read(Pending, end_of_file), _Input, Output, _HandlerMode, AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, State0, _Timers0, Reader, Reader, State1) :-
+	continue_after_session_event(read(Pending, end_of_file), _Input, Output, _HandlerMode, AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, _MaxPayloadLength, State0, _Timers0, Reader, Reader, State1) :-
 		apply_session_read(Output, State0, AutoPong, Pending, end_of_file, State1),
 		!.
-	continue_after_session_event(read(Pending, Message), Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State0, _Timers0, _Reader0, Reader, State) :-
+	continue_after_session_event(read(Pending, Message), Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State0, _Timers0, _Reader0, Reader, State) :-
 		apply_session_read(Output, State0, AutoPong, Pending, Message, State1),
 		reset_loop_timers(KeepaliveInterval, IdleTimeout, State1, Timers1),
-		handler_actions(HandlerMode, Message, Replies, RegistryActions),
-		apply_registry_actions(HandlerMode, RegistryActions),
 		( 	close_handshake_completed(State1) ->
 			Reader = none,
 			State = State1
-		; 	write_reply_messages(Output, State1, Replies, State2),
+		; 	handler_actions(HandlerMode, Message, Replies, RegistryActions),
+			apply_registry_actions(HandlerMode, RegistryActions),
+			write_reply_messages(Output, State1, Replies, State2),
 			preserve_loop_timers(State2, Timers1, Timers2),
 			( 	close_handshake_completed(State2) ->
 				Reader = none,
 				State = State2
-			; 	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, Timers2, State2, none, Reader, State)
+			; 	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers2, State2, none, Reader, State)
 			)
 		).
-	continue_after_session_event(timeout(Wait), Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State0, Timers0, Reader0, Reader, State) :-
+	continue_after_session_event(timeout(Wait), Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State0, Timers0, Reader0, Reader, State) :-
 		handle_session_timeout(Output, KeepaliveInterval, IdleTimeout, Wait, State0, Timers0, State1, Timers1, Outcome),
-		continue_after_timeout(Outcome, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, State1, Timers1, Reader0, Reader, State).
-	continue_after_session_event(error(Error), _Input, _Output, _HandlerMode, _AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, _State0, _Timers0, Reader, Reader, _State) :-
+		continue_after_timeout(Outcome, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State1, Timers1, Reader0, Reader, State).
+	continue_after_session_event(error(Error), _Input, Output, _HandlerMode, _AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, _MaxPayloadLength, State0, _Timers0, Reader, Reader, _State) :-
+		best_effort_protocol_error_close(Output, State0, Error),
 		throw(Error).
-	continue_after_session_event(fail, _Input, _Output, _HandlerMode, _AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, _State0, _Timers0, Reader, Reader, _State) :-
+	continue_after_session_event(fail, _Input, _Output, _HandlerMode, _AutoPong, _KeepaliveInterval, _IdleTimeout, _PollInterval, _MaxPayloadLength, _State0, _Timers0, Reader, Reader, _State) :-
 		fail.
 
-	:- meta_predicate(ensure_session_reader(*, *, *, *)).
+	best_effort_protocol_error_close(Output, State0, Error) :-
+		protocol_error_close_payload(Error, Payload),
+		validate_state(State0, Pending0, Close0),
+		protocol_error_close_state(Close0),
+		!,
+		catch(write_message_state(Output, Pending0, Close0, message(close, Payload), [], _Pending, _Close), _, true).
+	best_effort_protocol_error_close(_Output, _State0, _Error).
+
+	protocol_error_close_state(open).
+	protocol_error_close_state(close_received(_Payload)).
+
+	protocol_error_close_payload(error(domain_error(http_websocket_session_sequence, _Frame), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_session_masking, _Frame), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_session_extensions, _Frame), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_frame, _Frame), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_opcode, _Opcode), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_byte_sequence, _Bytes), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_close_payload, _Payload), _Context), status(1002)).
+	protocol_error_close_payload(error(domain_error(http_websocket_message_text, _Payload), _Context), status(1007)).
+	protocol_error_close_payload(error(domain_error(http_websocket_payload_length_limit, _PayloadLength), _Context), status(1009)).
+
+	:- meta_predicate(ensure_session_reader(*, *, *, *, *)).
 
 	:- if(current_logtalk_flag(threads, supported)).
-	ensure_session_reader(Input, State0, none, reader(Goal, Tag)) :-
+	ensure_session_reader(Input, State0, MaxPayloadLength, none, reader(Goal, Tag)) :-
 		!,
-		Goal = read_session_message(Input, State0, _Pending, _Message),
+		Goal = read_session_message(Input, State0, MaxPayloadLength, _Pending, _Message),
 		threaded_once(Goal, Tag).
-	ensure_session_reader(_Input, _State0, Reader, Reader).
+	ensure_session_reader(_Input, _State0, _MaxPayloadLength, Reader, Reader).
 	:- else.
-	ensure_session_reader(_Input, _State0, _Reader0, _Reader) :-
+	ensure_session_reader(_Input, _State0, _MaxPayloadLength, _Reader0, _Reader) :-
 		throw(not_available(http_websocket_session_timing)).
 	:- endif.
 
@@ -531,7 +632,7 @@
 		throw(not_available(http_websocket_session_timing)).
 	:- endif.
 
-	reader_goal_event(read_session_message(_Input, _State0, Pending, Message), read(Pending, Message)).
+	reader_goal_event(read_session_message(_Input, _State0, _MaxPayloadLength, Pending, Message), read(Pending, Message)).
 
 	cancel_session_reader(Reader) :-
 		var(Reader),
@@ -544,10 +645,10 @@
 	cancel_session_reader(reader(_Goal, _Tag)).
 	:- endif.
 
-	read_session_message(Input, State0, Pending, Message) :-
+	read_session_message(Input, State0, MaxPayloadLength, Pending, Message) :-
 		validate_role,
 		validate_state(State0, Pending0, _Close0),
-		read_pending_message(Input, Pending0, Pending, Message).
+		read_pending_message(Input, Pending0, MaxPayloadLength, Pending, Message).
 
 	apply_session_read(Output, State0, AutoPong, Pending0, Message, State) :-
 		validate_state(State0, _Pending, Close0),
@@ -555,6 +656,10 @@
 		maybe_auto_control_message(Output, Pending0, Close1, Message, AutoPong, Pending, Close),
 		output_state(Pending, Close, State).
 
+	flush_pending_session_messages(_HandlerMode, _Output, State0, State0) :-
+		current_close_state(State0, Close),
+		Close \== open,
+		!.
 	flush_pending_session_messages(replies(_Handler), _Output, State, State).
 	flush_pending_session_messages(registry(Registry, Session, _Handler), Output, State0, State) :-
 		http_websocket_session_registry::take_pending(Registry, Session, Messages),
@@ -768,9 +873,23 @@
 
 	close_handshake_completed(session_state(_Pending, closed(_SentPayload, _ReceivedPayload))).
 
-	read_message_state(Stream, Pending0, Close0, Pending, Close, Message) :-
-		read_pending_message(Stream, Pending0, Pending, Message),
+	read_message_state(Stream, Pending0, Close0, MaxPayloadLength, Pending, Close, Message) :-
+		validate_read_close_state(Pending0, Close0),
+		read_pending_message(Stream, Pending0, MaxPayloadLength, Pending0b, Message),
+		pending_after_read(Pending0b, Message, Pending),
 		update_close_state_after_read(Close0, Message, Close).
+
+	validate_read_close_state(_Pending0, open) :-
+		!.
+	validate_read_close_state(_Pending0, close_sent(_Payload)) :-
+		!.
+	validate_read_close_state(Pending0, Close0) :-
+		output_state(Pending0, Close0, State),
+		domain_error(http_websocket_session_state, State).
+
+	pending_after_read(_Pending0, message(close, _Payload), idle) :-
+		!.
+	pending_after_read(Pending0, _Message, Pending0).
 
 	update_close_state_after_read(Close0, end_of_file, Close0) :-
 		!.
@@ -792,159 +911,153 @@
 		http_websocket::frame(final, binary, Chunk, [], _Frame),
 		valid_pending_chunks(Chunks).
 
-	read_pending_message(Stream, idle, Pending, Message) :-
+	read_pending_message(Stream, idle, MaxPayloadLength, Pending, Message) :-
 		!,
-		http_websocket::read_frame(Stream, Frame),
-		read_idle_frame(Frame, Stream, Pending, Message).
-	read_pending_message(Stream, fragment(Type, Chunks0), Pending, Message) :-
-		http_websocket::read_frame(Stream, Frame),
-		read_fragment_frame(Frame, Stream, Type, Chunks0, Pending, Message).
+		read_websocket_frame(Stream, MaxPayloadLength, Frame),
+		read_idle_frame(Frame, Stream, MaxPayloadLength, Pending, Message).
+	read_pending_message(Stream, fragment(Type, Chunks0), MaxPayloadLength, Pending, Message) :-
+		read_websocket_frame(Stream, MaxPayloadLength, Frame),
+		read_fragment_frame(Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message).
 
-	read_idle_frame(end_of_file, _Stream, idle, end_of_file) :-
+	read_idle_frame(end_of_file, _Stream, _MaxPayloadLength, idle, end_of_file) :-
 		!.
-	read_idle_frame(Frame, Stream, Pending, Message) :-
+	read_idle_frame(Frame, Stream, MaxPayloadLength, Pending, Message) :-
 		validate_incoming_frame(Frame),
 		http_websocket::opcode(Frame, Opcode),
 		http_websocket::final(Frame, Final),
 		http_websocket::payload(Frame, PayloadBytes),
-		read_idle_opcode(Opcode, Final, PayloadBytes, Frame, Stream, Pending, Message).
+		read_idle_opcode(Opcode, Final, PayloadBytes, Frame, Stream, MaxPayloadLength, Pending, Message).
 
-	read_idle_opcode(continuation, _Final, _PayloadBytes, Frame, _Stream, _Pending, _Message) :-
+	read_idle_opcode(continuation, _Final, _PayloadBytes, Frame, _Stream, _MaxPayloadLength, _Pending, _Message) :-
 		!,
 		domain_error(http_websocket_session_sequence, Frame).
-	read_idle_opcode(text, final, PayloadBytes, _Frame, _Stream, idle, Message) :-
+	read_idle_opcode(text, final, PayloadBytes, _Frame, _Stream, _MaxPayloadLength, idle, Message) :-
 		!,
 		^^decode_message(text, PayloadBytes, Message).
-	read_idle_opcode(binary, final, PayloadBytes, _Frame, _Stream, idle, Message) :-
+	read_idle_opcode(binary, final, PayloadBytes, _Frame, _Stream, _MaxPayloadLength, idle, Message) :-
 		!,
 		^^decode_message(binary, PayloadBytes, Message).
-	read_idle_opcode(text, more, PayloadBytes, _Frame, Stream, Pending, Message) :-
+	read_idle_opcode(text, more, PayloadBytes, _Frame, Stream, MaxPayloadLength, Pending, Message) :-
 		!,
-		read_fragmented_message(Stream, text, [PayloadBytes], Pending, Message).
-	read_idle_opcode(binary, more, PayloadBytes, _Frame, Stream, Pending, Message) :-
+		read_fragmented_message(Stream, text, [PayloadBytes], MaxPayloadLength, Pending, Message).
+	read_idle_opcode(binary, more, PayloadBytes, _Frame, Stream, MaxPayloadLength, Pending, Message) :-
 		!,
-		read_fragmented_message(Stream, binary, [PayloadBytes], Pending, Message).
-	read_idle_opcode(ping, _Final, PayloadBytes, _Frame, _Stream, idle, Message) :-
+		read_fragmented_message(Stream, binary, [PayloadBytes], MaxPayloadLength, Pending, Message).
+	read_idle_opcode(ping, _Final, PayloadBytes, _Frame, _Stream, _MaxPayloadLength, idle, Message) :-
 		!,
 		^^decode_message(ping, PayloadBytes, Message).
-	read_idle_opcode(pong, _Final, PayloadBytes, _Frame, _Stream, idle, Message) :-
+	read_idle_opcode(pong, _Final, PayloadBytes, _Frame, _Stream, _MaxPayloadLength, idle, Message) :-
 		!,
 		^^decode_message(pong, PayloadBytes, Message).
-	read_idle_opcode(close, _Final, PayloadBytes, _Frame, _Stream, idle, Message) :-
+	read_idle_opcode(close, _Final, PayloadBytes, _Frame, _Stream, _MaxPayloadLength, idle, Message) :-
 		^^decode_message(close, PayloadBytes, Message).
 
-	read_fragmented_message(Stream, Type, Chunks0, Pending, Message) :-
-		http_websocket::read_frame(Stream, Frame),
-		read_fragment_frame(Frame, Stream, Type, Chunks0, Pending, Message).
+	read_fragmented_message(Stream, Type, Chunks0, MaxPayloadLength, Pending, Message) :-
+		read_websocket_frame(Stream, MaxPayloadLength, Frame),
+		read_fragment_frame(Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message).
 
-	read_fragment_frame(end_of_file, _Stream, _Type, _Chunks0, _Pending, _Message) :-
+	read_fragment_frame(end_of_file, _Stream, _Type, _Chunks0, _MaxPayloadLength, _Pending, _Message) :-
 		!,
 		domain_error(http_websocket_session_sequence, end_of_file).
-	read_fragment_frame(Frame, Stream, Type, Chunks0, Pending, Message) :-
+	read_fragment_frame(Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message) :-
 		validate_incoming_frame(Frame),
 		http_websocket::opcode(Frame, Opcode),
 		http_websocket::final(Frame, Final),
 		http_websocket::payload(Frame, PayloadBytes),
-		read_fragment_opcode(Opcode, Final, PayloadBytes, Frame, Stream, Type, Chunks0, Pending, Message).
+		read_fragment_opcode(Opcode, Final, PayloadBytes, Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message).
 
-	read_fragment_opcode(continuation, final, PayloadBytes, _Frame, _Stream, Type, Chunks0, idle, Message) :-
+	read_fragment_opcode(continuation, final, PayloadBytes, _Frame, _Stream, Type, Chunks0, _MaxPayloadLength, idle, Message) :-
 		!,
 		reverse([PayloadBytes| Chunks0], Chunks),
 		append_chunks(Chunks, Bytes, []),
 		^^decode_message(Type, Bytes, Message).
-	read_fragment_opcode(continuation, more, PayloadBytes, _Frame, Stream, Type, Chunks0, Pending, Message) :-
+	read_fragment_opcode(continuation, more, PayloadBytes, _Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message) :-
 		!,
-		read_fragmented_message(Stream, Type, [PayloadBytes| Chunks0], Pending, Message).
-	read_fragment_opcode(ping, _Final, PayloadBytes, _Frame, _Stream, Type, Chunks0, fragment(Type, Chunks0), Message) :-
+		read_fragmented_message(Stream, Type, [PayloadBytes| Chunks0], MaxPayloadLength, Pending, Message).
+	read_fragment_opcode(ping, _Final, PayloadBytes, _Frame, _Stream, Type, Chunks0, _MaxPayloadLength, fragment(Type, Chunks0), Message) :-
 		!,
 		^^decode_message(ping, PayloadBytes, Message).
-	read_fragment_opcode(pong, _Final, PayloadBytes, _Frame, _Stream, Type, Chunks0, fragment(Type, Chunks0), Message) :-
+	read_fragment_opcode(pong, _Final, PayloadBytes, _Frame, _Stream, Type, Chunks0, _MaxPayloadLength, fragment(Type, Chunks0), Message) :-
 		!,
 		^^decode_message(pong, PayloadBytes, Message).
-	read_fragment_opcode(close, _Final, PayloadBytes, _Frame, _Stream, Type, Chunks0, fragment(Type, Chunks0), Message) :-
+	read_fragment_opcode(close, _Final, PayloadBytes, _Frame, _Stream, Type, Chunks0, _MaxPayloadLength, fragment(Type, Chunks0), Message) :-
 		!,
 		^^decode_message(close, PayloadBytes, Message).
-	read_fragment_opcode(_Opcode, _Final, _PayloadBytes, Frame, _Stream, _Type, _Chunks0, _Pending, _Message) :-
+	read_fragment_opcode(_Opcode, _Final, _PayloadBytes, Frame, _Stream, _Type, _Chunks0, _MaxPayloadLength, _Pending, _Message) :-
 		domain_error(http_websocket_session_sequence, Frame).
 
+	read_websocket_frame(Stream, none, Frame) :-
+		!,
+		http_websocket::read_frame(Stream, Frame).
+	read_websocket_frame(Stream, MaxPayloadLength, Frame) :-
+		http_websocket::read_frame(Stream, Frame, [max_payload_length(MaxPayloadLength)]).
+
 	validate_incoming_frame(Frame) :-
+		validate_incoming_frame_extensions(Frame),
+		validate_incoming_frame_masking(Frame).
+
+	validate_incoming_frame_extensions(Frame) :-
+		( 	\+ http_websocket::property(Frame, reserved_bits(_Bits)) ->
+			true
+		; 	domain_error(http_websocket_session_extensions, Frame)
+		).
+
+	validate_incoming_frame_masking(Frame) :-
 		_Role_ == client,
 		!,
 		( 	\+ http_websocket::property(Frame, masking_key(_)) ->
 			true
 		; 	domain_error(http_websocket_session_masking, Frame)
 		).
-	validate_incoming_frame(Frame) :-
+	validate_incoming_frame_masking(Frame) :-
 		( 	http_websocket::property(Frame, masking_key(_)) ->
 			true
 		; 	domain_error(http_websocket_session_masking, Frame)
 		).
 
-	parse_read_options(Options, AutoPong) :-
+	parse_read_options(Options, AutoPong, MaxPayloadLength) :-
 		check_read_options(Options),
-		reverse(Options, ReversedOptions),
-		( 	member(auto_pong(AutoPong), ReversedOptions) ->
-			true
-		; 	AutoPong = off
-		).
+		http_websocket_session_read_options::merged_options(Options, MergedOptions),
+		http_websocket_session_read_options::option(auto_pong(AutoPong), MergedOptions),
+		http_websocket_session_read_options::option(max_payload_length(MaxPayloadLength), MergedOptions).
 
 	check_read_options(Options) :-
-		( 	var(Options) ->
-			instantiation_error
-		; 	proper_list(Options) ->
-			check_read_option_list(Options)
-		; 	type_error(list, Options)
+		catch(
+			http_websocket_session_read_options::check_options(Options),
+			error(domain_error(option, Option), _),
+			domain_error(http_websocket_session_read_option, Option)
 		).
-
-	check_read_option_list([]).
-	check_read_option_list([Option| Options]) :-
-		check_read_option(Option),
-		check_read_option_list(Options).
-
-	check_read_option(auto_pong(on)) :-
-		!.
-	check_read_option(auto_pong(off)) :-
-		!.
-	check_read_option(Option) :-
-		domain_error(http_websocket_session_read_option, Option).
 
 	parse_write_options(Options, FragmentSize) :-
 		check_write_options(Options),
-		reverse(Options, ReversedOptions),
-		( 	member(fragment_size(FragmentSize), ReversedOptions) ->
-			true
-		; 	FragmentSize = none
-		).
+		http_websocket_session_write_options::merged_options(Options, MergedOptions),
+		http_websocket_session_write_options::option(fragment_size(FragmentSize), MergedOptions).
 
 	check_write_options(Options) :-
-		( 	var(Options) ->
-			instantiation_error
-		; 	proper_list(Options) ->
-			check_write_option_list(Options)
-		; 	type_error(list, Options)
+		catch(
+			http_websocket_session_write_options::check_options(Options),
+			error(domain_error(option, Option), _),
+			domain_error(http_websocket_session_write_option, Option)
 		).
-
-	check_write_option_list([]).
-	check_write_option_list([Option| Options]) :-
-		check_write_option(Option),
-		check_write_option_list(Options).
-
-	check_write_option(fragment_size(Size)) :-
-		!,
-		( 	integer(Size),
-			Size > 0 ->
-			true
-		; 	domain_error(http_websocket_session_write_option, fragment_size(Size))
-		).
-	check_write_option(Option) :-
-		domain_error(http_websocket_session_write_option, Option).
 
 	write_message_state(Stream, Pending0, Close0, Message0, Options, Pending, Close) :-
 		parse_write_options(Options, FragmentSize),
 		^^encode_message(Message0, Message, Opcode, PayloadBytes),
+		validate_write_close_state(Pending0, Close0, Message),
 		write_encoded_message(Stream, Opcode, PayloadBytes, FragmentSize),
 		Pending = Pending0,
 		update_close_state_after_write(Close0, Message, Close).
+
+	validate_write_close_state(_Pending0, open, _Message) :-
+		!.
+	validate_write_close_state(_Pending0, close_sent(_SentPayload), message(Type, _MessagePayload)) :-
+		\+ data_opcode(Type),
+		!.
+	validate_write_close_state(_Pending0, close_received(_ReceivedPayload), message(close, _Payload)) :-
+		!.
+	validate_write_close_state(Pending0, Close0, _Message) :-
+		output_state(Pending0, Close0, State),
+		domain_error(http_websocket_session_state, State).
 
 	update_close_state_after_write(Close0, message(close, Payload), Close) :-
 		!,
@@ -978,6 +1091,10 @@
 	data_opcode(text).
 	data_opcode(binary).
 
+	write_chunk_frames(Stream, Opcode, []) :-
+		!,
+		write_session_frame(Stream, final, Opcode, []).
+
 	write_chunk_frames(Stream, Opcode, [Chunk]) :-
 		!,
 		write_session_frame(Stream, final, Opcode, Chunk).
@@ -999,16 +1116,30 @@
 
 	outgoing_frame_properties(Properties) :-
 		( 	_Role_ == client ->
-			random_masking_key(Key),
+			::generate_masking_key(Key),
 			Properties = [masking_key(Key)]
 		; 	Properties = []
 		).
 
-	random_masking_key([Byte0, Byte1, Byte2, Byte3]) :-
-		random_between(0, 255, Byte0),
-		random_between(0, 255, Byte1),
-		random_between(0, 255, Byte2),
-		random_between(0, 255, Byte3).
+	generate_masking_key(Key) :-
+		random_bytes(4, Key).
+
+	random_bytes(N, Bytes) :-
+		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
+		list::length(Bytes, N),
+		read_random_bytes(Bytes, Stream),
+		close(Stream),
+		!.
+	random_bytes(N, Bytes) :-
+		wall_time(Time),
+		Seed is round(Time),
+		randomize(Seed),
+		sequence(N, 0, 255, Bytes).
+
+	read_random_bytes([], _).
+	read_random_bytes([Byte| Bytes], Stream) :-
+		get_byte(Stream, Byte),
+		read_random_bytes(Bytes, Stream).
 
 	split_payload_bytes(Bytes, FragmentSize, Chunks) :-
 		take_payload_chunks(Bytes, FragmentSize, Chunks).
@@ -1063,11 +1194,13 @@
 		comment is 'Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop using the given combined handshake and session options.',
 		argnames is ['URL', 'Handler', 'Response', 'State', 'Options'],
 		remarks is [
+			'Repeated options' - 'When the same handshake or session option is given multiple times, the first occurrence is used.',
 			'Handshake options' - 'The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `http_client::open_websocket/4`.',
 			'Session option ``auto_pong(on|off)``' - 'Controls automatic pong replies during the session loop.',
 			'Session option ``initial_messages(Messages)``' - 'Writes the given list of normalized outbound messages before entering the session loop.',
 			'Session option ``keepalive_interval(Seconds)``' - 'Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.',
-			'Session option ``idle_timeout(Seconds)``' - 'Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.'
+			'Session option ``idle_timeout(Seconds)``' - 'Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.',
+			'Session option ``max_payload_length(Bytes)``' - 'Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.'
 		]
 	]).
 
@@ -1087,24 +1220,27 @@
 
 	parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions) :-
 		check_open_options(Options),
-		reverse(Options, ReversedOptions),
-		( 	member(initial_messages(InitialMessages0), ReversedOptions) ->
+		( 	member(initial_messages(InitialMessages0), Options) ->
 			validate_initial_messages(InitialMessages0, InitialMessages)
 		; 	InitialMessages = []
 		),
-		( 	member(auto_pong(AutoPong0), ReversedOptions) ->
+		( 	member(auto_pong(AutoPong0), Options) ->
 			validate_auto_pong(AutoPong0, AutoPong)
 		; 	AutoPong = off
 		),
-		( 	member(keepalive_interval(Keepalive0), ReversedOptions) ->
+		( 	member(keepalive_interval(Keepalive0), Options) ->
 			validate_interval_option(keepalive_interval, Keepalive0, KeepaliveInterval)
 		; 	KeepaliveInterval = none
 		),
-		( 	member(idle_timeout(IdleTimeout0), ReversedOptions) ->
+		( 	member(idle_timeout(IdleTimeout0), Options) ->
 			validate_interval_option(idle_timeout, IdleTimeout0, IdleTimeout)
 		; 	IdleTimeout = none
 		),
-		build_session_options(AutoPong, KeepaliveInterval, IdleTimeout, SessionOptions),
+		( 	member(max_payload_length(MaxPayloadLength0), Options) ->
+			^^validate_non_negative_integer_option(http_websocket_client_session_option, max_payload_length, MaxPayloadLength0, MaxPayloadLength)
+		; 	MaxPayloadLength = none
+		),
+		build_session_options(AutoPong, KeepaliveInterval, IdleTimeout, MaxPayloadLength, SessionOptions),
 		filter_websocket_open_options(Options, WebSocketOptions).
 
 	check_open_options(Options) :-
@@ -1147,10 +1283,11 @@
 		Option =.. [Name, Interval],
 		domain_error(http_websocket_client_session_option, Option).
 
-	build_session_options(AutoPong, KeepaliveInterval, IdleTimeout, SessionOptions) :-
+	build_session_options(AutoPong, KeepaliveInterval, IdleTimeout, MaxPayloadLength, SessionOptions) :-
 		SessionOptions0 = [auto_pong(AutoPong)],
 		prepend_interval_option(keepalive_interval, KeepaliveInterval, SessionOptions0, SessionOptions1),
-		prepend_interval_option(idle_timeout, IdleTimeout, SessionOptions1, SessionOptions).
+		prepend_interval_option(idle_timeout, IdleTimeout, SessionOptions1, SessionOptions2),
+		prepend_interval_option(max_payload_length, MaxPayloadLength, SessionOptions2, SessionOptions).
 
 	prepend_interval_option(_Name, none, SessionOptions, SessionOptions) :-
 		!.
@@ -1168,6 +1305,9 @@
 		!,
 		filter_websocket_open_options(Options, FilteredOptions).
 	filter_websocket_open_options([idle_timeout(_)| Options], FilteredOptions) :-
+		!,
+		filter_websocket_open_options(Options, FilteredOptions).
+	filter_websocket_open_options([max_payload_length(_)| Options], FilteredOptions) :-
 		!,
 		filter_websocket_open_options(Options, FilteredOptions).
 	filter_websocket_open_options([Option| Options], [Option| FilteredOptions]) :-
@@ -1214,7 +1354,8 @@
 			'Option ``auto_pong(on)``' - 'Automatically writes pong replies while still forwarding ping messages to the session handler.',
 			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.',
 			'Option ``keepalive_interval(Seconds)``' - 'Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.',
-			'Option ``idle_timeout(Seconds)``' - 'Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.'
+			'Option ``idle_timeout(Seconds)``' - 'Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.',
+			'Option ``max_payload_length(Bytes)``' - 'Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.'
 		]
 	]).
 
@@ -1237,7 +1378,8 @@
 		remarks is [
 			'Option ``auto_pong(on|off)``' - 'Controls automatic pong replies in each active session loop.',
 			'Option ``keepalive_interval(Seconds)``' - 'Schedules empty ping messages when a peer stays silent for the given positive number of seconds.',
-			'Option ``idle_timeout(Seconds)``' - 'Closes a session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message.'
+			'Option ``idle_timeout(Seconds)``' - 'Closes a session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message.',
+			'Option ``max_payload_length(Bytes)``' - 'Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in each session loop. Use a non-negative integer.'
 		]
 	]).
 

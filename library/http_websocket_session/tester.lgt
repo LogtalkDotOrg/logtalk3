@@ -32,6 +32,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(random(loader)),
 		logtalk_load(timeout(loader)),

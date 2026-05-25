@@ -150,3 +150,43 @@
 	handle(_Message, []).
 
 :- end_object.
+
+
+:- object(websocket_close_broadcast_session_handler,
+	implements(http_websocket_session_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-25,
+		comment is 'Callback object used to verify that registry actions are skipped when a peer close is received.'
+	]).
+
+	handle(message(close, _Payload), [broadcast_others(message(text, should_not_broadcast))]) :-
+		!.
+	handle(message(ping, _Payload), []) :-
+		!.
+	handle(_Message, []).
+
+:- end_object.
+
+
+:- object(websocket_close_then_broadcast_session_handler,
+	implements(http_websocket_session_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-25,
+		comment is 'Callback object used to verify that queued registry messages are not flushed after sending a close frame.'
+	]).
+
+	handle(message(text, hello), [reply(message(close, status(1000))), broadcast(message(text, should_not_flush))]) :-
+		!.
+	handle(message(close, _Payload), []) :-
+		!.
+	handle(message(ping, _Payload), []) :-
+		!.
+	handle(_Message, []).
+
+:- end_object.

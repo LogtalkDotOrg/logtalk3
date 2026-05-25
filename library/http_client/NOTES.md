@@ -68,79 +68,79 @@ are used to run the local server concurrently with the client call.
 
 Define a small echo handler once:
 
-  :- object(notes_http_client_echo_handler,
-    implements(http_handler_protocol)).
-
-    handle(Request, Response) :-
-      http::version(Request, Version),
-      http::body(Request, Body),
-      http::response(Version, status(200, 'OK'), [], Body, [], Response).
-
-  :- end_object.
+	:- object(notes_http_client_echo_handler,
+		implements(http_handler_protocol)).
+		
+		handle(Request, Response) :-
+			http::version(Request, Version),
+			http::body(Request, Body),
+			http::response(Version, status(200, 'OK'), [], Body, [], Response).
+	
+	:- end_object.
 
 Start a local listener, send a request, and inspect the normalized response:
 
-  | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-       threaded_once(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
-       atomic_list_concat(['http://127.0.0.1:', Port, '/echo'], URL),
-       http_client::post(URL, content('text/plain', text(hello)), Response, []),
-       threaded_exit(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
-       http_socket::close_listener(Listener).
-
-  Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
+	| ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
+	     threaded_once(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+	     atomic_list_concat(['http://127.0.0.1:', Port, '/echo'], URL),
+	     http_client::post(URL, content('text/plain', text(hello)), Response, []),
+	     threaded_exit(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+	     http_socket::close_listener(Listener).
+	
+	Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
 
 For a multipart form-data request, define a handler that inspects the normalized
 request body using `http_multipart`:
 
-  :- object(notes_http_client_multipart_handler,
-    implements(http_handler_protocol)).
+	:- object(notes_http_client_multipart_handler,
+		implements(http_handler_protocol)).
+		
+		handle(Request, Response) :-
+			http::version(Request, Version),
+			http::body(Request, Body),
+			http_multipart::fields(Body, [title-Title]),
+			http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
+			atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
+			http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
+	
+	:- end_object.
 
-    handle(Request, Response) :-
-      http::version(Request, Version),
-      http::body(Request, Body),
-      http_multipart::fields(Body, [title-Title]),
-      http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
-      atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
-      http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
-
-  :- end_object.
-
-  | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-       threaded_once(http_socket::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
-       atomic_list_concat(['http://127.0.0.1:', Port, '/upload'], URL),
-       http_client::post(
-           URL,
-           form_data([
-               field(title, 'Logtalk'),
-               file(upload, 'notes.txt', 'text/plain', text(hello))
-           ]),
-           Response,
-           []
-       ),
-       threaded_exit(http_socket::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
-       http_socket::close_listener(Listener).
-
-  Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text('title=Logtalk; upload=notes.txt')), _).
+	| ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
+	     threaded_once(http_socket::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
+	     atomic_list_concat(['http://127.0.0.1:', Port, '/upload'], URL),
+	     http_client::post(
+	         URL,
+	         form_data([
+	             field(title, 'Logtalk'),
+	             file(upload, 'notes.txt', 'text/plain', text(hello))
+	         ]),
+	         Response,
+	         []
+	     ),
+	     threaded_exit(http_socket::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
+	     http_socket::close_listener(Listener).
+	
+	Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text('title=Logtalk; upload=notes.txt')), _).
 
 For a WebSocket opening handshake, define a handler that accepts the upgrade:
 
-  :- object(notes_http_client_websocket_handler,
-    implements(http_handler_protocol)).
+	:- object(notes_http_client_websocket_handler,
+		implements(http_handler_protocol)).
+		
+		handle(Request, Response) :-
+			http_server::accept_websocket(Request, Response, [protocol(chat)]).
+	
+	:- end_object.
 
-    handle(Request, Response) :-
-      http_server::accept_websocket(Request, Response, [protocol(chat)]).
-
-  :- end_object.
-
-  | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-       threaded_once(http_socket::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
-       atomic_list_concat(['ws://127.0.0.1:', Port, '/socket'], URL),
-       http_client::open_websocket(URL, Connection, Response, [protocols([chat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
-       http_socket::close_connection(Connection),
-       threaded_exit(http_socket::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
-       http_socket::close_listener(Listener).
-
-  Response = response(http(1,1), status(101, 'Switching Protocols'), _, empty, _).
+	| ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
+	     threaded_once(http_socket::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
+	     atomic_list_concat(['ws://127.0.0.1:', Port, '/socket'], URL),
+	     http_client::open_websocket(URL, Connection, Response, [protocols([chat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
+	     http_socket::close_connection(Connection),
+	     threaded_exit(http_socket::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
+	     http_socket::close_listener(Listener).
+	
+	Response = response(http(1,1), status(101, 'Switching Protocols'), _, empty, _).
 
 The `Connection` term returned by `open_websocket/4` remains open. After the
 handshake, either close it explicitly with `http_socket::close_connection/1`

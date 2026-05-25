@@ -26,7 +26,10 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-23,
-		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.'
+		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.',
+		remarks is [
+			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.'
+		]
 	]).
 
 	:- public(open/1).
@@ -174,15 +177,15 @@
 		request(Session, delete, URL, Response, Options).
 
 	post(Session, URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(Session, post, URL, Response, RequestOptions).
 
 	put(Session, URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(Session, put, URL, Response, RequestOptions).
 
 	patch(Session, URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(Session, patch, URL, Response, RequestOptions).
 
 	parse_open_options(UserOptions, JarOption, Headers, QueryPairs, Version, Properties) :-
@@ -233,28 +236,27 @@
 
 	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, CookiePairs) :-
 		validate_request_options(Options),
-		reverse(Options, ReversedOptions),
-		( 	member(headers(Headers0), ReversedOptions) ->
+		( 	member(headers(Headers0), Options) ->
 			Headers = Headers0
 		; 	Headers = []
 		),
-		( 	member(body(Body0), ReversedOptions) ->
+		( 	member(body(Body0), Options) ->
 			Body = Body0
 		; 	Body = empty
 		),
-		( 	member(query(QueryPairs0), ReversedOptions) ->
+		( 	member(query(QueryPairs0), Options) ->
 			QueryPairs = QueryPairs0
 		; 	QueryPairs = []
 		),
-		( 	member(version(Version0), ReversedOptions) ->
+		( 	member(version(Version0), Options) ->
 			Version = Version0
 		; 	Version = none
 		),
-		( 	member(properties(Properties0), ReversedOptions) ->
+		( 	member(properties(Properties0), Options) ->
 			Properties = Properties0
 		; 	Properties = []
 		),
-		( 	member(cookies(CookiePairs0), ReversedOptions) ->
+		( 	member(cookies(CookiePairs0), Options) ->
 			CookiePairs = CookiePairs0
 		; 	CookiePairs = []
 		).

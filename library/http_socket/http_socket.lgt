@@ -31,6 +31,7 @@
 			'Supported backends' - 'Availability depends on the supported backends of the sockets library.',
 			'Client side' - 'The open_connection/4 and close_connection/1 predicates manage reusable client connections. The open_connection_pool/4 and close_connection_pool/1 predicates manage reusable connection pools. The exchange/3 and exchange_connection/3 predicates operate on an open connection or a connection pool. The exchange/4 and exchange_connection/4 predicates open a client socket, perform one or more HTTP exchanges, and close the connection.',
 			'Server side' - 'The open_listener/4 and close_listener/1 predicates manage listener lifecycle. The serve_once/3 predicate serves one accepted connection. The serve_websocket_once/5 predicate serves one WebSocket opening handshake and returns an upgraded connection handle that remains open for use with the http_websocket library or later message-processing layers. The serve_listener/4 predicate provides bounded sequential serving. The serve_listener/5 predicate adds shutdown policy, worker-per-connection orchestration, and bounded worker-pool serving. The serve_until_shutdown/4 and request_shutdown/1 predicates provide externally controlled open-ended serving loops.',
+			'Option precedence' - 'When the same listener, serving, or pool-management option is given multiple times, the first occurrence is used.',
 			'Connection stream access' - 'The connection_streams/3 predicate exposes the binary input and output streams carried by both reusable client connection handles and upgraded WebSocket connection handles.'
 		]
 	]).
@@ -462,23 +463,23 @@
 	parse_listener_options(Options, Shutdown, Workers) :-
 		^^check_options(Options),
 		check_listener_options(Options),
-		reverse(Options, ReversedOptions),
-		^^option(shutdown(Shutdown), ReversedOptions, shutdown(keep_open)),
-		^^option(workers(Workers), ReversedOptions, workers(serial)).
+		^^merge_options(Options, MergedOptions),
+		^^option(shutdown(Shutdown), MergedOptions),
+		^^option(workers(Workers), MergedOptions).
 
 	parse_open_listener_options(Options, Workers) :-
 		^^check_options(Options),
 		check_open_listener_options(Options),
-		reverse(Options, ReversedOptions),
-		^^option(workers(Workers), ReversedOptions, workers(serial)).
+		^^merge_options(Options, MergedOptions),
+		^^option(workers(Workers), MergedOptions).
 
 	parse_connection_pool_options(Options, MinSize, MaxSize, ConnectionOptions) :-
 		^^check_options(Options),
 		check_connection_pool_options(Options),
-		reverse(Options, ReversedOptions),
-		^^option(min_size(MinSize), ReversedOptions, min_size(0)),
-		^^option(max_size(MaxSize), ReversedOptions, max_size(10)),
-		^^option(connection_options(ConnectionOptions), ReversedOptions, connection_options([])),
+		^^merge_options(Options, MergedOptions),
+		^^option(min_size(MinSize), MergedOptions),
+		^^option(max_size(MaxSize), MergedOptions),
+		^^option(connection_options(ConnectionOptions), MergedOptions),
 		(	MinSize =< MaxSize ->
 			true
 		;	domain_error(http_socket_connection_pool_options, [min_size(MinSize), max_size(MaxSize)])
@@ -532,6 +533,12 @@
 		MaxSize > 0.
 	valid_option(connection_options(ConnectionOptions)) :-
 		socket::valid_options(ConnectionOptions).
+
+	default_option(shutdown(keep_open)).
+	default_option(workers(serial)).
+	default_option(min_size(0)).
+	default_option(max_size(10)).
+	default_option(connection_options([])).
 
 	valid_workers_option(serial).
 	valid_workers_option(per_connection).

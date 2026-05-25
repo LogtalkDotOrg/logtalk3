@@ -21,7 +21,7 @@ ________________________________________________________________________
 `http`
 ======
 
-This library provides the transport-independent core of the planned HTTP stack.
+This library provides the transport-independent core of the HTTP stack.
 It currently covers normalized request and response terms, shared protocols,
 wire parsing and generation for the message start-lines, headers, and bodies,
 plus semantic normalization for a core set of frequently used headers.
@@ -141,5 +141,5 @@ Current limitations
 - The WebSocket support in this layer is limited to the HTTP opening-handshake
   metadata and helper predicates needed by plain `ws://` transports; `wss://`
   and TLS-backed transport orchestration remain out of scope
-- The library does not yet provide client or server transport orchestration;
-  those belong to the planned `http_client` and `http_server` libraries
+- For client and server transport orchestration, see, respectively, the
+  `http_client` and `http_server` libraries

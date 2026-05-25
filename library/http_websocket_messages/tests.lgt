@@ -83,6 +83,11 @@
 		write_frames_file('test_http_websocket_messages.tmp', [Frame1, Frame2]),
 		open_file_read_message('test_http_websocket_messages.tmp', _Message).
 
+	test(http_websocket_messages_read_message_2_06, error(domain_error(http_websocket_message_text, [0xC3, 0x28]))) :-
+		http_websocket::frame(final, text, [0xC3, 0x28], [], Frame),
+		write_frames_file('test_http_websocket_messages.tmp', [Frame]),
+		open_file_read_message('test_http_websocket_messages.tmp', _Message).
+
 	test(http_websocket_messages_write_message_2_01, deterministic) :-
 		message(text, hello, Message),
 		^^file_path('test_http_websocket_messages.tmp', File),

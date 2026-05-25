@@ -59,44 +59,46 @@ reproduced directly.
 
 Define a simple handler object once:
 
-  :- object(notes_http_server_echo_handler,
-    implements(http_handler_protocol)).
-
-    handle(Request, Response) :-
-      http::version(Request, Version),
-      http::body(Request, Body),
-      http::response(Version, status(200, 'OK'), [], Body, [], Response).
-
-  :- end_object.
+	:- object(notes_http_server_echo_handler,
+		implements(http_handler_protocol)).
+		
+		handle(Request, Response) :-
+			http::version(Request, Version),
+			http::body(Request, Body),
+			http::response(Version, status(200, 'OK'), [], Body, [], Response).
+	
+	:- end_object.
 
 To serve a single request from existing binary streams:
 
-  | ?- Request = 'POST /echo HTTP/1.1\r\nhost: example.com\r\ncontent-type: text/plain\r\ncontent-length: 5\r\n\r\nhello',
-       open('request.tmp', write, RequestStream, [type(binary)]),
-       write(RequestStream, Request),
-       close(RequestStream),
-       open('request.tmp', read, Input, [type(binary)]),
-       open('response.tmp', write, Output, [type(binary)]),
-       http_server::serve(Input, Output, notes_http_server_echo_handler),
-       close(Input),
-       close(Output),
-       http::parse_response(file('response.tmp'), Response).
+	| ?- Request = 'POST /echo HTTP/1.1\r\nhost: example.com\r\ncontent-type: text/plain\r\ncontent-length: 5\r\n\r\nhello',
+	     atom_codes(Request, RequestBytes),
+	     open('request.tmp', write, RequestStream, [type(binary)]),
+	     forall(member(RequestByte, RequestBytes), put_byte(RequestStream, RequestByte)),
+	     close(RequestStream),
+	     open('request.tmp', read, Input, [type(binary)]),
+	     open('response.tmp', write, Output, [type(binary)]),
+	     http_server::serve(Input, Output, notes_http_server_echo_handler),
+	     close(Input),
+	     close(Output),
+	     http::parse_response(file('response.tmp'), Response).
 
-  Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
+	Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
 
 To keep serving requests on the same stream pair until persistence rules say to
 stop, write several requests into the same input stream and call
 `serve_connection/3` once:
 
-  | ?- Requests = 'POST /echo HTTP/1.1\r\nhost: example.com\r\ncontent-type: text/plain\r\ncontent-length: 3\r\n\r\nonePOST /echo HTTP/1.1\r\nhost: example.com\r\ncontent-type: text/plain\r\ncontent-length: 3\r\n\r\ntwo',
-       open('requests.tmp', write, RequestStream, [type(binary)]),
-       write(RequestStream, Requests),
-       close(RequestStream),
-       open('requests.tmp', read, Input, [type(binary)]),
-       open('responses.tmp', write, Output, [type(binary)]),
-       http_server::serve_connection(Input, Output, notes_http_server_echo_handler),
-       close(Input),
-       close(Output).
+	| ?- Requests = 'POST /echo HTTP/1.1\r\nhost: example.com\r\ncontent-type: text/plain\r\ncontent-length: 3\r\n\r\nonePOST /echo HTTP/1.1\r\nhost: example.com\r\ncontent-type: text/plain\r\ncontent-length: 3\r\n\r\ntwo',
+	     atom_codes(Requests, RequestBytes),
+	     open('requests.tmp', write, RequestStream, [type(binary)]),
+	     forall(member(RequestByte, RequestBytes), put_byte(RequestStream, RequestByte)),
+	     close(RequestStream),
+	     open('requests.tmp', read, Input, [type(binary)]),
+	     open('responses.tmp', write, Output, [type(binary)]),
+	     http_server::serve_connection(Input, Output, notes_http_server_echo_handler),
+	     close(Input),
+	     close(Output).
 
 The generated `responses.tmp` file contains two consecutive normalized HTTP
 responses, one for `one` and one for `two`.
@@ -104,18 +106,18 @@ responses, one for `one` and one for `two`.
 For multipart request inspection, define a handler that uses `http_multipart`
 on the normalized request body:
 
-  :- object(notes_http_server_multipart_handler,
-    implements(http_handler_protocol)).
-
-    handle(Request, Response) :-
-      http::version(Request, Version),
-      http::body(Request, Body),
-      http_multipart::fields(Body, [title-Title]),
-      http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
-      atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
-      http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
-
-  :- end_object.
+	:- object(notes_http_server_multipart_handler,
+		implements(http_handler_protocol)).
+		
+		handle(Request, Response) :-
+			http::version(Request, Version),
+			http::body(Request, Body),
+			http_multipart::fields(Body, [title-Title]),
+			http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
+			atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
+			http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
+	
+	:- end_object.
 
 That handler can be used unchanged with `serve/3` or `serve_connection/3`
 because this library exposes multipart requests in the same normalized form
@@ -124,26 +126,27 @@ produced by `http::parse_request/2`.
 For a WebSocket opening handshake, define a handler that delegates to
 `accept_websocket/3`:
 
-  :- object(notes_http_server_websocket_handler,
-    implements(http_handler_protocol)).
+	:- object(notes_http_server_websocket_handler,
+		implements(http_handler_protocol)).
+		
+		handle(Request, Response) :-
+			http_server::accept_websocket(Request, Response, [protocol(chat)]).
+	
+	:- end_object.
 
-    handle(Request, Response) :-
-      http_server::accept_websocket(Request, Response, [protocol(chat)]).
+	| ?- Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\nsec-websocket-protocol: chat\r\n\r\n',
+	     atom_codes(Request, RequestBytes),
+	     open('ws_request.tmp', write, RequestStream, [type(binary)]),
+	     forall(member(RequestByte, RequestBytes), put_byte(RequestStream, RequestByte)),
+	     close(RequestStream),
+	     open('ws_request.tmp', read, Input, [type(binary)]),
+	     open('ws_response.tmp', write, Output, [type(binary)]),
+	     http_server::serve_websocket(Input, Output, notes_http_server_websocket_handler, Outcome),
+	     close(Input),
+	     close(Output).
 
-  :- end_object.
-
-  | ?- Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\nsec-websocket-protocol: chat\r\n\r\n',
-       open('ws_request.tmp', write, RequestStream, [type(binary)]),
-       write(RequestStream, Request),
-       close(RequestStream),
-       open('ws_request.tmp', read, Input, [type(binary)]),
-       open('ws_response.tmp', write, Output, [type(binary)]),
-       http_server::serve_websocket(Input, Output, notes_http_server_websocket_handler, Outcome),
-       close(Input),
-       close(Output).
-
-  Outcome = accepted(RequestTerm, Response),
-  Response = response(http(1,1), status(101, 'Switching Protocols'), _, empty, _).
+	Outcome = accepted(RequestTerm, Response),
+	Response = response(http(1,1), status(101, 'Switching Protocols'), _, empty, _).
 
 After `serve_websocket/4` succeeds, higher layers must take ownership of the
 underlying upgraded connection or streams. This library stops at the HTTP

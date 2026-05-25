@@ -125,8 +125,8 @@
 	:- dynamic(registry_session_/3).
 	:- mode(registry_session_(?positive_integer, ?positive_integer, ?list(compound)), zero_or_more).
 	:- info(registry_session_/3, [
-		comment is 'Registered sessions and their queued outbound messages indexed by registry identifier.',
-		argnames is ['RegistryId', 'SessionId', 'Messages']
+		comment is 'Registered sessions and their queued outbound messages indexed by registry identifier. Messages are stored in reverse order to make enqueue operations constant time.',
+		argnames is ['RegistryId', 'SessionId', 'QueuedMessagesReversed']
 	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
@@ -143,7 +143,7 @@
 	:- endif.
 
 	:- uses(list, [
-		append/3, member/2
+		member/2, reverse/2
 	]).
 
 	open(Registry) :-
@@ -272,8 +272,7 @@
 		Session = websocket_session(RegistryId, SessionId),
 		!,
 		( 	retract(registry_session_(RegistryId, SessionId, Messages0)) ->
-			append(Messages0, [Message], Messages),
-			assertz(registry_session_(RegistryId, SessionId, Messages))
+			assertz(registry_session_(RegistryId, SessionId, [Message| Messages0]))
 		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
 	queue_session_message(Registry, Session, _Message) :-
@@ -291,7 +290,7 @@
 		Session = websocket_session(RegistryId, SessionId),
 		!,
 		( 	retract(registry_session_(RegistryId, SessionId, Messages0)) ->
-			Messages = Messages0,
+			reverse(Messages0, Messages),
 			assertz(registry_session_(RegistryId, SessionId, []))
 		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).

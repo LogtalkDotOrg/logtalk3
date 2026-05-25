@@ -35,6 +35,48 @@
 :- end_object.
 
 
+:- object(websocket_no_protocol_http_server_handler,
+	implements(http_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-24,
+		comment is 'WebSocket handshake handler used by the http_server tests to exercise declining all offered subprotocols.'
+	]).
+
+	handle(Request, Response) :-
+		http_server::accept_websocket(Request, Response, []).
+
+:- end_object.
+
+
+:- object(websocket_extensions_http_server_handler,
+	implements(http_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-24,
+		comment is 'WebSocket handshake handler used by the http_server tests to exercise unsupported extension negotiation.'
+	]).
+
+	handle(Request, Response) :-
+		http::version(Request, Version),
+		http::property(Request, websocket_key(Key)),
+		http::websocket_accept(Key, Accept),
+		http::response(
+			Version,
+			status(101, 'Switching Protocols'),
+			[sec_websocket_extensions-'permessage-deflate'],
+			empty,
+			[connection([upgrade]), upgrade([websocket]), websocket_accept(Accept)],
+			Response
+		).
+
+:- end_object.
+
+
 :- object(echo_http_handler,
 	implements(http_handler_protocol)).
 

@@ -389,73 +389,83 @@ assume a backend with thread support because <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">threaded_exit/2</span></code> are used to run the local server concurrently with
 the client call.</p>
 <p>Define a small echo handler once:</p>
-<p>:- object(notes_http_client_echo_handler,
-implements(http_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-  http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-  http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-  http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_echo_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>:- end_object.</p>
 <p>Start a local listener, send a request, and inspect the normalized
 response:</p>
-<p>| ?- http_socket::open_listener(‘127.0.0.1’, Port, Listener, []),
-threaded_once(http_socket::serve_once(Listener,
-notes_http_client_echo_handler, _), Tag),
-atomic_list_concat([’<a class="reference external" href="http://127.0.0.1">http://127.0.0.1</a>:’, Port, ‘/echo’], URL),
-http_client::post(URL, content(‘text/plain’, text(hello)), Response,
-[]), threaded_exit(http_socket::serve_once(Listener,
-notes_http_client_echo_handler, _), Tag),
-http_socket::close_listener(Listener).</p>
-<p>Response = response(http(1,1), status(200, ‘OK’), _,
-content(‘text/plain’, text(hello)), _).</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/echo&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>post(<span class="nv">URL</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">Response</span>, []),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
+</pre></div>
+</div>
 <p>For a multipart form-data request, define a handler that inspects the
 normalized request body using <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code>:</p>
-<p>:- object(notes_http_client_multipart_handler,
-implements(http_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-  http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-  http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-  http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
-  http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
-  atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
-  http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_multipart_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
+        http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
+        atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
+        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/upload&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>post(
+         <span class="nv">URL</span>,
+         form_data([
+             field(title, <span class="s">&#39;Logtalk&#39;</span>),
+             file(upload, <span class="s">&#39;notes.txt&#39;</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))
+         ]),
+         <span class="nv">Response</span>,
+         []
+     ),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="s">&#39;title=Logtalk; upload=notes.txt&#39;</span>)), <span class="nv">_</span>).
 </pre></div>
 </div>
-<p>:- end_object.</p>
-<p>| ?- http_socket::open_listener(‘127.0.0.1’, Port, Listener, []),
-threaded_once(http_socket::serve_once(Listener,
-notes_http_client_multipart_handler, _), Tag),
-atomic_list_concat([’<a class="reference external" href="http://127.0.0.1">http://127.0.0.1</a>:’, Port, ‘/upload’], URL),
-http_client::post( URL, form_data([ field(title, ‘Logtalk’),
-file(upload, ‘notes.txt’, ‘text/plain’, text(hello)) ]), Response, [] ),
-threaded_exit(http_socket::serve_once(Listener,
-notes_http_client_multipart_handler, _), Tag),
-http_socket::close_listener(Listener).</p>
-<p>Response = response(http(1,1), status(200, ‘OK’), _,
-content(‘text/plain’, text(‘title=Logtalk; upload=notes.txt’)), _).</p>
 <p>For a WebSocket opening handshake, define a handler that accepts the
 upgrade:</p>
-<p>:- object(notes_http_client_websocket_handler,
-implements(http_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-  http_server<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_websocket_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_server<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;ws://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/socket&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>open_websocket(<span class="nv">URL</span>, <span class="nv">Connection</span>, <span class="nv">Response</span>, [protocols([chat]), key(<span class="s">&#39;dGhlIHNhbXBsZSBub25jZQ==&#39;</span>)]),
+     http_socket<span class="o">::</span>close_connection(<span class="nv">Connection</span>),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">101</span>, <span class="s">&#39;Switching Protocols&#39;</span>), <span class="nv">_</span>, empty, <span class="nv">_</span>).
 </pre></div>
 </div>
-<p>:- end_object.</p>
-<p>| ?- http_socket::open_listener(‘127.0.0.1’, Port, Listener, []),
-threaded_once(http_socket::serve_once(Listener,
-notes_http_client_websocket_handler, _), Tag),
-atomic_list_concat([‘ws://127.0.0.1:’, Port, ‘/socket’], URL),
-http_client::open_websocket(URL, Connection, Response,
-[protocols([chat]), key(‘dGhlIHNhbXBsZSBub25jZQ==’)]),
-http_socket::close_connection(Connection),
-threaded_exit(http_socket::serve_once(Listener,
-notes_http_client_websocket_handler, _), Tag),
-http_socket::close_listener(Listener).</p>
-<p>Response = response(http(1,1), status(101, ‘Switching Protocols’), _,
-empty, _).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Connection</span></code> term returned by <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> remains open.
 After the handshake, either close it explicitly with
 <code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> or hand it to the

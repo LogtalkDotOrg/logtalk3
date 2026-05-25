@@ -346,8 +346,8 @@
              
   <section id="http">
 <span id="library-http"></span><h1><code class="docutils literal notranslate"><span class="pre">http</span></code><a class="headerlink" href="#http" title="Link to this heading"></a></h1>
-<p>This library provides the transport-independent core of the planned HTTP
-stack. It currently covers normalized request and response terms, shared
+<p>This library provides the transport-independent core of the HTTP stack.
+It currently covers normalized request and response terms, shared
 protocols, wire parsing and generation for the message start-lines,
 headers, and bodies, plus semantic normalization for a core set of
 frequently used headers.</p>
@@ -465,9 +465,8 @@ set are preserved as validated raw <code class="docutils literal notranslate"><s
 opening-handshake metadata and helper predicates needed by plain
 <code class="docutils literal notranslate"><span class="pre">ws://</span></code> transports; <code class="docutils literal notranslate"><span class="pre">wss://</span></code> and TLS-backed transport
 orchestration remain out of scope</p></li>
-<li><p>The library does not yet provide client or server transport
-orchestration; those belong to the planned <code class="docutils literal notranslate"><span class="pre">http_client</span></code> and
-<code class="docutils literal notranslate"><span class="pre">http_server</span></code> libraries</p></li>
+<li><p>For client and server transport orchestration, see, respectively, the
+<code class="docutils literal notranslate"><span class="pre">http_client</span></code> and <code class="docutils literal notranslate"><span class="pre">http_server</span></code> libraries</p></li>
 </ul>
 </section>
 </section>

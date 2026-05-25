@@ -380,80 +380,94 @@ link in a web browser.</p>
 <p>The examples below use in-memory streams or local files so they can be
 reproduced directly.</p>
 <p>Define a simple handler object once:</p>
-<p>:- object(notes_http_server_echo_handler,
-implements(http_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-  http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-  http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-  http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_echo_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>:- end_object.</p>
 <p>To serve a single request from existing binary streams:</p>
-<p>| ?- Request = ‘POST /echo HTTP/1.1\r\nhost:
-example.com\r\ncontent-type: text/plain\r\ncontent-length:
-5\r\n\r\nhello’, open(‘request.tmp’, write, RequestStream,
-[type(binary)]), write(RequestStream, Request), close(RequestStream),
-open(‘request.tmp’, read, Input, [type(binary)]), open(‘response.tmp’,
-write, Output, [type(binary)]), http_server::serve(Input, Output,
-notes_http_server_echo_handler), close(Input), close(Output),
-<a class="reference external" href="http::parse_response(file('response.tmp">http::parse_response(file(‘response.tmp</a>’), Response).</p>
-<p>Response = response(http(1,1), status(200, ‘OK’), _,
-content(‘text/plain’, text(hello)), _).</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Request</span> <span class="o">=</span> <span class="s">&#39;POST /echo HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">content-type: text/plain</span><span class="se">\r\n</span><span class="s">content-length: 5</span><span class="se">\r\n\r\n</span><span class="s">hello&#39;</span>,
+     <span class="k">atom_codes</span>(<span class="nv">Request</span>, <span class="nv">RequestBytes</span>),
+     <span class="k">open</span>(<span class="s">&#39;request.tmp&#39;</span>, write, <span class="nv">RequestStream</span>, [type(binary)]),
+     <span class="k">forall</span>(member(<span class="nv">RequestByte</span>, <span class="nv">RequestBytes</span>), <span class="k">put_byte</span>(<span class="nv">RequestStream</span>, <span class="nv">RequestByte</span>)),
+     <span class="k">close</span>(<span class="nv">RequestStream</span>),
+     <span class="k">open</span>(<span class="s">&#39;request.tmp&#39;</span>, read, <span class="nv">Input</span>, [type(binary)]),
+     <span class="k">open</span>(<span class="s">&#39;response.tmp&#39;</span>, write, <span class="nv">Output</span>, [type(binary)]),
+     http_server<span class="o">::</span>serve(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_echo_handler),
+     <span class="k">close</span>(<span class="nv">Input</span>),
+     <span class="k">close</span>(<span class="nv">Output</span>),
+     http<span class="o">::</span>parse_response(file(<span class="s">&#39;response.tmp&#39;</span>), <span class="nv">Response</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
+</pre></div>
+</div>
 <p>To keep serving requests on the same stream pair until persistence rules
 say to stop, write several requests into the same input stream and call
 <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> once:</p>
-<p>| ?- Requests = ‘POST /echo HTTP/1.1\r\nhost:
-example.com\r\ncontent-type: text/plain\r\ncontent-length:
-3\r\n\r\nonePOST /echo HTTP/1.1\r\nhost:
-example.com\r\ncontent-type: text/plain\r\ncontent-length:
-3\r\n\r\ntwo’, open(‘requests.tmp’, write, RequestStream,
-[type(binary)]), write(RequestStream, Requests), close(RequestStream),
-open(‘requests.tmp’, read, Input, [type(binary)]), open(‘responses.tmp’,
-write, Output, [type(binary)]), http_server::serve_connection(Input,
-Output, notes_http_server_echo_handler), close(Input), close(Output).</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Requests</span> <span class="o">=</span> <span class="s">&#39;POST /echo HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">content-type: text/plain</span><span class="se">\r\n</span><span class="s">content-length: 3</span><span class="se">\r\n\r\n</span><span class="s">onePOST /echo HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">content-type: text/plain</span><span class="se">\r\n</span><span class="s">content-length: 3</span><span class="se">\r\n\r\n</span><span class="s">two&#39;</span>,
+     <span class="k">atom_codes</span>(<span class="nv">Requests</span>, <span class="nv">RequestBytes</span>),
+     <span class="k">open</span>(<span class="s">&#39;requests.tmp&#39;</span>, write, <span class="nv">RequestStream</span>, [type(binary)]),
+     <span class="k">forall</span>(member(<span class="nv">RequestByte</span>, <span class="nv">RequestBytes</span>), <span class="k">put_byte</span>(<span class="nv">RequestStream</span>, <span class="nv">RequestByte</span>)),
+     <span class="k">close</span>(<span class="nv">RequestStream</span>),
+     <span class="k">open</span>(<span class="s">&#39;requests.tmp&#39;</span>, read, <span class="nv">Input</span>, [type(binary)]),
+     <span class="k">open</span>(<span class="s">&#39;responses.tmp&#39;</span>, write, <span class="nv">Output</span>, [type(binary)]),
+     http_server<span class="o">::</span>serve_connection(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_echo_handler),
+     <span class="k">close</span>(<span class="nv">Input</span>),
+     <span class="k">close</span>(<span class="nv">Output</span>).
+</pre></div>
+</div>
 <p>The generated <code class="docutils literal notranslate"><span class="pre">responses.tmp</span></code> file contains two consecutive normalized
 HTTP responses, one for <code class="docutils literal notranslate"><span class="pre">one</span></code> and one for <code class="docutils literal notranslate"><span class="pre">two</span></code>.</p>
 <p>For multipart request inspection, define a handler that uses
 <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> on the normalized request body:</p>
-<p>:- object(notes_http_server_multipart_handler,
-implements(http_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-  http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-  http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-  http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
-  http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
-  atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
-  http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_multipart_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
+        http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
+        atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
+        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>:- end_object.</p>
 <p>That handler can be used unchanged with <code class="docutils literal notranslate"><span class="pre">serve/3</span></code> or
 <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> because this library exposes multipart requests
 in the same normalized form produced by <code class="docutils literal notranslate"><span class="pre">http::parse_request/2</span></code>.</p>
 <p>For a WebSocket opening handshake, define a handler that delegates to
 <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code>:</p>
-<p>:- object(notes_http_server_websocket_handler,
-implements(http_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-  http_server<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_websocket_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_server<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+| <span class="o">?-</span> <span class="nv">Request</span> <span class="o">=</span> <span class="s">&#39;GET /socket HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">connection: Upgrade</span><span class="se">\r\n</span><span class="s">upgrade: websocket</span><span class="se">\r\n</span><span class="s">sec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==</span><span class="se">\r\n</span><span class="s">sec-websocket-version: 13</span><span class="se">\r\n</span><span class="s">sec-websocket-protocol: chat</span><span class="se">\r\n\r\n</span><span class="s">&#39;</span>,
+     <span class="k">atom_codes</span>(<span class="nv">Request</span>, <span class="nv">RequestBytes</span>),
+     <span class="k">open</span>(<span class="s">&#39;ws_request.tmp&#39;</span>, write, <span class="nv">RequestStream</span>, [type(binary)]),
+     <span class="k">forall</span>(member(<span class="nv">RequestByte</span>, <span class="nv">RequestBytes</span>), <span class="k">put_byte</span>(<span class="nv">RequestStream</span>, <span class="nv">RequestByte</span>)),
+     <span class="k">close</span>(<span class="nv">RequestStream</span>),
+     <span class="k">open</span>(<span class="s">&#39;ws_request.tmp&#39;</span>, read, <span class="nv">Input</span>, [type(binary)]),
+     <span class="k">open</span>(<span class="s">&#39;ws_response.tmp&#39;</span>, write, <span class="nv">Output</span>, [type(binary)]),
+     http_server<span class="o">::</span>serve_websocket(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_websocket_handler, <span class="nv">Outcome</span>),
+     <span class="k">close</span>(<span class="nv">Input</span>),
+     <span class="k">close</span>(<span class="nv">Output</span>).
+
+<span class="nv">Outcome</span> <span class="o">=</span> accepted(<span class="nv">RequestTerm</span>, <span class="nv">Response</span>),
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">101</span>, <span class="s">&#39;Switching Protocols&#39;</span>), <span class="nv">_</span>, empty, <span class="nv">_</span>).
 </pre></div>
 </div>
-<p>:- end_object.</p>
-<p>| ?- Request = ‘GET /socket HTTP/1.1\r\nhost:
-example.com\r\nconnection: Upgrade\r\nupgrade:
-websocket\r\nsec-websocket-key:
-dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version:
-13\r\nsec-websocket-protocol: chat\r\n\r\n’,
-open(‘ws_request.tmp’, write, RequestStream, [type(binary)]),
-write(RequestStream, Request), close(RequestStream),
-open(‘ws_request.tmp’, read, Input, [type(binary)]),
-open(‘ws_response.tmp’, write, Output, [type(binary)]),
-http_server::serve_websocket(Input, Output,
-notes_http_server_websocket_handler, Outcome), close(Input),
-close(Output).</p>
-<p>Outcome = accepted(RequestTerm, Response), Response =
-response(http(1,1), status(101, ‘Switching Protocols’), _, empty, _).</p>
 <p>After <code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code> succeeds, higher layers must take ownership
 of the underlying upgraded connection or streams. This library stops at
 the HTTP opening handshake.</p>

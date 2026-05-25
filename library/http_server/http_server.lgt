@@ -75,7 +75,10 @@
 	:- mode(accept_websocket(+compound, --compound, +list), one_or_error).
 	:- info(accept_websocket/3, [
 		comment is 'Validates a normalized WebSocket opening-handshake request and builds a matching ``101 Switching Protocols`` response. The ``protocol(Protocol)`` option can be used to select a single offered subprotocol.',
-		argnames is ['Request', 'Response', 'Options']
+		argnames is ['Request', 'Response', 'Options'],
+		remarks is [
+			'Repeated options' - 'When the same WebSocket acceptance option is given multiple times, the first occurrence is used.'
+		]
 	]).
 
 	:- public(serve_websocket/4).
@@ -141,10 +144,9 @@
 
 	parse_accept_websocket_options(Options, Headers, Properties, ProtocolOption) :-
 		check_accept_websocket_options(Options),
-		reverse(Options, ReversedOptions),
-		accept_websocket_option(ReversedOptions, headers, [], Headers),
-		accept_websocket_option(ReversedOptions, properties, [], Properties),
-		accept_websocket_option(ReversedOptions, protocol, none, ProtocolOption).
+		accept_websocket_option(Options, headers, [], Headers),
+		accept_websocket_option(Options, properties, [], Properties),
+		accept_websocket_option(Options, protocol, none, ProtocolOption).
 
 	accept_websocket_option([], _Name, Default, Default).
 	accept_websocket_option([Option| _Options], Name, _Default, Value) :-
@@ -172,7 +174,7 @@
 
 	validate_accept_websocket_headers(Headers) :-
 		( 	member(Name-_, Headers),
-			memberchk(Name, [connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol]) ->
+			member(Name, [connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions]) ->
 			domain_error(http_server_websocket_headers, Headers)
 		; 	true
 		).
@@ -180,7 +182,7 @@
 	validate_accept_websocket_properties(Properties) :-
 		( 	member(Property, Properties),
 			functor(Property, Functor, _Arity),
-			memberchk(Functor, [connection, upgrade, websocket_key, websocket_version, websocket_accept, websocket_protocol]) ->
+			member(Functor, [connection, upgrade, websocket_key, websocket_version, websocket_accept, websocket_protocol, websocket_extensions]) ->
 			domain_error(http_server_websocket_properties, Properties)
 		; 	true
 		).
@@ -195,6 +197,7 @@
 		http::method(Request, get),
 		http::version(Request, Version),
 		websocket_http_version(Version),
+		websocket_host_header(Request),
 		http::body(Request, empty),
 		^^message_connection_tokens(Request, ConnectionTokens),
 		memberchk(upgrade, ConnectionTokens),
@@ -207,12 +210,17 @@
 		; 	OfferedProtocols = []
 		).
 
-	websocket_http_version(http(Major, Minor)) :-
-		Major >= 1,
-		( 	Major > 1 ->
+	websocket_host_header(Request) :-
+		( 	http::property(Request, host(_Host)) ->
 			true
-		; 	Minor >= 1
-		),
+		; 	http::property(Request, host(_Host, _Port)) ->
+			true
+		; 	http::header(Request, host, host(_Host))
+		; 	http::header(Request, host, host(_Host, _Port))
+		).
+
+	websocket_http_version(Version) :-
+		Version == http(1, 1),
 		!.
 
 	select_websocket_protocol(none, _OfferedProtocols, none) :-
@@ -261,12 +269,43 @@
 	serve_websocket_result(error(Response), Output, _Handler, rejected(Response)) :-
 		write_response(Output, Response).
 	serve_websocket_result(request(Request), Output, Handler, Outcome) :-
-		dispatch(Handler, Request, Response),
+		dispatch_websocket(Handler, Request, Response),
 		write_response_for_request(Output, Request, Response),
 		( 	valid_websocket_upgrade_response(Request, Response) ->
 			Outcome = accepted(Request, Response)
 		; 	Outcome = rejected(Response)
 		).
+
+	dispatch_websocket(Handler, Request, Response) :-
+		validate_handler(Handler),
+		http::version(Request, Version),
+		catch(
+			( 	Handler::handle(Request, Candidate),
+				( 	http::is_response(Candidate) ->
+					Response = Candidate
+				; 	internal_server_error_response(Version, Response)
+				)
+			),
+			Error,
+			( 	websocket_handler_error_response(Error, Request, Response) ->
+				true
+			; 	internal_server_error_response(Version, Response)
+			)
+		).
+
+	websocket_handler_error_response(error(domain_error(http_server_websocket_request, Request), _Context), _OriginalRequest, Response) :-
+		unsupported_websocket_version(Request),
+		!,
+		upgrade_required_response(Response).
+	websocket_handler_error_response(error(domain_error(http_server_websocket_request, _Request), _Context), _OriginalRequest, Response) :-
+		bad_request_response(http_server_websocket_request, Response).
+
+	unsupported_websocket_version(Request) :-
+		message_websocket_version(Request, Version),
+		Version =\= 13.
+
+	upgrade_required_response(Response) :-
+		http::response(http(1, 1), status(426, 'Upgrade Required'), [], content('text/plain', text('Upgrade Required')), [websocket_version(13)], Response).
 
 	valid_websocket_upgrade_response(Request, Response) :-
 		http::status(Response, status(101, _ReasonPhrase)),
@@ -278,13 +317,16 @@
 		message_websocket_key(Request, Key),
 		http::websocket_accept(Key, Accept),
 		message_websocket_accept(Response, Accept),
+		\+ message_websocket_extensions(Response, _Extensions),
 		valid_websocket_protocol_response(Request, Response).
 
 	valid_websocket_protocol_response(Request, Response) :-
 		message_websocket_protocols(Request, OfferedProtocols),
 		!,
-		message_websocket_protocols(Response, [SelectedProtocol]),
-		memberchk(SelectedProtocol, OfferedProtocols).
+		( 	message_websocket_protocols(Response, [SelectedProtocol]) ->
+			memberchk(SelectedProtocol, OfferedProtocols)
+		; 	true
+		).
 	valid_websocket_protocol_response(_Request, Response) :-
 		\+ message_websocket_protocols(Response, _Protocols).
 
@@ -292,6 +334,13 @@
 		( 	http::property(Message, websocket_accept(Accept)) ->
 			true
 		; 	http::header(Message, sec_websocket_accept, Accept)
+		),
+		!.
+
+	message_websocket_extensions(Message, Extensions) :-
+		( 	http::property(Message, websocket_extensions(Extensions)) ->
+			true
+		; 	http::header(Message, sec_websocket_extensions, Extensions)
 		),
 		!.
 

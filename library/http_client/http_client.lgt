@@ -30,6 +30,7 @@
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
 			'Request construction' - 'The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.',
+			'Option precedence' - 'When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.',
 			'WebSocket opening handshake' - 'The ``open_websocket/4`` predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.',
 			'Multipart form-data' - 'The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a ``form_data(Items)`` descriptor that is translated using the ``http_multipart`` library and annotated with a multipart boundary property before request construction.',
 			'Reusable transports' - 'The ``request/5`` and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.',
@@ -184,27 +185,27 @@
 		request(ConnectionOrPool, delete, URL, Response, Options).
 
 	post(URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(post, URL, Response, RequestOptions).
 
 	post(ConnectionOrPool, URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(ConnectionOrPool, post, URL, Response, RequestOptions).
 
 	put(URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(put, URL, Response, RequestOptions).
 
 	put(ConnectionOrPool, URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(ConnectionOrPool, put, URL, Response, RequestOptions).
 
 	patch(URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(patch, URL, Response, RequestOptions).
 
 	patch(ConnectionOrPool, URL, Body, Response, Options) :-
-		append(Options, [body(Body)], RequestOptions),
+		RequestOptions = [body(Body)| Options],
 		request(ConnectionOrPool, patch, URL, Response, RequestOptions).
 
 	open_websocket(URL, Connection, Response, Options) :-
@@ -224,27 +225,24 @@
 	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties) :-
 		^^check_options(Options),
 		check_request_options(Options),
-		reverse(Options, ReversedOptions),
-		^^option(headers(Headers), ReversedOptions, headers([])),
-		^^option(body(Body0), ReversedOptions, body(empty)),
-		^^option(query(QueryPairs), ReversedOptions, query([])),
-		^^option(version(Version), ReversedOptions, version(http(1, 1))),
-		^^option(properties(Properties0), ReversedOptions, properties([])),
+		^^merge_options(Options, MergedOptions),
+		^^option(headers(Headers), MergedOptions),
+		^^option(body(Body0), MergedOptions),
+		^^option(query(QueryPairs), MergedOptions),
+		^^option(version(Version), MergedOptions),
+		^^option(properties(Properties0), MergedOptions),
 		resolve_request_body(Body0, Headers, Properties0, Body, Properties).
 
 	parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions) :-
 		^^check_options(Options),
 		check_websocket_options(Options),
-		reverse(Options, ReversedOptions),
-		^^option(headers(Headers), ReversedOptions, headers([])),
-		^^option(query(QueryPairs), ReversedOptions, query([])),
-		^^option(version(Version), ReversedOptions, version(http(1, 1))),
-		^^option(protocols(Protocols), ReversedOptions, protocols([])),
-		^^option(connection_options(ConnectionOptions), ReversedOptions, connection_options([])),
-		( 	^^option(key(ExplicitKey), ReversedOptions, key(none)) ->
-			true
-		; 	ExplicitKey = none
-		),
+		^^merge_options(Options, MergedOptions),
+		^^option(headers(Headers), MergedOptions),
+		^^option(query(QueryPairs), MergedOptions),
+		^^option(version(Version), MergedOptions),
+		^^option(protocols(Protocols), MergedOptions),
+		^^option(connection_options(ConnectionOptions), MergedOptions),
+		^^option(key(ExplicitKey), MergedOptions),
 		validate_websocket_headers(Headers),
 		resolve_websocket_key(ExplicitKey, Key).
 
@@ -338,6 +336,15 @@
 	valid_option(connection_options(ConnectionOptions)) :-
 		proper_list(ConnectionOptions).
 
+	default_option(headers([])).
+	default_option(body(empty)).
+	default_option(query([])).
+	default_option(version(http(1, 1))).
+	default_option(properties([])).
+	default_option(protocols([])).
+	default_option(key(none)).
+	default_option(connection_options([])).
+
 	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Host, Port, Request) :-
 		parse_http_url(URL, Host, Port, Path, URLQuery),
 		merge_request_query(URLQuery, QueryPairs, Query),
@@ -411,12 +418,8 @@
 	validate_websocket_scheme_name(Scheme) :-
 		domain_error(http_client_websocket_scheme, Scheme).
 
-	validate_websocket_http_version(http(Major, Minor)) :-
-		Major >= 1,
-		( 	Major > 1 ->
-			true
-		; 	Minor >= 1
-		),
+	validate_websocket_http_version(Version) :-
+		Version == http(1, 1),
 		!.
 	validate_websocket_http_version(Version) :-
 		domain_error(http_client_websocket_version, Version).
@@ -433,6 +436,7 @@
 	websocket_header_name(sec_websocket_key).
 	websocket_header_name(sec_websocket_version).
 	websocket_header_name(sec_websocket_protocol).
+	websocket_header_name(sec_websocket_extensions).
 	websocket_header_name(sec_websocket_accept).
 
 	resolve_websocket_key(none, Key) :-
@@ -443,25 +447,50 @@
 	websocket_opening_key(Key) :-
 		uuid(atom)::uuid_v4(UUID),
 		atom_codes(UUID, UUIDCodes),
-		websocket_key_bytes(16, UUIDCodes, KeyBytes),
+		uuid_key_bytes(UUIDCodes, KeyBytes),
 		generate(atom(Key), KeyBytes).
 
-	websocket_key_bytes(0, _UUIDCodes, []) :-
+	uuid_key_bytes(UUIDCodes, KeyBytes) :-
+		uuid_key_bytes(UUIDCodes, [], ReversedKeyBytes),
+		reverse(ReversedKeyBytes, KeyBytes).
+
+	uuid_key_bytes([], KeyBytes, KeyBytes) :-
 		!.
-	websocket_key_bytes(Count, [0'-| UUIDCodes], Bytes) :-
+	uuid_key_bytes([0'-| UUIDCodes], KeyBytes0, KeyBytes) :-
 		!,
-		websocket_key_bytes(Count, UUIDCodes, Bytes).
-	websocket_key_bytes(Count, [Code| UUIDCodes], [Code| Bytes]) :-
-		NextCount is Count - 1,
-		websocket_key_bytes(NextCount, UUIDCodes, Bytes).
+		uuid_key_bytes(UUIDCodes, KeyBytes0, KeyBytes).
+	uuid_key_bytes([Code1, Code2| UUIDCodes], KeyBytes0, KeyBytes) :-
+		hex_digit_code_value(Code1, Value1),
+		hex_digit_code_value(Code2, Value2),
+		Byte is (Value1 << 4) \/ Value2,
+		uuid_key_bytes(UUIDCodes, [Byte| KeyBytes0], KeyBytes).
+
+	hex_digit_code_value(Code, Value) :-
+		( 	0'0 =< Code, Code =< 0'9 ->
+			Value is Code - 0'0
+		; 	0'a =< Code, Code =< 0'f ->
+			Value is Code - 0'a + 10
+		; 	0'A =< Code, Code =< 0'F ->
+			Value is Code - 0'A + 10
+		; 	fail
+		).
 
 	validate_websocket_response(Request, Response) :-
 		( 	valid_websocket_response(Request, Response) ->
 			true
+		; 	valid_websocket_version_rejection(Response) ->
+			domain_error(http_client_websocket_version_rejection, Response)
+		; 	valid_websocket_authentication_rejection(Response) ->
+			domain_error(http_client_websocket_authentication_rejection, Response)
+		; 	valid_websocket_redirection_rejection(Response) ->
+			domain_error(http_client_websocket_redirection_rejection, Response)
+		; 	valid_websocket_rejection(Response) ->
+			domain_error(http_client_websocket_rejection, Response)
 		; 	domain_error(http_client_websocket_response, Response)
 		).
 
 	valid_websocket_response(Request, Response) :-
+		websocket_response_http_version(Response),
 		http::status(Response, status(101, _ReasonPhrase)),
 		http::body(Response, empty),
 		^^message_connection_tokens(Response, ConnectionTokens),
@@ -471,15 +500,36 @@
 		message_websocket_key(Request, Key),
 		http::websocket_accept(Key, ExpectedAccept),
 		message_websocket_accept(Response, ExpectedAccept),
+		\+ message_websocket_extensions(Response, _Extensions),
 		validate_websocket_protocol_response(Request, Response).
 
+	valid_websocket_version_rejection(Response) :-
+		http::status(Response, status(426, _ReasonPhrase)),
+		message_websocket_version(Response, _Version).
+
+	valid_websocket_authentication_rejection(Response) :-
+		http::status(Response, status(401, _ReasonPhrase)).
+
+	valid_websocket_redirection_rejection(Response) :-
+		http::status(Response, status(Status, _ReasonPhrase)),
+		Status >= 300,
+		Status < 400.
+
+	valid_websocket_rejection(Response) :-
+		http::status(Response, status(Status, _ReasonPhrase)),
+		Status =\= 101.
+
+	websocket_response_http_version(Response) :-
+		http::version(Response, http(1, 1)).
+
 	validate_websocket_protocol_response(Request, Response) :-
-		message_websocket_protocols(Request, RequestedProtocols),
-		( 	message_websocket_protocols(Response, ResponseProtocols) ->
-			ResponseProtocols = [Protocol],
-			RequestedProtocols \== [],
-			memberchk(Protocol, RequestedProtocols)
-		; 	true
+		( 	message_websocket_protocols(Request, RequestedProtocols) ->
+			( 	message_websocket_protocols(Response, ResponseProtocols) ->
+				ResponseProtocols = [Protocol],
+				memberchk(Protocol, RequestedProtocols)
+			; 	true
+			)
+		; 	\+ message_websocket_protocols(Response, _Protocols)
 		).
 
 	message_upgrade_tokens(Message, Tokens) :-
@@ -496,10 +546,24 @@
 		),
 		!.
 
+	message_websocket_version(Message, Version) :-
+		( 	http::property(Message, websocket_version(Version)) ->
+			true
+		; 	http::header(Message, sec_websocket_version, Version)
+		),
+		!.
+
 	message_websocket_accept(Message, Accept) :-
 		( 	http::property(Message, websocket_accept(Accept)) ->
 			true
 		; 	http::header(Message, sec_websocket_accept, Accept)
+		),
+		!.
+
+	message_websocket_extensions(Message, Extensions) :-
+		( 	http::property(Message, websocket_extensions(Extensions)) ->
+			true
+		; 	http::header(Message, sec_websocket_extensions, Extensions)
 		),
 		!.
 

@@ -185,31 +185,31 @@ These timed options require backend thread support.
 
 A small server-side session handler can look like:
 
-  :- object(chat_session_handler,
-    implements(http_websocket_session_handler_protocol)).
-
-    handle(message(text, ping), [message(text, pong)]) :-
-      !.
-    handle(message(text, Text), [message(text, Text)]) :-
-      !.
-    handle(message(close, _Payload), []) :-
-      !.
-    handle(_Message, []).
-
-  :- end_object.
+	:- object(chat_session_handler,
+		implements(http_websocket_session_handler_protocol)).
+		
+		handle(message(text, ping), [message(text, pong)]) :-
+			!.
+		handle(message(text, Text), [message(text, Text)]) :-
+			!.
+		handle(message(close, _Payload), []) :-
+			!.
+		handle(_Message, []).
+	
+	:- end_object.
 
 After a successful opening handshake returns an upgraded `Connection` handle,
 run the loop with either:
 
-  | ?- http_websocket_server_session::run_session(Connection, chat_session_handler, FinalState).
+	| ?- http_websocket_server_session::run_session(Connection, chat_session_handler, FinalState).
 
-  or:
+or:
 
-  | ?- http_websocket_server_session::run_session(Connection, chat_session_handler, FinalState, [auto_pong(on)]).
+	| ?- http_websocket_server_session::run_session(Connection, chat_session_handler, FinalState, [auto_pong(on)]).
 
-  or with timed loop policies:
+or with timed loop policies:
 
-  | ?- http_websocket_server_session::run_session(Connection, chat_session_handler, FinalState, [auto_pong(on), keepalive_interval(30), idle_timeout(120)]).
+	| ?- http_websocket_server_session::run_session(Connection, chat_session_handler, FinalState, [auto_pong(on), keepalive_interval(30), idle_timeout(120)]).
 
 The `run_session/3-4` predicates take ownership of the upgraded connection, so
 no explicit `http_socket::close_connection/1` call is needed afterwards.
@@ -217,11 +217,11 @@ no explicit `http_socket::close_connection/1` call is needed afterwards.
 For a client that wants to collapse the opening handshake and the callback loop
 into a single call, the `http_websocket_client_session` object provides:
 
-  open(URL, SessionHandler, Response, FinalState)
+	open(URL, SessionHandler, Response, FinalState)
 
-  or:
+or:
 
-  open(URL, SessionHandler, Response, FinalState, [protocols([chat]), initial_messages([message(text, hello)]), auto_pong(on)])
+	open(URL, SessionHandler, Response, FinalState, [protocols([chat]), initial_messages([message(text, hello)]), auto_pong(on)])
 
 The `initial_messages(Messages)` option writes the given list of normalized
 outbound messages immediately after the handshake and before the first session
@@ -232,11 +232,11 @@ connection and close it automatically when the session loop finishes.
 For a server that wants to collapse the opening handshake and the callback loop
 into a single call, the `http_websocket_server_session` object also provides:
 
-  serve_once(Listener, HandshakeHandler, SessionHandler, Response, FinalState, ClientInfo)
+	serve_once(Listener, HandshakeHandler, SessionHandler, Response, FinalState, ClientInfo)
 
-  or:
+or:
 
-  serve_once(Listener, HandshakeHandler, SessionHandler, Response, FinalState, ClientInfo, [auto_pong(on)])
+	serve_once(Listener, HandshakeHandler, SessionHandler, Response, FinalState, ClientInfo, [auto_pong(on)])
 
 These predicates accept one incoming socket connection, serve one valid
 opening handshake via the given HTTP handler, run the session loop via the
@@ -251,11 +251,11 @@ Registry-backed server helper
 For multi-session servers that need queued outbound delivery and broadcast, the
 `http_websocket_server_session` object also provides:
 
-  serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control)
+	serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control)
 
-  or:
+or:
 
-  serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control, [auto_pong(on), keepalive_interval(30), idle_timeout(120)])
+	serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control, [auto_pong(on), keepalive_interval(30), idle_timeout(120)])
 
 This helper accepts opening handshakes until:
 
@@ -275,16 +275,16 @@ plain normalized reply messages, but it may also return these action wrappers:
 
 For example, a simple chat-style broadcast handler can look like:
 
-  :- object(chat_broadcast_handler,
-    implements(http_websocket_session_handler_protocol)).
-
-    handle(message(text, Text), [broadcast_others(message(text, Text))]) :-
-      !.
-    handle(message(close, _Payload), []) :-
-      !.
-    handle(_Message, []).
-
-  :- end_object.
+	:- object(chat_broadcast_handler,
+		implements(http_websocket_session_handler_protocol)).
+		
+		handle(message(text, Text), [broadcast_others(message(text, Text))]) :-
+			!.
+		handle(message(close, _Payload), []) :-
+			!.
+		handle(_Message, []).
+	
+	:- end_object.
 
 The `http_websocket_session_registry` object provides the registry handle and
 queue-management predicates used by this helper. The registry-backed server

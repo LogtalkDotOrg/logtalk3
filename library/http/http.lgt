@@ -615,7 +615,7 @@
 			add_unique_property(websocket_key(Key), Acc6, Acc7)
 		; 	Acc7 = Acc6
 		),
-		( 	semantic_single_header_value(Headers, sec_websocket_version, Version) ->
+		( 	semantic_websocket_version_header_value(Headers, Version) ->
 			add_unique_property(websocket_version(Version), Acc7, Acc8)
 		; 	Acc8 = Acc7
 		),
@@ -729,10 +729,11 @@
 		maybe_add_connection_header(Properties, Headers1, Headers2),
 		maybe_add_upgrade_header(Properties, Headers2, Headers3),
 		maybe_add_websocket_accept_header(Properties, Headers3, Headers4),
-		maybe_add_websocket_protocol_header(Properties, Headers4, Headers5),
-		maybe_add_transfer_encoding_header(Properties, Headers5, Headers6),
-		maybe_add_content_type_header(Body, Properties, Headers6, Headers7),
-		maybe_add_content_length_header(BodyBytes, Headers7, Headers).
+		maybe_add_websocket_version_header(Properties, Headers4, Headers5),
+		maybe_add_websocket_protocol_header(Properties, Headers5, Headers6),
+		maybe_add_transfer_encoding_header(Properties, Headers6, Headers7),
+		maybe_add_content_type_header(Body, Properties, Headers7, Headers8),
+		maybe_add_content_length_header(BodyBytes, Headers8, Headers).
 
 	maybe_add_request_host_header(_Target, _Properties, Headers, Headers) :-
 		header_name_present(Headers, host),
@@ -1546,8 +1547,12 @@
 		atom_codes(Key, Codes),
 		!.
 	header_value_codes(sec_websocket_version, Value, Codes) :-
-		normalize_header_semantics(sec_websocket_version, Value, Version),
-		number_codes(Version, Codes),
+		( 	Value = [_| _] ->
+			normalize_websocket_versions(Value, Versions),
+			websocket_versions_codes(Versions, Codes)
+		; 	normalize_header_semantics(sec_websocket_version, Value, Version),
+			websocket_versions_codes(Version, Codes)
+		),
 		!.
 	header_value_codes(sec_websocket_accept, Value, Codes) :-
 		normalize_header_semantics(sec_websocket_accept, Value, Accept),
@@ -1667,6 +1672,22 @@
 		header_values(Headers, Name, Values),
 		single_header_value(Name, Values, Value).
 
+	semantic_websocket_version_header_value(Headers, Version) :-
+		websocket_header_values(Headers, Values0),
+		Values0 \== [],
+		flatten_websocket_versions(Values0, Versions),
+		( 	Versions = [SingleVersion] ->
+			Version = SingleVersion
+		; 	Version = Versions
+		).
+
+	websocket_header_values([], []).
+	websocket_header_values([sec_websocket_version-Value| Headers], [Value| Values]) :-
+		!,
+		websocket_header_values(Headers, Values).
+	websocket_header_values([_Header| Headers], Values) :-
+		websocket_header_values(Headers, Values).
+
 	header_values(Headers, Name, Values) :-
 		header_values(Headers, Name, [], ReversedValues),
 		reverse(ReversedValues, Values).
@@ -1705,8 +1726,11 @@
 	normalize_websocket_version(Value, Version) :-
 		text_to_codes(Value, Codes0),
 		trim_ows_codes(Codes0, Codes),
-		valid_digit_codes(Codes),
-		number_codes(Version, Codes).
+		parse_websocket_version_codes(Codes, Versions),
+		( 	Versions = [SingleVersion] ->
+			Version = SingleVersion
+		; 	Version = Versions
+		).
 
 	single_header_value(_Name, [Value], Value) :-
 		!.
@@ -1719,6 +1743,14 @@
 	all_same_header_values([], _).
 	all_same_header_values([Value| Values], Value) :-
 		all_same_header_values(Values, Value).
+
+	flatten_websocket_versions([], []).
+	flatten_websocket_versions([[Version| Versions0]| Values0], Versions) :-
+		!,
+		flatten_websocket_versions(Values0, Versions1),
+		append([Version| Versions0], Versions1, Versions).
+	flatten_websocket_versions([Version| Values0], [Version| Versions]) :-
+		flatten_websocket_versions(Values0, Versions).
 
 	target_host_property(absolute(Components), HostProperty) :-
 		memberchk(authority(Authority), Components),
@@ -2010,7 +2042,10 @@
 		).
 	validate_header_value(sec_websocket_version, Value) :-
 		!,
-		( 	normalize_header_semantics(sec_websocket_version, Value, _) ->
+		( 	( 	Value = [_| _] ->
+				normalize_websocket_versions(Value, _)
+			; 	normalize_header_semantics(sec_websocket_version, Value, _)
+			) ->
 			true
 		; 	domain_error(http_header_value(sec_websocket_version), Value)
 		).
@@ -2152,7 +2187,10 @@
 	valid_property_by_functor(websocket_key, websocket_key(Key)) :-
 		valid_websocket_key(Key).
 	valid_property_by_functor(websocket_version, websocket_version(Version)) :-
-		normalize_websocket_version(Version, Version).
+		( 	Version = [_| _] ->
+			normalize_websocket_versions(Version, _)
+		; 	normalize_websocket_version(Version, _)
+		).
 	valid_property_by_functor(websocket_accept, websocket_accept(Accept)) :-
 		valid_websocket_accept(Accept).
 	valid_property_by_functor(websocket_protocol, websocket_protocol(Protocols)) :-
@@ -2546,6 +2584,11 @@
 		split_codes(0',, Codes, TokenCodeLists),
 		token_code_lists_atoms(TokenCodeLists, Tokens).
 
+	parse_websocket_version_codes(Codes0, Versions) :-
+		trim_ows_codes(Codes0, Codes),
+		split_codes(0',, Codes, VersionCodeLists),
+		websocket_version_code_lists(VersionCodeLists, Versions).
+
 	token_code_lists_atoms([], []).
 	token_code_lists_atoms([TokenCodes0| TokenCodeLists], [Token| Tokens]) :-
 		trim_ows_codes(TokenCodes0, TokenCodes),
@@ -2554,6 +2597,20 @@
 		valid_token_codes(NormalizedTokenCodes),
 		atom_codes(Token, NormalizedTokenCodes),
 		token_code_lists_atoms(TokenCodeLists, Tokens).
+
+	websocket_version_code_lists([], []).
+	websocket_version_code_lists([VersionCodes0| VersionCodeLists], [Version| Versions]) :-
+		trim_ows_codes(VersionCodes0, VersionCodes),
+		VersionCodes \== [],
+		valid_digit_codes(VersionCodes),
+		number_codes(Version, VersionCodes),
+		websocket_version_code_lists(VersionCodeLists, Versions).
+
+	normalize_websocket_versions([], []).
+	normalize_websocket_versions([Version0| Versions0], [Version| Versions]) :-
+		normalize_websocket_version(Version0, Version),
+		integer(Version),
+		normalize_websocket_versions(Versions0, Versions).
 
 	normalize_token_list([], []).
 	normalize_token_list([Token| Tokens], [NormalizedToken| NormalizedTokens]) :-
@@ -2569,6 +2626,18 @@
 		atom_codes(NormalizedToken, TokenCodes),
 		token_list_codes(Tokens, RestCodes),
 		append([TokenCodes, [0',, 0' ], RestCodes], Codes).
+
+	websocket_versions_codes(Version, Codes) :-
+		integer(Version),
+		!,
+		number_codes(Version, Codes).
+	websocket_versions_codes([Version], Codes) :-
+		!,
+		number_codes(Version, Codes).
+	websocket_versions_codes([Version| Versions], Codes) :-
+		number_codes(Version, VersionCodes),
+		websocket_versions_codes(Versions, RestCodes),
+		append([VersionCodes, [0',, 0' ], RestCodes], Codes).
 
 	websocket_accept_from_key(Key, Accept) :-
 		atom_codes(Key, KeyCodes),

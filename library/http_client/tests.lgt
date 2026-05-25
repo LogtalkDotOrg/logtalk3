@@ -29,7 +29,8 @@
 		comment is 'Unit tests for the "http_client" library.'
 	]).
 
-	:- uses(http, [body/2, parse_request/2, property/2, status/2]).
+	:- uses(http, [body/2, parse_request/2, property/2, status/2, version/2]).
+	:- uses(base64, [parse/2]).
 
 	cover(http_client_core).
 	cover(http_client).
@@ -338,11 +339,13 @@
 
 	test(http_client_open_websocket_4_02, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
-		InvalidResponse = 'HTTP/1.1 200 OK\r\ncontent-length: 0\r\n\r\n',
+		InvalidResponse = 'HTTP/1.0 200 OK\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, InvalidResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		catch(http_client::open_websocket(URL, _Connection, _Response, []), Error, true),
-		expected_websocket_response_error(Error),
+		Error = error(domain_error(http_client_websocket_rejection, Response), _),
+		version(Response, http(1, 0)),
+		status(Response, status(200, 'OK')),
 		threaded_exit(raw_server_once(Listener, InvalidResponse), Tag),
 		http_socket::close_listener(Listener).
 
@@ -361,6 +364,120 @@
 		property(Response, upgrade([websocket])),
 		property(Response, websocket_accept('s3pPLMBiTxaQ9kYGzzhZRbK+xOo=')),
 		property(Response, websocket_protocol([chat])).
+
+	test(http_client_open_websocket_4_04, error(domain_error(http_client_websocket_version, http(2, 0)))) :-
+		http_client::open_websocket('ws://example.com/socket', _Connection, _Response, [version(http(2, 0))]).
+
+	test(http_client_open_websocket_4_05, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		http_client::open_websocket(URL, Connection, Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]),
+		http_socket::close_connection(Connection),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener),
+		status(Response, status(101, 'Switching Protocols')),
+		body(Response, empty),
+		property(Response, connection([upgrade])),
+		property(Response, upgrade([websocket])),
+		property(Response, websocket_accept('s3pPLMBiTxaQ9kYGzzhZRbK+xOo=')),
+		\+ property(Response, websocket_protocol(_)).
+
+	test(http_client_open_websocket_4_06, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-protocol: chat\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		expected_websocket_response_error(Error),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_07, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-extensions: permessage-deflate\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		expected_websocket_response_error(Error),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_08, error(domain_error(http_client_websocket_headers, [sec_websocket_extensions-'permessage-deflate']))) :-
+		http_client::open_websocket('ws://example.com/socket', _Connection, _Response, [headers([sec_websocket_extensions-'permessage-deflate'])]).
+
+	test(http_client_open_websocket_4_09, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(raw_websocket_key_server_once(Listener), Tag),
+		local_ws_url(Port, '/socket', URL),
+		http_client::open_websocket(URL, Connection, Response, []),
+		http_socket::close_connection(Connection),
+		threaded_exit(raw_websocket_key_server_once(Listener), Tag),
+		http_socket::close_listener(Listener),
+		status(Response, status(101, 'Switching Protocols')),
+		body(Response, empty).
+
+	test(http_client_open_websocket_4_10, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		http_client::open_websocket(URL, Connection, Response, [protocols([chat, superchat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
+		http_socket::close_connection(Connection),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener),
+		status(Response, status(101, 'Switching Protocols')),
+		body(Response, empty),
+		property(Response, connection([upgrade])),
+		property(Response, upgrade([websocket])),
+		property(Response, websocket_accept('s3pPLMBiTxaQ9kYGzzhZRbK+xOo=')),
+		\+ property(Response, websocket_protocol(_)).
+
+	test(http_client_open_websocket_4_11, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.0 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		Error = error(domain_error(http_client_websocket_response, Response), _),
+		version(Response, http(1, 0)),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_12, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 426 Upgrade Required\r\nsec-websocket-version: 13\r\nsec-websocket-version: 8, 7\r\ncontent-type: text/plain\r\ncontent-length: 16\r\n\r\nUpgrade Required',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		Error = error(domain_error(http_client_websocket_version_rejection, Response), _),
+		status(Response, status(426, 'Upgrade Required')),
+		property(Response, websocket_version([13, 8, 7])),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_13, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 401 Unauthorized\r\nwww-authenticate: Basic realm="socket"\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		Error = error(domain_error(http_client_websocket_authentication_rejection, Response), _),
+		status(Response, status(401, 'Unauthorized')),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_14, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 302 Found\r\nlocation: /other-socket\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		Error = error(domain_error(http_client_websocket_redirection_rejection, Response), _),
+		status(Response, status(302, 'Found')),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
 
 	test(http_client_get_4_01, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -424,6 +541,44 @@
 		;	socket::close(Input, Output),
 			fail
 		).
+
+	raw_websocket_key_server_once(Listener) :-
+		socket::server_accept(Listener, Input, Output, _ClientInfo),
+		( 	catch(
+				( 	http_server::read_request(Input, Request),
+					websocket_key_response_atom(Request, ResponseAtom),
+					atom_codes(ResponseAtom, Bytes),
+					write_bytes(Bytes, Output),
+					flush_output(Output)
+				),
+				Error,
+				( 	catch(socket::close(Input, Output), _, true),
+					throw(Error)
+				)
+			) ->
+			socket::close(Input, Output)
+		; 	socket::close(Input, Output),
+			fail
+		).
+
+	websocket_key_response_atom(Request, ResponseAtom) :-
+		( 	request_has_uuid_v4_websocket_key(Request, Accept) ->
+			atomic_list_concat([
+				'HTTP/1.1 101 Switching Protocols\r\n',
+				'connection: Upgrade\r\n',
+				'upgrade: websocket\r\n',
+				'sec-websocket-accept: ', Accept, '\r\n',
+				'content-length: 0\r\n\r\n'
+			], ResponseAtom)
+		; 	ResponseAtom = 'HTTP/1.1 400 Bad Request\r\ncontent-length: 0\r\n\r\n'
+		).
+
+	request_has_uuid_v4_websocket_key(Request, Accept) :-
+		http::header(Request, sec_websocket_key, Key),
+		parse(atom(Key), [_, _, _, _, _, _, Byte7, _, Byte9, _, _, _, _, _, _, _]),
+		Byte7 /\ 0xF0 =:= 0x40,
+		Byte9 /\ 0xC0 =:= 0x80,
+		http::websocket_accept(Key, Accept).
 
 	local_http_url(Port, Path, URL) :-
 		number_codes(Port, PortCodes),

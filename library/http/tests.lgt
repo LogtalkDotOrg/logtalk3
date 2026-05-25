@@ -336,6 +336,16 @@
 		property(Response, set_cookies([set_cookie('SID', 'abc', [path-('/'), http_only-true])])),
 		property(Response, decoded_body(true)).
 
+	test(http_parse_response_2_02, deterministic) :-
+		parse_response(
+			atom('HTTP/1.1 426 Upgrade Required\r\nsec-websocket-version: 13\r\nsec-websocket-version: 8, 7\r\ncontent-length: 0\r\n\r\n'),
+			Response
+		),
+		status(Response, status(426, 'Upgrade Required')),
+		header(Response, sec_websocket_version, 13),
+		header(Response, sec_websocket_version, [8, 7]),
+		property(Response, websocket_version([13, 8, 7])).
+
 	test(http_generate_response_2_01, deterministic(Message == 'HTTP/1.1 201 Created\r\ncontent-length: 7\r\ncontent-type: text/plain\r\nset-cookie: SID=abc; Path=/; HttpOnly\r\n\r\ncreated')) :-
 		Response = response(http(1, 1), status(201, 'Created'), [], content('text/plain', text(created)), [set_cookies([set_cookie('SID', 'abc', [path-('/'), http_only-true])])]),
 		generate_response(atom(Message), Response).
@@ -371,6 +381,32 @@
 		property(ParsedResponse, upgrade([websocket])),
 		property(ParsedResponse, websocket_accept('s3pPLMBiTxaQ9kYGzzhZRbK+xOo=')),
 		property(ParsedResponse, websocket_protocol([chat])).
+
+	test(http_generate_response_2_04, deterministic) :-
+		Response = response(
+			http(1, 1),
+			status(426, 'Upgrade Required'),
+			[],
+			content('text/plain', text('Upgrade Required')),
+			[websocket_version(13)]
+		),
+		generate_response(atom(Message), Response),
+		parse_response(atom(Message), ParsedResponse),
+		header(ParsedResponse, sec_websocket_version, 13),
+		property(ParsedResponse, websocket_version(13)).
+
+	test(http_generate_response_2_05, deterministic) :-
+		Response = response(
+			http(1, 1),
+			status(426, 'Upgrade Required'),
+			[],
+			content('text/plain', text('Upgrade Required')),
+			[websocket_version([13, 8, 7])]
+		),
+		generate_response(atom(Message), Response),
+		parse_response(atom(Message), ParsedResponse),
+		header(ParsedResponse, sec_websocket_version, [13, 8, 7]),
+		property(ParsedResponse, websocket_version([13, 8, 7])).
 
 	test(http_request_7_06, error(domain_error(http_header_semantics, content_length(5)))) :-
 		request(get, origin('/users'), http(1, 1), [content_length-5], empty, [], _).

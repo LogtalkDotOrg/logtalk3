@@ -19,7 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_websocket).
+:- object(http_websocket,
+	imports(options)).
 
 	:- info([
 		version is 1:0:0,
@@ -77,6 +78,17 @@
 		argnames is ['Stream', 'Frame']
 	]).
 
+	:- public(read_frame/3).
+	:- mode(read_frame(+stream_or_alias, -term, +list), one_or_error).
+	:- info(read_frame/3, [
+		comment is 'Reads one WebSocket frame from a binary stream using the given read options. Returns ``end_of_file`` when the stream is already exhausted.',
+		argnames is ['Stream', 'Frame', 'Options'],
+		remarks is [
+			'Repeated options' - 'When the same read option is given multiple times, the first occurrence is used.',
+			'Option ``max_payload_length(Bytes)``' - 'Rejects frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Use a non-negative integer.'
+		]
+	]).
+
 	:- public(write_frame/2).
 	:- mode(write_frame(+stream_or_alias, +compound), one_or_error).
 	:- info(write_frame/2, [
@@ -119,6 +131,16 @@
 		argnames is ['Frame', 'Property']
 	]).
 
+	valid_option(max_payload_length(MaxPayloadLength)) :-
+		nonvar(MaxPayloadLength),
+		( 	MaxPayloadLength == none ->
+			true
+		; 	integer(MaxPayloadLength),
+			MaxPayloadLength >= 0
+		).
+
+	default_option(max_payload_length(none)).
+
 	frame(Final, Opcode, Payload, Properties0, Frame) :-
 		normalize_frame(frame(Final, Opcode, Payload, Properties0), Frame, _MaskingKey, _ReservedBits).
 
@@ -146,9 +168,13 @@
 		bytes_to_sink(Sink, Bytes).
 
 	read_frame(Stream, Frame) :-
+		read_frame(Stream, Frame, []).
+
+	read_frame(Stream, Frame, Options) :-
 		( 	var(Stream) ->
 			instantiation_error
-		; 	get_byte(Stream, Byte0),
+		; 	parse_read_frame_options(Options, MaxPayloadLength),
+			get_byte(Stream, Byte0),
 			( 	Byte0 =:= -1 ->
 				Frame = end_of_file
 			; 	read_required_byte(Stream, Byte1),
@@ -156,6 +182,7 @@
 				MaskFlag is (Byte1 >> 7) /\ 0x01,
 				LengthCode is Byte1 /\ 0x7F,
 				read_payload_length(Stream, LengthCode, PayloadLength),
+				validate_payload_length_limit(MaxPayloadLength, PayloadLength),
 				read_masking_key(Stream, MaskFlag, MaskingKey),
 				read_required_bytes(PayloadLength, Stream, PayloadBytes0),
 				mask_or_unmask_payload(PayloadBytes0, MaskingKey, PayloadBytes),
@@ -163,6 +190,19 @@
 				frame(Final, Opcode, PayloadBytes, Properties, Frame)
 			)
 		).
+
+	parse_read_frame_options(Options, MaxPayloadLength) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
+		^^option(max_payload_length(MaxPayloadLength), MergedOptions).
+
+	validate_payload_length_limit(none, _PayloadLength) :-
+		!.
+	validate_payload_length_limit(MaxPayloadLength, PayloadLength) :-
+		PayloadLength =< MaxPayloadLength,
+		!.
+	validate_payload_length_limit(_MaxPayloadLength, PayloadLength) :-
+		domain_error(http_websocket_payload_length_limit, PayloadLength).
 
 	write_frame(Stream, Frame) :-
 		( 	var(Stream) ->
@@ -500,7 +540,10 @@
 		!.
 	opcode_atom(0x9, ping) :-
 		!.
-	opcode_atom(0xA, pong).
+	opcode_atom(0xA, pong) :-
+		!.
+	opcode_atom(OpcodeCode, _Opcode) :-
+		domain_error(http_websocket_opcode, OpcodeCode).
 
 	opcode_code(continuation, 0x0) :-
 		!.

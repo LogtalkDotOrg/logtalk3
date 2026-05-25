@@ -508,39 +508,46 @@ messages after <code class="docutils literal notranslate"><span class="pre">Seco
 inbound silence and then waits one more idle interval for the peer close
 reply. These timed options require backend thread support.</p>
 <p>A small server-side session handler can look like:</p>
-<p>:- object(chat_session_handler,
-implements(http_websocket_session_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(message(text, ping), [message(text, pong)]) <span class="o">:-</span>
-  <span class="o">!</span>.
-handle(message(text, <span class="nv">Text</span>), [message(text, <span class="nv">Text</span>)]) <span class="o">:-</span>
-  <span class="o">!</span>.
-handle(message(close, <span class="nv">_Payload</span>), []) <span class="o">:-</span>
-  <span class="o">!</span>.
-handle(<span class="nv">_Message</span>, []).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(chat_session_handler,
+    <span class="k">implements</span>(http_websocket_session_handler_protocol)).
+
+    handle(message(text, ping), [message(text, pong)]) <span class="o">:-</span>
+        <span class="o">!</span>.
+    handle(message(text, <span class="nv">Text</span>), [message(text, <span class="nv">Text</span>)]) <span class="o">:-</span>
+        <span class="o">!</span>.
+    handle(message(close, <span class="nv">_Payload</span>), []) <span class="o">:-</span>
+        <span class="o">!</span>.
+    handle(<span class="nv">_Message</span>, []).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>:- end_object.</p>
 <p>After a successful opening handshake returns an upgraded <code class="docutils literal notranslate"><span class="pre">Connection</span></code>
 handle, run the loop with either:</p>
-<p>| ?- http_websocket_server_session::run_session(Connection,
-chat_session_handler, FinalState).</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_websocket_server_session<span class="o">::</span>run_session(<span class="nv">Connection</span>, chat_session_handler, <span class="nv">FinalState</span>).
+</pre></div>
+</div>
 <p>or:</p>
-<p>| ?- http_websocket_server_session::run_session(Connection,
-chat_session_handler, FinalState, [auto_pong(on)]).</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_websocket_server_session<span class="o">::</span>run_session(<span class="nv">Connection</span>, chat_session_handler, <span class="nv">FinalState</span>, [auto_pong(on)]).
+</pre></div>
+</div>
 <p>or with timed loop policies:</p>
-<p>| ?- http_websocket_server_session::run_session(Connection,
-chat_session_handler, FinalState, [auto_pong(on),
-keepalive_interval(30), idle_timeout(120)]).</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_websocket_server_session<span class="o">::</span>run_session(<span class="nv">Connection</span>, chat_session_handler, <span class="nv">FinalState</span>, [auto_pong(on), keepalive_interval(<span class="m">30</span>), idle_timeout(<span class="m">120</span>)]).
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> predicates take ownership of the upgraded
 connection, so no explicit <code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> call is
 needed afterwards.</p>
 <p>For a client that wants to collapse the opening handshake and the
 callback loop into a single call, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_session</span></code>
 object provides:</p>
-<p>open(URL, SessionHandler, Response, FinalState)</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">open</span>(<span class="nv">URL</span>, <span class="nv">SessionHandler</span>, <span class="nv">Response</span>, <span class="nv">FinalState</span>)
+</pre></div>
+</div>
 <p>or:</p>
-<p>open(URL, SessionHandler, Response, FinalState, [protocols([chat]),
-initial_messages([message(text, hello)]), auto_pong(on)])</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">open</span>(<span class="nv">URL</span>, <span class="nv">SessionHandler</span>, <span class="nv">Response</span>, <span class="nv">FinalState</span>, [protocols([chat]), initial_messages([message(text, hello)]), auto_pong(on)])
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">initial_messages(Messages)</span></code> option writes the given list of
 normalized outbound messages immediately after the handshake and before
 the first session read. The <code class="docutils literal notranslate"><span class="pre">open/4-5</span></code> predicates also accept the
@@ -550,11 +557,13 @@ automatically when the session loop finishes.</p>
 <p>For a server that wants to collapse the opening handshake and the
 callback loop into a single call, the <code class="docutils literal notranslate"><span class="pre">http_websocket_server_session</span></code>
 object also provides:</p>
-<p>serve_once(Listener, HandshakeHandler, SessionHandler, Response,
-FinalState, ClientInfo)</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>serve_once(<span class="nv">Listener</span>, <span class="nv">HandshakeHandler</span>, <span class="nv">SessionHandler</span>, <span class="nv">Response</span>, <span class="nv">FinalState</span>, <span class="nv">ClientInfo</span>)
+</pre></div>
+</div>
 <p>or:</p>
-<p>serve_once(Listener, HandshakeHandler, SessionHandler, Response,
-FinalState, ClientInfo, [auto_pong(on)])</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>serve_once(<span class="nv">Listener</span>, <span class="nv">HandshakeHandler</span>, <span class="nv">SessionHandler</span>, <span class="nv">Response</span>, <span class="nv">FinalState</span>, <span class="nv">ClientInfo</span>, [auto_pong(on)])
+</pre></div>
+</div>
 <p>These predicates accept one incoming socket connection, serve one valid
 opening handshake via the given HTTP handler, run the session loop via
 the given session handler, and then close the upgraded connection
@@ -565,12 +574,13 @@ automatically. They also accept the <code class="docutils literal notranslate"><
 <h2>Registry-backed server helper<a class="headerlink" href="#registry-backed-server-helper" title="Link to this heading"></a></h2>
 <p>For multi-session servers that need queued outbound delivery and
 broadcast, the <code class="docutils literal notranslate"><span class="pre">http_websocket_server_session</span></code> object also provides:</p>
-<p>serve_until_shutdown(Listener, HandshakeHandler, SessionHandler,
-Registry, Control)</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>serve_until_shutdown(<span class="nv">Listener</span>, <span class="nv">HandshakeHandler</span>, <span class="nv">SessionHandler</span>, <span class="nv">Registry</span>, <span class="nv">Control</span>)
+</pre></div>
+</div>
 <p>or:</p>
-<p>serve_until_shutdown(Listener, HandshakeHandler, SessionHandler,
-Registry, Control, [auto_pong(on), keepalive_interval(30),
-idle_timeout(120)])</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>serve_until_shutdown(<span class="nv">Listener</span>, <span class="nv">HandshakeHandler</span>, <span class="nv">SessionHandler</span>, <span class="nv">Registry</span>, <span class="nv">Control</span>, [auto_pong(on), keepalive_interval(<span class="m">30</span>), idle_timeout(<span class="m">120</span>)])
+</pre></div>
+</div>
 <p>This helper accepts opening handshakes until:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">http_websocket_server_session::request_shutdown(Control)</span></code> is
@@ -589,16 +599,18 @@ these action wrappers:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">broadcast_others(Message)</span></code></p></li>
 </ul>
 <p>For example, a simple chat-style broadcast handler can look like:</p>
-<p>:- object(chat_broadcast_handler,
-implements(http_websocket_session_handler_protocol)).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(message(text, <span class="nv">Text</span>), [broadcast_others(message(text, <span class="nv">Text</span>))]) <span class="o">:-</span>
-  <span class="o">!</span>.
-handle(message(close, <span class="nv">_Payload</span>), []) <span class="o">:-</span>
-  <span class="o">!</span>.
-handle(<span class="nv">_Message</span>, []).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(chat_broadcast_handler,
+    <span class="k">implements</span>(http_websocket_session_handler_protocol)).
+
+    handle(message(text, <span class="nv">Text</span>), [broadcast_others(message(text, <span class="nv">Text</span>))]) <span class="o">:-</span>
+        <span class="o">!</span>.
+    handle(message(close, <span class="nv">_Payload</span>), []) <span class="o">:-</span>
+        <span class="o">!</span>.
+    handle(<span class="nv">_Message</span>, []).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>:- end_object.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_websocket_session_registry</span></code> object provides the registry
 handle and queue-management predicates used by this helper. The
 registry-backed server helper requires backend thread support.</p>

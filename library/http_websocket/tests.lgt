@@ -35,6 +35,7 @@
 		parse/2,
 		generate/2,
 		read_frame/2,
+		read_frame/3,
 		write_frame/2,
 		final/2,
 		opcode/2,
@@ -115,6 +116,28 @@
 		close(Input),
 		ParsedFrame == Frame.
 
+	test(http_websocket_read_frame_3_01, error(domain_error(http_websocket_payload_length_limit, 1))) :-
+		frame(final, text, [0'h], [], Frame),
+		^^file_path('test_http_websocket_frame.tmp', File),
+		open(File, write, Output, [type(binary)]),
+		write_frame(Output, Frame),
+		close(Output),
+		open(File, read, Input, [type(binary)]),
+		catch(read_frame(Input, _ParsedFrame, [max_payload_length(0)]), Error, true),
+		close(Input),
+		throw(Error).
+
+	test(http_websocket_read_frame_3_02, error(domain_error(option, max_payload_length(_)))) :-
+		frame(final, text, [0'h], [], Frame),
+		^^file_path('test_http_websocket_frame.tmp', File),
+		open(File, write, Output, [type(binary)]),
+		write_frame(Output, Frame),
+		close(Output),
+		open(File, read, Input, [type(binary)]),
+		catch(read_frame(Input, _ParsedFrame, [max_payload_length(_)]), Error, true),
+		close(Input),
+		throw(Error).
+
 	test(http_websocket_frame_5_02, error(domain_error(http_websocket_frame, _))) :-
 		frame(final, close, [0x03], [], _Frame).
 
@@ -124,8 +147,26 @@
 	test(http_websocket_parse_2_04, error(domain_error(http_websocket_frame, _))) :-
 		parse(bytes([0x88, 0x01, 0x03]), _Frame).
 
+	test(http_websocket_parse_2_05, error(domain_error(http_websocket_opcode, 3))) :-
+		parse(bytes([0x83, 0x00]), _Frame).
+
+	test(http_websocket_read_frame_2_02, error(domain_error(http_websocket_opcode, 3))) :-
+		^^file_path('test_http_websocket_frame.tmp', File),
+		open(File, write, Output, [type(binary)]),
+		write_bytes([0x83, 0x00], Output),
+		close(Output),
+		open(File, read, Input, [type(binary)]),
+		catch(read_frame(Input, _ParsedFrame), Error, true),
+		close(Input),
+		throw(Error).
+
 	repeated_byte_list(Length, Byte, Bytes) :-
 		repeated_byte_list(Length, Byte, Bytes, []).
+
+	write_bytes([], _Output).
+	write_bytes([Byte| Bytes], Output) :-
+		put_byte(Output, Byte),
+		write_bytes(Bytes, Output).
 
 	repeated_byte_list(0, _Byte, Bytes, Bytes) :-
 		!.

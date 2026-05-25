@@ -26,6 +26,9 @@
 		author is 'Paulo Moura',
 		date is 2026-05-23,
 		comment is 'Transport-neutral WebSocket message predicates built on top of the http_websocket frame layer.',
+		remarks is [
+			'Fragmentation model' - 'This layer reassembles fragmented text and binary messages only when all continuation frames arrive contiguously. Interleaved control frames during fragmented messages raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` for RFC 6455 live-stream processing that must surface interleaved control frames while reassembling data messages.'
+		],
 		parameters is [
 			'TextRepresentation' - 'Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		]
@@ -54,8 +57,11 @@
 	:- public(read_message/2).
 	:- mode(read_message(+stream_or_alias, -term), one_or_error).
 	:- info(read_message/2, [
-		comment is 'Reads one WebSocket message from a binary stream. Continuation frames are reassembled for text and binary messages. Returns ``end_of_file`` when the stream is already exhausted.',
-		argnames is ['Stream', 'Message']
+		comment is 'Reads one WebSocket message from a binary stream. Continuation frames are reassembled for text and binary messages when they arrive contiguously. Returns ``end_of_file`` when the stream is already exhausted.',
+		argnames is ['Stream', 'Message'],
+		remarks is [
+			'Interleaved control frames' - 'Control frames interleaved in the middle of a fragmented data message are not surfaced by this simplified layer and instead raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` when interleaved control frames must be handled while a fragmented message is in progress.'
+		]
 	]).
 
 	:- public(write_message/2).
