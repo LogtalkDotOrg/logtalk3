@@ -29,15 +29,6 @@
 		comment is 'Internal shared helpers for HTTP transport persistence rules, connection token normalization, and chunk-size line parsing.'
 	]).
 
-	:- uses(list, [
-		member/2, memberchk/2, reverse/2
-	]).
-
-	:- uses(http, [
-		version/2 as http_version/2,
-		property/2 as http_property/2
-	]).
-
 	:- protected(connection_persistent/2).
 	:- mode(connection_persistent(+compound, +compound), zero_or_one).
 	:- info(connection_persistent/2, [
@@ -80,11 +71,28 @@
 		argnames is ['Message', 'Tokens']
 	]).
 
+	:- protected(message_header_values/3).
+	:- mode(message_header_values(+compound, +atom, -list), one).
+	:- info(message_header_values/3, [
+		comment is 'Returns the stored header values for the given header name in message order.',
+		argnames is ['Message', 'Name', 'Values']
+	]).
+
 	:- protected(chunk_size_line_size/2).
 	:- mode(chunk_size_line_size(+list(integer), -integer), one).
 	:- info(chunk_size_line_size/2, [
 		comment is 'Parses a chunk-size line into its hexadecimal size, ignoring optional whitespace and chunk extensions.',
 		argnames is ['LineBytes', 'Size']
+	]).
+
+	:- uses(list, [
+		member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(http, [
+		headers/2 as http_headers/2,
+		version/2 as http_version/2,
+		property/2 as http_property/2
 	]).
 
 	connection_persistent(Request, Response) :-
@@ -94,18 +102,18 @@
 	request_persistent(Request) :-
 		http_version(Request, Version),
 		\+ message_has_connection_token(Request, close),
-		(  version_persistent_by_default(Version) ->
+		(	version_persistent_by_default(Version) ->
 			true
-		;  message_has_connection_token(Request, 'keep-alive')
+		;	message_has_connection_token(Request, 'keep-alive')
 		).
 
 	response_persistent(Response) :-
 		http_version(Response, Version),
 		\+ http_property(Response, body_framing(close_delimited)),
 		\+ message_has_connection_token(Response, close),
-		(  version_persistent_by_default(Version) ->
+		(	version_persistent_by_default(Version) ->
 			true
-		;  message_has_connection_token(Response, 'keep-alive')
+		;	message_has_connection_token(Response, 'keep-alive')
 		).
 
 	version_persistent_by_default(http(1, 0)) :-
@@ -117,6 +125,17 @@
 	version_persistent_by_default(http(Major, _Minor)) :-
 		Major > 1.
 
+	message_header_values(Message, Name, Values) :-
+		http_headers(Message, Headers),
+		message_header_values_list(Headers, Name, Values).
+
+	message_header_values_list([], _Name, []).
+	message_header_values_list([Name-Value| Headers], Name, [Value| Values]) :-
+		!,
+		message_header_values_list(Headers, Name, Values).
+	message_header_values_list([_Header| Headers], Name, Values) :-
+		message_header_values_list(Headers, Name, Values).
+
 	message_has_connection_token(Message, Token) :-
 		message_connection_tokens(Message, Tokens),
 		memberchk(Token, Tokens).
@@ -127,13 +146,13 @@
 		connection_tokens(Headers, Properties, Tokens).
 
 	connection_tokens(Headers, Properties, Tokens) :-
-		(  member(connection(PropertyTokens), Properties) ->
+		(	member(connection(PropertyTokens), Properties) ->
 			true
-		;  PropertyTokens = []
+		;	PropertyTokens = []
 		),
-		(  member(connection-HeaderTokens, Headers) ->
+		(	member(connection-HeaderTokens, Headers) ->
 			true
-		;  HeaderTokens = []
+		;	HeaderTokens = []
 		),
 		merge_unique_tokens([PropertyTokens, HeaderTokens], Tokens).
 
@@ -148,9 +167,9 @@
 
 	merge_unique_token_list([], Tokens, Tokens).
 	merge_unique_token_list([Token| TokenList], Tokens0, Tokens) :-
-		(  member(Token, Tokens0) ->
+		(	member(Token, Tokens0) ->
 			Tokens1 = Tokens0
-		;  Tokens1 = [Token| Tokens0]
+		;	Tokens1 = [Token| Tokens0]
 		),
 		merge_unique_token_list(TokenList, Tokens1, Tokens).
 

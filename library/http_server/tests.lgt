@@ -333,24 +333,9 @@
 
 	test(http_server_serve_websocket_4_01, deterministic) :-
 		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\nsec-websocket-protocol: chat, superchat\r\n\r\n',
-		atom_codes(Request, Codes),
-		InputFile = '.http_server_serve_websocket_4_01_request.tmp',
-		OutputFile = '.http_server_serve_websocket_4_01_response.tmp',
-		setup_call_cleanup(
-			open(InputFile, write, RequestStream, [type(binary)]),
-			write_bytes(Codes, RequestStream),
-			close(RequestStream)
-		),
-		setup_call_cleanup(
-			open(InputFile, read, Input, [type(binary)]),
-			setup_call_cleanup(
-				open(OutputFile, write, Output, [type(binary)]),
-				http_server::serve_websocket(Input, Output, websocket_http_server_handler, Outcome),
-				close(Output)
-			),
-			close(Input)
-		),
-		parse_response(file(OutputFile), WireResponse),
+		^^file_path('.http_server_serve_websocket_4_01_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_01_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
 		Outcome = accepted(RequestTerm, Response),
 		method(RequestTerm, get),
 		status(Response, status(101, 'Switching Protocols')),
@@ -362,24 +347,9 @@
 
 	test(http_server_serve_websocket_4_02, deterministic) :-
 		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\n\r\n',
-		atom_codes(Request, Codes),
-		InputFile = '.http_server_serve_websocket_4_02_request.tmp',
-		OutputFile = '.http_server_serve_websocket_4_02_response.tmp',
-		setup_call_cleanup(
-			open(InputFile, write, RequestStream, [type(binary)]),
-			write_bytes(Codes, RequestStream),
-			close(RequestStream)
-		),
-		setup_call_cleanup(
-			open(InputFile, read, Input, [type(binary)]),
-			setup_call_cleanup(
-				open(OutputFile, write, Output, [type(binary)]),
-				http_server::serve_websocket(Input, Output, websocket_http_server_handler, Outcome),
-				close(Output)
-			),
-			close(Input)
-		),
-		parse_response(file(OutputFile), WireResponse),
+		^^file_path('.http_server_serve_websocket_4_02_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_02_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
 		Outcome = rejected(Response),
 		status(Response, status(400, 'Bad Request')),
 		status(WireResponse, status(400, 'Bad Request')),
@@ -388,24 +358,9 @@
 
 	test(http_server_serve_websocket_4_03, deterministic) :-
 		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\n\r\n',
-		atom_codes(Request, Codes),
-		InputFile = '.http_server_serve_websocket_4_03_request.tmp',
-		OutputFile = '.http_server_serve_websocket_4_03_response.tmp',
-		setup_call_cleanup(
-			open(InputFile, write, RequestStream, [type(binary)]),
-			write_bytes(Codes, RequestStream),
-			close(RequestStream)
-		),
-		setup_call_cleanup(
-			open(InputFile, read, Input, [type(binary)]),
-			setup_call_cleanup(
-				open(OutputFile, write, Output, [type(binary)]),
-				http_server::serve_websocket(Input, Output, websocket_extensions_http_server_handler, Outcome),
-				close(Output)
-			),
-			close(Input)
-		),
-		parse_response(file(OutputFile), WireResponse),
+		^^file_path('.http_server_serve_websocket_4_03_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_03_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_extensions_http_server_handler, Outcome, WireResponse),
 		Outcome = rejected(Response),
 		status(Response, status(101, 'Switching Protocols')),
 		status(WireResponse, status(101, 'Switching Protocols')),
@@ -416,24 +371,9 @@
 
 	test(http_server_serve_websocket_4_04, deterministic) :-
 		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\nsec-websocket-protocol: chat, superchat\r\n\r\n',
-		atom_codes(Request, Codes),
-		InputFile = '.http_server_serve_websocket_4_04_request.tmp',
-		OutputFile = '.http_server_serve_websocket_4_04_response.tmp',
-		setup_call_cleanup(
-			open(InputFile, write, RequestStream, [type(binary)]),
-			write_bytes(Codes, RequestStream),
-			close(RequestStream)
-		),
-		setup_call_cleanup(
-			open(InputFile, read, Input, [type(binary)]),
-			setup_call_cleanup(
-				open(OutputFile, write, Output, [type(binary)]),
-				http_server::serve_websocket(Input, Output, websocket_no_protocol_http_server_handler, Outcome),
-				close(Output)
-			),
-			close(Input)
-		),
-		parse_response(file(OutputFile), WireResponse),
+		^^file_path('.http_server_serve_websocket_4_04_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_04_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_no_protocol_http_server_handler, Outcome, WireResponse),
 		Outcome = accepted(RequestTerm, Response),
 		method(RequestTerm, get),
 		status(Response, status(101, 'Switching Protocols')),
@@ -446,24 +386,9 @@
 
 	test(http_server_serve_websocket_4_05, deterministic) :-
 		Request = 'GET /socket HTTP/1.1\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\n\r\n',
-		atom_codes(Request, Codes),
-		InputFile = '.http_server_serve_websocket_4_05_request.tmp',
-		OutputFile = '.http_server_serve_websocket_4_05_response.tmp',
-		setup_call_cleanup(
-			open(InputFile, write, RequestStream, [type(binary)]),
-			write_bytes(Codes, RequestStream),
-			close(RequestStream)
-		),
-		setup_call_cleanup(
-			open(InputFile, read, Input, [type(binary)]),
-			setup_call_cleanup(
-				open(OutputFile, write, Output, [type(binary)]),
-				http_server::serve_websocket(Input, Output, websocket_http_server_handler, Outcome),
-				close(Output)
-			),
-			close(Input)
-		),
-		parse_response(file(OutputFile), WireResponse),
+		^^file_path('.http_server_serve_websocket_4_05_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_05_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
 		Outcome = rejected(Response),
 		status(Response, status(400, 'Bad Request')),
 		status(WireResponse, status(400, 'Bad Request')),
@@ -472,29 +397,47 @@
 
 	test(http_server_serve_websocket_4_06, deterministic) :-
 		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 12\r\n\r\n',
-		atom_codes(Request, Codes),
-		InputFile = '.http_server_serve_websocket_4_06_request.tmp',
-		OutputFile = '.http_server_serve_websocket_4_06_response.tmp',
-		setup_call_cleanup(
-			open(InputFile, write, RequestStream, [type(binary)]),
-			write_bytes(Codes, RequestStream),
-			close(RequestStream)
-		),
-		setup_call_cleanup(
-			open(InputFile, read, Input, [type(binary)]),
-			setup_call_cleanup(
-				open(OutputFile, write, Output, [type(binary)]),
-				http_server::serve_websocket(Input, Output, websocket_http_server_handler, Outcome),
-				close(Output)
-			),
-			close(Input)
-		),
-		parse_response(file(OutputFile), WireResponse),
+		^^file_path('.http_server_serve_websocket_4_06_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_06_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
 		Outcome = rejected(Response),
 		status(Response, status(426, 'Upgrade Required')),
 		status(WireResponse, status(426, 'Upgrade Required')),
 		property(Response, websocket_version(13)),
 		property(WireResponse, websocket_version(13)),
+		^^clean_file(InputFile),
+		^^clean_file(OutputFile).
+
+	test(http_server_serve_websocket_4_07, deterministic) :-
+		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\nsec-websocket-extensions: permessage-deflate; bad="unterminated\r\n\r\n',
+		^^file_path('.http_server_serve_websocket_4_07_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_07_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
+		Outcome = rejected(Response),
+		status(Response, status(400, 'Bad Request')),
+		status(WireResponse, status(400, 'Bad Request')),
+		^^clean_file(InputFile),
+		^^clean_file(OutputFile).
+
+	test(http_server_serve_websocket_4_08, deterministic) :-
+		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\n\r\n',
+		^^file_path('.http_server_serve_websocket_4_08_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_08_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
+		Outcome = rejected(Response),
+		status(Response, status(400, 'Bad Request')),
+		status(WireResponse, status(400, 'Bad Request')),
+		^^clean_file(InputFile),
+		^^clean_file(OutputFile).
+
+	test(http_server_serve_websocket_4_09, deterministic) :-
+		Request = 'GET /socket HTTP/1.1\r\nhost: example.com\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==\r\nsec-websocket-version: 13\r\nsec-websocket-protocol: chat, chat\r\n\r\n',
+		^^file_path('.http_server_serve_websocket_4_09_request.tmp', InputFile),
+		^^file_path('.http_server_serve_websocket_4_09_response.tmp', OutputFile),
+		serve_websocket_request(Request, InputFile, OutputFile, websocket_http_server_handler, Outcome, WireResponse),
+		Outcome = rejected(Response),
+		status(Response, status(400, 'Bad Request')),
+		status(WireResponse, status(400, 'Bad Request')),
 		^^clean_file(InputFile),
 		^^clean_file(OutputFile).
 
@@ -664,6 +607,39 @@
 		http_server::read_request(Input, _).
 
 	% auxiliary predicates
+
+	serve_websocket_request(Request, InputFile, OutputFile, Handler, Outcome, WireResponse) :-
+		write_file_atom(InputFile, Request),
+		open(InputFile, read, Input, [type(binary)]),
+		( 	catch(
+				serve_websocket_request_(Input, OutputFile, Handler, Outcome),
+				Error,
+				( 	close_stream(Input),
+					throw(Error)
+				)
+			) ->
+			close_stream(Input)
+		; 	close_stream(Input),
+			fail
+		),
+		parse_response(file(OutputFile), WireResponse).
+
+	serve_websocket_request_(Input, OutputFile, Handler, Outcome) :-
+		open(OutputFile, write, Output, [type(binary)]),
+		( 	catch(
+				http_server::serve_websocket(Input, Output, Handler, Outcome),
+				Error,
+				( 	close_stream(Output),
+					throw(Error)
+				)
+			) ->
+			close_stream(Output)
+		; 	close_stream(Output),
+			fail
+		).
+
+	close_stream(Stream) :-
+		catch(close(Stream), _, true).
 
 	write_file_atom(Name, Atom) :-
 		atom_codes(Atom, Bytes),

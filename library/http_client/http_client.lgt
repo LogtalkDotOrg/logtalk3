@@ -385,6 +385,7 @@
 		; 	domain_error(http_client_websocket_url, URL)
 		),
 		validate_websocket_scheme(Components),
+		validate_websocket_fragment(Components, URL),
 		components_endpoint(Components, Host, Port),
 		components_path_query(Components, Path, Query).
 
@@ -417,6 +418,12 @@
 		domain_error(http_client_websocket_scheme, wss).
 	validate_websocket_scheme_name(Scheme) :-
 		domain_error(http_client_websocket_scheme, Scheme).
+
+	validate_websocket_fragment(Components, URL) :-
+		( 	member(fragment(Fragment), Components), Fragment \== '' ->
+			domain_error(http_client_websocket_url, URL)
+		; 	true
+		).
 
 	validate_websocket_http_version(Version) :-
 		Version == http(1, 1),
@@ -524,12 +531,11 @@
 
 	validate_websocket_protocol_response(Request, Response) :-
 		( 	message_websocket_protocols(Request, RequestedProtocols) ->
-			( 	message_websocket_protocols(Response, ResponseProtocols) ->
-				ResponseProtocols = [Protocol],
+			( 	message_response_websocket_protocols(Response, [Protocol]) ->
 				memberchk(Protocol, RequestedProtocols)
-			; 	true
+			; 	\+ response_websocket_protocol_present(Response)
 			)
-		; 	\+ message_websocket_protocols(Response, _Protocols)
+		; 	\+ response_websocket_protocol_present(Response)
 		).
 
 	message_upgrade_tokens(Message, Tokens) :-
@@ -554,7 +560,9 @@
 		!.
 
 	message_websocket_accept(Message, Accept) :-
-		( 	http::property(Message, websocket_accept(Accept)) ->
+		( 	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
+			Values = [Accept]
+		; 	http::property(Message, websocket_accept(Accept)) ->
 			true
 		; 	http::header(Message, sec_websocket_accept, Accept)
 		),
@@ -573,6 +581,20 @@
 		; 	http::header(Message, sec_websocket_protocol, Protocols)
 		),
 		!.
+
+	message_response_websocket_protocols(Message, Protocols) :-
+		( 	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
+			Values = [Protocols]
+		; 	http::property(Message, websocket_protocol(Protocols))
+		),
+		!.
+
+	response_websocket_protocol_present(Message) :-
+		^^message_header_values(Message, sec_websocket_protocol, Values),
+		Values \== [],
+		!.
+	response_websocket_protocol_present(Message) :-
+		http::property(Message, websocket_protocol(_Protocols)).
 
 	components_endpoint(Components, Host, Port) :-
 		member(authority(Authority), Components),

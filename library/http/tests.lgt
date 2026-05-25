@@ -418,4 +418,7 @@
 	test(http_request_7_08, error(domain_error(http_header_value(sec_websocket_key), invalid))) :-
 		request(get, origin('/socket'), http(1, 1), [sec_websocket_key-invalid], empty, [], _).
 
+	test(http_request_7_09, error(domain_error(http_property, websocket_protocol([chat, chat])))) :-
+		request(get, origin('/socket'), http(1, 1), [], empty, [websocket_protocol([chat, chat])], _).
+
 :- end_object.

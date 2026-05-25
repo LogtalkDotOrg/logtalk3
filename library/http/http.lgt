@@ -1506,6 +1506,13 @@
 	parse_header_value(sec_websocket_protocol, ValueCodes, Value) :-
 		normalize_header_semantics(sec_websocket_protocol, ValueCodes, Value),
 		!.
+	parse_header_value(sec_websocket_extensions, ValueCodes, Value) :-
+		(	normalize_header_semantics(sec_websocket_extensions, ValueCodes, Value) ->
+			true
+		;	atom_codes(RawValue, ValueCodes),
+			domain_error(http_header_value(sec_websocket_extensions), RawValue)
+		),
+		!.
 	parse_header_value(transfer_encoding, ValueCodes, Value) :-
 		normalize_header_semantics(transfer_encoding, ValueCodes, Value),
 		!.
@@ -1561,6 +1568,10 @@
 	header_value_codes(sec_websocket_protocol, Value, Codes) :-
 		normalize_header_semantics(sec_websocket_protocol, Value, Protocols),
 		token_list_codes(Protocols, Codes),
+		!.
+	header_value_codes(sec_websocket_extensions, Value, Codes) :-
+		normalize_header_semantics(sec_websocket_extensions, Value, Extensions),
+		atom_codes(Extensions, Codes),
 		!.
 	header_value_codes(transfer_encoding, Value, Codes) :-
 		normalize_header_semantics(transfer_encoding, Value, Tokens),
@@ -1654,12 +1665,14 @@
 	normalize_header_semantics(sec_websocket_accept, Value, Accept) :-
 		normalize_websocket_accept(Value, Accept).
 	normalize_header_semantics(sec_websocket_protocol, Tokens, NormalizedTokens) :-
-		valid_token_list(Tokens),
+		valid_unique_token_list(Tokens),
 		!,
 		normalize_token_list(Tokens, NormalizedTokens).
 	normalize_header_semantics(sec_websocket_protocol, Value, Tokens) :-
 		text_to_codes(Value, Codes),
-		parse_token_list_codes(Codes, Tokens).
+		parse_unique_token_list_codes(Codes, Tokens).
+	normalize_header_semantics(sec_websocket_extensions, Value, Extensions) :-
+		normalize_websocket_extensions(Value, Extensions).
 	normalize_header_semantics(transfer_encoding, Tokens, NormalizedTokens) :-
 		valid_token_list(Tokens),
 		!,
@@ -1700,7 +1713,7 @@
 		).
 
 	normalize_semantic_header_value(Name, RawValue, Value) :-
-		( 	memberchk(Name, [content_length, content_type, cookie, set_cookie, host, connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, transfer_encoding]) ->
+		( 	member(Name, [content_length, content_type, cookie, set_cookie, host, connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions, transfer_encoding]) ->
 			normalize_header_semantics(Name, RawValue, Value)
 		; 	Value = RawValue
 		).
@@ -1710,6 +1723,13 @@
 
 	normalize_websocket_accept(Value, Accept) :-
 		normalize_websocket_base64_value(Value, 20, Accept).
+
+	normalize_websocket_extensions(Value, Extensions) :-
+		text_to_codes(Value, Codes0),
+		trim_ows_codes(Codes0, Codes),
+		Codes \== [],
+		parse_websocket_extensions_codes(Codes),
+		atom_codes(Extensions, Codes).
 
 	normalize_websocket_base64_value(Value, Size, NormalizedValue) :-
 		text_to_codes(Value, Codes0),
@@ -2061,6 +2081,12 @@
 			true
 		; 	domain_error(http_header_value(sec_websocket_protocol), Value)
 		).
+	validate_header_value(sec_websocket_extensions, Value) :-
+		!,
+		( 	normalize_header_semantics(sec_websocket_extensions, Value, _) ->
+			true
+		; 	domain_error(http_header_value(sec_websocket_extensions), Value)
+		).
 	validate_header_value(transfer_encoding, Value) :-
 		!,
 		( 	normalize_header_semantics(transfer_encoding, Value, _) ->
@@ -2194,7 +2220,7 @@
 	valid_property_by_functor(websocket_accept, websocket_accept(Accept)) :-
 		valid_websocket_accept(Accept).
 	valid_property_by_functor(websocket_protocol, websocket_protocol(Protocols)) :-
-		valid_token_list(Protocols).
+		valid_unique_token_list(Protocols).
 	valid_property_by_functor(transfer_encoding, transfer_encoding(Tokens)) :-
 		valid_token_list(Tokens).
 	valid_property_by_functor(Functor, Property) :-
@@ -2286,6 +2312,16 @@
 		atom_codes(Token, Codes),
 		valid_token_codes(Codes),
 		valid_token_list(Tokens).
+
+	valid_unique_token_list(Tokens) :-
+		valid_token_list(Tokens),
+		normalize_token_list(Tokens, NormalizedTokens),
+		unique_atom_list(NormalizedTokens).
+
+	unique_atom_list([]).
+	unique_atom_list([Token| Tokens]) :-
+		\+ member(Token, Tokens),
+		unique_atom_list(Tokens).
 
 	valid_token_codes([]) :-
 		fail.
@@ -2584,10 +2620,95 @@
 		split_codes(0',, Codes, TokenCodeLists),
 		token_code_lists_atoms(TokenCodeLists, Tokens).
 
+	parse_unique_token_list_codes(Codes0, Tokens) :-
+		parse_token_list_codes(Codes0, Tokens),
+		valid_unique_token_list(Tokens).
+
+	parse_websocket_extensions_codes(Codes0) :-
+		trim_ows_codes(Codes0, Codes),
+		Codes \== [],
+		phrase(websocket_extensions, Codes).
+
 	parse_websocket_version_codes(Codes0, Versions) :-
 		trim_ows_codes(Codes0, Codes),
 		split_codes(0',, Codes, VersionCodeLists),
 		websocket_version_code_lists(VersionCodeLists, Versions).
+
+	websocket_extensions -->
+		websocket_extension,
+		websocket_extensions_tail.
+
+	websocket_extensions_tail -->
+		optional_whitespace,
+		[0',],
+		optional_whitespace,
+		!,
+		websocket_extension,
+		websocket_extensions_tail.
+	websocket_extensions_tail -->
+		optional_whitespace,
+		[].
+
+	websocket_extension -->
+		http_token,
+		websocket_extension_parameters.
+
+	websocket_extension_parameters -->
+		optional_whitespace,
+		[0';],
+		optional_whitespace,
+		!,
+		http_token,
+		websocket_extension_parameter_value,
+		websocket_extension_parameters.
+	websocket_extension_parameters -->
+		[].
+
+	websocket_extension_parameter_value -->
+		optional_whitespace,
+		[0'=],
+		optional_whitespace,
+		!,
+		websocket_extension_parameter_data.
+	websocket_extension_parameter_value -->
+		[].
+
+	websocket_extension_parameter_data -->
+		http_token,
+		!.
+	websocket_extension_parameter_data -->
+		quoted_http_text.
+
+	http_token -->
+		[Code],
+		{token_code(Code)},
+		http_token_tail.
+
+	http_token_tail -->
+		[Code],
+		{token_code(Code)},
+		!,
+		http_token_tail.
+	http_token_tail -->
+		[].
+
+	quoted_http_text -->
+		[0'"],
+		quoted_http_text_codes,
+		[0'"].
+
+	quoted_http_text_codes -->
+		[0'\\, Code],
+		{Code =\= 0'\r, Code =\= 0'\n},
+		!,
+		quoted_http_text_codes.
+	quoted_http_text_codes -->
+		[Code],
+		{Code =\= 0'", Code =\= 0'\\, Code =\= 0'\r, Code =\= 0'\n},
+		!,
+		quoted_http_text_codes.
+	quoted_http_text_codes -->
+		[].
 
 	token_code_lists_atoms([], []).
 	token_code_lists_atoms([TokenCodes0| TokenCodeLists], [Token| Tokens]) :-

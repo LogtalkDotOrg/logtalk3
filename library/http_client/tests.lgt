@@ -479,6 +479,29 @@
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
 		http_socket::close_listener(Listener).
 
+	test(http_client_open_websocket_4_15, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		expected_websocket_response_error(Error),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_16, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-protocol: chat\r\nsec-websocket-protocol: chat\r\ncontent-length: 0\r\n\r\n',
+		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
+		local_ws_url(Port, '/socket', URL),
+		catch(http_client::open_websocket(URL, _Connection, _Response, [protocols([chat, superchat]), key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		expected_websocket_response_error(Error),
+		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
+		http_socket::close_listener(Listener).
+
+	test(http_client_open_websocket_4_17, error(domain_error(http_client_websocket_url, 'ws://example.com/socket#frag'))) :-
+		http_client::open_websocket('ws://example.com/socket#frag', _Connection, _Response, []).
+
 	test(http_client_get_4_01, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_request_once(Listener, target_http_client_handler), Tag),

@@ -896,11 +896,6 @@
 		http_websocket_client_session::message(close, Payload, Message),
 		http_websocket_client_session::write_message(Output, Message).
 
-	write_bytes([], _Output).
-	write_bytes([Byte| Bytes], Output) :-
-		put_byte(Output, Byte),
-		write_bytes(Bytes, Output).
-
 	safe_close_connection(Connection) :-
 		catch(http_socket::close_connection(Connection), _, true).
 
@@ -911,6 +906,11 @@
 		catch(http_websocket_session_registry::close(Registry), _, true).
 
 	:- endif.
+
+	write_bytes([], _Output).
+	write_bytes([Byte| Bytes], Output) :-
+		put_byte(Output, Byte),
+		write_bytes(Bytes, Output).
 
 :- end_object.
 

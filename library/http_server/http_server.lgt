@@ -245,7 +245,9 @@
 		!.
 
 	message_websocket_key(Message, Key) :-
-		( 	http::property(Message, websocket_key(Key)) ->
+		( 	^^message_header_values(Message, sec_websocket_key, Values), Values \== [] ->
+			Values = [Key]
+		; 	http::property(Message, websocket_key(Key)) ->
 			true
 		; 	http::header(Message, sec_websocket_key, Key)
 		),
@@ -264,6 +266,20 @@
 		; 	http::header(Message, sec_websocket_protocol, Protocols)
 		),
 		!.
+
+	message_response_websocket_protocols(Message, Protocols) :-
+		( 	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
+			Values = [Protocols]
+		; 	http::property(Message, websocket_protocol(Protocols))
+		),
+		!.
+
+	response_websocket_protocol_present(Message) :-
+		^^message_header_values(Message, sec_websocket_protocol, Values),
+		Values \== [],
+		!.
+	response_websocket_protocol_present(Message) :-
+		http::property(Message, websocket_protocol(_Protocols)).
 
 	serve_websocket_result(end_of_file, _Output, _Handler, end_of_file).
 	serve_websocket_result(error(Response), Output, _Handler, rejected(Response)) :-
@@ -323,15 +339,17 @@
 	valid_websocket_protocol_response(Request, Response) :-
 		message_websocket_protocols(Request, OfferedProtocols),
 		!,
-		( 	message_websocket_protocols(Response, [SelectedProtocol]) ->
+		( 	message_response_websocket_protocols(Response, [SelectedProtocol]) ->
 			memberchk(SelectedProtocol, OfferedProtocols)
-		; 	true
+		; 	\+ response_websocket_protocol_present(Response)
 		).
 	valid_websocket_protocol_response(_Request, Response) :-
-		\+ message_websocket_protocols(Response, _Protocols).
+		\+ response_websocket_protocol_present(Response).
 
 	message_websocket_accept(Message, Accept) :-
-		( 	http::property(Message, websocket_accept(Accept)) ->
+		( 	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
+			Values = [Accept]
+		; 	http::property(Message, websocket_accept(Accept)) ->
 			true
 		; 	http::header(Message, sec_websocket_accept, Accept)
 		),
