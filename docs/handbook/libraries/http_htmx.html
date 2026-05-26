@@ -357,9 +357,9 @@ response terms.</p>
 <li><p>HTMX request detection helpers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reply/3-4</span></code> helpers for pre-rendered HTML atoms and <code class="docutils literal notranslate"><span class="pre">html</span></code>
 terms/lists</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4-5</span></code> helpers for full-page replies on ordinary
-and boosted HTMX requests and fragment replies on non-boosted HTMX
-requests</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4-5</span></code> helpers for full-page replies on ordinary,
+boosted, and history-restore HTMX requests and fragment replies on
+other HTMX requests</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">add_response_headers/4</span></code> for the common <code class="docutils literal notranslate"><span class="pre">HX-*</span></code> response headers</p></li>
 <li><p>the companion <code class="docutils literal notranslate"><span class="pre">http_router_htmx</span></code> category for router middleware
 integration</p></li>
@@ -397,11 +397,15 @@ category:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_htmx_request/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_boosted_request/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_history_restore_request/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_fragment_request/1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request_kind/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">current_url/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_url_abs_path/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">prompt/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">target/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">trigger/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">trigger_name/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request_property/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">request_properties/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reply/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reply/4</span></code></p></li>
@@ -415,10 +419,29 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">annotate_htmx_request/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">add_htmx_response_headers/3</span></code></p></li>
 </ul>
+<p>For handlers that only need one HTMX request flag or value, prefer
+<code class="docutils literal notranslate"><span class="pre">request_property/2</span></code>. Use <code class="docutils literal notranslate"><span class="pre">request_properties/2</span></code> when you need the
+full derived property list, for example when annotating a request with
+all HTMX metadata. The derived property set now also includes
+<code class="docutils literal notranslate"><span class="pre">htmx_request_kind(Kind)</span></code>, mirroring <code class="docutils literal notranslate"><span class="pre">request_kind/2</span></code> for middleware
+and other property-oriented consumers.</p>
+<p>For handlers that need the same full-page versus fragment decision used
+by <code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4-5</span></code>, prefer <code class="docutils literal notranslate"><span class="pre">is_fragment_request/1</span></code> instead
+of repeating the <code class="docutils literal notranslate"><span class="pre">HX-Request</span></code>, <code class="docutils literal notranslate"><span class="pre">HX-Boosted</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">HX-History-Restore-Request</span></code> checks.</p>
+<p>For handlers that need one mutually exclusive classification for control
+flow or presentation, prefer <code class="docutils literal notranslate"><span class="pre">request_kind/2</span></code> instead of open-coding
+precedence between ordinary, fragment, boosted, and history-restore
+requests.</p>
+<p>For handlers that need a same-origin absolute-path form of
+<code class="docutils literal notranslate"><span class="pre">HX-Current-URL</span></code>, prefer <code class="docutils literal notranslate"><span class="pre">current_url_abs_path/2</span></code>. It returns the
+path plus optional query and fails when the current URL does not match
+the request scheme and host information.</p>
 <p>The supported response-header options are currently:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">redirect(URL)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">refresh(Boolean)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vary_hx_request(Boolean)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">location(Value)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">push_url(Value)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">replace_url(Value)</span></code></p></li>
@@ -435,6 +458,17 @@ more <code class="docutils literal notranslate"><span class="pre">HX-*</span></c
 a <code class="docutils literal notranslate"><span class="pre">3xx</span></code> response status raises an error instead of silently generating
 headers that HTMX will ignore. If you need a normal HTTP redirect, use
 the standard response headers directly.</p>
+<p>When an endpoint can return both a full-page reply and an HTMX fragment
+for the same URL, set <code class="docutils literal notranslate"><span class="pre">vary_hx_request(true)</span></code> so the helpers merge
+<code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">HX-Request</span></code> with any existing <code class="docutils literal notranslate"><span class="pre">Vary</span></code> metadata. Otherwise,
+browser or intermediary caches can reuse the wrong representation.</p>
+<p>History restore requests after an HTMX history-cache miss are expected
+to return the full page. The <code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4-5</span></code> helpers
+therefore treat <code class="docutils literal notranslate"><span class="pre">HX-History-Restore-Request</span></code> the same as ordinary or
+boosted navigation. If your application uses <code class="docutils literal notranslate"><span class="pre">HX-Request</span></code> to select
+between page and fragment representations, configure the client with
+<code class="docutils literal notranslate"><span class="pre">htmx.config.historyRestoreAsHxRequest</span></code> set to <code class="docutils literal notranslate"><span class="pre">false</span></code> so that
+history restores do not also carry <code class="docutils literal notranslate"><span class="pre">HX-Request</span></code>.</p>
 <p>Structured values for <code class="docutils literal notranslate"><span class="pre">location/1</span></code> and the trigger options reuse the
 repository JSON-term conventions through the shared HTTP JSON helpers,
 with HTMX-specific validation of the top-level shape:</p>

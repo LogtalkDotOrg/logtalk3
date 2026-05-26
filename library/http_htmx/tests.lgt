@@ -39,12 +39,85 @@
 		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, []),
 		http_htmx::is_htmx_request(Request).
 
-	test(http_htmx_request_properties_2_01, deterministic(Properties == [htmx_request(true), htmx_boosted(true), htmx_target(panel), htmx_trigger('save-button'), htmx_trigger_name(save), htmx_current_url('https://example.com/items/1'), htmx_prompt('Rename?'), htmx_history_restore_request(true)])) :-
-		Request = request(
+	test(http_htmx_is_fragment_request_1_01, true) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, []),
+		http_htmx::is_fragment_request(Request).
+
+	test(http_htmx_is_fragment_request_1_02, fail) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [], empty, []),
+		http_htmx::is_fragment_request(Request).
+
+	test(http_htmx_is_fragment_request_1_03, fail) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true', hx_boosted-'true'], empty, []),
+		http_htmx::is_fragment_request(Request).
+
+	test(http_htmx_is_fragment_request_1_04, fail) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true', hx_history_restore_request-'true'], empty, []),
+		http_htmx::is_fragment_request(Request).
+
+	test(http_htmx_request_kind_2_01, deterministic(Kind == ordinary)) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [], empty, []),
+		http_htmx::request_kind(Request, Kind).
+
+	test(http_htmx_request_kind_2_02, deterministic(Kind == fragment)) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, []),
+		http_htmx::request_kind(Request, Kind).
+
+	test(http_htmx_request_kind_2_03, deterministic(Kind == boosted)) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true', hx_boosted-'true'], empty, []),
+		http_htmx::request_kind(Request, Kind).
+
+	test(http_htmx_request_kind_2_04, deterministic(Kind == history_restore)) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true', hx_history_restore_request-'true'], empty, []),
+		http_htmx::request_kind(Request, Kind).
+
+	test(http_htmx_request_kind_2_05, deterministic(Kind == history_restore)) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [hx_request-'true', hx_boosted-'true', hx_history_restore_request-'true'], empty, []),
+		http_htmx::request_kind(Request, Kind).
+
+	test(http_htmx_current_url_abs_path_2_01, deterministic(AbsolutePath == '/items/1?draft=true')) :-
+		request(
+			get,
+			origin('/items/1'),
+			http(1, 1),
+			[host-host('example.com'), hx_current_url-'https://example.com:443/items/1?draft=true#editor'],
+			empty,
+			[scheme(https)],
+			Request
+		),
+		http_htmx::current_url_abs_path(Request, AbsolutePath).
+
+	test(http_htmx_current_url_abs_path_2_02, fail) :-
+		request(
+			get,
+			origin('/items/1'),
+			http(1, 1),
+			[host-host('example.com'), hx_current_url-'https://other.example.com/items/1?draft=true'],
+			empty,
+			[scheme(https)],
+			Request
+		),
+		http_htmx::current_url_abs_path(Request, _AbsolutePath).
+
+	test(http_htmx_current_url_abs_path_2_03, fail) :-
+		request(
+			get,
+			origin('/items/1'),
+			http(1, 1),
+			[host-host('example.com'), hx_current_url-'https://example.com/items/1?draft=true'],
+			empty,
+			[],
+			Request
+		),
+		http_htmx::current_url_abs_path(Request, _AbsolutePath).
+
+	test(http_htmx_request_properties_2_01, deterministic(Properties == [htmx_request(true), htmx_request_kind(history_restore), htmx_boosted(true), htmx_target(panel), htmx_trigger('save-button'), htmx_trigger_name(save), htmx_current_url('https://example.com/items/1'), htmx_current_url_abs_path('/items/1'), htmx_prompt('Rename?'), htmx_history_restore_request(true)])) :-
+		request(
 			get,
 			origin('/items/1'),
 			http(1, 1),
 			[
+				host-host('example.com'),
 				hx_request-'true',
 				hx_boosted-'true',
 				hx_target-panel,
@@ -55,20 +128,49 @@
 				hx_history_restore_request-'true'
 			],
 			empty,
-			[]
+			[scheme(https)],
+			Request
 		),
 		http_htmx::request_properties(Request, Properties).
+
+	test(http_htmx_request_properties_2_02, deterministic(Properties == [htmx_request_kind(ordinary)])) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [], empty, []),
+		http_htmx::request_properties(Request, Properties).
+
+	test(http_htmx_request_property_2_01, deterministic) :-
+		Request = request(
+			get,
+			origin('/items/1'),
+			http(1, 1),
+			[
+				hx_request-'true',
+				hx_target-panel,
+				hx_history_restore_request-'true'
+			],
+			empty,
+			[]
+		),
+		http_htmx::request_property(Request, htmx_request(true)),
+		http_htmx::request_property(Request, htmx_request_kind(history_restore)),
+		http_htmx::request_property(Request, htmx_target(panel)),
+		http_htmx::request_property(Request, htmx_history_restore_request(true)),
+		\+ http_htmx::request_property(Request, htmx_boosted(true)).
+
+	test(http_htmx_request_property_2_02, deterministic) :-
+		Request = request(get, origin('/items/1'), http(1, 1), [], empty, []),
+		http_htmx::request_property(Request, htmx_request_kind(ordinary)).
 
 	test(http_htmx_request_accessors_2_02, deterministic) :-
 		atom_codes('true', BoostedCodes),
 		atom_chars('true', HistoryChars),
 		atom_codes('https://example.com/items/1', URLCodes),
 		atom_chars('Rename?', PromptChars),
-		Request = request(
+		request(
 			get,
 			origin('/items/1'),
 			http(1, 1),
 			[
+				host-host('example.com'),
 				hx_boosted-BoostedCodes,
 				hx_history_restore_request-HistoryChars,
 				hx_current_url-URLCodes,
@@ -78,11 +180,13 @@
 				hx_trigger_name-save
 			],
 			empty,
-			[]
+			[scheme(https)],
+			Request
 		),
 		http_htmx::is_boosted_request(Request),
 		http_htmx::is_history_restore_request(Request),
 		http_htmx::current_url(Request, 'https://example.com/items/1'),
+		http_htmx::current_url_abs_path(Request, '/items/1'),
 		http_htmx::prompt(Request, 'Rename?'),
 		http_htmx::target(Request, panel),
 		http_htmx::trigger(Request, 'save-button'),
@@ -139,6 +243,14 @@
 		once(sub_atom(HTML, _, _, _, '<!DOCTYPE html>')),
 		once(sub_atom(HTML, _, _, _, '<html>')).
 
+	test(http_htmx_page_fragment_reply_4_04, deterministic) :-
+		request(get, origin('/items/1'), http(1, 1), [hx_request-'true', hx_history_restore_request-'true'], empty, [], Request),
+		http_htmx::page_fragment_reply(Request, html([head(title('Item')), body(div('page'))]), div('fragment'), Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<!DOCTYPE html>')),
+		once(sub_atom(HTML, _, _, _, '<html>')).
+
 	test(http_htmx_add_response_headers_4_01, deterministic) :-
 		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
 		response(http(1, 1), status(200, 'OK'), [], content('text/html', text('<div>ok</div>')), [], Response0),
@@ -175,6 +287,20 @@
 		header(Response, hx_replace_url, '/items/2'),
 		\+ header(Response, hx_push_url, 'old-push'),
 		\+ header(Response, hx_replace_url, 'old-replace').
+
+	test(http_htmx_add_response_headers_4_05, deterministic) :-
+		request(get, origin('/items/1'), http(1, 1), [], empty, [], Request),
+		response(http(1, 1), status(200, 'OK'), [cache_control-'public'], content('text/html', text('<div>ok</div>')), [], Response0),
+		http_htmx::add_response_headers(Request, Response0, Response, [vary_hx_request(true)]),
+		header(Response, vary, 'HX-Request'),
+		header(Response, cache_control, 'public'),
+		\+ header(Response, hx_trigger, _).
+
+	test(http_htmx_reply_4_09, deterministic) :-
+		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
+		http_htmx::reply(Request, '<div>item</div>', Response, [headers([vary-'Accept-Encoding']), vary_hx_request(true), push_url(false)]),
+		header(Response, vary, 'Accept-Encoding, HX-Request'),
+		header(Response, hx_push_url, 'false').
 
 	test(http_htmx_reply_4_03, error(domain_error(option, retarget(_)))) :-
 		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
