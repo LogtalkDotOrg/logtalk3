@@ -48,6 +48,10 @@
 		append/3, member/2, memberchk/2, reverse/2
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/3
+	]).
+
 	:- uses(date, [
 		date_time_to_unix/2, format_date_time/4, unix_to_date_time/2, valid_date_time/1
 	]).
@@ -73,9 +77,16 @@
 		valid_atom_list(IndexFiles).
 	valid_option(mime_types_strict(Boolean)) :-
 		valid_boolean_option(Boolean).
+	valid_option(cache_control(Directives)) :-
+		valid_cache_control_directives(Directives).
+	valid_option(expires(none)).
+	valid_option(expires(Value)) :-
+		valid_expires_value(Value).
 
 	default_option(index_files(['index.html', 'index.htm'])).
 	default_option(mime_types_strict(false)).
+	default_option(cache_control([])).
+	default_option(expires(none)).
 
 	resolve_resource(Path, Request, DocumentRoot, Options, Resource) :-
 		resolved_document_root(DocumentRoot, Root),
@@ -296,8 +307,75 @@
 	resource_headers(File, Options, VaryAcceptEncoding, ETag, LastModified, Headers, MediaType) :-
 		representation_headers(File, Options, RepresentationHeaders, MediaType),
 		vary_headers(VaryAcceptEncoding, VaryHeaders),
-		append(RepresentationHeaders, VaryHeaders, HeaderPrefix),
+		cache_headers(CacheHeaders, Options),
+		append(RepresentationHeaders, VaryHeaders, HeaderPrefix0),
+		append(HeaderPrefix0, CacheHeaders, HeaderPrefix),
 		append(HeaderPrefix, [accept_ranges-'bytes', etag-ETag, last_modified-LastModified], Headers).
+
+	cache_headers(Headers, Options) :-
+		cache_control_headers(CacheControlHeaders, Options),
+		expires_headers(ExpiresHeaders, Options),
+		append(CacheControlHeaders, ExpiresHeaders, Headers).
+
+	cache_control_headers([cache_control-Value], Options) :-
+		^^option(cache_control(Directives), Options),
+		Directives \== [],
+		!,
+		cache_control_value(Directives, Value).
+	cache_control_headers([], _Options).
+
+	expires_headers([expires-Value], Options) :-
+		^^option(expires(Expires0), Options),
+		Expires0 \== none,
+		!,
+		expires_value(Expires0, Value).
+	expires_headers([], _Options).
+
+	cache_control_value(Directives, Value) :-
+		cache_control_directive_atoms(Directives, Atoms),
+		atomic_list_concat(Atoms, ', ', Value).
+
+	cache_control_directive_atoms([], []).
+	cache_control_directive_atoms([Directive| Directives], [Atom| Atoms]) :-
+		cache_control_directive_atom(Directive, Atom),
+		cache_control_directive_atoms(Directives, Atoms).
+
+	cache_control_directive_atom(public, 'public').
+	cache_control_directive_atom(private, 'private').
+	cache_control_directive_atom(no_cache, 'no-cache').
+	cache_control_directive_atom(no_store, 'no-store').
+	cache_control_directive_atom(no_transform, 'no-transform').
+	cache_control_directive_atom(must_revalidate, 'must-revalidate').
+	cache_control_directive_atom(proxy_revalidate, 'proxy-revalidate').
+	cache_control_directive_atom(immutable, 'immutable').
+	cache_control_directive_atom(max_age(Seconds), Atom) :-
+		seconds_directive_atom('max-age=', Seconds, Atom).
+	cache_control_directive_atom(s_maxage(Seconds), Atom) :-
+		seconds_directive_atom('s-maxage=', Seconds, Atom).
+	cache_control_directive_atom(stale_while_revalidate(Seconds), Atom) :-
+		seconds_directive_atom('stale-while-revalidate=', Seconds, Atom).
+	cache_control_directive_atom(stale_if_error(Seconds), Atom) :-
+		seconds_directive_atom('stale-if-error=', Seconds, Atom).
+	cache_control_directive_atom(extension(Directive), Directive).
+
+	seconds_directive_atom(Prefix, Seconds, Atom) :-
+		number_codes(Seconds, Codes),
+		atom_codes(Suffix, Codes),
+		atom_concat(Prefix, Suffix, Atom).
+
+	expires_value(Seconds0, Value) :-
+		integer(Seconds0),
+		!,
+		current_unix_time(CurrentTime),
+		ExpiresTime is CurrentTime + Seconds0,
+		http_date(ExpiresTime, Value).
+	expires_value(DateTime, Value) :-
+		date_time_to_unix(DateTime, ExpiresTime),
+		http_date(ExpiresTime, Value).
+
+	current_unix_time(CurrentTime) :-
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _Milliseconds),
+		date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), CurrentTime).
 
 	vary_headers(true, [vary-'Accept-Encoding']) :-
 		!.
@@ -558,6 +636,41 @@
 			Boolean == true;
 			Boolean == false
 		)).
+
+	valid_cache_control_directives([]).
+	valid_cache_control_directives([Directive| Directives]) :-
+		ground(Directive),
+		valid_cache_control_directive(Directive),
+		valid_cache_control_directives(Directives).
+
+	valid_cache_control_directive(public).
+	valid_cache_control_directive(private).
+	valid_cache_control_directive(no_cache).
+	valid_cache_control_directive(no_store).
+	valid_cache_control_directive(no_transform).
+	valid_cache_control_directive(must_revalidate).
+	valid_cache_control_directive(proxy_revalidate).
+	valid_cache_control_directive(immutable).
+	valid_cache_control_directive(max_age(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(s_maxage(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(stale_while_revalidate(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(stale_if_error(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(extension(Directive)) :-
+		atom(Directive),
+		Directive \== ''.
+
+	valid_expires_value(Value) :-
+		valid_non_negative_integer(Value).
+	valid_expires_value(Value) :-
+		valid_date_time(Value).
+
+	valid_non_negative_integer(Value) :-
+		integer(Value),
+		Value >= 0.
 
 	valid_atom_list(Atoms) :-
 		var(Atoms),

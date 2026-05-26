@@ -196,6 +196,36 @@
 		once(sub_atom(HTML, _, _, _, 'Name (ascending)')),
 		once(sub_atom(HTML, _, _, _, '?sort=name&order=descending')).
 
+	test(http_directory_listing_serve_5_08, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'alpha.txt', AlphaFile),
+		write_file_atom(AlphaFile, 'alpha'),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [columns([name, modified]), theme(ocean), stylesheets(['/assets/listing.css'])]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, 'class="http-directory-listing theme-ocean"')),
+		once(sub_atom(HTML, _, _, _, 'rel="stylesheet" href="/assets/listing.css"')),
+		once(sub_atom(HTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-modified"')),
+		once(sub_atom(HTML, _, _, _, '?sort=name&order=descending')),
+		once(sub_atom(HTML, _, _, _, '?sort=modified&order=ascending')),
+		\+ sub_atom(HTML, _, _, _, '?sort=type'),
+		\+ sub_atom(HTML, _, _, _, '?sort=size').
+
+	test(http_directory_listing_serve_5_09, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'alpha.txt', AlphaFile),
+		write_file_atom(AlphaFile, 'alpha'),
+		os::path_concat(Root, 'page.html', PageFile),
+		write_file_atom(PageFile, '<html></html>'),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [type_display(media)]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, 'text/plain')),
+		once(sub_atom(HTML, _, _, _, 'text/html')),
+		once(sub_atom(HTML, _, _, _, 'class="entry entry-file"')).
+
 	% auxiliary predicates
 
 	ensure_docroot(Root) :-

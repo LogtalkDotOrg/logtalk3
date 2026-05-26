@@ -42,7 +42,7 @@ The example illustrates four basic steps:
 
 1. Prepare a document root for the files and directories you want to expose.
 2. Delegate ordinary request paths to `http_static_files::serve/5`.
-3. Delegate a separate browsing prefix to `http_directory_listing::serve/5`.
+3. Delegate a separate browsing prefix to `http_directory_listing::serve/5` with custom presentation options.
 4. Exercise both handlers through ordinary `http_client` GET requests.
 
 Load the example with:
@@ -60,6 +60,15 @@ http_static_site_demo::run(Result).
 The returned `Result` term contains three normalized responses: the home page
 served from `/`, the plain-text guide file served from `/docs/guide.txt`, and
 the HTML directory listing served from `/browse/docs/`.
+
+The directory-listing route demonstrates several `http_directory_listing`
+customization hooks at once:
+
+1. `columns([name, type, modified])` hides the size column.
+2. `type_display(media)` shows MIME-based file types such as `text/plain`.
+3. `theme(ocean)` adds stable CSS hook classes to the generated HTML.
+4. `stylesheets(['/assets/listing.css'])` links a stylesheet served by the
+  same example site.
 
 When backend threads are not available, run the bounded server and the client
 workflow in separate sessions. In the first session start the example server:
@@ -87,6 +96,7 @@ Then open these URLs in a browser:
 - `http://127.0.0.1:8080/` for the home page served by `http_static_files`
 - `http://127.0.0.1:8080/docs/guide.txt` for a plain-text file response
 - `http://127.0.0.1:8080/browse/docs/` for the HTML directory listing served by `http_directory_listing`
+- `http://127.0.0.1:8080/assets/listing.css` for the stylesheet used by the customized directory listing
 
 From the `/browse/docs/` listing page, clicking `guide.txt` works by
 forwarding `/browse/...` file requests to `http_static_files` while
@@ -107,5 +117,6 @@ Study the [http_static_site.lgt](http_static_site.lgt) source file together
 with these sample queries. The example is intentionally small so the two helper
 libraries stay visible: the handler strips a `/browse` prefix before calling
 `http_directory_listing::serve/5`, strips the leading slash from ordinary file
-requests before calling `http_static_files::serve/5`, and lets the helpers take
-care of method handling, sandboxing, and response construction.
+requests before calling `http_static_files::serve/5`, lets the directory-listing
+route use the newer presentation options, and lets the helpers take care of
+method handling, sandboxing, and response construction.

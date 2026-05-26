@@ -69,11 +69,15 @@ Supported options are:
 
 - `index_files(IndexFiles)`
 - `mime_types_strict(Boolean)`
+- `cache_control(Directives)`
+- `expires(Expires)`
 
 Default options are:
 
 - `index_files(['index.html', 'index.htm'])`
 - `mime_types_strict(false)`
+- `cache_control([])`
+- `expires(none)`
 
 Supported features:
 
@@ -95,8 +99,20 @@ Supported features:
 - precompressed `.br` and `.gz` asset negotiation driven by `Accept-Encoding`
 - `Vary: Accept-Encoding` responses when negotiated precompressed variants exist
 - MIME type and content-encoding guessing
+- configurable `Cache-Control` and `Expires` response headers
 
 For directory listing, see the `http_directory_listing` library.
+
+Cache-policy configuration uses these option values:
+
+- `cache_control(Directives)` where `Directives` is a list containing any of
+    `public`, `private`, `no_cache`, `no_store`, `no_transform`,
+    `must_revalidate`, `proxy_revalidate`, `immutable`, `max_age(Seconds)`,
+    `s_maxage(Seconds)`, `stale_while_revalidate(Seconds)`,
+    `stale_if_error(Seconds)`, or `extension(Directive)`
+- `expires(none)` to omit the header, `expires(Seconds)` for a relative expiry
+    from the current system time, or `expires(date_time(Year,Month,Day,Hour,Minute,Second))`
+    for an absolute expiry time
 
 Current validator and date handling is intentionally conservative:
 

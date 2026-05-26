@@ -74,6 +74,10 @@
 	populate_document_root(Root) :-
 		os::path_concat(Root, 'index.html', IndexFile),
 		write_file_atom(IndexFile, '<!DOCTYPE html><html><body><h1>Static site example</h1><p>Try <a href="/docs/guide.txt">/docs/guide.txt</a> or <a href="/browse/docs/">/browse/docs/</a>.</p></body></html>'),
+		os::path_concat(Root, 'assets', AssetsDirectory),
+		os::make_directory_path(AssetsDirectory),
+		os::path_concat(AssetsDirectory, 'listing.css', ListingCSSFile),
+		write_file_atom(ListingCSSFile, 'body.http-directory-listing.theme-ocean{font-family:sans-serif;background:#eef6fb;color:#123b52} .directory-listing-table.theme-ocean{border-collapse:collapse;background:#fff;box-shadow:0 0 0 1px #c4d9e6} .directory-listing-table.theme-ocean th,.directory-listing-table.theme-ocean td{padding:0.35rem 0.6rem;border-bottom:1px solid #d8e7f0} .directory-listing-table.theme-ocean a{color:#0f5f8f;text-decoration:none} .directory-listing-table.theme-ocean a:hover{text-decoration:underline}'),
 		os::path_concat(Root, 'docs', DocsDirectory),
 		os::make_directory_path(DocsDirectory),
 		os::path_concat(DocsDirectory, 'guide.txt', GuideFile),
@@ -137,9 +141,18 @@
 	browse_response(Path, Request, Response) :-
 		browse_directory_request(Request),
 		!,
-		http_directory_listing::serve(Path, Request, _DocumentRoot_, Response, [title('Static site directory listing')]).
+		browse_directory_options(Options),
+		http_directory_listing::serve(Path, Request, _DocumentRoot_, Response, Options).
 	browse_response(Path, Request, Response) :-
 		http_static_files::serve(Path, Request, _DocumentRoot_, [index_files(['index.html'])], Response).
+
+	browse_directory_options([
+		title('Static site directory listing'),
+		columns([name, type, modified]),
+		type_display(media),
+		theme(ocean),
+		stylesheets(['/assets/listing.css'])
+	]).
 
 	browse_directory_request(Request) :-
 		request_target_path(Request, TargetPath),

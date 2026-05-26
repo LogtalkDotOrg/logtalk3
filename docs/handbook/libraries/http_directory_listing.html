@@ -388,7 +388,11 @@ link in a web browser.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">directories_first(Boolean)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort_by(SortBy)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort_order(SortOrder)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns(Columns)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_display(TypeDisplay)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theme(Theme)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stylesheets(Stylesheets)</span></code></p></li>
 </ul>
 <p>Default options are:</p>
 <ul class="simple">
@@ -396,7 +400,11 @@ link in a web browser.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">directories_first(true)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort_by(name)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort_order(ascending)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns([name,</span> <span class="pre">type,</span> <span class="pre">size,</span> <span class="pre">modified])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_display(simple)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">title('Directory</span> <span class="pre">listing')</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theme(default)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stylesheets([])</span></code></p></li>
 </ul>
 <p>Supported features:</p>
 <ul class="simple">
@@ -414,13 +422,34 @@ single mixed ordering</p></li>
 <li><p>relative links for directory and file entries</p></li>
 <li><p>file metadata columns for entry type, file size, and file modification
 time</p></li>
+<li><p>optional column selection while keeping the <code class="docutils literal notranslate"><span class="pre">Name</span></code> column visible</p></li>
+<li><p>MIME-based file-type display using <code class="docutils literal notranslate"><span class="pre">type_display(media)</span></code></p></li>
+<li><p>theme-aware CSS hooks on the generated <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;table&gt;</span></code>, and
+entry rows</p></li>
+<li><p>optional stylesheet <code class="docutils literal notranslate"><span class="pre">&lt;link&gt;</span></code> generation for custom presentation
+themes</p></li>
 <li><p>optional inclusion of dot files</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> for missing, unsafe, or non-directory targets</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> for other methods</p></li>
 </ul>
-<p>The current HTML output is intentionally simple. Richer file-type
-rendering and custom presentation themes are left for future versions of
-this library.</p>
+<p>Presentation customization uses these option values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">columns(Columns)</span></code> accepts an ordered subset of
+<code class="docutils literal notranslate"><span class="pre">[name,</span> <span class="pre">type,</span> <span class="pre">size,</span> <span class="pre">modified]</span></code> that must include <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_display(simple)</span></code> keeps the existing <code class="docutils literal notranslate"><span class="pre">file</span></code>/<code class="docutils literal notranslate"><span class="pre">directory</span></code>
+labels while <code class="docutils literal notranslate"><span class="pre">type_display(media)</span></code> renders MIME-based file type text
+such as <code class="docutils literal notranslate"><span class="pre">text/plain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theme(Theme)</span></code> adds a <code class="docutils literal notranslate"><span class="pre">theme-Theme</span></code> CSS class to the generated
+<code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;table&gt;</span></code> elements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stylesheets(Stylesheets)</span></code> appends stylesheet links in the generated
+<code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code></p></li>
+</ul>
+<p>The generated HTML now includes stable CSS hooks such as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code> class <code class="docutils literal notranslate"><span class="pre">http-directory-listing</span> <span class="pre">theme-Theme</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">table</span></code> class <code class="docutils literal notranslate"><span class="pre">directory-listing-table</span> <span class="pre">theme-Theme</span> <span class="pre">columns-...</span></code></p></li>
+<li><p>entry row classes <code class="docutils literal notranslate"><span class="pre">entry</span> <span class="pre">entry-directory</span></code> and <code class="docutils literal notranslate"><span class="pre">entry</span> <span class="pre">entry-file</span></code></p></li>
+</ul>
 </section>
 </section>
 

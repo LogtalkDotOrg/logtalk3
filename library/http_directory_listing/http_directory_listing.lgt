@@ -70,7 +70,7 @@
 		^^merge_options(UserOptions, Options),
 		( 	^^supported_method(Request) ->
 			( 	resolve_directory(Path, DocumentRoot, Directory) ->
-				directory_response(Path, Request, Directory, Options, Response)
+				directory_response(Path, Request, Directory, Response, Options)
 			; 	not_found_response(Request, Response)
 			)
 		; 	method_not_allowed_response(Request, Response)
@@ -85,14 +85,27 @@
 		valid_sort_by_value(SortBy).
 	valid_option(sort_order(SortOrder)) :-
 		valid_sort_order_value(SortOrder).
+	valid_option(columns(Columns)) :-
+		valid_columns_option(Columns).
+	valid_option(type_display(TypeDisplay)) :-
+		valid_type_display_value(TypeDisplay).
 	valid_option(title(Title)) :-
 		atom(Title).
+	valid_option(theme(Theme)) :-
+		atom(Theme),
+		Theme \== ''.
+	valid_option(stylesheets(Stylesheets)) :-
+		valid_stylesheet_list(Stylesheets).
 
 	default_option(dot_files(false)).
 	default_option(directories_first(true)).
 	default_option(sort_by(name)).
 	default_option(sort_order(ascending)).
+	default_option(columns([name, type, size, modified])).
+	default_option(type_display(simple)).
 	default_option(title('Directory listing')).
+	default_option(theme(default)).
+	default_option(stylesheets([])).
 
 	resolve_directory(Path, DocumentRoot, Directory) :-
 		resolved_document_root(DocumentRoot, Root),
@@ -107,11 +120,11 @@
 		; 	domain_error(http_directory_listing_document_root, DocumentRoot)
 		).
 
-	directory_response(Path, Request, Directory, Options, Response) :-
+	directory_response(Path, Request, Directory, Response, Options) :-
 		display_path(Path, DisplayPath),
 		listing_settings(Request, Options, Settings),
-		directory_entries(Directory, Options, Settings, Entries),
-		render_directory_listing(DisplayPath, Settings, Entries, Options, HTML),
+		directory_entries(Directory, Settings, Entries, Options),
+		render_directory_listing(DisplayPath, Settings, Entries, HTML, Options),
 		http::version(Request, Version),
 		http::response(Version, status(200, 'OK'), [], content('text/html', text(HTML)), [], Response).
 
@@ -230,7 +243,7 @@
 			Boolean == false
 		)).
 
-	directory_entries(Directory, Options, Settings, Entries) :-
+	directory_entries(Directory, Settings, Entries, Options) :-
 		^^option(dot_files(DotFiles), Options),
 		os::directory_files(Directory, Names0, [dot_files(DotFiles)]),
 		filter_special_entries(Names0, Names1),
@@ -252,24 +265,39 @@
 		entry_term(Name, EntryPath, Entry),
 		entry_terms(Names, Directory, Entries).
 
-	entry_term(Name, EntryPath, entry(Name, Href, Label, Type, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)) :-
+	entry_term(Name, EntryPath, entry(Name, Href, Label, EntryKind, TypeKey, TypeSimpleDisplay, TypeMediaDisplay, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)) :-
 		( 	os::directory_exists(EntryPath) ->
 			atom_concat(Name, '/', Href),
 			Label = Href,
-			Type = directory,
+			EntryKind = directory,
+			TypeKey = directory,
+			TypeSimpleDisplay = directory,
+			TypeMediaDisplay = directory,
 			SizeValue = -1,
 			SizeDisplay = '-',
 			ModifiedValue = -1,
 			ModifiedDisplay = '-'
 		; 	Href = Name,
 			Label = Name,
-			Type = file,
+			EntryKind = file,
+			TypeSimpleDisplay = file,
+			file_type_metadata(EntryPath, TypeKey, TypeMediaDisplay),
 			os::file_size(EntryPath, SizeValue),
 			size_display(SizeValue, SizeDisplay),
 			os::file_modification_time(EntryPath, ModifiedValue0),
 			normalize_modification_time(ModifiedValue0, ModifiedValue),
 			modified_display(ModifiedValue, ModifiedDisplay)
 		).
+
+	file_type_metadata(EntryPath, type(MediaType, Encoding), Display) :-
+		mime_types::guess_file_type(EntryPath, MediaType0, Encoding, false),
+		guessed_media_type(MediaType0, MediaType),
+		media_type_display(MediaType, Encoding, Display).
+
+	media_type_display(MediaType, '', MediaType) :-
+		!.
+	media_type_display(MediaType, Encoding, Display) :-
+		atomic_list_concat([MediaType, ' (', Encoding, ')'], Display).
 
 	size_display(Size, Display) :-
 		number_codes(Size, Codes),
@@ -295,7 +323,7 @@
 		sort_entries_group(Entries0, SortBy, SortOrder, Entries).
 
 	split_entries_by_type([], [], []).
-	split_entries_by_type([entry(Name, Href, Label, directory, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)| Entries], [entry(Name, Href, Label, directory, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)| DirectoryEntries], FileEntries) :-
+	split_entries_by_type([entry(Name, Href, Label, directory, TypeKey, TypeSimpleDisplay, TypeMediaDisplay, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)| Entries], [entry(Name, Href, Label, directory, TypeKey, TypeSimpleDisplay, TypeMediaDisplay, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)| DirectoryEntries], FileEntries) :-
 		!,
 		split_entries_by_type(Entries, DirectoryEntries, FileEntries).
 	split_entries_by_type([Entry| Entries], DirectoryEntries, [Entry| FileEntries]) :-
@@ -317,10 +345,10 @@
 		entry_sort_key(SortBy, Entry, Key),
 		keyed_entries(Entries, SortBy, KeyedEntries).
 
-	entry_sort_key(name, entry(Name, _Href, _Label, _Type, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), key(Name)).
-	entry_sort_key(type, entry(Name, _Href, _Label, Type, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), key(Type, Name)).
-	entry_sort_key(size, entry(Name, _Href, _Label, _Type, SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), key(SizeValue, Name)).
-	entry_sort_key(modified, entry(Name, _Href, _Label, _Type, _SizeValue, _SizeDisplay, ModifiedValue, _ModifiedDisplay), key(ModifiedValue, Name)).
+	entry_sort_key(name, entry(Name, _Href, _Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), key(Name)).
+	entry_sort_key(type, entry(Name, _Href, _Label, _EntryKind, TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), key(TypeKey, Name)).
+	entry_sort_key(size, entry(Name, _Href, _Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), key(SizeValue, Name)).
+	entry_sort_key(modified, entry(Name, _Href, _Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, ModifiedValue, _ModifiedDisplay), key(ModifiedValue, Name)).
 
 	keyed_entries_values([], []).
 	keyed_entries_values([_Key-Entry| KeyedEntries], [Entry| Entries]) :-
@@ -332,30 +360,38 @@
 		sub_atom(Name0, 0, _, 1, Name).
 	strip_trailing_slash(Name, Name).
 
-	render_directory_listing(DisplayPath, Settings, Entries, Options, HTML) :-
+	render_directory_listing(DisplayPath, Settings, Entries, HTML, Options) :-
 		^^option(title(Title), Options),
-		listing_document(Title, DisplayPath, Settings, Entries, Document),
+		listing_document(Title, DisplayPath, Settings, Entries, Document, Options),
 		with_output_to(atom(HTML), (
 			current_output(Stream),
 			html5::generate(stream(Stream), Document)
 		)).
 
-	listing_document(Title, DisplayPath, Settings, Entries, html([lang=en], [head(Head), body(Body)])) :-
-		listing_head(Title, Head),
-		listing_body(Title, DisplayPath, Settings, Entries, Body).
+	listing_document(Title, DisplayPath, Settings, Entries, html([lang=en], [head(Head), body([class=BodyClass], Body)]), Options) :-
+		listing_head(Title, Head, Options),
+		body_class(Options, BodyClass),
+		listing_body(Title, DisplayPath, Settings, Entries, Options, Body).
 
-	listing_head(Title, [meta([charset='utf-8']), title(Title)]).
+	listing_head(Title, Head, Options) :-
+		^^option(stylesheets(Stylesheets), Options),
+		stylesheet_links(Stylesheets, StylesheetLinks),
+		Head = [meta([charset='utf-8']), title(Title)| StylesheetLinks].
 
-	listing_body(Title, DisplayPath, Settings, Entries, Body) :-
-		listing_table(Settings, Entries, Table),
+	stylesheet_links([], []).
+	stylesheet_links([Href| Hrefs], [link([rel=stylesheet, href=Href])| Links]) :-
+		stylesheet_links(Hrefs, Links).
+
+	listing_body(Title, DisplayPath, Settings, Entries, Options, Body) :-
+		listing_table(Settings, Entries, Options, Table),
 		listing_navigation(DisplayPath, Navigation),
-		Body0 = [h1(Title), p(['Directory: ', code(DisplayPath)])| Navigation],
+		Body0 = [h1([class='listing-title'], Title), p([class='listing-path'], ['Directory: ', code(DisplayPath)])| Navigation],
 		( 	Entries == [] ->
 			append(Body0, [Table, p('Directory is empty.')], Body)
 		; 	append(Body0, [Table], Body)
 		).
 
-	listing_navigation(DisplayPath, [p(['Breadcrumbs: '| Breadcrumbs])| ParentBlocks]) :-
+	listing_navigation(DisplayPath, [p([class='breadcrumbs'], ['Breadcrumbs: '| Breadcrumbs])| ParentBlocks]) :-
 		path_segments(DisplayPath, Segments),
 		breadcrumbs_content(Segments, Breadcrumbs),
 		parent_directory_blocks(Segments, ParentBlocks).
@@ -386,22 +422,32 @@
 		atom_concat('../', TailHref, Href).
 
 	parent_directory_blocks([], []).
-	parent_directory_blocks([_| _], [p(a([href='../'], 'Parent directory'))]).
+	parent_directory_blocks([_| _], [p([class='parent-directory'], a([href='../'], 'Parent directory'))]).
 
-	listing_table(Settings, Entries, table([thead(HeaderRow), tbody(Rows)])) :-
-		listing_header_row(Settings, HeaderRow),
-		listing_rows(Entries, Rows).
+	listing_table(Settings, Entries, Options, table([class=TableClass], [thead(HeaderRow), tbody(Rows)])) :-
+		^^option(columns(Columns), Options),
+		table_class(Options, Columns, TableClass),
+		listing_header_row(Settings, Columns, HeaderRow),
+		listing_rows(Entries, Columns, Options, Rows).
 
-	listing_header_row(Settings, tr(Cells)) :-
-		sort_header_cell(Settings, name, 'Name', NameCell),
-		sort_header_cell(Settings, type, 'Type', TypeCell),
-		sort_header_cell(Settings, size, 'Size', SizeCell),
-		sort_header_cell(Settings, modified, 'Modified', ModifiedCell),
-		Cells = [NameCell, TypeCell, SizeCell, ModifiedCell].
+	listing_header_row(Settings, Columns, tr(Cells)) :-
+		listing_header_cells(Columns, Settings, Cells).
 
-	sort_header_cell(settings(_DirectoriesFirst, CurrentSortBy, CurrentSortOrder), SortBy, Label, th(a([href=Href], Content))) :-
+	listing_header_cells([], _Settings, []).
+	listing_header_cells([Column| Columns], Settings, [Cell| Cells]) :-
+		column_label(Column, Label),
+		sort_header_cell(Settings, Column, Label, Cell),
+		listing_header_cells(Columns, Settings, Cells).
+
+	column_label(name, 'Name').
+	column_label(type, 'Type').
+	column_label(size, 'Size').
+	column_label(modified, 'Modified').
+
+	sort_header_cell(settings(_DirectoriesFirst, CurrentSortBy, CurrentSortOrder), SortBy, Label, th([class=Class], a([href=Href], Content))) :-
 		next_sort_order(SortBy, CurrentSortBy, CurrentSortOrder, NextSortOrder),
 		sort_query_href(SortBy, NextSortOrder, Href),
+		column_class(SortBy, Class),
 		sort_header_content(SortBy, Label, CurrentSortBy, CurrentSortOrder, Content).
 
 	next_sort_order(SortBy, SortBy, ascending, descending) :-
@@ -411,14 +457,63 @@
 	sort_query_href(SortBy, SortOrder, Href) :-
 		atomic_list_concat(['?sort=', SortBy, '&order=',  SortOrder], Href).
 
+	column_class(Column, Class) :-
+		atom_concat('column-', Column, Class).
+
 	sort_header_content(SortBy, Label, SortBy, SortOrder, [Label, ' (', OrderAtom, ')']) :-
 		!,
 		OrderAtom = SortOrder.
 	sort_header_content(_SortBy, Label, _CurrentSortBy, _CurrentSortOrder, Label).
 
-	listing_rows([], []).
-	listing_rows([entry(_Name, Href, Label, Type, _SizeValue, SizeDisplay, _ModifiedValue, ModifiedDisplay)| Entries], [tr([td(a([href=Href], Label)), td(Type), td(SizeDisplay), td(ModifiedDisplay)])| Rows]) :-
-		listing_rows(Entries, Rows).
+	listing_rows([], _Columns, _Options, []).
+	listing_rows([Entry| Entries], Columns, Options, [tr([class=RowClass], Cells)| Rows]) :-
+		entry_row_class(Entry, RowClass),
+		listing_row_cells(Columns, Entry, Options, Cells),
+		listing_rows(Entries, Columns, Options, Rows).
+
+	entry_row_class(entry(_Name, _Href, _Label, EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), RowClass) :-
+		atom_concat('entry-', EntryKind, KindClass),
+		atomic_list_concat([entry, KindClass], ' ', RowClass).
+
+	listing_row_cells([], _Entry, _Options, []).
+	listing_row_cells([Column| Columns], Entry, Options, [Cell| Cells]) :-
+		listing_row_cell(Column, Entry, Options, Cell),
+		listing_row_cells(Columns, Entry, Options, Cells).
+
+	listing_row_cell(name, entry(_Name, Href, Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), _Options, td(a([href=Href], Label))).
+	listing_row_cell(type, Entry, Options, td(TypeDisplay)) :-
+		entry_type_display(Entry, Options, TypeDisplay).
+	listing_row_cell(size, entry(_Name, _Href, _Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, SizeDisplay, _ModifiedValue, _ModifiedDisplay), _Options, td(SizeDisplay)).
+	listing_row_cell(modified, entry(_Name, _Href, _Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, ModifiedDisplay), _Options, td(ModifiedDisplay)).
+
+	entry_type_display(entry(_Name, _Href, _Label, _EntryKind, _TypeKey, _TypeSimpleDisplay, TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), Options, TypeDisplay) :-
+		^^option(type_display(media), Options),
+		!,
+		TypeDisplay = TypeMediaDisplay.
+	entry_type_display(entry(_Name, _Href, _Label, _EntryKind, _TypeKey, TypeSimpleDisplay, _TypeMediaDisplay, _SizeValue, _SizeDisplay, _ModifiedValue, _ModifiedDisplay), _Options, TypeDisplay) :-
+		TypeDisplay = TypeSimpleDisplay.
+
+	body_class(Options, Class) :-
+		^^option(theme(Theme), Options),
+		theme_class(Theme, ThemeClass),
+		atomic_list_concat(['http-directory-listing', ThemeClass], ' ', Class).
+
+	table_class(Options, Columns, Class) :-
+		^^option(theme(Theme), Options),
+		theme_class(Theme, ThemeClass),
+		columns_class(Columns, ColumnsClass),
+		atomic_list_concat(['directory-listing-table', ThemeClass, ColumnsClass], ' ', Class).
+
+	theme_class(Theme, ThemeClass) :-
+		atom_concat('theme-', Theme, ThemeClass).
+
+	columns_class(Columns, Class) :-
+		atomic_list_concat(Columns, '-', Suffix),
+		atom_concat('columns-', Suffix, Class).
+
+	guessed_media_type('', 'application/octet-stream') :-
+		!.
+	guessed_media_type(Type, Type).
 
 	not_found_response(Request, Response) :-
 		http::version(Request, Version),
@@ -427,5 +522,31 @@
 	method_not_allowed_response(Request, Response) :-
 		http::version(Request, Version),
 		http::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD'], content('text/plain', text('Method Not Allowed')), [], Response).
+
+	valid_columns_option(Columns) :-
+		Columns \== [],
+		ground(Columns),
+		memberchk(name, Columns),
+		valid_columns_option(Columns, []).
+
+	valid_columns_option([], _Seen).
+	valid_columns_option([Column| Columns], Seen) :-
+		valid_column_value(Column),
+		\+ member(Column, Seen),
+		valid_columns_option(Columns, [Column| Seen]).
+
+	valid_column_value(name).
+	valid_column_value(type).
+	valid_column_value(size).
+	valid_column_value(modified).
+
+	valid_type_display_value(simple).
+	valid_type_display_value(media).
+
+	valid_stylesheet_list([]).
+	valid_stylesheet_list([Stylesheet| Stylesheets]) :-
+		atom(Stylesheet),
+		Stylesheet \== '',
+		valid_stylesheet_list(Stylesheets).
 
 :- end_object.

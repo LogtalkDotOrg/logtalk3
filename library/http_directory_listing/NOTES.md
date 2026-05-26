@@ -69,7 +69,11 @@ Supported options are:
 - `directories_first(Boolean)`
 - `sort_by(SortBy)`
 - `sort_order(SortOrder)`
+- `columns(Columns)`
+- `type_display(TypeDisplay)`
 - `title(Title)`
+- `theme(Theme)`
+- `stylesheets(Stylesheets)`
 
 Default options are:
 
@@ -77,7 +81,11 @@ Default options are:
 - `directories_first(true)`
 - `sort_by(name)`
 - `sort_order(ascending)`
+- `columns([name, type, size, modified])`
+- `type_display(simple)`
 - `title('Directory listing')`
+- `theme(default)`
+- `stylesheets([])`
 
 Supported features:
 
@@ -92,9 +100,26 @@ Supported features:
 - parent-directory navigation for non-root listings
 - relative links for directory and file entries
 - file metadata columns for entry type, file size, and file modification time
+- optional column selection while keeping the `Name` column visible
+- MIME-based file-type display using `type_display(media)`
+- theme-aware CSS hooks on the generated `<body>`, `<table>`, and entry rows
+- optional stylesheet `<link>` generation for custom presentation themes
 - optional inclusion of dot files
 - `404 Not Found` for missing, unsafe, or non-directory targets
 - `405 Method Not Allowed` for other methods
 
-The current HTML output is intentionally simple. Richer file-type rendering and
-custom presentation themes are left for future versions of this library.
+Presentation customization uses these option values:
+
+- `columns(Columns)` accepts an ordered subset of `[name, type, size, modified]`
+    that must include `name`
+- `type_display(simple)` keeps the existing `file`/`directory` labels while
+    `type_display(media)` renders MIME-based file type text such as `text/plain`
+- `theme(Theme)` adds a `theme-Theme` CSS class to the generated `<body>` and
+    `<table>` elements
+- `stylesheets(Stylesheets)` appends stylesheet links in the generated `<head>`
+
+The generated HTML now includes stable CSS hooks such as:
+
+- `body` class `http-directory-listing theme-Theme`
+- `table` class `directory-listing-table theme-Theme columns-...`
+- entry row classes `entry entry-directory` and `entry entry-file`

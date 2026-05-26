@@ -65,8 +65,13 @@
 		static_site_http_handler(Root)::handle(Request, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, 'class="http-directory-listing theme-ocean"')),
+		once(sub_atom(HTML, _, _, _, 'rel="stylesheet" href="/assets/listing.css"')),
+		once(sub_atom(HTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')),
 		once(sub_atom(HTML, _, _, _, '<a href="guide.txt">guide.txt</a>')),
 		once(sub_atom(HTML, _, _, _, '<a href="api/">api/</a>')),
+		once(sub_atom(HTML, _, _, _, 'text/plain')),
+		\+ sub_atom(HTML, _, _, _, '?sort=size'),
 		once(sub_atom(HTML, _, _, _, 'Parent directory')).
 
 	test(http_static_site_handler_04, deterministic) :-
@@ -77,6 +82,15 @@
 		body(Response, content('text/plain', file(File, 0, _Length))),
 		os::path_concat(Root, 'docs', DocsDirectory),
 		os::path_concat(DocsDirectory, 'guide.txt', File).
+
+	test(http_static_site_handler_05, deterministic) :-
+		static_site_fixture::prepare(Root),
+		request(get, origin('/assets/listing.css'), http(1, 1), [], empty, [], Request),
+		static_site_http_handler(Root)::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/css', file(File, 0, _Length))),
+		os::path_concat(Root, 'assets', AssetsDirectory),
+		os::path_concat(AssetsDirectory, 'listing.css', File).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -102,7 +116,9 @@
 			body(GuideResponse, content('text/plain', text('Guide for the static site example.'))),
 			status(ListingResponse, status(200, 'OK')),
 			body(ListingResponse, content('text/html', text(ListingHTML))),
-			once(sub_atom(ListingHTML, _, _, _, '<a href="guide.txt">guide.txt</a>')).
+			once(sub_atom(ListingHTML, _, _, _, '<a href="guide.txt">guide.txt</a>')),
+			once(sub_atom(ListingHTML, _, _, _, 'class="http-directory-listing theme-ocean"')),
+			once(sub_atom(ListingHTML, _, _, _, 'text/plain')).
 
 		test(http_static_site_client_02, deterministic) :-
 			static_site_fixture::prepare(Root),
@@ -131,7 +147,8 @@
 			body(GuideResponse, content('text/plain', text('Guide for the static site example.'))),
 			status(ListingResponse, status(200, 'OK')),
 			body(ListingResponse, content('text/html', text(ListingHTML))),
-			once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')).
+			once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')),
+			once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
 		cleanup_server_thread(Root, Listener, Tag) :-
 			catch(http_socket::close_listener(Listener), _, true),

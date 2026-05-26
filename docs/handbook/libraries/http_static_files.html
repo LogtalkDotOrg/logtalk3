@@ -390,11 +390,15 @@ predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">index_files(IndexFiles)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(Boolean)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires(Expires)</span></code></p></li>
 </ul>
 <p>Default options are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">index_files(['index.html',</span> <span class="pre">'index.htm'])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(false)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_control([])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code></p></li>
 </ul>
 <p>Supported features:</p>
 <ul class="simple">
@@ -419,8 +423,22 @@ does not match or is only weakly equal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">Accept-Encoding</span></code> responses when negotiated precompressed
 variants exist</p></li>
 <li><p>MIME type and content-encoding guessing</p></li>
+<li><p>configurable <code class="docutils literal notranslate"><span class="pre">Cache-Control</span></code> and <code class="docutils literal notranslate"><span class="pre">Expires</span></code> response headers</p></li>
 </ul>
 <p>For directory listing, see the <code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code> library.</p>
+<p>Cache-policy configuration uses these option values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code> where <code class="docutils literal notranslate"><span class="pre">Directives</span></code> is a list
+containing any of <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, <code class="docutils literal notranslate"><span class="pre">no_cache</span></code>, <code class="docutils literal notranslate"><span class="pre">no_store</span></code>,
+<code class="docutils literal notranslate"><span class="pre">no_transform</span></code>, <code class="docutils literal notranslate"><span class="pre">must_revalidate</span></code>, <code class="docutils literal notranslate"><span class="pre">proxy_revalidate</span></code>,
+<code class="docutils literal notranslate"><span class="pre">immutable</span></code>, <code class="docutils literal notranslate"><span class="pre">max_age(Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">s_maxage(Seconds)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">stale_while_revalidate(Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">stale_if_error(Seconds)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">extension(Directive)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code> to omit the header, <code class="docutils literal notranslate"><span class="pre">expires(Seconds)</span></code> for a
+relative expiry from the current system time, or
+<code class="docutils literal notranslate"><span class="pre">expires(date_time(Year,Month,Day,Hour,Minute,Second))</span></code> for an
+absolute expiry time</p></li>
+</ul>
 <p>Current validator and date handling is intentionally conservative:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ETag</span></code> values are weak validators of the form

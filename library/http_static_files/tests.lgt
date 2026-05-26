@@ -38,6 +38,10 @@
 		body/2
 	]).
 
+	:- uses(date, [
+		format_date_time/4
+	]).
+
 	:- uses(list, [
 		append/3, memberchk/2
 	]).
@@ -68,6 +72,19 @@
 		atom_concat(Expected1, LastModified, Expected2),
 		atom_concat(Expected2, '\r\n\r\nhello', ExpectedMessage),
 		Message == ExpectedMessage.
+
+	test(http_static_files_serve_5_05, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		format_date_time(date_time(2099, 1, 1, 0, 0, 0), 0, http_date, Expires),
+		request(get, origin('/hello.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [cache_control([public, max_age(3600), immutable]), expires(date_time(2099, 1, 1, 0, 0, 0))], Response),
+		status(Response, status(200, 'OK')),
+		headers(Response, Headers),
+		memberchk(cache_control-'public, max-age=3600, immutable', Headers),
+		memberchk(expires-Expires, Headers),
+		body(Response, content('text/plain', file(File, 0, 5))).
 
 	test(http_static_files_serve_5_01, deterministic) :-
 		ensure_docroot(Root),
