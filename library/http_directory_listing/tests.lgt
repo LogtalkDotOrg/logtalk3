@@ -226,6 +226,35 @@
 		once(sub_atom(HTML, _, _, _, 'text/html')),
 		once(sub_atom(HTML, _, _, _, 'class="entry entry-file"')).
 
+	test(http_directory_listing_serve_5_10, deterministic(PosZeta < PosAlpha)) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'alpha.txt', AlphaFile),
+		write_file_atom(AlphaFile, 'x'),
+		os::path_concat(Root, 'zeta.txt', ZetaFile),
+		write_file_atom(ZetaFile, 'zzzzz'),
+		request(get, origin('/', 'sort=size&order=descending'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [columns([name])]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, 'Name (descending)')),
+		\+ sub_atom(HTML, _, _, _, '?sort=size'),
+		once(sub_atom(HTML, PosZeta, _, _, '<a href="zeta.txt">zeta.txt</a>')),
+		once(sub_atom(HTML, PosAlpha, _, _, '<a href="alpha.txt">alpha.txt</a>')).
+
+	test(http_directory_listing_serve_5_11, deterministic(PosAlpha < PosZeta)) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'alpha.txt', AlphaFile),
+		write_file_atom(AlphaFile, 'x'),
+		os::path_concat(Root, 'zeta.txt', ZetaFile),
+		write_file_atom(ZetaFile, 'zzzzz'),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [columns([name]), sort_by(size)]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, 'Name (ascending)')),
+		once(sub_atom(HTML, PosAlpha, _, _, '<a href="alpha.txt">alpha.txt</a>')),
+		once(sub_atom(HTML, PosZeta, _, _, '<a href="zeta.txt">zeta.txt</a>')).
+
 	% auxiliary predicates
 
 	ensure_docroot(Root) :-

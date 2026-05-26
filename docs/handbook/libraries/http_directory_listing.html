@@ -416,7 +416,7 @@ link in a web browser.</p>
 single mixed ordering</p></li>
 <li><p>sortable <code class="docutils literal notranslate"><span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Type</span></code>, <code class="docutils literal notranslate"><span class="pre">Size</span></code>, and <code class="docutils literal notranslate"><span class="pre">Modified</span></code> columns</p></li>
 <li><p>query-driven ordering using <code class="docutils literal notranslate"><span class="pre">sort=name|type|size|modified</span></code> and
-<code class="docutils literal notranslate"><span class="pre">order=ascending|descending</span></code></p></li>
+<code class="docutils literal notranslate"><span class="pre">order=ascending|descending</span></code> for visible columns only</p></li>
 <li><p>breadcrumb navigation for the current directory path</p></li>
 <li><p>parent-directory navigation for non-root listings</p></li>
 <li><p>relative links for directory and file entries</p></li>
@@ -435,7 +435,10 @@ themes</p></li>
 <p>Presentation customization uses these option values:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">columns(Columns)</span></code> accepts an ordered subset of
-<code class="docutils literal notranslate"><span class="pre">[name,</span> <span class="pre">type,</span> <span class="pre">size,</span> <span class="pre">modified]</span></code> that must include <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+<code class="docutils literal notranslate"><span class="pre">[name,</span> <span class="pre">type,</span> <span class="pre">size,</span> <span class="pre">modified]</span></code> that must include <code class="docutils literal notranslate"><span class="pre">name</span></code>; hidden
+columns are also removed from the accepted query <code class="docutils literal notranslate"><span class="pre">sort=</span></code> values,
+with hidden or invalid sort keys falling back to the effective default
+visible column</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type_display(simple)</span></code> keeps the existing <code class="docutils literal notranslate"><span class="pre">file</span></code>/<code class="docutils literal notranslate"><span class="pre">directory</span></code>
 labels while <code class="docutils literal notranslate"><span class="pre">type_display(media)</span></code> renders MIME-based file type text
 such as <code class="docutils literal notranslate"><span class="pre">text/plain</span></code></p></li>

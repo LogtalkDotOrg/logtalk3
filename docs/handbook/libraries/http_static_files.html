@@ -415,6 +415,8 @@ precedence</p></li>
 and unsatisfiable range requests</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">If-Range</span></code> fallback to full <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> responses when the validator
 does not match or is only weakly equal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> when <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code> rejects the identity
+representation and no acceptable precompressed variant is available</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> for missing or unsafe paths</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> for other methods</p></li>
 <li><p>index-file lookup for directory targets</p></li>
@@ -455,7 +457,7 @@ ignored in that case</p></li>
 <li><p>precompressed-asset negotiation currently recognizes <code class="docutils literal notranslate"><span class="pre">.br</span></code> and
 <code class="docutils literal notranslate"><span class="pre">.gz</span></code> sibling files and selects between them using
 <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code> quality values, otherwise falling back to the
-identity representation</p></li>
+identity representation when it remains acceptable</p></li>
 <li><p>path sandboxing is based on canonicalized absolute-path prefix checks;
 no separate cross-backend symlink-policy layer has been added yet</p></li>
 </ul>

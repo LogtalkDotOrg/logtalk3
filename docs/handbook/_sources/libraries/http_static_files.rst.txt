@@ -79,6 +79,8 @@ Supported features:
   and unsatisfiable range requests
 - ``If-Range`` fallback to full ``200 OK`` responses when the validator
   does not match or is only weakly equal
+- ``406 Not Acceptable`` when ``Accept-Encoding`` rejects the identity
+  representation and no acceptable precompressed variant is available
 - ``404 Not Found`` for missing or unsafe paths
 - ``405 Method Not Allowed`` for other methods
 - index-file lookup for directory targets
@@ -120,6 +122,6 @@ Current validator and date handling is intentionally conservative:
 - precompressed-asset negotiation currently recognizes ``.br`` and
   ``.gz`` sibling files and selects between them using
   ``Accept-Encoding`` quality values, otherwise falling back to the
-  identity representation
+  identity representation when it remains acceptable
 - path sandboxing is based on canonicalized absolute-path prefix checks;
   no separate cross-backend symlink-policy layer has been added yet

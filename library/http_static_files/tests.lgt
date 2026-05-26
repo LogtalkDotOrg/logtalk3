@@ -50,11 +50,7 @@
 
 	cleanup :-
 		^^clean_file('test_secret.txt'),
-		^^file_path('test_docroot', Root),
-		( 	os::directory_exists(Root) ->
-			os::delete_directory_and_contents(Root)
-		; 	true
-		).
+		^^clean_directory('test_docroot').
 
 	test(http_static_files_serve_4_01, deterministic) :-
 		ensure_docroot(Root),
@@ -341,6 +337,28 @@
 		header(Response, vary, 'Accept-Encoding'),
 		\+ header(Response, content_encoding, _),
 		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_4_23, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		atom_concat(File, '.br', BrotliFile),
+		write_file_atom(BrotliFile, 'br'),
+		request(get, origin('/hello.txt'), http(1, 1), [accept_encoding-'identity;q=0, br;q=0'], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(406, 'Not Acceptable')),
+		header(Response, vary, 'Accept-Encoding'),
+		body(Response, content('text/plain', text('Not Acceptable'))).
+
+	test(http_static_files_serve_4_24, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'identity_only.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/identity_only.txt'), http(1, 1), [accept_encoding-'identity;q=0'], empty, [], Request),
+		http_static_files::serve('identity_only.txt', Request, Root, Response),
+		status(Response, status(406, 'Not Acceptable')),
+		\+ header(Response, vary, _),
+		body(Response, content('text/plain', text('Not Acceptable'))).
 
 	test(http_static_files_serve_5_02, error(domain_error(option, index_files(['index.html'| _])))) :-
 		ensure_docroot(Root),

@@ -93,7 +93,10 @@
 		^^resolved_target_path(Path, Root, Candidate),
 		existing_target_file(Candidate, Root, Options, TargetFile),
 		selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding),
-		resource(File, Options, VaryAcceptEncoding, Resource).
+		( 	File == not_acceptable ->
+			Resource = not_acceptable(VaryAcceptEncoding)
+		; 	resource(File, Options, VaryAcceptEncoding, Resource)
+		).
 
 	resolved_document_root(DocumentRoot, Root) :-
 		os::absolute_file_name(DocumentRoot, AbsoluteDocumentRoot),
@@ -126,6 +129,13 @@
 		!,
 		VaryAcceptEncoding = true,
 		preferred_representation_file(Request, TargetFile, VariantFiles, File).
+	selected_representation_file(Request, TargetFile, not_acceptable, false) :-
+		negotiable_resource_file(TargetFile),
+		request_header_value(Request, accept_encoding, Value),
+		accept_encoding_specs(Value, Specs),
+		identity_quality(Specs, IdentityQuality),
+		IdentityQuality =< 0.0,
+		!.
 	selected_representation_file(_Request, File, File, false).
 
 	negotiable_resource_file(File) :-
@@ -165,7 +175,11 @@
 		variant_representation_choice(br, Specs, VariantFiles, BrotliChoice),
 		better_representation_choice(BrotliChoice, BestChoice0, BestChoice1),
 		variant_representation_choice(gzip, Specs, VariantFiles, GzipChoice),
-		better_representation_choice(GzipChoice, BestChoice1, choice(File, _Quality, _Rank)).
+		better_representation_choice(GzipChoice, BestChoice1, choice(File0, Quality, _Rank)),
+		( 	Quality > 0.0 ->
+			File = File0
+		; 	File = not_acceptable
+		).
 
 	variant_representation_choice(Encoding, Specs, VariantFiles, choice(File, Quality, Rank)) :-
 		memberchk(Encoding-File, VariantFiles),
@@ -392,6 +406,9 @@
 		mime_types::guess_file_type(File, Type, _Encoding, Strict),
 		guessed_media_type(Type, MediaType).
 
+	resource_response(Request, not_acceptable(VaryAcceptEncoding), Response) :-
+		!,
+		not_acceptable_response(Request, VaryAcceptEncoding, Response).
 	resource_response(Request, Resource, Response) :-
 		request_not_modified(Request, Resource),
 		!,
@@ -626,6 +643,11 @@
 	not_found_response(Request, Response) :-
 		http::version(Request, Version),
 		http::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
+
+	not_acceptable_response(Request, VaryAcceptEncoding, Response) :-
+		vary_headers(VaryAcceptEncoding, Headers),
+		http::version(Request, Version),
+		http::response(Version, status(406, 'Not Acceptable'), Headers, content('text/plain', text('Not Acceptable')), [], Response).
 
 	method_not_allowed_response(Request, Response) :-
 		http::version(Request, Version),

@@ -151,18 +151,25 @@
 
 	listing_settings(Request, Options, settings(DirectoriesFirst, SortBy, SortOrder)) :-
 		^^option(directories_first(DirectoriesFirst), Options),
+		^^option(columns(Columns), Options),
 		^^option(sort_by(DefaultSortBy), Options),
 		^^option(sort_order(DefaultSortOrder), Options),
-		request_sort_by(Request, DefaultSortBy, SortBy),
+		visible_sort_by(DefaultSortBy, Columns, VisibleDefaultSortBy),
+		request_sort_by(Request, Columns, VisibleDefaultSortBy, SortBy),
 		request_sort_order(Request, DefaultSortOrder, SortOrder).
 
-	request_sort_by(Request, DefaultSortBy, SortBy) :-
+	request_sort_by(Request, Columns, DefaultSortBy, SortBy) :-
 		( 	request_query_pairs(Request, Pairs),
 			query_option_atom(Pairs, sort, SortBy0),
-			valid_sort_by_value(SortBy0) ->
+			member(SortBy0, Columns) ->
 			SortBy = SortBy0
 		; 	SortBy = DefaultSortBy
 		).
+
+	visible_sort_by(SortBy, Columns, SortBy) :-
+		member(SortBy, Columns),
+		!.
+	visible_sort_by(_SortBy, _Columns, name).
 
 	request_sort_order(Request, DefaultSortOrder, SortOrder) :-
 		( 	request_query_pairs(Request, Pairs),

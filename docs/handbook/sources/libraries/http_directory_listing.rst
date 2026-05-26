@@ -80,7 +80,7 @@ Supported features:
   single mixed ordering
 - sortable ``Name``, ``Type``, ``Size``, and ``Modified`` columns
 - query-driven ordering using ``sort=name|type|size|modified`` and
-  ``order=ascending|descending``
+  ``order=ascending|descending`` for visible columns only
 - breadcrumb navigation for the current directory path
 - parent-directory navigation for non-root listings
 - relative links for directory and file entries
@@ -99,7 +99,10 @@ Supported features:
 Presentation customization uses these option values:
 
 - ``columns(Columns)`` accepts an ordered subset of
-  ``[name, type, size, modified]`` that must include ``name``
+  ``[name, type, size, modified]`` that must include ``name``; hidden
+  columns are also removed from the accepted query ``sort=`` values,
+  with hidden or invalid sort keys falling back to the effective default
+  visible column
 - ``type_display(simple)`` keeps the existing ``file``/``directory``
   labels while ``type_display(media)`` renders MIME-based file type text
   such as ``text/plain``
