@@ -170,11 +170,13 @@
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_messages.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_session.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code></a></li>
@@ -385,6 +387,10 @@ bodies, and higher-layer properties</p></li>
 <li><p>Provide generic accessors over normalized request and response terms</p></li>
 <li><p>Parse and generate request lines, status lines, header blocks, bodies,
 full requests, and full responses</p></li>
+<li><p>Generate effective response headers independently from the response
+body bytes using <code class="docutils literal notranslate"><span class="pre">generate_response_headers/2</span></code> when higher layers
+need to stream file-backed bodies without materializing them in memory
+first</p></li>
 <li><p>Decode and generate chunked transfer coding for full requests and
 responses, including normalized <code class="docutils literal notranslate"><span class="pre">trailers/1</span></code> properties</p></li>
 <li><p>Parse and generate multipart bodies at both the standalone body level
@@ -438,6 +444,7 @@ reusable <code class="docutils literal notranslate"><span class="pre">Sec-WebSoc
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">binary(Bytes))</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">file(Path,</span> <span class="pre">Offset,</span> <span class="pre">Length))</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">text(Text))</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">json(Term))</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">form(Pairs))</span></code></p></li>
@@ -457,6 +464,10 @@ out of scope for now</p></li>
 <li><p>Multipart wire parsing and generation require a boundary parameter in
 the effective <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> metadata, or an explicit <code class="docutils literal notranslate"><span class="pre">boundary/1</span></code>
 option when using <code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code> or <code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></p></li>
+<li><p>File-backed bodies are generated only; parsing still normalizes
+incoming bodies to in-memory payload terms. The declared <code class="docutils literal notranslate"><span class="pre">Offset</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Length</span></code> determine the response <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> metadata when
+the body is generated.</p></li>
 <li><p>The current body codec set is intentionally small and focused on the
 media types needed by the first <code class="docutils literal notranslate"><span class="pre">http</span></code> and <code class="docutils literal notranslate"><span class="pre">open_api</span></code> integration
 slices</p></li>

@@ -8623,6 +8623,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http <http/0::generate_response/2>`
 
+``generate_response_headers/2``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http <http/0::generate_response_headers/2>`
+
 ``generate_set_cookie/4``
 -------------------------
 
@@ -21058,6 +21068,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_server <http_server/0::serve/3>`
 * :ref:`queuep <queuep/0::serve/3>`
+
+``serve/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_directory_listing <http_directory_listing/0::serve/4>`
+* :ref:`http_static_files <http_static_files/0::serve/4>`
+
+``serve/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_directory_listing <http_directory_listing/0::serve/5>`
+* :ref:`http_static_files <http_static_files/0::serve/5>`
 
 ``serve_connection/3``
 ----------------------

@@ -1,0 +1,127 @@
+.. index:: single: http_docroot_paths
+.. _http_docroot_paths/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_docroot_paths``
+======================
+
+Shared helpers for validating requests and sandboxing document-root relative paths.
+
+| **Availability:** 
+|    ``logtalk_load(http(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-05-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: validate_relative_path/1
+.. _http_docroot_paths/0::validate_relative_path/1:
+
+``validate_relative_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: validate_request/1
+.. _http_docroot_paths/0::validate_request/1:
+
+``validate_request/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: validate_document_root/1
+.. _http_docroot_paths/0::validate_document_root/1:
+
+``validate_document_root/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: supported_method/1
+.. _http_docroot_paths/0::supported_method/1:
+
+``supported_method/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: resolved_target_path/3
+.. _http_docroot_paths/0::resolved_target_path/3:
+
+``resolved_target_path/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: path_within_root/2
+.. _http_docroot_paths/0::path_within_root/2:
+
+``path_within_root/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

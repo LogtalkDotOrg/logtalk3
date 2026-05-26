@@ -162,6 +162,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a><ul>
@@ -178,6 +179,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_messages.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_session.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code></a></li>
@@ -481,6 +483,9 @@ the HTTP opening handshake.</p>
 without requiring end-of-file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">write_response/2</span></code> writes exactly one normalized response to a
 binary stream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_response/2</span></code> streams file-backed response bodies directly
+after writing the generated header block when the response does not
+use chunked transfer coding.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dispatch/3</span></code> calls a handler object and normalizes handler failures
 into <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> responses.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> validates a normalized WebSocket
@@ -493,11 +498,13 @@ completed with a valid WebSocket opening-handshake response.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve/3</span></code> connects request reading, handler dispatch, and response
 writing, returning <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> for malformed input. For
 <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests it sends the generated response headers but
-suppresses the response body bytes.</p></li>
+suppresses the response body bytes, including for file-backed
+responses.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> repeatedly serves requests on the same stream
 pair using HTTP persistence rules and stops on end-of-file or
 <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> semantics. For <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests it sends the
-generated response headers but suppresses the response body bytes.</p></li>
+generated response headers but suppresses the response body bytes,
+including for file-backed responses.</p></li>
 </ul>
 <p>Because incoming request bodies are normalized by the <code class="docutils literal notranslate"><span class="pre">http</span></code> library,
 handler objects can inspect <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> requests directly

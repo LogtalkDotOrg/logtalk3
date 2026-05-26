@@ -1168,6 +1168,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
    http <http_0>
    http_body_codec_protocol <http_body_codec_protocol_0>
+   http_docroot_paths <http_docroot_paths_0>
    http_form_body_codec <http_form_body_codec_0>
    http_handler_protocol <http_handler_protocol_0>
    http_json_body_codec <http_json_body_codec_0>
@@ -1209,6 +1210,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_cors <http_cors_0>
+
+``library/http_directory_listing/``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_directory_listing <http_directory_listing_0>
 
 ``library/http_multipart/``
 ---------------------------
@@ -1260,6 +1271,16 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_socket <http_socket_0>
+
+``library/http_static_files/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_static_files <http_static_files_0>
 
 ``library/http_websocket/``
 ---------------------------

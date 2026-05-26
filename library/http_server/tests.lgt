@@ -43,6 +43,8 @@
 		^^clean_file('test_http_server_chunked.tmp'),
 		^^clean_file('test_http_server_chunked_ows.tmp'),
 		^^clean_file('test_http_server_empty.tmp'),
+		^^clean_file('test_http_server_file_body.tmp'),
+		^^clean_file('test_http_server_file_response.tmp'),
 		^^clean_file('test_http_server_response.tmp'),
 		^^clean_file('test_http_server_multipart_input.tmp'),
 		^^clean_file('test_http_server_multipart_output.tmp'),
@@ -124,6 +126,16 @@
 		parse_response(file(File), WrittenResponse),
 		status(WrittenResponse, status(200, 'OK')),
 		body(WrittenResponse, content('text/plain', text(ready))).
+
+	test(http_server_write_response_2_02, deterministic(WrittenAtom == 'HTTP/1.1 206 Partial Content\r\ncontent-length: 3\r\ncontent-type: application/octet-stream\r\n\r\nbcd')) :-
+		write_file_atom('test_http_server_file_body.tmp', 'abcde'),
+		^^file_path('test_http_server_file_body.tmp', BodyFile),
+		^^file_path('test_http_server_file_response.tmp', OutputFile),
+		Response = response(http(1, 1), status(206, 'Partial Content'), [], content('application/octet-stream', file(BodyFile, 1, 3)), []),
+		open(OutputFile, write, Output, [type(binary)]),
+		http_server::write_response(Output, Response),
+		close(Output),
+		read_file_atom('test_http_server_file_response.tmp', WrittenAtom).
 
 	test(http_server_dispatch_3_01, deterministic) :-
 		Request = request(get, origin('/dispatch'), http(1, 1), [host-host('example.com')], empty, []),

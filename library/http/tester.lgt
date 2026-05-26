@@ -22,15 +22,13 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load(reader(loader)),
 	logtalk_load(base64(loader)),
 	logtalk_load(json(loader)),
 	logtalk_load(url(loader)),
 	logtalk_load(hashes(loader)),
-	(	logtalk::expand_library_path(http_cookies(loader), _) ->
-		logtalk_load(http_cookies(loader))
-	;	logtalk_load('../http_cookies/loader.lgt')
-	),
+	logtalk_load('../http_cookies/loader.lgt'),
 	logtalk_load([
 		http_request_protocol,
 		http_response_protocol,
@@ -42,8 +40,13 @@
 		http_text_body_codec,
 		http_json_body_codec,
 		http_form_body_codec,
-		http
-	], [debug(on), source_data(on)]),
+		http,
+		http_docroot_paths,
+		http_message_helpers
+	], [
+		debug(on),
+		source_data(on)
+	]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

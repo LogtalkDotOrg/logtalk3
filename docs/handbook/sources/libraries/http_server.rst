@@ -155,6 +155,9 @@ The current slice provides seven predicates:
   without requiring end-of-file.
 - ``write_response/2`` writes exactly one normalized response to a
   binary stream.
+- ``write_response/2`` streams file-backed response bodies directly
+  after writing the generated header block when the response does not
+  use chunked transfer coding.
 - ``dispatch/3`` calls a handler object and normalizes handler failures
   into ``500 Internal Server Error`` responses.
 - ``accept_websocket/3`` validates a normalized WebSocket
@@ -167,11 +170,13 @@ The current slice provides seven predicates:
 - ``serve/3`` connects request reading, handler dispatch, and response
   writing, returning ``400 Bad Request`` for malformed input. For
   ``HEAD`` requests it sends the generated response headers but
-  suppresses the response body bytes.
+  suppresses the response body bytes, including for file-backed
+  responses.
 - ``serve_connection/3`` repeatedly serves requests on the same stream
   pair using HTTP persistence rules and stops on end-of-file or
   ``Connection: close`` semantics. For ``HEAD`` requests it sends the
-  generated response headers but suppresses the response body bytes.
+  generated response headers but suppresses the response body bytes,
+  including for file-backed responses.
 
 Because incoming request bodies are normalized by the ``http`` library,
 handler objects can inspect ``multipart/form-data`` requests directly

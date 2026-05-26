@@ -110,6 +110,13 @@
 		).
 
 	write_response(Output, Response) :-
+		file_backed_response(Response, File, Offset, Length),
+		\+ response_uses_chunked_wire_body(Response),
+		!,
+		http::generate_response_headers(stream(Output), Response),
+		write_file_bytes(Output, File, Offset, Length),
+		flush_output(Output).
+	write_response(Output, Response) :-
 		http::generate_response(bytes(Bytes), Response),
 		write_bytes(Bytes, Output),
 		flush_output(Output).
@@ -393,8 +400,7 @@
 		http::method(Request, head).
 
 	head_response_bytes(Response, HeaderBytes) :-
-		http::generate_response(bytes(Bytes), Response),
-		strip_response_body_bytes(Bytes, HeaderBytes).
+		http::generate_response_headers(bytes(HeaderBytes), Response).
 
 	strip_response_body_bytes(Bytes, HeaderBytes) :-
 		(	split_response_header_bytes(Bytes, [], HeaderBytes) ->
@@ -611,6 +617,47 @@
 			domain_error(http_request_stream, bare_line_feed)
 		;	get_byte(Input, NextByte),
 			read_line_bytes(Input, NextByte, [Byte| Acc], Result)
+		).
+
+	file_backed_response(Response, File, Offset, Length) :-
+		http::body(Response, content(_MediaType, file(File, Offset, Length))).
+
+	response_uses_chunked_wire_body(Response) :-
+		http::property(Response, transfer_encoding([chunked])),
+		!.
+	response_uses_chunked_wire_body(Response) :-
+		http::header(Response, transfer_encoding, [chunked]).
+
+	write_file_bytes(Output, File, Offset, Length) :-
+		open(File, read, Input, [type(binary)]),
+		catch(
+			(	skip_file_bytes(Input, Offset, file(File, Offset, Length)),
+				copy_file_bytes(Input, Output, Length, file(File, Offset, Length))
+			),
+			Error,
+			(close(Input), throw(Error))
+		),
+		close(Input).
+
+	skip_file_bytes(_Input, 0, _FileBody) :-
+		!.
+	skip_file_bytes(Input, Remaining, FileBody) :-
+		get_byte(Input, Byte),
+		(	Byte =:= -1 ->
+			domain_error(http_body_file_range, FileBody)
+		;	NextRemaining is Remaining - 1,
+			skip_file_bytes(Input, NextRemaining, FileBody)
+		).
+
+	copy_file_bytes(_Input, _Output, 0, _FileBody) :-
+		!.
+	copy_file_bytes(Input, Output, Remaining, FileBody) :-
+		get_byte(Input, Byte),
+		(	Byte =:= -1 ->
+			domain_error(http_body_file_range, FileBody)
+		;	put_byte(Output, Byte),
+			NextRemaining is Remaining - 1,
+			copy_file_bytes(Input, Output, NextRemaining, FileBody)
 		).
 
 	write_bytes([], _Output).

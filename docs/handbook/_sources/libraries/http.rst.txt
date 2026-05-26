@@ -48,6 +48,10 @@ Current scope
 - Provide generic accessors over normalized request and response terms
 - Parse and generate request lines, status lines, header blocks, bodies,
   full requests, and full responses
+- Generate effective response headers independently from the response
+  body bytes using ``generate_response_headers/2`` when higher layers
+  need to stream file-backed bodies without materializing them in memory
+  first
 - Decode and generate chunked transfer coding for full requests and
   responses, including normalized ``trailers/1`` properties
 - Parse and generate multipart bodies at both the standalone body level
@@ -105,6 +109,7 @@ Supported body terms are:
 
 - ``empty``
 - ``content(MediaType, binary(Bytes))``
+- ``content(MediaType, file(Path, Offset, Length))``
 - ``content(MediaType, text(Text))``
 - ``content(MediaType, json(Term))``
 - ``content(MediaType, form(Pairs))``
@@ -125,6 +130,10 @@ Current limitations
 - Multipart wire parsing and generation require a boundary parameter in
   the effective ``Content-Type`` metadata, or an explicit ``boundary/1``
   option when using ``parse_body/4`` or ``generate_body/3``
+- File-backed bodies are generated only; parsing still normalizes
+  incoming bodies to in-memory payload terms. The declared ``Offset``
+  and ``Length`` determine the response ``Content-Length`` metadata when
+  the body is generated.
 - The current body codec set is intentionally small and focused on the
   media types needed by the first ``http`` and ``open_api`` integration
   slices

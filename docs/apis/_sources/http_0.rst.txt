@@ -197,6 +197,25 @@ Generates a complete HTTP response message to the given sink (``bytes(List)``, `
 
 ------------
 
+.. index:: generate_response_headers/2
+.. _http/0::generate_response_headers/2:
+
+``generate_response_headers/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates an HTTP response status line and effective header block, terminated by an empty line, to the given sink from a normalized ``response/5`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_response_headers(Sink,Response)``
+| **Mode and number of proofs:**
+|    ``generate_response_headers(+compound,++compound)`` - ``one_or_error``
+
+
+------------
+
 .. index:: parse_request_line/2
 .. _http/0::parse_request_line/2:
 

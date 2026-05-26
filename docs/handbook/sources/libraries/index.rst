@@ -120,11 +120,13 @@ directory in the ``NOTES.md`` file.
    http_client
    http_cookies
    http_cors
+   http_directory_listing
    http_multipart
    http_router
    http_server
    http_session
    http_socket
+   http_static_files
    http_websocket
    http_websocket_messages
    http_websocket_session

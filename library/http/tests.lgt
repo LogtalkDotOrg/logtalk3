@@ -42,6 +42,7 @@
 		generate_request/2,
 		parse_response/2,
 		generate_response/2,
+		generate_response_headers/2,
 		parse_request_line/2,
 		generate_request_line/2,
 		parse_status_line/2,
@@ -68,6 +69,9 @@
 	cover(http_text_body_codec).
 	cover(http_json_body_codec).
 	cover(http_form_body_codec).
+
+	cleanup :-
+		^^clean_file('test_http_response_body.tmp').
 
 	test(http_request_7_01, deterministic(Request == request(get, origin('/users'), http(1, 1), [host-'example.com'], empty, []))) :-
 		request(get, origin('/users'), http(1, 1), [host-'example.com'], empty, [], Request).
@@ -361,6 +365,12 @@
 		header(Response, sec_websocket_version, [8, 7]),
 		property(Response, websocket_version([13, 8, 7])).
 
+	test(http_generate_response_headers_2_01, deterministic(Message == 'HTTP/1.1 206 Partial Content\r\ncontent-length: 3\r\ncontent-type: application/octet-stream\r\n\r\n')) :-
+		write_file_atom('test_http_response_body.tmp', 'abcde'),
+		^^file_path('test_http_response_body.tmp', File),
+		Response = response(http(1, 1), status(206, 'Partial Content'), [], content('application/octet-stream', file(File, 1, 3)), []),
+		generate_response_headers(atom(Message), Response).
+
 	test(http_generate_response_2_01, deterministic(Message == 'HTTP/1.1 201 Created\r\ncontent-length: 7\r\ncontent-type: text/plain\r\nset-cookie: SID=abc; Path=/; HttpOnly\r\n\r\ncreated')) :-
 		Response = response(http(1, 1), status(201, 'Created'), [], content('text/plain', text(created)), [set_cookies([set_cookie('SID', 'abc', [path-('/'), http_only-true])])]),
 		generate_response(atom(Message), Response).
@@ -423,17 +433,35 @@
 		header(ParsedResponse, sec_websocket_version, [13, 8, 7]),
 		property(ParsedResponse, websocket_version([13, 8, 7])).
 
-	test(http_request_7_06, error(domain_error(http_header_semantics, content_length(5)))) :-
+	test(http_generate_response_2_06, deterministic(Message == 'HTTP/1.1 206 Partial Content\r\ncontent-length: 3\r\ncontent-type: application/octet-stream\r\n\r\nbcd')) :-
+		write_file_atom('test_http_response_body.tmp', 'abcde'),
+		^^file_path('test_http_response_body.tmp', File),
+		Response = response(http(1, 1), status(206, 'Partial Content'), [], content('application/octet-stream', file(File, 1, 3)), []),
+		generate_response(atom(Message), Response).
+
+	test(http_request_7_07, error(domain_error(http_header_semantics, content_length(5)))) :-
 		request(get, origin('/users'), http(1, 1), [content_length-5], empty, [], _).
 
-	test(http_request_7_07, error(domain_error(http_property_semantics, scheme(http)))) :-
+	test(http_request_7_08, error(domain_error(http_property_semantics, scheme(http)))) :-
 		url(atom)::parse('https://api.example.com/users', Components),
 		request(get, absolute(Components), http(1, 1), [host-'api.example.com'], empty, [scheme(http)], _).
 
-	test(http_request_7_08, error(domain_error(http_header_value(sec_websocket_key), invalid))) :-
+	test(http_request_7_09, error(domain_error(http_header_value(sec_websocket_key), invalid))) :-
 		request(get, origin('/socket'), http(1, 1), [sec_websocket_key-invalid], empty, [], _).
 
-	test(http_request_7_09, error(domain_error(http_property, websocket_protocol([chat, chat])))) :-
+	test(http_request_7_10, error(domain_error(http_property, websocket_protocol([chat, chat])))) :-
 		request(get, origin('/socket'), http(1, 1), [], empty, [websocket_protocol([chat, chat])], _).
+
+	write_file_atom(Name, Atom) :-
+		atom_codes(Atom, Bytes),
+		^^file_path(Name, File),
+		open(File, write, Output, [type(binary)]),
+		write_bytes(Bytes, Output),
+		close(Output).
+
+	write_bytes([], _Output).
+	write_bytes([Byte| Bytes], Output) :-
+		put_byte(Output, Byte),
+		write_bytes(Bytes, Output).
 
 :- end_object.

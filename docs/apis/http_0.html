@@ -165,6 +165,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http"><span class="xref std std-ref">http</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_body_codec_protocol_0.html">http_body_codec_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_docroot_paths_0.html">http_docroot_paths</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_form_body_codec_0.html">http_form_body_codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_handler_protocol_0.html">http_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_json_body_codec_0.html">http_json_body_codec</a></li>
@@ -180,11 +181,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-directory-listing"><span class="xref std std-ref">http_directory_listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket"><span class="xref std std-ref">http_socket</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket"><span class="xref std std-ref">http_websocket</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-session"><span class="xref std std-ref">http_websocket_session</span></a></li>
@@ -440,30 +443,31 @@
 <li><p><a class="reference internal" href="#generate-request-2" id="id7"><code class="docutils literal notranslate"><span class="pre">generate_request/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#parse-response-2" id="id8"><code class="docutils literal notranslate"><span class="pre">parse_response/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#generate-response-2" id="id9"><code class="docutils literal notranslate"><span class="pre">generate_response/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-request-line-2" id="id10"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-request-line-2" id="id11"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-status-line-2" id="id12"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-status-line-2" id="id13"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-headers-2" id="id14"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-headers-2" id="id15"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-body-4" id="id16"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-body-3" id="id17"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encode-body-4" id="id18"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#decode-body-4" id="id19"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#method-2" id="id20"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#target-2" id="id21"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#version-2" id="id22"><code class="docutils literal notranslate"><span class="pre">version/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#status-2" id="id23"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#headers-2" id="id24"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#header-3" id="id25"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#body-2" id="id26"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#property-2" id="id27"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#websocket-accept-2" id="id28"><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-response-headers-2" id="id10"><code class="docutils literal notranslate"><span class="pre">generate_response_headers/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#parse-request-line-2" id="id11"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-request-line-2" id="id12"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#parse-status-line-2" id="id13"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-status-line-2" id="id14"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#parse-headers-2" id="id15"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-headers-2" id="id16"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#parse-body-4" id="id17"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-body-3" id="id18"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#encode-body-4" id="id19"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decode-body-4" id="id20"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#method-2" id="id21"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#target-2" id="id22"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#version-2" id="id23"><code class="docutils literal notranslate"><span class="pre">version/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#status-2" id="id24"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#headers-2" id="id25"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#header-3" id="id26"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#body-2" id="id27"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#property-2" id="id28"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#websocket-accept-2" id="id29"><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id29">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id30">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id31">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id30">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id31">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id32">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -636,8 +640,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="generate-response-headers-2">
+<span id="http-0-generate-response-headers-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_response_headers/2</span></code></a><a class="headerlink" href="#generate-response-headers-2" title="Link to this heading"></a></h3>
+<p>Generates an HTTP response status line and effective header block, terminated by an empty line, to the given sink from a normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response_headers(Sink,Response)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response_headers(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="parse-request-line-2">
-<span id="http-0-parse-request-line-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a><a class="headerlink" href="#parse-request-line-2" title="Link to this heading"></a></h3>
+<span id="http-0-parse-request-line-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a><a class="headerlink" href="#parse-request-line-2" title="Link to this heading"></a></h3>
 <p>Parses an HTTP request line from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into a <code class="docutils literal notranslate"><span class="pre">request_line(Method,</span> <span class="pre">Target,</span> <span class="pre">Version)</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -658,7 +683,7 @@
 <hr class="docutils" />
 </section>
 <section id="generate-request-line-2">
-<span id="http-0-generate-request-line-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a><a class="headerlink" href="#generate-request-line-2" title="Link to this heading"></a></h3>
+<span id="http-0-generate-request-line-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a><a class="headerlink" href="#generate-request-line-2" title="Link to this heading"></a></h3>
 <p>Generates an HTTP request line to the given sink (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a <code class="docutils literal notranslate"><span class="pre">request_line(Method,</span> <span class="pre">Target,</span> <span class="pre">Version)</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -679,7 +704,7 @@
 <hr class="docutils" />
 </section>
 <section id="parse-status-line-2">
-<span id="http-0-parse-status-line-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a><a class="headerlink" href="#parse-status-line-2" title="Link to this heading"></a></h3>
+<span id="http-0-parse-status-line-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a><a class="headerlink" href="#parse-status-line-2" title="Link to this heading"></a></h3>
 <p>Parses an HTTP status line from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into a <code class="docutils literal notranslate"><span class="pre">status_line(Version,</span> <span class="pre">Status)</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -700,7 +725,7 @@
 <hr class="docutils" />
 </section>
 <section id="generate-status-line-2">
-<span id="http-0-generate-status-line-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a><a class="headerlink" href="#generate-status-line-2" title="Link to this heading"></a></h3>
+<span id="http-0-generate-status-line-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a><a class="headerlink" href="#generate-status-line-2" title="Link to this heading"></a></h3>
 <p>Generates an HTTP status line to the given sink (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a <code class="docutils literal notranslate"><span class="pre">status_line(Version,</span> <span class="pre">Status)</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -721,7 +746,7 @@
 <hr class="docutils" />
 </section>
 <section id="parse-headers-2">
-<span id="http-0-parse-headers-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a><a class="headerlink" href="#parse-headers-2" title="Link to this heading"></a></h3>
+<span id="http-0-parse-headers-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a><a class="headerlink" href="#parse-headers-2" title="Link to this heading"></a></h3>
 <p>Parses an HTTP header block from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into normalized header <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs with typed values for recognized headers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -742,7 +767,7 @@
 <hr class="docutils" />
 </section>
 <section id="generate-headers-2">
-<span id="http-0-generate-headers-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a><a class="headerlink" href="#generate-headers-2" title="Link to this heading"></a></h3>
+<span id="http-0-generate-headers-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a><a class="headerlink" href="#generate-headers-2" title="Link to this heading"></a></h3>
 <p>Generates an HTTP header block to the given sink (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from normalized header <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -763,7 +788,7 @@
 <hr class="docutils" />
 </section>
 <section id="parse-body-4">
-<span id="http-0-parse-body-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a><a class="headerlink" href="#parse-body-4" title="Link to this heading"></a></h3>
+<span id="http-0-parse-body-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a><a class="headerlink" href="#parse-body-4" title="Link to this heading"></a></h3>
 <p>Parses a body payload from the given source (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) according to the given media type and options into a normalized body term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -784,7 +809,7 @@
 <hr class="docutils" />
 </section>
 <section id="generate-body-3">
-<span id="http-0-generate-body-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a><a class="headerlink" href="#generate-body-3" title="Link to this heading"></a></h3>
+<span id="http-0-generate-body-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a><a class="headerlink" href="#generate-body-3" title="Link to this heading"></a></h3>
 <p>Generates a body payload to the given sink (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a normalized body term and options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -805,7 +830,7 @@
 <hr class="docutils" />
 </section>
 <section id="encode-body-4">
-<span id="http-0-encode-body-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a><a class="headerlink" href="#encode-body-4" title="Link to this heading"></a></h3>
+<span id="http-0-encode-body-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a><a class="headerlink" href="#encode-body-4" title="Link to this heading"></a></h3>
 <p>Encodes a semantic payload term using the registered concrete body codec for the given media type into a normalized body term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -826,7 +851,7 @@
 <hr class="docutils" />
 </section>
 <section id="decode-body-4">
-<span id="http-0-decode-body-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a><a class="headerlink" href="#decode-body-4" title="Link to this heading"></a></h3>
+<span id="http-0-decode-body-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a><a class="headerlink" href="#decode-body-4" title="Link to this heading"></a></h3>
 <p>Decodes a normalized body term using the registered concrete body codec for the given media type into a semantic payload term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -847,7 +872,7 @@
 <hr class="docutils" />
 </section>
 <section id="method-2">
-<span id="http-0-method-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a><a class="headerlink" href="#method-2" title="Link to this heading"></a></h3>
+<span id="http-0-method-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a><a class="headerlink" href="#method-2" title="Link to this heading"></a></h3>
 <p>Returns the request method from a normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -868,7 +893,7 @@
 <hr class="docutils" />
 </section>
 <section id="target-2">
-<span id="http-0-target-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a><a class="headerlink" href="#target-2" title="Link to this heading"></a></h3>
+<span id="http-0-target-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a><a class="headerlink" href="#target-2" title="Link to this heading"></a></h3>
 <p>Returns the request target from a normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -889,7 +914,7 @@
 <hr class="docutils" />
 </section>
 <section id="version-2">
-<span id="http-0-version-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">version/2</span></code></a><a class="headerlink" href="#version-2" title="Link to this heading"></a></h3>
+<span id="http-0-version-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">version/2</span></code></a><a class="headerlink" href="#version-2" title="Link to this heading"></a></h3>
 <p>Returns the HTTP version from a normalized request or response term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -910,7 +935,7 @@
 <hr class="docutils" />
 </section>
 <section id="status-2">
-<span id="http-0-status-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a><a class="headerlink" href="#status-2" title="Link to this heading"></a></h3>
+<span id="http-0-status-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a><a class="headerlink" href="#status-2" title="Link to this heading"></a></h3>
 <p>Returns the response status from a normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -931,7 +956,7 @@
 <hr class="docutils" />
 </section>
 <section id="headers-2">
-<span id="http-0-headers-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a><a class="headerlink" href="#headers-2" title="Link to this heading"></a></h3>
+<span id="http-0-headers-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a><a class="headerlink" href="#headers-2" title="Link to this heading"></a></h3>
 <p>Returns the normalized header list from a request or response term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -952,7 +977,7 @@
 <hr class="docutils" />
 </section>
 <section id="header-3">
-<span id="http-0-header-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a><a class="headerlink" href="#header-3" title="Link to this heading"></a></h3>
+<span id="http-0-header-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a><a class="headerlink" href="#header-3" title="Link to this heading"></a></h3>
 <p>Enumerates normalized header <code class="docutils literal notranslate"><span class="pre">Name</span></code> and <code class="docutils literal notranslate"><span class="pre">Value</span></code> pairs from a request or response term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -973,7 +998,7 @@
 <hr class="docutils" />
 </section>
 <section id="body-2">
-<span id="http-0-body-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a><a class="headerlink" href="#body-2" title="Link to this heading"></a></h3>
+<span id="http-0-body-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a><a class="headerlink" href="#body-2" title="Link to this heading"></a></h3>
 <p>Returns the normalized body term from a request or response term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -994,7 +1019,7 @@
 <hr class="docutils" />
 </section>
 <section id="property-2">
-<span id="http-0-property-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
+<span id="http-0-property-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
 <p>Enumerates normalized derived or higher-layer properties from a request or response term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1015,7 +1040,7 @@
 <hr class="docutils" />
 </section>
 <section id="websocket-accept-2">
-<span id="http-0-websocket-accept-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code></a><a class="headerlink" href="#websocket-accept-2" title="Link to this heading"></a></h3>
+<span id="http-0-websocket-accept-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code></a><a class="headerlink" href="#websocket-accept-2" title="Link to this heading"></a></h3>
 <p>Computes the canonical <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> header value for a valid <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code> header value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

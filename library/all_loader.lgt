@@ -227,6 +227,8 @@
 		http_websocket(loader),
 		http_websocket_messages(loader),
 		http_websocket_session(loader),
+		http_static_files(loader),
+		http_directory_listing(loader),
 		open_api(loader),
 		format(loader),
 		union_find(loader),

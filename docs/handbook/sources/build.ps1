@@ -171,11 +171,13 @@ Foreach-Object {
 (Get-Content ../../../library/http_client/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_client.rst
 (Get-Content ../../../library/http_cookies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cookies.rst
 (Get-Content ../../../library/http_cors/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cors.rst
+(Get-Content ../../../library/http_directory_listing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_directory_listing.rst
 (Get-Content ../../../library/http_multipart/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_multipart.rst
 (Get-Content ../../../library/http_router/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_router.rst
 (Get-Content ../../../library/http_server/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_server.rst
 (Get-Content ../../../library/http_session/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_session.rst
 (Get-Content ../../../library/http_socket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_socket.rst
+(Get-Content ../../../library/http_static_files/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_static_files.rst
 (Get-Content ../../../library/http_websocket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket.rst
 (Get-Content ../../../library/http_websocket_messages/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_messages.rst
 (Get-Content ../../../library/http_websocket_session/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_session.rst

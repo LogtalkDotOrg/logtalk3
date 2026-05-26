@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on May 4, 2026
+%  Last updated on May 23, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -107,6 +107,7 @@ logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(http_cookies_counter, examples('http_cookies_counter/')).
 logtalk_library_path(http_open_api, examples('http_open_api/')).
+logtalk_library_path(http_static_site, examples('http_static_site/')).
 logtalk_library_path(http_websocket_echo, examples('http_websocket_echo/')).
 logtalk_library_path(includes, examples('includes/')).
 logtalk_library_path(inheritance, examples('inheritance/')).

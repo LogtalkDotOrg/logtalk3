@@ -85,6 +85,13 @@
 		argnames is ['Sink', 'Response']
 	]).
 
+	:- public(generate_response_headers/2).
+	:- mode(generate_response_headers(+compound, ++compound), one_or_error).
+	:- info(generate_response_headers/2, [
+		comment is 'Generates an HTTP response status line and effective header block, terminated by an empty line, to the given sink from a normalized ``response/5`` term.',
+		argnames is ['Sink', 'Response']
+	]).
+
 	:- public(parse_request_line/2).
 	:- mode(parse_request_line(++compound, --compound), one_or_error).
 	:- info(parse_request_line/2, [
@@ -282,7 +289,7 @@
 		validate_request_term(Request),
 		Request = request(Method, Target, Version, Headers0, Body, Properties),
 		request_body_bytes(Headers0, Body, Properties, RawBodyBytes),
-		request_effective_headers(Target, Headers0, Body, Properties, RawBodyBytes, Headers),
+		request_effective_headers(Target, Headers0, Body, Properties, Headers),
 		message_wire_body(Headers, Properties, RawBodyBytes, BodyBytes),
 		request_line_codes(request_line(Method, Target, Version), LineCodes),
 		headers_codes(Headers, HeaderCodes),
@@ -305,14 +312,16 @@
 		validate_response_term(Response),
 		Response = response(Version, Status, Headers0, Body, Properties),
 		response_body_bytes(Headers0, Body, Properties, RawBodyBytes),
-		response_effective_headers(Headers0, Body, Properties, RawBodyBytes, Headers),
+		response_effective_headers(Headers0, Body, Properties, Headers),
 		message_wire_body(Headers, Properties, RawBodyBytes, BodyBytes),
-		status_line_codes(status_line(Version, Status), LineCodes),
-		headers_codes(Headers, HeaderCodes),
-		append(LineCodes, HeaderCodes, Prefix0),
-		append(Prefix0, [0'\r, 0'\n], Prefix1),
-		append(Prefix1, BodyBytes, Bytes),
+		response_prefix_bytes(Version, Status, Headers, HeaderBytes),
+		append(HeaderBytes, BodyBytes, Bytes),
 		bytes_to_sink(Sink, Bytes).
+
+	generate_response_headers(Sink, Response) :-
+		validate_response_term(Response),
+		response_header_bytes(Response, HeaderBytes),
+		bytes_to_sink(Sink, HeaderBytes).
 
 	parse_request_line(Source, RequestLine) :-
 		source_to_codes(Source, Codes),
@@ -712,7 +721,7 @@
 	semantic_property_functor(websocket_protocol, 1).
 	semantic_property_functor(transfer_encoding, 1).
 
-	request_effective_headers(Target, Headers0, Body, Properties, BodyBytes, Headers) :-
+	request_effective_headers(Target, Headers0, Body, Properties, Headers) :-
 		maybe_add_request_host_header(Target, Properties, Headers0, Headers1),
 		maybe_add_cookie_header(Properties, Headers1, Headers2),
 		maybe_add_connection_header(Properties, Headers2, Headers3),
@@ -722,9 +731,9 @@
 		maybe_add_websocket_protocol_header(Properties, Headers6, Headers7),
 		maybe_add_transfer_encoding_header(Properties, Headers7, Headers8),
 		maybe_add_content_type_header(Body, Properties, Headers8, Headers9),
-		maybe_add_content_length_header(BodyBytes, Headers9, Headers).
+		maybe_add_content_length_header(Body, Properties, Headers9, Headers).
 
-	response_effective_headers(Headers0, Body, Properties, BodyBytes, Headers) :-
+	response_effective_headers(Headers0, Body, Properties, Headers) :-
 		maybe_add_set_cookie_headers(Properties, Headers0, Headers1),
 		maybe_add_connection_header(Properties, Headers1, Headers2),
 		maybe_add_upgrade_header(Properties, Headers2, Headers3),
@@ -733,7 +742,17 @@
 		maybe_add_websocket_protocol_header(Properties, Headers5, Headers6),
 		maybe_add_transfer_encoding_header(Properties, Headers6, Headers7),
 		maybe_add_content_type_header(Body, Properties, Headers7, Headers8),
-		maybe_add_content_length_header(BodyBytes, Headers8, Headers).
+		maybe_add_content_length_header(Body, Properties, Headers8, Headers).
+
+	response_header_bytes(response(Version, Status, Headers0, Body, Properties), Bytes) :-
+		response_effective_headers(Headers0, Body, Properties, Headers),
+		response_prefix_bytes(Version, Status, Headers, Bytes).
+
+	response_prefix_bytes(Version, Status, Headers, Bytes) :-
+		status_line_codes(status_line(Version, Status), LineCodes),
+		headers_codes(Headers, HeaderCodes),
+		append(LineCodes, HeaderCodes, Prefix0),
+		append(Prefix0, [0'\r, 0'\n], Bytes).
 
 	maybe_add_request_host_header(_Target, _Properties, Headers, Headers) :-
 		header_name_present(Headers, host),
@@ -836,14 +855,16 @@
 		!.
 	maybe_add_content_type_header(content(MediaType, _Payload), _Properties, Headers, [content_type-media_type(MediaType, [])| Headers]).
 
-	maybe_add_content_length_header(_BodyBytes, Headers, Headers) :-
+	maybe_add_content_length_header(_Body, _Properties, Headers, Headers) :-
 		header_name_present(Headers, content_length),
 		!.
-	maybe_add_content_length_header(_BodyBytes, Headers, Headers) :-
+	maybe_add_content_length_header(_Body, _Properties, Headers, Headers) :-
 		chunked_transfer_headers(Headers),
 		!.
-	maybe_add_content_length_header(BodyBytes, Headers, [content_length-Length| Headers]) :-
-		length(BodyBytes, Length).
+	maybe_add_content_length_header(Body, Properties, Headers, [content_length-Length| Headers]) :-
+		body_length_if_known(Headers, Properties, Body, Length),
+		!.
+	maybe_add_content_length_header(_Body, _Properties, Headers, Headers).
 
 	chunked_transfer_headers(Headers) :-
 		semantic_single_header_value(Headers, transfer_encoding, [chunked]).
@@ -903,6 +924,9 @@
 
 	body_term_to_bytes(empty, _Options, []) :-
 		!.
+	body_term_to_bytes(content(_MediaType, file(Path, Offset, Length)), _Options, Bytes) :-
+		!,
+		file_body_bytes(Path, Offset, Length, Bytes).
 	body_term_to_bytes(content(MediaType, multipart(Parts)), Options, Bytes) :-
 		multipart_media_type(MediaType),
 		!,
@@ -1801,6 +1825,8 @@
 		!.
 	body_decoded_state(content(_, binary(_)), false) :-
 		!.
+	body_decoded_state(content(_, file(_, _, _)), false) :-
+		!.
 	body_decoded_state(content(_, text(_)), true) :-
 		!.
 	body_decoded_state(content(_, json(_)), true) :-
@@ -1809,9 +1835,60 @@
 		!.
 	body_decoded_state(content(_, multipart(_)), true).
 
+	body_length_if_known(empty, 0) :-
+		!.
+	body_length_if_known(content(_, file(_, _, Length)), Length) :-
+		!.
 	body_length_if_known(Body, Length) :-
 		catch(body_term_to_bytes(Body, [], Bytes), _, fail),
 		length(Bytes, Length).
+
+	body_length_if_known(_Headers, _Properties, Body, Length) :-
+		body_length_if_known(Body, Length),
+		!.
+	body_length_if_known(Headers, Properties, Body, Length) :-
+		catch(
+			(	body_serialization_options(Headers, Properties, Body, Options),
+				body_term_to_bytes(Body, Options, Bytes),
+				length(Bytes, Length)
+			),
+			_,
+			fail
+		).
+
+	file_body_bytes(Path, Offset, Length, Bytes) :-
+		open(Path, read, Stream, [type(binary)]),
+		catch(
+			(	skip_stream_bytes(Stream, Offset, file(Path, Offset, Length)),
+				read_stream_bytes(Stream, Length, Bytes, file(Path, Offset, Length))
+			),
+			Error,
+			(close(Stream), throw(Error))
+		),
+		close(Stream).
+
+	skip_stream_bytes(_Stream, 0, _FileBody) :-
+		!.
+	skip_stream_bytes(Stream, Remaining, FileBody) :-
+		get_byte(Stream, Byte),
+		(	Byte =:= -1 ->
+			domain_error(http_body_file_range, FileBody)
+		;	NextRemaining is Remaining - 1,
+			skip_stream_bytes(Stream, NextRemaining, FileBody)
+		).
+
+	read_stream_bytes(Stream, Length, Bytes, FileBody) :-
+		read_stream_bytes(Stream, Length, Bytes, [], FileBody).
+
+	read_stream_bytes(_Stream, 0, Bytes, Bytes, _FileBody) :-
+		!.
+	read_stream_bytes(Stream, Remaining, [Byte| Bytes0], Bytes, FileBody) :-
+		get_byte(Stream, Byte),
+		(	Byte =:= -1 ->
+			domain_error(http_body_file_range, FileBody)
+		;	NextRemaining is Remaining - 1,
+			read_stream_bytes(Stream, NextRemaining, Bytes0, Bytes, FileBody)
+		).
 
 	exact_length_bytes(Length, Bytes, ExactBytes) :-
 		prefix_bytes(Length, Bytes, ExactBytes, Rest),
@@ -2149,6 +2226,12 @@
 
 	valid_payload(binary(Bytes)) :-
 		valid_byte_list(Bytes).
+	valid_payload(file(Path, Offset, Length)) :-
+		atom(Path),
+		integer(Offset),
+		Offset >= 0,
+		integer(Length),
+		Length >= 0.
 	valid_payload(text(Text)) :-
 		valid_text(Text).
 	valid_payload(json(_)).

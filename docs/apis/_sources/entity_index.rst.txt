@@ -54,6 +54,7 @@ Categories
    graph_types <graph_types_0>
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    html <html_0>
+   http_docroot_paths <http_docroot_paths_0>
    http_json_term_helpers <http_json_term_helpers_0>
    http_message_helpers <http_message_helpers_0>
    http_router <http_router_0>
@@ -301,6 +302,7 @@ Objects
    http_cookie_jar <http_cookie_jar_0>
    http_cookies(Representation) <http_cookies_1>
    http_cors <http_cors_0>
+   http_directory_listing <http_directory_listing_0>
    http_form_body_codec <http_form_body_codec_0>
    http_json_body_codec <http_json_body_codec_0>
    http_multipart <http_multipart_0>
@@ -308,6 +310,7 @@ Objects
    http_server <http_server_0>
    http_session <http_session_0>
    http_socket <http_socket_0>
+   http_static_files <http_static_files_0>
    http_text_body_codec <http_text_body_codec_0>
    http_websocket <http_websocket_0>
    http_websocket_client_session <http_websocket_client_session_0>

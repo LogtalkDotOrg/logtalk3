@@ -1,0 +1,100 @@
+.. index:: single: http_static_files
+.. _http_static_files/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_static_files``
+=====================
+
+Router-agnostic static file response helper built on the normalized ``http`` library.
+
+| **Availability:** 
+|    ``logtalk_load(http_static_files(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_docroot_paths <http_docroot_paths/0>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`date <date/0>`
+|    :ref:`http <http/0>`
+|    :ref:`list <list/0>`
+|    :ref:`mime_types <mime_types/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serve/4
+.. _http_static_files/0::serve/4:
+
+``serve/4``
+^^^^^^^^^^^
+
+Serves a relative request path from the given document root using the default options and returns a normalized response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(Path,Request,DocumentRoot,Response)``
+| **Mode and number of proofs:**
+|    ``serve(+atom,+compound,+atom,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve/5
+.. _http_static_files/0::serve/5:
+
+``serve/5``
+^^^^^^^^^^^
+
+Serves a relative request path from the given document root using the given options and returns a normalized response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(Path,Request,DocumentRoot,Options,Response)``
+| **Mode and number of proofs:**
+|    ``serve(+atom,+compound,+atom,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -72,8 +72,11 @@ libraries.
 * ADDED: New `http_open_api` example illustrating the use of the new HTTP and
 OpenAPI libraries.
 
-* ADDED: New `http_websocket_echo` example illustrating the use HTTP and
-WebSocket libraries.
+* ADDED: New `http_websocket_echo` example illustrating the use of the new
+HTTP and WebSocket libraries.
+
+* ADDED: New `http_static_site` example illustrating the use of the new HTTP
+libraries.
 
 * FIXED: The `checkpoint` multi-threading example test flakiness due to
 potential out-or-order output. Thanks to Andrew Davison for the bug report.

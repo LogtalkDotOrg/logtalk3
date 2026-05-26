@@ -21,6 +21,7 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
+	logtalk_load(os(loader)),
 	logtalk_load(reader(loader)),
 	logtalk_load(base64(loader)),
 	logtalk_load(json(loader)),
@@ -39,6 +40,7 @@
 		http_json_body_codec,
 		http_form_body_codec,
 		http,
+		http_docroot_paths,
 		http_message_helpers
 	], [
 		optimize(on)
