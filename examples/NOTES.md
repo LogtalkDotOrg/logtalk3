@@ -312,6 +312,11 @@ Follows a short description of each included example (in alphabetical order):
 	small HTTP cookie example showing how a server preserves a visit
 	counter in the client
 
+- `http_htmx_panel`  
+	small HTTP client and server example showing how to use the	`http_htmx`
+    and `http_router_htmx` libraries for boosted navigation, fragment swaps,
+    and server-triggered updates
+
 - `http_open_api`  
 	small HTTP client and server example showing how to publish and consume
 	an OpenAPI contract

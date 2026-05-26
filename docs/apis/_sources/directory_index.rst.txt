@@ -1221,6 +1221,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    http_directory_listing <http_directory_listing_0>
 
+``library/http_htmx/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_htmx <http_htmx_0>
+   http_router_htmx <http_router_htmx_0>
+
 ``library/http_multipart/``
 ---------------------------
 

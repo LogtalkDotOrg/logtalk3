@@ -121,6 +121,7 @@ directory in the ``NOTES.md`` file.
    http_cookies
    http_cors
    http_directory_listing
+   http_htmx
    http_multipart
    http_router
    http_server

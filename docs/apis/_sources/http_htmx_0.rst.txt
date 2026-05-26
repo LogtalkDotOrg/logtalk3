@@ -1,0 +1,326 @@
+.. index:: single: http_htmx
+.. _http_htmx/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_htmx``
+=============
+
+Transport-neutral HTMX request classification, HTML reply helpers, and response decoration helpers for normalized HTTP messages.
+
+| **Availability:** 
+|    ``logtalk_load(http_htmx(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_json_term_helpers <http_json_term_helpers/0>`
+| **Uses:**
+|    :ref:`html5 <html5/0>`
+|    :ref:`http <http/0>`
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: is_htmx_request/1
+.. _http_htmx/0::is_htmx_request/1:
+
+``is_htmx_request/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the request carries a truthy ``HX-Request`` header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_htmx_request(Request)``
+| **Mode and number of proofs:**
+|    ``is_htmx_request(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_boosted_request/1
+.. _http_htmx/0::is_boosted_request/1:
+
+``is_boosted_request/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the request carries a truthy ``HX-Boosted`` header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_boosted_request(Request)``
+| **Mode and number of proofs:**
+|    ``is_boosted_request(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_history_restore_request/1
+.. _http_htmx/0::is_history_restore_request/1:
+
+``is_history_restore_request/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the request carries a truthy ``HX-History-Restore-Request`` header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_history_restore_request(Request)``
+| **Mode and number of proofs:**
+|    ``is_history_restore_request(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: current_url/2
+.. _http_htmx/0::current_url/2:
+
+``current_url/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the single request ``HX-Current-URL`` header value when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current_url(Request,URL)``
+| **Mode and number of proofs:**
+|    ``current_url(+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: prompt/2
+.. _http_htmx/0::prompt/2:
+
+``prompt/2``
+^^^^^^^^^^^^
+
+Returns the single request ``HX-Prompt`` header value when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prompt(Request,Prompt)``
+| **Mode and number of proofs:**
+|    ``prompt(+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: target/2
+.. _http_htmx/0::target/2:
+
+``target/2``
+^^^^^^^^^^^^
+
+Returns the single request ``HX-Target`` header value when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target(Request,Target)``
+| **Mode and number of proofs:**
+|    ``target(+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: trigger/2
+.. _http_htmx/0::trigger/2:
+
+``trigger/2``
+^^^^^^^^^^^^^
+
+Returns the single request ``HX-Trigger`` header value when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trigger(Request,Trigger)``
+| **Mode and number of proofs:**
+|    ``trigger(+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: trigger_name/2
+.. _http_htmx/0::trigger_name/2:
+
+``trigger_name/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the single request ``HX-Trigger-Name`` header value when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trigger_name(Request,Name)``
+| **Mode and number of proofs:**
+|    ``trigger_name(+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: request_properties/2
+.. _http_htmx/0::request_properties/2:
+
+``request_properties/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of derived HTMX request properties computed from the normalized request headers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_properties(Request,Properties)``
+| **Mode and number of proofs:**
+|    ``request_properties(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: reply/3
+.. _http_htmx/0::reply/3:
+
+``reply/3``
+^^^^^^^^^^^
+
+Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an ``html`` term/list using the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reply(Request,Content,Response)``
+| **Mode and number of proofs:**
+|    ``reply(+compound,+term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: reply/4
+.. _http_htmx/0::reply/4:
+
+``reply/4``
+^^^^^^^^^^^
+
+Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an ``html`` term/list using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reply(Request,Content,Response,Options)``
+| **Mode and number of proofs:**
+|    ``reply(+compound,+term,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: page_fragment_reply/4
+.. _http_htmx/0::page_fragment_reply/4:
+
+``page_fragment_reply/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a normalized ``text/html`` response using the full-page content for ordinary and boosted HTMX requests and the fragment content for non-boosted HTMX requests, with the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``page_fragment_reply(Request,PageContent,FragmentContent,Response)``
+| **Mode and number of proofs:**
+|    ``page_fragment_reply(+compound,+term,+term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: page_fragment_reply/5
+.. _http_htmx/0::page_fragment_reply/5:
+
+``page_fragment_reply/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a normalized ``text/html`` response using the full-page content for ordinary and boosted HTMX requests and the fragment content for non-boosted HTMX requests, with the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``page_fragment_reply(Request,PageContent,FragmentContent,Response,Options)``
+| **Mode and number of proofs:**
+|    ``page_fragment_reply(+compound,+term,+term,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: add_response_headers/4
+.. _http_htmx/0::add_response_headers/4:
+
+``add_response_headers/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decorates a normalized response with the relevant HTMX response headers when the request is an HTMX request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_response_headers(Request,Response0,Response,Options)``
+| **Mode and number of proofs:**
+|    ``add_response_headers(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

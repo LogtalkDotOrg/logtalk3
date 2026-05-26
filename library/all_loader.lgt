@@ -220,6 +220,7 @@
 		http_cookies(loader),
 		http_cors(loader),
 		http_session(loader),
+		http_htmx(loader),
 		http_multipart(loader),
 		http_router(loader),
 		http_server(loader),

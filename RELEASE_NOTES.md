@@ -66,8 +66,11 @@ Tools
 Examples
 --------
 
-* ADDED: New `http_cookies_counter` illustrating the use of the new HTTP
-libraries.
+* ADDED: New `http_cookies_counter` example illustrating the use of the new
+HTTP libraries.
+
+* ADDED: New `http_htmx_panel` example illustrating the use of the new HTTP
+and HTMX libraries.
 
 * ADDED: New `http_open_api` example illustrating the use of the new HTTP and
 OpenAPI libraries.

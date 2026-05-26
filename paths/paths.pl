@@ -201,6 +201,7 @@ logtalk_library_path(http_client, library('http_client/')).
 logtalk_library_path(http_cookies, library('http_cookies/')).
 logtalk_library_path(http_cors, library('http_cors/')).
 logtalk_library_path(http_directory_listing, library('http_directory_listing/')).
+logtalk_library_path(http_htmx, library('http_htmx/')).
 logtalk_library_path(http_multipart, library('http_multipart/')).
 logtalk_library_path(http_router, library('http_router/')).
 logtalk_library_path(http_server, library('http_server/')).
@@ -411,6 +412,7 @@ logtalk_library_path(haunted_wasteland, examples('haunted_wasteland/')).
 logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(http_cookies_counter, examples('http_cookies_counter/')).
+logtalk_library_path(http_htmx_panel, examples('http_htmx_panel/')).
 logtalk_library_path(http_open_api, examples('http_open_api/')).
 logtalk_library_path(http_static_site, examples('http_static_site/')).
 logtalk_library_path(http_websocket_echo, examples('http_websocket_echo/')).

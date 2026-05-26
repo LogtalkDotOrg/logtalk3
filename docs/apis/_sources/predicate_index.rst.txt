@@ -381,6 +381,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_cors <http_cors/0::add_response_headers/4>`
+* :ref:`http_htmx <http_htmx/0::add_response_headers/4>`
 
 ``add_rule/3``
 --------------
@@ -3849,6 +3850,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`socket <socket/0::current_host/1>`
+
+``current_url/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::current_url/2>`
 
 ``cut/3``
 ---------
@@ -10514,6 +10525,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_multipart <http_multipart/0::is_body/1>`
 
+``is_boosted_request/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::is_boosted_request/1>`
+
 ``is_clockwise_polygon/1``
 --------------------------
 
@@ -10644,6 +10665,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`characterp <characterp/0::is_hex_digit/1>`
+
+``is_history_restore_request/1``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::is_history_restore_request/1>`
+
+``is_htmx_request/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::is_htmx_request/1>`
 
 ``is_invalid/0``
 ----------------
@@ -16043,6 +16084,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_32 <hash_common_32/0::pad_md/4>`
 
+``page_fragment_reply/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::page_fragment_reply/4>`
+
+``page_fragment_reply/5``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::page_fragment_reply/5>`
+
 ``pairwise_dataset_connected_components/2``
 -------------------------------------------
 
@@ -17822,6 +17883,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::progress/5>`
 
+``prompt/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::prompt/2>`
+
 ``prompt_get/3``
 ----------------
 
@@ -19591,6 +19662,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`atom <atom/0::replace_sub_atom/4>`
 
+``reply/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::reply/3>`
+
+``reply/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::reply/4>`
+
 ``report_directory/3``
 ----------------------
 
@@ -19762,6 +19853,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_cors <http_cors/0::request_origin/2>`
+
+``request_properties/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::request_properties/2>`
 
 ``request_shutdown/1``
 ----------------------
@@ -23070,6 +23171,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http <http/0::target/2>`
+* :ref:`http_htmx <http_htmx/0::target/2>`
 
 ``tcb_minus_tdb_approx/3``
 --------------------------
@@ -23585,6 +23687,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::triangular/4>`
+
+``trigger/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::trigger/2>`
+
+``trigger_name/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::trigger_name/2>`
 
 ``trim/2``
 ----------
