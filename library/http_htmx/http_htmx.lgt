@@ -272,9 +272,9 @@
 
 	page_fragment_reply(Request, PageContent, FragmentContent, Response, UserOptions) :-
 		validate_request(Request),
-		( 	is_fragment_request(Request) ->
+		(	is_fragment_request(Request) ->
 			Content = FragmentContent
-		; 	Content = PageContent
+		;	Content = PageContent
 		),
 		reply(Request, Content, Response, UserOptions).
 
@@ -285,20 +285,20 @@
 		^^merge_options(UserOptions, Options),
 		htmx_response_headers(Options, Headers),
 		vary_hx_request_tokens(Options, VaryTokens),
-		( 	is_htmx_request(Request),
+		(	is_htmx_request(Request),
 			Headers \== [] ->
 			ensure_htmx_response_headers_allowed(Response0),
 			merge_response_headers(Response0, Headers, VaryTokens, Response)
-		; 	VaryTokens \== [] ->
+		;	VaryTokens \== [] ->
 			merge_response_headers(Response0, [], VaryTokens, Response)
-		; 	Response = Response0
+		;	Response = Response0
 		).
 
 	ensure_htmx_response_headers_allowed(Response) :-
 		http::status(Response, Status),
-		( 	htmx_response_headers_allowed(Status) ->
+		(	htmx_response_headers_allowed(Status) ->
 			true
-		; 	domain_error(htmx_response_headers_status, Status)
+		;	domain_error(htmx_response_headers_status, Status)
 		).
 
 	htmx_response_headers_allowed(status(Code, _Reason)) :-
@@ -398,13 +398,13 @@
 		equivalent_origin_port(URLScheme, URLPort, RequestPort).
 
 	request_origin_endpoint(Request, Host, Port) :-
-		( 	http::property(Request, host(Host, Port)) ->
+		(	http::property(Request, host(Host, Port)) ->
 			true
-		; 	http::property(Request, host(Host)) ->
+		;	http::property(Request, host(Host)) ->
 			Port = implied
-		; 	http::header(Request, host, host(Host, Port)) ->
+		;	http::header(Request, host, host(Host, Port)) ->
 			true
-		; 	http::header(Request, host, host(Host)) ->
+		;	http::header(Request, host, host(Host)) ->
 			Port = implied
 		;	false
 		).
@@ -415,10 +415,10 @@
 		lowercase_ascii_atom(Host0, Host).
 
 	strip_authority_userinfo(Authority, HostPort) :-
-		( 	last_separator_sub_atom(Authority, '@', Before, After) ->
+		(	last_separator_sub_atom(Authority, '@', Before, After) ->
 			Start is Before + 1,
 			sub_atom(Authority, Start, After, 0, HostPort)
-		; 	HostPort = Authority
+		;	HostPort = Authority
 		).
 
 	parse_authority_host_port(HostPort, Host, Port) :-
@@ -435,9 +435,9 @@
 		EndBracket > 0,
 		HostLength is EndBracket - 1,
 		sub_atom(HostPort, 1, HostLength, _, Host),
-		( 	AfterBracket =:= 0 ->
+		(	AfterBracket =:= 0 ->
 			Port = implied
-		; 	SuffixStart is EndBracket + 1,
+		;	SuffixStart is EndBracket + 1,
 			sub_atom(HostPort, SuffixStart, AfterBracket, 0, Suffix),
 			sub_atom(Suffix, 0, 1, _, ':'),
 			sub_atom(Suffix, 1, _, 0, PortAtom),
@@ -491,15 +491,15 @@
 	default_origin_port(wss, 443).
 
 	components_absolute_path(Components, AbsolutePath) :-
-		( 	memberchk(path(Path0), Components),
+		(	memberchk(path(Path0), Components),
 			Path0 \== '' ->
 			Path = Path0
-		; 	Path = ('/')
+		;	Path = ('/')
 		),
-		( 	memberchk(query(Query), Components),
+		(	memberchk(query(Query), Components),
 			Query \== '' ->
 			atomic_list_concat([Path, '?', Query], AbsolutePath)
-		; 	AbsolutePath = Path
+		;	AbsolutePath = Path
 		).
 
 	request_boolean_header(Request, Name) :-
@@ -651,15 +651,15 @@
 	merge_response_headers(response(Version, Status, Headers0, Body, Properties), GeneratedHeaders, VaryTokens0, Response) :-
 		collect_vary_tokens(Headers0, ExistingVaryTokens),
 		header_names(GeneratedHeaders, GeneratedNames0),
-		( 	ExistingVaryTokens == ('*') ->
+		(	ExistingVaryTokens == ('*') ->
 			MergedHeaders = [vary-('*')| GeneratedHeaders],
 			GeneratedNames = [vary| GeneratedNames0]
-		; 	append(ExistingVaryTokens, VaryTokens0, MergedVaryTokens0),
+		;	append(ExistingVaryTokens, VaryTokens0, MergedVaryTokens0),
 			unique_preserving_order(MergedVaryTokens0, MergedVaryTokens),
-			( 	MergedVaryTokens == [] ->
+			(	MergedVaryTokens == [] ->
 				MergedHeaders = GeneratedHeaders,
 				GeneratedNames = GeneratedNames0
-			; 	vary_token_list_atom(MergedVaryTokens, VaryValue),
+			;	vary_token_list_atom(MergedVaryTokens, VaryValue),
 				MergedHeaders = [vary-VaryValue| GeneratedHeaders],
 				GeneratedNames = [vary| GeneratedNames0]
 			)
@@ -674,17 +674,17 @@
 
 	remove_headers_by_names([], _Names, []).
 	remove_headers_by_names([Name-Value| Headers], Names, RemainingHeaders) :-
-		( 	member(Name, Names) ->
+		(	member(Name, Names) ->
 			RemainingHeaders = Tail
-		; 	RemainingHeaders = [Name-Value| Tail]
+		;	RemainingHeaders = [Name-Value| Tail]
 		),
 		remove_headers_by_names(Headers, Names, Tail).
 
 	collect_vary_tokens(Headers, Tokens) :-
 		collect_vary_tokens_list(Headers, Tokens0),
-		( 	Tokens0 == ('*') ->
+		(	Tokens0 == ('*') ->
 			Tokens = ('*')
-		; 	unique_preserving_order(Tokens0, Tokens)
+		;	unique_preserving_order(Tokens0, Tokens)
 		).
 
 	collect_vary_tokens_list([], []).
@@ -694,11 +694,11 @@
 	collect_vary_tokens_list([vary-Value| Headers], Tokens) :-
 		!,
 		collect_vary_tokens_list(Headers, RestTokens),
-		( 	RestTokens == ('*') ->
+		(	RestTokens == ('*') ->
 			Tokens = ('*')
-		; 	parse_vary_tokens(Value, Names) ->
+		;	parse_vary_tokens(Value, Names) ->
 			append(Names, RestTokens, Tokens)
-		; 	Tokens = RestTokens
+		;	Tokens = RestTokens
 		).
 	collect_vary_tokens_list([_| Headers], Tokens) :-
 		collect_vary_tokens_list(Headers, Tokens).
@@ -717,9 +717,9 @@
 	normalize_vary_segments([], []).
 	normalize_vary_segments([Segment| Segments], Tokens) :-
 		trim_ows_atom(Segment, Trimmed),
-		( 	Trimmed == '' ->
+		(	Trimmed == '' ->
 			Tokens = Rest
-		; 	normalize_vary_token_atom(Trimmed, Token),
+		;	normalize_vary_token_atom(Trimmed, Token),
 			Tokens = [Token| Rest]
 		),
 		normalize_vary_segments(Segments, Rest).
@@ -797,10 +797,10 @@
 
 	unique_preserving_order([], _Seen, Unique, Unique).
 	unique_preserving_order([Element| Elements], Seen0, Unique0, Unique) :-
-		( 	member(Element, Seen0) ->
+		(	member(Element, Seen0) ->
 			Seen1 = Seen0,
 			Unique1 = Unique0
-		; 	Seen1 = [Element| Seen0],
+		;	Seen1 = [Element| Seen0],
 			Unique0 = [Element| Unique1]
 		),
 		unique_preserving_order(Elements, Seen1, Unique1, Unique).
@@ -811,9 +811,9 @@
 
 	filter_overridden_headers([], _Overrides, []).
 	filter_overridden_headers([Header| Headers0], Overrides, Headers) :-
-		( 	overridden_header(Header, Overrides) ->
+		(	overridden_header(Header, Overrides) ->
 			Headers = Tail
-		; 	Headers = [Header| Tail]
+		;	Headers = [Header| Tail]
 		),
 		filter_overridden_headers(Headers0, Overrides, Tail).
 

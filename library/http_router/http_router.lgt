@@ -39,7 +39,7 @@
 			'OPTIONS handling' - 'An ``OPTIONS`` request matches an explicit ``options`` route first and otherwise returns an automatic response. Synthetic ``OPTIONS`` requests are annotated with ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, the router also annotates ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters, can be customized using ``route_automatic_options_response/3``, and still flows through response middleware.',
 			'Custom error responses' - 'Importing objects can optionally define ``route_not_found_response/2`` and ``route_method_not_allowed_response/3`` predicates to customize ``404`` and ``405`` responses.',
 			'Custom negotiation failures' - 'Importing objects can optionally define ``route_not_acceptable_response/3`` to customize ``406 Not Acceptable`` responses for route-level content negotiation failures.',
-			'Request annotations' - 'Matched requests are annotated with the explicit properties ``route(Id)`` and ``path_params(Pairs)`` plus any additional metadata declared by ``route_metadata/2`` before the route handler is called.'
+			'Request annotations' - 'Matched requests are annotated with the explicit properties ``route(Id)`` and ``path_params(Pairs)`` plus any additional metadata declared by ``route_metadata/2`` before the route handler is called. On the normal routing path the router also scrubs stale internal synthetic properties such as ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``, and ``response_media_type/1`` before handler execution.'
 		]
 	]).
 
@@ -50,7 +50,7 @@
 		remarks is [
 			'Middleware' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.',
 			'Response middleware' - 'Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.',
-			'Request annotations' - 'Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied.',
+			'Request annotations' - 'Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied. On this normal routing path the router strips stale internal synthetic properties such as ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``, and ``response_media_type/1`` before calling the handler.',
 			'Automatic ``OPTIONS``' - 'An explicit ``options`` route matches first. Otherwise the router builds an automatic response from a synthetic request carrying ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, that synthetic request also carries ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic ``OPTIONS`` responses still pass through response middleware and can be customized using ``route_automatic_options_response/3``.',
 			'Custom responses' - 'Importing objects can optionally define ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.',
 			'Failure behavior' - 'Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.'
@@ -249,23 +249,23 @@
 		route_open_api_properties(Metadata, Properties).
 
 	route_open_api_metadata(RouteId, Metadata) :-
-		( 	::route_metadata(RouteId, Metadata0) ->
+		(	::route_metadata(RouteId, Metadata0) ->
 			normalize_route_metadata(Metadata0, Metadata)
-		; 	Metadata = []
+		;	Metadata = []
 		).
 
 	route_open_api_summary(RouteId, Metadata, Summary) :-
-		( 	route_metadata_property_value(summary, Metadata, Summary) ->
+		(	route_metadata_property_value(summary, Metadata, Summary) ->
 			true
-		; 	Summary = RouteId
+		;	Summary = RouteId
 		).
 
 	route_open_api_parameters(PathTemplate, Metadata, Parameters) :-
 		default_open_api_path_parameters(PathTemplate, DefaultParameters),
-		( 	route_metadata_property_value(parameters, Metadata, MetadataParameters0) ->
+		(	route_metadata_property_value(parameters, Metadata, MetadataParameters0) ->
 			normalize_open_api_metadata_parameters(MetadataParameters0, MetadataParameters),
 			merge_open_api_parameters(DefaultParameters, MetadataParameters, Parameters)
-		; 	Parameters = DefaultParameters
+		;	Parameters = DefaultParameters
 		).
 
 	normalize_open_api_metadata_parameters([], []) :-
@@ -298,9 +298,9 @@
 	merge_open_api_parameters([], MetadataParameters, MetadataParameters).
 	merge_open_api_parameters([DefaultParameter| DefaultParameters], MetadataParameters0, [Parameter| Parameters]) :-
 		DefaultParameter = parameter(Name, path, _Description, _Required, _Schema),
-		( 	select_open_api_parameter(Name, path, MetadataParameters0, Parameter, MetadataParameters1) ->
+		(	select_open_api_parameter(Name, path, MetadataParameters0, Parameter, MetadataParameters1) ->
 			true
-		; 	Parameter = DefaultParameter,
+		;	Parameter = DefaultParameter,
 			MetadataParameters1 = MetadataParameters0
 		),
 		merge_open_api_parameters(DefaultParameters, MetadataParameters1, Parameters).
@@ -312,32 +312,32 @@
 		select_open_api_parameter(Name, In, Parameters0, SelectedParameter, Parameters).
 
 	route_open_api_request_body(RouteId, Method, PathTemplate, Handler, Metadata, RequestBody) :-
-		( 	route_metadata_property_value(request_body, Metadata, RequestBody) ->
+		(	route_metadata_property_value(request_body, Metadata, RequestBody) ->
 			true
-		; 	inferred_open_api_request_body_examples(RouteId, RequestBody) ->
+		;	inferred_open_api_request_body_examples(RouteId, RequestBody) ->
 			true
-		; 	inferred_open_api_request_body(RouteId, Method, PathTemplate, Handler, RequestBody) ->
+		;	inferred_open_api_request_body(RouteId, Method, PathTemplate, Handler, RequestBody) ->
 			true
-		; 	RequestBody = none
+		;	RequestBody = none
 		).
 
 	route_open_api_responses(Method, RouteId, PathTemplate, Handler, Metadata, Responses) :-
-		( 	route_metadata_property_value(responses, Metadata, Responses) ->
+		(	route_metadata_property_value(responses, Metadata, Responses) ->
 			true
-		; 	inferred_open_api_responses_examples(RouteId, Responses) ->
+		;	inferred_open_api_responses_examples(RouteId, Responses) ->
 			true
-		; 	inferred_open_api_responses(Method, RouteId, PathTemplate, Handler, Responses) ->
+		;	inferred_open_api_responses(Method, RouteId, PathTemplate, Handler, Responses) ->
 			true
-		; 	default_open_api_responses(Method, RouteId, Responses)
+		;	default_open_api_responses(Method, RouteId, Responses)
 		).
 
 	default_open_api_responses(Method, RouteId, [response(Status, Description, MediaTypes)]) :-
 		default_open_api_response_status(Method, Status),
 		default_open_api_response_description(Status, Description),
-		( 	::route_produces(RouteId, ProducedMediaTypes0) ->
+		(	::route_produces(RouteId, ProducedMediaTypes0) ->
 			normalize_produced_media_types(ProducedMediaTypes0, ProducedMediaTypes),
 			open_api_media_descriptors(ProducedMediaTypes, MediaTypes)
-		; 	MediaTypes = []
+		;	MediaTypes = []
 		).
 
 	default_open_api_response_status(post, 201) :-
@@ -442,15 +442,15 @@
 		response_open_api_media_descriptors(Response, MediaDescriptors).
 
 	route_open_api_produced_media_types(RouteId, ProducedMediaTypes) :-
-		( 	::route_produces(RouteId, ProducedMediaTypes0) ->
+		(	::route_produces(RouteId, ProducedMediaTypes0) ->
 			normalize_produced_media_types(ProducedMediaTypes0, ProducedMediaTypes)
-		; 	ProducedMediaTypes = []
+		;	ProducedMediaTypes = []
 		).
 
 	route_open_api_default_probe_media_type(RouteId, ProbeMediaType) :-
-		( 	route_open_api_produced_media_types(RouteId, [ProbeMediaType| _]) ->
+		(	route_open_api_produced_media_types(RouteId, [ProbeMediaType| _]) ->
 			true
-		; 	ProbeMediaType = none
+		;	ProbeMediaType = none
 		).
 
 	route_open_api_probe_request(RouteId, Method, PathTemplate, ProbeMediaType, Body, Request) :-
@@ -509,7 +509,8 @@
 		route_metadata_properties(RouteId, Properties0, Properties1),
 		remove_property_functor(Properties1, path_params, Properties2),
 		remove_property_functor(Properties2, route, Properties3),
-		Properties = [route(RouteId), path_params(PathParams)| Properties3].
+		remove_property_functor(Properties3, open_api_probe, Properties4),
+		Properties = [open_api_probe(true), route(RouteId), path_params(PathParams)| Properties4].
 
 	annotate_open_api_probe_response_media_type(none, Request, Request) :-
 		!.
@@ -528,12 +529,12 @@
 		inferred_open_api_response_description(Status, Reason, Description).
 
 	inferred_open_api_response_description(Status, Reason, Description) :-
-		( 	default_open_api_response_status_description(Status, Description) ->
+		(	default_open_api_response_status_description(Status, Description) ->
 			true
-		; 	atom(Reason),
+		;	atom(Reason),
 			Reason \== '' ->
 			Description = Reason
-		; 	default_open_api_response_description(Status, Description)
+		;	default_open_api_response_description(Status, Description)
 		).
 
 	default_open_api_response_status_description(200, 'Successful response') :-
@@ -547,7 +548,7 @@
 
 	inferred_open_api_response_media_descriptors([], _RouteId, _Method, _PathTemplate, _Handler, MediaDescriptors, MediaDescriptors).
 	inferred_open_api_response_media_descriptors([ProbeMediaType| ProducedMediaTypes], RouteId, Method, PathTemplate, Handler, MediaDescriptors0, MediaDescriptors) :-
-		( 	catch(
+		(	catch(
 				(	route_open_api_probe_response(RouteId, Method, PathTemplate, Handler, ProbeMediaType, Response),
 					response_open_api_media_descriptors(Response, ResponseMediaDescriptors)
 				),
@@ -555,7 +556,7 @@
 				fail
 			) ->
 			append_new_open_api_media_descriptors(ResponseMediaDescriptors, MediaDescriptors0, MediaDescriptors1)
-		; 	MediaDescriptors1 = MediaDescriptors0
+		;	MediaDescriptors1 = MediaDescriptors0
 		),
 		inferred_open_api_response_media_descriptors(ProducedMediaTypes, RouteId, Method, PathTemplate, Handler, MediaDescriptors1, MediaDescriptors).
 
@@ -590,9 +591,9 @@
 		!.
 	merge_open_api_schema(Schema0, Schema, {oneOf-Alternatives}) :-
 		schema_one_of_alternatives(Schema0, Alternatives0),
-		( 	memberchk(Schema, Alternatives0) ->
+		(	member(Schema, Alternatives0) ->
 			Alternatives = Alternatives0
-		; 	append(Alternatives0, [Schema], Alternatives)
+		;	append(Alternatives0, [Schema], Alternatives)
 		).
 
 	schema_one_of_alternatives({oneOf-Alternatives}, Alternatives) :-
@@ -681,9 +682,9 @@
 		json_property_schema_pairs(Pairs, PropertyPairs, Required).
 
 	route_open_api_properties(Metadata, Properties) :-
-		( 	Metadata == [] ->
+		(	Metadata == [] ->
 			Properties = []
-		; 	route_open_api_properties_(Metadata, Properties)
+		;	route_open_api_properties_(Metadata, Properties)
 		).
 
 	route_open_api_properties_([], []).
@@ -769,36 +770,36 @@
 
 	handle_middleware_outcome(respond(Request, Response), Request, Response).
 	handle_middleware_outcome(continue(Request), EffectiveRequest, Response) :-
-		( 	routable_path(Request, Path) ->
-			( 	matched_route(Request, Path, RouteId, Handler, PathParams) ->
+		(	routable_path(Request, Path) ->
+			(	matched_route(Request, Path, RouteId, Handler, PathParams) ->
 				annotate_request(RouteId, PathParams, Request, RoutedRequest),
 				route_response(RouteId, Handler, RoutedRequest, EffectiveRequest, Response)
-			; 	automatic_options_response(Request, Path, EffectiveRequest, Response) ->
+			;	automatic_options_response(Request, Path, EffectiveRequest, Response) ->
 				true
-			; 	allowed_route_methods(Path, AllowedMethods) ->
+			;	allowed_route_methods(Path, AllowedMethods) ->
 				annotate_method_not_allowed_request(Request, AllowedMethods, EffectiveRequest),
 				method_not_allowed_response(EffectiveRequest, AllowedMethods, Response)
-			; 	EffectiveRequest = Request,
+			;	EffectiveRequest = Request,
 				not_found_response(Request, Response)
 			)
-		; 	EffectiveRequest = Request,
+		;	EffectiveRequest = Request,
 			not_found_response(Request, Response)
 		).
 
 	route_response(RouteId, Handler, Request, EffectiveRequest, Response) :-
-		( 	negotiated_route_request(RouteId, Request, NegotiatedRequest) ->
+		(	negotiated_route_request(RouteId, Request, NegotiatedRequest) ->
 			EffectiveRequest = NegotiatedRequest,
 			call_route_handler(Handler, NegotiatedRequest, Response)
-		; 	EffectiveRequest = Request,
+		;	EffectiveRequest = Request,
 			handle_not_acceptable_response(RouteId, Request, Response)
 		).
 
 	negotiated_route_request(RouteId, Request, NegotiatedRequest) :-
-		( 	::route_produces(RouteId, ProducedMediaTypes0) ->
+		(	::route_produces(RouteId, ProducedMediaTypes0) ->
 			normalize_produced_media_types(ProducedMediaTypes0, ProducedMediaTypes),
 			negotiated_response_media_type(Request, ProducedMediaTypes, MediaType),
 			annotate_response_media_type(MediaType, Request, NegotiatedRequest)
-		; 	NegotiatedRequest = Request
+		;	NegotiatedRequest = Request
 		).
 
 	normalize_produced_media_types(ProducedMediaTypes0, ProducedMediaTypes) :-
@@ -828,9 +829,9 @@
 
 	negotiated_response_media_type(Request, ProducedMediaTypes, MediaType) :-
 		accept_header_values(Request, AcceptHeaderValues),
-		( 	AcceptHeaderValues == [] ->
+		(	AcceptHeaderValues == [] ->
 			ProducedMediaTypes = [MediaType| _]
-		; 	accept_header_specs(AcceptHeaderValues, AcceptSpecs),
+		;	accept_header_specs(AcceptHeaderValues, AcceptSpecs),
 			AcceptSpecs \== [],
 			best_produced_media_type(ProducedMediaTypes, AcceptSpecs, MediaType)
 		).
@@ -851,9 +852,9 @@
 
 	accept_item_specs([], AcceptSpecs, AcceptSpecs).
 	accept_item_specs([AcceptItemCodes| AcceptItemCodesList], AcceptSpecs0, AcceptSpecs) :-
-		( 	accept_spec(AcceptItemCodes, AcceptSpec) ->
+		(	accept_spec(AcceptItemCodes, AcceptSpec) ->
 			AcceptSpecs1 = [AcceptSpec| AcceptSpecs0]
-		; 	AcceptSpecs1 = AcceptSpecs0
+		;	AcceptSpecs1 = AcceptSpecs0
 		),
 		accept_item_specs(AcceptItemCodesList, AcceptSpecs1, AcceptSpecs).
 
@@ -897,9 +898,9 @@
 		fail.
 	best_produced_media_type([], _AcceptSpecs, choice(MediaType, _Quality, _Specificity), MediaType).
 	best_produced_media_type([ProducedMediaType| ProducedMediaTypes], AcceptSpecs, BestChoice0, MediaType) :-
-		( 	best_accept_match(ProducedMediaType, AcceptSpecs, Quality, Specificity) ->
+		(	best_accept_match(ProducedMediaType, AcceptSpecs, Quality, Specificity) ->
 			better_media_choice(choice(ProducedMediaType, Quality, Specificity), BestChoice0, BestChoice1)
-		; 	BestChoice1 = BestChoice0
+		;	BestChoice1 = BestChoice0
 		),
 		best_produced_media_type(ProducedMediaTypes, AcceptSpecs, BestChoice1, MediaType).
 
@@ -911,9 +912,9 @@
 		fail.
 	best_accept_match([], _Type, _Subtype, choice(_Type, _Subtype, Quality, Specificity), Quality, Specificity).
 	best_accept_match([AcceptSpec| AcceptSpecs], Type, Subtype, BestChoice0, Quality, Specificity) :-
-		( 	accept_spec_matches(AcceptSpec, Type, Subtype, MatchQuality, MatchSpecificity) ->
+		(	accept_spec_matches(AcceptSpec, Type, Subtype, MatchQuality, MatchSpecificity) ->
 			better_accept_choice(choice(Type, Subtype, MatchQuality, MatchSpecificity), BestChoice0, BestChoice1)
-		; 	BestChoice1 = BestChoice0
+		;	BestChoice1 = BestChoice0
 		),
 		best_accept_match(AcceptSpecs, Type, Subtype, BestChoice1, Quality, Specificity).
 
@@ -924,8 +925,8 @@
 	better_media_choice(Choice, none, Choice) :-
 		!.
 	better_media_choice(choice(MediaType, Quality, Specificity), choice(_BestMediaType, BestQuality, BestSpecificity), choice(MediaType, Quality, Specificity)) :-
-		( 	Quality > BestQuality
-		; 	Quality =:= BestQuality,
+		(	Quality > BestQuality
+		;	Quality =:= BestQuality,
 			Specificity > BestSpecificity
 		),
 		!.
@@ -934,8 +935,8 @@
 	better_accept_choice(Choice, none, Choice) :-
 		!.
 	better_accept_choice(choice(Type, Subtype, Quality, Specificity), choice(_BestType, _BestSubtype, BestQuality, BestSpecificity), choice(Type, Subtype, Quality, Specificity)) :-
-		( 	Quality > BestQuality
-		; 	Quality =:= BestQuality,
+		(	Quality > BestQuality
+		;	Quality =:= BestQuality,
 			Specificity > BestSpecificity
 		),
 		!.
@@ -970,7 +971,7 @@
 	allowed_route_methods(Path, AllowedMethods) :-
 		findall(
 			RouteAllowedMethods,
-			( 	::route(_RouteId, RouteMethod, Template, _Handler),
+			(	::route(_RouteId, RouteMethod, Template, _Handler),
 				template_matches(Template, Path, _PathParams),
 				route_allowed_methods(RouteMethod, RouteAllowedMethods)
 			),
@@ -993,9 +994,9 @@
 
 	append_new_methods([], Methods, Methods).
 	append_new_methods([Method| Methods0], Methods1, Methods) :-
-		( 	member(Method, Methods1) ->
+		(	member(Method, Methods1) ->
 			Methods2 = Methods1
-		; 	append(Methods1, [Method], Methods2)
+		;	append(Methods1, [Method], Methods2)
 		),
 		append_new_methods(Methods0, Methods2, Methods).
 
@@ -1004,9 +1005,9 @@
 		allowed_route_methods(Path, AllowedMethods0),
 		effective_allowed_methods(AllowedMethods0, AllowedMethods),
 		annotate_automatic_options_request(Path, Request0, AllowedMethods, Request),
-		( 	::route_automatic_options_response(Request, AllowedMethods, Response) ->
+		(	::route_automatic_options_response(Request, AllowedMethods, Response) ->
 			true
-		; 	default_automatic_options_response(Request, AllowedMethods, Response)
+		;	default_automatic_options_response(Request, AllowedMethods, Response)
 		).
 
 	default_automatic_options_response(Request, AllowedMethods, Response) :-
@@ -1021,9 +1022,9 @@
 	target_path(origin(Path), Path).
 	target_path(origin(Path, _Query), Path).
 	target_path(absolute(Components), Path) :-
-		( 	member(path(Path), Components) ->
+		(	member(path(Path), Components) ->
 			true
-		; 	Path = ''
+		;	Path = ''
 		).
 
 	annotate_automatic_options_request(Path, Request0, AllowedMethods, Request) :-
@@ -1042,9 +1043,9 @@
 		automatic_options_route_metadata(RouteId, Metadata).
 
 	automatic_options_route_metadata(RouteId, Metadata) :-
-		( 	::route_metadata(RouteId, Metadata0) ->
+		(	::route_metadata(RouteId, Metadata0) ->
 			normalize_route_metadata(Metadata0, Metadata)
-		; 	Metadata = []
+		;	Metadata = []
 		).
 
 	annotate_automatic_options_route_matches([], Request, Request).
@@ -1058,9 +1059,9 @@
 		annotate_shared_automatic_options_metadata(RouteMatches, Request3, Request).
 
 	annotate_shared_automatic_options_path_params(RouteMatches, Request0, Request) :-
-		( 	shared_automatic_options_path_params(RouteMatches, PathParams) ->
+		(	shared_automatic_options_path_params(RouteMatches, PathParams) ->
 			annotate_request_property(path_params(PathParams), Request0, Request)
-		; 	Request = Request0
+		;	Request = Request0
 		).
 
 	shared_automatic_options_path_params([route_match(_RouteId, PathParams, _Metadata)| RouteMatches], PathParams) :-
@@ -1079,9 +1080,9 @@
 		shared_automatic_options_metadata(Metadata0, RouteMatches, Metadata).
 	shared_automatic_options_metadata([], _RouteMatches, []).
 	shared_automatic_options_metadata([MetadataProperty| Metadata0], RouteMatches, Metadata) :-
-		( 	shared_automatic_options_metadata_property(MetadataProperty, RouteMatches) ->
+		(	shared_automatic_options_metadata_property(MetadataProperty, RouteMatches) ->
 			Metadata = [MetadataProperty| Metadata1]
-		; 	Metadata = Metadata1
+		;	Metadata = Metadata1
 		),
 		shared_automatic_options_metadata(Metadata0, RouteMatches, Metadata1).
 
@@ -1109,14 +1110,18 @@
 		route_metadata_properties(RouteId, Properties0, Properties1),
 		remove_property_functor(Properties1, path_params, Properties2),
 		remove_property_functor(Properties2, route, Properties3),
-		Properties = [route(RouteId), path_params(PathParams)| Properties3],
+		remove_property_functor(Properties3, open_api_probe, Properties4),
+		remove_property_functor(Properties4, automatic_options, Properties5),
+		remove_property_functor(Properties5, effective_methods, Properties6),
+		remove_property_functor(Properties6, response_media_type, Properties7),
+		Properties = [route(RouteId), path_params(PathParams)| Properties7],
 		http::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	route_metadata_properties(RouteId, Properties0, Properties) :-
-		( 	::route_metadata(RouteId, Metadata0) ->
+		(	::route_metadata(RouteId, Metadata0) ->
 			normalize_route_metadata(Metadata0, Metadata),
 			merge_route_metadata(Metadata, Properties0, Properties)
-		; 	Properties = Properties0
+		;	Properties = Properties0
 		).
 
 	normalize_route_metadata([], []) :-
@@ -1143,6 +1148,7 @@
 	reserved_route_metadata_functor(route).
 	reserved_route_metadata_functor(path_params).
 	reserved_route_metadata_functor(response_media_type).
+	reserved_route_metadata_functor(open_api_probe).
 	reserved_route_metadata_functor(automatic_options).
 	reserved_route_metadata_functor(effective_methods).
 	reserved_route_metadata_functor(matched_path).
@@ -1156,9 +1162,9 @@
 
 	open_api_info(info(Title, '1.0.0', 'HTTP router API', [])) :-
 		this(This),
-		( 	atom(This) ->
+		(	atom(This) ->
 			Title = This
-		; 	Title = 'HTTP Router API'
+		;	Title = 'HTTP Router API'
 		).
 
 	open_api_servers([]).
@@ -1166,9 +1172,9 @@
 	remove_property_functor([], _Functor, []).
 	remove_property_functor([Property| Properties], Functor, FilteredProperties) :-
 		functor(Property, PropertyFunctor, _),
-		( 	PropertyFunctor == Functor ->
+		(	PropertyFunctor == Functor ->
 			remove_property_functor(Properties, Functor, FilteredProperties)
-		; 	FilteredProperties = [Property| FilteredProperties0],
+		;	FilteredProperties = [Property| FilteredProperties0],
 			remove_property_functor(Properties, Functor, FilteredProperties0)
 		).
 
@@ -1213,17 +1219,17 @@
 		atom_codes(Segment, [0'{| Rest]),
 		append(DescriptorCodes, [0'}], Rest),
 		DescriptorCodes \== [],
-		\+ memberchk(0'{, DescriptorCodes),
-		\+ memberchk(0'}, DescriptorCodes),
+		\+ member(0'{, DescriptorCodes),
+		\+ member(0'}, DescriptorCodes),
 		placeholder_descriptor_name_type(DescriptorCodes, Name, Type).
 
 	placeholder_descriptor_name_type(DescriptorCodes, Name, Type) :-
-		( 	append(NameCodes, [0':| TypeCodes], DescriptorCodes) ->
+		(	append(NameCodes, [0':| TypeCodes], DescriptorCodes) ->
 			NameCodes \== [],
 			TypeCodes \== [],
 			atom_codes(Name, NameCodes),
 			placeholder_segment_type(TypeCodes, Type)
-		; 	atom_codes(Name, DescriptorCodes),
+		;	atom_codes(Name, DescriptorCodes),
 			Type = string
 		).
 
@@ -1279,12 +1285,12 @@
 	path_segments_codes(Codes, [Segment| Segments]) :-
 		path_segment_codes(Codes, SegmentCodes, Tail, HasSeparator),
 		atom_codes(Segment, SegmentCodes),
-		( 	HasSeparator == true ->
-			( 	Tail == [] ->
+		(	HasSeparator == true ->
+			(	Tail == [] ->
 				Segments = ['']
-			; 	path_segments_codes(Tail, Segments)
+			;	path_segments_codes(Tail, Segments)
 			)
-		; 	Segments = []
+		;	Segments = []
 		).
 
 	path_segment_codes([], [], [], false).
@@ -1294,19 +1300,19 @@
 		path_segment_codes(Codes, SegmentCodes, Tail, HasSeparator).
 
 	not_found_response(Request, Response) :-
-		( 	::route_not_found_response(Request, Response) ->
+		(	::route_not_found_response(Request, Response) ->
 			true
-		; 	default_not_found_response(Request, Response)
+		;	default_not_found_response(Request, Response)
 		).
 
 	handle_not_acceptable_response(RouteId, Request, Response) :-
-		( 	::route_produces(RouteId, ProducedMediaTypes0) ->
+		(	::route_produces(RouteId, ProducedMediaTypes0) ->
 			normalize_produced_media_types(ProducedMediaTypes0, ProducedMediaTypes)
-		; 	ProducedMediaTypes = []
+		;	ProducedMediaTypes = []
 		),
-		( 	::route_not_acceptable_response(Request, ProducedMediaTypes, Response) ->
+		(	::route_not_acceptable_response(Request, ProducedMediaTypes, Response) ->
 			true
-		; 	default_not_acceptable_response(Request, Response)
+		;	default_not_acceptable_response(Request, Response)
 		).
 
 	default_not_found_response(Request, Response) :-
@@ -1319,9 +1325,9 @@
 
 	method_not_allowed_response(Request, AllowedMethods0, Response) :-
 		effective_allowed_methods(AllowedMethods0, AllowedMethods),
-		( 	::route_method_not_allowed_response(Request, AllowedMethods, Response) ->
+		(	::route_method_not_allowed_response(Request, AllowedMethods, Response) ->
 			true
-		; 	default_method_not_allowed_response(Request, AllowedMethods, Response)
+		;	default_method_not_allowed_response(Request, AllowedMethods, Response)
 		).
 
 	default_method_not_allowed_response(Request, AllowedMethods, Response) :-

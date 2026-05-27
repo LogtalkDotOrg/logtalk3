@@ -98,33 +98,33 @@
 		!,
 		instantiation_error.
 	source_codes(file(File), Codes) :-
-		( 	var(File) ->
+		(	var(File) ->
 			instantiation_error
-		; 	file_to_codes(File, Codes)
+		;	file_to_codes(File, Codes)
 		),
 		!.
 	source_codes(stream(Stream), Codes) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	stream_to_codes(Stream, Codes)
+		;	stream_to_codes(Stream, Codes)
 		),
 		!.
 	source_codes(atom(Atom), Codes) :-
-		( 	var(Atom) ->
+		(	var(Atom) ->
 			instantiation_error
-		; 	atom_codes(Atom, Codes)
+		;	atom_codes(Atom, Codes)
 		),
 		!.
 	source_codes(chars(Chars), Codes) :-
-		( 	var(Chars) ->
+		(	var(Chars) ->
 			instantiation_error
-		; 	chars_to_codes(Chars, Codes)
+		;	chars_to_codes(Chars, Codes)
 		),
 		!.
 	source_codes(codes(Codes), Codes) :-
-		( 	var(Codes) ->
+		(	var(Codes) ->
 			instantiation_error
-		; 	true
+		;	true
 		),
 		!.
 	source_codes(Source, _) :-
@@ -185,9 +185,9 @@
 		lines_to_sentences(Lines, ChecksumPolicy, UnknownTypePolicy, Sentences).
 
 	line_sentence(LineCodes, ChecksumPolicy, UnknownTypePolicy, Sentence) :-
-		( 	parse_line(LineCodes, ChecksumPolicy, UnknownTypePolicy, Sentence) ->
+		(	parse_line(LineCodes, ChecksumPolicy, UnknownTypePolicy, Sentence) ->
 			true
-		; 	atom_codes(Line, LineCodes),
+		;	atom_codes(Line, LineCodes),
 			domain_error(nmea_sentence, Line)
 		).
 
@@ -249,25 +249,25 @@
 		atom_codes(Checksum, [HighCode, LowCode]).
 
 	hex_nibble_code(Value, Code) :-
-		( 	Value < 10 ->
+		(	Value < 10 ->
 			Code is 0'0 + Value
-		; 	Code is 0'A + Value - 10
+		;	Code is 0'A + Value - 10
 		).
 
 	hex_digit_value(Code, Value) :-
-		( 	0'0 =< Code, Code =< 0'9 ->
+		(	0'0 =< Code, Code =< 0'9 ->
 			Value is Code - 0'0
-		; 	0'A =< Code, Code =< 0'F ->
+		;	0'A =< Code, Code =< 0'F ->
 			Value is Code - 0'A + 10
-		; 	0'a =< Code, Code =< 0'f ->
+		;	0'a =< Code, Code =< 0'f ->
 			Value is Code - 0'a + 10
 		;	fail
 		).
 
 	uppercase_code(Code, UpperCode) :-
-		( 	0'a =< Code, Code =< 0'z ->
+		(	0'a =< Code, Code =< 0'z ->
 			UpperCode is Code - 32
-		; 	UpperCode = Code
+		;	UpperCode = Code
 		).
 
 	accept_checksum(required, ProvidedChecksum, ComputedChecksum) :-
@@ -335,9 +335,9 @@
 
 	lowercase_codes([], []).
 	lowercase_codes([Code| Codes], [LowercaseCode| LowercaseCodes]) :-
-		( 	0'A =< Code, Code =< 0'Z ->
+		(	0'A =< Code, Code =< 0'Z ->
 			LowercaseCode is Code + 32
-		; 	LowercaseCode = Code
+		;	LowercaseCode = Code
 		),
 		lowercase_codes(Codes, LowercaseCodes).
 
@@ -356,9 +356,9 @@
 	supported_standard_type(gll).
 
 	validate_sentence_fields(Type, Fields) :-
-		( 	supported_standard_type(Type) ->
+		(	supported_standard_type(Type) ->
 			validate_supported_sentence(Type, Fields)
-		; 	true
+		;	true
 		).
 
 	validate_supported_sentence(gga, Fields) :-
@@ -393,9 +393,9 @@
 	rmc_data(Fields, rmc(Time, Status, Coordinate, movement(SpeedKnots, CourseDegrees), Date, MagneticVariation, Mode)) :-
 		Fields = [TimeField, StatusField, LatitudeField, LatitudeDirectionField, LongitudeField, LongitudeDirectionField,
 			SpeedField, CourseField, DateField, VariationField, VariationDirectionField| Tail],
-		( 	Tail = [ModeField] ->
+		(	Tail = [ModeField] ->
 			true
-		; 	Tail = [],
+		;	Tail = [],
 			ModeField = ''
 		),
 		parse_utc_time(TimeField, Time),
@@ -413,9 +413,9 @@
 			SatelliteField5, SatelliteField6, SatelliteField7, SatelliteField8,
 			SatelliteField9, SatelliteField10, SatelliteField11, SatelliteField12,
 			PDOPField, HDOPField, VDOPField| Tail],
-		( 	Tail = [SystemIdField] ->
+		(	Tail = [SystemIdField] ->
 			true
-		; 	Tail = [],
+		;	Tail = [],
 			SystemIdField = ''
 		),
 		parse_selection_mode(SelectionModeField, SelectionMode),
@@ -440,9 +440,9 @@
 	vtg_data(Fields, vtg(track(TrueCourseDegrees, MagneticCourseDegrees), speed(SpeedKnots, SpeedKph), Mode)) :-
 		Fields = [TrueCourseField, TrueMarkerField, MagneticCourseField, MagneticMarkerField,
 			SpeedKnotsField, SpeedKnotsMarkerField, SpeedKphField, SpeedKphMarkerField| Tail],
-		( 	Tail = [ModeField] ->
+		(	Tail = [ModeField] ->
 			true
-		; 	Tail = [],
+		;	Tail = [],
 			ModeField = ''
 		),
 		parse_tagged_float(TrueCourseField, TrueMarkerField, 'T', TrueCourseDegrees),
@@ -453,9 +453,9 @@
 
 	gll_data(Fields, gll(Coordinate, Time, Status, Mode)) :-
 		Fields = [LatitudeField, LatitudeDirectionField, LongitudeField, LongitudeDirectionField, TimeField, StatusField| Tail],
-		( 	Tail = [ModeField] ->
+		(	Tail = [ModeField] ->
 			true
-		; 	Tail = [],
+		;	Tail = [],
 			ModeField = ''
 		),
 		parse_coordinate(LatitudeField, LatitudeDirectionField, LongitudeField, LongitudeDirectionField, Coordinate),
@@ -472,17 +472,17 @@
 		integer_codes([HourCode1, HourCode2], Hour),
 		integer_codes([MinuteCode1, MinuteCode2], Minute),
 		integer_codes([SecondCode1, SecondCode2], Second),
-		( 	time::valid(Hour, Minute, Second) ->
+		(	time::valid(Hour, Minute, Second) ->
 			true
-		; 	Second =:= 60,
+		;	Second =:= 60,
 			time::valid(Hour, Minute, 59)
 		),
 		fraction_codes(FractionCodes, Fraction).
 
 	split_decimal_codes(Codes, WholeCodes, FractionCodes) :-
-		( 	append(WholeCodes, [0'.| FractionCodes], Codes) ->
+		(	append(WholeCodes, [0'.| FractionCodes], Codes) ->
 			FractionCodes \== []
-		; 	WholeCodes = Codes,
+		;	WholeCodes = Codes,
 			FractionCodes = []
 		).
 
@@ -522,9 +522,9 @@
 		integer_codes([DayCode1, DayCode2], Day),
 		integer_codes([MonthCode1, MonthCode2], Month),
 		integer_codes([YearCode1, YearCode2], Year2),
-		( 	Year2 >= 80 ->
+		(	Year2 >= 80 ->
 			Year is 1900 + Year2
-		; 	Year is 2000 + Year2
+		;	Year is 2000 + Year2
 		),
 		date::valid(Year, Month, Day).
 
@@ -561,16 +561,16 @@
 
 	direction_sign(latitude, Field, Sign) :-
 		normalized_char_atom(Field, Direction),
-		( 	Direction == n ->
+		(	Direction == n ->
 			Sign = 1.0
-		; 	Direction == s,
+		;	Direction == s,
 			Sign = -1.0
 		).
 	direction_sign(longitude, Field, Sign) :-
 		normalized_char_atom(Field, Direction),
-		( 	Direction == e ->
+		(	Direction == e ->
 			Sign = 1.0
-		; 	Direction == w,
+		;	Direction == w,
 			Sign = -1.0
 		).
 
@@ -596,35 +596,35 @@
 		!.
 	parse_status(Field, Status) :-
 		normalized_char_atom(Field, Code),
-		( 	Code == a ->
+		(	Code == a ->
 			Status = active
-		; 	Code == v ->
+		;	Code == v ->
 			Status = void
-		; 	Status = unknown(Code)
+		;	Status = unknown(Code)
 		).
 
 	parse_selection_mode('', missing) :-
 		!.
 	parse_selection_mode(Field, SelectionMode) :-
 		normalized_char_atom(Field, Code),
-		( 	Code == a ->
+		(	Code == a ->
 			SelectionMode = automatic
-		; 	Code == m ->
+		;	Code == m ->
 			SelectionMode = manual
-		; 	SelectionMode = unknown(Code)
+		;	SelectionMode = unknown(Code)
 		).
 
 	parse_fix_type('', missing) :-
 		!.
 	parse_fix_type(Field, FixType) :-
 		integer_field(Field, Code),
-		( 	Code =:= 1 ->
+		(	Code =:= 1 ->
 			FixType = no_fix
-		; 	Code =:= 2 ->
+		;	Code =:= 2 ->
 			FixType = fix_2d
-		; 	Code =:= 3 ->
+		;	Code =:= 3 ->
 			FixType = fix_3d
-		; 	FixType = unknown(Code)
+		;	FixType = unknown(Code)
 		).
 
 	parse_mode('', missing) :-
@@ -662,9 +662,9 @@
 	parse_magnetic_variation(ValueField, DirectionField, magnetic_variation(Value, Direction)) :-
 		float_field(ValueField, Value),
 		normalized_char_atom(DirectionField, Code),
-		( 	Code == e ->
+		(	Code == e ->
 			Direction = east
-		; 	Code == w,
+		;	Code == w,
 			Direction = west
 		).
 
@@ -689,9 +689,9 @@
 
 	normalized_char_atom(Field, Atom) :-
 		char_code(Field, Code),
-		( 	0'A =< Code, Code =< 0'Z ->
+		(	0'A =< Code, Code =< 0'Z ->
 			LowercaseCode is Code + 32
-		; 	LowercaseCode = Code
+		;	LowercaseCode = Code
 		),
 		char_code(Atom, LowercaseCode).
 
@@ -734,9 +734,9 @@
 		PreviousSatelliteCount is (MessageNumber - 1) * 4,
 		PreviousSatelliteCount < SatellitesInView,
 		RemainingSatelliteCount is SatellitesInView - PreviousSatelliteCount,
-		( 	RemainingSatelliteCount > 4 ->
+		(	RemainingSatelliteCount > 4 ->
 			ExpectedSatelliteCount = 4
-		; 	ExpectedSatelliteCount = RemainingSatelliteCount
+		;	ExpectedSatelliteCount = RemainingSatelliteCount
 		),
 		SatelliteCount =:= ExpectedSatelliteCount.
 
@@ -775,13 +775,13 @@
 		signed_decimal_codes(Codes, Float).
 
 	unsigned_decimal_codes(Codes, Number) :-
-		( 	append(IntegerCodes, [0'.| FractionCodes], Codes),
+		(	append(IntegerCodes, [0'.| FractionCodes], Codes),
 			IntegerCodes \== [],
 			FractionCodes \== [],
 			digit_codes(IntegerCodes),
 			digit_codes(FractionCodes) ->
 			true
-		; 	digit_codes(Codes)
+		;	digit_codes(Codes)
 		),
 		number_codes(Number, Codes).
 

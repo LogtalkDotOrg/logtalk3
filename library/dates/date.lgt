@@ -215,7 +215,7 @@
 		Delta is (Weekday - FirstWeekday + 7) mod 7,
 		FirstDay is 1 + Delta,
 		days_in_month(Month, Year, Length),
-		( 	Week =:= 5 ->
+		(	Week =:= 5 ->
 			last_month_weekday(FirstDay, Length, Day)
 		;	Day is FirstDay + (Week - 1) * 7,
 			Day =< Length
@@ -245,7 +245,7 @@
 
 	last_month_weekday(Day0, Length, Day) :-
 		NextDay is Day0 + 7,
-		( 	NextDay =< Length ->
+		(	NextDay =< Length ->
 			last_month_weekday(NextDay, Length, Day)
 		;	Day = Day0
 		).
@@ -630,7 +630,7 @@
 		AbsOffsetSeconds =< 86340,
 		OffsetHours is AbsOffsetSeconds // 3600,
 		OffsetMinutes is (AbsOffsetSeconds mod 3600) // 60,
-		( 	OffsetSeconds < 0 ->
+		(	OffsetSeconds < 0 ->
 			SignCode = 0'-
 		;	SignCode = 0'+
 		).
@@ -654,7 +654,7 @@
 		integer(Hours),
 		Hours >= 0,
 		Hours < 12,
-		( 	Hours =:= 0 ->
+		(	Hours =:= 0 ->
 			TwelveHours = 12
 		;	TwelveHours = Hours
 		).
@@ -662,7 +662,7 @@
 		integer(Hours),
 		Hours >= 12,
 		Hours =< 23,
-		( 	Hours =:= 12 ->
+		(	Hours =:= 12 ->
 			TwelveHours = 12
 		;	TwelveHours is Hours - 12
 		).
@@ -682,7 +682,7 @@
 		Integer >= 0,
 		number_codes(Integer, RawCodes),
 		length(RawCodes, RawLength),
-		( 	RawLength >= Width ->
+		(	RawLength >= Width ->
 			Codes = RawCodes
 		;	Padding is Width - RawLength,
 			zero_codes(Padding, ZeroCodes),

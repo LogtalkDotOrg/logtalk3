@@ -543,9 +543,9 @@
 		Z is X + Y.
 
 	traverse_optional_closure(Term, Optional) :-
-		( 	integer(Term) ->
+		(	integer(Term) ->
 			optional::of(Term, Optional)
-		; 	optional::empty(Optional)
+		;	optional::empty(Optional)
 		).
 
 	a(1).

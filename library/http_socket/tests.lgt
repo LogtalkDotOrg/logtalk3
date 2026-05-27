@@ -580,15 +580,15 @@
 
 	server_serve_requests_once(Listener, Handler, Count) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
-		( 	catch(
+		(	catch(
 				serve_requests(Count, Input, Output, Handler),
 				Error,
-				( 	catch(socket::close(Input, Output), _, true),
+				(	catch(socket::close(Input, Output), _, true),
 					throw(Error)
 				)
 			) ->
 			socket::close(Input, Output)
-		; 		socket::close(Input, Output),
+		;		socket::close(Input, Output),
 			fail
 		).
 

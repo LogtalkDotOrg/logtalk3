@@ -726,9 +726,9 @@
 		Z is X + Y.
 
 	traverse_expected_closure(Term, Expected) :-
-		( 	integer(Term) ->
+		(	integer(Term) ->
 			expected::of_expected(Term, Expected)
-		; 	expected::of_unexpected(not_integer(Term), Expected)
+		;	expected::of_unexpected(not_integer(Term), Expected)
 		).
 
 	a(1).

@@ -180,24 +180,24 @@
 		domain_error(http_server_websocket_option, Option).
 
 	validate_accept_websocket_headers(Headers) :-
-		( 	member(Name-_, Headers),
+		(	member(Name-_, Headers),
 			member(Name, [connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions]) ->
 			domain_error(http_server_websocket_headers, Headers)
-		; 	true
+		;	true
 		).
 
 	validate_accept_websocket_properties(Properties) :-
-		( 	member(Property, Properties),
+		(	member(Property, Properties),
 			functor(Property, Functor, _Arity),
 			member(Functor, [connection, upgrade, websocket_key, websocket_version, websocket_accept, websocket_protocol, websocket_extensions]) ->
 			domain_error(http_server_websocket_properties, Properties)
-		; 	true
+		;	true
 		).
 
 	validate_websocket_request(Request, Version, Key, OfferedProtocols) :-
-		( 	valid_websocket_request(Request, Version, Key, OfferedProtocols) ->
+		(	valid_websocket_request(Request, Version, Key, OfferedProtocols) ->
 			true
-		; 	domain_error(http_server_websocket_request, Request)
+		;	domain_error(http_server_websocket_request, Request)
 		).
 
 	valid_websocket_request(Request, Version, Key, OfferedProtocols) :-
@@ -212,18 +212,18 @@
 		memberchk(websocket, UpgradeTokens),
 		message_websocket_key(Request, Key),
 		message_websocket_version(Request, 13),
-		( 	message_websocket_protocols(Request, OfferedProtocols) ->
+		(	message_websocket_protocols(Request, OfferedProtocols) ->
 			true
-		; 	OfferedProtocols = []
+		;	OfferedProtocols = []
 		).
 
 	websocket_host_header(Request) :-
-		( 	http::property(Request, host(_Host)) ->
+		(	http::property(Request, host(_Host)) ->
 			true
-		; 	http::property(Request, host(_Host, _Port)) ->
+		;	http::property(Request, host(_Host, _Port)) ->
 			true
-		; 	http::header(Request, host, host(_Host))
-		; 	http::header(Request, host, host(_Host, _Port))
+		;	http::header(Request, host, host(_Host))
+		;	http::header(Request, host, host(_Host, _Port))
 		).
 
 	websocket_http_version(Version) :-
@@ -245,39 +245,39 @@
 		Protocol \== none.
 
 	message_upgrade_tokens(Message, Tokens) :-
-		( 	http::property(Message, upgrade(Tokens)) ->
+		(	http::property(Message, upgrade(Tokens)) ->
 			true
-		; 	http::header(Message, upgrade, Tokens)
+		;	http::header(Message, upgrade, Tokens)
 		),
 		!.
 
 	message_websocket_key(Message, Key) :-
-		( 	^^message_header_values(Message, sec_websocket_key, Values), Values \== [] ->
+		(	^^message_header_values(Message, sec_websocket_key, Values), Values \== [] ->
 			Values = [Key]
-		; 	http::property(Message, websocket_key(Key)) ->
+		;	http::property(Message, websocket_key(Key)) ->
 			true
-		; 	http::header(Message, sec_websocket_key, Key)
+		;	http::header(Message, sec_websocket_key, Key)
 		),
 		!.
 
 	message_websocket_version(Message, Version) :-
-		( 	http::property(Message, websocket_version(Version)) ->
+		(	http::property(Message, websocket_version(Version)) ->
 			true
-		; 	http::header(Message, sec_websocket_version, Version)
+		;	http::header(Message, sec_websocket_version, Version)
 		),
 		!.
 
 	message_websocket_protocols(Message, Protocols) :-
-		( 	http::property(Message, websocket_protocol(Protocols)) ->
+		(	http::property(Message, websocket_protocol(Protocols)) ->
 			true
-		; 	http::header(Message, sec_websocket_protocol, Protocols)
+		;	http::header(Message, sec_websocket_protocol, Protocols)
 		),
 		!.
 
 	message_response_websocket_protocols(Message, Protocols) :-
-		( 	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
+		(	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
 			Values = [Protocols]
-		; 	http::property(Message, websocket_protocol(Protocols))
+		;	http::property(Message, websocket_protocol(Protocols))
 		),
 		!.
 
@@ -294,25 +294,25 @@
 	serve_websocket_result(request(Request), Output, Handler, Outcome) :-
 		dispatch_websocket(Handler, Request, Response),
 		write_response_for_request(Output, Request, Response),
-		( 	valid_websocket_upgrade_response(Request, Response) ->
+		(	valid_websocket_upgrade_response(Request, Response) ->
 			Outcome = accepted(Request, Response)
-		; 	Outcome = rejected(Response)
+		;	Outcome = rejected(Response)
 		).
 
 	dispatch_websocket(Handler, Request, Response) :-
 		validate_handler(Handler),
 		http::version(Request, Version),
 		catch(
-			( 	Handler::handle(Request, Candidate),
-				( 	http::is_response(Candidate) ->
+			(	Handler::handle(Request, Candidate),
+				(	http::is_response(Candidate) ->
 					Response = Candidate
-				; 	internal_server_error_response(Version, Response)
+				;	internal_server_error_response(Version, Response)
 				)
 			),
 			Error,
-			( 	websocket_handler_error_response(Error, Request, Response) ->
+			(	websocket_handler_error_response(Error, Request, Response) ->
 				true
-			; 	internal_server_error_response(Version, Response)
+			;	internal_server_error_response(Version, Response)
 			)
 		).
 
@@ -346,26 +346,26 @@
 	valid_websocket_protocol_response(Request, Response) :-
 		message_websocket_protocols(Request, OfferedProtocols),
 		!,
-		( 	message_response_websocket_protocols(Response, [SelectedProtocol]) ->
+		(	message_response_websocket_protocols(Response, [SelectedProtocol]) ->
 			memberchk(SelectedProtocol, OfferedProtocols)
-		; 	\+ response_websocket_protocol_present(Response)
+		;	\+ response_websocket_protocol_present(Response)
 		).
 	valid_websocket_protocol_response(_Request, Response) :-
 		\+ response_websocket_protocol_present(Response).
 
 	message_websocket_accept(Message, Accept) :-
-		( 	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
+		(	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
 			Values = [Accept]
-		; 	http::property(Message, websocket_accept(Accept)) ->
+		;	http::property(Message, websocket_accept(Accept)) ->
 			true
-		; 	http::header(Message, sec_websocket_accept, Accept)
+		;	http::header(Message, sec_websocket_accept, Accept)
 		),
 		!.
 
 	message_websocket_extensions(Message, Extensions) :-
-		( 	http::property(Message, websocket_extensions(Extensions)) ->
+		(	http::property(Message, websocket_extensions(Extensions)) ->
 			true
-		; 	http::header(Message, sec_websocket_extensions, Extensions)
+		;	http::header(Message, sec_websocket_extensions, Extensions)
 		),
 		!.
 

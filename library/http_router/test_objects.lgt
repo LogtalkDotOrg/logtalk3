@@ -223,9 +223,9 @@
 		http::response(Version, status(204, 'No Content'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], empty, [], Response).
 
 	add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		( 	http::property(Request, automatic_options(true)) ->
+		(	http::property(Request, automatic_options(true)) ->
 			Stage = automatic
-		; 	Stage = routed
+		;	Stage = routed
 		),
 		http::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
 
@@ -698,6 +698,38 @@
 :- end_object.
 
 
+:- object(property_scrubbing_http_router,
+	implements(http_handler_protocol),
+	imports(http_router)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-27,
+		comment is 'Router object used by the http_router tests to exercise scrubbing of internal request properties on the normal routing path.'
+	]).
+
+	:- protected(show_scrubbed/2).
+	:- info(show_scrubbed/2, [
+		comment is 'Route handler used by the property scrubbing router object for the ``GET /scrubbed`` path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	route(show_scrubbed, get, '/scrubbed', show_scrubbed).
+
+	show_scrubbed(Request, Response) :-
+		http::property(Request, route(show_scrubbed)),
+		http::property(Request, path_params([])),
+		\+ http::property(Request, open_api_probe(_)),
+		\+ http::property(Request, automatic_options(_)),
+		\+ http::property(Request, effective_methods(_)),
+		\+ http::property(Request, response_media_type(_)),
+		http::version(Request, Version),
+		http::response(Version, status(200, 'OK'), [], content('text/plain', text(scrubbed)), [], Response).
+
+:- end_object.
+
+
 :- object(example_open_api_http_router,
 	implements(http_handler_protocol),
 	imports(http_router)).
@@ -826,9 +858,9 @@
 		http::response(Version, Status, [x_router_stage-after| Headers0], Body, Properties, Response).
 
 	add_response_kind(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		( 	http::property(Request, route(show_page)) ->
+		(	http::property(Request, route(show_page)) ->
 			Kind = routed
-		; 	Kind = intercepted
+		;	Kind = intercepted
 		),
 		http::response(Version, Status, [x_response_kind-Kind| Headers0], Body, Properties, Response).
 

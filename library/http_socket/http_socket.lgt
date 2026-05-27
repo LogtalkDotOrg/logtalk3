@@ -426,9 +426,9 @@
 
 	adopt_connection_streams(Input, Output) :-
 		{adopt_stream(Input)},
-		( 	Input == Output ->
+		(	Input == Output ->
 			true
-		; 	{adopt_stream(Output)}
+		;	{adopt_stream(Output)}
 		).
 
 	:- else.
@@ -551,9 +551,9 @@
 
 	call_with_catch_cleanup(Goal, Cleanup) :-
 		catch(
-			( 	call(Goal) ->
+			(	call(Goal) ->
 				call(Cleanup)
-			; 	call(Cleanup),
+			;	call(Cleanup),
 				fail
 			),
 			Error,
@@ -617,7 +617,7 @@
 		catch(close_connection(Connection), _, true).
 
 	pool_exchange_connection(PoolId, Pool, Requests, Responses) :-
-		( 	Requests == [] ->
+		(	Requests == [] ->
 			connection_pool_id_outcome(PoolId, Outcome),
 			connection_pool_stats_outcome(Outcome, Pool, _Stats),
 			Responses = []
@@ -642,16 +642,16 @@
 		last_request_response(Requests, Responses, Request, Response).
 
 	one_shot_request(Request0, Request) :-
-		( 	http::is_request(Request0) ->
+		(	http::is_request(Request0) ->
 			ensure_close_connection_request(Request0, Request)
-		; 	Request = Request0
+		;	Request = Request0
 		).
 
 	one_shot_request_sequence(Requests0, Requests) :-
-		( 	proper_list(Requests0),
+		(	proper_list(Requests0),
 			Requests0 \== [] ->
 			one_shot_request_sequence_(Requests0, Requests)
-		; 	Requests = Requests0
+		;	Requests = Requests0
 		).
 
 	one_shot_request_sequence_([Request], [OneShotRequest]) :-
@@ -661,11 +661,11 @@
 		one_shot_request_sequence_(Requests, ReversedRequests).
 
 	ensure_close_connection_request(request(Method, Target, Version, Headers, Body, Properties0), Request) :-
-		( 	member(connection(_), Properties0) ->
+		(	member(connection(_), Properties0) ->
 			Properties = Properties0
-		; 	member(connection-_, Headers) ->
+		;	member(connection-_, Headers) ->
 			Properties = Properties0
-		; 	Properties = [connection([close])| Properties0]
+		;	Properties = [connection([close])| Properties0]
 		),
 		Request = request(Method, Target, Version, Headers, Body, Properties).
 
@@ -694,11 +694,11 @@
 		).
 
 	request_shutdown_impl(Control) :-
-		( 	var(Control) ->
+		(	var(Control) ->
 			instantiation_error
-		; 	listener_shutdown_control_(Control, _Listener, RunId) ->
+		;	listener_shutdown_control_(Control, _Listener, RunId) ->
 			force_shutdown_control(Control, RunId)
-		; 	existence_error(http_socket_shutdown_control, Control)
+		;	existence_error(http_socket_shutdown_control, Control)
 		).
 
 	serve_listener_with_workers_impl(per_connection, Listener, Handler, Count, ClientInfos) :-
@@ -759,17 +759,17 @@
 		!.
 	serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, ClientInfos0, ClientInfos, Workers0, Workers) :-
 		collect_finished_connection_workers(Workers0, no_error, Workers1, Error),
-		( 	Error == no_error ->
+		(	Error == no_error ->
 			true
-		; 	throw(Error)
+		;	throw(Error)
 		),
 		length(Workers1, ActiveWorkers),
-		( 	ActiveWorkers < Size ->
+		(	ActiveWorkers < Size ->
 			socket::server_accept(Listener, Input, Output, ClientInfo),
 			spawn_notifying_connection_worker(listener_pool_worker_finished(RunId), Input, Output, Handler, Worker),
 			NextCount is Count - 1,
 			serve_listener_pool_rolling(Listener, Handler, RunId, Size, NextCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers1], Workers)
-		; 	threaded_wait(listener_pool_worker_finished(RunId)),
+		;	threaded_wait(listener_pool_worker_finished(RunId)),
 			serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, ClientInfos0, ClientInfos, Workers1, Workers)
 		).
 
@@ -782,10 +782,10 @@
 		accept_worker_batch(Listener, Handler, NextBatchCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers0], Workers).
 
 	pool_batch_counts(Size, Count, BatchCount, RemainingCount) :-
-		( 	Count =< Size ->
+		(	Count =< Size ->
 			BatchCount = Count,
 			RemainingCount = 0
-		; 	BatchCount = Size,
+		;	BatchCount = Size,
 			RemainingCount is Count - Size
 		).
 
@@ -831,9 +831,9 @@
 
 	collect_finished_connection_workers([], Error, [], Error).
 	collect_finished_connection_workers([worker(Tag, Goal)| Workers0], Error0, Workers, Error) :-
-		( 	collect_finished_connection_worker(Tag, Goal, Error0, Error1) ->
+		(	collect_finished_connection_worker(Tag, Goal, Error0, Error1) ->
 			collect_finished_connection_workers(Workers0, Error1, Workers, Error)
-		; 	Workers = [worker(Tag, Goal)| Workers1],
+		;	Workers = [worker(Tag, Goal)| Workers1],
 			collect_finished_connection_workers(Workers0, Error0, Workers1, Error)
 		).
 
@@ -845,7 +845,7 @@
 	:- endif.
 
 	allocate_connection_pool_id(PoolId) :-
-		( 	retract(connection_pool_seed_(CurrentPoolId)) ->
+		(	retract(connection_pool_seed_(CurrentPoolId)) ->
 			PoolId is CurrentPoolId + 1
 		;	PoolId = 1
 		),
@@ -980,8 +980,8 @@
 		(	shutdown_requested(Control, RunId) ->
 			wait_for_active_workers(Control, RunId)
 		;	active_worker_count(Control, RunId, Count),
-			( 	Count < Size ->
-				( 	try_server_accept(Listener, Control, RunId, Input, Output) ->
+			(	Count < Size ->
+				(	try_server_accept(Listener, Control, RunId, Input, Output) ->
 					spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
 					serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size)
 				;	wait_for_active_workers(Control, RunId)
@@ -1049,7 +1049,7 @@
 
 	wait_for_active_workers(Control, RunId) :-
 		active_worker_count(Control, RunId, Count),
-		( 	Count =:= 0 ->
+		(	Count =:= 0 ->
 			true
 		;	wait_for_one_active_worker(Control, RunId),
 			wait_for_active_workers(Control, RunId)
@@ -1073,7 +1073,7 @@
 		collect_finished_workers(Workers, Control, RunId, Error1, Error).
 
 	collect_finished_worker(Tag, Goal, Control, RunId, Error0, Error) :-
-		( 	catch(threaded_peek(Goal, Tag), _, fail) ->
+		(	catch(threaded_peek(Goal, Tag), _, fail) ->
 			unregister_active_worker(Control, RunId, worker(Tag, Goal)),
 			catch(threaded_exit(Goal, Tag), WorkerError, true),
 			remember_worker_error(Error0, WorkerError, Error)

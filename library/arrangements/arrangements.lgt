@@ -197,9 +197,9 @@
 		nth_arrangement(K, Domain, PreviousIndex, Previous).
 
 	count_arrangements_total(N, K, Count) :-
-		( 	K < 0 ->
+		(	K < 0 ->
 			Count = 0
-		; 	count_power(K, N, 1, Count)
+		;	count_power(K, N, 1, Count)
 		).
 
 	count_power(0, _, Count, Count) :-

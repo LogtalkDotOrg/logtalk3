@@ -68,12 +68,12 @@
 		^^validate_document_root(DocumentRoot),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		( 	^^supported_method(Request) ->
-			( 	resolve_directory(Path, DocumentRoot, Directory) ->
+		(	^^supported_method(Request) ->
+			(	resolve_directory(Path, DocumentRoot, Directory) ->
 				directory_response(Path, Request, Directory, Response, Options)
-			; 	not_found_response(Request, Response)
+			;	not_found_response(Request, Response)
 			)
-		; 	method_not_allowed_response(Request, Response)
+		;	method_not_allowed_response(Request, Response)
 		),
 		!.
 
@@ -115,9 +115,9 @@
 
 	resolved_document_root(DocumentRoot, Root) :-
 		os::absolute_file_name(DocumentRoot, AbsoluteDocumentRoot),
-		( 	os::directory_exists(AbsoluteDocumentRoot) ->
+		(	os::directory_exists(AbsoluteDocumentRoot) ->
 			os::path_concat(AbsoluteDocumentRoot, '', Root)
-		; 	domain_error(http_directory_listing_document_root, DocumentRoot)
+		;	domain_error(http_directory_listing_document_root, DocumentRoot)
 		).
 
 	directory_response(Path, Request, Directory, Response, Options) :-
@@ -133,9 +133,9 @@
 		!.
 	display_path(Path, DisplayPath) :-
 		strip_leading_slashes(Path, StrippedPath),
-		( 	sub_atom(StrippedPath, _, 1, 0, '/') ->
+		(	sub_atom(StrippedPath, _, 1, 0, '/') ->
 			Suffix = StrippedPath
-		; 	atom_concat(StrippedPath, '/', Suffix)
+		;	atom_concat(StrippedPath, '/', Suffix)
 		),
 		atom_concat('/', Suffix, DisplayPath).
 
@@ -159,11 +159,11 @@
 		request_sort_order(Request, DefaultSortOrder, SortOrder).
 
 	request_sort_by(Request, Columns, DefaultSortBy, SortBy) :-
-		( 	request_query_pairs(Request, Pairs),
+		(	request_query_pairs(Request, Pairs),
 			query_option_atom(Pairs, sort, SortBy0),
 			member(SortBy0, Columns) ->
 			SortBy = SortBy0
-		; 	SortBy = DefaultSortBy
+		;	SortBy = DefaultSortBy
 		).
 
 	visible_sort_by(SortBy, Columns, SortBy) :-
@@ -172,12 +172,12 @@
 	visible_sort_by(_SortBy, _Columns, name).
 
 	request_sort_order(Request, DefaultSortOrder, SortOrder) :-
-		( 	request_query_pairs(Request, Pairs),
+		(	request_query_pairs(Request, Pairs),
 			query_option_atom(Pairs, order, SortOrderAtom),
 			valid_sort_order_value(SortOrderAtom) ->
 			SortOrder0 = SortOrderAtom,
 			SortOrder = SortOrder0
-		; 	SortOrder = DefaultSortOrder
+		;	SortOrder = DefaultSortOrder
 		).
 
 	request_query_pairs(Request, Pairs) :-
@@ -195,11 +195,11 @@
 
 	query_pair_texts([], []).
 	query_pair_texts([PairText| PairTexts], Pairs) :-
-		( 	PairText == '' ->
+		(	PairText == '' ->
 			Pairs = RestPairs
-		; 	query_pair_text(PairText, Pair) ->
+		;	query_pair_text(PairText, Pair) ->
 			Pairs = [Pair| RestPairs]
-		; 	Pairs = RestPairs
+		;	Pairs = RestPairs
 		),
 		query_pair_texts(PairTexts, RestPairs).
 
@@ -207,11 +207,11 @@
 		atom::split(PairText, '=', Parts),
 		Parts = [Name| ValueParts],
 		Name \== '',
-		( 	ValueParts == [] ->
+		(	ValueParts == [] ->
 			Value = ''
-		; 	ValueParts = [Value] ->
+		;	ValueParts = [Value] ->
 			true
-		; 	atomic_list_concat(ValueParts, '=', Value)
+		;	atomic_list_concat(ValueParts, '=', Value)
 		).
 
 	query_option_atom(Pairs, Name, Atom) :-
@@ -273,7 +273,7 @@
 		entry_terms(Names, Directory, Entries).
 
 	entry_term(Name, EntryPath, entry(Name, Href, Label, EntryKind, TypeKey, TypeSimpleDisplay, TypeMediaDisplay, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)) :-
-		( 	os::directory_exists(EntryPath) ->
+		(	os::directory_exists(EntryPath) ->
 			atom_concat(Name, '/', Href),
 			Label = Href,
 			EntryKind = directory,
@@ -284,7 +284,7 @@
 			SizeDisplay = '-',
 			ModifiedValue = -1,
 			ModifiedDisplay = '-'
-		; 	Href = Name,
+		;	Href = Name,
 			Label = Name,
 			EntryKind = file,
 			TypeSimpleDisplay = file,
@@ -311,9 +311,9 @@
 		atom_codes(Display, Codes).
 
 	normalize_modification_time(ModifiedTime, NormalizedTime) :-
-		( 	integer(ModifiedTime) ->
+		(	integer(ModifiedTime) ->
 			NormalizedTime = ModifiedTime
-		; 	NormalizedTime is floor(ModifiedTime)
+		;	NormalizedTime is floor(ModifiedTime)
 		).
 
 	modified_display(ModifiedTime, Display) :-
@@ -342,9 +342,9 @@
 		keyed_entries(Entries0, SortBy, KeyedEntries0),
 		sort(KeyedEntries0, KeyedEntries1),
 		keyed_entries_values(KeyedEntries1, Entries1),
-		( 	SortOrder == descending ->
+		(	SortOrder == descending ->
 			reverse(Entries1, Entries)
-		; 	Entries = Entries1
+		;	Entries = Entries1
 		).
 
 	keyed_entries([], _SortBy, []).
@@ -393,9 +393,9 @@
 		listing_table(Settings, Entries, Options, Table),
 		listing_navigation(DisplayPath, Navigation),
 		Body0 = [h1([class='listing-title'], Title), p([class='listing-path'], ['Directory: ', code(DisplayPath)])| Navigation],
-		( 	Entries == [] ->
+		(	Entries == [] ->
 			append(Body0, [Table, p('Directory is empty.')], Body)
-		; 	append(Body0, [Table], Body)
+		;	append(Body0, [Table], Body)
 		).
 
 	listing_navigation(DisplayPath, [p([class='breadcrumbs'], ['Breadcrumbs: '| Breadcrumbs])| ParentBlocks]) :-
@@ -406,9 +406,9 @@
 	path_segments(Path, Segments) :-
 		strip_leading_slashes(Path, LeadingStrippedPath),
 		strip_trailing_slash(LeadingStrippedPath, NormalizedPath),
-		( 	NormalizedPath == '' ->
+		(	NormalizedPath == '' ->
 			Segments = []
-		; 	atom::split(NormalizedPath, '/', Segments)
+		;	atom::split(NormalizedPath, '/', Segments)
 		).
 
 	breadcrumbs_content([], [code('/')]) :-

@@ -237,7 +237,7 @@
 		).
 
 	attribute_name_codes(Codes, NameCodes) :-
-		( 	split_attribute_codes(Codes, NameCodes, _ValueCodes) ->
+		(	split_attribute_codes(Codes, NameCodes, _ValueCodes) ->
 			true
 		;	NameCodes = Codes
 		).

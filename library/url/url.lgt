@@ -516,7 +516,7 @@
 		convert_to_text(_Representation_, AuthorityCodes, Authority),
 		( PathCodes == [] ->
 			Components = [authority(Authority)]
-		; 	convert_to_text(_Representation_, PathCodes, Path),
+		;	convert_to_text(_Representation_, PathCodes, Path),
 			Components = [authority(Authority), path(Path)]
 		).
 	relative_reference_main_components(MainCodes, [path(Path)]) :-
@@ -531,11 +531,11 @@
 		( QueryCodes == [] ->
 			( FragmentCodes == [] ->
 				Components = []
-			; 	Components = [fragment(Fragment)]
+			;	Components = [fragment(Fragment)]
 			)
-		; 	( FragmentCodes == [] ->
+		;	( FragmentCodes == [] ->
 				Components = [query(Query)]
-			; 	Components = [query(Query), fragment(Fragment)]
+			;	Components = [query(Query), fragment(Fragment)]
 			)
 		).
 
@@ -829,7 +829,7 @@
 		append([0'[| HostBodyCodes], [0']], HostCodes),
 		( RemainingCodes = [0':| PortDigitCodes] ->
 			PortCodes = [0':| PortDigitCodes]
-		; 	PortCodes = []
+		;	PortCodes = []
 		).
 	split_host_port_codes(Codes, HostCodes, PortCodes) :-
 		append(HostCodes, [0':| PortDigitCodes], Codes),
@@ -1309,13 +1309,13 @@
 	append_optional_query(Components0, Query, Empty, Components) :-
 		( Query == Empty ->
 			Components = Components0
-		; 	append(Components0, [query(Query)], Components)
+		;	append(Components0, [query(Query)], Components)
 		).
 
 	append_optional_fragment(Components0, Fragment, Empty, Components) :-
 		( Fragment == Empty ->
 			Components = Components0
-		; 	append(Components0, [fragment(Fragment)], Components)
+		;	append(Components0, [fragment(Fragment)], Components)
 		).
 
 	relativize_reference_path(BasePath, TargetPath, RelativePath) :-
@@ -1377,9 +1377,9 @@
 	relative_path_codes(RelativeSegments, TargetTrailingSlash, TargetPathCodes, RelativePathCodes) :-
 		RelativeSegments \== [],
 		join_segments(RelativeSegments, TargetTrailingSlash, RelativePathCodes0),
-		( 	relative_path_noscheme_codes(RelativePathCodes0) ->
+		(	relative_path_noscheme_codes(RelativePathCodes0) ->
 			RelativePathCodes = RelativePathCodes0
-		; 	TargetPathCodes = [0'/|_],
+		;	TargetPathCodes = [0'/|_],
 			RelativePathCodes = TargetPathCodes
 		),
 		!.
@@ -1483,7 +1483,7 @@
 	component_value_or_default(Name, Components, Default, Value) :-
 		(	component_value(Name, Components, Value) ->
 			true
-		; 	Value = Default
+		;	Value = Default
 		).
 
 	:- private(downcase_text/2).

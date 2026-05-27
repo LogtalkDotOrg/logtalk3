@@ -118,7 +118,7 @@
 
 	read_response_for_request(Input, Request, Response) :-
 		http::method(Request, Method),
-		( 	Method == head ->
+		(	Method == head ->
 			read_head_response(Input, Response)
 		;	read_response(Input, Response)
 		).

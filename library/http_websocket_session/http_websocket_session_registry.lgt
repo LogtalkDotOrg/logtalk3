@@ -187,9 +187,9 @@
 		take_pending_messages(Registry, Session, Messages).
 
 	validate_registry_message(Message) :-
-		( 	http_websocket_messages::is_message(Message) ->
+		(	http_websocket_messages::is_message(Message) ->
 			true
-		; 	domain_error(http_websocket_session_registry_message, Message)
+		;	domain_error(http_websocket_session_registry_message, Message)
 		).
 
 	broadcast_message([], _Registry, _Message).
@@ -199,16 +199,16 @@
 
 	broadcast_except_message([], _Registry, _ExceptSession, _Message).
 	broadcast_except_message([Session| Sessions], Registry, ExceptSession, Message) :-
-		( 	Session == ExceptSession ->
+		(	Session == ExceptSession ->
 			true
-		; 	queue_session_message(Registry, Session, Message)
+		;	queue_session_message(Registry, Session, Message)
 		),
 		broadcast_except_message(Sessions, Registry, ExceptSession, Message).
 
 	allocate_registry_id(RegistryId) :-
-		( 	retract(registry_seed_(CurrentRegistryId)) ->
+		(	retract(registry_seed_(CurrentRegistryId)) ->
 			RegistryId is CurrentRegistryId + 1
-		; 	RegistryId = 1
+		;	RegistryId = 1
 		),
 		assertz(registry_seed_(RegistryId)).
 
@@ -220,31 +220,31 @@
 		nonvar(Registry),
 		Registry = session_registry(RegistryId),
 		!,
-		( 	retract(registry_state_(RegistryId, _NextSessionId)) ->
+		(	retract(registry_state_(RegistryId, _NextSessionId)) ->
 			retractall(registry_session_(RegistryId, _SessionId, _Messages)),
 			true
-		; 	existence_error(http_websocket_session_registry, session_registry(RegistryId))
+		;	existence_error(http_websocket_session_registry, session_registry(RegistryId))
 		).
 	close_registry(Registry) :-
-		( 	var(Registry) ->
+		(	var(Registry) ->
 			instantiation_error
-		; 	domain_error(http_websocket_session_registry, Registry)
+		;	domain_error(http_websocket_session_registry, Registry)
 		).
 
 	register_session(Registry, websocket_session(RegistryId, SessionId)) :-
 		nonvar(Registry),
 		Registry = session_registry(RegistryId),
 		!,
-		( 	retract(registry_state_(RegistryId, CurrentSessionId)) ->
+		(	retract(registry_state_(RegistryId, CurrentSessionId)) ->
 			SessionId is CurrentSessionId + 1,
 			assertz(registry_state_(RegistryId, SessionId)),
 			assertz(registry_session_(RegistryId, SessionId, []))
-		; 	existence_error(http_websocket_session_registry, session_registry(RegistryId))
+		;	existence_error(http_websocket_session_registry, session_registry(RegistryId))
 		).
 	register_session(Registry, _Session) :-
-		( 	var(Registry) ->
+		(	var(Registry) ->
 			instantiation_error
-		; 	domain_error(http_websocket_session_registry, Registry)
+		;	domain_error(http_websocket_session_registry, Registry)
 		).
 
 	unregister_session(Registry, Session) :-
@@ -253,16 +253,16 @@
 		Registry = session_registry(RegistryId),
 		Session = websocket_session(RegistryId, SessionId),
 		!,
-		( 	retract(registry_session_(RegistryId, SessionId, _Messages)) ->
+		(	retract(registry_session_(RegistryId, SessionId, _Messages)) ->
 			true
-		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
+		;	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
 	unregister_session(Registry, Session) :-
-		( 	var(Registry) ->
+		(	var(Registry) ->
 			instantiation_error
-		; 	var(Session) ->
+		;	var(Session) ->
 			instantiation_error
-		; 	domain_error(http_websocket_session_registry_session, Session)
+		;	domain_error(http_websocket_session_registry_session, Session)
 		).
 
 	queue_session_message(Registry, Session, Message) :-
@@ -271,16 +271,16 @@
 		Registry = session_registry(RegistryId),
 		Session = websocket_session(RegistryId, SessionId),
 		!,
-		( 	retract(registry_session_(RegistryId, SessionId, Messages0)) ->
+		(	retract(registry_session_(RegistryId, SessionId, Messages0)) ->
 			assertz(registry_session_(RegistryId, SessionId, [Message| Messages0]))
-		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
+		;	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
 	queue_session_message(Registry, Session, _Message) :-
-		( 	var(Registry) ->
+		(	var(Registry) ->
 			instantiation_error
-		; 	var(Session) ->
+		;	var(Session) ->
 			instantiation_error
-		; 	domain_error(http_websocket_session_registry_session, Session)
+		;	domain_error(http_websocket_session_registry_session, Session)
 		).
 
 	take_pending_messages(Registry, Session, Messages) :-
@@ -289,31 +289,31 @@
 		Registry = session_registry(RegistryId),
 		Session = websocket_session(RegistryId, SessionId),
 		!,
-		( 	retract(registry_session_(RegistryId, SessionId, Messages0)) ->
+		(	retract(registry_session_(RegistryId, SessionId, Messages0)) ->
 			reverse(Messages0, Messages),
 			assertz(registry_session_(RegistryId, SessionId, []))
-		; 	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
+		;	existence_error(http_websocket_session_registry_session, websocket_session(RegistryId, SessionId))
 		).
 	take_pending_messages(Registry, Session, _Messages) :-
-		( 	var(Registry) ->
+		(	var(Registry) ->
 			instantiation_error
-		; 	var(Session) ->
+		;	var(Session) ->
 			instantiation_error
-		; 	domain_error(http_websocket_session_registry_session, Session)
+		;	domain_error(http_websocket_session_registry_session, Session)
 		).
 
 	current_sessions(Registry, Sessions) :-
 		nonvar(Registry),
 		Registry = session_registry(RegistryId),
 		!,
-		( 	registry_state_(RegistryId, _NextSessionId) ->
+		(	registry_state_(RegistryId, _NextSessionId) ->
 			findall(websocket_session(RegistryId, SessionId), registry_session_(RegistryId, SessionId, _Messages), Sessions)
-		; 	existence_error(http_websocket_session_registry, session_registry(RegistryId))
+		;	existence_error(http_websocket_session_registry, session_registry(RegistryId))
 		).
 	current_sessions(Registry, _Sessions) :-
-		( 	var(Registry) ->
+		(	var(Registry) ->
 			instantiation_error
-		; 	domain_error(http_websocket_session_registry, Registry)
+		;	domain_error(http_websocket_session_registry, Registry)
 		).
 
 :- end_object.

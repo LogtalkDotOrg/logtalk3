@@ -62,9 +62,12 @@ route-specific metadata using:
 When defined, ``Metadata`` must be a list of compound terms. The router
 removes any existing request properties with the same functors, prepends
 the metadata to the matched request, and then adds the standard
-``route/1`` and ``path_params/1`` annotations. This keeps route metadata
-available to both route handlers and response middleware and allows
-metadata descriptors such as ``summary/1``, ``description/1``,
+``route/1`` and ``path_params/1`` annotations. On the normal routing
+path it also scrubs stale internal synthetic properties such as
+``open_api_probe/1``, ``automatic_options/1``, and
+``effective_methods/1`` before calling the handler. This keeps route
+metadata available to both route handlers and response middleware and
+allows metadata descriptors such as ``summary/1``, ``description/1``,
 ``tags/1``, or other application-specific terms.
 
 When a router object also implements the ``open_api_provider_protocol``
@@ -129,6 +132,11 @@ list, annotates the matched request with
 ``response_media_type(MediaType)``, and returns a generic
 ``406 Not Acceptable`` response when no produced media type matches.
 
+On the normal routing path, any stale incoming ``response_media_type/1``
+annotation is scrubbed before route dispatch and replaced only when the
+matched route successfully negotiates one of its declared
+``route_produces/2`` media types.
+
 Importing router objects can also optionally define ordered middleware
 descriptors using:
 
@@ -180,7 +188,9 @@ before response middleware runs. When multiple non-``options`` routes
 match the same path, the synthetic request omits ``route/1``, keeps
 ``path_params/1`` only when all matches produce the same value, and
 preserves only metadata properties that are identical across all matched
-routes.
+routes. The same normal routing path also scrubs stale
+``response_media_type/1`` annotations so only fresh negotiation results
+reach route handlers.
 
 Importing router objects can optionally customize error handling by
 defining:

@@ -567,25 +567,25 @@
 
 	raw_websocket_key_server_once(Listener) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
-		( 	catch(
-				( 	http_server::read_request(Input, Request),
+		(	catch(
+				(	http_server::read_request(Input, Request),
 					websocket_key_response_atom(Request, ResponseAtom),
 					atom_codes(ResponseAtom, Bytes),
 					write_bytes(Bytes, Output),
 					flush_output(Output)
 				),
 				Error,
-				( 	catch(socket::close(Input, Output), _, true),
+				(	catch(socket::close(Input, Output), _, true),
 					throw(Error)
 				)
 			) ->
 			socket::close(Input, Output)
-		; 	socket::close(Input, Output),
+		;	socket::close(Input, Output),
 			fail
 		).
 
 	websocket_key_response_atom(Request, ResponseAtom) :-
-		( 	request_has_uuid_v4_websocket_key(Request, Accept) ->
+		(	request_has_uuid_v4_websocket_key(Request, Accept) ->
 			atomic_list_concat([
 				'HTTP/1.1 101 Switching Protocols\r\n',
 				'connection: Upgrade\r\n',
@@ -593,7 +593,7 @@
 				'sec-websocket-accept: ', Accept, '\r\n',
 				'content-length: 0\r\n\r\n'
 			], ResponseAtom)
-		; 	ResponseAtom = 'HTTP/1.1 400 Bad Request\r\ncontent-length: 0\r\n\r\n'
+		;	ResponseAtom = 'HTTP/1.1 400 Bad Request\r\ncontent-length: 0\r\n\r\n'
 		).
 
 	request_has_uuid_v4_websocket_key(Request, Accept) :-

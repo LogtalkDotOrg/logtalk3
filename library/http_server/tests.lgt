@@ -623,30 +623,30 @@
 	serve_websocket_request(Request, InputFile, OutputFile, Handler, Outcome, WireResponse) :-
 		write_file_atom(InputFile, Request),
 		open(InputFile, read, Input, [type(binary)]),
-		( 	catch(
+		(	catch(
 				serve_websocket_request_(Input, OutputFile, Handler, Outcome),
 				Error,
-				( 	close_stream(Input),
+				(	close_stream(Input),
 					throw(Error)
 				)
 			) ->
 			close_stream(Input)
-		; 	close_stream(Input),
+		;	close_stream(Input),
 			fail
 		),
 		parse_response(file(OutputFile), WireResponse).
 
 	serve_websocket_request_(Input, OutputFile, Handler, Outcome) :-
 		open(OutputFile, write, Output, [type(binary)]),
-		( 	catch(
+		(	catch(
 				http_server::serve_websocket(Input, Output, Handler, Outcome),
 				Error,
-				( 	close_stream(Output),
+				(	close_stream(Output),
 					throw(Error)
 				)
 			) ->
 			close_stream(Output)
-		; 	close_stream(Output),
+		;	close_stream(Output),
 			fail
 		).
 

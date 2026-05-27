@@ -502,7 +502,7 @@
 			path_error(Path, option_not_allowed(Name), Error),
 			Errors = [Error| RestErrors],
 			validate_options(Options, Path, Allowed, BBoxLength, Seen, RestErrors)
-		; 	member(Name, Seen) ->
+		;	member(Name, Seen) ->
 			path_error(Path, duplicate_option(Name), Error),
 			Errors = [Error| RestErrors],
 			validate_options(Options, Path, Allowed, BBoxLength, Seen, RestErrors)

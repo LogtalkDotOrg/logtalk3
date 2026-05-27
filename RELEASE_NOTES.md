@@ -33,7 +33,8 @@ accept relative reference arguments.
 
 * ADDED: New `http`, `http_client`, `http_cookies`, `http_multipart`,
 `http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
-`http_websocket_messages`, `http_websocket_session`, and `open_api` libraries.
+`http_websocket_messages`, `http_websocket_session`, `http_directory_listing`,
+`http_static_files`, `open_api`, and `rest` libraries.
 
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
 `relativize/3`, and `resolve/3` predicates.
@@ -74,6 +75,9 @@ and HTMX libraries.
 
 * ADDED: New `http_open_api` example illustrating the use of the new HTTP and
 OpenAPI libraries.
+
+* ADDED: New `http_rest_greetings` and `http_rest_open_meteo` examples
+illustrating the use of the new HTTP and REST libraries.
 
 * ADDED: New `http_websocket_echo` example illustrating the use of the new
 HTTP and WebSocket libraries.

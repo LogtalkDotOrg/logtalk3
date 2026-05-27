@@ -30,38 +30,17 @@
 	]).
 
 	:- uses(list, [
+		append/3,
+		member/2,
 		memberchk/2
 	]).
 
 	:- uses(http, [
-		request/7,
-		response/6,
-		is_request/1,
-		is_response/1,
-		parse_request/2,
-		generate_request/2,
-		parse_response/2,
-		generate_response/2,
-		generate_response_headers/2,
-		parse_request_line/2,
-		generate_request_line/2,
-		parse_status_line/2,
-		generate_status_line/2,
-		parse_headers/2,
-		generate_headers/2,
-		parse_body/4,
-		generate_body/3,
-		encode_body/4,
-		decode_body/4,
-		websocket_accept/2,
-		method/2,
-		target/2,
-		version/2,
-		status/2,
-		headers/2,
-		header/3,
-		body/2,
-		property/2
+		request/7, response/6, is_request/1, is_response/1, parse_request/2, generate_request/2,
+		parse_response/2, generate_response/2, generate_response_headers/2, parse_request_line/2,
+		generate_request_line/2, parse_status_line/2, generate_status_line/2, parse_headers/2,
+		generate_headers/2, parse_body/4, generate_body/3, encode_body/4, decode_body/4, websocket_accept/2,
+		method/2, target/2, version/2, status/2, headers/2, header/3, body/2, property/2
 	]).
 
 	cover(http).
@@ -175,7 +154,6 @@
 			Headers
 		).
 
-
 	test(http_parse_headers_2_02, deterministic(Headers == [
 		upgrade-[websocket],
 		connection-[upgrade],
@@ -251,8 +229,17 @@
 		Part = part(Headers, content('text/plain', text(hello)), Properties),
 		memberchk(content_type-media_type('text/plain', []), Headers),
 		memberchk(content_type('text/plain', []), Properties),
-		memberchk(content_length(5), Properties),
+		\+ member(content_length(_), Properties),
 		memberchk(decoded_body(true), Properties).
+
+	test(http_parse_body_4_04, deterministic(UnitCodes == [176,67])) :-
+		parse_body(
+			bytes([123, 34, 117, 34, 58, 34, 194, 176, 67, 34, 125]),
+			'application/json',
+			[],
+			content('application/json', json({u-Unit}))
+		),
+		atom_codes(Unit, UnitCodes).
 
 	test(http_generate_body_3_01, deterministic(BodyAtom == '{"name":"Alice"}')) :-
 		generate_body(atom(BodyAtom), content('application/json', json({name-'Alice'})), []).
@@ -296,6 +283,16 @@
 		body(Request, content('text/plain', text('Wikipedia'))),
 		property(Request, transfer_encoding([chunked])),
 		property(Request, trailers([etag-'abc'])).
+
+	test(http_parse_request_2_03, deterministic) :-
+		atom_codes('POST /cities HTTP/1.1\r\nhost: example.com\r\ncontent-type: application/json\r\ncontent-length: 17\r\n\r\n', HeaderBytes),
+		unicode_escaped_json_body_bytes(BodyBytes),
+		append(HeaderBytes, BodyBytes, Message),
+		parse_request(bytes(Message), Request),
+		body(Request, content('application/json', json({city-City}))),
+		atom_codes(City, [225]),
+		property(Request, content_length(17)),
+		property(Request, decoded_body(true)).
 
 	test(http_generate_request_2_01, deterministic(Message == 'POST /users HTTP/1.1\r\ncontent-length: 16\r\ncontent-type: application/json\r\nhost: example.com\r\n\r\n{"name":"Alice"}')) :-
 		Request = request(post, origin('/users'), http(1, 1), [host-host('example.com')], content('application/json', json({name-'Alice'})), []),
@@ -364,6 +361,16 @@
 		header(Response, sec_websocket_version, 13),
 		header(Response, sec_websocket_version, [8, 7]),
 		property(Response, websocket_version([13, 8, 7])).
+
+	test(http_parse_response_2_03, deterministic) :-
+		atom_codes('HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ncontent-length: 17\r\n\r\n', HeaderBytes),
+		unicode_escaped_json_body_bytes(BodyBytes),
+		append(HeaderBytes, BodyBytes, Message),
+		parse_response(bytes(Message), Response),
+		body(Response, content('application/json', json({city-City}))),
+		atom_codes(City, [225]),
+		property(Response, content_length(17)),
+		property(Response, decoded_body(true)).
 
 	test(http_generate_response_headers_2_01, deterministic(Message == 'HTTP/1.1 206 Partial Content\r\ncontent-length: 3\r\ncontent-type: application/octet-stream\r\n\r\n')) :-
 		write_file_atom('test_http_response_body.tmp', 'abcde'),
@@ -463,5 +470,7 @@
 	write_bytes([Byte| Bytes], Output) :-
 		put_byte(Output, Byte),
 		write_bytes(Bytes, Output).
+
+	unicode_escaped_json_body_bytes([123, 34, 99, 105, 116, 121, 34, 58, 34, 92, 117, 48, 48, 101, 49, 34, 125]).
 
 :- end_object.

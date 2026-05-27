@@ -48,12 +48,12 @@
 		).
 
 	next_visit_count(Request, VisitCount) :-
-		( 	http::property(Request, cookies(Pairs)),
+		(	http::property(Request, cookies(Pairs)),
 			memberchk(visits-CurrentText, Pairs),
 			atom_codes(CurrentText, CurrentTextCodes),
 			catch(number_codes(CurrentCount, CurrentTextCodes), _, fail) ->
 			VisitCount is CurrentCount + 1
-		; 	VisitCount = 1
+		;	VisitCount = 1
 		).
 
 :- end_object.
@@ -76,9 +76,9 @@
 	handle(Request, Response) :-
 		http::version(Request, Version),
 		http::target(Request, Target),
-		( 	request_info_target_(Target) ->
+		(	request_info_target_(Target) ->
 			request_info_response_(Request, Version, Response)
-		; 	echo_response_(Request, Version, Response)
+		;	echo_response_(Request, Version, Response)
 		).
 
 	request_info_target_(origin('/request-info')).
@@ -97,10 +97,10 @@
 
 	echo_response_(Request, Version, Response) :-
 		http::body(Request, Body),
-		( 	Body == empty ->
+		(	Body == empty ->
 			http::method(Request, Method),
 			ResponseBody = content('text/plain', text(Method))
-		; 	ResponseBody = Body
+		;	ResponseBody = Body
 		),
 		http::response(Version, status(200, 'OK'), [], ResponseBody, [], Response).
 

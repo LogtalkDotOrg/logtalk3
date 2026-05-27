@@ -221,6 +221,7 @@ directory in the ``NOTES.md`` file.
    regression_protocols
    regression_tree
    regularized_bradley_terry_ranker
+   rest
    ridge_regression
    schulze_ranker
    sequential_pattern_mining_protocols

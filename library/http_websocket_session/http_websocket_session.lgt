@@ -253,9 +253,9 @@
 		catch(validate_state(State, _Pending, _Close), _, fail).
 
 	read_message(Stream, State0, State, Message) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	validate_role,
+		;	validate_role,
 			validate_state(State0, Pending0, Close0),
 			read_message_state(Stream, Pending0, Close0, none, Pending, Close, Message),
 			output_state(Pending, Close, State)
@@ -265,11 +265,11 @@
 		read_message(Input, Output, State0, State, Message, []).
 
 	read_message(Input, Output, State0, State, Message, Options) :-
-		( 	var(Input) ->
+		(	var(Input) ->
 			instantiation_error
-		; 	var(Output) ->
+		;	var(Output) ->
 			instantiation_error
-		; 	validate_role,
+		;	validate_role,
 			parse_read_options(Options, AutoPong, MaxPayloadLength),
 			validate_state(State0, Pending0, Close0),
 			read_message_state(Input, Pending0, Close0, MaxPayloadLength, Pending1, Close1, Message),
@@ -281,9 +281,9 @@
 		write_message(Stream, Message, []).
 
 	write_message(Stream, Message, Options) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	validate_role,
+		;	validate_role,
 			write_message_state(Stream, idle, open, Message, Options, _Pending, _Close)
 		).
 
@@ -291,9 +291,9 @@
 		write_message(Stream, State0, State, Message, []).
 
 	write_message(Stream, State0, State, Message, Options) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	validate_role,
+		;	validate_role,
 			validate_state(State0, Pending0, Close0),
 			write_message_state(Stream, Pending0, Close0, Message, Options, Pending, Close),
 			output_state(Pending, Close, State)
@@ -350,12 +350,12 @@
 	registry_poll_interval(0.05).
 
 	ensure_timed_session_support(PollInterval, KeepaliveInterval, IdleTimeout) :-
-		( 	timed_session_loop_needed(PollInterval, KeepaliveInterval, IdleTimeout) ->
-			( 	timed_session_loop_supported ->
+		(	timed_session_loop_needed(PollInterval, KeepaliveInterval, IdleTimeout) ->
+			(	timed_session_loop_supported ->
 				true
-			; 	throw(not_available(http_websocket_session_timing))
+			;	throw(not_available(http_websocket_session_timing))
 			)
-		; 	true
+		;	true
 		).
 
 	timed_session_loop_needed(PollInterval, _KeepaliveInterval, _IdleTimeout) :-
@@ -417,26 +417,26 @@
 		domain_error(Domain, Option).
 
 	validate_role :-
-		( 	_Role_ == client ->
+		(	_Role_ == client ->
 			true
-		; 	_Role_ == server ->
+		;	_Role_ == server ->
 			true
-		; 	domain_error(http_websocket_session_role, _Role_)
+		;	domain_error(http_websocket_session_role, _Role_)
 		).
 
 	validate_state(State0, Pending, Close) :-
-		( 	var(State0) ->
+		(	var(State0) ->
 			instantiation_error
-		; 	State0 == session_state(idle) ->
+		;	State0 == session_state(idle) ->
 			Pending = idle,
 			Close = open
-		; 	State0 = session_state(Pending0) ->
+		;	State0 = session_state(Pending0) ->
 			validate_pending_state(Pending0, Pending),
 			Close = open
-		; 	State0 = session_state(Pending0, Close0) ->
+		;	State0 = session_state(Pending0, Close0) ->
 			validate_pending_state(Pending0, Pending),
 			validate_close_state(Close0, Close)
-		; 	domain_error(http_websocket_session_state, State0)
+		;	domain_error(http_websocket_session_state, State0)
 		).
 
 	validate_pending_state(idle, idle) :-
@@ -448,11 +448,11 @@
 		domain_error(http_websocket_session_state, session_state(Pending0)).
 
 	validate_pending_fragment(Type, Chunks) :-
-		( 	(Type == text; Type == binary),
+		(	(Type == text; Type == binary),
 			Chunks = [_| _],
 			valid_pending_chunks(Chunks) ->
 			true
-		; 	domain_error(http_websocket_session_state, session_state(fragment(Type, Chunks)))
+		;	domain_error(http_websocket_session_state, session_state(fragment(Type, Chunks)))
 		).
 
 	validate_close_state(open, open) :-
@@ -471,17 +471,17 @@
 		domain_error(http_websocket_session_state, session_state(idle, CloseState)).
 
 	validate_session_handler(Handler) :-
-		( 	var(Handler) ->
+		(	var(Handler) ->
 			instantiation_error
-		; 	conforms_to_protocol(Handler, http_websocket_session_handler_protocol) ->
+		;	conforms_to_protocol(Handler, http_websocket_session_handler_protocol) ->
 			true
-		; 	domain_error(http_websocket_session_handler, Handler)
+		;	domain_error(http_websocket_session_handler, Handler)
 		).
 
 	normalize_close_state_payload(Payload0, Payload) :-
-		( 	catch(^^encode_message(message(close, Payload0), message(close, Payload), _Opcode, _PayloadBytes), _, fail) ->
+		(	catch(^^encode_message(message(close, Payload0), message(close, Payload), _Opcode, _PayloadBytes), _, fail) ->
 			true
-		; 	domain_error(http_websocket_session_state, session_state(idle, Payload0))
+		;	domain_error(http_websocket_session_state, session_state(idle, Payload0))
 		).
 
 	output_state(Pending, open, session_state(Pending)) :-
@@ -491,15 +491,15 @@
 	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers0, State0, Reader0, Reader, State) :-
 		flush_pending_session_messages(HandlerMode, Output, State0, State1),
 		preserve_loop_timers(State1, Timers0, Timers1),
-		( 	close_handshake_completed(State1) ->
+		(	close_handshake_completed(State1) ->
 			Reader = Reader0,
 			State = State1
-		; 	ready_session_event(Reader0, Event, Reader1) ->
+		;	ready_session_event(Reader0, Event, Reader1) ->
 			continue_after_session_event(Event, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State1, Timers1, Reader1, Reader, State)
-		; 	pending_loop_timeout_action(Timers1) ->
+		;	pending_loop_timeout_action(Timers1) ->
 			handle_session_timeout(Output, KeepaliveInterval, IdleTimeout, 0.0, State1, Timers1, State2, Timers2, Outcome),
 			continue_after_timeout(Outcome, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State2, Timers2, Reader0, Reader, State)
-		; 	next_loop_wait(Timers1, PollInterval, Wait),
+		;	next_loop_wait(Timers1, PollInterval, Wait),
 			read_session_event(Input, State1, Wait, MaxPayloadLength, Reader0, Event, Reader1),
 			continue_after_session_event(Event, Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State1, Timers1, Reader1, Reader, State)
 		).
@@ -511,9 +511,9 @@
 	read_session_event(Input, State0, blocking, MaxPayloadLength, _Reader0, Event, none) :-
 		!,
 		catch(read_session_message(Input, State0, MaxPayloadLength, Pending, Message), Error, Event = error(Error)),
-		( 	var(Event) ->
+		(	var(Event) ->
 			Event = read(Pending, Message)
-		; 	true
+		;	true
 		).
 	read_session_event(Input, State0, timed(Wait), MaxPayloadLength, Reader0, Event, Reader) :-
 		ensure_session_reader(Input, State0, MaxPayloadLength, Reader0, Reader1),
@@ -536,9 +536,9 @@
 
 	session_reader_poll_delay(Remaining, Delay) :-
 		session_reader_poll_interval(PollInterval),
-		( 	Remaining =< PollInterval ->
+		(	Remaining =< PollInterval ->
 			Delay = Remaining
-		; 	Delay = PollInterval
+		;	Delay = PollInterval
 		).
 
 	session_reader_poll_interval(0.01).
@@ -549,17 +549,17 @@
 	continue_after_session_event(read(Pending, Message), Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State0, _Timers0, _Reader0, Reader, State) :-
 		apply_session_read(Output, State0, AutoPong, Pending, Message, State1),
 		reset_loop_timers(KeepaliveInterval, IdleTimeout, State1, Timers1),
-		( 	close_handshake_completed(State1) ->
+		(	close_handshake_completed(State1) ->
 			Reader = none,
 			State = State1
-		; 	handler_actions(HandlerMode, Message, Replies, RegistryActions),
+		;	handler_actions(HandlerMode, Message, Replies, RegistryActions),
 			apply_registry_actions(HandlerMode, RegistryActions),
 			write_reply_messages(Output, State1, Replies, State2),
 			preserve_loop_timers(State2, Timers1, Timers2),
-			( 	close_handshake_completed(State2) ->
+			(	close_handshake_completed(State2) ->
 				Reader = none,
 				State = State2
-			; 	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers2, State2, none, Reader, State)
+			;	run_session_loop(Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, Timers2, State2, none, Reader, State)
 			)
 		).
 	continue_after_session_event(timeout(Wait), Input, Output, HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength, State0, Timers0, Reader0, Reader, State) :-
@@ -620,12 +620,12 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 	collect_session_reader_event(reader(Goal, Tag), Event) :-
-		( 	catch(threaded_exit(Goal, Tag), Error, Outcome = error(Error)) ->
-			( 	var(Outcome) ->
+		(	catch(threaded_exit(Goal, Tag), Error, Outcome = error(Error)) ->
+			(	var(Outcome) ->
 				reader_goal_event(Goal, Event)
-			; 	Event = Outcome
+			;	Event = Outcome
 			)
-		; 	Event = fail
+		;	Event = fail
 		).
 	:- else.
 	collect_session_reader_event(_Reader, _Event) :-
@@ -672,21 +672,21 @@
 		validate_registry_handler_actions(Actions0, Replies, Actions).
 
 	validate_registry_handler_actions(Actions0, Replies, Actions) :-
-		( 	var(Actions0) ->
+		(	var(Actions0) ->
 			instantiation_error
-		; 	proper_list(Actions0) ->
+		;	proper_list(Actions0) ->
 			validate_registry_handler_action_list(Actions0, Replies, Actions)
-		; 	type_error(list, Actions0)
+		;	type_error(list, Actions0)
 		).
 
 	validate_registry_handler_action_list([], [], []).
 	validate_registry_handler_action_list([Action| Actions0], Replies, Actions) :-
 		validate_registry_handler_action(Action, Normalized, Kind),
 		validate_registry_handler_action_list(Actions0, Replies0, Actions0b),
-		( 	Kind == reply ->
+		(	Kind == reply ->
 			Replies = [Normalized| Replies0],
 			Actions = Actions0b
-		; 	Replies = Replies0,
+		;	Replies = Replies0,
 			Actions = [Normalized| Actions0b]
 		).
 
@@ -772,9 +772,9 @@
 
 	next_loop_wait(Timers, PollInterval, Wait) :-
 		timer_wait_candidate(Timers, PollInterval, Candidate),
-		( 	Candidate == none ->
+		(	Candidate == none ->
 			Wait = blocking
-		; 	Wait = timed(Candidate)
+		;	Wait = timed(Candidate)
 		).
 
 	timer_wait_candidate(timers(KeepaliveRemaining, IdleRemaining), PollInterval, Candidate) :-
@@ -786,9 +786,9 @@
 	minimum_wait_candidate(Value, none, Value) :-
 		!.
 	minimum_wait_candidate(Value0, Value1, Value) :-
-		( 	Value0 =< Value1 ->
+		(	Value0 =< Value1 ->
 			Value = Value0
-		; 	Value = Value1
+		;	Value = Value1
 		).
 
 	decrement_loop_timers(Wait, timers(KeepaliveRemaining0, IdleRemaining0), timers(KeepaliveRemaining, IdleRemaining)) :-
@@ -802,25 +802,25 @@
 
 	handle_session_timeout(Output, KeepaliveInterval, IdleTimeout, Wait, State0, Timers0, State, Timers, Outcome) :-
 		decrement_loop_timers(Wait, Timers0, timers(KeepaliveRemaining, IdleRemaining)),
-		( 	numeric_timer_expired(IdleRemaining) ->
+		(	numeric_timer_expired(IdleRemaining) ->
 			handle_idle_timeout(Output, IdleTimeout, State0, State, Timers, Outcome)
-		; 	numeric_timer_expired(KeepaliveRemaining) ->
+		;	numeric_timer_expired(KeepaliveRemaining) ->
 			handle_keepalive_timeout(Output, KeepaliveInterval, IdleRemaining, State0, State, Timers, Outcome)
-		; 	State = State0,
+		;	State = State0,
 			Timers = timers(KeepaliveRemaining, IdleRemaining),
 			Outcome = continue
 		).
 
 	handle_keepalive_timeout(Output, KeepaliveInterval, IdleRemaining, State0, State, timers(KeepaliveRemaining, IdleRemaining1), continue) :-
 		current_close_state(State0, Close),
-		( 	Close == open,
+		(	Close == open,
 			KeepaliveInterval \== none ->
 			write_message(Output, State0, State1, message(ping, [])),
 			current_close_state(State1, Close1),
 			reset_keepalive_timer(Close1, KeepaliveInterval, KeepaliveRemaining),
 			preserve_idle_timer(Close1, IdleRemaining, IdleRemaining1),
 			State = State1
-		; 	State = State0,
+		;	State = State0,
 			KeepaliveRemaining = none,
 			IdleRemaining1 = IdleRemaining
 		).
@@ -833,9 +833,9 @@
 		write_message(Output, State0, State1, message(close, status(1001, idle_timeout))),
 		reset_loop_timers(none, IdleTimeout, State1, timers(_KeepaliveRemaining, IdleRemaining)),
 		State = State1,
-		( 	close_handshake_completed(State1) ->
+		(	close_handshake_completed(State1) ->
 			Outcome = stop
-		; 	Outcome = continue
+		;	Outcome = continue
 		).
 	handle_idle_timeout_state(close_sent(_Payload), _Output, _IdleTimeout, State, State, timers(none, none), stop).
 	handle_idle_timeout_state(close_received(_Payload), _Output, _IdleTimeout, State, State, timers(none, none), stop).
@@ -846,12 +846,12 @@
 		validate_handler_replies(Replies0, Replies).
 
 	validate_handler_replies(Replies0, Replies) :-
-		( 	var(Replies0) ->
+		(	var(Replies0) ->
 			instantiation_error
-		; 	proper_list(Replies0) ->
+		;	proper_list(Replies0) ->
 			validate_handler_reply_list(Replies0),
 			Replies = Replies0
-		; 	type_error(list, Replies0)
+		;	type_error(list, Replies0)
 		).
 
 	validate_handler_reply_list([]).
@@ -860,9 +860,9 @@
 		validate_handler_reply_list(Replies).
 
 	validate_handler_reply(Reply) :-
-		( 	catch(^^encode_message(Reply, _Message, _Opcode, _PayloadBytes), _, fail) ->
+		(	catch(^^encode_message(Reply, _Message, _Opcode, _PayloadBytes), _, fail) ->
 			true
-		; 	domain_error(http_websocket_session_handler_reply, Reply)
+		;	domain_error(http_websocket_session_handler_reply, Reply)
 		).
 
 	write_reply_messages(_Output, State, [], State) :-
@@ -997,22 +997,22 @@
 		validate_incoming_frame_masking(Frame).
 
 	validate_incoming_frame_extensions(Frame) :-
-		( 	\+ http_websocket::property(Frame, reserved_bits(_Bits)) ->
+		(	\+ http_websocket::property(Frame, reserved_bits(_Bits)) ->
 			true
-		; 	domain_error(http_websocket_session_extensions, Frame)
+		;	domain_error(http_websocket_session_extensions, Frame)
 		).
 
 	validate_incoming_frame_masking(Frame) :-
 		_Role_ == client,
 		!,
-		( 	\+ http_websocket::property(Frame, masking_key(_)) ->
+		(	\+ http_websocket::property(Frame, masking_key(_)) ->
 			true
-		; 	domain_error(http_websocket_session_masking, Frame)
+		;	domain_error(http_websocket_session_masking, Frame)
 		).
 	validate_incoming_frame_masking(Frame) :-
-		( 	http_websocket::property(Frame, masking_key(_)) ->
+		(	http_websocket::property(Frame, masking_key(_)) ->
 			true
-		; 	domain_error(http_websocket_session_masking, Frame)
+		;	domain_error(http_websocket_session_masking, Frame)
 		).
 
 	parse_read_options(Options, AutoPong, MaxPayloadLength) :-
@@ -1081,11 +1081,11 @@
 	maybe_auto_control_message(_Output, Pending, Close, _Message, _AutoPong, Pending, Close).
 
 	write_encoded_message(Stream, Opcode, PayloadBytes, FragmentSize) :-
-		( 	data_opcode(Opcode),
+		(	data_opcode(Opcode),
 			FragmentSize \== none ->
 			split_payload_bytes(PayloadBytes, FragmentSize, Chunks),
 			write_chunk_frames(Stream, Opcode, Chunks)
-		; 	write_session_frame(Stream, final, Opcode, PayloadBytes)
+		;	write_session_frame(Stream, final, Opcode, PayloadBytes)
 		).
 
 	data_opcode(text).
@@ -1115,10 +1115,10 @@
 		http_websocket::write_frame(Stream, Frame).
 
 	outgoing_frame_properties(Properties) :-
-		( 	_Role_ == client ->
+		(	_Role_ == client ->
 			::generate_masking_key(Key),
 			Properties = [masking_key(Key)]
-		; 	Properties = []
+		;	Properties = []
 		).
 
 	generate_masking_key(Key) :-
@@ -1211,7 +1211,7 @@
 		parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions),
 		http_client::open_websocket(URL, Connection, Response, WebSocketOptions),
 		::run_once_with_cleanup_(
-			( 	^^initial_state(State0),
+			(	^^initial_state(State0),
 				write_initial_messages(Connection, State0, State1, InitialMessages),
 				^^run_session_connection(Connection, handler_replies(Handler), State1, State, SessionOptions)
 			),
@@ -1220,51 +1220,51 @@
 
 	parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions) :-
 		check_open_options(Options),
-		( 	member(initial_messages(InitialMessages0), Options) ->
+		(	member(initial_messages(InitialMessages0), Options) ->
 			validate_initial_messages(InitialMessages0, InitialMessages)
-		; 	InitialMessages = []
+		;	InitialMessages = []
 		),
-		( 	member(auto_pong(AutoPong0), Options) ->
+		(	member(auto_pong(AutoPong0), Options) ->
 			validate_auto_pong(AutoPong0, AutoPong)
-		; 	AutoPong = off
+		;	AutoPong = off
 		),
-		( 	member(keepalive_interval(Keepalive0), Options) ->
+		(	member(keepalive_interval(Keepalive0), Options) ->
 			validate_interval_option(keepalive_interval, Keepalive0, KeepaliveInterval)
-		; 	KeepaliveInterval = none
+		;	KeepaliveInterval = none
 		),
-		( 	member(idle_timeout(IdleTimeout0), Options) ->
+		(	member(idle_timeout(IdleTimeout0), Options) ->
 			validate_interval_option(idle_timeout, IdleTimeout0, IdleTimeout)
-		; 	IdleTimeout = none
+		;	IdleTimeout = none
 		),
-		( 	member(max_payload_length(MaxPayloadLength0), Options) ->
+		(	member(max_payload_length(MaxPayloadLength0), Options) ->
 			^^validate_non_negative_integer_option(http_websocket_client_session_option, max_payload_length, MaxPayloadLength0, MaxPayloadLength)
-		; 	MaxPayloadLength = none
+		;	MaxPayloadLength = none
 		),
 		build_session_options(AutoPong, KeepaliveInterval, IdleTimeout, MaxPayloadLength, SessionOptions),
 		filter_websocket_open_options(Options, WebSocketOptions).
 
 	check_open_options(Options) :-
-		( 	var(Options) ->
+		(	var(Options) ->
 			instantiation_error
-		; 	proper_list(Options) ->
+		;	proper_list(Options) ->
 			true
-		; 	type_error(list, Options)
+		;	type_error(list, Options)
 		).
 
 	validate_initial_messages(Messages0, Messages) :-
-		( 	var(Messages0) ->
+		(	var(Messages0) ->
 			instantiation_error
-		; 	proper_list(Messages0) ->
+		;	proper_list(Messages0) ->
 			validate_initial_message_list(Messages0),
 			Messages = Messages0
-		; 	type_error(list, Messages0)
+		;	type_error(list, Messages0)
 		).
 
 	validate_initial_message_list([]).
 	validate_initial_message_list([Message| Messages]) :-
-		( 	^^is_message(Message) ->
+		(	^^is_message(Message) ->
 			true
-		; 	domain_error(http_websocket_client_session_initial_message, Message)
+		;	domain_error(http_websocket_client_session_initial_message, Message)
 		),
 		validate_initial_message_list(Messages).
 
@@ -1459,30 +1459,30 @@
 		).
 
 	request_shutdown(Control) :-
-		( 	var(Control) ->
+		(	var(Control) ->
 			instantiation_error
-		; 	shutdown_control_(Control, _Listener, RunId) ->
+		;	shutdown_control_(Control, _Listener, RunId) ->
 			force_shutdown_control(Control, RunId)
-		; 	existence_error(http_websocket_session_shutdown_control, Control)
+		;	existence_error(http_websocket_session_shutdown_control, Control)
 		).
 
 	validate_session_registry(Registry) :-
 		http_websocket_session_registry::session_count(Registry, _Count).
 
 	register_shutdown_control(Control, Listener, RunId) :-
-		( 	var(Control) ->
+		(	var(Control) ->
 			instantiation_error
-		; 	\+ shutdown_control_(Control, _, _),
+		;	\+ shutdown_control_(Control, _, _),
 			allocate_shutdown_run_id(RunId),
 			assertz(shutdown_control_(Control, Listener, RunId)) ->
 			true
-		; 	permission_error(reuse, http_websocket_session_shutdown_control, Control)
+		;	permission_error(reuse, http_websocket_session_shutdown_control, Control)
 		).
 
 	allocate_shutdown_run_id(RunId) :-
-		( 	retract(shutdown_seed_(CurrentRunId)) ->
+		(	retract(shutdown_seed_(CurrentRunId)) ->
 			RunId is CurrentRunId + 1
-		; 	RunId = 1
+		;	RunId = 1
 		),
 		assertz(shutdown_seed_(RunId)).
 
@@ -1492,13 +1492,13 @@
 		retractall(shutdown_control_(Control, _Listener, RunId)).
 
 	force_shutdown_control(Control, RunId) :-
-		( 	shutdown_requested_(Control, RunId) ->
+		(	shutdown_requested_(Control, RunId) ->
 			true
-		; 	assertz(shutdown_requested_(Control, RunId))
+		;	assertz(shutdown_requested_(Control, RunId))
 		),
-		( 	shutdown_control_(Control, Listener, RunId) ->
+		(	shutdown_control_(Control, Listener, RunId) ->
 			catch(http_socket::close_listener(Listener), _, true)
-		; 	true
+		;	true
 		).
 
 	shutdown_requested(Control, RunId) :-
@@ -1506,27 +1506,27 @@
 
 	serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options) :-
 		check_finished_workers(Control, RunId),
-		( 	shutdown_requested(Control, RunId) ->
+		(	shutdown_requested(Control, RunId) ->
 			wait_for_active_workers(Control, RunId)
-		; 	accept_session_connection(Listener, HandshakeHandler, Control, RunId, Outcome),
-			( 	Outcome = accepted(Connection) ->
+		;	accept_session_connection(Listener, HandshakeHandler, Control, RunId, Outcome),
+			(	Outcome = accepted(Connection) ->
 				spawn_session_worker(Control, RunId, Connection, Registry, SessionHandler, Options),
 				serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options)
-			; 	Outcome == recoverable ->
+			;	Outcome == recoverable ->
 				serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options)
-			; 	wait_for_active_workers(Control, RunId)
+			;	wait_for_active_workers(Control, RunId)
 			)
 		).
 
 	accept_session_connection(Listener, HandshakeHandler, Control, RunId, Outcome) :-
 		catch(http_socket::serve_websocket_once(Listener, HandshakeHandler, Connection, _Response, _ClientInfo), Error, true),
-		( 	var(Error) ->
+		(	var(Error) ->
 			Outcome = accepted(Connection)
-		; 	shutdown_requested(Control, RunId) ->
+		;	shutdown_requested(Control, RunId) ->
 			Outcome = shutdown
-		; 	recoverable_accept_error(Error) ->
+		;	recoverable_accept_error(Error) ->
 			Outcome = recoverable
-		; 	force_shutdown_control(Control, RunId),
+		;	force_shutdown_control(Control, RunId),
 			throw(Error)
 		).
 
@@ -1538,7 +1538,7 @@
 		catch(
 			threaded_once(Goal, Tag),
 			Error,
-			( 	force_shutdown_control(Control, RunId),
+			(	force_shutdown_control(Control, RunId),
 				catch(http_socket::close_connection(Connection), _, true),
 				throw(Error)
 			)
@@ -1550,7 +1550,7 @@
 			catch(
 				serve_registered_session(Connection, Registry, SessionHandler, Options),
 				Error,
-				( 	force_shutdown_control(Control, RunId),
+				(	force_shutdown_control(Control, RunId),
 					throw(Error)
 				)
 			),
@@ -1583,25 +1583,25 @@
 
 	check_finished_workers(Control, RunId) :-
 		collect_finished_workers(Control, RunId, no_error, Error),
-		( 	Error == no_error ->
+		(	Error == no_error ->
 			true
-		; 	throw(Error)
+		;	throw(Error)
 		).
 
 	wait_for_active_workers(Control, RunId) :-
 		active_worker_count(Control, RunId, Count),
-		( 	Count =:= 0 ->
+		(	Count =:= 0 ->
 			true
-		; 	wait_for_one_active_worker(Control, RunId),
+		;	wait_for_one_active_worker(Control, RunId),
 			wait_for_active_workers(Control, RunId)
 		).
 
 	wait_for_one_active_worker(Control, RunId) :-
 		threaded_wait(websocket_session_worker_finished(Control, RunId)),
 		collect_finished_workers(Control, RunId, no_error, Error),
-		( 	Error == no_error ->
+		(	Error == no_error ->
 			true
-		; 	throw(Error)
+		;	throw(Error)
 		).
 
 	collect_finished_workers(Control, RunId, Error0, Error) :-
@@ -1614,11 +1614,11 @@
 		collect_finished_workers(Workers, Control, RunId, Error1, Error).
 
 	collect_finished_worker(Tag, Goal, Control, RunId, Error0, Error) :-
-		( 	catch(threaded_peek(Goal, Tag), _, fail) ->
+		(	catch(threaded_peek(Goal, Tag), _, fail) ->
 			unregister_active_worker(Control, RunId, worker(Tag, Goal)),
 			catch(threaded_exit(Goal, Tag), WorkerError, true),
 			remember_worker_error(Error0, WorkerError, Error)
-		; 	Error = Error0
+		;	Error = Error0
 		).
 
 	remember_worker_error(no_error, WorkerError, error(WorkerError)) :-

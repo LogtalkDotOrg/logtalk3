@@ -270,6 +270,7 @@
 <li class="toctree-l2"><a class="reference internal" href="regression_protocols.html"><code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="regression_tree.html"><code class="docutils literal notranslate"><span class="pre">regression_tree</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="regularized_bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html"><code class="docutils literal notranslate"><span class="pre">rest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">ridge_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="schulze_ranker.html"><code class="docutils literal notranslate"><span class="pre">schulze_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sequential_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code></a></li>
@@ -401,9 +402,12 @@ route-specific metadata using:</p>
 <p>When defined, <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> must be a list of compound terms. The router
 removes any existing request properties with the same functors, prepends
 the metadata to the matched request, and then adds the standard
-<code class="docutils literal notranslate"><span class="pre">route/1</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> annotations. This keeps route metadata
-available to both route handlers and response middleware and allows
-metadata descriptors such as <code class="docutils literal notranslate"><span class="pre">summary/1</span></code>, <code class="docutils literal notranslate"><span class="pre">description/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">route/1</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> annotations. On the normal routing
+path it also scrubs stale internal synthetic properties such as
+<code class="docutils literal notranslate"><span class="pre">open_api_probe/1</span></code>, <code class="docutils literal notranslate"><span class="pre">automatic_options/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">effective_methods/1</span></code> before calling the handler. This keeps route
+metadata available to both route handlers and response middleware and
+allows metadata descriptors such as <code class="docutils literal notranslate"><span class="pre">summary/1</span></code>, <code class="docutils literal notranslate"><span class="pre">description/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">tags/1</span></code>, or other application-specific terms.</p>
 <p>When a router object also implements the <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code>
 protocol, the imported category can automatically derive
@@ -464,6 +468,10 @@ atoms. The router negotiates the request <code class="docutils literal notransla
 list, annotates the matched request with
 <code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code>, and returns a generic
 <code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> response when no produced media type matches.</p>
+<p>On the normal routing path, any stale incoming <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code>
+annotation is scrubbed before route dispatch and replaced only when the
+matched route successfully negotiates one of its declared
+<code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> media types.</p>
 <p>Importing router objects can also optionally define ordered middleware
 descriptors using:</p>
 <ul class="simple">
@@ -509,7 +517,9 @@ before response middleware runs. When multiple non-<code class="docutils literal
 match the same path, the synthetic request omits <code class="docutils literal notranslate"><span class="pre">route/1</span></code>, keeps
 <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> only when all matches produce the same value, and
 preserves only metadata properties that are identical across all matched
-routes.</p>
+routes. The same normal routing path also scrubs stale
+<code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code> annotations so only fresh negotiation results
+reach route handlers.</p>
 <p>Importing router objects can optionally customize error handling by
 defining:</p>
 <ul class="simple">

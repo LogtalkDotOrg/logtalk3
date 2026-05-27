@@ -378,11 +378,11 @@
 		components_path_query(Components, Path, Query).
 
 	parse_websocket_url(URL, Host, Port, Path, Query) :-
-		( 	var(URL) ->
+		(	var(URL) ->
 			instantiation_error
-		; 	url(atom)::parse(URL, Components) ->
+		;	url(atom)::parse(URL, Components) ->
 			true
-		; 	domain_error(http_client_websocket_url, URL)
+		;	domain_error(http_client_websocket_url, URL)
 		),
 		validate_websocket_scheme(Components),
 		validate_websocket_fragment(Components, URL),
@@ -420,9 +420,9 @@
 		domain_error(http_client_websocket_scheme, Scheme).
 
 	validate_websocket_fragment(Components, URL) :-
-		( 	member(fragment(Fragment), Components), Fragment \== '' ->
+		(	member(fragment(Fragment), Components), Fragment \== '' ->
 			domain_error(http_client_websocket_url, URL)
-		; 	true
+		;	true
 		).
 
 	validate_websocket_http_version(Version) :-
@@ -432,10 +432,10 @@
 		domain_error(http_client_websocket_version, Version).
 
 	validate_websocket_headers(Headers) :-
-		( 	member(Name-_, Headers),
+		(	member(Name-_, Headers),
 			websocket_header_name(Name) ->
 			domain_error(http_client_websocket_headers, Headers)
-		; 	true
+		;	true
 		).
 
 	websocket_header_name(connection).
@@ -473,27 +473,27 @@
 		uuid_key_bytes(UUIDCodes, [Byte| KeyBytes0], KeyBytes).
 
 	hex_digit_code_value(Code, Value) :-
-		( 	0'0 =< Code, Code =< 0'9 ->
+		(	0'0 =< Code, Code =< 0'9 ->
 			Value is Code - 0'0
-		; 	0'a =< Code, Code =< 0'f ->
+		;	0'a =< Code, Code =< 0'f ->
 			Value is Code - 0'a + 10
-		; 	0'A =< Code, Code =< 0'F ->
+		;	0'A =< Code, Code =< 0'F ->
 			Value is Code - 0'A + 10
-		; 	fail
+		;	fail
 		).
 
 	validate_websocket_response(Request, Response) :-
-		( 	valid_websocket_response(Request, Response) ->
+		(	valid_websocket_response(Request, Response) ->
 			true
-		; 	valid_websocket_version_rejection(Response) ->
+		;	valid_websocket_version_rejection(Response) ->
 			domain_error(http_client_websocket_version_rejection, Response)
-		; 	valid_websocket_authentication_rejection(Response) ->
+		;	valid_websocket_authentication_rejection(Response) ->
 			domain_error(http_client_websocket_authentication_rejection, Response)
-		; 	valid_websocket_redirection_rejection(Response) ->
+		;	valid_websocket_redirection_rejection(Response) ->
 			domain_error(http_client_websocket_redirection_rejection, Response)
-		; 	valid_websocket_rejection(Response) ->
+		;	valid_websocket_rejection(Response) ->
 			domain_error(http_client_websocket_rejection, Response)
-		; 	domain_error(http_client_websocket_response, Response)
+		;	domain_error(http_client_websocket_response, Response)
 		).
 
 	valid_websocket_response(Request, Response) :-
@@ -530,62 +530,62 @@
 		http::version(Response, http(1, 1)).
 
 	validate_websocket_protocol_response(Request, Response) :-
-		( 	message_websocket_protocols(Request, RequestedProtocols) ->
-			( 	message_response_websocket_protocols(Response, [Protocol]) ->
+		(	message_websocket_protocols(Request, RequestedProtocols) ->
+			(	message_response_websocket_protocols(Response, [Protocol]) ->
 				memberchk(Protocol, RequestedProtocols)
-			; 	\+ response_websocket_protocol_present(Response)
+			;	\+ response_websocket_protocol_present(Response)
 			)
-		; 	\+ response_websocket_protocol_present(Response)
+		;	\+ response_websocket_protocol_present(Response)
 		).
 
 	message_upgrade_tokens(Message, Tokens) :-
-		( 	http::property(Message, upgrade(Tokens)) ->
+		(	http::property(Message, upgrade(Tokens)) ->
 			true
-		; 	http::header(Message, upgrade, Tokens)
+		;	http::header(Message, upgrade, Tokens)
 		),
 		!.
 
 	message_websocket_key(Message, Key) :-
-		( 	http::property(Message, websocket_key(Key)) ->
+		(	http::property(Message, websocket_key(Key)) ->
 			true
-		; 	http::header(Message, sec_websocket_key, Key)
+		;	http::header(Message, sec_websocket_key, Key)
 		),
 		!.
 
 	message_websocket_version(Message, Version) :-
-		( 	http::property(Message, websocket_version(Version)) ->
+		(	http::property(Message, websocket_version(Version)) ->
 			true
-		; 	http::header(Message, sec_websocket_version, Version)
+		;	http::header(Message, sec_websocket_version, Version)
 		),
 		!.
 
 	message_websocket_accept(Message, Accept) :-
-		( 	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
+		(	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
 			Values = [Accept]
-		; 	http::property(Message, websocket_accept(Accept)) ->
+		;	http::property(Message, websocket_accept(Accept)) ->
 			true
-		; 	http::header(Message, sec_websocket_accept, Accept)
+		;	http::header(Message, sec_websocket_accept, Accept)
 		),
 		!.
 
 	message_websocket_extensions(Message, Extensions) :-
-		( 	http::property(Message, websocket_extensions(Extensions)) ->
+		(	http::property(Message, websocket_extensions(Extensions)) ->
 			true
-		; 	http::header(Message, sec_websocket_extensions, Extensions)
+		;	http::header(Message, sec_websocket_extensions, Extensions)
 		),
 		!.
 
 	message_websocket_protocols(Message, Protocols) :-
-		( 	http::property(Message, websocket_protocol(Protocols)) ->
+		(	http::property(Message, websocket_protocol(Protocols)) ->
 			true
-		; 	http::header(Message, sec_websocket_protocol, Protocols)
+		;	http::header(Message, sec_websocket_protocol, Protocols)
 		),
 		!.
 
 	message_response_websocket_protocols(Message, Protocols) :-
-		( 	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
+		(	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
 			Values = [Protocols]
-		; 	http::property(Message, websocket_protocol(Protocols))
+		;	http::property(Message, websocket_protocol(Protocols))
 		),
 		!.
 
@@ -614,7 +614,7 @@
 		).
 
 	parse_authority_endpoint(Authority, Host, Port) :-
-		( 	atom_codes(Authority, Codes0),
+		(	atom_codes(Authority, Codes0),
 			strip_userinfo_codes(Codes0, Codes),
 			parse_authority_codes(Codes, HostCodes, Port),
 			lowercase_ascii_codes(HostCodes, NormalizedHostCodes),

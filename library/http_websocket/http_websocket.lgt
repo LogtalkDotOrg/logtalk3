@@ -133,9 +133,9 @@
 
 	valid_option(max_payload_length(MaxPayloadLength)) :-
 		nonvar(MaxPayloadLength),
-		( 	MaxPayloadLength == none ->
+		(	MaxPayloadLength == none ->
 			true
-		; 	integer(MaxPayloadLength),
+		;	integer(MaxPayloadLength),
 			MaxPayloadLength >= 0
 		).
 
@@ -148,18 +148,18 @@
 		catch(normalize_frame(Frame, _NormalizedFrame, _MaskingKey, _ReservedBits), _, fail).
 
 	parse(Source, Frame) :-
-		( 	var(Source) ->
+		(	var(Source) ->
 			instantiation_error
-		; 	Source = file(File) ->
+		;	Source = file(File) ->
 			file_to_bytes(File, Bytes),
 			parse_bytes(Bytes, Frame)
-		; 	Source = stream(Stream) ->
+		;	Source = stream(Stream) ->
 			read_frame(Stream, Frame)
-		; 	Source = bytes(Bytes) ->
+		;	Source = bytes(Bytes) ->
 			parse_bytes(Bytes, Frame)
-		; 	Source = codes(Bytes) ->
+		;	Source = codes(Bytes) ->
 			parse_bytes(Bytes, Frame)
-		; 	domain_error(http_websocket_source, Source)
+		;	domain_error(http_websocket_source, Source)
 		).
 
 	generate(Sink, Frame) :-
@@ -171,13 +171,13 @@
 		read_frame(Stream, Frame, []).
 
 	read_frame(Stream, Frame, Options) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	parse_read_frame_options(Options, MaxPayloadLength),
+		;	parse_read_frame_options(Options, MaxPayloadLength),
 			get_byte(Stream, Byte0),
-			( 	Byte0 =:= -1 ->
+			(	Byte0 =:= -1 ->
 				Frame = end_of_file
-			; 	read_required_byte(Stream, Byte1),
+			;	read_required_byte(Stream, Byte1),
 				decode_first_byte(Byte0, Final, Opcode, ReservedBits),
 				MaskFlag is (Byte1 >> 7) /\ 0x01,
 				LengthCode is Byte1 /\ 0x7F,
@@ -205,9 +205,9 @@
 		domain_error(http_websocket_payload_length_limit, PayloadLength).
 
 	write_frame(Stream, Frame) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	normalize_frame(Frame, NormalizedFrame, _MaskingKey, _ReservedBits),
+		;	normalize_frame(Frame, NormalizedFrame, _MaskingKey, _ReservedBits),
 			phrase(encode_frame(NormalizedFrame), Bytes),
 			write_bytes(Bytes, Stream),
 			flush_output(Stream)
@@ -227,15 +227,15 @@
 
 	property(Frame, Property) :-
 		normalize_frame(Frame, frame(_Final, _Opcode, _Payload, Properties), _MaskingKey, _ReservedBits),
-		( 	var(Property) ->
+		(	var(Property) ->
 			member(Property, Properties)
-		; 	memberchk(Property, Properties)
+		;	memberchk(Property, Properties)
 		).
 
 	parse_bytes(Bytes, Frame) :-
-		( 	valid_byte_list(Bytes) ->
+		(	valid_byte_list(Bytes) ->
 			parse_valid_bytes(Bytes, Frame)
-		; 	domain_error(http_websocket_byte_sequence, Bytes)
+		;	domain_error(http_websocket_byte_sequence, Bytes)
 		).
 
 	parse_valid_bytes([], end_of_file) :-
@@ -247,16 +247,16 @@
 		domain_error(http_websocket_byte_sequence, Bytes).
 
 	normalize_frame(Frame0, Frame, MaskingKey, ReservedBits) :-
-		( 	var(Frame0) ->
+		(	var(Frame0) ->
 			instantiation_error
-		; 	Frame0 = frame(Final, Opcode, Payload, Properties0) ->
+		;	Frame0 = frame(Final, Opcode, Payload, Properties0) ->
 			validate_final(Final),
 			validate_opcode(Opcode),
 			validate_payload(Payload),
 			normalize_properties(Properties0, Properties, MaskingKey, ReservedBits),
 			validate_frame_semantics(Final, Opcode, Payload),
 			Frame = frame(Final, Opcode, Payload, Properties)
-		; 	domain_error(http_websocket_frame, Frame0)
+		;	domain_error(http_websocket_frame, Frame0)
 		).
 
 	validate_final(final) :-
@@ -282,17 +282,17 @@
 		domain_error(http_websocket_opcode, Opcode).
 
 	validate_payload(Payload) :-
-		( 	var(Payload) ->
+		(	var(Payload) ->
 			instantiation_error
-		; 	valid_byte_list(Payload) ->
+		;	valid_byte_list(Payload) ->
 			true
-		; 	domain_error(http_websocket_payload, Payload)
+		;	domain_error(http_websocket_payload, Payload)
 		).
 
 	normalize_properties(Properties0, Properties, MaskingKey, ReservedBits) :-
-		( 	var(Properties0) ->
+		(	var(Properties0) ->
 			instantiation_error
-		; 	extract_properties(Properties0, no, [], MaskingKey, ReservedBits),
+		;	extract_properties(Properties0, no, [], MaskingKey, ReservedBits),
 			properties_from_components(ReservedBits, MaskingKey, Properties)
 		).
 
@@ -321,19 +321,19 @@
 		domain_error(http_websocket_property, Property).
 
 	validate_masking_key(Key) :-
-		( 	Key = [Byte0, Byte1, Byte2, Byte3],
+		(	Key = [Byte0, Byte1, Byte2, Byte3],
 			valid_byte(Byte0),
 			valid_byte(Byte1),
 			valid_byte(Byte2),
 			valid_byte(Byte3) ->
 			true
-		; 	domain_error(http_websocket_masking_key, Key)
+		;	domain_error(http_websocket_masking_key, Key)
 		).
 
 	validate_reserved_bits(Bits0, Bits) :-
-		( 	var(Bits0) ->
+		(	var(Bits0) ->
 			instantiation_error
-		; 	validate_reserved_bits_list(Bits0, []),
+		;	validate_reserved_bits_list(Bits0, []),
 			canonical_reserved_bits(Bits0, Bits)
 		).
 
@@ -342,9 +342,9 @@
 	validate_reserved_bits_list([Bit| Bits], Seen) :-
 		!,
 		valid_reserved_bit(Bit),
-		( 	memberchk(Bit, Seen) ->
+		(	memberchk(Bit, Seen) ->
 			domain_error(http_websocket_reserved_bits, [Bit| Bits])
-		; 	validate_reserved_bits_list(Bits, [Bit| Seen])
+		;	validate_reserved_bits_list(Bits, [Bit| Seen])
 		).
 	validate_reserved_bits_list(Bits, _Seen) :-
 		domain_error(http_websocket_reserved_bits, Bits).
@@ -356,27 +356,27 @@
 	valid_reserved_bit(rsv3).
 
 	canonical_reserved_bits(Bits0, Bits) :-
-		( 	memberchk(rsv1, Bits0) ->
+		(	memberchk(rsv1, Bits0) ->
 			Bits = [rsv1| Bits1]
-		; 	Bits = Bits1
+		;	Bits = Bits1
 		),
-		( 	memberchk(rsv2, Bits0) ->
+		(	memberchk(rsv2, Bits0) ->
 			Bits1 = [rsv2| Bits2]
-		; 	Bits1 = Bits2
+		;	Bits1 = Bits2
 		),
-		( 	memberchk(rsv3, Bits0) ->
+		(	memberchk(rsv3, Bits0) ->
 			Bits2 = [rsv3| Bits3]
-		; 	Bits2 = Bits3
+		;	Bits2 = Bits3
 		),
 		Bits3 = [].
 
 	validate_frame_semantics(Final, Opcode, Payload) :-
-		( 	control_opcode(Opcode) ->
+		(	control_opcode(Opcode) ->
 			Final == final,
 			length(Payload, PayloadLength),
 			PayloadLength =< 125,
 			validate_close_payload(Opcode, Payload)
-		; 	true
+		;	true
 		),
 		!.
 	validate_frame_semantics(Final, Opcode, Payload) :-
@@ -390,9 +390,9 @@
 
 	validate_close_payload(close, Payload) :-
 		!,
-		( 	Payload == [] ->
+		(	Payload == [] ->
 			true
-		; 	Payload = [Byte0, Byte1| _],
+		;	Payload = [Byte0, Byte1| _],
 			Code is (Byte0 << 8) \/ Byte1,
 			valid_close_code(Code)
 		).
@@ -405,20 +405,20 @@
 		Code =\= 1005,
 		Code =\= 1006,
 		Code =\= 1015,
-		( 	Code =< 1014 ->
+		(	Code =< 1014 ->
 			true
-		; 	Code >= 3000
+		;	Code >= 3000
 		),
 		!.
 
 	properties_from_components(ReservedBits, MaskingKey, Properties) :-
-		( 	ReservedBits == [] ->
+		(	ReservedBits == [] ->
 			Properties = Properties0
-		; 	Properties = [reserved_bits(ReservedBits)| Properties0]
+		;	Properties = [reserved_bits(ReservedBits)| Properties0]
 		),
-		( 	MaskingKey == no ->
+		(	MaskingKey == no ->
 			Properties0 = []
-		; 	Properties0 = [masking_key(MaskingKey)]
+		;	Properties0 = [masking_key(MaskingKey)]
 		).
 
 	decode_frame(Frame) -->
@@ -484,26 +484,26 @@
 		[Byte0, Byte1, Byte2, Byte3].
 
 	decode_first_byte(Byte0, Final, Opcode, ReservedBits) :-
-		( 	Byte0 /\ 0x80 =:= 0x80 ->
+		(	Byte0 /\ 0x80 =:= 0x80 ->
 			Final = final
-		; 	Final = more
+		;	Final = more
 		),
 		OpcodeCode is Byte0 /\ 0x0F,
 		opcode_atom(OpcodeCode, Opcode),
 		byte_reserved_bits(Byte0, ReservedBits).
 
 	byte_reserved_bits(Byte0, ReservedBits) :-
-		( 	Byte0 /\ 0x40 =:= 0x40 ->
+		(	Byte0 /\ 0x40 =:= 0x40 ->
 			ReservedBits = [rsv1| ReservedBits1]
-		; 	ReservedBits = ReservedBits1
+		;	ReservedBits = ReservedBits1
 		),
-		( 	Byte0 /\ 0x20 =:= 0x20 ->
+		(	Byte0 /\ 0x20 =:= 0x20 ->
 			ReservedBits1 = [rsv2| ReservedBits2]
-		; 	ReservedBits1 = ReservedBits2
+		;	ReservedBits1 = ReservedBits2
 		),
-		( 	Byte0 /\ 0x10 =:= 0x10 ->
+		(	Byte0 /\ 0x10 =:= 0x10 ->
 			ReservedBits2 = [rsv3]
-		; 	ReservedBits2 = []
+		;	ReservedBits2 = []
 		).
 
 	first_byte(Final, Opcode, ReservedBits, Byte0) :-
@@ -517,17 +517,17 @@
 	final_bit(more, 0x00).
 
 	reserved_bits_mask(ReservedBits, Mask) :-
-		( 	memberchk(rsv1, ReservedBits) ->
+		(	memberchk(rsv1, ReservedBits) ->
 			Mask0 = 0x40
-		; 	Mask0 = 0x00
+		;	Mask0 = 0x00
 		),
-		( 	memberchk(rsv2, ReservedBits) ->
+		(	memberchk(rsv2, ReservedBits) ->
 			Mask1 is Mask0 \/ 0x20
-		; 	Mask1 = Mask0
+		;	Mask1 = Mask0
 		),
-		( 	memberchk(rsv3, ReservedBits) ->
+		(	memberchk(rsv3, ReservedBits) ->
 			Mask is Mask1 \/ 0x10
-		; 	Mask = Mask1
+		;	Mask = Mask1
 		).
 
 	opcode_atom(0x0, continuation) :-
@@ -558,15 +558,15 @@
 	opcode_code(pong, 0xA).
 
 	payload_length_encoding(PayloadLength, LengthCode, ExtendedLengthBytes) :-
-		( 	PayloadLength =< 125 ->
+		(	PayloadLength =< 125 ->
 			LengthCode = PayloadLength,
 			ExtendedLengthBytes = []
-		; 	PayloadLength =< 0xFFFF ->
+		;	PayloadLength =< 0xFFFF ->
 			LengthCode = 126,
 			Byte0 is (PayloadLength >> 8) /\ 0xFF,
 			Byte1 is PayloadLength /\ 0xFF,
 			ExtendedLengthBytes = [Byte0, Byte1]
-		; 	PayloadLength =< 0x7FFFFFFFFFFFFFFF ->
+		;	PayloadLength =< 0x7FFFFFFFFFFFFFFF ->
 			LengthCode = 127,
 			Byte0 is (PayloadLength >> 56) /\ 0xFF,
 			Byte1 is (PayloadLength >> 48) /\ 0xFF,
@@ -577,7 +577,7 @@
 			Byte6 is (PayloadLength >> 8) /\ 0xFF,
 			Byte7 is PayloadLength /\ 0xFF,
 			ExtendedLengthBytes = [Byte0, Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7]
-		; 	domain_error(http_websocket_frame_length, PayloadLength)
+		;	domain_error(http_websocket_frame_length, PayloadLength)
 		).
 
 	masking_encoding(no, PayloadBytes, 0x00, PayloadBytes) :-
@@ -630,9 +630,9 @@
 
 	read_required_byte(Stream, Byte) :-
 		get_byte(Stream, Byte),
-		( 	Byte =:= -1 ->
+		(	Byte =:= -1 ->
 			domain_error(http_websocket_byte_sequence, end_of_file)
-		; 	true
+		;	true
 		).
 
 	read_required_bytes(0, _Stream, []) :-
@@ -640,27 +640,27 @@
 	read_required_bytes(Count, Stream, [Byte| Bytes]) :-
 		Count > 0,
 		get_byte(Stream, Byte),
-		( 	Byte =:= -1 ->
+		(	Byte =:= -1 ->
 			domain_error(http_websocket_byte_sequence, end_of_file)
-		; 	NextCount is Count - 1,
+		;	NextCount is Count - 1,
 			read_required_bytes(NextCount, Stream, Bytes)
 		).
 
 	bytes_to_sink(Sink, Bytes) :-
-		( 	var(Sink) ->
+		(	var(Sink) ->
 			instantiation_error
-		; 	Sink = file(File) ->
+		;	Sink = file(File) ->
 			open(File, write, Stream, [type(binary)]),
 			write_bytes(Bytes, Stream),
 			close(Stream)
-		; 	Sink = stream(Stream) ->
+		;	Sink = stream(Stream) ->
 			write_bytes(Bytes, Stream),
 			flush_output(Stream)
-		; 	Sink = bytes(Bytes) ->
+		;	Sink = bytes(Bytes) ->
 			true
-		; 	Sink = codes(Bytes) ->
+		;	Sink = codes(Bytes) ->
 			true
-		; 	domain_error(http_websocket_sink, Sink)
+		;	domain_error(http_websocket_sink, Sink)
 		).
 
 	write_bytes([], _Stream).

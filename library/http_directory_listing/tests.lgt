@@ -274,9 +274,9 @@
 
 	expected_modified_display(File, Display) :-
 		os::file_modification_time(File, ModifiedTime0),
-		( 	integer(ModifiedTime0) ->
+		(	integer(ModifiedTime0) ->
 			ModifiedTime = ModifiedTime0
-		; 	ModifiedTime is floor(ModifiedTime0)
+		;	ModifiedTime is floor(ModifiedTime0)
 		),
 		unix_to_date_time(ModifiedTime, DateTime),
 		format_date_time(DateTime, 0, date_time_medium, Display).

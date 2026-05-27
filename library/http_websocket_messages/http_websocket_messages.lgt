@@ -110,16 +110,16 @@
 		catch(encode_message(Message, _NormalizedMessage, _Opcode, _PayloadBytes), _, fail).
 
 	read_message(Stream, Message) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	http_websocket::read_frame(Stream, Frame),
+		;	http_websocket::read_frame(Stream, Frame),
 			read_frame_message(Frame, Stream, Message)
 		).
 
 	write_message(Stream, Message) :-
-		( 	var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		; 	encode_message(Message, _NormalizedMessage, Opcode, PayloadBytes),
+		;	encode_message(Message, _NormalizedMessage, Opcode, PayloadBytes),
 			http_websocket::frame(final, Opcode, PayloadBytes, [], Frame),
 			http_websocket::write_frame(Stream, Frame)
 		).
@@ -185,17 +185,17 @@
 
 	read_continuation_payload(Stream, Chunks0, PayloadBytes) :-
 		http_websocket::read_frame(Stream, Frame),
-		( 	Frame == end_of_file ->
+		(	Frame == end_of_file ->
 			domain_error(http_websocket_message_sequence, end_of_file)
-		; 	http_websocket::opcode(Frame, continuation) ->
+		;	http_websocket::opcode(Frame, continuation) ->
 			http_websocket::payload(Frame, Chunk),
 			http_websocket::final(Frame, Final),
-			( 	Final == final ->
+			(	Final == final ->
 				reverse([Chunk| Chunks0], Chunks),
 				append_chunks(Chunks, PayloadBytes, [])
-			; 	read_continuation_payload(Stream, [Chunk| Chunks0], PayloadBytes)
+			;	read_continuation_payload(Stream, [Chunk| Chunks0], PayloadBytes)
 			)
-		; 	domain_error(http_websocket_message_sequence, Frame)
+		;	domain_error(http_websocket_message_sequence, Frame)
 		).
 
 	append_chunks([], Bytes, Bytes).
@@ -218,13 +218,13 @@
 		bytes_text(ReasonBytes, Reason).
 
 	normalize_message(Message0, Message, Opcode, PayloadBytes) :-
-		( 	var(Message0) ->
+		(	var(Message0) ->
 			instantiation_error
-		; 	Message0 = message(Type, Payload0) ->
+		;	Message0 = message(Type, Payload0) ->
 			message_type_opcode(Type, Opcode),
 			normalize_message_payload(Type, Payload0, Payload, PayloadBytes),
 			Message = message(Type, Payload)
-		; 	domain_error(http_websocket_message, Message0)
+		;	domain_error(http_websocket_message, Message0)
 		).
 
 	message_type_opcode(text, text) :-
@@ -270,10 +270,10 @@
 		domain_error(http_websocket_close_payload, Payload).
 
 	close_code_bytes(Code, Byte0, Byte1) :-
-		( 	integer(Code) ->
+		(	integer(Code) ->
 			Byte0 is (Code >> 8) /\ 0xFF,
 			Byte1 is Code /\ 0xFF
-		; 	domain_error(http_websocket_close_code, Code)
+		;	domain_error(http_websocket_close_code, Code)
 		).
 
 	text_bytes(Text0, Text, Bytes) :-
@@ -281,30 +281,30 @@
 		 	utf_8::codes_to_bytes(Codes, Bytes),
 			codes_text(_TextRepresentation_, Codes, Text) ->
 			true
-		; 	domain_error(http_websocket_message_text, Text0)
+		;	domain_error(http_websocket_message_text, Text0)
 		).
 
 	bytes_text(Bytes, Text) :-
-		( 	utf_8::bytes_to_codes(Bytes, Codes),
+		(	utf_8::bytes_to_codes(Bytes, Codes),
 			codes_text(_TextRepresentation_, Codes, Text) ->
 			true
-		; 	domain_error(http_websocket_message_text, Bytes)
+		;	domain_error(http_websocket_message_text, Bytes)
 		).
 
 	text_codes(atom, Text, Codes) :-
-		( 	atom(Text) ->
+		(	atom(Text) ->
 			atom_codes(Text, Codes)
-		; 	domain_error(http_websocket_message_text, Text)
+		;	domain_error(http_websocket_message_text, Text)
 		).
 	text_codes(chars, Text, Codes) :-
-		( 	Text = chars(Chars) ->
+		(	Text = chars(Chars) ->
 			chars_to_codes(Chars, Codes)
-		; 	domain_error(http_websocket_message_text, Text)
+		;	domain_error(http_websocket_message_text, Text)
 		).
 	text_codes(codes, Text, Codes) :-
-		( 	Text = codes(Codes) ->
+		(	Text = codes(Codes) ->
 			true
-		; 	domain_error(http_websocket_message_text, Text)
+		;	domain_error(http_websocket_message_text, Text)
 		).
 
 	codes_text(atom, Codes, Text) :-

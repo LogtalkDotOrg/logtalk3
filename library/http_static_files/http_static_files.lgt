@@ -65,12 +65,12 @@
 		^^validate_document_root(DocumentRoot),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		( 	^^supported_method(Request) ->
-			( 	resolve_resource(Path, Request, DocumentRoot, Options, Resource) ->
+		(	^^supported_method(Request) ->
+			(	resolve_resource(Path, Request, DocumentRoot, Options, Resource) ->
 				resource_response(Request, Resource, Response)
-			; 	not_found_response(Request, Response)
+			;	not_found_response(Request, Response)
 			)
-		; 	method_not_allowed_response(Request, Response)
+		;	method_not_allowed_response(Request, Response)
 		).
 
 	valid_option(index_files(IndexFiles)) :-
@@ -93,16 +93,16 @@
 		^^resolved_target_path(Path, Root, Candidate),
 		existing_target_file(Candidate, Root, Options, TargetFile),
 		selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding),
-		( 	File == not_acceptable ->
+		(	File == not_acceptable ->
 			Resource = not_acceptable(VaryAcceptEncoding)
-		; 	resource(File, Options, VaryAcceptEncoding, Resource)
+		;	resource(File, Options, VaryAcceptEncoding, Resource)
 		).
 
 	resolved_document_root(DocumentRoot, Root) :-
 		os::absolute_file_name(DocumentRoot, AbsoluteDocumentRoot),
-		( 	os::directory_exists(AbsoluteDocumentRoot) ->
+		(	os::directory_exists(AbsoluteDocumentRoot) ->
 			os::path_concat(AbsoluteDocumentRoot, '', Root)
-		; 	domain_error(http_static_files_document_root, DocumentRoot)
+		;	domain_error(http_static_files_document_root, DocumentRoot)
 		).
 
 	existing_target_file(Candidate, _Root, _Options, Candidate) :-
@@ -143,13 +143,13 @@
 		Encoding == ''.
 
 	precompressed_variant_files(BaseFile, VariantFiles) :-
-		( 	precompressed_variant_file(BaseFile, br, BrotliFile) ->
+		(	precompressed_variant_file(BaseFile, br, BrotliFile) ->
 			BrotliVariants = [br-BrotliFile]
-		; 	BrotliVariants = []
+		;	BrotliVariants = []
 		),
-		( 	precompressed_variant_file(BaseFile, gzip, GzipFile) ->
+		(	precompressed_variant_file(BaseFile, gzip, GzipFile) ->
 			append(BrotliVariants, [gzip-GzipFile], VariantFiles)
-		; 	VariantFiles = BrotliVariants
+		;	VariantFiles = BrotliVariants
 		),
 		VariantFiles \== [].
 
@@ -176,9 +176,9 @@
 		better_representation_choice(BrotliChoice, BestChoice0, BestChoice1),
 		variant_representation_choice(gzip, Specs, VariantFiles, GzipChoice),
 		better_representation_choice(GzipChoice, BestChoice1, choice(File0, Quality, _Rank)),
-		( 	Quality > 0.0 ->
+		(	Quality > 0.0 ->
 			File = File0
-		; 	File = not_acceptable
+		;	File = not_acceptable
 		).
 
 	variant_representation_choice(Encoding, Specs, VariantFiles, choice(File, Quality, Rank)) :-
@@ -192,8 +192,8 @@
 	better_representation_choice(none, BestChoice, BestChoice) :-
 		!.
 	better_representation_choice(choice(File, Quality, Rank), choice(_BestFile, BestQuality, BestRank), choice(File, Quality, Rank)) :-
-		( 	Quality > BestQuality
-		; 	Quality =:= BestQuality,
+		(	Quality > BestQuality
+		;	Quality =:= BestQuality,
 			Rank > BestRank
 		),
 		!.
@@ -226,10 +226,10 @@
 
 	best_content_coding_quality([], _Encodings, Quality, Quality).
 	best_content_coding_quality([accept_encoding(Coding, CodingQuality)| Specs], Encodings, BestQuality0, BestQuality) :-
-		( 	memberchk(Coding, Encodings),
+		(	memberchk(Coding, Encodings),
 			CodingQuality > BestQuality0 ->
 			BestQuality1 = CodingQuality
-		; 	BestQuality1 = BestQuality0
+		;	BestQuality1 = BestQuality0
 		),
 		best_content_coding_quality(Specs, Encodings, BestQuality1, BestQuality).
 
@@ -244,17 +244,17 @@
 
 	accept_encoding_specs(Value, Specs) :-
 		trim_ows_atom(Value, TrimmedValue),
-		( 	TrimmedValue == '' ->
+		(	TrimmedValue == '' ->
 			Specs = []
-		; 	atom::split(TrimmedValue, ',', Items),
+		;	atom::split(TrimmedValue, ',', Items),
 			accept_encoding_items(Items, Specs)
 		).
 
 	accept_encoding_items([], []).
 	accept_encoding_items([Item| Items], Specs) :-
-		( 	accept_encoding_item(Item, Spec) ->
+		(	accept_encoding_item(Item, Spec) ->
 			Specs = [Spec| Specs0]
-		; 	Specs = Specs0
+		;	Specs = Specs0
 		),
 		accept_encoding_items(Items, Specs0).
 
@@ -471,9 +471,9 @@
 	if_range_matches(Request, resource(_File, _MediaType, _Headers, _Size, ModifiedTime, ETag, _LastModified)) :-
 		request_header_value(Request, if_range, Value),
 		trim_ows_atom(Value, TrimmedValue),
-		( 	strong_entity_tag_match(TrimmedValue, ETag) ->
+		(	strong_entity_tag_match(TrimmedValue, ETag) ->
 			true
-		; 	http_date_seconds(TrimmedValue, Seconds),
+		;	http_date_seconds(TrimmedValue, Seconds),
 			ModifiedTime =< Seconds
 		).
 
@@ -483,9 +483,9 @@
 
 	if_none_match_matches(Value, ETag) :-
 		trim_ows_atom(Value, TrimmedValue),
-		( 	TrimmedValue == '*' ->
+		(	TrimmedValue == '*' ->
 			true
-		; 	atom::split(TrimmedValue, ',', Tags),
+		;	atom::split(TrimmedValue, ',', Tags),
 			etag_list_matches(Tags, ETag)
 		).
 
@@ -532,9 +532,9 @@
 		Start =< RequestedEnd,
 		Start < Size,
 		MaxEnd is Size - 1,
-		( 	RequestedEnd =< MaxEnd ->
+		(	RequestedEnd =< MaxEnd ->
 			End = RequestedEnd
-		; 	End = MaxEnd
+		;	End = MaxEnd
 		).
 	range_bounds(StartCodes, [], Size, Start, End) :-
 		StartCodes \== [],
@@ -545,9 +545,9 @@
 		EndCodes \== [],
 		decimal_codes_integer(EndCodes, RequestedLength),
 		RequestedLength > 0,
-		( 	RequestedLength =< Size ->
+		(	RequestedLength =< Size ->
 			Length = RequestedLength
-		; 	Length = Size
+		;	Length = Size
 		),
 		Start is Size - Length,
 		End is Size - 1.
@@ -567,9 +567,9 @@
 		atom_codes(ContentRange, Codes).
 
 	normalize_modification_time(ModifiedTime, NormalizedTime) :-
-		( 	integer(ModifiedTime) ->
+		(	integer(ModifiedTime) ->
 			NormalizedTime = ModifiedTime
-		; 	NormalizedTime is floor(ModifiedTime)
+		;	NormalizedTime is floor(ModifiedTime)
 		).
 
 	entity_tag(Size, ModifiedTime, ETag) :-

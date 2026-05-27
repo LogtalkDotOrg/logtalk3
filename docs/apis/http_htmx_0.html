@@ -282,6 +282,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regression-protocols"><span class="xref std std-ref">regression_protocols</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regression-tree"><span class="xref std std-ref">regression_tree</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#regularized-bradley-terry-ranker"><span class="xref std std-ref">regularized_bradley_terry_ranker</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#rest"><span class="xref std std-ref">rest</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ridge-regression"><span class="xref std std-ref">ridge_regression</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sarif"><span class="xref std std-ref">sarif</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sbom"><span class="xref std std-ref">sbom</span></a></li>
@@ -401,10 +402,13 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="atom_0.html#atom-0"><span class="std std-ref">atom</span></a></div>
 <div class="line"><a class="reference internal" href="html5_0.html#html5-0"><span class="std std-ref">html5</span></a></div>
 <div class="line"><a class="reference internal" href="http_0.html#http-0"><span class="std std-ref">http</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+<div class="line"><a class="reference internal" href="url_1.html#url-1"><span class="std std-ref">url(Representation)</span></a></div>
+<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -426,22 +430,26 @@
 <li><p><a class="reference internal" href="#is-htmx-request-1" id="id2"><code class="docutils literal notranslate"><span class="pre">is_htmx_request/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#is-boosted-request-1" id="id3"><code class="docutils literal notranslate"><span class="pre">is_boosted_request/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#is-history-restore-request-1" id="id4"><code class="docutils literal notranslate"><span class="pre">is_history_restore_request/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#current-url-2" id="id5"><code class="docutils literal notranslate"><span class="pre">current_url/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#prompt-2" id="id6"><code class="docutils literal notranslate"><span class="pre">prompt/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#target-2" id="id7"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#trigger-2" id="id8"><code class="docutils literal notranslate"><span class="pre">trigger/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#trigger-name-2" id="id9"><code class="docutils literal notranslate"><span class="pre">trigger_name/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#request-properties-2" id="id10"><code class="docutils literal notranslate"><span class="pre">request_properties/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reply-3" id="id11"><code class="docutils literal notranslate"><span class="pre">reply/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reply-4" id="id12"><code class="docutils literal notranslate"><span class="pre">reply/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#page-fragment-reply-4" id="id13"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#page-fragment-reply-5" id="id14"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#add-response-headers-4" id="id15"><code class="docutils literal notranslate"><span class="pre">add_response_headers/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#is-fragment-request-1" id="id5"><code class="docutils literal notranslate"><span class="pre">is_fragment_request/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#request-kind-2" id="id6"><code class="docutils literal notranslate"><span class="pre">request_kind/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#current-url-2" id="id7"><code class="docutils literal notranslate"><span class="pre">current_url/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#current-url-abs-path-2" id="id8"><code class="docutils literal notranslate"><span class="pre">current_url_abs_path/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prompt-2" id="id9"><code class="docutils literal notranslate"><span class="pre">prompt/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#target-2" id="id10"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#trigger-2" id="id11"><code class="docutils literal notranslate"><span class="pre">trigger/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#trigger-name-2" id="id12"><code class="docutils literal notranslate"><span class="pre">trigger_name/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#request-properties-2" id="id13"><code class="docutils literal notranslate"><span class="pre">request_properties/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#request-property-2" id="id14"><code class="docutils literal notranslate"><span class="pre">request_property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reply-3" id="id15"><code class="docutils literal notranslate"><span class="pre">reply/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reply-4" id="id16"><code class="docutils literal notranslate"><span class="pre">reply/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#page-fragment-reply-4" id="id17"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#page-fragment-reply-5" id="id18"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#add-response-headers-4" id="id19"><code class="docutils literal notranslate"><span class="pre">add_response_headers/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id20">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -509,8 +517,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="is-fragment-request-1">
+<span id="http-htmx-0-is-fragment-request-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_fragment_request/1</span></code></a><a class="headerlink" href="#is-fragment-request-1" title="Link to this heading"></a></h3>
+<p>Succeeds when the request should receive fragment content, meaning an HTMX request that is neither boosted nor a history restore request.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_fragment_request(Request)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_fragment_request(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="request-kind-2">
+<span id="http-htmx-0-request-kind-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_kind/2</span></code></a><a class="headerlink" href="#request-kind-2" title="Link to this heading"></a></h3>
+<p>Classifies the request as one of <code class="docutils literal notranslate"><span class="pre">ordinary</span></code>, <code class="docutils literal notranslate"><span class="pre">fragment</span></code>, <code class="docutils literal notranslate"><span class="pre">boosted</span></code>, or <code class="docutils literal notranslate"><span class="pre">history_restore</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">request_kind(Request,Kind)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">request_kind(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="current-url-2">
-<span id="http-htmx-0-current-url-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_url/2</span></code></a><a class="headerlink" href="#current-url-2" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-current-url-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_url/2</span></code></a><a class="headerlink" href="#current-url-2" title="Link to this heading"></a></h3>
 <p>Returns the single request <code class="docutils literal notranslate"><span class="pre">HX-Current-URL</span></code> header value when present.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -530,8 +580,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="current-url-abs-path-2">
+<span id="http-htmx-0-current-url-abs-path-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_url_abs_path/2</span></code></a><a class="headerlink" href="#current-url-abs-path-2" title="Link to this heading"></a></h3>
+<p>Returns the same-origin absolute-path form of the <code class="docutils literal notranslate"><span class="pre">HX-Current-URL</span></code> header value, including any query component but excluding scheme, authority, and fragment.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_url_abs_path(Request,AbsolutePath)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_url_abs_path(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="prompt-2">
-<span id="http-htmx-0-prompt-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prompt/2</span></code></a><a class="headerlink" href="#prompt-2" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-prompt-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prompt/2</span></code></a><a class="headerlink" href="#prompt-2" title="Link to this heading"></a></h3>
 <p>Returns the single request <code class="docutils literal notranslate"><span class="pre">HX-Prompt</span></code> header value when present.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -552,7 +623,7 @@
 <hr class="docutils" />
 </section>
 <section id="target-2">
-<span id="http-htmx-0-target-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a><a class="headerlink" href="#target-2" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-target-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a><a class="headerlink" href="#target-2" title="Link to this heading"></a></h3>
 <p>Returns the single request <code class="docutils literal notranslate"><span class="pre">HX-Target</span></code> header value when present.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -573,7 +644,7 @@
 <hr class="docutils" />
 </section>
 <section id="trigger-2">
-<span id="http-htmx-0-trigger-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">trigger/2</span></code></a><a class="headerlink" href="#trigger-2" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-trigger-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">trigger/2</span></code></a><a class="headerlink" href="#trigger-2" title="Link to this heading"></a></h3>
 <p>Returns the single request <code class="docutils literal notranslate"><span class="pre">HX-Trigger</span></code> header value when present.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -594,7 +665,7 @@
 <hr class="docutils" />
 </section>
 <section id="trigger-name-2">
-<span id="http-htmx-0-trigger-name-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">trigger_name/2</span></code></a><a class="headerlink" href="#trigger-name-2" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-trigger-name-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">trigger_name/2</span></code></a><a class="headerlink" href="#trigger-name-2" title="Link to this heading"></a></h3>
 <p>Returns the single request <code class="docutils literal notranslate"><span class="pre">HX-Trigger-Name</span></code> header value when present.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -615,8 +686,8 @@
 <hr class="docutils" />
 </section>
 <section id="request-properties-2">
-<span id="http-htmx-0-request-properties-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_properties/2</span></code></a><a class="headerlink" href="#request-properties-2" title="Link to this heading"></a></h3>
-<p>Returns a list of derived HTMX request properties computed from the normalized request headers.</p>
+<span id="http-htmx-0-request-properties-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_properties/2</span></code></a><a class="headerlink" href="#request-properties-2" title="Link to this heading"></a></h3>
+<p>Returns a list of derived HTMX request properties and request classification computed from the normalized request headers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -635,8 +706,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="request-property-2">
+<span id="http-htmx-0-request-property-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_property/2</span></code></a><a class="headerlink" href="#request-property-2" title="Link to this heading"></a></h3>
+<p>Enumerates or tests individual derived HTMX request properties and request classification computed from the normalized request headers.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">request_property(Request,Property)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">request_property(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="reply-3">
-<span id="http-htmx-0-reply-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reply/3</span></code></a><a class="headerlink" href="#reply-3" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-reply-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reply/3</span></code></a><a class="headerlink" href="#reply-3" title="Link to this heading"></a></h3>
 <p>Builds a normalized <code class="docutils literal notranslate"><span class="pre">text/html</span></code> response from a pre-rendered HTML atom or an <code class="docutils literal notranslate"><span class="pre">html</span></code> term/list using the default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -657,7 +749,7 @@
 <hr class="docutils" />
 </section>
 <section id="reply-4">
-<span id="http-htmx-0-reply-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reply/4</span></code></a><a class="headerlink" href="#reply-4" title="Link to this heading"></a></h3>
+<span id="http-htmx-0-reply-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reply/4</span></code></a><a class="headerlink" href="#reply-4" title="Link to this heading"></a></h3>
 <p>Builds a normalized <code class="docutils literal notranslate"><span class="pre">text/html</span></code> response from a pre-rendered HTML atom or an <code class="docutils literal notranslate"><span class="pre">html</span></code> term/list using the given options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -678,8 +770,8 @@
 <hr class="docutils" />
 </section>
 <section id="page-fragment-reply-4">
-<span id="http-htmx-0-page-fragment-reply-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4</span></code></a><a class="headerlink" href="#page-fragment-reply-4" title="Link to this heading"></a></h3>
-<p>Builds a normalized <code class="docutils literal notranslate"><span class="pre">text/html</span></code> response using the full-page content for ordinary and boosted HTMX requests and the fragment content for non-boosted HTMX requests, with the default options.</p>
+<span id="http-htmx-0-page-fragment-reply-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/4</span></code></a><a class="headerlink" href="#page-fragment-reply-4" title="Link to this heading"></a></h3>
+<p>Builds a normalized <code class="docutils literal notranslate"><span class="pre">text/html</span></code> response using the fragment content when <code class="docutils literal notranslate"><span class="pre">is_fragment_request/1</span></code> succeeds and the full-page content otherwise, with the default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -699,8 +791,8 @@
 <hr class="docutils" />
 </section>
 <section id="page-fragment-reply-5">
-<span id="http-htmx-0-page-fragment-reply-5"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/5</span></code></a><a class="headerlink" href="#page-fragment-reply-5" title="Link to this heading"></a></h3>
-<p>Builds a normalized <code class="docutils literal notranslate"><span class="pre">text/html</span></code> response using the full-page content for ordinary and boosted HTMX requests and the fragment content for non-boosted HTMX requests, with the given options.</p>
+<span id="http-htmx-0-page-fragment-reply-5"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply/5</span></code></a><a class="headerlink" href="#page-fragment-reply-5" title="Link to this heading"></a></h3>
+<p>Builds a normalized <code class="docutils literal notranslate"><span class="pre">text/html</span></code> response using the fragment content when <code class="docutils literal notranslate"><span class="pre">is_fragment_request/1</span></code> succeeds and the full-page content otherwise, with the given options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -720,8 +812,8 @@
 <hr class="docutils" />
 </section>
 <section id="add-response-headers-4">
-<span id="http-htmx-0-add-response-headers-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_response_headers/4</span></code></a><a class="headerlink" href="#add-response-headers-4" title="Link to this heading"></a></h3>
-<p>Decorates a normalized response with the relevant HTMX response headers when the request is an HTMX request.</p>
+<span id="http-htmx-0-add-response-headers-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_response_headers/4</span></code></a><a class="headerlink" href="#add-response-headers-4" title="Link to this heading"></a></h3>
+<p>Decorates a normalized response with the relevant HTMX response headers and optional cache-vary metadata.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

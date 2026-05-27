@@ -266,7 +266,7 @@
 	validate_multipart_part(Part) :-
 		(	valid_multipart_part(Part) ->
 			true
-		; 	domain_error(http_multipart_part, Part)
+		;	domain_error(http_multipart_part, Part)
 		).
 
 	valid_multipart_part(part(Headers, Body, Properties)) :-
@@ -275,14 +275,14 @@
 	validate_multipart_media_type(MediaType) :-
 		(	valid_multipart_media_type(MediaType) ->
 			true
-		; 	domain_error(http_multipart_media_type, MediaType)
+		;	domain_error(http_multipart_media_type, MediaType)
 		).
 
 	validate_form_data_body(Body) :-
 		validate_multipart_body(Body),
 		(	Body = content(MediaType, multipart(_)), same_media_type(MediaType, 'multipart/form-data') ->
 			true
-		; 	domain_error(http_multipart_form_data_body, Body)
+		;	domain_error(http_multipart_form_data_body, Body)
 		).
 
 	validate_form_data_name(Name) :-
@@ -294,7 +294,7 @@
 	validate_form_data_text(Domain, Text) :-
 		(	valid_form_data_text(Text) ->
 			true
-		; 	domain_error(Domain, Text)
+		;	domain_error(Domain, Text)
 		).
 
 	valid_form_data_text(Text) :-
@@ -314,7 +314,7 @@
 	parts_fields([Part| Parts], Fields) :-
 		(	field(Part, Name, Value) ->
 			Fields = [Name-Value| Fields0]
-		; 	Fields = Fields0
+		;	Fields = Fields0
 		),
 		parts_fields(Parts, Fields0).
 
@@ -322,7 +322,7 @@
 	parts_files([Part| Parts], Files) :-
 		(	file(Part, Name, Filename, MediaType, Payload) ->
 			Files = [file(Name, Filename, MediaType, Payload)| Files0]
-		; 	Files = Files0
+		;	Files = Files0
 		),
 		parts_files(Parts, Files0).
 
@@ -351,7 +351,7 @@
 		memberchk(name-Name, Parameters),
 		(	member(filename-FoundFilename, Parameters) ->
 			Filename = yes(FoundFilename)
-		; 	Filename = no
+		;	Filename = no
 		).
 
 	parse_content_disposition(Value, Type, Parameters) :-

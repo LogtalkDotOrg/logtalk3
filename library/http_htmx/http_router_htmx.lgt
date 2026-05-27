@@ -48,18 +48,18 @@
 
 	annotate_htmx_request(Request, continue(AnnotatedRequest)) :-
 		http_htmx::request_properties(Request, HTMXProperties),
-		( 	HTMXProperties == [] ->
+		(	HTMXProperties == [] ->
 			AnnotatedRequest = Request
-		; 	annotated_request(Request, HTMXProperties, AnnotatedRequest)
+		;	annotated_request(Request, HTMXProperties, AnnotatedRequest)
 		).
 
 	add_htmx_response_headers(Request, Response0, Response) :-
 		request_htmx_response_options(Request, RequestOptions),
 		response_htmx_response_options(Response0, ResponseOptions),
 		overlay_options(ResponseOptions, RequestOptions, Options),
-		( 	Options == [] ->
+		(	Options == [] ->
 			Response = Response0
-		; 	http_htmx::add_response_headers(Request, Response0, Response, Options)
+		;	http_htmx::add_response_headers(Request, Response0, Response, Options)
 		).
 
 	annotated_request(Request, HTMXProperties, AnnotatedRequest) :-
@@ -88,9 +88,9 @@
 
 	filter_overridden_options([], _Overrides, []).
 	filter_overridden_options([Option| Options0], Overrides, Options) :-
-		( 	overridden_option(Option, Overrides) ->
+		(	overridden_option(Option, Overrides) ->
 			Options = Tail
-		; 	Options = [Option| Tail]
+		;	Options = [Option| Tail]
 		),
 		filter_overridden_options(Options0, Overrides, Tail).
 
@@ -110,9 +110,9 @@
 
 	filter_overridden_properties([], _Overrides, []).
 	filter_overridden_properties([Property| Properties0], Overrides, Properties) :-
-		( 	overridden_property(Property, Overrides) ->
+		(	overridden_property(Property, Overrides) ->
 			Properties = Tail
-		; 	Properties = [Property| Tail]
+		;	Properties = [Property| Tail]
 		),
 		filter_overridden_properties(Properties0, Overrides, Tail).
 

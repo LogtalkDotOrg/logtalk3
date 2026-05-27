@@ -302,6 +302,7 @@ logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
 logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(regularized_bradley_terry_ranker, library('regularized_bradley_terry_ranker/')).
+logtalk_library_path(rest, library('rest/')).
 logtalk_library_path(ridge_regression, library('ridge_regression/')).
 logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
@@ -414,6 +415,8 @@ logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(http_cookies_counter, examples('http_cookies_counter/')).
 logtalk_library_path(http_htmx_panel, examples('http_htmx_panel/')).
 logtalk_library_path(http_open_api, examples('http_open_api/')).
+logtalk_library_path(http_rest_greetings, examples('http_rest_greetings/')).
+logtalk_library_path(http_rest_open_meteo, examples('http_rest_open_meteo/')).
 logtalk_library_path(http_static_site, examples('http_static_site/')).
 logtalk_library_path(http_websocket_echo, examples('http_websocket_echo/')).
 logtalk_library_path(includes, examples('includes/')).

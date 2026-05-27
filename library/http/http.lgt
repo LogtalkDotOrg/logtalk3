@@ -242,12 +242,12 @@
 	]).
 
 	websocket_accept(Key, Accept) :-
-		( 	var(Key) ->
+		(	var(Key) ->
 			instantiation_error
-		; 	normalize_websocket_key(Key, NormalizedKey) ->
+		;	normalize_websocket_key(Key, NormalizedKey) ->
 			websocket_accept_from_key(NormalizedKey, Accept),
 			!
-		; 	domain_error(http_header_value(sec_websocket_key), Key)
+		;	domain_error(http_header_value(sec_websocket_key), Key)
 		).
 
 	request(Method, Target, Version, Headers, Body, Properties, Request) :-
@@ -282,7 +282,14 @@
 		message_body_from_headers(Headers, BodyBytes, Body, ExtraProperties),
 		derived_request_properties(Target, Headers, Body, DerivedProperties),
 		merge_property_lists([DerivedProperties, ExtraProperties], Properties),
-		request(Method, Target, Version, Headers, Body, Properties, Request),
+		validate_method(Method),
+		validate_target(Target),
+		validate_version(Version),
+		validate_headers(Headers),
+		validate_body(Body),
+		validate_properties(Properties),
+		validate_request_semantics(Target, Headers, Body, Properties, parsed),
+		Request = request(Method, Target, Version, Headers, Body, Properties),
 		!.
 
 	generate_request(Sink, Request) :-
@@ -305,7 +312,13 @@
 		message_body_from_headers(Headers, BodyBytes, Body, ExtraProperties),
 		derived_response_properties(Headers, Body, DerivedProperties),
 		merge_property_lists([DerivedProperties, ExtraProperties], Properties),
-		response(Version, Status, Headers, Body, Properties, Response),
+		validate_version(Version),
+		validate_status(Status),
+		validate_headers(Headers),
+		validate_body(Body),
+		validate_properties(Properties),
+		validate_response_semantics(Headers, Body, Properties, parsed),
+		Response = response(Version, Status, Headers, Body, Properties),
 		!.
 
 	generate_response(Sink, Response) :-
@@ -353,8 +366,21 @@
 	parse_body(Source, MediaType, Options, Body) :-
 		validate_media_type(MediaType),
 		validate_body_options(Options),
+		source_body_options(Source, Options, EffectiveOptions),
 		source_to_bytes(Source, Bytes),
-		body_bytes_to_term(Bytes, MediaType, Options, Body).
+		body_bytes_to_term(Bytes, MediaType, EffectiveOptions, Body).
+
+	source_body_options(_Source, Options, Options) :-
+		member(wire_bytes(true), Options),
+		!.
+	source_body_options(Source, Options, [wire_bytes(true)| Options]) :-
+		raw_body_byte_source(Source),
+		!.
+	source_body_options(_Source, Options, Options).
+
+	raw_body_byte_source(file(_)).
+	raw_body_byte_source(stream(_)).
+	raw_body_byte_source(bytes(_)).
 
 	generate_body(Sink, Body, Options) :-
 		validate_body(Body),
@@ -365,17 +391,17 @@
 	encode_body(MediaType, Payload, Options, Body) :-
 		validate_media_type(MediaType),
 		validate_body_options(Options),
-		( 	body_codec(MediaType, Codec) ->
+		(	body_codec(MediaType, Codec) ->
 			Codec::encode_body(MediaType, Payload, Options, Body)
-		; 	existence_error(http_body_codec, MediaType)
+		;	existence_error(http_body_codec, MediaType)
 		).
 
 	decode_body(MediaType, Body, Options, Payload) :-
 		validate_media_type(MediaType),
 		validate_body_options(Options),
-		( 	body_codec(MediaType, Codec) ->
+		(	body_codec(MediaType, Codec) ->
 			Codec::decode_body(MediaType, Body, Options, Payload)
-		; 	existence_error(http_body_codec, MediaType)
+		;	existence_error(http_body_codec, MediaType)
 		).
 
 	method(request(Method, _, _, _, _, _), Method).
@@ -392,23 +418,23 @@
 
 	header(Message, Name, Value) :-
 		headers(Message, Headers),
-		( 	nonvar(Name), nonvar(Value) ->
+		(	nonvar(Name), nonvar(Value) ->
 			memberchk(Name-Value, Headers)
-		; 	member(Name-Value, Headers)
+		;	member(Name-Value, Headers)
 		).
 
 	body(request(_, _, _, _, Body, _), Body).
 	body(response(_, _, _, Body, _), Body).
 
 	property(request(_, _, _, _, _, Properties), Property) :-
-		( 	nonvar(Property) ->
+		(	nonvar(Property) ->
 			memberchk(Property, Properties)
-		; 	member(Property, Properties)
+		;	member(Property, Properties)
 		).
 	property(response(_, _, _, _, Properties), Property) :-
-		( 	nonvar(Property) ->
+		(	nonvar(Property) ->
 			memberchk(Property, Properties)
-		; 	member(Property, Properties)
+		;	member(Property, Properties)
 		).
 
 	validate_request_term(request(Method, Target, Version, Headers, Body, Properties)) :-
@@ -429,23 +455,29 @@
 		validate_response_semantics(Headers, Body, Properties).
 
 	validate_request_semantics(Target, Headers, Body, Properties) :-
+		validate_request_semantics(Target, Headers, Body, Properties, strict).
+
+	validate_request_semantics(Target, Headers, Body, Properties, Mode) :-
 		validate_transfer_encoding_semantics(Headers, Properties),
-		validate_header_body_semantics(Headers, Body),
+		validate_header_body_semantics(Headers, Body, Mode),
 		validate_header_target_semantics(Target, Headers),
 		derived_request_properties(Target, Headers, Body, DerivedProperties),
 		validate_property_semantics(Properties, DerivedProperties).
 
 	validate_response_semantics(Headers, Body, Properties) :-
+		validate_response_semantics(Headers, Body, Properties, strict).
+
+	validate_response_semantics(Headers, Body, Properties, Mode) :-
 		validate_transfer_encoding_semantics(Headers, Properties),
-		validate_header_body_semantics(Headers, Body),
+		validate_header_body_semantics(Headers, Body, Mode),
 		derived_response_properties(Headers, Body, DerivedProperties),
 		validate_property_semantics(Properties, DerivedProperties).
 
 	validate_transfer_encoding_semantics(Headers, Properties) :-
-		( 	transfer_encoding_tokens(Headers, Properties, Tokens) ->
+		(	transfer_encoding_tokens(Headers, Properties, Tokens) ->
 			validate_supported_transfer_encoding(Tokens),
 			validate_chunked_content_length_semantics(Headers, Tokens)
-		; 	true
+		;	true
 		),
 		validate_trailer_property_semantics(Headers, Properties).
 
@@ -455,60 +487,67 @@
 		domain_error(http_transfer_encoding, Tokens).
 
 	validate_chunked_content_length_semantics(Headers, [chunked]) :-
-		( 	semantic_single_header_value(Headers, content_length, _) ->
+		(	semantic_single_header_value(Headers, content_length, _) ->
 			domain_error(http_header_semantics, transfer_encoding([chunked]))
-		; 	true
+		;	true
 		),
 		!.
 	validate_chunked_content_length_semantics(_Headers, _Tokens).
 
 	validate_trailer_property_semantics(Headers, Properties) :-
-		( 	member(TrailersProperty, Properties), functor(TrailersProperty, trailers, 1) ->
-			( 	transfer_encoding_tokens(Headers, Properties, Tokens) ->
-				( 	Tokens == [chunked] ->
+		(	member(TrailersProperty, Properties), functor(TrailersProperty, trailers, 1) ->
+			(	transfer_encoding_tokens(Headers, Properties, Tokens) ->
+				(	Tokens == [chunked] ->
 					true
-				; 	domain_error(http_property_semantics, TrailersProperty)
+				;	domain_error(http_property_semantics, TrailersProperty)
 				)
-			; 	true
+			;	true
 			)
-		; 	true
+		;	true
 		).
 
 	validate_header_body_semantics(Headers, Body) :-
-		( 	semantic_single_header_value(Headers, content_length, Length) ->
-			validate_content_length_semantics(Length, Body)
-		; 	true
+		validate_header_body_semantics(Headers, Body, strict).
+
+	validate_header_body_semantics(Headers, Body, Mode) :-
+		(	semantic_single_header_value(Headers, content_length, Length) ->
+			validate_content_length_semantics(Mode, Length, Body)
+		;	true
 		),
-		( 	semantic_single_header_value(Headers, content_type, MediaTypeProperty) ->
+		(	semantic_single_header_value(Headers, content_type, MediaTypeProperty) ->
 			validate_content_type_semantics(MediaTypeProperty, Body)
-		; 	true
+		;	true
 		).
 
+	validate_content_length_semantics(parsed, _Length, _Body).
+	validate_content_length_semantics(strict, Length, Body) :-
+		validate_content_length_semantics(Length, Body).
+
 	validate_header_target_semantics(Target, Headers) :-
-		( 	semantic_single_header_value(Headers, host, HeaderHost), target_host_property(Target, TargetHost) ->
-			( HeaderHost == TargetHost ->
+		(	semantic_single_header_value(Headers, host, HeaderHost), target_host_property(Target, TargetHost) ->
+			(	HeaderHost == TargetHost ->
 				true
-			; 	domain_error(http_header_semantics, host(HeaderHost))
+			;	domain_error(http_header_semantics, host(HeaderHost))
 			)
-		; 	true
+		;	true
 		).
 
 	validate_content_length_semantics(Length, Body) :-
-		( 	body_length_if_known(Body, BodyLength) ->
-			( Length =:= BodyLength ->
+		(	body_length_if_known(Body, BodyLength) ->
+			(	Length =:= BodyLength ->
 				true
-			; 	domain_error(http_header_semantics, content_length(Length))
+			;	domain_error(http_header_semantics, content_length(Length))
 			)
-		; 	true
+		;	true
 		).
 
 	validate_content_type_semantics(media_type(HeaderMediaType, _Parameters), empty) :-
 		HeaderMediaType \== '',
 		!.
 	validate_content_type_semantics(media_type(HeaderMediaType, _Parameters), content(BodyMediaType, _Payload)) :-
-		( 	same_media_type(HeaderMediaType, BodyMediaType) ->
+		(	same_media_type(HeaderMediaType, BodyMediaType) ->
 			true
-		; 	domain_error(http_header_semantics, content_type(HeaderMediaType))
+		;	domain_error(http_header_semantics, content_type(HeaderMediaType))
 		).
 
 	validate_property_semantics(Properties, DerivedProperties) :-
@@ -517,20 +556,20 @@
 
 	validate_explicit_property_uniqueness([]).
 	validate_explicit_property_uniqueness([Property| Properties]) :-
-		( 	same_semantic_property(Properties, Property, Other), Other \== Property ->
+		(	same_semantic_property(Properties, Property, Other), Other \== Property ->
 			domain_error(http_property_semantics, Property)
-		; 	true
+		;	true
 		),
 		validate_explicit_property_uniqueness(Properties).
 
 	validate_explicit_property_semantics([], _).
 	validate_explicit_property_semantics([Property| Properties], DerivedProperties) :-
-		( 	semantic_property(Property), same_semantic_property(DerivedProperties, Property, DerivedProperty) ->
-			( DerivedProperty == Property ->
+		(	semantic_property(Property), same_semantic_property(DerivedProperties, Property, DerivedProperty) ->
+			(	DerivedProperty == Property ->
 				true
-			; 	domain_error(http_property_semantics, Property)
+			;	domain_error(http_property_semantics, Property)
 			)
-		; 	true
+		;	true
 		),
 		validate_explicit_property_semantics(Properties, DerivedProperties).
 
@@ -550,23 +589,23 @@
 		reverse(ReversedProperties, Properties).
 
 	properties_from_target(absolute(Components), Acc, Properties) :-
-		( 	memberchk(scheme(Scheme0), Components) ->
+		(	memberchk(scheme(Scheme0), Components) ->
 			normalize_atom_text(Scheme0, Scheme),
 			add_unique_property(scheme(Scheme), Acc, Acc0)
-		; 	Acc0 = Acc
+		;	Acc0 = Acc
 		),
-		( 	memberchk(authority(Authority), Components), authority_host_property(Authority, HostProperty) ->
+		(	memberchk(authority(Authority), Components), authority_host_property(Authority, HostProperty) ->
 			add_unique_property(HostProperty, Acc0, Acc1)
-		; 	Acc1 = Acc0
+		;	Acc1 = Acc0
 		),
-		( 	memberchk(path(Path), Components) ->
+		(	memberchk(path(Path), Components) ->
 			path_segments_property(Path, PathProperty),
 			add_optional_property(PathProperty, Acc1, Acc2)
-		; 	Acc2 = Acc1
+		;	Acc2 = Acc1
 		),
-		( 	memberchk(query(Query), Components), query_pairs_property(Query, QueryProperty) ->
+		(	memberchk(query(Query), Components), query_pairs_property(Query, QueryProperty) ->
 			add_unique_property(QueryProperty, Acc2, Properties)
-		; 	Properties = Acc2
+		;	Properties = Acc2
 		).
 	properties_from_target(authority(Host), Acc, Properties) :-
 		normalize_atom_text(Host, NormalizedHost),
@@ -580,9 +619,9 @@
 	properties_from_target(origin(Path, Query), Acc, Properties) :-
 		path_segments_property(Path, PathProperty),
 		add_optional_property(PathProperty, Acc, Acc0),
-		( 	query_pairs_property(Query, QueryProperty) ->
+		(	query_pairs_property(Query, QueryProperty) ->
 			add_unique_property(QueryProperty, Acc0, Properties)
-		; 	Properties = Acc0
+		;	Properties = Acc0
 		).
 	properties_from_target(asterisk, Properties, Properties).
 
@@ -591,54 +630,54 @@
 		reverse(ReversedProperties, Properties).
 
 	properties_from_headers(Headers, Acc, Properties) :-
-		( 	semantic_single_header_value(Headers, host, HostProperty) ->
+		(	semantic_single_header_value(Headers, host, HostProperty) ->
 			add_unique_property(HostProperty, Acc, Acc0)
-		; 	Acc0 = Acc
+		;	Acc0 = Acc
 		),
-		( 	semantic_single_header_value(Headers, content_type, media_type(MediaType, Parameters)) ->
+		(	semantic_single_header_value(Headers, content_type, media_type(MediaType, Parameters)) ->
 			add_unique_property(content_type(MediaType, Parameters), Acc0, Acc1)
-		; 	Acc1 = Acc0
+		;	Acc1 = Acc0
 		),
-		( 	semantic_single_header_value(Headers, content_length, Length) ->
+		(	semantic_single_header_value(Headers, content_length, Length) ->
 			add_unique_property(content_length(Length), Acc1, Acc2)
-		; 	Acc2 = Acc1
+		;	Acc2 = Acc1
 		),
-		( 	semantic_single_header_value(Headers, cookie, Pairs) ->
+		(	semantic_single_header_value(Headers, cookie, Pairs) ->
 			add_unique_property(cookies(Pairs), Acc2, Acc3)
-		; 	Acc3 = Acc2
+		;	Acc3 = Acc2
 		),
 		header_values(Headers, set_cookie, SetCookies),
-		( 	SetCookies \== [] ->
+		(	SetCookies \== [] ->
 			add_unique_property(set_cookies(SetCookies), Acc3, Acc4)
-		; 	Acc4 = Acc3
+		;	Acc4 = Acc3
 		),
-		( 	semantic_single_header_value(Headers, connection, ConnectionTokens) ->
+		(	semantic_single_header_value(Headers, connection, ConnectionTokens) ->
 			add_unique_property(connection(ConnectionTokens), Acc4, Acc5)
-		; 	Acc5 = Acc4
+		;	Acc5 = Acc4
 		),
-		( 	semantic_single_header_value(Headers, upgrade, UpgradeTokens) ->
+		(	semantic_single_header_value(Headers, upgrade, UpgradeTokens) ->
 			add_unique_property(upgrade(UpgradeTokens), Acc5, Acc6)
-		; 	Acc6 = Acc5
+		;	Acc6 = Acc5
 		),
-		( 	semantic_single_header_value(Headers, sec_websocket_key, Key) ->
+		(	semantic_single_header_value(Headers, sec_websocket_key, Key) ->
 			add_unique_property(websocket_key(Key), Acc6, Acc7)
-		; 	Acc7 = Acc6
+		;	Acc7 = Acc6
 		),
-		( 	semantic_websocket_version_header_value(Headers, Version) ->
+		(	semantic_websocket_version_header_value(Headers, Version) ->
 			add_unique_property(websocket_version(Version), Acc7, Acc8)
-		; 	Acc8 = Acc7
+		;	Acc8 = Acc7
 		),
-		( 	semantic_single_header_value(Headers, sec_websocket_accept, Accept) ->
+		(	semantic_single_header_value(Headers, sec_websocket_accept, Accept) ->
 			add_unique_property(websocket_accept(Accept), Acc8, Acc9)
-		; 	Acc9 = Acc8
+		;	Acc9 = Acc8
 		),
-		( 	semantic_single_header_value(Headers, sec_websocket_protocol, Protocols) ->
+		(	semantic_single_header_value(Headers, sec_websocket_protocol, Protocols) ->
 			add_unique_property(websocket_protocol(Protocols), Acc9, Acc10)
-		; 	Acc10 = Acc9
+		;	Acc10 = Acc9
 		),
-		( 	semantic_single_header_value(Headers, transfer_encoding, TransferTokens) ->
+		(	semantic_single_header_value(Headers, transfer_encoding, TransferTokens) ->
 			add_unique_property(transfer_encoding(TransferTokens), Acc10, Properties)
-		; 	Properties = Acc10
+		;	Properties = Acc10
 		).
 
 	properties_from_body(Body, Properties) :-
@@ -646,9 +685,10 @@
 		reverse(ReversedProperties, Properties).
 
 	properties_from_body(Body, Acc, Properties) :-
-		( 	body_length_if_known(Body, Length) ->
+		(	body_decoded_state(Body, false),
+			body_length_if_known(Body, Length) ->
 			add_unique_property(content_length(Length), Acc, Acc0)
-		; 	Acc0 = Acc
+		;	Acc0 = Acc
 		),
 		body_decoded_state(Body, Decoded),
 		add_unique_property(decoded_body(Decoded), Acc0, Properties).
@@ -758,8 +798,8 @@
 		header_name_present(Headers, host),
 		!.
 	maybe_add_request_host_header(_Target, Properties, Headers, [host-HostValue| Headers]) :-
-		( 	member(host(Host), Properties), HostValue = host(Host)
-		; 	member(host(Host, Port), Properties), HostValue = host(Host, Port)
+		(	member(host(Host), Properties), HostValue = host(Host)
+		;	member(host(Host, Port), Properties), HostValue = host(Host, Port)
 		),
 		!.
 	maybe_add_request_host_header(Target, _Properties, Headers, [host-HostValue| Headers]) :-
@@ -906,10 +946,13 @@
 	body_options_from_content_type(MediaType, Parameters, [boundary(Boundary)]) :-
 		multipart_media_type(MediaType),
 		!,
-		( 	multipart_boundary_parameter(Parameters, Boundary) ->
+		(	multipart_boundary_parameter(Parameters, Boundary) ->
 			true
-		; 	domain_error(http_multipart_boundary, Parameters)
+		;	domain_error(http_multipart_boundary, Parameters)
 		).
+	body_options_from_content_type(_MediaType, Parameters, [charset(Charset)]) :-
+		member(charset-Charset, Parameters),
+		!.
 	body_options_from_content_type(_MediaType, _Parameters, []).
 
 	body_bytes_to_term([], _MediaType, _Options, empty) :-
@@ -943,43 +986,43 @@
 	payload_body_from_headers(_Headers, [], empty) :-
 		!.
 	payload_body_from_headers(Headers, Bytes, Body) :-
-		( 	semantic_single_header_value(Headers, content_type, media_type(MediaType, Parameters)) ->
+		(	semantic_single_header_value(Headers, content_type, media_type(MediaType, Parameters)) ->
 			body_options_from_content_type(MediaType, Parameters, Options),
 			parse_body(bytes(Bytes), MediaType, Options, Body)
-		; 	encode_body('application/octet-stream', Bytes, [], Body)
+		;	encode_body('application/octet-stream', Bytes, [], Body)
 		).
 
 	transfer_body_bytes(Headers, Bytes, BodyBytes, Properties) :-
-		( 	semantic_single_header_value(Headers, transfer_encoding, Tokens) ->
+		(	semantic_single_header_value(Headers, transfer_encoding, Tokens) ->
 			decode_transfer_bytes(Tokens, Bytes, BodyBytes, Properties)
-		; 	Properties = [],
-			( 	semantic_single_header_value(Headers, content_length, Length) ->
+		;	Properties = [],
+			(	semantic_single_header_value(Headers, content_length, Length) ->
 				exact_length_bytes(Length, Bytes, BodyBytes)
-			; 	BodyBytes = Bytes
+			;	BodyBytes = Bytes
 			)
 		).
 
 	decode_transfer_bytes([chunked], Bytes, BodyBytes, Properties) :-
 		phrase(chunked_body_bytes(Chunks, Trailers), Bytes),
 		append(Chunks, BodyBytes),
-		( 	Trailers == [] ->
+		(	Trailers == [] ->
 			Properties = []
-		; 	Properties = [trailers(Trailers)]
+		;	Properties = [trailers(Trailers)]
 		).
 	decode_transfer_bytes(Tokens, _Bytes, _BodyBytes, _Properties) :-
 		domain_error(http_transfer_encoding, Tokens).
 
 	message_wire_body(Headers, Properties, RawBodyBytes, WireBodyBytes) :-
-		( 	transfer_encoding_tokens(Headers, Properties, [chunked]) ->
+		(	transfer_encoding_tokens(Headers, Properties, [chunked]) ->
 			trailers_property(Properties, Trailers),
 			generate_chunked_body(RawBodyBytes, Trailers, WireBodyBytes)
-		; 	WireBodyBytes = RawBodyBytes
+		;	WireBodyBytes = RawBodyBytes
 		).
 
 	trailers_property(Properties, Trailers) :-
-		( 	memberchk(trailers(Trailers), Properties) ->
+		(	memberchk(trailers(Trailers), Properties) ->
 			true
-		; 	Trailers = []
+		;	Trailers = []
 		).
 
 	transfer_encoding_tokens(Headers, _Properties, Tokens) :-
@@ -1004,10 +1047,10 @@
 		multipart_parts_bytes(Parts, BoundaryCodes, Bytes).
 
 	multipart_boundary_option(Options, Boundary) :-
-		( 	memberchk(boundary(Boundary0), Options) ->
+		(	memberchk(boundary(Boundary0), Options) ->
 			text_to_atom(Boundary0, Boundary),
 			valid_multipart_boundary(Boundary)
-		; 	domain_error(http_multipart_boundary, Options)
+		;	domain_error(http_multipart_boundary, Options)
 		).
 
 	valid_multipart_boundary(Boundary) :-
@@ -1036,9 +1079,9 @@
 	parse_multipart_part_sequence(Bytes, BoundaryCodes, [Part| Parts]) :-
 		split_multipart_part(Bytes, BoundaryCodes, PartBytes, RestBytes, Final),
 		parse_multipart_part_bytes(PartBytes, Part),
-		( 	Final == true ->
+		(	Final == true ->
 			Parts = []
-		; 	parse_multipart_part_sequence(RestBytes, BoundaryCodes, Parts)
+		;	parse_multipart_part_sequence(RestBytes, BoundaryCodes, Parts)
 		).
 
 	split_multipart_part(Bytes, BoundaryCodes, PartBytes, RestBytes, Final) :-
@@ -1171,29 +1214,60 @@
 		{Size > 0, NextSize is Size - 1},
 		chunk_data(NextSize, Bytes).
 
-	parse_wire_payload(MediaType, Bytes, _Options, Payload) :-
-		( 	json_media_type(MediaType) ->
-			json::parse(codes(Bytes), Payload)
-		; 	form_media_type(MediaType) ->
+	parse_wire_payload(MediaType, Bytes, Options, Payload) :-
+		(	json_media_type(MediaType) ->
+			payload_text_codes(MediaType, Bytes, Options, Codes),
+			json::parse(codes(Codes), Payload)
+		;	form_media_type(MediaType) ->
 			parse_www_form_codes(Bytes, Payload)
-		; 	text_media_type(MediaType) ->
-			atom_codes(Payload, Bytes)
-		; 	octet_stream_media_type(MediaType) ->
+		;	text_media_type(MediaType) ->
+			payload_text_codes(MediaType, Bytes, Options, Codes),
+			atom_codes(Payload, Codes)
+		;	octet_stream_media_type(MediaType) ->
 			Payload = Bytes
-		; 	existence_error(http_body_codec, MediaType)
+		;	existence_error(http_body_codec, MediaType)
 		).
 
+	payload_text_codes(MediaType, Bytes, Options, Codes) :-
+		(	payload_charset(MediaType, Options, CharsetObject) ->
+			CharsetObject::bytes_to_codes(Bytes, Codes)
+		;	Codes = Bytes
+		).
+
+	payload_charset(_MediaType, Options, CharsetObject) :-
+		memberchk(wire_bytes(true), Options),
+		memberchk(charset(Charset), Options),
+		!,
+		charset_object(Charset, CharsetObject).
+	payload_charset(MediaType, Options, utf_8) :-
+		memberchk(wire_bytes(true), Options),
+		json_media_type(MediaType).
+
+	charset_object(Charset, CharsetObject) :-
+		normalize_atom_text(Charset, NormalizedCharset),
+		atom_codes(NormalizedCharset, CharsetCodes),
+		charset_object_name_codes(CharsetCodes, CharsetObjectCodes),
+		atom_codes(CharsetObject, CharsetObjectCodes),
+		catch(CharsetObject::preferred_mime_name(_), _, fail).
+
+	charset_object_name_codes([], []).
+	charset_object_name_codes([0'-| CharsetCodes], [0'_| CharsetObjectCodes]) :-
+		!,
+		charset_object_name_codes(CharsetCodes, CharsetObjectCodes).
+	charset_object_name_codes([Code| CharsetCodes], [Code| CharsetObjectCodes]) :-
+		charset_object_name_codes(CharsetCodes, CharsetObjectCodes).
+
 	generate_wire_payload(MediaType, Payload, _Options, Bytes) :-
-		( 	json_media_type(MediaType) ->
+		(	json_media_type(MediaType) ->
 			json::generate(codes(Bytes), Payload)
-		; 	form_media_type(MediaType) ->
+		;	form_media_type(MediaType) ->
 			parse_form_payload(Payload, Pairs),
 			generate_www_form_codes(Pairs, Bytes)
-		; 	text_media_type(MediaType) ->
+		;	text_media_type(MediaType) ->
 			text_to_codes(Payload, Bytes)
-		; 	octet_stream_media_type(MediaType) ->
+		;	octet_stream_media_type(MediaType) ->
 			( Payload = binary(RawBytes) -> Bytes = RawBytes ; Bytes = Payload )
-		; 	existence_error(http_body_codec, MediaType)
+		;	existence_error(http_body_codec, MediaType)
 		).
 
 	body_codec(MediaType, http_json_body_codec) :-
@@ -1272,10 +1346,10 @@
 		http_version_token(Version),
 		[0' ],
 		status_code_token(Code),
-		( 	[0' ] ->
+		(	[0' ] ->
 			reason_phrase_token(ReasonPhraseCodes),
 			{atom_codes(ReasonPhrase, ReasonPhraseCodes)}
-		; 	{ReasonPhrase = ''}
+		;	{ReasonPhrase = ''}
 		),
 		{Status = status(Code, ReasonPhrase)}.
 
@@ -1430,9 +1504,9 @@
 		codes(VersionCodes),
 		[0' ],
 		codes(StatusCodes),
-		( 	{ReasonPhraseCodes == []} ->
+		(	{ReasonPhraseCodes == []} ->
 			[]
-		; 	[0' ], codes(ReasonPhraseCodes)
+		;	[0' ], codes(ReasonPhraseCodes)
 		),
 		crlf.
 
@@ -1453,9 +1527,9 @@
 		append([ [0'H, 0'T, 0'T, 0'P, 0'/], MajorCodes, [0'.], MinorCodes ], Codes).
 
 	reason_phrase_codes(ReasonPhrase, Codes) :-
-		( 	ReasonPhrase == '' ->
+		(	ReasonPhrase == '' ->
 			Codes = []
-		; 	valid_header_text(ReasonPhrase),
+		;	valid_header_text(ReasonPhrase),
 			text_to_codes(ReasonPhrase, Codes)
 		).
 
@@ -1484,11 +1558,11 @@
 	parse_request_target_codes(Codes, Target) :-
 		Codes = [0'/| _],
 		!,
-		( 	split_once(0'?, Codes, PathCodes, QueryCodes) ->
+		(	split_once(0'?, Codes, PathCodes, QueryCodes) ->
 			atom_codes(Path, PathCodes),
 			atom_codes(Query, QueryCodes),
 			Target = origin(Path, Query)
-		; 	atom_codes(Path, Codes),
+		;	atom_codes(Path, Codes),
 			Target = origin(Path)
 		).
 	parse_request_target_codes(Codes, authority(Host, Port)) :-
@@ -1578,10 +1652,10 @@
 		atom_codes(Key, Codes),
 		!.
 	header_value_codes(sec_websocket_version, Value, Codes) :-
-		( 	Value = [_| _] ->
+		(	Value = [_| _] ->
 			normalize_websocket_versions(Value, Versions),
 			websocket_versions_codes(Versions, Codes)
-		; 	normalize_header_semantics(sec_websocket_version, Value, Version),
+		;	normalize_header_semantics(sec_websocket_version, Value, Version),
 			websocket_versions_codes(Version, Codes)
 		),
 		!.
@@ -1629,9 +1703,9 @@
 		lowercase_header_name_codes(Codes, NormalizedCodes).
 
 	normalize_header_semantics(content_length, Value, Length) :-
-		( 	integer(Value) ->
+		(	integer(Value) ->
 			Length = Value
-		; 	text_to_codes(Value, Codes),
+		;	text_to_codes(Value, Codes),
 			trim_ows_codes(Codes, TrimmedCodes),
 			number_codes(Length, TrimmedCodes)
 		),
@@ -1713,9 +1787,9 @@
 		websocket_header_values(Headers, Values0),
 		Values0 \== [],
 		flatten_websocket_versions(Values0, Versions),
-		( 	Versions = [SingleVersion] ->
+		(	Versions = [SingleVersion] ->
 			Version = SingleVersion
-		; 	Version = Versions
+		;	Version = Versions
 		).
 
 	websocket_header_values([], []).
@@ -1731,15 +1805,15 @@
 
 	header_values([], _Name, Values, Values).
 	header_values([HeaderName-RawValue| Headers], Name, Acc, Values) :-
-		( 	HeaderName == Name, normalize_semantic_header_value(Name, RawValue, Value) ->
+		(	HeaderName == Name, normalize_semantic_header_value(Name, RawValue, Value) ->
 			header_values(Headers, Name, [Value| Acc], Values)
-		; 	header_values(Headers, Name, Acc, Values)
+		;	header_values(Headers, Name, Acc, Values)
 		).
 
 	normalize_semantic_header_value(Name, RawValue, Value) :-
-		( 	member(Name, [content_length, content_type, cookie, set_cookie, host, connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions, transfer_encoding]) ->
+		(	member(Name, [content_length, content_type, cookie, set_cookie, host, connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions, transfer_encoding]) ->
 			normalize_header_semantics(Name, RawValue, Value)
-		; 	Value = RawValue
+		;	Value = RawValue
 		).
 
 	normalize_websocket_key(Value, Key) :-
@@ -1771,9 +1845,9 @@
 		text_to_codes(Value, Codes0),
 		trim_ows_codes(Codes0, Codes),
 		parse_websocket_version_codes(Codes, Versions),
-		( 	Versions = [SingleVersion] ->
+		(	Versions = [SingleVersion] ->
 			Version = SingleVersion
-		; 	Version = Versions
+		;	Version = Versions
 		).
 
 	single_header_value(_Name, [Value], Value) :-
@@ -1810,9 +1884,9 @@
 
 	path_segments_property(Path, path_segments(Segments)) :-
 		atom_codes(Path, PathCodes0),
-		( 	PathCodes0 = [0'/| PathCodes] ->
+		(	PathCodes0 = [0'/| PathCodes] ->
 			true
-		; 	PathCodes = PathCodes0
+		;	PathCodes = PathCodes0
 		),
 		split_codes(0'/, PathCodes, SegmentCodeLists),
 		segment_code_lists_atoms(SegmentCodeLists, Segments).
@@ -1902,75 +1976,75 @@
 		prefix_bytes(NextLength, Bytes, Prefix, Rest).
 
 	source_to_codes(Source, Codes) :-
-		( 	var(Source) ->
+		(	var(Source) ->
 			instantiation_error
-		; 	Source = file(File) ->
+		;	Source = file(File) ->
 			file_to_codes(File, Codes)
-		; 	Source = stream(Stream) ->
+		;	Source = stream(Stream) ->
 			stream_to_codes(Stream, Codes)
-		; 	Source = codes(Codes) ->
+		;	Source = codes(Codes) ->
 			true
-		; 	Source = chars(Chars) ->
+		;	Source = chars(Chars) ->
 			chars_to_codes(Chars, Codes)
-		; 	Source = atom(Atom) ->
+		;	Source = atom(Atom) ->
 			atom_codes(Atom, Codes)
-		; 	domain_error(http_source, Source)
+		;	domain_error(http_source, Source)
 		).
 
 	source_to_bytes(Source, Bytes) :-
-		( 	var(Source) ->
+		(	var(Source) ->
 			instantiation_error
-		; 	Source = file(File) ->
+		;	Source = file(File) ->
 			file_to_bytes(File, Bytes)
-		; 	Source = stream(Stream) ->
+		;	Source = stream(Stream) ->
 			stream_to_bytes(Stream, Bytes)
-		; 	Source = bytes(Bytes) ->
+		;	Source = bytes(Bytes) ->
 			true
-		; 	Source = codes(Bytes) ->
+		;	Source = codes(Bytes) ->
 			true
-		; 	Source = chars(Chars) ->
+		;	Source = chars(Chars) ->
 			chars_to_codes(Chars, Bytes)
-		; 	Source = atom(Atom) ->
+		;	Source = atom(Atom) ->
 			atom_codes(Atom, Bytes)
-		; 	domain_error(http_source, Source)
+		;	domain_error(http_source, Source)
 		).
 
 	codes_to_sink(Sink, Codes) :-
-		( 	var(Sink) ->
+		(	var(Sink) ->
 			instantiation_error
-		; 	Sink = file(File) ->
+		;	Sink = file(File) ->
 			open(File, write, Stream),
 			write_codes(Codes, Stream),
 			close(Stream)
-		; 	Sink = stream(Stream) ->
+		;	Sink = stream(Stream) ->
 			write_codes(Codes, Stream)
-		; 	Sink = codes(Codes) ->
+		;	Sink = codes(Codes) ->
 			true
-		; 	Sink = chars(Chars) ->
+		;	Sink = chars(Chars) ->
 			codes_to_chars(Codes, Chars)
-		; 	Sink = atom(Atom) ->
+		;	Sink = atom(Atom) ->
 			atom_codes(Atom, Codes)
-		; 	domain_error(http_sink, Sink)
+		;	domain_error(http_sink, Sink)
 		).
 
 	bytes_to_sink(Sink, Bytes) :-
-		( 	var(Sink) ->
+		(	var(Sink) ->
 			instantiation_error
-		; 	Sink = file(File) ->
+		;	Sink = file(File) ->
 			open(File, write, Stream, [type(binary)]),
 			write_bytes(Bytes, Stream),
 			close(Stream)
-		; 	Sink = stream(Stream) ->
+		;	Sink = stream(Stream) ->
 			write_bytes(Bytes, Stream)
-		; 	Sink = bytes(Bytes) ->
+		;	Sink = bytes(Bytes) ->
 			true
-		; 	Sink = codes(Bytes) ->
+		;	Sink = codes(Bytes) ->
 			true
-		; 	Sink = chars(Chars) ->
+		;	Sink = chars(Chars) ->
 			codes_to_chars(Bytes, Chars)
-		; 	Sink = atom(Atom) ->
+		;	Sink = atom(Atom) ->
 			atom_codes(Atom, Bytes)
-		; 	domain_error(http_sink, Sink)
+		;	domain_error(http_sink, Sink)
 		).
 
 	write_codes([], _Stream).
@@ -1984,9 +2058,9 @@
 		write_bytes(Bytes, Stream).
 
 	validate_method(Method) :-
-		( 	valid_method(Method) ->
+		(	valid_method(Method) ->
 			true
-		; 	domain_error(http_method, Method)
+		;	domain_error(http_method, Method)
 		).
 
 	valid_method(get).
@@ -2000,9 +2074,9 @@
 	valid_method(connect).
 
 	validate_target(Target) :-
-		( 	valid_target(Target) ->
+		(	valid_target(Target) ->
 			true
-		; 	domain_error(http_target, Target)
+		;	domain_error(http_target, Target)
 		).
 
 	valid_target(asterisk).
@@ -2028,9 +2102,9 @@
 		catch(url(atom)::valid(URL), _, fail).
 
 	validate_version(Version) :-
-		( 	valid_version(Version) ->
+		(	valid_version(Version) ->
 			true
-		; 	domain_error(http_version, Version)
+		;	domain_error(http_version, Version)
 		).
 
 	valid_version(http(Major, Minor)) :-
@@ -2040,9 +2114,9 @@
 		Minor >= 0.
 
 	validate_status(Status) :-
-		( 	valid_status(Status) ->
+		(	valid_status(Status) ->
 			true
-		; 	domain_error(http_status, Status)
+		;	domain_error(http_status, Status)
 		).
 
 	valid_status(status(Code, ReasonPhrase)) :-
@@ -2052,25 +2126,25 @@
 		valid_text(ReasonPhrase).
 
 	validate_headers(Headers) :-
-		( 	var(Headers) ->
+		(	var(Headers) ->
 			domain_error(http_headers, Headers)
-		; 	validate_header_list(Headers)
+		;	validate_header_list(Headers)
 		).
 
 	validate_header_list(Headers) :-
-		( 	Headers == [] ->
+		(	Headers == [] ->
 			true
-		; 	Headers = [Header| Rest] ->
+		;	Headers = [Header| Rest] ->
 			validate_header(Header),
 			validate_header_list(Rest)
-		; 	domain_error(http_headers, Headers)
+		;	domain_error(http_headers, Headers)
 		).
 
 	validate_header(Name-Value) :-
 		!,
-		( 	valid_header_name(Name) ->
+		(	valid_header_name(Name) ->
 			validate_header_value(Name, Value)
-		; 	domain_error(http_header_name, Name)
+		;	domain_error(http_header_name, Name)
 		).
 	validate_header(Header) :-
 		domain_error(http_header, Header).
@@ -2109,95 +2183,95 @@
 
 	validate_header_value(content_length, Value) :-
 		!,
-		( 	normalize_header_semantics(content_length, Value, _) ->
+		(	normalize_header_semantics(content_length, Value, _) ->
 			true
-		; 	domain_error(http_header_value(content_length), Value)
+		;	domain_error(http_header_value(content_length), Value)
 		).
 	validate_header_value(content_type, Value) :-
 		!,
-		( 	normalize_header_semantics(content_type, Value, _) ->
+		(	normalize_header_semantics(content_type, Value, _) ->
 			true
-		; 	domain_error(http_header_value(content_type), Value)
+		;	domain_error(http_header_value(content_type), Value)
 		).
 	validate_header_value(cookie, Value) :-
 		!,
-		( 	normalize_header_semantics(cookie, Value, _) ->
+		(	normalize_header_semantics(cookie, Value, _) ->
 			true
-		; 	domain_error(http_header_value(cookie), Value)
+		;	domain_error(http_header_value(cookie), Value)
 		).
 	validate_header_value(set_cookie, Value) :-
 		!,
-		( 	normalize_header_semantics(set_cookie, Value, _) ->
+		(	normalize_header_semantics(set_cookie, Value, _) ->
 			true
-		; 	domain_error(http_header_value(set_cookie), Value)
+		;	domain_error(http_header_value(set_cookie), Value)
 		).
 	validate_header_value(host, Value) :-
 		!,
-		( 	normalize_header_semantics(host, Value, _) ->
+		(	normalize_header_semantics(host, Value, _) ->
 			true
-		; 	domain_error(http_header_value(host), Value)
+		;	domain_error(http_header_value(host), Value)
 		).
 	validate_header_value(connection, Value) :-
 		!,
-		( 	normalize_header_semantics(connection, Value, _) ->
+		(	normalize_header_semantics(connection, Value, _) ->
 			true
-		; 	domain_error(http_header_value(connection), Value)
+		;	domain_error(http_header_value(connection), Value)
 		).
 	validate_header_value(upgrade, Value) :-
 		!,
-		( 	normalize_header_semantics(upgrade, Value, _) ->
+		(	normalize_header_semantics(upgrade, Value, _) ->
 			true
-		; 	domain_error(http_header_value(upgrade), Value)
+		;	domain_error(http_header_value(upgrade), Value)
 		).
 	validate_header_value(sec_websocket_key, Value) :-
 		!,
-		( 	normalize_header_semantics(sec_websocket_key, Value, _) ->
+		(	normalize_header_semantics(sec_websocket_key, Value, _) ->
 			true
-		; 	domain_error(http_header_value(sec_websocket_key), Value)
+		;	domain_error(http_header_value(sec_websocket_key), Value)
 		).
 	validate_header_value(sec_websocket_version, Value) :-
 		!,
-		( 	( 	Value = [_| _] ->
+		(	( 	Value = [_| _] ->
 				normalize_websocket_versions(Value, _)
-			; 	normalize_header_semantics(sec_websocket_version, Value, _)
+			;	normalize_header_semantics(sec_websocket_version, Value, _)
 			) ->
 			true
-		; 	domain_error(http_header_value(sec_websocket_version), Value)
+		;	domain_error(http_header_value(sec_websocket_version), Value)
 		).
 	validate_header_value(sec_websocket_accept, Value) :-
 		!,
-		( 	normalize_header_semantics(sec_websocket_accept, Value, _) ->
+		(	normalize_header_semantics(sec_websocket_accept, Value, _) ->
 			true
-		; 	domain_error(http_header_value(sec_websocket_accept), Value)
+		;	domain_error(http_header_value(sec_websocket_accept), Value)
 		).
 	validate_header_value(sec_websocket_protocol, Value) :-
 		!,
-		( 	normalize_header_semantics(sec_websocket_protocol, Value, _) ->
+		(	normalize_header_semantics(sec_websocket_protocol, Value, _) ->
 			true
-		; 	domain_error(http_header_value(sec_websocket_protocol), Value)
+		;	domain_error(http_header_value(sec_websocket_protocol), Value)
 		).
 	validate_header_value(sec_websocket_extensions, Value) :-
 		!,
-		( 	normalize_header_semantics(sec_websocket_extensions, Value, _) ->
+		(	normalize_header_semantics(sec_websocket_extensions, Value, _) ->
 			true
-		; 	domain_error(http_header_value(sec_websocket_extensions), Value)
+		;	domain_error(http_header_value(sec_websocket_extensions), Value)
 		).
 	validate_header_value(transfer_encoding, Value) :-
 		!,
-		( 	normalize_header_semantics(transfer_encoding, Value, _) ->
+		(	normalize_header_semantics(transfer_encoding, Value, _) ->
 			true
-		; 	domain_error(http_header_value(transfer_encoding), Value)
+		;	domain_error(http_header_value(transfer_encoding), Value)
 		).
 	validate_header_value(_, Value) :-
-		( 	valid_header_text(Value) ->
+		(	valid_header_text(Value) ->
 			true
-		; 	domain_error(http_header_value, Value)
+		;	domain_error(http_header_value, Value)
 		).
 
 	validate_body(Body) :-
-		( 	valid_body(Body) ->
+		(	valid_body(Body) ->
 			true
-		; 	domain_error(http_body, Body)
+		;	domain_error(http_body, Body)
 		).
 
 	valid_body(empty).
@@ -2206,9 +2280,9 @@
 		valid_payload(Payload).
 
 	validate_media_type(MediaType) :-
-		( 	valid_media_type(MediaType) ->
+		(	valid_media_type(MediaType) ->
 			true
-		; 	domain_error(http_media_type, MediaType)
+		;	domain_error(http_media_type, MediaType)
 		).
 
 	valid_media_type(MediaType) :-
@@ -2251,24 +2325,24 @@
 		catch(validate_properties(Properties), _, fail).
 
 	validate_properties(Properties) :-
-		( 	var(Properties) ->
+		(	var(Properties) ->
 			domain_error(http_properties, Properties)
-		; 	validate_property_list(Properties)
+		;	validate_property_list(Properties)
 		).
 
 	validate_property_list(Properties) :-
-		( 	Properties == [] ->
+		(	Properties == [] ->
 			true
-		; 	Properties = [Property| Rest] ->
+		;	Properties = [Property| Rest] ->
 			validate_property(Property),
 			validate_property_list(Rest)
-		; 	domain_error(http_properties, Properties)
+		;	domain_error(http_properties, Properties)
 		).
 
 	validate_property(Property) :-
-		( 	valid_property(Property) ->
+		(	valid_property(Property) ->
 			true
-		; 	domain_error(http_property, Property)
+		;	domain_error(http_property, Property)
 		).
 
 	valid_property(Property) :-
@@ -2307,6 +2381,8 @@
 		valid_port(Port).
 	valid_property_by_functor(decoded_body, decoded_body(Boolean)) :-
 		valid_boolean(Boolean).
+	valid_property_by_functor(open_api_probe, open_api_probe(Boolean)) :-
+		valid_boolean(Boolean).
 	valid_property_by_functor(connection, connection(Tokens)) :-
 		valid_token_list(Tokens).
 	valid_property_by_functor(upgrade, upgrade(Tokens)) :-
@@ -2314,9 +2390,9 @@
 	valid_property_by_functor(websocket_key, websocket_key(Key)) :-
 		valid_websocket_key(Key).
 	valid_property_by_functor(websocket_version, websocket_version(Version)) :-
-		( 	Version = [_| _] ->
+		(	Version = [_| _] ->
 			normalize_websocket_versions(Version, _)
-		; 	normalize_websocket_version(Version, _)
+		;	normalize_websocket_version(Version, _)
 		).
 	valid_property_by_functor(websocket_accept, websocket_accept(Accept)) :-
 		valid_websocket_accept(Accept).
@@ -2349,9 +2425,9 @@
 	recognized_property_functor(transfer_encoding).
 
 	validate_body_options(Options) :-
-		( 	var(Options) ->
+		(	var(Options) ->
 			domain_error(http_body_options, Options)
-		; 	valid_options_list(Options)
+		;	valid_options_list(Options)
 		).
 
 	valid_options_list([]).
@@ -2359,9 +2435,9 @@
 		valid_options_list(Options).
 
 	validate_parameter_pairs(Parameters) :-
-		( 	valid_parameter_pairs(Parameters) ->
+		(	valid_parameter_pairs(Parameters) ->
 			true
-		; 	domain_error(http_parameters, Parameters)
+		;	domain_error(http_parameters, Parameters)
 		).
 
 	valid_set_cookie_values([]).
@@ -2502,11 +2578,11 @@
 		atom_codes(Atom, Codes).
 
 	text_to_codes(Text, Codes) :-
-		( 	atom(Text) ->
+		(	atom(Text) ->
 			atom_codes(Text, Codes)
-		; 	valid_character_list(Text) ->
+		;	valid_character_list(Text) ->
 			chars_to_codes(Text, Codes)
-		; 	Codes = Text
+		;	Codes = Text
 		).
 
 	normalize_atom_text(Text, NormalizedText) :-
@@ -2539,9 +2615,9 @@
 
 	parameter_value_codes(Value, ValueCodes) :-
 		text_to_codes(Value, Codes),
-		( 	valid_token_codes(Codes) ->
+		(	valid_token_codes(Codes) ->
 			ValueCodes = Codes
-		; 	append([[0'"], Codes, [0'"]], ValueCodes)
+		;	append([[0'"], Codes, [0'"]], ValueCodes)
 		).
 
 	parse_media_type_codes(Codes, media_type(MediaType, Parameters)) :-
@@ -2589,9 +2665,9 @@
 		pair_segments_pairs(Segments, Pairs).
 
 	parse_pair_segment(Segment, Name, Value) :-
-		( 	split_once(0'=, Segment, NameCodes0, ValueCodes0) ->
+		(	split_once(0'=, Segment, NameCodes0, ValueCodes0) ->
 			true
-		; 	NameCodes0 = Segment,
+		;	NameCodes0 = Segment,
 			ValueCodes0 = []
 		),
 		www_form_decode_codes(NameCodes0, NameCodes),
@@ -2603,9 +2679,9 @@
 	generate_www_form_codes([Name-Value| Pairs], Codes) :-
 		www_form_encode_text(Name, NameCodes),
 		www_form_encode_text(Value, ValueCodes),
-		( 	Pairs == [] ->
+		(	Pairs == [] ->
 			append([NameCodes, [0'=], ValueCodes], Codes)
-		; 	generate_www_form_codes(Pairs, RestCodes),
+		;	generate_www_form_codes(Pairs, RestCodes),
 			append([NameCodes, [0'=], ValueCodes, [0'&], RestCodes], Codes)
 		).
 
@@ -2707,11 +2783,11 @@
 		atom_codes(Host, Codes).
 	host_value_codes(host(Host, Port), Codes) :-
 		atom_codes(Host, HostCodes0),
-		( 	memberchk(0':, HostCodes0), HostCodes0 = [0'[| _] ->
+		(	memberchk(0':, HostCodes0), HostCodes0 = [0'[| _] ->
 			HostCodes = HostCodes0
-		; 	memberchk(0':, HostCodes0) ->
+		;	memberchk(0':, HostCodes0) ->
 			append([0'[| HostCodes0], [0']], HostCodes)
-		; 	HostCodes = HostCodes0
+		;	HostCodes = HostCodes0
 		),
 		number_codes(Port, PortCodes),
 		append([HostCodes, [0':], PortCodes], Codes).
@@ -2938,16 +3014,16 @@
 		websocket_sha1_rounds(NextIndex, Words, T, A0, C1, C0, D0, A, B, C, D, E).
 
 	websocket_sha1_f_k(Index, B, C, D, F, K) :-
-		( 	Index < 20 ->
+		(	Index < 20 ->
 			F is ((B /\ C) \/ ((\ B) /\ D)) /\ 0xFFFFFFFF,
 			K = 0x5A827999
-		; 	Index < 40 ->
+		;	Index < 40 ->
 			F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
 			K = 0x6ED9EBA1
-		; 	Index < 60 ->
+		;	Index < 60 ->
 			F is ((B /\ C) \/ (B /\ D) \/ (C /\ D)) /\ 0xFFFFFFFF,
 			K = 0x8F1BBCDC
-		; 	F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
+		;	F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
 			K = 0xCA62C1D6
 		).
 
@@ -3002,9 +3078,9 @@
 		validate_method(Method).
 
 	normalize_ascii_code(Code, NormalizedCode) :-
-		( 	uppercase_alpha(Code) ->
+		(	uppercase_alpha(Code) ->
 			NormalizedCode is Code + 32
-		; 	NormalizedCode = Code
+		;	NormalizedCode = Code
 		).
 
 	ows_code(Code) :-
@@ -3023,9 +3099,9 @@
 		^^trim_ows_codes(Codes, TrimmedCodes).
 
 	strip_userinfo_codes(Codes, StrippedCodes) :-
-		( 	last_separator_suffix(0'@, Codes, Suffix) ->
+		(	last_separator_suffix(0'@, Codes, Suffix) ->
 			StrippedCodes = Suffix
-		; 	StrippedCodes = Codes
+		;	StrippedCodes = Codes
 		).
 
 	last_separator_suffix(Separator, Codes, Suffix) :-
@@ -3110,9 +3186,9 @@
 		Digit is Number mod 16,
 		hex_digit(Digit, Code),
 		Quotient is Number // 16,
-		( 	Quotient =:= 0 ->
+		(	Quotient =:= 0 ->
 			Codes = [Code| Acc]
-		; 	hex_number_codes(Quotient, [Code| Acc], Codes)
+		;	hex_number_codes(Quotient, [Code| Acc], Codes)
 		).
 
 	hex_pair(Code, High, Low) :-
@@ -3122,9 +3198,9 @@
 		hex_digit(LowValue, Low).
 
 	hex_digit(Value, Code) :-
-		( 	Value < 10 ->
+		(	Value < 10 ->
 			Code is 0'0 + Value
-		; 	Code is 0'A + Value - 10
+		;	Code is 0'A + Value - 10
 		).
 
 	hex_value(Code, Value) :-

@@ -44,9 +44,9 @@
 	route_metadata(show_panel, [htmx_response_options([retarget('#panel')])]).
 
 	show_panel(Request, Response) :-
-		( 	http::property(Request, htmx_request(true)) ->
+		(	http::property(Request, htmx_request(true)) ->
 			BodyText = '<div>htmx-panel</div>'
-		; 	BodyText = '<div>plain-panel</div>'
+		;	BodyText = '<div>plain-panel</div>'
 		),
 		http::version(Request, Version),
 		http::response(Version, status(200, 'OK'), [], content('text/html', text(BodyText)), [htmx_response_options([trigger(saved)])], Response).

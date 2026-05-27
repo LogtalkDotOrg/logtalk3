@@ -1563,6 +1563,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_32 <hash_common_32/0::big_endian_word32/2>`
 
+``binary_body/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::binary_body/2>`
+
 ``binomial/3``
 --------------
 
@@ -3750,6 +3760,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`process <process/0::create/3>`
 
+``created_response/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::created_response/4>`
+
 ``creators/1``
 --------------
 
@@ -3860,6 +3880,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_htmx <http_htmx/0::current_url/2>`
+
+``current_url_abs_path/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::current_url_abs_path/2>`
 
 ``cut/3``
 ---------
@@ -7890,6 +7920,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`loopp <loopp/0::foreach/4>`
 
+``form_body/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::form_body/2>`
+
 ``form_data_body/2``
 --------------------
 
@@ -10646,6 +10686,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::is_false/1>`
 
+``is_fragment_request/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::is_fragment_request/1>`
+
 ``is_frame/1``
 --------------
 
@@ -11120,6 +11170,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::join_packet_zone/4>`
+
+``json_body/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::json_body/2>`
+
+``json_response/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::json_response/4>`
+
+``json_response/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::json_response/5>`
 
 ``json_to_geojson/2``
 ---------------------
@@ -14599,6 +14679,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::nextto/3>`
 * :ref:`varlistp <varlistp/0::nextto/3>`
 
+``no_content_response/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::no_content_response/2>`
+
 ``node/7``
 ----------
 
@@ -16762,6 +16852,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::path_consistency/2>`
 
+``path_parameter/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::path_parameter/3>`
+
 ``pattern_miner_options/2``
 ---------------------------
 
@@ -17842,6 +17942,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`regressor_protocol <regressor_protocol/0::print_regressor/1>`
 
+``problem_response/6``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::problem_response/6>`
+
 ``product/2``
 -------------
 
@@ -18227,6 +18337,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::query/2>`
+
+``query_parameter/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::query_parameter/3>`
 
 ``question_hook/6``
 -------------------
@@ -19834,6 +19954,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http <http/0::request/7>`
 
+``request_body/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::request_body/2>`
+
 ``request_cookies/3``
 ---------------------
 
@@ -19843,6 +19973,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_cookie_jar <http_cookie_jar/0::request_cookies/3>`
+
+``request_header/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::request_header/3>`
+
+``request_kind/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::request_kind/2>`
 
 ``request_origin/2``
 --------------------
@@ -19863,6 +20013,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_htmx <http_htmx/0::request_properties/2>`
+
+``request_property/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_htmx <http_htmx/0::request_property/2>`
 
 ``request_shutdown/1``
 ----------------------
@@ -23332,6 +23492,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`lgtunit <lgtunit/0::test/1>`
+
+``text_body/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::text_body/2>`
 
 ``time_of_day/4``
 -----------------

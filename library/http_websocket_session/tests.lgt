@@ -737,19 +737,19 @@
 
 	raw_server_once(Listener, ResponseAtom) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
-		( 	catch(
-				( 	http_server::read_request(Input, _Request),
+		(	catch(
+				(	http_server::read_request(Input, _Request),
 					atom_codes(ResponseAtom, Bytes),
 					write_bytes(Bytes, Output),
 					flush_output(Output)
 				),
 				Error,
-				( 	catch(socket::close(Input, Output), _, true),
+				(	catch(socket::close(Input, Output), _, true),
 					throw(Error)
 				)
 			) ->
 			socket::close(Input, Output)
-		; 	socket::close(Input, Output),
+		;	socket::close(Input, Output),
 			fail
 		).
 
@@ -761,9 +761,9 @@
 
 	read_frames(Input, Frames) :-
 		http_websocket::read_frame(Input, Frame),
-		( 	Frame == end_of_file ->
+		(	Frame == end_of_file ->
 			Frames = []
-		; 	Frames = [Frame| Rest],
+		;	Frames = [Frame| Rest],
 			read_frames(Input, Rest)
 		).
 
@@ -796,7 +796,7 @@
 		catch(
 			http_socket::exchange(Connection, Request, Response),
 			Error,
-			( 	catch(http_socket::close_connection(Connection), _, true),
+			(	catch(http_socket::close_connection(Connection), _, true),
 				throw(Error)
 			)
 		).
@@ -838,13 +838,13 @@
 
 	wait_for_registry_session_count(Registry, ExpectedCount, Retries) :-
 		http_websocket_session_registry::session_count(Registry, Count),
-		( 	Count == ExpectedCount ->
+		(	Count == ExpectedCount ->
 			true
-		; 	Retries > 0 ->
+		;	Retries > 0 ->
 			os::sleep(0.01),
 			NextRetries is Retries - 1,
 			wait_for_registry_session_count(Registry, ExpectedCount, NextRetries)
-		; 	throw(timeout_error(wait_for_registry_session_count, ExpectedCount))
+		;	throw(timeout_error(wait_for_registry_session_count, ExpectedCount))
 		).
 
 	read_reply_frames_until_close(Seconds, Input, Frames) :-
@@ -852,11 +852,11 @@
 		read_reply_frames_until_close_result(Result, Seconds, Input, Frames).
 
 	read_reply_frames_until_close_result(frame(Frame), Seconds, Input, [Frame| Frames]) :-
-		( 	Frame == end_of_file ->
+		(	Frame == end_of_file ->
 			Frames = []
-		; 	http_websocket::opcode(Frame, close) ->
+		;	http_websocket::opcode(Frame, close) ->
 			Frames = []
-		; 	read_reply_frames_until_close(Seconds, Input, Frames)
+		;	read_reply_frames_until_close(Seconds, Input, Frames)
 		).
 	read_reply_frames_until_close_result(timeout, _Seconds, _Input, []).
 	read_reply_frames_until_close_result(error(Error), _Seconds, _Input, [error(Error)]).
@@ -864,24 +864,24 @@
 
 	read_frame_result_with_timeout(Seconds, Input, Result) :-
 		timeout::call_with_timeout(http_websocket::read_frame(Input, Frame), Seconds, TimeoutResult),
-		( 	TimeoutResult == true ->
+		(	TimeoutResult == true ->
 			Result = frame(Frame)
-		; 	TimeoutResult == timeout ->
+		;	TimeoutResult == timeout ->
 			Result = timeout
-		; 	TimeoutResult = error(Error) ->
+		;	TimeoutResult = error(Error) ->
 			Result = error(Error)
-		; 	Result = fail
+		;	Result = fail
 		).
 
 	read_frame_with_timeout(Seconds, Input, Frame) :-
 		timeout::call_with_timeout(http_websocket::read_frame(Input, Frame0), Seconds, Result),
-		( 	Result == true ->
+		(	Result == true ->
 			Frame = Frame0
-		; 	Result == timeout ->
+		;	Result == timeout ->
 			throw(timeout_error(read_frame, Seconds))
-		; 	Result = error(Error) ->
+		;	Result = error(Error) ->
 			throw(Error)
-		; 	throw(error(unexpected_timeout_result(Result), read_frame_with_timeout/3))
+		;	throw(error(unexpected_timeout_result(Result), read_frame_with_timeout/3))
 		).
 
 	expected_session_sequence_error(error(domain_error(http_websocket_session_sequence, _Frame), _Context)).

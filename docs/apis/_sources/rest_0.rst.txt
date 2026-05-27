@@ -1,0 +1,422 @@
+.. index:: single: rest
+.. _rest/0:
+
+.. rst-class:: right
+
+**category**
+
+``rest``
+========
+
+REST authoring layer built on top of the HTTP router category.
+
+| **Availability:** 
+|    ``logtalk_load(rest(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_router <http_router/0>`
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`list <list/0>`
+|    :ref:`open_api <open_api/0>`
+
+| **Remarks:**
+
+   - Endpoint descriptors: Importing objects declare ``endpoint/5`` clauses. Endpoint identifiers must be unique within the importing object. The category derives ``route/4``, ``route_metadata/2``, and ``route_produces/2`` from those descriptors and dispatches all matched routes through a single action runner.
+   - Contract validation hooks: Importing objects can optionally define ``open_api_validate_request/1`` and ``open_api_validate_response/1`` to enable automatic request and response contract validation against the matched endpoint OpenAPI operation id.
+   - Request helpers: The category provides helper predicates for path parameters, query parameters, headers, and common decoded request body formats. The decoded body helpers report missing or mismatched request bodies as ``400 Bad Request`` problem responses when used from endpoint actions.
+   - Result normalization: Endpoint actions return small result terms such as ``ok(JSON)``, ``created(Location, JSON)``, ``no_content``, ``json(Status, JSON)``, or ``problem(Status, Type, Title, Detail)`` and the category normalizes those terms into HTTP responses. Successful JSON responses honor the negotiated router media type when one is available while problem responses always use ``application/problem+json``.
+   - OpenAPI reuse: Endpoint options other than ``produces/1`` are passed through as route metadata, allowing existing ``http_router`` OpenAPI derivation to continue working when the importing object also implements ``open_api_provider_protocol``.
+
+| **Inherited public predicates:**
+|     :ref:`http_router/0::api_info/1`  :ref:`http_router/0::handle/2`  :ref:`http_router/0::operations/1`  :ref:`http_router/0::schema/2`  :ref:`http_router/0::security/1`  :ref:`http_router/0::security_scheme/2`  :ref:`http_router/0::servers/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: path_parameter/3
+.. _rest/0::path_parameter/3:
+
+``path_parameter/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a named path parameter extracted by the router from the current request using deterministic lookup.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_parameter(Request,Name,Value)``
+| **Mode and number of proofs:**
+|    ``path_parameter(+compound,?atom,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: query_parameter/3
+.. _rest/0::query_parameter/3:
+
+``query_parameter/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the first named query parameter from the current request when query pairs are available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query_parameter(Request,Name,Value)``
+| **Mode and number of proofs:**
+|    ``query_parameter(+compound,?atom,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: request_header/3
+.. _rest/0::request_header/3:
+
+``request_header/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a normalized request header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_header(Request,Name,Value)``
+| **Mode and number of proofs:**
+|    ``request_header(+compound,?atom,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: request_body/2
+.. _rest/0::request_body/2:
+
+``request_body/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the normalized request body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_body(Request,Body)``
+| **Mode and number of proofs:**
+|    ``request_body(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: json_body/2
+.. _rest/0::json_body/2:
+
+``json_body/2``
+^^^^^^^^^^^^^^^
+
+Returns the decoded JSON payload from a normalized request body and reports a client error when the request body is missing or not decoded as JSON.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_body(Request,JSON)``
+| **Mode and number of proofs:**
+|    ``json_body(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: form_body/2
+.. _rest/0::form_body/2:
+
+``form_body/2``
+^^^^^^^^^^^^^^^
+
+Returns the decoded form payload from a normalized request body and reports a client error when the request body is missing or not decoded as form data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``form_body(Request,Pairs)``
+| **Mode and number of proofs:**
+|    ``form_body(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: text_body/2
+.. _rest/0::text_body/2:
+
+``text_body/2``
+^^^^^^^^^^^^^^^
+
+Returns the decoded text payload from a normalized request body and reports a client error when the request body is missing or not decoded as text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``text_body(Request,Text)``
+| **Mode and number of proofs:**
+|    ``text_body(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: binary_body/2
+.. _rest/0::binary_body/2:
+
+``binary_body/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the decoded binary payload from a normalized request body and reports a client error when the request body is missing or not decoded as binary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_body(Request,Bytes)``
+| **Mode and number of proofs:**
+|    ``binary_body(+compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: json_response/4
+.. _rest/0::json_response/4:
+
+``json_response/4``
+^^^^^^^^^^^^^^^^^^^
+
+Builds a JSON response for the given request and status descriptor, honoring any negotiated response media type annotation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_response(Request,Status,JSON,Response)``
+| **Mode and number of proofs:**
+|    ``json_response(+compound,++term,++term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: json_response/5
+.. _rest/0::json_response/5:
+
+``json_response/5``
+^^^^^^^^^^^^^^^^^^^
+
+Builds a JSON response for the given request and status descriptor, honoring any negotiated response media type annotation and adding the provided normalized headers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_response(Request,Status,Headers,JSON,Response)``
+| **Mode and number of proofs:**
+|    ``json_response(+compound,++term,+list(compound),++term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: created_response/4
+.. _rest/0::created_response/4:
+
+``created_response/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a ``201 Created`` JSON response with a ``Location`` header, honoring any negotiated response media type annotation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``created_response(Request,Location,JSON,Response)``
+| **Mode and number of proofs:**
+|    ``created_response(+compound,++term,++term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: no_content_response/2
+.. _rest/0::no_content_response/2:
+
+``no_content_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a ``204 No Content`` response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``no_content_response(Request,Response)``
+| **Mode and number of proofs:**
+|    ``no_content_response(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: problem_response/6
+.. _rest/0::problem_response/6:
+
+``problem_response/6``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Builds an ``application/problem+json`` response with the standard ``type``, ``title``, ``detail``, and numeric ``status`` fields.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problem_response(Request,Status,Type,Title,Detail,Response)``
+| **Mode and number of proofs:**
+|    ``problem_response(+compound,++term,++atom,++atom,++atom,-compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: endpoint/5
+.. _rest/0::endpoint/5:
+
+``endpoint/5``
+^^^^^^^^^^^^^^
+
+Hook predicate that enumerates REST endpoint descriptors. ``Id`` is the endpoint identifier and must be unique within the importing object; when OpenAPI derivation is used it also becomes the operation identifier. ``Method`` is the lowercase HTTP method, ``Path`` the path template, ``Action`` the name of a declared local predicate with arity 2, and ``Options`` a list of route metadata terms plus the optional ``produces(MediaTypes)`` descriptor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``endpoint(Id,Method,Path,Action,Options)``
+| **Mode and number of proofs:**
+|    ``endpoint(?atom,?atom,?atom,?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_validate_request/1
+.. _rest/0::open_api_validate_request/1:
+
+``open_api_validate_request/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that enables automatic OpenAPI request contract validation for the given endpoint identifier before its action predicate is called.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_validate_request(Id)``
+| **Mode and number of proofs:**
+|    ``open_api_validate_request(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_request_validation_error_response/4
+.. _rest/0::open_api_request_validation_error_response/4:
+
+``open_api_request_validation_error_response/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes the response returned when OpenAPI request contract validation fails. The default implementation preserves the distinction between generic ``400`` request failures, ``415 Unsupported Media Type``, and ``422 Unprocessable Content`` for invalid request bodies. The arguments are the current request, the endpoint identifier, the validation errors, and the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_request_validation_error_response(Request,Id,Errors,Response)``
+| **Mode and number of proofs:**
+|    ``open_api_request_validation_error_response(+compound,+atom,+list,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: open_api_validate_response/1
+.. _rest/0::open_api_validate_response/1:
+
+``open_api_validate_response/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that enables automatic OpenAPI response contract validation for the given endpoint identifier after its action result is normalized into an HTTP response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_validate_response(Id)``
+| **Mode and number of proofs:**
+|    ``open_api_validate_response(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_response_validation_error_response/5
+.. _rest/0::open_api_response_validation_error_response/5:
+
+``open_api_response_validation_error_response/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes the response returned when OpenAPI response contract validation fails. The arguments are the current request, the endpoint identifier, the candidate response, the validation errors, and the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_response_validation_error_response(Request,Id,Response0,Errors,Response)``
+| **Mode and number of proofs:**
+|    ``open_api_response_validation_error_response(+compound,+atom,+compound,+list,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: dispatch_rest_endpoint/2
+.. _rest/0::dispatch_rest_endpoint/2:
+
+``dispatch_rest_endpoint/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Runs the action associated with the matched endpoint and normalizes its result term into an HTTP response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dispatch_rest_endpoint(Request,Response)``
+| **Mode and number of proofs:**
+|    ``dispatch_rest_endpoint(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

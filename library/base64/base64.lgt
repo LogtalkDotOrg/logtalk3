@@ -130,8 +130,8 @@
 		[Byte1, Byte2, Byte3].
 
 	code_to_index(Code, Index) :-
-		( 	Code =:= 0'+ -> Index is 62
-		; 	Code =:= 0'/ -> Index is 63
+		(	Code =:= 0'+ -> Index is 62
+		;	Code =:= 0'/ -> Index is 63
 		;	0'0 =< Code, Code =< 0'9 -> Index is Code - 0'0 + 52
 		;	0'A =< Code, Code =< 0'Z -> Index is Code - 0'A
 		;	0'a =< Code, Code =< 0'z -> Index is Code - 0'a + 26
@@ -188,8 +188,8 @@
 		(	Index =< 25 -> Code is 0'A + Index
 		;	Index =< 51 -> Code is 0'a + Index - 26
 		;	Index =< 61 -> Code is 0'0 + Index - 52
-		; 	Index =:= 62 -> Code is 0'+
-		; 	Code is 0'/
+		;	Index =:= 62 -> Code is 0'+
+		;	Code is 0'/
 		),
 		!.
 

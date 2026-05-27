@@ -226,6 +226,7 @@ logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
 logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(regularized_bradley_terry_ranker, library('regularized_bradley_terry_ranker/')).
+logtalk_library_path(rest, library('rest/')).
 logtalk_library_path(ridge_regression, library('ridge_regression/')).
 logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).

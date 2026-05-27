@@ -272,6 +272,7 @@ Foreach-Object {
 (Get-Content ../../../library/regression_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 (Get-Content ../../../library/regression_tree/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 (Get-Content ../../../library/regularized_bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry_ranker.rst
+(Get-Content ../../../library/rest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rest.rst
 (Get-Content ../../../library/ridge_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ridge_regression.rst
 (Get-Content ../../../library/schulze_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst

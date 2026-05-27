@@ -120,7 +120,7 @@
 	find_rightmost_greater(Pivot, Suffix, Swap, SuffixWithoutSwap) :-
 		reverse(Suffix, RevSuffix),
 		RevSuffix = [Head| Tail],
-		( 	Head @> Pivot ->
+		(	Head @> Pivot ->
 			Swap = Head,
 			reverse(Tail, SuffixWithoutSwap)
 		;	find_rightmost_greater_aux(Pivot, RevSuffix, Swap, RevNewSuffix),

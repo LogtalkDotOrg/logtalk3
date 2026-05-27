@@ -25,6 +25,7 @@
 	logtalk_load(os(loader)),
 	logtalk_load(reader(loader)),
 	logtalk_load(base64(loader)),
+	logtalk_load(character_sets(loader)),
 	logtalk_load(json(loader)),
 	logtalk_load(url(loader)),
 	logtalk_load(hashes(loader)),

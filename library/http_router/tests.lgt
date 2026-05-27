@@ -235,6 +235,12 @@
 		status(Response, status(404, 'Not Found')),
 		body(Response, content('text/plain', text('Not Found'))).
 
+	test(http_router_handle_2_27, deterministic) :-
+		Request = request(get, origin('/scrubbed'), http(1, 1), [], empty, [route(stale), path_params([id-'legacy']), open_api_probe(true), automatic_options(true), effective_methods([get, options]), response_media_type('application/vnd.stale+json')]),
+		property_scrubbing_http_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text(scrubbed))).
+
 	test(http_router_open_api_3_01, deterministic) :-
 		OpenAPI = open_api,
 		OpenAPI::operation(open_api_http_router, show_item, Operation),
@@ -439,9 +445,9 @@
 
 	json_pair((Pair, Rest), Key, Value) :-
 		!,
-		( 	pair_key_value(Pair, Key, Value) ->
+		(	pair_key_value(Pair, Key, Value) ->
 			true
-		; 	json_pair(Rest, Key, Value)
+		;	json_pair(Rest, Key, Value)
 		).
 	json_pair(Pair, Key, Value) :-
 		pair_key_value(Pair, Key, Value).

@@ -321,6 +321,14 @@ Follows a short description of each included example (in alphabetical order):
 	small HTTP client and server example showing how to publish and consume
 	an OpenAPI contract
 
+- `http_rest_greetings`  
+	small HTTP client and server example showing how to define and consume a
+	REST API using the `rest` library
+
+- `http_rest_open_meteo`  
+	small REST client example showing how to resolve a location name and fetch
+	a weather forecast from the Open-Meteo APIs
+
 - `http_static_site`  
 	small HTTP client and server example showing how to combine the
 	`http_static_files` and `http_directory_listing` libraries

@@ -192,9 +192,9 @@
 		^^check_options(UserOptions),
 		ensure_consistent_cookie_source_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		( 	member(cookies_file(File), UserOptions) ->
+		(	member(cookies_file(File), UserOptions) ->
 			JarOption = cookies_file(File)
-		; 	^^option(cookie_jar(JarOption), Options)
+		;	^^option(cookie_jar(JarOption), Options)
 		),
 		^^option(headers(Headers), Options),
 		^^option(query(QueryPairs), Options),
@@ -236,37 +236,37 @@
 
 	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, CookiePairs) :-
 		validate_request_options(Options),
-		( 	member(headers(Headers0), Options) ->
+		(	member(headers(Headers0), Options) ->
 			Headers = Headers0
-		; 	Headers = []
+		;	Headers = []
 		),
-		( 	member(body(Body0), Options) ->
+		(	member(body(Body0), Options) ->
 			Body = Body0
-		; 	Body = empty
+		;	Body = empty
 		),
-		( 	member(query(QueryPairs0), Options) ->
+		(	member(query(QueryPairs0), Options) ->
 			QueryPairs = QueryPairs0
-		; 	QueryPairs = []
+		;	QueryPairs = []
 		),
-		( 	member(version(Version0), Options) ->
+		(	member(version(Version0), Options) ->
 			Version = Version0
-		; 	Version = none
+		;	Version = none
 		),
-		( 	member(properties(Properties0), Options) ->
+		(	member(properties(Properties0), Options) ->
 			Properties = Properties0
-		; 	Properties = []
+		;	Properties = []
 		),
-		( 	member(cookies(CookiePairs0), Options) ->
+		(	member(cookies(CookiePairs0), Options) ->
 			CookiePairs = CookiePairs0
-		; 	CookiePairs = []
+		;	CookiePairs = []
 		).
 
 	validate_request_options(Options) :-
-		( 	var(Options) ->
+		(	var(Options) ->
 			instantiation_error
-		; 	proper_list(Options) ->
+		;	proper_list(Options) ->
 			validate_request_option_list(Options)
-		; 	domain_error(http_session_request_options, Options)
+		;	domain_error(http_session_request_options, Options)
 		).
 
 	validate_request_option_list([]).
@@ -302,16 +302,16 @@
 		catch(http_cookies(atom)::generate_cookie(CookiePairs, _Cookie), _, fail).
 
 	ensure_no_default_cookie_property(Properties) :-
-		( 	member(cookies(_CookiePairs), Properties) ->
+		(	member(cookies(_CookiePairs), Properties) ->
 			domain_error(http_session_option, properties(Properties))
-		; 	true
+		;	true
 		).
 
 	ensure_consistent_cookie_source_options(Options) :-
-		( 	member(cookie_jar(_JarOption), Options),
+		(	member(cookie_jar(_JarOption), Options),
 			member(cookies_file(_File), Options) ->
 			domain_error(http_session_options, Options)
-		; 	true
+		;	true
 		).
 
 	resolve_session_jar(new, Jar, owned) :-
@@ -342,9 +342,9 @@
 	maybe_close_owned_jar(_Jar, _Ownership).
 
 	allocate_session_id(SessionId) :-
-		( 	retract(session_seed_(CurrentSessionId)) ->
+		(	retract(session_seed_(CurrentSessionId)) ->
 			SessionId is CurrentSessionId + 1
-		; 	SessionId = 1
+		;	SessionId = 1
 		),
 		assertz(session_seed_(SessionId)).
 
@@ -355,9 +355,9 @@
 		var(SessionId),
 		instantiation_error.
 	current_session_state(http_session(SessionId), State) :-
-		( 	session_state_(SessionId, State) ->
+		(	session_state_(SessionId, State) ->
 			true
-		; 	existence_error(http_session, http_session(SessionId))
+		;	existence_error(http_session, http_session(SessionId))
 		),
 		!.
 	current_session_state(Session, _State) :-
@@ -369,9 +369,9 @@
 
 	filter_named_pairs([], _OverridePairs, []).
 	filter_named_pairs([Name-Value| Pairs], OverridePairs, FilteredPairs) :-
-		( 	member(Name-_, OverridePairs) ->
+		(	member(Name-_, OverridePairs) ->
 			filter_named_pairs(Pairs, OverridePairs, FilteredPairs)
-		; 	FilteredPairs = [Name-Value| RemainingPairs],
+		;	FilteredPairs = [Name-Value| RemainingPairs],
 			filter_named_pairs(Pairs, OverridePairs, RemainingPairs)
 		).
 
@@ -382,9 +382,9 @@
 	filter_properties([], _OverrideProperties, []).
 	filter_properties([Property| Properties], OverrideProperties, FilteredProperties) :-
 		property_functor(Property, Functor),
-		( 	property_functor_member(Functor, OverrideProperties) ->
+		(	property_functor_member(Functor, OverrideProperties) ->
 			filter_properties(Properties, OverrideProperties, FilteredProperties)
-		; 	FilteredProperties = [Property| RemainingProperties],
+		;	FilteredProperties = [Property| RemainingProperties],
 			filter_properties(Properties, OverrideProperties, RemainingProperties)
 		).
 
@@ -425,9 +425,9 @@
 
 	build_client_request_options(Headers, Body, QueryPairs, Version, Properties, Options) :-
 		base_request_options(Headers, QueryPairs, Version, Properties, BaseOptions),
-		( 	Body == empty ->
+		(	Body == empty ->
 			Options = BaseOptions
-		; 	append(BaseOptions, [body(Body)], Options)
+		;	append(BaseOptions, [body(Body)], Options)
 		).
 
 	base_request_options(Headers, QueryPairs, Version, Properties, [headers(Headers), query(QueryPairs), version(Version), properties(Properties)]).
@@ -435,9 +435,9 @@
 	store_response_cookies(none, _URL, _Response) :-
 		!.
 	store_response_cookies(Jar, URL, Response) :-
-		( 	http::property(Response, set_cookies(SetCookies)) ->
+		(	http::property(Response, set_cookies(SetCookies)) ->
 			http_cookie_jar::store_set_cookies(Jar, URL, SetCookies)
-		; 	true
+		;	true
 		).
 
 :- end_object.

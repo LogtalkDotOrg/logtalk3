@@ -34,10 +34,10 @@
 	]).
 
 	relation_set(RelationSet) :-
-		( 	var(RelationSet) ->
+		(	var(RelationSet) ->
 			relation_order(Order),
 			relation_subset(Order, RelationSet)
-		; 	normalize(RelationSet, RelationSet)
+		;	normalize(RelationSet, RelationSet)
 		).
 
 	empty([]).

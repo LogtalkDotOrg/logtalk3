@@ -36,25 +36,25 @@
 	:- protected(path_within_root/2).
 
 	validate_relative_path(Path) :-
-		( 	var(Path) ->
+		(	var(Path) ->
 			instantiation_error
-		; 	atom(Path) ->
+		;	atom(Path) ->
 			true
-		; 	type_error(atom, Path)
+		;	type_error(atom, Path)
 		).
 
 	validate_request(Request) :-
-		( 	http::is_request(Request) ->
+		(	http::is_request(Request) ->
 			true
-		; 	domain_error(http_request, Request)
+		;	domain_error(http_request, Request)
 		).
 
 	validate_document_root(DocumentRoot) :-
-		( 	var(DocumentRoot) ->
+		(	var(DocumentRoot) ->
 			instantiation_error
-		; 	atom(DocumentRoot) ->
+		;	atom(DocumentRoot) ->
 			true
-		; 	type_error(atom, DocumentRoot)
+		;	type_error(atom, DocumentRoot)
 		).
 
 	supported_method(Request) :-

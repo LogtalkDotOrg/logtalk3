@@ -103,29 +103,29 @@
 
 	preflight_response(Request, Response, UserOptions) :-
 		resolve_options(Request, UserOptions, Options),
-		( 	is_preflight_request(Request) ->
+		(	is_preflight_request(Request) ->
 			Request = request(_, _, Version, _, _, _),
-			( 	preflight_headers(Request, Options, Headers0, VaryTokens) ->
+			(	preflight_headers(Request, Options, Headers0, VaryTokens) ->
 				finalize_headers(VaryTokens, Headers0, Headers),
 				http::response(Version, status(200, 'OK'), Headers, empty, [], Response)
-			; 	preflight_denied_vary_tokens(Request, Options, VaryTokens),
+			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				finalize_headers(VaryTokens, [], Headers),
 				http::response(Version, status(403, 'Forbidden'), Headers, empty, [], Response)
 			)
-		; 	domain_error(http_cors_preflight_request, Request)
+		;	domain_error(http_cors_preflight_request, Request)
 		), !.
 
 	add_response_headers(Request, Response0, Response, UserOptions) :-
 		resolve_options(Request, UserOptions, Options),
-		( 	is_preflight_request(Request) ->
-			( 	preflight_headers(Request, Options, Headers, VaryTokens) ->
+		(	is_preflight_request(Request) ->
+			(	preflight_headers(Request, Options, Headers, VaryTokens) ->
 				merge_response_headers(Response0, Headers, VaryTokens, Response)
-			; 	preflight_denied_vary_tokens(Request, Options, VaryTokens),
+			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				merge_denied_response_headers(VaryTokens, Response0, Response)
 			)
-		; 	actual_headers(Request, Response0, Options, Headers, VaryTokens) ->
+		;	actual_headers(Request, Response0, Options, Headers, VaryTokens) ->
 			merge_response_headers(Response0, Headers, VaryTokens, Response)
-		; 	actual_denied_vary_tokens(Options, VaryTokens),
+		;	actual_denied_vary_tokens(Options, VaryTokens),
 			merge_denied_response_headers(VaryTokens, Response0, Response)
 		),
 		!.
@@ -181,9 +181,9 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, BaseOptions),
 		request_route_options(Request, RouteOptions),
-		( 	RouteOptions == [] ->
+		(	RouteOptions == [] ->
 			Options0 = BaseOptions
-		; 	^^check_options(RouteOptions),
+		;	^^check_options(RouteOptions),
 			overlay_options(RouteOptions, BaseOptions, Options0)
 		),
 		fix_options_list(Options0, Options0a),
@@ -193,9 +193,9 @@
 
 	fix_options_list([], []).
 	fix_options_list([Option| Options], [FixedOption| FixedOptions]) :-
-		( 	fix_option(Option, FixedOption) ->
+		(	fix_option(Option, FixedOption) ->
 			true
-		; 	FixedOption = Option
+		;	FixedOption = Option
 		),
 		fix_options_list(Options, FixedOptions).
 
@@ -205,9 +205,9 @@
 
 	filter_overridden_options([], _Overrides, []).
 	filter_overridden_options([BaseOption| BaseOptions], Overrides, FilteredOptions) :-
-		( 	overridden_option(BaseOption, Overrides) ->
+		(	overridden_option(BaseOption, Overrides) ->
 			FilteredOptions = Tail
-		; 	FilteredOptions = [BaseOption| Tail]
+		;	FilteredOptions = [BaseOption| Tail]
 		),
 		filter_overridden_options(BaseOptions, Overrides, Tail).
 
@@ -222,12 +222,12 @@
 		functor(Option2, Functor, Arity).
 
 	constrain_allowed_methods(Request, Options0, Options) :-
-		( 	request_effective_methods(Request, EffectiveMethods0) ->
+		(	request_effective_methods(Request, EffectiveMethods0) ->
 			filter_non_options_methods(EffectiveMethods0, EffectiveMethods),
 			^^option(allowed_methods(AllowedMethods0), Options0),
 			intersection_preserving_order(AllowedMethods0, EffectiveMethods, AllowedMethods),
 			replace_option(allowed_methods(AllowedMethods), Options0, Options)
-		; 	Options = Options0
+		;	Options = Options0
 		).
 
 	replace_option(Option, Options0, Options) :-
@@ -236,9 +236,9 @@
 
 	remove_same_kind_options([], _Option, []).
 	remove_same_kind_options([Candidate| Candidates], Option, FilteredOptions) :-
-		( 	same_option_kind(Candidate, Option) ->
+		(	same_option_kind(Candidate, Option) ->
 			FilteredOptions = Tail
-		; 	FilteredOptions = [Candidate| Tail]
+		;	FilteredOptions = [Candidate| Tail]
 		),
 		remove_same_kind_options(Candidates, Option, Tail).
 
@@ -250,10 +250,10 @@
 	validate_origin_credentials_semantics(Options) :-
 		^^option(allowed_origins(AllowedOrigins), Options),
 		^^option(allow_credentials(AllowCredentials), Options),
-		( 	AllowedOrigins == any,
+		(	AllowedOrigins == any,
 			AllowCredentials == true ->
 			domain_error(http_cors_options, [allowed_origins(any), allow_credentials(true)])
-		; 	true
+		;	true
 		).
 
 	validate_allowed_headers_semantics(Options) :-
@@ -331,9 +331,9 @@
 		header_subset(Headers, AllowedHeaders).
 
 	preflight_vary_tokens(OriginVaryTokens, Request, VaryTokens) :-
-		( 	requested_headers_header_present(Request) ->
+		(	requested_headers_header_present(Request) ->
 			HeaderTokens = [access_control_request_headers]
-		; 	HeaderTokens = []
+		;	HeaderTokens = []
 		),
 		append(OriginVaryTokens, [access_control_request_method| HeaderTokens], VaryTokens).
 
@@ -361,9 +361,9 @@
 		^^option(expose_headers(any), Options),
 		!,
 		exposed_header_names(Response, Names),
-		( 	Names == [] ->
+		(	Names == [] ->
 			Value = none
-		; 	header_name_list_atom(Names, Value)
+		;	header_name_list_atom(Names, Value)
 		).
 	actual_expose_headers_value(_Response, Options, _AllowCredentials, none) :-
 		^^option(expose_headers([]), Options),
@@ -379,9 +379,9 @@
 
 	remove_forbidden_exposed_header_names([], []).
 	remove_forbidden_exposed_header_names([Name| Names], FilteredNames) :-
-		( 	forbidden_exposed_header_name(Name) ->
+		(	forbidden_exposed_header_name(Name) ->
 			FilteredNames = Tail
-		; 	FilteredNames = [Name| Tail]
+		;	FilteredNames = [Name| Tail]
 		),
 		remove_forbidden_exposed_header_names(Names, Tail).
 
@@ -394,34 +394,34 @@
 
 	actual_header_list(AllowOrigin, AllowCredentials, ExposeHeadersValue, Headers) :-
 		Headers = [access_control_allow_origin-AllowOrigin| Headers0],
-		( 	AllowCredentials == true ->
+		(	AllowCredentials == true ->
 			Headers0 = [access_control_allow_credentials-'true'| Headers1]
-		; 	Headers0 = Headers1
+		;	Headers0 = Headers1
 		),
-		( 	ExposeHeadersValue == none ->
+		(	ExposeHeadersValue == none ->
 			Headers1 = []
-		; 	Headers1 = [access_control_expose_headers-ExposeHeadersValue]
+		;	Headers1 = [access_control_expose_headers-ExposeHeadersValue]
 		).
 
 	preflight_header_list(AllowOrigin, AllowedMethods, AllowHeadersValue, AllowCredentials, MaxAge, AllowHeaderValue, Headers) :-
 		method_list_atom(AllowedMethods, AllowedMethodsValue),
 		Headers = [access_control_allow_methods-AllowedMethodsValue, access_control_allow_origin-AllowOrigin| Headers0],
-		( 	AllowHeadersValue == none ->
+		(	AllowHeadersValue == none ->
 			Headers0 = Headers1
-		; 	Headers0 = [access_control_allow_headers-AllowHeadersValue| Headers1]
+		;	Headers0 = [access_control_allow_headers-AllowHeadersValue| Headers1]
 		),
-		( 	AllowCredentials == true ->
+		(	AllowCredentials == true ->
 			Headers1 = [access_control_allow_credentials-'true'| Headers2]
-		; 	Headers1 = Headers2
+		;	Headers1 = Headers2
 		),
-		( 	MaxAge == none ->
+		(	MaxAge == none ->
 			Headers2 = Headers3
-		; 	integer_atom(MaxAge, MaxAgeAtom),
+		;	integer_atom(MaxAge, MaxAgeAtom),
 			Headers2 = [access_control_max_age-MaxAgeAtom| Headers3]
 		),
-		( 	AllowHeaderValue == none ->
+		(	AllowHeaderValue == none ->
 			Headers3 = []
-		; 	Headers3 = [allow-AllowHeaderValue]
+		;	Headers3 = [allow-AllowHeaderValue]
 		).
 
 	finalize_headers([], Headers, Headers).
@@ -438,15 +438,15 @@
 		Response0 = response(Version, Status, Headers0, Body, Properties),
 		collect_vary_tokens(Headers0, ExistingVaryTokens),
 		header_names(GeneratedHeaders, GeneratedNames0),
-		( 	ExistingVaryTokens == '*' ->
+		(	ExistingVaryTokens == '*' ->
 			MergedHeaders = [vary-'*'| GeneratedHeaders],
 			GeneratedNames = [vary| GeneratedNames0]
-		; 	append(ExistingVaryTokens, VaryTokens0, MergedVaryTokens0),
+		;	append(ExistingVaryTokens, VaryTokens0, MergedVaryTokens0),
 			unique_preserving_order(MergedVaryTokens0, MergedVaryTokens),
-			( 	MergedVaryTokens == [] ->
+			(	MergedVaryTokens == [] ->
 				MergedHeaders = GeneratedHeaders,
 				GeneratedNames = GeneratedNames0
-			; 	header_name_list_atom(MergedVaryTokens, VaryValue),
+			;	header_name_list_atom(MergedVaryTokens, VaryValue),
 				MergedHeaders = [vary-VaryValue| GeneratedHeaders],
 				GeneratedNames = [vary| GeneratedNames0]
 			)
@@ -461,17 +461,17 @@
 
 	remove_headers_by_names([], _Names, []).
 	remove_headers_by_names([Name-Value| Headers], Names, RemainingHeaders) :-
-		( 	member(Name, Names) ->
+		(	member(Name, Names) ->
 			RemainingHeaders = Tail
-		; 	RemainingHeaders = [Name-Value| Tail]
+		;	RemainingHeaders = [Name-Value| Tail]
 		),
 		remove_headers_by_names(Headers, Names, Tail).
 
 	collect_vary_tokens(Headers, Tokens) :-
 		collect_vary_tokens_list(Headers, Tokens0),
-		( 	Tokens0 == '*' ->
+		(	Tokens0 == '*' ->
 			Tokens = '*'
-		; 	unique_preserving_order(Tokens0, Tokens)
+		;	unique_preserving_order(Tokens0, Tokens)
 		).
 
 	collect_vary_tokens_list([], []).
@@ -481,11 +481,11 @@
 	collect_vary_tokens_list([vary-Value| Headers], Tokens) :-
 		!,
 		collect_vary_tokens_list(Headers, RestTokens),
-		( 	RestTokens == '*' ->
+		(	RestTokens == '*' ->
 			Tokens = '*'
-		; 	parse_field_name_list(Value, Names) ->
+		;	parse_field_name_list(Value, Names) ->
 			append(Names, RestTokens, Tokens)
-		; 	Tokens = RestTokens
+		;	Tokens = RestTokens
 		),
 		!.
 	collect_vary_tokens_list([_| Headers], Tokens) :-
@@ -537,9 +537,9 @@
 		arg(1, Property, Value).
 
 	request_route_options(Request, RouteOptions) :-
-		( 	single_property_value(Request, cors, RouteOptions) ->
+		(	single_property_value(Request, cors, RouteOptions) ->
 			true
-		; 	RouteOptions = []
+		;	RouteOptions = []
 		).
 
 	request_effective_methods(Request, EffectiveMethods) :-
@@ -550,9 +550,9 @@
 		normalize_method_atom(Value, Method).
 
 	requested_header_names(Request, Names) :-
-		( 	single_header_value(Request, access_control_request_headers, Value) ->
+		(	single_header_value(Request, access_control_request_headers, Value) ->
 			parse_field_name_list(Value, Names)
-		; 	Names = []
+		;	Names = []
 		).
 
 	requested_headers_header_present(Request) :-
@@ -688,27 +688,27 @@
 
 	unique_preserving_order([], _Seen, Unique, Unique).
 	unique_preserving_order([Element| Elements], Seen0, Unique0, Unique) :-
-		( 	member(Element, Seen0) ->
+		(	member(Element, Seen0) ->
 			Seen1 = Seen0,
 			Unique1 = Unique0
-		; 	Seen1 = [Element| Seen0],
+		;	Seen1 = [Element| Seen0],
 			Unique0 = [Element| Unique1]
 		),
 		unique_preserving_order(Elements, Seen1, Unique1, Unique).
 
 	intersection_preserving_order([], _Allowed, []).
 	intersection_preserving_order([Element| Elements], Allowed, Intersection) :-
-		( 	member(Element, Allowed) ->
+		(	member(Element, Allowed) ->
 			Intersection = [Element| Rest]
-		; 	Intersection = Rest
+		;	Intersection = Rest
 		),
 		intersection_preserving_order(Elements, Allowed, Rest).
 
 	filter_non_options_methods([], []).
 	filter_non_options_methods([Method| Methods], FilteredMethods) :-
-		( 	Method == options ->
+		(	Method == options ->
 			FilteredMethods = Rest
-		; 	FilteredMethods = [Method| Rest]
+		;	FilteredMethods = [Method| Rest]
 		),
 		filter_non_options_methods(Methods, Rest).
 
@@ -734,9 +734,9 @@
 
 	valid_method_codes([]).
 	valid_method_codes([Code| Codes]) :-
-		( 	lowercase_alpha(Code)
-		; 	digit_code(Code)
-		; 	Code =:= 0'_
+		(	lowercase_alpha(Code)
+		;	digit_code(Code)
+		;	Code =:= 0'_
 		),
 		valid_method_codes(Codes).
 
