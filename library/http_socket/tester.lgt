@@ -37,7 +37,7 @@
 		logtalk_load('../http_websocket/loader.lgt'),
 		logtalk_load('../http_websocket_messages/loader.lgt'),
 		logtalk_load('../http_websocket_session/loader.lgt'),
-		logtalk_load(http_socket, [debug(on), source_data(on)]),
+		logtalk_load([http_socket_protocol, http_socket], [debug(on), source_data(on)]),
 		logtalk_load(test_objects),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),

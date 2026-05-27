@@ -132,6 +132,7 @@ logtalk_library_path(http_router, library('http_router/')).
 logtalk_library_path(http_server, library('http_server/')).
 logtalk_library_path(http_session, library('http_session/')).
 logtalk_library_path(http_socket, library('http_socket/')).
+logtalk_library_path(http_socket_process, library('http_socket_process/')).
 logtalk_library_path(http_static_files, library('http_static_files/')).
 logtalk_library_path(http_websocket, library('http_websocket/')).
 logtalk_library_path(http_websocket_messages, library('http_websocket_messages/')).

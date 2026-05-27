@@ -1,0 +1,421 @@
+.. index:: single: http_socket_protocol
+.. _http_socket_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_socket_protocol``
+========================
+
+Extracted protocol entity
+
+| **Availability:** 
+|    ``logtalk_load(http_socket(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open_listener/4
+.. _http_socket_protocol/0::open_listener/4:
+
+``open_listener/4``
+^^^^^^^^^^^^^^^^^^^
+
+Opens a TCP listener on the given host and port using the given socket options. If Port is a variable, it is unified with the bound port number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_listener(Host,Port,Listener,Options)``
+| **Mode and number of proofs:**
+|    ``open_listener(+atom,?integer,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: close_listener/1
+.. _http_socket_protocol/0::close_listener/1:
+
+``close_listener/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Closes a listener previously opened with open_listener/4.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_listener(Listener)``
+| **Mode and number of proofs:**
+|    ``close_listener(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_connection/4
+.. _http_socket_protocol/0::open_connection/4:
+
+``open_connection/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Opens a reusable client connection to the given host and port using the given socket options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_connection(Host,Port,Connection,Options)``
+| **Mode and number of proofs:**
+|    ``open_connection(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: close_connection/1
+.. _http_socket_protocol/0::close_connection/1:
+
+``close_connection/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Closes a reusable client connection previously opened with open_connection/4.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_connection(Connection)``
+| **Mode and number of proofs:**
+|    ``close_connection(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: connection_streams/3
+.. _http_socket_protocol/0::connection_streams/3:
+
+``connection_streams/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by serve_websocket_once/5.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_streams(Connection,Input,Output)``
+| **Mode and number of proofs:**
+|    ``connection_streams(+compound,--stream,--stream)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_connection_pool/4
+.. _http_socket_protocol/0::open_connection_pool/4:
+
+``open_connection_pool/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a managed reusable connection pool for the given host and port.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_connection_pool(Host,Port,Pool,Options)``
+| **Mode and number of proofs:**
+|    ``open_connection_pool(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``min_size(N)``: Pre-open N reusable client connections when creating the pool. The default is 0.
+    - Option ``max_size(N)``: Allow at most N managed client connections in the pool. The default is 10.
+    - Option ``connection_options(Options)``: Socket options passed to open_connection/4 when creating pooled connections. The default is [].
+
+
+------------
+
+.. index:: close_connection_pool/1
+.. _http_socket_protocol/0::close_connection_pool/1:
+
+``close_connection_pool/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Closes a managed reusable connection pool and all currently available pooled connections. Throws if pooled exchanges are still in progress.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_connection_pool(Pool)``
+| **Mode and number of proofs:**
+|    ``close_connection_pool(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: connection_pool_stats/2
+.. _http_socket_protocol/0::connection_pool_stats/2:
+
+``connection_pool_stats/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns managed pool statistics as stats(Available, InUse, Total, MinSize, MaxSize).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_pool_stats(Pool,Stats)``
+| **Mode and number of proofs:**
+|    ``connection_pool_stats(+compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: exchange/3
+.. _http_socket_protocol/0::exchange/3:
+
+``exchange/3``
+^^^^^^^^^^^^^^
+
+Performs a single HTTP exchange on an open reusable client connection or by temporarily acquiring a pooled reusable client connection.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(ConnectionOrPool,Request,Response)``
+| **Mode and number of proofs:**
+|    ``exchange(+compound,+compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: exchange_connection/3
+.. _http_socket_protocol/0::exchange_connection/3:
+
+``exchange_connection/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange_connection(ConnectionOrPool,Requests,Responses)``
+| **Mode and number of proofs:**
+|    ``exchange_connection(+compound,++list(compound),--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: exchange/4
+.. _http_socket_protocol/0::exchange/4:
+
+``exchange/4``
+^^^^^^^^^^^^^^
+
+Opens a client socket connection to the given host and port, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, ``Connection: close`` is added automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(Host,Port,Request,Response)``
+| **Mode and number of proofs:**
+|    ``exchange(+atom,+integer,+compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: exchange_connection/4
+.. _http_socket_protocol/0::exchange_connection/4:
+
+``exchange_connection/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, ``Connection: close`` is added automatically to that final request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange_connection(Host,Port,Requests,Responses)``
+| **Mode and number of proofs:**
+|    ``exchange_connection(+atom,+integer,++list(compound),--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_once/3
+.. _http_socket_protocol/0::serve_once/3:
+
+``serve_once/3``
+^^^^^^^^^^^^^^^^
+
+Accepts one incoming socket connection on the given server socket, serves that connection using the http_server library, closes the streams, and returns client information.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(ServerSocket,Handler,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_websocket_once/5
+.. _http_socket_protocol/0::serve_websocket_once/5:
+
+``serve_websocket_once/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts one incoming socket connection on the given listener, serves exactly one WebSocket opening handshake using the given handler, and on success returns an upgraded connection handle that remains open together with the handshake response and client information. Rejected or malformed handshakes are written to the stream, the accepted streams are closed, and the predicate throws.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_websocket_once(Listener,Handler,Connection,Response,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_listener/4
+.. _http_socket_protocol/0::serve_listener/4:
+
+``serve_listener/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves exactly Count incoming connections on the given listener, returning the accepted client information terms in order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_listener(Listener,Handler,Count,ClientInfos)``
+| **Mode and number of proofs:**
+|    ``serve_listener(+compound,+object_identifier,+integer,--list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_listener/5
+.. _http_socket_protocol/0::serve_listener/5:
+
+``serve_listener/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves exactly Count incoming connections on the given listener using the specified shutdown and worker options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_listener(Listener,Handler,Count,ClientInfos,Options)``
+| **Mode and number of proofs:**
+|    ``serve_listener(+compound,+object_identifier,+integer,--list(compound),+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``shutdown(keep_open)``: Leave the listener open after serving the requested number of connections. This is the default.
+    - Option ``shutdown(close)``: Close the listener when serving completes or aborts.
+    - Option ``workers(serial)``: Serve accepted connections sequentially in the caller thread. This is the default.
+    - Option ``workers(per_connection)``: Spawn one worker thread per accepted connection and wait for all workers before returning. Requires backend thread support.
+    - Option ``workers(pool(Size))``: Serve accepted connections in batches of up to Size worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.
+    - Option ``workers(pool(Size, rolling))``: Serve accepted connections using at most Size concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.
+
+
+------------
+
+.. index:: serve_until_shutdown/4
+.. _http_socket_protocol/0::serve_until_shutdown/4:
+
+``serve_until_shutdown/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_until_shutdown(Listener,Handler,Control,Options)``
+| **Mode and number of proofs:**
+|    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.
+    - Option ``workers(serial)``: Serve accepted connections sequentially in the caller thread. This is the default.
+    - Option ``workers(per_connection)``: Spawn one worker thread per accepted connection and wait for all workers when shutdown is requested. Requires backend thread support.
+    - Option ``workers(pool(Size))``: Serve accepted connections using at most Size concurrent worker threads, waiting for worker completion notifications before accepting additional connections. Requires backend thread support.
+    - Option ``workers(pool(Size, rolling))``: Alias for ``workers(pool(Size))``. Requires backend thread support.
+    - Shutdown behavior: Calling request_shutdown/1 closes the listener, stops accepting new connections, and waits for active workers to finish before the serving loop returns.
+
+
+------------
+
+.. index:: request_shutdown/1
+.. _http_socket_protocol/0::request_shutdown/1:
+
+``request_shutdown/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_shutdown(Control)``
+| **Mode and number of proofs:**
+|    ``request_shutdown(+nonvar)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

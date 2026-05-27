@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_static_files" href="http_static_files_0.html" />
+    <link rel="next" title="http_socket_protocol" href="http_socket_protocol_0.html" />
     <link rel="prev" title="http_session" href="http_session_0.html" />
    
 </head>
@@ -174,6 +174,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-socket"><span class="xref std std-ref">http_socket</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_socket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_socket_protocol_0.html">http_socket_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a></li>
@@ -394,6 +395,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Implements:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0"><span class="std std-ref">http_socket_protocol</span></a></div>
+</div>
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
@@ -424,466 +429,32 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-close-connection-1"><span class="std std-ref">close_connection/1</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-close-connection-pool-1"><span class="std std-ref">close_connection_pool/1</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-close-listener-1"><span class="std std-ref">close_listener/1</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-connection-pool-stats-2"><span class="std std-ref">connection_pool_stats/2</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-connection-streams-3"><span class="std std-ref">connection_streams/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-exchange-3"><span class="std std-ref">exchange/3</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-exchange-4"><span class="std std-ref">exchange/4</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-exchange-connection-3"><span class="std std-ref">exchange_connection/3</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-exchange-connection-4"><span class="std std-ref">exchange_connection/4</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-open-connection-4"><span class="std std-ref">open_connection/4</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-open-connection-pool-4"><span class="std std-ref">open_connection_pool/4</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-open-listener-4"><span class="std std-ref">open_listener/4</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-request-shutdown-1"><span class="std std-ref">request_shutdown/1</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-serve-listener-4"><span class="std std-ref">serve_listener/4</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-serve-listener-5"><span class="std std-ref">serve_listener/5</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-serve-once-3"><span class="std std-ref">serve_once/3</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-serve-until-shutdown-4"><span class="std std-ref">serve_until_shutdown/4</span></a>  <a class="reference internal" href="http_socket_protocol_0.html#http-socket-protocol-0-serve-websocket-once-5"><span class="std std-ref">serve_websocket_once/5</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#open-listener-4" id="id2"><code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-listener-1" id="id3"><code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-connection-4" id="id4"><code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-connection-1" id="id5"><code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#connection-streams-3" id="id6"><code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-connection-pool-4" id="id7"><code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-connection-pool-1" id="id8"><code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#connection-pool-stats-2" id="id9"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-3" id="id10"><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-connection-3" id="id11"><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-4" id="id12"><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-connection-4" id="id13"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-once-3" id="id14"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-websocket-once-5" id="id15"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-listener-4" id="id16"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-listener-5" id="id17"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-until-shutdown-4" id="id18"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#request-shutdown-1" id="id19"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#connection-pool-seed-1" id="id4"><code class="docutils literal notranslate"><span class="pre">connection_pool_seed_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#connection-pool-config-6" id="id5"><code class="docutils literal notranslate"><span class="pre">connection_pool_config_/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#connection-pool-available-2" id="id6"><code class="docutils literal notranslate"><span class="pre">connection_pool_available_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#connection-pool-in-use-2" id="id7"><code class="docutils literal notranslate"><span class="pre">connection_pool_in_use_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-shutdown-seed-1" id="id8"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-shutdown-control-3" id="id9"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-shutdown-requested-2" id="id10"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-active-worker-3" id="id11"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id20">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#connection-pool-seed-1" id="id22"><code class="docutils literal notranslate"><span class="pre">connection_pool_seed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#connection-pool-config-6" id="id23"><code class="docutils literal notranslate"><span class="pre">connection_pool_config_/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#connection-pool-available-2" id="id24"><code class="docutils literal notranslate"><span class="pre">connection_pool_available_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#connection-pool-in-use-2" id="id25"><code class="docutils literal notranslate"><span class="pre">connection_pool_in_use_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-shutdown-seed-1" id="id26"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-shutdown-control-3" id="id27"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-shutdown-requested-2" id="id28"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-active-worker-3" id="id29"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#operators" id="id30">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="open-listener-4">
-<span id="http-socket-0-open-listener-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code></a><a class="headerlink" href="#open-listener-4" title="Link to this heading"></a></h3>
-<p>Opens a TCP listener on the given host and port using the given socket options. If Port is a variable, it is unified with the bound port number.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_listener(Host,Port,Listener,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_listener(+atom,?integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="close-listener-1">
-<span id="http-socket-0-close-listener-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code></a><a class="headerlink" href="#close-listener-1" title="Link to this heading"></a></h3>
-<p>Closes a listener previously opened with open_listener/4.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_listener(Listener)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_listener(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="open-connection-4">
-<span id="http-socket-0-open-connection-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code></a><a class="headerlink" href="#open-connection-4" title="Link to this heading"></a></h3>
-<p>Opens a reusable client connection to the given host and port using the given socket options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_connection(Host,Port,Connection,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_connection(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="close-connection-1">
-<span id="http-socket-0-close-connection-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code></a><a class="headerlink" href="#close-connection-1" title="Link to this heading"></a></h3>
-<p>Closes a reusable client connection previously opened with open_connection/4.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_connection(Connection)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_connection(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="connection-streams-3">
-<span id="http-socket-0-connection-streams-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code></a><a class="headerlink" href="#connection-streams-3" title="Link to this heading"></a></h3>
-<p>Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by serve_websocket_once/5.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">connection_streams(Connection,Input,Output)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">connection_streams(+compound,--stream,--stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="open-connection-pool-4">
-<span id="http-socket-0-open-connection-pool-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code></a><a class="headerlink" href="#open-connection-pool-4" title="Link to this heading"></a></h3>
-<p>Opens a managed reusable connection pool for the given host and port.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_connection_pool(Host,Port,Pool,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_connection_pool(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code>: Pre-open N reusable client connections when creating the pool. The default is 0.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code>: Allow at most N managed client connections in the pool. The default is 10.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code>: Socket options passed to open_connection/4 when creating pooled connections. The default is [].</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="close-connection-pool-1">
-<span id="http-socket-0-close-connection-pool-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code></a><a class="headerlink" href="#close-connection-pool-1" title="Link to this heading"></a></h3>
-<p>Closes a managed reusable connection pool and all currently available pooled connections. Throws if pooled exchanges are still in progress.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_connection_pool(Pool)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close_connection_pool(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="connection-pool-stats-2">
-<span id="http-socket-0-connection-pool-stats-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code></a><a class="headerlink" href="#connection-pool-stats-2" title="Link to this heading"></a></h3>
-<p>Returns managed pool statistics as stats(Available, InUse, Total, MinSize, MaxSize).</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats(Pool,Stats)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats(+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="exchange-3">
-<span id="http-socket-0-exchange-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code></a><a class="headerlink" href="#exchange-3" title="Link to this heading"></a></h3>
-<p>Performs a single HTTP exchange on an open reusable client connection or by temporarily acquiring a pooled reusable client connection.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(ConnectionOrPool,Request,Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(+compound,+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="exchange-connection-3">
-<span id="http-socket-0-exchange-connection-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code></a><a class="headerlink" href="#exchange-connection-3" title="Link to this heading"></a></h3>
-<p>Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(ConnectionOrPool,Requests,Responses)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+compound,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="exchange-4">
-<span id="http-socket-0-exchange-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></a><a class="headerlink" href="#exchange-4" title="Link to this heading"></a></h3>
-<p>Opens a client socket connection to the given host and port, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> is added automatically.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(Host,Port,Request,Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(+atom,+integer,+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="exchange-connection-4">
-<span id="http-socket-0-exchange-connection-4"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a><a class="headerlink" href="#exchange-connection-4" title="Link to this heading"></a></h3>
-<p>Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> is added automatically to that final request.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(Host,Port,Requests,Responses)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+atom,+integer,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="serve-once-3">
-<span id="http-socket-0-serve-once-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a><a class="headerlink" href="#serve-once-3" title="Link to this heading"></a></h3>
-<p>Accepts one incoming socket connection on the given server socket, serves that connection using the http_server library, closes the streams, and returns client information.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(ServerSocket,Handler,ClientInfo)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="serve-websocket-once-5">
-<span id="http-socket-0-serve-websocket-once-5"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a><a class="headerlink" href="#serve-websocket-once-5" title="Link to this heading"></a></h3>
-<p>Accepts one incoming socket connection on the given listener, serves exactly one WebSocket opening handshake using the given handler, and on success returns an upgraded connection handle that remains open together with the handshake response and client information. Rejected or malformed handshakes are written to the stream, the accepted streams are closed, and the predicate throws.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once(Listener,Handler,Connection,Response,ClientInfo)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="serve-listener-4">
-<span id="http-socket-0-serve-listener-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a><a class="headerlink" href="#serve-listener-4" title="Link to this heading"></a></h3>
-<p>Accepts and serves exactly Count incoming connections on the given listener, returning the accepted client information terms in order.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_listener(Listener,Handler,Count,ClientInfos)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_listener(+compound,+object_identifier,+integer,--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="serve-listener-5">
-<span id="http-socket-0-serve-listener-5"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a><a class="headerlink" href="#serve-listener-5" title="Link to this heading"></a></h3>
-<p>Accepts and serves exactly Count incoming connections on the given listener using the specified shutdown and worker options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_listener(Listener,Handler,Count,ClientInfos,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_listener(+compound,+object_identifier,+integer,--list(compound),+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">shutdown(keep_open)</span></code>: Leave the listener open after serving the requested number of connections. This is the default.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">shutdown(close)</span></code>: Close the listener when serving completes or aborts.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code>: Serve accepted connections sequentially in the caller thread. This is the default.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code>: Spawn one worker thread per accepted connection and wait for all workers before returning. Requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code>: Serve accepted connections in batches of up to Size worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size,</span> <span class="pre">rolling))</span></code>: Serve accepted connections using at most Size concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="serve-until-shutdown-4">
-<span id="http-socket-0-serve-until-shutdown-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a><a class="headerlink" href="#serve-until-shutdown-4" title="Link to this heading"></a></h3>
-<p>Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(Listener,Handler,Control,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(+compound,+object_identifier,+nonvar,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code>: Serve accepted connections sequentially in the caller thread. This is the default.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code>: Spawn one worker thread per accepted connection and wait for all workers when shutdown is requested. Requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code>: Serve accepted connections using at most Size concurrent worker threads, waiting for worker completion notifications before accepting additional connections. Requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size,</span> <span class="pre">rolling))</span></code>: Alias for <code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code>. Requires backend thread support.</p></li>
-<li><p>Shutdown behavior: Calling request_shutdown/1 closes the listener, stops accepting new connections, and waits for active workers to finish before the serving loop returns.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="request-shutdown-1">
-<span id="http-socket-0-request-shutdown-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a><a class="headerlink" href="#request-shutdown-1" title="Link to this heading"></a></h3>
-<p>Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request_shutdown(Control)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request_shutdown(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -891,7 +462,7 @@
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="connection-pool-seed-1">
-<span id="http-socket-0-connection-pool-seed-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_seed_/1</span></code></a><a class="headerlink" href="#connection-pool-seed-1" title="Link to this heading"></a></h3>
+<span id="http-socket-0-connection-pool-seed-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_seed_/1</span></code></a><a class="headerlink" href="#connection-pool-seed-1" title="Link to this heading"></a></h3>
 <p>Last allocated connection pool identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -912,7 +483,7 @@
 <hr class="docutils" />
 </section>
 <section id="connection-pool-config-6">
-<span id="http-socket-0-connection-pool-config-6"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_config_/6</span></code></a><a class="headerlink" href="#connection-pool-config-6" title="Link to this heading"></a></h3>
+<span id="http-socket-0-connection-pool-config-6"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_config_/6</span></code></a><a class="headerlink" href="#connection-pool-config-6" title="Link to this heading"></a></h3>
 <p>Stored connection pool configuration indexed by pool identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -933,7 +504,7 @@
 <hr class="docutils" />
 </section>
 <section id="connection-pool-available-2">
-<span id="http-socket-0-connection-pool-available-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_available_/2</span></code></a><a class="headerlink" href="#connection-pool-available-2" title="Link to this heading"></a></h3>
+<span id="http-socket-0-connection-pool-available-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_available_/2</span></code></a><a class="headerlink" href="#connection-pool-available-2" title="Link to this heading"></a></h3>
 <p>Reusable idle client connections indexed by pool identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -954,7 +525,7 @@
 <hr class="docutils" />
 </section>
 <section id="connection-pool-in-use-2">
-<span id="http-socket-0-connection-pool-in-use-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_in_use_/2</span></code></a><a class="headerlink" href="#connection-pool-in-use-2" title="Link to this heading"></a></h3>
+<span id="http-socket-0-connection-pool-in-use-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_pool_in_use_/2</span></code></a><a class="headerlink" href="#connection-pool-in-use-2" title="Link to this heading"></a></h3>
 <p>Checked-out client connections indexed by pool identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -975,7 +546,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-shutdown-seed-1">
-<span id="http-socket-0-listener-shutdown-seed-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a><a class="headerlink" href="#listener-shutdown-seed-1" title="Link to this heading"></a></h3>
+<span id="http-socket-0-listener-shutdown-seed-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a><a class="headerlink" href="#listener-shutdown-seed-1" title="Link to this heading"></a></h3>
 <p>Last allocated shutdown run identifier for open-ended listener loops.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -996,7 +567,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-shutdown-control-3">
-<span id="http-socket-0-listener-shutdown-control-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a><a class="headerlink" href="#listener-shutdown-control-3" title="Link to this heading"></a></h3>
+<span id="http-socket-0-listener-shutdown-control-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a><a class="headerlink" href="#listener-shutdown-control-3" title="Link to this heading"></a></h3>
 <p>Registered shutdown control terms and their associated listeners.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1017,7 +588,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-shutdown-requested-2">
-<span id="http-socket-0-listener-shutdown-requested-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a><a class="headerlink" href="#listener-shutdown-requested-2" title="Link to this heading"></a></h3>
+<span id="http-socket-0-listener-shutdown-requested-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a><a class="headerlink" href="#listener-shutdown-requested-2" title="Link to this heading"></a></h3>
 <p>Recorded shutdown requests indexed by control term and run identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1038,7 +609,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-active-worker-3">
-<span id="http-socket-0-listener-active-worker-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a><a class="headerlink" href="#listener-active-worker-3" title="Link to this heading"></a></h3>
+<span id="http-socket-0-listener-active-worker-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a><a class="headerlink" href="#listener-active-worker-3" title="Link to this heading"></a></h3>
 <p>Active listener worker records indexed by control term and run identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1070,7 +641,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="http_session_0.html" class="btn btn-neutral float-left" title="http_session" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_static_files_0.html" class="btn btn-neutral float-right" title="http_static_files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_socket_protocol_0.html" class="btn btn-neutral float-right" title="http_socket_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
