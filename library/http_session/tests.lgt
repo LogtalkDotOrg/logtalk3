@@ -35,6 +35,7 @@
 	]).
 
 	:- uses(list, [
+		member/2,
 		memberchk/2
 	]).
 
@@ -47,6 +48,7 @@
 	cover(http_server_session).
 	cover(http_server_session_handler(_, _)).
 	cover(http_server_session_router(_)).
+	cover(http_server_session_event_logger).
 	cover(http_session_test_handler).
 	cover(http_session_request_echo_handler).
 	cover(http_server_session_counter_handler).
@@ -196,6 +198,24 @@
 
 	test(http_cookie_jar_22, error(instantiation_error)) :-
 		http_cookie_jar::cookie_count(cookie_jar(_JarId), _Count).
+
+	test(http_cookie_jar_23, deterministic(Cookies == [session-'1'])) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'http://Example.COM', [set_cookie(session, '1', [domain-'.Example.COM'])]),
+		http_cookie_jar::request_cookies(Jar, 'http://sub.example.com', Cookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_24, deterministic(Cookies == [session-'1'])) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'http://user@[::1]:8080/login', [set_cookie(session, '1', [path-('/')])]),
+		http_cookie_jar::request_cookies(Jar, 'http://[::1]:8080/dashboard', Cookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_25, deterministic(Cookies == [session-'1'])) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'http://[::1]/login', [set_cookie(session, '1', [path-('/')])]),
+		http_cookie_jar::request_cookies(Jar, 'http://[::1]/dashboard', Cookies),
+		http_cookie_jar::close(Jar).
 
 	test(http_client_session_00, deterministic(Cookies == [session-'1'])) :-
 		^^file_path('test_http_client_session_cookie_jar_state.tmp', Path),
@@ -419,6 +439,174 @@
 			http_server_session::gc(Manager, Collected),
 			http_server_session::count(Manager, Count),
 			http_server_session::close(Manager).
+
+		test(http_server_session_07, deterministic((Removed == 1, Data == []))) :-
+			http_server_session::open(Manager),
+			server_session_request([], Request10),
+			http_server_session::begin(Manager, Request10, Request11),
+			http_server_session::current(Request11, Session1),
+			http_server_session::set(Session1, visits, 1),
+			http_server_session::remove(Session1, visits, Removed),
+			http_server_session::data(Session1, Data),
+			server_session_response(Response10),
+			http_server_session::finish(Request11, Response10, _Response1),
+			http_server_session::close(Manager).
+
+		test(http_server_session_08, deterministic((RemovalFailed == true, Visits == 1, \+ http::property(Response2, set_cookies(_))))) :-
+			http_server_session::open(Manager),
+			server_session_request([], Request10),
+			http_server_session::begin(Manager, Request10, Request11),
+			http_server_session::current(Request11, Session1),
+			http_server_session::set(Session1, visits, 1),
+			server_session_response(Response10),
+			http_server_session::finish(Request11, Response10, Response1),
+			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
+			server_session_request([session-SessionId], Request20),
+			http_server_session::begin(Manager, Request20, Request21),
+			http_server_session::current(Request21, Session2),
+			(	http_server_session::remove(Session2, missing, _Value) ->
+				RemovalFailed = false
+			;	RemovalFailed = true
+			),
+			http_server_session::get(Session2, visits, Visits),
+			server_session_response(Response20),
+			http_server_session::finish(Request21, Response20, Response2),
+			http_server_session::close(Manager).
+
+		test(http_server_session_09, deterministic((SessionState == stale, memberchk(max_age-0, Attributes)))) :-
+			http_server_session::open(Manager, [absolute_timeout(0)]),
+			server_session_request([], Request10),
+			http_server_session::begin(Manager, Request10, Request11),
+			http_server_session::current(Request11, Session1),
+			http_server_session::set(Session1, visits, 1),
+			server_session_response(Response10),
+			http_server_session::finish(Request11, Response10, Response1),
+			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
+			server_session_request([session-SessionId], Request20),
+			http_server_session::begin(Manager, Request20, Request21),
+			http::property(Request21, http_server_session_state(SessionState)),
+			server_session_response(Response20),
+			http_server_session::finish(Request21, Response20, Response2),
+			server_session_cookie(Response2, set_cookie(session, '', Attributes)),
+			http_server_session::close(Manager).
+
+		test(http_server_session_10, deterministic((SessionState == stale, Count == 0, memberchk(max_age-0, Attributes)))) :-
+			http_server_session::open(Manager, [idle_timeout(0), gc_interval(0)]),
+			server_session_request([], Request10),
+			http_server_session::begin(Manager, Request10, Request11),
+			http_server_session::current(Request11, Session1),
+			http_server_session::set(Session1, visits, 1),
+			server_session_response(Response10),
+			http_server_session::finish(Request11, Response10, Response1),
+			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
+			server_session_request([session-SessionId], Request20),
+			http_server_session::begin(Manager, Request20, Request21),
+			http::property(Request21, http_server_session_state(SessionState)),
+			http_server_session::count(Manager, Count),
+			server_session_response(Response20),
+			http_server_session::finish(Request21, Response20, Response2),
+			server_session_cookie(Response2, set_cookie(session, '', Attributes)),
+			http_server_session::close(Manager).
+
+		test(http_server_session_11, deterministic((Visits == 1, memberchk(path-('/app'), Attributes), memberchk(secure-true, Attributes), \+ http::property(Response2, set_cookies(_))))) :-
+			http_server_session::open(Manager, [cookie_name(sid), cookie_attributes([path-('/app'), secure-true])]),
+			server_session_request([], Request10),
+			http_server_session::begin(Manager, Request10, Request11),
+			http_server_session::current(Request11, Session1),
+			http_server_session::set(Session1, visits, 1),
+			server_session_response(Response10),
+			http_server_session::finish(Request11, Response10, Response1),
+			server_session_cookie(Response1, set_cookie(sid, SessionId, Attributes)),
+			server_session_request([sid-SessionId], Request20),
+			http_server_session::begin(Manager, Request20, Request21),
+			http_server_session::current(Request21, Session2),
+			http_server_session::get(Session2, visits, Visits),
+			server_session_response(Response20),
+			http_server_session::finish(Request21, Response20, Response2),
+			http_server_session::close(Manager).
+
+		test(http_server_session_12, deterministic((memberchk(created(SessionId), Events), memberchk(touched(SessionId), Events), memberchk(resumed(SessionId), Events), memberchk(renewed(SessionId, NewId), Events), memberchk(touched(NewId), Events)))) :-
+			http_server_session_event_logger::reset,
+			http_server_session_event_logger::open(Manager),
+			server_session_request([], Request10),
+			http_server_session_event_logger::begin(Manager, Request10, Request11),
+			http_server_session_event_logger::current(Request11, Session1),
+			http_server_session_event_logger::set(Session1, visits, 1),
+			server_session_response(Response10),
+			http_server_session_event_logger::finish(Request11, Response10, Response1),
+			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
+			server_session_request([session-SessionId], Request20),
+			http_server_session_event_logger::begin(Manager, Request20, Request21),
+			http_server_session_event_logger::current(Request21, Session2),
+			http_server_session_event_logger::renew(Session2, NewId),
+			server_session_response(Response20),
+			http_server_session_event_logger::finish(Request21, Response20, _Response2),
+			http_server_session_event_logger::events(Events),
+			http_server_session_event_logger::close(Manager),
+			http_server_session_event_logger::reset.
+
+			test(http_server_session_13, deterministic((Data == [], Count == 0, \+ http::property(Response, set_cookies(_))))) :-
+				http_server_session::open(Manager),
+				server_session_request([], Request0),
+				http_server_session::begin(Manager, Request0, Request),
+				http_server_session::current(Request, Session),
+				http_server_session::data(Session, Data),
+				server_session_response(Response0),
+				http_server_session::finish(Request, Response0, Response),
+				http_server_session::count(Manager, Count),
+				http_server_session::close(Manager).
+
+			test(http_server_session_14, deterministic((Data == [], Count == 1))) :-
+				http_server_session::open(Manager),
+				server_session_request([], Request0),
+				http_server_session::begin(Manager, Request0, Request),
+				http_server_session::ensure(Request, Session),
+				http_server_session::data(Session, Data),
+				http_server_session::count(Manager, Count),
+				server_session_response(Response0),
+				http_server_session::finish(Request, Response0, Response),
+				server_session_cookie(Response, set_cookie(session, _SessionId, _Attributes)),
+				http_server_session::close(Manager).
+
+			test(http_server_session_15, deterministic) :-
+				http_server_session::open(Manager),
+				server_session_request([], Request0),
+				http_server_session::begin(Manager, Request0, Request),
+				http_server_session::current(Request, Session),
+				http_server_session::set(Session, visits, 1),
+				http::response(http(1, 1), status(200, 'OK'), [], empty, [connection([close]), set_cookies([set_cookie(existing, '1', [path-('/'), http_only-true]), set_cookie(other, '2', [path-('/app')])])], Response0),
+				http_server_session::finish(Request, Response0, Response),
+				http::property(Response, connection([close])),
+				http::property(Response, set_cookies(SetCookies)),
+				memberchk(set_cookie(session, _SessionId, _Attributes), SetCookies),
+				memberchk(set_cookie(existing, '1', [path-('/'), http_only-true]), SetCookies),
+				memberchk(set_cookie(other, '2', [path-('/app')]), SetCookies),
+				http_server_session::close(Manager).
+
+			test(http_server_session_16, deterministic((User == alice, Data == [visits-1, user-alice]))) :-
+				http_server_session::open(Manager),
+				server_session_request([], Request0),
+				http_server_session::begin(Manager, Request0, Request),
+				http_server_session::current(Request, Session),
+				http_server_session::set(Session, visits, 1),
+				http_server_session::set(Session, user, alice),
+				http_server_session::get(Session, user, User),
+				http_server_session::data(Session, Data),
+				server_session_response(Response0),
+				http_server_session::finish(Request, Response0, _Response),
+				http_server_session::close(Manager).
+
+			test(http_server_session_17, deterministic((memberchk(max_age-TTL, Attributes), TTL >= 0, TTL =< 5, memberchk(path-('/app'), Attributes), memberchk(secure-true, Attributes), \+ member(expires-_, Attributes), \+ member(max_age-99, Attributes)))) :-
+				date::format_date_time(date_time(2099, 1, 1, 0, 0, 0), 0, http_date, Expires),
+				http_server_session::open(Manager, [cookie_attributes([path-('/app'), secure-true, expires-Expires, max_age-99]), idle_timeout(10), absolute_timeout(5)]),
+				server_session_request([], Request0),
+				http_server_session::begin(Manager, Request0, Request),
+				http_server_session::current(Request, Session),
+				http_server_session::set(Session, visits, 1),
+				server_session_response(Response0),
+				http_server_session::finish(Request, Response0, Response),
+				server_session_cookie(Response, set_cookie(session, _SessionId, Attributes)),
+				http_server_session::close(Manager).
 
 		test(http_server_session_handler_01, deterministic) :-
 			http_server_session::open(Manager),

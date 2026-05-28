@@ -132,6 +132,50 @@
 	:- end_object.
 
 
+	:- object(http_server_session_event_logger,
+		extends(http_server_session)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-05-28,
+			comment is 'Local server-session specialization used by the http_session library tests to record lifecycle hook events.'
+		]).
+
+		:- public(reset/0).
+		:- mode(reset, one).
+		:- info(reset/0, [
+			comment is 'Clears the recorded server-session lifecycle events.',
+			argnames is []
+		]).
+
+		:- public(events/1).
+		:- mode(events(-list(compound)), one).
+		:- info(events/1, [
+			comment is 'Returns the recorded server-session lifecycle events in call order.',
+			argnames is ['Events']
+		]).
+
+		:- private(event_/1).
+		:- dynamic(event_/1).
+		:- mode(event_(?compound), zero_or_more).
+		:- info(event_/1, [
+			comment is 'Recorded server-session lifecycle events.',
+			argnames is ['Event']
+		]).
+
+		reset :-
+			retractall(event_(_)).
+
+		events(Events) :-
+			findall(Event, event_(Event), Events).
+
+		http_server_session_event(_Manager, Event) :-
+			assertz(event_(Event)).
+
+	:- end_object.
+
+
 	:- object(http_server_session_router(_Manager_),
 		implements(http_handler_protocol),
 		imports([http_router, http_router_server_session(_Manager_)])).

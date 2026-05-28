@@ -543,8 +543,9 @@
 		context_current_session_id(Context, SessionId),
 		SessionId \== none,
 		session_handle_manager_id(Session, ManagerId),
-		retract(stored_session_(ManagerId, SessionId, Data0, CreatedAt, LastSeenAt, AbsoluteExpiryAt)),
+		stored_session_(ManagerId, SessionId, Data0, CreatedAt, LastSeenAt, AbsoluteExpiryAt),
 		remove_data_key(Data0, Key, Value, Data),
+		retract(stored_session_(ManagerId, SessionId, Data0, CreatedAt, LastSeenAt, AbsoluteExpiryAt)),
 		assertz(stored_session_(ManagerId, SessionId, Data, CreatedAt, LastSeenAt, AbsoluteExpiryAt)).
 
 	destroy_session_handle(Session) :-
@@ -568,7 +569,8 @@
 		retract(stored_session_(ManagerId, SessionId, Data, CreatedAt, LastSeenAt, AbsoluteExpiryAt)),
 		allocate_distinct_session_identifier(SessionId, NewIdentifier),
 		assertz(stored_session_(ManagerId, NewIdentifier, Data, CreatedAt, LastSeenAt, AbsoluteExpiryAt)),
-		Context = request_context(ManagerId, NewIdentifier, context_original_session_id_value(Context0), false, false, SessionId),
+		context_original_session_id_value(Context0, OriginalSessionId),
+		Context = request_context(ManagerId, NewIdentifier, OriginalSessionId, false, false, SessionId),
 		update_context_state(ContextId, Context),
 		notify_event(http_server_session(ManagerId), renewed(SessionId, NewIdentifier)).
 
