@@ -1,0 +1,152 @@
+.. index:: single: http_parameters
+.. _http_parameters/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_parameters``
+===================
+
+Typed HTTP query, form, and path parameter extraction helpers plus OpenAPI descriptor generation helpers.
+
+| **Availability:** 
+|    ``logtalk_load(http_parameters(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-28
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_json_term_helpers <http_json_term_helpers/0>`
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parameters/3
+.. _http_parameters/0::parameters/3:
+
+``parameters/3``
+^^^^^^^^^^^^^^^^
+
+Extracts typed parameters from a normalized HTTP request using the given declaration list. Client-input failures throw ``error(http_parameter_validation(Errors), Context)`` where ``Errors`` is a non-empty list of structured parameter errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parameters(Request,Declarations,Parameters)``
+| **Mode and number of proofs:**
+|    ``parameters(+compound,+list(compound),-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: parameter/3
+.. _http_parameters/0::parameter/3:
+
+``parameter/3``
+^^^^^^^^^^^^^^^
+
+Extracts a single typed parameter from a normalized HTTP request using the given declaration. Optional absent parameters fail instead of throwing an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parameter(Request,Declaration,Value)``
+| **Mode and number of proofs:**
+|    ``parameter(+compound,+compound,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: open_api_parameters/2
+.. _http_parameters/0::open_api_parameters/2:
+
+``open_api_parameters/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates OpenAPI ``parameter/5`` descriptors for query and path declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_parameters(Declarations,Parameters)``
+| **Mode and number of proofs:**
+|    ``open_api_parameters(+list(compound),-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_api_request_body/3
+.. _http_parameters/0::open_api_request_body/3:
+
+``open_api_request_body/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates an OpenAPI ``request_body/3`` descriptor for form declarations using the given description. Fails when the declaration list contains no form parameters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_request_body(Declarations,Description,RequestBody)``
+| **Mode and number of proofs:**
+|    ``open_api_request_body(+list(compound),+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: open_api_bad_request_response/1
+.. _http_parameters/0::open_api_bad_request_response/1:
+
+``open_api_bad_request_response/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the default OpenAPI ``400 Bad Request`` response descriptor used by router integrations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_bad_request_response(Response)``
+| **Mode and number of proofs:**
+|    ``open_api_bad_request_response(-compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

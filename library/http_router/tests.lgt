@@ -241,6 +241,23 @@
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text(scrubbed))).
 
+	test(http_router_handle_2_28, deterministic) :-
+		Request = request(get, origin('/bad-request/default'), http(1, 1), [], empty, []),
+		parameter_validation_http_router::handle(Request, Response),
+		status(Response, status(400, 'Bad Request')),
+		body(Response, content('text/plain', text('Bad Request'))).
+
+	test(http_router_handle_2_29, deterministic) :-
+		Request = request(get, origin('/bad-request/custom'), http(1, 1), [], empty, []),
+		parameter_validation_http_router::handle(Request, Response),
+		status(Response, status(400, 'Bad Request')),
+		header(Response, x_router, custom),
+		body(Response, content('text/plain', text(custom_bad_request))).
+
+	test(http_router_handle_2_30, error(domain_error(http_router_test, invalid_handler_error))) :-
+		Request = request(get, origin('/bad-request/error'), http(1, 1), [], empty, []),
+		parameter_validation_http_router::handle(Request, _Response).
+
 	test(http_router_open_api_3_01, deterministic) :-
 		OpenAPI = open_api,
 		OpenAPI::operation(open_api_http_router, show_item, Operation),
@@ -375,7 +392,7 @@
 		Operation = operation(
 			update_message,
 			put,
-			'/examples/messages/{id:integer}',
+			'/examples/messages/{id}',
 			'Update example message',
 			[parameter(id, path, 'Path parameter.', true, {type-integer})],
 			request_body('Inferred request body', false, [

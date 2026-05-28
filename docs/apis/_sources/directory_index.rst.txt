@@ -1242,6 +1242,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    http_multipart <http_multipart_0>
 
+``library/http_parameters/``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_parameters <http_parameters_0>
+   http_router_parameters <http_router_parameters_0>
+
 ``library/http_router/``
 ------------------------
 

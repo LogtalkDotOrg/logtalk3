@@ -28,6 +28,7 @@
 		date is 2026-05-23,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.',
 		remarks is [
+			'Custom bad-request responses' - 'Importing objects can optionally define ``route_bad_request_response/3`` to customize ``400 Bad Request`` responses generated from dedicated parameter-validation exceptions raised by route handlers.',
 			'Content negotiation' - 'Importing objects can optionally define ``route_produces/2`` clauses so the router negotiates the request ``Accept`` header and annotates matched requests with the negotiated ``response_media_type(MediaType)`` property.',
 			'Middleware chaining' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response.',
 			'Response middleware' - 'Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.',
@@ -48,12 +49,13 @@
 	:- info(handle/2, [
 		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses.',
 		remarks is [
+			'Bad-request handling' - 'Dedicated route-handler exceptions matching ``error(http_parameter_validation(Errors), Context)`` with a non-empty ``Errors`` list are translated into ``400 Bad Request`` responses using either ``route_bad_request_response/3`` or the default plain-text response.',
 			'Middleware' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.',
 			'Response middleware' - 'Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.',
 			'Request annotations' - 'Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied. On this normal routing path the router strips stale internal synthetic properties such as ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``, and ``response_media_type/1`` before calling the handler.',
 			'Automatic ``OPTIONS``' - 'An explicit ``options`` route matches first. Otherwise the router builds an automatic response from a synthetic request carrying ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, that synthetic request also carries ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic ``OPTIONS`` responses still pass through response middleware and can be customized using ``route_automatic_options_response/3``.',
-			'Custom responses' - 'Importing objects can optionally define ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.',
-			'Failure behavior' - 'Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.'
+			'Custom responses' - 'Importing objects can optionally define ``route_bad_request_response/3``, ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``400``, ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.',
+			'Failure behavior' - 'Dedicated parameter-validation exceptions return ``400 Bad Request`` responses. Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.'
 		],
 		argnames is ['Request', 'Response']
 	]).
@@ -184,11 +186,25 @@
 		argnames is ['Id', 'MediaTypes']
 	]).
 
+	:- protected(path_template_parameters/2).
+	:- mode(path_template_parameters(+atom, -list(compound)), one_or_error).
+	:- info(path_template_parameters/2, [
+		comment is 'Returns the normalized placeholder descriptors declared in a path template as ``parameter(Name, Type)`` terms.',
+		argnames is ['PathTemplate', 'Parameters']
+	]).
+
 	:- protected(route_not_found_response/2).
 	:- mode(route_not_found_response(+compound, -compound), zero_or_one).
 	:- info(route_not_found_response/2, [
 		comment is 'Optional hook predicate that customizes ``404 Not Found`` responses. When defined by the importing object, it is called with the unmatched request and must return the response to send.',
 		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(route_bad_request_response/3).
+	:- mode(route_bad_request_response(+compound, +list(compound), -compound), zero_or_one).
+	:- info(route_bad_request_response/3, [
+		comment is 'Optional hook predicate that customizes ``400 Bad Request`` responses generated from dedicated parameter-validation exceptions raised by route handlers. When defined by the importing object, it is called with the routed request, the structured parameter error list, and must return the response to send.',
+		argnames is ['Request', 'Errors', 'Response']
 	]).
 
 	:- protected(route_method_not_allowed_response/3).
@@ -239,14 +255,46 @@
 	security_scheme(Name, SecurityScheme) :-
 		::open_api_security_scheme(Name, SecurityScheme).
 
-	open_api_operation(operation(RouteId, Method, PathTemplate, Summary, Parameters, RequestBody, Responses, Properties)) :-
+	open_api_operation(operation(RouteId, Method, OpenAPIPathTemplate, Summary, Parameters, RequestBody, Responses, Properties)) :-
 		::route(RouteId, Method, PathTemplate, Handler),
+		route_open_api_path_template(PathTemplate, OpenAPIPathTemplate),
 		route_open_api_metadata(RouteId, Metadata),
 		route_open_api_summary(RouteId, Metadata, Summary),
 		route_open_api_parameters(PathTemplate, Metadata, Parameters),
 		route_open_api_request_body(RouteId, Method, PathTemplate, Handler, Metadata, RequestBody),
 		route_open_api_responses(Method, RouteId, PathTemplate, Handler, Metadata, Responses),
 		route_open_api_properties(Metadata, Properties).
+
+	route_open_api_path_template(PathTemplate, OpenAPIPathTemplate) :-
+		template_path_segments(PathTemplate, TemplateSegments),
+		open_api_template_segments(TemplateSegments, Segments),
+		open_api_path_segments(Segments, OpenAPIPathTemplate).
+
+	open_api_template_segments([], []).
+	open_api_template_segments([literal(Segment)| TemplateSegments], [Segment| Segments]) :-
+		!,
+		open_api_template_segments(TemplateSegments, Segments).
+	open_api_template_segments([wildcard| TemplateSegments], ['*'| Segments]) :-
+		!,
+		open_api_template_segments(TemplateSegments, Segments).
+	open_api_template_segments([parameter(Name, _Type)| TemplateSegments], [Segment| Segments]) :-
+		atom_concat('{', Name, Prefix),
+		atom_concat(Prefix, '}', Segment),
+		open_api_template_segments(TemplateSegments, Segments).
+
+	open_api_path_segments([], '/') :-
+		!.
+	open_api_path_segments(Segments, Path) :-
+		open_api_path_segments_codes(Segments, Codes),
+		atom_codes(Path, [0'/| Codes]).
+
+	open_api_path_segments_codes([Segment], Codes) :-
+		!,
+		atom_codes(Segment, Codes).
+	open_api_path_segments_codes([Segment| Segments], Codes) :-
+		atom_codes(Segment, SegmentCodes),
+		open_api_path_segments_codes(Segments, RestCodes),
+		append(SegmentCodes, [0'/| RestCodes], Codes).
 
 	route_open_api_metadata(RouteId, Metadata) :-
 		(	::route_metadata(RouteId, Metadata0) ->
@@ -282,8 +330,10 @@
 
 	template_segments_open_api_parameters([], []).
 	template_segments_open_api_parameters([literal(_)| TemplateSegments], Parameters) :-
+		!,
 		template_segments_open_api_parameters(TemplateSegments, Parameters).
 	template_segments_open_api_parameters([wildcard| TemplateSegments], Parameters) :-
+		!,
 		template_segments_open_api_parameters(TemplateSegments, Parameters).
 	template_segments_open_api_parameters([parameter(Name, Type)| TemplateSegments], [parameter(Name, path, 'Path parameter.', true, Schema)| Parameters]) :-
 		path_parameter_open_api_schema(Type, Schema),
@@ -294,6 +344,20 @@
 	path_parameter_open_api_schema(number, {type-number}) :-
 		!.
 	path_parameter_open_api_schema(_Type, {type-string}).
+
+	path_template_parameters(PathTemplate, Parameters) :-
+		template_path_segments(PathTemplate, TemplateSegments),
+		template_segments_parameters(TemplateSegments, Parameters).
+
+	template_segments_parameters([], []).
+	template_segments_parameters([literal(_)| TemplateSegments], Parameters) :-
+		!,
+		template_segments_parameters(TemplateSegments, Parameters).
+	template_segments_parameters([wildcard| TemplateSegments], Parameters) :-
+		!,
+		template_segments_parameters(TemplateSegments, Parameters).
+	template_segments_parameters([parameter(Name, Type)| TemplateSegments], [parameter(Name, Type)| Parameters]) :-
+		template_segments_parameters(TemplateSegments, Parameters).
 
 	merge_open_api_parameters([], MetadataParameters, MetadataParameters).
 	merge_open_api_parameters([DefaultParameter| DefaultParameters], MetadataParameters0, [Parameter| Parameters]) :-
@@ -322,14 +386,37 @@
 		).
 
 	route_open_api_responses(Method, RouteId, PathTemplate, Handler, Metadata, Responses) :-
-		(	route_metadata_property_value(responses, Metadata, Responses) ->
-			true
+		(	route_metadata_property_value(responses, Metadata, MetadataResponses) ->
+			route_open_api_metadata_responses(Method, RouteId, PathTemplate, Handler, MetadataResponses, Responses)
 		;	inferred_open_api_responses_examples(RouteId, Responses) ->
 			true
 		;	inferred_open_api_responses(Method, RouteId, PathTemplate, Handler, Responses) ->
 			true
 		;	default_open_api_responses(Method, RouteId, Responses)
 		).
+
+	route_open_api_metadata_responses(_Method, _RouteId, _PathTemplate, _Handler, MetadataResponses, MetadataResponses) :-
+		open_api_responses_include_success(MetadataResponses),
+		!.
+	route_open_api_metadata_responses(Method, RouteId, PathTemplate, Handler, MetadataResponses, Responses) :-
+		(   inferred_open_api_responses(Method, RouteId, PathTemplate, Handler, SuccessResponses) ->
+			append(SuccessResponses, MetadataResponses, Responses)
+		;   default_open_api_responses(Method, RouteId, SuccessResponses),
+			append(SuccessResponses, MetadataResponses, Responses)
+		).
+
+	open_api_responses_include_success([response(Status, _Description, _MediaDescriptors)| _Responses]) :-
+		open_api_success_status(Status),
+		!.
+	open_api_responses_include_success([_Response| Responses]) :-
+		open_api_responses_include_success(Responses).
+
+	open_api_success_status(Status) :-
+		integer(Status),
+		Status >= 200,
+		Status < 300,
+		!.
+	open_api_success_status('2XX').
 
 	default_open_api_responses(Method, RouteId, [response(Status, Description, MediaTypes)]) :-
 		default_open_api_response_status(Method, Status),
@@ -789,10 +876,21 @@
 	route_response(RouteId, Handler, Request, EffectiveRequest, Response) :-
 		(	negotiated_route_request(RouteId, Request, NegotiatedRequest) ->
 			EffectiveRequest = NegotiatedRequest,
-			call_route_handler(Handler, NegotiatedRequest, Response)
+			catch(
+				call_route_handler(Handler, NegotiatedRequest, Response),
+				Error,
+				handle_route_handler_error(Error, NegotiatedRequest, Response)
+			)
 		;	EffectiveRequest = Request,
 			handle_not_acceptable_response(RouteId, Request, Response)
 		).
+
+	handle_route_handler_error(error(http_parameter_validation(Errors), _Context), Request, Response) :-
+		Errors = [_| _],
+		!,
+		bad_request_response(Request, Errors, Response).
+	handle_route_handler_error(Error, _Request, _Response) :-
+		throw(Error).
 
 	negotiated_route_request(RouteId, Request, NegotiatedRequest) :-
 		(	::route_produces(RouteId, ProducedMediaTypes0) ->
@@ -1322,6 +1420,16 @@
 	default_not_acceptable_response(Request, Response) :-
 		http::version(Request, Version),
 		http::response(Version, status(406, 'Not Acceptable'), [], content('text/plain', text('Not Acceptable')), [], Response).
+
+	bad_request_response(Request, Errors, Response) :-
+		(	::route_bad_request_response(Request, Errors, Response) ->
+			true
+		;	default_bad_request_response(Request, Response)
+		).
+
+	default_bad_request_response(Request, Response) :-
+		http::version(Request, Version),
+		http::response(Version, status(400, 'Bad Request'), [], content('text/plain', text('Bad Request')), [], Response).
 
 	method_not_allowed_response(Request, AllowedMethods0, Response) :-
 		effective_allowed_methods(AllowedMethods0, AllowedMethods),

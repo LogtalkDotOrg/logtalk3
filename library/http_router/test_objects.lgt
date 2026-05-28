@@ -416,6 +416,69 @@
 :- end_object.
 
 
+	:- object(parameter_validation_http_router,
+		implements(http_handler_protocol),
+		imports(http_router)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-05-28,
+			comment is 'Router object used by the http_router tests to exercise default and custom ``400`` responses generated from parameter-validation exceptions.'
+		]).
+
+		:- protected(show_default_bad_request/2).
+		:- info(show_default_bad_request/2, [
+			comment is 'Route handler used by the parameter-validation router object for the default ``400`` response path.',
+			argnames is ['Request', 'Response']
+		]).
+
+		:- protected(show_custom_bad_request/2).
+		:- info(show_custom_bad_request/2, [
+			comment is 'Route handler used by the parameter-validation router object for the custom ``400`` response path.',
+			argnames is ['Request', 'Response']
+		]).
+
+		:- protected(show_handler_error/2).
+		:- info(show_handler_error/2, [
+			comment is 'Route handler used by the parameter-validation router object to confirm unrelated exceptions still propagate.',
+			argnames is ['Request', 'Response']
+		]).
+
+		:- protected(route_bad_request_response/3).
+		:- info(route_bad_request_response/3, [
+			comment is 'Custom ``400`` response hook used by the router tests.',
+			argnames is ['Request', 'Errors', 'Response']
+		]).
+
+		route(show_default_bad_request, get, '/bad-request/default', show_default_bad_request).
+		route(show_custom_bad_request, get, '/bad-request/custom', show_custom_bad_request).
+		route(show_handler_error, get, '/bad-request/error', show_handler_error).
+
+		show_default_bad_request(Request, _Response) :-
+			http::property(Request, route(show_default_bad_request)),
+			http::property(Request, path_params([])),
+			throw(error(http_parameter_validation([missing_parameter(query, id)]), route_parameters(show_default_bad_request))).
+
+		show_custom_bad_request(Request, _Response) :-
+			http::property(Request, route(show_custom_bad_request)),
+			http::property(Request, path_params([])),
+			throw(error(http_parameter_validation([duplicate_parameter(query, id)]), route_parameters(show_custom_bad_request))).
+
+		show_handler_error(Request, _Response) :-
+			http::property(Request, route(show_handler_error)),
+			http::property(Request, path_params([])),
+			throw(error(domain_error(http_router_test, invalid_handler_error), show_handler_error/2)).
+
+		route_bad_request_response(Request, Errors, Response) :-
+			Errors == [duplicate_parameter(query, id)],
+			http::property(Request, route(show_custom_bad_request)),
+			http::version(Request, Version),
+			http::response(Version, status(400, 'Bad Request'), [x_router-custom], content('text/plain', text(custom_bad_request)), [], Response).
+
+	:- end_object.
+
+
 :- object(route_metadata_http_router,
 	implements(http_handler_protocol),
 	imports(http_router)).

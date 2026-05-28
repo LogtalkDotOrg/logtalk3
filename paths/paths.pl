@@ -203,6 +203,7 @@ logtalk_library_path(http_cors, library('http_cors/')).
 logtalk_library_path(http_directory_listing, library('http_directory_listing/')).
 logtalk_library_path(http_htmx, library('http_htmx/')).
 logtalk_library_path(http_multipart, library('http_multipart/')).
+logtalk_library_path(http_parameters, library('http_parameters/')).
 logtalk_library_path(http_router, library('http_router/')).
 logtalk_library_path(http_server, library('http_server/')).
 logtalk_library_path(http_session, library('http_session/')).

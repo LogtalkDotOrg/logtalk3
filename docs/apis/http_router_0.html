@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="http_server" href="http_server_0.html" />
-    <link rel="prev" title="http_multipart" href="http_multipart_0.html" />
+    <link rel="prev" title="http_router_parameters" href="http_router_parameters_0.html" />
    
 </head>
 
@@ -169,6 +169,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-directory-listing"><span class="xref std std-ref">http_directory_listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-htmx"><span class="xref std std-ref">http_htmx</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-parameters"><span class="xref std std-ref">http_parameters</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_router</a></li>
 </ul>
@@ -410,6 +411,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p>Custom bad-request responses: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> to customize <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses generated from dedicated parameter-validation exceptions raised by route handlers.</p></li>
 <li><p>Content negotiation: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> clauses so the router negotiates the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header and annotates matched requests with the negotiated <code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code> property.</p></li>
 <li><p>Middleware chaining: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">middleware/2</span></code> descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response.</p></li>
 <li><p>Response middleware: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">response_middleware/2</span></code> descriptors whose handlers transform the final response after route dispatch or short-circuit handling.</p></li>
@@ -458,13 +460,14 @@
 <li><p><a class="reference internal" href="#open-api-security-scheme-2" id="id20"><code class="docutils literal notranslate"><span class="pre">open_api_security_scheme/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#route-produces-2" id="id21"><code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#route-not-found-response-2" id="id22"><code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-method-not-allowed-response-3" id="id23"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-automatic-options-response-3" id="id24"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-not-acceptable-response-3" id="id25"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-bad-request-response-3" id="id23"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-method-not-allowed-response-3" id="id24"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-automatic-options-response-3" id="id25"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-not-acceptable-response-3" id="id26"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -493,12 +496,13 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p>Bad-request handling: Dedicated route-handler exceptions matching <code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),</span> <span class="pre">Context)</span></code> with a non-empty <code class="docutils literal notranslate"><span class="pre">Errors</span></code> list are translated into <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses using either <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> or the default plain-text response.</p></li>
 <li><p>Middleware: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">middleware/2</span></code> descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.</p></li>
 <li><p>Response middleware: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">response_middleware/2</span></code> descriptors whose handlers transform the final response after route dispatch or short-circuit handling.</p></li>
 <li><p>Request annotations: Matched requests are annotated before handler execution with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code>, <code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>, any <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code> properties, and the negotiated <code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code> property when <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> is defined and the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header can be satisfied. On this normal routing path the router strips stale internal synthetic properties such as <code class="docutils literal notranslate"><span class="pre">open_api_probe/1</span></code>, <code class="docutils literal notranslate"><span class="pre">automatic_options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">effective_methods/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code> before calling the handler.</p></li>
 <li><p>Automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>: An explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> route matches first. Otherwise the router builds an automatic response from a synthetic request carrying <code class="docutils literal notranslate"><span class="pre">automatic_options(true)</span></code> and <code class="docutils literal notranslate"><span class="pre">effective_methods(Methods)</span></code>. When exactly one non-<code class="docutils literal notranslate"><span class="pre">options</span></code> route matches the path, that synthetic request also carries <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code>, <code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>, and that route metadata; when multiple non-<code class="docutils literal notranslate"><span class="pre">options</span></code> routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses still pass through response middleware and can be customized using <code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code>.</p></li>
-<li><p>Custom responses: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code>, <code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code>, <code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code> to customize <code class="docutils literal notranslate"><span class="pre">404</span></code>, <code class="docutils literal notranslate"><span class="pre">405</span></code>, automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>, and <code class="docutils literal notranslate"><span class="pre">406</span></code> handling.</p></li>
-<li><p>Failure behavior: Path matches with unsupported methods return <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> responses with an <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header derived from the matching path templates. Content negotiation failures return <code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code>.</p></li>
+<li><p>Custom responses: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code>, <code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code>, <code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code>, <code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code> to customize <code class="docutils literal notranslate"><span class="pre">400</span></code>, <code class="docutils literal notranslate"><span class="pre">404</span></code>, <code class="docutils literal notranslate"><span class="pre">405</span></code>, automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>, and <code class="docutils literal notranslate"><span class="pre">406</span></code> handling.</p></li>
+<li><p>Failure behavior: Dedicated parameter-validation exceptions return <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses. Path matches with unsupported methods return <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> responses with an <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header derived from the matching path templates. Content negotiation failures return <code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -905,8 +909,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="route-bad-request-response-3">
+<span id="http-router-0-route-bad-request-response-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code></a><a class="headerlink" href="#route-bad-request-response-3" title="Link to this heading"></a></h3>
+<p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses generated from dedicated parameter-validation exceptions raised by route handlers. When defined by the importing object, it is called with the routed request, the structured parameter error list, and must return the response to send.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response(Request,Errors,Response)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response(+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="route-method-not-allowed-response-3">
-<span id="http-router-0-route-method-not-allowed-response-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a><a class="headerlink" href="#route-method-not-allowed-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-method-not-allowed-response-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a><a class="headerlink" href="#route-method-not-allowed-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> responses. When defined by the importing object, it is called with the request, the effective allowed methods list as lowercase atoms, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -927,7 +952,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-automatic-options-response-3">
-<span id="http-router-0-route-automatic-options-response-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a><a class="headerlink" href="#route-automatic-options-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-automatic-options-response-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a><a class="headerlink" href="#route-automatic-options-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses when no explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> route matches. When defined by the importing object, it is called with the annotated synthetic request, the effective allowed methods list as lowercase atoms, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -948,7 +973,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-not-acceptable-response-3">
-<span id="http-router-0-route-not-acceptable-response-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a><a class="headerlink" href="#route-not-acceptable-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-not-acceptable-response-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a><a class="headerlink" href="#route-not-acceptable-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> responses. When defined by the importing object, it is called with the request, the normalized produced media types for the matched route, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -983,7 +1008,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_multipart_0.html" class="btn btn-neutral float-left" title="http_multipart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_router_parameters_0.html" class="btn btn-neutral float-left" title="http_router_parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="http_server_0.html" class="btn btn-neutral float-right" title="http_server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -197,10 +197,17 @@ annotations so only fresh negotiation results reach route handlers.
 
 Importing router objects can optionally customize error handling by defining:
 
+- `route_bad_request_response(Request, Errors, Response)`
 - `route_not_found_response(Request, Response)`
 - `route_method_not_allowed_response(Request, AllowedMethods, Response)`
 - `route_automatic_options_response(Request, EffectiveMethods, Response)`
 - `route_not_acceptable_response(Request, ProducedMediaTypes, Response)`
+
+Dedicated route-handler exceptions matching `error(http_parameter_validation(Errors), Context)`
+with a non-empty `Errors` list are translated into `400 Bad Request` responses
+before response middleware runs. The routed request annotations remain
+available to the optional `route_bad_request_response/3` hook and to any later
+response middleware.
 
 The `AllowedMethods` argument passed to the `405` hook is the effective method
 list as lowercase atoms and already includes implicit `head` support for `get`

@@ -123,6 +123,7 @@ directory in the ``NOTES.md`` file.
    http_directory_listing
    http_htmx
    http_multipart
+   http_parameters
    http_router
    http_server
    http_session

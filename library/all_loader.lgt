@@ -223,6 +223,7 @@
 		http_htmx(loader),
 		http_multipart(loader),
 		http_router(loader),
+		http_parameters(loader),
 		http_server(loader),
 		http_socket(loader),
 		http_websocket(loader),

@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="http_server" href="http_server.html" />
-    <link rel="prev" title="http_multipart" href="http_multipart.html" />
+    <link rel="prev" title="http_parameters" href="http_parameters.html" />
    
 </head>
 
@@ -165,6 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_htmx.html"><code class="docutils literal notranslate"><span class="pre">http_htmx</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
@@ -523,11 +524,18 @@ reach route handlers.</p>
 <p>Importing router objects can optionally customize error handling by
 defining:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">route_bad_request_response(Request,</span> <span class="pre">Errors,</span> <span class="pre">Response)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_not_found_response(Request,</span> <span class="pre">Response)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response(Request,</span> <span class="pre">AllowedMethods,</span> <span class="pre">Response)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response(Request,</span> <span class="pre">EffectiveMethods,</span> <span class="pre">Response)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response(Request,</span> <span class="pre">ProducedMediaTypes,</span> <span class="pre">Response)</span></code></p></li>
 </ul>
+<p>Dedicated route-handler exceptions matching
+<code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),</span> <span class="pre">Context)</span></code> with a non-empty
+<code class="docutils literal notranslate"><span class="pre">Errors</span></code> list are translated into <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses before
+response middleware runs. The routed request annotations remain
+available to the optional <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> hook and to
+any later response middleware.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">AllowedMethods</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook is the
 effective method list as lowercase atoms and already includes implicit
 <code class="docutils literal notranslate"><span class="pre">head</span></code> support for <code class="docutils literal notranslate"><span class="pre">get</span></code> routes and automatic <code class="docutils literal notranslate"><span class="pre">options</span></code> support.
@@ -568,7 +576,7 @@ stated directly instead of inferred.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_multipart.html" class="btn btn-neutral float-left" title="http_multipart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_parameters.html" class="btn btn-neutral float-left" title="http_parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="http_server.html" class="btn btn-neutral float-right" title="http_server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
