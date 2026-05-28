@@ -141,7 +141,11 @@
 	]).
 
 	:- uses(date, [
-		date_time_to_unix/2, name_of_month/3, unix_to_date_time/2, valid_date_time/1
+		date_time_to_unix/2, unix_to_date_time/2, valid_date_time/1
+	]).
+
+	:- uses(user, [
+		close/1 as close_stream/1, open/3 as open_file/3
 	]).
 
 	open(Jar) :-
@@ -188,17 +192,17 @@
 	save(Jar, File) :-
 		validate_cookie_file(File),
 		cookies(Jar, Cookies),
-		open(File, write, Stream),
+		open_file(File, write, Stream),
 		write_canonical(Stream, saved_http_cookie_jar(1, Cookies)),
 		write(Stream, '.\n'),
-		{close(Stream)}.
+		close_stream(Stream).
 
 	load(Jar, File) :-
 		validate_cookie_file(File),
-		open(File, read, Stream),
+		open_file(File, read, Stream),
 		read_term(Stream, SavedTerm, []),
 		read_term(Stream, EndTerm, []),
-		{close(Stream)},
+		close_stream(Stream),
 		persisted_cookies_term(SavedTerm, EndTerm, PersistedCookies),
 		current_unix_time(CurrentTime),
 		load_state(Jar, PersistedCookies, CurrentTime).
@@ -292,7 +296,10 @@
 		\+ member(session-_, Attributes),
 		valid_date_time(DateTime),
 		date_time_to_unix(DateTime, UnixTime),
-		normalize_cookie_expiry(expires(UnixTime), CurrentTime, Expiry).
+		(	UnixTime =< CurrentTime ->
+			Expiry = delete
+		;	Expiry = expires(UnixTime)
+		).
 	persisted_cookie_expiry(Attributes, _CurrentTime, session) :-
 		member(session-true, Attributes),
 		!,
@@ -416,26 +423,20 @@
 		default_cookie_path(RequestPath, DefaultPath),
 		normalize_cookie_path(Attributes, DefaultPath, Path),
 		cookie_flags(Attributes, Secure, HttpOnly),
-		cookie_expiry(Attributes, CurrentTime, Expiry0),
-		normalize_cookie_expiry(Expiry0, CurrentTime, Expiry).
-
-	normalize_cookie_expiry(expires(ExpiryTime), CurrentTime, delete) :-
-		ExpiryTime =< CurrentTime,
-		!.
-	normalize_cookie_expiry(Expiry, _CurrentTime, Expiry).
+		http_cookies(atom)::cookie_expiry(Attributes, CurrentTime, Expiry).
 
 	normalize_cookie_domain(RequestHost, Attributes, RequestHost, true) :-
-		\+ member(domain-_, Attributes),
+		\+ http_cookies(atom)::cookie_attribute_present(Attributes, domain),
 		!.
 	normalize_cookie_domain(RequestHost, Attributes, Domain, false) :-
-		memberchk(domain-DeclaredDomain, Attributes),
+		http_cookies(atom)::cookie_attribute_value(Attributes, domain, DeclaredDomain),
 		normalize_domain_atom(DeclaredDomain, Domain),
 		Domain \== '',
 		\+ atom_concat(_, '.', Domain),
 		domain_matches_host(RequestHost, Domain).
 
 	normalize_cookie_path(Attributes, DefaultPath, Path) :-
-		(	memberchk(path-DeclaredPath, Attributes),
+		(	http_cookies(atom)::cookie_attribute_value(Attributes, path, DefaultPath, DeclaredPath),
 			atom(DeclaredPath),
 			atom_codes(DeclaredPath, [0'/| _DeclaredPathCodes]) ->
 			Path = DeclaredPath
@@ -443,51 +444,8 @@
 		).
 
 	cookie_flags(Attributes, Secure, HttpOnly) :-
-		(	member(secure-true, Attributes) ->
-			Secure = true
-		;	Secure = false
-		),
-		(	member(http_only-true, Attributes) ->
-			HttpOnly = true
-		;	HttpOnly = false
-		).
-
-	cookie_expiry(Attributes, CurrentTime, Expiry) :-
-		(	member(max_age-MaxAge, Attributes) ->
-			max_age_expiry(MaxAge, CurrentTime, Expiry)
-		;	memberchk(expires-ExpiresText, Attributes),
-			parse_http_date(ExpiresText, DateTime),
-			date_time_to_unix(DateTime, UnixTime) ->
-			Expiry = expires(UnixTime)
-		;	Expiry = session
-		).
-
-	max_age_expiry(0, _CurrentTime, delete) :-
-		!.
-	max_age_expiry(MaxAge, CurrentTime, expires(UnixTime)) :-
-		integer(MaxAge),
-		MaxAge > 0,
-		UnixTime is CurrentTime + MaxAge.
-
-	parse_http_date(Text, date_time(Year, Month, Day, Hours, Minutes, Seconds)) :-
-		atom_codes(Text, [
-			_Day1, _Day2, _Day3, 0',, 0' ,
-			DayTens, DayUnits, 0' ,
-			Month1, Month2, Month3, 0' ,
-			Year1, Year2, Year3, Year4, 0' ,
-			Hour1, Hour2, 0':,
-			Minute1, Minute2, 0':,
-			Second1, Second2, 0' ,
-			0'G, 0'M, 0'T
-		]),
-		number_codes(Day, [DayTens, DayUnits]),
-		atom_codes(MonthShort, [Month1, Month2, Month3]),
-		name_of_month(Month, _MonthName, MonthShort),
-		number_codes(Year, [Year1, Year2, Year3, Year4]),
-		number_codes(Hours, [Hour1, Hour2]),
-		number_codes(Minutes, [Minute1, Minute2]),
-		number_codes(Seconds, [Second1, Second2]),
-		valid_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds)).
+		http_cookies(atom)::cookie_attribute_value(Attributes, secure, false, Secure),
+		http_cookies(atom)::cookie_attribute_value(Attributes, http_only, false, HttpOnly).
 
 	delete_cookie(JarId, Name, Domain, Path) :-
 		retractall(jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, _Expiry, _CreationIndex)).

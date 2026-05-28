@@ -54,27 +54,51 @@
 	test(parse_set_cookie_2_01, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [path-("/"), secure-true, http_only-true]))) :-
 		http_cookies::parse_set_cookie("SID=31d4d96e407aad42; Path=/; Secure; HttpOnly", Name, Value, Attributes).
 
-	test(parse_set_cookie_2_02, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [expires-"Wed, 09 Jun 2021 10:18:14 GMT", max_age-3600, domain-"example.com", path-"/docs", secure-true, http_only-true, extension-"Priority=High"]))) :-
+	test(parse_set_cookie_2_02, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [expires-date_time(2021, 6, 9, 10, 18, 14), max_age-3600, domain-"example.com", path-"/docs", secure-true, http_only-true, priority-high]))) :-
 		http_cookies::parse_set_cookie("SID=31d4d96e407aad42; Expires=Wed, 09 Jun 2021 10:18:14 GMT; Max-Age=3600; Domain=example.com; Path=/docs; Secure; HttpOnly; Priority=High", Name, Value, Attributes).
 
 	test(parse_set_cookie_2_03, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [secure-true, http_only-true, path-("/")]))) :-
 		http_cookies::parse_set_cookie("SID=31d4d96e407aad42; secure; httponly; path=/", Name, Value, Attributes).
+
+	test(parse_set_cookie_2_04, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [same_site-none, partitioned-true, path-("/docs"), secure-true]))) :-
+		http_cookies::parse_set_cookie("SID=31d4d96e407aad42; SameSite=None; Partitioned; Path=/docs; Secure", Name, Value, Attributes).
 
 	test(generate_set_cookie_2_01, deterministic(SetCookie == "SID=31d4d96e407aad42; Expires=Wed, 09 Jun 2021 10:18:14 GMT; Max-Age=3600; Domain=example.com; Path=/docs; Secure; HttpOnly; Priority=High")) :-
 		http_cookies::generate_set_cookie(
 			"SID",
 			"31d4d96e407aad42",
 			[
-				expires-"Wed, 09 Jun 2021 10:18:14 GMT",
+				expires-date_time(2021, 6, 9, 10, 18, 14),
 				max_age-3600,
 				domain-"example.com",
 				path-"/docs",
 				secure-true,
 				http_only-true,
-				extension-"Priority=High"
+				priority-high
 			],
 			SetCookie
 		).
 
 	test(generate_set_cookie_2_02, deterministic(SetCookie == "flag=; Path=/")) :-
 		http_cookies::generate_set_cookie("flag", "", [path-("/")], SetCookie).
+
+	test(normalize_cookie_attributes_2_01, deterministic(NormalizedAttributes == [expires-date_time(2021, 6, 9, 10, 18, 14), secure-true, priority-high])) :-
+		http_cookies::normalize_cookie_attributes([expires-"Wed, 09 Jun 2021 10:18:14 GMT", secure-true, priority-high], NormalizedAttributes).
+
+	test(cookie_attribute_present_2_01, true) :-
+		http_cookies::cookie_attribute_present([path-("/"), secure-true, http_only-true], secure).
+
+	test(cookie_attribute_value_3_01, deterministic(DateTime == date_time(2021, 6, 9, 10, 18, 14))) :-
+		http_cookies::cookie_attribute_value([expires-"Wed, 09 Jun 2021 10:18:14 GMT", secure-true], expires, DateTime).
+
+	test(cookie_attribute_value_4_01, deterministic(Value == false)) :-
+		http_cookies::cookie_attribute_value([path-("/")], secure, false, Value).
+
+	test(cookie_expiry_2_01, deterministic(Expiry == max_age(3600))) :-
+		http_cookies::cookie_expiry([expires-date_time(2021, 6, 9, 10, 18, 14), max_age-3600], Expiry).
+
+	test(cookie_expiry_3_01, deterministic(Expiry == expires(160))) :-
+		http_cookies::cookie_expiry([max_age-60], 100, Expiry).
+
+	test(cookie_deletion_3_01, deterministic(SetCookie == set_cookie("SID", "", [domain-"example.com", path-"/docs", secure-true, http_only-true, same_site-none, partitioned-true, expires-date_time(1970, 1, 1, 0, 0, 0), max_age-0]))) :-
+		http_cookies::cookie_deletion("SID", [domain-"example.com", path-"/docs", secure-true, http_only-true, same_site-none, partitioned-true, priority-high], SetCookie).

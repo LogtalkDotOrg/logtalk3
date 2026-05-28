@@ -22,6 +22,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
+	logtalk_load(dates(loader)),
 	logtalk_load(http_cookies, [debug(on), source_data(on)]),
 	logtalk_load([tests_atom, tests_chars, tests_codes], [hook(lgtunit)]),
 	lgtunit::run_test_sets([

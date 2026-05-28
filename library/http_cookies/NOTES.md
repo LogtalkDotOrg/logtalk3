@@ -41,16 +41,31 @@ and a list of attributes.
 
 where `Attributes` use `Key-Value` notation and can contain:
 
-- `expires-Date`
+- `expires-date_time(Year, Month, Day, Hours, Minutes, Seconds)`
 - `max_age-Seconds`
 - `domain-Domain`
 - `path-Path`
 - `secure-true`
 - `http_only-true`
+- `same_site-lax|strict|none`
+- `partitioned-true`
+- `priority-low|medium|high`
 - `extension-Attribute`
 
 Unknown Set-Cookie attributes are preserved as `extension-Attribute` pairs so
 long as they do not reuse one of the reserved RFC 6265 attribute names.
+
+The `Expires` attribute is normalized to a `date_time/6` term when parsing and
+generated back using the canonical HTTP-date syntax.
+
+The library also provides pure helpers for working with canonical attribute
+lists:
+
+- `normalize_cookie_attributes/2`
+- `cookie_attribute_present/2`
+- `cookie_attribute_value/3-4`
+- `cookie_expiry/2-3`
+- `cookie_deletion/3`
 
 
 API documentation

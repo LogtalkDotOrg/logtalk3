@@ -32,8 +32,8 @@
 
 	:- initialization((
 		logtalk_load(dates(loader)),
-		logtalk_load(http_client(loader)),
-		logtalk_load(http_cookies(loader)),
+		logtalk_load('../http_client/loader.lgt'),
+		logtalk_load('../http_cookies/loader.lgt'),
 		logtalk_load(options(loader)),
 		logtalk_load([http_cookie_jar, http_session], [optimize(on)])
 	)).

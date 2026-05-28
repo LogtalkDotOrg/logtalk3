@@ -367,17 +367,31 @@ pairs.</p>
 value, and a list of attributes.</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> use <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code> notation and can contain:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">expires-Date</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires-date_time(Year,</span> <span class="pre">Month,</span> <span class="pre">Day,</span> <span class="pre">Hours,</span> <span class="pre">Minutes,</span> <span class="pre">Seconds)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_age-Seconds</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">domain-Domain</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">path-Path</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">secure-true</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_only-true</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">same_site-lax|strict|none</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">partitioned-true</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">priority-low|medium|high</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">extension-Attribute</span></code></p></li>
 </ul>
 <p>Unknown Set-Cookie attributes are preserved as <code class="docutils literal notranslate"><span class="pre">extension-Attribute</span></code>
 pairs so long as they do not reuse one of the reserved RFC 6265
 attribute names.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Expires</span></code> attribute is normalized to a <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term when
+parsing and generated back using the canonical HTTP-date syntax.</p>
+<p>The library also provides pure helpers for working with canonical
+attribute lists:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">normalize_cookie_attributes/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cookie_attribute_present/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value/3-4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cookie_expiry/2-3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cookie_deletion/3</span></code></p></li>
+</ul>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
