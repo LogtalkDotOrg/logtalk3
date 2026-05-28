@@ -105,3 +105,66 @@
 		http::response(Version, status(200, 'OK'), [], ResponseBody, [], Response).
 
 :- end_object.
+
+
+	:- object(http_server_session_counter_handler,
+		implements(http_handler_protocol)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-05-28,
+			comment is 'Local HTTP handler used by the http_session library tests to exercise the plain server-session handler wrapper.'
+		]).
+
+		handle(Request, Response) :-
+			http_server_session::current(Request, Session),
+			( http_server_session::get(Session, visits, CurrentCount) ->
+				VisitCount is CurrentCount + 1
+			; VisitCount = 1
+			),
+			http_server_session::set(Session, visits, VisitCount),
+			http::version(Request, Version),
+			number_codes(VisitCount, VisitCountCodes),
+			atom_codes(VisitCountText, VisitCountCodes),
+			http::response(Version, status(200, 'OK'), [], content('text/plain', text(VisitCountText)), [], Response).
+
+	:- end_object.
+
+
+	:- object(http_server_session_router(_Manager_),
+		implements(http_handler_protocol),
+		imports([http_router, http_router_server_session(_Manager_)])).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-05-28,
+			comment is 'Local router object used by the http_session library tests to exercise the router-side server-session middleware helpers.'
+		]).
+
+		:- protected(visits/2).
+		:- info(visits/2, [
+			comment is 'Route handler used by the server-session router test object for the ``/visits`` path.',
+			argnames is ['Request', 'Response']
+		]).
+
+		middleware(server_session, annotate_server_session_request).
+		response_middleware(server_session, add_server_session_response).
+
+		route(visits, get, '/visits', visits).
+
+		visits(Request, Response) :-
+			http::property(Request, route(visits)),
+			http_server_session::current(Request, Session),
+			( http_server_session::get(Session, visits, CurrentCount) ->
+				VisitCount is CurrentCount + 1
+			; VisitCount = 1
+			),
+			http_server_session::set(Session, visits, VisitCount),
+			http::version(Request, Version),
+			number_codes(VisitCount, VisitCountCodes),
+			atom_codes(VisitCountText, VisitCountCodes),
+			http::response(Version, status(200, 'OK'), [], content('text/plain', text(VisitCountText)), [], Response).
+
+	:- end_object.

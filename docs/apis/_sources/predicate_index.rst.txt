@@ -1432,6 +1432,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datalog_protocol <datalog_protocol/0::begin/0>`
 
+``begin/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::begin/3>`
+
 ``begin_transaction/3``
 -----------------------
 
@@ -2696,8 +2706,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::close/1>`
+* :ref:`http_client_session <http_client_session/0::close/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::close/1>`
-* :ref:`http_session <http_session/0::close/1>`
+* :ref:`http_server_session <http_server_session/0::close/1>`
 * :ref:`http_websocket_session_registry <http_websocket_session_registry/0::close/1>`
 
 ``close/2``
@@ -3367,6 +3378,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dates_tz_protocol <dates_tz_protocol/0::convert_zones_with_resolution/5>`
 
+``cookie_attribute_present/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::cookie_attribute_present/2>`
+
+``cookie_attribute_value/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::cookie_attribute_value/3>`
+
+``cookie_attribute_value/4``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::cookie_attribute_value/4>`
+
 ``cookie_count/2``
 ------------------
 
@@ -3377,6 +3418,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_cookie_jar <http_cookie_jar/0::cookie_count/2>`
 
+``cookie_deletion/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::cookie_deletion/3>`
+
+``cookie_expiry/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::cookie_expiry/2>`
+
+``cookie_expiry/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::cookie_expiry/3>`
+
 ``cookie_jar/2``
 ----------------
 
@@ -3385,7 +3456,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_session <http_session/0::cookie_jar/2>`
+* :ref:`http_client_session <http_client_session/0::cookie_jar/2>`
 
 ``cookies/2``
 -------------
@@ -3446,6 +3517,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`string_distance(Representation) <string_distance/1::cosine_similarity/3>`
+
+``count/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::count/2>`
 
 ``count_arrangements/3``
 ------------------------
@@ -3859,6 +3940,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server_session <http_server_session/0::current/2>`
 * :ref:`zipperp <zipperp/0::current/2>`
 
 ``current_host/1``
@@ -3950,6 +4032,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server_session <http_server_session/0::data/2>`
 * :ref:`nmea_protocol <nmea_protocol/0::data/2>`
 * :ref:`ports_profiler <ports_profiler/0::data/2>`
 
@@ -4535,7 +4618,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::delete/4>`
 * :ref:`heap_protocol <heap_protocol/0::delete/4>`
 * :ref:`http_client <http_client/0::delete/4>`
-* :ref:`http_session <http_session/0::delete/4>`
+* :ref:`http_client_session <http_client_session/0::delete/4>`
 
 ``delete_all_after/2``
 ----------------------
@@ -4960,6 +5043,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp_pool <amqp_pool/0::destroy/0>`
+
+``destroy/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::destroy/1>`
 
 ``determinant/2``
 -----------------
@@ -6385,6 +6478,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mime_types <mime_types/0::encoding_suffix/2>`
 
+``ensure/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::ensure/2>`
+
 ``ensure_directory/1``
 ----------------------
 
@@ -7674,6 +7777,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc/3::fine/2>`
 
+``finish/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::finish/3>`
+
 ``finished_by/2``
 -----------------
 
@@ -8475,6 +8588,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`memcached <memcached/0::gats/5>`
 
+``gc/2``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::gc/2>`
+
 ``generate/1``
 --------------
 
@@ -8783,6 +8906,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::get/3>`
+* :ref:`http_server_session <http_server_session/0::get/3>`
 * :ref:`memcached <memcached/0::get/3>`
 * :ref:`redis <redis/0::get/3>`
 
@@ -8795,7 +8919,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::get/4>`
-* :ref:`http_session <http_session/0::get/4>`
+* :ref:`http_client_session <http_client_session/0::get/4>`
 * :ref:`memcached <memcached/0::get/4>`
 
 ``get_field/2``
@@ -9321,7 +9445,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::head/4>`
-* :ref:`http_session <http_session/0::head/4>`
+* :ref:`http_client_session <http_client_session/0::head/4>`
 
 ``head_pred/1``
 ---------------
@@ -14810,6 +14934,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::normalize/2>`
 * :ref:`url(Representation) <url/1::normalize/2>`
 
+``normalize_cookie_attributes/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_cookies(Representation) <http_cookies/1::normalize_cookie_attributes/2>`
+
 ``normalize_coordinate/2``
 --------------------------
 
@@ -15594,8 +15728,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_client_session <http_client_session/0::open/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/1>`
-* :ref:`http_session <http_session/0::open/1>`
+* :ref:`http_server_session <http_server_session/0::open/1>`
 * :ref:`http_websocket_session_registry <http_websocket_session_registry/0::open/1>`
 
 ``open/2``
@@ -15606,8 +15741,9 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_client_session <http_client_session/0::open/2>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/2>`
-* :ref:`http_session <http_session/0::open/2>`
+* :ref:`http_server_session <http_server_session/0::open/2>`
 
 ``open/4``
 ----------
@@ -16820,7 +16956,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::patch/5>`
-* :ref:`http_session <http_session/0::patch/5>`
+* :ref:`http_client_session <http_client_session/0::patch/5>`
 
 ``path/3``
 ----------
@@ -17317,7 +17453,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::post/5>`
-* :ref:`http_session <http_session/0::post/5>`
+* :ref:`http_client_session <http_client_session/0::post/5>`
 
 ``postorder/2``
 ---------------
@@ -18296,7 +18432,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::put/5>`
-* :ref:`http_session <http_session/0::put/5>`
+* :ref:`http_client_session <http_client_session/0::put/5>`
 
 ``qr_decomposition/3``
 ----------------------
@@ -19701,6 +19837,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranking_dataset_protocol <ranking_dataset_protocol/0::relevance/3>`
 
+``remove/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::remove/3>`
+
 ``removeDependent/1``
 ---------------------
 
@@ -19751,6 +19897,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::rename_file/2>`
+
+``renew/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server_session <http_server_session/0::renew/2>`
 
 ``replace/3``
 -------------
@@ -19942,7 +20098,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client <http_client/0::request/5>`
-* :ref:`http_session <http_session/0::request/5>`
+* :ref:`http_client_session <http_client_session/0::request/5>`
 
 ``request/7``
 -------------
@@ -21581,6 +21737,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server_session <http_server_session/0::set/3>`
 * :ref:`memcached <memcached/0::set/3>`
 
 ``set/4``

@@ -1,0 +1,95 @@
+.. index:: single: http_router_server_session(Manager)
+.. _http_router_server_session/1:
+
+.. rst-class:: right
+
+**category**
+
+``http_router_server_session(Manager)``
+=======================================
+
+* ``Manager`` - Server-session manager handle used for request begin and response finish processing.
+
+
+Optional server-session middleware helpers for router objects importing the ``http_router`` category.
+
+| **Availability:** 
+|    ``logtalk_load(http_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-28
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`http_server_session <http_server_session/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: annotate_server_session_request/2
+.. _http_router_server_session/1::annotate_server_session_request/2:
+
+``annotate_server_session_request/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Router middleware helper that annotates a normalized request with a server-session handle and state before route dispatch.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``annotate_server_session_request(Request,Action)``
+| **Mode and number of proofs:**
+|    ``annotate_server_session_request(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: add_server_session_response/3
+.. _http_router_server_session/1::add_server_session_response/3:
+
+``add_server_session_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Router response-middleware helper that finalizes server-session cookie lifecycle changes after route dispatch.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_server_session_response(Request,Response0,Response)``
+| **Mode and number of proofs:**
+|    ``add_server_session_response(+compound,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

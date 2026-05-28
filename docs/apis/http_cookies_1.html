@@ -399,6 +399,7 @@
 <div class="line-block">
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="date_0.html#date-0"><span class="std std-ref">date</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 </div>
 </div>
@@ -408,9 +409,9 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Cookie header pairs: Cookie header values are represented as <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs.</p></li>
-<li><p>Set-Cookie components: Set-Cookie header values are represented by a cookie name, a cookie value, and an attribute list where attributes use <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code> notation such as <code class="docutils literal notranslate"><span class="pre">expires-Date</span></code>, <code class="docutils literal notranslate"><span class="pre">max_age-Seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">domain-Domain</span></code>, <code class="docutils literal notranslate"><span class="pre">path-Path</span></code>, <code class="docutils literal notranslate"><span class="pre">secure-true</span></code>, <code class="docutils literal notranslate"><span class="pre">http_only-true</span></code>, and <code class="docutils literal notranslate"><span class="pre">extension-Attribute</span></code>.</p></li>
+<li><p>Set-Cookie components: Set-Cookie header values are represented by a cookie name, a cookie value, and an attribute list where attributes use <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code> notation such as <code class="docutils literal notranslate"><span class="pre">expires-date_time(Year,</span> <span class="pre">Month,</span> <span class="pre">Day,</span> <span class="pre">Hours,</span> <span class="pre">Minutes,</span> <span class="pre">Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">max_age-Seconds</span></code>, <code class="docutils literal notranslate"><span class="pre">domain-Domain</span></code>, <code class="docutils literal notranslate"><span class="pre">path-Path</span></code>, <code class="docutils literal notranslate"><span class="pre">secure-true</span></code>, <code class="docutils literal notranslate"><span class="pre">http_only-true</span></code>, <code class="docutils literal notranslate"><span class="pre">same_site-lax</span></code>, <code class="docutils literal notranslate"><span class="pre">partitioned-true</span></code>, <code class="docutils literal notranslate"><span class="pre">priority-high</span></code>, and <code class="docutils literal notranslate"><span class="pre">extension-Attribute</span></code>.</p></li>
 <li><p>Extension attributes: Unknown Set-Cookie attributes are preserved verbatim as <code class="docutils literal notranslate"><span class="pre">extension-Attribute</span></code> pairs as long as they do not use a reserved RFC 6265 attribute name.</p></li>
-<li><p>Expires attribute: The <code class="docutils literal notranslate"><span class="pre">Expires</span></code> attribute value is preserved as text. The library validates the RFC 6265 character constraints but does not normalize dates.</p></li>
+<li><p>Expires attribute: The <code class="docutils literal notranslate"><span class="pre">Expires</span></code> attribute value is normalized to a <code class="docutils literal notranslate"><span class="pre">date_time(Year,</span> <span class="pre">Month,</span> <span class="pre">Day,</span> <span class="pre">Hours,</span> <span class="pre">Minutes,</span> <span class="pre">Seconds)</span></code> term and generated back using the canonical HTTP-date representation.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -429,11 +430,18 @@
 <li><p><a class="reference internal" href="#valid-set-cookie-1" id="id5"><code class="docutils literal notranslate"><span class="pre">valid_set_cookie/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#parse-set-cookie-4" id="id6"><code class="docutils literal notranslate"><span class="pre">parse_set_cookie/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#generate-set-cookie-4" id="id7"><code class="docutils literal notranslate"><span class="pre">generate_set_cookie/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#normalize-cookie-attributes-2" id="id8"><code class="docutils literal notranslate"><span class="pre">normalize_cookie_attributes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cookie-attribute-present-2" id="id9"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_present/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cookie-attribute-value-3" id="id10"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cookie-attribute-value-4" id="id11"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cookie-expiry-2" id="id12"><code class="docutils literal notranslate"><span class="pre">cookie_expiry/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cookie-expiry-3" id="id13"><code class="docutils literal notranslate"><span class="pre">cookie_expiry/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cookie-deletion-3" id="id14"><code class="docutils literal notranslate"><span class="pre">cookie_deletion/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id15">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id16">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -560,6 +568,153 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_set_cookie(++text,++text,++list(compound),-text)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="normalize-cookie-attributes-2">
+<span id="http-cookies-1-normalize-cookie-attributes-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normalize_cookie_attributes/2</span></code></a><a class="headerlink" href="#normalize-cookie-attributes-2" title="Link to this heading"></a></h3>
+<p>Normalizes and validates a Set-Cookie attribute list using the canonical attribute term representation.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_cookie_attributes(Attributes,NormalizedAttributes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">normalize_cookie_attributes(++list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cookie-attribute-present-2">
+<span id="http-cookies-1-cookie-attribute-present-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_present/2</span></code></a><a class="headerlink" href="#cookie-attribute-present-2" title="Link to this heading"></a></h3>
+<p>True iff a normalized Set-Cookie attribute list contains an attribute with the given name.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_present(Attributes,Name)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_present(++list(compound),++atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cookie-attribute-value-3">
+<span id="http-cookies-1-cookie-attribute-value-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value/3</span></code></a><a class="headerlink" href="#cookie-attribute-value-3" title="Link to this heading"></a></h3>
+<p>Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value(Attributes,Name,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value(++list(compound),++atom,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cookie-attribute-value-4">
+<span id="http-cookies-1-cookie-attribute-value-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value/4</span></code></a><a class="headerlink" href="#cookie-attribute-value-4" title="Link to this heading"></a></h3>
+<p>Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list or the given default value when absent.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value(Attributes,Name,Default,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_attribute_value(++list(compound),++atom,++term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cookie-expiry-2">
+<span id="http-cookies-1-cookie-expiry-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_expiry/2</span></code></a><a class="headerlink" href="#cookie-expiry-2" title="Link to this heading"></a></h3>
+<p>Returns the raw normalized expiry view for a Set-Cookie attribute list as <code class="docutils literal notranslate"><span class="pre">session</span></code>, <code class="docutils literal notranslate"><span class="pre">max_age(Seconds)</span></code>, or <code class="docutils literal notranslate"><span class="pre">expires(DateTime)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_expiry(Attributes,Expiry)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_expiry(++list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cookie-expiry-3">
+<span id="http-cookies-1-cookie-expiry-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_expiry/3</span></code></a><a class="headerlink" href="#cookie-expiry-3" title="Link to this heading"></a></h3>
+<p>Resolves the normalized expiry view for a Set-Cookie attribute list against the given current Unix time as <code class="docutils literal notranslate"><span class="pre">session</span></code>, <code class="docutils literal notranslate"><span class="pre">delete</span></code>, or <code class="docutils literal notranslate"><span class="pre">expires(UnixTime)</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_expiry(Attributes,CurrentUnixTime,Expiry)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_expiry(++list(compound),++integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="cookie-deletion-3">
+<span id="http-cookies-1-cookie-deletion-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_deletion/3</span></code></a><a class="headerlink" href="#cookie-deletion-3" title="Link to this heading"></a></h3>
+<p>Returns a canonical Set-Cookie term that deletes the named cookie while echoing the relevant scoping and policy attributes from a template attribute list.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_deletion(Name,Attributes,Deletion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_deletion(++text,++list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

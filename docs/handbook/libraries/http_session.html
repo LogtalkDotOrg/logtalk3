@@ -349,18 +349,25 @@
              
   <section id="http-session">
 <span id="library-http-session"></span><h1><code class="docutils literal notranslate"><span class="pre">http_session</span></code><a class="headerlink" href="#http-session" title="Link to this heading"></a></h1>
-<p>This library adds explicit reusable client state on top of the stateless
-<code class="docutils literal notranslate"><span class="pre">http_client</span></code> library.</p>
-<p>The initial implementation provides two public objects:</p>
+<p>This library provides explicit client-side and server-side HTTP session
+support on top of the normalized HTTP stack.</p>
+<p>The library provides these public entities:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">http_cookie_jar</span></code> explicit in-memory cookie storage and request
-matching</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">http_session</span></code> reusable HTTP sessions that automatically replay and
-store cookies</p></li>
+matching for client-side use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_client_session</span></code> reusable HTTP client sessions that
+automatically replay and store cookies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_server_session</span></code> server-side session manager over normalized
+request and response terms</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_server_session_handler(_,</span> <span class="pre">_)</span></code> portable handler wrapper that
+applies server-session begin and finish logic</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_router_server_session(_)</span></code> router middleware helpers for
+request annotation and response finalization</p></li>
 </ul>
 <p>The design keeps the current <code class="docutils literal notranslate"><span class="pre">http_client</span></code> API stateless. Automatic
-cookie persistence is scoped to explicit session handles instead of
-using hidden process-global state.</p>
+cookie persistence is scoped to explicit client-session handles, while
+server-side session state stays in an explicit in-memory manager keyed
+by opaque cookie identifiers.</p>
 <p>This library can be used with backend Prolog systems that supports the
 <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
 Trealla Prolog, and XVM.</p>
@@ -390,17 +397,30 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_client<span class="o">::</span>get(<span class="s">&#39;http://127.0.0.1:8080/resource&#39;</span>, <span class="nv">Response</span>, []).
 </pre></div>
 </div>
-<p>Use <code class="docutils literal notranslate"><span class="pre">http_session</span></code> when you need cookie persistence across requests:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Session</span>),
-     http_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">First</span>, []),
-     http_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">Second</span>, []),
-     http_session<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
+<p>Use <code class="docutils literal notranslate"><span class="pre">http_client_session</span></code> when you need cookie persistence across
+requests:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_client_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Session</span>),
+     http_client_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">First</span>, []),
+     http_client_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">Second</span>, []),
+     http_client_session<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
 </pre></div>
 </div>
 <p>Sessions can also reopen a saved cookie jar directly:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Session</span>, [cookies_file(<span class="s">&#39;cookies.state&#39;</span>)]),
-     http_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">Response</span>, []),
-     http_session<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_client_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Session</span>, [cookies_file(<span class="s">&#39;cookies.state&#39;</span>)]),
+     http_client_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">Response</span>, []),
+     http_client_session<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">http_server_session</span></code> when you need explicit server-side session
+state over normalized request and response terms:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_server_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Manager</span>),
+     http<span class="o">::</span>request(get, origin(<span class="s">&#39;/visits&#39;</span>), http(<span class="m">1</span>, <span class="m">1</span>), [], empty, [], <span class="nv">Request0</span>),
+     http_server_session<span class="o">::</span>begin(<span class="nv">Manager</span>, <span class="nv">Request0</span>, <span class="nv">Request</span>),
+     http_server_session<span class="o">::</span>current(<span class="nv">Request</span>, <span class="nv">Session</span>),
+     http_server_session<span class="o">::</span>set(<span class="nv">Session</span>, visits, <span class="m">1</span>),
+     http<span class="o">::</span>response(http(<span class="m">1</span>, <span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], empty, [], <span class="nv">Response0</span>),
+     http_server_session<span class="o">::</span>finish(<span class="nv">Request</span>, <span class="nv">Response0</span>, <span class="nv">Response</span>),
+     http_server_session<span class="o">::</span><span class="k">close</span>(<span class="nv">Manager</span>).
 </pre></div>
 </div>
 <p>You can also work directly with the cookie jar:</p>
@@ -423,7 +443,11 @@ fresh owned cookie jar from disk. It is mutually exclusive with the
 <p>Current scope:</p>
 <ul class="simple">
 <li><p>in-memory cookie storage with explicit save and load support</p></li>
-<li><p>automatic cookie replay for explicit session handles</p></li>
+<li><p>automatic cookie replay for explicit client-session handles</p></li>
+<li><p>in-memory server-side session storage keyed by opaque cookie
+identifiers</p></li>
+<li><p>direct server-session request begin/finish operations plus
+plain-handler and router adapters</p></li>
 <li><p>absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs via the existing <code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade</p></li>
 <li><p>core handling for host-only and domain cookies, default path
 computation, secure filtering, <code class="docutils literal notranslate"><span class="pre">Max-Age</span></code>, and normalized <code class="docutils literal notranslate"><span class="pre">Expires</span></code>
@@ -434,6 +458,7 @@ HTTP-date values</p></li>
 <li><p>HTTPS transport support in the client facade</p></li>
 <li><p>public suffix enforcement</p></li>
 <li><p>SameSite policies</p></li>
+<li><p>persistent or distributed server-session stores</p></li>
 <li><p>session-owned connection-pool management</p></li>
 </ul>
 </section>

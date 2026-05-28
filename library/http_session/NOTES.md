@@ -21,19 +21,26 @@ ________________________________________________________________________
 `http_session`
 ==============
 
-This library adds explicit reusable client state on top of the stateless
-`http_client` library.
+This library provides explicit client-side and server-side HTTP session
+support on top of the normalized HTTP stack.
 
-The initial implementation provides two public objects:
+The library provides these public entities:
 
 - `http_cookie_jar`
-  explicit in-memory cookie storage and request matching
-- `http_session`
-  reusable HTTP sessions that automatically replay and store cookies
+	explicit in-memory cookie storage and request matching for client-side use
+- `http_client_session`
+	reusable HTTP client sessions that automatically replay and store cookies
+- `http_server_session`
+	server-side session manager over normalized request and response terms
+- `http_server_session_handler(_, _)`
+	portable handler wrapper that applies server-session begin and finish logic
+- `http_router_server_session(_)`
+	router middleware helpers for request annotation and response finalization
 
 The design keeps the current `http_client` API stateless. Automatic cookie
-persistence is scoped to explicit session handles instead of using hidden
-process-global state.
+persistence is scoped to explicit client-session handles, while server-side
+session state stays in an explicit in-memory manager keyed by opaque cookie
+identifiers.
 
 This library can be used with backend Prolog systems that supports the
 `sockets` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
@@ -70,18 +77,30 @@ Use `http_client` for one-shot stateless calls:
 
 	| ?- http_client::get('http://127.0.0.1:8080/resource', Response, []).
 
-Use `http_session` when you need cookie persistence across requests:
+Use `http_client_session` when you need cookie persistence across requests:
 
-	| ?- http_session::open(Session),
-	     http_session::get(Session, 'http://127.0.0.1:8080/visits', First, []),
-	     http_session::get(Session, 'http://127.0.0.1:8080/visits', Second, []),
-	     http_session::close(Session).
+	| ?- http_client_session::open(Session),
+	     http_client_session::get(Session, 'http://127.0.0.1:8080/visits', First, []),
+	     http_client_session::get(Session, 'http://127.0.0.1:8080/visits', Second, []),
+	     http_client_session::close(Session).
 
 Sessions can also reopen a saved cookie jar directly:
 
-	| ?- http_session::open(Session, [cookies_file('cookies.state')]),
-	     http_session::get(Session, 'http://127.0.0.1:8080/visits', Response, []),
-	     http_session::close(Session).
+	| ?- http_client_session::open(Session, [cookies_file('cookies.state')]),
+	     http_client_session::get(Session, 'http://127.0.0.1:8080/visits', Response, []),
+	     http_client_session::close(Session).
+
+Use `http_server_session` when you need explicit server-side session state over
+normalized request and response terms:
+
+	| ?- http_server_session::open(Manager),
+	     http::request(get, origin('/visits'), http(1, 1), [], empty, [], Request0),
+	     http_server_session::begin(Manager, Request0, Request),
+	     http_server_session::current(Request, Session),
+	     http_server_session::set(Session, visits, 1),
+	     http::response(http(1, 1), status(200, 'OK'), [], empty, [], Response0),
+	     http_server_session::finish(Request, Response0, Response),
+	     http_server_session::close(Manager).
 
 You can also work directly with the cookie jar:
 
@@ -104,7 +123,9 @@ option.
 Current scope:
 
 - in-memory cookie storage with explicit save and load support
-- automatic cookie replay for explicit session handles
+- automatic cookie replay for explicit client-session handles
+- in-memory server-side session storage keyed by opaque cookie identifiers
+- direct server-session request begin/finish operations plus plain-handler and router adapters
 - absolute `http://` URLs via the existing `http_client` facade
 - core handling for host-only and domain cookies, default path computation,
   secure filtering, `Max-Age`, and normalized `Expires` HTTP-date values
@@ -114,4 +135,5 @@ Out of scope for this first slice:
 - HTTPS transport support in the client facade
 - public suffix enforcement
 - SameSite policies
+- persistent or distributed server-session stores
 - session-owned connection-pool management

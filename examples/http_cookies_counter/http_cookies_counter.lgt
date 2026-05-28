@@ -140,7 +140,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-23,
-		comment is 'HTTP client used by the cookie counter example, backed by an explicit http_session cookie jar.'
+		comment is 'HTTP client used by the cookie counter example, backed by an explicit http_client_session cookie jar.'
 	]).
 
 	:- public(visit/4).
@@ -159,19 +159,19 @@
 
 	visit(Port, Session, Response, StoredCookiePairs) :-
 		visits_url(Port, URL),
-		http_session::get(Session, URL, Response, []),
+		http_client_session::get(Session, URL, Response, []),
 		session_cookie_pairs(Session, URL, StoredCookiePairs).
 
 	run(Port, result(FirstResponse, StoredCookiePairs, SecondResponse)) :-
-		http_session::open(Session),
+		http_client_session::open(Session),
 		catch(
 			run_with_session(Port, Session, FirstResponse, StoredCookiePairs, SecondResponse),
 			Error,
-			( 	catch(http_session::close(Session), _, true),
+			( 	catch(http_client_session::close(Session), _, true),
 				throw(Error)
 			)
 		),
-		http_session::close(Session).
+		http_client_session::close(Session).
 
 	run_with_session(Port, Session, FirstResponse, StoredCookiePairs, SecondResponse) :-
 		visit(Port, Session, FirstResponse, StoredCookiePairs),
@@ -180,7 +180,7 @@
 	% The client can inspect the explicit session jar to show what cookie state
 	% is currently stored for the example endpoint after each response.
 	session_cookie_pairs(Session, URL, CookiePairs) :-
-		http_session::cookie_jar(Session, Jar),
+		http_client_session::cookie_jar(Session, Jar),
 		( 	Jar == none ->
 			CookiePairs = []
 		; 	http_cookie_jar::request_cookies(Jar, URL, CookiePairs)

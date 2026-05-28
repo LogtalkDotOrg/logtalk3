@@ -40,7 +40,7 @@ client by sending a `Set-Cookie` header and reading the corresponding
 `Cookie` header in a later request.
 
 The important point is that the server controls the cookie contents and their
-meaning. The client side in this example now uses the explicit `http_session`
+meaning. The client side in this example now uses the explicit `http_client_session`
 and `http_cookie_jar` library objects so the round-trip is realistic while the
 stored cookie state remains inspectable.
 
@@ -49,7 +49,7 @@ The example illustrates four basic steps:
 1. Read normalized cookie pairs from the incoming request.
 2. Compute the next visit count without keeping any mutable server state.
 3. Generate a `Set-Cookie` header value with `http_cookies(atom)::generate_set_cookie/4`.
-4. Replay the stored cookie automatically on the next request using one explicit `http_session` and inspect the current jar contents with `http_cookie_jar`.
+4. Replay the stored cookie automatically on the next request using one explicit `http_client_session` and inspect the current jar contents with `http_cookie_jar`.
 
 Load the example with:
 
@@ -83,10 +83,10 @@ cookie_counter_client::run(8080, Result).
 To inspect the cookie round-trip step by step instead of using `run/2`, call:
 
 ```logtalk
-http_session::open(Session),
+http_client_session::open(Session),
 cookie_counter_client::visit(8080, Session, FirstResponse, CookiePairs),
 cookie_counter_client::visit(8080, Session, SecondResponse, _),
-http_session::close(Session).
+http_client_session::close(Session).
 ```
 
 Study the [http_cookies_counter.lgt](http_cookies_counter.lgt) source file
@@ -94,4 +94,4 @@ together with these sample queries. The example is intentionally small so the
 cookie storage story stays visible: the server derives the next value from the
 cookie it previously asked the client to store instead of keeping the counter
 locally, while the client delegates persistence and replay to the dedicated
-session and cookie-jar library.
+client-session and cookie-jar library.

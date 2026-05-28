@@ -32,10 +32,11 @@
 
 	:- initialization((
 		logtalk_load(dates(loader)),
+		logtalk_load(ids(loader)),
 		logtalk_load('../http_client/loader.lgt'),
 		logtalk_load('../http_cookies/loader.lgt'),
 		logtalk_load(options(loader)),
-		logtalk_load([http_cookie_jar, http_session], [optimize(on)])
+		logtalk_load([http_cookie_jar, http_client_session, http_server_session, http_server_session_handler, http_router_server_session], [optimize(on)])
 	)).
 
 :- else.
