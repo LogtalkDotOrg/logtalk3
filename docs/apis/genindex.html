@@ -238,6 +238,8 @@
 </li>
       <li><a href="hash_common_64_0.html#index-3">add64/3</a>
 </li>
+      <li><a href="http_digest_0.html#index-14">add_authentication_info/4</a>
+</li>
       <li><a href="wrapper_0.html#index-25">add_directive_/2</a>
 </li>
       <li><a href="wrapper_0.html#index-26">add_directive_/3</a>
@@ -340,10 +342,10 @@
 </li>
       <li><a href="hierarchyp_0.html#index-2">ancestors/1</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="hash_common_64_0.html#index-8">and64/3</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="http_router_htmx_0.html#index-1">annotate_htmx_request/2</a>
 </li>
       <li><a href="http_router_server_session_1.html#index-1">annotate_server_session_request/2</a>
@@ -495,6 +497,12 @@
       <li><a href="anomaly_dataset_protocol_0.html#index-1">attribute_values/2</a>, <a href="clustering_dataset_protocol_0.html#index-1">[1]</a>, <a href="dataset_protocol_0.html#index-1">[2]</a>, <a href="dimension_reduction_dataset_protocol_0.html#index-1">[3]</a>, <a href="regression_dataset_protocol_0.html#index-1">[4]</a>
 </li>
       <li><a href="regressor_common_0.html#index-59">augment_rows/3</a>
+</li>
+      <li><a href="http_digest_0.html#index-3">authentication_info/2</a>
+</li>
+      <li><a href="http_digest_0.html#index-2">authorization/2</a>
+</li>
+      <li><a href="http_digest_0.html#index-10">authorize_request/6</a>
 </li>
       <li><a href="automation_report_0.html#index-0">automation_report</a>
 </li>
@@ -890,6 +898,8 @@
 </li>
       <li><a href="statistics_0.html#index-8">central_moment_sum/7</a>
 </li>
+      <li><a href="http_digest_0.html#index-1">challenge/2</a>
+</li>
       <li><a href="osp_0.html#index-15">change_directory/1</a>
 </li>
       <li><a href="subject_0.html#index-1">changed/0</a>
@@ -1166,7 +1176,7 @@
 </li>
       <li><a href="cloning_0.html#index-0">cloning</a>
 </li>
-      <li><a href="amqp_0.html#index-2">close/1</a>, <a href="http_client_session_0.html#index-3">[1]</a>, <a href="http_cookie_jar_0.html#index-3">[2]</a>, <a href="http_server_session_0.html#index-3">[3]</a>, <a href="http_websocket_session_registry_0.html#index-2">[4]</a>
+      <li><a href="amqp_0.html#index-2">close/1</a>, <a href="http_client_digest_session_0.html#index-3">[1]</a>, <a href="http_client_session_0.html#index-3">[2]</a>, <a href="http_cookie_jar_0.html#index-3">[3]</a>, <a href="http_server_session_0.html#index-3">[4]</a>, <a href="http_websocket_session_registry_0.html#index-2">[5]</a>
 </li>
       <li><a href="socket_0.html#index-9">close/2</a>
 </li>
@@ -1402,7 +1412,7 @@
 </li>
       <li><a href="http_cookies_1.html#index-12">cookie_expiry/3</a>
 </li>
-      <li><a href="http_client_session_0.html#index-4">cookie_jar/2</a>
+      <li><a href="http_client_digest_session_0.html#index-4">cookie_jar/2</a>, <a href="http_client_session_0.html#index-4">[1]</a>
 </li>
       <li><a href="http_cookie_jar_0.html#index-7">cookies/2</a>
 </li>
@@ -1804,7 +1814,7 @@
 </li>
       <li><a href="http_client_0.html#index-7">delete/3</a>, <a href="listp_0.html#index-3">[1]</a>, <a href="setp_0.html#index-3">[2]</a>, <a href="varlistp_0.html#index-2">[3]</a>
 </li>
-      <li><a href="dictionaryp_0.html#index-7">delete/4</a>, <a href="heap_protocol_0.html#index-3">[1]</a>, <a href="http_client_0.html#index-8">[2]</a>, <a href="http_client_session_0.html#index-8">[3]</a>
+      <li><a href="dictionaryp_0.html#index-7">delete/4</a>, <a href="heap_protocol_0.html#index-3">[1]</a>, <a href="http_client_0.html#index-8">[2]</a>, <a href="http_client_digest_session_0.html#index-8">[3]</a>, <a href="http_client_session_0.html#index-8">[4]</a>
 </li>
       <li><a href="zipperp_0.html#index-22">delete_all_after/2</a>
 </li>
@@ -2900,7 +2910,13 @@
 </li>
       <li><a href="yaml_protocol_0.html#index-4">generate_all/2</a>
 </li>
+      <li><a href="http_digest_0.html#index-9">generate_authentication_info/2</a>
+</li>
+      <li><a href="http_digest_0.html#index-7">generate_authorization/2</a>
+</li>
       <li><a href="http_0.html#index-17">generate_body/3</a>
+</li>
+      <li><a href="http_digest_0.html#index-5">generate_challenge/2</a>
 </li>
       <li><a href="http_cookies_1.html#index-3">generate_cookie/2</a>
 </li>
@@ -2970,16 +2986,16 @@
 </li>
       <li><a href="http_client_0.html#index-3">get/3</a>, <a href="http_server_session_0.html#index-9">[1]</a>, <a href="memcached_0.html#index-11">[2]</a>, <a href="redis_0.html#index-6">[3]</a>
 </li>
-      <li><a href="http_client_0.html#index-4">get/4</a>, <a href="http_client_session_0.html#index-6">[1]</a>, <a href="memcached_0.html#index-12">[2]</a>
+      <li><a href="http_client_0.html#index-4">get/4</a>, <a href="http_client_digest_session_0.html#index-6">[1]</a>, <a href="http_client_session_0.html#index-6">[2]</a>, <a href="memcached_0.html#index-12">[3]</a>
 </li>
       <li><a href="java_access_protocol_0.html#index-1">get_field/2</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="flags_0.html#index-1">get_flag_value/2</a>
 </li>
       <li><a href="arbitrary_0.html#index-7">get_seed/1</a>, <a href="pseudo_random_protocol_0.html#index-1">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="redis_0.html#index-9">getrange/5</a>
 </li>
       <li><a href="memcached_0.html#index-13">gets/4</a>
@@ -3090,6 +3106,8 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="http_digest_verifier_protocol_0.html#index-1">ha1/4</a>
+</li>
       <li><a href="halstead_metric_0.html#index-0">halstead_metric</a>
 </li>
       <li><a href="halstead_metric_1.html#index-0">halstead_metric(Stroud)</a>
@@ -3140,7 +3158,7 @@
 </li>
       <li><a href="http_client_0.html#index-5">head/3</a>
 </li>
-      <li><a href="http_client_0.html#index-6">head/4</a>, <a href="http_client_session_0.html#index-7">[1]</a>
+      <li><a href="http_client_0.html#index-6">head/4</a>, <a href="http_client_digest_session_0.html#index-7">[1]</a>, <a href="http_client_session_0.html#index-7">[2]</a>
 </li>
       <li><a href="head_arguments_mutation_5.html#index-0">head_arguments_mutation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation)</a>
 </li>
@@ -3200,12 +3218,12 @@
 </li>
       <li><a href="hmac_0.html#index-0">hmac</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="hmac_protocol_0.html#index-0">hmac_protocol</a>
 </li>
       <li><a href="hodge_rank_0.html#index-0">hodge_rank</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pack_protocol_0.html#index-4">home/1</a>, <a href="registry_protocol_0.html#index-3">[1]</a>
 </li>
       <li><a href="application_protocol_0.html#index-5">homepage/1</a>
@@ -3228,6 +3246,8 @@
 </li>
       <li><a href="http_client_core_0.html#index-0">http_client_core</a>
 </li>
+      <li><a href="http_client_digest_session_0.html#index-0">http_client_digest_session</a>
+</li>
       <li><a href="http_client_session_0.html#index-0">http_client_session</a>
 </li>
       <li><a href="http_cookie_jar_0.html#index-0">http_cookie_jar</a>
@@ -3235,6 +3255,10 @@
       <li><a href="http_cookies_1.html#index-0">http_cookies(Representation)</a>
 </li>
       <li><a href="http_cors_0.html#index-0">http_cors</a>
+</li>
+      <li><a href="http_digest_0.html#index-0">http_digest</a>
+</li>
+      <li><a href="http_digest_verifier_protocol_0.html#index-0">http_digest_verifier_protocol</a>
 </li>
       <li><a href="http_directory_listing_0.html#index-0">http_directory_listing</a>
 </li>
@@ -3271,6 +3295,8 @@
       <li><a href="http_router_server_session_1.html#index-0">http_router_server_session(Manager)</a>
 </li>
       <li><a href="http_server_0.html#index-0">http_server</a>
+</li>
+      <li><a href="http_server_digest_handler_4.html#index-0">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a>
 </li>
       <li><a href="http_server_session_0.html#index-0">http_server_session</a>
 </li>
@@ -5156,7 +5182,9 @@
 </li>
       <li><a href="http_client_session_0.html#index-2">open/2</a>, <a href="http_cookie_jar_0.html#index-2">[1]</a>, <a href="http_server_session_0.html#index-2">[2]</a>
 </li>
-      <li><a href="http_websocket_client_session_0.html#index-1">open/4</a>
+      <li><a href="http_client_digest_session_0.html#index-1">open/3</a>
+</li>
+      <li><a href="http_client_digest_session_0.html#index-2">open/4</a>, <a href="http_websocket_client_session_0.html#index-1">[1]</a>
 </li>
       <li><a href="http_websocket_client_session_0.html#index-2">open/5</a>
 </li>
@@ -5434,7 +5462,13 @@
 </li>
       <li><a href="yaml_protocol_0.html#index-2">parse_all/2</a>
 </li>
+      <li><a href="http_digest_0.html#index-8">parse_authentication_info/2</a>
+</li>
+      <li><a href="http_digest_0.html#index-6">parse_authorization/2</a>
+</li>
       <li><a href="http_0.html#index-16">parse_body/4</a>
+</li>
+      <li><a href="http_digest_0.html#index-4">parse_challenge/2</a>
 </li>
       <li><a href="http_cookies_1.html#index-2">parse_cookie/2</a>
 </li>
@@ -5520,7 +5554,7 @@
 </li>
       <li><a href="http_client_0.html#index-13">patch/4</a>
 </li>
-      <li><a href="http_client_0.html#index-14">patch/5</a>, <a href="http_client_session_0.html#index-11">[1]</a>
+      <li><a href="http_client_0.html#index-14">patch/5</a>, <a href="http_client_digest_session_0.html#index-11">[1]</a>, <a href="http_client_session_0.html#index-11">[2]</a>
 </li>
       <li><a href="graph_protocol_0.html#index-19">path/3</a>
 </li>
@@ -5529,6 +5563,8 @@
       <li><a href="interval_constraint_network_protocol_0.html#index-22">path_consistency/2</a>
 </li>
       <li><a href="rest_0.html#index-1">path_parameter/3</a>
+</li>
+      <li><a href="http_router_0.html#index-20">path_template_parameters/2</a>
 </li>
       <li><a href="http_docroot_paths_0.html#index-6">path_within_root/2</a>
 </li>
@@ -5630,12 +5666,12 @@
 </li>
       <li><a href="geohash_protocol_0.html#index-30">polyline_covering/4</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="geospatial_protocol_0.html#index-49">polyline_length/2</a>
 </li>
       <li><a href="geospatial_protocol_0.html#index-50">polyline_length/3</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="geospatial_protocol_0.html#index-53">polyline_resample/3</a>
 </li>
       <li><a href="geospatial_protocol_0.html#index-51">polyline_simplify/3</a>
@@ -5664,7 +5700,7 @@
 </li>
       <li><a href="http_client_0.html#index-9">post/4</a>
 </li>
-      <li><a href="http_client_0.html#index-10">post/5</a>, <a href="http_client_session_0.html#index-9">[1]</a>
+      <li><a href="http_client_0.html#index-10">post/5</a>, <a href="http_client_digest_session_0.html#index-9">[1]</a>, <a href="http_client_session_0.html#index-9">[2]</a>
 </li>
       <li><a href="bintree_0.html#index-3">postorder/2</a>
 </li>
@@ -5922,6 +5958,8 @@
 </li>
       <li><a href="http_0.html#index-27">property/2</a>, <a href="http_websocket_0.html#index-12">[1]</a>
 </li>
+      <li><a href="http_digest_0.html#index-11">protect_request/4</a>
+</li>
       <li><a href="proto_hierarchy_0.html#index-0">proto_hierarchy</a>
 </li>
       <li><a href="proto_hierarchyp_0.html#index-0">proto_hierarchyp</a>
@@ -5950,7 +5988,7 @@
 </li>
       <li><a href="http_client_0.html#index-11">put/4</a>
 </li>
-      <li><a href="http_client_0.html#index-12">put/5</a>, <a href="http_client_session_0.html#index-10">[1]</a>
+      <li><a href="http_client_0.html#index-12">put/5</a>, <a href="http_client_digest_session_0.html#index-10">[1]</a>, <a href="http_client_session_0.html#index-10">[2]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -6434,7 +6472,7 @@
 </li>
       <li><a href="http_client_0.html#index-1">request/4</a>, <a href="json_rpc_0.html#index-1">[1]</a>
 </li>
-      <li><a href="http_client_0.html#index-2">request/5</a>, <a href="http_client_session_0.html#index-5">[1]</a>
+      <li><a href="http_client_0.html#index-2">request/5</a>, <a href="http_client_digest_session_0.html#index-5">[1]</a>, <a href="http_client_session_0.html#index-5">[2]</a>
 </li>
       <li><a href="http_0.html#index-1">request/7</a>
 </li>
@@ -6572,9 +6610,9 @@
 </li>
       <li><a href="http_router_0.html#index-10">route/4</a>
 </li>
-      <li><a href="http_router_0.html#index-23">route_automatic_options_response/3</a>
+      <li><a href="http_router_0.html#index-24">route_automatic_options_response/3</a>
 </li>
-      <li><a href="http_router_0.html#index-21">route_bad_request_response/3</a>
+      <li><a href="http_router_0.html#index-22">route_bad_request_response/3</a>
 </li>
       <li><a href="geospatial_protocol_0.html#index-58">route_distance/2</a>
 </li>
@@ -6584,11 +6622,11 @@
 </li>
       <li><a href="http_router_0.html#index-11">route_metadata/2</a>
 </li>
-      <li><a href="http_router_0.html#index-22">route_method_not_allowed_response/3</a>
+      <li><a href="http_router_0.html#index-23">route_method_not_allowed_response/3</a>
 </li>
-      <li><a href="http_router_0.html#index-24">route_not_acceptable_response/3</a>
+      <li><a href="http_router_0.html#index-25">route_not_acceptable_response/3</a>
 </li>
-      <li><a href="http_router_0.html#index-20">route_not_found_response/2</a>
+      <li><a href="http_router_0.html#index-21">route_not_found_response/2</a>
 </li>
       <li><a href="http_router_0.html#index-12">route_open_api_request_body_example/2</a>
 </li>
@@ -6906,9 +6944,9 @@
 </li>
       <li><a href="http_websocket_session_registry_0.html#index-7">session_count/2</a>
 </li>
-      <li><a href="http_client_session_0.html#index-12">session_seed_/1</a>
+      <li><a href="http_client_digest_session_0.html#index-12">session_seed_/1</a>, <a href="http_client_session_0.html#index-12">[1]</a>
 </li>
-      <li><a href="http_client_session_0.html#index-13">session_state_/2</a>
+      <li><a href="http_client_digest_session_0.html#index-13">session_state_/2</a>, <a href="http_client_session_0.html#index-13">[1]</a>
 </li>
       <li><a href="http_websocket_session_registry_0.html#index-6">sessions/2</a>
 </li>
@@ -7828,6 +7866,10 @@
 </li>
       <li><a href="ulid_types_0.html#index-0">ulid_types</a>
 </li>
+      <li><a href="http_digest_0.html#index-12">unauthorized_response/3</a>
+</li>
+      <li><a href="http_digest_0.html#index-13">unauthorized_response/4</a>
+</li>
       <li><a href="mapped_single_byte_character_set_0.html#index-2">undefined/2</a>
 </li>
       <li><a href="undirected_graph_common_0.html#index-0">undirected_graph_common</a>
@@ -7906,10 +7948,10 @@
 </li>
       <li><a href="ccsds_aos_frames_4.html#index-4">update_fecf/2</a>, <a href="ccsds_frame_protocol_0.html#index-5">[1]</a>, <a href="ccsds_frames_0.html#index-9">[2]</a>, <a href="ccsds_tc_frames_3.html#index-5">[3]</a>, <a href="ccsds_tm_frames_3.html#index-10">[4]</a>
 </li>
-      <li><a href="two3tree_0.html#index-28">update_impl/3</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="two3tree_0.html#index-28">update_impl/3</a>
+</li>
       <li><a href="nested_dictionary_protocol_0.html#index-6">update_in/4</a>
 </li>
       <li><a href="nested_dictionary_protocol_0.html#index-7">update_in/5</a>

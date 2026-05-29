@@ -303,10 +303,12 @@ Objects
    http <http_0>
    http_client <http_client_0>
    http_client_core <http_client_core_0>
+   http_client_digest_session <http_client_digest_session_0>
    http_client_session <http_client_session_0>
    http_cookie_jar <http_cookie_jar_0>
    http_cookies(Representation) <http_cookies_1>
    http_cors <http_cors_0>
+   http_digest <http_digest_0>
    http_directory_listing <http_directory_listing_0>
    http_form_body_codec <http_form_body_codec_0>
    http_htmx <http_htmx_0>
@@ -315,6 +317,7 @@ Objects
    http_octet_stream_body_codec <http_octet_stream_body_codec_0>
    http_parameters <http_parameters_0>
    http_server <http_server_0>
+   http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_digest_handler_4>
    http_server_session <http_server_session_0>
    http_server_session_handler(Manager,Handler) <http_server_session_handler_2>
    http_socket <http_socket_0>
@@ -716,6 +719,7 @@ Protocols
    hierarchyp <hierarchyp_0>
    hmac_protocol <hmac_protocol_0>
    http_body_codec_protocol <http_body_codec_protocol_0>
+   http_digest_verifier_protocol <http_digest_verifier_protocol_0>
    http_handler_protocol <http_handler_protocol_0>
    http_request_protocol <http_request_protocol_0>
    http_response_protocol <http_response_protocol_0>

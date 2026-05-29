@@ -22,6 +22,13 @@
 :- object(http_websocket_session_read_options,
 	imports(options)).
 
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-23,
+		comment is 'Auxiliary object defining the supported read options and default values for HTTP WebSocket sessions.'
+	]).
+
 	:- public(merged_options/2).
 	:- mode(merged_options(+list(compound), -list(compound)), one).
 	:- info(merged_options/2, [
@@ -47,6 +54,13 @@
 
 :- object(http_websocket_session_loop_options,
 	imports(options)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-23,
+		comment is 'Auxiliary object defining the supported session-loop options and default values for HTTP WebSocket sessions.'
+	]).
 
 	:- public(merged_options/2).
 	:- mode(merged_options(+list(compound), -list(compound)), one).
@@ -83,6 +97,13 @@
 
 :- object(http_websocket_session_write_options,
 	imports(options)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-23,
+		comment is 'Auxiliary object defining the supported write options and default values for HTTP WebSocket sessions.'
+	]).
 
 	:- public(merged_options/2).
 	:- mode(merged_options(+list(compound), -list(compound)), one).

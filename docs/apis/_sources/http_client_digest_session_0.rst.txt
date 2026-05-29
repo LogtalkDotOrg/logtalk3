@@ -1,0 +1,313 @@
+.. index:: single: http_client_digest_session
+.. _http_client_digest_session/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_client_digest_session``
+==============================
+
+Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.
+
+| **Availability:** 
+|    ``logtalk_load(http_digest(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`http_cookie_jar <http_cookie_jar/0>`
+|    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`http_digest <http_digest/0>`
+|    :ref:`http_multipart <http_multipart/0>`
+|    :ref:`http_socket <http_socket/0>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`uuid(Representation) <uuid/1>`
+
+| **Remarks:**
+
+   - Option precedence: When the same session default, Digest default, or per-request option is given multiple times, the first occurrence is used.
+   - Reactive authentication: Requests are sent once without credentials and retried automatically only when the response carries a ``401`` Digest challenge accepted by the core ``http_digest`` object.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open/3
+.. _http_client_digest_session/0::open/3:
+
+``open/3``
+^^^^^^^^^^
+
+Opens a new Digest client session with the given username and password and a freshly created owned cookie jar.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Session,Username,Password)``
+| **Mode and number of proofs:**
+|    ``open(-compound,++text,++text)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open/4
+.. _http_client_digest_session/0::open/4:
+
+``open/4``
+^^^^^^^^^^
+
+Opens a new Digest client session using the given credentials plus cookie-jar, request-default, and default Digest authorization options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Session,Username,Password,Options)``
+| **Mode and number of proofs:**
+|    ``open(-compound,++text,++text,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: close/1
+.. _http_client_digest_session/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes a Digest client session and, when applicable, the owned cookie jar created for it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Session)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: cookie_jar/2
+.. _http_client_digest_session/0::cookie_jar/2:
+
+``cookie_jar/2``
+^^^^^^^^^^^^^^^^
+
+Returns the configured cookie jar handle or the atom ``none`` when the session does not persist cookies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_jar(Session,Jar)``
+| **Mode and number of proofs:**
+|    ``cookie_jar(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: request/5
+.. _http_client_digest_session/0::request/5:
+
+``request/5``
+^^^^^^^^^^^^^
+
+Performs one HTTP request using session defaults, cookie replay/storage, and automatic retry when the server replies with a Digest challenge.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(Session,Method,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``request(+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: get/4
+.. _http_client_digest_session/0::get/4:
+
+``get/4``
+^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``get`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Session,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: head/4
+.. _http_client_digest_session/0::head/4:
+
+``head/4``
+^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``head`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head(Session,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``head(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: delete/4
+.. _http_client_digest_session/0::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``delete`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(Session,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``delete(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: post/5
+.. _http_client_digest_session/0::post/5:
+
+``post/5``
+^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``post`` method and the given body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``post(Session,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``post(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: put/5
+.. _http_client_digest_session/0::put/5:
+
+``put/5``
+^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``put`` method and the given body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(Session,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``put(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: patch/5
+.. _http_client_digest_session/0::patch/5:
+
+``patch/5``
+^^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``patch`` method and the given body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``patch(Session,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``patch(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: session_seed_/1
+.. _http_client_digest_session/0::session_seed_/1:
+
+``session_seed_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Last allocated Digest client session identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``session_seed_(SessionId)``
+| **Mode and number of proofs:**
+|    ``session_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: session_state_/2
+.. _http_client_digest_session/0::session_state_/2:
+
+``session_state_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Per-session stored cookie jar ownership, credentials, default request state, and default Digest authorization options.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``session_state_(SessionId,State)``
+| **Mode and number of proofs:**
+|    ``session_state_(?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

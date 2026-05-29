@@ -4,7 +4,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-27,
-		comment is 'Extracted protocol entity'
+		comment is 'Sockets-backed HTTP transport predicates.'
 	]).
 
 	:- public(open_listener/4).

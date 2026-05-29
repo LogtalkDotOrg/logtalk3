@@ -428,6 +428,25 @@ Optional hook predicate that declares the response media types produced by a rou
 
 ------------
 
+.. index:: path_template_parameters/2
+.. _http_router/0::path_template_parameters/2:
+
+``path_template_parameters/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the normalized placeholder descriptors declared in a path template as ``parameter(Name, Type)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_template_parameters(PathTemplate,Parameters)``
+| **Mode and number of proofs:**
+|    ``path_template_parameters(+atom,-list(compound))`` - ``one_or_error``
+
+
+------------
+
 .. index:: route_not_found_response/2
 .. _http_router/0::route_not_found_response/2:
 

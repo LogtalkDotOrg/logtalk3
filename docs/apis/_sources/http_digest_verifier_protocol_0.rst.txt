@@ -1,0 +1,74 @@
+.. index:: single: http_digest_verifier_protocol
+.. _http_digest_verifier_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_digest_verifier_protocol``
+=================================
+
+Protocol for HTTP Digest authentication verifiers backed by stored HA1 values.
+
+| **Availability:** 
+|    ``logtalk_load(http_digest(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: ha1/4
+.. _http_digest_verifier_protocol/0::ha1/4:
+
+``ha1/4``
+^^^^^^^^^
+
+Returns the stored lowercase hexadecimal HA1 value for the given normalized digest algorithm family, realm, and username. Fails when the user is unknown for the realm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ha1(Algorithm,Realm,Username,HA1)``
+| **Mode and number of proofs:**
+|    ``ha1(+atom,++atom,++atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

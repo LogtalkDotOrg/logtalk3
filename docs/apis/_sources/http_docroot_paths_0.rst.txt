@@ -14,7 +14,7 @@ Shared helpers for validating requests and sandboxing document-root relative pat
 |    ``logtalk_load(http(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
+| **Version:** 1:0:0
 | **Date:** 2026-05-25
 
 | **Compilation flags:**
@@ -49,8 +49,15 @@ Protected predicates
 ``validate_relative_path/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Validates a document-root relative request path atom.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``validate_relative_path(Path)``
+| **Mode and number of proofs:**
+|    ``validate_relative_path(+atom)`` - ``one_or_error``
 
 
 ------------
@@ -61,8 +68,15 @@ Protected predicates
 ``validate_request/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Validates a normalized HTTP request term.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``validate_request(Request)``
+| **Mode and number of proofs:**
+|    ``validate_request(+compound)`` - ``one_or_error``
 
 
 ------------
@@ -73,8 +87,15 @@ Protected predicates
 ``validate_document_root/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Validates a document root path atom.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``validate_document_root(DocumentRoot)``
+| **Mode and number of proofs:**
+|    ``validate_document_root(+atom)`` - ``one_or_error``
 
 
 ------------
@@ -85,8 +106,15 @@ Protected predicates
 ``supported_method/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+True when the request method is supported for document-root serving, currently ``get`` or ``head``.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``supported_method(Request)``
+| **Mode and number of proofs:**
+|    ``supported_method(+compound)`` - ``zero_or_one``
 
 
 ------------
@@ -97,8 +125,15 @@ Protected predicates
 ``resolved_target_path/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Resolves a request path against a document root and succeeds only when the resulting path stays within that root.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``resolved_target_path(Path,Root,Candidate)``
+| **Mode and number of proofs:**
+|    ``resolved_target_path(+atom,+atom,-atom)`` - ``zero_or_one``
 
 
 ------------
@@ -109,8 +144,15 @@ Protected predicates
 ``path_within_root/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+True when the candidate path is the document root itself or a path nested under it.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``path_within_root(Root,Candidate)``
+| **Mode and number of proofs:**
+|    ``path_within_root(+atom,+atom)`` - ``zero_or_one``
 
 
 ------------

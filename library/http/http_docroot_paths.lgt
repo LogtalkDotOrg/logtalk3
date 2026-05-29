@@ -22,18 +22,53 @@
 :- category(http_docroot_paths).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-25,
 		comment is 'Shared helpers for validating requests and sandboxing document-root relative paths.'
 	]).
 
 	:- protected(validate_relative_path/1).
+	:- mode(validate_relative_path(+atom), one_or_error).
+	:- info(validate_relative_path/1, [
+		comment is 'Validates a document-root relative request path atom.',
+		argnames is ['Path']
+	]).
+
 	:- protected(validate_request/1).
+	:- mode(validate_request(+compound), one_or_error).
+	:- info(validate_request/1, [
+		comment is 'Validates a normalized HTTP request term.',
+		argnames is ['Request']
+	]).
+
 	:- protected(validate_document_root/1).
+	:- mode(validate_document_root(+atom), one_or_error).
+	:- info(validate_document_root/1, [
+		comment is 'Validates a document root path atom.',
+		argnames is ['DocumentRoot']
+	]).
+
 	:- protected(supported_method/1).
+	:- mode(supported_method(+compound), zero_or_one).
+	:- info(supported_method/1, [
+		comment is 'True when the request method is supported for document-root serving, currently ``get`` or ``head``.',
+		argnames is ['Request']
+	]).
+
 	:- protected(resolved_target_path/3).
+	:- mode(resolved_target_path(+atom, +atom, -atom), zero_or_one).
+	:- info(resolved_target_path/3, [
+		comment is 'Resolves a request path against a document root and succeeds only when the resulting path stays within that root.',
+		argnames is ['Path', 'Root', 'Candidate']
+	]).
+
 	:- protected(path_within_root/2).
+	:- mode(path_within_root(+atom, +atom), zero_or_one).
+	:- info(path_within_root/2, [
+		comment is 'True when the candidate path is the document root itself or a path nested under it.',
+		argnames is ['Root', 'Candidate']
+	]).
 
 	validate_relative_path(Path) :-
 		(	var(Path) ->

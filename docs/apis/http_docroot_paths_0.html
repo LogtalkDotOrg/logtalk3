@@ -181,6 +181,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-digest"><span class="xref std std-ref">http_digest</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-directory-listing"><span class="xref std std-ref">http_directory_listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-htmx"><span class="xref std std-ref">http_htmx</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
@@ -397,7 +398,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:1:0</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
 <div class="line"><strong>Date:</strong> 2026-05-25</div>
 </div>
 <div class="line-block">
@@ -450,60 +451,126 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="validate-relative-path-1">
 <span id="http-docroot-paths-0-validate-relative-path-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_relative_path/1</span></code></a><a class="headerlink" href="#validate-relative-path-1" title="Link to this heading"></a></h3>
+<p>Validates a document-root relative request path atom.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_relative_path(Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_relative_path(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="validate-request-1">
 <span id="http-docroot-paths-0-validate-request-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_request/1</span></code></a><a class="headerlink" href="#validate-request-1" title="Link to this heading"></a></h3>
+<p>Validates a normalized HTTP request term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_request(Request)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_request(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="validate-document-root-1">
 <span id="http-docroot-paths-0-validate-document-root-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_document_root/1</span></code></a><a class="headerlink" href="#validate-document-root-1" title="Link to this heading"></a></h3>
+<p>Validates a document root path atom.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_document_root(DocumentRoot)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_document_root(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="supported-method-1">
 <span id="http-docroot-paths-0-supported-method-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">supported_method/1</span></code></a><a class="headerlink" href="#supported-method-1" title="Link to this heading"></a></h3>
+<p>True when the request method is supported for document-root serving, currently <code class="docutils literal notranslate"><span class="pre">get</span></code> or <code class="docutils literal notranslate"><span class="pre">head</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">supported_method(Request)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">supported_method(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="resolved-target-path-3">
 <span id="http-docroot-paths-0-resolved-target-path-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resolved_target_path/3</span></code></a><a class="headerlink" href="#resolved-target-path-3" title="Link to this heading"></a></h3>
+<p>Resolves a request path against a document root and succeeds only when the resulting path stays within that root.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resolved_target_path(Path,Root,Candidate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resolved_target_path(+atom,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="path-within-root-2">
 <span id="http-docroot-paths-0-path-within-root-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">path_within_root/2</span></code></a><a class="headerlink" href="#path-within-root-2" title="Link to this heading"></a></h3>
+<p>True when the candidate path is the document root itself or a path nested under it.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_within_root(Root,Candidate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_within_root(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

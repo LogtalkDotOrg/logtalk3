@@ -8,8 +8,14 @@
 ``http_websocket_session_write_options``
 ========================================
 
+Auxiliary object defining the supported write options and default values for HTTP WebSocket sessions.
+
 | **Availability:** 
 |    ``logtalk_load(http_websocket_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
