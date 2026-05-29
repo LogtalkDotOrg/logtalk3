@@ -258,10 +258,7 @@
 		Request = request(get, origin('/bad-request/error'), http(1, 1), [], empty, []),
 		parameter_validation_http_router::handle(Request, _Response).
 
-	test(http_router_open_api_3_01, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::operation(open_api_http_router, show_item, Operation),
-		Operation = operation(
+	test(http_router_open_api_3_01, deterministic(Operation == operation(
 			show_item,
 			get,
 			'/open-api/items/{id}',
@@ -273,12 +270,12 @@
 				response(default, 'Error response', [media('application/json', schema_ref(api_error))])
 			],
 			[description('Returns an item by id.'), tags([items])]
-		).
+	))) :-
+		open_api::operation(open_api_http_router, show_item, Operation).
 
-	test(http_router_open_api_2_01, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::document(open_api_http_router, Document),
-		OpenAPI::validate_document(Document),
+	test(http_router_open_api_2_01, deterministic((
+		ground(Document),
+		open_api::validate_document(Document),
 		json_field(Document, info, Info),
 		json_field(Info, title, 'Router OpenAPI API'),
 		json_field(Document, servers, [Server]),
@@ -300,12 +297,11 @@
 		json_field(Document, components, Components),
 		json_field(Components, schemas, Schemas),
 		json_field(Schemas, item, _),
-		json_field(Schemas, document, _).
+		json_field(Schemas, document, _)
+	))) :-
+		open_api::document(open_api_http_router, Document).
 
-	test(http_router_open_api_inference_3_01, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::operation(inferred_open_api_http_router, show_message, Operation),
-		Operation = operation(
+	test(http_router_open_api_inference_3_01, deterministic(Operation == operation(
 			show_message,
 			get,
 			'/inferred/messages/{id}',
@@ -327,12 +323,10 @@
 				])
 			],
 			[tags([inferred])]
-		).
+	))) :-
+		open_api::operation(inferred_open_api_http_router, show_message, Operation).
 
-	test(http_router_open_api_inference_3_02, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::operation(inferred_open_api_http_router, create_message, Operation),
-		Operation = operation(
+	test(http_router_open_api_inference_3_02, deterministic(Operation == operation(
 			create_message,
 			post,
 			'/inferred/messages',
@@ -364,12 +358,12 @@
 				])
 			],
 			[tags([inferred])]
-		).
+	))) :-
+		open_api::operation(inferred_open_api_http_router, create_message, Operation).
 
-	test(http_router_open_api_inference_2_01, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::document(inferred_open_api_http_router, Document),
-		OpenAPI::validate_document(Document),
+	test(http_router_open_api_inference_2_01, deterministic((
+		ground(Document),
+		open_api::validate_document(Document),
 		json_field(Document, paths, Paths),
 		json_field(Paths, '/inferred/messages/{id}', ItemPath),
 		json_field(ItemPath, get, ShowMessageOperation),
@@ -384,12 +378,11 @@
 		json_field(RequestBody, content, RequestBodyContent),
 		json_field(RequestBodyContent, 'application/json', RequestBodyMedia),
 		json_field(RequestBodyMedia, schema, RequestSchema),
-		json_field(RequestSchema, required, [title, published]).
+		json_field(RequestSchema, required, [title, published])
+	))) :-
+		open_api::document(inferred_open_api_http_router, Document).
 
-	test(http_router_open_api_inference_3_03, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::operation(example_open_api_http_router, update_message, Operation),
-		Operation = operation(
+	test(http_router_open_api_inference_3_03, deterministic(Operation == operation(
 			update_message,
 			put,
 			'/examples/messages/{id}',
@@ -429,12 +422,10 @@
 				])
 			],
 			[tags([examples])]
-		).
+	))) :-
+		open_api::operation(example_open_api_http_router, update_message, Operation).
 
-	test(http_router_open_api_inference_3_04, deterministic) :-
-		OpenAPI = open_api,
-		OpenAPI::operation(example_open_api_http_router, show_nullable_message, Operation),
-		Operation = operation(
+	test(http_router_open_api_inference_3_04, deterministic(Operation == operation(
 			show_nullable_message,
 			get,
 			'/examples/messages/nullable',
@@ -455,7 +446,8 @@
 				])
 			],
 			[tags([examples])]
-		).
+	))) :-
+		open_api::operation(example_open_api_http_router, show_nullable_message, Operation).
 
 	json_field({Pairs}, Key, Value) :-
 		json_pair(Pairs, Key, Value).
