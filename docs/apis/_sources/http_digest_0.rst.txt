@@ -299,7 +299,7 @@ Decorates a normalized HTTP response with an explicit normalized Digest challeng
 ``add_authentication_info/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Decorates a normalized HTTP response with an ``Authentication-Info`` header computed from a previously verified request and options.
+Decorates a normalized HTTP response with an ``Authentication-Info`` header computed from a previously verified request and options. The ``nextnonce`` option accepts ``false`` to omit the field, ``true`` to generate a fresh nonce using ``nonce_secret/1``, or an explicit nonce atom to emit verbatim.
 
 | **Compilation flags:**
 |    ``static``

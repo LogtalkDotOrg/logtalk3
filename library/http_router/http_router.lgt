@@ -28,6 +28,7 @@
 		date is 2026-05-23,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.',
 		remarks is [
+			'Route authorization' - 'Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after route matching and metadata annotation but before route handler dispatch.',
 			'Custom bad-request responses' - 'Importing objects can optionally define ``route_bad_request_response/3`` to customize ``400 Bad Request`` responses generated from dedicated parameter-validation exceptions raised by route handlers.',
 			'Content negotiation' - 'Importing objects can optionally define ``route_produces/2`` clauses so the router negotiates the request ``Accept`` header and annotates matched requests with the negotiated ``response_media_type(MediaType)`` property.',
 			'Middleware chaining' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response.',
@@ -49,6 +50,7 @@
 	:- info(handle/2, [
 		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses.',
 		remarks is [
+			'Route authorization' - 'Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after matching and metadata annotation but before route handler dispatch. The hook must return either ``continue(Request)`` or ``respond(Response)``. Short-circuited responses still flow through response middleware with the routed request annotations preserved.',
 			'Bad-request handling' - 'Dedicated route-handler exceptions matching ``error(http_parameter_validation(Errors), Context)`` with a non-empty ``Errors`` list are translated into ``400 Bad Request`` responses using either ``route_bad_request_response/3`` or the default plain-text response.',
 			'Middleware' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.',
 			'Response middleware' - 'Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.',
@@ -128,6 +130,13 @@
 	:- info(route_metadata/2, [
 		comment is 'Optional hook predicate that declares additional metadata properties for a route. When defined, ``Metadata`` must be a list of compound terms. The router removes any existing request properties with the same functors, prepends the metadata to the matched request, and then adds the standard ``route/1`` and ``path_params/1`` annotations.',
 		argnames is ['Id', 'Metadata']
+	]).
+
+	:- protected(authorize_routed_request/2).
+	:- mode(authorize_routed_request(+compound, -compound), one_or_error).
+	:- info(authorize_routed_request/2, [
+		comment is 'Optional hook predicate that validates or decorates a routed request after route matching and metadata annotation but before route handler dispatch. It must return either ``continue(Request)`` or ``respond(Response)``. The default implementation continues with the routed request unchanged.',
+		argnames is ['Request', 'Action']
 	]).
 
 	:- protected(route_open_api_request_body_example/2).
@@ -855,12 +864,15 @@
 	validate_response_middleware_response(Response) :-
 		domain_error(http_router_response_middleware_response, Response).
 
+	authorize_routed_request(Request, continue(Request)).
+
 	handle_middleware_outcome(respond(Request, Response), Request, Response).
 	handle_middleware_outcome(continue(Request), EffectiveRequest, Response) :-
 		(	routable_path(Request, Path) ->
 			(	matched_route(Request, Path, RouteId, Handler, PathParams) ->
 				annotate_request(RouteId, PathParams, Request, RoutedRequest),
-				route_response(RouteId, Handler, RoutedRequest, EffectiveRequest, Response)
+				call_route_authorizer(RoutedRequest, AuthorizationAction),
+				handle_route_authorization_action(AuthorizationAction, RouteId, Handler, RoutedRequest, EffectiveRequest, Response)
 			;	automatic_options_response(Request, Path, EffectiveRequest, Response) ->
 				true
 			;	allowed_route_methods(Path, AllowedMethods) ->
@@ -872,6 +884,23 @@
 		;	EffectiveRequest = Request,
 			not_found_response(Request, Response)
 		).
+
+	call_route_authorizer(Request, Action) :-
+		::authorize_routed_request(Request, Action),
+		validate_route_authorization_action(Action).
+
+	handle_route_authorization_action(continue(Request), RouteId, Handler, _CurrentRequest, EffectiveRequest, Response) :-
+		route_response(RouteId, Handler, Request, EffectiveRequest, Response).
+	handle_route_authorization_action(respond(Response), _RouteId, _Handler, Request, Request, Response).
+
+	validate_route_authorization_action(continue(Request)) :-
+		http::is_request(Request),
+		!.
+	validate_route_authorization_action(respond(Response)) :-
+		http::is_response(Response),
+		!.
+	validate_route_authorization_action(Action) :-
+		domain_error(http_router_route_authorization_action, Action).
 
 	route_response(RouteId, Handler, Request, EffectiveRequest, Response) :-
 		(	negotiated_route_request(RouteId, Request, NegotiatedRequest) ->

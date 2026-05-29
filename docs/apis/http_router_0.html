@@ -163,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http"><span class="xref std std-ref">http</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-authenticate"><span class="xref std std-ref">http_authenticate</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
@@ -412,6 +413,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p>Route authorization: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code> to validate or decorate routed requests after route matching and metadata annotation but before route handler dispatch.</p></li>
 <li><p>Custom bad-request responses: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> to customize <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses generated from dedicated parameter-validation exceptions raised by route handlers.</p></li>
 <li><p>Content negotiation: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> clauses so the router negotiates the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header and annotates matched requests with the negotiated <code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code> property.</p></li>
 <li><p>Middleware chaining: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">middleware/2</span></code> descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response.</p></li>
@@ -452,24 +454,25 @@
 <li><p><a class="reference internal" href="#response-middleware-2" id="id11"><code class="docutils literal notranslate"><span class="pre">response_middleware/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#route-4" id="id12"><code class="docutils literal notranslate"><span class="pre">route/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#route-metadata-2" id="id13"><code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-open-api-request-body-example-2" id="id14"><code class="docutils literal notranslate"><span class="pre">route_open_api_request_body_example/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-open-api-response-example-2" id="id15"><code class="docutils literal notranslate"><span class="pre">route_open_api_response_example/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-api-info-1" id="id16"><code class="docutils literal notranslate"><span class="pre">open_api_info/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-api-servers-1" id="id17"><code class="docutils literal notranslate"><span class="pre">open_api_servers/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-api-security-1" id="id18"><code class="docutils literal notranslate"><span class="pre">open_api_security/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-api-schema-2" id="id19"><code class="docutils literal notranslate"><span class="pre">open_api_schema/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-api-security-scheme-2" id="id20"><code class="docutils literal notranslate"><span class="pre">open_api_security_scheme/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-produces-2" id="id21"><code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#path-template-parameters-2" id="id22"><code class="docutils literal notranslate"><span class="pre">path_template_parameters/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-not-found-response-2" id="id23"><code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-bad-request-response-3" id="id24"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-method-not-allowed-response-3" id="id25"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-automatic-options-response-3" id="id26"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#route-not-acceptable-response-3" id="id27"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authorize-routed-request-2" id="id14"><code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-open-api-request-body-example-2" id="id15"><code class="docutils literal notranslate"><span class="pre">route_open_api_request_body_example/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-open-api-response-example-2" id="id16"><code class="docutils literal notranslate"><span class="pre">route_open_api_response_example/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-api-info-1" id="id17"><code class="docutils literal notranslate"><span class="pre">open_api_info/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-api-servers-1" id="id18"><code class="docutils literal notranslate"><span class="pre">open_api_servers/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-api-security-1" id="id19"><code class="docutils literal notranslate"><span class="pre">open_api_security/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-api-schema-2" id="id20"><code class="docutils literal notranslate"><span class="pre">open_api_schema/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-api-security-scheme-2" id="id21"><code class="docutils literal notranslate"><span class="pre">open_api_security_scheme/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-produces-2" id="id22"><code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#path-template-parameters-2" id="id23"><code class="docutils literal notranslate"><span class="pre">path_template_parameters/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-not-found-response-2" id="id24"><code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-bad-request-response-3" id="id25"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-method-not-allowed-response-3" id="id26"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-automatic-options-response-3" id="id27"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#route-not-acceptable-response-3" id="id28"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id28">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id29">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id29">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id30">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -498,6 +501,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p>Route authorization: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code> to validate or decorate routed requests after matching and metadata annotation but before route handler dispatch. The hook must return either <code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. Short-circuited responses still flow through response middleware with the routed request annotations preserved.</p></li>
 <li><p>Bad-request handling: Dedicated route-handler exceptions matching <code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),</span> <span class="pre">Context)</span></code> with a non-empty <code class="docutils literal notranslate"><span class="pre">Errors</span></code> list are translated into <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses using either <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> or the default plain-text response.</p></li>
 <li><p>Middleware: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">middleware/2</span></code> descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.</p></li>
 <li><p>Response middleware: Importing objects can optionally define ordered <code class="docutils literal notranslate"><span class="pre">response_middleware/2</span></code> descriptors whose handlers transform the final response after route dispatch or short-circuit handling.</p></li>
@@ -722,8 +726,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="authorize-routed-request-2">
+<span id="http-router-0-authorize-routed-request-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code></a><a class="headerlink" href="#authorize-routed-request-2" title="Link to this heading"></a></h3>
+<p>Optional hook predicate that validates or decorates a routed request after route matching and metadata annotation but before route handler dispatch. It must return either <code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. The default implementation continues with the routed request unchanged.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorize_routed_request(Request,Action)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorize_routed_request(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="route-open-api-request-body-example-2">
-<span id="http-router-0-route-open-api-request-body-example-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_open_api_request_body_example/2</span></code></a><a class="headerlink" href="#route-open-api-request-body-example-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-open-api-request-body-example-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_open_api_request_body_example/2</span></code></a><a class="headerlink" href="#route-open-api-request-body-example-2" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that enumerates example request bodies for OpenAPI inference. Each <code class="docutils literal notranslate"><span class="pre">Body</span></code> must be either <code class="docutils literal notranslate"><span class="pre">empty</span></code> or a normalized <code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">Payload)</span></code> term. These examples are only consulted when explicit <code class="docutils literal notranslate"><span class="pre">request_body/1</span></code> route metadata is absent.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -744,7 +769,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-open-api-response-example-2">
-<span id="http-router-0-route-open-api-response-example-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_open_api_response_example/2</span></code></a><a class="headerlink" href="#route-open-api-response-example-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-open-api-response-example-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_open_api_response_example/2</span></code></a><a class="headerlink" href="#route-open-api-response-example-2" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that enumerates example normalized HTTP responses for OpenAPI inference. These examples are only consulted when explicit <code class="docutils literal notranslate"><span class="pre">responses/1</span></code> route metadata is absent.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -765,7 +790,7 @@
 <hr class="docutils" />
 </section>
 <section id="open-api-info-1">
-<span id="http-router-0-open-api-info-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_info/1</span></code></a><a class="headerlink" href="#open-api-info-1" title="Link to this heading"></a></h3>
+<span id="http-router-0-open-api-info-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_info/1</span></code></a><a class="headerlink" href="#open-api-info-1" title="Link to this heading"></a></h3>
 <p>Hook predicate that importing router objects can override to customize the default top-level OpenAPI info descriptor.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -786,7 +811,7 @@
 <hr class="docutils" />
 </section>
 <section id="open-api-servers-1">
-<span id="http-router-0-open-api-servers-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_servers/1</span></code></a><a class="headerlink" href="#open-api-servers-1" title="Link to this heading"></a></h3>
+<span id="http-router-0-open-api-servers-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_servers/1</span></code></a><a class="headerlink" href="#open-api-servers-1" title="Link to this heading"></a></h3>
 <p>Hook predicate that importing router objects can override to customize the default OpenAPI server descriptors.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -807,7 +832,7 @@
 <hr class="docutils" />
 </section>
 <section id="open-api-security-1">
-<span id="http-router-0-open-api-security-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_security/1</span></code></a><a class="headerlink" href="#open-api-security-1" title="Link to this heading"></a></h3>
+<span id="http-router-0-open-api-security-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_security/1</span></code></a><a class="headerlink" href="#open-api-security-1" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that importing router objects can define to expose top-level OpenAPI security requirements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -828,7 +853,7 @@
 <hr class="docutils" />
 </section>
 <section id="open-api-schema-2">
-<span id="http-router-0-open-api-schema-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_schema/2</span></code></a><a class="headerlink" href="#open-api-schema-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-open-api-schema-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_schema/2</span></code></a><a class="headerlink" href="#open-api-schema-2" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that importing router objects can define to expose reusable OpenAPI schemas.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -849,7 +874,7 @@
 <hr class="docutils" />
 </section>
 <section id="open-api-security-scheme-2">
-<span id="http-router-0-open-api-security-scheme-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_security_scheme/2</span></code></a><a class="headerlink" href="#open-api-security-scheme-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-open-api-security-scheme-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_api_security_scheme/2</span></code></a><a class="headerlink" href="#open-api-security-scheme-2" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that importing router objects can define to expose reusable OpenAPI security schemes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -870,7 +895,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-produces-2">
-<span id="http-router-0-route-produces-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code></a><a class="headerlink" href="#route-produces-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-produces-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code></a><a class="headerlink" href="#route-produces-2" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that declares the response media types produced by a route. When defined, <code class="docutils literal notranslate"><span class="pre">MediaTypes</span></code> must be a non-empty list of media type atoms. The router negotiates the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header against this list, annotates successful matches with <code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code>, and returns <code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> when no produced type matches.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -891,7 +916,7 @@
 <hr class="docutils" />
 </section>
 <section id="path-template-parameters-2">
-<span id="http-router-0-path-template-parameters-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">path_template_parameters/2</span></code></a><a class="headerlink" href="#path-template-parameters-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-path-template-parameters-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">path_template_parameters/2</span></code></a><a class="headerlink" href="#path-template-parameters-2" title="Link to this heading"></a></h3>
 <p>Returns the normalized placeholder descriptors declared in a path template as <code class="docutils literal notranslate"><span class="pre">parameter(Name,</span> <span class="pre">Type)</span></code> terms.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -912,7 +937,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-not-found-response-2">
-<span id="http-router-0-route-not-found-response-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code></a><a class="headerlink" href="#route-not-found-response-2" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-not-found-response-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_not_found_response/2</span></code></a><a class="headerlink" href="#route-not-found-response-2" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> responses. When defined by the importing object, it is called with the unmatched request and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -933,7 +958,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-bad-request-response-3">
-<span id="http-router-0-route-bad-request-response-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code></a><a class="headerlink" href="#route-bad-request-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-bad-request-response-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code></a><a class="headerlink" href="#route-bad-request-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses generated from dedicated parameter-validation exceptions raised by route handlers. When defined by the importing object, it is called with the routed request, the structured parameter error list, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -954,7 +979,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-method-not-allowed-response-3">
-<span id="http-router-0-route-method-not-allowed-response-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a><a class="headerlink" href="#route-method-not-allowed-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-method-not-allowed-response-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response/3</span></code></a><a class="headerlink" href="#route-method-not-allowed-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> responses. When defined by the importing object, it is called with the request, the effective allowed methods list as lowercase atoms, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -975,7 +1000,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-automatic-options-response-3">
-<span id="http-router-0-route-automatic-options-response-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a><a class="headerlink" href="#route-automatic-options-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-automatic-options-response-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code></a><a class="headerlink" href="#route-automatic-options-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses when no explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> route matches. When defined by the importing object, it is called with the annotated synthetic request, the effective allowed methods list as lowercase atoms, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -996,7 +1021,7 @@
 <hr class="docutils" />
 </section>
 <section id="route-not-acceptable-response-3">
-<span id="http-router-0-route-not-acceptable-response-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a><a class="headerlink" href="#route-not-acceptable-response-3" title="Link to this heading"></a></h3>
+<span id="http-router-0-route-not-acceptable-response-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response/3</span></code></a><a class="headerlink" href="#route-not-acceptable-response-3" title="Link to this heading"></a></h3>
 <p>Optional hook predicate that customizes <code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> responses. When defined by the importing object, it is called with the request, the normalized produced media types for the matched route, and must return the response to send.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

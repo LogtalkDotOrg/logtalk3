@@ -1180,6 +1180,20 @@ To load an entity, always load the library that includes it using the goal ``log
    http_text_body_codec <http_text_body_codec_0>
    http_text_helpers <http_text_helpers_0>
 
+``library/http_authenticate/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_authenticate <http_authenticate_0>
+   http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>
+   http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>
+   http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
+   http_server_basic_handler(Verifier,Handler,ProtectOptions) <http_server_basic_handler_3>
+
 ``library/http_client/``
 ------------------------
 

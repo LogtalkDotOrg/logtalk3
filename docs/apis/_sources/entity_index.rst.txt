@@ -58,6 +58,7 @@ Categories
    http_json_term_helpers <http_json_term_helpers_0>
    http_message_helpers <http_message_helpers_0>
    http_router <http_router_0>
+   http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
    http_router_htmx <http_router_htmx_0>
    http_router_parameters <http_router_parameters_0>
    http_router_server_session(Manager) <http_router_server_session_1>
@@ -301,6 +302,7 @@ Objects
    hook_set(Set) <hook_set_1>
    html5 <html5_0>
    http <http_0>
+   http_authenticate <http_authenticate_0>
    http_client <http_client_0>
    http_client_core <http_client_core_0>
    http_client_digest_session <http_client_digest_session_0>
@@ -312,11 +314,13 @@ Objects
    http_directory_listing <http_directory_listing_0>
    http_form_body_codec <http_form_body_codec_0>
    http_htmx <http_htmx_0>
+   http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>
    http_json_body_codec <http_json_body_codec_0>
    http_multipart <http_multipart_0>
    http_octet_stream_body_codec <http_octet_stream_body_codec_0>
    http_parameters <http_parameters_0>
    http_server <http_server_0>
+   http_server_basic_handler(Verifier,Handler,ProtectOptions) <http_server_basic_handler_3>
    http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_digest_handler_4>
    http_server_session <http_server_session_0>
    http_server_session_handler(Manager,Handler) <http_server_session_handler_2>
@@ -718,6 +722,7 @@ Protocols
    heapp <heapp_0>
    hierarchyp <hierarchyp_0>
    hmac_protocol <hmac_protocol_0>
+   http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>
    http_body_codec_protocol <http_body_codec_protocol_0>
    http_digest_verifier_protocol <http_digest_verifier_protocol_0>
    http_handler_protocol <http_handler_protocol_0>

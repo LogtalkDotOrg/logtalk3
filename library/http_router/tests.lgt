@@ -258,6 +258,21 @@
 		Request = request(get, origin('/bad-request/error'), http(1, 1), [], empty, []),
 		parameter_validation_http_router::handle(Request, _Response).
 
+	test(http_router_handle_2_31, deterministic) :-
+		Request = request(get, origin('/secure'), http(1, 1), [], empty, []),
+		route_authorization_http_router::handle(Request, Response),
+		status(Response, status(401, 'Unauthorized')),
+		header(Response, x_authorization, denied),
+		header(Response, x_router_stage, routed),
+		body(Response, empty).
+
+	test(http_router_handle_2_32, deterministic) :-
+		Request = request(get, origin('/secure'), http(1, 1), [x_allow-yes], empty, []),
+		route_authorization_http_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		header(Response, x_router_stage, routed),
+		body(Response, content('text/plain', text(secret))).
+
 	test(http_router_open_api_3_01, deterministic(Operation == operation(
 			show_item,
 			get,

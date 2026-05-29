@@ -416,6 +416,53 @@
 :- end_object.
 
 
+	:- object(route_authorization_http_router,
+		implements(http_handler_protocol),
+		imports(http_router)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-05-29,
+			comment is 'Router object used by the http_router tests to exercise routed-request authorization hooks.'
+		]).
+
+		:- protected(show_secret/2).
+		:- info(show_secret/2, [
+			comment is 'Route handler used by the route-authorization router object for the ``/secure`` path.',
+			argnames is ['Request', 'Response']
+		]).
+
+		:- protected(add_router_stage/3).
+		:- info(add_router_stage/3, [
+			comment is 'Response middleware handler that marks whether the response was produced for a routed request.',
+			argnames is ['Request', 'Response0', 'Response']
+		]).
+
+		route(show_secret, get, '/secure', show_secret).
+
+		response_middleware(add_router_stage, add_router_stage).
+
+		authorize_routed_request(Request, respond(Response)) :-
+			http::property(Request, route(show_secret)),
+			\+ http::header(Request, x_allow, yes),
+			!,
+			http::version(Request, Version),
+			http::response(Version, status(401, 'Unauthorized'), [x_authorization-denied], empty, [], Response).
+		authorize_routed_request(Request, continue(Request)).
+
+		add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
+			( http::property(Request, route(show_secret)) -> Stage = routed ; Stage = other ),
+			http::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
+
+		show_secret(Request, Response) :-
+			http::property(Request, route(show_secret)),
+			http::version(Request, Version),
+			http::response(Version, status(200, 'OK'), [], content('text/plain', text(secret)), [], Response).
+
+	:- end_object.
+
+
 	:- object(parameter_validation_http_router,
 		implements(http_handler_protocol),
 		imports(http_router)).

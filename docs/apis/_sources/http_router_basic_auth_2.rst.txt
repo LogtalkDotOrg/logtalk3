@@ -1,0 +1,79 @@
+.. index:: single: http_router_basic_auth(Verifier,BaseOptions)
+.. _http_router_basic_auth/2:
+
+.. rst-class:: right
+
+**category**
+
+``http_router_basic_auth(Verifier,BaseOptions)``
+================================================
+
+* ``Verifier`` - Verifier object passed to ``http_authenticate::protect_request/4`` when a routed request declares Basic auth metadata.
+* ``BaseOptions`` - Base protect-request options merged with any route-specific ``basic_auth/1`` metadata options.
+
+
+Optional Basic-auth router helpers for objects importing the ``http_router`` category.
+
+| **Availability:** 
+|    ``logtalk_load(http_authenticate(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`http <http/0>`
+|    :ref:`http_authenticate <http_authenticate/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: authorize_basic_auth_request/2
+.. _http_router_basic_auth/2::authorize_basic_auth_request/2:
+
+``authorize_basic_auth_request/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Router helper that applies Basic-auth route metadata to a routed request and returns either ``continue(Request)`` or ``respond(Response)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorize_basic_auth_request(Request,Action)``
+| **Mode and number of proofs:**
+|    ``authorize_basic_auth_request(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

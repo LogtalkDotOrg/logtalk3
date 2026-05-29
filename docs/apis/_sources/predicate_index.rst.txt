@@ -1178,6 +1178,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::authorization/2>`
 * :ref:`http_digest <http_digest/0::authorization/2>`
 
 ``authorize_request/6``
@@ -2144,6 +2145,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::challenge/2>`
 * :ref:`http_digest <http_digest/0::challenge/2>`
 
 ``change_directory/1``
@@ -8768,6 +8770,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::generate_authorization/2>`
 * :ref:`http_digest <http_digest/0::generate_authorization/2>`
 
 ``generate_body/3``
@@ -8788,6 +8791,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::generate_challenge/2>`
 * :ref:`http_digest <http_digest/0::generate_challenge/2>`
 
 ``generate_cookie/2``
@@ -16758,6 +16762,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::parse_authorization/2>`
 * :ref:`http_digest <http_digest/0::parse_authorization/2>`
 
 ``parse_body/4``
@@ -16778,6 +16783,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::parse_challenge/2>`
 * :ref:`http_digest <http_digest/0::parse_challenge/2>`
 
 ``parse_cookie/2``
@@ -18519,6 +18525,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::protect_request/4>`
 * :ref:`http_digest <http_digest/0::protect_request/4>`
 
 ``prove/2``
@@ -24425,6 +24432,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::unauthorized_response/3>`
 * :ref:`http_digest <http_digest/0::unauthorized_response/3>`
 
 ``unauthorized_response/4``
@@ -24435,6 +24443,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_authenticate <http_authenticate/0::unauthorized_response/4>`
 * :ref:`http_digest <http_digest/0::unauthorized_response/4>`
 
 ``unexpected/1``
@@ -25563,6 +25572,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::vector_value/3>`
+
+``verify/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_authenticate_verifier_protocol <http_authenticate_verifier_protocol/0::verify/3>`
 
 ``verify_commands_availability/0``
 ----------------------------------

@@ -344,10 +344,10 @@
 </li>
       <li><a href="hash_common_64_0.html#index-8">and64/3</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="http_router_htmx_0.html#index-1">annotate_htmx_request/2</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="http_router_server_session_1.html#index-1">annotate_server_session_request/2</a>
 </li>
       <li><a href="anomaly_dataset_protocol_0.html#index-0">anomaly_dataset_protocol</a>
@@ -500,9 +500,13 @@
 </li>
       <li><a href="http_digest_0.html#index-3">authentication_info/2</a>
 </li>
-      <li><a href="http_digest_0.html#index-2">authorization/2</a>
+      <li><a href="http_authenticate_0.html#index-2">authorization/2</a>, <a href="http_digest_0.html#index-2">[1]</a>
+</li>
+      <li><a href="http_router_basic_auth_2.html#index-1">authorize_basic_auth_request/2</a>
 </li>
       <li><a href="http_digest_0.html#index-10">authorize_request/6</a>
+</li>
+      <li><a href="http_router_0.html#index-12">authorize_routed_request/2</a>
 </li>
       <li><a href="automation_report_0.html#index-0">automation_report</a>
 </li>
@@ -898,7 +902,7 @@
 </li>
       <li><a href="statistics_0.html#index-8">central_moment_sum/7</a>
 </li>
-      <li><a href="http_digest_0.html#index-1">challenge/2</a>
+      <li><a href="http_authenticate_0.html#index-1">challenge/2</a>, <a href="http_digest_0.html#index-1">[1]</a>
 </li>
       <li><a href="osp_0.html#index-15">change_directory/1</a>
 </li>
@@ -2912,11 +2916,11 @@
 </li>
       <li><a href="http_digest_0.html#index-9">generate_authentication_info/2</a>
 </li>
-      <li><a href="http_digest_0.html#index-7">generate_authorization/2</a>
+      <li><a href="http_authenticate_0.html#index-6">generate_authorization/2</a>, <a href="http_digest_0.html#index-7">[1]</a>
 </li>
       <li><a href="http_0.html#index-17">generate_body/3</a>
 </li>
-      <li><a href="http_digest_0.html#index-5">generate_challenge/2</a>
+      <li><a href="http_authenticate_0.html#index-4">generate_challenge/2</a>, <a href="http_digest_0.html#index-5">[1]</a>
 </li>
       <li><a href="http_cookies_1.html#index-3">generate_cookie/2</a>
 </li>
@@ -3222,12 +3226,12 @@
 </li>
       <li><a href="hodge_rank_0.html#index-0">hodge_rank</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pack_protocol_0.html#index-4">home/1</a>, <a href="registry_protocol_0.html#index-3">[1]</a>
 </li>
       <li><a href="application_protocol_0.html#index-5">homepage/1</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="hook_pipeline_1.html#index-0">hook_pipeline(Pipeline)</a>
 </li>
       <li><a href="hook_set_1.html#index-0">hook_set(Set)</a>
@@ -3239,6 +3243,10 @@
       <li><a href="html5_0.html#index-0">html5</a>
 </li>
       <li><a href="http_0.html#index-0">http</a>
+</li>
+      <li><a href="http_authenticate_0.html#index-0">http_authenticate</a>
+</li>
+      <li><a href="http_authenticate_verifier_protocol_0.html#index-0">http_authenticate_verifier_protocol</a>
 </li>
       <li><a href="http_body_codec_protocol_0.html#index-0">http_body_codec_protocol</a>
 </li>
@@ -3270,6 +3278,8 @@
 </li>
       <li><a href="http_htmx_0.html#index-0">http_htmx</a>
 </li>
+      <li><a href="http_htpasswd_verifier_1.html#index-0">http_htpasswd_verifier(Path)</a>
+</li>
       <li><a href="http_json_body_codec_0.html#index-0">http_json_body_codec</a>
 </li>
       <li><a href="http_json_term_helpers_0.html#index-0">http_json_term_helpers</a>
@@ -3288,6 +3298,8 @@
 </li>
       <li><a href="http_router_0.html#index-0">http_router</a>
 </li>
+      <li><a href="http_router_basic_auth_2.html#index-0">http_router_basic_auth(Verifier,BaseOptions)</a>
+</li>
       <li><a href="http_router_htmx_0.html#index-0">http_router_htmx</a>
 </li>
       <li><a href="http_router_parameters_0.html#index-0">http_router_parameters</a>
@@ -3295,6 +3307,8 @@
       <li><a href="http_router_server_session_1.html#index-0">http_router_server_session(Manager)</a>
 </li>
       <li><a href="http_server_0.html#index-0">http_server</a>
+</li>
+      <li><a href="http_server_basic_handler_3.html#index-0">http_server_basic_handler(Verifier,Handler,ProtectOptions)</a>
 </li>
       <li><a href="http_server_digest_handler_4.html#index-0">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a>
 </li>
@@ -5192,7 +5206,7 @@
 </li>
       <li><a href="http_parameters_0.html#index-5">open_api_bad_request_response/1</a>
 </li>
-      <li><a href="http_router_0.html#index-14">open_api_info/1</a>
+      <li><a href="http_router_0.html#index-15">open_api_info/1</a>
 </li>
       <li><a href="http_parameters_0.html#index-3">open_api_parameters/2</a>
 </li>
@@ -5204,13 +5218,13 @@
 </li>
       <li><a href="rest_0.html#index-18">open_api_response_validation_error_response/5</a>
 </li>
-      <li><a href="http_router_0.html#index-17">open_api_schema/2</a>
+      <li><a href="http_router_0.html#index-18">open_api_schema/2</a>
 </li>
-      <li><a href="http_router_0.html#index-16">open_api_security/1</a>
+      <li><a href="http_router_0.html#index-17">open_api_security/1</a>
 </li>
-      <li><a href="http_router_0.html#index-18">open_api_security_scheme/2</a>
+      <li><a href="http_router_0.html#index-19">open_api_security_scheme/2</a>
 </li>
-      <li><a href="http_router_0.html#index-15">open_api_servers/1</a>
+      <li><a href="http_router_0.html#index-16">open_api_servers/1</a>
 </li>
       <li><a href="rest_0.html#index-15">open_api_validate_request/1</a>
 </li>
@@ -5464,11 +5478,11 @@
 </li>
       <li><a href="http_digest_0.html#index-8">parse_authentication_info/2</a>
 </li>
-      <li><a href="http_digest_0.html#index-6">parse_authorization/2</a>
+      <li><a href="http_authenticate_0.html#index-5">parse_authorization/2</a>, <a href="http_digest_0.html#index-6">[1]</a>
 </li>
       <li><a href="http_0.html#index-16">parse_body/4</a>
 </li>
-      <li><a href="http_digest_0.html#index-4">parse_challenge/2</a>
+      <li><a href="http_authenticate_0.html#index-3">parse_challenge/2</a>, <a href="http_digest_0.html#index-4">[1]</a>
 </li>
       <li><a href="http_cookies_1.html#index-2">parse_cookie/2</a>
 </li>
@@ -5564,7 +5578,7 @@
 </li>
       <li><a href="rest_0.html#index-1">path_parameter/3</a>
 </li>
-      <li><a href="http_router_0.html#index-20">path_template_parameters/2</a>
+      <li><a href="http_router_0.html#index-21">path_template_parameters/2</a>
 </li>
       <li><a href="http_docroot_paths_0.html#index-6">path_within_root/2</a>
 </li>
@@ -5958,7 +5972,7 @@
 </li>
       <li><a href="http_0.html#index-27">property/2</a>, <a href="http_websocket_0.html#index-12">[1]</a>
 </li>
-      <li><a href="http_digest_0.html#index-11">protect_request/4</a>
+      <li><a href="http_authenticate_0.html#index-7">protect_request/4</a>, <a href="http_digest_0.html#index-11">[1]</a>
 </li>
       <li><a href="proto_hierarchy_0.html#index-0">proto_hierarchy</a>
 </li>
@@ -6610,9 +6624,9 @@
 </li>
       <li><a href="http_router_0.html#index-10">route/4</a>
 </li>
-      <li><a href="http_router_0.html#index-24">route_automatic_options_response/3</a>
+      <li><a href="http_router_0.html#index-25">route_automatic_options_response/3</a>
 </li>
-      <li><a href="http_router_0.html#index-22">route_bad_request_response/3</a>
+      <li><a href="http_router_0.html#index-23">route_bad_request_response/3</a>
 </li>
       <li><a href="geospatial_protocol_0.html#index-58">route_distance/2</a>
 </li>
@@ -6622,15 +6636,15 @@
 </li>
       <li><a href="http_router_0.html#index-11">route_metadata/2</a>
 </li>
-      <li><a href="http_router_0.html#index-23">route_method_not_allowed_response/3</a>
+      <li><a href="http_router_0.html#index-24">route_method_not_allowed_response/3</a>
 </li>
-      <li><a href="http_router_0.html#index-25">route_not_acceptable_response/3</a>
+      <li><a href="http_router_0.html#index-26">route_not_acceptable_response/3</a>
 </li>
-      <li><a href="http_router_0.html#index-21">route_not_found_response/2</a>
+      <li><a href="http_router_0.html#index-22">route_not_found_response/2</a>
 </li>
-      <li><a href="http_router_0.html#index-12">route_open_api_request_body_example/2</a>
+      <li><a href="http_router_0.html#index-13">route_open_api_request_body_example/2</a>
 </li>
-      <li><a href="http_router_0.html#index-13">route_open_api_response_example/2</a>
+      <li><a href="http_router_0.html#index-14">route_open_api_response_example/2</a>
 </li>
       <li><a href="http_router_parameters_0.html#index-2">route_parameter_declarations/2</a>
 </li>
@@ -6640,7 +6654,7 @@
 </li>
       <li><a href="http_router_parameters_0.html#index-1">route_parameters/2</a>
 </li>
-      <li><a href="http_router_0.html#index-19">route_produces/2</a>
+      <li><a href="http_router_0.html#index-20">route_produces/2</a>
 </li>
       <li><a href="regressor_common_0.html#index-43">rows_to_design_matrix/3</a>
 </li>
@@ -7866,9 +7880,9 @@
 </li>
       <li><a href="ulid_types_0.html#index-0">ulid_types</a>
 </li>
-      <li><a href="http_digest_0.html#index-12">unauthorized_response/3</a>
+      <li><a href="http_authenticate_0.html#index-8">unauthorized_response/3</a>, <a href="http_digest_0.html#index-12">[1]</a>
 </li>
-      <li><a href="http_digest_0.html#index-13">unauthorized_response/4</a>
+      <li><a href="http_authenticate_0.html#index-9">unauthorized_response/4</a>, <a href="http_digest_0.html#index-13">[1]</a>
 </li>
       <li><a href="mapped_single_byte_character_set_0.html#index-2">undefined/2</a>
 </li>
@@ -8172,10 +8186,10 @@
 </li>
       <li><a href="score_ranker_model_common_0.html#index-7">valid_score_ranker_diagnostics/3</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ccsds_tc_services_0.html#index-1">valid_segment/1</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sequential_pattern_mining_common_0.html#index-8">valid_sequence_patterns/2</a>
 </li>
       <li><a href="http_cookies_1.html#index-4">valid_set_cookie/1</a>
@@ -8271,6 +8285,8 @@
       <li><a href="linear_algebra_protocol_0.html#index-9">vector_norm/3</a>
 </li>
       <li><a href="linear_algebra_protocol_0.html#index-26">vector_value/3</a>
+</li>
+      <li><a href="http_authenticate_verifier_protocol_0.html#index-1">verify/3</a>
 </li>
       <li><a href="packs_common_0.html#index-3">verify_commands_availability/0</a>
 </li>

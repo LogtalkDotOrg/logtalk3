@@ -1,0 +1,63 @@
+.. index:: single: http_server_basic_handler(Verifier,Handler,ProtectOptions)
+.. _http_server_basic_handler/3:
+
+.. rst-class:: right
+
+**object**
+
+``http_server_basic_handler(Verifier,Handler,ProtectOptions)``
+==============================================================
+
+* ``Verifier`` - Verifier object implementing the ``http_authenticate_verifier_protocol`` protocol.
+* ``Handler`` - Wrapped object implementing the ``http_handler_protocol`` protocol.
+* ``ProtectOptions`` - Options passed to ``http_authenticate::protect_request/4``.
+
+
+Wrapper HTTP handler object that applies Basic request verification around another portable HTTP handler.
+
+| **Availability:** 
+|    ``logtalk_load(http_authenticate(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
+| **Uses:**
+|    :ref:`http_authenticate <http_authenticate/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_handler_protocol/0::handle/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

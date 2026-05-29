@@ -30,6 +30,7 @@ Declarative HTTP router category for objects implementing the http_handler_proto
 
 | **Remarks:**
 
+   - Route authorization: Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after route matching and metadata annotation but before route handler dispatch.
    - Custom bad-request responses: Importing objects can optionally define ``route_bad_request_response/3`` to customize ``400 Bad Request`` responses generated from dedicated parameter-validation exceptions raised by route handlers.
    - Content negotiation: Importing objects can optionally define ``route_produces/2`` clauses so the router negotiates the request ``Accept`` header and annotates matched requests with the negotiated ``response_media_type(MediaType)`` property.
    - Middleware chaining: Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response.
@@ -72,6 +73,7 @@ Routes a normalized HTTP request using the importing object ``route/4`` clauses.
 
 | **Remarks:**
 
+    - Route authorization: Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after matching and metadata annotation but before route handler dispatch. The hook must return either ``continue(Request)`` or ``respond(Response)``. Short-circuited responses still flow through response middleware with the routed request annotations preserved.
     - Bad-request handling: Dedicated route-handler exceptions matching ``error(http_parameter_validation(Errors), Context)`` with a non-empty ``Errors`` list are translated into ``400 Bad Request`` responses using either ``route_bad_request_response/3`` or the default plain-text response.
     - Middleware: Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.
     - Response middleware: Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.
@@ -272,6 +274,25 @@ Optional hook predicate that declares additional metadata properties for a route
 |    ``route_metadata(Id,Metadata)``
 | **Mode and number of proofs:**
 |    ``route_metadata(?atom,?list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: authorize_routed_request/2
+.. _http_router/0::authorize_routed_request/2:
+
+``authorize_routed_request/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that validates or decorates a routed request after route matching and metadata annotation but before route handler dispatch. It must return either ``continue(Request)`` or ``respond(Response)``. The default implementation continues with the routed request unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorize_routed_request(Request,Action)``
+| **Mode and number of proofs:**
+|    ``authorize_routed_request(+compound,-compound)`` - ``one_or_error``
 
 
 ------------

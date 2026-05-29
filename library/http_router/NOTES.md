@@ -85,6 +85,17 @@ available to both route handlers and response middleware and allows metadata
 descriptors such as `summary/1`, `description/1`, `tags/1`, or other
 application-specific terms.
 
+Importing router objects can also optionally authorize or decorate routed
+requests after route matching and metadata annotation but before route handler
+dispatch using:
+
+- `authorize_routed_request(Request, Action)`
+
+The hook must return either `continue(Request)` or `respond(Response)`.
+Short-circuited responses still flow through response middleware and keep the
+routed request annotations such as `route/1`, `path_params/1`, and any route
+metadata properties.
+
 When a router object also implements the `open_api_provider_protocol`
 protocol, the imported category can automatically derive `operations/1` from
 `route/4`, `route_metadata/2`, and `route_produces/2`. Recognized

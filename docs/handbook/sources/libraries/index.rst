@@ -117,6 +117,7 @@ directory in the ``NOTES.md`` file.
    hook_objects
    html
    http
+   http_authenticate
    http_client
    http_cookies
    http_cors

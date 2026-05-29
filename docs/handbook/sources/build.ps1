@@ -168,6 +168,7 @@ Foreach-Object {
 (Get-Content ../../../library/hook_objects/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 (Get-Content ../../../library/html/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/html.rst
 (Get-Content ../../../library/http/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http.rst
+(Get-Content ../../../library/http_authenticate/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_authenticate.rst
 (Get-Content ../../../library/http_client/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_client.rst
 (Get-Content ../../../library/http_cookies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cookies.rst
 (Get-Content ../../../library/http_cors/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cors.rst

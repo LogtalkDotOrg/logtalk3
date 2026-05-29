@@ -1259,6 +1259,20 @@ To load any library (including developer tools, ports, and contributions), use t
    http_text_body_codec <http_text_body_codec_0>
    http_text_helpers <http_text_helpers_0>
 
+:ref:`http_authenticate <library_http_authenticate>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_authenticate <http_authenticate_0>
+   http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>
+   http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>
+   http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
+   http_server_basic_handler(Verifier,Handler,ProtectOptions) <http_server_basic_handler_3>
+
 :ref:`http_client <library_http_client>`
 ----------------------------------------
 
