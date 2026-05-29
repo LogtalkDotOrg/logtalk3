@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `hmac`
-========
+======
 
 The `hmac` library provides a portable implementation of HMAC
 (Keyed-Hashing for Message Authentication) as specified in RFC 2104:
@@ -40,6 +40,7 @@ protocol from the `hashes` library. Currently supported hash objects are:
 - `md5`
 - `sha1`
 - `sha256`
+- `sha512_256`
 - `sha3_224`
 - `sha3_256`
 - `sha3_384`

@@ -36,6 +36,11 @@ accept relative reference arguments.
 
 * ADDED: New `reader::line_to_bytes/2-3` library predicates.
 
+* ADDED: Support for the SHA-512/256 hash function to the `hashes` library.
+
+* ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
+library.
+
 * IMPROVED: The `tle_orbits` library position-only propagation and ground-track
 queries to avoid computing and discarding velocity values.
 

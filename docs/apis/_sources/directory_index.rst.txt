@@ -1031,6 +1031,7 @@ To load an entity, always load the library that includes it using the goal ``log
    sha3_256 <sha3_256_0>
    sha3_384 <sha3_384_0>
    sha3_512 <sha3_512_0>
+   sha512_256 <sha512_256_0>
    shake128(OutputBytes) <shake128_1>
    shake256(OutputBytes) <shake256_1>
    siphash_2_4 <siphash_2_4_0>

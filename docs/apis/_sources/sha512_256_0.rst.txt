@@ -1,20 +1,20 @@
-.. index:: single: hmac
-.. _hmac/0:
+.. index:: single: sha512_256
+.. _sha512_256/0:
 
 .. rst-class:: right
 
 **object**
 
-``hmac``
-========
+``sha512_256``
+==============
 
-HMAC (Keyed-Hash Message Authentication Code) implementation as specified in RFC 2104.
+SHA-512/256 hash function.
 
 | **Availability:** 
-|    ``logtalk_load(hmac(loader))``
+|    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:0:0
 | **Date:** 2026-05-29
 
 | **Compilation flags:**
@@ -22,16 +22,17 @@ HMAC (Keyed-Hash Message Authentication Code) implementation as specified in RFC
 
 
 | **Implements:**
-|    ``public`` :ref:`hmac_protocol <hmac_protocol/0>`
+|    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
 | **Uses:**
 |    :ref:`hash_common_32 <hash_common_32/0>`
+|    :ref:`hash_common_64 <hash_common_64/0>`
 |    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`hmac_protocol/0::digest/4`  :ref:`hmac_protocol/0::digest/5`  :ref:`hmac_protocol/0::hex_digest/4`  :ref:`hmac_protocol/0::hex_digest/5`  
+|     :ref:`hash_digest_protocol/0::block_size/1`  :ref:`hash_digest_protocol/0::digest/2`  :ref:`hash_digest_protocol/0::digest_size/1`  :ref:`hash_protocol/0::hash/2`  
 
 .. contents::
    :local:
@@ -59,5 +60,5 @@ Operators
 
 .. seealso::
 
-   :ref:`md5 <md5/0>`, :ref:`sha1 <sha1/0>`, :ref:`sha256 <sha256/0>`, :ref:`sha512_256 <sha512_256/0>`, :ref:`sha3_224 <sha3_224/0>`, :ref:`sha3_256 <sha3_256/0>`, :ref:`sha3_384 <sha3_384/0>`, :ref:`sha3_512 <sha3_512/0>`
+   :ref:`sha256 <sha256/0>`, :ref:`sha1 <sha1/0>`
 

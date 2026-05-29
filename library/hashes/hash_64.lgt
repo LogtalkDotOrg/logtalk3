@@ -969,6 +969,271 @@
 :- end_object.
 
 
+	:- object(sha512_256,
+		implements(hash_digest_protocol)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-05-29,
+			comment is 'SHA-512/256 hash function.',
+			see_also is [sha256, sha1]
+		]).
+
+		:- uses(hash_common_32, [
+			bytes_hex/2
+		]).
+
+		:- uses(hash_common_64, [
+			add64/3, and64/3, integer_to_big_endian_bytes64/2, not64/2, or64/3,
+			rol64/3, shl64/3, shr64/3, xor64/3
+		]).
+
+		digest(Bytes, DigestBytes) :-
+			sha512_256_pad(Bytes, PaddedBytes),
+			sha512_256_blocks(PaddedBytes, [0x22312194FC2BF72C,0x9F555FA3C84C64C2,0x2393B86B6F53B151,0x963877195940EABD,0x96283EE2A88EFFE3,0xBE5E1E2553863992,0x2B0199FC2C85B8AA,0x0EB72DDC81C52CA2], State),
+			sha512_256_state_bytes(State, DigestBytes).
+
+		digest_size(32).
+
+		block_size(128).
+
+		hash(Bytes, Hash) :-
+			digest(Bytes, DigestBytes),
+			bytes_hex(DigestBytes, Hash).
+
+		sha512_256_pad(Bytes, PaddedBytes) :-
+			list::length(Bytes, Length),
+			BitLength is Length * 8,
+			Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
+			sha512_256_zeros(Zeros, ZeroBytes),
+			sha512_256_length_bytes(BitLength, LengthBytes),
+			list::append(Bytes, [0x80| ZeroBytes], Bytes0),
+			list::append(Bytes0, LengthBytes, PaddedBytes).
+
+		sha512_256_zeros(0, []) :-
+			!.
+		sha512_256_zeros(Count, [0| Zeros]) :-
+			NextCount is Count - 1,
+			sha512_256_zeros(NextCount, Zeros).
+
+		sha512_256_length_bytes(BitLength, LengthBytes) :-
+			Two64 is 0x10000000000000000,
+			High is (BitLength // Two64) mod Two64,
+			Low is BitLength mod Two64,
+			integer_to_big_endian_bytes64(High, HighBytes),
+			integer_to_big_endian_bytes64(Low, LowBytes),
+			list::append(HighBytes, LowBytes, LengthBytes).
+
+		sha512_256_blocks([], State, State).
+		sha512_256_blocks([Byte| Bytes], State0, State) :-
+			list::take(128, [Byte| Bytes], Block, Rest),
+			sha512_256_block_words(Block, W0),
+			extend_sha512_256_words(16, W0, W),
+			sha512_256_compress(W, State0, State1),
+			sha512_256_blocks(Rest, State1, State).
+
+		sha512_256_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
+			sha512_256_rounds(0, W, A0, B0, C0, D0, E0, F0, G0, H0, A1, B1, C1, D1, E1, F1, G1, H1),
+			sha512_256_accumulate_state([A0,B0,C0,D0,E0,F0,G0,H0], [A1,B1,C1,D1,E1,F1,G1,H1], [A,B,C,D,E,F,G,H]).
+
+		sha512_256_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
+			!.
+		sha512_256_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
+			list::nth0(I, W, WI),
+			sha512_256_k(I, KI),
+			sha512_256_sigma1(E0, S1),
+			and64(E0, F0, EF),
+			not64(E0, NE),
+			and64(NE, G0, NG),
+			xor64(EF, NG, Ch),
+			add64(H0, S1, T1_0),
+			add64(T1_0, Ch, T1_1),
+			add64(T1_1, KI, T1_2),
+			add64(T1_2, WI, T1),
+			sha512_256_sigma0(A0, S0),
+			and64(A0, B0, AB),
+			and64(A0, C0, AC),
+			and64(B0, C0, BC),
+			or64(AB, AC, ABAC),
+			or64(ABAC, BC, Maj),
+			add64(S0, Maj, T2),
+			add64(T1, T2, A1),
+			add64(D0, T1, E1),
+			NextI is I + 1,
+			sha512_256_rounds(NextI, W, A1, A0, B0, C0, E1, E0, F0, G0, A, B, C, D, E, F, G, H).
+
+		sha512_256_accumulate_state([], [], []).
+		sha512_256_accumulate_state([StateWord| StateWords], [WorkingWord| WorkingWords], [Word| Words]) :-
+			add64(StateWord, WorkingWord, Word),
+			sha512_256_accumulate_state(StateWords, WorkingWords, Words).
+
+		sha512_256_sigma0(X, Sigma) :-
+			sha512_256_ror64(X, 28, A),
+			sha512_256_ror64(X, 34, B),
+			sha512_256_ror64(X, 39, C),
+			xor64(B, C, BC),
+			xor64(A, BC, Sigma).
+
+		sha512_256_sigma1(X, Sigma) :-
+			sha512_256_ror64(X, 14, A),
+			sha512_256_ror64(X, 18, B),
+			sha512_256_ror64(X, 41, C),
+			xor64(B, C, BC),
+			xor64(A, BC, Sigma).
+
+		sha512_256_gamma0(X, Gamma) :-
+			sha512_256_ror64(X, 1, A),
+			sha512_256_ror64(X, 8, B),
+			shr64(X, 7, C),
+			xor64(B, C, BC),
+			xor64(A, BC, Gamma).
+
+		sha512_256_gamma1(X, Gamma) :-
+			sha512_256_ror64(X, 19, A),
+			sha512_256_ror64(X, 61, B),
+			shr64(X, 6, C),
+			xor64(B, C, BC),
+			xor64(A, BC, Gamma).
+
+		sha512_256_ror64(Value, Shift, Rotated) :-
+			LeftShift is 64 - (Shift /\ 63),
+			rol64(Value, LeftShift, Rotated).
+
+		extend_sha512_256_words(80, Words, Words) :-
+			!.
+		extend_sha512_256_words(Index, Words0, Words) :-
+			I2 is Index - 2,
+			I7 is Index - 7,
+			I15 is Index - 15,
+			I16 is Index - 16,
+			list::nth0(I2, Words0, W2),
+			list::nth0(I7, Words0, W7),
+			list::nth0(I15, Words0, W15),
+			list::nth0(I16, Words0, W16),
+			sha512_256_gamma1(W2, G1),
+			sha512_256_gamma0(W15, G0),
+			add64(G1, W7, T0),
+			add64(T0, G0, T1),
+			add64(T1, W16, Word),
+			list::append(Words0, [Word], Words1),
+			NextIndex is Index + 1,
+			extend_sha512_256_words(NextIndex, Words1, Words).
+
+		sha512_256_state_bytes([W0, W1, W2, W3| _], DigestBytes) :-
+			integer_to_big_endian_bytes64(W0, B0),
+			integer_to_big_endian_bytes64(W1, B1),
+			integer_to_big_endian_bytes64(W2, B2),
+			integer_to_big_endian_bytes64(W3, B3),
+			list::append(B0, B1, T01),
+			list::append(B2, B3, T23),
+			list::append(T01, T23, DigestBytes).
+
+		sha512_256_block_words([], []).
+		sha512_256_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words]) :-
+			sha512_256_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+			sha512_256_block_words(Bytes, Words).
+
+		sha512_256_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
+			shl64(B0, 56, W0),
+			shl64(B1, 48, W1),
+			shl64(B2, 40, W2),
+			shl64(B3, 32, W3),
+			shl64(B4, 24, W4),
+			shl64(B5, 16, W5),
+			shl64(B6, 8, W6),
+			or64(W0, W1, T01),
+			or64(W2, W3, T23),
+			or64(W4, W5, T45),
+			or64(W6, B7, T67),
+			or64(T01, T23, T0123),
+			or64(T45, T67, T4567),
+			or64(T0123, T4567, Word).
+
+		sha512_256_k( 0, 0x428A2F98D728AE22).
+		sha512_256_k( 1, 0x7137449123EF65CD).
+		sha512_256_k( 2, 0xB5C0FBCFEC4D3B2F).
+		sha512_256_k( 3, 0xE9B5DBA58189DBBC).
+		sha512_256_k( 4, 0x3956C25BF348B538).
+		sha512_256_k( 5, 0x59F111F1B605D019).
+		sha512_256_k( 6, 0x923F82A4AF194F9B).
+		sha512_256_k( 7, 0xAB1C5ED5DA6D8118).
+		sha512_256_k( 8, 0xD807AA98A3030242).
+		sha512_256_k( 9, 0x12835B0145706FBE).
+		sha512_256_k(10, 0x243185BE4EE4B28C).
+		sha512_256_k(11, 0x550C7DC3D5FFB4E2).
+		sha512_256_k(12, 0x72BE5D74F27B896F).
+		sha512_256_k(13, 0x80DEB1FE3B1696B1).
+		sha512_256_k(14, 0x9BDC06A725C71235).
+		sha512_256_k(15, 0xC19BF174CF692694).
+		sha512_256_k(16, 0xE49B69C19EF14AD2).
+		sha512_256_k(17, 0xEFBE4786384F25E3).
+		sha512_256_k(18, 0x0FC19DC68B8CD5B5).
+		sha512_256_k(19, 0x240CA1CC77AC9C65).
+		sha512_256_k(20, 0x2DE92C6F592B0275).
+		sha512_256_k(21, 0x4A7484AA6EA6E483).
+		sha512_256_k(22, 0x5CB0A9DCBD41FBD4).
+		sha512_256_k(23, 0x76F988DA831153B5).
+		sha512_256_k(24, 0x983E5152EE66DFAB).
+		sha512_256_k(25, 0xA831C66D2DB43210).
+		sha512_256_k(26, 0xB00327C898FB213F).
+		sha512_256_k(27, 0xBF597FC7BEEF0EE4).
+		sha512_256_k(28, 0xC6E00BF33DA88FC2).
+		sha512_256_k(29, 0xD5A79147930AA725).
+		sha512_256_k(30, 0x06CA6351E003826F).
+		sha512_256_k(31, 0x142929670A0E6E70).
+		sha512_256_k(32, 0x27B70A8546D22FFC).
+		sha512_256_k(33, 0x2E1B21385C26C926).
+		sha512_256_k(34, 0x4D2C6DFC5AC42AED).
+		sha512_256_k(35, 0x53380D139D95B3DF).
+		sha512_256_k(36, 0x650A73548BAF63DE).
+		sha512_256_k(37, 0x766A0ABB3C77B2A8).
+		sha512_256_k(38, 0x81C2C92E47EDAEE6).
+		sha512_256_k(39, 0x92722C851482353B).
+		sha512_256_k(40, 0xA2BFE8A14CF10364).
+		sha512_256_k(41, 0xA81A664BBC423001).
+		sha512_256_k(42, 0xC24B8B70D0F89791).
+		sha512_256_k(43, 0xC76C51A30654BE30).
+		sha512_256_k(44, 0xD192E819D6EF5218).
+		sha512_256_k(45, 0xD69906245565A910).
+		sha512_256_k(46, 0xF40E35855771202A).
+		sha512_256_k(47, 0x106AA07032BBD1B8).
+		sha512_256_k(48, 0x19A4C116B8D2D0C8).
+		sha512_256_k(49, 0x1E376C085141AB53).
+		sha512_256_k(50, 0x2748774CDF8EEB99).
+		sha512_256_k(51, 0x34B0BCB5E19B48A8).
+		sha512_256_k(52, 0x391C0CB3C5C95A63).
+		sha512_256_k(53, 0x4ED8AA4AE3418ACB).
+		sha512_256_k(54, 0x5B9CCA4F7763E373).
+		sha512_256_k(55, 0x682E6FF3D6B2B8A3).
+		sha512_256_k(56, 0x748F82EE5DEFB2FC).
+		sha512_256_k(57, 0x78A5636F43172F60).
+		sha512_256_k(58, 0x84C87814A1F0AB72).
+		sha512_256_k(59, 0x8CC702081A6439EC).
+		sha512_256_k(60, 0x90BEFFFA23631E28).
+		sha512_256_k(61, 0xA4506CEBDE82BDE9).
+		sha512_256_k(62, 0xBEF9A3F7B2C67915).
+		sha512_256_k(63, 0xC67178F2E372532B).
+		sha512_256_k(64, 0xCA273ECEEA26619C).
+		sha512_256_k(65, 0xD186B8C721C0C207).
+		sha512_256_k(66, 0xEADA7DD6CDE0EB1E).
+		sha512_256_k(67, 0xF57D4F7FEE6ED178).
+		sha512_256_k(68, 0x06F067AA72176FBA).
+		sha512_256_k(69, 0x0A637DC5A2C898A6).
+		sha512_256_k(70, 0x113F9804BEF90DAE).
+		sha512_256_k(71, 0x1B710B35131C471B).
+		sha512_256_k(72, 0x28DB77F523047D84).
+		sha512_256_k(73, 0x32CAAB7B40C72493).
+		sha512_256_k(74, 0x3C9EBE0A15C9BEBC).
+		sha512_256_k(75, 0x431D67C49C100D4C).
+		sha512_256_k(76, 0x4CC5D4BECB3E42B6).
+		sha512_256_k(77, 0x597F299CFC657E2A).
+		sha512_256_k(78, 0x5FCB6FAB3AD6FAEC).
+		sha512_256_k(79, 0x6C44198C4A475817).
+
+	:- end_object.
+
+
 :- object(sha256,
 	implements(hash_digest_protocol)).
 

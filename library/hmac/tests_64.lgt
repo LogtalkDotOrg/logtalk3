@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-05-29,
 		comment is 'Unit tests for the "hmac" library on unbounded integer backends.'
 	]).
 
@@ -59,6 +59,12 @@
 		repeat_byte(20, 0x0c, Key),
 		atom_codes('Test With Truncation', Message),
 		hex_digest(sha256, Key, Message, 16, HexDigest).
+
+	% Reproducible reference value generated with Python's standard hashlib/hmac sha512_256 implementation.
+	test(sha512_256_python_case_1_hex_digest, deterministic(HexDigest == '9f9126c3d9c3c330d760425ca8a217e31feae31bfe70196ff81642b868402eab')) :-
+		repeat_byte(20, 0x0b, Key),
+		atom_codes('Hi There', Message),
+		hex_digest(sha512_256, Key, Message, HexDigest).
 
 	test(sha3_224_case_1_hex_digest, deterministic(HexDigest == '3b16546bbc7be2706a031dcafd56373d9884367641d8c59af3c860f7')) :-
 		repeat_byte(20, 0x0b, Key),

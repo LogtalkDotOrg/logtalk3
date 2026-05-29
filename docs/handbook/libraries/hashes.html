@@ -338,8 +338,8 @@ commonly used hashing algorithms. All hash objects implement the
 takes a list of bytes and returns the computed hash as a lowercase
 hexadecimal atom.</p>
 <p>The fixed-size cryptographic hash objects that can be safely used with
-HMAC (<code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>, and <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>) also implement the
+HMAC (<code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>, and <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>) also implement the
 <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol. This protocol adds <code class="docutils literal notranslate"><span class="pre">digest/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">digest_size/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">block_size/1</span></code> predicates so that libraries
 such as <code class="docutils literal notranslate"><span class="pre">hmac</span></code> can compute keyed digests without duplicating hash
@@ -375,13 +375,14 @@ function internals.</p>
 <li><p>MD5 (<code class="docutils literal notranslate"><span class="pre">md5</span></code>)</p></li>
 <li><p>SHA1 (<code class="docutils literal notranslate"><span class="pre">sha1</span></code>)</p></li>
 <li><p>SHA256 (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>)</p></li>
+<li><p>SHA-512/256 (<code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>)</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">djb2_64</span></code>, <code class="docutils literal notranslate"><span class="pre">sdbm_64</span></code>, <code class="docutils literal notranslate"><span class="pre">fnv1a_64</span></code>, <code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code>,
 <code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>, <code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>,
 <code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>, <code class="docutils literal notranslate"><span class="pre">shake128(OutputBytes)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">shake256(OutputBytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, and <code class="docutils literal notranslate"><span class="pre">sha256</span></code> objects are only
-loaded on backend Prolog compilers supporting unbounded integer
-arithmetic.</p>
+<code class="docutils literal notranslate"><span class="pre">shake256(OutputBytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, and <code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>
+objects are only loaded on backend Prolog compilers supporting unbounded
+integer arithmetic.</p>
 <p>The SHAKE objects are parametric extensible-output functions. Pass the
 number of output bytes to generate when constructing the object.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">crc32_reflected(Polynomial)</span></code> object implements a reflected CRC-32
