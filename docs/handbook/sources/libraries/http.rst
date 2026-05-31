@@ -11,6 +11,25 @@ frequently used headers.
 
 The library predicates are currently defined in the ``http`` object.
 
+Layering
+--------
+
+Use the ``http`` library as the base of the current HTTP and API stack:
+
+- Start here when you need normalized ``request/6`` and ``response/5``
+  terms, shared protocols, body codecs, or wire parsing and generation.
+- Add `http_server <../http_server/NOTES.md>`__ or
+  `http_client <../http_client/NOTES.md>`__ when you need transport-side
+  orchestration on top of those normalized messages.
+- Add `http_router <../http_router/NOTES.md>`__ when you want
+  declarative path-template and method dispatch over handler objects
+  implementing the ``http_handler_protocol`` protocol.
+- Add `rest <../rest/NOTES.md>`__ when you want a higher-level authoring
+  layer on top of ``http_router``.
+- Pair any of those layers with `open_api <../open_api/NOTES.md>`__ when
+  you want OpenAPI document derivation or request and response contract
+  validation.
+
 API documentation
 -----------------
 

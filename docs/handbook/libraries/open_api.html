@@ -236,6 +236,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nmea.html"><code class="docutils literal notranslate"><span class="pre">nmea</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nmf_projection.html"><code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">open_api</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#layering">Layering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
@@ -360,6 +361,26 @@ documents. It builds on top of the <code class="docutils literal notranslate"><s
 <p>This initial implementation focuses on deriving OpenAPI documents from
 objects implementing the <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code> protocol using a
 small, portable descriptor vocabulary.</p>
+<section id="layering">
+<h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">open_api</span></code> is a companion library for the HTTP stack rather than a
+transport or dispatch layer:</p>
+<ul class="simple">
+<li><p>Use it standalone when you only need to parse, generate, or
+structurally validate OpenAPI documents.</p></li>
+<li><p>Pair it with <a class="reference external" href="../http/NOTES.md">http</a> when you need request or
+response contract validation against normalized HTTP terms or wire
+sources.</p></li>
+<li><p>Pair it with <a class="reference external" href="../http_router/NOTES.md">http_router</a> when router
+objects expose <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code> metadata derived from
+<code class="docutils literal notranslate"><span class="pre">route/4</span></code>, <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code>.</p></li>
+<li><p>Pair it with <a class="reference external" href="../rest/NOTES.md">rest</a> when you want the same
+validation and document derivation over higher-level endpoint
+descriptors built on top of <code class="docutils literal notranslate"><span class="pre">http_router</span></code>.</p></li>
+<li><p>Use it directly with custom provider objects when your API description
+source is not a router or REST object.</p></li>
+</ul>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

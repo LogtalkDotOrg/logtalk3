@@ -15,6 +15,24 @@ hooks from higher-level endpoint descriptors, provides small request and
 response helpers, and normalizes simple action result terms into HTTP
 responses.
 
+Layering
+--------
+
+``rest`` is the highest-level authoring layer in the current HTTP stack:
+
+- Start with `http <../http/NOTES.md>`__ for normalized HTTP messages
+  and with `http_router <../http_router/NOTES.md>`__ for declarative
+  routing.
+- Use ``rest`` when you want to describe endpoints with ``endpoint/5``,
+  keep the inherited ``handle/2`` entry point, and return small result
+  terms instead of building every response manually.
+- Stay with `http_router <../http_router/NOTES.md>`__ when you need
+  direct control over ``route/4``, custom handler predicates, or router
+  hooks without the higher-level endpoint layer.
+- Pair REST applications with `open_api <../open_api/NOTES.md>`__ when
+  you want derived OpenAPI documents or opt-in request and response
+  contract validation.
+
 API documentation
 -----------------
 

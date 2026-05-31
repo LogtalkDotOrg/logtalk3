@@ -267,6 +267,7 @@
 <li class="toctree-l2"><a class="reference internal" href="regression_tree.html"><code class="docutils literal notranslate"><span class="pre">regression_tree</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="regularized_bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry_ranker</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">rest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#layering">Layering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -364,6 +365,24 @@ logic.</p>
 hooks from higher-level endpoint descriptors, provides small request and
 response helpers, and normalizes simple action result terms into HTTP
 responses.</p>
+<section id="layering">
+<h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">rest</span></code> is the highest-level authoring layer in the current HTTP stack:</p>
+<ul class="simple">
+<li><p>Start with <a class="reference external" href="../http/NOTES.md">http</a> for normalized HTTP messages
+and with <a class="reference external" href="../http_router/NOTES.md">http_router</a> for declarative
+routing.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">rest</span></code> when you want to describe endpoints with <code class="docutils literal notranslate"><span class="pre">endpoint/5</span></code>,
+keep the inherited <code class="docutils literal notranslate"><span class="pre">handle/2</span></code> entry point, and return small result
+terms instead of building every response manually.</p></li>
+<li><p>Stay with <a class="reference external" href="../http_router/NOTES.md">http_router</a> when you need
+direct control over <code class="docutils literal notranslate"><span class="pre">route/4</span></code>, custom handler predicates, or router
+hooks without the higher-level endpoint layer.</p></li>
+<li><p>Pair REST applications with <a class="reference external" href="../open_api/NOTES.md">open_api</a> when
+you want derived OpenAPI documents or opt-in request and response
+contract validation.</p></li>
+</ul>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

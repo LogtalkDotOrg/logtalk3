@@ -159,6 +159,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#layering">Layering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -360,6 +361,25 @@ protocols, wire parsing and generation for the message start-lines,
 headers, and bodies, plus semantic normalization for a core set of
 frequently used headers.</p>
 <p>The library predicates are currently defined in the <code class="docutils literal notranslate"><span class="pre">http</span></code> object.</p>
+<section id="layering">
+<h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">http</span></code> library as the base of the current HTTP and API stack:</p>
+<ul class="simple">
+<li><p>Start here when you need normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> and <code class="docutils literal notranslate"><span class="pre">response/5</span></code>
+terms, shared protocols, body codecs, or wire parsing and generation.</p></li>
+<li><p>Add <a class="reference external" href="../http_server/NOTES.md">http_server</a> or
+<a class="reference external" href="../http_client/NOTES.md">http_client</a> when you need transport-side
+orchestration on top of those normalized messages.</p></li>
+<li><p>Add <a class="reference external" href="../http_router/NOTES.md">http_router</a> when you want
+declarative path-template and method dispatch over handler objects
+implementing the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol.</p></li>
+<li><p>Add <a class="reference external" href="../rest/NOTES.md">rest</a> when you want a higher-level authoring
+layer on top of <code class="docutils literal notranslate"><span class="pre">http_router</span></code>.</p></li>
+<li><p>Pair any of those layers with <a class="reference external" href="../open_api/NOTES.md">open_api</a> when
+you want OpenAPI document derivation or request and response contract
+validation.</p></li>
+</ul>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

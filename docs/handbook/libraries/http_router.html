@@ -169,6 +169,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#layering">Layering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -358,6 +359,33 @@ on top of the <code class="docutils literal notranslate"><span class="pre">http<
 that router objects can implement the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol
 directly while reusing common method dispatch and path-template matching
 logic.</p>
+<section id="layering">
+<h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">http_router</span></code> sits between the normalized <code class="docutils literal notranslate"><span class="pre">http</span></code> message layer and
+higher-level API authoring helpers:</p>
+<ul class="simple">
+<li><p>Use <a class="reference external" href="../http/NOTES.md">http</a> directly when you only need normalized
+messages, parsers, generators, or low-level handlers.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">http_router</span></code> when you want the handler object to keep exposing
+<code class="docutils literal notranslate"><span class="pre">handle/2</span></code> while route matching, metadata annotation, middleware,
+and content negotiation are derived from <code class="docutils literal notranslate"><span class="pre">route/4</span></code> declarations.</p></li>
+<li><p>Add <a class="reference external" href="../rest/NOTES.md">rest</a> when <code class="docutils literal notranslate"><span class="pre">route/4</span></code> is still too
+low-level and you prefer endpoint descriptors plus small normalized
+result terms.</p></li>
+<li><p>Pair router objects with <a class="reference external" href="../open_api/NOTES.md">open_api</a> when you
+want the route declarations and metadata to derive OpenAPI operations
+automatically.</p></li>
+<li><p>Add companion libraries such as
+<a class="reference external" href="../http_parameters/NOTES.md">http_parameters</a>,
+<a class="reference external" href="../http_cors/NOTES.md">http_cors</a>,
+<a class="reference external" href="../http_htmx/NOTES.md">http_htmx</a>,
+<a class="reference external" href="../http_session/NOTES.md">http_session</a>,
+<a class="reference external" href="../http_static_files/NOTES.md">http_static_files</a>, and
+<a class="reference external" href="../http_directory_listing/NOTES.md">http_directory_listing</a> when
+you need parameter extraction, middleware helpers, sessions, or
+static-file routing on the same dispatch layer.</p></li>
+</ul>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

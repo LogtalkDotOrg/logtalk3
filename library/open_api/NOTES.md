@@ -30,6 +30,26 @@ objects implementing the `open_api_provider_protocol` protocol using a small,
 portable descriptor vocabulary.
 
 
+Layering
+--------
+
+`open_api` is a companion library for the HTTP stack rather than a transport or
+dispatch layer:
+
+- Use it standalone when you only need to parse, generate, or structurally
+  validate OpenAPI documents.
+- Pair it with [http](../http/NOTES.md) when you need request or response
+  contract validation against normalized HTTP terms or wire sources.
+- Pair it with [http_router](../http_router/NOTES.md) when router objects
+  expose `open_api_provider_protocol` metadata derived from `route/4`,
+  `route_metadata/2`, and `route_produces/2`.
+- Pair it with [rest](../rest/NOTES.md) when you want the same validation and
+  document derivation over higher-level endpoint descriptors built on top of
+  `http_router`.
+- Use it directly with custom provider objects when your API description source
+  is not a router or REST object.
+
+
 API documentation
 -----------------
 
