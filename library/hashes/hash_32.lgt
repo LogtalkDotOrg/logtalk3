@@ -376,28 +376,25 @@
 	implements(hash_digest_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-15,
+		date is 2026-06-01,
 		comment is 'MD5 hash function.',
 		see_also is [sha1, sha256]
 	]).
 
 	:- uses(hash_common_32, [
-		add32/3, add32/5, bytes_hex/2, integer_to_little_endian_bytes32/2, little_endian_word32/2, pad_md/4,
+		add32/3, add32/5, bytes_hex/2, integer_to_little_endian_bytes32/3, little_endian_word32/2, pad_md/4,
 		rol32/3
 	]).
 
 	digest(Bytes, DigestBytes) :-
 		pad_md(little, Bytes, 8, PaddedBytes),
 		md5_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, A, B, C, D),
-		integer_to_little_endian_bytes32(A, BytesA),
-		integer_to_little_endian_bytes32(B, BytesB),
-		integer_to_little_endian_bytes32(C, BytesC),
-		integer_to_little_endian_bytes32(D, BytesD),
-		list::append(BytesA, BytesB, BytesAB),
-		list::append(BytesC, BytesD, BytesCD),
-		list::append(BytesAB, BytesCD, DigestBytes).
+		integer_to_little_endian_bytes32(A, DigestBytes, BytesB),
+		integer_to_little_endian_bytes32(B, BytesB, BytesC),
+		integer_to_little_endian_bytes32(C, BytesC, BytesD),
+		integer_to_little_endian_bytes32(D, BytesD, []).
 
 	digest_size(16).
 

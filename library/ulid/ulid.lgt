@@ -23,14 +23,18 @@
 	implements(ulid_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-06-01,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
 		see_also is [ulid, ulid_types, cuid2(_,_,_), ids(_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), uuid(_)]
+	]).
+
+	:- uses(crypto, [
+		random_bytes/2
 	]).
 
 	generate(ULID) :-
@@ -119,23 +123,6 @@
 	chars_to_codes([Char| Chars], [Code| Codes]) :-
 		char_code(Char, Code),
 		chars_to_codes(Chars, Codes).
-
-	random_bytes(N, Bytes) :-
-		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
-		list::length(Bytes, N),
-		read_random_bytes(Bytes, Stream),
-		close(Stream),
-		!.
-	random_bytes(N, Bytes) :-
-		os::wall_time(Time),
-		Seed is round(Time),
-		fast_random::randomize(Seed),
-		fast_random::sequence(N, 0, 255, Bytes).
-
-	read_random_bytes([], _).
-	read_random_bytes([Byte| Bytes], Stream) :-
-		get_byte(Stream, Byte),
-		read_random_bytes(Bytes, Stream).
 
 	% Crockford's Base32 encoding
 	code( 0, 0'0).

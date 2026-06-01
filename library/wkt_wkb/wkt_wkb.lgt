@@ -23,11 +23,15 @@
 	implements(wkt_wkb_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-06-01,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
 		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
+	]).
+
+	:- uses(crypto, [
+		hex_bytes/2
 	]).
 
 	:- uses(reader, [
@@ -1470,49 +1474,21 @@
 		codes_to_chars(Codes, Chars).
 
 	hex_codes_bytes([], []).
-	hex_codes_bytes([Code| Codes], Bytes) :-
+	hex_codes_bytes(Codes0, Bytes) :-
+		remove_hex_whitespace(Codes0, Codes),
+		atom_codes(Hex, Codes),
+		catch(hex_bytes(Hex, Bytes), error(_, _), fail).
+
+	remove_hex_whitespace([], []).
+	remove_hex_whitespace([Code| Codes], Bytes) :-
 		whitespace_code(Code),
 		!,
-		hex_codes_bytes(Codes, Bytes).
-	hex_codes_bytes([HighCode, LowCode| Codes], [Byte| Bytes]) :-
-		hex_digit_value(HighCode, High),
-		hex_digit_value(LowCode, Low),
-		Byte is (High << 4) \/ Low,
-		hex_codes_bytes(Codes, Bytes).
-
-	hex_digit_value(Code, Value) :-
-		0'0 =< Code,
-		Code =< 0'9,
-		!,
-		Value is Code - 0'0.
-	hex_digit_value(Code, Value) :-
-		0'a =< Code,
-		Code =< 0'f,
-		!,
-		Value is Code - 0'a + 10.
-	hex_digit_value(Code, Value) :-
-		0'A =< Code,
-		Code =< 0'F,
-		Value is Code - 0'A + 10.
+		remove_hex_whitespace(Codes, Bytes).
+	remove_hex_whitespace([Code| Codes], [Code| Bytes]) :-
+		remove_hex_whitespace(Codes, Bytes).
 
 	bytes_hex(Bytes, Hex) :-
-		bytes_hex_codes(Bytes, Codes),
-		atom_codes(Hex, Codes).
-
-	bytes_hex_codes([], []).
-	bytes_hex_codes([Byte| Bytes], [HighCode, LowCode| Codes]) :-
-		High is (Byte >> 4) /\ 0x0f,
-		Low is Byte /\ 0x0f,
-		hex_digit_code(High, HighCode),
-		hex_digit_code(Low, LowCode),
-		bytes_hex_codes(Bytes, Codes).
-
-	hex_digit_code(Value, Code) :-
-		Value < 10,
-		!,
-		Code is Value + 0'0.
-	hex_digit_code(Value, Code) :-
-		Code is Value - 10 + 0'a.
+		hex_bytes(Hex, Bytes).
 
 	bytes_to_unsigned_integer(Bytes, Integer) :-
 		bytes_to_unsigned_integer(Bytes, 0, Integer).

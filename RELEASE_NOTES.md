@@ -22,14 +22,17 @@ RELEASE NOTES
 =============
 
 
-3.101.0 - May ??, 2026
-======================
+3.101.0 - June ??, 2026
+=======================
 
 Library
 -------
 
 * CHANGED: The `url` library `generate/2` and `normalize/2` predicates to also
 accept relative reference arguments.
+
+* ADDED: New `crypto` library providing transport-neutral cryptographic helper
+predicates.
 
 * ADDED: New `http`, `http_client`, `http_cookies`, `http_multipart`,
 `http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
@@ -46,6 +49,9 @@ accept relative reference arguments.
 * ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
 library.
 
+* IMPROVED: The `hashes` library implementation of the SHA1-1, SHA-256, and
+SHA-512/256 hash functions.
+
 * IMPROVED: The `tle_orbits` library position-only propagation and ground-track
 queries to avoid computing and discarding velocity values.
 
@@ -55,6 +61,9 @@ queries to avoid computing and discarding velocity values.
 `ica_projection`, `fp_growth_pattern_miner`, `gaussian_process_regression`,
 `lasso_regression`, `string_distance`, `colley_ranker`, `hodge_rank`,
 `massey_ranker`, and `regression_protocols` libraries.
+
+* UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
+libraries to use the new `crypto` library.
 
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).

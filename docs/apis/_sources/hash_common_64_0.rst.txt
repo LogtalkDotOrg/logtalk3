@@ -14,8 +14,8 @@ Auxiliary predicates for the hashes library 64-bit algorithms.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Version:** 1:1:0
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -243,6 +243,25 @@ Shifts a 64-bit word right by the given number of bits after masking the input.
 |    ``shr64(Value,Shift,Shifted)``
 | **Mode and number of proofs:**
 |    ``shr64(+integer,+integer,-integer)`` - ``one``
+
+
+------------
+
+.. index:: integer_to_big_endian_bytes64/3
+.. _hash_common_64/0::integer_to_big_endian_bytes64/3:
+
+``integer_to_big_endian_bytes64/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a 64-bit word into eight bytes in big-endian order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_big_endian_bytes64(Integer,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``integer_to_big_endian_bytes64(+integer,-list(integer),-variable)`` - ``one``
 
 
 ------------

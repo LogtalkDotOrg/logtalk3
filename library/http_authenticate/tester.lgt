@@ -22,6 +22,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
+	logtalk_load(crypto(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load('../http/loader.lgt'),

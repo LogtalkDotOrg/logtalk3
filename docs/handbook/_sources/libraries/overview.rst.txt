@@ -35,7 +35,7 @@ multiple areas):
   ``ccsds_time_codes``, ``ccsds_time_fields``,
 - Text and NLP: ``character_sets``, ``grammars``, ``stemming``,
   ``string_distance``, and ``strings``.
-- Web and HTTP: ``html``, ``mime_types``, ``url``, ``http``,
+- Web and HTTP APIs: ``html``, ``mime_types``, ``url``, ``http``,
   ``http_authenticate``, ``http_client``, ``http_cookies``,
   ``http_cors``, ``http_digest``, ``http_directory_listing``,
   ``http_htmx``, ``http_multipart``, ``http_parameters``,
@@ -54,7 +54,7 @@ multiple areas):
 - System and external integration: ``git``, ``java``, ``os``, and
   ``sockets``.
 - Logic and symbolic computing: ``datalog``.
-- Security and integrity: ``hashes`` and ``hmac``.
+- Security and integrity: ``crypto``, ``hashes``, and ``hmac``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
 - Mathematics, statistics, and optimization: ``ieee_754``,
   ``linear_algebra``, ``simulated_annealing``, and ``statistics``.

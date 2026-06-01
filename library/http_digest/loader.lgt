@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(crypto(loader)),
 	logtalk_load(dates(loader)),
 	logtalk_load(hashes(loader)),
 	logtalk_load(hmac(loader)),

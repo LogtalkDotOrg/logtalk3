@@ -17,8 +17,8 @@ Universally unique identifier (UUID) generator.
 |    ``logtalk_load(uuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:9:0
-| **Date:** 2026-04-08
+| **Version:** 0:9:1
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,7 +27,7 @@ Universally unique identifier (UUID) generator.
 | **Implements:**
 |    ``public`` :ref:`uuid_protocol <uuid_protocol/0>`
 | **Uses:**
-|    :ref:`fast_random <fast_random/0>`
+|    :ref:`crypto <crypto/0>`
 |    :ref:`iso8601 <iso8601/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`

@@ -22,9 +22,9 @@
 :- object(hash_common_64).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-06-01,
 		comment is 'Auxiliary predicates for the hashes library 64-bit algorithms.'
 	]).
 
@@ -105,6 +105,13 @@
 		argnames is ['Value', 'Shift', 'Shifted']
 	]).
 
+	:- public(integer_to_big_endian_bytes64/3).
+	:- mode(integer_to_big_endian_bytes64(+integer, -list(integer), -variable), one).
+	:- info(integer_to_big_endian_bytes64/3, [
+		comment is 'Encodes a 64-bit word into eight bytes in big-endian order.',
+		argnames is ['Integer', 'Bytes', 'Tail']
+	]).
+
 	:- public(integer_to_big_endian_bytes64/2).
 	:- mode(integer_to_big_endian_bytes64(+integer, -list(integer)), one).
 	:- info(integer_to_big_endian_bytes64/2, [
@@ -159,7 +166,7 @@
 		Mask is 0xFFFFFFFFFFFFFFFF,
 		Shifted is (Value /\ Mask) >> Shift.
 
-	integer_to_big_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7]) :-
+	integer_to_big_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7| Tail], Tail) :-
 		B0 is (Integer >> 56) /\ 0xFF,
 		B1 is (Integer >> 48) /\ 0xFF,
 		B2 is (Integer >> 40) /\ 0xFF,
@@ -168,6 +175,9 @@
 		B5 is (Integer >> 16) /\ 0xFF,
 		B6 is (Integer >> 8) /\ 0xFF,
 		B7 is Integer /\ 0xFF.
+
+	integer_to_big_endian_bytes64(Integer, Bytes) :-
+		integer_to_big_endian_bytes64(Integer, Bytes, []).
 
 	fixed_hex_atom(Digits, Integer, Hex) :-
 		fixed_hex_codes(Digits, Integer, Codes),

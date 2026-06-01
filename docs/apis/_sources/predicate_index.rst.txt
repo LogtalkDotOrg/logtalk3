@@ -9639,6 +9639,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`command_line_options <command_line_options/0::help/3>`
 
+``hex_bytes/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::hex_bytes/2>`
+
 ``hex_digest/4``
 ----------------
 
@@ -9708,6 +9718,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::hgetall/3>`
+
+``hkdf/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::hkdf/5>`
 
 ``hkeys/3``
 -----------
@@ -10476,6 +10496,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_32 <hash_common_32/0::integer_to_big_endian_bytes32/2>`
 
+``integer_to_big_endian_bytes32/3``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::integer_to_big_endian_bytes32/3>`
+
 ``integer_to_big_endian_bytes64/2``
 -----------------------------------
 
@@ -10486,6 +10516,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`hash_common_64 <hash_common_64/0::integer_to_big_endian_bytes64/2>`
 
+``integer_to_big_endian_bytes64/3``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_64 <hash_common_64/0::integer_to_big_endian_bytes64/3>`
+
 ``integer_to_little_endian_bytes32/2``
 --------------------------------------
 
@@ -10495,6 +10535,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`hash_common_32 <hash_common_32/0::integer_to_little_endian_bytes32/2>`
+
+``integer_to_little_endian_bytes32/3``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`hash_common_32 <hash_common_32/0::integer_to_little_endian_bytes32/3>`
 
 ``internal_error/2``
 --------------------
@@ -17129,6 +17179,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_multipart <http_multipart/0::parts/2>`
 
+``password_hash/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::password_hash/4>`
+
 ``patch/4``
 -----------
 
@@ -17211,6 +17271,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_websocket <http_websocket/0::payload/2>`
 * :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::payload/2>`
+
+``pbkdf2/6``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::pbkdf2/6>`
 
 ``peek_back/2``
 ---------------
@@ -18819,6 +18889,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::random_arrangement/3>`
+
+``random_bytes/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::random_bytes/2>`
 
 ``random_cartesian_tuple/2``
 ----------------------------
@@ -21436,6 +21516,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::secondary_header_time/3>`
+
+``secure_compare/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::secure_compare/2>`
 
 ``security/1``
 --------------
@@ -25606,6 +25696,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frames <ccsds_frames/0::verify_fecf/1>`
 * :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::verify_fecf/1>`
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::verify_fecf/1>`
+
+``verify_password_hash/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::verify_password_hash/2>`
 
 ``version/1``
 -------------

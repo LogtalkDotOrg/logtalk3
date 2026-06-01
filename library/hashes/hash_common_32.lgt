@@ -22,9 +22,9 @@
 :- object(hash_common_32).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-06-01,
 		comment is 'Auxiliary predicates for the hashes library 32-bit algorithms.'
 	]).
 
@@ -105,11 +105,25 @@
 		argnames is ['Bytes', 'Word']
 	]).
 
+	:- public(integer_to_little_endian_bytes32/3).
+	:- mode(integer_to_little_endian_bytes32(+integer, -list(integer), -variable), one).
+	:- info(integer_to_little_endian_bytes32/3, [
+		comment is 'Encodes a 32-bit word into four bytes in little-endian order.',
+		argnames is ['Integer', 'Bytes', 'Tail']
+	]).
+
 	:- public(integer_to_little_endian_bytes32/2).
 	:- mode(integer_to_little_endian_bytes32(+integer, -list(integer)), one).
 	:- info(integer_to_little_endian_bytes32/2, [
 		comment is 'Encodes a 32-bit word into four bytes in little-endian order.',
 		argnames is ['Integer', 'Bytes']
+	]).
+
+	:- public(integer_to_big_endian_bytes32/3).
+	:- mode(integer_to_big_endian_bytes32(+integer, -list(integer), -variable), one).
+	:- info(integer_to_big_endian_bytes32/3, [
+		comment is 'Encodes a 32-bit word into four bytes in big-endian order.',
+		argnames is ['Integer', 'Bytes', 'Tail']
 	]).
 
 	:- public(integer_to_big_endian_bytes32/2).
@@ -175,40 +189,44 @@
 	big_endian_word32([B0, B1, B2, B3], Word) :-
 		Word is (B0 << 24) \/ (B1 << 16) \/ (B2 << 8) \/ B3.
 
-	integer_to_little_endian_bytes32(Integer, [B0, B1, B2, B3]) :-
+	integer_to_little_endian_bytes32(Integer, [B0, B1, B2, B3| Tail], Tail) :-
 		B0 is Integer /\ 0xFF,
 		B1 is (Integer >> 8) /\ 0xFF,
 		B2 is (Integer >> 16) /\ 0xFF,
 		B3 is (Integer >> 24) /\ 0xFF.
 
-	integer_to_big_endian_bytes32(Integer, [B0, B1, B2, B3]) :-
+	integer_to_little_endian_bytes32(Integer, Bytes) :-
+		integer_to_little_endian_bytes32(Integer, Bytes, []).
+
+	integer_to_big_endian_bytes32(Integer, [B0, B1, B2, B3| Tail], Tail) :-
 		B0 is (Integer >> 24) /\ 0xFF,
 		B1 is (Integer >> 16) /\ 0xFF,
 		B2 is (Integer >> 8) /\ 0xFF,
 		B3 is Integer /\ 0xFF.
 
+	integer_to_big_endian_bytes32(Integer, Bytes) :-
+		integer_to_big_endian_bytes32(Integer, Bytes, []).
+
 	pad_md(little, Bytes, LengthFieldBytes, PaddedBytes) :-
 		list::length(Bytes, Length),
 		BitLength is Length * 8,
 		Zeros is (56 - ((Length + 1) mod 64) + 64) mod 64,
-		zeros(Zeros, ZeroBytes),
+		zeros(Zeros, ZeroBytes, LengthBytes),
 		little_endian_length_bytes(BitLength, LengthFieldBytes, LengthBytes),
-		list::append(Bytes, [0x80| ZeroBytes], Bytes0),
-		list::append(Bytes0, LengthBytes, PaddedBytes).
+		list::append(Bytes, [0x80| ZeroBytes], PaddedBytes).
 	pad_md(big, Bytes, LengthFieldBytes, PaddedBytes) :-
 		list::length(Bytes, Length),
 		BitLength is Length * 8,
 		Zeros is (56 - ((Length + 1) mod 64) + 64) mod 64,
-		zeros(Zeros, ZeroBytes),
+		zeros(Zeros, ZeroBytes, LengthBytes),
 		big_endian_length_bytes(BitLength, LengthFieldBytes, LengthBytes),
-		list::append(Bytes, [0x80| ZeroBytes], Bytes0),
-		list::append(Bytes0, LengthBytes, PaddedBytes).
+		list::append(Bytes, [0x80| ZeroBytes], PaddedBytes).
 
-	zeros(0, []) :-
+	zeros(0, Tail, Tail) :-
 		!.
-	zeros(Count, [0| Zeros]) :-
+	zeros(Count, [0| Zeros], Tail) :-
 		NextCount is Count - 1,
-		zeros(NextCount, Zeros).
+		zeros(NextCount, Zeros, Tail).
 
 	little_endian_length_bytes(_, 0, []) :-
 		!.

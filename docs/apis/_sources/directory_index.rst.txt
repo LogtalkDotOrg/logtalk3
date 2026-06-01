@@ -545,6 +545,16 @@ To load an entity, always load the library that includes it using the goal ``log
    crs_projections <crs_projections_0>
    crs_projections_protocol <crs_projections_protocol_0>
 
+``library/crypto/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   crypto <crypto_0>
+
 ``library/csv/``
 ----------------
 

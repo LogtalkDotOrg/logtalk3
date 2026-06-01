@@ -25,8 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-01,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
+	]).
+
+	:- uses(crypto, [
+		secure_compare/2
 	]).
 
 	:- public(challenge/2).
@@ -622,7 +626,7 @@
 			compute_effective_ha1(Algorithm, StoredHA1, Nonce, CNonce, HA1),
 			method(Request, Method),
 			compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, ExpectedDigest),
-			ExpectedDigest == ResponseDigest,
+			secure_compare(ExpectedDigest, ResponseDigest),
 			annotated_digest_request(Request, Authorization, Username, Userhash, Realm, Algorithm, Qop, Nonce, NonceCount, HA1, VerifiedRequest),
 			Status = valid
 		).
@@ -881,7 +885,8 @@
 		(	nonce_components(Nonce, Timestamp, Signature),
 			Timestamp =< CurrentTime,
 			generate_nonce(Realm, Secret, Timestamp, ExpectedNonce),
-			nonce_components(ExpectedNonce, _ExpectedTimestamp, Signature),
+			nonce_components(ExpectedNonce, _ExpectedTimestamp, ExpectedSignature),
+			secure_compare(ExpectedSignature, Signature),
 			Age is CurrentTime - Timestamp,
 			(	Age =< NonceTTL ->
 				Status = valid

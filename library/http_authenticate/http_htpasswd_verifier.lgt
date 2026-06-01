@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-01,
 		comment is 'Portable Apache ``.htpasswd`` subset verifier supporting ``{SHA}`` entries and rejecting unsupported hash markers.',
 		parameters is [
 			'Path' - 'Path of the password file to load on each verification request.'
@@ -34,13 +34,18 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2, reverse/2
+		member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(crypto, [
+		verify_password_hash/2
 	]).
 
 	verify(_Realm, Username, Password) :-
 		load_password_entries(_Path_, Entries),
 		memberchk(Username-HashSpec, Entries),
-		verify_password_hash(HashSpec, Password).
+		atom_codes(Password, PasswordCodes),
+		verify_password_hash(HashSpec, PasswordCodes).
 
 	load_password_entries(Path0, Entries) :-
 		check_path(Path0, Path),
@@ -73,7 +78,7 @@
 			Entries1 = Entries0
 		;	parse_password_line(Path, LineNumber, Line, Entry),
 			Entry = Username-_,
-			(	memberchk(Username-_, Entries0) ->
+			(	member(Username-_, Entries0) ->
 				domain_error(http_password_file(Path), duplicate(LineNumber, Username))
 			;	Entries1 = [Entry| Entries0]
 			)
@@ -96,11 +101,10 @@
 	split_line_at_first_colon([Code| Codes], [Code| UsernameCodes], HashCodes) :-
 		split_line_at_first_colon(Codes, UsernameCodes, HashCodes).
 
-	parse_password_hash(Path, LineNumber, [0'{, 0'S, 0'H, 0'A, 0'}| DigestCodes], sha1(Digest)) :-
+	parse_password_hash(Path, LineNumber, [0'{, 0'S, 0'H, 0'A, 0'}| DigestCodes], digest(sha1, DigestBytes)) :-
 		DigestCodes \== [],
 		catch(base64::parse(codes(DigestCodes), DigestBytes), _Error, domain_error(http_password_file(Path), invalid(LineNumber))),
 		length(DigestBytes, 20),
-		atom_codes(Digest, DigestCodes),
 		!.
 	parse_password_hash(Path, LineNumber, [0'{, 0'S, 0'H, 0'A, 0'}| _DigestCodes], _HashSpec) :-
 		domain_error(http_password_file(Path), invalid(LineNumber)).
@@ -121,12 +125,6 @@
 		!.
 	password_hash_marker([Code| Codes], Acc0, MarkerCodes) :-
 		password_hash_marker(Codes, [Code| Acc0], MarkerCodes).
-
-	verify_password_hash(sha1(StoredDigest), Password) :-
-		atom_codes(Password, PasswordCodes),
-		sha1::digest(PasswordCodes, DigestBytes),
-		base64::generate(atom(ComputedDigest), DigestBytes),
-		ComputedDigest == StoredDigest.
 
 	split_lines(Codes, Lines) :-
 		split_lines(Codes, [], [], ReversedLines),

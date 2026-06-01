@@ -170,6 +170,7 @@
 		base58(loader),
 		base64(loader),
 		base85(loader),
+		crypto(loader),
 		hashes(loader),
 		hmac(loader),
 		ranking_protocols(loader),

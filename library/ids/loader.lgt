@@ -21,7 +21,6 @@
 
 :- initialization((
 	logtalk_load(base64(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(random(loader)),
+	logtalk_load(crypto(loader)),
 	logtalk_load(ids, [optimize(on)])
 )).

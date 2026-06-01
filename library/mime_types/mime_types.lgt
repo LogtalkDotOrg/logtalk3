@@ -22,9 +22,9 @@
 :- object(mime_types).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-06-01,
 		comment is 'MIME type registry and convenience predicates for mapping file names and URLs to media types.',
 		remarks is [
 			'Default behavior' - 'Convenience predicates default to lenient lookup by consulting both built-in standard mappings and built-in common mappings.',
@@ -97,7 +97,7 @@
 	]).
 
 	:- public(guess_all_extensions/3).
-	:- mode(guess_all_extensions(+atom, -list(atom)), one).
+	:- mode(guess_all_extensions(+atom, -list(atom), +boolean), one).
 	:- info(guess_all_extensions/3, [
 		comment is 'Returns all known file extensions associated with a MIME type.',
 		argnames is ['Type', 'Extensions', 'Strict']

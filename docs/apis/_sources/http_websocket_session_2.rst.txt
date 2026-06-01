@@ -19,7 +19,7 @@ Stateful WebSocket session predicates that build on top of the message layer to 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -28,7 +28,7 @@ Stateful WebSocket session predicates that build on top of the message layer to 
 | **Extends:**
 |    ``public`` :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`crypto <crypto/0>`
 |    :ref:`http_socket <http_socket/0>`
 |    :ref:`http_websocket <http_websocket/0>`
 |    :ref:`http_websocket_session_loop_options <http_websocket_session_loop_options/0>`
@@ -363,7 +363,7 @@ Validates a non-negative integer option value for the given domain and option na
 ``generate_masking_key/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation first tries to read four random bytes from ``/dev/urandom`` and falls back to a wall-time-seeded ``fast_random(xoshiro128pp)`` generator.
+Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation delegates to ``crypto::random_bytes/2``.
 
 | **Compilation flags:**
 |    ``static``

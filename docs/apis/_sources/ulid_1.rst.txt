@@ -17,8 +17,8 @@ Universally Unique Lexicographically Sortable Identifier (ULID) generator.
 |    ``logtalk_load(ulid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-02-26
+| **Version:** 1:1:1
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,9 +27,8 @@ Universally Unique Lexicographically Sortable Identifier (ULID) generator.
 | **Implements:**
 |    ``public`` :ref:`ulid_protocol <ulid_protocol/0>`
 | **Uses:**
-|    :ref:`fast_random <fast_random/0>`
+|    :ref:`crypto <crypto/0>`
 |    :ref:`iso8601 <iso8601/0>`
-|    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 
 | **Remarks:**

@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#crs-projections"><span class="xref std std-ref">crs_projections</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#crypto"><span class="xref std std-ref">crypto</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cuid2"><span class="xref std std-ref">cuid2</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cusum-anomaly-detector"><span class="xref std std-ref">cusum_anomaly_detector</span></a></li>
@@ -399,7 +400,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-23</div>
+<div class="line"><strong>Date:</strong> 2026-06-01</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -414,7 +415,7 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
+<div class="line"><a class="reference internal" href="crypto_0.html#crypto-0"><span class="std std-ref">crypto</span></a></div>
 <div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_0.html#http-websocket-0"><span class="std std-ref">http_websocket</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_session_loop_options_0.html#http-websocket-session-loop-options-0"><span class="std std-ref">http_websocket_session_loop_options</span></a></div>
@@ -837,7 +838,7 @@
 </section>
 <section id="generate-masking-key-1">
 <span id="http-websocket-session-2-generate-masking-key-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a><a class="headerlink" href="#generate-masking-key-1" title="Link to this heading"></a></h3>
-<p>Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation first tries to read four random bytes from <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> and falls back to a wall-time-seeded <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> generator.</p>
+<p>Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation delegates to <code class="docutils literal notranslate"><span class="pre">crypto::random_bytes/2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

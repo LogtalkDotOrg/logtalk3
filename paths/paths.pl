@@ -138,6 +138,7 @@ logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(colley_ranker, library('colley_ranker/')).
 logtalk_library_path(copeland_ranker, library('copeland_ranker/')).
 logtalk_library_path(coroutining, library('coroutining/')).
+logtalk_library_path(crypto, library('crypto/')).
 logtalk_library_path(crs_projections, library('crs_projections/')).
 logtalk_library_path(ccsds_frames, library('ccsds_frames/')).
 logtalk_library_path(ccsds_link_profiles, library('ccsds_link_profiles/')).

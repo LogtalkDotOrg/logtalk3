@@ -19,8 +19,8 @@ Cuid2 generator.
 |    ``logtalk_load(cuid2(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 1:0:1
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,9 +29,8 @@ Cuid2 generator.
 | **Implements:**
 |    ``public`` :ref:`cuid2_protocol <cuid2_protocol/0>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`crypto <crypto/0>`
 |    :ref:`list <list/0>`
-|    :ref:`os <os/0>`
 
 | **Remarks:**
 |    (none)

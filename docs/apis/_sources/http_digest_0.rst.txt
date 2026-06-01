@@ -15,7 +15,7 @@ HTTP Digest authentication parsing, generation, request decoration, and verifica
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-29
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ HTTP Digest authentication parsing, generation, request decoration, and verifica
 |    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
 | **Uses:**
+|    :ref:`crypto <crypto/0>`
 |    :ref:`date <date/0>`
 |    :ref:`hmac <hmac/0>`
 |    :ref:`http <http/0>`

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 23, 2026
+##   Last updated on June 1, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -117,6 +117,7 @@ Foreach-Object {
 (Get-Content ../../../library/command_line_options/NOTES.md | Select-Object -Skip 32) | pandoc -f gfm -t rst -o libraries/command_line_options.rst
 (Get-Content ../../../library/copeland_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
+(Get-Content ../../../library/crypto/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/crypto.rst
 (Get-Content ../../../library/crs_projections/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/crs_projections.rst
 (Get-Content ../../../library/csv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/csv.rst
 (Get-Content ../../../library/cuid2/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cuid2.rst

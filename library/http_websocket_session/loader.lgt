@@ -31,9 +31,9 @@
 )).
 
 	:- initialization((
+		logtalk_load(crypto(loader)),
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
-		logtalk_load(random(loader)),
 		logtalk_load(timeout(loader)),
 		logtalk_load('../http_client/loader.lgt'),
 		logtalk_load('../http_socket/loader.lgt'),

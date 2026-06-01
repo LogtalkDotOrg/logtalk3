@@ -22,9 +22,9 @@
 :- object(ids(_Representation_, _Bytes_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-06-01,
 		comment is 'Generator of random identifiers.',
 		parameters is [
 			'Representation' - 'Text representation for the identifier. Possible values are ``atom``, ``chars``, and ``codes``.',
@@ -40,6 +40,10 @@
 		argnames is ['Identifier']
 	]).
 
+	:- uses(crypto, [
+		random_bytes/2
+	]).
+
 	generate(Identifier) :-
 		generate(_Representation_, Identifier).
 
@@ -52,23 +56,6 @@
 	generate(codes, Identifier) :-
 		random_bytes(_Bytes_, Bytes),
 		base64::generate(codes(Identifier), Bytes).
-
-	random_bytes(N, Bytes) :-
-		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
-		list::length(Bytes, N),
-		read_random_bytes(Bytes, Stream),
-		close(Stream),
-		!.
-	random_bytes(N, Bytes) :-
-		os::wall_time(Time),
-		Seed is round(Time),
-		fast_random::randomize(Seed),
-		fast_random::sequence(N, 0, 255, Bytes).
-
-	read_random_bytes([], _).
-	read_random_bytes([Byte| Bytes], Stream) :-
-		get_byte(Stream, Byte),
-		read_random_bytes(Bytes, Stream).
 
 :- end_object.
 

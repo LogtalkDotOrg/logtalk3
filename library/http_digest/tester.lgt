@@ -32,7 +32,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
-		logtalk_load(lgtunit(loader)),
+		logtalk_load(crypto(loader)),
 		logtalk_load(dates(loader)),
 		logtalk_load(hashes(loader)),
 		logtalk_load(hmac(loader)),
@@ -42,6 +42,7 @@
 		logtalk_load('../http_client/loader.lgt'),
 		logtalk_load('../http_session/http_cookie_jar.lgt', [optimize(on)]),
 		logtalk_load([http_digest_verifier_protocol, http_digest, http_server_digest_handler, http_client_digest_session], [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
 		logtalk_load(test_objects, [debug(on), source_data(on)]),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
@@ -51,6 +52,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(crypto(loader)),
 		logtalk_load(dates(loader)),
 		logtalk_load(hashes(loader)),
 		logtalk_load(hmac(loader)),

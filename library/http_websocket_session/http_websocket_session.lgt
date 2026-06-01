@@ -131,7 +131,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-01,
 		comment is 'Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and optionally run a higher-level callback loop on upgraded http_socket connections.',
 		parameters is [
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
@@ -260,12 +260,12 @@
 		append/3, member/2, reverse/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(fast_random(xoshiro128pp), [
-		randomize/1, sequence/4
+	:- uses(crypto, [
+		random_bytes/2
 	]).
 
 	:- uses(os, [
-		sleep/1, wall_time/1
+		sleep/1
 	]).
 
 	initial_state(session_state(idle)).
@@ -425,7 +425,7 @@
 	:- protected(generate_masking_key/1).
 	:- mode(generate_masking_key(-list(byte)), one).
 	:- info(generate_masking_key/1, [
-		comment is 'Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation first tries to read four random bytes from ``/dev/urandom`` and falls back to a wall-time-seeded ``fast_random(xoshiro128pp)`` generator.',
+		comment is 'Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation delegates to ``crypto::random_bytes/2``.',
 		argnames is ['Key']
 	]).
 
@@ -1144,23 +1144,6 @@
 
 	generate_masking_key(Key) :-
 		random_bytes(4, Key).
-
-	random_bytes(N, Bytes) :-
-		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
-		list::length(Bytes, N),
-		read_random_bytes(Bytes, Stream),
-		close(Stream),
-		!.
-	random_bytes(N, Bytes) :-
-		wall_time(Time),
-		Seed is round(Time),
-		randomize(Seed),
-		sequence(N, 0, 255, Bytes).
-
-	read_random_bytes([], _).
-	read_random_bytes([Byte| Bytes], Stream) :-
-		get_byte(Stream, Byte),
-		read_random_bytes(Bytes, Stream).
 
 	split_payload_bytes(Bytes, FragmentSize, Chunks) :-
 		take_payload_chunks(Bytes, FragmentSize, Chunks).

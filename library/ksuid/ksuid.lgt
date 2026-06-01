@@ -23,9 +23,9 @@
 	implements(ksuid_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-06-01,
 		comment is 'KSUID generator.',
 		parameters is [
 			'Representation' - 'Text representation for the KSUID. Possible values are ``atom``, ``chars``, and ``codes``.',
@@ -34,8 +34,8 @@
 		see_also is [ksuid, cuid2(_,_,_), nanoid(_,_,_), ids(_,_), ulid(_), snowflakeid(_,_,_,_,_,_,_), uuid(_)]
 	]).
 
-	:- uses(fast_random(xoshiro128pp), [
-		randomize/1, sequence/4
+	:- uses(crypto, [
+		random_bytes/2
 	]).
 
 	:- uses(iso8601, [
@@ -47,7 +47,7 @@
 	]).
 
 	:- uses(os, [
-		date_time/7, wall_time/1
+		date_time/7
 	]).
 
 	generate(KSUID) :-
@@ -171,23 +171,6 @@
 	codes_to_ksuid(chars, Codes, KSUID) :-
 		codes_to_chars(Codes, KSUID).
 	codes_to_ksuid(codes, KSUID, KSUID).
-
-	random_bytes(N, Bytes) :-
-		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
-		length(Bytes, N),
-		read_random_bytes(Bytes, Stream),
-		close(Stream),
-		!.
-	random_bytes(N, Bytes) :-
-		wall_time(Time),
-		Seed is round(Time),
-		randomize(Seed),
-		sequence(N, 0, 255, Bytes).
-
-	read_random_bytes([], _).
-	read_random_bytes([Byte| Bytes], Stream) :-
-		get_byte(Stream, Byte),
-		read_random_bytes(Bytes, Stream).
 
 	codes_to_chars([], []).
 	codes_to_chars([Code| Codes], [Char| Chars]) :-

@@ -67,6 +67,7 @@ directory in the ``NOTES.md`` file.
    core
    copeland_ranker
    coroutining
+   crypto
    crs_projections
    csv
    cuid2

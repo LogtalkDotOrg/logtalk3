@@ -21,7 +21,6 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(random(loader)),
+	logtalk_load(crypto(loader)),
 	logtalk_load([cuid2_protocol, cuid2], [optimize(on)])
 )).

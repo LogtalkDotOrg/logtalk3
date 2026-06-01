@@ -18,8 +18,8 @@ KSUID generator.
 |    ``logtalk_load(ksuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 1:0:1
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ KSUID generator.
 | **Implements:**
 |    ``public`` :ref:`ksuid_protocol <ksuid_protocol/0>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`crypto <crypto/0>`
 |    :ref:`iso8601 <iso8601/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
