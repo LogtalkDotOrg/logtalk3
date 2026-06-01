@@ -39,7 +39,7 @@
 		request/7, response/6, is_request/1, is_response/1, parse_request/2, generate_request/2,
 		parse_response/2, generate_response/2, generate_response_headers/2, parse_request_line/2,
 		generate_request_line/2, parse_status_line/2, generate_status_line/2, parse_headers/2,
-		generate_headers/2, parse_body/4, generate_body/3, encode_body/4, decode_body/4, websocket_accept/2,
+		generate_headers/2, parse_body/4, generate_body/3, encode_body/4, decode_body/4,
 		method/2, target/2, version/2, status/2, headers/2, header/3, body/2, property/2
 	]).
 
@@ -202,9 +202,6 @@
 			atom(HeaderBlock),
 			['foo!bar'-'baz']
 		).
-
-	test(http_websocket_accept_2_01, deterministic(Accept == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo=')) :-
-		websocket_accept('dGhlIHNhbXBsZSBub25jZQ==', Accept).
 
 	test(http_encode_body_4_01, deterministic(Body == content('application/json', json({name-'Alice'})))) :-
 		encode_body('application/json', {name-'Alice'}, [], Body).

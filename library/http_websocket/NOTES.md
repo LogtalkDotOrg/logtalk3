@@ -21,10 +21,11 @@ ________________________________________________________________________
 `http_websocket`
 ================
 
-This library provides the next transport-neutral WebSocket slice on top of the
-opening-handshake helpers already available in the `http`, `http_client`,
-`http_server`, and `http_socket` libraries. It focuses on normalized frame
-terms plus binary frame parsing and generation.
+This library provides the transport-neutral WebSocket helpers shared by the
+current HTTP stack. It includes opening-handshake key generation and accept
+value computation in the `http_websocket_handshake` object plus normalized
+frame terms and binary frame parsing and generation in the `http_websocket`
+object.
 
 
 API documentation
@@ -37,7 +38,7 @@ link in a web browser.
 Loading
 -------
 
-To load the library, load the `loader.lgt` file:
+To load the full library, load the `loader.lgt` file:
 
 	| ?- logtalk_load(http_websocket(loader)).
 
@@ -55,6 +56,10 @@ Current scope
 
 The current slice provides:
 
+- `http_websocket_handshake::websocket_opening_key/1` for generating
+  canonical base64-encoded opening keys.
+- `http_websocket_handshake::websocket_accept/2` for computing canonical
+  `Sec-WebSocket-Accept` values from valid opening keys.
 - `frame/5` for constructing validated normalized WebSocket frame terms.
 - `is_frame/1` for testing normalized frame terms.
 - `final/2`, `opcode/2`, `payload/2`, `properties/2`, and `property/2` for
@@ -86,6 +91,9 @@ Where:
 Current workflow
 ----------------
 
+- Use `http_websocket_handshake::websocket_opening_key/1` and
+  `http_websocket_handshake::websocket_accept/2` when you only need the
+  opening-handshake values.
 - Use `http_client::open_websocket/4` or `http_socket::serve_websocket_once/5`
   to complete the opening handshake and obtain an upgraded connection handle.
 - Use `http_socket::connection_streams/3` to obtain the binary input and

@@ -21,5 +21,6 @@
 
 :- initialization((
 	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_websocket/loader.lgt'),
 	logtalk_load(http_server, [optimize(on)])
 )).

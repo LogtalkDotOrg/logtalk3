@@ -30,7 +30,6 @@
 	]).
 
 	:- uses(http, [body/2, parse_request/2, property/2, status/2, version/2]).
-	:- uses(base64, [parse/2]).
 
 	cover(http_client_core).
 	cover(http_client).
@@ -585,7 +584,7 @@
 		).
 
 	websocket_key_response_atom(Request, ResponseAtom) :-
-		(	request_has_uuid_v4_websocket_key(Request, Accept) ->
+		(	request_has_valid_websocket_key(Request, Accept) ->
 			atomic_list_concat([
 				'HTTP/1.1 101 Switching Protocols\r\n',
 				'connection: Upgrade\r\n',
@@ -596,12 +595,9 @@
 		;	ResponseAtom = 'HTTP/1.1 400 Bad Request\r\ncontent-length: 0\r\n\r\n'
 		).
 
-	request_has_uuid_v4_websocket_key(Request, Accept) :-
+	request_has_valid_websocket_key(Request, Accept) :-
 		http::header(Request, sec_websocket_key, Key),
-		parse(atom(Key), [_, _, _, _, _, _, Byte7, _, Byte9, _, _, _, _, _, _, _]),
-		Byte7 /\ 0xF0 =:= 0x40,
-		Byte9 /\ 0xC0 =:= 0x80,
-		http::websocket_accept(Key, Accept).
+		http_websocket_handshake::websocket_accept(Key, Accept).
 
 	local_http_url(Port, Path, URL) :-
 		number_codes(Port, PortCodes),

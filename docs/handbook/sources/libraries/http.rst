@@ -79,9 +79,7 @@ Current scope
   by the higher-level ``http_multipart`` helpers and the current client
   and server integration tests
 - Normalize and generate the core WebSocket opening-handshake headers
-  needed by the next client and server transport slices, including a
-  reusable ``Sec-WebSocket-Accept`` helper for valid
-  ``Sec-WebSocket-Key`` values
+  needed by the next client and server transport slices
 - Dispatch to concrete body codecs for ``application/octet-stream``,
   ``text/plain``, ``application/json``, and
   ``application/x-www-form-urlencoded``
@@ -158,9 +156,9 @@ Current limitations
   slices
 - Header normalization is still selective; headers outside the supported
   set are preserved as validated raw ``Name-Value`` pairs
-- The WebSocket support in this layer is limited to the HTTP
-  opening-handshake metadata and helper predicates needed by plain
-  ``ws://`` transports; ``wss://`` and TLS-backed transport
-  orchestration remain out of scope
+- The WebSocket support in this layer is limited to HTTP
+  opening-handshake metadata normalization. Shared opening-handshake
+  predicates can be found in the ``http_websocket`` library; ``wss://``
+  and TLS-backed transport orchestration remain out of scope
 - For client and server transport orchestration, see, respectively, the
   ``http_client`` and ``http_server`` libraries

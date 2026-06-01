@@ -147,8 +147,9 @@
 		append/3, member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(base64, [
-		generate/2
+	:- uses(http_websocket_handshake, [
+		websocket_accept/2,
+		websocket_opening_key/1
 	]).
 
 	:- uses(user, [
@@ -451,37 +452,6 @@
 		websocket_opening_key(Key).
 	resolve_websocket_key(Key, Key).
 
-	websocket_opening_key(Key) :-
-		uuid(atom)::uuid_v4(UUID),
-		atom_codes(UUID, UUIDCodes),
-		uuid_key_bytes(UUIDCodes, KeyBytes),
-		generate(atom(Key), KeyBytes).
-
-	uuid_key_bytes(UUIDCodes, KeyBytes) :-
-		uuid_key_bytes(UUIDCodes, [], ReversedKeyBytes),
-		reverse(ReversedKeyBytes, KeyBytes).
-
-	uuid_key_bytes([], KeyBytes, KeyBytes) :-
-		!.
-	uuid_key_bytes([0'-| UUIDCodes], KeyBytes0, KeyBytes) :-
-		!,
-		uuid_key_bytes(UUIDCodes, KeyBytes0, KeyBytes).
-	uuid_key_bytes([Code1, Code2| UUIDCodes], KeyBytes0, KeyBytes) :-
-		hex_digit_code_value(Code1, Value1),
-		hex_digit_code_value(Code2, Value2),
-		Byte is (Value1 << 4) \/ Value2,
-		uuid_key_bytes(UUIDCodes, [Byte| KeyBytes0], KeyBytes).
-
-	hex_digit_code_value(Code, Value) :-
-		(	0'0 =< Code, Code =< 0'9 ->
-			Value is Code - 0'0
-		;	0'a =< Code, Code =< 0'f ->
-			Value is Code - 0'a + 10
-		;	0'A =< Code, Code =< 0'F ->
-			Value is Code - 0'A + 10
-		;	fail
-		).
-
 	validate_websocket_response(Request, Response) :-
 		(	valid_websocket_response(Request, Response) ->
 			true
@@ -505,7 +475,7 @@
 		message_upgrade_tokens(Response, UpgradeTokens),
 		memberchk(websocket, UpgradeTokens),
 		message_websocket_key(Request, Key),
-		http::websocket_accept(Key, ExpectedAccept),
+		websocket_accept(Key, ExpectedAccept),
 		message_websocket_accept(Response, ExpectedAccept),
 		\+ message_websocket_extensions(Response, _Extensions),
 		validate_websocket_protocol_response(Request, Response).

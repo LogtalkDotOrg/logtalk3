@@ -25,7 +25,6 @@ Transport-independent normalized HTTP request and response constructors, validat
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
 | **Uses:**
 |    :ref:`base64 <base64/0>`
-|    :ref:`hash_common_32 <hash_common_32/0>`
 |    :ref:`http_cookies(Representation) <http_cookies/1>`
 |    :ref:`json <json/0>`
 |    :ref:`list <list/0>`
@@ -554,25 +553,6 @@ Enumerates normalized derived or higher-layer properties from a request or respo
 |    ``property(Message,Property)``
 | **Mode and number of proofs:**
 |    ``property(+compound,?compound)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: websocket_accept/2
-.. _http/0::websocket_accept/2:
-
-``websocket_accept/2``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Computes the canonical ``Sec-WebSocket-Accept`` header value for a valid ``Sec-WebSocket-Key`` header value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``websocket_accept(Key,Accept)``
-| **Mode and number of proofs:**
-|    ``websocket_accept(++term,--atom)`` - ``one_or_error``
 
 
 ------------

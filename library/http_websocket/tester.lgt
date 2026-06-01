@@ -22,9 +22,12 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
+	logtalk_load(base64(loader)),
+	logtalk_load(crypto(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(reader(loader)),
-	logtalk_load(http_websocket, [debug(on), source_data(on)]),
+	logtalk_load(hashes(loader)),
+	logtalk_load([http_websocket_handshake, http_websocket], [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

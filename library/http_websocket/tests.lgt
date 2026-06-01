@@ -44,7 +44,13 @@
 		property/2
 	]).
 
+	:- uses(http_websocket_handshake, [
+		websocket_accept/2,
+		websocket_opening_key/1
+	]).
+
 	cover(http_websocket).
+	cover(http_websocket_handshake).
 
 	cleanup :-
 		^^clean_file('test_http_websocket_frame.tmp').
@@ -60,6 +66,14 @@
 
 	test(http_websocket_is_frame_1_01, fail) :-
 		is_frame(frame(more, ping, [], [])).
+
+	test(http_websocket_handshake_accept_2_01, deterministic(Accept == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo=')) :-
+		websocket_accept('dGhlIHNhbXBsZSBub25jZQ==', Accept).
+
+	test(http_websocket_handshake_opening_key_1_01, deterministic) :-
+		websocket_opening_key(Key),
+		base64::parse(atom(Key), Bytes),
+		Bytes = [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _].
 
 	test(http_websocket_parse_2_01, true(Frame == end_of_file)) :-
 		parse(bytes([]), Frame).

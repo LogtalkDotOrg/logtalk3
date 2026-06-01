@@ -218,13 +218,6 @@
 		argnames is ['Message', 'Property']
 	]).
 
-	:- public(websocket_accept/2).
-	:- mode(websocket_accept(++term, --atom), one_or_error).
-	:- info(websocket_accept/2, [
-		comment is 'Computes the canonical ``Sec-WebSocket-Accept`` header value for a valid ``Sec-WebSocket-Key`` header value.',
-		argnames is ['Key', 'Accept']
-	]).
-
 	:- uses(list, [
 		append/2, append/3, length/2, member/2, memberchk/2, reverse/2
 	]).
@@ -233,22 +226,9 @@
 		parse/2, generate/2
 	]).
 
-	:- uses(hash_common_32, [
-		add32/3, add32/5, big_endian_word32/2, integer_to_big_endian_bytes32/2, pad_md/4, rol32/3
-	]).
-
 	:- uses(reader, [
 		file_to_bytes/2, file_to_codes/2, stream_to_bytes/2, stream_to_codes/2
 	]).
-
-	websocket_accept(Key, Accept) :-
-		(	var(Key) ->
-			instantiation_error
-		;	normalize_websocket_key(Key, NormalizedKey) ->
-			websocket_accept_from_key(NormalizedKey, Accept),
-			!
-		;	domain_error(http_header_value(sec_websocket_key), Key)
-		).
 
 	request(Method, Target, Version, Headers, Body, Properties, Request) :-
 		validate_method(Method),
@@ -2936,96 +2916,6 @@
 		number_codes(Version, VersionCodes),
 		websocket_versions_codes(Versions, RestCodes),
 		append([VersionCodes, [0',, 0' ], RestCodes], Codes).
-
-	websocket_accept_from_key(Key, Accept) :-
-		atom_codes(Key, KeyCodes),
-		atom_codes('258EAFA5-E914-47DA-95CA-C5AB0DC85B11', GuidCodes),
-		append(KeyCodes, GuidCodes, Bytes),
-		websocket_sha1_digest(Bytes, DigestBytes),
-		generate(atom(Accept), DigestBytes).
-
-	websocket_sha1_digest(Bytes, DigestBytes) :-
-		pad_md(big, Bytes, 8, PaddedBytes),
-		websocket_sha1_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0, H0, H1, H2, H3, H4),
-		integer_to_big_endian_bytes32(H0, B0),
-		integer_to_big_endian_bytes32(H1, B1),
-		integer_to_big_endian_bytes32(H2, B2),
-		integer_to_big_endian_bytes32(H3, B3),
-		integer_to_big_endian_bytes32(H4, B4),
-		append([B0, B1, B2, B3, B4], DigestBytes).
-
-	websocket_sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
-	websocket_sha1_blocks(Bytes0, H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
-		take_n_bytes(64, Bytes0, Block, Rest),
-		websocket_sha1_block_words(Block, W0),
-		extend_websocket_sha1_words(16, W0, W),
-		websocket_sha1_rounds(0, W, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
-		add32(H0_0, A, H0_1),
-		add32(H1_0, B, H1_1),
-		add32(H2_0, C, H2_1),
-		add32(H3_0, D, H3_1),
-		add32(H4_0, E, H4_1),
-		websocket_sha1_blocks(Rest, H0_1, H1_1, H2_1, H3_1, H4_1, H0, H1, H2, H3, H4).
-
-	take_n_bytes(0, Bytes, [], Bytes) :-
-		!.
-	take_n_bytes(Count, [Byte| Bytes], [Byte| Taken], Rest) :-
-		NextCount is Count - 1,
-		take_n_bytes(NextCount, Bytes, Taken, Rest).
-
-	websocket_sha1_block_words([], []).
-	websocket_sha1_block_words([B0, B1, B2, B3| Bytes], [Word| Words]) :-
-		big_endian_word32([B0, B1, B2, B3], Word),
-		websocket_sha1_block_words(Bytes, Words).
-
-	extend_websocket_sha1_words(80, Words, Words) :-
-		!.
-	extend_websocket_sha1_words(Index, Words0, Words) :-
-		I3 is Index - 3,
-		I8 is Index - 8,
-		I14 is Index - 14,
-		I16 is Index - 16,
-		list_nth0(I3, Words0, W3),
-		list_nth0(I8, Words0, W8),
-		list_nth0(I14, Words0, W14),
-		list_nth0(I16, Words0, W16),
-		Temp is xor(W3, xor(W8, xor(W14, W16))),
-		rol32(Temp, 1, Word),
-		append(Words0, [Word], Words1),
-		NextIndex is Index + 1,
-		extend_websocket_sha1_words(NextIndex, Words1, Words).
-
-	list_nth0(0, [Element| _], Element) :-
-		!.
-	list_nth0(Index, [_| Elements], Element) :-
-		NextIndex is Index - 1,
-		list_nth0(NextIndex, Elements, Element).
-
-	websocket_sha1_rounds(80, _Words, A, B, C, D, E, A, B, C, D, E) :-
-		!.
-	websocket_sha1_rounds(Index, Words, A0, B0, C0, D0, E0, A, B, C, D, E) :-
-		list_nth0(Index, Words, WI),
-		websocket_sha1_f_k(Index, B0, C0, D0, F, K),
-		rol32(A0, 5, RA),
-		add32(RA, F, E0, K, T0),
-		add32(T0, WI, T),
-		rol32(B0, 30, C1),
-		NextIndex is Index + 1,
-		websocket_sha1_rounds(NextIndex, Words, T, A0, C1, C0, D0, A, B, C, D, E).
-
-	websocket_sha1_f_k(Index, B, C, D, F, K) :-
-		(	Index < 20 ->
-			F is ((B /\ C) \/ ((\ B) /\ D)) /\ 0xFFFFFFFF,
-			K = 0x5A827999
-		;	Index < 40 ->
-			F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
-			K = 0x6ED9EBA1
-		;	Index < 60 ->
-			F is ((B /\ C) \/ (B /\ D) \/ (C /\ D)) /\ 0xFFFFFFFF,
-			K = 0x8F1BBCDC
-		;	F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
-			K = 0xCA62C1D6
-		).
 
 	method_token_code(Code) :-
 		token_code(Code).

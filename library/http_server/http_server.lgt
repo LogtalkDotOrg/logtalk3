@@ -92,13 +92,17 @@
 		append/3, member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
 	]).
 
+	:- uses(http_websocket_handshake, [
+		websocket_accept/2
+	]).
+
 	accept_websocket(Request, Response, Options) :-
 		parse_accept_websocket_options(Options, Headers, Properties0, ProtocolOption),
 		validate_accept_websocket_headers(Headers),
 		validate_accept_websocket_properties(Properties0),
 		validate_websocket_request(Request, Version, Key, OfferedProtocols),
 		select_websocket_protocol(ProtocolOption, OfferedProtocols, SelectedProtocol),
-		http::websocket_accept(Key, Accept),
+		websocket_accept(Key, Accept),
 		websocket_response_properties(Properties0, Accept, SelectedProtocol, Properties),
 		http::response(Version, status(101, 'Switching Protocols'), Headers, empty, Properties, Response).
 
@@ -338,7 +342,7 @@
 		message_upgrade_tokens(Response, UpgradeTokens),
 		memberchk(websocket, UpgradeTokens),
 		message_websocket_key(Request, Key),
-		http::websocket_accept(Key, Accept),
+		websocket_accept(Key, Accept),
 		message_websocket_accept(Response, Accept),
 		\+ message_websocket_extensions(Response, _Extensions),
 		valid_websocket_protocol_response(Request, Response).

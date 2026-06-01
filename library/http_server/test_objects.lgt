@@ -64,7 +64,7 @@
 	handle(Request, Response) :-
 		http::version(Request, Version),
 		http::property(Request, websocket_key(Key)),
-		http::websocket_accept(Key, Accept),
+		http_websocket_handshake::websocket_accept(Key, Accept),
 		http::response(
 			Version,
 			status(101, 'Switching Protocols'),

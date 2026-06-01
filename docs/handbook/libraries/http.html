@@ -425,9 +425,7 @@ and the full-message level when a boundary is available</p></li>
 by the higher-level <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> helpers and the current client
 and server integration tests</p></li>
 <li><p>Normalize and generate the core WebSocket opening-handshake headers
-needed by the next client and server transport slices, including a
-reusable <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> helper for valid
-<code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code> values</p></li>
+needed by the next client and server transport slices</p></li>
 <li><p>Dispatch to concrete body codecs for <code class="docutils literal notranslate"><span class="pre">application/octet-stream</span></code>,
 <code class="docutils literal notranslate"><span class="pre">text/plain</span></code>, <code class="docutils literal notranslate"><span class="pre">application/json</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code></p></li>
@@ -499,10 +497,10 @@ media types needed by the first <code class="docutils literal notranslate"><span
 slices</p></li>
 <li><p>Header normalization is still selective; headers outside the supported
 set are preserved as validated raw <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs</p></li>
-<li><p>The WebSocket support in this layer is limited to the HTTP
-opening-handshake metadata and helper predicates needed by plain
-<code class="docutils literal notranslate"><span class="pre">ws://</span></code> transports; <code class="docutils literal notranslate"><span class="pre">wss://</span></code> and TLS-backed transport
-orchestration remain out of scope</p></li>
+<li><p>The WebSocket support in this layer is limited to HTTP
+opening-handshake metadata normalization. Shared opening-handshake
+predicates can be found in the <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> library; <code class="docutils literal notranslate"><span class="pre">wss://</span></code>
+and TLS-backed transport orchestration remain out of scope</p></li>
 <li><p>For client and server transport orchestration, see, respectively, the
 <code class="docutils literal notranslate"><span class="pre">http_client</span></code> and <code class="docutils literal notranslate"><span class="pre">http_server</span></code> libraries</p></li>
 </ul>

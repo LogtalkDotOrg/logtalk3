@@ -25893,7 +25893,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::websocket_accept/2>`
+* :ref:`http_websocket_handshake <http_websocket_handshake/0::websocket_accept/2>`
+
+``websocket_opening_key/1``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket_handshake <http_websocket_handshake/0::websocket_opening_key/1>`
 
 ``week_of_year_iso/2``
 ----------------------

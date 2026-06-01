@@ -21,7 +21,9 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
+	logtalk_load(base64(loader)),
+	logtalk_load(crypto(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(reader(loader)),
-	logtalk_load(http_websocket, [optimize(on)])
+	logtalk_load([http_websocket_handshake, http_websocket], [optimize(on)])
 )).

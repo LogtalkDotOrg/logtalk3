@@ -14,8 +14,8 @@ MIME type registry and convenience predicates for mapping file names and URLs to
 |    ``logtalk_load(mime_types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-04-17
+| **Version:** 1:1:1
+| **Date:** 2026-06-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -210,7 +210,6 @@ Returns all known file extensions associated with a MIME type using lenient look
 |    ``guess_all_extensions(Type,Extensions)``
 | **Mode and number of proofs:**
 |    ``guess_all_extensions(+atom,-list(atom))`` - ``one``
-|    ``guess_all_extensions(+atom,-list(atom))`` - ``one``
 
 
 ------------
@@ -228,6 +227,9 @@ Returns all known file extensions associated with a MIME type.
 
 | **Template:**
 |    ``guess_all_extensions(Type,Extensions,Strict)``
+| **Mode and number of proofs:**
+|    ``guess_all_extensions(+atom,-list(atom),+boolean)`` - ``one``
+
 
 ------------
 

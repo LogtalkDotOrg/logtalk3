@@ -356,11 +356,11 @@
              
   <section id="http-websocket">
 <span id="library-http-websocket"></span><h1><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code><a class="headerlink" href="#http-websocket" title="Link to this heading"></a></h1>
-<p>This library provides the next transport-neutral WebSocket slice on top
-of the opening-handshake helpers already available in the <code class="docutils literal notranslate"><span class="pre">http</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_client</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> libraries. It
-focuses on normalized frame terms plus binary frame parsing and
-generation.</p>
+<p>This library provides the transport-neutral WebSocket helpers shared by
+the current HTTP stack. It includes opening-handshake key generation and
+accept value computation in the <code class="docutils literal notranslate"><span class="pre">http_websocket_handshake</span></code> object plus
+normalized frame terms and binary frame parsing and generation in the
+<code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> object.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -369,7 +369,7 @@ link in a web browser.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<p>To load the full library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_websocket(loader)).
 </pre></div>
 </div>
@@ -385,6 +385,10 @@ link in a web browser.</p>
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
 <p>The current slice provides:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">http_websocket_handshake::websocket_opening_key/1</span></code> for generating
+canonical base64-encoded opening keys.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_websocket_handshake::websocket_accept/2</span></code> for computing
+canonical <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> values from valid opening keys.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">frame/5</span></code> for constructing validated normalized WebSocket frame
 terms.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_frame/1</span></code> for testing normalized frame terms.</p></li>
@@ -419,6 +423,9 @@ binary streams.</p></li>
 <section id="current-workflow">
 <h2>Current workflow<a class="headerlink" href="#current-workflow" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">http_websocket_handshake::websocket_opening_key/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">http_websocket_handshake::websocket_accept/2</span></code> when you only need
+the opening-handshake values.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code> or
 <code class="docutils literal notranslate"><span class="pre">http_socket::serve_websocket_once/5</span></code> to complete the opening
 handshake and obtain an upgraded connection handle.</p></li>
