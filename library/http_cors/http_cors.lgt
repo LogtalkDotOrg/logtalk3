@@ -438,8 +438,8 @@
 		Response0 = response(Version, Status, Headers0, Body, Properties),
 		collect_vary_tokens(Headers0, ExistingVaryTokens),
 		header_names(GeneratedHeaders, GeneratedNames0),
-		(	ExistingVaryTokens == '*' ->
-			MergedHeaders = [vary-'*'| GeneratedHeaders],
+		(	ExistingVaryTokens == ('*') ->
+			MergedHeaders = [vary-('*')| GeneratedHeaders],
 			GeneratedNames = [vary| GeneratedNames0]
 		;	append(ExistingVaryTokens, VaryTokens0, MergedVaryTokens0),
 			unique_preserving_order(MergedVaryTokens0, MergedVaryTokens),
@@ -469,8 +469,8 @@
 
 	collect_vary_tokens(Headers, Tokens) :-
 		collect_vary_tokens_list(Headers, Tokens0),
-		(	Tokens0 == '*' ->
-			Tokens = '*'
+		(	Tokens0 == ('*') ->
+			Tokens = ('*')
 		;	unique_preserving_order(Tokens0, Tokens)
 		).
 
@@ -481,8 +481,8 @@
 	collect_vary_tokens_list([vary-Value| Headers], Tokens) :-
 		!,
 		collect_vary_tokens_list(Headers, RestTokens),
-		(	RestTokens == '*' ->
-			Tokens = '*'
+		(	RestTokens == ('*') ->
+			Tokens = ('*')
 		;	parse_field_name_list(Value, Names) ->
 			append(Names, RestTokens, Tokens)
 		;	Tokens = RestTokens

@@ -422,7 +422,7 @@
 
 	test(http_cors_add_response_headers_4_08, deterministic) :-
 		Request = request(get, origin('/resource'), http(1, 1), [origin-'https://app.example.com'], empty, []),
-		Response0 = response(http(1, 1), status(200, 'OK'), [vary-'*'], content('text/plain', text(ok)), []),
+		Response0 = response(http(1, 1), status(200, 'OK'), [vary-('*')], content('text/plain', text(ok)), []),
 		Options = [allowed_origins(['https://app.example.com'])],
 		http_cors::add_response_headers(Request, Response0, Response, Options),
 		header(Response, access_control_allow_origin, 'https://app.example.com'),

@@ -483,7 +483,7 @@
 
 	if_none_match_matches(Value, ETag) :-
 		trim_ows_atom(Value, TrimmedValue),
-		(	TrimmedValue == '*' ->
+		(	TrimmedValue == ('*') ->
 			true
 		;	atom::split(TrimmedValue, ',', Tags),
 			etag_list_matches(Tags, ETag)
@@ -569,7 +569,10 @@
 	normalize_modification_time(ModifiedTime, NormalizedTime) :-
 		(	integer(ModifiedTime) ->
 			NormalizedTime = ModifiedTime
-		;	NormalizedTime is floor(ModifiedTime)
+		;	float(ModifiedTime) ->
+			NormalizedTime is floor(ModifiedTime)
+		;	ModifiedTime = dt(Year, Month, Day, Hours, Minutes, Seconds),
+			date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), ModifiedTime)
 		).
 
 	entity_tag(Size, ModifiedTime, ETag) :-

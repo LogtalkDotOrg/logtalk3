@@ -281,9 +281,9 @@
 			TypeSimpleDisplay = directory,
 			TypeMediaDisplay = directory,
 			SizeValue = -1,
-			SizeDisplay = '-',
+			SizeDisplay = ('-'),
 			ModifiedValue = -1,
-			ModifiedDisplay = '-'
+			ModifiedDisplay = ('-')
 		;	Href = Name,
 			Label = Name,
 			EntryKind = file,
