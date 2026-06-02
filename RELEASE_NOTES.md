@@ -37,7 +37,8 @@ predicates.
 * ADDED: New `http_core`, `http_client`, `http_cookies`, `http_multipart`,
 `http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
 `http_websocket_messages`, `http_websocket_session`, `http_directory_listing`,
-`http_static_files`, `open_api`, and `rest` libraries.
+`http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
+`http_digest`, `http_cors`, `open_api`, and `rest` libraries.
 
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
 `relativize/3`, and `resolve/3` predicates.
