@@ -24,7 +24,7 @@
 	logtalk_load(term_io(loader)),
 	logtalk_load(html(loader)),
 	logtalk_load(url(loader)),
-	logtalk_load('../http_router/loader.lgt'),
+	logtalk_load(http_router(loader)),
 	logtalk_load(http_htmx, [optimize(on)]),
 	logtalk_load(http_router_htmx, [optimize(on)])
 )).

@@ -32,11 +32,11 @@
 
 	:- initialization((
 		logtalk_load(sockets(loader)),
-		logtalk_load('../http_client/core_loader.lgt'),
-		logtalk_load('../http_server/loader.lgt'),
-		logtalk_load('../http_websocket/loader.lgt'),
-		logtalk_load('../http_websocket_messages/loader.lgt'),
-		logtalk_load('../http_websocket_session/loader.lgt'),
+		logtalk_load(http_client(core_loader)),
+		logtalk_load(http_server(loader)),
+		logtalk_load(http_websocket(loader)),
+		logtalk_load(http_websocket_messages(loader)),
+		logtalk_load(http_websocket_session(loader)),
 		logtalk_load([http_socket_protocol, http_socket], [debug(on), source_data(on)]),
 		logtalk_load(test_objects),
 		logtalk_load(lgtunit(loader)),

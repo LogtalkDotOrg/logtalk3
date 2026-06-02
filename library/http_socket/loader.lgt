@@ -32,8 +32,8 @@
 
 	:- initialization((
 		logtalk_load(sockets(loader)),
-		logtalk_load('../http_client/core_loader.lgt'),
-		logtalk_load('../http_server/loader.lgt'),
+		logtalk_load(http_client(core_loader)),
+		logtalk_load(http_server(loader)),
 		logtalk_load([http_socket_protocol, http_socket], [optimize(on)])
 	)).
 

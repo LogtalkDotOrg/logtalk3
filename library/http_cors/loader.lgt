@@ -21,6 +21,6 @@
 
 :- initialization((
 	logtalk_load(options(loader)),
-	logtalk_load('../http_core/loader.lgt'),
+	logtalk_load(http_core(loader)),
 	logtalk_load(http_cors, [optimize(on)])
 )).

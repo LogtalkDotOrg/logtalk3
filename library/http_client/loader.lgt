@@ -31,10 +31,10 @@
 )).
 
 	:- initialization((
-		logtalk_load('../http_core/loader.lgt'),
-		logtalk_load('../http_websocket/loader.lgt'),
-		logtalk_load('../http_multipart/loader.lgt'),
-		logtalk_load('../http_socket/loader.lgt'),
+		logtalk_load(http_core(loader)),
+		logtalk_load(http_websocket(loader)),
+		logtalk_load(http_multipart(loader)),
+		logtalk_load(http_socket(loader)),
 		logtalk_load(uuid(loader)),
 		logtalk_load(http_client, [optimize(on)])
 	)).

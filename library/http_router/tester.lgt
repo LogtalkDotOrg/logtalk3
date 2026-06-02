@@ -20,8 +20,8 @@
 
 
 :- initialization((
-	logtalk_load('../http_core/loader.lgt'),
-	logtalk_load('../open_api/loader.lgt'),
+	logtalk_load(http_core(loader)),
+	logtalk_load(open_api(loader)),
 	logtalk_load(http_router, [debug(on), source_data(on)]),
 	logtalk_load(test_objects),
 	logtalk_load(lgtunit(loader)),

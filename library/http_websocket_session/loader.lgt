@@ -35,9 +35,9 @@
 		logtalk_load(options(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(timeout(loader)),
-		logtalk_load('../http_client/loader.lgt'),
-		logtalk_load('../http_socket/loader.lgt'),
-		logtalk_load('../http_websocket_messages/loader.lgt'),
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_socket(loader)),
+		logtalk_load(http_websocket_messages(loader)),
 		logtalk_load([
 			http_websocket_session_handler_protocol,
 			http_websocket_session_registry,

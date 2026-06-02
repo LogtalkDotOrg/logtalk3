@@ -28,7 +28,7 @@
 	logtalk_load(character_sets(loader)),
 	logtalk_load(json(loader)),
 	logtalk_load(url(loader)),
-	logtalk_load('../http_cookies/loader.lgt'),
+	logtalk_load(http_cookies(loader)),
 	logtalk_load([
 		http_request_protocol,
 		http_response_protocol,

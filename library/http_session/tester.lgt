@@ -35,11 +35,20 @@
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(dates(loader)),
 		logtalk_load(ids(loader)),
+		logtalk_load(options(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_cookies(loader)),
 		logtalk_load(http_router(loader)),
-		logtalk_load(options(loader)),
-		logtalk_load([http_cookie_jar, http_client_session, http_server_session, http_server_session_handler, http_router_server_session], [debug(on), source_data(on)]),
+		logtalk_load([
+			http_cookie_jar,
+			http_client_session,
+			http_server_session,
+			http_server_session_handler,
+			http_router_server_session
+		], [
+			debug(on),
+			source_data(on)
+		]),
 		logtalk_load(test_objects),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

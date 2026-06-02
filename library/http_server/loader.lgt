@@ -20,7 +20,7 @@
 
 
 :- initialization((
-	logtalk_load('../http_core/loader.lgt'),
-	logtalk_load('../http_websocket/loader.lgt'),
+	logtalk_load(http_core(loader)),
+	logtalk_load(http_websocket(loader)),
 	logtalk_load(http_server, [optimize(on)])
 )).

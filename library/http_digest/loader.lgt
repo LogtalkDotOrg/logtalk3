@@ -25,7 +25,7 @@
 	logtalk_load(hashes(loader)),
 	logtalk_load(hmac(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load('../http_core/loader.lgt'),
+	logtalk_load(http_core(loader)),
 	logtalk_load([http_digest_verifier_protocol, http_digest, http_server_digest_handler], [optimize(on)])
 )).
 
@@ -41,9 +41,9 @@
 )).
 
 	:- initialization((
-		logtalk_load('../http_cookies/loader.lgt'),
-		logtalk_load('../http_client/loader.lgt'),
-		logtalk_load('../http_session/http_cookie_jar.lgt', [optimize(on)]),
+		logtalk_load(http_cookies(loader)),
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_session(http_cookie_jar), [optimize(on)]),
 		logtalk_load(http_client_digest_session, [optimize(on)])
 	)).
 

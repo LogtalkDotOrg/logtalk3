@@ -20,9 +20,9 @@
 
 
 :- initialization((
-	logtalk_load('../http_core/loader.lgt'),
-	logtalk_load('../http_websocket/loader.lgt'),
-	logtalk_load('../http_multipart/loader.lgt'),
+	logtalk_load(http_core(loader)),
+	logtalk_load(http_websocket(loader)),
+	logtalk_load(http_multipart(loader)),
 	logtalk_load(http_server, [debug(on), source_data(on)]),
 	logtalk_load(test_objects),
 	logtalk_load(lgtunit(loader)),
