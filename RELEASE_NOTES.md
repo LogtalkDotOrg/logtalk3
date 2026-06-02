@@ -97,6 +97,14 @@ HTTP and WebSocket libraries.
 * ADDED: New `http_static_site` example illustrating the use of the new HTTP
 libraries.
 
+* ADDED: New `http_static_site_basic` example illustrating the use of the new
+HTTP Basic authentication library together with the static-file and
+directory-listing helpers.
+
+* ADDED: New `http_static_site_digest` example illustrating the use of the new
+HTTP Digest authentication library together with the static-file and
+directory-listing helpers.
+
 * FIXED: The `checkpoint` multi-threading example test flakiness due to
 potential out-or-order output. Thanks to Andrew Davison for the bug report.
 
@@ -7528,6 +7536,7 @@ to run it on Windows.
 
 * FIXED: Workaround a XSB parser bug that prevented loading the `bench`
 example.
+
 
 * FIXED: Tests for the `around_methods`, `books`, `hailstone`, `hello_world`,
 `localizations`, and `patches` examples when run on Windows systems using

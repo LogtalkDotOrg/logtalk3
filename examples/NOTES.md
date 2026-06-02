@@ -333,6 +333,16 @@ Follows a short description of each included example (in alphabetical order):
 	small HTTP client and server example showing how to combine the
 	`http_static_files` and `http_directory_listing` libraries
 
+- `http_static_site_basic`  
+	small HTTP client and server example showing how to protect a static site
+	with HTTP Basic authentication while combining the `http_static_files`,
+	`http_directory_listing`, and `http_authenticate` libraries
+
+- `http_static_site_digest`  
+	small HTTP client and server example showing how to protect a static site
+	with HTTP Digest authentication while combining the `http_static_files`,
+	`http_directory_listing`, and `http_digest` libraries
+
 - `http_websocket_echo`  
 	small HTTP and WebSocket example showing the opening handshake and a
 	one-message echo exchange
