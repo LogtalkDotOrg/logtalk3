@@ -210,7 +210,7 @@
 							p(['This page was served for a ', strong(ModeLabel), '.']),
 							p(['Current full-page panel: ', strong(VariantLabel), '.']),
 							p('Use the studio controls to swap other panel variants without leaving the page. Each HTMX fragment response emits a server-triggered event that refreshes the activity rail.'),
-							p(a([href='/'], 'Back to the landing page'))
+							p(a([href=('/')], 'Back to the landing page'))
 						]),
 						StudioCard,
 						ActivityCard
