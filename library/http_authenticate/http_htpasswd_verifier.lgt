@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-06-02,
 		comment is 'Portable Apache ``.htpasswd`` subset verifier supporting ``{SHA}`` entries and rejecting unsupported hash markers.',
 		parameters is [
 			'Path' - 'Path of the password file to load on each verification request.'
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2, reverse/2
+		length/2, member/2, memberchk/2, reverse/2
 	]).
 
 	:- uses(crypto, [

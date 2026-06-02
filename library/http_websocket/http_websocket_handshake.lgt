@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-06-02,
 		comment is 'Shared helpers for WebSocket opening-handshake key generation and accept-value computation.'
 	]).
 
@@ -51,7 +51,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, nth0/3, reverse/2, take/4
+		append/2, append/3, length/2, nth0/3, reverse/2, take/4
 	]).
 
 	:- uses(hash_common_32, [

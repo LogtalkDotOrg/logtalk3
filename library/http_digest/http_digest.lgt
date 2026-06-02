@@ -29,10 +29,6 @@
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
-	:- uses(crypto, [
-		secure_compare/2
-	]).
-
 	:- public(challenge/2).
 	:- mode(challenge(+compound, -compound), zero_or_one).
 	:- info(challenge/2, [
@@ -131,6 +127,9 @@
 		argnames is ['Request', 'Response0', 'Response', 'Options']
 	]).
 
+	:- uses(crypto, [
+		secure_compare/2
+	]).
 
 	:- uses(date, [
 		date_time_to_unix/2
@@ -147,7 +146,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, append/3, member/2, memberchk/2, reverse/2,
+		append/2, append/3, length/2, member/2, memberchk/2, reverse/2,
 		valid/1 as proper_list/1
 	]).
 
