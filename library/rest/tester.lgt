@@ -21,8 +21,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load('../http_router/loader.lgt'),
-	logtalk_load('../open_api/loader.lgt'),
+	logtalk_load(http_router(loader)),
+	logtalk_load(open_api(loader)),
 	logtalk_load(rest, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(test_objects, [debug(on), source_data(on)]),

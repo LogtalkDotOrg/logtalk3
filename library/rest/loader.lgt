@@ -20,7 +20,7 @@
 
 
 :- initialization((
-	logtalk_load('../http_router/loader.lgt'),
-	logtalk_load('../open_api/loader.lgt'),
+	logtalk_load(http_router(loader)),
+	logtalk_load(open_api(loader)),
 	logtalk_load(rest, [optimize(on)])
 )).
