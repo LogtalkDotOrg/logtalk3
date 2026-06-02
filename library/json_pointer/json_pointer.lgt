@@ -23,9 +23,9 @@
 	implements(json_pointer_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-06-02,
 		comment is 'JSON Pointer (RFC 6901) parser, generator, and evaluator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used for reference tokens. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -306,8 +306,9 @@
 		Code =< 0'f,
 		Value is Code - 0'a + 10.
 
-	evaluate_pointer([], JSON, JSON) :-
-		!.
+	evaluate_pointer([], JSON, Value) :-
+		!,
+		JSON = Value.
 	evaluate_pointer([Token| Tokens], JSON, Value) :-
 		!,
 		evaluate_token(JSON, Token, Intermediate),
