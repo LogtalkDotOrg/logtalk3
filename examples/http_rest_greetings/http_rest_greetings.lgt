@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-02,
 		comment is 'REST API used by the HTTP REST example.',
 		parnames is ['Port']
 	]).
@@ -121,8 +121,8 @@
 	}).
 
 	handle(Request, Response) :-
-		http::method(Request, get),
-		http::target(Request, origin('/openapi.json')),
+		http_core::method(Request, get),
+		http_core::target(Request, origin('/openapi.json')),
 		!,
 		self(Self),
 		open_api::document(Self, Document),
@@ -201,7 +201,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-02,
 		comment is 'Small local HTTP server used by the HTTP REST example.'
 	]).
 
@@ -230,7 +230,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-02,
 		comment is 'HTTP client used by the HTTP REST example.'
 	]).
 
@@ -276,8 +276,8 @@
 	fetch_document(Port, Document) :-
 		open_api_url(Port, URL),
 		http_client::get(URL, Response, []),
-		http::status(Response, status(200, 'OK')),
-		http::body(Response, content('application/json', json(Document))),
+		http_core::status(Response, status(200, 'OK')),
+		http_core::body(Response, content('application/json', json(Document))),
 		open_api::validate_document(Document).
 
 	create_greeting(Port, Name, Response) :-
@@ -326,7 +326,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-02,
 		comment is 'Self-contained demo object for the HTTP REST example.'
 	]).
 
@@ -371,9 +371,9 @@
 			catch(once(threaded_exit(serve_demo_requests(Listener, Port), Tag)), _, true).
 
 		print_result(result(_Document, CreateResponse, LookupResponse, DeleteResponse)) :-
-			http::body(CreateResponse, content('application/json', json({message-CreateMessage}))),
-			http::body(LookupResponse, content('application/json', json({message-LookupMessage}))),
-			http::status(DeleteResponse, status(204, 'No Content')),
+			http_core::body(CreateResponse, content('application/json', json({message-CreateMessage}))),
+			http_core::body(LookupResponse, content('application/json', json({message-LookupMessage}))),
+			http_core::status(DeleteResponse, status(204, 'No Content')),
 			write('Created greeting: '),
 			write(CreateMessage),
 			nl,

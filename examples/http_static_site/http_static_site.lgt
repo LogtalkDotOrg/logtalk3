@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Fixture object that creates and deletes the sample document root used by the static-site example.'
 	]).
 
@@ -51,6 +51,10 @@
 	:- info(cleanup/1, [
 		comment is 'Deletes a previously prepared sample document root when it still exists.',
 		argnames is ['DocumentRoot']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	document_root(Root) :-
@@ -110,7 +114,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'HTTP handler for the static-site example.'
 	]).
 
@@ -123,8 +127,8 @@
 		!,
 		http_static_files::serve(Path, Request, _DocumentRoot_, [index_files(['index.html'])], Response).
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
 
 	browse_request_path(Request, '/') :-
 		request_target_path(Request, '/browse'),
@@ -171,10 +175,10 @@
 		normalize_relative_path(RelativePath0, Path).
 
 	request_target_path(Request, Path) :-
-		http::target(Request, origin(Path)),
+		http_core::target(Request, origin(Path)),
 		!.
 	request_target_path(Request, Path) :-
-		http::target(Request, origin(Path, _Query)).
+		http_core::target(Request, origin(Path, _Query)).
 
 	normalize_relative_path(Path0, Path) :-
 		( 	sub_atom(Path0, _, 1, 0, '/') ->
@@ -193,7 +197,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Small local HTTP server used by the static-site example.'
 	]).
 
@@ -254,7 +258,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'HTTP client used by the static-site example.'
 	]).
 
@@ -284,6 +288,10 @@
 	:- info(run/2, [
 		comment is 'Fetches the home page, a static guide file, and a browsable directory listing from the example server.',
 		argnames is ['Port', 'Result']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	fetch_home(Port, Response) :-
@@ -318,7 +326,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Self-contained demo object for the static-site example.'
 	]).
 
@@ -363,9 +371,9 @@
 			catch(static_site_fixture::cleanup(DocumentRoot), _, true).
 
 		print_result(result(HomeResponse, GuideResponse, ListingResponse)) :-
-			http::status(HomeResponse, HomeStatus),
-			http::status(GuideResponse, GuideStatus),
-			http::status(ListingResponse, ListingStatus),
+			http_core::status(HomeResponse, HomeStatus),
+			http_core::status(GuideResponse, GuideStatus),
+			http_core::status(ListingResponse, ListingStatus),
 			write('Home response: '),
 			write(HomeStatus),
 			nl,

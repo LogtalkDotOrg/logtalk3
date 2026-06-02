@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Unit tests for the "http_htmx_panel" example.'
 	]).
 

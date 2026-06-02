@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'OpenAPI provider for the HTTP and OpenAPI example.',
 		parnames is (['Port'])
 	]).
@@ -138,7 +138,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'HTTP handler for the HTTP and OpenAPI example.'
 	]).
 
@@ -149,28 +149,28 @@
 	% Route dispatch is written explicitly so the example stays easy to read
 	% without introducing an extra router abstraction.
 	handle(Request, Response) :-
-		http::method(Request, get),
-		http::target(Request, origin('/openapi.json')),
+		http_core::method(Request, get),
+		http_core::target(Request, origin('/openapi.json')),
 		!,
 		reply_with_document(Request, Response).
 	handle(Request, Response) :-
-		http::method(Request, get),
+		http_core::method(Request, get),
 		request_greeting_name(Request, _Name),
 		!,
 		reply_with_path_greeting(Request, Response).
 	handle(Request, Response) :-
-		http::method(Request, post),
-		http::target(Request, origin('/greetings')),
+		http_core::method(Request, post),
+		http_core::target(Request, origin('/greetings')),
 		!,
 		reply_with_greeting(Request, Response).
 	handle(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		json_response(Version, status(404, 'Not Found'), {code-not_found, message-'Unknown route'}, Response).
 
 	% The OpenAPI document is derived on demand from the provider object and
 	% then returned as ordinary JSON content.
 	reply_with_document(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		provider(Provider),
 		open_api::document(Provider, Document),
 		json_response(Version, status(200, 'OK'), Document, Response).
@@ -178,7 +178,7 @@
 	% For the POST operation the handler first validates the request contract,
 	% then extracts the body field used to build the greeting text.
 	reply_with_greeting(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		provider(Provider),
 		open_api::validate_request(Provider, create_greeting, Request, Errors),
 		( 	Errors == [] ->
@@ -193,7 +193,7 @@
 	% The GET path-parameter operation follows the same contract-validation
 	% pattern. The only difference is how the input value is extracted.
 	reply_with_path_greeting(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		provider(Provider),
 		open_api::validate_request(Provider, get_greeting, Request, Errors),
 		( 	Errors == [] ->
@@ -211,14 +211,14 @@
 
 	% POST input comes from a JSON body.
 	request_body_name(Request, Name) :-
-		http::body(Request, content('application/json', json({name-Name}))),
+		http_core::body(Request, content('application/json', json({name-Name}))),
 		!.
 
 	% GET input comes from the request target. OpenAPI validation confirms the
 	% path matches the template, but the example still extracts the actual
 	% segment explicitly so the handler can use it.
 	request_greeting_name(Request, Name) :-
-		http::target(Request, Target),
+		http_core::target(Request, Target),
 		target_greeting_name(Target, Name).
 
 	target_greeting_name(origin(Path), Name) :-
@@ -240,7 +240,7 @@
 
 	% All responses are JSON so the response builder can stay small.
 	json_response(Version, Status, Body, Response) :-
-		http::response(Version, Status, [], content('application/json', json(Body)), [], Response).
+		http_core::response(Version, Status, [], content('application/json', json(Body)), [], Response).
 
 :- end_object.
 
@@ -255,7 +255,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Small local HTTP server used by the HTTP and OpenAPI example.'
 	]).
 
@@ -385,7 +385,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'HTTP client used by the HTTP and OpenAPI example.'
 	]).
 
@@ -426,8 +426,8 @@
 	fetch_document(Port, Document) :-
 		open_api_url(Port, URL),
 		http_client::get(URL, Response, []),
-		http::status(Response, status(200, 'OK')),
-		http::body(Response, content('application/json', json(Document))),
+		http_core::status(Response, status(200, 'OK')),
+		http_core::body(Response, content('application/json', json(Document))),
 		open_api::validate_document(Document).
 
 	% The POST call demonstrates a body-based request built directly from the
@@ -486,7 +486,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Managed client that starts and stops the open-ended server alternative for the HTTP and OpenAPI example.'
 	]).
 
@@ -552,7 +552,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Self-contained demo object for the HTTP and OpenAPI example.'
 	]).
 
@@ -606,8 +606,8 @@
 		% Printing both responses makes the difference between the POST and GET
 		% operations visible when running the demo interactively.
 		print_result(result(_Document, CreateResponse, LookupResponse)) :-
-			http::body(CreateResponse, content('application/json', json({message-CreateMessage}))),
-			http::body(LookupResponse, content('application/json', json({message-LookupMessage}))),
+			http_core::body(CreateResponse, content('application/json', json({message-CreateMessage}))),
+			http_core::body(LookupResponse, content('application/json', json({message-LookupMessage}))),
 			write('Fetched the OpenAPI document and created: '),
 			write(CreateMessage),
 			nl,

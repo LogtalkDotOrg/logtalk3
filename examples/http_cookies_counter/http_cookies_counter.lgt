@@ -31,7 +31,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'HTTP handler for the cookie counter example.'
 	]).
 
@@ -43,12 +43,12 @@
 	% only moving part. Repeating the same GET request shows that the state is
 	% not preserved on the server side but in the client cookie.
 	handle(Request, Response) :-
-		http::method(Request, get),
-		http::target(Request, origin('/visits')),
+		http_core::method(Request, get),
+		http_core::target(Request, origin('/visits')),
 		!,
 		reply_with_visit(Request, Response).
 	handle(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		json_response(Version, status(404, 'Not Found'), {code-not_found, message-'Unknown route'}, [], Response).
 
 	% Incoming Cookie headers are already normalized by the HTTP library into
@@ -56,7 +56,7 @@
 	% reading the previously stored count and calls http_cookies directly when
 	% generating the outgoing Set-Cookie header text controlled by the server.
 	reply_with_visit(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		next_visit_count(Request, VisitCount),
 		visit_set_cookie(VisitCount, SetCookie),
 		json_response(
@@ -68,7 +68,7 @@
 		).
 
 	next_visit_count(Request, VisitCount) :-
-		( 	http::property(Request, cookies(Pairs)),
+		( 	http_core::property(Request, cookies(Pairs)),
 			memberchk(visits-CurrentText, Pairs),
 			cookie_integer(CurrentText, CurrentCount) ->
 			VisitCount is CurrentCount + 1
@@ -90,7 +90,7 @@
 		SetCookie = set_cookie(visits, VisitText, [path-('/'), max_age-600, http_only-true]).
 
 	json_response(Version, Status, Body, Properties, Response) :-
-		http::response(Version, Status, [], content('application/json', json(Body)), Properties, Response).
+		http_core::response(Version, Status, [], content('application/json', json(Body)), Properties, Response).
 
 :- end_object.
 
@@ -252,8 +252,8 @@
 			catch(once(threaded_exit(serve_demo_requests(Listener), Tag)), _, true).
 
 		print_result(result(FirstResponse, StoredCookiePairs, SecondResponse)) :-
-			http::body(FirstResponse, content('application/json', json({visits-FirstVisit, message-FirstMessage}))),
-			http::body(SecondResponse, content('application/json', json({visits-SecondVisit, message-SecondMessage}))),
+			http_core::body(FirstResponse, content('application/json', json({visits-FirstVisit, message-FirstMessage}))),
+			http_core::body(SecondResponse, content('application/json', json({visits-SecondVisit, message-SecondMessage}))),
 			write('First visit: '),
 			write(FirstVisit),
 			write(' ('),

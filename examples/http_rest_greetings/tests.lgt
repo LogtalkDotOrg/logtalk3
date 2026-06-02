@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-02,
 		comment is 'Unit tests for the "http_rest" example.'
 	]).
 
@@ -36,7 +36,7 @@
 	cover(greetings_rest_api(_)).
 	cover(greetings_rest_server).
 	cover(greetings_rest_client).
-	cover(http_rest_demo).
+	cover(http_rest_greetings_demo).
 
 	test(http_rest_document_01, deterministic) :-
 		request(get, origin('/openapi.json'), http(1, 1), [], empty, [], Request),
@@ -89,7 +89,7 @@
 		:- threaded.
 
 		test(http_rest_demo_01, deterministic) :-
-			http_rest_demo::run(result(Document, CreateResponse, LookupResponse, DeleteResponse)),
+			http_rest_greetings_demo::run(result(Document, CreateResponse, LookupResponse, DeleteResponse)),
 			open_api::validate_document(Document),
 			status(CreateResponse, status(201, 'Created')),
 			header(CreateResponse, location, '/greetings/Ada'),

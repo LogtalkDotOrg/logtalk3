@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-02,
 		comment is 'REST client example for the Open-Meteo geocoding and forecast APIs.'
 	]).
 
@@ -85,8 +85,8 @@
 		], URL).
 
 	response_json(Response, JSON) :-
-		( 	http::status(Response, status(200, 'OK')),
-			http::body(Response, content('application/json', json(JSON))) ->
+		( 	http_core::status(Response, status(200, 'OK')),
+			http_core::body(Response, content('application/json', json(JSON))) ->
 			check_api_error(JSON)
 		; 	throw_forecast_error(unexpected_open_meteo_response(Response))
 		).

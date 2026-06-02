@@ -32,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'HTTP handler for the HTMX panel example.'
 	]).
 
@@ -90,6 +90,10 @@
 	:- info(activity_alert/2, [
 		comment is 'Route handler that returns the activity rail fragment for the alert panel.',
 		argnames is ['Request', 'Response']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	middleware(htmx_request, annotate_htmx_request).
@@ -295,7 +299,7 @@
 	) :-
 		activity_path(Variant, Path),
 		variant_event(Variant, Event),
-		atomic_list_concat([Event, ' from:body'], Trigger).
+		atom_concat(Event, ' from:body', Trigger).
 
 	placeholder_panel(
 		div([class='panel-placeholder'], [
@@ -435,7 +439,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Small local HTTP server used by the HTMX panel example.'
 	]).
 
@@ -479,7 +483,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'HTTP client used by the HTMX panel example.'
 	]).
 
@@ -516,6 +520,10 @@
 	:- info(run/2, [
 		comment is 'Fetches the home page, the ordinary panel page, the HTMX fragment response, and the boosted panel page from the example server.',
 		argnames is ['Port', 'Result']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	fetch_home(Port, Response) :-
@@ -555,7 +563,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Self-contained demo object for the HTMX panel example.'
 	]).
 
@@ -597,10 +605,10 @@
 			catch(once(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag)), _, true).
 
 		print_result(result(HomeResponse, PanelPageResponse, PanelFragmentResponse, PanelBoostedResponse)) :-
-			http::status(HomeResponse, HomeStatus),
-			http::status(PanelPageResponse, PanelPageStatus),
-			http::status(PanelFragmentResponse, PanelFragmentStatus),
-			http::status(PanelBoostedResponse, PanelBoostedStatus),
+			http_core::status(HomeResponse, HomeStatus),
+			http_core::status(PanelPageResponse, PanelPageStatus),
+			http_core::status(PanelFragmentResponse, PanelFragmentStatus),
+			http_core::status(PanelBoostedResponse, PanelBoostedStatus),
 			write('Home response: '),
 			write(HomeStatus),
 			nl,
