@@ -196,11 +196,6 @@ logtalk_library_path(hodge_rank, library('hodge_rank/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).
 logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
-logtalk_library_path(http, library('http/')).
-logtalk_library_path(http_client, library('http_client/')).
-logtalk_library_path(http_cookies, library('http_cookies/')).
-logtalk_library_path(http_server, library('http_server/')).
-logtalk_library_path(http_socket, library('http_socket/')).
 logtalk_library_path(ica_projection, library('ica_projection/')).
 logtalk_library_path(ica_projection, library('ica_projection/')).
 logtalk_library_path(ids, library('ids/')).
@@ -261,7 +256,6 @@ logtalk_library_path(nearest_centroid_classifier, library('nearest_centroid_clas
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
-logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
