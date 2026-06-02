@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-06-02,
 		comment is 'Unit tests for the "crypto" library.'
 	]).
 
@@ -319,7 +319,7 @@
 	test(crypto_password_hash_4_09, error(instantiation_error)) :-
 		password_hash(md5, [112,97,115,115], _PasswordHash, _).
 
-	test(crypto_password_hash_4_10, error(type_error(list, foo))) :-
+	test(crypto_password_hash_4_10, error(type_error(list(compound), foo))) :-
 		password_hash(md5, [112,97,115,115], _PasswordHash, foo).
 
 	test(crypto_password_hash_4_11, error(instantiation_error)) :-

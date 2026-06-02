@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-06-02,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -187,7 +187,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, take/3
+		append/3, length/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -195,7 +195,7 @@
 	]).
 
 	:- uses(os, [
-		wall_time/1
+		cpu_time/1, pid/1, wall_time/1
 	]).
 
 	:- uses(type, [
@@ -274,9 +274,7 @@
 		check_pbkdf2_output_length(Length, DigestSize, Context),
 		(   Length =:= 0 ->
 			DerivedKey = []
-		;   BlockCount is ((Length - 1) // DigestSize) + 1,
-			pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, BlockCount, FullKey),
-			take(Length, FullKey, DerivedKey)
+		;   pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, Length, DerivedKey, [])
 		).
 
 	password_hash(Hash, Password, PasswordHash, Options) :-
@@ -303,8 +301,17 @@
 		).
 
 	fallback_seed(Seed) :-
-		wall_time(Time),
-		Seed is round(Time).
+		pid(PID),
+		cpu_time(CPU0),
+		wall_time(Wall0),
+		CPU is round(CPU0),
+		Wall is round(Wall0),
+		W is 0xFFFFFFFF,
+		S0 is xor(xor(PID, Wall << 8), CPU << 16) /\ W,
+		S1 is xor(S0, S0 >> 11),
+		S2 is xor(S1, S1 << 7) /\ W,
+		S3 is xor(S2, S2 >> 17),
+		Seed is xor(S3, (S3 << 5)) /\ W.
 
 	check_hash(Hash, Context) :-
 		(   var(Hash) ->
@@ -428,6 +435,7 @@
 		).
 
 	parse_password_hash_options(Options, Hash, Iterations, Salt, Length, Context) :-
+		check(list(compound), Options, Context),
 		Hash::digest_size(DefaultLength),
 		(   var(Options) ->
 			throw(error(instantiation_error, Context))
@@ -524,16 +532,16 @@
 	hkdf_expand_blocks(Hash, PseudorandomKey, Info, Index, BlockCount, Previous, Remaining0, Bytes0, Bytes) :-
 		build_hkdf_message(Previous, Info, Index, Message),
 		digest(Hash, PseudorandomKey, Message, Block),
-		copy_hkdf_output(Block, Remaining0, Remaining, Bytes0, Bytes1),
+		copy_output_bytes(Block, Remaining0, Remaining, Bytes0, Bytes1),
 		NextIndex is Index + 1,
 		hkdf_expand_blocks(Hash, PseudorandomKey, Info, NextIndex, BlockCount, Block, Remaining, Bytes1, Bytes).
 
-	copy_hkdf_output(_Block, 0, 0, Bytes, Bytes) :-
+	copy_output_bytes(_Block, 0, 0, Bytes, Bytes) :-
 		!.
-	copy_hkdf_output([], Remaining, Remaining, Bytes, Bytes).
-	copy_hkdf_output([Byte| Block], Remaining0, Remaining, [Byte| Bytes], Tail) :-
+	copy_output_bytes([], Remaining, Remaining, Bytes, Bytes).
+	copy_output_bytes([Byte| Block], Remaining0, Remaining, [Byte| Bytes], Tail) :-
 		Remaining1 is Remaining0 - 1,
-		copy_hkdf_output(Block, Remaining1, Remaining, Bytes, Tail).
+		copy_output_bytes(Block, Remaining1, Remaining, Bytes, Tail).
 
 	build_hkdf_message(Previous, Info, Index, Message) :-
 		copy_hkdf_prefix(Previous, Info, Index, Message).
@@ -547,14 +555,13 @@
 	copy_hkdf_suffix([Byte| Bytes], Index, [Byte| Message]) :-
 		copy_hkdf_suffix(Bytes, Index, Message).
 
-	pbkdf2_blocks(_Hash, _Password, _Salt, _Iterations, Index, BlockCount, []) :-
-		Index > BlockCount,
+	pbkdf2_blocks(_Hash, _Password, _Salt, _Iterations, _Index, 0, DerivedKey, DerivedKey) :-
 		!.
-	pbkdf2_blocks(Hash, Password, Salt, Iterations, Index, BlockCount, DerivedKey) :-
+	pbkdf2_blocks(Hash, Password, Salt, Iterations, Index, Remaining0, DerivedKey0, DerivedKey) :-
 		pbkdf2_block(Hash, Password, Salt, Iterations, Index, Block),
+		copy_output_bytes(Block, Remaining0, Remaining, DerivedKey0, DerivedKey1),
 		NextIndex is Index + 1,
-		append(Block, Rest, DerivedKey),
-		pbkdf2_blocks(Hash, Password, Salt, Iterations, NextIndex, BlockCount, Rest).
+		pbkdf2_blocks(Hash, Password, Salt, Iterations, NextIndex, Remaining, DerivedKey1, DerivedKey).
 
 	pbkdf2_block(Hash, Password, Salt, Iterations, Index, Block) :-
 		integer_to_big_endian_bytes32(Index, CounterBytes),
