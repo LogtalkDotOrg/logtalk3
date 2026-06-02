@@ -216,7 +216,7 @@
 		ulid(loader),
 		uuid(loader),
 		html(loader),
-		http(loader),
+		http_core(loader),
 		http_client(loader),
 		http_cookies(loader),
 		http_cors(loader),

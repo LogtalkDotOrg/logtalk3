@@ -30,9 +30,9 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 :- end_object.
 
@@ -48,10 +48,10 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::target(Request, Target),
+		http_core::version(Request, Version),
+		http_core::target(Request, Target),
 		target_text(Target, Text),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
 
 	target_text(origin(Path), Path).
 	target_text(origin(Path, Query), Text) :-
@@ -72,14 +72,14 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
 		http_multipart::fields(Body, [title-Title]),
 		http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
 		atom_concat('title=', Title, Prefix),
 		atom_concat(Prefix, '; upload=', Prefix0),
 		atom_concat(Prefix0, Filename, Summary),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Summary)), [], Response).
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Summary)), [], Response).
 
 :- end_object.
 

@@ -159,7 +159,6 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
@@ -174,6 +173,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -359,10 +359,10 @@
   <section id="http-client">
 <span id="library-http-client"></span><h1><code class="docutils literal notranslate"><span class="pre">http_client</span></code><a class="headerlink" href="#http-client" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_client</span></code> library provides a request-oriented client layer on
-top of the <code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> libraries. It is the
-request-oriented client-side entry point: it builds normalized requests
-from absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs plus options and delegates transport to
-the sockets-backed layer.</p>
+top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> libraries. It is
+the request-oriented client-side entry point: it builds normalized
+requests from absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs plus options and delegates
+transport to the sockets-backed layer.</p>
 <p>The low-level stream primitives previously exposed as the main API now
 live in the <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object. That object remains the
 transport-neutral stream-processing layer used internally by
@@ -402,9 +402,9 @@ the client call.</p>
     <span class="k">implements</span>(http_handler_protocol)).
 
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
@@ -427,12 +427,12 @@ normalized request body using <code class="docutils literal notranslate"><span c
     <span class="k">implements</span>(http_handler_protocol)).
 
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
         http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
         http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
         atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
-        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
 
 <span class="p">:- </span><span class="k">end_object</span>.
 

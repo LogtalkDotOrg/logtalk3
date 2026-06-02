@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_parameters" library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, header/3, request/7, status/2
 	]).
 	:- uses(list, [

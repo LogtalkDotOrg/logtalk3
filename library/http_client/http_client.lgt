@@ -351,7 +351,7 @@
 		merge_request_query(URLQuery, QueryPairs, Query),
 		build_origin_target(Path, Query, Target),
 		request_host_property(Host, Port, HostProperty),
-		http::request(Method, Target, Version, Headers, Body, [HostProperty| Properties0], Request).
+		http_core::request(Method, Target, Version, Headers, Body, [HostProperty| Properties0], Request).
 
 	build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Host, Port, Request) :-
 		parse_websocket_url(URL, Host, Port, Path, URLQuery),
@@ -360,7 +360,7 @@
 		build_origin_target(Path, Query, Target),
 		request_host_property(Host, Port, HostProperty),
 		websocket_request_properties(Protocols, Key, HostProperty, Properties),
-		http::request(get, Target, Version, Headers, empty, Properties, Request).
+		http_core::request(get, Target, Version, Headers, empty, Properties, Request).
 
 	websocket_request_properties([], Key, HostProperty, [HostProperty, connection([upgrade]), upgrade([websocket]), websocket_key(Key), websocket_version(13)]) :-
 		!.
@@ -468,8 +468,8 @@
 
 	valid_websocket_response(Request, Response) :-
 		websocket_response_http_version(Response),
-		http::status(Response, status(101, _ReasonPhrase)),
-		http::body(Response, empty),
+		http_core::status(Response, status(101, _ReasonPhrase)),
+		http_core::body(Response, empty),
 		^^message_connection_tokens(Response, ConnectionTokens),
 		memberchk(upgrade, ConnectionTokens),
 		message_upgrade_tokens(Response, UpgradeTokens),
@@ -481,23 +481,23 @@
 		validate_websocket_protocol_response(Request, Response).
 
 	valid_websocket_version_rejection(Response) :-
-		http::status(Response, status(426, _ReasonPhrase)),
+		http_core::status(Response, status(426, _ReasonPhrase)),
 		message_websocket_version(Response, _Version).
 
 	valid_websocket_authentication_rejection(Response) :-
-		http::status(Response, status(401, _ReasonPhrase)).
+		http_core::status(Response, status(401, _ReasonPhrase)).
 
 	valid_websocket_redirection_rejection(Response) :-
-		http::status(Response, status(Status, _ReasonPhrase)),
+		http_core::status(Response, status(Status, _ReasonPhrase)),
 		Status >= 300,
 		Status < 400.
 
 	valid_websocket_rejection(Response) :-
-		http::status(Response, status(Status, _ReasonPhrase)),
+		http_core::status(Response, status(Status, _ReasonPhrase)),
 		Status =\= 101.
 
 	websocket_response_http_version(Response) :-
-		http::version(Response, http(1, 1)).
+		http_core::version(Response, http(1, 1)).
 
 	validate_websocket_protocol_response(Request, Response) :-
 		(	message_websocket_protocols(Request, RequestedProtocols) ->
@@ -509,53 +509,53 @@
 		).
 
 	message_upgrade_tokens(Message, Tokens) :-
-		(	http::property(Message, upgrade(Tokens)) ->
+		(	http_core::property(Message, upgrade(Tokens)) ->
 			true
-		;	http::header(Message, upgrade, Tokens)
+		;	http_core::header(Message, upgrade, Tokens)
 		),
 		!.
 
 	message_websocket_key(Message, Key) :-
-		(	http::property(Message, websocket_key(Key)) ->
+		(	http_core::property(Message, websocket_key(Key)) ->
 			true
-		;	http::header(Message, sec_websocket_key, Key)
+		;	http_core::header(Message, sec_websocket_key, Key)
 		),
 		!.
 
 	message_websocket_version(Message, Version) :-
-		(	http::property(Message, websocket_version(Version)) ->
+		(	http_core::property(Message, websocket_version(Version)) ->
 			true
-		;	http::header(Message, sec_websocket_version, Version)
+		;	http_core::header(Message, sec_websocket_version, Version)
 		),
 		!.
 
 	message_websocket_accept(Message, Accept) :-
 		(	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
 			Values = [Accept]
-		;	http::property(Message, websocket_accept(Accept)) ->
+		;	http_core::property(Message, websocket_accept(Accept)) ->
 			true
-		;	http::header(Message, sec_websocket_accept, Accept)
+		;	http_core::header(Message, sec_websocket_accept, Accept)
 		),
 		!.
 
 	message_websocket_extensions(Message, Extensions) :-
-		(	http::property(Message, websocket_extensions(Extensions)) ->
+		(	http_core::property(Message, websocket_extensions(Extensions)) ->
 			true
-		;	http::header(Message, sec_websocket_extensions, Extensions)
+		;	http_core::header(Message, sec_websocket_extensions, Extensions)
 		),
 		!.
 
 	message_websocket_protocols(Message, Protocols) :-
-		(	http::property(Message, websocket_protocol(Protocols)) ->
+		(	http_core::property(Message, websocket_protocol(Protocols)) ->
 			true
-		;	http::header(Message, sec_websocket_protocol, Protocols)
+		;	http_core::header(Message, sec_websocket_protocol, Protocols)
 		),
 		!.
 
 	message_response_websocket_protocols(Message, Protocols) :-
 		(	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
 			Values = [Protocols]
-		;	http::property(Message, websocket_protocol(Protocols))
+		;	http_core::property(Message, websocket_protocol(Protocols))
 		),
 		!.
 
@@ -564,7 +564,7 @@
 		Values \== [],
 		!.
 	response_websocket_protocol_present(Message) :-
-		http::property(Message, websocket_protocol(_Protocols)).
+		http_core::property(Message, websocket_protocol(_Protocols)).
 
 	components_endpoint(Components, Host, Port) :-
 		member(authority(Authority), Components),
@@ -614,7 +614,7 @@
 		number_codes(Port, PortCodes).
 
 	validate_endpoint_host_port(Host, Port) :-
-		http::request(get, authority(Host, Port), http(1, 1), [], empty, [], _).
+		http_core::request(get, authority(Host, Port), http(1, 1), [], empty, [], _).
 
 	normalize_request_path('', '/') :-
 		!.
@@ -627,8 +627,8 @@
 		append_query_text(URLQuery, QueryFromOptions, Query).
 
 	encode_query_pairs(QueryPairs, Query) :-
-		http::encode_body('application/x-www-form-urlencoded', QueryPairs, [], Body),
-		http::generate_body(atom(Query), Body, []).
+		http_core::encode_body('application/x-www-form-urlencoded', QueryPairs, [], Body),
+		http_core::generate_body(atom(Query), Body, []).
 
 	append_query_text('', Query, Query) :-
 		!.

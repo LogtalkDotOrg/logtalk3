@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_client" library.'
 	]).
 
-	:- uses(http, [body/2, parse_request/2, property/2, status/2, version/2]).
+	:- uses(http_core, [body/2, parse_request/2, property/2, status/2, version/2]).
 
 	cover(http_client_core).
 	cover(http_client).
@@ -596,7 +596,7 @@
 		).
 
 	request_has_valid_websocket_key(Request, Accept) :-
-		http::header(Request, sec_websocket_key, Key),
+		http_core::header(Request, sec_websocket_key, Key),
 		http_websocket_handshake::websocket_accept(Key, Accept).
 
 	local_http_url(Port, Path, URL) :-
@@ -635,13 +635,13 @@
 
 	responses_atom([], '').
 	responses_atom([Response| Responses], Atom) :-
-		http::generate_response(atom(ResponseAtom), Response),
+		http_core::generate_response(atom(ResponseAtom), Response),
 		responses_atom(Responses, ResponsesAtom),
 		atom_concat(ResponseAtom, ResponsesAtom, Atom).
 
 	requests_atom([], '').
 	requests_atom([Request| Requests], Atom) :-
-		http::generate_request(atom(RequestAtom), Request),
+		http_core::generate_request(atom(RequestAtom), Request),
 		requests_atom(Requests, RequestsAtom),
 		atom_concat(RequestAtom, RequestsAtom, Atom).
 

@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_static_site" example.'
 	]).
 
-	:- uses(http, [body/2, header/3, request/7, status/2]).
+	:- uses(http_core, [body/2, header/3, request/7, status/2]).
 
 	cover(static_site_fixture).
 	cover(static_site_http_handler(_)).

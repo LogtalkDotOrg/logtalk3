@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the http_session library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2,
 		property/2
 	]).
@@ -344,7 +344,7 @@
 			http_server_session::current(Request, Session),
 			http_server_session::set(Session, visits, 1),
 			http_server_session::data(Session, Data),
-			http::property(Request, http_server_session_state(SessionState)),
+			http_core::property(Request, http_server_session_state(SessionState)),
 			server_session_response(Response0),
 			http_server_session::finish(Request, Response0, Response),
 			server_session_cookie(Response, set_cookie(session, SessionId, Attributes)),
@@ -352,7 +352,7 @@
 			atom(SessionId),
 			memberchk(http_only-true, Attributes).
 
-		test(http_server_session_02, deterministic((Visits == 1, \+ http::property(Response2, set_cookies(_))))) :-
+		test(http_server_session_02, deterministic((Visits == 1, \+ http_core::property(Response2, set_cookies(_))))) :-
 			http_server_session::open(Manager),
 			server_session_request([], Request10),
 			http_server_session::begin(Manager, Request10, Request11),
@@ -422,7 +422,7 @@
 			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
 			server_session_request([session-SessionId], Request20),
 			http_server_session::begin(Manager, Request20, Request21),
-			http::property(Request21, http_server_session_state(SessionState)),
+			http_core::property(Request21, http_server_session_state(SessionState)),
 			server_session_response(Response20),
 			http_server_session::finish(Request21, Response20, Response2),
 			server_session_cookie(Response2, set_cookie(session, '', Attributes)),
@@ -452,7 +452,7 @@
 			http_server_session::finish(Request11, Response10, _Response1),
 			http_server_session::close(Manager).
 
-		test(http_server_session_08, deterministic((RemovalFailed == true, Visits == 1, \+ http::property(Response2, set_cookies(_))))) :-
+		test(http_server_session_08, deterministic((RemovalFailed == true, Visits == 1, \+ http_core::property(Response2, set_cookies(_))))) :-
 			http_server_session::open(Manager),
 			server_session_request([], Request10),
 			http_server_session::begin(Manager, Request10, Request11),
@@ -484,7 +484,7 @@
 			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
 			server_session_request([session-SessionId], Request20),
 			http_server_session::begin(Manager, Request20, Request21),
-			http::property(Request21, http_server_session_state(SessionState)),
+			http_core::property(Request21, http_server_session_state(SessionState)),
 			server_session_response(Response20),
 			http_server_session::finish(Request21, Response20, Response2),
 			server_session_cookie(Response2, set_cookie(session, '', Attributes)),
@@ -501,14 +501,14 @@
 			server_session_cookie(Response1, set_cookie(session, SessionId, _Attributes1)),
 			server_session_request([session-SessionId], Request20),
 			http_server_session::begin(Manager, Request20, Request21),
-			http::property(Request21, http_server_session_state(SessionState)),
+			http_core::property(Request21, http_server_session_state(SessionState)),
 			http_server_session::count(Manager, Count),
 			server_session_response(Response20),
 			http_server_session::finish(Request21, Response20, Response2),
 			server_session_cookie(Response2, set_cookie(session, '', Attributes)),
 			http_server_session::close(Manager).
 
-		test(http_server_session_11, deterministic((Visits == 1, memberchk(path-('/app'), Attributes), memberchk(secure-true, Attributes), \+ http::property(Response2, set_cookies(_))))) :-
+		test(http_server_session_11, deterministic((Visits == 1, memberchk(path-('/app'), Attributes), memberchk(secure-true, Attributes), \+ http_core::property(Response2, set_cookies(_))))) :-
 			http_server_session::open(Manager, [cookie_name(sid), cookie_attributes([path-('/app'), secure-true])]),
 			server_session_request([], Request10),
 			http_server_session::begin(Manager, Request10, Request11),
@@ -545,7 +545,7 @@
 			http_server_session_event_logger::close(Manager),
 			http_server_session_event_logger::reset.
 
-			test(http_server_session_13, deterministic((Data == [], Count == 0, \+ http::property(Response, set_cookies(_))))) :-
+			test(http_server_session_13, deterministic((Data == [], Count == 0, \+ http_core::property(Response, set_cookies(_))))) :-
 				http_server_session::open(Manager),
 				server_session_request([], Request0),
 				http_server_session::begin(Manager, Request0, Request),
@@ -574,10 +574,10 @@
 				http_server_session::begin(Manager, Request0, Request),
 				http_server_session::current(Request, Session),
 				http_server_session::set(Session, visits, 1),
-				http::response(http(1, 1), status(200, 'OK'), [], empty, [connection([close]), set_cookies([set_cookie(existing, '1', [path-('/'), http_only-true]), set_cookie(other, '2', [path-('/app')])])], Response0),
+				http_core::response(http(1, 1), status(200, 'OK'), [], empty, [connection([close]), set_cookies([set_cookie(existing, '1', [path-('/'), http_only-true]), set_cookie(other, '2', [path-('/app')])])], Response0),
 				http_server_session::finish(Request, Response0, Response),
-				http::property(Response, connection([close])),
-				http::property(Response, set_cookies(SetCookies)),
+				http_core::property(Response, connection([close])),
+				http_core::property(Response, set_cookies(SetCookies)),
 				memberchk(set_cookie(session, _SessionId, _Attributes), SetCookies),
 				memberchk(set_cookie(existing, '1', [path-('/'), http_only-true]), SetCookies),
 				memberchk(set_cookie(other, '2', [path-('/app')]), SetCookies),
@@ -638,13 +638,13 @@
 				Properties = []
 			;	Properties = [cookies(Cookies)]
 			),
-			http::request(get, origin(Path), http(1, 1), [], empty, Properties, Request).
+			http_core::request(get, origin(Path), http(1, 1), [], empty, Properties, Request).
 
 		server_session_response(Response) :-
-			http::response(http(1, 1), status(200, 'OK'), [], empty, [], Response).
+			http_core::response(http(1, 1), status(200, 'OK'), [], empty, [], Response).
 
 		server_session_cookie(Response, SetCookie) :-
-			http::property(Response, set_cookies(SetCookies)),
+			http_core::property(Response, set_cookies(SetCookies)),
 			server_session_cookie_(SetCookies, SetCookie).
 
 		server_session_cookie_([SetCookie| _SetCookies], SetCookie) :-

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>http &mdash; Logtalk 3.101.0</title>
+  <title>http_core &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="http_authenticate" href="http_authenticate.html" />
-    <link rel="prev" title="html" href="html.html" />
+    <link rel="next" title="http_cors" href="http_cors.html" />
+    <link rel="prev" title="http_cookies" href="http_cookies.html" />
    
 </head>
 
@@ -159,7 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#layering">Layering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
@@ -169,9 +172,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -344,9 +344,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/http.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/http_core.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -354,17 +354,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="http">
-<span id="library-http"></span><h1><code class="docutils literal notranslate"><span class="pre">http</span></code><a class="headerlink" href="#http" title="Link to this heading"></a></h1>
+  <section id="http-core">
+<span id="library-http-core"></span><h1><code class="docutils literal notranslate"><span class="pre">http_core</span></code><a class="headerlink" href="#http-core" title="Link to this heading"></a></h1>
 <p>This library provides the transport-independent core of the HTTP stack.
 It currently covers normalized request and response terms, shared
 protocols, wire parsing and generation for the message start-lines,
 headers, and bodies, plus semantic normalization for a core set of
 frequently used headers.</p>
-<p>The library predicates are currently defined in the <code class="docutils literal notranslate"><span class="pre">http</span></code> object.</p>
+<p>The library predicates are currently defined in the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>
+object.</p>
 <section id="layering">
 <h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">http</span></code> library as the base of the current HTTP and API stack:</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library as the base of the current HTTP and API
+stack:</p>
 <ul class="simple">
 <li><p>Start here when you need normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> and <code class="docutils literal notranslate"><span class="pre">response/5</span></code>
 terms, shared protocols, body codecs, or wire parsing and generation.</p></li>
@@ -493,8 +495,8 @@ incoming bodies to in-memory payload terms. The declared <code class="docutils l
 and <code class="docutils literal notranslate"><span class="pre">Length</span></code> determine the response <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> metadata when
 the body is generated.</p></li>
 <li><p>The current body codec set is intentionally small and focused on the
-media types needed by the first <code class="docutils literal notranslate"><span class="pre">http</span></code> and <code class="docutils literal notranslate"><span class="pre">open_api</span></code> integration
-slices</p></li>
+media types needed by the current <code class="docutils literal notranslate"><span class="pre">http_core</span></code> and <code class="docutils literal notranslate"><span class="pre">open_api</span></code>
+libraries</p></li>
 <li><p>Header normalization is still selective; headers outside the supported
 set are preserved as validated raw <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs</p></li>
 <li><p>The WebSocket support in this layer is limited to HTTP
@@ -511,8 +513,8 @@ and TLS-backed transport orchestration remain out of scope</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="html.html" class="btn btn-neutral float-left" title="html" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_authenticate.html" class="btn btn-neutral float-right" title="http_authenticate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_cookies.html" class="btn btn-neutral float-left" title="http_cookies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_cors.html" class="btn btn-neutral float-right" title="http_cors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

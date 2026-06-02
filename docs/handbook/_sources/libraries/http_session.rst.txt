@@ -86,11 +86,11 @@ state over normalized request and response terms:
 ::
 
    | ?- http_server_session::open(Manager),
-        http::request(get, origin('/visits'), http(1, 1), [], empty, [], Request0),
+        http_core::request(get, origin('/visits'), http(1, 1), [], empty, [], Request0),
         http_server_session::begin(Manager, Request0, Request),
         http_server_session::current(Request, Session),
         http_server_session::set(Session, visits, 1),
-        http::response(http(1, 1), status(200, 'OK'), [], empty, [], Response0),
+        http_core::response(http(1, 1), status(200, 'OK'), [], empty, [], Response0),
         http_server_session::finish(Request, Response0, Response),
         http_server_session::close(Manager).
 

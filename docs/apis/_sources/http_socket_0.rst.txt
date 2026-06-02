@@ -28,8 +28,8 @@ Sockets-backed HTTP transport predicates built on top of the http_client_core an
 |    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
 |    :ref:`http_client_core <http_client_core/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`http_server <http_server/0>`
 |    :ref:`list <list/0>`
 |    :ref:`socket <socket/0>`

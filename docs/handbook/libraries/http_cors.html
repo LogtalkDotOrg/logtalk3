@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="http_digest" href="http_digest.html" />
-    <link rel="prev" title="http_cookies" href="http_cookies.html" />
+    <link rel="prev" title="http_core" href="http_core.html" />
    
 </head>
 
@@ -159,10 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
@@ -358,13 +358,14 @@
   <section id="http-cors">
 <span id="library-http-cors"></span><h1><code class="docutils literal notranslate"><span class="pre">http_cors</span></code><a class="headerlink" href="#http-cors" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_cors</span></code> library provides a transport-neutral CORS layer on top
-of the normalized <code class="docutils literal notranslate"><span class="pre">http</span></code> core library. It classifies normalized
+of the normalized <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It classifies normalized
 requests as CORS or preflight requests, builds direct preflight
 responses from CORS policies, and decorates normalized responses with
 the relevant <code class="docutils literal notranslate"><span class="pre">Access-Control-*</span></code> headers.</p>
-<p>This library stays above <code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_router</span></code>.
-It uses normalized request and response terms and can be called directly
-from plain handlers or from router hooks and response middleware.</p>
+<p>This library reuses the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">http_router</span></code>. It uses normalized request and response terms and can
+be called directly from plain handlers or from router hooks and response
+middleware.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -419,7 +420,8 @@ public predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">allow_credentials(false)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_age(none)</span></code></p></li>
 </ul>
-<p>This library consumes the normalized HTTP terms provided by <code class="docutils literal notranslate"><span class="pre">http</span></code>:</p>
+<p>This library consumes the normalized HTTP terms provided by the
+<code class="docutils literal notranslate"><span class="pre">http_core</span></code> library:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>request(<span class="nv">Method</span>, <span class="nv">Target</span>, <span class="nv">Version</span>, <span class="nv">Headers</span>, <span class="nv">Body</span>, <span class="nv">Properties</span>)
 response(<span class="nv">Version</span>, <span class="nv">Status</span>, <span class="nv">Headers</span>, <span class="nv">Body</span>, <span class="nv">Properties</span>)
 </pre></div>
@@ -530,7 +532,7 @@ and <code class="docutils literal notranslate"><span class="pre">expose_headers/
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_cookies.html" class="btn btn-neutral float-left" title="http_cookies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_core.html" class="btn btn-neutral float-left" title="http_core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="http_digest.html" class="btn btn-neutral float-right" title="http_digest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

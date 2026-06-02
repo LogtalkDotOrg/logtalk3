@@ -1704,7 +1704,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::body/2>`
+* :ref:`http_core <http_core/0::body/2>`
 
 ``body/3``
 ----------
@@ -4381,8 +4381,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::decode_body/4>`
 * :ref:`http_body_codec_protocol <http_body_codec_protocol/0::decode_body/4>`
+* :ref:`http_core <http_core/0::decode_body/4>`
 
 ``decode_exception/2``
 ----------------------
@@ -6500,8 +6500,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::encode_body/4>`
 * :ref:`http_body_codec_protocol <http_body_codec_protocol/0::encode_body/4>`
+* :ref:`http_core <http_core/0::encode_body/4>`
 
 ``encode_frame/2``
 ------------------
@@ -8781,7 +8781,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_body/3>`
+* :ref:`http_core <http_core/0::generate_body/3>`
 
 ``generate_challenge/2``
 ------------------------
@@ -8842,7 +8842,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_headers/2>`
+* :ref:`http_core <http_core/0::generate_headers/2>`
 
 ``generate_idle_packet/4``
 --------------------------
@@ -8862,7 +8862,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_request/2>`
+* :ref:`http_core <http_core/0::generate_request/2>`
 
 ``generate_request_line/2``
 ---------------------------
@@ -8872,7 +8872,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_request_line/2>`
+* :ref:`http_core <http_core/0::generate_request_line/2>`
 
 ``generate_response/2``
 -----------------------
@@ -8882,7 +8882,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_response/2>`
+* :ref:`http_core <http_core/0::generate_response/2>`
 
 ``generate_response_headers/2``
 -------------------------------
@@ -8892,7 +8892,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_response_headers/2>`
+* :ref:`http_core <http_core/0::generate_response_headers/2>`
 
 ``generate_set_cookie/4``
 -------------------------
@@ -8912,7 +8912,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::generate_status_line/2>`
+* :ref:`http_core <http_core/0::generate_status_line/2>`
 
 ``genint/2``
 ------------
@@ -9575,7 +9575,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::header/3>`
+* :ref:`http_core <http_core/0::header/3>`
 
 ``headers/1``
 -------------
@@ -9596,7 +9596,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::headers/2>`
+* :ref:`http_core <http_core/0::headers/2>`
 
 ``help/0``
 ----------
@@ -11187,7 +11187,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::is_request/1>`
+* :ref:`http_core <http_core/0::is_request/1>`
 * :ref:`json_rpc <json_rpc/0::is_request/1>`
 
 ``is_response/1``
@@ -11198,7 +11198,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::is_response/1>`
+* :ref:`http_core <http_core/0::is_response/1>`
 * :ref:`json_rpc <json_rpc/0::is_response/1>`
 
 ``is_sparse/1``
@@ -14119,7 +14119,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::method/2>`
+* :ref:`http_core <http_core/0::method/2>`
 * :ref:`json_rpc <json_rpc/0::method/2>`
 
 ``method_not_found/2``
@@ -16823,7 +16823,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::parse_body/4>`
+* :ref:`http_core <http_core/0::parse_body/4>`
 
 ``parse_challenge/2``
 ---------------------
@@ -16914,7 +16914,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::parse_headers/2>`
+* :ref:`http_core <http_core/0::parse_headers/2>`
 
 ``parse_lines/4``
 -----------------
@@ -16954,7 +16954,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::parse_request/2>`
+* :ref:`http_core <http_core/0::parse_request/2>`
 
 ``parse_request_line/2``
 ------------------------
@@ -16964,7 +16964,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::parse_request_line/2>`
+* :ref:`http_core <http_core/0::parse_request_line/2>`
 
 ``parse_response/2``
 --------------------
@@ -16974,7 +16974,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::parse_response/2>`
+* :ref:`http_core <http_core/0::parse_response/2>`
 
 ``parse_set_cookie/4``
 ----------------------
@@ -16994,7 +16994,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::parse_status_line/2>`
+* :ref:`http_core <http_core/0::parse_status_line/2>`
 
 ``part/4``
 ----------
@@ -18584,7 +18584,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::property/2>`
+* :ref:`http_core <http_core/0::property/2>`
 * :ref:`http_websocket <http_websocket/0::property/2>`
 
 ``protect_request/4``
@@ -20395,7 +20395,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::request/7>`
+* :ref:`http_core <http_core/0::request/7>`
 
 ``request_body/2``
 ------------------
@@ -20683,7 +20683,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::response/6>`
+* :ref:`http_core <http_core/0::response/6>`
 
 ``restore/1``
 -------------
@@ -22921,7 +22921,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::status/2>`
+* :ref:`http_core <http_core/0::status/2>`
 
 ``stem/2``
 ----------
@@ -23794,7 +23794,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http <http/0::target/2>`
+* :ref:`http_core <http_core/0::target/2>`
 * :ref:`http_htmx <http_htmx/0::target/2>`
 
 ``tcb_minus_tdb_approx/3``
@@ -25730,7 +25730,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::version/2>`
 * :ref:`ccsds_frames <ccsds_frames/0::version/2>`
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::version/2>`
-* :ref:`http <http/0::version/2>`
+* :ref:`http_core <http_core/0::version/2>`
 * :ref:`memcached <memcached/0::version/2>`
 
 ``version/6``

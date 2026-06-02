@@ -4,10 +4,10 @@
 ===============
 
 The ``http_client`` library provides a request-oriented client layer on
-top of the ``http``, ``url``, and ``http_socket`` libraries. It is the
-request-oriented client-side entry point: it builds normalized requests
-from absolute ``http://`` URLs plus options and delegates transport to
-the sockets-backed layer.
+top of the ``http_core``, ``url``, and ``http_socket`` libraries. It is
+the request-oriented client-side entry point: it builds normalized
+requests from absolute ``http://`` URLs plus options and delegates
+transport to the sockets-backed layer.
 
 The low-level stream primitives previously exposed as the main API now
 live in the ``http_client_core`` object. That object remains the
@@ -60,9 +60,9 @@ Define a small echo handler once:
        implements(http_handler_protocol)).
        
        handle(Request, Response) :-
-           http::version(Request, Version),
-           http::body(Request, Body),
-           http::response(Version, status(200, 'OK'), [], Body, [], Response).
+           http_core::version(Request, Version),
+           http_core::body(Request, Body),
+           http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
    :- end_object.
 
@@ -89,12 +89,12 @@ normalized request body using ``http_multipart``:
        implements(http_handler_protocol)).
        
        handle(Request, Response) :-
-           http::version(Request, Version),
-           http::body(Request, Body),
+           http_core::version(Request, Version),
+           http_core::body(Request, Body),
            http_multipart::fields(Body, [title-Title]),
            http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
            atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
-           http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
+           http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
 
    :- end_object.
 

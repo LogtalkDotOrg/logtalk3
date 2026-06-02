@@ -159,10 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -355,7 +355,7 @@
 <span id="library-http-static-files"></span><h1><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code><a class="headerlink" href="#http-static-files" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_static_files</span></code> library provides a router-agnostic helper for
 serving existing files from a configured document root using normalized
-<code class="docutils literal notranslate"><span class="pre">http</span></code> request and response terms.</p>
+<code class="docutils literal notranslate"><span class="pre">http_core</span></code> request and response terms.</p>
 <p>This library resolves a relative request path against a document root,
 canonicalizes the joined target path using <code class="docutils literal notranslate"><span class="pre">os::absolute_file_name/2</span></code>,
 rejects canonicalized escapes with the same outward <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code>

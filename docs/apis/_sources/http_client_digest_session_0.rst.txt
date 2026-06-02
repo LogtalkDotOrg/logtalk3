@@ -25,9 +25,9 @@ Stateful HTTP Digest client sessions that add cookie persistence and one-round-t
 |    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
 |    :ref:`http_cookie_jar <http_cookie_jar/0>`
 |    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`http_digest <http_digest/0>`
 |    :ref:`http_multipart <http_multipart/0>`
 |    :ref:`http_socket <http_socket/0>`

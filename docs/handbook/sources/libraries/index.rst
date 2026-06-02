@@ -117,10 +117,10 @@ directory in the ``NOTES.md`` file.
    hook_flows
    hook_objects
    html
-   http
    http_authenticate
    http_client
    http_cookies
+   http_core
    http_cors
    http_digest
    http_directory_listing

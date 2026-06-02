@@ -23,7 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(options(loader)),
 	logtalk_load('../http_router/loader.lgt'),
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load(http_cors, [debug(on), source_data(on)]),
 	logtalk_load(test_objects),
 	logtalk_load(lgtunit(loader)),

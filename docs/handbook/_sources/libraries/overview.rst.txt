@@ -35,7 +35,7 @@ multiple areas):
   ``ccsds_time_codes``, ``ccsds_time_fields``,
 - Text and NLP: ``character_sets``, ``grammars``, ``stemming``,
   ``string_distance``, and ``strings``.
-- Web and HTTP APIs: ``html``, ``mime_types``, ``url``, ``http``,
+- Web and HTTP APIs: ``html``, ``mime_types``, ``url``, ``http_core``,
   ``http_authenticate``, ``http_client``, ``http_cookies``,
   ``http_cors``, ``http_digest``, ``http_directory_listing``,
   ``http_htmx``, ``http_multipart``, ``http_parameters``,

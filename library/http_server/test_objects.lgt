@@ -62,10 +62,10 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::property(Request, websocket_key(Key)),
+		http_core::version(Request, Version),
+		http_core::property(Request, websocket_key(Key)),
 		http_websocket_handshake::websocket_accept(Key, Accept),
-		http::response(
+		http_core::response(
 			Version,
 			status(101, 'Switching Protocols'),
 			[sec_websocket_extensions-'permessage-deflate'],
@@ -88,9 +88,9 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 :- end_object.
 
@@ -106,8 +106,8 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(ready)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(ready)), [], Response).
 
 :- end_object.
 
@@ -123,9 +123,9 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [connection([close])], Response).
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
+		http_core::response(Version, status(200, 'OK'), [], Body, [connection([close])], Response).
 
 :- end_object.
 
@@ -157,13 +157,13 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
 		http_multipart::fields(Body, [title-Title]),
 		http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
 		atom_concat('title=', Title, Prefix),
 		atom_concat(Prefix, '; upload=', Prefix0),
 		atom_concat(Prefix0, Filename, Summary),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Summary)), [], Response).
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Summary)), [], Response).
 
 :- end_object.

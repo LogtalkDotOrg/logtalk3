@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_static_files" library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		request/7,
 		generate_response/2,
 		status/2,

@@ -4,14 +4,15 @@
 =============
 
 The ``http_cors`` library provides a transport-neutral CORS layer on top
-of the normalized ``http`` core library. It classifies normalized
+of the normalized ``http_core`` library. It classifies normalized
 requests as CORS or preflight requests, builds direct preflight
 responses from CORS policies, and decorates normalized responses with
 the relevant ``Access-Control-*`` headers.
 
-This library stays above ``http``, ``http_server``, and ``http_router``.
-It uses normalized request and response terms and can be called directly
-from plain handlers or from router hooks and response middleware.
+This library reuses the ``http_core``, ``http_server``, and
+``http_router``. It uses normalized request and response terms and can
+be called directly from plain handlers or from router hooks and response
+middleware.
 
 API documentation
 -----------------
@@ -73,7 +74,8 @@ The default policy is:
 - ``allow_credentials(false)``
 - ``max_age(none)``
 
-This library consumes the normalized HTTP terms provided by ``http``:
+This library consumes the normalized HTTP terms provided by the
+``http_core`` library:
 
 ::
 

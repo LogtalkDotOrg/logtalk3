@@ -5,7 +5,7 @@
 
 The ``http_htmx`` library provides router-agnostic helpers for HTMX
 request classification, HTML reply construction, and HTMX
-response-header decoration using normalized ``http`` request and
+response-header decoration using normalized ``http_core`` request and
 response terms.
 
 Currently this library provides:

@@ -47,7 +47,7 @@
 	:- mode(parse(++compound, +atom, +list, -compound), one_or_error).
 
 	:- info(parse/4, [
-		comment is 'Parses a multipart body from a source term by delegating to the underlying http::parse_body/4 predicate after validating the media type.',
+		comment is 'Parses a multipart body from a source term by delegating to the underlying http_core::parse_body/4 predicate after validating the media type.',
 		argnames is ['Source', 'MediaType', 'Options', 'Body']
 	]).
 
@@ -55,7 +55,7 @@
 	:- mode(generate(++compound, +compound, +list), one_or_error).
 
 	:- info(generate/3, [
-		comment is 'Generates a multipart body to a sink term by delegating to the underlying http::generate_body/3 predicate after validating the multipart body term.',
+		comment is 'Generates a multipart body to a sink term by delegating to the underlying http_core::generate_body/3 predicate after validating the multipart body term.',
 		argnames is ['Sink', 'Body', 'Options']
 	]).
 
@@ -175,12 +175,12 @@
 
 	parse(Source, MediaType, Options, Body) :-
 		validate_multipart_media_type(MediaType),
-		http::parse_body(Source, MediaType, Options, Body),
+		http_core::parse_body(Source, MediaType, Options, Body),
 		validate_multipart_body(Body).
 
 	generate(Sink, Body, Options) :-
 		validate_multipart_body(Body),
-		http::generate_body(Sink, Body, Options).
+		http_core::generate_body(Sink, Body, Options).
 
 	media_type(Body, MediaType) :-
 		validate_multipart_body(Body),
@@ -270,7 +270,7 @@
 		).
 
 	valid_multipart_part(part(Headers, Body, Properties)) :-
-		catch(http::response(http(1, 1), status(200, 'OK'), Headers, Body, Properties, _Response), _, fail).
+		catch(http_core::response(http(1, 1), status(200, 'OK'), Headers, Body, Properties, _Response), _, fail).
 
 	validate_multipart_media_type(MediaType) :-
 		(	valid_multipart_media_type(MediaType) ->
@@ -307,7 +307,7 @@
 		atom_codes(Value, Bytes).
 
 	valid_multipart_media_type(MediaType) :-
-		catch(http::response(http(1, 1), status(200, 'OK'), [], content(MediaType, binary([])), [], _Response), _, fail),
+		catch(http_core::response(http(1, 1), status(200, 'OK'), [], content(MediaType, binary([])), [], _Response), _, fail),
 		multipart_media_type(MediaType).
 
 	parts_fields([], []).

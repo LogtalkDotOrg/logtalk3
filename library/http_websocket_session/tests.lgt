@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_websocket_session" library.'
 	]).
 
-	:- uses(http, [request/7, status/2]).
+	:- uses(http_core, [request/7, status/2]).
 	:- uses(user, [atomic_list_concat/2]).
 
 	cover(http_websocket_session(_, _)).

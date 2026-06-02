@@ -1168,28 +1168,6 @@ To load an entity, always load the library that includes it using the goal ``log
    html5 <html5_0>
    xhtml11 <xhtml11_0>
 
-``library/http/``
------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   http <http_0>
-   http_body_codec_protocol <http_body_codec_protocol_0>
-   http_docroot_paths <http_docroot_paths_0>
-   http_form_body_codec <http_form_body_codec_0>
-   http_handler_protocol <http_handler_protocol_0>
-   http_json_body_codec <http_json_body_codec_0>
-   http_json_term_helpers <http_json_term_helpers_0>
-   http_message_helpers <http_message_helpers_0>
-   http_octet_stream_body_codec <http_octet_stream_body_codec_0>
-   http_request_protocol <http_request_protocol_0>
-   http_response_protocol <http_response_protocol_0>
-   http_text_body_codec <http_text_body_codec_0>
-   http_text_helpers <http_text_helpers_0>
-
 ``library/http_authenticate/``
 ------------------------------
 
@@ -1224,6 +1202,28 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_cookies(Representation) <http_cookies_1>
+
+``library/http_core/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_body_codec_protocol <http_body_codec_protocol_0>
+   http_core <http_core_0>
+   http_docroot_paths <http_docroot_paths_0>
+   http_form_body_codec <http_form_body_codec_0>
+   http_handler_protocol <http_handler_protocol_0>
+   http_json_body_codec <http_json_body_codec_0>
+   http_json_term_helpers <http_json_term_helpers_0>
+   http_message_helpers <http_message_helpers_0>
+   http_octet_stream_body_codec <http_octet_stream_body_codec_0>
+   http_request_protocol <http_request_protocol_0>
+   http_response_protocol <http_response_protocol_0>
+   http_text_body_codec <http_text_body_codec_0>
+   http_text_helpers <http_text_helpers_0>
 
 ``library/http_cors/``
 ----------------------

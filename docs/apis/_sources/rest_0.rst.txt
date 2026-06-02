@@ -24,7 +24,7 @@ REST authoring layer built on top of the HTTP router category.
 | **Extends:**
 |    ``public`` :ref:`http_router <http_router/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`open_api <open_api/0>`
 

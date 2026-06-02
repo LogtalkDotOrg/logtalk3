@@ -79,13 +79,13 @@
 		Metadata \== [].
 
 	validate_request(Request) :-
-		http::is_request(Request),
+		http_core::is_request(Request),
 		!.
 	validate_request(Request) :-
 		domain_error(http_request, Request).
 
 	routed_request_route(Request, RouteId) :-
-		http::property(Request, route(RouteId)),
+		http_core::property(Request, route(RouteId)),
 		!.
 	routed_request_route(Request, _RouteId) :-
 		domain_error(http_routed_request, Request).

@@ -59,7 +59,7 @@ Current scope
   implementing the ``http_request_protocol`` and
   ``http_response_protocol`` protocols, against provider operation
   descriptors
-- Parse HTTP request and response wire sources through the ``http``
+- Parse HTTP request and response wire sources through the ``http_core``
   library before validating them against provider operation descriptors
 - Parse and generate OpenAPI documents using the repository-standard
   JSON term representation
@@ -121,7 +121,7 @@ Current limitations
   fixed-field checks for Security Scheme Objects and OAuth Flow Objects
 - The library currently derives only ``components.schemas`` and
   ``components.securitySchemes`` plus the root ``security`` field
-- The library now integrates with the ``http`` core for request and
+- The library integrates with the ``http_core`` library for request and
   response parsing and for protocol-based access to normalized HTTP
   messages, but it still limits itself to contract validation rather
   than transport concerns

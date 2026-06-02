@@ -24,7 +24,7 @@ OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on 
 | **Imports:**
 |    ``public`` :ref:`http_json_term_helpers <http_json_term_helpers/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`json <json/0>`
 |    :ref:`json_schema <json_schema/0>`
 |    :ref:`list <list/0>`
@@ -202,7 +202,7 @@ Validates a normalized HTTP request term or an object implementing the ``http_re
 ``validate_http_request/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Succeeds when an HTTP request wire source parsed by the ``http`` library conforms to the provider operation descriptor identified by the given ``operationId``.
+Succeeds when an HTTP request wire source parsed by the ``http_core`` library conforms to the provider operation descriptor identified by the given ``operationId``.
 
 | **Compilation flags:**
 |    ``static``
@@ -221,7 +221,7 @@ Succeeds when an HTTP request wire source parsed by the ``http`` library conform
 ``validate_http_request/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Parses an HTTP request wire source using the ``http`` library and validates the resulting normalized request against the provider operation descriptor identified by the given ``operationId``.
+Parses an HTTP request wire source using the ``http_core`` library and validates the resulting normalized request against the provider operation descriptor identified by the given ``operationId``.
 
 | **Compilation flags:**
 |    ``static``
@@ -278,7 +278,7 @@ Validates a normalized HTTP response term or an object implementing the ``http_r
 ``validate_http_response/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Succeeds when an HTTP response wire source parsed by the ``http`` library conforms to the provider operation descriptor identified by the given ``operationId``.
+Succeeds when an HTTP response wire source parsed by the ``http_core`` library conforms to the provider operation descriptor identified by the given ``operationId``.
 
 | **Compilation flags:**
 |    ``static``
@@ -297,7 +297,7 @@ Succeeds when an HTTP response wire source parsed by the ``http`` library confor
 ``validate_http_response/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Parses an HTTP response wire source using the ``http`` library and validates the resulting normalized response against the provider operation descriptor identified by the given ``operationId``.
+Parses an HTTP response wire source using the ``http_core`` library and validates the resulting normalized response against the provider operation descriptor identified by the given ``operationId``.
 
 | **Compilation flags:**
 |    ``static``

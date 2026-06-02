@@ -1,7 +1,7 @@
-.. _library_http:
+.. _library_http_core:
 
-``http``
-========
+``http_core``
+=============
 
 This library provides the transport-independent core of the HTTP stack.
 It currently covers normalized request and response terms, shared
@@ -9,12 +9,14 @@ protocols, wire parsing and generation for the message start-lines,
 headers, and bodies, plus semantic normalization for a core set of
 frequently used headers.
 
-The library predicates are currently defined in the ``http`` object.
+The library predicates are currently defined in the ``http_core``
+object.
 
 Layering
 --------
 
-Use the ``http`` library as the base of the current HTTP and API stack:
+Use the ``http_core`` library as the base of the current HTTP and API
+stack:
 
 - Start here when you need normalized ``request/6`` and ``response/5``
   terms, shared protocols, body codecs, or wire parsing and generation.
@@ -152,8 +154,8 @@ Current limitations
   and ``Length`` determine the response ``Content-Length`` metadata when
   the body is generated.
 - The current body codec set is intentionally small and focused on the
-  media types needed by the first ``http`` and ``open_api`` integration
-  slices
+  media types needed by the current ``http_core`` and ``open_api``
+  libraries
 - Header normalization is still selective; headers outside the supported
   set are preserved as validated raw ``Name-Value`` pairs
 - The WebSocket support in this layer is limited to HTTP

@@ -98,7 +98,7 @@
 	open_api_bad_request_response(response(400, 'Bad Request', [media('text/plain', {type-string})])).
 
 	validate_request(Request) :-
-		http::is_request(Request),
+		http_core::is_request(Request),
 		!.
 	validate_request(Request) :-
 		domain_error(http_request, Request).
@@ -639,38 +639,38 @@
 	member_boolean_false(off).
 
 	request_parameter_values(query, Request, Name, Values) :-
-		(   http::property(Request, query_pairs(Pairs)) ->
+		(   http_core::property(Request, query_pairs(Pairs)) ->
 			named_pair_values(Pairs, Name, Values)
 		;   target_query_pairs(Request, Pairs) ->
 			named_pair_values(Pairs, Name, Values)
 		;   Values = []
 		).
 	request_parameter_values(form, Request, Name, Values) :-
-		(   http::body(Request, content(_MediaType, form(Pairs))) ->
+		(   http_core::body(Request, content(_MediaType, form(Pairs))) ->
 			named_pair_values(Pairs, Name, Values)
 		;   Values = []
 		).
 	request_parameter_values(header, Request, Name, Values) :-
-		(   http::headers(Request, Headers) ->
+		(   http_core::headers(Request, Headers) ->
 			named_header_values(Headers, Name, Values)
 		;   Values = []
 		).
 	request_parameter_values(cookie, Request, Name, Values) :-
-		(   http::property(Request, cookies(Pairs)) ->
+		(   http_core::property(Request, cookies(Pairs)) ->
 			named_pair_values(Pairs, Name, Values)
 		;   Values = []
 		).
 	request_parameter_values(path, Request, Name, Values) :-
-		(   http::property(Request, path_params(Pairs)) ->
+		(   http_core::property(Request, path_params(Pairs)) ->
 			named_pair_values(Pairs, Name, Values)
 		;   Values = []
 		).
 
 	target_query_pairs(Request, Pairs) :-
-		http::target(Request, Target),
+		http_core::target(Request, Target),
 		target_query(Target, Query),
 		Query \== '',
-		http::parse_body(atom(Query), 'application/x-www-form-urlencoded', [], content('application/x-www-form-urlencoded', form(Pairs))).
+		http_core::parse_body(atom(Query), 'application/x-www-form-urlencoded', [], content('application/x-www-form-urlencoded', form(Pairs))).
 
 	target_query(origin(_Path, Query), Query).
 	target_query(absolute(Components), Query) :-

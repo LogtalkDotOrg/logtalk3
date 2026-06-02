@@ -26,8 +26,8 @@ HTTP cookie jar implementing explicit storage and request matching on top of the
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`date <date/0>`
-|    :ref:`http <http/0>`
 |    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 |    :ref:`url(Representation) <url/1>`

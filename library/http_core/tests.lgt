@@ -35,7 +35,7 @@
 		memberchk/2
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		request/7, response/6, is_request/1, is_response/1, parse_request/2, generate_request/2,
 		parse_response/2, generate_response/2, generate_response_headers/2, parse_request_line/2,
 		generate_request_line/2, parse_status_line/2, generate_status_line/2, parse_headers/2,
@@ -43,7 +43,7 @@
 		method/2, target/2, version/2, status/2, headers/2, header/3, body/2, property/2
 	]).
 
-	cover(http).
+	cover(http_core).
 	cover(http_octet_stream_body_codec).
 	cover(http_text_body_codec).
 	cover(http_json_body_codec).

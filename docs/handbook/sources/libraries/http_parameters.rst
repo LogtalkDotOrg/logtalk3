@@ -57,7 +57,7 @@ The currently supported source atoms are:
 
 Header declarations match normalized request headers case-insensitively.
 Cookie declarations read from the normalized ``cookies(Pairs)`` request
-property already exposed by the ``http`` library. Reserved OpenAPI
+property already exposed by the ``http_core`` library. Reserved OpenAPI
 header names such as ``accept``, ``content_type``, and ``authorization``
 remain available for runtime extraction but are omitted from generated
 OpenAPI parameter descriptors.

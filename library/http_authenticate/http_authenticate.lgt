@@ -92,7 +92,7 @@
 		argnames is ['Challenge', 'Response0', 'Response', 'Options']
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, header/3, headers/2, is_request/1, is_response/1, property/2, request/7, response/6,
 		status/2, version/2
 	]).
@@ -352,8 +352,8 @@
 		validate_authorization_term(Authorization, Username, Password).
 
 	annotated_basic_request(Request0, Authorization, Username, Realm, Request) :-
-		http::method(Request0, Method),
-		http::target(Request0, Target),
+		http_core::method(Request0, Method),
+		http_core::target(Request0, Target),
 		version(Request0, Version),
 		headers(Request0, Headers),
 		body(Request0, Body),
@@ -677,7 +677,7 @@
 		).
 
 	valid_header_list(Headers) :-
-		catch(http::generate_headers(codes(_), Headers), _, fail).
+		catch(http_core::generate_headers(codes(_), Headers), _, fail).
 
 	valid_body_term_or_error(Body) :-
 		(	valid_body_term(Body) ->
@@ -692,7 +692,7 @@
 		).
 
 	valid_body_term(Body) :-
-		catch(http::response(http(1, 1), status(401, 'Unauthorized'), [], Body, [], _), _, fail).
+		catch(http_core::response(http(1, 1), status(401, 'Unauthorized'), [], Body, [], _), _, fail).
 
 	overlay_headers(Overrides, Headers0, Headers) :-
 		filter_overridden_headers(Headers0, Overrides, FilteredHeaders),

@@ -140,7 +140,7 @@
 		hex_digest/4
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, header/3, headers/2, is_request/1, is_response/1,
 		method/2, property/2, request/7, response/6, status/2,
 		target/2, version/2

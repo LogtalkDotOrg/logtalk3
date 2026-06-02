@@ -24,7 +24,7 @@
 	logtalk_load(crypto(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load([
 		http_authenticate_verifier_protocol,
 		http_authenticate,

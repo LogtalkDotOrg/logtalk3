@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_cookies_counter" example.'
 	]).
 
-	:- uses(http, [body/2, property/2, request/7, status/2]).
+	:- uses(http_core, [body/2, property/2, request/7, status/2]).
 
 	cover(cookie_counter_http_handler).
 	cover(cookie_counter_server).

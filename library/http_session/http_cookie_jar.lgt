@@ -666,7 +666,7 @@
 		number_codes(Port, PortCodes).
 
 	validate_cookie_endpoint(Host, Port) :-
-		http::request(get, authority(Host, Port), http(1, 1), [], empty, [], _Request).
+		http_core::request(get, authority(Host, Port), http(1, 1), [], empty, [], _Request).
 
 	normalize_request_path('', '/') :-
 		!.

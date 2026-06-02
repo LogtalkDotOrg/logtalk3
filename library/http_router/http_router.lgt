@@ -508,7 +508,7 @@
 		normalize_open_api_response_example(Response0, Response).
 
 	normalize_open_api_response_example(Response, Response) :-
-		http::is_response(Response),
+		http_core::is_response(Response),
 		!.
 	normalize_open_api_response_example(Response, _NormalizedResponse) :-
 		domain_error(http_router_open_api_response_example, Response).
@@ -558,11 +558,11 @@
 	route_open_api_probe_response(RouteId, Method, PathTemplate, Handler, ProbeMediaType, Response) :-
 		route_open_api_probe_request(RouteId, Method, PathTemplate, ProbeMediaType, empty, Request),
 		once(call_route_handler(Handler, Request, Response)),
-		http::is_response(Response).
+		http_core::is_response(Response).
 	route_open_api_probe_response(RouteId, Method, PathTemplate, Handler, ProbeMediaType, Response) :-
 		route_open_api_probe_request(RouteId, Method, PathTemplate, ProbeMediaType, _ProbeBody, Request),
 		once(call_route_handler(Handler, Request, Response)),
-		http::is_response(Response).
+		http_core::is_response(Response).
 
 	route_open_api_probe_path(PathTemplate, Path, PathParams) :-
 		template_path_segments(PathTemplate, TemplateSegments),
@@ -832,10 +832,10 @@
 		domain_error(http_router_middleware, Handler).
 
 	validate_middleware_action(continue(Request)) :-
-		http::is_request(Request),
+		http_core::is_request(Request),
 		!.
 	validate_middleware_action(respond(Response)) :-
-		http::is_response(Response),
+		http_core::is_response(Response),
 		!.
 	validate_middleware_action(Action) :-
 		domain_error(http_router_middleware_action, Action).
@@ -859,7 +859,7 @@
 		domain_error(http_router_response_middleware, Handler).
 
 	validate_response_middleware_response(Response) :-
-		http::is_response(Response),
+		http_core::is_response(Response),
 		!.
 	validate_response_middleware_response(Response) :-
 		domain_error(http_router_response_middleware_response, Response).
@@ -894,10 +894,10 @@
 	handle_route_authorization_action(respond(Response), _RouteId, _Handler, Request, Request, Response).
 
 	validate_route_authorization_action(continue(Request)) :-
-		http::is_request(Request),
+		http_core::is_request(Request),
 		!.
 	validate_route_authorization_action(respond(Response)) :-
-		http::is_response(Response),
+		http_core::is_response(Response),
 		!.
 	validate_route_authorization_action(Action) :-
 		domain_error(http_router_route_authorization_action, Action).
@@ -964,7 +964,7 @@
 		).
 
 	accept_header_values(Request, AcceptHeaderValues) :-
-		findall(AcceptHeaderValue, http::header(Request, accept, AcceptHeaderValue), AcceptHeaderValues).
+		findall(AcceptHeaderValue, http_core::header(Request, accept, AcceptHeaderValue), AcceptHeaderValues).
 
 	accept_header_specs(AcceptHeaderValues, AcceptSpecs) :-
 		accept_header_specs(AcceptHeaderValues, [], AcceptSpecs0),
@@ -1081,10 +1081,10 @@
 	annotate_response_media_type(MediaType, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
 		remove_property_functor(Properties0, response_media_type, Properties1),
 		Properties = [response_media_type(MediaType)| Properties1],
-		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	matched_route(Request, Path, RouteId, Handler, PathParams) :-
-		http::method(Request, Method),
+		http_core::method(Request, Method),
 		preferred_route_method(Method, RouteMethod),
 		::route(RouteId, RouteMethod, Template, Handler),
 		template_matches(Template, Path, PathParams),
@@ -1128,7 +1128,7 @@
 		append_new_methods(Methods0, Methods2, Methods).
 
 	automatic_options_response(Request0, Path, Request, Response) :-
-		http::method(Request0, options),
+		http_core::method(Request0, options),
 		allowed_route_methods(Path, AllowedMethods0),
 		effective_allowed_methods(AllowedMethods0, AllowedMethods),
 		annotate_automatic_options_request(Path, Request0, AllowedMethods, Request),
@@ -1138,12 +1138,12 @@
 		).
 
 	default_automatic_options_response(Request, AllowedMethods, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		allow_header_value(AllowedMethods, AllowValue),
-		http::response(Version, status(200, 'OK'), [allow-AllowValue], empty, [], Response).
+		http_core::response(Version, status(200, 'OK'), [allow-AllowValue], empty, [], Response).
 
 	routable_path(Request, Path) :-
-		http::target(Request, Target),
+		http_core::target(Request, Target),
 		target_path(Target, Path).
 
 	target_path(origin(Path), Path).
@@ -1201,7 +1201,7 @@
 	annotate_shared_automatic_options_metadata(RouteMatches, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
 		shared_automatic_options_metadata(RouteMatches, Metadata),
 		merge_route_metadata(Metadata, Properties0, Properties),
-		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	shared_automatic_options_metadata([route_match(_RouteId, _PathParams, Metadata0)| RouteMatches], Metadata) :-
 		shared_automatic_options_metadata(Metadata0, RouteMatches, Metadata).
@@ -1225,13 +1225,13 @@
 
 	remove_request_property_functor(request(Method, Target, Version, Headers, Body, Properties0), Functor, Request) :-
 		remove_property_functor(Properties0, Functor, Properties),
-		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	annotate_request_property(Property, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
 		functor(Property, Functor, _),
 		remove_property_functor(Properties0, Functor, Properties1),
 		Properties = [Property| Properties1],
-		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	annotate_request(RouteId, PathParams, request(Method, Target, Version, Headers, Body, Properties0), Request) :-
 		route_metadata_properties(RouteId, Properties0, Properties1),
@@ -1242,7 +1242,7 @@
 		remove_property_functor(Properties5, effective_methods, Properties6),
 		remove_property_functor(Properties6, response_media_type, Properties7),
 		Properties = [route(RouteId), path_params(PathParams)| Properties7],
-		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	route_metadata_properties(RouteId, Properties0, Properties) :-
 		(	::route_metadata(RouteId, Metadata0) ->
@@ -1443,12 +1443,12 @@
 		).
 
 	default_not_found_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
 
 	default_not_acceptable_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(406, 'Not Acceptable'), [], content('text/plain', text('Not Acceptable')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(406, 'Not Acceptable'), [], content('text/plain', text('Not Acceptable')), [], Response).
 
 	bad_request_response(Request, Errors, Response) :-
 		(	::route_bad_request_response(Request, Errors, Response) ->
@@ -1457,8 +1457,8 @@
 		).
 
 	default_bad_request_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(400, 'Bad Request'), [], content('text/plain', text('Bad Request')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(400, 'Bad Request'), [], content('text/plain', text('Bad Request')), [], Response).
 
 	method_not_allowed_response(Request, AllowedMethods0, Response) :-
 		effective_allowed_methods(AllowedMethods0, AllowedMethods),
@@ -1468,9 +1468,9 @@
 		).
 
 	default_method_not_allowed_response(Request, AllowedMethods, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		allow_header_value(AllowedMethods, AllowValue),
-		http::response(Version, status(405, 'Method Not Allowed'), [allow-AllowValue], content('text/plain', text('Method Not Allowed')), [], Response).
+		http_core::response(Version, status(405, 'Method Not Allowed'), [allow-AllowValue], content('text/plain', text('Method Not Allowed')), [], Response).
 
 	effective_allowed_methods(AllowedMethods0, AllowedMethods) :-
 		append_new_methods([options], AllowedMethods0, AllowedMethods).

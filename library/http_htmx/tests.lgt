@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the ``http_htmx`` library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, header/3, request/7, response/6, status/2
 	]).
 

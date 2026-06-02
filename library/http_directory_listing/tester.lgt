@@ -28,7 +28,7 @@
 	logtalk_load(dates(loader)),
 	logtalk_load(term_io(loader)),
 	logtalk_load(html(loader)),
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load(http_directory_listing, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

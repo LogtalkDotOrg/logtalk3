@@ -4,7 +4,7 @@
 ===============
 
 The ``http_server`` library provides a portable stream-oriented server
-layer on top of the ``http`` core library. It is designed for the first
+layer on top of the ``http_core`` library. It is designed for the first
 orchestration step above the wire parser and generator: read exactly one
 request from an existing binary stream, dispatch it to a handler object
 implementing the ``http_handler_protocol`` protocol, and write exactly
@@ -49,9 +49,9 @@ Define a simple handler object once:
        implements(http_handler_protocol)).
        
        handle(Request, Response) :-
-           http::version(Request, Version),
-           http::body(Request, Body),
-           http::response(Version, status(200, 'OK'), [], Body, [], Response).
+           http_core::version(Request, Version),
+           http_core::body(Request, Body),
+           http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
    :- end_object.
 
@@ -69,7 +69,7 @@ To serve a single request from existing binary streams:
         http_server::serve(Input, Output, notes_http_server_echo_handler),
         close(Input),
         close(Output),
-        http::parse_response(file('response.tmp'), Response).
+        http_core::parse_response(file('response.tmp'), Response).
 
    Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
 
@@ -102,18 +102,18 @@ For multipart request inspection, define a handler that uses
        implements(http_handler_protocol)).
        
        handle(Request, Response) :-
-           http::version(Request, Version),
-           http::body(Request, Body),
+           http_core::version(Request, Version),
+           http_core::body(Request, Body),
            http_multipart::fields(Body, [title-Title]),
            http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
            atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
-           http::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
+           http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
 
    :- end_object.
 
 That handler can be used unchanged with ``serve/3`` or
 ``serve_connection/3`` because this library exposes multipart requests
-in the same normalized form produced by ``http::parse_request/2``.
+in the same normalized form produced by ``http_core::parse_request/2``.
 
 For a WebSocket opening handshake, define a handler that delegates to
 ``accept_websocket/3``:
@@ -178,10 +178,10 @@ The current slice provides seven predicates:
   generated response headers but suppresses the response body bytes,
   including for file-backed responses.
 
-Because incoming request bodies are normalized by the ``http`` library,
-handler objects can inspect ``multipart/form-data`` requests directly
-using the ``http_multipart`` predicates after reading or serving a
-request.
+Because incoming request bodies are normalized by the ``http_core``
+library, handler objects can inspect ``multipart/form-data`` requests
+directly using the ``http_multipart`` predicates after reading or
+serving a request.
 
 This layer intentionally stays transport-neutral. It does not accept
 sockets, listen for connections, or manage concurrency. Those concerns
@@ -207,7 +207,7 @@ Multipart workflow
 
 This library does not introduce a separate multipart server API.
 Multipart requests are exposed to handlers as the same normalized
-request bodies produced by ``http::parse_request/2``, which means
+request bodies produced by ``http_core::parse_request/2``, which means
 handlers can use ``http_multipart::fields/2`` and
 ``http_multipart::files/2`` directly on the request body.
 

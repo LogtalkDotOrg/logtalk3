@@ -10,10 +10,10 @@ that REST application objects can continue to implement the
 router dispatch, request annotation, middleware, and OpenAPI derivation
 logic.
 
-This library reuses the ``http`` and ``http_router``. It derives router
-hooks from higher-level endpoint descriptors, provides small request and
-response helpers, and normalizes simple action result terms into HTTP
-responses.
+This library reuses the ``http_core`` and ``http_router``. It derives
+router hooks from higher-level endpoint descriptors, provides small
+request and response helpers, and normalizes simple action result terms
+into HTTP responses.
 
 Layering
 --------
@@ -122,7 +122,7 @@ predicates and response middleware and also allows router-level OpenAPI
 derivation to keep working.
 
 The current helper predicates read the normalized HTTP request terms
-provided by ``http``:
+provided by ``http_core``:
 
 ::
 
@@ -130,11 +130,12 @@ provided by ``http``:
 
 They rely on router annotations such as ``route/1`` and
 ``path_params/1`` plus the normalized derived properties produced by the
-``http`` library such as ``query_pairs/1``. The ``path_parameter/3`` and
-``query_parameter/3`` helpers are deterministic lookups. The decoded
-body helpers return ``400 Bad Request`` problem responses when the
-current action expects a JSON, form, text, or binary body and the
-normalized request body is missing or has a different decoded shape.
+``http_core`` library such as ``query_pairs/1``. The
+``path_parameter/3`` and ``query_parameter/3`` helpers are deterministic
+lookups. The decoded body helpers return ``400 Bad Request`` problem
+responses when the current action expects a JSON, form, text, or binary
+body and the normalized request body is missing or has a different
+decoded shape.
 
 Action result normalization currently builds normalized HTTP response
 terms using these rules:

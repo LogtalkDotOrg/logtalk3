@@ -11,7 +11,7 @@
 Protocol for Logtalk objects exposing normalized HTTP request data.
 
 | **Availability:** 
-|    ``logtalk_load(http(loader))``
+|    ``logtalk_load(http_core(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0

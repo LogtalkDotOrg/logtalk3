@@ -20,6 +20,6 @@
 
 
 :- initialization((
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load(http_client_core, [optimize(on)])
 )).

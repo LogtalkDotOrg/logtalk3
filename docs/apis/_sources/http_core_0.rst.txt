@@ -1,17 +1,17 @@
-.. index:: single: http
-.. _http/0:
+.. index:: single: http_core
+.. _http_core/0:
 
 .. rst-class:: right
 
 **object**
 
-``http``
-========
+``http_core``
+=============
 
 Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.
 
 | **Availability:** 
-|    ``logtalk_load(http(loader))``
+|    ``logtalk_load(http_core(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
@@ -45,7 +45,7 @@ Public predicates
 -----------------
 
 .. index:: request/7
-.. _http/0::request/7:
+.. _http_core/0::request/7:
 
 ``request/7``
 ^^^^^^^^^^^^^
@@ -64,7 +64,7 @@ Constructs a validated normalized ``request/6`` term from the given method, targ
 ------------
 
 .. index:: response/6
-.. _http/0::response/6:
+.. _http_core/0::response/6:
 
 ``response/6``
 ^^^^^^^^^^^^^^
@@ -83,7 +83,7 @@ Constructs a validated normalized ``response/5`` term from the given version, st
 ------------
 
 .. index:: is_request/1
-.. _http/0::is_request/1:
+.. _http_core/0::is_request/1:
 
 ``is_request/1``
 ^^^^^^^^^^^^^^^^
@@ -102,7 +102,7 @@ Succeeds if the given term is a structurally and semantically valid normalized `
 ------------
 
 .. index:: is_response/1
-.. _http/0::is_response/1:
+.. _http_core/0::is_response/1:
 
 ``is_response/1``
 ^^^^^^^^^^^^^^^^^
@@ -121,7 +121,7 @@ Succeeds if the given term is a structurally and semantically valid normalized `
 ------------
 
 .. index:: parse_request/2
-.. _http/0::parse_request/2:
+.. _http_core/0::parse_request/2:
 
 ``parse_request/2``
 ^^^^^^^^^^^^^^^^^^^
@@ -140,7 +140,7 @@ Parses a complete HTTP request message from the given source (``bytes(List)``, `
 ------------
 
 .. index:: generate_request/2
-.. _http/0::generate_request/2:
+.. _http_core/0::generate_request/2:
 
 ``generate_request/2``
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -159,7 +159,7 @@ Generates a complete HTTP request message to the given sink (``bytes(List)``, ``
 ------------
 
 .. index:: parse_response/2
-.. _http/0::parse_response/2:
+.. _http_core/0::parse_response/2:
 
 ``parse_response/2``
 ^^^^^^^^^^^^^^^^^^^^
@@ -178,7 +178,7 @@ Parses a complete HTTP response message from the given source (``bytes(List)``, 
 ------------
 
 .. index:: generate_response/2
-.. _http/0::generate_response/2:
+.. _http_core/0::generate_response/2:
 
 ``generate_response/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -197,7 +197,7 @@ Generates a complete HTTP response message to the given sink (``bytes(List)``, `
 ------------
 
 .. index:: generate_response_headers/2
-.. _http/0::generate_response_headers/2:
+.. _http_core/0::generate_response_headers/2:
 
 ``generate_response_headers/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -216,7 +216,7 @@ Generates an HTTP response status line and effective header block, terminated by
 ------------
 
 .. index:: parse_request_line/2
-.. _http/0::parse_request_line/2:
+.. _http_core/0::parse_request_line/2:
 
 ``parse_request_line/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -235,7 +235,7 @@ Parses an HTTP request line from the given source (``codes(List)``, ``chars(List
 ------------
 
 .. index:: generate_request_line/2
-.. _http/0::generate_request_line/2:
+.. _http_core/0::generate_request_line/2:
 
 ``generate_request_line/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -254,7 +254,7 @@ Generates an HTTP request line to the given sink (``codes(List)``, ``chars(List)
 ------------
 
 .. index:: parse_status_line/2
-.. _http/0::parse_status_line/2:
+.. _http_core/0::parse_status_line/2:
 
 ``parse_status_line/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -273,7 +273,7 @@ Parses an HTTP status line from the given source (``codes(List)``, ``chars(List)
 ------------
 
 .. index:: generate_status_line/2
-.. _http/0::generate_status_line/2:
+.. _http_core/0::generate_status_line/2:
 
 ``generate_status_line/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -292,7 +292,7 @@ Generates an HTTP status line to the given sink (``codes(List)``, ``chars(List)`
 ------------
 
 .. index:: parse_headers/2
-.. _http/0::parse_headers/2:
+.. _http_core/0::parse_headers/2:
 
 ``parse_headers/2``
 ^^^^^^^^^^^^^^^^^^^
@@ -311,7 +311,7 @@ Parses an HTTP header block from the given source (``codes(List)``, ``chars(List
 ------------
 
 .. index:: generate_headers/2
-.. _http/0::generate_headers/2:
+.. _http_core/0::generate_headers/2:
 
 ``generate_headers/2``
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -330,7 +330,7 @@ Generates an HTTP header block to the given sink (``codes(List)``, ``chars(List)
 ------------
 
 .. index:: parse_body/4
-.. _http/0::parse_body/4:
+.. _http_core/0::parse_body/4:
 
 ``parse_body/4``
 ^^^^^^^^^^^^^^^^
@@ -349,7 +349,7 @@ Parses a body payload from the given source (``bytes(List)``, ``codes(List)``, `
 ------------
 
 .. index:: generate_body/3
-.. _http/0::generate_body/3:
+.. _http_core/0::generate_body/3:
 
 ``generate_body/3``
 ^^^^^^^^^^^^^^^^^^^
@@ -368,7 +368,7 @@ Generates a body payload to the given sink (``bytes(List)``, ``codes(List)``, ``
 ------------
 
 .. index:: encode_body/4
-.. _http/0::encode_body/4:
+.. _http_core/0::encode_body/4:
 
 ``encode_body/4``
 ^^^^^^^^^^^^^^^^^
@@ -387,7 +387,7 @@ Encodes a semantic payload term using the registered concrete body codec for the
 ------------
 
 .. index:: decode_body/4
-.. _http/0::decode_body/4:
+.. _http_core/0::decode_body/4:
 
 ``decode_body/4``
 ^^^^^^^^^^^^^^^^^
@@ -406,7 +406,7 @@ Decodes a normalized body term using the registered concrete body codec for the 
 ------------
 
 .. index:: method/2
-.. _http/0::method/2:
+.. _http_core/0::method/2:
 
 ``method/2``
 ^^^^^^^^^^^^
@@ -425,7 +425,7 @@ Returns the request method from a normalized ``request/6`` term.
 ------------
 
 .. index:: target/2
-.. _http/0::target/2:
+.. _http_core/0::target/2:
 
 ``target/2``
 ^^^^^^^^^^^^
@@ -444,7 +444,7 @@ Returns the request target from a normalized ``request/6`` term.
 ------------
 
 .. index:: version/2
-.. _http/0::version/2:
+.. _http_core/0::version/2:
 
 ``version/2``
 ^^^^^^^^^^^^^
@@ -463,7 +463,7 @@ Returns the HTTP version from a normalized request or response term.
 ------------
 
 .. index:: status/2
-.. _http/0::status/2:
+.. _http_core/0::status/2:
 
 ``status/2``
 ^^^^^^^^^^^^
@@ -482,7 +482,7 @@ Returns the response status from a normalized ``response/5`` term.
 ------------
 
 .. index:: headers/2
-.. _http/0::headers/2:
+.. _http_core/0::headers/2:
 
 ``headers/2``
 ^^^^^^^^^^^^^
@@ -501,7 +501,7 @@ Returns the normalized header list from a request or response term.
 ------------
 
 .. index:: header/3
-.. _http/0::header/3:
+.. _http_core/0::header/3:
 
 ``header/3``
 ^^^^^^^^^^^^
@@ -520,7 +520,7 @@ Enumerates normalized header ``Name`` and ``Value`` pairs from a request or resp
 ------------
 
 .. index:: body/2
-.. _http/0::body/2:
+.. _http_core/0::body/2:
 
 ``body/2``
 ^^^^^^^^^^
@@ -539,7 +539,7 @@ Returns the normalized body term from a request or response term.
 ------------
 
 .. index:: property/2
-.. _http/0::property/2:
+.. _http_core/0::property/2:
 
 ``property/2``
 ^^^^^^^^^^^^^^

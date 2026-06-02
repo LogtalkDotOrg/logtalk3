@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_cors" library.'
 	]).
 
-	:- uses(http, [body/2, header/3, status/2]).
+	:- uses(http_core, [body/2, header/3, status/2]).
 
 	cover(http_cors).
 

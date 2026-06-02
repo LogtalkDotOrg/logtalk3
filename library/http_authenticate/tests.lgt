@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the http_authenticate library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, header/3, property/2, status/2
 	]).
 

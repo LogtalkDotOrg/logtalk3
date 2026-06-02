@@ -8,7 +8,7 @@
 ``http_directory_listing``
 ==========================
 
-Router-agnostic directory listing helper built on the normalized ``http`` library.
+Router-agnostic directory listing helper built on the normalized ``http_core`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_directory_listing(loader))``
@@ -28,7 +28,7 @@ Router-agnostic directory listing helper built on the normalized ``http`` librar
 |    :ref:`atom <atom/0>`
 |    :ref:`date <date/0>`
 |    :ref:`html5 <html5/0>`
-|    :ref:`http <http/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`mime_types <mime_types/0>`
 |    :ref:`os <os/0>`

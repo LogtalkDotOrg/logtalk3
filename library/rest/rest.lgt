@@ -187,18 +187,18 @@
 		memberchk(produces(MediaTypes), Options).
 
 	path_parameter(Request, Name, Value) :-
-		http::property(Request, path_params(Pairs)),
+		http_core::property(Request, path_params(Pairs)),
 		memberchk(Name-Value, Pairs).
 
 	query_parameter(Request, Name, Value) :-
-		http::property(Request, query_pairs(Pairs)),
+		http_core::property(Request, query_pairs(Pairs)),
 		memberchk(Name-Value, Pairs).
 
 	request_header(Request, Name, Value) :-
-		http::header(Request, Name, Value).
+		http_core::header(Request, Name, Value).
 
 	request_body(Request, Body) :-
-		http::body(Request, Body).
+		http_core::body(Request, Body).
 
 	json_body(Request, JSON) :-
 		request_body_payload(Request, json, JSON).
@@ -213,7 +213,7 @@
 		request_body_payload(Request, binary, Bytes).
 
 	request_body_payload(Request, PayloadType, Payload) :-
-		http::body(Request, Body),
+		http_core::body(Request, Body),
 		request_body_payload_(PayloadType, Body, Payload).
 
 	request_body_payload_(json, content(_MediaType, json(JSON)), JSON) :-
@@ -240,35 +240,35 @@
 		json_response(Request, StatusSpec, [], JSON, Response).
 
 	json_response(Request, StatusSpec, Headers, JSON, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		normalize_status(StatusSpec, Status),
 		success_response_media_type(Request, MediaType),
-		http::response(Version, Status, Headers, content(MediaType, json(JSON)), [], Response).
+		http_core::response(Version, Status, Headers, content(MediaType, json(JSON)), [], Response).
 
 	created_response(Request, Location, JSON, Response) :-
 		json_response(Request, 201, [location-Location], JSON, Response).
 
 	no_content_response(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		normalize_status(204, Status),
-		http::response(Version, Status, [], empty, [], Response).
+		http_core::response(Version, Status, [], empty, [], Response).
 
 	problem_response(Request, StatusSpec, Type, Title, Detail, Response) :-
 		normalize_status(StatusSpec, Status),
 		Status = status(Code, _Reason),
 		Problem = {type-Type, title-Title, detail-Detail, status-Code},
-		http::version(Request, Version),
-		http::response(Version, Status, [], content('application/problem+json', json(Problem)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, Status, [], content('application/problem+json', json(Problem)), [], Response).
 
 	success_response_media_type(Request, MediaType) :-
-		(   http::property(Request, response_media_type(MediaType)) ->
+		(   http_core::property(Request, response_media_type(MediaType)) ->
 			true
 		;   MediaType = 'application/json'
 		).
 
 	dispatch_rest_endpoint(Request, Response) :-
-		http::property(Request, route(Id)),
-		(   http::property(Request, open_api_probe(true)) ->
+		http_core::property(Request, route(Id)),
+		(   http_core::property(Request, open_api_probe(true)) ->
 			run_rest_endpoint(Id, Request, Response)
 		;   validate_open_api_request(Id, Request, ValidationResponse),
 			(   var(ValidationResponse) ->
@@ -325,11 +325,11 @@
 		metadata_options(Options, Metadata).
 
 	normalize_rest_result(_Request, Result, Response) :-
-		http::is_response(Result),
+		http_core::is_response(Result),
 		!,
 		Response = Result.
 	normalize_rest_result(_Request, response(Response), Response) :-
-		http::is_response(Response),
+		http_core::is_response(Response),
 		!.
 	normalize_rest_result(Request, ok(JSON), Response) :-
 		!,

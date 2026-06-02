@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
-	:- uses(http, [body/2, property/2, request/7, status/2]).
+	:- uses(http_core, [body/2, property/2, request/7, status/2]).
 
 	cover(http_socket).
 

@@ -25,6 +25,6 @@
 	logtalk_load(os(loader)),
 	logtalk_load(mime_types(loader)),
 	logtalk_load(dates(loader)),
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load(http_static_files, [optimize(on)])
 )).

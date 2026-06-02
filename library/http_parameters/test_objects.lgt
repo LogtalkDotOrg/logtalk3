@@ -109,20 +109,20 @@
 	show_search(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [q-alpha, page-1, tag-[news, tech]],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(search_results)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(search_results)), [], Response).
 
 	show_item(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [id-42],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(item_42)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(item_42)), [], Response).
 
 	create_session(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [username-alice, password-secret, remember-true],
-		http::version(Request, Version),
-		http::response(Version, status(201, 'Created'), [], content('text/plain', text(session_created)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(201, 'Created'), [], content('text/plain', text(session_created)), [], Response).
 
 :- end_object.
 
@@ -158,8 +158,8 @@
 	show_reports(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [status-published, page-1],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(reports_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(reports_ok)), [], Response).
 
 :- end_object.
 
@@ -196,8 +196,8 @@
 	show_session(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [etag-'session-tag', session-'cookie-1', verbose-true],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(session_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(session_ok)), [], Response).
 
 :- end_object.
 
@@ -230,8 +230,8 @@
 	]).
 
 	show_profiles(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(profiles_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(profiles_ok)), [], Response).
 
 :- end_object.
 
@@ -274,8 +274,8 @@
 	show_metadata(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [q-alpha, page-1],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(metadata_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(metadata_ok)), [], Response).
 
 :- end_object.
 
@@ -309,8 +309,8 @@
 	]).
 
 	show_trace(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(trace_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(trace_ok)), [], Response).
 
 :- end_object.
 
@@ -358,25 +358,25 @@
 	show_note(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [slug-note],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(note_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(note_ok)), [], Response).
 
 	show_alias(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [name-alias],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(alias_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(alias_ok)), [], Response).
 
 	show_score(Request, Response) :-
 		::route_parameters(Request, Parameters),
 		Parameters == [value-2.5],
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(score_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(score_ok)), [], Response).
 
 	show_flag(Request, Response) :-
 		::route_parameters(Request, _Parameters),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(flag_ok)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(flag_ok)), [], Response).
 
 :- end_object.
 
@@ -396,8 +396,8 @@
 
 	show_item(Request, Response) :-
 		::route_parameters(Request, _Parameters),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(item)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(item)), [], Response).
 
 :- end_object.
 
@@ -427,8 +427,8 @@
 
 		create(Request, Response) :-
 			::route_parameters(Request, _Parameters),
-			http::version(Request, Version),
-			http::response(Version, status(201, 'Created'), [], content('text/plain', text(created)), [], Response).
+			http_core::version(Request, Version),
+			http_core::response(Version, status(201, 'Created'), [], content('text/plain', text(created)), [], Response).
 
 	:- end_object.
 
@@ -458,8 +458,8 @@
 
 		create(Request, Response) :-
 			::route_parameters(Request, _Parameters),
-			http::version(Request, Version),
-			http::response(Version, status(201, 'Created'), [], content('text/plain', text(created)), [], Response).
+			http_core::version(Request, Version),
+			http_core::response(Version, status(201, 'Created'), [], content('text/plain', text(created)), [], Response).
 
 	:- end_object.
 
@@ -479,7 +479,7 @@
 
 	show_item(Request, Response) :-
 		::route_parameters(Request, _Parameters),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(item)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(item)), [], Response).
 
 :- end_object.

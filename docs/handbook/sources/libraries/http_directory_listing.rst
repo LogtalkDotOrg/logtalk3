@@ -5,7 +5,7 @@
 
 The ``http_directory_listing`` library provides a router-agnostic helper
 for serving HTML directory listings from a configured document root
-using normalized ``http`` request and response terms.
+using normalized ``http_core`` request and response terms.
 
 This library resolves a relative request path against a document root,
 canonicalizes the joined target path using ``os::absolute_file_name/2``,

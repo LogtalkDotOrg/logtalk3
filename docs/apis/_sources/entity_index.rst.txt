@@ -302,7 +302,6 @@ Objects
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
    html5 <html5_0>
-   http <http_0>
    http_authenticate <http_authenticate_0>
    http_client <http_client_0>
    http_client_core <http_client_core_0>
@@ -310,6 +309,7 @@ Objects
    http_client_session <http_client_session_0>
    http_cookie_jar <http_cookie_jar_0>
    http_cookies(Representation) <http_cookies_1>
+   http_core <http_core_0>
    http_cors <http_cors_0>
    http_digest <http_digest_0>
    http_directory_listing <http_directory_listing_0>

@@ -104,11 +104,11 @@
 		select_websocket_protocol(ProtocolOption, OfferedProtocols, SelectedProtocol),
 		websocket_accept(Key, Accept),
 		websocket_response_properties(Properties0, Accept, SelectedProtocol, Properties),
-		http::response(Version, status(101, 'Switching Protocols'), Headers, empty, Properties, Response).
+		http_core::response(Version, status(101, 'Switching Protocols'), Headers, empty, Properties, Response).
 
 	read_request(Input, Request) :-
 		read_request_bytes(Input, Bytes),
-		(	http::parse_request(bytes(Bytes), Request) ->
+		(	http_core::parse_request(bytes(Bytes), Request) ->
 			true
 		;	domain_error(http_request_stream, malformed_request(Bytes))
 		).
@@ -117,19 +117,19 @@
 		file_backed_response(Response, File, Offset, Length),
 		\+ response_uses_chunked_wire_body(Response),
 		!,
-		http::generate_response_headers(stream(Output), Response),
+		http_core::generate_response_headers(stream(Output), Response),
 		write_file_bytes(Output, File, Offset, Length),
 		flush_output(Output).
 	write_response(Output, Response) :-
-		http::generate_response(bytes(Bytes), Response),
+		http_core::generate_response(bytes(Bytes), Response),
 		write_bytes(Bytes, Output),
 		flush_output(Output).
 
 	dispatch(Handler, Request, Response) :-
 		validate_handler(Handler),
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		(	catch(Handler::handle(Request, Candidate), _, fail),
-			http::is_response(Candidate) ->
+			http_core::is_response(Candidate) ->
 			Response = Candidate
 		;	internal_server_error_response(Version, Response)
 		).
@@ -205,11 +205,11 @@
 		).
 
 	valid_websocket_request(Request, Version, Key, OfferedProtocols) :-
-		http::method(Request, get),
-		http::version(Request, Version),
+		http_core::method(Request, get),
+		http_core::version(Request, Version),
 		websocket_http_version(Version),
 		websocket_host_header(Request),
-		http::body(Request, empty),
+		http_core::body(Request, empty),
 		^^message_connection_tokens(Request, ConnectionTokens),
 		memberchk(upgrade, ConnectionTokens),
 		message_upgrade_tokens(Request, UpgradeTokens),
@@ -222,12 +222,12 @@
 		).
 
 	websocket_host_header(Request) :-
-		(	http::property(Request, host(_Host)) ->
+		(	http_core::property(Request, host(_Host)) ->
 			true
-		;	http::property(Request, host(_Host, _Port)) ->
+		;	http_core::property(Request, host(_Host, _Port)) ->
 			true
-		;	http::header(Request, host, host(_Host))
-		;	http::header(Request, host, host(_Host, _Port))
+		;	http_core::header(Request, host, host(_Host))
+		;	http_core::header(Request, host, host(_Host, _Port))
 		).
 
 	websocket_http_version(Version) :-
@@ -249,39 +249,39 @@
 		Protocol \== none.
 
 	message_upgrade_tokens(Message, Tokens) :-
-		(	http::property(Message, upgrade(Tokens)) ->
+		(	http_core::property(Message, upgrade(Tokens)) ->
 			true
-		;	http::header(Message, upgrade, Tokens)
+		;	http_core::header(Message, upgrade, Tokens)
 		),
 		!.
 
 	message_websocket_key(Message, Key) :-
 		(	^^message_header_values(Message, sec_websocket_key, Values), Values \== [] ->
 			Values = [Key]
-		;	http::property(Message, websocket_key(Key)) ->
+		;	http_core::property(Message, websocket_key(Key)) ->
 			true
-		;	http::header(Message, sec_websocket_key, Key)
+		;	http_core::header(Message, sec_websocket_key, Key)
 		),
 		!.
 
 	message_websocket_version(Message, Version) :-
-		(	http::property(Message, websocket_version(Version)) ->
+		(	http_core::property(Message, websocket_version(Version)) ->
 			true
-		;	http::header(Message, sec_websocket_version, Version)
+		;	http_core::header(Message, sec_websocket_version, Version)
 		),
 		!.
 
 	message_websocket_protocols(Message, Protocols) :-
-		(	http::property(Message, websocket_protocol(Protocols)) ->
+		(	http_core::property(Message, websocket_protocol(Protocols)) ->
 			true
-		;	http::header(Message, sec_websocket_protocol, Protocols)
+		;	http_core::header(Message, sec_websocket_protocol, Protocols)
 		),
 		!.
 
 	message_response_websocket_protocols(Message, Protocols) :-
 		(	^^message_header_values(Message, sec_websocket_protocol, Values), Values \== [] ->
 			Values = [Protocols]
-		;	http::property(Message, websocket_protocol(Protocols))
+		;	http_core::property(Message, websocket_protocol(Protocols))
 		),
 		!.
 
@@ -290,7 +290,7 @@
 		Values \== [],
 		!.
 	response_websocket_protocol_present(Message) :-
-		http::property(Message, websocket_protocol(_Protocols)).
+		http_core::property(Message, websocket_protocol(_Protocols)).
 
 	serve_websocket_result(end_of_file, _Output, _Handler, end_of_file).
 	serve_websocket_result(error(Response), Output, _Handler, rejected(Response)) :-
@@ -305,10 +305,10 @@
 
 	dispatch_websocket(Handler, Request, Response) :-
 		validate_handler(Handler),
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		catch(
 			(	Handler::handle(Request, Candidate),
-				(	http::is_response(Candidate) ->
+				(	http_core::is_response(Candidate) ->
 					Response = Candidate
 				;	internal_server_error_response(Version, Response)
 				)
@@ -332,11 +332,11 @@
 		Version =\= 13.
 
 	upgrade_required_response(Response) :-
-		http::response(http(1, 1), status(426, 'Upgrade Required'), [], content('text/plain', text('Upgrade Required')), [websocket_version(13)], Response).
+		http_core::response(http(1, 1), status(426, 'Upgrade Required'), [], content('text/plain', text('Upgrade Required')), [websocket_version(13)], Response).
 
 	valid_websocket_upgrade_response(Request, Response) :-
-		http::status(Response, status(101, _ReasonPhrase)),
-		http::body(Response, empty),
+		http_core::status(Response, status(101, _ReasonPhrase)),
+		http_core::body(Response, empty),
 		^^message_connection_tokens(Response, ConnectionTokens),
 		memberchk(upgrade, ConnectionTokens),
 		message_upgrade_tokens(Response, UpgradeTokens),
@@ -360,16 +360,16 @@
 	message_websocket_accept(Message, Accept) :-
 		(	^^message_header_values(Message, sec_websocket_accept, Values), Values \== [] ->
 			Values = [Accept]
-		;	http::property(Message, websocket_accept(Accept)) ->
+		;	http_core::property(Message, websocket_accept(Accept)) ->
 			true
-		;	http::header(Message, sec_websocket_accept, Accept)
+		;	http_core::header(Message, sec_websocket_accept, Accept)
 		),
 		!.
 
 	message_websocket_extensions(Message, Extensions) :-
-		(	http::property(Message, websocket_extensions(Extensions)) ->
+		(	http_core::property(Message, websocket_extensions(Extensions)) ->
 			true
-		;	http::header(Message, sec_websocket_extensions, Extensions)
+		;	http_core::header(Message, sec_websocket_extensions, Extensions)
 		),
 		!.
 
@@ -401,10 +401,10 @@
 		write_response(Output, Response).
 
 	head_request(Request) :-
-		http::method(Request, head).
+		http_core::method(Request, head).
 
 	head_response_bytes(Response, HeaderBytes) :-
-		http::generate_response_headers(bytes(HeaderBytes), Response).
+		http_core::generate_response_headers(bytes(HeaderBytes), Response).
 
 	strip_response_body_bytes(Bytes, HeaderBytes) :-
 		(	split_response_header_bytes(Bytes, [], HeaderBytes) ->
@@ -447,7 +447,7 @@
 		^^request_persistent(Request).
 
 	switching_protocols_response(Response) :-
-		http::status(Response, status(101, _ReasonPhrase)).
+		http_core::status(Response, status(101, _ReasonPhrase)).
 
 	apply_connection_action(upgrade, Response, Response) :-
 		!.
@@ -493,7 +493,7 @@
 			Properties = Properties1
 		;	Properties = [connection(Tokens)| Properties1]
 		),
-		http::response(Version, Status, Headers, Body, Properties, Response).
+		http_core::response(Version, Status, Headers, Body, Properties, Response).
 
 	remove_connection_headers(Headers, FilteredHeaders) :-
 		remove_connection_headers(Headers, [], ReversedHeaders),
@@ -528,7 +528,7 @@
 
 	read_header_block(Input, HeaderBytes, Headers) :-
 		read_header_block_bytes(Input, HeaderBytes, []),
-		http::parse_headers(codes(HeaderBytes), Headers).
+		http_core::parse_headers(codes(HeaderBytes), Headers).
 
 	read_header_block_bytes(Input, Bytes0, Bytes) :-
 		read_line_bytes(Input, LineResult),
@@ -624,13 +624,13 @@
 		).
 
 	file_backed_response(Response, File, Offset, Length) :-
-		http::body(Response, content(_MediaType, file(File, Offset, Length))).
+		http_core::body(Response, content(_MediaType, file(File, Offset, Length))).
 
 	response_uses_chunked_wire_body(Response) :-
-		http::property(Response, transfer_encoding([chunked])),
+		http_core::property(Response, transfer_encoding([chunked])),
 		!.
 	response_uses_chunked_wire_body(Response) :-
-		http::header(Response, transfer_encoding, [chunked]).
+		http_core::header(Response, transfer_encoding, [chunked]).
 
 	write_file_bytes(Output, File, Offset, Length) :-
 		open(File, read, Input, [type(binary)]),
@@ -682,6 +682,6 @@
 		error_response(Version, 500, 'Internal Server Error', 'Internal Server Error', Response).
 
 	error_response(Version, Code, Reason, Message, Response) :-
-		http::response(Version, status(Code, Reason), [], content('text/plain', text(Message)), [], Response).
+		http_core::response(Version, status(Code, Reason), [], content('text/plain', text(Message)), [], Response).
 
 :- end_object.

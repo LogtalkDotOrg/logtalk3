@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "rest" library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, header/3, status/2
 	]).
 

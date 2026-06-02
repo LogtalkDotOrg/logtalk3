@@ -38,7 +38,7 @@
 		validate/3 as json_schema_validate/3
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		parse_request/2 as http_parse_request/2, parse_response/2 as http_parse_response/2,
 		is_request/1 as http_is_request/1, is_response/1 as http_is_response/1, method/2 as http_method/2,
 		target/2 as http_target/2, headers/2 as http_headers/2, body/2 as http_body/2,
@@ -112,14 +112,14 @@
 	:- public(validate_http_request/3).
 	:- mode(validate_http_request(+object_identifier, +atom, ++compound), zero_or_one).
 	:- info(validate_http_request/3, [
-		comment is 'Succeeds when an HTTP request wire source parsed by the ``http`` library conforms to the provider operation descriptor identified by the given ``operationId``.',
+		comment is 'Succeeds when an HTTP request wire source parsed by the ``http_core`` library conforms to the provider operation descriptor identified by the given ``operationId``.',
 		argnames is ['Provider', 'OperationId', 'Source']
 	]).
 
 	:- public(validate_http_request/4).
 	:- mode(validate_http_request(+object_identifier, +atom, ++compound, --list), one).
 	:- info(validate_http_request/4, [
-		comment is 'Parses an HTTP request wire source using the ``http`` library and validates the resulting normalized request against the provider operation descriptor identified by the given ``operationId``.',
+		comment is 'Parses an HTTP request wire source using the ``http_core`` library and validates the resulting normalized request against the provider operation descriptor identified by the given ``operationId``.',
 		argnames is ['Provider', 'OperationId', 'Source', 'Errors']
 	]).
 
@@ -140,14 +140,14 @@
 	:- public(validate_http_response/3).
 	:- mode(validate_http_response(+object_identifier, +atom, ++compound), zero_or_one).
 	:- info(validate_http_response/3, [
-		comment is 'Succeeds when an HTTP response wire source parsed by the ``http`` library conforms to the provider operation descriptor identified by the given ``operationId``.',
+		comment is 'Succeeds when an HTTP response wire source parsed by the ``http_core`` library conforms to the provider operation descriptor identified by the given ``operationId``.',
 		argnames is ['Provider', 'OperationId', 'Source']
 	]).
 
 	:- public(validate_http_response/4).
 	:- mode(validate_http_response(+object_identifier, +atom, ++compound, --list), one).
 	:- info(validate_http_response/4, [
-		comment is 'Parses an HTTP response wire source using the ``http`` library and validates the resulting normalized response against the provider operation descriptor identified by the given ``operationId``.',
+		comment is 'Parses an HTTP response wire source using the ``http_core`` library and validates the resulting normalized response against the provider operation descriptor identified by the given ``operationId``.',
 		argnames is ['Provider', 'OperationId', 'Source', 'Errors']
 	]).
 

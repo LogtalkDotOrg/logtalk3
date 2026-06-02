@@ -22,8 +22,8 @@ ________________________________________________________________________
 ===================
 
 The `http_static_files` library provides a router-agnostic helper for serving
-existing files from a configured document root using normalized `http` request
-and response terms.
+existing files from a configured document root using normalized `http_core`
+request and response terms.
 
 This library resolves a relative request path against a document root, canonicalizes
 the joined target path using `os::absolute_file_name/2`, rejects canonicalized

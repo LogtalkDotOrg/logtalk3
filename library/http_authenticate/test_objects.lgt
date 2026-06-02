@@ -45,9 +45,9 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::property(Request, basic_username(Username)),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
+		http_core::version(Request, Version),
+		http_core::property(Request, basic_username(Username)),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
 
 :- end_object.
 
@@ -94,12 +94,12 @@
 		^^authorize_basic_auth_request(Request, Action).
 
 	add_router_stage(_Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		http::response(Version, Status, [x_router_stage-routed| Headers0], Body, Properties, Response).
+		http_core::response(Version, Status, [x_router_stage-routed| Headers0], Body, Properties, Response).
 
 	show_secret(Request, Response) :-
-		http::property(Request, route(show_secret)),
-		http::property(Request, basic_username(Username)),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
+		http_core::property(Request, route(show_secret)),
+		http_core::property(Request, basic_username(Username)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
 
 :- end_object.

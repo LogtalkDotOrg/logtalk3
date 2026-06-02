@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-25,
-		comment is 'Router-agnostic static file response helper built on the normalized ``http`` library.'
+		comment is 'Router-agnostic static file response helper built on the normalized ``http_core`` library.'
 	]).
 
 	:- public(serve/4).
@@ -421,8 +421,8 @@
 		full_response(Request, Resource, Response).
 
 	full_response(Request, resource(File, MediaType, Headers, Size, _ModifiedTime, _ETag, _LastModified), Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), Headers, content(MediaType, file(File, 0, Size)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), Headers, content(MediaType, file(File, 0, Size)), [], Response).
 
 	range_response(Request, _RangeValue, Resource, Response) :-
 		\+ if_range_matches(Request, Resource),
@@ -439,19 +439,19 @@
 		Length is End - Start + 1,
 		content_range_value(Start, End, Size, ContentRange),
 		prepend_header(content_range-ContentRange, Headers0, Headers),
-		http::version(Request, Version),
-		http::response(Version, status(206, 'Partial Content'), Headers, content(MediaType, file(File, Start, Length)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(206, 'Partial Content'), Headers, content(MediaType, file(File, Start, Length)), [], Response).
 
 	not_modified_response(Request, resource(_File, MediaType, Headers0, _Size, _ModifiedTime, _ETag, _LastModified), Response) :-
 		prepend_header(content_type-media_type(MediaType, []), Headers0, Headers),
-		http::version(Request, Version),
-		http::response(Version, status(304, 'Not Modified'), Headers, empty, [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(304, 'Not Modified'), Headers, empty, [], Response).
 
 	range_not_satisfiable_response(Request, resource(_File, _MediaType, Headers0, Size, _ModifiedTime, _ETag, _LastModified), Response) :-
 		unsatisfied_content_range_value(Size, ContentRange),
 		prepend_header(content_range-ContentRange, Headers0, Headers),
-		http::version(Request, Version),
-		http::response(Version, status(416, 'Range Not Satisfiable'), Headers, empty, [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(416, 'Range Not Satisfiable'), Headers, empty, [], Response).
 
 	request_not_modified(Request, resource(_File, _MediaType, _Headers, _Size, _ModifiedTime, ETag, _LastModified)) :-
 		request_header_value(Request, if_none_match, Value),
@@ -478,7 +478,7 @@
 		).
 
 	request_header_value(Request, Name, Value) :-
-		http::header(Request, Name, Value),
+		http_core::header(Request, Name, Value),
 		!.
 
 	if_none_match_matches(Value, ETag) :-
@@ -644,17 +644,17 @@
 	guessed_media_type(Type, Type).
 
 	not_found_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
 
 	not_acceptable_response(Request, VaryAcceptEncoding, Response) :-
 		vary_headers(VaryAcceptEncoding, Headers),
-		http::version(Request, Version),
-		http::response(Version, status(406, 'Not Acceptable'), Headers, content('text/plain', text('Not Acceptable')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(406, 'Not Acceptable'), Headers, content('text/plain', text('Not Acceptable')), [], Response).
 
 	method_not_allowed_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD'], content('text/plain', text('Method Not Allowed')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD'], content('text/plain', text('Method Not Allowed')), [], Response).
 
 	valid_boolean_option(Boolean) :-
 		once((

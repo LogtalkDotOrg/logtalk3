@@ -25,7 +25,7 @@
 	logtalk_load(hashes(loader)),
 	logtalk_load(hmac(loader)),
 	logtalk_load(options(loader)),
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load([http_digest_verifier_protocol, http_digest, http_server_digest_handler], [optimize(on)])
 )).
 

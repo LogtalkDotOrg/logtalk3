@@ -159,10 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -357,11 +357,11 @@
   <section id="http-multipart">
 <span id="library-http-multipart"></span><h1><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code><a class="headerlink" href="#http-multipart" title="Link to this heading"></a></h1>
 <p>This library provides a higher-level multipart helper layer on top of
-the <code class="docutils literal notranslate"><span class="pre">http</span></code> core library. It does not replace the low-level multipart
-wire support already implemented in <code class="docutils literal notranslate"><span class="pre">http</span></code>; instead it wraps the
+the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It does not replace the low-level multipart
+wire support already implemented in <code class="docutils literal notranslate"><span class="pre">http_core</span></code>; instead it wraps the
 normalized multipart body and part terms, adds form-data field and file
 helpers, and delegates raw parsing and generation to the existing
-<code class="docutils literal notranslate"><span class="pre">http</span></code> predicates.</p>
+<code class="docutils literal notranslate"><span class="pre">http_core</span></code> predicates.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -402,13 +402,13 @@ form-data field and file parts.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code> for constructing a <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> body
 from an ordered list of field and file descriptors.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parse/4</span></code> and <code class="docutils literal notranslate"><span class="pre">generate/3</span></code> as multipart-specific wrappers around
-the existing <code class="docutils literal notranslate"><span class="pre">http::parse_body/4</span></code> and <code class="docutils literal notranslate"><span class="pre">http::generate_body/3</span></code>
-predicates.</p></li>
+the existing <code class="docutils literal notranslate"><span class="pre">http_core::parse_body/4</span></code> and
+<code class="docutils literal notranslate"><span class="pre">http_core::generate_body/3</span></code> predicates.</p></li>
 </ul>
 </section>
 <section id="normalized-terms">
 <h2>Normalized terms<a class="headerlink" href="#normalized-terms" title="Link to this heading"></a></h2>
-<p>Multipart bodies use the normalized <code class="docutils literal notranslate"><span class="pre">http</span></code> body term:</p>
+<p>Multipart bodies use the normalized <code class="docutils literal notranslate"><span class="pre">http_core</span></code> body term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>content(<span class="nv">MediaType</span>, multipart(<span class="nv">Parts</span>))
 </pre></div>
 </div>
@@ -444,7 +444,8 @@ a non-text body or a more specialized encoding, callers should use the
 generic part accessors instead.</p></li>
 <li><p>Multipart wire parsing and generation still require a boundary
 parameter in the effective <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> metadata or an explicit
-<code class="docutils literal notranslate"><span class="pre">boundary/1</span></code> option, exactly as in the underlying <code class="docutils literal notranslate"><span class="pre">http</span></code> library.</p></li>
+<code class="docutils literal notranslate"><span class="pre">boundary/1</span></code> option, exactly as in the underlying <code class="docutils literal notranslate"><span class="pre">http_core</span></code>
+library.</p></li>
 <li><p>The library does not yet provide streaming sinks, temp-file policies,
 or large-upload orchestration.</p></li>
 </ul>

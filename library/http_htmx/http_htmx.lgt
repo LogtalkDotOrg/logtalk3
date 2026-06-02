@@ -263,8 +263,8 @@
 		render_content(Content, HTML),
 		^^option(status(Status), Options),
 		^^option(headers(Headers), Options),
-		http::version(Request, Version),
-		http::response(Version, Status, Headers, content('text/html', text(HTML)), [], Response0),
+		http_core::version(Request, Version),
+		http_core::response(Version, Status, Headers, content('text/html', text(HTML)), [], Response0),
 		add_response_headers(Request, Response0, Response, Options).
 
 	page_fragment_reply(Request, PageContent, FragmentContent, Response) :-
@@ -295,7 +295,7 @@
 		).
 
 	ensure_htmx_response_headers_allowed(Response) :-
-		http::status(Response, Status),
+		http_core::status(Response, Status),
 		(	htmx_response_headers_allowed(Status) ->
 			true
 		;	domain_error(htmx_response_headers_status, Status)
@@ -389,7 +389,7 @@
 	same_origin_current_url(Request, Components) :-
 		memberchk(scheme(URLScheme0), Components),
 		lowercase_ascii_atom(URLScheme0, URLScheme),
-		http::property(Request, scheme(RequestScheme)),
+		http_core::property(Request, scheme(RequestScheme)),
 		URLScheme == RequestScheme,
 		memberchk(authority(URLAuthority), Components),
 		authority_endpoint(URLAuthority, URLHost, URLPort),
@@ -398,13 +398,13 @@
 		equivalent_origin_port(URLScheme, URLPort, RequestPort).
 
 	request_origin_endpoint(Request, Host, Port) :-
-		(	http::property(Request, host(Host, Port)) ->
+		(	http_core::property(Request, host(Host, Port)) ->
 			true
-		;	http::property(Request, host(Host)) ->
+		;	http_core::property(Request, host(Host)) ->
 			Port = implied
-		;	http::header(Request, host, host(Host, Port)) ->
+		;	http_core::header(Request, host, host(Host, Port)) ->
 			true
-		;	http::header(Request, host, host(Host)) ->
+		;	http_core::header(Request, host, host(Host)) ->
 			Port = implied
 		;	false
 		).
@@ -511,7 +511,7 @@
 		text_atom(Value, Atom).
 
 	request_header_value(Request, Name, Value) :-
-		http::header(Request, Name, Value),
+		http_core::header(Request, Name, Value),
 		!.
 
 	header_true(Value) :-
@@ -645,8 +645,8 @@
 
 	json_header_value(Value, HeaderValue) :-
 		^^normalize_json_value(Value, JSON),
-		http::encode_body('application/json', JSON, [], Body),
-		http::generate_body(atom(HeaderValue), Body, []).
+		http_core::encode_body('application/json', JSON, [], Body),
+		http_core::generate_body(atom(HeaderValue), Body, []).
 
 	merge_response_headers(response(Version, Status, Headers0, Body, Properties), GeneratedHeaders, VaryTokens0, Response) :-
 		collect_vary_tokens(Headers0, ExistingVaryTokens),
@@ -666,7 +666,7 @@
 		),
 		remove_headers_by_names(Headers0, GeneratedNames, RemainingHeaders),
 		append(MergedHeaders, RemainingHeaders, Headers),
-		http::response(Version, Status, Headers, Body, Properties, Response).
+		http_core::response(Version, Status, Headers, Body, Properties, Response).
 
 	header_names([], []).
 	header_names([Name-_| Headers], [Name| Names]) :-
@@ -824,13 +824,13 @@
 		overridden_header(Header, Overrides).
 
 	validate_request(Request) :-
-		http::is_request(Request),
+		http_core::is_request(Request),
 		!.
 	validate_request(Request) :-
 		domain_error(http_request, Request).
 
 	validate_response(Response) :-
-		http::is_response(Response),
+		http_core::is_response(Response),
 		!.
 	validate_response(Response) :-
 		domain_error(http_response, Response).

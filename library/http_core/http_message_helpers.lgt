@@ -89,7 +89,7 @@
 		member/2, memberchk/2, reverse/2
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		headers/2 as http_headers/2,
 		version/2 as http_version/2,
 		property/2 as http_property/2

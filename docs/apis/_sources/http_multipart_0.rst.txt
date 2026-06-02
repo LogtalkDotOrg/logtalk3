@@ -24,7 +24,7 @@ Multipart helper predicates built on top of the normalized body and part terms p
 | **Imports:**
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
 
@@ -85,7 +85,7 @@ True when the argument is a valid normalized multipart body term.
 ``parse/4``
 ^^^^^^^^^^^
 
-Parses a multipart body from a source term by delegating to the underlying http::parse_body/4 predicate after validating the media type.
+Parses a multipart body from a source term by delegating to the underlying http_core::parse_body/4 predicate after validating the media type.
 
 | **Compilation flags:**
 |    ``static``
@@ -104,7 +104,7 @@ Parses a multipart body from a source term by delegating to the underlying http:
 ``generate/3``
 ^^^^^^^^^^^^^^
 
-Generates a multipart body to a sink term by delegating to the underlying http::generate_body/3 predicate after validating the multipart body term.
+Generates a multipart body to a sink term by delegating to the underlying http_core::generate_body/3 predicate after validating the multipart body term.
 
 | **Compilation flags:**
 |    ``static``

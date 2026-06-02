@@ -24,10 +24,10 @@ Stateful HTTP client sessions that add cookie persistence on top of the stateles
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
 |    :ref:`http_client <http_client/0>`
 |    :ref:`http_cookie_jar <http_cookie_jar/0>`
 |    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 
 | **Remarks:**

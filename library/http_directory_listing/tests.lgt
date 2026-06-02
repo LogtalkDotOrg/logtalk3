@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_directory_listing" library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		request/7,
 		status/2,
 		header/3,

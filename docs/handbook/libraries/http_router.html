@@ -159,10 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -356,14 +356,14 @@
   <section id="http-router">
 <span id="library-http-router"></span><h1><code class="docutils literal notranslate"><span class="pre">http_router</span></code><a class="headerlink" href="#http-router" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library provides the first declarative routing layer
-on top of the <code class="docutils literal notranslate"><span class="pre">http</span></code> core library. It is implemented as a category so
+on top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It is implemented as a category so
 that router objects can implement the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol
 directly while reusing common method dispatch and path-template matching
 logic.</p>
 <section id="layering">
 <h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">http_router</span></code> sits between the normalized <code class="docutils literal notranslate"><span class="pre">http</span></code> message layer and
-higher-level API authoring helpers:</p>
+<p><code class="docutils literal notranslate"><span class="pre">http_router</span></code> sits between the normalized <code class="docutils literal notranslate"><span class="pre">http_core</span></code> message layer
+and higher-level API authoring helpers:</p>
 <ul class="simple">
 <li><p>Use <a class="reference external" href="../http/NOTES.md">http</a> directly when you only need normalized
 messages, parsers, generators, or low-level handlers.</p></li>

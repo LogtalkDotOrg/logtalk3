@@ -293,7 +293,7 @@
 	:- endif.
 
 	normalize_connection_endpoint(Host, Port, NormalizedHost) :-
-		http::request(get, authority(Host, Port), http(1, 1), [], empty, [], _),
+		http_core::request(get, authority(Host, Port), http(1, 1), [], empty, [], _),
 		atom_codes(Host, HostCodes),
 		lowercase_ascii_codes(HostCodes, NormalizedHostCodes),
 		atom_codes(NormalizedHost, NormalizedHostCodes).
@@ -497,7 +497,7 @@
 		last_request_response(Requests, Responses, Request, Response).
 
 	one_shot_request(Request0, Request) :-
-		(	http::is_request(Request0) ->
+		(	http_core::is_request(Request0) ->
 			ensure_close_connection_request(Request0, Request)
 		;	Request = Request0
 		).

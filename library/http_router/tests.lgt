@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_router" library.'
 	]).
 
-	:- uses(http, [body/2, header/3, property/2, status/2]).
+	:- uses(http_core, [body/2, header/3, property/2, status/2]).
 
 	cover(http_router).
 

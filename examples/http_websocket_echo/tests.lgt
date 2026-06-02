@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_websocket_echo" example.'
 	]).
 
-	:- uses(http, [property/2, status/2]).
+	:- uses(http_core, [property/2, status/2]).
 
 	cover(websocket_echo_http_handler(_)).
 	cover(websocket_echo_server).

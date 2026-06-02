@@ -34,7 +34,7 @@ accept relative reference arguments.
 * ADDED: New `crypto` library providing transport-neutral cryptographic helper
 predicates.
 
-* ADDED: New `http`, `http_client`, `http_cookies`, `http_multipart`,
+* ADDED: New `http_core`, `http_client`, `http_cookies`, `http_multipart`,
 `http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
 `http_websocket_messages`, `http_websocket_session`, `http_directory_listing`,
 `http_static_files`, `open_api`, and `rest` libraries.

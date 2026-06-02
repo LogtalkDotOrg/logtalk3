@@ -34,11 +34,11 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
+		http_core::version(Request, Version),
 		next_visit_count(Request, VisitCount),
 		number_codes(VisitCount, VisitCountCodes),
 		atom_codes(VisitCountText, VisitCountCodes),
-		http::response(
+		http_core::response(
 			Version,
 			status(200, 'OK'),
 			[],
@@ -48,7 +48,7 @@
 		).
 
 	next_visit_count(Request, VisitCount) :-
-		(	http::property(Request, cookies(Pairs)),
+		(	http_core::property(Request, cookies(Pairs)),
 			memberchk(visits-CurrentText, Pairs),
 			atom_codes(CurrentText, CurrentTextCodes),
 			catch(number_codes(CurrentCount, CurrentTextCodes), _, fail) ->
@@ -74,8 +74,8 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::target(Request, Target),
+		http_core::version(Request, Version),
+		http_core::target(Request, Target),
 		(	request_info_target_(Target) ->
 			request_info_response_(Request, Version, Response)
 		;	echo_response_(Request, Version, Response)
@@ -85,24 +85,24 @@
 	request_info_target_(origin('/request-info', _Query)).
 
 	request_info_response_(Request, Version, Response) :-
-		http::property(Request, query_pairs(QueryPairs)),
+		http_core::property(Request, query_pairs(QueryPairs)),
 		memberchk(lang-Lang, QueryPairs),
 		memberchk(page-Page, QueryPairs),
 		memberchk(item-Item, QueryPairs),
-		http::version(Request, http(Major, Minor)),
-		http::property(Request, cookies(CookiePairs)),
+		http_core::version(Request, http(Major, Minor)),
+		http_core::property(Request, cookies(CookiePairs)),
 		memberchk(session-Session, CookiePairs),
 		Body = {lang-Lang, page-Page, item-Item, session-Session, major-Major, minor-Minor},
-		http::response(Version, status(200, 'OK'), [], content('application/json', json(Body)), [], Response).
+		http_core::response(Version, status(200, 'OK'), [], content('application/json', json(Body)), [], Response).
 
 	echo_response_(Request, Version, Response) :-
-		http::body(Request, Body),
+		http_core::body(Request, Body),
 		(	Body == empty ->
-			http::method(Request, Method),
+			http_core::method(Request, Method),
 			ResponseBody = content('text/plain', text(Method))
 		;	ResponseBody = Body
 		),
-		http::response(Version, status(200, 'OK'), [], ResponseBody, [], Response).
+		http_core::response(Version, status(200, 'OK'), [], ResponseBody, [], Response).
 
 :- end_object.
 
@@ -124,10 +124,10 @@
 			; VisitCount = 1
 			),
 			http_server_session::set(Session, visits, VisitCount),
-			http::version(Request, Version),
+			http_core::version(Request, Version),
 			number_codes(VisitCount, VisitCountCodes),
 			atom_codes(VisitCountText, VisitCountCodes),
-			http::response(Version, status(200, 'OK'), [], content('text/plain', text(VisitCountText)), [], Response).
+			http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(VisitCountText)), [], Response).
 
 	:- end_object.
 
@@ -199,16 +199,16 @@
 		route(visits, get, '/visits', visits).
 
 		visits(Request, Response) :-
-			http::property(Request, route(visits)),
+			http_core::property(Request, route(visits)),
 			http_server_session::current(Request, Session),
 			( http_server_session::get(Session, visits, CurrentCount) ->
 				VisitCount is CurrentCount + 1
 			; VisitCount = 1
 			),
 			http_server_session::set(Session, visits, VisitCount),
-			http::version(Request, Version),
+			http_core::version(Request, Version),
 			number_codes(VisitCount, VisitCountCodes),
 			atom_codes(VisitCountText, VisitCountCodes),
-			http::response(Version, status(200, 'OK'), [], content('text/plain', text(VisitCountText)), [], Response).
+			http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(VisitCountText)), [], Response).
 
 	:- end_object.

@@ -68,9 +68,9 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::property(Request, digest_username(Username)),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
+		http_core::version(Request, Version),
+		http_core::property(Request, digest_username(Username)),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
 
 :- end_object.
 
@@ -90,8 +90,8 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::target(Request, Target),
+		http_core::version(Request, Version),
+		http_core::target(Request, Target),
 		(	request_info_target_(Target) ->
 			request_info_response_(Request, Version, Response)
 		;	echo_response_(Request, Version, Response)
@@ -101,24 +101,24 @@
 	request_info_target_(origin('/request-info', _Query)).
 
 	request_info_response_(Request, Version, Response) :-
-		http::property(Request, query_pairs(QueryPairs)),
+		http_core::property(Request, query_pairs(QueryPairs)),
 		memberchk(lang-Lang, QueryPairs),
 		memberchk(page-Page, QueryPairs),
 		memberchk(item-Item, QueryPairs),
-		http::version(Request, http(Major, Minor)),
-		http::property(Request, cookies(CookiePairs)),
+		http_core::version(Request, http(Major, Minor)),
+		http_core::property(Request, cookies(CookiePairs)),
 		memberchk(session-Session, CookiePairs),
 		Body = {lang-Lang, page-Page, item-Item, session-Session, major-Major, minor-Minor},
-		http::response(Version, status(200, 'OK'), [], content('application/json', json(Body)), [], Response).
+		http_core::response(Version, status(200, 'OK'), [], content('application/json', json(Body)), [], Response).
 
 	echo_response_(Request, Version, Response) :-
-		http::body(Request, Body),
+		http_core::body(Request, Body),
 		(	Body == empty ->
-			http::method(Request, Method),
+			http_core::method(Request, Method),
 			ResponseBody = content('text/plain', text(Method))
 		;	ResponseBody = Body
 		),
-		http::response(Version, status(200, 'OK'), [], ResponseBody, [], Response).
+		http_core::response(Version, status(200, 'OK'), [], ResponseBody, [], Response).
 
 :- end_object.
 
@@ -138,14 +138,14 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
 		http_multipart::fields(Body, [title-Title]),
-		http::property(Request, content_type('multipart/form-data', Parameters)),
+		http_core::property(Request, content_type('multipart/form-data', Parameters)),
 		memberchk(boundary-Boundary, Parameters),
 		atom_concat('title=', Title, Prefix),
 		atom_concat(Prefix, '; boundary=', Prefix0),
 		atom_concat(Prefix0, Boundary, Summary),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(Summary)), [], Response).
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Summary)), [], Response).
 
 :- end_object.

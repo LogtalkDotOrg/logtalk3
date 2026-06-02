@@ -72,15 +72,15 @@
 		http_cors::add_response_headers(Request, Response0, Response, Defaults).
 
 	show_page(Request, Response) :-
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, cors([
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, cors([
 			allowed_origins(['https://app.example.com']),
 			expose_headers([x_trace_id]),
 			allow_credentials(true)
 		])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [x_trace_id-'abc-123'], content('text/plain', text(cors_page)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [x_trace_id-'abc-123'], content('text/plain', text(cors_page)), [], Response).
 
 :- end_object.
 
@@ -128,11 +128,11 @@
 
 	route_automatic_options_response(Request, EffectiveMethods, Response) :-
 		EffectiveMethods == [get, head, options],
-		http::property(Request, automatic_options(true)),
-		http::property(Request, effective_methods(EffectiveMethods)),
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, cors([
+		http_core::property(Request, automatic_options(true)),
+		http_core::property(Request, effective_methods(EffectiveMethods)),
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, cors([
 			allowed_origins(['https://app.example.com']),
 			allowed_methods([get]),
 			allowed_headers(requested),
@@ -150,9 +150,9 @@
 		http_cors::preflight_response(Request, Response, Defaults).
 
 	show_page(Request, Response) :-
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([id-'42'])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(cors_options_page)), [], Response).
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(cors_options_page)), [], Response).
 
 :- end_object.

@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-05-25,
-		comment is 'Router-agnostic directory listing helper built on the normalized ``http`` library.'
+		comment is 'Router-agnostic directory listing helper built on the normalized ``http_core`` library.'
 	]).
 
 	:- public(serve/4).
@@ -125,8 +125,8 @@
 		listing_settings(Request, Options, Settings),
 		directory_entries(Directory, Settings, Entries, Options),
 		render_directory_listing(DisplayPath, Settings, Entries, HTML, Options),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/html', text(HTML)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/html', text(HTML)), [], Response).
 
 	display_path(Path, '/') :-
 		strip_leading_slashes(Path, ''),
@@ -181,10 +181,10 @@
 		).
 
 	request_query_pairs(Request, Pairs) :-
-		http::property(Request, query_pairs(Pairs)),
+		http_core::property(Request, query_pairs(Pairs)),
 		!.
 	request_query_pairs(Request, Pairs) :-
-		http::target(Request, origin(_Path, Query)),
+		http_core::target(Request, origin(_Path, Query)),
 		query_text_pairs(Query, Pairs).
 
 	query_text_pairs('', []) :-
@@ -523,12 +523,12 @@
 	guessed_media_type(Type, Type).
 
 	not_found_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
 
 	method_not_allowed_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD'], content('text/plain', text('Method Not Allowed')), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD'], content('text/plain', text('Method Not Allowed')), [], Response).
 
 	valid_columns_option(Columns) :-
 		Columns \== [],

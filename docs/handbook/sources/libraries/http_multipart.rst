@@ -4,11 +4,11 @@
 ==================
 
 This library provides a higher-level multipart helper layer on top of
-the ``http`` core library. It does not replace the low-level multipart
-wire support already implemented in ``http``; instead it wraps the
+the ``http_core`` library. It does not replace the low-level multipart
+wire support already implemented in ``http_core``; instead it wraps the
 normalized multipart body and part terms, adds form-data field and file
 helpers, and delegates raw parsing and generation to the existing
-``http`` predicates.
+``http_core`` predicates.
 
 API documentation
 -----------------
@@ -56,13 +56,13 @@ The current slice provides:
 - ``form_data_body/2`` for constructing a ``multipart/form-data`` body
   from an ordered list of field and file descriptors.
 - ``parse/4`` and ``generate/3`` as multipart-specific wrappers around
-  the existing ``http::parse_body/4`` and ``http::generate_body/3``
-  predicates.
+  the existing ``http_core::parse_body/4`` and
+  ``http_core::generate_body/3`` predicates.
 
 Normalized terms
 ----------------
 
-Multipart bodies use the normalized ``http`` body term:
+Multipart bodies use the normalized ``http_core`` body term:
 
 ::
 
@@ -100,6 +100,7 @@ Current limitations
   generic part accessors instead.
 - Multipart wire parsing and generation still require a boundary
   parameter in the effective ``Content-Type`` metadata or an explicit
-  ``boundary/1`` option, exactly as in the underlying ``http`` library.
+  ``boundary/1`` option, exactly as in the underlying ``http_core``
+  library.
 - The library does not yet provide streaming sinks, temp-file policies,
   or large-upload orchestration.

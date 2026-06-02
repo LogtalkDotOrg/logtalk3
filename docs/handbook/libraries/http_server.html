@@ -159,10 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -359,7 +359,7 @@
   <section id="http-server">
 <span id="library-http-server"></span><h1><code class="docutils literal notranslate"><span class="pre">http_server</span></code><a class="headerlink" href="#http-server" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_server</span></code> library provides a portable stream-oriented server
-layer on top of the <code class="docutils literal notranslate"><span class="pre">http</span></code> core library. It is designed for the first
+layer on top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It is designed for the first
 orchestration step above the wire parser and generator: read exactly one
 request from an existing binary stream, dispatch it to a handler object
 implementing the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol, and write exactly
@@ -393,9 +393,9 @@ reproduced directly.</p>
     <span class="k">implements</span>(http_handler_protocol)).
 
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
@@ -411,7 +411,7 @@ reproduced directly.</p>
      http_server<span class="o">::</span>serve(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_echo_handler),
      <span class="k">close</span>(<span class="nv">Input</span>),
      <span class="k">close</span>(<span class="nv">Output</span>),
-     http<span class="o">::</span>parse_response(file(<span class="s">&#39;response.tmp&#39;</span>), <span class="nv">Response</span>).
+     http_core<span class="o">::</span>parse_response(file(<span class="s">&#39;response.tmp&#39;</span>), <span class="nv">Response</span>).
 
 <span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
 </pre></div>
@@ -439,19 +439,19 @@ HTTP responses, one for <code class="docutils literal notranslate"><span class="
     <span class="k">implements</span>(http_handler_protocol)).
 
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-        http<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
-        http<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
         http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
         http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
         atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
-        http<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>That handler can be used unchanged with <code class="docutils literal notranslate"><span class="pre">serve/3</span></code> or
 <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> because this library exposes multipart requests
-in the same normalized form produced by <code class="docutils literal notranslate"><span class="pre">http::parse_request/2</span></code>.</p>
+in the same normalized form produced by <code class="docutils literal notranslate"><span class="pre">http_core::parse_request/2</span></code>.</p>
 <p>For a WebSocket opening handshake, define a handler that delegates to
 <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_websocket_handler,
@@ -512,10 +512,10 @@ pair using HTTP persistence rules and stops on end-of-file or
 generated response headers but suppresses the response body bytes,
 including for file-backed responses.</p></li>
 </ul>
-<p>Because incoming request bodies are normalized by the <code class="docutils literal notranslate"><span class="pre">http</span></code> library,
-handler objects can inspect <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> requests directly
-using the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> predicates after reading or serving a
-request.</p>
+<p>Because incoming request bodies are normalized by the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>
+library, handler objects can inspect <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> requests
+directly using the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> predicates after reading or
+serving a request.</p>
 <p>This layer intentionally stays transport-neutral. It does not accept
 sockets, listen for connections, or manage concurrency. Those concerns
 belong to higher layers or backend-specific integration built on top of
@@ -538,7 +538,7 @@ remain available for the next request on the stream.</p>
 <h2>Multipart workflow<a class="headerlink" href="#multipart-workflow" title="Link to this heading"></a></h2>
 <p>This library does not introduce a separate multipart server API.
 Multipart requests are exposed to handlers as the same normalized
-request bodies produced by <code class="docutils literal notranslate"><span class="pre">http::parse_request/2</span></code>, which means
+request bodies produced by <code class="docutils literal notranslate"><span class="pre">http_core::parse_request/2</span></code>, which means
 handlers can use <code class="docutils literal notranslate"><span class="pre">http_multipart::fields/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">http_multipart::files/2</span></code> directly on the request body.</p>
 </section>

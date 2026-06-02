@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "http_server" library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, method/2, parse_response/2, property/2, status/2, target/2
 	]).
 	:- uses(list, [
@@ -220,7 +220,7 @@
 			Body,
 			[content_type('multipart/form-data', [boundary-'server-boundary'])]
 		),
-		http::generate_request(atom(RequestAtom), Request),
+		http_core::generate_request(atom(RequestAtom), Request),
 		write_file_atom('test_http_server_multipart_input.tmp', RequestAtom),
 		^^file_path('test_http_server_multipart_input.tmp', InputFile),
 		^^file_path('test_http_server_multipart_output.tmp', OutputFile),
@@ -234,7 +234,7 @@
 		body(Response, content('text/plain', text('title=Logtalk; upload=notes.txt'))).
 
 	test(http_server_accept_websocket_3_01, deterministic) :-
-		http::request(
+		http_core::request(
 			get,
 			origin('/socket'),
 			http(1, 1),
@@ -259,7 +259,7 @@
 		property(Response, websocket_protocol([chat])).
 
 	test(http_server_accept_websocket_3_02, error(domain_error(http_server_websocket_request, _))) :-
-		http::request(
+		http_core::request(
 			post,
 			origin('/socket'),
 			http(1, 1),
@@ -276,7 +276,7 @@
 		http_server::accept_websocket(Request, _Response, []).
 
 	test(http_server_accept_websocket_3_03, error(domain_error(http_server_websocket_request, _))) :-
-		http::request(
+		http_core::request(
 			get,
 			origin('/socket'),
 			http(2, 0),
@@ -293,7 +293,7 @@
 		http_server::accept_websocket(Request, _Response, []).
 
 	test(http_server_accept_websocket_3_04, error(domain_error(http_server_websocket_headers, [sec_websocket_extensions-'permessage-deflate']))) :-
-		http::request(
+		http_core::request(
 			get,
 			origin('/socket'),
 			http(1, 1),
@@ -310,7 +310,7 @@
 		http_server::accept_websocket(Request, _Response, [headers([sec_websocket_extensions-'permessage-deflate'])]).
 
 	test(http_server_accept_websocket_3_05, error(domain_error(http_server_websocket_properties, [websocket_extensions([permessage_deflate])])) ) :-
-		http::request(
+		http_core::request(
 			get,
 			origin('/socket'),
 			http(1, 1),
@@ -327,7 +327,7 @@
 		http_server::accept_websocket(Request, _Response, [properties([websocket_extensions([permessage_deflate])])]).
 
 	test(http_server_accept_websocket_3_06, error(domain_error(http_server_websocket_request, _))) :-
-		http::request(
+		http_core::request(
 			get,
 			origin('/socket'),
 			http(1, 1),
@@ -377,7 +377,7 @@
 		status(Response, status(101, 'Switching Protocols')),
 		status(WireResponse, status(101, 'Switching Protocols')),
 		property(WireResponse, websocket_accept('s3pPLMBiTxaQ9kYGzzhZRbK+xOo=')),
-		http::header(WireResponse, sec_websocket_extensions, 'permessage-deflate'),
+		http_core::header(WireResponse, sec_websocket_extensions, 'permessage-deflate'),
 		^^clean_file(InputFile),
 		^^clean_file(OutputFile).
 
@@ -467,8 +467,8 @@
 		close(Output),
 		ExpectedResponse1 = response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(one)), []),
 		ExpectedResponse2 = response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(two)), []),
-		http::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
-		http::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
+		http_core::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
+		http_core::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
 		atom_concat(ExpectedAtom1, ExpectedAtom2, ExpectedAtom),
 		read_file_atom('test_http_server_connection_output.tmp', ExpectedAtom).
 
@@ -485,7 +485,7 @@
 		close(Input),
 		close(Output),
 		ExpectedResponse = response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(one)), [connection([close])]),
-		http::generate_response(atom(ExpectedAtom), ExpectedResponse),
+		http_core::generate_response(atom(ExpectedAtom), ExpectedResponse),
 		read_file_atom('test_http_server_close_output.tmp', ExpectedAtom).
 
 	test(http_server_serve_connection_3_03, deterministic) :-
@@ -501,7 +501,7 @@
 		close(Input),
 		close(Output),
 		ExpectedResponse = response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(one)), [connection([close])]),
-		http::generate_response(atom(ExpectedAtom), ExpectedResponse),
+		http_core::generate_response(atom(ExpectedAtom), ExpectedResponse),
 		read_file_atom('test_http_server_response_close_output.tmp', ExpectedAtom).
 
 	test(http_server_serve_connection_3_04, deterministic) :-
@@ -518,8 +518,8 @@
 		close(Output),
 		ExpectedResponse1 = response(http(1, 0), status(200, 'OK'), [], content('text/plain', text(one)), [connection(['keep-alive'])]),
 		ExpectedResponse2 = response(http(1, 0), status(200, 'OK'), [], content('text/plain', text(two)), [connection(['keep-alive'])]),
-		http::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
-		http::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
+		http_core::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
+		http_core::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
 		atom_concat(ExpectedAtom1, ExpectedAtom2, ExpectedAtom),
 		read_file_atom('test_http_server_keep_alive_output.tmp', ExpectedAtom).
 
@@ -537,8 +537,8 @@
 		close(Output),
 		ExpectedResponse1 = response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(one)), []),
 		ExpectedResponse2 = response(http(1, 1), status(400, 'Bad Request'), [], content('text/plain', text('Bad Request')), [connection([close])]),
-		http::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
-		http::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
+		http_core::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
+		http_core::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
 		atom_concat(ExpectedAtom1, ExpectedAtom2, ExpectedAtom),
 		read_file_atom('test_http_server_connection_bad_output.tmp', ExpectedAtom).
 
@@ -556,7 +556,7 @@
 		close(Output),
 		ExpectedResponse = response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(ready)), []),
 		head_response_atom(ExpectedResponse, ExpectedAtom1),
-		http::generate_response(atom(ExpectedAtom2), ExpectedResponse),
+		http_core::generate_response(atom(ExpectedAtom2), ExpectedResponse),
 		atom_concat(ExpectedAtom1, ExpectedAtom2, ExpectedAtom),
 		read_file_atom('test_http_server_head_connection_output.tmp', ExpectedAtom).
 
@@ -572,7 +572,7 @@
 		http_server::serve_connection(Input, Output, websocket_http_server_handler),
 		close(Input),
 		close(Output),
-		http::request(
+		http_core::request(
 			get,
 			origin('/socket'),
 			http(1, 1),
@@ -589,7 +589,7 @@
 			Request
 		),
 		http_server::accept_websocket(Request, ExpectedResponse, [protocol(chat)]),
-		http::generate_response(atom(ExpectedAtom), ExpectedResponse),
+		http_core::generate_response(atom(ExpectedAtom), ExpectedResponse),
 		read_file_atom('test_http_server_upgrade_connection_output.tmp', ExpectedAtom).
 
 	test(http_server_serve_connection_3_08, deterministic) :-
@@ -606,8 +606,8 @@
 		close(Output),
 		ExpectedResponse1 = response(http(1, 0), status(200, 'OK'), [], content('text/plain', text(one)), [connection(['keep-alive'])]),
 		ExpectedResponse2 = response(http(1, 0), status(200, 'OK'), [], content('text/plain', text(two)), [connection(['keep-alive'])]),
-		http::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
-		http::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
+		http_core::generate_response(atom(ExpectedAtom1), ExpectedResponse1),
+		http_core::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
 		atom_concat(ExpectedAtom1, ExpectedAtom2, ExpectedAtom),
 		read_file_atom('test_http_server_duplicate_keep_alive_output.tmp', ExpectedAtom).
 
@@ -683,7 +683,7 @@
 		read_bytes(Input, NextByte, Bytes).
 
 	head_response_atom(Response, Atom) :-
-		http::generate_response(atom(FullAtom), Response),
+		http_core::generate_response(atom(FullAtom), Response),
 		atom_codes(FullAtom, Codes),
 		strip_response_body_codes(Codes, HeaderCodes),
 		atom_codes(Atom, HeaderCodes).

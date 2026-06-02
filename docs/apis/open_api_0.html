@@ -163,10 +163,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-flows"><span class="xref std std-ref">hook_flows</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#hook-objects"><span class="xref std std-ref">hook_objects</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http"><span class="xref std std-ref">http</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-authenticate"><span class="xref std std-ref">http_authenticate</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-core"><span class="xref std std-ref">http_core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cors"><span class="xref std std-ref">http_cors</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-digest"><span class="xref std std-ref">http_digest</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-directory-listing"><span class="xref std std-ref">http_directory_listing</span></a></li>
@@ -405,7 +405,7 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="http_0.html#http-0"><span class="std std-ref">http</span></a></div>
+<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
 <div class="line"><a class="reference internal" href="json_0.html#json-0"><span class="std std-ref">json</span></a></div>
 <div class="line"><a class="reference internal" href="json_schema_0.html#json-schema-0"><span class="std std-ref">json_schema</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
@@ -622,7 +622,7 @@
 </section>
 <section id="validate-http-request-3">
 <span id="open-api-0-validate-http-request-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_http_request/3</span></code></a><a class="headerlink" href="#validate-http-request-3" title="Link to this heading"></a></h3>
-<p>Succeeds when an HTTP request wire source parsed by the <code class="docutils literal notranslate"><span class="pre">http</span></code> library conforms to the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
+<p>Succeeds when an HTTP request wire source parsed by the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library conforms to the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -643,7 +643,7 @@
 </section>
 <section id="validate-http-request-4">
 <span id="open-api-0-validate-http-request-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_http_request/4</span></code></a><a class="headerlink" href="#validate-http-request-4" title="Link to this heading"></a></h3>
-<p>Parses an HTTP request wire source using the <code class="docutils literal notranslate"><span class="pre">http</span></code> library and validates the resulting normalized request against the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
+<p>Parses an HTTP request wire source using the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library and validates the resulting normalized request against the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -706,7 +706,7 @@
 </section>
 <section id="validate-http-response-3">
 <span id="open-api-0-validate-http-response-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_http_response/3</span></code></a><a class="headerlink" href="#validate-http-response-3" title="Link to this heading"></a></h3>
-<p>Succeeds when an HTTP response wire source parsed by the <code class="docutils literal notranslate"><span class="pre">http</span></code> library conforms to the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
+<p>Succeeds when an HTTP response wire source parsed by the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library conforms to the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -727,7 +727,7 @@
 </section>
 <section id="validate-http-response-4">
 <span id="open-api-0-validate-http-response-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_http_response/4</span></code></a><a class="headerlink" href="#validate-http-response-4" title="Link to this heading"></a></h3>
-<p>Parses an HTTP response wire source using the <code class="docutils literal notranslate"><span class="pre">http</span></code> library and validates the resulting normalized response against the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
+<p>Parses an HTTP response wire source using the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library and validates the resulting normalized response against the provider operation descriptor identified by the given <code class="docutils literal notranslate"><span class="pre">operationId</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -531,7 +531,7 @@
 	maybe_retry_digest_request(_Host, _Port, _URL, _Username, _Password, _Request, _DigestOptions, _Jar, Response, Response).
 
 	digest_challenge_response(Response, Challenge) :-
-		http::status(Response, status(401, _ReasonPhrase)),
+		http_core::status(Response, status(401, _ReasonPhrase)),
 		http_digest::challenge(Response, Challenge).
 
 	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Host, Port, Request) :-
@@ -539,7 +539,7 @@
 		merge_request_query(URLQuery, QueryPairs, Query),
 		build_origin_target(Path, Query, Target),
 		request_host_property(Host, Port, HostProperty),
-		http::request(Method, Target, Version, Headers, Body, [HostProperty| Properties0], Request).
+		http_core::request(Method, Target, Version, Headers, Body, [HostProperty| Properties0], Request).
 
 	parse_http_url(URL, Host, Port, Path, Query) :-
 		(	var(URL) ->
@@ -615,7 +615,7 @@
 		number_codes(Port, PortCodes).
 
 	validate_endpoint_host_port(Host, Port) :-
-		http::request(get, authority(Host, Port), http(1, 1), [], empty, [], _Request).
+		http_core::request(get, authority(Host, Port), http(1, 1), [], empty, [], _Request).
 
 	normalize_request_path('', '/') :-
 		!.
@@ -624,8 +624,8 @@
 	merge_request_query(URLQuery, [], URLQuery) :-
 		!.
 	merge_request_query(URLQuery, QueryPairs, Query) :-
-		http::encode_body('application/x-www-form-urlencoded', QueryPairs, [], Body),
-		http::generate_body(atom(QueryFromOptions), Body, []),
+		http_core::encode_body('application/x-www-form-urlencoded', QueryPairs, [], Body),
+		http_core::generate_body(atom(QueryFromOptions), Body, []),
 		append_query_text(URLQuery, QueryFromOptions, Query).
 
 	append_query_text('', Query, Query) :-
@@ -646,7 +646,7 @@
 	store_response_cookies(none, _URL, _Response) :-
 		!.
 	store_response_cookies(Jar, URL, Response) :-
-		(	http::property(Response, set_cookies(SetCookies)) ->
+		(	http_core::property(Response, set_cookies(SetCookies)) ->
 			http_cookie_jar::store_set_cookies(Jar, URL, SetCookies)
 		;	true
 		).

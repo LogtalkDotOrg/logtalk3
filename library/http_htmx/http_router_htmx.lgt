@@ -63,22 +63,22 @@
 		).
 
 	annotated_request(Request, HTMXProperties, AnnotatedRequest) :-
-		http::method(Request, Method),
-		http::target(Request, Target),
-		http::version(Request, Version),
-		http::headers(Request, Headers),
-		http::body(Request, Body),
-		findall(Property, http::property(Request, Property), Properties0),
+		http_core::method(Request, Method),
+		http_core::target(Request, Target),
+		http_core::version(Request, Version),
+		http_core::headers(Request, Headers),
+		http_core::body(Request, Body),
+		findall(Property, http_core::property(Request, Property), Properties0),
 		overlay_properties(HTMXProperties, Properties0, Properties),
-		http::request(Method, Target, Version, Headers, Body, Properties, AnnotatedRequest).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, AnnotatedRequest).
 
 	request_htmx_response_options(Request, Options) :-
-		http::property(Request, htmx_response_options(Options)),
+		http_core::property(Request, htmx_response_options(Options)),
 		!.
 	request_htmx_response_options(_Request, []).
 
 	response_htmx_response_options(Response, Options) :-
-		http::property(Response, htmx_response_options(Options)),
+		http_core::property(Response, htmx_response_options(Options)),
 		!.
 	response_htmx_response_options(_Response, []).
 

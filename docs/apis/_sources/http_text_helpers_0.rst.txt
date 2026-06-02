@@ -11,7 +11,7 @@
 Internal shared helpers for ASCII case normalization and HTTP optional whitespace trimming.
 
 | **Availability:** 
-|    ``logtalk_load(http(loader))``
+|    ``logtalk_load(http_core(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0

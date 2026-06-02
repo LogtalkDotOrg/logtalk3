@@ -46,9 +46,9 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::body(Request, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 :- end_object.
 
@@ -64,8 +64,8 @@
 	]).
 
 	handle(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], empty, [connection([close])], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], empty, [connection([close])], Response).
 
 :- end_object.
 

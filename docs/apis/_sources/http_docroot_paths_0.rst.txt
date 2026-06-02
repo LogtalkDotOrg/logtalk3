@@ -11,7 +11,7 @@
 Shared helpers for validating requests and sandboxing document-root relative paths.
 
 | **Availability:** 
-|    ``logtalk_load(http(loader))``
+|    ``logtalk_load(http_core(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
@@ -22,7 +22,7 @@ Shared helpers for validating requests and sandboxing document-root relative pat
 
 
 | **Uses:**
-|    :ref:`http <http/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`os <os/0>`
 
 | **Remarks:**

@@ -45,7 +45,7 @@
 	]).
 
 	authorize_basic_auth_request(Request, Action) :-
-		(	http::property(Request, basic_auth(RouteOptions)) ->
+		(	http_core::property(Request, basic_auth(RouteOptions)) ->
 			validate_route_options(RouteOptions),
 			validate_route_options(_BaseOptions_),
 			overlay_options(RouteOptions, _BaseOptions_, ProtectOptions),

@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the http_digest library.'
 	]).
 
-	:- uses(http, [
+	:- uses(http_core, [
 		body/2, headers/2, property/2, request/7, response/6, status/2
 	]).
 

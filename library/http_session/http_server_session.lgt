@@ -222,9 +222,9 @@
 		finish_request(Request, Response0, Response).
 
 	current(Request, Session) :-
-		(	\+ http::is_request(Request) ->
+		(	\+ http_core::is_request(Request) ->
 			domain_error(http_server_session_request, Request)
-		;	http::property(Request, http_server_session(Session)) ->
+		;	http_core::property(Request, http_server_session(Session)) ->
 			true
 		;	domain_error(http_server_session_request, Request)
 		).
@@ -410,19 +410,19 @@
 		assertz(context_state_(ContextId, Context)).
 
 	validate_request(Request) :-
-		(	http::is_request(Request) ->
+		(	http_core::is_request(Request) ->
 			true
 		;	domain_error(http_server_session_request, Request)
 		).
 
 	validate_response(Response) :-
-		(	http::is_response(Response) ->
+		(	http_core::is_response(Response) ->
 			true
 		;	domain_error(http_server_session_response, Response)
 		).
 
 	request_cookie_identifier(Request, CookieName, CookieId) :-
-		(	http::property(Request, cookies(CookiePairs)),
+		(	http_core::property(Request, cookies(CookiePairs)),
 			lookup_data_key(CookiePairs, CookieName, CookieId) ->
 			true
 		;	CookieId = none
@@ -460,15 +460,15 @@
 		CurrentTime >= AbsoluteExpiryAt.
 
 	annotate_request(Request, Session, SessionState, SessionId, AnnotatedRequest) :-
-		http::method(Request, Method),
-		http::target(Request, Target),
-		http::version(Request, Version),
-		http::headers(Request, Headers),
-		http::body(Request, Body),
-		findall(Property, http::property(Request, Property), Properties0),
+		http_core::method(Request, Method),
+		http_core::target(Request, Target),
+		http_core::version(Request, Version),
+		http_core::headers(Request, Headers),
+		http_core::body(Request, Body),
+		findall(Property, http_core::property(Request, Property), Properties0),
 		request_session_properties(Session, SessionState, SessionId, SessionProperties),
 		overlay_properties(SessionProperties, Properties0, Properties),
-		http::request(Method, Target, Version, Headers, Body, Properties, AnnotatedRequest).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, AnnotatedRequest).
 
 	request_session_properties(Session, SessionState, SessionId, [http_server_session(Session), http_server_session_state(SessionState)| Tail]) :-
 		(	SessionId == none ->
@@ -685,15 +685,15 @@
 		!,
 		Response = Response0.
 	add_response_session_cookies(Response0, SessionCookies, Response) :-
-		http::version(Response0, Version),
-		http::status(Response0, Status),
-		http::headers(Response0, Headers),
-		http::body(Response0, Body),
-		findall(Property, http::property(Response0, Property), Properties0),
+		http_core::version(Response0, Version),
+		http_core::status(Response0, Status),
+		http_core::headers(Response0, Headers),
+		http_core::body(Response0, Body),
+		findall(Property, http_core::property(Response0, Property), Properties0),
 		extract_response_set_cookies(Properties0, ExistingSetCookies, OtherProperties),
 		append(SessionCookies, ExistingSetCookies, SetCookies),
 		Properties = [set_cookies(SetCookies)| OtherProperties],
-		http::response(Version, Status, Headers, Body, Properties, Response).
+		http_core::response(Version, Status, Headers, Body, Properties, Response).
 
 	extract_response_set_cookies([], [], []).
 	extract_response_set_cookies([set_cookies(SetCookies)| Properties], CombinedSetCookies, OtherProperties) :-

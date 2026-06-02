@@ -107,10 +107,10 @@
 			Request = request(_, _, Version, _, _, _),
 			(	preflight_headers(Request, Options, Headers0, VaryTokens) ->
 				finalize_headers(VaryTokens, Headers0, Headers),
-				http::response(Version, status(200, 'OK'), Headers, empty, [], Response)
+				http_core::response(Version, status(200, 'OK'), Headers, empty, [], Response)
 			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				finalize_headers(VaryTokens, [], Headers),
-				http::response(Version, status(403, 'Forbidden'), Headers, empty, [], Response)
+				http_core::response(Version, status(403, 'Forbidden'), Headers, empty, [], Response)
 			)
 		;	domain_error(http_cors_preflight_request, Request)
 		), !.
@@ -453,7 +453,7 @@
 		),
 		remove_headers_by_names(Headers0, GeneratedNames, RemainingHeaders),
 		append(MergedHeaders, RemainingHeaders, Headers),
-		http::response(Version, Status, Headers, Body, Properties, Response).
+		http_core::response(Version, Status, Headers, Body, Properties, Response).
 
 	header_names([], []).
 	header_names([Name-_| Headers], [Name| Names]) :-

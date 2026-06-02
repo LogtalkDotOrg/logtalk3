@@ -435,7 +435,7 @@
 	store_response_cookies(none, _URL, _Response) :-
 		!.
 	store_response_cookies(Jar, URL, Response) :-
-		(	http::property(Response, set_cookies(SetCookies)) ->
+		(	http_core::property(Response, set_cookies(SetCookies)) ->
 			http_cookie_jar::store_set_cookies(Jar, URL, SetCookies)
 		;	true
 		).

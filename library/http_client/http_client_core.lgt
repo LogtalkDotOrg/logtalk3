@@ -67,13 +67,13 @@
 	]).
 
 	write_request(Output, Request) :-
-		http::generate_request(bytes(Bytes), Request),
+		http_core::generate_request(bytes(Bytes), Request),
 		write_bytes(Bytes, Output),
 		flush_output(Output).
 
 	read_response(Input, Response) :-
 		read_response_bytes(Input, Bytes, BodyFraming),
-		(	http::parse_response(bytes(Bytes), Response0) ->
+		(	http_core::parse_response(bytes(Bytes), Response0) ->
 			attach_body_framing_property(BodyFraming, Response0, Response)
 		;	domain_error(http_response_stream, malformed_response(Bytes))
 		).
@@ -111,13 +111,13 @@
 		).
 
 	validate_request(Request) :-
-		(	http::is_request(Request) ->
+		(	http_core::is_request(Request) ->
 			true
 		;	domain_error(http_request, Request)
 		).
 
 	read_response_for_request(Input, Request, Response) :-
-		http::method(Request, Method),
+		http_core::method(Request, Method),
 		(	Method == head ->
 			read_head_response(Input, Response)
 		;	read_response(Input, Response)
@@ -127,7 +127,7 @@
 		read_line_bytes(Input, LineResult),
 		LineResult = line(StatusLineBytes),
 		append(StatusLineBytes, [0'\r, 0'\n], StatusLineBytesCRLF),
-		(	http::parse_status_line(codes(StatusLineBytesCRLF), status_line(Version, Status)) ->
+		(	http_core::parse_status_line(codes(StatusLineBytesCRLF), status_line(Version, Status)) ->
 			true
 		;	domain_error(http_response_stream, malformed_status_line(StatusLineBytesCRLF))
 		),
@@ -136,7 +136,7 @@
 
 	build_head_response(Version, Status, Headers0, Response) :-
 		strip_head_content_length_headers(Headers0, Headers, Properties0),
-		http::response(Version, Status, Headers, empty, [body_omitted(head)| Properties0], Response).
+		http_core::response(Version, Status, Headers, empty, [body_omitted(head)| Properties0], Response).
 
 	strip_head_content_length_headers([], [], []).
 	strip_head_content_length_headers([content_length-Length| Headers0], Headers, [omitted_body_length(Length)| Properties]) :-
@@ -149,7 +149,7 @@
 		read_line_bytes(Input, LineResult),
 		LineResult = line(StatusLineBytes),
 		append(StatusLineBytes, [0'\r, 0'\n], StatusLineBytesCRLF),
-		(	http::parse_status_line(codes(StatusLineBytesCRLF), status_line(_Version, Status)) ->
+		(	http_core::parse_status_line(codes(StatusLineBytesCRLF), status_line(_Version, Status)) ->
 			true
 		;	domain_error(http_response_stream, malformed_status_line(StatusLineBytesCRLF))
 		),
@@ -165,11 +165,11 @@
 			Properties = Properties0
 		;	Properties = [body_framing(close_delimited)| Properties0]
 		),
-		http::response(Version, Status, Headers, Body, Properties, Response).
+		http_core::response(Version, Status, Headers, Body, Properties, Response).
 
 	read_header_block(Input, HeaderBytes, Headers) :-
 		read_header_block_bytes(Input, HeaderBytes, []),
-		http::parse_headers(codes(HeaderBytes), Headers).
+		http_core::parse_headers(codes(HeaderBytes), Headers).
 
 	read_header_block_bytes(Input, Bytes0, Bytes) :-
 		read_line_bytes(Input, LineResult),

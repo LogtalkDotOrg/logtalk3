@@ -23,7 +23,7 @@
 	logtalk_load(application(loader)),
 	logtalk_load(json(loader)),
 	logtalk_load(json_schema(loader)),
-	logtalk_load('../http/loader.lgt'),
+	logtalk_load('../http_core/loader.lgt'),
 	logtalk_load([
 		open_api_provider_protocol,
 		open_api

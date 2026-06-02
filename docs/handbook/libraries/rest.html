@@ -159,10 +159,10 @@
 <li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http.html"><code class="docutils literal notranslate"><span class="pre">http</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_client.html"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
@@ -362,10 +362,10 @@ that REST application objects can continue to implement the
 <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol directly while reusing the existing
 router dispatch, request annotation, middleware, and OpenAPI derivation
 logic.</p>
-<p>This library reuses the <code class="docutils literal notranslate"><span class="pre">http</span></code> and <code class="docutils literal notranslate"><span class="pre">http_router</span></code>. It derives router
-hooks from higher-level endpoint descriptors, provides small request and
-response helpers, and normalizes simple action result terms into HTTP
-responses.</p>
+<p>This library reuses the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> and <code class="docutils literal notranslate"><span class="pre">http_router</span></code>. It derives
+router hooks from higher-level endpoint descriptors, provides small
+request and response helpers, and normalizes simple action result terms
+into HTTP responses.</p>
 <section id="layering">
 <h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">rest</span></code> is the highest-level authoring layer in the current HTTP stack:</p>
@@ -465,17 +465,18 @@ special <code class="docutils literal notranslate"><span class="pre">produces(Me
 predicates and response middleware and also allows router-level OpenAPI
 derivation to keep working.</p>
 <p>The current helper predicates read the normalized HTTP request terms
-provided by <code class="docutils literal notranslate"><span class="pre">http</span></code>:</p>
+provided by <code class="docutils literal notranslate"><span class="pre">http_core</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>request(<span class="nv">Method</span>, <span class="nv">Target</span>, <span class="nv">Version</span>, <span class="nv">Headers</span>, <span class="nv">Body</span>, <span class="nv">Properties</span>)
 </pre></div>
 </div>
 <p>They rely on router annotations such as <code class="docutils literal notranslate"><span class="pre">route/1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> plus the normalized derived properties produced by the
-<code class="docutils literal notranslate"><span class="pre">http</span></code> library such as <code class="docutils literal notranslate"><span class="pre">query_pairs/1</span></code>. The <code class="docutils literal notranslate"><span class="pre">path_parameter/3</span></code> and
-<code class="docutils literal notranslate"><span class="pre">query_parameter/3</span></code> helpers are deterministic lookups. The decoded
-body helpers return <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> problem responses when the
-current action expects a JSON, form, text, or binary body and the
-normalized request body is missing or has a different decoded shape.</p>
+<code class="docutils literal notranslate"><span class="pre">http_core</span></code> library such as <code class="docutils literal notranslate"><span class="pre">query_pairs/1</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">path_parameter/3</span></code> and <code class="docutils literal notranslate"><span class="pre">query_parameter/3</span></code> helpers are deterministic
+lookups. The decoded body helpers return <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> problem
+responses when the current action expects a JSON, form, text, or binary
+body and the normalized request body is missing or has a different
+decoded shape.</p>
 <p>Action result normalization currently builds normalized HTTP response
 terms using these rules:</p>
 <ul class="simple">

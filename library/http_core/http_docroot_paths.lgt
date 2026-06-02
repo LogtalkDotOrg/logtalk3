@@ -79,7 +79,7 @@
 		).
 
 	validate_request(Request) :-
-		(	http::is_request(Request) ->
+		(	http_core::is_request(Request) ->
 			true
 		;	domain_error(http_request, Request)
 		).
@@ -93,7 +93,7 @@
 		).
 
 	supported_method(Request) :-
-		http::method(Request, Method),
+		http_core::method(Request, Method),
 		once((Method == get; Method == head)).
 
 	resolved_target_path(Path, Root, Candidate) :-

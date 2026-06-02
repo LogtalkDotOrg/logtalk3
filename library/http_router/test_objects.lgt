@@ -60,33 +60,33 @@
 	route(status_get, get, '/status', status_get).
 
 	list_users(Request, Response) :-
-		http::property(Request, route(list_users)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(users)), [], Response).
+		http_core::property(Request, route(list_users)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(users)), [], Response).
 
 	show_user(Request, Response) :-
-		http::property(Request, route(show_user)),
-		http::property(Request, path_params([id-'42'])),
-		http::method(Request, Method),
-		http::version(Request, Version),
+		http_core::property(Request, route(show_user)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::method(Request, Method),
+		http_core::version(Request, Version),
 		show_user_body(Method, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 	show_user_body(head, content('text/plain', text(head_user))).
 	show_user_body(get, content('text/plain', text(user))).
 
 	status_head(Request, Response) :-
-		http::property(Request, route(status_head)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(head_status)), [], Response).
+		http_core::property(Request, route(status_head)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(head_status)), [], Response).
 
 	status_get(Request, Response) :-
-		http::property(Request, route(status_get)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(get_status)), [], Response).
+		http_core::property(Request, route(status_get)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(get_status)), [], Response).
 
 :- end_object.
 
@@ -111,10 +111,10 @@
 	route(show_report, get, '/reports/{year:integer}/*', show_report).
 
 	show_report(Request, Response) :-
-		http::property(Request, route(show_report)),
-		http::property(Request, path_params([year-2026])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(report_2026)), [], Response).
+		http_core::property(Request, route(show_report)),
+		http_core::property(Request, path_params([year-2026])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(report_2026)), [], Response).
 
 :- end_object.
 
@@ -151,21 +151,21 @@
 	route(show_items, get, '/items', show_items).
 
 	show_items(Request, Response) :-
-		http::property(Request, route(show_items)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(items)), [], Response).
+		http_core::property(Request, route(show_items)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(items)), [], Response).
 
 	route_not_found_response(Request, Response) :-
-		http::version(Request, Version),
-		http::response(Version, status(404, 'Not Found'), [x_router-custom], content('text/plain', text(custom_not_found)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(404, 'Not Found'), [x_router-custom], content('text/plain', text(custom_not_found)), [], Response).
 
 	route_method_not_allowed_response(Request, AllowedMethods, Response) :-
 		AllowedMethods == [get, head, options],
-		http::property(Request, matched_path(true)),
-		http::property(Request, effective_methods([get, head, options])),
-		http::version(Request, Version),
-		http::response(Version, status(405, 'Method Not Allowed'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], content('text/plain', text(custom_method_not_allowed)), [], Response).
+		http_core::property(Request, matched_path(true)),
+		http_core::property(Request, effective_methods([get, head, options])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(405, 'Method Not Allowed'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], content('text/plain', text(custom_method_not_allowed)), [], Response).
 
 :- end_object.
 
@@ -213,29 +213,29 @@
 
 	route_automatic_options_response(Request, EffectiveMethods, Response) :-
 		EffectiveMethods == [get, head, options],
-		http::property(Request, automatic_options(true)),
-		http::property(Request, effective_methods(EffectiveMethods)),
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, summary('Show page options')),
-		http::property(Request, tags([options, pages])),
-		http::version(Request, Version),
-		http::response(Version, status(204, 'No Content'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], empty, [], Response).
+		http_core::property(Request, automatic_options(true)),
+		http_core::property(Request, effective_methods(EffectiveMethods)),
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, summary('Show page options')),
+		http_core::property(Request, tags([options, pages])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(204, 'No Content'), [x_router-custom, allow-'GET, HEAD, OPTIONS'], empty, [], Response).
 
 	add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		(	http::property(Request, automatic_options(true)) ->
+		(	http_core::property(Request, automatic_options(true)) ->
 			Stage = automatic
 		;	Stage = routed
 		),
-		http::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
+		http_core::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
 
 	show_page(Request, Response) :-
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, summary('Show page options')),
-		http::property(Request, tags([options, pages])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(automatic_options_page)), [], Response).
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, summary('Show page options')),
+		http_core::property(Request, tags([options, pages])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(automatic_options_page)), [], Response).
 
 :- end_object.
 
@@ -283,33 +283,33 @@
 
 	route_automatic_options_response(Request, EffectiveMethods, Response) :-
 		EffectiveMethods == [get, head, post, options],
-		http::property(Request, automatic_options(true)),
-		http::property(Request, effective_methods(EffectiveMethods)),
-		\+ http::property(Request, route(_)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, tags([items])),
-		http::property(Request, deprecated(false)),
-		\+ http::property(Request, summary(_)),
-		http::version(Request, Version),
-		http::response(Version, status(204, 'No Content'), [x_router-multi, allow-'GET, HEAD, POST, OPTIONS'], empty, [], Response).
+		http_core::property(Request, automatic_options(true)),
+		http_core::property(Request, effective_methods(EffectiveMethods)),
+		\+ http_core::property(Request, route(_)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, tags([items])),
+		http_core::property(Request, deprecated(false)),
+		\+ http_core::property(Request, summary(_)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(204, 'No Content'), [x_router-multi, allow-'GET, HEAD, POST, OPTIONS'], empty, [], Response).
 
 	show_item(Request, Response) :-
-		http::property(Request, route(show_item)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, summary('Show option item')),
-		http::property(Request, tags([items])),
-		http::property(Request, deprecated(false)),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(multi_options_show_item)), [], Response).
+		http_core::property(Request, route(show_item)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, summary('Show option item')),
+		http_core::property(Request, tags([items])),
+		http_core::property(Request, deprecated(false)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(multi_options_show_item)), [], Response).
 
 	update_item(Request, Response) :-
-		http::property(Request, route(update_item)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, summary('Update option item')),
-		http::property(Request, tags([items])),
-		http::property(Request, deprecated(false)),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(multi_options_update_item)), [], Response).
+		http_core::property(Request, route(update_item)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, summary('Update option item')),
+		http_core::property(Request, tags([items])),
+		http_core::property(Request, deprecated(false)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(multi_options_update_item)), [], Response).
 
 :- end_object.
 
@@ -356,27 +356,27 @@
 	route(show_item, get, '/items/{id}', show_item).
 
 	maintenance_mode(Request, respond(Response)) :-
-		http::target(Request, origin('/maintenance')),
+		http_core::target(Request, origin('/maintenance')),
 		!,
-		http::version(Request, Version),
-		http::response(Version, status(503, 'Service Unavailable'), [], content('text/plain', text(maintenance)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(503, 'Service Unavailable'), [], content('text/plain', text(maintenance)), [], Response).
 	maintenance_mode(Request, continue(Request)).
 
 	rewrite_legacy_items(request(Method, origin('/legacy-items/42'), Version, Headers, Body, Properties), continue(Request)) :-
 		!,
-		http::request(Method, origin('/items/42'), Version, Headers, Body, Properties, Request).
+		http_core::request(Method, origin('/items/42'), Version, Headers, Body, Properties, Request).
 	rewrite_legacy_items(Request, continue(Request)).
 
 	tag_request(request(Method, Target, Version, Headers, Body, Properties0), continue(Request)) :-
 		Properties = [middleware(tagged)| Properties0],
-		http::request(Method, Target, Version, Headers, Body, Properties, Request).
+		http_core::request(Method, Target, Version, Headers, Body, Properties, Request).
 
 	show_item(Request, Response) :-
-		http::property(Request, route(show_item)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, middleware(tagged)),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(middleware_item)), [], Response).
+		http_core::property(Request, route(show_item)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, middleware(tagged)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(middleware_item)), [], Response).
 
 :- end_object.
 
@@ -403,12 +403,12 @@
 	route_produces(show_document, ['application/json', 'text/plain']).
 
 	show_document(Request, Response) :-
-		http::property(Request, route(show_document)),
-		http::property(Request, path_params([])),
-		http::property(Request, response_media_type(MediaType)),
-		http::version(Request, Version),
+		http_core::property(Request, route(show_document)),
+		http_core::property(Request, path_params([])),
+		http_core::property(Request, response_media_type(MediaType)),
+		http_core::version(Request, Version),
 		document_body(MediaType, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 	document_body('application/json', content('application/json', json({id-'42', format-json}))).
 	document_body('text/plain', content('text/plain', text(document_text))).
@@ -444,21 +444,21 @@
 		response_middleware(add_router_stage, add_router_stage).
 
 		authorize_routed_request(Request, respond(Response)) :-
-			http::property(Request, route(show_secret)),
-			\+ http::header(Request, x_allow, yes),
+			http_core::property(Request, route(show_secret)),
+			\+ http_core::header(Request, x_allow, yes),
 			!,
-			http::version(Request, Version),
-			http::response(Version, status(401, 'Unauthorized'), [x_authorization-denied], empty, [], Response).
+			http_core::version(Request, Version),
+			http_core::response(Version, status(401, 'Unauthorized'), [x_authorization-denied], empty, [], Response).
 		authorize_routed_request(Request, continue(Request)).
 
 		add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-			( http::property(Request, route(show_secret)) -> Stage = routed ; Stage = other ),
-			http::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
+			( http_core::property(Request, route(show_secret)) -> Stage = routed ; Stage = other ),
+			http_core::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
 
 		show_secret(Request, Response) :-
-			http::property(Request, route(show_secret)),
-			http::version(Request, Version),
-			http::response(Version, status(200, 'OK'), [], content('text/plain', text(secret)), [], Response).
+			http_core::property(Request, route(show_secret)),
+			http_core::version(Request, Version),
+			http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(secret)), [], Response).
 
 	:- end_object.
 
@@ -503,25 +503,25 @@
 		route(show_handler_error, get, '/bad-request/error', show_handler_error).
 
 		show_default_bad_request(Request, _Response) :-
-			http::property(Request, route(show_default_bad_request)),
-			http::property(Request, path_params([])),
+			http_core::property(Request, route(show_default_bad_request)),
+			http_core::property(Request, path_params([])),
 			throw(error(http_parameter_validation([missing_parameter(query, id)]), route_parameters(show_default_bad_request))).
 
 		show_custom_bad_request(Request, _Response) :-
-			http::property(Request, route(show_custom_bad_request)),
-			http::property(Request, path_params([])),
+			http_core::property(Request, route(show_custom_bad_request)),
+			http_core::property(Request, path_params([])),
 			throw(error(http_parameter_validation([duplicate_parameter(query, id)]), route_parameters(show_custom_bad_request))).
 
 		show_handler_error(Request, _Response) :-
-			http::property(Request, route(show_handler_error)),
-			http::property(Request, path_params([])),
+			http_core::property(Request, route(show_handler_error)),
+			http_core::property(Request, path_params([])),
 			throw(error(domain_error(http_router_test, invalid_handler_error), show_handler_error/2)).
 
 		route_bad_request_response(Request, Errors, Response) :-
 			Errors == [duplicate_parameter(query, id)],
-			http::property(Request, route(show_custom_bad_request)),
-			http::version(Request, Version),
-			http::response(Version, status(400, 'Bad Request'), [x_router-custom], content('text/plain', text(custom_bad_request)), [], Response).
+			http_core::property(Request, route(show_custom_bad_request)),
+			http_core::version(Request, Version),
+			http_core::response(Version, status(400, 'Bad Request'), [x_router-custom], content('text/plain', text(custom_bad_request)), [], Response).
 
 	:- end_object.
 
@@ -572,29 +572,29 @@
 	route_produces(show_document, ['application/json', 'text/plain']).
 
 	add_route_summary(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		http::property(Request, summary(Summary)),
-		http::response(Version, Status, [x_route_summary-Summary| Headers0], Body, Properties, Response).
+		http_core::property(Request, summary(Summary)),
+		http_core::response(Version, Status, [x_route_summary-Summary| Headers0], Body, Properties, Response).
 
 	show_page(Request, Response) :-
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([])),
-		http::property(Request, summary('Show page')),
-		http::property(Request, description('Display a page using route metadata.')),
-		http::property(Request, tags([pages, public])),
-		http::property(Request, deprecated(false)),
-		\+ http::property(Request, summary(stale)),
-		\+ http::property(Request, tags([legacy])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(route_metadata_page)), [], Response).
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([])),
+		http_core::property(Request, summary('Show page')),
+		http_core::property(Request, description('Display a page using route metadata.')),
+		http_core::property(Request, tags([pages, public])),
+		http_core::property(Request, deprecated(false)),
+		\+ http_core::property(Request, summary(stale)),
+		\+ http_core::property(Request, tags([legacy])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(route_metadata_page)), [], Response).
 
 	show_document(Request, Response) :-
-		http::property(Request, route(show_document)),
-		http::property(Request, path_params([])),
-		http::property(Request, summary('Show document')),
-		http::property(Request, tags([documents, api])),
-		http::property(Request, response_media_type('application/json')),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('application/json', json({kind-route_metadata, format-json})), [], Response).
+		http_core::property(Request, route(show_document)),
+		http_core::property(Request, path_params([])),
+		http_core::property(Request, summary('Show document')),
+		http_core::property(Request, tags([documents, api])),
+		http_core::property(Request, response_media_type('application/json')),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('application/json', json({kind-route_metadata, format-json})), [], Response).
 
 :- end_object.
 
@@ -728,16 +728,16 @@
 	}).
 
 	show_item(Request, Response) :-
-		http::property(Request, route(show_item)),
-		http::property(Request, path_params([id-'42'])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('application/json', json({id-'42', name-'Widget'})), [], Response).
+		http_core::property(Request, route(show_item)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('application/json', json({id-'42', name-'Widget'})), [], Response).
 
 	create_document(Request, Response) :-
-		http::property(Request, route(create_document)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(201, 'Created'), [], content('application/json', json({id-'100', title-'Guide'})), [], Response).
+		http_core::property(Request, route(create_document)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(201, 'Created'), [], content('application/json', json({id-'100', title-'Guide'})), [], Response).
 
 :- end_object.
 
@@ -788,22 +788,22 @@
 	]).
 
 	show_message(Request, Response) :-
-		http::property(Request, route(show_message)),
-		http::property(Request, path_params([id-'42'])),
-		http::property(Request, response_media_type(MediaType)),
-		http::version(Request, Version),
+		http_core::property(Request, route(show_message)),
+		http_core::property(Request, path_params([id-'42'])),
+		http_core::property(Request, response_media_type(MediaType)),
+		http_core::version(Request, Version),
 		inferred_message_body(MediaType, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 	inferred_message_body('application/json', content('application/json', json({id-'42', title-'Guide'}))).
 	inferred_message_body('text/plain', content('text/plain', text('Guide'))).
 
 	create_message(Request, Response) :-
-		http::property(Request, route(create_message)),
-		http::property(Request, path_params([])),
-		http::body(Request, content('application/json', json({title-'Guide', published-true}))),
-		http::version(Request, Version),
-		http::response(Version, status(201, 'Created'), [], content('application/json', json({id-'100', title-'Guide', published-true})), [], Response).
+		http_core::property(Request, route(create_message)),
+		http_core::property(Request, path_params([])),
+		http_core::body(Request, content('application/json', json({title-'Guide', published-true}))),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(201, 'Created'), [], content('application/json', json({id-'100', title-'Guide', published-true})), [], Response).
 
 :- end_object.
 
@@ -828,14 +828,14 @@
 	route(show_scrubbed, get, '/scrubbed', show_scrubbed).
 
 	show_scrubbed(Request, Response) :-
-		http::property(Request, route(show_scrubbed)),
-		http::property(Request, path_params([])),
-		\+ http::property(Request, open_api_probe(_)),
-		\+ http::property(Request, automatic_options(_)),
-		\+ http::property(Request, effective_methods(_)),
-		\+ http::property(Request, response_media_type(_)),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(scrubbed)), [], Response).
+		http_core::property(Request, route(show_scrubbed)),
+		http_core::property(Request, path_params([])),
+		\+ http_core::property(Request, open_api_probe(_)),
+		\+ http_core::property(Request, automatic_options(_)),
+		\+ http_core::property(Request, effective_methods(_)),
+		\+ http_core::property(Request, response_media_type(_)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(scrubbed)), [], Response).
 
 :- end_object.
 
@@ -902,16 +902,16 @@
 	route_open_api_response_example(update_message, response(http(1, 1), status(400, 'Bad Request'), [], content('application/json', json({error-'invalid'})), [])).
 
 	show_nullable_message(Request, Response) :-
-		http::property(Request, route(show_nullable_message)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('application/json', json({id-'42', subtitle-null})), [], Response).
+		http_core::property(Request, route(show_nullable_message)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('application/json', json({id-'42', subtitle-null})), [], Response).
 
 	update_message(Request, Response) :-
-		http::property(Request, route(update_message)),
-		http::property(Request, path_params([id-42])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('application/json', json({id-42, title-'Guide'})), [], Response).
+		http_core::property(Request, route(update_message)),
+		http_core::property(Request, path_params([id-42])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('application/json', json({id-42, title-'Guide'})), [], Response).
 
 :- end_object.
 
@@ -958,27 +958,27 @@
 	route(show_page, get, '/pages/42', show_page).
 
 	short_circuit(Request, respond(Response)) :-
-		http::target(Request, origin('/blocked')),
+		http_core::target(Request, origin('/blocked')),
 		!,
-		http::version(Request, Version),
-		http::response(Version, status(503, 'Service Unavailable'), [], content('text/plain', text(blocked)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(503, 'Service Unavailable'), [], content('text/plain', text(blocked)), [], Response).
 	short_circuit(Request, continue(Request)).
 
 	add_router_stage(_Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		http::response(Version, Status, [x_router_stage-after| Headers0], Body, Properties, Response).
+		http_core::response(Version, Status, [x_router_stage-after| Headers0], Body, Properties, Response).
 
 	add_response_kind(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-		(	http::property(Request, route(show_page)) ->
+		(	http_core::property(Request, route(show_page)) ->
 			Kind = routed
 		;	Kind = intercepted
 		),
-		http::response(Version, Status, [x_response_kind-Kind| Headers0], Body, Properties, Response).
+		http_core::response(Version, Status, [x_response_kind-Kind| Headers0], Body, Properties, Response).
 
 	show_page(Request, Response) :-
-		http::property(Request, route(show_page)),
-		http::property(Request, path_params([])),
-		http::version(Request, Version),
-		http::response(Version, status(200, 'OK'), [], content('text/plain', text(page)), [], Response).
+		http_core::property(Request, route(show_page)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(page)), [], Response).
 
 :- end_object.
 
@@ -1011,17 +1011,17 @@
 	route_produces(show_document, ['application/json', 'text/plain']).
 
 	show_document(Request, Response) :-
-		http::property(Request, route(show_document)),
-		http::property(Request, path_params([])),
-		http::property(Request, response_media_type(MediaType)),
-		http::version(Request, Version),
+		http_core::property(Request, route(show_document)),
+		http_core::property(Request, path_params([])),
+		http_core::property(Request, response_media_type(MediaType)),
+		http_core::version(Request, Version),
 		document_body(MediaType, Body),
-		http::response(Version, status(200, 'OK'), [], Body, [], Response).
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 	route_not_acceptable_response(Request, ProducedMediaTypes, Response) :-
 		ProducedMediaTypes == ['application/json', 'text/plain'],
-		http::version(Request, Version),
-		http::response(Version, status(406, 'Not Acceptable'), [x_router-custom], content('text/plain', text(custom_not_acceptable)), [], Response).
+		http_core::version(Request, Version),
+		http_core::response(Version, status(406, 'Not Acceptable'), [x_router-custom], content('text/plain', text(custom_not_acceptable)), [], Response).
 
 	document_body('application/json', content('application/json', json({id-'42', format-json}))).
 	document_body('text/plain', content('text/plain', text(document_text))).

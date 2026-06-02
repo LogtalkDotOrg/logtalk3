@@ -31,7 +31,7 @@
 )).
 
 	:- initialization((
-		logtalk_load('../http/loader.lgt'),
+		logtalk_load('../http_core/loader.lgt'),
 		logtalk_load('../http_websocket/loader.lgt'),
 		logtalk_load('../http_multipart/loader.lgt'),
 		logtalk_load('../http_socket/loader.lgt'),

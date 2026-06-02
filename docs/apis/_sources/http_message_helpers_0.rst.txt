@@ -11,7 +11,7 @@
 Internal shared helpers for HTTP transport persistence rules, connection token normalization, and chunk-size line parsing.
 
 | **Availability:** 
-|    ``logtalk_load(http(loader))``
+|    ``logtalk_load(http_core(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
@@ -24,7 +24,7 @@ Internal shared helpers for HTTP transport persistence rules, connection token n
 | **Extends:**
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
 | **Uses:**
-|    :ref:`http <http/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 
 | **Remarks:**
