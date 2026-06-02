@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-02,
 		comment is 'Unit tests for the http_digest library.'
 	]).
 
@@ -59,12 +59,11 @@
 		cover(http_client_digest_session).
 	:- endif.
 
-	test(http_digest_01, deterministic) :-
+	test(http_digest_01, deterministic(Challenge == ParsedChallenge)) :-
 		challenge_options(sha256, 1700000000, Options),
 		http_digest::unauthorized_response(Challenge, Response, Options),
 		status(Response, status(401, 'Unauthorized')),
-		http_digest::challenge(Response, ParsedChallenge),
-		Challenge == ParsedChallenge.
+		http_digest::challenge(Response, ParsedChallenge).
 
 	test(http_digest_02, deterministic) :-
 		authorized_request(sha256, '/protected', 1700000000, AuthorizedRequest),
@@ -94,7 +93,7 @@
 		http_digest::challenge(Response, digest_challenge(Fields)),
 		memberchk(stale(true), Fields).
 
-	test(http_digest_05, deterministic) :-
+	test(http_digest_05, deterministic(Rspauth \== none)) :-
 		verified_request(sha256, '/protected', 1700000000, VerifiedRequest),
 		response(http(1, 1), status(200, 'OK'), [], empty, [], Response0),
 		http_digest::add_authentication_info(VerifiedRequest, Response0, Response, [nextnonce('next-nonce')]),
@@ -102,8 +101,7 @@
 		memberchk(nextnonce('next-nonce'), Fields),
 		memberchk(qop(auth), Fields),
 		memberchk(nonce_count(1), Fields),
-		memberchk(rspauth(Rspauth), Fields),
-		Rspauth \== none.
+		memberchk(rspauth(Rspauth), Fields).
 
 	test(http_digest_06, deterministic) :-
 		verified_request(sha256, '/protected', 1700000000, VerifiedRequest),
@@ -130,7 +128,7 @@
 		http_digest::protect_request(AuthorizedRequest, http_digest_test_verifier, continue(VerifiedRequest), Options),
 		property(VerifiedRequest, digest_algorithm(md5)).
 
-	test(http_digest_09, deterministic) :-
+	test(http_digest_09, deterministic(Challenge == ParsedChallenge)) :-
 		Challenge = digest_challenge([
 			realm('test-realm'),
 			domains(['/protected', '/admin']),
@@ -160,8 +158,7 @@
 		property(Response, connection([close])),
 		property(Response, cache_control([private])),
 		\+ property(Response, etag(base)),
-		http_digest::challenge(Response, ParsedChallenge),
-		Challenge == ParsedChallenge.
+		http_digest::challenge(Response, ParsedChallenge).
 
 	test(http_digest_10, error(domain_error(option, unsupported_option(foo)))) :-
 		challenge_for_algorithm(sha256, 1700000000, Challenge),

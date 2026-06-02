@@ -334,8 +334,7 @@
 		(	catch(verify_authorization_request(Authorization, Request, Verifier, Realm, VerifiedRequest, Status), Error, protected_request_error_status(Error, Status)) ->
 			true
 		;	Status = invalid
-		),
-		!.
+		).
 
 	protected_request_error_status(error(domain_error(http_authenticate_header(authorization), _), _), invalid).
 	protected_request_error_status(Error, _Status) :-
@@ -499,27 +498,30 @@
 		quoted_value_codes(Codes, false, [Code| Acc0], Acc, RestCodes).
 
 	split_directive_segments(HeaderName, Codes, Segments) :-
-		split_directive_segments(Codes, HeaderName, false, false, [], [], ReversedSegments),
-		reverse(ReversedSegments, Segments).
+		split_directive_segments(Codes, HeaderName, false, false, [], Segments).
 
-	split_directive_segments([], _HeaderName, _Quoted, _Escaped, Current0, Segments0, Segments) :-
+	split_directive_segments([], _HeaderName, _Quoted, _Escaped, Current0, Segments) :-
+		!,	% ECLiPSe creates a spurious choice-point without this cut!
 		reverse(Current0, Current),
 		trim_ows_codes(Current, TrimmedCurrent),
 		(	TrimmedCurrent == [] ->
-			Segments = Segments0
-		;	Segments = [TrimmedCurrent| Segments0]
+			Segments = []
+		;	Segments = [TrimmedCurrent]
 		).
-	split_directive_segments([Code| Codes], HeaderName, Quoted, true, Current0, Segments0, Segments) :-
+	split_directive_segments([Code| Codes], HeaderName, Quoted, true, Current0, Segments) :-
 		!,
-		split_directive_segments(Codes, HeaderName, Quoted, false, [Code| Current0], Segments0, Segments).
-	split_directive_segments([0'\\| Codes], HeaderName, true, false, Current0, Segments0, Segments) :-
+		split_directive_segments(Codes, HeaderName, Quoted, false, [Code| Current0], Segments).
+	split_directive_segments([0'\\| Codes], HeaderName, true, false, Current0, Segments) :-
 		!,
-		split_directive_segments(Codes, HeaderName, true, true, [0'\\| Current0], Segments0, Segments).
-	split_directive_segments([0'"| Codes], HeaderName, Quoted, false, Current0, Segments0, Segments) :-
-		( Quoted == true -> NewQuoted = false ; NewQuoted = true ),
+		split_directive_segments(Codes, HeaderName, true, true, [0'\\| Current0], Segments).
+	split_directive_segments([0'"| Codes], HeaderName, Quoted, false, Current0, Segments) :-
+		(	Quoted == true ->
+			NewQuoted = false
+		;	NewQuoted = true
+		),
 		!,
-		split_directive_segments(Codes, HeaderName, NewQuoted, false, [0'"| Current0], Segments0, Segments).
-	split_directive_segments([0',| Codes], HeaderName, false, false, Current0, Segments0, Segments) :-
+		split_directive_segments(Codes, HeaderName, NewQuoted, false, [0'"| Current0], Segments).
+	split_directive_segments([0',| Codes], HeaderName, false, false, Current0, [TrimmedCurrent| Segments]) :-
 		!,
 		reverse(Current0, Current),
 		trim_ows_codes(Current, TrimmedCurrent),
@@ -528,10 +530,10 @@
 			domain_error(http_authenticate_header(HeaderName), invalid(syntax))
 		;	TrimmedCodes == [] ->
 			domain_error(http_authenticate_header(HeaderName), invalid(syntax))
-		;	split_directive_segments(Codes, HeaderName, false, false, [], [TrimmedCurrent| Segments0], Segments)
+		;	split_directive_segments(Codes, HeaderName, false, false, [], Segments)
 		).
-	split_directive_segments([Code| Codes], HeaderName, Quoted, false, Current0, Segments0, Segments) :-
-		split_directive_segments(Codes, HeaderName, Quoted, false, [Code| Current0], Segments0, Segments).
+	split_directive_segments([Code| Codes], HeaderName, Quoted, false, Current0, Segments) :-
+		split_directive_segments(Codes, HeaderName, Quoted, false, [Code| Current0], Segments).
 
 	ensure_known_directive_names([], _HeaderName, _KnownNames).
 	ensure_known_directive_names([Name-_| Pairs], HeaderName, KnownNames) :-

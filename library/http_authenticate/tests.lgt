@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-02,
 		comment is 'Unit tests for the http_authenticate library.'
 	]).
 
@@ -40,23 +40,21 @@
 	cover(http_authenticate_test_handler).
 	cover(http_authenticate_test_router).
 
-	test(http_authenticate_01, deterministic) :-
+	test(http_authenticate_01, deterministic(Challenge == ParsedChallenge)) :-
 		Challenge = basic_challenge([
 			realm('test-realm'),
 			charset(utf_8)
 		]),
 		http_authenticate::generate_challenge(Challenge, HeaderValue),
-		http_authenticate::parse_challenge(HeaderValue, ParsedChallenge),
-		Challenge == ParsedChallenge.
+		http_authenticate::parse_challenge(HeaderValue, ParsedChallenge).
 
-	test(http_authenticate_02, deterministic) :-
+	test(http_authenticate_02, deterministic(Authorization == ParsedAuthorization)) :-
 		Authorization = basic_authorization([
 			username('Mufasa'),
 			password('Circle Of Life')
 		]),
 		http_authenticate::generate_authorization(Authorization, HeaderValue),
-		http_authenticate::parse_authorization(HeaderValue, ParsedAuthorization),
-		Authorization == ParsedAuthorization.
+		http_authenticate::parse_authorization(HeaderValue, ParsedAuthorization).
 
 	test(http_authenticate_03, deterministic) :-
 		request_with_authorization('/protected', Request),
@@ -139,7 +137,7 @@
 		^^file_path('test_files/invalid_sha.htpasswd', Path),
 		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'Circle Of Life').
 
-	test(http_authenticate_16, deterministic) :-
+	test(http_authenticate_16, deterministic(ParsedChallenge == Challenge)) :-
 		Challenge = basic_challenge([
 			realm('test-realm'),
 			charset(utf_8)
@@ -159,8 +157,7 @@
 		body(Response, OverlayBody),
 		property(Response, base_property(ok)),
 		property(Response, overlay_property(ok)),
-		http_authenticate::challenge(Response, ParsedChallenge),
-		ParsedChallenge == Challenge.
+		http_authenticate::challenge(Response, ParsedChallenge).
 
 	test(http_authenticate_17, error(domain_error(option, headers([x_test-foo(bar)])))) :-
 		Request = request(get, origin('/protected'), http(1, 1), [], empty, []),
@@ -177,6 +174,8 @@
 			charset(none)
 		]),
 		http_authenticate::unauthorized_response(Challenge, Response0, _Response, [status(status(403, 'Forbidden'))]).
+
+	% auxiliary predicates
 
 	request_with_authorization(Path, Request) :-
 		Authorization = basic_authorization([
