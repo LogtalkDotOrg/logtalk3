@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.',
 		remarks is [
 			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.'
@@ -134,7 +134,7 @@
 	:- endif.
 
 	:- uses(list, [
-		append/3, member/2, reverse/2, valid/1 as proper_list/1
+		append/3, member/2, valid/1 as proper_list/1
 	]).
 
 	open(Session) :-

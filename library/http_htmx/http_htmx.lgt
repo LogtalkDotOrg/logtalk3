@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-02,
 		comment is 'Transport-neutral HTMX request classification, HTML reply helpers, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -804,24 +804,6 @@
 			Unique0 = [Element| Unique1]
 		),
 		unique_preserving_order(Elements, Seen1, Unique1, Unique).
-
-	overlay_headers(Overrides, Headers0, Headers) :-
-		filter_overridden_headers(Headers0, Overrides, FilteredHeaders),
-		append(Overrides, FilteredHeaders, Headers).
-
-	filter_overridden_headers([], _Overrides, []).
-	filter_overridden_headers([Header| Headers0], Overrides, Headers) :-
-		(	overridden_header(Header, Overrides) ->
-			Headers = Tail
-		;	Headers = [Header| Tail]
-		),
-		filter_overridden_headers(Headers0, Overrides, Tail).
-
-	overridden_header(Name-_, [Override| _]) :-
-		Override = Name-_,
-		!.
-	overridden_header(Header, [_| Overrides]) :-
-		overridden_header(Header, Overrides).
 
 	validate_request(Request) :-
 		http_core::is_request(Request),

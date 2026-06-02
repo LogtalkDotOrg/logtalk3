@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -485,9 +485,6 @@
 			)
 		;	true
 		).
-
-	validate_header_body_semantics(Headers, Body) :-
-		validate_header_body_semantics(Headers, Body, strict).
 
 	validate_header_body_semantics(Headers, Body, Mode) :-
 		(	semantic_single_header_value(Headers, content_length, Length) ->

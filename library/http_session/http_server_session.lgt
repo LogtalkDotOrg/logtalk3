@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-28,
+		date is 2026-06-02,
 		comment is 'Server-side HTTP session manager over normalized request and response terms using opaque cookie identifiers and an in-memory session store.'
 	]).
 
@@ -198,11 +198,11 @@
 	:- endif.
 
 	:- uses(list, [
-		append/2, append/3, valid/1 as proper_list/1
+		append/3
 	]).
 
 	:- uses(date, [
-		date_time_to_unix/2, unix_to_date_time/2
+		date_time_to_unix/2
 	]).
 
 	open(Manager) :-

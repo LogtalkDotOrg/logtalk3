@@ -131,7 +131,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-06-02,
 		comment is 'Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and optionally run a higher-level callback loop on upgraded http_socket connections.',
 		parameters is [
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
@@ -257,7 +257,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, member/2, reverse/2, valid/1 as proper_list/1
+		append/3, reverse/2, valid/1 as proper_list/1
 	]).
 
 	:- uses(crypto, [
@@ -1176,12 +1176,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Stateful WebSocket session predicates for client-side use with atom text representation.'
 	]).
 
 	:- uses(list, [
-		member/2, reverse/2, valid/1 as proper_list/1
+		member/2, valid/1 as proper_list/1
 	]).
 
 	:- public(open/4).

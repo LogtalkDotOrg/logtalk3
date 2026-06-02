@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-02,
 		comment is 'Portable stream-based HTTP server orchestration predicates.',
 		remarks is [
 			'Binary streams' - 'All stream predicates expect binary input and output streams.',
@@ -405,19 +405,6 @@
 
 	head_response_bytes(Response, HeaderBytes) :-
 		http_core::generate_response_headers(bytes(HeaderBytes), Response).
-
-	strip_response_body_bytes(Bytes, HeaderBytes) :-
-		(	split_response_header_bytes(Bytes, [], HeaderBytes) ->
-			true
-		;	domain_error(http_response_stream, malformed_response(Bytes))
-		).
-
-	split_response_header_bytes([0'\r,0'\n,0'\r,0'\n| _], Acc, HeaderBytes) :-
-		!,
-		reverse(Acc, PrefixBytes),
-		append(PrefixBytes, [0'\r,0'\n,0'\r,0'\n], HeaderBytes).
-	split_response_header_bytes([Byte| Bytes], Acc, HeaderBytes) :-
-		split_response_header_bytes(Bytes, [Byte| Acc], HeaderBytes).
 
 	try_read_request(Input, Result) :-
 		catch(
