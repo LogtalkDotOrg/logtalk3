@@ -19,10 +19,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(http_static_files(loader)),
-	logtalk_load(http_directory_listing(loader)),
-	logtalk_load(http_digest(loader)),
-	logtalk_load(http_static_site_digest, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(types(loader)),
+		logtalk_load(http_static_files(loader)),
+		logtalk_load(http_directory_listing(loader)),
+		logtalk_load(http_digest(loader)),
+		logtalk_load(http_static_site_digest, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_static_site_digest example requires a backend supporting sockets and unbounded integers)'), nl)).
+
+:- endif.

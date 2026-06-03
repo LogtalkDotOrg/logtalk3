@@ -19,8 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(http_client(loader)),
-	logtalk_load(http_websocket_messages(loader)),
-	logtalk_load(http_websocket_echo, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_websocket_messages(loader)),
+		logtalk_load(http_websocket_echo, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_websocket_echo example requires a backend supporting sockets and unbounded integers)'), nl)).
+
+:- endif.

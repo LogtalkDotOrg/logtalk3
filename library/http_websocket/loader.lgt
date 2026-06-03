@@ -19,11 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(basic_types(loader)),
-	logtalk_load(base64(loader)),
-	logtalk_load(crypto(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(reader(loader)),
-	logtalk_load([http_websocket_handshake, http_websocket], [optimize(on)])
-)).
+:- if(current_prolog_flag(bounded, false)).
+
+	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(base64(loader)),
+		logtalk_load(crypto(loader)),
+		logtalk_load(options(loader)),
+		logtalk_load(reader(loader)),
+		logtalk_load([http_websocket_handshake, http_websocket], [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_websocket library not available for your backend Prolog compiler)'), nl)).
+
+:- endif.

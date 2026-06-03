@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-03,
 		comment is 'Unit tests for the "http_websocket_session" library.'
 	]).
 
@@ -40,6 +40,9 @@
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.
 	:- endif.
+
+	setup :-
+		cleanup.
 
 	cleanup :-
 		^^clean_file('test_http_websocket_session.tmp'),

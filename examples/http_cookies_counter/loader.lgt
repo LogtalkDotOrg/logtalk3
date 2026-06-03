@@ -19,7 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load('../../library/http_session/loader.lgt'),
-	logtalk_load(http_cookies_counter, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(http_session(loader)),
+		logtalk_load(http_cookies_counter, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_cookies_counter example requires a backend supporting sockets and unbounded integers)'), nl)).
+
+:- endif.

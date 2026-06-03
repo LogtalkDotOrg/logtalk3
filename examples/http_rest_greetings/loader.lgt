@@ -19,8 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(rest(loader)),
-	logtalk_load(http_client(loader)),
-	logtalk_load(http_rest_greetings, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(rest(loader)),
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_rest_greetings, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_rest_greetings example requires a backend supporting sockets and unbounded integers)'), nl)).
+
+:- endif.

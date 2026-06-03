@@ -19,11 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load('../../library/http_session/loader.lgt'),
-	logtalk_load(http_cookies_counter, [debug(on), source_data(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(http_session(loader)),
+		logtalk_load(http_cookies_counter, [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.

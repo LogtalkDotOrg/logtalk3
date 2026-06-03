@@ -19,8 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(http_core(loader)),
-	logtalk_load(http_websocket(loader)),
-	logtalk_load(http_server, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(http_core(loader)),
+		logtalk_load(http_websocket(loader)),
+		logtalk_load(http_server, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_server library not available for your backend Prolog compiler)'), nl)).
+
+:- endif.

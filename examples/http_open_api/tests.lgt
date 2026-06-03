@@ -29,7 +29,9 @@
 		comment is 'Unit tests for the "http_open_api" example.'
 	]).
 
-	:- uses(http_core, [body/2, request/7, status/2]).
+	:- uses(http_core, [
+		body/2, request/7, status/2
+	]).
 
 	cover(greetings_api(_)).
 	cover(greetings_http_handler(_)).

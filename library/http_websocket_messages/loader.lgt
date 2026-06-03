@@ -19,8 +19,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(character_sets(loader)),
-	logtalk_load(http_websocket(loader)),
-	logtalk_load(http_websocket_messages, [optimize(on)])
-)).
+:- if(current_prolog_flag(bounded, false)).
+
+	:- initialization((
+		logtalk_load(character_sets(loader)),
+		logtalk_load(http_websocket(loader)),
+		logtalk_load(http_websocket_messages, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_websocket_messages library not available for your backend Prolog compiler)'), nl)).
+
+:- endif.

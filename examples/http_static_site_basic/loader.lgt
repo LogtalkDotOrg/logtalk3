@@ -19,13 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(base64(loader)),
-	logtalk_load(hashes(loader)),
-	logtalk_load(http_client(loader)),
-	logtalk_load(http_static_files(loader)),
-	logtalk_load(http_directory_listing(loader)),
-	logtalk_load(http_authenticate(loader)),
-	logtalk_load(http_static_site_basic, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(types(loader)),
+		logtalk_load(base64(loader)),
+		logtalk_load(hashes(loader)),
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_static_files(loader)),
+		logtalk_load(http_directory_listing(loader)),
+		logtalk_load(http_authenticate(loader)),
+		logtalk_load(http_static_site_basic, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_static_site_basic example requires a backend supporting sockets and unbounded integers)'), nl)).
+
+:- endif.

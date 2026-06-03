@@ -19,13 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(http_core(loader)),
-	logtalk_load(http_websocket(loader)),
-	logtalk_load(http_multipart(loader)),
-	logtalk_load(http_server, [debug(on), source_data(on)]),
-	logtalk_load(test_objects),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(http_core(loader)),
+		logtalk_load(http_websocket(loader)),
+		logtalk_load(http_multipart(loader)),
+		logtalk_load(http_server, [debug(on), source_data(on)]),
+		logtalk_load(test_objects),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((write('(not applicable)'), nl)).
+
+:- endif.

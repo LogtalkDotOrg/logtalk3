@@ -19,8 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(http_client(loader)),
-	logtalk_load(json_pointer(loader)),
-	logtalk_load(http_rest_open_meteo, [optimize(on)])
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
 )).
+
+	:- initialization((
+		logtalk_load(http_client(loader)),
+		logtalk_load(json_pointer(loader)),
+		logtalk_load(http_rest_open_meteo, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((write('(http_rest_open_meteo example requires a backend supporting sockets and unbounded integers)'), nl)).
+
+:- endif.
