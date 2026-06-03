@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-04,
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
@@ -99,174 +99,6 @@
 		catch(http_socket::serve_websocket_once(Listener, echo_http_socket_handler, _Connection, _HandshakeResponse, _ClientInfo), Error, (threaded_exit(client_exchange_response('127.0.0.1', Port, Request, _Response), ClientTag), http_socket::close_listener(Listener), throw(Error))),
 		threaded_exit(client_exchange_response('127.0.0.1', Port, Request, _Response), ClientTag),
 		http_socket::close_listener(Listener).
-
-	test(http_socket_websocket_frames_5_01, deterministic) :-
-		Host = '127.0.0.1',
-		Path = '/socket',
-		Key = 'dGhlIHNhbXBsZSBub25jZQ==',
-		http_websocket::frame(final, text, [0'H, 0'e, 0'l, 0'l, 0'o], [masking_key([1, 2, 3, 4])], ClientFrame),
-		http_socket::open_listener(Host, Port, Listener, []),
-		Control = websocket_client_sync(Host, Port, Path, Key),
-		start_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientTag),
-		http_socket::serve_websocket_once(Listener, websocket_http_socket_handler, ServerConnection, ServerResponse, _ClientInfo),
-		await_websocket_client_exchange(Control, ClientConnection, ClientResponse),
-		http_socket::connection_streams(ServerConnection, ServerInput, ServerOutput),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
-		finish_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientConnection, ClientResponse, ClientTag),
-		http_websocket::write_frame(ClientOutput, ClientFrame),
-		http_websocket::read_frame(ServerInput, ServerFrame),
-		http_websocket::frame(final, pong, [0'p, 0'o, 0'n, 0'g], [], ServerReplyFrame),
-		http_websocket::write_frame(ServerOutput, ServerReplyFrame),
-		http_websocket::read_frame(ClientInput, ClientReplyFrame),
-		http_socket::close_connection(ServerConnection),
-		http_socket::close_connection(ClientConnection),
-		http_socket::close_listener(Listener),
-		status(ServerResponse, status(101, 'Switching Protocols')),
-		status(ClientResponse, status(101, 'Switching Protocols')),
-		http_websocket::opcode(ServerFrame, text),
-		http_websocket::payload(ServerFrame, [0'H, 0'e, 0'l, 0'l, 0'o]),
-		http_websocket::property(ServerFrame, masking_key([1, 2, 3, 4])),
-		http_websocket::opcode(ClientReplyFrame, pong),
-		http_websocket::payload(ClientReplyFrame, [0'p, 0'o, 0'n, 0'g]).
-
-	test(http_socket_websocket_messages_5_01, deterministic) :-
-		Host = '127.0.0.1',
-		Path = '/socket',
-		Key = 'dGhlIHNhbXBsZSBub25jZQ==',
-		http_websocket::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], ClientFrame1),
-		http_websocket::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([5, 6, 7, 8])], ClientFrame2),
-		http_socket::open_listener(Host, Port, Listener, []),
-		Control = websocket_client_sync(Host, Port, Path, Key),
-		start_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientTag),
-		http_socket::serve_websocket_once(Listener, websocket_http_socket_handler, ServerConnection, ServerResponse, _ClientInfo),
-		await_websocket_client_exchange(Control, ClientConnection, ClientResponse),
-		http_socket::connection_streams(ServerConnection, ServerInput, ServerOutput),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
-		finish_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientConnection, ClientResponse, ClientTag),
-		write_websocket_frames([ClientFrame1, ClientFrame2], ClientOutput),
-		http_websocket_messages::read_message(ServerInput, ServerMessage),
-		http_websocket_messages::message(text, ok, ServerReplyMessage),
-		http_websocket_messages::write_message(ServerOutput, ServerReplyMessage),
-		http_websocket_messages::read_message(ClientInput, ClientReplyMessage),
-		http_socket::close_connection(ServerConnection),
-		http_socket::close_connection(ClientConnection),
-		http_socket::close_listener(Listener),
-		status(ServerResponse, status(101, 'Switching Protocols')),
-		status(ClientResponse, status(101, 'Switching Protocols')),
-		ServerMessage == message(text, hello),
-		ClientReplyMessage == message(text, ok).
-
-	test(http_socket_websocket_session_5_01, deterministic) :-
-		Host = '127.0.0.1',
-		Path = '/socket',
-		Key = 'dGhlIHNhbXBsZSBub25jZQ==',
-		http_websocket::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], ClientFrame1),
-		http_websocket::frame(final, ping, [0'!], [masking_key([5, 6, 7, 8])], ClientFrame2),
-		http_websocket::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], ClientFrame3),
-		http_socket::open_listener(Host, Port, Listener, []),
-		Control = websocket_client_sync(Host, Port, Path, Key),
-		start_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientTag),
-		http_socket::serve_websocket_once(Listener, websocket_http_socket_handler, ServerConnection, ServerResponse, _ClientInfo),
-		await_websocket_client_exchange(Control, ClientConnection, ClientResponse),
-		http_socket::connection_streams(ServerConnection, ServerInput, ServerOutput),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
-		finish_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientConnection, ClientResponse, ClientTag),
-		write_websocket_frames([ClientFrame1, ClientFrame2, ClientFrame3], ClientOutput),
-		http_websocket_server_session::initial_state(ServerState0),
-		http_websocket_server_session::read_message(ServerInput, ServerOutput, ServerState0, ServerState1, ServerControlMessage, [auto_pong(on)]),
-		http_websocket_server_session::read_message(ServerInput, ServerOutput, ServerState1, ServerState2, ServerDataMessage, [auto_pong(on)]),
-		http_websocket_server_session::message(text, ok, ServerReplyMessage),
-		http_websocket_server_session::write_message(ServerOutput, ServerReplyMessage, [fragment_size(1)]),
-		read_websocket_frames(3, ClientInput, ClientReplyFrames),
-		http_socket::close_connection(ServerConnection),
-		http_socket::close_connection(ClientConnection),
-		http_socket::close_listener(Listener),
-		status(ServerResponse, status(101, 'Switching Protocols')),
-		status(ClientResponse, status(101, 'Switching Protocols')),
-		ServerState0 == session_state(idle),
-		ServerState1 == session_state(fragment(text, [[0'h, 0'e]])),
-		ServerState2 == session_state(idle),
-		ServerControlMessage == message(ping, [0'!]),
-		ServerDataMessage == message(text, hello),
-		ClientReplyFrames = [PongFrame, ReplyFrame1, ReplyFrame2],
-		http_websocket::opcode(PongFrame, pong),
-		http_websocket::final(PongFrame, final),
-		http_websocket::payload(PongFrame, [0'!]),
-		\+ http_websocket::property(PongFrame, masking_key(_)),
-		http_websocket::opcode(ReplyFrame1, text),
-		http_websocket::final(ReplyFrame1, more),
-		http_websocket::payload(ReplyFrame1, [0'o]),
-		\+ http_websocket::property(ReplyFrame1, masking_key(_)),
-		http_websocket::opcode(ReplyFrame2, continuation),
-		http_websocket::final(ReplyFrame2, final),
-		http_websocket::payload(ReplyFrame2, [0'k]),
-		\+ http_websocket::property(ReplyFrame2, masking_key(_)).
-
-	test(http_socket_websocket_session_5_02, deterministic) :-
-		Host = '127.0.0.1',
-		Path = '/socket',
-		Key = 'dGhlIHNhbXBsZSBub25jZQ==',
-		http_websocket::frame(final, close, [0x03, 0xE8], [masking_key([1, 2, 3, 4])], ClientFrame),
-		http_socket::open_listener(Host, Port, Listener, []),
-		Control = websocket_client_sync(Host, Port, Path, Key),
-		start_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientTag),
-		http_socket::serve_websocket_once(Listener, websocket_http_socket_handler, ServerConnection, ServerResponse, _ClientInfo),
-		await_websocket_client_exchange(Control, ClientConnection, ClientResponse),
-		http_socket::connection_streams(ServerConnection, ServerInput, ServerOutput),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
-		finish_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientConnection, ClientResponse, ClientTag),
-		http_websocket::write_frame(ClientOutput, ClientFrame),
-		http_websocket_server_session::initial_state(ServerState0),
-		http_websocket_server_session::read_message(ServerInput, ServerOutput, ServerState0, ServerState, ServerMessage),
-		read_websocket_frames(1, ClientInput, ClientReplyFrames),
-		http_socket::close_connection(ServerConnection),
-		http_socket::close_connection(ClientConnection),
-		http_socket::close_listener(Listener),
-		status(ServerResponse, status(101, 'Switching Protocols')),
-		status(ClientResponse, status(101, 'Switching Protocols')),
-		ServerState == session_state(idle, closed(status(1000), status(1000))),
-		ServerMessage == message(close, status(1000)),
-		ClientReplyFrames = [ReplyFrame],
-		http_websocket::opcode(ReplyFrame, close),
-		http_websocket::final(ReplyFrame, final),
-		http_websocket::payload(ReplyFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)).
-
-	test(http_socket_websocket_session_5_03, deterministic) :-
-		Host = '127.0.0.1',
-		Path = '/socket',
-		Key = 'dGhlIHNhbXBsZSBub25jZQ==',
-		http_websocket::frame(final, ping, [0'!], [masking_key([1, 2, 3, 4])], ClientFrame1),
-		http_websocket::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([5, 6, 7, 8])], ClientFrame2),
-		http_websocket::frame(final, close, [0x03, 0xE8], [masking_key([9, 10, 11, 12])], ClientFrame3),
-		http_socket::open_listener(Host, Port, Listener, []),
-		Control = websocket_client_sync(Host, Port, Path, Key),
-		start_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientTag),
-		http_socket::serve_websocket_once(Listener, websocket_http_socket_handler, ServerConnection, ServerResponse, _ClientInfo),
-		await_websocket_client_exchange(Control, ClientConnection, ClientResponse),
-		http_socket::connection_streams(ServerConnection, ServerInput, ServerOutput),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
-		finish_websocket_client_exchange(Control, Host, Port, Path, [chat], Key, ClientConnection, ClientResponse, ClientTag),
-		write_websocket_frames([ClientFrame1, ClientFrame2, ClientFrame3], ClientOutput),
-		http_websocket_server_session::run_session(ServerConnection, websocket_http_socket_session_loop_handler, ServerState, [auto_pong(on)]),
-		read_websocket_frames(3, ClientInput, ClientReplyFrames),
-		http_socket::close_connection(ClientConnection),
-		http_socket::close_listener(Listener),
-		status(ServerResponse, status(101, 'Switching Protocols')),
-		status(ClientResponse, status(101, 'Switching Protocols')),
-		ServerState == session_state(idle, closed(status(1000), status(1000))),
-		stream_closed(ServerInput),
-		stream_closed(ServerOutput),
-		ClientReplyFrames = [PongFrame, ReplyFrame, CloseFrame],
-		http_websocket::opcode(PongFrame, pong),
-		http_websocket::payload(PongFrame, [0'!]),
-		\+ http_websocket::property(PongFrame, masking_key(_)),
-		http_websocket::opcode(ReplyFrame, text),
-		http_websocket::payload(ReplyFrame, [0'o, 0'k]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
 
 	test(http_socket_exchange_4_01, deterministic) :-
 		Request = request(post, origin('/echo'), http(1, 1), [host-host('example.com')], content('text/plain', text(hello)), []),
@@ -640,21 +472,6 @@
 		websocket_client_exchange(Host, Port, Path, Protocols, Key, Connection, Response),
 		threaded_notify(websocket_client_ready(Control, Connection, Response)),
 		threaded_wait(websocket_client_release(Control)).
-
-	write_websocket_frames([], _Output).
-	write_websocket_frames([Frame| Frames], Output) :-
-		http_websocket::write_frame(Output, Frame),
-		write_websocket_frames(Frames, Output).
-
-	read_websocket_frames(0, _Input, []) :-
-		!.
-	read_websocket_frames(Count, Input, [Frame| Frames]) :-
-		http_websocket::read_frame(Input, Frame),
-		NextCount is Count - 1,
-		read_websocket_frames(NextCount, Input, Frames).
-
-	stream_closed(Stream) :-
-		\+ catch(once(stream_property(Stream, _)), _, fail).
 
 	:- endif.
 

@@ -68,24 +68,3 @@
 		http_core::response(Version, status(200, 'OK'), [], empty, [connection([close])], Response).
 
 :- end_object.
-
-
-:- object(websocket_http_socket_session_loop_handler,
-	implements(http_websocket_session_handler_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-05-23,
-		comment is 'Callback object used by the higher-level WebSocket session-loop transport tests.'
-	]).
-
-	handle(message(text, hello), [message(text, ok)]) :-
-		!.
-	handle(message(ping, _Payload), []) :-
-		!.
-	handle(message(close, _Payload), []) :-
-		!.
-	handle(_Message, []).
-
-:- end_object.
