@@ -37,15 +37,15 @@ Layering
 
 `rest` is the highest-level authoring layer in the current HTTP stack:
 
-- Start with [http](../http/NOTES.md) for normalized HTTP messages and with
-  [http_router](../http_router/NOTES.md) for declarative routing.
-- Use `rest` when you want to describe endpoints with `endpoint/5`, keep the
-  inherited `handle/2` entry point, and return small result terms instead of
-  building every response manually.
-- Stay with [http_router](../http_router/NOTES.md) when you need direct control
-  over `route/4`, custom handler predicates, or router hooks without the
+- Start with `http_core` library for normalized HTTP messages and with the
+  `http_router` library for declarative routing.
+- Use the `rest` library when you want to describe endpoints with `endpoint/5`,
+  keep the inherited `handle/2` entry point, and return small result terms
+  instead of building every response manually.
+- Stay with the `http_router` library when you need direct control over
+  `route/4`, custom handler predicates, or router hooks without the
   higher-level endpoint layer.
-- Pair REST applications with [open_api](../open_api/NOTES.md) when you want
+- Pair REST applications with the `open_api` library when you want
   derived OpenAPI documents or opt-in request and response contract
   validation.
 
@@ -86,6 +86,8 @@ predicates:
 - `request_header/3`
 - `request_body/2`
 - `json_body/2`
+- `json_object_body/2`
+- `json_array_body/2`
 - `form_body/2`
 - `text_body/2`
 - `binary_body/2`
@@ -145,14 +147,16 @@ the normalized derived properties produced by the `http_core` library such as
 deterministic lookups. The decoded body helpers return `400 Bad Request`
 problem responses when the current action expects a JSON, form, text, or
 binary body and the normalized request body is missing or has a different
-decoded shape.
+decoded shape. The `json_object_body/2` and `json_array_body/2` helpers build
+on `json_body/2` and additionally require the decoded JSON payload to be an
+object or array term respectively.
 
 Action result normalization currently builds normalized HTTP response terms
 using these rules:
 
 - successful JSON responses use the negotiated router media type when the
-  request carries a `response_media_type/1` annotation and otherwise fall
-  back to `application/json`
+  request carries a JSON-compatible `response_media_type/1` annotation and
+  otherwise fall back to `application/json`
 - problem responses always use `application/problem+json`
 
 When `open_api_validate_request/1` succeeds for a matched endpoint, the

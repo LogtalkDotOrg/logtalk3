@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'Unit tests for the "rest" library.'
 	]).
 
@@ -98,6 +98,38 @@
 	test(rest_helper_2_04, deterministic(Name == 'Ada')) :-
 		Request = request(get, origin('/search', 'name=Ada&name=Grace'), http(1, 1), [], empty, [query_pairs([name-'Ada', name-'Grace'])]),
 		sample_rest_application::query_parameter(Request, name, Name).
+
+	test(rest_json_body_shape_2_01, deterministic(JSONObject == {name-'Ada'})) :-
+		Request = request(post, origin('/helpers/object'), http(1, 1), [], content('application/json', json({name-'Ada'})), []),
+		sample_rest_application::json_object_body(Request, JSONObject).
+
+	test(rest_json_body_shape_2_02, deterministic(JSONArray == ['Ada', 'Grace'])) :-
+		Request = request(post, origin('/helpers/array'), http(1, 1), [], content('application/json', json(['Ada', 'Grace'])), []),
+		sample_rest_application::json_array_body(Request, JSONArray).
+
+	test(rest_json_body_shape_handle_2_01, deterministic) :-
+		Request = request(post, origin('/json/object'), http(1, 1), [], content('application/json', json({name-'Ada'})), []),
+		json_body_shapes_rest_application::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/json', json({name-'Ada'}))).
+
+	test(rest_json_body_shape_handle_2_02, deterministic) :-
+		Request = request(post, origin('/json/array'), http(1, 1), [], content('application/json', json([1, 2, 3])), []),
+		json_body_shapes_rest_application::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/json', json([1, 2, 3]))).
+
+	test(rest_json_body_shape_handle_2_03, deterministic) :-
+		Request = request(post, origin('/json/object'), http(1, 1), [], content('application/json', json([name-'Ada'])), []),
+		json_body_shapes_rest_application::handle(Request, Response),
+		status(Response, status(400, 'Bad Request')),
+		body(Response, content('application/problem+json', json({type-'urn:logtalk:invalid-request-body', title-'Bad Request', detail-'Expected JSON object request body.', status-400}))).
+
+	test(rest_json_body_shape_handle_2_04, deterministic) :-
+		Request = request(post, origin('/json/array'), http(1, 1), [], content('application/json', json({name-'Ada'})), []),
+		json_body_shapes_rest_application::handle(Request, Response),
+		status(Response, status(400, 'Bad Request')),
+		body(Response, content('application/problem+json', json({type-'urn:logtalk:invalid-request-body', title-'Bad Request', detail-'Expected JSON array request body.', status-400}))).
 
 	test(rest_handle_2_08, deterministic) :-
 		Request = request(get, origin('/variants/wrapped'), http(1, 1), [], empty, []),
@@ -181,6 +213,12 @@
 		status(Response, status(200, 'OK')),
 		body(Response, content('application/json', json({id-'42', format-default}))).
 
+	test(rest_handle_2_22, deterministic) :-
+		Request = request(get, origin('/mixed/items/42'), http(1, 1), [accept-'text/plain'], empty, []),
+		mixed_media_type_rest_application::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/json', json({id-'42', format-mixed}))).
+
 	test(rest_route_metadata_2_01, deterministic) :-
 		sample_rest_application::route_metadata_descriptor(show_item, Metadata),
 		Metadata == [summary('Show item'), tags([items])].
@@ -209,6 +247,35 @@
 		status(Response405, status(405, 'Method Not Allowed')),
 		sample_rest_application::json_response(Request, 406, {error-not_acceptable}, Response406),
 		status(Response406, status(406, 'Not Acceptable')).
+
+	test(rest_json_response_4_02, error(instantiation_error)) :-
+		Request = request(get, origin('/helpers/statuses'), http(1, 1), [], empty, []),
+		sample_rest_application::json_response(Request, _Status, {error-missing_status}, _Response).
+
+	test(rest_json_response_4_03, error(instantiation_error)) :-
+		Request = request(get, origin('/helpers/statuses'), http(1, 1), [], empty, []),
+		sample_rest_application::json_response(Request, status(_Code, 'Accepted'), {error-partial_status}, _Response).
+
+	test(rest_json_response_4_04, error(domain_error(http_status, status(99, 'Invalid')))) :-
+		Request = request(get, origin('/helpers/statuses'), http(1, 1), [], empty, []),
+		sample_rest_application::json_response(Request, status(99, 'Invalid'), {error-invalid_status_code}, _Response).
+
+	test(rest_json_response_4_05, error(domain_error(http_status, status(200, invalid_reason(detail))))) :-
+		Request = request(get, origin('/helpers/statuses'), http(1, 1), [], empty, []),
+		sample_rest_application::json_response(Request, status(200, invalid_reason(detail)), {error-invalid_status_reason}, _Response).
+
+	test(rest_json_response_4_06, deterministic) :-
+		Request = request(get, origin('/helpers/statuses'), http(1, 1), [], empty, [response_media_type('text/json')]),
+		sample_rest_application::json_response(Request, 200, {ok- @true}, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/json', json({ok- @true}))).
+
+	test(rest_json_response_5_01, deterministic) :-
+		Request = request(get, origin('/helpers/statuses'), http(1, 1), [], empty, [response_media_type('text/plain')]),
+		sample_rest_application::json_response(Request, 202, [x_test-yes], {accepted- @true}, Response),
+		status(Response, status(202, 'Accepted')),
+		header(Response, x_test, yes),
+		body(Response, content('application/json', json({accepted- @true}))).
 
 	test(rest_open_api_validation_2_01, deterministic) :-
 		Request = request(post, origin('/contract/items'), http(1, 1), [], content('application/json', json({name-'Guide'})), []),

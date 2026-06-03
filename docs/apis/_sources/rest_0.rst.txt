@@ -15,7 +15,7 @@ REST authoring layer built on top of the HTTP router category.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-27
+| **Date:** 2026-06-03
 
 | **Compilation flags:**
 |    ``static``
@@ -138,6 +138,60 @@ Returns the decoded JSON payload from a normalized request body and reports a cl
 | **Mode and number of proofs:**
 |    ``json_body(+compound,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The normalized request body is missing or is not decoded as JSON:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected JSON request body.)``
+
+
+------------
+
+.. index:: json_object_body/2
+.. _rest/0::json_object_body/2:
+
+``json_object_body/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the decoded JSON payload when it is a JSON object term and reports a client error when the request body is missing, not decoded as JSON, or not an object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object_body(Request,JSONObject)``
+| **Mode and number of proofs:**
+|    ``json_object_body(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The normalized request body is missing or is not decoded as JSON:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected JSON request body.)``
+|    The decoded JSON payload is not a JSON object term:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected JSON object request body.)``
+
+
+------------
+
+.. index:: json_array_body/2
+.. _rest/0::json_array_body/2:
+
+``json_array_body/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the decoded JSON payload when it is a JSON array term and reports a client error when the request body is missing, not decoded as JSON, or not an array.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_array_body(Request,JSONArray)``
+| **Mode and number of proofs:**
+|    ``json_array_body(+compound,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The normalized request body is missing or is not decoded as JSON:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected JSON request body.)``
+|    The decoded JSON payload is not a JSON array term:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected JSON array request body.)``
+
 
 ------------
 
@@ -156,6 +210,10 @@ Returns the decoded form payload from a normalized request body and reports a cl
 |    ``form_body(Request,Pairs)``
 | **Mode and number of proofs:**
 |    ``form_body(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The normalized request body is missing or is not decoded as form data:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected form request body.)``
 
 
 ------------
@@ -176,6 +234,10 @@ Returns the decoded text payload from a normalized request body and reports a cl
 | **Mode and number of proofs:**
 |    ``text_body(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The normalized request body is missing or is not decoded as text:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected text request body.)``
+
 
 ------------
 
@@ -194,6 +256,10 @@ Returns the decoded binary payload from a normalized request body and reports a 
 |    ``binary_body(Request,Bytes)``
 | **Mode and number of proofs:**
 |    ``binary_body(+compound,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The normalized request body is missing or is not decoded as binary:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected binary request body.)``
 
 
 ------------
@@ -214,6 +280,14 @@ Builds a JSON response for the given request and status descriptor, honoring any
 | **Mode and number of proofs:**
 |    ``json_response(+compound,++term,++term,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Status`` is a variable or a ``status(Code, Reason)`` term with a variable argument:
+|        ``instantiation_error``
+|    ``Status`` is an integer without a built-in reason phrase supported by the rest library:
+|        ``domain_error(http_status_code,Status)``
+|    ``Status`` is neither an integer nor a valid normalized HTTP status term:
+|        ``domain_error(http_status,Status)``
+
 
 ------------
 
@@ -233,6 +307,16 @@ Builds a JSON response for the given request and status descriptor, honoring any
 | **Mode and number of proofs:**
 |    ``json_response(+compound,++term,+list(compound),++term,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Status`` is a variable or a ``status(Code, Reason)`` term with a variable argument:
+|        ``instantiation_error``
+|    ``Status`` is an integer without a built-in reason phrase supported by the rest library:
+|        ``domain_error(http_status_code,Status)``
+|    ``Status`` is neither an integer nor a valid normalized HTTP status term:
+|        ``domain_error(http_status,Status)``
+|    ``Headers`` is not a valid normalized header list:
+|        ``domain_error(http_headers,Headers)``
+
 
 ------------
 
@@ -251,6 +335,10 @@ Builds a ``201 Created`` JSON response with a ``Location`` header, honoring any 
 |    ``created_response(Request,Location,JSON,Response)``
 | **Mode and number of proofs:**
 |    ``created_response(+compound,++term,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Location`` is not a valid normalized header value:
+|        ``domain_error(http_header_value,Location)``
 
 
 ------------
@@ -289,6 +377,14 @@ Builds an ``application/problem+json`` response with the standard ``type``, ``ti
 |    ``problem_response(Request,Status,Type,Title,Detail,Response)``
 | **Mode and number of proofs:**
 |    ``problem_response(+compound,++term,++atom,++atom,++atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is a variable or a ``status(Code, Reason)`` term with a variable argument:
+|        ``instantiation_error``
+|    ``Status`` is an integer without a built-in reason phrase supported by the rest library:
+|        ``domain_error(http_status_code,Status)``
+|    ``Status`` is neither an integer nor a valid normalized HTTP status term:
+|        ``domain_error(http_status,Status)``
 
 
 ------------

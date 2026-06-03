@@ -369,15 +369,15 @@ transport or dispatch layer:</p>
 <ul class="simple">
 <li><p>Use it standalone when you only need to parse, generate, or
 structurally validate OpenAPI documents.</p></li>
-<li><p>Pair it with <a class="reference external" href="../http/NOTES.md">http</a> when you need request or
+<li><p>Pair it with the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library when you need request or
 response contract validation against normalized HTTP terms or wire
 sources.</p></li>
-<li><p>Pair it with <a class="reference external" href="../http_router/NOTES.md">http_router</a> when router
-objects expose <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code> metadata derived from
-<code class="docutils literal notranslate"><span class="pre">route/4</span></code>, <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code>.</p></li>
-<li><p>Pair it with <a class="reference external" href="../rest/NOTES.md">rest</a> when you want the same
-validation and document derivation over higher-level endpoint
-descriptors built on top of <code class="docutils literal notranslate"><span class="pre">http_router</span></code>.</p></li>
+<li><p>Pair it with <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library when router objects expose
+<code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code> metadata derived from <code class="docutils literal notranslate"><span class="pre">route/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code>.</p></li>
+<li><p>Pair it with <code class="docutils literal notranslate"><span class="pre">rest</span></code> library when you want the same validation and
+document derivation over higher-level endpoint descriptors built on
+top of <code class="docutils literal notranslate"><span class="pre">http_router</span></code>.</p></li>
 <li><p>Use it directly with custom provider objects when your API description
 source is not a router or REST object.</p></li>
 </ul>
@@ -401,6 +401,10 @@ link in a web browser.</p>
 <li><p>Derive OpenAPI 3.1.0 documents from provider objects exposing
 <code class="docutils literal notranslate"><span class="pre">api_info/1</span></code>, <code class="docutils literal notranslate"><span class="pre">servers/1</span></code>, <code class="docutils literal notranslate"><span class="pre">security/1</span></code>, <code class="docutils literal notranslate"><span class="pre">operations/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">schema/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code></p></li>
+<li><p>Construct reusable JSON descriptor terms using helper predicates for
+<code class="docutils literal notranslate"><span class="pre">media/2</span></code>, <code class="docutils literal notranslate"><span class="pre">request_body/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">response/3</span></code>, validating
+JSON-compatible media types, response status keys, and shallow
+schema-term shape, including boolean schemas</p></li>
 <li><p>Resolve provider operations by <code class="docutils literal notranslate"><span class="pre">operationId</span></code> using <code class="docutils literal notranslate"><span class="pre">operation/3</span></code></p></li>
 <li><p>Validate normalized HTTP request and response terms, or objects
 implementing the <code class="docutils literal notranslate"><span class="pre">http_request_protocol</span></code> and
@@ -487,6 +491,10 @@ query-string parsing is intentionally out of scope for this first pass</p></li>
 <li><p>Request and response body validation currently supports <code class="docutils literal notranslate"><span class="pre">json/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">text/1</span></code>, <code class="docutils literal notranslate"><span class="pre">binary/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">form/1</span></code> payload terms; multipart
 payload validation remains out of scope</p></li>
+<li><p>The JSON helper predicates validate media types and response status
+keys eagerly, but schema validation at the helper boundary remains
+intentionally shallow and only checks for boolean schemas, JSON object
+terms, or <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> references</p></li>
 </ul>
 </section>
 <section id="usage">
@@ -508,21 +516,51 @@ payload validation remains out of scope</p></li>
 </div>
 <p>Resolve an operation descriptor and validate normalized requests,
 responses, or HTTP wire sources against it:</p>
-<p>| ?- open_api::operation(sample_open_api_provider, update_user,
-Operation).</p>
-<p>| ?- open_api::validate_request( sample_open_api_provider, update_user,
-request( put, origin(‘/users/11111111-1111-1111-1111-111111111111’),
-http(1, 1), [], content(‘application/json’, json({name-‘Alice Example’,
-active-true})), [query_pairs([verbose-true])] ), Errors ).</p>
-<p>| ?- open_api::validate_response( sample_open_api_provider, get_user,
-response( http(1, 1), status(404, ‘Not Found’), [],
-content(‘application/json’, json({code-not_found, message-‘User not
-found’})), [] ) ).</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> open_api<span class="o">::</span>validate_http_request(
-     sample_open_api_provider,
-     update_user,
-     <span class="k">atom</span>(<span class="s">&#39;PUT /users/11111111-1111-1111-1111-111111111111?verbose=true HTTP/1.1</span><span class="se">\r\n</span><span class="s">content-type: application/json</span><span class="se">\r\n\r\n</span><span class="s">{&quot;name&quot;:&quot;Alice Example&quot;,&quot;active&quot;:true}&#39;</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> open_api<span class="o">::</span>operation(sample_open_api_provider, update_user, <span class="nv">Operation</span>).
+
+| <span class="o">?-</span> open_api<span class="o">::</span>validate_request(
+      sample_open_api_provider,
+      update_user,
+      request(
+          put,
+          origin(<span class="s">&#39;/users/11111111-1111-1111-1111-111111111111&#39;</span>),
+          http(<span class="m">1</span>, <span class="m">1</span>),
+          [],
+          content(<span class="s">&#39;application/json&#39;</span>, json(<span class="k">{</span>name<span class="o">-</span><span class="s">&#39;Alice Example&#39;</span>, active<span class="o">-</span><span class="k">true}</span>)),
+          [query_pairs([verbose<span class="o">-</span><span class="k">true</span>])]
+      ),
+      <span class="nv">Errors</span>
    ).
+
+| <span class="o">?-</span> open_api<span class="o">::</span>validate_response(
+        sample_open_api_provider,
+        get_user,
+        response(
+            http(<span class="m">1</span>, <span class="m">1</span>),
+            status(<span class="m">404</span>, <span class="s">&#39;Not Found&#39;</span>),
+            [],
+            content(<span class="s">&#39;application/json&#39;</span>, json(<span class="k">{</span>code<span class="o">-</span>not_found, message<span class="o">-</span><span class="s">&#39;User not found&#39;</span><span class="k">}</span>)),
+            []
+        )
+     ).
+
+| <span class="o">?-</span> open_api<span class="o">::</span>validate_http_request(
+        sample_open_api_provider,
+        update_user,
+        <span class="k">atom</span>(<span class="s">&#39;PUT /users/11111111-1111-1111-1111-111111111111?verbose=true HTTP/1.1</span><span class="se">\r\n</span><span class="s">content-type: application/json</span><span class="se">\r\n\r\n</span><span class="s">{&quot;name&quot;:&quot;Alice Example&quot;,&quot;active&quot;:true}&#39;</span>)
+     ).
+</pre></div>
+</div>
+<p>Construct standard JSON request and response descriptors when building
+provider operations programmatically:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> open_api<span class="o">::</span>json_request_body_descriptor(
+        <span class="s">&#39;Message payload&#39;</span>,
+        <span class="k">true</span>,
+        <span class="k">{</span>type<span class="o">-</span>object, properties<span class="o">-</span><span class="k">{</span>title<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>string<span class="k">}}</span>, required<span class="o">-</span>[title], additionalProperties<span class="o">-</span> <span class="o">@</span><span class="k">false}</span>,
+        <span class="nv">RequestBody</span>
+     ).
+
+| <span class="o">?-</span> open_api<span class="o">::</span>problem_response_descriptor(default, <span class="s">&#39;Problem response&#39;</span>, <span class="nv">Response</span>).
 </pre></div>
 </div>
 </section>

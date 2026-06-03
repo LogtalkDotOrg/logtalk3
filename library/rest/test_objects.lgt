@@ -164,6 +164,50 @@
 :- end_object.
 
 
+	:- object(json_body_shapes_rest_application,
+		implements(http_handler_protocol),
+		imports(rest)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-06-03,
+			comment is 'REST application object used by the rest library tests to exercise JSON object and array body helpers.'
+		]).
+
+		:- protected(endpoint/5).
+		:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
+		:- info(endpoint/5, [
+			comment is 'Declares the REST endpoints used by the JSON body helper tests.',
+			argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
+		]).
+
+		:- protected(echo_object/2).
+		:- mode(echo_object(+compound, -compound), one_or_error).
+		:- info(echo_object/2, [
+			comment is 'Action used by the JSON body helper REST application for the ``POST /json/object`` endpoint.',
+			argnames is ['Request', 'Result']
+		]).
+
+		:- protected(echo_array/2).
+		:- mode(echo_array(+compound, -compound), one_or_error).
+		:- info(echo_array/2, [
+			comment is 'Action used by the JSON body helper REST application for the ``POST /json/array`` endpoint.',
+			argnames is ['Request', 'Result']
+		]).
+
+		endpoint(echo_object, post, '/json/object', echo_object, [produces(['application/json'])]).
+		endpoint(echo_array, post, '/json/array', echo_array, [produces(['application/json'])]).
+
+		echo_object(Request, ok(JSONObject)) :-
+			::json_object_body(Request, JSONObject).
+
+		echo_array(Request, ok(JSONArray)) :-
+			::json_array_body(Request, JSONArray).
+
+	:- end_object.
+
+
 :- object(result_variants_rest_application,
 	implements(http_handler_protocol),
 	imports(rest)).
@@ -526,6 +570,36 @@
 	accepted_vendor_item(_Request, json(202, {accepted- @true})).
 
 	missing_vendor_item(_Request, problem(404, 'urn:logtalk:vendor-missing', 'Not Found', 'Vendor item not found')).
+
+:- end_object.
+
+
+:- object(mixed_media_type_rest_application,
+	implements(http_handler_protocol),
+	imports(rest)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-03,
+		comment is 'REST application object used by the rest library tests to exercise fallback from negotiated non-JSON media types when using JSON response helpers.'
+	]).
+
+	:- protected(endpoint/5).
+	:- info(endpoint/5, [
+		comment is 'Declares the mixed-media endpoint used by the rest library tests.',
+		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
+	]).
+
+	:- protected(show_mixed_item/2).
+	:- info(show_mixed_item/2, [
+		comment is 'Action used by the mixed-media REST application for the ``GET /mixed/items/42`` endpoint.',
+		argnames is ['Request', 'Result']
+	]).
+
+	endpoint(show_mixed_item, get, '/mixed/items/42', show_mixed_item, [produces(['application/json', 'text/plain'])]).
+
+	show_mixed_item(_Request, ok({id-'42', format-mixed})).
 
 :- end_object.
 

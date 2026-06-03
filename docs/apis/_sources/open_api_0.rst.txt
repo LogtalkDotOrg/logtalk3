@@ -15,7 +15,7 @@ OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -306,6 +306,232 @@ Parses an HTTP response wire source using the ``http_core`` library and validate
 |    ``validate_http_response(Provider,OperationId,Source,Errors)``
 | **Mode and number of proofs:**
 |    ``validate_http_response(+object_identifier,+atom,++compound,--list)`` - ``one``
+
+
+------------
+
+.. index:: json_media_descriptor/2
+.. _open_api/0::json_media_descriptor/2:
+
+``json_media_descriptor/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI JSON media descriptor using the default ``application/json`` media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_media_descriptor(Schema,MediaDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_media_descriptor(++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: json_media_descriptor/3
+.. _open_api/0::json_media_descriptor/3:
+
+``json_media_descriptor/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI JSON media descriptor using the given media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_media_descriptor(MediaType,Schema,MediaDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_media_descriptor(+atom,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``MediaType`` is a variable:
+|        ``instantiation_error``
+|    ``MediaType`` is neither a variable nor an atom:
+|        ``domain_error(open_api_media_type,MediaType)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: json_request_body_descriptor/4
+.. _open_api/0::json_request_body_descriptor/4:
+
+``json_request_body_descriptor/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI request-body descriptor using the default ``application/json`` media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_request_body_descriptor(Description,Required,Schema,RequestBody)``
+| **Mode and number of proofs:**
+|    ``json_request_body_descriptor(+atom,+boolean,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``Required`` is a variable:
+|        ``instantiation_error``
+|    ``Required`` is neither a variable nor a boolean:
+|        ``domain_error(open_api_boolean,Required)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: json_request_body_descriptor/5
+.. _open_api/0::json_request_body_descriptor/5:
+
+``json_request_body_descriptor/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI request-body descriptor using the given media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_request_body_descriptor(MediaType,Description,Required,Schema,RequestBody)``
+| **Mode and number of proofs:**
+|    ``json_request_body_descriptor(+atom,+atom,+boolean,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``MediaType`` is a variable:
+|        ``instantiation_error``
+|    ``MediaType`` is neither a variable nor an atom:
+|        ``domain_error(open_api_media_type,MediaType)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``Required`` is a variable:
+|        ``instantiation_error``
+|    ``Required`` is neither a variable nor a boolean:
+|        ``domain_error(open_api_boolean,Required)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: json_response_descriptor/4
+.. _open_api/0::json_response_descriptor/4:
+
+``json_response_descriptor/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI response descriptor using the default ``application/json`` media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_response_descriptor(Status,Description,Schema,ResponseDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_response_descriptor(++term,+atom,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is a variable:
+|        ``instantiation_error``
+|    ``Status`` is neither a variable nor a valid OpenAPI response status:
+|        ``domain_error(open_api_response_status,Status)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: json_response_descriptor/5
+.. _open_api/0::json_response_descriptor/5:
+
+``json_response_descriptor/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI response descriptor using the given media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_response_descriptor(Status,Description,MediaType,Schema,ResponseDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_response_descriptor(++term,+atom,+atom,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is a variable:
+|        ``instantiation_error``
+|    ``Status`` is neither a variable nor a valid OpenAPI response status:
+|        ``domain_error(open_api_response_status,Status)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``MediaType`` is a variable:
+|        ``instantiation_error``
+|    ``MediaType`` is neither a variable nor an atom:
+|        ``domain_error(open_api_media_type,MediaType)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: problem_json_schema/1
+.. _open_api/0::problem_json_schema/1:
+
+``problem_json_schema/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an inline RFC 7807-compatible JSON schema for problem responses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problem_json_schema(Schema)``
+| **Mode and number of proofs:**
+|    ``problem_json_schema(-term)`` - ``one``
+
+
+------------
+
+.. index:: problem_response_descriptor/3
+.. _open_api/0::problem_response_descriptor/3:
+
+``problem_response_descriptor/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI problem-response descriptor using the ``application/problem+json`` media type and the default problem schema.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problem_response_descriptor(Status,Description,ResponseDescriptor)``
+| **Mode and number of proofs:**
+|    ``problem_response_descriptor(++term,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is not a valid OpenAPI response status:
+|        ``domain_error(open_api_response_status,Status)``
+|    ``Description`` is not an atom:
+|        ``domain_error(open_api_description,Description)``
 
 
 ------------

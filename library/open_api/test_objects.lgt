@@ -39,6 +39,45 @@
 
 
 :- object(
+	boolean_schema_descriptor_helper_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Boolean Schema Helper API', '1.0.0', 'Fixture provider using boolean schemas with the OpenAPI JSON descriptor helper predicates.', [])).
+	servers([]).
+	security([]).
+	operations([
+		operation(
+			check_feature_flag,
+			post,
+			'/feature-flags/check',
+			'Check feature flag',
+			[],
+			RequestBody,
+			[ResponseDescriptor],
+			[]
+		)
+	]) :-
+		open_api::json_request_body_descriptor(
+			'No JSON payload is accepted for this operation.',
+			false,
+			false,
+			RequestBody
+		),
+		open_api::json_response_descriptor(
+			200,
+			'Any JSON response is accepted.',
+			true,
+			ResponseDescriptor
+		).
+	schema(_, _) :-
+		fail.
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(
 	missing_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
@@ -785,6 +824,61 @@
 		fail.
 	body(content('text/plain', text(ok))).
 	property(_) :-
+		fail.
+
+:- end_object.
+
+
+:- object(
+	json_descriptor_helper_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('JSON Descriptor Helper API', '1.0.0', 'Fixture provider using the OpenAPI JSON descriptor helper predicates.', [])).
+	servers([]).
+	security([]).
+	operations([
+		operation(
+			create_widget,
+			post,
+			'/widgets',
+			'Create widget',
+			[],
+			RequestBody,
+			[CreatedResponse, ErrorResponse],
+			[]
+		)
+	]) :-
+		open_api::json_request_body_descriptor(
+			'Widget payload',
+			true,
+			{
+				type-object,
+				properties-{
+					title-{type-string}
+				},
+				required-[title],
+				additionalProperties- @false
+			},
+			RequestBody
+		),
+		open_api::json_response_descriptor(
+			201,
+			'Created',
+			{
+				type-object,
+				properties-{
+					id-{type-string},
+					title-{type-string}
+				},
+				required-[id, title],
+				additionalProperties- @false
+			},
+			CreatedResponse
+		),
+		open_api::problem_response_descriptor(default, 'Error response', ErrorResponse).
+	schema(_, _) :-
+		fail.
+	security_scheme(_, _) :-
 		fail.
 
 :- end_object.

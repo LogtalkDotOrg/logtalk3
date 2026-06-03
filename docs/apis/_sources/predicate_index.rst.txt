@@ -11444,6 +11444,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::join_packet_zone/4>`
 
+``json_array_body/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::json_array_body/2>`
+
 ``json_body/2``
 ---------------
 
@@ -11453,6 +11463,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`rest <rest/0::json_body/2>`
+
+``json_media_descriptor/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::json_media_descriptor/2>`
+
+``json_media_descriptor/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::json_media_descriptor/3>`
+
+``json_object_body/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`rest <rest/0::json_object_body/2>`
+
+``json_request_body_descriptor/4``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::json_request_body_descriptor/4>`
+
+``json_request_body_descriptor/5``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::json_request_body_descriptor/5>`
 
 ``json_response/4``
 -------------------
@@ -11473,6 +11533,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`rest <rest/0::json_response/5>`
+
+``json_response_descriptor/4``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::json_response_descriptor/4>`
+
+``json_response_descriptor/5``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::json_response_descriptor/5>`
 
 ``json_to_geojson/2``
 ---------------------
@@ -18342,6 +18422,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`regressor_protocol <regressor_protocol/0::print_regressor/1>`
 
+``problem_json_schema/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::problem_json_schema/1>`
+
 ``problem_response/6``
 ----------------------
 
@@ -18351,6 +18441,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`rest <rest/0::problem_response/6>`
+
+``problem_response_descriptor/3``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_api <open_api/0::problem_response_descriptor/3>`
 
 ``product/2``
 -------------

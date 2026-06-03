@@ -370,18 +370,17 @@ into HTTP responses.</p>
 <h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">rest</span></code> is the highest-level authoring layer in the current HTTP stack:</p>
 <ul class="simple">
-<li><p>Start with <a class="reference external" href="../http/NOTES.md">http</a> for normalized HTTP messages
-and with <a class="reference external" href="../http_router/NOTES.md">http_router</a> for declarative
-routing.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">rest</span></code> when you want to describe endpoints with <code class="docutils literal notranslate"><span class="pre">endpoint/5</span></code>,
-keep the inherited <code class="docutils literal notranslate"><span class="pre">handle/2</span></code> entry point, and return small result
-terms instead of building every response manually.</p></li>
-<li><p>Stay with <a class="reference external" href="../http_router/NOTES.md">http_router</a> when you need
-direct control over <code class="docutils literal notranslate"><span class="pre">route/4</span></code>, custom handler predicates, or router
-hooks without the higher-level endpoint layer.</p></li>
-<li><p>Pair REST applications with <a class="reference external" href="../open_api/NOTES.md">open_api</a> when
-you want derived OpenAPI documents or opt-in request and response
-contract validation.</p></li>
+<li><p>Start with <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library for normalized HTTP messages and with
+the <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library for declarative routing.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">rest</span></code> library when you want to describe endpoints with
+<code class="docutils literal notranslate"><span class="pre">endpoint/5</span></code>, keep the inherited <code class="docutils literal notranslate"><span class="pre">handle/2</span></code> entry point, and
+return small result terms instead of building every response manually.</p></li>
+<li><p>Stay with the <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library when you need direct control
+over <code class="docutils literal notranslate"><span class="pre">route/4</span></code>, custom handler predicates, or router hooks without
+the higher-level endpoint layer.</p></li>
+<li><p>Pair REST applications with the <code class="docutils literal notranslate"><span class="pre">open_api</span></code> library when you want
+derived OpenAPI documents or opt-in request and response contract
+validation.</p></li>
 </ul>
 </section>
 <section id="api-documentation">
@@ -416,6 +415,8 @@ helper predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">request_header/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">request_body/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">json_body/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">json_object_body/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">json_array_body/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">form_body/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">text_body/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">binary_body/2</span></code></p></li>
@@ -476,13 +477,15 @@ provided by <code class="docutils literal notranslate"><span class="pre">http_co
 lookups. The decoded body helpers return <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> problem
 responses when the current action expects a JSON, form, text, or binary
 body and the normalized request body is missing or has a different
-decoded shape.</p>
+decoded shape. The <code class="docutils literal notranslate"><span class="pre">json_object_body/2</span></code> and <code class="docutils literal notranslate"><span class="pre">json_array_body/2</span></code>
+helpers build on <code class="docutils literal notranslate"><span class="pre">json_body/2</span></code> and additionally require the decoded
+JSON payload to be an object or array term respectively.</p>
 <p>Action result normalization currently builds normalized HTTP response
 terms using these rules:</p>
 <ul class="simple">
 <li><p>successful JSON responses use the negotiated router media type when
-the request carries a <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code> annotation and
-otherwise fall back to <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p></li>
+the request carries a JSON-compatible <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code>
+annotation and otherwise fall back to <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p></li>
 <li><p>problem responses always use <code class="docutils literal notranslate"><span class="pre">application/problem+json</span></code></p></li>
 </ul>
 <p>When <code class="docutils literal notranslate"><span class="pre">open_api_validate_request/1</span></code> succeeds for a matched endpoint,

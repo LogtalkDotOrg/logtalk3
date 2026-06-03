@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-03,
 		comment is 'Unit tests for the "open_api" library.'
 	]).
 
@@ -34,22 +34,16 @@
 	]).
 
 	:- uses(open_api, [
-		document/2,
-		parse/2,
-		generate/2,
-		validate_document/1,
-		validate_document/2,
-		operation/3,
-		validate_request/3,
-		validate_request/4,
-		validate_http_request/3,
-		validate_response/3,
-		validate_response/4,
-		validate_http_response/3
+		document/2, parse/2, generate/2, validate_document/1, validate_document/2, operation/3,
+		json_media_descriptor/2, json_media_descriptor/3, json_request_body_descriptor/4,
+		json_request_body_descriptor/5, json_response_descriptor/4, json_response_descriptor/5,
+		problem_json_schema/1, problem_response_descriptor/3, validate_request/3, validate_request/4,
+		validate_http_request/3, validate_response/3, validate_response/4, validate_http_response/3
 	]).
 
 	cover(open_api).
 	cover(sample_open_api_provider).
+	cover(boolean_schema_descriptor_helper_provider).
 
 	test(open_api_document_2_01, deterministic) :-
 		document(sample_open_api_provider, Document),
@@ -101,6 +95,117 @@
 
 	test(open_api_operation_3_02, error(existence_error(open_api_operation, delete_user))) :-
 		operation(sample_open_api_provider, delete_user, _).
+
+	test(open_api_descriptor_helper_2_01, deterministic(MediaDescriptor == media('application/json', {type-string}))) :-
+		json_media_descriptor({type-string}, MediaDescriptor).
+
+	test(open_api_descriptor_helper_2_02, deterministic(MediaDescriptor == media('application/json', schema_ref(widget)))) :-
+		json_media_descriptor(schema_ref(widget), MediaDescriptor).
+
+	test(open_api_descriptor_helper_2_04, deterministic(MediaDescriptor == media('application/json', true))) :-
+		json_media_descriptor(true, MediaDescriptor).
+
+	test(open_api_descriptor_helper_3_01, deterministic(MediaDescriptor == media('application/vnd.example+json', {type-object}))) :-
+		json_media_descriptor('application/vnd.example+json', {type-object}, MediaDescriptor).
+
+	test(open_api_descriptor_helper_3_02a, deterministic(MediaDescriptor == media('text/json', {type-string}))) :-
+		json_media_descriptor('text/json', {type-string}, MediaDescriptor).
+
+	test(open_api_descriptor_helper_4_01, deterministic(RequestBody == request_body('Widget payload', true, [media('application/json', {type-object})]))) :-
+		json_request_body_descriptor('Widget payload', true, {type-object}, RequestBody).
+
+	test(open_api_descriptor_helper_4_07, deterministic(RequestBody == request_body('No payload', false, [media('application/json', false)]))) :-
+		json_request_body_descriptor('No payload', false, false, RequestBody).
+
+	test(open_api_descriptor_helper_5_01, deterministic(RequestBody == request_body('Widget payload', false, [media('application/vnd.example+json', {type-object})]))) :-
+		json_request_body_descriptor('application/vnd.example+json', 'Widget payload', false, {type-object}, RequestBody).
+
+	test(open_api_descriptor_helper_4_02, deterministic(ResponseDescriptor == response(201, 'Created', [media('application/json', {type-object})]))) :-
+		json_response_descriptor(201, 'Created', {type-object}, ResponseDescriptor).
+
+	test(open_api_descriptor_helper_4_03, deterministic(ResponseDescriptor == response('2XX', 'Successful response', [media('application/json', schema_ref(widget))]))) :-
+		json_response_descriptor('2XX', 'Successful response', schema_ref(widget), ResponseDescriptor).
+
+	test(open_api_descriptor_helper_4_08, deterministic(ResponseDescriptor == response(200, 'Any JSON', [media('application/json', true)]))) :-
+		json_response_descriptor(200, 'Any JSON', true, ResponseDescriptor).
+
+	test(open_api_descriptor_helper_5_02, deterministic(ResponseDescriptor == response(default, 'Error response', [media('application/vnd.example+json', {type-object})]))) :-
+		json_response_descriptor(default, 'Error response', 'application/vnd.example+json', {type-object}, ResponseDescriptor).
+
+	test(open_api_descriptor_helper_1_01, deterministic(ProblemSchema == {
+		type-object,
+		properties-{
+			type-{type-string, format-'uri-reference'},
+			title-{type-string},
+			detail-{type-string},
+			status-{type-integer}
+		},
+		required-[type, title, detail, status],
+		additionalProperties- @true
+	})) :-
+		problem_json_schema(ProblemSchema).
+
+	test(open_api_descriptor_helper_3_02, deterministic(ResponseDescriptor == response(400, 'Bad Request', [media('application/problem+json', ProblemSchema)]))) :-
+		problem_json_schema(ProblemSchema),
+		problem_response_descriptor(400, 'Bad Request', ResponseDescriptor).
+
+	test(open_api_descriptor_helper_3_05, error(domain_error(open_api_media_type, 'text/plain'))) :-
+		json_media_descriptor('text/plain', {type-object}, _MediaDescriptor).
+
+	test(open_api_descriptor_helper_4_04, error(domain_error(open_api_response_status, 42))) :-
+		json_response_descriptor(42, 'Invalid', {type-object}, _ResponseDescriptor).
+
+	test(open_api_descriptor_helper_4_05, error(domain_error(open_api_response_status, '9XX'))) :-
+		json_response_descriptor('9XX', 'Invalid', {type-object}, _ResponseDescriptor).
+
+	test(open_api_descriptor_helper_4_06, error(domain_error(open_api_json_schema_term, 42))) :-
+		json_request_body_descriptor('Payload', true, 42, _RequestBody).
+
+	test(open_api_descriptor_helper_2_03, error(domain_error(open_api_json_schema_term, schema_ref(42)))) :-
+		json_media_descriptor(schema_ref(42), _MediaDescriptor).
+
+	test(open_api_descriptor_helper_3_03, deterministic) :-
+		validate_request(
+			json_descriptor_helper_provider,
+			create_widget,
+			request(
+				post,
+				origin('/widgets'),
+				http(1, 1),
+				[],
+				content('application/json', json({title-'Guide'})),
+				[]
+			)
+		).
+
+	test(open_api_document_2_25, deterministic) :-
+		document(boolean_schema_descriptor_helper_provider, Document),
+		validate_document(Document),
+		json_field(Document, paths, Paths),
+		json_field(Paths, '/feature-flags/check', PathItem),
+		json_field(PathItem, post, Operation),
+		json_field(Operation, requestBody, RequestBody),
+		json_field(RequestBody, content, RequestContent),
+		json_field(RequestContent, 'application/json', RequestMedia),
+		json_field(RequestMedia, schema, @false),
+		json_field(Operation, responses, Responses),
+		json_field(Responses, '200', ResponseDescriptor),
+		json_field(ResponseDescriptor, content, ResponseContent),
+		json_field(ResponseContent, 'application/json', ResponseMedia),
+		json_field(ResponseMedia, schema, @true).
+
+	test(open_api_descriptor_helper_3_04, deterministic) :-
+		validate_response(
+			json_descriptor_helper_provider,
+			create_widget,
+			response(
+				http(1, 1),
+				status(201, 'Created'),
+				[],
+				content('application/json', json({id-'100', title-'Guide'})),
+				[]
+			)
+		).
 
 	test(open_api_document_2_02, error(domain_error(open_api_operation_id, duplicate(shared_operation)))) :-
 		document(duplicate_operation_id_provider, _).

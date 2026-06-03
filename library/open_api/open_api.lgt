@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-03,
 		comment is 'OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.',
 		see_also is [json, json_schema, application_protocol, open_api_provider_protocol]
 	]).
@@ -149,6 +149,114 @@
 	:- info(validate_http_response/4, [
 		comment is 'Parses an HTTP response wire source using the ``http_core`` library and validates the resulting normalized response against the provider operation descriptor identified by the given ``operationId``.',
 		argnames is ['Provider', 'OperationId', 'Source', 'Errors']
+	]).
+
+	:- public(json_media_descriptor/2).
+	:- mode(json_media_descriptor(++term, -compound), one_or_error).
+	:- info(json_media_descriptor/2, [
+		comment is 'Constructs an OpenAPI JSON media descriptor using the default ``application/json`` media type.',
+		argnames is ['Schema', 'MediaDescriptor'],
+		exceptions is [
+			'``Schema`` is a variable' - instantiation_error,
+			'``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term' - domain_error(open_api_json_schema_term, 'Schema')
+		]
+	]).
+
+	:- public(json_media_descriptor/3).
+	:- mode(json_media_descriptor(+atom, ++term, -compound), one_or_error).
+	:- info(json_media_descriptor/3, [
+		comment is 'Constructs an OpenAPI JSON media descriptor using the given media type.',
+		argnames is ['MediaType', 'Schema', 'MediaDescriptor'],
+		exceptions is [
+			'``MediaType`` is a variable' - instantiation_error,
+			'``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom' - domain_error(open_api_media_type, 'MediaType'),
+			'``Schema`` is a variable' - instantiation_error,
+			'``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term' - domain_error(open_api_json_schema_term, 'Schema')
+		]
+	]).
+
+	:- public(json_request_body_descriptor/4).
+	:- mode(json_request_body_descriptor(+atom, +boolean, ++term, -compound), one_or_error).
+	:- info(json_request_body_descriptor/4, [
+		comment is 'Constructs an OpenAPI request-body descriptor using the default ``application/json`` media type.',
+		argnames is ['Description', 'Required', 'Schema', 'RequestBody'],
+		exceptions is [
+			'``Description`` is a variable' - instantiation_error,
+			'``Description`` is neither a variable nor an atom' - domain_error(open_api_description, 'Description'),
+			'``Required`` is a variable' - instantiation_error,
+			'``Required`` is neither a variable nor a boolean' - domain_error(open_api_boolean, 'Required'),
+			'``Schema`` is a variable' - instantiation_error,
+			'``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term' - domain_error(open_api_json_schema_term, 'Schema')
+		]
+	]).
+
+	:- public(json_request_body_descriptor/5).
+	:- mode(json_request_body_descriptor(+atom, +atom, +boolean, ++term, -compound), one_or_error).
+	:- info(json_request_body_descriptor/5, [
+		comment is 'Constructs an OpenAPI request-body descriptor using the given media type.',
+		argnames is ['MediaType', 'Description', 'Required', 'Schema', 'RequestBody'],
+		exceptions is [
+			'``MediaType`` is a variable' - instantiation_error,
+			'``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom' - domain_error(open_api_media_type, 'MediaType'),
+			'``Description`` is a variable' - instantiation_error,
+			'``Description`` is neither a variable nor an atom' - domain_error(open_api_description, 'Description'),
+			'``Required`` is a variable' - instantiation_error,
+			'``Required`` is neither a variable nor a boolean' - domain_error(open_api_boolean, 'Required'),
+			'``Schema`` is a variable' - instantiation_error,
+			'``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term' - domain_error(open_api_json_schema_term, 'Schema')
+		]
+	]).
+
+	:- public(json_response_descriptor/4).
+	:- mode(json_response_descriptor(++term, +atom, ++term, -compound), one_or_error).
+	:- info(json_response_descriptor/4, [
+		comment is 'Constructs an OpenAPI response descriptor using the default ``application/json`` media type.',
+		argnames is ['Status', 'Description', 'Schema', 'ResponseDescriptor'],
+		exceptions is [
+			'``Status`` is a variable' - instantiation_error,
+			'``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``''2XX''``' - domain_error(open_api_response_status, 'Status'),
+			'``Description`` is a variable' - instantiation_error,
+			'``Description`` is neither a variable nor an atom' - domain_error(open_api_description, 'Description'),
+			'``Schema`` is a variable' - instantiation_error,
+			'``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term' - domain_error(open_api_json_schema_term, 'Schema')
+		]
+	]).
+
+	:- public(json_response_descriptor/5).
+	:- mode(json_response_descriptor(++term, +atom, +atom, ++term, -compound), one_or_error).
+	:- info(json_response_descriptor/5, [
+		comment is 'Constructs an OpenAPI response descriptor using the given media type.',
+		argnames is ['Status', 'Description', 'MediaType', 'Schema', 'ResponseDescriptor'],
+		exceptions is [
+			'``Status`` is a variable' - instantiation_error,
+			'``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``''2XX''``' - domain_error(open_api_response_status, 'Status'),
+			'``Description`` is a variable' - instantiation_error,
+			'``Description`` is neither a variable nor an atom' - domain_error(open_api_description, 'Description'),
+			'``MediaType`` is a variable' - instantiation_error,
+			'``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom' - domain_error(open_api_media_type, 'MediaType'),
+			'``Schema`` is a variable' - instantiation_error,
+			'``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term' - domain_error(open_api_json_schema_term, 'Schema')
+		]
+	]).
+
+	:- public(problem_json_schema/1).
+	:- mode(problem_json_schema(-term), one).
+	:- info(problem_json_schema/1, [
+		comment is 'Returns an inline RFC 7807-compatible JSON schema for problem responses.',
+		argnames is ['Schema']
+	]).
+
+	:- public(problem_response_descriptor/3).
+	:- mode(problem_response_descriptor(++term, +atom, -compound), one_or_error).
+	:- info(problem_response_descriptor/3, [
+		comment is 'Constructs an OpenAPI problem-response descriptor using the ``application/problem+json`` media type and the default problem schema.',
+		argnames is ['Status', 'Description', 'ResponseDescriptor'],
+		exceptions is [
+			'``Status`` is a variable' - instantiation_error,
+			'``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``''2XX''``' - domain_error(open_api_response_status, 'Status'),
+			'``Description`` is a variable' - instantiation_error,
+			'``Description`` is neither a variable nor an atom' - domain_error(open_api_description, 'Description')
+		]
 	]).
 
 	% top-level orchestration
@@ -746,7 +854,104 @@
 		http_parse_response(Source, Response),
 		validate_response(Provider, OperationId, Response, Errors).
 
+	json_media_descriptor(Schema, MediaDescriptor) :-
+		json_media_descriptor('application/json', Schema, MediaDescriptor).
+
+	json_media_descriptor(MediaType, Schema, media(MediaType, Schema)) :-
+		validate_json_media_type(MediaType),
+		validate_json_schema_term(Schema).
+
+	json_request_body_descriptor(Description, Required, Schema, RequestBody) :-
+		json_request_body_descriptor('application/json', Description, Required, Schema, RequestBody).
+
+	json_request_body_descriptor(MediaType, Description, Required, Schema, request_body(Description, Required, [MediaDescriptor])) :-
+		validate_open_api_description(Description),
+		validate_open_api_boolean(Required),
+		json_media_descriptor(MediaType, Schema, MediaDescriptor).
+
+	json_response_descriptor(Status, Description, Schema, ResponseDescriptor) :-
+		json_response_descriptor(Status, Description, 'application/json', Schema, ResponseDescriptor).
+
+	json_response_descriptor(Status, Description, MediaType, Schema, response(Status, Description, [MediaDescriptor])) :-
+		validate_open_api_response_status(Status),
+		validate_open_api_description(Description),
+		json_media_descriptor(MediaType, Schema, MediaDescriptor).
+
+	problem_json_schema({
+		type-object,
+		properties-{
+			type-{type-string, format-'uri-reference'},
+			title-{type-string},
+			detail-{type-string},
+			status-{type-integer}
+		},
+		required-[type, title, detail, status],
+		additionalProperties- @true
+	}).
+
+	problem_response_descriptor(Status, Description, ResponseDescriptor) :-
+		problem_json_schema(Schema),
+		json_response_descriptor(Status, Description, 'application/problem+json', Schema, ResponseDescriptor).
+
 	% operation lookup and contract validation
+
+	validate_json_media_type(MediaType) :-
+		(	var(MediaType) ->
+			instantiation_error
+		;	atom(MediaType),
+			json_compatible_media_type(MediaType),
+			catch(http_core::response(http(1, 1), status(200, 'OK'), [], content(MediaType, json({})), [], _), _, fail) ->
+			true
+		;	domain_error(open_api_media_type, MediaType)
+		).
+
+	validate_json_schema_term(Schema) :-
+		(	var(Schema) ->
+			instantiation_error
+		;	json_schema_term(Schema) ->
+			true
+		;	domain_error(open_api_json_schema_term, Schema)
+		).
+
+	json_compatible_media_type(MediaType) :-
+		ascii_lower_atom(MediaType, LowerMediaType),
+		json_compatible_media_type_(LowerMediaType),
+		!.
+
+	json_compatible_media_type_('application/json').
+	json_compatible_media_type_('text/json').
+	json_compatible_media_type_(MediaType) :-
+		atom_codes(MediaType, Codes),
+		append(_, [0'+, 0'j, 0's, 0'o, 0'n], Codes).
+
+	json_schema_term(schema_ref(Name)) :-
+		atom(Name),
+		!.
+	json_schema_term(Schema) :-
+		boolean_to_json(Schema, _JSONSchema),
+		!.
+	json_schema_term(Schema) :-
+		^^json_object_pairs(Schema, _Pairs).
+
+	validate_open_api_description(Description) :-
+		(	var(Description) ->
+			instantiation_error
+		;	atom(Description) ->
+			true
+		;	domain_error(open_api_description, Description)
+		).
+
+	validate_open_api_boolean(Boolean) :-
+		(	var(Boolean) ->
+			instantiation_error
+		;	boolean_to_json(Boolean, _JSONBoolean) ->
+			true
+		;	domain_error(open_api_boolean, Boolean)
+		).
+
+	validate_open_api_response_status(Status) :-
+		status_key(Status, _Key),
+		!.
 
 	operation_descriptor_by_id(Operations, OperationId, Operation) :-
 		operation_descriptor_by_id_matches(Operations, OperationId, Matches),
@@ -1414,7 +1619,10 @@
 
 	security_scheme_declared_scope_names(SecurityScheme, ScopeNames) :-
 		security_scheme_type(SecurityScheme, Type),
-		(	Type == oauth2 ; Type == openIdConnect ),
+		(	Type == oauth2 ->
+			true
+		;	Type == openIdConnect
+		),
 		security_scheme_flows_object(SecurityScheme, Flows),
 		oauth_flows_scope_names(Flows, [], ScopeNames).
 
@@ -1626,7 +1834,7 @@
 		domain_error(open_api_operation_property, Property).
 
 	deprecated_property_pair(Deprecated, deprecated-JsonDeprecated) :-
-		(	bool_to_json(Deprecated, JsonDeprecated) ->
+		(	boolean_to_json(Deprecated, JsonDeprecated) ->
 			true
 		;	domain_error(open_api_operation_property, deprecated(Deprecated))
 		).
@@ -1684,7 +1892,7 @@
 		parameters_to_json(Descriptors, JsonParameters).
 
 	parameter_descriptor_to_json(parameter(Name, In, Description, Required, Schema), Parameter) :-
-		bool_to_json(Required, JsonRequired),
+		boolean_to_json(Required, JsonRequired),
 		schema_term_to_json(Schema, JsonSchema),
 		Parameter = {name-Name, in-In, description-Description, required-JsonRequired, schema-JsonSchema}.
 
@@ -1692,7 +1900,7 @@
 		!,
 		domain_error(open_api_request_body, request_body(Description, Required, [])).
 	request_body_to_json(request_body(Description, Required, MediaTypes), RequestBody) :-
-		bool_to_json(Required, JsonRequired),
+		boolean_to_json(Required, JsonRequired),
 		media_types_to_json(MediaTypes, Content),
 		RequestBody = {description-Description, required-JsonRequired, content-Content}.
 
@@ -2020,7 +2228,7 @@
 
 	validate_security_scheme_pairs(Name, Pairs) :-
 		security_scheme_type_from_pairs(Name, Pairs, Type),
-		validate_security_scheme_type_properties(Name, Type, Pairs).
+		validate_security_scheme_type_properties(Type, Name, Pairs).
 
 	security_scheme_type_from_pairs(Name, Pairs, Type) :-
 		(	lookup_pair_value(type, Pairs, Type) ->
@@ -2041,17 +2249,17 @@
 	validate_security_scheme_type(Name, Type) :-
 		domain_error(open_api_security_scheme(Name), invalid_type(Type)).
 
-	validate_security_scheme_type_properties(Name, apiKey, Pairs) :-
+	validate_security_scheme_type_properties(apiKey, Name, Pairs) :-
 		require_security_scheme_field(Name, apiKey, Pairs, name, _),
 		require_security_scheme_field(Name, apiKey, Pairs, in, In),
 		validate_api_key_location(Name, In).
-	validate_security_scheme_type_properties(Name, http, Pairs) :-
+	validate_security_scheme_type_properties(http, Name, Pairs) :-
 		require_security_scheme_field(Name, http, Pairs, scheme, _).
-	validate_security_scheme_type_properties(_, mutualTLS, _).
-	validate_security_scheme_type_properties(Name, oauth2, Pairs) :-
+	validate_security_scheme_type_properties(mutualTLS, _, _).
+	validate_security_scheme_type_properties(oauth2, Name, Pairs) :-
 		require_security_scheme_field(Name, oauth2, Pairs, flows, Flows),
 		validate_oauth_flows_object(Name, oauth2, Flows).
-	validate_security_scheme_type_properties(Name, openIdConnect, Pairs) :-
+	validate_security_scheme_type_properties(openIdConnect, Name, Pairs) :-
 		require_security_scheme_field(Name, openIdConnect, Pairs, openIdConnectUrl, OpenIdConnectUrl),
 		validate_security_scheme_url_field(Name, openIdConnect, openIdConnectUrl, OpenIdConnectUrl),
 		(	lookup_pair_value(flows, Pairs, Flows) ->
@@ -2078,7 +2286,7 @@
 	validate_oauth_flows_object(Name, Type, Flows) :-
 		^^json_object_pairs(Flows, FlowPairs),
 		!,
-		validate_oauth_flow_pairs(Name, Type, FlowPairs, 0, Count),
+		validate_oauth_flow_pairs(FlowPairs, Name, Type, 0, Count),
 		(	Count > 0 ->
 			true
 		;	domain_error(open_api_security_scheme(Name, Type), missing(oauth_flow))
@@ -2086,14 +2294,14 @@
 	validate_oauth_flows_object(Name, Type, Flows) :-
 		domain_error(open_api_security_scheme(Name, Type), invalid(flows, Flows)).
 
-	validate_oauth_flow_pairs(_, _, [], Count, Count).
-	validate_oauth_flow_pairs(Name, Type, [FlowName-FlowObject| FlowPairs], Count0, Count) :-
+	validate_oauth_flow_pairs([], _, _, Count, Count).
+	validate_oauth_flow_pairs([FlowName-FlowObject| FlowPairs], Name, Type, Count0, Count) :-
 		(	oauth_flow_name(FlowName) ->
 			validate_oauth_flow_object(Name, Type, FlowName, FlowObject),
 			Count1 is Count0 + 1
 		;	Count1 = Count0
 		),
-		validate_oauth_flow_pairs(Name, Type, FlowPairs, Count1, Count).
+		validate_oauth_flow_pairs(FlowPairs, Name, Type, Count1, Count).
 
 	oauth_flow_name(implicit).
 	oauth_flow_name(password).
@@ -2268,6 +2476,9 @@
 	schema_term_to_json(schema_ref(Name), Reference) :-
 		!,
 		schema_ref_object(Name, Reference).
+	schema_term_to_json(Schema, JSONSchema) :-
+		boolean_to_json(Schema, JSONSchema),
+		!.
 	schema_term_to_json([], []) :-
 		!.
 	schema_term_to_json([Term| Terms], [JsonTerm| JsonTerms]) :-
@@ -2440,6 +2651,9 @@
 
 	% scalar and object helpers
 
+	status_key(Status, _) :-
+		var(Status),
+		instantiation_error.
 	status_key(default, default) :-
 		!.
 	status_key(Status, Status) :-
@@ -2447,6 +2661,8 @@
 		!.
 	status_key(Status, Key) :-
 		integer(Status),
+		Status >= 100,
+		Status =< 599,
 		!,
 		number_codes(Status, Codes),
 		atom_codes(Key, Codes).
@@ -2474,7 +2690,7 @@
 	json_true(@true).
 	json_true(true).
 
-	bool_to_json(true, @true).
-	bool_to_json(false, @false).
+	boolean_to_json(true, @true).
+	boolean_to_json(false, @false).
 
 :- end_object.

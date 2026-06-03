@@ -38,13 +38,13 @@ dispatch layer:
 
 - Use it standalone when you only need to parse, generate, or structurally
   validate OpenAPI documents.
-- Pair it with [http](../http/NOTES.md) when you need request or response
+- Pair it with the `http_core` library when you need request or response
   contract validation against normalized HTTP terms or wire sources.
-- Pair it with [http_router](../http_router/NOTES.md) when router objects
-  expose `open_api_provider_protocol` metadata derived from `route/4`,
+- Pair it with `http_router` library when router objects expose
+  `open_api_provider_protocol` metadata derived from `route/4`,
   `route_metadata/2`, and `route_produces/2`.
-- Pair it with [rest](../rest/NOTES.md) when you want the same validation and
-  document derivation over higher-level endpoint descriptors built on top of
+- Pair it with `rest` library when you want the same validation and document
+  derivation over higher-level endpoint descriptors built on top of
   `http_router`.
 - Use it directly with custom provider objects when your API description source
   is not a router or REST object.
@@ -71,6 +71,10 @@ Current scope
 - Derive OpenAPI 3.1.0 documents from provider objects exposing
   `api_info/1`, `servers/1`, `security/1`, `operations/1`, `schema/2`, and
   `security_scheme/2`
+- Construct reusable JSON descriptor terms using helper predicates for
+  `media/2`, `request_body/3`, and `response/3`, validating JSON-compatible
+  media types, response status keys, and shallow schema-term shape,
+  including boolean schemas
 - Resolve provider operations by `operationId` using `operation/3`
 - Validate normalized HTTP request and response terms, or objects
   implementing the `http_request_protocol` and
@@ -150,6 +154,10 @@ Current limitations
 - Request and response body validation currently supports `json/1`,
   `text/1`, `binary/1`, and `form/1` payload terms; multipart payload
   validation remains out of scope
+- The JSON helper predicates validate media types and response status keys
+  eagerly, but schema validation at the helper boundary remains
+  intentionally shallow and only checks for boolean schemas, JSON object
+  terms, or `schema_ref/1` references
 
 
 Usage
@@ -173,9 +181,9 @@ Validate a document and inspect any structural errors:
 Resolve an operation descriptor and validate normalized requests,
 responses, or HTTP wire sources against it:
 
-  | ?- open_api::operation(sample_open_api_provider, update_user, Operation).
+    | ?- open_api::operation(sample_open_api_provider, update_user, Operation).
 
-  | ?- open_api::validate_request(
+    | ?- open_api::validate_request(
           sample_open_api_provider,
           update_user,
           request(
@@ -189,20 +197,32 @@ responses, or HTTP wire sources against it:
           Errors
        ).
 
-  | ?- open_api::validate_response(
-          sample_open_api_provider,
-          get_user,
-          response(
-              http(1, 1),
-              status(404, 'Not Found'),
-              [],
-              content('application/json', json({code-not_found, message-'User not found'})),
-              []
-          )
-       ).
+    | ?- open_api::validate_response(
+            sample_open_api_provider,
+            get_user,
+            response(
+                http(1, 1),
+                status(404, 'Not Found'),
+                [],
+                content('application/json', json({code-not_found, message-'User not found'})),
+                []
+            )
+         ).
 
-        | ?- open_api::validate_http_request(
-             sample_open_api_provider,
-             update_user,
-             atom('PUT /users/11111111-1111-1111-1111-111111111111?verbose=true HTTP/1.1\r\ncontent-type: application/json\r\n\r\n{"name":"Alice Example","active":true}')
-           ).
+    | ?- open_api::validate_http_request(
+            sample_open_api_provider,
+            update_user,
+            atom('PUT /users/11111111-1111-1111-1111-111111111111?verbose=true HTTP/1.1\r\ncontent-type: application/json\r\n\r\n{"name":"Alice Example","active":true}')
+         ).
+
+Construct standard JSON request and response descriptors when building
+provider operations programmatically:
+
+    | ?- open_api::json_request_body_descriptor(
+            'Message payload',
+            true,
+            {type-object, properties-{title-{type-string}}, required-[title], additionalProperties- @false},
+            RequestBody
+         ).
+
+    | ?- open_api::problem_response_descriptor(default, 'Problem response', Response).

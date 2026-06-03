@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST authoring layer built on top of the HTTP router category.',
 		remarks is [
 			'Endpoint descriptors' - 'Importing objects declare ``endpoint/5`` clauses. Endpoint identifiers must be unique within the importing object. The category derives ``route/4``, ``route_metadata/2``, and ``route_produces/2`` from those descriptors and dispatches all matched routes through a single action runner.',
@@ -68,49 +68,97 @@
 	:- mode(json_body(+compound, -term), one_or_error).
 	:- info(json_body/2, [
 		comment is 'Returns the decoded JSON payload from a normalized request body and reports a client error when the request body is missing or not decoded as JSON.',
-		argnames is ['Request', 'JSON']
+		argnames is ['Request', 'JSON'],
+		exceptions is [
+			'The normalized request body is missing or is not decoded as JSON' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON request body.')
+		]
+	]).
+
+	:- public(json_object_body/2).
+	:- mode(json_object_body(+compound, -term), one_or_error).
+	:- info(json_object_body/2, [
+		comment is 'Returns the decoded JSON payload when it is a JSON object term and reports a client error when the request body is missing, not decoded as JSON, or not an object.',
+		argnames is ['Request', 'JSONObject'],
+		exceptions is [
+			'The normalized request body is missing or is not decoded as JSON' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON request body.'),
+			'The decoded JSON payload is not a JSON object term' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON object request body.')
+		]
+	]).
+
+	:- public(json_array_body/2).
+	:- mode(json_array_body(+compound, -list), one_or_error).
+	:- info(json_array_body/2, [
+		comment is 'Returns the decoded JSON payload when it is a JSON array term and reports a client error when the request body is missing, not decoded as JSON, or not an array.',
+		argnames is ['Request', 'JSONArray'],
+		exceptions is [
+			'The normalized request body is missing or is not decoded as JSON' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON request body.'),
+			'The decoded JSON payload is not a JSON array term' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON array request body.')
+		]
 	]).
 
 	:- public(form_body/2).
 	:- mode(form_body(+compound, -list(compound)), one_or_error).
 	:- info(form_body/2, [
 		comment is 'Returns the decoded form payload from a normalized request body and reports a client error when the request body is missing or not decoded as form data.',
-		argnames is ['Request', 'Pairs']
+		argnames is ['Request', 'Pairs'],
+		exceptions is [
+			'The normalized request body is missing or is not decoded as form data' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected form request body.')
+		]
 	]).
 
 	:- public(text_body/2).
 	:- mode(text_body(+compound, -atom), one_or_error).
 	:- info(text_body/2, [
 		comment is 'Returns the decoded text payload from a normalized request body and reports a client error when the request body is missing or not decoded as text.',
-		argnames is ['Request', 'Text']
+		argnames is ['Request', 'Text'],
+		exceptions is [
+			'The normalized request body is missing or is not decoded as text' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected text request body.')
+		]
 	]).
 
 	:- public(binary_body/2).
 	:- mode(binary_body(+compound, -list(integer)), one_or_error).
 	:- info(binary_body/2, [
 		comment is 'Returns the decoded binary payload from a normalized request body and reports a client error when the request body is missing or not decoded as binary.',
-		argnames is ['Request', 'Bytes']
+		argnames is ['Request', 'Bytes'],
+		exceptions is [
+			'The normalized request body is missing or is not decoded as binary' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected binary request body.')
+		]
 	]).
 
 	:- public(json_response/4).
 	:- mode(json_response(+compound, ++term, ++term, -compound), one_or_error).
 	:- info(json_response/4, [
 		comment is 'Builds a JSON response for the given request and status descriptor, honoring any negotiated response media type annotation.',
-		argnames is ['Request', 'Status', 'JSON', 'Response']
+		argnames is ['Request', 'Status', 'JSON', 'Response'],
+		exceptions is [
+			'``Status`` is a variable or a ``status(Code, Reason)`` term with a variable argument' - instantiation_error,
+			'``Status`` is an integer without a built-in reason phrase supported by the rest library' - domain_error(http_status_code, 'Status'),
+			'``Status`` is neither an integer nor a valid normalized HTTP status term' - domain_error(http_status, 'Status')
+		]
 	]).
 
 	:- public(json_response/5).
 	:- mode(json_response(+compound, ++term, +list(compound), ++term, -compound), one_or_error).
 	:- info(json_response/5, [
 		comment is 'Builds a JSON response for the given request and status descriptor, honoring any negotiated response media type annotation and adding the provided normalized headers.',
-		argnames is ['Request', 'Status', 'Headers', 'JSON', 'Response']
+		argnames is ['Request', 'Status', 'Headers', 'JSON', 'Response'],
+		exceptions is [
+			'``Status`` is a variable or a ``status(Code, Reason)`` term with a variable argument' - instantiation_error,
+			'``Status`` is an integer without a built-in reason phrase supported by the rest library' - domain_error(http_status_code, 'Status'),
+			'``Status`` is neither an integer nor a valid normalized HTTP status term' - domain_error(http_status, 'Status'),
+			'``Headers`` is not a valid normalized header list' - domain_error(http_headers, 'Headers')
+		]
 	]).
 
 	:- public(created_response/4).
 	:- mode(created_response(+compound, ++term, ++term, -compound), one_or_error).
 	:- info(created_response/4, [
 		comment is 'Builds a ``201 Created`` JSON response with a ``Location`` header, honoring any negotiated response media type annotation.',
-		argnames is ['Request', 'Location', 'JSON', 'Response']
+		argnames is ['Request', 'Location', 'JSON', 'Response'],
+		exceptions is [
+			'``Location`` is not a valid normalized header value' - domain_error(http_header_value, 'Location')
+		]
 	]).
 
 	:- public(no_content_response/2).
@@ -124,7 +172,12 @@
 	:- mode(problem_response(+compound, ++term, ++atom, ++atom, ++atom, -compound), one_or_error).
 	:- info(problem_response/6, [
 		comment is 'Builds an ``application/problem+json`` response with the standard ``type``, ``title``, ``detail``, and numeric ``status`` fields.',
-		argnames is ['Request', 'Status', 'Type', 'Title', 'Detail', 'Response']
+		argnames is ['Request', 'Status', 'Type', 'Title', 'Detail', 'Response'],
+		exceptions is [
+			'``Status`` is a variable or a ``status(Code, Reason)`` term with a variable argument' - instantiation_error,
+			'``Status`` is an integer without a built-in reason phrase supported by the rest library' - domain_error(http_status_code, 'Status'),
+			'``Status`` is neither an integer nor a valid normalized HTTP status term' - domain_error(http_status, 'Status')
+		]
 	]).
 
 	:- protected(endpoint/5).
@@ -203,6 +256,14 @@
 	json_body(Request, JSON) :-
 		request_body_payload(Request, json, JSON).
 
+	json_object_body(Request, JSONObject) :-
+		json_body(Request, JSON),
+		json_body_shape(object, JSON, JSONObject).
+
+	json_array_body(Request, JSONArray) :-
+		json_body(Request, JSON),
+		json_body_shape(array, JSON, JSONArray).
+
 	form_body(Request, Pairs) :-
 		request_body_payload(Request, form, Pairs).
 
@@ -226,6 +287,29 @@
 		!.
 	request_body_payload_(PayloadType, _Body, _Payload) :-
 		request_body_payload_error(PayloadType).
+
+	json_body_shape(object, JSON, JSON) :-
+		nonvar(JSON),
+		^^json_object_pairs(JSON, _Pairs),
+		!.
+	json_body_shape(array, JSON, JSON) :-
+		json_array(JSON),
+		!.
+	json_body_shape(Shape, _JSON, _Payload) :-
+		json_body_shape_error(Shape).
+
+	json_array(JSON) :-
+		nonvar(JSON),
+		json_array_(JSON).
+
+	json_array_([]).
+	json_array_([_Value| Values]) :-
+		json_array_(Values).
+
+	json_body_shape_error(object) :-
+		throw(problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON object request body.')).
+	json_body_shape_error(array) :-
+		throw(problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON array request body.')).
 
 	request_body_payload_error(json) :-
 		throw(problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected JSON request body.')).
@@ -261,10 +345,17 @@
 		http_core::response(Version, Status, [], content('application/problem+json', json(Problem)), [], Response).
 
 	success_response_media_type(Request, MediaType) :-
-		(   http_core::property(Request, response_media_type(MediaType)) ->
-			true
+		(   http_core::property(Request, response_media_type(MediaType0)),
+			json_compatible_media_type(MediaType0) ->
+			MediaType = MediaType0
 		;   MediaType = 'application/json'
 		).
+
+	json_compatible_media_type('application/json').
+	json_compatible_media_type('text/json').
+	json_compatible_media_type(MediaType) :-
+		atom(MediaType),
+		sub_atom(MediaType, _, _, 0, '+json').
 
 	dispatch_rest_endpoint(Request, Response) :-
 		http_core::property(Request, route(Id)),
@@ -442,14 +533,21 @@
 	normalize_rest_error(Request, _Error, Response) :-
 		problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'Unhandled REST action error.', Response).
 
+	normalize_status(Status, _NormalizedStatus) :-
+		\+ ground(Status),
+		instantiation_error.
 	normalize_status(status(Code, Reason), status(Code, Reason)) :-
-		!.
+		!,
+		http_core::response(http(1, 1), status(Code, Reason), [], empty, [], _).
 	normalize_status(Code, status(Code, Reason)) :-
 		integer(Code),
+		!,
 		(   reason_phrase(Code, Reason) ->
 			true
 		;   domain_error(http_status_code, Code)
 		).
+	normalize_status(Status, _NormalizedStatus) :-
+		domain_error(http_status, Status).
 
 	reason_phrase(200, 'OK').
 	reason_phrase(201, 'Created').
