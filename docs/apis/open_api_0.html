@@ -780,6 +780,10 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is neither a boolean schema nor a JSON object schema term nor a <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_json_schema_term,Schema)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -810,13 +814,17 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is neither a variable nor an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is neither a variable nor a JSON-compatible HTTP media type atom:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_media_type,MediaType)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is neither a boolean schema nor a JSON object schema term nor a <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_json_schema_term,Schema)</span></code></div>
 </div>
 </div>
 </div>
@@ -864,6 +872,10 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is neither a boolean schema nor a JSON object schema term nor a <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_json_schema_term,Schema)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -894,7 +906,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is neither a variable nor an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is neither a variable nor a JSON-compatible HTTP media type atom:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_media_type,MediaType)</span></code></div>
 </div>
@@ -917,6 +929,10 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is neither a boolean schema nor a JSON object schema term nor a <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_json_schema_term,Schema)</span></code></div>
 </div>
 </div>
 </div>
@@ -948,7 +964,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is neither a variable nor a valid OpenAPI response status:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is neither a variable nor <code class="docutils literal notranslate"><span class="pre">default</span></code> nor an integer in the <code class="docutils literal notranslate"><span class="pre">100..599</span></code> range nor a wildcard status atom such as <code class="docutils literal notranslate"><span class="pre">'2XX'</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_response_status,Status)</span></code></div>
 </div>
@@ -963,6 +979,10 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is neither a boolean schema nor a JSON object schema term nor a <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_json_schema_term,Schema)</span></code></div>
 </div>
 </div>
 </div>
@@ -994,7 +1014,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is neither a variable nor a valid OpenAPI response status:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is neither a variable nor <code class="docutils literal notranslate"><span class="pre">default</span></code> nor an integer in the <code class="docutils literal notranslate"><span class="pre">100..599</span></code> range nor a wildcard status atom such as <code class="docutils literal notranslate"><span class="pre">'2XX'</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_response_status,Status)</span></code></div>
 </div>
@@ -1010,13 +1030,17 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is neither a variable nor an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is neither a variable nor a JSON-compatible HTTP media type atom:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_media_type,MediaType)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is neither a boolean schema nor a JSON object schema term nor a <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_json_schema_term,Schema)</span></code></div>
 </div>
 </div>
 </div>
@@ -1065,11 +1089,19 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is not a valid OpenAPI response status:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is neither a variable nor <code class="docutils literal notranslate"><span class="pre">default</span></code> nor an integer in the <code class="docutils literal notranslate"><span class="pre">100..599</span></code> range nor a wildcard status atom such as <code class="docutils literal notranslate"><span class="pre">'2XX'</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_response_status,Status)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Description</span></code> is not an atom:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Description</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Description</span></code> is neither a variable nor an atom:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_description,Description)</span></code></div>
 </div>

@@ -24,7 +24,7 @@ ________________________________________________________________________
 The `ccsds_tc_services` library provides service-aware helpers that sit above
 raw `ccsds_frames` telecommand transfer frame terms.
 
-This first implementation slice covers:
+The current implementation covers:
 
 - extracting telecommand segments from CCSDS telecommand transfer frames
 - encoding telecommand segments back into telecommand transfer frames

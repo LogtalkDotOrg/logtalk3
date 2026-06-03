@@ -34,6 +34,10 @@ The library provides these public entities:
 - `http_server_digest_handler(_, _, _, _)`
 	portable handler wrapper that applies Digest protection and response
 	decoration around another object implementing `http_handler_protocol`
+- `http_router_digest_auth(_, _, _)`
+	router companion category that protects routes declaring `digest_auth/1`
+	metadata and decorates successful protected responses with
+	`Authentication-Info`
 - `http_client_digest_session`
 	stateful client helper that preserves cookies and retries once when the
 	server replies with a `401` Digest challenge
@@ -85,6 +89,17 @@ want a portable middleware-style integration point for Digest verification:
 
 	| ?- Handler = http_server_digest_handler(verifier, app_handler, [realm('private'), nonce_secret('secret')], []).
 
+Use `http_router_digest_auth(_, _, _)` in router objects importing
+`http_router` when you want per-route protection driven by normal route
+metadata:
+
+	authorize_routed_request(Request, Action) :-
+		^^authorize_digest_auth_request(Request, Action).
+
+	response_middleware(digest_authentication_info, add_digest_authentication_info).
+
+	route_metadata(show_secret, [digest_auth([])]).
+
 Use `http_client_digest_session` when you need cookie persistence plus
 automatic retry after a `401` Digest challenge:
 
@@ -111,6 +126,9 @@ Current scope
   authorizations, and `Authentication-Info`
 - server-side request protection through explicit verifier objects
 - middleware-style handler wrapping for server integration
+- route-level protection and successful-response `Authentication-Info`
+	decoration through `http_router_digest_auth(_, _, _)` plus the
+	`authorize_routed_request/2` and `response_middleware/2` router hooks
 - client-side Digest retry on top of the existing `http://` socket-backed
   transport and cookie-jar support
 - MD5, SHA-256, and SHA-512-256 based Digest computations through the `hashes`

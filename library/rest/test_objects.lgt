@@ -26,71 +26,82 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'Sample REST application object used by the rest library tests.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the REST endpoints exercised by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- public(route_metadata_descriptor/2).
+	:- mode(route_metadata_descriptor(+atom, -list(compound)), zero_or_one).
 	:- info(route_metadata_descriptor/2, [
 		comment is 'Calls the imported route metadata hook so the rest library tests can verify metadata lookup for uniquely identified endpoints.',
 		argnames is ['Id', 'Metadata']
 	]).
 
 	:- public(route_produces_descriptor/2).
+	:- mode(route_produces_descriptor(+atom, -list(atom)), zero_or_one).
 	:- info(route_produces_descriptor/2, [
 		comment is 'Calls the imported route produces hook so the rest library tests can verify produces lookup for uniquely identified endpoints.',
 		argnames is ['Id', 'MediaTypes']
 	]).
 
 	:- protected(show_item/2).
+	:- mode(show_item(+compound, -term), one_or_error).
 	:- info(show_item/2, [
 		comment is 'Action used by the sample REST application for the ``GET /items/{id}`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(create_item/2).
+	:- mode(create_item(+compound, -term), one_or_error).
 	:- info(create_item/2, [
 		comment is 'Action used by the sample REST application for the ``POST /items`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(search_items/2).
+	:- mode(search_items(+compound, -term), one_or_error).
 	:- info(search_items/2, [
 		comment is 'Action used by the sample REST application for the ``GET /search`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(missing_item/2).
+	:- mode(missing_item(+compound, -term), one_or_error).
 	:- info(missing_item/2, [
 		comment is 'Action used by the sample REST application for the ``GET /missing`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(delete_item/2).
+	:- mode(delete_item(+compound, -term), one_or_error).
 	:- info(delete_item/2, [
 		comment is 'Action used by the sample REST application for the ``DELETE /items/{id}`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(conflict_item/2).
+	:- mode(conflict_item(+compound, -term), one_or_error).
 	:- info(conflict_item/2, [
 		comment is 'Action used by the sample REST application for the ``POST /items/conflict`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(broken_item/2).
+	:- mode(broken_item(+compound, -term), zero_or_one).
 	:- info(broken_item/2, [
 		comment is 'Action used by the sample REST application for the ``GET /broken`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(show_implicit_item/2).
+	:- mode(show_implicit_item(+compound, -term), one_or_error).
 	:- info(show_implicit_item/2, [
 		comment is 'Action used by the sample REST application for the ``GET /implicit/items/42`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -215,49 +226,84 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise additional result and error normalization branches.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the REST endpoints used by the result variants tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(wrapped_response/2).
+	:- mode(wrapped_response(+compound, -term), one_or_error).
 	:- info(wrapped_response/2, [
 		comment is 'Action used by the result variants REST application for the ``GET /variants/wrapped`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(accepted_json/2).
+	:- mode(accepted_json(+compound, -term), one_or_error).
 	:- info(accepted_json/2, [
 		comment is 'Action used by the result variants REST application for the ``GET /variants/accepted`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(header_json/2).
+	:- mode(header_json(+compound, -term), one_or_error).
 	:- info(header_json/2, [
 		comment is 'Action used by the result variants REST application for the ``GET /variants/unauthorized`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(invalid_result/2).
+	:- mode(invalid_result(+compound, -term), one_or_error).
 	:- info(invalid_result/2, [
 		comment is 'Action used by the result variants REST application for the ``GET /variants/invalid`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(context_problem_error/2).
+	:- mode(context_problem_error(+compound, -term), one_or_error).
 	:- info(context_problem_error/2, [
 		comment is 'Action used by the result variants REST application for the ``GET /variants/unprocessable`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(generic_error/2).
+	:- mode(generic_error(+compound, -term), one_or_error).
 	:- info(generic_error/2, [
 		comment is 'Action used by the result variants REST application for the ``GET /variants/error`` endpoint.',
+		argnames is ['Request', 'Result']
+	]).
+
+	:- protected(thrown_ok_result/2).
+	:- mode(thrown_ok_result(+compound, -term), one_or_error).
+	:- info(thrown_ok_result/2, [
+		comment is 'Action used by the result variants REST application for the ``GET /variants/thrown/ok`` endpoint.',
+		argnames is ['Request', 'Result']
+	]).
+
+	:- protected(thrown_created_result/2).
+	:- mode(thrown_created_result(+compound, -term), one_or_error).
+	:- info(thrown_created_result/2, [
+		comment is 'Action used by the result variants REST application for the ``POST /variants/thrown/created`` endpoint.',
+		argnames is ['Request', 'Result']
+	]).
+
+	:- protected(thrown_no_content_result/2).
+	:- mode(thrown_no_content_result(+compound, -term), one_or_error).
+	:- info(thrown_no_content_result/2, [
+		comment is 'Action used by the result variants REST application for the ``DELETE /variants/thrown/no-content`` endpoint.',
+		argnames is ['Request', 'Result']
+	]).
+
+	:- protected(thrown_header_json_result/2).
+	:- mode(thrown_header_json_result(+compound, -term), one_or_error).
+	:- info(thrown_header_json_result/2, [
+		comment is 'Action used by the result variants REST application for the ``GET /variants/thrown/headers`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
@@ -267,6 +313,10 @@
 	endpoint(invalid_result, get, '/variants/invalid', invalid_result, []).
 	endpoint(context_problem_error, get, '/variants/unprocessable', context_problem_error, [produces(['application/problem+json'])]).
 	endpoint(generic_error, get, '/variants/error', generic_error, [produces(['application/problem+json'])]).
+	endpoint(thrown_ok_result, get, '/variants/thrown/ok', thrown_ok_result, [produces(['application/json'])]).
+	endpoint(thrown_created_result, post, '/variants/thrown/created', thrown_created_result, [produces(['application/json'])]).
+	endpoint(thrown_no_content_result, delete, '/variants/thrown/no-content', thrown_no_content_result, []).
+	endpoint(thrown_header_json_result, get, '/variants/thrown/headers', thrown_header_json_result, [produces(['application/json'])]).
 
 	wrapped_response(Request, response(Response)) :-
 		::json_response(Request, status(200, 'OK'), {wrapped- @true}, Response).
@@ -274,6 +324,18 @@
 	accepted_json(_Request, json(202, {accepted- @true})).
 
 	header_json(_Request, json(401, [x_auth_required-yes], {error-unauthorized})).
+
+	thrown_ok_result(_Request, _Result) :-
+		throw(ok({thrown- @true})).
+
+	thrown_created_result(_Request, _Result) :-
+		throw(created('/variants/thrown/created/100', {id-'100', created- @true})).
+
+	thrown_no_content_result(_Request, _Result) :-
+		throw(no_content).
+
+	thrown_header_json_result(_Request, _Result) :-
+		throw(json(202, [x_thrown-yes], {accepted- @true})).
 
 	invalid_result(_Request, unexpected_result).
 
@@ -286,6 +348,70 @@
 :- end_object.
 
 
+	:- object(action_error_hooks_rest_application,
+		implements(http_handler_protocol),
+		imports(rest)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-06-03,
+			comment is 'REST application object used by the rest library tests to exercise action failure and unsupported exception response hooks.'
+		]).
+
+		:- protected(endpoint/5).
+		:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
+		:- info(endpoint/5, [
+			comment is 'Declares the REST endpoints used by the action hook tests.',
+			argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
+		]).
+
+		:- protected(rest_action_failure_response/3).
+		:- mode(rest_action_failure_response(+compound, +atom, -compound), zero_or_one).
+		:- info(rest_action_failure_response/3, [
+			comment is 'Customizes the response returned when the failing action hook test endpoint fails without throwing an exception.',
+			argnames is ['Request', 'Id', 'Response']
+		]).
+
+		:- protected(rest_action_error_response/4).
+		:- mode(rest_action_error_response(+compound, +atom, +term, -compound), zero_or_one).
+		:- info(rest_action_error_response/4, [
+			comment is 'Customizes the response returned when the erroring action hook test endpoint throws an unsupported exception.',
+			argnames is ['Request', 'Id', 'Error', 'Response']
+		]).
+
+		:- protected(failing_item/2).
+		:- mode(failing_item(+compound, -term), zero_or_one).
+		:- info(failing_item/2, [
+			comment is 'Action used by the action hook REST application for the ``GET /hooks/failure`` endpoint.',
+			argnames is ['Request', 'Result']
+		]).
+
+		:- protected(erroring_item/2).
+		:- mode(erroring_item(+compound, -term), one_or_error).
+		:- info(erroring_item/2, [
+			comment is 'Action used by the action hook REST application for the ``GET /hooks/error`` endpoint.',
+			argnames is ['Request', 'Result']
+		]).
+
+		endpoint(failing_item, get, '/hooks/failure', failing_item, []).
+		endpoint(erroring_item, get, '/hooks/error', erroring_item, []).
+
+		rest_action_failure_response(Request, failing_item, Response) :-
+			::problem_response(Request, 409, 'urn:logtalk:action-failed', 'Conflict', 'Custom REST action failure.', Response).
+
+		rest_action_error_response(Request, erroring_item, error(unexpected_failure, _Context), Response) :-
+			::problem_response(Request, 422, 'urn:logtalk:action-error', 'Unprocessable Content', 'Custom REST action error.', Response).
+
+		failing_item(_Request, _Result) :-
+			fail.
+
+		erroring_item(_Request, _Result) :-
+			throw(error(unexpected_failure, context(action_error_hooks_rest_application, erroring_item/2))).
+
+	:- end_object.
+
+
 :- object(invalid_request_validation_rest_application,
 	implements([http_handler_protocol, open_api_provider_protocol]),
 	imports(rest)).
@@ -293,23 +419,26 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise request validation exception handling.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the invalid request validation endpoint used by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(open_api_validate_request/1).
+	:- mode(open_api_validate_request(?atom), zero_or_more).
 	:- info(open_api_validate_request/1, [
 		comment is 'Enables automatic OpenAPI request contract validation for the invalid request validation fixture endpoint.',
 		argnames is ['Id']
 	]).
 
 	:- protected(create_item/2).
+	:- mode(create_item(+compound, -term), one_or_error).
 	:- info(create_item/2, [
 		comment is 'Action used by the invalid request validation REST application for the ``POST /validation-exception/request`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -337,23 +466,26 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise response validation exception handling.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the invalid response validation endpoint used by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(open_api_validate_response/1).
+	:- mode(open_api_validate_response(?atom), zero_or_more).
 	:- info(open_api_validate_response/1, [
 		comment is 'Enables automatic OpenAPI response contract validation for the invalid response validation fixture endpoint.',
 		argnames is ['Id']
 	]).
 
 	:- protected(show_item/2).
+	:- mode(show_item(+compound, -term), one_or_error).
 	:- info(show_item/2, [
 		comment is 'Action used by the invalid response validation REST application for the ``GET /validation-exception/response/{id}`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -384,17 +516,19 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise OpenAPI derivation through endpoint descriptors.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the REST endpoint used by the OpenAPI rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(show_item/2).
+	:- mode(show_item(+compound, -term), one_or_error).
 	:- info(show_item/2, [
 		comment is 'Action used by the OpenAPI REST application for the ``GET /items/{id}`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -420,35 +554,40 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise automatic OpenAPI request and response contract validation hooks.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the validated REST endpoints used by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(open_api_validate_request/1).
+	:- mode(open_api_validate_request(?atom), zero_or_more).
 	:- info(open_api_validate_request/1, [
 		comment is 'Enables automatic OpenAPI request contract validation for selected endpoints.',
 		argnames is ['Id']
 	]).
 
 	:- protected(open_api_validate_response/1).
+	:- mode(open_api_validate_response(?atom), zero_or_more).
 	:- info(open_api_validate_response/1, [
 		comment is 'Enables automatic OpenAPI response contract validation for selected endpoints.',
 		argnames is ['Id']
 	]).
 
 	:- protected(create_contract_item/2).
+	:- mode(create_contract_item(+compound, -term), one_or_error).
 	:- info(create_contract_item/2, [
 		comment is 'Action used by the validated REST application for the ``POST /contract/items`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(show_contract_item/2).
+	:- mode(show_contract_item(+compound, -term), one_or_error).
 	:- info(show_contract_item/2, [
 		comment is 'Action used by the validated REST application for the ``GET /contract/items/{id}`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -523,35 +662,40 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise negotiated vendor JSON media types.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the vendor media type REST endpoints used by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(show_vendor_item/2).
+	:- mode(show_vendor_item(+compound, -term), one_or_error).
 	:- info(show_vendor_item/2, [
 		comment is 'Action used by the vendor media type REST application for the ``GET /vendor/items/42`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(create_vendor_item/2).
+	:- mode(create_vendor_item(+compound, -term), one_or_error).
 	:- info(create_vendor_item/2, [
 		comment is 'Action used by the vendor media type REST application for the ``POST /vendor/items`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(accepted_vendor_item/2).
+	:- mode(accepted_vendor_item(+compound, -term), one_or_error).
 	:- info(accepted_vendor_item/2, [
 		comment is 'Action used by the vendor media type REST application for the ``GET /vendor/items/accepted`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(missing_vendor_item/2).
+	:- mode(missing_vendor_item(+compound, -term), one_or_error).
 	:- info(missing_vendor_item/2, [
 		comment is 'Action used by the vendor media type REST application for the ``GET /vendor/items/missing`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -586,12 +730,14 @@
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the mixed-media endpoint used by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- protected(show_mixed_item/2).
+	:- mode(show_mixed_item(+compound, -term), one_or_error).
 	:- info(show_mixed_item/2, [
 		comment is 'Action used by the mixed-media REST application for the ``GET /mixed/items/42`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -611,41 +757,47 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-03,
 		comment is 'REST application object used by the rest library tests to exercise duplicate endpoint identifier failures.'
 	]).
 
 	:- protected(endpoint/5).
+	:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
 	:- info(endpoint/5, [
 		comment is 'Declares the duplicate endpoint identifiers used by the rest library tests.',
 		argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
 	]).
 
 	:- public(route_descriptor/4).
+	:- mode(route_descriptor(?atom, ?atom, ?atom, ?atom), zero_or_more).
 	:- info(route_descriptor/4, [
 		comment is 'Calls the imported route descriptor predicate so the rest library tests can exercise duplicate endpoint identifier failures on the earliest routing path.',
 		argnames is ['Id', 'Method', 'Path', 'Handler']
 	]).
 
 	:- public(route_metadata_descriptor/2).
+	:- mode(route_metadata_descriptor(+atom, -list(compound)), zero_or_one).
 	:- info(route_metadata_descriptor/2, [
 		comment is 'Calls the imported route metadata hook so the rest library tests can exercise duplicate endpoint identifier failures during metadata lookup.',
 		argnames is ['Id', 'Metadata']
 	]).
 
 	:- public(route_produces_descriptor/2).
+	:- mode(route_produces_descriptor(+atom, -list(atom)), zero_or_one).
 	:- info(route_produces_descriptor/2, [
 		comment is 'Calls the imported route produces hook so the rest library tests can exercise duplicate endpoint identifier failures during produces lookup.',
 		argnames is ['Id', 'MediaTypes']
 	]).
 
 	:- protected(first_duplicate_item/2).
+	:- mode(first_duplicate_item(+compound, -term), one_or_error).
 	:- info(first_duplicate_item/2, [
 		comment is 'Action used by the duplicate endpoint id REST application for the ``GET /duplicates/one`` endpoint.',
 		argnames is ['Request', 'Result']
 	]).
 
 	:- protected(second_duplicate_item/2).
+	:- mode(second_duplicate_item(+compound, -term), one_or_error).
 	:- info(second_duplicate_item/2, [
 		comment is 'Action used by the duplicate endpoint id REST application for the ``GET /duplicates/two`` endpoint.',
 		argnames is ['Request', 'Result']
@@ -668,3 +820,100 @@
 	second_duplicate_item(_Request, ok({which-second})).
 
 :- end_object.
+
+
+	:- object(rest_digest_auth_test_verifier,
+		implements(http_digest_verifier_protocol)).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-06-03,
+			comment is 'Local Digest verifier used by the rest library tests to exercise router companion integration.'
+		]).
+
+		:- uses(user, [
+			atomic_list_concat/3
+		]).
+
+		ha1(sha256, Realm, Username, HA1) :-
+			credential_password(Realm, Username, Password),
+			credential_material_codes(Username, Realm, Password, Codes),
+			sha256::hash(Codes, HA1).
+
+		credential_password('test-realm', 'Mufasa', 'Circle Of Life').
+
+		credential_material_codes(Username, Realm, Password, Codes) :-
+			atomic_list_concat([Username, Realm, Password], ':', Material),
+			atom_codes(Material, Codes).
+
+	:- end_object.
+
+
+	:- object(digest_auth_rest_application,
+		implements(http_handler_protocol),
+		imports([
+			rest,
+			http_router_digest_auth(
+				rest_digest_auth_test_verifier,
+				[realm('test-realm'), algorithm(sha256), accepted_algorithms([sha256]), qops([auth]), nonce_secret('secret'), current_time(1700000000)],
+				[nextnonce('next-nonce')]
+			)
+		])).
+
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2026-06-03,
+			comment is 'REST application object used by the rest library tests to exercise Digest-auth router companion integration.'
+		]).
+
+		:- protected(endpoint/5).
+		:- mode(endpoint(?atom, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
+		:- info(endpoint/5, [
+			comment is 'Declares the REST endpoints used by the Digest-auth integration tests.',
+			argnames is ['Id', 'Method', 'Path', 'Action', 'Options']
+		]).
+
+		:- public(route_metadata_descriptor/2).
+		:- mode(route_metadata_descriptor(+atom, -list(compound)), zero_or_one).
+		:- info(route_metadata_descriptor/2, [
+			comment is 'Calls the imported route metadata hook so the rest library tests can verify Digest-auth metadata passthrough.',
+			argnames is ['Id', 'Metadata']
+		]).
+
+		:- protected(authorize_routed_request/2).
+		:- mode(authorize_routed_request(+compound, -compound), one_or_error).
+		:- info(authorize_routed_request/2, [
+			comment is 'Route-authorization hook that delegates Digest-auth checks to the imported router helper category.',
+			argnames is ['Request', 'Action']
+		]).
+
+		:- protected(response_middleware/2).
+		:- mode(response_middleware(?atom, ?atom), zero_or_more).
+		:- info(response_middleware/2, [
+			comment is 'Response middleware hook that registers Digest ``Authentication-Info`` decoration for successfully verified requests.',
+			argnames is ['Id', 'Handler']
+		]).
+
+		:- protected(show_secret/2).
+		:- mode(show_secret(+compound, -compound), one_or_error).
+		:- info(show_secret/2, [
+			comment is 'Action used by the Digest-auth REST application for the ``GET /secret`` endpoint.',
+			argnames is ['Request', 'Result']
+		]).
+
+		endpoint(show_secret, get, '/secret', show_secret, [digest_auth([]), produces(['application/json'])]).
+
+		route_metadata_descriptor(Id, Metadata) :-
+			::route_metadata(Id, Metadata).
+
+		authorize_routed_request(Request, Action) :-
+			^^authorize_digest_auth_request(Request, Action).
+
+		response_middleware(digest_authentication_info, add_digest_authentication_info).
+
+		show_secret(Request, ok({user-Username})) :-
+			http_core::property(Request, digest_username(Username)).
+
+	:- end_object.

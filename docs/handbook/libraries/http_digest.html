@@ -367,6 +367,9 @@ authorization, request protection, challenge building, and
 <li><p><code class="docutils literal notranslate"><span class="pre">http_server_digest_handler(_,</span> <span class="pre">_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> portable handler wrapper
 that applies Digest protection and response decoration around another
 object implementing <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> router companion category that
+protects routes declaring <code class="docutils literal notranslate"><span class="pre">digest_auth/1</span></code> metadata and decorates
+successful protected responses with <code class="docutils literal notranslate"><span class="pre">Authentication-Info</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_client_digest_session</span></code> stateful client helper that preserves
 cookies and retries once when the server replies with a <code class="docutils literal notranslate"><span class="pre">401</span></code> Digest
 challenge</p></li>
@@ -413,6 +416,17 @@ verification:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Handler</span> <span class="o">=</span> http_server_digest_handler(verifier, app_handler, [realm(<span class="s">&#39;private&#39;</span>), nonce_secret(<span class="s">&#39;secret&#39;</span>)], []).
 </pre></div>
 </div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> in router objects importing
+<code class="docutils literal notranslate"><span class="pre">http_router</span></code> when you want per-route protection driven by normal
+route metadata:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>authorize_routed_request(<span class="nv">Request</span>, <span class="nv">Action</span>) <span class="o">:-</span>
+    <span class="o">^^</span>authorize_digest_auth_request(<span class="nv">Request</span>, <span class="nv">Action</span>).
+
+response_middleware(digest_authentication_info, add_digest_authentication_info).
+
+route_metadata(show_secret, [digest_auth([])]).
+</pre></div>
+</div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">http_client_digest_session</span></code> when you need cookie persistence plus
 automatic retry after a <code class="docutils literal notranslate"><span class="pre">401</span></code> Digest challenge:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_client_digest_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Session</span>, <span class="s">&#39;Mufasa&#39;</span>, <span class="s">&#39;Circle Of Life&#39;</span>),
@@ -440,6 +454,10 @@ three forms:</p>
 authorizations, and <code class="docutils literal notranslate"><span class="pre">Authentication-Info</span></code></p></li>
 <li><p>server-side request protection through explicit verifier objects</p></li>
 <li><p>middleware-style handler wrapping for server integration</p></li>
+<li><p>route-level protection and successful-response <code class="docutils literal notranslate"><span class="pre">Authentication-Info</span></code>
+decoration through <code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> plus the
+<code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code> and <code class="docutils literal notranslate"><span class="pre">response_middleware/2</span></code> router
+hooks</p></li>
 <li><p>client-side Digest retry on top of the existing <code class="docutils literal notranslate"><span class="pre">http://</span></code>
 socket-backed transport and cookie-jar support</p></li>
 <li><p>MD5, SHA-256, and SHA-512-256 based Digest computations through the

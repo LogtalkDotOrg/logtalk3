@@ -76,7 +76,7 @@ To test this library, load the `tester.lgt` file:
 Current scope
 -------------
 
-The current slice provides one imported routing predicate through the
+The current version provides one imported routing predicate through the
 category inheritance from `http_router` plus request and response helper
 predicates:
 
@@ -103,6 +103,12 @@ The category also exposes optional OpenAPI contract validation hooks:
 - `open_api_validate_response/1`
 - `open_api_response_validation_error_response/5`
 
+The category also exposes optional action failure and error normalization
+hooks:
+
+- `rest_action_failure_response/3`
+- `rest_action_error_response/4`
+
 Importing REST application objects are expected to define endpoint
 descriptors using:
 
@@ -114,7 +120,7 @@ identifiers are reused as operation identifiers.
 
 The `Action` argument is the name of a declared local predicate with arity 2,
 typically a protected predicate. The action predicate receives the annotated
-request and returns one of the currently supported result terms:
+request and returns or throws one of the currently supported result terms:
 
 - `ok(JSON)`
 - `created(Location, JSON)`
@@ -131,10 +137,20 @@ descriptors:
 - `route_metadata/2`
 - `route_produces/2`
 
+All matched routes dispatch through a single internal action runner that
+calls the endpoint action and normalizes its returned or thrown result.
+
 Endpoint options are passed through as route metadata except for the special
 `produces(MediaTypes)` option, which is translated into `route_produces/2`.
 This keeps endpoint metadata available to action predicates and response
 middleware and also allows router-level OpenAPI derivation to keep working.
+
+That same metadata pass-through also allows REST applications to reuse router
+companion categories. For example, an object can import
+`http_router_digest_auth(_, _, _)`, declare `digest_auth(Options)` in endpoint
+options, delegate `authorize_routed_request/2` to
+`authorize_digest_auth_request/2`, and register
+`add_digest_authentication_info/3` as response middleware.
 
 The current helper predicates read the normalized HTTP request terms provided
 by `http_core`:
@@ -152,12 +168,17 @@ on `json_body/2` and additionally require the decoded JSON payload to be an
 object or array term respectively.
 
 Action result normalization currently builds normalized HTTP response terms
-using these rules:
+from returned or thrown supported result terms using these rules:
 
 - successful JSON responses use the negotiated router media type when the
   request carries a JSON-compatible `response_media_type/1` annotation and
   otherwise fall back to `application/json`
 - problem responses always use `application/problem+json`
+
+Plain action failure and unsupported exceptions still default to generic
+`500 Internal Server Error` problem responses, but importing objects can
+override those defaults using `rest_action_failure_response/3` and
+`rest_action_error_response/4`.
 
 When `open_api_validate_request/1` succeeds for a matched endpoint, the
 category validates the normalized request against the derived OpenAPI
@@ -184,8 +205,8 @@ protocol, the inherited `http_router` OpenAPI derivation continues to work.
 Endpoint options such as `summary/1`, `description/1`, `tags/1`,
 `deprecated/1`, `security/1`, `parameters/1`, `request_body/1`, and
 `responses/1` are exposed through `route_metadata/2`, while
-`produces(MediaTypes)` drives `route_produces/2` and therefore response media
-type inference.
+`produces(MediaTypes)` drives `route_produces/2` and therefore response
+media type inference.
 
 
 Current limitations
@@ -193,10 +214,8 @@ Current limitations
 
 - request and response OpenAPI contract validation is currently opt-in per
   endpoint using the validation hooks
-- the current slice does not yet include authentication, authorization,
-  pagination, filtering, or rate-limiting helpers
+- the current version does not yet include dedicated pagination, filtering,
+  or rate-limiting helpers of its own
 - result normalization currently focuses on JSON and problem responses; it
   does not yet provide specialized helpers for redirects, streaming, or
   multipart payloads
-- action failures are currently mapped to generic `500 Internal Server Error`
-  problem responses unless the action throws a `problem/4` term explicitly

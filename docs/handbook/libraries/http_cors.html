@@ -388,8 +388,8 @@ link in a web browser.</p>
 </section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
-<p>The current slice provides one transport-neutral public object with five
-public predicates:</p>
+<p>The current implementation provides one transport-neutral public object
+with five public predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">request_origin/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">is_cors_request/1</span></code></p></li>
@@ -521,7 +521,7 @@ permission headers but it may still preserve or add cache-relevant
 <li><p>dynamic callback policies are not supported</p></li>
 <li><p>wildcard subdomain matching is not supported</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allowed_origins(any)</span></code> cannot be combined with
-<code class="docutils literal notranslate"><span class="pre">allow_credentials(true)</span></code> in the current slice</p></li>
+<code class="docutils literal notranslate"><span class="pre">allow_credentials(true)</span></code> in the current version</p></li>
 <li><p>wildcard semantics are currently implemented for <code class="docutils literal notranslate"><span class="pre">allowed_headers/1</span></code>
 and <code class="docutils literal notranslate"><span class="pre">expose_headers/1</span></code>, but not for <code class="docutils literal notranslate"><span class="pre">allowed_methods/1</span></code></p></li>
 </ul>

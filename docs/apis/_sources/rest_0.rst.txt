@@ -29,12 +29,7 @@ REST authoring layer built on top of the HTTP router category.
 |    :ref:`open_api <open_api/0>`
 
 | **Remarks:**
-
-   - Endpoint descriptors: Importing objects declare ``endpoint/5`` clauses. Endpoint identifiers must be unique within the importing object. The category derives ``route/4``, ``route_metadata/2``, and ``route_produces/2`` from those descriptors and dispatches all matched routes through a single action runner.
-   - Contract validation hooks: Importing objects can optionally define ``open_api_validate_request/1`` and ``open_api_validate_response/1`` to enable automatic request and response contract validation against the matched endpoint OpenAPI operation id.
-   - Request helpers: The category provides helper predicates for path parameters, query parameters, headers, and common decoded request body formats. The decoded body helpers report missing or mismatched request bodies as ``400 Bad Request`` problem responses when used from endpoint actions.
-   - Result normalization: Endpoint actions return small result terms such as ``ok(JSON)``, ``created(Location, JSON)``, ``no_content``, ``json(Status, JSON)``, or ``problem(Status, Type, Title, Detail)`` and the category normalizes those terms into HTTP responses. Successful JSON responses honor the negotiated router media type when one is available while problem responses always use ``application/problem+json``.
-   - OpenAPI reuse: Endpoint options other than ``produces/1`` are passed through as route metadata, allowing existing ``http_router`` OpenAPI derivation to continue working when the importing object also implements ``open_api_provider_protocol``.
+|    (none)
 
 | **Inherited public predicates:**
 |     :ref:`http_router/0::api_info/1`  :ref:`http_router/0::handle/2`  :ref:`http_router/0::operations/1`  :ref:`http_router/0::schema/2`  :ref:`http_router/0::security/1`  :ref:`http_router/0::security_scheme/2`  :ref:`http_router/0::servers/1`  
@@ -487,13 +482,51 @@ Optional hook predicate that customizes the response returned when OpenAPI respo
 
 ------------
 
+.. index:: rest_action_failure_response/3
+.. _rest/0::rest_action_failure_response/3:
+
+``rest_action_failure_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes the response returned when the matched endpoint action fails without throwing an exception. The arguments are the current request, the endpoint identifier, and the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rest_action_failure_response(Request,Id,Response)``
+| **Mode and number of proofs:**
+|    ``rest_action_failure_response(+compound,+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: rest_action_error_response/4
+.. _rest/0::rest_action_error_response/4:
+
+``rest_action_error_response/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes the response returned when the matched endpoint action throws an unsupported exception. The arguments are the current request, the endpoint identifier, the thrown term, and the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rest_action_error_response(Request,Id,Error,Response)``
+| **Mode and number of proofs:**
+|    ``rest_action_error_response(+compound,+atom,+term,-compound)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: dispatch_rest_endpoint/2
 .. _rest/0::dispatch_rest_endpoint/2:
 
 ``dispatch_rest_endpoint/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Runs the action associated with the matched endpoint and normalizes its result term into an HTTP response.
+Runs the action associated with the matched endpoint and normalizes any supported returned or thrown result term into an HTTP response.
 
 | **Compilation flags:**
 |    ``static``

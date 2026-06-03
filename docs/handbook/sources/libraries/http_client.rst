@@ -147,7 +147,7 @@ After the handshake, either close it explicitly with
 Current scope
 -------------
 
-The initial request-oriented slice provides:
+The initial request-oriented implementation provides:
 
 - ``request/4`` for one-shot requests against absolute ``http://`` URLs.
 - ``open_websocket/4`` for validated WebSocket opening handshakes

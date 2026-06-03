@@ -156,7 +156,7 @@ opening handshake.
 Current scope
 -------------
 
-The current slice provides seven predicates:
+The current implementation provides seven predicates:
 
 - `read_request/2` reads exactly one request from a binary stream without
   requiring end-of-file.

@@ -26,7 +26,7 @@
 	logtalk_load(hmac(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(http_core(loader)),
-	logtalk_load([http_digest_verifier_protocol, http_digest, http_server_digest_handler], [optimize(on)])
+	logtalk_load([http_digest_verifier_protocol, http_digest, http_server_digest_handler, http_router_digest_auth], [optimize(on)])
 )).
 
 :- if((

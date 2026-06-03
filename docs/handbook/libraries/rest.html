@@ -405,7 +405,7 @@ link in a web browser.</p>
 </section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
-<p>The current slice provides one imported routing predicate through the
+<p>The current version provides one imported routing predicate through the
 category inheritance from <code class="docutils literal notranslate"><span class="pre">http_router</span></code> plus request and response
 helper predicates:</p>
 <ul class="simple">
@@ -432,6 +432,12 @@ helper predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">open_api_validate_response/1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">open_api_response_validation_error_response/5</span></code></p></li>
 </ul>
+<p>The category also exposes optional action failure and error
+normalization hooks:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rest_action_failure_response/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rest_action_error_response/4</span></code></p></li>
+</ul>
 <p>Importing REST application objects are expected to define endpoint
 descriptors using:</p>
 <ul class="simple">
@@ -442,8 +448,8 @@ the object also exposes OpenAPI operations through <code class="docutils literal
 those same identifiers are reused as operation identifiers.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Action</span></code> argument is the name of a declared local predicate with
 arity 2, typically a protected predicate. The action predicate receives
-the annotated request and returns one of the currently supported result
-terms:</p>
+the annotated request and returns or throws one of the currently
+supported result terms:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ok(JSON)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">created(Location,</span> <span class="pre">JSON)</span></code></p></li>
@@ -460,11 +466,19 @@ descriptors:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code></p></li>
 </ul>
+<p>All matched routes dispatch through a single internal action runner that
+calls the endpoint action and normalizes its returned or thrown result.</p>
 <p>Endpoint options are passed through as route metadata except for the
 special <code class="docutils literal notranslate"><span class="pre">produces(MediaTypes)</span></code> option, which is translated into
 <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code>. This keeps endpoint metadata available to action
 predicates and response middleware and also allows router-level OpenAPI
 derivation to keep working.</p>
+<p>That same metadata pass-through also allows REST applications to reuse
+router companion categories. For example, an object can import
+<code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code>, declare <code class="docutils literal notranslate"><span class="pre">digest_auth(Options)</span></code>
+in endpoint options, delegate <code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code> to
+<code class="docutils literal notranslate"><span class="pre">authorize_digest_auth_request/2</span></code>, and register
+<code class="docutils literal notranslate"><span class="pre">add_digest_authentication_info/3</span></code> as response middleware.</p>
 <p>The current helper predicates read the normalized HTTP request terms
 provided by <code class="docutils literal notranslate"><span class="pre">http_core</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>request(<span class="nv">Method</span>, <span class="nv">Target</span>, <span class="nv">Version</span>, <span class="nv">Headers</span>, <span class="nv">Body</span>, <span class="nv">Properties</span>)
@@ -481,13 +495,17 @@ decoded shape. The <code class="docutils literal notranslate"><span class="pre">
 helpers build on <code class="docutils literal notranslate"><span class="pre">json_body/2</span></code> and additionally require the decoded
 JSON payload to be an object or array term respectively.</p>
 <p>Action result normalization currently builds normalized HTTP response
-terms using these rules:</p>
+terms from returned or thrown supported result terms using these rules:</p>
 <ul class="simple">
 <li><p>successful JSON responses use the negotiated router media type when
 the request carries a JSON-compatible <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code>
 annotation and otherwise fall back to <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p></li>
 <li><p>problem responses always use <code class="docutils literal notranslate"><span class="pre">application/problem+json</span></code></p></li>
 </ul>
+<p>Plain action failure and unsupported exceptions still default to generic
+<code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> problem responses, but importing objects
+can override those defaults using <code class="docutils literal notranslate"><span class="pre">rest_action_failure_response/3</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rest_action_error_response/4</span></code>.</p>
 <p>When <code class="docutils literal notranslate"><span class="pre">open_api_validate_request/1</span></code> succeeds for a matched endpoint,
 the category validates the normalized request against the derived
 OpenAPI operation descriptor before calling the endpoint action. When
@@ -521,14 +539,11 @@ response media type inference.</p>
 <ul class="simple">
 <li><p>request and response OpenAPI contract validation is currently opt-in
 per endpoint using the validation hooks</p></li>
-<li><p>the current slice does not yet include authentication, authorization,
-pagination, filtering, or rate-limiting helpers</p></li>
+<li><p>the current version does not yet include dedicated pagination,
+filtering, or rate-limiting helpers of its own</p></li>
 <li><p>result normalization currently focuses on JSON and problem responses;
 it does not yet provide specialized helpers for redirects, streaming,
 or multipart payloads</p></li>
-<li><p>action failures are currently mapped to generic
-<code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> problem responses unless the action
-throws a <code class="docutils literal notranslate"><span class="pre">problem/4</span></code> term explicitly</p></li>
 </ul>
 </section>
 </section>

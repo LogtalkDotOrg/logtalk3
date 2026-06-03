@@ -37,7 +37,7 @@ To test this library, load the ``tester.lgt`` file:
 Current scope
 -------------
 
-The current slice provides:
+The current implementation provides:
 
 - ``message/3`` for constructing validated normalized WebSocket message
   terms.
@@ -109,7 +109,7 @@ Current limitations
 - Client and server masking policy is still not enforced automatically
   by role in this stateless layer. Use the ``http_websocket_session``
   library when that policy should be applied automatically.
-- This slice still does not provide application session loops,
+- This version still does not provide application session loops,
   close-handshake orchestration, or automatic ping/pong policies. The
   stateful session layer is the next abstraction step, but it still
   leaves those policies to the caller.

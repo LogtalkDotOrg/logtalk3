@@ -75,6 +75,76 @@
 :- end_object.
 
 
+:- object(http_digest_test_router,
+	implements(http_handler_protocol),
+	imports([
+		http_router,
+		http_router_digest_auth(
+			http_digest_test_verifier,
+			[realm('test-realm'), algorithm(sha256), accepted_algorithms([sha256]), qops([auth]), nonce_secret('secret'), current_time(1700000000)],
+			[nextnonce('next-nonce')]
+		)
+	])).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-03,
+		comment is 'Router object used by the http_digest library tests to exercise Digest-auth route protection and Authentication-Info response decoration.'
+	]).
+
+	:- protected(show_public/2).
+	:- info(show_public/2, [
+		comment is 'Protected route handler used by the digest test router object for the ``/public`` path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(show_secret/2).
+	:- info(show_secret/2, [
+		comment is 'Protected route handler used by the digest test router object for the ``/secret`` path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(add_router_stage/3).
+	:- info(add_router_stage/3, [
+		comment is 'Response middleware handler that marks routed responses produced by the digest test router object.',
+		argnames is ['Request', 'Response0', 'Response']
+	]).
+
+	:- protected(authorize_routed_request/2).
+	:- info(authorize_routed_request/2, [
+		comment is 'Route-authorization hook that delegates Digest-auth checks to the imported router helper category.',
+		argnames is ['Request', 'Action']
+	]).
+
+	route(show_public, get, '/public', show_public).
+	route(show_secret, get, '/secret', show_secret).
+	route(show_secret_sha512, get, '/secret-sha512', show_secret).
+
+	route_metadata(show_secret, [digest_auth([])]).
+	route_metadata(show_secret_sha512, [digest_auth([algorithm(sha512_256), accepted_algorithms([sha512_256])])]).
+
+	response_middleware(digest_authentication_info, add_digest_authentication_info).
+	response_middleware(add_router_stage, add_router_stage).
+
+	authorize_routed_request(Request, Action) :-
+		^^authorize_digest_auth_request(Request, Action).
+
+	add_router_stage(_Request, response(Version, Status, Headers0, Body, Properties), Response) :-
+		http_core::response(Version, Status, [x_router_stage-routed| Headers0], Body, Properties, Response).
+
+	show_public(Request, Response) :-
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(public)), [], Response).
+
+	show_secret(Request, Response) :-
+		http_core::property(Request, digest_username(Username)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Username)), [], Response).
+
+:- end_object.
+
+
 :- object(http_digest_request_echo_handler,
 	implements(http_handler_protocol)).
 

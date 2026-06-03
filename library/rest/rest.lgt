@@ -26,14 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-03,
-		comment is 'REST authoring layer built on top of the HTTP router category.',
-		remarks is [
-			'Endpoint descriptors' - 'Importing objects declare ``endpoint/5`` clauses. Endpoint identifiers must be unique within the importing object. The category derives ``route/4``, ``route_metadata/2``, and ``route_produces/2`` from those descriptors and dispatches all matched routes through a single action runner.',
-			'Contract validation hooks' - 'Importing objects can optionally define ``open_api_validate_request/1`` and ``open_api_validate_response/1`` to enable automatic request and response contract validation against the matched endpoint OpenAPI operation id.',
-			'Request helpers' - 'The category provides helper predicates for path parameters, query parameters, headers, and common decoded request body formats. The decoded body helpers report missing or mismatched request bodies as ``400 Bad Request`` problem responses when used from endpoint actions.',
-			'Result normalization' - 'Endpoint actions return small result terms such as ``ok(JSON)``, ``created(Location, JSON)``, ``no_content``, ``json(Status, JSON)``, or ``problem(Status, Type, Title, Detail)`` and the category normalizes those terms into HTTP responses. Successful JSON responses honor the negotiated router media type when one is available while problem responses always use ``application/problem+json``.',
-			'OpenAPI reuse' - 'Endpoint options other than ``produces/1`` are passed through as route metadata, allowing existing ``http_router`` OpenAPI derivation to continue working when the importing object also implements ``open_api_provider_protocol``.'
-		]
+		comment is 'REST authoring layer built on top of the HTTP router category.'
 	]).
 
 	:- public(path_parameter/3).
@@ -215,10 +208,24 @@
 		argnames is ['Request', 'Id', 'Response0', 'Errors', 'Response']
 	]).
 
+	:- protected(rest_action_failure_response/3).
+	:- mode(rest_action_failure_response(+compound, +atom, -compound), zero_or_one).
+	:- info(rest_action_failure_response/3, [
+		comment is 'Optional hook predicate that customizes the response returned when the matched endpoint action fails without throwing an exception. The arguments are the current request, the endpoint identifier, and the response to send.',
+		argnames is ['Request', 'Id', 'Response']
+	]).
+
+	:- protected(rest_action_error_response/4).
+	:- mode(rest_action_error_response(+compound, +atom, +term, -compound), zero_or_one).
+	:- info(rest_action_error_response/4, [
+		comment is 'Optional hook predicate that customizes the response returned when the matched endpoint action throws an unsupported exception. The arguments are the current request, the endpoint identifier, the thrown term, and the response to send.',
+		argnames is ['Request', 'Id', 'Error', 'Response']
+	]).
+
 	:- protected(dispatch_rest_endpoint/2).
 	:- mode(dispatch_rest_endpoint(+compound, -compound), one_or_error).
 	:- info(dispatch_rest_endpoint/2, [
-		comment is 'Runs the action associated with the matched endpoint and normalizes its result term into an HTTP response.',
+		comment is 'Runs the action associated with the matched endpoint and normalizes any supported returned or thrown result term into an HTTP response.',
 		argnames is ['Request', 'Response']
 	]).
 
@@ -371,7 +378,7 @@
 
 	run_rest_endpoint(Id, Request, Response) :-
 		endpoint_descriptor(Id, _Method, _Path, Action, _Options),
-		run_rest_action(Action, Request, Result, Response0),
+		run_rest_action(Id, Action, Request, Result, Response0),
 		(   var(Response0) ->
 			normalize_rest_result(Request, Result, Response)
 		;   Response = Response0
@@ -514,24 +521,53 @@
 	open_api_validation_exception_response(response, Request, _Error, Response) :-
 		problem_response(Request, 500, 'urn:logtalk:open-api:response-validation-error', 'OpenAPI Validation Error', 'OpenAPI response contract validation failed.', Response).
 
-	run_rest_action(Action, Request, Result, Response) :-
+	run_rest_action(Id, Action, Request, Result, Response) :-
 		Goal =.. [Action, Request, Result0],
-		(   catch(::Goal, Error, normalize_rest_error(Request, Error, Response)) ->
+		(   catch(::Goal, Error, normalize_rest_caught_term(Request, Id, Error, Response)) ->
 			(   var(Response) ->
 				Result = Result0
 			;   true
 			)
-		;   problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'REST action failed.', Response)
+		;   rest_action_failure_response_(Request, Id, Response)
 		).
 
-	normalize_rest_error(Request, problem(StatusSpec, Type, Title, Detail), Response) :-
+	normalize_rest_caught_term(Request, _Id, Term, Response) :-
+		rest_result_term(Term),
+		!,
+		normalize_rest_result(Request, Term, Response).
+	normalize_rest_caught_term(Request, Id, Error, Response) :-
+		normalize_rest_error(Request, Id, Error, Response).
+
+	rest_result_term(Result) :-
+		http_core::is_response(Result),
+		!.
+	rest_result_term(response(Response)) :-
+		http_core::is_response(Response),
+		!.
+	rest_result_term(ok(_JSON)).
+	rest_result_term(created(_Location, _JSON)).
+	rest_result_term(no_content).
+	rest_result_term(json(_StatusSpec, _JSON)).
+	rest_result_term(json(_StatusSpec, _Headers, _JSON)).
+	rest_result_term(problem(_StatusSpec, _Type, _Title, _Detail)).
+
+	normalize_rest_error(Request, _Id, problem(StatusSpec, Type, Title, Detail), Response) :-
 		!,
 		problem_response(Request, StatusSpec, Type, Title, Detail, Response).
-	normalize_rest_error(Request, error(problem(StatusSpec, Type, Title, Detail), _Context), Response) :-
+	normalize_rest_error(Request, _Id, error(problem(StatusSpec, Type, Title, Detail), _Context), Response) :-
 		!,
 		problem_response(Request, StatusSpec, Type, Title, Detail, Response).
-	normalize_rest_error(Request, _Error, Response) :-
-		problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'Unhandled REST action error.', Response).
+	normalize_rest_error(Request, Id, Error, Response) :-
+		(   ::rest_action_error_response(Request, Id, Error, Response) ->
+			true
+		;   problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'Unhandled REST action error.', Response)
+		).
+
+	rest_action_failure_response_(Request, Id, Response) :-
+		(   ::rest_action_failure_response(Request, Id, Response) ->
+			true
+		;   problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'REST action failed.', Response)
+		).
 
 	normalize_status(Status, _NormalizedStatus) :-
 		\+ ground(Status),

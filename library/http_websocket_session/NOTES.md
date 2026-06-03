@@ -61,7 +61,7 @@ To test this library, load the `tester.lgt` file:
 Current scope
 -------------
 
-The current slice provides:
+The current implementation provides:
 
 - `initial_state/1` and `is_state/1` for working with session state terms.
 - `read_message/4` for stateful message reads that preserve pending fragmented

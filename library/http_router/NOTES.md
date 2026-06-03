@@ -78,7 +78,7 @@ To test this library, load the `tester.lgt` file:
 Current scope
 -------------
 
-The initial routing slice provides one public predicate through the imported
+The initial routing solution provides one public predicate through the imported
 category:
 
 - `handle/2` routes a normalized request using `route/4` clauses defined by the
@@ -262,7 +262,7 @@ list declared by `route_produces/2` for the matched route.
 Current limitations
 -------------------
 
-- The current slice supports path-template matching, pre-routing middleware
+- The current version supports path-template matching, pre-routing middleware
   chaining, response post-processing middleware, route-specific metadata
   annotations, automatic OpenAPI provider derivation including best-effort
   request and successful response schema inference, method dispatch,

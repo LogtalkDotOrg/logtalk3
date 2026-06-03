@@ -33,6 +33,10 @@
 		body/2, header/3, status/2
 	]).
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
 	cover(rest).
 
 	test(rest_handle_2_01, deterministic) :-
@@ -166,6 +170,18 @@
 		status(Response, status(500, 'Internal Server Error')),
 		body(Response, content('application/problem+json', json({type-'about:blank', title-'Internal Server Error', detail-'Unhandled REST action error.', status-500}))).
 
+	test(rest_action_hook_2_01, deterministic) :-
+		Request = request(get, origin('/hooks/failure'), http(1, 1), [], empty, []),
+		action_error_hooks_rest_application::handle(Request, Response),
+		status(Response, status(409, 'Conflict')),
+		body(Response, content('application/problem+json', json({type-'urn:logtalk:action-failed', title-'Conflict', detail-'Custom REST action failure.', status-409}))).
+
+	test(rest_action_hook_2_02, deterministic) :-
+		Request = request(get, origin('/hooks/error'), http(1, 1), [], empty, []),
+		action_error_hooks_rest_application::handle(Request, Response),
+		status(Response, status(422, 'Unprocessable Content')),
+		body(Response, content('application/problem+json', json({type-'urn:logtalk:action-error', title-'Unprocessable Content', detail-'Custom REST action error.', status-422}))).
+
 	test(rest_handle_2_14, deterministic) :-
 		Request = request(get, origin('/vendor/items/42'), http(1, 1), [accept-'application/vnd.example+json'], empty, []),
 		vendor_media_type_rest_application::handle(Request, Response),
@@ -219,6 +235,32 @@
 		status(Response, status(200, 'OK')),
 		body(Response, content('application/json', json({id-'42', format-mixed}))).
 
+	test(rest_handle_2_23, deterministic) :-
+		Request = request(get, origin('/variants/thrown/ok'), http(1, 1), [], empty, []),
+		result_variants_rest_application::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/json', json({thrown- @true}))).
+
+	test(rest_handle_2_24, deterministic) :-
+		Request = request(post, origin('/variants/thrown/created'), http(1, 1), [], empty, []),
+		result_variants_rest_application::handle(Request, Response),
+		status(Response, status(201, 'Created')),
+		header(Response, location, '/variants/thrown/created/100'),
+		body(Response, content('application/json', json({id-'100', created- @true}))).
+
+	test(rest_handle_2_25, deterministic) :-
+		Request = request(delete, origin('/variants/thrown/no-content'), http(1, 1), [], empty, []),
+		result_variants_rest_application::handle(Request, Response),
+		status(Response, status(204, 'No Content')),
+		body(Response, empty).
+
+	test(rest_handle_2_26, deterministic) :-
+		Request = request(get, origin('/variants/thrown/headers'), http(1, 1), [], empty, []),
+		result_variants_rest_application::handle(Request, Response),
+		status(Response, status(202, 'Accepted')),
+		header(Response, x_thrown, yes),
+		body(Response, content('application/json', json({accepted- @true}))).
+
 	test(rest_route_metadata_2_01, deterministic) :-
 		sample_rest_application::route_metadata_descriptor(show_item, Metadata),
 		Metadata == [summary('Show item'), tags([items])].
@@ -235,6 +277,25 @@
 
 	test(rest_route_4_01, error(domain_error(rest_endpoint_id, duplicate(duplicate_item)))) :-
 		duplicate_endpoint_id_rest_application::route_descriptor(_Id, _Method, _Path, _Handler).
+
+	test(rest_digest_auth_2_01, deterministic) :-
+		digest_auth_rest_application::route_metadata_descriptor(show_secret, Metadata),
+		Metadata == [digest_auth([])].
+
+	test(rest_digest_auth_2_02, deterministic) :-
+		Request = request(get, origin('/secret'), http(1, 1), [], empty, []),
+		digest_auth_rest_application::handle(Request, Response),
+		status(Response, status(401, 'Unauthorized')),
+		http_digest::challenge(Response, digest_challenge(Fields)),
+		memberchk(realm('test-realm'), Fields).
+
+	test(rest_digest_auth_2_03, deterministic) :-
+		authorized_digest_rest_request('/secret', Request),
+		digest_auth_rest_application::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/json', json({user-'Mufasa'}))),
+		http_digest::authentication_info(Response, digest_authentication_info(Fields)),
+		memberchk(nextnonce('next-nonce'), Fields).
 
 	test(rest_open_api_duplicate_endpoint_id_2_01, error(domain_error(rest_endpoint_id, duplicate(duplicate_item)))) :-
 		open_api::operation(duplicate_endpoint_id_rest_application, duplicate_item, _Operation).
@@ -390,5 +451,13 @@
 			],
 			[tags([contract])]
 		).
+
+	% auxiliary predicates
+
+	authorized_digest_rest_request(Path, AuthorizedRequest) :-
+		Request = request(get, origin(Path), http(1, 1), [], empty, []),
+		digest_auth_rest_application::handle(Request, ChallengeResponse),
+		http_digest::challenge(ChallengeResponse, Challenge),
+		http_digest::authorize_request(Request, Challenge, 'Mufasa', 'Circle Of Life', AuthorizedRequest, [cnonce('client-nonce'), nonce_count(1)]).
 
 :- end_object.

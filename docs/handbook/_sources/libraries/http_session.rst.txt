@@ -129,7 +129,7 @@ Current scope:
   computation, secure filtering, ``Max-Age``, and normalized ``Expires``
   HTTP-date values
 
-Out of scope for this first slice:
+Out of scope for this first implementation:
 
 - HTTPS transport support in the client facade
 - public suffix enforcement

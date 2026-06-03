@@ -411,16 +411,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Endpoint descriptors: Importing objects declare <code class="docutils literal notranslate"><span class="pre">endpoint/5</span></code> clauses. Endpoint identifiers must be unique within the importing object. The category derives <code class="docutils literal notranslate"><span class="pre">route/4</span></code>, <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> from those descriptors and dispatches all matched routes through a single action runner.</p></li>
-<li><p>Contract validation hooks: Importing objects can optionally define <code class="docutils literal notranslate"><span class="pre">open_api_validate_request/1</span></code> and <code class="docutils literal notranslate"><span class="pre">open_api_validate_response/1</span></code> to enable automatic request and response contract validation against the matched endpoint OpenAPI operation id.</p></li>
-<li><p>Request helpers: The category provides helper predicates for path parameters, query parameters, headers, and common decoded request body formats. The decoded body helpers report missing or mismatched request bodies as <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> problem responses when used from endpoint actions.</p></li>
-<li><p>Result normalization: Endpoint actions return small result terms such as <code class="docutils literal notranslate"><span class="pre">ok(JSON)</span></code>, <code class="docutils literal notranslate"><span class="pre">created(Location,</span> <span class="pre">JSON)</span></code>, <code class="docutils literal notranslate"><span class="pre">no_content</span></code>, <code class="docutils literal notranslate"><span class="pre">json(Status,</span> <span class="pre">JSON)</span></code>, or <code class="docutils literal notranslate"><span class="pre">problem(Status,</span> <span class="pre">Type,</span> <span class="pre">Title,</span> <span class="pre">Detail)</span></code> and the category normalizes those terms into HTTP responses. Successful JSON responses honor the negotiated router media type when one is available while problem responses always use <code class="docutils literal notranslate"><span class="pre">application/problem+json</span></code>.</p></li>
-<li><p>OpenAPI reuse: Endpoint options other than <code class="docutils literal notranslate"><span class="pre">produces/1</span></code> are passed through as route metadata, allowing existing <code class="docutils literal notranslate"><span class="pre">http_router</span></code> OpenAPI derivation to continue working when the importing object also implements <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code>.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -455,11 +449,13 @@
 <li><p><a class="reference internal" href="#open-api-request-validation-error-response-4" id="id20"><code class="docutils literal notranslate"><span class="pre">open_api_request_validation_error_response/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#open-api-validate-response-1" id="id21"><code class="docutils literal notranslate"><span class="pre">open_api_validate_response/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#open-api-response-validation-error-response-5" id="id22"><code class="docutils literal notranslate"><span class="pre">open_api_response_validation_error_response/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#dispatch-rest-endpoint-2" id="id23"><code class="docutils literal notranslate"><span class="pre">dispatch_rest_endpoint/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rest-action-failure-response-3" id="id23"><code class="docutils literal notranslate"><span class="pre">rest_action_failure_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rest-action-error-response-4" id="id24"><code class="docutils literal notranslate"><span class="pre">rest_action_error_response/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dispatch-rest-endpoint-2" id="id25"><code class="docutils literal notranslate"><span class="pre">dispatch_rest_endpoint/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id24">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id25">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -1013,9 +1009,51 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="rest-action-failure-response-3">
+<span id="rest-0-rest-action-failure-response-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rest_action_failure_response/3</span></code></a><a class="headerlink" href="#rest-action-failure-response-3" title="Link to this heading"></a></h3>
+<p>Optional hook predicate that customizes the response returned when the matched endpoint action fails without throwing an exception. The arguments are the current request, the endpoint identifier, and the response to send.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rest_action_failure_response(Request,Id,Response)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rest_action_failure_response(+compound,+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rest-action-error-response-4">
+<span id="rest-0-rest-action-error-response-4"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rest_action_error_response/4</span></code></a><a class="headerlink" href="#rest-action-error-response-4" title="Link to this heading"></a></h3>
+<p>Optional hook predicate that customizes the response returned when the matched endpoint action throws an unsupported exception. The arguments are the current request, the endpoint identifier, the thrown term, and the response to send.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rest_action_error_response(Request,Id,Error,Response)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rest_action_error_response(+compound,+atom,+term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="dispatch-rest-endpoint-2">
-<span id="rest-0-dispatch-rest-endpoint-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dispatch_rest_endpoint/2</span></code></a><a class="headerlink" href="#dispatch-rest-endpoint-2" title="Link to this heading"></a></h3>
-<p>Runs the action associated with the matched endpoint and normalizes its result term into an HTTP response.</p>
+<span id="rest-0-dispatch-rest-endpoint-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dispatch_rest_endpoint/2</span></code></a><a class="headerlink" href="#dispatch-rest-endpoint-2" title="Link to this heading"></a></h3>
+<p>Runs the action associated with the matched endpoint and normalizes any supported returned or thrown result term into an HTTP response.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

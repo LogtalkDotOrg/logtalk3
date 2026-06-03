@@ -43,8 +43,10 @@
 
 	cover(http_digest).
 	cover(http_server_digest_handler(_, _, _, _)).
+	cover(http_router_digest_auth(_, _, _)).
 	cover(http_digest_test_verifier).
 	cover(http_digest_test_handler).
+	cover(http_digest_test_router).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
@@ -257,6 +259,54 @@
 		body(Response, content('text/plain', text('Mufasa'))),
 		http_digest::authentication_info(Response, digest_authentication_info(Fields)),
 		memberchk(nextnonce(none), Fields).
+
+	test(http_router_digest_auth_01, deterministic) :-
+		request_for_path('/secret', Request),
+		http_digest_test_router::handle(Request, Response),
+		status(Response, status(401, 'Unauthorized')),
+		headers(Response, Headers),
+		memberchk(x_router_stage-routed, Headers),
+		\+ http_digest::authentication_info(Response, _AuthenticationInfo),
+		http_digest::challenge(Response, _Challenge).
+
+	test(http_router_digest_auth_02, deterministic) :-
+		authorized_request(sha256, '/secret', 1700000000, Request),
+		http_digest_test_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		headers(Response, Headers),
+		memberchk(x_router_stage-routed, Headers),
+		body(Response, content('text/plain', text('Mufasa'))),
+		http_digest::authentication_info(Response, digest_authentication_info(Fields)),
+		memberchk(nextnonce('next-nonce'), Fields).
+
+	test(http_router_digest_auth_03, deterministic) :-
+		request_for_path('/public', Request),
+		http_digest_test_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		headers(Response, Headers),
+		memberchk(x_router_stage-routed, Headers),
+		body(Response, content('text/plain', text(public))),
+		\+ http_digest::authentication_info(Response, _AuthenticationInfo).
+
+	test(http_router_digest_auth_04, deterministic) :-
+		authorized_request(sha256, '/secret', 1699999698, Request),
+		http_digest_test_router::handle(Request, Response),
+		status(Response, status(401, 'Unauthorized')),
+		headers(Response, Headers),
+		memberchk(x_router_stage-routed, Headers),
+		\+ http_digest::authentication_info(Response, _AuthenticationInfo),
+		http_digest::challenge(Response, digest_challenge(Fields)),
+		memberchk(stale(true), Fields).
+
+	test(http_router_digest_auth_05, deterministic) :-
+		authorized_request(sha512_256, '/secret-sha512', 1700000000, Request),
+		http_digest_test_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		headers(Response, Headers),
+		memberchk(x_router_stage-routed, Headers),
+		body(Response, content('text/plain', text('Mufasa'))),
+		http_digest::authentication_info(Response, digest_authentication_info(Fields)),
+		memberchk(nextnonce('next-nonce'), Fields).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),

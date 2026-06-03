@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>http_digest_verifier_protocol &mdash; Logtalk 3.101.0</title>
+  <title>http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)" href="http_router_digest_auth_3.html" />
-    <link rel="prev" title="http_digest" href="http_digest_0.html" />
+    <link rel="next" title="http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)" href="http_server_digest_handler_4.html" />
+    <link rel="prev" title="http_digest_verifier_protocol" href="http_digest_verifier_protocol_0.html" />
    
 </head>
 
@@ -171,8 +171,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-digest"><span class="xref std std-ref">http_digest</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_client_digest_session_0.html">http_client_digest_session</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_digest_0.html">http_digest</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">http_digest_verifier_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_router_digest_auth_3.html">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_digest_verifier_protocol_0.html">http_digest_verifier_protocol</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_server_digest_handler_4.html">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
 </ul>
 </li>
@@ -370,9 +370,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_digest_verifier_protocol</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/http_digest_verifier_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/http_router_digest_auth_3.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -380,10 +380,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="http-digest-verifier-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="http-digest-verifier-protocol">
-<h1><code class="docutils literal notranslate"><span class="pre">http_digest_verifier_protocol</span></code><a class="headerlink" href="#http-digest-verifier-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for HTTP Digest authentication verifiers backed by stored HA1 values.</p>
+  <p class="right" id="http-router-digest-auth-3"><span id="index-0"></span><strong>category</strong></p>
+<section id="http-router-digest-auth-verifier-protectoptions-authenticationinfooptions">
+<h1><code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</span></code><a class="headerlink" href="#http-router-digest-auth-verifier-protectoptions-authenticationinfooptions" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> - Verifier object passed to <code class="docutils literal notranslate"><span class="pre">http_digest::protect_request/4</span></code> when a routed request declares <code class="docutils literal notranslate"><span class="pre">digest_auth/1</span></code> metadata.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ProtectOptions</span></code> - Base protect-request options merged with any route-specific <code class="docutils literal notranslate"><span class="pre">digest_auth/1</span></code> metadata options.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AuthenticationInfoOptions</span></code> - Base options passed to <code class="docutils literal notranslate"><span class="pre">http_digest::add_authentication_info/4</span></code> when a routed request was successfully verified using Digest authentication.</p></li>
+</ul>
+<p>Optional Digest-auth router helpers for objects importing the <code class="docutils literal notranslate"><span class="pre">http_router</span></code> category.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -393,7 +398,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-29</div>
+<div class="line"><strong>Date:</strong> 2026-06-03</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -402,9 +407,11 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Dependencies:</strong></div>
+<div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
+<div class="line"><a class="reference internal" href="http_digest_0.html#http-digest-0"><span class="std std-ref">http_digest</span></a></div>
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -421,21 +428,26 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#ha1-4" id="id2"><code class="docutils literal notranslate"><span class="pre">ha1/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authorize-digest-auth-request-2" id="id3"><code class="docutils literal notranslate"><span class="pre">authorize_digest_auth_request/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#add-digest-authentication-info-3" id="id4"><code class="docutils literal notranslate"><span class="pre">add_digest_authentication_info/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id3">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id4">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="ha1-4">
-<span id="http-digest-verifier-protocol-0-ha1-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ha1/4</span></code></a><a class="headerlink" href="#ha1-4" title="Link to this heading"></a></h3>
-<p>Returns the stored lowercase hexadecimal HA1 value for the given normalized digest algorithm family, realm, and username. Fails when the user is unknown for the realm.</p>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<section id="authorize-digest-auth-request-2">
+<span id="http-router-digest-auth-3-authorize-digest-auth-request-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authorize_digest_auth_request/2</span></code></a><a class="headerlink" href="#authorize-digest-auth-request-2" title="Link to this heading"></a></h3>
+<p>Router helper that applies Digest-auth route metadata to a routed request and returns either <code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -445,23 +457,158 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">ha1(Algorithm,Realm,Username,HA1)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorize_digest_auth_request(Request,Action)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">ha1(+atom,++atom,++atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorize_digest_auth_request(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RouteOptions</span></code> is not a proper list of Digest protection options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_digest_auth_options,RouteOptions)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ProtectOptions</span></code> is not a proper list of Digest protection options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_digest_auth_options,ProtectOptions)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> does not name an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_digest_verifier,Verifier)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> names an object that does not implement <code class="docutils literal notranslate"><span class="pre">http_digest_verifier_protocol</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_verifier,Verifier)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the effective Digest protection options list is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the effective Digest protection options list is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the effective Digest protection options list is a compound term but not a valid Digest option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the effective Digest protection options list is not accepted by <code class="docutils literal notranslate"><span class="pre">http_digest::protect_request/4</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_protect_request_option,Option)</span></code></div>
+</div>
+<div class="line">The effective Digest protection options omit <code class="docutils literal notranslate"><span class="pre">realm/1</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_term(challenge),missing(realm))</span></code></div>
+</div>
+<div class="line">The effective Digest protection options omit <code class="docutils literal notranslate"><span class="pre">nonce_secret/1</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_protect_request_option,nonce_secret(A))</span></code></div>
+</div>
+<div class="line">The effective Digest protection options request unsupported <code class="docutils literal notranslate"><span class="pre">userhash</span></code> support:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_term(challenge),invalid(userhash))</span></code></div>
+</div>
+<div class="line">The effective Digest protection options request an unsupported Digest algorithm:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_algorithm,Algorithm)</span></code></div>
+</div>
+<div class="line">The effective Digest protection options request an unsupported Digest qop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_qop,Qop)</span></code></div>
+</div>
+<div class="line">The effective Digest protection options request a non-401 failure status:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_status,Status)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="add-digest-authentication-info-3">
+<span id="http-router-digest-auth-3-add-digest-authentication-info-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">add_digest_authentication_info/3</span></code></a><a class="headerlink" href="#add-digest-authentication-info-3" title="Link to this heading"></a></h3>
+<p>Router helper that decorates a response with <code class="docutils literal notranslate"><span class="pre">Authentication-Info</span></code> when the routed request was successfully verified using Digest authentication.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_digest_authentication_info(Request,Response0,Response)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">add_digest_authentication_info(+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">AuthenticationInfoOptions</span></code> is not a proper list of Digest authentication-info options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_digest_auth_authentication_info_options,AuthenticationInfoOptions)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response0</span></code> is not a normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response0)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the Digest authentication-info options list is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the Digest authentication-info options list is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the Digest authentication-info options list is a compound term but not a valid Digest option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the Digest authentication-info options list is not accepted by <code class="docutils literal notranslate"><span class="pre">http_digest::add_authentication_info/4</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_add_authentication_info_option,Option)</span></code></div>
+</div>
+<div class="line">The routed request carries an invalid Digest authorization term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_term(authorization),Cause)</span></code></div>
+</div>
+<div class="line">The routed request carries a Digest authorization with an unsupported response qop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_qop,Qop)</span></code></div>
+</div>
+<div class="line">The routed request carries a Digest authorization with an unsupported algorithm:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_algorithm,Algorithm)</span></code></div>
+</div>
+<div class="line">Automatic <code class="docutils literal notranslate"><span class="pre">nextnonce</span></code> generation is requested without <code class="docutils literal notranslate"><span class="pre">nonce_secret/1</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_digest_add_authentication_info_option,nonce_secret(A))</span></code></div>
+</div>
 </div>
 </div>
 </section>
 </section>
 <hr class="docutils" />
-<section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
-</section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
@@ -473,8 +620,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_digest_0.html" class="btn btn-neutral float-left" title="http_digest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_router_digest_auth_3.html" class="btn btn-neutral float-right" title="http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_digest_verifier_protocol_0.html" class="btn btn-neutral float-left" title="http_digest_verifier_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_server_digest_handler_4.html" class="btn btn-neutral float-right" title="http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

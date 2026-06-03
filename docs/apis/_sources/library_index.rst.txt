@@ -1325,6 +1325,7 @@ To load any library (including developer tools, ports, and contributions), use t
    http_client_digest_session <http_client_digest_session_0>
    http_digest <http_digest_0>
    http_digest_verifier_protocol <http_digest_verifier_protocol_0>
+   http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>
    http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_digest_handler_4>
 
 :ref:`http_directory_listing <library_http_directory_listing>`

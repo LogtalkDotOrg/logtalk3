@@ -58,7 +58,7 @@ To test this library, load the `tester.lgt` file:
 Current scope
 -------------
 
-The current slice provides one public object with two public predicates:
+The current version provides one public object with two public predicates:
 
 - `serve/4`
 - `serve/5`

@@ -41,7 +41,7 @@ To test this library, load the ``tester.lgt`` file:
 Current scope
 -------------
 
-The current slice provides eighteen predicates:
+The current implementation provides eighteen predicates:
 
 - ``open_listener/4`` opens a TCP listener using the ``sockets`` library
   and returns the listener handle.

@@ -37,7 +37,7 @@ To test this library, load the ``tester.lgt`` file:
 Current scope
 -------------
 
-The current slice provides:
+The current implementation provides:
 
 - ``http_websocket_handshake::websocket_opening_key/1`` for generating
   canonical base64-encoded opening keys.
@@ -98,7 +98,7 @@ Current workflow
 Current limitations
 -------------------
 
-- This slice operates at the frame level only. It does not yet provide
+- This library operates at the frame level only. It does not yet provide
   application session loops.
 - Message reassembly plus UTF-8-aware text and close-reason handling now
   live in the ``http_websocket_messages`` library.

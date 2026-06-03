@@ -59,6 +59,7 @@ Categories
    http_message_helpers <http_message_helpers_0>
    http_router <http_router_0>
    http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
+   http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>
    http_router_htmx <http_router_htmx_0>
    http_router_parameters <http_router_parameters_0>
    http_router_server_session(Manager) <http_router_server_session_1>

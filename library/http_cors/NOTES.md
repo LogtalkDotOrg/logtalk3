@@ -57,8 +57,8 @@ To test this library, load the `tester.lgt` file:
 Current scope
 -------------
 
-The current slice provides one transport-neutral public object with five public
-predicates:
+The current implementation provides one transport-neutral public object with
+five public predicates:
 
 - `request_origin/2`
 - `is_cors_request/1`
@@ -195,6 +195,6 @@ Current limitations
 - dynamic callback policies are not supported
 - wildcard subdomain matching is not supported
 - `allowed_origins(any)` cannot be combined with `allow_credentials(true)` in
-  the current slice
+  the current version
 - wildcard semantics are currently implemented for `allowed_headers/1` and
   `expose_headers/1`, but not for `allowed_methods/1`

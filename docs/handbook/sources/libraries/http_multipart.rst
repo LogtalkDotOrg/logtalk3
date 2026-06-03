@@ -38,7 +38,7 @@ To test this library, load the ``tester.lgt`` file:
 Current scope
 -------------
 
-The current slice provides:
+The current version provides:
 
 - ``body/3`` for constructing validated normalized multipart body terms.
 - ``part/4`` for constructing validated normalized multipart part terms.
@@ -91,7 +91,7 @@ Current workflow
 Current limitations
 -------------------
 
-- This slice is entirely in-memory.
+- This version is entirely in-memory.
 - The form-data helpers only cover the common
   ``Content-Disposition: form-data`` parameters needed for ``name`` and
   ``filename`` extraction and construction.

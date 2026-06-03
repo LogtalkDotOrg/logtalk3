@@ -383,7 +383,7 @@ link in a web browser.</p>
 </section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
-<p>The current slice provides:</p>
+<p>The current implementation provides:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">message/3</span></code> for constructing validated normalized WebSocket message
 terms.</p></li>
@@ -455,7 +455,7 @@ must be surfaced while the fragmented data remains pending.</p></li>
 <li><p>Client and server masking policy is still not enforced automatically
 by role in this stateless layer. Use the <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>
 library when that policy should be applied automatically.</p></li>
-<li><p>This slice still does not provide application session loops,
+<li><p>This version still does not provide application session loops,
 close-handshake orchestration, or automatic ping/pong policies. The
 stateful session layer is the next abstraction step, but it still
 leaves those policies to the caller.</p></li>

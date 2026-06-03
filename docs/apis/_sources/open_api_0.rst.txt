@@ -329,6 +329,8 @@ Constructs an OpenAPI JSON media descriptor using the default ``application/json
 | **Exceptions:**
 |    ``Schema`` is a variable:
 |        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
 
 
 ------------
@@ -352,10 +354,12 @@ Constructs an OpenAPI JSON media descriptor using the given media type.
 | **Exceptions:**
 |    ``MediaType`` is a variable:
 |        ``instantiation_error``
-|    ``MediaType`` is neither a variable nor an atom:
+|    ``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom:
 |        ``domain_error(open_api_media_type,MediaType)``
 |    ``Schema`` is a variable:
 |        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
 
 
 ------------
@@ -387,6 +391,8 @@ Constructs an OpenAPI request-body descriptor using the default ``application/js
 |        ``domain_error(open_api_boolean,Required)``
 |    ``Schema`` is a variable:
 |        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
 
 
 ------------
@@ -410,7 +416,7 @@ Constructs an OpenAPI request-body descriptor using the given media type.
 | **Exceptions:**
 |    ``MediaType`` is a variable:
 |        ``instantiation_error``
-|    ``MediaType`` is neither a variable nor an atom:
+|    ``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom:
 |        ``domain_error(open_api_media_type,MediaType)``
 |    ``Description`` is a variable:
 |        ``instantiation_error``
@@ -422,6 +428,8 @@ Constructs an OpenAPI request-body descriptor using the given media type.
 |        ``domain_error(open_api_boolean,Required)``
 |    ``Schema`` is a variable:
 |        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
 
 
 ------------
@@ -445,7 +453,7 @@ Constructs an OpenAPI response descriptor using the default ``application/json``
 | **Exceptions:**
 |    ``Status`` is a variable:
 |        ``instantiation_error``
-|    ``Status`` is neither a variable nor a valid OpenAPI response status:
+|    ``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``'2XX'``:
 |        ``domain_error(open_api_response_status,Status)``
 |    ``Description`` is a variable:
 |        ``instantiation_error``
@@ -453,6 +461,8 @@ Constructs an OpenAPI response descriptor using the default ``application/json``
 |        ``domain_error(open_api_description,Description)``
 |    ``Schema`` is a variable:
 |        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
 
 
 ------------
@@ -476,7 +486,7 @@ Constructs an OpenAPI response descriptor using the given media type.
 | **Exceptions:**
 |    ``Status`` is a variable:
 |        ``instantiation_error``
-|    ``Status`` is neither a variable nor a valid OpenAPI response status:
+|    ``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``'2XX'``:
 |        ``domain_error(open_api_response_status,Status)``
 |    ``Description`` is a variable:
 |        ``instantiation_error``
@@ -484,10 +494,12 @@ Constructs an OpenAPI response descriptor using the given media type.
 |        ``domain_error(open_api_description,Description)``
 |    ``MediaType`` is a variable:
 |        ``instantiation_error``
-|    ``MediaType`` is neither a variable nor an atom:
+|    ``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom:
 |        ``domain_error(open_api_media_type,MediaType)``
 |    ``Schema`` is a variable:
 |        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
 
 
 ------------
@@ -528,9 +540,13 @@ Constructs an OpenAPI problem-response descriptor using the ``application/proble
 |    ``problem_response_descriptor(++term,+atom,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Status`` is not a valid OpenAPI response status:
+|    ``Status`` is a variable:
+|        ``instantiation_error``
+|    ``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``'2XX'``:
 |        ``domain_error(open_api_response_status,Status)``
-|    ``Description`` is not an atom:
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
 |        ``domain_error(open_api_description,Description)``
 
 
