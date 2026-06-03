@@ -25857,6 +25857,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(encoding_directive).
 '$lgt_valid_flag'(engines).
 '$lgt_valid_flag'(modules).
+'$lgt_valid_flag'(sockets).
 '$lgt_valid_flag'(tabling).
 '$lgt_valid_flag'(threads).
 '$lgt_valid_flag'(unicode).
@@ -25884,6 +25885,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_read_only_flag'(prolog_compatible_version).
 '$lgt_read_only_flag'(prolog_dialect).
 '$lgt_read_only_flag'(prolog_version).
+'$lgt_read_only_flag'(sockets).
 '$lgt_read_only_flag'(tabling).
 '$lgt_read_only_flag'(threads).
 '$lgt_read_only_flag'(unicode).
@@ -26081,6 +26083,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(modules, supported) :- !.
 '$lgt_valid_flag_value'(modules, unsupported) :- !.
+
+'$lgt_valid_flag_value'(sockets, supported) :- !.
+'$lgt_valid_flag_value'(sockets, unsupported) :- !.
 
 '$lgt_valid_flag_value'(tabling, supported) :- !.
 '$lgt_valid_flag_value'(tabling, unsupported) :- !.

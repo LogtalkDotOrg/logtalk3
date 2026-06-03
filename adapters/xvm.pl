@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XVM 10.0.0 and later versions
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -267,6 +267,7 @@
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(10, 0, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
+'$lgt_prolog_feature'(sockets, supported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, Engines) :-
 	(	predicate_property(message_queue_create(_, _), built_in) ->

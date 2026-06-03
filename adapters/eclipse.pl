@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -386,6 +386,7 @@ forall(Generate, Test) :-
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(v(6,1,143))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
+'$lgt_prolog_feature'(sockets, supported).
 '$lgt_prolog_feature'(tabling, unsupported).
 :- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
 	'$lgt_prolog_feature'(engines, supported).

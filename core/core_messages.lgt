@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:147:0,
+		version is 1:148:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-06-03,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -1189,21 +1189,23 @@
 
 	default_read_only_flags -->
 		{
+			current_logtalk_flag(prolog_dialect, PrologDialect),
 			current_logtalk_flag(unicode, Unicode0), align(Unicode0, Unicode),
 			current_logtalk_flag(encoding_directive, Encodings),
 			current_logtalk_flag(engines, Engines0), align(Engines0, Engines),
 			current_logtalk_flag(threads, Threads),
 			current_logtalk_flag(modules, Modules0), align(Modules0, Modules),
 			current_logtalk_flag(coinduction, Coinduction),
-			current_logtalk_flag(tabling, Tabling0), align(Tabling0, Tabling),
-			current_logtalk_flag(prolog_dialect, PrologDialect)
+			current_logtalk_flag(sockets, Sockets0), align(Sockets0, Sockets),
+			current_logtalk_flag(tabling, Tabling)
 		},
 		[
 			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
+			'  prolog_dialect: ~w'-[PrologDialect], nl,
 			'  unicode: ~w  encoding_directive: ~w'-[Unicode, Encodings], nl,
 			'  engines: ~w  threads:            ~w'-[Engines, Threads], nl,
 			'  modules: ~w  coinduction:        ~w'-[Modules, Coinduction], nl,
-			'  tabling: ~w  prolog_dialect:     ~w'-[Tabling, PrologDialect], nl, nl
+			'  sockets: ~w  tabling:            ~w'-[Sockets, Tabling], nl, nl
 		].
 
 	ground_term_copy(Term, GroundTerm) :-

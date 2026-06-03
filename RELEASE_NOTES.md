@@ -25,6 +25,12 @@ RELEASE NOTES
 3.101.0 - June ??, 2026
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Read-only `sockets` compilation flag to declare if a backend provides
+compatible sockets support. Valid values are `supported` and `unsupported`.
+
 Library
 -------
 
