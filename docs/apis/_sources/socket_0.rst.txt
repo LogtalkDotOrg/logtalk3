@@ -14,8 +14,8 @@ Portable abstraction over TCP sockets. Provides a high-level API for client and 
 |    ``logtalk_load(sockets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:13:0
-| **Date:** 2026-04-22
+| **Version:** 0:13:1
+| **Date:** 2026-06-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ Portable abstraction over TCP sockets. Provides a high-level API for client and 
 
 | **Remarks:**
 
-   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.
+   - Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
    - Design rationale: Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/5`` and ``server_open/3`` that abstracts over these differences.
    - Stream handling: Predicates ``client_open/5`` and ``server_accept/5`` return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.
    - Options: Currently options are only defined for the ``server_open/3`` predicate. This is expected to change in future versions for the other predicates that have an options argument.
