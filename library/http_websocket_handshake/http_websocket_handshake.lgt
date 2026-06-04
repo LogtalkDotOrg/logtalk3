@@ -117,7 +117,7 @@
 		trim_leading_ows_codes(ReversedCodes, ReversedTrimmedCodes),
 		reverse(ReversedTrimmedCodes, TrimmedCodes).
 
-	ows_code(0' ).
+	ows_code(32).
 	ows_code(0'\t).
 
 	websocket_accept_from_key(Key, Accept) :-
@@ -137,8 +137,8 @@
 		integer_to_big_endian_bytes32(H4, B4, []).
 
 	websocket_sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
-	websocket_sha1_blocks(Bytes0, H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
-		take(64, Bytes0, Block, Rest),
+	websocket_sha1_blocks([Byte0| Bytes0], H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
+		take(64, [Byte0| Bytes0], Block, Rest),
 		websocket_sha1_block_words(Block, W0),
 		extend_websocket_sha1_words(16, W0, W),
 		websocket_sha1_rounds(0, W, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),

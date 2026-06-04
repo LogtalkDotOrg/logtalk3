@@ -33,7 +33,6 @@
 		property/2, status/2
 	]).
 
-	cover(websocket_echo_http_handler(_)).
 	cover(websocket_echo_server).
 	cover(websocket_echo_client).
 	cover(http_websocket_echo_demo).

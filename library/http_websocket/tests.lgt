@@ -19,174 +19,229 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(websocket_echo_session_handler,
+	implements(http_websocket_session_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-04,
+		comment is 'Helper session handler used by http_websocket wrapper tests.'
+	]).
+
+	handle(message(text, Text), [message(text, Text)]) :-
+		!.
+	handle(message(close, _Payload), []) :-
+		!.
+	handle(_Message, []).
+
+:- end_object.
+
+
+:- object(websocket_close_after_echo_handler,
+	implements(http_websocket_session_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-04,
+		comment is 'Helper client session handler that closes after receiving one text reply.'
+	]).
+
+	handle(message(text, _Text), [message(close, status(1000, done))]) :-
+		!.
+	handle(message(close, _Payload), []) :-
+		!.
+	handle(_Message, []).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-04,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 
-	:- uses(http_websocket, [
-		frame/5,
-		is_frame/1,
-		parse/2,
-		generate/2,
-		read_frame/2,
-		read_frame/3,
-		write_frame/2,
-		final/2,
-		opcode/2,
-		payload/2,
-		properties/2,
-		property/2
+	:- uses(http_core, [
+		property/2, status/2
 	]).
 
-	:- uses(http_websocket_handshake, [
-		websocket_accept/2,
-		websocket_opening_key/1
+	:- uses(http_websocket_messages, [
+		message/3 as normalized_message/3
 	]).
 
 	cover(http_websocket).
-	cover(http_websocket_handshake).
 
-	cleanup :-
-		^^clean_file('test_http_websocket_frame.tmp').
+	:- if(current_logtalk_flag(threads, supported)).
 
-	test(http_websocket_frame_5_01, deterministic(Properties == [reserved_bits([rsv1, rsv3]), masking_key([1, 2, 3, 4])])) :-
-		frame(final, text, [0'H, 0'e, 0'l, 0'l, 0'o], [masking_key([1, 2, 3, 4]), reserved_bits([rsv3, rsv1])], Frame),
-		final(Frame, final),
-		opcode(Frame, text),
-		payload(Frame, [0'H, 0'e, 0'l, 0'l, 0'o]),
-		properties(Frame, Properties),
-		property(Frame, reserved_bits([rsv1, rsv3])),
-		property(Frame, masking_key([1, 2, 3, 4])).
+		:- threaded.
 
-	test(http_websocket_is_frame_1_01, fail) :-
-		is_frame(frame(more, ping, [], [])).
+		test(http_websocket_direct_text_2_01, deterministic) :-
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(server_accept_text_exchange(Listener, ServerSession), Tag),
+			catch(
+				client_direct_text_exchange(Port, ClientSession),
+				Error,
+				(	catch(http_socket::close_listener(Listener), _, true),
+					catch(once(threaded_exit(server_accept_text_exchange(Listener, _ServerSession), Tag)), _, true),
+					throw(Error)
+				)
+			),
+			once(threaded_exit(server_accept_text_exchange(Listener, ServerSession), Tag)),
+			catch(http_socket::close_listener(Listener), _, true),
+			ServerSession = session(ServerResponse, server, chat, message(text, hello), message(close, status(1000, done))),
+			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, 'Echo: hello')),
+			status(ServerResponse, status(101, 'Switching Protocols')),
+			property(ServerResponse, websocket_protocol([chat])),
+			status(ClientResponse, status(101, 'Switching Protocols')),
+			property(ClientResponse, websocket_protocol([chat])).
 
-	test(http_websocket_handshake_accept_2_01, deterministic(Accept == 's3pPLMBiTxaQ9kYGzzhZRbK+xOo=')) :-
-		websocket_accept('dGhlIHNhbXBsZSBub25jZQ==', Accept).
+		test(http_websocket_direct_json_2_01, deterministic(ReplyJSON == JSON)) :-
+			JSON = {message-hello, count-1},
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(server_accept_json_exchange(Listener, _ReceivedJSON), Tag),
+			catch(
+				client_direct_json_exchange(Port, JSON, ReplyJSON),
+				Error,
+				(	catch(http_socket::close_listener(Listener), _, true),
+					catch(once(threaded_exit(server_accept_json_exchange(Listener, _ServerReceivedJSON), Tag)), _, true),
+					throw(Error)
+				)
+			),
+			once(threaded_exit(server_accept_json_exchange(Listener, _ReceivedJSON), Tag)),
+			catch(http_socket::close_listener(Listener), _, true).
 
-	test(http_websocket_handshake_opening_key_1_01, deterministic) :-
-		websocket_opening_key(Key),
-		base64::parse(atom(Key), Bytes),
-		Bytes = [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _].
+		test(http_websocket_direct_term_2_01, deterministic(ReplyTerm == hello(world, 42))) :-
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(server_accept_term_exchange(Listener, _ReceivedTerm), Tag),
+			catch(
+				client_direct_term_exchange(Port, hello(world, 42), ReplyTerm),
+				Error,
+				(	catch(http_socket::close_listener(Listener), _, true),
+					catch(once(threaded_exit(server_accept_term_exchange(Listener, _ServerReceivedTerm), Tag)), _, true),
+					throw(Error)
+				)
+			),
+			once(threaded_exit(server_accept_term_exchange(Listener, _ReceivedTerm), Tag)),
+			catch(http_socket::close_listener(Listener), _, true).
 
-	test(http_websocket_parse_2_01, true(Frame == end_of_file)) :-
-		parse(bytes([]), Frame).
+		test(http_websocket_open_session_5_01, deterministic) :-
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(server_accept_for_open_session(Listener, ServerSession), Tag),
+			catch(
+				client_open_session_exchange(Port, ClientResponse, ClientState),
+				Error,
+				(	catch(http_socket::close_listener(Listener), _, true),
+					catch(once(threaded_exit(server_accept_for_open_session(Listener, _ServerSession), Tag)), _, true),
+					throw(Error)
+				)
+			),
+			once(threaded_exit(server_accept_for_open_session(Listener, ServerSession), Tag)),
+			catch(http_socket::close_listener(Listener), _, true),
+			ServerSession = session(ServerResponse, message(text, hello), message(close, status(1000, done))),
+			status(ServerResponse, status(101, 'Switching Protocols')),
+			property(ServerResponse, websocket_protocol([chat])),
+			status(ClientResponse, status(101, 'Switching Protocols')),
+			property(ClientResponse, websocket_protocol([chat])),
+			ClientState = session_state(idle, closed(status(1000, done), status(1000, done))).
 
-	test(http_websocket_parse_2_02, deterministic) :-
-		parse(bytes([0x81, 0x05, 0'H, 0'e, 0'l, 0'l, 0'o]), Frame),
-		final(Frame, final),
-		opcode(Frame, text),
-		payload(Frame, [0'H, 0'e, 0'l, 0'l, 0'o]),
-		properties(Frame, []).
+		test(http_websocket_serve_once_6_01, deterministic) :-
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag),
+			catch(
+				client_direct_text_exchange(Port, ClientSession),
+				Error,
+				(	catch(http_socket::close_listener(Listener), _, true),
+					catch(once(threaded_exit(server_serve_once_exchange(Listener, _Response, _State), Tag)), _, true),
+					throw(Error)
+				)
+			),
+			once(threaded_exit(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag)),
+			catch(http_socket::close_listener(Listener), _, true),
+			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, hello)),
+			status(ServerResponse, status(101, 'Switching Protocols')),
+			property(ServerResponse, websocket_protocol([chat])),
+			ServerState = session_state(idle, closed(status(1000, done), status(1000, done))),
+			status(ClientResponse, status(101, 'Switching Protocols')),
+			property(ClientResponse, websocket_protocol([chat])).
 
-	test(http_websocket_parse_2_03, deterministic) :-
-		parse(bytes([0x81, 0x85, 0x37, 0xFA, 0x21, 0x3D, 0x7F, 0x9F, 0x4D, 0x51, 0x58]), Frame),
-		final(Frame, final),
-		opcode(Frame, text),
-		payload(Frame, [0'H, 0'e, 0'l, 0'l, 0'o]),
-		property(Frame, masking_key([0x37, 0xFA, 0x21, 0x3D])).
+		server_accept_text_exchange(Listener, session(Response, Role, Protocol, ReceivedMessage, CloseMessage)) :-
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
+			http_websocket::property(WebSocket, role(Role)),
+			http_websocket::property(WebSocket, response(Response)),
+			http_websocket::property(WebSocket, subprotocol(Protocol)),
+			http_websocket::receive(WebSocket, ReceivedMessage),
+			echo_reply_message(ReceivedMessage, ReplyMessage),
+			http_websocket::send(WebSocket, ReplyMessage),
+			http_websocket::receive(WebSocket, CloseMessage).
 
-	test(http_websocket_generate_2_01, true(Bytes == [0x81, 0x05, 0'H, 0'e, 0'l, 0'l, 0'o])) :-
-		frame(final, text, [0'H, 0'e, 0'l, 0'l, 0'o], [], Frame),
-		generate(bytes(Bytes), Frame).
+		client_direct_text_exchange(Port, session(Response, Role, Protocol, SentMessage, ReplyMessage)) :-
+			websocket_url(Port, URL),
+			normalized_message(text, hello, SentMessage),
+			http_websocket::open(URL, WebSocket, [protocols([chat])]),
+			http_websocket::property(WebSocket, role(Role)),
+			http_websocket::property(WebSocket, response(Response)),
+			http_websocket::property(WebSocket, subprotocol(Protocol)),
+			http_websocket::send(WebSocket, SentMessage),
+			http_websocket::receive(WebSocket, ReplyMessage),
+			http_websocket::close(WebSocket, status(1000, done)).
 
-	test(http_websocket_generate_2_02, true(Bytes == [0x81, 0x85, 0x37, 0xFA, 0x21, 0x3D, 0x7F, 0x9F, 0x4D, 0x51, 0x58])) :-
-		frame(final, text, [0'H, 0'e, 0'l, 0'l, 0'o], [masking_key([0x37, 0xFA, 0x21, 0x3D])], Frame),
-		generate(bytes(Bytes), Frame).
+		server_accept_json_exchange(Listener, ReceivedJSON) :-
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, []),
+			http_websocket::receive_json(WebSocket, ReceivedJSON),
+			http_websocket::send_json(WebSocket, ReceivedJSON),
+			http_websocket::receive(WebSocket, _CloseMessage).
 
-	test(http_websocket_roundtrip_2_01, deterministic) :-
-		repeated_byte_list(126, 0xAA, PayloadBytes),
-		frame(final, binary, PayloadBytes, [reserved_bits([rsv1])], Frame),
-		generate(bytes(Bytes), Frame),
-		Bytes = [0xC2, 0x7E, 0x00, 0x7E| _],
-		parse(bytes(Bytes), ParsedFrame),
-		opcode(ParsedFrame, binary),
-		payload(ParsedFrame, PayloadBytes),
-		property(ParsedFrame, reserved_bits([rsv1])).
+		client_direct_json_exchange(Port, JSON, ReplyJSON) :-
+			websocket_url(Port, URL),
+			http_websocket::open(URL, WebSocket, []),
+			http_websocket::send_json(WebSocket, JSON),
+			http_websocket::receive_json(WebSocket, ReplyJSON),
+			http_websocket::close(WebSocket, status(1000, done)).
 
-	test(http_websocket_roundtrip_2_02, deterministic) :-
-		repeated_byte_list(65536, 0x55, PayloadBytes),
-		frame(final, binary, PayloadBytes, [], Frame),
-		generate(bytes(Bytes), Frame),
-		Bytes = [0x82, 0x7F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00| _],
-		parse(bytes(Bytes), ParsedFrame),
-		opcode(ParsedFrame, binary),
-		payload(ParsedFrame, PayloadBytes).
+		server_accept_term_exchange(Listener, ReceivedTerm) :-
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, []),
+			http_websocket::receive_term(WebSocket, ReceivedTerm),
+			http_websocket::send_term(WebSocket, ReceivedTerm),
+			http_websocket::receive(WebSocket, _CloseMessage).
 
-	test(http_websocket_write_read_frame_2_01, deterministic) :-
-		frame(final, pong, [0'p, 0'o, 0'n, 0'g], [], Frame),
-		^^file_path('test_http_websocket_frame.tmp', File),
-		open(File, write, Output, [type(binary)]),
-		write_frame(Output, Frame),
-		close(Output),
-		open(File, read, Input, [type(binary)]),
-		read_frame(Input, ParsedFrame),
-		close(Input),
-		ParsedFrame == Frame.
+		client_direct_term_exchange(Port, Term, ReplyTerm) :-
+			websocket_url(Port, URL),
+			http_websocket::open(URL, WebSocket, []),
+			http_websocket::send_term(WebSocket, Term),
+			http_websocket::receive_term(WebSocket, ReplyTerm),
+			http_websocket::close(WebSocket, status(1000, done)).
 
-	test(http_websocket_read_frame_3_01, error(domain_error(http_websocket_payload_length_limit, 1))) :-
-		frame(final, text, [0'h], [], Frame),
-		^^file_path('test_http_websocket_frame.tmp', File),
-		open(File, write, Output, [type(binary)]),
-		write_frame(Output, Frame),
-		close(Output),
-		open(File, read, Input, [type(binary)]),
-		catch(read_frame(Input, _ParsedFrame, [max_payload_length(0)]), Error, true),
-		close(Input),
-		throw(Error).
+		server_accept_for_open_session(Listener, session(Response, ReceivedMessage, CloseMessage)) :-
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
+			http_websocket::property(WebSocket, response(Response)),
+			http_websocket::receive(WebSocket, ReceivedMessage),
+			echo_reply_message(ReceivedMessage, ReplyMessage),
+			http_websocket::send(WebSocket, ReplyMessage),
+			http_websocket::receive(WebSocket, CloseMessage).
 
-	test(http_websocket_read_frame_3_02, error(domain_error(option, max_payload_length(_)))) :-
-		frame(final, text, [0'h], [], Frame),
-		^^file_path('test_http_websocket_frame.tmp', File),
-		open(File, write, Output, [type(binary)]),
-		write_frame(Output, Frame),
-		close(Output),
-		open(File, read, Input, [type(binary)]),
-		catch(read_frame(Input, _ParsedFrame, [max_payload_length(_)]), Error, true),
-		close(Input),
-		throw(Error).
+		client_open_session_exchange(Port, Response, State) :-
+			websocket_url(Port, URL),
+			http_websocket::open_session(URL, websocket_close_after_echo_handler, Response, State, [protocols([chat]), initial_messages([message(text, hello)])]).
 
-	test(http_websocket_frame_5_02, error(domain_error(http_websocket_frame, _))) :-
-		frame(final, close, [0x03], [], _Frame).
+		server_serve_once_exchange(Listener, Response, State) :-
+			http_websocket::serve_once(Listener, websocket_echo_session_handler, Response, State, _ClientInfo, [protocol(chat)]).
 
-	test(http_websocket_frame_5_03, error(domain_error(http_websocket_frame, _))) :-
-		frame(more, ping, [], [], _Frame).
+		websocket_url(Port, URL) :-
+			number_codes(Port, PortCodes),
+			atom_codes(PortAtom, PortCodes),
+			atom_concat('ws://127.0.0.1:', PortAtom, Prefix),
+			atom_concat(Prefix, '/echo', URL).
 
-	test(http_websocket_parse_2_04, error(domain_error(http_websocket_frame, _))) :-
-		parse(bytes([0x88, 0x01, 0x03]), _Frame).
+		echo_reply_message(message(text, Text), ReplyMessage) :-
+			atom_concat('Echo: ', Text, ReplyText),
+			normalized_message(text, ReplyText, ReplyMessage).
 
-	test(http_websocket_parse_2_05, error(domain_error(http_websocket_opcode, 3))) :-
-		parse(bytes([0x83, 0x00]), _Frame).
-
-	test(http_websocket_read_frame_2_02, error(domain_error(http_websocket_opcode, 3))) :-
-		^^file_path('test_http_websocket_frame.tmp', File),
-		open(File, write, Output, [type(binary)]),
-		write_bytes([0x83, 0x00], Output),
-		close(Output),
-		open(File, read, Input, [type(binary)]),
-		catch(read_frame(Input, _ParsedFrame), Error, true),
-		close(Input),
-		throw(Error).
-
-	repeated_byte_list(Length, Byte, Bytes) :-
-		repeated_byte_list(Length, Byte, Bytes, []).
-
-	write_bytes([], _Output).
-	write_bytes([Byte| Bytes], Output) :-
-		put_byte(Output, Byte),
-		write_bytes(Bytes, Output).
-
-	repeated_byte_list(0, _Byte, Bytes, Bytes) :-
-		!.
-	repeated_byte_list(Length, Byte, [Byte| Bytes0], Bytes) :-
-		Length > 0,
-		NextLength is Length - 1,
-		repeated_byte_list(NextLength, Byte, Bytes0, Bytes).
+	:- endif.
 
 :- end_object.

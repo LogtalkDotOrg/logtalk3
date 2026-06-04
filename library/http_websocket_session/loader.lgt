@@ -31,6 +31,7 @@
 		logtalk_load(timeout(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_socket(loader)),
+		logtalk_load(http_websocket_frames(loader)),
 		logtalk_load(http_websocket_messages(loader)),
 		logtalk_load([
 			http_websocket_session_handler_protocol,

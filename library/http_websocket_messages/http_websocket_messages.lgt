@@ -112,7 +112,7 @@
 	read_message(Stream, Message) :-
 		(	var(Stream) ->
 			instantiation_error
-		;	http_websocket::read_frame(Stream, Frame),
+		;	http_websocket_frames::read_frame(Stream, Frame),
 			read_frame_message(Frame, Stream, Message)
 		).
 
@@ -120,8 +120,8 @@
 		(	var(Stream) ->
 			instantiation_error
 		;	encode_message(Message, _NormalizedMessage, Opcode, PayloadBytes),
-			http_websocket::frame(final, Opcode, PayloadBytes, [], Frame),
-			http_websocket::write_frame(Stream, Frame)
+			http_websocket_frames::frame(final, Opcode, PayloadBytes, [], Frame),
+			http_websocket_frames::write_frame(Stream, Frame)
 		).
 
 	type(Message, Type) :-
@@ -141,13 +141,13 @@
 		decode_data_message(binary, PayloadBytes, Message).
 	decode_message(ping, PayloadBytes, message(ping, PayloadBytes)) :-
 		!,
-		http_websocket::frame(final, ping, PayloadBytes, [], _Frame).
+		http_websocket_frames::frame(final, ping, PayloadBytes, [], _Frame).
 	decode_message(pong, PayloadBytes, message(pong, PayloadBytes)) :-
 		!,
-		http_websocket::frame(final, pong, PayloadBytes, [], _Frame).
+		http_websocket_frames::frame(final, pong, PayloadBytes, [], _Frame).
 	decode_message(close, PayloadBytes, Message) :-
 		!,
-		http_websocket::frame(final, close, PayloadBytes, [], _Frame),
+		http_websocket_frames::frame(final, close, PayloadBytes, [], _Frame),
 		close_payload_message(PayloadBytes, Message).
 	decode_message(Type, _PayloadBytes, _Message) :-
 		domain_error(http_websocket_message_type, Type).
@@ -155,9 +155,9 @@
 	read_frame_message(end_of_file, _Stream, end_of_file) :-
 		!.
 	read_frame_message(Frame, Stream, Message) :-
-		http_websocket::opcode(Frame, Opcode),
-		http_websocket::final(Frame, Final),
-		http_websocket::payload(Frame, PayloadBytes),
+		http_websocket_frames::opcode(Frame, Opcode),
+		http_websocket_frames::final(Frame, Final),
+		http_websocket_frames::payload(Frame, PayloadBytes),
 		read_message_opcode(Opcode, Final, PayloadBytes, Frame, Stream, Message).
 
 	read_message_opcode(continuation, _Final, _PayloadBytes, Frame, _Stream, _Message) :-
@@ -184,12 +184,12 @@
 		decode_data_message(Type, PayloadBytes, Message).
 
 	read_continuation_payload(Stream, Chunks0, PayloadBytes) :-
-		http_websocket::read_frame(Stream, Frame),
+		http_websocket_frames::read_frame(Stream, Frame),
 		(	Frame == end_of_file ->
 			domain_error(http_websocket_message_sequence, end_of_file)
-		;	http_websocket::opcode(Frame, continuation) ->
-			http_websocket::payload(Frame, Chunk),
-			http_websocket::final(Frame, Final),
+		;	http_websocket_frames::opcode(Frame, continuation) ->
+			http_websocket_frames::payload(Frame, Chunk),
+			http_websocket_frames::final(Frame, Final),
 			(	Final == final ->
 				reverse([Chunk| Chunks0], Chunks),
 				append_chunks(Chunks, PayloadBytes, [])
@@ -243,19 +243,19 @@
 	normalize_message_payload(text, Text0, Text, PayloadBytes) :-
 		!,
 		text_bytes(Text0, Text, PayloadBytes),
-		http_websocket::frame(final, text, PayloadBytes, [], _Frame).
+		http_websocket_frames::frame(final, text, PayloadBytes, [], _Frame).
 	normalize_message_payload(binary, Payload, Payload, Payload) :-
 		!,
-		http_websocket::frame(final, binary, Payload, [], _Frame).
+		http_websocket_frames::frame(final, binary, Payload, [], _Frame).
 	normalize_message_payload(ping, Payload, Payload, Payload) :-
 		!,
-		http_websocket::frame(final, ping, Payload, [], _Frame).
+		http_websocket_frames::frame(final, ping, Payload, [], _Frame).
 	normalize_message_payload(pong, Payload, Payload, Payload) :-
 		!,
-		http_websocket::frame(final, pong, Payload, [], _Frame).
+		http_websocket_frames::frame(final, pong, Payload, [], _Frame).
 	normalize_message_payload(close, Payload0, Payload, PayloadBytes) :-
 		normalize_close_payload(Payload0, Payload, PayloadBytes),
-		http_websocket::frame(final, close, PayloadBytes, [], _Frame).
+		http_websocket_frames::frame(final, close, PayloadBytes, [], _Frame).
 
 	normalize_close_payload(empty, empty, []) :-
 		!.

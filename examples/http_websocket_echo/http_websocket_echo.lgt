@@ -18,31 +18,10 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-% This handler only performs the HTTP Upgrade handshake. Once the connection
-% is upgraded, the example switches to the WebSocket message layer.
-
-:- object(websocket_echo_http_handler(_Protocol_),
-	implements(http_handler_protocol)).
-
-	:- info([
-		version is 0:1:0,
-		author is 'Paulo Moura',
-		date is 2026-05-23,
-		comment is 'WebSocket opening-handshake handler for the echo example.',
-		parnames is ['Protocol']
-	]).
-
-	% The selected subprotocol must be one offered by the client.
-	handle(Request, Response) :-
-		http_server::accept_websocket(Request, Response, [protocol(_Protocol_)]).
-
-:- end_object.
-
-
-% The server accepts one WebSocket client, reads one text message, writes one
-% text reply, and then closes the upgraded connection. Keeping the exchange to
-% one message in each direction makes the control flow easy to follow.
+% The server accepts one WebSocket client using the high-level porcelain API,
+% reads one text message, writes one text reply, then waits for the client
+% close frame. Keeping the exchange to one message in each direction makes the
+% control flow easy to follow.
 
 :- object(websocket_echo_server).
 
@@ -81,25 +60,13 @@
 		),
 		http_socket::close_listener(Listener).
 
-	% serve_websocket_once/5 performs the opening handshake and returns an open
-	% WebSocket connection handle. The message exchange itself uses the streams
-	% stored in that handle.
 	serve_listener(Listener, session(HandshakeResponse, ReceivedMessage, ReplyMessage)) :-
-		http_socket::serve_websocket_once(Listener, websocket_echo_http_handler(chat), Connection, HandshakeResponse, _ClientInfo),
-		catch(
-			serve_connection(Connection, ReceivedMessage, ReplyMessage),
-			Error,
-			(	catch(http_socket::close_connection(Connection), _, true),
-				throw(Error)
-			)
-		),
-		http_socket::close_connection(Connection).
-
-	serve_connection(Connection, ReceivedMessage, ReplyMessage) :-
-		http_socket::connection_streams(Connection, Input, Output),
-		http_websocket_messages::read_message(Input, ReceivedMessage),
+		http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
+		http_websocket::property(WebSocket, response(HandshakeResponse)),
+		http_websocket::receive(WebSocket, ReceivedMessage),
 		echo_reply_message(ReceivedMessage, ReplyMessage),
-		http_websocket_messages::write_message(Output, ReplyMessage).
+		http_websocket::send(WebSocket, ReplyMessage),
+		http_websocket::receive(WebSocket, _CloseMessage).
 
 	% The example focuses on text messages. The server turns the received text
 	% into a new text message so both reading and writing are visible.
@@ -111,9 +78,8 @@
 
 
 % The direct client assumes a WebSocket server is already running. It opens a
-% WebSocket connection, sends one text message, reads one reply, and closes the
-% connection. Compared with the demo object below, this client only speaks the
-% wire protocol and does not manage any server lifecycle.
+% WebSocket connection with the porcelain API, sends one text message, reads one
+% reply, and then closes the connection.
 
 :- object(websocket_echo_client).
 
@@ -133,21 +99,21 @@
 
 	run(Port, Text, session(HandshakeResponse, SentMessage, ReplyMessage)) :-
 		websocket_url(Port, URL),
-		http_client::open_websocket(URL, Connection, HandshakeResponse, [protocols([chat])]),
+		http_websocket::open(URL, WebSocket, [protocols([chat])]),
+		http_websocket::property(WebSocket, response(HandshakeResponse)),
 		catch(
-			client_exchange(Connection, Text, SentMessage, ReplyMessage),
+			client_exchange(WebSocket, Text, SentMessage, ReplyMessage),
 			Error,
-			(	catch(http_socket::close_connection(Connection), _, true),
+			(	catch(http_websocket::close(WebSocket), _, true),
 				throw(Error)
 			)
-		),
-		http_socket::close_connection(Connection).
+		).
 
-	client_exchange(Connection, Text, SentMessage, ReplyMessage) :-
-		http_socket::connection_streams(Connection, Input, Output),
+	client_exchange(WebSocket, Text, SentMessage, ReplyMessage) :-
 		http_websocket_messages::message(text, Text, SentMessage),
-		http_websocket_messages::write_message(Output, SentMessage),
-		http_websocket_messages::read_message(Input, ReplyMessage).
+		http_websocket::send(WebSocket, SentMessage),
+		http_websocket::receive(WebSocket, ReplyMessage),
+		http_websocket::close(WebSocket, status(1000, done)).
 
 	% The client uses the higher-level ws:// URL facade instead of constructing
 	% the opening handshake request manually.
@@ -163,8 +129,8 @@
 % The demo object keeps the example self-contained when backend threads are
 % available: one thread runs the WebSocket server while the main thread runs
 % the direct client. This is similar in spirit to the http_open_api demo but
-% focused on the opening handshake and message exchange instead of request/
-% response documents.
+% focused on the high-level WebSocket open/send/receive flow instead of the
+% lower-level request/response plumbing.
 
 :- object(http_websocket_echo_demo).
 

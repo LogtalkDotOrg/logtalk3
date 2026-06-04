@@ -30,7 +30,7 @@ Stateful WebSocket session predicates that build on top of the message layer to 
 | **Uses:**
 |    :ref:`crypto <crypto/0>`
 |    :ref:`http_socket <http_socket/0>`
-|    :ref:`http_websocket <http_websocket/0>`
+|    :ref:`http_websocket_frames <http_websocket_frames/0>`
 |    :ref:`http_websocket_session_loop_options <http_websocket_session_loop_options/0>`
 |    :ref:`http_websocket_session_read_options <http_websocket_session_read_options/0>`
 |    :ref:`http_websocket_session_registry <http_websocket_session_registry/0>`

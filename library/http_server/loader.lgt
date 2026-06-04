@@ -25,8 +25,11 @@
 )).
 
 	:- initialization((
+		logtalk_load(crypto(loader)),
+		logtalk_load(hashes(loader)),
 		logtalk_load(http_core(loader)),
-		logtalk_load(http_websocket(loader)),
+		logtalk_load(http_multipart(loader)),
+		logtalk_load(http_websocket_handshake(loader)),
 		logtalk_load(http_server, [optimize(on)])
 	)).
 

@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_websocket_handshake" href="http_websocket_handshake_0.html" />
+    <link rel="next" title="http_websocket_accept_handler(Options)" href="http_websocket_accept_handler_1.html" />
     <link rel="prev" title="http_static_files" href="http_static_files_0.html" />
    
 </head>
@@ -180,9 +180,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket"><span class="xref std std-ref">http_websocket</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_handshake_0.html">http_websocket_handshake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_accept_handler_1.html">http_websocket_accept_handler(Options)</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-frames"><span class="xref std std-ref">http_websocket_frames</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-handshake"><span class="xref std std-ref">http_websocket_handshake</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-session"><span class="xref std std-ref">http_websocket_session</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ica-projection"><span class="xref std std-ref">ica_projection</span></a></li>
@@ -380,7 +382,7 @@
   <p class="right" id="http-websocket-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="http-websocket">
 <h1><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code><a class="headerlink" href="#http-websocket" title="Link to this heading"></a></h1>
-<p>Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.</p>
+<p>High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -390,7 +392,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-23</div>
+<div class="line"><strong>Date:</strong> 2026-06-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -405,8 +407,15 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="http_client_0.html#http-client-0"><span class="std std-ref">http_client</span></a></div>
+<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
+<div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
+<div class="line"><a class="reference internal" href="http_websocket_client_session_0.html#http-websocket-client-session-0"><span class="std std-ref">http_websocket_client_session</span></a></div>
+<div class="line"><a class="reference internal" href="http_websocket_messages_0.html#http-websocket-messages-0"><span class="std std-ref">http_websocket_messages</span></a></div>
+<div class="line"><a class="reference internal" href="http_websocket_server_session_0.html#http-websocket-server-session-0"><span class="std std-ref">http_websocket_server_session</span></a></div>
+<div class="line"><a class="reference internal" href="json_0.html#json-0"><span class="std std-ref">json</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="reader_0.html#reader-0"><span class="std std-ref">reader</span></a></div>
+<div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -425,30 +434,46 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#frame-5" id="id2"><code class="docutils literal notranslate"><span class="pre">frame/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-frame-1" id="id3"><code class="docutils literal notranslate"><span class="pre">is_frame/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-2" id="id4"><code class="docutils literal notranslate"><span class="pre">parse/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-2" id="id5"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#read-frame-2" id="id6"><code class="docutils literal notranslate"><span class="pre">read_frame/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#read-frame-3" id="id7"><code class="docutils literal notranslate"><span class="pre">read_frame/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#write-frame-2" id="id8"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#final-2" id="id9"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#opcode-2" id="id10"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#payload-2" id="id11"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#properties-2" id="id12"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#property-2" id="id13"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-2" id="id2"><code class="docutils literal notranslate"><span class="pre">open/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-3" id="id3"><code class="docutils literal notranslate"><span class="pre">open/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#accept-3" id="id4"><code class="docutils literal notranslate"><span class="pre">accept/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#accept-4" id="id5"><code class="docutils literal notranslate"><span class="pre">accept/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-2" id="id6"><code class="docutils literal notranslate"><span class="pre">send/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-3" id="id7"><code class="docutils literal notranslate"><span class="pre">send/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-2" id="id8"><code class="docutils literal notranslate"><span class="pre">receive/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-3" id="id9"><code class="docutils literal notranslate"><span class="pre">receive/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-1" id="id10"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-2" id="id11"><code class="docutils literal notranslate"><span class="pre">close/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#property-2" id="id12"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-text-2" id="id13"><code class="docutils literal notranslate"><span class="pre">send_text/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-text-2" id="id14"><code class="docutils literal notranslate"><span class="pre">receive_text/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-binary-2" id="id15"><code class="docutils literal notranslate"><span class="pre">send_binary/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-binary-2" id="id16"><code class="docutils literal notranslate"><span class="pre">receive_binary/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-json-2" id="id17"><code class="docutils literal notranslate"><span class="pre">send_json/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-json-2" id="id18"><code class="docutils literal notranslate"><span class="pre">receive_json/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#send-term-2" id="id19"><code class="docutils literal notranslate"><span class="pre">send_term/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#receive-term-2" id="id20"><code class="docutils literal notranslate"><span class="pre">receive_term/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-session-4" id="id21"><code class="docutils literal notranslate"><span class="pre">open_session/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-session-5" id="id22"><code class="docutils literal notranslate"><span class="pre">open_session/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-once-5" id="id23"><code class="docutils literal notranslate"><span class="pre">serve_once/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-once-6" id="id24"><code class="docutils literal notranslate"><span class="pre">serve_once/6</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id15">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id16">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#handle-seed-1" id="id27"><code class="docutils literal notranslate"><span class="pre">handle_seed_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#handle-state-8" id="id28"><code class="docutils literal notranslate"><span class="pre">handle_state_/8</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id29">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="frame-5">
-<span id="http-websocket-0-frame-5"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">frame/5</span></code></a><a class="headerlink" href="#frame-5" title="Link to this heading"></a></h3>
-<p>Constructs a validated normalized WebSocket frame term from the fragmentation state atom, opcode atom, payload bytes, and frame properties.</p>
+<section id="open-2">
+<span id="http-websocket-0-open-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open/2</span></code></a><a class="headerlink" href="#open-2" title="Link to this heading"></a></h3>
+<p>Opens a client WebSocket connection to the given <code class="docutils literal notranslate"><span class="pre">ws://</span></code> or <code class="docutils literal notranslate"><span class="pre">wss://</span></code> URL and returns an opaque handle managed by this object.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -458,50 +483,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">frame(Final,Opcode,Payload,Properties,Frame)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open(URL,WebSocket)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">frame(+atom,+atom,+list(byte),+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Final atoms: Use <code class="docutils literal notranslate"><span class="pre">final</span></code> for FIN=1 and <code class="docutils literal notranslate"><span class="pre">more</span></code> for FIN=0.</p></li>
-<li><p>Opcode atoms: Supported opcodes are <code class="docutils literal notranslate"><span class="pre">continuation</span></code>, <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">binary</span></code>, <code class="docutils literal notranslate"><span class="pre">close</span></code>, <code class="docutils literal notranslate"><span class="pre">ping</span></code>, and <code class="docutils literal notranslate"><span class="pre">pong</span></code>.</p></li>
-<li><p>Property <code class="docutils literal notranslate"><span class="pre">masking_key(Key)</span></code>: Requests masking on the wire using a list of four mask bytes.</p></li>
-<li><p>Property <code class="docutils literal notranslate"><span class="pre">reserved_bits(Bits)</span></code>: Preserves reserved bits as an ordered list containing any of <code class="docutils literal notranslate"><span class="pre">rsv1</span></code>, <code class="docutils literal notranslate"><span class="pre">rsv2</span></code>, and <code class="docutils literal notranslate"><span class="pre">rsv3</span></code>.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="is-frame-1">
-<span id="http-websocket-0-is-frame-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_frame/1</span></code></a><a class="headerlink" href="#is-frame-1" title="Link to this heading"></a></h3>
-<p>True when the argument is a valid normalized WebSocket frame term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_frame(Frame)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_frame(&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open(+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="parse-2">
-<span id="http-websocket-0-parse-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse/2</span></code></a><a class="headerlink" href="#parse-2" title="Link to this heading"></a></h3>
-<p>Parses one WebSocket frame from a source term. Supported sources are <code class="docutils literal notranslate"><span class="pre">bytes(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>, and <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>. Empty sources return <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.</p>
+<section id="open-3">
+<span id="http-websocket-0-open-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open/3</span></code></a><a class="headerlink" href="#open-3" title="Link to this heading"></a></h3>
+<p>Opens a client WebSocket connection to the given URL, returning an opaque handle. Client handshake options are forwarded to <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code>. The direct API also accepts <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code> and <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes|none)</span></code> options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -511,18 +504,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse(Source,Frame)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open(URL,WebSocket,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse(++compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open(+atom,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="generate-2">
-<span id="http-websocket-0-generate-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a><a class="headerlink" href="#generate-2" title="Link to this heading"></a></h3>
-<p>Generates one validated WebSocket frame to a sink term. Supported sinks are <code class="docutils literal notranslate"><span class="pre">bytes(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>, and <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>.</p>
+<section id="accept-3">
+<span id="http-websocket-0-accept-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accept/3</span></code></a><a class="headerlink" href="#accept-3" title="Link to this heading"></a></h3>
+<p>Accepts one incoming WebSocket connection on the given listener using the default opening-handshake policy and returns an opaque server-side handle together with the accepted client information.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -532,18 +525,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(Sink,Frame)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accept(Listener,WebSocket,ClientInfo)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(++compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accept(+compound,-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="read-frame-2">
-<span id="http-websocket-0-read-frame-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">read_frame/2</span></code></a><a class="headerlink" href="#read-frame-2" title="Link to this heading"></a></h3>
-<p>Reads one WebSocket frame from a binary stream without requiring end-of-file. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> when the stream is already exhausted.</p>
+<section id="accept-4">
+<span id="http-websocket-0-accept-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accept/4</span></code></a><a class="headerlink" href="#accept-4" title="Link to this heading"></a></h3>
+<p>Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to <code class="docutils literal notranslate"><span class="pre">http_server::accept_websocket/3</span></code>. The direct API also accepts <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code> and <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes|none)</span></code> options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -553,18 +546,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_frame(Stream,Frame)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accept(Listener,WebSocket,ClientInfo,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_frame(+stream_or_alias,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">accept(+compound,-compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="read-frame-3">
-<span id="http-websocket-0-read-frame-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">read_frame/3</span></code></a><a class="headerlink" href="#read-frame-3" title="Link to this heading"></a></h3>
-<p>Reads one WebSocket frame from a binary stream using the given read options. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> when the stream is already exhausted.</p>
+<section id="send-2">
+<span id="http-websocket-0-send-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send/2</span></code></a><a class="headerlink" href="#send-2" title="Link to this heading"></a></h3>
+<p>Writes one outbound WebSocket message using the opaque handle. Accepts normalized <code class="docutils literal notranslate"><span class="pre">message(Type,</span> <span class="pre">Payload)</span></code> terms and the convenience wrappers <code class="docutils literal notranslate"><span class="pre">text(Text)</span></code>, <code class="docutils literal notranslate"><span class="pre">binary(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">ping(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">pong(Bytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">close(Payload)</span></code>, <code class="docutils literal notranslate"><span class="pre">json(JSON)</span></code>, and <code class="docutils literal notranslate"><span class="pre">term(Term)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -574,48 +567,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_frame(Stream,Frame,Options)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(WebSocket,Message)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_frame(+stream_or_alias,-term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Repeated options: When the same read option is given multiple times, the first occurrence is used.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Use a non-negative integer.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="write-frame-2">
-<span id="http-websocket-0-write-frame-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code></a><a class="headerlink" href="#write-frame-2" title="Link to this heading"></a></h3>
-<p>Writes one validated WebSocket frame to a binary stream and flushes the stream.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_frame(Stream,Frame)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_frame(+stream_or_alias,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(+compound,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="final-2">
-<span id="http-websocket-0-final-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">final/2</span></code></a><a class="headerlink" href="#final-2" title="Link to this heading"></a></h3>
-<p>Returns the fragmentation state atom of a validated WebSocket frame term.</p>
+<section id="send-3">
+<span id="http-websocket-0-send-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send/3</span></code></a><a class="headerlink" href="#send-3" title="Link to this heading"></a></h3>
+<p>Writes one outbound WebSocket message using the opaque handle and the given write options, forwarding those options to the underlying session <code class="docutils literal notranslate"><span class="pre">write_message/5</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -625,18 +588,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">final(Frame,Final)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(WebSocket,Message,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">final(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(+compound,+term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="opcode-2">
-<span id="http-websocket-0-opcode-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">opcode/2</span></code></a><a class="headerlink" href="#opcode-2" title="Link to this heading"></a></h3>
-<p>Returns the opcode atom of a validated WebSocket frame term.</p>
+<section id="receive-2">
+<span id="http-websocket-0-receive-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive/2</span></code></a><a class="headerlink" href="#receive-2" title="Link to this heading"></a></h3>
+<p>Reads the next normalized WebSocket message using the opaque handle. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> when the peer closes the transport before another message is available.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -646,18 +609,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">opcode(Frame,Opcode)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive(WebSocket,Message)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">opcode(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="payload-2">
-<span id="http-websocket-0-payload-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">payload/2</span></code></a><a class="headerlink" href="#payload-2" title="Link to this heading"></a></h3>
-<p>Returns the payload byte list of a validated WebSocket frame term.</p>
+<section id="receive-3">
+<span id="http-websocket-0-receive-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive/3</span></code></a><a class="headerlink" href="#receive-3" title="Link to this heading"></a></h3>
+<p>Reads the next normalized WebSocket message using the opaque handle and the given read options. The direct API accepts per-call <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code> and <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes|none)</span></code> overrides.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -667,18 +630,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">payload(Frame,Payload)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive(WebSocket,Message,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">payload(+compound,-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive(+compound,-term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="properties-2">
-<span id="http-websocket-0-properties-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">properties/2</span></code></a><a class="headerlink" href="#properties-2" title="Link to this heading"></a></h3>
-<p>Returns the normalized property list of a validated WebSocket frame term.</p>
+<section id="close-1">
+<span id="http-websocket-0-close-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a><a class="headerlink" href="#close-1" title="Link to this heading"></a></h3>
+<p>Best-effort graceful close of the WebSocket handle using the normal close payload <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -688,18 +651,39 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">properties(Frame,Properties)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(WebSocket)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">properties(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="close-2">
+<span id="http-websocket-0-close-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/2</span></code></a><a class="headerlink" href="#close-2" title="Link to this heading"></a></h3>
+<p>Best-effort graceful close of the WebSocket handle using the given close payload, which must be valid for a normalized <code class="docutils literal notranslate"><span class="pre">message(close,</span> <span class="pre">Payload)</span></code> term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(WebSocket,Payload)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="property-2">
-<span id="http-websocket-0-property-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
-<p>True when the validated WebSocket frame term contains the given property. When the property argument is a variable, properties can be enumerated on backtracking.</p>
+<span id="http-websocket-0-property-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
+<p>Enumerates properties of an open opaque WebSocket handle. Supported properties are <code class="docutils literal notranslate"><span class="pre">role(Role)</span></code>, <code class="docutils literal notranslate"><span class="pre">response(Response)</span></code>, <code class="docutils literal notranslate"><span class="pre">connection(Connection)</span></code>, <code class="docutils literal notranslate"><span class="pre">state(State)</span></code>, <code class="docutils literal notranslate"><span class="pre">client_info(ClientInfo)</span></code>, and <code class="docutils literal notranslate"><span class="pre">subprotocol(Protocol)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -709,11 +693,263 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">property(Frame,Property)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">property(WebSocket,Property)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">property(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">property(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="send-text-2">
+<span id="http-websocket-0-send-text-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send_text/2</span></code></a><a class="headerlink" href="#send-text-2" title="Link to this heading"></a></h3>
+<p>Convenience wrapper for sending one text message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_text(WebSocket,Text)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_text(+compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="receive-text-2">
+<span id="http-websocket-0-receive-text-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive_text/2</span></code></a><a class="headerlink" href="#receive-text-2" title="Link to this heading"></a></h3>
+<p>Reads the next message and returns its text payload when the message type is <code class="docutils literal notranslate"><span class="pre">text</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> unchanged.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_text(WebSocket,Text)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_text(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="send-binary-2">
+<span id="http-websocket-0-send-binary-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send_binary/2</span></code></a><a class="headerlink" href="#send-binary-2" title="Link to this heading"></a></h3>
+<p>Convenience wrapper for sending one binary message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_binary(WebSocket,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_binary(+compound,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="receive-binary-2">
+<span id="http-websocket-0-receive-binary-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive_binary/2</span></code></a><a class="headerlink" href="#receive-binary-2" title="Link to this heading"></a></h3>
+<p>Reads the next message and returns its binary payload when the message type is <code class="docutils literal notranslate"><span class="pre">binary</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> unchanged.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_binary(WebSocket,Bytes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_binary(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="send-json-2">
+<span id="http-websocket-0-send-json-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send_json/2</span></code></a><a class="headerlink" href="#send-json-2" title="Link to this heading"></a></h3>
+<p>Serializes a JSON term as UTF-8 text and sends it as one text message. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_json(WebSocket,JSON)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_json(+compound,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="receive-json-2">
+<span id="http-websocket-0-receive-json-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive_json/2</span></code></a><a class="headerlink" href="#receive-json-2" title="Link to this heading"></a></h3>
+<p>Reads the next text message and decodes its payload as JSON. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> unchanged. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_json(WebSocket,JSON)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_json(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="send-term-2">
+<span id="http-websocket-0-send-term-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send_term/2</span></code></a><a class="headerlink" href="#send-term-2" title="Link to this heading"></a></h3>
+<p>Serializes a Prolog term using canonical write options and sends it as one text message.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_term(WebSocket,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_term(+compound,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="receive-term-2">
+<span id="http-websocket-0-receive-term-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">receive_term/2</span></code></a><a class="headerlink" href="#receive-term-2" title="Link to this heading"></a></h3>
+<p>Reads the next text message and parses its payload as one Prolog term. Returns <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> unchanged.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_term(WebSocket,Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">receive_term(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="open-session-4">
+<span id="http-websocket-0-open-session-4"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_session/4</span></code></a><a class="headerlink" href="#open-session-4" title="Link to this heading"></a></h3>
+<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/4</span></code> that keeps the user in the high-level <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> surface for callback-driven client sessions.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open_session(URL,Handler,Response,State)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open_session(+atom,+object_identifier,-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="open-session-5">
+<span id="http-websocket-0-open-session-5"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_session/5</span></code></a><a class="headerlink" href="#open-session-5" title="Link to this heading"></a></h3>
+<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/5</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open_session(URL,Handler,Response,State,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">open_session(+atom,+object_identifier,-compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="serve-once-5">
+<span id="http-websocket-0-serve-once-5"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/5</span></code></a><a class="headerlink" href="#serve-once-5" title="Link to this heading"></a></h3>
+<p>Convenience wrapper that accepts one incoming WebSocket connection on the given listener, performs the opening handshake using the default server policy, and runs one callback-driven server session.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(Listener,Handler,Response,State,ClientInfo)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,-compound,-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="serve-once-6">
+<span id="http-websocket-0-serve-once-6"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/6</span></code></a><a class="headerlink" href="#serve-once-6" title="Link to this heading"></a></h3>
+<p>Convenience wrapper that accepts one incoming WebSocket connection on the given listener and runs one callback-driven server session using the given combined handshake and session options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(Listener,Handler,Response,State,ClientInfo,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,-compound,-compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 </section>
@@ -725,8 +961,49 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="handle-seed-1">
+<span id="http-websocket-0-handle-seed-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">handle_seed_/1</span></code></a><a class="headerlink" href="#handle-seed-1" title="Link to this heading"></a></h3>
+<p>Last allocated opaque WebSocket handle identifier.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_seed_(HandleId)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_seed_(?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="handle-state-8">
+<span id="http-websocket-0-handle-state-8"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">handle_state_/8</span></code></a><a class="headerlink" href="#handle-state-8" title="Link to this heading"></a></h3>
+<p>Stored opaque WebSocket handle state.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_state_(HandleId,Role,Connection,Response,ClientInfo,State,AutoPong,MaxPayloadLength)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_state_(?positive_integer,?atom,?compound,?compound,?term,?compound,?atom,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
@@ -738,7 +1015,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="http_static_files_0.html" class="btn btn-neutral float-left" title="http_static_files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_websocket_handshake_0.html" class="btn btn-neutral float-right" title="http_websocket_handshake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_websocket_accept_handler_1.html" class="btn btn-neutral float-right" title="http_websocket_accept_handler(Options)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

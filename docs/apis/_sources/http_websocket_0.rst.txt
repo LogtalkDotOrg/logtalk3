@@ -8,14 +8,14 @@
 ``http_websocket``
 ==================
 
-Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.
+High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,8 +24,15 @@ Transport-neutral WebSocket frame predicates for constructing, parsing, generati
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`http_client <http_client/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_socket <http_socket/0>`
+|    :ref:`http_websocket_client_session <http_websocket_client_session/0>`
+|    :ref:`http_websocket_messages <http_websocket_messages/0>`
+|    :ref:`http_websocket_server_session <http_websocket_server_session/0>`
+|    :ref:`json <json/0>`
 |    :ref:`list <list/0>`
-|    :ref:`reader <reader/0>`
+|    :ref:`term_io <term_io/0>`
 
 | **Remarks:**
 |    (none)
@@ -40,223 +47,192 @@ Transport-neutral WebSocket frame predicates for constructing, parsing, generati
 Public predicates
 -----------------
 
-.. index:: frame/5
-.. _http_websocket/0::frame/5:
+.. index:: open/2
+.. _http_websocket/0::open/2:
 
-``frame/5``
-^^^^^^^^^^^
+``open/2``
+^^^^^^^^^^
 
-Constructs a validated normalized WebSocket frame term from the fragmentation state atom, opcode atom, payload bytes, and frame properties.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``frame(Final,Opcode,Payload,Properties,Frame)``
-| **Mode and number of proofs:**
-|    ``frame(+atom,+atom,+list(byte),+list(compound),-compound)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Final atoms: Use ``final`` for FIN=1 and ``more`` for FIN=0.
-    - Opcode atoms: Supported opcodes are ``continuation``, ``text``, ``binary``, ``close``, ``ping``, and ``pong``.
-    - Property ``masking_key(Key)``: Requests masking on the wire using a list of four mask bytes.
-    - Property ``reserved_bits(Bits)``: Preserves reserved bits as an ordered list containing any of ``rsv1``, ``rsv2``, and ``rsv3``.
-
-
-------------
-
-.. index:: is_frame/1
-.. _http_websocket/0::is_frame/1:
-
-``is_frame/1``
-^^^^^^^^^^^^^^
-
-True when the argument is a valid normalized WebSocket frame term.
+Opens a client WebSocket connection to the given ``ws://`` or ``wss://`` URL and returns an opaque handle managed by this object.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``is_frame(Frame)``
+|    ``open(URL,WebSocket)``
 | **Mode and number of proofs:**
-|    ``is_frame(@term)`` - ``zero_or_one``
+|    ``open(+atom,-compound)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: parse/2
-.. _http_websocket/0::parse/2:
+.. index:: open/3
+.. _http_websocket/0::open/3:
 
-``parse/2``
-^^^^^^^^^^^
+``open/3``
+^^^^^^^^^^
 
-Parses one WebSocket frame from a source term. Supported sources are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``. Empty sources return ``end_of_file``.
+Opens a client WebSocket connection to the given URL, returning an opaque handle. Client handshake options are forwarded to ``http_client::open_websocket/4``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``parse(Source,Frame)``
+|    ``open(URL,WebSocket,Options)``
 | **Mode and number of proofs:**
-|    ``parse(++compound,-term)`` - ``one_or_error``
+|    ``open(+atom,-compound,+list)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: generate/2
-.. _http_websocket/0::generate/2:
+.. index:: accept/3
+.. _http_websocket/0::accept/3:
 
-``generate/2``
-^^^^^^^^^^^^^^
-
-Generates one validated WebSocket frame to a sink term. Supported sinks are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``generate(Sink,Frame)``
-| **Mode and number of proofs:**
-|    ``generate(++compound,+compound)`` - ``one_or_error``
-
-
-------------
-
-.. index:: read_frame/2
-.. _http_websocket/0::read_frame/2:
-
-``read_frame/2``
-^^^^^^^^^^^^^^^^
-
-Reads one WebSocket frame from a binary stream without requiring end-of-file. Returns ``end_of_file`` when the stream is already exhausted.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``read_frame(Stream,Frame)``
-| **Mode and number of proofs:**
-|    ``read_frame(+stream_or_alias,-term)`` - ``one_or_error``
-
-
-------------
-
-.. index:: read_frame/3
-.. _http_websocket/0::read_frame/3:
-
-``read_frame/3``
-^^^^^^^^^^^^^^^^
-
-Reads one WebSocket frame from a binary stream using the given read options. Returns ``end_of_file`` when the stream is already exhausted.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``read_frame(Stream,Frame,Options)``
-| **Mode and number of proofs:**
-|    ``read_frame(+stream_or_alias,-term,+list)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Repeated options: When the same read option is given multiple times, the first occurrence is used.
-    - Option ``max_payload_length(Bytes)``: Rejects frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Use a non-negative integer.
-
-
-------------
-
-.. index:: write_frame/2
-.. _http_websocket/0::write_frame/2:
-
-``write_frame/2``
-^^^^^^^^^^^^^^^^^
-
-Writes one validated WebSocket frame to a binary stream and flushes the stream.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``write_frame(Stream,Frame)``
-| **Mode and number of proofs:**
-|    ``write_frame(+stream_or_alias,+compound)`` - ``one_or_error``
-
-
-------------
-
-.. index:: final/2
-.. _http_websocket/0::final/2:
-
-``final/2``
-^^^^^^^^^^^
-
-Returns the fragmentation state atom of a validated WebSocket frame term.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``final(Frame,Final)``
-| **Mode and number of proofs:**
-|    ``final(+compound,-atom)`` - ``one_or_error``
-
-
-------------
-
-.. index:: opcode/2
-.. _http_websocket/0::opcode/2:
-
-``opcode/2``
+``accept/3``
 ^^^^^^^^^^^^
 
-Returns the opcode atom of a validated WebSocket frame term.
+Accepts one incoming WebSocket connection on the given listener using the default opening-handshake policy and returns an opaque server-side handle together with the accepted client information.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``opcode(Frame,Opcode)``
+|    ``accept(Listener,WebSocket,ClientInfo)``
 | **Mode and number of proofs:**
-|    ``opcode(+compound,-atom)`` - ``one_or_error``
+|    ``accept(+compound,-compound,-compound)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: payload/2
-.. _http_websocket/0::payload/2:
+.. index:: accept/4
+.. _http_websocket/0::accept/4:
 
-``payload/2``
+``accept/4``
+^^^^^^^^^^^^
+
+Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accept(Listener,WebSocket,ClientInfo,Options)``
+| **Mode and number of proofs:**
+|    ``accept(+compound,-compound,-compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send/2
+.. _http_websocket/0::send/2:
+
+``send/2``
+^^^^^^^^^^
+
+Writes one outbound WebSocket message using the opaque handle. Accepts normalized ``message(Type, Payload)`` terms and the convenience wrappers ``text(Text)``, ``binary(Bytes)``, ``ping(Bytes)``, ``pong(Bytes)``, ``close(Payload)``, ``json(JSON)``, and ``term(Term)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send(WebSocket,Message)``
+| **Mode and number of proofs:**
+|    ``send(+compound,+term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send/3
+.. _http_websocket/0::send/3:
+
+``send/3``
+^^^^^^^^^^
+
+Writes one outbound WebSocket message using the opaque handle and the given write options, forwarding those options to the underlying session ``write_message/5`` predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send(WebSocket,Message,Options)``
+| **Mode and number of proofs:**
+|    ``send(+compound,+term,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive/2
+.. _http_websocket/0::receive/2:
+
+``receive/2``
 ^^^^^^^^^^^^^
 
-Returns the payload byte list of a validated WebSocket frame term.
+Reads the next normalized WebSocket message using the opaque handle. Returns ``end_of_file`` when the peer closes the transport before another message is available.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``payload(Frame,Payload)``
+|    ``receive(WebSocket,Message)``
 | **Mode and number of proofs:**
-|    ``payload(+compound,-list(byte))`` - ``one_or_error``
+|    ``receive(+compound,-term)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: properties/2
-.. _http_websocket/0::properties/2:
+.. index:: receive/3
+.. _http_websocket/0::receive/3:
 
-``properties/2``
-^^^^^^^^^^^^^^^^
+``receive/3``
+^^^^^^^^^^^^^
 
-Returns the normalized property list of a validated WebSocket frame term.
+Reads the next normalized WebSocket message using the opaque handle and the given read options. The direct API accepts per-call ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` overrides.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``properties(Frame,Properties)``
+|    ``receive(WebSocket,Message,Options)``
 | **Mode and number of proofs:**
-|    ``properties(+compound,-list(compound))`` - ``one_or_error``
+|    ``receive(+compound,-term,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: close/1
+.. _http_websocket/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Best-effort graceful close of the WebSocket handle using the normal close payload ``empty``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(WebSocket)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: close/2
+.. _http_websocket/0::close/2:
+
+``close/2``
+^^^^^^^^^^^
+
+Best-effort graceful close of the WebSocket handle using the given close payload, which must be valid for a normalized ``message(close, Payload)`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(WebSocket,Payload)``
+| **Mode and number of proofs:**
+|    ``close(+compound,+term)`` - ``one_or_error``
 
 
 ------------
@@ -267,15 +243,243 @@ Returns the normalized property list of a validated WebSocket frame term.
 ``property/2``
 ^^^^^^^^^^^^^^
 
-True when the validated WebSocket frame term contains the given property. When the property argument is a variable, properties can be enumerated on backtracking.
+Enumerates properties of an open opaque WebSocket handle. Supported properties are ``role(Role)``, ``response(Response)``, ``connection(Connection)``, ``state(State)``, ``client_info(ClientInfo)``, and ``subprotocol(Protocol)``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``property(Frame,Property)``
+|    ``property(WebSocket,Property)``
 | **Mode and number of proofs:**
-|    ``property(+compound,?compound)`` - ``zero_or_one_or_error``
+|    ``property(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: send_text/2
+.. _http_websocket/0::send_text/2:
+
+``send_text/2``
+^^^^^^^^^^^^^^^
+
+Convenience wrapper for sending one text message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_text(WebSocket,Text)``
+| **Mode and number of proofs:**
+|    ``send_text(+compound,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive_text/2
+.. _http_websocket/0::receive_text/2:
+
+``receive_text/2``
+^^^^^^^^^^^^^^^^^^
+
+Reads the next message and returns its text payload when the message type is ``text``. Returns ``end_of_file`` unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_text(WebSocket,Text)``
+| **Mode and number of proofs:**
+|    ``receive_text(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_binary/2
+.. _http_websocket/0::send_binary/2:
+
+``send_binary/2``
+^^^^^^^^^^^^^^^^^
+
+Convenience wrapper for sending one binary message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_binary(WebSocket,Bytes)``
+| **Mode and number of proofs:**
+|    ``send_binary(+compound,+list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive_binary/2
+.. _http_websocket/0::receive_binary/2:
+
+``receive_binary/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Reads the next message and returns its binary payload when the message type is ``binary``. Returns ``end_of_file`` unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_binary(WebSocket,Bytes)``
+| **Mode and number of proofs:**
+|    ``receive_binary(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_json/2
+.. _http_websocket/0::send_json/2:
+
+``send_json/2``
+^^^^^^^^^^^^^^^
+
+Serializes a JSON term as UTF-8 text and sends it as one text message. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_json(WebSocket,JSON)``
+| **Mode and number of proofs:**
+|    ``send_json(+compound,+nonvar)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive_json/2
+.. _http_websocket/0::receive_json/2:
+
+``receive_json/2``
+^^^^^^^^^^^^^^^^^^
+
+Reads the next text message and decodes its payload as JSON. Returns ``end_of_file`` unchanged. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_json(WebSocket,JSON)``
+| **Mode and number of proofs:**
+|    ``receive_json(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_term/2
+.. _http_websocket/0::send_term/2:
+
+``send_term/2``
+^^^^^^^^^^^^^^^
+
+Serializes a Prolog term using canonical write options and sends it as one text message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_term(WebSocket,Term)``
+| **Mode and number of proofs:**
+|    ``send_term(+compound,+term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive_term/2
+.. _http_websocket/0::receive_term/2:
+
+``receive_term/2``
+^^^^^^^^^^^^^^^^^^
+
+Reads the next text message and parses its payload as one Prolog term. Returns ``end_of_file`` unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_term(WebSocket,Term)``
+| **Mode and number of proofs:**
+|    ``receive_term(+compound,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_session/4
+.. _http_websocket/0::open_session/4:
+
+``open_session/4``
+^^^^^^^^^^^^^^^^^^
+
+Convenience wrapper over ``http_websocket_client_session::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_session(URL,Handler,Response,State)``
+| **Mode and number of proofs:**
+|    ``open_session(+atom,+object_identifier,-compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_session/5
+.. _http_websocket/0::open_session/5:
+
+``open_session/5``
+^^^^^^^^^^^^^^^^^^
+
+Convenience wrapper over ``http_websocket_client_session::open/5``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_session(URL,Handler,Response,State,Options)``
+| **Mode and number of proofs:**
+|    ``open_session(+atom,+object_identifier,-compound,-compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_once/5
+.. _http_websocket/0::serve_once/5:
+
+``serve_once/5``
+^^^^^^^^^^^^^^^^
+
+Convenience wrapper that accepts one incoming WebSocket connection on the given listener, performs the opening handshake using the default server policy, and runs one callback-driven server session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(Listener,Handler,Response,State,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,-compound,-compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_once/6
+.. _http_websocket/0::serve_once/6:
+
+``serve_once/6``
+^^^^^^^^^^^^^^^^
+
+Convenience wrapper that accepts one incoming WebSocket connection on the given listener and runs one callback-driven server session using the given combined handshake and session options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(Listener,Handler,Response,State,ClientInfo,Options)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,-compound,-compound,-compound,+list)`` - ``one_or_error``
 
 
 ------------
@@ -288,7 +492,43 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: handle_seed_/1
+.. _http_websocket/0::handle_seed_/1:
+
+``handle_seed_/1``
+^^^^^^^^^^^^^^^^^^
+
+Last allocated opaque WebSocket handle identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``handle_seed_(HandleId)``
+| **Mode and number of proofs:**
+|    ``handle_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: handle_state_/8
+.. _http_websocket/0::handle_state_/8:
+
+``handle_state_/8``
+^^^^^^^^^^^^^^^^^^^
+
+Stored opaque WebSocket handle state.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``handle_state_(HandleId,Role,Connection,Response,ClientInfo,State,AutoPong,MaxPayloadLength)``
+| **Mode and number of proofs:**
+|    ``handle_state_(?positive_integer,?atom,?compound,?compound,?term,?compound,?atom,?term)`` - ``zero_or_more``
+
+
+------------
 
 Operators
 ---------

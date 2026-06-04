@@ -929,7 +929,7 @@
 
 	valid_pending_chunks([]).
 	valid_pending_chunks([Chunk| Chunks]) :-
-		http_websocket::frame(final, binary, Chunk, [], _Frame),
+		http_websocket_frames::frame(final, binary, Chunk, [], _Frame),
 		valid_pending_chunks(Chunks).
 
 	read_pending_message(Stream, idle, MaxPayloadLength, Pending, Message) :-
@@ -944,9 +944,9 @@
 		!.
 	read_idle_frame(Frame, Stream, MaxPayloadLength, Pending, Message) :-
 		validate_incoming_frame(Frame),
-		http_websocket::opcode(Frame, Opcode),
-		http_websocket::final(Frame, Final),
-		http_websocket::payload(Frame, PayloadBytes),
+		http_websocket_frames::opcode(Frame, Opcode),
+		http_websocket_frames::final(Frame, Final),
+		http_websocket_frames::payload(Frame, PayloadBytes),
 		read_idle_opcode(Opcode, Final, PayloadBytes, Frame, Stream, MaxPayloadLength, Pending, Message).
 
 	read_idle_opcode(continuation, _Final, _PayloadBytes, Frame, _Stream, _MaxPayloadLength, _Pending, _Message) :-
@@ -982,9 +982,9 @@
 		domain_error(http_websocket_session_sequence, end_of_file).
 	read_fragment_frame(Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message) :-
 		validate_incoming_frame(Frame),
-		http_websocket::opcode(Frame, Opcode),
-		http_websocket::final(Frame, Final),
-		http_websocket::payload(Frame, PayloadBytes),
+		http_websocket_frames::opcode(Frame, Opcode),
+		http_websocket_frames::final(Frame, Final),
+		http_websocket_frames::payload(Frame, PayloadBytes),
 		read_fragment_opcode(Opcode, Final, PayloadBytes, Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message).
 
 	read_fragment_opcode(continuation, final, PayloadBytes, _Frame, _Stream, Type, Chunks0, _MaxPayloadLength, idle, Message) :-
@@ -1009,16 +1009,16 @@
 
 	read_websocket_frame(Stream, none, Frame) :-
 		!,
-		http_websocket::read_frame(Stream, Frame).
+		http_websocket_frames::read_frame(Stream, Frame).
 	read_websocket_frame(Stream, MaxPayloadLength, Frame) :-
-		http_websocket::read_frame(Stream, Frame, [max_payload_length(MaxPayloadLength)]).
+		http_websocket_frames::read_frame(Stream, Frame, [max_payload_length(MaxPayloadLength)]).
 
 	validate_incoming_frame(Frame) :-
 		validate_incoming_frame_extensions(Frame),
 		validate_incoming_frame_masking(Frame).
 
 	validate_incoming_frame_extensions(Frame) :-
-		(	\+ http_websocket::property(Frame, reserved_bits(_Bits)) ->
+		(	\+ http_websocket_frames::property(Frame, reserved_bits(_Bits)) ->
 			true
 		;	domain_error(http_websocket_session_extensions, Frame)
 		).
@@ -1026,12 +1026,12 @@
 	validate_incoming_frame_masking(Frame) :-
 		_Role_ == client,
 		!,
-		(	\+ http_websocket::property(Frame, masking_key(_)) ->
+		(	\+ http_websocket_frames::property(Frame, masking_key(_)) ->
 			true
 		;	domain_error(http_websocket_session_masking, Frame)
 		).
 	validate_incoming_frame_masking(Frame) :-
-		(	http_websocket::property(Frame, masking_key(_)) ->
+		(	http_websocket_frames::property(Frame, masking_key(_)) ->
 			true
 		;	domain_error(http_websocket_session_masking, Frame)
 		).
@@ -1132,8 +1132,8 @@
 
 	write_session_frame(Stream, Final, Opcode, PayloadBytes) :-
 		outgoing_frame_properties(Properties),
-		http_websocket::frame(Final, Opcode, PayloadBytes, Properties, Frame),
-		http_websocket::write_frame(Stream, Frame).
+		http_websocket_frames::frame(Final, Opcode, PayloadBytes, Properties, Frame),
+		http_websocket_frames::write_frame(Stream, Frame).
 
 	outgoing_frame_properties(Properties) :-
 		(	_Role_ == client ->

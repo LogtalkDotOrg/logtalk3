@@ -3,11 +3,8 @@
 ``http_websocket``
 ==================
 
-This library provides the transport-neutral WebSocket helpers shared by
-the current HTTP stack. It includes opening-handshake key generation and
-accept value computation in the ``http_websocket_handshake`` object plus
-normalized frame terms and binary frame parsing and generation in the
-``http_websocket`` object.
+This library provides high-level WebSocket predicates for opening and
+closing connections and for exchanging messages.
 
 API documentation
 -----------------
@@ -37,96 +34,63 @@ To test this library, load the ``tester.lgt`` file:
 Current scope
 -------------
 
-The current implementation provides:
+The current implementation provides the following predicates:
 
-- ``http_websocket_handshake::websocket_opening_key/1`` for generating
-  canonical base64-encoded opening keys.
-- ``http_websocket_handshake::websocket_accept/2`` for computing
-  canonical ``Sec-WebSocket-Accept`` values from valid opening keys.
-- ``frame/5`` for constructing validated normalized WebSocket frame
-  terms.
-- ``is_frame/1`` for testing normalized frame terms.
-- ``final/2``, ``opcode/2``, ``payload/2``, ``properties/2``, and
-  ``property/2`` for inspecting normalized frame terms.
-- ``parse/2`` and ``generate/2`` for binary source and sink terms.
-- ``read_frame/2`` and ``write_frame/2`` for incremental frame I/O on
-  binary streams.
-
-Normalized terms
-----------------
-
-Frames use the normalized term:
-
-::
-
-   frame(Final, Opcode, Payload, Properties)
-
-Where:
-
-- ``Final`` is either ``final`` or ``more``.
-- ``Opcode`` is one of ``continuation``, ``text``, ``binary``,
-  ``close``, ``ping``, or ``pong``.
-- ``Payload`` is a list of bytes.
-- ``Properties`` currently recognizes:
-
-  - ``masking_key(Key)`` where ``Key`` is a four-byte list.
-  - ``reserved_bits(Bits)`` where ``Bits`` is an ordered subset of
-    ``[rsv1, rsv2, rsv3]``.
-
-Valid properties
-----------------
-
-The ``Properties`` list accepted by ``frame/5``, ``generate/2``, and
-``write_frame/2`` can contain only the following properties:
-
-- ``masking_key(Key)``
-
-  - ``Key`` must be a list of exactly four bytes.
-  - Each byte must be an integer in the ``0..255`` range.
-
-- ``reserved_bits(Bits)``
-
-  - ``Bits`` must be a list containing any ordered subset of
-    ``[rsv1, rsv2, rsv3]``.
-  - Duplicate reserved-bit atoms are invalid.
-
-Each property can be given at most once. When both properties are
-present, the normalized property list is returned in the canonical order
-``[reserved_bits(Bits), masking_key(Key)]``.
+- ``open/2-3`` for opening client WebSocket connections and returning
+  opaque handles.
+- ``accept/3-4`` for accepting one server-side WebSocket connection on
+  an open listener and returning opaque handles.
+- ``send/2-3``, ``receive/2-3``, and ``close/1-2`` for direct message
+  exchange using those handles.
+- ``property/2`` for inspecting handle properties such as the handshake
+  response, selected subprotocol, or underlying upgraded connection.
+- ``send_text/2``, ``receive_text/2``, ``send_binary/2``,
+  ``receive_binary/2``, ``send_json/2``, ``receive_json/2``,
+  ``send_term/2``, and ``receive_term/2`` convenience predicates for
+  common payload formats.
+- ``open_session/4-5`` and ``serve_once/5-6`` for callback-driven client
+  and server sessions built on top of the ``http_websocket_session``
+  layer.
 
 Current workflow
 ----------------
 
-- Use ``http_websocket_handshake::websocket_opening_key/1`` and
-  ``http_websocket_handshake::websocket_accept/2`` when you only need
-  the opening-handshake values.
-- Use ``http_client::open_websocket/4`` or
-  ``http_socket::serve_websocket_once/5`` to complete the opening
-  handshake and obtain an upgraded connection handle.
-- Use ``http_socket::connection_streams/3`` to obtain the binary input
-  and output streams carried by that upgraded connection handle.
-- Use ``read_frame/2`` and ``write_frame/2`` on those streams to
-  exchange WebSocket frames.
-- Use the higher-level ``http_websocket_messages`` library when you need
-  continuation reassembly or UTF-8-aware text and close-reason handling.
-- Use the ``http_websocket_session`` library when fragmented reads must
-  preserve pending state across interleaved control frames or when
-  outgoing writes should apply client or server masking policy
-  automatically.
-- Use ``parse/2`` and ``generate/2`` when working with in-memory byte
-  lists or binary files instead of live streams.
+For the common direct client case:
 
-Current limitations
--------------------
+\| ?- http_websocket::open('ws://127.0.0.1:8080/echo', WebSocket,
+[protocols([chat])]), http_websocket::send_text(WebSocket, hello),
+http_websocket::receive_text(WebSocket, Reply),
+http_websocket::close(WebSocket, status(1000, done)).
 
-- This library operates at the frame level only. It does not yet provide
-  application session loops.
-- Message reassembly plus UTF-8-aware text and close-reason handling now
-  live in the ``http_websocket_messages`` library.
-- Client and server masking policy is not enforced by role in this frame
-  layer. The presence of a ``masking_key/1`` property controls whether
-  outgoing frames are masked. Use the ``http_websocket_session`` layer
-  when you want role-aware writes and role-aware incoming masking
-  validation.
-- Reserved bits are preserved structurally but no extension negotiation
-  or extension semantics are implemented yet.
+For the common direct server case:
+
+\| ?- http_socket::open_listener('127.0.0.1', 8080, Listener, []),
+http_websocket::accept(Listener, WebSocket, ClientInfo,
+[protocol(chat)]), http_websocket::receive(WebSocket, Message),
+http_websocket::send(WebSocket, Message).
+
+For callback-driven client sessions that should stay on the high-level
+surface, use:
+
+\| ?- http_websocket::open_session(URL, Handler, Response, State,
+[protocols([chat]), initial_messages([message(text, hello)])]).
+
+For callback-driven server sessions that should stay on the high-level
+surface, use:
+
+\| ?- http_websocket::serve_once(Listener, Handler, Response, State,
+ClientInfo, [protocol(chat)]).
+
+Lower-level layers
+------------------
+
+The ``http_websocket`` library now hides the most common plumbing, but
+the lower-level libraries remain available when you need them:
+
+- Use ``http_websocket_frames`` when working with raw frame parsing and
+  generation.
+- Use ``http_websocket_messages`` when you want transport-neutral
+  message I/O without connection or session ownership.
+- Use ``http_websocket_session`` when you need the full callback-driven
+  session layer, registry-backed broadcast helpers, or detailed
+  close/ping state control.

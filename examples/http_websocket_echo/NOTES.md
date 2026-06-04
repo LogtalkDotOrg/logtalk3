@@ -35,15 +35,14 @@ ________________________________________________________________________
 
 # http_websocket_echo
 
-This example shows the basics of using the HTTP and WebSocket libraries to
-upgrade an HTTP connection and exchange WebSocket messages.
+This example shows the basics of using the high-level `http_websocket` library
+to accept a WebSocket connection, exchange messages, and close the session.
 
-The example illustrates four basic steps:
+The example illustrates three basic steps:
 
-1. Accept the HTTP Upgrade handshake with `http_server::accept_websocket/3`.
-2. Open a client connection with `http_client::open_websocket/4`.
-3. Extract the upgraded connection streams with `http_socket::connection_streams/3`.
-4. Read and write normalized WebSocket messages with `http_websocket_messages`.
+1. Accept the connection with `http_websocket::accept/4`.
+2. Open the client connection with `http_websocket::open/3`.
+3. Exchange normalized messages with `http_websocket::send/2` and `http_websocket::receive/2`.
 
 Load the example with:
 
@@ -75,5 +74,6 @@ websocket_echo_client::run(8080, hello, Session).
 
 Study the [http_websocket_echo.lgt](http_websocket_echo.lgt) source file
 together with these sample queries. The example is intentionally small so
-the handshake, upgraded connection handling, and message exchange logic can
-be understood without extra protocol machinery.
+the high-level WebSocket open/send/receive flow can be understood without
+dropping down to the lower-level handshake, stream, frame, or session
+plumbing libraries.

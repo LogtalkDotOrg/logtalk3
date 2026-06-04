@@ -171,6 +171,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::absolute_file_name/2>`
 
+``accept/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::accept/3>`
+
+``accept/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::accept/4>`
+
 ``accept_websocket/3``
 ----------------------
 
@@ -2762,6 +2782,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_session <http_client_session/0::close/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::close/1>`
 * :ref:`http_server_session <http_server_session/0::close/1>`
+* :ref:`http_websocket <http_websocket/0::close/1>`
 * :ref:`http_websocket_session_registry <http_websocket_session_registry/0::close/1>`
 
 ``close/2``
@@ -2772,6 +2793,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_websocket <http_websocket/0::close/2>`
 * :ref:`socket <socket/0::close/2>`
 
 ``close/3``
@@ -7730,7 +7752,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::final/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::final/2>`
 
 ``final_bearing/3``
 -------------------
@@ -8348,7 +8370,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::frame/5>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::frame/5>`
 
 ``frame_body/2``
 ----------------
@@ -8687,7 +8709,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
-* :ref:`http_websocket <http_websocket/0::generate/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::generate/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
@@ -10977,7 +10999,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::is_frame/1>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::is_frame/1>`
 
 ``is_hex_digit/1``
 ------------------
@@ -15947,7 +15969,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::opcode/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::opcode/2>`
 
 ``open/1``
 ----------
@@ -15973,6 +15995,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_session <http_client_session/0::open/2>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/2>`
 * :ref:`http_server_session <http_server_session/0::open/2>`
+* :ref:`http_websocket <http_websocket/0::open/2>`
 
 ``open/3``
 ----------
@@ -15983,6 +16006,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client_digest_session <http_client_digest_session/0::open/3>`
+* :ref:`http_websocket <http_websocket/0::open/3>`
 
 ``open/4``
 ----------
@@ -16064,6 +16088,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_socket_protocol <http_socket_protocol/0::open_listener/4>`
+
+``open_session/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::open_session/4>`
+
+``open_session/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::open_session/5>`
 
 ``open_websocket/4``
 --------------------
@@ -16809,7 +16853,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
-* :ref:`http_websocket <http_websocket/0::parse/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::parse/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
@@ -17349,7 +17393,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::payload/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::payload/2>`
 * :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::payload/2>`
 
 ``pbkdf2/6``
@@ -18662,7 +18706,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::properties/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::properties/2>`
 
 ``property/1``
 --------------
@@ -18686,6 +18730,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_core <http_core/0::property/2>`
 * :ref:`http_websocket <http_websocket/0::property/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::property/2>`
 
 ``protect_request/4``
 ---------------------
@@ -19445,7 +19490,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::read_frame/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::read_frame/2>`
 
 ``read_frame/3``
 ----------------
@@ -19455,7 +19500,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::read_frame/3>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::read_frame/3>`
 
 ``read_framed_message/2``
 -------------------------
@@ -19982,6 +20027,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::reassemble_tm_packets/7>`
 
+``receive/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::receive/2>`
+
 ``receive/3``
 -------------
 
@@ -19991,7 +20046,48 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::receive/3>`
+* :ref:`http_websocket <http_websocket/0::receive/3>`
 * :ref:`stomp <stomp/0::receive/3>`
+
+``receive_binary/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::receive_binary/2>`
+
+``receive_json/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::receive_json/2>`
+
+``receive_term/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::receive_term/2>`
+
+``receive_text/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::receive_text/2>`
 
 ``recorda/2``
 -------------
@@ -21744,6 +21840,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::selectchk/4>`
 
+``send/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::send/2>`
+
 ``send/3``
 ----------
 
@@ -21752,6 +21858,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_websocket <http_websocket/0::send/3>`
 * :ref:`http_websocket_session_registry <http_websocket_session_registry/0::send/3>`
 * :ref:`redis <redis/0::send/3>`
 
@@ -21765,6 +21872,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`stomp <stomp/0::send/4>`
 
+``send_binary/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::send_binary/2>`
+
 ``send_heartbeat/1``
 --------------------
 
@@ -21775,6 +21892,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::send_heartbeat/1>`
 * :ref:`stomp <stomp/0::send_heartbeat/1>`
+
+``send_json/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::send_json/2>`
+
+``send_term/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::send_term/2>`
+
+``send_text/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::send_text/2>`
 
 ``sentence_type/2``
 -------------------
@@ -21955,6 +22102,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_socket_protocol <http_socket_protocol/0::serve_once/3>`
 
+``serve_once/5``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_websocket <http_websocket/0::serve_once/5>`
+
 ``serve_once/6``
 ----------------
 
@@ -21963,6 +22120,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_websocket <http_websocket/0::serve_once/6>`
 * :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_once/6>`
 
 ``serve_once/7``
@@ -26204,7 +26362,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket <http_websocket/0::write_frame/2>`
+* :ref:`http_websocket_frames <http_websocket_frames/0::write_frame/2>`
 
 ``write_framed_message/2``
 --------------------------

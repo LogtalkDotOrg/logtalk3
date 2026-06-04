@@ -11,7 +11,7 @@
 Shared helpers for WebSocket opening-handshake key generation and accept-value computation.
 
 | **Availability:** 
-|    ``logtalk_load(http_websocket(loader))``
+|    ``logtalk_load(http_websocket_handshake(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0

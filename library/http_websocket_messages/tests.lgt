@@ -54,37 +54,37 @@
 		is_message(message(close, status(1005))).
 
 	test(http_websocket_messages_read_message_2_01, deterministic) :-
-		http_websocket::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [], Frame),
+		http_websocket_frames::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [], Frame),
 		write_frames_file('test_http_websocket_messages.tmp', [Frame]),
 		open_file_read_message('test_http_websocket_messages.tmp', Message),
 		type(Message, text),
 		payload(Message, hello).
 
 	test(http_websocket_messages_read_message_2_02, true(Message == message(text, hello))) :-
-		http_websocket::frame(more, text, [0'h, 0'e], [], Frame1),
-		http_websocket::frame(final, continuation, [0'l, 0'l, 0'o], [], Frame2),
+		http_websocket_frames::frame(more, text, [0'h, 0'e], [], Frame1),
+		http_websocket_frames::frame(final, continuation, [0'l, 0'l, 0'o], [], Frame2),
 		write_frames_file('test_http_websocket_messages.tmp', [Frame1, Frame2]),
 		open_file_read_message('test_http_websocket_messages.tmp', Message).
 
 	test(http_websocket_messages_read_message_2_03, true(Message == message(binary, [1, 2, 3, 4]))) :-
-		http_websocket::frame(more, binary, [1, 2], [], Frame1),
-		http_websocket::frame(final, continuation, [3, 4], [], Frame2),
+		http_websocket_frames::frame(more, binary, [1, 2], [], Frame1),
+		http_websocket_frames::frame(final, continuation, [3, 4], [], Frame2),
 		write_frames_file('test_http_websocket_messages.tmp', [Frame1, Frame2]),
 		open_file_read_message('test_http_websocket_messages.tmp', Message).
 
 	test(http_websocket_messages_read_message_2_04, true(Message == message(close, status(1000, bye)))) :-
-		http_websocket::frame(final, close, [0x03, 0xE8, 0'b, 0'y, 0'e], [], Frame),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8, 0'b, 0'y, 0'e], [], Frame),
 		write_frames_file('test_http_websocket_messages.tmp', [Frame]),
 		open_file_read_message('test_http_websocket_messages.tmp', Message).
 
 	test(http_websocket_messages_read_message_2_05, error(domain_error(http_websocket_message_sequence, _))) :-
-		http_websocket::frame(more, text, [0'H], [], Frame1),
-		http_websocket::frame(final, ping, [0'!], [], Frame2),
+		http_websocket_frames::frame(more, text, [0'H], [], Frame1),
+		http_websocket_frames::frame(final, ping, [0'!], [], Frame2),
 		write_frames_file('test_http_websocket_messages.tmp', [Frame1, Frame2]),
 		open_file_read_message('test_http_websocket_messages.tmp', _Message).
 
 	test(http_websocket_messages_read_message_2_06, error(domain_error(http_websocket_message_text, [0xC3, 0x28]))) :-
-		http_websocket::frame(final, text, [0xC3, 0x28], [], Frame),
+		http_websocket_frames::frame(final, text, [0xC3, 0x28], [], Frame),
 		write_frames_file('test_http_websocket_messages.tmp', [Frame]),
 		open_file_read_message('test_http_websocket_messages.tmp', _Message).
 
@@ -95,10 +95,10 @@
 		write_message(Output, Message),
 		close(Output),
 		open(File, read, Input, [type(binary)]),
-		http_websocket::read_frame(Input, Frame),
+		http_websocket_frames::read_frame(Input, Frame),
 		close(Input),
-		http_websocket::opcode(Frame, text),
-		http_websocket::payload(Frame, [0'h, 0'e, 0'l, 0'l, 0'o]).
+		http_websocket_frames::opcode(Frame, text),
+		http_websocket_frames::payload(Frame, [0'h, 0'e, 0'l, 0'l, 0'o]).
 
 	test(http_websocket_messages_write_message_2_02, true(PayloadBytes == [0x03, 0xE8, 0'b, 0'y, 0'e])) :-
 		message(close, status(1000, bye), Message),
@@ -107,10 +107,10 @@
 		write_message(Output, Message),
 		close(Output),
 		open(File, read, Input, [type(binary)]),
-		http_websocket::read_frame(Input, Frame),
+		http_websocket_frames::read_frame(Input, Frame),
 		close(Input),
-		http_websocket::opcode(Frame, close),
-		http_websocket::payload(Frame, PayloadBytes).
+		http_websocket_frames::opcode(Frame, close),
+		http_websocket_frames::payload(Frame, PayloadBytes).
 
 	write_frames_file(Path, Frames) :-
 		^^file_path(Path, File),
@@ -120,7 +120,7 @@
 
 	write_frames([], _Output).
 	write_frames([Frame| Frames], Output) :-
-		http_websocket::write_frame(Output, Frame),
+		http_websocket_frames::write_frame(Output, Frame),
 		write_frames(Frames, Output).
 
 	open_file_read_message(Path, Message) :-

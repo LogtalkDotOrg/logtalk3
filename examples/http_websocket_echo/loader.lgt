@@ -25,8 +25,7 @@
 )).
 
 	:- initialization((
-		logtalk_load(http_client(loader)),
-		logtalk_load(http_websocket_messages(loader)),
+		logtalk_load(http_websocket(loader)),
 		logtalk_load(http_websocket_echo, [optimize(on)])
 	)).
 

@@ -55,7 +55,7 @@
 		http_websocket_server_session::is_state(session_state(fragment(text, [[0'h, 0'e]]), close_received(status(1000)))).
 
 	test(http_websocket_session_read_message_4_01, deterministic) :-
-		http_websocket::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([1, 2, 3, 4])], Frame),
+		http_websocket_frames::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([1, 2, 3, 4])], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_server_session::initial_state(State0),
 		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_server_session, State0, State, Message),
@@ -63,9 +63,9 @@
 		Message == message(text, hello).
 
 	test(http_websocket_session_read_message_4_02, deterministic) :-
-		http_websocket::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
-		http_websocket::frame(final, ping, [0'!], [masking_key([5, 6, 7, 8])], Frame2),
-		http_websocket::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], Frame3),
+		http_websocket_frames::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
+		http_websocket_frames::frame(final, ping, [0'!], [masking_key([5, 6, 7, 8])], Frame2),
+		http_websocket_frames::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], Frame3),
 		write_frames_file('test_http_websocket_session.tmp', [Frame1, Frame2, Frame3]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		open(File, read, Input, [type(binary)]),
@@ -80,9 +80,9 @@
 		Message2 == message(text, hello).
 
 	test(http_websocket_session_read_message_4_03, deterministic) :-
-		http_websocket::frame(more, binary, [1, 2], [], Frame1),
-		http_websocket::frame(final, close, [0x03, 0xE8], [], Frame2),
-		http_websocket::frame(final, continuation, [3, 4], [], Frame3),
+		http_websocket_frames::frame(more, binary, [1, 2], [], Frame1),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8], [], Frame2),
+		http_websocket_frames::frame(final, continuation, [3, 4], [], Frame3),
 		write_frames_file('test_http_websocket_session.tmp', [Frame1, Frame2, Frame3]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		open(File, read, Input, [type(binary)]),
@@ -101,7 +101,7 @@
 		http_websocket_client_session::initial_state(State0),
 		http_websocket_client_session::write_message(ReplyOutput, State0, State1, SentMessage),
 		close(ReplyOutput),
-		http_websocket::frame(final, close, [0x03, 0xE8], [], Frame),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8], [], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		open(File, read, Input, [type(binary)]),
@@ -112,25 +112,25 @@
 		Message == message(close, status(1000)).
 
 	test(http_websocket_session_read_message_4_04, error(domain_error(http_websocket_session_masking, _))) :-
-		http_websocket::frame(final, text, [0'h], [], Frame),
+		http_websocket_frames::frame(final, text, [0'h], [], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_server_session::initial_state(State0),
 		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_server_session, State0, _State, _Message).
 
 	test(http_websocket_session_read_message_4_05, error(domain_error(http_websocket_session_masking, _))) :-
-		http_websocket::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], Frame),
+		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_client_session::initial_state(State0),
 		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_client_session, State0, _State, _Message).
 
 	test(http_websocket_session_read_message_4_07, error(domain_error(http_websocket_session_extensions, _))) :-
-		http_websocket::frame(final, text, [0'h], [masking_key([1, 2, 3, 4]), reserved_bits([rsv1])], Frame),
+		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4]), reserved_bits([rsv1])], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_server_session::initial_state(State0),
 		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_server_session, State0, _State, _Message).
 
 	test(http_websocket_session_read_message_4_08, error(domain_error(http_websocket_session_extensions, _))) :-
-		http_websocket::frame(final, text, [0'h], [reserved_bits([rsv2])], Frame),
+		http_websocket_frames::frame(final, text, [0'h], [reserved_bits([rsv2])], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_client_session::initial_state(State0),
 		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_client_session, State0, _State, _Message).
@@ -142,10 +142,10 @@
 		http_websocket_client_session::write_message(Output, Message),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket::opcode(Frame, text),
-		http_websocket::final(Frame, final),
-		http_websocket::payload(Frame, [0'h, 0'e, 0'l, 0'l, 0'o]),
-		http_websocket::property(Frame, masking_key(_)).
+		http_websocket_frames::opcode(Frame, text),
+		http_websocket_frames::final(Frame, final),
+		http_websocket_frames::payload(Frame, [0'h, 0'e, 0'l, 0'l, 0'o]),
+		http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_2_02, deterministic) :-
 		fixed_masking_key_http_websocket_client_session::message(text, hello, Message),
@@ -154,10 +154,10 @@
 		fixed_masking_key_http_websocket_client_session::write_message(Output, Message),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket::opcode(Frame, text),
-		http_websocket::final(Frame, final),
-		http_websocket::payload(Frame, [0'h, 0'e, 0'l, 0'l, 0'o]),
-		http_websocket::property(Frame, masking_key([1, 2, 3, 4])).
+		http_websocket_frames::opcode(Frame, text),
+		http_websocket_frames::final(Frame, final),
+		http_websocket_frames::payload(Frame, [0'h, 0'e, 0'l, 0'l, 0'o]),
+		http_websocket_frames::property(Frame, masking_key([1, 2, 3, 4])).
 
 	test(http_websocket_session_write_message_3_01, deterministic) :-
 		http_websocket_server_session::message(text, hello, Message),
@@ -166,18 +166,18 @@
 		http_websocket_server_session::write_message(Output, Message, [fragment_size(2)]),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame1, Frame2, Frame3]),
-		http_websocket::opcode(Frame1, text),
-		http_websocket::final(Frame1, more),
-		http_websocket::payload(Frame1, [0'h, 0'e]),
-		\+ http_websocket::property(Frame1, masking_key(_)),
-		http_websocket::opcode(Frame2, continuation),
-		http_websocket::final(Frame2, more),
-		http_websocket::payload(Frame2, [0'l, 0'l]),
-		\+ http_websocket::property(Frame2, masking_key(_)),
-		http_websocket::opcode(Frame3, continuation),
-		http_websocket::final(Frame3, final),
-		http_websocket::payload(Frame3, [0'o]),
-		\+ http_websocket::property(Frame3, masking_key(_)).
+		http_websocket_frames::opcode(Frame1, text),
+		http_websocket_frames::final(Frame1, more),
+		http_websocket_frames::payload(Frame1, [0'h, 0'e]),
+		\+ http_websocket_frames::property(Frame1, masking_key(_)),
+		http_websocket_frames::opcode(Frame2, continuation),
+		http_websocket_frames::final(Frame2, more),
+		http_websocket_frames::payload(Frame2, [0'l, 0'l]),
+		\+ http_websocket_frames::property(Frame2, masking_key(_)),
+		http_websocket_frames::opcode(Frame3, continuation),
+		http_websocket_frames::final(Frame3, final),
+		http_websocket_frames::payload(Frame3, [0'o]),
+		\+ http_websocket_frames::property(Frame3, masking_key(_)).
 
 	test(http_websocket_session_write_message_3_02, deterministic) :-
 		http_websocket_client_session::message(binary, [1, 2, 3, 4], Message),
@@ -186,14 +186,14 @@
 		http_websocket_client_session::write_message(Output, Message, [fragment_size(2)]),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame1, Frame2]),
-		http_websocket::opcode(Frame1, binary),
-		http_websocket::final(Frame1, more),
-		http_websocket::payload(Frame1, [1, 2]),
-		http_websocket::property(Frame1, masking_key(_)),
-		http_websocket::opcode(Frame2, continuation),
-		http_websocket::final(Frame2, final),
-		http_websocket::payload(Frame2, [3, 4]),
-		http_websocket::property(Frame2, masking_key(_)).
+		http_websocket_frames::opcode(Frame1, binary),
+		http_websocket_frames::final(Frame1, more),
+		http_websocket_frames::payload(Frame1, [1, 2]),
+		http_websocket_frames::property(Frame1, masking_key(_)),
+		http_websocket_frames::opcode(Frame2, continuation),
+		http_websocket_frames::final(Frame2, final),
+		http_websocket_frames::payload(Frame2, [3, 4]),
+		http_websocket_frames::property(Frame2, masking_key(_)).
 
 	test(http_websocket_session_write_message_3_03, deterministic) :-
 		http_websocket_client_session::message(ping, [0'!], Message),
@@ -202,10 +202,10 @@
 		http_websocket_client_session::write_message(Output, Message, [fragment_size(1)]),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket::opcode(Frame, ping),
-		http_websocket::final(Frame, final),
-		http_websocket::payload(Frame, [0'!]),
-		http_websocket::property(Frame, masking_key(_)).
+		http_websocket_frames::opcode(Frame, ping),
+		http_websocket_frames::final(Frame, final),
+		http_websocket_frames::payload(Frame, [0'!]),
+		http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_3_04, deterministic) :-
 		http_websocket_server_session::message(text, '', Message),
@@ -214,10 +214,10 @@
 		http_websocket_server_session::write_message(Output, Message, [fragment_size(2)]),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket::opcode(Frame, text),
-		http_websocket::final(Frame, final),
-		http_websocket::payload(Frame, []),
-		\+ http_websocket::property(Frame, masking_key(_)).
+		http_websocket_frames::opcode(Frame, text),
+		http_websocket_frames::final(Frame, final),
+		http_websocket_frames::payload(Frame, []),
+		\+ http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_3_05, deterministic) :-
 		http_websocket_client_session::message(binary, [], Message),
@@ -226,10 +226,10 @@
 		http_websocket_client_session::write_message(Output, Message, [fragment_size(2)]),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket::opcode(Frame, binary),
-		http_websocket::final(Frame, final),
-		http_websocket::payload(Frame, []),
-		http_websocket::property(Frame, masking_key(_)).
+		http_websocket_frames::opcode(Frame, binary),
+		http_websocket_frames::final(Frame, final),
+		http_websocket_frames::payload(Frame, []),
+		http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_4_01, deterministic) :-
 		http_websocket_client_session::message(close, status(1000, bye), Message),
@@ -240,10 +240,10 @@
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
 		State == session_state(idle, close_sent(status(1000, bye))),
-		http_websocket::opcode(Frame, close),
-		http_websocket::final(Frame, final),
-		http_websocket::payload(Frame, [0x03, 0xE8, 0'b, 0'y, 0'e]),
-		http_websocket::property(Frame, masking_key(_)).
+		http_websocket_frames::opcode(Frame, close),
+		http_websocket_frames::final(Frame, final),
+		http_websocket_frames::payload(Frame, [0x03, 0xE8, 0'b, 0'y, 0'e]),
+		http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_4_02, deterministic) :-
 		http_websocket_client_session::message(text, hello, Message),
@@ -268,7 +268,7 @@
 		Frames == [].
 
 	test(http_websocket_session_read_message_5_01, deterministic) :-
-		http_websocket::frame(final, close, [0x03, 0xE8, 0'b, 0'y, 0'e], [masking_key([1, 2, 3, 4])], Frame),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8, 0'b, 0'y, 0'e], [masking_key([1, 2, 3, 4])], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		^^file_path('test_http_websocket_session_reply.tmp', ReplyFile),
@@ -281,15 +281,15 @@
 		read_frames_file('test_http_websocket_session_reply.tmp', [ReplyFrame]),
 		State == session_state(idle, closed(status(1000, bye), status(1000, bye))),
 		Message == message(close, status(1000, bye)),
-		http_websocket::opcode(ReplyFrame, close),
-		http_websocket::final(ReplyFrame, final),
-		http_websocket::payload(ReplyFrame, [0x03, 0xE8, 0'b, 0'y, 0'e]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)).
+		http_websocket_frames::opcode(ReplyFrame, close),
+		http_websocket_frames::final(ReplyFrame, final),
+		http_websocket_frames::payload(ReplyFrame, [0x03, 0xE8, 0'b, 0'y, 0'e]),
+		\+ http_websocket_frames::property(ReplyFrame, masking_key(_)).
 
 	test(http_websocket_session_read_message_5_02, deterministic) :-
-		http_websocket::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
-		http_websocket::frame(final, close, [0x03, 0xE8], [masking_key([5, 6, 7, 8])], Frame2),
-		http_websocket::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], Frame3),
+		http_websocket_frames::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8], [masking_key([5, 6, 7, 8])], Frame2),
+		http_websocket_frames::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], Frame3),
 		write_frames_file('test_http_websocket_session.tmp', [Frame1, Frame2, Frame3]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		^^file_path('test_http_websocket_session_reply.tmp', ReplyFile),
@@ -302,15 +302,15 @@
 		read_frames_file('test_http_websocket_session_reply.tmp', [ReplyFrame]),
 		State == session_state(idle, closed(status(1000), status(1000))),
 		Message == message(close, status(1000)),
-		http_websocket::opcode(ReplyFrame, close),
-		http_websocket::final(ReplyFrame, final),
-		http_websocket::payload(ReplyFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)).
+		http_websocket_frames::opcode(ReplyFrame, close),
+		http_websocket_frames::final(ReplyFrame, final),
+		http_websocket_frames::payload(ReplyFrame, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(ReplyFrame, masking_key(_)).
 
 	test(http_websocket_session_read_message_6_01, deterministic) :-
-		http_websocket::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
-		http_websocket::frame(final, ping, [0'!], [masking_key([5, 6, 7, 8])], Frame2),
-		http_websocket::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], Frame3),
+		http_websocket_frames::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
+		http_websocket_frames::frame(final, ping, [0'!], [masking_key([5, 6, 7, 8])], Frame2),
+		http_websocket_frames::frame(final, continuation, [0'l, 0'l, 0'o], [masking_key([9, 10, 11, 12])], Frame3),
 		write_frames_file('test_http_websocket_session.tmp', [Frame1, Frame2, Frame3]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		^^file_path('test_http_websocket_session_reply.tmp', ReplyFile),
@@ -326,13 +326,13 @@
 		State2 == session_state(idle),
 		Message1 == message(ping, [0'!]),
 		Message2 == message(text, hello),
-		http_websocket::opcode(ReplyFrame, pong),
-		http_websocket::final(ReplyFrame, final),
-		http_websocket::payload(ReplyFrame, [0'!]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)).
+		http_websocket_frames::opcode(ReplyFrame, pong),
+		http_websocket_frames::final(ReplyFrame, final),
+		http_websocket_frames::payload(ReplyFrame, [0'!]),
+		\+ http_websocket_frames::property(ReplyFrame, masking_key(_)).
 
 	test(http_websocket_session_read_message_6_02, error(domain_error(http_websocket_payload_length_limit, 1))) :-
-		http_websocket::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], Frame),
+		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], Frame),
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		^^file_path('test_http_websocket_session.tmp', File),
 		^^file_path('test_http_websocket_session_reply.tmp', ReplyFile),
@@ -373,9 +373,9 @@
 	:- if(current_logtalk_flag(threads, supported)).
 
 	test(http_websocket_session_run_session_4_01, deterministic) :-
-		http_websocket::frame(final, ping, [0'!], [masking_key([1, 2, 3, 4])], ClientFrame1),
-		http_websocket::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([5, 6, 7, 8])], ClientFrame2),
-		http_websocket::frame(final, close, [0x03, 0xE8], [masking_key([9, 10, 11, 12])], ClientFrame3),
+		http_websocket_frames::frame(final, ping, [0'!], [masking_key([1, 2, 3, 4])], ClientFrame1),
+		http_websocket_frames::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([5, 6, 7, 8])], ClientFrame2),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8], [masking_key([9, 10, 11, 12])], ClientFrame3),
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_session_loop_handler, ServerResponse, ServerState, [auto_pong(on)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
@@ -389,18 +389,18 @@
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		ServerState == session_state(idle, closed(status(1000), status(1000))),
 		ClientReplyFrames = [PongFrame, ReplyFrame, CloseFrame],
-		http_websocket::opcode(PongFrame, pong),
-		http_websocket::payload(PongFrame, [0'!]),
-		\+ http_websocket::property(PongFrame, masking_key(_)),
-		http_websocket::opcode(ReplyFrame, text),
-		http_websocket::payload(ReplyFrame, [0'o, 0'k]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(PongFrame, pong),
+		http_websocket_frames::payload(PongFrame, [0'!]),
+		\+ http_websocket_frames::property(PongFrame, masking_key(_)),
+		http_websocket_frames::opcode(ReplyFrame, text),
+		http_websocket_frames::payload(ReplyFrame, [0'o, 0'k]),
+		\+ http_websocket_frames::property(ReplyFrame, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_session_run_session_4_02, deterministic) :-
-		http_websocket::frame(final, continuation, [], [masking_key([1, 2, 3, 4])], ClientFrame),
+		http_websocket_frames::frame(final, continuation, [], [masking_key([1, 2, 3, 4])], ClientFrame),
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_session_loop_handler, ServerResponse, _ServerState, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
@@ -413,12 +413,12 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		expected_session_sequence_error(ServerError),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xEA]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xEA]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_session_run_session_4_03, deterministic) :-
-		http_websocket::frame(final, text, [0xC3, 0x28], [masking_key([1, 2, 3, 4])], ClientFrame),
+		http_websocket_frames::frame(final, text, [0xC3, 0x28], [masking_key([1, 2, 3, 4])], ClientFrame),
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_session_loop_handler, ServerResponse, _ServerState, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
@@ -431,9 +431,9 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		expected_message_text_error(ServerError),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xEF]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xEF]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_session_run_session_4_04, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -449,14 +449,14 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		expected_websocket_opcode_error(ServerError),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xEA]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xEA]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_session_serve_once_7_01, deterministic) :-
-		http_websocket::frame(final, ping, [0'!], [masking_key([1, 2, 3, 4])], ClientFrame1),
-		http_websocket::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([5, 6, 7, 8])], ClientFrame2),
-		http_websocket::frame(final, close, [0x03, 0xE8], [masking_key([9, 10, 11, 12])], ClientFrame3),
+		http_websocket_frames::frame(final, ping, [0'!], [masking_key([1, 2, 3, 4])], ClientFrame1),
+		http_websocket_frames::frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [masking_key([5, 6, 7, 8])], ClientFrame2),
+		http_websocket_frames::frame(final, close, [0x03, 0xE8], [masking_key([9, 10, 11, 12])], ClientFrame3),
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once_with_client_info(Listener, websocket_session_loop_handler, ServerResponse, ServerState, ClientInfo, [auto_pong(on)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
@@ -471,15 +471,15 @@
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		ServerState == session_state(idle, closed(status(1000), status(1000))),
 		ClientReplyFrames = [PongFrame, ReplyFrame, CloseFrame],
-		http_websocket::opcode(PongFrame, pong),
-		http_websocket::payload(PongFrame, [0'!]),
-		\+ http_websocket::property(PongFrame, masking_key(_)),
-		http_websocket::opcode(ReplyFrame, text),
-		http_websocket::payload(ReplyFrame, [0'o, 0'k]),
-		\+ http_websocket::property(ReplyFrame, masking_key(_)),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(PongFrame, pong),
+		http_websocket_frames::payload(PongFrame, [0'!]),
+		\+ http_websocket_frames::property(PongFrame, masking_key(_)),
+		http_websocket_frames::opcode(ReplyFrame, text),
+		http_websocket_frames::payload(ReplyFrame, [0'o, 0'k]),
+		\+ http_websocket_frames::property(ReplyFrame, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_client_session_open_5_01, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -521,12 +521,12 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		ServerState == session_state(idle, closed(status(1000), status(1000))),
-		http_websocket::opcode(PingFrame, ping),
-		http_websocket::payload(PingFrame, []),
-		\+ http_websocket::property(PingFrame, masking_key(_)),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(PingFrame, ping),
+		http_websocket_frames::payload(PingFrame, []),
+		\+ http_websocket_frames::property(PingFrame, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_session_serve_once_7_03, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -541,12 +541,12 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		ServerState == session_state(idle, closed(status(1001, idle_timeout), status(1001, idle_timeout))),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xE9, 0'i, 0'd, 0'l, 0'e, 0'_, 0't, 0'i, 0'm, 0'e, 0'o, 0'u, 0't]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xE9, 0'i, 0'd, 0'l, 0'e, 0'_, 0't, 0'i, 0'm, 0'e, 0'o, 0'u, 0't]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_session_serve_once_7_04, deterministic) :-
-		http_websocket::frame(final, continuation, [], [masking_key([1, 2, 3, 4])], ClientFrame),
+		http_websocket_frames::frame(final, continuation, [], [masking_key([1, 2, 3, 4])], ClientFrame),
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_session_loop_handler, ServerResponse, _ServerState, [keepalive_interval(5)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
@@ -559,12 +559,12 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		expected_session_sequence_error(ServerError),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xEA]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xEA]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_session_serve_once_7_05, deterministic) :-
-		http_websocket::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], ClientFrame),
+		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], ClientFrame),
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_session_loop_handler, ServerResponse, _ServerState, [max_payload_length(0)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
@@ -577,9 +577,9 @@
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		expected_payload_length_limit_error(ServerError),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xF1]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xF1]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_client_session_open_5_02, deterministic) :-
 		websocket_keepalive_close_handler::reset,
@@ -655,15 +655,15 @@
 		Count == 0,
 		status(ClientResponse1, status(101, 'Switching Protocols')),
 		status(ClientResponse2, status(101, 'Switching Protocols')),
-		http_websocket::opcode(BroadcastFrame, text),
-		http_websocket::payload(BroadcastFrame, [0'h, 0'e, 0'l, 0'l, 0'o]),
-		\+ http_websocket::property(BroadcastFrame, masking_key(_)),
-		http_websocket::opcode(CloseFrame1, close),
-		http_websocket::payload(CloseFrame1, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame1, masking_key(_)),
-		http_websocket::opcode(CloseFrame2, close),
-		http_websocket::payload(CloseFrame2, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame2, masking_key(_)).
+		http_websocket_frames::opcode(BroadcastFrame, text),
+		http_websocket_frames::payload(BroadcastFrame, [0'h, 0'e, 0'l, 0'l, 0'o]),
+		\+ http_websocket_frames::property(BroadcastFrame, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame1, close),
+		http_websocket_frames::payload(CloseFrame1, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame1, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame2, close),
+		http_websocket_frames::payload(CloseFrame2, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame2, masking_key(_)).
 
 	test(http_websocket_server_session_serve_until_shutdown_6_02, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -689,13 +689,13 @@
 		Count == 0,
 		status(ClientResponse1, status(101, 'Switching Protocols')),
 		status(ClientResponse2, status(101, 'Switching Protocols')),
-		http_websocket::opcode(CloseFrame1, close),
-		http_websocket::payload(CloseFrame1, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame1, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame1, close),
+		http_websocket_frames::payload(CloseFrame1, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame1, masking_key(_)),
 		Client2Frames = [CloseFrame2],
-		http_websocket::opcode(CloseFrame2, close),
-		http_websocket::payload(CloseFrame2, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame2, masking_key(_)).
+		http_websocket_frames::opcode(CloseFrame2, close),
+		http_websocket_frames::payload(CloseFrame2, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame2, masking_key(_)).
 
 	test(http_websocket_server_session_serve_until_shutdown_6_03, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -718,9 +718,9 @@
 		safe_close_registry(Registry),
 		Count == 0,
 		status(ClientResponse, status(101, 'Switching Protocols')),
-		http_websocket::opcode(CloseFrame, close),
-		http_websocket::payload(CloseFrame, [0x03, 0xE8]),
-		\+ http_websocket::property(CloseFrame, masking_key(_)),
+		http_websocket_frames::opcode(CloseFrame, close),
+		http_websocket_frames::payload(CloseFrame, [0x03, 0xE8]),
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)),
 		NextFrame == end_of_file.
 
 	:- endif.
@@ -735,7 +735,7 @@
 
 	write_frames([], _Output).
 	write_frames([Frame| Frames], Output) :-
-		http_websocket::write_frame(Output, Frame),
+		http_websocket_frames::write_frame(Output, Frame),
 		write_frames(Frames, Output).
 
 	raw_server_once(Listener, ResponseAtom) :-
@@ -763,7 +763,7 @@
 		close(Input).
 
 	read_frames(Input, Frames) :-
-		http_websocket::read_frame(Input, Frame),
+		http_websocket_frames::read_frame(Input, Frame),
 		(	Frame == end_of_file ->
 			Frames = []
 		;	Frames = [Frame| Rest],
@@ -813,7 +813,7 @@
 	read_reply_frames(0, _Input, []) :-
 		!.
 	read_reply_frames(Count, Input, [Frame| Frames]) :-
-		http_websocket::read_frame(Input, Frame),
+		http_websocket_frames::read_frame(Input, Frame),
 		NextCount is Count - 1,
 		read_reply_frames(NextCount, Input, Frames).
 
@@ -857,7 +857,7 @@
 	read_reply_frames_until_close_result(frame(Frame), Seconds, Input, [Frame| Frames]) :-
 		(	Frame == end_of_file ->
 			Frames = []
-		;	http_websocket::opcode(Frame, close) ->
+		;	http_websocket_frames::opcode(Frame, close) ->
 			Frames = []
 		;	read_reply_frames_until_close(Seconds, Input, Frames)
 		).
@@ -866,7 +866,7 @@
 	read_reply_frames_until_close_result(fail, _Seconds, _Input, [fail]).
 
 	read_frame_result_with_timeout(Seconds, Input, Result) :-
-		timeout::call_with_timeout(http_websocket::read_frame(Input, Frame), Seconds, TimeoutResult),
+		timeout::call_with_timeout(http_websocket_frames::read_frame(Input, Frame), Seconds, TimeoutResult),
 		(	TimeoutResult == true ->
 			Result = frame(Frame)
 		;	TimeoutResult == timeout ->
@@ -877,7 +877,7 @@
 		).
 
 	read_frame_with_timeout(Seconds, Input, Frame) :-
-		timeout::call_with_timeout(http_websocket::read_frame(Input, Frame0), Seconds, Result),
+		timeout::call_with_timeout(http_websocket_frames::read_frame(Input, Frame0), Seconds, Result),
 		(	Result == true ->
 			Frame = Frame0
 		;	Result == timeout ->

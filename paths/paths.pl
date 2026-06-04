@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 2, 2026
+%  Last updated on June 4, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -213,6 +213,8 @@ logtalk_library_path(http_session, library('http_session/')).
 logtalk_library_path(http_socket, library('http_socket/')).
 logtalk_library_path(http_static_files, library('http_static_files/')).
 logtalk_library_path(http_websocket, library('http_websocket/')).
+logtalk_library_path(http_websocket_frames, library('http_websocket_frames/')).
+logtalk_library_path(http_websocket_handshake, library('http_websocket_handshake/')).
 logtalk_library_path(http_websocket_messages, library('http_websocket_messages/')).
 logtalk_library_path(http_websocket_session, library('http_websocket_session/')).
 logtalk_library_path(ica_projection, library('ica_projection/')).
