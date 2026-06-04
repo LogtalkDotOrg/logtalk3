@@ -29,9 +29,13 @@
 		comment is 'Unit tests for the "http_static_site_basic" example.'
 	]).
 
-	:- uses(http_core, [body/2, header/3, request/7, status/2]).
+	:- uses(http_core, [
+		body/2, header/3, request/7, status/2
+	]).
 
-	:- uses(user, [atomic_list_concat/2]).
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
 
 	cover(static_site_basic_fixture).
 	cover(static_site_basic_http_handler(_)).

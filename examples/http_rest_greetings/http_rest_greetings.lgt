@@ -234,10 +234,6 @@
 		comment is 'HTTP client used by the HTTP REST example.'
 	]).
 
-	:- uses(user, [
-		atom_concat/3
-	]).
-
 	:- public(fetch_document/2).
 	:- mode(fetch_document(+integer, -compound), one_or_error).
 	:- info(fetch_document/2, [

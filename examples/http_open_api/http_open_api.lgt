@@ -142,10 +142,6 @@
 		comment is 'HTTP handler for the HTTP and OpenAPI example.'
 	]).
 
-	:- uses(user, [
-		atom_concat/3
-	]).
-
 	% Route dispatch is written explicitly so the example stays easy to read
 	% without introducing an extra router abstraction.
 	handle(Request, Response) :-
@@ -387,10 +383,6 @@
 		author is 'Paulo Moura',
 		date is 2026-06-02,
 		comment is 'HTTP client used by the HTTP and OpenAPI example.'
-	]).
-
-	:- uses(user, [
-		atom_concat/3
 	]).
 
 	:- public(fetch_document/2).

@@ -67,10 +67,6 @@
 		argnames is ['Listener', 'Session']
 	]).
 
-	:- uses(user, [
-		atom_concat/3
-	]).
-
 	% This convenience predicate is useful when the server is run in its own
 	% session. It opens the listener, waits for one client, serves that client,
 	% and then closes the listener.
@@ -133,10 +129,6 @@
 	:- info(run/3, [
 		comment is 'Connects to the local WebSocket server, sends one text message, reads one reply, and returns the handshake plus the exchanged messages.',
 		argnames is ['Port', 'Text', 'Session']
-	]).
-
-	:- uses(user, [
-		atom_codes/2, atom_concat/3, number_codes/2
 	]).
 
 	run(Port, Text, session(HandshakeResponse, SentMessage, ReplyMessage)) :-
