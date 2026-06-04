@@ -562,24 +562,27 @@
 	normalize_outbound_message(Message0, Message) :-
 		(	is_message(Message0) ->
 			Message = Message0
-		;	Message0 = text(Text) ->
-			websocket_message(text, Text, Message)
-		;	Message0 = binary(Bytes) ->
-			websocket_message(binary, Bytes, Message)
-		;	Message0 = ping(Bytes) ->
-			websocket_message(ping, Bytes, Message)
-		;	Message0 = pong(Bytes) ->
-			websocket_message(pong, Bytes, Message)
-		;	Message0 = close(Payload) ->
-			websocket_message(close, Payload, Message)
-		;	Message0 = json(JSON) ->
-			json_text(JSON, Text),
-			websocket_message(text, Text, Message)
-		;	Message0 = term(Term) ->
-			term_text(Term, Text),
-			websocket_message(text, Text, Message)
+		;	normalize_outbound_message_(Message0, Message) ->
+			true
 		;	domain_error(http_websocket_message, Message0)
 		).
+
+	normalize_outbound_message_(text(Text), Message) :-
+		websocket_message(text, Text, Message).
+	normalize_outbound_message_(binary(Bytes), Message) :-
+		websocket_message(binary, Bytes, Message).
+	normalize_outbound_message_(ping(Bytes), Message) :-
+		websocket_message(ping, Bytes, Message).
+	normalize_outbound_message_(pong(Bytes), Message) :-
+		websocket_message(pong, Bytes, Message).
+	normalize_outbound_message_(close(Payload), Message) :-
+		websocket_message(close, Payload, Message).
+	normalize_outbound_message_(json(JSON), Message) :-
+		json_text(JSON, Text),
+		websocket_message(text, Text, Message).
+	normalize_outbound_message_(term(Term), Message) :-
+		term_text(Term, Text),
+		websocket_message(text, Text, Message).
 
 	normalize_close_message(Payload, Message) :-
 		websocket_message(close, Payload, Message).
