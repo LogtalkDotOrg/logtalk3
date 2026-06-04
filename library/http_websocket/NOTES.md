@@ -88,6 +88,25 @@ Where:
     `[rsv1, rsv2, rsv3]`.
 
 
+Valid properties
+----------------
+
+The `Properties` list accepted by `frame/5`, `generate/2`, and `write_frame/2`
+can contain only the following properties:
+
+- `masking_key(Key)`
+  - `Key` must be a list of exactly four bytes.
+  - Each byte must be an integer in the `0..255` range.
+- `reserved_bits(Bits)`
+  - `Bits` must be a list containing any ordered subset of
+    `[rsv1, rsv2, rsv3]`.
+  - Duplicate reserved-bit atoms are invalid.
+
+Each property can be given at most once. When both properties are present, the
+normalized property list is returned in the canonical order
+`[reserved_bits(Bits), masking_key(Key)]`.
+
+
 Current workflow
 ----------------
 

@@ -180,6 +180,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#normalized-terms">Normalized terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#valid-properties">Valid properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-workflow">Current workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
 </ul>
@@ -419,6 +420,29 @@ binary streams.</p></li>
 </ul>
 </li>
 </ul>
+</section>
+<section id="valid-properties">
+<h2>Valid properties<a class="headerlink" href="#valid-properties" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Properties</span></code> list accepted by <code class="docutils literal notranslate"><span class="pre">frame/5</span></code>, <code class="docutils literal notranslate"><span class="pre">generate/2</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">write_frame/2</span></code> can contain only the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">masking_key(Key)</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Key</span></code> must be a list of exactly four bytes.</p></li>
+<li><p>Each byte must be an integer in the <code class="docutils literal notranslate"><span class="pre">0..255</span></code> range.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reserved_bits(Bits)</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Bits</span></code> must be a list containing any ordered subset of
+<code class="docutils literal notranslate"><span class="pre">[rsv1,</span> <span class="pre">rsv2,</span> <span class="pre">rsv3]</span></code>.</p></li>
+<li><p>Duplicate reserved-bit atoms are invalid.</p></li>
+</ul>
+</li>
+</ul>
+<p>Each property can be given at most once. When both properties are
+present, the normalized property list is returned in the canonical order
+<code class="docutils literal notranslate"><span class="pre">[reserved_bits(Bits),</span> <span class="pre">masking_key(Key)]</span></code>.</p>
 </section>
 <section id="current-workflow">
 <h2>Current workflow<a class="headerlink" href="#current-workflow" title="Link to this heading"></a></h2>
