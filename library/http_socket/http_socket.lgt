@@ -249,11 +249,25 @@
 		NextCount is Count - 1,
 		serve_listener_serial(Listener, Handler, NextCount, ClientInfos).
 
-	serve_accepted_connection(Input, Output, Handler) :-
-		call_with_catch_cleanup(
-			http_server::serve_connection(Input, Output, Handler),
-			socket::close(Input, Output)
-		).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
+
+		serve_accepted_connection(Input, Output, Handler) :-
+			adopt_stream(Input),
+			adopt_stream(Output),
+			call_with_catch_cleanup(
+				http_server::serve_connection(Input, Output, Handler),
+				socket::close(Input, Output)
+			).
+
+	:- else.
+
+		serve_accepted_connection(Input, Output, Handler) :-
+			call_with_catch_cleanup(
+				http_server::serve_connection(Input, Output, Handler),
+				socket::close(Input, Output)
+			).
+
+	:- endif.
 
 	serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
 		http_server::serve_websocket(Input, Output, Handler, Outcome),
