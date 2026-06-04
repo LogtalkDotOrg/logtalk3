@@ -102,7 +102,8 @@
 	]).
 
 	:- public(property/2).
-	:- mode(property(+compound, ?compound), zero_or_more).
+	:- mode(property(+compound, +compound), zero_or_one).
+	:- mode(property(+compound, -compound), zero_or_more).
 	:- info(property/2, [
 		comment is 'Enumerates properties of an open opaque WebSocket handle. Supported properties are ``role(Role)``, ``response(Response)``, ``connection(Connection)``, ``state(State)``, ``client_info(ClientInfo)``, and ``subprotocol(Protocol)``.',
 		argnames is ['WebSocket', 'Property']
@@ -325,17 +326,20 @@
 		normalize_close_message(Payload, Message),
 		close_handle(WebSocket, Message).
 
-	property(WebSocket, role(Role)) :-
+	property(WebSocket, Property) :-
+		property_(Property, WebSocket).
+
+	property_(role(Role), WebSocket) :-
 		with_handle_state(WebSocket, Role, _Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
-	property(WebSocket, response(Response)) :-
+	property_(response(Response), WebSocket) :-
 		with_handle_state(WebSocket, _Role, _Connection, Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
-	property(WebSocket, connection(Connection)) :-
+	property_(connection(Connection), WebSocket) :-
 		with_handle_state(WebSocket, _Role, Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
-	property(WebSocket, state(State)) :-
+	property_(state(State), WebSocket) :-
 		with_handle_state(WebSocket, _Role, _Connection, _Response, _ClientInfo, State, _AutoPong, _MaxPayloadLength).
-	property(WebSocket, client_info(ClientInfo)) :-
+	property_(client_info(ClientInfo), WebSocket) :-
 		with_handle_state(WebSocket, server, _Connection, _Response, ClientInfo, _State, _AutoPong, _MaxPayloadLength).
-	property(WebSocket, subprotocol(Protocol)) :-
+	property_(subprotocol(Protocol), WebSocket) :-
 		with_handle_state(WebSocket, _Role, _Connection, Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength),
 		http_property(Response, websocket_protocol([Protocol])).
 
@@ -420,7 +424,6 @@
 
 	handle_identifier(WebSocket, _HandleId) :-
 		var(WebSocket),
-		!,
 		instantiation_error.
 	handle_identifier(http_websocket_handle(HandleId), HandleId) :-
 		integer(HandleId),
