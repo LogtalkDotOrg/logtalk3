@@ -23,12 +23,12 @@
 	imports(options)).
 
 	:- info([
-		version is 0:13:1,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
+		date is 2026-04-22,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
-			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
+			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
 			'Design rationale' - 'Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with ``client_open/5`` and ``server_open/3`` that abstracts over these differences.',
 			'Stream handling' - 'Predicates ``client_open/5`` and ``server_accept/5`` return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (``put_byte/2``, ``get_byte/2``, ``read/2``, ``write/2``, etc.) to communicate.',
 			'Options' - 'Currently options are only defined for the ``server_open/3`` predicate. This is expected to change in future versions for the other predicates that have an options argument.'
@@ -197,6 +197,18 @@
 			throw(error(socket_error(Error), Context))
 		).
 
+	close(Input, Output) :-
+		context(Context),
+		catch(
+			(	Input == Output ->
+				close(Input)
+			;	close(Input),
+				close(Output)
+			),
+			Error,
+			throw(error(socket_error(Error), Context))
+		).
+
 	current_host(Host) :-
 		context(Context),
 		catch(
@@ -253,18 +265,6 @@
 	server_close_(server_socket(Socket, _)) :-
 		close(Socket, Socket).
 
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
 	current_host_(Host) :-
 		get_flag(hostname, HostString),
 		atom_string(Host, HostString).
@@ -301,18 +301,6 @@
 
 	server_close_(server_socket(Socket, _)) :-
 		socket_close(Socket).
-
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
 
 	current_host_(Host) :-
 		host_name(Host).
@@ -376,18 +364,6 @@
 	server_close_(server_socket(ServerSocket, _)) :-
 		sockets:socket_server_close(ServerSocket).
 
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
 	current_host_(Host) :-
 		sockets:current_host(Host).
 
@@ -439,18 +415,6 @@
 
 	server_close_(server_socket(Socket, _)) :-
 		socket:tcp_close_socket(Socket).
-
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
 
 	current_host_(Host) :-
 		socket:gethostname(Host).
@@ -514,18 +478,6 @@
 	server_close_(server_socket(ServerSocket, _)) :-
 		sockets:socket_server_close(ServerSocket).
 
-	close(Input, Output) :-
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
-
 	current_host_(Host) :-
 		sockets:current_host(Host).
 
@@ -561,20 +513,6 @@
 
 	server_close_(server_socket(Socket, _)) :-
 		socket_close(Socket).
-
-	close(Input, Output) :-
-		adopt_stream(Input),
-		adopt_stream(Output),
-		context(Context),
-		catch(
-			(	Input == Output ->
-				close(Input)
-			;	close(Input),
-				close(Output)
-			),
-			Error,
-			throw(error(socket_error(Error), Context))
-		).
 
 	current_host_(Host) :-
 		host_name(Host).

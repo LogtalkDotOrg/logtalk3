@@ -390,8 +390,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:13:1</div>
-<div class="line"><strong>Date:</strong> 2026-06-04</div>
+<div class="line"><strong>Version:</strong> 0:13:0</div>
+<div class="line"><strong>Date:</strong> 2026-04-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -414,7 +414,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p></li>
+<li><p>Supported backends: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.</p></li>
 <li><p>Design rationale: Some backends (notably SICStus Prolog) do not provide low-level socket creation predicates that can be separated from binding or connecting. This library therefore provides a higher-level API with <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> that abstracts over these differences.</p></li>
 <li><p>Stream handling: Predicates <code class="docutils literal notranslate"><span class="pre">client_open/5</span></code> and <code class="docutils literal notranslate"><span class="pre">server_accept/5</span></code> return separate input and output streams opened in binary mode. For backends where the same stream is used for bidirectional communication, the same stream handle is returned in both arguments. Use standard stream predicates (<code class="docutils literal notranslate"><span class="pre">put_byte/2</span></code>, <code class="docutils literal notranslate"><span class="pre">get_byte/2</span></code>, <code class="docutils literal notranslate"><span class="pre">read/2</span></code>, <code class="docutils literal notranslate"><span class="pre">write/2</span></code>, etc.) to communicate.</p></li>
 <li><p>Options: Currently options are only defined for the <code class="docutils literal notranslate"><span class="pre">server_open/3</span></code> predicate. This is expected to change in future versions for the other predicates that have an options argument.</p></li>

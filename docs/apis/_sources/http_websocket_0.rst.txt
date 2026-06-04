@@ -251,8 +251,7 @@ Enumerates properties of an open opaque WebSocket handle. Supported properties a
 | **Template:**
 |    ``property(WebSocket,Property)``
 | **Mode and number of proofs:**
-|    ``property(+compound,+compound)`` - ``zero_or_one``
-|    ``property(+compound,-compound)`` - ``zero_or_more``
+|    ``property(+compound,?compound)`` - ``zero_or_more``
 
 
 ------------
