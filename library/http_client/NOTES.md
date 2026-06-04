@@ -266,18 +266,14 @@ sequence because the connection is consumed while reading the body.
 Current limitations
 -------------------
 
-- Only absolute `http://` URLs are currently supported by the request-oriented
+- Only absolute `http://` URLs are supported by the request-oriented
   facade. `https://` URLs are rejected until transport-level TLS support is
   added.
-- The WebSocket helper currently supports only plain `ws://` opening
+- The WebSocket helper supports only plain `ws://` opening
   handshakes. `wss://` remains out of scope until TLS support exists.
-- The WebSocket helper stops at handshake validation. Frame parsing and
-  generation now live in the `http_websocket` library, message reassembly and
-  UTF-8-aware message I/O now live in the `http_websocket_messages` library,
-  and the `http_websocket_session` library now adds explicit session state,
-  interleaved control-frame surfacing, role-aware writes, automatic close
-  replies, and optional automatic pong replies. Higher-level application policy
-  still belongs to the next layer.
+- The WebSocket helper is limited to opening-handshake validation. It does not
+	provide frame parsing, message reassembly, session state, or higher-level
+	application policy.
 - Only the transport coding sequence `[chunked]` is recognized when reading
   streamed response bodies in `http_client_core`.
 - Close-delimited response bodies can only be used as the final response in an

@@ -212,10 +212,9 @@ media type inference.
 Current limitations
 -------------------
 
-- request and response OpenAPI contract validation is currently opt-in per
-  endpoint using the validation hooks
-- the current version does not yet include dedicated pagination, filtering,
-  or rate-limiting helpers of its own
-- result normalization currently focuses on JSON and problem responses; it
-  does not yet provide specialized helpers for redirects, streaming, or
-  multipart payloads
+- Request and response OpenAPI contract validation is opt-in per endpoint using
+  the validation hooks
+- The library does not include dedicated pagination, filtering, or
+  rate-limiting helpers of its own
+- Result normalization focuses on JSON and problem responses; it does not
+  provide specialized helpers for redirects, streaming, or multipart payloads

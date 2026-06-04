@@ -190,23 +190,10 @@ Current limitations
 
 - Availability depends on the supported backends of the ``sockets``
   library.
-- The library does not yet provide TLS. Higher-level URL-based request
-  helpers now live in the ``http_client`` library.
-- The WebSocket transport helper now stops at returning the upgraded
-  connection handle and its streams. Frame parsing and frame writing now
-  live in the ``http_websocket`` library, message reassembly and
-  UTF-8-aware message I/O now live in the ``http_websocket_messages``
-  library, and the new ``http_websocket_session`` library adds explicit
-  session state, interleaved control-frame surfacing, role-aware writes,
-  automatic close replies, and optional automatic pong replies. That
-  library now also provides a simple callback-driven connection loop,
-  but higher-level application policy beyond a single synchronous
-  session handler still belongs to a later layer.
-- The ``workers(per_connection)`` option depends on backend thread
-  support.
-- The ``workers(pool(N))`` and ``workers(per_connection)`` options
+- The library does not provide TLS or URL-based request helpers.
+- The WebSocket transport helper is limited to the opening handshake and
+  upgraded connection handle management. It does not provide frame
+  parsing, message I/O, or higher-level session handling.
+- The ``workers(per_connection)`` and ``workers(pool(N))`` options
   depend on backend thread support.
-- Server-side helpers still do not provide supervision trees.
-- Request scheduling now covers serial serving,
-  one-worker-per-connection, fixed-size batch pools, and rolling
-  fixed-size worker pools.
+- Server-side helpers do not provide supervision trees.

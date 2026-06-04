@@ -143,24 +143,20 @@ Multipart parts use recursive normalized terms:
 Current limitations
 -------------------
 
-- Chunked transfer coding support is currently limited to the bare
+- Chunked transfer coding support is limited to the bare
   ``Transfer-Encoding: chunked`` case; stacked transfer codings remain
   out of scope for now
 - Multipart wire parsing and generation require a boundary parameter in
   the effective ``Content-Type`` metadata, or an explicit ``boundary/1``
   option when using ``parse_body/4`` or ``generate_body/3``
-- File-backed bodies are generated only; parsing still normalizes
-  incoming bodies to in-memory payload terms. The declared ``Offset``
-  and ``Length`` determine the response ``Content-Length`` metadata when
-  the body is generated.
-- The current body codec set is intentionally small and focused on the
-  media types needed by the current ``http_core`` and ``open_api``
-  libraries
-- Header normalization is still selective; headers outside the supported
-  set are preserved as validated raw ``Name-Value`` pairs
+- File-backed bodies are generated only; parsing normalizes incoming
+  bodies to in-memory payload terms. The declared ``Offset`` and
+  ``Length`` determine the response ``Content-Length`` metadata when the
+  body is generated.
+- The body codec set is intentionally small and focused on a limited set
+  of media types
+- Header normalization is selective; headers outside the supported set
+  are preserved as validated raw ``Name-Value`` pairs
 - The WebSocket support in this layer is limited to HTTP
-  opening-handshake metadata normalization. Shared opening-handshake
-  predicates can be found in the ``http_websocket`` library; ``wss://``
-  and TLS-backed transport orchestration remain out of scope
-- For client and server transport orchestration, see, respectively, the
-  ``http_client`` and ``http_server`` libraries
+  opening-handshake metadata normalization. ``wss://`` and TLS-backed
+  transport orchestration remain out of scope

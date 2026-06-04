@@ -667,18 +667,14 @@ broadcast delivery, create a registry with
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> and <code class="docutils literal notranslate"><span class="pre">serve_once/6-7</span></code> helpers remain
-synchronous, single-connection callback loops, but they are available
-on backends without thread support when used without timed loop
-options.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> and <code class="docutils literal notranslate"><span class="pre">serve_once/6-7</span></code> helpers are
+synchronous, single-connection callback loops. On backends without
+thread support, they can be used only without timed loop options.</p></li>
 <li><p>The timed loop options <code class="docutils literal notranslate"><span class="pre">keepalive_interval/1</span></code> and <code class="docutils literal notranslate"><span class="pre">idle_timeout/1</span></code>
 require backend thread support.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5-6</span></code> helper requires backend thread
 support.</p></li>
-<li><p>The explicit session state remains available for callers that need
-direct control of read and write sequencing.</p></li>
-<li><p>Fragmentation is currently controlled only by fixed payload chunk
-size.</p></li>
+<li><p>Fragmentation is controlled only by fixed payload chunk size.</p></li>
 <li><p>Reserved-bit extension negotiation and extension semantics remain
 delegated to lower layers.</p></li>
 </ul>

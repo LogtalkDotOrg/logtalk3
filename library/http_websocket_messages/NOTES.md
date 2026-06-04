@@ -108,15 +108,15 @@ Current workflow
 Current limitations
 -------------------
 
-- Outgoing messages are currently generated as a single final frame. This
-  layer does not yet provide outgoing fragmentation policies.
+- Outgoing messages are generated as a single final frame. This layer does not
+  provide outgoing fragmentation policies.
 - Fragmented text and binary messages are reassembled only when the following
   frames are plain continuation frames. Use the `http_websocket_session`
   library when interleaved control messages must be surfaced while the
   fragmented data remains pending.
-- Client and server masking policy is still not enforced automatically by role
+- Client and server masking policy is not enforced automatically by role
   in this stateless layer. Use the `http_websocket_session` library when that
   policy should be applied automatically.
-- This version still does not provide application session loops, close-handshake
-  orchestration, or automatic ping/pong policies. The stateful session layer is
-  the next abstraction step, but it still leaves those policies to the caller.
+- This layer does not provide application session loops. For full
+  close-handshake orchestration or automatic ping/pong policies, use the
+  `http_websocket_session` layer.

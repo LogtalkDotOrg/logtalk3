@@ -486,27 +486,23 @@ needed by the next client and server transport slices</p></li>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Chunked transfer coding support is currently limited to the bare
+<li><p>Chunked transfer coding support is limited to the bare
 <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding:</span> <span class="pre">chunked</span></code> case; stacked transfer codings remain
 out of scope for now</p></li>
 <li><p>Multipart wire parsing and generation require a boundary parameter in
 the effective <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> metadata, or an explicit <code class="docutils literal notranslate"><span class="pre">boundary/1</span></code>
 option when using <code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code> or <code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></p></li>
-<li><p>File-backed bodies are generated only; parsing still normalizes
-incoming bodies to in-memory payload terms. The declared <code class="docutils literal notranslate"><span class="pre">Offset</span></code>
-and <code class="docutils literal notranslate"><span class="pre">Length</span></code> determine the response <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> metadata when
-the body is generated.</p></li>
-<li><p>The current body codec set is intentionally small and focused on the
-media types needed by the current <code class="docutils literal notranslate"><span class="pre">http_core</span></code> and <code class="docutils literal notranslate"><span class="pre">open_api</span></code>
-libraries</p></li>
-<li><p>Header normalization is still selective; headers outside the supported
-set are preserved as validated raw <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs</p></li>
+<li><p>File-backed bodies are generated only; parsing normalizes incoming
+bodies to in-memory payload terms. The declared <code class="docutils literal notranslate"><span class="pre">Offset</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Length</span></code> determine the response <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> metadata when the
+body is generated.</p></li>
+<li><p>The body codec set is intentionally small and focused on a limited set
+of media types</p></li>
+<li><p>Header normalization is selective; headers outside the supported set
+are preserved as validated raw <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs</p></li>
 <li><p>The WebSocket support in this layer is limited to HTTP
-opening-handshake metadata normalization. Shared opening-handshake
-predicates can be found in the <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> library; <code class="docutils literal notranslate"><span class="pre">wss://</span></code>
-and TLS-backed transport orchestration remain out of scope</p></li>
-<li><p>For client and server transport orchestration, see, respectively, the
-<code class="docutils literal notranslate"><span class="pre">http_client</span></code> and <code class="docutils literal notranslate"><span class="pre">http_server</span></code> libraries</p></li>
+opening-handshake metadata normalization. <code class="docutils literal notranslate"><span class="pre">wss://</span></code> and TLS-backed
+transport orchestration remain out of scope</p></li>
 </ul>
 </section>
 </section>

@@ -264,19 +264,8 @@ normalized list declared by ``route_produces/2`` for the matched route.
 Current limitations
 -------------------
 
-- The current version supports path-template matching, pre-routing
-  middleware chaining, response post-processing middleware,
-  route-specific metadata annotations, automatic OpenAPI provider
-  derivation including best-effort request and successful response
-  schema inference, method dispatch, route-level content negotiation,
-  customizable ``404``/``405``/automatic ``OPTIONS``/``406`` responses,
-  and automatic ``OPTIONS`` responses.
-- Path templates support literal segments, anonymous ``*`` wildcard
-  segments, plain ``{name}`` placeholders, and typed placeholders such
-  as ``{id:integer}`` and ``{score:number}``.
-- OpenAPI inference is still best-effort, but it now accepts optional
+- OpenAPI inference is best-effort. Even with the optional
   ``route_open_api_request_body_example/2`` and
-  ``route_open_api_response_example/2`` hooks before falling back to
-  handler probing. Explicit metadata remains the right choice for
-  reusable component schemas and for routes whose contracts should be
-  stated directly instead of inferred.
+  ``route_open_api_response_example/2`` hooks, explicit metadata remains
+  the right choice for reusable component schemas and for routes whose
+  contracts should be stated directly instead of inferred.

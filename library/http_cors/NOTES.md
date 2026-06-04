@@ -191,10 +191,9 @@ is required.
 Current limitations
 -------------------
 
-- origin matching is exact and string-based
-- dynamic callback policies are not supported
-- wildcard subdomain matching is not supported
-- `allowed_origins(any)` cannot be combined with `allow_credentials(true)` in
-  the current version
-- wildcard semantics are currently implemented for `allowed_headers/1` and
-  `expose_headers/1`, but not for `allowed_methods/1`
+- Origin matching is exact and string-based
+- Dynamic callback policies are not supported
+- Wildcard subdomain matching is not supported
+- `allowed_origins(any)` cannot be combined with `allow_credentials(true)`
+- Wildcard semantics are implemented for `allowed_headers/1` and
+    `expose_headers/1`, but not for `allowed_methods/1`

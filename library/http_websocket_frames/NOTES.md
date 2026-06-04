@@ -118,13 +118,13 @@ Current workflow
 Current limitations
 -------------------
 
-- This library operates at the frame level only. It does not yet provide
+- This library operates at the frame level only. It does not provide
   application session loops.
-- Message reassembly plus UTF-8-aware text and close-reason handling now live
-  in the `http_websocket_messages` library.
+- This layer does not provide message reassembly or UTF-8-aware text and
+  close-reason handling.
 - Client and server masking policy is not enforced by role in this frame layer.
   The presence of a `masking_key/1` property controls whether outgoing frames
   are masked. Use the `http_websocket_session` layer when you want role-aware
   writes and role-aware incoming masking validation.
 - Reserved bits are preserved structurally but no extension negotiation or
-  extension semantics are implemented yet.
+  extension semantics are implemented.

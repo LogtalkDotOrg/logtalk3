@@ -471,30 +471,29 @@ contribute missing OpenAPI metadata:</p>
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Validation is intentionally partial and does not attempt to implement
-the full OpenAPI 3.1 meta-schema, but it now includes type-specific
-fixed-field checks for Security Scheme Objects and OAuth Flow Objects</p></li>
-<li><p>The library currently derives only <code class="docutils literal notranslate"><span class="pre">components.schemas</span></code> and
+the full OpenAPI 3.1 meta-schema. Only selected type-specific
+fixed-field checks, such as those for Security Scheme Objects and
+OAuth Flow Objects, are provided</p></li>
+<li><p>The library derives only <code class="docutils literal notranslate"><span class="pre">components.schemas</span></code> and
 <code class="docutils literal notranslate"><span class="pre">components.securitySchemes</span></code> plus the root <code class="docutils literal notranslate"><span class="pre">security</span></code> field</p></li>
 <li><p>The library integrates with the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library for request and
 response parsing and for protocol-based access to normalized HTTP
-messages, but it still limits itself to contract validation rather
-than transport concerns</p></li>
-<li><p>The supported <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code> descriptor vocabulary is
-summarized in
-<a class="reference external" href="SECURITY_DESCRIPTOR_DSL.md">SECURITY_DESCRIPTOR_DSL.md</a>. Legacy
-raw OpenAPI Security Scheme Object curly terms are still accepted
-during transition</p></li>
-<li><p>Scope validation currently cross-checks against locally declared OAuth
-flow scopes when they are present in a reusable security scheme. Full
-OpenID Connect discovery-based scope resolution remains out of scope</p></li>
-<li><p>Query and cookie parameter validation currently relies on typed
-request properties such as <code class="docutils literal notranslate"><span class="pre">query_pairs/1</span></code> and <code class="docutils literal notranslate"><span class="pre">cookies/1</span></code>; raw
-query-string parsing is intentionally out of scope for this first pass</p></li>
-<li><p>Request and response body validation currently supports <code class="docutils literal notranslate"><span class="pre">json/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">text/1</span></code>, <code class="docutils literal notranslate"><span class="pre">binary/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">form/1</span></code> payload terms; multipart
-payload validation remains out of scope</p></li>
+messages, but it limits itself to contract validation rather than
+transport concerns</p></li>
+<li><p>The supported <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code> descriptor vocabulary is limited
+to the forms summarized in
+<a class="reference external" href="SECURITY_DESCRIPTOR_DSL.md">SECURITY_DESCRIPTOR_DSL.md</a></p></li>
+<li><p>Scope validation cross-checks against locally declared OAuth flow
+scopes when they are present in a reusable security scheme. Full
+OpenID Connect discovery-based scope resolution is out of scope</p></li>
+<li><p>Query and cookie parameter validation relies on typed request
+properties such as <code class="docutils literal notranslate"><span class="pre">query_pairs/1</span></code> and <code class="docutils literal notranslate"><span class="pre">cookies/1</span></code>; raw
+query-string parsing is intentionally out of scope</p></li>
+<li><p>Request and response body validation supports <code class="docutils literal notranslate"><span class="pre">json/1</span></code>, <code class="docutils literal notranslate"><span class="pre">text/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">binary/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">form/1</span></code> payload terms; multipart payload
+validation remains out of scope</p></li>
 <li><p>The JSON helper predicates validate media types and response status
-keys eagerly, but schema validation at the helper boundary remains
+keys eagerly, but schema validation at the helper boundary is
 intentionally shallow and only checks for boolean schemas, JSON object
 terms, or <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> references</p></li>
 </ul>

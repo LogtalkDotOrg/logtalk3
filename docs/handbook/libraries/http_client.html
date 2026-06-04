@@ -611,19 +611,14 @@ the connection is consumed while reading the body.</p>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Only absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are currently supported by the
-request-oriented facade. <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs are rejected until
-transport-level TLS support is added.</p></li>
-<li><p>The WebSocket helper currently supports only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening
-handshakes. <code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
-<li><p>The WebSocket helper stops at handshake validation. Frame parsing and
-generation now live in the <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> library, message
-reassembly and UTF-8-aware message I/O now live in the
-<code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code> library, and the
-<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> library now adds explicit session state,
-interleaved control-frame surfacing, role-aware writes, automatic
-close replies, and optional automatic pong replies. Higher-level
-application policy still belongs to the next layer.</p></li>
+<li><p>Only absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are supported by the request-oriented
+facade. <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs are rejected until transport-level TLS
+support is added.</p></li>
+<li><p>The WebSocket helper supports only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes.
+<code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
+<li><p>The WebSocket helper is limited to opening-handshake validation. It
+does not provide frame parsing, message reassembly, session state, or
+higher-level application policy.</p></li>
 <li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
 reading streamed response bodies in <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>.</p></li>
 <li><p>Close-delimited response bodies can only be used as the final response

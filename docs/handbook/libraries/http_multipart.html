@@ -437,19 +437,18 @@ incoming multipart requests without reparsing them.</p></li>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>This version is entirely in-memory.</p></li>
+<li><p>The library is entirely in-memory.</p></li>
 <li><p>The form-data helpers only cover the common
 <code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">form-data</span></code> parameters needed for <code class="docutils literal notranslate"><span class="pre">name</span></code> and
 <code class="docutils literal notranslate"><span class="pre">filename</span></code> extraction and construction.</p></li>
 <li><p>Textual field helpers target simple text field payloads. If a part has
 a non-text body or a more specialized encoding, callers should use the
 generic part accessors instead.</p></li>
-<li><p>Multipart wire parsing and generation still require a boundary
-parameter in the effective <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> metadata or an explicit
-<code class="docutils literal notranslate"><span class="pre">boundary/1</span></code> option, exactly as in the underlying <code class="docutils literal notranslate"><span class="pre">http_core</span></code>
-library.</p></li>
-<li><p>The library does not yet provide streaming sinks, temp-file policies,
-or large-upload orchestration.</p></li>
+<li><p>Multipart wire parsing and generation require a boundary parameter in
+the effective <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> metadata or an explicit <code class="docutils literal notranslate"><span class="pre">boundary/1</span></code>
+option, exactly as in the underlying <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library.</p></li>
+<li><p>The library does not provide streaming sinks, temp-file policies, or
+large-upload orchestration.</p></li>
 </ul>
 </section>
 </section>

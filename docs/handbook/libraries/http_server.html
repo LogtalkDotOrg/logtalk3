@@ -570,12 +570,12 @@ entry point for handshake plus callback-driven session execution.</p></li>
 <ul class="simple">
 <li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
 reading streamed request bodies.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> helper only covers the HTTP opening
-handshake. This layer does not yet hand upgraded connections off to a
-frame-processing loop, and <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> is still
-HTTP-request oriented.</p></li>
-<li><p>The library does not yet provide socket accept loops, connection
-pooling, or concurrency management.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> helper is limited to the HTTP opening
+handshake. This layer does not hand upgraded connections off to a
+frame-processing loop, and <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> remains HTTP-request
+oriented.</p></li>
+<li><p>The library does not provide socket accept loops, connection pooling,
+or concurrency management.</p></li>
 <li><p>The library assumes binary streams for both input and output.</p></li>
 </ul>
 </section>

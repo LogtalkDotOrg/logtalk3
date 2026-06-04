@@ -134,28 +134,28 @@ Current limitations
 -------------------
 
 - Validation is intentionally partial and does not attempt to implement the
-  full OpenAPI 3.1 meta-schema, but it now includes type-specific fixed-field
-  checks for Security Scheme Objects and OAuth Flow Objects
-- The library currently derives only `components.schemas` and
+  full OpenAPI 3.1 meta-schema. Only selected type-specific fixed-field
+  checks, such as those for Security Scheme Objects and OAuth Flow Objects,
+  are provided
+- The library derives only `components.schemas` and
   `components.securitySchemes` plus the root `security` field
 - The library integrates with the `http_core` library for request and
   response parsing and for protocol-based access to normalized HTTP
-  messages, but it still limits itself to contract validation rather
+  messages, but it limits itself to contract validation rather
   than transport concerns
-- The supported `security_scheme/2` descriptor vocabulary is summarized in
-  [SECURITY_DESCRIPTOR_DSL.md](SECURITY_DESCRIPTOR_DSL.md). Legacy raw OpenAPI
-  Security Scheme Object curly terms are still accepted during transition
-- Scope validation currently cross-checks against locally declared OAuth flow
+- The supported `security_scheme/2` descriptor vocabulary is limited to the
+  forms summarized in [SECURITY_DESCRIPTOR_DSL.md](SECURITY_DESCRIPTOR_DSL.md)
+- Scope validation cross-checks against locally declared OAuth flow
   scopes when they are present in a reusable security scheme. Full OpenID
-  Connect discovery-based scope resolution remains out of scope
-- Query and cookie parameter validation currently relies on typed request
+  Connect discovery-based scope resolution is out of scope
+- Query and cookie parameter validation relies on typed request
   properties such as `query_pairs/1` and `cookies/1`; raw query-string
-  parsing is intentionally out of scope for this first pass
-- Request and response body validation currently supports `json/1`,
+  parsing is intentionally out of scope
+- Request and response body validation supports `json/1`,
   `text/1`, `binary/1`, and `form/1` payload terms; multipart payload
   validation remains out of scope
 - The JSON helper predicates validate media types and response status keys
-  eagerly, but schema validation at the helper boundary remains
+  eagerly, but schema validation at the helper boundary is
   intentionally shallow and only checks for boolean schemas, JSON object
   terms, or `schema_ref/1` references
 

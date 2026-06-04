@@ -236,9 +236,9 @@ Current limitations
 
 - Only the transport coding sequence `[chunked]` is recognized when reading
   streamed request bodies.
-- The `accept_websocket/3` helper only covers the HTTP opening handshake. This
-  layer does not yet hand upgraded connections off to a frame-processing loop,
-  and `serve_connection/3` is still HTTP-request oriented.
-- The library does not yet provide socket accept loops, connection pooling, or
+- The `accept_websocket/3` helper is limited to the HTTP opening handshake.
+	This layer does not hand upgraded connections off to a frame-processing
+	loop, and `serve_connection/3` remains HTTP-request oriented.
+- The library does not provide socket accept loops, connection pooling, or
   concurrency management.
 - The library assumes binary streams for both input and output.

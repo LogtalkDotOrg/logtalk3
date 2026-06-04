@@ -531,26 +531,13 @@ are closed in that case.</p></li>
 <ul class="simple">
 <li><p>Availability depends on the supported backends of the <code class="docutils literal notranslate"><span class="pre">sockets</span></code>
 library.</p></li>
-<li><p>The library does not yet provide TLS. Higher-level URL-based request
-helpers now live in the <code class="docutils literal notranslate"><span class="pre">http_client</span></code> library.</p></li>
-<li><p>The WebSocket transport helper now stops at returning the upgraded
-connection handle and its streams. Frame parsing and frame writing now
-live in the <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> library, message reassembly and
-UTF-8-aware message I/O now live in the <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>
-library, and the new <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> library adds explicit
-session state, interleaved control-frame surfacing, role-aware writes,
-automatic close replies, and optional automatic pong replies. That
-library now also provides a simple callback-driven connection loop,
-but higher-level application policy beyond a single synchronous
-session handler still belongs to a later layer.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> option depends on backend thread
-support.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code> and <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> options
+<li><p>The library does not provide TLS or URL-based request helpers.</p></li>
+<li><p>The WebSocket transport helper is limited to the opening handshake and
+upgraded connection handle management. It does not provide frame
+parsing, message I/O, or higher-level session handling.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> and <code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code> options
 depend on backend thread support.</p></li>
-<li><p>Server-side helpers still do not provide supervision trees.</p></li>
-<li><p>Request scheduling now covers serial serving,
-one-worker-per-connection, fixed-size batch pools, and rolling
-fixed-size worker pools.</p></li>
+<li><p>Server-side helpers do not provide supervision trees.</p></li>
 </ul>
 </section>
 </section>

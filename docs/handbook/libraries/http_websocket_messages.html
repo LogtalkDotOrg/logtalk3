@@ -448,19 +448,18 @@ need raw frame properties such as masking keys or reserved bits.</p></li>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Outgoing messages are currently generated as a single final frame.
-This layer does not yet provide outgoing fragmentation policies.</p></li>
+<li><p>Outgoing messages are generated as a single final frame. This layer
+does not provide outgoing fragmentation policies.</p></li>
 <li><p>Fragmented text and binary messages are reassembled only when the
 following frames are plain continuation frames. Use the
 <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> library when interleaved control messages
 must be surfaced while the fragmented data remains pending.</p></li>
-<li><p>Client and server masking policy is still not enforced automatically
-by role in this stateless layer. Use the <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>
-library when that policy should be applied automatically.</p></li>
-<li><p>This version still does not provide application session loops,
-close-handshake orchestration, or automatic ping/pong policies. The
-stateful session layer is the next abstraction step, but it still
-leaves those policies to the caller.</p></li>
+<li><p>Client and server masking policy is not enforced automatically by role
+in this stateless layer. Use the <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> library
+when that policy should be applied automatically.</p></li>
+<li><p>This layer does not provide application session loops. For full
+close-handshake orchestration or automatic ping/pong policies, use the
+<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> layer.</p></li>
 </ul>
 </section>
 </section>

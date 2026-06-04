@@ -595,22 +595,11 @@ normalized list declared by <code class="docutils literal notranslate"><span cla
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The current version supports path-template matching, pre-routing
-middleware chaining, response post-processing middleware,
-route-specific metadata annotations, automatic OpenAPI provider
-derivation including best-effort request and successful response
-schema inference, method dispatch, route-level content negotiation,
-customizable <code class="docutils literal notranslate"><span class="pre">404</span></code>/<code class="docutils literal notranslate"><span class="pre">405</span></code>/automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>/<code class="docutils literal notranslate"><span class="pre">406</span></code> responses,
-and automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses.</p></li>
-<li><p>Path templates support literal segments, anonymous <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcard
-segments, plain <code class="docutils literal notranslate"><span class="pre">{name}</span></code> placeholders, and typed placeholders such
-as <code class="docutils literal notranslate"><span class="pre">{id:integer}</span></code> and <code class="docutils literal notranslate"><span class="pre">{score:number}</span></code>.</p></li>
-<li><p>OpenAPI inference is still best-effort, but it now accepts optional
+<li><p>OpenAPI inference is best-effort. Even with the optional
 <code class="docutils literal notranslate"><span class="pre">route_open_api_request_body_example/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">route_open_api_response_example/2</span></code> hooks before falling back to
-handler probing. Explicit metadata remains the right choice for
-reusable component schemas and for routes whose contracts should be
-stated directly instead of inferred.</p></li>
+<code class="docutils literal notranslate"><span class="pre">route_open_api_response_example/2</span></code> hooks, explicit metadata remains
+the right choice for reusable component schemas and for routes whose
+contracts should be stated directly instead of inferred.</p></li>
 </ul>
 </section>
 </section>

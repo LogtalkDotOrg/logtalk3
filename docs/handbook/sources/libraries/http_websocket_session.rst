@@ -350,17 +350,13 @@ Current workflow
 Current limitations
 -------------------
 
-- The ``run_session/3-4`` and ``serve_once/6-7`` helpers remain
-  synchronous, single-connection callback loops, but they are available
-  on backends without thread support when used without timed loop
-  options.
+- The ``run_session/3-4`` and ``serve_once/6-7`` helpers are
+  synchronous, single-connection callback loops. On backends without
+  thread support, they can be used only without timed loop options.
 - The timed loop options ``keepalive_interval/1`` and ``idle_timeout/1``
   require backend thread support.
 - The ``serve_until_shutdown/5-6`` helper requires backend thread
   support.
-- The explicit session state remains available for callers that need
-  direct control of read and write sequencing.
-- Fragmentation is currently controlled only by fixed payload chunk
-  size.
+- Fragmentation is controlled only by fixed payload chunk size.
 - Reserved-bit extension negotiation and extension semantics remain
   delegated to lower layers.

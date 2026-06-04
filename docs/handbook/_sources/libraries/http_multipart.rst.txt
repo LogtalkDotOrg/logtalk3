@@ -91,16 +91,15 @@ Current workflow
 Current limitations
 -------------------
 
-- This version is entirely in-memory.
+- The library is entirely in-memory.
 - The form-data helpers only cover the common
   ``Content-Disposition: form-data`` parameters needed for ``name`` and
   ``filename`` extraction and construction.
 - Textual field helpers target simple text field payloads. If a part has
   a non-text body or a more specialized encoding, callers should use the
   generic part accessors instead.
-- Multipart wire parsing and generation still require a boundary
-  parameter in the effective ``Content-Type`` metadata or an explicit
-  ``boundary/1`` option, exactly as in the underlying ``http_core``
-  library.
-- The library does not yet provide streaming sinks, temp-file policies,
-  or large-upload orchestration.
+- Multipart wire parsing and generation require a boundary parameter in
+  the effective ``Content-Type`` metadata or an explicit ``boundary/1``
+  option, exactly as in the underlying ``http_core`` library.
+- The library does not provide streaming sinks, temp-file policies, or
+  large-upload orchestration.
