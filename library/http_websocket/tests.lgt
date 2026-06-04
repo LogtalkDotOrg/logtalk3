@@ -170,6 +170,8 @@
 			status(ClientResponse, status(101, 'Switching Protocols')),
 			property(ClientResponse, websocket_protocol([chat])).
 
+		% auxiliary predicates
+
 		server_accept_text_exchange(Listener, session(Response, Role, Protocol, ReceivedMessage, CloseMessage)) :-
 			http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
 			http_websocket::property(WebSocket, role(Role)),

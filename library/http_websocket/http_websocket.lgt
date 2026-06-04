@@ -601,10 +601,12 @@
 	decode_term_text(end_of_file, end_of_file) :-
 		!.
 	decode_term_text(Text, Term) :-
-		read_term_from_atom(Text, Term0, [syntax_errors(error)]),
-		(	Term0 == end_of_file ->
-			domain_error(http_websocket_term_text, Text)
-		;	Term = Term0
+		(	catch(read_term_from_atom(Text, Term0, []), _, fail) ->
+			(	Term0 == end_of_file ->
+				domain_error(http_websocket_term_text, Text)
+			;	Term = Term0
+			)
+		;	domain_error(http_websocket_term_text, Text)
 		).
 
 	message_text(end_of_file, end_of_file) :-
