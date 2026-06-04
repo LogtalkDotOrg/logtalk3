@@ -616,41 +616,52 @@
 	:- meta_predicate(ensure_session_reader(*, *, *, *, *)).
 
 	:- if(current_logtalk_flag(threads, supported)).
-	ensure_session_reader(Input, State0, MaxPayloadLength, none, reader(Goal, Tag)) :-
-		!,
-		Goal = read_session_message(Input, State0, MaxPayloadLength, _Pending, _Message),
-		threaded_once(Goal, Tag).
-	ensure_session_reader(_Input, _State0, _MaxPayloadLength, Reader, Reader).
+
+		ensure_session_reader(Input, State0, MaxPayloadLength, none, reader(Goal, Tag)) :-
+			!,
+			Goal = read_session_message(Input, State0, MaxPayloadLength, _Pending, _Message),
+			threaded_once(Goal, Tag).
+		ensure_session_reader(_Input, _State0, _MaxPayloadLength, Reader, Reader).
+
 	:- else.
-	ensure_session_reader(_Input, _State0, _MaxPayloadLength, _Reader0, _Reader) :-
-		throw(not_available(http_websocket_session_timing)).
+
+		ensure_session_reader(_Input, _State0, _MaxPayloadLength, _Reader0, _Reader) :-
+			throw(not_available(http_websocket_session_timing)).
+
 	:- endif.
 
 	:- meta_predicate(ready_session_event(*, *, *)).
 
 	ready_session_event(none, _Event, _Reader) :-
 		fail.
+
 	:- if(current_logtalk_flag(threads, supported)).
-	ready_session_event(reader(Goal, Tag), Event, none) :-
-		catch(threaded_peek(Goal, Tag), Error, (catch(threaded_exit(Goal, Tag), _ExitError, true), throw(Error))),
-		!,
-		collect_session_reader_event(reader(Goal, Tag), Event).
+
+		ready_session_event(reader(Goal, Tag), Event, none) :-
+			catch(threaded_peek(Goal, Tag), Error, (catch(threaded_exit(Goal, Tag), _ExitError, true), throw(Error))),
+			!,
+			collect_session_reader_event(reader(Goal, Tag), Event).
+
 	:- endif.
 
 	:- meta_predicate(collect_session_reader_event(*, *)).
 
 	:- if(current_logtalk_flag(threads, supported)).
-	collect_session_reader_event(reader(Goal, Tag), Event) :-
-		(	catch(threaded_exit(Goal, Tag), Error, Outcome = error(Error)) ->
-			(	var(Outcome) ->
-				reader_goal_event(Goal, Event)
-			;	Event = Outcome
-			)
-		;	Event = fail
-		).
+
+		collect_session_reader_event(reader(Goal, Tag), Event) :-
+			(	catch(threaded_exit(Goal, Tag), Error, Outcome = error(Error)) ->
+				(	var(Outcome) ->
+					reader_goal_event(Goal, Event)
+				;	Event = Outcome
+				)
+			;	Event = fail
+			).
+
 	:- else.
-	collect_session_reader_event(_Reader, _Event) :-
-		throw(not_available(http_websocket_session_timing)).
+
+		collect_session_reader_event(_Reader, _Event) :-
+			throw(not_available(http_websocket_session_timing)).
+
 	:- endif.
 
 	reader_goal_event(read_session_message(_Input, _State0, _MaxPayloadLength, Pending, Message), read(Pending, Message)).
@@ -666,10 +677,22 @@
 	cancel_session_reader(reader(_Goal, _Tag)).
 	:- endif.
 
-	read_session_message(Input, State0, MaxPayloadLength, Pending, Message) :-
-		validate_role,
-		validate_state(State0, Pending0, _Close0),
-		read_pending_message(Input, Pending0, MaxPayloadLength, Pending, Message).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
+
+		read_session_message(Input, State0, MaxPayloadLength, Pending, Message) :-
+			adopt_stream(Input),
+			validate_role,
+			validate_state(State0, Pending0, _Close0),
+			read_pending_message(Input, Pending0, MaxPayloadLength, Pending, Message).
+
+	:- else.
+
+		read_session_message(Input, State0, MaxPayloadLength, Pending, Message) :-
+			validate_role,
+			validate_state(State0, Pending0, _Close0),
+			read_pending_message(Input, Pending0, MaxPayloadLength, Pending, Message).
+
+	:- endif.
 
 	apply_session_read(Output, State0, AutoPong, Pending0, Message, State) :-
 		validate_state(State0, _Pending, Close0),
