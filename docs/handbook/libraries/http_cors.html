@@ -403,6 +403,7 @@ with five public predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">allowed_origins(any)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allowed_origins(Origins)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allowed_methods(any)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allowed_methods(Methods)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allowed_headers(any)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">allowed_headers(requested)</span></code></p></li>
@@ -446,6 +447,26 @@ that has the intended CORS wildcard meaning. On credentialed requests,
 and for <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> preflight requests, the library materializes
 explicit header-name lists instead because browsers otherwise treat
 <code class="docutils literal notranslate"><span class="pre">*</span></code> as a literal header name.</p>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">allowed_origins(any)</span></code> emits <code class="docutils literal notranslate"><span class="pre">*</span></code> for non-credentialed
+requests but reflects the concrete request origin for credentialed
+requests and adds <code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">Origin</span></code> so caches keep those responses
+partitioned correctly.</p>
+<p>Wildcard origin policies can also be expressed using pattern atoms
+inside <code class="docutils literal notranslate"><span class="pre">allowed_origins(Origins)</span></code>, for example
+<code class="docutils literal notranslate"><span class="pre">allowed_origins(['https://*.example.com'])</span></code>. These patterns match
+exactly one leftmost hostname label, require exact scheme matching, and
+require exact port matching when the pattern includes an explicit port.
+Matching pattern policies always emit the concrete request origin and
+add or preserve <code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">Origin</span></code> because the response depends on the
+requesting origin.</p>
+<p>Wildcard method policies can be expressed using
+<code class="docutils literal notranslate"><span class="pre">allowed_methods(any)</span></code>. For compatibility, exact <code class="docutils literal notranslate"><span class="pre">['*']</span></code> values are
+normalized to the same wildcard behavior. Method wildcards expand from
+the request <code class="docutils literal notranslate"><span class="pre">effective_methods(Methods)</span></code> property after removing
+<code class="docutils literal notranslate"><span class="pre">options</span></code>, so they are intended for routed or otherwise annotated
+requests that provide that metadata. The generated
+<code class="docutils literal notranslate"><span class="pre">Access-Control-Allow-Methods</span></code> header still contains an explicit
+method list.</p>
 </section>
 <section id="route-level-overrides">
 <h2>Route-level overrides<a class="headerlink" href="#route-level-overrides" title="Link to this heading"></a></h2>
@@ -521,11 +542,6 @@ permission headers but it may still preserve or add cache-relevant
 <ul class="simple">
 <li><p>Origin matching is exact and string-based</p></li>
 <li><p>Dynamic callback policies are not supported</p></li>
-<li><p>Wildcard subdomain matching is not supported</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">allowed_origins(any)</span></code> cannot be combined with
-<code class="docutils literal notranslate"><span class="pre">allow_credentials(true)</span></code></p></li>
-<li><p>Wildcard semantics are implemented for <code class="docutils literal notranslate"><span class="pre">allowed_headers/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">expose_headers/1</span></code>, but not for <code class="docutils literal notranslate"><span class="pre">allowed_methods/1</span></code></p></li>
 </ul>
 </section>
 </section>

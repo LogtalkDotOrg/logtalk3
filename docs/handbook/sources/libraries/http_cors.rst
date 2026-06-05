@@ -55,6 +55,7 @@ The option DSL follows the ``options`` library conventions and supports:
 
 - ``allowed_origins(any)``
 - ``allowed_origins(Origins)``
+- ``allowed_methods(any)``
 - ``allowed_methods(Methods)``
 - ``allowed_headers(any)``
 - ``allowed_headers(requested)``
@@ -102,6 +103,29 @@ that has the intended CORS wildcard meaning. On credentialed requests,
 and for ``Authorization`` preflight requests, the library materializes
 explicit header-name lists instead because browsers otherwise treat
 ``*`` as a literal header name.
+
+Similarly, ``allowed_origins(any)`` emits ``*`` for non-credentialed
+requests but reflects the concrete request origin for credentialed
+requests and adds ``Vary: Origin`` so caches keep those responses
+partitioned correctly.
+
+Wildcard origin policies can also be expressed using pattern atoms
+inside ``allowed_origins(Origins)``, for example
+``allowed_origins(['https://*.example.com'])``. These patterns match
+exactly one leftmost hostname label, require exact scheme matching, and
+require exact port matching when the pattern includes an explicit port.
+Matching pattern policies always emit the concrete request origin and
+add or preserve ``Vary: Origin`` because the response depends on the
+requesting origin.
+
+Wildcard method policies can be expressed using
+``allowed_methods(any)``. For compatibility, exact ``['*']`` values are
+normalized to the same wildcard behavior. Method wildcards expand from
+the request ``effective_methods(Methods)`` property after removing
+``options``, so they are intended for routed or otherwise annotated
+requests that provide that metadata. The generated
+``Access-Control-Allow-Methods`` header still contains an explicit
+method list.
 
 Route-level overrides
 ---------------------
@@ -186,8 +210,3 @@ Current limitations
 
 - Origin matching is exact and string-based
 - Dynamic callback policies are not supported
-- Wildcard subdomain matching is not supported
-- ``allowed_origins(any)`` cannot be combined with
-  ``allow_credentials(true)``
-- Wildcard semantics are implemented for ``allowed_headers/1`` and
-  ``expose_headers/1``, but not for ``allowed_methods/1``

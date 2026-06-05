@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-06-05,
 		comment is 'Shared helpers for validating requests and sandboxing document-root relative paths.'
 	]).
 

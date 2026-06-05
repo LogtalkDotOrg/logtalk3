@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-06-05,
 		comment is 'Transport-neutral CORS request classification, preflight response generation, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -85,6 +85,10 @@
 		argnames is ['Option', 'FixedOption']
 	]).
 
+	:- uses(atom, [
+		split/3
+	]).
+
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2
 	]).
@@ -130,24 +134,38 @@
 		),
 		!.
 
-	valid_option(allowed_origins(any)).
 	valid_option(allowed_origins(Origins)) :-
-		valid_origin_list(Origins).
+		(	Origins == any ->
+			true
+		;	valid_origin_list(Origins)
+		).
 	valid_option(allowed_methods(Methods)) :-
-		valid_method_list(Methods).
-	valid_option(allowed_headers(any)).
-	valid_option(allowed_headers(requested)).
+		(	Methods == any ->
+			true
+		;	wildcard_method_list(Methods) ->
+			true
+		;	valid_method_list(Methods)
+		).
 	valid_option(allowed_headers(Headers)) :-
-		valid_header_name_list(Headers).
-	valid_option(expose_headers(any)).
+		(	Headers == any ->
+			true
+		;	Headers == requested ->
+			true
+		;	valid_header_name_list(Headers)
+		).
 	valid_option(expose_headers(Headers)) :-
-		valid_header_name_list(Headers).
-	valid_option(allow_credentials(true)).
-	valid_option(allow_credentials(false)).
-	valid_option(max_age(none)).
+		(	Headers == any ->
+			true
+		;	valid_header_name_list(Headers)
+		).
+	valid_option(allow_credentials(Boolean)) :-
+		once((Boolean == true; Boolean == false)).
 	valid_option(max_age(Seconds)) :-
-		integer(Seconds),
-		Seconds >= 0.
+		(	Seconds == none ->
+			true
+		;	integer(Seconds),
+			Seconds >= 0
+		).
 
 	default_option(allowed_origins([])).
 	default_option(allowed_methods([get])).
@@ -158,6 +176,9 @@
 
 	fix_option(allowed_origins(Origins0), allowed_origins(Origins)) :-
 		unique_preserving_order(Origins0, Origins).
+	fix_option(allowed_methods(Methods0), allowed_methods(any)) :-
+		unique_preserving_order(Methods0, ['*']),
+		!.
 	fix_option(allowed_methods(Methods0), allowed_methods(Methods)) :-
 		unique_preserving_order(Methods0, Methods).
 	fix_option(allowed_headers(Headers0), allowed_headers(any)) :-
@@ -222,9 +243,15 @@
 		functor(Option2, Functor, Arity).
 
 	constrain_allowed_methods(Request, Options0, Options) :-
-		(	request_effective_methods(Request, EffectiveMethods0) ->
+		^^option(allowed_methods(AllowedMethods0), Options0),
+		(	AllowedMethods0 == any ->
+			( 	request_effective_methods(Request, EffectiveMethods0) ->
+				filter_non_options_methods(EffectiveMethods0, AllowedMethods),
+				replace_option(allowed_methods(AllowedMethods), Options0, Options)
+			;	domain_error(http_cors_options, [allowed_methods(any)])
+			)
+		;	request_effective_methods(Request, EffectiveMethods0) ->
 			filter_non_options_methods(EffectiveMethods0, EffectiveMethods),
-			^^option(allowed_methods(AllowedMethods0), Options0),
 			intersection_preserving_order(AllowedMethods0, EffectiveMethods, AllowedMethods),
 			replace_option(allowed_methods(AllowedMethods), Options0, Options)
 		;	Options = Options0
@@ -243,18 +270,8 @@
 		remove_same_kind_options(Candidates, Option, Tail).
 
 	validate_option_semantics(Options) :-
-		validate_origin_credentials_semantics(Options),
 		validate_allowed_headers_semantics(Options),
 		validate_expose_headers_semantics(Options).
-
-	validate_origin_credentials_semantics(Options) :-
-		^^option(allowed_origins(AllowedOrigins), Options),
-		^^option(allow_credentials(AllowCredentials), Options),
-		(	AllowedOrigins == any,
-			AllowCredentials == true ->
-			domain_error(http_cors_options, [allowed_origins(any), allow_credentials(true)])
-		;	true
-		).
 
 	validate_allowed_headers_semantics(Options) :-
 		^^option(allowed_headers(AllowedHeaders), Options),
@@ -296,12 +313,22 @@
 		preflight_header_list(AllowOrigin, AllowedMethods, AllowHeadersValue, AllowCredentials, MaxAge, AllowHeaderValue, Headers),
 		preflight_vary_tokens(OriginVaryTokens, Request, VaryTokens).
 
-	allowed_origin(_Origin, Options, '*', []) :-
+	allowed_origin(Origin, Options, AllowOrigin, VaryTokens) :-
 		^^option(allowed_origins(any), Options),
-		!.
+		!,
+		^^option(allow_credentials(AllowCredentials), Options),
+		(	AllowCredentials == true ->
+			AllowOrigin = Origin,
+			VaryTokens = [origin]
+		;	AllowOrigin = '*',
+			VaryTokens = []
+		).
 	allowed_origin(Origin, Options, Origin, [origin]) :-
 		^^option(allowed_origins(Origins), Options),
 		memberchk(Origin, Origins).
+	allowed_origin(Origin, Options, Origin, [origin]) :-
+		^^option(allowed_origins(Origins), Options),
+		origin_matches_pattern(Origin, Origins).
 
 	allowed_headers_value([], _Options, none) :-
 		!.
@@ -719,7 +746,160 @@
 
 	valid_origin(Origin) :-
 		atom(Origin),
-		Origin \== ''.
+		Origin \== '',
+		atom_codes(Origin, Codes),
+		(	contains_wildcard_code(Codes) ->
+			wildcard_origin_pattern(Origin, _Scheme, _BaseLabels, _Port)
+		;	true
+		).
+
+	origin_matches_pattern(Origin, [Pattern| _]) :-
+		wildcard_origin_match(Origin, Pattern),
+		!.
+	origin_matches_pattern(Origin, [_| Patterns]) :-
+		origin_matches_pattern(Origin, Patterns).
+
+	wildcard_origin_match(Origin, Pattern) :-
+		wildcard_origin_pattern(Pattern, Scheme, BaseLabels, Port),
+		origin_components(Origin, Scheme, HostLabels, Port),
+		HostLabels = [_| BaseLabels].
+
+	wildcard_origin_pattern(Pattern, Scheme, BaseLabels, Port) :-
+		atom(Pattern),
+		split_origin_scheme_authority_codes(Pattern, SchemeCodes0, AuthorityCodes),
+		lowercase_ascii_codes(SchemeCodes0, SchemeCodes),
+		atom_codes(Scheme, SchemeCodes),
+		parse_origin_authority_codes(AuthorityCodes, HostCodes0, Port),
+		lowercase_ascii_codes(HostCodes0, HostCodes),
+		HostCodes = [0'*, 0'.| BaseHostCodes],
+		BaseHostCodes \== [],
+		\+ contains_wildcard_code(BaseHostCodes),
+		host_codes_labels(BaseHostCodes, BaseLabels),
+		valid_origin_port(Port).
+
+	origin_components(Origin, Scheme, HostLabels, Port) :-
+		atom(Origin),
+		split_origin_scheme_authority_codes(Origin, SchemeCodes0, AuthorityCodes),
+		lowercase_ascii_codes(SchemeCodes0, SchemeCodes),
+		atom_codes(Scheme, SchemeCodes),
+		parse_origin_authority_codes(AuthorityCodes, HostCodes0, Port),
+		lowercase_ascii_codes(HostCodes0, HostCodes),
+		host_codes_labels(HostCodes, HostLabels).
+
+	split_origin_scheme_authority_codes(Origin, SchemeCodes, AuthorityCodes) :-
+		split(Origin, '://', [Scheme, Authority]),
+		Scheme \== '',
+		Authority \== '',
+		atom_codes(Scheme, SchemeCodes),
+		atom_codes(Authority, AuthorityCodes).
+
+	parse_origin_authority_codes([0'[| Codes], HostCodes, Port) :-
+		split_once(0'], Codes, HostCodes, RestCodes),
+		!,
+		parse_bracketed_origin_port_codes(RestCodes, Port).
+	parse_origin_authority_codes(Codes, HostCodes, Port) :-
+		split_last_colon(Codes, HostCodes, PortCodes),
+		PortCodes \== [],
+		digit_codes(PortCodes),
+		!,
+		number_codes(Port, PortCodes),
+		valid_origin_port(Port).
+	parse_origin_authority_codes(Codes, Codes, none).
+
+	parse_bracketed_origin_port_codes([], none) :-
+		!.
+	parse_bracketed_origin_port_codes([0':| PortCodes], Port) :-
+		PortCodes \== [],
+		digit_codes(PortCodes),
+		number_codes(Port, PortCodes),
+		valid_origin_port(Port).
+
+	host_codes_labels(Codes, Labels) :-
+		split_dot_codes(Codes, LabelCodesList),
+		host_labels(LabelCodesList, Labels).
+
+	host_labels([], []).
+	host_labels([LabelCodes| LabelCodesList], [Label| Labels]) :-
+		valid_host_label_codes(LabelCodes),
+		atom_codes(Label, LabelCodes),
+		host_labels(LabelCodesList, Labels).
+
+	valid_host_label_codes([Code]) :-
+		host_label_edge_code(Code).
+	valid_host_label_codes([Code| Codes]) :-
+		host_label_edge_code(Code),
+		valid_host_label_tail_codes(Codes).
+
+	valid_host_label_tail_codes([Code]) :-
+		host_label_edge_code(Code).
+	valid_host_label_tail_codes([Code| Codes]) :-
+		host_label_code(Code),
+		valid_host_label_tail_codes(Codes).
+
+	host_label_edge_code(Code) :-
+		lowercase_alpha(Code),
+		!.
+	host_label_edge_code(Code) :-
+		digit_code(Code).
+
+	host_label_code(Code) :-
+		host_label_edge_code(Code),
+		!.
+	host_label_code(0'-).
+
+	split_dot_codes(Codes, Segments) :-
+		split_dot_codes(Codes, [], Segments).
+
+	split_dot_codes([], Current0, [Current]) :-
+		reverse(Current0, Current).
+	split_dot_codes([0'.| Codes], Current0, [Current| Segments]) :-
+		!,
+		reverse(Current0, Current),
+		split_dot_codes(Codes, [], Segments).
+	split_dot_codes([Code| Codes], Current0, Segments) :-
+		split_dot_codes(Codes, [Code| Current0], Segments).
+
+	valid_origin_port(Port) :-
+		(	Port == none ->
+			true
+		;	integer(Port),
+			Port >= 0,
+			Port =< 65535
+		).
+
+	contains_wildcard_code([0'*| _]) :-
+		!.
+	contains_wildcard_code([_| Codes]) :-
+		contains_wildcard_code(Codes).
+
+	split_last_colon(Codes, HostCodes, PortCodes) :-
+		reverse(Codes, ReversedCodes),
+		split_once(0':, ReversedCodes, ReversedPortCodes, ReversedHostCodes),
+		reverse(ReversedHostCodes, HostCodes),
+		reverse(ReversedPortCodes, PortCodes).
+
+	split_once(Separator, [Separator| After], [], After) :-
+		!.
+	split_once(Separator, [Code| Codes], [Code| Before], After) :-
+		split_once(Separator, Codes, Before, After).
+
+	digit_codes([Code| Codes]) :-
+		digit_code(Code),
+		digit_codes(Codes).
+	digit_codes([]).
+
+	lowercase_ascii_codes([], []).
+	lowercase_ascii_codes([Code| Codes], [LowercaseCode| LowercaseCodes]) :-
+		lowercase_ascii_code(Code, LowercaseCode),
+		lowercase_ascii_codes(Codes, LowercaseCodes).
+
+	wildcard_method_list(Methods) :-
+		ground(Methods),
+		wildcard_method_list_nonvar(Methods).
+
+	wildcard_method_list_nonvar(['*']).
+	wildcard_method_list_nonvar(['*'| Methods]) :-
+		wildcard_method_list_nonvar(Methods).
 
 	valid_method_list([]).
 	valid_method_list([Method| Methods]) :-

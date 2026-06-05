@@ -43,7 +43,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-05,
 		comment is 'Unit tests for the "http" library.'
 	]).
 

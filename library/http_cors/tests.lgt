@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-06-05,
 		comment is 'Unit tests for the "http_cors" library.'
 	]).
 
@@ -105,9 +105,15 @@
 		Request = request(get, origin('/resource'), http(1, 1), [origin-'https://app.example.com'], empty, []),
 		http_cors::preflight_response(Request, _Response, [allowed_origins(['https://app.example.com'])]).
 
-	test(http_cors_preflight_response_3_04, error(domain_error(http_cors_options, [allowed_origins(any), allow_credentials(true)]))) :-
+	test(http_cors_preflight_response_3_04, deterministic) :-
 		Request = request(options, origin('/resource'), http(1, 1), [origin-'https://app.example.com', access_control_request_method-'GET'], empty, []),
-		http_cors::preflight_response(Request, _Response, [allowed_origins(any), allow_credentials(true)]).
+		http_cors::preflight_response(Request, Response, [allowed_origins(any), allow_credentials(true)]),
+		status(Response, status(200, 'OK')),
+		header(Response, access_control_allow_origin, 'https://app.example.com'),
+		header(Response, access_control_allow_credentials, 'true'),
+		header(Response, access_control_allow_methods, 'GET'),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		body(Response, empty).
 
 	test(http_cors_preflight_response_3_05, deterministic) :-
 		Request = request(
@@ -337,6 +343,183 @@
 		header(Response, vary, 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers'),
 		body(Response, empty).
 
+	test(http_cors_preflight_response_3_14, deterministic) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://api.example.com',
+				access_control_request_method-'POST'
+			],
+			empty,
+			[]
+		),
+		Options = [
+			allowed_origins(['https://*.example.com']),
+			allowed_methods([post])
+		],
+		http_cors::preflight_response(Request, Response, Options),
+		status(Response, status(200, 'OK')),
+		header(Response, access_control_allow_origin, 'https://api.example.com'),
+		header(Response, access_control_allow_methods, 'POST'),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		body(Response, empty).
+
+	test(http_cors_preflight_response_3_15, deterministic) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://a.b.example.com',
+				access_control_request_method-'POST'
+			],
+			empty,
+			[]
+		),
+		Options = [
+			allowed_origins(['https://*.example.com']),
+			allowed_methods([post])
+		],
+		http_cors::preflight_response(Request, Response, Options),
+		status(Response, status(403, 'Forbidden')),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		\+ header(Response, access_control_allow_origin, _),
+		body(Response, empty).
+
+	test(http_cors_preflight_response_3_16, deterministic) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://api.example.com:8443',
+				access_control_request_method-'POST'
+			],
+			empty,
+			[]
+		),
+		Options = [
+			allowed_origins(['https://*.example.com:8443']),
+			allowed_methods([post])
+		],
+		http_cors::preflight_response(Request, Response, Options),
+		status(Response, status(200, 'OK')),
+		header(Response, access_control_allow_origin, 'https://api.example.com:8443'),
+		header(Response, access_control_allow_methods, 'POST'),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		body(Response, empty).
+
+	test(http_cors_preflight_response_3_17, error(domain_error(option, allowed_origins(['https://api*.example.com'])))) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://api.example.com',
+				access_control_request_method-'POST'
+			],
+			empty,
+			[]
+		),
+		http_cors::preflight_response(Request, _Response, [
+			allowed_origins(['https://api*.example.com']),
+			allowed_methods([post])
+		]).
+
+	test(http_cors_preflight_response_3_18, deterministic) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://app.example.com',
+				access_control_request_method-'POST'
+			],
+			empty,
+			[
+				effective_methods([get, head, post, options])
+			]
+		),
+		Options = [
+			allowed_origins(['https://app.example.com']),
+			allowed_methods(any)
+		],
+		http_cors::preflight_response(Request, Response, Options),
+		status(Response, status(200, 'OK')),
+		header(Response, allow, 'GET, HEAD, POST, OPTIONS'),
+		header(Response, access_control_allow_origin, 'https://app.example.com'),
+		header(Response, access_control_allow_methods, 'GET, HEAD, POST'),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		body(Response, empty).
+
+	test(http_cors_preflight_response_3_19, deterministic) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://app.example.com',
+				access_control_request_method-'GET'
+			],
+			empty,
+			[
+				effective_methods([get, head, options])
+			]
+		),
+		Options = [
+			allowed_origins(['https://app.example.com']),
+			allowed_methods(['*'])
+		],
+		http_cors::preflight_response(Request, Response, Options),
+		status(Response, status(200, 'OK')),
+		header(Response, access_control_allow_origin, 'https://app.example.com'),
+		header(Response, access_control_allow_methods, 'GET, HEAD'),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		body(Response, empty).
+
+	test(http_cors_preflight_response_3_20, deterministic) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://app.example.com',
+				access_control_request_method-'PUT'
+			],
+			empty,
+			[
+				effective_methods([get, head, post, options])
+			]
+		),
+		Options = [
+			allowed_origins(['https://app.example.com']),
+			allowed_methods(any)
+		],
+		http_cors::preflight_response(Request, Response, Options),
+		status(Response, status(403, 'Forbidden')),
+		header(Response, vary, 'Origin, Access-Control-Request-Method'),
+		\+ header(Response, access_control_allow_origin, _),
+		body(Response, empty).
+
+	test(http_cors_preflight_response_3_21, error(domain_error(http_cors_options, [allowed_methods(any)]))) :-
+		Request = request(
+			options,
+			origin('/resource'),
+			http(1, 1),
+			[
+				origin-'https://app.example.com',
+				access_control_request_method-'GET'
+			],
+			empty,
+			[]
+		),
+		http_cors::preflight_response(Request, _Response, [
+			allowed_origins(['https://app.example.com']),
+			allowed_methods(any)
+		]).
+
 	test(http_cors_add_response_headers_4_01, deterministic) :-
 		Request = request(get, origin('/resource'), http(1, 1), [origin-'https://app.example.com'], empty, []),
 		Response0 = response(http(1, 1), status(200, 'OK'), [x_trace_id-'abc-123'], content('text/plain', text(ok)), []),
@@ -440,6 +623,36 @@
 		http_cors::add_response_headers(Request, Response1, Response2, Options),
 		Response1 == Response2,
 		header(Response2, access_control_expose_headers, 'X-Trace-Id').
+
+	test(http_cors_add_response_headers_4_10, deterministic) :-
+		Request = request(get, origin('/resource'), http(1, 1), [origin-'https://app.example.com'], empty, []),
+		Response0 = response(http(1, 1), status(200, 'OK'), [x_trace_id-'abc-123'], content('text/plain', text(ok)), []),
+		Options = [
+			allowed_origins(any),
+			allow_credentials(true),
+			expose_headers(any)
+		],
+		http_cors::add_response_headers(Request, Response0, Response, Options),
+		header(Response, access_control_allow_origin, 'https://app.example.com'),
+		header(Response, access_control_allow_credentials, 'true'),
+		header(Response, access_control_expose_headers, 'X-Trace-Id'),
+		header(Response, vary, 'Origin'),
+		header(Response, x_trace_id, 'abc-123').
+
+	test(http_cors_add_response_headers_4_11, deterministic) :-
+		Request = request(get, origin('/resource'), http(1, 1), [origin-'https://api.example.com'], empty, []),
+		Response0 = response(http(1, 1), status(200, 'OK'), [x_trace_id-'abc-123'], content('text/plain', text(ok)), []),
+		Options = [
+			allowed_origins(['https://*.example.com']),
+			allow_credentials(true),
+			expose_headers(any)
+		],
+		http_cors::add_response_headers(Request, Response0, Response, Options),
+		header(Response, access_control_allow_origin, 'https://api.example.com'),
+		header(Response, access_control_allow_credentials, 'true'),
+		header(Response, access_control_expose_headers, 'X-Trace-Id'),
+		header(Response, vary, 'Origin'),
+		header(Response, x_trace_id, 'abc-123').
 
 	test(http_cors_router_integration_2_01, deterministic) :-
 		Request = request(get, origin('/cors/pages/42'), http(1, 1), [origin-'https://app.example.com'], empty, []),

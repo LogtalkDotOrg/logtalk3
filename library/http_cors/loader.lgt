@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(basic_types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(http_core(loader)),
 	logtalk_load(http_cors, [optimize(on)])

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-05,
 		comment is 'Internal shared helpers for ASCII case normalization and HTTP optional whitespace trimming.'
 	]).
 
