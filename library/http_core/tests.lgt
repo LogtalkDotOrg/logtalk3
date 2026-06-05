@@ -19,6 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(http_docroot_paths_test_helper,
+	imports(http_docroot_paths)).
+
+	:- public(check_relative_path/1).
+	:- mode(check_relative_path(+atom), one_or_error).
+
+	:- public(check_document_root/1).
+	:- mode(check_document_root(+atom), one_or_error).
+
+	check_relative_path(Path) :-
+		^^validate_relative_path(Path).
+
+	check_document_root(DocumentRoot) :-
+		^^validate_document_root(DocumentRoot).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
@@ -44,6 +62,7 @@
 	]).
 
 	cover(http_core).
+	cover(http_docroot_paths).
 	cover(http_octet_stream_body_codec).
 	cover(http_text_body_codec).
 	cover(http_json_body_codec).
@@ -51,6 +70,31 @@
 
 	cleanup :-
 		^^clean_file('test_http_response_body.tmp').
+
+	test(http_docroot_paths_validate_relative_path_1_01, deterministic) :-
+		http_docroot_paths_test_helper::check_relative_path('/assets/app.js').
+
+	test(http_docroot_paths_validate_relative_path_1_02, deterministic) :-
+		http_docroot_paths_test_helper::check_relative_path('').
+
+	test(http_docroot_paths_validate_relative_path_1_03, deterministic) :-
+		http_docroot_paths_test_helper::check_relative_path('../etc/passwd').
+
+	test(http_docroot_paths_validate_relative_path_1_04, error(domain_error(http_docroot_relative_path, 'assets\\app.js'))) :-
+		http_docroot_paths_test_helper::check_relative_path('assets\\app.js').
+
+	test(http_docroot_paths_validate_relative_path_1_05, deterministic) :-
+		http_docroot_paths_test_helper::check_relative_path('./index.html').
+
+	test(http_docroot_paths_validate_document_root_1_01, deterministic) :-
+		os::working_directory(Directory),
+		http_docroot_paths_test_helper::check_document_root(Directory).
+
+	test(http_docroot_paths_validate_document_root_1_02, error(domain_error(http_docroot_document_root, '.'))) :-
+		http_docroot_paths_test_helper::check_document_root('.').
+
+	test(http_docroot_paths_validate_document_root_1_03, error(domain_error(http_docroot_document_root, ''))) :-
+		http_docroot_paths_test_helper::check_document_root('').
 
 	test(http_request_7_01, deterministic(Request == request(get, origin('/users'), http(1, 1), [host-'example.com'], empty, []))) :-
 		request(get, origin('/users'), http(1, 1), [host-'example.com'], empty, [], Request).

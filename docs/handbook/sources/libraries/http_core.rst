@@ -159,4 +159,4 @@ Current limitations
   are preserved as validated raw ``Name-Value`` pairs
 - The WebSocket support in this layer is limited to HTTP
   opening-handshake metadata normalization. ``wss://`` and TLS-backed
-  transport orchestration remain out of scope
+  transport orchestration are currently not supported

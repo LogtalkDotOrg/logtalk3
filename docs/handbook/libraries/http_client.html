@@ -616,9 +616,9 @@ facade. <code class="docutils literal notranslate"><span class="pre">https://</s
 support is added.</p></li>
 <li><p>The WebSocket helper supports only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes.
 <code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
-<li><p>The WebSocket helper is limited to opening-handshake validation. It
-does not provide frame parsing, message reassembly, session state, or
-higher-level application policy.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate is limited to opening-handshake
+validation. See the dedicated WebSocket libraries for frame parsing,
+message reassembly, and related functionality.</p></li>
 <li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
 reading streamed response bodies in <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>.</p></li>
 <li><p>Close-delimited response bodies can only be used as the final response

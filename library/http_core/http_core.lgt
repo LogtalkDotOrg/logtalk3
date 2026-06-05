@@ -269,8 +269,7 @@
 		validate_body(Body),
 		validate_properties(Properties),
 		validate_request_semantics(Target, Headers, Body, Properties, parsed),
-		Request = request(Method, Target, Version, Headers, Body, Properties),
-		!.
+		Request = request(Method, Target, Version, Headers, Body, Properties).
 
 	generate_request(Sink, Request) :-
 		validate_request_term(Request),
@@ -298,8 +297,7 @@
 		validate_body(Body),
 		validate_properties(Properties),
 		validate_response_semantics(Headers, Body, Properties, parsed),
-		Response = response(Version, Status, Headers, Body, Properties),
-		!.
+		Response = response(Version, Status, Headers, Body, Properties).
 
 	generate_response(Sink, Response) :-
 		validate_response_term(Response),
@@ -690,7 +688,7 @@
 		add_unique_property(Property, Properties0, Properties).
 
 	add_unique_property(Property, Properties, Properties) :-
-		memberchk(Property, Properties),
+		member(Property, Properties),
 		!.
 	add_unique_property(Property, Properties, Properties) :-
 		semantic_property(Property),
@@ -810,7 +808,7 @@
 		header_name_present(Headers, connection),
 		!.
 	maybe_add_connection_header(Properties, Headers, [connection-Tokens| Headers]) :-
-		memberchk(connection(Tokens), Properties),
+		member(connection(Tokens), Properties),
 		!.
 	maybe_add_connection_header(_Properties, Headers, Headers).
 
@@ -818,7 +816,7 @@
 		header_name_present(Headers, upgrade),
 		!.
 	maybe_add_upgrade_header(Properties, Headers, [upgrade-Tokens| Headers]) :-
-		memberchk(upgrade(Tokens), Properties),
+		member(upgrade(Tokens), Properties),
 		!.
 	maybe_add_upgrade_header(_Properties, Headers, Headers).
 
@@ -826,7 +824,7 @@
 		header_name_present(Headers, sec_websocket_key),
 		!.
 	maybe_add_websocket_key_header(Properties, Headers, [sec_websocket_key-Key| Headers]) :-
-		memberchk(websocket_key(Key), Properties),
+		member(websocket_key(Key), Properties),
 		!.
 	maybe_add_websocket_key_header(_Properties, Headers, Headers).
 
@@ -842,7 +840,7 @@
 		header_name_present(Headers, sec_websocket_accept),
 		!.
 	maybe_add_websocket_accept_header(Properties, Headers, [sec_websocket_accept-Accept| Headers]) :-
-		memberchk(websocket_accept(Accept), Properties),
+		member(websocket_accept(Accept), Properties),
 		!.
 	maybe_add_websocket_accept_header(_Properties, Headers, Headers).
 
@@ -850,7 +848,7 @@
 		header_name_present(Headers, sec_websocket_protocol),
 		!.
 	maybe_add_websocket_protocol_header(Properties, Headers, [sec_websocket_protocol-Protocols| Headers]) :-
-		memberchk(websocket_protocol(Protocols), Properties),
+		member(websocket_protocol(Protocols), Properties),
 		!.
 	maybe_add_websocket_protocol_header(_Properties, Headers, Headers).
 
@@ -858,7 +856,7 @@
 		header_name_present(Headers, transfer_encoding),
 		!.
 	maybe_add_transfer_encoding_header(Properties, Headers, [transfer_encoding-Tokens| Headers]) :-
-		memberchk(transfer_encoding(Tokens), Properties),
+		member(transfer_encoding(Tokens), Properties),
 		!.
 	maybe_add_transfer_encoding_header(_Properties, Headers, Headers).
 
@@ -868,7 +866,7 @@
 		header_name_present(Headers, content_type),
 		!.
 	maybe_add_content_type_header(_Body, Properties, Headers, [content_type-media_type(MediaType, Parameters)| Headers]) :-
-		memberchk(content_type(MediaType, Parameters), Properties),
+		member(content_type(MediaType, Parameters), Properties),
 		!.
 	maybe_add_content_type_header(content(MediaType, _Payload), _Properties, Headers, [content_type-media_type(MediaType, [])| Headers]).
 
@@ -980,6 +978,7 @@
 		).
 
 	decode_transfer_bytes([chunked], Bytes, BodyBytes, Properties) :-
+		!,
 		phrase(chunked_body_bytes(Chunks, Trailers), Bytes),
 		append(Chunks, BodyBytes),
 		(	Trailers == [] ->
@@ -997,7 +996,7 @@
 		).
 
 	trailers_property(Properties, Trailers) :-
-		(	memberchk(trailers(Trailers), Properties) ->
+		(	member(trailers(Trailers), Properties) ->
 			true
 		;	Trailers = []
 		).
@@ -1024,7 +1023,7 @@
 		multipart_parts_bytes(Parts, BoundaryCodes, Bytes).
 
 	multipart_boundary_option(Options, Boundary) :-
-		(	memberchk(boundary(Boundary0), Options) ->
+		(	member(boundary(Boundary0), Options) ->
 			text_to_atom(Boundary0, Boundary),
 			valid_multipart_boundary(Boundary)
 		;	domain_error(http_multipart_boundary, Options)
@@ -2760,9 +2759,9 @@
 		atom_codes(Host, Codes).
 	host_value_codes(host(Host, Port), Codes) :-
 		atom_codes(Host, HostCodes0),
-		(	memberchk(0':, HostCodes0), HostCodes0 = [0'[| _] ->
+		(	member(0':, HostCodes0), HostCodes0 = [0'[| _] ->
 			HostCodes = HostCodes0
-		;	memberchk(0':, HostCodes0) ->
+		;	member(0':, HostCodes0) ->
 			append([0'[| HostCodes0], [0']], HostCodes)
 		;	HostCodes = HostCodes0
 		),

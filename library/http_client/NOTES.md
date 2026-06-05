@@ -271,9 +271,9 @@ Current limitations
   added.
 - The WebSocket helper supports only plain `ws://` opening
   handshakes. `wss://` remains out of scope until TLS support exists.
-- The WebSocket helper is limited to opening-handshake validation. It does not
-	provide frame parsing, message reassembly, session state, or higher-level
-	application policy.
+- The `open_websocket/4` predicate is limited to opening-handshake validation.
+  See the dedicated WebSocket libraries for frame parsing, message reassembly,
+  and related functionality.
 - Only the transport coding sequence `[chunked]` is recognized when reading
   streamed response bodies in `http_client_core`.
 - Close-delimited response bodies can only be used as the final response in an

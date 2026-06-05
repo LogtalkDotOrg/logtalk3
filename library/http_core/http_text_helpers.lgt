@@ -67,7 +67,7 @@
 		argnames is ['Codes', 'TrimmedCodes']
 	]).
 
-	ows_code(0' ).
+	ows_code(32).
 	ows_code(0'\t).
 
 	lowercase_ascii_codes([], []).

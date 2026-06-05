@@ -45,7 +45,7 @@
 	:- protected(validate_document_root/1).
 	:- mode(validate_document_root(+atom), one_or_error).
 	:- info(validate_document_root/1, [
-		comment is 'Validates a document root path atom.',
+		comment is 'Validates an absolute document root path atom.',
 		argnames is ['DocumentRoot']
 	]).
 
@@ -74,7 +74,10 @@
 		(	var(Path) ->
 			instantiation_error
 		;	atom(Path) ->
-			true
+			(	valid_relative_path(Path) ->
+				true
+			;	domain_error(http_docroot_relative_path, Path)
+			)
 		;	type_error(atom, Path)
 		).
 
@@ -88,7 +91,10 @@
 		(	var(DocumentRoot) ->
 			instantiation_error
 		;	atom(DocumentRoot) ->
-			true
+			(	valid_document_root(DocumentRoot) ->
+				true
+			;	domain_error(http_docroot_document_root, DocumentRoot)
+			)
 		;	type_error(atom, DocumentRoot)
 		).
 
@@ -101,6 +107,13 @@
 		os::path_concat(Root, RelativePath, JoinedPath),
 		os::absolute_file_name(JoinedPath, Candidate),
 		path_within_root(Root, Candidate).
+
+	valid_relative_path(Path) :-
+		normalized_relative_path(Path, _).
+
+	valid_document_root(DocumentRoot) :-
+		DocumentRoot \== '',
+		os::is_absolute_file_name(DocumentRoot).
 
 	normalized_relative_path(Path, RelativePath) :-
 		strip_leading_slashes(Path, StrippedPath),
