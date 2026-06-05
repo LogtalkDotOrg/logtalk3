@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on June 3, 2026
+%  Last updated on June 5, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -45,6 +45,16 @@
 		mutex_property(_, alias(Alias)) :-
 			catch(with_mutex(Alias,true), _, fail).
 	:- endif.
+:- endif.
+
+:- if(\+ get_flag(mutex_lock/1, type, built_in)).
+	mutex_lock(Mutex) :-
+		catch(thread_get_message(Mutex, token), _, message_queue_create(_, [alias(Mutex)])).
+:- endif.
+
+:- if(\+ get_flag(mutex_unlock/1, type, built_in)).
+	mutex_lock(Mutex) :-
+		catch(thread_send_message(Mutex, token), _, (message_queue_create(_, [alias(Mutex)]), thread_send_message(Mutex, token))).
 :- endif.
 
 :- set_event_handler(134, '$lgt_eclipse_discontiguous_predicate_handler'/2).

@@ -31,6 +31,12 @@ Logtalk compiler and runtime
 * ADDED: Read-only `sockets` compilation flag to declare if a backend provides
 compatible sockets support. Valid values are `supported` and `unsupported`.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Definitions for the `mutex_lock/1` and `mutex_unlock/1` predicates to
+the ECLiPSE adapter file.
+
 Library
 -------
 
