@@ -395,7 +395,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-02</div>
+<div class="line"><strong>Date:</strong> 2026-06-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -407,6 +407,7 @@
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_origin_site_helpers_0.html#http-origin-site-helpers-0"><span class="std std-ref">http_origin_site_helpers</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
@@ -546,7 +547,7 @@
 </section>
 <section id="request-5">
 <span id="http-client-session-0-request-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request/5</span></code></a><a class="headerlink" href="#request-5" title="Link to this heading"></a></h3>
-<p>Performs one HTTP request using session defaults and automatic cookie replay/storage.</p>
+<p>Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include <code class="docutils literal notranslate"><span class="pre">source_url(URL)</span></code> for an absolute HTTP or HTTPS URL, <code class="docutils literal notranslate"><span class="pre">source_origin(Origin)</span></code> for a bare Origin header value, and <code class="docutils literal notranslate"><span class="pre">top_level_navigation(Boolean)</span></code> to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to <code class="docutils literal notranslate"><span class="pre">source_url(URL)</span></code> and <code class="docutils literal notranslate"><span class="pre">top_level_navigation(false)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

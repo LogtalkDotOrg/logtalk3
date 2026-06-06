@@ -15,7 +15,7 @@ Request-oriented HTTP client facade built on top of the url and http_socket libr
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-02
+| **Date:** 2026-06-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Request-oriented HTTP client facade built on top of the url and http_socket libr
 |    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
 | **Uses:**
 |    :ref:`http_core <http_core/0>`
 |    :ref:`http_multipart <http_multipart/0>`

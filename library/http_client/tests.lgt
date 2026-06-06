@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-06,
 		comment is 'Unit tests for the "http_client" library.'
 	]).
 
@@ -293,6 +293,17 @@
 		http_socket::close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/search?q=logtalk&page=1'))).
+
+	test(http_client_get_3_02, deterministic) :-
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_ignore(server_serve_once(Listener, target_http_client_handler)),
+		local_http_url(Port, '/userinfo', URL0),
+		atom_concat('http://', Suffix, URL0),
+		atom_concat('http://user@', Suffix, URL),
+		http_client::get(URL, Response, []),
+		http_socket::close_listener(Listener),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text('/userinfo'))).
 
 	test(http_client_post_4_01, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),

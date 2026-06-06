@@ -20,12 +20,12 @@
 
 
 :- object(http_client_session,
-	imports(options)).
+	imports([options, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-06,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.',
 		remarks is [
 			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.'
@@ -63,7 +63,7 @@
 	:- public(request/5).
 	:- mode(request(+compound, +atom, +atom, -compound, +list(compound)), one_or_error).
 	:- info(request/5, [
-		comment is 'Performs one HTTP request using session defaults and automatic cookie replay/storage.',
+		comment is 'Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include ``source_url(URL)`` for an absolute HTTP or HTTPS URL, ``source_origin(Origin)`` for a bare Origin header value, and ``top_level_navigation(Boolean)`` to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to ``source_url(URL)`` and ``top_level_navigation(false)``.',
 		argnames is ['Session', 'Method', 'URL', 'Response', 'Options']
 	]).
 
@@ -153,12 +153,12 @@
 
 	request(Session, Method, URL, Response, Options) :-
 		current_session_state(Session, session_state(Jar, _Ownership, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties0)),
-		parse_request_options(Options, RequestHeaders, Body, RequestQueryPairs, RequestVersion, RequestProperties0, ExplicitCookiePairs),
+		parse_request_options(Options, RequestHeaders, Body, RequestQueryPairs, RequestVersion, RequestProperties0, ExplicitCookiePairs, RequestSource, TopLevelNavigation),
 		extract_request_cookie_properties(RequestProperties0, PropertyCookiePairs, RequestProperties),
 		merge_named_pairs(DefaultHeaders, RequestHeaders, MergedHeaders),
 		merge_named_pairs(DefaultQueryPairs, RequestQueryPairs, MergedQueryPairs),
 		merge_properties(DefaultProperties0, RequestProperties, MergedProperties0),
-		jar_request_cookie_pairs(Jar, URL, JarCookiePairs),
+		jar_request_cookie_pairs(Jar, Method, URL, RequestSource, TopLevelNavigation, JarCookiePairs),
 		merge_named_pairs(JarCookiePairs, PropertyCookiePairs, PropertyMergedCookiePairs),
 		merge_named_pairs(PropertyMergedCookiePairs, ExplicitCookiePairs, FinalCookiePairs),
 		maybe_add_cookie_property(FinalCookiePairs, MergedProperties0, MergedProperties),
@@ -234,7 +234,7 @@
 	valid_option(properties(Properties)) :-
 		proper_list(Properties).
 
-	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, CookiePairs) :-
+	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, CookiePairs, Source, TopLevelNavigation) :-
 		validate_request_options(Options),
 		(	member(headers(Headers0), Options) ->
 			Headers = Headers0
@@ -255,6 +255,16 @@
 		(	member(properties(Properties0), Options) ->
 			Properties = Properties0
 		;	Properties = []
+		),
+		( 	member(source_url(SourceURL), Options) ->
+			Source = source_url(SourceURL)
+		; 	member(source_origin(Origin), Options) ->
+			Source = source_origin(Origin)
+		; 	Source = default
+		),
+		( 	member(top_level_navigation(TopLevelNavigation0), Options) ->
+			TopLevelNavigation = TopLevelNavigation0
+		; 	TopLevelNavigation = false
 		),
 		(	member(cookies(CookiePairs0), Options) ->
 			CookiePairs = CookiePairs0
@@ -287,6 +297,17 @@
 		Major >= 0,
 		integer(Minor),
 		Minor >= 0,
+		!.
+	validate_request_option(source_url(SourceURL)) :-
+		atom(SourceURL),
+		^^absolute_url_context(SourceURL, _SourceContext),
+		!.
+	validate_request_option(source_origin(Origin)) :-
+		atom(Origin),
+		^^origin_endpoint(Origin, _SourceEndpoint),
+		!.
+	validate_request_option(top_level_navigation(TopLevelNavigation)) :-
+		(TopLevelNavigation == true; TopLevelNavigation == false),
 		!.
 	validate_request_option(properties(Properties)) :-
 		proper_list(Properties),
@@ -409,10 +430,15 @@
 	extract_request_cookie_properties([Property| Properties], AccCookiePairs, CookiePairs, [Property| RemainingProperties]) :-
 		extract_request_cookie_properties(Properties, AccCookiePairs, CookiePairs, RemainingProperties).
 
-	jar_request_cookie_pairs(none, _URL, []) :-
+	jar_request_cookie_pairs(none, _Method, _URL, _RequestSource, _TopLevelNavigation, []) :-
 		!.
-	jar_request_cookie_pairs(Jar, URL, CookiePairs) :-
-		http_cookie_jar::request_cookies(Jar, URL, CookiePairs).
+	jar_request_cookie_pairs(Jar, Method, URL, RequestSource0, TopLevelNavigation, CookiePairs) :-
+		default_request_source(URL, RequestSource0, RequestSource),
+		http_cookie_jar::request_cookies(Jar, URL, request_context(Method, RequestSource, TopLevelNavigation), CookiePairs).
+
+	default_request_source(URL, default, source_url(URL)) :-
+		!.
+	default_request_source(_URL, RequestSource, RequestSource).
 
 	maybe_add_cookie_property([], Properties, Properties) :-
 		!.

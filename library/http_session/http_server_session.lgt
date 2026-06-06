@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-06,
 		comment is 'Server-side HTTP session manager over normalized request and response terms using opaque cookie identifiers and an in-memory session store.'
 	]).
 
@@ -198,7 +198,7 @@
 	:- endif.
 
 	:- uses(list, [
-		append/3
+		append/3, member/2, memberchk/2
 	]).
 
 	:- uses(date, [
@@ -282,7 +282,7 @@
 		valid_cookie_name(CookieName).
 
 	default_option(cookie_name(session)).
-	default_option(cookie_attributes([path-('/'), http_only-true])).
+	default_option(cookie_attributes([path-('/'), http_only-true, same_site-lax])).
 	default_option(idle_timeout(none)).
 	default_option(absolute_timeout(none)).
 	default_option(gc_interval(none)).
@@ -316,10 +316,17 @@
 
 	normalize_cookie_template_attributes(Attributes, CookieAttributes) :-
 		http_cookies(atom)::normalize_cookie_attributes(Attributes, NormalizedAttributes),
-		strip_lifetime_attributes(NormalizedAttributes, CookieAttributes).
+		strip_lifetime_attributes(NormalizedAttributes, CookieAttributes),
+		validate_cookie_template_same_site(CookieAttributes).
 
 	valid_cookie_name(Name) :-
 		catch(http_cookies(atom)::generate_cookie([Name-'1'], _Cookie), _, fail).
+
+	validate_cookie_template_same_site(Attributes) :-
+		member(same_site-none, Attributes),
+		!,
+		memberchk(secure-true, Attributes).
+	validate_cookie_template_same_site(_Attributes).
 
 	strip_lifetime_attributes([], []).
 	strip_lifetime_attributes([expires-_DateTime| Attributes], NormalizedAttributes) :-

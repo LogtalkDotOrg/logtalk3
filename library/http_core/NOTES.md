@@ -110,6 +110,10 @@ Current scope
   `trailers/1`, and `decoded_body/1`
 - Reuse `url` for absolute-target validation and `http_cookies` for `Cookie`
   and `Set-Cookie` header validation
+- Provide the internal `http_origin_site_helpers` category reused by
+  `http_cors` and `http_session` for absolute URL parsing, `Origin` parsing,
+  normalized endpoint derivation, and schemeful same-site comparison using a
+	bundled public suffix rule set with exact, wildcard, and exception cases
 
 
 Normalized terms
@@ -163,6 +167,10 @@ Current limitations
   media types
 - Header normalization is selective; headers outside the supported set
   are preserved as validated raw `Name-Value` pairs
+- The internal schemeful same-site helper uses bundled public suffix rules to
+  tighten site classification for multi-label public suffixes and hosted
+  domains, but automatic synchronization with the full Mozilla Public Suffix
+  List remains out of scope
 - The WebSocket support in this layer is limited to HTTP opening-handshake
   metadata normalization. `wss://` and TLS-backed transport orchestration
   are currently not supported

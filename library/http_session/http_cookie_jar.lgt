@@ -20,12 +20,12 @@
 
 
 :- object(http_cookie_jar,
-	imports([http_text_helpers, options])).
+	imports([http_text_helpers, http_origin_site_helpers, options])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-06,
 		comment is 'HTTP cookie jar implementing explicit storage and request matching on top of the http_cookies parsing and generation predicates, with explicit save and load operations for persisting jar contents.'
 	]).
 
@@ -67,8 +67,15 @@
 	:- public(request_cookies/3).
 	:- mode(request_cookies(+compound, +atom, -list(compound)), one_or_error).
 	:- info(request_cookies/3, [
-		comment is 'Returns the cookie name-value pairs currently applicable to the given absolute URL.',
+		comment is 'Returns the cookie name-value pairs currently applicable to the given absolute URL using the convenience default ``request_context(get, source_url(URL), false)``.',
 		argnames is ['Jar', 'URL', 'Cookies']
+	]).
+
+	:- public(request_cookies/4).
+	:- mode(request_cookies(+compound, +atom, +compound, -list(compound)), one_or_error).
+	:- info(request_cookies/4, [
+		comment is 'Returns the cookie name-value pairs currently applicable to the given absolute URL for an explicit request context represented as ``request_context(Method, Source, TopLevelNavigation)`` where ``Source`` is either ``source_url(URL)`` for an absolute HTTP or HTTPS URL or ``source_origin(Origin)`` for a bare Origin header value.',
+		argnames is ['Jar', 'URL', 'RequestContext', 'Cookies']
 	]).
 
 	:- public(cookies/2).
@@ -115,12 +122,12 @@
 		argnames is ['JarId', 'CreationIndex']
 	]).
 
-	:- private(jar_cookie_/10).
-	:- dynamic(jar_cookie_/10).
-	:- mode(jar_cookie_(?positive_integer, ?atom, ?atom, ?atom, ?atom, ?boolean, ?boolean, ?boolean, ?nonvar, ?positive_integer), zero_or_more).
-	:- info(jar_cookie_/10, [
+	:- private(jar_cookie_/11).
+	:- dynamic(jar_cookie_/11).
+	:- mode(jar_cookie_(?positive_integer, ?atom, ?atom, ?atom, ?atom, ?boolean, ?boolean, ?boolean, ?nonvar, ?nonvar, ?positive_integer), zero_or_more).
+	:- info(jar_cookie_/11, [
 		comment is 'Stored cookie entries indexed by jar identifier.',
-		argnames is ['JarId', 'Name', 'Domain', 'Path', 'Value', 'HostOnly', 'Secure', 'HttpOnly', 'Expiry', 'CreationIndex']
+		argnames is ['JarId', 'Name', 'Domain', 'Path', 'Value', 'HostOnly', 'Secure', 'HttpOnly', 'SameSite', 'Expiry', 'CreationIndex']
 	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
@@ -129,7 +136,7 @@
 			close_jar/1,
 			clear_jar/1,
 			store_set_cookies_state/4,
-			request_cookies_state/4,
+			request_cookies_state/5,
 			cookies_state/3,
 			cookie_count_state/3,
 			load_state/3
@@ -179,7 +186,11 @@
 
 	request_cookies(Jar, URL, Cookies) :-
 		current_unix_time(CurrentTime),
-		request_cookies_state(Jar, URL, CurrentTime, Cookies).
+		request_cookies_state(Jar, URL, request_context(get, source_url(URL), false), CurrentTime, Cookies).
+
+	request_cookies(Jar, URL, RequestContext, Cookies) :-
+		current_unix_time(CurrentTime),
+		request_cookies_state(Jar, URL, RequestContext, CurrentTime, Cookies).
 
 	cookies(Jar, Cookies) :-
 		current_unix_time(CurrentTime),
@@ -214,16 +225,18 @@
 	close_jar(Jar) :-
 		jar_identifier(Jar, JarId),
 		retract(jar_state_(JarId, _CreationSeed)),
-		retractall(jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _Expiry, _CreationIndex)).
+		retractall(jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, _Expiry, _CreationIndex)).
 
 	clear_jar(Jar) :-
 		jar_identifier(Jar, JarId),
-		retractall(jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _Expiry, _CreationIndex)).
+		retractall(jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, _Expiry, _CreationIndex)),
+		retract(jar_state_(JarId, _CurrentCreationIndex)),
+		assertz(jar_state_(JarId, 0)).
 
 	load_state(Jar, PersistedCookies, CurrentTime) :-
 		jar_identifier(Jar, JarId),
 		normalize_persisted_cookie_list(PersistedCookies, CurrentTime, NormalizedCookies),
-		retractall(jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _Expiry, _CreationIndex)),
+		retractall(jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, _Expiry, _CreationIndex)),
 		retract(jar_state_(JarId, _CurrentCreationIndex)),
 		assertz(jar_state_(JarId, 0)),
 		store_persisted_cookie_list(NormalizedCookies, JarId).
@@ -278,10 +291,11 @@
 		persisted_cookie_boolean_attribute(host_only, Attributes, HostOnly),
 		persisted_cookie_boolean_attribute(secure, Attributes, Secure),
 		persisted_cookie_boolean_attribute(http_only, Attributes, HttpOnly),
+		persisted_cookie_same_site_state(Attributes, Secure, SameSite),
 		persisted_cookie_expiry(Attributes, CurrentTime, Expiry),
 		(	Expiry == delete ->
 			PersistedCookie = skip
-		;	PersistedCookie = persisted_cookie(Name, Value, Domain, Path, HostOnly, Secure, HttpOnly, Expiry)
+		; 	PersistedCookie = persisted_cookie(Name, Value, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry)
 		).
 
 	persisted_cookie_boolean_attribute(Name, Attributes, true) :-
@@ -289,6 +303,17 @@
 		!.
 	persisted_cookie_boolean_attribute(Name, Attributes, false) :-
 		\+ member(Name-_, Attributes).
+
+	persisted_cookie_same_site_state(Attributes, Secure, SameSite) :-
+		( 	memberchk(same_site-SameSite, Attributes) ->
+			valid_persisted_cookie_same_site_value(SameSite),
+			valid_cookie_same_site_state(SameSite, Secure)
+		; 	SameSite = absent
+		).
+
+	valid_persisted_cookie_same_site_value(lax).
+	valid_persisted_cookie_same_site_value(strict).
+	valid_persisted_cookie_same_site_value(none).
 
 	persisted_cookie_expiry(Attributes, CurrentTime, Expiry) :-
 		member(expires-DateTime, Attributes),
@@ -309,8 +334,8 @@
 		\+ member(expires-_, Attributes).
 
 	store_persisted_cookie_list([], _JarId).
-	store_persisted_cookie_list([persisted_cookie(Name, Value, Domain, Path, HostOnly, Secure, HttpOnly, Expiry)| PersistedCookies], JarId) :-
-		replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, Expiry),
+	store_persisted_cookie_list([persisted_cookie(Name, Value, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry)| PersistedCookies], JarId) :-
+		replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry),
 		store_persisted_cookie_list(PersistedCookies, JarId).
 
 	store_set_cookies_state(Jar, URL, SetCookies, CurrentTime) :-
@@ -320,17 +345,64 @@
 		purge_expired_cookies(JarId, CurrentTime),
 		store_set_cookie_list(SetCookies, JarId, URLContext, CurrentTime).
 
-	request_cookies_state(Jar, URL, CurrentTime, Cookies) :-
+	request_cookies_state(Jar, URL, RequestContext0, CurrentTime, Cookies) :-
 		jar_identifier(Jar, JarId),
 		cookie_url_context(URL, URLContext),
+		normalize_request_context(URLContext, RequestContext0, RequestContext),
 		purge_expired_cookies(JarId, CurrentTime),
 		findall(
 			request_cookie(PathLength, CreationIndex, Name-Value),
-			matching_request_cookie(JarId, URLContext, PathLength, CreationIndex, Name, Value),
+			matching_request_cookie(JarId, URLContext, RequestContext, PathLength, CreationIndex, Name, Value),
 			Entries0
 		),
 		sort_request_cookies(Entries0, Entries),
 		request_cookie_pairs(Entries, Cookies).
+
+	normalize_request_context(_URLContext, RequestContext, _NormalizedContext) :-
+		var(RequestContext),
+		!,
+		instantiation_error.
+	normalize_request_context(URLContext, request_context(Method0, Source0, TopLevelNavigation0), cookie_request_context(Method, Source, TopLevelNavigation)) :-
+		!,
+		normalize_request_context_method(Method0, Method),
+		normalize_request_context_source(URLContext, Source0, Source),
+		normalize_request_context_navigation(TopLevelNavigation0, TopLevelNavigation).
+	normalize_request_context(_URLContext, RequestContext, _NormalizedContext) :-
+		domain_error(http_cookie_jar_request_context, RequestContext).
+
+	normalize_request_context_method(Method0, Method) :-
+		( 	var(Method0) ->
+			instantiation_error
+		; 	atom(Method0) ->
+			atom_codes(Method0, MethodCodes0),
+			^^lowercase_ascii_codes(MethodCodes0, MethodCodes),
+			atom_codes(Method, MethodCodes)
+		; 	type_error(atom, Method0)
+		).
+
+	normalize_request_context_source(_URLContext, Source, _NormalizedSource) :-
+		var(Source),
+		!,
+		instantiation_error.
+	normalize_request_context_source(_URLContext, source_url(SourceURL), SourceContext) :-
+		atom(SourceURL),
+		cookie_url_context(SourceURL, SourceCookieContext),
+		same_site_context(SourceCookieContext, SourceContext),
+		!.
+	normalize_request_context_source(_URLContext, source_origin(Origin), SourceEndpoint) :-
+		atom(Origin),
+		^^origin_endpoint(Origin, SourceEndpoint),
+		!.
+	normalize_request_context_source(_URLContext, Source, _NormalizedSource) :-
+		domain_error(http_cookie_jar_request_source, Source).
+
+	normalize_request_context_navigation(TopLevelNavigation0, TopLevelNavigation) :-
+		( 	var(TopLevelNavigation0) ->
+			instantiation_error
+		; 	(TopLevelNavigation0 == true; TopLevelNavigation0 == false) ->
+			TopLevelNavigation = TopLevelNavigation0
+		; 	domain_error(boolean, TopLevelNavigation0)
+		).
 
 	cookies_state(Jar, CurrentTime, Cookies) :-
 		jar_identifier(Jar, JarId),
@@ -348,7 +420,7 @@
 		purge_expired_cookies(JarId, CurrentTime),
 		findall(
 			CreationIndex,
-			jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _Expiry, CreationIndex),
+			jar_cookie_(JarId, _Name, _Domain, _Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, _Expiry, CreationIndex),
 			CreationIndexes
 		),
 		length(CreationIndexes, Count).
@@ -400,10 +472,10 @@
 		store_set_cookie_list(SetCookies, JarId, URLContext, CurrentTime).
 
 	store_set_cookie(JarId, URLContext, set_cookie(Name, Value, Attributes), CurrentTime) :-
-		(	normalized_set_cookie(URLContext, Attributes, CurrentTime, Domain, Path, HostOnly, Secure, HttpOnly, Expiry) ->
+		( 	normalized_set_cookie(URLContext, Attributes, CurrentTime, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry) ->
 			(	Expiry == delete ->
 				delete_cookie(JarId, Name, Domain, Path)
-			;	replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, Expiry)
+			; 	replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry)
 			)
 		;	true
 		).
@@ -417,12 +489,14 @@
 		HostOnly,
 		Secure,
 		HttpOnly,
+		SameSite,
 		Expiry
 	) :-
 		normalize_cookie_domain(RequestHost, Attributes, Domain, HostOnly),
 		default_cookie_path(RequestPath, DefaultPath),
 		normalize_cookie_path(Attributes, DefaultPath, Path),
 		cookie_flags(Attributes, Secure, HttpOnly),
+		cookie_same_site_state(Attributes, Secure, SameSite),
 		http_cookies(atom)::cookie_expiry(Attributes, CurrentTime, Expiry).
 
 	normalize_cookie_domain(RequestHost, Attributes, RequestHost, true) :-
@@ -447,13 +521,22 @@
 		http_cookies(atom)::cookie_attribute_value(Attributes, secure, false, Secure),
 		http_cookies(atom)::cookie_attribute_value(Attributes, http_only, false, HttpOnly).
 
-	delete_cookie(JarId, Name, Domain, Path) :-
-		retractall(jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, _Expiry, _CreationIndex)).
+	cookie_same_site_state(Attributes, Secure, SameSite) :-
+		http_cookies(atom)::cookie_attribute_value(Attributes, same_site, absent, SameSite),
+		valid_cookie_same_site_state(SameSite, Secure).
 
-	replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, Expiry) :-
+	valid_cookie_same_site_state(absent, _Secure).
+	valid_cookie_same_site_state(lax, _Secure).
+	valid_cookie_same_site_state(strict, _Secure).
+	valid_cookie_same_site_state(none, true).
+
+	delete_cookie(JarId, Name, Domain, Path) :-
+		retractall(jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, _Expiry, _CreationIndex)).
+
+	replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry) :-
 		delete_cookie(JarId, Name, Domain, Path),
 		next_creation_index(JarId, CreationIndex),
-		assertz(jar_cookie_(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, Expiry, CreationIndex)).
+		assertz(jar_cookie_(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry, CreationIndex)).
 
 	next_creation_index(JarId, CreationIndex) :-
 		retract(jar_state_(JarId, CurrentCreationIndex)),
@@ -461,18 +544,19 @@
 		assertz(jar_state_(JarId, CreationIndex)).
 
 	purge_expired_cookies(JarId, CurrentTime) :-
-		(	jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, expires(ExpiryTime), _CreationIndex),
+		( 	jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, expires(ExpiryTime), _CreationIndex),
 			ExpiryTime =< CurrentTime ->
-			retractall(jar_cookie_(JarId, Name, Domain, Path, _AnyValue, _AnyHostOnly, _AnySecure, _AnyHttpOnly, _AnyExpiry, _AnyCreationIndex)),
+			retractall(jar_cookie_(JarId, Name, Domain, Path, _AnyValue, _AnyHostOnly, _AnySecure, _AnyHttpOnly, _AnySameSite, _AnyExpiry, _AnyCreationIndex)),
 			purge_expired_cookies(JarId, CurrentTime)
 		;	true
 		).
 
-	matching_request_cookie(JarId, cookie_url_context(Scheme, RequestHost, _Port, RequestPath), PathLength, CreationIndex, Name, Value) :-
-		jar_cookie_(JarId, Name, Domain, CookiePath, Value, HostOnly, Secure, _HttpOnly, _Expiry, CreationIndex),
+	matching_request_cookie(JarId, cookie_url_context(Scheme, RequestHost, _Port, RequestPath), RequestContext, PathLength, CreationIndex, Name, Value) :-
+		jar_cookie_(JarId, Name, Domain, CookiePath, Value, HostOnly, Secure, _HttpOnly, SameSite, _Expiry, CreationIndex),
 		cookie_domain_matches_request(HostOnly, Domain, RequestHost),
 		cookie_path_matches_request(CookiePath, RequestPath),
 		cookie_secure_matches_scheme(Secure, Scheme),
+		cookie_same_site_matches_request(SameSite, cookie_url_context(Scheme, RequestHost, _Port, RequestPath), RequestContext),
 		atom_codes(CookiePath, CookiePathCodes),
 		length(CookiePathCodes, PathLength).
 
@@ -506,11 +590,36 @@
 	cookie_secure_matches_scheme(false, _Scheme).
 	cookie_secure_matches_scheme(true, https).
 
-	stored_cookie_term(JarId, CreationIndex, Name, Value, Attributes) :-
-		jar_cookie_(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, Expiry, CreationIndex),
-		stored_cookie_attributes(Domain, Path, HostOnly, Secure, HttpOnly, Expiry, Attributes).
+	cookie_same_site_matches_request(none, _URLContext, _RequestContext).
+	cookie_same_site_matches_request(strict, URLContext, RequestContext) :-
+		same_site_request(URLContext, RequestContext).
+	cookie_same_site_matches_request(lax, URLContext, RequestContext) :-
+		lax_request(URLContext, RequestContext).
+	cookie_same_site_matches_request(absent, URLContext, RequestContext) :-
+		lax_request(URLContext, RequestContext).
 
-	stored_cookie_attributes(Domain, Path, HostOnly, Secure, HttpOnly, Expiry, Attributes) :-
+	same_site_request(URLContext, cookie_request_context(_Method, SourceContext, _TopLevelNavigation)) :-
+		same_site_context(URLContext, SameSiteURLContext),
+		^^same_site(SameSiteURLContext, SourceContext).
+
+	lax_request(URLContext, RequestContext) :-
+		same_site_request(URLContext, RequestContext),
+		!.
+	lax_request(_URLContext, cookie_request_context(Method, _SourceContext, true)) :-
+		safe_request_method(Method).
+
+	same_site_context(cookie_url_context(Scheme, Host, Port, Path), http_url_context(Scheme, Host, Port, Path)).
+
+	safe_request_method(get).
+	safe_request_method(head).
+	safe_request_method(options).
+	safe_request_method(trace).
+
+	stored_cookie_term(JarId, CreationIndex, Name, Value, Attributes) :-
+		jar_cookie_(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry, CreationIndex),
+		stored_cookie_attributes(Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry, Attributes).
+
+	stored_cookie_attributes(Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry, Attributes) :-
 		BaseAttributes = [domain-Domain, path-Path],
 		(	HostOnly == true ->
 			append(BaseAttributes, [host_only-true], HostAttributes)
@@ -524,7 +633,13 @@
 			append(SecureAttributes, [http_only-true], HttpOnlyAttributes)
 		;	HttpOnlyAttributes = SecureAttributes
 		),
-		stored_cookie_expiry_attributes(Expiry, HttpOnlyAttributes, Attributes).
+		stored_cookie_same_site_attributes(SameSite, HttpOnlyAttributes, SameSiteAttributes),
+		stored_cookie_expiry_attributes(Expiry, SameSiteAttributes, Attributes).
+
+	stored_cookie_same_site_attributes(absent, Attributes, Attributes) :-
+		!.
+	stored_cookie_same_site_attributes(SameSite, Attributes, FinalAttributes) :-
+		append(Attributes, [same_site-SameSite], FinalAttributes).
 
 	stored_cookie_expiry_attributes(session, Attributes, FinalAttributes) :-
 		append(Attributes, [session-true], FinalAttributes).
@@ -608,93 +723,27 @@
 	cookie_url_context(URL, cookie_url_context(Scheme, Host, Port, Path)) :-
 		(	var(URL) ->
 			instantiation_error
-		;	url(atom)::parse(URL, Components) ->
+		; 	^^absolute_url_context(URL, http_url_context(Scheme, Host, Port, Path)) ->
 			true
+		; 	url(atom)::parse(URL, Components) ->
+			cookie_url_context_parse_error(Components, URL)
 		;	domain_error(http_cookie_jar_url, URL)
-		),
-		memberchk(scheme(Scheme), Components),
-		validate_cookie_scheme(Scheme),
-		memberchk(authority(Authority), Components),
-		parse_cookie_authority(Scheme, Authority, Host, Port),
-		(	member(path(Path0), Components) ->
-			normalize_request_path(Path0, Path)
-		;	Path = ('/')
 		).
 
-	cookie_scheme(http).
-	cookie_scheme(https).
-
-	validate_cookie_scheme(Scheme) :-
-		(	cookie_scheme(Scheme) ->
-			true
-		;	domain_error(http_cookie_jar_url_scheme, Scheme)
+	cookie_url_context_parse_error(Components, URL) :-
+		( 	memberchk(scheme(Scheme0), Components),
+			atom_codes(Scheme0, SchemeCodes0),
+			^^lowercase_ascii_codes(SchemeCodes0, SchemeCodes),
+			atom_codes(Scheme, SchemeCodes),
+			\+ memberchk(Scheme, [http, https]) ->
+			domain_error(http_cookie_jar_url_scheme, Scheme)
+		; 	domain_error(http_cookie_jar_url, URL)
 		).
-
-	parse_cookie_authority(Scheme, Authority, Host, Port) :-
-		atom_codes(Authority, AuthorityCodes0),
-		strip_userinfo_codes(AuthorityCodes0, AuthorityCodes),
-		parse_authority_codes(Scheme, AuthorityCodes, HostCodes, Port),
-		lowercase_ascii_codes(HostCodes, LowercaseHostCodes),
-		atom_codes(Host, LowercaseHostCodes),
-		validate_cookie_endpoint(Host, Port),
-		!.
-	parse_cookie_authority(_Scheme, Authority, _Host, _Port) :-
-		domain_error(http_cookie_jar_url, Authority).
-
-	parse_authority_codes(Scheme, [0'[| AuthorityCodes], HostCodes, Port) :-
-		split_once(0'], AuthorityCodes, HostCodes, RestCodes),
-		!,
-		parse_bracketed_port_codes(Scheme, RestCodes, Port).
-	parse_authority_codes(_Scheme, AuthorityCodes, HostCodes, Port) :-
-		split_last_colon(AuthorityCodes, HostCodes, PortCodes),
-		PortCodes \== [],
-		digit_codes(PortCodes),
-		!,
-		number_codes(Port, PortCodes).
-	parse_authority_codes(Scheme, AuthorityCodes, AuthorityCodes, Port) :-
-		default_scheme_port(Scheme, Port).
-
-	default_scheme_port(http, 80).
-	default_scheme_port(https, 443).
-
-	parse_bracketed_port_codes(Scheme, [], Port) :-
-		!,
-		default_scheme_port(Scheme, Port).
-	parse_bracketed_port_codes(_Scheme, [0':| PortCodes], Port) :-
-		PortCodes \== [],
-		digit_codes(PortCodes),
-		number_codes(Port, PortCodes).
-
-	validate_cookie_endpoint(Host, Port) :-
-		http_core::request(get, authority(Host, Port), http(1, 1), [], empty, [], _Request).
-
-	normalize_request_path('', '/') :-
-		!.
-	normalize_request_path(Path, Path).
-
-	strip_userinfo_codes(AuthorityCodes0, AuthorityCodes) :-
-		reverse(AuthorityCodes0, ReversedAuthorityCodes0),
-		(	split_once(0'@, ReversedAuthorityCodes0, ReversedAuthorityCodes, _IgnoredUserinfoCodes) ->
-			reverse(ReversedAuthorityCodes, AuthorityCodes)
-		;	AuthorityCodes = AuthorityCodes0
-		).
-
-	split_last_colon(AuthorityCodes, HostCodes, PortCodes) :-
-		reverse(AuthorityCodes, ReversedAuthorityCodes),
-		split_once(0':, ReversedAuthorityCodes, ReversedPortCodes, ReversedHostCodes),
-		reverse(ReversedHostCodes, HostCodes),
-		reverse(ReversedPortCodes, PortCodes).
 
 	split_once(Separator, [Separator| AfterCodes], [], AfterCodes) :-
 		!.
 	split_once(Separator, [Code| Codes], [Code| BeforeCodes], AfterCodes) :-
 		split_once(Separator, Codes, BeforeCodes, AfterCodes).
-
-	digit_codes([]).
-	digit_codes([Code| Codes]) :-
-		Code >= 0'0,
-		Code =< 0'9,
-		digit_codes(Codes).
 
 	lowercase_ascii_codes(Codes, LowercaseCodes) :-
 		^^lowercase_ascii_codes(Codes, LowercaseCodes).

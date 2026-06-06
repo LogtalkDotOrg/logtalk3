@@ -37,13 +37,43 @@
 :- end_object.
 
 
+:- object(http_origin_site_test_helper,
+	imports(http_origin_site_helpers)).
+
+	:- public(check_absolute_url_context/2).
+	:- mode(check_absolute_url_context(+atom, -compound), one_or_error).
+
+	:- public(check_origin_endpoint/2).
+	:- mode(check_origin_endpoint(+atom, -compound), one_or_error).
+
+	:- public(check_request_endpoint/2).
+	:- mode(check_request_endpoint(+compound, -compound), one_or_error).
+
+	:- public(check_same_site/2).
+	:- mode(check_same_site(+compound, +compound), zero_or_one).
+
+	check_absolute_url_context(URL, Context) :-
+		^^absolute_url_context(URL, Context).
+
+	check_origin_endpoint(Origin, Endpoint) :-
+		^^origin_endpoint(Origin, Endpoint).
+
+	check_request_endpoint(Request, Endpoint) :-
+		^^request_endpoint(Request, Endpoint).
+
+	check_same_site(Left, Right) :-
+		^^same_site(Left, Right).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-05,
+		date is 2026-06-06,
 		comment is 'Unit tests for the "http" library.'
 	]).
 
@@ -62,6 +92,7 @@
 	]).
 
 	cover(http_core).
+	cover(http_origin_site_helpers).
 	cover(http_docroot_paths).
 	cover(http_octet_stream_body_codec).
 	cover(http_text_body_codec).
@@ -95,6 +126,55 @@
 
 	test(http_docroot_paths_validate_document_root_1_03, error(domain_error(http_docroot_document_root, ''))) :-
 		http_docroot_paths_test_helper::check_document_root('').
+
+	test(http_origin_site_helpers_absolute_url_context_2_01, deterministic(Context == http_url_context(https, 'api.example.com', 443, '/'))) :-
+		http_origin_site_test_helper::check_absolute_url_context('https://api.example.com', Context).
+
+	test(http_origin_site_helpers_absolute_url_context_2_02, deterministic(Context == http_url_context(http, 'api.example.com', 8080, '/v1/users'))) :-
+		http_origin_site_test_helper::check_absolute_url_context('http://api.example.com:8080/v1/users', Context).
+
+	test(http_origin_site_helpers_origin_endpoint_2_01, deterministic(Endpoint == http_endpoint(https, '2001:db8::1', 444))) :-
+		http_origin_site_test_helper::check_origin_endpoint('https://[2001:db8::1]:444', Endpoint).
+
+	test(http_origin_site_helpers_request_endpoint_2_01, deterministic(Endpoint == http_endpoint(https, 'api.example.com', 443))) :-
+		url(atom)::parse('https://api.example.com/users', Components),
+		request(get, absolute(Components), http(1, 1), [], empty, [], Request),
+		http_origin_site_test_helper::check_request_endpoint(Request, Endpoint).
+
+	test(http_origin_site_helpers_same_site_2_01, deterministic) :-
+		Left = http_endpoint(https, 'api.example.com', 443),
+		Right = http_endpoint(https, 'cdn.example.com', 8443),
+		http_origin_site_test_helper::check_same_site(Left, Right).
+
+	test(http_origin_site_helpers_same_site_2_02, deterministic) :-
+		Left = http_endpoint(https, 'api.example.com', 443),
+		Right = http_endpoint(http, 'api.example.com', 80),
+		\+ http_origin_site_test_helper::check_same_site(Left, Right).
+
+	test(http_origin_site_helpers_same_site_2_03, deterministic) :-
+		Left = http_endpoint(https, 'service.co.uk', 443),
+		Right = http_endpoint(https, 'admin.co.uk', 443),
+		\+ http_origin_site_test_helper::check_same_site(Left, Right).
+
+	test(http_origin_site_helpers_same_site_2_04, deterministic) :-
+		Left = http_endpoint(https, 'app.service.co.uk', 443),
+		Right = http_endpoint(https, 'cdn.service.co.uk', 8443),
+		http_origin_site_test_helper::check_same_site(Left, Right).
+
+	test(http_origin_site_helpers_same_site_2_05, deterministic) :-
+		Left = http_endpoint(https, 'alice.github.io', 443),
+		Right = http_endpoint(https, 'bob.github.io', 443),
+		\+ http_origin_site_test_helper::check_same_site(Left, Right).
+
+	test(http_origin_site_helpers_same_site_2_06, deterministic) :-
+		Left = http_endpoint(https, 'foo.city.kawasaki.jp', 443),
+		Right = http_endpoint(https, 'bar.city.kawasaki.jp', 8443),
+		http_origin_site_test_helper::check_same_site(Left, Right).
+
+	test(http_origin_site_helpers_same_site_2_07, deterministic) :-
+		Left = http_endpoint(https, 'foo.kawasaki.jp', 443),
+		Right = http_endpoint(https, 'bar.kawasaki.jp', 443),
+		\+ http_origin_site_test_helper::check_same_site(Left, Right).
 
 	test(http_request_7_01, deterministic(Request == request(get, origin('/users'), http(1, 1), [host-'example.com'], empty, []))) :-
 		request(get, origin('/users'), http(1, 1), [host-'example.com'], empty, [], Request).

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>http_core &mdash; Logtalk 3.101.0</title>
+  <title>http_origin_site_helpers &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_docroot_paths" href="http_docroot_paths_0.html" />
-    <link rel="prev" title="http_body_codec_protocol" href="http_body_codec_protocol_0.html" />
+    <link rel="next" title="http_request_protocol" href="http_request_protocol_0.html" />
+    <link rel="prev" title="http_octet_stream_body_codec" href="http_octet_stream_body_codec_0.html" />
    
 </head>
 
@@ -168,7 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-cookies"><span class="xref std std-ref">http_cookies</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-core"><span class="xref std std-ref">http_core</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_body_codec_protocol_0.html">http_body_codec_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">http_core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_core_0.html">http_core</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_docroot_paths_0.html">http_docroot_paths</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_form_body_codec_0.html">http_form_body_codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_handler_protocol_0.html">http_handler_protocol</a></li>
@@ -176,7 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_json_term_helpers_0.html">http_json_term_helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_message_helpers_0.html">http_message_helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_octet_stream_body_codec_0.html">http_octet_stream_body_codec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_origin_site_helpers_0.html">http_origin_site_helpers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">http_origin_site_helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_request_protocol_0.html">http_request_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_response_protocol_0.html">http_response_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_text_body_codec_0.html">http_text_body_codec</a></li>
@@ -381,9 +381,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_origin_site_helpers</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/http_core_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/http_origin_site_helpers_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -391,10 +391,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="http-core-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="http-core">
-<h1><code class="docutils literal notranslate"><span class="pre">http_core</span></code><a class="headerlink" href="#http-core" title="Link to this heading"></a></h1>
-<p>Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.</p>
+  <p class="right" id="http-origin-site-helpers-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="http-origin-site-helpers">
+<h1><code class="docutils literal notranslate"><span class="pre">http_origin_site_helpers</span></code><a class="headerlink" href="#http-origin-site-helpers" title="Link to this heading"></a></h1>
+<p>Internal shared helpers for parsing HTTP origins and absolute URLs, deriving request endpoints, and comparing endpoints for schemeful same-site semantics.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -404,26 +404,24 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-05</div>
+<div class="line"><strong>Date:</strong> 2026-06-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Imports:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_text_helpers_0.html#http-text-helpers-0"><span class="std std-ref">http_text_helpers</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="base64_0.html#base64-0"><span class="std std-ref">base64</span></a></div>
-<div class="line"><a class="reference internal" href="http_cookies_1.html#http-cookies-1"><span class="std std-ref">http_cookies(Representation)</span></a></div>
-<div class="line"><a class="reference internal" href="json_0.html#json-0"><span class="std std-ref">json</span></a></div>
+<div class="line"><a class="reference internal" href="atom_0.html#atom-0"><span class="std std-ref">atom</span></a></div>
+<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="reader_0.html#reader-0"><span class="std std-ref">reader</span></a></div>
 <div class="line"><a class="reference internal" href="url_1.html#url-1"><span class="std std-ref">url(Representation)</span></a></div>
 </div>
 </div>
@@ -441,616 +439,132 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#request-7" id="id2"><code class="docutils literal notranslate"><span class="pre">request/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#response-6" id="id3"><code class="docutils literal notranslate"><span class="pre">response/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-request-1" id="id4"><code class="docutils literal notranslate"><span class="pre">is_request/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#is-response-1" id="id5"><code class="docutils literal notranslate"><span class="pre">is_response/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-request-2" id="id6"><code class="docutils literal notranslate"><span class="pre">parse_request/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-request-2" id="id7"><code class="docutils literal notranslate"><span class="pre">generate_request/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-response-2" id="id8"><code class="docutils literal notranslate"><span class="pre">parse_response/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-response-2" id="id9"><code class="docutils literal notranslate"><span class="pre">generate_response/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-response-headers-2" id="id10"><code class="docutils literal notranslate"><span class="pre">generate_response_headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-request-line-2" id="id11"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-request-line-2" id="id12"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-status-line-2" id="id13"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-status-line-2" id="id14"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-headers-2" id="id15"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-headers-2" id="id16"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#parse-body-4" id="id17"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-body-3" id="id18"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#encode-body-4" id="id19"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#decode-body-4" id="id20"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#method-2" id="id21"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#target-2" id="id22"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#version-2" id="id23"><code class="docutils literal notranslate"><span class="pre">version/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#status-2" id="id24"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#headers-2" id="id25"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#header-3" id="id26"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#body-2" id="id27"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#property-2" id="id28"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#absolute-url-context-2" id="id3"><code class="docutils literal notranslate"><span class="pre">absolute_url_context/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#origin-endpoint-2" id="id4"><code class="docutils literal notranslate"><span class="pre">origin_endpoint/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#request-endpoint-2" id="id5"><code class="docutils literal notranslate"><span class="pre">request_endpoint/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#same-site-2" id="id6"><code class="docutils literal notranslate"><span class="pre">same_site/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#host-labels-2" id="id7"><code class="docutils literal notranslate"><span class="pre">host_labels/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id29">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id30">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id31">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="request-7">
-<span id="http-core-0-request-7"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request/7</span></code></a><a class="headerlink" href="#request-7" title="Link to this heading"></a></h3>
-<p>Constructs a validated normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term from the given method, target, version, headers, body, and properties.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(Method,Target,Version,Headers,Body,Properties,Request)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(+atom,+compound,+compound,+list(compound),+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="response-6">
-<span id="http-core-0-response-6"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">response/6</span></code></a><a class="headerlink" href="#response-6" title="Link to this heading"></a></h3>
-<p>Constructs a validated normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term from the given version, status, headers, body, and properties.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">response(Version,Status,Headers,Body,Properties,Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">response(+compound,+compound,+list(compound),+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="is-request-1">
-<span id="http-core-0-is-request-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_request/1</span></code></a><a class="headerlink" href="#is-request-1" title="Link to this heading"></a></h3>
-<p>Succeeds if the given term is a structurally and semantically valid normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_request(Request)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_request(+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="is-response-1">
-<span id="http-core-0-is-response-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">is_response/1</span></code></a><a class="headerlink" href="#is-response-1" title="Link to this heading"></a></h3>
-<p>Succeeds if the given term is a structurally and semantically valid normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_response(Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">is_response(+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="parse-request-2">
-<span id="http-core-0-parse-request-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_request/2</span></code></a><a class="headerlink" href="#parse-request-2" title="Link to this heading"></a></h3>
-<p>Parses a complete HTTP request message from the given source (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into a normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_request(Source,Request)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_request(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-request-2">
-<span id="http-core-0-generate-request-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_request/2</span></code></a><a class="headerlink" href="#generate-request-2" title="Link to this heading"></a></h3>
-<p>Generates a complete HTTP request message to the given sink (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_request(Sink,Request)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_request(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="parse-response-2">
-<span id="http-core-0-parse-response-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_response/2</span></code></a><a class="headerlink" href="#parse-response-2" title="Link to this heading"></a></h3>
-<p>Parses a complete HTTP response message from the given source (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into a normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_response(Source,Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_response(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-response-2">
-<span id="http-core-0-generate-response-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_response/2</span></code></a><a class="headerlink" href="#generate-response-2" title="Link to this heading"></a></h3>
-<p>Generates a complete HTTP response message to the given sink (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response(Sink,Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-response-headers-2">
-<span id="http-core-0-generate-response-headers-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_response_headers/2</span></code></a><a class="headerlink" href="#generate-response-headers-2" title="Link to this heading"></a></h3>
-<p>Generates an HTTP response status line and effective header block, terminated by an empty line, to the given sink from a normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response_headers(Sink,Response)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response_headers(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="parse-request-line-2">
-<span id="http-core-0-parse-request-line-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_request_line/2</span></code></a><a class="headerlink" href="#parse-request-line-2" title="Link to this heading"></a></h3>
-<p>Parses an HTTP request line from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into a <code class="docutils literal notranslate"><span class="pre">request_line(Method,</span> <span class="pre">Target,</span> <span class="pre">Version)</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_request_line(Source,RequestLine)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_request_line(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-request-line-2">
-<span id="http-core-0-generate-request-line-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_request_line/2</span></code></a><a class="headerlink" href="#generate-request-line-2" title="Link to this heading"></a></h3>
-<p>Generates an HTTP request line to the given sink (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a <code class="docutils literal notranslate"><span class="pre">request_line(Method,</span> <span class="pre">Target,</span> <span class="pre">Version)</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_request_line(Sink,RequestLine)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_request_line(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="parse-status-line-2">
-<span id="http-core-0-parse-status-line-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_status_line/2</span></code></a><a class="headerlink" href="#parse-status-line-2" title="Link to this heading"></a></h3>
-<p>Parses an HTTP status line from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into a <code class="docutils literal notranslate"><span class="pre">status_line(Version,</span> <span class="pre">Status)</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_status_line(Source,StatusLine)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_status_line(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-status-line-2">
-<span id="http-core-0-generate-status-line-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_status_line/2</span></code></a><a class="headerlink" href="#generate-status-line-2" title="Link to this heading"></a></h3>
-<p>Generates an HTTP status line to the given sink (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a <code class="docutils literal notranslate"><span class="pre">status_line(Version,</span> <span class="pre">Status)</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_status_line(Sink,StatusLine)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_status_line(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="parse-headers-2">
-<span id="http-core-0-parse-headers-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_headers/2</span></code></a><a class="headerlink" href="#parse-headers-2" title="Link to this heading"></a></h3>
-<p>Parses an HTTP header block from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) into normalized header <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs with typed values for recognized headers.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_headers(Source,Headers)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_headers(++compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-headers-2">
-<span id="http-core-0-generate-headers-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_headers/2</span></code></a><a class="headerlink" href="#generate-headers-2" title="Link to this heading"></a></h3>
-<p>Generates an HTTP header block to the given sink (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from normalized header <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_headers(Sink,Headers)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_headers(+compound,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="parse-body-4">
-<span id="http-core-0-parse-body-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse_body/4</span></code></a><a class="headerlink" href="#parse-body-4" title="Link to this heading"></a></h3>
-<p>Parses a body payload from the given source (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) according to the given media type and options into a normalized body term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_body(Source,MediaType,Options,Body)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse_body(++compound,++atom,+list(compound),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="generate-body-3">
-<span id="http-core-0-generate-body-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_body/3</span></code></a><a class="headerlink" href="#generate-body-3" title="Link to this heading"></a></h3>
-<p>Generates a body payload to the given sink (<code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, or <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>) from a normalized body term and options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_body(Sink,Body,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate_body(+compound,++compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="encode-body-4">
-<span id="http-core-0-encode-body-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">encode_body/4</span></code></a><a class="headerlink" href="#encode-body-4" title="Link to this heading"></a></h3>
-<p>Encodes a semantic payload term using the registered concrete body codec for the given media type into a normalized body term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_body(MediaType,Payload,Options,Body)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">encode_body(+atom,++term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="decode-body-4">
-<span id="http-core-0-decode-body-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a><a class="headerlink" href="#decode-body-4" title="Link to this heading"></a></h3>
-<p>Decodes a normalized body term using the registered concrete body codec for the given media type into a semantic payload term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_body(MediaType,Body,Options,Payload)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_body(+atom,++compound,+list(compound),--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="method-2">
-<span id="http-core-0-method-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">method/2</span></code></a><a class="headerlink" href="#method-2" title="Link to this heading"></a></h3>
-<p>Returns the request method from a normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">method(Request,Method)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">method(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="target-2">
-<span id="http-core-0-target-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">target/2</span></code></a><a class="headerlink" href="#target-2" title="Link to this heading"></a></h3>
-<p>Returns the request target from a normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">target(Request,Target)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">target(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="version-2">
-<span id="http-core-0-version-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">version/2</span></code></a><a class="headerlink" href="#version-2" title="Link to this heading"></a></h3>
-<p>Returns the HTTP version from a normalized request or response term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">version(Message,Version)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">version(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="status-2">
-<span id="http-core-0-status-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">status/2</span></code></a><a class="headerlink" href="#status-2" title="Link to this heading"></a></h3>
-<p>Returns the response status from a normalized <code class="docutils literal notranslate"><span class="pre">response/5</span></code> term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">status(Response,Status)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">status(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="headers-2">
-<span id="http-core-0-headers-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">headers/2</span></code></a><a class="headerlink" href="#headers-2" title="Link to this heading"></a></h3>
-<p>Returns the normalized header list from a request or response term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">headers(Message,Headers)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">headers(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="header-3">
-<span id="http-core-0-header-3"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">header/3</span></code></a><a class="headerlink" href="#header-3" title="Link to this heading"></a></h3>
-<p>Enumerates normalized header <code class="docutils literal notranslate"><span class="pre">Name</span></code> and <code class="docutils literal notranslate"><span class="pre">Value</span></code> pairs from a request or response term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">header(Message,Name,Value)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">header(+compound,?atom,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="body-2">
-<span id="http-core-0-body-2"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body/2</span></code></a><a class="headerlink" href="#body-2" title="Link to this heading"></a></h3>
-<p>Returns the normalized body term from a request or response term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">body(Message,Body)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">body(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="property-2">
-<span id="http-core-0-property-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
-<p>Enumerates normalized derived or higher-layer properties from a request or response term.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">property(Message,Property)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">property(+compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
+<section id="absolute-url-context-2">
+<span id="http-origin-site-helpers-0-absolute-url-context-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">absolute_url_context/2</span></code></a><a class="headerlink" href="#absolute-url-context-2" title="Link to this heading"></a></h3>
+<p>Parses an absolute HTTP or HTTPS URL atom into a normalized endpoint and request path context.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">absolute_url_context(URL,Context)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">absolute_url_context(+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="origin-endpoint-2">
+<span id="http-origin-site-helpers-0-origin-endpoint-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">origin_endpoint/2</span></code></a><a class="headerlink" href="#origin-endpoint-2" title="Link to this heading"></a></h3>
+<p>Parses an Origin header atom into a normalized HTTP or HTTPS endpoint.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">origin_endpoint(Origin,Endpoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">origin_endpoint(+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="request-endpoint-2">
+<span id="http-origin-site-helpers-0-request-endpoint-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_endpoint/2</span></code></a><a class="headerlink" href="#request-endpoint-2" title="Link to this heading"></a></h3>
+<p>Derives a normalized HTTP or HTTPS endpoint from normalized request properties.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">request_endpoint(Request,Endpoint)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">request_endpoint(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="same-site-2">
+<span id="http-origin-site-helpers-0-same-site-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">same_site/2</span></code></a><a class="headerlink" href="#same-site-2" title="Link to this heading"></a></h3>
+<p>Succeeds when two normalized endpoints or URL contexts are schemefully same-site using bundled public suffix rules, including exact, wildcard, and exception cases.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_site(Left,Right)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">same_site(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="host-labels-2">
+<span id="http-origin-site-helpers-0-host-labels-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">host_labels/2</span></code></a><a class="headerlink" href="#host-labels-2" title="Link to this heading"></a></h3>
+<p>Splits a normalized host atom into non-empty dot-separated labels.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">host_labels(Host,Labels)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">host_labels(+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -1065,8 +579,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_body_codec_protocol_0.html" class="btn btn-neutral float-left" title="http_body_codec_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_docroot_paths_0.html" class="btn btn-neutral float-right" title="http_docroot_paths" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_octet_stream_body_codec_0.html" class="btn btn-neutral float-left" title="http_octet_stream_body_codec" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_request_protocol_0.html" class="btn btn-neutral float-right" title="http_request_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

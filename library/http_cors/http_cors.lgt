@@ -20,12 +20,12 @@
 
 
 :- object(http_cors,
-	imports(options)).
+	imports([options, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-05,
+		date is 2026-06-06,
 		comment is 'Transport-neutral CORS request classification, preflight response generation, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -64,31 +64,6 @@
 		argnames is ['Request', 'Response0', 'Response', 'Options']
 	]).
 
-	:- protected(valid_option/1).
-	:- mode(valid_option(+compound), zero_or_one).
-	:- info(valid_option/1, [
-		comment is 'Validates supported CORS option terms.',
-		argnames is ['Option']
-	]).
-
-	:- protected(default_option/1).
-	:- mode(default_option(-compound), zero_or_more).
-	:- info(default_option/1, [
-		comment is 'Enumerates default CORS option terms.',
-		argnames is ['Option']
-	]).
-
-	:- protected(fix_option/2).
-	:- mode(fix_option(+compound, -compound), zero_or_one).
-	:- info(fix_option/2, [
-		comment is 'Normalizes option values by removing duplicate list elements while preserving the first occurrence order.',
-		argnames is ['Option', 'FixedOption']
-	]).
-
-	:- uses(atom, [
-		split/3
-	]).
-
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2
 	]).
@@ -107,63 +82,63 @@
 
 	preflight_response(Request, Response, UserOptions) :-
 		resolve_options(Request, UserOptions, Options),
-		(	is_preflight_request(Request) ->
+		( 	is_preflight_request(Request) ->
 			Request = request(_, _, Version, _, _, _),
-			(	preflight_headers(Request, Options, Headers0, VaryTokens) ->
+			( 	preflight_headers(Request, Options, Headers0, VaryTokens) ->
 				finalize_headers(VaryTokens, Headers0, Headers),
 				http_core::response(Version, status(200, 'OK'), Headers, empty, [], Response)
-			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
+			; 	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				finalize_headers(VaryTokens, [], Headers),
 				http_core::response(Version, status(403, 'Forbidden'), Headers, empty, [], Response)
 			)
-		;	domain_error(http_cors_preflight_request, Request)
+		; 	domain_error(http_cors_preflight_request, Request)
 		), !.
 
 	add_response_headers(Request, Response0, Response, UserOptions) :-
 		resolve_options(Request, UserOptions, Options),
-		(	is_preflight_request(Request) ->
-			(	preflight_headers(Request, Options, Headers, VaryTokens) ->
+		( 	is_preflight_request(Request) ->
+			( 	preflight_headers(Request, Options, Headers, VaryTokens) ->
 				merge_response_headers(Response0, Headers, VaryTokens, Response)
-			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
+			; 	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				merge_denied_response_headers(VaryTokens, Response0, Response)
 			)
-		;	actual_headers(Request, Response0, Options, Headers, VaryTokens) ->
+		; 	actual_headers(Request, Response0, Options, Headers, VaryTokens) ->
 			merge_response_headers(Response0, Headers, VaryTokens, Response)
-		;	actual_denied_vary_tokens(Options, VaryTokens),
+		; 	actual_denied_vary_tokens(Options, VaryTokens),
 			merge_denied_response_headers(VaryTokens, Response0, Response)
 		),
 		!.
 
 	valid_option(allowed_origins(Origins)) :-
-		(	Origins == any ->
+		( 	Origins == any ->
 			true
-		;	valid_origin_list(Origins)
+		; 	valid_origin_list(Origins)
 		).
 	valid_option(allowed_methods(Methods)) :-
-		(	Methods == any ->
+		( 	Methods == any ->
 			true
-		;	wildcard_method_list(Methods) ->
+		; 	wildcard_method_list(Methods) ->
 			true
-		;	valid_method_list(Methods)
+		; 	valid_method_list(Methods)
 		).
 	valid_option(allowed_headers(Headers)) :-
-		(	Headers == any ->
+		( 	Headers == any ->
 			true
-		;	Headers == requested ->
+		; 	Headers == requested ->
 			true
-		;	valid_header_name_list(Headers)
+		; 	valid_header_name_list(Headers)
 		).
 	valid_option(expose_headers(Headers)) :-
-		(	Headers == any ->
+		( 	Headers == any ->
 			true
-		;	valid_header_name_list(Headers)
+		; 	valid_header_name_list(Headers)
 		).
 	valid_option(allow_credentials(Boolean)) :-
 		once((Boolean == true; Boolean == false)).
 	valid_option(max_age(Seconds)) :-
-		(	Seconds == none ->
+		( 	Seconds == none ->
 			true
-		;	integer(Seconds),
+		; 	integer(Seconds),
 			Seconds >= 0
 		).
 
@@ -202,9 +177,9 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, BaseOptions),
 		request_route_options(Request, RouteOptions),
-		(	RouteOptions == [] ->
+		( 	RouteOptions == [] ->
 			Options0 = BaseOptions
-		;	^^check_options(RouteOptions),
+		; 	^^check_options(RouteOptions),
 			overlay_options(RouteOptions, BaseOptions, Options0)
 		),
 		fix_options_list(Options0, Options0a),
@@ -761,137 +736,34 @@
 
 	wildcard_origin_match(Origin, Pattern) :-
 		wildcard_origin_pattern(Pattern, Scheme, BaseLabels, Port),
-		origin_components(Origin, Scheme, HostLabels, Port),
+		origin_endpoint_components(Origin, Scheme, HostLabels, Port),
 		HostLabels = [_| BaseLabels].
 
 	wildcard_origin_pattern(Pattern, Scheme, BaseLabels, Port) :-
 		atom(Pattern),
-		split_origin_scheme_authority_codes(Pattern, SchemeCodes0, AuthorityCodes),
-		lowercase_ascii_codes(SchemeCodes0, SchemeCodes),
-		atom_codes(Scheme, SchemeCodes),
-		parse_origin_authority_codes(AuthorityCodes, HostCodes0, Port),
-		lowercase_ascii_codes(HostCodes0, HostCodes),
-		HostCodes = [0'*, 0'.| BaseHostCodes],
-		BaseHostCodes \== [],
-		\+ contains_wildcard_code(BaseHostCodes),
-		host_codes_labels(BaseHostCodes, BaseLabels),
-		valid_origin_port(Port).
+		split_wildcard_origin(Pattern, BaseOrigin, BaseAuthorityCodes),
+		\+ contains_wildcard_code(BaseAuthorityCodes),
+		^^origin_endpoint(BaseOrigin, http_endpoint(Scheme, BaseHost, Port)),
+		^^host_labels(BaseHost, BaseLabels).
 
-	origin_components(Origin, Scheme, HostLabels, Port) :-
-		atom(Origin),
-		split_origin_scheme_authority_codes(Origin, SchemeCodes0, AuthorityCodes),
-		lowercase_ascii_codes(SchemeCodes0, SchemeCodes),
-		atom_codes(Scheme, SchemeCodes),
-		parse_origin_authority_codes(AuthorityCodes, HostCodes0, Port),
-		lowercase_ascii_codes(HostCodes0, HostCodes),
-		host_codes_labels(HostCodes, HostLabels).
+	origin_endpoint_components(Origin, Scheme, HostLabels, Port) :-
+		^^origin_endpoint(Origin, http_endpoint(Scheme, Host, Port)),
+		^^host_labels(Host, HostLabels).
 
-	split_origin_scheme_authority_codes(Origin, SchemeCodes, AuthorityCodes) :-
-		split(Origin, '://', [Scheme, Authority]),
+	split_wildcard_origin(Pattern, BaseOrigin, BaseAuthorityCodes) :-
+		atom::split(Pattern, '://', [Scheme, WildcardAuthority]),
 		Scheme \== '',
-		Authority \== '',
-		atom_codes(Scheme, SchemeCodes),
-		atom_codes(Authority, AuthorityCodes).
-
-	parse_origin_authority_codes([0'[| Codes], HostCodes, Port) :-
-		split_once(0'], Codes, HostCodes, RestCodes),
-		!,
-		parse_bracketed_origin_port_codes(RestCodes, Port).
-	parse_origin_authority_codes(Codes, HostCodes, Port) :-
-		split_last_colon(Codes, HostCodes, PortCodes),
-		PortCodes \== [],
-		digit_codes(PortCodes),
-		!,
-		number_codes(Port, PortCodes),
-		valid_origin_port(Port).
-	parse_origin_authority_codes(Codes, Codes, none).
-
-	parse_bracketed_origin_port_codes([], none) :-
-		!.
-	parse_bracketed_origin_port_codes([0':| PortCodes], Port) :-
-		PortCodes \== [],
-		digit_codes(PortCodes),
-		number_codes(Port, PortCodes),
-		valid_origin_port(Port).
-
-	host_codes_labels(Codes, Labels) :-
-		split_dot_codes(Codes, LabelCodesList),
-		host_labels(LabelCodesList, Labels).
-
-	host_labels([], []).
-	host_labels([LabelCodes| LabelCodesList], [Label| Labels]) :-
-		valid_host_label_codes(LabelCodes),
-		atom_codes(Label, LabelCodes),
-		host_labels(LabelCodesList, Labels).
-
-	valid_host_label_codes([Code]) :-
-		host_label_edge_code(Code).
-	valid_host_label_codes([Code| Codes]) :-
-		host_label_edge_code(Code),
-		valid_host_label_tail_codes(Codes).
-
-	valid_host_label_tail_codes([Code]) :-
-		host_label_edge_code(Code).
-	valid_host_label_tail_codes([Code| Codes]) :-
-		host_label_code(Code),
-		valid_host_label_tail_codes(Codes).
-
-	host_label_edge_code(Code) :-
-		lowercase_alpha(Code),
-		!.
-	host_label_edge_code(Code) :-
-		digit_code(Code).
-
-	host_label_code(Code) :-
-		host_label_edge_code(Code),
-		!.
-	host_label_code(0'-).
-
-	split_dot_codes(Codes, Segments) :-
-		split_dot_codes(Codes, [], Segments).
-
-	split_dot_codes([], Current0, [Current]) :-
-		reverse(Current0, Current).
-	split_dot_codes([0'.| Codes], Current0, [Current| Segments]) :-
-		!,
-		reverse(Current0, Current),
-		split_dot_codes(Codes, [], Segments).
-	split_dot_codes([Code| Codes], Current0, Segments) :-
-		split_dot_codes(Codes, [Code| Current0], Segments).
-
-	valid_origin_port(Port) :-
-		(	Port == none ->
-			true
-		;	integer(Port),
-			Port >= 0,
-			Port =< 65535
-		).
+		WildcardAuthority \== '',
+		atom_codes(WildcardAuthority, [0'*, 0'.| BaseAuthorityCodes]),
+		BaseAuthorityCodes \== [],
+		atom_codes(BaseAuthority, BaseAuthorityCodes),
+		atom_concat(Scheme, '://', Prefix),
+		atom_concat(Prefix, BaseAuthority, BaseOrigin).
 
 	contains_wildcard_code([0'*| _]) :-
 		!.
 	contains_wildcard_code([_| Codes]) :-
 		contains_wildcard_code(Codes).
-
-	split_last_colon(Codes, HostCodes, PortCodes) :-
-		reverse(Codes, ReversedCodes),
-		split_once(0':, ReversedCodes, ReversedPortCodes, ReversedHostCodes),
-		reverse(ReversedHostCodes, HostCodes),
-		reverse(ReversedPortCodes, PortCodes).
-
-	split_once(Separator, [Separator| After], [], After) :-
-		!.
-	split_once(Separator, [Code| Codes], [Code| Before], After) :-
-		split_once(Separator, Codes, Before, After).
-
-	digit_codes([Code| Codes]) :-
-		digit_code(Code),
-		digit_codes(Codes).
-	digit_codes([]).
-
-	lowercase_ascii_codes([], []).
-	lowercase_ascii_codes([Code| Codes], [LowercaseCode| LowercaseCodes]) :-
-		lowercase_ascii_code(Code, LowercaseCode),
-		lowercase_ascii_codes(Codes, LowercaseCodes).
 
 	wildcard_method_list(Methods) :-
 		ground(Methods),

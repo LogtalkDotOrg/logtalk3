@@ -15,7 +15,7 @@ Shared helpers for validating requests and sandboxing document-root relative pat
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-25
+| **Date:** 2026-06-05
 
 | **Compilation flags:**
 |    ``static``
@@ -87,7 +87,7 @@ Validates a normalized HTTP request term.
 ``validate_document_root/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Validates a document root path atom.
+Validates an absolute document root path atom.
 
 | **Compilation flags:**
 |    ``static``

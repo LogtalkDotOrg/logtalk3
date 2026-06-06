@@ -411,6 +411,13 @@ requests:</p>
      http_client_session<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
 </pre></div>
 </div>
+<p>Per-request client-session options can also carry explicit SameSite
+replay context when cookie replay depends on the request initiator or
+whether the request is a top-level navigation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_client_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://app.example.com/data&#39;</span>, <span class="nv">Response</span>,
+     [source_origin(<span class="s">&#39;https://other.example.net&#39;</span>), top_level_navigation(<span class="k">true</span>)]).
+</pre></div>
+</div>
 <p>Sessions can also reopen a saved cookie jar directly:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_client_session<span class="o">::</span><span class="k">open</span>(<span class="nv">Session</span>, [cookies_file(<span class="s">&#39;cookies.state&#39;</span>)]),
      http_client_session<span class="o">::</span>get(<span class="nv">Session</span>, <span class="s">&#39;http://127.0.0.1:8080/visits&#39;</span>, <span class="nv">Response</span>, []),
@@ -431,18 +438,30 @@ state over normalized request and response terms:</p>
 </div>
 <p>You can also work directly with the cookie jar:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_cookie_jar<span class="o">::</span><span class="k">open</span>(<span class="nv">Jar</span>),
-     http_cookie_jar<span class="o">::</span>store_set_cookies(<span class="nv">Jar</span>, <span class="s">&#39;http://example.com/login&#39;</span>, [set_cookie(session, <span class="s">&#39;1&#39;</span>, [path<span class="o">-</span><span class="s">&#39;/&#39;</span>])]),
+     http_cookie_jar<span class="o">::</span>store_set_cookies(<span class="nv">Jar</span>, <span class="s">&#39;http://example.com/login&#39;</span>, [set_cookie(session, <span class="s">&#39;1&#39;</span>, [path<span class="o">-</span>(<span class="s">&#39;/&#39;</span>)])]),
      http_cookie_jar<span class="o">::</span>request_cookies(<span class="nv">Jar</span>, <span class="s">&#39;http://example.com/dashboard&#39;</span>, <span class="nv">Cookies</span>).
+</pre></div>
+</div>
+<p>When you need explicit SameSite replay control, use the primary
+context-bearing cookie-jar API:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_cookie_jar<span class="o">::</span>request_cookies(<span class="nv">Jar</span>, <span class="s">&#39;https://app.example.com/data&#39;</span>,
+     request_context(get, source_url(<span class="s">&#39;https://other.example.net/start&#39;</span>), <span class="k">true</span>), <span class="nv">Cookies</span>).
 </pre></div>
 </div>
 <p>Cookie jars can also be explicitly saved and restored:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_cookie_jar<span class="o">::</span><span class="k">open</span>(<span class="nv">Jar</span>),
-     http_cookie_jar<span class="o">::</span>store_set_cookies(<span class="nv">Jar</span>, <span class="s">&#39;http://example.com/login&#39;</span>, [set_cookie(session, <span class="s">&#39;1&#39;</span>, [path<span class="o">-</span><span class="s">&#39;/&#39;</span>])]),
+     http_cookie_jar<span class="o">::</span>store_set_cookies(<span class="nv">Jar</span>, <span class="s">&#39;http://example.com/login&#39;</span>, [set_cookie(session, <span class="s">&#39;1&#39;</span>, [path<span class="o">-</span>(<span class="s">&#39;/&#39;</span>)])]),
      http_cookie_jar<span class="o">::</span>save(<span class="nv">Jar</span>, <span class="s">&#39;cookies.state&#39;</span>),
      http_cookie_jar<span class="o">::</span><span class="k">close</span>(<span class="nv">Jar</span>),
      http_cookie_jar<span class="o">::</span><span class="k">open</span>(<span class="nv">RestoredJar</span>, [cookies_file(<span class="s">&#39;cookies.state&#39;</span>)]).
 </pre></div>
 </div>
+<p>When these SameSite request-context controls are omitted, both
+<code class="docutils literal notranslate"><span class="pre">http_client_session</span></code> and <code class="docutils literal notranslate"><span class="pre">http_cookie_jar::request_cookies/3</span></code>
+default to <code class="docutils literal notranslate"><span class="pre">request_context(get,</span> <span class="pre">source_url(URL),</span> <span class="pre">false)</span></code>, modeling a
+same-site direct request to the target URL. Use <code class="docutils literal notranslate"><span class="pre">source_url/1</span></code> for a
+full initiating URL and <code class="docutils literal notranslate"><span class="pre">source_origin/1</span></code> for a bare <code class="docutils literal notranslate"><span class="pre">Origin</span></code> header
+value.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cookies_file/1</span></code> session option is a convenience for opening a
 fresh owned cookie jar from disk. It is mutually exclusive with the
 <code class="docutils literal notranslate"><span class="pre">cookie_jar/1</span></code> session option.</p>
@@ -450,20 +469,35 @@ fresh owned cookie jar from disk. It is mutually exclusive with the
 <ul class="simple">
 <li><p>in-memory cookie storage with explicit save and load support</p></li>
 <li><p>automatic cookie replay for explicit client-session handles</p></li>
+<li><p>context-bearing cookie replay using
+<code class="docutils literal notranslate"><span class="pre">request_context(Method,</span> <span class="pre">Source,</span> <span class="pre">TopLevelNavigation)</span></code> and the
+matching <code class="docutils literal notranslate"><span class="pre">http_client_session</span></code> request options <code class="docutils literal notranslate"><span class="pre">source_url/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">source_origin/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">top_level_navigation/1</span></code></p></li>
 <li><p>in-memory server-side session storage keyed by opaque cookie
 identifiers</p></li>
 <li><p>direct server-session request begin/finish operations plus
 plain-handler and router adapters</p></li>
-<li><p>absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs via the existing <code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade</p></li>
+<li><p>client-session transport over absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs via the
+existing <code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade, while cookie storage and SameSite
+source parsing also accept <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs and bare <code class="docutils literal notranslate"><span class="pre">Origin</span></code>
+values</p></li>
 <li><p>core handling for host-only and domain cookies, default path
-computation, secure filtering, <code class="docutils literal notranslate"><span class="pre">Max-Age</span></code>, and normalized <code class="docutils literal notranslate"><span class="pre">Expires</span></code>
-HTTP-date values</p></li>
+computation, secure filtering, <code class="docutils literal notranslate"><span class="pre">Max-Age</span></code>, normalized <code class="docutils literal notranslate"><span class="pre">Expires</span></code>
+HTTP-date values, and <code class="docutils literal notranslate"><span class="pre">SameSite</span></code> values</p></li>
+<li><p>schemeful SameSite replay semantics using the shared origin/site
+helper in <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, with cookies that omit <code class="docutils literal notranslate"><span class="pre">SameSite</span></code> treated
+as Lax-by-default</p></li>
+<li><p>server-session cookie emission with a default <code class="docutils literal notranslate"><span class="pre">same_site-lax</span></code>
+template and validation that explicit <code class="docutils literal notranslate"><span class="pre">same_site-none</span></code> also requires
+<code class="docutils literal notranslate"><span class="pre">secure-true</span></code></p></li>
 </ul>
 <p>Out of scope for this first implementation:</p>
 <ul class="simple">
 <li><p>HTTPS transport support in the client facade</p></li>
-<li><p>public suffix enforcement</p></li>
-<li><p>SameSite policies</p></li>
+<li><p>automatic synchronization with the full Mozilla Public Suffix List
+snapshot</p></li>
+<li><p>browser-specific temporary Lax-allowing-unsafe grace windows</p></li>
+<li><p>full browser document lifecycle semantics for cookie replay decisions</p></li>
 <li><p>persistent or distributed server-session stores</p></li>
 <li><p>session-owned connection-pool management</p></li>
 </ul>

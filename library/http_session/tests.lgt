@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-06,
 		comment is 'Unit tests for the http_session library.'
 	]).
 
@@ -174,47 +174,97 @@
 		http_cookie_jar::close(Jar),
 		memberchk(expires-date_time(2099, 1, 1, 0, 0, 0), Attributes).
 
-	test(http_cookie_jar_17, error(domain_error(http_cookie_jar_set_cookie, bad_cookie)), [cleanup(catch(http_cookie_jar::close(Jar), _, true))]) :-
+	test(http_cookie_jar_17, deterministic) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'https://example.com/login', [set_cookie(session, '1', [path-('/'), secure-true, same_site-none])]),
+		http_cookie_jar::cookies(Jar, [cookie(session, '1', Attributes)]),
+		http_cookie_jar::close(Jar),
+		memberchk(same_site-none, Attributes).
+
+	test(http_cookie_jar_18, deterministic((Count == 0, Cookies == []))) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'http://example.com/login', [set_cookie(session, '1', [path-('/'), same_site-none])]),
+		http_cookie_jar::cookie_count(Jar, Count),
+		http_cookie_jar::cookies(Jar, Cookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_19, deterministic) :-
+		^^file_path('test_cookie_jar_state.tmp', Path),
+		http_cookie_jar::open(SourceJar),
+		http_cookie_jar::store_set_cookies(SourceJar, 'http://example.com/login', [set_cookie(session, '1', [path-('/'), same_site-lax])]),
+		http_cookie_jar::save(SourceJar, Path),
+		http_cookie_jar::close(SourceJar),
+		http_cookie_jar::open(RestoredJar, [cookies_file(Path)]),
+		http_cookie_jar::cookies(RestoredJar, [cookie(session, '1', Attributes)]),
+		http_cookie_jar::close(RestoredJar),
+		memberchk(same_site-lax, Attributes).
+
+	test(http_cookie_jar_20, error(domain_error(http_cookie_jar_set_cookie, bad_cookie)), [cleanup(catch(http_cookie_jar::close(Jar), _, true))]) :-
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::store_set_cookies(Jar, 'http://example.com/login', [bad_cookie]).
 
-	test(http_cookie_jar_18, error(domain_error(http_cookie_jar_persisted_cookie, bad_cookie)), [cleanup(catch(http_cookie_jar::close(Jar), _, true))]) :-
+	test(http_cookie_jar_21, error(domain_error(http_cookie_jar_persisted_cookie, bad_cookie)), [cleanup(catch(http_cookie_jar::close(Jar), _, true))]) :-
 		^^file_path('test_invalid_cookie_jar_item.tmp', Path),
 		^^create_text_file('test_invalid_cookie_jar_item.tmp', 'saved_http_cookie_jar(1, [bad_cookie]).\n'),
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::load(Jar, Path).
 
-	test(http_cookie_jar_19, error(domain_error(http_cookie_jar_persisted_cookies, _)), [cleanup(catch(http_cookie_jar::close(Jar), _, true))]) :-
+	test(http_cookie_jar_22, error(domain_error(http_cookie_jar_persisted_cookies, _)), [cleanup(catch(http_cookie_jar::close(Jar), _, true))]) :-
 		^^file_path('test_invalid_cookie_jar_state.tmp', Path),
 		^^create_text_file('test_invalid_cookie_jar_state.tmp', 'foo.\n'),
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::load(Jar, Path).
 
-	test(http_cookie_jar_20, error(domain_error(http_cookie_jar, foo))) :-
+	test(http_cookie_jar_23, error(domain_error(http_cookie_jar, foo))) :-
 		http_cookie_jar::cookie_count(foo, _Count).
 
-	test(http_cookie_jar_21, error(instantiation_error)) :-
+	test(http_cookie_jar_24, error(instantiation_error)) :-
 		http_cookie_jar::cookie_count(_Jar, _Count).
 
-	test(http_cookie_jar_22, error(instantiation_error)) :-
+	test(http_cookie_jar_25, error(instantiation_error)) :-
 		http_cookie_jar::cookie_count(cookie_jar(_JarId), _Count).
 
-	test(http_cookie_jar_23, deterministic(Cookies == [session-'1'])) :-
+	test(http_cookie_jar_26, deterministic(Cookies == [session-'1'])) :-
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::store_set_cookies(Jar, 'http://Example.COM', [set_cookie(session, '1', [domain-'.Example.COM'])]),
 		http_cookie_jar::request_cookies(Jar, 'http://sub.example.com', Cookies),
 		http_cookie_jar::close(Jar).
 
-	test(http_cookie_jar_24, deterministic(Cookies == [session-'1'])) :-
+	test(http_cookie_jar_27, deterministic(Cookies == [session-'1'])) :-
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::store_set_cookies(Jar, 'http://user@[::1]:8080/login', [set_cookie(session, '1', [path-('/')])]),
 		http_cookie_jar::request_cookies(Jar, 'http://[::1]:8080/dashboard', Cookies),
 		http_cookie_jar::close(Jar).
 
-	test(http_cookie_jar_25, deterministic(Cookies == [session-'1'])) :-
+	test(http_cookie_jar_28, deterministic(Cookies == [session-'1'])) :-
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::store_set_cookies(Jar, 'http://[::1]/login', [set_cookie(session, '1', [path-('/')])]),
 		http_cookie_jar::request_cookies(Jar, 'http://[::1]/dashboard', Cookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_29, deterministic((SameSiteCookies == [session-'1'], CrossSiteCookies == []))) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'https://app.example.com/login', [set_cookie(session, '1', [path-('/'), same_site-strict])]),
+		http_cookie_jar::request_cookies(Jar, 'https://app.example.com/dashboard', request_context(get, source_url('https://app.example.com/home'), false), SameSiteCookies),
+		http_cookie_jar::request_cookies(Jar, 'https://app.example.com/dashboard', request_context(get, source_url('https://other.example.net/home'), false), CrossSiteCookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_30, deterministic(Cookies == [session-'1'])) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'https://app.example.com/login', [set_cookie(session, '1', [path-('/')])]),
+		http_cookie_jar::request_cookies(Jar, 'https://app.example.com/dashboard', request_context(get, source_url('https://other.example.net/home'), true), Cookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_31, deterministic(Cookies == [])) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'https://app.example.com/login', [set_cookie(session, '1', [path-('/')])]),
+		http_cookie_jar::request_cookies(Jar, 'https://app.example.com/dashboard', request_context(post, source_url('https://other.example.net/home'), true), Cookies),
+		http_cookie_jar::close(Jar).
+
+	test(http_cookie_jar_32, deterministic(Cookies == [session-'1'])) :-
+		http_cookie_jar::open(Jar),
+		http_cookie_jar::store_set_cookies(Jar, 'https://app.example.com/login', [set_cookie(session, '1', [path-('/'), secure-true, same_site-none])]),
+		http_cookie_jar::request_cookies(Jar, 'https://app.example.com/dashboard', request_context(post, source_origin('https://other.example.net'), false), Cookies),
 		http_cookie_jar::close(Jar).
 
 	test(http_client_session_00, deterministic(Cookies == [session-'1'])) :-
@@ -249,6 +299,14 @@
 	test(http_client_session_08, error(domain_error(http_client_session_request_option, unsupported_option)), [cleanup(catch(http_client_session::close(Session), _, true))]) :-
 		http_client_session::open(Session),
 		http_client_session::get(Session, 'http://example.com/', _Response, [unsupported_option]).
+
+	test(http_client_session_08a, error(domain_error(http_client_session_request_option, source_url('/relative'))), [cleanup(catch(http_client_session::close(Session), _, true))]) :-
+		http_client_session::open(Session),
+		http_client_session::get(Session, 'http://example.com/', _Response, [source_url('/relative')]).
+
+	test(http_client_session_08b, error(domain_error(http_client_session_request_option, source_origin('https://other.example.net/path'))), [cleanup(catch(http_client_session::close(Session), _, true))]) :-
+		http_client_session::open(Session),
+		http_client_session::get(Session, 'http://example.com/', _Response, [source_origin('https://other.example.net/path')]).
 
 	test(http_client_session_11, error(instantiation_error)) :-
 		http_client_session::cookie_jar(_Session, _Jar).
@@ -335,6 +393,36 @@
 			http_cookie_jar::close(Jar),
 			body(Response, content('application/json', json({lang-'en', page-'2', item-'7', session-'explicit', major-1, minor-0}))).
 
+		test(http_client_session_14, deterministic) :-
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
+			atomic_list_concat(['http://127.0.0.1:', Port, '/login'], LoginURL),
+			atomic_list_concat(['http://127.0.0.1:', Port, '/cookie-info'], URL),
+			http_cookie_jar::open(Jar),
+			http_cookie_jar::store_set_cookies(Jar, LoginURL, [set_cookie(session, '1', [path-('/'), http_only-true])]),
+			http_client_session::open(Session, [cookie_jar(Jar)]),
+			http_client_session::get(Session, URL, Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
+			http_client_session::close(Session),
+			once(threaded_exit(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(http_socket::close_listener(Listener), _, true),
+			http_cookie_jar::close(Jar),
+			body(Response, content('text/plain', text('1'))).
+
+		test(http_client_session_15, deterministic) :-
+			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
+			atomic_list_concat(['http://127.0.0.1:', Port, '/login'], LoginURL),
+			atomic_list_concat(['http://127.0.0.1:', Port, '/cookie-info'], URL),
+			http_cookie_jar::open(Jar),
+			http_cookie_jar::store_set_cookies(Jar, LoginURL, [set_cookie(session, '1', [path-('/'), http_only-true])]),
+			http_client_session::open(Session, [cookie_jar(Jar)]),
+			http_client_session::post(Session, URL, content('text/plain', text(post)), Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
+			http_client_session::close(Session),
+			once(threaded_exit(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(http_socket::close_listener(Listener), _, true),
+			http_cookie_jar::close(Jar),
+			body(Response, content('text/plain', text('none'))).
+
 	:- endif.
 
 		test(http_server_session_01, deterministic((Data == [visits-1], SessionState == anonymous))) :-
@@ -350,7 +438,8 @@
 			server_session_cookie(Response, set_cookie(session, SessionId, Attributes)),
 			http_server_session::close(Manager),
 			atom(SessionId),
-			memberchk(http_only-true, Attributes).
+			memberchk(http_only-true, Attributes),
+			memberchk(same_site-lax, Attributes).
 
 		test(http_server_session_02, deterministic((Visits == 1, \+ http_core::property(Response2, set_cookies(_))))) :-
 			http_server_session::open(Manager),
@@ -607,6 +696,20 @@
 				http_server_session::finish(Request, Response0, Response),
 				server_session_cookie(Response, set_cookie(session, _SessionId, Attributes)),
 				http_server_session::close(Manager).
+
+			test(http_server_session_18, deterministic((memberchk(secure-true, Attributes), memberchk(same_site-none, Attributes)))) :-
+				http_server_session::open(Manager, [cookie_attributes([path-('/'), http_only-true, secure-true, same_site-none])]),
+				server_session_request([], Request0),
+				http_server_session::begin(Manager, Request0, Request),
+				http_server_session::current(Request, Session),
+				http_server_session::set(Session, visits, 1),
+				server_session_response(Response0),
+				http_server_session::finish(Request, Response0, Response),
+				server_session_cookie(Response, set_cookie(session, _SessionId, Attributes)),
+				http_server_session::close(Manager).
+
+			test(http_server_session_19, error(domain_error(option, cookie_attributes([path-('/'), http_only-true, same_site-none])))) :-
+				http_server_session::open(_Manager, [cookie_attributes([path-('/'), http_only-true, same_site-none])]).
 
 		test(http_server_session_handler_01, deterministic) :-
 			http_server_session::open(Manager),

@@ -20,12 +20,12 @@
 
 
 :- object(http_client,
-	imports([options, http_message_helpers, http_text_helpers])).
+	imports([options, http_message_helpers, http_text_helpers, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-06,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
@@ -569,9 +569,16 @@
 	components_endpoint(Components, Host, Port) :-
 		member(authority(Authority), Components),
 		!,
-		parse_authority_endpoint(Authority, Host, Port).
+		( 	authority_url_context(Authority, Host, Port) ->
+			true
+		; 	domain_error(http_client_url, Authority)
+		).
 	components_endpoint(Components, _Host, _Port) :-
 		domain_error(http_client_url, Components).
+
+	authority_url_context(Authority, Host, Port) :-
+		atomic_list_concat(['http://', Authority, '/'], URL),
+		^^absolute_url_context(URL, http_url_context(http, Host, Port, '/')).
 
 	components_path_query(Components, Path, Query) :-
 		(	member(path(Path0), Components) ->
@@ -582,39 +589,6 @@
 			true
 		;	Query = ''
 		).
-
-	parse_authority_endpoint(Authority, Host, Port) :-
-		(	atom_codes(Authority, Codes0),
-			strip_userinfo_codes(Codes0, Codes),
-			parse_authority_codes(Codes, HostCodes, Port),
-			lowercase_ascii_codes(HostCodes, NormalizedHostCodes),
-			atom_codes(Host, NormalizedHostCodes),
-			validate_endpoint_host_port(Host, Port) ->
-			true
-		;	domain_error(http_client_url, Authority)
-		).
-
-	parse_authority_codes([0'[| Codes], HostCodes, Port) :-
-		split_once(0'], Codes, HostCodes, RestCodes),
-		!,
-		parse_bracketed_port_codes(RestCodes, Port).
-	parse_authority_codes(Codes, HostCodes, Port) :-
-		split_last_colon(Codes, HostCodes, PortCodes),
-		PortCodes \== [],
-		digit_codes(PortCodes),
-		!,
-		number_codes(Port, PortCodes).
-	parse_authority_codes(Codes, Codes, 80).
-
-	parse_bracketed_port_codes([], 80) :-
-		!.
-	parse_bracketed_port_codes([0':| PortCodes], Port) :-
-		PortCodes \== [],
-		digit_codes(PortCodes),
-		number_codes(Port, PortCodes).
-
-	validate_endpoint_host_port(Host, Port) :-
-		http_core::request(get, authority(Host, Port), http(1, 1), [], empty, [], _).
 
 	normalize_request_path('', '/') :-
 		!.
@@ -662,33 +636,6 @@
 			instantiation_error
 		;	domain_error(http_socket_connection_or_pool, ConnectionOrPool)
 		).
-
-	strip_userinfo_codes(Codes0, Codes) :-
-		reverse(Codes0, ReversedCodes0),
-		(	split_once(0'@, ReversedCodes0, ReversedCodes, _ReversedUserinfo) ->
-			reverse(ReversedCodes, Codes)
-		;	Codes = Codes0
-		).
-
-	split_last_colon(Codes, HostCodes, PortCodes) :-
-		reverse(Codes, ReversedCodes),
-		split_once(0':, ReversedCodes, ReversedPortCodes, ReversedHostCodes),
-		reverse(ReversedHostCodes, HostCodes),
-		reverse(ReversedPortCodes, PortCodes).
-
-	split_once(Separator, [Separator| After], [], After) :-
-		!.
-	split_once(Separator, [Code| Codes], [Code| Before], After) :-
-		split_once(Separator, Codes, Before, After).
-
-	digit_codes([Code| Codes]) :-
-		digit_code(Code),
-		digit_codes(Codes).
-	digit_codes([]).
-
-	digit_code(Code) :-
-		Code >= 0'0,
-		Code =< 0'9.
 
 	lowercase_ascii_codes(Codes, LowercaseCodes) :-
 		^^lowercase_ascii_codes(Codes, LowercaseCodes).

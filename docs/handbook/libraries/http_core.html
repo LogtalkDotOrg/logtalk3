@@ -447,6 +447,11 @@ needed by the next client and server transport slices</p></li>
 <code class="docutils literal notranslate"><span class="pre">decoded_body/1</span></code></p></li>
 <li><p>Reuse <code class="docutils literal notranslate"><span class="pre">url</span></code> for absolute-target validation and <code class="docutils literal notranslate"><span class="pre">http_cookies</span></code> for
 <code class="docutils literal notranslate"><span class="pre">Cookie</span></code> and <code class="docutils literal notranslate"><span class="pre">Set-Cookie</span></code> header validation</p></li>
+<li><p>Provide the internal <code class="docutils literal notranslate"><span class="pre">http_origin_site_helpers</span></code> category reused by
+<code class="docutils literal notranslate"><span class="pre">http_cors</span></code> and <code class="docutils literal notranslate"><span class="pre">http_session</span></code> for absolute URL parsing,
+<code class="docutils literal notranslate"><span class="pre">Origin</span></code> parsing, normalized endpoint derivation, and schemeful
+same-site comparison using a bundled public suffix rule set with
+exact, wildcard, and exception cases</p></li>
 </ul>
 </section>
 <section id="normalized-terms">
@@ -500,6 +505,10 @@ body is generated.</p></li>
 of media types</p></li>
 <li><p>Header normalization is selective; headers outside the supported set
 are preserved as validated raw <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs</p></li>
+<li><p>The internal schemeful same-site helper uses bundled public suffix
+rules to tighten site classification for multi-label public suffixes
+and hosted domains, but automatic synchronization with the full
+Mozilla Public Suffix List remains out of scope</p></li>
 <li><p>The WebSocket support in this layer is limited to HTTP
 opening-handshake metadata normalization. <code class="docutils literal notranslate"><span class="pre">wss://</span></code> and TLS-backed
 transport orchestration are currently not supported</p></li>

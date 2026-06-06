@@ -15,7 +15,7 @@ HTTP cookie jar implementing explicit storage and request matching on top of the
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,11 +23,11 @@ HTTP cookie jar implementing explicit storage and request matching on top of the
 
 | **Imports:**
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`date <date/0>`
 |    :ref:`http_cookies(Representation) <http_cookies/1>`
-|    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 |    :ref:`url(Representation) <url/1>`
@@ -147,7 +147,7 @@ Stores normalized Set-Cookie terms for the given absolute URL, replacing existin
 ``request_cookies/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns the cookie name-value pairs currently applicable to the given absolute URL.
+Returns the cookie name-value pairs currently applicable to the given absolute URL using the convenience default ``request_context(get, source_url(URL), false)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -156,6 +156,25 @@ Returns the cookie name-value pairs currently applicable to the given absolute U
 |    ``request_cookies(Jar,URL,Cookies)``
 | **Mode and number of proofs:**
 |    ``request_cookies(+compound,+atom,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: request_cookies/4
+.. _http_cookie_jar/0::request_cookies/4:
+
+``request_cookies/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the cookie name-value pairs currently applicable to the given absolute URL for an explicit request context represented as ``request_context(Method, Source, TopLevelNavigation)`` where ``Source`` is either ``source_url(URL)`` for an absolute HTTP or HTTPS URL or ``source_origin(Origin)`` for a bare Origin header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_cookies(Jar,URL,RequestContext,Cookies)``
+| **Mode and number of proofs:**
+|    ``request_cookies(+compound,+atom,+compound,-list(compound))`` - ``one_or_error``
 
 
 ------------
@@ -282,10 +301,10 @@ Per-jar creation index counter state.
 
 ------------
 
-.. index:: jar_cookie_/10
-.. _http_cookie_jar/0::jar_cookie_/10:
+.. index:: jar_cookie_/11
+.. _http_cookie_jar/0::jar_cookie_/11:
 
-``jar_cookie_/10``
+``jar_cookie_/11``
 ^^^^^^^^^^^^^^^^^^
 
 Stored cookie entries indexed by jar identifier.
@@ -294,9 +313,9 @@ Stored cookie entries indexed by jar identifier.
 |    ``dynamic``
 
 | **Template:**
-|    ``jar_cookie_(JarId,Name,Domain,Path,Value,HostOnly,Secure,HttpOnly,Expiry,CreationIndex)``
+|    ``jar_cookie_(JarId,Name,Domain,Path,Value,HostOnly,Secure,HttpOnly,SameSite,Expiry,CreationIndex)``
 | **Mode and number of proofs:**
-|    ``jar_cookie_(?positive_integer,?atom,?atom,?atom,?atom,?boolean,?boolean,?boolean,?nonvar,?positive_integer)`` - ``zero_or_more``
+|    ``jar_cookie_(?positive_integer,?atom,?atom,?atom,?atom,?boolean,?boolean,?boolean,?nonvar,?nonvar,?positive_integer)`` - ``zero_or_more``
 
 
 ------------

@@ -78,11 +78,16 @@
 		http_core::target(Request, Target),
 		(	request_info_target_(Target) ->
 			request_info_response_(Request, Version, Response)
+		; 	cookie_info_target_(Target) ->
+			cookie_info_response_(Request, Version, Response)
 		;	echo_response_(Request, Version, Response)
 		).
 
 	request_info_target_(origin('/request-info')).
 	request_info_target_(origin('/request-info', _Query)).
+
+	cookie_info_target_(origin('/cookie-info')).
+	cookie_info_target_(origin('/cookie-info', _Query)).
 
 	request_info_response_(Request, Version, Response) :-
 		http_core::property(Request, query_pairs(QueryPairs)),
@@ -94,6 +99,14 @@
 		memberchk(session-Session, CookiePairs),
 		Body = {lang-Lang, page-Page, item-Item, session-Session, major-Major, minor-Minor},
 		http_core::response(Version, status(200, 'OK'), [], content('application/json', json(Body)), [], Response).
+
+	cookie_info_response_(Request, Version, Response) :-
+		( 	http_core::property(Request, cookies(CookiePairs)),
+			memberchk(session-Session, CookiePairs) ->
+			Body = content('text/plain', text(Session))
+		; 	Body = content('text/plain', text('none'))
+		),
+		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
 	echo_response_(Request, Version, Response) :-
 		http_core::body(Request, Body),

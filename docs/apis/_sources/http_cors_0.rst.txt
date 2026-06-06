@@ -15,7 +15,7 @@ Transport-neutral CORS request classification, preflight response generation, an
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-25
+| **Date:** 2026-06-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,7 +23,9 @@ Transport-neutral CORS request classification, preflight response generation, an
 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
 | **Uses:**
+|    :ref:`atom <atom/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 
@@ -31,7 +33,7 @@ Transport-neutral CORS request classification, preflight response generation, an
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -138,62 +140,7 @@ Decorates a normalized response with the relevant CORS response headers when the
 Protected predicates
 --------------------
 
-.. index:: valid_option/1
-.. _http_cors/0::valid_option/1:
-
-``valid_option/1``
-^^^^^^^^^^^^^^^^^^
-
-Validates supported CORS option terms.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``valid_option(Option)``
-| **Mode and number of proofs:**
-|    ``valid_option(+compound)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: default_option/1
-.. _http_cors/0::default_option/1:
-
-``default_option/1``
-^^^^^^^^^^^^^^^^^^^^
-
-Enumerates default CORS option terms.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``default_option(Option)``
-| **Mode and number of proofs:**
-|    ``default_option(-compound)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: fix_option/2
-.. _http_cors/0::fix_option/2:
-
-``fix_option/2``
-^^^^^^^^^^^^^^^^
-
-Normalizes option values by removing duplicate list elements while preserving the first occurrence order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``fix_option(Option,FixedOption)``
-| **Mode and number of proofs:**
-|    ``fix_option(+compound,-compound)`` - ``zero_or_one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------

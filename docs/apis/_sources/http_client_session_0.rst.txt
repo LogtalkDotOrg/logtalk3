@@ -15,7 +15,7 @@ Stateful HTTP client sessions that add cookie persistence on top of the stateles
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-02
+| **Date:** 2026-06-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,7 @@ Stateful HTTP client sessions that add cookie persistence on top of the stateles
 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
 | **Uses:**
 |    :ref:`http_client <http_client/0>`
 |    :ref:`http_cookie_jar <http_cookie_jar/0>`
@@ -126,7 +127,7 @@ Returns the configured cookie jar handle or the atom ``none`` when the session d
 ``request/5``
 ^^^^^^^^^^^^^
 
-Performs one HTTP request using session defaults and automatic cookie replay/storage.
+Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include ``source_url(URL)`` for an absolute HTTP or HTTPS URL, ``source_origin(Origin)`` for a bare Origin header value, and ``top_level_navigation(Boolean)`` to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to ``source_url(URL)`` and ``top_level_navigation(false)``.
 
 | **Compilation flags:**
 |    ``static``

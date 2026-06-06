@@ -40,6 +40,7 @@
 		http_json_body_codec,
 		http_form_body_codec,
 		http_core,
+		http_origin_site_helpers,
 		http_docroot_paths,
 		http_message_helpers
 	], [
