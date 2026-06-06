@@ -23,9 +23,9 @@
 	imports([ranking_dataset_common, score_ranker_model_common, condorcet_victory_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-06-06,
 		comment is 'Ranked Pairs pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by locking direct pairwise victories in descending strength order while avoiding cycles and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, schulze_ranker, copeland_ranker]
 	]).
@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2, nth1/3, reverse/2, sort/4
+		length/2, memberchk/2, nth1/3, sort/4
 	]).
 
 	:- uses(numberlist, [
@@ -132,18 +132,17 @@
 
 	lock_victories(Victories, Count, LockedPairs, LockedClosure) :-
 		^^zero_matrix(Count, LockedClosure0),
-		lock_victories(Victories, LockedClosure0, LockedClosure, [], LockedPairs0),
-		reverse(LockedPairs0, LockedPairs).
+		lock_victories_(Victories, LockedClosure0, LockedClosure, LockedPairs).
 
-	lock_victories([], LockedClosure, LockedClosure, LockedPairs, LockedPairs).
-	lock_victories([victory(WinnerIndex, LoserIndex, Winner, Loser, Strength)| Victories], LockedClosure0, LockedClosure, LockedPairs0, LockedPairs) :-
+	lock_victories_([], LockedClosure, LockedClosure, []).
+	lock_victories_([victory(WinnerIndex, LoserIndex, Winner, Loser, Strength)| Victories], LockedClosure0, LockedClosure, LockedPairs) :-
 		(   introduces_cycle(WinnerIndex, LoserIndex, LockedClosure0) ->
 			LockedClosure1 = LockedClosure0,
-			LockedPairs1 = LockedPairs0
+			LockedPairs = LockedPairs0
 		;   add_locked_edge(WinnerIndex, LoserIndex, LockedClosure0, LockedClosure1),
-			LockedPairs1 = [lock(Winner, Loser, Strength)| LockedPairs0]
+			LockedPairs = [lock(Winner, Loser, Strength)| LockedPairs0]
 		),
-		lock_victories(Victories, LockedClosure1, LockedClosure, LockedPairs1, LockedPairs).
+		lock_victories_(Victories, LockedClosure1, LockedClosure, LockedPairs0).
 
 	introduces_cycle(WinnerIndex, LoserIndex, LockedClosure) :-
 		^^matrix_entry(LockedClosure, LoserIndex, WinnerIndex, 1).

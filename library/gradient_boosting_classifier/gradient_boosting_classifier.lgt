@@ -23,9 +23,9 @@
 	imports(probabilistic_classifier_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-06-06,
 		comment is 'Gradient boosting classifier using multinomial additive models fitted by regression trees to softmax residuals.',
 		see_also is [dataset_protocol, regression_tree, gradient_boosting_regression, adaptive_boosting_classifier, random_forest_classifier]
 	]).
@@ -62,8 +62,7 @@
 		build_tree_options(Options, TreeOptions),
 		^^option(number_of_estimators(NumberOfEstimators), Options),
 		^^option(learning_rate(LearningRate), Options),
-		build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, 1, ScoreVectors0, [], StageTrees0),
-		reverse(StageTrees0, StageTrees),
+		build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, 1, ScoreVectors0, StageTrees),
 		Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, Options).
 
 	predict(Classifier, Instance, Class) :-
@@ -105,19 +104,20 @@
 		^^option(minimum_variance_reduction(MinimumVarianceReduction), Options),
 		^^option(feature_scaling(FeatureScaling), Options).
 
-	build_stages(_Classes, _Attributes, _Examples, NumberOfEstimators, _LearningRate, _TreeOptions, Round, ScoreVectors, StageTrees, StageTrees) :-
+	build_stages(_Classes, _Attributes, _Examples, NumberOfEstimators, _LearningRate, _TreeOptions, Round, ScoreVectors, []) :-
 		Round > NumberOfEstimators,
 		!,
 		ScoreVectors \== [].
-	build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, Round, ScoreVectors0, StageTrees0, StageTrees) :-
+	build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, Round, ScoreVectors0, StageTrees) :-
 		probability_vectors(ScoreVectors0, ProbabilityVectors),
 		build_stage_trees(Classes, Attributes, Examples, ProbabilityVectors, LearningRate, TreeOptions, 1, [], ReversedClassTrees, 0.0, MaxResidual),
 		reverse(ReversedClassTrees, ClassTrees),
 		(   MaxResidual =< 1.0e-8 ->
-			StageTrees = StageTrees0
+			StageTrees = []
 		;   update_score_vectors(Examples, Classes, ClassTrees, ScoreVectors0, ScoreVectors1),
 			NextRound is Round + 1,
-			build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, NextRound, ScoreVectors1, [stage_trees(ClassTrees)| StageTrees0], StageTrees)
+			StageTrees = [stage_trees(ClassTrees)| StageTrees0],
+			build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, NextRound, ScoreVectors1, StageTrees0)
 		).
 
 	probability_vectors([], []).

@@ -1008,9 +1008,9 @@
 
 	path_error(ReversePath, Reason0, Reason) :-
 		reverse(ReversePath, Path),
-		( atom(Reason0) ->
+		(	atom(Reason0) ->
 			Reason =.. [Reason0, Path]
-		; Reason0 =.. [Functor| Arguments],
+		;	Reason0 =.. [Functor| Arguments],
 			append(Arguments, [Path], ArgumentsWithPath),
 			Reason =.. [Functor| ArgumentsWithPath]
 		).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-06-06,
 		comment is 'Rank Centrality pairwise preference ranker. Learns one stationary probability score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by applying power iteration to the Rank Centrality Markov chain built from aggregated head-to-head outcomes, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry_ranker, copeland_ranker]
 	]).
@@ -40,7 +40,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, nth1/3, reverse/2
+		length/2, member/2, memberchk/2, nth1/3
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -321,8 +321,7 @@
 		dictionary_new(ForwardVisited0),
 		finish_order(1, Count, DirectedAdjacency, ForwardVisited0, [], _ForwardVisited, Order),
 		dictionary_new(ReverseVisited0),
-		collect_components(Order, ReverseAdjacency, ReverseVisited0, [], _ReverseVisited, Components0),
-		reverse(Components0, Components).
+		collect_components(Order, ReverseAdjacency, ReverseVisited0, _ReverseVisited, Components).
 
 	finish_order(Index, Count, _DirectedAdjacency, Visited, Order, Visited, Order) :-
 		Index > Count,
@@ -350,15 +349,15 @@
 		),
 		dfs_finish_neighbors(Neighbors, DirectedAdjacency, Visited1, Order1, Visited, Order).
 
-	collect_components([], _ReverseAdjacency, Visited, Components, Visited, Components).
-	collect_components([Index| Indices], ReverseAdjacency, Visited0, Components0, Visited, Components) :-
+	collect_components([], _ReverseAdjacency, Visited, Visited, []).
+	collect_components([Index| Indices], ReverseAdjacency, Visited0, Visited, Components) :-
 		(	dictionary_lookup(Index, _Seen, Visited0) ->
 			Visited1 = Visited0,
-			Components1 = Components0
+			Components = Components0
 		;	dfs_collect(Index, ReverseAdjacency, Visited0, [], Visited1, Component),
-			Components1 = [Component| Components0]
+			Components = [Component| Components0]
 		),
-		collect_components(Indices, ReverseAdjacency, Visited1, Components1, Visited, Components).
+		collect_components(Indices, ReverseAdjacency, Visited1, Visited, Components0).
 
 	dfs_collect(Index, ReverseAdjacency, Visited0, Component0, Visited, Component) :-
 		dictionary_insert(Visited0, Index, true, Visited1),
