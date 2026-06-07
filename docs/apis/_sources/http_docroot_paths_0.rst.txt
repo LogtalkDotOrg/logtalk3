@@ -1,0 +1,169 @@
+.. index:: single: http_docroot_paths
+.. _http_docroot_paths/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_docroot_paths``
+======================
+
+Shared helpers for validating requests and sandboxing document-root relative paths.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: validate_relative_path/1
+.. _http_docroot_paths/0::validate_relative_path/1:
+
+``validate_relative_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a document-root relative request path atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_relative_path(Path)``
+| **Mode and number of proofs:**
+|    ``validate_relative_path(+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate_request/1
+.. _http_docroot_paths/0::validate_request/1:
+
+``validate_request/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a normalized HTTP request term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_request(Request)``
+| **Mode and number of proofs:**
+|    ``validate_request(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate_document_root/1
+.. _http_docroot_paths/0::validate_document_root/1:
+
+``validate_document_root/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates an absolute document root path atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_document_root(DocumentRoot)``
+| **Mode and number of proofs:**
+|    ``validate_document_root(+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: supported_method/1
+.. _http_docroot_paths/0::supported_method/1:
+
+``supported_method/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when the request method is supported for document-root serving, currently ``get`` or ``head``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_method(Request)``
+| **Mode and number of proofs:**
+|    ``supported_method(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: resolved_target_path/3
+.. _http_docroot_paths/0::resolved_target_path/3:
+
+``resolved_target_path/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Resolves a request path against a document root and succeeds only when the resulting path stays within that root.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resolved_target_path(Path,Root,Candidate)``
+| **Mode and number of proofs:**
+|    ``resolved_target_path(+atom,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: path_within_root/2
+.. _http_docroot_paths/0::path_within_root/2:
+
+``path_within_root/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when the candidate path is the document root itself or a path nested under it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_within_root(Root,Candidate)``
+| **Mode and number of proofs:**
+|    ``path_within_root(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

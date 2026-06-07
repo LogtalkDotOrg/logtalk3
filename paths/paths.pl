@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 17, 2026
+%  Last updated on June 4, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -138,6 +138,7 @@ logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(colley_ranker, library('colley_ranker/')).
 logtalk_library_path(copeland_ranker, library('copeland_ranker/')).
 logtalk_library_path(coroutining, library('coroutining/')).
+logtalk_library_path(crypto, library('crypto/')).
 logtalk_library_path(crs_projections, library('crs_projections/')).
 logtalk_library_path(ccsds_frames, library('ccsds_frames/')).
 logtalk_library_path(ccsds_link_profiles, library('ccsds_link_profiles/')).
@@ -196,7 +197,26 @@ logtalk_library_path(hodge_rank, library('hodge_rank/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).
 logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
-logtalk_library_path(ica_projection, library('ica_projection/')).
+logtalk_library_path(http_authenticate, library('http_authenticate/')).
+logtalk_library_path(http_client, library('http_client/')).
+logtalk_library_path(http_cookies, library('http_cookies/')).
+logtalk_library_path(http_core, library('http_core/')).
+logtalk_library_path(http_cors, library('http_cors/')).
+logtalk_library_path(http_digest, library('http_digest/')).
+logtalk_library_path(http_directory_listing, library('http_directory_listing/')).
+logtalk_library_path(http_htmx, library('http_htmx/')).
+logtalk_library_path(http_multipart, library('http_multipart/')).
+logtalk_library_path(http_parameters, library('http_parameters/')).
+logtalk_library_path(http_router, library('http_router/')).
+logtalk_library_path(http_server, library('http_server/')).
+logtalk_library_path(http_session, library('http_session/')).
+logtalk_library_path(http_socket, library('http_socket/')).
+logtalk_library_path(http_static_files, library('http_static_files/')).
+logtalk_library_path(http_websocket, library('http_websocket/')).
+logtalk_library_path(http_websocket_frames, library('http_websocket_frames/')).
+logtalk_library_path(http_websocket_handshake, library('http_websocket_handshake/')).
+logtalk_library_path(http_websocket_messages, library('http_websocket_messages/')).
+logtalk_library_path(http_websocket_session, library('http_websocket_session/')).
 logtalk_library_path(ica_projection, library('ica_projection/')).
 logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(ieee_754, library('ieee_754/')).
@@ -286,6 +306,7 @@ logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(regression_protocols, library('regression_protocols/')).
 logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(regularized_bradley_terry_ranker, library('regularized_bradley_terry_ranker/')).
+logtalk_library_path(rest, library('rest/')).
 logtalk_library_path(ridge_regression, library('ridge_regression/')).
 logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
@@ -395,6 +416,15 @@ logtalk_library_path(hanoi, threads('hanoi/')).
 logtalk_library_path(haunted_wasteland, examples('haunted_wasteland/')).
 logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
+logtalk_library_path(http_cookies_counter, examples('http_cookies_counter/')).
+logtalk_library_path(http_htmx_panel, examples('http_htmx_panel/')).
+logtalk_library_path(http_open_api, examples('http_open_api/')).
+logtalk_library_path(http_rest_greetings, examples('http_rest_greetings/')).
+logtalk_library_path(http_rest_open_meteo, examples('http_rest_open_meteo/')).
+logtalk_library_path(http_static_site, examples('http_static_site/')).
+logtalk_library_path(http_static_site_digest, examples('http_static_site_digest/')).
+logtalk_library_path(http_static_site_basic, examples('http_static_site_basic/')).
+logtalk_library_path(http_websocket_echo, examples('http_websocket_echo/')).
 logtalk_library_path(includes, examples('includes/')).
 logtalk_library_path(inheritance, examples('inheritance/')).
 logtalk_library_path(inlining, examples('inlining/')).

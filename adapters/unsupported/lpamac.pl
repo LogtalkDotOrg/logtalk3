@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -339,6 +339,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_feature'(prolog_compatible_version, '=='(v(1,25))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
+'$lgt_prolog_feature'(sockets, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).

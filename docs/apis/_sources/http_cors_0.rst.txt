@@ -1,0 +1,154 @@
+.. index:: single: http_cors
+.. _http_cors/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_cors``
+=============
+
+Transport-neutral CORS request classification, preflight response generation, and response decoration helpers for normalized HTTP messages.
+
+| **Availability:** 
+|    ``logtalk_load(http_cors(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: request_origin/2
+.. _http_cors/0::request_origin/2:
+
+``request_origin/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the single request ``Origin`` header value when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_origin(Request,Origin)``
+| **Mode and number of proofs:**
+|    ``request_origin(+compound,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_cors_request/1
+.. _http_cors/0::is_cors_request/1:
+
+``is_cors_request/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the request carries a single ``Origin`` header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_cors_request(Request)``
+| **Mode and number of proofs:**
+|    ``is_cors_request(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: is_preflight_request/1
+.. _http_cors/0::is_preflight_request/1:
+
+``is_preflight_request/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the request is a CORS preflight request with method ``options`` and a single ``Access-Control-Request-Method`` header value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_preflight_request(Request)``
+| **Mode and number of proofs:**
+|    ``is_preflight_request(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: preflight_response/3
+.. _http_cors/0::preflight_response/3:
+
+``preflight_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a normalized CORS preflight response using the given policy options. Allowed preflight requests return ``200 OK`` with the relevant ``Access-Control-*`` headers and denied requests return ``403 Forbidden``. Non-preflight requests raise an error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``preflight_response(Request,Response,Options)``
+| **Mode and number of proofs:**
+|    ``preflight_response(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: add_response_headers/4
+.. _http_cors/0::add_response_headers/4:
+
+``add_response_headers/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decorates a normalized response with the relevant CORS response headers when the request matches and the policy allows it. Denied requests preserve or add cache-relevant ``Vary`` metadata but do not add permission headers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_response_headers(Request,Response0,Response,Options)``
+| **Mode and number of proofs:**
+|    ``add_response_headers(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

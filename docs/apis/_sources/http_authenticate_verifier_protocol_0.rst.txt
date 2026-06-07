@@ -1,0 +1,74 @@
+.. index:: single: http_authenticate_verifier_protocol
+.. _http_authenticate_verifier_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_authenticate_verifier_protocol``
+=======================================
+
+Protocol for HTTP Basic authentication verifiers backed by application-defined credential stores.
+
+| **Availability:** 
+|    ``logtalk_load(http_authenticate(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: verify/3
+.. _http_authenticate_verifier_protocol/0::verify/3:
+
+``verify/3``
+^^^^^^^^^^^^
+
+Succeeds when the plaintext password is valid for the given realm and username.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify(Realm,Username,Password)``
+| **Mode and number of proofs:**
+|    ``verify(++atom,++atom,++atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

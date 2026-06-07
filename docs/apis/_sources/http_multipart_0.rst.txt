@@ -1,0 +1,400 @@
+.. index:: single: http_multipart
+.. _http_multipart/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_multipart``
+==================
+
+Multipart helper predicates built on top of the normalized body and part terms provided by the http library.
+
+| **Availability:** 
+|    ``logtalk_load(http_multipart(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: body/3
+.. _http_multipart/0::body/3:
+
+``body/3``
+^^^^^^^^^^
+
+Constructs a validated normalized multipart body term from a multipart media type atom and a list of multipart parts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``body(MediaType,Parts,Body)``
+| **Mode and number of proofs:**
+|    ``body(+atom,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: is_body/1
+.. _http_multipart/0::is_body/1:
+
+``is_body/1``
+^^^^^^^^^^^^^
+
+True when the argument is a valid normalized multipart body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_body(Body)``
+| **Mode and number of proofs:**
+|    ``is_body(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse/4
+.. _http_multipart/0::parse/4:
+
+``parse/4``
+^^^^^^^^^^^
+
+Parses a multipart body from a source term by delegating to the underlying http_core::parse_body/4 predicate after validating the media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,MediaType,Options,Body)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,+atom,+list,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/3
+.. _http_multipart/0::generate/3:
+
+``generate/3``
+^^^^^^^^^^^^^^
+
+Generates a multipart body to a sink term by delegating to the underlying http_core::generate_body/3 predicate after validating the multipart body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Body,Options)``
+| **Mode and number of proofs:**
+|    ``generate(++compound,+compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: media_type/2
+.. _http_multipart/0::media_type/2:
+
+``media_type/2``
+^^^^^^^^^^^^^^^^
+
+Returns the media type atom of a validated multipart body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``media_type(Body,MediaType)``
+| **Mode and number of proofs:**
+|    ``media_type(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parts/2
+.. _http_multipart/0::parts/2:
+
+``parts/2``
+^^^^^^^^^^^
+
+Returns the list of multipart part terms of a validated multipart body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parts(Body,Parts)``
+| **Mode and number of proofs:**
+|    ``parts(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: fields/2
+.. _http_multipart/0::fields/2:
+
+``fields/2``
+^^^^^^^^^^^^
+
+Returns the list of form-data field name-value pairs found in a validated multipart/form-data body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fields(Body,Fields)``
+| **Mode and number of proofs:**
+|    ``fields(+compound,-list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: files/2
+.. _http_multipart/0::files/2:
+
+``files/2``
+^^^^^^^^^^^
+
+Returns the list of form-data file descriptors found in a validated multipart/form-data body, preserving part order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``files(Body,Files)``
+| **Mode and number of proofs:**
+|    ``files(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: part/4
+.. _http_multipart/0::part/4:
+
+``part/4``
+^^^^^^^^^^
+
+Constructs a validated normalized multipart part term from headers, body, and properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``part(Headers,Body,Properties,Part)``
+| **Mode and number of proofs:**
+|    ``part(+list(compound),+compound,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: is_part/1
+.. _http_multipart/0::is_part/1:
+
+``is_part/1``
+^^^^^^^^^^^^^
+
+True when the argument is a valid normalized multipart part term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_part(Part)``
+| **Mode and number of proofs:**
+|    ``is_part(@term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: part_headers/2
+.. _http_multipart/0::part_headers/2:
+
+``part_headers/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the headers of a validated multipart part term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``part_headers(Part,Headers)``
+| **Mode and number of proofs:**
+|    ``part_headers(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: part_body/2
+.. _http_multipart/0::part_body/2:
+
+``part_body/2``
+^^^^^^^^^^^^^^^
+
+Returns the body of a validated multipart part term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``part_body(Part,Body)``
+| **Mode and number of proofs:**
+|    ``part_body(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: part_properties/2
+.. _http_multipart/0::part_properties/2:
+
+``part_properties/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the properties of a validated multipart part term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``part_properties(Part,Properties)``
+| **Mode and number of proofs:**
+|    ``part_properties(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: field/3
+.. _http_multipart/0::field/3:
+
+``field/3``
+^^^^^^^^^^^
+
+True when the validated multipart part is a textual form-data field part, returning its field name and text value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``field(Part,Name,Value)``
+| **Mode and number of proofs:**
+|    ``field(+compound,-atom,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: file/5
+.. _http_multipart/0::file/5:
+
+``file/5``
+^^^^^^^^^^
+
+True when the validated multipart part is a form-data file part, returning its field name, filename, media type, and payload term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file(Part,Name,Filename,MediaType,Payload)``
+| **Mode and number of proofs:**
+|    ``file(+compound,-atom,-atom,-atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: field_part/3
+.. _http_multipart/0::field_part/3:
+
+``field_part/3``
+^^^^^^^^^^^^^^^^
+
+Constructs a normalized multipart part for a textual form-data field using a content-disposition header and a text/plain body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``field_part(Name,Value,Part)``
+| **Mode and number of proofs:**
+|    ``field_part(+atom,+term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: file_part/5
+.. _http_multipart/0::file_part/5:
+
+``file_part/5``
+^^^^^^^^^^^^^^^
+
+Constructs a normalized multipart part for a form-data file using a content-disposition header and the given media type and payload.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_part(Name,Filename,MediaType,Payload,Part)``
+| **Mode and number of proofs:**
+|    ``file_part(+atom,+atom,+atom,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: form_data_body/2
+.. _http_multipart/0::form_data_body/2:
+
+``form_data_body/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Constructs a multipart/form-data body from an ordered list of field(Name, Value) and file(Name, Filename, MediaType, Payload) descriptors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``form_data_body(Items,Body)``
+| **Mode and number of proofs:**
+|    ``form_data_body(+list,-compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

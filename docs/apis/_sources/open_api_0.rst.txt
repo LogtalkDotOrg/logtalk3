@@ -1,0 +1,573 @@
+.. index:: single: open_api
+.. _open_api/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_api``
+============
+
+OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.
+
+| **Availability:** 
+|    ``logtalk_load(open_api(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`http_json_term_helpers <http_json_term_helpers/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`json <json/0>`
+|    :ref:`json_schema <json_schema/0>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: document/2
+.. _open_api/0::document/2:
+
+``document/2``
+^^^^^^^^^^^^^^
+
+Derives an OpenAPI 3.1.0 document in the repository-standard JSON term representation from an object implementing the ``open_api_provider_protocol`` protocol. When the provider also implements the ``application_protocol`` protocol, missing ``description`` and ``license`` info fields may be backfilled from application metadata and ``homepage/1`` may be mapped to the top-level ``externalDocs`` object. Top-level security defaults declared by ``security/1`` are emitted under the root ``security`` field. Reusable security schemes declared by ``security_scheme/2`` are emitted under ``components.securitySchemes`` and referenced scheme names and OAuth flow scopes are validated against those declarations when locally available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``document(Provider,Document)``
+| **Mode and number of proofs:**
+|    ``document(+object_identifier,-compound)`` - ``one``
+
+
+------------
+
+.. index:: parse/2
+.. _open_api/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses an OpenAPI document from the given source (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) into the JSON term representation used by the ``json`` library.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Document)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate/2
+.. _open_api/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) for an OpenAPI document term using JSON serialization.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Document)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate_document/1
+.. _open_api/0::validate_document/1:
+
+``validate_document/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds if the given OpenAPI document term is valid according to the phase-1 OpenAPI validation schema.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_document(Document)``
+| **Mode and number of proofs:**
+|    ``validate_document(+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate_document/2
+.. _open_api/0::validate_document/2:
+
+``validate_document/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates an OpenAPI document term and returns a list of validation errors (empty list if valid).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_document(Document,Errors)``
+| **Mode and number of proofs:**
+|    ``validate_document(+term,--list)`` - ``one``
+
+
+------------
+
+.. index:: operation/3
+.. _open_api/0::operation/3:
+
+``operation/3``
+^^^^^^^^^^^^^^^
+
+Resolves an operation descriptor exposed by a provider object using its ``operationId`` atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operation(Provider,OperationId,Operation)``
+| **Mode and number of proofs:**
+|    ``operation(+object_identifier,+atom,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate_request/3
+.. _open_api/0::validate_request/3:
+
+``validate_request/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the given normalized HTTP request term or object implementing the ``http_request_protocol`` protocol conforms to the provider operation descriptor identified by the given ``operationId``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_request(Provider,OperationId,Request)``
+| **Mode and number of proofs:**
+|    ``validate_request(+object_identifier,+atom,++term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate_request/4
+.. _open_api/0::validate_request/4:
+
+``validate_request/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a normalized HTTP request term or an object implementing the ``http_request_protocol`` protocol against the provider operation descriptor identified by the given ``operationId`` and returns any contract errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_request(Provider,OperationId,Request,Errors)``
+| **Mode and number of proofs:**
+|    ``validate_request(+object_identifier,+atom,++term,--list)`` - ``one``
+
+
+------------
+
+.. index:: validate_http_request/3
+.. _open_api/0::validate_http_request/3:
+
+``validate_http_request/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when an HTTP request wire source parsed by the ``http_core`` library conforms to the provider operation descriptor identified by the given ``operationId``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_http_request(Provider,OperationId,Source)``
+| **Mode and number of proofs:**
+|    ``validate_http_request(+object_identifier,+atom,++compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate_http_request/4
+.. _open_api/0::validate_http_request/4:
+
+``validate_http_request/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an HTTP request wire source using the ``http_core`` library and validates the resulting normalized request against the provider operation descriptor identified by the given ``operationId``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_http_request(Provider,OperationId,Source,Errors)``
+| **Mode and number of proofs:**
+|    ``validate_http_request(+object_identifier,+atom,++compound,--list)`` - ``one``
+
+
+------------
+
+.. index:: validate_response/3
+.. _open_api/0::validate_response/3:
+
+``validate_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the given normalized HTTP response term or object implementing the ``http_response_protocol`` protocol conforms to the provider operation descriptor identified by the given ``operationId``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_response(Provider,OperationId,Response)``
+| **Mode and number of proofs:**
+|    ``validate_response(+object_identifier,+atom,++term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate_response/4
+.. _open_api/0::validate_response/4:
+
+``validate_response/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a normalized HTTP response term or an object implementing the ``http_response_protocol`` protocol against the provider operation descriptor identified by the given ``operationId`` and returns any contract errors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_response(Provider,OperationId,Response,Errors)``
+| **Mode and number of proofs:**
+|    ``validate_response(+object_identifier,+atom,++term,--list)`` - ``one``
+
+
+------------
+
+.. index:: validate_http_response/3
+.. _open_api/0::validate_http_response/3:
+
+``validate_http_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when an HTTP response wire source parsed by the ``http_core`` library conforms to the provider operation descriptor identified by the given ``operationId``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_http_response(Provider,OperationId,Source)``
+| **Mode and number of proofs:**
+|    ``validate_http_response(+object_identifier,+atom,++compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate_http_response/4
+.. _open_api/0::validate_http_response/4:
+
+``validate_http_response/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an HTTP response wire source using the ``http_core`` library and validates the resulting normalized response against the provider operation descriptor identified by the given ``operationId``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_http_response(Provider,OperationId,Source,Errors)``
+| **Mode and number of proofs:**
+|    ``validate_http_response(+object_identifier,+atom,++compound,--list)`` - ``one``
+
+
+------------
+
+.. index:: json_media_descriptor/2
+.. _open_api/0::json_media_descriptor/2:
+
+``json_media_descriptor/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI JSON media descriptor using the default ``application/json`` media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_media_descriptor(Schema,MediaDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_media_descriptor(++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
+
+
+------------
+
+.. index:: json_media_descriptor/3
+.. _open_api/0::json_media_descriptor/3:
+
+``json_media_descriptor/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI JSON media descriptor using the given media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_media_descriptor(MediaType,Schema,MediaDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_media_descriptor(+atom,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``MediaType`` is a variable:
+|        ``instantiation_error``
+|    ``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom:
+|        ``domain_error(open_api_media_type,MediaType)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
+
+
+------------
+
+.. index:: json_request_body_descriptor/4
+.. _open_api/0::json_request_body_descriptor/4:
+
+``json_request_body_descriptor/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI request-body descriptor using the default ``application/json`` media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_request_body_descriptor(Description,Required,Schema,RequestBody)``
+| **Mode and number of proofs:**
+|    ``json_request_body_descriptor(+atom,+boolean,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``Required`` is a variable:
+|        ``instantiation_error``
+|    ``Required`` is neither a variable nor a boolean:
+|        ``domain_error(open_api_boolean,Required)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
+
+
+------------
+
+.. index:: json_request_body_descriptor/5
+.. _open_api/0::json_request_body_descriptor/5:
+
+``json_request_body_descriptor/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI request-body descriptor using the given media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_request_body_descriptor(MediaType,Description,Required,Schema,RequestBody)``
+| **Mode and number of proofs:**
+|    ``json_request_body_descriptor(+atom,+atom,+boolean,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``MediaType`` is a variable:
+|        ``instantiation_error``
+|    ``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom:
+|        ``domain_error(open_api_media_type,MediaType)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``Required`` is a variable:
+|        ``instantiation_error``
+|    ``Required`` is neither a variable nor a boolean:
+|        ``domain_error(open_api_boolean,Required)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
+
+
+------------
+
+.. index:: json_response_descriptor/4
+.. _open_api/0::json_response_descriptor/4:
+
+``json_response_descriptor/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI response descriptor using the default ``application/json`` media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_response_descriptor(Status,Description,Schema,ResponseDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_response_descriptor(++term,+atom,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is a variable:
+|        ``instantiation_error``
+|    ``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``'2XX'``:
+|        ``domain_error(open_api_response_status,Status)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
+
+
+------------
+
+.. index:: json_response_descriptor/5
+.. _open_api/0::json_response_descriptor/5:
+
+``json_response_descriptor/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI response descriptor using the given media type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_response_descriptor(Status,Description,MediaType,Schema,ResponseDescriptor)``
+| **Mode and number of proofs:**
+|    ``json_response_descriptor(++term,+atom,+atom,++term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is a variable:
+|        ``instantiation_error``
+|    ``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``'2XX'``:
+|        ``domain_error(open_api_response_status,Status)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+|    ``MediaType`` is a variable:
+|        ``instantiation_error``
+|    ``MediaType`` is neither a variable nor a JSON-compatible HTTP media type atom:
+|        ``domain_error(open_api_media_type,MediaType)``
+|    ``Schema`` is a variable:
+|        ``instantiation_error``
+|    ``Schema`` is neither a boolean schema nor a JSON object schema term nor a ``schema_ref/1`` term:
+|        ``domain_error(open_api_json_schema_term,Schema)``
+
+
+------------
+
+.. index:: problem_json_schema/1
+.. _open_api/0::problem_json_schema/1:
+
+``problem_json_schema/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an inline RFC 7807-compatible JSON schema for problem responses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problem_json_schema(Schema)``
+| **Mode and number of proofs:**
+|    ``problem_json_schema(-term)`` - ``one``
+
+
+------------
+
+.. index:: problem_response_descriptor/3
+.. _open_api/0::problem_response_descriptor/3:
+
+``problem_response_descriptor/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Constructs an OpenAPI problem-response descriptor using the ``application/problem+json`` media type and the default problem schema.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problem_response_descriptor(Status,Description,ResponseDescriptor)``
+| **Mode and number of proofs:**
+|    ``problem_response_descriptor(++term,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Status`` is a variable:
+|        ``instantiation_error``
+|    ``Status`` is neither a variable nor ``default`` nor an integer in the ``100..599`` range nor a wildcard status atom such as ``'2XX'``:
+|        ``domain_error(open_api_response_status,Status)``
+|    ``Description`` is a variable:
+|        ``instantiation_error``
+|    ``Description`` is neither a variable nor an atom:
+|        ``domain_error(open_api_description,Description)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`json <json/0>`, :ref:`json_schema <json_schema/0>`, :ref:`application_protocol <application_protocol/0>`, :ref:`open_api_provider_protocol <open_api_provider_protocol/0>`
+

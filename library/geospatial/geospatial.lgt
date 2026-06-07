@@ -555,11 +555,11 @@
 		valid_bbox(BoundingBox),
 		valid_coordinate(Coordinate1),
 		valid_coordinate(Coordinate2),
-		( 	bbox_contains(BoundingBox, Coordinate1) ->
+		(	bbox_contains(BoundingBox, Coordinate1) ->
 			true
-		; 	bbox_segment_intersects(BoundingBox, Coordinate1, Coordinate2) ->
+		;	bbox_segment_intersects(BoundingBox, Coordinate1, Coordinate2) ->
 			true
-		; 	bbox_intersects_polyline(BoundingBox, Coordinate2, Coordinates)
+		;	bbox_intersects_polyline(BoundingBox, Coordinate2, Coordinates)
 		).
 
 	valid_bbox(bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))) :-
@@ -624,22 +624,22 @@
 		fail.
 	bbox_intersects_polyline(BoundingBox, Previous, [Coordinate| Coordinates]) :-
 		valid_coordinate(Coordinate),
-		( 	bbox_contains(BoundingBox, Coordinate) ->
+		(	bbox_contains(BoundingBox, Coordinate) ->
 			true
-		; 	bbox_segment_intersects(BoundingBox, Previous, Coordinate) ->
+		;	bbox_segment_intersects(BoundingBox, Previous, Coordinate) ->
 			true
-		; 	bbox_intersects_polyline(BoundingBox, Coordinate, Coordinates)
+		;	bbox_intersects_polyline(BoundingBox, Coordinate, Coordinates)
 		).
 
 	bbox_segment_intersects(BoundingBox, Coordinate1, Coordinate2) :-
 		bbox_polygon(BoundingBox, [Corner1, Corner2, Corner3, Corner4]),
-		( 	segments_intersect(Coordinate1, Coordinate2, Corner1, Corner2) ->
+		(	segments_intersect(Coordinate1, Coordinate2, Corner1, Corner2) ->
 			true
-		; 	segments_intersect(Coordinate1, Coordinate2, Corner2, Corner3) ->
+		;	segments_intersect(Coordinate1, Coordinate2, Corner2, Corner3) ->
 			true
-		; 	segments_intersect(Coordinate1, Coordinate2, Corner3, Corner4) ->
+		;	segments_intersect(Coordinate1, Coordinate2, Corner3, Corner4) ->
 			true
-		; 	segments_intersect(Coordinate1, Coordinate2, Corner4, Corner1)
+		;	segments_intersect(Coordinate1, Coordinate2, Corner4, Corner1)
 		).
 
 	point_to_polyline_distance(Point, [Coordinate1, Coordinate2| Coordinates], Distance) :-

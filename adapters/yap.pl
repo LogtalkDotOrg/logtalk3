@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -342,6 +342,7 @@
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(v(6,3,4))).
 
 '$lgt_prolog_feature'(encoding_directive, full).
+'$lgt_prolog_feature'(sockets, unsupported).
 '$lgt_prolog_feature'(tabling, Tabling) :-
 	(	current_prolog_flag(system_options, tabling) ->
 		Tabling = supported

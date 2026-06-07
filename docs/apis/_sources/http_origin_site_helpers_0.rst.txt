@@ -1,0 +1,154 @@
+.. index:: single: http_origin_site_helpers
+.. _http_origin_site_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_origin_site_helpers``
+============================
+
+Internal shared helpers for parsing HTTP origins and absolute URLs, deriving request endpoints, and comparing endpoints for schemeful same-site semantics.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: absolute_url_context/2
+.. _http_origin_site_helpers/0::absolute_url_context/2:
+
+``absolute_url_context/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an absolute HTTP or HTTPS URL atom into a normalized endpoint and request path context.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``absolute_url_context(URL,Context)``
+| **Mode and number of proofs:**
+|    ``absolute_url_context(+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: origin_endpoint/2
+.. _http_origin_site_helpers/0::origin_endpoint/2:
+
+``origin_endpoint/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Parses an Origin header atom into a normalized HTTP or HTTPS endpoint.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``origin_endpoint(Origin,Endpoint)``
+| **Mode and number of proofs:**
+|    ``origin_endpoint(+atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: request_endpoint/2
+.. _http_origin_site_helpers/0::request_endpoint/2:
+
+``request_endpoint/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Derives a normalized HTTP or HTTPS endpoint from normalized request properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_endpoint(Request,Endpoint)``
+| **Mode and number of proofs:**
+|    ``request_endpoint(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: same_site/2
+.. _http_origin_site_helpers/0::same_site/2:
+
+``same_site/2``
+^^^^^^^^^^^^^^^
+
+Succeeds when two normalized endpoints or URL contexts are schemefully same-site using bundled public suffix rules, including exact, wildcard, and exception cases.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``same_site(Left,Right)``
+| **Mode and number of proofs:**
+|    ``same_site(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: host_labels/2
+.. _http_origin_site_helpers/0::host_labels/2:
+
+``host_labels/2``
+^^^^^^^^^^^^^^^^^
+
+Splits a normalized host atom into non-empty dot-separated labels.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``host_labels(Host,Labels)``
+| **Mode and number of proofs:**
+|    ``host_labels(+atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

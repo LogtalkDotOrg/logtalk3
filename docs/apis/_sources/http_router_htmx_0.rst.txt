@@ -1,0 +1,94 @@
+.. index:: single: http_router_htmx
+.. _http_router_htmx/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_router_htmx``
+====================
+
+Optional HTMX middleware helpers for router objects importing the ``http_router`` category.
+
+| **Availability:** 
+|    ``logtalk_load(http_htmx(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_htmx <http_htmx/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: annotate_htmx_request/2
+.. _http_router_htmx/0::annotate_htmx_request/2:
+
+``annotate_htmx_request/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Router middleware helper that annotates a normalized request with derived HTMX properties and continues the middleware chain.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``annotate_htmx_request(Request,Action)``
+| **Mode and number of proofs:**
+|    ``annotate_htmx_request(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: add_htmx_response_headers/3
+.. _http_router_htmx/0::add_htmx_response_headers/3:
+
+``add_htmx_response_headers/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Router response-middleware helper that decorates a normalized response using ``htmx_response_options/1`` request or response properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_htmx_response_headers(Request,Response0,Response)``
+| **Mode and number of proofs:**
+|    ``add_htmx_response_headers(+compound,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

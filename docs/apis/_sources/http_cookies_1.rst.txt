@@ -1,0 +1,309 @@
+.. index:: single: http_cookies(Representation)
+.. _http_cookies/1:
+
+.. rst-class:: right
+
+**object**
+
+``http_cookies(Representation)``
+================================
+
+* ``Representation`` - Cookie header representation. Valid values are ``atom``, ``chars``, and ``codes``.
+
+
+HTTP Cookie and Set-Cookie header parsing and generation predicates implementing RFC 6265 syntax.
+
+| **Availability:** 
+|    ``logtalk_load(http_cookies(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Cookie header pairs: Cookie header values are represented as ``Name-Value`` pairs.
+   - Set-Cookie components: Set-Cookie header values are represented by a cookie name, a cookie value, and an attribute list where attributes use ``Key-Value`` notation such as ``expires-date_time(Year, Month, Day, Hours, Minutes, Seconds)``, ``max_age-Seconds``, ``domain-Domain``, ``path-Path``, ``secure-true``, ``http_only-true``, ``same_site-lax``, ``partitioned-true``, ``priority-high``, and ``extension-Attribute``.
+   - Extension attributes: Unknown Set-Cookie attributes are preserved verbatim as ``extension-Attribute`` pairs as long as they do not use a reserved RFC 6265 attribute name.
+   - Expires attribute: The ``Expires`` attribute value is normalized to a ``date_time(Year, Month, Day, Hours, Minutes, Seconds)`` term and generated back using the canonical HTTP-date representation.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid_cookie/1
+.. _http_cookies/1::valid_cookie/1:
+
+``valid_cookie/1``
+^^^^^^^^^^^^^^^^^^
+
+True iff the argument is a valid HTTP ``Cookie`` header field value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_cookie(Cookie)``
+| **Mode and number of proofs:**
+|    ``valid_cookie(++text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_cookie/2
+.. _http_cookies/1::parse_cookie/2:
+
+``parse_cookie/2``
+^^^^^^^^^^^^^^^^^^
+
+Parses a ``Cookie`` header field value into a list of ``Name-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_cookie(Cookie,Pairs)``
+| **Mode and number of proofs:**
+|    ``parse_cookie(++text,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: generate_cookie/2
+.. _http_cookies/1::generate_cookie/2:
+
+``generate_cookie/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Generates a canonical ``Cookie`` header field value from a list of ``Name-Value`` pairs using ``;`` as the separator.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_cookie(Pairs,Cookie)``
+| **Mode and number of proofs:**
+|    ``generate_cookie(++list(compound),-text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_set_cookie/1
+.. _http_cookies/1::valid_set_cookie/1:
+
+``valid_set_cookie/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the argument is a valid HTTP ``Set-Cookie`` header field value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_set_cookie(SetCookie)``
+| **Mode and number of proofs:**
+|    ``valid_set_cookie(++text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_set_cookie/4
+.. _http_cookies/1::parse_set_cookie/4:
+
+``parse_set_cookie/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Parses a ``Set-Cookie`` header field value into a cookie name, a cookie value, and a list of attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_set_cookie(SetCookie,Name,Value,Attributes)``
+| **Mode and number of proofs:**
+|    ``parse_set_cookie(++text,-text,-text,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: generate_set_cookie/4
+.. _http_cookies/1::generate_set_cookie/4:
+
+``generate_set_cookie/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a canonical ``Set-Cookie`` header field value from a cookie name, a cookie value, and a list of attributes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_set_cookie(Name,Value,Attributes,SetCookie)``
+| **Mode and number of proofs:**
+|    ``generate_set_cookie(++text,++text,++list(compound),-text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalize_cookie_attributes/2
+.. _http_cookies/1::normalize_cookie_attributes/2:
+
+``normalize_cookie_attributes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes and validates a Set-Cookie attribute list using the canonical attribute term representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_cookie_attributes(Attributes,NormalizedAttributes)``
+| **Mode and number of proofs:**
+|    ``normalize_cookie_attributes(++list(compound),-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cookie_attribute_present/2
+.. _http_cookies/1::cookie_attribute_present/2:
+
+``cookie_attribute_present/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff a normalized Set-Cookie attribute list contains an attribute with the given name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_attribute_present(Attributes,Name)``
+| **Mode and number of proofs:**
+|    ``cookie_attribute_present(++list(compound),++atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cookie_attribute_value/3
+.. _http_cookies/1::cookie_attribute_value/3:
+
+``cookie_attribute_value/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_attribute_value(Attributes,Name,Value)``
+| **Mode and number of proofs:**
+|    ``cookie_attribute_value(++list(compound),++atom,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cookie_attribute_value/4
+.. _http_cookies/1::cookie_attribute_value/4:
+
+``cookie_attribute_value/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list or the given default value when absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_attribute_value(Attributes,Name,Default,Value)``
+| **Mode and number of proofs:**
+|    ``cookie_attribute_value(++list(compound),++atom,++term,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cookie_expiry/2
+.. _http_cookies/1::cookie_expiry/2:
+
+``cookie_expiry/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the raw normalized expiry view for a Set-Cookie attribute list as ``session``, ``max_age(Seconds)``, or ``expires(DateTime)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_expiry(Attributes,Expiry)``
+| **Mode and number of proofs:**
+|    ``cookie_expiry(++list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cookie_expiry/3
+.. _http_cookies/1::cookie_expiry/3:
+
+``cookie_expiry/3``
+^^^^^^^^^^^^^^^^^^^
+
+Resolves the normalized expiry view for a Set-Cookie attribute list against the given current Unix time as ``session``, ``delete``, or ``expires(UnixTime)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_expiry(Attributes,CurrentUnixTime,Expiry)``
+| **Mode and number of proofs:**
+|    ``cookie_expiry(++list(compound),++integer,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cookie_deletion/3
+.. _http_cookies/1::cookie_deletion/3:
+
+``cookie_deletion/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a canonical Set-Cookie term that deletes the named cookie while echoing the relevant scoping and policy attributes from a template attribute list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cookie_deletion(Name,Attributes,Deletion)``
+| **Mode and number of proofs:**
+|    ``cookie_deletion(++text,++list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

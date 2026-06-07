@@ -1,0 +1,189 @@
+.. index:: single: http_json_term_helpers
+.. _http_json_term_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_json_term_helpers``
+==========================
+
+Internal shared helpers for the repository-standard JSON term representation used by the HTTP, OpenAPI, and HTTP router libraries.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(none)
+
+Protected predicates
+--------------------
+
+.. index:: json_object_pairs/2
+.. _http_json_term_helpers/0::json_object_pairs/2:
+
+``json_object_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts between supported JSON object term representations and a flat list of key-value pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object_pairs(Object,Pairs)``
+| **Mode and number of proofs:**
+|    ``json_object_pairs(+term,-list(compound))`` - ``zero_or_one``
+|    ``json_object_pairs(-term,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: pairs_to_object/2
+.. _http_json_term_helpers/0::pairs_to_object/2:
+
+``pairs_to_object/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of JSON object key-value pairs into the repository-standard object representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairs_to_object(Pairs,Object)``
+| **Mode and number of proofs:**
+|    ``pairs_to_object(+list(compound),-term)`` - ``one``
+
+
+------------
+
+.. index:: curly_pairs_to_list/2
+.. _http_json_term_helpers/0::curly_pairs_to_list/2:
+
+``curly_pairs_to_list/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a nested curly-pair term into a plain list of pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``curly_pairs_to_list(CurlyPairs,Pairs)``
+| **Mode and number of proofs:**
+|    ``curly_pairs_to_list(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: list_to_curly_pairs/2
+.. _http_json_term_helpers/0::list_to_curly_pairs/2:
+
+``list_to_curly_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a plain list of pairs into the nested curly-pair representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_to_curly_pairs(Pairs,CurlyPairs)``
+| **Mode and number of proofs:**
+|    ``list_to_curly_pairs(+list(compound),-compound)`` - ``one``
+
+
+------------
+
+.. index:: pair_key_value/3
+.. _http_json_term_helpers/0::pair_key_value/3:
+
+``pair_key_value/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Normalizes supported key-value pair syntaxes into explicit key and value terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pair_key_value(Pair,Key,Value)``
+| **Mode and number of proofs:**
+|    ``pair_key_value(+compound,-term,-term)`` - ``one``
+
+
+------------
+
+.. index:: normalize_json_value/2
+.. _http_json_term_helpers/0::normalize_json_value/2:
+
+``normalize_json_value/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes arbitrary JSON-like values into the repository-standard JSON representation, including booleans and null.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_json_value(Value,JsonValue)``
+| **Mode and number of proofs:**
+|    ``normalize_json_value(+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: normalize_json_pairs/2
+.. _http_json_term_helpers/0::normalize_json_pairs/2:
+
+``normalize_json_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes the values of a JSON object pair list into the repository-standard JSON representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_json_pairs(Pairs,JsonPairs)``
+| **Mode and number of proofs:**
+|    ``normalize_json_pairs(+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

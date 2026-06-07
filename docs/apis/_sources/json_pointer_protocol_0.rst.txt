@@ -14,8 +14,8 @@ JSON Pointer (RFC 6901) parser, generator, and evaluator protocol.
 |    ``logtalk_load(json_pointer(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-11
+| **Version:** 1:0:1
+| **Date:** 2026-06-02
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,7 @@ Parses a JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``,
 | **Template:**
 |    ``parse(Source,Pointer)``
 | **Mode and number of proofs:**
-|    ``parse(++compound,--list(ground))`` - ``zero_or_one``
+|    ``parse(++compound,--list(ground))`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``Source`` is a variable:
@@ -106,7 +106,7 @@ Parses a URI fragment representation of a JSON Pointer from the given source (``
 | **Template:**
 |    ``parse_fragment(Source,Pointer)``
 | **Mode and number of proofs:**
-|    ``parse_fragment(++compound,--list(ground))`` - ``zero_or_one``
+|    ``parse_fragment(++compound,--list(ground))`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``Source`` is a variable:
@@ -160,7 +160,7 @@ Evaluates a parsed JSON Pointer against a JSON term. Fails if the pointer does n
 | **Template:**
 |    ``evaluate(Pointer,JSON,Value)``
 | **Mode and number of proofs:**
-|    ``evaluate(++list(ground),++term,?term)`` - ``zero_or_one``
+|    ``evaluate(++list(ground),++term,?term)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``Pointer`` is a variable:

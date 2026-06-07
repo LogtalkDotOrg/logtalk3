@@ -67,6 +67,7 @@ directory in the ``NOTES.md`` file.
    core
    copeland_ranker
    coroutining
+   crypto
    crs_projections
    csv
    cuid2
@@ -116,6 +117,26 @@ directory in the ``NOTES.md`` file.
    hook_flows
    hook_objects
    html
+   http_authenticate
+   http_client
+   http_cookies
+   http_core
+   http_cors
+   http_digest
+   http_directory_listing
+   http_htmx
+   http_multipart
+   http_parameters
+   http_router
+   http_server
+   http_session
+   http_socket
+   http_static_files
+   http_websocket
+   http_websocket_frames
+   http_websocket_handshake
+   http_websocket_messages
+   http_websocket_session
    ica_projection
    ids
    ieee_754
@@ -175,6 +196,7 @@ directory in the ``NOTES.md`` file.
    nested_dictionaries
    nmea
    nmf_projection
+   open_api
    optics_clusterer
    optionals
    options
@@ -205,6 +227,7 @@ directory in the ``NOTES.md`` file.
    regression_protocols
    regression_tree
    regularized_bradley_terry_ranker
+   rest
    ridge_regression
    schulze_ranker
    sequential_pattern_mining_protocols

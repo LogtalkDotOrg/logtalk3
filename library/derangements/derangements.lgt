@@ -158,7 +158,7 @@
 		distinct_input_derangement_count(List, Count),
 		once((
 			SampleCount =:= 0
-		; 	Count > 0
+		;	Count > 0
 		)),
 		sample_derangements_distinct_input_loop(SampleCount, List, Samples).
 	sample_derangements(List, SampleCount, Samples) :-
@@ -216,9 +216,9 @@
 
 	random_derangement_distinct_input(List, Derangement) :-
 		permutations::random_permutation(List, Derangement0),
-		( 	is_derangement(List, Derangement0) ->
+		(	is_derangement(List, Derangement0) ->
 			Derangement = Derangement0
-		; 	random_derangement_distinct_input(List, Derangement)
+		;	random_derangement_distinct_input(List, Derangement)
 		).
 
 	sample_derangements_distinct_input_loop(0, _, []) :-

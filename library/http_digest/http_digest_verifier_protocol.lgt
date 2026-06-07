@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- protocol(http_digest_verifier_protocol).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-05-29,
+		comment is 'Protocol for HTTP Digest authentication verifiers backed by stored HA1 values.'
+	]).
+
+	:- public(ha1/4).
+	:- mode(ha1(+atom, ++atom, ++atom, -atom), zero_or_one).
+	:- info(ha1/4, [
+		comment is 'Returns the stored lowercase hexadecimal HA1 value for the given normalized digest algorithm family, realm, and username. Fails when the user is unknown for the realm.',
+		argnames is ['Algorithm', 'Realm', 'Username', 'HA1']
+	]).
+
+:- end_protocol.

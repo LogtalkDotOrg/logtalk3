@@ -122,7 +122,7 @@
 		Remaining is N - Pos - 1,
 		binomial(Remaining, K1, CombsAtPos),
 		NewCount is Count + CombsAtPos,
-		( 	NewCount > Index ->
+		(	NewCount > Index ->
 			C = Pos,
 			IndexRemainder is Index - Count
 		;	Pos1 is Pos + 1,
@@ -165,7 +165,7 @@
 
 	count_combinations(K, List, Count) :-
 		length(List, N),
-		( 	N >= K, K >= 0 ->
+		(	N >= K, K >= 0 ->
 			binomial(N, K, Count)
 		;	Count = 0
 		).

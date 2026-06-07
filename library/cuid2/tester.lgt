@@ -22,8 +22,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(random(loader)),
+	logtalk_load(crypto(loader)),
 	logtalk_load([cuid2_protocol, cuid2], [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

@@ -237,14 +237,14 @@
 		distinct_multisets(K, List, lexicographic, Multisets).
 
 	multiset_count_total(N, K, Count) :-
-		( 	K < 0 ->
+		(	K < 0 ->
 			Count = 0
-		; 	N =:= 0 ->
-			( 	K =:= 0 ->
+		;	N =:= 0 ->
+			(	K =:= 0 ->
 				Count = 1
-			; 	Count = 0
+			;	Count = 0
 			)
-		; 	NK1 is N + K - 1,
+		;	NK1 is N + K - 1,
 			binomial(NK1, K, Count)
 		).
 

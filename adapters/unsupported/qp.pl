@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -320,6 +320,7 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(v(9,7,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
+'$lgt_prolog_feature'(sockets, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).

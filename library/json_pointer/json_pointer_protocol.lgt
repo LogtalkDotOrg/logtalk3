@@ -22,14 +22,14 @@
 :- protocol(json_pointer_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-06-02,
 		comment is 'JSON Pointer (RFC 6901) parser, generator, and evaluator protocol.'
 	]).
 
 	:- public(parse/2).
-	:- mode(parse(++compound, --list(ground)), zero_or_one).
+	:- mode(parse(++compound, --list(ground)), zero_or_one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses a JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a list of reference tokens. Fails if the pointer cannot be parsed.',
 		argnames is ['Source', 'Pointer'],
@@ -53,7 +53,7 @@
 	]).
 
 	:- public(parse_fragment/2).
-	:- mode(parse_fragment(++compound, --list(ground)), zero_or_one).
+	:- mode(parse_fragment(++compound, --list(ground)), zero_or_one_or_error).
 	:- info(parse_fragment/2, [
 		comment is 'Parses a URI fragment representation of a JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a list of reference tokens. Fails if the fragment cannot be parsed.',
 		argnames is ['Source', 'Pointer'],
@@ -77,7 +77,7 @@
 	]).
 
 	:- public(evaluate/3).
-	:- mode(evaluate(++list(ground), ++term, ?term), zero_or_one).
+	:- mode(evaluate(++list(ground), ++term, ?term), zero_or_one_or_error).
 	:- info(evaluate/3, [
 		comment is 'Evaluates a parsed JSON Pointer against a JSON term. Fails if the pointer does not identify a value in the given JSON term.',
 		argnames is ['Pointer', 'JSON', 'Value'],

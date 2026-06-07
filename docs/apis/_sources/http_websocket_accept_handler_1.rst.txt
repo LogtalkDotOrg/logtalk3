@@ -1,0 +1,58 @@
+.. index:: single: http_websocket_accept_handler(Options)
+.. _http_websocket_accept_handler/1:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_accept_handler(Options)``
+==========================================
+
+Internal opening-handshake adapter used by the high-level http_websocket server predicates.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
+| **Uses:**
+|    :ref:`http_server <http_server/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_handler_protocol/0::handle/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

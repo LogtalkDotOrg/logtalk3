@@ -22,6 +22,7 @@
 :- if(\+ current_logtalk_flag(encoding_directive, unsupported)).
 
 	:- initialization((
+		logtalk_load(basic_types(loader)),
 		logtalk_load(iso_3166(loader)),
 		logtalk_load([iso_13616_registry, iso_13616_protocol, iso_13616], [optimize(on)])
 	)).

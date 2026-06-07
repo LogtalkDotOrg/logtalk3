@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>http_client &mdash; Logtalk 3.101.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ab892a5e"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="http_cookies" href="http_cookies.html" />
+    <link rel="prev" title="http_authenticate" href="http_authenticate.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.101.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adaptive_boosting_classifier.html"><code class="docutils literal notranslate"><span class="pre">adaptive_boosting_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="agglomerative_clusterer.html"><code class="docutils literal notranslate"><span class="pre">agglomerative_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="amqp.html"><code class="docutils literal notranslate"><span class="pre">amqp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="anomaly_detection_protocols.html"><code class="docutils literal notranslate"><span class="pre">anomaly_detection_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html"><code class="docutils literal notranslate"><span class="pre">application</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="apriori_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">apriori_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrangements.html"><code class="docutils literal notranslate"><span class="pre">arrangements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="avro.html"><code class="docutils literal notranslate"><span class="pre">avro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base32.html"><code class="docutils literal notranslate"><span class="pre">base32</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base58.html"><code class="docutils literal notranslate"><span class="pre">base58</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="borda_ranker.html"><code class="docutils literal notranslate"><span class="pre">borda_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">bradley_terry_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="c45_classifier.html"><code class="docutils literal notranslate"><span class="pre">c45_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cartesian_products.html"><code class="docutils literal notranslate"><span class="pre">cartesian_products</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_frames.html"><code class="docutils literal notranslate"><span class="pre">ccsds_frames</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_link_profiles.html"><code class="docutils literal notranslate"><span class="pre">ccsds_link_profiles</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_packet_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packet_services</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_packetization.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packetization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_packets.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_tc_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_tc_services</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_time_codes.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_codes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ccsds_time_fields.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_fields</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="classification_protocols.html"><code class="docutils literal notranslate"><span class="pre">classification_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="clo_span_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">clo_span_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_protocols.html"><code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="colley_ranker.html"><code class="docutils literal notranslate"><span class="pre">colley_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="combinations.html"><code class="docutils literal notranslate"><span class="pre">combinations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_options.html"><code class="docutils literal notranslate"><span class="pre">command_line_options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="copeland_ranker.html"><code class="docutils literal notranslate"><span class="pre">copeland_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto.html"><code class="docutils literal notranslate"><span class="pre">crypto</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crs_projections.html"><code class="docutils literal notranslate"><span class="pre">crs_projections</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuid2.html"><code class="docutils literal notranslate"><span class="pre">cuid2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cusum_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">cusum_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="datalog.html"><code class="docutils literal notranslate"><span class="pre">datalog</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates_tz.html"><code class="docutils literal notranslate"><span class="pre">dates_tz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbscan_clusterer.html"><code class="docutils literal notranslate"><span class="pre">dbscan_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deques.html"><code class="docutils literal notranslate"><span class="pre">deques</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="derangements.html"><code class="docutils literal notranslate"><span class="pre">derangements</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dif.html"><code class="docutils literal notranslate"><span class="pre">dif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimension_reduction_protocols.html"><code class="docutils literal notranslate"><span class="pre">dimension_reduction_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="eclat_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">eclat_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="elastic_net_regression.html"><code class="docutils literal notranslate"><span class="pre">elastic_net_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="elo_ranker.html"><code class="docutils literal notranslate"><span class="pre">elo_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ewma_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">ewma_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fp_growth_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">fp_growth_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="frequent_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">frequent_pattern_mining_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_mixture_clusterer.html"><code class="docutils literal notranslate"><span class="pre">gaussian_mixture_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_process_regression.html"><code class="docutils literal notranslate"><span class="pre">gaussian_process_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="geojson.html"><code class="docutils literal notranslate"><span class="pre">geojson</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="geospatial.html"><code class="docutils literal notranslate"><span class="pre">geospatial</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="glicko2_ranker.html"><code class="docutils literal notranslate"><span class="pre">glicko2_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="glicko2_periodic_ranker.html"><code class="docutils literal notranslate"><span class="pre">glicko2_periodic_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient_boosting_classifier.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient_boosting_regression.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gsp_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">gsp_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hashes.html"><code class="docutils literal notranslate"><span class="pre">hashes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdbscan_clusterer.html"><code class="docutils literal notranslate"><span class="pre">hdbscan_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchical_clustering.html"><code class="docutils literal notranslate"><span class="pre">hierarchical_clustering</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hmac.html"><code class="docutils literal notranslate"><span class="pre">hmac</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hodge_rank.html"><code class="docutils literal notranslate"><span class="pre">hodge_rank</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="html.html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_authenticate.html"><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-examples">Usage examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multipart-workflow">Multipart workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#websocket-workflow">WebSocket workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#framing-rules">Framing rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_digest.html"><code class="docutils literal notranslate"><span class="pre">http_digest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_directory_listing.html"><code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_htmx.html"><code class="docutils literal notranslate"><span class="pre">http_htmx</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_handshake.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_handshake</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_messages.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_session.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ica_projection.html"><code class="docutils literal notranslate"><span class="pre">ica_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ieee_754.html"><code class="docutils literal notranslate"><span class="pre">ieee_754</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iqr_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">iqr_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_639.html"><code class="docutils literal notranslate"><span class="pre">iso_639</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_3166.html"><code class="docutils literal notranslate"><span class="pre">iso_3166</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_4217.html"><code class="docutils literal notranslate"><span class="pre">iso_4217</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_9362.html"><code class="docutils literal notranslate"><span class="pre">iso_9362</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="iso_13616.html"><code class="docutils literal notranslate"><span class="pre">iso_13616</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isolation_forest_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">isolation_forest_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_ld.html"><code class="docutils literal notranslate"><span class="pre">json_ld</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_lines.html"><code class="docutils literal notranslate"><span class="pre">json_lines</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_pointer.html"><code class="docutils literal notranslate"><span class="pre">json_pointer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kcenters_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kcenters_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kemeny_young_ranker.html"><code class="docutils literal notranslate"><span class="pre">kemeny_young_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_svm_classifier.html"><code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_pca_projection.html"><code class="docutils literal notranslate"><span class="pre">kernel_pca_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmeans_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmeans_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmedians_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmedians_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmedoids_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmedoids_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmodes_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kmodes_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_classifier.html"><code class="docutils literal notranslate"><span class="pre">knn_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_distance_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">knn_distance_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="knn_regression.html"><code class="docutils literal notranslate"><span class="pre">knn_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kprototypes_clusterer.html"><code class="docutils literal notranslate"><span class="pre">kprototypes_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ksuid.html"><code class="docutils literal notranslate"><span class="pre">ksuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso_regression.html"><code class="docutils literal notranslate"><span class="pre">lasso_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lda_classifier.html"><code class="docutils literal notranslate"><span class="pre">lda_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_algebra.html"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_svm_classifier.html"><code class="docutils literal notranslate"><span class="pre">linear_svm_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lof_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">lof_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression_classifier.html"><code class="docutils literal notranslate"><span class="pre">logistic_regression_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="massey_ranker.html"><code class="docutils literal notranslate"><span class="pre">massey_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcp_server.html"><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="memcached.html"><code class="docutils literal notranslate"><span class="pre">memcached</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="message_pack.html"><code class="docutils literal notranslate"><span class="pre">message_pack</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime_types.html"><code class="docutils literal notranslate"><span class="pre">mime_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modified_z_score_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">modified_z_score_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="multisets.html"><code class="docutils literal notranslate"><span class="pre">multisets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoid.html"><code class="docutils literal notranslate"><span class="pre">nanoid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes_classifier.html"><code class="docutils literal notranslate"><span class="pre">naive_bayes_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nearest_centroid_classifier.html"><code class="docutils literal notranslate"><span class="pre">nearest_centroid_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nmea.html"><code class="docutils literal notranslate"><span class="pre">nmea</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nmf_projection.html"><code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_api.html"><code class="docutils literal notranslate"><span class="pre">open_api</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optics_clusterer.html"><code class="docutils literal notranslate"><span class="pre">optics_clusterer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="partitions.html"><code class="docutils literal notranslate"><span class="pre">partitions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">pattern_mining_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pca_projection.html"><code class="docutils literal notranslate"><span class="pre">pca_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="permutations.html"><code class="docutils literal notranslate"><span class="pre">permutations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plackett_luce_ranker.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plackett_luce_last_ranker.html"><code class="docutils literal notranslate"><span class="pre">plackett_luce_last_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pls_projection.html"><code class="docutils literal notranslate"><span class="pre">pls_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prefix_span_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">prefix_span_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="probabilistic_pca_projection.html"><code class="docutils literal notranslate"><span class="pre">probabilistic_pca_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html"><code class="docutils literal notranslate"><span class="pre">process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="protobuf.html"><code class="docutils literal notranslate"><span class="pre">protobuf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qda_classifier.html"><code class="docutils literal notranslate"><span class="pre">qda_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest_classifier.html"><code class="docutils literal notranslate"><span class="pre">random_forest_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest_regression.html"><code class="docutils literal notranslate"><span class="pre">random_forest_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html"><code class="docutils literal notranslate"><span class="pre">random_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rank_centrality.html"><code class="docutils literal notranslate"><span class="pre">rank_centrality</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ranked_pairs.html"><code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ranking_protocols.html"><code class="docutils literal notranslate"><span class="pre">ranking_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression_protocols.html"><code class="docutils literal notranslate"><span class="pre">regression_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regression_tree.html"><code class="docutils literal notranslate"><span class="pre">regression_tree</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regularized_bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html"><code class="docutils literal notranslate"><span class="pre">rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">ridge_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="schulze_ranker.html"><code class="docutils literal notranslate"><span class="pre">schulze_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sequential_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sgd_classifier.html"><code class="docutils literal notranslate"><span class="pre">sgd_classifier</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="snowflakeid.html"><code class="docutils literal notranslate"><span class="pre">snowflakeid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sockets.html"><code class="docutils literal notranslate"><span class="pre">sockets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spade_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">spade_pattern_miner</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulated_annealing.html"><code class="docutils literal notranslate"><span class="pre">simulated_annealing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stemming.html"><code class="docutils literal notranslate"><span class="pre">stemming</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stomp.html"><code class="docutils literal notranslate"><span class="pre">stomp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_scales.html"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tle_orbits.html"><code class="docutils literal notranslate"><span class="pre">tle_orbits</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toml.html"><code class="docutils literal notranslate"><span class="pre">toml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="truncated_svd_projection.html"><code class="docutils literal notranslate"><span class="pre">truncated_svd_projection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tzif.html"><code class="docutils literal notranslate"><span class="pre">tzif</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wkt_wkb.html"><code class="docutils literal notranslate"><span class="pre">wkt_wkb</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="z_score_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">z_score_anomaly_detector</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_client</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/http_client.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="http-client">
+<span id="library-http-client"></span><h1><code class="docutils literal notranslate"><span class="pre">http_client</span></code><a class="headerlink" href="#http-client" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">http_client</span></code> library provides a request-oriented client layer on
+top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> libraries. It is
+the request-oriented client-side entry point: it builds normalized
+requests from absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs plus options and delegates
+transport to the sockets-backed layer.</p>
+<p>The low-level stream primitives previously exposed as the main API now
+live in the <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object. That object remains the
+transport-neutral stream-processing layer used internally by
+<code class="docutils literal notranslate"><span class="pre">http_socket</span></code>.</p>
+<p>This library can be used with backend Prolog systems that supports the
+<code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, and XVM.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#http_client">../../apis/library_index.html#http_client</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_client(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_client(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage-examples">
+<h2>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h2>
+<p>The examples below are self-contained. They use a local <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
+listener so they can be reproduced without any external service. They
+assume a backend with thread support because <code class="docutils literal notranslate"><span class="pre">threaded_once/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">threaded_exit/2</span></code> are used to run the local server concurrently with
+the client call.</p>
+<p>Define a small echo handler once:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_echo_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Start a local listener, send a request, and inspect the normalized
+response:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/echo&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>post(<span class="nv">URL</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">Response</span>, []),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>For a multipart form-data request, define a handler that inspects the
+normalized request body using <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_multipart_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
+        http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
+        atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/upload&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>post(
+         <span class="nv">URL</span>,
+         form_data([
+             field(title, <span class="s">&#39;Logtalk&#39;</span>),
+             file(upload, <span class="s">&#39;notes.txt&#39;</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))
+         ]),
+         <span class="nv">Response</span>,
+         []
+     ),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="s">&#39;title=Logtalk; upload=notes.txt&#39;</span>)), <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>For a WebSocket opening handshake, define a handler that accepts the
+upgrade:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_websocket_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_server<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;ws://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/socket&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>open_websocket(<span class="nv">URL</span>, <span class="nv">Connection</span>, <span class="nv">Response</span>, [protocols([chat]), key(<span class="s">&#39;dGhlIHNhbXBsZSBub25jZQ==&#39;</span>)]),
+     http_socket<span class="o">::</span>close_connection(<span class="nv">Connection</span>),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">101</span>, <span class="s">&#39;Switching Protocols&#39;</span>), <span class="nv">_</span>, empty, <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Connection</span></code> term returned by <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> remains open.
+After the handshake, either close it explicitly with
+<code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> or hand it to the
+<code class="docutils literal notranslate"><span class="pre">http_websocket</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> libraries.</p>
+</section>
+<section id="current-scope">
+<h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
+<p>The initial request-oriented implementation provides:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">request/4</span></code> for one-shot requests against absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> for validated WebSocket opening handshakes
+against absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URLs, returning the upgraded reusable
+connection handle and the <code class="docutils literal notranslate"><span class="pre">101</span></code> response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request/5</span></code> for requests over an already open <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
+connection or connection pool handle, with endpoint validation against
+the supplied URL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">head/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">delete/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">post/4-5</span></code>, <code class="docutils literal notranslate"><span class="pre">put/4-5</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">patch/4-5</span></code> convenience predicates.</p></li>
+</ul>
+<p>Supported request options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">headers(Headers)</span></code> to supply normalized request headers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body(Body)</span></code> to supply a normalized request body. The
+request-oriented facade also accepts <code class="docutils literal notranslate"><span class="pre">body(form_data(Items))</span></code> as a
+convenience descriptor for multipart form-data requests; in that case
+it builds the multipart body via <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> and injects a
+generated boundary property unless the caller already provided one in
+<code class="docutils literal notranslate"><span class="pre">properties/1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query(Pairs)</span></code> to append URL-encoded query pairs to the URL query
+string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> to override the default <code class="docutils literal notranslate"><span class="pre">http(1,1)</span></code> version.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">properties(Properties)</span></code> to supply additional normalized request
+properties.</p></li>
+</ul>
+<p>Supported WebSocket opening-handshake options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">headers(Headers)</span></code> to supply additional normalized handshake request
+headers other than the handshake-managed headers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query(Pairs)</span></code> to append URL-encoded query pairs to the URL query
+string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> to override the default <code class="docutils literal notranslate"><span class="pre">http(1,1)</span></code> version.
+The opening handshake requires HTTP/1.1 or later.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocols(Protocols)</span></code> to request one or more subprotocol tokens.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key(Key)</span></code> to provide an explicit <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code> value. When
+omitted, a fresh key is generated automatically.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> to pass socket options through to
+<code class="docutils literal notranslate"><span class="pre">http_socket::open_connection/4</span></code>.</p></li>
+</ul>
+</section>
+<section id="multipart-workflow">
+<h2>Multipart workflow<a class="headerlink" href="#multipart-workflow" title="Link to this heading"></a></h2>
+<p>The current multipart workflow is intentionally small but practical:</p>
+<ul class="simple">
+<li><p>For generic multipart bodies, callers can keep using normalized
+<code class="docutils literal notranslate"><span class="pre">content(MediaType,</span> <span class="pre">multipart(Parts))</span></code> terms.</p></li>
+<li><p>For common form-data requests, callers can use <code class="docutils literal notranslate"><span class="pre">form_data(Items)</span></code>
+through the existing body path, including <code class="docutils literal notranslate"><span class="pre">post/4-5</span></code>, <code class="docutils literal notranslate"><span class="pre">put/4-5</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">patch/4-5</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Items</span></code> descriptors are the same <code class="docutils literal notranslate"><span class="pre">field(Name,</span> <span class="pre">Value)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">file(Name,</span> <span class="pre">Filename,</span> <span class="pre">MediaType,</span> <span class="pre">Payload)</span></code> descriptors supported by
+the <code class="docutils literal notranslate"><span class="pre">http_multipart::form_data_body/2</span></code> helper.</p></li>
+<li><p>When using the convenience descriptor, the client facade adds a
+multipart boundary property automatically so the request can be
+generated on the wire without extra caller bookkeeping.</p></li>
+</ul>
+</section>
+<section id="websocket-workflow">
+<h2>WebSocket workflow<a class="headerlink" href="#websocket-workflow" title="Link to this heading"></a></h2>
+<p>The current WebSocket workflow is intentionally limited to the opening
+handshake:</p>
+<ul class="simple">
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> with an absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL.</p></li>
+<li><p>The helper opens a dedicated reusable <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> connection,
+sends a normalized opening-handshake request, and validates the server
+<code class="docutils literal notranslate"><span class="pre">101</span></code> response including the <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> value.</p></li>
+<li><p>When the call succeeds, the returned connection handle remains open so
+a higher layer can take over the upgraded stream, typically by calling
+<code class="docutils literal notranslate"><span class="pre">http_socket::connection_streams/3</span></code> and then using the
+<code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> frame predicates, the <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>
+message predicates, or the stateful <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>
+predicates with explicit close-state and automatic control-message
+handling, including the higher-level <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback
+loop.</p>
+<ul>
+<li><p>When client-side code wants one entry point for handshake plus
+session execution, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/4-5</span></code>
+predicates layer on top of <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>, can write optional
+initial outbound messages, and then run the callback-driven session
+loop.</p></li>
+</ul>
+</li>
+<li><p>Callers are responsible for eventually closing that connection using
+<code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> if a later layer does not take
+ownership of it. The <code class="docutils literal notranslate"><span class="pre">http_websocket_session::run_session/3-4</span></code>
+predicates do take ownership of the upgraded connection and close it
+automatically when the session loop finishes, as do the higher-level
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/4-5</span></code> predicates.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object continues to provide the original
+stream-based predicates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">write_request/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></p></li>
+</ul>
+</section>
+<section id="framing-rules">
+<h2>Framing rules<a class="headerlink" href="#framing-rules" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object supports response framing for:</p>
+<ul class="simple">
+<li><p>status codes that never carry a body (<code class="docutils literal notranslate"><span class="pre">1xx</span></code>, <code class="docutils literal notranslate"><span class="pre">204</span></code>, <code class="docutils literal notranslate"><span class="pre">205</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">304</span></code>)</p></li>
+<li><p>fixed-length bodies via <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code></p></li>
+<li><p>chunked bodies via <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding:</span> <span class="pre">chunked</span></code>, including trailers</p></li>
+<li><p>close-delimited bodies terminated by end-of-file</p></li>
+</ul>
+<p>Request-aware exchanges performed by <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange/4</span></code>
+and <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_connection/4</span></code> also support <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>
+responses. In that case the normalized response body is <code class="docutils literal notranslate"><span class="pre">empty</span></code> and
+the response is annotated with the metadata properties
+<code class="docutils literal notranslate"><span class="pre">body_omitted(head)</span></code> and, when applicable,
+<code class="docutils literal notranslate"><span class="pre">omitted_body_length(Length)</span></code>.</p>
+<p>Close-delimited responses returned by
+<code class="docutils literal notranslate"><span class="pre">http_client_core::read_response/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">http_client_core::exchange/4</span></code> are annotated with the property
+<code class="docutils literal notranslate"><span class="pre">body_framing(close_delimited)</span></code>. Sequential exchanges can only use a
+close-delimited response as the final response in the sequence because
+the connection is consumed while reading the body.</p>
+</section>
+<section id="current-limitations">
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Only absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are supported by the request-oriented
+facade. <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs are rejected until transport-level TLS
+support is added.</p></li>
+<li><p>The WebSocket helper supports only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes.
+<code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate is limited to opening-handshake
+validation. See the dedicated WebSocket libraries for frame parsing,
+message reassembly, and related functionality.</p></li>
+<li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
+reading streamed response bodies in <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>.</p></li>
+<li><p>Close-delimited response bodies can only be used as the final response
+in an <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_connection/4</span></code> sequence.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object assumes binary streams for both input
+and output.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="http_authenticate.html" class="btn btn-neutral float-left" title="http_authenticate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_cookies.html" class="btn btn-neutral float-right" title="http_cookies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

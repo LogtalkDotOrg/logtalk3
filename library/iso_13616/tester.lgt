@@ -23,6 +23,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(basic_types(loader)),
 		logtalk_load(iso_3166(loader)),
 		logtalk_load([iso_13616_registry, iso_13616_protocol, iso_13616], [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),

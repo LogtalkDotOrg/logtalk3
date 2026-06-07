@@ -24,9 +24,9 @@
 	extends(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-06-07,
 		comment is 'Shared predicates for pattern miner diagnostics, defaults, option handling, and export helpers.'
 	]).
 
@@ -84,7 +84,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(type, [

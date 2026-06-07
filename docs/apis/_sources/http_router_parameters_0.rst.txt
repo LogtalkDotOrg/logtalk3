@@ -1,0 +1,135 @@
+.. index:: single: http_router_parameters
+.. _http_router_parameters/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_router_parameters``
+==========================
+
+Declarative router companion category that reuses ``http_parameters`` declarations for request extraction and OpenAPI metadata generation.
+
+| **Availability:** 
+|    ``logtalk_load(http_parameters(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-28
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_router <http_router/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_parameters <http_parameters/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Route declarations: Importing objects define parameter declarations per route using ``route_parameter_declarations/2``.
+   - Handler helper: Route handlers can call ``route_parameters/2`` on the routed request to extract typed values using the matched route declarations.
+   - OpenAPI metadata: The category generates route metadata for query and path parameters, form request bodies, and a default ``400 Bad Request`` response descriptor from the same declarations. Importing objects can extend or override that metadata using ``route_parameter_extra_metadata/2`` or by overriding ``route_metadata/2`` and delegating with ``^^route_metadata/2``.
+
+| **Inherited public predicates:**
+|     :ref:`http_router/0::api_info/1`  :ref:`http_router/0::handle/2`  :ref:`http_router/0::operations/1`  :ref:`http_router/0::schema/2`  :ref:`http_router/0::security/1`  :ref:`http_router/0::security_scheme/2`  :ref:`http_router/0::servers/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: route_parameters/2
+.. _http_router_parameters/0::route_parameters/2:
+
+``route_parameters/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts typed parameters for the route identified by the routed request ``route/1`` annotation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_parameters(Request,Parameters)``
+| **Mode and number of proofs:**
+|    ``route_parameters(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: route_parameter_declarations/2
+.. _http_router_parameters/0::route_parameter_declarations/2:
+
+``route_parameter_declarations/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that returns the ``http_parameters`` declaration list for a route identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_parameter_declarations(RouteId,Declarations)``
+| **Mode and number of proofs:**
+|    ``route_parameter_declarations(?atom,?list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_parameter_request_body_description/2
+.. _http_router_parameters/0::route_parameter_request_body_description/2:
+
+``route_parameter_request_body_description/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes the generated OpenAPI request-body description for form parameter declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_parameter_request_body_description(RouteId,Description)``
+| **Mode and number of proofs:**
+|    ``route_parameter_request_body_description(?atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_parameter_extra_metadata/2
+.. _http_router_parameters/0::route_parameter_extra_metadata/2:
+
+``route_parameter_extra_metadata/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that returns additional route metadata terms to merge with the metadata generated from parameter declarations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_parameter_extra_metadata(RouteId,Metadata)``
+| **Mode and number of proofs:**
+|    ``route_parameter_extra_metadata(?atom,?list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-03,
+		date is 2026-06-07,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -1607,14 +1607,18 @@
 		valid(list(atom), Entities).
 	valid_option(exclude_entities(Entities)) :-
 		valid(list(atom), Entities).
-	valid_option(max_mutators(all)).
 	valid_option(max_mutators(MaxMutators)) :-
-		integer(MaxMutators),
-		MaxMutators > 0.
-	valid_option(max_mutations_per_mutator(all)).
+		(	MaxMutators == all ->
+			true
+		;	integer(MaxMutators),
+			MaxMutators > 0
+		).
 	valid_option(max_mutations_per_mutator(MaxMutations)) :-
-		integer(MaxMutations),
-		MaxMutations > 0.
+		(	MaxMutations == all ->
+			true
+		;	integer(MaxMutations),
+			MaxMutations > 0
+		).
 	valid_option(mutators(Mutators)) :-
 		valid(list(atom), Mutators),
 		forall(
@@ -1632,10 +1636,13 @@
 	valid_option(timeout(Timeout)) :-
 		number(Timeout),
 		Timeout > 0.
-	valid_option(sampling(all)).
-	valid_option(sampling(count(Count))) :-
-		integer(Count),
-		Count >= 0.
+	valid_option(sampling(Sampling)) :-
+		(	Sampling == all ->
+			true
+		;	Sampling = count(Count),
+			integer(Count),
+			Count >= 0
+		).
 	valid_option(sampling(rate(Rate))) :-
 		number(Rate),
 		Rate >= 0.0,
@@ -1643,7 +1650,7 @@
 	valid_option(seed(Seed)) :-
 		integer(Seed).
 	valid_option(format(Format)) :-
-		member(Format, [none, text, json]).
+		once((Format == none; Format == text; Format == json)).
 	valid_option(report_file_name(FileName)) :-
 		atom(FileName).
 	valid_option(tester_file_name(Tester)) :-

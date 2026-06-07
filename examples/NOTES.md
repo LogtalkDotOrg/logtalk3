@@ -308,6 +308,45 @@ Follows a short description of each included example (in alphabetical order):
 	solution for the Advent of Code 2023 Day 8 problem; illustrates the
 	use of the `dictionaries` and `grammars` libraries plus cyclic terms
 
+- `http_cookies_counter`  
+	small HTTP cookie example showing how a server preserves a visit
+	counter in the client
+
+- `http_htmx_panel`  
+	small HTTP client and server example showing how to use the	`http_htmx`
+    and `http_router_htmx` libraries for boosted navigation, fragment swaps,
+    and server-triggered updates
+
+- `http_open_api`  
+	small HTTP client and server example showing how to publish and consume
+	an OpenAPI contract
+
+- `http_rest_greetings`  
+	small HTTP client and server example showing how to define and consume a
+	REST API using the `rest` library
+
+- `http_rest_open_meteo`  
+	small REST client example showing how to resolve a location name and fetch
+	a weather forecast from the Open-Meteo APIs
+
+- `http_static_site`  
+	small HTTP client and server example showing how to combine the
+	`http_static_files` and `http_directory_listing` libraries
+
+- `http_static_site_basic`  
+	small HTTP client and server example showing how to protect a static site
+	with HTTP Basic authentication while combining the `http_static_files`,
+	`http_directory_listing`, and `http_authenticate` libraries
+
+- `http_static_site_digest`  
+	small HTTP client and server example showing how to protect a static site
+	with HTTP Digest authentication while combining the `http_static_files`,
+	`http_directory_listing`, and `http_digest` libraries
+
+- `http_websocket_echo`  
+	small HTTP and WebSocket example showing the opening handshake and a
+	one-message echo exchange
+
 - `hello_world`  
 	the unavoidable "hello world" programming example
 

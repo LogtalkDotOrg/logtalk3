@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for O-Prolog 1.32 and later versions
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -285,6 +285,7 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 3, 2))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
+'$lgt_prolog_feature'(sockets, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).

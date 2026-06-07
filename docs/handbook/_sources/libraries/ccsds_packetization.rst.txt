@@ -6,7 +6,7 @@
 The ``ccsds_packetization`` library provides the inverse service-layer
 helpers to the existing ``ccsds_packet_services`` library.
 
-This first implementation slice covers:
+The current implementation covers:
 
 - fitting packet streams into TM and AOS packet-service regions
 - preserving partially emitted packet bytes across frame boundaries

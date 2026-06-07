@@ -1,0 +1,232 @@
+.. index:: single: http_authenticate
+.. _http_authenticate/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_authenticate``
+=====================
+
+HTTP Basic authentication parsing, generation, challenge building, and request verification helpers.
+
+| **Availability:** 
+|    ``logtalk_load(http_authenticate(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`base64 <base64/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: challenge/2
+.. _http_authenticate/0::challenge/2:
+
+``challenge/2``
+^^^^^^^^^^^^^^^
+
+Returns the single parsed Basic ``WWW-Authenticate`` challenge from a normalized HTTP response when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``challenge(Response,Challenge)``
+| **Mode and number of proofs:**
+|    ``challenge(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: authorization/2
+.. _http_authenticate/0::authorization/2:
+
+``authorization/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the single parsed Basic ``Authorization`` header from a normalized HTTP request when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorization(Request,Authorization)``
+| **Mode and number of proofs:**
+|    ``authorization(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_challenge/2
+.. _http_authenticate/0::parse_challenge/2:
+
+``parse_challenge/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Parses one Basic challenge header field value into a normalized ``basic_challenge/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_challenge(Text,Challenge)``
+| **Mode and number of proofs:**
+|    ``parse_challenge(++text,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_challenge/2
+.. _http_authenticate/0::generate_challenge/2:
+
+``generate_challenge/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates one canonical Basic challenge header field value from a normalized ``basic_challenge/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_challenge(Challenge,HeaderValue)``
+| **Mode and number of proofs:**
+|    ``generate_challenge(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_authorization/2
+.. _http_authenticate/0::parse_authorization/2:
+
+``parse_authorization/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses one Basic authorization header field value into a normalized ``basic_authorization/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_authorization(Text,Authorization)``
+| **Mode and number of proofs:**
+|    ``parse_authorization(++text,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_authorization/2
+.. _http_authenticate/0::generate_authorization/2:
+
+``generate_authorization/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates one canonical Basic authorization header field value from a normalized ``basic_authorization/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_authorization(Authorization,HeaderValue)``
+| **Mode and number of proofs:**
+|    ``generate_authorization(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: protect_request/4
+.. _http_authenticate/0::protect_request/4:
+
+``protect_request/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Verifies a normalized HTTP request using a Basic verifier object and returns either ``continue(Request)`` or ``respond(Response)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``protect_request(Request,Verifier,Action,Options)``
+| **Mode and number of proofs:**
+|    ``protect_request(+compound,+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: unauthorized_response/3
+.. _http_authenticate/0::unauthorized_response/3:
+
+``unauthorized_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a normalized ``401 Unauthorized`` response and returns the generated normalized Basic challenge term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unauthorized_response(Challenge,Response,Options)``
+| **Mode and number of proofs:**
+|    ``unauthorized_response(-compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: unauthorized_response/4
+.. _http_authenticate/0::unauthorized_response/4:
+
+``unauthorized_response/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decorates a normalized HTTP response with an explicit normalized Basic challenge term and returns the resulting ``401 Unauthorized`` response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unauthorized_response(Challenge,Response0,Response,Options)``
+| **Mode and number of proofs:**
+|    ``unauthorized_response(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

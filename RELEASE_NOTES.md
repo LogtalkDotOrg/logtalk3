@@ -22,14 +22,35 @@ RELEASE NOTES
 =============
 
 
-3.101.0 - May ??, 2026
-======================
+3.101.0 - June ??, 2026
+=======================
+
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Read-only `sockets` compilation flag to declare if a backend provides
+compatible sockets support. Valid values are `supported` and `unsupported`.
+
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Definitions for the `mutex_lock/1` and `mutex_unlock/1` predicates to
+the ECLiPSE adapter file.
 
 Library
 -------
 
 * CHANGED: The `url` library `generate/2` and `normalize/2` predicates to also
 accept relative reference arguments.
+
+* ADDED: New `crypto` library providing transport-neutral cryptographic helper
+predicates.
+
+* ADDED: New `http_core`, `http_client`, `http_cookies`, `http_multipart`,
+`http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
+`http_websocket_messages`, `http_websocket_session`, `http_directory_listing`,
+`http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
+`http_digest`, `http_cors`, `open_api`, and `rest` libraries.
 
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
 `relativize/3`, and `resolve/3` predicates.
@@ -41,6 +62,9 @@ accept relative reference arguments.
 * ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
 library.
 
+* IMPROVED: The `hashes` library implementation of the SHA1-1, SHA-256, and
+SHA-512/256 hash functions.
+
 * IMPROVED: The `tle_orbits` library position-only propagation and ground-track
 queries to avoid computing and discarding velocity values.
 
@@ -49,21 +73,56 @@ queries to avoid computing and discarding velocity values.
 `arrangements`, `combinations`, `linear_algebra`, `tle_orbits`, `wkt_wkb`,
 `ica_projection`, `fp_growth_pattern_miner`, `gaussian_process_regression`,
 `lasso_regression`, `string_distance`, `colley_ranker`, `hodge_rank`,
-`massey_ranker`, and `regression_protocols` libraries.
+`massey_ranker`, `rank_centrality`, `ranked_pairs`, and `regression_protocols`
+libraries.
+
+* UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
+libraries to use the new `crypto` library.
 
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).
+
+* FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
+throw an error when failure was expected.
 
 Tools
 -----
 
 * FIXED: Spurious choice-points in some of the `packs` tool public predicates.
 
+* FIXED: More strict validation of the `mutation_testing` tool options.
+
 Examples
 --------
 
-* FIXED: The `checkpoint` multi-threading example test flakiness due to potential
-out-or-order output. Thanks to Andrew Davison for the bug report.
+* ADDED: New `http_cookies_counter` example illustrating the use of the new
+HTTP libraries.
+
+* ADDED: New `http_htmx_panel` example illustrating the use of the new HTTP
+and HTMX libraries.
+
+* ADDED: New `http_open_api` example illustrating the use of the new HTTP and
+OpenAPI libraries.
+
+* ADDED: New `http_rest_greetings` and `http_rest_open_meteo` examples
+illustrating the use of the new HTTP and REST libraries.
+
+* ADDED: New `http_websocket_echo` example illustrating the use of the new
+HTTP and WebSocket libraries.
+
+* ADDED: New `http_static_site` example illustrating the use of the new HTTP
+libraries.
+
+* ADDED: New `http_static_site_basic` example illustrating the use of the new
+HTTP Basic authentication library together with the static-file and
+directory-listing helpers.
+
+* ADDED: New `http_static_site_digest` example illustrating the use of the new
+HTTP Digest authentication library together with the static-file and
+directory-listing helpers.
+
+* FIXED: The `checkpoint` multi-threading example test flakiness due to
+potential out-or-order output. Thanks to Andrew Davison for the bug report.
 
 
 3.100.1 - May 16, 2026
@@ -7493,6 +7552,7 @@ to run it on Windows.
 
 * FIXED: Workaround a XSB parser bug that prevented loading the `bench`
 example.
+
 
 * FIXED: Tests for the `around_methods`, `books`, `hailstone`, `hello_world`,
 `localizations`, and `patches` examples when run on Windows systems using

@@ -52,8 +52,13 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 	`ccsds_packets`, `ccsds_tc_services`, `ccsds_time_codes`, `ccsds_time_fields`,
 - Text and NLP:
 	`character_sets`, `grammars`, `stemming`, `string_distance`, and `strings`.
-- Web:
-	`html`, `mime_types`, and `url`.
+- Web and HTTP APIs:
+	`html`, `mime_types`, `url`, `http_core`, `http_authenticate`, `http_client`,
+	`http_cookies`, `http_cors`, `http_digest`, `http_directory_listing`,
+	`http_htmx`, `http_multipart`, `http_parameters`, `http_router`,
+	`http_server`, `http_session`, `http_socket`, `http_socket_process`,
+	`http_static_files`, `http_websocket`, `http_websocket_messages`,
+	`http_websocket_session`, `open_api`, and `rest`.
 - Identifiers:
 	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`,
 	`ulid`, and `uuid`.
@@ -69,7 +74,7 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 - Logic and symbolic computing:
 	`datalog`.
 - Security and integrity:
-	`hashes` and `hmac`.
+	`crypto`, `hashes`, and `hmac`.
 - Randomness:
 	`arbitrary`, `mutations`, and `random`.
 - Mathematics, statistics, and optimization:

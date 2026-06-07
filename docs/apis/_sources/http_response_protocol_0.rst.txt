@@ -1,0 +1,169 @@
+.. index:: single: http_response_protocol
+.. _http_response_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_response_protocol``
+==========================
+
+Protocol for Logtalk objects exposing normalized HTTP response data.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: version/1
+.. _http_response_protocol/0::version/1:
+
+``version/1``
+^^^^^^^^^^^^^
+
+Returns the normalized HTTP version term ``http(Major, Minor)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``version(Version)``
+| **Mode and number of proofs:**
+|    ``version(-compound)`` - ``one``
+
+
+------------
+
+.. index:: status/1
+.. _http_response_protocol/0::status/1:
+
+``status/1``
+^^^^^^^^^^^^
+
+Returns the normalized HTTP status term ``status(Code, ReasonPhrase)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``status(Status)``
+| **Mode and number of proofs:**
+|    ``status(-compound)`` - ``one``
+
+
+------------
+
+.. index:: headers/1
+.. _http_response_protocol/0::headers/1:
+
+``headers/1``
+^^^^^^^^^^^^^
+
+Returns the response header list as normalized ``Name-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``headers(Headers)``
+| **Mode and number of proofs:**
+|    ``headers(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: header/2
+.. _http_response_protocol/0::header/2:
+
+``header/2``
+^^^^^^^^^^^^
+
+Enumerates normalized response headers as ``Name`` and ``Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header(Name,Value)``
+| **Mode and number of proofs:**
+|    ``header(?atom,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: body/1
+.. _http_response_protocol/0::body/1:
+
+``body/1``
+^^^^^^^^^^
+
+Returns the normalized response body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``body(Body)``
+| **Mode and number of proofs:**
+|    ``body(-compound)`` - ``one``
+
+
+------------
+
+.. index:: property/1
+.. _http_response_protocol/0::property/1:
+
+``property/1``
+^^^^^^^^^^^^^^
+
+Enumerates derived or higher-layer normalized response properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``property(Property)``
+| **Mode and number of proofs:**
+|    ``property(?compound)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

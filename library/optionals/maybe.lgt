@@ -96,13 +96,13 @@
 
 	sequence([], optional([])).
 	sequence([Optional| Optionals], Sequenced) :-
-		( 	Optional = optional(Value) ->
+		(	Optional = optional(Value) ->
 			sequence(Optionals, RestSequenced),
-			( 	RestSequenced = optional(RestValues) ->
+			(	RestSequenced = optional(RestValues) ->
 				Sequenced = optional([Value| RestValues])
-			; 	Sequenced = empty
+			;	Sequenced = empty
 			)
-		; 	Optional == empty,
+		;	Optional == empty,
 			Sequenced = empty
 		).
 

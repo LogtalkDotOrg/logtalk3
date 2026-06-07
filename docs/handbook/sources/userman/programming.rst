@@ -739,6 +739,14 @@ These are:
    used in both Logtalk source files and compiler generated Prolog
    files), and ``source`` (can be used only in Logtalk source files).
 
+.. _flag_sockets:
+.. index:: pair: sockets; Flag
+
+``sockets``
+   Informs Logtalk if the :term:`backend Prolog compiler` provides
+   compatible sockets support. Possible flag values are ``unsupported``
+   and ``supported``.
+
 .. _flag_tabling:
 .. index:: pair: tabling; Flag
 

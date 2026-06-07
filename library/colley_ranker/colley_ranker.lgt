@@ -103,11 +103,11 @@
 		Column > Count,
 		!.
 	row_coefficients(Column, Count, Index, Neighbors, Games, [Coefficient| Coefficients]) :-
-		( 	Column =:= Index ->
+		(	Column =:= Index ->
 			Coefficient is 2.0 + Games
-		; 	neighbor_weight(Column, Neighbors, Weight) ->
+		;	neighbor_weight(Column, Neighbors, Weight) ->
 			Coefficient is -Weight
-		; 	Coefficient = 0.0
+		;	Coefficient = 0.0
 		),
 		NextColumn is Column + 1,
 		row_coefficients(NextColumn, Count, Index, Neighbors, Games, Coefficients).

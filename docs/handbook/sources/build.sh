@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on May 11, 2026
+##   Last updated on June 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -101,6 +101,7 @@ sed '1,19d' ../../../library/c45_classifier/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/cartesian_products/NOTES.md | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
 sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
+sed '1,19d' ../../../library/crypto/NOTES.md | pandoc -f gfm -t rst -o libraries/crypto.rst
 sed '1,19d' ../../../library/crs_projections/NOTES.md | pandoc -f gfm -t rst -o libraries/crs_projections.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_frames.rst
@@ -167,6 +168,26 @@ sed '1,19d' ../../../library/hodge_rank/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/hook_flows/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_flows.rst
 sed '1,19d' ../../../library/hook_objects/NOTES.md | pandoc -f gfm -t rst -o libraries/hook_objects.rst
 sed '1,19d' ../../../library/html/NOTES.md | pandoc -f gfm -t rst -o libraries/html.rst
+sed '1,19d' ../../../library/http_authenticate/NOTES.md | pandoc -f gfm -t rst -o libraries/http_authenticate.rst
+sed '1,19d' ../../../library/http_client/NOTES.md | pandoc -f gfm -t rst -o libraries/http_client.rst
+sed '1,19d' ../../../library/http_cookies/NOTES.md | pandoc -f gfm -t rst -o libraries/http_cookies.rst
+sed '1,19d' ../../../library/http_core/NOTES.md | pandoc -f gfm -t rst -o libraries/http_core.rst
+sed '1,19d' ../../../library/http_cors/NOTES.md | pandoc -f gfm -t rst -o libraries/http_cors.rst
+sed '1,19d' ../../../library/http_digest/NOTES.md | pandoc -f gfm -t rst -o libraries/http_digest.rst
+sed '1,19d' ../../../library/http_directory_listing/NOTES.md | pandoc -f gfm -t rst -o libraries/http_directory_listing.rst
+sed '1,19d' ../../../library/http_htmx/NOTES.md | pandoc -f gfm -t rst -o libraries/http_htmx.rst
+sed '1,19d' ../../../library/http_multipart/NOTES.md | pandoc -f gfm -t rst -o libraries/http_multipart.rst
+sed '1,19d' ../../../library/http_parameters/NOTES.md | pandoc -f gfm -t rst -o libraries/http_parameters.rst
+sed '1,19d' ../../../library/http_router/NOTES.md | pandoc -f gfm -t rst -o libraries/http_router.rst
+sed '1,19d' ../../../library/http_server/NOTES.md | pandoc -f gfm -t rst -o libraries/http_server.rst
+sed '1,19d' ../../../library/http_session/NOTES.md | pandoc -f gfm -t rst -o libraries/http_session.rst
+sed '1,19d' ../../../library/http_socket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket.rst
+sed '1,19d' ../../../library/http_static_files/NOTES.md | pandoc -f gfm -t rst -o libraries/http_static_files.rst
+sed '1,19d' ../../../library/http_websocket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket.rst
+sed '1,19d' ../../../library/http_websocket_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_frames.rst
+sed '1,19d' ../../../library/http_websocket_handshake/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_handshake.rst
+sed '1,19d' ../../../library/http_websocket_messages/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_messages.rst
+sed '1,19d' ../../../library/http_websocket_session/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_session.rst
 sed '1,19d' ../../../library/ica_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/ica_projection.rst
 sed '1,19d' ../../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.rst
 sed '1,19d' ../../../library/ieee_754/NOTES.md | pandoc -f gfm -t rst -o libraries/ieee_754.rst
@@ -226,6 +247,7 @@ sed '1,19d' ../../../library/nearest_centroid_classifier/NOTES.md | pandoc -f gf
 sed '1,19d' ../../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
 sed '1,19d' ../../../library/nmea/NOTES.md | pandoc -f gfm -t rst -o libraries/nmea.rst
 sed '1,19d' ../../../library/nmf_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
+sed '1,19d' ../../../library/open_api/NOTES.md | pandoc -f gfm -t rst -o libraries/open_api.rst
 sed '1,19d' ../../../library/optics_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
 sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst
@@ -256,6 +278,7 @@ sed '1,19d' ../../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/regression_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_protocols.rst
 sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o libraries/regression_tree.rst
 sed '1,19d' ../../../library/regularized_bradley_terry_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry_ranker.rst
+sed '1,19d' ../../../library/rest/NOTES.md | pandoc -f gfm -t rst -o libraries/rest.rst
 sed '1,19d' ../../../library/ridge_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/ridge_regression.rst
 sed '1,19d' ../../../library/schulze_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst

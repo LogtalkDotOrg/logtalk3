@@ -33,6 +33,10 @@
 		parse/2, generate/2, validate/1, validate/2
 	]).
 
+	:- uses(list, [
+		append/3
+	]).
+
 	cover(wkt_wkb).
 
 	cleanup :-
@@ -142,6 +146,12 @@
 
 	test(wkt_wkb_parse_wkb_hex_codes_01, deterministic(Geometry == point([1.0, 2.0]))) :-
 		atom_codes('0101000000000000000000f03f0000000000000040', Codes),
+		parse(wkb(hex(codes(Codes))), Geometry).
+
+	test(wkt_wkb_parse_wkb_hex_codes_whitespace_01, deterministic(Geometry == point([1.0, 2.0]))) :-
+		atom_codes('0101000000000000000000f03f', Codes1),
+		atom_codes('0000000000000040', Codes2),
+		append(Codes1, [0'\n, 0'\t, 32, 0'\r| Codes2], Codes),
 		parse(wkb(hex(codes(Codes))), Geometry).
 
 	test(wkt_wkb_parse_wkb_bytes_big_01, deterministic(Geometry == point([1.0, 2.0]))) :-

@@ -375,7 +375,7 @@
 			PositiveNonGround0 = PositiveNonGround1,
 			Aggregate0 = [Literal| Aggregate1],
 			Negative0 = Negative1
-		; 	PositiveGround0 = PositiveGround1,
+		;	PositiveGround0 = PositiveGround1,
 			PositiveNonGround0 = PositiveNonGround1,
 			Aggregate0 = Aggregate1,
 			Negative0 = [Literal| Negative1]
@@ -569,20 +569,20 @@
 		(	Sign == aggregate ->
 			Term = agg(_, _, Goals, _),
 			relax_aggregate_goals(Goals, HeadName, HeadArity, HeadStratum, Change0, Change1, NewHeadStratum)
-		; 	term_predicate(Term, predicate(BodyName, BodyArity)),
+		;	term_predicate(Term, predicate(BodyName, BodyArity)),
 			( predicate_stratum_(BodyName, BodyArity, BodyStratum) ->
 				true
-			; 	BodyStratum = 0
+			;	BodyStratum = 0
 			),
 			( Sign == negative ->
 				MinimumHeadStratum is BodyStratum + 1
-			; 	MinimumHeadStratum is BodyStratum
+			;	MinimumHeadStratum is BodyStratum
 			),
 			( HeadStratum < MinimumHeadStratum ->
 				update_predicate_stratum(HeadName, HeadArity, MinimumHeadStratum),
 				NewHeadStratum = MinimumHeadStratum,
 				Change1 = changed
-			; 	NewHeadStratum = HeadStratum,
+			;	NewHeadStratum = HeadStratum,
 				Change1 = Change0
 			)
 		),
@@ -593,14 +593,14 @@
 		term_predicate(Goal, predicate(BodyName, BodyArity)),
 		(	predicate_stratum_(BodyName, BodyArity, BodyStratum) ->
 			true
-		; 	BodyStratum = 0
+		;	BodyStratum = 0
 		),
 		MinimumHeadStratum is BodyStratum + 1,
 		( HeadStratum < MinimumHeadStratum ->
 			update_predicate_stratum(HeadName, HeadArity, MinimumHeadStratum),
 			NextHeadStratum = MinimumHeadStratum,
 			Change1 = changed
-		; 	NextHeadStratum = HeadStratum,
+		;	NextHeadStratum = HeadStratum,
 			Change1 = Change0
 		),
 		relax_aggregate_goals(Goals, HeadName, HeadArity, NextHeadStratum, Change1, Change, FinalHeadStratum).
@@ -613,7 +613,7 @@
 		findall(Stratum, predicate_stratum_(_, _, Stratum), Strata),
 		(	Strata == [] ->
 			Maximum is -1
-		; 	max(Strata, Maximum)
+		;	max(Strata, Maximum)
 		).
 
 	materialize_strata(Stratum, MaximumStratum) :-

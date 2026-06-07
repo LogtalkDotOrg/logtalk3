@@ -1,0 +1,103 @@
+.. index:: single: http_directory_listing
+.. _http_directory_listing/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_directory_listing``
+==========================
+
+Router-agnostic directory listing helper built on the normalized ``http_core`` library.
+
+| **Availability:** 
+|    ``logtalk_load(http_directory_listing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_docroot_paths <http_docroot_paths/0>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`date <date/0>`
+|    :ref:`html5 <html5/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`mime_types <mime_types/0>`
+|    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serve/4
+.. _http_directory_listing/0::serve/4:
+
+``serve/4``
+^^^^^^^^^^^
+
+Serves a directory listing for a relative request path from the given document root using the default options and returns a normalized response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(Path,Request,DocumentRoot,Response)``
+| **Mode and number of proofs:**
+|    ``serve(+atom,+compound,+atom,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve/5
+.. _http_directory_listing/0::serve/5:
+
+``serve/5``
+^^^^^^^^^^^
+
+Serves a directory listing for a relative request path from the given document root using the given options and returns a normalized response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(Path,Request,DocumentRoot,Response,Options)``
+| **Mode and number of proofs:**
+|    ``serve(+atom,+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

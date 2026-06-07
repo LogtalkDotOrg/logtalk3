@@ -1,0 +1,188 @@
+.. index:: single: http_request_protocol
+.. _http_request_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_request_protocol``
+=========================
+
+Protocol for Logtalk objects exposing normalized HTTP request data.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: method/1
+.. _http_request_protocol/0::method/1:
+
+``method/1``
+^^^^^^^^^^^^
+
+Returns the normalized lowercase HTTP method atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``method(Method)``
+| **Mode and number of proofs:**
+|    ``method(-atom)`` - ``one``
+
+
+------------
+
+.. index:: target/1
+.. _http_request_protocol/0::target/1:
+
+``target/1``
+^^^^^^^^^^^^
+
+Returns the normalized request target descriptor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target(Target)``
+| **Mode and number of proofs:**
+|    ``target(-compound)`` - ``one``
+
+
+------------
+
+.. index:: version/1
+.. _http_request_protocol/0::version/1:
+
+``version/1``
+^^^^^^^^^^^^^
+
+Returns the normalized HTTP version term ``http(Major, Minor)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``version(Version)``
+| **Mode and number of proofs:**
+|    ``version(-compound)`` - ``one``
+
+
+------------
+
+.. index:: headers/1
+.. _http_request_protocol/0::headers/1:
+
+``headers/1``
+^^^^^^^^^^^^^
+
+Returns the request header list as normalized ``Name-Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``headers(Headers)``
+| **Mode and number of proofs:**
+|    ``headers(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: header/2
+.. _http_request_protocol/0::header/2:
+
+``header/2``
+^^^^^^^^^^^^
+
+Enumerates normalized request headers as ``Name`` and ``Value`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header(Name,Value)``
+| **Mode and number of proofs:**
+|    ``header(?atom,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: body/1
+.. _http_request_protocol/0::body/1:
+
+``body/1``
+^^^^^^^^^^
+
+Returns the normalized request body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``body(Body)``
+| **Mode and number of proofs:**
+|    ``body(-compound)`` - ``one``
+
+
+------------
+
+.. index:: property/1
+.. _http_request_protocol/0::property/1:
+
+``property/1``
+^^^^^^^^^^^^^^
+
+Enumerates derived or higher-layer normalized request properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``property(Property)``
+| **Mode and number of proofs:**
+|    ``property(?compound)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

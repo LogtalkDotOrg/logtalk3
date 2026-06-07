@@ -1,0 +1,383 @@
+.. index:: single: crypto
+.. _crypto/0:
+
+.. rst-class:: right
+
+**object**
+
+``crypto``
+==========
+
+Transport-neutral cryptographic helper predicates.
+
+| **Availability:** 
+|    ``logtalk_load(crypto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`hmac <hmac/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: random_bytes/2
+.. _crypto/0::random_bytes/2:
+
+``random_bytes/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns a list with the requested number of random bytes. It tries ``/dev/urandom`` first and falls back to a pseudo-random generator when necessary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_bytes(Count,Bytes)``
+| **Mode and number of proofs:**
+|    ``random_bytes(+non_negative_integer,-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but is less than zero:
+|        ``domain_error(non_negative_integer,Count)``
+
+
+------------
+
+.. index:: hex_bytes/2
+.. _crypto/0::hex_bytes/2:
+
+``hex_bytes/2``
+^^^^^^^^^^^^^^^
+
+Relates a hexadecimal atom with the corresponding list of bytes, generating lowercase hexadecimal atoms when converting from bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hex_bytes(Hex,Bytes)``
+| **Mode and number of proofs:**
+|    ``hex_bytes(+atom,-list(byte))`` - ``zero_or_one_or_error``
+|    ``hex_bytes(-atom,+list(byte))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Hex`` and ``Bytes`` are both variables:
+|        ``instantiation_error``
+|    ``Hex`` is neither a variable nor an atom:
+|        ``type_error(atom,Hex)``
+|    ``Hex`` is an atom but not a valid hexadecimal atom:
+|        ``domain_error(hexadecimal_atom,Hex)``
+|    ``Bytes`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),Bytes)``
+|    ``Bytes`` contains a variable byte:
+|        ``instantiation_error``
+|    ``Bytes`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Bytes`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: secure_compare/2
+.. _crypto/0::secure_compare/2:
+
+``secure_compare/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when both inputs are equal using a constant-time comparison strategy for byte sequences of the same representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``secure_compare(Expected,Candidate)``
+| **Mode and number of proofs:**
+|    ``secure_compare(+list(byte),+list(byte))`` - ``zero_or_one_or_error``
+|    ``secure_compare(+atom,+atom)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Expected`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Expected`` is neither an atom nor a list of bytes:
+|        ``type_error(list(byte),Expected)``
+|    ``Expected`` is an atom and ``Candidate`` is not an atom:
+|        ``type_error(atom,Candidate)``
+|    ``Candidate`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Candidate`` is neither an atom nor a list of bytes when ``Expected`` is a byte list:
+|        ``type_error(list(byte),Candidate)``
+|    ``Expected`` or ``Candidate`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Expected`` or ``Candidate`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: hkdf/5
+.. _crypto/0::hkdf/5:
+
+``hkdf/5``
+^^^^^^^^^^
+
+Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the `hash_digest_protocol` protocol.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hkdf(Hash,KeyMaterial,Length,Bytes,Options)``
+| **Mode and number of proofs:**
+|    ``hkdf(+object_identifier,+list(byte),+non_negative_integer,-list(byte),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Hash`` is a variable:
+|        ``instantiation_error``
+|    ``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol:
+|        ``domain_error(crypto_hash,Hash)``
+|    ``KeyMaterial`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``KeyMaterial`` is a list but not a list of bytes:
+|        ``type_error(list(byte),KeyMaterial)``
+|    ``KeyMaterial`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``KeyMaterial`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Length`` is a variable:
+|        ``instantiation_error``
+|    ``Length`` is neither a variable nor an integer:
+|        ``type_error(integer,Length)``
+|    ``Length`` is less than zero:
+|        ``domain_error(non_negative_integer,Length)``
+|    ``Length`` exceeds the maximum HKDF output length for the selected hash:
+|        ``domain_error(hkdf_output_length(0,MaxLength),Length)``
+|    ``Options`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list of compound terms:
+|        ``type_error(list(compound),Options)``
+|    ``Options`` contains an invalid option term:
+|        ``domain_error(hkdf_option,Option)``
+|    ``Options`` contains a ``salt/1`` or ``info/1`` value that is not a list of bytes:
+|        ``type_error(list(byte),Bytes)``
+|    ``Options`` contains a ``salt/1`` or ``info/1`` value with a variable byte:
+|        ``instantiation_error``
+|    ``Options`` contains a ``salt/1`` or ``info/1`` value with a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Options`` contains a ``salt/1`` or ``info/1`` value with an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+| **Remarks:**
+
+    - Repeated options: When the same HKDF option is given multiple times, the last occurrence is used.
+    - Option ``salt(Bytes)``: Uses the given byte list as the HKDF salt. When this option is absent, the salt defaults to a zero-filled byte list with the selected hash digest size.
+    - Option ``info(Bytes)``: Uses the given byte list as the HKDF context information. When this option is absent, the context information defaults to the empty list.
+
+
+------------
+
+.. index:: pbkdf2/6
+.. _crypto/0::pbkdf2/6:
+
+``pbkdf2/6``
+^^^^^^^^^^^^
+
+Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the `hash_digest_protocol` protocol.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pbkdf2(Hash,Password,Salt,Iterations,Length,DerivedKey)``
+| **Mode and number of proofs:**
+|    ``pbkdf2(+object_identifier,+list(byte),+list(byte),+integer,+non_negative_integer,-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Hash`` is a variable:
+|        ``instantiation_error``
+|    ``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol:
+|        ``domain_error(crypto_hash,Hash)``
+|    ``Password`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Password`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Password)``
+|    ``Password`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Password`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Salt`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Salt`` is a liust but not a list of bytes:
+|        ``type_error(list(byte),Salt)``
+|    ``Salt`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Salt`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Iterations`` is a variable:
+|        ``instantiation_error``
+|    ``Iterations`` is neither a variable nor an integer:
+|        ``type_error(integer,Iterations)``
+|    ``Iterations`` is an integer but not a positive integer:
+|        ``domain_error(positive_integer,Iterations)``
+|    ``Length`` is a variable:
+|        ``instantiation_error``
+|    ``Length`` is neither a variable nor an integer:
+|        ``type_error(integer,Length)``
+|    ``Length`` is an integer but is less than zero:
+|        ``domain_error(non_negative_integer,Length)``
+|    ``Length`` exceeds the maximum PBKDF2 output length:
+|        ``domain_error(pbkdf2_output_length,Length)``
+
+
+------------
+
+.. index:: password_hash/4
+.. _crypto/0::password_hash/4:
+
+``password_hash/4``
+^^^^^^^^^^^^^^^^^^^
+
+Computes a structured password-hash term using PBKDF2, a hash object implementing the `hash_digest_protocol` protocol, and the given derivation options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``password_hash(Hash,Password,PasswordHash,Options)``
+| **Mode and number of proofs:**
+|    ``password_hash(+object_identifier,+list(byte),-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Hash`` is a variable:
+|        ``instantiation_error``
+|    ``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol:
+|        ``domain_error(crypto_hash,Hash)``
+|    ``Password`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Password`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Password)``
+|    ``Password`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Password`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Options`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Options`` is a list but not a list of compound terms:
+|        ``type_error(list(compound),Options)``
+|    ``Options`` contains an invalid option term:
+|        ``domain_error(password_hash_option,Option)``
+|    ``Options`` contains an ``iterations/1`` value that is not an integer:
+|        ``type_error(integer,Iterations)``
+|    ``Options`` contains an ``iterations/1`` value that is not a positive integer:
+|        ``domain_error(positive_integer,Iterations)``
+|    ``Options`` contains a ``salt/1`` value that is not a list of bytes:
+|        ``type_error(list(byte),Salt)``
+|    ``Options`` contains a ``salt/1`` value with a variable byte:
+|        ``instantiation_error``
+|    ``Options`` contains a ``salt/1`` value with a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Options`` contains a ``salt/1`` value with an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer:
+|        ``type_error(integer,Length)``
+|    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero:
+|        ``domain_error(non_negative_integer,Length)``
+
+| **Remarks:**
+
+    - Repeated options: When the same password-hash option is given multiple times, the last occurrence is used.
+    - Option ``iterations(Count)``: Uses the given positive integer PBKDF2 iteration count. When this option is absent, the iteration count defaults to ``131072``.
+    - Option ``salt(Bytes)``: Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any ``salt_length/1`` option only affects validation, not the selected salt value.
+    - Option ``salt_length(Count)``: Generates a random salt with the given non-negative number of bytes when ``salt/1`` is absent. When this option is absent, the generated salt length defaults to ``16`` bytes.
+    - Option ``length(Count)``: Uses the given non-negative derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.
+
+
+------------
+
+.. index:: verify_password_hash/2
+.. _crypto/0::verify_password_hash/2:
+
+``verify_password_hash/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the password byte sequence matches the given structured password-hash term or stored digest term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_password_hash(PasswordHash,Password)``
+| **Mode and number of proofs:**
+|    ``verify_password_hash(+compound,+list(byte))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``PasswordHash`` is not a supported password-hash term:
+|        ``domain_error(password_hash,PasswordHash)``
+|    ``PasswordHash`` contains a variable hash object:
+|        ``instantiation_error``
+|    ``PasswordHash`` contains a hash object that does not implement the ``hash_digest_protocol`` protocol:
+|        ``domain_error(crypto_hash,Hash)``
+|    ``PasswordHash`` contains an ``Iterations`` value that is not an integer:
+|        ``type_error(integer,Iterations)``
+|    ``PasswordHash`` contains an ``Iterations`` value that is not a positive integer:
+|        ``domain_error(positive_integer,Iterations)``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value that is not a list of bytes:
+|        ``type_error(list(byte),Bytes)``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with a variable byte:
+|        ``instantiation_error``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Password`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Password`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Password)``
+|    ``Password`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Password`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

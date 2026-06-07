@@ -127,6 +127,9 @@ https://logtalk.org/docs/apis/index.html
 
 Most directories include `NOTES.md` documentation files.
 
+The [library/NOTES.md](library/NOTES.md) file provides a thematic overview
+of the libraries.
+
 On POSIX systems, there's also [man pages](docs/man/man1) for most shell scripts.
 A list of these scripts can be generated using the `apropos logtalk` command.
 [HTML versions](https://logtalk.org/documentation.html#man-pages) of the man

@@ -1,0 +1,358 @@
+.. index:: single: http_client
+.. _http_client/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_client``
+===============
+
+Request-oriented HTTP client facade built on top of the url and http_socket libraries.
+
+| **Availability:** 
+|    ``logtalk_load(http_client(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_multipart <http_multipart/0>`
+|    :ref:`http_socket <http_socket/0>`
+|    :ref:`http_websocket_handshake <http_websocket_handshake/0>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`uuid(Representation) <uuid/1>`
+
+| **Remarks:**
+
+   - URL support: This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.
+   - Request construction: The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.
+   - Option precedence: When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.
+   - WebSocket opening handshake: The ``open_websocket/4`` predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.
+   - Multipart form-data: The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a ``form_data(Items)`` descriptor that is translated using the ``http_multipart`` library and annotated with a multipart boundary property before request construction.
+   - Reusable transports: The ``request/5`` and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.
+   - Low-level core: The stream-based primitives are available from the ``http_client_core`` object.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: request/4
+.. _http_client/0::request/4:
+
+``request/4``
+^^^^^^^^^^^^^
+
+Builds a normalized request from the given method, absolute ``http://`` URL, and options, performs a one-shot exchange, and returns the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(Method,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``request(+atom,+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: request/5
+.. _http_client/0::request/5:
+
+``request/5``
+^^^^^^^^^^^^^
+
+Builds a normalized request from the given method, absolute ``http://`` URL, and options, validates it against an open http_socket connection or pool handle endpoint, performs one exchange, and returns the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(ConnectionOrPool,Method,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``request(+compound,+atom,+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: get/3
+.. _http_client/0::get/3:
+
+``get/3``
+^^^^^^^^^
+
+Convenience wrapper over request/4 using the ``get`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``get(+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: get/4
+.. _http_client/0::get/4:
+
+``get/4``
+^^^^^^^^^
+
+Convenience wrapper over request/5 using the ``get`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(ConnectionOrPool,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: head/3
+.. _http_client/0::head/3:
+
+``head/3``
+^^^^^^^^^^
+
+Convenience wrapper over request/4 using the ``head`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head(URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``head(+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: head/4
+.. _http_client/0::head/4:
+
+``head/4``
+^^^^^^^^^^
+
+Convenience wrapper over request/5 using the ``head`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head(ConnectionOrPool,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``head(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: delete/3
+.. _http_client/0::delete/3:
+
+``delete/3``
+^^^^^^^^^^^^
+
+Convenience wrapper over request/4 using the ``delete`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``delete(+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: delete/4
+.. _http_client/0::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Convenience wrapper over request/5 using the ``delete`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(ConnectionOrPool,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``delete(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: post/4
+.. _http_client/0::post/4:
+
+``post/4``
+^^^^^^^^^^
+
+Convenience wrapper over request/4 using the ``post`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``post(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``post(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: post/5
+.. _http_client/0::post/5:
+
+``post/5``
+^^^^^^^^^^
+
+Convenience wrapper over request/5 using the ``post`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``post(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``post(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: put/4
+.. _http_client/0::put/4:
+
+``put/4``
+^^^^^^^^^
+
+Convenience wrapper over request/4 using the ``put`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``put(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: put/5
+.. _http_client/0::put/5:
+
+``put/5``
+^^^^^^^^^
+
+Convenience wrapper over request/5 using the ``put`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``put(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: patch/4
+.. _http_client/0::patch/4:
+
+``patch/4``
+^^^^^^^^^^^
+
+Convenience wrapper over request/4 using the ``patch`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``patch(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``patch(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: patch/5
+.. _http_client/0::patch/5:
+
+``patch/5``
+^^^^^^^^^^^
+
+Convenience wrapper over request/5 using the ``patch`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``patch(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``patch(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_websocket/4
+.. _http_client/0::open_websocket/4:
+
+``open_websocket/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Builds a WebSocket opening-handshake request from the given absolute ``ws://`` URL and options, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_websocket(URL,Connection,Response,Options)``
+| **Mode and number of proofs:**
+|    ``open_websocket(+atom,--compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

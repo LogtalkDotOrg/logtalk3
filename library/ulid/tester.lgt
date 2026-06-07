@@ -21,8 +21,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	logtalk_load(crypto(loader)),
 	logtalk_load(iso8601(loader)),
-	logtalk_load(random(loader)),
 	logtalk_load([ulid_protocol, ulid, ulid_types], [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

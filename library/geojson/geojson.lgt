@@ -502,7 +502,7 @@
 			path_error(Path, option_not_allowed(Name), Error),
 			Errors = [Error| RestErrors],
 			validate_options(Options, Path, Allowed, BBoxLength, Seen, RestErrors)
-		; 	member(Name, Seen) ->
+		;	member(Name, Seen) ->
 			path_error(Path, duplicate_option(Name), Error),
 			Errors = [Error| RestErrors],
 			validate_options(Options, Path, Allowed, BBoxLength, Seen, RestErrors)
@@ -1008,9 +1008,9 @@
 
 	path_error(ReversePath, Reason0, Reason) :-
 		reverse(ReversePath, Path),
-		( atom(Reason0) ->
+		(	atom(Reason0) ->
 			Reason =.. [Reason0, Path]
-		; Reason0 =.. [Functor| Arguments],
+		;	Reason0 =.. [Functor| Arguments],
 			append(Arguments, [Path], ArgumentsWithPath),
 			Reason =.. [Functor| ArgumentsWithPath]
 		).

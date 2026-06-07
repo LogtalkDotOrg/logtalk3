@@ -1,0 +1,575 @@
+.. index:: single: http_router
+.. _http_router/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_router``
+===============
+
+Declarative HTTP router category for objects implementing the http_handler_protocol protocol.
+
+| **Availability:** 
+|    ``logtalk_load(http_router(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_json_term_helpers <http_json_term_helpers/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Route authorization: Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after route matching and metadata annotation but before route handler dispatch.
+   - Custom bad-request responses: Importing objects can optionally define ``route_bad_request_response/3`` to customize ``400 Bad Request`` responses generated from dedicated parameter-validation exceptions raised by route handlers.
+   - Content negotiation: Importing objects can optionally define ``route_produces/2`` clauses so the router negotiates the request ``Accept`` header and annotates matched requests with the negotiated ``response_media_type(MediaType)`` property.
+   - Middleware chaining: Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response.
+   - Response middleware: Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.
+   - OpenAPI derivation: Router objects can automatically expose ``open_api_provider_protocol`` operation descriptors derived from ``route/4``, ``route_metadata/2``, and ``route_produces/2`` plus optional top-level OpenAPI hooks. When ``request_body/1`` or ``responses/1`` metadata is absent, the router first checks optional example hooks and then attempts to infer inline request and response schemas by probing route handlers with synthetic annotated requests.
+   - Route metadata: Importing objects can optionally define ``route_metadata/2`` clauses so matched requests are annotated with additional route-specific metadata properties before the route handler is called.
+   - Route declarations: Importing objects must define ``route/4`` clauses using the descriptor shape ``route(Id, Method, PathTemplate, Handler)``.
+   - Path templates: Path-template atoms support literal segments, anonymous ``*`` wildcard segments, plain ``{name}`` placeholders, and typed placeholders such as ``{id:integer}`` and ``{score:number}``.
+   - HEAD fallback: A ``HEAD`` request matches an exact ``head`` route first and otherwise falls back to a matching ``get`` route.
+   - OPTIONS handling: An ``OPTIONS`` request matches an explicit ``options`` route first and otherwise returns an automatic response. Synthetic ``OPTIONS`` requests are annotated with ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, the router also annotates ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters, can be customized using ``route_automatic_options_response/3``, and still flows through response middleware.
+   - Custom error responses: Importing objects can optionally define ``route_not_found_response/2`` and ``route_method_not_allowed_response/3`` predicates to customize ``404`` and ``405`` responses.
+   - Custom negotiation failures: Importing objects can optionally define ``route_not_acceptable_response/3`` to customize ``406 Not Acceptable`` responses for route-level content negotiation failures.
+   - Request annotations: Matched requests are annotated with the explicit properties ``route(Id)`` and ``path_params(Pairs)`` plus any additional metadata declared by ``route_metadata/2`` before the route handler is called. On the normal routing path the router also scrubs stale internal synthetic properties such as ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``, and ``response_media_type/1`` before handler execution.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: handle/2
+.. _http_router/0::handle/2:
+
+``handle/2``
+^^^^^^^^^^^^
+
+Routes a normalized HTTP request using the importing object ``route/4`` clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle(Request,Response)``
+| **Mode and number of proofs:**
+|    ``handle(+compound,-compound)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Route authorization: Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after matching and metadata annotation but before route handler dispatch. The hook must return either ``continue(Request)`` or ``respond(Response)``. Short-circuited responses still flow through response middleware with the routed request annotations preserved.
+    - Bad-request handling: Dedicated route-handler exceptions matching ``error(http_parameter_validation(Errors), Context)`` with a non-empty ``Errors`` list are translated into ``400 Bad Request`` responses using either ``route_bad_request_response/3`` or the default plain-text response.
+    - Middleware: Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.
+    - Response middleware: Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.
+    - Request annotations: Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied. On this normal routing path the router strips stale internal synthetic properties such as ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``, and ``response_media_type/1`` before calling the handler.
+    - Automatic ``OPTIONS``: An explicit ``options`` route matches first. Otherwise the router builds an automatic response from a synthetic request carrying ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, that synthetic request also carries ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic ``OPTIONS`` responses still pass through response middleware and can be customized using ``route_automatic_options_response/3``.
+    - Custom responses: Importing objects can optionally define ``route_bad_request_response/3``, ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``400``, ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.
+    - Failure behavior: Dedicated parameter-validation exceptions return ``400 Bad Request`` responses. Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.
+
+
+------------
+
+.. index:: api_info/1
+.. _http_router/0::api_info/1:
+
+``api_info/1``
+^^^^^^^^^^^^^^
+
+Returns the top-level OpenAPI info descriptor used when a router object also implements the ``open_api_provider_protocol`` protocol. Importing objects can override the default descriptor by defining ``open_api_info/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``api_info(Info)``
+| **Mode and number of proofs:**
+|    ``api_info(-compound)`` - ``one``
+
+
+------------
+
+.. index:: servers/1
+.. _http_router/0::servers/1:
+
+``servers/1``
+^^^^^^^^^^^^^
+
+Returns the OpenAPI server descriptors used when a router object also implements the ``open_api_provider_protocol`` protocol. Importing objects can override the default empty list by defining ``open_api_servers/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``servers(Servers)``
+| **Mode and number of proofs:**
+|    ``servers(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: security/1
+.. _http_router/0::security/1:
+
+``security/1``
+^^^^^^^^^^^^^^
+
+Optional OpenAPI top-level security hook passthrough used when a router object also implements the ``open_api_provider_protocol`` protocol. Importing objects can define ``open_api_security/1`` to expose top-level security requirements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``security(Security)``
+| **Mode and number of proofs:**
+|    ``security(-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: operations/1
+.. _http_router/0::operations/1:
+
+``operations/1``
+^^^^^^^^^^^^^^^^
+
+Derives OpenAPI operation descriptors from ``route/4``, ``route_metadata/2``, and ``route_produces/2`` when a router object also implements the ``open_api_provider_protocol`` protocol. Recognized route metadata terms are ``summary/1``, ``description/1``, ``tags/1``, ``deprecated/1``, ``security/1``, ``parameters/1``, ``request_body/1``, and ``responses/1``. When ``request_body/1`` or ``responses/1`` metadata is absent, the router first checks optional ``route_open_api_request_body_example/2`` and ``route_open_api_response_example/2`` hooks and then attempts to infer inline request and response schemas by probing the route handler with a synthetic annotated request. Explicit metadata always takes precedence over inferred descriptors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operations(Operations)``
+| **Mode and number of proofs:**
+|    ``operations(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: schema/2
+.. _http_router/0::schema/2:
+
+``schema/2``
+^^^^^^^^^^^^
+
+Optional OpenAPI schema hook passthrough used when a router object also implements the ``open_api_provider_protocol`` protocol. Importing objects can define ``open_api_schema/2`` to expose reusable schemas referenced by derived route operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``schema(Name,Schema)``
+| **Mode and number of proofs:**
+|    ``schema(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: security_scheme/2
+.. _http_router/0::security_scheme/2:
+
+``security_scheme/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Optional OpenAPI security scheme hook passthrough used when a router object also implements the ``open_api_provider_protocol`` protocol. Importing objects can define ``open_api_security_scheme/2`` to expose reusable security schemes referenced by derived route operations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``security_scheme(Name,SecurityScheme)``
+| **Mode and number of proofs:**
+|    ``security_scheme(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: middleware/2
+.. _http_router/0::middleware/2:
+
+``middleware/2``
+^^^^^^^^^^^^^^^^
+
+Optional hook predicate that enumerates ordered middleware descriptors. ``Id`` is the middleware identifier and ``Handler`` is the name of a declared local predicate with arity 2, typically protected, that receives the current request and returns either ``continue(Request)`` or ``respond(Response)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``middleware(Id,Handler)``
+| **Mode and number of proofs:**
+|    ``middleware(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: response_middleware/2
+.. _http_router/0::response_middleware/2:
+
+``response_middleware/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that enumerates ordered response middleware descriptors. ``Id`` is the middleware identifier and ``Handler`` is the name of a declared local predicate with arity 3, typically protected, that receives the request used to produce the current response and returns the transformed response. Routed requests preserve their route metadata annotations and negotiated media type, when applicable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response_middleware(Id,Handler)``
+| **Mode and number of proofs:**
+|    ``response_middleware(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: route/4
+.. _http_router/0::route/4:
+
+``route/4``
+^^^^^^^^^^^
+
+Hook predicate that enumerates route descriptors. ``Id`` is the route identifier, ``Method`` is a lowercase HTTP method atom, ``PathTemplate`` is a path-template atom using literal segments, anonymous ``*`` wildcard segments, and optional plain or typed placeholders such as ``{id}``, ``{id:integer}``, and ``{score:number}``, and ``Handler`` is the name of a declared local predicate with arity 2, typically protected, that receives the annotated request and returns the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route(Id,Method,PathTemplate,Handler)``
+| **Mode and number of proofs:**
+|    ``route(?atom,?atom,?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: route_metadata/2
+.. _http_router/0::route_metadata/2:
+
+``route_metadata/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that declares additional metadata properties for a route. When defined, ``Metadata`` must be a list of compound terms. The router removes any existing request properties with the same functors, prepends the metadata to the matched request, and then adds the standard ``route/1`` and ``path_params/1`` annotations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_metadata(Id,Metadata)``
+| **Mode and number of proofs:**
+|    ``route_metadata(?atom,?list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: authorize_routed_request/2
+.. _http_router/0::authorize_routed_request/2:
+
+``authorize_routed_request/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that validates or decorates a routed request after route matching and metadata annotation but before route handler dispatch. It must return either ``continue(Request)`` or ``respond(Response)``. The default implementation continues with the routed request unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorize_routed_request(Request,Action)``
+| **Mode and number of proofs:**
+|    ``authorize_routed_request(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: route_open_api_request_body_example/2
+.. _http_router/0::route_open_api_request_body_example/2:
+
+``route_open_api_request_body_example/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that enumerates example request bodies for OpenAPI inference. Each ``Body`` must be either ``empty`` or a normalized ``content(MediaType, Payload)`` term. These examples are only consulted when explicit ``request_body/1`` route metadata is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_open_api_request_body_example(Id,Body)``
+| **Mode and number of proofs:**
+|    ``route_open_api_request_body_example(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: route_open_api_response_example/2
+.. _http_router/0::route_open_api_response_example/2:
+
+``route_open_api_response_example/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that enumerates example normalized HTTP responses for OpenAPI inference. These examples are only consulted when explicit ``responses/1`` route metadata is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_open_api_response_example(Id,Response)``
+| **Mode and number of proofs:**
+|    ``route_open_api_response_example(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_info/1
+.. _http_router/0::open_api_info/1:
+
+``open_api_info/1``
+^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing router objects can override to customize the default top-level OpenAPI info descriptor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_info(Info)``
+| **Mode and number of proofs:**
+|    ``open_api_info(-compound)`` - ``one``
+
+
+------------
+
+.. index:: open_api_servers/1
+.. _http_router/0::open_api_servers/1:
+
+``open_api_servers/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Hook predicate that importing router objects can override to customize the default OpenAPI server descriptors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_servers(Servers)``
+| **Mode and number of proofs:**
+|    ``open_api_servers(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: open_api_security/1
+.. _http_router/0::open_api_security/1:
+
+``open_api_security/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that importing router objects can define to expose top-level OpenAPI security requirements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_security(Security)``
+| **Mode and number of proofs:**
+|    ``open_api_security(-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: open_api_schema/2
+.. _http_router/0::open_api_schema/2:
+
+``open_api_schema/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that importing router objects can define to expose reusable OpenAPI schemas.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_schema(Name,Schema)``
+| **Mode and number of proofs:**
+|    ``open_api_schema(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_security_scheme/2
+.. _http_router/0::open_api_security_scheme/2:
+
+``open_api_security_scheme/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that importing router objects can define to expose reusable OpenAPI security schemes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_security_scheme(Name,SecurityScheme)``
+| **Mode and number of proofs:**
+|    ``open_api_security_scheme(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: route_produces/2
+.. _http_router/0::route_produces/2:
+
+``route_produces/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that declares the response media types produced by a route. When defined, ``MediaTypes`` must be a non-empty list of media type atoms. The router negotiates the request ``Accept`` header against this list, annotates successful matches with ``response_media_type(MediaType)``, and returns ``406 Not Acceptable`` when no produced type matches.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_produces(Id,MediaTypes)``
+| **Mode and number of proofs:**
+|    ``route_produces(?atom,?list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: path_template_parameters/2
+.. _http_router/0::path_template_parameters/2:
+
+``path_template_parameters/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the normalized placeholder descriptors declared in a path template as ``parameter(Name, Type)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_template_parameters(PathTemplate,Parameters)``
+| **Mode and number of proofs:**
+|    ``path_template_parameters(+atom,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: route_not_found_response/2
+.. _http_router/0::route_not_found_response/2:
+
+``route_not_found_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes ``404 Not Found`` responses. When defined by the importing object, it is called with the unmatched request and must return the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_not_found_response(Request,Response)``
+| **Mode and number of proofs:**
+|    ``route_not_found_response(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_bad_request_response/3
+.. _http_router/0::route_bad_request_response/3:
+
+``route_bad_request_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes ``400 Bad Request`` responses generated from dedicated parameter-validation exceptions raised by route handlers. When defined by the importing object, it is called with the routed request, the structured parameter error list, and must return the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_bad_request_response(Request,Errors,Response)``
+| **Mode and number of proofs:**
+|    ``route_bad_request_response(+compound,+list(compound),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_method_not_allowed_response/3
+.. _http_router/0::route_method_not_allowed_response/3:
+
+``route_method_not_allowed_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes ``405 Method Not Allowed`` responses. When defined by the importing object, it is called with the request, the effective allowed methods list as lowercase atoms, and must return the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_method_not_allowed_response(Request,AllowedMethods,Response)``
+| **Mode and number of proofs:**
+|    ``route_method_not_allowed_response(+compound,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_automatic_options_response/3
+.. _http_router/0::route_automatic_options_response/3:
+
+``route_automatic_options_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes automatic ``OPTIONS`` responses when no explicit ``options`` route matches. When defined by the importing object, it is called with the annotated synthetic request, the effective allowed methods list as lowercase atoms, and must return the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_automatic_options_response(Request,EffectiveMethods,Response)``
+| **Mode and number of proofs:**
+|    ``route_automatic_options_response(+compound,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: route_not_acceptable_response/3
+.. _http_router/0::route_not_acceptable_response/3:
+
+``route_not_acceptable_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional hook predicate that customizes ``406 Not Acceptable`` responses. When defined by the importing object, it is called with the request, the normalized produced media types for the matched route, and must return the response to send.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``route_not_acceptable_response(Request,ProducedMediaTypes,Response)``
+| **Mode and number of proofs:**
+|    ``route_not_acceptable_response(+compound,+list(atom),-compound)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

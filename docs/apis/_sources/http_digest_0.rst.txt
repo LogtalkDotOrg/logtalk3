@@ -1,0 +1,330 @@
+.. index:: single: http_digest
+.. _http_digest/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_digest``
+===============
+
+HTTP Digest authentication parsing, generation, request decoration, and verification helpers.
+
+| **Availability:** 
+|    ``logtalk_load(http_digest(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`crypto <crypto/0>`
+|    :ref:`date <date/0>`
+|    :ref:`hmac <hmac/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`sha256 <sha256/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: challenge/2
+.. _http_digest/0::challenge/2:
+
+``challenge/2``
+^^^^^^^^^^^^^^^
+
+Returns the single parsed Digest ``WWW-Authenticate`` challenge from a normalized HTTP response when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``challenge(Response,Challenge)``
+| **Mode and number of proofs:**
+|    ``challenge(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: authorization/2
+.. _http_digest/0::authorization/2:
+
+``authorization/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the single parsed Digest ``Authorization`` header from a normalized HTTP request when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorization(Request,Authorization)``
+| **Mode and number of proofs:**
+|    ``authorization(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: authentication_info/2
+.. _http_digest/0::authentication_info/2:
+
+``authentication_info/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the parsed ``Authentication-Info`` header from a normalized HTTP response when present.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authentication_info(Response,AuthenticationInfo)``
+| **Mode and number of proofs:**
+|    ``authentication_info(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_challenge/2
+.. _http_digest/0::parse_challenge/2:
+
+``parse_challenge/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Parses one Digest challenge header field value into a normalized ``digest_challenge/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_challenge(Text,Challenge)``
+| **Mode and number of proofs:**
+|    ``parse_challenge(++text,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_challenge/2
+.. _http_digest/0::generate_challenge/2:
+
+``generate_challenge/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates one canonical Digest challenge header field value from a normalized ``digest_challenge/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_challenge(Challenge,HeaderValue)``
+| **Mode and number of proofs:**
+|    ``generate_challenge(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_authorization/2
+.. _http_digest/0::parse_authorization/2:
+
+``parse_authorization/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses one Digest authorization header field value into a normalized ``digest_authorization/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_authorization(Text,Authorization)``
+| **Mode and number of proofs:**
+|    ``parse_authorization(++text,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_authorization/2
+.. _http_digest/0::generate_authorization/2:
+
+``generate_authorization/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates one canonical Digest authorization header field value from a normalized ``digest_authorization/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_authorization(Authorization,HeaderValue)``
+| **Mode and number of proofs:**
+|    ``generate_authorization(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: parse_authentication_info/2
+.. _http_digest/0::parse_authentication_info/2:
+
+``parse_authentication_info/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses one ``Authentication-Info`` header field value into a normalized ``digest_authentication_info/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_authentication_info(Text,AuthenticationInfo)``
+| **Mode and number of proofs:**
+|    ``parse_authentication_info(++text,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: generate_authentication_info/2
+.. _http_digest/0::generate_authentication_info/2:
+
+``generate_authentication_info/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates one canonical ``Authentication-Info`` header field value from a normalized ``digest_authentication_info/1`` term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_authentication_info(AuthenticationInfo,HeaderValue)``
+| **Mode and number of proofs:**
+|    ``generate_authentication_info(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: authorize_request/6
+.. _http_digest/0::authorize_request/6:
+
+``authorize_request/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Decorates a normalized HTTP request with a Digest ``Authorization`` header computed from a normalized challenge term, username, password, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorize_request(Request,Challenge,Username,Password,AuthorizedRequest,Options)``
+| **Mode and number of proofs:**
+|    ``authorize_request(+compound,+compound,++text,++text,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: protect_request/4
+.. _http_digest/0::protect_request/4:
+
+``protect_request/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Verifies a normalized HTTP request using a Digest verifier object and returns either ``continue(Request)`` or ``respond(Response)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``protect_request(Request,Verifier,Action,Options)``
+| **Mode and number of proofs:**
+|    ``protect_request(+compound,+object_identifier,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: unauthorized_response/3
+.. _http_digest/0::unauthorized_response/3:
+
+``unauthorized_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds a normalized ``401 Unauthorized`` response and returns the generated normalized Digest challenge term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unauthorized_response(Challenge,Response,Options)``
+| **Mode and number of proofs:**
+|    ``unauthorized_response(-compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: unauthorized_response/4
+.. _http_digest/0::unauthorized_response/4:
+
+``unauthorized_response/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decorates a normalized HTTP response with an explicit normalized Digest challenge term and returns the resulting ``401 Unauthorized`` response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unauthorized_response(Challenge,Response0,Response,Options)``
+| **Mode and number of proofs:**
+|    ``unauthorized_response(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: add_authentication_info/4
+.. _http_digest/0::add_authentication_info/4:
+
+``add_authentication_info/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decorates a normalized HTTP response with an ``Authentication-Info`` header computed from a previously verified request and options. The ``nextnonce`` option accepts ``false`` to omit the field, ``true`` to generate a fresh nonce using ``nonce_secret/1``, or an explicit nonce atom to emit verbatim.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add_authentication_info(Request,Response0,Response,Options)``
+| **Mode and number of proofs:**
+|    ``add_authentication_info(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

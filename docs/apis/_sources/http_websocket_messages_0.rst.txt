@@ -1,0 +1,56 @@
+.. index:: single: http_websocket_messages
+.. _http_websocket_messages/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_messages``
+===========================
+
+Transport-neutral WebSocket message predicates using atoms for text messages and close reasons.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_messages(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_websocket_messages(atom) <http_websocket_messages/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_messages/1::type/2`  :ref:`http_websocket_messages/1::write_message/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

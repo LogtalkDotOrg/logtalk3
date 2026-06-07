@@ -1,0 +1,209 @@
+.. index:: single: http_message_helpers
+.. _http_message_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_message_helpers``
+========================
+
+Internal shared helpers for HTTP transport persistence rules, connection token normalization, and chunk-size line parsing.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: connection_persistent/2
+.. _http_message_helpers/0::connection_persistent/2:
+
+``connection_persistent/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when a request-response exchange can continue on the same connection according to HTTP persistence semantics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_persistent(Request,Response)``
+| **Mode and number of proofs:**
+|    ``connection_persistent(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: request_persistent/1
+.. _http_message_helpers/0::request_persistent/1:
+
+``request_persistent/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when a normalized HTTP request keeps the connection persistent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_persistent(Request)``
+| **Mode and number of proofs:**
+|    ``request_persistent(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: response_persistent/1
+.. _http_message_helpers/0::response_persistent/1:
+
+``response_persistent/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when a normalized HTTP response keeps the connection persistent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response_persistent(Response)``
+| **Mode and number of proofs:**
+|    ``response_persistent(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: version_persistent_by_default/1
+.. _http_message_helpers/0::version_persistent_by_default/1:
+
+``version_persistent_by_default/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the given HTTP version uses persistent connections by default.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``version_persistent_by_default(Version)``
+| **Mode and number of proofs:**
+|    ``version_persistent_by_default(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: message_has_connection_token/2
+.. _http_message_helpers/0::message_has_connection_token/2:
+
+``message_has_connection_token/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when a normalized HTTP message exposes the given normalized Connection token through either headers or derived properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``message_has_connection_token(Message,Token)``
+| **Mode and number of proofs:**
+|    ``message_has_connection_token(+compound,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: message_connection_tokens/2
+.. _http_message_helpers/0::message_connection_tokens/2:
+
+``message_connection_tokens/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the de-duplicated normalized Connection tokens exposed by a normalized HTTP message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``message_connection_tokens(Message,Tokens)``
+| **Mode and number of proofs:**
+|    ``message_connection_tokens(+compound,-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: message_header_values/3
+.. _http_message_helpers/0::message_header_values/3:
+
+``message_header_values/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the stored header values for the given header name in message order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``message_header_values(Message,Name,Values)``
+| **Mode and number of proofs:**
+|    ``message_header_values(+compound,+atom,-list)`` - ``one``
+
+
+------------
+
+.. index:: chunk_size_line_size/2
+.. _http_message_helpers/0::chunk_size_line_size/2:
+
+``chunk_size_line_size/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses a chunk-size line into its hexadecimal size, ignoring optional whitespace and chunk extensions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chunk_size_line_size(LineBytes,Size)``
+| **Mode and number of proofs:**
+|    ``chunk_size_line_size(+list(integer),-integer)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -119,7 +119,7 @@
 		interval_relation_set::intersection(CurrentRelationSet, RelationSet, RefinedRelationSet),
 		(	RefinedRelationSet == CurrentRelationSet ->
 			RefinedNetwork = Network
-		; 	refine_compiled(CompiledNetwork, Node1, Node2, RefinedRelationSet, direct(RelationSet), UpdatedNetwork),
+		;	refine_compiled(CompiledNetwork, Node1, Node2, RefinedRelationSet, direct(RelationSet), UpdatedNetwork),
 			decompile_network(UpdatedNetwork, RefinedNetwork)
 		).
 
@@ -151,7 +151,7 @@
 		batch_refine_seed_compiled(Constraints, CompiledNetwork, RefinedNetwork, SeedPairs0, RefinementChanges),
 		(	SeedPairs0 == [] ->
 			compiled_seed_pairs(RefinedNetwork, SeedPairs)
-		; 	SeedPairs = SeedPairs0
+		;	SeedPairs = SeedPairs0
 		),
 		propagate_compiled_seeded(SeedPairs, RefinedNetwork, CompiledClosure, PropagationChanges),
 		decompile_network(CompiledClosure, Closure),
@@ -164,7 +164,7 @@
 		refine_seed_compiled(CompiledNetwork, Node1, Node2, RelationSet, RefinedNetwork, SeedPairs0, RefinementChanges),
 		(	SeedPairs0 == [] ->
 			compiled_seed_pairs(RefinedNetwork, SeedPairs)
-		; 	SeedPairs = SeedPairs0
+		;	SeedPairs = SeedPairs0
 		),
 		propagate_compiled_seeded(SeedPairs, RefinedNetwork, CompiledClosure, PropagationChanges),
 		decompile_network(CompiledClosure, Closure),
@@ -289,12 +289,12 @@
 	binary_search_node_index(NodeIndexVector, Node, Low, High, Index) :-
 		Middle is (Low + High) // 2,
 		arg(Middle, NodeIndexVector, entry(MiddleNode, MiddleIndex)),
-		( 	Node == MiddleNode ->
+		(	Node == MiddleNode ->
 			Index = MiddleIndex
-		; 	Node @< MiddleNode ->
+		;	Node @< MiddleNode ->
 			NextHigh is Middle - 1,
 			binary_search_node_index(NodeIndexVector, Node, Low, NextHigh, Index)
-		; 	NextLow is Middle + 1,
+		;	NextLow is Middle + 1,
 			binary_search_node_index(NodeIndexVector, Node, NextLow, High, Index)
 		).
 
@@ -480,9 +480,9 @@
 		propagate_compiled_worklist(UpdatedWorklist, ScheduledPairs2, Size, UpdatedNetwork, Closure, Changes1, Changes).
 
 	empty_scheduled_pairs(Size, scheduled(Rows)) :-
-		( 	Size =< 1 ->
+		(	Size =< 1 ->
 			functor(Rows, rows, 0)
-		; 	RowCount is Size - 1,
+		;	RowCount is Size - 1,
 			functor(Rows, rows, RowCount),
 			fill_scheduled_rows(1, RowCount, Size, Rows)
 		).
@@ -524,10 +524,10 @@
 
 	enqueue_unique_pairs([], ScheduledPairs, ScheduledPairs, Worklist, Worklist).
 	enqueue_unique_pairs([pair(LeftIndex, RightIndex)| Pairs], ScheduledPairs0, ScheduledPairs, Worklist0, Worklist) :-
-		( 	scheduled_pair(ScheduledPairs0, LeftIndex, RightIndex, yes) ->
+		(	scheduled_pair(ScheduledPairs0, LeftIndex, RightIndex, yes) ->
 			ScheduledPairs1 = ScheduledPairs0,
 			Worklist1 = Worklist0
-		; 	update_scheduled_pair(ScheduledPairs0, LeftIndex, RightIndex, yes, ScheduledPairs1),
+		;	update_scheduled_pair(ScheduledPairs0, LeftIndex, RightIndex, yes, ScheduledPairs1),
 			Worklist1 = [pair(LeftIndex, RightIndex)| Worklist0]
 		),
 		enqueue_unique_pairs(Pairs, ScheduledPairs1, ScheduledPairs, Worklist1, Worklist).
@@ -612,7 +612,7 @@
 		compiled_supporting_explanations(1, Size, CompiledNetwork, Index1, Index2, CurrentRelationSet, UniversalRelationSet, [], ReversedExplanations),
 		( ReversedExplanations == [] ->
 			Explanations = [direct(CurrentRelationSet)]
-		; 	reverse(ReversedExplanations, Explanations)
+		;	reverse(ReversedExplanations, Explanations)
 		).
 
 	compiled_entailment_explanation(CompiledNetwork, Node, Node, [equal], identity) :-
@@ -632,7 +632,7 @@
 		!,
 		fail.
 	compiled_supporting_explanation(Index, Size, CompiledNetwork, Index1, Index2, CurrentRelationSet, UniversalRelationSet, Explanation) :-
-		( 	distinct_indices(Index1, Index2, Index),
+		(	distinct_indices(Index1, Index2, Index),
 			compiled_relation(CompiledNetwork, Index1, Index, LeftRelationSet),
 			compiled_relation(CompiledNetwork, Index, Index2, RightRelationSet),
 			interval_relation_set::compose(LeftRelationSet, RightRelationSet, ComposedRelationSet),
@@ -640,7 +640,7 @@
 			interval_relation_set::subset(CurrentRelationSet, ComposedRelationSet) ->
 			node_name(CompiledNetwork, Index, Node3),
 			Explanation = propagated(Node3, LeftRelationSet, RightRelationSet, ComposedRelationSet)
-		; 	NextIndex is Index + 1,
+		;	NextIndex is Index + 1,
 			compiled_supporting_explanation(NextIndex, Size, CompiledNetwork, Index1, Index2, CurrentRelationSet, UniversalRelationSet, Explanation)
 		).
 
@@ -648,7 +648,7 @@
 		Index > Size,
 		!.
 	compiled_supporting_explanations(Index, Size, CompiledNetwork, Index1, Index2, CurrentRelationSet, UniversalRelationSet, Explanations0, Explanations) :-
-		( 	distinct_indices(Index1, Index2, Index),
+		(	distinct_indices(Index1, Index2, Index),
 			compiled_relation(CompiledNetwork, Index1, Index, LeftRelationSet),
 			compiled_relation(CompiledNetwork, Index, Index2, RightRelationSet),
 			interval_relation_set::compose(LeftRelationSet, RightRelationSet, ComposedRelationSet),
@@ -656,7 +656,7 @@
 			interval_relation_set::subset(CurrentRelationSet, ComposedRelationSet) ->
 			node_name(CompiledNetwork, Index, Node3),
 			add_unique_explanation(propagated(Node3, LeftRelationSet, RightRelationSet, ComposedRelationSet), Explanations0, Explanations1)
-		; 	Explanations1 = Explanations0
+		;	Explanations1 = Explanations0
 		),
 		NextIndex is Index + 1,
 		compiled_supporting_explanations(NextIndex, Size, CompiledNetwork, Index1, Index2, CurrentRelationSet, UniversalRelationSet, Explanations1, Explanations).
@@ -672,14 +672,14 @@
 		!,
 		fail.
 	compiled_contradictory_support(Index, Size, CompiledNetwork, Index1, Index2, Cause) :-
-		( 	distinct_indices(Index1, Index2, Index),
+		(	distinct_indices(Index1, Index2, Index),
 			compiled_relation(CompiledNetwork, Index1, Index, LeftRelationSet),
 			compiled_relation(CompiledNetwork, Index, Index2, RightRelationSet),
 			interval_relation_set::compose(LeftRelationSet, RightRelationSet, ComposedRelationSet),
 			ComposedRelationSet \== [] ->
 			node_name(CompiledNetwork, Index, Node3),
 			Cause = propagated(Node3, LeftRelationSet, RightRelationSet, ComposedRelationSet)
-		; 	NextIndex is Index + 1,
+		;	NextIndex is Index + 1,
 			compiled_contradictory_support(NextIndex, Size, CompiledNetwork, Index1, Index2, Cause)
 		).
 
@@ -797,12 +797,12 @@
 		ColumnIndex =< RowLength,
 		RightIndex is RowIndex + ColumnIndex,
 		arg(ColumnIndex, Row, Cell),
-		( 	cell_relation(Cell, []) ->
+		(	cell_relation(Cell, []) ->
 			node_name(CompiledNetwork, RowIndex, Node1),
 			node_name(CompiledNetwork, RightIndex, Node2),
 			compiled_contradiction_explanation_cell(CompiledNetwork, RowIndex, RightIndex, Cell, Cause),
 			Explanations1 = [contradiction(Node1, Node2, Cause)| Explanations0]
-		; 	Explanations1 = Explanations0
+		;	Explanations1 = Explanations0
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		compiled_contradiction_row_explanations(Row, NextColumnIndex, RowIndex, CompiledNetwork, Explanations1, Explanations).
@@ -831,20 +831,20 @@
 	propagation_triples([Change| Changes], Triples0, Triples) :-
 		(	propagation_triple(Change, Triple) ->
 			add_unique_triple(Triple, Triples0, Triples1)
-		; 	Triples1 = Triples0
+		;	Triples1 = Triples0
 		),
 		propagation_triples(Changes, Triples1, Triples).
 
 	add_unique_triple(Triple, Triples0, Triples) :-
 		(	member(Triple, Triples0) ->
 			Triples = Triples0
-		; 	Triples = [Triple| Triples0]
+		;	Triples = [Triple| Triples0]
 		).
 
 	add_unique_explanation(Explanation, Explanations0, Explanations) :-
 		(	memberchk(Explanation, Explanations0) ->
 			Explanations = Explanations0
-		; 	Explanations = [Explanation| Explanations0]
+		;	Explanations = [Explanation| Explanations0]
 		).
 
 	explicit_constraints([], []).

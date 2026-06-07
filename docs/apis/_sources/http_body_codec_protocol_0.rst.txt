@@ -1,0 +1,112 @@
+.. index:: single: http_body_codec_protocol
+.. _http_body_codec_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_body_codec_protocol``
+============================
+
+Protocol for portable HTTP body codecs.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: media_types/1
+.. _http_body_codec_protocol/0::media_types/1:
+
+``media_types/1``
+^^^^^^^^^^^^^^^^^
+
+Returns the media types supported by this body codec.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``media_types(MediaTypes)``
+| **Mode and number of proofs:**
+|    ``media_types(-list(atom))`` - ``one``
+
+
+------------
+
+.. index:: encode_body/4
+.. _http_body_codec_protocol/0::encode_body/4:
+
+``encode_body/4``
+^^^^^^^^^^^^^^^^^
+
+Encodes a semantic payload term for the given media type and options into a normalized HTTP body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_body(MediaType,Payload,Options,Body)``
+| **Mode and number of proofs:**
+|    ``encode_body(+atom,++term,+list(compound),-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_body/4
+.. _http_body_codec_protocol/0::decode_body/4:
+
+``decode_body/4``
+^^^^^^^^^^^^^^^^^
+
+Decodes a normalized HTTP body term for the given media type and options into a semantic payload term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_body(MediaType,Body,Options,Payload)``
+| **Mode and number of proofs:**
+|    ``decode_body(+atom,++compound,+list(compound),-term)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

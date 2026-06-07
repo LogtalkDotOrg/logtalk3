@@ -548,7 +548,7 @@
 	check_regressor(Regressor) :-
 		(   var(Regressor) ->
 			instantiation_error
-		; 	::regressor_term_template(Regressor, _Template),
+		;	::regressor_term_template(Regressor, _Template),
 			::regressor_diagnostics_data(Regressor, _Diagnostics) ->
 			true
 		;   domain_error(regressor, Regressor)

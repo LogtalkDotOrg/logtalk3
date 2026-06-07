@@ -23,14 +23,18 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Paulo Moura',
-		date is 2026-04-08,
+		date is 2026-06-01,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
 		see_also is [uuid, cuid2(_,_,_), ksuid(_,_), ids(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), ulid(_)]
+	]).
+
+	:- uses(crypto, [
+		random_bytes/2
 	]).
 
 	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
@@ -286,23 +290,6 @@
 	hexadecimal_code_decimal(0'D, 13).
 	hexadecimal_code_decimal(0'E, 14).
 	hexadecimal_code_decimal(0'F, 15).
-
-	random_bytes(N, Bytes) :-
-		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
-		list::length(Bytes, N),
-		read_random_bytes(Bytes, Stream),
-		close(Stream),
-		!.
-	random_bytes(N, Bytes) :-
-		os::wall_time(Time),
-		Seed is round(Time),
-		fast_random::randomize(Seed),
-		fast_random::sequence(N, 0, 255, Bytes).
-
-	read_random_bytes([], _).
-	read_random_bytes([Byte| Bytes], Stream) :-
-		get_byte(Stream, Byte),
-		read_random_bytes(Bytes, Stream).
 
 	text_codes(Text, Codes) :-
 		atom(Text),

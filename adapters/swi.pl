@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on March 25, 2026
+%  Last updated on June 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -369,6 +369,7 @@
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(v(6,6,0))).
 
 '$lgt_prolog_feature'(encoding_directive, full).
+'$lgt_prolog_feature'(sockets, supported).
 '$lgt_prolog_feature'(tabling, Tabling) :-
 	current_prolog_flag(version_data, swi(Major, Minor, Patch, _)),
 	(	(Major,Minor,Patch) @>= (7,3,21) ->

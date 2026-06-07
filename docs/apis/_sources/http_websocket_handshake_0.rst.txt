@@ -1,0 +1,95 @@
+.. index:: single: http_websocket_handshake
+.. _http_websocket_handshake/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_handshake``
+============================
+
+Shared helpers for WebSocket opening-handshake key generation and accept-value computation.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_handshake(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`base64 <base64/0>`
+|    :ref:`crypto <crypto/0>`
+|    :ref:`hash_common_32 <hash_common_32/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: websocket_opening_key/1
+.. _http_websocket_handshake/0::websocket_opening_key/1:
+
+``websocket_opening_key/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a canonical base64-encoded 16-byte WebSocket opening key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``websocket_opening_key(Key)``
+| **Mode and number of proofs:**
+|    ``websocket_opening_key(--atom)`` - ``one``
+
+
+------------
+
+.. index:: websocket_accept/2
+.. _http_websocket_handshake/0::websocket_accept/2:
+
+``websocket_accept/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the canonical `Sec-WebSocket-Accept` value for a valid WebSocket opening key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``websocket_accept(Key,Accept)``
+| **Mode and number of proofs:**
+|    ``websocket_accept(++term,--atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

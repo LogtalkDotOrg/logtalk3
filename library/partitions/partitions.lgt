@@ -337,10 +337,10 @@
 		assignment_partition(List, K, Assignment, Partition).
 
 	partition_assignment(N, K, Assignment) :-
-		( 	N =:= 0 ->
+		(	N =:= 0 ->
 			K = 0,
 			Assignment = []
-		; 	Assignment = [0| Labels],
+		;	Assignment = [0| Labels],
 			partition_assignment_loop(N, 1, 0, 1, K, Labels)
 		).
 

@@ -135,13 +135,13 @@
 
 	sequence([], expected([])).
 	sequence([Expected| Expecteds], Sequenced) :-
-		( 	Expected = expected(Value) ->
+		(	Expected = expected(Value) ->
 			sequence(Expecteds, RestSequenced),
-			( 	RestSequenced = expected(RestValues) ->
+			(	RestSequenced = expected(RestValues) ->
 				Sequenced = expected([Value| RestValues])
-			; 	Sequenced = RestSequenced
+			;	Sequenced = RestSequenced
 			)
-		; 	Expected = unexpected(_),
+		;	Expected = unexpected(_),
 			Sequenced = Expected
 		).
 

@@ -1,0 +1,64 @@
+.. index:: single: http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)
+.. _http_server_digest_handler/4:
+
+.. rst-class:: right
+
+**object**
+
+``http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)``
+=========================================================================================
+
+* ``Verifier`` - Verifier object implementing the ``http_digest_verifier_protocol`` protocol.
+* ``Handler`` - Wrapped object implementing the ``http_handler_protocol`` protocol.
+* ``ProtectOptions`` - Options passed to ``http_digest::protect_request/4``.
+* ``AuthenticationInfoOptions`` - Options passed to ``http_digest::add_authentication_info/4`` on successful request verification.
+
+
+Wrapper HTTP handler object that applies Digest request verification and Authentication-Info response decoration around another portable HTTP handler.
+
+| **Availability:** 
+|    ``logtalk_load(http_digest(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-05-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
+| **Uses:**
+|    :ref:`http_digest <http_digest/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_handler_protocol/0::handle/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

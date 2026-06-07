@@ -331,7 +331,7 @@
 		!,
 		(	A @< B, B @> C ->
 			true
-		; 	A @> B, B @< C
+		;	A @> B, B @< C
 		),
 		is_alternating([B, C| Tail]).
 	is_alternating(_).

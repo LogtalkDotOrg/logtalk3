@@ -23,9 +23,9 @@
 	implements(cuid2_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-06-01,
 		comment is 'Cuid2 generator.',
 		parameters is [
 			'Representation' - 'Text representation for the Cuid2 identifier. Possible values are ``atom``, ``chars``, and ``codes``.',
@@ -35,16 +35,12 @@
 		see_also is [cuid2, ids(_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), ulid(_), uuid(_)]
 	]).
 
-	:- uses(fast_random(xoshiro128pp), [
-		randomize/1, sequence/4
+	:- uses(crypto, [
+		random_bytes/2
 	]).
 
 	:- uses(list, [
 		append/3, length/2, member/2, nth0/3, reverse/2
-	]).
-
-	:- uses(os, [
-		wall_time/1
 	]).
 
 	generate(Cuid2) :-
@@ -221,23 +217,6 @@
 	codes_to_cuid2(chars, Codes, Cuid2) :-
 		codes_to_chars(Codes, Cuid2).
 	codes_to_cuid2(codes, Cuid2, Cuid2).
-
-	random_bytes(N, Bytes) :-
-		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
-		length(Bytes, N),
-		read_random_bytes(Bytes, Stream),
-		close(Stream),
-		!.
-	random_bytes(N, Bytes) :-
-		wall_time(Time),
-		Seed is round(Time),
-		randomize(Seed),
-		sequence(N, 0, 255, Bytes).
-
-	read_random_bytes([], _).
-	read_random_bytes([Byte| Bytes], Stream) :-
-		get_byte(Stream, Byte),
-		read_random_bytes(Bytes, Stream).
 
 	codes_to_chars([], []).
 	codes_to_chars([Code| Codes], [Char| Chars]) :-
