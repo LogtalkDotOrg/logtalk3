@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-628 1235,-628 1235,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category http_router_digest_auth/3</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;06&#45;07, 18:19</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;06&#45;07, 21:38</text>
 <g id="clust1" class="cluster">
 <title>cluster_http_router_digest_auth_3_category</title>
 <g id="a_clust1"><a xlink:title="http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1211,-54.25 1211,-54.25 1217,-54.25 1223,-60.25 1223,-66.25 1223,-66.25 1223,-604 1223,-604 1223,-610 1217,-616 1211,-616 1211,-616 20,-616 20,-616 14,-616 8,-610 8,-604 8,-604 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-598.25" font-family="Monospace" font-size="10.00" fill="dimgray">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>authorize_digest_auth_request/2</title>
 <polygon fill="yellow" stroke="black" points="514.88,-577.25 279.12,-577.25 279.12,-541.25 514.88,-541.25 514.88,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="287.12" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="292.38" y="-561.12" font-family="Monospace" font-size="11.00">authorize_digest_auth_request/2</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>validate_options/2</title>
 <polygon fill="cornsilk" stroke="black" points="635,-458 487,-458 487,-422 635,-422 635,-458"/>
 <text xml:space="preserve" text-anchor="start" x="495" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L107">
+<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="500.25" y="-441.88" font-family="Monospace" font-size="11.00">validate_options/2</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- authorize_digest_auth_request/2&#45;&gt;validate_options/2 -->
 <g id="edge1" class="edge">
 <title>authorize_digest_auth_request/2&#45;&gt;validate_options/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M421.2,-540.95C449.3,-520.86 495.82,-487.6 527.41,-465.01"/>
 <polygon fill="black" stroke="black" points="529.37,-467.92 535.47,-459.25 525.3,-462.22 529.37,-467.92"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="483.92" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>overlay_options/3</title>
 <polygon fill="cornsilk" stroke="black" points="159.62,-458 18.38,-458 18.38,-422 159.62,-422 159.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="26.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="31.62" y="-441.88" font-family="Monospace" font-size="11.00">overlay_options/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- authorize_digest_auth_request/2&#45;&gt;overlay_options/3 -->
 <g id="edge2" class="edge">
 <title>authorize_digest_auth_request/2&#45;&gt;overlay_options/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M351.22,-540.82C296.4,-519.95 204.58,-485 145.43,-462.48"/>
 <polygon fill="black" stroke="black" points="146.78,-459.25 136.19,-458.97 144.29,-465.79 146.78,-459.25"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="252.24" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- authorize_digest_auth_request/2&#45;&gt;http_core::property/2 -->
 <g id="edge8" class="edge">
 <title>authorize_digest_auth_request/2&#45;&gt;http_core::property/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M399.67,-540.93C404.88,-512.62 418.9,-456.19 451.75,-422 481.19,-391.36 584.83,-361.04 661.93,-341.91"/>
 <polygon fill="black" stroke="black" points="662.76,-345.31 671.64,-339.53 661.09,-338.51 662.76,-345.31"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="451.75" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- authorize_digest_auth_request/2&#45;&gt;http_digest::protect_request/4 -->
 <g id="edge9" class="edge">
 <title>authorize_digest_auth_request/2&#45;&gt;http_digest::protect_request/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M381.51,-540.95C363.98,-521.38 335.26,-489.31 315.09,-466.78"/>
 <polygon fill="black" stroke="black" points="317.84,-464.61 308.57,-459.5 312.63,-469.28 317.84,-464.61"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L85">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="347.65" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>add_digest_authentication_info/3</title>
 <polygon fill="yellow" stroke="black" points="965.25,-577.25 722.75,-577.25 722.75,-541.25 965.25,-541.25 965.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="730.75" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L61">
+<g id="a_node2_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L61">
 <text xml:space="preserve" text-anchor="start" x="736" y="-561.12" font-family="Monospace" font-size="11.00">add_digest_authentication_info/3</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <title>verified_digest_request/1</title>
 <polygon fill="cornsilk" stroke="black" points="848.62,-458 653.38,-458 653.38,-422 848.62,-422 848.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="661.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L102">
+<g id="a_node3_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="666.62" y="-441.88" font-family="Monospace" font-size="11.00">verified_digest_request/1</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- add_digest_authentication_info/3&#45;&gt;verified_digest_request/1 -->
 <g id="edge3" class="edge">
 <title>add_digest_authentication_info/3&#45;&gt;verified_digest_request/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M830.28,-540.95C814.89,-521.55 789.77,-489.88 771.93,-467.39"/>
 <polygon fill="black" stroke="black" points="774.68,-465.22 765.72,-459.56 769.19,-469.57 774.68,-465.22"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="800.29" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- add_digest_authentication_info/3&#45;&gt;validate_options/2 -->
 <g id="edge4" class="edge">
 <title>add_digest_authentication_info/3&#45;&gt;validate_options/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M801.94,-540.82C751.7,-520.01 667.66,-485.19 613.29,-462.66"/>
 <polygon fill="black" stroke="black" points="614.81,-459.5 604.23,-458.91 612.13,-465.97 614.81,-459.5"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="710.99" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -203,12 +203,12 @@
 <!-- add_digest_authentication_info/3&#45;&gt;http_core::property/2 -->
 <g id="edge10" class="edge">
 <title>add_digest_authentication_info/3&#45;&gt;http_core::property/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M850.99,-541.07C860.72,-514.39 875.3,-461.93 858,-422 844.04,-389.8 814.08,-363.2 789.4,-345.51"/>
 <polygon fill="black" stroke="black" points="791.71,-342.85 781.49,-340.04 787.72,-348.61 791.71,-342.85"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="865.84" y="-436.62" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -230,12 +230,12 @@
 <!-- add_digest_authentication_info/3&#45;&gt;http_digest::add_authentication_info/4 -->
 <g id="edge11" class="edge">
 <title>add_digest_authentication_info/3&#45;&gt;http_digest::add_authentication_info/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M877.49,-540.95C917.23,-520.43 983.57,-486.16 1027.31,-463.57"/>
 <polygon fill="black" stroke="black" points="1028.74,-466.77 1036.02,-459.07 1025.53,-460.55 1028.74,-466.77"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L94">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="964.31" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -243,12 +243,12 @@
 <!-- verified_digest_request/1&#45;&gt;http_core::property/2 -->
 <g id="edge12" class="edge">
 <title>verified_digest_request/1&#45;&gt;http_core::property/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L102" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M751,-421.7C751,-403 751,-372.87 751,-350.58"/>
 <polygon fill="black" stroke="black" points="754.5,-350.64 751,-340.64 747.5,-350.64 754.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L102">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="751" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -270,12 +270,12 @@
 <!-- validate_options/2&#45;&gt;list::valid/1 -->
 <g id="edge13" class="edge">
 <title>validate_options/2&#45;&gt;list::valid/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L107" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M561,-421.7C561,-403 561,-372.87 561,-350.58"/>
 <polygon fill="black" stroke="black" points="564.5,-350.64 561,-340.64 557.5,-350.64 564.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L107">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="561" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -285,7 +285,7 @@
 <title>filter_overridden_options/3</title>
 <polygon fill="cornsilk" stroke="black" points="371.38,-338.75 162.62,-338.75 162.62,-302.75 371.38,-302.75 371.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="170.62" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L117">
+<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="175.88" y="-322.62" font-family="Monospace" font-size="11.00">filter_overridden_options/3</text>
 </a>
 </g>
@@ -297,12 +297,12 @@
 <!-- overlay_options/3&#45;&gt;filter_overridden_options/3 -->
 <g id="edge5" class="edge">
 <title>overlay_options/3&#45;&gt;filter_overridden_options/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M115.26,-421.7C146.03,-401.44 197.13,-367.77 231.43,-345.18"/>
 <polygon fill="black" stroke="black" points="232.94,-348.38 239.36,-339.95 229.09,-342.53 232.94,-348.38"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="183.34" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -324,12 +324,12 @@
 <!-- overlay_options/3&#45;&gt;list::append/3 -->
 <g id="edge14" class="edge">
 <title>overlay_options/3&#45;&gt;list::append/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M88.26,-421.7C87.46,-403 86.18,-372.87 85.23,-350.58"/>
 <polygon fill="black" stroke="black" points="88.73,-350.48 84.81,-340.63 81.73,-350.77 88.73,-350.48"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L113">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="86.65" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -339,7 +339,7 @@
 <title>overridden_option/2</title>
 <polygon fill="cornsilk" stroke="black" points="344.38,-219.5 189.62,-219.5 189.62,-183.5 344.38,-183.5 344.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="197.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L125">
+<g id="a_node7_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="202.88" y="-203.38" font-family="Monospace" font-size="11.00">overridden_option/2</text>
 </a>
 </g>
@@ -351,12 +351,12 @@
 <!-- filter_overridden_options/3&#45;&gt;overridden_option/2 -->
 <g id="edge6" class="edge">
 <title>filter_overridden_options/3&#45;&gt;overridden_option/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L118" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L118" xlink:title="calls">
 <path fill="none" stroke="black" d="M267,-302.45C267,-283.75 267,-253.62 267,-231.33"/>
 <polygon fill="black" stroke="black" points="270.5,-231.39 267,-221.39 263.5,-231.39 270.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L118">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="267" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -366,7 +366,7 @@
 <title>same_option_kind/2</title>
 <polygon fill="cornsilk" stroke="black" points="341,-100.25 193,-100.25 193,-64.25 341,-64.25 341,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="201" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L131">
+<g id="a_node8_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L131">
 <text xml:space="preserve" text-anchor="start" x="206.25" y="-84.12" font-family="Monospace" font-size="11.00">same_option_kind/2</text>
 </a>
 </g>
@@ -378,12 +378,12 @@
 <!-- overridden_option/2&#45;&gt;same_option_kind/2 -->
 <g id="edge7" class="edge">
 <title>overridden_option/2&#45;&gt;same_option_kind/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L125" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M267,-183.2C267,-164.5 267,-134.37 267,-112.08"/>
 <polygon fill="black" stroke="black" points="270.5,-112.14 267,-102.14 263.5,-112.14 270.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fd185b8bd99e496977ec3702d22a366b5d996f49/library/http_digest/http_router_digest_auth.lgt#L125">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5067bd085ea29235c27703bd2d8a75a21cc236ba/library/http_digest/http_router_digest_auth.lgt#L125">
 <text xml:space="preserve" text-anchor="start" x="267" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
