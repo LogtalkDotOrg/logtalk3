@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'WebSocket handshake handler used by the http_websocket_session tests.'
 	]).
 
@@ -41,7 +41,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Callback object used by the higher-level session-loop tests.'
 	]).
 
@@ -62,7 +62,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Callback object used by the client-side handshake-plus-session convenience tests.'
 	]).
 
@@ -83,7 +83,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Callback object used to capture a client keepalive ping and then close the session.'
 	]).
 
@@ -137,7 +137,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Callback object used by the registry-backed broadcast server tests.'
 	]).
 

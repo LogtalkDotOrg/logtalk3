@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-06-07,
 		comment is 'Internal shared helpers for parsing HTTP origins and absolute URLs, deriving request endpoints, and comparing endpoints for schemeful same-site semantics.'
 	]).
 
@@ -65,7 +65,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2, reverse/2, take/3
+		length/2, member/2, memberchk/2, reverse/2, take/3
 	]).
 
 	:- uses(http_core, [

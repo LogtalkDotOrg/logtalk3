@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-07,
 		comment is 'Transport-neutral HTMX request classification, HTML reply helpers, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -839,9 +839,11 @@
 		atom(Value),
 		Value \== ''.
 
-	valid_push_replace_value(false).
 	valid_push_replace_value(Value) :-
-		valid_non_empty_atom(Value).
+		(	Value == false ->
+			true
+		;	valid_non_empty_atom(Value)
+		).
 
 	valid_location_value(Value) :-
 		valid_non_empty_atom(Value),

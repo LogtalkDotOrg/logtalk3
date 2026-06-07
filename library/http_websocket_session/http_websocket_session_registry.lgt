@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Session registry predicates for active WebSocket sessions and queued broadcast delivery.'
 	]).
 
@@ -143,7 +143,7 @@
 	:- endif.
 
 	:- uses(list, [
-		member/2, reverse/2
+		length/2, member/2, reverse/2
 	]).
 
 	open(Registry) :-

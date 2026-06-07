@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Auxiliary object defining the supported read options and default values for HTTP WebSocket sessions.'
 	]).
 
@@ -1473,6 +1473,10 @@
 		^^run_session(Connection, SessionHandler, State, Options).
 
 	:- if(current_logtalk_flag(threads, supported)).
+
+	:- uses(list, [
+		length/2
+	]).
 
 	serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control) :-
 		serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control, []).

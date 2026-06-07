@@ -23,9 +23,9 @@
 	implements(iso_13616_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-06-07,
 		comment is 'ISO 13616 IBAN parser and normalizer based on the public ISO and SWIFT registry structure definitions and MOD-97 checksum algorithm.'
 	]).
 
@@ -35,6 +35,10 @@
 
 	:- uses(iso_3166, [
 		country/4
+	]).
+
+	:- uses(list, [
+		length/2
 	]).
 
 	iban(IBAN, CountryAlpha2, CheckDigits, BBAN) :-

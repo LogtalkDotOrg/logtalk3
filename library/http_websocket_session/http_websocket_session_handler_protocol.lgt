@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-07,
 		comment is 'Protocol for callback objects used by the higher-level WebSocket session loop.'
 	]).
 

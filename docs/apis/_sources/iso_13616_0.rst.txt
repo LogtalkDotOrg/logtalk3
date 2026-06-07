@@ -14,8 +14,8 @@ ISO 13616 IBAN parser and normalizer based on the public ISO and SWIFT registry 
 |    ``logtalk_load(iso_13616(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-05
+| **Version:** 1:0:1
+| **Date:** 2026-06-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,6 +26,7 @@ ISO 13616 IBAN parser and normalizer based on the public ISO and SWIFT registry 
 | **Uses:**
 |    :ref:`iso_13616_registry <iso_13616_registry/0>`
 |    :ref:`iso_3166 <iso_3166/0>`
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
