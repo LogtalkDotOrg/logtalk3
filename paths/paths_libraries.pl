@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on June 4, 2026
+%  Last updated on June 7, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -202,6 +202,7 @@ logtalk_library_path(nearest_centroid_classifier, library('nearest_centroid_clas
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
+logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
