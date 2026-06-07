@@ -12,9 +12,9 @@
 	imports(mutator_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-03-20,
+		date is 2026-06-07,
 		comment is 'Hook object implementing the ``clauses_reordering`` mutator by reordering the clauses of a non-discontiguous predicate or non-terminal definition.',
 		parameters is [
 			'Entity' - 'Identifier of the entity being mutated.',
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, reverse/2, select/3
+		append/3, reverse/2, select/3
 	]).
 
 	term_expansion((Head :- Body), []) :-
@@ -105,11 +105,5 @@
 			reverse(ReversedClauses, Clauses)
 		;   Clauses = []
 		).
-
-	clause_head((Head :- _), Head) :-
-		!.
-	clause_head((Head --> _), Head) :-
-		!.
-	clause_head(Head, Head).
 
 :- end_object.

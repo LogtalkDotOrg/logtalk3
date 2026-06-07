@@ -90,6 +90,8 @@ Tools
 
 * FIXED: Spurious choice-points in some of the `packs` tool public predicates.
 
+* FIXED: More strict validation of the `mutation_testing` tool options.
+
 Examples
 --------
 
