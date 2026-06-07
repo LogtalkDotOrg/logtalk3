@@ -65,13 +65,11 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2, reverse/2
+		member/2, memberchk/2, reverse/2, take/3
 	]).
 
 	:- uses(http_core, [
-		property/2 as http_property/2,
-		request/7 as http_request/7,
-		target/2 as http_target/2
+		property/2 as http_property/2, request/7 as http_request/7, target/2 as http_target/2
 	]).
 
 	absolute_url_context(URL, http_url_context(Scheme, Host, Port, Path)) :-
@@ -217,7 +215,7 @@
 		public_suffix_length(Labels, Length),
 		SiteLength is Length + 1,
 		reverse(Labels, ReversedLabels),
-		take_prefix(SiteLength, ReversedLabels, ReversedSiteLabels),
+		take(SiteLength, ReversedLabels, ReversedSiteLabels),
 		reverse(ReversedSiteLabels, SiteLabels).
 
 	public_suffix_length(Labels, Length) :-
@@ -266,13 +264,6 @@
 		host_labels_atom(Labels, LabelsAtom),
 		atom_concat(Label, '.', Prefix),
 		atom_concat(Prefix, LabelsAtom, Atom).
-
-	take_prefix(0, _Labels, []) :-
-		!.
-	take_prefix(Count, [Label| Labels], [Label| Prefix]) :-
-		Count > 0,
-		Remaining is Count - 1,
-		take_prefix(Remaining, Labels, Prefix).
 
 	reversed_prefix([], _Labels).
 	reversed_prefix([Label| Prefix], [Label| Labels]) :-
