@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on June 2, 2026
+%  Last updated on June 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -107,6 +107,7 @@ logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(http_cookies_counter, examples('http_cookies_counter/')).
 logtalk_library_path(http_htmx_panel, examples('http_htmx_panel/')).
+logtalk_library_path(http_multipart_form, examples('http_multipart_form/')).
 logtalk_library_path(http_open_api, examples('http_open_api/')).
 logtalk_library_path(http_rest_greetings, examples('http_rest_greetings/')).
 logtalk_library_path(http_rest_open_meteo, examples('http_rest_open_meteo/')).

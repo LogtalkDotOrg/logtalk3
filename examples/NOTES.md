@@ -317,6 +317,10 @@ Follows a short description of each included example (in alphabetical order):
     and `http_router_htmx` libraries for boosted navigation, fragment swaps,
     and server-triggered updates
 
+- `http_multipart_form`  
+	small HTTP client and server example showing how to handle a plain
+	`multipart/form-data` HTML form using the `http_multipart` library
+
 - `http_open_api`  
 	small HTTP client and server example showing how to publish and consume
 	an OpenAPI contract
