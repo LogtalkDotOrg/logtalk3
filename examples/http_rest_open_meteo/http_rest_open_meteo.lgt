@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-08,
 		comment is 'REST client example for the Open-Meteo geocoding and forecast APIs.'
 	]).
 
@@ -46,6 +46,10 @@
 		evaluate/3
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	forecast(Location, forecast(location(Name, Country, Latitude, Longitude, Timezone), ForecastJSON)) :-
 		geocoding_url(Location, GeocodingURL),
 		::http_get(GeocodingURL, GeocodingResponse),
@@ -59,8 +63,7 @@
 		http_client::get(URL, Response, []).
 
 	geocoding_url(Location, URL) :-
-		atom_concat('name=', Location, Prefix),
-		atom_concat(Prefix, '&count=1&language=en&format=json', Query),
+		atomic_list_concat(['name=', Location, '&count=1&language=en&format=json'], Query),
 		url(atom)::generate([
 			scheme(http),
 			authority('geocoding-api.open-meteo.com'),
@@ -69,14 +72,13 @@
 		], URL).
 
 	forecast_url(Latitude, Longitude, URL) :-
-		number_atom(Latitude, LatitudeAtom),
-		number_atom(Longitude, LongitudeAtom),
-		atom_concat('latitude=', LatitudeAtom, Prefix0),
-		atom_concat(Prefix0, '&longitude=', Prefix1),
-		atom_concat(Prefix1, LongitudeAtom, Prefix2),
-		atom_concat(Prefix2, '&current=temperature_2m,weather_code', Prefix3),
-		atom_concat(Prefix3, '&daily=weather_code,temperature_2m_max,temperature_2m_min', Prefix4),
-		atom_concat(Prefix4, '&timezone=auto&forecast_days=3', Query),
+		atomic_list_concat([
+			'latitude=', Latitude,
+			'&longitude=', Longitude,
+			'&current=temperature_2m,weather_code',
+			'&daily=weather_code,temperature_2m_max,temperature_2m_min',
+			'&timezone=auto&forecast_days=3'
+		], Query),
 		url(atom)::generate([
 			scheme(http),
 			authority('api.open-meteo.com'),
@@ -115,10 +117,6 @@
 			true
 		; 	throw_forecast_error(unexpected_open_meteo_geocoding_result(Result))
 		).
-
-	number_atom(Number, Atom) :-
-		number_codes(Number, Codes),
-		atom_codes(Atom, Codes).
 
 	throw_forecast_error(Error) :-
 		self(Self),
