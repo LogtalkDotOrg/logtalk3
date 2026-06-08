@@ -84,18 +84,44 @@ category:
 - `handle/2` routes a normalized request using `route/4` clauses defined by the
   importing object.
 
-Importing router objects are expected to define route descriptors using:
+The remaining router behavior is organized in the sections below.
+
+
+Route declarations
+------------------
+
+Importing router objects must define route descriptors using:
 
 - `route(Id, Method, PathTemplate, Handler)`
 
 The `Handler` argument is the name of a declared local predicate with arity 2,
-typically a protected predicate. The router category calls that predicate after
-annotating the matched request with:
+typically a protected predicate.
 
-- `route(Id)`
-- `path_params(Pairs)`
 
-Importing router objects can also optionally declare additional route-specific
+Path templates
+--------------
+
+Path-template atoms support literal segments, anonymous `*` wildcard segments,
+plain `{name}` placeholders, and typed placeholders such as `{id:integer}` and
+`{score:number}`. Example:
+
+	route(show_user, get, '/users/{id}', show_user).
+
+
+Request annotations
+-------------------
+
+The router category calls the matched handler after annotating the request with
+`route(Id)` and `path_params(Pairs)`. On the normal routing path it also scrubs
+stale internal synthetic properties such as `open_api_probe/1`,
+`automatic_options/1`, `effective_methods/1`, and `response_media_type/1`
+before handler execution.
+
+
+Route metadata
+--------------
+
+Importing router objects can optionally declare additional route-specific
 metadata using:
 
 - `route_metadata(Id, Metadata)`
@@ -103,16 +129,17 @@ metadata using:
 When defined, `Metadata` must be a list of compound terms. The router removes
 any existing request properties with the same functors, prepends the metadata to
 the matched request, and then adds the standard `route/1` and `path_params/1`
-annotations. On the normal routing path it also scrubs stale internal synthetic
-properties such as `open_api_probe/1`, `automatic_options/1`, and
-`effective_methods/1` before calling the handler. This keeps route metadata
-available to both route handlers and response middleware and allows metadata
-descriptors such as `summary/1`, `description/1`, `tags/1`, or other
-application-specific terms.
+annotations. This keeps route metadata available to both route handlers and
+response middleware and allows metadata descriptors such as `summary/1`,
+`description/1`, `tags/1`, or other application-specific terms.
 
-Importing router objects can also optionally authorize or decorate routed
-requests after route matching and metadata annotation but before route handler
-dispatch using:
+
+Route authorization
+-------------------
+
+Importing router objects can optionally authorize or decorate routed requests
+after route matching and metadata annotation but before route handler dispatch
+using:
 
 - `authorize_routed_request(Request, Action)`
 
@@ -120,6 +147,131 @@ The hook must return either `continue(Request)` or `respond(Response)`.
 Short-circuited responses still flow through response middleware and keep the
 routed request annotations such as `route/1`, `path_params/1`, and any route
 metadata properties.
+
+
+Content negotiation
+-------------------
+
+Importing router objects can optionally declare route response media types
+using:
+
+- `route_produces(Id, MediaTypes)`
+
+When defined, `MediaTypes` must be a non-empty list of media type atoms. The
+router negotiates the request `Accept` header against that list, annotates the
+matched request with `response_media_type(MediaType)`, and returns a generic
+`406 Not Acceptable` response when no produced media type matches.
+
+On the normal routing path, any stale incoming `response_media_type/1`
+annotation is scrubbed before route dispatch and replaced only when the
+matched route successfully negotiates one of its declared `route_produces/2`
+media types.
+
+
+Middleware chaining
+-------------------
+
+Importing router objects can also optionally define ordered middleware
+descriptors using:
+
+- `middleware(Id, Handler)`
+
+The `Handler` argument is the name of a declared local predicate with arity 2
+that receives the current request and returns either `continue(Request)` or
+`respond(Response)`. Middleware runs before route matching, so it can rewrite
+requests before dispatch or short-circuit processing with an immediate response.
+
+
+Response middleware
+-------------------
+
+Importing router objects can also optionally define ordered response middleware
+descriptors using:
+
+- `response_middleware(Id, Handler)`
+
+The `Handler` argument is the name of a declared local predicate with arity 3
+that receives the current request, the current response, and returns the
+transformed response. Response middleware runs after route dispatch or
+short-circuit processing, so it can decorate or rewrite any generated response.
+
+
+HEAD fallback
+-------------
+
+`HEAD` requests match exact `head` routes first and otherwise fall back to a
+matching `get` route.
+
+
+OPTIONS handling
+----------------
+
+`OPTIONS` requests match explicit `options` routes first. When no explicit
+`options` route exists for a matched path, the router returns an automatic
+`200 OK` response with the derived `Allow` header and an empty body. The
+synthetic request used for this path is annotated with
+`automatic_options(true)` and `effective_methods(Methods)`. When the router
+can identify exactly one matching non-`options` route template, it also
+annotates that synthetic request with `route(Id)`, `path_params(Pairs)`, and
+that route `route_metadata/2` properties before response middleware runs. When
+multiple non-`options` routes match the same path, the synthetic request omits
+`route/1`, keeps `path_params/1` only when all matches produce the same value,
+and preserves only metadata properties that are identical across all matched
+routes. Automatic `OPTIONS` can be customized using
+`route_automatic_options_response/3` and still flows through response
+middleware.
+
+
+Custom bad-request responses
+----------------------------
+
+Importing router objects can optionally define:
+
+- `route_bad_request_response(Request, Errors, Response)`
+
+Dedicated route-handler exceptions matching
+`error(http_parameter_validation(Errors), Context)` with a non-empty `Errors`
+list are translated into `400 Bad Request` responses before response
+middleware runs. The routed request annotations remain available to the
+optional `route_bad_request_response/3` hook and to any later response
+middleware.
+
+
+Custom error responses
+----------------------
+
+Importing router objects can optionally customize other routing errors by
+defining:
+
+- `route_not_found_response(Request, Response)`
+- `route_method_not_allowed_response(Request, AllowedMethods, Response)`
+
+When a path matches but the request method does not, the router returns a
+`405 Method Not Allowed` response with an `Allow` header derived from the
+matching route descriptors. A `get` route implicitly contributes both `GET` and
+`HEAD` to that header. Automatic router support for `OPTIONS` also contributes
+`OPTIONS` to the header for matched paths.
+
+The `AllowedMethods` argument passed to the `405` hook is the effective method
+list as lowercase atoms and already includes implicit `head` support for `get`
+routes and automatic `options` support. The `Request` passed to the `405` hook
+and to response middleware is annotated with `matched_path(true)` and
+`effective_methods(AllowedMethods)`.
+
+
+Custom negotiation failures
+---------------------------
+
+Importing router objects can optionally define:
+
+- `route_not_acceptable_response(Request, ProducedMediaTypes, Response)`
+
+The `ProducedMediaTypes` argument passed to the `406` hook is the normalized
+list declared by `route_produces/2` for the matched route.
+
+
+OpenAPI derivation
+------------------
 
 When a router object also implements the `open_api_provider_protocol`
 protocol, the imported category can automatically derive `operations/1` from
@@ -167,96 +319,6 @@ provider surface with these hooks:
 - `open_api_security(Security)`
 - `open_api_schema(Name, Schema)`
 - `open_api_security_scheme(Name, SecurityScheme)`
-
-Importing router objects can also optionally declare route response media types
-using:
-
-- `route_produces(Id, MediaTypes)`
-
-When defined, `MediaTypes` must be a non-empty list of media type atoms. The
-router negotiates the request `Accept` header against that list, annotates the
-matched request with `response_media_type(MediaType)`, and returns a generic
-`406 Not Acceptable` response when no produced media type matches.
-
-On the normal routing path, any stale incoming `response_media_type/1`
-annotation is scrubbed before route dispatch and replaced only when the
-matched route successfully negotiates one of its declared `route_produces/2`
-media types.
-
-Importing router objects can also optionally define ordered middleware
-descriptors using:
-
-- `middleware(Id, Handler)`
-
-The `Handler` argument is the name of a declared local predicate with arity 2
-that receives the current request and returns either `continue(Request)` or
-`respond(Response)`. Middleware runs before route matching, so it can rewrite
-requests before dispatch or short-circuit processing with an immediate response.
-
-Importing router objects can also optionally define ordered response middleware
-descriptors using:
-
-- `response_middleware(Id, Handler)`
-
-The `Handler` argument is the name of a declared local predicate with arity 3
-that receives the current request, the current response, and returns the
-transformed response. Response middleware runs after route dispatch or
-short-circuit processing, so it can decorate or rewrite any generated response.
-
-Path templates are atoms using literal segments and optional `{name}`
-placeholders. Example:
-
-	route(show_user, get, '/users/{id}', show_user).
-
-`HEAD` requests match exact `head` routes first and otherwise fall back to a
-matching `get` route.
-
-When a path matches but the request method does not, the router returns a
-`405 Method Not Allowed` response with an `Allow` header derived from the
-matching route descriptors. A `get` route implicitly contributes both `GET` and
-`HEAD` to that header. Automatic router support for `OPTIONS` also contributes
-`OPTIONS` to the header for matched paths.
-
-`OPTIONS` requests match explicit `options` routes first. When no explicit
-`options` route exists for a matched path, the router returns an automatic
-`200 OK` response with the derived `Allow` header and an empty body. The
-synthetic request used for this path is annotated with
-`automatic_options(true)` and `effective_methods(Methods)`. When the router
-can identify exactly one matching non-`options` route template, it also
-annotates that synthetic request with `route(Id)`, `path_params(Pairs)`, and
-that route `route_metadata/2` properties before response middleware runs. When
-multiple non-`options` routes match the same path, the synthetic request omits
-`route/1`, keeps `path_params/1` only when all matches produce the same value,
-and preserves only metadata properties that are identical across all matched
-routes. The same normal routing path also scrubs stale `response_media_type/1`
-annotations so only fresh negotiation results reach route handlers.
-
-Importing router objects can optionally customize error handling by defining:
-
-- `route_bad_request_response(Request, Errors, Response)`
-- `route_not_found_response(Request, Response)`
-- `route_method_not_allowed_response(Request, AllowedMethods, Response)`
-- `route_automatic_options_response(Request, EffectiveMethods, Response)`
-- `route_not_acceptable_response(Request, ProducedMediaTypes, Response)`
-
-Dedicated route-handler exceptions matching `error(http_parameter_validation(Errors), Context)`
-with a non-empty `Errors` list are translated into `400 Bad Request` responses
-before response middleware runs. The routed request annotations remain
-available to the optional `route_bad_request_response/3` hook and to any later
-response middleware.
-
-The `AllowedMethods` argument passed to the `405` hook is the effective method
-list as lowercase atoms and already includes implicit `head` support for `get`
-routes and automatic `options` support. The `Request` passed to the `405` hook
-and to response middleware is annotated with `matched_path(true)` and
-`effective_methods(AllowedMethods)`.
-
-The `EffectiveMethods` argument passed to the automatic `OPTIONS` hook is the
-same effective method list. The `Request` passed to that hook and to response
-middleware is the annotated synthetic request described above.
-
-The `ProducedMediaTypes` argument passed to the `406` hook is the normalized
-list declared by `route_produces/2` for the matched route.
 
 
 Current limitations

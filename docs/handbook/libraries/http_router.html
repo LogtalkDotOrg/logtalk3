@@ -175,6 +175,20 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#route-declarations">Route declarations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#path-templates">Path templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request-annotations">Request annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#route-metadata">Route metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#route-authorization">Route authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#content-negotiation">Content negotiation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#middleware-chaining">Middleware chaining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#response-middleware">Response middleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#head-fallback">HEAD fallback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options-handling">OPTIONS handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-bad-request-responses">Custom bad-request responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-error-responses">Custom error responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-negotiation-failures">Custom negotiation failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openapi-derivation">OpenAPI derivation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
 </ul>
 </li>
@@ -417,18 +431,37 @@ imported category:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">handle/2</span></code> routes a normalized request using <code class="docutils literal notranslate"><span class="pre">route/4</span></code> clauses
 defined by the importing object.</p></li>
 </ul>
-<p>Importing router objects are expected to define route descriptors using:</p>
+<p>The remaining router behavior is organized in the sections below.</p>
+</section>
+<section id="route-declarations">
+<h2>Route declarations<a class="headerlink" href="#route-declarations" title="Link to this heading"></a></h2>
+<p>Importing router objects must define route descriptors using:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">route(Id,</span> <span class="pre">Method,</span> <span class="pre">PathTemplate,</span> <span class="pre">Handler)</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local predicate with
-arity 2, typically a protected predicate. The router category calls that
-predicate after annotating the matched request with:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">route(Id)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code></p></li>
-</ul>
-<p>Importing router objects can also optionally declare additional
+arity 2, typically a protected predicate.</p>
+</section>
+<section id="path-templates">
+<h2>Path templates<a class="headerlink" href="#path-templates" title="Link to this heading"></a></h2>
+<p>Path-template atoms support literal segments, anonymous <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcard
+segments, plain <code class="docutils literal notranslate"><span class="pre">{name}</span></code> placeholders, and typed placeholders such as
+<code class="docutils literal notranslate"><span class="pre">{id:integer}</span></code> and <code class="docutils literal notranslate"><span class="pre">{score:number}</span></code>. Example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>route(show_user, get, <span class="s">&#39;/users/{id}&#39;</span>, show_user).
+</pre></div>
+</div>
+</section>
+<section id="request-annotations">
+<h2>Request annotations<a class="headerlink" href="#request-annotations" title="Link to this heading"></a></h2>
+<p>The router category calls the matched handler after annotating the
+request with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>. On the normal
+routing path it also scrubs stale internal synthetic properties such as
+<code class="docutils literal notranslate"><span class="pre">open_api_probe/1</span></code>, <code class="docutils literal notranslate"><span class="pre">automatic_options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">effective_methods/1</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code> before handler execution.</p>
+</section>
+<section id="route-metadata">
+<h2>Route metadata<a class="headerlink" href="#route-metadata" title="Link to this heading"></a></h2>
+<p>Importing router objects can optionally declare additional
 route-specific metadata using:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">route_metadata(Id,</span> <span class="pre">Metadata)</span></code></p></li>
@@ -436,16 +469,16 @@ route-specific metadata using:</p>
 <p>When defined, <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> must be a list of compound terms. The router
 removes any existing request properties with the same functors, prepends
 the metadata to the matched request, and then adds the standard
-<code class="docutils literal notranslate"><span class="pre">route/1</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> annotations. On the normal routing
-path it also scrubs stale internal synthetic properties such as
-<code class="docutils literal notranslate"><span class="pre">open_api_probe/1</span></code>, <code class="docutils literal notranslate"><span class="pre">automatic_options/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">effective_methods/1</span></code> before calling the handler. This keeps route
-metadata available to both route handlers and response middleware and
-allows metadata descriptors such as <code class="docutils literal notranslate"><span class="pre">summary/1</span></code>, <code class="docutils literal notranslate"><span class="pre">description/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">route/1</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> annotations. This keeps route metadata
+available to both route handlers and response middleware and allows
+metadata descriptors such as <code class="docutils literal notranslate"><span class="pre">summary/1</span></code>, <code class="docutils literal notranslate"><span class="pre">description/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">tags/1</span></code>, or other application-specific terms.</p>
-<p>Importing router objects can also optionally authorize or decorate
-routed requests after route matching and metadata annotation but before
-route handler dispatch using:</p>
+</section>
+<section id="route-authorization">
+<h2>Route authorization<a class="headerlink" href="#route-authorization" title="Link to this heading"></a></h2>
+<p>Importing router objects can optionally authorize or decorate routed
+requests after route matching and metadata annotation but before route
+handler dispatch using:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">authorize_routed_request(Request,</span> <span class="pre">Action)</span></code></p></li>
 </ul>
@@ -453,6 +486,118 @@ route handler dispatch using:</p>
 <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. Short-circuited responses still flow through
 response middleware and keep the routed request annotations such as
 <code class="docutils literal notranslate"><span class="pre">route/1</span></code>, <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code>, and any route metadata properties.</p>
+</section>
+<section id="content-negotiation">
+<h2>Content negotiation<a class="headerlink" href="#content-negotiation" title="Link to this heading"></a></h2>
+<p>Importing router objects can optionally declare route response media
+types using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">route_produces(Id,</span> <span class="pre">MediaTypes)</span></code></p></li>
+</ul>
+<p>When defined, <code class="docutils literal notranslate"><span class="pre">MediaTypes</span></code> must be a non-empty list of media type
+atoms. The router negotiates the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header against that
+list, annotates the matched request with
+<code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code>, and returns a generic
+<code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> response when no produced media type matches.</p>
+<p>On the normal routing path, any stale incoming <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code>
+annotation is scrubbed before route dispatch and replaced only when the
+matched route successfully negotiates one of its declared
+<code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> media types.</p>
+</section>
+<section id="middleware-chaining">
+<h2>Middleware chaining<a class="headerlink" href="#middleware-chaining" title="Link to this heading"></a></h2>
+<p>Importing router objects can also optionally define ordered middleware
+descriptors using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">middleware(Id,</span> <span class="pre">Handler)</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local predicate with
+arity 2 that receives the current request and returns either
+<code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. Middleware runs before
+route matching, so it can rewrite requests before dispatch or
+short-circuit processing with an immediate response.</p>
+</section>
+<section id="response-middleware">
+<h2>Response middleware<a class="headerlink" href="#response-middleware" title="Link to this heading"></a></h2>
+<p>Importing router objects can also optionally define ordered response
+middleware descriptors using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">response_middleware(Id,</span> <span class="pre">Handler)</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local predicate with
+arity 3 that receives the current request, the current response, and
+returns the transformed response. Response middleware runs after route
+dispatch or short-circuit processing, so it can decorate or rewrite any
+generated response.</p>
+</section>
+<section id="head-fallback">
+<h2>HEAD fallback<a class="headerlink" href="#head-fallback" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests match exact <code class="docutils literal notranslate"><span class="pre">head</span></code> routes first and otherwise fall
+back to a matching <code class="docutils literal notranslate"><span class="pre">get</span></code> route.</p>
+</section>
+<section id="options-handling">
+<h2>OPTIONS handling<a class="headerlink" href="#options-handling" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> requests match explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> routes first. When no
+explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> route exists for a matched path, the router returns
+an automatic <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> response with the derived <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header and
+an empty body. The synthetic request used for this path is annotated
+with <code class="docutils literal notranslate"><span class="pre">automatic_options(true)</span></code> and <code class="docutils literal notranslate"><span class="pre">effective_methods(Methods)</span></code>.
+When the router can identify exactly one matching non-<code class="docutils literal notranslate"><span class="pre">options</span></code> route
+template, it also annotates that synthetic request with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>, and that route <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code> properties
+before response middleware runs. When multiple non-<code class="docutils literal notranslate"><span class="pre">options</span></code> routes
+match the same path, the synthetic request omits <code class="docutils literal notranslate"><span class="pre">route/1</span></code>, keeps
+<code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> only when all matches produce the same value, and
+preserves only metadata properties that are identical across all matched
+routes. Automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> can be customized using
+<code class="docutils literal notranslate"><span class="pre">route_automatic_options_response/3</span></code> and still flows through response
+middleware.</p>
+</section>
+<section id="custom-bad-request-responses">
+<h2>Custom bad-request responses<a class="headerlink" href="#custom-bad-request-responses" title="Link to this heading"></a></h2>
+<p>Importing router objects can optionally define:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">route_bad_request_response(Request,</span> <span class="pre">Errors,</span> <span class="pre">Response)</span></code></p></li>
+</ul>
+<p>Dedicated route-handler exceptions matching
+<code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),</span> <span class="pre">Context)</span></code> with a non-empty
+<code class="docutils literal notranslate"><span class="pre">Errors</span></code> list are translated into <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses before
+response middleware runs. The routed request annotations remain
+available to the optional <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> hook and to
+any later response middleware.</p>
+</section>
+<section id="custom-error-responses">
+<h2>Custom error responses<a class="headerlink" href="#custom-error-responses" title="Link to this heading"></a></h2>
+<p>Importing router objects can optionally customize other routing errors
+by defining:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">route_not_found_response(Request,</span> <span class="pre">Response)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response(Request,</span> <span class="pre">AllowedMethods,</span> <span class="pre">Response)</span></code></p></li>
+</ul>
+<p>When a path matches but the request method does not, the router returns
+a <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> response with an <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header derived
+from the matching route descriptors. A <code class="docutils literal notranslate"><span class="pre">get</span></code> route implicitly
+contributes both <code class="docutils literal notranslate"><span class="pre">GET</span></code> and <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> to that header. Automatic router
+support for <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> also contributes <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> to the header for
+matched paths.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">AllowedMethods</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook is the
+effective method list as lowercase atoms and already includes implicit
+<code class="docutils literal notranslate"><span class="pre">head</span></code> support for <code class="docutils literal notranslate"><span class="pre">get</span></code> routes and automatic <code class="docutils literal notranslate"><span class="pre">options</span></code> support.
+The <code class="docutils literal notranslate"><span class="pre">Request</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook and to response middleware is
+annotated with <code class="docutils literal notranslate"><span class="pre">matched_path(true)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">effective_methods(AllowedMethods)</span></code>.</p>
+</section>
+<section id="custom-negotiation-failures">
+<h2>Custom negotiation failures<a class="headerlink" href="#custom-negotiation-failures" title="Link to this heading"></a></h2>
+<p>Importing router objects can optionally define:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response(Request,</span> <span class="pre">ProducedMediaTypes,</span> <span class="pre">Response)</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">ProducedMediaTypes</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">406</span></code> hook is the
+normalized list declared by <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> for the matched route.</p>
+</section>
+<section id="openapi-derivation">
+<h2>OpenAPI derivation<a class="headerlink" href="#openapi-derivation" title="Link to this heading"></a></h2>
 <p>When a router object also implements the <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code>
 protocol, the imported category can automatically derive
 <code class="docutils literal notranslate"><span class="pre">operations/1</span></code> from <code class="docutils literal notranslate"><span class="pre">route/4</span></code>, <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code>, and
@@ -502,95 +647,6 @@ hooks:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">open_api_schema(Name,</span> <span class="pre">Schema)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">open_api_security_scheme(Name,</span> <span class="pre">SecurityScheme)</span></code></p></li>
 </ul>
-<p>Importing router objects can also optionally declare route response
-media types using:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">route_produces(Id,</span> <span class="pre">MediaTypes)</span></code></p></li>
-</ul>
-<p>When defined, <code class="docutils literal notranslate"><span class="pre">MediaTypes</span></code> must be a non-empty list of media type
-atoms. The router negotiates the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header against that
-list, annotates the matched request with
-<code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code>, and returns a generic
-<code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> response when no produced media type matches.</p>
-<p>On the normal routing path, any stale incoming <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code>
-annotation is scrubbed before route dispatch and replaced only when the
-matched route successfully negotiates one of its declared
-<code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> media types.</p>
-<p>Importing router objects can also optionally define ordered middleware
-descriptors using:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">middleware(Id,</span> <span class="pre">Handler)</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local predicate with
-arity 2 that receives the current request and returns either
-<code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. Middleware runs before
-route matching, so it can rewrite requests before dispatch or
-short-circuit processing with an immediate response.</p>
-<p>Importing router objects can also optionally define ordered response
-middleware descriptors using:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">response_middleware(Id,</span> <span class="pre">Handler)</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local predicate with
-arity 3 that receives the current request, the current response, and
-returns the transformed response. Response middleware runs after route
-dispatch or short-circuit processing, so it can decorate or rewrite any
-generated response.</p>
-<p>Path templates are atoms using literal segments and optional <code class="docutils literal notranslate"><span class="pre">{name}</span></code>
-placeholders. Example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>route(show_user, get, <span class="s">&#39;/users/{id}&#39;</span>, show_user).
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests match exact <code class="docutils literal notranslate"><span class="pre">head</span></code> routes first and otherwise fall
-back to a matching <code class="docutils literal notranslate"><span class="pre">get</span></code> route.</p>
-<p>When a path matches but the request method does not, the router returns
-a <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> response with an <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header derived
-from the matching route descriptors. A <code class="docutils literal notranslate"><span class="pre">get</span></code> route implicitly
-contributes both <code class="docutils literal notranslate"><span class="pre">GET</span></code> and <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> to that header. Automatic router
-support for <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> also contributes <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> to the header for
-matched paths.</p>
-<p><code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> requests match explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> routes first. When no
-explicit <code class="docutils literal notranslate"><span class="pre">options</span></code> route exists for a matched path, the router returns
-an automatic <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> response with the derived <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header and
-an empty body. The synthetic request used for this path is annotated
-with <code class="docutils literal notranslate"><span class="pre">automatic_options(true)</span></code> and <code class="docutils literal notranslate"><span class="pre">effective_methods(Methods)</span></code>.
-When the router can identify exactly one matching non-<code class="docutils literal notranslate"><span class="pre">options</span></code> route
-template, it also annotates that synthetic request with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>, and that route <code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code> properties
-before response middleware runs. When multiple non-<code class="docutils literal notranslate"><span class="pre">options</span></code> routes
-match the same path, the synthetic request omits <code class="docutils literal notranslate"><span class="pre">route/1</span></code>, keeps
-<code class="docutils literal notranslate"><span class="pre">path_params/1</span></code> only when all matches produce the same value, and
-preserves only metadata properties that are identical across all matched
-routes. The same normal routing path also scrubs stale
-<code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code> annotations so only fresh negotiation results
-reach route handlers.</p>
-<p>Importing router objects can optionally customize error handling by
-defining:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">route_bad_request_response(Request,</span> <span class="pre">Errors,</span> <span class="pre">Response)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">route_not_found_response(Request,</span> <span class="pre">Response)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">route_method_not_allowed_response(Request,</span> <span class="pre">AllowedMethods,</span> <span class="pre">Response)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">route_automatic_options_response(Request,</span> <span class="pre">EffectiveMethods,</span> <span class="pre">Response)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">route_not_acceptable_response(Request,</span> <span class="pre">ProducedMediaTypes,</span> <span class="pre">Response)</span></code></p></li>
-</ul>
-<p>Dedicated route-handler exceptions matching
-<code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),</span> <span class="pre">Context)</span></code> with a non-empty
-<code class="docutils literal notranslate"><span class="pre">Errors</span></code> list are translated into <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses before
-response middleware runs. The routed request annotations remain
-available to the optional <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> hook and to
-any later response middleware.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">AllowedMethods</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook is the
-effective method list as lowercase atoms and already includes implicit
-<code class="docutils literal notranslate"><span class="pre">head</span></code> support for <code class="docutils literal notranslate"><span class="pre">get</span></code> routes and automatic <code class="docutils literal notranslate"><span class="pre">options</span></code> support.
-The <code class="docutils literal notranslate"><span class="pre">Request</span></code> passed to the <code class="docutils literal notranslate"><span class="pre">405</span></code> hook and to response middleware is
-annotated with <code class="docutils literal notranslate"><span class="pre">matched_path(true)</span></code> and
-<code class="docutils literal notranslate"><span class="pre">effective_methods(AllowedMethods)</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">EffectiveMethods</span></code> argument passed to the automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>
-hook is the same effective method list. The <code class="docutils literal notranslate"><span class="pre">Request</span></code> passed to that
-hook and to response middleware is the annotated synthetic request
-described above.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">ProducedMediaTypes</span></code> argument passed to the <code class="docutils literal notranslate"><span class="pre">406</span></code> hook is the
-normalized list declared by <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> for the matched route.</p>
 </section>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
