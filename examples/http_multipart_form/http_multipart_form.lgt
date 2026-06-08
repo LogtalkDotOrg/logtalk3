@@ -117,12 +117,14 @@
 							button([type=submit], 'Send form data')
 						]),
 						p([class='hint'], 'The form uses enctype="multipart/form-data" so the server can inspect the normalized multipart request body directly.')
-					])
+					]),
+					EnvironmentCard
 				])
 			])
 		])
 	) :-
-		page_styles(Styles).
+		page_styles(Styles),
+		runtime_environment_card(EnvironmentCard).
 
 	confirmation_page_content(Name, Email,
 		html([lang=en], [
@@ -145,12 +147,14 @@
 							dd(Email)
 						]),
 						p(a([href='/'], 'Submit another form'))
-					])
+					]),
+					EnvironmentCard
 				])
 			])
 		])
 	) :-
-		page_styles(Styles).
+		page_styles(Styles),
+		runtime_environment_card(EnvironmentCard).
 
 	invalid_submission_page_content(
 		html([lang=en], [
@@ -167,14 +171,60 @@
 						h1('Missing multipart form fields'),
 						p('The server expected a multipart/form-data request containing both the name and email fields.'),
 						p(a([href='/'], 'Return to the form'))
-					])
+					]),
+					EnvironmentCard
 				])
 			])
 		])
 	) :-
-		page_styles(Styles).
+		page_styles(Styles),
+		runtime_environment_card(EnvironmentCard).
 
-	page_styles('body {\n\tmargin: 0;\n\tbackground: linear-gradient(180deg, #f4efe8 0%, #e5ddd1 100%);\n\tcolor: #1d2935;\n\tfont-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;\n}\n\n* {\n\tbox-sizing: border-box;\n}\n\n.page-shell {\n\tmax-width: 760px;\n\tmargin: 0 auto;\n\tpadding: 40px 20px 56px;\n}\n\n.card {\n\tbackground: rgba(255, 251, 246, 0.94);\n\tborder: 1px solid #d7c8b2;\n\tborder-radius: 24px;\n\tpadding: 26px;\n\tbox-shadow: 0 20px 45px rgba(52, 39, 24, 0.09);\n}\n\n.hero-card,\n.form-card,\n.success-card,\n.error-card {\n\tmargin-bottom: 18px;\n}\n\n.eyebrow {\n\tmargin: 0 0 12px;\n\ttext-transform: uppercase;\n\tletter-spacing: 0.18em;\n\tfont-size: 0.75rem;\n\tfont-weight: bold;\n\tcolor: #8a4b08;\n}\n\n.card h1,\n.card h2 {\n\tmargin-top: 0;\n}\n\n.card p {\n\tline-height: 1.65;\n}\n\n.contact-form {\n\tdisplay: grid;\n\tgap: 12px;\n\tmargin-top: 18px;\n}\n\nlabel {\n\tfont-weight: bold;\n}\n\ninput {\n\twidth: 100%;\n\tpadding: 12px 14px;\n\tborder: 1px solid #c8b79d;\n\tborder-radius: 14px;\n\tfont: inherit;\n\tbackground: #fffdf8;\n}\n\nbutton {\n\tmargin-top: 6px;\n\tborder: 0;\n\tborder-radius: 999px;\n\tpadding: 12px 18px;\n\tfont: inherit;\n\tfont-weight: bold;\n\tcursor: pointer;\n\tcolor: #ffffff;\n\tbackground: #0f766e;\n\tbox-shadow: 0 12px 24px rgba(15, 118, 110, 0.18);\n}\n\n.hint {\n\tmargin-bottom: 0;\n\tfont-size: 0.95rem;\n\tcolor: #5d4c3c;\n}\n\n.summary-list {\n\tdisplay: grid;\n\tgrid-template-columns: max-content 1fr;\n\tgap: 10px 18px;\n\tmargin: 20px 0;\n}\n\n.summary-list dt {\n\tfont-weight: bold;\n}\n\n.summary-list dd {\n\tmargin: 0;\n}\n\n.error-card {\n\tborder-color: #d5a6a3;\n}\n\n@media (max-width: 640px) {\n\t.page-shell {\n\t\tpadding: 28px 16px 40px;\n\t}\n\n\t.card {\n\t\tpadding: 20px;\n\t}\n}\n').
+	runtime_environment_card(
+		section([class='card environment-card'], [
+			h2('Runtime environment'),
+			dl([class='summary-list'], [
+				dt('Logtalk'),
+				dd(LogtalkVersion),
+				dt(BackendName),
+				dd(BackendVersion)
+			])
+		])
+	) :-
+		runtime_environment(LogtalkVersion, BackendName, BackendVersion).
+
+	runtime_environment(LogtalkVersion, BackendName, BackendVersion) :-
+		logtalk_version(LogtalkVersion),
+		current_logtalk_flag(prolog_dialect, Backend),
+		backend(Backend, BackendName),
+		current_logtalk_flag(prolog_version, v(Major, Minor, Patch)),
+		atomic_list_concat([Major, Minor, Patch], '.', BackendVersion).
+
+	logtalk_version(Version) :-
+		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
+		atomic_list_concat([Major, Minor, Patch], '.', Prefix),
+		( 	Status == stable ->
+			Version = Prefix
+		; 	atomic_list_concat([Prefix, Status], '-', Version)
+		).
+
+	backend(logtalk, 'Logtalk').
+	backend(b, 'B-Prolog').
+	backend(ciao, 'Ciao Prolog').
+	backend(cx, 'CxProlog').
+	backend(eclipse, 'ECLiPSe').
+	backend(gnu, 'GNU Prolog').
+	backend(ji, 'JIProlog').
+	backend(quintus, 'Quintus Prolog').
+	backend(sicstus, 'SICStus Prolog').
+	backend(swi, 'SWI-Prolog').
+	backend(tau, 'Tau Prolog').
+	backend(trealla, 'Trealla Prolog').
+	backend(xsb, 'XSB').
+	backend(xvm, 'XVM').
+	backend(yap, 'YAP').
+
+	page_styles('body {\n\tmargin: 0;\n\tbackground: linear-gradient(180deg, #f4efe8 0%, #e5ddd1 100%);\n\tcolor: #1d2935;\n\tfont-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;\n}\n\n* {\n\tbox-sizing: border-box;\n}\n\n.page-shell {\n\tmax-width: 760px;\n\tmargin: 0 auto;\n\tpadding: 40px 20px 56px;\n}\n\n.card {\n\tbackground: rgba(255, 251, 246, 0.94);\n\tborder: 1px solid #d7c8b2;\n\tborder-radius: 24px;\n\tpadding: 26px;\n\tbox-shadow: 0 20px 45px rgba(52, 39, 24, 0.09);\n}\n\n.hero-card,\n.form-card,\n.success-card,\n.error-card,\n.environment-card {\n\tmargin-bottom: 18px;\n}\n\n.eyebrow {\n\tmargin: 0 0 12px;\n\ttext-transform: uppercase;\n\tletter-spacing: 0.18em;\n\tfont-size: 0.75rem;\n\tfont-weight: bold;\n\tcolor: #8a4b08;\n}\n\n.card h1,\n.card h2 {\n\tmargin-top: 0;\n}\n\n.card p {\n\tline-height: 1.65;\n}\n\n.contact-form {\n\tdisplay: grid;\n\tgap: 12px;\n\tmargin-top: 18px;\n}\n\nlabel {\n\tfont-weight: bold;\n}\n\ninput {\n\twidth: 100%;\n\tpadding: 12px 14px;\n\tborder: 1px solid #c8b79d;\n\tborder-radius: 14px;\n\tfont: inherit;\n\tbackground: #fffdf8;\n}\n\nbutton {\n\tmargin-top: 6px;\n\tborder: 0;\n\tborder-radius: 999px;\n\tpadding: 12px 18px;\n\tfont: inherit;\n\tfont-weight: bold;\n\tcursor: pointer;\n\tcolor: #ffffff;\n\tbackground: #0f766e;\n\tbox-shadow: 0 12px 24px rgba(15, 118, 110, 0.18);\n}\n\n.hint {\n\tmargin-bottom: 0;\n\tfont-size: 0.95rem;\n\tcolor: #5d4c3c;\n}\n\n.summary-list {\n\tdisplay: grid;\n\tgrid-template-columns: max-content 1fr;\n\tgap: 10px 18px;\n\tmargin: 20px 0;\n}\n\n.summary-list dt {\n\tfont-weight: bold;\n}\n\n.summary-list dd {\n\tmargin: 0;\n}\n\n.error-card {\n\tborder-color: #d5a6a3;\n}\n\n@media (max-width: 640px) {\n\t.page-shell {\n\t\tpadding: 28px 16px 40px;\n\t}\n\n\t.card {\n\t\tpadding: 20px;\n\t}\n}\n').
 
 :- end_object.
 

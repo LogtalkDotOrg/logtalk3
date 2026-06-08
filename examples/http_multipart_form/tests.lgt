@@ -33,6 +33,10 @@
 		body/2, request/7, status/2
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	cover(multipart_form_http_handler).
 	cover(multipart_form_server).
 	cover(multipart_form_client).
@@ -41,12 +45,18 @@
 	test(http_multipart_form_handler_01, deterministic) :-
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		multipart_form_http_handler::handle(Request, Response),
+		logtalk_version(LogtalkVersion),
+		backend_name(BackendName),
+		backend_version(BackendVersion),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/html', text(HTML))),
 		once(sub_atom(HTML, _, _, _, '<form')),
 		once(sub_atom(HTML, _, _, _, 'multipart/form-data')),
 		once(sub_atom(HTML, _, _, _, 'name="name"')),
-		once(sub_atom(HTML, _, _, _, 'name="email"')).
+		once(sub_atom(HTML, _, _, _, 'name="email"')),
+		once(sub_atom(HTML, _, _, _, LogtalkVersion)),
+		once(sub_atom(HTML, _, _, _, BackendName)),
+		once(sub_atom(HTML, _, _, _, BackendVersion)).
 
 	test(http_multipart_form_handler_02, deterministic) :-
 		http_multipart::form_data_body([
@@ -109,5 +119,37 @@
 			catch(once(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag)), _, true).
 
 	:- endif.
+
+	logtalk_version(Version) :-
+		current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status)),
+		atomic_list_concat([Major, Minor, Patch], '.', Prefix),
+		( 	Status == stable ->
+			Version = Prefix
+		; 	atomic_list_concat([Prefix, Status], '-', Version)
+		).
+
+	backend_name(Name) :-
+		current_logtalk_flag(prolog_dialect, Backend),
+		backend(Backend, Name).
+
+	backend_version(Version) :-
+		current_logtalk_flag(prolog_version, v(Major, Minor, Patch)),
+		atomic_list_concat([Major, Minor, Patch], '.', Version).
+
+	backend(logtalk, 'Logtalk').
+	backend(b, 'B-Prolog').
+	backend(ciao, 'Ciao Prolog').
+	backend(cx, 'CxProlog').
+	backend(eclipse, 'ECLiPSe').
+	backend(gnu, 'GNU Prolog').
+	backend(ji, 'JIProlog').
+	backend(quintus, 'Quintus Prolog').
+	backend(sicstus, 'SICStus Prolog').
+	backend(swi, 'SWI-Prolog').
+	backend(tau, 'Tau Prolog').
+	backend(trealla, 'Trealla Prolog').
+	backend(xsb, 'XSB').
+	backend(xvm, 'XVM').
+	backend(yap, 'YAP').
 
 :- end_object.
