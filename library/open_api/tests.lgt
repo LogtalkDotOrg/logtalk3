@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-03,
+		date is 2026-06-08,
 		comment is 'Unit tests for the "open_api" library.'
 	]).
 
@@ -216,16 +216,16 @@
 	test(open_api_document_2_04, error(existence_error(open_api_security_scope(user_oauth), admin_users))) :-
 		document(invalid_oauth_scope_provider, _).
 
-	test(open_api_document_2_05, error(domain_error(open_api_security_scheme(api_key, apiKey), missing(name)))) :-
+	test(open_api_document_2_05, error(domain_error(open_api_security_scheme(api_key), invalid_descriptor({type-apiKey})))) :-
 		document(invalid_api_key_security_scheme_provider, _).
 
-	test(open_api_document_2_06, error(domain_error(open_api_security_scheme(user_http, http), missing(scheme)))) :-
+	test(open_api_document_2_06, error(domain_error(open_api_security_scheme(user_http), invalid_descriptor({type-http})))) :-
 		document(invalid_http_security_scheme_provider, _).
 
-	test(open_api_document_2_07, error(domain_error(open_api_security_scheme(user_oauth, oauth2), missing(flows)))) :-
+	test(open_api_document_2_07, error(domain_error(open_api_security_scheme(user_oauth), invalid_descriptor({type-oauth2})))) :-
 		document(invalid_oauth_security_scheme_provider, _).
 
-	test(open_api_document_2_08, error(domain_error(open_api_security_scheme(user_oidc, openIdConnect), missing(openIdConnectUrl)))) :-
+	test(open_api_document_2_08, error(domain_error(open_api_security_scheme(user_oidc), invalid_descriptor({type-openIdConnect})))) :-
 		document(invalid_openid_security_scheme_provider, _).
 
 	test(open_api_document_2_09, error(domain_error(open_api_security_scheme(api_key, apiKey), invalid(in, body)))) :-
@@ -320,8 +320,20 @@
 	test(open_api_document_2_21, error(domain_error(open_api_path('/pets/{name}'), duplicate_template('/pets/{petId}')))) :-
 		document(equivalent_path_template_provider, _).
 
-	test(open_api_document_2_22, error(domain_error(open_api_security_scheme(user_oidc, openIdConnect), invalid_option(flows([implicit('https://auth.example.com/oauth/authorize', [scope(profile, 'Read profile data')])]))))) :-
-		document(invalid_openid_flow_security_scheme_provider, _).
+	test(open_api_document_2_22, deterministic) :-
+		document(openid_flow_security_scheme_provider, Document),
+		validate_document(Document),
+		json_field(Document, security, [DefaultSecurity]),
+		json_field(DefaultSecurity, user_oidc, [profile]),
+		json_field(Document, components, Components),
+		json_field(Components, securitySchemes, SecuritySchemes),
+		json_field(SecuritySchemes, user_oidc, OIDCScheme),
+		json_field(OIDCScheme, openIdConnectUrl, 'https://auth.example.com/oidc'),
+		\+ json_field(OIDCScheme, flows, _),
+		\+ json_field(OIDCScheme, '$localFlows', _).
+
+	test(open_api_document_2_22a, error(existence_error(open_api_security_scope(user_oidc), admin))) :-
+		document(invalid_openid_scope_security_scheme_provider, _).
 
 	test(open_api_document_2_23, deterministic) :-
 		document(relative_external_docs_provider, Document),
@@ -331,6 +343,36 @@
 
 	test(open_api_document_2_24, error(domain_error(open_api_component_schema, invalid_name('bad/key')))) :-
 		document(invalid_component_name_provider, _).
+
+	test(open_api_document_2_29, error(test_provider_hook(security))) :-
+		document(throwing_security_hook_provider, _).
+
+	test(open_api_document_2_30, error(test_provider_hook(homepage))) :-
+		document(throwing_homepage_hook_provider, _).
+
+	test(open_api_document_2_31, error(test_provider_hook(description))) :-
+		document(throwing_description_hook_provider, _).
+
+	test(open_api_document_2_32, error(test_provider_hook(license))) :-
+		document(throwing_license_hook_provider, _).
+
+	test(open_api_document_2_33, error(domain_error(open_api_summary, 42))) :-
+		document(invalid_operation_summary_provider, _).
+
+	test(open_api_document_2_34, error(domain_error(open_api_description, 42))) :-
+		document(invalid_response_description_provider, _).
+
+	test(open_api_document_2_35, error(domain_error(open_api_license, 42))) :-
+		document(invalid_license_metadata_provider, _).
+
+	test(open_api_document_2_36, error(domain_error(open_api_security_scheme(user_http, http), invalid(scheme, 123)))) :-
+		document(invalid_http_security_scheme_scalar_provider, _).
+
+	test(open_api_document_2_37, error(domain_error(open_api_security_scheme(user_key, apiKey), invalid(name, 123)))) :-
+		document(invalid_api_key_security_scheme_scalar_provider, _).
+
+	test(open_api_document_2_38, error(domain_error(open_api_security_scheme(user_oidc, openIdConnect), invalid_url(openIdConnectUrl, 123)))) :-
+		document(invalid_openid_security_scheme_scalar_provider, _).
 
 	test(open_api_validate_document_1_01, deterministic) :-
 		\+ validate_document({
@@ -584,6 +626,318 @@
 			}
 		}, Errors),
 		memberchk(error([components, schemas, 'bad/key'], invalid_component_name('bad/key')), Errors).
+
+	test(open_api_validate_document_1_12, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid Operation Summary API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						summary-42,
+						responses-{
+							'200'-{description-'OK'}
+						}
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get, summary], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_13, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Missing Operation Responses API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						summary-'List users'
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get], missing_required(responses)), Errors).
+
+	test(open_api_validate_document_1_14, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid Response Description API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						responses-{
+							'200'-{description-42}
+						}
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get, responses, '200', description], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_15, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid Response Status API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						responses-{
+							bogus-{description-'OK'}
+						}
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get, responses, bogus], invalid_response_status(bogus)), Errors).
+
+	test(open_api_validate_document_1_16, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid Operation Tags Type API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						tags-123,
+						responses-{
+							'200'-{description-'OK'}
+						}
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get, tags], expected_type(array)), Errors).
+
+	test(open_api_validate_document_1_17, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid Operation Tag Entry API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						tags-[users, 123],
+						responses-{
+							'200'-{description-'OK'}
+						}
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get, tags, 2], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_18, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Unexpected Operation Property API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						foo-bar,
+						responses-{
+							'200'-{description-'OK'}
+						}
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([paths, '/users', get, foo], unexpected_property), Errors).
+
+	test(open_api_validate_document_1_19, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Operation Extension Property API',
+				version-'1.0.0'
+			},
+			paths-{
+				'/users'-{
+					get-{
+						'x-example'-bar,
+						responses-{
+							'200'-{description-'OK'}
+						}
+					}
+				}
+			}
+		}, Errors),
+		Errors == [].
+
+	test(open_api_validate_document_1_20, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid API Key Security Scheme Name API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_key-{
+						type-apiKey,
+						name-123,
+						in-header
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_key, name], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_21, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid API Key Security Scheme Location Type API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_key-{
+						type-apiKey,
+						name-key,
+						in-123
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_key, in], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_22, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid API Key Security Scheme Location Value API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_key-{
+						type-apiKey,
+						name-key,
+						in-body
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_key, in], invalid_api_key_location(body)), Errors).
+
+	test(open_api_validate_document_1_23, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid HTTP Security Scheme API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_http-{
+						type-http,
+						scheme-123
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_http, scheme], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_24, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid HTTP Bearer Format API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_http-{
+						type-http,
+						scheme-bearer,
+						bearerFormat-123
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_http, bearerFormat], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_25, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid OpenID Connect URL Type API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_oidc-{
+						type-openIdConnect,
+						openIdConnectUrl-123
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_oidc, openIdConnectUrl], expected_type(string)), Errors).
+
+	test(open_api_validate_document_1_26, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid OpenID Connect URL Value API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_oidc-{
+						type-openIdConnect,
+						openIdConnectUrl-'not a url'
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_oidc, openIdConnectUrl], invalid_url('not a url')), Errors).
+
+	test(open_api_validate_document_1_27, deterministic) :-
+		validate_document({
+			openapi-'3.1.0',
+			info-{
+				title-'Invalid Security Scheme Description API',
+				version-'1.0.0'
+			},
+			paths-{},
+			components-{
+				securitySchemes-{
+					user_http-{
+						type-http,
+						scheme-bearer,
+						description-123
+					}
+				}
+			}
+		}, Errors),
+		memberchk(error([components, securitySchemes, user_http, description], expected_type(string)), Errors).
 
 	test(open_api_validate_request_3_01, deterministic) :-
 		validate_request(

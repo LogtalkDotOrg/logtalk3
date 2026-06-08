@@ -19,32 +19,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(
-	duplicate_operation_id_provider,
+:- object(duplicate_operation_id_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Duplicate Operation Id API', '1.0.0', 'Fixture provider with duplicate operation identifiers.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(shared_operation, get, '/users', 'List users', [], none, [response(200, 'Listed users', [])], []),
 		operation(shared_operation, post, '/users', 'Create user', [], none, [response(201, 'Created user', [])], [])
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	boolean_schema_descriptor_helper_provider,
+:- object(boolean_schema_descriptor_helper_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Boolean Schema Helper API', '1.0.0', 'Fixture provider using boolean schemas with the OpenAPI JSON descriptor helper predicates.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			check_feature_flag,
@@ -69,21 +75,25 @@
 			true,
 			ResponseDescriptor
 		).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	missing_security_scheme_provider,
+:- object(missing_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Missing Security Scheme API', '1.0.0', 'Fixture provider with undeclared security scheme references.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			list_secured_users,
@@ -96,21 +106,25 @@
 			[security([[missing_bearer-[]]])]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	invalid_oauth_scope_provider,
+:- object(invalid_oauth_scope_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid OAuth Scope API', '1.0.0', 'Fixture provider with undeclared OAuth scope references.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			list_scoped_users,
@@ -123,8 +137,10 @@
 			[security([[user_oauth-[admin_users]]])]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oauth, oauth2([
 		client_credentials(
 			'https://auth.example.com/oauth/token',
@@ -135,16 +151,20 @@
 :- end_object.
 
 
-:- object(
-	invalid_api_key_security_scheme_provider,
+:- object(invalid_api_key_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid API Key Security Scheme API', '1.0.0', 'Fixture provider with a malformed apiKey security scheme.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(api_key, {
 		type-apiKey
 	}).
@@ -152,16 +172,20 @@
 :- end_object.
 
 
-:- object(
-	invalid_http_security_scheme_provider,
+:- object(invalid_http_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid HTTP Security Scheme API', '1.0.0', 'Fixture provider with a malformed http security scheme.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_http, {
 		type-http
 	}).
@@ -169,16 +193,20 @@
 :- end_object.
 
 
-:- object(
-	invalid_oauth_security_scheme_provider,
+:- object(invalid_oauth_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid OAuth Security Scheme API', '1.0.0', 'Fixture provider with a malformed oauth2 security scheme.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oauth, {
 		type-oauth2
 	}).
@@ -186,16 +214,20 @@
 :- end_object.
 
 
-:- object(
-	invalid_openid_security_scheme_provider,
+:- object(invalid_openid_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid OpenID Connect Security Scheme API', '1.0.0', 'Fixture provider with a malformed openIdConnect security scheme.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oidc, {
 		type-openIdConnect
 	}).
@@ -203,16 +235,23 @@
 :- end_object.
 
 
-:- object(
-	invalid_openid_flow_security_scheme_provider,
+
+:- object(openid_flow_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
-	api_info(info('Invalid OpenID Connect Flows Security Scheme API', '1.0.0', 'Fixture provider using invalid flows options for an openIdConnect security scheme.', [])).
+	api_info(info('OpenID Connect Flows Security Scheme API', '1.0.0', 'Fixture provider using local scope declarations for an openIdConnect security scheme.', [])).
+
 	servers([]).
-	security([]).
+
+	security([
+		[user_oidc-[profile]]
+	]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oidc, openid_connect(
 		'https://auth.example.com/oidc',
 		[
@@ -229,31 +268,71 @@
 :- end_object.
 
 
-:- object(
-	invalid_api_key_location_security_scheme_provider,
+:- object(invalid_openid_scope_security_scheme_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Invalid OpenID Connect Scope Security Scheme API', '1.0.0', 'Fixture provider referencing an undeclared local OpenID Connect scope.', [])).
+
+	servers([]).
+
+	security([
+		[user_oidc-[admin]]
+	]).
+
+	operations([]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(user_oidc, openid_connect(
+		'https://auth.example.com/oidc',
+		[
+			description('OIDC scheme'),
+			flows([
+				implicit(
+					'https://auth.example.com/oauth/authorize',
+					[scope(profile, 'Read profile data')]
+				)
+			])
+		]
+	)).
+
+:- end_object.
+
+
+:- object(invalid_api_key_location_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid API Key Location Security Scheme API', '1.0.0', 'Fixture provider with an invalid apiKey in value.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(api_key, api_key(body, 'X-API-Key')).
 
 :- end_object.
 
 
-:- object(
-	invalid_oauth_url_security_scheme_provider,
+:- object(invalid_oauth_url_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid OAuth URL Security Scheme API', '1.0.0', 'Fixture provider with an invalid oauth2 URL field.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oauth, oauth2([
 		client_credentials(
 			'not a url',
@@ -264,31 +343,39 @@
 :- end_object.
 
 
-:- object(
-	invalid_openid_url_security_scheme_provider,
+:- object(invalid_openid_url_security_scheme_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid OpenID Connect URL Security Scheme API', '1.0.0', 'Fixture provider with an invalid openIdConnect URL field.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oidc, openid_connect('not a url')).
 
 :- end_object.
 
 
-:- object(
-	invalid_oauth_scope_descriptor_provider,
+:- object(invalid_oauth_scope_descriptor_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid OAuth Scope Descriptor API', '1.0.0', 'Fixture provider with a malformed oauth2 DSL scope descriptor.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(user_oauth, oauth2([
 		client_credentials(
 			'https://auth.example.com/oauth/token',
@@ -299,53 +386,158 @@
 :- end_object.
 
 
-:- object(
-	invalid_server_url_provider,
+:- object(invalid_server_url_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid Server URL API', '1.0.0', 'Fixture provider with an invalid server URL.', [])).
+
 	servers([
 		server('not a url', 'Broken server URL')
 	]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	relative_external_docs_provider,
+:- object(relative_external_docs_provider,
 	implements((open_api_provider_protocol, application_protocol))).
 
 	api_info(info('Relative External Docs API', '1.0.0', 'Fixture provider using a relative externalDocs URL reference.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	homepage('/docs').
+
 	description('Relative docs fixture').
+
 	license('Apache-2.0').
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	security_matrix_provider,
+:- object(throwing_security_hook_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Throwing Security Hook API', '1.0.0', 'Fixture provider whose optional security hook throws.', [])).
+
+	servers([]).
+
+	security(_) :-
+		throw(error(test_provider_hook(security), throwing_security_hook_provider)).
+
+	operations([]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(throwing_homepage_hook_provider,
+	implements((open_api_provider_protocol, application_protocol))).
+
+	api_info(info('Throwing Homepage Hook API', '1.0.0', 'Fixture provider whose optional homepage hook throws.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	homepage(_) :-
+		throw(error(test_provider_hook(homepage), throwing_homepage_hook_provider)).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(throwing_description_hook_provider,
+	implements((open_api_provider_protocol, application_protocol))).
+
+	api_info(info('Throwing Description Hook API', '1.0.0', 'Fixture provider whose optional description hook throws.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	description(_) :-
+		throw(error(test_provider_hook(description), throwing_description_hook_provider)).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(throwing_license_hook_provider,
+	implements((open_api_provider_protocol, application_protocol))).
+
+	api_info(info('Throwing License Hook API', '1.0.0', 'Fixture provider whose optional license hook throws.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	license(_) :-
+		throw(error(test_provider_hook(license), throwing_license_hook_provider)).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(security_matrix_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Security Matrix API', '1.0.0', 'Fixture provider covering additional security scheme variants.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(api_key_query, api_key(query, api_key)).
 	security_scheme(api_key_header, api_key(header, 'X-API-Key', [description('Header based API key')])).
 	security_scheme(api_key_cookie, api_key(cookie, session_id)).
@@ -373,13 +565,15 @@
 :- end_object.
 
 
-:- object(
-	parameter_matrix_provider,
+:- object(parameter_matrix_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Parameter Matrix API', '1.0.0', 'Fixture provider covering path, query, header, and cookie request parameters.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			get_session,
@@ -397,21 +591,25 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	payload_matrix_provider,
+:- object(payload_matrix_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Payload Matrix API', '1.0.0', 'Fixture provider covering optional, text, and form payload validation.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			patch_profile_note,
@@ -444,58 +642,70 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	invalid_relative_server_url_provider,
+:- object(invalid_relative_server_url_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid Relative Server URL API', '1.0.0', 'Fixture provider with a malformed relative server URL.', [])).
+
 	servers([
 		server('users[1]', 'Broken relative server URL')
 	]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	valid_server_url_provider,
+:- object(valid_server_url_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Valid Server URL API', '1.0.0', 'Fixture provider with relative and templated server URLs.', [])).
+
 	servers([
 		server('/v1', 'Relative server URL'),
 		server('https://{username}.gigantic-server.com:{port}/{basePath}', 'Templated server URL')
 	]).
+
 	security([]).
+
 	operations([]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	invalid_path_parameter_provider,
+:- object(invalid_path_parameter_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid Path Parameter API', '1.0.0', 'Fixture provider with a mismatched path parameter name.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			get_user,
@@ -510,21 +720,25 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	wildcard_response_provider,
+:- object(wildcard_response_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Wildcard Response API', '1.0.0', 'Fixture provider with a wildcard response status.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			list_items,
@@ -537,21 +751,25 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	duplicate_query_parameter_provider,
+:- object(duplicate_query_parameter_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Duplicate Query Parameter API', '1.0.0', 'Fixture provider with duplicated query parameters.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			list_users,
@@ -567,21 +785,25 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	ignored_header_parameter_provider,
+:- object(ignored_header_parameter_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Ignored Header Parameter API', '1.0.0', 'Fixture provider using a reserved header parameter name.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			get_profiles,
@@ -596,21 +818,25 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	media_range_provider,
+:- object(media_range_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Media Range API', '1.0.0', 'Fixture provider using wildcard media type declarations.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			accept_any_payload,
@@ -633,21 +859,25 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	equivalent_path_template_provider,
+:- object(equivalent_path_template_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Equivalent Path Template API', '1.0.0', 'Fixture provider with equivalent templated paths.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			get_pet_by_id,
@@ -674,56 +904,213 @@
 			[]
 		)
 	]).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	invalid_component_name_provider,
+:- object(invalid_component_name_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('Invalid Component Name API', '1.0.0', 'Fixture provider using an invalid component schema name.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([]).
+
 	schema('bad/key', {type-string}).
+
 	security_scheme(_, _) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	http_request_protocol_fixture,
+:- object(invalid_operation_summary_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Invalid Operation Summary API', '1.0.0', 'Fixture provider with a non-atom operation summary.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([
+		operation(
+			list_users,
+			get,
+			'/users',
+			42,
+			[],
+			none,
+			[response(200, 'OK', [])],
+			[]
+		)
+	]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(invalid_response_description_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Invalid Response Description API', '1.0.0', 'Fixture provider with a non-atom response description.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([
+		operation(
+			list_users,
+			get,
+			'/users',
+			'List users',
+			[],
+			none,
+			[response(200, 42, [])],
+			[]
+		)
+	]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(invalid_license_metadata_provider,
+	implements((open_api_provider_protocol, application_protocol))).
+
+	api_info(info('Invalid License Metadata API', '1.0.0', 'Fixture provider with a non-atom application license.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	license(42).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(_, _) :-
+		fail.
+
+:- end_object.
+
+
+:- object(invalid_http_security_scheme_scalar_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Invalid HTTP Security Scheme API', '1.0.0', 'Fixture provider with a non-atom HTTP security scheme value.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(user_http, http(123)).
+
+:- end_object.
+
+
+:- object(invalid_api_key_security_scheme_scalar_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Invalid API Key Security Scheme API', '1.0.0', 'Fixture provider with a non-atom API key name.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(user_key, api_key(header, 123)).
+
+:- end_object.
+
+
+:- object(invalid_openid_security_scheme_scalar_provider,
+	implements(open_api_provider_protocol)).
+
+	api_info(info('Invalid OpenID Security Scheme API', '1.0.0', 'Fixture provider with a malformed OpenID Connect URL.', [])).
+
+	servers([]).
+
+	security([]).
+
+	operations([]).
+
+	schema(_, _) :-
+		fail.
+
+	security_scheme(user_oidc, openid_connect(123)).
+
+:- end_object.
+
+
+:- object(http_request_protocol_fixture,
 	implements(http_request_protocol)).
 
 	method(put).
+
 	target(origin('/users/11111111-1111-1111-1111-111111111111')).
+
 	version(http(1, 1)).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(content('application/json', json({name-'Alice Example', active-true}))).
+
 	property(query_pairs([verbose-true])).
 
 :- end_object.
 
 
-:- object(
-	http_mixed_case_header_request_protocol_fixture,
+:- object(http_mixed_case_header_request_protocol_fixture,
 	implements(http_request_protocol)).
 
 	method(get).
+
 	target(absolute([scheme(http), authority('api.example.com'), path('/sessions/session-1'), query('verbose=true'), fragment('')])).
+
 	version(http(1, 1)).
+
 	headers(['ETag'-'session-tag']).
+
 	header(_, _) :-
 		fail.
+
 	body(empty).
+
 	property(query_pairs([verbose-true])).
 	property(cookies([session_id-'cookie-1'])).
 	property(path_params([id-'session-1'])).
@@ -731,111 +1118,139 @@
 :- end_object.
 
 
-:- object(
-	http_invalid_request_body_protocol_fixture,
+:- object(http_invalid_request_body_protocol_fixture,
 	implements(http_request_protocol)).
 
 	method(patch).
+
 	target(origin('/profiles/profile-1/note')).
+
 	version(http(1, 1)).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(bogus).
+
 	property(_) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	http_unsupported_request_payload_protocol_fixture,
+:- object(http_unsupported_request_payload_protocol_fixture,
 	implements(http_request_protocol)).
 
 	method(post).
+
 	target(origin('/login')).
+
 	version(http(1, 1)).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(content('application/x-www-form-urlencoded', xml(invalid))).
+
 	property(_) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	http_response_protocol_fixture,
+:- object(http_response_protocol_fixture,
 	implements(http_response_protocol)).
 
 	version(http(1, 1)).
+
 	status(status(404, 'Not Found')).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(content('application/json', json({code-not_found, message-'User not found'}))).
+
 	property(_) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	http_unsupported_response_payload_protocol_fixture,
+:- object(http_unsupported_response_payload_protocol_fixture,
 	implements(http_response_protocol)).
 
 	version(http(1, 1)).
+
 	status(status(200, 'OK')).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(content('text/plain', raw)).
+
 	property(_) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	http_invalid_response_body_protocol_fixture,
+:- object(http_invalid_response_body_protocol_fixture,
 	implements(http_response_protocol)).
 
 	version(http(1, 1)).
+
 	status(status(200, 'OK')).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(invalid_body).
+
 	property(_) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	http_integer_status_response_protocol_fixture,
+:- object(http_integer_status_response_protocol_fixture,
 	implements(http_response_protocol)).
 
 	version(http(1, 1)).
+
 	status(200).
+
 	headers([]).
+
 	header(_, _) :-
 		fail.
+
 	body(content('text/plain', text(ok))).
+
 	property(_) :-
 		fail.
 
 :- end_object.
 
 
-:- object(
-	json_descriptor_helper_provider,
+:- object(json_descriptor_helper_provider,
 	implements(open_api_provider_protocol)).
 
 	api_info(info('JSON Descriptor Helper API', '1.0.0', 'Fixture provider using the OpenAPI JSON descriptor helper predicates.', [])).
+
 	servers([]).
+
 	security([]).
+
 	operations([
 		operation(
 			create_widget,
@@ -876,8 +1291,10 @@
 			CreatedResponse
 		),
 		open_api::problem_response_descriptor(default, 'Error response', ErrorResponse).
+
 	schema(_, _) :-
 		fail.
+
 	security_scheme(_, _) :-
 		fail.
 

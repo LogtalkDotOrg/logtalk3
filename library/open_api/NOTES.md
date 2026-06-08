@@ -27,7 +27,16 @@ It builds on top of the `json`, `json_schema`, and `application` libraries.
 
 This initial implementation focuses on deriving OpenAPI documents from
 objects implementing the `open_api_provider_protocol` protocol using a small,
-portable descriptor vocabulary.
+portable descriptor vocabulary. This provides the following benefits:
+
+- Earlier validation: malformed descriptors can be rejected by functor shape
+  and argument checks before any JSON normalization.
+- Better portability: provider objects depend on a Logtalk-level vocabulary,
+  not on OpenAPI object field spelling.
+- Better reuse: the same descriptors could later feed both OpenAPI generation
+  and a future authentication or HTTP integration layer.
+- Cleaner provider code: provider objects avoid raw camelCase OpenAPI keys and
+  nested curly terms for common security cases.
 
 
 Layering
@@ -65,12 +74,19 @@ To load this library, load the `loader.lgt` file:
 	| ?- logtalk_load(open_api(loader)).
 
 
+Testing
+-------
+
+To test this library, load the `tester.lgt` file:
+
+	| ?- logtalk_load(open_api(tester)).
+
+
 Current scope
 -------------
 
-- Derive OpenAPI 3.1.0 documents from provider objects exposing
-  `api_info/1`, `servers/1`, `security/1`, `operations/1`, `schema/2`, and
-  `security_scheme/2`
+- Derive OpenAPI 3.1.0 documents from provider objects implementing the
+  `open_api_provider_protocol` protocol
 - Construct reusable JSON descriptor terms using helper predicates for
   `media/2`, `request_body/3`, and `response/3`, validating JSON-compatible
   media types, response status keys, and shallow schema-term shape,
@@ -93,42 +109,18 @@ Current scope
 - Derive reusable security schemes under `components.securitySchemes` and
   reject top-level or operation `security/1` references to undeclared scheme
   names or undeclared OAuth flow scopes when locally available
-- Accept portable `security_scheme/2` descriptors using `api_key/2-3`,
-  `http/1-2`, `mutual_tls/0-1`, `oauth2/1-2`, and `openid_connect/1-2`
-  while still normalizing legacy raw OpenAPI Security Scheme Object curly
-  terms during transition
 - Reject malformed reusable security scheme descriptors that omit fixed fields
   required by their `type`, and reject malformed declared OAuth flow objects
   that omit their required URLs or `scopes`
 - Reject provider-side invalid `apiKey.in` values and malformed URL-valued
   security fields such as OAuth token or authorization endpoints
-- Accept provider `server(URL, Description)` descriptors using absolute,
-  relative, or templated OpenAPI Server Object URLs, while still rejecting
-  malformed server URL strings
+- Validate provider server descriptor URLs and reject malformed values
 - Accept wildcard response status descriptors such as `'2XX'`
 - Reject provider path parameter descriptors that are not declared in the
   operation path template or that do not use `Required = true`
 - Reject parsed or derived documents whose inline path parameters violate the
   OpenAPI path-parameter invariants
 - Accept webhook-only OpenAPI 3.1.0 documents during structural validation
-
-The current implementation keeps the operation property vocabulary narrow and
-supports only the property terms already used in the draft provider examples:
-
-- `description(Atom)`
-- `tags(List)`
-- `deprecated(Boolean)`
-- `security(Requirements)` where `Requirements` is a list of security
-  requirement alternatives, each represented as a list of `Scheme-Scopes`
-  pairs, and `[]` denotes an empty security requirement object
-
-Provider objects that also implement `application_protocol` can contribute
-missing OpenAPI metadata:
-
-- `description/1` maps to `info.description`
-- `license/1` maps to `info.license.name`
-- `homepage/1` maps to the top-level `externalDocs.url`
-
 
 Current limitations
 -------------------
@@ -144,7 +136,7 @@ Current limitations
   messages, but it limits itself to contract validation rather
   than transport concerns
 - The supported `security_scheme/2` descriptor vocabulary is limited to the
-  forms summarized in [SECURITY_DESCRIPTOR_DSL.md](SECURITY_DESCRIPTOR_DSL.md)
+  forms summarized below
 - Scope validation cross-checks against locally declared OAuth flow
   scopes when they are present in a reusable security scheme. Full OpenID
   Connect discovery-based scope resolution is out of scope
@@ -158,6 +150,178 @@ Current limitations
   eagerly, but schema validation at the helper boundary is
   intentionally shallow and only checks for boolean schemas, JSON object
   terms, or `schema_ref/1` references
+
+
+Provider descriptors
+--------------------
+
+### API metadata
+
+The `api_info/1` predicate returns an `info(Title, Version, Summary,
+Properties)` descriptor for the top-level OpenAPI `info` object. Currently
+recognized metadata properties are limited to `description(Description)`.
+
+Provider objects that also implement `application_protocol` can contribute
+missing OpenAPI metadata:
+
+- `description/1` maps to `info.description`
+- `license/1` maps to `info.license.name`
+- `homepage/1` maps to the top-level `externalDocs.url`
+
+### Server descriptors
+
+The `servers/1` predicate returns a list of `server(URL, Description)`
+descriptors used to build the top-level OpenAPI `servers` array. `URL` must be
+a valid OpenAPI Server Object URL string, allowing absolute URLs, relative
+references, and templated variables such as
+`https://{username}.example.com:{port}/{basePath}`.
+
+### Top-level security defaults
+
+The `security/1` predicate returns a list of top-level OpenAPI security
+requirement alternatives. The returned list uses the same `Requirements`
+representation accepted by operation `security(Requirements)` properties: each
+requirement alternative is a list of `Scheme-Scopes` pairs and `[]` denotes an
+empty security requirement object. Scheme names must match declarations exposed
+by `security_scheme/2`.
+
+### Operation descriptors
+
+The `operations/1` predicate returns a list of
+`operation(Id, Method, Path, Summary, Parameters, RequestBody, Responses,
+Properties)` descriptors. `Id` is used as the OpenAPI `operationId` and must be
+unique across the returned descriptor list.
+
+Nested descriptors are `parameter(Name, In, Description, Required, Schema)`,
+`request_body(Description, Required, MediaTypes)`,
+`response(Status, Description, MediaTypes)`, and `media(MediaType, Schema)`.
+`Status` may be an integer HTTP status code, `default`, or a wildcard range
+atom such as `'2XX'`. Path parameters must match a template expression in
+`Path` and must use `Required = true`.
+
+The current implementation keeps the operation property vocabulary narrow and
+supports only:
+
+- `description(Description)`
+- `tags(Tags)`
+- `deprecated(Boolean)`
+- `security(Requirements)` where `Requirements` is a list of requirement
+  alternatives represented as lists of `Scheme-Scopes` pairs and `[]` denotes
+  an empty security requirement object
+
+Scheme names referenced from `security(Requirements)` must match names exposed
+by `security_scheme/2`, and operation-level security overrides any top-level
+`security/1` declaration.
+
+### Reusable schemas
+
+The `schema/2` predicate maps reusable schema names to JSON Schema curly terms
+compatible with the `json_schema` library. References to reusable schemas are
+expressed using `schema_ref(Name)` terms.
+
+### Reusable security schemes
+
+The `security_scheme/2` predicate maps reusable security scheme names to
+portable descriptor terms. This library accepts those terms and normalizes them
+to OpenAPI Security Scheme Objects when deriving the final document. The
+scheme names must match names referenced from operation
+`security(Requirements)` properties. The
+descriptor vocabulary keeps provider objects at the Logtalk domain level
+instead of exposing OpenAPI JSON surface spelling directly:
+
+- provider code does not need raw OpenAPI field names such as
+  `openIdConnectUrl` or `clientCredentials`
+- validation can happen at the level of Logtalk terms before document
+  generation
+- the same provider facts are easier to reuse in a future portable HTTP or
+  authentication library because they describe security intent rather than
+  emitted OpenAPI object structure
+
+Supported descriptor shapes are:
+
+- `api_key(In, Name)`
+- `api_key(In, Name, Options)`
+- `http(Scheme)`
+- `http(Scheme, Options)`
+- `mutual_tls`
+- `mutual_tls(Options)`
+- `oauth2(Flows)`
+- `oauth2(Flows, Options)`
+- `openid_connect(URL)`
+- `openid_connect(URL, Options)`
+
+Supported scheme options are:
+
+- `description(Description)` for all scheme kinds
+- `bearer_format(Format)` for `http/2`
+- `flows(Flows)` for `openid_connect/2` when locally declared scopes are
+  needed without relying on OpenID Connect discovery; these local flow
+  declarations are used only for provider-side security-reference validation
+  and are not emitted into the final OpenAPI document
+
+Supported OAuth flow descriptors are:
+
+- `implicit(AuthorizationURL, Scopes)`
+- `implicit(AuthorizationURL, Scopes, [refresh_url(URL)])`
+- `password(TokenURL, Scopes)`
+- `password(TokenURL, Scopes, [refresh_url(URL)])`
+- `client_credentials(TokenURL, Scopes)`
+- `client_credentials(TokenURL, Scopes, [refresh_url(URL)])`
+- `authorization_code(AuthorizationURL, TokenURL, Scopes)`
+- `authorization_code(AuthorizationURL, TokenURL, Scopes, [refresh_url(URL)])`
+
+Scope descriptors are expressed as a list of `scope(Name, Description)` terms.
+
+Use descriptor terms such as:
+
+    security_scheme(
+      user_oauth,
+      oauth2([
+        client_credentials(
+          'https://auth.example.com/oauth/token',
+          [scope(read_users, 'Read user data')]
+        )
+      ])
+    ).
+    
+    security_scheme(api_key, api_key(header, 'X-API-Key')).
+    
+    security_scheme(user_bearer, http(bearer, [bearer_format('JWT')])).
+    
+    security_scheme(user_oidc, openid_connect('https://example.com/.well-known/openid-configuration')).
+
+An OpenID Connect scheme can also declare local scopes for the existing
+security reference validation path:
+
+    security_scheme(
+      user_oidc,
+      openid_connect(
+        'https://example.com/.well-known/openid-configuration',
+        [flows([
+          authorization_code(
+            'https://example.com/oauth/authorize',
+            'https://example.com/oauth/token',
+            [
+              scope(read_users, 'Read user data')
+            ]
+          )
+        ])]
+      )
+    ).
+
+  Those local flow declarations are used only for provider-side security
+  reference validation. They are not emitted into the derived OpenAPI document,
+  as OpenID Connect Security Scheme Objects do not define a `flows` field.
+
+Provider-side validation checks, among other things:
+
+- duplicate scheme names
+- invalid descriptor functors or arities
+- required fixed fields after normalization
+- valid `apiKey` locations
+- malformed OAuth flow or scope descriptors
+- malformed URL-valued fields such as `tokenUrl`, `authorizationUrl`,
+  `refreshUrl`, and `openIdConnectUrl`
 
 
 Usage

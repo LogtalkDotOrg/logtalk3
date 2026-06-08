@@ -242,8 +242,18 @@
 <li class="toctree-l3"><a class="reference internal" href="#layering">Layering</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provider-descriptors">Provider descriptors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api-metadata">API metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-descriptors">Server descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#top-level-security-defaults">Top-level security defaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operation-descriptors">Operation descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reusable-schemas">Reusable schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reusable-security-schemes">Reusable security schemes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
@@ -363,7 +373,18 @@ documents. It builds on top of the <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">application</span></code> libraries.</p>
 <p>This initial implementation focuses on deriving OpenAPI documents from
 objects implementing the <code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code> protocol using a
-small, portable descriptor vocabulary.</p>
+small, portable descriptor vocabulary. This provides the following
+benefits:</p>
+<ul class="simple">
+<li><p>Earlier validation: malformed descriptors can be rejected by functor
+shape and argument checks before any JSON normalization.</p></li>
+<li><p>Better portability: provider objects depend on a Logtalk-level
+vocabulary, not on OpenAPI object field spelling.</p></li>
+<li><p>Better reuse: the same descriptors could later feed both OpenAPI
+generation and a future authentication or HTTP integration layer.</p></li>
+<li><p>Cleaner provider code: provider objects avoid raw camelCase OpenAPI
+keys and nested curly terms for common security cases.</p></li>
+</ul>
 <section id="layering">
 <h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">open_api</span></code> is a companion library for the HTTP stack rather than a
@@ -397,12 +418,18 @@ link in a web browser.</p>
 </pre></div>
 </div>
 </section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(open_api(tester)).
+</pre></div>
+</div>
+</section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Derive OpenAPI 3.1.0 documents from provider objects exposing
-<code class="docutils literal notranslate"><span class="pre">api_info/1</span></code>, <code class="docutils literal notranslate"><span class="pre">servers/1</span></code>, <code class="docutils literal notranslate"><span class="pre">security/1</span></code>, <code class="docutils literal notranslate"><span class="pre">operations/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">schema/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code></p></li>
+<li><p>Derive OpenAPI 3.1.0 documents from provider objects implementing the
+<code class="docutils literal notranslate"><span class="pre">open_api_provider_protocol</span></code> protocol</p></li>
 <li><p>Construct reusable JSON descriptor terms using helper predicates for
 <code class="docutils literal notranslate"><span class="pre">media/2</span></code>, <code class="docutils literal notranslate"><span class="pre">request_body/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">response/3</span></code>, validating
 JSON-compatible media types, response status keys, and shallow
@@ -426,19 +453,13 @@ atom for more than one operation</p></li>
 and reject top-level or operation <code class="docutils literal notranslate"><span class="pre">security/1</span></code> references to
 undeclared scheme names or undeclared OAuth flow scopes when locally
 available</p></li>
-<li><p>Accept portable <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code> descriptors using
-<code class="docutils literal notranslate"><span class="pre">api_key/2-3</span></code>, <code class="docutils literal notranslate"><span class="pre">http/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_tls/0-1</span></code>, <code class="docutils literal notranslate"><span class="pre">oauth2/1-2</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">openid_connect/1-2</span></code> while still normalizing legacy raw OpenAPI
-Security Scheme Object curly terms during transition</p></li>
 <li><p>Reject malformed reusable security scheme descriptors that omit fixed
 fields required by their <code class="docutils literal notranslate"><span class="pre">type</span></code>, and reject malformed declared OAuth
 flow objects that omit their required URLs or <code class="docutils literal notranslate"><span class="pre">scopes</span></code></p></li>
 <li><p>Reject provider-side invalid <code class="docutils literal notranslate"><span class="pre">apiKey.in</span></code> values and malformed
 URL-valued security fields such as OAuth token or authorization
 endpoints</p></li>
-<li><p>Accept provider <code class="docutils literal notranslate"><span class="pre">server(URL,</span> <span class="pre">Description)</span></code> descriptors using
-absolute, relative, or templated OpenAPI Server Object URLs, while
-still rejecting malformed server URL strings</p></li>
+<li><p>Validate provider server descriptor URLs and reject malformed values</p></li>
 <li><p>Accept wildcard response status descriptors such as <code class="docutils literal notranslate"><span class="pre">'2XX'</span></code></p></li>
 <li><p>Reject provider path parameter descriptors that are not declared in
 the operation path template or that do not use <code class="docutils literal notranslate"><span class="pre">Required</span> <span class="pre">=</span> <span class="pre">true</span></code></p></li>
@@ -446,25 +467,6 @@ the operation path template or that do not use <code class="docutils literal not
 violate the OpenAPI path-parameter invariants</p></li>
 <li><p>Accept webhook-only OpenAPI 3.1.0 documents during structural
 validation</p></li>
-</ul>
-<p>The current implementation keeps the operation property vocabulary
-narrow and supports only the property terms already used in the draft
-provider examples:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description(Atom)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tags(List)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deprecated(Boolean)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">security(Requirements)</span></code> where <code class="docutils literal notranslate"><span class="pre">Requirements</span></code> is a list of
-security requirement alternatives, each represented as a list of
-<code class="docutils literal notranslate"><span class="pre">Scheme-Scopes</span></code> pairs, and <code class="docutils literal notranslate"><span class="pre">[]</span></code> denotes an empty security
-requirement object</p></li>
-</ul>
-<p>Provider objects that also implement <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> can
-contribute missing OpenAPI metadata:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">description/1</span></code> maps to <code class="docutils literal notranslate"><span class="pre">info.description</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">license/1</span></code> maps to <code class="docutils literal notranslate"><span class="pre">info.license.name</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">homepage/1</span></code> maps to the top-level <code class="docutils literal notranslate"><span class="pre">externalDocs.url</span></code></p></li>
 </ul>
 </section>
 <section id="current-limitations">
@@ -481,8 +483,7 @@ response parsing and for protocol-based access to normalized HTTP
 messages, but it limits itself to contract validation rather than
 transport concerns</p></li>
 <li><p>The supported <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code> descriptor vocabulary is limited
-to the forms summarized in
-<a class="reference external" href="SECURITY_DESCRIPTOR_DSL.md">SECURITY_DESCRIPTOR_DSL.md</a></p></li>
+to the forms summarized below</p></li>
 <li><p>Scope validation cross-checks against locally declared OAuth flow
 scopes when they are present in a reusable security scheme. Full
 OpenID Connect discovery-based scope resolution is out of scope</p></li>
@@ -497,6 +498,180 @@ keys eagerly, but schema validation at the helper boundary is
 intentionally shallow and only checks for boolean schemas, JSON object
 terms, or <code class="docutils literal notranslate"><span class="pre">schema_ref/1</span></code> references</p></li>
 </ul>
+</section>
+<section id="provider-descriptors">
+<h2>Provider descriptors<a class="headerlink" href="#provider-descriptors" title="Link to this heading"></a></h2>
+<section id="api-metadata">
+<h3>API metadata<a class="headerlink" href="#api-metadata" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">api_info/1</span></code> predicate returns an
+<code class="docutils literal notranslate"><span class="pre">info(Title,</span> <span class="pre">Version,</span> <span class="pre">Summary,</span> <span class="pre">Properties)</span></code> descriptor for the
+top-level OpenAPI <code class="docutils literal notranslate"><span class="pre">info</span></code> object. Currently recognized metadata
+properties are limited to <code class="docutils literal notranslate"><span class="pre">description(Description)</span></code>.</p>
+<p>Provider objects that also implement <code class="docutils literal notranslate"><span class="pre">application_protocol</span></code> can
+contribute missing OpenAPI metadata:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description/1</span></code> maps to <code class="docutils literal notranslate"><span class="pre">info.description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">license/1</span></code> maps to <code class="docutils literal notranslate"><span class="pre">info.license.name</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">homepage/1</span></code> maps to the top-level <code class="docutils literal notranslate"><span class="pre">externalDocs.url</span></code></p></li>
+</ul>
+</section>
+<section id="server-descriptors">
+<h3>Server descriptors<a class="headerlink" href="#server-descriptors" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">servers/1</span></code> predicate returns a list of
+<code class="docutils literal notranslate"><span class="pre">server(URL,</span> <span class="pre">Description)</span></code> descriptors used to build the top-level
+OpenAPI <code class="docutils literal notranslate"><span class="pre">servers</span></code> array. <code class="docutils literal notranslate"><span class="pre">URL</span></code> must be a valid OpenAPI Server Object
+URL string, allowing absolute URLs, relative references, and templated
+variables such as <code class="docutils literal notranslate"><span class="pre">https://{username}.example.com:{port}/{basePath}</span></code>.</p>
+</section>
+<section id="top-level-security-defaults">
+<h3>Top-level security defaults<a class="headerlink" href="#top-level-security-defaults" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">security/1</span></code> predicate returns a list of top-level OpenAPI
+security requirement alternatives. The returned list uses the same
+<code class="docutils literal notranslate"><span class="pre">Requirements</span></code> representation accepted by operation
+<code class="docutils literal notranslate"><span class="pre">security(Requirements)</span></code> properties: each requirement alternative is a
+list of <code class="docutils literal notranslate"><span class="pre">Scheme-Scopes</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">[]</span></code> denotes an empty security
+requirement object. Scheme names must match declarations exposed by
+<code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code>.</p>
+</section>
+<section id="operation-descriptors">
+<h3>Operation descriptors<a class="headerlink" href="#operation-descriptors" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">operations/1</span></code> predicate returns a list of
+<code class="docutils literal notranslate"><span class="pre">operation(Id,</span> <span class="pre">Method,</span> <span class="pre">Path,</span> <span class="pre">Summary,</span> <span class="pre">Parameters,</span> <span class="pre">RequestBody,</span> <span class="pre">Responses,</span> <span class="pre">Properties)</span></code>
+descriptors. <code class="docutils literal notranslate"><span class="pre">Id</span></code> is used as the OpenAPI <code class="docutils literal notranslate"><span class="pre">operationId</span></code> and must be
+unique across the returned descriptor list.</p>
+<p>Nested descriptors are
+<code class="docutils literal notranslate"><span class="pre">parameter(Name,</span> <span class="pre">In,</span> <span class="pre">Description,</span> <span class="pre">Required,</span> <span class="pre">Schema)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">request_body(Description,</span> <span class="pre">Required,</span> <span class="pre">MediaTypes)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">response(Status,</span> <span class="pre">Description,</span> <span class="pre">MediaTypes)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">media(MediaType,</span> <span class="pre">Schema)</span></code>. <code class="docutils literal notranslate"><span class="pre">Status</span></code> may be an integer HTTP status
+code, <code class="docutils literal notranslate"><span class="pre">default</span></code>, or a wildcard range atom such as <code class="docutils literal notranslate"><span class="pre">'2XX'</span></code>. Path
+parameters must match a template expression in <code class="docutils literal notranslate"><span class="pre">Path</span></code> and must use
+<code class="docutils literal notranslate"><span class="pre">Required</span> <span class="pre">=</span> <span class="pre">true</span></code>.</p>
+<p>The current implementation keeps the operation property vocabulary
+narrow and supports only:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description(Description)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags(Tags)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deprecated(Boolean)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">security(Requirements)</span></code> where <code class="docutils literal notranslate"><span class="pre">Requirements</span></code> is a list of
+requirement alternatives represented as lists of <code class="docutils literal notranslate"><span class="pre">Scheme-Scopes</span></code>
+pairs and <code class="docutils literal notranslate"><span class="pre">[]</span></code> denotes an empty security requirement object</p></li>
+</ul>
+<p>Scheme names referenced from <code class="docutils literal notranslate"><span class="pre">security(Requirements)</span></code> must match names
+exposed by <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code>, and operation-level security overrides
+any top-level <code class="docutils literal notranslate"><span class="pre">security/1</span></code> declaration.</p>
+</section>
+<section id="reusable-schemas">
+<h3>Reusable schemas<a class="headerlink" href="#reusable-schemas" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">schema/2</span></code> predicate maps reusable schema names to JSON Schema
+curly terms compatible with the <code class="docutils literal notranslate"><span class="pre">json_schema</span></code> library. References to
+reusable schemas are expressed using <code class="docutils literal notranslate"><span class="pre">schema_ref(Name)</span></code> terms.</p>
+</section>
+<section id="reusable-security-schemes">
+<h3>Reusable security schemes<a class="headerlink" href="#reusable-security-schemes" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">security_scheme/2</span></code> predicate maps reusable security scheme names
+to portable descriptor terms. This library accepts those terms and
+normalizes them to OpenAPI Security Scheme Objects when deriving the
+final document. The scheme names must match names referenced from
+operation <code class="docutils literal notranslate"><span class="pre">security(Requirements)</span></code> properties. The descriptor
+vocabulary keeps provider objects at the Logtalk domain level instead of
+exposing OpenAPI JSON surface spelling directly:</p>
+<ul class="simple">
+<li><p>provider code does not need raw OpenAPI field names such as
+<code class="docutils literal notranslate"><span class="pre">openIdConnectUrl</span></code> or <code class="docutils literal notranslate"><span class="pre">clientCredentials</span></code></p></li>
+<li><p>validation can happen at the level of Logtalk terms before document
+generation</p></li>
+<li><p>the same provider facts are easier to reuse in a future portable HTTP
+or authentication library because they describe security intent rather
+than emitted OpenAPI object structure</p></li>
+</ul>
+<p>Supported descriptor shapes are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">api_key(In,</span> <span class="pre">Name)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">api_key(In,</span> <span class="pre">Name,</span> <span class="pre">Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http(Scheme)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http(Scheme,</span> <span class="pre">Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutual_tls</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutual_tls(Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oauth2(Flows)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oauth2(Flows,</span> <span class="pre">Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openid_connect(URL)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openid_connect(URL,</span> <span class="pre">Options)</span></code></p></li>
+</ul>
+<p>Supported scheme options are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">description(Description)</span></code> for all scheme kinds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bearer_format(Format)</span></code> for <code class="docutils literal notranslate"><span class="pre">http/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flows(Flows)</span></code> for <code class="docutils literal notranslate"><span class="pre">openid_connect/2</span></code> when locally declared scopes
+are needed without relying on OpenID Connect discovery; these local
+flow declarations are used only for provider-side security-reference
+validation and are not emitted into the final OpenAPI document</p></li>
+</ul>
+<p>Supported OAuth flow descriptors are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">implicit(AuthorizationURL,</span> <span class="pre">Scopes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">implicit(AuthorizationURL,</span> <span class="pre">Scopes,</span> <span class="pre">[refresh_url(URL)])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password(TokenURL,</span> <span class="pre">Scopes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password(TokenURL,</span> <span class="pre">Scopes,</span> <span class="pre">[refresh_url(URL)])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_credentials(TokenURL,</span> <span class="pre">Scopes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">client_credentials(TokenURL,</span> <span class="pre">Scopes,</span> <span class="pre">[refresh_url(URL)])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authorization_code(AuthorizationURL,</span> <span class="pre">TokenURL,</span> <span class="pre">Scopes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authorization_code(AuthorizationURL,</span> <span class="pre">TokenURL,</span> <span class="pre">Scopes,</span> <span class="pre">[refresh_url(URL)])</span></code></p></li>
+</ul>
+<p>Scope descriptors are expressed as a list of
+<code class="docutils literal notranslate"><span class="pre">scope(Name,</span> <span class="pre">Description)</span></code> terms.</p>
+<p>Use descriptor terms such as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>security_scheme(
+  user_oauth,
+  oauth2([
+    client_credentials(
+      <span class="s">&#39;https://auth.example.com/oauth/token&#39;</span>,
+      [scope(read_users, <span class="s">&#39;Read user data&#39;</span>)]
+    )
+  ])
+).
+
+security_scheme(api_key, api_key(header, <span class="s">&#39;X-API-Key&#39;</span>)).
+
+security_scheme(user_bearer, http(bearer, [bearer_format(<span class="s">&#39;JWT&#39;</span>)])).
+
+security_scheme(user_oidc, openid_connect(<span class="s">&#39;https://example.com/.well-known/openid-configuration&#39;</span>)).
+</pre></div>
+</div>
+<p>An OpenID Connect scheme can also declare local scopes for the existing
+security reference validation path:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>security_scheme(
+  user_oidc,
+  openid_connect(
+    <span class="s">&#39;https://example.com/.well-known/openid-configuration&#39;</span>,
+    [flows([
+      authorization_code(
+        <span class="s">&#39;https://example.com/oauth/authorize&#39;</span>,
+        <span class="s">&#39;https://example.com/oauth/token&#39;</span>,
+        [
+          scope(read_users, <span class="s">&#39;Read user data&#39;</span>)
+        ]
+      )
+    ])]
+  )
+).
+</pre></div>
+</div>
+<p>Those local flow declarations are used only for provider-side security
+reference validation. They are not emitted into the derived OpenAPI
+document, as OpenID Connect Security Scheme Objects do not define a
+<code class="docutils literal notranslate"><span class="pre">flows</span></code> field.</p>
+<p>Provider-side validation checks, among other things:</p>
+<ul class="simple">
+<li><p>duplicate scheme names</p></li>
+<li><p>invalid descriptor functors or arities</p></li>
+<li><p>required fixed fields after normalization</p></li>
+<li><p>valid <code class="docutils literal notranslate"><span class="pre">apiKey</span></code> locations</p></li>
+<li><p>malformed OAuth flow or scope descriptors</p></li>
+<li><p>malformed URL-valued fields such as <code class="docutils literal notranslate"><span class="pre">tokenUrl</span></code>,
+<code class="docutils literal notranslate"><span class="pre">authorizationUrl</span></code>, <code class="docutils literal notranslate"><span class="pre">refreshUrl</span></code>, and <code class="docutils literal notranslate"><span class="pre">openIdConnectUrl</span></code></p></li>
+</ul>
+</section>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>

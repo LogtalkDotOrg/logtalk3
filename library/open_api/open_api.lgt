@@ -25,32 +25,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-03,
+		date is 2026-06-08,
 		comment is 'OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.',
 		see_also is [json, json_schema, application_protocol, open_api_provider_protocol]
-	]).
-
-	:- uses(json, [
-		parse/2 as json_parse/2, generate/2 as json_generate/2
-	]).
-
-	:- uses(json_schema, [
-		validate/3 as json_schema_validate/3
-	]).
-
-	:- uses(http_core, [
-		parse_request/2 as http_parse_request/2, parse_response/2 as http_parse_response/2,
-		is_request/1 as http_is_request/1, is_response/1 as http_is_response/1, method/2 as http_method/2,
-		target/2 as http_target/2, headers/2 as http_headers/2, body/2 as http_body/2,
-		property/2 as http_property/2, status/2 as http_status/2
-	]).
-
-	:- uses(list, [
-		append/3, member/2, memberchk/2, reverse/2
-	]).
-
-	:- uses(user, [
-		atomic_concat/3
 	]).
 
 	:- public(document/2).
@@ -257,6 +234,29 @@
 			'``Description`` is a variable' - instantiation_error,
 			'``Description`` is neither a variable nor an atom' - domain_error(open_api_description, 'Description')
 		]
+	]).
+
+	:- uses(json, [
+		parse/2 as json_parse/2, generate/2 as json_generate/2
+	]).
+
+	:- uses(json_schema, [
+		validate/3 as json_schema_validate/3
+	]).
+
+	:- uses(http_core, [
+		parse_request/2 as http_parse_request/2, parse_response/2 as http_parse_response/2,
+		is_request/1 as http_is_request/1, is_response/1 as http_is_response/1, method/2 as http_method/2,
+		target/2 as http_target/2, headers/2 as http_headers/2, body/2 as http_body/2,
+		property/2 as http_property/2, status/2 as http_status/2
+	]).
+
+	:- uses(list, [
+		append/2, append/3, member/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(user, [
+		atomic_concat/3
 	]).
 
 	% top-level orchestration
@@ -573,6 +573,7 @@
 
 	validate_document_path_operation(Path, Method, Operation, TemplateNames, PathItemNames, PathItemReferences, Errors) :-
 		(	^^json_object_pairs(Operation, OperationPairs) ->
+			validate_document_operation_object(OperationPairs, [paths, Path, Method], OperationObjectErrors),
 			validate_document_parameter_definitions(OperationPairs, [paths, Path, Method, parameters], ParameterDefinitionErrors),
 			document_object_path_parameter_names(OperationPairs, TemplateNames, [paths, Path, Method, parameters], OperationNames, OperationReferences, ParameterErrors),
 			merge_unique_names(PathItemNames, OperationNames, EffectiveNames),
@@ -581,9 +582,176 @@
 				CoverageErrors = []
 			;	validate_document_path_parameter_coverage(TemplateNames, EffectiveNames, [paths, Path, Method, parameters], CoverageErrors)
 			),
-			append(ParameterDefinitionErrors, ParameterErrors, Errors0),
-			append(Errors0, CoverageErrors, Errors)
+			append(OperationObjectErrors, ParameterDefinitionErrors, Errors0),
+			append(Errors0, ParameterErrors, Errors1),
+			append(Errors1, CoverageErrors, Errors)
 		;	Errors = [error([paths, Path, Method], expected_type(object))]
+		).
+
+	validate_document_operation_object(Pairs, Context, Errors) :-
+		validate_allowed_object_pairs(Pairs, Context, [tags, summary, description, externalDocs, operationId, parameters, requestBody, responses, callbacks, deprecated, security, servers], KnownFieldErrors),
+		validate_document_optional_tags_field(Pairs, Context, TagsErrors),
+		validate_document_optional_atom_field(Pairs, Context, summary, SummaryErrors),
+		validate_document_optional_atom_field(Pairs, Context, description, DescriptionErrors),
+		validate_document_optional_atom_field(Pairs, Context, operationId, OperationIdErrors),
+		validate_document_optional_boolean_field(Pairs, Context, deprecated, DeprecatedErrors),
+		validate_document_request_body_field(Pairs, Context, RequestBodyErrors),
+		validate_document_responses_field(Pairs, Context, ResponseErrors),
+		append([
+			KnownFieldErrors, SummaryErrors, TagsErrors, DescriptionErrors,
+			OperationIdErrors, DeprecatedErrors, RequestBodyErrors, ResponseErrors
+		], Errors).
+
+	validate_document_optional_atom_field(Pairs, Context, Field, Errors) :-
+		(	lookup_pair_value(Field, Pairs, Value) ->
+			append(Context, [Field], Path),
+			(	atom(Value) ->
+				Errors = []
+			;	Errors = [error(Path, expected_type(string))]
+			)
+		;	Errors = []
+		).
+
+	validate_document_optional_boolean_field(Pairs, Context, Field, Errors) :-
+		(	lookup_pair_value(Field, Pairs, Value) ->
+			append(Context, [Field], Path),
+			(	json_boolean(Value) ->
+				Errors = []
+			;	Errors = [error(Path, expected_type(boolean))]
+			)
+		;	Errors = []
+		).
+
+	validate_document_optional_tags_field(Pairs, Context, Errors) :-
+		(	lookup_pair_value(tags, Pairs, Tags) ->
+			append(Context, [tags], Path),
+			validate_document_tag_array(Tags, Path, Errors)
+		;	Errors = []
+		).
+
+	validate_document_tag_array([], _, []) :-
+		!.
+	validate_document_tag_array([Tag| Tags], Path, Errors) :-
+		validate_document_tag_array([Tag| Tags], Path, 1, Errors).
+	validate_document_tag_array(_, Path, [error(Path, expected_type(array))]).
+
+	validate_document_tag_array([], _, _, []).
+	validate_document_tag_array([Tag| Tags], Path, Index, Errors) :-
+		append(Path, [Index], TagPath),
+		(	atom(Tag) ->
+			CurrentErrors = []
+		;	CurrentErrors = [error(TagPath, expected_type(string))]
+		),
+		NextIndex is Index + 1,
+		validate_document_tag_array(Tags, Path, NextIndex, RestErrors),
+		append(CurrentErrors, RestErrors, Errors).
+
+	validate_document_request_body_field(Pairs, Context, Errors) :-
+		(	lookup_pair_value(requestBody, Pairs, RequestBody) ->
+			append(Context, [requestBody], Path),
+			validate_document_request_body_object(RequestBody, Path, Errors)
+		;	Errors = []
+		).
+
+	validate_document_request_body_object(RequestBody, Path, Errors) :-
+		(	^^json_object_pairs(RequestBody, RequestBodyPairs) ->
+			(	lookup_pair_value('$ref', RequestBodyPairs, _) ->
+				Errors = []
+			;	validate_document_optional_atom_field(RequestBodyPairs, Path, description, DescriptionErrors),
+				validate_document_optional_boolean_field(RequestBodyPairs, Path, required, RequiredErrors),
+				validate_document_required_object_field(RequestBodyPairs, Path, content, ContentErrors),
+				append(DescriptionErrors, RequiredErrors, Errors0),
+				append(Errors0, ContentErrors, Errors)
+			)
+		;	Errors = [error(Path, expected_type(object))]
+		).
+
+	validate_document_responses_field(Pairs, Context, Errors) :-
+		required_pair_value(Pairs, Context, responses, Responses, PresenceErrors),
+		validate_document_responses_object(PresenceErrors, Responses, Context, Errors).
+
+	validate_document_responses_object([], Responses, Context, Errors) :-
+		append(Context, [responses], Path),
+		(	^^json_object_pairs(Responses, ResponsePairs) ->
+			validate_document_response_pairs(ResponsePairs, Path, Errors)
+		;	Errors = [error(Path, expected_type(object))]
+		).
+	validate_document_responses_object(Errors, _, _, Errors).
+
+	validate_document_response_pairs([], _, []).
+	validate_document_response_pairs([Pair| Pairs], Context, Errors) :-
+		^^pair_key_value(Pair, Status, Response),
+		append(Context, [Status], Path),
+		validate_document_response_status(Status, Path, StatusErrors),
+		validate_document_response_object(Response, Path, ResponseErrors),
+		validate_document_response_pairs(Pairs, Context, RestErrors),
+		append(StatusErrors, ResponseErrors, Errors0),
+		append(Errors0, RestErrors, Errors).
+
+	validate_document_response_status(Status, Path, Errors) :-
+		(	valid_document_response_status(Status) ->
+			Errors = []
+		;	Errors = [error(Path, invalid_response_status(Status))]
+		).
+
+	valid_document_response_status(default) :-
+		!.
+	valid_document_response_status(Status) :-
+		response_status_range(Status, _, _),
+		!.
+	valid_document_response_status(Status) :-
+		integer(Status),
+		Status >= 100,
+		Status =< 599,
+		!.
+	valid_document_response_status(Status) :-
+		atom(Status),
+		atom_codes(Status, Codes),
+		catch(number_codes(StatusCode, Codes), _, fail),
+		StatusCode >= 100,
+		StatusCode =< 599.
+
+	validate_document_response_object(Response, Path, Errors) :-
+		(	^^json_object_pairs(Response, ResponsePairs) ->
+			(	lookup_pair_value('$ref', ResponsePairs, _) ->
+				Errors = []
+			;	validate_document_required_atom_field(ResponsePairs, Path, description, DescriptionErrors),
+				validate_document_optional_object_field(ResponsePairs, Path, content, ContentErrors),
+				append(DescriptionErrors, ContentErrors, Errors)
+			)
+		;	Errors = [error(Path, expected_type(object))]
+		).
+
+	validate_document_required_atom_field(Pairs, Context, Field, Errors) :-
+		required_pair_value(Pairs, Context, Field, Value, PresenceErrors),
+		(	PresenceErrors == [] ->
+			append(Context, [Field], Path),
+			(	atom(Value) ->
+				Errors = []
+			;	Errors = [error(Path, expected_type(string))]
+			)
+		;	Errors = PresenceErrors
+		).
+
+	validate_document_required_object_field(Pairs, Context, Field, Errors) :-
+		required_pair_value(Pairs, Context, Field, Value, PresenceErrors),
+		(	PresenceErrors == [] ->
+			append(Context, [Field], Path),
+			(	^^json_object_pairs(Value, _) ->
+				Errors = []
+			;	Errors = [error(Path, expected_type(object))]
+			)
+		;	Errors = PresenceErrors
+		).
+
+	validate_document_optional_object_field(Pairs, Context, Field, Errors) :-
+		(	lookup_pair_value(Field, Pairs, Value) ->
+			append(Context, [Field], Path),
+			(	^^json_object_pairs(Value, _) ->
+				Errors = []
+			;	Errors = [error(Path, expected_type(object))]
+			)
+		;	Errors = []
 		).
 
 	validate_document_parameter_definitions(Pairs, Context, Errors) :-
@@ -725,10 +893,10 @@
 	validate_document_security_scheme(SecurityScheme, Path, Errors) :-
 		(	^^json_object_pairs(SecurityScheme, Pairs) ->
 			validate_allowed_object_pairs(Pairs, Path, [type, description, name, in, scheme, bearerFormat, flows, openIdConnectUrl], PropertyErrors),
+			validate_document_optional_atom_field(Pairs, Path, description, DescriptionErrors),
 			validate_document_security_scheme_type(Pairs, Path, Type, TypeErrors),
 			validate_document_security_scheme_type_errors(Type, Pairs, Path, FieldErrors),
-			append(PropertyErrors, TypeErrors, Errors0),
-			append(Errors0, FieldErrors, Errors)
+			append([PropertyErrors, TypeErrors, DescriptionErrors, FieldErrors], Errors)
 		;	Errors = [error(Path, expected_type(object))]
 		).
 
@@ -750,9 +918,13 @@
 
 	validate_document_security_scheme_type_errors(invalid, _, _, []).
 	validate_document_security_scheme_type_errors(apiKey, Pairs, Path, Errors) :-
-		check_required_pairs([name, in], Pairs, Path, Errors).
+		validate_document_required_atom_field(Pairs, Path, name, NameErrors),
+		validate_document_required_api_key_location_field(Pairs, Path, InErrors),
+		append(NameErrors, InErrors, Errors).
 	validate_document_security_scheme_type_errors(http, Pairs, Path, Errors) :-
-		check_required_pairs([scheme], Pairs, Path, Errors).
+		validate_document_required_atom_field(Pairs, Path, scheme, SchemeErrors),
+		validate_document_optional_atom_field(Pairs, Path, bearerFormat, BearerFormatErrors),
+		append(SchemeErrors, BearerFormatErrors, Errors).
 	validate_document_security_scheme_type_errors(mutualTLS, _, _, []).
 	validate_document_security_scheme_type_errors(oauth2, Pairs, Path, Errors) :-
 		required_pair_value(Pairs, Path, flows, Flows, FlowPresenceErrors),
@@ -763,9 +935,37 @@
 		),
 		append(FlowPresenceErrors, FlowErrors, Errors).
 	validate_document_security_scheme_type_errors(openIdConnect, Pairs, Path, Errors) :-
-		required_pair_value(Pairs, Path, openIdConnectUrl, _, OpenIdErrors),
+		validate_document_required_url_field(Pairs, Path, openIdConnectUrl, OpenIdErrors),
 		validate_allowed_object_pairs(Pairs, Path, [type, description, openIdConnectUrl], PropertyErrors),
 		append(OpenIdErrors, PropertyErrors, Errors).
+
+	validate_document_required_api_key_location_field(Pairs, Context, Errors) :-
+		required_pair_value(Pairs, Context, in, Value, PresenceErrors),
+		(	PresenceErrors == [] ->
+			append(Context, [in], Path),
+			(	atom(Value) ->
+				(	valid_api_key_location(Value) ->
+					Errors = []
+				;	Errors = [error(Path, invalid_api_key_location(Value))]
+				)
+			;	Errors = [error(Path, expected_type(string))]
+			)
+		;	Errors = PresenceErrors
+		).
+
+	validate_document_required_url_field(Pairs, Context, Field, Errors) :-
+		required_pair_value(Pairs, Context, Field, Value, PresenceErrors),
+		(	PresenceErrors == [] ->
+			append(Context, [Field], Path),
+			(	atom(Value) ->
+				(	valid_provider_url(Value) ->
+					Errors = []
+				;	Errors = [error(Path, invalid_url(Value))]
+				)
+			;	Errors = [error(Path, expected_type(string))]
+			)
+		;	Errors = PresenceErrors
+		).
 
 	check_required_pairs([], _, _, []).
 	check_required_pairs([Field| Fields], Pairs, Path, Errors) :-
@@ -933,12 +1133,49 @@
 	json_schema_term(Schema) :-
 		^^json_object_pairs(Schema, _Pairs).
 
-	validate_open_api_description(Description) :-
-		(	var(Description) ->
+	validate_open_api_atom(Type, Value) :-
+		(	var(Value) ->
 			instantiation_error
-		;	atom(Description) ->
+		;	atom(Value) ->
 			true
-		;	domain_error(open_api_description, Description)
+		;	domain_error(Type, Value)
+		).
+
+	validate_open_api_title(Title) :-
+		validate_open_api_atom(open_api_title, Title).
+
+	validate_open_api_version(Version) :-
+		validate_open_api_atom(open_api_version, Version).
+
+	validate_open_api_summary(Summary) :-
+		validate_open_api_atom(open_api_summary, Summary).
+
+	validate_open_api_description(Description) :-
+		validate_open_api_atom(open_api_description, Description).
+
+	validate_open_api_license(License) :-
+		validate_open_api_atom(open_api_license, License).
+
+	validate_open_api_operation_id(OperationId) :-
+		validate_open_api_atom(open_api_operation_id, OperationId).
+
+	validate_open_api_operation_method(Method) :-
+		(	var(Method) ->
+			instantiation_error
+		;	operation_method(Method) ->
+			true
+		;	domain_error(open_api_operation_method, Method)
+		).
+
+	validate_open_api_parameter_name(Name) :-
+		validate_open_api_atom(open_api_parameter_name, Name).
+
+	validate_open_api_parameter_location(In) :-
+		(	var(In) ->
+			instantiation_error
+		;	memberchk(In, [path, query, header, cookie]) ->
+			true
+		;	domain_error(open_api_parameter_location, In)
 		).
 
 	validate_open_api_boolean(Boolean) :-
@@ -1460,7 +1697,7 @@
 		server_descriptors_to_json(Descriptors, Servers).
 
 	provider_security_pairs(Provider, [security-JsonRequirements]) :-
-		catch(Provider::security(Requirements), _, fail),
+		Provider::security(Requirements),
 		provider_security_scheme_pairs(Provider, SecuritySchemePairs, _),
 		validate_document_security_requirements(Requirements, SecuritySchemePairs),
 		security_requirements_to_json(Requirements, JsonRequirements),
@@ -1618,12 +1855,12 @@
 		).
 
 	security_scheme_declared_scope_names(SecurityScheme, ScopeNames) :-
-		security_scheme_type(SecurityScheme, Type),
-		(	Type == oauth2 ->
-			true
-		;	Type == openIdConnect
-		),
+		security_scheme_type(SecurityScheme, oauth2),
 		security_scheme_flows_object(SecurityScheme, Flows),
+		oauth_flows_scope_names(Flows, [], ScopeNames).
+	security_scheme_declared_scope_names(SecurityScheme, ScopeNames) :-
+		security_scheme_type(SecurityScheme, openIdConnect),
+		security_scheme_local_flows_object(SecurityScheme, Flows),
 		oauth_flows_scope_names(Flows, [], ScopeNames).
 
 	security_scheme_type(SecurityScheme, Type) :-
@@ -1633,6 +1870,10 @@
 	security_scheme_flows_object(SecurityScheme, Flows) :-
 		^^json_object_pairs(SecurityScheme, Pairs),
 		lookup_pair_value(flows, Pairs, Flows).
+
+	security_scheme_local_flows_object(SecurityScheme, Flows) :-
+		^^json_object_pairs(SecurityScheme, Pairs),
+		lookup_pair_value('$localFlows', Pairs, Flows).
 
 	oauth_flows_scope_names(Flows, Acc, ScopeNames) :-
 		^^json_object_pairs(Flows, FlowPairs),
@@ -1676,7 +1917,7 @@
 
 	provider_external_docs_pairs(Provider, [externalDocs-{url-Homepage}]) :-
 		conforms_to_protocol(Provider, application_protocol),
-		catch(Provider::homepage(Homepage), _, fail),
+		Provider::homepage(Homepage),
 		validate_provider_url_reference(open_api_external_docs, Homepage),
 		!.
 	provider_external_docs_pairs(_, []).
@@ -1684,6 +1925,9 @@
 	% info mapping
 
 	api_info_descriptor_to_json(info(Title, Version, Summary, Properties), Info) :-
+		validate_open_api_title(Title),
+		validate_open_api_version(Version),
+		validate_open_api_summary(Summary),
 		info_properties_to_pairs(Properties, PropertyPairs),
 		^^pairs_to_object([title-Title, version-Version, summary-Summary| PropertyPairs], Info).
 
@@ -1693,6 +1937,7 @@
 	info_properties_to_pairs([], _, []).
 	info_properties_to_pairs([description(Description)| Properties], no, [description-Description| Pairs0]) :-
 		!,
+		validate_open_api_description(Description),
 		info_properties_to_pairs(Properties, yes, Pairs0).
 	info_properties_to_pairs([description(_)| _], yes, _) :-
 		!,
@@ -1713,7 +1958,8 @@
 		member(description-_, Pairs),
 		!.
 	merge_application_description(Provider, Pairs, MergedPairs) :-
-		(	catch(Provider::description(Description), _, fail) ->
+		(	Provider::description(Description) ->
+			validate_open_api_description(Description),
 			append(Pairs, [description-Description], MergedPairs)
 		;	MergedPairs = Pairs
 		).
@@ -1722,7 +1968,8 @@
 		member(license-_, Pairs),
 		!.
 	merge_application_license(Provider, Pairs, MergedPairs) :-
-		(	catch(Provider::license(License), _, fail) ->
+		(	Provider::license(License) ->
+			validate_open_api_license(License),
 			append(Pairs, [license-{name-License}], MergedPairs)
 		;	MergedPairs = Pairs
 		).
@@ -1735,6 +1982,7 @@
 		server_descriptors_to_json(Descriptors, JsonServers).
 
 	server_descriptor_to_json(server(URL, Description), {url-URL, description-Description}) :-
+		validate_open_api_description(Description),
 		validate_server_url(URL).
 
 	% path mapping and grouping
@@ -1788,9 +2036,12 @@
 		).
 
 	operation_descriptor_to_json(
-		operation(Id, _Method, _Path, Summary, Parameters, RequestBody, Responses, Properties),
+		operation(Id, Method, _Path, Summary, Parameters, RequestBody, Responses, Properties),
 		Operation
 	) :-
+		validate_open_api_operation_id(Id),
+		validate_open_api_operation_method(Method),
+		validate_open_api_summary(Summary),
 		parameters_to_json(Parameters, JsonParameters),
 		responses_to_json(Responses, JsonResponses),
 		operation_properties_to_pairs(Properties, PropertyPairs),
@@ -1806,12 +2057,14 @@
 	operation_properties_to_pairs([], _, _, _, _, []).
 	operation_properties_to_pairs([description(Description)| Properties], no, TagsSeen, DeprecatedSeen, SecuritySeen, [description-Description| Pairs]) :-
 		!,
+		validate_open_api_description(Description),
 		operation_properties_to_pairs(Properties, yes, TagsSeen, DeprecatedSeen, SecuritySeen, Pairs).
 	operation_properties_to_pairs([description(_)| _], yes, _, _, _, _) :-
 		!,
 		domain_error(open_api_operation_property, duplicate(description)).
-	operation_properties_to_pairs([tags(Tags)| Properties], DescriptionSeen, no, DeprecatedSeen, SecuritySeen, [tags-Tags| Pairs]) :-
+	operation_properties_to_pairs([tags(Tags)| Properties], DescriptionSeen, no, DeprecatedSeen, SecuritySeen, [Pair| Pairs]) :-
 		!,
+		tags_property_pair(Tags, Pair),
 		operation_properties_to_pairs(Properties, DescriptionSeen, yes, DeprecatedSeen, SecuritySeen, Pairs).
 	operation_properties_to_pairs([tags(_)| _], _, yes, _, _, _) :-
 		!,
@@ -1838,6 +2091,17 @@
 			true
 		;	domain_error(open_api_operation_property, deprecated(Deprecated))
 		).
+
+	tags_property_pair(Tags, tags-Tags) :-
+		(	valid_open_api_tags(Tags) ->
+			true
+		;	domain_error(open_api_operation_property, tags(Tags))
+		).
+
+	valid_open_api_tags([]).
+	valid_open_api_tags([Tag| Tags]) :-
+		atom(Tag),
+		valid_open_api_tags(Tags).
 
 	security_property_pair(Requirements, security-JsonRequirements) :-
 		security_requirements_to_json(Requirements, JsonRequirements).
@@ -1892,6 +2156,9 @@
 		parameters_to_json(Descriptors, JsonParameters).
 
 	parameter_descriptor_to_json(parameter(Name, In, Description, Required, Schema), Parameter) :-
+		validate_open_api_parameter_name(Name),
+		validate_open_api_parameter_location(In),
+		validate_open_api_description(Description),
 		boolean_to_json(Required, JsonRequired),
 		schema_term_to_json(Schema, JsonSchema),
 		Parameter = {name-Name, in-In, description-Description, required-JsonRequired, schema-JsonSchema}.
@@ -1900,6 +2167,7 @@
 		!,
 		domain_error(open_api_request_body, request_body(Description, Required, [])).
 	request_body_to_json(request_body(Description, Required, MediaTypes), RequestBody) :-
+		validate_open_api_description(Description),
 		boolean_to_json(Required, JsonRequired),
 		media_types_to_json(MediaTypes, Content),
 		RequestBody = {description-Description, required-JsonRequired, content-Content}.
@@ -1922,9 +2190,11 @@
 	response_descriptor_to_pair(response(Status, Description, []), Key-Response) :-
 		!,
 		status_key(Status, Key),
+		validate_open_api_description(Description),
 		Response = {description-Description}.
 	response_descriptor_to_pair(response(Status, Description, MediaTypes), Key-Response) :-
 		status_key(Status, Key),
+		validate_open_api_description(Description),
 		media_types_to_json(MediaTypes, Content),
 		Response = {description-Description, content-Content}.
 
@@ -1952,7 +2222,8 @@
 
 	provider_security_schemes_object(Provider, SecuritySchemes) :-
 		provider_security_scheme_pairs(Provider, Pairs, _),
-		^^pairs_to_object(Pairs, SecuritySchemes).
+		public_security_scheme_pairs(Pairs, PublicPairs),
+		^^pairs_to_object(PublicPairs, SecuritySchemes).
 
 	provider_security_scheme_pairs(Provider, Pairs, Names) :-
 		findall(Name-SecuritySchemeTerm, Provider::security_scheme(Name, SecuritySchemeTerm), Descriptors),
@@ -1990,77 +2261,68 @@
 	security_scheme_descriptor_names([Name-_| Pairs], [Name| Names]) :-
 		security_scheme_descriptor_names(Pairs, Names).
 
-	security_scheme_descriptor_to_pair(Name, SecuritySchemeTerm, Name-JsonSecurityScheme) :-
-		security_scheme_descriptor_to_json(Name, SecuritySchemeTerm, JsonSecurityScheme),
-		validate_security_scheme_object(Name, JsonSecurityScheme).
+	public_security_scheme_pairs([], []).
+	public_security_scheme_pairs([Name-SecurityScheme| Pairs], [Name-PublicSecurityScheme| PublicPairs]) :-
+		public_security_scheme_object(SecurityScheme, PublicSecurityScheme),
+		public_security_scheme_pairs(Pairs, PublicPairs).
 
-	security_scheme_descriptor_to_json(Name, SecuritySchemeTerm, JsonSecurityScheme) :-
-		(	security_scheme_dsl_term(SecuritySchemeTerm) ->
-			security_scheme_dsl_to_json(Name, SecuritySchemeTerm, JsonSecurityScheme)
-		;	^^normalize_json_value(SecuritySchemeTerm, JsonSecurityScheme)
+	public_security_scheme_object(SecurityScheme, PublicSecurityScheme) :-
+		^^json_object_pairs(SecurityScheme, Pairs),
+		public_security_scheme_object_pairs(Pairs, PublicPairs),
+		^^pairs_to_object(PublicPairs, PublicSecurityScheme).
+
+	public_security_scheme_object_pairs([], []).
+	public_security_scheme_object_pairs(['$localFlows'-_| Pairs], PublicPairs) :-
+		!,
+		public_security_scheme_object_pairs(Pairs, PublicPairs).
+	public_security_scheme_object_pairs([Pair| Pairs], [Pair| PublicPairs]) :-
+		public_security_scheme_object_pairs(Pairs, PublicPairs).
+
+	security_scheme_descriptor_to_pair(Name, SecuritySchemeTerm, Name-JsonSecurityScheme) :-
+		(	security_scheme_dsl_to_json(SecuritySchemeTerm, Name, JsonSecurityScheme) ->
+			validate_security_scheme_object(Name, JsonSecurityScheme)
+		;	domain_error(open_api_security_scheme(Name), invalid_descriptor(SecuritySchemeTerm))
 		).
 
-	security_scheme_dsl_term(mutual_tls) :-
-		!.
-	security_scheme_dsl_term(SecuritySchemeTerm) :-
-		compound(SecuritySchemeTerm),
-		functor(SecuritySchemeTerm, Functor, _),
-		security_scheme_dsl_functor(Functor).
-
-	security_scheme_dsl_functor(api_key).
-	security_scheme_dsl_functor(http).
-	security_scheme_dsl_functor(mutual_tls).
-	security_scheme_dsl_functor(oauth2).
-	security_scheme_dsl_functor(openid_connect).
-
-	security_scheme_dsl_to_json(Name, api_key(In, HeaderName), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(api_key(In, HeaderName), Name, JsonSecurityScheme) :-
 		security_scheme_api_key_pairs(Name, In, HeaderName, [], Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, api_key(In, HeaderName, Options), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(api_key(In, HeaderName, Options), Name, JsonSecurityScheme) :-
 		security_scheme_api_key_pairs(Name, In, HeaderName, Options, Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, http(Scheme), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(http(Scheme), Name, JsonSecurityScheme) :-
 		security_scheme_http_pairs(Name, Scheme, [], Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, http(Scheme, Options), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(http(Scheme, Options), Name, JsonSecurityScheme) :-
 		security_scheme_http_pairs(Name, Scheme, Options, Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, mutual_tls, JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(mutual_tls, Name, JsonSecurityScheme) :-
 		security_scheme_mutual_tls_pairs(Name, [], Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, mutual_tls(Options), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(mutual_tls(Options), Name, JsonSecurityScheme) :-
 		security_scheme_mutual_tls_pairs(Name, Options, Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, oauth2(FlowDescriptors), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(oauth2(FlowDescriptors), Name, JsonSecurityScheme) :-
 		security_scheme_oauth2_pairs(Name, FlowDescriptors, [], Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, oauth2(FlowDescriptors, Options), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(oauth2(FlowDescriptors, Options), Name, JsonSecurityScheme) :-
 		security_scheme_oauth2_pairs(Name, FlowDescriptors, Options, Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, openid_connect(URL), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(openid_connect(URL), Name, JsonSecurityScheme) :-
 		security_scheme_openid_connect_pairs(Name, URL, [], Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, openid_connect(URL, Options), JsonSecurityScheme) :-
-		!,
+	security_scheme_dsl_to_json(openid_connect(URL, Options), Name, JsonSecurityScheme) :-
 		security_scheme_openid_connect_pairs(Name, URL, Options, Pairs),
 		^^pairs_to_object(Pairs, JsonSecurityScheme).
-	security_scheme_dsl_to_json(Name, SecuritySchemeTerm, _) :-
-		domain_error(open_api_security_scheme(Name), invalid_descriptor(SecuritySchemeTerm)).
 
 	security_scheme_api_key_pairs(Name, In, HeaderName, Options, Pairs) :-
+		validate_api_key_location(Name, In),
+		validate_security_scheme_atom_field(Name, apiKey, name, HeaderName),
 		security_scheme_common_option_pairs(Name, apiKey, Options, OptionPairs),
 		Pairs = [type-apiKey, name-HeaderName, in-In| OptionPairs].
 
 	security_scheme_http_pairs(Name, Scheme, Options, Pairs) :-
+		validate_security_scheme_atom_field(Name, http, scheme, Scheme),
 		security_scheme_http_option_pairs(Name, Options, OptionPairs),
 		Pairs = [type-http, scheme-Scheme| OptionPairs].
 
@@ -2074,6 +2336,7 @@
 		Pairs = [type-oauth2, flows-JsonFlows| OptionPairs].
 
 	security_scheme_openid_connect_pairs(Name, URL, Options, Pairs) :-
+		validate_security_scheme_url_field(Name, openIdConnect, openIdConnectUrl, URL),
 		security_scheme_openid_connect_option_pairs(Name, Options, OptionPairs),
 		Pairs = [type-openIdConnect, openIdConnectUrl-URL| OptionPairs].
 
@@ -2119,12 +2382,19 @@
 		security_scheme_openid_connect_option_pairs(Options, Name, no, no, Pairs).
 
 	security_scheme_openid_connect_option_pairs([], _, _, _, []).
-	security_scheme_openid_connect_option_pairs([description(Description)| Options], Name, no, _, [description-Description| Pairs]) :-
+	security_scheme_openid_connect_option_pairs([description(Description)| Options], Name, no, FlowsSeen, [description-Description| Pairs]) :-
 		!,
-		security_scheme_openid_connect_option_pairs(Options, Name, yes, no, Pairs).
+		security_scheme_openid_connect_option_pairs(Options, Name, yes, FlowsSeen, Pairs).
 	security_scheme_openid_connect_option_pairs([description(_)| _], Name, yes, _, _) :-
 		!,
 		domain_error(open_api_security_scheme(Name, openIdConnect), duplicate(description)).
+	security_scheme_openid_connect_option_pairs([flows(FlowDescriptors)| Options], Name, DescriptionSeen, no, ['$localFlows'-JsonFlows| Pairs]) :-
+		!,
+		oauth_flow_descriptors_to_json(Name, openIdConnect, FlowDescriptors, JsonFlows),
+		security_scheme_openid_connect_option_pairs(Options, Name, DescriptionSeen, yes, Pairs).
+	security_scheme_openid_connect_option_pairs([flows(_)| _], Name, _, yes, _) :-
+		!,
+		domain_error(open_api_security_scheme(Name, openIdConnect), duplicate(flows)).
 	security_scheme_openid_connect_option_pairs([Option| _], Name, _, _, _) :-
 		!,
 		domain_error(open_api_security_scheme(Name, openIdConnect), invalid_option(Option)).
@@ -2271,6 +2541,12 @@
 		(	valid_api_key_location(In) ->
 			true
 		;	domain_error(open_api_security_scheme(Name, apiKey), invalid(in, In))
+		).
+
+	validate_security_scheme_atom_field(Name, Type, Field, Value) :-
+		(	atom(Value) ->
+			true
+		;	domain_error(open_api_security_scheme(Name, Type), invalid(Field, Value))
 		).
 
 	valid_api_key_location(query).
@@ -2688,7 +2964,9 @@
 	operation_method(trace).
 
 	json_true(@true).
-	json_true(true).
+
+	json_boolean(@true).
+	json_boolean(@false).
 
 	boolean_to_json(true, @true).
 	boolean_to_json(false, @false).
