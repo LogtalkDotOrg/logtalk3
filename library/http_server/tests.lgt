@@ -209,8 +209,8 @@
 
 	test(http_server_serve_3_05, deterministic) :-
 		http_multipart::form_data_body([
-			field(title, 'Logtalk'),
-			file(upload, 'notes.txt', 'text/plain', text(hello))
+			field(title, 'Logtalk', []),
+			file(upload, 'notes.txt', 'text/plain', text(hello), [])
 		], Body),
 		Request = request(
 			post,

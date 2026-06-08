@@ -172,6 +172,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#form-data-descriptors">Form-data descriptors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#normalized-terms">Normalized terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-workflow">Current workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
@@ -395,18 +396,35 @@ and part terms.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">media_type/2</span></code> and <code class="docutils literal notranslate"><span class="pre">parts/2</span></code> for inspecting multipart body terms.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">part_headers/2</span></code>, <code class="docutils literal notranslate"><span class="pre">part_body/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">part_properties/2</span></code> for
 inspecting multipart part terms.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">field/3</span></code> and <code class="docutils literal notranslate"><span class="pre">fields/2</span></code> for inspecting textual form-data field
+<li><p><code class="docutils literal notranslate"><span class="pre">field/4</span></code> and <code class="docutils literal notranslate"><span class="pre">fields/2</span></code> for inspecting textual form-data field
 parts and multipart/form-data bodies.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file/5</span></code> and <code class="docutils literal notranslate"><span class="pre">files/2</span></code> for inspecting form-data file parts and
+<li><p><code class="docutils literal notranslate"><span class="pre">file/6</span></code> and <code class="docutils literal notranslate"><span class="pre">files/2</span></code> for inspecting form-data file parts and
 multipart/form-data bodies.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">field_part/3</span></code> and <code class="docutils literal notranslate"><span class="pre">file_part/5</span></code> for constructing outgoing
+<li><p><code class="docutils literal notranslate"><span class="pre">field_part/4</span></code> and <code class="docutils literal notranslate"><span class="pre">file_part/6</span></code> for constructing outgoing
 form-data field and file parts.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code> for constructing a <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> body
-from an ordered list of field and file descriptors.</p></li>
+from an ordered list of parameter-aware field and file descriptors.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parse/4</span></code> and <code class="docutils literal notranslate"><span class="pre">generate/3</span></code> as multipart-specific wrappers around
 the existing <code class="docutils literal notranslate"><span class="pre">http_core::parse_body/4</span></code> and
 <code class="docutils literal notranslate"><span class="pre">http_core::generate_body/3</span></code> predicates.</p></li>
 </ul>
+</section>
+<section id="form-data-descriptors">
+<h2>Form-data descriptors<a class="headerlink" href="#form-data-descriptors" title="Link to this heading"></a></h2>
+<p>The parameter-aware helper predicates use the following descriptor
+shapes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">field(Name,</span> <span class="pre">Value,</span> <span class="pre">Parameters)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file(Name,</span> <span class="pre">Filename,</span> <span class="pre">MediaType,</span> <span class="pre">Payload,</span> <span class="pre">Parameters)</span></code></p></li>
+</ul>
+<p>In both cases, <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is an ordered list of extra
+<code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">form-data</span></code> parameters represented as
+<code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs. The reserved <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">filename</span></code> parameters
+remain explicit helper arguments and must not be repeated in the
+<code class="docutils literal notranslate"><span class="pre">Parameters</span></code> list.</p>
+<p>Additional <code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">form-data</span></code> parameters are preserved
+as ordered <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs. Any special semantics for extended
+parameters such as <code class="docutils literal notranslate"><span class="pre">filename*</span></code> are intentionally left to callers.</p>
 </section>
 <section id="normalized-terms">
 <h2>Normalized terms<a class="headerlink" href="#normalized-terms" title="Link to this heading"></a></h2>
@@ -424,7 +442,7 @@ the existing <code class="docutils literal notranslate"><span class="pre">http_c
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code> when you want to assemble a normalized
 <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> body explicitly.</p></li>
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">field/3</span></code>, <code class="docutils literal notranslate"><span class="pre">fields/2</span></code>, <code class="docutils literal notranslate"><span class="pre">file/5</span></code>, and <code class="docutils literal notranslate"><span class="pre">files/2</span></code>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">field/4</span></code>, <code class="docutils literal notranslate"><span class="pre">fields/2</span></code>, <code class="docutils literal notranslate"><span class="pre">file/6</span></code>, and <code class="docutils literal notranslate"><span class="pre">files/2</span></code>
 predicates when you want to inspect multipart form-data bodies after
 parsing.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">http_client</span></code> library can send common form-data requests
@@ -438,9 +456,6 @@ incoming multipart requests without reparsing them.</p></li>
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The library is entirely in-memory.</p></li>
-<li><p>The form-data helpers only cover the common
-<code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">form-data</span></code> parameters needed for <code class="docutils literal notranslate"><span class="pre">name</span></code> and
-<code class="docutils literal notranslate"><span class="pre">filename</span></code> extraction and construction.</p></li>
 <li><p>Textual field helpers target simple text field payloads. If a part has
 a non-text body or a more specialized encoding, callers should use the
 generic part accessors instead.</p></li>

@@ -63,16 +63,34 @@ The current version provides:
 - `media_type/2` and `parts/2` for inspecting multipart body terms.
 - `part_headers/2`, `part_body/2`, and `part_properties/2` for inspecting
   multipart part terms.
-- `field/3` and `fields/2` for inspecting textual form-data field parts and
+- `field/4` and `fields/2` for inspecting textual form-data field parts and
   multipart/form-data bodies.
-- `file/5` and `files/2` for inspecting form-data file parts and
+- `file/6` and `files/2` for inspecting form-data file parts and
   multipart/form-data bodies.
-- `field_part/3` and `file_part/5` for constructing outgoing form-data field
+- `field_part/4` and `file_part/6` for constructing outgoing form-data field
   and file parts.
 - `form_data_body/2` for constructing a `multipart/form-data` body from an
-  ordered list of field and file descriptors.
+  ordered list of parameter-aware field and file descriptors.
 - `parse/4` and `generate/3` as multipart-specific wrappers around the
   existing `http_core::parse_body/4` and `http_core::generate_body/3` predicates.
+
+
+Form-data descriptors
+---------------------
+
+The parameter-aware helper predicates use the following descriptor shapes:
+
+- `field(Name, Value, Parameters)`
+- `file(Name, Filename, MediaType, Payload, Parameters)`
+
+In both cases, `Parameters` is an ordered list of extra
+`Content-Disposition: form-data` parameters represented as `Name-Value`
+pairs. The reserved `name` and `filename` parameters remain explicit helper
+arguments and must not be repeated in the `Parameters` list.
+
+Additional `Content-Disposition: form-data` parameters are preserved as
+ordered `Name-Value` pairs. Any special semantics for extended parameters
+such as `filename*` are intentionally left to callers.
 
 
 Normalized terms
@@ -92,7 +110,7 @@ Current workflow
 
 - Use `form_data_body/2` when you want to assemble a normalized
   `multipart/form-data` body explicitly.
-- Use the `field/3`, `fields/2`, `file/5`, and `files/2` predicates when you
+- Use the `field/4`, `fields/2`, `file/6`, and `files/2` predicates when you
   want to inspect multipart form-data bodies after parsing.
 - The `http_client` library can send common form-data requests directly from a
   `form_data(Items)` descriptor.
@@ -105,8 +123,6 @@ Current limitations
 -------------------
 
 - The library is entirely in-memory.
-- The form-data helpers only cover the common `Content-Disposition: form-data`
-  parameters needed for `name` and `filename` extraction and construction.
 - Textual field helpers target simple text field payloads. If a part has a
   non-text body or a more specialized encoding, callers should use the generic
   part accessors instead.

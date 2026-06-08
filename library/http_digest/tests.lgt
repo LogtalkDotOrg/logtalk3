@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-08,
 		comment is 'Unit tests for the http_digest library.'
 	]).
 
@@ -392,7 +392,7 @@
 				threaded_once(http_socket::serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 				request_echo_url(Port, '/form-info', URL),
 				http_client_digest_session::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
-				http_client_digest_session::post(Session, URL, form_data([field(title, 'Logtalk')]), Response, []),
+				http_client_digest_session::post(Session, URL, form_data([field(title, 'Logtalk', [])]), Response, []),
 				http_client_digest_session::close(Session),
 				once(threaded_exit(http_socket::serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
 				catch(http_socket::close_listener(Listener), _, true),
@@ -405,7 +405,7 @@
 				threaded_once(http_socket::serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 				request_echo_url(Port, '/form-info', URL),
 				http_client_digest_session::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
-				http_client_digest_session::post(Session, URL, form_data([field(title, 'Logtalk')]), Response, [properties([content_type('Multipart/Form-Data', [boundary-'fixed-boundary'])])]),
+				http_client_digest_session::post(Session, URL, form_data([field(title, 'Logtalk', [])]), Response, [properties([content_type('Multipart/Form-Data', [boundary-'fixed-boundary'])])]),
 				http_client_digest_session::close(Session),
 				once(threaded_exit(http_socket::serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
 				catch(http_socket::close_listener(Listener), _, true),

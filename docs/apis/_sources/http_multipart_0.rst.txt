@@ -15,7 +15,7 @@ Multipart helper predicates built on top of the normalized body and part terms p
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -161,7 +161,7 @@ Returns the list of multipart part terms of a validated multipart body term.
 ``fields/2``
 ^^^^^^^^^^^^
 
-Returns the list of form-data field name-value pairs found in a validated multipart/form-data body.
+Returns the list of form-data field(Name, Value, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.
 
 | **Compilation flags:**
 |    ``static``
@@ -169,7 +169,7 @@ Returns the list of form-data field name-value pairs found in a validated multip
 | **Template:**
 |    ``fields(Body,Fields)``
 | **Mode and number of proofs:**
-|    ``fields(+compound,-list)`` - ``one_or_error``
+|    ``fields(+compound,-list(compound))`` - ``one_or_error``
 
 
 ------------
@@ -180,7 +180,7 @@ Returns the list of form-data field name-value pairs found in a validated multip
 ``files/2``
 ^^^^^^^^^^^
 
-Returns the list of form-data file descriptors found in a validated multipart/form-data body, preserving part order.
+Returns the list of form-data file(Name, Filename, MediaType, Payload, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.
 
 | **Compilation flags:**
 |    ``static``
@@ -288,78 +288,78 @@ Returns the properties of a validated multipart part term.
 
 ------------
 
-.. index:: field/3
-.. _http_multipart/0::field/3:
+.. index:: field/4
+.. _http_multipart/0::field/4:
 
-``field/3``
+``field/4``
 ^^^^^^^^^^^
 
-True when the validated multipart part is a textual form-data field part, returning its field name and text value.
+True when the validated multipart part is a textual form-data field part, returning its field name, text value, and additional disposition parameters.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``field(Part,Name,Value)``
+|    ``field(Part,Name,Value,Parameters)``
 | **Mode and number of proofs:**
-|    ``field(+compound,-atom,-term)`` - ``zero_or_one``
+|    ``field(+compound,-atom,-term,-list(compound))`` - ``zero_or_one``
 
 
 ------------
 
-.. index:: file/5
-.. _http_multipart/0::file/5:
+.. index:: file/6
+.. _http_multipart/0::file/6:
 
-``file/5``
+``file/6``
 ^^^^^^^^^^
 
-True when the validated multipart part is a form-data file part, returning its field name, filename, media type, and payload term.
+True when the validated multipart part is a form-data file part, returning its field name, filename, media type, payload term, and additional disposition parameters.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``file(Part,Name,Filename,MediaType,Payload)``
+|    ``file(Part,Name,Filename,MediaType,Payload,Parameters)``
 | **Mode and number of proofs:**
-|    ``file(+compound,-atom,-atom,-atom,-compound)`` - ``zero_or_one``
+|    ``file(+compound,-atom,-atom,-atom,-compound,-list(compound))`` - ``zero_or_one``
 
 
 ------------
 
-.. index:: field_part/3
-.. _http_multipart/0::field_part/3:
+.. index:: field_part/4
+.. _http_multipart/0::field_part/4:
 
-``field_part/3``
+``field_part/4``
 ^^^^^^^^^^^^^^^^
 
-Constructs a normalized multipart part for a textual form-data field using a content-disposition header and a text/plain body.
+Constructs a normalized multipart part for a textual form-data field using a content-disposition header, a text/plain body, and additional disposition parameters.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``field_part(Name,Value,Part)``
+|    ``field_part(Name,Value,Parameters,Part)``
 | **Mode and number of proofs:**
-|    ``field_part(+atom,+term,-compound)`` - ``one_or_error``
+|    ``field_part(+atom,+term,+list(compound),-compound)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: file_part/5
-.. _http_multipart/0::file_part/5:
+.. index:: file_part/6
+.. _http_multipart/0::file_part/6:
 
-``file_part/5``
+``file_part/6``
 ^^^^^^^^^^^^^^^
 
-Constructs a normalized multipart part for a form-data file using a content-disposition header and the given media type and payload.
+Constructs a normalized multipart part for a form-data file using a content-disposition header, the given media type and payload, and additional disposition parameters.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``file_part(Name,Filename,MediaType,Payload,Part)``
+|    ``file_part(Name,Filename,MediaType,Payload,Parameters,Part)``
 | **Mode and number of proofs:**
-|    ``file_part(+atom,+atom,+atom,+compound,-compound)`` - ``one_or_error``
+|    ``file_part(+atom,+atom,+atom,+compound,+list(compound),-compound)`` - ``one_or_error``
 
 
 ------------
@@ -370,7 +370,7 @@ Constructs a normalized multipart part for a form-data file using a content-disp
 ``form_data_body/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Constructs a multipart/form-data body from an ordered list of field(Name, Value) and file(Name, Filename, MediaType, Payload) descriptors.
+Constructs a multipart/form-data body from an ordered list of field(Name, Value, Parameters) and file(Name, Filename, MediaType, Payload, Parameters) descriptors.
 
 | **Compilation flags:**
 |    ``static``
@@ -378,7 +378,7 @@ Constructs a multipart/form-data body from an ordered list of field(Name, Value)
 | **Template:**
 |    ``form_data_body(Items,Body)``
 | **Mode and number of proofs:**
-|    ``form_data_body(+list,-compound)`` - ``one_or_error``
+|    ``form_data_body(+list(compound),-compound)`` - ``one_or_error``
 
 
 ------------

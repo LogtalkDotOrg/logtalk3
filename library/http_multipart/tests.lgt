@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-08,
 		comment is 'Unit tests for the "http_multipart" library.'
 	]).
 
@@ -92,18 +92,37 @@
 		])),
 		http_multipart::generate(atom(BodyAtom), Body, [boundary(abc)]).
 
-	test(http_multipart_field_part_3_01, deterministic(Part == part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []))) :-
-		http_multipart::field_part(title, 'Logtalk', Part).
+	test(http_multipart_field_part_4_01, deterministic(Part == part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []))) :-
+		http_multipart::field_part(title, 'Logtalk', [], Part).
 
-	test(http_multipart_field_3_01, deterministic((Name == title, Value == 'Logtalk'))) :-
+	test(http_multipart_field_part_4_02, deterministic(Part == part([content_disposition-'form-data; name="title"; charset="utf8"'], content('text/plain', text('Logtalk')), []))) :-
+		http_multipart::field_part(title, 'Logtalk', [charset-utf8], Part).
+
+	test(http_multipart_field_part_4_03, error(domain_error(http_multipart_form_data_parameter, name-title))) :-
+		http_multipart::field_part(title, 'Logtalk', [name-title], _Part).
+
+	test(http_multipart_field_part_4_04, error(domain_error(http_multipart_form_data_parameter, charset-latin1))) :-
+		http_multipart::field_part(title, 'Logtalk', [charset-utf8, charset-latin1], _Part).
+
+	test(http_multipart_field_part_4_05, error(domain_error(http_multipart_form_data_parameter_name, 'bad name'))) :-
+		http_multipart::field_part(title, 'Logtalk', ['bad name'-utf8], _Part).
+
+	test(http_multipart_field_part_4_06, error(domain_error(http_multipart_form_data_parameter_value, [0'u,0't,0'f,0'8,0'\n]))) :-
+		http_multipart::field_part(title, 'Logtalk', [charset-[0'u,0't,0'f,0'8,0'\n]], _Part).
+
+	test(http_multipart_field_4_01, deterministic((Name == title, Value == 'Logtalk', Parameters == []))) :-
 		Part = part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []),
-		http_multipart::field(Part, Name, Value).
+		http_multipart::field(Part, Name, Value, Parameters).
 
-	test(http_multipart_field_3_02, false) :-
+	test(http_multipart_field_4_02, deterministic((Name == title, Value == 'Logtalk', Parameters == [charset-utf8]))) :-
+		Part = part([content_disposition-'form-data; name="title"; charset="utf8"'], content('text/plain', text('Logtalk')), []),
+		http_multipart::field(Part, Name, Value, Parameters).
+
+	test(http_multipart_field_4_03, false) :-
 		Part = part([content_disposition-'form-data; name="upload"; filename="notes.txt"'], content('text/plain', text('Logtalk')), []),
-		http_multipart::field(Part, _Name, _Value).
+		http_multipart::field(Part, _Name, _Value, _Parameters).
 
-	test(http_multipart_fields_2_01, deterministic(Fields == [title-'Logtalk', summary-'Portable'])) :-
+	test(http_multipart_fields_2_01, deterministic(Fields == [field(title, 'Logtalk', []), field(summary, 'Portable', [])])) :-
 		Body = content('multipart/form-data', multipart([
 			part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []),
 			part([content_disposition-'form-data; name="upload"; filename="notes.txt"'], content('text/plain', text('content')), []),
@@ -111,18 +130,28 @@
 		])),
 		http_multipart::fields(Body, Fields).
 
-	test(http_multipart_file_part_5_01, deterministic(Part == part([content_disposition-'form-data; name="upload"; filename="notes.txt"'], content('text/plain', text('hello')), []))) :-
-		http_multipart::file_part(upload, 'notes.txt', 'text/plain', text('hello'), Part).
+	test(http_multipart_file_part_6_01, deterministic(Part == part([content_disposition-'form-data; name="upload"; filename="notes.txt"'], content('text/plain', text('hello')), []))) :-
+		http_multipart::file_part(upload, 'notes.txt', 'text/plain', text('hello'), [], Part).
 
-	test(http_multipart_file_5_01, deterministic((Name == upload, Filename == 'notes.txt', MediaType == 'text/plain', Payload == text('hello')))) :-
+	test(http_multipart_file_part_6_02, deterministic(Part == part([content_disposition-'form-data; name="upload"; filename="notes.txt"; creation_date="2026-06-08"'], content('text/plain', text('hello')), []))) :-
+		http_multipart::file_part(upload, 'notes.txt', 'text/plain', text('hello'), [creation_date-'2026-06-08'], Part).
+
+	test(http_multipart_file_part_6_03, error(domain_error(http_multipart_form_data_parameter, filename-'copy.txt'))) :-
+		http_multipart::file_part(upload, 'notes.txt', 'text/plain', text('hello'), [filename-'copy.txt'], _Part).
+
+	test(http_multipart_file_6_01, deterministic((Name == upload, Filename == 'notes.txt', MediaType == 'text/plain', Payload == text('hello'), Parameters == []))) :-
 		Part = part([content_disposition-'form-data; name="upload"; filename="notes.txt"'], content('text/plain', text('hello')), []),
-		http_multipart::file(Part, Name, Filename, MediaType, Payload).
+		http_multipart::file(Part, Name, Filename, MediaType, Payload, Parameters).
 
-	test(http_multipart_file_5_02, false) :-
+	test(http_multipart_file_6_02, deterministic((Name == upload, Filename == 'notes.txt', MediaType == 'text/plain', Payload == text('hello'), Parameters == [creation_date-'2026-06-08']))) :-
+		Part = part([content_disposition-'form-data; name="upload"; filename="notes.txt"; creation_date="2026-06-08"'], content('text/plain', text('hello')), []),
+		http_multipart::file(Part, Name, Filename, MediaType, Payload, Parameters).
+
+	test(http_multipart_file_6_04, false) :-
 		Part = part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []),
-		http_multipart::file(Part, _Name, _Filename, _MediaType, _Payload).
+		http_multipart::file(Part, _Name, _Filename, _MediaType, _Payload, _Parameters).
 
-	test(http_multipart_files_2_01, deterministic(Files == [file(upload, 'notes.txt', 'text/plain', text('hello')), file(archive, 'bundle.bin', 'application/octet-stream', binary([1,2,3]))])) :-
+	test(http_multipart_files_2_01, deterministic(Files == [file(upload, 'notes.txt', 'text/plain', text('hello'), []), file(archive, 'bundle.bin', 'application/octet-stream', binary([1,2,3]), [])])) :-
 		Body = content('multipart/form-data', multipart([
 			part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []),
 			part([content_disposition-'form-data; name="upload"; filename="notes.txt"'], content('text/plain', text('hello')), []),
@@ -132,8 +161,8 @@
 
 	test(http_multipart_form_data_body_2_01, deterministic) :-
 		http_multipart::form_data_body([
-			field(title, 'Logtalk'),
-			file(upload, 'notes.txt', 'text/plain', text('hello'))
+			field(title, 'Logtalk', []),
+			file(upload, 'notes.txt', 'text/plain', text('hello'), [])
 		], Body),
 		Body = content('multipart/form-data', multipart([FieldPart, FilePart])),
 		FieldPart = part([content_disposition-'form-data; name="title"'], content('text/plain', text('Logtalk')), []),
@@ -146,8 +175,18 @@
 			[boundary(abc)],
 			Body
 		),
-		http_multipart::fields(Body, [title-'Logtalk']),
-		http_multipart::files(Body, [file(upload, 'notes.txt', 'text/plain', text(hello))]).
+		http_multipart::fields(Body, [field(title, 'Logtalk', [])]),
+		http_multipart::files(Body, [file(upload, 'notes.txt', 'text/plain', text(hello), [])]).
+
+	test(http_multipart_round_trip_3_01, deterministic) :-
+		http_multipart::form_data_body([
+			field(title, 'Logtalk', [charset-utf8]),
+			file(upload, 'notes.txt', 'text/plain', text(hello), [creation_date-'2026-06-08'])
+		], Body),
+		http_multipart::generate(atom(BodyAtom), Body, [boundary(abc)]),
+		http_multipart::parse(atom(BodyAtom), 'multipart/form-data', [boundary(abc)], ParsedBody),
+		http_multipart::fields(ParsedBody, [field(title, 'Logtalk', [charset-utf8])]),
+		http_multipart::files(ParsedBody, [file(upload, 'notes.txt', 'text/plain', text(hello), [creation_date-'2026-06-08'])]).
 
 	test(http_multipart_fields_2_02, deterministic(Fields == [])) :-
 		Body = content('multipart/form-data', multipart([

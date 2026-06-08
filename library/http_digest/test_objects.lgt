@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-02,
 		comment is 'Local Digest verifier used by the http_digest library tests.'
 	]).
 
@@ -63,7 +63,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-02,
 		comment is 'Local HTTP handler used by the http_digest library tests.'
 	]).
 
@@ -151,7 +151,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-02,
 		comment is 'Local HTTP handler used by the http_digest library tests to exercise digest client session request wrappers and request option merging.'
 	]).
 
@@ -199,7 +199,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-08,
 		comment is 'Local HTTP handler used by the http_digest library tests to summarize multipart form-data requests.'
 	]).
 
@@ -210,7 +210,7 @@
 	handle(Request, Response) :-
 		http_core::version(Request, Version),
 		http_core::body(Request, Body),
-		http_multipart::fields(Body, [title-Title]),
+		http_multipart::fields(Body, [field(title, Title, _Parameters)]),
 		http_core::property(Request, content_type('multipart/form-data', Parameters)),
 		memberchk(boundary-Boundary, Parameters),
 		atom_concat('title=', Title, Prefix),

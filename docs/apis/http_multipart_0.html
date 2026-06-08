@@ -391,7 +391,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-23</div>
+<div class="line"><strong>Date:</strong> 2026-06-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -440,10 +440,10 @@
 <li><p><a class="reference internal" href="#part-headers-2" id="id12"><code class="docutils literal notranslate"><span class="pre">part_headers/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#part-body-2" id="id13"><code class="docutils literal notranslate"><span class="pre">part_body/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#part-properties-2" id="id14"><code class="docutils literal notranslate"><span class="pre">part_properties/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#field-3" id="id15"><code class="docutils literal notranslate"><span class="pre">field/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#file-5" id="id16"><code class="docutils literal notranslate"><span class="pre">file/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#field-part-3" id="id17"><code class="docutils literal notranslate"><span class="pre">field_part/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#file-part-5" id="id18"><code class="docutils literal notranslate"><span class="pre">file_part/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#field-4" id="id15"><code class="docutils literal notranslate"><span class="pre">field/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-6" id="id16"><code class="docutils literal notranslate"><span class="pre">file/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#field-part-4" id="id17"><code class="docutils literal notranslate"><span class="pre">field_part/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-part-6" id="id18"><code class="docutils literal notranslate"><span class="pre">file_part/6</span></code></a></p></li>
 <li><p><a class="reference internal" href="#form-data-body-2" id="id19"><code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code></a></p></li>
 </ul>
 </li>
@@ -582,7 +582,7 @@
 </section>
 <section id="fields-2">
 <span id="http-multipart-0-fields-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fields/2</span></code></a><a class="headerlink" href="#fields-2" title="Link to this heading"></a></h3>
-<p>Returns the list of form-data field name-value pairs found in a validated multipart/form-data body.</p>
+<p>Returns the list of form-data field(Name, Value, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -596,14 +596,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">fields(+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fields(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="files-2">
 <span id="http-multipart-0-files-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">files/2</span></code></a><a class="headerlink" href="#files-2" title="Link to this heading"></a></h3>
-<p>Returns the list of form-data file descriptors found in a validated multipart/form-data body, preserving part order.</p>
+<p>Returns the list of form-data file(Name, Filename, MediaType, Payload, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -727,9 +727,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="field-3">
-<span id="http-multipart-0-field-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">field/3</span></code></a><a class="headerlink" href="#field-3" title="Link to this heading"></a></h3>
-<p>True when the validated multipart part is a textual form-data field part, returning its field name and text value.</p>
+<section id="field-4">
+<span id="http-multipart-0-field-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">field/4</span></code></a><a class="headerlink" href="#field-4" title="Link to this heading"></a></h3>
+<p>True when the validated multipart part is a textual form-data field part, returning its field name, text value, and additional disposition parameters.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -739,18 +739,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">field(Part,Name,Value)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">field(Part,Name,Value,Parameters)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">field(+compound,-atom,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">field(+compound,-atom,-term,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="file-5">
-<span id="http-multipart-0-file-5"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/5</span></code></a><a class="headerlink" href="#file-5" title="Link to this heading"></a></h3>
-<p>True when the validated multipart part is a form-data file part, returning its field name, filename, media type, and payload term.</p>
+<section id="file-6">
+<span id="http-multipart-0-file-6"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/6</span></code></a><a class="headerlink" href="#file-6" title="Link to this heading"></a></h3>
+<p>True when the validated multipart part is a form-data file part, returning its field name, filename, media type, payload term, and additional disposition parameters.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -760,18 +760,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">file(Part,Name,Filename,MediaType,Payload)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(Part,Name,Filename,MediaType,Payload,Parameters)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">file(+compound,-atom,-atom,-atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(+compound,-atom,-atom,-atom,-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="field-part-3">
-<span id="http-multipart-0-field-part-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">field_part/3</span></code></a><a class="headerlink" href="#field-part-3" title="Link to this heading"></a></h3>
-<p>Constructs a normalized multipart part for a textual form-data field using a content-disposition header and a text/plain body.</p>
+<section id="field-part-4">
+<span id="http-multipart-0-field-part-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">field_part/4</span></code></a><a class="headerlink" href="#field-part-4" title="Link to this heading"></a></h3>
+<p>Constructs a normalized multipart part for a textual form-data field using a content-disposition header, a text/plain body, and additional disposition parameters.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -781,18 +781,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">field_part(Name,Value,Part)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">field_part(Name,Value,Parameters,Part)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">field_part(+atom,+term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">field_part(+atom,+term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="file-part-5">
-<span id="http-multipart-0-file-part-5"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_part/5</span></code></a><a class="headerlink" href="#file-part-5" title="Link to this heading"></a></h3>
-<p>Constructs a normalized multipart part for a form-data file using a content-disposition header and the given media type and payload.</p>
+<section id="file-part-6">
+<span id="http-multipart-0-file-part-6"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_part/6</span></code></a><a class="headerlink" href="#file-part-6" title="Link to this heading"></a></h3>
+<p>Constructs a normalized multipart part for a form-data file using a content-disposition header, the given media type and payload, and additional disposition parameters.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -802,18 +802,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">file_part(Name,Filename,MediaType,Payload,Part)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_part(Name,Filename,MediaType,Payload,Parameters,Part)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">file_part(+atom,+atom,+atom,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file_part(+atom,+atom,+atom,+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="form-data-body-2">
 <span id="http-multipart-0-form-data-body-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">form_data_body/2</span></code></a><a class="headerlink" href="#form-data-body-2" title="Link to this heading"></a></h3>
-<p>Constructs a multipart/form-data body from an ordered list of field(Name, Value) and file(Name, Filename, MediaType, Payload) descriptors.</p>
+<p>Constructs a multipart/form-data body from an ordered list of field(Name, Value, Parameters) and file(Name, Filename, MediaType, Payload, Parameters) descriptors.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -827,7 +827,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">form_data_body(+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">form_data_body(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 </section>

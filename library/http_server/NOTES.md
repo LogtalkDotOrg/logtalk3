@@ -112,8 +112,8 @@ on the normalized request body:
 		handle(Request, Response) :-
 			http_core::version(Request, Version),
 			http_core::body(Request, Body),
-			http_multipart::fields(Body, [title-Title]),
-			http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
+			http_multipart::fields(Body, [field(title, Title, _FieldParameters)]),
+			http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello), _FileParameters)]),
 			atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
 			http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
 	
@@ -122,6 +122,16 @@ on the normalized request body:
 That handler can be used unchanged with `serve/3` or `serve_connection/3`
 because this library exposes multipart requests in the same normalized form
 produced by `http_core::parse_request/2`.
+
+The multipart helper predicates used by handlers return the parameter-aware
+`field(Name, Value, Parameters)` and
+`file(Name, Filename, MediaType, Payload, Parameters)` descriptors defined by
+the `http_multipart` library.
+
+In both descriptor shapes, `Parameters` is the ordered list of extra
+`Content-Disposition: form-data` parameters. The reserved `name` and
+`filename` parameters stay explicit helper arguments and are not repeated in
+that list.
 
 For a WebSocket opening handshake, define a handler that delegates to
 `accept_websocket/3`:

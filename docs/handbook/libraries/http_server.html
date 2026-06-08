@@ -443,8 +443,8 @@ HTTP responses, one for <code class="docutils literal notranslate"><span class="
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
         http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
         http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
-        http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [title<span class="o">-</span><span class="nv">Title</span>]),
-        http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello))]),
+        http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [field(title, <span class="nv">Title</span>, <span class="nv">_FieldParameters</span>)]),
+        http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello), <span class="nv">_FileParameters</span>)]),
         atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
         http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
 
@@ -454,6 +454,14 @@ HTTP responses, one for <code class="docutils literal notranslate"><span class="
 <p>That handler can be used unchanged with <code class="docutils literal notranslate"><span class="pre">serve/3</span></code> or
 <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> because this library exposes multipart requests
 in the same normalized form produced by <code class="docutils literal notranslate"><span class="pre">http_core::parse_request/2</span></code>.</p>
+<p>The multipart helper predicates used by handlers return the
+parameter-aware <code class="docutils literal notranslate"><span class="pre">field(Name,</span> <span class="pre">Value,</span> <span class="pre">Parameters)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">file(Name,</span> <span class="pre">Filename,</span> <span class="pre">MediaType,</span> <span class="pre">Payload,</span> <span class="pre">Parameters)</span></code> descriptors
+defined by the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> library.</p>
+<p>In both descriptor shapes, <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is the ordered list of extra
+<code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">form-data</span></code> parameters. The reserved <code class="docutils literal notranslate"><span class="pre">name</span></code> and
+<code class="docutils literal notranslate"><span class="pre">filename</span></code> parameters stay explicit helper arguments and are not
+repeated in that list.</p>
 <p>For a WebSocket opening handshake, define a handler that delegates to
 <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_websocket_handler,

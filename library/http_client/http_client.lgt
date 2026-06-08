@@ -25,14 +25,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-06-08,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
 			'Request construction' - 'The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.',
 			'Option precedence' - 'When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.',
 			'WebSocket opening handshake' - 'The ``open_websocket/4`` predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.',
-			'Multipart form-data' - 'The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a ``form_data(Items)`` descriptor that is translated using the ``http_multipart`` library and annotated with a multipart boundary property before request construction.',
+			'Multipart form-data' - 'The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a parameter-aware ``form_data(Items)`` descriptor using the ``field(Name, Value, Parameters)`` and ``file(Name, Filename, MediaType, Payload, Parameters)`` shapes supported by the ``http_multipart`` library; the request builder translates those descriptors and annotates the request with a multipart boundary property before construction.',
 			'Reusable transports' - 'The ``request/5`` and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.',
 			'Low-level core' - 'The stream-based primitives are available from the ``http_client_core`` object.'
 		]

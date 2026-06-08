@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-08,
 		comment is 'Multipart helper predicates built on top of the normalized body and part terms provided by the http library.'
 	]).
 
@@ -74,16 +74,16 @@
 	]).
 
 	:- public(fields/2).
-	:- mode(fields(+compound, -list), one_or_error).
+	:- mode(fields(+compound, -list(compound)), one_or_error).
 	:- info(fields/2, [
-		comment is 'Returns the list of form-data field name-value pairs found in a validated multipart/form-data body.',
+		comment is 'Returns the list of form-data field(Name, Value, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.',
 		argnames is ['Body', 'Fields']
 	]).
 
 	:- public(files/2).
 	:- mode(files(+compound, -list(compound)), one_or_error).
 	:- info(files/2, [
-		comment is 'Returns the list of form-data file descriptors found in a validated multipart/form-data body, preserving part order.',
+		comment is 'Returns the list of form-data file(Name, Filename, MediaType, Payload, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.',
 		argnames is ['Body', 'Files']
 	]).
 
@@ -122,38 +122,38 @@
 		argnames is ['Part', 'Properties']
 	]).
 
-	:- public(field/3).
-	:- mode(field(+compound, -atom, -term), zero_or_one).
-	:- info(field/3, [
-		comment is 'True when the validated multipart part is a textual form-data field part, returning its field name and text value.',
-		argnames is ['Part', 'Name', 'Value']
+	:- public(field/4).
+	:- mode(field(+compound, -atom, -term, -list(compound)), zero_or_one).
+	:- info(field/4, [
+		comment is 'True when the validated multipart part is a textual form-data field part, returning its field name, text value, and additional disposition parameters.',
+		argnames is ['Part', 'Name', 'Value', 'Parameters']
 	]).
 
-	:- public(file/5).
-	:- mode(file(+compound, -atom, -atom, -atom, -compound), zero_or_one).
-	:- info(file/5, [
-		comment is 'True when the validated multipart part is a form-data file part, returning its field name, filename, media type, and payload term.',
-		argnames is ['Part', 'Name', 'Filename', 'MediaType', 'Payload']
+	:- public(file/6).
+	:- mode(file(+compound, -atom, -atom, -atom, -compound, -list(compound)), zero_or_one).
+	:- info(file/6, [
+		comment is 'True when the validated multipart part is a form-data file part, returning its field name, filename, media type, payload term, and additional disposition parameters.',
+		argnames is ['Part', 'Name', 'Filename', 'MediaType', 'Payload', 'Parameters']
 	]).
 
-	:- public(field_part/3).
-	:- mode(field_part(+atom, +term, -compound), one_or_error).
-	:- info(field_part/3, [
-		comment is 'Constructs a normalized multipart part for a textual form-data field using a content-disposition header and a text/plain body.',
-		argnames is ['Name', 'Value', 'Part']
+	:- public(field_part/4).
+	:- mode(field_part(+atom, +term, +list(compound), -compound), one_or_error).
+	:- info(field_part/4, [
+		comment is 'Constructs a normalized multipart part for a textual form-data field using a content-disposition header, a text/plain body, and additional disposition parameters.',
+		argnames is ['Name', 'Value', 'Parameters', 'Part']
 	]).
 
-	:- public(file_part/5).
-	:- mode(file_part(+atom, +atom, +atom, +compound, -compound), one_or_error).
-	:- info(file_part/5, [
-		comment is 'Constructs a normalized multipart part for a form-data file using a content-disposition header and the given media type and payload.',
-		argnames is ['Name', 'Filename', 'MediaType', 'Payload', 'Part']
+	:- public(file_part/6).
+	:- mode(file_part(+atom, +atom, +atom, +compound, +list(compound), -compound), one_or_error).
+	:- info(file_part/6, [
+		comment is 'Constructs a normalized multipart part for a form-data file using a content-disposition header, the given media type and payload, and additional disposition parameters.',
+		argnames is ['Name', 'Filename', 'MediaType', 'Payload', 'Parameters', 'Part']
 	]).
 
 	:- public(form_data_body/2).
-	:- mode(form_data_body(+list, -compound), one_or_error).
+	:- mode(form_data_body(+list(compound), -compound), one_or_error).
 	:- info(form_data_body/2, [
-		comment is 'Constructs a multipart/form-data body from an ordered list of field(Name, Value) and file(Name, Filename, MediaType, Payload) descriptors.',
+		comment is 'Constructs a multipart/form-data body from an ordered list of field(Name, Value, Parameters) and file(Name, Filename, MediaType, Payload, Parameters) descriptors.',
 		argnames is ['Items', 'Body']
 	]).
 
@@ -219,28 +219,30 @@
 		validate_multipart_part(Part),
 		Part = part(_Headers, _Body, Properties).
 
-	field(Part, Name, Value) :-
+	field(Part, Name, Value, Parameters) :-
 		validate_multipart_part(Part),
-		part_form_data_disposition(Part, Name, no),
+		part_form_data_disposition(Part, Name, no, Parameters),
 		part_body(Part, Body),
 		field_body_value(Body, Value),
 		!.
 
-	file(Part, Name, Filename, MediaType, Payload) :-
+	file(Part, Name, Filename, MediaType, Payload, Parameters) :-
 		validate_multipart_part(Part),
-		part_form_data_disposition(Part, Name, yes(Filename)),
+		part_form_data_disposition(Part, Name, yes(Filename), Parameters),
 		part_body(Part, content(MediaType, Payload)),
 		!.
 
-	field_part(Name, Value, Part) :-
+	field_part(Name, Value, Parameters, Part) :-
 		validate_form_data_name(Name),
-		form_data_disposition_header_value(Name, no, HeaderValue),
+		validate_form_data_parameters(Parameters, NormalizedParameters),
+		form_data_disposition_header_value(Name, no, NormalizedParameters, HeaderValue),
 		part([content_disposition-HeaderValue], content('text/plain', text(Value)), [], Part).
 
-	file_part(Name, Filename, MediaType, Payload, Part) :-
+	file_part(Name, Filename, MediaType, Payload, Parameters, Part) :-
 		validate_form_data_name(Name),
 		validate_form_data_filename(Filename),
-		form_data_disposition_header_value(Name, yes(Filename), HeaderValue),
+		validate_form_data_parameters(Parameters, NormalizedParameters),
+		form_data_disposition_header_value(Name, yes(Filename), NormalizedParameters, HeaderValue),
 		part([content_disposition-HeaderValue], content(MediaType, Payload), [], Part).
 
 	form_data_body(Items, Body) :-
@@ -291,6 +293,35 @@
 	validate_form_data_filename(Filename) :-
 		validate_form_data_text(http_multipart_form_data_filename, Filename).
 
+	validate_form_data_parameters(Parameters, NormalizedParameters) :-
+		validate_form_data_parameters(Parameters, [], NormalizedParameters).
+
+	validate_form_data_parameters([], _SeenNames, []) :-
+		!.
+	validate_form_data_parameters([Parameter| Parameters], SeenNames, [NormalizedName-Value| NormalizedParameters]) :-
+		!,
+		validate_form_data_parameter(Parameter, NormalizedName, Value),
+		validate_form_data_parameter_name_uniqueness(NormalizedName, Parameter, SeenNames, SeenNames0),
+		validate_form_data_parameters(Parameters, SeenNames0, NormalizedParameters).
+	validate_form_data_parameters(Parameters, _SeenNames, _NormalizedParameters) :-
+		domain_error(http_multipart_form_data_parameters, Parameters).
+
+	validate_form_data_parameter(Name-Value, NormalizedName, Value) :-
+		!,
+		validate_form_data_parameter_name(Name, NormalizedName),
+		validate_form_data_parameter_value(Value).
+	validate_form_data_parameter(Parameter, _NormalizedName, _Value) :-
+		domain_error(http_multipart_form_data_parameter, Parameter).
+
+	validate_form_data_parameter_name(Name, NormalizedName) :-
+		(	valid_form_data_parameter_name(Name, NormalizedName) ->
+			true
+		;	domain_error(http_multipart_form_data_parameter_name, Name)
+		).
+
+	validate_form_data_parameter_value(Value) :-
+		validate_form_data_text(http_multipart_form_data_parameter_value, Value).
+
 	validate_form_data_text(Domain, Text) :-
 		(	valid_form_data_text(Text) ->
 			true
@@ -302,6 +333,25 @@
 		text_to_codes(Text, Codes),
 		codes_without_line_breaks(Codes).
 
+	valid_form_data_parameter_name(Name, NormalizedName) :-
+		valid(text, Name),
+		text_to_codes(Name, Codes),
+		Codes \== [],
+		codes_are_token(Codes),
+		lowercase_ascii_codes(Codes, NormalizedCodes),
+		atom_codes(NormalizedName, NormalizedCodes).
+
+	validate_form_data_parameter_name_uniqueness(NormalizedName, Parameter, SeenNames, [NormalizedName| SeenNames]) :-
+		(	reserved_form_data_parameter_name(NormalizedName) ->
+			domain_error(http_multipart_form_data_parameter, Parameter)
+		;	member(NormalizedName, SeenNames) ->
+			domain_error(http_multipart_form_data_parameter, Parameter)
+		;	true
+		).
+
+	reserved_form_data_parameter_name(name).
+	reserved_form_data_parameter_name(filename).
+
 	field_body_value(content(_MediaType, text(Value)), Value).
 	field_body_value(content('application/octet-stream', binary(Bytes)), Value) :-
 		atom_codes(Value, Bytes).
@@ -312,16 +362,16 @@
 
 	parts_fields([], []).
 	parts_fields([Part| Parts], Fields) :-
-		(	field(Part, Name, Value) ->
-			Fields = [Name-Value| Fields0]
+		(	field(Part, Name, Value, Parameters) ->
+			Fields = [field(Name, Value, Parameters)| Fields0]
 		;	Fields = Fields0
 		),
 		parts_fields(Parts, Fields0).
 
 	parts_files([], []).
 	parts_files([Part| Parts], Files) :-
-		(	file(Part, Name, Filename, MediaType, Payload) ->
-			Files = [file(Name, Filename, MediaType, Payload)| Files0]
+		(	file(Part, Name, Filename, MediaType, Payload, Parameters) ->
+			Files = [file(Name, Filename, MediaType, Payload, Parameters)| Files0]
 		;	Files = Files0
 		),
 		parts_files(Parts, Files0).
@@ -335,23 +385,39 @@
 	form_data_items_parts(Items, _Parts) :-
 		domain_error(http_multipart_form_data_items, Items).
 
-	form_data_item_part(field(Name, Value), Part) :-
+	form_data_item_part(field(Name, Value, Parameters), Part) :-
 		!,
-		field_part(Name, Value, Part).
-	form_data_item_part(file(Name, Filename, MediaType, Payload), Part) :-
+		field_part(Name, Value, Parameters, Part).
+	form_data_item_part(file(Name, Filename, MediaType, Payload, Parameters), Part) :-
 		!,
-		file_part(Name, Filename, MediaType, Payload, Part).
+		file_part(Name, Filename, MediaType, Payload, Parameters, Part).
 	form_data_item_part(Item, _Part) :-
 		domain_error(http_multipart_form_data_item, Item).
 
-	part_form_data_disposition(Part, Name, Filename) :-
+	part_form_data_disposition(Part, Name, Filename, ExtraParameters) :-
 		part_headers(Part, Headers),
 		memberchk(content_disposition-Value, Headers),
 		parse_content_disposition(Value, 'form-data', Parameters),
-		memberchk(name-Name, Parameters),
-		(	member(filename-FoundFilename, Parameters) ->
-			Filename = yes(FoundFilename)
-		;	Filename = no
+		parse_form_data_disposition_parameters(Parameters, Name, Filename, ExtraParameters).
+
+	parse_form_data_disposition_parameters(Parameters, Name, Filename, ExtraParameters) :-
+		parse_form_data_disposition_parameters(Parameters, no, no, [], Name, Filename, ExtraParameters).
+
+	parse_form_data_disposition_parameters([], yes(Name), Filename, _SeenNames, Name, Filename, []) :-
+		!.
+	parse_form_data_disposition_parameters([], no, _Filename0, _SeenNames, _Name, _Filename, _ExtraParameters) :-
+		fail.
+	parse_form_data_disposition_parameters([ParameterName-ParameterValue| Parameters], Name0, Filename0, SeenNames, Name, Filename, ExtraParameters) :-
+		(	member(ParameterName, SeenNames) ->
+			fail
+		;	ParameterName == name ->
+			Name0 == no,
+			parse_form_data_disposition_parameters(Parameters, yes(ParameterValue), Filename0, [ParameterName| SeenNames], Name, Filename, ExtraParameters)
+		;	ParameterName == filename ->
+			Filename0 == no,
+			parse_form_data_disposition_parameters(Parameters, Name0, yes(ParameterValue), [ParameterName| SeenNames], Name, Filename, ExtraParameters)
+		;	ExtraParameters = [ParameterName-ParameterValue| ExtraParameters0],
+			parse_form_data_disposition_parameters(Parameters, Name0, Filename0, [ParameterName| SeenNames], Name, Filename, ExtraParameters0)
 		).
 
 	parse_content_disposition(Value, Type, Parameters) :-
@@ -445,6 +511,11 @@
 		Code =\= 0'\r,
 		Code =\= 0'\n.
 
+	codes_are_token([]).
+	codes_are_token([Code| Codes]) :-
+		token_code(Code),
+		codes_are_token(Codes).
+
 	token_code(Code) :-
 		Code > 31,
 		Code < 127,
@@ -470,24 +541,30 @@
 	separator_code(0' ).
 	separator_code(0'\t).
 
-	whitespace_code(0' ).
+	whitespace_code(32).
 	whitespace_code(0'\t).
 
-	form_data_disposition_header_value(Name, Filename, HeaderValue) :-
-		text_to_codes(Name, NameCodes0),
-		escaped_quoted_codes(NameCodes0, NameCodes),
-		(	Filename == no ->
-			Codes0 = [0'f,0'o,0'r,0'm,0'-,0'd,0'a,0't,0'a,0';,0' ,0'n,0'a,0'm,0'e,0'=,0'"| NameCodes],
-			append(Codes0, [0'"], Codes)
-		;	Filename = yes(FilenameText),
-			text_to_codes(FilenameText, FilenameCodes0),
-			escaped_quoted_codes(FilenameCodes0, FilenameCodes),
-			Codes0 = [0'f,0'o,0'r,0'm,0'-,0'd,0'a,0't,0'a,0';,0' ,0'n,0'a,0'm,0'e,0'=,0'"| NameCodes],
-			append(Codes0, [0'",0';,0' ,0'f,0'i,0'l,0'e,0'n,0'a,0'm,0'e,0'=,0'"], Codes1),
-			append(Codes1, FilenameCodes, Codes2),
-			append(Codes2, [0'"], Codes)
-		),
+	form_data_disposition_header_value(Name, Filename, Parameters, HeaderValue) :-
+		form_data_disposition_parameters(Filename, Name, Parameters, HeaderParameters),
+		content_disposition_header_value('form-data', HeaderParameters, HeaderValue).
+
+	form_data_disposition_parameters(no, Name, Parameters, [name-Name| Parameters]).
+	form_data_disposition_parameters(yes(Filename), Name, Parameters, [name-Name, filename-Filename| Parameters]).
+
+	content_disposition_header_value(Type, Parameters, HeaderValue) :-
+		text_to_codes(Type, TypeCodes),
+		content_disposition_parameters_codes(Parameters, ParameterCodes),
+		append(TypeCodes, ParameterCodes, Codes),
 		atom_codes(HeaderValue, Codes).
+
+	content_disposition_parameters_codes([], []).
+	content_disposition_parameters_codes([Name-Value| Parameters], Codes) :-
+		text_to_codes(Name, NameCodes),
+		text_to_codes(Value, ValueCodes0),
+		escaped_quoted_codes(ValueCodes0, ValueCodes),
+		content_disposition_parameters_codes(Parameters, Codes2),
+		append([0';,32| NameCodes], [0'=,0'"| ValueCodes], Codes1),
+		append(Codes1, [0'"| Codes2], Codes).
 
 	escaped_quoted_codes([], []).
 	escaped_quoted_codes([Code| Codes], [0'\\, Code| EscapedCodes]) :-

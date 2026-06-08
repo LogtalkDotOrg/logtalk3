@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-06-08,
 		comment is 'Unit tests for the "http_client" library.'
 	]).
 
@@ -321,8 +321,8 @@
 		http_client::post(
 			URL,
 			form_data([
-				field(title, 'Logtalk'),
-				file(upload, 'notes.txt', 'text/plain', text(hello))
+				field(title, 'Logtalk', []),
+				file(upload, 'notes.txt', 'text/plain', text(hello), [])
 			]),
 			Response,
 			[]

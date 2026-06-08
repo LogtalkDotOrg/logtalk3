@@ -74,8 +74,8 @@
 	handle(Request, Response) :-
 		http_core::version(Request, Version),
 		http_core::body(Request, Body),
-		http_multipart::fields(Body, [title-Title]),
-		http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
+		http_multipart::fields(Body, [field(title, Title, _FieldParameters)]),
+		http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello), _FileParameters)]),
 		atom_concat('title=', Title, Prefix),
 		atom_concat(Prefix, '; upload=', Prefix0),
 		atom_concat(Prefix0, Filename, Summary),

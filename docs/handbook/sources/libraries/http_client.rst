@@ -91,8 +91,8 @@ normalized request body using ``http_multipart``:
        handle(Request, Response) :-
            http_core::version(Request, Version),
            http_core::body(Request, Body),
-           http_multipart::fields(Body, [title-Title]),
-           http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello))]),
+           http_multipart::fields(Body, [field(title, Title, _FieldParameters)]),
+           http_multipart::files(Body, [file(upload, Filename, 'text/plain', text(hello), _FileParameters)]),
            atomic_list_concat(['title=', Title, '; upload=', Filename], Text),
            http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(Text)), [], Response).
 
@@ -104,8 +104,8 @@ normalized request body using ``http_multipart``:
         http_client::post(
             URL,
             form_data([
-                field(title, 'Logtalk'),
-                file(upload, 'notes.txt', 'text/plain', text(hello))
+                field(title, 'Logtalk', []),
+                file(upload, 'notes.txt', 'text/plain', text(hello), [])
             ]),
             Response,
             []
@@ -198,12 +198,31 @@ The current multipart workflow is intentionally small but practical:
 - For common form-data requests, callers can use ``form_data(Items)``
   through the existing body path, including ``post/4-5``, ``put/4-5``,
   and ``patch/4-5``.
-- The ``Items`` descriptors are the same ``field(Name, Value)`` and
-  ``file(Name, Filename, MediaType, Payload)`` descriptors supported by
-  the ``http_multipart::form_data_body/2`` helper.
+- The ``Items`` descriptors are the same
+  ``field(Name, Value, Parameters)`` and
+  ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors
+  supported by the ``http_multipart::form_data_body/2`` helper.
+- In both descriptor shapes, ``Parameters`` is the ordered list of extra
+  ``Content-Disposition: form-data`` parameters to preserve or generate.
+- The reserved ``name`` and ``filename`` parameters stay explicit helper
+  arguments and must not be repeated in the ``Parameters`` list.
 - When using the convenience descriptor, the client facade adds a
   multipart boundary property automatically so the request can be
   generated on the wire without extra caller bookkeeping.
+
+For example, callers can send extra disposition parameters explicitly:
+
+::
+
+   | ?- http_client::post(
+        URL,
+        form_data([
+            field(title, 'Logtalk', [charset-utf8]),
+            file(upload, 'notes.txt', 'text/plain', text(hello), [creation_date-'2026-06-08'])
+        ]),
+        Response,
+        []
+    ).
 
 WebSocket workflow
 ------------------
