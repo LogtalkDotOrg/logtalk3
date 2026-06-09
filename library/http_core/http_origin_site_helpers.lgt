@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-09,
 		comment is 'Internal shared helpers for parsing HTTP origins and absolute URLs, deriving request endpoints, and comparing endpoints for schemeful same-site semantics.'
 	]).
 
@@ -129,13 +129,13 @@
 	components_path(Components, Path) :-
 		( 	member(path(Path0), Components) ->
 			normalize_request_path(Path0, Path)
-		; 	Path = '/'
+		; 	Path = ('/')
 		).
 
 	origin_extra_components(Components) :-
 		member(path(Path), Components),
 		Path \== '',
-		Path \== '/'.
+		Path \== ('/').
 	origin_extra_components(Components) :-
 		member(query(Query), Components),
 		Query \== ''.
