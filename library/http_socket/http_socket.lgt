@@ -865,8 +865,10 @@
 				;	force_shutdown_control(Control, RunId),
 					throw(Error)
 				)
-			),
+			) ->
 			serve_until_shutdown_serial(Listener, Handler, Control, RunId)
+		;	force_shutdown_control(Control, RunId),
+			throw(unexpted_failure(server_once/3))
 		).
 
 	serve_until_shutdown_parallel(Listener, Handler, Control, RunId) :-
