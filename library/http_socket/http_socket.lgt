@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-09,
 		comment is 'Sockets-backed HTTP transport predicates built on top of the http_client_core and http_server libraries.',
 		remarks is [
 			'Supported backends' - 'Availability depends on the supported backends of the sockets library.',
@@ -252,8 +252,7 @@
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		serve_accepted_connection(Input, Output, Handler) :-
-			adopt_stream(Input),
-			adopt_stream(Output),
+			adopt_connection_streams(Input, Output),
 			call_with_catch_cleanup(
 				http_server::serve_connection(Input, Output, Handler),
 				socket::close(Input, Output)
@@ -269,9 +268,20 @@
 
 	:- endif.
 
-	serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
-		http_server::serve_websocket(Input, Output, Handler, Outcome),
-		serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
+
+		serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
+			adopt_connection_streams(Input, Output),
+			http_server::serve_websocket(Input, Output, Handler, Outcome),
+			serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+
+	:- else.
+
+		serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
+			http_server::serve_websocket(Input, Output, Handler, Outcome),
+			serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+
+	:- endif.
 
 	serve_websocket_outcome(accepted(_Request, Response), Input, Output, http_websocket_connection(ClientInfo, Input, Output), Response, ClientInfo).
 	serve_websocket_outcome(rejected(Response), _Input, _Output, _Connection, _RejectedResponse, _ClientInfo) :-
@@ -529,14 +539,39 @@
 	one_shot_request_sequence_([Request| Requests], [Request| ReversedRequests]) :-
 		one_shot_request_sequence_(Requests, ReversedRequests).
 
-	ensure_close_connection_request(request(Method, Target, Version, Headers, Body, Properties0), Request) :-
-		(	member(connection(_), Properties0) ->
-			Properties = Properties0
-		;	member(connection-_, Headers) ->
-			Properties = Properties0
-		;	Properties = [connection([close])| Properties0]
-		),
+	ensure_close_connection_request(request(Method, Target, Version, Headers0, Body, Properties0), Request) :-
+		normalize_close_connection_headers(Headers0, Headers),
+		normalize_close_connection_properties(Properties0, Properties),
 		Request = request(Method, Target, Version, Headers, Body, Properties).
+
+	normalize_close_connection_headers([], []).
+	normalize_close_connection_headers([connection-Tokens0| Headers0], [connection-Tokens| Headers]) :-
+		!,
+		force_close_connection_tokens(Tokens0, Tokens),
+		normalize_close_connection_headers(Headers0, Headers).
+	normalize_close_connection_headers([Header| Headers0], [Header| Headers]) :-
+		normalize_close_connection_headers(Headers0, Headers).
+
+	normalize_close_connection_properties([], [connection([close])]).
+	normalize_close_connection_properties([connection(Tokens0)| Properties0], [connection(Tokens)| Properties]) :-
+		!,
+		force_close_connection_tokens(Tokens0, Tokens),
+		normalize_close_connection_properties(Properties0, Properties).
+	normalize_close_connection_properties([Property| Properties0], [Property| Properties]) :-
+		normalize_close_connection_properties(Properties0, Properties).
+
+	force_close_connection_tokens(Tokens0, [close| Tokens]) :-
+		remove_persistence_connection_tokens(Tokens0, Tokens).
+
+	remove_persistence_connection_tokens([], []).
+	remove_persistence_connection_tokens([close| Tokens0], Tokens) :-
+		!,
+		remove_persistence_connection_tokens(Tokens0, Tokens).
+	remove_persistence_connection_tokens(['keep-alive'| Tokens0], Tokens) :-
+		!,
+		remove_persistence_connection_tokens(Tokens0, Tokens).
+	remove_persistence_connection_tokens([Token| Tokens0], [Token| Tokens]) :-
+		remove_persistence_connection_tokens(Tokens0, Tokens).
 
 	lowercase_ascii_codes(Codes, LowercaseCodes) :-
 		^^lowercase_ascii_codes(Codes, LowercaseCodes).

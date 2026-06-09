@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
+		date is 2026-06-09,
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
@@ -172,7 +172,7 @@
 		property(Response1, connection(['keep-alive'])),
 		status(Response2, status(200, 'OK')),
 		body(Response2, empty),
-		property(Response2, connection(['keep-alive'])).
+		\+ property(Response2, connection(_)).
 
 	test(http_socket_exchange_connection_3_01, deterministic) :-
 		Requests = [
