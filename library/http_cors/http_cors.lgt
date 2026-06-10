@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-06-10,
 		comment is 'Transport-neutral CORS request classification, preflight response generation, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -295,7 +295,7 @@
 		(	AllowCredentials == true ->
 			AllowOrigin = Origin,
 			VaryTokens = [origin]
-		;	AllowOrigin = '*',
+		;	AllowOrigin = ('*'),
 			VaryTokens = []
 		).
 	allowed_origin(Origin, Options, Origin, [origin]) :-
