@@ -21,6 +21,13 @@
 		argnames is ['Listener']
 	]).
 
+	:- public(request_listener_shutdown/1).
+	:- mode(request_listener_shutdown(+compound), one_or_error).
+	:- info(request_listener_shutdown/1, [
+		comment is 'Best-effort wakeup request for a listener accept loop opened with open_listener/4. This predicate does not close the listener but causes a blocked accept call to return portably when possible.',
+		argnames is ['Listener']
+	]).
+
 	:- public(open_connection/4).
 	:- mode(open_connection(+atom, +integer, --compound, +list), one_or_error).
 	:- info(open_connection/4, [

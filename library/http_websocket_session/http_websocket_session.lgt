@@ -1361,7 +1361,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-10,
 		comment is 'Stateful WebSocket session predicates for server-side use with atom text representation, including registry-backed broadcast helpers.'
 	]).
 
@@ -1389,7 +1389,7 @@
 	:- public(serve_until_shutdown/5).
 	:- mode(serve_until_shutdown(+compound, +object_identifier, +object_identifier, +compound, +nonvar), one_or_error).
 	:- info(serve_until_shutdown/5, [
-		comment is 'Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, and registers active sessions in the given registry for queued broadcasts.',
+		comment is 'Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control'],
 		remarks is [
 			'Thread support' - 'This helper requires backend thread support so that multiple sessions can stay active concurrently.',
@@ -1400,7 +1400,7 @@
 	:- public(serve_until_shutdown/6).
 	:- mode(serve_until_shutdown(+compound, +object_identifier, +object_identifier, +compound, +nonvar, +list), one_or_error).
 	:- info(serve_until_shutdown/6, [
-		comment is 'Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, and applies the given session-loop options to every active session.',
+		comment is 'Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control', 'Options'],
 		remarks is [
 			'Option ``auto_pong(on|off)``' - 'Controls automatic pong replies in each active session loop.',
@@ -1413,7 +1413,7 @@
 	:- public(request_shutdown/1).
 	:- mode(request_shutdown(+nonvar), one_or_error).
 	:- info(request_shutdown/1, [
-		comment is 'Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term.',
+		comment is 'Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
 		argnames is ['Control']
 	]).
 
@@ -1486,7 +1486,9 @@
 		register_shutdown_control(Control, Listener, RunId),
 		::run_once_with_cleanup_(
 			serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options),
-			cleanup_shutdown_control(Control, RunId)
+			(	catch(http_socket::close_listener(Listener), _, true),
+				cleanup_shutdown_control(Control, RunId)
+			)
 		).
 
 	request_shutdown(Control) :-
@@ -1528,7 +1530,7 @@
 		;	assertz(shutdown_requested_(Control, RunId))
 		),
 		(	shutdown_control_(Control, Listener, RunId) ->
-			catch(http_socket::close_listener(Listener), _, true)
+			catch(http_socket::request_listener_shutdown(Listener), _, true)
 		;	true
 		).
 

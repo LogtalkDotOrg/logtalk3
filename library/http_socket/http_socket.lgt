@@ -155,6 +155,9 @@
 		unregister_listener_endpoint(Listener),
 		socket::server_close(Listener).
 
+	request_listener_shutdown(Listener) :-
+		signal_shutdown_listener(Listener).
+
 	open_connection(Host, Port, http_connection(NormalizedHost, Port, Input, Output), Options) :-
 		normalize_connection_endpoint(Host, Port, NormalizedHost),
 		socket::client_open(Host, Port, Input, Output, Options).
