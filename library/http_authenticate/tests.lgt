@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-10,
 		comment is 'Unit tests for the http_authenticate library.'
 	]).
 
@@ -103,7 +103,7 @@
 		header(Response, x_router_stage, routed),
 		body(Response, content('text/plain', text('Mufasa'))).
 
-	test(http_authenticate_09, deterministic) :-
+	test(http_authenticate_09, deterministic, [condition(current_prolog_flag(bounded, false))]) :-
 		^^file_path('test_files/supported.htpasswd', Path),
 		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'Circle Of Life').
 
