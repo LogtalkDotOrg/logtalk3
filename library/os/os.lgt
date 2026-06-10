@@ -2101,7 +2101,8 @@
 	resolve_command_path_windows(Command, Path) :-
 		environment_variable('PATH', Paths),
 		atom::split(Paths, ';', Directories),
-		environment_variable('PATHEXT', Extensions),
+		environment_variable('PATHEXT', PathExtensions),
+		atom::split(PathExtensions, ';', Extensions),
 		resolve_command_path_windows(['.'| Directories], Extensions, Command, Path).
 
 	resolve_command_path_windows([Directory| _Directories], Extensions, Command, Path) :-
@@ -2112,8 +2113,7 @@
 
 	command_on_path_directory_windows(Directory, Extensions, Command, Path) :-
 		list::member(Extension, Extensions),
-		atom_concat(Command, Extension, Basename),
-		path_concat(Directory, Basename, Path0),
+		{atomic_list_concat([Directory, '\\', Command, Extension], Path0)},
 		absolute_file_name(Path0, Path),
 		file_exists(Path).
 
