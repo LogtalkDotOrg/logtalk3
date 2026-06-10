@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-10,
 		comment is 'Unit tests for the http_digest library.'
 	]).
 
@@ -47,19 +47,7 @@
 	cover(http_digest_test_verifier).
 	cover(http_digest_test_handler).
 	cover(http_digest_test_router).
-
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == eclipse; Dialect == gnu;
-			Dialect == sicstus; Dialect == swi;
-			Dialect == trealla,
-			current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
-			v(Major, Minor, Patch) @>= v(2, 90, 3);
-			Dialect == xvm
-		)
-	)).
-		cover(http_client_digest_session).
-	:- endif.
+	cover(http_client_digest_session).
 
 	test(http_digest_01, deterministic(Challenge == ParsedChallenge)) :-
 		challenge_options(sha256, 1700000000, Options),

@@ -19,15 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(crypto(loader)),
-	logtalk_load(dates(loader)),
-	logtalk_load(hashes(loader)),
-	logtalk_load(hmac(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(http_core(loader)),
-	logtalk_load([http_digest_verifier_protocol, http_digest, http_server_digest_handler, http_router_digest_auth], [optimize(on)])
-)).
 
 :- if((
 	current_logtalk_flag(sockets, supported),
@@ -35,10 +26,28 @@
 )).
 
 	:- initialization((
+		logtalk_load(crypto(loader)),
+		logtalk_load(dates(loader)),
+		logtalk_load(hashes(loader)),
+		logtalk_load(hmac(loader)),
+		logtalk_load(options(loader)),
+		logtalk_load(http_core(loader)),
 		logtalk_load(http_cookies(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_session(http_cookie_jar), [optimize(on)]),
-		logtalk_load(http_client_digest_session, [optimize(on)])
+		logtalk_load([
+			http_digest_verifier_protocol,
+			http_digest,
+			http_server_digest_handler,
+			http_router_digest_auth,
+			http_client_digest_session
+		], [
+			optimize(on)
+		])
 	)).
+
+:- else.
+
+	:- initialization((write('(http_digest library not available for your backend Prolog compiler)'), nl)).
 
 :- endif.
