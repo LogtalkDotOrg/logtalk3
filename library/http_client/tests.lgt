@@ -29,7 +29,9 @@
 		comment is 'Unit tests for the "http_client" library.'
 	]).
 
-	:- uses(http_core, [body/2, parse_request/2, property/2, status/2, version/2]).
+	:- uses(http_core, [
+		body/2, parse_request/2, property/2, status/2, version/2
+	]).
 
 	cover(http_client_core).
 	cover(http_client).
