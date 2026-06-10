@@ -81,6 +81,9 @@ libraries.
 * UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
 libraries to use the new `crypto` library.
 
+* UPDATED: The `os::read_only_device_path/1` to return `/dev/urandom` on POSIX
+systems instead of only macOS.
+
 * FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
 alphabet entries were swapped).
 

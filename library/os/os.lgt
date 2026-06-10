@@ -2090,7 +2090,7 @@
 		).
 
 	read_only_device_path('/dev/urandom') :-
-		operating_system_name('Darwin').
+		\+ operating_system_type(windows).
 
 	resolve_command_path(Command, Path) :-
 		(	operating_system_type(windows) ->
