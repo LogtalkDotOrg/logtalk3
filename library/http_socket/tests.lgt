@@ -29,19 +29,21 @@
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
-	:- uses(http_core, [body/2, property/2, request/7, status/2]).
+	:- uses(http_core, [
+		body/2, property/2, request/7, status/2
+	]).
 
 	cover(http_socket).
-
-	:- if(current_logtalk_flag(threads, supported)).
-
-	:- threaded.
 
 	test(http_socket_open_close_listener_4_01, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		integer(Port),
 		Port > 0,
 		http_socket::close_listener(Listener).
+
+	:- if(current_logtalk_flag(threads, supported)).
+
+	:- threaded.
 
 	test(http_socket_open_close_connection_4_01, deterministic) :-
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
@@ -384,6 +386,8 @@
 		status(Response2, status(200, 'OK')),
 		body(Response2, content('text/plain', text(beta))),
 		client_connection_state('127.0.0.1', Port, closed).
+
+	% auxiliary predicates
 
 	client_exchange_ignore(Host, Port, Request) :-
 		catch(http_socket::exchange(Host, Port, Request, _Response), _, true).

@@ -875,25 +875,6 @@
 		;	true
 		).
 
-	signal_shutdown_listener(Listener) :-
-		(	listener_endpoint_(Listener, Host0, Port) ->
-			shutdown_signal_host(Host0, Host),
-			catch(
-				(	socket::client_open(Host, Port, Input, Output, []),
-					socket::close(Input, Output)
-				),
-				_,
-				true
-			)
-		;	true
-		).
-
-	shutdown_signal_host('0.0.0.0', '127.0.0.1') :-
-		!.
-	shutdown_signal_host('::', '::1') :-
-		!.
-	shutdown_signal_host(Host, Host).
-
 	shutdown_requested(Control, RunId) :-
 		listener_shutdown_requested_(Control, RunId).
 
@@ -1051,5 +1032,24 @@
 		throw(error(resource_error(threads), http_socket::serve_listener(_, _, _, _, [workers(pool(_, rolling))]) )).
 
 	:- endif.
+
+	signal_shutdown_listener(Listener) :-
+		(	listener_endpoint_(Listener, Host0, Port) ->
+			shutdown_signal_host(Host0, Host),
+			catch(
+				(	socket::client_open(Host, Port, Input, Output, []),
+					socket::close(Input, Output)
+				),
+				_,
+				true
+			)
+		;	true
+		).
+
+	shutdown_signal_host('0.0.0.0', '127.0.0.1') :-
+		!.
+	shutdown_signal_host('::', '::1') :-
+		!.
+	shutdown_signal_host(Host, Host).
 
 :- end_object.
