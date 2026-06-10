@@ -3,7 +3,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-06-10,
 		comment is 'Sockets-backed HTTP transport predicates.'
 	]).
 
@@ -135,7 +135,7 @@
 	:- public(serve_until_shutdown/4).
 	:- mode(serve_until_shutdown(+compound, +object_identifier, +nonvar, +list), one_or_error).
 	:- info(serve_until_shutdown/4, [
-		comment is 'Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term.',
+		comment is 'Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, then closes the listener before returning.',
 		argnames is ['Listener', 'Handler', 'Control', 'Options'],
 		remarks is [
 			'Control term' - 'The control term must be non-variable and should be fresh for each open-ended serving loop.',
@@ -143,14 +143,14 @@
 			'Option ``workers(per_connection)``' - 'Spawn one worker thread per accepted connection and wait for all workers when shutdown is requested. Requires backend thread support.',
 			'Option ``workers(pool(Size))``' - 'Serve accepted connections using at most Size concurrent worker threads, waiting for worker completion notifications before accepting additional connections. Requires backend thread support.',
 			'Option ``workers(pool(Size, rolling))``' - 'Alias for ``workers(pool(Size))``. Requires backend thread support.',
-			'Shutdown behavior' - 'Calling request_shutdown/1 closes the listener, stops accepting new connections, and waits for active workers to finish before the serving loop returns.'
+			'Shutdown behavior' - 'Calling request_shutdown/1 wakes the serving loop, stops accepting new connections, and waits for active workers to finish before the listener is closed and the serving loop returns.'
 		]
 	]).
 
 	:- public(request_shutdown/1).
 	:- mode(request_shutdown(+nonvar), one_or_error).
 	:- info(request_shutdown/1, [
-		comment is 'Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term.',
+		comment is 'Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
 		argnames is ['Control']
 	]).
 

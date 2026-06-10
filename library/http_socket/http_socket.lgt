@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-09,
+		date is 2026-06-10,
 		comment is 'Sockets-backed HTTP transport predicates built on top of the http_client_core and http_server libraries.',
 		remarks is [
 			'Supported backends' - 'Availability depends on the supported backends of the sockets library.',
@@ -101,6 +101,14 @@
 		argnames is ['Control', 'RunId', 'Worker']
 	]).
 
+	:- private(listener_endpoint_/3).
+	:- dynamic(listener_endpoint_/3).
+	:- mode(listener_endpoint_(?compound, ?atom, ?integer), zero_or_more).
+	:- info(listener_endpoint_/3, [
+		comment is 'Stored listener endpoints indexed by listener handle.',
+		argnames is ['Listener', 'Host', 'Port']
+	]).
+
 	:- synchronized([
 		allocate_connection_pool_id/1,
 		register_connection_pool/7,
@@ -110,6 +118,8 @@
 		close_connection_pool_state/2,
 		connection_pool_id_outcome/2,
 		allocate_shutdown_run_id/1,
+		register_listener_endpoint/3,
+		unregister_listener_endpoint/1,
 		register_shutdown_control/3,
 		cleanup_shutdown_control/2,
 		force_shutdown_control/2,
@@ -138,9 +148,11 @@
 	:- endif.
 
 	open_listener(Host, Port, Listener, Options) :-
-		socket::server_open(Host, Port, Listener, Options).
+		socket::server_open(Host, Port, Listener, Options),
+		register_listener_endpoint(Listener, Host, Port).
 
 	close_listener(Listener) :-
+		unregister_listener_endpoint(Listener),
 		socket::server_close(Listener).
 
 	open_connection(Host, Port, http_connection(NormalizedHost, Port, Input, Output), Options) :-
@@ -594,7 +606,9 @@
 		register_shutdown_control(Control, Listener, RunId),
 		call_with_catch_cleanup(
 			serve_until_shutdown_with_workers(Workers, Listener, Handler, Control, RunId),
-			cleanup_shutdown_control(Control, RunId)
+			(	catch(close_listener(Listener), _, true),
+				cleanup_shutdown_control(Control, RunId)
+			)
 		).
 
 	request_shutdown_impl(Control) :-
@@ -759,6 +773,13 @@
 		assertz(connection_pool_config_(PoolId, Host, Port, MinSize, MaxSize, ConnectionOptions)),
 		register_pool_available_connections_(ReversedConnections, PoolId).
 
+	register_listener_endpoint(Listener, Host, Port) :-
+		retractall(listener_endpoint_(Listener, _, _)),
+		assertz(listener_endpoint_(Listener, Host, Port)).
+
+	unregister_listener_endpoint(Listener) :-
+		retractall(listener_endpoint_(Listener, _, _)).
+
 	register_pool_available_connections_([], _PoolId).
 	register_pool_available_connections_([Connection| Connections], PoolId) :-
 		assertz(connection_pool_available_(PoolId, Connection)),
@@ -847,9 +868,28 @@
 		;	assertz(listener_shutdown_requested_(Control, RunId))
 		),
 		(	listener_shutdown_control_(Control, Listener, RunId) ->
-			catch(close_listener(Listener), _, true)
+			signal_shutdown_listener(Listener)
 		;	true
 		).
+
+	signal_shutdown_listener(Listener) :-
+		(	listener_endpoint_(Listener, Host0, Port) ->
+			shutdown_signal_host(Host0, Host),
+			catch(
+				(	socket::client_open(Host, Port, Input, Output, []),
+					socket::close(Input, Output)
+				),
+				_,
+				true
+			)
+		;	true
+		).
+
+	shutdown_signal_host('0.0.0.0', '127.0.0.1') :-
+		!.
+	shutdown_signal_host('::', '::1') :-
+		!.
+	shutdown_signal_host(Host, Host).
 
 	shutdown_requested(Control, RunId) :-
 		listener_shutdown_requested_(Control, RunId).

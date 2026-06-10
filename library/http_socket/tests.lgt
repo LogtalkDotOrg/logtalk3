@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-09,
+		date is 2026-06-10,
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
@@ -221,7 +221,8 @@
 		http_socket::request_shutdown(Control),
 		threaded_exit(http_socket::serve_until_shutdown(Listener, closing_http_socket_handler, Control, [workers(per_connection)]), ServeTag),
 		status(Response, status(200, 'OK')),
-		body(Response, empty).
+		body(Response, empty),
+		client_connection_state('127.0.0.1', Port, closed).
 
 	test(http_socket_serve_listener_4_01, deterministic) :-
 		Request1 = request(get, origin('/one'), http(1, 1), [host-host('example.com')], empty, []),
