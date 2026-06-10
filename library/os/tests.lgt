@@ -524,10 +524,10 @@
 		write(Stream, abc),
 		flush_output(Stream).
 
-	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(only_posix_systems)]) :-
+	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(only_mac_systems)]) :-
 		os::read_only_device_path(Path).
 
-	test(os_read_only_device_path_1_02, error(_), [condition(only_posix_systems)]) :-
+	test(os_read_only_device_path_1_02, error(_), [condition(only_mac_systems)]) :-
 		os::read_only_device_path(Path),
 		open(Path, write, Stream),
 		write(Stream, abc),

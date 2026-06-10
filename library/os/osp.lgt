@@ -170,7 +170,7 @@
 	:- public(read_only_device_path/1).
 	:- mode(read_only_device_path(?atom), zero_or_one).
 	:- info(read_only_device_path/1, [
-		comment is 'Read-only device path: ``/dev/urandom`` on POSIX systems. Fails on other systems. Experimental.',
+		comment is 'Read-only device path: ``/dev/urandom`` on macOS. Fails on other systems. Experimental.',
 		argnames is ['Path']
 	]).
 
