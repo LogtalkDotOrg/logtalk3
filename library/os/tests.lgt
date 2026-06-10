@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:41:1,
+		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2026-04-02,
+		date is 2026-06-10,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -532,6 +532,27 @@
 		open(Path, write, Stream),
 		write(Stream, abc),
 		flush_output(Stream).
+
+	test(os_resolve_command_path_2_01, true(os::file_exists(Path)), [condition(only_windows_systems)]) :-
+		os::resolve_command_path(where, Path).
+
+	test(os_resolve_command_path_2_02, true(os::file_exists(Path)), [condition(only_windows_systems)]) :-
+		os::resolve_command_path('Where', Path).
+
+	test(os_resolve_command_path_2_03, true(os::file_exists(Path)), [condition(only_windows_systems)]) :-
+		os::resolve_command_path('WHERE', Path).
+
+	test(os_resolve_command_path_2_04, true(os::file_exists(Path)), [condition(\+ only_windows_systems)]) :-
+		os::resolve_command_path(cat, Path).
+
+	test(os_resolve_command_path_2_05, false, [condition(only_linux_and_bsd_systems)]) :-
+		os::resolve_command_path('Cat', _).
+
+	test(os_resolve_command_path_2_06, false, [condition(only_linux_and_bsd_systems)]) :-
+		os::resolve_command_path('CAT', _).
+
+	test(os_resolve_command_path_2_07, false) :-
+		os::resolve_command_path(non_existing_command, _).
 
 	test(os_directory_files_2_01, true) :-
 		this(This),

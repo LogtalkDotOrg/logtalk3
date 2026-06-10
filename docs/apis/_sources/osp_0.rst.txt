@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:43:0
-| **Date:** 2026-04-03
+| **Version:** 1:44:0
+| **Date:** 2026-06-10
 
 | **Compilation flags:**
 |    ``static``
@@ -417,6 +417,25 @@ Read-only device path: ``/dev/urandom`` on macOS. Fails on other systems. Experi
 |    ``read_only_device_path(Path)``
 | **Mode and number of proofs:**
 |    ``read_only_device_path(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: resolve_command_path/2
+.. _osp/0::resolve_command_path/2:
+
+``resolve_command_path/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Resolves a command path given its name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resolve_command_path(Command,Path)``
+| **Mode and number of proofs:**
+|    ``resolve_command_path(+atom,-atom)`` - ``zero_or_one``
 
 
 ------------

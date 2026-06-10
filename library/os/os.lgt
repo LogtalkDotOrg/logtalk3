@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:103:1,
+		version is 1:104:0,
 		author is 'Paulo Moura',
-		date is 2026-04-06,
+		date is 2026-06-10,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2091,6 +2091,48 @@
 
 	read_only_device_path('/dev/urandom') :-
 		operating_system_name('Darwin').
+
+	resolve_command_path(Command, Path) :-
+		(	operating_system_type(windows) ->
+			resolve_command_path_windows(Command, Path)
+		;	resolve_command_path_posix(Command, Path)
+		).
+
+	resolve_command_path_windows(Command, Path) :-
+		environment_variable('PATH', Paths),
+		atom::split(Paths, ';', Directories),
+		environment_variable('PATHEXT', Extensions),
+		resolve_command_path_windows(['.'| Directories], Extensions, Command, Path).
+
+	resolve_command_path_windows([Directory| _Directories], Extensions, Command, Path) :-
+		command_on_path_directory_windows(Directory, Extensions, Command, Path),
+		!.
+	resolve_command_path_windows([_Directory| Directories], Extensions, Command, Path) :-
+		resolve_command_path_windows(Directories, Extensions, Command, Path).
+
+	command_on_path_directory_windows(Directory, Extensions, Command, Path) :-
+		list::member(Extension, Extensions),
+		atom_concat(Command, Extension, Basename),
+		path_concat(Directory, Basename, Path0),
+		absolute_file_name(Path0, Path),
+		file_exists(Path).
+
+	resolve_command_path_posix(Command, Path) :-
+		environment_variable('PATH', Paths),
+		atom::split(Paths, ':', Directories),
+		resolve_command_path_posix(Directories, Command, Path).
+
+	resolve_command_path_posix([Directory| _Directories], Command, Path) :-
+		command_on_path_directory_posix(Directory, Command, Path),
+		!.
+	resolve_command_path_posix([_Directory| Directories], Command, Path) :-
+		resolve_command_path_posix(Directories, Command, Path).
+
+	command_on_path_directory_posix(Directory, Command, Path) :-
+		path_concat(Directory, Command, Path0),
+		absolute_file_name(Path0, Path),
+		file_exists(Path),
+		file_permission(Path, execute).
 
 	ensure_directory(Directory) :-
 		(	directory_exists(Directory) ->

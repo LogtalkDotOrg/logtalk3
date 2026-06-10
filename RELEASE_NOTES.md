@@ -52,15 +52,17 @@ predicates.
 `http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
 `http_digest`, `http_cors`, `open_api`, and `rest` libraries.
 
-* ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
-`relativize/3`, and `resolve/3` predicates.
-
-* ADDED: New `reader::line_to_bytes/2-3` library predicates.
-
 * ADDED: Support for the SHA-512/256 hash function to the `hashes` library.
 
 * ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
 library.
+
+* ADDED: New `os::resolve_command_path/2` library predicate.
+
+* ADDED: New `reader::line_to_bytes/2-3` library predicates.
+
+* ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
+`relativize/3`, and `resolve/3` predicates.
 
 * IMPROVED: The `hashes` library implementation of the SHA1-1, SHA-256, and
 SHA-512/256 hash functions.

@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:43:0,
+		version is 1:44:0,
 		author is 'Paulo Moura',
-		date is 2026-04-03,
+		date is 2026-06-10,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.',
@@ -172,6 +172,13 @@
 	:- info(read_only_device_path/1, [
 		comment is 'Read-only device path: ``/dev/urandom`` on macOS. Fails on other systems. Experimental.',
 		argnames is ['Path']
+	]).
+
+	:- public(resolve_command_path/2).
+	:- mode(resolve_command_path(+atom, -atom), zero_or_one).
+	:- info(resolve_command_path/2, [
+		comment is 'Resolves a command path given its name.',
+		argnames is ['Command', 'Path']
 	]).
 
 	:- public(directory_files/2).
