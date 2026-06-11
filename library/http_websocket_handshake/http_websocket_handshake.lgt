@@ -66,7 +66,7 @@
 		(   var(Key) ->
 			throw(error(instantiation_error, context(http_websocket_handshake::websocket_accept/2, _)))
 		;   normalize_websocket_key(Key, NormalizedKey) ->
-			once(websocket_accept_from_key(NormalizedKey, Accept))
+			websocket_accept_from_key(NormalizedKey, Accept)
 		;   throw(error(domain_error(http_websocket_key, Key), context(http_websocket_handshake::websocket_accept/2, _)))
 		).
 
@@ -77,7 +77,7 @@
 		text_to_codes(Value, Codes0),
 		trim_ows_codes(Codes0, Codes),
 		Codes \== [],
-		catch(once(parse(codes(Codes), Bytes)), _, fail),
+		catch(parse(codes(Codes), Bytes), _, fail),
 		length(Bytes, Size),
 		generate(atom(NormalizedValue), Bytes).
 
