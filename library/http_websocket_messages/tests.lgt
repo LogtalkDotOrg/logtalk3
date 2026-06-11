@@ -25,17 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-11,
 		comment is 'Unit tests for the "http_websocket_messages" library.'
 	]).
 
 	:- uses(http_websocket_messages, [
-		message/3,
-		is_message/1,
-		read_message/2,
-		write_message/2,
-		type/2,
-		payload/2
+		message/3, is_message/1, read_message/2, write_message/2, type/2, payload/2
 	]).
 
 	cover(http_websocket_messages(_)).
@@ -111,6 +106,8 @@
 		close(Input),
 		http_websocket_frames::opcode(Frame, close),
 		http_websocket_frames::payload(Frame, PayloadBytes).
+
+	% auxiliary predicates
 
 	write_frames_file(Path, Frames) :-
 		^^file_path(Path, File),

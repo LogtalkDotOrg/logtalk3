@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-11,
 		comment is 'Transport-neutral WebSocket message predicates built on top of the http_websocket frame layer.',
 		remarks is [
 			'Fragmentation model' - 'This layer reassembles fragmented text and binary messages only when all continuation frames arrive contiguously. Interleaved control frames during fragmented messages raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` for RFC 6455 live-stream processing that must surface interleaved control frames while reassembling data messages.'
@@ -161,25 +161,19 @@
 		read_message_opcode(Opcode, Final, PayloadBytes, Frame, Stream, Message).
 
 	read_message_opcode(continuation, _Final, _PayloadBytes, Frame, _Stream, _Message) :-
-		!,
 		domain_error(http_websocket_message_sequence, Frame).
 	read_message_opcode(text, Final, PayloadBytes, _Frame, Stream, Message) :-
-		!,
-		read_data_message(text, Final, PayloadBytes, Stream, Message).
+		read_data_message(Final, text, PayloadBytes, Stream, Message).
 	read_message_opcode(binary, Final, PayloadBytes, _Frame, Stream, Message) :-
-		!,
-		read_data_message(binary, Final, PayloadBytes, Stream, Message).
-	read_message_opcode(ping, _Final, PayloadBytes, _Frame, _Stream, message(ping, PayloadBytes)) :-
-		!.
-	read_message_opcode(pong, _Final, PayloadBytes, _Frame, _Stream, message(pong, PayloadBytes)) :-
-		!.
+		read_data_message(Final, binary, PayloadBytes, Stream, Message).
+	read_message_opcode(ping, _Final, PayloadBytes, _Frame, _Stream, message(ping, PayloadBytes)).
+	read_message_opcode(pong, _Final, PayloadBytes, _Frame, _Stream, message(pong, PayloadBytes)).
 	read_message_opcode(close, _Final, PayloadBytes, _Frame, _Stream, Message) :-
 		close_payload_message(PayloadBytes, Message).
 
-	read_data_message(Type, final, PayloadBytes, _Stream, Message) :-
-		!,
+	read_data_message(final, Type, PayloadBytes, _Stream, Message) :-
 		decode_data_message(Type, PayloadBytes, Message).
-	read_data_message(Type, more, PayloadBytes0, Stream, Message) :-
+	read_data_message(more, Type, PayloadBytes0, Stream, Message) :-
 		read_continuation_payload(Stream, [PayloadBytes0], PayloadBytes),
 		decode_data_message(Type, PayloadBytes, Message).
 
@@ -204,7 +198,6 @@
 		append_chunks(Chunks, Bytes1, Bytes).
 
 	decode_data_message(text, PayloadBytes, message(text, Text)) :-
-		!,
 		bytes_text(PayloadBytes, Text).
 	decode_data_message(binary, PayloadBytes, message(binary, PayloadBytes)).
 
@@ -241,33 +234,26 @@
 		domain_error(http_websocket_message_type, Type).
 
 	normalize_message_payload(text, Text0, Text, PayloadBytes) :-
-		!,
 		text_bytes(Text0, Text, PayloadBytes),
 		http_websocket_frames::frame(final, text, PayloadBytes, [], _Frame).
 	normalize_message_payload(binary, Payload, Payload, Payload) :-
-		!,
 		http_websocket_frames::frame(final, binary, Payload, [], _Frame).
 	normalize_message_payload(ping, Payload, Payload, Payload) :-
-		!,
 		http_websocket_frames::frame(final, ping, Payload, [], _Frame).
 	normalize_message_payload(pong, Payload, Payload, Payload) :-
-		!,
 		http_websocket_frames::frame(final, pong, Payload, [], _Frame).
 	normalize_message_payload(close, Payload0, Payload, PayloadBytes) :-
-		normalize_close_payload(Payload0, Payload, PayloadBytes),
-		http_websocket_frames::frame(final, close, PayloadBytes, [], _Frame).
+		(	normalize_close_payload(Payload0, Payload, PayloadBytes) ->
+			http_websocket_frames::frame(final, close, PayloadBytes, [], _Frame)
+		;	domain_error(http_websocket_close_payload, Payload0)
+		).
 
-	normalize_close_payload(empty, empty, []) :-
-		!.
+	normalize_close_payload(empty, empty, []).
 	normalize_close_payload(status(Code), status(Code), [Byte0, Byte1]) :-
-		!,
 		close_code_bytes(Code, Byte0, Byte1).
 	normalize_close_payload(status(Code, Reason0), status(Code, Reason), [Byte0, Byte1| ReasonBytes]) :-
-		!,
 		close_code_bytes(Code, Byte0, Byte1),
 		text_bytes(Reason0, Reason, ReasonBytes).
-	normalize_close_payload(Payload, _NormalizedPayload, _PayloadBytes) :-
-		domain_error(http_websocket_close_payload, Payload).
 
 	close_code_bytes(Code, Byte0, Byte1) :-
 		(	integer(Code) ->
