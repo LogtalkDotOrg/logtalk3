@@ -23,9 +23,9 @@
 :- category(html).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2021-03-30,
+		date is 2021-06-11,
 		comment is 'HTML generation.'
 	]).
 
@@ -50,11 +50,22 @@
 		argnames is ['Element', 'Display']
 	]).
 
+	:- public(aggregate_resources/2).
+	:- mode(aggregate_resources(+list, -list), one).
+	:- info(aggregate_resources/2, [
+		comment is 'Returns a dependency-aware, deduplicated list of resource declarations.',
+		argnames is ['Declarations', 'Resources']
+	]).
+
 	:- private(doctype/1).
 	:- mode(doctype(?atom), one).
 	:- info(doctype/1, [
 		comment is 'Doctype text.',
 		argnames is ['DocType']
+	]).
+
+	:- uses(list, [
+		append/3, member/2, memberchk/2, reverse/2, selectchk/3, valid/1 as is_list/1
 	]).
 
 	generate(Sink, _) :-
@@ -128,6 +139,28 @@
 		write_html_open_tag(code, inline, Stream),
 		write(Stream, Content),
 		write_html_close_tag(code, inline, Stream).
+	% resource aggregation helpers
+	write_html_element(resources(Declarations), Stream) :-
+		!,
+		aggregate_resources(Declarations, Resources),
+		write_html(Resources, Stream).
+	write_html_element(resource(Type, Target), Stream) :-
+		!,
+		write_resource(Type, Target, [], Stream).
+	write_html_element(resource(Type, Target, Attributes), Stream) :-
+		!,
+		write_resource(Type, Target, Attributes, Stream).
+	write_html_element(css(Href), Stream) :-
+		!,
+		write_resource(css, Href, [], Stream).
+	write_html_element(stylesheet(Href), Stream) :-
+		!,
+		write_resource(css, Href, [], Stream).
+	write_html_element(js(Src), Stream) :-
+		!,
+		write_resource(js, Src, [], Stream).
+	write_html_element(dependency(_, _), _) :-
+		!.
 	% other elements
 	write_html_element(Tag, Stream) :-
 		functor(Tag, Name, Arity),
@@ -182,6 +215,80 @@
 		write(Stream, '"').
 	write_html_tag_attribute(Key-Value, Stream) :-
 		write_html_tag_attribute(Key=Value, Stream).
+
+	write_resource(Type, Target, Attributes, Stream) :-
+		normalize_attributes(Attributes, AttributesList),
+		(	(Type == css ; Type == stylesheet) ->
+			LinkAttributes = [rel=stylesheet, href=Target| AttributesList],
+			write_html_element(link(LinkAttributes), Stream)
+		;	(Type == js ; Type == script ; Type == javascript) ->
+			ScriptAttributes = [src=Target| AttributesList],
+			write_html_element(script(ScriptAttributes, ''), Stream)
+		;	domain_error(resource_type, Type)
+		).
+
+	aggregate_resources(Declarations, Resources) :-
+		collect_resources(Declarations, [], [], Resources0, Dependencies),
+		unique_resources(Resources0, UniqueResources),
+		order_dependencies(Dependencies, UniqueResources, Resources).
+
+	order_dependencies([], Resources, Resources).
+	order_dependencies([Dependency| Dependencies], Resources0, Resources) :-
+		order_dependency(Dependency, Resources0, Resources1),
+		order_dependencies(Dependencies, Resources1, Resources).
+
+	collect_resources([], Resources, Dependencies, Resources, Dependencies).
+	collect_resources([Declaration| Declarations], Resources0, Dependencies0, Resources, Dependencies) :-
+		normalize_declaration(Declaration, Normalized, DependencyTerms),
+		(	DependencyTerms == [] ->
+			append(Resources0, [Normalized], Resources1),
+			collect_resources(Declarations, Resources1, Dependencies0, Resources, Dependencies)
+		;	append(Dependencies0, [DependencyTerms], Dependencies1),
+			collect_resources(Declarations, Resources0, Dependencies1, Resources, Dependencies)
+		).
+
+	normalize_declaration(resource(Type, Target), resource(Type, Target, []), []).
+	normalize_declaration(resource(Type, Target, Attributes), resource(Type, Target, Attributes), []).
+	normalize_declaration(css(Href), resource(css, Href, []), []).
+	normalize_declaration(stylesheet(Href), resource(css, Href, []), []).
+	normalize_declaration(js(Src), resource(js, Src, []), []).
+	normalize_declaration(dependency(Dependent, Required), dependency(Dependent, Required), dependency(Dependent, Required)).
+	normalize_declaration(Declaration, Declaration, []).
+
+	order_dependency(dependency(Dependent, Required), Resources0, Resources) :-
+		canonical_resource(Dependent, DependentResource),
+		canonical_resource(Required, RequiredResource),
+		memberchk(DependentResource, Resources0),
+		memberchk(RequiredResource, Resources0),
+		selectchk(RequiredResource, Resources0, WithoutRequired),
+		selectchk(DependentResource, WithoutRequired, WithoutBoth),
+		Resources = [RequiredResource, DependentResource| WithoutBoth],
+		!.
+	order_dependency(_, Resources, Resources).
+
+	canonical_resource(resource(Type, Target, Attributes), resource(Type, Target, Attributes)).
+	canonical_resource(resource(Type, Target), resource(Type, Target, [])).
+	canonical_resource(css(Href), resource(css, Href, [])).
+	canonical_resource(stylesheet(Href), resource(css, Href, [])).
+	canonical_resource(js(Src), resource(js, Src, [])).
+	canonical_resource(Declaration, Declaration).
+
+	unique_resources(Resources, UniqueResources) :-
+		unique_resources(Resources, [], UniqueResources0),
+		reverse(UniqueResources0, UniqueResources).
+
+	unique_resources([], Seen, Seen).
+	unique_resources([Resource| Resources], Seen0, UniqueResources) :-
+		(	member(Resource, Seen0) ->
+			unique_resources(Resources, Seen0, UniqueResources)
+		;	unique_resources(Resources, [Resource| Seen0], UniqueResources)
+		).
+
+	normalize_attributes(Attributes, AttributesList) :-
+		is_list(Attributes),
+		!,
+		AttributesList = Attributes.
+	normalize_attributes(Attribute, [Attribute]).
 
 	write_html_open_tag(Name, Attributes, Breaks, Stream) :-
 		write(Stream, '<'), write(Stream, Name),

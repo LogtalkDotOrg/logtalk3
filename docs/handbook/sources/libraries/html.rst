@@ -151,6 +151,72 @@ Note that the callback always takes the form ``Object::Closure`` where
 generated content). More complex callbacks are possible by using lambda
 expressions.
 
+Working with resource declarations
+----------------------------------
+
+The renderer accepts explicit resource declarations in addition to the
+usual HTML elements. The supported resource declarations are:
+
+- ``resource(Type, Target)``
+- ``resource(Type, Target, Attributes)``
+- ``css(Href)``
+- ``js(Src)``
+- ``resources(Declarations)``
+- ``dependency(Dependent, Required)``
+
+Here, ``Type`` is ``css`` or ``js``, ``Target`` is the stylesheet or
+script location, ``Attributes`` is an optional list of HTML attributes
+added to the generated ``<link>`` or ``<script>`` element, ``Href`` and
+``Src`` are shorthand forms for the corresponding stylesheet or script
+target, ``Declarations`` is a list of resource specifications to
+aggregate, and ``dependency(Dependent, Required)`` expresses that the
+resource ``Dependent`` must be emitted after ``Required`` when ordering
+the generated output.
+
+The atom ``stylesheet`` can also be used as an alternative to ``css``.
+The atoms ``javascript`` and ``script`` can also be used as an
+alternative to ``js``.
+
+For example, the following term renders standard stylesheet and
+JavaScript links directly:
+
+::
+
+   | ?- current_output(Stream),
+        html5::generate(stream(Stream),
+            resources([
+                css('base.css'),
+                resource(js, 'app.js', [defer-true])
+        ])).
+
+This produces ``<link rel="stylesheet" href="base.css" />`` and
+``<script defer src="app.js"></script>``-style output.
+
+Aggregating and ordering resources
+----------------------------------
+
+A list of resource declarations can be wrapped with ``resources/1`` to
+normalize and aggregate them into a deterministic output order. Repeated
+entries are removed automatically, and
+``dependency(Dependent, Required)`` can be used to force a resource to
+be emitted after its prerequisite.
+
+For example:
+
+::
+
+   | ?- current_output(Stream),
+        html5::generate(stream(Stream),
+            resources([
+                dependency(resource(css, 'theme.css'), resource(css, 'base.css')),
+                css('theme.css'),
+                css('base.css'),
+                css('theme.css')
+        ])).
+
+This renders the ``base.css`` stylesheet before ``theme.css``, while
+also removing the duplicated ``theme.css`` entry from the final output.
+
 Working with custom elements
 ----------------------------
 

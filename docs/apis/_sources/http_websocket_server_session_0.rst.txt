@@ -15,7 +15,7 @@ Stateful WebSocket session predicates for server-side use with atom text represe
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -93,7 +93,7 @@ Accepts one incoming socket connection on the given listener, serves one WebSock
 ``serve_until_shutdown/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, and registers active sessions in the given registry for queued broadcasts.
+Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.
 
 | **Compilation flags:**
 |    ``static``
@@ -117,7 +117,7 @@ Accepts WebSocket opening handshakes on the given listener until request_shutdow
 ``serve_until_shutdown/6``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, and applies the given session-loop options to every active session.
+Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.
 
 | **Compilation flags:**
 |    ``static``
@@ -143,7 +143,7 @@ Accepts WebSocket opening handshakes on the given listener until request_shutdow
 ``request_shutdown/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term.
+Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.
 
 | **Compilation flags:**
 |    ``static``

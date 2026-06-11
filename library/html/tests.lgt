@@ -28,15 +28,18 @@ content(strong('Hello world!')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-06-11,
 		comment is 'Unit tests for the "html" library.'
 	]).
 
 	cover(html).
 	cover(html5).
 	cover(xhtml11).
+
+	cleanup :-
+		^^clean_file('foo.html').
 
 	test(html_01, error(instantiation_error)) :-
 		html5::generate(_, []).
@@ -60,29 +63,29 @@ content(strong('Hello world!')).
 	test(html_07, error(domain_error(html_element, bar(a)))) :-
 		html5::generate(file('foo.html'), bar(a)).
 
-	test(html_08, true) :-
+	test(html_08, deterministic) :-
 		^^suppress_text_output,
 		current_output(Stream),
 		html5::generate(stream(Stream), html([lang=en], [head(title('Hello world!')), body(p('Bye!'))])).
 
-	test(html_09, true(Assertion)) :-
+	test(html_09, deterministic(Assertion)) :-
 		^^set_text_output(''),
 		current_output(Stream),
 		html5::generate(stream(Stream), code([foo,bar,baz])),
 		^^text_output_assertion('<code>[foo,bar,baz]</code>', Assertion).
 
-	test(html_10, true) :-
+	test(html_10, deterministic) :-
 		^^suppress_text_output,
 		current_output(Stream),
 		xhtml11::generate(stream(Stream), html([lang=en], [head(title('Hello world!')), body(p('Bye!'))])).
 
-	test(html_11, true(Assertion)) :-
+	test(html_11, deterministic(Assertion)) :-
 		^^set_text_output(''),
 		current_output(Stream),
 		xhtml11::generate(stream(Stream), code([foo,bar,baz])),
 		^^text_output_assertion('<code>[foo,bar,baz]</code>', Assertion).
 
-	test(html_12, true) :-
+	test(html_12, deterministic) :-
 		^^suppress_text_output,
 		create_object(
 			Custom,
@@ -96,13 +99,28 @@ content(strong('Hello world!')).
 		current_output(Stream),
 		Custom::generate(stream(Stream), foo(bar)).
 
-	test(html_13, true(Assertion)) :-
+	test(html_13, deterministic(Assertion)) :-
 		^^set_text_output(''),
 		current_output(Stream),
 		html5::generate(stream(Stream), span(user::content)),
 		^^text_output_assertion('<span><strong>Hello world!</strong></span>', Assertion).
 
-	cleanup :-
-		^^clean_file('foo.html').
+	test(html_14, deterministic(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		html5::generate(stream(Stream),
+			resources([
+				dependency(resource(css, 'theme.css'), resource(css, 'base.css')),
+				css('theme.css'),
+				css('base.css'),
+				css('theme.css')
+			])),
+		^^text_output_assertion('<link rel="stylesheet" href="base.css" />\n<link rel="stylesheet" href="theme.css" />\n', Assertion).
+
+	test(html_15, deterministic(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		html5::generate(stream(Stream), resources([js('app.js'), resource(js, 'vendor.js')])),
+		^^text_output_assertion('<script src="app.js"></script><script src="vendor.js"></script>', Assertion).
 
 :- end_object.

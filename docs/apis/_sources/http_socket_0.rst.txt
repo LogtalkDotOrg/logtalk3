@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates built on top of the http_client_core an
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-09
+| **Date:** 2026-06-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -43,7 +43,7 @@ Sockets-backed HTTP transport predicates built on top of the http_client_core an
    - Connection stream access: The connection_streams/3 predicate exposes the binary input and output streams carried by both reusable client connection handles and upgraded WebSocket connection handles.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_listener_shutdown/1`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -210,6 +210,25 @@ Active listener worker records indexed by control term and run identifier.
 |    ``listener_active_worker_(Control,RunId,Worker)``
 | **Mode and number of proofs:**
 |    ``listener_active_worker_(?nonvar,?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: listener_endpoint_/3
+.. _http_socket/0::listener_endpoint_/3:
+
+``listener_endpoint_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Stored listener endpoints indexed by listener handle.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_endpoint_(Listener,Host,Port)``
+| **Mode and number of proofs:**
+|    ``listener_endpoint_(?compound,?atom,?integer)`` - ``zero_or_more``
 
 
 ------------

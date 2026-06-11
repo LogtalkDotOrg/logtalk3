@@ -165,6 +165,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#generating-a-html-document">Generating a HTML document</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-a-html-fragment">Generating a HTML fragment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-callbacks-to-generate-content">Working with callbacks to generate content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-resource-declarations">Working with resource declarations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aggregating-and-ordering-resources">Aggregating and ordering resources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-custom-elements">Working with custom elements</a></li>
 </ul>
 </li>
@@ -478,6 +480,63 @@ example:</p>
 <code class="docutils literal notranslate"><span class="pre">Closure</span></code> is extended with a single argument (to be bound to the
 generated content). More complex callbacks are possible by using lambda
 expressions.</p>
+</section>
+<section id="working-with-resource-declarations">
+<h2>Working with resource declarations<a class="headerlink" href="#working-with-resource-declarations" title="Link to this heading"></a></h2>
+<p>The renderer accepts explicit resource declarations in addition to the
+usual HTML elements. The supported resource declarations are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">resource(Type,</span> <span class="pre">Target)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource(Type,</span> <span class="pre">Target,</span> <span class="pre">Attributes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">css(Href)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">js(Src)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resources(Declarations)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dependency(Dependent,</span> <span class="pre">Required)</span></code></p></li>
+</ul>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">Type</span></code> is <code class="docutils literal notranslate"><span class="pre">css</span></code> or <code class="docutils literal notranslate"><span class="pre">js</span></code>, <code class="docutils literal notranslate"><span class="pre">Target</span></code> is the stylesheet or
+script location, <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> is an optional list of HTML attributes
+added to the generated <code class="docutils literal notranslate"><span class="pre">&lt;link&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element, <code class="docutils literal notranslate"><span class="pre">Href</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Src</span></code> are shorthand forms for the corresponding stylesheet or script
+target, <code class="docutils literal notranslate"><span class="pre">Declarations</span></code> is a list of resource specifications to
+aggregate, and <code class="docutils literal notranslate"><span class="pre">dependency(Dependent,</span> <span class="pre">Required)</span></code> expresses that the
+resource <code class="docutils literal notranslate"><span class="pre">Dependent</span></code> must be emitted after <code class="docutils literal notranslate"><span class="pre">Required</span></code> when ordering
+the generated output.</p>
+<p>The atom <code class="docutils literal notranslate"><span class="pre">stylesheet</span></code> can also be used as an alternative to <code class="docutils literal notranslate"><span class="pre">css</span></code>.
+The atoms <code class="docutils literal notranslate"><span class="pre">javascript</span></code> and <code class="docutils literal notranslate"><span class="pre">script</span></code> can also be used as an
+alternative to <code class="docutils literal notranslate"><span class="pre">js</span></code>.</p>
+<p>For example, the following term renders standard stylesheet and
+JavaScript links directly:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_output</span>(<span class="nv">Stream</span>),
+     html5<span class="o">::</span>generate(stream(<span class="nv">Stream</span>),
+         resources([
+             css(<span class="s">&#39;base.css&#39;</span>),
+             resource(js, <span class="s">&#39;app.js&#39;</span>, [defer<span class="o">-</span><span class="k">true</span>])
+     ])).
+</pre></div>
+</div>
+<p>This produces <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=&quot;stylesheet&quot;</span> <span class="pre">href=&quot;base.css&quot;</span> <span class="pre">/&gt;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">&lt;script</span> <span class="pre">defer</span> <span class="pre">src=&quot;app.js&quot;&gt;&lt;/script&gt;</span></code>-style output.</p>
+</section>
+<section id="aggregating-and-ordering-resources">
+<h2>Aggregating and ordering resources<a class="headerlink" href="#aggregating-and-ordering-resources" title="Link to this heading"></a></h2>
+<p>A list of resource declarations can be wrapped with <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> to
+normalize and aggregate them into a deterministic output order. Repeated
+entries are removed automatically, and
+<code class="docutils literal notranslate"><span class="pre">dependency(Dependent,</span> <span class="pre">Required)</span></code> can be used to force a resource to
+be emitted after its prerequisite.</p>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_output</span>(<span class="nv">Stream</span>),
+     html5<span class="o">::</span>generate(stream(<span class="nv">Stream</span>),
+         resources([
+             dependency(resource(css, <span class="s">&#39;theme.css&#39;</span>), resource(css, <span class="s">&#39;base.css&#39;</span>)),
+             css(<span class="s">&#39;theme.css&#39;</span>),
+             css(<span class="s">&#39;base.css&#39;</span>),
+             css(<span class="s">&#39;theme.css&#39;</span>)
+     ])).
+</pre></div>
+</div>
+<p>This renders the <code class="docutils literal notranslate"><span class="pre">base.css</span></code> stylesheet before <code class="docutils literal notranslate"><span class="pre">theme.css</span></code>, while
+also removing the duplicated <code class="docutils literal notranslate"><span class="pre">theme.css</span></code> entry from the final output.</p>
 </section>
 <section id="working-with-custom-elements">
 <h2>Working with custom elements<a class="headerlink" href="#working-with-custom-elements" title="Link to this heading"></a></h2>

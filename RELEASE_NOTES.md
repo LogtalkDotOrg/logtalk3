@@ -46,6 +46,9 @@ accept relative reference arguments.
 * ADDED: New `crypto` library providing transport-neutral cryptographic helper
 predicates.
 
+* ADDED: New `html` library support for CSS/JS resource declarations,
+aggregation, and dependency-aware ordering.
+
 * ADDED: New `http_core`, `http_client`, `http_cookies`, `http_multipart`,
 `http_router`, `http_server`, `http_socket`, `http_websocket`, `http_session`,
 `http_websocket_messages`, `http_websocket_session`, `http_directory_listing`,

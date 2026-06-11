@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-27
+| **Date:** 2026-06-10
 
 | **Compilation flags:**
 |    ``static``
@@ -72,6 +72,25 @@ Closes a listener previously opened with open_listener/4.
 |    ``close_listener(Listener)``
 | **Mode and number of proofs:**
 |    ``close_listener(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: request_listener_shutdown/1
+.. _http_socket_protocol/0::request_listener_shutdown/1:
+
+``request_listener_shutdown/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Best-effort wakeup request for a listener accept loop opened with open_listener/4. This predicate does not close the listener but causes a blocked accept call to return portably when possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_listener_shutdown(Listener)``
+| **Mode and number of proofs:**
+|    ``request_listener_shutdown(+compound)`` - ``one_or_error``
 
 
 ------------
@@ -363,7 +382,7 @@ Accepts and serves exactly Count incoming connections on the given listener usin
 ``serve_until_shutdown/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term.
+Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, then closes the listener before returning.
 
 | **Compilation flags:**
 |    ``static``
@@ -380,7 +399,7 @@ Accepts and serves incoming connections on the given listener until request_shut
     - Option ``workers(per_connection)``: Spawn one worker thread per accepted connection and wait for all workers when shutdown is requested. Requires backend thread support.
     - Option ``workers(pool(Size))``: Serve accepted connections using at most Size concurrent worker threads, waiting for worker completion notifications before accepting additional connections. Requires backend thread support.
     - Option ``workers(pool(Size, rolling))``: Alias for ``workers(pool(Size))``. Requires backend thread support.
-    - Shutdown behavior: Calling request_shutdown/1 closes the listener, stops accepting new connections, and waits for active workers to finish before the serving loop returns.
+    - Shutdown behavior: Calling request_shutdown/1 wakes the serving loop, stops accepting new connections, and waits for active workers to finish before the listener is closed and the serving loop returns.
 
 
 ------------
@@ -391,7 +410,7 @@ Accepts and serves incoming connections on the given listener until request_shut
 ``request_shutdown/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term.
+Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term and wakes any blocked accept call so the loop can terminate portably.
 
 | **Compilation flags:**
 |    ``static``
