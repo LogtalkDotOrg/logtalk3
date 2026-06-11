@@ -5,6 +5,7 @@
 
 This library provides lower-level opening-handshake predicates in the
 ``http_websocket_handshake`` object that is used by other libraries.
+Requires a backend supporting unbound integer arithmetic.
 
 API documentation
 -----------------

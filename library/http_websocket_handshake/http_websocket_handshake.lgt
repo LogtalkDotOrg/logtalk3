@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-11,
 		comment is 'Shared helpers for WebSocket opening-handshake key generation and accept-value computation.'
 	]).
 
@@ -64,10 +64,10 @@
 
 	websocket_accept(Key, Accept) :-
 		(   var(Key) ->
-			throw(error(instantiation_error, context(http_websocket_handshake::websocket_accept/2, _)))
+			instantiation_error
 		;   normalize_websocket_key(Key, NormalizedKey) ->
 			websocket_accept_from_key(NormalizedKey, Accept)
-		;   throw(error(domain_error(http_websocket_key, Key), context(http_websocket_handshake::websocket_accept/2, _)))
+		;   domain_error(http_websocket_key, Key)
 		).
 
 	normalize_websocket_key(Value, Key) :-
