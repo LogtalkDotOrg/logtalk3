@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
+		date is 2026-06-11,
 		comment is 'Helper session handler used by http_websocket wrapper tests.'
 	]).
 
@@ -44,7 +44,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
+		date is 2026-06-11,
 		comment is 'Helper client session handler that closes after receiving one text reply.'
 	]).
 
@@ -63,7 +63,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
+		date is 2026-06-11,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 
@@ -88,11 +88,11 @@
 				client_direct_text_exchange(Port, ClientSession),
 				Error,
 				(	catch(http_socket::close_listener(Listener), _, true),
-					catch(once(threaded_exit(server_accept_text_exchange(Listener, _ServerSession), Tag)), _, true),
+					catch(threaded_exit(server_accept_text_exchange(Listener, _ServerSession), Tag), _, true),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(server_accept_text_exchange(Listener, ServerSession), Tag)),
+			threaded_exit(server_accept_text_exchange(Listener, ServerSession), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			ServerSession = session(ServerResponse, server, chat, message(text, hello), message(close, status(1000, done))),
 			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, 'Echo: hello')),
@@ -109,11 +109,11 @@
 				client_direct_json_exchange(Port, JSON, ReplyJSON),
 				Error,
 				(	catch(http_socket::close_listener(Listener), _, true),
-					catch(once(threaded_exit(server_accept_json_exchange(Listener, _ServerReceivedJSON), Tag)), _, true),
+					catch(threaded_exit(server_accept_json_exchange(Listener, _ServerReceivedJSON), Tag), _, true),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(server_accept_json_exchange(Listener, _ReceivedJSON), Tag)),
+			threaded_exit(server_accept_json_exchange(Listener, _ReceivedJSON), Tag),
 			catch(http_socket::close_listener(Listener), _, true).
 
 		test(http_websocket_direct_term_2_01, deterministic(ReplyTerm == hello(world, 42))) :-
@@ -123,11 +123,11 @@
 				client_direct_term_exchange(Port, hello(world, 42), ReplyTerm),
 				Error,
 				(	catch(http_socket::close_listener(Listener), _, true),
-					catch(once(threaded_exit(server_accept_term_exchange(Listener, _ServerReceivedTerm), Tag)), _, true),
+					catch(threaded_exit(server_accept_term_exchange(Listener, _ServerReceivedTerm), Tag), _, true),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(server_accept_term_exchange(Listener, _ReceivedTerm), Tag)),
+			threaded_exit(server_accept_term_exchange(Listener, _ReceivedTerm), Tag),
 			catch(http_socket::close_listener(Listener), _, true).
 
 		test(http_websocket_open_session_5_01, deterministic) :-
@@ -137,11 +137,11 @@
 				client_open_session_exchange(Port, ClientResponse, ClientState),
 				Error,
 				(	catch(http_socket::close_listener(Listener), _, true),
-					catch(once(threaded_exit(server_accept_for_open_session(Listener, _ServerSession), Tag)), _, true),
+					catch(threaded_exit(server_accept_for_open_session(Listener, _ServerSession), Tag), _, true),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(server_accept_for_open_session(Listener, ServerSession), Tag)),
+			threaded_exit(server_accept_for_open_session(Listener, ServerSession), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			ServerSession = session(ServerResponse, message(text, hello), message(close, status(1000, done))),
 			status(ServerResponse, status(101, 'Switching Protocols')),
@@ -157,11 +157,11 @@
 				client_direct_text_exchange(Port, ClientSession),
 				Error,
 				(	catch(http_socket::close_listener(Listener), _, true),
-					catch(once(threaded_exit(server_serve_once_exchange(Listener, _Response, _State), Tag)), _, true),
+					catch(threaded_exit(server_serve_once_exchange(Listener, _Response, _State), Tag), _, true),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag)),
+			threaded_exit(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, hello)),
 			status(ServerResponse, status(101, 'Switching Protocols')),

@@ -38,7 +38,6 @@
 
 	:- public(open/3).
 	:- mode(open(+atom, -compound, +list), one_or_error).
-
 	:- info(open/3, [
 		comment is 'Opens a client WebSocket connection to the given URL, returning an opaque handle. Client handshake options are forwarded to ``http_client::open_websocket/4``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
 		argnames is ['URL', 'WebSocket', 'Options']
