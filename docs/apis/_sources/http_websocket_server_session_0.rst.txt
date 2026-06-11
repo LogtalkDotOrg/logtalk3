@@ -8,31 +8,27 @@
 ``http_websocket_server_session``
 =================================
 
-Stateful WebSocket session predicates for server-side use with atom text representation, including registry-backed broadcast helpers.
+Stateful WebSocket session predicates for server-side use with atom text representation.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket_session(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-10
+| **Date:** 2026-06-11
 
 | **Compilation flags:**
-|    ``static, context_switching_calls, threaded``
+|    ``static, context_switching_calls``
 
 
 | **Extends:**
 |    ``public`` :ref:`http_websocket_session(server,atom) <http_websocket_session/2>`
-| **Uses:**
-|    :ref:`http_socket <http_socket/0>`
-|    :ref:`http_websocket_session_registry <http_websocket_session_registry/0>`
-|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`http_websocket_session/2::initial_state/1`  :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_session/2::is_state/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_session/2::read_message/4`  :ref:`http_websocket_session/2::read_message/5`  :ref:`http_websocket_session/2::read_message/6`  :ref:`http_websocket_session/2::run_session/3`  :ref:`http_websocket_session/2::run_session/4`  :ref:`http_websocket_messages/1::type/2`  :ref:`http_websocket_session/2::write_message/2`  :ref:`http_websocket_session/2::write_message/3`  :ref:`http_websocket_session/2::write_message/4`  :ref:`http_websocket_session/2::write_message/5`  
+|     :ref:`http_websocket_session/2::initial_state/1`  :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_session/2::is_state/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_session/2::read_message/4`  :ref:`http_websocket_session/2::read_message/5`  :ref:`http_websocket_session/2::read_message/6`  :ref:`http_websocket_messages/1::type/2`  :ref:`http_websocket_session/2::write_message/2`  :ref:`http_websocket_session/2::write_message/3`  :ref:`http_websocket_session/2::write_message/4`  :ref:`http_websocket_session/2::write_message/5`  
 
 .. contents::
    :local:
@@ -41,120 +37,7 @@ Stateful WebSocket session predicates for server-side use with atom text represe
 Public predicates
 -----------------
 
-.. index:: serve_once/6
-.. _http_websocket_server_session/0::serve_once/6:
-
-``serve_once/6``
-^^^^^^^^^^^^^^^^
-
-Accepts one incoming socket connection on the given listener, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler until the close handshake completes or the peer closes the stream.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``serve_once(Listener,HandshakeHandler,SessionHandler,Response,State,ClientInfo)``
-| **Mode and number of proofs:**
-|    ``serve_once(+compound,+object_identifier,+object_identifier,-compound,-compound,-compound)`` - ``one_or_error``
-
-
-------------
-
-.. index:: serve_once/7
-.. _http_websocket_server_session/0::serve_once/7:
-
-``serve_once/7``
-^^^^^^^^^^^^^^^^
-
-Accepts one incoming socket connection on the given listener, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler and the given session-loop options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``serve_once(Listener,HandshakeHandler,SessionHandler,Response,State,ClientInfo,Options)``
-| **Mode and number of proofs:**
-|    ``serve_once(+compound,+object_identifier,+object_identifier,-compound,-compound,-compound,+list)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Option ``auto_pong(on)``: Automatically writes pong replies while still forwarding ping messages to the session handler.
-    - Option ``auto_pong(off)``: Disables automatic pong replies. This is the default.
-    - Option ``keepalive_interval(Seconds)``: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.
-    - Option ``idle_timeout(Seconds)``: Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.
-    - Option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.
-
-
-------------
-
-.. index:: serve_until_shutdown/5
-.. _http_websocket_server_session/0::serve_until_shutdown/5:
-
-``serve_until_shutdown/5``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``serve_until_shutdown(Listener,HandshakeHandler,SessionHandler,Registry,Control)``
-| **Mode and number of proofs:**
-|    ``serve_until_shutdown(+compound,+object_identifier,+object_identifier,+compound,+nonvar)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Thread support: This helper requires backend thread support so that multiple sessions can stay active concurrently.
-    - Handler actions: Plain normalized messages are written back to the originating session. ``broadcast(Message)`` queues ``Message`` for all registered sessions and ``broadcast_others(Message)`` queues it for all registered sessions except the originating one.
-
-
-------------
-
-.. index:: serve_until_shutdown/6
-.. _http_websocket_server_session/0::serve_until_shutdown/6:
-
-``serve_until_shutdown/6``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``serve_until_shutdown(Listener,HandshakeHandler,SessionHandler,Registry,Control,Options)``
-| **Mode and number of proofs:**
-|    ``serve_until_shutdown(+compound,+object_identifier,+object_identifier,+compound,+nonvar,+list)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Option ``auto_pong(on|off)``: Controls automatic pong replies in each active session loop.
-    - Option ``keepalive_interval(Seconds)``: Schedules empty ping messages when a peer stays silent for the given positive number of seconds.
-    - Option ``idle_timeout(Seconds)``: Closes a session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message.
-    - Option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in each session loop. Use a non-negative integer.
-
-
-------------
-
-.. index:: request_shutdown/1
-.. _http_websocket_server_session/0::request_shutdown/1:
-
-``request_shutdown/1``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``request_shutdown(Control)``
-| **Mode and number of proofs:**
-|    ``request_shutdown(+nonvar)`` - ``one_or_error``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------
@@ -164,81 +47,7 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: shutdown_seed_/1
-.. _http_websocket_server_session/0::shutdown_seed_/1:
-
-``shutdown_seed_/1``
-^^^^^^^^^^^^^^^^^^^^
-
-Last allocated shutdown run identifier for open-ended WebSocket server loops.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``shutdown_seed_(RunId)``
-| **Mode and number of proofs:**
-|    ``shutdown_seed_(?positive_integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: shutdown_control_/3
-.. _http_websocket_server_session/0::shutdown_control_/3:
-
-``shutdown_control_/3``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Registered shutdown control terms and their associated listeners.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``shutdown_control_(Control,Listener,RunId)``
-| **Mode and number of proofs:**
-|    ``shutdown_control_(?nonvar,?compound,?positive_integer)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: shutdown_requested_/2
-.. _http_websocket_server_session/0::shutdown_requested_/2:
-
-``shutdown_requested_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Recorded shutdown requests indexed by control term and run identifier.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``shutdown_requested_(Control,RunId)``
-| **Mode and number of proofs:**
-|    ``shutdown_requested_(?nonvar,?positive_integer)`` - ``zero_or_more``
-
-
-------------
-
-.. index:: active_worker_/3
-.. _http_websocket_server_session/0::active_worker_/3:
-
-``active_worker_/3``
-^^^^^^^^^^^^^^^^^^^^
-
-Active WebSocket session worker records indexed by control term and run identifier.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``active_worker_(Control,RunId,Worker)``
-| **Mode and number of proofs:**
-|    ``active_worker_(?nonvar,?positive_integer,?compound)`` - ``zero_or_more``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(websocket_http_websocket_session_handler,
+:- object(websocket_handshake_handler,
 	implements(http_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
-		comment is 'WebSocket handshake handler used by the http_websocket_session tests.'
+		date is 2026-06-11,
+		comment is 'WebSocket handshake handler used by the http_websocket_service tests.'
 	]).
 
 	handle(Request, Response) :-
@@ -35,13 +35,13 @@
 :- end_object.
 
 
-:- object(websocket_session_loop_handler,
-	implements(http_websocket_session_handler_protocol)).
+:- object(websocket_service_loop_handler,
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-11,
 		comment is 'Callback object used by the higher-level session-loop tests.'
 	]).
 
@@ -56,13 +56,13 @@
 :- end_object.
 
 
-:- object(websocket_client_session_loop_handler,
-	implements(http_websocket_session_handler_protocol)).
+:- object(websocket_client_service_loop_handler,
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-11,
 		comment is 'Callback object used by the client-side handshake-plus-session convenience tests.'
 	]).
 
@@ -78,12 +78,12 @@
 
 
 :- object(websocket_keepalive_close_handler,
-	implements(http_websocket_session_handler_protocol)).
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-11,
 		comment is 'Callback object used to capture a client keepalive ping and then close the session.'
 	]).
 
@@ -131,13 +131,13 @@
 :- end_object.
 
 
-:- object(websocket_broadcast_session_handler,
-	implements(http_websocket_session_handler_protocol)).
+:- object(websocket_broadcast_service_handler,
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-11,
 		comment is 'Callback object used by the registry-backed broadcast server tests.'
 	]).
 
@@ -152,13 +152,13 @@
 :- end_object.
 
 
-:- object(websocket_close_broadcast_session_handler,
-	implements(http_websocket_session_handler_protocol)).
+:- object(websocket_close_broadcast_service_handler,
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-06-11,
 		comment is 'Callback object used to verify that registry actions are skipped when a peer close is received.'
 	]).
 
@@ -171,13 +171,13 @@
 :- end_object.
 
 
-:- object(websocket_close_then_broadcast_session_handler,
-	implements(http_websocket_session_handler_protocol)).
+:- object(websocket_close_then_broadcast_service_handler,
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-06-11,
 		comment is 'Callback object used to verify that queued registry messages are not flushed after sending a close frame.'
 	]).
 

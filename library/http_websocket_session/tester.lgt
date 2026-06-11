@@ -19,30 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(sockets, supported),
-	current_prolog_flag(bounded, false)
-)).
+:- if(current_prolog_flag(bounded, false)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(crypto(loader)),
 		logtalk_load(options(loader)),
-		logtalk_load(os(loader)),
-		logtalk_load(timeout(loader)),
-		logtalk_load(http_client(loader)),
-		logtalk_load(http_socket(loader)),
 		logtalk_load(http_websocket_frames(loader)),
 		logtalk_load(http_websocket_messages(loader)),
-		logtalk_load([
-			http_websocket_session_handler_protocol,
-			http_websocket_session_registry,
-			http_websocket_session
-		], [
+		logtalk_load(http_websocket_session, [
 			debug(on),
 			source_data(on)
 		]),
-		logtalk_load(test_objects),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run

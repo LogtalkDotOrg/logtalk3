@@ -20,7 +20,7 @@
 
 
 :- object(websocket_echo_session_handler,
-	implements(http_websocket_session_handler_protocol)).
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,
@@ -39,7 +39,7 @@
 
 
 :- object(websocket_close_after_echo_handler,
-	implements(http_websocket_session_handler_protocol)).
+	implements(http_websocket_service_handler_protocol)).
 
 	:- info([
 		version is 1:0:0,

@@ -168,7 +168,7 @@
 	:- mode(open_session(+atom, +object_identifier, -compound, -compound), one_or_error).
 
 	:- info(open_session/4, [
-		comment is 'Convenience wrapper over ``http_websocket_client_session::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.',
+		comment is 'Convenience wrapper over ``http_websocket_client_service::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.',
 		argnames is ['URL', 'Handler', 'Response', 'State']
 	]).
 
@@ -176,7 +176,7 @@
 	:- mode(open_session(+atom, +object_identifier, -compound, -compound, +list), one_or_error).
 
 	:- info(open_session/5, [
-		comment is 'Convenience wrapper over ``http_websocket_client_session::open/5``.',
+		comment is 'Convenience wrapper over ``http_websocket_client_service::open/5``.',
 		argnames is ['URL', 'Handler', 'Response', 'State', 'Options']
 	]).
 
@@ -234,8 +234,12 @@
 		close_connection/1, connection_streams/3, serve_websocket_once/5
 	]).
 
+	:- uses(http_websocket_client_service, [
+		open/5 as open_client_session/5
+	]).
+
 	:- uses(http_websocket_client_session, [
-		initial_state/1 as client_initial_state/1, open/5 as open_client_session/5,
+		initial_state/1 as client_initial_state/1,
 		read_message/6 as client_read_message/6, write_message/5 as client_write_message/5
 	]).
 
@@ -243,9 +247,13 @@
 		is_message/1, message/3 as websocket_message/3
 	]).
 
+	:- uses(http_websocket_server_service, [
+		serve_once/7 as serve_server_session/7
+	]).
+
 	:- uses(http_websocket_server_session, [
 		initial_state/1 as server_initial_state/1, read_message/6 as server_read_message/6,
-		serve_once/7 as serve_server_session/7, write_message/5 as server_write_message/5
+		write_message/5 as server_write_message/5
 	]).
 
 	:- uses(json, [

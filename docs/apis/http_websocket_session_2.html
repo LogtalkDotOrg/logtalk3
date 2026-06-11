@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_websocket_session_handler_protocol" href="http_websocket_session_handler_protocol_0.html" />
+    <link rel="next" title="http_websocket_session_read_options" href="http_websocket_session_read_options_0.html" />
     <link rel="prev" title="http_websocket_server_session" href="http_websocket_server_session_0.html" />
    
 </head>
@@ -182,14 +182,12 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-frames"><span class="xref std std-ref">http_websocket_frames</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-handshake"><span class="xref std std-ref">http_websocket_handshake</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-service"><span class="xref std std-ref">http_websocket_service</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket-session"><span class="xref std std-ref">http_websocket_session</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_client_session_0.html">http_websocket_client_session</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_server_session_0.html">http_websocket_server_session</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_session(Role,TextRepresentation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_handler_protocol_0.html">http_websocket_session_handler_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_loop_options_0.html">http_websocket_session_loop_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_read_options_0.html">http_websocket_session_read_options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_registry_0.html">http_websocket_session_registry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_write_options_0.html">http_websocket_session_write_options</a></li>
 </ul>
 </li>
@@ -392,7 +390,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Role</span></code> - Peer role for masking policy. Possible values are <code class="docutils literal notranslate"><span class="pre">client</span></code> and <code class="docutils literal notranslate"><span class="pre">server</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">TextRepresentation</span></code> - Text representation to be used for text messages and close reasons. Possible values are <code class="docutils literal notranslate"><span class="pre">atom</span></code> (default), <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code>.</p></li>
 </ul>
-<p>Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and optionally run a higher-level callback loop on upgraded http_socket connections.</p>
+<p>Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and track close-handshake state. The callback-driven session loops are provided by the http_websocket_service library.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -402,12 +400,12 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-02</div>
+<div class="line"><strong>Date:</strong> 2026-06-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls,</span> <span class="pre">threaded</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -418,14 +416,10 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="crypto_0.html#crypto-0"><span class="std std-ref">crypto</span></a></div>
-<div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_frames_0.html#http-websocket-frames-0"><span class="std std-ref">http_websocket_frames</span></a></div>
-<div class="line"><a class="reference internal" href="http_websocket_session_loop_options_0.html#http-websocket-session-loop-options-0"><span class="std std-ref">http_websocket_session_loop_options</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_session_read_options_0.html#http-websocket-session-read-options-0"><span class="std std-ref">http_websocket_session_read_options</span></a></div>
-<div class="line"><a class="reference internal" href="http_websocket_session_registry_0.html#http-websocket-session-registry-0"><span class="std std-ref">http_websocket_session_registry</span></a></div>
 <div class="line"><a class="reference internal" href="http_websocket_session_write_options_0.html#http-websocket-session-write-options-0"><span class="std std-ref">http_websocket_session_write_options</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -433,7 +427,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option precedence: When the same read, write, or loop option is given multiple times, the first occurrence is used.</p></li>
+<li><p>Option precedence: When the same read or write option is given multiple times, the first occurrence is used.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -455,20 +449,21 @@
 <li><p><a class="reference internal" href="#write-message-3" id="id8"><code class="docutils literal notranslate"><span class="pre">write_message/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#write-message-4" id="id9"><code class="docutils literal notranslate"><span class="pre">write_message/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#write-message-5" id="id10"><code class="docutils literal notranslate"><span class="pre">write_message/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#run-session-3" id="id11"><code class="docutils literal notranslate"><span class="pre">run_session/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#run-session-4" id="id12"><code class="docutils literal notranslate"><span class="pre">run_session/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#run-session-connection-5" id="id14"><code class="docutils literal notranslate"><span class="pre">run_session_connection/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#run-once-with-cleanup-2" id="id15"><code class="docutils literal notranslate"><span class="pre">run_once_with_cleanup_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-non-negative-integer-option-4" id="id16"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#generate-masking-key-1" id="id17"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#validate-role-0" id="id12"><code class="docutils literal notranslate"><span class="pre">validate_role/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#read-session-message-5" id="id13"><code class="docutils literal notranslate"><span class="pre">read_session_message/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#apply-session-read-6" id="id14"><code class="docutils literal notranslate"><span class="pre">apply_session_read/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#current-close-state-2" id="id15"><code class="docutils literal notranslate"><span class="pre">current_close_state/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#close-handshake-completed-1" id="id16"><code class="docutils literal notranslate"><span class="pre">close_handshake_completed/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#best-effort-protocol-error-close-3" id="id17"><code class="docutils literal notranslate"><span class="pre">best_effort_protocol_error_close/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#generate-masking-key-1" id="id18"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id19">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id20">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -712,77 +707,31 @@
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">fragment_size(Size)</span></code>: When writing <code class="docutils literal notranslate"><span class="pre">text</span></code> or <code class="docutils literal notranslate"><span class="pre">binary</span></code> messages, split the payload into frames of at most <code class="docutils literal notranslate"><span class="pre">Size</span></code> bytes. Control messages always remain single final frames.</p></li>
 </ul>
 </div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="run-session-3">
-<span id="http-websocket-session-2-run-session-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run_session/3</span></code></a><a class="headerlink" href="#run-session-3" title="Link to this heading"></a></h3>
-<p>Runs a higher-level session loop on an upgraded http_socket WebSocket connection until the close handshake completes or the peer closes the stream, then closes the upgraded connection automatically.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_session(Connection,Handler,State)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_session(+compound,+object_identifier,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Handler protocol: The handler object must conform to the <code class="docutils literal notranslate"><span class="pre">http_websocket_session_handler_protocol</span></code> protocol and return a list of normalized reply messages for each received message.</p></li>
-<li><p>Connection ownership: This predicate takes ownership of the upgraded connection and closes it before succeeding or rethrowing any exception.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="run-session-4">
-<span id="http-websocket-session-2-run-session-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run_session/4</span></code></a><a class="headerlink" href="#run-session-4" title="Link to this heading"></a></h3>
-<p>Runs a higher-level session loop on an upgraded http_socket WebSocket connection using the given loop options, then closes the upgraded connection automatically.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_session(Connection,Handler,State,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_session(+compound,+object_identifier,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(on)</span></code>: Automatically writes pong replies while still forwarding ping messages to the handler.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(off)</span></code>: Disables automatic pong replies. This is the default.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: When no inbound message is received for the given positive number of seconds, writes an empty ping message and continues the loop. This option requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">idle_timeout(Seconds)</span></code>: When no inbound message is received for the given positive number of seconds, writes <code class="docutils literal notranslate"><span class="pre">message(close,</span> <span class="pre">status(1001,</span> <span class="pre">idle_timeout))</span></code> and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Oversized frames are treated as <code class="docutils literal notranslate"><span class="pre">1009</span></code> close errors in the session loop. Use a non-negative integer.</p></li>
-</ul>
-</div></blockquote>
 </section>
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<section id="run-session-connection-5">
-<span id="http-websocket-session-2-run-session-connection-5"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run_session_connection/5</span></code></a><a class="headerlink" href="#run-session-connection-5" title="Link to this heading"></a></h3>
-<p>Protected helper that runs the callback-driven session loop on an upgraded WebSocket connection starting from the given session state and using the given loop options. Connection ownership is handled by the caller.</p>
+<section id="validate-role-0">
+<span id="http-websocket-session-2-validate-role-0"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_role/0</span></code></a><a class="headerlink" href="#validate-role-0" title="Link to this heading"></a></h3>
+<p>Validates the session role parameter. Throws a domain error when the role is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_role</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="read-session-message-5">
+<span id="http-websocket-session-2-read-session-message-5"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">read_session_message/5</span></code></a><a class="headerlink" href="#read-session-message-5" title="Link to this heading"></a></h3>
+<p>Protected helper that validates the session role and state and reads the next session-level message, returning the updated pending-fragment bookkeeping term and the message. Close-state transitions are left to the caller.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -792,34 +741,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_session_connection(Connection,HandlerDescriptor,State,UpdatedState,Options)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_session_message(Stream,State,MaxPayloadLength,Pending,Message)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_session_connection(+compound,+compound,+compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_session_message(+stream_or_alias,+compound,+term,-compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="run-once-with-cleanup-2">
-<span id="http-websocket-session-2-run-once-with-cleanup-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run_once_with_cleanup_/2</span></code></a><a class="headerlink" href="#run-once-with-cleanup-2" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Meta-predicate template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_once_with_cleanup_(0,0)</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="validate-non-negative-integer-option-4">
-<span id="http-websocket-session-2-validate-non-negative-integer-option-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option/4</span></code></a><a class="headerlink" href="#validate-non-negative-integer-option-4" title="Link to this heading"></a></h3>
-<p>Validates a non-negative integer option value for the given domain and option name.</p>
+<section id="apply-session-read-6">
+<span id="http-websocket-session-2-apply-session-read-6"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">apply_session_read/6</span></code></a><a class="headerlink" href="#apply-session-read-6" title="Link to this heading"></a></h3>
+<p>Protected helper that applies the close-state and automatic control-message transitions for a message read outside this object and returns the updated session state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -829,17 +762,80 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option(Domain,Name,Value,ValidatedValue)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">apply_session_read(Output,State,AutoPong,Pending,Message,UpdatedState)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_non_negative_integer_option(+atom,+atom,&#64;term,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">apply_session_read(+stream_or_alias,+compound,+atom,+compound,+term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="current-close-state-2">
+<span id="http-websocket-session-2-current-close-state-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_close_state/2</span></code></a><a class="headerlink" href="#current-close-state-2" title="Link to this heading"></a></h3>
+<p>Protected helper that returns the close-handshake component of a session state term. Open states are reported as <code class="docutils literal notranslate"><span class="pre">open</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_close_state(State,CloseState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">current_close_state(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="close-handshake-completed-1">
+<span id="http-websocket-session-2-close-handshake-completed-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close_handshake_completed/1</span></code></a><a class="headerlink" href="#close-handshake-completed-1" title="Link to this heading"></a></h3>
+<p>Protected helper that is true when the given session state records a completed close handshake.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close_handshake_completed(State)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">close_handshake_completed(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="best-effort-protocol-error-close-3">
+<span id="http-websocket-session-2-best-effort-protocol-error-close-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">best_effort_protocol_error_close/3</span></code></a><a class="headerlink" href="#best-effort-protocol-error-close-3" title="Link to this heading"></a></h3>
+<p>Protected helper that writes a best-effort close message mapping the given protocol error to its close status code when the session close state still allows it. Write errors are ignored.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">best_effort_protocol_error_close(Output,State,Error)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">best_effort_protocol_error_close(+stream_or_alias,+compound,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="generate-masking-key-1">
-<span id="http-websocket-session-2-generate-masking-key-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a><a class="headerlink" href="#generate-masking-key-1" title="Link to this heading"></a></h3>
+<span id="http-websocket-session-2-generate-masking-key-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate_masking_key/1</span></code></a><a class="headerlink" href="#generate-masking-key-1" title="Link to this heading"></a></h3>
 <p>Protected hook that returns the four-byte masking key to use for outgoing client frames. The default implementation delegates to <code class="docutils literal notranslate"><span class="pre">crypto::random_bytes/2</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -875,7 +871,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="http_websocket_server_session_0.html" class="btn btn-neutral float-left" title="http_websocket_server_session" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_websocket_session_handler_protocol_0.html" class="btn btn-neutral float-right" title="http_websocket_session_handler_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_websocket_session_read_options_0.html" class="btn btn-neutral float-right" title="http_websocket_session_read_options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

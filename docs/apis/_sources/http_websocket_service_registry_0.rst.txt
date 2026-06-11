@@ -1,0 +1,319 @@
+.. index:: single: http_websocket_service_registry
+.. _http_websocket_service_registry/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_service_registry``
+===================================
+
+Session registry predicates for active WebSocket sessions and queued broadcast delivery.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_service(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`http_websocket_messages <http_websocket_messages/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open/1
+.. _http_websocket_service_registry/0::open/1:
+
+``open/1``
+^^^^^^^^^^
+
+Opens a new empty WebSocket session registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Registry)``
+| **Mode and number of proofs:**
+|    ``open(-compound)`` - ``one``
+
+
+------------
+
+.. index:: close/1
+.. _http_websocket_service_registry/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes a session registry and removes all registered sessions and queued messages.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Registry)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: register/2
+.. _http_websocket_service_registry/0::register/2:
+
+``register/2``
+^^^^^^^^^^^^^^
+
+Registers a new active session in the given registry and returns its session identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``register(Registry,Session)``
+| **Mode and number of proofs:**
+|    ``register(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: unregister/2
+.. _http_websocket_service_registry/0::unregister/2:
+
+``unregister/2``
+^^^^^^^^^^^^^^^^
+
+Removes a session from the given registry together with any queued outbound messages.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unregister(Registry,Session)``
+| **Mode and number of proofs:**
+|    ``unregister(+compound,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: session/2
+.. _http_websocket_service_registry/0::session/2:
+
+``session/2``
+^^^^^^^^^^^^^
+
+Enumerates active session identifiers registered in the given registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``session(Registry,Session)``
+| **Mode and number of proofs:**
+|    ``session(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: sessions/2
+.. _http_websocket_service_registry/0::sessions/2:
+
+``sessions/2``
+^^^^^^^^^^^^^^
+
+Returns the list of active session identifiers registered in the given registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sessions(Registry,Sessions)``
+| **Mode and number of proofs:**
+|    ``sessions(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: session_count/2
+.. _http_websocket_service_registry/0::session_count/2:
+
+``session_count/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the number of active sessions currently registered in the given registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``session_count(Registry,Count)``
+| **Mode and number of proofs:**
+|    ``session_count(+compound,-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send/3
+.. _http_websocket_service_registry/0::send/3:
+
+``send/3``
+^^^^^^^^^^
+
+Queues a normalized outbound message for the specified registered session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send(Registry,Session,Message)``
+| **Mode and number of proofs:**
+|    ``send(+compound,+compound,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: broadcast/2
+.. _http_websocket_service_registry/0::broadcast/2:
+
+``broadcast/2``
+^^^^^^^^^^^^^^^
+
+Queues a normalized outbound message for all currently registered sessions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``broadcast(Registry,Message)``
+| **Mode and number of proofs:**
+|    ``broadcast(+compound,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: broadcast_except/3
+.. _http_websocket_service_registry/0::broadcast_except/3:
+
+``broadcast_except/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Queues a normalized outbound message for all currently registered sessions except the specified session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``broadcast_except(Registry,Session,Message)``
+| **Mode and number of proofs:**
+|    ``broadcast_except(+compound,+compound,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: take_pending/3
+.. _http_websocket_service_registry/0::take_pending/3:
+
+``take_pending/3``
+^^^^^^^^^^^^^^^^^^
+
+Removes and returns the queued outbound messages for the specified registered session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``take_pending(Registry,Session,Messages)``
+| **Mode and number of proofs:**
+|    ``take_pending(+compound,+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: registry_seed_/1
+.. _http_websocket_service_registry/0::registry_seed_/1:
+
+``registry_seed_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Last allocated registry identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``registry_seed_(RegistryId)``
+| **Mode and number of proofs:**
+|    ``registry_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: registry_state_/2
+.. _http_websocket_service_registry/0::registry_state_/2:
+
+``registry_state_/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Per-registry next session identifier state.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``registry_state_(RegistryId,NextSessionId)``
+| **Mode and number of proofs:**
+|    ``registry_state_(?positive_integer,?non_negative_integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: registry_session_/3
+.. _http_websocket_service_registry/0::registry_session_/3:
+
+``registry_session_/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Registered sessions and their queued outbound messages indexed by registry identifier. Messages are stored in reverse order to make enqueue operations constant time.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``registry_session_(RegistryId,SessionId,QueuedMessagesReversed)``
+| **Mode and number of proofs:**
+|    ``registry_session_(?positive_integer,?positive_integer,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

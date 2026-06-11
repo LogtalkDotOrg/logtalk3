@@ -1834,7 +1834,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::broadcast/2>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::broadcast/2>`
 
 ``broadcast_except/3``
 ----------------------
@@ -1844,7 +1844,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::broadcast_except/3>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::broadcast_except/3>`
 
 ``built_date/1``
 ----------------
@@ -2793,7 +2793,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_cookie_jar <http_cookie_jar/0::close/1>`
 * :ref:`http_server_session <http_server_session/0::close/1>`
 * :ref:`http_websocket <http_websocket/0::close/1>`
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::close/1>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::close/1>`
 
 ``close/2``
 -----------
@@ -9473,7 +9473,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_handler_protocol <http_handler_protocol/0::handle/2>`
 * :ref:`http_router <http_router/0::handle/2>`
-* :ref:`http_websocket_session_handler_protocol <http_websocket_session_handler_protocol/0::handle/2>`
+* :ref:`http_websocket_service_handler_protocol <http_websocket_service_handler_protocol/0::handle/2>`
 
 ``harmonic_mean/2``
 -------------------
@@ -14029,7 +14029,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_loop_options <http_websocket_session_loop_options/0::merged_options/2>`
+* :ref:`http_websocket_service_loop_options <http_websocket_service_loop_options/0::merged_options/2>`
 * :ref:`http_websocket_session_read_options <http_websocket_session_read_options/0::merged_options/2>`
 * :ref:`http_websocket_session_write_options <http_websocket_session_write_options/0::merged_options/2>`
 
@@ -15992,7 +15992,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_session <http_client_session/0::open/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/1>`
 * :ref:`http_server_session <http_server_session/0::open/1>`
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::open/1>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::open/1>`
 
 ``open/2``
 ----------
@@ -16027,7 +16027,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client_digest_session <http_client_digest_session/0::open/4>`
-* :ref:`http_websocket_client_session <http_websocket_client_session/0::open/4>`
+* :ref:`http_websocket_client_service <http_websocket_client_service/0::open/4>`
 
 ``open/5``
 ----------
@@ -16037,7 +16037,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_client_session <http_websocket_client_session/0::open/5>`
+* :ref:`http_websocket_client_service <http_websocket_client_service/0::open/5>`
 
 ``open_api_bad_request_response/1``
 -----------------------------------
@@ -20227,7 +20227,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::register/2>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::register/2>`
 
 ``regressor_options/2``
 -----------------------
@@ -20702,7 +20702,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_socket_protocol <http_socket_protocol/0::request_shutdown/1>`
-* :ref:`http_websocket_server_session <http_websocket_server_session/0::request_shutdown/1>`
+* :ref:`http_websocket_server_service <http_websocket_server_service/0::request_shutdown/1>`
 
 ``rescale/3``
 -------------
@@ -21309,7 +21309,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::run_session/3>`
+* :ref:`http_websocket_service(Role,TextRepresentation) <http_websocket_service/2::run_session/3>`
 
 ``run_session/4``
 -----------------
@@ -21319,7 +21319,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::run_session/4>`
+* :ref:`http_websocket_service(Role,TextRepresentation) <http_websocket_service/2::run_session/4>`
 
 ``run_test_sets/1``
 -------------------
@@ -21899,7 +21899,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_websocket <http_websocket/0::send/3>`
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::send/3>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::send/3>`
 * :ref:`redis <redis/0::send/3>`
 
 ``send/4``
@@ -22161,7 +22161,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_websocket <http_websocket/0::serve_once/6>`
-* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_once/6>`
+* :ref:`http_websocket_server_service <http_websocket_server_service/0::serve_once/6>`
 
 ``serve_once/7``
 ----------------
@@ -22171,7 +22171,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_once/7>`
+* :ref:`http_websocket_server_service <http_websocket_server_service/0::serve_once/7>`
 
 ``serve_until_shutdown/4``
 --------------------------
@@ -22191,7 +22191,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_until_shutdown/5>`
+* :ref:`http_websocket_server_service <http_websocket_server_service/0::serve_until_shutdown/5>`
 
 ``serve_until_shutdown/6``
 --------------------------
@@ -22201,7 +22201,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_server_session <http_websocket_server_session/0::serve_until_shutdown/6>`
+* :ref:`http_websocket_server_service <http_websocket_server_service/0::serve_until_shutdown/6>`
 
 ``serve_websocket/4``
 ---------------------
@@ -22302,7 +22302,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::session/2>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::session/2>`
 
 ``session_count/2``
 -------------------
@@ -22312,7 +22312,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::session_count/2>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::session_count/2>`
 
 ``sessions/2``
 --------------
@@ -22322,7 +22322,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::sessions/2>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::sessions/2>`
 
 ``set/1``
 ---------
@@ -24060,7 +24060,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::take_pending/3>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::take_pending/3>`
 
 ``talker/2``
 ------------
@@ -24996,7 +24996,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket_session_registry <http_websocket_session_registry/0::unregister/2>`
+* :ref:`http_websocket_service_registry <http_websocket_service_registry/0::unregister/2>`
 
 ``unsubscribe/3``
 -----------------

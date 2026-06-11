@@ -12,35 +12,31 @@
 * ``TextRepresentation`` - Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.
 
 
-Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and optionally run a higher-level callback loop on upgraded http_socket connections.
+Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and track close-handshake state. The callback-driven session loops are provided by the http_websocket_service library.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket_session(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-02
+| **Date:** 2026-06-11
 
 | **Compilation flags:**
-|    ``static, context_switching_calls, threaded``
+|    ``static, context_switching_calls``
 
 
 | **Extends:**
 |    ``public`` :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1>`
 | **Uses:**
 |    :ref:`crypto <crypto/0>`
-|    :ref:`http_socket <http_socket/0>`
 |    :ref:`http_websocket_frames <http_websocket_frames/0>`
-|    :ref:`http_websocket_session_loop_options <http_websocket_session_loop_options/0>`
 |    :ref:`http_websocket_session_read_options <http_websocket_session_read_options/0>`
-|    :ref:`http_websocket_session_registry <http_websocket_session_registry/0>`
 |    :ref:`http_websocket_session_write_options <http_websocket_session_write_options/0>`
 |    :ref:`list <list/0>`
-|    :ref:`os <os/0>`
 
 | **Remarks:**
 
-   - Option precedence: When the same read, write, or loop option is given multiple times, the first occurrence is used.
+   - Option precedence: When the same read or write option is given multiple times, the first occurrence is used.
 
 | **Inherited public predicates:**
 |     :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_messages/1::type/2`  
@@ -251,108 +247,117 @@ Writes one validated WebSocket message using the masking policy implied by the s
 
 ------------
 
-.. index:: run_session/3
-.. _http_websocket_session/2::run_session/3:
-
-``run_session/3``
-^^^^^^^^^^^^^^^^^
-
-Runs a higher-level session loop on an upgraded http_socket WebSocket connection until the close handshake completes or the peer closes the stream, then closes the upgraded connection automatically.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``run_session(Connection,Handler,State)``
-| **Mode and number of proofs:**
-|    ``run_session(+compound,+object_identifier,-compound)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Handler protocol: The handler object must conform to the ``http_websocket_session_handler_protocol`` protocol and return a list of normalized reply messages for each received message.
-    - Connection ownership: This predicate takes ownership of the upgraded connection and closes it before succeeding or rethrowing any exception.
-
-
-------------
-
-.. index:: run_session/4
-.. _http_websocket_session/2::run_session/4:
-
-``run_session/4``
-^^^^^^^^^^^^^^^^^
-
-Runs a higher-level session loop on an upgraded http_socket WebSocket connection using the given loop options, then closes the upgraded connection automatically.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``run_session(Connection,Handler,State,Options)``
-| **Mode and number of proofs:**
-|    ``run_session(+compound,+object_identifier,-compound,+list)`` - ``one_or_error``
-
-| **Remarks:**
-
-    - Option ``auto_pong(on)``: Automatically writes pong replies while still forwarding ping messages to the handler.
-    - Option ``auto_pong(off)``: Disables automatic pong replies. This is the default.
-    - Option ``keepalive_interval(Seconds)``: When no inbound message is received for the given positive number of seconds, writes an empty ping message and continues the loop. This option requires backend thread support.
-    - Option ``idle_timeout(Seconds)``: When no inbound message is received for the given positive number of seconds, writes ``message(close, status(1001, idle_timeout))`` and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.
-    - Option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.
-
-
-------------
-
 Protected predicates
 --------------------
 
-.. index:: run_session_connection/5
-.. _http_websocket_session/2::run_session_connection/5:
+.. index:: validate_role/0
+.. _http_websocket_session/2::validate_role/0:
 
-``run_session_connection/5``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``validate_role/0``
+^^^^^^^^^^^^^^^^^^^
 
-Protected helper that runs the callback-driven session loop on an upgraded WebSocket connection starting from the given session state and using the given loop options. Connection ownership is handled by the caller.
+Validates the session role parameter. Throws a domain error when the role is neither ``client`` nor ``server``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``validate_role`` - ``one_or_error``
+
+
+------------
+
+.. index:: read_session_message/5
+.. _http_websocket_session/2::read_session_message/5:
+
+``read_session_message/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that validates the session role and state and reads the next session-level message, returning the updated pending-fragment bookkeeping term and the message. Close-state transitions are left to the caller.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``run_session_connection(Connection,HandlerDescriptor,State,UpdatedState,Options)``
+|    ``read_session_message(Stream,State,MaxPayloadLength,Pending,Message)``
 | **Mode and number of proofs:**
-|    ``run_session_connection(+compound,+compound,+compound,-compound,+list)`` - ``one_or_error``
+|    ``read_session_message(+stream_or_alias,+compound,+term,-compound,-term)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: run_once_with_cleanup_/2
-.. _http_websocket_session/2::run_once_with_cleanup_/2:
+.. index:: apply_session_read/6
+.. _http_websocket_session/2::apply_session_read/6:
 
-``run_once_with_cleanup_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``apply_session_read/6``
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:**
-|    ``static``
-
-| **Meta-predicate template:**
-|    ``run_once_with_cleanup_(0,0)``
-
-------------
-
-.. index:: validate_non_negative_integer_option/4
-.. _http_websocket_session/2::validate_non_negative_integer_option/4:
-
-``validate_non_negative_integer_option/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Validates a non-negative integer option value for the given domain and option name.
+Protected helper that applies the close-state and automatic control-message transitions for a message read outside this object and returns the updated session state.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``validate_non_negative_integer_option(Domain,Name,Value,ValidatedValue)``
+|    ``apply_session_read(Output,State,AutoPong,Pending,Message,UpdatedState)``
 | **Mode and number of proofs:**
-|    ``validate_non_negative_integer_option(+atom,+atom,@term,-integer)`` - ``one_or_error``
+|    ``apply_session_read(+stream_or_alias,+compound,+atom,+compound,+term,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: current_close_state/2
+.. _http_websocket_session/2::current_close_state/2:
+
+``current_close_state/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that returns the close-handshake component of a session state term. Open states are reported as ``open``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current_close_state(State,CloseState)``
+| **Mode and number of proofs:**
+|    ``current_close_state(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: close_handshake_completed/1
+.. _http_websocket_session/2::close_handshake_completed/1:
+
+``close_handshake_completed/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that is true when the given session state records a completed close handshake.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_handshake_completed(State)``
+| **Mode and number of proofs:**
+|    ``close_handshake_completed(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: best_effort_protocol_error_close/3
+.. _http_websocket_session/2::best_effort_protocol_error_close/3:
+
+``best_effort_protocol_error_close/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that writes a best-effort close message mapping the given protocol error to its close status code when the session close state still allows it. Write errors are ignored.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``best_effort_protocol_error_close(Output,State,Error)``
+| **Mode and number of proofs:**
+|    ``best_effort_protocol_error_close(+stream_or_alias,+compound,+callable)`` - ``one``
 
 
 ------------

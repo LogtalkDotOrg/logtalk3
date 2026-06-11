@@ -141,8 +141,8 @@ upgrade:
 The ``Connection`` term returned by ``open_websocket/4`` remains open.
 After the handshake, either close it explicitly with
 ``http_socket::close_connection/1`` or hand it to the
-``http_websocket``, ``http_websocket_messages``, or
-``http_websocket_session`` libraries.
+``http_websocket``, ``http_websocket_messages``,
+``http_websocket_session``, or ``http_websocket_service`` libraries.
 
 Current scope
 -------------
@@ -240,21 +240,21 @@ handshake:
   ``http_websocket`` frame predicates, the ``http_websocket_messages``
   message predicates, or the stateful ``http_websocket_session``
   predicates with explicit close-state and automatic control-message
-  handling, including the higher-level ``run_session/3-4`` callback
-  loop.
+  handling, including the higher-level ``http_websocket_service``
+  ``run_session/3-4`` callback loop.
 
   - When client-side code wants one entry point for handshake plus
-    session execution, the ``http_websocket_client_session::open/4-5``
+    session execution, the ``http_websocket_client_service::open/4-5``
     predicates layer on top of ``open_websocket/4``, can write optional
     initial outbound messages, and then run the callback-driven session
     loop.
 
 - Callers are responsible for eventually closing that connection using
   ``http_socket::close_connection/1`` if a later layer does not take
-  ownership of it. The ``http_websocket_session::run_session/3-4``
+  ownership of it. The ``http_websocket_service::run_session/3-4``
   predicates do take ownership of the upgraded connection and close it
   automatically when the session loop finishes, as do the higher-level
-  ``http_websocket_client_session::open/4-5`` predicates.
+  ``http_websocket_client_service::open/4-5`` predicates.
 
 The ``http_client_core`` object continues to provide the original
 stream-based predicates:

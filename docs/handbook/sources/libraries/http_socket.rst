@@ -174,13 +174,14 @@ opening handshake handoff:
   level, with ``http_websocket_messages::read_message/2`` and
   ``http_websocket_messages::write_message/2``, or with the stateful
   ``http_websocket_session`` layer when interleaved control frames and
-  role-aware masking policies matter, including automatic close replies,
-  optional automatic pong replies, the higher-level ``run_session/3-4``
-  callback loop that takes ownership of the upgraded connection and
-  closes it automatically after the close handshake completes, the
-  client-side ``http_websocket_client_session::open/4-5`` convenience,
-  and the server-side ``http_websocket_server_session::serve_once/6-7``
-  convenience.
+  role-aware masking policies matter, including automatic close replies
+  and optional automatic pong replies, or with the
+  ``http_websocket_service`` layer, which provides the higher-level
+  ``run_session/3-4`` callback loop that takes ownership of the upgraded
+  connection and closes it automatically after the close handshake
+  completes, the client-side ``http_websocket_client_service::open/4-5``
+  convenience, and the server-side
+  ``http_websocket_server_service::serve_once/6-7`` convenience.
 - Rejected or malformed handshakes are written to the peer and then
   reported as errors by ``serve_websocket_once/5``; the accepted streams
   are closed in that case.

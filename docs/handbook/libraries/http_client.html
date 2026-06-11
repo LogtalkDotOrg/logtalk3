@@ -189,6 +189,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_handshake.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_handshake</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_messages.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_service.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_session.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ica_projection.html"><code class="docutils literal notranslate"><span class="pre">ica_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
@@ -480,8 +481,8 @@ upgrade:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Connection</span></code> term returned by <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> remains open.
 After the handshake, either close it explicitly with
 <code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> or hand it to the
-<code class="docutils literal notranslate"><span class="pre">http_websocket</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> libraries.</p>
+<code class="docutils literal notranslate"><span class="pre">http_websocket</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>, or <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code> libraries.</p>
 </section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
@@ -576,11 +577,11 @@ a higher layer can take over the upgraded stream, typically by calling
 <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> frame predicates, the <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>
 message predicates, or the stateful <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>
 predicates with explicit close-state and automatic control-message
-handling, including the higher-level <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback
-loop.</p>
+handling, including the higher-level <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code>
+<code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback loop.</p>
 <ul>
 <li><p>When client-side code wants one entry point for handshake plus
-session execution, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/4-5</span></code>
+session execution, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code>
 predicates layer on top of <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>, can write optional
 initial outbound messages, and then run the callback-driven session
 loop.</p></li>
@@ -588,10 +589,10 @@ loop.</p></li>
 </li>
 <li><p>Callers are responsible for eventually closing that connection using
 <code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> if a later layer does not take
-ownership of it. The <code class="docutils literal notranslate"><span class="pre">http_websocket_session::run_session/3-4</span></code>
+ownership of it. The <code class="docutils literal notranslate"><span class="pre">http_websocket_service::run_session/3-4</span></code>
 predicates do take ownership of the upgraded connection and close it
 automatically when the session loop finishes, as do the higher-level
-<code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/4-5</span></code> predicates.</p></li>
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code> predicates.</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object continues to provide the original
 stream-based predicates:</p>

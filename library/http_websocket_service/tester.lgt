@@ -19,20 +19,36 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(http_websocket_session_handler_protocol).
+:- if((
+	current_logtalk_flag(sockets, supported),
+	current_prolog_flag(bounded, false)
+)).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-06-07,
-		comment is 'Protocol for callback objects used by the higher-level WebSocket session loop.'
-	]).
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(os(loader)),
+		logtalk_load(timeout(loader)),
+		logtalk_load(http_client(loader)),
+		logtalk_load(http_socket(loader)),
+		logtalk_load(http_websocket_session(loader)),
+		logtalk_load([
+			http_websocket_service_handler_protocol,
+			http_websocket_service_registry,
+			http_websocket_service
+		], [
+			debug(on),
+			source_data(on)
+		]),
+		logtalk_load(test_objects),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
 
-	:- public(handle/2).
-	:- mode(handle(+compound, -list(compound)), one_or_error).
-	:- info(handle/2, [
-		comment is 'Processes a received normalized WebSocket message and returns a list of zero or more session actions. Plain normalized messages are written back on the same session before the next read. When used with the registry-backed server helper, the list may also contain the action wrappers ``reply(Message)``, ``broadcast(Message)``, and ``broadcast_others(Message)``.',
-		argnames is ['Message', 'Replies']
-	]).
+:- else.
 
-:- end_protocol.
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.

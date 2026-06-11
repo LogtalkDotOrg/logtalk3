@@ -136,6 +136,7 @@ directory in the ``NOTES.md`` file.
    http_websocket_frames
    http_websocket_handshake
    http_websocket_messages
+   http_websocket_service
    http_websocket_session
    ica_projection
    ids

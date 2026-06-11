@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 4, 2026
+##   Last updated on June 11, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -187,6 +187,7 @@ Foreach-Object {
 (Get-Content ../../../library/http_websocket_frames/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_frames.rst
 (Get-Content ../../../library/http_websocket_handshake/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_handshake.rst
 (Get-Content ../../../library/http_websocket_messages/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_messages.rst
+(Get-Content ../../../library/http_websocket_service/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_service.rst
 (Get-Content ../../../library/http_websocket_session/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_session.rst
 (Get-Content ../../../library/ica_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ica_projection.rst
 (Get-Content ../../../library/ids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ids.rst

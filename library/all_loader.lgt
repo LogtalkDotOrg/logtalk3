@@ -233,6 +233,7 @@
 		http_websocket_frames(loader),
 		http_websocket_messages(loader),
 		http_websocket_session(loader),
+		http_websocket_service(loader),
 		http_websocket(loader),
 		http_static_files(loader),
 		http_directory_listing(loader),

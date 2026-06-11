@@ -32,7 +32,7 @@
 		logtalk_load(term_io(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_server(loader)),
-		logtalk_load(http_websocket_session(loader)),
+		logtalk_load(http_websocket_service(loader)),
 		logtalk_load(http_websocket, [optimize(on)])
 	)).
 

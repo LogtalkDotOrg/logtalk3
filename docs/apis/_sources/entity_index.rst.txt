@@ -332,16 +332,19 @@ Objects
    http_text_body_codec <http_text_body_codec_0>
    http_websocket <http_websocket_0>
    http_websocket_accept_handler(Options) <http_websocket_accept_handler_1>
+   http_websocket_client_service <http_websocket_client_service_0>
    http_websocket_client_session <http_websocket_client_session_0>
    http_websocket_frames <http_websocket_frames_0>
    http_websocket_handshake <http_websocket_handshake_0>
    http_websocket_messages <http_websocket_messages_0>
    http_websocket_messages(TextRepresentation) <http_websocket_messages_1>
+   http_websocket_server_service <http_websocket_server_service_0>
    http_websocket_server_session <http_websocket_server_session_0>
+   http_websocket_service(Role,TextRepresentation) <http_websocket_service_2>
+   http_websocket_service_loop_options <http_websocket_service_loop_options_0>
+   http_websocket_service_registry <http_websocket_service_registry_0>
    http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
-   http_websocket_session_loop_options <http_websocket_session_loop_options_0>
    http_websocket_session_read_options <http_websocket_session_read_options_0>
-   http_websocket_session_registry <http_websocket_session_registry_0>
    http_websocket_session_write_options <http_websocket_session_write_options_0>
    ica_projection <ica_projection_0>
    iddfs_interpreter(Increment) <iddfs_interpreter_1>
@@ -735,7 +738,7 @@ Protocols
    http_request_protocol <http_request_protocol_0>
    http_response_protocol <http_response_protocol_0>
    http_socket_protocol <http_socket_protocol_0>
-   http_websocket_session_handler_protocol <http_websocket_session_handler_protocol_0>
+   http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
    ieee_754_fields_protocol <ieee_754_fields_protocol_0>
    ieee_754_protocol <ieee_754_protocol_0>
    interpreterp <interpreterp_0>

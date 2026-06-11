@@ -1,0 +1,174 @@
+.. index:: single: http_websocket_service(Role,TextRepresentation)
+.. _http_websocket_service/2:
+
+.. rst-class:: right
+
+**object**
+
+``http_websocket_service(Role,TextRepresentation)``
+===================================================
+
+* ``Role`` - Peer role for masking policy. Possible values are ``client`` and ``server``.
+* ``TextRepresentation`` - Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+Callback-driven WebSocket session loops over upgraded http_socket connections, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.
+
+| **Availability:** 
+|    ``logtalk_load(http_websocket_service(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls, threaded``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2>`
+| **Uses:**
+|    :ref:`http_socket <http_socket/0>`
+|    :ref:`http_websocket_service_loop_options <http_websocket_service_loop_options/0>`
+|    :ref:`http_websocket_service_registry <http_websocket_service_registry/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+
+   - Option precedence: When the same loop option is given multiple times, the first occurrence is used.
+   - Timed policies: Keepalive and idle-timeout deadlines are tracked using wall-clock time, making the loop robust to scheduling jitter and slow reads.
+
+| **Inherited public predicates:**
+|     :ref:`http_websocket_session/2::initial_state/1`  :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_session/2::is_state/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_session/2::read_message/4`  :ref:`http_websocket_session/2::read_message/5`  :ref:`http_websocket_session/2::read_message/6`  :ref:`http_websocket_messages/1::type/2`  :ref:`http_websocket_session/2::write_message/2`  :ref:`http_websocket_session/2::write_message/3`  :ref:`http_websocket_session/2::write_message/4`  :ref:`http_websocket_session/2::write_message/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run_session/3
+.. _http_websocket_service/2::run_session/3:
+
+``run_session/3``
+^^^^^^^^^^^^^^^^^
+
+Runs a higher-level session loop on an upgraded http_socket WebSocket connection until the close handshake completes or the peer closes the stream, then closes the upgraded connection automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_session(Connection,Handler,State)``
+| **Mode and number of proofs:**
+|    ``run_session(+compound,+object_identifier,-compound)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Handler protocol: The handler object must conform to the ``http_websocket_service_handler_protocol`` protocol and return a list of normalized reply messages for each received message.
+    - Connection ownership: This predicate takes ownership of the upgraded connection and closes it before succeeding or rethrowing any exception.
+
+
+------------
+
+.. index:: run_session/4
+.. _http_websocket_service/2::run_session/4:
+
+``run_session/4``
+^^^^^^^^^^^^^^^^^
+
+Runs a higher-level session loop on an upgraded http_socket WebSocket connection using the given loop options, then closes the upgraded connection automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_session(Connection,Handler,State,Options)``
+| **Mode and number of proofs:**
+|    ``run_session(+compound,+object_identifier,-compound,+list)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Option ``auto_pong(on)``: Automatically writes pong replies while still forwarding ping messages to the handler.
+    - Option ``auto_pong(off)``: Disables automatic pong replies. This is the default.
+    - Option ``keepalive_interval(Seconds)``: When no inbound message is received for the given positive number of seconds, writes an empty ping message and continues the loop. This option requires backend thread support.
+    - Option ``idle_timeout(Seconds)``: When no inbound message is received for the given positive number of seconds, writes ``message(close, status(1001, idle_timeout))`` and waits up to one additional idle-timeout interval for the peer to complete the close handshake before stopping. This option requires backend thread support.
+    - Option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: run_session_connection/5
+.. _http_websocket_service/2::run_session_connection/5:
+
+``run_session_connection/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that runs the callback-driven session loop on an upgraded WebSocket connection starting from the given session state and using the given loop options. Connection ownership is handled by the caller.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_session_connection(Connection,HandlerDescriptor,State,UpdatedState,Options)``
+| **Mode and number of proofs:**
+|    ``run_session_connection(+compound,+compound,+compound,-compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: run_once_with_cleanup_/2
+.. _http_websocket_service/2::run_once_with_cleanup_/2:
+
+``run_once_with_cleanup_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Protected helper that calls a goal once and always runs the cleanup goal afterwards, both on success, failure, and error.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_once_with_cleanup_(Goal,Cleanup)``
+| **Meta-predicate template:**
+|    ``run_once_with_cleanup_(0,0)``
+| **Mode and number of proofs:**
+|    ``run_once_with_cleanup_(+callable,+callable)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: validate_non_negative_integer_option/4
+.. _http_websocket_service/2::validate_non_negative_integer_option/4:
+
+``validate_non_negative_integer_option/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a non-negative integer option value for the given domain and option name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_non_negative_integer_option(Domain,Name,Value,ValidatedValue)``
+| **Mode and number of proofs:**
+|    ``validate_non_negative_integer_option(+atom,+atom,@term,-integer)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

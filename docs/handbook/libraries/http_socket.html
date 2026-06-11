@@ -186,6 +186,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_handshake.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_handshake</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_messages.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_websocket_service.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_session.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ica_projection.html"><code class="docutils literal notranslate"><span class="pre">ica_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ids.html"><code class="docutils literal notranslate"><span class="pre">ids</span></code></a></li>
@@ -514,13 +515,14 @@ and <code class="docutils literal notranslate"><span class="pre">http_websocket:
 level, with <code class="docutils literal notranslate"><span class="pre">http_websocket_messages::read_message/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">http_websocket_messages::write_message/2</span></code>, or with the stateful
 <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> layer when interleaved control frames and
-role-aware masking policies matter, including automatic close replies,
-optional automatic pong replies, the higher-level <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code>
-callback loop that takes ownership of the upgraded connection and
-closes it automatically after the close handshake completes, the
-client-side <code class="docutils literal notranslate"><span class="pre">http_websocket_client_session::open/4-5</span></code> convenience,
-and the server-side <code class="docutils literal notranslate"><span class="pre">http_websocket_server_session::serve_once/6-7</span></code>
-convenience.</p></li>
+role-aware masking policies matter, including automatic close replies
+and optional automatic pong replies, or with the
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code> layer, which provides the higher-level
+<code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback loop that takes ownership of the upgraded
+connection and closes it automatically after the close handshake
+completes, the client-side <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code>
+convenience, and the server-side
+<code class="docutils literal notranslate"><span class="pre">http_websocket_server_service::serve_once/6-7</span></code> convenience.</p></li>
 <li><p>Rejected or malformed handshakes are written to the peer and then
 reported as errors by <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code>; the accepted streams
 are closed in that case.</p></li>

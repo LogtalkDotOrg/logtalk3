@@ -33,7 +33,7 @@
 		logtalk_load(term_io(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_server(loader)),
-		logtalk_load(http_websocket_session(loader)),
+		logtalk_load(http_websocket_service(loader)),
 		logtalk_load(http_websocket, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),

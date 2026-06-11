@@ -19,27 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(sockets, supported),
-	current_prolog_flag(bounded, false)
-)).
+:- if(current_prolog_flag(bounded, false)).
 
 	:- initialization((
 		logtalk_load(crypto(loader)),
 		logtalk_load(options(loader)),
-		logtalk_load(os(loader)),
-		logtalk_load(timeout(loader)),
-		logtalk_load(http_client(loader)),
-		logtalk_load(http_socket(loader)),
 		logtalk_load(http_websocket_frames(loader)),
 		logtalk_load(http_websocket_messages(loader)),
-		logtalk_load([
-			http_websocket_session_handler_protocol,
-			http_websocket_session_registry,
-			http_websocket_session
-		], [
-			optimize(on)
-		])
+		logtalk_load(http_websocket_session, [optimize(on)])
 	)).
 
 :- else.

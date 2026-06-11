@@ -236,7 +236,7 @@ This layer now provides a focused helper for the HTTP opening handshake:
   the upgraded stream or begin frame processing.
 - Higher layers that need to continue on the upgraded connection must stop at
   a single served message and then take over the underlying stream or socket.
-- The `http_websocket_server_session::serve_once/6-7` predicates build on top
+- The `http_websocket_server_service::serve_once/6-7` predicates build on top
   of this handshake helper when server-side code wants a single entry point for
   handshake plus callback-driven session execution.
 

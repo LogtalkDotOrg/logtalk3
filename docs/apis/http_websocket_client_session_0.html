@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="http_websocket_server_session" href="http_websocket_server_session_0.html" />
-    <link rel="prev" title="http_websocket_messages(TextRepresentation)" href="http_websocket_messages_1.html" />
+    <link rel="prev" title="http_websocket_service_registry" href="http_websocket_service_registry_0.html" />
    
 </head>
 
@@ -182,14 +182,12 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-frames"><span class="xref std std-ref">http_websocket_frames</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-handshake"><span class="xref std std-ref">http_websocket_handshake</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-service"><span class="xref std std-ref">http_websocket_service</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket-session"><span class="xref std std-ref">http_websocket_session</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_client_session</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_server_session_0.html">http_websocket_server_session</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_2.html">http_websocket_session(Role,TextRepresentation)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_handler_protocol_0.html">http_websocket_session_handler_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_loop_options_0.html">http_websocket_session_loop_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_read_options_0.html">http_websocket_session_read_options</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_session_registry_0.html">http_websocket_session_registry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_session_write_options_0.html">http_websocket_session_write_options</a></li>
 </ul>
 </li>
@@ -398,7 +396,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-02</div>
+<div class="line"><strong>Date:</strong> 2026-06-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -411,12 +409,6 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2"><span class="std std-ref">http_websocket_session(client,atom)</span></a></div>
 </div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="http_client_0.html#http-client-0"><span class="std std-ref">http_client</span></a></div>
-<div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
@@ -427,81 +419,21 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-initial-state-1"><span class="std std-ref">initial_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-is-message-1"><span class="std std-ref">is_message/1</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-is-state-1"><span class="std std-ref">is_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-message-3"><span class="std std-ref">message/3</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-payload-2"><span class="std std-ref">payload/2</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-read-message-2"><span class="std std-ref">read_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-4"><span class="std std-ref">read_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-5"><span class="std std-ref">read_message/5</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-6"><span class="std std-ref">read_message/6</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-run-session-3"><span class="std std-ref">run_session/3</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-run-session-4"><span class="std std-ref">run_session/4</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-type-2"><span class="std std-ref">type/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-2"><span class="std std-ref">write_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-3"><span class="std std-ref">write_message/3</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-4"><span class="std std-ref">write_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-5"><span class="std std-ref">write_message/5</span></a></div>
+<div class="line"> <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-initial-state-1"><span class="std std-ref">initial_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-is-message-1"><span class="std std-ref">is_message/1</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-is-state-1"><span class="std std-ref">is_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-message-3"><span class="std std-ref">message/3</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-payload-2"><span class="std std-ref">payload/2</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-read-message-2"><span class="std std-ref">read_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-4"><span class="std std-ref">read_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-5"><span class="std std-ref">read_message/5</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-6"><span class="std std-ref">read_message/6</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-type-2"><span class="std std-ref">type/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-2"><span class="std std-ref">write_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-3"><span class="std std-ref">write_message/3</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-4"><span class="std std-ref">write_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-5"><span class="std std-ref">write_message/5</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#open-4" id="id2"><code class="docutils literal notranslate"><span class="pre">open/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-5" id="id3"><code class="docutils literal notranslate"><span class="pre">open/5</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="open-4">
-<span id="http-websocket-client-session-0-open-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open/4</span></code></a><a class="headerlink" href="#open-4" title="Link to this heading"></a></h3>
-<p>Builds a WebSocket opening handshake from the given absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop until the close handshake completes or the peer closes the stream.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(URL,Handler,Response,State)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(+atom,+object_identifier,-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="open-5">
-<span id="http-websocket-client-session-0-open-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open/5</span></code></a><a class="headerlink" href="#open-5" title="Link to this heading"></a></h3>
-<p>Builds a WebSocket opening handshake from the given absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop using the given combined handshake and session options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(URL,Handler,Response,State,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(+atom,+object_identifier,-compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Repeated options: When the same handshake or session option is given multiple times, the first occurrence is used.</p></li>
-<li><p>Handshake options: The <cite>headers/1</cite>, <cite>query/1</cite>, <cite>version/1</cite>, <cite>protocols/1</cite>, <cite>key/1</cite>, and <cite>connection_options/1</cite> options are forwarded to <cite>http_client::open_websocket/4</cite>.</p></li>
-<li><p>Session option <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code>: Controls automatic pong replies during the session loop.</p></li>
-<li><p>Session option <code class="docutils literal notranslate"><span class="pre">initial_messages(Messages)</span></code>: Writes the given list of normalized outbound messages before entering the session loop.</p></li>
-<li><p>Session option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.</p></li>
-<li><p>Session option <code class="docutils literal notranslate"><span class="pre">idle_timeout(Seconds)</span></code>: Closes the session with <code class="docutils literal notranslate"><span class="pre">status(1001,</span> <span class="pre">idle_timeout)</span></code> after the given positive number of seconds without an inbound message. This option requires backend thread support.</p></li>
-<li><p>Session option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Oversized frames are treated as <code class="docutils literal notranslate"><span class="pre">1009</span></code> close errors in the session loop. Use a non-negative integer.</p></li>
-</ul>
-</div></blockquote>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -520,7 +452,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_websocket_messages_1.html" class="btn btn-neutral float-left" title="http_websocket_messages(TextRepresentation)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_websocket_service_registry_0.html" class="btn btn-neutral float-left" title="http_websocket_service_registry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="http_websocket_server_session_0.html" class="btn btn-neutral float-right" title="http_websocket_server_session" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

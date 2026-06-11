@@ -27,8 +27,10 @@ High-level WebSocket predicates for opening and closing connections, exchanging 
 |    :ref:`http_client <http_client/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`http_socket <http_socket/0>`
+|    :ref:`http_websocket_client_service <http_websocket_client_service/0>`
 |    :ref:`http_websocket_client_session <http_websocket_client_session/0>`
 |    :ref:`http_websocket_messages <http_websocket_messages/0>`
+|    :ref:`http_websocket_server_service <http_websocket_server_service/0>`
 |    :ref:`http_websocket_server_session <http_websocket_server_session/0>`
 |    :ref:`json <json/0>`
 |    :ref:`list <list/0>`
@@ -415,7 +417,7 @@ Reads the next text message and parses its payload as one Prolog term. Returns `
 ``open_session/4``
 ^^^^^^^^^^^^^^^^^^
 
-Convenience wrapper over ``http_websocket_client_session::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.
+Convenience wrapper over ``http_websocket_client_service::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.
 
 | **Compilation flags:**
 |    ``static``
@@ -434,7 +436,7 @@ Convenience wrapper over ``http_websocket_client_session::open/4`` that keeps th
 ``open_session/5``
 ^^^^^^^^^^^^^^^^^^
 
-Convenience wrapper over ``http_websocket_client_session::open/5``.
+Convenience wrapper over ``http_websocket_client_service::open/5``.
 
 | **Compilation flags:**
 |    ``static``

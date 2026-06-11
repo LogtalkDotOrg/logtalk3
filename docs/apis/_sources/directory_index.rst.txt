@@ -1389,6 +1389,21 @@ To load an entity, always load the library that includes it using the goal ``log
    http_websocket_messages <http_websocket_messages_0>
    http_websocket_messages(TextRepresentation) <http_websocket_messages_1>
 
+``library/http_websocket_service/``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_websocket_client_service <http_websocket_client_service_0>
+   http_websocket_server_service <http_websocket_server_service_0>
+   http_websocket_service(Role,TextRepresentation) <http_websocket_service_2>
+   http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
+   http_websocket_service_loop_options <http_websocket_service_loop_options_0>
+   http_websocket_service_registry <http_websocket_service_registry_0>
+
 ``library/http_websocket_session/``
 -----------------------------------
 
@@ -1400,10 +1415,7 @@ To load an entity, always load the library that includes it using the goal ``log
    http_websocket_client_session <http_websocket_client_session_0>
    http_websocket_server_session <http_websocket_server_session_0>
    http_websocket_session(Role,TextRepresentation) <http_websocket_session_2>
-   http_websocket_session_handler_protocol <http_websocket_session_handler_protocol_0>
-   http_websocket_session_loop_options <http_websocket_session_loop_options_0>
    http_websocket_session_read_options <http_websocket_session_read_options_0>
-   http_websocket_session_registry <http_websocket_session_registry_0>
    http_websocket_session_write_options <http_websocket_session_write_options_0>
 
 ``library/ica_projection/``

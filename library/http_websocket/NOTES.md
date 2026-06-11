@@ -68,7 +68,7 @@ The current implementation provides the following predicates:
   `receive_term/2` convenience predicates for common payload formats.
 - `open_session/4-5` and `serve_once/5-6`
   for callback-driven client and server sessions built on top of the
-  `http_websocket_session` layer.
+  `http_websocket_service` layer.
 
 
 Current workflow
@@ -109,6 +109,7 @@ lower-level libraries remain available when you need them:
   generation.
 - Use `http_websocket_messages` when you want transport-neutral message I/O
   without connection or session ownership.
-- Use `http_websocket_session` when you need the full callback-driven session
-  layer, registry-backed broadcast helpers, or detailed close/ping state
-  control.
+- Use `http_websocket_session` when you need the stateful message layer with
+  detailed close/ping state control but without callback loops or threads.
+- Use `http_websocket_service` when you need the full callback-driven session
+  layer or registry-backed broadcast helpers.
