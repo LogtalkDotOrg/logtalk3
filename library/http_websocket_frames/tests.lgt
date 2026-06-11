@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-11,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 
@@ -143,26 +143,19 @@
 	test(http_websocket_frames_read_frame_2_02, error(domain_error(http_websocket_opcode, 3))) :-
 		^^file_path('test_http_websocket_frame.tmp', File),
 		open(File, write, Output, [type(binary)]),
-		write_bytes([0x83, 0x00], Output),
+		put_byte(Output, 0x83),
+		put_byte(Output, 0x00),
 		close(Output),
 		open(File, read, Input, [type(binary)]),
 		catch(read_frame(Input, _ParsedFrame), Error, true),
 		close(Input),
 		throw(Error).
 
-	repeated_byte_list(Length, Byte, Bytes) :-
-		repeated_byte_list(Length, Byte, Bytes, []).
-
-	write_bytes([], _Output).
-	write_bytes([Byte| Bytes], Output) :-
-		put_byte(Output, Byte),
-		write_bytes(Bytes, Output).
-
-	repeated_byte_list(0, _Byte, Bytes, Bytes) :-
+	repeated_byte_list(0, _Byte, []) :-
 		!.
-	repeated_byte_list(Length, Byte, [Byte| Bytes0], Bytes) :-
+	repeated_byte_list(Length, Byte, [Byte| Bytes]) :-
 		Length > 0,
 		NextLength is Length - 1,
-		repeated_byte_list(NextLength, Byte, Bytes0, Bytes).
+		repeated_byte_list(NextLength, Byte, Bytes).
 
 :- end_object.

@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-11,
 		comment is 'Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.'
 	]).
 
 	:- uses(list, [
-		length/2, member/2, memberchk/2, reverse/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(reader, [
@@ -183,9 +183,9 @@
 				LengthCode is Byte1 /\ 0x7F,
 				read_payload_length(Stream, LengthCode, PayloadLength),
 				validate_payload_length_limit(MaxPayloadLength, PayloadLength),
-				read_masking_key(Stream, MaskFlag, MaskingKey),
+				read_masking_key(MaskFlag, Stream, MaskingKey),
 				read_required_bytes(PayloadLength, Stream, PayloadBytes0),
-				mask_or_unmask_payload(PayloadBytes0, MaskingKey, PayloadBytes),
+				mask_or_unmask_payload(MaskingKey, PayloadBytes0, PayloadBytes),
 				properties_from_components(ReservedBits, MaskingKey, Properties),
 				frame(Final, Opcode, PayloadBytes, Properties, Frame)
 			)
@@ -290,20 +290,17 @@
 		).
 
 	normalize_properties(Properties0, Properties, MaskingKey, ReservedBits) :-
-		(	var(Properties0) ->
+		(	\+ ground(Properties0) ->
 			instantiation_error
-		;	extract_properties(Properties0, no, [], MaskingKey, ReservedBits),
+		;	extract_properties(Properties0, no, [], MaskingKey, ReservedBits) ->
 			properties_from_components(ReservedBits, MaskingKey, Properties)
+		;	domain_error(http_websocket_properties, Properties)
 		).
 
-	extract_properties([], MaskingKey, ReservedBits, MaskingKey, ReservedBits) :-
-		!.
+	extract_properties([], MaskingKey, ReservedBits, MaskingKey, ReservedBits).
 	extract_properties([Property| Properties], MaskingKey0, ReservedBits0, MaskingKey, ReservedBits) :-
-		!,
 		parse_property(Property, MaskingKey0, ReservedBits0, MaskingKey1, ReservedBits1),
-				extract_properties(Properties, MaskingKey1, ReservedBits1, MaskingKey, ReservedBits).
-	extract_properties(Properties, _MaskingKey0, _ReservedBits0, _MaskingKey, _ReservedBits) :-
-		domain_error(http_websocket_properties, Properties).
+		extract_properties(Properties, MaskingKey1, ReservedBits1, MaskingKey, ReservedBits).
 
 	parse_property(masking_key(Key), no, ReservedBits, Key, ReservedBits) :-
 		!,
@@ -331,40 +328,35 @@
 		).
 
 	validate_reserved_bits(Bits0, Bits) :-
-		(	var(Bits0) ->
+		(	\+ ground(Bits0) ->
 			instantiation_error
-		;	validate_reserved_bits_list(Bits0, []),
+		;	validate_reserved_bits_list(Bits0, []) ->
 			canonical_reserved_bits(Bits0, Bits)
+		;	domain_error(http_websocket_reserved_bits, Bits)
 		).
 
-	validate_reserved_bits_list([], _Seen) :-
-		!.
+	validate_reserved_bits_list([], _Seen).
 	validate_reserved_bits_list([Bit| Bits], Seen) :-
-		!,
 		valid_reserved_bit(Bit),
-		(	memberchk(Bit, Seen) ->
+		(	member(Bit, Seen) ->
 			domain_error(http_websocket_reserved_bits, [Bit| Bits])
 		;	validate_reserved_bits_list(Bits, [Bit| Seen])
 		).
-	validate_reserved_bits_list(Bits, _Seen) :-
-		domain_error(http_websocket_reserved_bits, Bits).
 
-	valid_reserved_bit(rsv1) :-
-		!.
-	valid_reserved_bit(rsv2) :-
-		!.
+	valid_reserved_bit(rsv1).
+	valid_reserved_bit(rsv2).
 	valid_reserved_bit(rsv3).
 
 	canonical_reserved_bits(Bits0, Bits) :-
-		(	memberchk(rsv1, Bits0) ->
+		(	member(rsv1, Bits0) ->
 			Bits = [rsv1| Bits1]
 		;	Bits = Bits1
 		),
-		(	memberchk(rsv2, Bits0) ->
+		(	member(rsv2, Bits0) ->
 			Bits1 = [rsv2| Bits2]
 		;	Bits1 = Bits2
 		),
-		(	memberchk(rsv3, Bits0) ->
+		(	member(rsv3, Bits0) ->
 			Bits2 = [rsv3| Bits3]
 		;	Bits2 = Bits3
 		),
@@ -382,10 +374,8 @@
 	validate_frame_semantics(Final, Opcode, Payload) :-
 		domain_error(http_websocket_frame, frame(Final, Opcode, Payload, _)).
 
-	control_opcode(close) :-
-		!.
-	control_opcode(ping) :-
-		!.
+	control_opcode(close).
+	control_opcode(ping).
 	control_opcode(pong).
 
 	validate_close_payload(close, Payload) :-
@@ -432,7 +422,7 @@
 		{ 	length(PayloadBytes0, PayloadLength)
 		},
 		bytes(PayloadBytes0),
-		{ 	mask_or_unmask_payload(PayloadBytes0, MaskingKey, PayloadBytes),
+		{ 	mask_or_unmask_payload(MaskingKey, PayloadBytes0, PayloadBytes),
 			properties_from_components(ReservedBits, MaskingKey, Properties),
 			frame(Final, Opcode, PayloadBytes, Properties, Frame)
 		}.
@@ -468,7 +458,7 @@
 		}.
 
 	decode_masking_key(0, no) -->
-		!.
+		[].
 	decode_masking_key(1, [Byte0, Byte1, Byte2, Byte3]) -->
 		[Byte0, Byte1, Byte2, Byte3].
 
@@ -489,8 +479,10 @@
 		;	Final = more
 		),
 		OpcodeCode is Byte0 /\ 0x0F,
-		opcode_atom(OpcodeCode, Opcode),
-		byte_reserved_bits(Byte0, ReservedBits).
+		(	opcode_atom(OpcodeCode, Opcode) ->
+			byte_reserved_bits(Byte0, ReservedBits)
+		;	domain_error(http_websocket_opcode, OpcodeCode)
+		).
 
 	byte_reserved_bits(Byte0, ReservedBits) :-
 		(	Byte0 /\ 0x40 =:= 0x40 ->
@@ -512,49 +504,35 @@
 		opcode_code(Opcode, OpcodeCode),
 		Byte0 is FinalBit \/ ReservedBitsMask \/ OpcodeCode.
 
-	final_bit(final, 0x80) :-
-		!.
+	final_bit(final, 0x80).
 	final_bit(more, 0x00).
 
 	reserved_bits_mask(ReservedBits, Mask) :-
-		(	memberchk(rsv1, ReservedBits) ->
+		(	member(rsv1, ReservedBits) ->
 			Mask0 = 0x40
 		;	Mask0 = 0x00
 		),
-		(	memberchk(rsv2, ReservedBits) ->
+		(	member(rsv2, ReservedBits) ->
 			Mask1 is Mask0 \/ 0x20
 		;	Mask1 = Mask0
 		),
-		(	memberchk(rsv3, ReservedBits) ->
+		(	member(rsv3, ReservedBits) ->
 			Mask is Mask1 \/ 0x10
 		;	Mask = Mask1
 		).
 
-	opcode_atom(0x0, continuation) :-
-		!.
-	opcode_atom(0x1, text) :-
-		!.
-	opcode_atom(0x2, binary) :-
-		!.
-	opcode_atom(0x8, close) :-
-		!.
-	opcode_atom(0x9, ping) :-
-		!.
-	opcode_atom(0xA, pong) :-
-		!.
-	opcode_atom(OpcodeCode, _Opcode) :-
-		domain_error(http_websocket_opcode, OpcodeCode).
+	opcode_atom(0x0, continuation).
+	opcode_atom(0x1, text).
+	opcode_atom(0x2, binary).
+	opcode_atom(0x8, close).
+	opcode_atom(0x9, ping).
+	opcode_atom(0xA, pong).
 
-	opcode_code(continuation, 0x0) :-
-		!.
-	opcode_code(text, 0x1) :-
-		!.
-	opcode_code(binary, 0x2) :-
-		!.
-	opcode_code(close, 0x8) :-
-		!.
-	opcode_code(ping, 0x9) :-
-		!.
+	opcode_code(continuation, 0x0).
+	opcode_code(text, 0x1).
+	opcode_code(binary, 0x2).
+	opcode_code(close, 0x8).
+	opcode_code(ping, 0x9).
 	opcode_code(pong, 0xA).
 
 	payload_length_encoding(PayloadLength, LengthCode, ExtendedLengthBytes) :-
@@ -580,24 +558,20 @@
 		;	domain_error(http_websocket_frame_length, PayloadLength)
 		).
 
-	masking_encoding(no, PayloadBytes, 0x00, PayloadBytes) :-
-		!.
+	masking_encoding(no, PayloadBytes, 0x00, PayloadBytes).
 	masking_encoding([Byte0, Byte1, Byte2, Byte3], PayloadBytes, 0x80, EncodedPayloadBytes) :-
-		mask_or_unmask_payload(PayloadBytes, [Byte0, Byte1, Byte2, Byte3], EncodedPayloadBytes).
+		mask_or_unmask_payload([Byte0, Byte1, Byte2, Byte3], PayloadBytes, EncodedPayloadBytes).
 
-	mask_or_unmask_payload(PayloadBytes, no, PayloadBytes) :-
-		!.
-	mask_or_unmask_payload(PayloadBytes, [Byte0, Byte1, Byte2, Byte3], ResultBytes) :-
-		mask_bytes(PayloadBytes, [Byte0, Byte1, Byte2, Byte3], 0, [], ReversedResultBytes),
-		reverse(ReversedResultBytes, ResultBytes).
+	mask_or_unmask_payload(no, PayloadBytes, PayloadBytes).
+	mask_or_unmask_payload([Byte0, Byte1, Byte2, Byte3], PayloadBytes, ResultBytes) :-
+		mask_bytes(PayloadBytes, [Byte0, Byte1, Byte2, Byte3], 0, ResultBytes).
 
-	mask_bytes([], _MaskingKey, _Index, Bytes, Bytes) :-
-		!.
-	mask_bytes([Byte| Bytes], [Key0, Key1, Key2, Key3], Index, Acc0, Acc) :-
+	mask_bytes([], _MaskingKey, _Index, []).
+	mask_bytes([Byte| Bytes], [Key0, Key1, Key2, Key3], Index, [MaskedByte| MaskedBytes]) :-
 		masking_byte(Index, Key0, Key1, Key2, Key3, MaskByte),
 		MaskedByte is xor(Byte, MaskByte),
 		NextIndex is (Index + 1) mod 4,
-		mask_bytes(Bytes, [Key0, Key1, Key2, Key3], NextIndex, [MaskedByte| Acc0], Acc).
+		mask_bytes(Bytes, [Key0, Key1, Key2, Key3], NextIndex, MaskedBytes).
 
 	masking_byte(0, Key0, _Key1, _Key2, _Key3, Key0).
 	masking_byte(1, _Key0, Key1, _Key2, _Key3, Key1).
@@ -623,9 +597,8 @@
 	read_payload_length(_Stream, _LengthCode, _PayloadLength) :-
 		domain_error(http_websocket_byte_sequence, end_of_file).
 
-	read_masking_key(_Stream, 0, no) :-
-		!.
-	read_masking_key(Stream, 1, MaskingKey) :-
+	read_masking_key(0, _Stream, no).
+	read_masking_key(1, Stream, MaskingKey) :-
 		read_required_bytes(4, Stream, MaskingKey).
 
 	read_required_byte(Stream, Byte) :-
