@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-12,
 		comment is 'Unit tests for the "http_multipart_form" example.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2
+		atomic_list_concat/3
 	]).
 
 	cover(multipart_form_http_handler).

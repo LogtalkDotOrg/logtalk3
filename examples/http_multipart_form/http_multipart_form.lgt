@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-12,
 		comment is 'HTTP handler for the multipart form example.'
 	]).
 
@@ -53,7 +53,7 @@
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2
+		atomic_list_concat/3
 	]).
 
 	route(home, get, '/', home).
@@ -234,7 +234,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-12,
 		comment is 'Small local HTTP server used by the multipart form example.'
 	]).
 
@@ -274,7 +274,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-12,
 		comment is 'HTTP client used by the multipart form example.'
 	]).
 
@@ -326,7 +326,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-12,
 		comment is 'Self-contained demo object for the multipart form example.'
 	]).
 
