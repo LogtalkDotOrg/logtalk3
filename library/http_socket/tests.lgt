@@ -165,9 +165,9 @@
 			request(get, origin('/two'), http(1, 0), [host-host('example.com'), connection-['keep-alive', 'keep-alive']], empty, [])
 		],
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
-		threaded_once(server_serve_once(Listener, echo_http_socket_handler), Tag),
+		threaded_once(server_serve_requests_once(Listener, keep_alive_close_http_socket_handler, 2), Tag),
 		http_socket::exchange_connection('127.0.0.1', Port, Requests, [Response1, Response2]),
-		threaded_exit(server_serve_once(Listener, echo_http_socket_handler), Tag),
+		threaded_exit(server_serve_requests_once(Listener, keep_alive_close_http_socket_handler, 2), Tag),
 		http_socket::close_listener(Listener),
 		status(Response1, status(200, 'OK')),
 		body(Response1, empty),

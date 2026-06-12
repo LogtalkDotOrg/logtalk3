@@ -965,18 +965,19 @@
 	serve_until_shutdown_serial(Listener, Handler, Control, RunId) :-
 		(	shutdown_requested(Control, RunId) ->
 			true
-		;	catch(
-				serve_once(Listener, Handler, _ClientInfo),
-				Error,
-				(	shutdown_requested(Control, RunId) ->
-					true
-				;	force_shutdown_control(Control, RunId),
-					throw(Error)
-				)
-			) ->
-			serve_until_shutdown_serial(Listener, Handler, Control, RunId)
-		;	force_shutdown_control(Control, RunId),
-			throw(unexpted_failure(server_once/3))
+		; 	try_server_accept(Listener, Control, RunId, Input, Output) ->
+			( 	shutdown_requested(Control, RunId) ->
+				catch(socket::close(Input, Output), _, true)
+			; 	catch(
+					serve_accepted_connection(Input, Output, Handler),
+					Error,
+					( 	force_shutdown_control(Control, RunId),
+						throw(Error)
+					)
+				),
+				serve_until_shutdown_serial(Listener, Handler, Control, RunId)
+			)
+		; 	true
 		).
 
 	serve_until_shutdown_parallel(Listener, Handler, Control, RunId) :-
@@ -984,8 +985,12 @@
 		(	shutdown_requested(Control, RunId) ->
 			wait_for_active_workers(Control, RunId)
 		;	try_server_accept(Listener, Control, RunId, Input, Output) ->
-			spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
-			serve_until_shutdown_parallel(Listener, Handler, Control, RunId)
+			( 	shutdown_requested(Control, RunId) ->
+				catch(socket::close(Input, Output), _, true),
+				wait_for_active_workers(Control, RunId)
+			; 	spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
+				serve_until_shutdown_parallel(Listener, Handler, Control, RunId)
+			)
 		;	wait_for_active_workers(Control, RunId)
 		).
 
@@ -996,8 +1001,12 @@
 		;	active_worker_count(Control, RunId, Count),
 			(	Count < Size ->
 				(	try_server_accept(Listener, Control, RunId, Input, Output) ->
-					spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
-					serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size)
+					( 	shutdown_requested(Control, RunId) ->
+						catch(socket::close(Input, Output), _, true),
+						wait_for_active_workers(Control, RunId)
+					; 	spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
+						serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size)
+					)
 				;	wait_for_active_workers(Control, RunId)
 				)
 			;	wait_for_one_active_worker(Control, RunId),
@@ -1065,20 +1074,36 @@
 		).
 
 	wait_for_active_workers(Control, RunId) :-
-		active_worker_count(Control, RunId, Count),
-		(	Count =:= 0 ->
+		current_active_workers(Control, RunId, Workers),
+		wait_for_workers(Workers, Control, RunId, no_error, Error),
+		( 	Error == no_error ->
 			true
-		;	wait_for_one_active_worker(Control, RunId),
-			wait_for_active_workers(Control, RunId)
+		; 	throw(Error)
 		).
 
 	wait_for_one_active_worker(Control, RunId) :-
-		threaded_wait(listener_worker_finished(Control, RunId)),
-		collect_finished_workers(Control, RunId, no_error, Error),
+		current_active_workers(Control, RunId, Workers),
+		wait_for_one_worker(Workers, Control, RunId, no_error, Error),
 		(	Error == no_error ->
 			true
 		;	throw(Error)
 		).
+
+	wait_for_workers([], _Control, _RunId, Error, Error).
+	wait_for_workers([Worker| Workers], Control, RunId, Error0, Error) :-
+		wait_for_worker(Worker, Control, RunId, Error0, Error1),
+		wait_for_workers(Workers, Control, RunId, Error1, Error).
+
+	wait_for_one_worker([], _Control, _RunId, Error, Error).
+	wait_for_one_worker([Worker| _Workers], Control, RunId, Error0, Error) :-
+		wait_for_worker(Worker, Control, RunId, Error0, Error).
+
+	:- meta_predicate(wait_for_worker(::, *, *, *, *)).
+
+	wait_for_worker(worker(Tag, Goal), Control, RunId, Error0, Error) :-
+		unregister_active_worker(Control, RunId, worker(Tag, Goal)),
+		catch(threaded_exit(Goal, Tag), WorkerError, true),
+		remember_worker_error(Error0, WorkerError, Error).
 
 	collect_finished_workers(Control, RunId, Error0, Error) :-
 		current_active_workers(Control, RunId, Workers),

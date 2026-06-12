@@ -68,3 +68,24 @@
 		http_core::response(Version, status(200, 'OK'), [], empty, [connection([close])], Response).
 
 :- end_object.
+
+
+:- object(keep_alive_close_http_socket_handler,
+	implements(http_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-12,
+		comment is 'Handler used by the http_socket tests to keep the first HTTP/1.0 response persistent and require an explicit close on the second request.'
+	]).
+
+	handle(Request, Response) :-
+		Request = request(get, origin('/one'), Version, _Headers, empty, _Properties),
+		http_core::response(Version, status(200, 'OK'), [], empty, [connection(['keep-alive'])], Response).
+	handle(Request, Response) :-
+		Request = request(get, origin('/two'), Version, _Headers, empty, _Properties),
+		http_core::property(Request, connection([close])),
+		http_core::response(Version, status(200, 'OK'), [], empty, [], Response).
+
+:- end_object.
