@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Unit tests for the "http_static_site_digest" example.'
 	]).
 
@@ -160,7 +160,8 @@
 						throw(Error)
 					)
 				),
-				once(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag)),
+				http_socket::request_listener_shutdown(Listener),
+				threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag),
 				catch(http_socket::close_listener(Listener), _, true),
 				status(ChallengeResponse, status(401, 'Unauthorized')),
 				digest_challenge_fields(ChallengeResponse, ChallengeFields),
@@ -190,7 +191,8 @@
 						throw(Error)
 					)
 				),
-				once(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 2), Tag)),
+				http_socket::request_listener_shutdown(Listener),
+				threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 2), Tag),
 				catch(http_socket::close_listener(Listener), _, true),
 				status(Response, status(200, 'OK')),
 				body(Response, content('text/plain', text('Guide for the digest-authenticated static site example.'))).
@@ -212,8 +214,9 @@
 				once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
 			cleanup_server_thread(DocumentRoot, Listener, Tag, Count) :-
+				http_socket::request_listener_shutdown(Listener),
+				catch(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, Count), Tag), _, true),
 				catch(http_socket::close_listener(Listener), _, true),
-				catch(once(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, Count), Tag)), _, true),
 				static_site_digest_fixture::workspace_root(Root),
 				catch(static_site_digest_fixture::cleanup(Root), _, true).
 

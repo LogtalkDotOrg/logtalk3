@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Unit tests for the "http_static_site" example.'
 	]).
 
@@ -103,11 +103,12 @@
 			catch(
 				static_site_client::run(Port, result(HomeResponse, GuideResponse, ListingResponse)),
 				Error,
-				( 	cleanup_server_thread(Root, Listener, Tag),
+				( 	cleanup_server_thread(Root, Listener, Tag, 3),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(static_site_server::serve_listener(Listener, Root, 3), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(static_site_server::serve_listener(Listener, Root, 3), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			status(HomeResponse, status(200, 'OK')),
 			body(HomeResponse, content('text/html', text(HomeHTML))),
@@ -129,11 +130,12 @@
 					http_client::get(URL, Response, [])
 				),
 				Error,
-				( 	cleanup_server_thread(Root, Listener, Tag),
+				( 	cleanup_server_thread(Root, Listener, Tag, 1),
 					throw(Error)
 				)
 			),
-			once(threaded_exit(static_site_server::serve_listener(Listener, Root, 1), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(static_site_server::serve_listener(Listener, Root, 1), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			status(Response, status(200, 'OK')),
 			body(Response, content('text/plain', text('Guide for the static site example.'))).
@@ -150,9 +152,10 @@
 			once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')),
 			once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
-		cleanup_server_thread(Root, Listener, Tag) :-
+		cleanup_server_thread(Root, Listener, Tag, Count) :-
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(static_site_server::serve_listener(Listener, Root, Count), Tag), _, true),
 			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(static_site_server::serve_listener(Listener, Root, 3), Tag)), _, true),
 			catch(static_site_fixture::cleanup(Root), _, true).
 
 	:- endif.

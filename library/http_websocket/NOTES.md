@@ -24,6 +24,10 @@ ________________________________________________________________________
 This library provides high-level WebSocket predicates for opening and
 closing connections and for exchanging messages.
 
+This library can be used with backend Prolog systems that supports unbound
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
+SWI-Prolog, Trealla Prolog, and XVM.
+
 
 API documentation
 -----------------

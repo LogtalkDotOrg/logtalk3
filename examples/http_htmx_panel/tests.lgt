@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Unit tests for the "http_htmx_panel" example.'
 	]).
 
@@ -116,7 +116,8 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			status(HomeResponse, status(200, 'OK')),
 			body(HomeResponse, content('text/html', text(HomeHTML))),
@@ -143,8 +144,9 @@
 			header(PanelBoostedResponse, hx_trigger, overview_loaded).
 
 		cleanup_server_thread(Listener, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 	:- endif.
 

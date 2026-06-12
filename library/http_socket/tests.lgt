@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-10,
+		date is 2026-06-12,
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
@@ -320,6 +320,19 @@
 		status(Response3, status(200, 'OK')),
 		body(Response3, content('text/plain', text(gamma))).
 
+	test(http_socket_serve_listener_5_06, deterministic) :-
+		Request = request(post, origin('/cancel-bounded'), http(1, 1), [host-host('example.com')], content('text/plain', text(cancel)), []),
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(http_socket::serve_listener(Listener, echo_http_socket_handler, 2, ClientInfos, [shutdown(close)]), ServeTag),
+		threaded_once(client_exchange_response('127.0.0.1', Port, Request, Response), ClientTag),
+		threaded_exit(client_exchange_response('127.0.0.1', Port, Request, Response), ClientTag),
+		http_socket::request_listener_shutdown(Listener),
+		threaded_exit(http_socket::serve_listener(Listener, echo_http_socket_handler, 2, ClientInfos, [shutdown(close)]), ServeTag),
+		ClientInfos = [_ClientInfo],
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text(cancel))),
+		client_connection_state('127.0.0.1', Port, closed).
+
 	test(http_socket_serve_until_shutdown_4_01, deterministic) :-
 		Control = serial_listener_control,
 		Request = request(post, origin('/serial-shutdown'), http(1, 1), [host-host('example.com')], content('text/plain', text(serial)), []),
@@ -387,7 +400,16 @@
 		body(Response2, content('text/plain', text(beta))),
 		client_connection_state('127.0.0.1', Port, closed).
 
+	test(http_socket_serve_until_shutdown_5_01, deterministic) :-
+		Control = ready_listener_control,
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket::serve_until_shutdown(Listener, echo_http_socket_handler, Control, [], request_ready_shutdown(Control)),
+		client_connection_state('127.0.0.1', Port, closed).
+
 	% auxiliary predicates
+
+	request_ready_shutdown(Control) :-
+		http_socket::request_shutdown(Control).
 
 	client_exchange_ignore(Host, Port, Request) :-
 		catch(http_socket::exchange(Host, Port, Request, _Response), _, true).
@@ -420,12 +442,12 @@
 		(	catch(
 				serve_requests(Count, Input, Output, Handler),
 				Error,
-				(	catch(socket::close(Input, Output), _, true),
+				( 	catch(socket::close(Input, Output), _, true),
 					throw(Error)
 				)
 			) ->
 			socket::close(Input, Output)
-		;		socket::close(Input, Output),
+		; 	socket::close(Input, Output),
 			fail
 		).
 

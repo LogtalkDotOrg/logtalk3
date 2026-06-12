@@ -32,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP handler for the HTMX panel example.'
 	]).
 
@@ -439,7 +439,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Small local HTTP server used by the HTMX panel example.'
 	]).
 
@@ -483,7 +483,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP client used by the HTMX panel example.'
 	]).
 
@@ -563,7 +563,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Self-contained demo object for the HTMX panel example.'
 	]).
 
@@ -597,12 +597,14 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag),
 			catch(http_socket::close_listener(Listener), _, true).
 
 		cleanup_demo(Listener, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 		print_result(result(HomeResponse, PanelPageResponse, PanelFragmentResponse, PanelBoostedResponse)) :-
 			http_core::status(HomeResponse, HomeStatus),

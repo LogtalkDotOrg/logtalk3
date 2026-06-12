@@ -363,9 +363,9 @@ the <code class="docutils literal notranslate"><span class="pre">http_client_cor
 uses TCP sockets for connection management while delegating HTTP message
 framing and connection semantics to the existing stream core and server
 layers.</p>
-<p>This library can be used with backend Prolog systems that supports the
-<code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM.</p>
+<p>This library can be used with backend Prolog systems that supports
+unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -388,57 +388,28 @@ link in a web browser.</p>
 </section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
-<p>The current implementation provides eighteen predicates:</p>
+<p>The current implementation provides nineteen public predicates, grouped
+by responsibility:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code> opens a TCP listener using the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library
-and returns the listener handle.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code> closes a listener previously opened with
-<code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> opens a reusable client connection using the
-<code class="docutils literal notranslate"><span class="pre">sockets</span></code> library and returns a connection handle.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code> closes a reusable client connection previously
-opened with <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code> returns the binary input and output streams
-carried by a reusable client connection handle or by an upgraded
-WebSocket connection handle.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code> opens a managed reusable connection pool
-for a given host and port.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code> closes a managed reusable connection pool
-and all currently available pooled connections.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code> returns pool statistics as
-<code class="docutils literal notranslate"><span class="pre">stats(Available,</span> <span class="pre">InUse,</span> <span class="pre">Total,</span> <span class="pre">MinSize,</span> <span class="pre">MaxSize)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code> performs one HTTP exchange on an open reusable client
-connection or by temporarily acquiring a pooled reusable client
-connection.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code> performs a sequence of HTTP exchanges on an
-open reusable client connection or by temporarily acquiring a pooled
-reusable client connection.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code> opens a client socket, performs one HTTP exchange, and
-closes the connection.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code> opens a client socket, performs a sequence
-of HTTP exchanges on a persistent connection, and closes the
-connection.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code> accepts one client socket connection, serves that
-connection using the <code class="docutils literal notranslate"><span class="pre">http_server</span></code> library, and closes the accepted
-streams.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code> accepts one client socket connection,
-serves one WebSocket opening handshake using the <code class="docutils literal notranslate"><span class="pre">http_server</span></code>
-library, and returns an upgraded connection handle that remains open
-on success.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code> accepts and serves a bounded number of client
-connections on the same listener.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code> accepts and serves a bounded number of client
-connections using configurable shutdown and worker options.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> accepts and serves client connections until
-an external shutdown request is issued for the associated control
-term.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> stops an open-ended <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code>
-loop, closes its listener, and lets active workers finish before
-returning.</p></li>
+<li><p>Listener lifecycle: <code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code>, <code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code>.</p></li>
+<li><p>Reusable client connections: <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code>, <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/4</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code>.</p></li>
+<li><p>Managed connection pools: <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code>.</p></li>
+<li><p>Server-side request serving: <code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code>, <code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code>.</p></li>
+<li><p>Open-ended serving control: <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code>, and <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code>.</p></li>
 </ul>
-<p>This layer is intentionally thin. It delegates request and response
-framing to <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> and <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, and delegates
-socket creation and teardown to the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library.</p>
+<p>Although it exposes these transport-oriented helpers, the library stays
+focused on socket-backed connection and listener management. It
+delegates HTTP message framing and connection semantics to
+<code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> and <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, and delegates socket creation
+and teardown to the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library.</p>
 <p>Reusable client connections are represented by
 <code class="docutils literal notranslate"><span class="pre">http_connection(Host,</span> <span class="pre">Port,</span> <span class="pre">...)</span></code> handle terms that carry normalized
 endpoint metadata and can be passed to <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
@@ -453,6 +424,13 @@ that can be passed to <code class="docutils literal notranslate"><span class="pr
 normalized endpoint metadata and can be passed to <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code>, <code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code>.</p>
+<p>Open-ended serving is controlled by a user-supplied control term. A
+control term is any fresh non-variable term chosen by the caller to
+identify one active <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code> loop. The same term is later passed to
+<code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> to stop that specific serving loop,
+distinguishing it from any other listener loops running at the same
+time.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code> predicate supports the following options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code> pre-opens <code class="docutils literal notranslate"><span class="pre">N</span></code> reusable connections when the pool is
@@ -465,13 +443,17 @@ The default is <code class="docutils literal notranslate"><span class="pre">10</
 <p>Pool exchanges fail immediately with
 <code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_connection_pool)</span></code> when no pooled
 connection is available and the pool is already at its maximum size.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code> predicate currently supports two option
+<p>The <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code> predicate supports the following option
 families:</p>
+<p>Shutdown options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">shutdown(keep_open)</span></code> leaves the listener open after the bounded
 serving loop. This is the default.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shutdown(close)</span></code> closes the listener when the bounded serving loop
 finishes or aborts.</p></li>
+</ul>
+<p>Worker options:</p>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code> serves accepted connections sequentially in the
 caller thread. This is the default.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> spawns one worker thread per accepted
@@ -482,8 +464,12 @@ accepting the next batch.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(N,</span> <span class="pre">rolling))</span></code> keeps up to <code class="docutils literal notranslate"><span class="pre">N</span></code> worker threads active
 and accepts the next connection as soon as one worker finishes.</p></li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> predicate supports the <code class="docutils literal notranslate"><span class="pre">workers/1</span></code>
-option family:</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code> for a listener with an active
+bounded <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code> loop wakes any blocked accept call and lets
+the loop return with the client information terms accepted before the
+shutdown request.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> and <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code> predicates
+support the <code class="docutils literal notranslate"><span class="pre">workers/1</span></code> option family:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code> serves accepted connections sequentially in the
 caller thread. This is the default.</p></li>
@@ -495,8 +481,10 @@ before accepting additional connections.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(N,</span> <span class="pre">rolling))</span></code> is accepted as an explicit alias for the
 rolling fixed-size worker-pool policy used by <code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code>.</p></li>
 </ul>
-<p>Open-ended serving loops should use a fresh non-variable control term
-for each call to <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code>.</p>
+<p>Open-ended serving loops should use a fresh control term for each call
+to <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> or <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code>.</p>
+<p>When the same listener, serving, or pool-management option is given
+multiple times, the first occurrence is used.</p>
 </section>
 <section id="websocket-handshake-workflow">
 <h2>WebSocket handshake workflow<a class="headerlink" href="#websocket-handshake-workflow" title="Link to this heading"></a></h2>

@@ -10,6 +10,10 @@ request from an existing binary stream, dispatch it to a handler object
 implementing the ``http_handler_protocol`` protocol, and write exactly
 one response.
 
+This library can be used with backend Prolog systems that supports
+unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
 API documentation
 -----------------
 

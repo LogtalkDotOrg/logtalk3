@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Unit tests for the "http_static_site_basic" example.'
 	]).
 
@@ -142,7 +142,8 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			status(ChallengeResponse, status(401, 'Unauthorized')),
 			static_site_basic_fixture::realm(Realm),
@@ -175,7 +176,8 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 1), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 1), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			status(Response, status(200, 'OK')),
 			body(Response, content('text/plain', text('Guide for the authenticated static site example.'))).
@@ -199,8 +201,9 @@
 			once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
 		cleanup_server_thread(DocumentRoot, PasswordFile, Listener, Tag, Count) :-
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, Count), Tag), _, true),
 			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, Count), Tag)), _, true),
 			static_site_basic_fixture::workspace_root(Root),
 			catch(static_site_basic_fixture::cleanup(Root), _, true).
 

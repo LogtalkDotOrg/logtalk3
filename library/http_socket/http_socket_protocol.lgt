@@ -120,14 +120,14 @@
 	:- public(serve_listener/4).
 	:- mode(serve_listener(+compound, +object_identifier, +integer, --list(compound)), one_or_error).
 	:- info(serve_listener/4, [
-		comment is 'Accepts and serves exactly Count incoming connections on the given listener, returning the accepted client information terms in order.',
+		comment is 'Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.',
 		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos']
 	]).
 
 	:- public(serve_listener/5).
 	:- mode(serve_listener(+compound, +object_identifier, +integer, --list(compound), +list), one_or_error).
 	:- info(serve_listener/5, [
-		comment is 'Accepts and serves exactly Count incoming connections on the given listener using the specified shutdown and worker options.',
+		comment is 'Accepts and serves Count incoming connections on the given listener using the specified shutdown and worker options. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.',
 		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos', 'Options'],
 		remarks is [
 			'Option ``shutdown(keep_open)``' - 'Leave the listener open after serving the requested number of connections. This is the default.',
@@ -154,10 +154,23 @@
 		]
 	]).
 
+	:- public(serve_until_shutdown/5).
+	:- meta_predicate(serve_until_shutdown(*, *, *, *, 0)).
+	:- mode(serve_until_shutdown(+compound, +object_identifier, +nonvar, +list, +callable), one_or_error).
+	:- info(serve_until_shutdown/5, [
+		comment is 'Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.',
+		argnames is ['Listener', 'Handler', 'Control', 'Options', 'Ready'],
+		remarks is [
+			'Control term' - 'The control term must be non-variable and should be fresh for each open-ended serving loop.',
+			'Ready goal' - 'Called once after the shutdown control is registered and before the serving loop starts accepting connections.',
+			'Options' - 'Supports the same worker options as serve_until_shutdown/4.'
+		]
+	]).
+
 	:- public(request_shutdown/1).
 	:- mode(request_shutdown(+nonvar), one_or_error).
 	:- info(request_shutdown/1, [
-		comment is 'Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
+		comment is 'Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 or serve_until_shutdown/5 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
 		argnames is ['Control']
 	]).
 

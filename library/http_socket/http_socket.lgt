@@ -26,15 +26,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-10,
-		comment is 'Sockets-backed HTTP transport predicates built on top of the http_client_core and http_server libraries.',
-		remarks is [
-			'Supported backends' - 'Availability depends on the supported backends of the sockets library.',
-			'Client side' - 'The open_connection/4 and close_connection/1 predicates manage reusable client connections. The open_connection_pool/4 and close_connection_pool/1 predicates manage reusable connection pools. The exchange/3 and exchange_connection/3 predicates operate on an open connection or a connection pool. The exchange/4 and exchange_connection/4 predicates open a client socket, perform one or more HTTP exchanges, and close the connection.',
-			'Server side' - 'The open_listener/4 and close_listener/1 predicates manage listener lifecycle. The serve_once/3 predicate serves one accepted connection. The serve_websocket_once/5 predicate serves one WebSocket opening handshake and returns an upgraded connection handle that remains open for use with the http_websocket library or later message-processing layers. The serve_listener/4 predicate provides bounded sequential serving. The serve_listener/5 predicate adds shutdown policy, worker-per-connection orchestration, and bounded worker-pool serving. The serve_until_shutdown/4 and request_shutdown/1 predicates provide externally controlled open-ended serving loops.',
-			'Option precedence' - 'When the same listener, serving, or pool-management option is given multiple times, the first occurrence is used.',
-			'Connection stream access' - 'The connection_streams/3 predicate exposes the binary input and output streams carried by both reusable client connection handles and upgraded WebSocket connection handles.'
-		]
+		date is 2026-06-12,
+		comment is 'Sockets-backed HTTP transport predicates built on top of the http_client_core and http_server libraries.'
 	]).
 
 	:- private(connection_pool_seed_/1).
@@ -134,11 +127,12 @@
 	:- endif.
 
 	:- uses(list, [
-		length/2, member/2, reverse/2, valid/1 as proper_list/1
+		length/2, reverse/2, valid/1 as proper_list/1
 	]).
 
 	:- meta_predicate(call_with_catch_cleanup(0, 0)).
 	:- meta_predicate(call_with_shutdown_policy(*, *, 0)).
+	:- meta_predicate(serve_until_shutdown(*, *, *, *, 0)).
 	:- if(current_logtalk_flag(threads, supported)).
 		:- meta_predicate(spawn_connection_worker(*, *, *, *)).
 		:- meta_predicate(spawn_notifying_connection_worker(*, *, *, *, *)).
@@ -156,7 +150,10 @@
 		socket::server_close(Listener).
 
 	request_listener_shutdown(Listener) :-
-		signal_shutdown_listener(Listener).
+		( 	request_listener_shutdown_control(Listener) ->
+			true
+		; 	signal_shutdown_listener(Listener)
+		).
 
 	open_connection(Host, Port, http_connection(NormalizedHost, Port, Input, Output), Options) :-
 		normalize_connection_endpoint(Host, Port, NormalizedHost),
@@ -252,17 +249,10 @@
 		).
 
 	serve_until_shutdown(Listener, Handler, Control, Options) :-
-		serve_until_shutdown_impl(Listener, Handler, Control, Options).
+		serve_until_shutdown(Listener, Handler, Control, Options, true).
 
 	request_shutdown(Control) :-
 		request_shutdown_impl(Control).
-
-	serve_listener_serial(_Listener, _Handler, 0, []) :-
-		!.
-	serve_listener_serial(Listener, Handler, Count, [ClientInfo| ClientInfos]) :-
-		serve_once(Listener, Handler, ClientInfo),
-		NextCount is Count - 1,
-		serve_listener_serial(Listener, Handler, NextCount, ClientInfos).
 
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
@@ -596,22 +586,31 @@
 		catch(close_connection(Connection), _, true),
 		close_connection_list(Connections).
 
-	serve_listener_with_workers(serial, Listener, Handler, Count, ClientInfos) :-
-		!,
-		serve_listener_serial(Listener, Handler, Count, ClientInfos).
 	serve_listener_with_workers(Workers, Listener, Handler, Count, ClientInfos) :-
 		serve_listener_with_workers_impl(Workers, Listener, Handler, Count, ClientInfos).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-	serve_until_shutdown_impl(Listener, Handler, Control, Options) :-
+	serve_until_shutdown(Listener, Handler, Control, Options, Ready) :-
 		parse_open_listener_options(Options, Workers),
 		register_shutdown_control(Control, Listener, RunId),
-		call_with_catch_cleanup(
-			serve_until_shutdown_with_workers(Workers, Listener, Handler, Control, RunId),
-			(	catch(close_listener(Listener), _, true),
-				cleanup_shutdown_control(Control, RunId)
+		( 	catch(
+				call(Ready),
+				Error,
+				( 	catch(close_listener(Listener), _, true),
+					cleanup_shutdown_control(Control, RunId),
+					throw(Error)
+				)
+			) ->
+			call_with_catch_cleanup(
+				serve_until_shutdown_with_workers(Workers, Listener, Handler, Control, RunId),
+				( 	catch(close_listener(Listener), _, true),
+					cleanup_shutdown_control(Control, RunId)
+				)
 			)
+		; 	catch(close_listener(Listener), _, true),
+			cleanup_shutdown_control(Control, RunId),
+			fail
 		).
 
 	request_shutdown_impl(Control) :-
@@ -622,26 +621,46 @@
 		;	existence_error(http_socket_shutdown_control, Control)
 		).
 
-	serve_listener_with_workers_impl(per_connection, Listener, Handler, Count, ClientInfos) :-
+	bounded_listener_control(Listener, bounded_listener(Listener)).
+
+	request_listener_shutdown_control(Listener) :-
+		bounded_listener_control(Listener, Control),
+		listener_shutdown_control_(Control, Listener, RunId),
+		!,
+		force_shutdown_control(Control, RunId).
+
+	serve_listener_with_workers_impl(Workers, Listener, Handler, Count, ClientInfos) :-
+		bounded_listener_control(Listener, Control),
+		register_shutdown_control(Control, Listener, RunId),
+		call_with_catch_cleanup(
+			serve_listener_with_workers_impl(Workers, Listener, Handler, Count, ClientInfos, Control, RunId),
+			cleanup_shutdown_control(Control, RunId)
+		).
+
+	serve_listener_with_workers_impl(serial, Listener, Handler, Count, ClientInfos, Control, RunId) :-
+		!,
+		serve_listener_serial(Listener, Handler, Count, ClientInfos, Control, RunId).
+	serve_listener_with_workers_impl(per_connection, Listener, Handler, Count, ClientInfos, Control, RunId) :-
 		catch(
-			serve_listener_parallel(Listener, Handler, Count, ClientInfos, [], ReversedWorkers),
+			serve_listener_parallel(Listener, Handler, Count, ClientInfos, [], ReversedWorkers, Control, RunId),
 			Error,
-			(	wait_for_reversed_workers(ReversedWorkers),
+			( 	force_shutdown_control(Control, RunId),
+				wait_for_reversed_workers(ReversedWorkers),
 				throw(Error)
 			)
 		),
 		wait_for_reversed_workers(ReversedWorkers).
 
-	serve_listener_with_workers_impl(pool(Size), Listener, Handler, Count, ClientInfos) :-
-		serve_listener_pool_batch(Listener, Handler, Size, Count, [], ReversedClientInfos),
+	serve_listener_with_workers_impl(pool(Size), Listener, Handler, Count, ClientInfos, Control, RunId) :-
+		serve_listener_pool_batch(Listener, Handler, Size, Count, [], ReversedClientInfos, Control, RunId),
 		reverse(ReversedClientInfos, ClientInfos).
 
-	serve_listener_with_workers_impl(pool(Size, rolling), Listener, Handler, Count, ClientInfos) :-
-		allocate_shutdown_run_id(RunId),
+	serve_listener_with_workers_impl(pool(Size, rolling), Listener, Handler, Count, ClientInfos, Control, RunId) :-
 		catch(
-			serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, [], ReversedClientInfos, [], ReversedWorkers),
+			serve_listener_pool_rolling(Listener, Handler, Control, RunId, Size, Count, [], ReversedClientInfos, [], ReversedWorkers),
 			Error,
-			(	wait_for_reversed_workers(ReversedWorkers),
+			( 	force_shutdown_control(Control, RunId),
+				wait_for_reversed_workers(ReversedWorkers),
 				throw(Error)
 			)
 		),
@@ -660,47 +679,112 @@
 	serve_until_shutdown_with_workers(pool(Size, rolling), Listener, Handler, Control, RunId) :-
 		serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size).
 
-	serve_listener_parallel(_Listener, _Handler, 0, [], Workers, Workers) :-
+	serve_listener_serial(_Listener, _Handler, 0, [], _Control, _RunId) :-
 		!.
-	serve_listener_parallel(Listener, Handler, Count, [ClientInfo| ClientInfos], Workers0, Workers) :-
-		socket::server_accept(Listener, Input, Output, ClientInfo),
-		spawn_connection_worker(Input, Output, Handler, Worker),
-		NextCount is Count - 1,
-		serve_listener_parallel(Listener, Handler, NextCount, ClientInfos, [Worker| Workers0], Workers).
+	serve_listener_serial(Listener, Handler, Count, ClientInfos, Control, RunId) :-
+		( 	shutdown_requested(Control, RunId) ->
+			ClientInfos = []
+		; 	try_server_accept(Listener, Control, RunId, Input, Output, ClientInfo) ->
+			( 	shutdown_requested(Control, RunId) ->
+				catch(socket::close(Input, Output), _, true),
+				ClientInfos = []
+			; 	catch(
+					serve_accepted_connection(Input, Output, Handler),
+					Error,
+					( 	force_shutdown_control(Control, RunId),
+						throw(Error)
+					)
+				),
+				NextCount is Count - 1,
+				ClientInfos = [ClientInfo| Tail],
+				serve_listener_serial(Listener, Handler, NextCount, Tail, Control, RunId)
+			)
+		; 	ClientInfos = []
+		).
 
-	serve_listener_pool_batch(_Listener, _Handler, _Size, 0, ClientInfos, ClientInfos) :-
+	serve_listener_parallel(_Listener, _Handler, 0, [], Workers, Workers, _Control, _RunId) :-
 		!.
-	serve_listener_pool_batch(Listener, Handler, Size, Count, ClientInfos0, ClientInfos) :-
-		pool_batch_counts(Size, Count, BatchCount, RemainingCount),
-		accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos1, [], ReversedWorkers),
-		wait_for_reversed_workers(ReversedWorkers),
-		serve_listener_pool_batch(Listener, Handler, Size, RemainingCount, ClientInfos1, ClientInfos).
+	serve_listener_parallel(Listener, Handler, Count, ClientInfos, Workers0, Workers, Control, RunId) :-
+		( 	shutdown_requested(Control, RunId) ->
+			ClientInfos = [],
+			Workers = Workers0
+		; 	try_server_accept(Listener, Control, RunId, Input, Output, ClientInfo) ->
+			( 	shutdown_requested(Control, RunId) ->
+				catch(socket::close(Input, Output), _, true),
+				ClientInfos = [],
+				Workers = Workers0
+			; 	spawn_connection_worker(Input, Output, Handler, Worker),
+				NextCount is Count - 1,
+				ClientInfos = [ClientInfo| Tail],
+				serve_listener_parallel(Listener, Handler, NextCount, Tail, [Worker| Workers0], Workers, Control, RunId)
+			)
+		; 	ClientInfos = [],
+			Workers = Workers0
+		).
 
-	serve_listener_pool_rolling(_Listener, _Handler, _RunId, _Size, 0, ClientInfos, ClientInfos, Workers, Workers) :-
+	serve_listener_pool_batch(_Listener, _Handler, _Size, 0, ClientInfos, ClientInfos, _Control, _RunId) :-
 		!.
-	serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, ClientInfos0, ClientInfos, Workers0, Workers) :-
+	serve_listener_pool_batch(Listener, Handler, Size, Count, ClientInfos0, ClientInfos, Control, RunId) :-
+		( 	shutdown_requested(Control, RunId) ->
+			ClientInfos = ClientInfos0
+		; 	pool_batch_counts(Size, Count, BatchCount, RemainingCount),
+			accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos1, [], ReversedWorkers, Control, RunId),
+			wait_for_reversed_workers(ReversedWorkers),
+			( 	shutdown_requested(Control, RunId) ->
+				ClientInfos = ClientInfos1
+			; 	serve_listener_pool_batch(Listener, Handler, Size, RemainingCount, ClientInfos1, ClientInfos, Control, RunId)
+			)
+		).
+
+	serve_listener_pool_rolling(_Listener, _Handler, _Control, _RunId, _Size, 0, ClientInfos, ClientInfos, Workers, Workers) :-
+		!.
+	serve_listener_pool_rolling(Listener, Handler, Control, RunId, Size, Count, ClientInfos0, ClientInfos, Workers0, Workers) :-
 		collect_finished_connection_workers(Workers0, no_error, Workers1, Error),
 		(	Error == no_error ->
 			true
-		;	throw(Error)
+		; 	force_shutdown_control(Control, RunId),
+			throw(Error)
 		),
-		length(Workers1, ActiveWorkers),
-		(	ActiveWorkers < Size ->
-			socket::server_accept(Listener, Input, Output, ClientInfo),
-			spawn_notifying_connection_worker(listener_pool_worker_finished(RunId), Input, Output, Handler, Worker),
-			NextCount is Count - 1,
-			serve_listener_pool_rolling(Listener, Handler, RunId, Size, NextCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers1], Workers)
-		;	threaded_wait(listener_pool_worker_finished(RunId)),
-			serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, ClientInfos0, ClientInfos, Workers1, Workers)
+		( 	shutdown_requested(Control, RunId) ->
+			ClientInfos = ClientInfos0,
+			Workers = Workers1
+		; 	length(Workers1, ActiveWorkers),
+			( 	ActiveWorkers < Size ->
+				( 	try_server_accept(Listener, Control, RunId, Input, Output, ClientInfo) ->
+					( 	shutdown_requested(Control, RunId) ->
+						catch(socket::close(Input, Output), _, true),
+						ClientInfos = ClientInfos0,
+						Workers = Workers1
+					; 	spawn_notifying_connection_worker(listener_pool_worker_finished(RunId), Input, Output, Handler, Worker),
+						NextCount is Count - 1,
+						serve_listener_pool_rolling(Listener, Handler, Control, RunId, Size, NextCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers1], Workers)
+					)
+				; 	ClientInfos = ClientInfos0,
+					Workers = Workers1
+				)
+			; 	threaded_wait(listener_pool_worker_finished(RunId)),
+				serve_listener_pool_rolling(Listener, Handler, Control, RunId, Size, Count, ClientInfos0, ClientInfos, Workers1, Workers)
+			)
 		).
 
-	accept_worker_batch(_Listener, _Handler, 0, ClientInfos, ClientInfos, Workers, Workers) :-
+	accept_worker_batch(_Listener, _Handler, 0, ClientInfos, ClientInfos, Workers, Workers, _Control, _RunId) :-
 		!.
-	accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos, Workers0, Workers) :-
-		socket::server_accept(Listener, Input, Output, ClientInfo),
-		spawn_connection_worker(Input, Output, Handler, Worker),
-		NextBatchCount is BatchCount - 1,
-		accept_worker_batch(Listener, Handler, NextBatchCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers0], Workers).
+	accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos, Workers0, Workers, Control, RunId) :-
+		( 	shutdown_requested(Control, RunId) ->
+			ClientInfos = ClientInfos0,
+			Workers = Workers0
+		; 	try_server_accept(Listener, Control, RunId, Input, Output, ClientInfo) ->
+			( 	shutdown_requested(Control, RunId) ->
+				catch(socket::close(Input, Output), _, true),
+				ClientInfos = ClientInfos0,
+				Workers = Workers0
+			; 	spawn_connection_worker(Input, Output, Handler, Worker),
+				NextBatchCount is BatchCount - 1,
+				accept_worker_batch(Listener, Handler, NextBatchCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers0], Workers, Control, RunId)
+			)
+		; 	ClientInfos = ClientInfos0,
+			Workers = Workers0
+		).
 
 	pool_batch_counts(Size, Count, BatchCount, RemainingCount) :-
 		(	Count =< Size ->
@@ -922,8 +1006,11 @@
 		).
 
 	try_server_accept(Listener, Control, RunId, Input, Output) :-
+		try_server_accept(Listener, Control, RunId, Input, Output, _ClientInfo).
+
+	try_server_accept(Listener, Control, RunId, Input, Output, ClientInfo) :-
 		catch(
-			socket::server_accept(Listener, Input, Output, _ClientInfo),
+			socket::server_accept(Listener, Input, Output, ClientInfo),
 			Error,
 			handle_accept_error(Control, RunId, Error)
 		).
@@ -1018,12 +1105,25 @@
 
 	:- else.
 
-	serve_until_shutdown_impl(_Listener, _Handler, _Control, _Options) :-
-		throw(error(resource_error(threads), http_socket::serve_until_shutdown(_, _, _, _))).
+	serve_until_shutdown(_Listener, _Handler, _Control, _Options, _Ready) :-
+		throw(error(resource_error(threads), http_socket::serve_until_shutdown(_, _, _, _, _))).
+
+	request_listener_shutdown_control(_Listener) :-
+		fail.
 
 	request_shutdown_impl(_Control) :-
 		throw(error(resource_error(threads), http_socket::request_shutdown(_))).
 
+	serve_listener_serial(_Listener, _Handler, 0, []) :-
+		!.
+	serve_listener_serial(Listener, Handler, Count, [ClientInfo| ClientInfos]) :-
+		serve_once(Listener, Handler, ClientInfo),
+		NextCount is Count - 1,
+		serve_listener_serial(Listener, Handler, NextCount, ClientInfos).
+
+	serve_listener_with_workers_impl(serial, Listener, Handler, Count, ClientInfos) :-
+		!,
+		serve_listener_serial(Listener, Handler, Count, ClientInfos).
 	serve_listener_with_workers_impl(per_connection, _Listener, _Handler, _Count, _ClientInfos) :-
 		throw(error(resource_error(threads), http_socket::serve_listener(_, _, _, _, [workers(per_connection)]) )).
 	serve_listener_with_workers_impl(pool(_Size), _Listener, _Handler, _Count, _ClientInfos) :-

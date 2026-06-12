@@ -17,6 +17,9 @@ policies, and the registry-backed broadcast helpers for upgraded
 ``http_socket`` connections are provided by the
 ``http_websocket_service`` library.
 
+This library can be used with backend Prolog systems that supports
+unbound integer arithmetic.
+
 API documentation
 -----------------
 

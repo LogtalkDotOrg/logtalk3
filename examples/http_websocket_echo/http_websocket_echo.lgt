@@ -28,7 +28,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-12,
 		comment is 'Small WebSocket echo server used by the example.'
 	]).
 
@@ -86,7 +86,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-12,
 		comment is 'WebSocket client used by the echo example.'
 	]).
 
@@ -137,7 +137,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-12,
 		comment is 'Self-contained demo object for the WebSocket echo example.'
 	]).
 
@@ -173,13 +173,15 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(websocket_echo_server::serve_listener(Listener, ServerSession), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(websocket_echo_server::serve_listener(Listener, ServerSession), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			Result = result(ServerSession, ClientSession).
 
 		cleanup_demo(Listener, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(websocket_echo_server::serve_listener(Listener, _ServerSession), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(websocket_echo_server::serve_listener(Listener, _ServerSession), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 		print_result(result(_ServerSession, session(_HandshakeResponse, SentMessage, ReplyMessage))) :-
 			http_websocket_messages::payload(SentMessage, SentText),

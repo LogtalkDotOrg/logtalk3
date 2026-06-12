@@ -360,12 +360,14 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag),
 			catch(http_socket::close_listener(Listener), _, true).
 
 		cleanup_demo(Listener, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 		print_result(result(FormResponse, SubmitResponse)) :-
 			http_core::status(FormResponse, FormStatus),

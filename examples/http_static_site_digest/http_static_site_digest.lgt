@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Fixture object that creates and deletes the sample document root used by the Digest-authenticated static-site example.'
 	]).
 
@@ -266,7 +266,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Local Digest verifier used by the authenticated static-site example.'
 	]).
 
@@ -311,7 +311,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP handler for the Digest-authenticated static-site example.'
 	]).
 
@@ -394,7 +394,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Small local HTTP server used by the Digest-authenticated static-site example.'
 	]).
 
@@ -472,7 +472,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-06-02,
+			date is 2026-06-12,
 			comment is 'HTTP client used by the Digest-authenticated static-site example.'
 		]).
 
@@ -575,7 +575,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-06-02,
+			date is 2026-06-12,
 			comment is 'Stub HTTP client object used when the current backend does not support the Digest client-session helper.'
 		]).
 
@@ -654,7 +654,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-06-02,
+			date is 2026-06-12,
 			comment is 'Self-contained demo object for the Digest-authenticated static-site example.'
 		]).
 
@@ -690,13 +690,15 @@
 						throw(Error)
 					)
 				),
-				once(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag)),
+				http_socket::request_listener_shutdown(Listener),
+				threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag),
 				catch(http_socket::close_listener(Listener), _, true),
 				catch(static_site_digest_fixture::cleanup(WorkspaceRoot), _, true).
 
 			cleanup_demo(WorkspaceRoot, DocumentRoot, Listener, Tag) :-
+				http_socket::request_listener_shutdown(Listener),
+				catch(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag), _, true),
 				catch(http_socket::close_listener(Listener), _, true),
-				catch(once(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag)), _, true),
 				catch(static_site_digest_fixture::cleanup(WorkspaceRoot), _, true).
 
 			print_result(result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)) :-
@@ -737,7 +739,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-06-02,
+			date is 2026-06-12,
 			comment is 'Stub demo object used when the current backend does not support the Digest client-session helper.'
 		]).
 

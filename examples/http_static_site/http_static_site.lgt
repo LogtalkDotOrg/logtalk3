@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Fixture object that creates and deletes the sample document root used by the static-site example.'
 	]).
 
@@ -114,7 +114,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP handler for the static-site example.'
 	]).
 
@@ -197,7 +197,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Small local HTTP server used by the static-site example.'
 	]).
 
@@ -258,7 +258,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP client used by the static-site example.'
 	]).
 
@@ -326,7 +326,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Self-contained demo object for the static-site example.'
 	]).
 
@@ -361,13 +361,15 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			catch(static_site_fixture::cleanup(DocumentRoot), _, true).
 
 		cleanup_demo(DocumentRoot, Listener, Tag) :-
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag), _, true),
 			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag)), _, true),
 			catch(static_site_fixture::cleanup(DocumentRoot), _, true).
 
 		print_result(result(HomeResponse, GuideResponse, ListingResponse)) :-

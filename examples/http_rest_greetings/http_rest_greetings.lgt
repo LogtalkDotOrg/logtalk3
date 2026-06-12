@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'REST API used by the HTTP REST example.',
 		parnames is ['Port']
 	]).
@@ -201,7 +201,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Small local HTTP server used by the HTTP REST example.'
 	]).
 
@@ -230,7 +230,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP client used by the HTTP REST example.'
 	]).
 
@@ -322,7 +322,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'Self-contained demo object for the HTTP REST example.'
 	]).
 
@@ -356,15 +356,17 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(serve_demo_requests(Listener, Port), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(serve_demo_requests(Listener, Port), Tag),
 			catch(http_socket::close_listener(Listener), _, true).
 
 		serve_demo_requests(Listener, Port) :-
 			http_socket::serve_listener(Listener, greetings_rest_api(Port), 4, _ClientInfos, [shutdown(close)]).
 
 		cleanup_demo(Listener, Port, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(serve_demo_requests(Listener, Port), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(serve_demo_requests(Listener, Port), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 		print_result(result(_Document, CreateResponse, LookupResponse, DeleteResponse)) :-
 			http_core::body(CreateResponse, content('application/json', json({message-CreateMessage}))),

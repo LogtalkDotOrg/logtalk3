@@ -31,7 +31,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-12,
 		comment is 'HTTP handler for the cookie counter example.'
 	]).
 
@@ -239,7 +239,8 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(serve_demo_requests(Listener), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(serve_demo_requests(Listener), Tag),
 			catch(http_socket::close_listener(Listener), _, true).
 
 		% The client performs two one-shot GET requests, so the demo server only
@@ -248,8 +249,9 @@
 			http_socket::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]).
 
 		cleanup_demo(Listener, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(serve_demo_requests(Listener), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(serve_demo_requests(Listener), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 		print_result(result(FirstResponse, StoredCookiePairs, SecondResponse)) :-
 			http_core::body(FirstResponse, content('application/json', json({visits-FirstVisit, message-FirstMessage}))),

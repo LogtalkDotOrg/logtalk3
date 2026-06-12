@@ -11,11 +11,11 @@ policies, client- and server-side conveniences that collapse the opening
 handshake and the session loop into a single call, and a registry-backed
 broadcast helper for multi-session servers.
 
-This library can be used with backend Prolog systems that support the
-``sockets`` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM. On backends that don't support threads, only a
-subset of the library is usable; see the "Backends without thread
-support" section below for the details.
+This library can be used with backend Prolog systems that supports
+unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM. On backends that don't
+support threads, only a subset of the library is usable; see the
+"Backends without thread support" section below for the details.
 
 API documentation
 -----------------

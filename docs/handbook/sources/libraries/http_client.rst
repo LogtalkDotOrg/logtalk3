@@ -14,9 +14,9 @@ live in the ``http_client_core`` object. That object remains the
 transport-neutral stream-processing layer used internally by
 ``http_socket``.
 
-This library can be used with backend Prolog systems that supports the
-``sockets`` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM.
+This library can be used with backend Prolog systems that supports
+unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 API documentation
 -----------------

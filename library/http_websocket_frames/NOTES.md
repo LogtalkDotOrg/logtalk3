@@ -25,6 +25,9 @@ This library provides the transport-neutral WebSocket helpers shared by
 the current HTTP stack. It includes normalized frame terms and binary
 frame parsing and generation in the `http_websocket_frames` object.
 
+This library can be used with backend Prolog systems that supports unbound
+integer arithmetic.
+
 
 API documentation
 -----------------

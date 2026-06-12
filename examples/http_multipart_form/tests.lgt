@@ -99,7 +99,8 @@
 					throw(Error)
 				)
 			),
-			once(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag)),
+			http_socket::request_listener_shutdown(Listener),
+			threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag),
 			catch(http_socket::close_listener(Listener), _, true),
 			status(FormResponse, status(200, 'OK')),
 			body(FormResponse, content('text/html', text(FormHTML))),
@@ -115,8 +116,9 @@
 			status(SubmitResponse, status(200, 'OK')).
 
 		cleanup_server_thread(Listener, Tag) :-
-			catch(http_socket::close_listener(Listener), _, true),
-			catch(once(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag)), _, true).
+			http_socket::request_listener_shutdown(Listener),
+			catch(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag), _, true),
+			catch(http_socket::close_listener(Listener), _, true).
 
 	:- endif.
 

@@ -26,9 +26,9 @@ The `http_socket` library is the first transport-aware layer on top of the
 for connection management while delegating HTTP message framing and connection
 semantics to the existing stream core and server layers.
 
-This library can be used with backend Prolog systems that supports the
-`sockets` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM.
+This library can be used with backend Prolog systems that supports unbound
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
+SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation
@@ -57,50 +57,25 @@ To test this library, load the `tester.lgt` file:
 Current scope
 -------------
 
-The current implementation provides eighteen predicates:
+The current implementation provides nineteen public predicates, grouped by
+responsibility:
 
-- `open_listener/4` opens a TCP listener using the `sockets` library and
-  returns the listener handle.
-- `close_listener/1` closes a listener previously opened with `open_listener/4`.
-- `open_connection/4` opens a reusable client connection using the `sockets`
-  library and returns a connection handle.
-- `close_connection/1` closes a reusable client connection previously opened
-  with `open_connection/4`.
-- `connection_streams/3` returns the binary input and output streams carried by
-  a reusable client connection handle or by an upgraded WebSocket connection
-  handle.
-- `open_connection_pool/4` opens a managed reusable connection pool for a given
-  host and port.
-- `close_connection_pool/1` closes a managed reusable connection pool and all
-  currently available pooled connections.
-- `connection_pool_stats/2` returns pool statistics as
-  `stats(Available, InUse, Total, MinSize, MaxSize)`.
-- `exchange/3` performs one HTTP exchange on an open reusable client
-  connection or by temporarily acquiring a pooled reusable client connection.
-- `exchange_connection/3` performs a sequence of HTTP exchanges on an open
-  reusable client connection or by temporarily acquiring a pooled reusable
-  client connection.
-- `exchange/4` opens a client socket, performs one HTTP exchange, and closes the
-  connection.
-- `exchange_connection/4` opens a client socket, performs a sequence of HTTP
-  exchanges on a persistent connection, and closes the connection.
-- `serve_once/3` accepts one client socket connection, serves that connection
-  using the `http_server` library, and closes the accepted streams.
-- `serve_websocket_once/5` accepts one client socket connection, serves one
-  WebSocket opening handshake using the `http_server` library, and returns an
-  upgraded connection handle that remains open on success.
-- `serve_listener/4` accepts and serves a bounded number of client connections
-  on the same listener.
-- `serve_listener/5` accepts and serves a bounded number of client connections
-  using configurable shutdown and worker options.
-- `serve_until_shutdown/4` accepts and serves client connections until an
-  external shutdown request is issued for the associated control term.
-- `request_shutdown/1` stops an open-ended `serve_until_shutdown/4` loop,
-  closes its listener, and lets active workers finish before returning.
+- Listener lifecycle: `open_listener/4`, `close_listener/1`, and
+  `request_listener_shutdown/1`.
+- Reusable client connections: `open_connection/4`, `close_connection/1`,
+  `connection_streams/3`, `exchange/3`, `exchange_connection/3`, `exchange/4`,
+  and `exchange_connection/4`.
+- Managed connection pools: `open_connection_pool/4`,
+  `close_connection_pool/1`, and `connection_pool_stats/2`.
+- Server-side request serving: `serve_once/3`, `serve_websocket_once/5`,
+  `serve_listener/4`, and `serve_listener/5`.
+- Open-ended serving control: `serve_until_shutdown/4`,
+  `serve_until_shutdown/5`, and `request_shutdown/1`.
 
-This layer is intentionally thin. It delegates request and response framing to
-`http_client_core` and `http_server`, and delegates socket creation and teardown
-to the `sockets` library.
+Although it exposes these transport-oriented helpers, the library stays focused
+on socket-backed connection and listener management. It delegates HTTP message
+framing and connection semantics to `http_client_core` and `http_server`, and
+delegates socket creation and teardown to the `sockets` library.
 
 Reusable client connections are represented by `http_connection(Host, Port, ...)`
 handle terms that carry normalized endpoint metadata and can be passed to
@@ -116,6 +91,12 @@ Managed connection pools are represented by
 endpoint metadata and can be passed to `exchange/3`, `exchange_connection/3`,
 `close_connection_pool/1`, and `connection_pool_stats/2`.
 
+Open-ended serving is controlled by a user-supplied control term. A control
+term is any fresh non-variable term chosen by the caller to identify one active
+`serve_until_shutdown/4` or `serve_until_shutdown/5` loop. The same term is
+later passed to `request_shutdown/1` to stop that specific serving loop,
+distinguishing it from any other listener loops running at the same time.
+
 The `open_connection_pool/4` predicate supports the following options:
 
 - `min_size(N)` pre-opens `N` reusable connections when the pool is created.
@@ -129,12 +110,17 @@ Pool exchanges fail immediately with `resource_error(http_socket_connection_pool
 when no pooled connection is available and the pool is already at its maximum
 size.
 
-The `serve_listener/5` predicate currently supports two option families:
+The `serve_listener/5` predicate supports the following option families:
+
+Shutdown options:
 
 - `shutdown(keep_open)` leaves the listener open after the bounded serving loop.
   This is the default.
 - `shutdown(close)` closes the listener when the bounded serving loop finishes
   or aborts.
+
+Worker options:
+
 - `workers(serial)` serves accepted connections sequentially in the caller
   thread. This is the default.
 - `workers(per_connection)` spawns one worker thread per accepted connection and
@@ -144,7 +130,12 @@ The `serve_listener/5` predicate currently supports two option families:
 - `workers(pool(N, rolling))` keeps up to `N` worker threads active and
   accepts the next connection as soon as one worker finishes.
 
-The `serve_until_shutdown/4` predicate supports the `workers/1` option family:
+Calling `request_listener_shutdown/1` for a listener with an active bounded
+`serve_listener/5` loop wakes any blocked accept call and lets the loop return
+with the client information terms accepted before the shutdown request.
+
+The `serve_until_shutdown/4` and `serve_until_shutdown/5` predicates support the
+`workers/1` option family:
 
 - `workers(serial)` serves accepted connections sequentially in the caller
   thread. This is the default.
@@ -156,8 +147,11 @@ The `serve_until_shutdown/4` predicate supports the `workers/1` option family:
 - `workers(pool(N, rolling))` is accepted as an explicit alias for the rolling
   fixed-size worker-pool policy used by `workers(pool(N))`.
 
-Open-ended serving loops should use a fresh non-variable control term for each
-call to `serve_until_shutdown/4`.
+Open-ended serving loops should use a fresh control term for each call to
+`serve_until_shutdown/4` or `serve_until_shutdown/5`.
+
+When the same listener, serving, or pool-management option is given multiple
+times, the first occurrence is used.
 
 WebSocket handshake workflow
 ----------------------------

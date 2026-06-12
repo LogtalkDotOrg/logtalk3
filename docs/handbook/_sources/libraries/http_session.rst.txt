@@ -24,9 +24,9 @@ cookie persistence is scoped to explicit client-session handles, while
 server-side session state stays in an explicit in-memory manager keyed
 by opaque cookie identifiers.
 
-This library can be used with backend Prolog systems that supports the
-``sockets`` library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM.
+This library can be used with backend Prolog systems that supports
+unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 API documentation
 -----------------

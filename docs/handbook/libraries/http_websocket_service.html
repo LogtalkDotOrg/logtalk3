@@ -368,11 +368,11 @@ lifecycle ownership, optional auto-pong, keepalive, and idle-timeout
 policies, client- and server-side conveniences that collapse the opening
 handshake and the session loop into a single call, and a registry-backed
 broadcast helper for multi-session servers.</p>
-<p>This library can be used with backend Prolog systems that support the
-<code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-Trealla Prolog, and XVM. On backends that don’t support threads, only a
-subset of the library is usable; see the “Backends without thread
-support” section below for the details.</p>
+<p>This library can be used with backend Prolog systems that supports
+unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM. On backends that don’t
+support threads, only a subset of the library is usable; see the
+“Backends without thread support” section below for the details.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
