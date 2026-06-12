@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on May 4, 2026
+##   Last updated on June 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 19.0"
+	Write-Output "$myName 20.0"
 }
 
 Function Format-Decimal {
@@ -431,6 +431,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	Write-Output "     (level 1 means current directory only)"
 	Write-Output "  -e exclude directories matching a regular expression"
+	Write-Output "     (prefix with '^' to include only matching directories)"
 	Write-Output "  -i integration script command-line options (no default)"
 	Write-Output "  -g initialization goal (default is $initialization_goal)"
 	Write-Output "  -r random generator starting seed (no default)"
@@ -619,8 +620,8 @@ Function Confirm-Parameters() {
 	}
 
 	if ($l -ne "") {
-		if ($l -is [int] -and $l -ge 1) {
-			$script:level = $l - 1
+		if ($l -match '^[1-9][0-9]*$') {
+			$script:level = [int]$l - 1
 		} else {
 			Write-Error "Error! Level must be an integer equal or greater than 1: $l"
 			Write-Usage-Help
@@ -682,6 +683,7 @@ $base = $pwd
 
 $level = 999
 $exclude = ""
+$include_only = $false
 
 if (Test-Path "$env:Programfiles/Git/usr/bin/timeout.exe") {
 	$timeout_command = "$env:Programfiles/Git/usr/bin/timeout.exe"
@@ -775,7 +777,17 @@ if ($l -eq "") {
 }
 
 if ($exclude -ne "") {
-	$driver_files = $driver_files | Where-Object {$_.fullname -notmatch $exclude}
+	if ($exclude.StartsWith('^')) {
+		$include_only = $true
+		$exclude = $exclude.Substring(1)
+	} else {
+		$include_only = $false
+	}
+	if ($include_only) {
+		$driver_files = $driver_files | Where-Object {$_.FullName -match $exclude}
+	} else {
+		$driver_files = $driver_files | Where-Object {$_.FullName -notmatch $exclude}
+	}
 }
 
 $driver_files = $driver_files | Sort-Object -Property FullName

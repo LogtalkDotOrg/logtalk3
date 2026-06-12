@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on April 28, 2026
+##   Last updated on June 12, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 27.0"
+	echo "$(basename "$0") 28.0"
 	exit 0
 }
 
@@ -82,6 +82,7 @@ else
 fi
 level=""
 exclude=""
+include_only='false'
 results="$base/logtalk_tester_logs"
 mode='normal'
 format='default'
@@ -406,6 +407,7 @@ usage_help() {
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
 	echo "  -e exclude directories matching a POSIX-extended regular expression"
+	echo "     (prefix with '^' to include only matching directories)"
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
@@ -663,6 +665,10 @@ fi
 
 if [ "$e_arg" != "" ] ; then
 	exclude="$e_arg"
+	if [ "${exclude:0:1}" == "^" ] ; then
+		include_only='true'
+		exclude="${exclude#^}"
+	fi
 fi
 
 if [ "$g_arg" != "" ] ; then
@@ -713,6 +719,16 @@ if [ "$exclude" == "" ] ; then
 	drivers_file=$(mktemp)
 	find -L "$base" $level -type f \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
 	find_exit=$?
+elif [ "$include_only" == "true" ] ; then
+	if [ "$(uname)" == "Darwin" ] ; then
+		drivers_file=$(mktemp)
+		find -L -E "$base" $level -type f -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+		find_exit=$?
+	else
+		drivers_file=$(mktemp)
+		find -L "$base" $level -type f -regextype posix-extended -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"
+		find_exit=$?
+	fi
 elif [ "$(uname)" == "Darwin" ] ; then
 	drivers_file=$(mktemp)
 	find -L -E "$base" $level -type f -not -regex "$exclude" \( -name "$driver.lgt" -or -name "$driver.logtalk" \) | LC_ALL=C sort > "$drivers_file"

@@ -96,6 +96,13 @@ throw an error when failure was expected.
 Tools
 -----
 
+* ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
+automation scripts for prefixing the `-e` option with `^` to include only
+matching test sets instead of excluding them.
+
+* FIXED: The `logtalk_tester.ps1` PowerShell script to correctly handle the
+`-l` option when selecting test sets.
+
 * FIXED: Spurious choice-points in some of the `packs` tool public predicates.
 
 * FIXED: More strict validation of the `mutation_testing` tool options.

@@ -77,7 +77,7 @@ Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR, \fIcobe
 Directory depth level to look for test sets. Level 1 means the current directory only. Default is to recursively look into all sub-directories.
 .TP
 .BI \-e
-Regular expression for excluding directories (using the \fIfind\fR command support for POSIX-extended regular expressions).
+Regular expression for excluding directories (using the \fIfind\fR command support for POSIX-extended regular expressions). Prefix the pattern with '^' to include only the matching directories instead of excluding them.
 .TP
 .BI \-i
 Integration script command-line options (no default).
@@ -167,6 +167,10 @@ Run all tests in the current directory and sub-directories using the YAP backend
 .TP
 Run all Prolog standards compliance tests with the exception of the \fIcatch_3\fR and \fIcut_0\fR test sets:
 \fBlogtalk_tester -p swi -e ".*/(catch_3|cut_0)/.*"\fR
+.PP
+.TP
+Run only the test sets whose name starts with \fIhttp_\fR:
+\fBlogtalk_tester -p swi -e "^.*/http_.*/.*"\fR
 
 .SH IMPLEMENTATION NOTES
 When the script detects either a \fItimeout\fR, \fIgtimeout\fR, or \fIgnutimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.
