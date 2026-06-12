@@ -335,7 +335,7 @@ Accepts one incoming socket connection on the given listener, serves exactly one
 ``serve_listener/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves exactly Count incoming connections on the given listener, returning the accepted client information terms in order.
+Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.
 
 | **Compilation flags:**
 |    ``static``
@@ -354,7 +354,7 @@ Accepts and serves exactly Count incoming connections on the given listener, ret
 ``serve_listener/5``
 ^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves exactly Count incoming connections on the given listener using the specified shutdown and worker options.
+Accepts and serves Count incoming connections on the given listener using the specified shutdown and worker options. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.
 
 | **Compilation flags:**
 |    ``static``
@@ -404,13 +404,40 @@ Accepts and serves incoming connections on the given listener until request_shut
 
 ------------
 
+.. index:: serve_until_shutdown/5
+.. _http_socket_protocol/0::serve_until_shutdown/5:
+
+``serve_until_shutdown/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_until_shutdown(Listener,Handler,Control,Options,Ready)``
+| **Meta-predicate template:**
+|    ``serve_until_shutdown(*,*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list,+callable)`` - ``one_or_error``
+
+| **Remarks:**
+
+    - Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.
+    - Ready goal: Called once after the shutdown control is registered and before the serving loop starts accepting connections.
+    - Options: Supports the same worker options as serve_until_shutdown/4.
+
+
+------------
+
 .. index:: request_shutdown/1
 .. _http_socket_protocol/0::request_shutdown/1:
 
 ``request_shutdown/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 for the specified control term and wakes any blocked accept call so the loop can terminate portably.
+Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 or serve_until_shutdown/5 for the specified control term and wakes any blocked accept call so the loop can terminate portably.
 
 | **Compilation flags:**
 |    ``static``

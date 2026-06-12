@@ -14,8 +14,8 @@ Linda server predicates and tuple-space state. Import into a threaded object tog
 |    ``logtalk_load(linda(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:1
-| **Date:** 2026-04-22
+| **Version:** 2:0:2
+| **Date:** 2026-06-12
 
 | **Compilation flags:**
 |    ``static``
@@ -183,6 +183,23 @@ Flag indicating the server has received a shutdown request.
 
 | **Mode and number of proofs:**
 |    ``server_shutdown_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: accept_loop_stopped_/0
+.. _linda_server/0::accept_loop_stopped_/0:
+
+``accept_loop_stopped_/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Flag indicating the server accept loop has stopped.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``accept_loop_stopped_`` - ``zero_or_one``
 
 
 ------------

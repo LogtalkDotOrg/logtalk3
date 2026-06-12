@@ -91,6 +91,8 @@ alphabet entries were swapped).
 * FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
 throw an error when failure was expected.
 
+* FIXED: A `linda` library timing issue at server shutdown.
+
 Tools
 -----
 

@@ -122,27 +122,6 @@ Protected helper that runs the callback-driven session loop on an upgraded WebSo
 
 ------------
 
-.. index:: run_once_with_cleanup_/2
-.. _http_websocket_service/2::run_once_with_cleanup_/2:
-
-``run_once_with_cleanup_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Protected helper that calls a goal once and always runs the cleanup goal afterwards, both on success, failure, and error.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``run_once_with_cleanup_(Goal,Cleanup)``
-| **Meta-predicate template:**
-|    ``run_once_with_cleanup_(0,0)``
-| **Mode and number of proofs:**
-|    ``run_once_with_cleanup_(+callable,+callable)`` - ``zero_or_one_or_error``
-
-
-------------
-
 .. index:: validate_non_negative_integer_option/4
 .. _http_websocket_service/2::validate_non_negative_integer_option/4:
 

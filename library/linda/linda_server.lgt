@@ -22,9 +22,9 @@
 :- category(linda_server).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:0:2,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-06-12,
 		comment is 'Linda server predicates and tuple-space state. Import into a threaded object together with the linda_client category.'
 	]).
 
@@ -92,6 +92,13 @@
 	:- mode(server_shutdown_, zero_or_one).
 	:- info(server_shutdown_/0, [
 		comment is 'Flag indicating the server has received a shutdown request.'
+	]).
+
+	:- private(accept_loop_stopped_/0).
+	:- dynamic(accept_loop_stopped_/0).
+	:- mode(accept_loop_stopped_, zero_or_one).
+	:- info(accept_loop_stopped_/0, [
+		comment is 'Flag indicating the server accept loop has stopped.'
 	]).
 
 	:- private(tuple_/1).
@@ -236,6 +243,7 @@
 	linda_(Options) :-
 		context(Context),
 		retractall(server_shutdown_),
+		retractall(accept_loop_stopped_),
 		% Start socket server
 		ignore(memberchk(port(Port), Options)),
 		socket::server_open(Port, ServerSocket, [type(text)]),
@@ -279,6 +287,7 @@
 		retractall(server_socket_(_)),
 		retractall(server_running_(_)),
 		retractall(server_shutdown_),
+		retractall(accept_loop_stopped_),
 		retractall(tuple_(_)),
 		retractall(waiting_(_ ,_, _)),
 		retractall(client_connection_(_, _, _)),
@@ -311,24 +320,49 @@
 		(   server_shutdown_ ->
 			% Stop accepting new connections
 			dbg(@'Accept loop stopping due to shutdown'),
+			note_accept_loop_stopped,
 			threaded_engine_yield(done)
 		;   catch(
 				(   socket::server_accept(ServerSocket, Input, Output, ClientInfo, [type(text)]),
 					dbg('Accepted new connection'-ClientInfo),
-					(   accept_hook_(accept_hook(ClientAddr, Input, Output, Goal)) ->
-						ClientInfo = client(ClientAddr),
-						(   call(Goal) ->
-							create_client_engine(ClientInfo, Input, Output)
-						;   socket::close(Input, Output)
-						)
-					;   create_client_engine(ClientInfo, Input, Output)
-					)
+					handle_accepted_connection(ClientInfo, Input, Output)
 				),
 				Error,
 				dbg('Accept error'-Error)
 			),
 			accept_loop(ServerSocket)
 		).
+
+	handle_accepted_connection(ClientInfo, Input, Output) :-
+		(   server_shutdown_ ->
+			catch(socket::close(Input, Output), _, true)
+		;   accept_hook_(accept_hook(ClientAddr, Input, Output, Goal)) ->
+			ClientInfo = client(ClientAddr),
+			(   call(Goal) ->
+				create_client_engine(ClientInfo, Input, Output)
+			;   socket::close(Input, Output)
+			)
+		;   create_client_engine(ClientInfo, Input, Output)
+		).
+
+	note_accept_loop_stopped :-
+		(   accept_loop_stopped_ ->
+			true
+		;   assertz(accept_loop_stopped_)
+		).
+
+	wait_for_accept_loop_to_stop :-
+		wait_for_accept_loop_to_stop(100).
+
+	wait_for_accept_loop_to_stop(_Remaining) :-
+		accept_loop_stopped_,
+		!.
+	wait_for_accept_loop_to_stop(0) :-
+		!.
+	wait_for_accept_loop_to_stop(Remaining) :-
+		sleep(0.01),
+		NextRemaining is Remaining - 1,
+		wait_for_accept_loop_to_stop(NextRemaining).
 
 	create_client_engine(ClientId, Input, Output) :-
 		% Register client connection
@@ -469,11 +503,16 @@
 
 	handle_request(shutdown, ClientId, Output) :-
 		!,
-		assertz(server_shutdown_),
+		(   server_shutdown_ ->
+			true
+		;   assertz(server_shutdown_)
+		),
+		signal_accept_loop,
 		(	retract(server_socket_(ServerSocket)) ->
 			catch(socket::server_close(ServerSocket), Error, dbg('Server shutdown error'-Error))
 		;	true
 		),
+		wait_for_accept_loop_to_stop,
 		% Send response first
 		write(Output, 'ok.\n'),
 		flush_output(Output),
@@ -487,6 +526,25 @@
 		write_canonical(Output, error(unknown_request)),
 		write(Output, '.\n'),
 		flush_output(Output).
+
+	signal_accept_loop :-
+		(   server_running_(Host0:Port) ->
+			shutdown_signal_host(Host0, Host),
+			catch(
+				(   socket::client_open(Host, Port, Input, Output, [type(text)]),
+					socket::close(Input, Output)
+				),
+				_,
+				true
+			)
+		;   true
+		).
+
+	shutdown_signal_host('0.0.0.0', '127.0.0.1') :-
+		!.
+	shutdown_signal_host('::', '::1') :-
+		!.
+	shutdown_signal_host(Host, Host).
 
 	% ==========================================================================
 	% Synchronized tuple space operations
