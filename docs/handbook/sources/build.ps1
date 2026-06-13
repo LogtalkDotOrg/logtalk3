@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 11, 2026
+##   Last updated on June 13, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -170,6 +170,7 @@ Foreach-Object {
 (Get-Content ../../../library/html/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/html.rst
 (Get-Content ../../../library/http_authenticate/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_authenticate.rst
 (Get-Content ../../../library/http_client/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_client.rst
+(Get-Content ../../../library/http_client_core/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_client_core.rst
 (Get-Content ../../../library/http_cookies/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cookies.rst
 (Get-Content ../../../library/http_core/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_core.rst
 (Get-Content ../../../library/http_cors/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_cors.rst

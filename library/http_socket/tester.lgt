@@ -26,7 +26,7 @@
 
 	:- initialization((
 		logtalk_load(sockets(loader)),
-		logtalk_load(http_client(core_loader)),
+		logtalk_load(http_client_core(loader)),
 		logtalk_load(http_server(loader)),
 		logtalk_load([http_socket_protocol, http_socket], [debug(on), source_data(on)]),
 		logtalk_load(test_objects),

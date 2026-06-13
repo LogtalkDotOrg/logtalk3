@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="http_cookies" href="http_cookies.html" />
+    <link rel="next" title="http_client_core" href="http_client_core.html" />
     <link rel="prev" title="http_authenticate" href="http_authenticate.html" />
    
 </head>
@@ -168,10 +168,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multipart-workflow">Multipart workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#websocket-workflow">WebSocket workflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#framing-rules">Framing rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="http_client_core.html"><code class="docutils literal notranslate"><span class="pre">http_client_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cookies.html"><code class="docutils literal notranslate"><span class="pre">http_cookies</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_core.html"><code class="docutils literal notranslate"><span class="pre">http_core</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_cors.html"><code class="docutils literal notranslate"><span class="pre">http_cors</span></code></a></li>
@@ -366,10 +366,6 @@ top of the <code class="docutils literal notranslate"><span class="pre">http_cor
 the request-oriented client-side entry point: it builds normalized
 requests from absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs plus options and delegates
 transport to the sockets-backed layer.</p>
-<p>The low-level stream primitives previously exposed as the main API now
-live in the <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object. That object remains the
-transport-neutral stream-processing layer used internally by
-<code class="docutils literal notranslate"><span class="pre">http_socket</span></code>.</p>
 <p>This library can be used with backend Prolog systems that supports
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
@@ -594,37 +590,6 @@ predicates do take ownership of the upgraded connection and close it
 automatically when the session loop finishes, as do the higher-level
 <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code> predicates.</p></li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object continues to provide the original
-stream-based predicates:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">write_request/2</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></p></li>
-</ul>
-</section>
-<section id="framing-rules">
-<h2>Framing rules<a class="headerlink" href="#framing-rules" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object supports response framing for:</p>
-<ul class="simple">
-<li><p>status codes that never carry a body (<code class="docutils literal notranslate"><span class="pre">1xx</span></code>, <code class="docutils literal notranslate"><span class="pre">204</span></code>, <code class="docutils literal notranslate"><span class="pre">205</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">304</span></code>)</p></li>
-<li><p>fixed-length bodies via <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code></p></li>
-<li><p>chunked bodies via <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding:</span> <span class="pre">chunked</span></code>, including trailers</p></li>
-<li><p>close-delimited bodies terminated by end-of-file</p></li>
-</ul>
-<p>Request-aware exchanges performed by <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange/4</span></code>
-and <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_connection/4</span></code> also support <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>
-responses. In that case the normalized response body is <code class="docutils literal notranslate"><span class="pre">empty</span></code> and
-the response is annotated with the metadata properties
-<code class="docutils literal notranslate"><span class="pre">body_omitted(head)</span></code> and, when applicable,
-<code class="docutils literal notranslate"><span class="pre">omitted_body_length(Length)</span></code>.</p>
-<p>Close-delimited responses returned by
-<code class="docutils literal notranslate"><span class="pre">http_client_core::read_response/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">http_client_core::exchange/4</span></code> are annotated with the property
-<code class="docutils literal notranslate"><span class="pre">body_framing(close_delimited)</span></code>. Sequential exchanges can only use a
-close-delimited response as the final response in the sequence because
-the connection is consumed while reading the body.</p>
 </section>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
@@ -637,12 +602,6 @@ support is added.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate is limited to opening-handshake
 validation. See the dedicated WebSocket libraries for frame parsing,
 message reassembly, and related functionality.</p></li>
-<li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
-reading streamed response bodies in <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>.</p></li>
-<li><p>Close-delimited response bodies can only be used as the final response
-in an <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_connection/4</span></code> sequence.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object assumes binary streams for both input
-and output.</p></li>
 </ul>
 </section>
 </section>
@@ -652,7 +611,7 @@ and output.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="http_authenticate.html" class="btn btn-neutral float-left" title="http_authenticate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_cookies.html" class="btn btn-neutral float-right" title="http_cookies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_client_core.html" class="btn btn-neutral float-right" title="http_client_core" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

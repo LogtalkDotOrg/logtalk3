@@ -20,6 +20,9 @@
 
 
 :- initialization((
-	logtalk_load('../http_core/loader.lgt'),
-	logtalk_load(http_client_core, [optimize(on)])
+	logtalk_load(http_core(loader)),
+	logtalk_load(http_client_core, [debug(on), source_data(on)]),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
 )).

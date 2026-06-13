@@ -11,11 +11,11 @@
 Portable stream-based HTTP client core predicates.
 
 | **Availability:** 
-|    ``logtalk_load(http_client(loader))``
+|    ``logtalk_load(http_client_core(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

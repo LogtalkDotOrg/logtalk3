@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-13,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
@@ -144,7 +144,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
+		member/2, memberchk/2, valid/1 as proper_list/1
 	]).
 
 	:- uses(http_websocket_handshake, [

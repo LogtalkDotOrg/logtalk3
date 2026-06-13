@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on June 11, 2026
+%  Last updated on June 13, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -124,6 +124,7 @@ logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
 logtalk_library_path(http_authenticate, library('http_authenticate/')).
 logtalk_library_path(http_client, library('http_client/')).
+logtalk_library_path(http_client_core, library('http_client_core/')).
 logtalk_library_path(http_cookies, library('http_cookies/')).
 logtalk_library_path(http_core, library('http_core/')).
 logtalk_library_path(http_cors, library('http_cors/')).

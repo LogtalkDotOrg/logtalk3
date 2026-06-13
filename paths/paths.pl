@@ -199,6 +199,7 @@ logtalk_library_path(hook_objects, library('hook_objects/')).
 logtalk_library_path(html, library('html/')).
 logtalk_library_path(http_authenticate, library('http_authenticate/')).
 logtalk_library_path(http_client, library('http_client/')).
+logtalk_library_path(http_client_core, library('http_client_core/')).
 logtalk_library_path(http_cookies, library('http_cookies/')).
 logtalk_library_path(http_core, library('http_core/')).
 logtalk_library_path(http_cors, library('http_cors/')).

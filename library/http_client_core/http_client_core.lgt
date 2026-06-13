@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-13,
 		comment is 'Portable stream-based HTTP client core predicates.',
 		remarks is [
 			'Binary streams' - 'All stream predicates expect binary input and output streams.',
@@ -63,7 +63,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, member/2, memberchk/2, reverse/2
+		append/3, member/2, memberchk/2
 	]).
 
 	write_request(Output, Request) :-
@@ -249,14 +249,14 @@
 		).
 
 	read_remaining_bytes(Input, Bytes) :-
-		read_remaining_bytes(Input, [], Bytes).
-
-	read_remaining_bytes(Input, Acc, Bytes) :-
 		get_byte(Input, Byte),
-		(	Byte =:= -1 ->
-			reverse(Acc, Bytes)
-		;	read_remaining_bytes(Input, [Byte| Acc], Bytes)
-		).
+		read_remaining_bytes(Byte, Input, Bytes).
+
+	read_remaining_bytes(-1, _Input, []) :-
+		!.
+	read_remaining_bytes(Byte, Input, [Byte| Bytes]) :-
+		get_byte(Input, NextByte),
+		read_remaining_bytes(NextByte, Input, Bytes).
 
 	read_crlf(Input) :-
 		get_byte(Input, CarriageReturn),
@@ -271,22 +271,22 @@
 		get_byte(Input, Byte),
 		(	Byte =:= -1 ->
 			Result = end_of_file
-		;	read_line_bytes(Input, Byte, [], Result)
+		;	read_line_bytes(Byte, Input, Bytes),
+			Result = line(Bytes)
 		).
 
-	read_line_bytes(Input, Byte, Acc, Result) :-
-		(	Byte =:= 0'\r ->
-			get_byte(Input, NextByte),
-			(	NextByte =:= 0'\n ->
-				reverse(Acc, Bytes),
-				Result = line(Bytes)
-			;	domain_error(http_response_stream, invalid_line_ending(Byte, NextByte))
-			)
-		;	Byte =:= 0'\n ->
-			domain_error(http_response_stream, bare_line_feed)
-		;	get_byte(Input, NextByte),
-			read_line_bytes(Input, NextByte, [Byte| Acc], Result)
+	read_line_bytes(0'\r, Input, []) :-
+		!,
+		get_byte(Input, Byte),
+		(	Byte =:= 0'\n ->
+			true
+		;	domain_error(http_response_stream, invalid_line_ending(0'\r, Byte))
 		).
+	read_line_bytes(0'\n, _Input, _) :-
+		domain_error(http_response_stream, bare_line_feed).
+	read_line_bytes(Byte, Input, [Byte| Bytes]) :-
+		get_byte(Input, NextByte),
+		read_line_bytes(NextByte, Input, Bytes).
 
 	write_bytes([], _Output).
 	write_bytes([Byte| Bytes], Output) :-
