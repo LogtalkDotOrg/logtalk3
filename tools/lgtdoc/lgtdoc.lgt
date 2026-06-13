@@ -24,9 +24,9 @@
 	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 11:3:0,
+		version is 11:4:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-06-13,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1253,6 +1253,10 @@
 				)
 			),
 			write_xml_close_tag(Stream, exceptions)
+		;	entity_property(Entity, declares(Functor/Arity, Properties)),
+			member(mode(_Template, Proofs), Properties),
+			memberchk(Proofs, [zero_or_error, one_or_error, zero_or_one_or_error, zero_or_more_or_error, one_or_more_or_error, error]) ->
+			warn_on_missing_predicate_info_key(Indicator, exceptions, Type, Entity)
 		;	true
 		),
 		(	member(remarks(Remarks), Info) ->

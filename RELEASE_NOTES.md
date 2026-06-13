@@ -100,6 +100,10 @@ Tools
 automation scripts for prefixing the `-e` option with `^` to include only
 matching test sets instead of excluding them.
 
+* UPDATED: The `lgtdoc` tool linter to report any predicate/non-terminal
+`info/2` directive missing an `exceptions` key when the corresponding `mode/2`
+directives declare that the predicate/non-terminal may throw an error.
+
 * FIXED: The `logtalk_tester.ps1` PowerShell script to correctly handle the
 `-l` option when selecting test sets.
 
