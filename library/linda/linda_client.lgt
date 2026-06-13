@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:0:2,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-06-13,
 		comment is 'Linda client predicates and client-side connection state. Import into a threaded object together with the linda_server category.'
 	]).
 
@@ -69,7 +69,7 @@
 	:- public(shutdown_server/1).
 	:- mode(shutdown_server(++address_or_alias), one_or_error).
 	:- info(shutdown_server/1, [
-		comment is 'Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/1`` after this predicate.',
+		comment is 'Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. The connection used for shutdown is closed after the server acknowledges the request.',
 		argnames is ['Address'],
 		exceptions is [
 			'Not connected' - linda_error(not_connected('Address'))
@@ -249,8 +249,8 @@
 		argnames is ['Timeout']
 	]).
 
-	:- uses(os, [
-		cpu_time/1, sleep/1
+	:- uses(timeout, [
+		call_with_timeout/3
 	]).
 
 	% ==========================================================================
@@ -284,7 +284,7 @@
 		(	retract(client_connection_input_(Address, Input)),
 			retract(client_connection_output_(Address, Output)),
 			retract(client_connection_alias_(Address, _Alias)) ->
-			write_out(Output, exit),
+			catch(write_out(Output, exit), _, true),
 			catch(socket::close(Input, Output), _, true)
 		;	true
 		).
@@ -292,13 +292,15 @@
 	shutdown_server(AddressOrALias) :-
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
-		(	client_connection_output_(Address, Output),
+		( 	client_connection_output_(Address, Output),
+			client_connection_input_(Address, Input) ->
 			write_out(Output, shutdown),
-			client_connection_input_(Address, Input),
 			read_in(Input, Response),
-			Response == ok ->
-			true
-		;	throw(error(linda_error(shutdown_failed(Response)), Context))
+			( 	Response == ok ->
+				close_client(Address)
+			;	throw(error(linda_error(shutdown_failed(Response)), Context))
+			)
+		;	throw(error(linda_error(not_connected(Address)), Context))
 		).
 
 	linda_timeout(OldTime, NewTime) :-
@@ -473,10 +475,6 @@
 	findall_in_noblock(Template, Tuple, Bag) :-
 		findall_in_noblock(blackboard, Template, Tuple, Bag).
 
-	% Check if stream has data ready (backend dependent)
-	stream_ready(Stream) :-
-		catch(peek_char(Stream, _), _, fail).
-
 	% Auxiliary predicate to wait for result with optional timeout
 	wait_for_result(Input, Result, Context) :-
 		(	client_timeout_(Timeout), Timeout \== off ->
@@ -488,21 +486,16 @@
 		).
 
 	wait_for_result_timeout(Input, Result, TimeoutSeconds, Context) :-
-		cpu_time(StartTime),
-		wait_for_result_loop(Input, Result, StartTime, TimeoutSeconds, Context).
+		call_with_timeout(read_in(Input, Result), TimeoutSeconds, TimeoutResult),
+		wait_for_result_outcome(TimeoutResult, Context).
 
-	wait_for_result_loop(Input, Result, StartTime, TimeoutSeconds, Context) :-
-		(	stream_ready(Input) ->
-			read_in(Input, Result)
-		;	cpu_time(CurrentTime),
-			Elapsed is CurrentTime - StartTime,
-			(	Elapsed > TimeoutSeconds ->
-				throw(error(linda_error(timeout), Context))
-			;	% Small sleep to avoid busy waiting
-				sleep(0.01),
-				wait_for_result_loop(Input, Result, StartTime, TimeoutSeconds, Context)
-			)
-		).
+	wait_for_result_outcome(true, _Context).
+	wait_for_result_outcome(timeout, Context) :-
+		throw(error(linda_error(timeout), Context)).
+	wait_for_result_outcome(fail, _Context) :-
+		fail.
+	wait_for_result_outcome(error(Error), _Context) :-
+		throw(Error).
 
 	resolve_alias(AddressOrALias, Address, Context) :-
 		(	var(AddressOrALias) ->

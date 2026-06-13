@@ -22,9 +22,9 @@
 :- category(linda_server).
 
 	:- info([
-		version is 2:0:2,
+		version is 2:0:3,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-06-13,
 		comment is 'Linda server predicates and tuple-space state. Import into a threaded object together with the linda_client category.'
 	]).
 
@@ -351,26 +351,27 @@
 		;   assertz(accept_loop_stopped_)
 		).
 
-	wait_for_accept_loop_to_stop :-
-		wait_for_accept_loop_to_stop(100).
+	wait_for_accept_loop_to_stop(Outcome) :-
+		wait_for_accept_loop_to_stop(100, Outcome).
 
-	wait_for_accept_loop_to_stop(_Remaining) :-
+	wait_for_accept_loop_to_stop(_Remaining, stopped) :-
 		accept_loop_stopped_,
 		!.
-	wait_for_accept_loop_to_stop(0) :-
+	wait_for_accept_loop_to_stop(0, timeout) :-
 		!.
-	wait_for_accept_loop_to_stop(Remaining) :-
+	wait_for_accept_loop_to_stop(Remaining, Outcome) :-
 		sleep(0.01),
 		NextRemaining is Remaining - 1,
-		wait_for_accept_loop_to_stop(NextRemaining).
+		wait_for_accept_loop_to_stop(NextRemaining, Outcome).
 
-	create_client_engine(ClientId, Input, Output) :-
+	create_client_engine(ClientInfo, Input, Output) :-
+		ClientId = client(ClientInfo, Input),
 		% Register client connection
 		assertz(client_connection_(ClientId, Input, Output)),
 		% Create engine that reads directly from its socket
 		threaded_engine_create(_, client_engine_loop(ClientId, Input, Output, EngineName), EngineName),
 		assertz(client_engine_(ClientId, EngineName)),
-		dbg('Client connected'::['ClientId'-ClientId, 'EngineName'-EngineName]).
+		dbg('Client connected'::['ClientId'-ClientId, 'ClientInfo'-ClientInfo, 'EngineName'-EngineName]).
 
 	% Each client engine reads directly from its socket (blocking read)
 	% The loop must be robust - failures in handle_request must not terminate the engine
@@ -512,10 +513,8 @@
 			catch(socket::server_close(ServerSocket), Error, dbg('Server shutdown error'-Error))
 		;	true
 		),
-		wait_for_accept_loop_to_stop,
-		% Send response first
-		write(Output, 'ok.\n'),
-		flush_output(Output),
+		wait_for_accept_loop_to_stop(Outcome),
+		shutdown_response(Outcome, Output),
 		% Write exit term to all client input streams to terminate engines
 		forall(
 			(client_connection_(OtherClientId, Input, _), OtherClientId \== ClientId),
@@ -527,11 +526,18 @@
 		write(Output, '.\n'),
 		flush_output(Output).
 
+	shutdown_response(stopped, Output) :-
+		write(Output, 'ok.\n'),
+		flush_output(Output).
+	shutdown_response(timeout, Output) :-
+		write_canonical(Output, error(shutdown_timeout)),
+		write(Output, '.\n'),
+		flush_output(Output).
+
 	signal_accept_loop :-
-		(   server_running_(Host0:Port) ->
-			shutdown_signal_host(Host0, Host),
+		(   server_running_(_Host:Port) ->
 			catch(
-				(   socket::client_open(Host, Port, Input, Output, [type(text)]),
+				(   socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
 					socket::close(Input, Output)
 				),
 				_,
@@ -539,12 +545,6 @@
 			)
 		;   true
 		).
-
-	shutdown_signal_host('0.0.0.0', '127.0.0.1') :-
-		!.
-	shutdown_signal_host('::', '::1') :-
-		!.
-	shutdown_signal_host(Host, Host).
 
 	% ==========================================================================
 	% Synchronized tuple space operations
@@ -637,29 +637,60 @@
 
 	% Try to wake one in/1 or in_list/1 waiter. Succeeds if a waiter was woken.
 	wake_one_in_waiter(Tuple) :-
-		% Find the first matching in/1 or in_list/1 waiter
-		(   waiting_(ClientId, in(Pattern), Output),
-			\+ Tuple \= Pattern ->
-			Request = in(Pattern)
-		;   waiting_(ClientId, in_list(Patterns), Output),
-			member(Pattern, Patterns),
-			\+ Tuple \= Pattern ->
-			Request = in_list(Patterns)
-		;   fail
+		findall(
+			waiter(ClientId, Request, Output),
+			(	waiting_(ClientId, in(Pattern), Output),
+				\+ Tuple \= Pattern,
+				Request = in(Pattern)
+			;	waiting_(ClientId, in_list(Patterns), Output),
+				member(Pattern, Patterns),
+				\+ Tuple \= Pattern,
+				Request = in_list(Patterns)
+			),
+			Waiters
 		),
-		% Wake this one waiter
-		retract(waiting_(ClientId, Request, Output)),
-		write_out(Output, result(Tuple)).
+		wake_one_in_waiter(Waiters, Tuple).
+
+	wake_one_in_waiter([waiter(ClientId, Request, Output)| Waiters], Tuple) :-
+		( 	retract(waiting_(ClientId, Request, Output)) ->
+			( 	notify_waiting_client(ClientId, Output, result(Tuple)) ->
+				true
+			; 	wake_one_in_waiter(Waiters, Tuple)
+			)
+		; 	wake_one_in_waiter(Waiters, Tuple)
+		).
+	wake_one_in_waiter([], _) :-
+		fail.
 
 	% Wake all rd/1 and rd_list/1 waiters matching the tuple
 	wake_all_rd_waiters(Tuple) :-
-		forall(
-			(   waiting_(ClientId, Request, Output),
+		findall(
+			waiter(ClientId, Request, Output),
+			(	waiting_(ClientId, Request, Output),
 				is_rd_request(Request, Tuple)
 			),
-			(   retract(waiting_(ClientId, Request, Output)) ->
-				write_out(Output, result(Tuple))
-			;   true
+			Waiters
+		),
+		wake_all_rd_waiters(Waiters, Tuple).
+
+	wake_all_rd_waiters([waiter(ClientId, Request, Output)| Waiters], Tuple) :-
+		( 	retract(waiting_(ClientId, Request, Output)) ->
+			ignore(notify_waiting_client(ClientId, Output, result(Tuple)))
+		; 	true
+		),
+		wake_all_rd_waiters(Waiters, Tuple).
+	wake_all_rd_waiters([], _).
+
+	notify_waiting_client(ClientId, Output, Term) :-
+		catch(write_out(Output, Term), _, (prune_waiting_client(ClientId), fail)).
+
+	prune_waiting_client(ClientId) :-
+		( 	client_connection_(ClientId, Input, Output) ->
+			remove_client(ClientId, Input, Output)
+		; 	retractall(waiting_(ClientId, _, _)),
+			( 	retract(client_engine_(ClientId, EngineName)) ->
+				threaded_ignore(threaded_engine_destroy(EngineName))
+			; 	true
 			)
 		).
 

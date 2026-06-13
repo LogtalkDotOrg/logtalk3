@@ -34,13 +34,26 @@
 :- end_object.
 
 
-:- object(client,
+:- object(client1,
 	imports(linda_client)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-03-27,
+		date is 2026-06-13,
+		comment is 'Description'
+	]).
+
+:- end_object.
+
+
+:- object(client2,
+	imports(linda_client)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-13,
 		comment is 'Description'
 	]).
 

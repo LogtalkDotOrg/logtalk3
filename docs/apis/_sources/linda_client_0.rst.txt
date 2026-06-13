@@ -14,8 +14,8 @@ Linda client predicates and client-side connection state. Import into a threaded
 |    ``logtalk_load(linda(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:1
-| **Date:** 2026-04-22
+| **Version:** 2:0:2
+| **Date:** 2026-06-13
 
 | **Compilation flags:**
 |    ``static``
@@ -24,8 +24,8 @@ Linda client predicates and client-side connection state. Import into a threaded
 | **Extends:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`os <os/0>`
 |    :ref:`socket <socket/0>`
+|    :ref:`timeout <timeout/0>`
 
 | **Remarks:**
 |    (none)
@@ -119,7 +119,7 @@ Closes the connection to the given Linda server.
 ``shutdown_server/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. Call ``close_client/1`` after this predicate.
+Sends a shutdown signal to the given server. The server stops accepting new connections but continues serving existing clients until they all disconnect. The connection used for shutdown is closed after the server acknowledges the request.
 
 | **Compilation flags:**
 |    ``static``
