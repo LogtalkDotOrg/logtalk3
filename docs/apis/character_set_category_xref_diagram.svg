@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 1203,-151 1203,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category character_set</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;06&#45;12, 16:13</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;06&#45;13, 18:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_character_set_category</title>
 <g id="a_clust1"><a xlink:title="character_set">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1179,-54.25 1179,-54.25 1185,-54.25 1191,-60.25 1191,-66.25 1191,-66.25 1191,-127 1191,-127 1191,-133 1185,-139 1179,-139 1179,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">character_set</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>valid_unicode_scalar/1</title>
 <polygon fill="yellow" stroke="black" points="193.5,-100.25 18.5,-100.25 18.5,-64.25 193.5,-64.25 193.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-84.12" font-family="Monospace" font-size="11.00">valid_unicode_scalar/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>continuation_byte/1</title>
 <polygon fill="yellow" stroke="black" points="366.38,-100.25 211.62,-100.25 211.62,-64.25 366.38,-64.25 366.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="219.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="224.88" y="-84.12" font-family="Monospace" font-size="11.00">continuation_byte/1</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>high_surrogate/1</title>
 <polygon fill="yellow" stroke="black" points="519.25,-100.25 384.75,-100.25 384.75,-64.25 519.25,-64.25 519.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="392.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="398" y="-84.12" font-family="Monospace" font-size="11.00">high_surrogate/1</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>low_surrogate/1</title>
 <polygon fill="yellow" stroke="black" points="664.88,-100.25 537.12,-100.25 537.12,-64.25 664.88,-64.25 664.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="545.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="550.38" y="-84.12" font-family="Monospace" font-size="11.00">low_surrogate/1</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>word_bytes/4</title>
 <polygon fill="yellow" stroke="black" points="790.75,-100.25 683.25,-100.25 683.25,-64.25 790.75,-64.25 790.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="691.25" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="696.5" y="-84.12" font-family="Monospace" font-size="11.00">word_bytes/4</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>dword_bytes/6</title>
 <polygon fill="yellow" stroke="black" points="923.12,-100.25 808.88,-100.25 808.88,-64.25 923.12,-64.25 923.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="816.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="822.12" y="-84.12" font-family="Monospace" font-size="11.00">dword_bytes/6</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>bytes_word/4</title>
 <polygon fill="yellow" stroke="black" points="1048.75,-100.25 941.25,-100.25 941.25,-64.25 1048.75,-64.25 1048.75,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="949.25" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="954.5" y="-84.12" font-family="Monospace" font-size="11.00">bytes_word/4</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>bytes_dword/6</title>
 <polygon fill="yellow" stroke="black" points="1181.12,-100.25 1066.88,-100.25 1066.88,-64.25 1181.12,-64.25 1181.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1074.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e46b1da268d94942970122415d69d938b5fcbfc5/library/character_sets/character_sets.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af7a6ae1a3616b6936098ddc19bea99f129d7daa/library/character_sets/character_sets.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="1080.12" y="-84.12" font-family="Monospace" font-size="11.00">bytes_dword/6</text>
 </a>
 </g>
