@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-13,
 		comment is 'Unit tests for the "http_websocket_session" library.'
 	]).
 
@@ -86,6 +86,18 @@
 		Message1 == message(close, status(1000)),
 		Error = error(domain_error(http_websocket_session_state, session_state(idle, close_received(status(1000)))), _).
 
+	test(http_websocket_session_read_message_4_04, error(domain_error(http_websocket_session_masking, _))) :-
+		http_websocket_frames::frame(final, text, [0'h], [], Frame),
+		write_frames_file('test_http_websocket_session.tmp', [Frame]),
+		http_websocket_server_session::initial_state(State0),
+		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_server_session, State0, _State, _Message).
+
+	test(http_websocket_session_read_message_4_05, error(domain_error(http_websocket_session_masking, _))) :-
+		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], Frame),
+		write_frames_file('test_http_websocket_session.tmp', [Frame]),
+		http_websocket_client_session::initial_state(State0),
+		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_client_session, State0, _State, _Message).
+
 	test(http_websocket_session_read_message_4_06, deterministic) :-
 		http_websocket_client_session::message(close, status(1001), SentMessage),
 		^^file_path('test_http_websocket_session_reply.tmp', ReplyFile),
@@ -102,18 +114,6 @@
 		State1 == session_state(idle, close_sent(status(1001))),
 		State2 == session_state(idle, closed(status(1001), status(1000))),
 		Message == message(close, status(1000)).
-
-	test(http_websocket_session_read_message_4_04, error(domain_error(http_websocket_session_masking, _))) :-
-		http_websocket_frames::frame(final, text, [0'h], [], Frame),
-		write_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket_server_session::initial_state(State0),
-		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_server_session, State0, _State, _Message).
-
-	test(http_websocket_session_read_message_4_05, error(domain_error(http_websocket_session_masking, _))) :-
-		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4])], Frame),
-		write_frames_file('test_http_websocket_session.tmp', [Frame]),
-		http_websocket_client_session::initial_state(State0),
-		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_client_session, State0, _State, _Message).
 
 	test(http_websocket_session_read_message_4_07, error(domain_error(http_websocket_session_extensions, _))) :-
 		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4]), reserved_bits([rsv1])], Frame),
