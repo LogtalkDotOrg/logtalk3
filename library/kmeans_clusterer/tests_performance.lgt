@@ -86,9 +86,9 @@
 	minimum_centroid_distance([Centroid| Centroids], MinimumDistance) :-
 		minimum_distance_to_others(Centroid, Centroids, FirstMinimumDistance),
 		minimum_centroid_distance(Centroids, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Centroid, [Other| Others], MinimumDistance) :-

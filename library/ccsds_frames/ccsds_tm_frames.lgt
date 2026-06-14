@@ -172,11 +172,11 @@
 		Frame == UpdatedFrame.
 
 	update_fecf(Frame, UpdatedFrame) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   refresh_fecf(Frame, UpdatedFrame) ->
+		;	refresh_fecf(Frame, UpdatedFrame) ->
 			true
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 
 	verify_fecf(Frame) :-
@@ -206,10 +206,10 @@
 
 	refresh_fecf(Frame, UpdatedFrame) :-
 		frame_template(Frame),
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			compute_fecf(Frame, FECF),
 			replace_fecf(Frame, FECF, UpdatedFrame)
-		;   UpdatedFrame = Frame
+		;	UpdatedFrame = Frame
 		).
 
 	frame_type(tm_transfer_frame(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _), tm).
@@ -247,7 +247,7 @@
 	secondary_header(tm_transfer_frame(_, _, _, _, _, _, _, _, _, _, _, SecondaryHeader, _, _, _), SecondaryHeader).
 
 	parse_bytes(Bytes, Frames) :-
-		(   valid_parameters,
+		(	valid_parameters,
 			valid(list(byte), Bytes),
 			parse_all(Bytes, Frames) ->
 			true
@@ -300,21 +300,21 @@
 		append_optional_ocf(OCFFlag, OCF, Rest2, Tail).
 
 	generate_all_stream([Frame| Frames], Stream) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   generate(Frame, Bytes, []) ->
+		;	generate(Frame, Bytes, []) ->
 			write_bytes(Bytes, Stream),
 			generate_all_stream(Frames, Stream)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 	generate_all_stream([], _).
 
 	generate_all_bytes([Frame| Frames], Bytes) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   generate(Frame, Bytes, Tail) ->
+		;	generate(Frame, Bytes, Tail) ->
 			generate_all_bytes(Frames, Tail)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 	generate_all_bytes([], []).
 
@@ -328,10 +328,10 @@
 		take(4, Bytes, OCFBytes, Rest).
 
 	take_optional_fecf(Bytes, Rest, FECF) :-
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			take(2, Bytes, FECFBytes, Rest),
 			FECF = fecf(FECFBytes)
-		;   Rest = Bytes,
+		;	Rest = Bytes,
 			FECF = none
 		).
 
@@ -344,10 +344,10 @@
 		append(OCFBytes, Rest, Bytes).
 
 	append_optional_fecf(FECF, Bytes, Rest) :-
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			FECF = fecf(FECFBytes),
 			append(FECFBytes, Rest, Bytes)
-		;   FECF = none,
+		;	FECF = none,
 			Rest = Bytes
 		).
 
@@ -360,9 +360,9 @@
 	ocf_length(1, 4).
 
 	fecf_length(Length) :-
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			Length = 2
-		;   Length = 0
+		;	Length = 0
 		).
 
 	valid_secondary_header(0, none, 0).
@@ -401,9 +401,9 @@
 		!.
 	compute_fecf_crc_bits(Bit, CRC0, CRC) :-
 		Bit > 0,
-		(   CRC0 /\ 0x8000 =:= 0 ->
+		(	CRC0 /\ 0x8000 =:= 0 ->
 			CRC1 is (CRC0 << 1) /\ 0xFFFF
-		;   CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
+		;	CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
 		),
 		NextBit is Bit - 1,
 		compute_fecf_crc_bits(NextBit, CRC1, CRC).
@@ -418,11 +418,11 @@
 		_FrameLength_ >= 6,
 		integer(_SecondaryHeaderLength_),
 		_SecondaryHeaderLength_ >= 0,
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			FECFLen = 2
-		;   (   _HasFECF_ == false ->
+		;	(   _HasFECF_ == false ->
 				FECFLen = 0
-			;   fail
+			;	fail
 			)
 		),
 		_FrameLength_ >= 6 + FECFLen.

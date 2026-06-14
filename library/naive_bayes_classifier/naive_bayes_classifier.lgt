@@ -250,7 +250,7 @@
 		classifier_data(Classifier, Classes, _ClassPriors, AttributeNames, FeatureTypes, _FeatureParams).
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
+		(	classifier_data(Classifier, Classes, ClassPriors, AttributeNames, FeatureTypes, FeatureParams),
 			^^valid_class_values(Classes),
 			valid_class_priors(ClassPriors, Classes),
 			^^valid_attribute_names(AttributeNames),
@@ -260,7 +260,7 @@
 			length(FeatureParams, FeatureCount),
 			valid_feature_params(FeatureParams, AttributeNames, FeatureTypes, Classes) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-

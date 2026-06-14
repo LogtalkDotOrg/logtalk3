@@ -149,19 +149,19 @@
 	undirected_cycle_from(Current, Parent, Start, Graph, Visited, ReverseCycle) :-
 		::neighbors(Current, Graph, Neighbors),
 		member(Next, Neighbors),
-		( Next == Parent ->
+		(	Next == Parent ->
 			fail
-		; Next == Start ->
+		;	Next == Start ->
 			length(Visited, N),
 			N >= 3,
 			ReverseCycle = [Start| Visited]
-		; \+ member(Next, Visited),
+		;	\+ member(Next, Visited),
 			undirected_cycle_from(Next, Current, Start, Graph, [Next| Visited], ReverseCycle)
 		).
 
 	ap_all([], _, _, Disc, Low, Points, _, Disc, Low, Points).
 	ap_all([Vertex| Vertices], Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Points) :-
-		( dfs_lookup(Vertex, _, Disc0) ->
+		(	dfs_lookup(Vertex, _, Disc0) ->
 			ap_all(Vertices, Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Points)
 		;	dfs_visit(Vertex, none, Graph, Time0, Disc0, Low0, Points0, Bridges0, Time1, Disc1, Low1, Points1, _),
 			ap_all(Vertices, Graph, Time1, Disc1, Low1, Points1, Bridges0, Disc, Low, Points)
@@ -169,7 +169,7 @@
 
 	bridges_all([], _, _, Disc, Low, _, Bridges, Disc, Low, Bridges).
 	bridges_all([Vertex| Vertices], Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Bridges) :-
-		( dfs_lookup(Vertex, _, Disc0) ->
+		(	dfs_lookup(Vertex, _, Disc0) ->
 			bridges_all(Vertices, Graph, Time0, Disc0, Low0, Points0, Bridges0, Disc, Low, Bridges)
 		;	dfs_visit(Vertex, none, Graph, Time0, Disc0, Low0, Points0, Bridges0, Time1, Disc1, Low1, _, Bridges1),
 			bridges_all(Vertices, Graph, Time1, Disc1, Low1, Points0, Bridges1, Disc, Low, Bridges)
@@ -181,8 +181,8 @@
 		Time1 is Time0 + 1,
 		::neighbors(Vertex, Graph, Neighbors),
 		dfs_neighbors(Neighbors, Vertex, Parent, Graph, Time1, Disc1, Low1, Time2, Disc2, Low2, Time0, 0, ChildCount, Points0, Points1, Bridges0, Bridges1),
-		( Parent == none,
-		  ChildCount > 1 ->
+		(	Parent == none,
+			ChildCount > 1 ->
 			set_insert(Points1, Vertex, Points)
 		;	Points = Points1
 		),
@@ -193,9 +193,9 @@
 
 	dfs_neighbors([], _, _, _, Time, Disc, Low, Time, Disc, Low, _, ChildCount, ChildCount, Points, Points, Bridges, Bridges).
 	dfs_neighbors([Neighbor| Neighbors], Vertex, Parent, Graph, Time0, Disc0, Low0, Time, Disc, Low, VertexDisc, ChildCount0, ChildCount, Points0, Points, Bridges0, Bridges) :-
-		( Neighbor == Parent ->
+		(	Neighbor == Parent ->
 			dfs_neighbors(Neighbors, Vertex, Parent, Graph, Time0, Disc0, Low0, Time, Disc, Low, VertexDisc, ChildCount0, ChildCount, Points0, Points, Bridges0, Bridges)
-		; dfs_lookup(Neighbor, NeighborDisc, Disc0) ->
+		;	dfs_lookup(Neighbor, NeighborDisc, Disc0) ->
 			dfs_lookup(Vertex, VertexLow0, Low0),
 			NewVertexLow is min(VertexLow0, NeighborDisc),
 			dfs_insert(Low0, Vertex, NewVertexLow, Low1),
@@ -205,12 +205,12 @@
 			dfs_lookup(Neighbor, NeighborLow, Low1),
 			NewVertexLow is min(VertexLow0, NeighborLow),
 			dfs_insert(Low1, Vertex, NewVertexLow, Low2),
-			( Parent \== none,
-			  NeighborLow >= VertexDisc ->
+			(	Parent \== none,
+				NeighborLow >= VertexDisc ->
 				set_insert(Points1, Vertex, Points2)
 			;	Points2 = Points1
 			),
-			( NeighborLow > VertexDisc ->
+			(	NeighborLow > VertexDisc ->
 				canonical_edge(Vertex, Neighbor, Edge),
 				set_insert(Bridges1, Edge, Bridges2)
 			;	Bridges2 = Bridges1

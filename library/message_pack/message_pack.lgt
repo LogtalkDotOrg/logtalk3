@@ -88,9 +88,9 @@
 	encode_literal(not_a_number) --> {ieee_754(single, big, canonical)::generate(@not_a_number, Bytes, [])}, [0xca], bytes(Bytes).
 
 	encode_integer(Integer) -->
-		(   {0 =< Integer} ->
+		(	{0 =< Integer} ->
 			encode_non_negative_integer(Integer)
-		;   encode_negative_integer(Integer)
+		;	encode_negative_integer(Integer)
 		).
 
 	encode_non_negative_integer(Integer) -->
@@ -476,15 +476,15 @@
 		bytes_to_unsigned_integer(Bytes, Unsigned),
 		Bits is Length * 8,
 		SignMask is 1 << (Bits - 1),
-		(   Unsigned /\ SignMask =:= 0 ->
+		(	Unsigned /\ SignMask =:= 0 ->
 			Integer = Unsigned
-		;   Integer is Unsigned - (1 << Bits)
+		;	Integer is Unsigned - (1 << Bits)
 		).
 
 	byte_to_signed_integer(Byte, Integer) :-
-		(   Byte >= 0x80 ->
+		(	Byte >= 0x80 ->
 			Integer is Byte - 0x100
-		;   Integer = Byte
+		;	Integer = Byte
 		).
 
 	message_pack_utf_8_string_to_term(atom, Codes, Atom) :-

@@ -87,11 +87,11 @@
 
 	check_dimension_reducer(DimensionReducer) :-
 		^^check_dimension_reducer(DimensionReducer),
-		(   DimensionReducer = nmf_reducer(Encoders, Components, Diagnostics),
+		(	DimensionReducer = nmf_reducer(Encoders, Components, Diagnostics),
 			valid_non_negative_components(Components),
 			valid_nmf_diagnostics(Encoders, Components, Diagnostics) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(nmf_reducer(Encoders, Components, Diagnostics)) :-
@@ -118,9 +118,9 @@
 	check_non_negative_attribute_values([], _AttributeValues).
 	check_non_negative_attribute_values([Attribute| Attributes], AttributeValues) :-
 		^^attribute_value(Attribute, AttributeValues, Value),
-		(   Value >= 0.0 ->
+		(	Value >= 0.0 ->
 			true
-		;   domain_error(non_negative_attribute, Attribute-Value)
+		;	domain_error(non_negative_attribute, Attribute-Value)
 		),
 		check_non_negative_attribute_values(Attributes, AttributeValues).
 
@@ -132,13 +132,13 @@
 
 	non_negative_scale(Values, Options, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == true ->
+		(	FeatureScaling == true ->
 			max_value(Values, Maximum),
-			(   Maximum > 0.0 ->
+			(	Maximum > 0.0 ->
 				Scale = Maximum
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
-		;   Scale = 1.0
+		;	Scale = 1.0
 		).
 
 	max_value([Value| Values], Maximum) :-
@@ -173,9 +173,9 @@
 		positive_floor_row(Values, PositiveValues).
 
 	positive_floor(Value, PositiveValue) :-
-		(   Value > 0.0 ->
+		(	Value > 0.0 ->
 			PositiveValue = Value
-		;   PositiveValue = 1.0e-12
+		;	PositiveValue = 1.0e-12
 		).
 
 	train_factorization(Rows, Coefficients0, Components0, Options, Convergence, Iterations, FinalDelta, Coefficients, Components) :-
@@ -188,19 +188,19 @@
 		update_coefficients(Rows, Coefficients0, Components1, Coefficients1, CoefficientsDelta),
 		CurrentDelta is max(ComponentsDelta, CoefficientsDelta),
 		Iteration is Iteration0 + 1,
-		(   CurrentDelta =< Tolerance ->
+		(	CurrentDelta =< Tolerance ->
 			Convergence = tolerance,
 			Iterations = Iteration,
 			FinalDelta = CurrentDelta,
 			Coefficients = Coefficients1,
 			Components = Components1
-		;   Iteration >= MaximumIterations ->
+		;	Iteration >= MaximumIterations ->
 			Convergence = maximum_iterations_exhausted,
 			Iterations = Iteration,
 			FinalDelta = CurrentDelta,
 			Coefficients = Coefficients1,
 			Components = Components1
-		;   iterate_factorization(Rows, MaximumIterations, Tolerance, Iteration, Coefficients1, Components1, Convergence, Iterations, FinalDelta, Coefficients, Components)
+		;	iterate_factorization(Rows, MaximumIterations, Tolerance, Iteration, Coefficients1, Components1, Convergence, Iterations, FinalDelta, Coefficients, Components)
 		).
 
 	update_components(Rows, Coefficients, Components0, Components, Delta) :-
@@ -228,11 +228,11 @@
 		reconstruct_row(Weights0, Components, Approximation),
 		update_weight_vector(Weights0, Features, Components, Approximation, 0.0, Weights1, Delta),
 		Iteration is Iteration0 + 1,
-		(   Delta =< Tolerance ->
+		(	Delta =< Tolerance ->
 			Weights = Weights1
-		;   Iteration >= MaximumIterations ->
+		;	Iteration >= MaximumIterations ->
 			Weights = Weights1
-		;   iterate_weights(Options, Features, Components, Iteration, Weights1, Weights)
+		;	iterate_weights(Options, Features, Components, Iteration, Weights1, Weights)
 		).
 
 	weights_pairs([], _Index, []).

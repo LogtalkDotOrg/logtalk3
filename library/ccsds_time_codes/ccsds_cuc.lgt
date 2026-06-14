@@ -132,24 +132,24 @@
 		;	number(Seconds) ->
 			epoch_offset(_Epoch_, Offset),
 			Adjusted is Seconds - Offset,
-			(   Adjusted < 0 ->
+			(	Adjusted < 0 ->
 				domain_error(ccsds_time_code_unix_seconds, Seconds)
-			;   true
+			;	true
 			),
 			fine_scale(_FineOctets_, Scale),
 			Coarse0 is floor(Adjusted),
 			Fraction is Adjusted - Coarse0,
 			Fine0 is round(Fraction * Scale),
-			(   Fine0 =:= Scale ->
+			(	Fine0 =:= Scale ->
 				Coarse is Coarse0 + 1,
 				Fine = 0
-			;   Coarse = Coarse0,
+			;	Coarse = Coarse0,
 				Fine = Fine0
 			),
 			TimeCode = cuc_time(Coarse, Fine),
-			(   valid(TimeCode) ->
+			(	valid(TimeCode) ->
 				true
-			;   domain_error(ccsds_time_code_unix_seconds, Seconds)
+			;	domain_error(ccsds_time_code_unix_seconds, Seconds)
 			)
 		;	domain_error(ccsds_time_code_unix_seconds, Seconds)
 		).
@@ -159,7 +159,7 @@
 	fine(cuc_time(_, Fine), Fine).
 
 	parse_bytes(Bytes, TimeCode) :-
-		(   valid_bytes(Bytes),
+		(	valid_bytes(Bytes),
 			expected_length(ExpectedLength),
 			length(Bytes, ExpectedLength) ->
 			decode_time(Bytes, TimeCode)

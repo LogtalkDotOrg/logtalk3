@@ -313,15 +313,15 @@
 		instantiation_error.
 	join_packet_zone(PacketZone, SecondaryHeaderLength, Bytes, FirstHeaderPointer) :-
 		valid_secondary_header_length(SecondaryHeaderLength),
-		(   valid(PacketZone) ->
+		(	valid(PacketZone) ->
 			true
-		;   domain_error(ccsds_packet_zone, PacketZone)
+		;	domain_error(ccsds_packet_zone, PacketZone)
 		),
 		PacketZone = packet_zone(PrefixData, Packets, SuffixData),
-		(   Packets == [] ->
+		(	Packets == [] ->
 			append(PrefixData, SuffixData, Bytes),
 			FirstHeaderPointer = 2047
-		;   ccsds_packets(SecondaryHeaderLength)::generate(bytes(PacketBytes), Packets),
+		;	ccsds_packets(SecondaryHeaderLength)::generate(bytes(PacketBytes), Packets),
 			append(PrefixData, PacketBytes, Bytes0),
 			append(Bytes0, SuffixData, Bytes),
 			length(PrefixData, FirstHeaderPointer)
@@ -387,9 +387,9 @@
 		instantiation_error.
 	reassemble_packet_zone(PacketZone, SecondaryHeaderLength, State, Packets, UpdatedState) :-
 		valid_secondary_header_length(SecondaryHeaderLength),
-		(   valid(PacketZone) ->
+		(	valid(PacketZone) ->
 			true
-		;   domain_error(ccsds_packet_zone, PacketZone)
+		;	domain_error(ccsds_packet_zone, PacketZone)
 		),
 		valid_packet_reassembly_state(State),
 		reassemble_packet_zone_(PacketZone, SecondaryHeaderLength, State, Packets, UpdatedState).
@@ -683,9 +683,9 @@
 		valid_aos_packet_zone_bytes(DataField),
 		decode_aos_packet_zone(DataField, FirstHeaderPointer, PacketZoneBytes),
 		aos_counter_modulus(SignalingField, CounterModulus),
-		(   FirstHeaderPointer =:= 2046 ->
+		(	FirstHeaderPointer =:= 2046 ->
 			ReassemblyMode = idle_only
-		;   ReassemblyMode = packet_zone_context(FirstHeaderPointer, PacketZoneBytes)
+		;	ReassemblyMode = packet_zone_context(FirstHeaderPointer, PacketZoneBytes)
 		).
 	aos_reassembly_context(Frame, _, _, _, _, _) :-
 		domain_error(ccsds_aos_transfer_frame_term, Frame).
@@ -712,10 +712,10 @@
 		update_channel_state(State, FrameType, SpacecraftId, VirtualChannelId, CounterModulus, ExpectedFrameCount, UpdatedPendingData, UpdatedState).
 
 	channel_state(channel_reassembly_state(Channels), FrameType, SpacecraftId, VirtualChannelId, CounterModulus, VirtualChannelFrameCount, Policy, RecoveryMode, PendingData, Events) :-
-		(   select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, ExistingEntry, _) ->
+		(	select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, ExistingEntry, _) ->
 			ExistingEntry = reassembly_channel(FrameType, SpacecraftId, VirtualChannelId, StoredCounterModulus, ExpectedFrameCount, StoredPendingData),
 			channel_recovery_mode(Policy, FrameType, SpacecraftId, VirtualChannelId, StoredCounterModulus, CounterModulus, ExpectedFrameCount, VirtualChannelFrameCount, StoredPendingData, RecoveryMode, PendingData, Events)
-		;   PendingData = [],
+		;	PendingData = [],
 			RecoveryMode = normal,
 			Events = []
 		).
@@ -759,9 +759,9 @@
 	sanitize_packet_zone_after_discontinuity(packet_zone(_, Packets, SuffixData), packet_zone([], Packets, SuffixData)).
 
 	update_channel_state(channel_reassembly_state(Channels), FrameType, SpacecraftId, VirtualChannelId, CounterModulus, ExpectedFrameCount, PendingData, channel_reassembly_state(UpdatedChannels)) :-
-		(   select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, _, OtherChannels) ->
+		(	select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, _, OtherChannels) ->
 			true
-		;   OtherChannels = Channels
+		;	OtherChannels = Channels
 		),
 		UpdatedChannels = [reassembly_channel(FrameType, SpacecraftId, VirtualChannelId, CounterModulus, ExpectedFrameCount, PendingData)| OtherChannels].
 
@@ -789,9 +789,9 @@
 		ExpectedFrameCount is (VirtualChannelFrameCount + 1) mod CounterModulus.
 
 	aos_counter_modulus(signaling_field(_, FrameCountUsageFlag, _, _), CounterModulus) :-
-		(   FrameCountUsageFlag =:= 1 ->
+		(	FrameCountUsageFlag =:= 1 ->
 			CounterModulus = 268435456
-		;   CounterModulus = 16777216
+		;	CounterModulus = 16777216
 		).
 
 	pending_fragments_([reassembly_channel(FrameType, SpacecraftId, VirtualChannelId, _, _, PendingData)| Channels], [pending_fragment(FrameType, SpacecraftId, VirtualChannelId, PendingData)| PendingFragments]) :-
@@ -803,14 +803,14 @@
 	pending_fragments_([], []).
 
 	join_aos_packet_zone_(PacketZone, SecondaryHeaderLength, PacketZoneBytes, FirstHeaderPointer) :-
-		(   valid(PacketZone) ->
+		(	valid(PacketZone) ->
 			true
-		;   domain_error(ccsds_packet_zone, PacketZone)
+		;	domain_error(ccsds_packet_zone, PacketZone)
 		),
 		PacketZone = packet_zone(PrefixData, Packets, SuffixData),
-		(   Packets == [] ->
+		(	Packets == [] ->
 			join_empty_aos_packet_zone(PrefixData, SuffixData, PacketZone, PacketZoneBytes, FirstHeaderPointer)
-		;   join_packet_zone(PacketZone, SecondaryHeaderLength, PacketZoneBytes, FirstHeaderPointer)
+		;	join_packet_zone(PacketZone, SecondaryHeaderLength, PacketZoneBytes, FirstHeaderPointer)
 		).
 
 	join_empty_aos_packet_zone([], SuffixData, _, SuffixData, 2046) :-
@@ -911,19 +911,19 @@
 
 	compute_fecf_crc_bits(0, CRC, CRC).
 	compute_fecf_crc_bits(Bit, CRC0, CRC) :-
-		(   CRC0 /\ 0x8000 =:= 0 ->
+		(	CRC0 /\ 0x8000 =:= 0 ->
 			CRC1 is (CRC0 << 1) /\ 0xFFFF
-		;   CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
+		;	CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
 		),
 		NextBit is Bit - 1,
 		compute_fecf_crc_bits(NextBit, CRC1, CRC).
 
 	decode_aos_packet_zone([Byte0, Byte1| PacketZoneBytes], FirstHeaderPointer, PacketZoneBytes) :-
 		Reserved is (Byte0 >> 3) /\ 0x1F,
-		(   Reserved =:= 0 ->
+		(	Reserved =:= 0 ->
 			FirstHeaderPointer is ((Byte0 /\ 0x07) << 8) \/ Byte1,
 			valid_aos_first_header_pointer(FirstHeaderPointer, PacketZoneBytes)
-		;   domain_error(ccsds_aos_packet_zone_bytes, [Byte0, Byte1| PacketZoneBytes])
+		;	domain_error(ccsds_aos_packet_zone_bytes, [Byte0, Byte1| PacketZoneBytes])
 		).
 
 	encode_aos_packet_zone(FirstHeaderPointer, PacketZoneBytes, [Byte0, Byte1| PacketZoneBytes]) :-

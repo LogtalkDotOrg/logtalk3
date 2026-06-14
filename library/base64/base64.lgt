@@ -22,9 +22,9 @@
 :- object(base64).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-18,
+		date is 2026-06-14,
 		comment is 'Base64 parser and generator.'
 	]).
 
@@ -32,14 +32,23 @@
 	:- mode(parse(++compound, --list(byte)), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses the Base64 data from the given source (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` into a list of bytes.',
-		argnames is ['Source', 'Bytes']
+		argnames is ['Source', 'Bytes'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Base64 source term' - domain_error(base64_source, 'Source'),
+			'``Source`` contains Base64 data with characters outside the Base64 alphabet' - representation_error(base64)
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(+compound, +list(byte)), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates Base64 in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` for the list of bytes in the second argument.',
-		argnames is ['Sink', 'Bytes']
+		argnames is ['Sink', 'Bytes'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Base64 sink term' - domain_error(base64_sink, 'Sink')
+		]
 	]).
 
 	parse(Source, _) :-

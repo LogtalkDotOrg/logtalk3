@@ -39,13 +39,13 @@
 		^^base_regressor_diagnostics(sample_regressor, TargetName, TrainingExampleCount, Options, [], Diagnostics).
 
 	check_regressor(Regressor) :-
-		(   Regressor = sample_regressor(TargetName, Attributes, Target, Diagnostics),
+		(	Regressor = sample_regressor(TargetName, Attributes, Target, Diagnostics),
 			atom(TargetName),
 			^^valid_attribute_declarations(Attributes),
 			number(Target),
 			^^valid_regressor_metadata(sample_regressor, Diagnostics) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
@@ -168,12 +168,12 @@
 
 	read_header_lines(Stream, Lines) :-
 		read_line_atom(Stream, Line),
-		(   Line == end_of_file ->
+		(	Line == end_of_file ->
 			Lines = []
-		;   sub_atom(Line, 0, 1, _, '%') ->
+		;	sub_atom(Line, 0, 1, _, '%') ->
 			Lines = [Line| RestLines],
 			read_header_lines(Stream, RestLines)
-		;   Lines = []
+		;	Lines = []
 		).
 
 	read_line_atom(Stream, Line) :-

@@ -101,12 +101,12 @@
 		format('Diagnostics: ~q~n', [Diagnostics]).
 
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
-		(   var(Ranker) ->
+		(	var(Ranker) ->
 			instantiation_error
-		;   Ranker = bt_ranker(Items, Strengths, Diagnostics),
+		;	Ranker = bt_ranker(Items, Strengths, Diagnostics),
 			valid_ranker_data(Items, Strengths, Diagnostics) ->
 			true
-		;   domain_error(bradley_terry_ranker, Ranker)
+		;	domain_error(bradley_terry_ranker, Ranker)
 		).
 
 	valid_ranker_data(Items, Strengths, Diagnostics) :-
@@ -146,17 +146,17 @@
 		update_strength_values(PairWeights, WinTotals, StrengthDictionary, CurrentStrengths, RawStrengths, TotalRawStrength1, TotalRawStrength).
 
 	normalize_strengths(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference) :-
-		(   TotalRawStrength =< 1.0e-12 ->
+		(	TotalRawStrength =< 1.0e-12 ->
 			normalize_strengths_identity(RawStrengths, Strengths0, Strengths, 0.0, MaximumDifference)
-		;   normalize_strengths_scaled(RawStrengths, TotalRawStrength, Strengths0, Strengths, 0.0, MaximumDifference)
+		;	normalize_strengths_scaled(RawStrengths, TotalRawStrength, Strengths0, Strengths, 0.0, MaximumDifference)
 		).
 
 	normalize_strengths_identity([], [], [], MaximumDifference, MaximumDifference).
 	normalize_strengths_identity([RawStrength| RawStrengths], [Strength0| Strengths0], [RawStrength| Strengths], MaximumDifference0, MaximumDifference) :-
 		Difference is abs(Strength0 - RawStrength),
-		(   Difference > MaximumDifference0 ->
+		(	Difference > MaximumDifference0 ->
 			MaximumDifference1 = Difference
-		;   MaximumDifference1 = MaximumDifference0
+		;	MaximumDifference1 = MaximumDifference0
 		),
 		normalize_strengths_identity(RawStrengths, Strengths0, Strengths, MaximumDifference1, MaximumDifference).
 
@@ -164,9 +164,9 @@
 	normalize_strengths_scaled([RawStrength| RawStrengths], TotalRawStrength, [Strength0| Strengths0], [Strength| Strengths], MaximumDifference0, MaximumDifference) :-
 		Strength is RawStrength / TotalRawStrength,
 		Difference is abs(Strength0 - Strength),
-		(   Difference > MaximumDifference0 ->
+		(	Difference > MaximumDifference0 ->
 			MaximumDifference1 = Difference
-		;   MaximumDifference1 = MaximumDifference0
+		;	MaximumDifference1 = MaximumDifference0
 		),
 		normalize_strengths_scaled(RawStrengths, TotalRawStrength, Strengths0, Strengths, MaximumDifference1, MaximumDifference).
 

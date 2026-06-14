@@ -514,7 +514,7 @@
 		!,
 		split_authority_path_codes(AuthorityPathCodes, AuthorityCodes, PathCodes),
 		convert_to_text(_Representation_, AuthorityCodes, Authority),
-		( PathCodes == [] ->
+		(	PathCodes == [] ->
 			Components = [authority(Authority)]
 		;	convert_to_text(_Representation_, PathCodes, Path),
 			Components = [authority(Authority), path(Path)]
@@ -528,12 +528,12 @@
 	relative_reference_tail_components(QueryCodes, FragmentCodes, Components) :-
 		convert_to_text(_Representation_, QueryCodes, Query),
 		convert_to_text(_Representation_, FragmentCodes, Fragment),
-		( QueryCodes == [] ->
-			( FragmentCodes == [] ->
+		(	QueryCodes == [] ->
+			(	FragmentCodes == [] ->
 				Components = []
 			;	Components = [fragment(Fragment)]
 			)
-		;	( FragmentCodes == [] ->
+		;	(	FragmentCodes == [] ->
 				Components = [query(Query)]
 			;	Components = [query(Query), fragment(Fragment)]
 			)
@@ -827,7 +827,7 @@
 		append(HostBodyCodes, [0']| RemainingCodes], Codes),
 		!,
 		append([0'[| HostBodyCodes], [0']], HostCodes),
-		( RemainingCodes = [0':| PortDigitCodes] ->
+		(	RemainingCodes = [0':| PortDigitCodes] ->
 			PortCodes = [0':| PortDigitCodes]
 		;	PortCodes = []
 		).
@@ -1307,13 +1307,13 @@
 		append_optional_fragment(Components1, Fragment, Empty, Components).
 
 	append_optional_query(Components0, Query, Empty, Components) :-
-		( Query == Empty ->
+		(	Query == Empty ->
 			Components = Components0
 		;	append(Components0, [query(Query)], Components)
 		).
 
 	append_optional_fragment(Components0, Fragment, Empty, Components) :-
-		( Fragment == Empty ->
+		(	Fragment == Empty ->
 			Components = Components0
 		;	append(Components0, [fragment(Fragment)], Components)
 		).

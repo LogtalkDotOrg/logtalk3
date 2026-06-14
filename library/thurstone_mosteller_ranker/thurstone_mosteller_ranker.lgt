@@ -50,9 +50,9 @@
 		^^merge_options(UserOptions, Options),
 		^^validate_pairwise_dataset(Dataset, DatasetSummary),
 		^^pairwise_dataset_items(Dataset, Items),
-		(   Items = [Item] ->
+		(	Items = [Item] ->
 			singleton_ranker(Item, Options, DatasetSummary, Ranker)
-		;   ^^pairwise_dataset_matchups(Dataset, Matchups),
+		;	^^pairwise_dataset_matchups(Dataset, Matchups),
 			length(Items, Count),
 			index_items(Items, 1, IndexPairs),
 			as_dictionary(IndexPairs, IndexDictionary),
@@ -106,11 +106,11 @@
 		build_system(Matchups, IndexDictionary, Count, Matrix1, Matrix, Vector1, Vector).
 
 	update_system(Index1, Index2, Count, Weight, Difference, Matrix0, Matrix, Vector0, Vector) :-
-		(   Index1 =:= Count ->
+		(	Index1 =:= Count ->
 			update_anchor_system(Index2, -Difference, Weight, Matrix0, Matrix, Vector0, Vector)
-		;   Index2 =:= Count ->
+		;	Index2 =:= Count ->
 			update_anchor_system(Index1, Difference, Weight, Matrix0, Matrix, Vector0, Vector)
-		;   update_matrix_entry(Matrix0, Index1, Index1, Weight, Matrix1),
+		;	update_matrix_entry(Matrix0, Index1, Index1, Weight, Matrix1),
 			update_matrix_entry(Matrix1, Index2, Index2, Weight, Matrix2),
 			update_matrix_entry(Matrix2, Index1, Index2, -Weight, Matrix3),
 			update_matrix_entry(Matrix3, Index2, Index1, -Weight, Matrix),
@@ -181,10 +181,10 @@
 	select_pivot_row([Row| Rows], Candidate0, RemainingRows0, PivotRow, RemainingRows) :-
 		leading_magnitude(Row, Magnitude),
 		leading_magnitude(Candidate0, CandidateMagnitude),
-		(   Magnitude > CandidateMagnitude ->
+		(	Magnitude > CandidateMagnitude ->
 			Candidate = Row,
 			RemainingRows1 = [Candidate0| RemainingRows0]
-		;   Candidate = Candidate0,
+		;	Candidate = Candidate0,
 			RemainingRows1 = [Row| RemainingRows0]
 		),
 		select_pivot_row(Rows, Candidate, RemainingRows1, PivotRow, RemainingRows).
@@ -193,9 +193,9 @@
 		Magnitude is abs(Leading).
 
 	ensure_non_zero(Value) :-
-		(   abs(Value) > 1.0e-12 ->
+		(	abs(Value) > 1.0e-12 ->
 			true
-		;   evaluation_error(zero_divisor)
+		;	evaluation_error(zero_divisor)
 		).
 
 	eliminate_rows(_Pivot, _PivotTail, _PivotValue, [], []) :-
@@ -229,18 +229,18 @@
 
 	validate_solution(Matrix, Vector, Solution) :-
 		maximum_residual(Matrix, Vector, Solution, 0.0, MaximumResidual),
-		(   MaximumResidual =< 1.0e-8 ->
+		(	MaximumResidual =< 1.0e-8 ->
 			true
-		;   domain_error(thurstone_mosteller_linear_system_residual, MaximumResidual)
+		;	domain_error(thurstone_mosteller_linear_system_residual, MaximumResidual)
 		).
 
 	maximum_residual([], [], _Solution, MaximumResidual, MaximumResidual).
 	maximum_residual([Row| Matrix], [Value| Vector], Solution, MaximumResidual0, MaximumResidual) :-
 		dot_product(Row, Solution, RowValue),
 		Residual is abs(RowValue - Value),
-		(   Residual > MaximumResidual0 ->
+		(	Residual > MaximumResidual0 ->
 			MaximumResidual1 = Residual
-		;   MaximumResidual1 = MaximumResidual0
+		;	MaximumResidual1 = MaximumResidual0
 		),
 		maximum_residual(Matrix, Vector, Solution, MaximumResidual1, MaximumResidual).
 
@@ -262,14 +262,14 @@
 	probit(Probability, Quantile) :-
 		Plow = 0.02425,
 		Phigh is 1.0 - Plow,
-		(   Probability < Plow ->
+		(	Probability < Plow ->
 			Q is sqrt(-2.0 * log(Probability)),
 			inverse_tail(Q, Quantile)
-		;   Probability =< Phigh ->
+		;	Probability =< Phigh ->
 			Q is Probability - 0.5,
 			R is Q * Q,
 			inverse_central(Q, R, Quantile)
-		;   Q is sqrt(-2.0 * log(1.0 - Probability)),
+		;	Q is sqrt(-2.0 * log(1.0 - Probability)),
 			inverse_tail(Q, TailQuantile),
 			Quantile is -TailQuantile
 		).

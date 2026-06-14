@@ -234,9 +234,9 @@
 	check_clusterer(Clusterer) :-
 		(	var(Clusterer) ->
 			instantiation_error
-		;   ::clusterer_diagnostics_data(Clusterer, _Diagnostics) ->
+		;	::clusterer_diagnostics_data(Clusterer, _Diagnostics) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusterer(Clusterer) :-
@@ -313,9 +313,9 @@
 	check_attribute_declarations([]).
 	check_attribute_declarations([Attribute-_| Attributes]) :-
 		attribute_declaration_occurrences(Attributes, Attribute, 1, Count),
-		(   Count == 1 ->
+		(	Count == 1 ->
 			true
-		;   permission_error(repeat, attribute_declaration, Attribute)
+		;	permission_error(repeat, attribute_declaration, Attribute)
 		),
 		remove_attribute_declarations(Attributes, Attribute, RemainingAttributes),
 		check_attribute_declarations(RemainingAttributes).
@@ -337,16 +337,16 @@
 
 	check_continuous_attributes([]).
 	check_continuous_attributes([Attribute-Values| Attributes]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			true
-		;   domain_error(continuous_attribute(Attribute), Values)
+		;	domain_error(continuous_attribute(Attribute), Values)
 		),
 		check_continuous_attributes(Attributes).
 
 	check_examples_non_empty(Dataset, Examples) :-
-		(   Examples == [] ->
+		(	Examples == [] ->
 			domain_error(non_empty_dataset, Dataset)
-		;   true
+		;	true
 		).
 
 	check_examples(Dataset, AttributeNames, Examples) :-
@@ -365,13 +365,13 @@
 	check_example_attributes_checked([], _AttributeValues).
 	check_example_attributes_checked([Attribute| Attributes], AttributeValues) :-
 		::attribute_value(Attribute, AttributeValues, Value),
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		check_example_attributes_checked(Attributes, AttributeValues).
 
@@ -382,19 +382,19 @@
 	check_declared_attribute_bindings([], _AttributeValues).
 	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
 		attribute_occurrences(AttributeValues, Attribute, 0, Count),
-		(   Count == 1 ->
+		(	Count == 1 ->
 			true
-		;   Count == 0 ->
+		;	Count == 0 ->
 			existence_error(attribute, Attribute)
-		;   domain_error(attribute_occurrences(Attribute, 1), Count)
+		;	domain_error(attribute_occurrences(Attribute, 1), Count)
 		),
 		check_declared_attribute_bindings(Attributes, AttributeValues).
 
 	check_undeclared_attribute_bindings([], _AttributeNames).
 	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
-		(   member(Attribute, AttributeNames) ->
+		(	member(Attribute, AttributeNames) ->
 			true
-		;   domain_error(declared_attribute(AttributeNames), Attribute)
+		;	domain_error(declared_attribute(AttributeNames), Attribute)
 		),
 		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
 
@@ -407,9 +407,9 @@
 		attribute_occurrences(AttributeValues, Attribute, Count0, Count).
 
 	attribute_value(Attribute, AttributeValues, Value) :-
-		(   member(Attribute-Value, AttributeValues) ->
+		(	member(Attribute-Value, AttributeValues) ->
 			true
-		;   existence_error(attribute, Attribute)
+		;	existence_error(attribute, Attribute)
 		).
 
 	build_encoders([], _Examples, _Options, []).
@@ -419,19 +419,19 @@
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == on ->
+		(	FeatureScaling == on ->
 			::known_attribute_values(Examples, Attribute, Values),
 			arithmetic_mean(Values, Mean),
 			length(Values, Count),
-			(   Count > 1 ->
+			(	Count > 1 ->
 				variance(Values, Variance)
-			;   Variance = 0.0
+			;	Variance = 0.0
 			),
-			(   Variance > 0.0 ->
+			(	Variance > 0.0 ->
 				Scale is sqrt(Variance)
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
-		;   Mean = 0.0,
+		;	Mean = 0.0,
 			Scale = 1.0
 		).
 
@@ -467,20 +467,20 @@
 		encode_instance_checked(Encoders, AttributeValues, Features).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		Feature is float((Value - Mean) / Scale).
 
 	check_cluster_count(K, Count) :-
-		(   K =< Count ->
+		(	K =< Count ->
 			true
-		;   domain_error(cluster_count(1, Count), K)
+		;	domain_error(cluster_count(1, Count), K)
 		).
 
 	take_first_k(0, _Rows, []) :-
@@ -498,9 +498,9 @@
 	write_comment_header(Dataset, Clusterer, Functor, Stream) :-
 		format(Stream, '% exported clusterer predicate: ~q/~d~n', [Functor, 1]),
 		format(Stream, '% training dataset: ~q~n', [Dataset]),
-		(   ::diagnostics(Clusterer, Diagnostics) ->
+		(	::diagnostics(Clusterer, Diagnostics) ->
 			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
-		;   true
+		;	true
 		),
 		format(Stream, '% ~q(Clusterer)~n', [Functor]).
 

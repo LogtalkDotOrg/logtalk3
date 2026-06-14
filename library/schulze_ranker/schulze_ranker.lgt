@@ -140,13 +140,13 @@
 		^^matrix_entry(OriginalPaths, RowIndex, ColumnIndex, CurrentStrength),
 		^^matrix_entry(OriginalPaths, RowIndex, Pivot, LeftStrength),
 		^^matrix_entry(OriginalPaths, Pivot, ColumnIndex, RightStrength),
-		(   LeftStrength =< RightStrength ->
+		(	LeftStrength =< RightStrength ->
 			CandidateStrength = LeftStrength
-		;   CandidateStrength = RightStrength
+		;	CandidateStrength = RightStrength
 		),
-		(   CandidateStrength > CurrentStrength ->
+		(	CandidateStrength > CurrentStrength ->
 			Value = CandidateStrength
-		;   Value = CurrentStrength
+		;	Value = CurrentStrength
 		).
 
 	schulze_scores(Count, StrongestPaths, Scores) :-
@@ -164,13 +164,13 @@
 		OpponentIndex > Count,
 		!.
 	schulze_score(Index, OpponentIndex, Count, StrongestPaths, Score0, Score) :-
-		(   Index =:= OpponentIndex ->
+		(	Index =:= OpponentIndex ->
 			Score1 = Score0
-		;   ^^matrix_entry(StrongestPaths, Index, OpponentIndex, ForwardStrength),
+		;	^^matrix_entry(StrongestPaths, Index, OpponentIndex, ForwardStrength),
 			^^matrix_entry(StrongestPaths, OpponentIndex, Index, ReverseStrength),
-			(   ForwardStrength > ReverseStrength ->
+			(	ForwardStrength > ReverseStrength ->
 				Score1 is Score0 + 1
-			;   Score1 = Score0
+			;	Score1 = Score0
 			)
 		),
 		NextOpponentIndex is OpponentIndex + 1,
@@ -190,9 +190,9 @@
 
 	row_strongest_paths([], _Item, [], StrongestPaths-StrongestPaths).
 	row_strongest_paths([OtherItem| OtherItems], Item, [Strength| Strengths], StrongestPaths0-StrongestPaths) :-
-		(   Item == OtherItem ->
+		(	Item == OtherItem ->
 			StrongestPaths0 = StrongestPaths1
-		;   StrongestPaths0 = [path(Item, OtherItem, Strength)| StrongestPaths1]
+		;	StrongestPaths0 = [path(Item, OtherItem, Strength)| StrongestPaths1]
 		),
 		row_strongest_paths(OtherItems, Item, Strengths, StrongestPaths1-StrongestPaths).
 

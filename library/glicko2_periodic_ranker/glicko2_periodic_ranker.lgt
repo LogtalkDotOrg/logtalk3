@@ -114,20 +114,20 @@
 		ensure_initialized_period_players(Games, InitialMu, InitialPhi, InitialVolatility, Ratings2, Ratings, Deviations2, Deviations, Volatilities2, Volatilities).
 
 	ensure_initialized_item(Item, InitialMu, InitialPhi, InitialVolatility, Ratings0, Ratings, Deviations0, Deviations, Volatilities0, Volatilities) :-
-		(   dictionary_lookup(Item, _Rating, Ratings0) ->
+		(	dictionary_lookup(Item, _Rating, Ratings0) ->
 			Ratings = Ratings0,
 			Deviations = Deviations0,
 			Volatilities = Volatilities0
-		;   dictionary_insert(Ratings0, Item, InitialMu, Ratings),
+		;	dictionary_insert(Ratings0, Item, InitialMu, Ratings),
 			dictionary_insert(Deviations0, Item, InitialPhi, Deviations),
 			dictionary_insert(Volatilities0, Item, InitialVolatility, Volatilities)
 		).
 
 	active_items([], _Ratings, []).
 	active_items([Item| Items], Ratings, ActiveItems) :-
-		(   dictionary_lookup(Item, _Rating, Ratings) ->
+		(	dictionary_lookup(Item, _Rating, Ratings) ->
 			ActiveItems = [Item| Rest]
-		;   ActiveItems = Rest
+		;	ActiveItems = Rest
 		),
 		active_items(Items, Ratings, Rest).
 
@@ -156,12 +156,12 @@
 
 	item_period_results([], _Item, []).
 	item_period_results([game(Item1, Item2, Score)| Games], Item, ItemResults) :-
-		(   Item == Item1 ->
+		(	Item == Item1 ->
 			ItemResults = [game(Item2, Score, 1)| Rest]
-		;   Item == Item2 ->
+		;	Item == Item2 ->
 			OpponentScore is 1.0 - Score,
 			ItemResults = [game(Item1, OpponentScore, 1)| Rest]
-		;   ItemResults = Rest
+		;	ItemResults = Rest
 		),
 		item_period_results(Games, Item, Rest).
 

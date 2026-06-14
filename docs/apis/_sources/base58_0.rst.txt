@@ -14,8 +14,8 @@ Base58 encoder and decoder (Bitcoin alphabet variant).
 |    ``logtalk_load(base58(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-04-17
+| **Version:** 1:1:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -54,6 +54,14 @@ Parses Base58 data from the given source (``atom(Atom)``, ``chars(List)``, or ``
 | **Mode and number of proofs:**
 |    ``parse(++compound,--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Base58 source term:
+|        ``domain_error(base58_source,Source)``
+|    ``Source`` contains Base58 data with characters outside the Base58 alphabet:
+|        ``representation_error(base58)``
+
 
 ------------
 
@@ -72,6 +80,12 @@ Generates Base58 in the representation specified in the first argument (``atom(A
 |    ``generate(Sink,Bytes)``
 | **Mode and number of proofs:**
 |    ``generate(+compound,+list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Base58 sink term:
+|        ``domain_error(base58_sink,Sink)``
 
 
 ------------

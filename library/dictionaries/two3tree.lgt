@@ -810,7 +810,7 @@
 	]).
 
 	insert_node3_7(node3(KL0, VL0, KR0, VR0, L0, M0, R0), K, V, T1) :-
-		( K @< KL0
+		(	K @< KL0
 		->	insert_impl(L0, K, V, L1), M1 = M0, R1 = R0
 		;	(	K @< KR0
 			->	insert_impl(M0, K, V, M1), L1 = L0, R1 = R0
@@ -967,7 +967,7 @@
 		next_impl(R, K, NK, NV, _).
 	next_impl(node2(K0, _), K, NK, NV, Succ) :-
 		K @< K0, !,
-		( Succ \= none
+		(	Succ \= none
 		->	Succ = NK-NV
 		;	fail
 		).

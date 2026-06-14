@@ -376,18 +376,18 @@
 		close(Stream).
 
 	open_override_file(File, Stream) :-
-		(   atom(File) ->
+		(	atom(File) ->
 			catch(open(File, read, Stream), Error, handle_open_error(File, Error, Stream))
-		;   logtalk::expand_library_path(File, Expanded) ->
+		;	logtalk::expand_library_path(File, Expanded) ->
 			catch(open(Expanded, read, Stream), Error, rethrow_open_error(File, Error))
-		;   existence_error(source_sink, File)
+		;	existence_error(source_sink, File)
 		).
 
 	handle_open_error(File, error(existence_error(source_sink, _), _), Stream) :-
 		!,
-		(   logtalk::expand_library_path(time_scales(File), Expanded) ->
+		(	logtalk::expand_library_path(time_scales(File), Expanded) ->
 			catch(open(Expanded, read, Stream), Error, rethrow_open_error(File, Error))
-		;   existence_error(source_sink, File)
+		;	existence_error(source_sink, File)
 		).
 	handle_open_error(File, Error, _) :-
 		rethrow_open_error(File, Error).
@@ -400,9 +400,9 @@
 
 	read_terms(Stream, Terms) :-
 		read_term(Stream, Term, []),
-		(   Term == end_of_file ->
+		(	Term == end_of_file ->
 			Terms = []
-		;   Terms = [Term| Rest],
+		;	Terms = [Term| Rest],
 			read_terms(Stream, Rest)
 		).
 
@@ -419,19 +419,19 @@
 		write_entries(Entries, Stream).
 
 	check_file_specification(File) :-
-		(   var(File) ->
+		(	var(File) ->
 			instantiation_error
-		;   (atom(File); compound(File)) ->
+		;	(atom(File); compound(File)) ->
 			true
-		;   domain_error(file_specification, File)
+		;	domain_error(file_specification, File)
 		).
 
 	check_output_file(File) :-
-		(   var(File) ->
+		(	var(File) ->
 			instantiation_error
-		;   atom(File) ->
+		;	atom(File) ->
 			true
-		;   type_error(atom, File)
+		;	type_error(atom, File)
 		).
 
 	parse_leap_terms([], []).

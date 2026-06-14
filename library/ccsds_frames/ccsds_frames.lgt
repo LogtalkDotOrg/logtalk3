@@ -190,38 +190,38 @@
 	fecf(aos_transfer_frame(_, _, _, _, _, _, _, _, FECF), FECF).
 
 	extract_packets(Frame, SecondaryHeaderLength, Packets) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   valid(Frame) ->
+		;	valid(Frame) ->
 			valid_secondary_header_length(SecondaryHeaderLength),
 			data_field(Frame, DataField),
 			ccsds_packets(SecondaryHeaderLength)::parse(bytes(DataField), Packets)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 
 	insert_packets(Packets, SecondaryHeaderLength, Frame, UpdatedFrame) :-
-		(   var(Packets) ->
+		(	var(Packets) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(Frame) ->
+		;	var(Frame) ->
 			instantiation_error
-		;   valid(Frame) ->
+		;	valid(Frame) ->
 			valid_secondary_header_length(SecondaryHeaderLength),
 			ccsds_packets(SecondaryHeaderLength)::generate(bytes(DataField), Packets),
 			replace_data_field(Frame, DataField, IntermediateFrame),
 			update_fecf(IntermediateFrame, UpdatedFrame)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 
 	update_fecf(Frame, UpdatedFrame) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   known_frame(Frame) ->
+		;	known_frame(Frame) ->
 			refresh_fecf(Frame, UpdatedFrame)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 
 	verify_fecf(Frame) :-
@@ -354,9 +354,9 @@
 		!.
 	compute_fecf_crc_bits(Bit, CRC0, CRC) :-
 		Bit > 0,
-		(   CRC0 /\ 0x8000 =:= 0 ->
+		(	CRC0 /\ 0x8000 =:= 0 ->
 			CRC1 is (CRC0 << 1) /\ 0xFFFF
-		;   CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
+		;	CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
 		),
 		NextBit is Bit - 1,
 		compute_fecf_crc_bits(NextBit, CRC1, CRC).

@@ -256,15 +256,15 @@
 			Properties = Properties0
 		;	Properties = []
 		),
-		( 	member(source_url(SourceURL), Options) ->
+		(	member(source_url(SourceURL), Options) ->
 			Source = source_url(SourceURL)
-		; 	member(source_origin(Origin), Options) ->
+		;	member(source_origin(Origin), Options) ->
 			Source = source_origin(Origin)
-		; 	Source = default
+		;	Source = default
 		),
-		( 	member(top_level_navigation(TopLevelNavigation0), Options) ->
+		(	member(top_level_navigation(TopLevelNavigation0), Options) ->
 			TopLevelNavigation = TopLevelNavigation0
-		; 	TopLevelNavigation = false
+		;	TopLevelNavigation = false
 		),
 		(	member(cookies(CookiePairs0), Options) ->
 			CookiePairs = CookiePairs0

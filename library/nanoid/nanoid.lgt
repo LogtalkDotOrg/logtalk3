@@ -53,38 +53,38 @@
 		codes_to_nanoid(_Representation_, Codes, NanoID).
 
 	check_representation(Context) :-
-		(   var(_Representation_) ->
+		(	var(_Representation_) ->
 			throw(error(instantiation_error, Context))
-		;   _Representation_ == atom ->
+		;	_Representation_ == atom ->
 			true
-		;   _Representation_ == chars ->
+		;	_Representation_ == chars ->
 			true
-		;   _Representation_ == codes ->
+		;	_Representation_ == codes ->
 			true
-		;   throw(error(domain_error(nanoid_representation, _Representation_), Context))
+		;	throw(error(domain_error(nanoid_representation, _Representation_), Context))
 		).
 
 	check_size(Context) :-
-		(   var(_Size_) ->
+		(	var(_Size_) ->
 			throw(error(instantiation_error, Context))
-		;   integer(_Size_) ->
-			(   _Size_ > 0 ->
+		;	integer(_Size_) ->
+			(	_Size_ > 0 ->
 				true
-			;   throw(error(domain_error(not_less_than_one, _Size_), Context))
+			;	throw(error(domain_error(not_less_than_one, _Size_), Context))
 			)
-		;   throw(error(type_error(integer, _Size_), Context))
+		;	throw(error(type_error(integer, _Size_), Context))
 		).
 
 	alphabet_codes(Alphabet, Codes) :-
-		(   var(Alphabet) ->
+		(	var(Alphabet) ->
 			throw(error(instantiation_error, Context))
-		;   atom(Alphabet) ->
+		;	atom(Alphabet) ->
 			atom_codes(Alphabet, Codes)
-		;   chars_alphabet_codes(Alphabet, Codes) ->
+		;	chars_alphabet_codes(Alphabet, Codes) ->
 			true
-		;   codes_alphabet_codes(Alphabet, Codes) ->
+		;	codes_alphabet_codes(Alphabet, Codes) ->
 			true
-		;   throw(error(type_error(text, Alphabet), Context))
+		;	throw(error(type_error(text, Alphabet), Context))
 		).
 
 	chars_alphabet_codes([], []).
@@ -100,13 +100,13 @@
 		codes_alphabet_codes(Codes, ConvertedCodes).
 
 	check_alphabet(Context, Codes) :-
-		(   Codes == [] ->
+		(	Codes == [] ->
 			throw(error(domain_error(nanoid_alphabet, _Alphabet_), Context))
-		;   Codes = [_] ->
+		;	Codes = [_] ->
 			throw(error(domain_error(nanoid_alphabet, _Alphabet_), Context))
-		;   valid_code_list(Codes) ->
+		;	valid_code_list(Codes) ->
 			check_alphabet_unique(Context, Codes)
-		;   throw(error(domain_error(nanoid_alphabet, _Alphabet_), Context))
+		;	throw(error(domain_error(nanoid_alphabet, _Alphabet_), Context))
 		).
 
 	valid_code_list([]).
@@ -117,9 +117,9 @@
 		valid_code_list(Codes).
 
 	check_alphabet_unique(Context, Codes) :-
-		(   repeated_code(Codes) ->
+		(	repeated_code(Codes) ->
 			throw(error(domain_error(nanoid_alphabet, _Alphabet_), Context))
-		;   true
+		;	true
 		).
 
 	repeated_code([Code| Codes]) :-
@@ -141,17 +141,17 @@
 
 	bits(AlphabetLength, Bits0, Bits) :-
 		Power is 1 << Bits0,
-		(   Power >= AlphabetLength ->
+		(	Power >= AlphabetLength ->
 			Bits = Bits0
-		;   Bits1 is Bits0 + 1,
+		;	Bits1 is Bits0 + 1,
 			bits(AlphabetLength, Bits1, Bits)
 		).
 
 	step(Size, Mask, AlphabetLength, Step) :-
 		Step0 is (8*Mask*Size + 5*AlphabetLength - 1) // (5*AlphabetLength),
-		(   Step0 >= Size ->
+		(	Step0 >= Size ->
 			Step = Step0
-		;   Step = Size
+		;	Step = Size
 		).
 
 	generate_codes(0, _, _, _, _, Codes, Codes) :-
@@ -166,11 +166,11 @@
 		!.
 	consume_bytes([Byte| Bytes], Remaining0, AlphabetCodes, AlphabetLength, Mask, Acc0, Remaining, Acc) :-
 		Index is Byte /\ Mask,
-		(   Index < AlphabetLength ->
+		(	Index < AlphabetLength ->
 			nth0(Index, AlphabetCodes, Code),
 			Remaining1 is Remaining0 - 1,
 			Acc1 = [Code| Acc0]
-		;   Remaining1 = Remaining0,
+		;	Remaining1 = Remaining0,
 			Acc1 = Acc0
 		),
 		consume_bytes(Bytes, Remaining1, AlphabetCodes, AlphabetLength, Mask, Acc1, Remaining, Acc).

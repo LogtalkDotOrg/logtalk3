@@ -759,9 +759,9 @@
 		magnitude(AllTokens, Tokens1, Magnitude1),
 		magnitude(AllTokens, Tokens2, Magnitude2),
 		Denominator is Magnitude1 * Magnitude2,
-		(   Denominator =:= 0
+		(	Denominator =:= 0
 		->  Similarity = 0.0
-		;   Similarity is DotProduct / Denominator
+		;	Similarity is DotProduct / Denominator
 		).
 
 	dot_product([], _, _, DotProduct, DotProduct).
@@ -903,10 +903,10 @@
 
 	soundex_pad(List, N, Padded) :-
 		length(List, Length),
-		(   Length >= N
+		(	Length >= N
 		->  length(Padded, N),
 			append(Padded, _, List)
-		;   Rem is N - Length,
+		;	Rem is N - Length,
 			length(Zeros, Rem),
 			maplist_eq(Zeros, '0'),
 			append(List, Zeros, Padded)

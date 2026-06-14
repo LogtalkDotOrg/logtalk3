@@ -73,10 +73,10 @@
 
 	build_encoders([], _, _, []).
 	build_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_encoders(Rest, Examples, Options, Encoders).
 
@@ -91,13 +91,13 @@
 
 	compute_distance(Features1, Features2, Distance, Options) :-
 		^^option(distance_metric(Metric), Options),
-		(   Metric == euclidean ->
+		(	Metric == euclidean ->
 			euclidean_distance(Features1, Features2, Distance)
-		;   Metric == manhattan ->
+		;	Metric == manhattan ->
 			manhattan_distance(Features1, Features2, Distance)
-		;   Metric == chebyshev ->
+		;	Metric == chebyshev ->
 			chebyshev_distance(Features1, Features2, Distance)
-		;   ^^option(minkowski_power(Power), Options),
+		;	^^option(minkowski_power(Power), Options),
 			minkowski_distance(Features1, Features2, Power, Distance)
 		).
 
@@ -119,9 +119,9 @@
 
 	distance_weights([], []).
 	distance_weights([Distance-Target| Neighbors], [Weight-Target| WeightedNeighbors]) :-
-		(   Distance =< 1.0e-12 ->
+		(	Distance =< 1.0e-12 ->
 			Weight = 1.0e10
-		;   Weight is 1.0 / Distance
+		;	Weight is 1.0 / Distance
 		),
 		distance_weights(Neighbors, WeightedNeighbors).
 
@@ -134,9 +134,9 @@
 	weighted_average_target([], _WeightedSum, _TotalWeight, 0.0).
 	weighted_average_target(WeightedNeighbors, WeightedSum0, TotalWeight0, Target) :-
 		accumulate_weighted_targets(WeightedNeighbors, WeightedSum0, WeightedSum, TotalWeight0, TotalWeight),
-		(   TotalWeight =< 1.0e-12 ->
+		(	TotalWeight =< 1.0e-12 ->
 			Target = 0.0
-		;   Target is WeightedSum / TotalWeight
+		;	Target is WeightedSum / TotalWeight
 		).
 
 	accumulate_weighted_targets([], WeightedSum, WeightedSum, TotalWeight, TotalWeight).
@@ -151,14 +151,14 @@
 	regressor_term_template(knn_regressor(_Encoders, _Rows, _Diagnostics), knn_regressor('Encoders', 'Rows', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = knn_regressor(Encoders, Rows, Diagnostics),
+		(	Regressor = knn_regressor(Encoders, Rows, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			^^valid_encoded_rows(Encoders, Rows),
 			^^valid_regressor_metadata(knn_regression, Diagnostics),
 			length(Rows, TrainingExampleCount),
 			^^valid_diagnostic_count(training_example_count, Diagnostics, TrainingExampleCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-

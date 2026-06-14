@@ -265,9 +265,9 @@
 	segment_header_suffixes(tc_reassembled_segment(_, HeaderSuffixes, _), HeaderSuffixes).
 
 	segment_data(Segment, Data) :-
-		(   segment_term_parts(Segment, _, _, _, Data) ->
+		(	segment_term_parts(Segment, _, _, _, Data) ->
 			true
-		;   Segment = tc_reassembled_segment(_, _, Data)
+		;	Segment = tc_reassembled_segment(_, _, Data)
 		).
 
 	valid_reassembly_state(tc_reassembly_state(Channels)) :-
@@ -283,31 +283,31 @@
 	valid_discontinuity_policy(resynchronize).
 
 	extract_tc_segment(Frame, Segment) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   tc_segment_context(Frame, _, _, _, Segment)
+		;	tc_segment_context(Frame, _, _, _, Segment)
 		).
 
 	insert_tc_segment(Segment, Frame, UpdatedFrame) :-
-		(   var(Segment) ->
+		(	var(Segment) ->
 			instantiation_error
-		;   var(Frame) ->
+		;	var(Frame) ->
 			instantiation_error
-		;   Segment = tc_segment(SequenceFlags, MapId, Data),
+		;	Segment = tc_segment(SequenceFlags, MapId, Data),
 			valid_segment(Segment) ->
 			Frame = tc_transfer_frame(Version, BypassFlag, ControlCommandFlag, SpacecraftId, VirtualChannelId, SequenceNumber, SegmentHeader0, _, FECF),
 			extract_segment_header_suffix(SegmentHeader0, HeaderSuffix),
 			encode_segment_header(SequenceFlags, MapId, HeaderSuffix, SegmentHeader),
 			UpdatedFrame = tc_transfer_frame(Version, BypassFlag, ControlCommandFlag, SpacecraftId, VirtualChannelId, SequenceNumber, SegmentHeader, Data, FECF)
-		;   Segment = tc_segment(SequenceFlags, MapId, HeaderSuffix, Data),
+		;	Segment = tc_segment(SequenceFlags, MapId, HeaderSuffix, Data),
 			valid_segment(Segment) ->
 			Frame = tc_transfer_frame(Version, BypassFlag, ControlCommandFlag, SpacecraftId, VirtualChannelId, SequenceNumber, SegmentHeader0, _, FECF),
-			(   SegmentHeader0 = none
-			;   extract_segment_header_suffix(SegmentHeader0, _)
+			(	SegmentHeader0 = none
+			;	extract_segment_header_suffix(SegmentHeader0, _)
 			),
 			encode_segment_header(SequenceFlags, MapId, HeaderSuffix, SegmentHeader),
 			UpdatedFrame = tc_transfer_frame(Version, BypassFlag, ControlCommandFlag, SpacecraftId, VirtualChannelId, SequenceNumber, SegmentHeader, Data, FECF)
-		;   domain_error(ccsds_tc_segment, Segment)
+		;	domain_error(ccsds_tc_segment, Segment)
 		).
 
 	reassemble_tc_frame(Frame, State, Segments, UpdatedState) :-
@@ -317,13 +317,13 @@
 		reassemble_tc_frame(Frame, Policy, State, Segments, UpdatedState, _).
 
 	reassemble_tc_frame(Frame, Policy, State, Segments, UpdatedState, Events) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   var(Policy) ->
+		;	var(Policy) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   valid_discontinuity_policy_(Policy),
+		;	valid_discontinuity_policy_(Policy),
 			valid_reassembly_state_(State),
 			reassemble_tc_frame_with_provenance(Frame, Policy, State, ReassembledSegments, UpdatedState, Events),
 			strip_reassembled_segments(ReassembledSegments, Segments)
@@ -336,13 +336,13 @@
 		reassemble_tc_frames(Frames, Policy, State, Segments, UpdatedState, _).
 
 	reassemble_tc_frames(Frames, Policy, State, Segments, UpdatedState, Events) :-
-		(   var(Frames) ->
+		(	var(Frames) ->
 			instantiation_error
-		;   var(Policy) ->
+		;	var(Policy) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   valid_discontinuity_policy_(Policy),
+		;	valid_discontinuity_policy_(Policy),
 			valid_reassembly_state_(State),
 			reassemble_tc_frames_with_provenance(Frames, Policy, State, ReassembledSegments, UpdatedState, Events),
 			strip_reassembled_segments(ReassembledSegments, Segments)
@@ -352,13 +352,13 @@
 		reassemble_tc_frame_with_provenance(Frame, throw, State, ReassembledSegments, UpdatedState, Events).
 
 	reassemble_tc_frame_with_provenance(Frame, Policy, State, ReassembledSegments, UpdatedState, Events) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   var(Policy) ->
+		;	var(Policy) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   valid_discontinuity_policy_(Policy),
+		;	valid_discontinuity_policy_(Policy),
 			valid_reassembly_state_(State),
 			tc_segment_context(Frame, SpacecraftId, VirtualChannelId, SequenceNumber, Segment),
 			channel_state(State, SpacecraftId, VirtualChannelId, SequenceNumber, Policy, RecoveryMode, PendingSegments, RecoveryEvents),
@@ -372,13 +372,13 @@
 		reassemble_tc_frames_with_provenance(Frames, throw, State, ReassembledSegments, UpdatedState, Events).
 
 	reassemble_tc_frames_with_provenance(Frames, Policy, State, ReassembledSegments, UpdatedState, Events) :-
-		(   var(Frames) ->
+		(	var(Frames) ->
 			instantiation_error
-		;   var(Policy) ->
+		;	var(Policy) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   valid_discontinuity_policy_(Policy),
+		;	valid_discontinuity_policy_(Policy),
 			valid_reassembly_state_(State),
 			reassemble_tc_frames_with_provenance_(Frames, Policy, State, ReassembledSegments, UpdatedState, Events)
 		).
@@ -391,22 +391,22 @@
 	reassemble_tc_frames_with_provenance_([], _, State, [], State, []).
 
 	dispatch_service_units_by_map(ServiceUnits, Dispatches) :-
-		(   var(ServiceUnits) ->
+		(	var(ServiceUnits) ->
 			instantiation_error
-		;   valid_service_units(ServiceUnits) ->
+		;	valid_service_units(ServiceUnits) ->
 			dispatch_service_units_by_map_(ServiceUnits, [], Dispatches)
-		;   domain_error(ccsds_tc_service_units, ServiceUnits)
+		;	domain_error(ccsds_tc_service_units, ServiceUnits)
 		).
 
 	dispatch_service_units_by_map(ServiceUnits, MapId, DispatchedServiceUnits) :-
-		(   var(ServiceUnits) ->
+		(	var(ServiceUnits) ->
 			instantiation_error
-		;   var(MapId) ->
+		;	var(MapId) ->
 			instantiation_error
-		;   valid_service_units(ServiceUnits) ->
+		;	valid_service_units(ServiceUnits) ->
 			check_map_id_(MapId),
 			dispatch_service_units_for_map(ServiceUnits, MapId, DispatchedServiceUnits)
-		;   domain_error(ccsds_tc_service_units, ServiceUnits)
+		;	domain_error(ccsds_tc_service_units, ServiceUnits)
 		).
 
 	dispatch_service_units_by_map_([ServiceUnit| ServiceUnits], Dispatches0, Dispatches) :-
@@ -475,9 +475,9 @@
 	encode_sequence_flags(unsegmented, 3).
 
 	channel_state(tc_reassembly_state(Channels), SpacecraftId, VirtualChannelId, SequenceNumber, Policy, RecoveryMode, PendingSegments, Events) :-
-		(   select_channel_entry(SpacecraftId, VirtualChannelId, Channels, tc_reassembly_channel(SpacecraftId, VirtualChannelId, ExpectedSequenceNumber, StoredPendingSegments), _) ->
+		(	select_channel_entry(SpacecraftId, VirtualChannelId, Channels, tc_reassembly_channel(SpacecraftId, VirtualChannelId, ExpectedSequenceNumber, StoredPendingSegments), _) ->
 			channel_recovery_mode(Policy, SpacecraftId, VirtualChannelId, ExpectedSequenceNumber, SequenceNumber, StoredPendingSegments, RecoveryMode, PendingSegments, Events)
-		;   RecoveryMode = normal,
+		;	RecoveryMode = normal,
 			PendingSegments = [],
 			Events = []
 		).
@@ -516,41 +516,41 @@
 	reassemble_segment(Segment, PendingSegments, [ReassembledSegment], PendingSegments) :-
 		segment_term_parts(Segment, unsegmented, MapId, HeaderSuffix, Data),
 		!,
-		(   select_pending_segment(MapId, PendingSegments, _, _, _) ->
+		(	select_pending_segment(MapId, PendingSegments, _, _, _) ->
 			domain_error(ccsds_tc_segment_reassembly, existing_pending_segment(MapId))
-		;   ReassembledSegment = tc_reassembled_segment(MapId, [HeaderSuffix], Data)
+		;	ReassembledSegment = tc_reassembled_segment(MapId, [HeaderSuffix], Data)
 		).
 	reassemble_segment(Segment, PendingSegments, [], [tc_pending_segment(MapId, Data, [HeaderSuffix])| PendingSegments]) :-
 		segment_term_parts(Segment, first, MapId, HeaderSuffix, Data),
 		!,
-		(   select_pending_segment(MapId, PendingSegments, _, _, _) ->
+		(	select_pending_segment(MapId, PendingSegments, _, _, _) ->
 			domain_error(ccsds_tc_segment_reassembly, existing_pending_segment(MapId))
-		;   true
+		;	true
 		).
 	reassemble_segment(Segment, PendingSegments, [], UpdatedPendingSegments) :-
 		segment_term_parts(Segment, continuation, MapId, HeaderSuffix, Data),
 		!,
-		(   select_pending_segment(MapId, PendingSegments, PendingData, PendingHeaderSuffixes, OtherPendingSegments) ->
+		(	select_pending_segment(MapId, PendingSegments, PendingData, PendingHeaderSuffixes, OtherPendingSegments) ->
 			append(PendingData, Data, UpdatedData),
 			append(PendingHeaderSuffixes, [HeaderSuffix], UpdatedHeaderSuffixes),
 			UpdatedPendingSegments = [tc_pending_segment(MapId, UpdatedData, UpdatedHeaderSuffixes)| OtherPendingSegments]
-		;   domain_error(ccsds_tc_segment_reassembly, missing_first_segment(MapId))
+		;	domain_error(ccsds_tc_segment_reassembly, missing_first_segment(MapId))
 		).
 	reassemble_segment(Segment, PendingSegments, [tc_reassembled_segment(MapId, HeaderSuffixes, ReassembledData)], UpdatedPendingSegments) :-
 		segment_term_parts(Segment, last, MapId, HeaderSuffix, Data),
-		(   select_pending_segment(MapId, PendingSegments, PendingData, PendingHeaderSuffixes, UpdatedPendingSegments) ->
+		(	select_pending_segment(MapId, PendingSegments, PendingData, PendingHeaderSuffixes, UpdatedPendingSegments) ->
 			append(PendingData, Data, ReassembledData),
 			append(PendingHeaderSuffixes, [HeaderSuffix], HeaderSuffixes)
-		;   domain_error(ccsds_tc_segment_reassembly, missing_first_segment(MapId))
+		;	domain_error(ccsds_tc_segment_reassembly, missing_first_segment(MapId))
 		).
 
 	segment_term_parts(tc_segment(SequenceFlags, MapId, Data), SequenceFlags, MapId, [], Data).
 	segment_term_parts(tc_segment(SequenceFlags, MapId, HeaderSuffix, Data), SequenceFlags, MapId, HeaderSuffix, Data).
 
 	service_unit_map_id(ServiceUnit, MapId) :-
-		(   segment_term_parts(ServiceUnit, _, MapId, _, _) ->
+		(	segment_term_parts(ServiceUnit, _, MapId, _, _) ->
 			true
-		;   ServiceUnit = tc_reassembled_segment(MapId, _, _)
+		;	ServiceUnit = tc_reassembled_segment(MapId, _, _)
 		).
 
 	select_pending_segment(MapId, [PendingSegment| PendingSegments], PendingData, PendingHeaderSuffixes, PendingSegments) :-
@@ -560,9 +560,9 @@
 		select_pending_segment(MapId, PendingSegments, PendingData, PendingHeaderSuffixes, OtherPendingSegments).
 
 	update_channel_state(tc_reassembly_state(Channels), SpacecraftId, VirtualChannelId, ExpectedSequenceNumber, PendingSegments, tc_reassembly_state(UpdatedChannels)) :-
-		(   select_channel_entry(SpacecraftId, VirtualChannelId, Channels, _, OtherChannels) ->
+		(	select_channel_entry(SpacecraftId, VirtualChannelId, Channels, _, OtherChannels) ->
 			true
-		;   OtherChannels = Channels
+		;	OtherChannels = Channels
 		),
 		UpdatedChannels = [tc_reassembly_channel(SpacecraftId, VirtualChannelId, ExpectedSequenceNumber, PendingSegments)| OtherChannels].
 
@@ -622,9 +622,9 @@
 	valid_service_units([]).
 
 	valid_service_unit(ServiceUnit) :-
-		(   valid_segment(ServiceUnit) ->
+		(	valid_segment(ServiceUnit) ->
 			true
-		;   valid_reassembled_segment(ServiceUnit)
+		;	valid_reassembled_segment(ServiceUnit)
 		).
 
 	valid_pending_segment(PendingSegment) :-

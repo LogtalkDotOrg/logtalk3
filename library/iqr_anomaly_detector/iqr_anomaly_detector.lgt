@@ -300,9 +300,9 @@
 			iqr_score(Value, FirstQuartile, ThirdQuartile, Scale, Options, IQRScore),
 			IQRScores = [IQRScore| Tail],
 			KnownCount1 is KnownCount0 + 1,
-			(   IQRScore > 0.0 ->
+			(	IQRScore > 0.0 ->
 				PositiveCount1 is PositiveCount0 + 1
-			;   PositiveCount1 = PositiveCount0
+			;	PositiveCount1 = PositiveCount0
 			)
 		;	type_error(number, Value)
 		),

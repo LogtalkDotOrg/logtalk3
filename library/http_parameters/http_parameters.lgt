@@ -86,9 +86,9 @@
 		open_api_parameter_descriptors(NormalizedDeclarations, Parameters).
 
 	open_api_request_body(Declarations, Description, RequestBody) :-
-		(   atom(Description) ->
+		(	atom(Description) ->
 			true
-		;   domain_error(http_parameter_request_body_description, Description)
+		;	domain_error(http_parameter_request_body_description, Description)
 		),
 		normalize_declarations(Declarations, NormalizedDeclarations),
 		form_declarations(NormalizedDeclarations, FormDeclarations),
@@ -104,15 +104,15 @@
 		domain_error(http_request, Request).
 
 	normalize_declarations(Declarations, NormalizedDeclarations) :-
-		(   var(Declarations) ->
+		(	var(Declarations) ->
 			instantiation_error
-		;   Declarations == [] ->
+		;	Declarations == [] ->
 			NormalizedDeclarations = []
-		;   Declarations = [Declaration| Rest] ->
+		;	Declarations = [Declaration| Rest] ->
 			normalize_declaration(Declaration, NormalizedDeclaration),
 			normalize_declarations(Rest, NormalizedRest),
 			NormalizedDeclarations = [NormalizedDeclaration| NormalizedRest]
-		;   type_error(list, Declarations)
+		;	type_error(list, Declarations)
 		),
 		validate_unique_declarations(NormalizedDeclarations).
 
@@ -121,9 +121,9 @@
 
 	validate_unique_declarations([], _Seen).
 	validate_unique_declarations([declaration(Name, Source, _ScalarType, _Cardinality, _Required, _Default, _Description, _Schema, _Constraints)| Declarations], Seen) :-
-		(   duplicate_declaration_key(Name, Source, Seen) ->
+		(	duplicate_declaration_key(Name, Source, Seen) ->
 			domain_error(http_parameter_declaration(Name, Source), duplicate)
-		;   validate_unique_declarations(Declarations, [Name-Source| Seen])
+		;	validate_unique_declarations(Declarations, [Name-Source| Seen])
 		).
 
 	duplicate_declaration_key(Name, Source, [Name-Source| _Seen]) :-
@@ -187,18 +187,18 @@
 		domain_error(http_parameter_type, Type).
 
 	normalize_declaration_options(Options, Declaration, Optional, Default, Description, Schema, Constraints) :-
-		(   var(Options) ->
+		(	var(Options) ->
 			instantiation_error
-		;   Options == [] ->
+		;	Options == [] ->
 			Optional = false,
 			Default = none,
 			Description = none,
 			Schema = none,
 			empty_constraints(Constraints)
-		;   Options = [Option| Rest] ->
+		;	Options = [Option| Rest] ->
 			normalize_declaration_options(Rest, Declaration, Optional0, Default0, Description0, Schema0, Constraints0),
 			normalize_declaration_option(Option, Declaration, Optional0, Default0, Description0, Schema0, Constraints0, Optional, Default, Description, Schema, Constraints)
-		;   type_error(list, Options)
+		;	type_error(list, Options)
 		).
 
 	empty_constraints(constraints(none, none, none, none)).
@@ -218,9 +218,9 @@
 		atom(Description),
 		!.
 	normalize_declaration_option(description(Description), _Declaration, _Optional, _Default, _Description0, _Schema, _Constraints0, _Optional1, _Default1, _Description1, _Schema1, _Constraints1) :-
-		(   atom(Description) ->
+		(	atom(Description) ->
 			domain_error(http_parameter_options, duplicate(description))
-		;   domain_error(http_parameter_description, Description)
+		;	domain_error(http_parameter_description, Description)
 		).
 	normalize_declaration_option(schema(Schema), _Declaration, Optional, Default, Description, none, Constraints, Optional, Default, Description, Schema, Constraints) :-
 		nonvar(Schema),
@@ -265,14 +265,14 @@
 		var(Values),
 		instantiation_error.
 	normalize_enum_values(ScalarType, Values, NormalizedValues) :-
-		(   Values = [_| _] ->
-			(   normalize_enum_values_list(Values, ScalarType, NormalizedValues) ->
+		(	Values = [_| _] ->
+			(	normalize_enum_values_list(Values, ScalarType, NormalizedValues) ->
 				true
-			;   domain_error(http_parameter_option, enum(Values))
+			;	domain_error(http_parameter_option, enum(Values))
 			)
-		;   Values == [] ->
+		;	Values == [] ->
 			domain_error(http_parameter_option, enum(Values))
-		;   type_error(list, Values)
+		;	type_error(list, Values)
 		).
 
 	normalize_enum_values_list([], _ScalarType, []).
@@ -282,41 +282,41 @@
 
 	normalize_minimum_value(integer, _Declaration, Value, Minimum) :-
 		!,
-		(   integer(Value) ->
+		(	integer(Value) ->
 			Minimum = Value
-		;   domain_error(http_parameter_option, minimum(Value))
+		;	domain_error(http_parameter_option, minimum(Value))
 		).
 	normalize_minimum_value(number, _Declaration, Value, Minimum) :-
 		!,
-		(   number(Value) ->
+		(	number(Value) ->
 			Minimum = Value
-		;   domain_error(http_parameter_option, minimum(Value))
+		;	domain_error(http_parameter_option, minimum(Value))
 		).
 	normalize_minimum_value(_ScalarType, Declaration, _Value, _Minimum) :-
 		domain_error(http_parameter_declaration, Declaration).
 
 	normalize_maximum_value(integer, _Declaration, Value, Maximum) :-
 		!,
-		(   integer(Value) ->
+		(	integer(Value) ->
 			Maximum = Value
-		;   domain_error(http_parameter_option, maximum(Value))
+		;	domain_error(http_parameter_option, maximum(Value))
 		).
 	normalize_maximum_value(number, _Declaration, Value, Maximum) :-
 		!,
-		(   number(Value) ->
+		(	number(Value) ->
 			Maximum = Value
-		;   domain_error(http_parameter_option, maximum(Value))
+		;	domain_error(http_parameter_option, maximum(Value))
 		).
 	normalize_maximum_value(_ScalarType, Declaration, _Value, _Maximum) :-
 		domain_error(http_parameter_declaration, Declaration).
 
 	normalize_pattern_value(Declaration, ScalarType, Value, Pattern) :-
-		(   pattern_scalar_type(ScalarType) ->
-			(   normalize_text_atom(Value, Pattern) ->
+		(	pattern_scalar_type(ScalarType) ->
+			(	normalize_text_atom(Value, Pattern) ->
 				true
-			;   domain_error(http_parameter_option, pattern(Value))
+			;	domain_error(http_parameter_option, pattern(Value))
 			)
-		;   domain_error(http_parameter_declaration, Declaration)
+		;	domain_error(http_parameter_declaration, Declaration)
 		).
 
 	pattern_scalar_type(string).
@@ -332,11 +332,11 @@
 	validate_declaration_semantics(_Declaration, _Source, _Cardinality, _Default).
 
 	validate_constraints_semantics(Declaration, constraints(_Enum, Minimum, Maximum, _Pattern)) :-
-		(   Minimum \== none,
+		(	Minimum \== none,
 			Maximum \== none,
 			Minimum > Maximum ->
 			domain_error(http_parameter_declaration, Declaration)
-		;   true
+		;	true
 		).
 
 	normalize_required_default(true, Default, false, Default) :-
@@ -355,9 +355,9 @@
 
 	validate_default_constraint(Name, Domain, Value, Constraints) :-
 		validate_parameter_constraints(Value, Constraints, Result),
-		(   Result == ok ->
+		(	Result == ok ->
 			true
-		;   domain_error(Domain, invalid_default(Name, Value))
+		;	domain_error(Domain, invalid_default(Name, Value))
 		).
 
 	validate_default_list_constraints([], _Name, _ScalarType, _Constraints).
@@ -366,14 +366,14 @@
 		validate_default_list_constraints(Values, Name, ScalarType, Constraints).
 
 	normalize_default_value(scalar, Name, ScalarType, Value, NormalizedValue) :-
-		(   normalize_default_scalar(ScalarType, Value, NormalizedValue) ->
+		(	normalize_default_scalar(ScalarType, Value, NormalizedValue) ->
 			true
-		;   domain_error(http_parameter_default(ScalarType), invalid_default(Name, Value))
+		;	domain_error(http_parameter_default(ScalarType), invalid_default(Name, Value))
 		).
 	normalize_default_value(list, Name, ScalarType, Value, NormalizedValue) :-
-		(   normalize_default_list(Value, ScalarType, NormalizedValue) ->
+		(	normalize_default_list(Value, ScalarType, NormalizedValue) ->
 			true
-		;   domain_error(http_parameter_default(list(ScalarType)), invalid_default(Name, Value))
+		;	domain_error(http_parameter_default(list(ScalarType)), invalid_default(Name, Value))
 		).
 
 	normalize_default_list([], _ScalarType, []) :-
@@ -421,9 +421,9 @@
 
 	apply_open_api_constraints(Schema0, Constraints, Schema) :-
 		open_api_constraint_pairs(Constraints, ConstraintPairs),
-		(   ConstraintPairs == [] ->
+		(	ConstraintPairs == [] ->
 			Schema = Schema0
-		;   ^^json_object_pairs(Schema0, SchemaPairs0),
+		;	^^json_object_pairs(Schema0, SchemaPairs0),
 			append(SchemaPairs0, ConstraintPairs, SchemaPairs),
 			^^pairs_to_object(SchemaPairs, Schema)
 		).
@@ -469,9 +469,9 @@
 	resolve_declarations([Declaration| Declarations], Request, Parameters) :-
 		resolve_declaration(Declaration, Request, Parameter, Present),
 		resolve_declarations(Declarations, Request, RestParameters),
-		(   Present == true ->
+		(	Present == true ->
 			Parameters = [Parameter| RestParameters]
-		;   Parameters = RestParameters
+		;	Parameters = RestParameters
 		).
 
 	resolve_declaration(declaration(Name, Source, ScalarType, scalar, Required, Default, _Description, _Schema, Constraints), Request, Name-Value, true) :-
@@ -484,11 +484,11 @@
 
 	resolve_scalar_declaration(Source, Name, _ScalarType, Required, Default, _Constraints, [], Value) :-
 		!,
-		(   Default = default(DefaultValue) ->
+		(	Default = default(DefaultValue) ->
 			Value = DefaultValue
-		;   Required == true ->
+		;	Required == true ->
 			throw_parameter_validation(Name, Source, missing_parameter(Source, Name))
-		;   fail
+		;	fail
 		).
 	resolve_scalar_declaration(Source, Name, _ScalarType, _Required, _Default, _Constraints, [_Value0, _Value1| _], _Value) :-
 		!,
@@ -498,12 +498,12 @@
 
 	resolve_list_declaration(Source, Name, _ScalarType, Required, Default, _Constraints, [], Values, Present) :-
 		!,
-		(   Default = default(DefaultValues) ->
+		(	Default = default(DefaultValues) ->
 			Values = DefaultValues,
 			Present = true
-		;   Required == true ->
+		;	Required == true ->
 			throw_parameter_validation(Name, Source, missing_parameter(Source, Name))
-		;   Present = false
+		;	Present = false
 		).
 	resolve_list_declaration(Source, Name, ScalarType, _Required, _Default, Constraints, RawValues, Values, true) :-
 		coerce_parameter_values(RawValues, Source, Name, ScalarType, Constraints, 1, Values).
@@ -511,28 +511,28 @@
 	coerce_parameter_values([], _Source, _Name, _ScalarType, _Constraints, _Index, []).
 	coerce_parameter_values([Value0| Values0], Source, Name, ScalarType, Constraints, Index, [Value| Values]) :-
 		coerce_scalar_value(Source, ScalarType, Value0, Value, Result),
-		(   Result == ok ->
+		(	Result == ok ->
 			validate_parameter_constraints(Value, Constraints, ValidationResult),
-			(   ValidationResult == ok ->
+			(	ValidationResult == ok ->
 				NextIndex is Index + 1,
 				coerce_parameter_values(Values0, Source, Name, ScalarType, Constraints, NextIndex, Values)
-			;   ValidationResult = error(Reason),
+			;	ValidationResult = error(Reason),
 				throw_parameter_validation(Name, Source, invalid_parameter_value(Source, Name, Value0, invalid_list_item(Index, Reason)))
 			)
-		;   Result = error(Reason),
+		;	Result = error(Reason),
 			throw_parameter_validation(Name, Source, invalid_parameter_value(Source, Name, Value0, invalid_list_item(Index, Reason)))
 		).
 
 	coerce_parameter_value(Source, Name, ScalarType, Constraints, Value0, Value) :-
 		coerce_scalar_value(Source, ScalarType, Value0, Value, Result),
-		(   Result == ok ->
+		(	Result == ok ->
 			validate_parameter_constraints(Value, Constraints, ValidationResult),
-			(   ValidationResult == ok ->
+			(	ValidationResult == ok ->
 				true
-			;   ValidationResult = error(Reason),
+			;	ValidationResult = error(Reason),
 				throw_parameter_validation(Name, Source, invalid_parameter_value(Source, Name, Value0, Reason))
 			)
-		;   Result = error(Reason),
+		;	Result = error(Reason),
 			throw_parameter_validation(Name, Source, invalid_parameter_value(Source, Name, Value0, Reason))
 		).
 
@@ -571,9 +571,9 @@
 		path_scalar_value(ScalarType, Value0, Value, Result).
 
 	coerce_text_scalar_value(ScalarType, Value0, Value, Result) :-
-		(   normalize_text_atom(Value0, TextValue) ->
+		(	normalize_text_atom(Value0, TextValue) ->
 			coerce_text_atom(ScalarType, TextValue, Value, Result)
-		;   Result = error(expected(ScalarType))
+		;	Result = error(expected(ScalarType))
 		).
 
 	coerce_text_atom(string, Value, Value, ok).
@@ -639,31 +639,31 @@
 	member_boolean_false(off).
 
 	request_parameter_values(query, Request, Name, Values) :-
-		(   http_core::property(Request, query_pairs(Pairs)) ->
+		(	http_core::property(Request, query_pairs(Pairs)) ->
 			named_pair_values(Pairs, Name, Values)
-		;   target_query_pairs(Request, Pairs) ->
+		;	target_query_pairs(Request, Pairs) ->
 			named_pair_values(Pairs, Name, Values)
-		;   Values = []
+		;	Values = []
 		).
 	request_parameter_values(form, Request, Name, Values) :-
-		(   http_core::body(Request, content(_MediaType, form(Pairs))) ->
+		(	http_core::body(Request, content(_MediaType, form(Pairs))) ->
 			named_pair_values(Pairs, Name, Values)
-		;   Values = []
+		;	Values = []
 		).
 	request_parameter_values(header, Request, Name, Values) :-
-		(   http_core::headers(Request, Headers) ->
+		(	http_core::headers(Request, Headers) ->
 			named_header_values(Headers, Name, Values)
-		;   Values = []
+		;	Values = []
 		).
 	request_parameter_values(cookie, Request, Name, Values) :-
-		(   http_core::property(Request, cookies(Pairs)) ->
+		(	http_core::property(Request, cookies(Pairs)) ->
 			named_pair_values(Pairs, Name, Values)
-		;   Values = []
+		;	Values = []
 		).
 	request_parameter_values(path, Request, Name, Values) :-
-		(   http_core::property(Request, path_params(Pairs)) ->
+		(	http_core::property(Request, path_params(Pairs)) ->
 			named_pair_values(Pairs, Name, Values)
-		;   Values = []
+		;	Values = []
 		).
 
 	target_query_pairs(Request, Pairs) :-
@@ -690,9 +690,9 @@
 
 	named_header_values([], _Name, []).
 	named_header_values([HeaderName-Value| Headers], Name, Values) :-
-		(   same_header_name(Name, HeaderName) ->
+		(	same_header_name(Name, HeaderName) ->
 			Values = [Value| RestValues]
-		;   Values = RestValues
+		;	Values = RestValues
 		),
 		named_header_values(Headers, Name, RestValues).
 
@@ -706,11 +706,11 @@
 
 	open_api_parameter_descriptors([], []).
 	open_api_parameter_descriptors([declaration(Name, Source, _ScalarType, _Cardinality, Required, _Default, Description0, Schema, _Constraints)| Declarations], Parameters) :-
-		(   Source == form ->
+		(	Source == form ->
 			Parameters = RestParameters
-		;   ignored_open_api_parameter(Name, Source) ->
+		;	ignored_open_api_parameter(Name, Source) ->
 			Parameters = RestParameters
-		;   parameter_open_api_description(Source, Description0, Description),
+		;	parameter_open_api_description(Source, Description0, Description),
 			Parameters = [parameter(Name, Source, Description, Required, Schema)| RestParameters]
 		),
 		open_api_parameter_descriptors(Declarations, RestParameters).
@@ -768,19 +768,19 @@
 	form_property_pairs([], [], []).
 	form_property_pairs([declaration(Name, form, _ScalarType, _Cardinality, Required, _Default, Description, Schema0, _Constraints)| Declarations], [Name-Schema| PropertyPairs], RequiredNames) :-
 		form_property_schema(Description, Schema0, Schema),
-		(   Required == true ->
+		(	Required == true ->
 			RequiredNames = [Name| RestRequiredNames]
-		;   RequiredNames = RestRequiredNames
+		;	RequiredNames = RestRequiredNames
 		),
 		form_property_pairs(Declarations, PropertyPairs, RestRequiredNames).
 
 	form_property_schema(none, Schema, Schema) :-
 		!.
 	form_property_schema(Description, Schema0, Schema) :-
-		(   ^^json_object_pairs(Schema0, Pairs0) ->
+		(	^^json_object_pairs(Schema0, Pairs0) ->
 			remove_description_pair(Pairs0, Pairs1),
 			^^pairs_to_object([description-Description| Pairs1], Schema)
-		;   Schema = {allOf-[Schema0], description-Description}
+		;	Schema = {allOf-[Schema0], description-Description}
 		).
 
 	remove_description_pair([], []).
@@ -810,10 +810,10 @@
 
 	lowercase_ascii_codes([], []).
 	lowercase_ascii_codes([Code0| Codes0], [Code| Codes]) :-
-		(   Code0 >= 0'A,
+		(	Code0 >= 0'A,
 			Code0 =< 0'Z ->
 			Code is Code0 + 32
-		;   Code = Code0
+		;	Code = Code0
 		),
 		lowercase_ascii_codes(Codes0, Codes).
 

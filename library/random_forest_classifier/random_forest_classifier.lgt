@@ -244,7 +244,7 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, Trees, ClassValues, Options),
+		(	classifier_data(Classifier, Trees, ClassValues, Options),
 			Trees \== [],
 			^^valid_class_values(ClassValues),
 			catch(::check_options(Options), _Error, fail),
@@ -252,7 +252,7 @@
 			length(Trees, ExpectedTreeCount),
 			valid_trees(Trees) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	% export_to_clauses/4 - exports classifier as a clause

@@ -91,14 +91,14 @@
 		].
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Clusters, Noise, Options),
+		(	clusterer_data(Clusterer, Encoders, Clusters, Noise, Options),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid_clusters(Clusters, FeatureCount, []),
 			valid(list(list(number, FeatureCount)), Noise),
 			catch(::check_options(Options), _Error, fail) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusters([], _FeatureCount, _SeenIds).
@@ -118,17 +118,17 @@
 
 	cluster_rows([], _NeighborhoodIndex, _Options, _Visited, Assignments, ClusterCount, ClusterCount, Assignments, CoreIds, CoreIds).
 	cluster_rows([Id-_| RemainingRows], NeighborhoodIndex, Options, Visited0, Assignments0, ClusterCount0, ClusterCount, Assignments, CoreIds0, CoreIds) :-
-		(   visited(Id, Visited0) ->
+		(	visited(Id, Visited0) ->
 			cluster_rows(RemainingRows, NeighborhoodIndex, Options, Visited0, Assignments0, ClusterCount0, ClusterCount, Assignments, CoreIds0, CoreIds)
-		;   mark_visited(Id, Visited0, Visited1),
+		;	mark_visited(Id, Visited0, Visited1),
 			region_query(Id, NeighborhoodIndex, NeighborCount, Neighbors),
 			^^option(minimum_points(MinimumPoints), Options),
-			(   NeighborCount < MinimumPoints ->
+			(	NeighborCount < MinimumPoints ->
 				assign_label(Id, noise, Assignments0, Assignments1),
 				ClusterCount1 = ClusterCount0,
 				Visited2 = Visited1,
 				CoreIds1 = CoreIds0
-			;   ClusterCount1 is ClusterCount0 + 1,
+			;	ClusterCount1 is ClusterCount0 + 1,
 				assign_label(Id, ClusterCount1, Assignments0, SeedAssignments),
 				add_core_id(Id, CoreIds0, SeedCoreIds),
 				empty_queue(SeedQueue, SeedQueuedIds),
@@ -145,16 +145,16 @@
 		deque::pop_front(Queue0, Id-_, Queue1),
 		remove_queue_id(Id, QueuedIds0, QueuedIds1),
 		assign_label(Id, ClusterId, Assignments0, Assignments1),
-		(   visited(Id, Visited0) ->
+		(	visited(Id, Visited0) ->
 			expand_cluster(Queue1, QueuedIds1, NeighborhoodIndex, Options, ClusterId, Visited0, Visited, Assignments1, Assignments, CoreIds0, CoreIds)
-		;   region_query(Id, NeighborhoodIndex, NeighborCount, Neighbors),
+		;	region_query(Id, NeighborhoodIndex, NeighborCount, Neighbors),
 			mark_visited(Id, Visited0, Visited1),
 			^^option(minimum_points(MinimumPoints), Options),
-			(   NeighborCount >= MinimumPoints ->
+			(	NeighborCount >= MinimumPoints ->
 				add_core_id(Id, CoreIds0, CoreIds1),
 				enqueue_neighbors(Neighbors, Visited1, Queue1, ExpandedQueue, QueuedIds1, QueuedIds2),
 				expand_cluster(ExpandedQueue, QueuedIds2, NeighborhoodIndex, Options, ClusterId, Visited1, Visited, Assignments1, Assignments, CoreIds1, CoreIds)
-			;   expand_cluster(Queue1, QueuedIds1, NeighborhoodIndex, Options, ClusterId, Visited1, Visited, Assignments1, Assignments, CoreIds0, CoreIds)
+			;	expand_cluster(Queue1, QueuedIds1, NeighborhoodIndex, Options, ClusterId, Visited1, Visited, Assignments1, Assignments, CoreIds0, CoreIds)
 			)
 		).
 
@@ -195,9 +195,9 @@
 
 	unique_candidate_rows([], []).
 	unique_candidate_rows([Row| Rows], UniqueRows) :-
-		(   member(Row, Rows) ->
+		(	member(Row, Rows) ->
 			unique_candidate_rows(Rows, UniqueRows)
-		;   UniqueRows = [Row| RestUniqueRows],
+		;	UniqueRows = [Row| RestUniqueRows],
 			unique_candidate_rows(Rows, RestUniqueRows)
 		).
 
@@ -225,13 +225,13 @@
 
 	pivot_distance_summary([], _PivotId, _PivotVector, _Options, Count, Sum, SumSquares, MinimumDistance, MaximumDistance, Count, Sum, SumSquares, MinimumDistance, MaximumDistance).
 	pivot_distance_summary([Id-Vector| Rows], PivotId, PivotVector, Options, Count0, Sum0, SumSquares0, MinimumDistance0, MaximumDistance0, Count, Sum, SumSquares, MinimumDistance, MaximumDistance) :-
-		(   Id == PivotId ->
+		(	Id == PivotId ->
 			Count1 = Count0,
 			Sum1 = Sum0,
 			SumSquares1 = SumSquares0,
 			MinimumDistance1 = MinimumDistance0,
 			MaximumDistance1 = MaximumDistance0
-		;   distance(Options, PivotVector, Vector, Distance),
+		;	distance(Options, PivotVector, Vector, Distance),
 			Count1 is Count0 + 1,
 			Sum1 is Sum0 + Distance,
 			SumSquares1 is SumSquares0 + Distance * Distance,
@@ -281,9 +281,9 @@
 
 	better_heuristic_pivot(Score, candidate(BestDispersion, BestRange, _BestPivot), Score) :-
 		Score = candidate(Dispersion, Range, _Pivot),
-		(   Dispersion > BestDispersion ->
+		(	Dispersion > BestDispersion ->
 			true
-		;   Dispersion =:= BestDispersion,
+		;	Dispersion =:= BestDispersion,
 			Range > BestRange
 		),
 		!.
@@ -291,9 +291,9 @@
 
 	better_exact_pivot(Profile, candidate(BestGap, BestRange, _BestPivot, _BestSortedRows), Profile) :-
 		Profile = candidate(Gap, Range, _Pivot, _SortedRows),
-		(   Gap > BestGap ->
+		(	Gap > BestGap ->
 			true
-		;   Gap =:= BestGap,
+		;	Gap =:= BestGap,
 			Range > BestRange
 		),
 		!.
@@ -328,13 +328,13 @@
 
 	enqueue_neighbors([], _Visited, Queue, Queue, QueuedIds, QueuedIds).
 	enqueue_neighbors([Id-Vector| Neighbors], Visited, Queue0, Queue, QueuedIds0, QueuedIds) :-
-		(   visited(Id, Visited) ->
+		(	visited(Id, Visited) ->
 			Queue1 = Queue0,
 			QueuedIds1 = QueuedIds0
-		;   queued(Id, QueuedIds0) ->
+		;	queued(Id, QueuedIds0) ->
 			Queue1 = Queue0,
 			QueuedIds1 = QueuedIds0
-		;   deque::push_back(Id-Vector, Queue0, Queue1),
+		;	deque::push_back(Id-Vector, Queue0, Queue1),
 			avltree::insert(QueuedIds0, Id, true, QueuedIds1)
 		),
 		enqueue_neighbors(Neighbors, Visited, Queue1, Queue, QueuedIds1, QueuedIds).
@@ -343,9 +343,9 @@
 		avltree::lookup(Id, true, QueuedIds).
 
 	remove_queue_id(Id, QueuedIds0, QueuedIds) :-
-		(   avltree::delete(QueuedIds0, Id, true, QueuedIds) ->
+		(	avltree::delete(QueuedIds0, Id, true, QueuedIds) ->
 			true
-		;   QueuedIds = QueuedIds0
+		;	QueuedIds = QueuedIds0
 		).
 
 	visited(Id, Visited) :-
@@ -355,10 +355,10 @@
 		avltree::insert(Visited0, Id, true, Visited).
 
 	assign_label(Id, Label, Assignments0, Assignments) :-
-		(   avltree::lookup(Id, ExistingLabel, Assignments0) ->
+		(	avltree::lookup(Id, ExistingLabel, Assignments0) ->
 			update_label(ExistingLabel, Label, UpdatedLabel),
 			avltree::insert(Assignments0, Id, UpdatedLabel, Assignments)
-		;   avltree::insert(Assignments0, Id, Label, Assignments)
+		;	avltree::insert(Assignments0, Id, Label, Assignments)
 		).
 
 	update_label(noise, Label, Label) :-
@@ -384,14 +384,14 @@
 	cluster_points(_ClusterId, [], _Assignments, _CoreIds, [], []) :-
 		!.
 	cluster_points(ClusterId, [Id-Vector| Rows], Assignments, CoreIds, CorePoints, BorderPoints) :-
-		(   assignment_label(Id, Assignments, ClusterId) ->
-			(   core_point(Id, CoreIds) ->
+		(	assignment_label(Id, Assignments, ClusterId) ->
+			(	core_point(Id, CoreIds) ->
 				CorePoints = [Vector| RestCorePoints],
 				BorderPoints = RestBorderPoints
-			;   CorePoints = RestCorePoints,
+			;	CorePoints = RestCorePoints,
 				BorderPoints = [Vector| RestBorderPoints]
 			)
-		;   CorePoints = RestCorePoints,
+		;	CorePoints = RestCorePoints,
 			BorderPoints = RestBorderPoints
 		),
 		cluster_points(ClusterId, Rows, Assignments, CoreIds, RestCorePoints, RestBorderPoints).
@@ -399,9 +399,9 @@
 	noise_points([], _Assignments, []) :-
 		!.
 	noise_points([Id-Vector| Rows], Assignments, Noise) :-
-		(   assignment_label(Id, Assignments, noise) ->
+		(	assignment_label(Id, Assignments, noise) ->
 			Noise = [Vector| RestNoise]
-		;   Noise = RestNoise
+		;	Noise = RestNoise
 		),
 		noise_points(Rows, Assignments, RestNoise).
 
@@ -414,21 +414,21 @@
 	classify_cluster(Clusters, Features, Options, Cluster) :-
 		findall(
 			Distance-CandidateCluster,
-			(   member(cluster(CandidateCluster, CorePoints, _BorderPoints), Clusters),
+			(	member(cluster(CandidateCluster, CorePoints, _BorderPoints), Clusters),
 				nearest_reachable_core_distance(CorePoints, Features, Options, Distance)
 			),
 			Candidates
 		),
-		(   Candidates == [] ->
+		(	Candidates == [] ->
 			Cluster = noise
-		;   best_candidate(Candidates, Cluster, _Distance)
+		;	best_candidate(Candidates, Cluster, _Distance)
 		).
 
 	nearest_reachable_core_distance(CorePoints, Features, Options, Distance) :-
 		^^option(epsilon(Epsilon), Options),
 		findall(
 			CandidateDistance,
-			(   member(CorePoint, CorePoints),
+			(	member(CorePoint, CorePoints),
 				distance(Options, Features, CorePoint, CandidateDistance),
 				CandidateDistance =< Epsilon
 			),
@@ -439,9 +439,9 @@
 
 	minimum_distance([], Distance, Distance).
 	minimum_distance([Candidate| Candidates], CurrentDistance, Distance) :-
-		(   Candidate < CurrentDistance ->
+		(	Candidate < CurrentDistance ->
 			NextDistance = Candidate
-		;   NextDistance = CurrentDistance
+		;	NextDistance = CurrentDistance
 		),
 		minimum_distance(Candidates, NextDistance, Distance).
 
@@ -450,10 +450,10 @@
 
 	best_candidate([], BestCluster, BestDistance, BestCluster, BestDistance).
 	best_candidate([Distance-Cluster| Candidates], CurrentCluster, CurrentDistance, BestCluster, BestDistance) :-
-		(   Distance < CurrentDistance ->
+		(	Distance < CurrentDistance ->
 			NextCluster = Cluster,
 			NextDistance = Distance
-		;   NextCluster = CurrentCluster,
+		;	NextCluster = CurrentCluster,
 			NextDistance = CurrentDistance
 		),
 		best_candidate(Candidates, NextCluster, NextDistance, BestCluster, BestDistance).

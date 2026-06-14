@@ -86,18 +86,18 @@
 	order_transactions([], _FrequentItemSupports, []).
 	order_transactions([_Id-Transaction| Transactions], FrequentItemSupports, OrderedTransactions) :-
 		order_transaction(Transaction, FrequentItemSupports, OrderedTransaction),
-		(   OrderedTransaction == [] ->
+		(	OrderedTransaction == [] ->
 			OrderedTransactions = RestOrderedTransactions
-		;   OrderedTransactions = [1-OrderedTransaction| RestOrderedTransactions]
+		;	OrderedTransactions = [1-OrderedTransaction| RestOrderedTransactions]
 		),
 		order_transactions(Transactions, FrequentItemSupports, RestOrderedTransactions).
 
 	order_weighted_paths([], _FrequentItemSupports, []).
 	order_weighted_paths([Count-Path| Paths], FrequentItemSupports, OrderedPaths) :-
 		order_transaction(Path, FrequentItemSupports, OrderedPath),
-		(   OrderedPath == [] ->
+		(	OrderedPath == [] ->
 			OrderedPaths = RestOrderedPaths
-		;   OrderedPaths = [Count-OrderedPath| RestOrderedPaths]
+		;	OrderedPaths = [Count-OrderedPath| RestOrderedPaths]
 		),
 		order_weighted_paths(Paths, FrequentItemSupports, RestOrderedPaths).
 
@@ -106,9 +106,9 @@
 
 	order_transaction_by_supports([], _Transaction, []).
 	order_transaction_by_supports([item_support(Item, _Support)| FrequentItemSupports], Transaction, OrderedTransaction) :-
-		(   member(Item, Transaction) ->
+		(	member(Item, Transaction) ->
 			OrderedTransaction = [Item| RestOrderedTransaction]
-		;   OrderedTransaction = RestOrderedTransaction
+		;	OrderedTransaction = RestOrderedTransaction
 		),
 		order_transaction_by_supports(FrequentItemSupports, Transaction, RestOrderedTransaction).
 
@@ -158,12 +158,12 @@
 	mine_tree([item_support(Item, Support)| ItemSupports], Tree, SupportCount, MaximumPatternLength, Suffix, Patterns) :-
 		canonical_pattern(Item, Suffix, Pattern),
 		length(Pattern, PatternLength),
-		(   PatternLength =< MaximumPatternLength ->
+		(	PatternLength =< MaximumPatternLength ->
 			conditional_pattern_base(Tree, Item, PatternBase),
 			conditional_patterns(PatternBase, SupportCount, MaximumPatternLength, Pattern, ConditionalPatterns),
 			Patterns = [itemset(Pattern, Support)| ConditionalPatternsAndRest],
 			append(ConditionalPatterns, RestPatterns, ConditionalPatternsAndRest)
-		;   Patterns = RestPatterns
+		;	Patterns = RestPatterns
 		),
 		mine_tree(ItemSupports, Tree, SupportCount, MaximumPatternLength, Suffix, RestPatterns).
 
@@ -174,9 +174,9 @@
 	conditional_patterns(PatternBase, SupportCount, MaximumPatternLength, Pattern, Patterns) :-
 		count_pattern_base_items(PatternBase, [], ItemCounts0),
 		^^select_frequent_item_supports(ItemCounts0, SupportCount, FrequentItemSupports0),
-		(   FrequentItemSupports0 == [] ->
+		(	FrequentItemSupports0 == [] ->
 			Patterns = []
-		;   sort_item_supports_by_frequency(FrequentItemSupports0, FrequentItemSupports),
+		;	sort_item_supports_by_frequency(FrequentItemSupports0, FrequentItemSupports),
 			order_weighted_paths(PatternBase, FrequentItemSupports, OrderedPaths),
 			build_fp_tree(OrderedPaths, ConditionalTree),
 			reverse(FrequentItemSupports, MiningItemSupports),
@@ -196,9 +196,9 @@
 
 	conditional_pattern_base_from_nodes([], []).
 	conditional_pattern_base_from_nodes([NodeOccurrence| NodeOccurrences], PatternBase) :-
-		(   node_prefix_path(NodeOccurrence, Count, Prefix) ->
+		(	node_prefix_path(NodeOccurrence, Count, Prefix) ->
 			PatternBase = [Count-Prefix| PatternBase0]
-		;   PatternBase = PatternBase0
+		;	PatternBase = PatternBase0
 		),
 		conditional_pattern_base_from_nodes(NodeOccurrences, PatternBase0).
 
@@ -222,7 +222,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = fp_growth_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = fp_growth_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_itemset_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(fp_growth_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -231,7 +231,7 @@
 			memberchk(support_layout(fp_tree), Diagnostics),
 			memberchk(projection_access(header_table_parent_links), Diagnostics) ->
 			true
-		;   domain_error(fp_growth_pattern_miner, PatternMiner)
+		;	domain_error(fp_growth_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, fp_growth_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

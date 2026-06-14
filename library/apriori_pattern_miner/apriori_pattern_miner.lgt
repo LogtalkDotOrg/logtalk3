@@ -108,9 +108,9 @@
 		count_items_in_transaction(Items, ItemCounts1, ItemCounts).
 
 	increment_item_count(Item, ItemCounts0, ItemCounts) :-
-		(   dictionary_lookup(Item, Count0, ItemCounts0) ->
+		(	dictionary_lookup(Item, Count0, ItemCounts0) ->
 			Count is Count0 + 1
-		;   Count = 1
+		;	Count = 1
 		),
 		dictionary_insert(ItemCounts0, Item, Count, ItemCounts).
 
@@ -120,9 +120,9 @@
 			true
 		;	Support = 0
 		),
-		(   Support >= SupportCount ->
+		(	Support >= SupportCount ->
 			Level = [itemset([Item], Support)| LevelTail]
-		;   Level = LevelTail
+		;	Level = LevelTail
 		),
 		frequent_level_one(Items, ItemCounts, SupportCount, LevelTail).
 
@@ -178,11 +178,11 @@
 
 	advance_to_itemset(Target, [Itemset| Itemsets], RemainingItemsets) :-
 		compare(Order, Itemset, Target),
-		(   Order == (=) ->
+		(	Order == (=) ->
 			RemainingItemsets = [Itemset| Itemsets]
-		;   Order == (<) ->
+		;	Order == (<) ->
 			advance_to_itemset(Target, Itemsets, RemainingItemsets)
-		;   fail
+		;	fail
 		).
 
 	frequent_candidates([], _Transactions, _SupportCount, []).
@@ -214,17 +214,17 @@
 	insert_candidate_hash_tree(Candidate, Depth, CandidateLength, hash_tree(BucketDictionary0), hash_tree(BucketDictionary)) :-
 		nth1(Depth, Candidate, Item),
 		hash_item(Item, Hash),
-		(   dictionary_lookup(Hash, ItemDictionary0, BucketDictionary0) ->
+		(	dictionary_lookup(Hash, ItemDictionary0, BucketDictionary0) ->
 			true
-		;   dictionary_new(ItemDictionary0)
+		;	dictionary_new(ItemDictionary0)
 		),
 		insert_candidate_item_tree(Candidate, Item, Depth, CandidateLength, ItemDictionary0, ItemDictionary),
 		dictionary_insert(BucketDictionary0, Hash, ItemDictionary, BucketDictionary).
 
 	insert_candidate_item_tree(Candidate, Item, Depth, CandidateLength, ItemDictionary0, ItemDictionary) :-
-		(   dictionary_lookup(Item, CandidateHashTree0, ItemDictionary0) ->
+		(	dictionary_lookup(Item, CandidateHashTree0, ItemDictionary0) ->
 			insert_candidate_subtree(Candidate, Depth, CandidateLength, CandidateHashTree0, CandidateHashTree)
-		;   initialize_candidate_subtree(Candidate, Depth, CandidateLength, CandidateHashTree)
+		;	initialize_candidate_subtree(Candidate, Depth, CandidateLength, CandidateHashTree)
 		),
 		dictionary_insert(ItemDictionary0, Item, CandidateHashTree, ItemDictionary).
 
@@ -263,19 +263,19 @@
 		!.
 	count_transaction_candidates(hash_tree(BucketDictionary0), [Item| Transaction], hash_tree(BucketDictionary)) :-
 		hash_item(Item, Hash),
-		(   dictionary_lookup(Hash, ItemDictionary0, BucketDictionary0),
+		(	dictionary_lookup(Hash, ItemDictionary0, BucketDictionary0),
 			dictionary_lookup(Item, CandidateHashTree0, ItemDictionary0) ->
 			count_transaction_candidates(CandidateHashTree0, Transaction, CandidateHashTree),
 			dictionary_insert(ItemDictionary0, Item, CandidateHashTree, ItemDictionary),
 			dictionary_insert(BucketDictionary0, Hash, ItemDictionary, BucketDictionary1)
-		;   BucketDictionary1 = BucketDictionary0
+		;	BucketDictionary1 = BucketDictionary0
 		),
 		count_transaction_candidates(hash_tree(BucketDictionary1), Transaction, hash_tree(BucketDictionary)).
 
 	select_frequent_candidates(leaf(candidate_count(Candidate, Support)), SupportCount, Level) :-
-		(   Support >= SupportCount ->
+		(	Support >= SupportCount ->
 			Level = [itemset(Candidate, Support)]
-		;   Level = []
+		;	Level = []
 		).
 	select_frequent_candidates(hash_tree(BucketDictionary), SupportCount, Level) :-
 		dictionary_as_list(BucketDictionary, BucketPairs),
@@ -309,7 +309,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = apriori_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = apriori_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_itemset_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(apriori_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -319,7 +319,7 @@
 			memberchk(pruning(anti_monotone_subsets), Diagnostics),
 			memberchk(support_layout(horizontal_transactions), Diagnostics) ->
 			true
-		;   domain_error(apriori_pattern_miner, PatternMiner)
+		;	domain_error(apriori_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, apriori_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

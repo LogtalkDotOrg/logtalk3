@@ -162,15 +162,15 @@
 		date_time_to_unix(StartDateTime, StartUnixTime),
 		date_time_to_unix(EndDateTime, EndUnixTime),
 		DeltaSeconds is EndUnixTime - StartUnixTime,
-		(   var(Duration) ->
+		(	var(Duration) ->
 			Duration = DeltaSeconds
-		;   integer(Duration) ->
+		;	integer(Duration) ->
 			Duration =:= DeltaSeconds
-		;   Duration = duration(_, _, _, _) ->
+		;	Duration = duration(_, _, _, _) ->
 			seconds_duration(DeltaSeconds, Duration)
-		;   Duration = duration(_, _, _, _, _, _) ->
+		;	Duration = duration(_, _, _, _, _, _) ->
 			calendar_duration_between(StartDateTime, EndDateTime, Duration)
-		;   fail
+		;	fail
 		).
 
 	utc_to_local(UTCDateTime, Offset, LocalDateTime) :-
@@ -294,9 +294,9 @@
 	epoch_julian_day(2440588).
 
 	unix_day_offset(UnixTime, DayOffset) :-
-		(   UnixTime >= 0 ->
+		(	UnixTime >= 0 ->
 			DayOffset is UnixTime // 86400
-		;   AbsUnixTime is -UnixTime,
+		;	AbsUnixTime is -UnixTime,
 			DayOffset is -((AbsUnixTime + 86399) // 86400)
 		).
 
@@ -725,15 +725,15 @@
 	calendar_duration_between(StartDateTime, EndDateTime, duration(Years, Months, Days, Hours, Minutes, Seconds)) :-
 		date_time_to_unix(StartDateTime, StartUnix),
 		date_time_to_unix(EndDateTime, EndUnix),
-		(   StartUnix =< EndUnix ->
+		(	StartUnix =< EndUnix ->
 			StartDateTime = date_time(SYear, SMonth, _, _, _, _),
 			EndDateTime   = date_time(EYear, EMonth, _, _, _, _),
 			RawDeltaMonths is (EYear - SYear) * 12 + (EMonth - SMonth),
 			apply_months_to_datetime(StartDateTime, RawDeltaMonths, Intermediate0),
 			date_time_to_unix(Intermediate0, T0),
-			(   T0 > EndUnix ->
+			(	T0 > EndUnix ->
 				DeltaMonths is RawDeltaMonths - 1
-			;   DeltaMonths = RawDeltaMonths
+			;	DeltaMonths = RawDeltaMonths
 			),
 			apply_months_to_datetime(StartDateTime, DeltaMonths, Intermediate),
 			Years  is DeltaMonths // 12,
@@ -741,7 +741,7 @@
 			date_time_to_unix(Intermediate, IntUnix),
 			RemainSecs is EndUnix - IntUnix,
 			seconds_duration(RemainSecs, duration(Days, Hours, Minutes, Seconds))
-		;   % Backward interval: compute as forward and negate all fields
+		;	% Backward interval: compute as forward and negate all fields
 			calendar_duration_between(EndDateTime, StartDateTime, duration(Y0, Mo0, D0, H0, Mi0, Se0)),
 			Years   is -Y0,
 			Months  is -Mo0,

@@ -468,9 +468,9 @@
 			validate_preference(Items, Winner, Loser, Weight)
 		),
 		::pairwise_dataset_connected_components(Dataset, Components),
-		(   Components = [_] ->
+		(	Components = [_] ->
 			true
-		;   domain_error(connected_pairwise_dataset, Components)
+		;	domain_error(connected_pairwise_dataset, Components)
 		),
 		::pairwise_dataset_summary(Dataset, Summary).
 
@@ -488,9 +488,9 @@
 			validate_measurement(Items, Item1, Item2, Value, Weight)
 		),
 		::pairwise_measurement_dataset_connected_components(Dataset, Components),
-		(   Components = [_] ->
+		(	Components = [_] ->
 			true
-		;   domain_error(connected_pairwise_measurement_dataset, Components)
+		;	domain_error(connected_pairwise_measurement_dataset, Components)
 		),
 		::pairwise_measurement_dataset_summary(Dataset, Summary).
 
@@ -515,9 +515,9 @@
 			validate_temporal_game(Periods, Items, Period, Item1, Item2, Score)
 		),
 		::temporal_pairwise_dataset_connected_components(Dataset, Components),
-		(   Components = [_] ->
+		(	Components = [_] ->
 			true
-		;   domain_error(connected_temporal_pairwise_dataset, Components)
+		;	domain_error(connected_temporal_pairwise_dataset, Components)
 		),
 		::temporal_pairwise_dataset_summary(Dataset, Summary).
 
@@ -558,36 +558,36 @@
 
 	neighbors([], _Item, []).
 	neighbors([p(Winner, Loser, _)| Preferences], Item, Neighbors) :-
-		(   Item == Winner ->
+		(	Item == Winner ->
 			Neighbors = [Loser| Rest]
-		;   Item == Loser ->
+		;	Item == Loser ->
 			Neighbors = [Winner| Rest]
-		;   Neighbors = Rest
+		;	Neighbors = Rest
 		),
 		neighbors(Preferences, Item, Rest).
 
 	new_items([], _Visited, []).
 	new_items([Item| Items], Visited, NewItems) :-
-		(   member(Item, Visited) ->
+		(	member(Item, Visited) ->
 			new_items(Items, Visited, NewItems)
-		;   NewItems = [Item| Rest],
+		;	NewItems = [Item| Rest],
 			new_items(Items, [Item| Visited], Rest)
 		).
 
 	remove_items([], _ToRemove, []).
 	remove_items([Item| Items], ToRemove, RemainingItems) :-
-		(   member(Item, ToRemove) ->
+		(	member(Item, ToRemove) ->
 			remove_items(Items, ToRemove, RemainingItems)
-		;   RemainingItems = [Item| Rest],
+		;	RemainingItems = [Item| Rest],
 			remove_items(Items, ToRemove, Rest)
 		).
 
 	isolated_items([], _Preferences, []).
 	isolated_items([Component| Components], Preferences, IsolatedItems) :-
-		(   Component = [Item],
+		(	Component = [Item],
 		    neighbors(Preferences, Item, []) ->
 			IsolatedItems = [Item| Rest]
-		;   IsolatedItems = Rest
+		;	IsolatedItems = Rest
 		),
 		isolated_items(Components, Preferences, Rest).
 
@@ -604,11 +604,11 @@
 		grouped_dataset_item_relevances(Items, Dataset, Group, MissingRelevance, ItemRelevances).
 
 	grouped_dataset_item_relevance(Dataset, Group, Item, MissingRelevance, Relevance) :-
-		(   Dataset::relevance(Group, Item, Relevance0) ->
+		(	Dataset::relevance(Group, Item, Relevance0) ->
 			Relevance = Relevance0
-		;   MissingRelevance == zero ->
+		;	MissingRelevance == zero ->
 			Relevance = 0
-		;   existence_error(relevance, Group-Item)
+		;	existence_error(relevance, Group-Item)
 		).
 
 	grouped_dataset_relevance_frequencies([], FrequencyDictionary, FrequencyDictionary).
@@ -622,16 +622,16 @@
 		grouped_dataset_tie_blocks(ItemRelevances, TieBlocks1, TieBlocks).
 
 	update_frequency_dictionary(FrequencyDictionary0, Relevance, FrequencyDictionary) :-
-		(   dictionary_lookup(Relevance, Count0, FrequencyDictionary0) ->
+		(	dictionary_lookup(Relevance, Count0, FrequencyDictionary0) ->
 			Count is Count0 + 1
-		;   Count = 1
+		;	Count = 1
 		),
 		dictionary_insert(FrequencyDictionary0, Relevance, Count, FrequencyDictionary).
 
 	update_tie_block_dictionary(TieBlocks0, Relevance, Item, TieBlocks) :-
-		(   dictionary_lookup(Relevance, Items0, TieBlocks0) ->
+		(	dictionary_lookup(Relevance, Items0, TieBlocks0) ->
 			append(Items0, [Item], Items)
-		;   Items = [Item]
+		;	Items = [Item]
 		),
 		dictionary_insert(TieBlocks0, Relevance, Items, TieBlocks).
 
@@ -652,12 +652,12 @@
 	aggregate_matchups([p(Winner, Loser, Weight)| Preferences], ItemIndices, Matchups0, Matchups) :-
 		dictionary_lookup(Winner, WinnerIndex, ItemIndices),
 		dictionary_lookup(Loser, LoserIndex, ItemIndices),
-		(   WinnerIndex < LoserIndex ->
+		(	WinnerIndex < LoserIndex ->
 			LeftIndex = WinnerIndex,
 			RightIndex = LoserIndex,
 			LeftDelta = Weight,
 			RightDelta = 0
-		;   LeftIndex = LoserIndex,
+		;	LeftIndex = LoserIndex,
 			RightIndex = WinnerIndex,
 			LeftDelta = 0,
 			RightDelta = Weight
@@ -667,10 +667,10 @@
 
 	update_matchup_dictionary(Matchups0, LeftIndex, RightIndex, LeftDelta, RightDelta, Matchups) :-
 		Key = pair(LeftIndex, RightIndex),
-		(   dictionary_lookup(Key, totals(Left0, Right0), Matchups0) ->
+		(	dictionary_lookup(Key, totals(Left0, Right0), Matchups0) ->
 			Left is Left0 + LeftDelta,
 			Right is Right0 + RightDelta
-		;   Left = LeftDelta,
+		;	Left = LeftDelta,
 			Right = RightDelta
 		),
 		dictionary_insert(Matchups0, Key, totals(Left, Right), Matchups).
@@ -691,106 +691,106 @@
 
 	check_unique_items([]).
 	check_unique_items([Item| Items]) :-
-		(   member(Item, Items) ->
+		(	member(Item, Items) ->
 			domain_error(unique_items, [Item| Items])
-		;   check_unique_items(Items)
+		;	check_unique_items(Items)
 		).
 
 	check_unique_periods([]).
 	check_unique_periods([Period| Periods]) :-
-		(   member(Period, Periods) ->
+		(	member(Period, Periods) ->
 			domain_error(unique_periods, [Period| Periods])
-		;   check_unique_periods(Periods)
+		;	check_unique_periods(Periods)
 		).
 
 	check_unique_groups([]).
 	check_unique_groups([Group| Groups]) :-
-		(   member(Group, Groups) ->
+		(	member(Group, Groups) ->
 			domain_error(unique_groups, [Group| Groups])
-		;   check_unique_groups(Groups)
+		;	check_unique_groups(Groups)
 		).
 
 	validate_group_items(Dataset, Group) :-
 		findall(Item, Dataset::item(Group, Item), RawItems),
-		(   RawItems == [] ->
+		(	RawItems == [] ->
 			domain_error(non_empty_group, Group)
-		;   check_unique_items(RawItems)
+		;	check_unique_items(RawItems)
 		).
 
 	validate_preference(Items, Winner, Loser, Weight) :-
-		(   member(Winner, Items) ->
+		(	member(Winner, Items) ->
 			true
-		;   existence_error(item, Winner)
+		;	existence_error(item, Winner)
 		),
-		(   member(Loser, Items) ->
+		(	member(Loser, Items) ->
 			true
-		;   existence_error(item, Loser)
+		;	existence_error(item, Loser)
 		),
-		(   Winner == Loser ->
+		(	Winner == Loser ->
 			domain_error(distinct_items, Winner-Loser)
-		;   true
+		;	true
 		),
-		(   number(Weight), Weight > 0 ->
+		(	number(Weight), Weight > 0 ->
 			true
-		;   domain_error(positive_number, Weight)
+		;	domain_error(positive_number, Weight)
 		).
 
 	validate_measurement(Items, Item1, Item2, Value, Weight) :-
-		(   member(Item1, Items) ->
+		(	member(Item1, Items) ->
 			true
-		;   existence_error(item, Item1)
+		;	existence_error(item, Item1)
 		),
-		(   member(Item2, Items) ->
+		(	member(Item2, Items) ->
 			true
-		;   existence_error(item, Item2)
+		;	existence_error(item, Item2)
 		),
-		(   Item1 == Item2 ->
+		(	Item1 == Item2 ->
 			domain_error(distinct_items, Item1-Item2)
-		;   true
+		;	true
 		),
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
-		(   number(Weight), Weight > 0 ->
+		(	number(Weight), Weight > 0 ->
 			true
-		;   domain_error(positive_number, Weight)
+		;	domain_error(positive_number, Weight)
 		).
 
 	validate_temporal_game(Periods, Items, Period, Item1, Item2, Score) :-
-		(   member(Period, Periods) ->
+		(	member(Period, Periods) ->
 			true
-		;   existence_error(period, Period)
+		;	existence_error(period, Period)
 		),
-		(   member(Item1, Items) ->
+		(	member(Item1, Items) ->
 			true
-		;   existence_error(item, Item1)
+		;	existence_error(item, Item1)
 		),
-		(   member(Item2, Items) ->
+		(	member(Item2, Items) ->
 			true
-		;   existence_error(item, Item2)
+		;	existence_error(item, Item2)
 		),
-		(   Item1 == Item2 ->
+		(	Item1 == Item2 ->
 			domain_error(distinct_items, Item1-Item2)
-		;   true
+		;	true
 		),
-		(   number(Score), {Score =:= 0.0; Score =:= 0.5; Score =:= 1.0} ->
+		(	number(Score), {Score =:= 0.0; Score =:= 0.5; Score =:= 1.0} ->
 			true
-		;   domain_error(game_score, Score)
+		;	domain_error(game_score, Score)
 		).
 
 	validate_relevance(Dataset, Groups, Group, Item, Relevance) :-
-		(   member(Group, Groups) ->
+		(	member(Group, Groups) ->
 			true
-		;   existence_error(group, Group)
+		;	existence_error(group, Group)
 		),
-		(   Dataset::item(Group, Item) ->
+		(	Dataset::item(Group, Item) ->
 			true
-		;   existence_error(item, Item)
+		;	existence_error(item, Item)
 		),
-		(   integer(Relevance), Relevance >= 0 ->
+		(	integer(Relevance), Relevance >= 0 ->
 			true
-		;   domain_error(non_negative_integer, Relevance)
+		;	domain_error(non_negative_integer, Relevance)
 		).
 
 	unique_list(Items, UniqueItems) :-
@@ -799,9 +799,9 @@
 
 	unique_list([], _Seen, []).
 	unique_list([Item| Items], Seen0, UniqueItems) :-
-		(   dictionary_lookup(Item, _Seen, Seen0) ->
+		(	dictionary_lookup(Item, _Seen, Seen0) ->
 			unique_list(Items, Seen0, UniqueItems)
-		;   dictionary_insert(Seen0, Item, true, Seen),
+		;	dictionary_insert(Seen0, Item, true, Seen),
 			UniqueItems = [Item| Rest],
 			unique_list(Items, Seen, Rest)
 		).

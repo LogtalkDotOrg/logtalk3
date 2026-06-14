@@ -79,9 +79,9 @@
 	evaluate_examples([], _, Correct, Correct, TotalLogLoss, TotalLogLoss).
 	evaluate_examples([Class-AttributeValues| Examples], Classifier, Correct0, Correct, LogLoss0, LogLoss) :-
 		logistic_regression_classifier::predict(Classifier, AttributeValues, Prediction),
-		(   Prediction == Class ->
+		(	Prediction == Class ->
 			Correct1 is Correct0 + 1
-		;   Correct1 = Correct0
+		;	Correct1 = Correct0
 		),
 		logistic_regression_classifier::predict_probabilities(Classifier, AttributeValues, Probabilities),
 		memberchk(Class-Probability, Probabilities),
@@ -91,9 +91,9 @@
 		evaluate_examples(Examples, Classifier, Correct1, Correct, LogLoss1, LogLoss).
 
 	bounded_probability(Probability, SafeProbability) :-
-		(   Probability < 1.0e-15 ->
+		(	Probability < 1.0e-15 ->
 			SafeProbability = 1.0e-15
-		;   SafeProbability = Probability
+		;	SafeProbability = Probability
 		).
 
 :- end_object.

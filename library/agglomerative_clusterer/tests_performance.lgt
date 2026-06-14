@@ -104,18 +104,18 @@
 	minimum_distance([], _Features, _Options, Distance, Distance).
 	minimum_distance([Point| Points], Features, Options, CurrentDistance, Distance) :-
 		distance(Options, Features, Point, CandidateDistance),
-		(   CandidateDistance < CurrentDistance ->
+		(	CandidateDistance < CurrentDistance ->
 			NextDistance = CandidateDistance
-		;   NextDistance = CurrentDistance
+		;	NextDistance = CurrentDistance
 		),
 		minimum_distance(Points, Features, Options, NextDistance, Distance).
 
 	maximum_distance([], _Features, _Options, Distance, Distance).
 	maximum_distance([Point| Points], Features, Options, CurrentDistance, Distance) :-
 		distance(Options, Features, Point, CandidateDistance),
-		(   CandidateDistance > CurrentDistance ->
+		(	CandidateDistance > CurrentDistance ->
 			NextDistance = CandidateDistance
-		;   NextDistance = CurrentDistance
+		;	NextDistance = CurrentDistance
 		),
 		maximum_distance(Points, Features, Options, NextDistance, Distance).
 
@@ -169,9 +169,9 @@
 	minimum_prototype_distance([Prototype| Prototypes], MinimumDistance) :-
 		minimum_distance_to_others(Prototype, Prototypes, FirstMinimumDistance),
 		minimum_prototype_distance(Prototypes, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Prototype, [Other| Others], MinimumDistance) :-

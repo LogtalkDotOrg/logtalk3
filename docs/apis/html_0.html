@@ -394,8 +394,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paul Brown and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:4:0</div>
-<div class="line"><strong>Date:</strong> 2021-06-11</div>
+<div class="line"><strong>Version:</strong> 0:4:1</div>
+<div class="line"><strong>Date:</strong> 2021-06-16</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -459,6 +459,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+compound,++term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is ground but not a valid sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(html_sink,Sink)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

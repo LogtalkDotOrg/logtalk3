@@ -205,52 +205,52 @@
 
 	parse_frame(Source, Profile, Frame) :-
 		parse_frames(Source, Profile, Frames),
-		(   Frames = [Frame] ->
+		(	Frames = [Frame] ->
 			true
-		;   domain_error(ccsds_single_frame_source, Source)
+		;	domain_error(ccsds_single_frame_source, Source)
 		).
 
 	parse_frames(Source, Profile, Frames) :-
-		(   var(Source) ->
+		(	var(Source) ->
 			instantiation_error
-		;   var(Profile) ->
+		;	var(Profile) ->
 			instantiation_error
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			profile_object(Profile, Object),
 			Object::parse(Source, Frames)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	generate_frame(Sink, Profile, Frame) :-
-		(   var(Sink) ->
+		(	var(Sink) ->
 			instantiation_error
-		;   var(Profile) ->
+		;	var(Profile) ->
 			instantiation_error
-		;   var(Frame) ->
+		;	var(Frame) ->
 			instantiation_error
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			profile_object(Profile, Object),
-			(   Object::valid(Frame) ->
+			(	Object::valid(Frame) ->
 				generate_frames(Sink, Profile, [Frame])
-			;   domain_error(ccsds_frame_term, Frame)
+			;	domain_error(ccsds_frame_term, Frame)
 			)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	generate_frames(Sink, Profile, Frames) :-
-		(   var(Sink) ->
+		(	var(Sink) ->
 			instantiation_error
-		;   var(Profile) ->
+		;	var(Profile) ->
 			instantiation_error
-		;   var(Frames) ->
+		;	var(Frames) ->
 			instantiation_error
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			profile_object(Profile, Object),
-			(   valid_frames(Object, Frames) ->
+			(	valid_frames(Object, Frames) ->
 				Object::generate(Sink, Frames)
-			;   domain_error(ccsds_frame_terms, Frames)
+			;	domain_error(ccsds_frame_terms, Frames)
 			)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	valid_reassembly_state(State) :-
@@ -260,48 +260,48 @@
 		ccsds_packet_services::initial_channel_reassembly_state(State).
 
 	pending_fragments(State, PendingFragments) :-
-		(   var(State) ->
+		(	var(State) ->
 			instantiation_error
-		;   ccsds_packet_services::pending_fragments(State, PendingFragments)
+		;	ccsds_packet_services::pending_fragments(State, PendingFragments)
 		).
 
 	valid_discontinuity_policy(Policy) :-
 		ccsds_packet_services::valid_discontinuity_policy(Policy).
 
 	extract_packets(Profile, SecondaryHeaderLength, Frame, PacketZone) :-
-		(   var(Profile) ->
+		(	var(Profile) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(Frame) ->
+		;	var(Frame) ->
 			instantiation_error
-		;   packet_profile_object(Profile, Type, _) ->
-			(   packet_frame_term(Type, Frame) ->
+		;	packet_profile_object(Profile, Type, _) ->
+			(	packet_frame_term(Type, Frame) ->
 				extract_profile_packets(Type, Frame, SecondaryHeaderLength, PacketZone)
-			;   domain_error(ccsds_frame_term, Frame)
+			;	domain_error(ccsds_frame_term, Frame)
 			)
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			domain_error(ccsds_packet_link_profile, Profile)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	insert_packets(Profile, SecondaryHeaderLength, PacketZone, Frame, UpdatedFrame) :-
-		(   var(Profile) ->
+		(	var(Profile) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(PacketZone) ->
+		;	var(PacketZone) ->
 			instantiation_error
-		;   var(Frame) ->
+		;	var(Frame) ->
 			instantiation_error
-		;   packet_profile_object(Profile, Type, _) ->
-			(   packet_frame_term(Type, Frame) ->
+		;	packet_profile_object(Profile, Type, _) ->
+			(	packet_frame_term(Type, Frame) ->
 				insert_profile_packets(Type, PacketZone, SecondaryHeaderLength, Frame, UpdatedFrame)
-			;   domain_error(ccsds_frame_term, Frame)
+			;	domain_error(ccsds_frame_term, Frame)
 			)
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			domain_error(ccsds_packet_link_profile, Profile)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	reassemble_packets(Profile, SecondaryHeaderLength, Frame, State, Packets, UpdatedState) :-
@@ -311,24 +311,24 @@
 		reassemble_packets(Profile, SecondaryHeaderLength, Frame, Policy, State, Packets, UpdatedState, _).
 
 	reassemble_packets(Profile, SecondaryHeaderLength, Frame, Policy, State, Packets, UpdatedState, Events) :-
-		(   var(Profile) ->
+		(	var(Profile) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(Frame) ->
+		;	var(Frame) ->
 			instantiation_error
-		;   var(Policy) ->
+		;	var(Policy) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   packet_profile_object(Profile, Type, _) ->
-			(   packet_frame_term(Type, Frame) ->
+		;	packet_profile_object(Profile, Type, _) ->
+			(	packet_frame_term(Type, Frame) ->
 				reassemble_profile_packets(Type, Frame, SecondaryHeaderLength, Policy, State, Packets, UpdatedState, Events)
-			;   domain_error(ccsds_frame_term, Frame)
+			;	domain_error(ccsds_frame_term, Frame)
 			)
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			domain_error(ccsds_packet_link_profile, Profile)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	reassemble_frames(Profile, SecondaryHeaderLength, Frames, State, Packets, UpdatedState) :-
@@ -338,24 +338,24 @@
 		reassemble_frames(Profile, SecondaryHeaderLength, Frames, Policy, State, Packets, UpdatedState, _).
 
 	reassemble_frames(Profile, SecondaryHeaderLength, Frames, Policy, State, Packets, UpdatedState, Events) :-
-		(   var(Profile) ->
+		(	var(Profile) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(Frames) ->
+		;	var(Frames) ->
 			instantiation_error
-		;   var(Policy) ->
+		;	var(Policy) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   packet_profile_object(Profile, Type, _) ->
-			(   valid_packet_frames(Type, Frames) ->
+		;	packet_profile_object(Profile, Type, _) ->
+			(	valid_packet_frames(Type, Frames) ->
 				reassemble_profile_frames(Type, Frames, SecondaryHeaderLength, Policy, State, Packets, UpdatedState, Events)
-			;   domain_error(ccsds_frame_terms, Frames)
+			;	domain_error(ccsds_frame_terms, Frames)
 			)
-		;   valid_profile(Profile) ->
+		;	valid_profile(Profile) ->
 			domain_error(ccsds_packet_link_profile, Profile)
-		;   domain_error(ccsds_link_profile, Profile)
+		;	domain_error(ccsds_link_profile, Profile)
 		).
 
 	profile_object(tm_profile(FrameLength, SecondaryHeaderLength, HasFECF), ccsds_tm_frames(FrameLength, SecondaryHeaderLength, HasFECF)).

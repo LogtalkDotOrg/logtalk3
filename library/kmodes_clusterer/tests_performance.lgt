@@ -81,9 +81,9 @@
 	mismatch_distance([], [], [], 0.0).
 	mismatch_distance([discrete(_, _)| Encoders], [Feature| Features], [ModeFeature| ModeFeatures], Distance) :-
 		mismatch_distance(Encoders, Features, ModeFeatures, RestDistance),
-		(   Feature == ModeFeature ->
+		(	Feature == ModeFeature ->
 			Distance = RestDistance
-		;   Distance is RestDistance + 1.0
+		;	Distance is RestDistance + 1.0
 		).
 
 	minimum_mode_distance(_Encoders, [], 0.0).
@@ -91,9 +91,9 @@
 	minimum_mode_distance(Encoders, [Mode| Modes], MinimumDistance) :-
 		minimum_distance_to_others(Encoders, Mode, Modes, FirstMinimumDistance),
 		minimum_mode_distance(Encoders, Modes, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Encoders, Mode, [Other| Others], MinimumDistance) :-

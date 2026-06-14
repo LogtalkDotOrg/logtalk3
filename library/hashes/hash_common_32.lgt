@@ -170,17 +170,17 @@
 	rol32(Value, Shift, Rotated) :-
 		Mask is 0xFFFFFFFF,
 		Count is Shift /\ 31,
-		(   Count =:= 0 ->
+		(	Count =:= 0 ->
 			Rotated is Value /\ Mask
-		;   Rotated is ((Value << Count) \/ (Value >> (32 - Count))) /\ Mask
+		;	Rotated is ((Value << Count) \/ (Value >> (32 - Count))) /\ Mask
 		).
 
 	ror32(Value, Shift, Rotated) :-
 		Mask is 0xFFFFFFFF,
 		Count is Shift /\ 31,
-		(   Count =:= 0 ->
+		(	Count =:= 0 ->
 			Rotated is Value /\ Mask
-		;   Rotated is ((Value >> Count) \/ (Value << (32 - Count))) /\ Mask
+		;	Rotated is ((Value >> Count) \/ (Value << (32 - Count))) /\ Mask
 		).
 
 	little_endian_word32([B0, B1, B2, B3], Word) :-

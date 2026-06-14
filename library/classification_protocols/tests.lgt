@@ -75,13 +75,13 @@
 	predict(sample_classifier(DefaultClass, _Diagnostics), _Instance, DefaultClass).
 
 	check_classifier(Classifier) :-
-		(   Classifier = sample_classifier(DefaultClass, Diagnostics),
+		(	Classifier = sample_classifier(DefaultClass, Diagnostics),
 			atom(DefaultClass),
 			^^valid_classifier_metadata(sample_classifier, Diagnostics),
 			memberchk(training_dataset(_Dataset), Diagnostics),
 			memberchk(options([]), Diagnostics) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	classifier_diagnostics_data(sample_classifier(_DefaultClass, Diagnostics), Diagnostics).
@@ -361,9 +361,9 @@
 
 	read_line_atom(Stream, Line) :-
 		get_code(Stream, Code),
-		(   Code == -1 ->
+		(	Code == -1 ->
 			Line = end_of_file
-		;   read_line_codes(Code, Stream, Codes),
+		;	read_line_codes(Code, Stream, Codes),
 			atom_codes(Line, Codes)
 		).
 
@@ -374,9 +374,9 @@
 	read_line_codes(13, Stream, Codes) :-
 		!,
 		get_code(Stream, NextCode),
-		(   NextCode == 10 ->
+		(	NextCode == 10 ->
 			Codes = []
-		;   read_line_codes(NextCode, Stream, Codes)
+		;	read_line_codes(NextCode, Stream, Codes)
 		).
 	read_line_codes(Code, Stream, [Code| Codes]) :-
 		get_code(Stream, NextCode),

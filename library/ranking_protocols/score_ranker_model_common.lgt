@@ -158,12 +158,12 @@
 	score_ranker_data(Ranker, Items, Scores, Diagnostics) :-
 		::score_ranker_term('Items', 'Scores', 'Diagnostics', Template),
 		functor(Template, Domain, 3),
-		(   var(Ranker) ->
+		(	var(Ranker) ->
 			instantiation_error
-		;   ::score_ranker_term(Items, Scores, Diagnostics, Ranker),
+		;	::score_ranker_term(Items, Scores, Diagnostics, Ranker),
 			valid_score_ranker_data(Items, Scores, Diagnostics) ->
 			true
-		;   domain_error(Domain, Ranker)
+		;	domain_error(Domain, Ranker)
 		).
 
 	valid_score_ranker_data(Items, Scores, Diagnostics) :-

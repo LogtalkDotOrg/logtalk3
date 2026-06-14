@@ -97,7 +97,7 @@
 		clusterer_data(Clusterer, _Encoders, _Medians, _Options, Diagnostics).
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Medians, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Medians, Options, Diagnostics),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid(list(list(number, FeatureCount)), Medians),
@@ -105,7 +105,7 @@
 			length(Medians, MedianCount),
 			^^valid_diagnostic_count(median_count, Diagnostics, MedianCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	initialize_medians(first_k, K, Rows, Medians) :-
@@ -133,32 +133,32 @@
 	farthest_candidate([Candidate| Candidates], Selected, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_median_distance(Vector, Selected, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, BestCandidate1, BestDistance1, BestCandidate).
 
 	optimize_medians(Rows, Options, Iteration, PreviousShift, Medians0, Medians, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Medians = Medians0,
 			Convergence = maximum_iterations,
 			Iterations = Iteration,
 			FinalShift = PreviousShift
-		;   assign_rows(Rows, Medians0, Assignments),
+		;	assign_rows(Rows, Medians0, Assignments),
 			recompute_medians(Medians0, Assignments, 1, Medians1),
 			max_median_shift(Medians0, Medians1, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
 			NextIteration is Iteration + 1,
-			(   Shift =< Tolerance ->
+			(	Shift =< Tolerance ->
 				Medians = Medians1,
 				Convergence = tolerance,
 				Iterations = NextIteration,
 				FinalShift = Shift
-			;   optimize_medians(Rows, Options, NextIteration, Shift, Medians1, Medians, Convergence, Iterations, FinalShift)
+			;	optimize_medians(Rows, Options, NextIteration, Shift, Medians1, Medians, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -174,10 +174,10 @@
 	nearest_median([], _Vector, _Index, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_median([Median| Medians], Vector, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		manhattan_distance(Vector, Median, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance0
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		NextIndex is Index + 1,
@@ -190,18 +190,18 @@
 	closest_median_distance([], _Vector, BestDistance, BestDistance).
 	closest_median_distance([Median| Medians], Vector, BestDistance0, BestDistance) :-
 		manhattan_distance(Vector, Median, Distance),
-		(   Distance < BestDistance0 ->
+		(	Distance < BestDistance0 ->
 			BestDistance1 = Distance
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_median_distance(Medians, Vector, BestDistance1, BestDistance).
 
 	recompute_medians([], _, _, []).
 	recompute_medians([Median0| Medians0], Assignments, Cluster, [Median| Medians]) :-
 		assigned_vectors(Cluster, Assignments, Vectors),
-		(   Vectors == [] ->
+		(	Vectors == [] ->
 			Median = Median0
-		;   median_vectors(Vectors, Median)
+		;	median_vectors(Vectors, Median)
 		),
 		NextCluster is Cluster + 1,
 		recompute_medians(Medians0, Assignments, NextCluster, Medians).

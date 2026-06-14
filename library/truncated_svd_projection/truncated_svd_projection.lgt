@@ -86,10 +86,10 @@
 
 	check_dimension_reducer(DimensionReducer) :-
 		^^check_dimension_reducer(DimensionReducer),
-		(   DimensionReducer = truncated_svd_reducer(_Encoders, Components, SingularValues, _Diagnostics),
+		(	DimensionReducer = truncated_svd_reducer(_Encoders, Components, SingularValues, _Diagnostics),
 			valid_singular_values(Components, SingularValues) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	check_examples(Dataset, AttributeNames, Examples) :-
@@ -106,22 +106,22 @@
 	encoder_statistics(Examples, Attribute, Options, Mean, Scale) :-
 		^^known_attribute_values(Examples, Attribute, Values),
 		^^option(center(Center), Options),
-		(   Center == true ->
+		(	Center == true ->
 			arithmetic_mean(Values, Mean)
-		;   Mean = 0.0
+		;	Mean = 0.0
 		),
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == true ->
+		(	FeatureScaling == true ->
 			length(Values, Count),
-			(   Count > 1 ->
+			(	Count > 1 ->
 				variance(Values, Variance)
-			;   Variance = 0.0
+			;	Variance = 0.0
 			),
-			(   Variance > 0.0 ->
+			(	Variance > 0.0 ->
 				Scale is sqrt(Variance)
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
-		;   Scale = 1.0
+		;	Scale = 1.0
 		).
 
 	extract_components(_Rows, 0, _Options, [], [], []) :-
@@ -137,10 +137,10 @@
 	extract_components(Rows, Requested, TotalRequested, Options, ComponentsAcc, SingularValuesAcc, ComponentDiagnosticsAcc, Components, SingularValues, ComponentDiagnostics) :-
 		singular_triplet(Rows, Options, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta),
 		^^option(tolerance(Tolerance), Options),
-		(   SingularValue =< Tolerance ->
+		(	SingularValue =< Tolerance ->
 			length(ComponentsAcc, ExtractedCount),
 			domain_error(component_count, TotalRequested-ExtractedCount)
-		;   deflate_rows(Rows, SingularValue, LeftSingularVector, RightSingularVector, DeflatedRows),
+		;	deflate_rows(Rows, SingularValue, LeftSingularVector, RightSingularVector, DeflatedRows),
 			NextRequested is Requested - 1,
 			extract_components(DeflatedRows, NextRequested, TotalRequested, Options, [RightSingularVector| ComponentsAcc], [SingularValue| SingularValuesAcc], [component_diagnostics(Convergence, Iterations, FinalDelta)| ComponentDiagnosticsAcc], Components, SingularValues, ComponentDiagnostics)
 		).
@@ -159,14 +159,14 @@
 	singular_triplet_candidates(Rows, Options, [InitialVector| InitialVectors], BestSingularValue0, BestLeftSingularVector0, BestRightSingularVector0, BestConvergence0, BestIterations0, BestFinalDelta0, BestSingularValue, BestLeftSingularVector, BestRightSingularVector, BestConvergence, BestIterations, BestFinalDelta) :-
 		normalize_vector(InitialVector, NormalizedInitial),
 		iterate_singular_triplet(Rows, Options, 0, NormalizedInitial, CandidateSingularValue, CandidateLeftSingularVector, CandidateRightSingularVector, CandidateConvergence, CandidateIterations, CandidateFinalDelta),
-		(   CandidateSingularValue > BestSingularValue0 ->
+		(	CandidateSingularValue > BestSingularValue0 ->
 			BestSingularValue1 = CandidateSingularValue,
 			BestLeftSingularVector1 = CandidateLeftSingularVector,
 			BestRightSingularVector1 = CandidateRightSingularVector,
 			BestConvergence1 = CandidateConvergence,
 			BestIterations1 = CandidateIterations,
 			BestFinalDelta1 = CandidateFinalDelta
-		;   BestSingularValue1 = BestSingularValue0,
+		;	BestSingularValue1 = BestSingularValue0,
 			BestLeftSingularVector1 = BestLeftSingularVector0,
 			BestRightSingularVector1 = BestRightSingularVector0,
 			BestConvergence1 = BestConvergence0,
@@ -179,7 +179,7 @@
 		matrix_vector_product(Rows, RightSingularVector0, LeftProduct),
 		euclidean_norm(LeftProduct, LeftNorm),
 		^^option(tolerance(Tolerance), Options),
-		(   LeftNorm =< Tolerance ->
+		(	LeftNorm =< Tolerance ->
 			length(Rows, ExampleCount),
 			new_vector(ExampleCount, 0.0, LeftSingularVector),
 			SingularValue = 0.0,
@@ -187,10 +187,10 @@
 			Convergence = tolerance,
 			Iterations = Iteration,
 			FinalDelta = 0.0
-		;   rescale(LeftProduct, 1.0 / LeftNorm, LeftSingularVector0),
+		;	rescale(LeftProduct, 1.0 / LeftNorm, LeftSingularVector0),
 			transpose_matrix_vector_product(Rows, LeftSingularVector0, RightProduct),
 			euclidean_norm(RightProduct, RightNorm),
-			(   RightNorm =< Tolerance ->
+			(	RightNorm =< Tolerance ->
 				length(Rows, ExampleCount),
 				new_vector(ExampleCount, 0.0, LeftSingularVector),
 				SingularValue = 0.0,
@@ -198,23 +198,23 @@
 				Convergence = tolerance,
 				Iterations = Iteration,
 				FinalDelta = 0.0
-			;   rescale(RightProduct, 1.0 / RightNorm, RightSingularVector1),
+			;	rescale(RightProduct, 1.0 / RightNorm, RightSingularVector1),
 				stabilize_vector_sign(RightSingularVector1, StableRightSingularVector),
 				difference_norm(StableRightSingularVector, RightSingularVector0, Delta),
 				^^option(maximum_iterations(MaximumIterations), Options),
-				(   Delta =< Tolerance ->
+				(	Delta =< Tolerance ->
 					finalize_singular_triplet(Rows, StableRightSingularVector, Tolerance, SingularValue, LeftSingularVector),
 					RightSingularVector = StableRightSingularVector,
 					Convergence = tolerance,
 					Iterations = Iteration,
 					FinalDelta = Delta
-				;   Iteration >= MaximumIterations ->
+				;	Iteration >= MaximumIterations ->
 					finalize_singular_triplet(Rows, StableRightSingularVector, Tolerance, SingularValue, LeftSingularVector),
 					RightSingularVector = StableRightSingularVector,
 					Convergence = maximum_iterations_exhausted,
 					Iterations = Iteration,
 					FinalDelta = Delta
-				;   NextIteration is Iteration + 1,
+				;	NextIteration is Iteration + 1,
 					iterate_singular_triplet(Rows, Options, NextIteration, StableRightSingularVector, SingularValue, LeftSingularVector, RightSingularVector, Convergence, Iterations, FinalDelta)
 				)
 			)
@@ -234,10 +234,10 @@
 	finalize_singular_triplet(Rows, RightSingularVector, Tolerance, SingularValue, LeftSingularVector) :-
 		matrix_vector_product(Rows, RightSingularVector, LeftProduct),
 		euclidean_norm(LeftProduct, SingularValue),
-		(   SingularValue =< Tolerance ->
+		(	SingularValue =< Tolerance ->
 			length(Rows, ExampleCount),
 			new_vector(ExampleCount, 0.0, LeftSingularVector)
-		;   rescale(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
+		;	rescale(LeftProduct, 1.0 / SingularValue, LeftSingularVector)
 		).
 
 	deflate_rows([], _SingularValue, [], _RightSingularVector, []).

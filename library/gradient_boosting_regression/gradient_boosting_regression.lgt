@@ -98,9 +98,9 @@
 		!.
 	build_ensemble_(Attributes, Examples, Predictions, NumberOfEstimators, LearningRate, TreeOptions, Round, WeightedTrees) :-
 		create_residual_examples(Examples, Predictions, ResidualExamples, 0.0, ResidualSSE),
-		(   ResidualSSE =< 1.0e-12 ->
+		(	ResidualSSE =< 1.0e-12 ->
 			WeightedTrees = []
-		;   create_residual_dataset(Attributes, ResidualExamples, ResidualDataset),
+		;	create_residual_dataset(Attributes, ResidualExamples, ResidualDataset),
 			tree_learn(ResidualDataset, Tree, TreeOptions),
 			abolish_object(ResidualDataset),
 			update_predictions(Examples, Predictions, LearningRate, Tree, UpdatedPredictions),
@@ -148,7 +148,7 @@
 	regressor_term_template(gradient_boosting_regressor(_InitialPrediction, _WeightedTrees, _Diagnostics), gradient_boosting_regressor('InitialPrediction', 'WeightedTrees', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics),
+		(	Regressor = gradient_boosting_regressor(InitialPrediction, WeightedTrees, Diagnostics),
 			number(InitialPrediction),
 			^^valid_regressor_metadata(gradient_boosting_regression, Diagnostics),
 			^^regressor_options(Regressor, Options),
@@ -158,7 +158,7 @@
 			StageCount =< MaxEstimators,
 			^^valid_diagnostic_count(stage_count, Diagnostics, StageCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-

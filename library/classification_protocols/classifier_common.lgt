@@ -206,9 +206,9 @@
 	check_classifier(Classifier) :-
 		(	var(Classifier) ->
 			instantiation_error
-		;   ::classifier_diagnostics_data(Classifier, _Diagnostics) ->
+		;	::classifier_diagnostics_data(Classifier, _Diagnostics) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	valid_classifier(Classifier) :-
@@ -266,17 +266,17 @@
 		).
 
 	check_examples_non_empty(Dataset, Examples) :-
-		(   Examples == [] ->
+		(	Examples == [] ->
 			domain_error(non_empty_dataset, Dataset)
-		;   true
+		;	true
 		).
 
 	check_examples(Dataset, Examples) :-
 		::check_examples_non_empty(Dataset, Examples),
 		Dataset::class_values(ClassValues),
-		(   valid_class_values(ClassValues) ->
+		(	valid_class_values(ClassValues) ->
 			true
-		;   domain_error(class_values, ClassValues)
+		;	domain_error(class_values, ClassValues)
 		),
 		::dataset_attributes(Dataset, Attributes),
 		check_examples(Examples, ClassValues, Attributes).
@@ -284,9 +284,9 @@
 	check_complete_examples(Dataset, Examples) :-
 		::check_examples_non_empty(Dataset, Examples),
 		Dataset::class_values(ClassValues),
-		(   valid_class_values(ClassValues) ->
+		(	valid_class_values(ClassValues) ->
 			true
-		;   domain_error(class_values, ClassValues)
+		;	domain_error(class_values, ClassValues)
 		),
 		::dataset_attributes(Dataset, Attributes),
 		check_complete_examples(Examples, ClassValues, Attributes).
@@ -294,19 +294,19 @@
 	check_complete_examples_nonvar(Dataset, Examples) :-
 		::check_examples_non_empty(Dataset, Examples),
 		Dataset::class_values(ClassValues),
-		(   valid_class_values(ClassValues) ->
+		(	valid_class_values(ClassValues) ->
 			true
-		;   domain_error(class_values, ClassValues)
+		;	domain_error(class_values, ClassValues)
 		),
 		::dataset_attributes(Dataset, Attributes),
 		check_complete_examples_nonvar(Examples, ClassValues, Attributes).
 
 	build_linear_encoders([], _, _FeatureScaling, []).
 	build_linear_encoders([Attribute-Values| Rest], Examples, FeatureScaling, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			continuous_stats(Attribute, Examples, FeatureScaling, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_linear_encoders(Rest, Examples, FeatureScaling, Encoders).
 
@@ -318,20 +318,20 @@
 	encode_linear_instance([], _, []).
 	encode_linear_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features]) :-
 		!,
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			normalize_continuous(Value, Mean, Scale, Feature),
 			Missing = 0.0
-		;   Feature = 0.0,
+		;	Feature = 0.0,
 			Missing = 1.0
 		),
 		encode_linear_instance(Encoders, AttributeValues, Features).
 	encode_linear_instance([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			check_categorical_value(Attribute, Values, Value),
 			one_hot_encode(Values, Value, Encoded)
-		;   missing_one_hot_encode(Values, Encoded)
+		;	missing_one_hot_encode(Values, Encoded)
 		),
 		append(Encoded, RestFeatures, Features),
 		encode_linear_instance(Encoders, AttributeValues, RestFeatures).
@@ -356,18 +356,18 @@
 	mixed_feature_distance(chebyshev, FeatureTypes, Values1, Values2, Distance) :-
 		max_absolute_feature_difference(FeatureTypes, Values1, Values2, 0.0, Distance).
 	mixed_feature_distance(minkowski(Order), FeatureTypes, Values1, Values2, Distance) :-
-		(   Order > 0.0 ->
+		(	Order > 0.0 ->
 			sum_powered_feature_differences(FeatureTypes, Values1, Values2, Order, 0.0, Sum),
 			Distance is Sum ** (1.0 / Order)
-		;   domain_error(positive_number, Order)
+		;	domain_error(positive_number, Order)
 		).
 	mixed_feature_distance(cosine, FeatureTypes, Values1, Values2, Distance) :-
 		numeric_feature_dot_product(FeatureTypes, Values1, Values2, 0.0, DotProduct),
 		numeric_feature_magnitude(FeatureTypes, Values1, Magnitude1),
 		numeric_feature_magnitude(FeatureTypes, Values2, Magnitude2),
-		(   (Magnitude1 =:= 0 ; Magnitude2 =:= 0) ->
+		(	(Magnitude1 =:= 0 ; Magnitude2 =:= 0) ->
 			Distance = 1.0
-		;   Similarity is float(DotProduct / (Magnitude1 * Magnitude2)),
+		;	Similarity is float(DotProduct / (Magnitude1 * Magnitude2)),
 			Distance is float(1.0 - Similarity)
 		).
 
@@ -429,13 +429,13 @@
 
 	check_attribute_declarations([]).
 	check_attribute_declarations([Attribute-Values| Attributes]) :-
-		(   atom(Attribute),
+		(	atom(Attribute),
 			\+ member(Attribute-_, Attributes),
-			(   Values == continuous
-			;   valid_discrete_values(Values)
+			(	Values == continuous
+			;	valid_discrete_values(Values)
 			) ->
 			true
-		;   domain_error(attribute_declarations, Attribute)
+		;	domain_error(attribute_declarations, Attribute)
 		),
 		check_attribute_declarations(Attributes).
 
@@ -458,12 +458,12 @@
 		check_complete_examples_nonvar(Examples, ClassValues, Attributes).
 
 	check_example_class(Class, ClassValues) :-
-		(   atom(Class) ->
-			(   member(Class, ClassValues) ->
+		(	atom(Class) ->
+			(	member(Class, ClassValues) ->
 				true
-			;   existence_error(class_value, Class)
+			;	existence_error(class_value, Class)
 			)
-		;   type_error(atom, Class)
+		;	type_error(atom, Class)
 		).
 
 	check_example_attributes(Attributes, AttributeValues) :-
@@ -492,54 +492,54 @@
 	check_declared_attribute_bindings([], _AttributeValues).
 	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
 		attribute_occurrences(AttributeValues, Attribute, 0, Count),
-		(   Count =< 1 ->
+		(	Count =< 1 ->
 			true
-		;   domain_error(attribute_occurrences(Attribute, 1), Count)
+		;	domain_error(attribute_occurrences(Attribute, 1), Count)
 		),
 		check_declared_attribute_bindings(Attributes, AttributeValues).
 
 	check_required_attribute_bindings([], _AttributeValues).
 	check_required_attribute_bindings([Attribute| Attributes], AttributeValues) :-
 		attribute_occurrences(AttributeValues, Attribute, 0, Count),
-		(   Count == 1 ->
+		(	Count == 1 ->
 			true
-		;   Count == 0 ->
+		;	Count == 0 ->
 			existence_error(attribute, Attribute)
-		;   domain_error(attribute_occurrences(Attribute, 1), Count)
+		;	domain_error(attribute_occurrences(Attribute, 1), Count)
 		),
 		check_required_attribute_bindings(Attributes, AttributeValues).
 
 	check_undeclared_attribute_bindings([], _AttributeNames).
 	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
-		(   member(Attribute, AttributeNames) ->
+		(	member(Attribute, AttributeNames) ->
 			true
-		;   domain_error(declared_attribute(AttributeNames), Attribute)
+		;	domain_error(declared_attribute(AttributeNames), Attribute)
 		),
 		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
 
 	check_attribute_values([], _Attributes).
 	check_attribute_values([Attribute-Value| AttributeValues], Attributes) :-
 		memberchk(Attribute-Values, Attributes),
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			check_attribute_value(Values, Attribute, Value)
-		;   true
+		;	true
 		),
 		check_attribute_values(AttributeValues, Attributes).
 
 	check_nonvar_attribute_values([], _Attributes).
 	check_nonvar_attribute_values([Attribute-Value| AttributeValues], Attributes) :-
 		memberchk(Attribute-Values, Attributes),
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			check_attribute_value(Values, Attribute, Value)
-		;   instantiation_error
+		;	instantiation_error
 		),
 		check_nonvar_attribute_values(AttributeValues, Attributes).
 
 	check_attribute_value(continuous, _Attribute, Value) :-
 		!,
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		).
 	check_attribute_value(Values, Attribute, Value) :-
 		check_categorical_value(Attribute, Values, Value).
@@ -577,45 +577,45 @@
 
 	continuous_stats(Attribute, Examples, FeatureScaling, Mean, Scale) :-
 		known_attribute_values(Examples, Attribute, Values),
-		(   Values == [] ->
+		(	Values == [] ->
 			Mean = 0.0,
 			Scale = 1.0
-		;   FeatureScaling == true ->
+		;	FeatureScaling == true ->
 			arithmetic_mean(Values, Mean),
 			length(Values, Count),
-			(   Count > 1 ->
+			(	Count > 1 ->
 				variance(Values, Variance)
-			;   Variance = 0.0
+			;	Variance = 0.0
 			),
-			(   Variance > 0.0 ->
+			(	Variance > 0.0 ->
 				Scale is sqrt(Variance)
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
-		;   Mean = 0.0,
+		;	Mean = 0.0,
 			Scale = 1.0
 		).
 
 	known_attribute_values([], _, []).
 	known_attribute_values([_-_-AttributeValues| Examples], Attribute, Values) :-
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			Values = [Value| Rest]
-		;   Values = Rest
+		;	Values = Rest
 		),
 		known_attribute_values(Examples, Attribute, Rest).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		Feature is (Value - Mean) / Scale.
 
 	one_hot_encode([], _, [0.0]).
 	one_hot_encode([Category| Categories], Value, [Feature| Features]) :-
-		(   Value == Category ->
+		(	Value == Category ->
 			Feature = 1.0
-		;   Feature = 0.0
+		;	Feature = 0.0
 		),
 		one_hot_encode(Categories, Value, Features).
 
@@ -624,9 +624,9 @@
 		missing_one_hot_encode(Values, Zeroes).
 
 	check_categorical_value(Attribute, Values, Value) :-
-		(   member(Value, Values) ->
+		(	member(Value, Values) ->
 			true
-		;   domain_error(attribute_value(Attribute, Values), Value)
+		;	domain_error(attribute_value(Attribute, Values), Value)
 		).
 
 	linear_encoders_feature_count([], Count, Count).

@@ -109,13 +109,13 @@
 
 	row_victories([], _Winner, _WinnerIndex, [], _TieBreaking, Sequence, VictoryPairs-VictoryPairs, Sequence).
 	row_victories([Loser-LoserIndex| IndexPairs], Winner, WinnerIndex, [Strength| Strengths], TieBreaking, Sequence0, VictoryPairs0-VictoryPairs, Sequence) :-
-		(   WinnerIndex =:= LoserIndex ->
+		(	WinnerIndex =:= LoserIndex ->
 			VictoryPairs0 = VictoryPairs1,
 			Sequence1 = Sequence0
-		;   Strength =:= 0 ->
+		;	Strength =:= 0 ->
 			VictoryPairs0 = VictoryPairs1,
 			Sequence1 = Sequence0
-		;   victory_key(TieBreaking, Strength, Winner, Loser, Sequence0, Key),
+		;	victory_key(TieBreaking, Strength, Winner, Loser, Sequence0, Key),
 			VictoryPairs0 = [Key-victory(WinnerIndex, LoserIndex, Winner, Loser, Strength)| VictoryPairs1],
 			Sequence1 is Sequence0 + 1
 		),
@@ -136,10 +136,10 @@
 
 	lock_victories_([], LockedClosure, LockedClosure, []).
 	lock_victories_([victory(WinnerIndex, LoserIndex, Winner, Loser, Strength)| Victories], LockedClosure0, LockedClosure, LockedPairs) :-
-		(   introduces_cycle(WinnerIndex, LoserIndex, LockedClosure0) ->
+		(	introduces_cycle(WinnerIndex, LoserIndex, LockedClosure0) ->
 			LockedClosure1 = LockedClosure0,
 			LockedPairs = LockedPairs0
-		;   add_locked_edge(WinnerIndex, LoserIndex, LockedClosure0, LockedClosure1),
+		;	add_locked_edge(WinnerIndex, LoserIndex, LockedClosure0, LockedClosure1),
 			LockedPairs = [lock(Winner, Loser, Strength)| LockedPairs0]
 		),
 		lock_victories_(Victories, LockedClosure1, LockedClosure, LockedPairs0).
@@ -157,9 +157,9 @@
 
 	predecessor_flags([], _CurrentIndex, _WinnerIndex, []).
 	predecessor_flags([Row| Rows], CurrentIndex, WinnerIndex, [Flag| Flags]) :-
-		(   CurrentIndex =:= WinnerIndex ->
+		(	CurrentIndex =:= WinnerIndex ->
 			Flag = 1
-		;   ^^matrix_entry([Row], 1, WinnerIndex, Flag)
+		;	^^matrix_entry([Row], 1, WinnerIndex, Flag)
 		),
 		NextIndex is CurrentIndex + 1,
 		predecessor_flags(Rows, NextIndex, WinnerIndex, Flags).
@@ -170,26 +170,26 @@
 
 	successor_flags([], _CurrentIndex, _LoserIndex, []).
 	successor_flags([Value| Values], CurrentIndex, LoserIndex, [Flag| Flags]) :-
-		(   CurrentIndex =:= LoserIndex ->
+		(	CurrentIndex =:= LoserIndex ->
 			Flag = 1
-		;   Flag = Value
+		;	Flag = Value
 		),
 		NextIndex is CurrentIndex + 1,
 		successor_flags(Values, NextIndex, LoserIndex, Flags).
 
 	update_closure([], [], _SuccessorFlags, []).
 	update_closure([Row| Rows], [PredecessorFlag| PredecessorFlags], SuccessorFlags, [UpdatedRow| UpdatedRows]) :-
-		(   PredecessorFlag =:= 1 ->
+		(	PredecessorFlag =:= 1 ->
 			update_closure_row(Row, SuccessorFlags, UpdatedRow)
-		;   UpdatedRow = Row
+		;	UpdatedRow = Row
 		),
 		update_closure(Rows, PredecessorFlags, SuccessorFlags, UpdatedRows).
 
 	update_closure_row([], [], []).
 	update_closure_row([Value| Values], [SuccessorFlag| SuccessorFlags], [UpdatedValue| UpdatedValues]) :-
-		(   SuccessorFlag =:= 1 ->
+		(	SuccessorFlag =:= 1 ->
 			UpdatedValue = 1
-		;   UpdatedValue = Value
+		;	UpdatedValue = Value
 		),
 		update_closure_row(Values, SuccessorFlags, UpdatedValues).
 

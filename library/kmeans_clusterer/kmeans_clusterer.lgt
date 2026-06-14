@@ -97,7 +97,7 @@
 		clusterer_data(Clusterer, _Encoders, _Centroids, _Options, Diagnostics).
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Centroids, Options, Diagnostics),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid(list(list(float, FeatureCount)), Centroids),
@@ -105,7 +105,7 @@
 			length(Centroids, CentroidCount),
 			^^valid_diagnostic_count(centroid_count, Diagnostics, CentroidCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	initialize_centroids(first_k, K, Rows, Centroids) :-
@@ -133,32 +133,32 @@
 	farthest_candidate([Candidate| Candidates], Selected, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_centroid_distance_squared(Vector, Selected, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, BestCandidate1, BestDistance1, BestCandidate).
 
 	optimize_centroids(Rows, Options, Iteration, PreviousShift, Centroids0, Centroids, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Centroids = Centroids0,
 			Convergence = maximum_iterations,
 			Iterations = Iteration,
 			FinalShift = PreviousShift
-		;   assign_rows(Rows, Centroids0, Assignments),
+		;	assign_rows(Rows, Centroids0, Assignments),
 			recompute_centroids(Centroids0, Assignments, 1, Centroids1),
 			max_centroid_shift(Centroids0, Centroids1, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
 			NextIteration is Iteration + 1,
-			(   Shift =< Tolerance ->
+			(	Shift =< Tolerance ->
 				Centroids = Centroids1,
 				Convergence = tolerance,
 				Iterations = NextIteration,
 				FinalShift = Shift
-			;   optimize_centroids(Rows, Options, NextIteration, Shift, Centroids1, Centroids, Convergence, Iterations, FinalShift)
+			;	optimize_centroids(Rows, Options, NextIteration, Shift, Centroids1, Centroids, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -175,10 +175,10 @@
 		!.
 	nearest_centroid_classifier([Centroid| Centroids], Vector, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		squared_euclidean_distance(Vector, Centroid, 0.0, Distance),
-		(   Distance < BestDistance0 ->
+		(	Distance < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		NextIndex is Index + 1,
@@ -191,9 +191,9 @@
 	closest_centroid_distance_squared([], _Vector, BestDistance, BestDistance).
 	closest_centroid_distance_squared([Centroid| Centroids], Vector, BestDistance0, BestDistance) :-
 		squared_euclidean_distance(Vector, Centroid, 0.0, Distance),
-		(   Distance < BestDistance0 ->
+		(	Distance < BestDistance0 ->
 			BestDistance1 = Distance
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_centroid_distance_squared(Centroids, Vector, BestDistance1, BestDistance).
 
@@ -206,9 +206,9 @@
 	recompute_centroids([], _, _, []).
 	recompute_centroids([Centroid0| Centroids0], Assignments, Cluster, [Centroid| Centroids]) :-
 		assigned_vectors(Cluster, Assignments, Vectors),
-		(   Vectors == [] ->
+		(	Vectors == [] ->
 			Centroid = Centroid0
-		;   average_vectors(Vectors, Centroid)
+		;	average_vectors(Vectors, Centroid)
 		),
 		NextCluster is Cluster + 1,
 		recompute_centroids(Centroids0, Assignments, NextCluster, Centroids).

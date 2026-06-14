@@ -61,9 +61,9 @@
 		^^merge_options(UserOptions, Options),
 		^^validate_pairwise_dataset(Dataset, DatasetSummary),
 		^^pairwise_dataset_items(Dataset, Items),
-		(   Items = [Item] ->
+		(	Items = [Item] ->
 			singleton_ranker(Item, Options, DatasetSummary, Ranker)
-		;   ^^pairwise_dataset_matchups(Dataset, Matchups),
+		;	^^pairwise_dataset_matchups(Dataset, Matchups),
 			length(Items, Count),
 			^^index_items(Items, 1, IndexPairs),
 			as_dictionary(IndexPairs, IndexDictionary),
@@ -147,18 +147,18 @@
 
 	search_best_consensus(Remaining, PrefixRev, CurrentScore, IndexDictionary, PreferenceMatrix, BestScore0, BestRanking0, BestScore, BestRanking) :-
 		upper_bound(PrefixRev, Remaining, CurrentScore, IndexDictionary, PreferenceMatrix, UpperBound),
-		(   UpperBound =< BestScore0 ->
+		(	UpperBound =< BestScore0 ->
 			BestScore = BestScore0,
 			BestRanking = BestRanking0
-		;   Remaining == [] ->
+		;	Remaining == [] ->
 			reverse(PrefixRev, Ranking),
-			(   CurrentScore > BestScore0 ->
+			(	CurrentScore > BestScore0 ->
 				BestScore = CurrentScore,
 				BestRanking = Ranking
-			;   BestScore = BestScore0,
+			;	BestScore = BestScore0,
 				BestRanking = BestRanking0
 			)
-		;   explore_consensus_candidates(Remaining, Remaining, PrefixRev, CurrentScore, IndexDictionary, PreferenceMatrix, BestScore0, BestRanking0, BestScore, BestRanking)
+		;	explore_consensus_candidates(Remaining, Remaining, PrefixRev, CurrentScore, IndexDictionary, PreferenceMatrix, BestScore0, BestRanking0, BestScore, BestRanking)
 		).
 
 	explore_consensus_candidates([], _Remaining, _PrefixRev, _CurrentScore, _IndexDictionary, _PreferenceMatrix, BestScore, BestRanking, BestScore, BestRanking).

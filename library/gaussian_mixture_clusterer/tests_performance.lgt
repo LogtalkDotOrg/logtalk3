@@ -63,9 +63,9 @@
 	minimum_mean_distance([component(Mean, _Variances)| Components], MinimumDistance) :-
 		minimum_distance_to_means(Mean, Components, FirstMinimumDistance),
 		minimum_mean_distance(Components, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_means(Mean, [component(OtherMean, _OtherVariances)| Components], MinimumDistance) :-

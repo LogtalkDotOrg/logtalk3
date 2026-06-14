@@ -88,7 +88,7 @@
 		^^project_components(Components, CenteredKernelVector, 1, ReducedInstance).
 
 	check_dimension_reducer(DimensionReducer) :-
-		(   DimensionReducer = kernel_pca_reducer(Encoders, TrainingRows, RowMeans, TotalMean, Components, ExplainedVariances, Diagnostics),
+		(	DimensionReducer = kernel_pca_reducer(Encoders, TrainingRows, RowMeans, TotalMean, Components, ExplainedVariances, Diagnostics),
 			^^valid_linear_encoders(Encoders),
 			valid_training_rows(Encoders, TrainingRows),
 			length(TrainingRows, SampleCount),
@@ -97,7 +97,7 @@
 			valid_dual_components(Components, SampleCount),
 			valid_kernel_pca_diagnostics(Components, ExplainedVariances, Diagnostics) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(kernel_pca_reducer(Encoders, _TrainingRows, _RowMeans, _TotalMean, Components, ExplainedVariances, Diagnostics)) :-
@@ -113,9 +113,9 @@
 
 	check_minimum_examples(Examples) :-
 		length(Examples, Count),
-		(   Count >= 2 ->
+		(	Count >= 2 ->
 			true
-		;   domain_error(minimum_number_of_examples, Count)
+		;	domain_error(minimum_number_of_examples, Count)
 		).
 
 	example_attribute_values(_-AttributeValues, AttributeValues).

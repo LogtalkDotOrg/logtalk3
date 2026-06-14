@@ -90,12 +90,12 @@
 		^^project_components(Rotations, Features, 1, ReducedInstance).
 
 	check_dimension_reducer(DimensionReducer) :-
-		(   DimensionReducer = pls_projection_reducer(Encoders, Rotations, Diagnostics),
+		(	DimensionReducer = pls_projection_reducer(Encoders, Rotations, Diagnostics),
 			^^valid_linear_encoders(Encoders),
 			^^valid_projection_components(Encoders, Rotations),
 			valid_pls_diagnostics(Rotations, Diagnostics) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(pls_projection_reducer(Encoders, Rotations, Diagnostics)) :-
@@ -107,29 +107,29 @@
 	example_attribute_values(_-_-AttributeValues, AttributeValues).
 
 	check_target_attribute(TargetAttribute, AttributeNames) :-
-		(   memberchk(TargetAttribute, AttributeNames) ->
+		(	memberchk(TargetAttribute, AttributeNames) ->
 			domain_error(target_attribute, TargetAttribute)
-		;   true
+		;	true
 		).
 
 	check_examples(Dataset, AttributeNames, Examples) :-
 		^^check_examples_non_empty(Dataset, Examples),
 		length(Examples, SampleCount),
-		(   SampleCount >= 2 ->
+		(	SampleCount >= 2 ->
 			true
-		;   domain_error(minimum_number_of_examples, Dataset)
+		;	domain_error(minimum_number_of_examples, Dataset)
 		),
 		check_example_values(Examples, AttributeNames).
 
 	check_example_values([], _AttributeNames).
 	check_example_values([_-Target-AttributeValues| Examples], AttributeNames) :-
-		(   nonvar(Target) ->
+		(	nonvar(Target) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   number(Target) ->
+		(	number(Target) ->
 			true
-		;   type_error(number, Target)
+		;	type_error(number, Target)
 		),
 		^^check_example_attributes(AttributeNames, AttributeValues),
 		check_example_values(Examples, AttributeNames).
@@ -141,9 +141,9 @@
 	center_targets(TargetAttribute, Targets0, TargetMean, Targets) :-
 		arithmetic_mean(Targets0, TargetMean),
 		variance(Targets0, TargetVariance),
-		(   TargetVariance =< 1.0e-12 ->
+		(	TargetVariance =< 1.0e-12 ->
 			domain_error(target_variance, TargetAttribute)
-		;   subtract_mean(Targets0, TargetMean, Targets)
+		;	subtract_mean(Targets0, TargetMean, Targets)
 		).
 
 	subtract_mean([], _Mean, []).
@@ -167,9 +167,9 @@
 		score_vector(Rows, NormalizedComponent, Scores0),
 		dot_product(Scores0, Scores0, Denominator),
 		^^option(tolerance(Tolerance), Options),
-		(   Denominator =< Tolerance ->
+		(	Denominator =< Tolerance ->
 			handle_component_shortfall(TotalRequested, Options, ComponentsAcc, LoadingsAcc, TargetLoadingsAcc, Denominator, Tolerance, Components, Loadings, TargetLoadings, ExtractionDiagnostics)
-		;   component_loading(Rows, Scores0, Denominator, Loading0),
+		;	component_loading(Rows, Scores0, Denominator, Loading0),
 			dot_product(Targets, Scores0, TargetLoadingNumerator),
 			TargetLoading0 is TargetLoadingNumerator / Denominator,
 			stabilize_component_sign(NormalizedComponent, Scores0, Loading0, TargetLoading0, Tolerance, Component, Scores, Loading, TargetLoading),
@@ -214,7 +214,7 @@
 
 	stabilize_component_sign(Component0, Scores0, Loading0, TargetLoading0, Tolerance, Component, Scores, Loading, TargetLoading) :-
 		stabilize_vector_sign(Component0, Tolerance, Component),
-		(   Component == Component0 ->
+		(	Component == Component0 ->
 			Scores = Scores0,
 			Loading = Loading0,
 			TargetLoading = TargetLoading0

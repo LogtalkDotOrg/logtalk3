@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-06-14,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
@@ -55,84 +55,84 @@
 	:- public(get/3).
 	:- mode(get(+atom, --compound, +list), one_or_error).
 	:- info(get/3, [
-		comment is 'Convenience wrapper over request/4 using the ``get`` method.',
+		comment is 'Convenience wrapper over ``request/4`` using the ``get`` method.',
 		argnames is ['URL', 'Response', 'Options']
 	]).
 
 	:- public(get/4).
 	:- mode(get(+compound, +atom, --compound, +list), one_or_error).
 	:- info(get/4, [
-		comment is 'Convenience wrapper over request/5 using the ``get`` method.',
+		comment is 'Convenience wrapper over ``request/5`` using the ``get`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options']
 	]).
 
 	:- public(head/3).
 	:- mode(head(+atom, --compound, +list), one_or_error).
 	:- info(head/3, [
-		comment is 'Convenience wrapper over request/4 using the ``head`` method.',
+		comment is 'Convenience wrapper over ``request/4`` using the ``head`` method.',
 		argnames is ['URL', 'Response', 'Options']
 	]).
 
 	:- public(head/4).
 	:- mode(head(+compound, +atom, --compound, +list), one_or_error).
 	:- info(head/4, [
-		comment is 'Convenience wrapper over request/5 using the ``head`` method.',
+		comment is 'Convenience wrapper over ``request/5`` using the ``head`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options']
 	]).
 
 	:- public(delete/3).
 	:- mode(delete(+atom, --compound, +list), one_or_error).
 	:- info(delete/3, [
-		comment is 'Convenience wrapper over request/4 using the ``delete`` method.',
+		comment is 'Convenience wrapper over ``request/4`` using the ``delete`` method.',
 		argnames is ['URL', 'Response', 'Options']
 	]).
 
 	:- public(delete/4).
 	:- mode(delete(+compound, +atom, --compound, +list), one_or_error).
 	:- info(delete/4, [
-		comment is 'Convenience wrapper over request/5 using the ``delete`` method.',
+		comment is 'Convenience wrapper over ``request/5`` using the ``delete`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options']
 	]).
 
 	:- public(post/4).
 	:- mode(post(+atom, +compound, --compound, +list), one_or_error).
 	:- info(post/4, [
-		comment is 'Convenience wrapper over request/4 using the ``post`` method and the given request body.',
+		comment is 'Convenience wrapper over ``request/4`` using the ``post`` method and the given request body.',
 		argnames is ['URL', 'Body', 'Response', 'Options']
 	]).
 
 	:- public(post/5).
 	:- mode(post(+compound, +atom, +compound, --compound, +list), one_or_error).
 	:- info(post/5, [
-		comment is 'Convenience wrapper over request/5 using the ``post`` method and the given request body.',
+		comment is 'Convenience wrapper over ``request/5`` using the ``post`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options']
 	]).
 
 	:- public(put/4).
 	:- mode(put(+atom, +compound, --compound, +list), one_or_error).
 	:- info(put/4, [
-		comment is 'Convenience wrapper over request/4 using the ``put`` method and the given request body.',
+		comment is 'Convenience wrapper over ``request/4`` using the ``put`` method and the given request body.',
 		argnames is ['URL', 'Body', 'Response', 'Options']
 	]).
 
 	:- public(put/5).
 	:- mode(put(+compound, +atom, +compound, --compound, +list), one_or_error).
 	:- info(put/5, [
-		comment is 'Convenience wrapper over request/5 using the ``put`` method and the given request body.',
+		comment is 'Convenience wrapper over ``request/5`` using the ``put`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options']
 	]).
 
 	:- public(patch/4).
 	:- mode(patch(+atom, +compound, --compound, +list), one_or_error).
 	:- info(patch/4, [
-		comment is 'Convenience wrapper over request/4 using the ``patch`` method and the given request body.',
+		comment is 'Convenience wrapper over ``request/4`` using the ``patch`` method and the given request body.',
 		argnames is ['URL', 'Body', 'Response', 'Options']
 	]).
 
 	:- public(patch/5).
 	:- mode(patch(+compound, +atom, +compound, --compound, +list), one_or_error).
 	:- info(patch/5, [
-		comment is 'Convenience wrapper over request/5 using the ``patch`` method and the given request body.',
+		comment is 'Convenience wrapper over ``request/5`` using the ``patch`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options']
 	]).
 
@@ -569,9 +569,9 @@
 	components_endpoint(Components, Host, Port) :-
 		member(authority(Authority), Components),
 		!,
-		( 	authority_url_context(Authority, Host, Port) ->
+		(	authority_url_context(Authority, Host, Port) ->
 			true
-		; 	domain_error(http_client_url, Authority)
+		;	domain_error(http_client_url, Authority)
 		).
 	components_endpoint(Components, _Host, _Port) :-
 		domain_error(http_client_url, Components).

@@ -84,9 +84,9 @@
 
 	check_continuous_attributes([]).
 	check_continuous_attributes([Attribute-Values| Attributes]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			true
-		;   domain_error(continuous_attribute, Attribute)
+		;	domain_error(continuous_attribute, Attribute)
 		),
 		check_continuous_attributes(Attributes).
 
@@ -98,9 +98,9 @@
 	encode_instance([], _, []).
 	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
 		memberchk(Attribute-Value, AttributeValues),
-		(   number(Value) ->
+		(	number(Value) ->
 			Feature is (Value - Mean) / Scale
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		encode_instance(Encoders, AttributeValues, Features).
 
@@ -125,9 +125,9 @@
 		length(Rows, RowCount),
 		length(Classes, ClassCount),
 		Denominator0 is RowCount - ClassCount,
-		(   Denominator0 > 0 ->
+		(	Denominator0 > 0 ->
 			Denominator = Denominator0
-		;   Denominator = 1
+		;	Denominator = 1
 		),
 		Scale is 1.0 / Denominator,
 		scale_matrix(Scatter, Scale, PooledCovariance).
@@ -182,9 +182,9 @@
 	max_score([Class-Score], Class, Score) :-
 		!.
 	max_score([Class1-Score1, Class2-Score2| Scores], Class, Score) :-
-		(   Score1 >= Score2 ->
+		(	Score1 >= Score2 ->
 			max_score([Class1-Score1| Scores], Class, Score)
-		;   max_score([Class2-Score2| Scores], Class, Score)
+		;	max_score([Class2-Score2| Scores], Class, Score)
 		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
@@ -203,14 +203,14 @@
 		classes_from_models(Models, Classes).
 
 	check_classifier(Classifier) :-
-		(   Classifier = lda_classifier(Encoders, Models, Options),
+		(	Classifier = lda_classifier(Encoders, Models, Options),
 			^^valid_linear_encoders(Encoders),
 			valid_continuous_encoders(Encoders),
 			catch(::check_options(Options), _Error, fail),
 			length(Encoders, FeatureCount),
 			valid_models(Models, FeatureCount) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	valid_continuous_encoders([]).

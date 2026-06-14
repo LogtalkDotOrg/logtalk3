@@ -195,10 +195,10 @@
 		assignment_cluster(Id2, Assignments1, Cluster12),
 		assignment_cluster(Id1, Assignments2, Cluster21),
 		assignment_cluster(Id2, Assignments2, Cluster22),
-		(   Cluster11 == Cluster12,
+		(	Cluster11 == Cluster12,
 			Cluster21 == Cluster22 ->
 			true
-		;   Cluster11 \== Cluster12,
+		;	Cluster11 \== Cluster12,
 			Cluster21 \== Cluster22
 		).
 

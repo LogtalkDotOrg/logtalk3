@@ -99,9 +99,9 @@
 	minimum_center_distance([Center| Centers], MinimumDistance) :-
 		minimum_distance_to_others(Center, Centers, FirstMinimumDistance),
 		minimum_center_distance(Centers, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Center, [Other| Others], MinimumDistance) :-

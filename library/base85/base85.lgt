@@ -22,9 +22,9 @@
 :- object(base85).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2025-01-23,
+		date is 2026-06-14,
 		comment is 'Base85 encoder and decoder (Ascii85/btoa variant).'
 	]).
 
@@ -32,14 +32,23 @@
 	:- mode(parse(++compound, --list(byte)), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses Base85 (Ascii85) data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)``) into a list of bytes.',
-		argnames is ['Source', 'Bytes']
+		argnames is ['Source', 'Bytes'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Base85 source term' - domain_error(base85_source, 'Source'),
+			'``Source`` contains Base85 data with characters outside the Base85 alphabet' - representation_error(base85)
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(+compound, +list(byte)), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates Base85 (Ascii85) in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)``) for the list of bytes in the second argument.',
-		argnames is ['Sink', 'Bytes']
+		argnames is ['Sink', 'Bytes'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Base85 sink term' - domain_error(base85_sink, 'Sink')
+		]
 	]).
 
 	% Ascii85 uses characters '!' (33) to 'u' (117), plus 'z' for all-zero groups

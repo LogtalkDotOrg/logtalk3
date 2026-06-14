@@ -24,15 +24,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
-		comment is 'HTTP Cookie and Set-Cookie header parsing and generation predicates implementing RFC 6265 syntax.',
+		date is 2026-06-14,
+		comment is 'HTTP Cookie and ``Set-Cookie`` header parsing and generation predicates implementing RFC 6265 syntax.',
 		parameters is [
 			'Representation' - 'Cookie header representation. Valid values are ``atom``, ``chars``, and ``codes``.'
 		],
 		remarks is [
 			'Cookie header pairs' - 'Cookie header values are represented as ``Name-Value`` pairs.',
 			'Set-Cookie components' - 'Set-Cookie header values are represented by a cookie name, a cookie value, and an attribute list where attributes use ``Key-Value`` notation such as ``expires-date_time(Year, Month, Day, Hours, Minutes, Seconds)``, ``max_age-Seconds``, ``domain-Domain``, ``path-Path``, ``secure-true``, ``http_only-true``, ``same_site-lax``, ``partitioned-true``, ``priority-high``, and ``extension-Attribute``.',
-			'Extension attributes' - 'Unknown Set-Cookie attributes are preserved verbatim as ``extension-Attribute`` pairs as long as they do not use a reserved RFC 6265 attribute name.',
+			'Extension attributes' - 'Unknown ``Set-Cookie`` attributes are preserved verbatim as ``extension-Attribute`` pairs as long as they do not use a reserved RFC 6265 attribute name.',
 			'Expires attribute' - 'The ``Expires`` attribute value is normalized to a ``date_time(Year, Month, Day, Hours, Minutes, Seconds)`` term and generated back using the canonical HTTP-date representation.'
 		]
 	]).
@@ -82,49 +82,49 @@
 	:- public(normalize_cookie_attributes/2).
 	:- mode(normalize_cookie_attributes(++list(compound), -list(compound)), zero_or_one).
 	:- info(normalize_cookie_attributes/2, [
-		comment is 'Normalizes and validates a Set-Cookie attribute list using the canonical attribute term representation.',
+		comment is 'Normalizes and validates a ``Set-Cookie`` attribute list using the canonical attribute term representation.',
 		argnames is ['Attributes', 'NormalizedAttributes']
 	]).
 
 	:- public(cookie_attribute_present/2).
 	:- mode(cookie_attribute_present(++list(compound), ++atom), zero_or_one).
 	:- info(cookie_attribute_present/2, [
-		comment is 'True iff a normalized Set-Cookie attribute list contains an attribute with the given name.',
+		comment is 'True iff a normalized ``Set-Cookie`` attribute list contains an attribute with the given name.',
 		argnames is ['Attributes', 'Name']
 	]).
 
 	:- public(cookie_attribute_value/3).
 	:- mode(cookie_attribute_value(++list(compound), ++atom, -term), zero_or_one).
 	:- info(cookie_attribute_value/3, [
-		comment is 'Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list.',
+		comment is 'Returns the first value for the attribute with the given name in a normalized ``Set-Cookie`` attribute list.',
 		argnames is ['Attributes', 'Name', 'Value']
 	]).
 
 	:- public(cookie_attribute_value/4).
 	:- mode(cookie_attribute_value(++list(compound), ++atom, ++term, -term), zero_or_one).
 	:- info(cookie_attribute_value/4, [
-		comment is 'Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list or the given default value when absent.',
+		comment is 'Returns the first value for the attribute with the given name in a normalized ``Set-Cookie`` attribute list or the given default value when absent.',
 		argnames is ['Attributes', 'Name', 'Default', 'Value']
 	]).
 
 	:- public(cookie_expiry/2).
 	:- mode(cookie_expiry(++list(compound), -compound), zero_or_one).
 	:- info(cookie_expiry/2, [
-		comment is 'Returns the raw normalized expiry view for a Set-Cookie attribute list as ``session``, ``max_age(Seconds)``, or ``expires(DateTime)``.',
+		comment is 'Returns the raw normalized expiry view for a ``Set-Cookie`` attribute list as ``session``, ``max_age(Seconds)``, or ``expires(DateTime)``.',
 		argnames is ['Attributes', 'Expiry']
 	]).
 
 	:- public(cookie_expiry/3).
 	:- mode(cookie_expiry(++list(compound), ++integer, -compound), zero_or_one).
 	:- info(cookie_expiry/3, [
-		comment is 'Resolves the normalized expiry view for a Set-Cookie attribute list against the given current Unix time as ``session``, ``delete``, or ``expires(UnixTime)``.',
+		comment is 'Resolves the normalized expiry view for a ``Set-Cookie`` attribute list against the given current Unix time as ``session``, ``delete``, or ``expires(UnixTime)``.',
 		argnames is ['Attributes', 'CurrentUnixTime', 'Expiry']
 	]).
 
 	:- public(cookie_deletion/3).
 	:- mode(cookie_deletion(++text, ++list(compound), -compound), zero_or_one).
 	:- info(cookie_deletion/3, [
-		comment is 'Returns a canonical Set-Cookie term that deletes the named cookie while echoing the relevant scoping and policy attributes from a template attribute list.',
+		comment is 'Returns a canonical ``Set-Cookie`` term that deletes the named cookie while echoing the relevant scoping and policy attributes from a template attribute list.',
 		argnames is ['Name', 'Attributes', 'Deletion']
 	]).
 
@@ -467,9 +467,9 @@
 		;	codes_ignore_case_match(NameCodes, [0'p, 0'a, 0't, 0'h])
 		;	codes_ignore_case_match(NameCodes, [0's, 0'e, 0'c, 0'u, 0'r, 0'e])
 		;	codes_ignore_case_match(NameCodes, [0'h, 0't, 0't, 0'p, 0'o, 0'n, 0'l, 0'y])
-		; 	codes_ignore_case_match(NameCodes, [0's, 0'a, 0'm, 0'e, 0's, 0'i, 0't, 0'e])
-		; 	codes_ignore_case_match(NameCodes, [0'p, 0'a, 0'r, 0't, 0'i, 0't, 0'i, 0'o, 0'n, 0'e, 0'd])
-		; 	codes_ignore_case_match(NameCodes, [0'p, 0'r, 0'i, 0'o, 0'r, 0'i, 0't, 0'y])
+		;	codes_ignore_case_match(NameCodes, [0's, 0'a, 0'm, 0'e, 0's, 0'i, 0't, 0'e])
+		;	codes_ignore_case_match(NameCodes, [0'p, 0'a, 0'r, 0't, 0'i, 0't, 0'i, 0'o, 0'n, 0'e, 0'd])
+		;	codes_ignore_case_match(NameCodes, [0'p, 0'r, 0'i, 0'o, 0'r, 0'i, 0't, 0'y])
 		).
 
 	attribute_name_codes(Codes, NameCodes) :-

@@ -124,17 +124,17 @@
 
 	valid(TimeCode) :-
 		valid_parameters,
-		(   TimeCode = ccs_calendar_time(Year, Month, Day, Hour, Minute, Second, Fraction) ->
+		(	TimeCode = ccs_calendar_time(Year, Month, Day, Hour, Minute, Second, Fraction) ->
 			_CalendarVariant_ == calendar,
 			valid_calendar_date(Year, Month, Day),
 			valid_clock_time(Hour, Minute, Second),
 			valid_fraction(Fraction)
-		;   TimeCode = ccs_ordinal_time(Year, DayOfYear, Hour, Minute, Second, Fraction) ->
+		;	TimeCode = ccs_ordinal_time(Year, DayOfYear, Hour, Minute, Second, Fraction) ->
 			_CalendarVariant_ == day_of_year,
 			valid_ordinal_date(Year, DayOfYear),
 			valid_clock_time(Hour, Minute, Second),
 			valid_fraction(Fraction)
-		;   fail
+		;	fail
 		).
 
 	format(ccs).
@@ -142,36 +142,36 @@
 	epoch(none).
 
 	unix_seconds(TimeCode, Seconds) :-
-		(   var(TimeCode) ->
+		(	var(TimeCode) ->
 			instantiation_error
-		;   valid(TimeCode) ->
+		;	valid(TimeCode) ->
 			fraction_scale(Scale),
 			time_code_to_calendar(TimeCode, Year, Month, Day, Hour, Minute, Second, Fraction),
 			days_from_civil(Year, Month, Day, Days),
 			Seconds is Days * 86400 + Hour * 3600 + Minute * 60 + Second + Fraction / Scale
-		;   domain_error(ccs_time_code_term, TimeCode)
+		;	domain_error(ccs_time_code_term, TimeCode)
 		).
 
 	from_unix_seconds(Seconds, TimeCode) :-
-		(   var(Seconds) ->
+		(	var(Seconds) ->
 			instantiation_error
-		;   number(Seconds) ->
+		;	number(Seconds) ->
 			fraction_scale(Scale),
 			UnitsPerDay is 86400 * Scale,
 			rounded_units(Seconds, Scale, TotalUnits),
 			Days is floor(TotalUnits / UnitsPerDay),
 			DayUnits is TotalUnits - Days * UnitsPerDay,
 			civil_from_days(Days, Year, Month, Day),
-			(   valid_year(Year) ->
+			(	valid_year(Year) ->
 				decompose_day_units(DayUnits, Scale, Hour, Minute, Second, Fraction),
 				calendar_to_time_code(Year, Month, Day, Hour, Minute, Second, Fraction, TimeCode),
-				(   valid(TimeCode) ->
+				(	valid(TimeCode) ->
 					true
-				;   domain_error(ccs_time_code_unix_seconds, Seconds)
+				;	domain_error(ccs_time_code_unix_seconds, Seconds)
 				)
-			;   domain_error(ccs_time_code_unix_seconds, Seconds)
+			;	domain_error(ccs_time_code_unix_seconds, Seconds)
 			)
-		;   domain_error(ccs_time_code_unix_seconds, Seconds)
+		;	domain_error(ccs_time_code_unix_seconds, Seconds)
 		).
 
 	year(ccs_calendar_time(Year, _, _, _, _, _, _), Year).
@@ -192,10 +192,10 @@
 
 	parse_bytes(Bytes, TimeCode) :-
 		expected_length(ExpectedLength),
-		(   valid(list(byte, ExpectedLength), Bytes),
+		(	valid(list(byte, ExpectedLength), Bytes),
 			decode_time(Bytes, TimeCode) ->
 			true
-		;   domain_error(ccs_time_code_byte_sequence, Bytes)
+		;	domain_error(ccs_time_code_byte_sequence, Bytes)
 		).
 
 	expected_length(ExpectedLength) :-
@@ -203,13 +203,13 @@
 
 	decode_time(Bytes, TimeCode) :-
 		decode_bcd_octets(2, Bytes, Rest, Year),
-		(   _CalendarVariant_ == calendar ->
+		(	_CalendarVariant_ == calendar ->
 			decode_bcd_octets(1, Rest, Rest1, Month),
 			decode_bcd_octets(1, Rest1, Rest2, Day),
 			decode_clock_fields(Rest2, Rest3, Hour, Minute, Second),
 			decode_fraction(Rest3, Fraction),
 			TimeCode = ccs_calendar_time(Year, Month, Day, Hour, Minute, Second, Fraction)
-		;   _CalendarVariant_ == day_of_year,
+		;	_CalendarVariant_ == day_of_year,
 			decode_bcd_octets(2, Rest, Rest1, DayOfYear),
 			decode_clock_fields(Rest1, Rest2, Hour, Minute, Second),
 			decode_fraction(Rest2, Fraction),
@@ -218,13 +218,13 @@
 		valid(TimeCode).
 
 	encode_time(TimeCode, Bytes, Tail) :-
-		(   TimeCode = ccs_calendar_time(Year, Month, Day, Hour, Minute, Second, Fraction) ->
+		(	TimeCode = ccs_calendar_time(Year, Month, Day, Hour, Minute, Second, Fraction) ->
 			encode_bcd_octets(2, Year, Bytes, Rest),
 			encode_bcd_octets(1, Month, Rest, Rest1),
 			encode_bcd_octets(1, Day, Rest1, Rest2),
 			encode_clock_fields(Hour, Minute, Second, Rest2, Rest3),
 			encode_fraction(Fraction, Rest3, Tail)
-		;   TimeCode = ccs_ordinal_time(Year, DayOfYear, Hour, Minute, Second, Fraction),
+		;	TimeCode = ccs_ordinal_time(Year, DayOfYear, Hour, Minute, Second, Fraction),
 			encode_bcd_octets(2, Year, Bytes, Rest),
 			encode_bcd_octets(2, DayOfYear, Rest, Rest1),
 			encode_clock_fields(Hour, Minute, Second, Rest1, Rest2),
@@ -314,9 +314,9 @@
 		_FractionOctets_ >= 0.
 
 	valid_calendar_variant(Variant) :-
-		(   Variant == calendar ->
+		(	Variant == calendar ->
 			true
-		;   Variant == day_of_year
+		;	Variant == day_of_year
 		).
 
 	valid_calendar_date(Year, Month, Day) :-
@@ -364,9 +364,9 @@
 
 	rounded_units(Seconds, Scale, Units) :-
 		ScaledSeconds is Seconds * Scale,
-		(   integer(ScaledSeconds) ->
+		(	integer(ScaledSeconds) ->
 			Units = ScaledSeconds
-		;   Units is round(ScaledSeconds)
+		;	Units is round(ScaledSeconds)
 		).
 
 	fraction_scale(Scale) :-
@@ -413,10 +413,10 @@
 
 	calendar_from_ordinal(Year, DayOfYear, Month0, Month, Day) :-
 		days_in_month(Month0, Year, Days),
-		(   DayOfYear =< Days ->
+		(	DayOfYear =< Days ->
 			Month = Month0,
 			Day = DayOfYear
-		;   DayOfYear1 is DayOfYear - Days,
+		;	DayOfYear1 is DayOfYear - Days,
 			Month1 is Month0 + 1,
 			calendar_from_ordinal(Year, DayOfYear1, Month1, Month, Day)
 		).
@@ -451,15 +451,15 @@
 		Year mod 100 =\= 0.
 
 	days_from_civil(Year, Month, Day, Days) :-
-		(   Month =< 2 ->
+		(	Month =< 2 ->
 			Year1 is Year - 1
-		;   Year1 = Year
+		;	Year1 = Year
 		),
 		Era is floor(Year1 / 400),
 		YearOfEra is Year1 - Era * 400,
-		(   Month > 2 ->
+		(	Month > 2 ->
 			MonthPrime is Month - 3
-		;   MonthPrime is Month + 9
+		;	MonthPrime is Month + 9
 		),
 		DayOfYear is (153 * MonthPrime + 2) // 5 + Day - 1,
 		DayOfEra is YearOfEra * 365 + YearOfEra // 4 - YearOfEra // 100 + DayOfYear,
@@ -467,9 +467,9 @@
 
 	civil_from_days(Days, Year, Month, Day) :-
 		Z is Days + 719468,
-		(   Z < 0 ->
+		(	Z < 0 ->
 			Offset = 146096
-		;   Offset = 0
+		;	Offset = 0
 		),
 		Era is floor((Z - Offset) / 146097),
 		DayOfEra is Z - Era * 146097,
@@ -478,13 +478,13 @@
 		DayOfYear is DayOfEra - (365 * YearOfEra + YearOfEra // 4 - YearOfEra // 100),
 		MonthPrime is (5 * DayOfYear + 2) // 153,
 		Day is DayOfYear - (153 * MonthPrime + 2) // 5 + 1,
-		(   MonthPrime < 10 ->
+		(	MonthPrime < 10 ->
 			Month is MonthPrime + 3
-		;   Month is MonthPrime - 9
+		;	Month is MonthPrime - 9
 		),
-		(   Month =< 2 ->
+		(	Month =< 2 ->
 			Year is Year0 + 1
-		;   Year = Year0
+		;	Year = Year0
 		).
 
 	write_bytes([], _).

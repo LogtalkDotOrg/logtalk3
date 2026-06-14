@@ -131,9 +131,9 @@
 
 	canonical_spread_candidate([], BestCandidate, BestCandidate).
 	canonical_spread_candidate([Candidate| Candidates], BestCandidate0, BestCandidate) :-
-		(   preferred_spread_candidate(Candidate, BestCandidate0) ->
+		(	preferred_spread_candidate(Candidate, BestCandidate0) ->
 			BestCandidate1 = Candidate
-		;   BestCandidate1 = BestCandidate0
+		;	BestCandidate1 = BestCandidate0
 		),
 		canonical_spread_candidate(Candidates, BestCandidate1, BestCandidate).
 
@@ -147,22 +147,22 @@
 	farthest_candidate([Candidate| Candidates], Selected, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_mean_distance_squared(Vector, Selected, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   Distance =:= BestDistance0,
+		;	Distance =:= BestDistance0,
 			preferred_spread_candidate(Candidate, BestCandidate0) ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, BestCandidate1, BestDistance1, BestCandidate).
 
 	preferred_spread_candidate(Id1-Vector1, Id2-Vector2) :-
-		(   Vector1 @< Vector2 ->
+		(	Vector1 @< Vector2 ->
 			true
-		;   Vector1 == Vector2,
+		;	Vector1 == Vector2,
 			Id1 < Id2
 		).
 
@@ -173,9 +173,9 @@
 	closest_mean_distance_squared([], _Vector, BestDistance, BestDistance).
 	closest_mean_distance_squared([Mean| Means], Vector, BestDistance0, BestDistance) :-
 		squared_distance(Vector, Mean, 0.0, Distance),
-		(   Distance < BestDistance0 ->
+		(	Distance < BestDistance0 ->
 			BestDistance1 = Distance
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_mean_distance_squared(Means, Vector, BestDistance1, BestDistance).
 
@@ -206,13 +206,13 @@
 	column_variances([], []).
 	column_variances([Column| Columns], [VarianceValue| Variances]) :-
 		length(Column, Count),
-		(   Count > 1 ->
+		(	Count > 1 ->
 			variance(Column, Variance0)
-		;   Variance0 = 1.0
+		;	Variance0 = 1.0
 		),
-		(   Variance0 > 0.0 ->
+		(	Variance0 > 0.0 ->
 			VarianceValue = Variance0
-		;   VarianceValue = 1.0
+		;	VarianceValue = 1.0
 		),
 		column_variances(Columns, Variances).
 
@@ -234,7 +234,7 @@
 		expectation(Rows, Components0, Weights0, Responsibilities, 0.0, TotalLogLikelihood),
 		CurrentAverageLogLikelihood is TotalLogLikelihood / Count,
 		average_log_likelihood_delta(PreviousAverageLogLikelihood, CurrentAverageLogLikelihood, CurrentDelta),
-		(   PreviousAverageLogLikelihood \== none,
+		(	PreviousAverageLogLikelihood \== none,
 			^^option(tolerance(Tolerance), Options),
 			CurrentDelta =< Tolerance ->
 			Components = Components0,
@@ -243,7 +243,7 @@
 			Iterations = Iteration,
 			AverageLogLikelihood = CurrentAverageLogLikelihood,
 			FinalDelta = CurrentDelta
-		;   ^^option(maximum_iterations(MaximumIterations), Options),
+		;	^^option(maximum_iterations(MaximumIterations), Options),
 			Iteration >= MaximumIterations ->
 			Components = Components0,
 			Weights = Weights0,
@@ -251,7 +251,7 @@
 			Iterations = Iteration,
 			AverageLogLikelihood = CurrentAverageLogLikelihood,
 			FinalDelta = CurrentDelta
-		;   maximization(Rows, Responsibilities, Components0, Options, Components1, Weights1),
+		;	maximization(Rows, Responsibilities, Components0, Options, Components1, Weights1),
 			NextIteration is Iteration + 1,
 			optimize_em(Rows, Count, Options, NextIteration, CurrentAverageLogLikelihood, Components1, Weights1, Components, Weights, Convergence, Iterations, AverageLogLikelihood, FinalDelta)
 		).
@@ -303,9 +303,9 @@
 	update_best_component(_Index, _LogScore, BestLogScore, BestCluster, BestLogScore, BestCluster).
 
 	log_sum_exp(LogSumExp0, LogScore, LogSumExp) :-
-		(   LogScore > LogSumExp0 ->
+		(	LogScore > LogSumExp0 ->
 			LogSumExp is LogScore + log(1.0 + exp(LogSumExp0 - LogScore))
-		;   LogSumExp is LogSumExp0 + log(1.0 + exp(LogScore - LogSumExp0))
+		;	LogSumExp is LogSumExp0 + log(1.0 + exp(LogScore - LogSumExp0))
 		).
 
 	normalize_log_scores([], _LogLikelihood, []).
@@ -348,9 +348,9 @@
 
 	update_component(Index, Rows, ResponsibilitiesRows, Component0, Options, Component, Weight) :-
 		component_statistics(Rows, Index, ResponsibilitiesRows, ResponsibilitySum, WeightedSum, WeightedSquares),
-		(   ResponsibilitySum =< 1.0e-9 ->
+		(	ResponsibilitySum =< 1.0e-9 ->
 			dead_component_update(Rows, ResponsibilitiesRows, Component0, Options, Component, Weight)
-		;   divide_vector(WeightedSum, ResponsibilitySum, Mean),
+		;	divide_vector(WeightedSum, ResponsibilitySum, Mean),
 			length(Rows, Count),
 			divide_vector(WeightedSquares, ResponsibilitySum, SecondMoments),
 			variance_from_moments(SecondMoments, Mean, Options, Variances),
@@ -378,10 +378,10 @@
 	reseed_component_mean([], [], Mean, _LowestConfidence, Mean).
 	reseed_component_mean([_-Features| Rows], [Responsibilities| ResponsibilitiesRows], BestFeatures0, LowestConfidence0, Mean) :-
 		maximum_responsibility(Responsibilities, Confidence),
-		(   Confidence < LowestConfidence0 ->
+		(	Confidence < LowestConfidence0 ->
 			BestFeatures1 = Features,
 			LowestConfidence1 = Confidence
-		;   BestFeatures1 = BestFeatures0,
+		;	BestFeatures1 = BestFeatures0,
 			LowestConfidence1 = LowestConfidence0
 		),
 		reseed_component_mean(Rows, ResponsibilitiesRows, BestFeatures1, LowestConfidence1, Mean).
@@ -391,9 +391,9 @@
 
 	maximum_responsibility([], Maximum, Maximum).
 	maximum_responsibility([Responsibility| Responsibilities], CurrentMaximum, Maximum) :-
-		(   Responsibility > CurrentMaximum ->
+		(	Responsibility > CurrentMaximum ->
 			NextMaximum = Responsibility
-		;   NextMaximum = CurrentMaximum
+		;	NextMaximum = CurrentMaximum
 		),
 		maximum_responsibility(Responsibilities, NextMaximum, Maximum).
 
@@ -445,7 +445,7 @@
 		Clusterer =.. [_, Encoders, Components, Weights, Options, Diagnostics].
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Components, Weights, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Components, Weights, Options, Diagnostics),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid_components(Components, FeatureCount),
@@ -454,7 +454,7 @@
 			length(Components, ComponentCount),
 			^^valid_diagnostic_count(components, Diagnostics, ComponentCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	valid_components([], _FeatureCount).
@@ -475,9 +475,9 @@
 	variance_from_moments([SecondMoment| SecondMoments], [Mean| Means], Options, [Variance| Variances]) :-
 		Variance0 is SecondMoment - Mean * Mean,
 		^^option(covariance_regularization(Regularization), Options),
-		(   Variance0 > 0.0 ->
+		(	Variance0 > 0.0 ->
 			Variance is Variance0 + Regularization
-		;   Variance is Regularization
+		;	Variance is Regularization
 		),
 		variance_from_moments(SecondMoments, Means, Options, Variances).
 

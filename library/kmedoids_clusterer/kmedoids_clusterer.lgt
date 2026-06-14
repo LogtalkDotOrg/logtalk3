@@ -97,7 +97,7 @@
 		clusterer_data(Clusterer, _Encoders, _Medoids, _Options, Diagnostics).
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Medoids, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Medoids, Options, Diagnostics),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid(list(list(number, FeatureCount)), Medoids),
@@ -105,7 +105,7 @@
 			length(Medoids, MedoidCount),
 			^^valid_diagnostic_count(medoid_count, Diagnostics, MedoidCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	initialize_medoids(first_k, K, Rows, _Options, Medoids) :-
@@ -133,32 +133,32 @@
 	farthest_candidate([Candidate| Candidates], Selected, Options, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_medoid_distance(Vector, Selected, Options, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, Options, BestCandidate1, BestDistance1, BestCandidate).
 
 	optimize_medoids(Rows, Options, Iteration, PreviousShift, Medoids0, Medoids, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Medoids = Medoids0,
 			Convergence = maximum_iterations,
 			Iterations = Iteration,
 			FinalShift = PreviousShift
-		;   assign_rows(Rows, Medoids0, Options, Assignments),
+		;	assign_rows(Rows, Medoids0, Options, Assignments),
 			recompute_medoids(Medoids0, Assignments, Options, 1, Medoids1),
 			max_medoid_shift(Medoids0, Medoids1, Options, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
 			NextIteration is Iteration + 1,
-			(   Shift =< Tolerance ->
+			(	Shift =< Tolerance ->
 				Medoids = Medoids1,
 				Convergence = tolerance,
 				Iterations = NextIteration,
 				FinalShift = Shift
-			;   optimize_medoids(Rows, Options, NextIteration, Shift, Medoids1, Medoids, Convergence, Iterations, FinalShift)
+			;	optimize_medoids(Rows, Options, NextIteration, Shift, Medoids1, Medoids, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -174,10 +174,10 @@
 	nearest_medoid([], _Vector, _Options, _Index, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_medoid([Medoid| Medoids], Vector, Options, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		distance(Options, Vector, Medoid, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance0
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		NextIndex is Index + 1,
@@ -190,18 +190,18 @@
 	closest_medoid_distance([], _Vector, _Options, BestDistance, BestDistance).
 	closest_medoid_distance([Medoid| Medoids], Vector, Options, BestDistance0, BestDistance) :-
 		distance(Options, Vector, Medoid, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestDistance1 = Distance0
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_medoid_distance(Medoids, Vector, Options, BestDistance1, BestDistance).
 
 	recompute_medoids([], _, _, _, []).
 	recompute_medoids([Medoid0| Medoids0], Assignments, Options, Cluster, [Medoid| Medoids]) :-
 		assigned_vectors(Cluster, Assignments, Vectors),
-		(   Vectors == [] ->
+		(	Vectors == [] ->
 			Medoid = Medoid0
-		;   best_medoid(Vectors, Options, Medoid)
+		;	best_medoid(Vectors, Options, Medoid)
 		),
 		NextCluster is Cluster + 1,
 		recompute_medoids(Medoids0, Assignments, Options, NextCluster, Medoids).
@@ -221,10 +221,10 @@
 	best_medoid([], _Candidates, _Options, BestMedoid, _BestCost, BestMedoid).
 	best_medoid([Candidate| Candidates], AllVectors, Options, BestMedoid0, BestCost0, BestMedoid) :-
 		total_distance(AllVectors, Candidate, Options, 0.0, Cost),
-		(   Cost < BestCost0 ->
+		(	Cost < BestCost0 ->
 			BestMedoid1 = Candidate,
 			BestCost1 = Cost
-		;   BestMedoid1 = BestMedoid0,
+		;	BestMedoid1 = BestMedoid0,
 			BestCost1 = BestCost0
 		),
 		best_medoid(Candidates, AllVectors, Options, BestMedoid1, BestCost1, BestMedoid).

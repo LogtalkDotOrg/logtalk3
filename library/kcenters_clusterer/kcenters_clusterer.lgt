@@ -91,9 +91,9 @@
 
 	selection_strategy(Options, SelectionStrategy) :-
 		^^option(initialization(Initialization), Options),
-		(   Initialization == spread ->
+		(	Initialization == spread ->
 			SelectionStrategy = deterministic_farthest_first
-		;   SelectionStrategy = first_k
+		;	SelectionStrategy = first_k
 		).
 
 	clusterer_diagnostics_data(Clusterer, Diagnostics) :-
@@ -103,7 +103,7 @@
 		Clusterer =.. [_Functor, Encoders, Centers, Options, Diagnostics].
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Centers, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Centers, Options, Diagnostics),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid(list(list(number, FeatureCount)), Centers),
@@ -112,7 +112,7 @@
 			^^valid_diagnostic_count(center_count, Diagnostics, CenterCount),
 			^^valid_diagnostic_choice(selection_strategy, Diagnostics, [deterministic_farthest_first, first_k]) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	initialize_centers(first_k, K, Rows, _Options, Centers) :-
@@ -140,10 +140,10 @@
 	farthest_candidate([Candidate| Candidates], Selected, Options, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_center_distance(Vector, Selected, Options, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, Options, BestCandidate1, BestDistance1, BestCandidate).
@@ -155,10 +155,10 @@
 	nearest_center([], _Features, _Options, _Index, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_center([Center| Centers], Features, Options, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		distance(Options, Features, Center, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance0
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		NextIndex is Index + 1,
@@ -171,9 +171,9 @@
 	closest_center_distance([], _Vector, _Options, BestDistance, BestDistance).
 	closest_center_distance([Center| Centers], Vector, Options, BestDistance0, BestDistance) :-
 		distance(Options, Vector, Center, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestDistance1 = Distance0
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_center_distance(Centers, Vector, Options, BestDistance1, BestDistance).
 

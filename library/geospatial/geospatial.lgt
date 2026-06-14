@@ -783,7 +783,7 @@
 			RightCoordinates = [SplitCoordinate, Coordinate2| Coordinates]
 		;	RemainingDistance =:= SegmentDistance ->
 			append(LeftAccumulator, [Coordinate2], LeftCoordinates),
-			( Coordinates == [] ->
+			(	Coordinates == [] ->
 				RightCoordinates = [Coordinate2]
 			;	RightCoordinates = [Coordinate2| Coordinates]
 			)
@@ -792,7 +792,7 @@
 			NextRemainingDistance is RemainingDistance - SegmentDistance,
 			append(LeftAccumulator, [Coordinate2], NextLeftAccumulator),
 			polyline_split_at_distance([Coordinate2| Coordinates], NextRemainingDistance, NextLeftAccumulator, LeftCoordinates, RightCoordinates)
-		; append(LeftAccumulator, [Coordinate2], LeftCoordinates),
+		;	append(LeftAccumulator, [Coordinate2], LeftCoordinates),
 			RightCoordinates = [Coordinate2]
 		).
 
@@ -857,7 +857,7 @@
 
 	minimum_enclosing_circle_triples_with_pair(_, _, [], _, CenterX, CenterY, Radius, CenterX, CenterY, Radius).
 	minimum_enclosing_circle_triples_with_pair(Point1, Point2, [Point3| Points], AllPoints, CenterX0, CenterY0, Radius0, CenterX, CenterY, Radius) :-
-		( circle_from_triple(Point1, Point2, Point3, CandidateCenterX, CandidateCenterY, CandidateRadius) ->
+		(	circle_from_triple(Point1, Point2, Point3, CandidateCenterX, CandidateCenterY, CandidateRadius) ->
 			update_best_circle(AllPoints, CandidateCenterX, CandidateCenterY, CandidateRadius, CenterX0, CenterY0, Radius0, CenterX1, CenterY1, Radius1)
 		;	CenterX1 = CenterX0,
 			CenterY1 = CenterY0,
@@ -866,7 +866,7 @@
 		minimum_enclosing_circle_triples_with_pair(Point1, Point2, Points, AllPoints, CenterX1, CenterY1, Radius1, CenterX, CenterY, Radius).
 
 	update_best_circle(Points, CandidateCenterX, CandidateCenterY, CandidateRadius, CenterX0, CenterY0, Radius0, CenterX, CenterY, Radius) :-
-		( CandidateRadius < Radius0,
+		(	CandidateRadius < Radius0,
 			circle_contains_all_points(CandidateCenterX, CandidateCenterY, CandidateRadius, Points) ->
 			CenterX = CandidateCenterX,
 			CenterY = CandidateCenterY,
@@ -1031,7 +1031,7 @@
 	nearest_coordinate([Coordinate| Coordinates], Origin, Metric, CurrentNearest, CurrentDistance, Nearest, Distance) :-
 		valid_coordinate(Coordinate),
 		distance(Origin, Coordinate, Metric, CandidateDistance),
-		( CandidateDistance < CurrentDistance ->
+		(	CandidateDistance < CurrentDistance ->
 			nearest_coordinate(Coordinates, Origin, Metric, Coordinate, CandidateDistance, Nearest, Distance)
 		;	nearest_coordinate(Coordinates, Origin, Metric, CurrentNearest, CurrentDistance, Nearest, Distance)
 		).
@@ -1047,7 +1047,7 @@
 	remove_polygon_closure([Coordinate1, Coordinate2| Coordinates], OpenPolygon) :-
 		Polygon = [Coordinate1, Coordinate2| Coordinates],
 		last_polygon_coordinate(Polygon, Last),
-		( Coordinate1 == Last ->
+		(	Coordinate1 == Last ->
 			remove_last_polygon_coordinate(Polygon, OpenPolygon)
 		;	OpenPolygon = Polygon
 		).
@@ -1074,7 +1074,7 @@
 	point_on_polygon_boundary([], _, _) :-
 		fail.
 	point_on_polygon_boundary([Coordinate| Coordinates], Previous, Point) :-
-		( point_on_segment(Point, Previous, Coordinate) ->
+		(	point_on_segment(Point, Previous, Coordinate) ->
 			true
 		;	point_on_polygon_boundary(Coordinates, Coordinate, Point)
 		).
@@ -1097,7 +1097,7 @@
 
 	count_polygon_ray_crossings([], _, _, Crossings, Crossings).
 	count_polygon_ray_crossings([Coordinate| Coordinates], Previous, Point, Crossings0, Crossings) :-
-		( edge_crosses_ray(Point, Previous, Coordinate) ->
+		(	edge_crosses_ray(Point, Previous, Coordinate) ->
 			Crossings1 is Crossings0 + 1
 		;	Crossings1 = Crossings0
 		),

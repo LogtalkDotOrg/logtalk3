@@ -311,9 +311,9 @@
 		!.
 	utm_zone_from_coordinate(geographic(_, Longitude), Zone) :-
 		RawZone is floor((Longitude + 180.0) / 6.0) + 1,
-		(   RawZone > 60 ->
+		(	RawZone > 60 ->
 			Zone = 60
-		;   Zone = RawZone
+		;	Zone = RawZone
 		).
 
 	utm_zone_from_svalbard_longitude(Longitude, 31) :-
@@ -400,11 +400,11 @@
 		RatioBase is (1.0 - Eccentricity * SinLatitude0) / (1.0 + Eccentricity * SinLatitude0),
 		Ratio is exp(Eccentricity * log(RatioBase) / 2.0),
 		Latitude1 is pi / 2.0 - 2.0 * atan(T * Ratio),
-		(   abs(Latitude1 - Latitude0) =< 1.0e-12 ->
+		(	abs(Latitude1 - Latitude0) =< 1.0e-12 ->
 			Latitude = Latitude1
-		;   Iterations =< 0 ->
+		;	Iterations =< 0 ->
 			Latitude = Latitude1
-		;   NextIterations is Iterations - 1,
+		;	NextIterations is Iterations - 1,
 			world_mercator_latitude(Latitude1, T, Eccentricity, NextIterations, Latitude)
 		).
 
@@ -429,9 +429,9 @@
 
 	ecef_to_wgs84_3d(ecef(X, Y, Z), Coordinate) :-
 		valid_coordinate(ecef, ecef(X, Y, Z)),
-		(   abs(X) < 1.0e-12, abs(Y) < 1.0e-12, abs(Z) < 1.0e-12 ->
+		(	abs(X) < 1.0e-12, abs(Y) < 1.0e-12, abs(Z) < 1.0e-12 ->
 			fail
-		;   wgs84_semi_major_axis_meters(SemiMajorAxis),
+		;	wgs84_semi_major_axis_meters(SemiMajorAxis),
 			wgs84_semi_minor_axis_meters(SemiMinorAxis),
 			wgs84_eccentricity_squared(EccentricitySquared),
 			wgs84_second_eccentricity_squared(SecondEccentricitySquared),
@@ -447,9 +447,9 @@
 			SinLatitude is sin(LatitudeRadians),
 			CosLatitude is cos(LatitudeRadians),
 			PrimeVerticalRadius is SemiMajorAxis / sqrt(1.0 - EccentricitySquared * SinLatitude * SinLatitude),
-			(   abs(CosLatitude) > 1.0e-12 ->
+			(	abs(CosLatitude) > 1.0e-12 ->
 				Height is P / CosLatitude - PrimeVerticalRadius
-			;   Height is Z / SinLatitude - PrimeVerticalRadius * (1.0 - EccentricitySquared)
+			;	Height is Z / SinLatitude - PrimeVerticalRadius * (1.0 - EccentricitySquared)
 			),
 			Latitude is LatitudeRadians * 180.0 / pi,
 			Longitude is LongitudeRadians * 180.0 / pi,
@@ -540,9 +540,9 @@
 		OriginLongitudeRadians is OriginLongitude * pi / 180.0,
 		Rho is sqrt(X * X + Y * Y),
 		Rho =< 2.0 * Radius,
-		(   Rho =< 1.0e-12 ->
+		(	Rho =< 1.0e-12 ->
 			horizontal_geographic_coordinate(Origin, Coordinate)
-		;   CentralAngle is 2.0 * asin(Rho / (2.0 * Radius)),
+		;	CentralAngle is 2.0 * asin(Rho / (2.0 * Radius)),
 			SinCentralAngle is sin(CentralAngle),
 			CosCentralAngle is cos(CentralAngle),
 			SinOriginLatitude is sin(OriginLatitudeRadians),
@@ -589,9 +589,9 @@
 				(61.0 - 58.0 * TangentLatitudeSquared + TangentLatitudeSquared * TangentLatitudeSquared + 600.0 * EtaSquared - 330.0 * SecondEccentricitySquared) * ReducedLongitudeSixth / 720.0
 			)
 		),
-		(   Hemisphere == south ->
+		(	Hemisphere == south ->
 			Northing is Northing0 + 10000000.0
-		;   Northing = Northing0
+		;	Northing = Northing0
 		),
 		valid_coordinate(utm(Zone, Hemisphere), grid(Easting, Northing)).
 

@@ -108,9 +108,9 @@
 		check_scale(FromScale),
 		check_scale(ToScale),
 		check_instant_data(Instant, Scale, _Seconds, _Numerator, _Denominator),
-		(   Scale == FromScale ->
+		(	Scale == FromScale ->
 			true
-		;   domain_error(scale_mismatch, instant_scale(Scale, FromScale))
+		;	domain_error(scale_mismatch, instant_scale(Scale, FromScale))
 		).
 
 	convert(Instant, FromScale, ToScale, ConvertedInstant) :-
@@ -376,21 +376,21 @@
 		Numerator is round(OffsetSeconds * 1000000000.0).
 
 	check_scale(Scale) :-
-		(   var(Scale) ->
+		(	var(Scale) ->
 			instantiation_error
-		;   \+ atom(Scale) ->
+		;	\+ atom(Scale) ->
 			type_error(atom, Scale)
-		;   valid_scale(Scale) ->
+		;	valid_scale(Scale) ->
 			true
-		;   domain_error(time_scale, Scale)
+		;	domain_error(time_scale, Scale)
 		).
 
 	check_instant_data(Instant, Scale, Seconds, NormalizedNumerator, NormalizedDenominator) :-
-		(   var(Instant) ->
+		(	var(Instant) ->
 			instantiation_error
-		;   Instant = instant(Scale0, Seconds0, Fraction) ->
+		;	Instant = instant(Scale0, Seconds0, Fraction) ->
 			true
-		;   domain_error(instant, Instant)
+		;	domain_error(instant, Instant)
 		),
 		check_scale(Scale0),
 		check_utc_unix_seconds(Seconds0, Seconds),
@@ -398,41 +398,41 @@
 		Scale = Scale0.
 
 	check_utc_unix_seconds(Seconds0, Seconds) :-
-		(   var(Seconds0) ->
+		(	var(Seconds0) ->
 			instantiation_error
-		;   \+ integer(Seconds0) ->
+		;	\+ integer(Seconds0) ->
 			type_error(integer, Seconds0)
-		;   Seconds0 < 63072000 ->
+		;	Seconds0 < 63072000 ->
 			domain_error(utc_unix_seconds, Seconds0)
-		;   Seconds = Seconds0
+		;	Seconds = Seconds0
 		).
 
 	check_fraction(Fraction, NormalizedNumerator, NormalizedDenominator) :-
-		(   var(Fraction) ->
+		(	var(Fraction) ->
 			instantiation_error
-		;   Fraction = fraction(Numerator, Denominator) ->
+		;	Fraction = fraction(Numerator, Denominator) ->
 			true
-		;   domain_error(fraction, Fraction)
+		;	domain_error(fraction, Fraction)
 		),
 		check_integer_value(Numerator),
 		check_integer_value(Denominator),
-		(   Denominator =< 0 ->
+		(	Denominator =< 0 ->
 			domain_error(positive_denominator, Denominator)
-		;   true
+		;	true
 		),
 		normalize_rational(Numerator, Denominator, NormalizedNumerator0, NormalizedDenominator0),
-		(   (NormalizedNumerator0 < 0; NormalizedNumerator0 >= NormalizedDenominator0) ->
+		(	(NormalizedNumerator0 < 0; NormalizedNumerator0 >= NormalizedDenominator0) ->
 			domain_error(normalized_fraction, Fraction)
-		;   NormalizedNumerator = NormalizedNumerator0,
+		;	NormalizedNumerator = NormalizedNumerator0,
 			NormalizedDenominator = NormalizedDenominator0
 		).
 
 	check_integer_value(Value) :-
-		(   var(Value) ->
+		(	var(Value) ->
 			instantiation_error
-		;   \+ integer(Value) ->
+		;	\+ integer(Value) ->
 			type_error(integer, Value)
-		;   true
+		;	true
 		).
 
 	check_instant(instant(Scale, Seconds, fraction(Numerator, Denominator)), Scale, Seconds, NormalizedNumerator, NormalizedDenominator) :-
@@ -465,25 +465,25 @@
 		normalize_rational(ResidualNumerator, CommonDenominator, ResultNumerator, ResultDenominator).
 
 	floor_division(Numerator, Denominator, Quotient, Remainder) :-
-		(   Numerator >= 0 ->
+		(	Numerator >= 0 ->
 			Quotient is Numerator // Denominator
-		;   AbsNumerator is -Numerator,
+		;	AbsNumerator is -Numerator,
 			Quotient is -((AbsNumerator + Denominator - 1) // Denominator)
 		),
 		Remainder is Numerator - Quotient * Denominator.
 
 	normalize_rational(Numerator, Denominator, NormalizedNumerator, NormalizedDenominator) :-
-		(   Numerator =:= 0 ->
+		(	Numerator =:= 0 ->
 			NormalizedNumerator = 0,
 			NormalizedDenominator = 1
-		;   AbsoluteNumerator is abs(Numerator),
+		;	AbsoluteNumerator is abs(Numerator),
 			Divisor is gcd(AbsoluteNumerator, Denominator),
 			ReducedNumerator is Numerator // Divisor,
 			ReducedDenominator is Denominator // Divisor,
-			(   ReducedDenominator < 0 ->
+			(	ReducedDenominator < 0 ->
 				NormalizedNumerator is -ReducedNumerator,
 				NormalizedDenominator is -ReducedDenominator
-			;   NormalizedNumerator = ReducedNumerator,
+			;	NormalizedNumerator = ReducedNumerator,
 				NormalizedDenominator = ReducedDenominator
 			)
 		).

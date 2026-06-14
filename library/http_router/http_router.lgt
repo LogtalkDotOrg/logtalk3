@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-14,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -33,16 +33,6 @@
 	:- mode(handle(+compound, -compound), one_or_error).
 	:- info(handle/2, [
 		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses.',
-		remarks is [
-			'Route authorization' - 'Importing objects can optionally define ``authorize_routed_request/2`` to validate or decorate routed requests after matching and metadata annotation but before route handler dispatch. The hook must return either ``continue(Request)`` or ``respond(Response)``. Short-circuited responses still flow through response middleware with the routed request annotations preserved.',
-			'Bad-request handling' - 'Dedicated route-handler exceptions matching ``error(http_parameter_validation(Errors), Context)`` with a non-empty ``Errors`` list are translated into ``400 Bad Request`` responses using either ``route_bad_request_response/3`` or the default plain-text response.',
-			'Middleware' - 'Importing objects can optionally define ordered ``middleware/2`` descriptors whose handlers either continue with a possibly rewritten request or short-circuit with a response before route dispatch.',
-			'Response middleware' - 'Importing objects can optionally define ordered ``response_middleware/2`` descriptors whose handlers transform the final response after route dispatch or short-circuit handling.',
-			'Request annotations' - 'Matched requests are annotated before handler execution with ``route(Id)``, ``path_params(Pairs)``, any ``route_metadata/2`` properties, and the negotiated ``response_media_type(MediaType)`` property when ``route_produces/2`` is defined and the request ``Accept`` header can be satisfied. On this normal routing path the router strips stale internal synthetic properties such as ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``, and ``response_media_type/1`` before calling the handler.',
-			'Automatic ``OPTIONS``' - 'An explicit ``options`` route matches first. Otherwise the router builds an automatic response from a synthetic request carrying ``automatic_options(true)`` and ``effective_methods(Methods)``. When exactly one non-``options`` route matches the path, that synthetic request also carries ``route(Id)``, ``path_params(Pairs)``, and that route metadata; when multiple non-``options`` routes match, it preserves only identical shared metadata and any unambiguous path parameters. Automatic ``OPTIONS`` responses still pass through response middleware and can be customized using ``route_automatic_options_response/3``.',
-			'Custom responses' - 'Importing objects can optionally define ``route_bad_request_response/3``, ``route_not_found_response/2``, ``route_method_not_allowed_response/3``, ``route_automatic_options_response/3``, and ``route_not_acceptable_response/3`` to customize ``400``, ``404``, ``405``, automatic ``OPTIONS``, and ``406`` handling.',
-			'Failure behavior' - 'Dedicated parameter-validation exceptions return ``400 Bad Request`` responses. Path matches with unsupported methods return ``405 Method Not Allowed`` responses with an ``Allow`` header derived from the matching path templates. Content negotiation failures return ``406 Not Acceptable``.'
-		],
 		argnames is ['Request', 'Response']
 	]).
 
@@ -392,9 +382,9 @@
 		open_api_responses_include_success(MetadataResponses),
 		!.
 	route_open_api_metadata_responses(Method, RouteId, PathTemplate, Handler, MetadataResponses, Responses) :-
-		(   inferred_open_api_responses(Method, RouteId, PathTemplate, Handler, SuccessResponses) ->
+		(	inferred_open_api_responses(Method, RouteId, PathTemplate, Handler, SuccessResponses) ->
 			append(SuccessResponses, MetadataResponses, Responses)
-		;   default_open_api_responses(Method, RouteId, SuccessResponses),
+		;	default_open_api_responses(Method, RouteId, SuccessResponses),
 			append(SuccessResponses, MetadataResponses, Responses)
 		).
 

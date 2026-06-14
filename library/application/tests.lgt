@@ -71,13 +71,13 @@
 		]).
 
 	cleanup :-
-		(   current_object(application_fixture) ->
+		(	current_object(application_fixture) ->
 			abolish_object(application_fixture)
-		;   true
+		;	true
 		),
-		(   current_object(sparse_application) ->
+		(	current_object(sparse_application) ->
 			abolish_object(sparse_application)
-		;   true
+		;	true
 		).
 
 	fixture_object(application_fixture).

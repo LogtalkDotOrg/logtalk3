@@ -3,7 +3,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-10,
+		date is 2026-06-14,
 		comment is 'Sockets-backed HTTP transport predicates.'
 	]).
 
@@ -24,7 +24,7 @@
 	:- public(request_listener_shutdown/1).
 	:- mode(request_listener_shutdown(+compound), one_or_error).
 	:- info(request_listener_shutdown/1, [
-		comment is 'Best-effort wakeup request for a listener accept loop opened with open_listener/4. This predicate does not close the listener but causes a blocked accept call to return portably when possible.',
+		comment is 'Best-effort wakeup request for a listener accept loop opened with ``open_listener/4``. This predicate does not close the listener but causes a blocked accept call to return portably when possible.',
 		argnames is ['Listener']
 	]).
 
@@ -45,7 +45,7 @@
 	:- public(connection_streams/3).
 	:- mode(connection_streams(+compound, --stream, --stream), one_or_error).
 	:- info(connection_streams/3, [
-		comment is 'Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by serve_websocket_once/5.',
+		comment is 'Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by ``serve_websocket_once/5``.',
 		argnames is ['Connection', 'Input', 'Output']
 	]).
 
@@ -55,9 +55,9 @@
 		comment is 'Opens a managed reusable connection pool for the given host and port.',
 		argnames is ['Host', 'Port', 'Pool', 'Options'],
 		remarks is [
-			'Option ``min_size(N)``' - 'Pre-open N reusable client connections when creating the pool. The default is 0.',
-			'Option ``max_size(N)``' - 'Allow at most N managed client connections in the pool. The default is 10.',
-			'Option ``connection_options(Options)``' - 'Socket options passed to open_connection/4 when creating pooled connections. The default is [].'
+			'Option ``min_size(N)``' - 'Pre-open N reusable client connections when creating the pool. The default is ``0``.',
+			'Option ``max_size(N)``' - 'Allow at most N managed client connections in the pool. The default is ``10``.',
+			'Option ``connection_options(Options)``' - 'Socket options passed to ``open_connection/4`` when creating pooled connections. The default is ``[]``.'
 		]
 	]).
 
@@ -120,29 +120,29 @@
 	:- public(serve_listener/4).
 	:- mode(serve_listener(+compound, +object_identifier, +integer, --list(compound)), one_or_error).
 	:- info(serve_listener/4, [
-		comment is 'Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.',
+		comment is 'Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before Count connections are accepted.',
 		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos']
 	]).
 
 	:- public(serve_listener/5).
 	:- mode(serve_listener(+compound, +object_identifier, +integer, --list(compound), +list), one_or_error).
 	:- info(serve_listener/5, [
-		comment is 'Accepts and serves Count incoming connections on the given listener using the specified shutdown and worker options. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.',
+		comment is 'Accepts and serves ``Count`` incoming connections on the given listener using the specified shutdown and worker options. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before ``Count`` connections are accepted.',
 		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos', 'Options'],
 		remarks is [
 			'Option ``shutdown(keep_open)``' - 'Leave the listener open after serving the requested number of connections. This is the default.',
 			'Option ``shutdown(close)``' - 'Close the listener when serving completes or aborts.',
 			'Option ``workers(serial)``' - 'Serve accepted connections sequentially in the caller thread. This is the default.',
 			'Option ``workers(per_connection)``' - 'Spawn one worker thread per accepted connection and wait for all workers before returning. Requires backend thread support.',
-			'Option ``workers(pool(Size))``' - 'Serve accepted connections in batches of up to Size worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.',
-			'Option ``workers(pool(Size, rolling))``' - 'Serve accepted connections using at most Size concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.'
+			'Option ``workers(pool(Size))``' - 'Serve accepted connections in batches of up to ``Size`` worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.',
+			'Option ``workers(pool(Size, rolling))``' - 'Serve accepted connections using at most ``Size`` concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.'
 		]
 	]).
 
 	:- public(serve_until_shutdown/4).
 	:- mode(serve_until_shutdown(+compound, +object_identifier, +nonvar, +list), one_or_error).
 	:- info(serve_until_shutdown/4, [
-		comment is 'Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, then closes the listener before returning.',
+		comment is 'Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, then closes the listener before returning.',
 		argnames is ['Listener', 'Handler', 'Control', 'Options'],
 		remarks is [
 			'Control term' - 'The control term must be non-variable and should be fresh for each open-ended serving loop.',
@@ -158,19 +158,19 @@
 	:- meta_predicate(serve_until_shutdown(*, *, *, *, 0)).
 	:- mode(serve_until_shutdown(+compound, +object_identifier, +nonvar, +list, +callable), one_or_error).
 	:- info(serve_until_shutdown/5, [
-		comment is 'Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.',
+		comment is 'Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.',
 		argnames is ['Listener', 'Handler', 'Control', 'Options', 'Ready'],
 		remarks is [
 			'Control term' - 'The control term must be non-variable and should be fresh for each open-ended serving loop.',
 			'Ready goal' - 'Called once after the shutdown control is registered and before the serving loop starts accepting connections.',
-			'Options' - 'Supports the same worker options as serve_until_shutdown/4.'
+			'Options' - 'Supports the same worker options as ``serve_until_shutdown/4``.'
 		]
 	]).
 
 	:- public(request_shutdown/1).
 	:- mode(request_shutdown(+nonvar), one_or_error).
 	:- info(request_shutdown/1, [
-		comment is 'Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 or serve_until_shutdown/5 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
+		comment is 'Requests shutdown of an open-ended serving loop started with ``serve_until_shutdown/4`` or ``serve_until_shutdown/5`` for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
 		argnames is ['Control']
 	]).
 

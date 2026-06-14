@@ -85,9 +85,9 @@
 		\+ origin_extra_components(Components).
 
 	request_endpoint(Request, Endpoint) :-
-		( 	request_properties_endpoint(Request, Endpoint) ->
+		(	request_properties_endpoint(Request, Endpoint) ->
 			true
-		; 	request_target_endpoint(Request, Endpoint)
+		;	request_target_endpoint(Request, Endpoint)
 		).
 
 	same_site(Left, Right) :-
@@ -106,9 +106,9 @@
 		default_scheme_port(Scheme, DefaultPort),
 		memberchk(authority(Authority), Components),
 		authority_endpoint(Authority, UserinfoMode, Host, ExplicitPort),
-		( 	ExplicitPort == none ->
+		(	ExplicitPort == none ->
 			Port = DefaultPort
-		; 	Port = ExplicitPort
+		;	Port = ExplicitPort
 		),
 		validate_endpoint(Host, ExplicitPort).
 
@@ -127,9 +127,9 @@
 		\+ member(0'@, AuthorityCodes).
 
 	components_path(Components, Path) :-
-		( 	member(path(Path0), Components) ->
+		(	member(path(Path0), Components) ->
 			normalize_request_path(Path0, Path)
-		; 	Path = ('/')
+		;	Path = ('/')
 		).
 
 	origin_extra_components(Components) :-
@@ -151,9 +151,9 @@
 
 	request_properties_endpoint(Request, http_endpoint(Scheme, Host, Port)) :-
 		http_property(Request, scheme(Scheme)),
-		( 	http_property(Request, host(Host, Port)) ->
+		(	http_property(Request, host(Host, Port)) ->
 			true
-		; 	http_property(Request, host(Host)),
+		;	http_property(Request, host(Host)),
 			default_scheme_port(Scheme, Port)
 		).
 
@@ -220,11 +220,11 @@
 
 	public_suffix_length(Labels, Length) :-
 		reverse(Labels, ReversedLabels),
-		( 	exception_public_suffix_length(ReversedLabels, Length) ->
+		(	exception_public_suffix_length(ReversedLabels, Length) ->
 			true
-		; 	longest_public_suffix_length(ReversedLabels, Length) ->
+		;	longest_public_suffix_length(ReversedLabels, Length) ->
 			true
-		; 	Length = 1
+		;	Length = 1
 		).
 
 	exception_public_suffix_length(ReversedLabels, Length) :-
@@ -451,9 +451,9 @@
 
 	strip_userinfo_codes(AuthorityCodes0, AuthorityCodes) :-
 		reverse(AuthorityCodes0, ReversedAuthorityCodes0),
-		( 	split_once(0'@, ReversedAuthorityCodes0, ReversedAuthorityCodes, _IgnoredUserinfoCodes) ->
+		(	split_once(0'@, ReversedAuthorityCodes0, ReversedAuthorityCodes, _IgnoredUserinfoCodes) ->
 			reverse(ReversedAuthorityCodes, AuthorityCodes)
-		; 	AuthorityCodes = AuthorityCodes0
+		;	AuthorityCodes = AuthorityCodes0
 		).
 
 	split_last_colon(AuthorityCodes, HostCodes, PortCodes) :-

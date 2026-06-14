@@ -61,18 +61,18 @@
 	minimum_core_distance_between_clusters([cluster(_Id, CorePoints, _BorderPoints)| Clusters], MinimumDistance) :-
 		minimum_distance_to_clusters(CorePoints, Clusters, FirstMinimumDistance),
 		minimum_core_distance_between_clusters(Clusters, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_clusters(_CorePoints, [], 0.0).
 	minimum_distance_to_clusters(CorePoints, [cluster(_Id, OtherCorePoints, _BorderPoints)| Clusters], MinimumDistance) :-
 		minimum_distance_between_core_sets(CorePoints, OtherCorePoints, FirstDistance),
 		minimum_distance_to_clusters(CorePoints, Clusters, RestDistance),
-		(   RestDistance =< 0.0 ->
+		(	RestDistance =< 0.0 ->
 			MinimumDistance = FirstDistance
-		;   MinimumDistance is min(FirstDistance, RestDistance)
+		;	MinimumDistance is min(FirstDistance, RestDistance)
 		).
 
 	minimum_distance_between_core_sets([CorePoint| CorePoints], OtherCorePoints, MinimumDistance) :-

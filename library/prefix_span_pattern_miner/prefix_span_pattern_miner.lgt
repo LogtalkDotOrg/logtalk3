@@ -108,17 +108,17 @@
 
 	increment_sequence_item(Item, Id, SeenSequenceItems0, SeenSequenceItems, ItemCounts0, ItemCounts) :-
 		Key = Id-Item,
-		(   dictionary_lookup(Key, true, SeenSequenceItems0) ->
+		(	dictionary_lookup(Key, true, SeenSequenceItems0) ->
 			SeenSequenceItems = SeenSequenceItems0,
 			ItemCounts = ItemCounts0
-		;   dictionary_insert(SeenSequenceItems0, Key, true, SeenSequenceItems),
+		;	dictionary_insert(SeenSequenceItems0, Key, true, SeenSequenceItems),
 			increment_dictionary_count(Item, ItemCounts0, ItemCounts)
 		).
 
 	increment_dictionary_count(Key, Dictionary0, Dictionary) :-
-		(   dictionary_lookup(Key, Count0, Dictionary0) ->
+		(	dictionary_lookup(Key, Count0, Dictionary0) ->
 			Count is Count0 + 1
-		;   Count = 1
+		;	Count = 1
 		),
 		dictionary_insert(Dictionary0, Key, Count, Dictionary).
 
@@ -126,12 +126,12 @@
 	mine_i_extensions([item_support(Item, Support)| ItemSupports], ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, Patterns) :-
 		extend_prefix_itemset(Prefix, Item, ExtendedPrefix),
 		^^pattern_length(ExtendedPrefix, PatternLength),
-		(   PatternLength =< MaximumPatternLength ->
+		(	PatternLength =< MaximumPatternLength ->
 			project_i_extension(ProjectedDatabase, Item, ProjectedExtensionDatabase),
 			mine_patterns(ProjectedExtensionDatabase, SupportCount, MaximumPatternLength, ExtendedPrefix, ExtendedPatterns),
 			Patterns = [sequence_pattern(ExtendedPrefix, Support)| TailPatterns],
 			append(ExtendedPatterns, RestPatterns, TailPatterns)
-		;   Patterns = RestPatterns
+		;	Patterns = RestPatterns
 		),
 		mine_i_extensions(ItemSupports, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, RestPatterns).
 
@@ -139,12 +139,12 @@
 	mine_s_extensions([item_support(Item, Support)| ItemSupports], ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, Patterns) :-
 		extend_prefix_sequence(Prefix, Item, ExtendedPrefix),
 		^^pattern_length(ExtendedPrefix, PatternLength),
-		(   PatternLength =< MaximumPatternLength ->
+		(	PatternLength =< MaximumPatternLength ->
 			project_s_extension(ProjectedDatabase, Item, ProjectedExtensionDatabase),
 			mine_patterns(ProjectedExtensionDatabase, SupportCount, MaximumPatternLength, ExtendedPrefix, ExtendedPatterns),
 			Patterns = [sequence_pattern(ExtendedPrefix, Support)| TailPatterns],
 			append(ExtendedPatterns, RestPatterns, TailPatterns)
-		;   Patterns = RestPatterns
+		;	Patterns = RestPatterns
 		),
 		mine_s_extensions(ItemSupports, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, RestPatterns).
 
@@ -160,9 +160,9 @@
 
 	project_i_extension([], _Item, []).
 	project_i_extension([projected(Id, CurrentItemset, Sequence)| ProjectedDatabase], Item, ProjectedExtensionDatabase) :-
-		(   itemset_suffix_after_item(Item, CurrentItemset, RemainingItemset) ->
+		(	itemset_suffix_after_item(Item, CurrentItemset, RemainingItemset) ->
 			ProjectedExtensionDatabase = [projected(Id, RemainingItemset, Sequence)| RestProjectedExtensionDatabase]
-		;   ProjectedExtensionDatabase = RestProjectedExtensionDatabase
+		;	ProjectedExtensionDatabase = RestProjectedExtensionDatabase
 		),
 		project_i_extension(ProjectedDatabase, Item, RestProjectedExtensionDatabase).
 
@@ -173,9 +173,9 @@
 
 	project_sequence_occurrences([], _Id, _Item, ProjectedExtensionDatabase, ProjectedExtensionDatabase).
 	project_sequence_occurrences([Itemset| Sequence], Id, Item, ProjectedExtensionDatabase0, ProjectedExtensionDatabase) :-
-		(   itemset_suffix_after_item(Item, Itemset, RemainingItemset) ->
+		(	itemset_suffix_after_item(Item, Itemset, RemainingItemset) ->
 			ProjectedExtensionDatabase0 = [projected(Id, RemainingItemset, Sequence)| ProjectedExtensionDatabase1]
-		;   ProjectedExtensionDatabase0 = ProjectedExtensionDatabase1
+		;	ProjectedExtensionDatabase0 = ProjectedExtensionDatabase1
 		),
 		project_sequence_occurrences(Sequence, Id, Item, ProjectedExtensionDatabase1, ProjectedExtensionDatabase).
 
@@ -192,7 +192,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = prefix_span_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = prefix_span_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_sequence_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(prefix_span_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -200,7 +200,7 @@
 			memberchk(extension_modes([itemset, sequence]), Diagnostics),
 			memberchk(support_layout(projected_database), Diagnostics) ->
 			true
-		;   domain_error(prefix_span_pattern_miner, PatternMiner)
+		;	domain_error(prefix_span_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, prefix_span_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

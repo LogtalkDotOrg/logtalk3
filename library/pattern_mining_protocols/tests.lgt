@@ -40,13 +40,13 @@
 		^^pattern_miner_diagnostics(sample_pattern_miner, [bread, milk], Patterns, [], [search_strategy(sample_projection)], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = sample_pattern_miner(Patterns),
+		(	PatternMiner = sample_pattern_miner(Patterns),
 			valid_patterns(Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(sample_pattern_miner, [bread, milk], Patterns, [], Diagnostics),
 			memberchk(search_strategy(sample_projection), Diagnostics) ->
 			true
-		;   domain_error(sample_pattern_miner, PatternMiner)
+		;	domain_error(sample_pattern_miner, PatternMiner)
 		).
 
 	valid_patterns([]).

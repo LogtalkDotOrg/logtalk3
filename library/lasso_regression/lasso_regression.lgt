@@ -80,10 +80,10 @@
 
 	build_lasso_encoders([], _Examples, _Options, []).
 	build_lasso_encoders([Attribute-Values| Attributes], Examples, Options, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_lasso_encoders(Attributes, Examples, Options, Encoders).
 
@@ -147,25 +147,25 @@
 
 	optimize_lasso_model(RowCount, Columns, ColumnSumSquares, Options, Iteration, Bias0, Weights0, Residuals0, PreviousViolation, Bias, Weights, Convergence, Iterations, FinalDelta) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Bias = Bias0,
 			Weights = Weights0,
 			Convergence = maximum_iterations_exhausted,
 			Iterations = Iteration,
 			FinalDelta = PreviousViolation
-		;   update_bias(RowCount, Bias0, Residuals0, Bias1, Residuals1),
+		;	update_bias(RowCount, Bias0, Residuals0, Bias1, Residuals1),
 			sweep_lasso_weights(Columns, ColumnSumSquares, RowCount, Options, Weights0, Residuals1, Weights1, Residuals2),
 			^^option(regularization(Regularization), Options),
 			max_optimality_violation(RowCount, Columns, ColumnSumSquares, Weights1, Residuals2, Regularization, MaxViolation),
 			NextIteration is Iteration + 1,
 			^^option(tolerance(Tolerance), Options),
-			(   MaxViolation =< Tolerance ->
+			(	MaxViolation =< Tolerance ->
 				Bias = Bias1,
 				Weights = Weights1,
 				Convergence = tolerance,
 				Iterations = NextIteration,
 				FinalDelta = MaxViolation
-			;   optimize_lasso_model(RowCount, Columns, ColumnSumSquares, Options, NextIteration, Bias1, Weights1, Residuals2, MaxViolation, Bias, Weights, Convergence, Iterations, FinalDelta)
+			;	optimize_lasso_model(RowCount, Columns, ColumnSumSquares, Options, NextIteration, Bias1, Weights1, Residuals2, MaxViolation, Bias, Weights, Convergence, Iterations, FinalDelta)
 			)
 		).
 
@@ -187,9 +187,9 @@
 
 	update_lasso_weight(RowCount, Column, SumSquares, Options, Weight0, Residuals0, Weight1, Residuals1) :-
 		column_correlation(Column, Residuals0, Weight0, 0.0, SumCorrelation),
-		(   SumSquares =< 1.0e-12 ->
+		(	SumSquares =< 1.0e-12 ->
 			Weight1 = 0.0
-		;   MeanCorrelation is SumCorrelation / RowCount,
+		;	MeanCorrelation is SumCorrelation / RowCount,
 			MeanSquare is SumSquares / RowCount,
 			^^option(regularization(Regularization), Options),
 			soft_threshold(MeanCorrelation, Regularization, Thresholded),
@@ -223,31 +223,31 @@
 		SumSquares =< 1.0e-12,
 		!,
 		AbsWeight is abs(Weight),
-		(   AbsWeight =< 1.0e-12 ->
+		(	AbsWeight =< 1.0e-12 ->
 			Violation = 0.0
-		;   Violation = AbsWeight
+		;	Violation = AbsWeight
 		).
 	weight_optimality_violation(Column, _SumSquares, Weight, Residuals, RowCount, Regularization, Violation) :-
 		dot_product(Column, Residuals, SumCorrelation),
 		MeanCorrelation is SumCorrelation / RowCount,
 		AbsWeight is abs(Weight),
-		(   AbsWeight =< 1.0e-12 ->
+		(	AbsWeight =< 1.0e-12 ->
 			ExcessCorrelation is abs(MeanCorrelation) - Regularization,
-			(   ExcessCorrelation =< 0.0 ->
+			(	ExcessCorrelation =< 0.0 ->
 				Violation = 0.0
-			;   Violation = ExcessCorrelation
+			;	Violation = ExcessCorrelation
 			)
-		;   Weight > 0.0 ->
+		;	Weight > 0.0 ->
 			Violation is abs(MeanCorrelation - Regularization)
-		;   Violation is abs(MeanCorrelation + Regularization)
+		;	Violation is abs(MeanCorrelation + Regularization)
 		).
 
 	soft_threshold(Value, Threshold, Result) :-
-		(   Value > Threshold ->
+		(	Value > Threshold ->
 			Result is Value - Threshold
-		;   Value < -Threshold ->
+		;	Value < -Threshold ->
 			Result is Value + Threshold
-		;   Result = 0.0
+		;	Result = 0.0
 		).
 
 	update_residuals(_Column, Residuals, 0.0, Residuals) :-
@@ -263,7 +263,7 @@
 	regressor_term_template(lasso_regressor(_Encoders, _Bias, _Weights, _Diagnostics), lasso_regressor('Encoders', 'Bias', 'Weights', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = lasso_regressor(Encoders, Bias, Weights, Diagnostics),
+		(	Regressor = lasso_regressor(Encoders, Bias, Weights, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -272,7 +272,7 @@
 			^^valid_linear_model_diagnostics(Diagnostics),
 			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-

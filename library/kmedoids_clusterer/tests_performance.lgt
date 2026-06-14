@@ -86,9 +86,9 @@
 	minimum_medoid_distance([Medoid| Medoids], MinimumDistance) :-
 		minimum_distance_to_others(Medoid, Medoids, FirstMinimumDistance),
 		minimum_medoid_distance(Medoids, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Medoid, [Other| Others], MinimumDistance) :-

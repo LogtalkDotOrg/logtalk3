@@ -92,8 +92,8 @@
 		numberlist_euclidean_norm(Vector, Norm).
 
 	vector_norm(Vector, Order, Norm) :-
-		(   Order == inf
-		;   Order == infinity
+		(	Order == inf
+		;	Order == infinity
 		),
 		!,
 		numberlist_chebyshev_norm(Vector, Norm).
@@ -104,13 +104,13 @@
 		vector_norm_for_order(Vector, Order, Norm).
 
 	vector_norm_for_order(Vector, Order, Norm) :-
-		(   Order =:= 1 ->
+		(	Order =:= 1 ->
 			numberlist_manhattan_norm(Vector, Norm)
-		;   Order =:= 2 ->
+		;	Order =:= 2 ->
 			euclidean_norm(Vector, Norm)
-		;   Order > 0.0 ->
+		;	Order > 0.0 ->
 			vector_p_norm(Vector, Order, Norm)
-		;   domain_error(positive_number_or_infinity, Order)
+		;	domain_error(positive_number_or_infinity, Order)
 		).
 
 	vector_p_norm([Value| Values], Order, Norm) :-
@@ -332,9 +332,9 @@
 		check(non_negative_integer, Size, Context),
 		length(Diagonal, DiagonalLength),
 		minimum_diagonal_matrix_size(DiagonalLength, Offset, MinimumSize),
-		(   Size >= MinimumSize ->
+		(	Size >= MinimumSize ->
 			diagonal_matrix_rows(1, Size, Diagonal, Offset, Matrix)
-		;   domain_error(minimum_matrix_size(MinimumSize), Size)
+		;	domain_error(minimum_matrix_size(MinimumSize), Size)
 		).
 
 	diagonal_matrix_rows(RowIndex, Size, _Diagonal, _Offset, []) :-
@@ -349,9 +349,9 @@
 		ColumnIndex > Size,
 		!.
 	diagonal_matrix_row(ColumnIndex, Size, RowIndex, Diagonal, Offset, [Value| Row]) :-
-		(   diagonal_entry_value(RowIndex, ColumnIndex, Diagonal, Offset, EntryValue) ->
+		(	diagonal_entry_value(RowIndex, ColumnIndex, Diagonal, Offset, EntryValue) ->
 			Value = EntryValue
-		;   Value = 0.0
+		;	Value = 0.0
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		diagonal_matrix_row(NextColumnIndex, Size, RowIndex, Diagonal, Offset, Row).
@@ -362,9 +362,9 @@
 		nth1(DiagonalIndex, Diagonal, Value).
 
 	diagonal_value_index(RowIndex, Offset, DiagonalIndex) :-
-		(   Offset >= 0 ->
+		(	Offset >= 0 ->
 			DiagonalIndex is RowIndex
-		;   DiagonalIndex is RowIndex + Offset
+		;	DiagonalIndex is RowIndex + Offset
 		).
 
 	matrix_trace(Matrix, Trace) :-
@@ -409,9 +409,9 @@
 
 	extract_upper_triangular_row([], _Offset, _RowIndex, _ColumnIndex, []).
 	extract_upper_triangular_row([Value| Values], Offset, RowIndex, ColumnIndex, [UpperValue| UpperValues]) :-
-		(   ColumnIndex - RowIndex >= Offset ->
+		(	ColumnIndex - RowIndex >= Offset ->
 			UpperValue = Value
-		;   UpperValue = 0.0
+		;	UpperValue = 0.0
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		extract_upper_triangular_row(Values, Offset, RowIndex, NextColumnIndex, UpperValues).
@@ -433,9 +433,9 @@
 
 	extract_lower_triangular_row([], _Offset, _RowIndex, _ColumnIndex, []).
 	extract_lower_triangular_row([Value| Values], Offset, RowIndex, ColumnIndex, [LowerValue| LowerValues]) :-
-		(   ColumnIndex - RowIndex =< Offset ->
+		(	ColumnIndex - RowIndex =< Offset ->
 			LowerValue = Value
-		;   LowerValue = 0.0
+		;	LowerValue = 0.0
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		extract_lower_triangular_row(Values, Offset, RowIndex, NextColumnIndex, LowerValues).
@@ -452,9 +452,9 @@
 		require_matrix_row_count(RightHandSideMatrix, Size),
 		linear_system_scale(Matrix, RightHandSideMatrix, Scale),
 		triangularize_system(Matrix, RightHandSideMatrix, Scale, _Sign, UpperMatrix, UpperRightHandSideMatrix, Status),
-		(   Status == ok ->
+		(	Status == ok ->
 			solve_upper_triangular_matrix(UpperMatrix, UpperRightHandSideMatrix, Solutions)
-		;   evaluation_error(zero_divisor)
+		;	evaluation_error(zero_divisor)
 		).
 
 	determinant(Matrix, Determinant) :-
@@ -462,10 +462,10 @@
 		new_matrix(Size, 0, 0.0, EmptyRightHandSideMatrix),
 		matrix_scale(Matrix, Scale),
 		triangularize_system(Matrix, EmptyRightHandSideMatrix, Scale, Sign, UpperMatrix, _UpperRightHandSideMatrix, Status),
-		(   Status == ok ->
+		(	Status == ok ->
 			diagonal_product(UpperMatrix, Product),
 			Determinant is Sign * Product
-		;   Determinant = 0.0
+		;	Determinant = 0.0
 		).
 
 	inverse_matrix(Matrix, Inverse) :-
@@ -491,9 +491,9 @@
 		initialize_qr_candidates(Columns, 1, Candidates),
 		process_pivoted_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns),
 		selected_column_count(SelectedColumns, Rank),
-		(   Rank =:= 0 ->
+		(	Rank =:= 0 ->
 			new_vector(ColumnCount, 0.0, Solution)
-		;   q_columns_from_selected(SelectedColumns, OrthogonalColumns),
+		;	q_columns_from_selected(SelectedColumns, OrthogonalColumns),
 			q_transpose_times_vector(OrthogonalColumns, Values, OrthogonalValues),
 			upper_triangular_factor(ProcessedColumns, Rank, UpperTriangularFactor),
 			leading_square_factor(UpperTriangularFactor, Rank, LeadingFactor),
@@ -530,10 +530,10 @@
 		check(positive_integer, MaximumIterations, Context),
 		require_square_matrix(Matrix, Size),
 		require_symmetric_matrix(Matrix, Tolerance),
-		(   Size =:= 0 ->
+		(	Size =:= 0 ->
 			Eigenvectors = [],
 			Eigenvalues = []
-		;   initial_vectors(Size, InitialVectors),
+		;	initial_vectors(Size, InitialVectors),
 			extract_symmetric_eigenpairs(Matrix, Size, InitialVectors, Tolerance, MaximumIterations, [], [], Eigenvectors0, Eigenvalues0),
 			sort_eigenpairs_descending(Eigenvectors0, Eigenvalues0, Eigenvectors, Eigenvalues)
 		).
@@ -582,19 +582,19 @@
 	principal_symmetric_component_candidates(_Matrix, _SelectedEigenvectors, [], _Tolerance, _MaximumIterations, _Found, BestEigenvalue, BestEigenvector, BestEigenvalue, BestEigenvector) :-
 		!.
 	principal_symmetric_component_candidates(Matrix, SelectedEigenvectors, [InitialVector| InitialVectors], Tolerance, MaximumIterations, Found0, BestEigenvalue0, BestEigenvector0, BestEigenvalue, BestEigenvector) :-
-		(   orthogonal_initial_vector(InitialVector, SelectedEigenvectors, Tolerance, NormalizedInitial) ->
+		(	orthogonal_initial_vector(InitialVector, SelectedEigenvectors, Tolerance, NormalizedInitial) ->
 			iterate_symmetric_component(Matrix, SelectedEigenvectors, Tolerance, MaximumIterations, 0, NormalizedInitial, _CandidateEigenvalue0, CandidateEigenvector0),
 			stabilized_orthogonal_vector(CandidateEigenvector0, SelectedEigenvectors, Tolerance, CandidateEigenvector),
 			rayleigh_quotient(Matrix, CandidateEigenvector, CandidateEigenvalue),
-			(   better_eigenpair(Found0, CandidateEigenvalue, BestEigenvalue0) ->
+			(	better_eigenpair(Found0, CandidateEigenvalue, BestEigenvalue0) ->
 				Found1 = true,
 				BestEigenvalue1 = CandidateEigenvalue,
 				BestEigenvector1 = CandidateEigenvector
-			;   Found1 = Found0,
+			;	Found1 = Found0,
 				BestEigenvalue1 = BestEigenvalue0,
 				BestEigenvector1 = BestEigenvector0
 			)
-		;   Found1 = Found0,
+		;	Found1 = Found0,
 			BestEigenvalue1 = BestEigenvalue0,
 			BestEigenvector1 = BestEigenvector0
 		),
@@ -611,17 +611,17 @@
 		matrix_vector_product(Matrix, Vector0, Product0),
 		orthogonalize_against_basis(SelectedEigenvectors, Product0, Product),
 		euclidean_norm(Product, Norm),
-		(   Norm =< Tolerance ->
+		(	Norm =< Tolerance ->
 			Eigenvalue = 0.0,
 			Eigenvector = Vector0
-		;   Scale is 1.0 / Norm,
+		;	Scale is 1.0 / Norm,
 			scale_vector(Product, Scale, Vector1),
 			stabilized_orthogonal_vector(Vector1, SelectedEigenvectors, Tolerance, StableVector),
 			difference_norm(StableVector, Vector0, Delta),
-			(   (Delta =< Tolerance ; Iteration >= MaximumIterations) ->
+			(	(Delta =< Tolerance ; Iteration >= MaximumIterations) ->
 				rayleigh_quotient(Matrix, StableVector, Eigenvalue),
 				Eigenvector = StableVector
-			;   NextIteration is Iteration + 1,
+			;	NextIteration is Iteration + 1,
 				iterate_symmetric_component(Matrix, SelectedEigenvectors, Tolerance, MaximumIterations, NextIteration, StableVector, Eigenvalue, Eigenvector)
 			)
 		).
@@ -648,9 +648,9 @@
 
 	collect_null_space_basis([], [], _Tolerance, []).
 	collect_null_space_basis([Eigenvector| Eigenvectors], [Eigenvalue| Eigenvalues], Tolerance, Basis) :-
-		(   abs(Eigenvalue) =< Tolerance ->
+		(	abs(Eigenvalue) =< Tolerance ->
 			Basis = [Eigenvector| Rest]
-		;   Basis = Rest
+		;	Basis = Rest
 		),
 		collect_null_space_basis(Eigenvectors, Eigenvalues, Tolerance, Rest).
 
@@ -666,9 +666,9 @@
 
 	inverse_eigenvalues([], _Tolerance, []).
 	inverse_eigenvalues([Eigenvalue| Eigenvalues], Tolerance, [InverseEigenvalue| InverseEigenvalues]) :-
-		(   Eigenvalue > Tolerance ->
+		(	Eigenvalue > Tolerance ->
 			InverseEigenvalue is 1.0 / Eigenvalue
-		;   InverseEigenvalue = 0.0
+		;	InverseEigenvalue = 0.0
 		),
 		inverse_eigenvalues(Eigenvalues, Tolerance, InverseEigenvalues).
 
@@ -720,20 +720,20 @@
 
 	mean_list(Values, Mean) :-
 		length(Values, Count),
-		(   Count > 0 ->
+		(	Count > 0 ->
 			numberlist_sum(Values, Sum),
 			Mean is Sum / Count
-		;   domain_error(minimum_number_of_values(1), Values)
+		;	domain_error(minimum_number_of_values(1), Values)
 		).
 
 	minimum_diagonal_matrix_size(DiagonalLength, Offset, MinimumSize) :-
 		MinimumSize is DiagonalLength + abs(Offset).
 
 	diagonal_start_indices(Offset, RowIndex, ColumnIndex) :-
-		(   Offset >= 0 ->
+		(	Offset >= 0 ->
 			RowIndex = 1,
 			ColumnIndex is 1 + Offset
-		;   RowIndex is 1 - Offset,
+		;	RowIndex is 1 - Offset,
 			ColumnIndex = 1
 		).
 
@@ -747,9 +747,9 @@
 		context(Context),
 		check(non_negative_number, Tolerance, Context),
 		euclidean_norm(Vector, Norm),
-		(   Norm =< Tolerance ->
+		(	Norm =< Tolerance ->
 			NormalizedVector = Vector
-		;   rescale(Vector, 1.0 / Norm, NormalizedVector)
+		;	rescale(Vector, 1.0 / Norm, NormalizedVector)
 		).
 
 	difference_norm(Vector1, Vector2, Norm) :-
@@ -763,10 +763,10 @@
 	stabilize_vector_sign(Vector, Tolerance, StableVector) :-
 		context(Context),
 		check(non_negative_number, Tolerance, Context),
-		(   first_significant_component(Vector, Tolerance, First),
+		(	first_significant_component(Vector, Tolerance, First),
 			First < 0.0 ->
 			rescale(Vector, -1.0, StableVector)
-		;   StableVector = Vector
+		;	StableVector = Vector
 		).
 
 	first_significant_component(Vector, First) :-
@@ -798,13 +798,13 @@
 
 	covariance_matrix([FirstRow| Rows], CovarianceMatrix) :-
 		length([FirstRow| Rows], Count),
-		(   Count > 1 ->
+		(	Count > 1 ->
 			length(FirstRow, FeatureCount),
 			new_matrix(FeatureCount, FeatureCount, 0.0, ZeroMatrix),
 			accumulate_outer_products([FirstRow| Rows], ZeroMatrix, SumMatrix),
 			Scale is 1.0 / (Count - 1),
 			scale_matrix(SumMatrix, Scale, CovarianceMatrix)
-		;   domain_error(minimum_number_of_rows(2), [FirstRow| Rows])
+		;	domain_error(minimum_number_of_rows(2), [FirstRow| Rows])
 		).
 	covariance_matrix([], _CovarianceMatrix) :-
 		domain_error(minimum_number_of_rows(2), []).
@@ -837,17 +837,17 @@
 		append(Prefix, Zeroes, CholeskyRow).
 	cholesky_row(ColumnIndex, RowIndex, Size, Matrix, MatrixRow, PreviousRows, Prefix, CholeskyRow) :-
 		nth1(ColumnIndex, MatrixRow, MatrixValue),
-		(   ColumnIndex =:= RowIndex ->
+		(	ColumnIndex =:= RowIndex ->
 			sum_squares(Prefix, Correction),
 			DiagonalValue0 is MatrixValue - Correction,
-			(   DiagonalValue0 > 1.0e-12 ->
+			(	DiagonalValue0 > 1.0e-12 ->
 				DiagonalValue is sqrt(DiagonalValue0)
-			;   domain_error(positive_definite_matrix, Matrix)
+			;	domain_error(positive_definite_matrix, Matrix)
 			),
 			append(Prefix, [DiagonalValue], NextPrefix),
 			NextColumnIndex is ColumnIndex + 1,
 			cholesky_row(NextColumnIndex, RowIndex, Size, Matrix, MatrixRow, PreviousRows, NextPrefix, CholeskyRow)
-		;   nth1(ColumnIndex, PreviousRows, PreviousRow),
+		;	nth1(ColumnIndex, PreviousRows, PreviousRow),
 			prefix_dot(Prefix, PreviousRow, 0.0, Correction),
 			nth1(ColumnIndex, PreviousRow, Diagonal),
 			Entry is (MatrixValue - Correction) / Diagonal,
@@ -947,9 +947,9 @@
 		Index > Size,
 		!.
 	identity_column(Index, Size, OneIndex, [Value| Column]) :-
-		(   Index =:= OneIndex ->
+		(	Index =:= OneIndex ->
 			Value = 1.0
-		;   Value = 0.0
+		;	Value = 0.0
 		),
 		NextIndex is Index + 1,
 		identity_column(NextIndex, Size, OneIndex, Column).
@@ -982,22 +982,22 @@
 		Matrix = [Row| Rows],
 		length(Matrix, RowCount),
 		length(Row, ColumnCount),
-		(   matrix_rows_have_length(Rows, ColumnCount) ->
+		(	matrix_rows_have_length(Rows, ColumnCount) ->
 			true
-		;   domain_error(rectangular_matrix, Matrix)
+		;	domain_error(rectangular_matrix, Matrix)
 		).
 
 	require_square_matrix(Matrix, Size) :-
 		require_rectangular_matrix(Matrix, Size, ColumnCount),
-		(   Size =:= ColumnCount ->
+		(	Size =:= ColumnCount ->
 			true
-		;   domain_error(square_matrix, Matrix)
+		;	domain_error(square_matrix, Matrix)
 		).
 
 	require_symmetric_matrix(Matrix, Tolerance) :-
-		(   symmetric_matrix(Matrix, Tolerance) ->
+		(	symmetric_matrix(Matrix, Tolerance) ->
 			true
-		;   domain_error(symmetric_matrix, Matrix)
+		;	domain_error(symmetric_matrix, Matrix)
 		).
 
 	symmetric_matrix(Matrix, Tolerance) :-
@@ -1031,15 +1031,15 @@
 		matrix_rows_have_length(Rows, Size).
 
 	require_vector_length(Vector, Size) :-
-		(   length(Vector, Size) ->
+		(	length(Vector, Size) ->
 			true
-		;   domain_error(vector_length(Size), Vector)
+		;	domain_error(vector_length(Size), Vector)
 		).
 
 	require_matrix_row_count(Matrix, Size) :-
-		(   length(Matrix, Size) ->
+		(	length(Matrix, Size) ->
 			true
-		;   domain_error(matrix_row_count(Size), Matrix)
+		;	domain_error(matrix_row_count(Size), Matrix)
 		).
 
 	vector_as_column_matrix([], []).
@@ -1076,13 +1076,13 @@
 	process_ordered_qr_candidates([], _Tolerance, [], []).
 	process_ordered_qr_candidates([Candidate| Candidates], Tolerance, SelectedColumns, ProcessedColumns) :-
 		candidate_norm(Candidate, Norm),
-		(   Norm > Tolerance ->
+		(	Norm > Tolerance ->
 			promote_qr_candidate(Candidate, Norm, Basis, SelectedColumn, ProcessedColumn),
 			orthogonalize_qr_candidates(Candidates, Basis, OrthogonalCandidates),
 			SelectedColumns = [SelectedColumn| SelectedColumns0],
 			ProcessedColumns = [ProcessedColumn| ProcessedColumns0],
 			process_ordered_qr_candidates(OrthogonalCandidates, Tolerance, SelectedColumns0, ProcessedColumns0)
-		;   candidate_to_processed_column(Candidate, ProcessedColumn),
+		;	candidate_to_processed_column(Candidate, ProcessedColumn),
 			ProcessedColumns = [ProcessedColumn| ProcessedColumns0],
 			process_ordered_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns0)
 		).
@@ -1092,13 +1092,13 @@
 	process_pivoted_qr_candidates(Candidates, Tolerance, SelectedColumns, ProcessedColumns) :-
 		select_best_candidate(Candidates, Candidate, RemainingCandidates),
 		candidate_norm(Candidate, Norm),
-		(   Norm > Tolerance ->
+		(	Norm > Tolerance ->
 			promote_qr_candidate(Candidate, Norm, Basis, SelectedColumn, ProcessedColumn),
 			orthogonalize_qr_candidates(RemainingCandidates, Basis, OrthogonalCandidates),
 			SelectedColumns = [SelectedColumn| SelectedColumns0],
 			ProcessedColumns = [ProcessedColumn| ProcessedColumns0],
 			process_pivoted_qr_candidates(OrthogonalCandidates, Tolerance, SelectedColumns0, ProcessedColumns0)
-		;   SelectedColumns = [],
+		;	SelectedColumns = [],
 			candidates_to_processed_columns([Candidate| RemainingCandidates], ProcessedColumns)
 		).
 
@@ -1116,10 +1116,10 @@
 	select_best_candidate([Candidate| Candidates], Candidate0, RemainingCandidates0, BestCandidate, RemainingCandidates) :-
 		candidate_norm(Candidate, Norm),
 		candidate_norm(Candidate0, Norm0),
-		(   Norm > Norm0 ->
+		(	Norm > Norm0 ->
 			Candidate1 = Candidate,
 			RemainingCandidates1 = [Candidate0| RemainingCandidates0]
-		;   Candidate1 = Candidate0,
+		;	Candidate1 = Candidate0,
 			RemainingCandidates1 = [Candidate| RemainingCandidates0]
 		),
 		select_best_candidate(Candidates, Candidate1, RemainingCandidates1, BestCandidate, RemainingCandidates).
@@ -1150,9 +1150,9 @@
 
 	orthogonal_matrix_from_selected(SelectedColumns, RowCount, Orthogonal) :-
 		q_columns_from_selected(SelectedColumns, OrthogonalColumns),
-		(   OrthogonalColumns == [] ->
+		(	OrthogonalColumns == [] ->
 			new_matrix(RowCount, 0, 0.0, Orthogonal)
-		;   columns_to_rows(OrthogonalColumns, Orthogonal)
+		;	columns_to_rows(OrthogonalColumns, Orthogonal)
 		).
 
 	upper_triangular_factor(_ProcessedColumns, 0, []) :-
@@ -1174,9 +1174,9 @@
 		upper_triangular_row(ProcessedColumns, RowIndex, Values).
 
 	processed_column_coefficient(processed_column(_Index, Coefficients), RowIndex, Value) :-
-		(   nth1(RowIndex, Coefficients, Coefficient) ->
+		(	nth1(RowIndex, Coefficients, Coefficient) ->
 			Value = Coefficient
-		;   Value = 0.0
+		;	Value = 0.0
 		).
 
 	leading_square_factor([], _Rank, []).
@@ -1239,31 +1239,31 @@
 		select_pivot_row([Row0| Rows0], Index, PivotRow, RemainingRows, SwapSign),
 		pivot_row_value(Index, PivotRow, PivotValue),
 		Sign1 is Sign0 * SwapSign,
-		(   pivot_is_numerically_non_zero(PivotValue, Scale) ->
+		(	pivot_is_numerically_non_zero(PivotValue, Scale) ->
 			eliminate_system_rows(RemainingRows, Index, PivotRow, ReducedRows),
 			NextIndex is Index + 1,
 			triangularize_rows(ReducedRows, NextIndex, Scale, Sign1, Sign, UpperRows, Status)
-		;   Sign = Sign1,
+		;	Sign = Sign1,
 			UpperRows = [],
 			Status = zero_pivot
 		).
 
 	select_pivot_row([Row| Rows], Index, PivotRow, RemainingRows, SwapSign) :-
 		select_pivot_row(Rows, Index, Row, false, [], PivotRow, RemainingRows, CandidateMoved),
-		(   CandidateMoved == true ->
+		(	CandidateMoved == true ->
 			SwapSign = -1.0
-		;   SwapSign = 1.0
+		;	SwapSign = 1.0
 		).
 
 	select_pivot_row([], _Index, Candidate, CandidateMoved, RemainingRows, Candidate, RemainingRows, CandidateMoved).
 	select_pivot_row([Row| Rows], Index, Candidate0, CandidateMoved0, RemainingRows0, PivotRow, RemainingRows, CandidateMoved) :-
 		pivot_magnitude(Index, Row, Magnitude),
 		pivot_magnitude(Index, Candidate0, CandidateMagnitude),
-		(   Magnitude > CandidateMagnitude ->
+		(	Magnitude > CandidateMagnitude ->
 			Candidate = Row,
 			CandidateMoved1 = true,
 			RemainingRows1 = [Candidate0| RemainingRows0]
-		;   Candidate = Candidate0,
+		;	Candidate = Candidate0,
 			CandidateMoved1 = CandidateMoved0,
 			RemainingRows1 = [Row| RemainingRows0]
 		),

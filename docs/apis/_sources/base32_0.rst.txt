@@ -14,8 +14,8 @@ Base32 encoder and decoder (RFC 4648).
 |    ``logtalk_load(base32(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2025-01-23
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,6 +53,12 @@ Parses Base32 data from the given source (``atom(Atom)``, ``chars(List)``, ``cod
 | **Mode and number of proofs:**
 |    ``parse(++compound,--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Base32 source term:
+|        ``domain_error(base32_source,Source)``
+
 
 ------------
 
@@ -71,6 +77,12 @@ Generates Base32 in the representation specified in the first argument (``atom(A
 |    ``generate(Sink,Bytes)``
 | **Mode and number of proofs:**
 |    ``generate(+compound,+list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Base32 sink term:
+|        ``domain_error(base32_sink,Sink)``
 
 
 ------------

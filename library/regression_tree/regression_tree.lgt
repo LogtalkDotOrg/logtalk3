@@ -75,11 +75,11 @@
 
 	build_encoders([], _, _, [], []).
 	build_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders], FeatureLabels) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale),
 			AttributeLabels = [feature(Attribute, value), feature(Attribute, missing)]
-		;   Encoder = categorical(Attribute, Values),
+		;	Encoder = categorical(Attribute, Values),
 			categorical_feature_labels(Attribute, Values, AttributeLabels)
 		),
 		append(AttributeLabels, RestLabels, FeatureLabels),
@@ -101,13 +101,13 @@
 
 	build_tree(Rows, FeatureLabels, Depth, Options, Tree) :-
 		mean_target(Rows, Mean),
-		(   stopping_condition(Rows, Depth, Options) ->
+		(	stopping_condition(Rows, Depth, Options) ->
 			Tree = leaf(Mean)
-		;   best_split(Rows, FeatureLabels, Options, BestIndex, BestThreshold, BestReduction, LeftRows, RightRows),
+		;	best_split(Rows, FeatureLabels, Options, BestIndex, BestThreshold, BestReduction, LeftRows, RightRows),
 			^^option(minimum_variance_reduction(MinimumVarianceReduction), Options),
-			(   (BestIndex == none ; BestReduction =< MinimumVarianceReduction) ->
+			(	(BestIndex == none ; BestReduction =< MinimumVarianceReduction) ->
 				Tree = leaf(Mean)
-			;   NextDepth is Depth + 1,
+			;	NextDepth is Depth + 1,
 				build_tree(LeftRows, FeatureLabels, NextDepth, Options, LeftTree),
 				build_tree(RightRows, FeatureLabels, NextDepth, Options, RightTree),
 				Tree = node(BestIndex, BestThreshold, Mean, LeftTree, RightTree)
@@ -154,9 +154,9 @@
 
 	select_attribute_feature_indexes(AttributeIndexes, MaximumFeatures, FeatureIndexes) :-
 		length(AttributeIndexes, AttributeCount),
-		(   (MaximumFeatures == all ; MaximumFeatures >= AttributeCount) ->
+		(	(MaximumFeatures == all ; MaximumFeatures >= AttributeCount) ->
 			flatten_attribute_feature_indexes(AttributeIndexes, FeatureIndexes)
-		;   random_permutation(AttributeIndexes, ShuffledAttributeIndexes),
+		;	random_permutation(AttributeIndexes, ShuffledAttributeIndexes),
 			take_attribute_groups(MaximumFeatures, ShuffledAttributeIndexes, SelectedAttributeIndexes),
 			flatten_attribute_feature_indexes(SelectedAttributeIndexes, FeatureIndexes)
 		).
@@ -184,13 +184,13 @@
 	best_split_feature([Index| FeatureIndexes], Rows, ParentSSE, Options, BestIndex0, BestReduction0, BestThreshold0, BestLeft0, BestRight0, BestIndex, BestThreshold, BestReduction, BestLeft, BestRight) :-
 		candidate_thresholds(Rows, Index, Thresholds),
 		best_threshold_for_feature(Thresholds, Rows, Index, ParentSSE, Options, BestThresholdForFeature, BestReductionForFeature, LeftRows, RightRows),
-		(   number(BestReductionForFeature), number(BestReduction0), BestReductionForFeature > BestReduction0 ->
+		(	number(BestReductionForFeature), number(BestReduction0), BestReductionForFeature > BestReduction0 ->
 			NextBestIndex = Index,
 			NextBestReduction = BestReductionForFeature,
 			NextBestThreshold = BestThresholdForFeature,
 			NextBestLeft = LeftRows,
 			NextBestRight = RightRows
-		;   NextBestIndex = BestIndex0,
+		;	NextBestIndex = BestIndex0,
 			NextBestReduction = BestReduction0,
 			NextBestThreshold = BestThreshold0,
 			NextBestLeft = BestLeft0,
@@ -220,12 +220,12 @@
 		BestRightRows = BestRightRows0.
 	best_threshold_for_feature([Threshold| Thresholds], Rows, Index, ParentSSE, Options, BestThreshold0, BestReduction0, BestLeftRows0, BestRightRows0, BestThreshold, BestReduction, BestLeftRows, BestRightRows) :-
 		evaluate_threshold(Threshold, Rows, Index, ParentSSE, Options, CurrentReduction, CurrentLeftRows, CurrentRightRows),
-		(   number(CurrentReduction), number(BestReduction0), CurrentReduction > BestReduction0 ->
+		(	number(CurrentReduction), number(BestReduction0), CurrentReduction > BestReduction0 ->
 			NextBestThreshold = Threshold,
 			NextBestReduction = CurrentReduction,
 			NextBestLeftRows = CurrentLeftRows,
 			NextBestRightRows = CurrentRightRows
-		;   NextBestThreshold = BestThreshold0,
+		;	NextBestThreshold = BestThreshold0,
 			NextBestReduction = BestReduction0,
 			NextBestLeftRows = BestLeftRows0,
 			NextBestRightRows = BestRightRows0
@@ -237,9 +237,9 @@
 		length(LeftRows, LeftCount),
 		length(RightRows, RightCount),
 		^^option(minimum_samples_leaf(MinimumSamplesLeaf), Options),
-		(   (LeftCount < MinimumSamplesLeaf ; RightCount < MinimumSamplesLeaf) ->
+		(	(LeftCount < MinimumSamplesLeaf ; RightCount < MinimumSamplesLeaf) ->
 			Reduction = 0.0
-		;   target_sse(LeftRows, LeftSSE),
+		;	target_sse(LeftRows, LeftSSE),
 			target_sse(RightRows, RightSSE),
 			Reduction is ParentSSE - LeftSSE - RightSSE
 		), !.
@@ -247,10 +247,10 @@
 	split_rows([], _Index, _Threshold, [], []).
 	split_rows([Features-Target| Rows], Index, Threshold, LeftRows, RightRows) :-
 		nth1(Index, Features, Value),
-		(   Value =< Threshold ->
+		(	Value =< Threshold ->
 			LeftRows = [Features-Target| LeftRest],
 			split_rows(Rows, Index, Threshold, LeftRest, RightRows)
-		;   LeftRows = LeftRest,
+		;	LeftRows = LeftRest,
 			RightRows = [Features-Target| RightRest],
 			split_rows(Rows, Index, Threshold, LeftRows, RightRest)
 		).
@@ -277,12 +277,12 @@
 
 	predict_tree(leaf(Target), _Features, Target).
 	predict_tree(node(Index, Threshold, Fallback, LeftTree, RightTree), Features, Target) :-
-		(   nth1(Index, Features, Value) ->
-			(   Value =< Threshold ->
+		(	nth1(Index, Features, Value) ->
+			(	Value =< Threshold ->
 				predict_tree(LeftTree, Features, Target)
-			;   predict_tree(RightTree, Features, Target)
+			;	predict_tree(RightTree, Features, Target)
 			)
-		;   Target = Fallback
+		;	Target = Fallback
 		).
 
 	regressor_export_template(_Dataset, _Regressor, Functor, Template) :-
@@ -291,7 +291,7 @@
 	regressor_term_template(regression_tree_regressor(_Encoders, _FeatureLabels, _Tree, _Diagnostics), regression_tree_regressor('Encoders', 'FeatureLabels', 'Tree', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics),
+		(	Regressor = regression_tree_regressor(Encoders, FeatureLabels, Tree, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			^^valid_feature_labels(FeatureLabels),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -300,7 +300,7 @@
 			^^valid_regressor_metadata(regression_tree, Diagnostics),
 			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
@@ -329,9 +329,9 @@
 		print_tree(RightTree, FeatureLabels, NextIndent).
 
 	print_indent(Indent) :-
-		(   Indent =< 0 ->
+		(	Indent =< 0 ->
 			true
-		;   format('~*|', [Indent])
+		;	format('~*|', [Indent])
 		).
 
 	default_option(maximum_depth(10)).
@@ -347,9 +347,9 @@
 	valid_option(minimum_variance_reduction(MinimumVarianceReduction)) :-
 		valid(non_negative_float, MinimumVarianceReduction).
 	valid_option(maximum_features_per_split(MaximumFeaturesPerSplit)) :-
-		(   MaximumFeaturesPerSplit == all ->
+		(	MaximumFeaturesPerSplit == all ->
 			true
-		;   valid(positive_integer, MaximumFeaturesPerSplit)
+		;	valid(positive_integer, MaximumFeaturesPerSplit)
 		).
 	valid_option(feature_scaling(FeatureScaling)) :-
 		valid(boolean, FeatureScaling).

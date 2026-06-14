@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-10
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -82,7 +82,7 @@ Closes a listener previously opened with open_listener/4.
 ``request_listener_shutdown/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Best-effort wakeup request for a listener accept loop opened with open_listener/4. This predicate does not close the listener but causes a blocked accept call to return portably when possible.
+Best-effort wakeup request for a listener accept loop opened with ``open_listener/4``. This predicate does not close the listener but causes a blocked accept call to return portably when possible.
 
 | **Compilation flags:**
 |    ``static``
@@ -139,7 +139,7 @@ Closes a reusable client connection previously opened with open_connection/4.
 ``connection_streams/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by serve_websocket_once/5.
+Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by ``serve_websocket_once/5``.
 
 | **Compilation flags:**
 |    ``static``
@@ -170,9 +170,9 @@ Opens a managed reusable connection pool for the given host and port.
 
 | **Remarks:**
 
-    - Option ``min_size(N)``: Pre-open N reusable client connections when creating the pool. The default is 0.
-    - Option ``max_size(N)``: Allow at most N managed client connections in the pool. The default is 10.
-    - Option ``connection_options(Options)``: Socket options passed to open_connection/4 when creating pooled connections. The default is [].
+    - Option ``min_size(N)``: Pre-open N reusable client connections when creating the pool. The default is ``0``.
+    - Option ``max_size(N)``: Allow at most N managed client connections in the pool. The default is ``10``.
+    - Option ``connection_options(Options)``: Socket options passed to ``open_connection/4`` when creating pooled connections. The default is ``[]``.
 
 
 ------------
@@ -335,7 +335,7 @@ Accepts one incoming socket connection on the given listener, serves exactly one
 ``serve_listener/4``
 ^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.
+Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before Count connections are accepted.
 
 | **Compilation flags:**
 |    ``static``
@@ -354,7 +354,7 @@ Accepts and serves Count incoming connections on the given listener, returning t
 ``serve_listener/5``
 ^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves Count incoming connections on the given listener using the specified shutdown and worker options. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.
+Accepts and serves ``Count`` incoming connections on the given listener using the specified shutdown and worker options. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before ``Count`` connections are accepted.
 
 | **Compilation flags:**
 |    ``static``
@@ -370,8 +370,8 @@ Accepts and serves Count incoming connections on the given listener using the sp
     - Option ``shutdown(close)``: Close the listener when serving completes or aborts.
     - Option ``workers(serial)``: Serve accepted connections sequentially in the caller thread. This is the default.
     - Option ``workers(per_connection)``: Spawn one worker thread per accepted connection and wait for all workers before returning. Requires backend thread support.
-    - Option ``workers(pool(Size))``: Serve accepted connections in batches of up to Size worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.
-    - Option ``workers(pool(Size, rolling))``: Serve accepted connections using at most Size concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.
+    - Option ``workers(pool(Size))``: Serve accepted connections in batches of up to ``Size`` worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.
+    - Option ``workers(pool(Size, rolling))``: Serve accepted connections using at most ``Size`` concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.
 
 
 ------------
@@ -382,7 +382,7 @@ Accepts and serves Count incoming connections on the given listener using the sp
 ``serve_until_shutdown/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, then closes the listener before returning.
+Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, then closes the listener before returning.
 
 | **Compilation flags:**
 |    ``static``
@@ -410,7 +410,7 @@ Accepts and serves incoming connections on the given listener until request_shut
 ``serve_until_shutdown/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.
+Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.
 
 | **Compilation flags:**
 |    ``static``
@@ -426,7 +426,7 @@ Accepts and serves incoming connections on the given listener until request_shut
 
     - Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.
     - Ready goal: Called once after the shutdown control is registered and before the serving loop starts accepting connections.
-    - Options: Supports the same worker options as serve_until_shutdown/4.
+    - Options: Supports the same worker options as ``serve_until_shutdown/4``.
 
 
 ------------
@@ -437,7 +437,7 @@ Accepts and serves incoming connections on the given listener until request_shut
 ``request_shutdown/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 or serve_until_shutdown/5 for the specified control term and wakes any blocked accept call so the loop can terminate portably.
+Requests shutdown of an open-ended serving loop started with ``serve_until_shutdown/4`` or ``serve_until_shutdown/5`` for the specified control term and wakes any blocked accept call so the loop can terminate portably.
 
 | **Compilation flags:**
 |    ``static``

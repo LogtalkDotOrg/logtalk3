@@ -38,51 +38,51 @@
 
 	:- multifile(type::check/2).
 	type::check(ccsds_cuc(CoarseOctets, FineOctets, Epoch), Term) :-
-		(   valid_ccsds_cuc_bytes(Term, CoarseOctets, FineOctets, Epoch) ->
+		(	valid_ccsds_cuc_bytes(Term, CoarseOctets, FineOctets, Epoch) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_cuc(CoarseOctets, FineOctets, Epoch), Term))
+		;	throw(type_error(ccsds_cuc(CoarseOctets, FineOctets, Epoch), Term))
 		).
 
 	type::check(ccsds_cuc_time(CoarseOctets, FineOctets), Term) :-
-		(   ccsds_cuc(CoarseOctets, FineOctets, ccsds_epoch)::valid(Term) ->
+		(	ccsds_cuc(CoarseOctets, FineOctets, ccsds_epoch)::valid(Term) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_cuc_time(CoarseOctets, FineOctets), Term))
+		;	throw(type_error(ccsds_cuc_time(CoarseOctets, FineOctets), Term))
 		).
 
 	type::check(ccsds_cds(DaySegmentOctets, SubmillisecondOctets, Epoch), Term) :-
-		(   valid_ccsds_cds_bytes(Term, DaySegmentOctets, SubmillisecondOctets, Epoch) ->
+		(	valid_ccsds_cds_bytes(Term, DaySegmentOctets, SubmillisecondOctets, Epoch) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_cds(DaySegmentOctets, SubmillisecondOctets, Epoch), Term))
+		;	throw(type_error(ccsds_cds(DaySegmentOctets, SubmillisecondOctets, Epoch), Term))
 		).
 
 	type::check(ccsds_cds_time(DaySegmentOctets, SubmillisecondOctets), Term) :-
-		(   ccsds_cds(DaySegmentOctets, SubmillisecondOctets, ccsds_epoch)::valid(Term) ->
+		(	ccsds_cds(DaySegmentOctets, SubmillisecondOctets, ccsds_epoch)::valid(Term) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_cds_time(DaySegmentOctets, SubmillisecondOctets), Term))
+		;	throw(type_error(ccsds_cds_time(DaySegmentOctets, SubmillisecondOctets), Term))
 		).
 
 	type::check(ccsds_ccs(CalendarVariant, FractionOctets), Term) :-
-		(   valid_ccsds_ccs_bytes(Term, CalendarVariant, FractionOctets) ->
+		(	valid_ccsds_ccs_bytes(Term, CalendarVariant, FractionOctets) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_ccs(CalendarVariant, FractionOctets), Term))
+		;	throw(type_error(ccsds_ccs(CalendarVariant, FractionOctets), Term))
 		).
 
 	type::check(ccsds_ccs_time(CalendarVariant, FractionOctets), Term) :-
-		(   ccsds_ccs(CalendarVariant, FractionOctets)::valid(Term) ->
+		(	ccsds_ccs(CalendarVariant, FractionOctets)::valid(Term) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_ccs_time(CalendarVariant, FractionOctets), Term))
+		;	throw(type_error(ccsds_ccs_time(CalendarVariant, FractionOctets), Term))
 		).
 
 	valid_ccsds_cuc_bytes(Bytes, CoarseOctets, FineOctets, Epoch) :-

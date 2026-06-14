@@ -75,9 +75,9 @@
 
 	check_minimum_examples(Examples) :-
 		length(Examples, Count),
-		(   Count >= 2 ->
+		(	Count >= 2 ->
 			true
-		;   domain_error(minimum_number_of_examples, Count)
+		;	domain_error(minimum_number_of_examples, Count)
 		).
 
 	example_attribute_values(_-AttributeValues, AttributeValues).

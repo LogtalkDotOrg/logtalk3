@@ -147,13 +147,13 @@
 	process_blocks([], Acc, V0, V1, V2, V3, V0, V1, V2, V3, Acc).
 	process_blocks([Byte| Bytes], Acc0, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
 		list::append(Acc0, [Byte], Acc1),
-		(   Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
+		(	Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
 			little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], M),
 			xor64(V3, M, V3_0),
 			sip_rounds(2, V0, V1, V2, V3_0, V0_1, V1_1, V2_1, V3_1),
 			xor64(V0_1, M, V0_2),
 			process_blocks(Bytes, [], V0_2, V1_1, V2_1, V3_1, FV0, FV1, FV2, FV3, Last)
-		;   process_blocks(Bytes, Acc1, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last)
+		;	process_blocks(Bytes, Acc1, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last)
 		).
 
 	last_word(Bytes, Acc, Word) :-
@@ -515,11 +515,11 @@
 		keccak_f1600(State2, State).
 
 	absorb_full_blocks(Bytes, State0, State, Tail) :-
-		(   take_exact_prefix(_RateBytes_, Bytes, Block, Rest) ->
+		(	take_exact_prefix(_RateBytes_, Bytes, Block, Rest) ->
 			xor_block(Block, State0, State1),
 			keccak_f1600(State1, State2),
 			absorb_full_blocks(Rest, State2, State, Tail)
-		;   State = State0,
+		;	State = State0,
 			Tail = Bytes
 		).
 
@@ -533,9 +533,9 @@
 	squeeze(_, 0, []) :-
 		!.
 	squeeze(State, OutputBytes, DigestBytes) :-
-		(   OutputBytes =< _RateBytes_ ->
+		(	OutputBytes =< _RateBytes_ ->
 			state_prefix_bytes(State, OutputBytes, DigestBytes)
-		;   state_prefix_bytes(State, _RateBytes_, BlockBytes),
+		;	state_prefix_bytes(State, _RateBytes_, BlockBytes),
 			Remaining is OutputBytes - _RateBytes_,
 			keccak_f1600(State, NextState),
 			list::append(BlockBytes, RestBytes, DigestBytes),
@@ -927,16 +927,16 @@
 		sha1_rounds(NextI, W, T, A0, C1, C0, D0, A, B, C, D, E).
 
 	sha1_f_k(I, B, C, D, F, K) :-
-		(   I < 20 ->
+		(	I < 20 ->
 			F is ((B /\ C) \/ ((\ B) /\ D)) /\ 0xFFFFFFFF,
 			K = 0x5A827999
-		;   I < 40 ->
+		;	I < 40 ->
 			F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
 			K = 0x6ED9EBA1
-		;   I < 60 ->
+		;	I < 60 ->
 			F is ((B /\ C) \/ (B /\ D) \/ (C /\ D)) /\ 0xFFFFFFFF,
 			K = 0x8F1BBCDC
-		;   F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
+		;	F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
 			K = 0xCA62C1D6
 		).
 

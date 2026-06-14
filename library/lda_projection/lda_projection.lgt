@@ -92,9 +92,9 @@
 
 	check_class_values(ClassValues) :-
 		length(ClassValues, ClassCount),
-		(   ClassCount >= 2 ->
+		(	ClassCount >= 2 ->
 			true
-		;   domain_error(minimum_number_of_classes(2), ClassValues)
+		;	domain_error(minimum_number_of_classes(2), ClassValues)
 		).
 
 	check_examples(Dataset, AttributeNames, ClassValues, Examples) :-
@@ -108,9 +108,9 @@
 		check_example_values(Examples, AttributeNames, ClassValues).
 
 	check_example_class(Class, ClassValues) :-
-		(   member(Class, ClassValues) ->
+		(	member(Class, ClassValues) ->
 			true
-		;   domain_error(class_value, Class)
+		;	domain_error(class_value, Class)
 		).
 
 	example_attribute_values(_-_-AttributeValues, AttributeValues).
@@ -128,9 +128,9 @@
 	class_statistics([Class| Classes], Rows, [class_statistics(Class, Count, Mean, ClassRows)| Statistics]) :-
 		collect_class_rows(Rows, Class, ClassRows),
 		length(ClassRows, Count),
-		(   Count > 0 ->
+		(	Count > 0 ->
 			matrix_column_means(ClassRows, Mean)
-		;   domain_error(non_empty_class, Class)
+		;	domain_error(non_empty_class, Class)
 		),
 		class_statistics(Classes, Rows, Statistics).
 
@@ -194,11 +194,11 @@
 	cholesky_row(Column, RowIndex, Size, Matrix, LowerTriangular, Prefix, Row) :-
 		nth1(RowIndex, Matrix, MatrixRow),
 		nth1(Column, MatrixRow, MatrixValue),
-		(   Column =:= RowIndex ->
+		(	Column =:= RowIndex ->
 			sum_squares(Prefix, 0.0, SumSquares),
 			DiagonalValue is max(MatrixValue - SumSquares, 1.0e-12),
 			Value is sqrt(DiagonalValue)
-		;   nth1(Column, LowerTriangular, PreviousRow),
+		;	nth1(Column, LowerTriangular, PreviousRow),
 			PrefixCount is Column - 1,
 			prefix_dot(Prefix, PreviousRow, PrefixCount, 0.0, DotProduct),
 			nth1(Column, PreviousRow, Diagonal),

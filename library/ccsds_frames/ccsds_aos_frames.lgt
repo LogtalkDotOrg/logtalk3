@@ -131,11 +131,11 @@
 		Frame == UpdatedFrame.
 
 	update_fecf(Frame, UpdatedFrame) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   refresh_fecf(Frame, UpdatedFrame) ->
+		;	refresh_fecf(Frame, UpdatedFrame) ->
 			true
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 
 	verify_fecf(Frame) :-
@@ -159,10 +159,10 @@
 
 	refresh_fecf(Frame, UpdatedFrame) :-
 		frame_template(Frame),
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			compute_fecf(Frame, FECF),
 			replace_fecf(Frame, FECF, UpdatedFrame)
-		;   UpdatedFrame = Frame
+		;	UpdatedFrame = Frame
 		).
 
 	frame_type(aos_transfer_frame(_, _, _, _, _, _, _, _, _), aos).
@@ -186,11 +186,11 @@
 	fecf(aos_transfer_frame(_, _, _, _, _, _, _, _, FECF), FECF).
 
 	parse_bytes(Bytes, Frames) :-
-		(   valid_parameters,
+		(	valid_parameters,
 			valid(list(byte), Bytes),
 			parse_all(Bytes, Frames) ->
 			true
-		;   domain_error(ccsds_frame_byte_sequence, Bytes)
+		;	domain_error(ccsds_frame_byte_sequence, Bytes)
 		).
 
 	parse_all([], []).
@@ -210,9 +210,9 @@
 		ReplayFlag is (Byte5 >> 7) /\ 0x01,
 		FrameCountUsageFlag is (Byte5 >> 6) /\ 0x01,
 		FrameCountCycle is Byte5 /\ 0x0F,
-		(   FrameCountUsageFlag =:= 1 ->
+		(	FrameCountUsageFlag =:= 1 ->
 			VirtualChannelFrameCount is (FrameCountCycle << 24) \/ BaseFrameCount
-		;   VirtualChannelFrameCount = BaseFrameCount
+		;	VirtualChannelFrameCount = BaseFrameCount
 		),
 		SignalingField = signaling_field(ReplayFlag, FrameCountUsageFlag, SpacecraftIdExtension, FrameCountCycle),
 		ocf_length(OCFLen),
@@ -242,45 +242,45 @@
 		append_optional_ocf(OCF, Rest2, Tail).
 
 	generate_all_stream([Frame| Frames], Stream) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   generate(Frame, Bytes, []) ->
+		;	generate(Frame, Bytes, []) ->
 			write_bytes(Bytes, Stream),
 			generate_all_stream(Frames, Stream)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 	generate_all_stream([], _).
 
 	generate_all_bytes([Frame| Frames], Bytes) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   generate(Frame, Bytes, Tail) ->
+		;	generate(Frame, Bytes, Tail) ->
 			generate_all_bytes(Frames, Tail)
-		;   domain_error(ccsds_frame_term, Frame)
+		;	domain_error(ccsds_frame_term, Frame)
 		).
 	generate_all_bytes([], []).
 
 	take_optional_insert_zone(Bytes, Rest, InsertZone) :-
-		(   _InsertZoneLength_ =:= 0 ->
+		(	_InsertZoneLength_ =:= 0 ->
 			Rest = Bytes,
 			InsertZone = none
-		;   take(_InsertZoneLength_, Bytes, InsertZoneBytes, Rest),
+		;	take(_InsertZoneLength_, Bytes, InsertZoneBytes, Rest),
 			InsertZone = insert_zone(InsertZoneBytes)
 		).
 
 	take_optional_ocf(Bytes, Rest, OCF) :-
-		(   _HasOCF_ == true ->
+		(	_HasOCF_ == true ->
 			take(4, Bytes, OCFBytes, Rest),
 			OCF = ocf(OCFBytes)
-		;   Rest = Bytes,
+		;	Rest = Bytes,
 			OCF = none
 		).
 
 	take_optional_fecf(Bytes, Rest, FECF) :-
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			take(2, Bytes, FECFBytes, Rest),
 			FECF = fecf(FECFBytes)
-		;   Rest = Bytes,
+		;	Rest = Bytes,
 			FECF = none
 		).
 
@@ -289,18 +289,18 @@
 		append(InsertZoneBytes, Rest, Bytes).
 
 	append_optional_ocf(OCF, Bytes, Rest) :-
-		(   _HasOCF_ == true ->
+		(	_HasOCF_ == true ->
 			OCF = ocf(OCFBytes),
 			append(OCFBytes, Rest, Bytes)
-		;   OCF = none,
+		;	OCF = none,
 			Rest = Bytes
 		).
 
 	append_optional_fecf(FECF, Bytes, Rest) :-
-		(   _HasFECF_ == true ->
+		(	_HasFECF_ == true ->
 			FECF = fecf(FECFBytes),
 			append(FECFBytes, Rest, Bytes)
-		;   FECF = none,
+		;	FECF = none,
 			Rest = Bytes
 		).
 
@@ -334,9 +334,9 @@
 		valid(between(integer, 0, 3), SpacecraftIdExtension),
 		valid(between(integer, 0, 15), FrameCountCycle),
 		SpacecraftIdExtension =:= (SpacecraftId >> 8),
-		(   FrameCountUsageFlag =:= 1 ->
+		(	FrameCountUsageFlag =:= 1 ->
 			FrameCountCycle =:= ((VirtualChannelFrameCount >> 24) /\ 0x0F)
-		;   VirtualChannelFrameCount =< 16777215
+		;	VirtualChannelFrameCount =< 16777215
 		).
 
 	valid_insert_zone(none) :-
@@ -384,9 +384,9 @@
 		!.
 	compute_fecf_crc_bits(Bit, CRC0, CRC) :-
 		Bit > 0,
-		(   CRC0 /\ 0x8000 =:= 0 ->
+		(	CRC0 /\ 0x8000 =:= 0 ->
 			CRC1 is (CRC0 << 1) /\ 0xFFFF
-		;   CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
+		;	CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
 		),
 		NextBit is Bit - 1,
 		compute_fecf_crc_bits(NextBit, CRC1, CRC).

@@ -68,17 +68,17 @@
 		integer_to_representation(_Representation_, IntegerID, ID).
 
 	check_representation(Context) :-
-		(   var(_Representation_) ->
+		(	var(_Representation_) ->
 			throw(error(instantiation_error, Context))
-		;   _Representation_ == integer ->
+		;	_Representation_ == integer ->
 			true
-		;   _Representation_ == atom ->
+		;	_Representation_ == atom ->
 			true
-		;   _Representation_ == chars ->
+		;	_Representation_ == chars ->
 			true
-		;   _Representation_ == codes ->
+		;	_Representation_ == codes ->
 			true
-		;   throw(error(domain_error(snowflakeid_representation, _Representation_), Context))
+		;	throw(error(domain_error(snowflakeid_representation, _Representation_), Context))
 		).
 
 	check_configuration(Context) :-
@@ -88,25 +88,25 @@
 		check_node(Context).
 
 	check_epoch(Context) :-
-		(   var(_EpochMilliseconds_) ->
+		(	var(_EpochMilliseconds_) ->
 			throw(error(instantiation_error, Context))
-		;   integer(_EpochMilliseconds_) ->
-			(   _EpochMilliseconds_ >= 0 ->
+		;	integer(_EpochMilliseconds_) ->
+			(	_EpochMilliseconds_ >= 0 ->
 				true
-			;   throw(error(domain_error(not_less_than_zero, _EpochMilliseconds_), Context))
+			;	throw(error(domain_error(not_less_than_zero, _EpochMilliseconds_), Context))
 			)
-		;   throw(error(type_error(integer, _EpochMilliseconds_), Context))
+		;	throw(error(type_error(integer, _EpochMilliseconds_), Context))
 		).
 
 	check_time_unit(Context) :-
-		(   var(_TimeUnitMilliseconds_) ->
+		(	var(_TimeUnitMilliseconds_) ->
 			throw(error(instantiation_error, Context))
-		;   integer(_TimeUnitMilliseconds_) ->
-			(   _TimeUnitMilliseconds_ > 0 ->
+		;	integer(_TimeUnitMilliseconds_) ->
+			(	_TimeUnitMilliseconds_ > 0 ->
 				true
-			;   throw(error(domain_error(not_less_than_one, _TimeUnitMilliseconds_), Context))
+			;	throw(error(domain_error(not_less_than_one, _TimeUnitMilliseconds_), Context))
 			)
-		;   throw(error(type_error(integer, _TimeUnitMilliseconds_), Context))
+		;	throw(error(type_error(integer, _TimeUnitMilliseconds_), Context))
 		).
 
 	check_bits(Context) :-
@@ -114,52 +114,52 @@
 		check_bit_size(Context, _NodeBits_),
 		check_bit_size(Context, _SequenceBits_),
 		TotalBits is _TimestampBits_ + _NodeBits_ + _SequenceBits_,
-		(   TotalBits =< 64 ->
+		(	TotalBits =< 64 ->
 			true
-		;   throw(error(domain_error(snowflakeid_layout, layout(_TimestampBits_, _NodeBits_, _SequenceBits_)), Context))
+		;	throw(error(domain_error(snowflakeid_layout, layout(_TimestampBits_, _NodeBits_, _SequenceBits_)), Context))
 		).
 
 	check_bit_size(Context, Bits) :-
-		(   var(Bits) ->
+		(	var(Bits) ->
 			throw(error(instantiation_error, Context))
-		;   integer(Bits) ->
-			(   Bits > 0 ->
+		;	integer(Bits) ->
+			(	Bits > 0 ->
 				true
-			;   throw(error(domain_error(not_less_than_one, Bits), Context))
+			;	throw(error(domain_error(not_less_than_one, Bits), Context))
 			)
-		;   throw(error(type_error(integer, Bits), Context))
+		;	throw(error(type_error(integer, Bits), Context))
 		).
 
 	check_node(Context) :-
-		(   var(_Node_) ->
+		(	var(_Node_) ->
 			throw(error(instantiation_error, Context))
-		;   integer(_Node_) ->
+		;	integer(_Node_) ->
 			MaxNode is (1 << _NodeBits_) - 1,
-			(   _Node_ >= 0, _Node_ =< MaxNode ->
+			(	_Node_ >= 0, _Node_ =< MaxNode ->
 				true
-			;   throw(error(domain_error(snowflakeid_node, _Node_), Context))
+			;	throw(error(domain_error(snowflakeid_node, _Node_), Context))
 			)
-		;   throw(error(type_error(integer, _Node_), Context))
+		;	throw(error(type_error(integer, _Node_), Context))
 		).
 
 	current_time_unit(Context, TimeUnit) :-
 		current_timestamp_milliseconds(CurrentTimestamp),
 		DeltaMilliseconds is CurrentTimestamp - _EpochMilliseconds_,
-		(   DeltaMilliseconds >= 0 ->
+		(	DeltaMilliseconds >= 0 ->
 			TimeUnit is DeltaMilliseconds // _TimeUnitMilliseconds_,
 			MaxTimestamp is (1 << _TimestampBits_) - 1,
-			(   TimeUnit =< MaxTimestamp ->
+			(	TimeUnit =< MaxTimestamp ->
 				true
-			;   throw(error(domain_error(snowflakeid_timestamp, TimeUnit), Context))
+			;	throw(error(domain_error(snowflakeid_timestamp, TimeUnit), Context))
 			)
-		;   throw(error(domain_error(snowflakeid_epoch, _EpochMilliseconds_), Context))
+		;	throw(error(domain_error(snowflakeid_epoch, _EpochMilliseconds_), Context))
 		).
 
 	next_time_sequence(Context, CurrentTime, Time, Sequence) :-
 		MaxSequence is (1 << _SequenceBits_) - 1,
-		(   ::retract(last_time_sequence_(LastTime, LastSequence)) ->
+		(	::retract(last_time_sequence_(LastTime, LastSequence)) ->
 			true
-		;   LastTime = -1,
+		;	LastTime = -1,
 			LastSequence = -1
 		),
 		next_time_sequence(Context, CurrentTime, LastTime, LastSequence, MaxSequence, Time, Sequence),
@@ -174,19 +174,19 @@
 		CurrentTime =:= LastTime,
 		!,
 		NextSequence is LastSequence + 1,
-		(   NextSequence =< MaxSequence ->
+		(	NextSequence =< MaxSequence ->
 			Time = CurrentTime,
 			Sequence = NextSequence
-		;   wait_next_time_unit(_Context, LastTime, Time),
+		;	wait_next_time_unit(_Context, LastTime, Time),
 			Sequence = 0
 		).
 	next_time_sequence(_Context, CurrentTime, _LastTime, _LastSequence, _MaxSequence, CurrentTime, 0).
 
 	wait_next_time_unit(Context, LastTime, Time) :-
 		current_time_unit(Context, CurrentTime),
-		(   CurrentTime > LastTime ->
+		(	CurrentTime > LastTime ->
 			Time = CurrentTime
-		;   sleep(0.001),
+		;	sleep(0.001),
 			wait_next_time_unit(Context, LastTime, Time)
 		).
 

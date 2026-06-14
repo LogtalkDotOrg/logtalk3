@@ -135,35 +135,35 @@
 	epoch(_Epoch_).
 
 	unix_seconds(TimeCode, Seconds) :-
-		(   var(TimeCode) ->
+		(	var(TimeCode) ->
 			instantiation_error
-		;   valid(TimeCode) ->
+		;	valid(TimeCode) ->
 			epoch_offset(_Epoch_, Offset),
 			TimeCode =.. [_Functor, Days, Milliseconds| Rest],
 			Seconds0 is Days * 86400 + Milliseconds / 1000,
-			(   Rest = [Submilliseconds] ->
+			(	Rest = [Submilliseconds] ->
 				submillisecond_scale(_SubmillisecondOctets_, Scale),
 				Seconds is Offset + Seconds0 + Submilliseconds / Scale
-			;   Seconds is Offset + Seconds0
+			;	Seconds is Offset + Seconds0
 			)
-		;   domain_error(ccsds_time_code_term, TimeCode)
+		;	domain_error(ccsds_time_code_term, TimeCode)
 		).
 
 	from_unix_seconds(Seconds, TimeCode) :-
-		(   var(Seconds) ->
+		(	var(Seconds) ->
 			instantiation_error
-		;   number(Seconds) ->
+		;	number(Seconds) ->
 			epoch_offset(_Epoch_, Offset),
 			Adjusted is Seconds - Offset,
-			(   Adjusted < 0 ->
+			(	Adjusted < 0 ->
 				domain_error(ccsds_time_code_unix_seconds, Seconds)
-			;   convert_unix_seconds(Adjusted, TimeCode),
-				(   valid(TimeCode) ->
+			;	convert_unix_seconds(Adjusted, TimeCode),
+				(	valid(TimeCode) ->
 					true
-				;   domain_error(ccsds_time_code_unix_seconds, Seconds)
+				;	domain_error(ccsds_time_code_unix_seconds, Seconds)
 				)
 			)
-		;   domain_error(ccsds_time_code_unix_seconds, Seconds)
+		;	domain_error(ccsds_time_code_unix_seconds, Seconds)
 		).
 
 	days(cds_time(Days, _), Days).
@@ -176,9 +176,9 @@
 
 	parse_bytes(Bytes, TimeCode) :-
 		expected_length(ExpectedLength),
-		(   valid(list(byte, ExpectedLength), Bytes) ->
+		(	valid(list(byte, ExpectedLength), Bytes) ->
 			decode_time(Bytes, TimeCode)
-		;   domain_error(ccsds_time_code_byte_sequence, Bytes)
+		;	domain_error(ccsds_time_code_byte_sequence, Bytes)
 		).
 
 	expected_length(ExpectedLength) :-

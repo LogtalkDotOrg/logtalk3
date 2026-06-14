@@ -248,9 +248,9 @@
 
 	subfactorial_loop(I, N, Previous2, Previous1, Subfactorial) :-
 		Current is (I - 1) * (Previous1 + Previous2),
-		(   I =:= N ->
+		(	I =:= N ->
 			Subfactorial = Current
-		;   I1 is I + 1,
+		;	I1 is I + 1,
 			subfactorial_loop(I1, N, Previous1, Current, Subfactorial)
 		).
 
@@ -303,9 +303,9 @@
 
 	partition_number_loop(Current, N, PreviousPartitions, PartitionNumber) :-
 		partition_number_value(Current, PreviousPartitions, CurrentPartition),
-		(   Current =:= N ->
+		(	Current =:= N ->
 			PartitionNumber = CurrentPartition
-		;   Current1 is Current + 1,
+		;	Current1 is Current + 1,
 			append_partition_number(PreviousPartitions, CurrentPartition, Partitions),
 			partition_number_loop(Current1, N, Partitions, PartitionNumber)
 		).
@@ -324,11 +324,11 @@
 		partition_number_sign(K, Sign),
 		PartitionNumber1 is PartitionNumber0 + Sign * Value1,
 		Pentagonal2 is K * (3 * K + 1) // 2,
-		(   Pentagonal2 =< Current ->
+		(	Pentagonal2 =< Current ->
 			Index2 is Current - Pentagonal2,
 			nth0(Index2, Partitions, Value2),
 			PartitionNumber2 is PartitionNumber1 + Sign * Value2
-		;   PartitionNumber2 = PartitionNumber1
+		;	PartitionNumber2 = PartitionNumber1
 		),
 		K1 is K + 1,
 		partition_number_terms(K1, Current, Partitions, PartitionNumber2, PartitionNumber).

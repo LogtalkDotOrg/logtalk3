@@ -70,9 +70,9 @@
 		current_level_patterns(CurrentPatterns, CurrentLevelPatterns),
 		candidate_patterns(CurrentLevelPatterns, MaximumPatternLength, Candidates),
 		frequent_candidate_patterns(Candidates, CurrentLevelPatterns, Sequences, SupportCount, FrequentNextPatterns),
-		(   FrequentNextPatterns == [] ->
+		(	FrequentNextPatterns == [] ->
 			Patterns = CurrentPatterns
-		;   append(CurrentPatterns, LaterPatterns, Patterns),
+		;	append(CurrentPatterns, LaterPatterns, Patterns),
 			mine_levels(FrequentNextPatterns, Sequences, SupportCount, MaximumPatternLength, LaterPatterns)
 		).
 
@@ -124,18 +124,18 @@
 		index_candidate_extensions(Patterns, JoinIndex1, JoinIndex).
 
 	index_candidate_extension(JoinPrefix, Extension, JoinIndex0, JoinIndex) :-
-		(   dictionary_lookup(JoinPrefix, Extensions0, JoinIndex0) ->
+		(	dictionary_lookup(JoinPrefix, Extensions0, JoinIndex0) ->
 			Extensions = [Extension| Extensions0]
-		;   Extensions = [Extension]
+		;	Extensions = [Extension]
 		),
 		dictionary_insert(JoinIndex0, JoinPrefix, Extensions, JoinIndex).
 
 	generate_indexed_candidate_patterns([], _JoinIndex, _MaximumPatternLength, Candidates, Candidates).
 	generate_indexed_candidate_patterns([LeftPattern| LeftPatterns], JoinIndex, MaximumPatternLength, Candidates0, Candidates) :-
 		remove_first_item(LeftPattern, JoinSuffix),
-		(   dictionary_lookup(JoinSuffix, Extensions, JoinIndex) ->
+		(	dictionary_lookup(JoinSuffix, Extensions, JoinIndex) ->
 			generate_extension_candidates(Extensions, LeftPattern, MaximumPatternLength, Candidates0, Candidates1)
-		;   Candidates1 = Candidates0
+		;	Candidates1 = Candidates0
 		),
 		generate_indexed_candidate_patterns(LeftPatterns, JoinIndex, MaximumPatternLength, Candidates1, Candidates).
 
@@ -143,9 +143,9 @@
 	generate_extension_candidates([Extension| Extensions], LeftPattern, MaximumPatternLength, Candidates0, Candidates) :-
 		apply_extension(Extension, LeftPattern, Candidate),
 		^^pattern_length(Candidate, PatternLength),
-		(   PatternLength =< MaximumPatternLength ->
+		(	PatternLength =< MaximumPatternLength ->
 			Candidates1 = [Candidate| Candidates0]
-		;   Candidates1 = Candidates0
+		;	Candidates1 = Candidates0
 		),
 		generate_extension_candidates(Extensions, LeftPattern, MaximumPatternLength, Candidates1, Candidates).
 
@@ -192,9 +192,9 @@
 	prune_candidates([], _CurrentLevelPatternIndex, []).
 	prune_candidates([Candidate| Candidates], CurrentLevelPatternIndex, PrunedCandidates) :-
 		candidate_subpatterns(Candidate, CandidateSubpatterns),
-		(   all_subpatterns_frequent(CandidateSubpatterns, CurrentLevelPatternIndex) ->
+		(	all_subpatterns_frequent(CandidateSubpatterns, CurrentLevelPatternIndex) ->
 			PrunedCandidates = [Candidate| RestPrunedCandidates]
-		;   PrunedCandidates = RestPrunedCandidates
+		;	PrunedCandidates = RestPrunedCandidates
 		),
 		prune_candidates(Candidates, CurrentLevelPatternIndex, RestPrunedCandidates).
 
@@ -205,9 +205,9 @@
 	immediate_subpattern(Pattern, Subpattern) :-
 		append(Prefix, [Itemset| Suffix], Pattern),
 		append(ItemsBefore, [_| ItemsAfter], Itemset),
-		(   ItemsBefore == [], ItemsAfter == [] ->
+		(	ItemsBefore == [], ItemsAfter == [] ->
 			append(Prefix, Suffix, Subpattern)
-		;   append(ItemsBefore, ItemsAfter, ReducedItemset),
+		;	append(ItemsBefore, ItemsAfter, ReducedItemset),
 			append(Prefix, [ReducedItemset| Suffix], Subpattern)
 		).
 
@@ -237,18 +237,18 @@
 		increment_items_dictionary(Items, ItemCounts1, ItemCounts).
 
 	increment_dictionary_count(Key, Dictionary0, Dictionary) :-
-		(   dictionary_lookup(Key, Count0, Dictionary0) ->
+		(	dictionary_lookup(Key, Count0, Dictionary0) ->
 			Count is Count0 + 1
-		;   Count = 1
+		;	Count = 1
 		),
 		dictionary_insert(Dictionary0, Key, Count, Dictionary).
 
 	select_frequent_singleton_patterns([], _ItemCounts, _SupportCount, []).
 	select_frequent_singleton_patterns([Item| Items], ItemCounts, SupportCount, Patterns) :-
-		(   dictionary_lookup(Item, Support, ItemCounts),
+		(	dictionary_lookup(Item, Support, ItemCounts),
 			Support >= SupportCount ->
 			Patterns = [sequence_pattern([[Item]], Support)| RestPatterns]
-		;   Patterns = RestPatterns
+		;	Patterns = RestPatterns
 		),
 		select_frequent_singleton_patterns(Items, ItemCounts, SupportCount, RestPatterns).
 
@@ -259,18 +259,18 @@
 
 	count_sequence_candidate_supports([], _Sequence, CandidateCounts, CandidateCounts).
 	count_sequence_candidate_supports([Candidate| Candidates], Sequence, CandidateCounts0, CandidateCounts) :-
-		(   pattern_in_sequence(Candidate, Sequence) ->
+		(	pattern_in_sequence(Candidate, Sequence) ->
 			increment_dictionary_count(Candidate, CandidateCounts0, CandidateCounts1)
-		;   CandidateCounts1 = CandidateCounts0
+		;	CandidateCounts1 = CandidateCounts0
 		),
 		count_sequence_candidate_supports(Candidates, Sequence, CandidateCounts1, CandidateCounts).
 
 	select_frequent_candidate_patterns([], _CandidateCounts, _SupportCount, []).
 	select_frequent_candidate_patterns([Candidate| Candidates], CandidateCounts, SupportCount, FrequentPatterns) :-
-		(   dictionary_lookup(Candidate, Support, CandidateCounts),
+		(	dictionary_lookup(Candidate, Support, CandidateCounts),
 			Support >= SupportCount ->
 			FrequentPatterns = [sequence_pattern(Candidate, Support)| RestFrequentPatterns]
-		;   FrequentPatterns = RestFrequentPatterns
+		;	FrequentPatterns = RestFrequentPatterns
 		),
 		select_frequent_candidate_patterns(Candidates, CandidateCounts, SupportCount, RestFrequentPatterns).
 
@@ -299,7 +299,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = gsp_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = gsp_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_sequence_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(gsp_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -308,7 +308,7 @@
 			memberchk(extension_modes([itemset, sequence]), Diagnostics),
 			memberchk(support_layout(horizontal_sequences), Diagnostics) ->
 			true
-		;   domain_error(gsp_pattern_miner, PatternMiner)
+		;	domain_error(gsp_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, gsp_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

@@ -70,9 +70,9 @@
 	minimum_prototype_distance([cluster_summary(Prototype, _Radius)| Clusters], MinimumDistance) :-
 		minimum_distance_to_clusters(Prototype, Clusters, FirstMinimumDistance),
 		minimum_prototype_distance(Clusters, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_clusters(_Prototype, [], 0.0).

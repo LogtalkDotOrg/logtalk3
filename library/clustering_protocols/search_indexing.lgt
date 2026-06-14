@@ -91,9 +91,9 @@
 	build_auto_search_index([], _Options, metric_tree(empty)).
 	build_auto_search_index([Row| Rows], Options, SearchIndex) :-
 		row_count_and_dimension([Row| Rows], RowCount, Dimension),
-		(   grid_index_applicable(RowCount, Dimension) ->
+		(	grid_index_applicable(RowCount, Dimension) ->
 			build_grid_index([Row| Rows], Options, SearchIndex)
-		;   build_metric_tree([Row| Rows], Options, MetricTree),
+		;	build_metric_tree([Row| Rows], Options, MetricTree),
 			SearchIndex = metric_tree(MetricTree)
 		).
 
@@ -140,9 +140,9 @@
 	build_grid_cells([], _CellSize, Cells, Cells).
 	build_grid_cells([Position-(Id-Vector)| Rows], CellSize, Cells0, Cells) :-
 		grid_cell_coordinates(Vector, CellSize, Cell),
-		(   avltree::lookup(Cell, CellRows0, Cells0) ->
+		(	avltree::lookup(Cell, CellRows0, Cells0) ->
 			avltree::insert(Cells0, Cell, [Position-(Id-Vector)| CellRows0], Cells1)
-		;   avltree::insert(Cells0, Cell, [Position-(Id-Vector)], Cells1)
+		;	avltree::insert(Cells0, Cell, [Position-(Id-Vector)], Cells1)
 		),
 		build_grid_cells(Rows, CellSize, Cells1, Cells).
 
@@ -180,9 +180,9 @@
 
 	grid_candidate_entries([], _Cells, CandidateEntries, CandidateEntries).
 	grid_candidate_entries([NeighborCell| NeighborCells], Cells, CandidateEntries0, CandidateEntries) :-
-		(   avltree::lookup(NeighborCell, CellEntries, Cells) ->
+		(	avltree::lookup(NeighborCell, CellEntries, Cells) ->
 			append_positioned_rows(CellEntries, CandidateEntries0, CandidateEntries1)
-		;   CandidateEntries1 = CandidateEntries0
+		;	CandidateEntries1 = CandidateEntries0
 		),
 		grid_candidate_entries(NeighborCells, Cells, CandidateEntries1, CandidateEntries).
 
@@ -196,9 +196,9 @@
 	filter_grid_candidates([], _Vector, _Options, _Epsilon, Neighbors, Neighbors).
 	filter_grid_candidates([_Position-(Id-NeighborVector)| CandidateEntries], Vector, Options, Epsilon, Neighbors, Tail) :-
 		::distance(Options, Vector, NeighborVector, Distance),
-		(   Distance =< Epsilon ->
+		(	Distance =< Epsilon ->
 			Neighbors = [Id-NeighborVector| NeighborTail]
-		;   Neighbors = NeighborTail
+		;	Neighbors = NeighborTail
 		),
 		filter_grid_candidates(CandidateEntries, Vector, Options, Epsilon, NeighborTail, Tail).
 
@@ -211,21 +211,21 @@
 	metric_range_query(node(Id-NodeVector, InnerUpperBound, OuterLowerBound, InnerTree, OuterTree), Vector, Options, Epsilon, Neighbors, Tail) :-
 		::distance(Options, Vector, NodeVector, Distance),
 		current_neighbor(Id, NodeVector, Distance, Epsilon, Neighbors, NeighborTail0),
-		(   search_inner_branch(Distance, Epsilon, InnerUpperBound) ->
+		(	search_inner_branch(Distance, Epsilon, InnerUpperBound) ->
 			metric_range_query(InnerTree, Vector, Options, Epsilon, NeighborTail0, NeighborTail1)
-		;   NeighborTail1 = NeighborTail0
+		;	NeighborTail1 = NeighborTail0
 		),
-		(   search_outer_branch(Distance, Epsilon, OuterLowerBound) ->
+		(	search_outer_branch(Distance, Epsilon, OuterLowerBound) ->
 			metric_range_query(OuterTree, Vector, Options, Epsilon, NeighborTail1, Tail)
-		;   NeighborTail1 = Tail
+		;	NeighborTail1 = Tail
 		).
 
 	metric_range_query_leaf([], _Vector, _Options, _Epsilon, Neighbors, Neighbors).
 	metric_range_query_leaf([Id-NeighborVector| Rows], Vector, Options, Epsilon, Neighbors, Tail) :-
 		::distance(Options, Vector, NeighborVector, Distance),
-		(   Distance =< Epsilon ->
+		(	Distance =< Epsilon ->
 			Neighbors = [Id-NeighborVector| NeighborTail]
-		;   Neighbors = NeighborTail
+		;	Neighbors = NeighborTail
 		),
 		metric_range_query_leaf(Rows, Vector, Options, Epsilon, NeighborTail, Tail).
 

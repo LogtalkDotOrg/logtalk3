@@ -84,9 +84,9 @@
 	minimum_median_distance([Median| Medians], MinimumDistance) :-
 		minimum_distance_to_others(Median, Medians, FirstMinimumDistance),
 		minimum_median_distance(Medians, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Median, [Other| Others], MinimumDistance) :-

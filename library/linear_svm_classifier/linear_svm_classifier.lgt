@@ -87,36 +87,36 @@
 
 	build_encoders([], _, []).
 	build_encoders([Attribute-Values| Rest], Examples, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			continuous_stats(Attribute, Examples, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_encoders(Rest, Examples, Encoders).
 
 	continuous_stats(Attribute, Examples, Mean, Scale) :-
 		known_attribute_values(Examples, Attribute, Values),
-		(   Values == [] ->
+		(	Values == [] ->
 			Mean = 0.0,
 			Scale = 1.0
-		;   arithmetic_mean(Values, Mean),
+		;	arithmetic_mean(Values, Mean),
 			length(Values, Count),
-			(   Count > 1 ->
+			(	Count > 1 ->
 				variance(Values, Variance)
-			;   Variance = 0.0
+			;	Variance = 0.0
 			),
-			(   Variance > 0.0 ->
+			(	Variance > 0.0 ->
 				Scale is sqrt(Variance)
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
 		).
 
 	known_attribute_values([], _, []).
 	known_attribute_values([_-_-AttributeValues| Examples], Attribute, Values) :-
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			Values = [Value| Rest]
-		;   Values = Rest
+		;	Values = Rest
 		),
 		known_attribute_values(Examples, Attribute, Rest).
 
@@ -128,36 +128,36 @@
 	encode_instance([], _, []).
 	encode_instance([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features]) :-
 		!,
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			normalize_continuous(Value, Mean, Scale, Feature),
 			Missing = 0.0
-		;   Feature = 0.0,
+		;	Feature = 0.0,
 			Missing = 1.0
 		),
 		encode_instance(Encoders, AttributeValues, Features).
 	encode_instance([categorical(Attribute, Values)| Encoders], AttributeValues, Features) :-
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			check_categorical_value(Attribute, Values, Value),
 			one_hot_encode(Values, Value, Encoded)
-		;   missing_one_hot_encode(Values, Encoded)
+		;	missing_one_hot_encode(Values, Encoded)
 		),
 		append(Encoded, RestFeatures, Features),
 		encode_instance(Encoders, AttributeValues, RestFeatures).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		Feature is (Value - Mean) / Scale.
 
 	one_hot_encode([], _, [0.0]).
 	one_hot_encode([Category| Categories], Value, [Feature| Features]) :-
-		(   Value == Category ->
+		(	Value == Category ->
 			Feature = 1.0
-		;   Feature = 0.0
+		;	Feature = 0.0
 		),
 		one_hot_encode(Categories, Value, Features).
 
@@ -166,9 +166,9 @@
 		missing_one_hot_encode(Values, Zeroes).
 
 	check_categorical_value(Attribute, Values, Value) :-
-		(   member(Value, Values) ->
+		(	member(Value, Values) ->
 			true
-		;   domain_error(attribute_value(Attribute, Values), Value)
+		;	domain_error(attribute_value(Attribute, Values), Value)
 		).
 
 	encoders_feature_count([], 0).
@@ -192,15 +192,15 @@
 
 	optimize_model(Rows, PositiveClass, Options, Iteration, Model0, Model) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Model = Model0
-		;   ^^option(learning_rate(LearningRate), Options),
+		;	^^option(learning_rate(LearningRate), Options),
 			Step is LearningRate / sqrt(Iteration + 1.0),
 			update_model(Rows, PositiveClass, Model0, Step, Options, Model1, MaxDelta),
 			^^option(tolerance(Tolerance), Options),
-			(   MaxDelta =< Tolerance ->
+			(	MaxDelta =< Tolerance ->
 				Model = Model1
-			;   NextIteration is Iteration + 1,
+			;	NextIteration is Iteration + 1,
 				optimize_model(Rows, PositiveClass, Options, NextIteration, Model1, Model)
 			)
 		).
@@ -223,10 +223,10 @@
 		scalar_product(Weights, Features, Linear),
 		Score is Bias + Linear,
 		Margin is Sign * Score,
-		(   Margin >= 1.0 ->
+		(	Margin >= 1.0 ->
 			BiasGradient1 = BiasGradient0,
 			WeightGradients1 = WeightGradients0
-		;   BiasGradient1 is BiasGradient0 - Sign,
+		;	BiasGradient1 is BiasGradient0 - Sign,
 			NegativeSign is -Sign,
 			add_scaled_vector(Features, NegativeSign, WeightGradients0, WeightGradients1)
 		),
@@ -254,9 +254,9 @@
 	max_score([Class-Score], Class, Score) :-
 		!.
 	max_score([Class1-Score1, Class2-Score2| Scores], Class, Score) :-
-		(   Score1 >= Score2 ->
+		(	Score1 >= Score2 ->
 			max_score([Class1-Score1| Scores], Class, Score)
-		;   max_score([Class2-Score2| Scores], Class, Score)
+		;	max_score([Class2-Score2| Scores], Class, Score)
 		).
 
 	classifier_diagnostics_data(Classifier, Diagnostics) :-
@@ -272,7 +272,7 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, Classes, Encoders, Models, Options),
+		(	classifier_data(Classifier, Classes, Encoders, Models, Options),
 			^^valid_class_values(Classes),
 			^^valid_linear_encoders(Encoders),
 			catch(::check_options(Options), _Error, fail),
@@ -281,7 +281,7 @@
 			length(Models, ModelCount),
 			valid_models(Models, Classes, EncodedFeatures, []) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-

@@ -283,13 +283,13 @@
 	check_dimension_reducer(DimensionReducer) :-
 		(	var(DimensionReducer) ->
 			instantiation_error
-		;   ::dimension_reducer_data(DimensionReducer, Encoders, Components),
+		;	::dimension_reducer_data(DimensionReducer, Encoders, Components),
 			::dimension_reducer_diagnostics_data(DimensionReducer, Diagnostics),
 			::valid_linear_encoders(Encoders),
 			::valid_projection_components(Encoders, Components),
 			::valid_dimension_reducer_metadata(Diagnostics) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	valid_dimension_reducer(DimensionReducer) :-
@@ -354,9 +354,9 @@
 		check_continuous_attributes(Attributes).
 
 	check_examples_non_empty(Dataset, Examples) :-
-		(   Examples == [] ->
+		(	Examples == [] ->
 			domain_error(non_empty_dataset, Dataset)
-		;   true
+		;	true
 		).
 
 	check_example_values([], _AttributeNames).
@@ -372,13 +372,13 @@
 	check_example_attributes_checked([], _AttributeValues).
 	check_example_attributes_checked([Attribute| Attributes], AttributeValues) :-
 		attribute_value(Attribute, AttributeValues, Value),
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		check_example_attributes_checked(Attributes, AttributeValues).
 
@@ -389,19 +389,19 @@
 	check_declared_attribute_bindings([], _AttributeValues).
 	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
 		attribute_occurrences(AttributeValues, Attribute, 0, Count),
-		(   Count == 1 ->
+		(	Count == 1 ->
 			true
-		;   Count == 0 ->
+		;	Count == 0 ->
 			existence_error(attribute, Attribute)
-		;   domain_error(attribute_occurrences, Attribute)
+		;	domain_error(attribute_occurrences, Attribute)
 		),
 		check_declared_attribute_bindings(Attributes, AttributeValues).
 
 	check_undeclared_attribute_bindings([], _AttributeNames).
 	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
-		(   member(Attribute, AttributeNames) ->
+		(	member(Attribute, AttributeNames) ->
 			true
-		;   domain_error(declared_attribute, Attribute)
+		;	domain_error(declared_attribute, Attribute)
 		),
 		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
 
@@ -414,9 +414,9 @@
 		attribute_occurrences(AttributeValues, Attribute, Count0, Count).
 
 	attribute_value(Attribute, AttributeValues, Value) :-
-		(   member(Attribute-Value, AttributeValues) ->
+		(	member(Attribute-Value, AttributeValues) ->
 			true
-		;   existence_error(attribute, Attribute)
+		;	existence_error(attribute, Attribute)
 		).
 
 	build_encoders([], _Examples, _Options, []).
@@ -495,12 +495,12 @@
 		!.
 	take_positive_components([], [], _Requested, _Tolerance, [], []).
 	take_positive_components([Component| Components0], [Eigenvalue| Eigenvalues0], Requested, Tolerance, Components, Eigenvalues) :-
-		(   Eigenvalue > Tolerance ->
+		(	Eigenvalue > Tolerance ->
 			Components = [Component| Components1],
 			Eigenvalues = [Eigenvalue| Eigenvalues1],
 			NextRequested is Requested - 1,
 			take_positive_components(Components0, Eigenvalues0, NextRequested, Tolerance, Components1, Eigenvalues1)
-		;   Components = [],
+		;	Components = [],
 			Eigenvalues = []
 		).
 
@@ -508,17 +508,17 @@
 		known_attribute_values(Examples, Attribute, Values),
 		arithmetic_mean(Values, Mean),
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == true ->
+		(	FeatureScaling == true ->
 			length(Values, Count),
-			(   Count > 1 ->
+			(	Count > 1 ->
 				variance(Values, Variance)
-			;   Variance = 0.0
+			;	Variance = 0.0
 			),
-			(   Variance > 0.0 ->
+			(	Variance > 0.0 ->
 				Scale is sqrt(Variance)
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
-		;   Scale = 1.0
+		;	Scale = 1.0
 		).
 
 	known_attribute_values([], _Attribute, []).
@@ -545,13 +545,13 @@
 	encode_instance_checked([], _AttributeValues, []).
 	encode_instance_checked([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature| Features]) :-
 		attribute_value(Attribute, AttributeValues, Value),
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		Feature is (Value - Mean) / Scale,
 		encode_instance_checked(Encoders, AttributeValues, Features).
@@ -612,9 +612,9 @@
 	write_comment_header(_Dataset, _DimensionReducer, Functor, Stream) :-
 		Template =.. [Functor, 'Reducer'],
 		format(Stream, '% exported dimension reducer predicate: ~q/1~n', [Functor]),
-		(   ::diagnostics(_DimensionReducer, Diagnostics) ->
+		(	::diagnostics(_DimensionReducer, Diagnostics) ->
 			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
-		;   true
+		;	true
 		),
 		format(Stream, '% ~w~n', [Template]).
 

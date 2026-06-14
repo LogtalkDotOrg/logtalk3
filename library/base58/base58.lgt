@@ -22,9 +22,9 @@
 :- object(base58).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-06-14,
 		comment is 'Base58 encoder and decoder (Bitcoin alphabet variant).'
 	]).
 
@@ -32,14 +32,23 @@
 	:- mode(parse(++compound, --list(byte)), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses Base58 data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)``) into a list of bytes.',
-		argnames is ['Source', 'Bytes']
+		argnames is ['Source', 'Bytes'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Base58 source term' - domain_error(base58_source, 'Source'),
+			'``Source`` contains Base58 data with characters outside the Base58 alphabet' - representation_error(base58)
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(+compound, +list(byte)), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates Base58 in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)``) for the list of bytes in the second argument.',
-		argnames is ['Sink', 'Bytes']
+		argnames is ['Sink', 'Bytes'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Base58 sink term' - domain_error(base58_sink, 'Sink')
+		]
 	]).
 
 	% Bitcoin alphabet: 123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz

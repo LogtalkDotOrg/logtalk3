@@ -44,23 +44,23 @@
 
 	finite_binary_rational(Source, Sign, Significand, Exponent) :-
 		^^source_bits(Source, Bits),
-		(   ^^bits_finite_binary_rational(Bits, Sign, Significand, Exponent) ->
+		(	^^bits_finite_binary_rational(Bits, Sign, Significand, Exponent) ->
 			true
-		;   domain_error(ieee_754_finite_encoding, Source)
+		;	domain_error(ieee_754_finite_encoding, Source)
 		).
 
 	nan_payload(Source, PayloadBits) :-
 		^^source_bits(Source, Bits),
-		(   ^^bits_nan_payload(Bits, PayloadBits) ->
+		(	^^bits_nan_payload(Bits, PayloadBits) ->
 			true
-		;   domain_error(ieee_754_nan_encoding, Source)
+		;	domain_error(ieee_754_nan_encoding, Source)
 		).
 
 	nan_kind(Source, Kind) :-
 		^^source_bits(Source, Bits),
-		(   ^^bits_nan_kind(Bits, Kind) ->
+		(	^^bits_nan_kind(Bits, Kind) ->
 			true
-		;   domain_error(ieee_754_nan_encoding, Source)
+		;	domain_error(ieee_754_nan_encoding, Source)
 		).
 
 	precision(_Precision_).

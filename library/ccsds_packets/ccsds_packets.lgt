@@ -268,12 +268,12 @@
 
 	secondary_header_time(Packet, Descriptor, TimeCode) :-
 		secondary_header(Packet, secondary_header(Bytes)),
-		(   var(Descriptor) ->
+		(	var(Descriptor) ->
 			ccsds_time_fields::parse(bytes(Bytes), Descriptor, TimeCode)
-		;   ccsds_time_fields::valid_descriptor(Descriptor) ->
+		;	ccsds_time_fields::valid_descriptor(Descriptor) ->
 			descriptor_object(Descriptor, Object),
 			Object::parse(bytes(Bytes), TimeCode)
-		;   domain_error(ccsds_time_field_descriptor, Descriptor)
+		;	domain_error(ccsds_time_field_descriptor, Descriptor)
 		).
 
 	descriptor_object(cuc_descriptor(CoarseOctets, FineOctets, Epoch), ccsds_cuc(CoarseOctets, FineOctets, Epoch)).

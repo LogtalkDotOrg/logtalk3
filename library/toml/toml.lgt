@@ -643,49 +643,49 @@
 		!.
 	ensure_table(node(Status, Pairs0), [Key], node(Status, Pairs)) :-
 		!,
-		(   pair_lookup(Key, Pairs0, node(implicit, ChildPairs)) ->
+		(	pair_lookup(Key, Pairs0, node(implicit, ChildPairs)) ->
 			update_pair(Key, node(explicit, ChildPairs), Pairs0, Pairs)
-		;   pair_lookup(Key, Pairs0, _) ->
+		;	pair_lookup(Key, Pairs0, _) ->
 			fail
-		;   append(Pairs0, [Key-node(explicit, [])], Pairs)
+		;	append(Pairs0, [Key-node(explicit, [])], Pairs)
 		).
 	ensure_table(node(Status, Pairs0), [Key, NextKey| Keys], node(Status, Pairs)) :-
-		(   pair_lookup(Key, Pairs0, node(ChildStatus, ChildPairs)) ->
+		(	pair_lookup(Key, Pairs0, node(ChildStatus, ChildPairs)) ->
 			ChildStatus \== inline,
 			ensure_table(node(ChildStatus, ChildPairs), [NextKey| Keys], UpdatedChild),
 			update_pair(Key, UpdatedChild, Pairs0, Pairs)
-		;   pair_lookup(Key, Pairs0, Tables0),
+		;	pair_lookup(Key, Pairs0, Tables0),
 			array_of_tables(Tables0) ->
 			last_array_table(Tables0, node(ChildStatus, ChildPairs)),
 			ChildStatus \== inline,
 			ensure_table(node(ChildStatus, ChildPairs), [NextKey| Keys], UpdatedChild),
 			update_last_array_table(Tables0, UpdatedChild, Tables),
 			update_pair(Key, Tables, Pairs0, Pairs)
-		;   ensure_table(node(implicit, []), [NextKey| Keys], Child),
+		;	ensure_table(node(implicit, []), [NextKey| Keys], Child),
 			append(Pairs0, [Key-Child], Pairs)
 		).
 
 	ensure_array_table(node(Status, Pairs0), [Key], node(Status, Pairs)) :-
 		!,
-		(   pair_lookup(Key, Pairs0, Tables0) ->
+		(	pair_lookup(Key, Pairs0, Tables0) ->
 			array_of_tables(Tables0),
 			append(Tables0, [node(explicit, [])], Tables),
 			update_pair(Key, Tables, Pairs0, Pairs)
-		;   append(Pairs0, [Key-[node(explicit, [])]], Pairs)
+		;	append(Pairs0, [Key-[node(explicit, [])]], Pairs)
 		).
 	ensure_array_table(node(Status, Pairs0), [Key, NextKey| Keys], node(Status, Pairs)) :-
-		(   pair_lookup(Key, Pairs0, node(ChildStatus, ChildPairs)) ->
+		(	pair_lookup(Key, Pairs0, node(ChildStatus, ChildPairs)) ->
 			ChildStatus \== inline,
 			ensure_array_table(node(ChildStatus, ChildPairs), [NextKey| Keys], UpdatedChild),
 			update_pair(Key, UpdatedChild, Pairs0, Pairs)
-		;   pair_lookup(Key, Pairs0, Tables0),
+		;	pair_lookup(Key, Pairs0, Tables0),
 			array_of_tables(Tables0) ->
 			last_array_table(Tables0, node(ChildStatus, ChildPairs)),
 			ChildStatus \== inline,
 			ensure_array_table(node(ChildStatus, ChildPairs), [NextKey| Keys], UpdatedChild),
 			update_last_array_table(Tables0, UpdatedChild, Tables),
 			update_pair(Key, Tables, Pairs0, Pairs)
-		;   ensure_array_table(node(implicit, []), [NextKey| Keys], Child),
+		;	ensure_array_table(node(implicit, []), [NextKey| Keys], Child),
 			append(Pairs0, [Key-Child], Pairs)
 		).
 
@@ -694,18 +694,18 @@
 		\+ pair_lookup(Key, Pairs0, _),
 		append(Pairs0, [Key-Value], Pairs).
 	insert_value(node(Status, Pairs0), [Key, NextKey| Keys], Value, node(Status, Pairs)) :-
-		(   pair_lookup(Key, Pairs0, node(ChildStatus, ChildPairs)) ->
+		(	pair_lookup(Key, Pairs0, node(ChildStatus, ChildPairs)) ->
 			ChildStatus \== inline,
 			insert_value(node(ChildStatus, ChildPairs), [NextKey| Keys], Value, UpdatedChild),
 			update_pair(Key, UpdatedChild, Pairs0, Pairs)
-		;   pair_lookup(Key, Pairs0, Tables0),
+		;	pair_lookup(Key, Pairs0, Tables0),
 			array_of_tables(Tables0) ->
 			last_array_table(Tables0, node(ChildStatus, ChildPairs)),
 			ChildStatus \== inline,
 			insert_value(node(ChildStatus, ChildPairs), [NextKey| Keys], Value, UpdatedChild),
 			update_last_array_table(Tables0, UpdatedChild, Tables),
 			update_pair(Key, Tables, Pairs0, Pairs)
-		;   \+ pair_lookup(Key, Pairs0, _),
+		;	\+ pair_lookup(Key, Pairs0, _),
 			insert_value(node(implicit, []), [NextKey| Keys], Value, Child),
 			append(Pairs0, [Key-Child], Pairs)
 		).
@@ -1248,16 +1248,16 @@
 		WholeSeconds is truncate(Seconds),
 		Fraction is Seconds - WholeSeconds,
 		Microseconds0 is round(Fraction*1000000),
-		(   Microseconds0 =:= 1000000 ->
+		(	Microseconds0 =:= 1000000 ->
 			WholeSeconds1 is WholeSeconds + 1,
 			Microseconds = 0
-		;   WholeSeconds1 = WholeSeconds,
+		;	WholeSeconds1 = WholeSeconds,
 			Microseconds = Microseconds0
 		),
 		fixed_width_codes(WholeSeconds1, 2, WholeCodes),
-		(   Microseconds =:= 0 ->
+		(	Microseconds =:= 0 ->
 			Codes = WholeCodes
-		;   fixed_width_codes(Microseconds, 6, FractionCodes0),
+		;	fixed_width_codes(Microseconds, 6, FractionCodes0),
 			trim_trailing_zero_codes(FractionCodes0, FractionCodes),
 			append(WholeCodes, [0'.| FractionCodes], Codes)
 		).

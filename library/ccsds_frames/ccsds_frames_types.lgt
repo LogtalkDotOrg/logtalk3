@@ -38,51 +38,51 @@
 
 	:- multifile(type::check/2).
 	type::check(ccsds_tm_frame(FrameLength, SecondaryHeaderLength, HasFECF), Term) :-
-		(   valid_ccsds_tm_frame_bytes(Term, FrameLength, SecondaryHeaderLength, HasFECF) ->
+		(	valid_ccsds_tm_frame_bytes(Term, FrameLength, SecondaryHeaderLength, HasFECF) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_tm_frame(FrameLength, SecondaryHeaderLength, HasFECF), Term))
+		;	throw(type_error(ccsds_tm_frame(FrameLength, SecondaryHeaderLength, HasFECF), Term))
 		).
 
 	type::check(ccsds_tm_frame_term(FrameLength, SecondaryHeaderLength, HasFECF), Term) :-
-		(   ccsds_tm_frames(FrameLength, SecondaryHeaderLength, HasFECF)::valid(Term) ->
+		(	ccsds_tm_frames(FrameLength, SecondaryHeaderLength, HasFECF)::valid(Term) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_tm_frame_term(FrameLength, SecondaryHeaderLength, HasFECF), Term))
+		;	throw(type_error(ccsds_tm_frame_term(FrameLength, SecondaryHeaderLength, HasFECF), Term))
 		).
 
 	type::check(ccsds_tc_frame(FrameLength, SegmentHeaderLength, HasFECF), Term) :-
-		(   valid_ccsds_tc_frame_bytes(Term, FrameLength, SegmentHeaderLength, HasFECF) ->
+		(	valid_ccsds_tc_frame_bytes(Term, FrameLength, SegmentHeaderLength, HasFECF) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_tc_frame(FrameLength, SegmentHeaderLength, HasFECF), Term))
+		;	throw(type_error(ccsds_tc_frame(FrameLength, SegmentHeaderLength, HasFECF), Term))
 		).
 
 	type::check(ccsds_tc_frame_term(FrameLength, SegmentHeaderLength, HasFECF), Term) :-
-		(   ccsds_tc_frames(FrameLength, SegmentHeaderLength, HasFECF)::valid(Term) ->
+		(	ccsds_tc_frames(FrameLength, SegmentHeaderLength, HasFECF)::valid(Term) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_tc_frame_term(FrameLength, SegmentHeaderLength, HasFECF), Term))
+		;	throw(type_error(ccsds_tc_frame_term(FrameLength, SegmentHeaderLength, HasFECF), Term))
 		).
 
 	type::check(ccsds_aos_frame(FrameLength, InsertZoneLength, HasOCF, HasFECF), Term) :-
-		(   valid_ccsds_aos_frame_bytes(Term, FrameLength, InsertZoneLength, HasOCF, HasFECF) ->
+		(	valid_ccsds_aos_frame_bytes(Term, FrameLength, InsertZoneLength, HasOCF, HasFECF) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_aos_frame(FrameLength, InsertZoneLength, HasOCF, HasFECF), Term))
+		;	throw(type_error(ccsds_aos_frame(FrameLength, InsertZoneLength, HasOCF, HasFECF), Term))
 		).
 
 	type::check(ccsds_aos_frame_term(FrameLength, InsertZoneLength, HasOCF, HasFECF), Term) :-
-		(   ccsds_aos_frames(FrameLength, InsertZoneLength, HasOCF, HasFECF)::valid(Term) ->
+		(	ccsds_aos_frames(FrameLength, InsertZoneLength, HasOCF, HasFECF)::valid(Term) ->
 			true
-		;   var(Term) ->
+		;	var(Term) ->
 			throw(instantiation_error)
-		;   throw(type_error(ccsds_aos_frame_term(FrameLength, InsertZoneLength, HasOCF, HasFECF), Term))
+		;	throw(type_error(ccsds_aos_frame_term(FrameLength, InsertZoneLength, HasOCF, HasFECF), Term))
 		).
 
 	valid_ccsds_tm_frame_bytes(Bytes, FrameLength, SecondaryHeaderLength, HasFECF) :-

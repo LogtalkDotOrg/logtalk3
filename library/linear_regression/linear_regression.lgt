@@ -71,7 +71,7 @@
 	regressor_term_template(linear_regressor(_Encoders, _Bias, _Weights, _Diagnostics), linear_regressor('Encoders', 'Bias', 'Weights', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
+		(	Regressor = linear_regressor(Encoders, Bias, Weights, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -80,7 +80,7 @@
 			valid_linear_regression_diagnostics(Diagnostics),
 			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	valid_linear_regression_diagnostics(Diagnostics) :-

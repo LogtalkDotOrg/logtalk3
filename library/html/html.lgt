@@ -23,9 +23,9 @@
 :- category(html).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:4:1,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2021-06-11,
+		date is 2021-06-16,
 		comment is 'HTML generation.'
 	]).
 
@@ -33,7 +33,12 @@
 	:- mode(generate(+compound, ++term), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates HTML content using the representation specified in the first argument (``stream(Stream)`` or ``file(Path)``) for the term in the second argument.',
-		argnames is ['Sink', 'Term']
+		argnames is ['Sink', 'Term'],
+		exceptions is [
+			'``Sink`` is not ground' - instantiation_error,
+			'``Term`` is not ground' - instantiation_error,
+			'``Sink`` is ground but not a valid sink term' - domain_error(html_sink, 'Sink')
+		]
 	]).
 
 	:- public(void_element/1).

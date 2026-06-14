@@ -136,7 +136,7 @@
 		valid_item_value_pairs(Items, Pairs, SeenItems).
 
 	valid_item_value_pairs(Items, Pairs, _SeenItems) :-
-		(   var(Items); var(Pairs) ),
+		(	var(Items); var(Pairs) ),
 		!,
 		fail.
 	valid_item_value_pairs([], [], _SeenItems).

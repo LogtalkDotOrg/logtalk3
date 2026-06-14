@@ -116,156 +116,156 @@
 	initial_state(packetizer_state([])).
 
 	pending_packets(State, PendingPackets) :-
-		(   var(State) ->
+		(	var(State) ->
 			instantiation_error
-		;   valid_packetizer_state(State) ->
+		;	valid_packetizer_state(State) ->
 			State = packetizer_state(Channels),
 			pending_packets_(Channels, PendingPackets)
-		;   domain_error(ccsds_packetizer_state, State)
+		;	domain_error(ccsds_packetizer_state, State)
 		).
 
 	packetize_tm_packets(Frame, SecondaryHeaderLength, State, Packets, UpdatedFrame, UpdatedState) :-
 		packetize_tm_packets(Frame, SecondaryHeaderLength, State, Packets, UpdatedFrame, UpdatedState, _).
 
 	packetize_tm_packets(Frame, SecondaryHeaderLength, State, Packets, UpdatedFrame, UpdatedState, Events) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   var(Packets) ->
+		;	var(Packets) ->
 			instantiation_error
-		;   valid_secondary_header_length(SecondaryHeaderLength),
+		;	valid_secondary_header_length(SecondaryHeaderLength),
 			valid_packetizer_state(State),
 			valid_packet_terms(Packets) ->
 			tm_frame_context(Frame, SpacecraftId, VirtualChannelId, Capacity),
 			packetize_channel(tm, SpacecraftId, VirtualChannelId, Capacity, SecondaryHeaderLength, State, Packets, DataField, FirstHeaderPointer, UpdatedState, Events),
 			tm_first_header_pointer(FirstHeaderPointer, NormalizedFirstHeaderPointer),
 			replace_tm_packet_zone(Frame, NormalizedFirstHeaderPointer, DataField, UpdatedFrame)
-		;   \+ valid_secondary_header_length(SecondaryHeaderLength) ->
+		;	\+ valid_secondary_header_length(SecondaryHeaderLength) ->
 			domain_error(ccsds_secondary_header_length, SecondaryHeaderLength)
-		;   \+ valid_packetizer_state(State) ->
+		;	\+ valid_packetizer_state(State) ->
 			domain_error(ccsds_packetizer_state, State)
-		;   \+ valid_packet_terms(Packets) ->
+		;	\+ valid_packet_terms(Packets) ->
 			domain_error(ccsds_packet_terms, Packets)
-		;   domain_error(ccsds_tm_transfer_frame_term, Frame)
+		;	domain_error(ccsds_tm_transfer_frame_term, Frame)
 		).
 
 	packetize_aos_packets(Frame, SecondaryHeaderLength, State, Packets, UpdatedFrame, UpdatedState) :-
 		packetize_aos_packets(Frame, SecondaryHeaderLength, State, Packets, UpdatedFrame, UpdatedState, _).
 
 	packetize_aos_packets(Frame, SecondaryHeaderLength, State, Packets, UpdatedFrame, UpdatedState, Events) :-
-		(   var(Frame) ->
+		(	var(Frame) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   var(Packets) ->
+		;	var(Packets) ->
 			instantiation_error
-		;   valid_secondary_header_length(SecondaryHeaderLength),
+		;	valid_secondary_header_length(SecondaryHeaderLength),
 			valid_packetizer_state(State),
 			valid_packet_terms(Packets) ->
 			aos_frame_context(Frame, SpacecraftId, VirtualChannelId, Capacity),
 			packetize_channel(aos, SpacecraftId, VirtualChannelId, Capacity, SecondaryHeaderLength, State, Packets, PacketZoneBytes, FirstHeaderPointer, UpdatedState, Events),
 			encode_aos_packet_zone(FirstHeaderPointer, PacketZoneBytes, DataField),
 			replace_aos_packet_zone(Frame, DataField, UpdatedFrame)
-		;   \+ valid_secondary_header_length(SecondaryHeaderLength) ->
+		;	\+ valid_secondary_header_length(SecondaryHeaderLength) ->
 			domain_error(ccsds_secondary_header_length, SecondaryHeaderLength)
-		;   \+ valid_packetizer_state(State) ->
+		;	\+ valid_packetizer_state(State) ->
 			domain_error(ccsds_packetizer_state, State)
-		;   \+ valid_packet_terms(Packets) ->
+		;	\+ valid_packet_terms(Packets) ->
 			domain_error(ccsds_packet_terms, Packets)
-		;   domain_error(ccsds_aos_transfer_frame_term, Frame)
+		;	domain_error(ccsds_aos_transfer_frame_term, Frame)
 		).
 
 	packetize_tm_frames(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, RemainingPackets, UpdatedState) :-
 		packetize_tm_frames(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, RemainingPackets, UpdatedState, _).
 
 	packetize_tm_frames(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, RemainingPackets, UpdatedState, Events) :-
-		(   var(Frames) ->
+		(	var(Frames) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   var(Packets) ->
+		;	var(Packets) ->
 			instantiation_error
-		;   valid_secondary_header_length(SecondaryHeaderLength),
+		;	valid_secondary_header_length(SecondaryHeaderLength),
 			valid_packetizer_state(State),
 			valid_packet_terms(Packets),
 			valid_tm_frames(Frames) ->
-			(   Frames = [FirstFrame| _] ->
+			(	Frames = [FirstFrame| _] ->
 				tm_frame_context(FirstFrame, SpacecraftId, VirtualChannelId, _),
 				packetize_tm_frames_(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, UpdatedState, Events),
 				queued_packets_for_channel(UpdatedState, tm, SpacecraftId, VirtualChannelId, RemainingPackets)
-			;   UpdatedFrames = [],
+			;	UpdatedFrames = [],
 				RemainingPackets = Packets,
 				UpdatedState = State,
 				Events = []
 			)
-		;   \+ valid_secondary_header_length(SecondaryHeaderLength) ->
+		;	\+ valid_secondary_header_length(SecondaryHeaderLength) ->
 			domain_error(ccsds_secondary_header_length, SecondaryHeaderLength)
-		;   \+ valid_packetizer_state(State) ->
+		;	\+ valid_packetizer_state(State) ->
 			domain_error(ccsds_packetizer_state, State)
-		;   \+ valid_packet_terms(Packets) ->
+		;	\+ valid_packet_terms(Packets) ->
 			domain_error(ccsds_packet_terms, Packets)
-		;   domain_error(ccsds_tm_transfer_frame_terms, Frames)
+		;	domain_error(ccsds_tm_transfer_frame_terms, Frames)
 		).
 
 	packetize_aos_frames(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, RemainingPackets, UpdatedState) :-
 		packetize_aos_frames(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, RemainingPackets, UpdatedState, _).
 
 	packetize_aos_frames(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, RemainingPackets, UpdatedState, Events) :-
-		(   var(Frames) ->
+		(	var(Frames) ->
 			instantiation_error
-		;   var(SecondaryHeaderLength) ->
+		;	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(State) ->
+		;	var(State) ->
 			instantiation_error
-		;   var(Packets) ->
+		;	var(Packets) ->
 			instantiation_error
-		;   valid_secondary_header_length(SecondaryHeaderLength),
+		;	valid_secondary_header_length(SecondaryHeaderLength),
 			valid_packetizer_state(State),
 			valid_packet_terms(Packets),
 			valid_aos_frames(Frames) ->
-			(   Frames = [FirstFrame| _] ->
+			(	Frames = [FirstFrame| _] ->
 				aos_frame_context(FirstFrame, SpacecraftId, VirtualChannelId, _),
 				packetize_aos_frames_(Frames, SecondaryHeaderLength, State, Packets, UpdatedFrames, UpdatedState, Events),
 				queued_packets_for_channel(UpdatedState, aos, SpacecraftId, VirtualChannelId, RemainingPackets)
-			;   UpdatedFrames = [],
+			;	UpdatedFrames = [],
 				RemainingPackets = Packets,
 				UpdatedState = State,
 				Events = []
 			)
-		;   \+ valid_secondary_header_length(SecondaryHeaderLength) ->
+		;	\+ valid_secondary_header_length(SecondaryHeaderLength) ->
 			domain_error(ccsds_secondary_header_length, SecondaryHeaderLength)
-		;   \+ valid_packetizer_state(State) ->
+		;	\+ valid_packetizer_state(State) ->
 			domain_error(ccsds_packetizer_state, State)
-		;   \+ valid_packet_terms(Packets) ->
+		;	\+ valid_packet_terms(Packets) ->
 			domain_error(ccsds_packet_terms, Packets)
-		;   domain_error(ccsds_aos_transfer_frame_terms, Frames)
+		;	domain_error(ccsds_aos_transfer_frame_terms, Frames)
 		).
 
 	generate_idle_packet(SecondaryHeaderLength, SequenceCount, UserDataLength, Packet) :-
-		(   var(SecondaryHeaderLength) ->
+		(	var(SecondaryHeaderLength) ->
 			instantiation_error
-		;   var(SequenceCount) ->
+		;	var(SequenceCount) ->
 			instantiation_error
-		;   var(UserDataLength) ->
+		;	var(UserDataLength) ->
 			instantiation_error
-		;   valid_secondary_header_length(SecondaryHeaderLength),
+		;	valid_secondary_header_length(SecondaryHeaderLength),
 			valid_sequence_count(SequenceCount),
 			integer(UserDataLength), UserDataLength >= 1 ->
 			idle_secondary_header(SecondaryHeaderLength, SecondaryHeader),
 			zero_bytes(UserDataLength, UserData),
 			Packet = ccsds_packet(0, 0, 0, 2047, 3, SequenceCount, SecondaryHeader, UserData)
-		;   \+ valid_secondary_header_length(SecondaryHeaderLength) ->
+		;	\+ valid_secondary_header_length(SecondaryHeaderLength) ->
 			domain_error(ccsds_secondary_header_length, SecondaryHeaderLength)
-		;   \+ valid_sequence_count(SequenceCount) ->
+		;	\+ valid_sequence_count(SequenceCount) ->
 			domain_error(ccsds_packet_sequence_count, SequenceCount)
-		;   domain_error(ccsds_idle_user_data_length, UserDataLength)
+		;	domain_error(ccsds_idle_user_data_length, UserDataLength)
 		).
 
 	packetize_tm_frames_([Frame| Frames], SecondaryHeaderLength, State, Packets, [UpdatedFrame| UpdatedFrames], UpdatedState, Events) :-
@@ -295,13 +295,13 @@
 		!.
 	fill_packet_zone(Capacity, SecondaryHeaderLength, FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets, ZoneBytes, FirstHeaderPointer, UpdatedPendingBytes, UpdatedQueuedPackets, Events) :-
 		consume_pending_bytes(Capacity, PendingBytes, PrefixBytes, RemainingCapacity, PendingRemainder),
-		(   PendingRemainder \== [] ->
+		(	PendingRemainder \== [] ->
 			ZoneBytes = PrefixBytes,
 			FirstHeaderPointer = none,
 			UpdatedPendingBytes = PendingRemainder,
 			UpdatedQueuedPackets = QueuedPackets,
 			Events = []
-		;   length(PrefixBytes, Offset),
+		;	length(PrefixBytes, Offset),
 			emit_started_packets(RemainingCapacity, Offset, SecondaryHeaderLength, FrameType, SpacecraftId, VirtualChannelId, QueuedPackets, StartedBytes, FirstHeaderPointer, UpdatedPendingBytes, UpdatedQueuedPackets, Events),
 			append(PrefixBytes, StartedBytes, ZoneBytes)
 		).
@@ -357,53 +357,53 @@
 		!.
 	emit_idle_fill(Capacity, SecondaryHeaderLength, FrameType, SpacecraftId, VirtualChannelId, IdleSequenceCount, Bytes, UpdatedPendingBytes, Events) :-
 		minimum_packet_bytes_length(SecondaryHeaderLength, MinimumLength),
-		(   Capacity >= MinimumLength ->
+		(	Capacity >= MinimumLength ->
 			UserDataLength is Capacity - 6 - SecondaryHeaderLength,
 			generate_idle_packet(SecondaryHeaderLength, IdleSequenceCount, UserDataLength, IdlePacket),
 			packet_bytes(IdlePacket, SecondaryHeaderLength, Bytes, _),
 			UpdatedPendingBytes = [],
 			Events = [generated_idle_packet(FrameType, SpacecraftId, VirtualChannelId, IdlePacket)]
-		;   generate_idle_packet(SecondaryHeaderLength, IdleSequenceCount, 1, IdlePacket),
+		;	generate_idle_packet(SecondaryHeaderLength, IdleSequenceCount, 1, IdlePacket),
 			packet_bytes(IdlePacket, SecondaryHeaderLength, IdlePacketBytes, _),
 			take(Capacity, IdlePacketBytes, Bytes, UpdatedPendingBytes),
 			Events = [generated_idle_packet(FrameType, SpacecraftId, VirtualChannelId, IdlePacket), buffered_packet_fragment(FrameType, SpacecraftId, VirtualChannelId, UpdatedPendingBytes)]
 		).
 
 	consume_pending_bytes(Capacity, PendingBytes, PrefixBytes, RemainingCapacity, PendingRemainder) :-
-		(   PendingBytes == [] ->
+		(	PendingBytes == [] ->
 			PrefixBytes = [],
 			RemainingCapacity = Capacity,
 			PendingRemainder = []
-		;   take(Capacity, PendingBytes, PrefixBytes, PendingRemainder) ->
+		;	take(Capacity, PendingBytes, PrefixBytes, PendingRemainder) ->
 			length(PrefixBytes, PrefixLength),
 			RemainingCapacity is Capacity - PrefixLength
-		;   PrefixBytes = PendingBytes,
+		;	PrefixBytes = PendingBytes,
 			length(PrefixBytes, PrefixLength),
 			RemainingCapacity is Capacity - PrefixLength,
 			PendingRemainder = []
 		).
 
 	channel_state(packetizer_state(Channels), FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets) :-
-		(   select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, packetizer_channel(FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets), _) ->
+		(	select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, packetizer_channel(FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets), _) ->
 			true
-		;   PendingBytes = [],
+		;	PendingBytes = [],
 			QueuedPackets = []
 		).
 
 	queued_packets_for_channel(packetizer_state(Channels), FrameType, SpacecraftId, VirtualChannelId, QueuedPackets) :-
-		(   select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, packetizer_channel(FrameType, SpacecraftId, VirtualChannelId, _, QueuedPackets), _) ->
+		(	select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, packetizer_channel(FrameType, SpacecraftId, VirtualChannelId, _, QueuedPackets), _) ->
 			true
-		;   QueuedPackets = []
+		;	QueuedPackets = []
 		).
 
 	update_channel_state(packetizer_state(Channels), FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets, packetizer_state(UpdatedChannels)) :-
-		(   select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, _, OtherChannels) ->
+		(	select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, Channels, _, OtherChannels) ->
 			true
-		;   OtherChannels = Channels
+		;	OtherChannels = Channels
 		),
-		(   PendingBytes == [], QueuedPackets == [] ->
+		(	PendingBytes == [], QueuedPackets == [] ->
 			UpdatedChannels = OtherChannels
-		;   UpdatedChannels = [packetizer_channel(FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets)| OtherChannels]
+		;	UpdatedChannels = [packetizer_channel(FrameType, SpacecraftId, VirtualChannelId, PendingBytes, QueuedPackets)| OtherChannels]
 		).
 
 	select_channel_entry(FrameType, SpacecraftId, VirtualChannelId, [Channel| Channels], Channel, Channels) :-
@@ -500,9 +500,9 @@
 
 	compute_fecf_crc_bits(0, CRC, CRC).
 	compute_fecf_crc_bits(Bit, CRC0, CRC) :-
-		(   CRC0 /\ 0x8000 =:= 0 ->
+		(	CRC0 /\ 0x8000 =:= 0 ->
 			CRC1 is (CRC0 << 1) /\ 0xFFFF
-		;   CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
+		;	CRC1 is xor((CRC0 << 1) /\ 0xFFFF, 0x1021)
 		),
 		NextBit is Bit - 1,
 		compute_fecf_crc_bits(NextBit, CRC1, CRC).

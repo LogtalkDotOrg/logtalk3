@@ -76,9 +76,9 @@
 	evaluate_examples([], _Classifier, Correct, Correct).
 	evaluate_examples([Class-AttributeValues| Examples], Classifier, Correct0, Correct) :-
 		linear_svm_classifier::predict(Classifier, AttributeValues, Prediction),
-		(   Prediction == Class ->
+		(	Prediction == Class ->
 			Correct1 is Correct0 + 1
-		;   Correct1 = Correct0
+		;	Correct1 = Correct0
 		),
 		evaluate_examples(Examples, Classifier, Correct1, Correct).
 

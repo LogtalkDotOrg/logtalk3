@@ -58,23 +58,23 @@
 		bytes_hex(DigestBytes, HexDigest).
 
 	check_hash(Hash) :-
-		(   var(Hash) ->
+		(	var(Hash) ->
 			instantiation_error
-		;   conforms_to_protocol(Hash, hash_digest_protocol) ->
+		;	conforms_to_protocol(Hash, hash_digest_protocol) ->
 			true
-		;   domain_error(hmac_hash, Hash)
+		;	domain_error(hmac_hash, Hash)
 		).
 
 	check_length(Length, DigestSize) :-
-		(   var(Length) ->
+		(	var(Length) ->
 			instantiation_error
-		;   integer(Length) ->
-			(   0 =< Length,
+		;	integer(Length) ->
+			(	0 =< Length,
 				Length =< DigestSize ->
 				true
-			;   domain_error(hmac_output_length(0, DigestSize), Length)
+			;	domain_error(hmac_output_length(0, DigestSize), Length)
 			)
-		;   type_error(integer, Length)
+		;	type_error(integer, Length)
 		).
 
 	digest_checked(Hash, KeyBytes, MessageBytes, Length, DigestBytes) :-
@@ -90,9 +90,9 @@
 	normalized_key(Hash, KeyBytes, NormalizedKey) :-
 		Hash::block_size(BlockSize),
 		length(KeyBytes, KeyLength),
-		(   KeyLength > BlockSize ->
+		(	KeyLength > BlockSize ->
 			Hash::digest(KeyBytes, ShortKey)
-		;   ShortKey = KeyBytes
+		;	ShortKey = KeyBytes
 		),
 		length(ShortKey, ShortKeyLength),
 		ZeroCount is BlockSize - ShortKeyLength,

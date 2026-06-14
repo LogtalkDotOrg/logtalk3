@@ -111,9 +111,9 @@
 	check_anomaly_detector(Detector) :-
 		(	var(Detector) ->
 			instantiation_error
-		;   ::anomaly_detector_term_template(Detector, _Template) ->
+		;	::anomaly_detector_term_template(Detector, _Template) ->
 			true
-		;   domain_error(anomaly_detector, Detector)
+		;	domain_error(anomaly_detector, Detector)
 		).
 
 	valid_anomaly_detector(Detector) :-
@@ -171,9 +171,9 @@
 		).
 
 	check_examples_non_empty(Dataset, Examples) :-
-		(   Examples == [] ->
+		(	Examples == [] ->
 			domain_error(non_empty_dataset, Dataset)
-		;   true
+		;	true
 		).
 
 	baseline_training_examples(Dataset, Examples, Options) :-

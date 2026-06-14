@@ -96,11 +96,11 @@
 		compress_features(Features, ActiveFlags, ActiveFeatures),
 		predictive_posterior_variance(PosteriorCovariance, ActiveFeatures, PosteriorVariance),
 		Variance0 is NoiseVariance + PosteriorVariance,
-		(   Variance0 >= 0.0 ->
+		(	Variance0 >= 0.0 ->
 			Variance = Variance0
-		;   Variance0 >= -1.0e-10 ->
+		;	Variance0 >= -1.0e-10 ->
 			Variance = 0.0
-		;   domain_error(non_negative_predictive_variance, Variance0)
+		;	domain_error(non_negative_predictive_variance, Variance0)
 		).
 
 	weight_variances(Regressor, Variances) :-
@@ -124,10 +124,10 @@
 
 	build_bayesian_ridge_encoders([], _Examples, _Options, []).
 	build_bayesian_ridge_encoders([Attribute-Values| Attributes], Examples, Options, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_bayesian_ridge_encoders(Attributes, Examples, Options, Encoders).
 
@@ -137,10 +137,10 @@
 		training_precision_bounds(Options, MinimumPrecision, MaximumPrecision),
 		weight_precision_hyperparameters(Options, LambdaShape, LambdaRate),
 		noise_precision_hyperparameters(Options, AlphaShape, AlphaRate),
-		(   ActiveRows = [_ActiveFeatures-_| _],
+		(	ActiveRows = [_ActiveFeatures-_| _],
 			_ActiveFeatures == [] ->
 			train_intercept_only_bayesian_model(Rows, FeatureCount, Options, ActiveFlags, Bias, Weights, PosteriorCovariance, NoiseVariance, TrainingDiagnostics)
-		;   initial_precisions(Rows, Options, Alpha0, Beta0),
+		;	initial_precisions(Rows, Options, Alpha0, Beta0),
 			prepare_bayesian_training_summary(ActiveRows, Summary),
 			Summary = bayesian_training_summary(RowCount, _ActiveFeatureCount, _FeatureMeans, _TargetMean, _CenteredRows, _CenteredTargets, _GramMatrix, _Projection, _TargetSquareNorm, _SampleGram, _Eigenvalues),
 			posterior_iteration_summary(Summary, Options, Alpha0, Beta0, InitialWeights, InitialResidualSumOfSquares, InitialGamma, InitialLogEvidence, InitialStabilization),
@@ -148,9 +148,9 @@
 			updated_noise_precision(RowCount, InitialGamma, InitialResidualSumOfSquares, Beta0, Options, Beta1),
 			optimize_bayesian_ridge_model(Summary, Options, 0, InitialWeights, Alpha1, Beta1, Bias, ActiveWeights, PosteriorCovariance, Alpha, Beta, Convergence, Iterations, FinalDelta, LogEvidence, [InitialLogEvidence], Scores, InitialStabilization, Stabilization),
 			expand_weights(ActiveFlags, ActiveWeights, Weights0),
-			(   FeatureCount =:= 0 ->
+			(	FeatureCount =:= 0 ->
 				Weights = []
-			;   Weights = Weights0
+			;	Weights = Weights0
 			),
 			NoiseVariance is 1.0 / Beta,
 			active_feature_count(ActiveFlags, ActiveFeatureCount),
@@ -241,13 +241,13 @@
 	initial_noise_precision(auto, Rows, Beta) :-
 		rows_targets(Rows, Targets),
 		length(Targets, Count),
-		(   Count > 1 ->
+		(	Count > 1 ->
 			variance(Targets, TargetVariance0)
-		;   TargetVariance0 = 0.0
+		;	TargetVariance0 = 0.0
 		),
-		(   TargetVariance0 > 1.0e-12 ->
+		(	TargetVariance0 > 1.0e-12 ->
 			Beta is 1.0 / TargetVariance0
-		;   Beta = 1.0
+		;	Beta = 1.0
 		),
 		!.
 	initial_noise_precision(Beta, _Rows, Beta).
@@ -269,10 +269,10 @@
 		new_matrix(FeatureCount, FeatureCount, 0.0, ZeroGram),
 		new_vector(FeatureCount, 0.0, ZeroProjection),
 		accumulate_centered_statistics(CenteredRows, CenteredTargets, ZeroGram, ZeroProjection, 0.0, GramMatrix, Projection, TargetSquareNorm),
-		(   RowCount < FeatureCount ->
+		(	RowCount < FeatureCount ->
 			gram_matrix(CenteredRows, SampleGram),
 			SpectralMatrix = SampleGram
-		;   SampleGram = [],
+		;	SampleGram = [],
 			SpectralMatrix = GramMatrix
 		),
 		spectral_tolerance(Tolerance),
@@ -309,7 +309,7 @@
 		NextIteration is Iteration + 1,
 		^^option(tolerance(Tolerance), Options),
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Delta =< Tolerance ->
+		(	Delta =< Tolerance ->
 			finalize_bayesian_posterior(Summary, Alpha0, Beta0, Bias, Weights, PosteriorCovariance, FinalStabilization),
 			Alpha = Alpha0,
 			Beta = Beta0,
@@ -319,7 +319,7 @@
 			LogEvidence = LogEvidence0,
 			Scores = Scores1,
 			merge_stabilization(Stabilization0, FinalStabilization, Stabilization)
-		;   NextIteration >= MaximumIterations ->
+		;	NextIteration >= MaximumIterations ->
 			finalize_bayesian_posterior(Summary, Alpha0, Beta0, Bias, Weights, PosteriorCovariance, FinalStabilization),
 			Alpha = Alpha0,
 			Beta = Beta0,
@@ -329,16 +329,16 @@
 			LogEvidence = LogEvidence0,
 			Scores = Scores1,
 			merge_stabilization(Stabilization0, FinalStabilization, Stabilization)
-		;   updated_weight_precision(Weights0, Gamma, Alpha0, Options, Alpha1),
+		;	updated_weight_precision(Weights0, Gamma, Alpha0, Options, Alpha1),
 			updated_noise_precision(RowCount, Gamma, ResidualSumOfSquares, Beta0, Options, Beta1),
 			optimize_bayesian_ridge_model(Summary, Options, NextIteration, Weights0, Alpha1, Beta1, Bias, Weights, PosteriorCovariance, Alpha, Beta, Convergence, Iterations, FinalDelta, LogEvidence, Scores1, Scores, Stabilization0, Stabilization)
 		).
 
 	posterior_iteration_summary(Summary, Options, Alpha, Beta, Weights, ResidualSumOfSquares, Gamma, LogEvidence, Stabilization) :-
 		Summary = bayesian_training_summary(RowCount, FeatureCount, _FeatureMeans, _TargetMean, CenteredRows, CenteredTargets, GramMatrix, Projection, TargetSquareNorm, SampleGram, Eigenvalues),
-		(   RowCount < FeatureCount ->
+		(	RowCount < FeatureCount ->
 			sample_space_iteration_summary(CenteredRows, CenteredTargets, SampleGram, RowCount, FeatureCount, Projection, GramMatrix, TargetSquareNorm, Eigenvalues, Alpha, Beta, Options, Weights, ResidualSumOfSquares, Gamma, LogEvidence, Stabilization)
-		;   weight_space_iteration_summary(GramMatrix, Projection, TargetSquareNorm, RowCount, FeatureCount, Eigenvalues, Alpha, Beta, Options, Weights, ResidualSumOfSquares, Gamma, LogEvidence, Stabilization)
+		;	weight_space_iteration_summary(GramMatrix, Projection, TargetSquareNorm, RowCount, FeatureCount, Eigenvalues, Alpha, Beta, Options, Weights, ResidualSumOfSquares, Gamma, LogEvidence, Stabilization)
 		).
 
 	weight_space_iteration_summary(GramMatrix, Projection, TargetSquareNorm, RowCount, FeatureCount, Eigenvalues, Alpha, Beta, Options, Weights, ResidualSumOfSquares, Gamma, LogEvidence, Stabilization) :-
@@ -401,7 +401,7 @@
 	).
 
 	check_regressor(Regressor) :-
-		(   Regressor = bayesian_ridge_regressor(Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics),
+		(	Regressor = bayesian_ridge_regressor(Encoders, Bias, Weights, ActiveFlags, PosteriorCovariance, NoiseVariance, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, Bias),
 			^^encoded_feature_count(Encoders, FeatureCount),
@@ -414,7 +414,7 @@
 			^^valid_regressor_metadata(bayesian_ridge_regression, Diagnostics),
 			valid_bayesian_ridge_diagnostics(Diagnostics, FeatureCount, ActiveFeatureCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	valid_active_flags(ActiveFlags, FeatureCount) :-
@@ -504,11 +504,11 @@
 	predictive_posterior_variance(PosteriorCovariance, ActiveFeatures, PosteriorVariance) :-
 		posterior_weight_covariance(PosteriorCovariance, WeightCovariance),
 		quadratic_form(ActiveFeatures, WeightCovariance, PosteriorVariance0),
-		(   PosteriorVariance0 >= 0.0 ->
+		(	PosteriorVariance0 >= 0.0 ->
 			PosteriorVariance = PosteriorVariance0
-		;   PosteriorVariance0 >= -1.0e-10 ->
+		;	PosteriorVariance0 >= -1.0e-10 ->
 			PosteriorVariance = 0.0
-		;   domain_error(non_negative_posterior_variance, PosteriorVariance0)
+		;	domain_error(non_negative_posterior_variance, PosteriorVariance0)
 		).
 
 	posterior_weight_covariance([_BiasRow| Rows], WeightCovariance) :-
@@ -524,9 +524,9 @@
 
 	active_diagonal_variances(PosteriorCovariance, Index, ActiveVariances) :-
 		length(PosteriorCovariance, Size),
-		(   Index > Size ->
+		(	Index > Size ->
 			ActiveVariances = []
-		;   matrix_value(PosteriorCovariance, Index, Index, Variance),
+		;	matrix_value(PosteriorCovariance, Index, Index, Variance),
 			ActiveVariances = [Variance| Rest],
 			NextIndex is Index + 1,
 			active_diagonal_variances(PosteriorCovariance, NextIndex, Rest)
@@ -551,9 +551,9 @@
 	build_weight_precision_row([], _Alpha, _Beta, _RowIndex, _ColumnIndex, []).
 	build_weight_precision_row([Value0| Values0], Alpha, Beta, RowIndex, ColumnIndex, [Value| Values]) :-
 		ScaledValue is Beta * Value0,
-		(   RowIndex =:= ColumnIndex ->
+		(	RowIndex =:= ColumnIndex ->
 			Value is ScaledValue + Alpha
-		;   Value = ScaledValue
+		;	Value = ScaledValue
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		build_weight_precision_row(Values0, Alpha, Beta, RowIndex, NextColumnIndex, Values).
@@ -571,9 +571,9 @@
 	build_sample_space_row([], _Ratio, _RowIndex, _ColumnIndex, []).
 	build_sample_space_row([Value0| Values0], Ratio, RowIndex, ColumnIndex, [Value| Values]) :-
 		ScaledValue is Ratio * Value0,
-		(   RowIndex =:= ColumnIndex ->
+		(	RowIndex =:= ColumnIndex ->
 			Value is ScaledValue + 1.0
-		;   Value = ScaledValue
+		;	Value = ScaledValue
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		build_sample_space_row(Values0, Ratio, RowIndex, NextColumnIndex, Values).
@@ -583,7 +583,7 @@
 		weight_precision_hyperparameters(Options, LambdaShape, LambdaRate),
 		training_precision_bounds(Options, MinimumPrecision, MaximumPrecision),
 		Denominator is WeightSquaredNorm + 2.0 * LambdaRate,
-		(   Denominator =< MinimumPrecision ->
+		(	Denominator =< MinimumPrecision ->
 			Alpha = MaximumPrecision
 		;
 			Alpha1 is (Gamma + 2.0 * LambdaShape) / Denominator,
@@ -594,14 +594,14 @@
 		noise_precision_hyperparameters(Options, AlphaShape, AlphaRate),
 		training_precision_bounds(Options, MinimumPrecision, MaximumPrecision),
 		EffectiveDegreesOfFreedom0 is RowCount - Gamma,
-		(   EffectiveDegreesOfFreedom0 > MinimumPrecision ->
+		(	EffectiveDegreesOfFreedom0 > MinimumPrecision ->
 			EffectiveDegreesOfFreedom = EffectiveDegreesOfFreedom0
-		;   EffectiveDegreesOfFreedom = MinimumPrecision
+		;	EffectiveDegreesOfFreedom = MinimumPrecision
 		),
 		Denominator is ResidualSumOfSquares + 2.0 * AlphaRate,
-		(   Denominator =< MinimumPrecision ->
+		(	Denominator =< MinimumPrecision ->
 			Beta = MaximumPrecision
-		;   Beta1 is (EffectiveDegreesOfFreedom + 2.0 * AlphaShape) / Denominator,
+		;	Beta1 is (EffectiveDegreesOfFreedom + 2.0 * AlphaShape) / Denominator,
 			clamp_precision(Beta1, Options, Beta)
 		).
 
@@ -610,9 +610,9 @@
 
 	gamma_from_eigenvalues([], _Alpha, _Beta, Gamma, Gamma).
 	gamma_from_eigenvalues([Eigenvalue0| Eigenvalues], Alpha, Beta, Gamma0, Gamma) :-
-		(   Eigenvalue0 > 0.0 ->
+		(	Eigenvalue0 > 0.0 ->
 			Contribution is (Beta * Eigenvalue0) / (Alpha + Beta * Eigenvalue0)
-		;   Contribution = 0.0
+		;	Contribution = 0.0
 		),
 		Gamma1 is Gamma0 + Contribution,
 		gamma_from_eigenvalues(Eigenvalues, Alpha, Beta, Gamma1, Gamma).
@@ -627,19 +627,19 @@
 
 	clamp_precision(Value0, Options, Value) :-
 		training_precision_bounds(Options, MinimumPrecision, MaximumPrecision),
-		(   Value0 < MinimumPrecision ->
+		(	Value0 < MinimumPrecision ->
 			Value = MinimumPrecision
-		;   Value0 > MaximumPrecision ->
+		;	Value0 > MaximumPrecision ->
 			Value = MaximumPrecision
-		;   Value = Value0
+		;	Value = Value0
 		).
 
 	clamp_gamma(FeatureCount, Gamma0, Gamma) :-
-		(   Gamma0 < 0.0 ->
+		(	Gamma0 < 0.0 ->
 			Gamma = 0.0
-		;   Gamma0 > FeatureCount ->
+		;	Gamma0 > FeatureCount ->
 			Gamma = FeatureCount
-		;   Gamma = Gamma0
+		;	Gamma = Gamma0
 		).
 
 	residual_sum_of_squares_from_statistics(TargetSquareNorm, Projection, GramMatrix, Weights, ResidualSumOfSquares) :-
@@ -647,11 +647,11 @@
 		matrix_vector_product(GramMatrix, Weights, GramWeights),
 		dot_product(Weights, GramWeights, QuadraticTerm),
 		ResidualSumOfSquares0 is TargetSquareNorm - 2.0 * ProjectionDot + QuadraticTerm,
-		(   ResidualSumOfSquares0 >= 0.0 ->
+		(	ResidualSumOfSquares0 >= 0.0 ->
 			ResidualSumOfSquares = ResidualSumOfSquares0
-		;   ResidualSumOfSquares0 >= -1.0e-10 ->
+		;	ResidualSumOfSquares0 >= -1.0e-10 ->
 			ResidualSumOfSquares = 0.0
-		;   domain_error(non_negative_residual_sum_of_squares, ResidualSumOfSquares0)
+		;	domain_error(non_negative_residual_sum_of_squares, ResidualSumOfSquares0)
 		).
 
 	weight_square_norm(Weights, WeightSquaredNorm) :-
@@ -710,10 +710,10 @@
 
 	positive_eigenvalues([], _Tolerance, []).
 	positive_eigenvalues([Eigenvalue| Eigenvalues], Tolerance, PositiveEigenvalues) :-
-		(   Eigenvalue > Tolerance ->
+		(	Eigenvalue > Tolerance ->
 			PositiveEigenvalues = [Eigenvalue| PositiveEigenvalues0],
 			positive_eigenvalues(Eigenvalues, Tolerance, PositiveEigenvalues0)
-		;   PositiveEigenvalues = []
+		;	PositiveEigenvalues = []
 		).
 
 	spectral_tolerance(1.0e-10).
@@ -756,7 +756,7 @@
 	feature_activity_flags([Sum| Sums], [SumSquares| Squares], Count, [Active| ActiveFlags]) :-
 		Mean is Sum / Count,
 		Variance0 is SumSquares / Count - Mean * Mean,
-		(   Variance0 > 1.0e-12 ->
+		(	Variance0 > 1.0e-12 ->
 			Active = active
 		;
 			Active = inactive
@@ -808,10 +808,10 @@
 		domain_error(positive_definite_precision_matrix, Matrix).
 	factorize_precision_matrix(Matrix0, Attempt, MaxAttempts, BaseJitter, CholeskyFactor, Attempts, Jitter) :-
 		add_precision_jitter(Matrix0, Attempt, BaseJitter, Matrix),
-		(   catch(cholesky_decomposition(Matrix, CholeskyFactor), error(non_positive_definite_matrix(_Value), _Context), fail) ->
+		(	catch(cholesky_decomposition(Matrix, CholeskyFactor), error(non_positive_definite_matrix(_Value), _Context), fail) ->
 			Attempts = Attempt,
 			applied_precision_jitter(Attempt, BaseJitter, Jitter)
-		;   NextAttempt is Attempt + 1,
+		;	NextAttempt is Attempt + 1,
 			factorize_precision_matrix(Matrix0, NextAttempt, MaxAttempts, BaseJitter, CholeskyFactor, Attempts, Jitter)
 		).
 

@@ -14,8 +14,8 @@ Apache Avro binary format parser and generator.
 |    ``logtalk_load(avro(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-05-09
+| **Version:** 1:2:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,6 +56,12 @@ Parses Avro binary data from the given source (``bytes(List)``, ``stream(Stream)
 | **Mode and number of proofs:**
 |    ``parse(++compound,--pair)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Avro source term:
+|        ``domain_error(avro_source,Source)``
+
 
 ------------
 
@@ -74,6 +80,12 @@ Parses Avro binary data from the given source using the provided schema, returni
 |    ``parse(Source,Schema,Data)``
 | **Mode and number of proofs:**
 |    ``parse(++compound,++term,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Avro source term:
+|        ``domain_error(avro_source,Source)``
 
 
 ------------
@@ -94,6 +106,12 @@ Generates Avro binary data to the given sink (``bytes(List)``, ``stream(Stream)`
 | **Mode and number of proofs:**
 |    ``generate(++compound,++term,++term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Avro sink term:
+|        ``domain_error(avro_sink,Sink)``
+
 
 ------------
 
@@ -112,6 +130,12 @@ Generates Avro binary data to the given sink from the given schema and data. Whe
 |    ``generate(Sink,IncludeSchema,Schema,Data)``
 | **Mode and number of proofs:**
 |    ``generate(++compound,++boolean,++term,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Avro sink term:
+|        ``domain_error(avro_sink,Sink)``
 
 
 ------------

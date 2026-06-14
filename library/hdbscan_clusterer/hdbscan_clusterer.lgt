@@ -96,14 +96,14 @@
 		].
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Clusters, Noise, Options),
+		(	clusterer_data(Clusterer, Encoders, Clusters, Noise, Options),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid_clusters(Clusters, FeatureCount, []),
 			valid(list(list(number, FeatureCount)), Noise),
 			catch(::check_options(Options), _Error, fail) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusters([], _FeatureCount, _SeenIds).
@@ -193,9 +193,9 @@
 	build_hierarchy([Weight-(Id1, Id2)| SortedEdges], UnionFind0, Components0, NextNodeId0, Root) :-
 		find(UnionFind0, Id1, RootId1, UnionFind1),
 		find(UnionFind1, Id2, RootId2, UnionFind2),
-		(   RootId1 == RootId2 ->
+		(	RootId1 == RootId2 ->
 			build_hierarchy(SortedEdges, UnionFind2, Components0, NextNodeId0, Root)
-		;   remove_component(RootId1, Components0, LeftNode, Components1),
+		;	remove_component(RootId1, Components0, LeftNode, Components1),
 			remove_component(RootId2, Components1, RightNode, Components2),
 			order_nodes(LeftNode, RightNode, OrderedLeft, OrderedRight),
 			merge_node(NextNodeId0, Weight, OrderedLeft, OrderedRight, Parent),
@@ -221,10 +221,10 @@
 	order_nodes(LeftNode, RightNode, OrderedLeft, OrderedRight) :-
 		node_min_id(LeftNode, LeftMinId),
 		node_min_id(RightNode, RightMinId),
-		(   LeftMinId @< RightMinId ->
+		(	LeftMinId @< RightMinId ->
 			OrderedLeft = LeftNode,
 			OrderedRight = RightNode
-		;   OrderedLeft = RightNode,
+		;	OrderedLeft = RightNode,
 			OrderedRight = LeftNode
 		).
 
@@ -234,7 +234,7 @@
 		Size is LeftSize + RightSize,
 		node_min_id(LeftNode, LeftMinId),
 		node_min_id(RightNode, RightMinId),
-		(   LeftMinId @< RightMinId -> MinId = LeftMinId ; MinId = RightMinId ),
+		(	LeftMinId @< RightMinId -> MinId = LeftMinId ; MinId = RightMinId ),
 		node_points(LeftNode, LeftPointIds),
 		node_points(RightNode, RightPointIds),
 		append(LeftPointIds, RightPointIds, PointIds0),
@@ -276,45 +276,45 @@
 	evaluate_child(_Node, _BirthLambda, _MinimumClusterSize, _Method, [], 0.0, no).
 
 	combine_selection(leaf, Candidate, NodeStability, LeftValid, LeftCandidates, LeftStability, RightValid, RightCandidates, RightStability, SelectedCandidates, SelectedStability) :-
-		(   LeftValid == yes,
+		(	LeftValid == yes,
 			RightValid == yes ->
 			append(LeftCandidates, RightCandidates, SelectedCandidates),
 			SelectedStability is LeftStability + RightStability
-		;   LeftValid == yes ->
+		;	LeftValid == yes ->
 			SelectedCandidates = LeftCandidates,
 			SelectedStability = LeftStability
-		;   RightValid == yes ->
+		;	RightValid == yes ->
 			SelectedCandidates = RightCandidates,
 			SelectedStability = RightStability
-		;   SelectedCandidates = [Candidate],
+		;	SelectedCandidates = [Candidate],
 			SelectedStability = NodeStability
 		).
 	combine_selection(eom, Candidate, NodeStability, LeftValid, LeftCandidates, LeftStability, RightValid, RightCandidates, RightStability, SelectedCandidates, SelectedStability) :-
-		(   LeftValid == yes,
+		(	LeftValid == yes,
 			RightValid == yes ->
 			append(LeftCandidates, RightCandidates, ChildCandidates),
 			ChildStability is LeftStability + RightStability,
 			choose_eom(Candidate, NodeStability, ChildCandidates, ChildStability, SelectedCandidates, SelectedStability)
-		;   LeftValid == yes ->
+		;	LeftValid == yes ->
 			choose_eom(Candidate, NodeStability, LeftCandidates, LeftStability, SelectedCandidates, SelectedStability)
-		;   RightValid == yes ->
+		;	RightValid == yes ->
 			choose_eom(Candidate, NodeStability, RightCandidates, RightStability, SelectedCandidates, SelectedStability)
-		;   SelectedCandidates = [Candidate],
+		;	SelectedCandidates = [Candidate],
 			SelectedStability = NodeStability
 		).
 
 	choose_eom(Candidate, NodeStability, ChildCandidates, ChildStability, SelectedCandidates, SelectedStability) :-
-		(   ChildStability > NodeStability ->
+		(	ChildStability > NodeStability ->
 			SelectedCandidates = ChildCandidates,
 			SelectedStability = ChildStability
-		;   SelectedCandidates = [Candidate],
+		;	SelectedCandidates = [Candidate],
 			SelectedStability = NodeStability
 		).
 
 	lambda_from_weight(Weight, Lambda) :-
-		(   Weight =< 0.0 ->
+		(	Weight =< 0.0 ->
 			Lambda = 1.0e12
-		;   Lambda is 1.0 / Weight
+		;	Lambda is 1.0 / Weight
 		).
 
 	sort_candidates(Candidates, SortedCandidates) :-
@@ -351,17 +351,17 @@
 	cluster_max_core_distance([], _CoreDistances, MaxCoreDistance, MaxCoreDistance).
 	cluster_max_core_distance([Id| PointIds], CoreDistances, MaxCoreDistance0, MaxCoreDistance) :-
 		core_distance_value(Id, CoreDistances, CoreDistance),
-		(   CoreDistance > MaxCoreDistance0 ->
+		(	CoreDistance > MaxCoreDistance0 ->
 			MaxCoreDistance1 = CoreDistance
-		;   MaxCoreDistance1 = MaxCoreDistance0
+		;	MaxCoreDistance1 = MaxCoreDistance0
 		),
 		cluster_max_core_distance(PointIds, CoreDistances, MaxCoreDistance1, MaxCoreDistance).
 
 	noise_points([], _SelectedPointIds, []).
 	noise_points([Id-Vector| Rows], SelectedPointIds, Noise) :-
-		(   memberchk(Id, SelectedPointIds) ->
+		(	memberchk(Id, SelectedPointIds) ->
 			Noise = RestNoise
-		;   Noise = [Vector| RestNoise]
+		;	Noise = [Vector| RestNoise]
 		),
 		noise_points(Rows, SelectedPointIds, RestNoise).
 
@@ -376,9 +376,9 @@
 			),
 			Candidates
 		),
-		(   Candidates == [] ->
+		(	Candidates == [] ->
 			Cluster = noise
-		;   best_candidate(Candidates, Cluster, _Distance)
+		;	best_candidate(Candidates, Cluster, _Distance)
 		).
 
 	prediction_threshold(MaxCoreDistance, Threshold) :-
@@ -391,9 +391,9 @@
 	nearest_point_distance([], _Features, _Options, BestDistance, BestDistance).
 	nearest_point_distance([Point| Points], Features, Options, BestDistance0, BestDistance) :-
 		distance(Options, Features, Point, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestDistance1 = Distance0
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		nearest_point_distance(Points, Features, Options, BestDistance1, BestDistance).
 
@@ -402,10 +402,10 @@
 
 	best_candidate([], BestClusterId, BestDistance, BestClusterId, BestDistance).
 	best_candidate([Distance-ClusterId| Candidates], CurrentClusterId, CurrentDistance, BestClusterId, BestDistance) :-
-		(   Distance < CurrentDistance ->
+		(	Distance < CurrentDistance ->
 			NextClusterId = ClusterId,
 			NextDistance = Distance
-		;   NextClusterId = CurrentClusterId,
+		;	NextClusterId = CurrentClusterId,
 			NextDistance = CurrentDistance
 		),
 		best_candidate(Candidates, NextClusterId, NextDistance, BestClusterId, BestDistance).

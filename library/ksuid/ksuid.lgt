@@ -63,27 +63,27 @@
 		codes_to_ksuid(_Representation_, Codes, KSUID).
 
 	check_representation(Context) :-
-		(   var(_Representation_) ->
+		(	var(_Representation_) ->
 			throw(error(instantiation_error, Context))
-		;   _Representation_ == atom ->
+		;	_Representation_ == atom ->
 			true
-		;   _Representation_ == chars ->
+		;	_Representation_ == chars ->
 			true
-		;   _Representation_ == codes ->
+		;	_Representation_ == codes ->
 			true
-		;   throw(error(domain_error(ksuid_representation, _Representation_), Context))
+		;	throw(error(domain_error(ksuid_representation, _Representation_), Context))
 		).
 
 	alphabet_codes(Context, Alphabet, Codes) :-
-		(   var(Alphabet) ->
+		(	var(Alphabet) ->
 			throw(error(instantiation_error, Context))
-		;   atom(Alphabet) ->
+		;	atom(Alphabet) ->
 			atom_codes(Alphabet, Codes)
-		;   chars_alphabet_codes(Alphabet, Codes) ->
+		;	chars_alphabet_codes(Alphabet, Codes) ->
 			true
-		;   codes_alphabet_codes(Alphabet, Codes) ->
+		;	codes_alphabet_codes(Alphabet, Codes) ->
 			true
-		;   throw(error(type_error(text, Alphabet), Context))
+		;	throw(error(type_error(text, Alphabet), Context))
 		).
 
 	chars_alphabet_codes([], []).
@@ -99,11 +99,11 @@
 		codes_alphabet_codes(Codes, ConvertedCodes).
 
 	check_alphabet(Context, Codes) :-
-		(   valid_code_list(Codes),
+		(	valid_code_list(Codes),
 			length(Codes, 62),
 			\+ repeated_code(Codes) ->
 			true
-		;   throw(error(domain_error(ksuid_alphabet, _Alphabet_), Context))
+		;	throw(error(domain_error(ksuid_alphabet, _Alphabet_), Context))
 		).
 
 	valid_code_list([]).
@@ -125,12 +125,12 @@
 		date(Current, Year, Month, Day),
 		UnixSeconds is (Current - UnixEpoch) * 86400 + Hours * 3600 + Minutes * 60 + Seconds,
 		Timestamp is UnixSeconds - 1400000000,
-		(   Timestamp >= 0 ->
+		(	Timestamp >= 0 ->
 			Byte1 is (Timestamp >> 24) /\ 0xff,
 			Byte2 is (Timestamp >> 16) /\ 0xff,
 			Byte3 is (Timestamp >> 8) /\ 0xff,
 			Byte4 is Timestamp /\ 0xff
-		;   throw(error(domain_error(ksuid_timestamp, Timestamp), Context))
+		;	throw(error(domain_error(ksuid_timestamp, Timestamp), Context))
 		).
 
 	bytes_integer([], Integer, Integer).
@@ -141,12 +141,12 @@
 	encode_base62(Context, Integer, AlphabetCodes, Size, Codes) :-
 		tobase62(Integer, AlphabetCodes, [], Digits),
 		length(Digits, DigitsLength),
-		(   DigitsLength =< Size ->
+		(	DigitsLength =< Size ->
 			nth0(0, AlphabetCodes, PadCode),
 			PaddingLength is Size - DigitsLength,
 			padding(PaddingLength, PadCode, PaddingCodes),
 			append(PaddingCodes, Digits, Codes)
-		;   throw(error(domain_error(ksuid_value, Integer), Context))
+		;	throw(error(domain_error(ksuid_value, Integer), Context))
 		).
 
 	tobase62(0, _, [], [0'0]) :-

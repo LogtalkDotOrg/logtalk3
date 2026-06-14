@@ -135,11 +135,11 @@
 	% -----------------------------------------------------------------
 
 	step_1b(Word, Stem) :-
-		(   % (m>0) EED -> EE; if EED matches but m=0, do nothing (longest match rule)
+		(	% (m>0) EED -> EE; if EED matches but m=0, do nothing (longest match rule)
 			ends_with(Word, [e,e,d], Prefix) ->
-			(   measure(Prefix, M), M > 0 ->
+			(	measure(Prefix, M), M > 0 ->
 				append(Prefix, [e,e], Stem)
-			;   Stem = Word  % EED matched but condition failed, don't try ED
+			;	Stem = Word  % EED matched but condition failed, don't try ED
 			)
 		;	% (*v*) ED -> (delete)
 			ends_with(Word, [e,d], Prefix),

@@ -292,11 +292,11 @@
 	shutdown_server(AddressOrALias) :-
 		context(Context),
 		resolve_alias(AddressOrALias, Address, Context),
-		( 	client_connection_output_(Address, Output),
+		(	client_connection_output_(Address, Output),
 			client_connection_input_(Address, Input) ->
 			write_out(Output, shutdown),
 			read_in(Input, Response),
-			( 	Response == ok ->
+			(	Response == ok ->
 				close_client(Address)
 			;	throw(error(linda_error(shutdown_failed(Response)), Context))
 			)

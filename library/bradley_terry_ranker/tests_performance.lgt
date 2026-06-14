@@ -41,9 +41,9 @@
 		item_(Next, Last, Item).
 
 	next_item(Item, Last, Next) :-
-		(   Item < Last ->
+		(	Item < Last ->
 			Next is Item + 1
-		;   Next = 1
+		;	Next = 1
 		).
 
 	forward_weight(Item, Weight) :-

@@ -151,7 +151,7 @@
 			Clauses0 = [
 				partition_([], _, [], []),
 				(partition_([GHead| GTail], GArgs, GIncluded, GExcluded) :-
-					(   GGoal ->
+					(	GGoal ->
 						GIncluded = [GHead| GRestIncluded],
 						GExcluded = GRestExcluded
 					;	GIncluded = GRestIncluded,

@@ -352,10 +352,10 @@
 		http_core::response(Version, Status, [], content('application/problem+json', json(Problem)), [], Response).
 
 	success_response_media_type(Request, MediaType) :-
-		(   http_core::property(Request, response_media_type(MediaType0)),
+		(	http_core::property(Request, response_media_type(MediaType0)),
 			json_compatible_media_type(MediaType0) ->
 			MediaType = MediaType0
-		;   MediaType = 'application/json'
+		;	MediaType = 'application/json'
 		).
 
 	json_compatible_media_type('application/json').
@@ -366,22 +366,22 @@
 
 	dispatch_rest_endpoint(Request, Response) :-
 		http_core::property(Request, route(Id)),
-		(   http_core::property(Request, open_api_probe(true)) ->
+		(	http_core::property(Request, open_api_probe(true)) ->
 			run_rest_endpoint(Id, Request, Response)
-		;   validate_open_api_request(Id, Request, ValidationResponse),
-			(   var(ValidationResponse) ->
+		;	validate_open_api_request(Id, Request, ValidationResponse),
+			(	var(ValidationResponse) ->
 				run_rest_endpoint(Id, Request, CandidateResponse),
 				validate_open_api_response(Id, Request, CandidateResponse, Response)
-			;   Response = ValidationResponse
+			;	Response = ValidationResponse
 			)
 		).
 
 	run_rest_endpoint(Id, Request, Response) :-
 		endpoint_descriptor(Id, _Method, _Path, Action, _Options),
 		run_rest_action(Id, Action, Request, Result, Response0),
-		(   var(Response0) ->
+		(	var(Response0) ->
 			normalize_rest_result(Request, Result, Response)
-		;   Response = Response0
+		;	Response = Response0
 		).
 
 	endpoint_descriptor(Id, Method, Path, Action, Options) :-
@@ -395,15 +395,15 @@
 
 	validate_unique_endpoint_ids :-
 		findall(Id, ::endpoint(Id, _Method, _Path, _Action, _Options), Ids),
-		(   duplicate_endpoint_id(Ids, DuplicateId) ->
+		(	duplicate_endpoint_id(Ids, DuplicateId) ->
 			domain_error(rest_endpoint_id, duplicate(DuplicateId))
-		;   true
+		;	true
 		).
 
 	duplicate_endpoint_id([Id| Ids], DuplicateId) :-
-		(   member(Id, Ids) ->
+		(	member(Id, Ids) ->
 			DuplicateId = Id
-		;   duplicate_endpoint_id(Ids, DuplicateId)
+		;	duplicate_endpoint_id(Ids, DuplicateId)
 		).
 	duplicate_endpoint_id([], _DuplicateId) :-
 		fail.
@@ -451,27 +451,27 @@
 		domain_error(rest_result, Result).
 
 	validate_open_api_request(Id, Request, Response) :-
-		(   ::open_api_validate_request(Id) ->
+		(	::open_api_validate_request(Id) ->
 			self(Self),
 			catch(
 				open_api::validate_request(Self, Id, Request, Errors),
 				Error,
 				open_api_validation_exception_response(request, Request, Error, Response)
 			),
-			(   var(Response) ->
-				(   Errors == [] ->
+			(	var(Response) ->
+				(	Errors == [] ->
 					true
-				;   open_api_request_validation_error_response_(Request, Id, Errors, Response)
+				;	open_api_request_validation_error_response_(Request, Id, Errors, Response)
 				)
-			;   true
+			;	true
 			)
-		;   true
+		;	true
 		).
 
 	open_api_request_validation_error_response_(Request, Id, Errors, Response) :-
-		(   ::open_api_request_validation_error_response(Request, Id, Errors, Response) ->
+		(	::open_api_request_validation_error_response(Request, Id, Errors, Response) ->
 			true
-		;   default_open_api_request_validation_error_response(Request, Id, Errors, Response)
+		;	default_open_api_request_validation_error_response(Request, Id, Errors, Response)
 		).
 
 	default_open_api_request_validation_error_response(Request, _Id, Errors, Response) :-
@@ -490,27 +490,27 @@
 	default_open_api_request_validation_problem(_Errors, 400, 'urn:logtalk:open-api:invalid-request', 'Invalid Request', 'Request does not conform to the OpenAPI contract.').
 
 	validate_open_api_response(Id, Request, CandidateResponse, Response) :-
-		(   ::open_api_validate_response(Id) ->
+		(	::open_api_validate_response(Id) ->
 			self(Self),
 			catch(
 				open_api::validate_response(Self, Id, CandidateResponse, Errors),
 				Error,
 				open_api_validation_exception_response(response, Request, Error, Response)
 			),
-			(   var(Response) ->
-				(   Errors == [] ->
+			(	var(Response) ->
+				(	Errors == [] ->
 					Response = CandidateResponse
-				;   open_api_response_validation_error_response_(Request, Id, CandidateResponse, Errors, Response)
+				;	open_api_response_validation_error_response_(Request, Id, CandidateResponse, Errors, Response)
 				)
-			;   true
+			;	true
 			)
-		;   Response = CandidateResponse
+		;	Response = CandidateResponse
 		).
 
 	open_api_response_validation_error_response_(Request, Id, CandidateResponse, Errors, Response) :-
-		(   ::open_api_response_validation_error_response(Request, Id, CandidateResponse, Errors, Response) ->
+		(	::open_api_response_validation_error_response(Request, Id, CandidateResponse, Errors, Response) ->
 			true
-		;   default_open_api_response_validation_error_response(Request, Id, CandidateResponse, Errors, Response)
+		;	default_open_api_response_validation_error_response(Request, Id, CandidateResponse, Errors, Response)
 		).
 
 	default_open_api_response_validation_error_response(Request, _Id, _CandidateResponse, _Errors, Response) :-
@@ -523,12 +523,12 @@
 
 	run_rest_action(Id, Action, Request, Result, Response) :-
 		Goal =.. [Action, Request, Result0],
-		(   catch(::Goal, Error, normalize_rest_caught_term(Request, Id, Error, Response)) ->
-			(   var(Response) ->
+		(	catch(::Goal, Error, normalize_rest_caught_term(Request, Id, Error, Response)) ->
+			(	var(Response) ->
 				Result = Result0
-			;   true
+			;	true
 			)
-		;   rest_action_failure_response_(Request, Id, Response)
+		;	rest_action_failure_response_(Request, Id, Response)
 		).
 
 	normalize_rest_caught_term(Request, _Id, Term, Response) :-
@@ -558,15 +558,15 @@
 		!,
 		problem_response(Request, StatusSpec, Type, Title, Detail, Response).
 	normalize_rest_error(Request, Id, Error, Response) :-
-		(   ::rest_action_error_response(Request, Id, Error, Response) ->
+		(	::rest_action_error_response(Request, Id, Error, Response) ->
 			true
-		;   problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'Unhandled REST action error.', Response)
+		;	problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'Unhandled REST action error.', Response)
 		).
 
 	rest_action_failure_response_(Request, Id, Response) :-
-		(   ::rest_action_failure_response(Request, Id, Response) ->
+		(	::rest_action_failure_response(Request, Id, Response) ->
 			true
-		;   problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'REST action failed.', Response)
+		;	problem_response(Request, 500, 'about:blank', 'Internal Server Error', 'REST action failed.', Response)
 		).
 
 	normalize_status(Status, _NormalizedStatus) :-
@@ -578,9 +578,9 @@
 	normalize_status(Code, status(Code, Reason)) :-
 		integer(Code),
 		!,
-		(   reason_phrase(Code, Reason) ->
+		(	reason_phrase(Code, Reason) ->
 			true
-		;   domain_error(http_status_code, Code)
+		;	domain_error(http_status_code, Code)
 		).
 	normalize_status(Status, _NormalizedStatus) :-
 		domain_error(http_status, Status).

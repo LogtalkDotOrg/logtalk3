@@ -91,16 +91,16 @@
 		domain_error(http_routed_request, Request).
 
 	route_parameter_declarations_or_empty(RouteId, Declarations) :-
-		(   ::route_parameter_declarations(RouteId, Declarations0) ->
+		(	::route_parameter_declarations(RouteId, Declarations0) ->
 			validate_route_parameter_declarations(RouteId, Declarations0),
 			Declarations = Declarations0
-		;   Declarations = []
+		;	Declarations = []
 		).
 
 	validate_route_parameter_declarations(RouteId, Declarations) :-
-		(   route_path_declarations(Declarations, PathDeclarations) ->
+		(	route_path_declarations(Declarations, PathDeclarations) ->
 			validate_route_path_declarations(PathDeclarations, RouteId)
-		;   true
+		;	true
 		).
 
 	route_path_declarations(Declarations, PathDeclarations) :-
@@ -109,9 +109,9 @@
 
 	route_path_declarations_list([], []).
 	route_path_declarations_list([Declaration| Declarations], PathDeclarations) :-
-		(   route_path_declaration(Declaration, Name, Type) ->
+		(	route_path_declaration(Declaration, Name, Type) ->
 			PathDeclarations = [parameter(Name, Type)| RestPathDeclarations]
-		;   PathDeclarations = RestPathDeclarations
+		;	PathDeclarations = RestPathDeclarations
 		),
 		route_path_declarations_list(Declarations, RestPathDeclarations).
 
@@ -131,9 +131,9 @@
 	validate_route_path_declarations([parameter(Name, Type)| Declarations], RouteId) :-
 		::route(RouteId, _Method, PathTemplate, _Handler),
 		^^path_template_parameters(PathTemplate, PathTemplateParameters),
-		(   select_path_template_parameter(Name, PathTemplateParameters, PathTemplateType) ->
+		(	select_path_template_parameter(Name, PathTemplateParameters, PathTemplateType) ->
 			validate_route_path_declaration_type(Name, Type, PathTemplateType)
-		;   domain_error(http_parameter_declaration(Name, path), not_in_route_path(RouteId))
+		;	domain_error(http_parameter_declaration(Name, path), not_in_route_path(RouteId))
 		),
 		validate_route_path_declarations(Declarations, RouteId).
 
@@ -156,16 +156,16 @@
 		domain_error(http_parameter_declaration(Name, path), incompatible_route_path_type(Type, PathTemplateType)).
 
 	route_parameter_extra_metadata_or_empty(RouteId, Metadata) :-
-		(   ::route_parameter_extra_metadata(RouteId, Metadata0) ->
+		(	::route_parameter_extra_metadata(RouteId, Metadata0) ->
 			Metadata = Metadata0
-		;   Metadata = []
+		;	Metadata = []
 		).
 
 	generated_route_metadata(RouteId, Metadata) :-
 		route_parameter_declarations_or_empty(RouteId, Declarations),
-		(   Declarations == [] ->
+		(	Declarations == [] ->
 			Metadata = []
-		;   generated_route_parameters_metadata(Declarations, ParametersMetadata),
+		;	generated_route_parameters_metadata(Declarations, ParametersMetadata),
 			generated_route_request_body_metadata(RouteId, Declarations, RequestBodyMetadata),
 			generated_route_responses_metadata(ResponsesMetadata),
 			append_generated_metadata(ParametersMetadata, RequestBodyMetadata, ResponsesMetadata, Metadata)
@@ -184,9 +184,9 @@
 	generated_route_request_body_metadata(_RouteId, _Declarations, []).
 
 	route_request_body_description(RouteId, Description) :-
-		(   ::route_parameter_request_body_description(RouteId, Description0) ->
+		(	::route_parameter_request_body_description(RouteId, Description0) ->
 			Description = Description0
-		;   Description = 'Form parameters.'
+		;	Description = 'Form parameters.'
 		).
 
 	generated_route_responses_metadata([responses([Response])]) :-
@@ -227,9 +227,9 @@
 
 	ordinary_metadata_terms([], []).
 	ordinary_metadata_terms([Property| Metadata], Terms) :-
-		(   special_metadata_property(Property) ->
+		(	special_metadata_property(Property) ->
 			Terms = RestTerms
-		;   Terms = [Property| RestTerms]
+		;	Terms = [Property| RestTerms]
 		),
 		ordinary_metadata_terms(Metadata, RestTerms).
 
@@ -251,9 +251,9 @@
 	merge_open_api_parameters([], ExtraParameters, ExtraParameters).
 	merge_open_api_parameters([GeneratedParameter| GeneratedParameters], ExtraParameters0, [Parameter| Parameters]) :-
 		GeneratedParameter = parameter(Name, In, _Description, _Required, _Schema),
-		(   select_open_api_parameter(Name, In, ExtraParameters0, Parameter, ExtraParameters) ->
+		(	select_open_api_parameter(Name, In, ExtraParameters0, Parameter, ExtraParameters) ->
 			true
-		;   Parameter = GeneratedParameter,
+		;	Parameter = GeneratedParameter,
 			ExtraParameters = ExtraParameters0
 		),
 		merge_open_api_parameters(GeneratedParameters, ExtraParameters, Parameters).

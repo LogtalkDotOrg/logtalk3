@@ -82,63 +82,63 @@
 
 	preflight_response(Request, Response, UserOptions) :-
 		resolve_options(Request, UserOptions, Options),
-		( 	is_preflight_request(Request) ->
+		(	is_preflight_request(Request) ->
 			Request = request(_, _, Version, _, _, _),
-			( 	preflight_headers(Request, Options, Headers0, VaryTokens) ->
+			(	preflight_headers(Request, Options, Headers0, VaryTokens) ->
 				finalize_headers(VaryTokens, Headers0, Headers),
 				http_core::response(Version, status(200, 'OK'), Headers, empty, [], Response)
-			; 	preflight_denied_vary_tokens(Request, Options, VaryTokens),
+			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				finalize_headers(VaryTokens, [], Headers),
 				http_core::response(Version, status(403, 'Forbidden'), Headers, empty, [], Response)
 			)
-		; 	domain_error(http_cors_preflight_request, Request)
+		;	domain_error(http_cors_preflight_request, Request)
 		), !.
 
 	add_response_headers(Request, Response0, Response, UserOptions) :-
 		resolve_options(Request, UserOptions, Options),
-		( 	is_preflight_request(Request) ->
-			( 	preflight_headers(Request, Options, Headers, VaryTokens) ->
+		(	is_preflight_request(Request) ->
+			(	preflight_headers(Request, Options, Headers, VaryTokens) ->
 				merge_response_headers(Response0, Headers, VaryTokens, Response)
-			; 	preflight_denied_vary_tokens(Request, Options, VaryTokens),
+			;	preflight_denied_vary_tokens(Request, Options, VaryTokens),
 				merge_denied_response_headers(VaryTokens, Response0, Response)
 			)
-		; 	actual_headers(Request, Response0, Options, Headers, VaryTokens) ->
+		;	actual_headers(Request, Response0, Options, Headers, VaryTokens) ->
 			merge_response_headers(Response0, Headers, VaryTokens, Response)
-		; 	actual_denied_vary_tokens(Options, VaryTokens),
+		;	actual_denied_vary_tokens(Options, VaryTokens),
 			merge_denied_response_headers(VaryTokens, Response0, Response)
 		),
 		!.
 
 	valid_option(allowed_origins(Origins)) :-
-		( 	Origins == any ->
+		(	Origins == any ->
 			true
-		; 	valid_origin_list(Origins)
+		;	valid_origin_list(Origins)
 		).
 	valid_option(allowed_methods(Methods)) :-
-		( 	Methods == any ->
+		(	Methods == any ->
 			true
-		; 	wildcard_method_list(Methods) ->
+		;	wildcard_method_list(Methods) ->
 			true
-		; 	valid_method_list(Methods)
+		;	valid_method_list(Methods)
 		).
 	valid_option(allowed_headers(Headers)) :-
-		( 	Headers == any ->
+		(	Headers == any ->
 			true
-		; 	Headers == requested ->
+		;	Headers == requested ->
 			true
-		; 	valid_header_name_list(Headers)
+		;	valid_header_name_list(Headers)
 		).
 	valid_option(expose_headers(Headers)) :-
-		( 	Headers == any ->
+		(	Headers == any ->
 			true
-		; 	valid_header_name_list(Headers)
+		;	valid_header_name_list(Headers)
 		).
 	valid_option(allow_credentials(Boolean)) :-
 		once((Boolean == true; Boolean == false)).
 	valid_option(max_age(Seconds)) :-
-		( 	Seconds == none ->
+		(	Seconds == none ->
 			true
-		; 	integer(Seconds),
+		;	integer(Seconds),
 			Seconds >= 0
 		).
 
@@ -177,9 +177,9 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, BaseOptions),
 		request_route_options(Request, RouteOptions),
-		( 	RouteOptions == [] ->
+		(	RouteOptions == [] ->
 			Options0 = BaseOptions
-		; 	^^check_options(RouteOptions),
+		;	^^check_options(RouteOptions),
 			overlay_options(RouteOptions, BaseOptions, Options0)
 		),
 		fix_options_list(Options0, Options0a),
@@ -220,7 +220,7 @@
 	constrain_allowed_methods(Request, Options0, Options) :-
 		^^option(allowed_methods(AllowedMethods0), Options0),
 		(	AllowedMethods0 == any ->
-			( 	request_effective_methods(Request, EffectiveMethods0) ->
+			(	request_effective_methods(Request, EffectiveMethods0) ->
 				filter_non_options_methods(EffectiveMethods0, AllowedMethods),
 				replace_option(allowed_methods(AllowedMethods), Options0, Options)
 			;	domain_error(http_cors_options, [allowed_methods(any)])

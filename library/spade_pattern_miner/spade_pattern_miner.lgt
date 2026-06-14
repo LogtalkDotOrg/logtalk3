@@ -84,9 +84,9 @@
 		index_itemset_occurrences(Items, Id, EventIndex, OccurrenceIndex1, OccurrenceIndex).
 
 	index_item_occurrence(Item, Occurrence, OccurrenceIndex0, OccurrenceIndex) :-
-		(   dictionary_lookup(Item, Occurrences0, OccurrenceIndex0) ->
+		(	dictionary_lookup(Item, Occurrences0, OccurrenceIndex0) ->
 			Occurrences = [Occurrence| Occurrences0]
-		;   Occurrences = [Occurrence]
+		;	Occurrences = [Occurrence]
 		),
 		dictionary_insert(OccurrenceIndex0, Item, Occurrences, OccurrenceIndex).
 
@@ -103,11 +103,11 @@
 
 	frequent_singletons([], _OccurrenceIndex, _SupportCount, []).
 	frequent_singletons([Item| Items], OccurrenceIndex, SupportCount, FrequentPatterns) :-
-		(   dictionary_lookup(Item, Occurrences, OccurrenceIndex),
+		(	dictionary_lookup(Item, Occurrences, OccurrenceIndex),
 			occurrences_support(Occurrences, Support),
 			Support >= SupportCount ->
 			FrequentPatterns = [pattern_occurrence([[Item]], Occurrences, Support)| RestFrequentPatterns]
-		;   FrequentPatterns = RestFrequentPatterns
+		;	FrequentPatterns = RestFrequentPatterns
 		),
 		frequent_singletons(Items, OccurrenceIndex, SupportCount, RestFrequentPatterns).
 
@@ -121,10 +121,10 @@
 	mine_equivalence_class_members(ClassPrefix, [pattern_occurrence(Pattern, Occurrences, Support)| PatternOccurrences], MemberIndex, SequenceIndex, SupportCount, MaximumPatternLength, Patterns) :-
 		Patterns = [sequence_pattern(Pattern, Support)| RestPatterns],
 		^^pattern_length(Pattern, PatternLength),
-		(   PatternLength < MaximumPatternLength ->
+		(	PatternLength < MaximumPatternLength ->
 			class_child_members(ClassPrefix, pattern_occurrence(Pattern, Occurrences, Support), MemberIndex, SequenceIndex, SupportCount, ChildMembers),
 			mine_equivalence_class(Pattern, ChildMembers, SupportCount, MaximumPatternLength, ExtensionPatterns)
-		;   ExtensionPatterns = []
+		;	ExtensionPatterns = []
 		),
 		append(ExtensionPatterns, SiblingPatterns, RestPatterns),
 		mine_equivalence_class_members(ClassPrefix, PatternOccurrences, MemberIndex, SequenceIndex, SupportCount, MaximumPatternLength, SiblingPatterns).
@@ -145,9 +145,9 @@
 
 	index_member_sequence_ids([], _MemberId, SequenceIndex, SequenceIndex).
 	index_member_sequence_ids([SequenceId| SequenceIds], MemberId, SequenceIndex0, SequenceIndex) :-
-		(   dictionary_lookup(SequenceId, Members0, SequenceIndex0) ->
+		(	dictionary_lookup(SequenceId, Members0, SequenceIndex0) ->
 			Members = [MemberId| Members0]
-		;   Members = [MemberId]
+		;	Members = [MemberId]
 		),
 		dictionary_insert(SequenceIndex0, SequenceId, Members, SequenceIndex1),
 		index_member_sequence_ids(SequenceIds, MemberId, SequenceIndex1, SequenceIndex).
@@ -185,17 +185,17 @@
 
 	active_class_member_ids([], _SequenceIndex, CandidateMemberIds, CandidateMemberIds).
 	active_class_member_ids([SequenceId| SequenceIds], SequenceIndex, CandidateMemberIds0, CandidateMemberIds) :-
-		(   dictionary_lookup(SequenceId, SequenceMembers, SequenceIndex) ->
+		(	dictionary_lookup(SequenceId, SequenceMembers, SequenceIndex) ->
 			mark_candidate_member_ids(SequenceMembers, CandidateMemberIds0, CandidateMemberIds1)
-		;   CandidateMemberIds1 = CandidateMemberIds0
+		;	CandidateMemberIds1 = CandidateMemberIds0
 		),
 		active_class_member_ids(SequenceIds, SequenceIndex, CandidateMemberIds1, CandidateMemberIds).
 
 	mark_candidate_member_ids([], CandidateMemberIds, CandidateMemberIds).
 	mark_candidate_member_ids([MemberId| MemberIds], CandidateMemberIds0, CandidateMemberIds) :-
-		(   dictionary_lookup(MemberId, _Seen, CandidateMemberIds0) ->
+		(	dictionary_lookup(MemberId, _Seen, CandidateMemberIds0) ->
 			CandidateMemberIds1 = CandidateMemberIds0
-		;   dictionary_insert(CandidateMemberIds0, MemberId, true, CandidateMemberIds1)
+		;	dictionary_insert(CandidateMemberIds0, MemberId, true, CandidateMemberIds1)
 		),
 		mark_candidate_member_ids(MemberIds, CandidateMemberIds1, CandidateMemberIds).
 
@@ -205,9 +205,9 @@
 
 	class_child_member(ClassPrefix, pattern_occurrence(LeftPattern, LeftOccurrences, _LeftSupport), pattern_occurrence(RightPattern, RightOccurrences, _RightSupport), SupportCount, pattern_occurrence(ChildPattern, ChildOccurrences, Support)) :-
 		class_member_extension_item(ClassPrefix, RightPattern, RightItem),
-		(   same_event_child_pattern(LeftPattern, RightItem, ChildPattern),
+		(	same_event_child_pattern(LeftPattern, RightItem, ChildPattern),
 			same_event_join_occurrences(LeftOccurrences, RightOccurrences, ChildOccurrences)
-		;   sequence_child_pattern(LeftPattern, RightItem, ChildPattern),
+		;	sequence_child_pattern(LeftPattern, RightItem, ChildPattern),
 			sequence_join_occurrences(LeftOccurrences, RightOccurrences, ChildOccurrences)
 		),
 		ChildOccurrences \== [],
@@ -221,7 +221,7 @@
 			append(LeadingItemsets, [PrefixLastItemset], ClassPrefix),
 			append(LeadingItemsets, [PatternLastItemset], Pattern),
 			append(PrefixLastItemset, [Item], PatternLastItemset)
-		;   append(ClassPrefix, [[Item]], Pattern)
+		;	append(ClassPrefix, [[Item]], Pattern)
 		)).
 
 	same_event_child_pattern(LeftPattern, RightItem, ChildPattern) :-
@@ -284,9 +284,9 @@
 
 	skip_non_later_event_indices([], _MinimumLeftEventIndex, []).
 	skip_non_later_event_indices([RightEventIndex| RightEventIndices], MinimumLeftEventIndex, LaterRightEventIndices) :-
-		(   RightEventIndex > MinimumLeftEventIndex ->
+		(	RightEventIndex > MinimumLeftEventIndex ->
 			LaterRightEventIndices = [RightEventIndex| RightEventIndices]
-		;   skip_non_later_event_indices(RightEventIndices, MinimumLeftEventIndex, LaterRightEventIndices)
+		;	skip_non_later_event_indices(RightEventIndices, MinimumLeftEventIndex, LaterRightEventIndices)
 		).
 
 	event_indices_occurrences([], _SequenceId, []).
@@ -299,9 +299,9 @@
 
 	occurrences_support([], _Id, Support, Support).
 	occurrences_support([occurrence(Id, _EventIndex)| Occurrences], PreviousId, Support0, Support) :-
-		(   Id == PreviousId ->
+		(	Id == PreviousId ->
 			Support1 = Support0
-		;   Support1 is Support0 + 1
+		;	Support1 is Support0 + 1
 		),
 		occurrences_support(Occurrences, Id, Support1, Support).
 
@@ -314,7 +314,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = spade_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = spade_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_sequence_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(spade_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -323,7 +323,7 @@
 			memberchk(extension_modes([itemset, sequence]), Diagnostics),
 			memberchk(support_layout(vertical_occurrence_lists), Diagnostics) ->
 			true
-		;   domain_error(spade_pattern_miner, PatternMiner)
+		;	domain_error(spade_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, spade_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

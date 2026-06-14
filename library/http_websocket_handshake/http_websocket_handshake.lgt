@@ -63,11 +63,11 @@
 		generate(atom(Key), Bytes).
 
 	websocket_accept(Key, Accept) :-
-		(   var(Key) ->
+		(	var(Key) ->
 			instantiation_error
-		;   normalize_websocket_key(Key, NormalizedKey) ->
+		;	normalize_websocket_key(Key, NormalizedKey) ->
 			websocket_accept_from_key(NormalizedKey, Accept)
-		;   domain_error(http_websocket_key, Key)
+		;	domain_error(http_websocket_key, Key)
 		).
 
 	normalize_websocket_key(Value, Key) :-
@@ -184,16 +184,16 @@
 		websocket_sha1_rounds(NextIndex, Words, T, A0, C1, C0, D0, A, B, C, D, E).
 
 	websocket_sha1_f_k(Index, B, C, D, F, K) :-
-		(   Index < 20 ->
+		(	Index < 20 ->
 			F is ((B /\ C) \/ ((\ B) /\ D)) /\ 0xFFFFFFFF,
 			K = 0x5A827999
-		;   Index < 40 ->
+		;	Index < 40 ->
 			F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
 			K = 0x6ED9EBA1
-		;   Index < 60 ->
+		;	Index < 60 ->
 			F is ((B /\ C) \/ (B /\ D) \/ (C /\ D)) /\ 0xFFFFFFFF,
 			K = 0x8F1BBCDC
-		;   F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
+		;	F is xor(B, xor(C, D)) /\ 0xFFFFFFFF,
 			K = 0xCA62C1D6
 		).
 

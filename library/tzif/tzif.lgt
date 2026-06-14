@@ -1183,9 +1183,9 @@
 
 	read_snapshot_terms(Stream, TZifs) :-
 		read_term(Stream, Term, []),
-		( Term == end_of_file ->
+		(	Term == end_of_file ->
 			TZifs = []
-		; check_tzif_term(Term),
+		;	check_tzif_term(Term),
 			TZifs = [Term| Rest],
 			read_snapshot_terms(Stream, Rest)
 		).

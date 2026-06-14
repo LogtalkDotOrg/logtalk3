@@ -94,21 +94,21 @@
 		clusterer_data(Clusterer, _Encoders, _Modes, _Options, Diagnostics).
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Modes, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Modes, Options, Diagnostics),
 			^^valid_discrete_encoders(Encoders),
 			^^valid_mixed_vectors(Encoders, Modes),
 			^^valid_clusterer_metadata(kmodes_clusterer, Options, Diagnostics),
 			length(Modes, ModeCount),
 			^^valid_diagnostic_count(mode_count, Diagnostics, ModeCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	check_discrete_attributes([]).
 	check_discrete_attributes([Attribute-Values| Attributes]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			domain_error(discrete_attribute(Attribute), continuous)
-		;   true
+		;	true
 		),
 		check_discrete_attributes(Attributes).
 
@@ -133,19 +133,19 @@
 		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
 
 	attribute_spec(Attribute, Attributes, Spec) :-
-		(   member(Attribute-Spec, Attributes) ->
+		(	member(Attribute-Spec, Attributes) ->
 			true
-		;   existence_error(attribute, Attribute)
+		;	existence_error(attribute, Attribute)
 		).
 
 	check_attribute_value(Attribute, AllowedValues, Value) :-
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   member(Value, AllowedValues) ->
+		(	member(Value, AllowedValues) ->
 			true
-		;   domain_error(attribute_value(Attribute, AllowedValues), Value)
+		;	domain_error(attribute_value(Attribute, AllowedValues), Value)
 		).
 
 	build_encoders([], []).
@@ -187,32 +187,32 @@
 	farthest_candidate([Candidate| Candidates], Selected, Encoders, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_mode_distance(Vector, Selected, Encoders, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, Encoders, BestCandidate1, BestDistance1, BestCandidate).
 
 	optimize_modes(Rows, Encoders, Options, Iteration, PreviousShift, Modes0, Modes, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Modes = Modes0,
 			Convergence = maximum_iterations,
 			Iterations = Iteration,
 			FinalShift = PreviousShift
-		;   assign_rows(Rows, Modes0, Encoders, Options, Assignments),
+		;	assign_rows(Rows, Modes0, Encoders, Options, Assignments),
 			recompute_modes(Modes0, Assignments, Encoders, 1, Modes1),
 			max_mode_shift(Modes0, Modes1, Encoders, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
 			NextIteration is Iteration + 1,
-			(   Shift =< Tolerance ->
+			(	Shift =< Tolerance ->
 				Modes = Modes1,
 				Convergence = tolerance,
 				Iterations = NextIteration,
 				FinalShift = Shift
-			;   optimize_modes(Rows, Encoders, Options, NextIteration, Shift, Modes1, Modes, Convergence, Iterations, FinalShift)
+			;	optimize_modes(Rows, Encoders, Options, NextIteration, Shift, Modes1, Modes, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -228,10 +228,10 @@
 	nearest_mode([], _Encoders, _Vector, _Index, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_mode([Mode| Modes], Encoders, Vector, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		mismatch_distance(Encoders, Vector, Mode, 0.0, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance0
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		NextIndex is Index + 1,
@@ -244,26 +244,26 @@
 	closest_mode_distance([], _Encoders, _Vector, BestDistance, BestDistance).
 	closest_mode_distance([Mode| Modes], Encoders, Vector, BestDistance0, BestDistance) :-
 		mismatch_distance(Encoders, Vector, Mode, 0.0, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestDistance1 = Distance0
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_mode_distance(Modes, Encoders, Vector, BestDistance1, BestDistance).
 
 	mismatch_distance([], [], [], Distance, Distance).
 	mismatch_distance([discrete(_, _)| Encoders], [Feature| Features], [ModeFeature| ModeFeatures], Distance0, Distance) :-
-		(   Feature == ModeFeature ->
+		(	Feature == ModeFeature ->
 			Distance1 is Distance0
-		;   Distance1 is Distance0 + 1.0
+		;	Distance1 is Distance0 + 1.0
 		),
 		mismatch_distance(Encoders, Features, ModeFeatures, Distance1, Distance).
 
 	recompute_modes([], _, _, _, []).
 	recompute_modes([Mode0| Modes0], Assignments, Encoders, Cluster, [Mode| Modes]) :-
 		assigned_vectors(Cluster, Assignments, Vectors),
-		(   Vectors == [] ->
+		(	Vectors == [] ->
 			Mode = Mode0
-		;   mode_from_vectors(Encoders, Vectors, Mode)
+		;	mode_from_vectors(Encoders, Vectors, Mode)
 		),
 		NextCluster is Cluster + 1,
 		recompute_modes(Modes0, Assignments, Encoders, NextCluster, Modes).
@@ -302,10 +302,10 @@
 	categorical_mode([], _Column, BestValue, _BestCount, BestValue).
 	categorical_mode([Value| Values], Column, BestValue0, BestCount0, BestValue) :-
 		count_occurrences(Value, Column, Count),
-		(   Count > BestCount0 ->
+		(	Count > BestCount0 ->
 			BestValue1 = Value,
 			BestCount1 = Count
-		;   BestValue1 = BestValue0,
+		;	BestValue1 = BestValue0,
 			BestCount1 = BestCount0
 		),
 		categorical_mode(Values, Column, BestValue1, BestCount1, BestValue).

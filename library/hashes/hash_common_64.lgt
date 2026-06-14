@@ -137,9 +137,9 @@
 	rol64(Value, Shift, Rotated) :-
 		Mask is 0xFFFFFFFFFFFFFFFF,
 		Count is Shift /\ 63,
-		(   Count =:= 0 ->
+		(	Count =:= 0 ->
 			Rotated is Value /\ Mask
-		;   Rotated is ((Value << Count) \/ (Value >> (64 - Count))) /\ Mask
+		;	Rotated is ((Value << Count) \/ (Value >> (64 - Count))) /\ Mask
 		).
 
 	xor64(A, B, Xor) :-

@@ -112,9 +112,9 @@
 		probability_vectors(ScoreVectors0, ProbabilityVectors),
 		build_stage_trees(Classes, Attributes, Examples, ProbabilityVectors, LearningRate, TreeOptions, 1, [], ReversedClassTrees, 0.0, MaxResidual),
 		reverse(ReversedClassTrees, ClassTrees),
-		(   MaxResidual =< 1.0e-8 ->
+		(	MaxResidual =< 1.0e-8 ->
 			StageTrees = []
-		;   update_score_vectors(Examples, Classes, ClassTrees, ScoreVectors0, ScoreVectors1),
+		;	update_score_vectors(Examples, Classes, ClassTrees, ScoreVectors0, ScoreVectors1),
 			NextRound is Round + 1,
 			StageTrees = [stage_trees(ClassTrees)| StageTrees0],
 			build_stages(Classes, Attributes, Examples, NumberOfEstimators, LearningRate, TreeOptions, NextRound, ScoreVectors1, StageTrees0)
@@ -138,9 +138,9 @@
 	create_residual_examples([], [], _Index, _Class, [], 0.0).
 	create_residual_examples([Id-Class-AttributeValues| Examples], [Probabilities| ProbabilityVectors], Index, TargetClass, [example(Id, Residual, AttributeValues)| ResidualExamples], MaxResidual) :-
 		probability_at(Index, Probabilities, Probability),
-		(   Class == TargetClass ->
+		(	Class == TargetClass ->
 			Target = 1.0
-		;   Target = 0.0
+		;	Target = 0.0
 		),
 		Residual is Target - Probability,
 		ResidualMagnitude is abs(Residual),
@@ -208,14 +208,14 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, Options),
+		(	Classifier = gradient_boosting_classifier(Classes, InitialScores, StageTrees, Options),
 			^^valid_class_values(Classes),
 			length(Classes, ClassCount),
 			valid(list(float, ClassCount), InitialScores),
 			catch(::check_options(Options), _Error, fail),
 			valid_stage_trees(StageTrees, Classes) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	valid_stage_trees([], _Classes).

@@ -89,15 +89,15 @@
 		domain_error(ieee_754_sink, Sink).
 
 	valid_value(Value) :-
-		(   float(Value) ->
+		(	float(Value) ->
 			true
-		;   Value == @infinity ->
+		;	Value == @infinity ->
 			true
-		;   Value == @negative_infinity ->
+		;	Value == @negative_infinity ->
 			true
-		;   Value == @not_a_number ->
+		;	Value == @not_a_number ->
 			true
-		;   _NaNRepresentation_ == payloads,
+		;	_NaNRepresentation_ == payloads,
 			Value = not_a_number(Bytes),
 			valid_nan_bytes(Bytes)
 		).
@@ -110,10 +110,10 @@
 	same_value(Value, RoundtripValue, Bits) :-
 		float(Value),
 		float(RoundtripValue),
-		(   Value =:= 0 ->
+		(	Value =:= 0 ->
 			value_bits(RoundtripValue, RoundtripBits),
 			RoundtripBits == Bits
-		;   RoundtripValue =:= Value
+		;	RoundtripValue =:= Value
 		).
 
 	value_bits(Value, _) :-
@@ -131,17 +131,17 @@
 		special_bits(not_a_number, Bits).
 	value_bits(not_a_number(Bytes), Bits) :-
 		!,
-		(   _NaNRepresentation_ == payloads,
+		(	_NaNRepresentation_ == payloads,
 			valid_nan_bytes(Bytes) ->
 			^^bytes_to_unsigned_integer(Bytes, Bits)
-		;   domain_error(ieee_754_value, not_a_number(Bytes))
+		;	domain_error(ieee_754_value, not_a_number(Bytes))
 		).
 	value_bits(Value, Bits) :-
 		float(Value),
 		!,
-		(   finite_value_bits(Value, Bits) ->
+		(	finite_value_bits(Value, Bits) ->
 			true
-		;   domain_error(ieee_754_representation, Value)
+		;	domain_error(ieee_754_representation, Value)
 		).
 	value_bits(Value, _) :-
 		domain_error(ieee_754_value, Value).
@@ -155,11 +155,11 @@
 		^^zero_bits(1, Bits).
 	finite_value_bits(Value, Bits) :-
 		float_sign_and_abs(Value, Sign, AbsValue),
-		(   rounds_to_zero(AbsValue) ->
+		(	rounds_to_zero(AbsValue) ->
 			^^zero_bits(Sign, Bits)
-		;   _Precision_ == double ->
+		;	_Precision_ == double ->
 			float_to_ieee754_double(Value, Bits)
-		;   float_to_ieee754_double(Value, DoubleBits),
+		;	float_to_ieee754_double(Value, DoubleBits),
 			round_double_bits(DoubleBits, Bits)
 		).
 
@@ -181,10 +181,10 @@
 		Sign is (DoubleBits >> 63) /\ 0x01,
 		ExponentBits is (DoubleBits >> 52) /\ 0x7ff,
 		MantissaBits is DoubleBits /\ 0xfffffffffffff,
-		(   ExponentBits =:= 0 ->
+		(	ExponentBits =:= 0 ->
 			Significand = MantissaBits,
 			Exponent = -1074
-		;   Significand is (1 << 52) + MantissaBits,
+		;	Significand is (1 << 52) + MantissaBits,
 			Exponent is ExponentBits - 1023 - 52
 		).
 
@@ -194,50 +194,50 @@
 		Emin is 1 - Bias,
 		integer_floor_log2(Significand, SignificandLog2),
 		UnbiasedExponent is SignificandLog2 + Exponent,
-		(   UnbiasedExponent > Emax ->
+		(	UnbiasedExponent > Emax ->
 			fail
-		;   UnbiasedExponent >= Emin ->
+		;	UnbiasedExponent >= Emin ->
 			K is Exponent + MantissaWidth - UnbiasedExponent,
 			round_scaled_power_of_two(Significand, K, RoundedSignificand0),
 			renormalize_rounded_significand(RoundedSignificand0, MantissaWidth, UnbiasedExponent, Emax, RoundedSignificand, RoundedExponent),
 			ExponentBits is RoundedExponent + Bias,
 			MantissaBits is RoundedSignificand - (1 << MantissaWidth),
 			Bits is (Sign << (ExponentWidth + MantissaWidth)) \/ (ExponentBits << MantissaWidth) \/ MantissaBits
-		;   K is Exponent + MantissaWidth - Emin,
+		;	K is Exponent + MantissaWidth - Emin,
 			round_scaled_power_of_two(Significand, K, RoundedMantissa0),
-			(   RoundedMantissa0 =:= 0 ->
+			(	RoundedMantissa0 =:= 0 ->
 				Bits is Sign << (ExponentWidth + MantissaWidth)
-			;   RoundedMantissa0 >= (1 << MantissaWidth) ->
+			;	RoundedMantissa0 >= (1 << MantissaWidth) ->
 				ExponentBits = 1,
 				Bits is (Sign << (ExponentWidth + MantissaWidth)) \/ (ExponentBits << MantissaWidth)
-			;   Bits is (Sign << (ExponentWidth + MantissaWidth)) \/ RoundedMantissa0
+			;	Bits is (Sign << (ExponentWidth + MantissaWidth)) \/ RoundedMantissa0
 			)
 		).
 
 	renormalize_rounded_significand(RoundedSignificand0, MantissaWidth, UnbiasedExponent0, Emax, RoundedSignificand, RoundedExponent) :-
-		(   RoundedSignificand0 =:= (1 << (MantissaWidth + 1)) ->
+		(	RoundedSignificand0 =:= (1 << (MantissaWidth + 1)) ->
 			RoundedSignificand is 1 << MantissaWidth,
 			RoundedExponent is UnbiasedExponent0 + 1,
 			RoundedExponent =< Emax
-		;   RoundedSignificand = RoundedSignificand0,
+		;	RoundedSignificand = RoundedSignificand0,
 			RoundedExponent = UnbiasedExponent0
 		).
 
 	round_scaled_power_of_two(Significand, K, Rounded) :-
-		(   K >= 0 ->
+		(	K >= 0 ->
 			Rounded is Significand << K
-		;   Shift is -K,
+		;	Shift is -K,
 			Quotient is Significand >> Shift,
 			Mask is (1 << Shift) - 1,
 			Remainder is Significand /\ Mask,
 			Half is 1 << (Shift - 1),
-			(   Remainder < Half ->
+			(	Remainder < Half ->
 				Rounded = Quotient
-			;   Remainder > Half ->
+			;	Remainder > Half ->
 				Rounded is Quotient + 1
-			;   Quotient /\ 1 =:= 0 ->
+			;	Quotient /\ 1 =:= 0 ->
 				Rounded = Quotient
-			;   Rounded is Quotient + 1
+			;	Rounded is Quotient + 1
 			)
 		).
 
@@ -272,14 +272,14 @@
 		^^apply_float_sign(Sign, Magnitude, Value).
 
 	parse_nan_bits(ByteCount, Bits, Value) :-
-		(   _NaNRepresentation_ == canonical ->
+		(	_NaNRepresentation_ == canonical ->
 			Value = @not_a_number
-		;   ^^canonical_nan_bits(CanonicalBits),
+		;	^^canonical_nan_bits(CanonicalBits),
 			canonical_nan_bytes(ByteCount, CanonicalBits, CanonicalBytes),
 			^^integer_to_bytes(ByteCount, Bits, Bytes),
-			(   Bytes == CanonicalBytes ->
+			(	Bytes == CanonicalBytes ->
 				Value = @not_a_number
-			;   Value = not_a_number(Bytes)
+			;	Value = not_a_number(Bytes)
 			)
 		).
 
@@ -307,17 +307,17 @@
 		integer_floor_log2(Integer, 0, Log2).
 
 	integer_floor_log2(Integer, Log20, Log2) :-
-		(   Integer < 2 ->
+		(	Integer < 2 ->
 			Log2 = Log20
-		;   NextInteger is Integer >> 1,
+		;	NextInteger is Integer >> 1,
 			NextLog2 is Log20 + 1,
 			integer_floor_log2(NextInteger, NextLog2, Log2)
 		).
 
 	power_of_two_float(Exponent, Float) :-
-		(   Exponent >= 0 ->
+		(	Exponent >= 0 ->
 			power_of_two_float_up(Exponent, 1.0, Float)
-		;   PositiveExponent is -Exponent,
+		;	PositiveExponent is -Exponent,
 			power_of_two_float_down(PositiveExponent, 1.0, Float)
 		).
 
@@ -356,42 +356,42 @@
 	float_sign_and_abs(Value, 0, Value).
 
 	normalize_binary_float(Value, Significand, Exponent) :-
-		(   Value >= 1.0 ->
+		(	Value >= 1.0 ->
 			normalize_binary_float_down(Value, 0, Significand, Exponent)
-		;   normalize_binary_float_up(Value, 0, Significand, Exponent)
+		;	normalize_binary_float_up(Value, 0, Significand, Exponent)
 		).
 
 	normalize_binary_float_down(Value, Exponent0, Significand, Exponent) :-
-		(   Value < 2.0 ->
+		(	Value < 2.0 ->
 			Significand = Value,
 			Exponent = Exponent0
-		;   NextValue is Value / 2.0,
+		;	NextValue is Value / 2.0,
 			NextExponent is Exponent0 + 1,
 			normalize_binary_float_down(NextValue, NextExponent, Significand, Exponent)
 		).
 
 	normalize_binary_float_up(Value, Exponent0, Significand, Exponent) :-
-		(   Value >= 1.0 ->
+		(	Value >= 1.0 ->
 			Significand = Value,
 			Exponent = Exponent0
-		;   NextValue is Value * 2.0,
+		;	NextValue is Value * 2.0,
 			NextExponent is Exponent0 - 1,
 			normalize_binary_float_up(NextValue, NextExponent, Significand, Exponent)
 		).
 
 	encode_ieee754_double_finite(Significand, Exponent, ExponentBits, MantissaBits) :-
-		(   Exponent > 1023 ->
+		(	Exponent > 1023 ->
 			fail
-		;   Exponent >= -1022 ->
+		;	Exponent >= -1022 ->
 			significand_fraction_bits(Significand, 52, MantissaBits, Remainder),
 			Remainder = 0.0,
 			ExponentBits is Exponent + 1023
-		;   Exponent >= -1074 ->
+		;	Exponent >= -1074 ->
 			Shift is Exponent + 1074,
 			scaled_significand_bits(Significand, Shift, MantissaBits, Remainder),
 			Remainder = 0.0,
 			ExponentBits = 0
-		;   fail
+		;	fail
 		).
 
 	significand_fraction_bits(Significand, Precision, Bits, Remainder) :-
@@ -403,10 +403,10 @@
 	fraction_bits(Precision, Fraction0, Bits0, Bits, Fraction) :-
 		Precision > 0,
 		Twice is Fraction0 * 2.0,
-		(   Twice >= 1.0 ->
+		(	Twice >= 1.0 ->
 			Bit = 1,
 			Fraction1 is Twice - 1.0
-		;   Bit = 0,
+		;	Bit = 0,
 			Fraction1 = Twice
 		),
 		Bits1 is (Bits0 << 1) \/ Bit,
@@ -422,10 +422,10 @@
 	scaled_bits(Shift, Fraction0, Bits0, Bits, Fraction) :-
 		Shift > 0,
 		Twice is Fraction0 * 2.0,
-		(   Twice >= 1.0 ->
+		(	Twice >= 1.0 ->
 			Bit = 1,
 			Fraction1 is Twice - 1.0
-		;   Bit = 0,
+		;	Bit = 0,
 			Fraction1 = Twice
 		),
 		Bits1 is (Bits0 << 1) \/ Bit,

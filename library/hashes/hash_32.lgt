@@ -140,9 +140,9 @@
 	crc32_table_value(0, Value, Value) :-
 		!.
 	crc32_table_value(Count, Value0, Value) :-
-		(   Value0 /\ 1 =:= 1 ->
+		(	Value0 /\ 1 =:= 1 ->
 			Value1 is xor((Value0 >> 1), _Polynomial_)
-		;   Value1 is Value0 >> 1
+		;	Value1 is Value0 >> 1
 		),
 		NextCount is Count - 1,
 		crc32_table_value(NextCount, Value1, Value).
@@ -206,10 +206,10 @@
 
 	crc32_non_reflected(Bytes, CRC32) :-
 		crc32_non_reflected_acc(Bytes, _Initial_, Acc0),
-		(   _AppendLength_ == true ->
+		(	_AppendLength_ == true ->
 			length_bytes(Bytes, LengthBytes),
 			crc32_non_reflected_acc(LengthBytes, Acc0, Acc1)
-		;   Acc1 = Acc0
+		;	Acc1 = Acc0
 		),
 		CRC32 is xor(Acc1, _FinalXor_) /\ 0xFFFFFFFF.
 
@@ -225,9 +225,9 @@
 	step_bits(0, Acc, Acc) :-
 		!.
 	step_bits(Count, Acc0, Acc) :-
-		(   Acc0 /\ 0x80000000 =:= 0x80000000 ->
+		(	Acc0 /\ 0x80000000 =:= 0x80000000 ->
 			Acc1 is xor((Acc0 << 1), _Polynomial_) /\ 0xFFFFFFFF
-		;   Acc1 is (Acc0 << 1) /\ 0xFFFFFFFF
+		;	Acc1 is (Acc0 << 1) /\ 0xFFFFFFFF
 		),
 		NextCount is Count - 1,
 		step_bits(NextCount, Acc1, Acc).
@@ -430,20 +430,20 @@
 		md5_rounds(NextI, X, D0, B1, B0, C0, A, B, C, D).
 
 	md5_f(I, B, C, D, F) :-
-		(   I < 16 ->
+		(	I < 16 ->
 			F is ((B /\ C) \/ ((\ B) /\ D)) /\ 0xFFFFFFFF
-		;   I < 32 ->
+		;	I < 32 ->
 			F is ((D /\ B) \/ ((\ D) /\ C)) /\ 0xFFFFFFFF
-		;   I < 48 ->
+		;	I < 48 ->
 			F is xor(B, xor(C, D)) /\ 0xFFFFFFFF
-		;   F is xor(C, (B \/ (\ D))) /\ 0xFFFFFFFF
+		;	F is xor(C, (B \/ (\ D))) /\ 0xFFFFFFFF
 		).
 
 	md5_g(I, G) :-
-		(   I < 16 -> G is I
-		;   I < 32 -> G is (5 * I + 1) mod 16
-		;   I < 48 -> G is (3 * I + 5) mod 16
-		;   G is (7 * I) mod 16
+		(	I < 16 -> G is I
+		;	I < 32 -> G is (5 * I + 1) mod 16
+		;	I < 48 -> G is (3 * I + 5) mod 16
+		;	G is (7 * I) mod 16
 		).
 
 	md5_s( 0,  7).

@@ -401,9 +401,9 @@
 		tree_to_clauses(Tree, Functor, AttributeNames, [], Clauses).
 
 	check_classifier(Classifier) :-
-		(   valid_tree(Classifier) ->
+		(	valid_tree(Classifier) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	classifier_diagnostics_data(_Tree, [model(c45_classifier)]).

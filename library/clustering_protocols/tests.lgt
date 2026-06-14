@@ -29,9 +29,9 @@
 	learn(_Dataset, sample_clusterer([x, y]), _Options).
 
 	check_clusterer(sample_clusterer(Attributes)) :-
-		(   ^^valid_attribute_names(Attributes) ->
+		(	^^valid_attribute_names(Attributes) ->
 			true
-		;   domain_error(clusterer, sample_clusterer(Attributes))
+		;	domain_error(clusterer, sample_clusterer(Attributes))
 		).
 
 	clusterer_diagnostics_data(sample_clusterer(Attributes), [

@@ -108,9 +108,9 @@
 	check_pattern_miner(PatternMiner) :-
 		(	var(PatternMiner) ->
 			instantiation_error
-		;   ::pattern_miner_diagnostics_data(PatternMiner, _Diagnostics) ->
+		;	::pattern_miner_diagnostics_data(PatternMiner, _Diagnostics) ->
 			true
-		;   domain_error(pattern_miner, PatternMiner)
+		;	domain_error(pattern_miner, PatternMiner)
 		).
 
 	valid_pattern_miner(PatternMiner) :-
@@ -219,9 +219,9 @@
 
 	pattern_items_length([], PatternLength, PatternLength).
 	pattern_items_length([Item| Items], PatternLength0, PatternLength) :-
-		(   Item = [_| _] ->
+		(	Item = [_| _] ->
 			pattern_items_length(Item, 0, ItemLength)
-		;   ItemLength = 1
+		;	ItemLength = 1
 		),
 		PatternLength1 is PatternLength0 + ItemLength,
 		pattern_items_length(Items, PatternLength1, PatternLength).

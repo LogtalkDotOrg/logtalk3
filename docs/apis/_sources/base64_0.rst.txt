@@ -14,8 +14,8 @@ Base64 parser and generator.
 |    ``logtalk_load(base64(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-18
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,6 +53,14 @@ Parses the Base64 data from the given source (``atom(Atom)``, ``chars(List)``, `
 | **Mode and number of proofs:**
 |    ``parse(++compound,--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Base64 source term:
+|        ``domain_error(base64_source,Source)``
+|    ``Source`` contains Base64 data with characters outside the Base64 alphabet:
+|        ``representation_error(base64)``
+
 
 ------------
 
@@ -71,6 +79,12 @@ Generates Base64 in the representation specified in the first argument (``atom(A
 |    ``generate(Sink,Bytes)``
 | **Mode and number of proofs:**
 |    ``generate(+compound,+list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Base64 sink term:
+|        ``domain_error(base64_sink,Sink)``
 
 
 ------------

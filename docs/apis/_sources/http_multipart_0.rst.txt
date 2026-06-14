@@ -85,7 +85,7 @@ True when the argument is a valid normalized multipart body term.
 ``parse/4``
 ^^^^^^^^^^^
 
-Parses a multipart body from a source term by delegating to the underlying http_core::parse_body/4 predicate after validating the media type.
+Parses a multipart body from a source term by delegating to the underlying ``http_core::parse_body/4`` predicate after validating the media type.
 
 | **Compilation flags:**
 |    ``static``
@@ -104,7 +104,7 @@ Parses a multipart body from a source term by delegating to the underlying http_
 ``generate/3``
 ^^^^^^^^^^^^^^
 
-Generates a multipart body to a sink term by delegating to the underlying http_core::generate_body/3 predicate after validating the multipart body term.
+Generates a multipart body to a sink term by delegating to the underlying ``http_core::generate_body/3`` predicate after validating the multipart body term.
 
 | **Compilation flags:**
 |    ``static``
@@ -180,7 +180,7 @@ Returns the list of form-data field(Name, Value, Parameters) descriptors found i
 ``files/2``
 ^^^^^^^^^^^
 
-Returns the list of form-data file(Name, Filename, MediaType, Payload, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.
+Returns the list of form-data ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors found in a validated multipart/form-data body, preserving part order.
 
 | **Compilation flags:**
 |    ``static``
@@ -370,7 +370,7 @@ Constructs a normalized multipart part for a form-data file using a content-disp
 ``form_data_body/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Constructs a multipart/form-data body from an ordered list of field(Name, Value, Parameters) and file(Name, Filename, MediaType, Payload, Parameters) descriptors.
+Constructs a multipart/form-data body from an ordered list of ``field(Name, Value, Parameters)`` and ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors.
 
 | **Compilation flags:**
 |    ``static``

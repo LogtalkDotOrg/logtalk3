@@ -96,14 +96,14 @@
 		clusterer_data(Clusterer, _Encoders, _Prototypes, _Options, Diagnostics).
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Prototypes, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Prototypes, Options, Diagnostics),
 			^^valid_mixed_encoders(Encoders),
 			^^valid_mixed_vectors(Encoders, Prototypes),
 			^^valid_clusterer_metadata(kprototypes_clusterer, Options, Diagnostics),
 			length(Prototypes, PrototypeCount),
 			^^valid_diagnostic_count(prototype_count, Diagnostics, PrototypeCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	check_examples(Dataset, Attributes, AttributeNames, Examples) :-
@@ -127,29 +127,29 @@
 		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
 
 	attribute_spec(Attribute, Attributes, Spec) :-
-		(   member(Attribute-Spec, Attributes) ->
+		(	member(Attribute-Spec, Attributes) ->
 			true
-		;   existence_error(attribute, Attribute)
+		;	existence_error(attribute, Attribute)
 		).
 
 	check_attribute_value(_Attribute, continuous, Value) :-
 		!,
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		).
 	check_attribute_value(Attribute, AllowedValues, Value) :-
-		(   nonvar(Value) ->
+		(	nonvar(Value) ->
 			true
-		;   instantiation_error
+		;	instantiation_error
 		),
-		(   member(Value, AllowedValues) ->
+		(	member(Value, AllowedValues) ->
 			true
-		;   domain_error(attribute_value(Attribute, AllowedValues), Value)
+		;	domain_error(attribute_value(Attribute, AllowedValues), Value)
 		).
 
 	build_encoders([], _, _, []).
@@ -162,19 +162,19 @@
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		^^option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == on ->
+		(	FeatureScaling == on ->
 			^^known_attribute_values(Examples, Attribute, Values),
 			arithmetic_mean(Values, Mean),
 			length(Values, Count),
-			(   Count > 1 ->
+			(	Count > 1 ->
 				variance(Values, Variance)
-			;   Variance = 0.0
+			;	Variance = 0.0
 			),
-			(   Variance > 0.0 ->
+			(	Variance > 0.0 ->
 				Scale is sqrt(Variance)
-			;   Scale = 1.0
+			;	Scale = 1.0
 			)
-		;   Mean = 0.0,
+		;	Mean = 0.0,
 			Scale = 1.0
 		).
 
@@ -218,32 +218,32 @@
 	farthest_candidate([Candidate| Candidates], Selected, Encoders, Options, BestCandidate0, BestDistance0, BestCandidate) :-
 		Candidate = _-Vector,
 		closest_prototype_distance(Vector, Selected, Encoders, Options, Distance),
-		(   Distance > BestDistance0 ->
+		(	Distance > BestDistance0 ->
 			BestCandidate1 = Candidate,
 			BestDistance1 = Distance
-		;   BestCandidate1 = BestCandidate0,
+		;	BestCandidate1 = BestCandidate0,
 			BestDistance1 = BestDistance0
 		),
 		farthest_candidate(Candidates, Selected, Encoders, Options, BestCandidate1, BestDistance1, BestCandidate).
 
 	optimize_prototypes(Rows, Encoders, Options, Iteration, PreviousShift, Prototypes0, Prototypes, Convergence, Iterations, FinalShift) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Iteration >= MaximumIterations ->
+		(	Iteration >= MaximumIterations ->
 			Prototypes = Prototypes0,
 			Convergence = maximum_iterations,
 			Iterations = Iteration,
 			FinalShift = PreviousShift
-		;   assign_rows(Rows, Prototypes0, Encoders, Options, Assignments),
+		;	assign_rows(Rows, Prototypes0, Encoders, Options, Assignments),
 			recompute_prototypes(Prototypes0, Assignments, Encoders, 1, Prototypes1),
 			max_prototype_shift(Prototypes0, Prototypes1, Encoders, Options, 0.0, Shift),
 			^^option(tolerance(Tolerance), Options),
 			NextIteration is Iteration + 1,
-			(   Shift =< Tolerance ->
+			(	Shift =< Tolerance ->
 				Prototypes = Prototypes1,
 				Convergence = tolerance,
 				Iterations = NextIteration,
 				FinalShift = Shift
-			;   optimize_prototypes(Rows, Encoders, Options, NextIteration, Shift, Prototypes1, Prototypes, Convergence, Iterations, FinalShift)
+			;	optimize_prototypes(Rows, Encoders, Options, NextIteration, Shift, Prototypes1, Prototypes, Convergence, Iterations, FinalShift)
 			)
 		).
 
@@ -259,10 +259,10 @@
 	nearest_prototype([], _Encoders, _Vector, _Options, _Index, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_prototype([Prototype| Prototypes], Encoders, Vector, Options, Index, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		mixed_distance(Encoders, Vector, Prototype, Options, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestCluster1 = Index,
 			BestDistance1 = Distance0
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		NextIndex is Index + 1,
@@ -275,9 +275,9 @@
 	closest_prototype_distance([], _Encoders, _Vector, _Options, BestDistance, BestDistance).
 	closest_prototype_distance([Prototype| Prototypes], Encoders, Vector, Options, BestDistance0, BestDistance) :-
 		mixed_distance(Encoders, Vector, Prototype, Options, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestDistance1 = Distance0
-		;   BestDistance1 = BestDistance0
+		;	BestDistance1 = BestDistance0
 		),
 		closest_prototype_distance(Prototypes, Encoders, Vector, Options, BestDistance1, BestDistance).
 
@@ -290,17 +290,17 @@
 	mixed_distance([discrete(_, _)| Encoders], [Feature| Features], [PrototypeFeature| PrototypeFeatures], Options, Distance) :-
 		mixed_distance(Encoders, Features, PrototypeFeatures, Options, RestDistance),
 		^^option(gamma(Gamma), Options),
-		(   Feature == PrototypeFeature ->
+		(	Feature == PrototypeFeature ->
 			Distance = RestDistance
-		;   Distance is RestDistance + Gamma
+		;	Distance is RestDistance + Gamma
 		).
 
 	recompute_prototypes([], _, _, _, []).
 	recompute_prototypes([Prototype0| Prototypes0], Assignments, Encoders, Cluster, [Prototype| Prototypes]) :-
 		assigned_vectors(Assignments, Cluster, Vectors),
-		(   Vectors == [] ->
+		(	Vectors == [] ->
 			Prototype = Prototype0
-		;   prototype_from_vectors(Encoders, Vectors, Prototype)
+		;	prototype_from_vectors(Encoders, Vectors, Prototype)
 		),
 		NextCluster is Cluster + 1,
 		recompute_prototypes(Prototypes0, Assignments, Encoders, NextCluster, Prototypes).
@@ -342,10 +342,10 @@
 	categorical_mode([], _Column, BestValue, _BestCount, BestValue).
 	categorical_mode([Value| Values], Column, BestValue0, BestCount0, BestValue) :-
 		count_occurrences(Column, Value, 0, Count),
-		(   Count > BestCount0 ->
+		(	Count > BestCount0 ->
 			BestValue1 = Value,
 			BestCount1 = Count
-		;   BestValue1 = BestValue0,
+		;	BestValue1 = BestValue0,
 			BestCount1 = BestCount0
 		),
 		categorical_mode(Values, Column, BestValue1, BestCount1, BestValue).

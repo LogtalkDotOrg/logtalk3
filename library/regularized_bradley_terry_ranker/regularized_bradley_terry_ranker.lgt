@@ -103,12 +103,12 @@
 		format('Diagnostics: ~q~n', [Diagnostics]).
 
 	ranker_data(Ranker, Items, Strengths, Diagnostics) :-
-		(   var(Ranker) ->
+		(	var(Ranker) ->
 			instantiation_error
-		;   Ranker = regularized_bt_ranker(Items, Strengths, Diagnostics),
+		;	Ranker = regularized_bt_ranker(Items, Strengths, Diagnostics),
 			valid_ranker_data(Items, Strengths, Diagnostics) ->
 			true
-		;   domain_error(regularized_bradley_terry_ranker, Ranker)
+		;	domain_error(regularized_bradley_terry_ranker, Ranker)
 		).
 
 	valid_ranker_data(Items, Strengths, Diagnostics) :-
@@ -147,9 +147,9 @@
 		^^item_denominator(Neighbors, StrengthDictionary, CurrentStrength, 0.0, Denominator),
 		Strength is (Wins + ShapeMinusOne) / (Rate + Denominator),
 		Difference is abs(CurrentStrength - Strength),
-		(   Difference > MaximumDifference0 ->
+		(	Difference > MaximumDifference0 ->
 			MaximumDifference1 = Difference
-		;   MaximumDifference1 = MaximumDifference0
+		;	MaximumDifference1 = MaximumDifference0
 		),
 		update_strength_values(PairWeights, WinTotals, ShapeMinusOne, Rate, StrengthDictionary, CurrentStrengths, Strengths, MaximumDifference1, MaximumDifference).
 

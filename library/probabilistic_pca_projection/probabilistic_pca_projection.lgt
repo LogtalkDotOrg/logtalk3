@@ -82,14 +82,14 @@
 		DimensionReducer = probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics).
 
 	check_dimension_reducer(DimensionReducer) :-
-		(   DimensionReducer = probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics),
+		(	DimensionReducer = probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics),
 			^^valid_linear_encoders(Encoders),
 			^^valid_projection_components(Encoders, Components),
 			^^valid_projection_components(Encoders, Loadings),
 			valid(non_negative_number, NoiseVariance),
 			valid_probabilistic_pca_diagnostics(Components, Loadings, ExplainedVariances, Diagnostics) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	print_dimension_reducer_properties(probabilistic_pca_reducer(Encoders, Components, Loadings, NoiseVariance, ExplainedVariances, Diagnostics)) :-
@@ -107,9 +107,9 @@
 
 	check_minimum_examples(Examples) :-
 		length(Examples, Count),
-		(   Count >= 2 ->
+		(	Count >= 2 ->
 			true
-		;   domain_error(minimum_number_of_examples, Count)
+		;	domain_error(minimum_number_of_examples, Count)
 		).
 
 	example_attribute_values(_-AttributeValues, AttributeValues).
@@ -120,9 +120,9 @@
 	handle_component_shortfall(RequestedComponentCount, Options, CovarianceMatrix, Components, ExplainedVariances, ExtractionDiagnostics) :-
 		length(Components, LearnedComponentCount),
 		^^option(shortfall_policy(Policy), Options),
-		(   Policy == error ->
+		(	Policy == error ->
 			domain_error(component_count, RequestedComponentCount-LearnedComponentCount)
-		;   residual_eigenvalue(CovarianceMatrix, Components, ExplainedVariances, Options, ResidualEigenvalue),
+		;	residual_eigenvalue(CovarianceMatrix, Components, ExplainedVariances, Options, ResidualEigenvalue),
 			^^option(tolerance(Tolerance), Options),
 			ExtractionDiagnostics = truncated(RequestedComponentCount, LearnedComponentCount, ResidualEigenvalue, Tolerance)
 		).
@@ -130,9 +130,9 @@
 	residual_eigenvalue(CovarianceMatrix, Components, ExplainedVariances, Options, ResidualEigenvalue) :-
 		deflate_extracted_components(Components, ExplainedVariances, CovarianceMatrix, ResidualCovarianceMatrix),
 		^^extract_components(ResidualCovarianceMatrix, 1, Options, _ResidualComponents, ResidualEigenvalues),
-		(   ResidualEigenvalues = [ResidualEigenvalue0| _] ->
+		(	ResidualEigenvalues = [ResidualEigenvalue0| _] ->
 			ResidualEigenvalue = ResidualEigenvalue0
-		;   ResidualEigenvalue = 0.0
+		;	ResidualEigenvalue = 0.0
 		).
 
 	deflate_extracted_components([], [], CovarianceMatrix, CovarianceMatrix).
@@ -148,13 +148,13 @@
 	estimate_noise_variance(CovarianceTrace, FeatureCount, ExplainedVariances, NoiseVariance) :-
 		length(ExplainedVariances, LearnedComponentCount),
 		ResidualDimensions is FeatureCount - LearnedComponentCount,
-		(   ResidualDimensions =< 0 ->
+		(	ResidualDimensions =< 0 ->
 			NoiseVariance = 0.0
-		;   sum_numbers(ExplainedVariances, 0.0, RetainedVariance),
+		;	sum_numbers(ExplainedVariances, 0.0, RetainedVariance),
 			ResidualVariance0 is CovarianceTrace - RetainedVariance,
-			(   ResidualVariance0 > 0.0 ->
+			(	ResidualVariance0 > 0.0 ->
 				ResidualVariance = ResidualVariance0
-			;   ResidualVariance = 0.0
+			;	ResidualVariance = 0.0
 			),
 			NoiseVariance is ResidualVariance / ResidualDimensions
 		).
@@ -167,10 +167,10 @@
 	build_loadings([], [], _NoiseVariance, _Tolerance, []).
 	build_loadings([Eigenvector| Eigenvectors], [ExplainedVariance| ExplainedVariances], NoiseVariance, Tolerance, [Loading| Loadings]) :-
 		latent_variance(ExplainedVariance, NoiseVariance, Tolerance, LoadingVariance),
-		(   LoadingVariance =< Tolerance ->
+		(	LoadingVariance =< Tolerance ->
 			length(Eigenvector, FeatureCount),
 			new_vector(FeatureCount, 0.0, Loading)
-		;   LoadingScale is sqrt(LoadingVariance),
+		;	LoadingScale is sqrt(LoadingVariance),
 			rescale(Eigenvector, LoadingScale, Loading)
 		),
 		build_loadings(Eigenvectors, ExplainedVariances, NoiseVariance, Tolerance, Loadings).
@@ -178,22 +178,22 @@
 	build_posterior_components([], [], _NoiseVariance, _Tolerance, []).
 	build_posterior_components([Eigenvector| Eigenvectors], [ExplainedVariance| ExplainedVariances], NoiseVariance, Tolerance, [Component| Components]) :-
 		latent_variance(ExplainedVariance, NoiseVariance, Tolerance, PosteriorVariance),
-		(   ExplainedVariance =< Tolerance ->
+		(	ExplainedVariance =< Tolerance ->
 			length(Eigenvector, FeatureCount),
 			new_vector(FeatureCount, 0.0, Component)
-		;   PosteriorVariance =< Tolerance ->
+		;	PosteriorVariance =< Tolerance ->
 			length(Eigenvector, FeatureCount),
 			new_vector(FeatureCount, 0.0, Component)
-		;   Scale is sqrt(PosteriorVariance) / ExplainedVariance,
+		;	Scale is sqrt(PosteriorVariance) / ExplainedVariance,
 			rescale(Eigenvector, Scale, Component)
 		),
 		build_posterior_components(Eigenvectors, ExplainedVariances, NoiseVariance, Tolerance, Components).
 
 	latent_variance(ExplainedVariance, NoiseVariance, Tolerance, LatentVariance) :-
 		Variance0 is ExplainedVariance - NoiseVariance,
-		(   Variance0 =< Tolerance ->
+		(	Variance0 =< Tolerance ->
 			LatentVariance = 0.0
-		;   LatentVariance = Variance0
+		;	LatentVariance = Variance0
 		).
 
 	valid_probabilistic_pca_diagnostics(Components, Loadings, ExplainedVariances, Diagnostics) :-
@@ -216,13 +216,13 @@
 		valid(boolean, FeatureScaling).
 
 	valid_shortfall_diagnostics(Components, Diagnostics) :-
-		(   memberchk(shortfall(Shortfall), Diagnostics) ->
+		(	memberchk(shortfall(Shortfall), Diagnostics) ->
 			valid_shortfall_diagnostic(Shortfall),
 			length(Components, LearnedComponentCount),
 			Shortfall = truncated(RequestedComponentCount, LearnedComponentCount, ResidualEigenvalue, _Tolerance),
 			RequestedComponentCount > LearnedComponentCount,
 			ResidualEigenvalue >= 0.0
-		;   true
+		;	true
 		).
 
 	valid_shortfall_diagnostic(truncated(RequestedComponentCount, LearnedComponentCount, ResidualEigenvalue, Tolerance)) :-

@@ -238,9 +238,9 @@
 		expand_alias(Path, Expanded),
 		os::decompose_file_name(Expanded, _, Name, Extension0),
 		normalize_extension(Extension0, Extension),
-		(   encoding_suffix(Extension, Encoding) ->
+		(	encoding_suffix(Extension, Encoding) ->
 			guess_name_type(Name, Type, Strict)
-		;   Encoding = '',
+		;	Encoding = '',
 			guess_extension_type_or_empty(Extension, Type, Strict)
 		).
 
@@ -255,9 +255,9 @@
 	guess_extension_type_or_empty('', '', _) :-
 		!.
 	guess_extension_type_or_empty(Extension, Type, Strict) :-
-		(   extension_type(Extension, Type, Strict) ->
+		(	extension_type(Extension, Type, Strict) ->
 			true
-		;   Type = ''
+		;	Type = ''
 		).
 
 	extension_type_lookup(true, Extension, Type) :-
@@ -288,9 +288,9 @@
 
 	read_mime_types_stream(Stream, Pairs) :-
 		reader::line_to_codes(Stream, Codes),
-		(   Codes == end_of_file ->
+		(	Codes == end_of_file ->
 			Pairs = []
-		;   atom_codes(Line, Codes),
+		;	atom_codes(Line, Codes),
 			parse_mime_types_line(Line, LinePairs),
 			append(LinePairs, RestPairs, Pairs),
 			read_mime_types_stream(Stream, RestPairs)
@@ -299,9 +299,9 @@
 	parse_mime_types_line(Line, Pairs) :-
 		strip_comment(Line, WithoutComment),
 		string(atom)::trim(WithoutComment, Trimmed),
-		(   Trimmed == '' ->
+		(	Trimmed == '' ->
 			Pairs = []
-		;   string(atom)::split_string(Trimmed, ' \t', ' \t', Tokens),
+		;	string(atom)::split_string(Trimmed, ' \t', ' \t', Tokens),
 			parse_mime_types_tokens(Tokens, Pairs)
 		).
 
@@ -332,9 +332,9 @@
 		trim_at_delimiter(FragmentTrimmed, '?', Output).
 
 	trim_at_delimiter(Input, Delimiter, Output) :-
-		(   sub_atom(Input, Before, _, _, Delimiter) ->
+		(	sub_atom(Input, Before, _, _, Delimiter) ->
 			sub_atom(Input, 0, Before, _, Output)
-		;   Output = Input
+		;	Output = Input
 		).
 
 	strip_comment(Line, WithoutComment) :-
@@ -342,9 +342,9 @@
 
 	expand_alias(Path, Expanded) :-
 		os::decompose_file_name(Path, _, Name, Extension),
-		(   suffix_alias(Extension, Replacement) ->
+		(	suffix_alias(Extension, Replacement) ->
 			atom_concat(Name, Replacement, Expanded)
-		;   Expanded = Path
+		;	Expanded = Path
 		).
 
 	normalize_type(Type, Normalized) :-
@@ -361,9 +361,9 @@
 		!.
 	normalize_extension_atom(Extension, Normalized) :-
 		string(atom)::string_lower(Extension, Lowercase),
-		(   sub_atom(Lowercase, 0, 1, _, '.') ->
+		(	sub_atom(Lowercase, 0, 1, _, '.') ->
 			Normalized = Lowercase
-		;   atom_concat('.', Lowercase, Normalized)
+		;	atom_concat('.', Lowercase, Normalized)
 		).
 
 	unique(List, Unique) :-

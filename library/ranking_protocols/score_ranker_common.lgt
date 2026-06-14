@@ -64,15 +64,15 @@
 		!.
 	rank_candidate_pairs([Candidate| Candidates], ScoreDictionary, SeenCandidates0, Original, [pair(NegScore, Candidate)-Candidate| Pairs]) :-
 		!,
-		(   var(Candidate) ->
+		(	var(Candidate) ->
 			instantiation_error
-		;   dictionary_lookup(Candidate, _Seen, SeenCandidates0) ->
+		;	dictionary_lookup(Candidate, _Seen, SeenCandidates0) ->
 			domain_error(unique_candidates, Original)
-		;   dictionary_lookup(Candidate, Score, ScoreDictionary) ->
+		;	dictionary_lookup(Candidate, Score, ScoreDictionary) ->
 			dictionary_insert(SeenCandidates0, Candidate, true, SeenCandidates),
 			NegScore is -Score,
 			rank_candidate_pairs(Candidates, ScoreDictionary, SeenCandidates, Original, Pairs)
-		;   existence_error(item, Candidate)
+		;	existence_error(item, Candidate)
 		).
 	rank_candidate_pairs(Candidates, _ScoreDictionary, _SeenCandidates, _Original, _Pairs) :-
 		type_error(list, Candidates).

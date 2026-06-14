@@ -188,9 +188,9 @@
 
 	codes_to_bytes([], []).
 	codes_to_bytes([Code| Codes], [Byte| Bytes]) :-
-		(   ::mapping(Byte, Code) ->
+		(	::mapping(Byte, Code) ->
 			true
-		;   Byte = Code,
+		;	Byte = Code,
 			\+ ::mapping(Byte, _),
 			\+ ::undefined(Byte, _)
 		),
@@ -198,9 +198,9 @@
 
 	bytes_to_codes([], []).
 	bytes_to_codes([Byte| Bytes], [Code| Codes]) :-
-		(   ::mapping(Byte, Code) ->
+		(	::mapping(Byte, Code) ->
 			true
-		;   Code = Byte,
+		;	Code = Byte,
 			\+ ::mapping(Byte, _),
 			\+ ::undefined(Byte, _)
 		),

@@ -87,7 +87,7 @@
 		].
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Ordering, Clusters, Noise, Options),
+		(	clusterer_data(Clusterer, Encoders, Ordering, Clusters, Noise, Options),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid_ordering(Ordering, FeatureCount, []),
@@ -95,7 +95,7 @@
 			valid(list(list(number, FeatureCount)), Noise),
 			catch(::check_options(Options), _Error, fail) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	valid_ordering([], _FeatureCount, _SeenIds).
@@ -130,9 +130,9 @@
 
 	optics_order([], _SearchIndex, _Options, _Processed, Ordering, Ordering).
 	optics_order([Id-Vector| Rows], SearchIndex, Options, Processed0, Ordering0, Ordering) :-
-		(   processed(Id, Processed0) ->
+		(	processed(Id, Processed0) ->
 			optics_order(Rows, SearchIndex, Options, Processed0, Ordering0, Ordering)
-		;   empty_seed_queue(Seeds0),
+		;	empty_seed_queue(Seeds0),
 			process_point(Id-Vector, none, SearchIndex, Options, Processed0, Processed1, Seeds0, Seeds, Ordering0, Ordering1),
 			expand_seeds(Seeds, SearchIndex, Options, Processed1, Processed2, Ordering1, Ordering2),
 			optics_order(Rows, SearchIndex, Options, Processed2, Ordering2, Ordering)
@@ -151,13 +151,13 @@
 		Ordering = Ordering1.
 
 	expand_seeds(Seeds0, SearchIndex, Options, Processed0, Processed, Ordering0, Ordering) :-
-		(   extract_best_seed(Seeds0, seed(Id, Reachability, Vector), Seeds1) ->
-			(   processed(Id, Processed0) ->
+		(	extract_best_seed(Seeds0, seed(Id, Reachability, Vector), Seeds1) ->
+			(	processed(Id, Processed0) ->
 				expand_seeds(Seeds1, SearchIndex, Options, Processed0, Processed, Ordering0, Ordering)
-			;   process_point(Id-Vector, Reachability, SearchIndex, Options, Processed0, Processed1, Seeds1, Seeds2, Ordering0, Ordering1),
+			;	process_point(Id-Vector, Reachability, SearchIndex, Options, Processed0, Processed1, Seeds1, Seeds2, Ordering0, Ordering1),
 				expand_seeds(Seeds2, SearchIndex, Options, Processed1, Processed, Ordering1, Ordering)
 			)
-		;   Processed = Processed0,
+		;	Processed = Processed0,
 			Ordering = Ordering0
 		).
 
@@ -192,9 +192,9 @@
 
 	unique_candidate_rows([], []).
 	unique_candidate_rows([Row| Rows], UniqueRows) :-
-		(   member(Row, Rows) ->
+		(	member(Row, Rows) ->
 			unique_candidate_rows(Rows, UniqueRows)
-		;   UniqueRows = [Row| RestUniqueRows],
+		;	UniqueRows = [Row| RestUniqueRows],
 			unique_candidate_rows(Rows, RestUniqueRows)
 		).
 
@@ -218,13 +218,13 @@
 
 	pivot_distance_summary([], _PivotId, _PivotVector, _Options, Count, Sum, SumSquares, MinimumDistance, MaximumDistance, Count, Sum, SumSquares, MinimumDistance, MaximumDistance).
 	pivot_distance_summary([Id-Vector| Rows], PivotId, PivotVector, Options, Count0, Sum0, SumSquares0, MinimumDistance0, MaximumDistance0, Count, Sum, SumSquares, MinimumDistance, MaximumDistance) :-
-		(   Id == PivotId ->
+		(	Id == PivotId ->
 			Count1 = Count0,
 			Sum1 = Sum0,
 			SumSquares1 = SumSquares0,
 			MinimumDistance1 = MinimumDistance0,
 			MaximumDistance1 = MaximumDistance0
-		;   distance(Options, PivotVector, Vector, Distance),
+		;	distance(Options, PivotVector, Vector, Distance),
 			Count1 is Count0 + 1,
 			Sum1 is Sum0 + Distance,
 			SumSquares1 is SumSquares0 + Distance * Distance,
@@ -251,9 +251,9 @@
 
 	better_metric_pivot(Score, candidate(BestDispersion, BestRange, _BestPivot), Score) :-
 		Score = candidate(Dispersion, Range, _Pivot),
-		(   Dispersion > BestDispersion ->
+		(	Dispersion > BestDispersion ->
 			true
-		;   Dispersion =:= BestDispersion,
+		;	Dispersion =:= BestDispersion,
 			Range > BestRange
 		),
 		!.
@@ -293,16 +293,16 @@
 
 	core_distance(Distances, Options, CoreDistance) :-
 		^^option(minimum_points(MinimumPoints), Options),
-		(   nth1(MinimumPoints, Distances, CoreDistance0) ->
+		(	nth1(MinimumPoints, Distances, CoreDistance0) ->
 			CoreDistance = CoreDistance0
-		;   CoreDistance = none
+		;	CoreDistance = none
 		).
 
 	update_seeds([], _CoreDistance, _Processed, Seeds, Seeds).
 	update_seeds([neighbor(NeighborId, NeighborVector, Distance)| Neighbors], CoreDistance, Processed, Seeds0, Seeds) :-
-		(   processed(NeighborId, Processed) ->
+		(	processed(NeighborId, Processed) ->
 			Seeds1 = Seeds0
-		;   Reachability is max(CoreDistance, Distance),
+		;	Reachability is max(CoreDistance, Distance),
 			update_seed(Seeds0, NeighborId, Reachability, NeighborVector, Seeds1)
 		),
 		update_seeds(Neighbors, CoreDistance, Processed, Seeds1, Seeds).
@@ -318,17 +318,17 @@
 		avltree::new(Entries).
 
 	update_seed(seed_queue(Heap0, Entries0, NextOrdinal0), Id, Reachability, Vector, seed_queue(Heap, Entries, NextOrdinal)) :-
-		(   avltree::lookup(Id, seed_entry(Reachability0, Ordinal, _CurrentVector), Entries0) ->
-			(   Reachability < Reachability0 ->
+		(	avltree::lookup(Id, seed_entry(Reachability0, Ordinal, _CurrentVector), Entries0) ->
+			(	Reachability < Reachability0 ->
 				seed_key(Reachability, Ordinal, Key),
 				binary_heap_min::insert(Key, seed(Id, Reachability, Ordinal, Vector), Heap0, Heap),
 				avltree::insert(Entries0, Id, seed_entry(Reachability, Ordinal, Vector), Entries),
 				NextOrdinal = NextOrdinal0
-			;   Heap = Heap0,
+			;	Heap = Heap0,
 				Entries = Entries0,
 				NextOrdinal = NextOrdinal0
 			)
-		;   Ordinal = NextOrdinal0,
+		;	Ordinal = NextOrdinal0,
 			seed_key(Reachability, Ordinal, Key),
 			binary_heap_min::insert(Key, seed(Id, Reachability, Ordinal, Vector), Heap0, Heap),
 			avltree::insert(Entries0, Id, seed_entry(Reachability, Ordinal, Vector), Entries),
@@ -339,13 +339,13 @@
 
 	extract_best_seed(seed_queue(Heap0, Entries0, NextOrdinal), Seed, seed_queue(Heap, Entries, NextOrdinal)) :-
 		binary_heap_min::delete(Heap0, _Key, seed(Id, Reachability, Ordinal, Vector), Heap1),
-		(   avltree::lookup(Id, seed_entry(CurrentReachability, Ordinal, CurrentVector), Entries0),
+		(	avltree::lookup(Id, seed_entry(CurrentReachability, Ordinal, CurrentVector), Entries0),
 			Reachability == CurrentReachability,
 			Vector == CurrentVector ->
 			Seed = seed(Id, Reachability, Vector),
 			avltree::delete(Entries0, Id, seed_entry(CurrentReachability, Ordinal, CurrentVector), Entries),
 			Heap = Heap1
-		;   extract_best_seed(seed_queue(Heap1, Entries0, NextOrdinal), Seed, seed_queue(Heap, Entries, NextOrdinal))
+		;	extract_best_seed(seed_queue(Heap1, Entries0, NextOrdinal), Seed, seed_queue(Heap, Entries, NextOrdinal))
 		).
 
 	extract_clusters(Ordering, Options, Clusters, Noise) :-
@@ -357,15 +357,15 @@
 	scan_ordering([], _ExtractionEpsilon, current(ClusterId, CorePoints, BorderPoints), _ClusterCount, [Cluster], []) :-
 		build_cluster(ClusterId, CorePoints, BorderPoints, Cluster).
 	scan_ordering([ordered(_Id, Reachability, CoreDistance, Vector)| Ordering], ExtractionEpsilon, Current0, ClusterCount0, Clusters, Noise) :-
-		(   start_new_cluster(Reachability, CoreDistance, ExtractionEpsilon) ->
+		(	start_new_cluster(Reachability, CoreDistance, ExtractionEpsilon) ->
 			ClusterId is ClusterCount0 + 1,
 			Current1 = current(ClusterId, [Vector], []),
 			scan_ordering(Ordering, ExtractionEpsilon, Current1, ClusterId, RemainingClusters, Noise),
 			prepend_finalized_cluster(Current0, RemainingClusters, Clusters)
-		;   continues_cluster(Current0, Reachability, ExtractionEpsilon) ->
+		;	continues_cluster(Current0, Reachability, ExtractionEpsilon) ->
 			add_current_point(Current0, CoreDistance, Vector, ExtractionEpsilon, Current1),
 			scan_ordering(Ordering, ExtractionEpsilon, Current1, ClusterCount0, Clusters, Noise)
-		;   Noise = [Vector| RemainingNoise],
+		;	Noise = [Vector| RemainingNoise],
 			scan_ordering(Ordering, ExtractionEpsilon, none, ClusterCount0, RemainingClusters, RemainingNoise),
 			prepend_finalized_cluster(Current0, RemainingClusters, Clusters)
 		).
@@ -386,10 +386,10 @@
 		CoreDistance =< ExtractionEpsilon.
 
 	add_current_point(current(ClusterId, CorePoints0, BorderPoints0), CoreDistance, Vector, ExtractionEpsilon, current(ClusterId, CorePoints, BorderPoints)) :-
-		(   is_core(CoreDistance, ExtractionEpsilon) ->
+		(	is_core(CoreDistance, ExtractionEpsilon) ->
 			CorePoints = [Vector| CorePoints0],
 			BorderPoints = BorderPoints0
-		;   CorePoints = CorePoints0,
+		;	CorePoints = CorePoints0,
 			BorderPoints = [Vector| BorderPoints0]
 		).
 
@@ -428,10 +428,10 @@
 	classify_cluster_candidate(cluster(CandidateCluster, CorePoints, _BorderPoints, Bounds), Features, Options, ExtractionEpsilon, Best0, Best) :-
 		best_distance_limit(Best0, ExtractionEpsilon, DistanceLimit),
 		lower_bound_distance(Bounds, Features, Options, LowerBound),
-		(   LowerBound =< DistanceLimit,
+		(	LowerBound =< DistanceLimit,
 			nearest_reachable_core_distance(CorePoints, Features, Options, DistanceLimit, Distance) ->
 			update_best_candidate(CandidateCluster, Distance, Best0, Best)
-		;   Best = Best0
+		;	Best = Best0
 		).
 
 	best_distance_limit(none, ExtractionEpsilon, ExtractionEpsilon).
@@ -441,9 +441,9 @@
 	update_best_candidate(Cluster, Distance, none, candidate(Cluster, Distance)) :-
 		!.
 	update_best_candidate(Cluster, Distance, candidate(CurrentCluster, CurrentDistance), Best) :-
-		(   Distance < CurrentDistance ->
+		(	Distance < CurrentDistance ->
 			Best = candidate(Cluster, Distance)
-		;   Best = candidate(CurrentCluster, CurrentDistance)
+		;	Best = candidate(CurrentCluster, CurrentDistance)
 		).
 
 	nearest_reachable_core_distance(CorePoints, Features, Options, DistanceLimit, Distance) :-

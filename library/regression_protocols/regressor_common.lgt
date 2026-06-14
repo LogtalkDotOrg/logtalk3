@@ -546,12 +546,12 @@
 		::learn(Dataset, Regressor, []).
 
 	check_regressor(Regressor) :-
-		(   var(Regressor) ->
+		(	var(Regressor) ->
 			instantiation_error
 		;	::regressor_term_template(Regressor, _Template),
 			::regressor_diagnostics_data(Regressor, _Diagnostics) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	valid_regressor(Regressor) :-
@@ -697,9 +697,9 @@
 		format(Stream, '% target: ~q~n', [Target]),
 		::dataset_attributes(Dataset, Attributes),
 		format(Stream, '% attributes: ~q~n', [Attributes]),
-		(   ::diagnostics(Regressor, Diagnostics) ->
+		(	::diagnostics(Regressor, Diagnostics) ->
 			format(Stream, '% diagnostics: ~q~n', [Diagnostics])
-		;   true
+		;	true
 		),
 		format(Stream, '% ~w~n', [Template]).
 
@@ -715,13 +715,13 @@
 
 	check_attribute_declarations([]).
 	check_attribute_declarations([Attribute-Values| Attributes]) :-
-		(   atom(Attribute),
+		(	atom(Attribute),
 			\+ member(Attribute-_, Attributes),
-			(   Values == continuous
-			;   valid_discrete_values(Values)
+			(	Values == continuous
+			;	valid_discrete_values(Values)
 			) ->
 			true
-		;   domain_error(attribute_declarations, Attribute)
+		;	domain_error(attribute_declarations, Attribute)
 		),
 		check_attribute_declarations(Attributes).
 
@@ -729,8 +729,8 @@
 	valid_attribute_declarations_([Attribute-Values| Attributes], SeenAttributes) :-
 		atom(Attribute),
 		\+ member(Attribute, SeenAttributes),
-		(   Values == continuous
-		;   valid_discrete_values(Values)
+		(	Values == continuous
+		;	valid_discrete_values(Values)
 		),
 		valid_attribute_declarations_(Attributes, [Attribute| SeenAttributes]).
 
@@ -750,32 +750,32 @@
 
 	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
 		::option(feature_scaling(FeatureScaling), Options),
-		(   FeatureScaling == true ->
+		(	FeatureScaling == true ->
 			::known_attribute_values(Examples, Attribute, Values),
-			(   Values == [] ->
+			(	Values == [] ->
 				Mean = 0.0,
 				Scale = 1.0
-			;   arithmetic_mean(Values, Mean),
+			;	arithmetic_mean(Values, Mean),
 				length(Values, Count),
-				(   Count > 1 ->
+				(	Count > 1 ->
 					variance(Values, Variance)
-				;   Variance = 0.0
+				;	Variance = 0.0
 				),
-				(   Variance > 0.0 ->
+				(	Variance > 0.0 ->
 					Scale is sqrt(Variance)
-				;   Scale = 1.0
+				;	Scale = 1.0
 				)
 			)
-		;   Mean = 0.0,
+		;	Mean = 0.0,
 			Scale = 1.0
 		).
 
 	known_attribute_values([], _, []).
 	known_attribute_values([example(_Id, _Target, AttributeValues)| Examples], Attribute, Values) :-
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			Values = [Value| Rest]
-		;   Values = Rest
+		;	Values = Rest
 		),
 		known_attribute_values(Examples, Attribute, Rest).
 
@@ -795,20 +795,20 @@
 	encode_instance_checked_([], _, Features, Features).
 	encode_instance_checked_([continuous(Attribute, Mean, Scale)| Encoders], AttributeValues, [Feature, Missing| Features], Tail) :-
 		!,
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			normalize_continuous(Value, Mean, Scale, Feature),
 			Missing = 0.0
-		;   Feature = 0.0,
+		;	Feature = 0.0,
 			Missing = 1.0
 		),
 		encode_instance_checked_(Encoders, AttributeValues, Features, Tail).
 	encode_instance_checked_([categorical(Attribute, Values)| Encoders], AttributeValues, Features, Tail) :-
-		(   memberchk(Attribute-Value, AttributeValues),
+		(	memberchk(Attribute-Value, AttributeValues),
 			nonvar(Value) ->
 			check_categorical_value(Attribute, Values, Value),
 			one_hot_encode(Values, Value, Features, RestFeatures)
-		;   missing_one_hot_encode(Values, Features, RestFeatures)
+		;	missing_one_hot_encode(Values, Features, RestFeatures)
 		),
 		encode_instance_checked_(Encoders, AttributeValues, RestFeatures, Tail).
 
@@ -819,17 +819,17 @@
 	check_declared_attribute_bindings([], _AttributeValues).
 	check_declared_attribute_bindings([Attribute| Attributes], AttributeValues) :-
 		attribute_occurrences(AttributeValues, Attribute, 0, Count),
-		(   Count =< 1 ->
+		(	Count =< 1 ->
 			true
-		;   domain_error(attribute_occurrences, Attribute)
+		;	domain_error(attribute_occurrences, Attribute)
 		),
 		check_declared_attribute_bindings(Attributes, AttributeValues).
 
 	check_undeclared_attribute_bindings([], _AttributeNames).
 	check_undeclared_attribute_bindings([Attribute-_Value| AttributeValues], AttributeNames) :-
-		(   member(Attribute, AttributeNames) ->
+		(	member(Attribute, AttributeNames) ->
 			true
-		;   domain_error(declared_attribute, Attribute)
+		;	domain_error(declared_attribute, Attribute)
 		),
 		check_undeclared_attribute_bindings(AttributeValues, AttributeNames).
 
@@ -873,30 +873,30 @@
 		length(Examples, TrainingExampleCount).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
-		(   number(Value) ->
+		(	number(Value) ->
 			true
-		;   type_error(number, Value)
+		;	type_error(number, Value)
 		),
 		Feature is (Value - Mean) / Scale.
 
 	check_categorical_value(Attribute, Values, Value) :-
-		(   member(Value, Values) ->
+		(	member(Value, Values) ->
 			true
-		;   domain_error(attribute_value(Attribute, Values), Value)
+		;	domain_error(attribute_value(Attribute, Values), Value)
 		).
 
 	one_hot_encode([Baseline| Values], Value, Encoded, Tail) :-
-		(   Value == Baseline ->
+		(	Value == Baseline ->
 			zero_vector_from_values(Values, Encoded, [0.0| Tail])
-		;   one_hot_encode_(Values, Value, Encoded, [0.0| Tail])
+		;	one_hot_encode_(Values, Value, Encoded, [0.0| Tail])
 		).
 
 	one_hot_encode_([], _Value, Tail, Tail).
 	one_hot_encode_([Category| Categories], Value, [Feature| Features], Tail) :-
-		(   Value == Category ->
+		(	Value == Category ->
 			Feature = 1.0,
 			zero_vector_from_values(Categories, Features, Tail)
-		;   Feature = 0.0,
+		;	Feature = 0.0,
 			one_hot_encode_(Categories, Value, Features, Tail)
 		).
 
@@ -919,10 +919,10 @@
 
 	build_linear_encoders([], _Examples, _Options, []).
 	build_linear_encoders([Attribute-Values| Rest], Examples, Options, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			::continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_linear_encoders(Rest, Examples, Options, Encoders).
 
@@ -950,19 +950,19 @@
 
 	train_ridge_model(Rows, FeatureCount, Options, Bias, Weights, TrainingDiagnostics) :-
 		::option(regularization(Regularization), Options),
-		(   Regularization =< 1.0e-12 ->
+		(	Regularization =< 1.0e-12 ->
 			train_linear_model(Rows, FeatureCount, Options, Bias, Weights, LinearDiagnostics),
 			append(LinearDiagnostics, [penalty_scaling(encoded_feature_standardization)], TrainingDiagnostics)
-		;   ridge_feature_statistics(Rows, PenaltyWeights, ActiveFlags),
+		;	ridge_feature_statistics(Rows, PenaltyWeights, ActiveFlags),
 			active_feature_count(ActiveFlags, ActiveFeatureCount),
 			compress_rows(Rows, ActiveFlags, ActiveRows),
 			compress_vector(PenaltyWeights, ActiveFlags, ActivePenaltyWeights),
 			build_ridge_system(ActiveRows, ActivePenaltyWeights, Regularization, Matrix, Vector),
 			solve_linear_system(Matrix, Vector, [Bias| ActiveWeights], Solver),
 			expand_weights(ActiveFlags, ActiveWeights, Weights0),
-			(   FeatureCount =:= 0 ->
+			(	FeatureCount =:= 0 ->
 				Weights = []
-			;   Weights = Weights0
+			;	Weights = Weights0
 			),
 			maximum_linear_system_residual(Matrix, Vector, [Bias| ActiveWeights], Residual),
 			TrainingDiagnostics = [solver(Solver), linear_system_residual(Residual), active_feature_count(ActiveFeatureCount), penalty_scaling(encoded_feature_standardization)]
@@ -989,10 +989,10 @@
 	feature_penalty_profiles([Sum| Sums], [SumSquares| Squares], Count, [PenaltyWeight| PenaltyWeights], [Active| ActiveFlags]) :-
 		Mean is Sum / Count,
 		Variance0 is SumSquares / Count - Mean * Mean,
-		(   Variance0 > 1.0e-12 ->
+		(	Variance0 > 1.0e-12 ->
 			PenaltyWeight = Variance0,
 			Active = active
-		;   PenaltyWeight = 1.0,
+		;	PenaltyWeight = 1.0,
 			Active = inactive
 		),
 		feature_penalty_profiles(Sums, Squares, Count, PenaltyWeights, ActiveFlags).
@@ -1054,12 +1054,12 @@
 
 	regularize_ridge_row([], _PenaltyWeights, _Regularization, _RowIndex, _ColumnIndex, []).
 	regularize_ridge_row([Value| Values], PenaltyWeights, Regularization, RowIndex, ColumnIndex, [RegularizedValue| RegularizedValues]) :-
-		(   RowIndex > 1,
+		(	RowIndex > 1,
 			ColumnIndex =:= RowIndex ->
 			PenaltyIndex is RowIndex - 1,
 			penalty_weight(PenaltyWeights, PenaltyIndex, PenaltyWeight),
 			RegularizedValue is Value + Regularization * PenaltyWeight
-		;   RegularizedValue = Value
+		;	RegularizedValue = Value
 		),
 		NextColumnIndex is ColumnIndex + 1,
 		regularize_ridge_row(Values, PenaltyWeights, Regularization, RowIndex, NextColumnIndex, RegularizedValues).
@@ -1094,10 +1094,10 @@
 	select_pivot_row([Row| Rows], Candidate0, RemainingRows0, PivotRow, RemainingRows) :-
 		leading_magnitude(Row, Magnitude),
 		leading_magnitude(Candidate0, CandidateMagnitude),
-		(   Magnitude > CandidateMagnitude ->
+		(	Magnitude > CandidateMagnitude ->
 			Candidate = Row,
 			RemainingRows1 = [Candidate0| RemainingRows0]
-		;   Candidate = Candidate0,
+		;	Candidate = Candidate0,
 			RemainingRows1 = [Row| RemainingRows0]
 		),
 		select_pivot_row(Rows, Candidate, RemainingRows1, PivotRow, RemainingRows).
@@ -1106,9 +1106,9 @@
 		Magnitude is abs(Leading).
 
 	ensure_non_zero(Value) :-
-		(   abs(Value) > 1.0e-12 ->
+		(	abs(Value) > 1.0e-12 ->
 			true
-		;   evaluation_error(zero_divisor)
+		;	evaluation_error(zero_divisor)
 		).
 
 	eliminate_rows(_Pivot, _PivotTail, _PivotValue, [], []) :-
@@ -1142,9 +1142,9 @@
 	maximum_linear_system_residual([Row| Matrix], [Value| Vector], Solution, MaximumResidual0, MaximumResidual) :-
 		dot_product(Row, Solution, RowValue),
 		Residual is abs(RowValue - Value),
-		(   Residual > MaximumResidual0 ->
+		(	Residual > MaximumResidual0 ->
 			MaximumResidual1 = Residual
-		;   MaximumResidual1 = MaximumResidual0
+		;	MaximumResidual1 = MaximumResidual0
 		),
 		maximum_linear_system_residual(Matrix, Vector, Solution, MaximumResidual1, MaximumResidual).
 

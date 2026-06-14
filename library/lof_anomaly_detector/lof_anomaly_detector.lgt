@@ -73,7 +73,7 @@
 			Detector = lof_detector(Dataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics).
 
 	check_anomaly_detector(Detector) :-
-			(   Detector = lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics),
+			(	Detector = lof_detector(TrainingDataset, AttributeNames, FeatureTypes, AttributeScales, Instances, ReferenceScores, Diagnostics),
 			valid(object_identifier, TrainingDataset),
 			valid_attribute_names(AttributeNames),
 			valid_feature_types(FeatureTypes, AttributeNames),
@@ -82,7 +82,7 @@
 			valid_reference_scores(ReferenceScores, Instances),
 				valid_detector_diagnostics(TrainingDataset, AttributeNames, FeatureTypes, Instances, ReferenceScores, Diagnostics) ->
 			true
-		;   domain_error(anomaly_detector, Detector)
+		;	domain_error(anomaly_detector, Detector)
 		).
 
 		anomaly_detector_diagnostics_data(lof_detector(_Dataset, _AttributeNames, _FeatureTypes, _AttributeScales, _Instances, _ReferenceScores, Diagnostics), Diagnostics).
@@ -211,16 +211,16 @@
 
 	determine_feature_types([], []).
 	determine_feature_types([_-Values| Pairs], [Type| Types]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			Type = numeric
-		;   Type = categorical
+		;	Type = categorical
 		),
 		determine_feature_types(Pairs, Types).
 
 	compute_attribute_scales([], _, _, []).
 	compute_attribute_scales([Attribute| Attributes], AttributePairs, Examples, [Scale| Scales]) :-
 		memberchk(Attribute-Values, AttributePairs),
-		(   Values == continuous ->
+		(	Values == continuous ->
 			findall(
 				Value,
 				(
@@ -233,15 +233,15 @@
 			),
 			(	NumericValues == [] ->
 				Scale = 1.0
-			;   min(NumericValues, Minimum),
+			;	min(NumericValues, Minimum),
 				max(NumericValues, Maximum),
 				Range is float(Maximum - Minimum),
-				(   Range =< 0.0 ->
+				(	Range =< 0.0 ->
 					Scale = 1.0
-				;   Scale = Range
+				;	Scale = Range
 				)
 			)
-		;   Scale = 1.0
+		;	Scale = 1.0
 		),
 		compute_attribute_scales(Attributes, AttributePairs, Examples, Scales).
 
@@ -252,17 +252,17 @@
 
 	sanitize_training_values([], []).
 	sanitize_training_values([Value| Values], [Sanitized| SanitizedValues]) :-
-		(   var(Value) ->
+		(	var(Value) ->
 			Sanitized = '$missing'
-		;   Sanitized = Value
+		;	Sanitized = Value
 		),
 		sanitize_training_values(Values, SanitizedValues).
 
 	sanitize_input_values([], []).
 	sanitize_input_values([Value| Values], [Sanitized| SanitizedValues]) :-
-		(   var(Value) ->
+		(	var(Value) ->
 			Sanitized = '$missing'
-		;   Sanitized = Value
+		;	Sanitized = Value
 		),
 		sanitize_input_values(Values, SanitizedValues).
 
@@ -271,33 +271,33 @@
 
 	raw_lof(Values, FeatureTypes, AttributeScales, Instances, Options, RawScore) :-
 		length(Instances, AvailableCount),
-		(   AvailableCount > 0 ->
+		(	AvailableCount > 0 ->
 			neighbor_count(Options, AvailableCount, RequestedK),
 			k_nearest_neighbors(Values, FeatureTypes, AttributeScales, Instances, Options, RequestedK, Neighbors),
 			length(Neighbors, NeighborCount),
-			(   NeighborCount > 0 ->
+			(	NeighborCount > 0 ->
 				local_reachability_density(Values, FeatureTypes, AttributeScales, Instances, Options, NeighborCount, Neighbors, QueryLrd),
 				neighbor_lrd_ratio_sum(Neighbors, FeatureTypes, AttributeScales, Instances, Options, NeighborCount, QueryLrd, 0.0, RatioSum),
 				RawScore is float(RatioSum / NeighborCount)
-			;   RawScore = 1.0
+			;	RawScore = 1.0
 			)
-		;   RawScore = 1.0
+		;	RawScore = 1.0
 		).
 
 	neighbor_count(Options, AvailableCount, K) :-
 		^^option(k(K0), Options),
-		(   AvailableCount =< 1 ->
+		(	AvailableCount =< 1 ->
 			K = AvailableCount
-		;   K0 =< AvailableCount ->
+		;	K0 =< AvailableCount ->
 			K = K0
-		;   K = AvailableCount
+		;	K = AvailableCount
 		).
 
 	local_reachability_density(Values, FeatureTypes, AttributeScales, Instances, Options, K, Neighbors, Lrd) :-
 		reachability_distance_sum(Values, FeatureTypes, AttributeScales, Instances, Options, K, Neighbors, 0.0, ReachabilitySum),
-		(   ReachabilitySum =< 0.0 ->
+		(	ReachabilitySum =< 0.0 ->
 			Lrd = 1.0e12
-		;   Lrd is float(K / ReachabilitySum)
+		;	Lrd is float(K / ReachabilitySum)
 		).
 
 	reachability_distance_sum(_Values, _FeatureTypes, _AttributeScales, _Instances, _Options, _K, [], Sum, Sum) :-
@@ -311,14 +311,14 @@
 	neighbor_k_distance(NeighborId, NeighborValues, FeatureTypes, AttributeScales, Instances, Options, K, KDistance) :-
 		remove_instance(Instances, NeighborId, OtherInstances),
 		length(OtherInstances, Count),
-		(   Count > 0 ->
-			(   K =< Count -> K2 = K ; K2 = Count ),
+		(	Count > 0 ->
+			(	K =< Count -> K2 = K ; K2 = Count ),
 			k_nearest_neighbors(NeighborValues, FeatureTypes, AttributeScales, OtherInstances, Options, K2, NeighborNeighbors),
-			(   NeighborNeighbors == [] ->
+			(	NeighborNeighbors == [] ->
 				KDistance = 0.0
-			;   k_distance_from_neighbors(NeighborNeighbors, KDistance)
+			;	k_distance_from_neighbors(NeighborNeighbors, KDistance)
 			)
-		;   KDistance = 0.0
+		;	KDistance = 0.0
 		).
 
 	neighbor_lrd_ratio_sum([], _FeatureTypes, _AttributeScales, _Instances, _Options, _K, _QueryLrd, Sum, Sum).
@@ -331,15 +331,15 @@
 	neighbor_local_reachability_density(NeighborId, NeighborValues, FeatureTypes, AttributeScales, Instances, Options, K, Lrd) :-
 		remove_instance(Instances, NeighborId, OtherInstances),
 		length(OtherInstances, Count),
-		(   Count > 0 ->
-			(   K =< Count -> K2 = K ; K2 = Count ),
+		(	Count > 0 ->
+			(	K =< Count -> K2 = K ; K2 = Count ),
 			k_nearest_neighbors(NeighborValues, FeatureTypes, AttributeScales, OtherInstances, Options, K2, Neighbors),
 			length(Neighbors, NeighborCount),
-			(   NeighborCount > 0 ->
+			(	NeighborCount > 0 ->
 				local_reachability_density(NeighborValues, FeatureTypes, AttributeScales, OtherInstances, Options, NeighborCount, Neighbors, Lrd)
-			;   Lrd = 1.0
+			;	Lrd = 1.0
 			)
-		;   Lrd = 1.0
+		;	Lrd = 1.0
 		).
 
 	k_nearest_neighbors(Values, FeatureTypes, AttributeScales, Instances, Options, K, Neighbors) :-
@@ -412,11 +412,11 @@
 
 	normalize_against_reference(RawScore, ReferenceScores, Score) :-
 		max(ReferenceScores, MaximumReferenceScore),
-		(   RawScore =< 1.0 ->
+		(	RawScore =< 1.0 ->
 			Score = 0.0
-		;   MaximumReferenceScore =< 1.0 ->
+		;	MaximumReferenceScore =< 1.0 ->
 			Score = 1.0
-		;   Scale is MaximumReferenceScore - 1.0,
+		;	Scale is MaximumReferenceScore - 1.0,
 			Normalized is float((RawScore - 1.0) / Scale),
 			clamp_score(Normalized, Score)
 		).
@@ -456,42 +456,42 @@
 
 	sum_squared_components([], [], [], [], Sum, Count, Sum, Count).
 	sum_squared_components([Value1| Values1], [Value2| Values2], [Type| Types], [Scale| Scales], Sum0, Count0, Sum, Count) :-
-		(   comparable_component(Type, Value1, Value2, Scale, Delta) ->
+		(	comparable_component(Type, Value1, Value2, Scale, Delta) ->
 			Sum1 is Sum0 + Delta * Delta,
 			Count1 is Count0 + 1
-		;   Sum1 = Sum0,
+		;	Sum1 = Sum0,
 			Count1 = Count0
 		),
 		sum_squared_components(Values1, Values2, Types, Scales, Sum1, Count1, Sum, Count).
 
 	sum_absolute_components([], [], [], [], Sum, Count, Sum, Count).
 	sum_absolute_components([Value1| Values1], [Value2| Values2], [Type| Types], [Scale| Scales], Sum0, Count0, Sum, Count) :-
-		(   comparable_component(Type, Value1, Value2, Scale, Delta) ->
+		(	comparable_component(Type, Value1, Value2, Scale, Delta) ->
 			Sum1 is Sum0 + abs(Delta),
 			Count1 is Count0 + 1
-		;   Sum1 = Sum0,
+		;	Sum1 = Sum0,
 			Count1 = Count0
 		),
 		sum_absolute_components(Values1, Values2, Types, Scales, Sum1, Count1, Sum, Count).
 
 	max_component_distance([], [], [], [], Maximum, Count, Maximum, Count).
 	max_component_distance([Value1| Values1], [Value2| Values2], [Type| Types], [Scale| Scales], Maximum0, Count0, Maximum, Count) :-
-		(   comparable_component(Type, Value1, Value2, Scale, Delta) ->
+		(	comparable_component(Type, Value1, Value2, Scale, Delta) ->
 			Component is abs(Delta),
 			Maximum1 is max(Maximum0, Component),
 			Count1 is Count0 + 1
-		;   Maximum1 = Maximum0,
+		;	Maximum1 = Maximum0,
 			Count1 = Count0
 		),
 		max_component_distance(Values1, Values2, Types, Scales, Maximum1, Count1, Maximum, Count).
 
 	sum_power_components([], [], [], [], _, Sum, Count, Sum, Count).
 	sum_power_components([Value1| Values1], [Value2| Values2], [Type| Types], [Scale| Scales], P, Sum0, Count0, Sum, Count) :-
-		(   comparable_component(Type, Value1, Value2, Scale, Delta) ->
+		(	comparable_component(Type, Value1, Value2, Scale, Delta) ->
 			Component is abs(Delta) ** P,
 			Sum1 is Sum0 + Component,
 			Count1 is Count0 + 1
-		;   Sum1 = Sum0,
+		;	Sum1 = Sum0,
 			Count1 = Count0
 		),
 		sum_power_components(Values1, Values2, Types, Scales, P, Sum1, Count1, Sum, Count).
@@ -508,9 +508,9 @@
 		Scale > 0.0,
 		Delta is float((Value1 - Value2) / Scale).
 	comparable_component(categorical, Value1, Value2, _Scale, Delta) :-
-		(   Value1 == Value2 ->
+		(	Value1 == Value2 ->
 			Delta = 0.0
-		;   Delta = 1.0
+		;	Delta = 1.0
 		).
 
 	missing_value(Value) :-

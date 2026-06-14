@@ -134,17 +134,17 @@
 		domain_error(non_empty_itemset, []).
 	check_sequence_itemset(Itemset, ItemDomain) :-
 		sort(Itemset, SortedItemset),
-		(   Itemset == SortedItemset ->
+		(	Itemset == SortedItemset ->
 			true
-		;   domain_error(canonical_itemset, Itemset)
+		;	domain_error(canonical_itemset, Itemset)
 		),
 		check_itemset_items(Itemset, ItemDomain).
 
 	check_itemset_items([], _ItemDomain).
 	check_itemset_items([Item| Items], ItemDomain) :-
-		(   member(Item, ItemDomain) ->
+		(	member(Item, ItemDomain) ->
 			true
-		;   domain_error(item, Item)
+		;	domain_error(item, Item)
 		),
 		check_itemset_items(Items, ItemDomain).
 
@@ -163,9 +163,9 @@
 
 	select_frequent_item_supports([], _SupportCount, []).
 	select_frequent_item_supports([Item-Support| ItemCounts], SupportCount, FrequentItemSupports) :-
-		(   Support >= SupportCount ->
+		(	Support >= SupportCount ->
 			FrequentItemSupports = [item_support(Item, Support)| RestFrequentItemSupports]
-		;   FrequentItemSupports = RestFrequentItemSupports
+		;	FrequentItemSupports = RestFrequentItemSupports
 		),
 		select_frequent_item_supports(ItemCounts, SupportCount, RestFrequentItemSupports).
 
@@ -208,9 +208,9 @@
 	filter_patterns([], _MinimumPatternLength, []).
 	filter_patterns([sequence_pattern(Pattern, Support)| Patterns], MinimumPatternLength, FilteredPatterns) :-
 		pattern_length(Pattern, PatternLength),
-		(   PatternLength >= MinimumPatternLength ->
+		(	PatternLength >= MinimumPatternLength ->
 			FilteredPatterns = [sequence_pattern(Pattern, Support)| RestFilteredPatterns]
-		;   FilteredPatterns = RestFilteredPatterns
+		;	FilteredPatterns = RestFilteredPatterns
 		),
 		filter_patterns(Patterns, MinimumPatternLength, RestFilteredPatterns).
 

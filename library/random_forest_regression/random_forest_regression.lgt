@@ -64,9 +64,9 @@
 		^^check_examples(Dataset, Examples),
 		length(Attributes, NumFeatures),
 		^^option(number_of_trees(NumTrees), Options),
-		(   ^^option(maximum_features_per_split(MaxFeatures), Options) ->
+		(	^^option(maximum_features_per_split(MaxFeatures), Options) ->
 			true
-		;   MaxFeatures is max(1, floor(sqrt(NumFeatures)))
+		;	MaxFeatures is max(1, floor(sqrt(NumFeatures)))
 		),
 		build_tree_options(Options, MaxFeatures, TreeOptions),
 		get_random_seed(OriginalSeed),
@@ -81,9 +81,9 @@
 	predict(Regressor, Instance, Target) :-
 		Regressor =.. [_, Trees, _Diagnostics],
 		collect_predictions(Trees, Instance, Predictions),
-		(   Predictions == [] ->
+		(	Predictions == [] ->
 			domain_error(non_empty_predictions, Regressor)
-		;   arithmetic_mean(Predictions, Target)
+		;	arithmetic_mean(Predictions, Target)
 		).
 
 	build_diagnostics(Target, AttributeCount, TrainingExampleCount, Trees, Options, Diagnostics) :-
@@ -145,10 +145,10 @@
 
 	collect_predictions([], _Instance, []).
 	collect_predictions([tree(Tree)| Trees], Instance, Predictions) :-
-		(   catch(once(tree_predict(Tree, Instance, Prediction)), error(instantiation_error, _), fail),
+		(	catch(once(tree_predict(Tree, Instance, Prediction)), error(instantiation_error, _), fail),
 			number(Prediction) ->
 			Predictions = [Prediction| RestPredictions]
-		;   Predictions = RestPredictions
+		;	Predictions = RestPredictions
 		),
 		collect_predictions(Trees, Instance, RestPredictions).
 
@@ -158,7 +158,7 @@
 	regressor_term_template(rf_regressor(_Trees, _Diagnostics), rf_regressor('Trees', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = rf_regressor(Trees, Diagnostics),
+		(	Regressor = rf_regressor(Trees, Diagnostics),
 			Trees \== [],
 			^^valid_regressor_metadata(random_forest_regression, Diagnostics),
 			^^regressor_options(Regressor, Options),
@@ -167,7 +167,7 @@
 			length(Trees, ExpectedTreeCount),
 			^^valid_diagnostic_count(tree_count, Diagnostics, ExpectedTreeCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	export_to_clauses(_Dataset, Regressor, Functor, [Clause]) :-
@@ -205,9 +205,9 @@
 	valid_option(number_of_trees(NumberOfTrees)) :-
 		valid(positive_integer, NumberOfTrees).
 	valid_option(maximum_features_per_split(MaximumFeaturesPerSplit)) :-
-		(   MaximumFeaturesPerSplit == all ->
+		(	MaximumFeaturesPerSplit == all ->
 			true
-		;   valid(positive_integer, MaximumFeaturesPerSplit)
+		;	valid(positive_integer, MaximumFeaturesPerSplit)
 		).
 	valid_option(maximum_depth(MaximumDepth)) :-
 		valid(positive_integer, MaximumDepth).

@@ -56,7 +56,7 @@
 		wait_for_client.
 
 	cleanup :-
-		( 	test_server_address_(Address) ->
+		(	test_server_address_(Address) ->
 			catch(client2::close_client(Address), _, true),
 			catch(client1::shutdown_server(Address), _, true),
 			catch(client1::close_client(Address), _, true)
@@ -127,7 +127,7 @@
 
 	reset_timeout_and_reconnect_client1 :-
 		reset_timeout,
-		( 	test_server_address_(Address) ->
+		(	test_server_address_(Address) ->
 			catch(client1::close_client(Address), _, true),
 			catch(client1::linda_client(Address), _, true),
 			wait_for_client
@@ -136,13 +136,13 @@
 
 	reset_timeout_and_close_client2 :-
 		reset_timeout,
-		( 	test_server_address_(Address) ->
+		(	test_server_address_(Address) ->
 			catch(client2::close_client(Address), _, true)
 		;	true
 		).
 
 	reconnect_client :-
-		( 	test_server_address_(Address) ->
+		(	test_server_address_(Address) ->
 			catch(client1::close_client(Address), _, true),
 			catch(client1::linda_client(Address), _, true),
 			wait_for_client
@@ -150,7 +150,7 @@
 		).
 
 	close_client2 :-
-		( 	test_server_address_(Address) ->
+		(	test_server_address_(Address) ->
 			catch(client2::close_client(Address), _, true),
 			wait_for_max_client_connections(1)
 		;	true
@@ -447,7 +447,7 @@
 		wait_for_no_client_connections,
 		Address = _Host:Port,
 		catch(
-			( 	socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
+			(	socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
 				socket::close(Input, Output),
 				ConnectionRefused = no
 			),

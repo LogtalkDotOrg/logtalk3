@@ -265,14 +265,14 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
+		(	classifier_data(Classifier, AttributeNames, FeatureTypes, Centroids),
 			^^valid_attribute_names(AttributeNames),
 			^^valid_feature_types(FeatureTypes, [numeric, categorical]),
 			length(AttributeNames, FeatureCount),
 			length(FeatureTypes, FeatureCount),
 			valid_centroids(Centroids, FeatureTypes) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-

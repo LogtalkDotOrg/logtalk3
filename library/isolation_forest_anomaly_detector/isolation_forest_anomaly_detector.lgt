@@ -111,7 +111,7 @@
 		Model = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics).
 
 	check_anomaly_detector(Detector) :-
-		(   Detector = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics),
+		(	Detector = if_model(Trees, Psi, AttributeNames, Attributes, Ranges, Diagnostics),
 			valid_attribute_names(AttributeNames),
 			valid_attribute_declarations(Attributes, AttributeNames),
 			integer(Psi),
@@ -120,7 +120,7 @@
 			valid_forest(Trees, AttributeNames),
 			valid_detector_diagnostics(Trees, Psi, AttributeNames, Diagnostics) ->
 			true
-		;   domain_error(anomaly_detector, Detector)
+		;	domain_error(anomaly_detector, Detector)
 		).
 
 	anomaly_detector_diagnostics_data(if_model(_Trees, _Psi, _AttributeNames, _Attributes, _Ranges, Diagnostics), Diagnostics).
@@ -218,9 +218,9 @@
 	valid_attribute_declarations_([Attribute-Values| Attributes], [AttributeName| AttributeNames]) :-
 		Attribute == AttributeName,
 		atom(Attribute),
-		(   Values == continuous ->
+		(	Values == continuous ->
 			true
-		;   valid(list(nonvar), Values),
+		;	valid(list(nonvar), Values),
 			Values \== []
 		),
 		valid_attribute_declarations_(Attributes, AttributeNames).

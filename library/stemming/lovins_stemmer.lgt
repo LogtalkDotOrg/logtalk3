@@ -468,9 +468,9 @@
 		% Remove ending only after dr or t, unless t follows t
 		length(Stem, Length),
 		Length >= 2,
-		(   append(_, [d,r], Stem) ->
+		(	append(_, [d,r], Stem) ->
 		    true
-		;   last(Stem, t),
+		;	last(Stem, t),
 		    \+ append(_, [t,t], Stem)
 		).
 	check_condition(t, Stem) :-
@@ -478,9 +478,9 @@
 		length(Stem, Lenght),
 		Lenght >= 2,
 		last(Stem, Last),
-		(   Last == s ->
+		(	Last == s ->
 		    true
-		;   Last == t,
+		;	Last == t,
 		    \+ append(_, [o,t], Stem)
 		).
 
@@ -495,10 +495,10 @@
 
 	% Rule 1: Remove one of double b, d, g, l, m, n, p, r, s, t
 	undouble(Word, Stem) :-
-		(   append(Prefix, [C, C], Word),
+		(	append(Prefix, [C, C], Word),
 		    member(C, [b, d, g, l, m, n, p, r, s, t]) ->
 		    append(Prefix, [C], Stem)
-		;   Stem = Word
+		;	Stem = Word
 		).
 
 	apply_transformation_rules(Word, Stem) :-

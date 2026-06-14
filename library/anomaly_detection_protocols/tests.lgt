@@ -36,9 +36,9 @@
 		findall(Attribute-Values, Dataset::attribute_values(Attribute, Values), Attributes),
 		Attributes \== [],
 		Dataset::class_values(ClassValues),
-		(   ClassValues == [normal, anomaly] ->
+		(	ClassValues == [normal, anomaly] ->
 			true
-		;   domain_error(class_values, ClassValues)
+		;	domain_error(class_values, ClassValues)
 		),
 		forall(
 			Dataset::example(_Id, Class, AttributeValues),
@@ -53,15 +53,15 @@
 		).
 
 	validate_attribute_value(Attribute, Values, AttributeValues) :-
-		(   memberchk(Attribute-Value, AttributeValues) ->
+		(	memberchk(Attribute-Value, AttributeValues) ->
 			true
-		;   existence_error(attribute, Attribute)
+		;	existence_error(attribute, Attribute)
 		),
-		(   var(Value) ->
+		(	var(Value) ->
 			true
-		;   Values == continuous ->
+		;	Values == continuous ->
 			number(Value)
-		;   memberchk(Value, Values)
+		;	memberchk(Value, Values)
 		).
 
 	training_model(Dataset, AttributeNames, Scale) :-
@@ -93,9 +93,9 @@
 		),
 		max_or_zero(AbsoluteValues, Maximum),
 		Score0 is Maximum / 5.0,
-		(   Score0 > 1.0 ->
+		(	Score0 > 1.0 ->
 			Score = 1.0
-		;   Score = Score0
+		;	Score = Score0
 		).
 
 	instance_score(AttributeNames, Scale, Instance, Score) :-
@@ -111,13 +111,13 @@
 			AbsoluteValues
 		),
 		max_or_zero(AbsoluteValues, Maximum),
-		(   Scale > 0.0 ->
+		(	Scale > 0.0 ->
 			Score0 is Maximum / Scale
-		;   Score0 = 0.0
+		;	Score0 = 0.0
 		),
-		(   Score0 > 1.0 ->
+		(	Score0 > 1.0 ->
 			Score = 1.0
-		;   Score = Score0
+		;	Score = Score0
 		).
 
 	max_or_zero([], 0.0).
@@ -130,9 +130,9 @@
 
 	max_or_zero([], Maximum, Maximum).
 	max_or_zero([Value| Values], Maximum0, Maximum) :-
-		(   Value > Maximum0 ->
+		(	Value > Maximum0 ->
 			Maximum1 = Value
-		;   Maximum1 = Maximum0
+		;	Maximum1 = Maximum0
 		),
 		max_or_zero(Values, Maximum1, Maximum).
 
@@ -182,7 +182,7 @@
 		anomaly_test_support::training_model(Dataset, AttributeNames, Scale).
 
 	check_anomaly_detector(Detector) :-
-		(   Detector = sample_anomaly_detector(Dataset, AttributeNames, Scale, Options),
+		(	Detector = sample_anomaly_detector(Dataset, AttributeNames, Scale, Options),
 			valid(object_identifier, Dataset),
 			valid(list(atom), AttributeNames),
 			AttributeNames \== [],
@@ -191,7 +191,7 @@
 			valid(list(compound), Options),
 			catch(^^check_options(Options), _Error, fail) ->
 			true
-		;   domain_error(anomaly_detector, Detector)
+		;	domain_error(anomaly_detector, Detector)
 		).
 
 	anomaly_detector_diagnostics_data(sample_anomaly_detector(Dataset, AttributeNames, Scale, Options), [

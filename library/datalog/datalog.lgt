@@ -570,15 +570,15 @@
 			Term = agg(_, _, Goals, _),
 			relax_aggregate_goals(Goals, HeadName, HeadArity, HeadStratum, Change0, Change1, NewHeadStratum)
 		;	term_predicate(Term, predicate(BodyName, BodyArity)),
-			( predicate_stratum_(BodyName, BodyArity, BodyStratum) ->
+			(	predicate_stratum_(BodyName, BodyArity, BodyStratum) ->
 				true
 			;	BodyStratum = 0
 			),
-			( Sign == negative ->
+			(	Sign == negative ->
 				MinimumHeadStratum is BodyStratum + 1
 			;	MinimumHeadStratum is BodyStratum
 			),
-			( HeadStratum < MinimumHeadStratum ->
+			(	HeadStratum < MinimumHeadStratum ->
 				update_predicate_stratum(HeadName, HeadArity, MinimumHeadStratum),
 				NewHeadStratum = MinimumHeadStratum,
 				Change1 = changed
@@ -596,7 +596,7 @@
 		;	BodyStratum = 0
 		),
 		MinimumHeadStratum is BodyStratum + 1,
-		( HeadStratum < MinimumHeadStratum ->
+		(	HeadStratum < MinimumHeadStratum ->
 			update_predicate_stratum(HeadName, HeadArity, MinimumHeadStratum),
 			NextHeadStratum = MinimumHeadStratum,
 			Change1 = changed
@@ -626,7 +626,7 @@
 
 	materialize_fixpoint(Stratum) :-
 		derive_all(Stratum, NewEdges),
-		( NewEdges =:= 0 ->
+		(	NewEdges =:= 0 ->
 			true
 		;	materialize_fixpoint(Stratum)
 		).

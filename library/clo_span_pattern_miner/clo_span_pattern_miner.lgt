@@ -64,9 +64,9 @@
 		frequent_i_extensions(ProjectedDatabase, SupportCount, FrequentIExtensions),
 		mine_closed_i_extensions(FrequentIExtensions, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, IPatterns),
 		frequent_s_extensions(ProjectedDatabase, SupportCount, FrequentSExtensions),
-		(   IPatterns == [] ->
+		(	IPatterns == [] ->
 			mine_closed_s_extensions(FrequentSExtensions, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, Patterns)
-		;   mine_closed_s_extensions(FrequentSExtensions, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, IPatterns, Patterns)
+		;	mine_closed_s_extensions(FrequentSExtensions, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, IPatterns, Patterns)
 		).
 
 	mine_closed_i_extensions(ItemSupports, ProjectedDatabase, SupportCount, MaximumPatternLength, Prefix, Patterns) :-
@@ -276,7 +276,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = clo_span_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = clo_span_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_sequence_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(clo_span_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -286,7 +286,7 @@
 			memberchk(closure_filter(projected_database_equivalence_and_same_support_frontier_pruning), Diagnostics),
 			memberchk(support_layout(projected_database), Diagnostics) ->
 			true
-		;   domain_error(clo_span_pattern_miner, PatternMiner)
+		;	domain_error(clo_span_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, clo_span_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

@@ -394,7 +394,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-10</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -497,7 +497,7 @@
 </section>
 <section id="request-listener-shutdown-1">
 <span id="http-socket-protocol-0-request-listener-shutdown-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code></a><a class="headerlink" href="#request-listener-shutdown-1" title="Link to this heading"></a></h3>
-<p>Best-effort wakeup request for a listener accept loop opened with open_listener/4. This predicate does not close the listener but causes a blocked accept call to return portably when possible.</p>
+<p>Best-effort wakeup request for a listener accept loop opened with <code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code>. This predicate does not close the listener but causes a blocked accept call to return portably when possible.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -560,7 +560,7 @@
 </section>
 <section id="connection-streams-3">
 <span id="http-socket-protocol-0-connection-streams-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code></a><a class="headerlink" href="#connection-streams-3" title="Link to this heading"></a></h3>
-<p>Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by serve_websocket_once/5.</p>
+<p>Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -603,9 +603,9 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code>: Pre-open N reusable client connections when creating the pool. The default is 0.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code>: Allow at most N managed client connections in the pool. The default is 10.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code>: Socket options passed to open_connection/4 when creating pooled connections. The default is [].</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code>: Pre-open N reusable client connections when creating the pool. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code>: Allow at most N managed client connections in the pool. The default is <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code>: Socket options passed to <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> when creating pooled connections. The default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -780,7 +780,7 @@
 </section>
 <section id="serve-listener-4">
 <span id="http-socket-protocol-0-serve-listener-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a><a class="headerlink" href="#serve-listener-4" title="Link to this heading"></a></h3>
-<p>Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.</p>
+<p>Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code> call for the listener may interrupt the bounded loop before Count connections are accepted.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -801,7 +801,7 @@
 </section>
 <section id="serve-listener-5">
 <span id="http-socket-protocol-0-serve-listener-5"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a><a class="headerlink" href="#serve-listener-5" title="Link to this heading"></a></h3>
-<p>Accepts and serves Count incoming connections on the given listener using the specified shutdown and worker options. A request_listener_shutdown/1 call for the listener may interrupt the bounded loop before Count connections are accepted.</p>
+<p>Accepts and serves <code class="docutils literal notranslate"><span class="pre">Count</span></code> incoming connections on the given listener using the specified shutdown and worker options. A <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code> call for the listener may interrupt the bounded loop before <code class="docutils literal notranslate"><span class="pre">Count</span></code> connections are accepted.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -827,15 +827,15 @@
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">shutdown(close)</span></code>: Close the listener when serving completes or aborts.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code>: Serve accepted connections sequentially in the caller thread. This is the default.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code>: Spawn one worker thread per accepted connection and wait for all workers before returning. Requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code>: Serve accepted connections in batches of up to Size worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size,</span> <span class="pre">rolling))</span></code>: Serve accepted connections using at most Size concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code>: Serve accepted connections in batches of up to <code class="docutils literal notranslate"><span class="pre">Size</span></code> worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">workers(pool(Size,</span> <span class="pre">rolling))</span></code>: Serve accepted connections using at most <code class="docutils literal notranslate"><span class="pre">Size</span></code> concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="serve-until-shutdown-4">
 <span id="http-socket-protocol-0-serve-until-shutdown-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a><a class="headerlink" href="#serve-until-shutdown-4" title="Link to this heading"></a></h3>
-<p>Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, then closes the listener before returning.</p>
+<p>Accepts and serves incoming connections on the given listener until <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> is called for the specified control term, then closes the listener before returning.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -869,7 +869,7 @@
 </section>
 <section id="serve-until-shutdown-5">
 <span id="http-socket-protocol-0-serve-until-shutdown-5"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a><a class="headerlink" href="#serve-until-shutdown-5" title="Link to this heading"></a></h3>
-<p>Accepts and serves incoming connections on the given listener until request_shutdown/1 is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.</p>
+<p>Accepts and serves incoming connections on the given listener until <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -897,14 +897,14 @@
 <div><ul class="simple">
 <li><p>Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.</p></li>
 <li><p>Ready goal: Called once after the shutdown control is registered and before the serving loop starts accepting connections.</p></li>
-<li><p>Options: Supports the same worker options as serve_until_shutdown/4.</p></li>
+<li><p>Options: Supports the same worker options as <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="request-shutdown-1">
 <span id="http-socket-protocol-0-request-shutdown-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a><a class="headerlink" href="#request-shutdown-1" title="Link to this heading"></a></h3>
-<p>Requests shutdown of an open-ended serving loop started with serve_until_shutdown/4 or serve_until_shutdown/5 for the specified control term and wakes any blocked accept call so the loop can terminate portably.</p>
+<p>Requests shutdown of an open-ended serving loop started with <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> or <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code> for the specified control term and wakes any blocked accept call so the loop can terminate portably.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

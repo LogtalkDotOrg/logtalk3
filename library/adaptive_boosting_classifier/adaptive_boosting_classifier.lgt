@@ -315,7 +315,7 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, WeightedTrees, ClassValues, Options),
+		(	classifier_data(Classifier, WeightedTrees, ClassValues, Options),
 			WeightedTrees \== [],
 			^^valid_class_values(ClassValues),
 			catch(::check_options(Options), _Error, fail),
@@ -324,7 +324,7 @@
 			EstimatorCount =< ExpectedEstimators,
 			valid_weighted_trees(WeightedTrees) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	% export_to_clauses/4 - exports classifier as a clause

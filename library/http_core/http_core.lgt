@@ -1260,9 +1260,9 @@
 
 	json_media_type(MediaType) :-
 		normalize_media_type_atom(MediaType, NormalizedMediaType),
-		( NormalizedMediaType == 'application/json'
-		; NormalizedMediaType == 'text/json'
-		; atom_codes(NormalizedMediaType, Codes), codes_suffix(Codes, [0'+, 0'j, 0's, 0'o, 0'n])
+		(	NormalizedMediaType == 'application/json'
+		;	NormalizedMediaType == 'text/json'
+		;	atom_codes(NormalizedMediaType, Codes), codes_suffix(Codes, [0'+, 0'j, 0's, 0'o, 0'n])
 		).
 
 	form_media_type(MediaType) :-

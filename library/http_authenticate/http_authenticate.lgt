@@ -651,7 +651,7 @@
 		domain_error(Context, duplicate(Name)).
 
 	ensure_basic_username(Username) :-
-		( 	sub_atom(Username, _, 1, _, ':') ->
+		(	sub_atom(Username, _, 1, _, ':') ->
 			domain_error(http_authenticate_term(authorization), invalid(username))
 		;	true
 		).

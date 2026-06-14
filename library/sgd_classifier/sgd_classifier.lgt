@@ -83,14 +83,14 @@
 
 	optimize_model(Rows, PositiveClass, Options, Epoch, Model0, Model) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Epoch >= MaximumIterations ->
+		(	Epoch >= MaximumIterations ->
 			Model = Model0
-		;   learning_rate_for_epoch(Options, Epoch, Step),
+		;	learning_rate_for_epoch(Options, Epoch, Step),
 			process_rows(Rows, PositiveClass, Options, Step, Model0, Model1, 0.0, MaxDelta),
 			^^option(tolerance(Tolerance), Options),
-			(   MaxDelta =< Tolerance ->
+			(	MaxDelta =< Tolerance ->
 				Model = Model1
-			;   NextEpoch is Epoch + 1,
+			;	NextEpoch is Epoch + 1,
 				optimize_model(Rows, PositiveClass, Options, NextEpoch, Model1, Model)
 			)
 		).
@@ -98,11 +98,11 @@
 	learning_rate_for_epoch(Options, Epoch, Step) :-
 		^^option(learning_rate(LearningRate), Options),
 		^^option(learning_schedule(Schedule), Options),
-		(   Schedule == constant ->
+		(	Schedule == constant ->
 			Step = LearningRate
-		;   Schedule = inverse_scaling(Power) ->
+		;	Schedule = inverse_scaling(Power) ->
 			Step is LearningRate / ((Epoch + 1.0) ** Power)
-		;   domain_error(learning_schedule, Schedule)
+		;	domain_error(learning_schedule, Schedule)
 		).
 
 	process_rows([], _PositiveClass, _Options, _Step, Model, Model, MaxDelta, MaxDelta).
@@ -125,48 +125,48 @@
 		Class = PositiveClass.
 
 	loss_gradient(log_loss, Sign, Score, BiasGradient, WeightScale) :-
-		(   Sign > 0.0 ->
+		(	Sign > 0.0 ->
 			Target = 1.0
-		;   Target = 0.0
+		;	Target = 0.0
 		),
 		Probability is 1.0 / (1.0 + exp(-Score)),
 		BiasGradient is Probability - Target,
 		WeightScale = BiasGradient.
 	loss_gradient(hinge, Sign, Score, BiasGradient, WeightScale) :-
 		Margin is Sign * Score,
-		(   Margin < 1.0 ->
+		(	Margin < 1.0 ->
 			BiasGradient is -Sign,
 			WeightScale is -Sign
-		;   BiasGradient = 0.0,
+		;	BiasGradient = 0.0,
 			WeightScale = 0.0
 		).
 	loss_gradient(squared_hinge, Sign, Score, BiasGradient, WeightScale) :-
 		Margin is Sign * Score,
-		(   Margin < 1.0 ->
+		(	Margin < 1.0 ->
 			Factor is -2.0 * (1.0 - Margin) * Sign,
 			BiasGradient = Factor,
 			WeightScale = Factor
-		;   BiasGradient = 0.0,
+		;	BiasGradient = 0.0,
 			WeightScale = 0.0
 		).
 	loss_gradient(perceptron, Sign, Score, BiasGradient, WeightScale) :-
 		Activation is Sign * Score,
-		(   Activation =< 0.0 ->
+		(	Activation =< 0.0 ->
 			BiasGradient is -Sign,
 			WeightScale is -Sign
-		;   BiasGradient = 0.0,
+		;	BiasGradient = 0.0,
 			WeightScale = 0.0
 		).
 	loss_gradient(modified_huber, Sign, Score, BiasGradient, WeightScale) :-
 		Margin is Sign * Score,
-		(   Margin >= 1.0 ->
+		(	Margin >= 1.0 ->
 			BiasGradient = 0.0,
 			WeightScale = 0.0
-		;   Margin >= -1.0 ->
+		;	Margin >= -1.0 ->
 			Factor is -2.0 * (1.0 - Margin) * Sign,
 			BiasGradient = Factor,
 			WeightScale = Factor
-		;   BiasGradient is -4.0 * Sign,
+		;	BiasGradient is -4.0 * Sign,
 			WeightScale is -4.0 * Sign
 		).
 
@@ -220,7 +220,7 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, Classes, Encoders, Loss, Models, Options),
+		(	classifier_data(Classifier, Classes, Encoders, Loss, Models, Options),
 			^^valid_class_values(Classes),
 			^^valid_linear_encoders(Encoders),
 			valid_loss(Loss),
@@ -230,7 +230,7 @@
 			length(Models, ModelCount),
 			valid_models(Models, Classes, EncodedFeatures, []) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-

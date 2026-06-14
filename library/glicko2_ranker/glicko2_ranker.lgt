@@ -93,9 +93,9 @@
 
 	validate_integer_preferences([]).
 	validate_integer_preferences([p(_Winner, _Loser, Weight)| Preferences]) :-
-		(   integer(Weight) ->
+		(	integer(Weight) ->
 			true
-		;   type_error(integer, Weight)
+		;	type_error(integer, Weight)
 		),
 		validate_integer_preferences(Preferences).
 
@@ -126,9 +126,9 @@
 		build_period_results(Matchups, PeriodResults2, PeriodResults).
 
 	update_period_results(PeriodResults0, Item, Game, PeriodResults) :-
-		(   dictionary_lookup(Item, Games0, PeriodResults0) ->
+		(	dictionary_lookup(Item, Games0, PeriodResults0) ->
 			Games = [Game| Games0]
-		;   Games = [Game]
+		;	Games = [Game]
 		),
 		dictionary_insert(PeriodResults0, Item, Games, PeriodResults).
 
@@ -148,21 +148,21 @@
 		rate_period(Items, PeriodResults, Ratings0, Deviations0, Volatilities0, Tau, VolatilityTolerance, RatingsAcc1, RatingsAcc, DeviationsAcc1, DeviationsAcc, VolatilitiesAcc1, VolatilitiesAcc).
 
 	item_period_results(Item, PeriodResults, ItemResults) :-
-		(   dictionary_lookup(Item, ItemResults, PeriodResults) ->
+		(	dictionary_lookup(Item, ItemResults, PeriodResults) ->
 			true
-		;   ItemResults = []
+		;	ItemResults = []
 		).
 
 	update_item_parameters(Item, ItemResults, Ratings0, Deviations0, Volatilities0, Tau, VolatilityTolerance, UpdatedRating, UpdatedDeviation, UpdatedVolatility) :-
 		dictionary_lookup(Item, Rating, Ratings0),
 		dictionary_lookup(Item, Deviation, Deviations0),
 		dictionary_lookup(Item, Volatility, Volatilities0),
-		(   ItemResults == [] ->
+		(	ItemResults == [] ->
 			UpdatedVolatility = Volatility,
 			DeviationStar is sqrt(Deviation * Deviation + UpdatedVolatility * UpdatedVolatility),
 			UpdatedRating = Rating,
 			UpdatedDeviation = DeviationStar
-		;   rating_period_terms(ItemResults, Rating, Ratings0, Deviations0, 0.0, VarianceInverse, 0.0, ImprovementSum),
+		;	rating_period_terms(ItemResults, Rating, Ratings0, Deviations0, 0.0, VarianceInverse, 0.0, ImprovementSum),
 			Variance is 1.0 / VarianceInverse,
 			Delta is Variance * ImprovementSum,
 			update_volatility(Deviation, Volatility, Delta, Variance, Tau, VolatilityTolerance, UpdatedVolatility),
@@ -201,25 +201,25 @@
 	find_search_boundary(K, Deviation, Delta, Variance, LogVolatilitySquared, Tau, Boundary) :-
 		Candidate is LogVolatilitySquared - K * Tau,
 		volatility_function(Candidate, Deviation, Delta, Variance, LogVolatilitySquared, Tau, Value),
-		(   Value < 0.0 ->
+		(	Value < 0.0 ->
 			NextK is K + 1,
 			find_search_boundary(NextK, Deviation, Delta, Variance, LogVolatilitySquared, Tau, Boundary)
-		;   Boundary = Candidate
+		;	Boundary = Candidate
 		).
 
 	refine_volatility(Left, Right, _LeftValue, _RightValue, _Deviation, _Delta, _Variance, _LogVolatilitySquared, _Tau, VolatilityTolerance, Left) :-
 		abs(Right - Left) =< VolatilityTolerance,
 		!.
 	refine_volatility(Left, Right, LeftValue, RightValue, Deviation, Delta, Variance, LogVolatilitySquared, Tau, VolatilityTolerance, Root) :-
-		(   abs(RightValue - LeftValue) =< 1.0e-12 ->
+		(	abs(RightValue - LeftValue) =< 1.0e-12 ->
 			Candidate is (Left + Right) / 2.0
-		;   Candidate is Left + (Left - Right) * LeftValue / (RightValue - LeftValue)
+		;	Candidate is Left + (Left - Right) * LeftValue / (RightValue - LeftValue)
 		),
 		volatility_function(Candidate, Deviation, Delta, Variance, LogVolatilitySquared, Tau, CandidateValue),
-		(   CandidateValue * RightValue < 0.0 ->
+		(	CandidateValue * RightValue < 0.0 ->
 			NextLeft = Right,
 			NextLeftValue = RightValue
-		;   NextLeft = Left,
+		;	NextLeft = Left,
 			NextLeftValue is LeftValue / 2.0
 		),
 		NextRight = Candidate,

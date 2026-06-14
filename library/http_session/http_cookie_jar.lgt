@@ -295,7 +295,7 @@
 		persisted_cookie_expiry(Attributes, CurrentTime, Expiry),
 		(	Expiry == delete ->
 			PersistedCookie = skip
-		; 	PersistedCookie = persisted_cookie(Name, Value, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry)
+		;	PersistedCookie = persisted_cookie(Name, Value, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry)
 		).
 
 	persisted_cookie_boolean_attribute(Name, Attributes, true) :-
@@ -305,10 +305,10 @@
 		\+ member(Name-_, Attributes).
 
 	persisted_cookie_same_site_state(Attributes, Secure, SameSite) :-
-		( 	memberchk(same_site-SameSite, Attributes) ->
+		(	memberchk(same_site-SameSite, Attributes) ->
 			valid_persisted_cookie_same_site_value(SameSite),
 			valid_cookie_same_site_state(SameSite, Secure)
-		; 	SameSite = absent
+		;	SameSite = absent
 		).
 
 	valid_persisted_cookie_same_site_value(lax).
@@ -371,13 +371,13 @@
 		domain_error(http_cookie_jar_request_context, RequestContext).
 
 	normalize_request_context_method(Method0, Method) :-
-		( 	var(Method0) ->
+		(	var(Method0) ->
 			instantiation_error
-		; 	atom(Method0) ->
+		;	atom(Method0) ->
 			atom_codes(Method0, MethodCodes0),
 			^^lowercase_ascii_codes(MethodCodes0, MethodCodes),
 			atom_codes(Method, MethodCodes)
-		; 	type_error(atom, Method0)
+		;	type_error(atom, Method0)
 		).
 
 	normalize_request_context_source(_URLContext, Source, _NormalizedSource) :-
@@ -397,11 +397,11 @@
 		domain_error(http_cookie_jar_request_source, Source).
 
 	normalize_request_context_navigation(TopLevelNavigation0, TopLevelNavigation) :-
-		( 	var(TopLevelNavigation0) ->
+		(	var(TopLevelNavigation0) ->
 			instantiation_error
-		; 	(TopLevelNavigation0 == true; TopLevelNavigation0 == false) ->
+		;	(TopLevelNavigation0 == true; TopLevelNavigation0 == false) ->
 			TopLevelNavigation = TopLevelNavigation0
-		; 	domain_error(boolean, TopLevelNavigation0)
+		;	domain_error(boolean, TopLevelNavigation0)
 		).
 
 	cookies_state(Jar, CurrentTime, Cookies) :-
@@ -472,10 +472,10 @@
 		store_set_cookie_list(SetCookies, JarId, URLContext, CurrentTime).
 
 	store_set_cookie(JarId, URLContext, set_cookie(Name, Value, Attributes), CurrentTime) :-
-		( 	normalized_set_cookie(URLContext, Attributes, CurrentTime, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry) ->
+		(	normalized_set_cookie(URLContext, Attributes, CurrentTime, Domain, Path, HostOnly, Secure, HttpOnly, SameSite, Expiry) ->
 			(	Expiry == delete ->
 				delete_cookie(JarId, Name, Domain, Path)
-			; 	replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry)
+			;	replace_cookie(JarId, Name, Domain, Path, Value, HostOnly, Secure, HttpOnly, SameSite, Expiry)
 			)
 		;	true
 		).
@@ -544,7 +544,7 @@
 		assertz(jar_state_(JarId, CreationIndex)).
 
 	purge_expired_cookies(JarId, CurrentTime) :-
-		( 	jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, expires(ExpiryTime), _CreationIndex),
+		(	jar_cookie_(JarId, Name, Domain, Path, _Value, _HostOnly, _Secure, _HttpOnly, _SameSite, expires(ExpiryTime), _CreationIndex),
 			ExpiryTime =< CurrentTime ->
 			retractall(jar_cookie_(JarId, Name, Domain, Path, _AnyValue, _AnyHostOnly, _AnySecure, _AnyHttpOnly, _AnySameSite, _AnyExpiry, _AnyCreationIndex)),
 			purge_expired_cookies(JarId, CurrentTime)
@@ -723,21 +723,21 @@
 	cookie_url_context(URL, cookie_url_context(Scheme, Host, Port, Path)) :-
 		(	var(URL) ->
 			instantiation_error
-		; 	^^absolute_url_context(URL, http_url_context(Scheme, Host, Port, Path)) ->
+		;	^^absolute_url_context(URL, http_url_context(Scheme, Host, Port, Path)) ->
 			true
-		; 	url(atom)::parse(URL, Components) ->
+		;	url(atom)::parse(URL, Components) ->
 			cookie_url_context_parse_error(Components, URL)
 		;	domain_error(http_cookie_jar_url, URL)
 		).
 
 	cookie_url_context_parse_error(Components, URL) :-
-		( 	memberchk(scheme(Scheme0), Components),
+		(	memberchk(scheme(Scheme0), Components),
 			atom_codes(Scheme0, SchemeCodes0),
 			^^lowercase_ascii_codes(SchemeCodes0, SchemeCodes),
 			atom_codes(Scheme, SchemeCodes),
 			\+ memberchk(Scheme, [http, https]) ->
 			domain_error(http_cookie_jar_url_scheme, Scheme)
-		; 	domain_error(http_cookie_jar_url, URL)
+		;	domain_error(http_cookie_jar_url, URL)
 		).
 
 	split_once(Separator, [Separator| AfterCodes], [], AfterCodes) :-

@@ -317,13 +317,13 @@
 
 	% Accept loop runs in its own thread, blocks on server_accept
 	accept_loop(ServerSocket) :-
-		(   server_shutdown_ ->
+		(	server_shutdown_ ->
 			% Stop accepting new connections
 			dbg(@'Accept loop stopping due to shutdown'),
 			note_accept_loop_stopped,
 			threaded_engine_yield(done)
-		;   catch(
-				(   socket::server_accept(ServerSocket, Input, Output, ClientInfo, [type(text)]),
+		;	catch(
+				(	socket::server_accept(ServerSocket, Input, Output, ClientInfo, [type(text)]),
 					dbg('Accepted new connection'-ClientInfo),
 					handle_accepted_connection(ClientInfo, Input, Output)
 				),
@@ -334,21 +334,21 @@
 		).
 
 	handle_accepted_connection(ClientInfo, Input, Output) :-
-		(   server_shutdown_ ->
+		(	server_shutdown_ ->
 			catch(socket::close(Input, Output), _, true)
-		;   accept_hook_(accept_hook(ClientAddr, Input, Output, Goal)) ->
+		;	accept_hook_(accept_hook(ClientAddr, Input, Output, Goal)) ->
 			ClientInfo = client(ClientAddr),
-			(   call(Goal) ->
+			(	call(Goal) ->
 				create_client_engine(ClientInfo, Input, Output)
-			;   socket::close(Input, Output)
+			;	socket::close(Input, Output)
 			)
-		;   create_client_engine(ClientInfo, Input, Output)
+		;	create_client_engine(ClientInfo, Input, Output)
 		).
 
 	note_accept_loop_stopped :-
-		(   accept_loop_stopped_ ->
+		(	accept_loop_stopped_ ->
 			true
-		;   assertz(accept_loop_stopped_)
+		;	assertz(accept_loop_stopped_)
 		).
 
 	wait_for_accept_loop_to_stop(Outcome) :-
@@ -378,30 +378,30 @@
 	client_engine_loop(ClientId, Input, Output, EngineName) :-
 		adopt_stream(Input),
 		adopt_stream(Output),
-		(   catch(read_term(Input, Request, []), ReadError, (Request = read_error(ReadError))) ->
+		(	catch(read_term(Input, Request, []), ReadError, (Request = read_error(ReadError))) ->
 			dbg('Engine loop'::['EngineName'-EngineName, 'Request'-Request]),
-			(   Request = read_error(Error) ->
+			(	Request = read_error(Error) ->
 				% Read error occurred
 				dbg('Engine loop'-['EngineName'-EngineName, 'Read error'-Error]),
 				remove_client(ClientId, Input, Output)
-			;   Request == exit ->
+			;	Request == exit ->
 				% Client disconnected
 				dbg('Client disconnected'-ClientId),
 				remove_client(ClientId, Input, Output)
-			;   % Handle the request - catch any failures or errors
+			;	% Handle the request - catch any failures or errors
 				dbg('Engine loop'::['EngineName'-EngineName, 'Handling request'-Request]),
-				(   catch(
+				(	catch(
 						handle_request(Request, ClientId, Output),
 						HandleError,
 						dbg('Engine loop'::['EngineName'-EngineName, 'Handle error'-HandleError])
 					) ->
 					true
-				;   dbg('Engine loop'::['EngineName'-EngineName, 'Handle failure for request'-Request])
+				;	dbg('Engine loop'::['EngineName'-EngineName, 'Handle failure for request'-Request])
 				),
 				% Always continue reading regardless of handle_request outcome
 				client_engine_loop(ClientId, Input, Output, EngineName)
 			)
-		;   % read_term failed without exception
+		;	% read_term failed without exception
 			dbg('Engine loop'::['EngineName'-EngineName, 'Read action'-'failed']),
 			remove_client(ClientId, Input, Output)
 		).
@@ -410,9 +410,9 @@
 		dbg('Removing client'-ClientId),
 		retractall(client_connection_(ClientId, _, _)),
 		% Retract and destroy the engine in a separate thread to avoid self-destruction
-		(   retract(client_engine_(ClientId, EngineName)) ->
+		(	retract(client_engine_(ClientId, EngineName)) ->
 			threaded_ignore(threaded_engine_destroy(EngineName))
-		;   true
+		;	true
 		),
 		retractall(waiting_(ClientId, _, _)),
 		catch(socket::close(Input, Output), _, true).
@@ -431,61 +431,61 @@
 	handle_request(in(Tuple), ClientId, Output) :-
 		!,
 		ts_in(Tuple, ClientId, Output, Found),
-		(   Found = yes(Result) ->
+		(	Found = yes(Result) ->
 			write_canonical(Output, result(Result)),
 			write(Output, '.\n'),
 			flush_output(Output)
-		;   true  % Response will be sent when tuple becomes available
+		;	true  % Response will be sent when tuple becomes available
 		).
 
 	handle_request(in_noblock(Tuple), _ClientId, Output) :-
 		!,
 		ts_in_noblock(Tuple, Found),
-		(   Found = yes(Result) ->
+		(	Found = yes(Result) ->
 			write_canonical(Output, result(Result)),
 			write(Output, '.\n')
-		;   write(Output, 'fail.\n')
+		;	write(Output, 'fail.\n')
 		),
 		flush_output(Output).
 
 	handle_request(in_list(TupleList), ClientId, Output) :-
 		!,
 		ts_in_list(TupleList, ClientId, Output, Found),
-		(   Found = yes(Result) ->
+		(	Found = yes(Result) ->
 			write_canonical(Output, result(Result)),
 			write(Output, '.\n'),
 			flush_output(Output)
-		;   true
+		;	true
 		).
 
 	handle_request(rd(Tuple), ClientId, Output) :-
 		!,
 		ts_rd(Tuple, ClientId, Output, Found),
-		(   Found = yes(Result) ->
+		(	Found = yes(Result) ->
 			write_canonical(Output, result(Result)),
 			write(Output, '.\n'),
 			flush_output(Output)
-		;   true
+		;	true
 		).
 
 	handle_request(rd_noblock(Tuple), _ClientId, Output) :-
 		!,
 		ts_rd_noblock(Tuple, Found),
-		(   Found = yes(Result) ->
+		(	Found = yes(Result) ->
 			write_canonical(Output, result(Result)),
 			write(Output, '.\n')
-		;   write(Output, 'fail.\n')
+		;	write(Output, 'fail.\n')
 		),
 		flush_output(Output).
 
 	handle_request(rd_list(TupleList), ClientId, Output) :-
 		!,
 		ts_rd_list(TupleList, ClientId, Output, Found),
-		(   Found = yes(Result) ->
+		(	Found = yes(Result) ->
 			write_canonical(Output, result(Result)),
 			write(Output, '.\n'),
 			flush_output(Output)
-		;   true
+		;	true
 		).
 
 	handle_request(findall_rd_noblock(Template, Tuple), _ClientId, Output) :-
@@ -504,9 +504,9 @@
 
 	handle_request(shutdown, ClientId, Output) :-
 		!,
-		(   server_shutdown_ ->
+		(	server_shutdown_ ->
 			true
-		;   assertz(server_shutdown_)
+		;	assertz(server_shutdown_)
 		),
 		signal_accept_loop,
 		(	retract(server_socket_(ServerSocket)) ->
@@ -535,15 +535,15 @@
 		flush_output(Output).
 
 	signal_accept_loop :-
-		(   server_running_(_Host:Port) ->
+		(	server_running_(_Host:Port) ->
 			catch(
-				(   socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
+				(	socket::client_open('127.0.0.1', Port, Input, Output, [type(text)]),
 					socket::close(Input, Output)
 				),
 				_,
 				true
 			)
-		;   true
+		;	true
 		).
 
 	% ==========================================================================
@@ -557,43 +557,43 @@
 		wake_waiting_clients(Tuple).
 
 	ts_in(Tuple, ClientId, Output, Found) :-
-		(   retract(tuple_(Tuple)) ->
+		(	retract(tuple_(Tuple)) ->
 			Found = yes(Tuple)
-		;   % No matching tuple, client will block
+		;	% No matching tuple, client will block
 			assertz(waiting_(ClientId, in(Tuple), Output)),
 			Found = no
 		).
 
 	ts_in_noblock(Tuple, Found) :-
-		(   retract(tuple_(Tuple)) ->
+		(	retract(tuple_(Tuple)) ->
 			Found = yes(Tuple)
-		;   Found = no
+		;	Found = no
 		).
 
 	ts_in_list(TupleList, ClientId, Output, Found) :-
-		(   find_matching_tuple(TupleList, Match), retract(tuple_(Match)) ->
+		(	find_matching_tuple(TupleList, Match), retract(tuple_(Match)) ->
 			Found = yes(Match)
-		;   assertz(waiting_(ClientId, in_list(TupleList), Output)),
+		;	assertz(waiting_(ClientId, in_list(TupleList), Output)),
 			Found = no
 		).
 
 	ts_rd(Tuple, ClientId, Output, Found) :-
-		(   tuple_(Tuple) ->
+		(	tuple_(Tuple) ->
 			Found = yes(Tuple)
-		;   assertz(waiting_(ClientId, rd(Tuple), Output)),
+		;	assertz(waiting_(ClientId, rd(Tuple), Output)),
 			Found = no
 		).
 
 	ts_rd_noblock(Tuple, Found) :-
-		(   tuple_(Tuple) ->
+		(	tuple_(Tuple) ->
 			Found = yes(Tuple)
-		;   Found = no
+		;	Found = no
 		).
 
 	ts_rd_list(TupleList, ClientId, Output, Found) :-
-		(   find_matching_tuple_rd(TupleList, Match) ->
+		(	find_matching_tuple_rd(TupleList, Match) ->
 			Found = yes(Match)
-		;   assertz(waiting_(ClientId, rd_list(TupleList), Output)),
+		;	assertz(waiting_(ClientId, rd_list(TupleList), Output)),
 			Found = no
 		).
 
@@ -611,15 +611,15 @@
 	% ==========================================================================
 
 	find_matching_tuple([Pattern| Patterns], Match) :-
-		(   tuple_(Match), \+ Match \= Pattern ->
+		(	tuple_(Match), \+ Match \= Pattern ->
 			true
-		;   find_matching_tuple(Patterns, Match)
+		;	find_matching_tuple(Patterns, Match)
 		).
 
 	find_matching_tuple_rd([Pattern| Patterns], Match) :-
-		(   tuple_(Match), \+ Match \= Pattern ->
+		(	tuple_(Match), \+ Match \= Pattern ->
 			true
-		;   find_matching_tuple_rd(Patterns, Match)
+		;	find_matching_tuple_rd(Patterns, Match)
 		).
 
 	% Wake waiting clients when a new tuple is added.
@@ -628,10 +628,10 @@
 	% Called from synchronized ts_out/1 predicate
 	wake_waiting_clients(Tuple) :-
 		% First, try to wake ONE in/1 or in_list/1 waiter (they consume the tuple)
-		(   wake_one_in_waiter(Tuple) ->
+		(	wake_one_in_waiter(Tuple) ->
 			% Tuple was consumed by an in/1 waiter, retract it
 			ignore(retract(tuple_(Tuple)))
-		;   % No in/1 waiter took it, tuple remains - wake all rd/1 waiters
+		;	% No in/1 waiter took it, tuple remains - wake all rd/1 waiters
 			wake_all_rd_waiters(Tuple)
 		).
 
@@ -652,12 +652,12 @@
 		wake_one_in_waiter(Waiters, Tuple).
 
 	wake_one_in_waiter([waiter(ClientId, Request, Output)| Waiters], Tuple) :-
-		( 	retract(waiting_(ClientId, Request, Output)) ->
-			( 	notify_waiting_client(ClientId, Output, result(Tuple)) ->
+		(	retract(waiting_(ClientId, Request, Output)) ->
+			(	notify_waiting_client(ClientId, Output, result(Tuple)) ->
 				true
-			; 	wake_one_in_waiter(Waiters, Tuple)
+			;	wake_one_in_waiter(Waiters, Tuple)
 			)
-		; 	wake_one_in_waiter(Waiters, Tuple)
+		;	wake_one_in_waiter(Waiters, Tuple)
 		).
 	wake_one_in_waiter([], _) :-
 		fail.
@@ -674,9 +674,9 @@
 		wake_all_rd_waiters(Waiters, Tuple).
 
 	wake_all_rd_waiters([waiter(ClientId, Request, Output)| Waiters], Tuple) :-
-		( 	retract(waiting_(ClientId, Request, Output)) ->
+		(	retract(waiting_(ClientId, Request, Output)) ->
 			ignore(notify_waiting_client(ClientId, Output, result(Tuple)))
-		; 	true
+		;	true
 		),
 		wake_all_rd_waiters(Waiters, Tuple).
 	wake_all_rd_waiters([], _).
@@ -685,12 +685,12 @@
 		catch(write_out(Output, Term), _, (prune_waiting_client(ClientId), fail)).
 
 	prune_waiting_client(ClientId) :-
-		( 	client_connection_(ClientId, Input, Output) ->
+		(	client_connection_(ClientId, Input, Output) ->
 			remove_client(ClientId, Input, Output)
-		; 	retractall(waiting_(ClientId, _, _)),
-			( 	retract(client_engine_(ClientId, EngineName)) ->
+		;	retractall(waiting_(ClientId, _, _)),
+			(	retract(client_engine_(ClientId, EngineName)) ->
 				threaded_ignore(threaded_engine_destroy(EngineName))
-			; 	true
+			;	true
 			)
 		).
 

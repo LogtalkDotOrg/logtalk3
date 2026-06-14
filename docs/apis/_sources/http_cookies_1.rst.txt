@@ -11,14 +11,14 @@
 * ``Representation`` - Cookie header representation. Valid values are ``atom``, ``chars``, and ``codes``.
 
 
-HTTP Cookie and Set-Cookie header parsing and generation predicates implementing RFC 6265 syntax.
+HTTP Cookie and ``Set-Cookie`` header parsing and generation predicates implementing RFC 6265 syntax.
 
 | **Availability:** 
 |    ``logtalk_load(http_cookies(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,7 @@ HTTP Cookie and Set-Cookie header parsing and generation predicates implementing
 
    - Cookie header pairs: Cookie header values are represented as ``Name-Value`` pairs.
    - Set-Cookie components: Set-Cookie header values are represented by a cookie name, a cookie value, and an attribute list where attributes use ``Key-Value`` notation such as ``expires-date_time(Year, Month, Day, Hours, Minutes, Seconds)``, ``max_age-Seconds``, ``domain-Domain``, ``path-Path``, ``secure-true``, ``http_only-true``, ``same_site-lax``, ``partitioned-true``, ``priority-high``, and ``extension-Attribute``.
-   - Extension attributes: Unknown Set-Cookie attributes are preserved verbatim as ``extension-Attribute`` pairs as long as they do not use a reserved RFC 6265 attribute name.
+   - Extension attributes: Unknown ``Set-Cookie`` attributes are preserved verbatim as ``extension-Attribute`` pairs as long as they do not use a reserved RFC 6265 attribute name.
    - Expires attribute: The ``Expires`` attribute value is normalized to a ``date_time(Year, Month, Day, Hours, Minutes, Seconds)`` term and generated back using the canonical HTTP-date representation.
 
 | **Inherited public predicates:**
@@ -165,7 +165,7 @@ Generates a canonical ``Set-Cookie`` header field value from a cookie name, a co
 ``normalize_cookie_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Normalizes and validates a Set-Cookie attribute list using the canonical attribute term representation.
+Normalizes and validates a ``Set-Cookie`` attribute list using the canonical attribute term representation.
 
 | **Compilation flags:**
 |    ``static``
@@ -184,7 +184,7 @@ Normalizes and validates a Set-Cookie attribute list using the canonical attribu
 ``cookie_attribute_present/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-True iff a normalized Set-Cookie attribute list contains an attribute with the given name.
+True iff a normalized ``Set-Cookie`` attribute list contains an attribute with the given name.
 
 | **Compilation flags:**
 |    ``static``
@@ -203,7 +203,7 @@ True iff a normalized Set-Cookie attribute list contains an attribute with the g
 ``cookie_attribute_value/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list.
+Returns the first value for the attribute with the given name in a normalized ``Set-Cookie`` attribute list.
 
 | **Compilation flags:**
 |    ``static``
@@ -222,7 +222,7 @@ Returns the first value for the attribute with the given name in a normalized Se
 ``cookie_attribute_value/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns the first value for the attribute with the given name in a normalized Set-Cookie attribute list or the given default value when absent.
+Returns the first value for the attribute with the given name in a normalized ``Set-Cookie`` attribute list or the given default value when absent.
 
 | **Compilation flags:**
 |    ``static``
@@ -241,7 +241,7 @@ Returns the first value for the attribute with the given name in a normalized Se
 ``cookie_expiry/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the raw normalized expiry view for a Set-Cookie attribute list as ``session``, ``max_age(Seconds)``, or ``expires(DateTime)``.
+Returns the raw normalized expiry view for a ``Set-Cookie`` attribute list as ``session``, ``max_age(Seconds)``, or ``expires(DateTime)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -260,7 +260,7 @@ Returns the raw normalized expiry view for a Set-Cookie attribute list as ``sess
 ``cookie_expiry/3``
 ^^^^^^^^^^^^^^^^^^^
 
-Resolves the normalized expiry view for a Set-Cookie attribute list against the given current Unix time as ``session``, ``delete``, or ``expires(UnixTime)``.
+Resolves the normalized expiry view for a ``Set-Cookie`` attribute list against the given current Unix time as ``session``, ``delete``, or ``expires(UnixTime)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -279,7 +279,7 @@ Resolves the normalized expiry view for a Set-Cookie attribute list against the 
 ``cookie_deletion/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns a canonical Set-Cookie term that deletes the named cookie while echoing the relevant scoping and policy attributes from a template attribute list.
+Returns a canonical ``Set-Cookie`` term that deletes the named cookie while echoing the relevant scoping and policy attributes from a template attribute list.
 
 | **Compilation flags:**
 |    ``static``

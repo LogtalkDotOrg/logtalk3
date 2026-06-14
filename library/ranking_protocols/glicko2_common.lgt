@@ -74,12 +74,12 @@
 		dictionary_lookup(Item, Rating, Ratings0),
 		dictionary_lookup(Item, Deviation, Deviations0),
 		dictionary_lookup(Item, Volatility, Volatilities0),
-		(   ItemResults == [] ->
+		(	ItemResults == [] ->
 			UpdatedVolatility = Volatility,
 			DeviationStar is sqrt(Deviation * Deviation + UpdatedVolatility * UpdatedVolatility),
 			UpdatedRating = Rating,
 			UpdatedDeviation = DeviationStar
-		;   rating_period_terms(ItemResults, Rating, Ratings0, Deviations0, 0.0, VarianceInverse, 0.0, ImprovementSum),
+		;	rating_period_terms(ItemResults, Rating, Ratings0, Deviations0, 0.0, VarianceInverse, 0.0, ImprovementSum),
 			Variance is 1.0 / VarianceInverse,
 			Delta is Variance * ImprovementSum,
 			update_volatility(Deviation, Volatility, Delta, Variance, Tau, VolatilityTolerance, UpdatedVolatility),
@@ -118,25 +118,25 @@
 	find_search_boundary(K, Deviation, Delta, Variance, LogVolatilitySquared, Tau, Boundary) :-
 		Candidate is LogVolatilitySquared - K * Tau,
 		volatility_function(Candidate, Deviation, Delta, Variance, LogVolatilitySquared, Tau, Value),
-		(   Value < 0.0 ->
+		(	Value < 0.0 ->
 			NextK is K + 1,
 			find_search_boundary(NextK, Deviation, Delta, Variance, LogVolatilitySquared, Tau, Boundary)
-		;   Boundary = Candidate
+		;	Boundary = Candidate
 		).
 
 	refine_volatility(Left, Right, _LeftValue, _RightValue, _Deviation, _Delta, _Variance, _LogVolatilitySquared, _Tau, VolatilityTolerance, Left) :-
 		abs(Right - Left) =< VolatilityTolerance,
 		!.
 	refine_volatility(Left, Right, LeftValue, RightValue, Deviation, Delta, Variance, LogVolatilitySquared, Tau, VolatilityTolerance, Root) :-
-		(   abs(RightValue - LeftValue) =< 1.0e-12 ->
+		(	abs(RightValue - LeftValue) =< 1.0e-12 ->
 			Candidate is (Left + Right) / 2.0
-		;   Candidate is Left + (Left - Right) * LeftValue / (RightValue - LeftValue)
+		;	Candidate is Left + (Left - Right) * LeftValue / (RightValue - LeftValue)
 		),
 		volatility_function(Candidate, Deviation, Delta, Variance, LogVolatilitySquared, Tau, CandidateValue),
-		(   CandidateValue * RightValue < 0.0 ->
+		(	CandidateValue * RightValue < 0.0 ->
 			NextLeft = Right,
 			NextLeftValue = RightValue
-		;   NextLeft = Left,
+		;	NextLeft = Left,
 			NextLeftValue is LeftValue / 2.0
 		),
 		NextRight = Candidate,

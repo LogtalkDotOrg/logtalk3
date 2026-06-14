@@ -119,7 +119,7 @@
 		].
 
 	check_clusterer(Clusterer) :-
-		(   clusterer_data(Clusterer, Encoders, Clusters, Prototypes, Options, Diagnostics),
+		(	clusterer_data(Clusterer, Encoders, Clusters, Prototypes, Options, Diagnostics),
 			length(Encoders, FeatureCount),
 			^^valid_continuous_encoders(Encoders),
 			valid_clusters(Clusters, FeatureCount, []),
@@ -130,7 +130,7 @@
 			^^valid_diagnostic_count(cluster_count, Diagnostics, ClusterCount),
 			^^valid_diagnostic_count(prototype_count, Diagnostics, ClusterCount) ->
 			true
-		;   domain_error(clusterer, Clusterer)
+		;	domain_error(clusterer, Clusterer)
 		).
 
 	valid_clusters([], _FeatureCount, _SeenIds).
@@ -152,9 +152,9 @@
 
 	maximum_example_id([], MaximumId, MaximumId).
 	maximum_example_id([Id-_AttributeValues| Examples], MaximumId0, MaximumId) :-
-		(   Id > MaximumId0 ->
+		(	Id > MaximumId0 ->
 			MaximumId1 = Id
-		;   MaximumId1 = MaximumId0
+		;	MaximumId1 = MaximumId0
 		),
 		maximum_example_id(Examples, MaximumId1, MaximumId).
 
@@ -212,9 +212,9 @@
 		pair_key(Distance, LeftNodeId, RightNodeId, Key),
 		heap_insert(Key, pair(LeftNodeId, RightNodeId), Heap0, Heap),
 		Size is Size0 + 1,
-		(   Size > MaximumSize0 ->
+		(	Size > MaximumSize0 ->
 			MaximumSize = Size
-		;   MaximumSize = MaximumSize0
+		;	MaximumSize = MaximumSize0
 		).
 
 	pair_key(Distance, LeftNodeId, RightNodeId, key(Distance, LeftNodeId, RightNodeId)).
@@ -239,12 +239,12 @@
 		!,
 		consistency_error(priority_queue_exhausted, Size, MaximumSize).
 	select_closest_pair(pair_queue(Heap0, Size0, MaximumSize), ActiveNodes, RuntimeStats0, RuntimeStats, LeftNodeId, RightNodeId, Distance, pair_queue(Heap, Size, MaximumSize)) :-
-		(   heap_delete(Heap0, key(PoppedDistance, PoppedLeftNodeId, PoppedRightNodeId), pair(PoppedLeftNodeId, PoppedRightNodeId), Heap1) ->
+		(	heap_delete(Heap0, key(PoppedDistance, PoppedLeftNodeId, PoppedRightNodeId), pair(PoppedLeftNodeId, PoppedRightNodeId), Heap1) ->
 			true
-		;   consistency_error(heap_delete_failed, Size0, MaximumSize)
+		;	consistency_error(heap_delete_failed, Size0, MaximumSize)
 		),
 		Size1 is Size0 - 1,
-		(   active_node(ActiveNodes, PoppedLeftNodeId),
+		(	active_node(ActiveNodes, PoppedLeftNodeId),
 			active_node(ActiveNodes, PoppedRightNodeId) ->
 			LeftNodeId = PoppedLeftNodeId,
 			RightNodeId = PoppedRightNodeId,
@@ -252,7 +252,7 @@
 			Heap = Heap1,
 			Size = Size1,
 			RuntimeStats = RuntimeStats0
-		;   increment_stale_pair_discard_count(RuntimeStats0, RuntimeStats1),
+		;	increment_stale_pair_discard_count(RuntimeStats0, RuntimeStats1),
 			select_closest_pair(pair_queue(Heap1, Size1, MaximumSize), ActiveNodes, RuntimeStats1, RuntimeStats, LeftNodeId, RightNodeId, Distance, pair_queue(Heap, Size, MaximumSize))
 		).
 
@@ -268,9 +268,9 @@
 		insert(ActiveNodes2, MergedNodeId, true, ActiveNodes).
 
 	delete_active_node(ActiveNodes0, NodeId, ActiveNodes) :-
-		(   lookup(NodeId, true, ActiveNodes0) ->
+		(	lookup(NodeId, true, ActiveNodes0) ->
 			delete(ActiveNodes0, NodeId, true, ActiveNodes)
-		;   existence_error(active_node, NodeId)
+		;	existence_error(active_node, NodeId)
 		).
 
 	ordered_node_pair(NodeId1, NodeId2, NodeId1, NodeId2) :-
@@ -301,14 +301,14 @@
 	merge_states_by_node_ids([], _LeftNodeId, _RightNodeId, _MergedState, _Inserted, []).
 	merge_states_by_node_ids([State| States], LeftNodeId, RightNodeId, MergedState, Inserted0, MergedStates) :-
 		state_node_id(State, NodeId),
-		(   (NodeId == LeftNodeId; NodeId == RightNodeId) ->
-			(   Inserted0 == false ->
+		(	(NodeId == LeftNodeId; NodeId == RightNodeId) ->
+			(	Inserted0 == false ->
 				MergedStates = [MergedState| RestMergedStates],
 				Inserted1 = true
-			;   MergedStates = RestMergedStates,
+			;	MergedStates = RestMergedStates,
 				Inserted1 = Inserted0
 			)
-		;   MergedStates = [State| RestMergedStates],
+		;	MergedStates = [State| RestMergedStates],
 			Inserted1 = Inserted0
 		),
 		merge_states_by_node_ids(States, LeftNodeId, RightNodeId, MergedState, Inserted1, RestMergedStates).
@@ -317,10 +317,10 @@
 	update_distance_cache([State| States], Options, Distances0, PairQueue0, LeftState, RightState, MergedState, Distances, PairQueue) :-
 		State = cluster_state(NodeId, _Members, _Size),
 		MergedState = cluster_state(MergedNodeId, _MergedMembers, _MergedSize),
-		(   NodeId == MergedNodeId ->
+		(	NodeId == MergedNodeId ->
 			Distances1 = Distances0,
 			PairQueue1 = PairQueue0
-		;   merged_distance(Options, Distances0, LeftState, RightState, State, Distance),
+		;	merged_distance(Options, Distances0, LeftState, RightState, State, Distance),
 			distance_key(MergedNodeId, NodeId, Key),
 			insert(Distances0, Key, Distance, Distances1),
 			insert_pair_queue(PairQueue0, MergedNodeId, NodeId, Distance, PairQueue1)
@@ -334,14 +334,14 @@
 		merge_distance(Linkage, LeftState, RightState, LeftDistance, RightDistance, Distance).
 
 	merge_distance(single, _LeftState, _RightState, LeftDistance, RightDistance, Distance) :-
-		(   LeftDistance =< RightDistance ->
+		(	LeftDistance =< RightDistance ->
 			Distance = LeftDistance
-		;   Distance = RightDistance
+		;	Distance = RightDistance
 		).
 	merge_distance(complete, _LeftState, _RightState, LeftDistance, RightDistance, Distance) :-
-		(   LeftDistance >= RightDistance ->
+		(	LeftDistance >= RightDistance ->
 			Distance = LeftDistance
-		;   Distance = RightDistance
+		;	Distance = RightDistance
 		).
 	merge_distance(average, cluster_state(_LeftNodeId, _LeftMembers, LeftSize), cluster_state(_RightNodeId, _RightMembers, RightSize), LeftDistance, RightDistance, Distance) :-
 		TotalSize is LeftSize + RightSize,
@@ -349,9 +349,9 @@
 
 	cached_state_distance(Distances, cluster_state(NodeId1, _Members1, _Size1), cluster_state(NodeId2, _Members2, _Size2), Distance) :-
 		distance_key(NodeId1, NodeId2, Key),
-		(   lookup(Key, Distance, Distances) ->
+		(	lookup(Key, Distance, Distances) ->
 			true
-		;   existence_error(cached_distance, Key)
+		;	existence_error(cached_distance, Key)
 		).
 
 	distance_key(NodeId1, NodeId2, NodeId1-NodeId2) :-
@@ -384,9 +384,9 @@
 
 	members_minimum_id([], MinimumId, MinimumId).
 	members_minimum_id([Id-_Vector| Members], MinimumId0, MinimumId) :-
-		(   Id < MinimumId0 ->
+		(	Id < MinimumId0 ->
 			MinimumId1 = Id
-		;   MinimumId1 = MinimumId0
+		;	MinimumId1 = MinimumId0
 		),
 		members_minimum_id(Members, MinimumId1, MinimumId).
 
@@ -424,10 +424,10 @@
 	nearest_cluster([], _Features, _Options, BestCluster, BestDistance, BestCluster, BestDistance).
 	nearest_cluster([cluster(Cluster, Points)| Clusters], Features, Options, BestCluster0, BestDistance0, BestCluster, BestDistance) :-
 		cluster_distance(Options, Features, Points, Distance0),
-		(   Distance0 < BestDistance0 ->
+		(	Distance0 < BestDistance0 ->
 			BestCluster1 = Cluster,
 			BestDistance1 = Distance0
-		;   BestCluster1 = BestCluster0,
+		;	BestCluster1 = BestCluster0,
 			BestDistance1 = BestDistance0
 		),
 		nearest_cluster(Clusters, Features, Options, BestCluster1, BestDistance1, BestCluster, BestDistance).
@@ -450,18 +450,18 @@
 	minimum_point_distance([], _Features, _Options, Distance, Distance).
 	minimum_point_distance([Point| Points], Features, Options, CurrentDistance, Distance) :-
 		distance(Options, Features, Point, CandidateDistance),
-		(   CandidateDistance < CurrentDistance ->
+		(	CandidateDistance < CurrentDistance ->
 			NextDistance = CandidateDistance
-		;   NextDistance = CurrentDistance
+		;	NextDistance = CurrentDistance
 		),
 		minimum_point_distance(Points, Features, Options, NextDistance, Distance).
 
 	maximum_point_distance([], _Features, _Options, Distance, Distance).
 	maximum_point_distance([Point| Points], Features, Options, CurrentDistance, Distance) :-
 		distance(Options, Features, Point, CandidateDistance),
-		(   CandidateDistance > CurrentDistance ->
+		(	CandidateDistance > CurrentDistance ->
 			NextDistance = CandidateDistance
-		;   NextDistance = CurrentDistance
+		;	NextDistance = CurrentDistance
 		),
 		maximum_point_distance(Points, Features, Options, NextDistance, Distance).
 

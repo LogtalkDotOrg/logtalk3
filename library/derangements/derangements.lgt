@@ -113,10 +113,10 @@
 
 	count_partial_derangements(FixedPoints, List, Count) :-
 		length(List, N),
-		(   FixedPoints >= 0,
+		(	FixedPoints >= 0,
 			FixedPoints =< N ->
 			count_partial_derangements_checked(FixedPoints, List, N, Count)
-		;   Count = 0
+		;	Count = 0
 		).
 
 	count_distinct_derangements(List, Count) :-
@@ -248,17 +248,17 @@
 	count_permutations_with_fixed_points([], _, _, Count, Count).
 	count_permutations_with_fixed_points([Permutation| Permutations], List, FixedPoints, Count0, Count) :-
 		fixed_points_count(List, Permutation, 0, PermutationFixedPoints),
-		(   PermutationFixedPoints =:= FixedPoints ->
+		(	PermutationFixedPoints =:= FixedPoints ->
 			Count1 is Count0 + 1
-		;   Count1 = Count0
+		;	Count1 = Count0
 		),
 		count_permutations_with_fixed_points(Permutations, List, FixedPoints, Count1, Count).
 
 	fixed_points_count([], [], Count, Count).
 	fixed_points_count([Head1| Tail1], [Head2| Tail2], Count0, Count) :-
-		(   Head1 == Head2 ->
+		(	Head1 == Head2 ->
 			Count1 is Count0 + 1
-		;   Count1 = Count0
+		;	Count1 = Count0
 		),
 		fixed_points_count(Tail1, Tail2, Count1, Count).
 

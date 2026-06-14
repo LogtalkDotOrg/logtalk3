@@ -22,9 +22,9 @@
 :- object(avro).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-06-14,
 		comment is 'Apache Avro binary format parser and generator.'
 	]).
 
@@ -32,28 +32,44 @@
 	:- mode(parse(++compound, --pair), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses Avro binary data from the given source (``bytes(List)``, ``stream(Stream)``, or ``file(Path)``) returning a ``Schema-Data`` pair. When the schema is not present in the file, ``Schema`` is unified with ``false``.',
-		argnames is ['Source', 'Schema-Data']
+		argnames is ['Source', 'Schema-Data'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Avro source term' - domain_error(avro_source, 'Source')
+		]
 	]).
 
 	:- public(parse/3).
 	:- mode(parse(++compound, ++term, --term), one_or_error).
 	:- info(parse/3, [
 		comment is 'Parses Avro binary data from the given source using the provided schema, returning the decoded data.',
-		argnames is ['Source', 'Schema', 'Data']
+		argnames is ['Source', 'Schema', 'Data'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Avro source term' - domain_error(avro_source, 'Source')
+		]
 	]).
 
 	:- public(generate/3).
 	:- mode(generate(++compound, ++term, ++term), one_or_error).
 	:- info(generate/3, [
 		comment is 'Generates Avro binary data to the given sink (``bytes(List)``, ``stream(Stream)``, or ``file(Path)``) from the given schema and data. The schema is not included in the output.',
-		argnames is ['Sink', 'Schema', 'Data']
+		argnames is ['Sink', 'Schema', 'Data'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Avro sink term' - domain_error(avro_sink, 'Sink')
+		]
 	]).
 
 	:- public(generate/4).
 	:- mode(generate(++compound, ++boolean, ++term, ++term), one_or_error).
 	:- info(generate/4, [
 		comment is 'Generates Avro binary data to the given sink from the given schema and data. When ``IncludeSchema`` is ``true``, generates an Avro Object Container File with the schema embedded.',
-		argnames is ['Sink', 'IncludeSchema', 'Schema', 'Data']
+		argnames is ['Sink', 'IncludeSchema', 'Schema', 'Data'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Avro sink term' - domain_error(avro_sink, 'Sink')
+		]
 	]).
 
 	:- uses(list, [

@@ -480,9 +480,9 @@
 		ascending_integer_list(NextInteger, Count, Integers).
 
 	identity_map(Count, Map) :-
-		(   Count =:= 0 ->
+		(	Count =:= 0 ->
 			Map = {}
-		;   identity_map_pairs(0, Count, Pairs),
+		;	identity_map_pairs(0, Count, Pairs),
 			Map = {Pairs}
 		).
 

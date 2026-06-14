@@ -92,11 +92,11 @@
 		ensure_predictive_variance(Variance0, Variance).
 
 	ensure_predictive_variance(Variance0, Variance) :-
-		(   Variance0 >= 0.0 ->
+		(	Variance0 >= 0.0 ->
 			Variance = Variance0
-		;   Variance0 >= -1.0e-10 ->
+		;	Variance0 >= -1.0e-10 ->
 			Variance = 0.0
-		;   domain_error(non_negative_predictive_variance, Variance0)
+		;	domain_error(non_negative_predictive_variance, Variance0)
 		).
 
 	build_diagnostics(Target, Encoders, TrainingExampleCount, Options, TrainingDiagnostics, Diagnostics) :-
@@ -117,9 +117,9 @@
 		center_targets(Targets, TargetMean, CenteredTargets),
 		factorization_settings(Options, FactorizationSettings),
 		initial_kernel(FeatureLayout, ContinuousFeatureCount, CategoricalFeatureCount, TrainingFeatures, CenteredTargets, Options, InitialKernel),
-		(   ^^option(optimize_hyperparameters(true), Options) ->
+		(	^^option(optimize_hyperparameters(true), Options) ->
 			optimize_kernel_hyperparameters(TrainingFeatures, CenteredTargets, Options, FactorizationSettings, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, Convergence, Iterations, FinalDelta, LogMarginalLikelihood)
-		;   evaluate_kernel(TrainingFeatures, CenteredTargets, FactorizationSettings, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, LogMarginalLikelihood),
+		;	evaluate_kernel(TrainingFeatures, CenteredTargets, FactorizationSettings, InitialKernel, Kernel, CholeskyFactor, Alpha, JitterAttempts, LogMarginalLikelihood),
 			Convergence = disabled,
 			Iterations = 0,
 			FinalDelta = 0.0
@@ -162,10 +162,10 @@
 
 	build_gaussian_process_encoders([], _Examples, _Options, []).
 	build_gaussian_process_encoders([Attribute-Values| Attributes], Examples, Options, [Encoder| Encoders]) :-
-		(   Values == continuous ->
+		(	Values == continuous ->
 			^^continuous_stats(Attribute, Examples, Options, Mean, Scale),
 			Encoder = continuous(Attribute, Mean, Scale)
-		;   Encoder = categorical(Attribute, Values)
+		;	Encoder = categorical(Attribute, Values)
 		),
 		build_gaussian_process_encoders(Attributes, Examples, Options, Encoders).
 
@@ -195,9 +195,9 @@
 		repeated_value(ContinuousFeatureCount, LengthScale, LengthScales).
 	resolve_length_scales(LengthScales, _FeatureLayout, _TrainingFeatures, ContinuousFeatureCount, LengthScales) :-
 		valid(list(positive_float), LengthScales),
-		(   length(LengthScales, ContinuousFeatureCount) ->
+		(	length(LengthScales, ContinuousFeatureCount) ->
 			true
-		;   domain_error(length_scale_dimensions(ContinuousFeatureCount), LengthScales)
+		;	domain_error(length_scale_dimensions(ContinuousFeatureCount), LengthScales)
 		).
 
 	resolve_categorical_penalties(auto, CategoricalFeatureCount, CategoricalPenalties) :-
@@ -209,9 +209,9 @@
 		repeated_value(CategoricalFeatureCount, CategoricalPenalty, CategoricalPenalties).
 	resolve_categorical_penalties(CategoricalPenalties, CategoricalFeatureCount, CategoricalPenalties) :-
 		valid(list(positive_float), CategoricalPenalties),
-		(   length(CategoricalPenalties, CategoricalFeatureCount) ->
+		(	length(CategoricalPenalties, CategoricalFeatureCount) ->
 			true
-		;   domain_error(categorical_penalty_dimensions(CategoricalFeatureCount), CategoricalPenalties)
+		;	domain_error(categorical_penalty_dimensions(CategoricalFeatureCount), CategoricalPenalties)
 		).
 
 	feature_default_length_scales(FeatureLayout, TrainingFeatures, LengthScales) :-
@@ -244,13 +244,13 @@
 
 	default_feature_length_scale(Values, LengthScale) :-
 		length(Values, Count),
-		(   Count > 1 ->
+		(	Count > 1 ->
 			variance(Values, Variance0)
-		;   Variance0 = 0.0
+		;	Variance0 = 0.0
 		),
-		(   Variance0 > 1.0e-12 ->
+		(	Variance0 > 1.0e-12 ->
 			LengthScale is sqrt(Variance0)
-		;   LengthScale = 1.0
+		;	LengthScale = 1.0
 		).
 
 	repeated_value(0, _Value, []) :-
@@ -262,13 +262,13 @@
 
 	resolve_signal_variance(auto, CenteredTargets, SignalVariance) :-
 		length(CenteredTargets, Count),
-		(   Count > 1 ->
+		(	Count > 1 ->
 			variance(CenteredTargets, Variance0)
-		;   Variance0 = 0.0
+		;	Variance0 = 0.0
 		),
-		(   Variance0 > 1.0e-8 ->
+		(	Variance0 > 1.0e-8 ->
 			SignalVariance = Variance0
-		;   SignalVariance = 1.0
+		;	SignalVariance = 1.0
 		),
 		!.
 	resolve_signal_variance(SignalVariance, _CenteredTargets, SignalVariance) :-
@@ -276,9 +276,9 @@
 
 	resolve_noise_variance(auto, SignalVariance, NoiseVariance) :-
 		NoiseVariance0 is SignalVariance * 1.0e-4,
-		(   NoiseVariance0 >= 1.0e-6 ->
+		(	NoiseVariance0 >= 1.0e-6 ->
 			NoiseVariance = NoiseVariance0
-		;   NoiseVariance = 1.0e-6
+		;	NoiseVariance = 1.0e-6
 		),
 		!.
 	resolve_noise_variance(NoiseVariance, _SignalVariance, NoiseVariance) :-
@@ -311,20 +311,20 @@
 		state_score(State1, Score1),
 		effective_tolerance(Score0, Tolerance, RelativeImprovementFactor, EffectiveTolerance),
 		Improvement0 is Score1 - Score0,
-		(   Improvement0 >= 0.0 ->
+		(	Improvement0 >= 0.0 ->
 			Improvement = Improvement0,
 			BestState = State1
-		;   Improvement = 0.0,
+		;	Improvement = 0.0,
 			BestState = State0
 		),
-		(   Improvement > EffectiveTolerance ->
+		(	Improvement > EffectiveTolerance ->
 			NextIteration is Iteration + 1,
 			coordinate_search(TrainingFeatures, CenteredTargets, FactorizationSettings, MaximumIterations, Tolerance, RelativeImprovementFactor, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, MinimumStep, NextIteration, Step, BestState, State, Convergence, Iterations, FinalDelta)
-		;   Step > MinimumStep ->
+		;	Step > MinimumStep ->
 			ReducedStep is Step / 2.0,
 			NextIteration is Iteration + 1,
 			coordinate_search(TrainingFeatures, CenteredTargets, FactorizationSettings, MaximumIterations, Tolerance, RelativeImprovementFactor, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, MinimumStep, NextIteration, ReducedStep, BestState, State, Convergence, Iterations, FinalDelta)
-		;   State = BestState,
+		;	State = BestState,
 			Convergence = tolerance,
 			Iterations is Iteration,
 			FinalDelta = Improvement
@@ -334,9 +334,9 @@
 
 	effective_tolerance(Score, Tolerance, RelativeImprovementFactor, EffectiveTolerance) :-
 		RelativeTolerance is abs(Score) * RelativeImprovementFactor,
-		(   RelativeTolerance > Tolerance ->
+		(	RelativeTolerance > Tolerance ->
 			EffectiveTolerance = RelativeTolerance
-		;   EffectiveTolerance = Tolerance
+		;	EffectiveTolerance = Tolerance
 		).
 
 	sweep_hyperparameters(TrainingFeatures, CenteredTargets, FactorizationSettings, Step, HyperparameterMinimum, MaximumContinuousLengthScale, MaximumCategoricalPenalty, State0, State) :-
@@ -417,11 +417,11 @@
 
 	unique_new_candidates([], _CurrentKernel, CandidateKernels, CandidateKernels).
 	unique_new_candidates([CandidateKernel| CandidateKernels0], CurrentKernel, CandidateKernels1, CandidateKernels) :-
-		(   CandidateKernel == CurrentKernel ->
+		(	CandidateKernel == CurrentKernel ->
 			CandidateKernels2 = CandidateKernels1
-		;   member(ExistingKernel, CandidateKernels1), CandidateKernel == ExistingKernel ->
+		;	member(ExistingKernel, CandidateKernels1), CandidateKernel == ExistingKernel ->
 			CandidateKernels2 = CandidateKernels1
-		;   CandidateKernels2 = [CandidateKernel| CandidateKernels1]
+		;	CandidateKernels2 = [CandidateKernel| CandidateKernels1]
 		),
 		unique_new_candidates(CandidateKernels0, CurrentKernel, CandidateKernels2, CandidateKernels).
 
@@ -448,25 +448,25 @@
 	scale_parameter(Parameter, Step, Minimum, Smaller, Larger) :-
 		Scale is exp(Step),
 		Smaller0 is Parameter / Scale,
-		(   Smaller0 >= Minimum ->
+		(	Smaller0 >= Minimum ->
 			Smaller = Smaller0
-		;   Smaller = Minimum
+		;	Smaller = Minimum
 		),
 		Larger is Parameter * Scale.
 
 	clamp_parameter(Value, Minimum, Maximum, Clamped) :-
-		(   Value < Minimum ->
+		(	Value < Minimum ->
 			Clamped = Minimum
-		;   Value > Maximum ->
+		;	Value > Maximum ->
 			Clamped = Maximum
-		;   Clamped = Value
+		;	Clamped = Value
 		).
 
 	best_candidate_state([], _TrainingFeatures, _CenteredTargets, _FactorizationSettings, State, State).
 	best_candidate_state([CandidateKernel| CandidateKernels], TrainingFeatures, CenteredTargets, FactorizationSettings, State0, State) :-
-		(   catch(candidate_state(CandidateKernel, TrainingFeatures, CenteredTargets, FactorizationSettings, CandidateState), error(domain_error(positive_definite_covariance, _), _), fail) ->
+		(	catch(candidate_state(CandidateKernel, TrainingFeatures, CenteredTargets, FactorizationSettings, CandidateState), error(domain_error(positive_definite_covariance, _), _), fail) ->
 			better_state(CandidateState, State0, BetterState)
-		;   BetterState = State0
+		;	BetterState = State0
 		),
 		best_candidate_state(CandidateKernels, TrainingFeatures, CenteredTargets, FactorizationSettings, BetterState, State).
 
@@ -493,10 +493,10 @@
 	factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, Attempt, Kernel, JitterAttempts, CholeskyFactor) :-
 		update_kernel_jitter(Kernel0, JitterScaleFactor, Attempt, CandidateKernel),
 		build_covariance_matrix(TrainingFeatures, CandidateKernel, CovarianceMatrix),
-		(   catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(domain_error(positive_definite_matrix, CovarianceMatrix), _Context), fail) ->
+		(	catch(cholesky_decomposition(CovarianceMatrix, CholeskyFactor), error(domain_error(positive_definite_matrix, CovarianceMatrix), _Context), fail) ->
 			Kernel = CandidateKernel,
 			JitterAttempts = Attempt
-		;   NextAttempt is Attempt + 1,
+		;	NextAttempt is Attempt + 1,
 			factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, NextAttempt, Kernel, JitterAttempts, CholeskyFactor)
 		).
 
@@ -555,9 +555,9 @@
 	mixed_distance([categorical_segment(_Attribute, Width)| FeatureLayout], Values, OtherValues, LengthScales, [CategoricalPenalty| CategoricalPenalties], DistanceSquared0, DistanceSquared) :-
 		prefix(Width, Values, Segment, RestValues),
 		prefix(Width, OtherValues, OtherSegment, RestOtherValues),
-		(   Segment == OtherSegment ->
+		(	Segment == OtherSegment ->
 			DistanceSquared1 = DistanceSquared0
-		;   DistanceSquared1 is DistanceSquared0 + CategoricalPenalty
+		;	DistanceSquared1 is DistanceSquared0 + CategoricalPenalty
 		),
 		mixed_distance(FeatureLayout, RestValues, RestOtherValues, LengthScales, CategoricalPenalties, DistanceSquared1, DistanceSquared).
 
@@ -594,7 +594,7 @@
 	regressor_term_template(gaussian_process_regressor(_Encoders, _TrainingFeatures, _TargetMean, _Alpha, _CholeskyFactor, _Kernel, _Diagnostics), gaussian_process_regressor('Encoders', 'TrainingFeatures', 'TargetMean', 'Alpha', 'CholeskyFactor', 'Kernel', 'Diagnostics')).
 
 	check_regressor(Regressor) :-
-		(   Regressor = gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics),
+		(	Regressor = gaussian_process_regressor(Encoders, TrainingFeatures, TargetMean, Alpha, CholeskyFactor, Kernel, Diagnostics),
 			^^valid_regression_encoders(Encoders),
 			valid(float, TargetMean),
 			build_feature_layout(Encoders, FeatureLayout, ContinuousFeatureCount, CategoricalFeatureCount),
@@ -610,7 +610,7 @@
 			valid_gaussian_process_diagnostics(Diagnostics, ContinuousFeatureCount, CategoricalFeatureCount),
 			^^valid_diagnostic_count(encoded_feature_count, Diagnostics, FeatureCount) ->
 			true
-		;   domain_error(regressor, Regressor)
+		;	domain_error(regressor, Regressor)
 		).
 
 	valid_kernel(Kernel, FeatureLayout, FeatureCount, ContinuousFeatureCount, CategoricalFeatureCount) :-
@@ -625,8 +625,8 @@
 		valid_feature_layout(FeatureLayout),
 		valid(list(positive_float), LengthScales),
 		valid(list(positive_float), CategoricalPenalties),
-		(   LengthScales \== []
-		;   CategoricalPenalties \== []
+		(	LengthScales \== []
+		;	CategoricalPenalties \== []
 		),
 		valid(positive_float, SignalVariance),
 		valid(non_negative_float, NoiseVariance),
@@ -749,28 +749,28 @@
 	valid_option(optimize_hyperparameters(OptimizeHyperparameters)) :-
 		valid(boolean, OptimizeHyperparameters).
 	valid_option(length_scale(LengthScale)) :-
-		(   LengthScale == auto ->
+		(	LengthScale == auto ->
 			true
-		;   valid(list(positive_float), LengthScale),
+		;	valid(list(positive_float), LengthScale),
 			true
-		;   valid(positive_float, LengthScale)
+		;	valid(positive_float, LengthScale)
 		).
 	valid_option(categorical_penalty(CategoricalPenalty)) :-
-		(   CategoricalPenalty == auto ->
+		(	CategoricalPenalty == auto ->
 			true
-		;   valid(list(positive_float), CategoricalPenalty),
+		;	valid(list(positive_float), CategoricalPenalty),
 			true
-		;   valid(positive_float, CategoricalPenalty)
+		;	valid(positive_float, CategoricalPenalty)
 		).
 	valid_option(signal_variance(SignalVariance)) :-
-		(   SignalVariance == auto ->
+		(	SignalVariance == auto ->
 			true
-		;   valid(positive_float, SignalVariance)
+		;	valid(positive_float, SignalVariance)
 		).
 	valid_option(noise_variance(NoiseVariance)) :-
-		(   NoiseVariance == auto ->
+		(	NoiseVariance == auto ->
 			true
-		;   valid(non_negative_float, NoiseVariance)
+		;	valid(non_negative_float, NoiseVariance)
 		).
 	valid_option(jitter(Jitter)) :-
 		valid(positive_float, Jitter).

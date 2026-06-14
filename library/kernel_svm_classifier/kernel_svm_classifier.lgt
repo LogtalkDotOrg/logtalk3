@@ -119,14 +119,14 @@
 
 	optimize_model(Rows, GramMatrix, PositiveClass, Options, Epoch, Model0, Model) :-
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Epoch >= MaximumIterations ->
+		(	Epoch >= MaximumIterations ->
 			Model = Model0
-		;   learning_rate_for_epoch(Options, Epoch, Step),
+		;	learning_rate_for_epoch(Options, Epoch, Step),
 			process_rows(Rows, GramMatrix, PositiveClass, Options, Step, 1, Model0, Model1, 0.0, MaxDelta),
 			^^option(tolerance(Tolerance), Options),
-			(   MaxDelta =< Tolerance ->
+			(	MaxDelta =< Tolerance ->
 				Model = Model1
-			;   NextEpoch is Epoch + 1,
+			;	NextEpoch is Epoch + 1,
 				optimize_model(Rows, GramMatrix, PositiveClass, Options, NextEpoch, Model1, Model)
 			)
 		).
@@ -134,11 +134,11 @@
 	learning_rate_for_epoch(Options, Epoch, Step) :-
 		^^option(learning_rate(LearningRate), Options),
 		^^option(learning_schedule(Schedule), Options),
-		(   Schedule == constant ->
+		(	Schedule == constant ->
 			Step = LearningRate
-		;   Schedule = inverse_scaling(Power) ->
+		;	Schedule = inverse_scaling(Power) ->
 			Step is LearningRate / ((Epoch + 1.0) ** Power)
-		;   domain_error(learning_schedule, Schedule)
+		;	domain_error(learning_schedule, Schedule)
 		).
 
 	process_rows([], _GramMatrix, _PositiveClass, _Options, _Step, _Index, Model, Model, MaxDelta, MaxDelta).
@@ -155,12 +155,12 @@
 		Margin is Sign * Score,
 		^^option(l2_regularization(Regularization), Options),
 		decay_coefficients(Coefficients0, Step, Regularization, Coefficients1, 0.0, DecayDelta),
-		(   Margin < 1.0 ->
+		(	Margin < 1.0 ->
 			add_dual_update(Coefficients1, Index, Step * Sign, Coefficients, 0.0, UpdateDelta),
 			Bias is Bias0 + Step * Sign,
 			BiasDelta is abs(Bias - Bias0),
 			Delta is max(BiasDelta, max(DecayDelta, UpdateDelta))
-		;   Coefficients = Coefficients1,
+		;	Coefficients = Coefficients1,
 			Bias = Bias0,
 			Delta = DecayDelta
 		),
@@ -226,7 +226,7 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, Classes, Encoders, Kernel, TrainingRows, Models, Options),
+		(	classifier_data(Classifier, Classes, Encoders, Kernel, TrainingRows, Models, Options),
 			^^valid_class_values(Classes),
 			^^valid_linear_encoders(Encoders),
 			valid_kernel(Kernel),
@@ -238,7 +238,7 @@
 			length(Models, ModelCount),
 			valid_models(Models, Classes, TrainingCount, []) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-

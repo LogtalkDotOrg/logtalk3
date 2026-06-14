@@ -98,9 +98,9 @@
 	generate_component(FeatureCount, Scale, [Weight| Component]) :-
 		FeatureCount > 0,
 		random_float(Random),
-		(   Random < 0.5 ->
+		(	Random < 0.5 ->
 			Weight is -Scale
-		;   Weight = Scale
+		;	Weight = Scale
 		),
 		NextFeatureCount is FeatureCount - 1,
 		generate_component(NextFeatureCount, Scale, Component).

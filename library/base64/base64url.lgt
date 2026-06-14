@@ -22,9 +22,9 @@
 :- object(base64url).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Paulo Moura',
-		date is 2021-03-10,
+		date is 2026-06-14,
 		comment is 'Base64URL parser and generator.'
 	]).
 
@@ -32,37 +32,62 @@
 	:- mode(parse(++compound, --types([atom,chars,codes])), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).',
-		argnames is ['Source', 'URL']
+		argnames is ['Source', 'URL'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Base64 source term' - domain_error(base64url_source, 'Source'),
+			'``Source`` contains Base64URL data with characters outside the Base64URL alphabet' - representation_error(base64)
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(+compound, +types([atom,chars,codes])), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).',
-		argnames is ['Sink', 'URL']
+		argnames is ['Sink', 'URL'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Base64 sink term' - domain_error(base64url_sink, 'Sink')
+		]
 	]).
 
+	parse(Source, _) :-
+		var(Source),
+		instantiation_error.
 	parse(atom(Atom), URL) :-
+		!,
 		atom_codes(Atom, Codes),
 		phrase(decode(Codes), URLCodes),
 		atom_codes(URL, URLCodes).
 	parse(chars(Chars), URL) :-
+		!,
 		chars_to_codes(Chars, Codes),
 		phrase(decode(Codes), URLCodes),
 		codes_to_chars(URLCodes, URL).
 	parse(codes(Codes), URL) :-
+		!,
 		phrase(decode(Codes), URL).
+	parse(Source, _) :-
+		domain_error(base64url_source, Source).
 
+	generate(Sink, _) :-
+		var(Sink),
+		instantiation_error.
 	generate(atom(Atom), URL) :-
+		!,
 		atom_codes(URL, URLCodes),
 		phrase(encode(URLCodes), Codes),
 		atom_codes(Atom, Codes).
 	generate(chars(Chars), URL) :-
+		!,
 		chars_to_codes(URL, URLCodes),
 		phrase(encode(URLCodes), Codes),
 		codes_to_chars(Codes, Chars).
 	generate(codes(Codes), URL) :-
+		!,
 		phrase(encode(URL), Codes).
+	generate(Sink, _) :-
+		domain_error(base64url_sink, Sink).
 
 	% parser (decoding)
 

@@ -170,16 +170,16 @@
 	source_bits(bytes(Bytes), Bits) :-
 		!,
 		precision_spec(_Precision_, _, _, _, Count),
-		(   valid(list(byte, Count), Bytes) ->
+		(	valid(list(byte, Count), Bytes) ->
 			canonical_order_bytes(_ByteOrder_, Bytes, CanonicalBytes),
 			bytes_to_unsigned_integer(CanonicalBytes, Bits)
-		;   domain_error(ieee_754_encoding, bytes(Bytes))
+		;	domain_error(ieee_754_encoding, bytes(Bytes))
 		).
 	source_bits(bits(Bits), Bits) :-
 		!,
-		(   valid_bits(Bits) ->
+		(	valid_bits(Bits) ->
 			true
-		;   domain_error(ieee_754_encoding, bits(Bits))
+		;	domain_error(ieee_754_encoding, bits(Bits))
 		).
 	source_bits(Source, _) :-
 		domain_error(ieee_754_source, Source).
@@ -190,33 +190,33 @@
 		ExponentBits is (Bits >> MantissaWidth) /\ ((1 << ExponentWidth) - 1),
 		MantissaBits is Bits /\ ((1 << MantissaWidth) - 1),
 		AllOnesExponent is (1 << ExponentWidth) - 1,
-		(   ExponentBits =:= 0 ->
-			(   MantissaBits =:= 0 ->
+		(	ExponentBits =:= 0 ->
+			(	MantissaBits =:= 0 ->
 				Class = zero
-			;   Class = subnormal
+			;	Class = subnormal
 			)
-		;   ExponentBits =:= AllOnesExponent ->
-			(   MantissaBits =:= 0 ->
+		;	ExponentBits =:= AllOnesExponent ->
+			(	MantissaBits =:= 0 ->
 				Class = infinity
-			;   Class = not_a_number
+			;	Class = not_a_number
 			)
-		;   Class = normal
+		;	Class = normal
 		).
 
 	bits_finite_binary_rational(Bits, Sign, Significand, Exponent) :-
 		bits_fields(Bits, Sign, ExponentBits, MantissaBits, Class),
-		(   Class == zero ->
+		(	Class == zero ->
 			Significand = 0,
 			Exponent = 0
-		;   Class == subnormal ->
+		;	Class == subnormal ->
 			precision_spec(_Precision_, _, MantissaWidth, Bias, _),
 			Significand = MantissaBits,
 			Exponent is 1 - Bias - MantissaWidth
-		;   Class == normal ->
+		;	Class == normal ->
 			precision_spec(_Precision_, _, MantissaWidth, Bias, _),
 			Significand is (1 << MantissaWidth) + MantissaBits,
 			Exponent is ExponentBits - Bias - MantissaWidth
-		;   fail
+		;	fail
 		).
 
 	bits_nan_payload(Bits, PayloadBits) :-
@@ -226,9 +226,9 @@
 		bits_fields(Bits, _Sign, _ExponentBits, PayloadBits, not_a_number),
 		precision_spec(_Precision_, _, MantissaWidth, _, _),
 		QuietBit is 1 << (MantissaWidth - 1),
-		(   PayloadBits /\ QuietBit =:= 0 ->
+		(	PayloadBits /\ QuietBit =:= 0 ->
 			Kind = signaling
-		;   Kind = quiet
+		;	Kind = quiet
 		).
 
 	canonical_nan_bits(Bits) :-

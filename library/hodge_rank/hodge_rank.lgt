@@ -58,9 +58,9 @@
 		^^merge_options(UserOptions, Options),
 		^^validate_pairwise_measurement_dataset(Dataset, DatasetSummary),
 		^^pairwise_measurement_dataset_items(Dataset, Items),
-		(   Items = [Item] ->
+		(	Items = [Item] ->
 			singleton_ranker(Item, Options, DatasetSummary, Ranker)
-		;   ^^pairwise_measurement_dataset_measurements(Dataset, Measurements),
+		;	^^pairwise_measurement_dataset_measurements(Dataset, Measurements),
 			length(Items, Count),
 			^^index_items(Items, 1, IndexPairs),
 			as_dictionary(IndexPairs, IndexDictionary),
@@ -98,9 +98,9 @@
 
 	hodge_rank_data(Ranker, Items, Scores, Diagnostics, Residuals) :-
 		::score_ranker_data(Ranker, Items, Scores, Diagnostics),
-		(   memberchk(residuals(Residuals), Diagnostics) ->
+		(	memberchk(residuals(Residuals), Diagnostics) ->
 			true
-		;   domain_error(hodge_rank_ranker, Ranker)
+		;	domain_error(hodge_rank_ranker, Ranker)
 		).
 
 	valid_score_ranker_diagnostics(Items, _Scores, Diagnostics) :-
@@ -144,17 +144,17 @@
 		update_neighbor_weight_dictionary(Dictionary1, Right, Left, Delta, Dictionary).
 
 	update_neighbor_weight_dictionary(Dictionary0, Key, Neighbor, Delta, Dictionary) :-
-		(   dictionary_lookup(Key, NeighborWeights0, Dictionary0) ->
+		(	dictionary_lookup(Key, NeighborWeights0, Dictionary0) ->
 			true
-		;   dictionary_new(NeighborWeights0)
+		;	dictionary_new(NeighborWeights0)
 		),
 		update_weight_dictionary(NeighborWeights0, Neighbor, Delta, NeighborWeights),
 		dictionary_insert(Dictionary0, Key, NeighborWeights, Dictionary).
 
 	update_weight_dictionary(Dictionary0, Key, Delta, Dictionary) :-
-		(   dictionary_lookup(Key, Weight0, Dictionary0) ->
+		(	dictionary_lookup(Key, Weight0, Dictionary0) ->
 			Weight is Weight0 + Delta
-		;   Weight = Delta
+		;	Weight = Delta
 		),
 		dictionary_insert(Dictionary0, Key, Weight, Dictionary).
 
@@ -195,10 +195,10 @@
 		Index > Count,
 		!.
 	hodge_system(Index, Count, PairWeights, Deltas, [Row| Matrix], [Value| Vector]) :-
-		(   Index =:= Count ->
+		(	Index =:= Count ->
 			ones_row(Count, Row),
 			Value = 0.0
-		;   nth1(Index, PairWeights, Neighbors),
+		;	nth1(Index, PairWeights, Neighbors),
 			nth1(Index, Deltas, Value),
 			row_weight(Neighbors, 0.0, TotalWeight),
 			row_coefficients(1, Count, Index, Neighbors, TotalWeight, Row)
@@ -222,11 +222,11 @@
 		Column > Count,
 		!.
 	row_coefficients(Column, Count, Index, Neighbors, TotalWeight, [Coefficient| Coefficients]) :-
-		(   Column =:= Index ->
+		(	Column =:= Index ->
 			Coefficient = TotalWeight
-		;   neighbor_weight(Column, Neighbors, Weight) ->
+		;	neighbor_weight(Column, Neighbors, Weight) ->
 			Coefficient is -Weight
-		;   Coefficient = 0.0
+		;	Coefficient = 0.0
 		),
 		NextColumn is Column + 1,
 		row_coefficients(NextColumn, Count, Index, Neighbors, TotalWeight, Coefficients).
@@ -287,10 +287,10 @@
 	select_pivot_row([Row| Rows], Candidate0, RemainingRows0, PivotRow, RemainingRows) :-
 		leading_magnitude(Row, Magnitude),
 		leading_magnitude(Candidate0, CandidateMagnitude),
-		(   Magnitude > CandidateMagnitude ->
+		(	Magnitude > CandidateMagnitude ->
 			Candidate = Row,
 			RemainingRows1 = [Candidate0| RemainingRows0]
-		;   Candidate = Candidate0,
+		;	Candidate = Candidate0,
 			RemainingRows1 = [Row| RemainingRows0]
 		),
 		select_pivot_row(Rows, Candidate, RemainingRows1, PivotRow, RemainingRows).
@@ -300,9 +300,9 @@
 
 	ensure_non_zero(Value, Scale) :-
 		Threshold is Scale * 1.0e-12,
-		(   abs(Value) > Threshold ->
+		(	abs(Value) > Threshold ->
 			true
-		;   evaluation_error(zero_divisor)
+		;	evaluation_error(zero_divisor)
 		).
 
 	eliminate_rows(_Pivot, _PivotTail, _PivotValue, [], []) :-
@@ -332,18 +332,18 @@
 	validate_solution(Matrix, Vector, Solution, Scale) :-
 		maximum_residual(Matrix, Vector, Solution, 0.0, MaximumResidual),
 		Tolerance is Scale * 1.0e-8,
-		(   MaximumResidual =< Tolerance ->
+		(	MaximumResidual =< Tolerance ->
 			true
-		;   domain_error(hodge_rank_linear_system_residual, MaximumResidual)
+		;	domain_error(hodge_rank_linear_system_residual, MaximumResidual)
 		).
 
 	maximum_residual([], [], _Solution, MaximumResidual, MaximumResidual).
 	maximum_residual([Row| Matrix], [Value| Vector], Solution, MaximumResidual0, MaximumResidual) :-
 		dot_product(Row, Solution, RowValue),
 		Residual is abs(RowValue - Value),
-		(   Residual > MaximumResidual0 ->
+		(	Residual > MaximumResidual0 ->
 			MaximumResidual1 = Residual
-		;   MaximumResidual1 = MaximumResidual0
+		;	MaximumResidual1 = MaximumResidual0
 		),
 		maximum_residual(Matrix, Vector, Solution, MaximumResidual1, MaximumResidual).
 

@@ -121,9 +121,9 @@
 		^^option(min_precision(MinPrecision), Options),
 		MinPrecision =< LimitPrecision,
 		covering_spec_geohashes(CoverSpec, BoundingBox, MinPrecision, Geohashes0),
-		(   Compact == true ->
+		(	Compact == true ->
 			compress_covering_geohashes(Geohashes0, MinPrecision, Geohashes)
-		;   Geohashes = Geohashes0
+		;	Geohashes = Geohashes0
 		).
 
 	compress(Geohashes, CompressedGeohashes) :-
@@ -286,16 +286,16 @@
 
 	adaptive_cover(Geohash, BoundingBox, MaxPrecision, Accumulator0, Accumulator) :-
 		bounding_box(Geohash, GeohashBoundingBox),
-		(   bbox_overlaps(BoundingBox, GeohashBoundingBox) ->
+		(	bbox_overlaps(BoundingBox, GeohashBoundingBox) ->
 			atom_length(Geohash, Precision),
-			(   Precision >= MaxPrecision ->
+			(	Precision >= MaxPrecision ->
 				Accumulator = [Geohash| Accumulator0]
-			;   bbox_contains(BoundingBox, GeohashBoundingBox) ->
+			;	bbox_contains(BoundingBox, GeohashBoundingBox) ->
 				Accumulator = [Geohash| Accumulator0]
-			;   children(Geohash, Children),
+			;	children(Geohash, Children),
 				adaptive_covering(Children, BoundingBox, MaxPrecision, Accumulator0, Accumulator)
 			)
-		;   Accumulator = Accumulator0
+		;	Accumulator = Accumulator0
 		).
 
 	compress_covering_geohashes(Geohashes, MinPrecision, CompressedGeohashes) :-
@@ -306,14 +306,14 @@
 
 	compress_cover_geohashes(Geohashes, MinPrecision, CompressedGeohashes) :-
 		compress_cover_geohashes_pass(Geohashes, MinPrecision, PassGeohashes, Changed),
-		(   Changed == true ->
+		(	Changed == true ->
 			compress_cover_geohashes(PassGeohashes, MinPrecision, CompressedGeohashes)
-		;   CompressedGeohashes = Geohashes
+		;	CompressedGeohashes = Geohashes
 		).
 
 	compress_cover_geohashes_pass(Geohashes, MinPrecision, CompressedGeohashes, Changed) :-
 		findall(Parent,
-			(   member(Geohash, Geohashes),
+			(	member(Geohash, Geohashes),
 				atom_length(Geohash, Precision),
 				Precision > MinPrecision,
 				parent(Geohash, Parent),
@@ -322,10 +322,10 @@
 			Parents0
 		),
 		sort(Parents0, Parents),
-		(   Parents == [] ->
+		(	Parents == [] ->
 			CompressedGeohashes = Geohashes,
 			Changed = false
-		;   collapse_parent_children(Geohashes, Parents, CompressedGeohashes),
+		;	collapse_parent_children(Geohashes, Parents, CompressedGeohashes),
 			Changed = true
 		).
 
@@ -336,9 +336,9 @@
 
 	remove_collapsed_children([], _Parents, []).
 	remove_collapsed_children([Geohash| Geohashes], Parents, RemainingGeohashes) :-
-		(   direct_child_of_any_parent(Geohash, Parents) ->
+		(	direct_child_of_any_parent(Geohash, Parents) ->
 			remove_collapsed_children(Geohashes, Parents, RemainingGeohashes)
-		;   RemainingGeohashes = [Geohash| Tail],
+		;	RemainingGeohashes = [Geohash| Tail],
 			remove_collapsed_children(Geohashes, Parents, Tail)
 		).
 
@@ -364,9 +364,9 @@
 
 	remove_covered_geohashes([], Accumulator, Accumulator).
 	remove_covered_geohashes([Geohash| Geohashes], Accumulator0, Accumulator) :-
-		(   covered_by_existing_prefix(Geohash, Accumulator0) ->
+		(	covered_by_existing_prefix(Geohash, Accumulator0) ->
 			Accumulator1 = Accumulator0
-		;   Accumulator1 = [Geohash| Accumulator0]
+		;	Accumulator1 = [Geohash| Accumulator0]
 		),
 		remove_covered_geohashes(Geohashes, Accumulator1, Accumulator).
 
@@ -437,9 +437,9 @@
 
 	neighbors_bits([], _HashInteger, _Bits, []).
 	neighbors_bits([Direction| Directions], HashInteger, Bits, Neighbors) :-
-		(   adjacent_bits(HashInteger, Bits, Direction, Neighbor) ->
+		(	adjacent_bits(HashInteger, Bits, Direction, Neighbor) ->
 			Neighbors = [Direction-Neighbor| Neighbors0]
-		;   Neighbors = Neighbors0
+		;	Neighbors = Neighbors0
 		),
 		neighbors_bits(Directions, HashInteger, Bits, Neighbors0).
 
@@ -508,9 +508,9 @@
 
 	filter_polygon_candidates([], _Polygon, []).
 	filter_polygon_candidates([Geohash| Candidates], Polygon, FilteredGeohashes) :-
-		(   polygon_intersects_geohash_cell(Polygon, Geohash) ->
+		(	polygon_intersects_geohash_cell(Polygon, Geohash) ->
 			FilteredGeohashes = [Geohash| Tail]
-		;   FilteredGeohashes = Tail
+		;	FilteredGeohashes = Tail
 		),
 		filter_polygon_candidates(Candidates, Polygon, Tail).
 
@@ -531,9 +531,9 @@
 
 	filter_polyline_candidates([], _Polyline, _Buffer, []).
 	filter_polyline_candidates([Geohash| Candidates], Polyline, Buffer, FilteredGeohashes) :-
-		(   polyline_intersects_geohash_cell(Polyline, Buffer, Geohash) ->
+		(	polyline_intersects_geohash_cell(Polyline, Buffer, Geohash) ->
 			FilteredGeohashes = [Geohash| Tail]
-		;   FilteredGeohashes = Tail
+		;	FilteredGeohashes = Tail
 		),
 		filter_polyline_candidates(Candidates, Polyline, Buffer, Tail).
 
@@ -605,21 +605,21 @@
 
 	refine_encode_axis(longitude, _Latitude, Longitude, LongitudeMin0, LongitudeMax0, LatitudeMin, LatitudeMax, Bit, LongitudeMin, LongitudeMax, LatitudeMin, LatitudeMax, latitude) :-
 		LongitudeMid is (LongitudeMin0 + LongitudeMax0) / 2.0,
-		(   Longitude >= LongitudeMid ->
+		(	Longitude >= LongitudeMid ->
 			Bit = 1,
 			LongitudeMin = LongitudeMid,
 			LongitudeMax = LongitudeMax0
-		;   Bit = 0,
+		;	Bit = 0,
 			LongitudeMin = LongitudeMin0,
 			LongitudeMax = LongitudeMid
 		).
 	refine_encode_axis(latitude, Latitude, _Longitude, LongitudeMin, LongitudeMax, LatitudeMin0, LatitudeMax0, Bit, LongitudeMin, LongitudeMax, LatitudeMin, LatitudeMax, longitude) :-
 		LatitudeMid is (LatitudeMin0 + LatitudeMax0) / 2.0,
-		(   Latitude >= LatitudeMid ->
+		(	Latitude >= LatitudeMid ->
 			Bit = 1,
 			LatitudeMin = LatitudeMid,
 			LatitudeMax = LatitudeMax0
-		;   Bit = 0,
+		;	Bit = 0,
 			LatitudeMin = LatitudeMin0,
 			LatitudeMax = LatitudeMid
 		).
@@ -640,26 +640,26 @@
 
 	refine_decode_axis(longitude, Bit, LongitudeMin0, LongitudeMax0, LatitudeMin, LatitudeMax, LongitudeMin, LongitudeMax, LatitudeMin, LatitudeMax, latitude) :-
 		LongitudeMid is (LongitudeMin0 + LongitudeMax0) / 2.0,
-		(   Bit =:= 0 ->
+		(	Bit =:= 0 ->
 			LongitudeMin = LongitudeMin0,
 			LongitudeMax = LongitudeMid
-		;   LongitudeMin = LongitudeMid,
+		;	LongitudeMin = LongitudeMid,
 			LongitudeMax = LongitudeMax0
 		).
 	refine_decode_axis(latitude, Bit, LongitudeMin, LongitudeMax, LatitudeMin0, LatitudeMax0, LongitudeMin, LongitudeMax, LatitudeMin, LatitudeMax, longitude) :-
 		LatitudeMid is (LatitudeMin0 + LatitudeMax0) / 2.0,
-		(   Bit =:= 0 ->
+		(	Bit =:= 0 ->
 			LatitudeMin = LatitudeMin0,
 			LatitudeMax = LatitudeMid
-		;   LatitudeMin = LatitudeMid,
+		;	LatitudeMin = LatitudeMid,
 			LatitudeMax = LatitudeMax0
 		).
 
 	neighbors([], _Geohash, []).
 	neighbors([Direction| Directions], Geohash, Neighbors) :-
-		(   adjacent(Geohash, Direction, Neighbor) ->
+		(	adjacent(Geohash, Direction, Neighbor) ->
 			Neighbors = [Direction-Neighbor| Neighbors0]
-		;   Neighbors = Neighbors0
+		;	Neighbors = Neighbors0
 		),
 		neighbors(Directions, Geohash, Neighbors0).
 
@@ -695,9 +695,9 @@
 	index_bounds(MinValue, MaxValue, Offset, Span, Count, StartIndex, EndIndex) :-
 		index_floor(MinValue, Offset, Span, Count, StartIndex),
 		index_ceiling(MaxValue, Offset, Span, Count, EndIndex0),
-		(   StartIndex =< EndIndex0 ->
+		(	StartIndex =< EndIndex0 ->
 			EndIndex = EndIndex0
-		;   EndIndex = StartIndex
+		;	EndIndex = StartIndex
 		).
 
 	index_floor(Value, Offset, Span, Count, Index) :-
@@ -712,11 +712,11 @@
 
 	clamp_index(Index0, Count, Index) :-
 		MaximumIndex is Count - 1,
-		(   Index0 < 0 ->
+		(	Index0 < 0 ->
 			Index = 0
-		;   Index0 > MaximumIndex ->
+		;	Index0 > MaximumIndex ->
 			Index = MaximumIndex
-		;   Index = Index0
+		;	Index = Index0
 		).
 
 	longitude_segments(MinLongitude, MaxLongitude, LongitudeSpan, LongitudeCells, [StartIndex-EndIndex]) :-

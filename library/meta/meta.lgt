@@ -112,7 +112,7 @@
 	:- meta_predicate(partition_(*, 1, *, *)).
 	partition_([], _, [], []).
 	partition_([Arg| Args], Closure, Included, Excluded) :-
-		(   call(Closure, Arg) ->
+		(	call(Closure, Arg) ->
 			Included = [Arg| RestIncluded],
 			Excluded = RestExcluded
 		;	Included = RestIncluded,

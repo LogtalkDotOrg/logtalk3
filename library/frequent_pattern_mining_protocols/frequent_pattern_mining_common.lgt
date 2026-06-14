@@ -92,9 +92,9 @@
 		sort(Ids, UniqueIds),
 		length(Ids, IdsCount),
 		length(UniqueIds, UniqueIdsCount),
-		(   IdsCount =:= UniqueIdsCount ->
+		(	IdsCount =:= UniqueIdsCount ->
 			true
-		;   domain_error(unique_transaction_ids, Ids)
+		;	domain_error(unique_transaction_ids, Ids)
 		).
 
 	check_transactions_list([], _ItemDomain, MaxTransactionLength, MaxTransactionLength).
@@ -106,17 +106,17 @@
 
 	check_transaction(Transaction, ItemDomain) :-
 		sort(Transaction, SortedTransaction),
-		(   Transaction == SortedTransaction ->
+		(	Transaction == SortedTransaction ->
 			true
-		;   domain_error(canonical_transaction, Transaction)
+		;	domain_error(canonical_transaction, Transaction)
 		),
 		check_transaction_items(Transaction, ItemDomain).
 
 	check_transaction_items([], _ItemDomain).
 	check_transaction_items([Item| Items], ItemDomain) :-
-		(   member(Item, ItemDomain) ->
+		(	member(Item, ItemDomain) ->
 			true
-		;   domain_error(item, Item)
+		;	domain_error(item, Item)
 		),
 		check_transaction_items(Items, ItemDomain).
 
@@ -137,9 +137,9 @@
 	filter_patterns([], _MinimumPatternLength, []).
 	filter_patterns([itemset(Items, Support)| Patterns], MinimumPatternLength, FilteredPatterns) :-
 		length(Items, PatternLength),
-		(   PatternLength >= MinimumPatternLength ->
+		(	PatternLength >= MinimumPatternLength ->
 			FilteredPatterns = [itemset(Items, Support)| RestFilteredPatterns]
-		;   FilteredPatterns = RestFilteredPatterns
+		;	FilteredPatterns = RestFilteredPatterns
 		),
 		filter_patterns(Patterns, MinimumPatternLength, RestFilteredPatterns).
 
@@ -158,9 +158,9 @@
 
 	select_frequent_item_supports([], _SupportCount, []).
 	select_frequent_item_supports([Item-Support| ItemCounts], SupportCount, FrequentItemSupports) :-
-		(   Support >= SupportCount ->
+		(	Support >= SupportCount ->
 			FrequentItemSupports = [item_support(Item, Support)| RestFrequentItemSupports]
-		;   FrequentItemSupports = RestFrequentItemSupports
+		;	FrequentItemSupports = RestFrequentItemSupports
 		),
 		select_frequent_item_supports(ItemCounts, SupportCount, RestFrequentItemSupports).
 

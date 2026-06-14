@@ -79,10 +79,10 @@
 
 	check_dimension_reducer(DimensionReducer) :-
 		^^check_dimension_reducer(DimensionReducer),
-		(   DimensionReducer = ica_reducer(Encoders, Components, Diagnostics),
+		(	DimensionReducer = ica_reducer(Encoders, Components, Diagnostics),
 			valid_ica_diagnostics(Encoders, Components, Diagnostics) ->
 			true
-		;   domain_error(dimension_reducer, DimensionReducer)
+		;	domain_error(dimension_reducer, DimensionReducer)
 		).
 
 	check_examples(Dataset, AttributeNames, Examples) :-
@@ -92,9 +92,9 @@
 
 	check_minimum_examples(Examples) :-
 		length(Examples, Count),
-		(   Count >= 2 ->
+		(	Count >= 2 ->
 			true
-		;   domain_error(minimum_number_of_examples, Count)
+		;	domain_error(minimum_number_of_examples, Count)
 		).
 
 	example_attribute_values(_-AttributeValues, AttributeValues).
@@ -105,18 +105,18 @@
 		symmetric_eigen(CovarianceMatrix, Tolerance, MaximumIterations, OrderedEigenvectors, OrderedEigenvalues),
 		positive_eigenpairs(OrderedEigenvectors, OrderedEigenvalues, Tolerance, PositiveEigenvectors, PositiveEigenvalues),
 		length(PositiveEigenvalues, AvailableComponentCount),
-		(   Requested =< AvailableComponentCount ->
+		(	Requested =< AvailableComponentCount ->
 			whitening_rows(PositiveEigenvectors, PositiveEigenvalues, Requested, WhiteningRows, WhiteningEigenvalues)
-		;   domain_error(component_count, Requested-AvailableComponentCount)
+		;	domain_error(component_count, Requested-AvailableComponentCount)
 		).
 
 	positive_eigenpairs([], [], _Tolerance, [], []).
 	positive_eigenpairs([Eigenvector| Eigenvectors], [Eigenvalue| Eigenvalues], Tolerance, PositiveEigenvectors, PositiveEigenvalues) :-
-		(   Eigenvalue > Tolerance ->
+		(	Eigenvalue > Tolerance ->
 			PositiveEigenvectors = [Eigenvector| PositiveEigenvectors0],
 			PositiveEigenvalues = [Eigenvalue| PositiveEigenvalues0],
 			positive_eigenpairs(Eigenvectors, Eigenvalues, Tolerance, PositiveEigenvectors0, PositiveEigenvalues0)
-		;   PositiveEigenvectors = [],
+		;	PositiveEigenvectors = [],
 			PositiveEigenvalues = []
 		).
 
@@ -160,24 +160,24 @@
 	fastica_component_candidates(_WhitenedRows, _Options, _PreviousWhitenedComponents, [], _BestScore, BestVector, BestConvergence, BestIterations, BestFinalDelta, BestVector, BestConvergence, BestIterations, BestFinalDelta) :-
 		!.
 	fastica_component_candidates(WhitenedRows, Options, PreviousWhitenedComponents, [InitialVector| InitialVectors], BestScore0, BestVector0, BestConvergence0, BestIterations0, BestFinalDelta0, BestVector, BestConvergence, BestIterations, BestFinalDelta) :-
-		(   normalize_nonzero_vector(InitialVector, NormalizedInitial),
+		(	normalize_nonzero_vector(InitialVector, NormalizedInitial),
 			orthonormalize_vector(NormalizedInitial, PreviousWhitenedComponents, OrthogonalInitial),
 			normalize_nonzero_vector(OrthogonalInitial, StartVector),
 			iterate_fastica(WhitenedRows, Options, PreviousWhitenedComponents, 0, StartVector, CandidateVector, CandidateConvergence, CandidateIterations, CandidateFinalDelta),
 			kurtosis_score(WhitenedRows, CandidateVector, CandidateScore) ->
-			(   CandidateScore > BestScore0 ->
+			(	CandidateScore > BestScore0 ->
 				BestScore1 = CandidateScore,
 				BestVector1 = CandidateVector,
 				BestConvergence1 = CandidateConvergence,
 				BestIterations1 = CandidateIterations,
 				BestFinalDelta1 = CandidateFinalDelta
-			;   BestScore1 = BestScore0,
+			;	BestScore1 = BestScore0,
 				BestVector1 = BestVector0,
 				BestConvergence1 = BestConvergence0,
 				BestIterations1 = BestIterations0,
 				BestFinalDelta1 = BestFinalDelta0
 			)
-		;   BestScore1 = BestScore0,
+		;	BestScore1 = BestScore0,
 			BestVector1 = BestVector0,
 			BestConvergence1 = BestConvergence0,
 			BestIterations1 = BestIterations0,
@@ -190,17 +190,17 @@
 		Iteration is Iteration0 + 1,
 		^^option(tolerance(Tolerance), Options),
 		^^option(maximum_iterations(MaximumIterations), Options),
-		(   Delta =< Tolerance ->
+		(	Delta =< Tolerance ->
 			Vector = Vector1,
 			Convergence = tolerance,
 			Iterations = Iteration,
 			FinalDelta = Delta
-		;   Iteration >= MaximumIterations ->
+		;	Iteration >= MaximumIterations ->
 			Vector = Vector1,
 			Convergence = maximum_iterations_exhausted,
 			Iterations = Iteration,
 			FinalDelta = Delta
-		;   iterate_fastica(WhitenedRows, Options, PreviousWhitenedComponents, Iteration, Vector1, Vector, Convergence, Iterations, FinalDelta)
+		;	iterate_fastica(WhitenedRows, Options, PreviousWhitenedComponents, Iteration, Vector1, Vector, Convergence, Iterations, FinalDelta)
 		).
 
 	fastica_update(WhitenedRows, PreviousWhitenedComponents, Vector0, Vector, Delta) :-

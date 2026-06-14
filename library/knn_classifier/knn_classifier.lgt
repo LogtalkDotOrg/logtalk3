@@ -229,14 +229,14 @@
 		].
 
 	check_classifier(Classifier) :-
-		(   classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),
+		(	classifier_data(Classifier, AttributeNames, FeatureTypes, Instances),
 			^^valid_attribute_names(AttributeNames),
 			^^valid_feature_types(FeatureTypes, [numeric, categorical]),
 			length(AttributeNames, FeatureCount),
 			length(FeatureTypes, FeatureCount),
 			valid_instances(Instances, FeatureTypes) ->
 			true
-		;   domain_error(classifier, Classifier)
+		;	domain_error(classifier, Classifier)
 		).
 
 	export_to_clauses(_Dataset, Classifier, Functor, [Clause]) :-

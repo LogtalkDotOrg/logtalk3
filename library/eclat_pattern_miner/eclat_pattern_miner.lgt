@@ -86,20 +86,20 @@
 		add_transaction_items(Items, TransactionOrdinal, TidsetDictionary1, TidsetDictionary).
 
 	increment_item_tidset(Item, TransactionOrdinal, TidsetDictionary0, TidsetDictionary) :-
-		(   dictionary_lookup(Item, tidset_support(RevTidset0, Support0), TidsetDictionary0) ->
+		(	dictionary_lookup(Item, tidset_support(RevTidset0, Support0), TidsetDictionary0) ->
 			RevTidset = [TransactionOrdinal| RevTidset0],
 			Support is Support0 + 1
-		;   RevTidset = [TransactionOrdinal],
+		;	RevTidset = [TransactionOrdinal],
 			Support = 1
 		),
 		dictionary_insert(TidsetDictionary0, Item, tidset_support(RevTidset, Support), TidsetDictionary).
 
 	select_initial_tidsets([], _TidsetDictionary, _SupportCount, []).
 	select_initial_tidsets([Item| Items], TidsetDictionary, SupportCount, Tidsets) :-
-		(   dictionary_lookup(Item, tidset_support(RevTidset, Support), TidsetDictionary), Support >= SupportCount ->
+		(	dictionary_lookup(Item, tidset_support(RevTidset, Support), TidsetDictionary), Support >= SupportCount ->
 			reverse(RevTidset, Tidset),
 			Tidsets = [item_tidset(Item, Tidset)| RestTidsets]
-		;   Tidsets = RestTidsets
+		;	Tidsets = RestTidsets
 		),
 		select_initial_tidsets(Items, TidsetDictionary, SupportCount, RestTidsets).
 
@@ -107,13 +107,13 @@
 	mine_tidsets([item_tidset(Item, Tidset)| Tidsets], Prefix, SupportCount, MaximumPatternLength, Patterns) :-
 		extend_prefix(Prefix, Item, PatternItems),
 		length(PatternItems, PatternLength),
-		(   PatternLength =< MaximumPatternLength ->
+		(	PatternLength =< MaximumPatternLength ->
 			length(Tidset, Support),
 			frequent_extensions(Tidsets, Tidset, SupportCount, Extensions),
 			mine_tidsets(Extensions, PatternItems, SupportCount, MaximumPatternLength, ExtensionPatterns),
 			Patterns = [itemset(PatternItems, Support)| TailPatterns],
 			append(ExtensionPatterns, RestPatterns, TailPatterns)
-		;   Patterns = RestPatterns
+		;	Patterns = RestPatterns
 		),
 		mine_tidsets(Tidsets, Prefix, SupportCount, MaximumPatternLength, RestPatterns).
 
@@ -124,9 +124,9 @@
 	frequent_extensions([item_tidset(Item, Tidset)| Tidsets], PrefixTidset, SupportCount, Extensions) :-
 		intersect_tidsets(PrefixTidset, Tidset, Intersection),
 		length(Intersection, Support),
-		(   Support >= SupportCount ->
+		(	Support >= SupportCount ->
 			Extensions = [item_tidset(Item, Intersection)| RestExtensions]
-		;   Extensions = RestExtensions
+		;	Extensions = RestExtensions
 		),
 		frequent_extensions(Tidsets, PrefixTidset, SupportCount, RestExtensions).
 
@@ -138,9 +138,9 @@
 		!,
 		intersect_tidsets(Tids1, Tids2, Intersection).
 	intersect_tidsets([Tid1| Tids1], [Tid2| Tids2], Intersection) :-
-		(   Tid1 < Tid2 ->
+		(	Tid1 < Tid2 ->
 			intersect_tidsets(Tids1, [Tid2| Tids2], Intersection)
-		;   intersect_tidsets([Tid1| Tids1], Tids2, Intersection)
+		;	intersect_tidsets([Tid1| Tids1], Tids2, Intersection)
 		).
 
 	pattern_miner_diagnostics_data(eclat_pattern_miner(ItemDomain, Patterns, Options), Diagnostics) :-
@@ -151,7 +151,7 @@
 		], Diagnostics).
 
 	check_pattern_miner(PatternMiner) :-
-		(   PatternMiner = eclat_pattern_miner(ItemDomain, Patterns, Options),
+		(	PatternMiner = eclat_pattern_miner(ItemDomain, Patterns, Options),
 			^^valid_itemset_patterns(ItemDomain, Patterns),
 			::pattern_miner_diagnostics_data(PatternMiner, Diagnostics),
 			^^valid_pattern_miner_metadata(eclat_pattern_miner, ItemDomain, Patterns, Options, Diagnostics),
@@ -159,7 +159,7 @@
 			memberchk(extension_operator(tidset_intersection), Diagnostics),
 			memberchk(support_layout(vertical_tidsets), Diagnostics) ->
 			true
-		;   domain_error(eclat_pattern_miner, PatternMiner)
+		;	domain_error(eclat_pattern_miner, PatternMiner)
 		).
 
 	pattern_miner_export_template(_Dataset, eclat_pattern_miner(ItemDomain, Patterns, Options), Functor, Template) :-

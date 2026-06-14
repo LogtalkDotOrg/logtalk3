@@ -78,7 +78,7 @@
 		http_core::target(Request, Target),
 		(	request_info_target_(Target) ->
 			request_info_response_(Request, Version, Response)
-		; 	cookie_info_target_(Target) ->
+		;	cookie_info_target_(Target) ->
 			cookie_info_response_(Request, Version, Response)
 		;	echo_response_(Request, Version, Response)
 		).
@@ -101,10 +101,10 @@
 		http_core::response(Version, status(200, 'OK'), [], content('application/json', json(Body)), [], Response).
 
 	cookie_info_response_(Request, Version, Response) :-
-		( 	http_core::property(Request, cookies(CookiePairs)),
+		(	http_core::property(Request, cookies(CookiePairs)),
 			memberchk(session-Session, CookiePairs) ->
 			Body = content('text/plain', text(Session))
-		; 	Body = content('text/plain', text('none'))
+		;	Body = content('text/plain', text('none'))
 		),
 		http_core::response(Version, status(200, 'OK'), [], Body, [], Response).
 
@@ -132,9 +132,9 @@
 
 		handle(Request, Response) :-
 			http_server_session::current(Request, Session),
-			( http_server_session::get(Session, visits, CurrentCount) ->
+			(	http_server_session::get(Session, visits, CurrentCount) ->
 				VisitCount is CurrentCount + 1
-			; VisitCount = 1
+			;	VisitCount = 1
 			),
 			http_server_session::set(Session, visits, VisitCount),
 			http_core::version(Request, Version),
@@ -152,7 +152,7 @@
 			version is 1:0:0,
 			author is 'Paulo Moura',
 			date is 2026-05-28,
-			comment is 'Local server-session specialization used by the http_session library tests to record lifecycle hook events.'
+			comment is 'Local server-session specialization used by the ``http_session`` library tests to record lifecycle hook events.'
 		]).
 
 		:- public(reset/0).
@@ -197,7 +197,7 @@
 			version is 1:0:0,
 			author is 'Paulo Moura',
 			date is 2026-05-28,
-			comment is 'Local router object used by the http_session library tests to exercise the router-side server-session middleware helpers.'
+			comment is 'Local router object used by the ``http_session`` library tests to exercise the router-side server-session middleware helpers.'
 		]).
 
 		:- protected(visits/2).
@@ -214,9 +214,9 @@
 		visits(Request, Response) :-
 			http_core::property(Request, route(visits)),
 			http_server_session::current(Request, Session),
-			( http_server_session::get(Session, visits, CurrentCount) ->
+			(	http_server_session::get(Session, visits, CurrentCount) ->
 				VisitCount is CurrentCount + 1
-			; VisitCount = 1
+			;	VisitCount = 1
 			),
 			http_server_session::set(Session, visits, VisitCount),
 			http_core::version(Request, Version),

@@ -152,10 +152,10 @@
 	codes_to_bytes([], _, Bytes, Bytes).
 	codes_to_bytes([Code| Codes], Endian, Bytes0, Bytes) :-
 		^^valid_unicode_scalar(Code),
-		(   Code =< 0xFFFF ->
+		(	Code =< 0xFFFF ->
 			^^word_bytes(Endian, Code, Byte1, Byte2),
 			Bytes0 = [Byte1, Byte2| Bytes1]
-		;   Pair is Code - 0x10000,
+		;	Pair is Code - 0x10000,
 			High is 0xD800 + (Pair >> 10),
 			Low is 0xDC00 + (Pair /\ 0x3FF),
 			^^word_bytes(Endian, High, Byte1, Byte2),
@@ -167,14 +167,14 @@
 	bytes_to_codes([], _, []).
 	bytes_to_codes([Byte1, Byte2| Bytes], Endian, [Code| Codes]) :-
 		^^bytes_word(Endian, Byte1, Byte2, Word),
-		(   ^^high_surrogate(Word) ->
+		(	^^high_surrogate(Word) ->
 			Bytes = [Byte3, Byte4| Rest],
 			^^bytes_word(Endian, Byte3, Byte4, Low),
 			^^low_surrogate(Low),
 			Code is 0x10000 + ((Word - 0xD800) << 10) + (Low - 0xDC00)
-		;   ^^low_surrogate(Word) ->
+		;	^^low_surrogate(Word) ->
 			fail
-		;   ^^valid_unicode_scalar(Word),
+		;	^^valid_unicode_scalar(Word),
 			Code = Word,
 			Rest = Bytes
 		),

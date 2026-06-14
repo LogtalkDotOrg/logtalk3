@@ -104,15 +104,15 @@
 	directed_cycle_from(Current, Start, Graph, Visited, ReverseCycle) :-
 		::neighbors(Current, Graph, Neighbors),
 		member(Next, Neighbors),
-		( Next == Start ->
+		(	Next == Start ->
 			ReverseCycle = [Start| Visited]
-		; \+ member(Next, Visited),
+		;	\+ member(Next, Visited),
 			directed_cycle_from(Next, Start, Graph, [Next| Visited], ReverseCycle)
 		).
 
 	weakly_connected_components_loop([], _, Components, Components).
 	weakly_connected_components_loop([Vertex| Vertices], Graph, Components0, Components) :-
-		( vertex_in_component(Vertex, Components0) ->
+		(	vertex_in_component(Vertex, Components0) ->
 			weakly_connected_components_loop(Vertices, Graph, Components0, Components)
 		;	::reachable(Vertex, Graph, Reachable),
 			subtract(Vertices, Reachable, Remaining),
@@ -120,7 +120,7 @@
 		).
 
 	vertex_in_component(Vertex, [Component| Components]) :-
-		( member(Vertex, Component) ->
+		(	member(Vertex, Component) ->
 			true
 		;	vertex_in_component(Vertex, Components)
 		).

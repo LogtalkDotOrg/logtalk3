@@ -88,9 +88,9 @@
 	mixed_distance([discrete(_, _)| Encoders], [Feature| Features], [PrototypeFeature| PrototypeFeatures], Options, Distance) :-
 		mixed_distance(Encoders, Features, PrototypeFeatures, Options, RestDistance),
 		memberchk(gamma(Gamma), Options),
-		(   Feature == PrototypeFeature ->
+		(	Feature == PrototypeFeature ->
 			Distance = RestDistance
-		;   Distance is RestDistance + Gamma
+		;	Distance is RestDistance + Gamma
 		).
 
 	minimum_prototype_distance(_Encoders, [], _Options, 0.0).
@@ -98,9 +98,9 @@
 	minimum_prototype_distance(Encoders, [Prototype| Prototypes], Options, MinimumDistance) :-
 		minimum_distance_to_others(Encoders, Prototype, Prototypes, Options, FirstMinimumDistance),
 		minimum_prototype_distance(Encoders, Prototypes, Options, RestMinimumDistance),
-		(   RestMinimumDistance =< 0.0 ->
+		(	RestMinimumDistance =< 0.0 ->
 			MinimumDistance = FirstMinimumDistance
-		;   MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
+		;	MinimumDistance is min(FirstMinimumDistance, RestMinimumDistance)
 		).
 
 	minimum_distance_to_others(Encoders, Prototype, [Other| Others], Options, MinimumDistance) :-

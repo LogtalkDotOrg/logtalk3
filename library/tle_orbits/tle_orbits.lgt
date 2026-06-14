@@ -77,13 +77,13 @@
 		propagate(TLE, Time, Frame, Model, Coordinate).
 
 	propagate(TLE, Time, Frame, Model, Coordinate) :-
-		(   valid_frame(Frame) ->
+		(	valid_frame(Frame) ->
 			true
-		;   domain_error(tle_reference_frame, Frame)
+		;	domain_error(tle_reference_frame, Frame)
 		),
-		(   valid_model(Model) ->
+		(	valid_model(Model) ->
 			true
-		;   domain_error(tle_propagation_model, Model)
+		;	domain_error(tle_propagation_model, Model)
 		),
 		time_spec_julian_date(TLE, Time, JulianDate),
 		propagate_julian_date(TLE, JulianDate, Model, ECI, ECEF, Geographic),
@@ -94,13 +94,13 @@
 		propagate_state(TLE, Time, Frame, Model, State).
 
 	propagate_state(TLE, Time, Frame, Model, State) :-
-		(   valid_frame(Frame) ->
+		(	valid_frame(Frame) ->
 			true
-		;   domain_error(tle_reference_frame, Frame)
+		;	domain_error(tle_reference_frame, Frame)
 		),
-		(   valid_model(Model) ->
+		(	valid_model(Model) ->
 			true
-		;   domain_error(tle_propagation_model, Model)
+		;	domain_error(tle_propagation_model, Model)
 		),
 		time_spec_julian_date(TLE, Time, JulianDate),
 		propagate_state_julian_date(Frame, TLE, JulianDate, Model, State).
@@ -114,9 +114,9 @@
 		valid_date_time(EndDateTime),
 		number(StepSeconds),
 		StepSeconds > 0.0,
-		(   valid_model(Model) ->
+		(	valid_model(Model) ->
 			true
-		;   domain_error(tle_propagation_model, Model)
+		;	domain_error(tle_propagation_model, Model)
 		),
 		date_time_julian_date(StartDateTime, StartJulianDate),
 		date_time_julian_date(EndDateTime, EndJulianDate),
@@ -132,33 +132,33 @@
 		!,
 		instantiation_error.
 	source_codes(file(File), Codes) :-
-		(   var(File) ->
+		(	var(File) ->
 			instantiation_error
-		;   file_to_codes(File, Codes)
+		;	file_to_codes(File, Codes)
 		),
 		!.
 	source_codes(stream(Stream), Codes) :-
-		(   var(Stream) ->
+		(	var(Stream) ->
 			instantiation_error
-		;   stream_to_codes(Stream, Codes)
+		;	stream_to_codes(Stream, Codes)
 		),
 		!.
 	source_codes(atom(Atom), Codes) :-
-		(   var(Atom) ->
+		(	var(Atom) ->
 			instantiation_error
-		;   atom_codes(Atom, Codes)
+		;	atom_codes(Atom, Codes)
 		),
 		!.
 	source_codes(chars(Chars), Codes) :-
-		(   var(Chars) ->
+		(	var(Chars) ->
 			instantiation_error
-		;   chars_to_codes(Chars, Codes)
+		;	chars_to_codes(Chars, Codes)
 		),
 		!.
 	source_codes(codes(Codes), Codes) :-
-		(   var(Codes) ->
+		(	var(Codes) ->
 			instantiation_error
-		;   true
+		;	true
 		),
 		!.
 	source_codes(Source, _) :-
@@ -220,9 +220,9 @@
 
 	keep_non_blank_lines([], []).
 	keep_non_blank_lines([Line| Lines], KeptLines) :-
-		(   blank_line(Line) ->
+		(	blank_line(Line) ->
 			keep_non_blank_lines(Lines, KeptLines)
-		;   KeptLines = [Line| Rest],
+		;	KeptLines = [Line| Rest],
 			keep_non_blank_lines(Lines, Rest)
 		).
 
@@ -273,9 +273,9 @@
 		!.
 	normalize_name(NameCodes0, Name) :-
 		trim_codes(NameCodes0, NameCodes),
-		(   NameCodes == [] ->
+		(	NameCodes == [] ->
 			Name = none
-		;   atom_codes(Name, NameCodes)
+		;	atom_codes(Name, NameCodes)
 		).
 
 	normalize_tle_line(LineCodes0, LineCodes) :-
@@ -299,11 +299,11 @@
 		checksum_value(Codes, Sum1, Sum).
 
 	checksum_digit_value(Code, Value) :-
-		(   digit_code_value(Code, Value0) ->
+		(	digit_code_value(Code, Value0) ->
 			Value = Value0
-		;   Code =:= 0'- ->
+		;	Code =:= 0'- ->
 			Value = 1
-		;   Value = 0
+		;	Value = 0
 		).
 
 	parse_line_1(LineCodes, CatalogNumber, Classification, LaunchYear, LaunchNumber, Piece, EpochJulianDate, MeanMotionDot, MeanMotionDdot, BStar, EphemerisType, ElementSetNumber) :-
@@ -361,9 +361,9 @@
 
 	piece_atom(Codes0, Piece) :-
 		trim_codes(Codes0, Codes),
-		(   Codes == [] ->
+		(	Codes == [] ->
 			Piece = none
-		;   atom_codes(Piece, Codes)
+		;	atom_codes(Piece, Codes)
 		).
 
 	parse_integer_field(Codes0, Integer) :-
@@ -468,9 +468,9 @@
 		transform(ecef, wgs84_3d, ECEF, Geographic).
 
 	orbital_state_eci(approximate, TLE, JulianDate, ECI) :-
-		(   deep_space_tle(TLE) ->
+		(	deep_space_tle(TLE) ->
 			orbital_state_eci(approximate_deep_space, TLE, JulianDate, ECI)
-		;   orbital_state_eci(approximate_near_earth, TLE, JulianDate, ECI)
+		;	orbital_state_eci(approximate_near_earth, TLE, JulianDate, ECI)
 		).
 	orbital_state_eci(two_body, TLE, JulianDate, eci(X, Y, Z)) :-
 		two_body_position(TLE, JulianDate, X, Y, Z).
@@ -480,9 +480,9 @@
 		approximate_deep_space_position(TLE, JulianDate, X, Y, Z).
 
 	orbital_state_eci(approximate, TLE, JulianDate, ECI, Velocity) :-
-		(   deep_space_tle(TLE) ->
+		(	deep_space_tle(TLE) ->
 			orbital_state_eci(approximate_deep_space, TLE, JulianDate, ECI, Velocity)
-		;   orbital_state_eci(approximate_near_earth, TLE, JulianDate, ECI, Velocity)
+		;	orbital_state_eci(approximate_near_earth, TLE, JulianDate, ECI, Velocity)
 		).
 	orbital_state_eci(two_body, TLE, JulianDate, eci(X, Y, Z), eci(VX, VY, VZ)) :-
 		two_body_state(TLE, JulianDate, X, Y, Z, VX, VY, VZ).
@@ -597,15 +597,15 @@
 		MeanMotionDdot is 12.0 * pi * MeanMotionDdotField / (86400.0 * 86400.0 * 86400.0).
 
 	non_negative(Value0, Value) :-
-		(   Value0 =< 0.0 ->
+		(	Value0 =< 0.0 ->
 			Value = 0.0
-		;   Value = Value0
+		;	Value = Value0
 		).
 
 	positive_or_epsilon(Value0, Epsilon, Value) :-
-		(   Value0 =< Epsilon ->
+		(	Value0 =< Epsilon ->
 			Value = Epsilon
-		;   Value = Value0
+		;	Value = Value0
 		).
 
 	semi_major_axis(Mu, MeanMotionRadiansPerSecond, SemiMajorAxis) :-
@@ -617,16 +617,16 @@
 		current_mean_motion_from_axis(Mu, SemiMajorAxis, CurrentMeanMotion1, CurrentMeanMotion).
 
 	current_mean_motion_from_axis(Mu, SemiMajorAxis, FallbackMeanMotion, MeanMotion) :-
-		(   SemiMajorAxis =< 0.0 ->
+		(	SemiMajorAxis =< 0.0 ->
 			MeanMotion = FallbackMeanMotion
-		;   MeanMotionFromAxis is sqrt(Mu / (SemiMajorAxis * SemiMajorAxis * SemiMajorAxis)),
+		;	MeanMotionFromAxis is sqrt(Mu / (SemiMajorAxis * SemiMajorAxis * SemiMajorAxis)),
 			positive_mean_motion(MeanMotionFromAxis, MeanMotion)
 		).
 
 	positive_mean_motion(MeanMotion0, MeanMotion) :-
-		(   MeanMotion0 =< 1.0e-12 ->
+		(	MeanMotion0 =< 1.0e-12 ->
 			MeanMotion = 1.0e-12
-		;   MeanMotion = MeanMotion0
+		;	MeanMotion = MeanMotion0
 		).
 
 	drag_adjusted_elements(SemiMajorAxis0, Eccentricity0, BStar, SecondsSinceEpoch, SemiMajorAxis, Eccentricity) :-
@@ -646,11 +646,11 @@
 		clamp_eccentricity(Eccentricity1, Eccentricity).
 
 	clamp_eccentricity(Eccentricity0, Eccentricity) :-
-		(   Eccentricity0 < 1.0e-9 ->
+		(	Eccentricity0 < 1.0e-9 ->
 			Eccentricity = 1.0e-9
-		;   Eccentricity0 > 0.999999 ->
+		;	Eccentricity0 > 0.999999 ->
 			Eccentricity = 0.999999
-		;   Eccentricity = Eccentricity0
+		;	Eccentricity = Eccentricity0
 		).
 
 	j2_secular_rates(SemiMajorAxis, Eccentricity, Inclination, MeanMotion, RightAscensionRate, ArgumentOfPerigeeRate, MeanAnomalyRate) :-
@@ -764,26 +764,26 @@
 	normalize_angle_radians(Angle, NormalizedAngle) :-
 		TwoPi is 2.0 * pi,
 		Normalized0 is Angle - floor(Angle / TwoPi) * TwoPi,
-		(   Normalized0 < 0.0 ->
+		(	Normalized0 < 0.0 ->
 			NormalizedAngle is Normalized0 + TwoPi
-		;   NormalizedAngle = Normalized0
+		;	NormalizedAngle = Normalized0
 		).
 
 	solve_kepler_equation(MeanAnomaly, Eccentricity, EccentricAnomaly) :-
-		(   Eccentricity < 0.8 ->
+		(	Eccentricity < 0.8 ->
 			InitialGuess = MeanAnomaly
-		;   InitialGuess = pi
+		;	InitialGuess = pi
 		),
 		solve_kepler_equation(MeanAnomaly, Eccentricity, InitialGuess, 0, EccentricAnomaly).
 
 	solve_kepler_equation(MeanAnomaly, Eccentricity, Estimate, Iteration, EccentricAnomaly) :-
 		Delta is (Estimate - Eccentricity * sin(Estimate) - MeanAnomaly) / (1.0 - Eccentricity * cos(Estimate)),
 		NextEstimate is Estimate - Delta,
-		(   abs(Delta) < 1.0e-12 ->
+		(	abs(Delta) < 1.0e-12 ->
 			EccentricAnomaly = NextEstimate
-		;   Iteration >= 15 ->
+		;	Iteration >= 15 ->
 			EccentricAnomaly = NextEstimate
-		;   NextIteration is Iteration + 1,
+		;	NextIteration is Iteration + 1,
 			solve_kepler_equation(MeanAnomaly, Eccentricity, NextEstimate, NextIteration, EccentricAnomaly)
 		).
 
@@ -1023,24 +1023,24 @@
 		normalize_time_components(Year0, Month0, Day0, Hours0, Minutes0, Seconds0, Year, Month, Day, Hours, Minutes, Seconds).
 
 	normalize_time_components(Year0, Month0, Day0, Hours0, Minutes0, Seconds0, Year, Month, Day, Hours, Minutes, Seconds) :-
-		(   Seconds0 >= 59.9999995 ->
+		(	Seconds0 >= 59.9999995 ->
 			Seconds1 = 0.0,
 			Minutes1 is Minutes0 + 1
-		;   Seconds1 = Seconds0,
+		;	Seconds1 = Seconds0,
 			Minutes1 = Minutes0
 		),
-		(   Minutes1 >= 60 ->
+		(	Minutes1 >= 60 ->
 			Minutes2 = 0,
 			Hours1 is Hours0 + 1
-		;   Minutes2 = Minutes1,
+		;	Minutes2 = Minutes1,
 			Hours1 = Hours0
 		),
-		(   Hours1 >= 24 ->
+		(	Hours1 >= 24 ->
 			Hours2 = 0,
 			date(CurrentJulianDayNumber, Year0, Month0, Day0),
 			NextJulianDayNumber is CurrentJulianDayNumber + 1,
 			date(NextJulianDayNumber, Year, Month, Day)
-		;   Hours2 = Hours1,
+		;	Hours2 = Hours1,
 			Year = Year0,
 			Month = Month0,
 			Day = Day0
@@ -1078,8 +1078,8 @@
 	canonical_float_codes([0'.| Codes], [0'0, 0'.| Codes]) :-
 		!.
 	canonical_float_codes([Sign, 0'.| Codes], [Sign, 0'0, 0'.| Codes]) :-
-		(   Sign =:= 0'+
-		;   Sign =:= 0'-
+		(	Sign =:= 0'+
+		;	Sign =:= 0'-
 		),
 		!.
 	canonical_float_codes(Codes, Codes).

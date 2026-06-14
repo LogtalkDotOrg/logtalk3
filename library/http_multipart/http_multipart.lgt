@@ -47,7 +47,7 @@
 	:- mode(parse(++compound, +atom, +list, -compound), one_or_error).
 
 	:- info(parse/4, [
-		comment is 'Parses a multipart body from a source term by delegating to the underlying http_core::parse_body/4 predicate after validating the media type.',
+		comment is 'Parses a multipart body from a source term by delegating to the underlying ``http_core::parse_body/4`` predicate after validating the media type.',
 		argnames is ['Source', 'MediaType', 'Options', 'Body']
 	]).
 
@@ -55,7 +55,7 @@
 	:- mode(generate(++compound, +compound, +list), one_or_error).
 
 	:- info(generate/3, [
-		comment is 'Generates a multipart body to a sink term by delegating to the underlying http_core::generate_body/3 predicate after validating the multipart body term.',
+		comment is 'Generates a multipart body to a sink term by delegating to the underlying ``http_core::generate_body/3`` predicate after validating the multipart body term.',
 		argnames is ['Sink', 'Body', 'Options']
 	]).
 
@@ -83,7 +83,7 @@
 	:- public(files/2).
 	:- mode(files(+compound, -list(compound)), one_or_error).
 	:- info(files/2, [
-		comment is 'Returns the list of form-data file(Name, Filename, MediaType, Payload, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.',
+		comment is 'Returns the list of form-data ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors found in a validated multipart/form-data body, preserving part order.',
 		argnames is ['Body', 'Files']
 	]).
 
@@ -153,7 +153,7 @@
 	:- public(form_data_body/2).
 	:- mode(form_data_body(+list(compound), -compound), one_or_error).
 	:- info(form_data_body/2, [
-		comment is 'Constructs a multipart/form-data body from an ordered list of field(Name, Value, Parameters) and file(Name, Filename, MediaType, Payload, Parameters) descriptors.',
+		comment is 'Constructs a multipart/form-data body from an ordered list of ``field(Name, Value, Parameters)`` and ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors.',
 		argnames is ['Items', 'Body']
 	]).
 

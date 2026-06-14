@@ -610,7 +610,7 @@
 		interval_relation_set::universal(UniversalRelationSet),
 		compiled_size(CompiledNetwork, Size),
 		compiled_supporting_explanations(1, Size, CompiledNetwork, Index1, Index2, CurrentRelationSet, UniversalRelationSet, [], ReversedExplanations),
-		( ReversedExplanations == [] ->
+		(	ReversedExplanations == [] ->
 			Explanations = [direct(CurrentRelationSet)]
 		;	reverse(ReversedExplanations, Explanations)
 		).

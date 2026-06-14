@@ -221,33 +221,33 @@
 
 	hex_bytes(Hex, Bytes) :-
 		context(Context),
-		(   var(Hex) ->
+		(	var(Hex) ->
 			check(list(byte), Bytes, Context),
 			bytes_hex(Bytes, Hex)
-		;   atom(Hex) ->
+		;	atom(Hex) ->
 			parse_hex_atom(Hex, DecodedBytes, Context),
-			(   var(Bytes) ->
+			(	var(Bytes) ->
 				Bytes = DecodedBytes
-			;   check(list(byte), Bytes, Context),
+			;	check(list(byte), Bytes, Context),
 				Bytes = DecodedBytes
 			)
-		;   throw(error(type_error(atom, Hex), Context))
+		;	throw(error(type_error(atom, Hex), Context))
 		).
 
 	secure_compare(Expected, Candidate) :-
 		context(Context),
-		(   var(Expected) ->
+		(	var(Expected) ->
 			throw(error(instantiation_error, Context))
-		;   var(Candidate) ->
+		;	var(Candidate) ->
 			throw(error(instantiation_error, Context))
-		;   atom(Expected) ->
-			(   atom(Candidate) ->
+		;	atom(Expected) ->
+			(	atom(Candidate) ->
 				atom_codes(Expected, ExpectedCodes),
 				atom_codes(Candidate, CandidateCodes),
 				constant_time_equal(ExpectedCodes, CandidateCodes)
-			;   throw(error(type_error(atom, Candidate), Context))
+			;	throw(error(type_error(atom, Candidate), Context))
 			)
-		;   check(list(byte), Expected, Context),
+		;	check(list(byte), Expected, Context),
 			check(list(byte), Candidate, Context),
 			constant_time_equal(Expected, Candidate)
 		).
@@ -272,9 +272,9 @@
 		check(non_negative_integer, Length, Context),
 		Hash::digest_size(DigestSize),
 		check_pbkdf2_output_length(Length, DigestSize, Context),
-		(   Length =:= 0 ->
+		(	Length =:= 0 ->
 			DerivedKey = []
-		;   pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, Length, DerivedKey, [])
+		;	pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, Length, DerivedKey, [])
 		).
 
 	password_hash(Hash, Password, PasswordHash, Options) :-
@@ -288,16 +288,16 @@
 	verify_password_hash(PasswordHash, Password) :-
 		context(Context),
 		check(list(byte), Password, Context),
-		(   PasswordHash = pbkdf2(_, _, _, _) ->
+		(	PasswordHash = pbkdf2(_, _, _, _) ->
 			check_password_hash(PasswordHash, Hash, Iterations, Salt, StoredKey, Context),
 			length(StoredKey, Length),
 			pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey),
 			secure_compare(StoredKey, DerivedKey)
-		;   PasswordHash = digest(_, _) ->
+		;	PasswordHash = digest(_, _) ->
 			check_digest_password_hash(PasswordHash, Hash, StoredDigest, Context),
 			Hash::digest(Password, ComputedDigest),
 			secure_compare(StoredDigest, ComputedDigest)
-		;   check_password_hash(PasswordHash, _Hash, _Iterations, _Salt, _StoredKey, Context)
+		;	check_password_hash(PasswordHash, _Hash, _Iterations, _Salt, _StoredKey, Context)
 		).
 
 	fallback_seed(Seed) :-
@@ -314,11 +314,11 @@
 		Seed is xor(S3, (S3 << 5)) /\ W.
 
 	check_hash(Hash, Context) :-
-		(   var(Hash) ->
+		(	var(Hash) ->
 			throw(error(instantiation_error, Context))
-		;   conforms_to_protocol(Hash, hash_digest_protocol) ->
+		;	conforms_to_protocol(Hash, hash_digest_protocol) ->
 			true
-		;   throw(error(domain_error(crypto_hash, Hash), Context))
+		;	throw(error(domain_error(crypto_hash, Hash), Context))
 		).
 
 	check_hkdf_output_length(0, _, _) :-
@@ -326,25 +326,25 @@
 	check_hkdf_output_length(Length, DigestSize, Context) :-
 		BlockCount is ((Length - 1) // DigestSize) + 1,
 		MaxLength is 255 * DigestSize,
-		(   BlockCount =< 255 ->
+		(	BlockCount =< 255 ->
 			true
-		;   throw(error(domain_error(hkdf_output_length(0, MaxLength), Length), Context))
+		;	throw(error(domain_error(hkdf_output_length(0, MaxLength), Length), Context))
 		).
 
 	check_pbkdf2_output_length(0, _, _) :-
 		!.
 	check_pbkdf2_output_length(Length, DigestSize, Context) :-
 		BlockCount is ((Length - 1) // DigestSize) + 1,
-		(   BlockCount =< 0xFFFFFFFF ->
+		(	BlockCount =< 0xFFFFFFFF ->
 			true
-		;   throw(error(domain_error(pbkdf2_output_length, Length), Context))
+		;	throw(error(domain_error(pbkdf2_output_length, Length), Context))
 		).
 
 	parse_hex_atom(Hex, Bytes, Context) :-
 		atom_codes(Hex, Codes),
-		(   Codes == [] ->
+		(	Codes == [] ->
 			Bytes = []
-		;   parse_hex_codes(Codes, Hex, Bytes, Context)
+		;	parse_hex_codes(Codes, Hex, Bytes, Context)
 		).
 
 	parse_hex_codes([], _, [], _) :-
@@ -410,39 +410,39 @@
 		parse_hkdf_options(Options, none, none, DigestSize, Salt, Info, Context).
 
 	parse_hkdf_options([], SaltOption, InfoOption, DigestSize, Salt, Info, _) :-
-		(   SaltOption == none ->
+		(	SaltOption == none ->
 			zero_bytes(DigestSize, Salt)
-		;   Salt = SaltOption
+		;	Salt = SaltOption
 		),
-		(   InfoOption == none ->
+		(	InfoOption == none ->
 			Info = []
-		;   Info = InfoOption
+		;	Info = InfoOption
 		).
 	parse_hkdf_options([Option| Options], Salt0, Info0, DigestSize, Salt, Info, Context) :-
 		parse_hkdf_option(Option, Salt0, Info0, Salt1, Info1, Context),
 		parse_hkdf_options(Options, Salt1, Info1, DigestSize, Salt, Info, Context).
 
 	parse_hkdf_option(Option, _Salt0, Info0, Salt, Info, Context) :-
-		(   Option = salt(SaltBytes) ->
+		(	Option = salt(SaltBytes) ->
 			check(list(byte), SaltBytes, Context),
 			Salt = SaltBytes,
 			Info = Info0
-		;   Option = info(InfoBytes) ->
+		;	Option = info(InfoBytes) ->
 			check(list(byte), InfoBytes, Context),
 			Salt = _Salt0,
 			Info = InfoBytes
-		;   throw(error(domain_error(hkdf_option, Option), Context))
+		;	throw(error(domain_error(hkdf_option, Option), Context))
 		).
 
 	parse_password_hash_options(Options, Hash, Iterations, Salt, Length, Context) :-
 		check(list(compound), Options, Context),
 		Hash::digest_size(DefaultLength),
-		(   var(Options) ->
+		(	var(Options) ->
 			throw(error(instantiation_error, Context))
-		;   parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength, Length, Context),
-			(   SaltOption == none ->
+		;	parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength, Length, Context),
+			(	SaltOption == none ->
 				random_bytes(SaltLength, Salt)
-			;   Salt = SaltOption
+			;	Salt = SaltOption
 			)
 		).
 
@@ -456,39 +456,39 @@
 		throw(error(type_error(list, Options), Context)).
 
 	parse_password_hash_option(Option, Iterations0, Salt0, SaltLength0, Length0, Iterations, Salt, SaltLength, Length, Context) :-
-		(   var(Option) ->
+		(	var(Option) ->
 			throw(error(instantiation_error, Context))
-		;   Option = iterations(Value) ->
+		;	Option = iterations(Value) ->
 			check(positive_integer, Value, Context),
 			Iterations = Value,
 			Salt = Salt0,
 			SaltLength = SaltLength0,
 			Length = Length0
-		;   Option = salt(SaltBytes) ->
+		;	Option = salt(SaltBytes) ->
 			check(list(byte), SaltBytes, Context),
 			Iterations = Iterations0,
 			Salt = SaltBytes,
 			SaltLength = SaltLength0,
 			Length = Length0
-		;   Option = salt_length(Value) ->
+		;	Option = salt_length(Value) ->
 			check(non_negative_integer, Value, Context),
 			Iterations = Iterations0,
 			Salt = Salt0,
 			SaltLength = Value,
 			Length = Length0
-		;   Option = length(Value) ->
+		;	Option = length(Value) ->
 			check(non_negative_integer, Value, Context),
 			Iterations = Iterations0,
 			Salt = Salt0,
 			SaltLength = SaltLength0,
 			Length = Value
-		;   throw(error(domain_error(password_hash_option, Option), Context))
+		;	throw(error(domain_error(password_hash_option, Option), Context))
 		).
 
 	check_password_hash(PasswordHash, Hash, Iterations, Salt, StoredKey, Context) :-
-		(   var(PasswordHash) ->
+		(	var(PasswordHash) ->
 			throw(error(instantiation_error, Context))
-		;   PasswordHash = pbkdf2(Hash0, Iterations0, Salt0, StoredKey0) ->
+		;	PasswordHash = pbkdf2(Hash0, Iterations0, Salt0, StoredKey0) ->
 			check_hash(Hash0, Context),
 			check(positive_integer, Iterations0, Context),
 			check(list(byte), Salt0, Context),
@@ -497,18 +497,18 @@
 			Iterations = Iterations0,
 			Salt = Salt0,
 			StoredKey = StoredKey0
-		;   throw(error(domain_error(password_hash, PasswordHash), Context))
+		;	throw(error(domain_error(password_hash, PasswordHash), Context))
 		).
 
 	check_digest_password_hash(PasswordHash, Hash, StoredDigest, Context) :-
-		(   var(PasswordHash) ->
+		(	var(PasswordHash) ->
 			throw(error(instantiation_error, Context))
-		;   PasswordHash = digest(Hash0, StoredDigest0) ->
+		;	PasswordHash = digest(Hash0, StoredDigest0) ->
 			check_hash(Hash0, Context),
 			check(list(byte), StoredDigest0, Context),
 			Hash = Hash0,
 			StoredDigest = StoredDigest0
-		;   throw(error(domain_error(password_hash, PasswordHash), Context))
+		;	throw(error(domain_error(password_hash, PasswordHash), Context))
 		).
 
 	zero_bytes(0, []) :-
