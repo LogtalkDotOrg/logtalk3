@@ -11,42 +11,60 @@
 	:- mode(open_listener(+atom, ?integer, --compound, +list), one_or_error).
 	:- info(open_listener/4, [
 		comment is 'Opens a TCP listener on the given host and port using the given socket options. If Port is a variable, it is unified with the bound port number.',
-		argnames is ['Host', 'Port', 'Listener', 'Options']
+		argnames is ['Host', 'Port', 'Listener', 'Options'],
+		exceptions is [
+			'The transport implementation may throw socket-opening or option-validation exceptions' - error
+		]
 	]).
 
 	:- public(close_listener/1).
 	:- mode(close_listener(+compound), one_or_error).
 	:- info(close_listener/1, [
 		comment is 'Closes a listener previously opened with open_listener/4.',
-		argnames is ['Listener']
+		argnames is ['Listener'],
+		exceptions is [
+			'The transport implementation may throw listener-validation or close exceptions' - error
+		]
 	]).
 
 	:- public(request_listener_shutdown/1).
 	:- mode(request_listener_shutdown(+compound), one_or_error).
 	:- info(request_listener_shutdown/1, [
 		comment is 'Best-effort wakeup request for a listener accept loop opened with ``open_listener/4``. This predicate does not close the listener but causes a blocked accept call to return portably when possible.',
-		argnames is ['Listener']
+		argnames is ['Listener'],
+		exceptions is [
+			'The transport implementation may throw listener-validation exceptions' - error
+		]
 	]).
 
 	:- public(open_connection/4).
 	:- mode(open_connection(+atom, +integer, --compound, +list), one_or_error).
 	:- info(open_connection/4, [
 		comment is 'Opens a reusable client connection to the given host and port using the given socket options.',
-		argnames is ['Host', 'Port', 'Connection', 'Options']
+		argnames is ['Host', 'Port', 'Connection', 'Options'],
+		exceptions is [
+			'The transport implementation may throw connection-opening or option-validation exceptions' - error
+		]
 	]).
 
 	:- public(close_connection/1).
 	:- mode(close_connection(+compound), one_or_error).
 	:- info(close_connection/1, [
 		comment is 'Closes a reusable client connection previously opened with open_connection/4.',
-		argnames is ['Connection']
+		argnames is ['Connection'],
+		exceptions is [
+			'The transport implementation may throw connection-validation or close exceptions' - error
+		]
 	]).
 
 	:- public(connection_streams/3).
 	:- mode(connection_streams(+compound, --stream, --stream), one_or_error).
 	:- info(connection_streams/3, [
 		comment is 'Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by ``serve_websocket_once/5``.',
-		argnames is ['Connection', 'Input', 'Output']
+		argnames is ['Connection', 'Input', 'Output'],
+		exceptions is [
+			'The transport implementation may throw connection-handle validation exceptions' - error
+		]
 	]).
 
 	:- public(open_connection_pool/4).
@@ -54,6 +72,9 @@
 	:- info(open_connection_pool/4, [
 		comment is 'Opens a managed reusable connection pool for the given host and port.',
 		argnames is ['Host', 'Port', 'Pool', 'Options'],
+		exceptions is [
+			'The transport implementation may throw connection-pool creation, resource, or option-validation exceptions' - error
+		],
 		remarks is [
 			'Option ``min_size(N)``' - 'Pre-open N reusable client connections when creating the pool. The default is ``0``.',
 			'Option ``max_size(N)``' - 'Allow at most N managed client connections in the pool. The default is ``10``.',
@@ -65,63 +86,90 @@
 	:- mode(close_connection_pool(+compound), one_or_error).
 	:- info(close_connection_pool/1, [
 		comment is 'Closes a managed reusable connection pool and all currently available pooled connections. Throws if pooled exchanges are still in progress.',
-		argnames is ['Pool']
+		argnames is ['Pool'],
+		exceptions is [
+			'The transport implementation may throw pool-validation exceptions or reject closing while exchanges remain active' - error
+		]
 	]).
 
 	:- public(connection_pool_stats/2).
 	:- mode(connection_pool_stats(+compound, --compound), one_or_error).
 	:- info(connection_pool_stats/2, [
 		comment is 'Returns managed pool statistics as stats(Available, InUse, Total, MinSize, MaxSize).',
-		argnames is ['Pool', 'Stats']
+		argnames is ['Pool', 'Stats'],
+		exceptions is [
+			'The transport implementation may throw pool-validation exceptions' - error
+		]
 	]).
 
 	:- public(exchange/3).
 	:- mode(exchange(+compound, +compound, --compound), one_or_error).
 	:- info(exchange/3, [
 		comment is 'Performs a single HTTP exchange on an open reusable client connection or by temporarily acquiring a pooled reusable client connection.',
-		argnames is ['ConnectionOrPool', 'Request', 'Response']
+		argnames is ['ConnectionOrPool', 'Request', 'Response'],
+		exceptions is [
+			'The transport implementation may throw handle-validation, request-validation, or exchange exceptions' - error
+		]
 	]).
 
 	:- public(exchange_connection/3).
 	:- mode(exchange_connection(+compound, ++list(compound), --list(compound)), one_or_error).
 	:- info(exchange_connection/3, [
 		comment is 'Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.',
-		argnames is ['ConnectionOrPool', 'Requests', 'Responses']
+		argnames is ['ConnectionOrPool', 'Requests', 'Responses'],
+		exceptions is [
+			'The transport implementation may throw handle-validation, request-sequence validation, or exchange exceptions' - error
+		]
 	]).
 
 	:- public(exchange/4).
 	:- mode(exchange(+atom, +integer, +compound, --compound), one_or_error).
 	:- info(exchange/4, [
 		comment is 'Opens a client socket connection to the given host and port, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, ``Connection: close`` is added automatically.',
-		argnames is ['Host', 'Port', 'Request', 'Response']
+		argnames is ['Host', 'Port', 'Request', 'Response'],
+		exceptions is [
+			'The transport implementation may throw connection-opening, request-validation, or exchange exceptions' - error
+		]
 	]).
 
 	:- public(exchange_connection/4).
 	:- mode(exchange_connection(+atom, +integer, ++list(compound), --list(compound)), one_or_error).
 	:- info(exchange_connection/4, [
 		comment is 'Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, ``Connection: close`` is added automatically to that final request.',
-		argnames is ['Host', 'Port', 'Requests', 'Responses']
+		argnames is ['Host', 'Port', 'Requests', 'Responses'],
+		exceptions is [
+			'The transport implementation may throw connection-opening, request-sequence validation, or exchange exceptions' - error
+		]
 	]).
 
 	:- public(serve_once/3).
 	:- mode(serve_once(+compound, +object_identifier, --compound), one_or_error).
 	:- info(serve_once/3, [
 		comment is 'Accepts one incoming socket connection on the given server socket, serves that connection using the http_server library, closes the streams, and returns client information.',
-		argnames is ['ServerSocket', 'Handler', 'ClientInfo']
+		argnames is ['ServerSocket', 'Handler', 'ClientInfo'],
+		exceptions is [
+			'The transport implementation may throw listener-accept, stream, or delegated server-serving exceptions' - error
+		]
 	]).
 
 	:- public(serve_websocket_once/5).
 	:- mode(serve_websocket_once(+compound, +object_identifier, --compound, --compound, --compound), one_or_error).
 	:- info(serve_websocket_once/5, [
 		comment is 'Accepts one incoming socket connection on the given listener, serves exactly one WebSocket opening handshake using the given handler, and on success returns an upgraded connection handle that remains open together with the handshake response and client information. Rejected or malformed handshakes are written to the stream, the accepted streams are closed, and the predicate throws.',
-		argnames is ['Listener', 'Handler', 'Connection', 'Response', 'ClientInfo']
+		argnames is ['Listener', 'Handler', 'Connection', 'Response', 'ClientInfo'],
+		exceptions is [
+			'The transport implementation may throw listener-accept, stream, or delegated WebSocket-serving exceptions' - error
+		]
 	]).
 
 	:- public(serve_listener/4).
 	:- mode(serve_listener(+compound, +object_identifier, +integer, --list(compound)), one_or_error).
 	:- info(serve_listener/4, [
 		comment is 'Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before Count connections are accepted.',
-		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos']
+		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos'],
+		exceptions is [
+			'The transport implementation may throw listener, worker, or delegated server-serving exceptions' - error
+		]
 	]).
 
 	:- public(serve_listener/5).
@@ -129,6 +177,9 @@
 	:- info(serve_listener/5, [
 		comment is 'Accepts and serves ``Count`` incoming connections on the given listener using the specified shutdown and worker options. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before ``Count`` connections are accepted.',
 		argnames is ['Listener', 'Handler', 'Count', 'ClientInfos', 'Options'],
+		exceptions is [
+			'The transport implementation may throw listener, worker, resource, or option-validation exceptions' - error
+		],
 		remarks is [
 			'Option ``shutdown(keep_open)``' - 'Leave the listener open after serving the requested number of connections. This is the default.',
 			'Option ``shutdown(close)``' - 'Close the listener when serving completes or aborts.',
@@ -144,6 +195,9 @@
 	:- info(serve_until_shutdown/4, [
 		comment is 'Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, then closes the listener before returning.',
 		argnames is ['Listener', 'Handler', 'Control', 'Options'],
+		exceptions is [
+			'The transport implementation may throw listener, worker, control-registration, or option-validation exceptions' - error
+		],
 		remarks is [
 			'Control term' - 'The control term must be non-variable and should be fresh for each open-ended serving loop.',
 			'Option ``workers(serial)``' - 'Serve accepted connections sequentially in the caller thread. This is the default.',
@@ -160,6 +214,9 @@
 	:- info(serve_until_shutdown/5, [
 		comment is 'Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.',
 		argnames is ['Listener', 'Handler', 'Control', 'Options', 'Ready'],
+		exceptions is [
+			'The transport implementation may throw listener, worker, ready-goal, control-registration, or option-validation exceptions' - error
+		],
 		remarks is [
 			'Control term' - 'The control term must be non-variable and should be fresh for each open-ended serving loop.',
 			'Ready goal' - 'Called once after the shutdown control is registered and before the serving loop starts accepting connections.',
@@ -171,7 +228,10 @@
 	:- mode(request_shutdown(+nonvar), one_or_error).
 	:- info(request_shutdown/1, [
 		comment is 'Requests shutdown of an open-ended serving loop started with ``serve_until_shutdown/4`` or ``serve_until_shutdown/5`` for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
-		argnames is ['Control']
+		argnames is ['Control'],
+		exceptions is [
+			'The transport implementation may throw shutdown-control validation exceptions' - error
+		]
 	]).
 
 :- end_protocol.

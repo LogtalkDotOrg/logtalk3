@@ -14,8 +14,8 @@ Predicates for term input/output from/to atom, chars, and codes. The predicates 
 |    ``logtalk_load(term_io(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2021-10-04
+| **Version:** 1:3:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -55,6 +55,14 @@ Reads a term from an atom using the given read options. A period at the end of t
 | **Mode and number of proofs:**
 |    ``read_term_from_atom(+atom,-term,+list(read_option))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Atom`` is a variable:
+|        ``instantiation_error``
+|    ``Atom`` is neither a variable nor an atom:
+|        ``type_error(atom,Atom)``
+|    ``Options`` is not a valid list of standard read options or ``Atom`` text cannot be read as a term:
+|        ``error``
+
 
 ------------
 
@@ -73,6 +81,14 @@ Reads a term from an atom using default read options. Shorthand for ``read_term_
 |    ``read_from_atom(Atom,Term)``
 | **Mode and number of proofs:**
 |    ``read_from_atom(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Atom`` is a variable:
+|        ``instantiation_error``
+|    ``Atom`` is neither a variable nor an atom:
+|        ``type_error(atom,Atom)``
+|    ``Atom`` text cannot be read as a term:
+|        ``error``
 
 
 ------------
@@ -93,6 +109,14 @@ Reads a term from a list of characters using the given read options. A period at
 | **Mode and number of proofs:**
 |    ``read_term_from_chars(+list(character),-term,+list(read_option))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Chars`` contains a variable element:
+|        ``instantiation_error``
+|    ``Chars`` contains an element that is not a character:
+|        ``type_error(character,Char)``
+|    ``Options`` is not a valid list of standard read options or ``Chars`` text cannot be read as a term:
+|        ``error``
+
 
 ------------
 
@@ -111,6 +135,12 @@ Reads a term from a list of characters using the given read options, also return
 |    ``read_term_from_chars(Chars,Term,Tail,Options)``
 | **Mode and number of proofs:**
 |    ``read_term_from_chars(+list(character),-term,-list(character),+list(read_option))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Chars`` contains an element that is not a character:
+|        ``type_error(character,Char)``
+|    ``Options`` is not a valid list of standard read options or ``Chars`` text cannot be read as a term:
+|        ``error``
 
 
 ------------
@@ -131,6 +161,14 @@ Reads a term from a list of characters using default read options. Shorthand for
 | **Mode and number of proofs:**
 |    ``read_from_chars(+list(character),-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Chars`` contains a variable element:
+|        ``instantiation_error``
+|    ``Chars`` contains an element that is not a character:
+|        ``type_error(character,Char)``
+|    ``Chars`` text cannot be read as a term:
+|        ``error``
+
 
 ------------
 
@@ -149,6 +187,14 @@ Reads a term from a list of character codes using the given read options. A peri
 |    ``read_term_from_codes(Codes,Term,Options)``
 | **Mode and number of proofs:**
 |    ``read_term_from_codes(+list(character_code),-term,+list(read_option))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Codes`` contains a variable element:
+|        ``instantiation_error``
+|    ``Codes`` contains an element that is not a character code:
+|        ``type_error(integer,Code)``
+|    ``Options`` is not a valid list of standard read options or ``Codes`` text cannot be read as a term:
+|        ``error``
 
 
 ------------
@@ -169,6 +215,12 @@ Reads a term from a list of character codes using the given read options, also r
 | **Mode and number of proofs:**
 |    ``read_term_from_codes(+list(character_code),-term,-list(character_code),+list(read_option))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Codes`` contains an element that is not a character code:
+|        ``type_error(integer,Code)``
+|    ``Options`` is not a valid list of standard read options or ``Codes`` text cannot be read as a term:
+|        ``error``
+
 
 ------------
 
@@ -187,6 +239,14 @@ Reads a term from a list of character codes using default read options. Shorthan
 |    ``read_from_codes(Codes,Term)``
 | **Mode and number of proofs:**
 |    ``read_from_codes(+list(character_code),-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Codes`` contains a variable element:
+|        ``instantiation_error``
+|    ``Codes`` contains an element that is not a character code:
+|        ``type_error(integer,Code)``
+|    ``Codes`` text cannot be read as a term:
+|        ``error``
 
 
 ------------

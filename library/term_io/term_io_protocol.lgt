@@ -22,9 +22,9 @@
 :- protocol(term_io_protocol).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2021-10-04,
+		date is 2026-06-14,
 		comment is 'Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		remarks is [
 			'Portability notes' - 'To keep calls to these library predicates portable, use only standard read/write options and specify output formats using atoms.'
@@ -35,56 +35,94 @@
 	:- mode(read_term_from_atom(+atom, -term, +list(read_option)), one_or_error).
 	:- info(read_term_from_atom/3, [
 		comment is 'Reads a term from an atom using the given read options. A period at the end of the atom is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
-		argnames is ['Atom', 'Term', 'Options']
+		argnames is ['Atom', 'Term', 'Options'],
+		exceptions is [
+			'``Atom`` is a variable' - instantiation_error,
+			'``Atom`` is neither a variable nor an atom' - type_error(atom, 'Atom'),
+			'``Options`` is not a valid list of standard read options or ``Atom`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_from_atom/2).
 	:- mode(read_from_atom(+atom, -term), one_or_error).
 	:- info(read_from_atom/2, [
 		comment is 'Reads a term from an atom using default read options. Shorthand for ``read_term_from_atom(Atom,Term,[])``. A period at the end of the atom is optional.',
-		argnames is ['Atom', 'Term']
+		argnames is ['Atom', 'Term'],
+		exceptions is [
+			'``Atom`` is a variable' - instantiation_error,
+			'``Atom`` is neither a variable nor an atom' - type_error(atom, 'Atom'),
+			'``Atom`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_term_from_chars/3).
 	:- mode(read_term_from_chars(+list(character), -term, +list(read_option)), one_or_error).
 	:- info(read_term_from_chars/3, [
 		comment is 'Reads a term from a list of characters using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
-		argnames is ['Chars', 'Term', 'Options']
+		argnames is ['Chars', 'Term', 'Options'],
+		exceptions is [
+			'``Chars`` contains a variable element' - instantiation_error,
+			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
+			'``Options`` is not a valid list of standard read options or ``Chars`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_term_from_chars/4).
 	:- mode(read_term_from_chars(+list(character), -term, -list(character), +list(read_option)), one_or_error).
 	:- info(read_term_from_chars/4, [
 		comment is 'Reads a term from a list of characters using the given read options, also returning the remaining characters. A period at the end of the term is required. Valid options are those supported by the standard ``read_term/3`` predicate.',
-		argnames is ['Chars', 'Term', 'Tail', 'Options']
+		argnames is ['Chars', 'Term', 'Tail', 'Options'],
+		exceptions is [
+			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
+			'``Options`` is not a valid list of standard read options or ``Chars`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_from_chars/2).
 	:- mode(read_from_chars(+list(character), -term), one_or_error).
 	:- info(read_from_chars/2, [
 		comment is 'Reads a term from a list of characters using default read options. Shorthand for ``read_term_from_chars(Chars,Term,[])``. A period at the end of the list is optional.',
-		argnames is ['Chars', 'Term']
+		argnames is ['Chars', 'Term'],
+		exceptions is [
+			'``Chars`` contains a variable element' - instantiation_error,
+			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
+			'``Chars`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_term_from_codes/3).
 	:- mode(read_term_from_codes(+list(character_code), -term, +list(read_option)), one_or_error).
 	:- info(read_term_from_codes/3, [
 		comment is 'Reads a term from a list of character codes using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
-		argnames is ['Codes', 'Term', 'Options']
+		argnames is ['Codes', 'Term', 'Options'],
+		exceptions is [
+			'``Codes`` contains a variable element' - instantiation_error,
+			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
+			'``Options`` is not a valid list of standard read options or ``Codes`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_term_from_codes/4).
 	:- mode(read_term_from_codes(+list(character_code), -term, -list(character_code), +list(read_option)), one_or_error).
 	:- info(read_term_from_codes/4, [
 		comment is 'Reads a term from a list of character codes using the given read options, also returning the remaining character codes. A period at the end of the term is required. Valid options are those supported by the standard ``read_term/3`` predicate.',
-		argnames is ['Codes', 'Term', 'Tail', 'Options']
+		argnames is ['Codes', 'Term', 'Tail', 'Options'],
+		exceptions is [
+			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
+			'``Options`` is not a valid list of standard read options or ``Codes`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(read_from_codes/2).
 	:- mode(read_from_codes(+list(character_code), -term), one_or_error).
 	:- info(read_from_codes/2, [
 		comment is 'Reads a term from a list of character codes using default read options. Shorthand for ``read_term_from_codes(Codes,Term,[])``. A period at the end of the list is optional.',
-		argnames is ['Codes', 'Term']
+		argnames is ['Codes', 'Term'],
+		exceptions is [
+			'``Codes`` contains a variable element' - instantiation_error,
+			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
+			'``Codes`` text cannot be read as a term' - error
+		]
 	]).
 
 	:- public(write_term_to_atom/3).

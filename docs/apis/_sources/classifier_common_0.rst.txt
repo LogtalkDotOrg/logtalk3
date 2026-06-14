@@ -14,8 +14,8 @@ Shared predicates for classifier diagnostics, dataset validation, mixed-feature 
 |    ``logtalk_load(classification_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-05-11
+| **Version:** 2:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -293,6 +293,16 @@ Checks that a training dataset is non-empty, that all example classes belong to 
 | **Mode and number of proofs:**
 |    ``check_examples(+object_identifier,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Examples`` is empty:
+|        ``domain_error(non_empty_dataset,Dataset)``
+|    ``Dataset`` class values declaration is invalid:
+|        ``domain_error(class_values,ClassValues)``
+|    An example class is not one of the declared class values:
+|        ``domain_error(dataset_example_class,Class)``
+|    An example attribute binding uses an undeclared attribute or a value outside the declared attribute domain:
+|        ``domain_error(dataset_example_attribute_values,AttributeValues)``
+
 
 ------------
 
@@ -312,6 +322,16 @@ Checks that a training dataset is non-empty, that all example classes belong to 
 | **Mode and number of proofs:**
 |    ``check_complete_examples(+object_identifier,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Examples`` is empty:
+|        ``domain_error(non_empty_dataset,Dataset)``
+|    ``Dataset`` class values declaration is invalid:
+|        ``domain_error(class_values,ClassValues)``
+|    An example class is not one of the declared class values:
+|        ``domain_error(dataset_example_class,Class)``
+|    An example attribute set is missing a declared attribute, contains a duplicate attribute, uses an undeclared attribute, or contains a non-variable value outside the declared attribute domain:
+|        ``domain_error(dataset_example_attribute_values,AttributeValues)``
+
 
 ------------
 
@@ -330,6 +350,16 @@ Checks that a training dataset is non-empty, that all example classes belong to 
 |    ``check_complete_examples_nonvar(Dataset,Examples)``
 | **Mode and number of proofs:**
 |    ``check_complete_examples_nonvar(+object_identifier,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Examples`` is empty:
+|        ``domain_error(non_empty_dataset,Dataset)``
+|    ``Dataset`` class values declaration is invalid:
+|        ``domain_error(class_values,ClassValues)``
+|    An example class is not one of the declared class values:
+|        ``domain_error(dataset_example_class,Class)``
+|    An example attribute set is missing a declared attribute, contains a duplicate attribute, uses an undeclared attribute, contains a variable value, or contains a value outside the declared attribute domain:
+|        ``domain_error(dataset_example_attribute_values,AttributeValues)``
 
 
 ------------
@@ -463,6 +493,10 @@ Computes a distance between two mixed-feature vectors using the given feature ty
 |    ``mixed_feature_distance(Metric,FeatureTypes,Values1,Values2,Distance)``
 | **Mode and number of proofs:**
 |    ``mixed_feature_distance(+term,+list,+list,+list,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Metric`` is ``minkowski(Order)`` and ``Order`` is not a positive number:
+|        ``domain_error(positive_number,Order)``
 
 
 ------------

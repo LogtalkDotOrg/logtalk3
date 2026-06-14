@@ -396,8 +396,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-11</div>
+<div class="line"><strong>Version:</strong> 2:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -744,6 +744,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_examples(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Examples</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_dataset,Dataset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> class values declaration is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(class_values,ClassValues)</span></code></div>
+</div>
+<div class="line">An example class is not one of the declared class values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dataset_example_class,Class)</span></code></div>
+</div>
+<div class="line">An example attribute binding uses an undeclared attribute or a value outside the declared attribute domain:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dataset_example_attribute_values,AttributeValues)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-complete-examples-2">
@@ -765,6 +786,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_complete_examples(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Examples</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_dataset,Dataset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> class values declaration is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(class_values,ClassValues)</span></code></div>
+</div>
+<div class="line">An example class is not one of the declared class values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dataset_example_class,Class)</span></code></div>
+</div>
+<div class="line">An example attribute set is missing a declared attribute, contains a duplicate attribute, uses an undeclared attribute, or contains a non-variable value outside the declared attribute domain:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dataset_example_attribute_values,AttributeValues)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-complete-examples-nonvar-2">
@@ -784,6 +826,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_complete_examples_nonvar(+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Examples</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_empty_dataset,Dataset)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code> class values declaration is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(class_values,ClassValues)</span></code></div>
+</div>
+<div class="line">An example class is not one of the declared class values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dataset_example_class,Class)</span></code></div>
+</div>
+<div class="line">An example attribute set is missing a declared attribute, contains a duplicate attribute, uses an undeclared attribute, contains a variable value, or contains a value outside the declared attribute domain:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dataset_example_attribute_values,AttributeValues)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -931,6 +994,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">mixed_feature_distance(+term,+list,+list,+list,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Metric</span></code> is <code class="docutils literal notranslate"><span class="pre">minkowski(Order)</span></code> and <code class="docutils literal notranslate"><span class="pre">Order</span></code> is not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Order)</span></code></div>
+</div>
 </div>
 </div>
 </section>

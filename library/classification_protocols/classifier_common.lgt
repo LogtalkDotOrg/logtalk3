@@ -24,9 +24,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-06-14,
 		comment is 'Shared predicates for classifier diagnostics, dataset validation, mixed-feature distance calculations, and export.'
 	]).
 
@@ -134,21 +134,39 @@
 	:- mode(check_examples(+object_identifier, +list), one_or_error).
 	:- info(check_examples/2, [
 		comment is 'Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that provided attribute bindings use declared attributes with values matching the declared domains. Missing attribute bindings are allowed.',
-		argnames is ['Dataset', 'Examples']
+		argnames is ['Dataset', 'Examples'],
+		exceptions is [
+			'``Examples`` is empty' - domain_error(non_empty_dataset, 'Dataset'),
+			'``Dataset`` class values declaration is invalid' - domain_error(class_values, 'ClassValues'),
+			'An example class is not one of the declared class values' - domain_error(dataset_example_class, 'Class'),
+			'An example attribute binding uses an undeclared attribute or a value outside the declared attribute domain' - domain_error(dataset_example_attribute_values, 'AttributeValues')
+		]
 	]).
 
 	:- protected(check_complete_examples/2).
 	:- mode(check_complete_examples(+object_identifier, +list), one_or_error).
 	:- info(check_complete_examples/2, [
 		comment is 'Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with values matching the declared domains. Missing values represented using variables are allowed.',
-		argnames is ['Dataset', 'Examples']
+		argnames is ['Dataset', 'Examples'],
+		exceptions is [
+			'``Examples`` is empty' - domain_error(non_empty_dataset, 'Dataset'),
+			'``Dataset`` class values declaration is invalid' - domain_error(class_values, 'ClassValues'),
+			'An example class is not one of the declared class values' - domain_error(dataset_example_class, 'Class'),
+			'An example attribute set is missing a declared attribute, contains a duplicate attribute, uses an undeclared attribute, or contains a non-variable value outside the declared attribute domain' - domain_error(dataset_example_attribute_values, 'AttributeValues')
+		]
 	]).
 
 	:- protected(check_complete_examples_nonvar/2).
 	:- mode(check_complete_examples_nonvar(+object_identifier, +list), one_or_error).
 	:- info(check_complete_examples_nonvar/2, [
 		comment is 'Checks that a training dataset is non-empty, that all example classes belong to the declared class values, and that each example contains every declared attribute exactly once with non-variable values matching the declared domains.',
-		argnames is ['Dataset', 'Examples']
+		argnames is ['Dataset', 'Examples'],
+		exceptions is [
+			'``Examples`` is empty' - domain_error(non_empty_dataset, 'Dataset'),
+			'``Dataset`` class values declaration is invalid' - domain_error(class_values, 'ClassValues'),
+			'An example class is not one of the declared class values' - domain_error(dataset_example_class, 'Class'),
+			'An example attribute set is missing a declared attribute, contains a duplicate attribute, uses an undeclared attribute, contains a variable value, or contains a value outside the declared attribute domain' - domain_error(dataset_example_attribute_values, 'AttributeValues')
+		]
 	]).
 
 	:- protected(build_linear_encoders/4).
@@ -197,7 +215,10 @@
 	:- mode(mixed_feature_distance(+term, +list, +list, +list, -float), one_or_error).
 	:- info(mixed_feature_distance/5, [
 		comment is 'Computes a distance between two mixed-feature vectors using the given feature types and one of the supported metrics ``euclidean``, ``manhattan``, ``chebyshev``, ``cosine``, or ``minkowski(Order)``.',
-		argnames is ['Metric', 'FeatureTypes', 'Values1', 'Values2', 'Distance']
+		argnames is ['Metric', 'FeatureTypes', 'Values1', 'Values2', 'Distance'],
+		exceptions is [
+			'``Metric`` is ``minkowski(Order)`` and ``Order`` is not a positive number' - domain_error(positive_number, 'Order')
+		]
 	]).
 
 	learn(Dataset, Classifier) :-

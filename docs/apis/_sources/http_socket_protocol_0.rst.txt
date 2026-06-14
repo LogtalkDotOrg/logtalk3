@@ -54,6 +54,10 @@ Opens a TCP listener on the given host and port using the given socket options. 
 | **Mode and number of proofs:**
 |    ``open_listener(+atom,?integer,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw socket-opening or option-validation exceptions:
+|        ``error``
+
 
 ------------
 
@@ -72,6 +76,10 @@ Closes a listener previously opened with open_listener/4.
 |    ``close_listener(Listener)``
 | **Mode and number of proofs:**
 |    ``close_listener(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw listener-validation or close exceptions:
+|        ``error``
 
 
 ------------
@@ -92,6 +100,10 @@ Best-effort wakeup request for a listener accept loop opened with ``open_listene
 | **Mode and number of proofs:**
 |    ``request_listener_shutdown(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw listener-validation exceptions:
+|        ``error``
+
 
 ------------
 
@@ -110,6 +122,10 @@ Opens a reusable client connection to the given host and port using the given so
 |    ``open_connection(Host,Port,Connection,Options)``
 | **Mode and number of proofs:**
 |    ``open_connection(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw connection-opening or option-validation exceptions:
+|        ``error``
 
 
 ------------
@@ -130,6 +146,10 @@ Closes a reusable client connection previously opened with open_connection/4.
 | **Mode and number of proofs:**
 |    ``close_connection(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw connection-validation or close exceptions:
+|        ``error``
+
 
 ------------
 
@@ -149,6 +169,10 @@ Returns the binary input and output streams carried by a reusable client connect
 | **Mode and number of proofs:**
 |    ``connection_streams(+compound,--stream,--stream)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw connection-handle validation exceptions:
+|        ``error``
+
 
 ------------
 
@@ -167,6 +191,10 @@ Opens a managed reusable connection pool for the given host and port.
 |    ``open_connection_pool(Host,Port,Pool,Options)``
 | **Mode and number of proofs:**
 |    ``open_connection_pool(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw connection-pool creation, resource, or option-validation exceptions:
+|        ``error``
 
 | **Remarks:**
 
@@ -193,6 +221,10 @@ Closes a managed reusable connection pool and all currently available pooled con
 | **Mode and number of proofs:**
 |    ``close_connection_pool(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw pool-validation exceptions or reject closing while exchanges remain active:
+|        ``error``
+
 
 ------------
 
@@ -211,6 +243,10 @@ Returns managed pool statistics as stats(Available, InUse, Total, MinSize, MaxSi
 |    ``connection_pool_stats(Pool,Stats)``
 | **Mode and number of proofs:**
 |    ``connection_pool_stats(+compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw pool-validation exceptions:
+|        ``error``
 
 
 ------------
@@ -231,6 +267,10 @@ Performs a single HTTP exchange on an open reusable client connection or by temp
 | **Mode and number of proofs:**
 |    ``exchange(+compound,+compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw handle-validation, request-validation, or exchange exceptions:
+|        ``error``
+
 
 ------------
 
@@ -249,6 +289,10 @@ Performs a sequence of HTTP exchanges on an open reusable client connection or b
 |    ``exchange_connection(ConnectionOrPool,Requests,Responses)``
 | **Mode and number of proofs:**
 |    ``exchange_connection(+compound,++list(compound),--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw handle-validation, request-sequence validation, or exchange exceptions:
+|        ``error``
 
 
 ------------
@@ -269,6 +313,10 @@ Opens a client socket connection to the given host and port, performs a single H
 | **Mode and number of proofs:**
 |    ``exchange(+atom,+integer,+compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw connection-opening, request-validation, or exchange exceptions:
+|        ``error``
+
 
 ------------
 
@@ -287,6 +335,10 @@ Opens a client socket connection to the given host and port, performs a sequence
 |    ``exchange_connection(Host,Port,Requests,Responses)``
 | **Mode and number of proofs:**
 |    ``exchange_connection(+atom,+integer,++list(compound),--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw connection-opening, request-sequence validation, or exchange exceptions:
+|        ``error``
 
 
 ------------
@@ -307,6 +359,10 @@ Accepts one incoming socket connection on the given server socket, serves that c
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw listener-accept, stream, or delegated server-serving exceptions:
+|        ``error``
+
 
 ------------
 
@@ -325,6 +381,10 @@ Accepts one incoming socket connection on the given listener, serves exactly one
 |    ``serve_websocket_once(Listener,Handler,Connection,Response,ClientInfo)``
 | **Mode and number of proofs:**
 |    ``serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw listener-accept, stream, or delegated WebSocket-serving exceptions:
+|        ``error``
 
 
 ------------
@@ -345,6 +405,10 @@ Accepts and serves Count incoming connections on the given listener, returning t
 | **Mode and number of proofs:**
 |    ``serve_listener(+compound,+object_identifier,+integer,--list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw listener, worker, or delegated server-serving exceptions:
+|        ``error``
+
 
 ------------
 
@@ -363,6 +427,10 @@ Accepts and serves ``Count`` incoming connections on the given listener using th
 |    ``serve_listener(Listener,Handler,Count,ClientInfos,Options)``
 | **Mode and number of proofs:**
 |    ``serve_listener(+compound,+object_identifier,+integer,--list(compound),+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw listener, worker, resource, or option-validation exceptions:
+|        ``error``
 
 | **Remarks:**
 
@@ -391,6 +459,10 @@ Accepts and serves incoming connections on the given listener until ``request_sh
 |    ``serve_until_shutdown(Listener,Handler,Control,Options)``
 | **Mode and number of proofs:**
 |    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw listener, worker, control-registration, or option-validation exceptions:
+|        ``error``
 
 | **Remarks:**
 
@@ -422,6 +494,10 @@ Accepts and serves incoming connections on the given listener until ``request_sh
 | **Mode and number of proofs:**
 |    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list,+callable)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The transport implementation may throw listener, worker, ready-goal, control-registration, or option-validation exceptions:
+|        ``error``
+
 | **Remarks:**
 
     - Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.
@@ -446,6 +522,10 @@ Requests shutdown of an open-ended serving loop started with ``serve_until_shutd
 |    ``request_shutdown(Control)``
 | **Mode and number of proofs:**
 |    ``request_shutdown(+nonvar)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw shutdown-control validation exceptions:
+|        ``error``
 
 
 ------------

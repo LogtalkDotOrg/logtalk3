@@ -14,8 +14,8 @@ JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructin
 |    ``logtalk_load(json_rpc(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-24
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -309,6 +309,10 @@ Decodes a JSON atom into a JSON-RPC 2.0 term (request, notification, response, e
 |    ``decode(JSON,Term)``
 | **Mode and number of proofs:**
 |    ``decode(+atom,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``parse/2`` when decoding the JSON atom into a JSON-RPC term:
+|        ``error``
 
 
 ------------

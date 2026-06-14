@@ -472,6 +472,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open_listener(+atom,?integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw socket-opening or option-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="close-listener-1">
@@ -491,6 +500,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close_listener(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener-validation or close exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -514,6 +532,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_listener_shutdown(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="open-connection-4">
@@ -533,6 +560,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open_connection(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-opening or option-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -556,6 +592,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close_connection(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-validation or close exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="connection-streams-3">
@@ -577,6 +622,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">connection_streams(+compound,--stream,--stream)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-handle validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="open-connection-pool-4">
@@ -596,6 +650,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open_connection_pool(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-pool creation, resource, or option-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -629,6 +692,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close_connection_pool(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw pool-validation exceptions or reject closing while exchanges remain active:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="connection-pool-stats-2">
@@ -648,6 +720,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats(+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw pool-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -671,6 +752,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(+compound,+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw handle-validation, request-validation, or exchange exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="exchange-connection-3">
@@ -690,6 +780,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+compound,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw handle-validation, request-sequence validation, or exchange exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -713,6 +812,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(+atom,+integer,+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-opening, request-validation, or exchange exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="exchange-connection-4">
@@ -732,6 +840,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+atom,+integer,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-opening, request-sequence validation, or exchange exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -755,6 +872,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener-accept, stream, or delegated server-serving exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="serve-websocket-once-5">
@@ -774,6 +900,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener-accept, stream, or delegated WebSocket-serving exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -797,6 +932,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_listener(+compound,+object_identifier,+integer,--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener, worker, or delegated server-serving exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="serve-listener-5">
@@ -816,6 +960,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_listener(+compound,+object_identifier,+integer,--list(compound),+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener, worker, resource, or option-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -850,6 +1003,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(+compound,+object_identifier,+nonvar,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener, worker, control-registration, or option-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -891,6 +1053,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw listener, worker, ready-goal, control-registration, or option-validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -919,6 +1090,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_shutdown(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw shutdown-control validation exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>
