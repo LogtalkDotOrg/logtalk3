@@ -79,6 +79,10 @@ Parses an OpenAPI document from the given source (``file(Path)``, ``stream(Strea
 | **Mode and number of proofs:**
 |    ``parse(++compound,--term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is invalid or JSON parsing of the OpenAPI document fails:
+|        ``error``
+
 
 ------------
 
@@ -97,6 +101,10 @@ Generates the representation specified in the first argument (``file(Path)``, ``
 |    ``generate(Sink,Document)``
 | **Mode and number of proofs:**
 |    ``generate(+compound,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is invalid or JSON serialization of the OpenAPI document fails:
+|        ``error``
 
 
 ------------
@@ -154,6 +162,10 @@ Resolves an operation descriptor exposed by a provider object using its ``operat
 |    ``operation(Provider,OperationId,Operation)``
 | **Mode and number of proofs:**
 |    ``operation(+object_identifier,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Provider`` does not expose the requested ``operationId`` or provider hooks violate OpenAPI descriptor expectations:
+|        ``error``
 
 
 ------------

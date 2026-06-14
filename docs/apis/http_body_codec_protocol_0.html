@@ -488,6 +488,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_body(+atom,++term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The implementing codec may throw media-type-specific validation or encoding exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-body-4">
@@ -507,6 +516,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_body(+atom,++compound,+list(compound),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The implementing codec may throw media-type-specific validation or decoding exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

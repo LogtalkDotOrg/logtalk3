@@ -515,6 +515,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_challenge(++text,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> is not a valid Basic challenge header value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-challenge-2">
@@ -534,6 +543,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_challenge(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> is not a valid normalized Basic challenge term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -557,6 +575,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_authorization(++text,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> is not a valid Basic authorization header value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-authorization-2">
@@ -576,6 +603,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_authorization(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Authorization</span></code> is not a valid normalized Basic authorization term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -599,6 +635,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">protect_request(+compound,+object_identifier,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid, or the verifier object rejects the request with an exception:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="unauthorized-response-3">
@@ -620,6 +665,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">unauthorized_response(-compound,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for Basic challenge generation or response construction:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="unauthorized-response-4">
@@ -639,6 +693,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">unauthorized_response(+compound,+compound,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> or <code class="docutils literal notranslate"><span class="pre">Response0</span></code> are invalid, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for unauthorized-response construction:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

@@ -81,6 +81,10 @@ Writes exactly one normalized HTTP response term to a binary stream.
 | **Mode and number of proofs:**
 |    ``write_response(+stream,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Response`` or ``Output`` are invalid for the delegated HTTP response generator:
+|        ``error``
+
 
 ------------
 
@@ -99,6 +103,8 @@ Dispatches a normalized HTTP request to a handler object implementing the http_h
 |    ``dispatch(Handler,Request,Response)``
 | **Mode and number of proofs:**
 |    ``dispatch(+object_identifier,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
 
 
 ------------
@@ -138,6 +144,10 @@ Repeatedly reads requests from a binary input stream, dispatches them to a handl
 | **Mode and number of proofs:**
 |    ``serve_connection(+stream,+stream,+object_identifier)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The binary streams or delegated request/response processing predicates raise a serving error:
+|        ``error``
+
 
 ------------
 
@@ -156,6 +166,10 @@ Validates a normalized WebSocket opening-handshake request and builds a matching
 |    ``accept_websocket(Request,Response,Options)``
 | **Mode and number of proofs:**
 |    ``accept_websocket(+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Request`` is not a valid normalized WebSocket opening-handshake request or ``Options`` are invalid:
+|        ``error``
 
 | **Remarks:**
 
@@ -179,6 +193,10 @@ Reads one request from a binary input stream, dispatches it to a handler object,
 |    ``serve_websocket(Input,Output,Handler,Outcome)``
 | **Mode and number of proofs:**
 |    ``serve_websocket(+stream,+stream,+object_identifier,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The binary streams or delegated WebSocket handshake processing predicates raise a serving error:
+|        ``error``
 
 
 ------------

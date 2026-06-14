@@ -495,6 +495,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="register-2">
@@ -516,6 +525,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">register(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="unregister-2">
@@ -535,6 +553,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">unregister(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are not valid registered WebSocket service handles:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -579,6 +606,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">sessions(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="session-count-2">
@@ -598,6 +634,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">session_count(+compound,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -621,6 +666,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send(+compound,+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are invalid, or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="broadcast-2">
@@ -640,6 +694,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">broadcast(+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is invalid or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -663,6 +726,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">broadcast_except(+compound,+compound,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are invalid, or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="take-pending-3">
@@ -682,6 +754,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">take_pending(+compound,+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are not valid registered WebSocket service handles:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

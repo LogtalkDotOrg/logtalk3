@@ -392,8 +392,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-08</div>
+<div class="line"><strong>Version:</strong> 0:1:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -716,6 +716,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">split_packet_zone(+list(byte),+integer,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">FirstHeaderPointer</span></code>, or <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is neither a variable nor a valid packet-zone byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone_bytes,Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">FirstHeaderPointer</span></code> is neither a variable nor a valid first header pointer for <code class="docutils literal notranslate"><span class="pre">Bytes</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_first_header_pointer,FirstHeaderPointer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="join-packet-zone-4">
@@ -735,6 +756,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">join_packet_zone(+compound,+integer,-list(byte),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> or <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> is neither a variable nor a valid packet-zone term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -758,6 +796,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">extract_tm_packets(+compound,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> or <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line">The frame packet-zone bytes or first header pointer are invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone_bytes,Bytes)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="insert-tm-packets-4">
@@ -777,6 +836,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_tm_packets(+compound,+integer,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> is neither a variable nor a valid packet-zone term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -800,6 +880,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">split_aos_packet_zone(+list(byte),+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> or <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is neither a variable nor a valid AOS packet-zone byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_packet_zone_bytes,Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="join-aos-packet-zone-3">
@@ -819,6 +916,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">join_aos_packet_zone(+compound,+integer,-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> or <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> is neither a variable nor a valid packet-zone term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> has neither packets nor a pure prefix or suffix and therefore cannot be encoded as an empty AOS packet zone:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -842,6 +960,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_packet_zone(+compound,+integer,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> is neither a variable nor a valid packet-zone term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packet reassembly state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="extract-aos-packets-3">
@@ -861,6 +1008,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">extract_aos_packets(+compound,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> or <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line">The frame data field is not a valid AOS packet-zone byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_packet_zone_bytes,Bytes)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -884,6 +1052,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_aos_packets(+compound,+integer,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> is neither a variable nor a valid packet-zone term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PacketZone</span></code> cannot be encoded as an AOS empty packet zone:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_packet_zone,PacketZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tm-packets-5">
@@ -903,6 +1096,43 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tm_packets(+compound,+integer,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The TM frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current TM frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -926,6 +1156,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tm_packets(+compound,+integer,+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The TM frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current TM frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tm-packets-7">
@@ -945,6 +1216,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tm_packets(+compound,+integer,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The TM frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current TM frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -968,6 +1280,43 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tm_frames(+list(compound),+integer,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The TM frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current TM frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tm-frames-6">
@@ -987,6 +1336,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tm_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The TM frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current TM frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1010,6 +1400,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tm_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The TM frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current TM frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-aos-packets-5">
@@ -1029,6 +1460,43 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_aos_packets(+compound,+integer,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The AOS frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current AOS frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1052,6 +1520,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_aos_packets(+compound,+integer,+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The AOS frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current AOS frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-aos-packets-7">
@@ -1071,6 +1580,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_aos_packets(+compound,+integer,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The AOS frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current AOS frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1094,6 +1644,43 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_aos_frames(+list(compound),+integer,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The AOS frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current AOS frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-aos-frames-6">
@@ -1115,6 +1702,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_aos_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The AOS frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current AOS frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-aos-frames-7">
@@ -1134,6 +1762,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_aos_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The AOS frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))</span></code></div>
+</div>
+<div class="line">The stored and current AOS frame counter moduli differ:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))</span></code></div>
+</div>
+<div class="line">A pending fragment cannot be continued by the packet zone prefix data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 </section>

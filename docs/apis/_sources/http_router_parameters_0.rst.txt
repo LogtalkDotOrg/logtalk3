@@ -60,6 +60,10 @@ Extracts typed parameters for the route identified by the routed request ``route
 | **Mode and number of proofs:**
 |    ``route_parameters(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    The routed request is missing route annotations, the route declarations are invalid, or typed parameter extraction fails:
+|        ``error``
+
 
 ------------
 

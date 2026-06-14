@@ -565,6 +565,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_kind(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="current-url-2">
@@ -712,6 +715,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_properties(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="request-property-2">
@@ -754,6 +760,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reply(+compound,+term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Content</span></code> or the derived HTMX response options are invalid for HTML reply generation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reply-4">
@@ -773,6 +788,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reply(+compound,+term,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Content</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for HTMX HTML reply generation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -796,6 +820,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply(+compound,+term,+term,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PageContent</span></code> or <code class="docutils literal notranslate"><span class="pre">FragmentContent</span></code> are invalid for HTMX HTML reply generation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="page-fragment-reply-5">
@@ -817,6 +850,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">page_fragment_reply(+compound,+term,+term,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PageContent</span></code>, <code class="docutils literal notranslate"><span class="pre">FragmentContent</span></code>, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for HTMX HTML reply generation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="add-response-headers-4">
@@ -836,6 +878,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">add_response_headers(+compound,+compound,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid HTMX response-header declarations or the delegated response builder rejects them:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

@@ -393,8 +393,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-08</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -457,6 +457,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">utc_to_local_tz(+compound,+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-to-utc-tz-3">
@@ -476,6 +485,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_to_utc_tz(+compound,+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is neither a variable nor a valid <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(date_time,LocalDateTime)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -518,6 +544,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">convert_zones(+compound,+atom,+atom,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is neither a variable nor a valid <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(date_time,LocalDateTime)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">FromZone</span></code> is not present in the cached TZif data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,FromZone)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ToZone</span></code> is not present in the cached TZif data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,ToZone)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

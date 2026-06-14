@@ -65,6 +65,10 @@ Runs a higher-level session loop on an upgraded http_socket WebSocket connection
 | **Mode and number of proofs:**
 |    ``run_session(+compound,+object_identifier,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` or ``Handler`` are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception:
+|        ``error``
+
 | **Remarks:**
 
     - Handler protocol: The handler object must conform to the ``http_websocket_service_handler_protocol`` protocol and return a list of normalized reply messages for each received message.
@@ -88,6 +92,10 @@ Runs a higher-level session loop on an upgraded http_socket WebSocket connection
 |    ``run_session(Connection,Handler,State,Options)``
 | **Mode and number of proofs:**
 |    ``run_session(+compound,+object_identifier,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection``, ``Handler``, or ``Options`` are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception:
+|        ``error``
 
 | **Remarks:**
 
@@ -119,6 +127,10 @@ Protected helper that runs the callback-driven session loop on an upgraded WebSo
 | **Mode and number of proofs:**
 |    ``run_session_connection(+compound,+compound,+compound,-compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The connection, handler descriptor, session state, or loop options are invalid for the callback-driven session loop:
+|        ``error``
+
 
 ------------
 
@@ -137,6 +149,10 @@ Validates a non-negative integer option value for the given domain and option na
 |    ``validate_non_negative_integer_option(Domain,Name,Value,ValidatedValue)``
 | **Mode and number of proofs:**
 |    ``validate_non_negative_integer_option(+atom,+atom,@term,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a non-negative integer option value for the given domain and option name:
+|        ``error``
 
 
 ------------

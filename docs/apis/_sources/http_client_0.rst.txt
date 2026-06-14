@@ -72,6 +72,12 @@ Builds a normalized request from the given method, absolute ``http://`` URL, and
 | **Mode and number of proofs:**
 |    ``request(+atom,+atom,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options:
+|        ``error``
+|    The delegated socket exchange fails request validation or transport processing:
+|        ``error``
+
 
 ------------
 
@@ -90,6 +96,14 @@ Builds a normalized request from the given method, absolute ``http://`` URL, and
 |    ``request(ConnectionOrPool,Method,URL,Response,Options)``
 | **Mode and number of proofs:**
 |    ``request(+compound,+atom,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle for ``URL``:
+|        ``error``
+|    ``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options:
+|        ``error``
+|    The delegated socket exchange fails request validation or transport processing:
+|        ``error``
 
 
 ------------
@@ -110,6 +124,10 @@ Convenience wrapper over ``request/4`` using the ``get`` method.
 | **Mode and number of proofs:**
 |    ``get(+atom,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/4`` for the given URL and options:
+|        ``error``
+
 
 ------------
 
@@ -128,6 +146,10 @@ Convenience wrapper over ``request/5`` using the ``get`` method.
 |    ``get(ConnectionOrPool,URL,Response,Options)``
 | **Mode and number of proofs:**
 |    ``get(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` for the given connection, URL, and options:
+|        ``error``
 
 
 ------------
@@ -148,6 +170,10 @@ Convenience wrapper over ``request/4`` using the ``head`` method.
 | **Mode and number of proofs:**
 |    ``head(+atom,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/4`` for the given URL and options:
+|        ``error``
+
 
 ------------
 
@@ -166,6 +192,10 @@ Convenience wrapper over ``request/5`` using the ``head`` method.
 |    ``head(ConnectionOrPool,URL,Response,Options)``
 | **Mode and number of proofs:**
 |    ``head(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` for the given connection, URL, and options:
+|        ``error``
 
 
 ------------
@@ -186,6 +216,10 @@ Convenience wrapper over ``request/4`` using the ``delete`` method.
 | **Mode and number of proofs:**
 |    ``delete(+atom,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/4`` for the given URL and options:
+|        ``error``
+
 
 ------------
 
@@ -204,6 +238,10 @@ Convenience wrapper over ``request/5`` using the ``delete`` method.
 |    ``delete(ConnectionOrPool,URL,Response,Options)``
 | **Mode and number of proofs:**
 |    ``delete(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` for the given connection, URL, and options:
+|        ``error``
 
 
 ------------
@@ -224,6 +262,10 @@ Convenience wrapper over ``request/4`` using the ``post`` method and the given r
 | **Mode and number of proofs:**
 |    ``post(+atom,+compound,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/4`` when the given body is merged into the request options:
+|        ``error``
+
 
 ------------
 
@@ -242,6 +284,10 @@ Convenience wrapper over ``request/5`` using the ``post`` method and the given r
 |    ``post(ConnectionOrPool,URL,Body,Response,Options)``
 | **Mode and number of proofs:**
 |    ``post(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
+|        ``error``
 
 
 ------------
@@ -262,6 +308,10 @@ Convenience wrapper over ``request/4`` using the ``put`` method and the given re
 | **Mode and number of proofs:**
 |    ``put(+atom,+compound,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/4`` when the given body is merged into the request options:
+|        ``error``
+
 
 ------------
 
@@ -280,6 +330,10 @@ Convenience wrapper over ``request/5`` using the ``put`` method and the given re
 |    ``put(ConnectionOrPool,URL,Body,Response,Options)``
 | **Mode and number of proofs:**
 |    ``put(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
+|        ``error``
 
 
 ------------
@@ -300,6 +354,10 @@ Convenience wrapper over ``request/4`` using the ``patch`` method and the given 
 | **Mode and number of proofs:**
 |    ``patch(+atom,+compound,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/4`` when the given body is merged into the request options:
+|        ``error``
+
 
 ------------
 
@@ -319,6 +377,10 @@ Convenience wrapper over ``request/5`` using the ``patch`` method and the given 
 | **Mode and number of proofs:**
 |    ``patch(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
+|        ``error``
+
 
 ------------
 
@@ -337,6 +399,12 @@ Builds a WebSocket opening-handshake request from the given absolute ``ws://`` U
 |    ``open_websocket(URL,Connection,Response,Options)``
 | **Mode and number of proofs:**
 |    ``open_websocket(+atom,--compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is not a supported absolute WebSocket URL or ``Options`` contain invalid opening-handshake options:
+|        ``error``
+|    The delegated socket or handshake processing rejects the connection or server response:
+|        ``error``
 
 
 ------------

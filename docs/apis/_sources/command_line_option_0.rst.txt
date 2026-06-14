@@ -51,6 +51,10 @@ Checks if the command-line option definition is valid. Throws an error if the de
 | **Mode and number of proofs:**
 |    ``check`` - ``one_or_error``
 
+| **Exceptions:**
+|    The importing object is missing ``name/1`` or returns values with invalid types for the option declaration predicates:
+|        ``error``
+
 
 ------------
 

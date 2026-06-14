@@ -546,6 +546,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_body(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The normalized request body is missing:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">problem(400,urn:logtalk:invalid-request-body,Bad</span> <span class="pre">Request,Expected</span> <span class="pre">request</span> <span class="pre">body.)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="json-body-2">
@@ -865,6 +874,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">no_content_response(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="problem-response-6">
@@ -1072,6 +1090,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dispatch_rest_endpoint(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The routed endpoint identifier is missing, unknown, duplicated, or the endpoint action produces an invalid REST result term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

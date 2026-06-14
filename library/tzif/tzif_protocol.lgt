@@ -22,9 +22,9 @@
 :- protocol(tzif_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-07,
+		date is 2026-06-14,
 		comment is 'Protocol for loading TZif data sets, persisting loaded terms, and answering zone-aware UTC-based offset, DST, and abbreviation queries.'
 	]).
 
@@ -60,7 +60,12 @@
 	:- mode(save(+atom), one_or_error).
 	:- info(save/1, [
 		comment is 'Saves all cached ``tzif(...)`` terms to a plain Prolog snapshot file.',
-		argnames is ['File']
+		argnames is ['File'],
+		exceptions is [
+			'No TZif terms are cached' - existence_error(tzif_cache, tzif),
+			'``File`` is a variable' - instantiation_error,
+			'``File`` is neither a variable nor a valid file name atom' - domain_error(file_name, 'File')
+		]
 	]).
 
 	:- public(clear_cache/0).
@@ -101,7 +106,10 @@
 	:- mode(zones(-list(atom)), one_or_error).
 	:- info(zones/1, [
 		comment is 'Returns the list of zone identifiers loaded in the cached ``tzif(...)`` terms.',
-		argnames is ['Zones']
+		argnames is ['Zones'],
+		exceptions is [
+			'No TZif terms are cached' - existence_error(tzif_cache, tzif)
+		]
 	]).
 
 	:- public(time_type/4).
@@ -115,14 +123,21 @@
 	:- mode(time_type(+atom, +types([integer, compound]), -compound), one_or_error).
 	:- info(time_type/3, [
 		comment is 'Returns the applicable local time type for a zone in the cached TZif terms.',
-		argnames is ['Zone', 'UTC', 'TimeType']
+		argnames is ['Zone', 'UTC', 'TimeType'],
+		exceptions is [
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
+		]
 	]).
 
 	:- public(time_type/2).
 	:- mode(time_type(+types([integer, compound]), -compound), one_or_error).
 	:- info(time_type/2, [
 		comment is 'Cached single-zone convenience variant of ``time_type/3`` using the cached TZif terms; requires exactly one cached zone.',
-		argnames is ['UTC', 'TimeType']
+		argnames is ['UTC', 'TimeType'],
+		exceptions is [
+			'No TZif terms are cached' - existence_error(tzif_cache, tzif),
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
+		]
 	]).
 
 	:- public(offset/4).
@@ -136,14 +151,20 @@
 	:- mode(offset(+atom, +types([integer, compound]), -integer), one_or_error).
 	:- info(offset/3, [
 		comment is 'Returns the UTC offset in seconds for a zone in the cached TZif terms.',
-		argnames is ['Zone', 'UTC', 'OffsetSeconds']
+		argnames is ['Zone', 'UTC', 'OffsetSeconds'],
+		exceptions is [
+			'Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant' - error
+		]
 	]).
 
 	:- public(offset/2).
 	:- mode(offset(+types([integer, compound]), -integer), one_or_error).
 	:- info(offset/2, [
 		comment is 'Cached single-zone convenience variant of ``offset/3`` using the cached TZif terms; requires exactly one cached zone.',
-		argnames is ['UTC', 'OffsetSeconds']
+		argnames is ['UTC', 'OffsetSeconds'],
+		exceptions is [
+			'Any exception that can be thrown by ``time_type/2`` for the given UTC instant' - error
+		]
 	]).
 
 	:- public(daylight_saving_time/4).
@@ -157,14 +178,20 @@
 	:- mode(daylight_saving_time(+atom, +types([integer, compound]), -atom), one_or_error).
 	:- info(daylight_saving_time/3, [
 		comment is 'Returns daylight-saving information for a zone in the cached TZif terms.',
-		argnames is ['Zone', 'UTC', 'IsDST']
+		argnames is ['Zone', 'UTC', 'IsDST'],
+		exceptions is [
+			'Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant' - error
+		]
 	]).
 
 	:- public(daylight_saving_time/2).
 	:- mode(daylight_saving_time(+types([integer, compound]), -atom), one_or_error).
 	:- info(daylight_saving_time/2, [
 		comment is 'Cached single-zone convenience variant of ``daylight_saving_time/3`` using the cached TZif terms; requires exactly one cached zone.',
-		argnames is ['UTC', 'IsDST']
+		argnames is ['UTC', 'IsDST'],
+		exceptions is [
+			'Any exception that can be thrown by ``time_type/2`` for the given UTC instant' - error
+		]
 	]).
 
 	:- public(abbreviation/4).
@@ -178,14 +205,20 @@
 	:- mode(abbreviation(+atom, +types([integer, compound]), -atom), one_or_error).
 	:- info(abbreviation/3, [
 		comment is 'Returns the time-zone abbreviation for a zone in the cached TZif terms.',
-		argnames is ['Zone', 'UTC', 'Abbreviation']
+		argnames is ['Zone', 'UTC', 'Abbreviation'],
+		exceptions is [
+			'Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant' - error
+		]
 	]).
 
 	:- public(abbreviation/2).
 	:- mode(abbreviation(+types([integer, compound]), -atom), one_or_error).
 	:- info(abbreviation/2, [
 		comment is 'Cached single-zone convenience variant of ``abbreviation/3`` using the cached TZif terms; requires exactly one cached zone.',
-		argnames is ['UTC', 'Abbreviation']
+		argnames is ['UTC', 'Abbreviation'],
+		exceptions is [
+			'Any exception that can be thrown by ``time_type/2`` for the given UTC instant' - error
+		]
 	]).
 
 	:- public(local_time_type/4).
@@ -199,14 +232,25 @@
 	:- mode(local_time_type(+atom, +compound, -compound), one_or_error).
 	:- info(local_time_type/3, [
 		comment is 'Returns the applicable local time type for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
-		argnames is ['Zone', 'LocalDateTime', 'TimeType']
+		argnames is ['Zone', 'LocalDateTime', 'TimeType'],
+		exceptions is [
+			'``LocalDateTime`` is a variable' - instantiation_error,
+			'``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term' - type_error(date_time, 'LocalDateTime'),
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
+		]
 	]).
 
 	:- public(local_time_type/2).
 	:- mode(local_time_type(+compound, -compound), one_or_error).
 	:- info(local_time_type/2, [
 		comment is 'Cached single-zone convenience variant of strict local civil-time lookup; requires exactly one cached zone and fails unless the local civil time has a unique interpretation.',
-		argnames is ['LocalDateTime', 'TimeType']
+		argnames is ['LocalDateTime', 'TimeType'],
+		exceptions is [
+			'``LocalDateTime`` is a variable' - instantiation_error,
+			'``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term' - type_error(date_time, 'LocalDateTime'),
+			'No TZif terms are cached' - existence_error(tzif_cache, tzif),
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
+		]
 	]).
 
 	:- public(local_time_type_with_resolution/5).
@@ -241,14 +285,20 @@
 	:- mode(local_offset(+atom, +compound, -integer), one_or_error).
 	:- info(local_offset/3, [
 		comment is 'Returns the UTC offset in seconds for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
-		argnames is ['Zone', 'LocalDateTime', 'OffsetSeconds']
+		argnames is ['Zone', 'LocalDateTime', 'OffsetSeconds'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time' - error
+		]
 	]).
 
 	:- public(local_offset/2).
 	:- mode(local_offset(+compound, -integer), one_or_error).
 	:- info(local_offset/2, [
 		comment is 'Cached single-zone convenience variant of strict local civil-time offset lookup.',
-		argnames is ['LocalDateTime', 'OffsetSeconds']
+		argnames is ['LocalDateTime', 'OffsetSeconds'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type/2`` for the given local civil time' - error
+		]
 	]).
 
 	:- public(local_offset_with_resolution/5).
@@ -283,14 +333,20 @@
 	:- mode(local_daylight_saving_time(+atom, +compound, -atom), one_or_error).
 	:- info(local_daylight_saving_time/3, [
 		comment is 'Returns daylight-saving information for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
-		argnames is ['Zone', 'LocalDateTime', 'IsDST']
+		argnames is ['Zone', 'LocalDateTime', 'IsDST'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time' - error
+		]
 	]).
 
 	:- public(local_daylight_saving_time/2).
 	:- mode(local_daylight_saving_time(+compound, -atom), one_or_error).
 	:- info(local_daylight_saving_time/2, [
 		comment is 'Cached single-zone convenience variant of strict local daylight-saving lookup.',
-		argnames is ['LocalDateTime', 'IsDST']
+		argnames is ['LocalDateTime', 'IsDST'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type/2`` for the given local civil time' - error
+		]
 	]).
 
 	:- public(local_daylight_saving_time_with_resolution/5).
@@ -325,14 +381,20 @@
 	:- mode(local_abbreviation(+atom, +compound, -atom), one_or_error).
 	:- info(local_abbreviation/3, [
 		comment is 'Returns the time-zone abbreviation for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
-		argnames is ['Zone', 'LocalDateTime', 'Abbreviation']
+		argnames is ['Zone', 'LocalDateTime', 'Abbreviation'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time' - error
+		]
 	]).
 
 	:- public(local_abbreviation/2).
 	:- mode(local_abbreviation(+compound, -atom), one_or_error).
 	:- info(local_abbreviation/2, [
 		comment is 'Cached single-zone convenience variant of strict local abbreviation lookup.',
-		argnames is ['LocalDateTime', 'Abbreviation']
+		argnames is ['LocalDateTime', 'Abbreviation'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type/2`` for the given local civil time' - error
+		]
 	]).
 
 	:- public(local_abbreviation_with_resolution/5).
@@ -367,14 +429,25 @@
 	:- mode(local_time_type_reified(+atom, +compound, -compound), one_or_error).
 	:- info(local_time_type_reified/3, [
 		comment is 'Returns a reified local civil-time lookup result for a zone in the cached TZif terms as one of ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.',
-		argnames is ['Zone', 'LocalDateTime', 'Result']
+		argnames is ['Zone', 'LocalDateTime', 'Result'],
+		exceptions is [
+			'``LocalDateTime`` is a variable' - instantiation_error,
+			'``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term' - type_error(date_time, 'LocalDateTime'),
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
+		]
 	]).
 
 	:- public(local_time_type_reified/2).
 	:- mode(local_time_type_reified(+compound, -compound), one_or_error).
 	:- info(local_time_type_reified/2, [
 		comment is 'Cached single-zone convenience variant of reified local civil-time lookup; returns ``unique(TimeType)``, ``ambiguous(TimeTypes)``, or ``nonexistent``.',
-		argnames is ['LocalDateTime', 'Result']
+		argnames is ['LocalDateTime', 'Result'],
+		exceptions is [
+			'``LocalDateTime`` is a variable' - instantiation_error,
+			'``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term' - type_error(date_time, 'LocalDateTime'),
+			'No TZif terms are cached' - existence_error(tzif_cache, tzif),
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
+		]
 	]).
 
 	:- public(local_offset_reified/4).
@@ -388,14 +461,20 @@
 	:- mode(local_offset_reified(+atom, +compound, -compound), one_or_error).
 	:- info(local_offset_reified/3, [
 		comment is 'Returns a reified local offset lookup result for a zone in the cached TZif terms as one of ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
-		argnames is ['Zone', 'LocalDateTime', 'Result']
+		argnames is ['Zone', 'LocalDateTime', 'Result'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time' - error
+		]
 	]).
 
 	:- public(local_offset_reified/2).
 	:- mode(local_offset_reified(+compound, -compound), one_or_error).
 	:- info(local_offset_reified/2, [
 		comment is 'Cached single-zone convenience variant of reified local offset lookup; returns ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
-		argnames is ['LocalDateTime', 'Result']
+		argnames is ['LocalDateTime', 'Result'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time' - error
+		]
 	]).
 
 	:- public(local_daylight_saving_time_reified/4).
@@ -409,14 +488,20 @@
 	:- mode(local_daylight_saving_time_reified(+atom, +compound, -compound), one_or_error).
 	:- info(local_daylight_saving_time_reified/3, [
 		comment is 'Returns a reified local daylight-saving lookup result for a zone in the cached TZif terms as one of ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
-		argnames is ['Zone', 'LocalDateTime', 'Result']
+		argnames is ['Zone', 'LocalDateTime', 'Result'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time' - error
+		]
 	]).
 
 	:- public(local_daylight_saving_time_reified/2).
 	:- mode(local_daylight_saving_time_reified(+compound, -compound), one_or_error).
 	:- info(local_daylight_saving_time_reified/2, [
 		comment is 'Cached single-zone convenience variant of reified local daylight-saving lookup; returns ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
-		argnames is ['LocalDateTime', 'Result']
+		argnames is ['LocalDateTime', 'Result'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time' - error
+		]
 	]).
 
 	:- public(local_abbreviation_reified/4).
@@ -430,14 +515,20 @@
 	:- mode(local_abbreviation_reified(+atom, +compound, -compound), one_or_error).
 	:- info(local_abbreviation_reified/3, [
 		comment is 'Returns a reified local abbreviation lookup result for a zone in the cached TZif terms as one of ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
-		argnames is ['Zone', 'LocalDateTime', 'Result']
+		argnames is ['Zone', 'LocalDateTime', 'Result'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time' - error
+		]
 	]).
 
 	:- public(local_abbreviation_reified/2).
 	:- mode(local_abbreviation_reified(+compound, -compound), one_or_error).
 	:- info(local_abbreviation_reified/2, [
 		comment is 'Cached single-zone convenience variant of reified local abbreviation lookup; returns ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
-		argnames is ['LocalDateTime', 'Result']
+		argnames is ['LocalDateTime', 'Result'],
+		exceptions is [
+			'Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time' - error
+		]
 	]).
 
 :- end_protocol.

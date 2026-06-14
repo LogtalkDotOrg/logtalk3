@@ -392,8 +392,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-09</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -485,6 +485,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pending_packets(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="packetize-tm-packets-6">
@@ -504,6 +517,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_tm_packets(+compound,+integer,+compound,+list(compound),-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -527,6 +565,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_tm_packets(+compound,+integer,+compound,+list(compound),-compound,-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="packetize-aos-packets-6">
@@ -546,6 +609,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_aos_packets(+compound,+integer,+compound,+list(compound),-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -569,6 +657,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_aos_packets(+compound,+integer,+compound,+list(compound),-compound,-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid AOS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="packetize-tm-frames-7">
@@ -588,6 +701,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_tm_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid list of TM transfer frame terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -611,6 +749,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_tm_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid list of TM transfer frame terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tm_transfer_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="packetize-aos-frames-7">
@@ -630,6 +793,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_aos_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid list of AOS transfer frame terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -653,6 +841,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">packetize_aos_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid list of AOS transfer frame terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_aos_transfer_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid packetizer state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packetizer_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid list of CCSDS packet terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_terms,Packets)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-idle-packet-4">
@@ -672,6 +885,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_idle_packet(+integer,+integer,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">SequenceCount</span></code>, or <code class="docutils literal notranslate"><span class="pre">UserDataLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SequenceCount</span></code> is neither a variable nor a valid CCSDS packet sequence count:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_sequence_count,SequenceCount)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">UserDataLength</span></code> is neither a variable nor a valid idle-packet user-data length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_idle_user_data_length,UserDataLength)</span></code></div>
+</div>
 </div>
 </div>
 </section>

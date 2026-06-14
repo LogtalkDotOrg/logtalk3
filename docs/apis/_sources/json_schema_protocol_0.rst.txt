@@ -14,8 +14,8 @@ JSON Schema parser and validator protocol.
 |    ``logtalk_load(json_schema(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-01-29
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -53,6 +53,14 @@ Parses a JSON schema from the given source (``file(Path)``, ``stream(Stream)``, 
 |    ``parse(Source,Schema)``
 | **Mode and number of proofs:**
 |    ``parse(++compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid JSON source term or does not contain parsable JSON:
+|        ``domain_error(json_source,Source)``
+|    The parsed JSON value is not a valid JSON Schema term:
+|        ``domain_error(json_schema,Schema)``
 
 
 ------------

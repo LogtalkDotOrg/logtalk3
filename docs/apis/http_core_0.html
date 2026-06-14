@@ -500,6 +500,39 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request(+atom,+compound,+compound,+list(compound),+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Method</span></code> is not a valid HTTP method atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_method,Method)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Target</span></code> is not a valid normalized HTTP target term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,Target)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is not a valid HTTP version term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_version,Version)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Headers</span></code> is not a valid normalized HTTP header list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Properties</span></code> is not a valid normalized HTTP property list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
+</div>
+<div class="line">The request headers, body, or properties violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="response-6">
@@ -519,6 +552,35 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">response(+compound,+compound,+list(compound),+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is not a valid HTTP version term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_version,Version)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Status</span></code> is not a valid normalized HTTP status term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_status,Status)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Headers</span></code> is not a valid normalized HTTP header list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Properties</span></code> is not a valid normalized HTTP property list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
+</div>
+<div class="line">The response headers, body, or properties violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -584,6 +646,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_request(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
+<div class="line">The parsed request violates normalized HTTP request validation or semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-request-2">
@@ -603,6 +682,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_request(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -626,6 +722,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_response(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
+<div class="line">The parsed response violates normalized HTTP response validation or semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-response-2">
@@ -645,6 +758,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -668,6 +798,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_response_headers(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parse-request-line-2">
@@ -687,6 +834,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_request_line(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -710,6 +870,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_request_line(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parse-status-line-2">
@@ -729,6 +902,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_status_line(++compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -752,6 +938,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_status_line(+compound,++compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parse-headers-2">
@@ -771,6 +970,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_headers(++compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -794,6 +1006,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_headers(+compound,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Headers</span></code> is not a valid normalized HTTP header list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parse-body-4">
@@ -813,6 +1042,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_body(++compound,++atom,+list(compound),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid HTTP media type atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line">No registered HTTP body codec exists for <code class="docutils literal notranslate"><span class="pre">MediaType</span></code> when codec-based decoding is required:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_body_codec,MediaType)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -836,6 +1090,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate_body(+compound,++compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line">No registered HTTP body codec exists for the body media type when codec-based encoding is required:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_body_codec,MediaType)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="encode-body-4">
@@ -855,6 +1134,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_body(+atom,++term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid HTTP media type atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line">No registered HTTP body codec exists for <code class="docutils literal notranslate"><span class="pre">MediaType</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_body_codec,MediaType)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -878,6 +1174,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_body(+atom,++compound,+list(compound),--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid HTTP media type atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line">No registered HTTP body codec exists for <code class="docutils literal notranslate"><span class="pre">MediaType</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_body_codec,MediaType)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="method-2">
@@ -898,6 +1211,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">method(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
 </div>
 <hr class="docutils" />
 </section>
@@ -920,6 +1236,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">target(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="version-2">
@@ -940,6 +1259,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">version(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
 </div>
 <hr class="docutils" />
 </section>
@@ -962,6 +1284,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">status(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="headers-2">
@@ -982,6 +1307,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">headers(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
 </div>
 <hr class="docutils" />
 </section>
@@ -1024,6 +1352,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">body(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
 </div>
 <hr class="docutils" />
 </section>

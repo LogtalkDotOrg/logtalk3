@@ -57,6 +57,10 @@ Accepts one incoming socket connection on the given listener, serves one WebSock
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,+object_identifier,-compound,-compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The listener or delegated WebSocket handshake and session handlers raise an exception:
+|        ``error``
+
 
 ------------
 
@@ -75,6 +79,10 @@ Accepts one incoming socket connection on the given listener, serves one WebSock
 |    ``serve_once(Listener,HandshakeHandler,SessionHandler,Response,State,ClientInfo,Options)``
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,+object_identifier,-compound,-compound,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The listener, session handlers, or loop options are invalid for WebSocket server-session startup:
+|        ``error``
 
 | **Remarks:**
 
@@ -103,6 +111,10 @@ Accepts WebSocket opening handshakes on the given listener until request_shutdow
 | **Mode and number of proofs:**
 |    ``serve_until_shutdown(+compound,+object_identifier,+object_identifier,+compound,+nonvar)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The listener, registry, control term, or delegated session handlers are invalid for registry-backed serving:
+|        ``error``
+
 | **Remarks:**
 
     - Thread support: This helper requires backend thread support so that multiple sessions can stay active concurrently.
@@ -126,6 +138,10 @@ Accepts WebSocket opening handshakes on the given listener until request_shutdow
 |    ``serve_until_shutdown(Listener,HandshakeHandler,SessionHandler,Registry,Control,Options)``
 | **Mode and number of proofs:**
 |    ``serve_until_shutdown(+compound,+object_identifier,+object_identifier,+compound,+nonvar,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The listener, registry, control term, or session-loop options are invalid for registry-backed serving:
+|        ``error``
 
 | **Remarks:**
 
@@ -152,6 +168,10 @@ Requests shutdown of a registry-backed server loop started with serve_until_shut
 |    ``request_shutdown(Control)``
 | **Mode and number of proofs:**
 |    ``request_shutdown(+nonvar)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Control`` is not a valid registered server-loop shutdown control term:
+|        ``error``
 
 
 ------------

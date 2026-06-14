@@ -32,7 +32,10 @@
 	:- mode(handle(+compound, -list(compound)), one_or_error).
 	:- info(handle/2, [
 		comment is 'Processes a received normalized WebSocket message and returns a list of zero or more session actions. Plain normalized messages are written back on the same session before the next read. When used with the registry-backed server helper, the list may also contain the action wrappers ``reply(Message)``, ``broadcast(Message)``, and ``broadcast_others(Message)``.',
-		argnames is ['Message', 'Replies']
+		argnames is ['Message', 'Replies'],
+		exceptions is [
+			'The implementing handler may throw message-specific or reply-construction exceptions' - error
+		]
 	]).
 
 :- end_protocol.

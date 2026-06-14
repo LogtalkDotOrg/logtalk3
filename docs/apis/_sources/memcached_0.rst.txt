@@ -14,8 +14,8 @@ Portable Memcached client implementing the text (ASCII) protocol. Uses the socke
 |    ``logtalk_load(memcached(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-09
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -306,6 +306,10 @@ Retrieves the value associated with the key. Fails if the key is not found.
 | **Mode and number of proofs:**
 |    ``get(+compound,+atom,-atom)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``get`` command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -324,6 +328,10 @@ Retrieves the value and flags associated with the key. Fails if the key is not f
 |    ``get(Connection,Key,Value,Flags)``
 | **Mode and number of proofs:**
 |    ``get(+compound,+atom,-atom,-integer)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``get`` command:
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -344,6 +352,10 @@ Retrieves the value and CAS unique token for the key. Fails if the key is not fo
 | **Mode and number of proofs:**
 |    ``gets(+compound,+atom,-atom,-integer)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``gets`` command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -362,6 +374,10 @@ Retrieves the value, flags, and CAS unique token for the key. Fails if the key i
 |    ``gets(Connection,Key,Value,Flags,CasUnique)``
 | **Mode and number of proofs:**
 |    ``gets(+compound,+atom,-atom,-integer,-integer)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``gets`` command:
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -382,6 +398,10 @@ Retrieves multiple keys at once. Returns a list of ``item(Key, Value, Flags)`` t
 | **Mode and number of proofs:**
 |    ``mget(+compound,+list(atom),-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the multi-key retrieval command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -400,6 +420,10 @@ Deletes the item with the given key. Fails if the key is not found.
 |    ``delete(Connection,Key)``
 | **Mode and number of proofs:**
 |    ``delete(+compound,+atom)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``delete`` command:
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -420,6 +444,10 @@ Increments the numeric value of the given key by the specified amount. Returns t
 | **Mode and number of proofs:**
 |    ``incr(+compound,+atom,+integer,-integer)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``incr`` command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -438,6 +466,10 @@ Decrements the numeric value of the given key by the specified amount. Returns t
 |    ``decr(Connection,Key,Amount,NewValue)``
 | **Mode and number of proofs:**
 |    ``decr(+compound,+atom,+integer,-integer)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``decr`` command:
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -458,6 +490,10 @@ Updates the expiration time of the given key without fetching the data. Fails if
 | **Mode and number of proofs:**
 |    ``touch(+compound,+atom,+integer)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``touch`` command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -476,6 +512,10 @@ Gets the value of the key and updates its expiration time. Fails if the key is n
 |    ``gat(Connection,Key,ExpTime,Value)``
 | **Mode and number of proofs:**
 |    ``gat(+compound,+atom,+integer,-atom)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``gat`` command:
+|        ``memcached_error(Error)``
 
 
 ------------
@@ -496,6 +536,10 @@ Gets the value and CAS unique token of the key and updates its expiration time. 
 | **Mode and number of proofs:**
 |    ``gats(+compound,+atom,+integer,-atom,-integer)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``gats`` command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -514,6 +558,12 @@ Invalidates all existing items immediately.
 |    ``flush_all(Connection)``
 | **Mode and number of proofs:**
 |    ``flush_all(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``flush_all`` command:
+|        ``memcached_error(Error)``
+|    The server replies with an error to the ``flush_all`` command:
+|        ``memcached_error(server_error(Message))``
 
 
 ------------
@@ -534,6 +584,12 @@ Invalidates all existing items after the specified number of seconds.
 | **Mode and number of proofs:**
 |    ``flush_all(+compound,+integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the delayed ``flush_all`` command:
+|        ``memcached_error(Error)``
+|    The server replies with an error to the delayed ``flush_all`` command:
+|        ``memcached_error(server_error(Message))``
+
 
 ------------
 
@@ -552,6 +608,12 @@ Returns the version string of the Memcached server.
 |    ``version(Connection,Version)``
 | **Mode and number of proofs:**
 |    ``version(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``version`` command:
+|        ``memcached_error(Error)``
+|    The server replies with an unexpected or error response to the ``version`` command:
+|        ``memcached_error(server_error(Message))``
 
 
 ------------
@@ -572,6 +634,10 @@ Returns general-purpose statistics as a list of ``stat(Name, Value)`` terms.
 | **Mode and number of proofs:**
 |    ``stats(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the ``stats`` command:
+|        ``memcached_error(Error)``
+
 
 ------------
 
@@ -590,6 +656,10 @@ Returns statistics for the given argument (e.g. ``items``, ``slabs``, ``sizes``)
 |    ``stats(Connection,Argument,Stats)``
 | **Mode and number of proofs:**
 |    ``stats(+compound,+atom,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Network or stream I/O error while sending or reading the parameterized ``stats`` command:
+|        ``memcached_error(Error)``
 
 
 ------------

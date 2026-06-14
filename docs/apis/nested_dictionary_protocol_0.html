@@ -395,8 +395,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paul Brown and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:1:0</div>
-<div class="line"><strong>Date:</strong> 2021-04-07</div>
+<div class="line"><strong>Version:</strong> 0:1:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -505,6 +505,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">as_nested_dictionary(++term,--dictionary)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is neither a variable nor a valid curly-bracketed term representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(curly_bracketed_term,Term)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Dictionary</span></code> is instantiated:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uninstantiation_error(Dictionary)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="as-curly-bracketed-2">
@@ -524,6 +541,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">as_curly_bracketed(+dictionary,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Dictionary</span></code> is a variable or contains a variable leaf value that cannot be represented:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is instantiated:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uninstantiation_error(Term)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

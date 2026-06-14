@@ -458,6 +458,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse(++compound,--pair)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid Protocol Buffers source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is not a valid Protocol Buffers schema for the encoded message:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_schema,Schema)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parse-3">
@@ -477,6 +494,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse(++compound,++term,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid Protocol Buffers source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is not a valid Protocol Buffers schema for the encoded message:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_schema,Schema)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -500,6 +534,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate(++compound,++term,++term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid Protocol Buffers sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is not a valid Protocol Buffers schema for <code class="docutils literal notranslate"><span class="pre">Data</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_schema,Schema)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-4">
@@ -519,6 +570,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate(++compound,++boolean,++term,++term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid Protocol Buffers sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Schema</span></code> is not a valid Protocol Buffers schema for <code class="docutils literal notranslate"><span class="pre">Data</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(protobuf_schema,Schema)</span></code></div>
+</div>
 </div>
 </div>
 </section>

@@ -59,6 +59,10 @@ Constructs a validated normalized WebSocket message term from the message type a
 | **Mode and number of proofs:**
 |    ``message(+atom,+term,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Type`` or ``Payload`` do not define a valid normalized WebSocket message term:
+|        ``error``
+
 | **Remarks:**
 
     - Type ``text``: Payload is text in the selected text representation.
@@ -104,6 +108,10 @@ Reads one WebSocket message from a binary stream. Continuation frames are reasse
 | **Mode and number of proofs:**
 |    ``read_message(+stream_or_alias,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Stream`` is a variable or the inbound frames do not form a valid normalized WebSocket message sequence:
+|        ``error``
+
 | **Remarks:**
 
     - Interleaved control frames: Control frames interleaved in the middle of a fragmented data message are not surfaced by this simplified layer and instead raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` when interleaved control frames must be handled while a fragmented message is in progress.
@@ -127,6 +135,10 @@ Writes one validated WebSocket message as a single final frame to a binary strea
 | **Mode and number of proofs:**
 |    ``write_message(+stream_or_alias,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Stream`` is a variable or ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
+
 
 ------------
 
@@ -146,6 +158,10 @@ Returns the type atom of a validated WebSocket message term.
 | **Mode and number of proofs:**
 |    ``type(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
+
 
 ------------
 
@@ -164,6 +180,10 @@ Returns the payload term of a validated WebSocket message term.
 |    ``payload(Message,Payload)``
 | **Mode and number of proofs:**
 |    ``payload(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
 
 
 ------------
@@ -187,6 +207,10 @@ Protected helper that normalizes a WebSocket message term and returns the normal
 | **Mode and number of proofs:**
 |    ``encode_message(+compound,-compound,-atom,-list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
+
 
 ------------
 
@@ -205,6 +229,10 @@ Protected helper that decodes payload bytes for the given message type atom into
 |    ``decode_message(Type,PayloadBytes,Message)``
 | **Mode and number of proofs:**
 |    ``decode_message(+atom,+list(byte),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Type`` is not a supported WebSocket message type or ``PayloadBytes`` do not decode to a valid message payload:
+|        ``error``
 
 
 ------------

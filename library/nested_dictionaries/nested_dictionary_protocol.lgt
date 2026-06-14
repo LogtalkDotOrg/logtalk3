@@ -23,9 +23,9 @@
 :- protocol(nested_dictionary_protocol).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2021-04-07,
+		date is 2026-06-14,
 		comment is 'Nested dictionary protocol.',
 		see_also is [navltree, nbintree, nrbtree]
 	]).
@@ -48,14 +48,23 @@
 	:- mode(as_nested_dictionary(++term, --dictionary), one_or_error).
 	:- info(as_nested_dictionary/2, [
 		comment is 'Creates a (nested) dictionary term from a curly-brackted term representation.',
-		argnames is ['Term', 'Dictionary']
+		argnames is ['Term', 'Dictionary'],
+		exceptions is [
+			'``Term`` is a variable' - instantiation_error,
+			'``Term`` is neither a variable nor a valid curly-bracketed term representation' - type_error(curly_bracketed_term, 'Term'),
+			'``Dictionary`` is instantiated' - uninstantiation_error('Dictionary')
+		]
 	]).
 
 	:- public(as_curly_bracketed/2).
 	:- mode(as_curly_bracketed(+dictionary, --term), one_or_error).
 	:- info(as_curly_bracketed/2, [
 		comment is 'Creates a a curly-brackted term representation from a (nested) dictionary.',
-		argnames is ['Dictionary', 'Term']
+		argnames is ['Dictionary', 'Term'],
+		exceptions is [
+			'``Dictionary`` is a variable or contains a variable leaf value that cannot be represented' - instantiation_error,
+			'``Term`` is instantiated' - uninstantiation_error('Term')
+		]
 	]).
 
 	:- public(lookup_in/3).

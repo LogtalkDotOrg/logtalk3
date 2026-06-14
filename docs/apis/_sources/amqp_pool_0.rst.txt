@@ -14,8 +14,8 @@ AMQP connection pool category. Import this category into an object to create a n
 |    ``logtalk_load(amqp(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-19
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -54,6 +54,10 @@ Initializes the connection pool with the given configuration options. Must be ca
 |    ``initialize(Options)``
 | **Mode and number of proofs:**
 |    ``initialize(+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` configure a minimum pool size greater than the maximum pool size:
+|        ``pool_error(invalid_config(min_size > max_size))``
 
 | **Remarks:**
 

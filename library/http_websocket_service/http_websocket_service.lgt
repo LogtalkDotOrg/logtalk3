@@ -89,6 +89,9 @@
 	:- info(run_session/3, [
 		comment is 'Runs a higher-level session loop on an upgraded http_socket WebSocket connection until the close handshake completes or the peer closes the stream, then closes the upgraded connection automatically.',
 		argnames is ['Connection', 'Handler', 'State'],
+		exceptions is [
+			'``Connection`` or ``Handler`` are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception' - error
+		],
 		remarks is [
 			'Handler protocol' - 'The handler object must conform to the ``http_websocket_service_handler_protocol`` protocol and return a list of normalized reply messages for each received message.',
 			'Connection ownership' - 'This predicate takes ownership of the upgraded connection and closes it before succeeding or rethrowing any exception.'
@@ -100,6 +103,9 @@
 	:- info(run_session/4, [
 		comment is 'Runs a higher-level session loop on an upgraded http_socket WebSocket connection using the given loop options, then closes the upgraded connection automatically.',
 		argnames is ['Connection', 'Handler', 'State', 'Options'],
+		exceptions is [
+			'``Connection``, ``Handler``, or ``Options`` are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception' - error
+		],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes pong replies while still forwarding ping messages to the handler.',
 			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.',
@@ -113,14 +119,20 @@
 	:- mode(run_session_connection(+compound, +compound, +compound, -compound, +list), one_or_error).
 	:- info(run_session_connection/5, [
 		comment is 'Protected helper that runs the callback-driven session loop on an upgraded WebSocket connection starting from the given session state and using the given loop options. Connection ownership is handled by the caller.',
-		argnames is ['Connection', 'HandlerDescriptor', 'State', 'UpdatedState', 'Options']
+		argnames is ['Connection', 'HandlerDescriptor', 'State', 'UpdatedState', 'Options'],
+		exceptions is [
+			'The connection, handler descriptor, session state, or loop options are invalid for the callback-driven session loop' - error
+		]
 	]).
 
 	:- protected(validate_non_negative_integer_option/4).
 	:- mode(validate_non_negative_integer_option(+atom, +atom, @term, -integer), one_or_error).
 	:- info(validate_non_negative_integer_option/4, [
 		comment is 'Validates a non-negative integer option value for the given domain and option name.',
-		argnames is ['Domain', 'Name', 'Value', 'ValidatedValue']
+		argnames is ['Domain', 'Name', 'Value', 'ValidatedValue'],
+		exceptions is [
+			'``Value`` is not a non-negative integer option value for the given domain and option name' - error
+		]
 	]).
 
 	:- uses(list, [
@@ -704,7 +716,10 @@
 	:- mode(open(+atom, +object_identifier, -compound, -compound), one_or_error).
 	:- info(open/4, [
 		comment is 'Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop until the close handshake completes or the peer closes the stream.',
-		argnames is ['URL', 'Handler', 'Response', 'State']
+		argnames is ['URL', 'Handler', 'Response', 'State'],
+		exceptions is [
+			'``URL`` or ``Handler`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception' - error
+		]
 	]).
 
 	:- public(open/5).
@@ -712,6 +727,9 @@
 	:- info(open/5, [
 		comment is 'Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop using the given combined handshake and session options.',
 		argnames is ['URL', 'Handler', 'Response', 'State', 'Options'],
+		exceptions is [
+			'``URL``, ``Handler``, or ``Options`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception' - error
+		],
 		remarks is [
 			'Repeated options' - 'When the same handshake or session option is given multiple times, the first occurrence is used.',
 			'Handshake options' - 'The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `http_client::open_websocket/4`.',
@@ -868,7 +886,10 @@
 	:- mode(serve_once(+compound, +object_identifier, +object_identifier, -compound, -compound, -compound), one_or_error).
 	:- info(serve_once/6, [
 		comment is 'Accepts one incoming socket connection on the given listener, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler until the close handshake completes or the peer closes the stream.',
-		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo']
+		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo'],
+		exceptions is [
+			'The listener or delegated WebSocket handshake and session handlers raise an exception' - error
+		]
 	]).
 
 	:- public(serve_once/7).
@@ -876,6 +897,9 @@
 	:- info(serve_once/7, [
 		comment is 'Accepts one incoming socket connection on the given listener, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler and the given session-loop options.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo', 'Options'],
+		exceptions is [
+			'The listener, session handlers, or loop options are invalid for WebSocket server-session startup' - error
+		],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes pong replies while still forwarding ping messages to the session handler.',
 			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.',
@@ -890,6 +914,9 @@
 	:- info(serve_until_shutdown/5, [
 		comment is 'Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control'],
+		exceptions is [
+			'The listener, registry, control term, or delegated session handlers are invalid for registry-backed serving' - error
+		],
 		remarks is [
 			'Thread support' - 'This helper requires backend thread support so that multiple sessions can stay active concurrently.',
 			'Handler actions' - 'Plain normalized messages are written back to the originating session. ``broadcast(Message)`` queues ``Message`` for all registered sessions and ``broadcast_others(Message)`` queues it for all registered sessions except the originating one.'
@@ -901,6 +928,9 @@
 	:- info(serve_until_shutdown/6, [
 		comment is 'Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control', 'Options'],
+		exceptions is [
+			'The listener, registry, control term, or session-loop options are invalid for registry-backed serving' - error
+		],
 		remarks is [
 			'Option ``auto_pong(on|off)``' - 'Controls automatic pong replies in each active session loop.',
 			'Option ``keepalive_interval(Seconds)``' - 'Schedules empty ping messages when a peer stays silent for the given positive number of seconds.',
@@ -913,7 +943,10 @@
 	:- mode(request_shutdown(+nonvar), one_or_error).
 	:- info(request_shutdown/1, [
 		comment is 'Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
-		argnames is ['Control']
+		argnames is ['Control'],
+		exceptions is [
+			'``Control`` is not a valid registered server-loop shutdown control term' - error
+		]
 	]).
 
 	:- if(current_logtalk_flag(threads, supported)).

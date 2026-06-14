@@ -98,6 +98,10 @@ Parses one Basic challenge header field value into a normalized ``basic_challeng
 | **Mode and number of proofs:**
 |    ``parse_challenge(++text,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Text`` is not a valid Basic challenge header value:
+|        ``error``
+
 
 ------------
 
@@ -116,6 +120,10 @@ Generates one canonical Basic challenge header field value from a normalized ``b
 |    ``generate_challenge(Challenge,HeaderValue)``
 | **Mode and number of proofs:**
 |    ``generate_challenge(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Challenge`` is not a valid normalized Basic challenge term:
+|        ``error``
 
 
 ------------
@@ -136,6 +144,10 @@ Parses one Basic authorization header field value into a normalized ``basic_auth
 | **Mode and number of proofs:**
 |    ``parse_authorization(++text,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Text`` is not a valid Basic authorization header value:
+|        ``error``
+
 
 ------------
 
@@ -154,6 +166,10 @@ Generates one canonical Basic authorization header field value from a normalized
 |    ``generate_authorization(Authorization,HeaderValue)``
 | **Mode and number of proofs:**
 |    ``generate_authorization(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Authorization`` is not a valid normalized Basic authorization term:
+|        ``error``
 
 
 ------------
@@ -174,6 +190,10 @@ Verifies a normalized HTTP request using a Basic verifier object and returns eit
 | **Mode and number of proofs:**
 |    ``protect_request(+compound,+object_identifier,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` or ``Options`` are invalid, or the verifier object rejects the request with an exception:
+|        ``error``
+
 
 ------------
 
@@ -193,6 +213,10 @@ Builds a normalized ``401 Unauthorized`` response and returns the generated norm
 | **Mode and number of proofs:**
 |    ``unauthorized_response(-compound,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Options`` are invalid for Basic challenge generation or response construction:
+|        ``error``
+
 
 ------------
 
@@ -211,6 +235,10 @@ Decorates a normalized HTTP response with an explicit normalized Basic challenge
 |    ``unauthorized_response(Challenge,Response0,Response,Options)``
 | **Mode and number of proofs:**
 |    ``unauthorized_response(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Challenge`` or ``Response0`` are invalid, or ``Options`` are invalid for unauthorized-response construction:
+|        ``error``
 
 
 ------------

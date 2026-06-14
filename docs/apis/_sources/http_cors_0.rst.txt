@@ -115,6 +115,12 @@ Builds a normalized CORS preflight response using the given policy options. Allo
 | **Mode and number of proofs:**
 |    ``preflight_response(+compound,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` is not a CORS preflight request:
+|        ``domain_error(http_cors_preflight_request,Request)``
+|    ``Options`` contain invalid CORS policy declarations:
+|        ``error``
+
 
 ------------
 
@@ -133,6 +139,10 @@ Decorates a normalized response with the relevant CORS response headers when the
 |    ``add_response_headers(Request,Response0,Response,Options)``
 | **Mode and number of proofs:**
 |    ``add_response_headers(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` contain invalid CORS policy declarations or the delegated response builder rejects the normalized response terms:
+|        ``error``
 
 
 ------------

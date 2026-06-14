@@ -126,6 +126,10 @@ Closes the AMQP connection with a specific reply code and reason.
 | **Mode and number of proofs:**
 |    ``close(+compound,+integer,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is not a valid AMQP connection handle:
+|        ``error``
+
 
 ------------
 
@@ -187,6 +191,10 @@ Closes a channel.
 | **Mode and number of proofs:**
 |    ``channel_close(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is not a valid AMQP channel handle:
+|        ``error``
+
 
 ------------
 
@@ -206,6 +214,10 @@ Closes a channel with a specific reply code and reason.
 | **Mode and number of proofs:**
 |    ``channel_close(+compound,+integer,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is not a valid AMQP channel handle:
+|        ``error``
+
 
 ------------
 
@@ -224,6 +236,10 @@ Declares an exchange on the server.
 |    ``exchange_declare(Channel,Exchange,Options)``
 | **Mode and number of proofs:**
 |    ``exchange_declare(+compound,+atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the exchange declaration:
+|        ``amqp_error(exchange_error(Message))``
 
 | **Remarks:**
 
@@ -252,6 +268,10 @@ Deletes an exchange.
 | **Mode and number of proofs:**
 |    ``exchange_delete(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the exchange deletion:
+|        ``amqp_error(exchange_error(Message))``
+
 | **Remarks:**
 
     - Option if_unused(Boolean): Only delete if unused. Default is false.
@@ -274,6 +294,10 @@ Binds an exchange to another exchange.
 |    ``exchange_bind(Channel,Destination,Source,Options)``
 | **Mode and number of proofs:**
 |    ``exchange_bind(+compound,+atom,+atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the exchange binding:
+|        ``amqp_error(exchange_error(Message))``
 
 | **Remarks:**
 
@@ -299,6 +323,10 @@ Unbinds an exchange from another exchange.
 | **Mode and number of proofs:**
 |    ``exchange_unbind(+compound,+atom,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the exchange unbinding:
+|        ``amqp_error(exchange_error(Message))``
+
 
 ------------
 
@@ -317,6 +345,10 @@ Declares a queue on the server. If Queue is a variable, the server generates a u
 |    ``queue_declare(Channel,Queue,Options)``
 | **Mode and number of proofs:**
 |    ``queue_declare(+compound,?atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the queue declaration:
+|        ``amqp_error(queue_error(Message))``
 
 | **Remarks:**
 
@@ -344,6 +376,10 @@ Deletes a queue.
 | **Mode and number of proofs:**
 |    ``queue_delete(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the queue deletion:
+|        ``amqp_error(queue_error(Message))``
+
 | **Remarks:**
 
     - Option if_unused(Boolean): Only delete if unused. Default is false.
@@ -367,6 +403,10 @@ Binds a queue to an exchange.
 |    ``queue_bind(Channel,Queue,Exchange,Options)``
 | **Mode and number of proofs:**
 |    ``queue_bind(+compound,+atom,+atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the queue binding:
+|        ``amqp_error(queue_error(Message))``
 
 | **Remarks:**
 
@@ -392,6 +432,10 @@ Unbinds a queue from an exchange.
 | **Mode and number of proofs:**
 |    ``queue_unbind(+compound,+atom,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the queue unbinding:
+|        ``amqp_error(queue_error(Message))``
+
 
 ------------
 
@@ -411,6 +455,10 @@ Purges all messages from a queue.
 | **Mode and number of proofs:**
 |    ``queue_purge(+compound,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the queue purge request:
+|        ``amqp_error(queue_error(Message))``
+
 
 ------------
 
@@ -429,6 +477,10 @@ Publishes a message to an exchange.
 |    ``basic_publish(Channel,Exchange,Body,Options)``
 | **Mode and number of proofs:**
 |    ``basic_publish(+compound,+atom,+term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid, ``Body`` cannot be encoded, or the frame/content transmission fails:
+|        ``error``
 
 | **Remarks:**
 
@@ -468,6 +520,10 @@ Starts consuming messages from a queue.
 | **Mode and number of proofs:**
 |    ``basic_consume(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the consume request:
+|        ``amqp_error(basic_error(Message))``
+
 | **Remarks:**
 
     - Option consumer_tag(Tag): Consumer identifier. Server generates if not provided.
@@ -495,6 +551,10 @@ Cancels a consumer.
 | **Mode and number of proofs:**
 |    ``basic_cancel(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the cancel request:
+|        ``amqp_error(basic_error(Message))``
+
 
 ------------
 
@@ -513,6 +573,10 @@ Synchronously gets a message from a queue.
 |    ``basic_get(Channel,Queue,Options)``
 | **Mode and number of proofs:**
 |    ``basic_get(+compound,+atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server replies with an unexpected ``basic.get`` result:
+|        ``amqp_error(basic_error(Message))``
 
 | **Remarks:**
 
@@ -537,6 +601,10 @@ Acknowledges a message.
 | **Mode and number of proofs:**
 |    ``basic_ack(+compound,+integer,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the acknowledgment frame cannot be sent:
+|        ``error``
+
 | **Remarks:**
 
     - Option multiple(Boolean): Acknowledge all up to this tag. Default is false.
@@ -559,6 +627,10 @@ Negatively acknowledges a message (RabbitMQ extension).
 |    ``basic_nack(Channel,DeliveryTag,Options)``
 | **Mode and number of proofs:**
 |    ``basic_nack(+compound,+integer,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the negative-acknowledgment frame cannot be sent:
+|        ``error``
 
 | **Remarks:**
 
@@ -584,6 +656,10 @@ Rejects a message.
 | **Mode and number of proofs:**
 |    ``basic_reject(+compound,+integer,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the reject frame cannot be sent:
+|        ``error``
+
 | **Remarks:**
 
     - Option requeue(Boolean): Requeue the message. Default is true.
@@ -606,6 +682,10 @@ Sets quality of service (prefetch) settings.
 |    ``basic_qos(Channel,Options)``
 | **Mode and number of proofs:**
 |    ``basic_qos(+compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the QoS request:
+|        ``amqp_error(basic_error(Message))``
 
 | **Remarks:**
 
@@ -632,6 +712,10 @@ Asks the server to redeliver unacknowledged messages.
 | **Mode and number of proofs:**
 |    ``basic_recover(+compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects the recover request:
+|        ``amqp_error(basic_error(Message))``
+
 | **Remarks:**
 
     - Option requeue(Boolean): Requeue messages. Default is false.
@@ -654,6 +738,10 @@ Receives a message or method from the server. Blocks until data is available or 
 |    ``receive(Channel,Message,Options)``
 | **Mode and number of proofs:**
 |    ``receive(+compound,-compound,+list)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the received frame sequence is not a valid AMQP content delivery:
+|        ``error``
 
 | **Remarks:**
 
@@ -678,6 +766,10 @@ Enables transaction mode on a channel.
 | **Mode and number of proofs:**
 |    ``tx_select(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects ``tx.select``:
+|        ``amqp_error(tx_error(Message))``
+
 
 ------------
 
@@ -696,6 +788,10 @@ Commits the current transaction.
 |    ``tx_commit(Channel)``
 | **Mode and number of proofs:**
 |    ``tx_commit(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects ``tx.commit``:
+|        ``amqp_error(tx_error(Message))``
 
 
 ------------
@@ -716,6 +812,10 @@ Rolls back the current transaction.
 | **Mode and number of proofs:**
 |    ``tx_rollback(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects ``tx.rollback``:
+|        ``amqp_error(tx_error(Message))``
+
 
 ------------
 
@@ -735,6 +835,10 @@ Enables publisher confirms on a channel (RabbitMQ extension).
 | **Mode and number of proofs:**
 |    ``confirm_select(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Channel`` is invalid or the server rejects ``confirm.select``:
+|        ``amqp_error(confirm_error(Message))``
+
 
 ------------
 
@@ -753,6 +857,10 @@ Sends a heartbeat frame to the server.
 |    ``send_heartbeat(Connection)``
 | **Mode and number of proofs:**
 |    ``send_heartbeat(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is not a valid AMQP connection handle or the heartbeat frame cannot be sent:
+|        ``error``
 
 
 ------------
@@ -906,6 +1014,10 @@ Decodes a list of bytes to an AMQP frame.
 | **Mode and number of proofs:**
 |    ``decode_frame(+list,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Bytes`` do not encode a valid complete AMQP frame payload:
+|        ``error``
+
 
 ------------
 
@@ -923,8 +1035,19 @@ Private predicates
 ``decode_field_value/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Decodes one AMQP field-table value from a byte list, returning the normalized typed value plus the remaining undecoded bytes.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``decode_field_value(Bytes,Value,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_field_value(+list(integer),-compound,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` do not start with a supported AMQP field-table value encoding:
+|        ``error``
 
 
 ------------

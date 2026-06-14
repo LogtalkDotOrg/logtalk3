@@ -14,8 +14,8 @@ Shared predicates for regressor learning defaults, diagnostics, validation, data
 |    ``logtalk_load(regression_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-05-21
+| **Version:** 1:1:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -1167,6 +1167,10 @@ Solves a square linear system using partial pivoting Gaussian elimination and re
 | **Mode and number of proofs:**
 |    ``solve_linear_system(+list(list(float)),+list(float),-list(float),-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The linear system is singular because a pivot coefficient becomes numerically zero:
+|        ``evaluation_error(zero_divisor)``
+
 
 ------------
 
@@ -1204,6 +1208,10 @@ Transforms an augmented matrix into upper-triangular form using partial pivoting
 |    ``triangularize(Rows0,UpperRows)``
 | **Mode and number of proofs:**
 |    ``triangularize(+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A pivot coefficient is numerically zero during elimination:
+|        ``evaluation_error(zero_divisor)``
 
 
 ------------
@@ -1322,6 +1330,10 @@ Performs back-substitution on an upper-triangular augmented matrix.
 |    ``back_substitution(UpperRows,Solution)``
 | **Mode and number of proofs:**
 |    ``back_substitution(+list(compound),-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A diagonal coefficient is numerically zero during back-substitution:
+|        ``evaluation_error(zero_divisor)``
 
 
 ------------

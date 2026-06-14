@@ -37,77 +37,109 @@
 	:- mode(open(-compound, ++text, ++text), one_or_error).
 	:- info(open/3, [
 		comment is 'Opens a new Digest client session with the given username and password and a freshly created owned cookie jar.',
-		argnames is ['Session', 'Username', 'Password']
+		argnames is ['Session', 'Username', 'Password'],
+		exceptions is []
 	]).
 
 	:- public(open/4).
 	:- mode(open(-compound, ++text, ++text, +list(compound)), one_or_error).
 	:- info(open/4, [
 		comment is 'Opens a new Digest client session using the given credentials plus cookie-jar, request-default, and default Digest authorization options.',
-		argnames is ['Session', 'Username', 'Password', 'Options']
+		argnames is ['Session', 'Username', 'Password', 'Options'],
+		exceptions is [
+			'``Options`` contain invalid Digest session defaults or cookie-jar options' - error
+		]
 	]).
 
 	:- public(close/1).
 	:- mode(close(+compound), one_or_error).
 	:- info(close/1, [
 		comment is 'Closes a Digest client session and, when applicable, the owned cookie jar created for it.',
-		argnames is ['Session']
+		argnames is ['Session'],
+		exceptions is [
+			'``Session`` is not an open Digest client session handle' - error
+		]
 	]).
 
 	:- public(cookie_jar/2).
 	:- mode(cookie_jar(+compound, -term), one_or_error).
 	:- info(cookie_jar/2, [
 		comment is 'Returns the configured cookie jar handle or the atom ``none`` when the session does not persist cookies.',
-		argnames is ['Session', 'Jar']
+		argnames is ['Session', 'Jar'],
+		exceptions is [
+			'``Session`` is not an open Digest client session handle' - error
+		]
 	]).
 
 	:- public(request/5).
 	:- mode(request(+compound, +atom, +atom, -compound, +list(compound)), one_or_error).
 	:- info(request/5, [
 		comment is 'Performs one HTTP request using session defaults, cookie replay/storage, and automatic retry when the server replies with a Digest challenge.',
-		argnames is ['Session', 'Method', 'URL', 'Response', 'Options']
+		argnames is ['Session', 'Method', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'``Session`` is not an open Digest client session handle' - error,
+			'``Options`` contain invalid Digest request options or the delegated client/authentication processing raises an exception' - error
+		]
 	]).
 
 	:- public(get/4).
 	:- mode(get(+compound, +atom, -compound, +list(compound)), one_or_error).
 	:- info(get/4, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``get`` method.',
-		argnames is ['Session', 'URL', 'Response', 'Options']
+		argnames is ['Session', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+		]
 	]).
 
 	:- public(head/4).
 	:- mode(head(+compound, +atom, -compound, +list(compound)), one_or_error).
 	:- info(head/4, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``head`` method.',
-		argnames is ['Session', 'URL', 'Response', 'Options']
+		argnames is ['Session', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+		]
 	]).
 
 	:- public(delete/4).
 	:- mode(delete(+compound, +atom, -compound, +list(compound)), one_or_error).
 	:- info(delete/4, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``delete`` method.',
-		argnames is ['Session', 'URL', 'Response', 'Options']
+		argnames is ['Session', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+		]
 	]).
 
 	:- public(post/5).
 	:- mode(post(+compound, +atom, +compound, -compound, +list(compound)), one_or_error).
 	:- info(post/5, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``post`` method and the given body.',
-		argnames is ['Session', 'URL', 'Body', 'Response', 'Options']
+		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(put/5).
 	:- mode(put(+compound, +atom, +compound, -compound, +list(compound)), one_or_error).
 	:- info(put/5, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``put`` method and the given body.',
-		argnames is ['Session', 'URL', 'Body', 'Response', 'Options']
+		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(patch/5).
 	:- mode(patch(+compound, +atom, +compound, -compound, +list(compound)), one_or_error).
 	:- info(patch/5, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``patch`` method and the given body.',
-		argnames is ['Session', 'URL', 'Body', 'Response', 'Options']
+		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- private(session_seed_/1).

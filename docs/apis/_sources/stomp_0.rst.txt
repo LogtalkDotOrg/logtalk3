@@ -95,6 +95,10 @@ Gracefully disconnects from the STOMP server. Sends DISCONNECT frame and waits f
 | **Mode and number of proofs:**
 |    ``disconnect(+compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is not a valid STOMP connection handle:
+|        ``error``
+
 | **Remarks:**
 
     - Option receipt(ReceiptId): Request receipt confirmation. Automatically generated if not specified.
@@ -137,6 +141,10 @@ Sends a message to the specified destination.
 | **Mode and number of proofs:**
 |    ``send(+compound,+atom,+term,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is invalid, ``Body`` cannot be encoded, or the SEND frame cannot be transmitted:
+|        ``stomp_error(error)``
+
 | **Remarks:**
 
     - Option content_type(MimeType): MIME type of the body.
@@ -164,6 +172,10 @@ Subscribes to a destination to receive messages.
 | **Mode and number of proofs:**
 |    ``subscribe(+compound,+atom,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is invalid, the acknowledgment mode is unsupported, or the SUBSCRIBE frame cannot be transmitted:
+|        ``stomp_error(error)``
+
 | **Remarks:**
 
     - Option ack(Mode): Acknowledgment mode: auto (default), client, or client_individual.
@@ -187,6 +199,10 @@ Unsubscribes from a destination.
 | **Mode and number of proofs:**
 |    ``unsubscribe(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is invalid or the UNSUBSCRIBE frame cannot be transmitted:
+|        ``stomp_error(error)``
+
 
 ------------
 
@@ -205,6 +221,10 @@ Receives a frame from the server. Returns MESSAGE, RECEIPT, or ERROR frames.
 |    ``receive(Connection,Frame,Options)``
 | **Mode and number of proofs:**
 |    ``receive(+compound,-compound,+list)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is invalid or the input stream does not contain a valid STOMP frame within the requested timeout:
+|        ``error``
 
 | **Remarks:**
 
@@ -229,6 +249,10 @@ Acknowledges receipt of a message.
 | **Mode and number of proofs:**
 |    ``ack(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is invalid or the ACK frame cannot be transmitted:
+|        ``stomp_error(error)``
+
 | **Remarks:**
 
     - Option transaction(TransactionId): Include acknowledgment in the named transaction.
@@ -251,6 +275,10 @@ Negatively acknowledges a message (tells server the message was not consumed).
 |    ``nack(Connection,AckId,Options)``
 | **Mode and number of proofs:**
 |    ``nack(+compound,+atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is invalid or the NACK frame cannot be transmitted:
+|        ``stomp_error(error)``
 
 | **Remarks:**
 
@@ -275,6 +303,10 @@ Begins a new transaction.
 | **Mode and number of proofs:**
 |    ``begin_transaction(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is invalid or the BEGIN frame cannot be transmitted:
+|        ``stomp_error(error)``
+
 
 ------------
 
@@ -293,6 +325,10 @@ Commits a transaction, making all its operations permanent.
 |    ``commit_transaction(Connection,TransactionId,Options)``
 | **Mode and number of proofs:**
 |    ``commit_transaction(+compound,+atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is invalid or the COMMIT frame cannot be transmitted:
+|        ``stomp_error(error)``
 
 
 ------------
@@ -313,6 +349,10 @@ Aborts a transaction, rolling back all its operations.
 | **Mode and number of proofs:**
 |    ``abort_transaction(+compound,+atom,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Connection`` is invalid or the ABORT frame cannot be transmitted:
+|        ``stomp_error(error)``
+
 
 ------------
 
@@ -331,6 +371,10 @@ Sends a heartbeat (EOL) to the server to keep the connection alive.
 |    ``send_heartbeat(Connection)``
 | **Mode and number of proofs:**
 |    ``send_heartbeat(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is invalid or the heartbeat cannot be written to the output stream:
+|        ``stomp_error(error)``
 
 
 ------------

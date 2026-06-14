@@ -14,8 +14,8 @@ Helpers for CCSDS telecommand segment extraction, insertion, and cross-frame TC 
 |    ``logtalk_load(ccsds_tc_services(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2026-05-08
+| **Version:** 0:1:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -320,6 +320,12 @@ Extracts a telecommand segment from a telecommand transfer frame using the repre
 | **Mode and number of proofs:**
 |    ``extract_tc_segment(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+
 
 ------------
 
@@ -338,6 +344,14 @@ Updates a telecommand transfer frame from a telecommand segment term by encoding
 |    ``insert_tc_segment(Segment,Frame,UpdatedFrame)``
 | **Mode and number of proofs:**
 |    ``insert_tc_segment(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Segment`` or ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Segment`` is neither a variable nor a valid telecommand segment term:
+|        ``domain_error(ccsds_tc_segment,Segment)``
+|    ``Frame`` has an invalid telecommand segment header suffix encoding:
+|        ``domain_error(ccsds_tc_segment_header,SegmentHeader)``
 
 
 ------------
@@ -358,6 +372,20 @@ Reassembles complete telecommand service units from a single telecommand transfe
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frame(+compound,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    The telecommand frame sequence is discontinuous:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
+
 
 ------------
 
@@ -376,6 +404,22 @@ Reassembles complete telecommand service units from a single telecommand transfe
 |    ``reassemble_tc_frame(Frame,Policy,State,Segments,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frame(+compound,+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    ``Policy`` is neither a variable nor a valid telecommand discontinuity recovery policy:
+|        ``domain_error(ccsds_tc_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    The telecommand frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
 
 
 ------------
@@ -396,6 +440,22 @@ Reassembles complete telecommand service units from a single telecommand transfe
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frame(+compound,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    ``Policy`` is neither a variable nor a valid telecommand discontinuity recovery policy:
+|        ``domain_error(ccsds_tc_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    The telecommand frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
+
 
 ------------
 
@@ -414,6 +474,20 @@ Reassembles complete telecommand service units across a sequence of telecommand 
 |    ``reassemble_tc_frames(Frames,State,Segments,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frames(+list(compound),+compound,-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames`` or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    The telecommand frame sequence is discontinuous:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
 
 
 ------------
@@ -434,6 +508,22 @@ Reassembles complete telecommand service units across a sequence of telecommand 
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frames(+list(compound),+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Policy`` is neither a variable nor a valid telecommand discontinuity recovery policy:
+|        ``domain_error(ccsds_tc_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    The telecommand frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
+
 
 ------------
 
@@ -452,6 +542,22 @@ Reassembles complete telecommand service units across a sequence of telecommand 
 |    ``reassemble_tc_frames(Frames,Policy,State,Segments,UpdatedState,Events)``
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frames(+list(compound),+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Policy`` is neither a variable nor a valid telecommand discontinuity recovery policy:
+|        ``domain_error(ccsds_tc_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    The telecommand frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
 
 
 ------------
@@ -472,6 +578,20 @@ Reassembles complete telecommand service units from a single telecommand transfe
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frame_with_provenance(+compound,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    The telecommand frame sequence is discontinuous:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
+
 
 ------------
 
@@ -490,6 +610,22 @@ Reassembles complete telecommand service units from a single telecommand transfe
 |    ``reassemble_tc_frame_with_provenance(Frame,Policy,State,ReassembledSegments,UpdatedState,Events)``
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frame_with_provenance(+compound,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    ``Policy`` is neither a variable nor a valid telecommand discontinuity recovery policy:
+|        ``domain_error(ccsds_tc_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    The telecommand frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
 
 
 ------------
@@ -510,6 +646,20 @@ Reassembles complete telecommand service units across a sequence of telecommand 
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frames_with_provenance(+list(compound),+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames`` or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    The telecommand frame sequence is discontinuous:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
+
 
 ------------
 
@@ -528,6 +678,22 @@ Reassembles complete telecommand service units across a sequence of telecommand 
 |    ``reassemble_tc_frames_with_provenance(Frames,Policy,State,ReassembledSegments,UpdatedState,Events)``
 | **Mode and number of proofs:**
 |    ``reassemble_tc_frames_with_provenance(+list(compound),+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Policy`` is neither a variable nor a valid telecommand discontinuity recovery policy:
+|        ``domain_error(ccsds_tc_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid telecommand reassembly state term:
+|        ``domain_error(ccsds_tc_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid telecommand transfer frame term:
+|        ``domain_error(ccsds_tc_transfer_frame_term,Frame)``
+|    The telecommand frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))``
+|    A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:
+|        ``domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))``
+|    A telecommand continuation or last segment is missing its first segment:
+|        ``domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))``
 
 
 ------------
@@ -548,6 +714,12 @@ Groups complete telecommand service-unit terms by MAP identifier, preserving the
 | **Mode and number of proofs:**
 |    ``dispatch_service_units_by_map(+list(compound),-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``ServiceUnits`` is a variable:
+|        ``instantiation_error``
+|    ``ServiceUnits`` is neither a variable nor a valid list of telecommand service units:
+|        ``domain_error(ccsds_tc_service_units,ServiceUnits)``
+
 
 ------------
 
@@ -566,6 +738,14 @@ Extracts the complete telecommand service units for a specific MAP identifier fr
 |    ``dispatch_service_units_by_map(ServiceUnits,MapId,DispatchedServiceUnits)``
 | **Mode and number of proofs:**
 |    ``dispatch_service_units_by_map(+list(compound),+integer,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ServiceUnits`` or ``MapId`` is a variable:
+|        ``instantiation_error``
+|    ``ServiceUnits`` is neither a variable nor a valid list of telecommand service units:
+|        ``domain_error(ccsds_tc_service_units,ServiceUnits)``
+|    ``MapId`` is neither a variable nor a valid telecommand MAP identifier:
+|        ``domain_error(ccsds_tc_map_id,MapId)``
 
 
 ------------

@@ -22,9 +22,9 @@
 :- object(message_pack(_StringRepresentation_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-06-14,
 		comment is 'MessagePack format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding MessagePack strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -35,14 +35,22 @@
 	:- mode(parse(@list(byte), -ground), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses a list of bytes in the MessagePack format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).',
-		argnames is ['Bytes', 'Term']
+		argnames is ['Bytes', 'Term'],
+		exceptions is [
+			'``Bytes`` is not ground' - instantiation_error,
+			'``Bytes`` is ground but not a valid MessagePack byte sequence' - domain_error(message_pack_byte_sequence, 'Bytes')
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(@ground, -list(byte)), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates a list of bytes in the MessagePack format representing the given term. Throws an error when generating is not possible (usually due to a term with no corresponding MessagePack representation).',
-		argnames is ['Term', 'Bytes']
+		argnames is ['Term', 'Bytes'],
+		exceptions is [
+			'``Term`` is a variable' - instantiation_error,
+			'``Term`` has no corresponding MessagePack representation' - domain_error(message_pack_term, 'Term')
+		]
 	]).
 
 	:- uses(list, [

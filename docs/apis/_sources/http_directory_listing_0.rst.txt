@@ -64,6 +64,10 @@ Serves a directory listing for a relative request path from the given document r
 | **Mode and number of proofs:**
 |    ``serve(+atom,+compound,+atom,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Path``, ``Request``, or ``DocumentRoot`` are invalid for directory-listing serving:
+|        ``error``
+
 
 ------------
 
@@ -82,6 +86,10 @@ Serves a directory listing for a relative request path from the given document r
 |    ``serve(Path,Request,DocumentRoot,Response,Options)``
 | **Mode and number of proofs:**
 |    ``serve(+atom,+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Path``, ``Request``, ``DocumentRoot``, or ``Options`` are invalid for directory-listing serving:
+|        ``error``
 
 
 ------------

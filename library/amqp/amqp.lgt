@@ -79,7 +79,10 @@
 	:- mode(close(+compound, +integer, +atom), one_or_error).
 	:- info(close/3, [
 		comment is 'Closes the AMQP connection with a specific reply code and reason.',
-		argnames is ['Connection', 'ReplyCode', 'ReplyText']
+		argnames is ['Connection', 'ReplyCode', 'ReplyText'],
+		exceptions is [
+			'``Connection`` is not a valid AMQP connection handle' - error
+		]
 	]).
 
 	:- public(connection_alive/1).
@@ -107,14 +110,20 @@
 	:- mode(channel_close(+compound), one_or_error).
 	:- info(channel_close/1, [
 		comment is 'Closes a channel.',
-		argnames is ['Channel']
+		argnames is ['Channel'],
+		exceptions is [
+			'``Channel`` is not a valid AMQP channel handle' - error
+		]
 	]).
 
 	:- public(channel_close/3).
 	:- mode(channel_close(+compound, +integer, +atom), one_or_error).
 	:- info(channel_close/3, [
 		comment is 'Closes a channel with a specific reply code and reason.',
-		argnames is ['Channel', 'ReplyCode', 'ReplyText']
+		argnames is ['Channel', 'ReplyCode', 'ReplyText'],
+		exceptions is [
+			'``Channel`` is not a valid AMQP channel handle' - error
+		]
 	]).
 
 	% ==========================================================================
@@ -126,6 +135,9 @@
 	:- info(exchange_declare/3, [
 		comment is 'Declares an exchange on the server.',
 		argnames is ['Channel', 'Exchange', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the exchange declaration' - amqp_error(exchange_error('Message'))
+		],
 		remarks is [
 			'Option type(Type)' - 'Exchange type: direct, fanout, topic, headers. Default is direct.',
 			'Option durable(Boolean)' - 'Survive server restart. Default is false.',
@@ -140,6 +152,9 @@
 	:- info(exchange_delete/3, [
 		comment is 'Deletes an exchange.',
 		argnames is ['Channel', 'Exchange', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the exchange deletion' - amqp_error(exchange_error('Message'))
+		],
 		remarks is [
 			'Option if_unused(Boolean)' - 'Only delete if unused. Default is false.'
 		]
@@ -150,6 +165,9 @@
 	:- info(exchange_bind/4, [
 		comment is 'Binds an exchange to another exchange.',
 		argnames is ['Channel', 'Destination', 'Source', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the exchange binding' - amqp_error(exchange_error('Message'))
+		],
 		remarks is [
 			'Option routing_key(Key)' - 'Routing key for binding. Default is empty.',
 			'Option arguments(Arguments)' - 'Additional arguments.'
@@ -160,7 +178,10 @@
 	:- mode(exchange_unbind(+compound, +atom, +atom, +list), one_or_error).
 	:- info(exchange_unbind/4, [
 		comment is 'Unbinds an exchange from another exchange.',
-		argnames is ['Channel', 'Destination', 'Source', 'Options']
+		argnames is ['Channel', 'Destination', 'Source', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the exchange unbinding' - amqp_error(exchange_error('Message'))
+		]
 	]).
 
 	% ==========================================================================
@@ -172,6 +193,9 @@
 	:- info(queue_declare/3, [
 		comment is 'Declares a queue on the server. If Queue is a variable, the server generates a unique name.',
 		argnames is ['Channel', 'Queue', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the queue declaration' - amqp_error(queue_error('Message'))
+		],
 		remarks is [
 			'Option durable(Boolean)' - 'Survive server restart. Default is false.',
 			'Option exclusive(Boolean)' - 'Exclusive to this connection. Default is false.',
@@ -185,6 +209,9 @@
 	:- info(queue_delete/3, [
 		comment is 'Deletes a queue.',
 		argnames is ['Channel', 'Queue', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the queue deletion' - amqp_error(queue_error('Message'))
+		],
 		remarks is [
 			'Option if_unused(Boolean)' - 'Only delete if unused. Default is false.',
 			'Option if_empty(Boolean)' - 'Only delete if empty. Default is false.'
@@ -196,6 +223,9 @@
 	:- info(queue_bind/4, [
 		comment is 'Binds a queue to an exchange.',
 		argnames is ['Channel', 'Queue', 'Exchange', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the queue binding' - amqp_error(queue_error('Message'))
+		],
 		remarks is [
 			'Option routing_key(Key)' - 'Routing key for binding. Default is empty.',
 			'Option arguments(Arguments)' - 'Additional arguments.'
@@ -206,14 +236,20 @@
 	:- mode(queue_unbind(+compound, +atom, +atom, +list), one_or_error).
 	:- info(queue_unbind/4, [
 		comment is 'Unbinds a queue from an exchange.',
-		argnames is ['Channel', 'Queue', 'Exchange', 'Options']
+		argnames is ['Channel', 'Queue', 'Exchange', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the queue unbinding' - amqp_error(queue_error('Message'))
+		]
 	]).
 
 	:- public(queue_purge/2).
 	:- mode(queue_purge(+compound, +atom), one_or_error).
 	:- info(queue_purge/2, [
 		comment is 'Purges all messages from a queue.',
-		argnames is ['Channel', 'Queue']
+		argnames is ['Channel', 'Queue'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the queue purge request' - amqp_error(queue_error('Message'))
+		]
 	]).
 
 	% ==========================================================================
@@ -225,6 +261,9 @@
 	:- info(basic_publish/4, [
 		comment is 'Publishes a message to an exchange.',
 		argnames is ['Channel', 'Exchange', 'Body', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid, ``Body`` cannot be encoded, or the frame/content transmission fails' - error
+		],
 		remarks is [
 			'Option routing_key(Key)' - 'Routing key for message. Default is empty.',
 			'Option mandatory(Boolean)' - 'Return if not routable. Default is false.',
@@ -250,6 +289,9 @@
 	:- info(basic_consume/3, [
 		comment is 'Starts consuming messages from a queue.',
 		argnames is ['Channel', 'Queue', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the consume request' - amqp_error(basic_error('Message'))
+		],
 		remarks is [
 			'Option consumer_tag(Tag)' - 'Consumer identifier. Server generates if not provided.',
 			'Option no_local(Boolean)' - 'Do not receive own messages. Default is false.',
@@ -263,7 +305,10 @@
 	:- mode(basic_cancel(+compound, +atom, +list), one_or_error).
 	:- info(basic_cancel/3, [
 		comment is 'Cancels a consumer.',
-		argnames is ['Channel', 'ConsumerTag', 'Options']
+		argnames is ['Channel', 'ConsumerTag', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the cancel request' - amqp_error(basic_error('Message'))
+		]
 	]).
 
 	:- public(basic_get/3).
@@ -271,6 +316,9 @@
 	:- info(basic_get/3, [
 		comment is 'Synchronously gets a message from a queue.',
 		argnames is ['Channel', 'Queue', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server replies with an unexpected ``basic.get`` result' - amqp_error(basic_error('Message'))
+		],
 		remarks is [
 			'Option no_ack(Boolean)' - 'No acknowledgment required. Default is false.'
 		]
@@ -281,6 +329,9 @@
 	:- info(basic_ack/3, [
 		comment is 'Acknowledges a message.',
 		argnames is ['Channel', 'DeliveryTag', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the acknowledgment frame cannot be sent' - error
+		],
 		remarks is [
 			'Option multiple(Boolean)' - 'Acknowledge all up to this tag. Default is false.'
 		]
@@ -291,6 +342,9 @@
 	:- info(basic_nack/3, [
 		comment is 'Negatively acknowledges a message (RabbitMQ extension).',
 		argnames is ['Channel', 'DeliveryTag', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the negative-acknowledgment frame cannot be sent' - error
+		],
 		remarks is [
 			'Option multiple(Boolean)' - 'Reject all up to this tag. Default is false.',
 			'Option requeue(Boolean)' - 'Requeue the message. Default is true.'
@@ -302,6 +356,9 @@
 	:- info(basic_reject/3, [
 		comment is 'Rejects a message.',
 		argnames is ['Channel', 'DeliveryTag', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the reject frame cannot be sent' - error
+		],
 		remarks is [
 			'Option requeue(Boolean)' - 'Requeue the message. Default is true.'
 		]
@@ -312,6 +369,9 @@
 	:- info(basic_qos/2, [
 		comment is 'Sets quality of service (prefetch) settings.',
 		argnames is ['Channel', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the QoS request' - amqp_error(basic_error('Message'))
+		],
 		remarks is [
 			'Option prefetch_size(Size)' - 'Prefetch window size in bytes. Default is 0 (no limit).',
 			'Option prefetch_count(Count)' - 'Prefetch window in messages. Default is 0 (no limit).',
@@ -324,6 +384,9 @@
 	:- info(basic_recover/2, [
 		comment is 'Asks the server to redeliver unacknowledged messages.',
 		argnames is ['Channel', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects the recover request' - amqp_error(basic_error('Message'))
+		],
 		remarks is [
 			'Option requeue(Boolean)' - 'Requeue messages. Default is false.'
 		]
@@ -338,6 +401,9 @@
 	:- info(receive/3, [
 		comment is 'Receives a message or method from the server. Blocks until data is available or timeout.',
 		argnames is ['Channel', 'Message', 'Options'],
+		exceptions is [
+			'``Channel`` is invalid or the received frame sequence is not a valid AMQP content delivery' - error
+		],
 		remarks is [
 			'Option timeout(Milliseconds)' - 'Timeout in milliseconds. 0 for non-blocking, -1 for infinite. Default is -1.'
 		]
@@ -351,21 +417,30 @@
 	:- mode(tx_select(+compound), one_or_error).
 	:- info(tx_select/1, [
 		comment is 'Enables transaction mode on a channel.',
-		argnames is ['Channel']
+		argnames is ['Channel'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects ``tx.select``' - amqp_error(tx_error('Message'))
+		]
 	]).
 
 	:- public(tx_commit/1).
 	:- mode(tx_commit(+compound), one_or_error).
 	:- info(tx_commit/1, [
 		comment is 'Commits the current transaction.',
-		argnames is ['Channel']
+		argnames is ['Channel'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects ``tx.commit``' - amqp_error(tx_error('Message'))
+		]
 	]).
 
 	:- public(tx_rollback/1).
 	:- mode(tx_rollback(+compound), one_or_error).
 	:- info(tx_rollback/1, [
 		comment is 'Rolls back the current transaction.',
-		argnames is ['Channel']
+		argnames is ['Channel'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects ``tx.rollback``' - amqp_error(tx_error('Message'))
+		]
 	]).
 
 	% ==========================================================================
@@ -376,7 +451,10 @@
 	:- mode(confirm_select(+compound), one_or_error).
 	:- info(confirm_select/1, [
 		comment is 'Enables publisher confirms on a channel (RabbitMQ extension).',
-		argnames is ['Channel']
+		argnames is ['Channel'],
+		exceptions is [
+			'``Channel`` is invalid or the server rejects ``confirm.select``' - amqp_error(confirm_error('Message'))
+		]
 	]).
 
 	% ==========================================================================
@@ -387,7 +465,10 @@
 	:- mode(send_heartbeat(+compound), one_or_error).
 	:- info(send_heartbeat/1, [
 		comment is 'Sends a heartbeat frame to the server.',
-		argnames is ['Connection']
+		argnames is ['Connection'],
+		exceptions is [
+			'``Connection`` is not a valid AMQP connection handle or the heartbeat frame cannot be sent' - error
+		]
 	]).
 
 	% ==========================================================================
@@ -451,7 +532,10 @@
 	:- mode(decode_frame(+list, -compound), one_or_error).
 	:- info(decode_frame/2, [
 		comment is 'Decodes a list of bytes to an AMQP frame.',
-		argnames is ['Bytes', 'Frame']
+		argnames is ['Bytes', 'Frame'],
+		exceptions is [
+			'``Bytes`` do not encode a valid complete AMQP frame payload' - error
+		]
 	]).
 
 	% ==========================================================================
@@ -1492,6 +1576,14 @@
 	% For testing; called using the (<<)/2 control construct;
 	% declared privatr to avoid dead code scanner warnings
 	:- private(decode_field_value/3).
+	:- mode(decode_field_value(+list(integer), -compound, -list(integer)), one_or_error).
+	:- info(decode_field_value/3, [
+		comment is 'Decodes one AMQP field-table value from a byte list, returning the normalized typed value plus the remaining undecoded bytes.',
+		argnames is ['Bytes', 'Value', 'Rest'],
+		exceptions is [
+			'``Bytes`` do not start with a supported AMQP field-table value encoding' - error
+		]
+	]).
 	decode_field_value([Byte| Bytes], Value, Rest) :-
 		decode_field_value(Byte, Bytes, Value, Rest).
 

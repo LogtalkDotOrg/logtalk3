@@ -14,8 +14,8 @@ Protocol for loading TZif data sets, persisting loaded terms, and answering zone
 |    ``logtalk_load(tzif(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-07
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -130,6 +130,14 @@ Saves all cached ``tzif(...)`` terms to a plain Prolog snapshot file.
 | **Mode and number of proofs:**
 |    ``save(+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    No TZif terms are cached:
+|        ``existence_error(tzif_cache,tzif)``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor a valid file name atom:
+|        ``domain_error(file_name,File)``
+
 
 ------------
 
@@ -242,6 +250,10 @@ Returns the list of zone identifiers loaded in the cached ``tzif(...)`` terms.
 | **Mode and number of proofs:**
 |    ``zones(-list(atom))`` - ``one_or_error``
 
+| **Exceptions:**
+|    No TZif terms are cached:
+|        ``existence_error(tzif_cache,tzif)``
+
 
 ------------
 
@@ -280,6 +292,10 @@ Returns the applicable local time type for a zone in the cached TZif terms.
 | **Mode and number of proofs:**
 |    ``time_type(+atom,+types([integer,compound]),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
+
 
 ------------
 
@@ -298,6 +314,12 @@ Cached single-zone convenience variant of ``time_type/3`` using the cached TZif 
 |    ``time_type(UTC,TimeType)``
 | **Mode and number of proofs:**
 |    ``time_type(+types([integer,compound]),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    No TZif terms are cached:
+|        ``existence_error(tzif_cache,tzif)``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -337,6 +359,10 @@ Returns the UTC offset in seconds for a zone in the cached TZif terms.
 | **Mode and number of proofs:**
 |    ``offset(+atom,+types([integer,compound]),-integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant:
+|        ``error``
+
 
 ------------
 
@@ -355,6 +381,10 @@ Cached single-zone convenience variant of ``offset/3`` using the cached TZif ter
 |    ``offset(UTC,OffsetSeconds)``
 | **Mode and number of proofs:**
 |    ``offset(+types([integer,compound]),-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``time_type/2`` for the given UTC instant:
+|        ``error``
 
 
 ------------
@@ -394,6 +424,10 @@ Returns daylight-saving information for a zone in the cached TZif terms.
 | **Mode and number of proofs:**
 |    ``daylight_saving_time(+atom,+types([integer,compound]),-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant:
+|        ``error``
+
 
 ------------
 
@@ -412,6 +446,10 @@ Cached single-zone convenience variant of ``daylight_saving_time/3`` using the c
 |    ``daylight_saving_time(UTC,IsDST)``
 | **Mode and number of proofs:**
 |    ``daylight_saving_time(+types([integer,compound]),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``time_type/2`` for the given UTC instant:
+|        ``error``
 
 
 ------------
@@ -451,6 +489,10 @@ Returns the time-zone abbreviation for a zone in the cached TZif terms.
 | **Mode and number of proofs:**
 |    ``abbreviation(+atom,+types([integer,compound]),-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant:
+|        ``error``
+
 
 ------------
 
@@ -469,6 +511,10 @@ Cached single-zone convenience variant of ``abbreviation/3`` using the cached TZ
 |    ``abbreviation(UTC,Abbreviation)``
 | **Mode and number of proofs:**
 |    ``abbreviation(+types([integer,compound]),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``time_type/2`` for the given UTC instant:
+|        ``error``
 
 
 ------------
@@ -508,6 +554,14 @@ Returns the applicable local time type for a zone in the cached TZif terms. This
 | **Mode and number of proofs:**
 |    ``local_time_type(+atom,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``LocalDateTime`` is a variable:
+|        ``instantiation_error``
+|    ``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term:
+|        ``type_error(date_time,LocalDateTime)``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
+
 
 ------------
 
@@ -526,6 +580,16 @@ Cached single-zone convenience variant of strict local civil-time lookup; requir
 |    ``local_time_type(LocalDateTime,TimeType)``
 | **Mode and number of proofs:**
 |    ``local_time_type(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``LocalDateTime`` is a variable:
+|        ``instantiation_error``
+|    ``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term:
+|        ``type_error(date_time,LocalDateTime)``
+|    No TZif terms are cached:
+|        ``existence_error(tzif_cache,tzif)``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -622,6 +686,10 @@ Returns the UTC offset in seconds for a zone in the cached TZif terms. This stri
 | **Mode and number of proofs:**
 |    ``local_offset(+atom,+compound,-integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time:
+|        ``error``
+
 
 ------------
 
@@ -640,6 +708,10 @@ Cached single-zone convenience variant of strict local civil-time offset lookup.
 |    ``local_offset(LocalDateTime,OffsetSeconds)``
 | **Mode and number of proofs:**
 |    ``local_offset(+compound,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type/2`` for the given local civil time:
+|        ``error``
 
 
 ------------
@@ -736,6 +808,10 @@ Returns daylight-saving information for a zone in the cached TZif terms. This st
 | **Mode and number of proofs:**
 |    ``local_daylight_saving_time(+atom,+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time:
+|        ``error``
+
 
 ------------
 
@@ -754,6 +830,10 @@ Cached single-zone convenience variant of strict local daylight-saving lookup.
 |    ``local_daylight_saving_time(LocalDateTime,IsDST)``
 | **Mode and number of proofs:**
 |    ``local_daylight_saving_time(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type/2`` for the given local civil time:
+|        ``error``
 
 
 ------------
@@ -850,6 +930,10 @@ Returns the time-zone abbreviation for a zone in the cached TZif terms. This str
 | **Mode and number of proofs:**
 |    ``local_abbreviation(+atom,+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time:
+|        ``error``
+
 
 ------------
 
@@ -868,6 +952,10 @@ Cached single-zone convenience variant of strict local abbreviation lookup.
 |    ``local_abbreviation(LocalDateTime,Abbreviation)``
 | **Mode and number of proofs:**
 |    ``local_abbreviation(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type/2`` for the given local civil time:
+|        ``error``
 
 
 ------------
@@ -964,6 +1052,14 @@ Returns a reified local civil-time lookup result for a zone in the cached TZif t
 | **Mode and number of proofs:**
 |    ``local_time_type_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``LocalDateTime`` is a variable:
+|        ``instantiation_error``
+|    ``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term:
+|        ``type_error(date_time,LocalDateTime)``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
+
 
 ------------
 
@@ -982,6 +1078,16 @@ Cached single-zone convenience variant of reified local civil-time lookup; retur
 |    ``local_time_type_reified(LocalDateTime,Result)``
 | **Mode and number of proofs:**
 |    ``local_time_type_reified(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``LocalDateTime`` is a variable:
+|        ``instantiation_error``
+|    ``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term:
+|        ``type_error(date_time,LocalDateTime)``
+|    No TZif terms are cached:
+|        ``existence_error(tzif_cache,tzif)``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -1021,6 +1127,10 @@ Returns a reified local offset lookup result for a zone in the cached TZif terms
 | **Mode and number of proofs:**
 |    ``local_offset_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time:
+|        ``error``
+
 
 ------------
 
@@ -1039,6 +1149,10 @@ Cached single-zone convenience variant of reified local offset lookup; returns `
 |    ``local_offset_reified(LocalDateTime,Result)``
 | **Mode and number of proofs:**
 |    ``local_offset_reified(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time:
+|        ``error``
 
 
 ------------
@@ -1078,6 +1192,10 @@ Returns a reified local daylight-saving lookup result for a zone in the cached T
 | **Mode and number of proofs:**
 |    ``local_daylight_saving_time_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time:
+|        ``error``
+
 
 ------------
 
@@ -1096,6 +1214,10 @@ Cached single-zone convenience variant of reified local daylight-saving lookup; 
 |    ``local_daylight_saving_time_reified(LocalDateTime,Result)``
 | **Mode and number of proofs:**
 |    ``local_daylight_saving_time_reified(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time:
+|        ``error``
 
 
 ------------
@@ -1135,6 +1257,10 @@ Returns a reified local abbreviation lookup result for a zone in the cached TZif
 | **Mode and number of proofs:**
 |    ``local_abbreviation_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time:
+|        ``error``
+
 
 ------------
 
@@ -1153,6 +1279,10 @@ Cached single-zone convenience variant of reified local abbreviation lookup; ret
 |    ``local_abbreviation_reified(LocalDateTime,Result)``
 | **Mode and number of proofs:**
 |    ``local_abbreviation_reified(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time:
+|        ``error``
 
 
 ------------

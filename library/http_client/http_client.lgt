@@ -42,105 +42,154 @@
 	:- mode(request(+atom, +atom, --compound, +list), one_or_error).
 	:- info(request/4, [
 		comment is 'Builds a normalized request from the given method, absolute ``http://`` URL, and options, performs a one-shot exchange, and returns the response.',
-		argnames is ['Method', 'URL', 'Response', 'Options']
+		argnames is ['Method', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options' - error,
+			'The delegated socket exchange fails request validation or transport processing' - error
+		]
 	]).
 
 	:- public(request/5).
 	:- mode(request(+compound, +atom, +atom, --compound, +list), one_or_error).
 	:- info(request/5, [
 		comment is 'Builds a normalized request from the given method, absolute ``http://`` URL, and options, validates it against an open http_socket connection or pool handle endpoint, performs one exchange, and returns the response.',
-		argnames is ['ConnectionOrPool', 'Method', 'URL', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'Method', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle for ``URL``' - error,
+			'``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options' - error,
+			'The delegated socket exchange fails request validation or transport processing' - error
+		]
 	]).
 
 	:- public(get/3).
 	:- mode(get(+atom, --compound, +list), one_or_error).
 	:- info(get/3, [
 		comment is 'Convenience wrapper over ``request/4`` using the ``get`` method.',
-		argnames is ['URL', 'Response', 'Options']
+		argnames is ['URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/4`` for the given URL and options' - error
+		]
 	]).
 
 	:- public(get/4).
 	:- mode(get(+compound, +atom, --compound, +list), one_or_error).
 	:- info(get/4, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``get`` method.',
-		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` for the given connection, URL, and options' - error
+		]
 	]).
 
 	:- public(head/3).
 	:- mode(head(+atom, --compound, +list), one_or_error).
 	:- info(head/3, [
 		comment is 'Convenience wrapper over ``request/4`` using the ``head`` method.',
-		argnames is ['URL', 'Response', 'Options']
+		argnames is ['URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/4`` for the given URL and options' - error
+		]
 	]).
 
 	:- public(head/4).
 	:- mode(head(+compound, +atom, --compound, +list), one_or_error).
 	:- info(head/4, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``head`` method.',
-		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` for the given connection, URL, and options' - error
+		]
 	]).
 
 	:- public(delete/3).
 	:- mode(delete(+atom, --compound, +list), one_or_error).
 	:- info(delete/3, [
 		comment is 'Convenience wrapper over ``request/4`` using the ``delete`` method.',
-		argnames is ['URL', 'Response', 'Options']
+		argnames is ['URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/4`` for the given URL and options' - error
+		]
 	]).
 
 	:- public(delete/4).
 	:- mode(delete(+compound, +atom, --compound, +list), one_or_error).
 	:- info(delete/4, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``delete`` method.',
-		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` for the given connection, URL, and options' - error
+		]
 	]).
 
 	:- public(post/4).
 	:- mode(post(+atom, +compound, --compound, +list), one_or_error).
 	:- info(post/4, [
 		comment is 'Convenience wrapper over ``request/4`` using the ``post`` method and the given request body.',
-		argnames is ['URL', 'Body', 'Response', 'Options']
+		argnames is ['URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/4`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(post/5).
 	:- mode(post(+compound, +atom, +compound, --compound, +list), one_or_error).
 	:- info(post/5, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``post`` method and the given request body.',
-		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(put/4).
 	:- mode(put(+atom, +compound, --compound, +list), one_or_error).
 	:- info(put/4, [
 		comment is 'Convenience wrapper over ``request/4`` using the ``put`` method and the given request body.',
-		argnames is ['URL', 'Body', 'Response', 'Options']
+		argnames is ['URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/4`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(put/5).
 	:- mode(put(+compound, +atom, +compound, --compound, +list), one_or_error).
 	:- info(put/5, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``put`` method and the given request body.',
-		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(patch/4).
 	:- mode(patch(+atom, +compound, --compound, +list), one_or_error).
 	:- info(patch/4, [
 		comment is 'Convenience wrapper over ``request/4`` using the ``patch`` method and the given request body.',
-		argnames is ['URL', 'Body', 'Response', 'Options']
+		argnames is ['URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/4`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(patch/5).
 	:- mode(patch(+compound, +atom, +compound, --compound, +list), one_or_error).
 	:- info(patch/5, [
 		comment is 'Convenience wrapper over ``request/5`` using the ``patch`` method and the given request body.',
-		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options']
+		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+		]
 	]).
 
 	:- public(open_websocket/4).
 	:- mode(open_websocket(+atom, --compound, --compound, +list), one_or_error).
 	:- info(open_websocket/4, [
 		comment is 'Builds a WebSocket opening-handshake request from the given absolute ``ws://`` URL and options, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.',
-		argnames is ['URL', 'Connection', 'Response', 'Options']
+		argnames is ['URL', 'Connection', 'Response', 'Options'],
+		exceptions is [
+			'``URL`` is not a supported absolute WebSocket URL or ``Options`` contain invalid opening-handshake options' - error,
+			'The delegated socket or handshake processing rejects the connection or server response' - error
+		]
 	]).
 
 	:- uses(list, [

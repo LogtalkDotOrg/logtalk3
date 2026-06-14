@@ -14,8 +14,8 @@ Shared IEEE 754 exact bit and byte handling predicates for the high-level codec 
 |    ``logtalk_load(ieee_754(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-11
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -58,6 +58,14 @@ Validates and normalizes a source term into canonical-order unsigned integer bit
 |    ``source_bits(Source,Bits)``
 | **Mode and number of proofs:**
 |    ``source_bits(++compound,--integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is not a variable but uses ``bytes(Bytes)`` or ``bits(Bits)`` with an encoding incompatible with the selected precision:
+|        ``domain_error(ieee_754_encoding,Source)``
+|    ``Source`` is not a valid IEEE 754 source term:
+|        ``domain_error(ieee_754_source,Source)``
 
 
 ------------

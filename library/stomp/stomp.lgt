@@ -62,6 +62,9 @@
 	:- info(disconnect/2, [
 		comment is 'Gracefully disconnects from the STOMP server. Sends DISCONNECT frame and waits for RECEIPT if requested.',
 		argnames is ['Connection', 'Options'],
+		exceptions is [
+			'``Connection`` is not a valid STOMP connection handle' - error
+		],
 		remarks is [
 			'Option receipt(ReceiptId)' - 'Request receipt confirmation. Automatically generated if not specified.'
 		]
@@ -83,6 +86,9 @@
 	:- info(send/4, [
 		comment is 'Sends a message to the specified destination.',
 		argnames is ['Connection', 'Destination', 'Body', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid, ``Body`` cannot be encoded, or the SEND frame cannot be transmitted' - stomp_error(error)
+		],
 		remarks is [
 			'Option content_type(MimeType)' - 'MIME type of the body.',
 			'Option content_length(Length)' - 'Body length in bytes. Auto-calculated if omitted for atom/string bodies.',
@@ -97,6 +103,9 @@
 	:- info(subscribe/4, [
 		comment is 'Subscribes to a destination to receive messages.',
 		argnames is ['Connection', 'Destination', 'SubscriptionId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid, the acknowledgment mode is unsupported, or the SUBSCRIBE frame cannot be transmitted' - stomp_error(error)
+		],
 		remarks is [
 			'Option ack(Mode)' - 'Acknowledgment mode: auto (default), client, or client_individual.'
 		]
@@ -106,7 +115,10 @@
 	:- mode(unsubscribe(+compound, +atom, +list), one_or_error).
 	:- info(unsubscribe/3, [
 		comment is 'Unsubscribes from a destination.',
-		argnames is ['Connection', 'SubscriptionId', 'Options']
+		argnames is ['Connection', 'SubscriptionId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the UNSUBSCRIBE frame cannot be transmitted' - stomp_error(error)
+		]
 	]).
 
 	:- public(receive/3).
@@ -114,6 +126,9 @@
 	:- info(receive/3, [
 		comment is 'Receives a frame from the server. Returns MESSAGE, RECEIPT, or ERROR frames.',
 		argnames is ['Connection', 'Frame', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the input stream does not contain a valid STOMP frame within the requested timeout' - error
+		],
 		remarks is [
 			'Option timeout(Milliseconds)' - 'Timeout in milliseconds. 0 for non-blocking, -1 for infinite wait. Default is -1.'
 		]
@@ -128,6 +143,9 @@
 	:- info(ack/3, [
 		comment is 'Acknowledges receipt of a message.',
 		argnames is ['Connection', 'AckId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the ACK frame cannot be transmitted' - stomp_error(error)
+		],
 		remarks is [
 			'Option transaction(TransactionId)' - 'Include acknowledgment in the named transaction.'
 		]
@@ -138,6 +156,9 @@
 	:- info(nack/3, [
 		comment is 'Negatively acknowledges a message (tells server the message was not consumed).',
 		argnames is ['Connection', 'AckId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the NACK frame cannot be transmitted' - stomp_error(error)
+		],
 		remarks is [
 			'Option transaction(TransactionId)' - 'Include negative acknowledgment in the named transaction.'
 		]
@@ -151,21 +172,30 @@
 	:- mode(begin_transaction(+compound, +atom, +list), one_or_error).
 	:- info(begin_transaction/3, [
 		comment is 'Begins a new transaction.',
-		argnames is ['Connection', 'TransactionId', 'Options']
+		argnames is ['Connection', 'TransactionId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the BEGIN frame cannot be transmitted' - stomp_error(error)
+		]
 	]).
 
 	:- public(commit_transaction/3).
 	:- mode(commit_transaction(+compound, +atom, +list), one_or_error).
 	:- info(commit_transaction/3, [
 		comment is 'Commits a transaction, making all its operations permanent.',
-		argnames is ['Connection', 'TransactionId', 'Options']
+		argnames is ['Connection', 'TransactionId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the COMMIT frame cannot be transmitted' - stomp_error(error)
+		]
 	]).
 
 	:- public(abort_transaction/3).
 	:- mode(abort_transaction(+compound, +atom, +list), one_or_error).
 	:- info(abort_transaction/3, [
 		comment is 'Aborts a transaction, rolling back all its operations.',
-		argnames is ['Connection', 'TransactionId', 'Options']
+		argnames is ['Connection', 'TransactionId', 'Options'],
+		exceptions is [
+			'``Connection`` is invalid or the ABORT frame cannot be transmitted' - stomp_error(error)
+		]
 	]).
 
 	% ==========================================================================
@@ -176,7 +206,10 @@
 	:- mode(send_heartbeat(+compound), one_or_error).
 	:- info(send_heartbeat/1, [
 		comment is 'Sends a heartbeat (EOL) to the server to keep the connection alive.',
-		argnames is ['Connection']
+		argnames is ['Connection'],
+		exceptions is [
+			'``Connection`` is invalid or the heartbeat cannot be written to the output stream' - stomp_error(error)
+		]
 	]).
 
 	% ==========================================================================

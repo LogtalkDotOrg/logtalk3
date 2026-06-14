@@ -47,14 +47,18 @@
 	:- mode(write_response(+stream, +compound), one_or_error).
 	:- info(write_response/2, [
 		comment is 'Writes exactly one normalized HTTP response term to a binary stream.',
-		argnames is ['Output', 'Response']
+		argnames is ['Output', 'Response'],
+		exceptions is [
+			'``Response`` or ``Output`` are invalid for the delegated HTTP response generator' - error
+		]
 	]).
 
 	:- public(dispatch/3).
 	:- mode(dispatch(+object_identifier, +compound, -compound), one_or_error).
 	:- info(dispatch/3, [
 		comment is 'Dispatches a normalized HTTP request to a handler object implementing the http_handler_protocol protocol. Handler failures, exceptions, or invalid responses are converted to an internal server error response.',
-		argnames is ['Handler', 'Request', 'Response']
+		argnames is ['Handler', 'Request', 'Response'],
+		exceptions is []
 	]).
 
 	:- public(serve/3).
@@ -68,7 +72,10 @@
 	:- mode(serve_connection(+stream, +stream, +object_identifier), one_or_error).
 	:- info(serve_connection/3, [
 		comment is 'Repeatedly reads requests from a binary input stream, dispatches them to a handler object, and writes responses to a binary output stream until end-of-file, a ``101 Switching Protocols`` response, or connection-close semantics terminate the connection. HEAD requests suppress response body bytes on the wire while preserving the generated response headers.',
-		argnames is ['Input', 'Output', 'Handler']
+		argnames is ['Input', 'Output', 'Handler'],
+		exceptions is [
+			'The binary streams or delegated request/response processing predicates raise a serving error' - error
+		]
 	]).
 
 	:- public(accept_websocket/3).
@@ -76,6 +83,9 @@
 	:- info(accept_websocket/3, [
 		comment is 'Validates a normalized WebSocket opening-handshake request and builds a matching ``101 Switching Protocols`` response. The ``protocol(Protocol)`` option can be used to select a single offered subprotocol.',
 		argnames is ['Request', 'Response', 'Options'],
+		exceptions is [
+			'``Request`` is not a valid normalized WebSocket opening-handshake request or ``Options`` are invalid' - error
+		],
 		remarks is [
 			'Repeated options' - 'When the same WebSocket acceptance option is given multiple times, the first occurrence is used.'
 		]
@@ -85,7 +95,10 @@
 	:- mode(serve_websocket(+stream, +stream, +object_identifier, --compound), one_or_error).
 	:- info(serve_websocket/4, [
 		comment is 'Reads one request from a binary input stream, dispatches it to a handler object, writes one response to a binary output stream, and returns ``accepted(Request, Response)`` when the exchange completed with a valid WebSocket opening-handshake response. Malformed requests and non-upgrade responses are written to the stream and reported as ``rejected(Response)``. Clean end-of-file before any bytes are read is reported as ``end_of_file``.',
-		argnames is ['Input', 'Output', 'Handler', 'Outcome']
+		argnames is ['Input', 'Output', 'Handler', 'Outcome'],
+		exceptions is [
+			'The binary streams or delegated WebSocket handshake processing predicates raise a serving error' - error
+		]
 	]).
 
 	:- uses(list, [

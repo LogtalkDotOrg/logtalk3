@@ -59,6 +59,14 @@ Validates a document-root relative request path atom.
 | **Mode and number of proofs:**
 |    ``validate_relative_path(+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Path`` is a variable:
+|        ``instantiation_error``
+|    ``Path`` is neither a variable nor an atom:
+|        ``type_error(atom,Path)``
+|    ``Path`` is not a safe document-root relative path:
+|        ``domain_error(http_docroot_relative_path,Path)``
+
 
 ------------
 
@@ -78,6 +86,10 @@ Validates a normalized HTTP request term.
 | **Mode and number of proofs:**
 |    ``validate_request(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+
 
 ------------
 
@@ -96,6 +108,14 @@ Validates an absolute document root path atom.
 |    ``validate_document_root(DocumentRoot)``
 | **Mode and number of proofs:**
 |    ``validate_document_root(+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``DocumentRoot`` is a variable:
+|        ``instantiation_error``
+|    ``DocumentRoot`` is neither a variable nor an atom:
+|        ``type_error(atom,DocumentRoot)``
+|    ``DocumentRoot`` is not a valid absolute document root path:
+|        ``domain_error(http_docroot_document_root,DocumentRoot)``
 
 
 ------------

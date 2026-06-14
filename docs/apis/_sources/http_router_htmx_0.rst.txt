@@ -60,6 +60,10 @@ Router middleware helper that annotates a normalized request with derived HTMX p
 | **Mode and number of proofs:**
 |    ``annotate_htmx_request(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``http_htmx::request_properties/2`` for the routed request:
+|        ``error``
+
 
 ------------
 
@@ -78,6 +82,10 @@ Router response-middleware helper that decorates a normalized response using ``h
 |    ``add_htmx_response_headers(Request,Response0,Response)``
 | **Mode and number of proofs:**
 |    ``add_htmx_response_headers(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``http_htmx::add_response_headers/4`` for the derived HTMX response options:
+|        ``error``
 
 
 ------------

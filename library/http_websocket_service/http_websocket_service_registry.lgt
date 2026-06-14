@@ -39,21 +39,30 @@
 	:- mode(close(+compound), one_or_error).
 	:- info(close/1, [
 		comment is 'Closes a session registry and removes all registered sessions and queued messages.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is not an open WebSocket service registry handle' - error
+		]
 	]).
 
 	:- public(register/2).
 	:- mode(register(+compound, -compound), one_or_error).
 	:- info(register/2, [
 		comment is 'Registers a new active session in the given registry and returns its session identifier.',
-		argnames is ['Registry', 'Session']
+		argnames is ['Registry', 'Session'],
+		exceptions is [
+			'``Registry`` is not an open WebSocket service registry handle' - error
+		]
 	]).
 
 	:- public(unregister/2).
 	:- mode(unregister(+compound, +compound), one_or_error).
 	:- info(unregister/2, [
 		comment is 'Removes a session from the given registry together with any queued outbound messages.',
-		argnames is ['Registry', 'Session']
+		argnames is ['Registry', 'Session'],
+		exceptions is [
+			'``Registry`` or ``Session`` are not valid registered WebSocket service handles' - error
+		]
 	]).
 
 	:- public(session/2).
@@ -67,42 +76,60 @@
 	:- mode(sessions(+compound, -list(compound)), one_or_error).
 	:- info(sessions/2, [
 		comment is 'Returns the list of active session identifiers registered in the given registry.',
-		argnames is ['Registry', 'Sessions']
+		argnames is ['Registry', 'Sessions'],
+		exceptions is [
+			'``Registry`` is not an open WebSocket service registry handle' - error
+		]
 	]).
 
 	:- public(session_count/2).
 	:- mode(session_count(+compound, -integer), one_or_error).
 	:- info(session_count/2, [
 		comment is 'Returns the number of active sessions currently registered in the given registry.',
-		argnames is ['Registry', 'Count']
+		argnames is ['Registry', 'Count'],
+		exceptions is [
+			'``Registry`` is not an open WebSocket service registry handle' - error
+		]
 	]).
 
 	:- public(send/3).
 	:- mode(send(+compound, +compound, +compound), one_or_error).
 	:- info(send/3, [
 		comment is 'Queues a normalized outbound message for the specified registered session.',
-		argnames is ['Registry', 'Session', 'Message']
+		argnames is ['Registry', 'Session', 'Message'],
+		exceptions is [
+			'``Registry`` or ``Session`` are invalid, or ``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- public(broadcast/2).
 	:- mode(broadcast(+compound, +compound), one_or_error).
 	:- info(broadcast/2, [
 		comment is 'Queues a normalized outbound message for all currently registered sessions.',
-		argnames is ['Registry', 'Message']
+		argnames is ['Registry', 'Message'],
+		exceptions is [
+			'``Registry`` is invalid or ``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- public(broadcast_except/3).
 	:- mode(broadcast_except(+compound, +compound, +compound), one_or_error).
 	:- info(broadcast_except/3, [
 		comment is 'Queues a normalized outbound message for all currently registered sessions except the specified session.',
-		argnames is ['Registry', 'Session', 'Message']
+		argnames is ['Registry', 'Session', 'Message'],
+		exceptions is [
+			'``Registry`` or ``Session`` are invalid, or ``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- public(take_pending/3).
 	:- mode(take_pending(+compound, +compound, -list(compound)), one_or_error).
 	:- info(take_pending/3, [
 		comment is 'Removes and returns the queued outbound messages for the specified registered session.',
-		argnames is ['Registry', 'Session', 'Messages']
+		argnames is ['Registry', 'Session', 'Messages'],
+		exceptions is [
+			'``Registry`` or ``Session`` are not valid registered WebSocket service handles' - error
+		]
 	]).
 
 	:- private(registry_seed_/1).

@@ -54,77 +54,110 @@
 	:- mode(parse_challenge(++text, -compound), one_or_error).
 	:- info(parse_challenge/2, [
 		comment is 'Parses one Digest challenge header field value into a normalized ``digest_challenge/1`` term.',
-		argnames is ['Text', 'Challenge']
+		argnames is ['Text', 'Challenge'],
+		exceptions is [
+			'``Text`` is not a valid Digest challenge header value' - error
+		]
 	]).
 
 	:- public(generate_challenge/2).
 	:- mode(generate_challenge(+compound, -atom), one_or_error).
 	:- info(generate_challenge/2, [
 		comment is 'Generates one canonical Digest challenge header field value from a normalized ``digest_challenge/1`` term.',
-		argnames is ['Challenge', 'HeaderValue']
+		argnames is ['Challenge', 'HeaderValue'],
+		exceptions is [
+			'``Challenge`` is not a valid normalized Digest challenge term' - error
+		]
 	]).
 
 	:- public(parse_authorization/2).
 	:- mode(parse_authorization(++text, -compound), one_or_error).
 	:- info(parse_authorization/2, [
 		comment is 'Parses one Digest authorization header field value into a normalized ``digest_authorization/1`` term.',
-		argnames is ['Text', 'Authorization']
+		argnames is ['Text', 'Authorization'],
+		exceptions is [
+			'``Text`` is not a valid Digest authorization header value' - error
+		]
 	]).
 
 	:- public(generate_authorization/2).
 	:- mode(generate_authorization(+compound, -atom), one_or_error).
 	:- info(generate_authorization/2, [
 		comment is 'Generates one canonical Digest authorization header field value from a normalized ``digest_authorization/1`` term.',
-		argnames is ['Authorization', 'HeaderValue']
+		argnames is ['Authorization', 'HeaderValue'],
+		exceptions is [
+			'``Authorization`` is not a valid normalized Digest authorization term' - error
+		]
 	]).
 
 	:- public(parse_authentication_info/2).
 	:- mode(parse_authentication_info(++text, -compound), one_or_error).
 	:- info(parse_authentication_info/2, [
 		comment is 'Parses one ``Authentication-Info`` header field value into a normalized ``digest_authentication_info/1`` term.',
-		argnames is ['Text', 'AuthenticationInfo']
+		argnames is ['Text', 'AuthenticationInfo'],
+		exceptions is [
+			'``Text`` is not a valid Digest ``Authentication-Info`` header value' - error
+		]
 	]).
 
 	:- public(generate_authentication_info/2).
 	:- mode(generate_authentication_info(+compound, -atom), one_or_error).
 	:- info(generate_authentication_info/2, [
 		comment is 'Generates one canonical ``Authentication-Info`` header field value from a normalized ``digest_authentication_info/1`` term.',
-		argnames is ['AuthenticationInfo', 'HeaderValue']
+		argnames is ['AuthenticationInfo', 'HeaderValue'],
+		exceptions is [
+			'``AuthenticationInfo`` is not a valid normalized Digest authentication-info term' - error
+		]
 	]).
 
 	:- public(authorize_request/6).
 	:- mode(authorize_request(+compound, +compound, ++text, ++text, -compound, +list(compound)), one_or_error).
 	:- info(authorize_request/6, [
 		comment is 'Decorates a normalized HTTP request with a Digest ``Authorization`` header computed from a normalized challenge term, username, password, and options.',
-		argnames is ['Request', 'Challenge', 'Username', 'Password', 'AuthorizedRequest', 'Options']
+		argnames is ['Request', 'Challenge', 'Username', 'Password', 'AuthorizedRequest', 'Options'],
+		exceptions is [
+			'``Request``, ``Challenge``, or ``Options`` are invalid for Digest authorization generation' - error
+		]
 	]).
 
 	:- public(protect_request/4).
 	:- mode(protect_request(+compound, +object_identifier, -compound, +list(compound)), one_or_error).
 	:- info(protect_request/4, [
 		comment is 'Verifies a normalized HTTP request using a Digest verifier object and returns either ``continue(Request)`` or ``respond(Response)``.',
-		argnames is ['Request', 'Verifier', 'Action', 'Options']
+		argnames is ['Request', 'Verifier', 'Action', 'Options'],
+		exceptions is [
+			'``Request`` or ``Options`` are invalid, or the verifier object rejects the request with an exception' - error
+		]
 	]).
 
 	:- public(unauthorized_response/3).
 	:- mode(unauthorized_response(-compound, -compound, +list(compound)), one_or_error).
 	:- info(unauthorized_response/3, [
 		comment is 'Builds a normalized ``401 Unauthorized`` response and returns the generated normalized Digest challenge term.',
-		argnames is ['Challenge', 'Response', 'Options']
+		argnames is ['Challenge', 'Response', 'Options'],
+		exceptions is [
+			'``Options`` are invalid for Digest challenge generation or response construction' - error
+		]
 	]).
 
 	:- public(unauthorized_response/4).
 	:- mode(unauthorized_response(+compound, +compound, -compound, +list(compound)), one_or_error).
 	:- info(unauthorized_response/4, [
 		comment is 'Decorates a normalized HTTP response with an explicit normalized Digest challenge term and returns the resulting ``401 Unauthorized`` response.',
-		argnames is ['Challenge', 'Response0', 'Response', 'Options']
+		argnames is ['Challenge', 'Response0', 'Response', 'Options'],
+		exceptions is [
+			'``Challenge`` or ``Response0`` are invalid, or ``Options`` are invalid for unauthorized-response construction' - error
+		]
 	]).
 
 	:- public(add_authentication_info/4).
 	:- mode(add_authentication_info(+compound, +compound, -compound, +list(compound)), one_or_error).
 	:- info(add_authentication_info/4, [
 		comment is 'Decorates a normalized HTTP response with an ``Authentication-Info`` header computed from a previously verified request and options. The ``nextnonce`` option accepts ``false`` to omit the field, ``true`` to generate a fresh nonce using ``nonce_secret/1``, or an explicit nonce atom to emit verbatim.',
-		argnames is ['Request', 'Response0', 'Response', 'Options']
+		argnames is ['Request', 'Response0', 'Response', 'Options'],
+		exceptions is [
+			'``Request`` or ``Response0`` are invalid, or ``Options`` are invalid for authentication-info generation' - error
+		]
 	]).
 
 	:- uses(crypto, [

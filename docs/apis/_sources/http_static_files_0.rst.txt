@@ -62,6 +62,10 @@ Serves a relative request path from the given document root using the default op
 | **Mode and number of proofs:**
 |    ``serve(+atom,+compound,+atom,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Path``, ``Request``, or ``DocumentRoot`` are invalid for document-root serving:
+|        ``error``
+
 
 ------------
 
@@ -80,6 +84,10 @@ Serves a relative request path from the given document root using the given opti
 |    ``serve(Path,Request,DocumentRoot,Options,Response)``
 | **Mode and number of proofs:**
 |    ``serve(+atom,+compound,+atom,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Path``, ``Request``, ``DocumentRoot``, or ``Options`` are invalid for static-file serving:
+|        ``error``
 
 
 ------------

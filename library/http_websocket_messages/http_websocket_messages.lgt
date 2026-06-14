@@ -39,6 +39,9 @@
 	:- info(message/3, [
 		comment is 'Constructs a validated normalized WebSocket message term from the message type atom and payload term.',
 		argnames is ['Type', 'Payload', 'Message'],
+		exceptions is [
+			'``Type`` or ``Payload`` do not define a valid normalized WebSocket message term' - error
+		],
 		remarks is [
 			'Type ``text``' - 'Payload is text in the selected text representation.',
 			'Type ``binary``' - 'Payload is a list of bytes.',
@@ -59,6 +62,9 @@
 	:- info(read_message/2, [
 		comment is 'Reads one WebSocket message from a binary stream. Continuation frames are reassembled for text and binary messages when they arrive contiguously. Returns ``end_of_file`` when the stream is already exhausted.',
 		argnames is ['Stream', 'Message'],
+		exceptions is [
+			'``Stream`` is a variable or the inbound frames do not form a valid normalized WebSocket message sequence' - error
+		],
 		remarks is [
 			'Interleaved control frames' - 'Control frames interleaved in the middle of a fragmented data message are not surfaced by this simplified layer and instead raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` when interleaved control frames must be handled while a fragmented message is in progress.'
 		]
@@ -68,35 +74,50 @@
 	:- mode(write_message(+stream_or_alias, +compound), one_or_error).
 	:- info(write_message/2, [
 		comment is 'Writes one validated WebSocket message as a single final frame to a binary stream and flushes the stream.',
-		argnames is ['Stream', 'Message']
+		argnames is ['Stream', 'Message'],
+		exceptions is [
+			'``Stream`` is a variable or ``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- public(type/2).
 	:- mode(type(+compound, -atom), one_or_error).
 	:- info(type/2, [
 		comment is 'Returns the type atom of a validated WebSocket message term.',
-		argnames is ['Message', 'Type']
+		argnames is ['Message', 'Type'],
+		exceptions is [
+			'``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- public(payload/2).
 	:- mode(payload(+compound, -term), one_or_error).
 	:- info(payload/2, [
 		comment is 'Returns the payload term of a validated WebSocket message term.',
-		argnames is ['Message', 'Payload']
+		argnames is ['Message', 'Payload'],
+		exceptions is [
+			'``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- protected(encode_message/4).
 	:- mode(encode_message(+compound, -compound, -atom, -list(byte)), one_or_error).
 	:- info(encode_message/4, [
 		comment is 'Protected helper that normalizes a WebSocket message term and returns the normalized term together with the corresponding frame opcode and payload bytes.',
-		argnames is ['Message', 'NormalizedMessage', 'Opcode', 'PayloadBytes']
+		argnames is ['Message', 'NormalizedMessage', 'Opcode', 'PayloadBytes'],
+		exceptions is [
+			'``Message`` is not a valid normalized WebSocket message term' - error
+		]
 	]).
 
 	:- protected(decode_message/3).
 	:- mode(decode_message(+atom, +list(byte), -compound), one_or_error).
 	:- info(decode_message/3, [
 		comment is 'Protected helper that decodes payload bytes for the given message type atom into a normalized WebSocket message term.',
-		argnames is ['Type', 'PayloadBytes', 'Message']
+		argnames is ['Type', 'PayloadBytes', 'Message'],
+		exceptions is [
+			'``Type`` is not a supported WebSocket message type or ``PayloadBytes`` do not decode to a valid message payload' - error
+		]
 	]).
 
 	:- uses(list, [

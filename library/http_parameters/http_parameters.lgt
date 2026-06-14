@@ -33,7 +33,11 @@
 	:- mode(parameters(+compound, +list(compound), -list(compound)), one_or_error).
 	:- info(parameters/3, [
 		comment is 'Extracts typed parameters from a normalized HTTP request using the given declaration list. Client-input failures throw ``error(http_parameter_validation(Errors), Context)`` where ``Errors`` is a non-empty list of structured parameter errors.',
-		argnames is ['Request', 'Declarations', 'Parameters']
+		argnames is ['Request', 'Declarations', 'Parameters'],
+		exceptions is [
+			'``Request`` is not a valid normalized HTTP request term or ``Declarations`` are not valid parameter declarations' - error,
+			'The request parameters fail declared type or constraint validation' - error(http_parameter_validation('Errors'), 'Context')
+		]
 	]).
 
 	:- public(parameter/3).
@@ -47,7 +51,10 @@
 	:- mode(open_api_parameters(+list(compound), -list(compound)), one_or_error).
 	:- info(open_api_parameters/2, [
 		comment is 'Generates OpenAPI ``parameter/5`` descriptors for query, path, header, and cookie declarations.',
-		argnames is ['Declarations', 'Parameters']
+		argnames is ['Declarations', 'Parameters'],
+		exceptions is [
+			'``Declarations`` are not valid HTTP parameter declarations for OpenAPI export' - error
+		]
 	]).
 
 	:- public(open_api_request_body/3).

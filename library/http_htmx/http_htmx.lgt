@@ -61,7 +61,8 @@
 	:- mode(request_kind(+compound, -atom), one_or_error).
 	:- info(request_kind/2, [
 		comment is 'Classifies the request as one of ``ordinary``, ``fragment``, ``boosted``, or ``history_restore``.',
-		argnames is ['Request', 'Kind']
+		argnames is ['Request', 'Kind'],
+		exceptions is []
 	]).
 
 	:- public(current_url/2).
@@ -110,7 +111,8 @@
 	:- mode(request_properties(+compound, -list(compound)), one_or_error).
 	:- info(request_properties/2, [
 		comment is 'Returns a list of derived HTMX request properties and request classification computed from the normalized request headers.',
-		argnames is ['Request', 'Properties']
+		argnames is ['Request', 'Properties'],
+		exceptions is []
 	]).
 
 	:- public(request_property/2).
@@ -124,35 +126,50 @@
 	:- mode(reply(+compound, +term, -compound), one_or_error).
 	:- info(reply/3, [
 		comment is 'Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an ``html`` term/list using the default options.',
-		argnames is ['Request', 'Content', 'Response']
+		argnames is ['Request', 'Content', 'Response'],
+		exceptions is [
+			'``Content`` or the derived HTMX response options are invalid for HTML reply generation' - error
+		]
 	]).
 
 	:- public(reply/4).
 	:- mode(reply(+compound, +term, -compound, +list(compound)), one_or_error).
 	:- info(reply/4, [
 		comment is 'Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an ``html`` term/list using the given options.',
-		argnames is ['Request', 'Content', 'Response', 'Options']
+		argnames is ['Request', 'Content', 'Response', 'Options'],
+		exceptions is [
+			'``Content`` or ``Options`` are invalid for HTMX HTML reply generation' - error
+		]
 	]).
 
 	:- public(page_fragment_reply/4).
 	:- mode(page_fragment_reply(+compound, +term, +term, -compound), one_or_error).
 	:- info(page_fragment_reply/4, [
 		comment is 'Builds a normalized ``text/html`` response using the fragment content when ``is_fragment_request/1`` succeeds and the full-page content otherwise, with the default options.',
-		argnames is ['Request', 'PageContent', 'FragmentContent', 'Response']
+		argnames is ['Request', 'PageContent', 'FragmentContent', 'Response'],
+		exceptions is [
+			'``PageContent`` or ``FragmentContent`` are invalid for HTMX HTML reply generation' - error
+		]
 	]).
 
 	:- public(page_fragment_reply/5).
 	:- mode(page_fragment_reply(+compound, +term, +term, -compound, +list(compound)), one_or_error).
 	:- info(page_fragment_reply/5, [
 		comment is 'Builds a normalized ``text/html`` response using the fragment content when ``is_fragment_request/1`` succeeds and the full-page content otherwise, with the given options.',
-		argnames is ['Request', 'PageContent', 'FragmentContent', 'Response', 'Options']
+		argnames is ['Request', 'PageContent', 'FragmentContent', 'Response', 'Options'],
+		exceptions is [
+			'``PageContent``, ``FragmentContent``, or ``Options`` are invalid for HTMX HTML reply generation' - error
+		]
 	]).
 
 	:- public(add_response_headers/4).
 	:- mode(add_response_headers(+compound, +compound, -compound, +list(compound)), one_or_error).
 	:- info(add_response_headers/4, [
 		comment is 'Decorates a normalized response with the relevant HTMX response headers and optional cache-vary metadata.',
-		argnames is ['Request', 'Response0', 'Response', 'Options']
+		argnames is ['Request', 'Response0', 'Response', 'Options'],
+		exceptions is [
+			'``Options`` contain invalid HTMX response-header declarations or the delegated response builder rejects them' - error
+		]
 	]).
 
 	:- uses(list, [

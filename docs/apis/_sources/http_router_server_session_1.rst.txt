@@ -61,6 +61,10 @@ Router middleware helper that annotates a normalized request with a server-sessi
 | **Mode and number of proofs:**
 |    ``annotate_server_session_request(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``http_server_session::begin/3`` for the configured manager and request:
+|        ``error``
+
 
 ------------
 
@@ -79,6 +83,10 @@ Router response-middleware helper that finalizes server-session cookie lifecycle
 |    ``add_server_session_response(Request,Response0,Response)``
 | **Mode and number of proofs:**
 |    ``add_server_session_response(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``http_server_session::finish/3`` for the configured manager request/response pair:
+|        ``error``
 
 
 ------------

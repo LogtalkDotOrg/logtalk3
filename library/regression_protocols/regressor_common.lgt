@@ -24,9 +24,9 @@
 	extends(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-06-14,
 		comment is 'Shared predicates for regressor learning defaults, diagnostics, validation, dataset validation, export, and pretty-print helpers.'
 	]).
 
@@ -442,7 +442,10 @@
 	:- mode(solve_linear_system(+list(list(float)), +list(float), -list(float), -atom), one_or_error).
 	:- info(solve_linear_system/4, [
 		comment is 'Solves a square linear system using partial pivoting Gaussian elimination and returns the solver name.',
-		argnames is ['Matrix', 'Vector', 'Solution', 'Solver']
+		argnames is ['Matrix', 'Vector', 'Solution', 'Solver'],
+		exceptions is [
+			'The linear system is singular because a pivot coefficient becomes numerically zero' - evaluation_error(zero_divisor)
+		]
 	]).
 
 	:- private(augment_rows/3).
@@ -456,7 +459,10 @@
 	:- mode(triangularize(+list(compound), -list(compound)), one_or_error).
 	:- info(triangularize/2, [
 		comment is 'Transforms an augmented matrix into upper-triangular form using partial pivoting.',
-		argnames is ['Rows0', 'UpperRows']
+		argnames is ['Rows0', 'UpperRows'],
+		exceptions is [
+			'A pivot coefficient is numerically zero during elimination' - evaluation_error(zero_divisor)
+		]
 	]).
 
 	:- private(select_pivot_row/3).
@@ -501,7 +507,10 @@
 	:- mode(back_substitution(+list(compound), -list(float)), one_or_error).
 	:- info(back_substitution/2, [
 		comment is 'Performs back-substitution on an upper-triangular augmented matrix.',
-		argnames is ['UpperRows', 'Solution']
+		argnames is ['UpperRows', 'Solution'],
+		exceptions is [
+			'A diagonal coefficient is numerically zero during back-substitution' - evaluation_error(zero_divisor)
+		]
 	]).
 
 	:- private(maximum_linear_system_residual/4).

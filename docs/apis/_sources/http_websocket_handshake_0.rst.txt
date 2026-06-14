@@ -75,6 +75,12 @@ Computes the canonical `Sec-WebSocket-Accept` value for a valid WebSocket openin
 | **Mode and number of proofs:**
 |    ``websocket_accept(++term,--atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is not a valid WebSocket opening key value:
+|        ``domain_error(http_websocket_key,Key)``
+
 
 ------------
 

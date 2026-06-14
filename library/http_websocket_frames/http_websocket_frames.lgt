@@ -42,6 +42,9 @@
 	:- info(frame/5, [
 		comment is 'Constructs a validated normalized WebSocket frame term from the fragmentation state atom, opcode atom, payload bytes, and frame properties.',
 		argnames is ['Final', 'Opcode', 'Payload', 'Properties', 'Frame'],
+		exceptions is [
+			'``Final``, ``Opcode``, ``Payload``, or ``Properties`` do not define a valid normalized WebSocket frame term' - error
+		],
 		remarks is [
 			'Final atoms' - 'Use ``final`` for FIN=1 and ``more`` for FIN=0.',
 			'Opcode atoms' - 'Supported opcodes are ``continuation``, ``text``, ``binary``, ``close``, ``ping``, and ``pong``.',
@@ -61,21 +64,32 @@
 	:- mode(parse(++compound, -term), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses one WebSocket frame from a source term. Supported sources are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``. Empty sources return ``end_of_file``.',
-		argnames is ['Source', 'Frame']
+		argnames is ['Source', 'Frame'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid WebSocket frame source term' - domain_error(http_websocket_source, 'Source'),
+			'The source bytes do not encode a valid normalized WebSocket frame' - error
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(++compound, +compound), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates one validated WebSocket frame to a sink term. Supported sinks are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``.',
-		argnames is ['Sink', 'Frame']
+		argnames is ['Sink', 'Frame'],
+		exceptions is [
+			'``Sink`` is invalid or ``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	:- public(read_frame/2).
 	:- mode(read_frame(+stream_or_alias, -term), one_or_error).
 	:- info(read_frame/2, [
 		comment is 'Reads one WebSocket frame from a binary stream without requiring end-of-file. Returns ``end_of_file`` when the stream is already exhausted.',
-		argnames is ['Stream', 'Frame']
+		argnames is ['Stream', 'Frame'],
+		exceptions is [
+			'Any exception that can be thrown by ``read_frame/3`` using the default options' - error
+		]
 	]).
 
 	:- public(read_frame/3).
@@ -83,6 +97,9 @@
 	:- info(read_frame/3, [
 		comment is 'Reads one WebSocket frame from a binary stream using the given read options. Returns ``end_of_file`` when the stream is already exhausted.',
 		argnames is ['Stream', 'Frame', 'Options'],
+		exceptions is [
+			'``Stream`` is a variable, ``Options`` are invalid, the payload length exceeds the configured limit, or the stream bytes do not encode a valid frame' - error
+		],
 		remarks is [
 			'Repeated options' - 'When the same read option is given multiple times, the first occurrence is used.',
 			'Option ``max_payload_length(Bytes)``' - 'Rejects frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Use a non-negative integer.'
@@ -93,42 +110,60 @@
 	:- mode(write_frame(+stream_or_alias, +compound), one_or_error).
 	:- info(write_frame/2, [
 		comment is 'Writes one validated WebSocket frame to a binary stream and flushes the stream.',
-		argnames is ['Stream', 'Frame']
+		argnames is ['Stream', 'Frame'],
+		exceptions is [
+			'``Stream`` is a variable or ``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	:- public(final/2).
 	:- mode(final(+compound, -atom), one_or_error).
 	:- info(final/2, [
 		comment is 'Returns the fragmentation state atom of a validated WebSocket frame term.',
-		argnames is ['Frame', 'Final']
+		argnames is ['Frame', 'Final'],
+		exceptions is [
+			'``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	:- public(opcode/2).
 	:- mode(opcode(+compound, -atom), one_or_error).
 	:- info(opcode/2, [
 		comment is 'Returns the opcode atom of a validated WebSocket frame term.',
-		argnames is ['Frame', 'Opcode']
+		argnames is ['Frame', 'Opcode'],
+		exceptions is [
+			'``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	:- public(payload/2).
 	:- mode(payload(+compound, -list(byte)), one_or_error).
 	:- info(payload/2, [
 		comment is 'Returns the payload byte list of a validated WebSocket frame term.',
-		argnames is ['Frame', 'Payload']
+		argnames is ['Frame', 'Payload'],
+		exceptions is [
+			'``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	:- public(properties/2).
 	:- mode(properties(+compound, -list(compound)), one_or_error).
 	:- info(properties/2, [
 		comment is 'Returns the normalized property list of a validated WebSocket frame term.',
-		argnames is ['Frame', 'Properties']
+		argnames is ['Frame', 'Properties'],
+		exceptions is [
+			'``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	:- public(property/2).
 	:- mode(property(+compound, ?compound), zero_or_one_or_error).
 	:- info(property/2, [
 		comment is 'True when the validated WebSocket frame term contains the given property. When the property argument is a variable, properties can be enumerated on backtracking.',
-		argnames is ['Frame', 'Property']
+		argnames is ['Frame', 'Property'],
+		exceptions is [
+			'``Frame`` is not a valid normalized WebSocket frame term' - error
+		]
 	]).
 
 	valid_option(max_payload_length(MaxPayloadLength)) :-

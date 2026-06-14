@@ -17,8 +17,8 @@ MessagePack format exporter and importer.
 |    ``logtalk_load(message_pack(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-05-21
+| **Version:** 1:1:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,6 +59,12 @@ Parses a list of bytes in the MessagePack format returning the corresponding ter
 | **Mode and number of proofs:**
 |    ``parse(@list(byte),-ground)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Bytes`` is not ground:
+|        ``instantiation_error``
+|    ``Bytes`` is ground but not a valid MessagePack byte sequence:
+|        ``domain_error(message_pack_byte_sequence,Bytes)``
+
 
 ------------
 
@@ -77,6 +83,12 @@ Generates a list of bytes in the MessagePack format representing the given term.
 |    ``generate(Term,Bytes)``
 | **Mode and number of proofs:**
 |    ``generate(@ground,-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Term`` is a variable:
+|        ``instantiation_error``
+|    ``Term`` has no corresponding MessagePack representation:
+|        ``domain_error(message_pack_term,Term)``
 
 
 ------------

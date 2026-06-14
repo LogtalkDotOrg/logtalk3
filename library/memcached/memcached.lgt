@@ -22,9 +22,9 @@
 :- object(memcached).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-09,
+		date is 2026-06-14,
 		comment is 'Portable Memcached client implementing the text (ASCII) protocol. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (same as the sockets library).',
@@ -39,9 +39,7 @@
 		]
 	]).
 
-	% ==========================================================================
-	% Public API - Connection Management
-	% ==========================================================================
+	% connection Management
 
 	:- public(connect/3).
 	:- mode(connect(+atom, +integer, --compound), one_or_error).
@@ -70,9 +68,7 @@
 		argnames is ['Connection']
 	]).
 
-	% ==========================================================================
-	% Public API - Storage Commands
-	% ==========================================================================
+	% storage Commands
 
 	:- public(set/5).
 	:- mode(set(+compound, +atom, +atom, +integer, +integer), one_or_error).
@@ -152,136 +148,177 @@
 		]
 	]).
 
-	% ==========================================================================
-	% Public API - Retrieval Commands
-	% ==========================================================================
+	% retrieval Commands
 
 	:- public(get/3).
 	:- mode(get(+compound, +atom, -atom), zero_or_one_or_error).
 	:- info(get/3, [
 		comment is 'Retrieves the value associated with the key. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'Value']
+		argnames is ['Connection', 'Key', 'Value'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``get`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(get/4).
 	:- mode(get(+compound, +atom, -atom, -integer), zero_or_one_or_error).
 	:- info(get/4, [
 		comment is 'Retrieves the value and flags associated with the key. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'Value', 'Flags']
+		argnames is ['Connection', 'Key', 'Value', 'Flags'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``get`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(gets/4).
 	:- mode(gets(+compound, +atom, -atom, -integer), zero_or_one_or_error).
 	:- info(gets/4, [
 		comment is 'Retrieves the value and CAS unique token for the key. Fails if the key is not found. The CAS value is used with the cas/6 predicate.',
-		argnames is ['Connection', 'Key', 'Value', 'CasUnique']
+		argnames is ['Connection', 'Key', 'Value', 'CasUnique'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``gets`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(gets/5).
 	:- mode(gets(+compound, +atom, -atom, -integer, -integer), zero_or_one_or_error).
 	:- info(gets/5, [
 		comment is 'Retrieves the value, flags, and CAS unique token for the key. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'Value', 'Flags', 'CasUnique']
+		argnames is ['Connection', 'Key', 'Value', 'Flags', 'CasUnique'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``gets`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(mget/3).
 	:- mode(mget(+compound, +list(atom), -list(compound)), one_or_error).
 	:- info(mget/3, [
 		comment is 'Retrieves multiple keys at once. Returns a list of ``item(Key, Value, Flags)`` terms for found keys.',
-		argnames is ['Connection', 'Keys', 'Items']
+		argnames is ['Connection', 'Keys', 'Items'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the multi-key retrieval command' - memcached_error('Error')
+		]
 	]).
 
-	% ==========================================================================
-	% Public API - Deletion
-	% ==========================================================================
+	% deletion
 
 	:- public(delete/2).
 	:- mode(delete(+compound, +atom), zero_or_one_or_error).
 	:- info(delete/2, [
 		comment is 'Deletes the item with the given key. Fails if the key is not found.',
-		argnames is ['Connection', 'Key']
+		argnames is ['Connection', 'Key'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``delete`` command' - memcached_error('Error')
+		]
 	]).
 
-	% ==========================================================================
-	% Public API - Increment/Decrement
-	% ==========================================================================
+	% increment/decrement
 
 	:- public(incr/4).
 	:- mode(incr(+compound, +atom, +integer, -integer), zero_or_one_or_error).
 	:- info(incr/4, [
 		comment is 'Increments the numeric value of the given key by the specified amount. Returns the new value. The item must already exist and contain a decimal representation of a 64-bit unsigned integer. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'Amount', 'NewValue']
+		argnames is ['Connection', 'Key', 'Amount', 'NewValue'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``incr`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(decr/4).
 	:- mode(decr(+compound, +atom, +integer, -integer), zero_or_one_or_error).
 	:- info(decr/4, [
 		comment is 'Decrements the numeric value of the given key by the specified amount. Returns the new value. Underflow is caught: decrementing below 0 yields 0. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'Amount', 'NewValue']
+		argnames is ['Connection', 'Key', 'Amount', 'NewValue'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``decr`` command' - memcached_error('Error')
+		]
 	]).
 
-	% ==========================================================================
-	% Public API - Touch
-	% ==========================================================================
+	% touch
 
 	:- public(touch/3).
 	:- mode(touch(+compound, +atom, +integer), zero_or_one_or_error).
 	:- info(touch/3, [
 		comment is 'Updates the expiration time of the given key without fetching the data. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'ExpTime']
+		argnames is ['Connection', 'Key', 'ExpTime'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``touch`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(gat/4).
 	:- mode(gat(+compound, +atom, +integer, -atom), zero_or_one_or_error).
 	:- info(gat/4, [
 		comment is 'Gets the value of the key and updates its expiration time. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'ExpTime', 'Value']
+		argnames is ['Connection', 'Key', 'ExpTime', 'Value'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``gat`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(gats/5).
 	:- mode(gats(+compound, +atom, +integer, -atom, -integer), zero_or_one_or_error).
 	:- info(gats/5, [
 		comment is 'Gets the value and CAS unique token of the key and updates its expiration time. Fails if the key is not found.',
-		argnames is ['Connection', 'Key', 'ExpTime', 'Value', 'CasUnique']
+		argnames is ['Connection', 'Key', 'ExpTime', 'Value', 'CasUnique'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``gats`` command' - memcached_error('Error')
+		]
 	]).
 
-	% ==========================================================================
-	% Public API - Server Commands
-	% ==========================================================================
+	% server commands
 
 	:- public(flush_all/1).
 	:- mode(flush_all(+compound), one_or_error).
 	:- info(flush_all/1, [
 		comment is 'Invalidates all existing items immediately.',
-		argnames is ['Connection']
+		argnames is ['Connection'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``flush_all`` command' - memcached_error('Error'),
+			'The server replies with an error to the ``flush_all`` command' - memcached_error(server_error('Message'))
+		]
 	]).
 
 	:- public(flush_all/2).
 	:- mode(flush_all(+compound, +integer), one_or_error).
 	:- info(flush_all/2, [
 		comment is 'Invalidates all existing items after the specified number of seconds.',
-		argnames is ['Connection', 'Delay']
+		argnames is ['Connection', 'Delay'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the delayed ``flush_all`` command' - memcached_error('Error'),
+			'The server replies with an error to the delayed ``flush_all`` command' - memcached_error(server_error('Message'))
+		]
 	]).
 
 	:- public(version/2).
 	:- mode(version(+compound, -atom), one_or_error).
 	:- info(version/2, [
 		comment is 'Returns the version string of the Memcached server.',
-		argnames is ['Connection', 'Version']
+		argnames is ['Connection', 'Version'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``version`` command' - memcached_error('Error'),
+			'The server replies with an unexpected or error response to the ``version`` command' - memcached_error(server_error('Message'))
+		]
 	]).
 
 	:- public(stats/2).
 	:- mode(stats(+compound, -list(compound)), one_or_error).
 	:- info(stats/2, [
 		comment is 'Returns general-purpose statistics as a list of ``stat(Name, Value)`` terms.',
-		argnames is ['Connection', 'Stats']
+		argnames is ['Connection', 'Stats'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the ``stats`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- public(stats/3).
 	:- mode(stats(+compound, +atom, -list(compound)), one_or_error).
 	:- info(stats/3, [
 		comment is 'Returns statistics for the given argument (e.g. ``items``, ``slabs``, ``sizes``) as a list of ``stat(Name, Value)`` terms.',
-		argnames is ['Connection', 'Argument', 'Stats']
+		argnames is ['Connection', 'Argument', 'Stats'],
+		exceptions is [
+			'Network or stream I/O error while sending or reading the parameterized ``stats`` command' - memcached_error('Error')
+		]
 	]).
 
 	:- uses(list, [
@@ -292,9 +329,7 @@
 		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
-	% ==========================================================================
-	% Implementation - Connection Management
-	% ==========================================================================
+	% connection management
 
 	connect(Host, Port, Connection) :-
 		context(Context),
@@ -320,9 +355,7 @@
 			catch(socket::close(Input, Output), _, true)
 		).
 
-	% ==========================================================================
-	% Implementation - Storage Commands
-	% ==========================================================================
+	% storage commands
 
 	set(Connection, Key, Value, Flags, ExpTime) :-
 		storage_command(Connection, set, Key, Value, Flags, ExpTime).
@@ -402,9 +435,7 @@
 		atom_codes(Message, Response),
 		throw(error(memcached_error(server_error(Message)), Context)).
 
-	% ==========================================================================
-	% Implementation - Retrieval Commands
-	% ==========================================================================
+	% retrieval commands
 
 	get(Connection, Key, Value) :-
 		get(Connection, Key, Value, _).
@@ -457,11 +488,7 @@
 			throw(error(memcached_error(Error), Context))
 		).
 
-
-
-	% ==========================================================================
-	% Implementation - Deletion
-	% ==========================================================================
+	% deletion
 
 	delete(Connection, Key) :-
 		context(Context),
@@ -479,9 +506,7 @@
 		atom_codes('DELETED', DeletedCodes),
 		starts_with(Response, DeletedCodes).
 
-	% ==========================================================================
-	% Implementation - Increment/Decrement
-	% ==========================================================================
+	% increment/decrement
 
 	incr(Connection, Key, Amount, NewValue) :-
 		incr_decr_command(Connection, incr, Key, Amount, NewValue).
@@ -509,9 +534,7 @@
 			number_codes(NewValue, ValueCodes)
 		).
 
-	% ==========================================================================
-	% Implementation - Touch
-	% ==========================================================================
+	% touch
 
 	touch(Connection, Key, ExpTime) :-
 		context(Context),
@@ -559,9 +582,7 @@
 		),
 		member(item(Key, Value, _, CasUnique), Items).
 
-	% ==========================================================================
-	% Implementation - Server Commands
-	% ==========================================================================
+	% server commands
 
 	flush_all(Connection) :-
 		context(Context),
@@ -654,9 +675,7 @@
 			throw(error(memcached_error(Error), Context))
 		).
 
-	% ==========================================================================
-	% Implementation - Low-Level I/O
-	% ==========================================================================
+	% low-level I/O
 
 	% Send command bytes to the server
 	send_command(Stream, Codes) :-
@@ -696,9 +715,7 @@
 		N1 is N - 1,
 		read_bytes(Stream, N1, Rest).
 
-	% ==========================================================================
-	% Implementation - Response Parsing
-	% ==========================================================================
+	% response parsing
 
 	% Parse retrieval responses: VALUE lines followed by END
 	read_retrieval_response(Stream, Items) :-
@@ -780,9 +797,7 @@
 		strip_crlf(ValueCodes, StrippedCodes),
 		atom_codes(Value, StrippedCodes).
 
-	% ==========================================================================
-	% Auxiliary Predicates
-	% ==========================================================================
+	% auxiliary predicates
 
 	% Check if a codes list starts with a given prefix
 	starts_with(List, Prefix) :-

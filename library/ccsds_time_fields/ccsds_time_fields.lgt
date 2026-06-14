@@ -22,9 +22,9 @@
 :- object(ccsds_time_fields).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-06-14,
 		comment is 'Helpers for parsing and generating self-describing CCSDS time fields using descriptor terms and the existing CCSDS time-code objects.'
 	]).
 
@@ -66,14 +66,22 @@
 	:- mode(format(+compound, -atom), one_or_error).
 	:- info(format/2, [
 		comment is 'Returns the CCSDS time-code format selected by a descriptor term.',
-		argnames is ['Descriptor', 'Format']
+		argnames is ['Descriptor', 'Format'],
+		exceptions is [
+			'``Descriptor`` is a variable' - instantiation_error,
+			'``Descriptor`` is neither a variable nor a supported CCSDS time-field descriptor term' - domain_error(ccsds_time_field_descriptor, 'Descriptor')
+		]
 	]).
 
 	:- public(epoch/2).
 	:- mode(epoch(+compound, -atom), one_or_error).
 	:- info(epoch/2, [
 		comment is 'Returns the epoch selected by a descriptor term. Calendar segmented descriptors return ``none``.',
-		argnames is ['Descriptor', 'Epoch']
+		argnames is ['Descriptor', 'Epoch'],
+		exceptions is [
+			'``Descriptor`` is a variable' - instantiation_error,
+			'``Descriptor`` is neither a variable nor a supported CCSDS time-field descriptor term' - domain_error(ccsds_time_field_descriptor, 'Descriptor')
+		]
 	]).
 
 	:- uses(reader, [

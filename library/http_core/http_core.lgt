@@ -33,14 +33,31 @@
 	:- mode(request(+atom, +compound, +compound, +list(compound), +compound, +list(compound), -compound), one_or_error).
 	:- info(request/7, [
 		comment is 'Constructs a validated normalized ``request/6`` term from the given method, target, version, headers, body, and properties.',
-		argnames is ['Method', 'Target', 'Version', 'Headers', 'Body', 'Properties', 'Request']
+		argnames is ['Method', 'Target', 'Version', 'Headers', 'Body', 'Properties', 'Request'],
+		exceptions is [
+			'``Method`` is not a valid HTTP method atom' - domain_error(http_method, 'Method'),
+			'``Target`` is not a valid normalized HTTP target term' - domain_error(http_target, 'Target'),
+			'``Version`` is not a valid HTTP version term' - domain_error(http_version, 'Version'),
+			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'``Properties`` is not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties'),
+			'The request headers, body, or properties violate normalized HTTP request semantics' - error
+		]
 	]).
 
 	:- public(response/6).
 	:- mode(response(+compound, +compound, +list(compound), +compound, +list(compound), -compound), one_or_error).
 	:- info(response/6, [
 		comment is 'Constructs a validated normalized ``response/5`` term from the given version, status, headers, body, and properties.',
-		argnames is ['Version', 'Status', 'Headers', 'Body', 'Properties', 'Response']
+		argnames is ['Version', 'Status', 'Headers', 'Body', 'Properties', 'Response'],
+		exceptions is [
+			'``Version`` is not a valid HTTP version term' - domain_error(http_version, 'Version'),
+			'``Status`` is not a valid normalized HTTP status term' - domain_error(http_status, 'Status'),
+			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'``Properties`` is not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties'),
+			'The response headers, body, or properties violate normalized HTTP response semantics' - error
+		]
 	]).
 
 	:- public(is_request/1).
@@ -61,140 +78,219 @@
 	:- mode(parse_request(++compound, --compound), one_or_error).
 	:- info(parse_request/2, [
 		comment is 'Parses a complete HTTP request message from the given source (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a normalized ``request/6`` term.',
-		argnames is ['Source', 'Request']
+		argnames is ['Source', 'Request'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source'),
+			'The parsed request violates normalized HTTP request validation or semantics' - error
+		]
 	]).
 
 	:- public(generate_request/2).
 	:- mode(generate_request(+compound, ++compound), one_or_error).
 	:- info(generate_request/2, [
 		comment is 'Generates a complete HTTP request message to the given sink (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a normalized ``request/6`` term.',
-		argnames is ['Sink', 'Request']
+		argnames is ['Sink', 'Request'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
+			'``Request`` is not a valid normalized HTTP request term' - error
+		]
 	]).
 
 	:- public(parse_response/2).
 	:- mode(parse_response(++compound, --compound), one_or_error).
 	:- info(parse_response/2, [
 		comment is 'Parses a complete HTTP response message from the given source (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a normalized ``response/5`` term.',
-		argnames is ['Source', 'Response']
+		argnames is ['Source', 'Response'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source'),
+			'The parsed response violates normalized HTTP response validation or semantics' - error
+		]
 	]).
 
 	:- public(generate_response/2).
 	:- mode(generate_response(+compound, ++compound), one_or_error).
 	:- info(generate_response/2, [
 		comment is 'Generates a complete HTTP response message to the given sink (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a normalized ``response/5`` term.',
-		argnames is ['Sink', 'Response']
+		argnames is ['Sink', 'Response'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
+			'``Response`` is not a valid normalized HTTP response term' - error
+		]
 	]).
 
 	:- public(generate_response_headers/2).
 	:- mode(generate_response_headers(+compound, ++compound), one_or_error).
 	:- info(generate_response_headers/2, [
 		comment is 'Generates an HTTP response status line and effective header block, terminated by an empty line, to the given sink from a normalized ``response/5`` term.',
-		argnames is ['Sink', 'Response']
+		argnames is ['Sink', 'Response'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
+			'``Response`` is not a valid normalized HTTP response term' - error
+		]
 	]).
 
 	:- public(parse_request_line/2).
 	:- mode(parse_request_line(++compound, --compound), one_or_error).
 	:- info(parse_request_line/2, [
 		comment is 'Parses an HTTP request line from the given source (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a ``request_line(Method, Target, Version)`` term.',
-		argnames is ['Source', 'RequestLine']
+		argnames is ['Source', 'RequestLine'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source')
+		]
 	]).
 
 	:- public(generate_request_line/2).
 	:- mode(generate_request_line(+compound, ++compound), one_or_error).
 	:- info(generate_request_line/2, [
 		comment is 'Generates an HTTP request line to the given sink (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a ``request_line(Method, Target, Version)`` term.',
-		argnames is ['Sink', 'RequestLine']
+		argnames is ['Sink', 'RequestLine'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink')
+		]
 	]).
 
 	:- public(parse_status_line/2).
 	:- mode(parse_status_line(++compound, --compound), one_or_error).
 	:- info(parse_status_line/2, [
 		comment is 'Parses an HTTP status line from the given source (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into a ``status_line(Version, Status)`` term.',
-		argnames is ['Source', 'StatusLine']
+		argnames is ['Source', 'StatusLine'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source')
+		]
 	]).
 
 	:- public(generate_status_line/2).
 	:- mode(generate_status_line(+compound, ++compound), one_or_error).
 	:- info(generate_status_line/2, [
 		comment is 'Generates an HTTP status line to the given sink (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a ``status_line(Version, Status)`` term.',
-		argnames is ['Sink', 'StatusLine']
+		argnames is ['Sink', 'StatusLine'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink')
+		]
 	]).
 
 	:- public(parse_headers/2).
 	:- mode(parse_headers(++compound, -list(compound)), one_or_error).
 	:- info(parse_headers/2, [
 		comment is 'Parses an HTTP header block from the given source (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) into normalized header ``Name-Value`` pairs with typed values for recognized headers.',
-		argnames is ['Source', 'Headers']
+		argnames is ['Source', 'Headers'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source')
+		]
 	]).
 
 	:- public(generate_headers/2).
 	:- mode(generate_headers(+compound, ++list(compound)), one_or_error).
 	:- info(generate_headers/2, [
 		comment is 'Generates an HTTP header block to the given sink (``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from normalized header ``Name-Value`` pairs.',
-		argnames is ['Sink', 'Headers']
+		argnames is ['Sink', 'Headers'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
+			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers')
+		]
 	]).
 
 	:- public(parse_body/4).
 	:- mode(parse_body(++compound, ++atom, +list(compound), --compound), one_or_error).
 	:- info(parse_body/4, [
 		comment is 'Parses a body payload from the given source (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) according to the given media type and options into a normalized body term.',
-		argnames is ['Source', 'MediaType', 'Options', 'Body']
+		argnames is ['Source', 'MediaType', 'Options', 'Body'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source'),
+			'``MediaType`` is not a valid HTTP media type atom' - domain_error(http_media_type, 'MediaType'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'No registered HTTP body codec exists for ``MediaType`` when codec-based decoding is required' - existence_error(http_body_codec, 'MediaType')
+		]
 	]).
 
 	:- public(generate_body/3).
 	:- mode(generate_body(+compound, ++compound, +list(compound)), one_or_error).
 	:- info(generate_body/3, [
 		comment is 'Generates a body payload to the given sink (``bytes(List)``, ``codes(List)``, ``chars(List)``, ``atom(Atom)``, ``file(Path)``, or ``stream(Stream)``) from a normalized body term and options.',
-		argnames is ['Sink', 'Body', 'Options']
+		argnames is ['Sink', 'Body', 'Options'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'No registered HTTP body codec exists for the body media type when codec-based encoding is required' - existence_error(http_body_codec, 'MediaType')
+		]
 	]).
 
 	:- public(encode_body/4).
 	:- mode(encode_body(+atom, ++term, +list(compound), -compound), one_or_error).
 	:- info(encode_body/4, [
 		comment is 'Encodes a semantic payload term using the registered concrete body codec for the given media type into a normalized body term.',
-		argnames is ['MediaType', 'Payload', 'Options', 'Body']
+		argnames is ['MediaType', 'Payload', 'Options', 'Body'],
+		exceptions is [
+			'``MediaType`` is not a valid HTTP media type atom' - domain_error(http_media_type, 'MediaType'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'No registered HTTP body codec exists for ``MediaType``' - existence_error(http_body_codec, 'MediaType')
+		]
 	]).
 
 	:- public(decode_body/4).
 	:- mode(decode_body(+atom, ++compound, +list(compound), --term), one_or_error).
 	:- info(decode_body/4, [
 		comment is 'Decodes a normalized body term using the registered concrete body codec for the given media type into a semantic payload term.',
-		argnames is ['MediaType', 'Body', 'Options', 'Payload']
+		argnames is ['MediaType', 'Body', 'Options', 'Payload'],
+		exceptions is [
+			'``MediaType`` is not a valid HTTP media type atom' - domain_error(http_media_type, 'MediaType'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'No registered HTTP body codec exists for ``MediaType``' - existence_error(http_body_codec, 'MediaType')
+		]
 	]).
 
 	:- public(method/2).
 	:- mode(method(+compound, -atom), one_or_error).
 	:- info(method/2, [
 		comment is 'Returns the request method from a normalized ``request/6`` term.',
-		argnames is ['Request', 'Method']
+		argnames is ['Request', 'Method'],
+		exceptions is []
 	]).
 
 	:- public(target/2).
 	:- mode(target(+compound, -compound), one_or_error).
 	:- info(target/2, [
 		comment is 'Returns the request target from a normalized ``request/6`` term.',
-		argnames is ['Request', 'Target']
+		argnames is ['Request', 'Target'],
+		exceptions is []
 	]).
 
 	:- public(version/2).
 	:- mode(version(+compound, -compound), one_or_error).
 	:- info(version/2, [
 		comment is 'Returns the HTTP version from a normalized request or response term.',
-		argnames is ['Message', 'Version']
+		argnames is ['Message', 'Version'],
+		exceptions is []
 	]).
 
 	:- public(status/2).
 	:- mode(status(+compound, -compound), one_or_error).
 	:- info(status/2, [
 		comment is 'Returns the response status from a normalized ``response/5`` term.',
-		argnames is ['Response', 'Status']
+		argnames is ['Response', 'Status'],
+		exceptions is []
 	]).
 
 	:- public(headers/2).
 	:- mode(headers(+compound, -list(compound)), one_or_error).
 	:- info(headers/2, [
 		comment is 'Returns the normalized header list from a request or response term.',
-		argnames is ['Message', 'Headers']
+		argnames is ['Message', 'Headers'],
+		exceptions is []
 	]).
 
 	:- public(header/3).
@@ -208,7 +304,8 @@
 	:- mode(body(+compound, -compound), one_or_error).
 	:- info(body/2, [
 		comment is 'Returns the normalized body term from a request or response term.',
-		argnames is ['Message', 'Body']
+		argnames is ['Message', 'Body'],
+		exceptions is []
 	]).
 
 	:- public(property/2).

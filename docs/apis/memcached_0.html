@@ -392,8 +392,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-09</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -812,6 +812,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">get(+compound,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">get</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="get-4">
@@ -831,6 +840,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">get(+compound,+atom,-atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">get</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -854,6 +872,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">gets(+compound,+atom,-atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">gets</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="gets-5">
@@ -873,6 +900,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">gets(+compound,+atom,-atom,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">gets</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -896,6 +932,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">mget(+compound,+list(atom),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the multi-key retrieval command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="delete-2">
@@ -915,6 +960,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">delete</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -938,6 +992,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">incr(+compound,+atom,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">incr</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decr-4">
@@ -957,6 +1020,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decr(+compound,+atom,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">decr</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -980,6 +1052,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">touch(+compound,+atom,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">touch</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="gat-4">
@@ -999,6 +1080,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">gat(+compound,+atom,+integer,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">gat</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1022,6 +1112,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">gats(+compound,+atom,+integer,-atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">gats</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="flush-all-1">
@@ -1041,6 +1140,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">flush_all(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">flush_all</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+<div class="line">The server replies with an error to the <code class="docutils literal notranslate"><span class="pre">flush_all</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(server_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1064,6 +1176,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">flush_all(+compound,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the delayed <code class="docutils literal notranslate"><span class="pre">flush_all</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+<div class="line">The server replies with an error to the delayed <code class="docutils literal notranslate"><span class="pre">flush_all</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(server_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="version-2">
@@ -1083,6 +1208,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">version(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">version</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+<div class="line">The server replies with an unexpected or error response to the <code class="docutils literal notranslate"><span class="pre">version</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(server_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1106,6 +1244,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">stats(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the <code class="docutils literal notranslate"><span class="pre">stats</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="stats-3">
@@ -1125,6 +1272,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">stats(+compound,+atom,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Network or stream I/O error while sending or reading the parameterized <code class="docutils literal notranslate"><span class="pre">stats</span></code> command:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">memcached_error(Error)</span></code></div>
+</div>
 </div>
 </div>
 </section>

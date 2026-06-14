@@ -57,6 +57,10 @@ Routes a normalized HTTP request using the importing object ``route/4`` clauses.
 | **Mode and number of proofs:**
 |    ``handle(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The request, route metadata, middleware, or delegated route handler raise a routing exception:
+|        ``error``
+
 
 ------------
 
@@ -269,6 +273,10 @@ Optional hook predicate that validates or decorates a routed request after route
 | **Mode and number of proofs:**
 |    ``authorize_routed_request(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The authorizer hook may throw request-specific authorization exceptions:
+|        ``error``
+
 
 ------------
 
@@ -439,6 +447,10 @@ Returns the normalized placeholder descriptors declared in a path template as ``
 |    ``path_template_parameters(PathTemplate,Parameters)``
 | **Mode and number of proofs:**
 |    ``path_template_parameters(+atom,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PathTemplate`` is not a valid router path template:
+|        ``error``
 
 
 ------------

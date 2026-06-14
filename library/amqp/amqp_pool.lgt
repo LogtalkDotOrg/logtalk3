@@ -22,19 +22,11 @@
 :- category(amqp_pool).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-02-19,
+		date is 2026-06-14,
 		comment is 'AMQP connection pool category. Import this category into an object to create a named connection pool with automatic connection management.'
 	]).
-
-	:- uses(list, [
-		length/2, member/2
-	]).
-
-	% ==========================================================================
-	% Public API
-	% ==========================================================================
 
 	:- public(initialize/1).
 	:- mode(initialize(+list), one_or_error).
@@ -42,6 +34,9 @@
 	:- info(initialize/1, [
 		comment is 'Initializes the connection pool with the given configuration options. Must be called before using other pool predicates.',
 		argnames is ['Options'],
+		exceptions is [
+			'``Options`` configure a minimum pool size greater than the maximum pool size' - pool_error(invalid_config('min_size > max_size'))
+		],
 		remarks is [
 			'Option host(Host)' - 'AMQP server hostname. Default is localhost.',
 			'Option port(Port)' - 'AMQP server port. Default is 5672.',
@@ -97,10 +92,6 @@
 		argnames is ['MinSize', 'MaxSize']
 	]).
 
-	% ==========================================================================
-	% Private State
-	% ==========================================================================
-
 	:- private(pool_config/5).
 	:- dynamic(pool_config/5).
 	:- mode(pool_config(?atom, ?integer, ?integer, ?integer, ?list), zero_or_one).
@@ -125,9 +116,9 @@
 		argnames is ['Connection', 'AcquireTimestamp']
 	]).
 
-	% ==========================================================================
-	% Implementation
-	% ==========================================================================
+	:- uses(list, [
+		length/2, member/2
+	]).
 
 	initialize(Options) :-
 		% Clear any existing state
@@ -245,9 +236,7 @@
 		;	true
 		).
 
-	% ==========================================================================
-	% Auxiliary predicates
-	% ==========================================================================
+	% auxiliary predicates
 
 	create_initial_connections(_, _, _, 0) :-
 		!.

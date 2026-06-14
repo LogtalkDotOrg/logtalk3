@@ -54,6 +54,10 @@ Parses one or more TLE records from a source specification into canonical ``tle(
 | **Mode and number of proofs:**
 |    ``parse(++compound,--list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception defined by the implementing TLE parser for invalid sources or malformed TLE data:
+|        ``error``
+
 
 ------------
 
@@ -72,6 +76,10 @@ Parses a single TLE record given an optional name atom or the atom ``none`` plus
 |    ``parse_lines(Name,Line1,Line2,TLE)``
 | **Mode and number of proofs:**
 |    ``parse_lines(++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception defined by the implementing TLE parser for invalid line syntax, checksums, or orbital element ranges:
+|        ``error``
 
 
 ------------
@@ -92,6 +100,10 @@ Propagates a parsed TLE using the default ``approximate`` model and returns a ``
 | **Mode and number of proofs:**
 |    ``propagate(++compound,++nonvar,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, or propagation-domain failures:
+|        ``error``
+
 
 ------------
 
@@ -110,6 +122,10 @@ Propagates a parsed TLE using the default ``approximate`` model and returns coor
 |    ``propagate(TLE,Time,Frame,Coordinate)``
 | **Mode and number of proofs:**
 |    ``propagate(++compound,++nonvar,++atom,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures:
+|        ``error``
 
 
 ------------
@@ -130,6 +146,10 @@ Propagates a parsed TLE using the requested propagation model and returns coordi
 | **Mode and number of proofs:**
 |    ``propagate(++compound,++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures:
+|        ``error``
+
 
 ------------
 
@@ -148,6 +168,10 @@ Propagates a parsed TLE using the default ``approximate`` model and returns ``st
 |    ``propagate_state(TLE,Time,Frame,State)``
 | **Mode and number of proofs:**
 |    ``propagate_state(++compound,++nonvar,++atom,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures:
+|        ``error``
 
 
 ------------
@@ -168,6 +192,10 @@ Propagates a parsed TLE using the requested propagation model and returns ``stat
 | **Mode and number of proofs:**
 |    ``propagate_state(++compound,++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures:
+|        ``error``
+
 
 ------------
 
@@ -187,6 +215,10 @@ Samples the propagated sub-satellite ground track between two UTC ``date_time/6`
 | **Mode and number of proofs:**
 |    ``ground_track(++compound,++compound,++compound,++number,--list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, or propagation-domain failures:
+|        ``error``
+
 
 ------------
 
@@ -205,6 +237,10 @@ Samples the propagated sub-satellite ground track between two UTC ``date_time/6`
 |    ``ground_track(TLE,StartDateTime,EndDateTime,StepSeconds,Model,Samples)``
 | **Mode and number of proofs:**
 |    ``ground_track(++compound,++compound,++compound,++number,++atom,--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, model identifiers, or propagation-domain failures:
+|        ``error``
 
 
 ------------

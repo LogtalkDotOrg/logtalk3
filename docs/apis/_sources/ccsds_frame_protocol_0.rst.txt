@@ -54,6 +54,14 @@ Parses CCSDS transfer frame(s) from a source. Supported source terms are ``file(
 | **Mode and number of proofs:**
 |    ``parse(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is not a valid CCSDS frame source term:
+|        ``domain_error(ccsds_frame_source,Source)``
+|    ``Source`` bytes are not a valid CCSDS frame byte sequence for the selected frame type:
+|        ``domain_error(ccsds_frame_byte_sequence,Bytes)``
+
 
 ------------
 
@@ -73,6 +81,14 @@ Generates CCSDS transfer frame bytes to a sink. Supported sink terms are ``file(
 | **Mode and number of proofs:**
 |    ``generate(+compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is not a valid CCSDS frame sink term:
+|        ``domain_error(ccsds_frame_sink,Sink)``
+|    ``Frames`` is not a valid list of CCSDS transfer frame terms for the selected frame type:
+|        ``domain_error(ccsds_frame_term,Frame)``
+
 
 ------------
 
@@ -91,6 +107,12 @@ Generates a list of bytes from a single CCSDS transfer frame term with an open t
 |    ``generate(Frame,Bytes,Tail)``
 | **Mode and number of proofs:**
 |    ``generate(+compound,-list(byte),--variable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is not a valid CCSDS transfer frame term for the selected frame type:
+|        ``domain_error(ccsds_frame_term,Frame)``
 
 
 ------------
@@ -129,6 +151,12 @@ Computes the correct frame error control field for the selected object configura
 |    ``update_fecf(Frame,UpdatedFrame)``
 | **Mode and number of proofs:**
 |    ``update_fecf(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is not a valid CCSDS transfer frame term for the selected frame type:
+|        ``domain_error(ccsds_frame_term,Frame)``
 
 
 ------------

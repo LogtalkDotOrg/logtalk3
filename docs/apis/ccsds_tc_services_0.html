@@ -392,8 +392,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-08</div>
+<div class="line"><strong>Version:</strong> 0:1:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -774,6 +774,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">extract_tc_segment(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="insert-tc-segment-3">
@@ -793,6 +806,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_tc_segment(+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Segment</span></code> or <code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Segment</span></code> is neither a variable nor a valid telecommand segment term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment,Segment)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> has an invalid telecommand segment header suffix encoding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_header,SegmentHeader)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -816,6 +846,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frame(+compound,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tc-frame-5">
@@ -835,6 +894,39 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frame(+compound,+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid telecommand discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -858,6 +950,39 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frame(+compound,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid telecommand discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tc-frames-4">
@@ -877,6 +1002,35 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frames(+list(compound),+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -900,6 +1054,39 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frames(+list(compound),+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid telecommand discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tc-frames-6">
@@ -919,6 +1106,39 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frames(+list(compound),+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid telecommand discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -942,6 +1162,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frame_with_provenance(+compound,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tc-frame-with-provenance-6">
@@ -961,6 +1210,39 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frame_with_provenance(+compound,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid telecommand discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -984,6 +1266,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frames_with_provenance(+list(compound),+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-tc-frames-with-provenance-6">
@@ -1003,6 +1314,39 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_tc_frames_with_provenance(+list(compound),+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid telecommand discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid telecommand reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Frame</span></code> of <code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a valid telecommand transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_term,Frame)</span></code></div>
+</div>
+<div class="line">The telecommand frame sequence is discontinuous under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_transfer_frame_sequence,tc_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedSequenceNumber,SequenceNumber))</span></code></div>
+</div>
+<div class="line">A telecommand segment starts a new reassembly while a previous segment for the same MAP is still pending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,existing_pending_segment(MapId))</span></code></div>
+</div>
+<div class="line">A telecommand continuation or last segment is missing its first segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_segment_reassembly,missing_first_segment(MapId))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1026,6 +1370,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dispatch_service_units_by_map(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServiceUnits</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServiceUnits</span></code> is neither a variable nor a valid list of telecommand service units:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_service_units,ServiceUnits)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="dispatch-service-units-by-map-3">
@@ -1045,6 +1402,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dispatch_service_units_by_map(+list(compound),+integer,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServiceUnits</span></code> or <code class="docutils literal notranslate"><span class="pre">MapId</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServiceUnits</span></code> is neither a variable nor a valid list of telecommand service units:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_service_units,ServiceUnits)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MapId</span></code> is neither a variable nor a valid telecommand MAP identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_tc_map_id,MapId)</span></code></div>
+</div>
 </div>
 </div>
 </section>

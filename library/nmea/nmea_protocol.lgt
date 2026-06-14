@@ -32,14 +32,20 @@
 	:- mode(parse(++compound, --list(compound)), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses NMEA sentences from a source specification into canonical raw sentence terms. Supported source specifications are ``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, and ``file(Path)``.',
-		argnames is ['Source', 'Sentences']
+		argnames is ['Source', 'Sentences'],
+		exceptions is [
+			'Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data' - error
+		]
 	]).
 
 	:- public(parse/3).
 	:- mode(parse(++compound, ++list(compound), --list(compound)), one_or_error).
 	:- info(parse/3, [
 		comment is 'Parses NMEA sentences from a source specification using parser options. Supported options are ``checksum(required)``, ``checksum(optional)``, ``checksum(ignore)``, ``unknown_type(keep)``, and ``unknown_type(error)``.',
-		argnames is ['Source', 'Options', 'Sentences']
+		argnames is ['Source', 'Options', 'Sentences'],
+		exceptions is [
+			'Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data' - error
+		]
 	]).
 
 	:- public(talker/2).

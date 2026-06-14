@@ -393,7 +393,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-08</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -475,6 +475,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">body(+atom,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid multipart media type atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Parts</span></code> is not a valid list of normalized multipart parts:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_parts,Parts)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="is-body-1">
@@ -517,6 +530,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse(++compound,+atom,+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid multipart media type atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are not valid for <code class="docutils literal notranslate"><span class="pre">http_core::parse_body/4</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+<div class="line">The parsed body is not a valid normalized multipart body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_body,Body)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="generate-3">
@@ -536,6 +566,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate(++compound,+compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized multipart body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are not valid for <code class="docutils literal notranslate"><span class="pre">http_core::generate_body/3</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -559,6 +602,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">media_type(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized multipart body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_body,Body)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parts-2">
@@ -578,6 +630,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parts(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized multipart body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_body,Body)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -601,6 +662,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fields(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized multipart/form-data body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_body,Body)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="files-2">
@@ -622,6 +692,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">files(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized multipart/form-data body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_body,Body)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="part-4">
@@ -641,6 +720,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">part(+list(compound),+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The given headers, body, and properties do not form a valid normalized multipart part term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_part,Part)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -685,6 +773,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">part_headers(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Part</span></code> is not a valid normalized multipart part term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_part,Part)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="part-body-2">
@@ -706,6 +803,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">part_body(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Part</span></code> is not a valid normalized multipart part term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_part,Part)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="part-properties-2">
@@ -725,6 +831,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">part_properties(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Part</span></code> is not a valid normalized multipart part term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_part,Part)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -790,6 +905,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">field_part(+atom,+term,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Name</span></code> is not a valid form-data field name:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameter_name,Name)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is not a valid list of additional form-data disposition parameters:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameters,Parameters)</span></code></div>
+</div>
+<div class="line">A form-data disposition parameter is invalid for a textual field part:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameter,Parameter)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="file-part-6">
@@ -811,6 +943,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">file_part(+atom,+atom,+atom,+compound,+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Name</span></code> is not a valid form-data field name:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameter_name,Name)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Filename</span></code> is not a valid form-data filename value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameter_value,Filename)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is not a valid list of additional form-data disposition parameters:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameters,Parameters)</span></code></div>
+</div>
+<div class="line">A form-data disposition parameter is invalid for a file part:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_parameter,Parameter)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="form-data-body-2">
@@ -830,6 +983,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">form_data_body(+list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Items</span></code> is not a valid list of form-data field or file descriptors:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_form_data_items,Items)</span></code></div>
+</div>
 </div>
 </div>
 </section>

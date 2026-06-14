@@ -81,6 +81,10 @@ Opens a new cookie jar using the given options list. Supported options include `
 | **Mode and number of proofs:**
 |    ``open(-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Options`` contain invalid cookie-jar configuration or persisted-cookie input:
+|        ``error``
+
 
 ------------
 
@@ -99,6 +103,10 @@ Closes a cookie jar and removes all stored cookies.
 |    ``close(Jar)``
 | **Mode and number of proofs:**
 |    ``close(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle:
+|        ``error``
 
 
 ------------
@@ -119,6 +127,10 @@ Removes all currently stored cookies from a cookie jar while keeping the jar han
 | **Mode and number of proofs:**
 |    ``clear(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle:
+|        ``error``
+
 
 ------------
 
@@ -137,6 +149,12 @@ Stores normalized Set-Cookie terms for the given absolute URL, replacing existin
 |    ``store_set_cookies(Jar,URL,SetCookies)``
 | **Mode and number of proofs:**
 |    ``store_set_cookies(+compound,+atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle:
+|        ``error``
+|    ``URL`` is not a supported absolute cookie-jar URL or ``SetCookies`` is not a valid set-cookie list:
+|        ``error``
 
 
 ------------
@@ -157,6 +175,10 @@ Returns the cookie name-value pairs currently applicable to the given absolute U
 | **Mode and number of proofs:**
 |    ``request_cookies(+compound,+atom,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle or ``URL`` is not a supported absolute cookie-jar URL:
+|        ``error``
+
 
 ------------
 
@@ -175,6 +197,10 @@ Returns the cookie name-value pairs currently applicable to the given absolute U
 |    ``request_cookies(Jar,URL,RequestContext,Cookies)``
 | **Mode and number of proofs:**
 |    ``request_cookies(+compound,+atom,+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle, ``URL`` is invalid, or ``RequestContext`` is not a valid cookie-jar request context:
+|        ``error``
 
 
 ------------
@@ -195,6 +221,10 @@ Returns the currently stored cookies as cookie(Name, Value, Attributes) terms.
 | **Mode and number of proofs:**
 |    ``cookies(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle:
+|        ``error``
+
 
 ------------
 
@@ -213,6 +243,10 @@ Returns the number of currently stored cookies.
 |    ``cookie_count(Jar,Count)``
 | **Mode and number of proofs:**
 |    ``cookie_count(+compound,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle:
+|        ``error``
 
 
 ------------
@@ -233,6 +267,10 @@ Persists the currently stored cookies to a file using a canonical Logtalk term r
 | **Mode and number of proofs:**
 |    ``save(+compound,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle or ``File`` is not a valid persistence target:
+|        ``error``
+
 
 ------------
 
@@ -251,6 +289,10 @@ Loads previously persisted cookies from a file, replacing the current jar conten
 |    ``load(Jar,File)``
 | **Mode and number of proofs:**
 |    ``load(+compound,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Jar`` is not an open cookie-jar handle, ``File`` is invalid, or the persisted cookie data is malformed:
+|        ``error``
 
 
 ------------

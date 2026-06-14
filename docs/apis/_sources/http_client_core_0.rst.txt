@@ -59,6 +59,10 @@ Writes exactly one normalized HTTP request term to a binary stream.
 | **Mode and number of proofs:**
 |    ``write_request(+stream,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` or ``Output`` are invalid for the delegated ``http_core::generate_request/2`` call:
+|        ``error``
+
 
 ------------
 
@@ -77,6 +81,10 @@ Reads exactly one HTTP response from a binary stream and returns it as a normali
 |    ``read_response(Input,Response)``
 | **Mode and number of proofs:**
 |    ``read_response(+stream,--compound)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    The input stream does not contain a valid normalized HTTP response message:
+|        ``domain_error(http_response_stream,malformed_response(Bytes))``
 
 
 ------------
@@ -97,6 +105,14 @@ Writes one normalized request to a binary output stream and then reads one norma
 | **Mode and number of proofs:**
 |    ``exchange(+stream,+stream,+compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` or ``Output`` are invalid for the delegated request writer:
+|        ``error``
+|    The input stream ends before a complete response is read:
+|        ``domain_error(http_response_stream,unexpected_end_of_file)``
+|    The input stream does not contain a valid normalized HTTP response message:
+|        ``domain_error(http_response_stream,malformed_response(Bytes))``
+
 
 ------------
 
@@ -115,6 +131,14 @@ Performs a sequence of request-response exchanges on the same binary stream pair
 |    ``exchange_connection(Input,Output,Requests,Responses)``
 | **Mode and number of proofs:**
 |    ``exchange_connection(+stream,+stream,++list(compound),--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Requests`` is not a valid list of normalized HTTP request terms:
+|        ``domain_error(http_client_connection,Requests)``
+|    A request in ``Requests`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    HTTP persistence requires the connection to close while requests remain to be exchanged:
+|        ``domain_error(http_client_connection,remaining_requests(Requests))``
 
 
 ------------

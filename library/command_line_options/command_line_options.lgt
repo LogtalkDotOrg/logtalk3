@@ -48,28 +48,43 @@
 	:- mode(parse(+list(object), +list(atom), -list, -list(atom)), one_or_error).
 	:- info(parse/4, [
 		comment is 'Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` using default parsing options.',
-		argnames is ['OptionObjects', 'ApplArguments', 'Options', 'PositionalArguments']
+		argnames is ['OptionObjects', 'ApplArguments', 'Options', 'PositionalArguments'],
+		exceptions is [
+			'Any exception that can be thrown by ``parse/5`` using the default parsing options' - error
+		]
 	]).
 
 	:- public(parse/5).
 	:- mode(parse(+list(object), +list(atom), -list, -list(atom), +list), one_or_error).
 	:- info(parse/5, [
 		comment is 'Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` and the parsing options ``ParseOptions``. ``Options`` is a list of parsed options as ``Name(Value)`` terms by default (or ``Func(Name,Value)`` when the ``output_functor(Func)`` parse option is used). ``PositionalArguments`` are the remaining non-dashed arguments. ``ParseOptions`` include ``output_functor(Func)``, ``duplicated_flags(Keep)`` (one of ``keepfirst``, ``keeplast``, ``keepall``; default ``keeplast``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).',
-		argnames is ['OptionObjects', 'ApplArguments', 'Options', 'PositionalArguments', 'ParseOptions']
+		argnames is ['OptionObjects', 'ApplArguments', 'Options', 'PositionalArguments', 'ParseOptions'],
+		exceptions is [
+			'``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags' - error,
+			'``ApplArguments`` is not a list of atoms, an unknown flag is found, a flag value cannot be parsed, or ``ParseOptions`` contains an invalid option' - error,
+			'A short option is written using the disallowed ``-f=value`` syntax' - syntax_error('disallowed: <shortflag>=<value>')
+		]
 	]).
 
 	:- public(help/2).
 	:- mode(help(+list(object), -atom), one_or_error).
 	:- info(help/2, [
 		comment is 'Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using default help options.',
-		argnames is ['OptionObjects', 'Help']
+		argnames is ['OptionObjects', 'Help'],
+		exceptions is [
+			'Any exception that can be thrown by ``help/3`` using the default help options' - error
+		]
 	]).
 
 	:- public(help/3).
 	:- mode(help(+list(object), -atom, +list), one_or_error).
 	:- info(help/3, [
 		comment is 'Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using the given ``HelpOptions``. ``HelpOptions`` include ``line_width(Width)`` (default 80), ``min_help_width(Width)`` (default 40), ``break_long_flags(Boolean)`` (default ``false``), and ``suppress_empty_meta(Boolean)`` (default ``true``).',
-		argnames is ['OptionObjects', 'Help', 'HelpOptions']
+		argnames is ['OptionObjects', 'Help', 'HelpOptions'],
+		exceptions is [
+			'``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags' - error,
+			'``HelpOptions`` contains an invalid option or invalid option value' - error
+		]
 	]).
 
 	:- uses(atom, [

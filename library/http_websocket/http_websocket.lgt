@@ -33,21 +33,30 @@
 	:- mode(open(+atom, -compound), one_or_error).
 	:- info(open/2, [
 		comment is 'Opens a client WebSocket connection to the given ``ws://`` or ``wss://`` URL and returns an opaque handle managed by this object.',
-		argnames is ['URL', 'WebSocket']
+		argnames is ['URL', 'WebSocket'],
+		exceptions is [
+			'Any exception that can be thrown by ``open/3`` using the default options' - error
+		]
 	]).
 
 	:- public(open/3).
 	:- mode(open(+atom, -compound, +list), one_or_error).
 	:- info(open/3, [
 		comment is 'Opens a client WebSocket connection to the given URL, returning an opaque handle. Client handshake options are forwarded to ``http_client::open_websocket/4``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
-		argnames is ['URL', 'WebSocket', 'Options']
+		argnames is ['URL', 'WebSocket', 'Options'],
+		exceptions is [
+			'``URL`` or ``Options`` are invalid for WebSocket opening, or the delegated opening handshake raises an exception' - error
+		]
 	]).
 
 	:- public(accept/3).
 	:- mode(accept(+compound, -compound, -compound), one_or_error).
 	:- info(accept/3, [
 		comment is 'Accepts one incoming WebSocket connection on the given listener using the default opening-handshake policy and returns an opaque server-side handle together with the accepted client information.',
-		argnames is ['Listener', 'WebSocket', 'ClientInfo']
+		argnames is ['Listener', 'WebSocket', 'ClientInfo'],
+		exceptions is [
+			'Any exception that can be thrown by ``accept/4`` using the default options' - error
+		]
 	]).
 
 	:- public(accept/4).
@@ -55,49 +64,70 @@
 
 	:- info(accept/4, [
 		comment is 'Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
-		argnames is ['Listener', 'WebSocket', 'ClientInfo', 'Options']
+		argnames is ['Listener', 'WebSocket', 'ClientInfo', 'Options'],
+		exceptions is [
+			'``Listener`` or ``Options`` are invalid for WebSocket acceptance, or the delegated server handshake raises an exception' - error
+		]
 	]).
 
 	:- public(send/2).
 	:- mode(send(+compound, +term), one_or_error).
 	:- info(send/2, [
 		comment is 'Writes one outbound WebSocket message using the opaque handle. Accepts normalized ``message(Type, Payload)`` terms and the convenience wrappers ``text(Text)``, ``binary(Bytes)``, ``ping(Bytes)``, ``pong(Bytes)``, ``close(Payload)``, ``json(JSON)``, and ``term(Term)``.',
-		argnames is ['WebSocket', 'Message']
+		argnames is ['WebSocket', 'Message'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or ``Message`` is not a valid outbound WebSocket message' - error
+		]
 	]).
 
 	:- public(send/3).
 	:- mode(send(+compound, +term, +list), one_or_error).
 	:- info(send/3, [
 		comment is 'Writes one outbound WebSocket message using the opaque handle and the given write options, forwarding those options to the underlying session ``write_message/5`` predicate.',
-		argnames is ['WebSocket', 'Message', 'Options']
+		argnames is ['WebSocket', 'Message', 'Options'],
+		exceptions is [
+			'``WebSocket``, ``Message``, or ``Options`` are invalid for outbound WebSocket writes' - error
+		]
 	]).
 
 	:- public(receive/2).
 	:- mode(receive(+compound, -term), one_or_error).
 	:- info(receive/2, [
 		comment is 'Reads the next normalized WebSocket message using the opaque handle. Returns ``end_of_file`` when the peer closes the transport before another message is available.',
-		argnames is ['WebSocket', 'Message']
+		argnames is ['WebSocket', 'Message'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or the delegated session read raises an exception' - error
+		]
 	]).
 
 	:- public(receive/3).
 	:- mode(receive(+compound, -term, +list), one_or_error).
 	:- info(receive/3, [
 		comment is 'Reads the next normalized WebSocket message using the opaque handle and the given read options. The direct API accepts per-call ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` overrides.',
-		argnames is ['WebSocket', 'Message', 'Options']
+		argnames is ['WebSocket', 'Message', 'Options'],
+		exceptions is [
+			'``WebSocket`` or ``Options`` are invalid for inbound WebSocket reads, or the delegated session read raises an exception' - error
+		]
 	]).
 
 	:- public(close/1).
 	:- mode(close(+compound), one_or_error).
 	:- info(close/1, [
 		comment is 'Best-effort graceful close of the WebSocket handle using the normal close payload ``empty``.',
-		argnames is ['WebSocket']
+		argnames is ['WebSocket'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle' - error
+		]
 	]).
 
 	:- public(close/2).
 	:- mode(close(+compound, +term), one_or_error).
 	:- info(close/2, [
 		comment is 'Best-effort graceful close of the WebSocket handle using the given close payload, which must be valid for a normalized ``message(close, Payload)`` term.',
-		argnames is ['WebSocket', 'Payload']
+		argnames is ['WebSocket', 'Payload'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or ``Payload`` is not a valid close payload' - error
+		]
 	]).
 
 	:- public(property/2).
@@ -112,56 +142,80 @@
 	:- mode(send_text(+compound, +atom), one_or_error).
 	:- info(send_text/2, [
 		comment is 'Convenience wrapper for sending one text message.',
-		argnames is ['WebSocket', 'Text']
+		argnames is ['WebSocket', 'Text'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or ``Text`` is not a valid text payload' - error
+		]
 	]).
 
 	:- public(receive_text/2).
 	:- mode(receive_text(+compound, -term), one_or_error).
 	:- info(receive_text/2, [
 		comment is 'Reads the next message and returns its text payload when the message type is ``text``. Returns ``end_of_file`` unchanged.',
-		argnames is ['WebSocket', 'Text']
+		argnames is ['WebSocket', 'Text'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or the received message is not a text message' - error
+		]
 	]).
 
 	:- public(send_binary/2).
 	:- mode(send_binary(+compound, +list(byte)), one_or_error).
 	:- info(send_binary/2, [
 		comment is 'Convenience wrapper for sending one binary message.',
-		argnames is ['WebSocket', 'Bytes']
+		argnames is ['WebSocket', 'Bytes'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or ``Bytes`` is not a valid binary payload' - error
+		]
 	]).
 
 	:- public(receive_binary/2).
 	:- mode(receive_binary(+compound, -term), one_or_error).
 	:- info(receive_binary/2, [
 		comment is 'Reads the next message and returns its binary payload when the message type is ``binary``. Returns ``end_of_file`` unchanged.',
-		argnames is ['WebSocket', 'Bytes']
+		argnames is ['WebSocket', 'Bytes'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or the received message is not a binary message' - error
+		]
 	]).
 
 	:- public(send_json/2).
 	:- mode(send_json(+compound, +nonvar), one_or_error).
 	:- info(send_json/2, [
 		comment is 'Serializes a JSON term as UTF-8 text and sends it as one text message. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.',
-		argnames is ['WebSocket', 'JSON']
+		argnames is ['WebSocket', 'JSON'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or ``JSON`` cannot be serialized as a text WebSocket message' - error
+		]
 	]).
 
 	:- public(receive_json/2).
 	:- mode(receive_json(+compound, -term), one_or_error).
 	:- info(receive_json/2, [
 		comment is 'Reads the next text message and decodes its payload as JSON. Returns ``end_of_file`` unchanged. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.',
-		argnames is ['WebSocket', 'JSON']
+		argnames is ['WebSocket', 'JSON'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or the received text payload is not valid JSON' - error
+		]
 	]).
 
 	:- public(send_term/2).
 	:- mode(send_term(+compound, +term), one_or_error).
 	:- info(send_term/2, [
 		comment is 'Serializes a Prolog term using canonical write options and sends it as one text message.',
-		argnames is ['WebSocket', 'Term']
+		argnames is ['WebSocket', 'Term'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or ``Term`` cannot be serialized as a text WebSocket message' - error
+		]
 	]).
 
 	:- public(receive_term/2).
 	:- mode(receive_term(+compound, -term), one_or_error).
 	:- info(receive_term/2, [
 		comment is 'Reads the next text message and parses its payload as one Prolog term. Returns ``end_of_file`` unchanged.',
-		argnames is ['WebSocket', 'Term']
+		argnames is ['WebSocket', 'Term'],
+		exceptions is [
+			'``WebSocket`` is not an open opaque WebSocket handle or the received text payload is not a canonical Prolog term' - error
+		]
 	]).
 
 	:- public(open_session/4).
@@ -169,7 +223,10 @@
 
 	:- info(open_session/4, [
 		comment is 'Convenience wrapper over ``http_websocket_client_service::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.',
-		argnames is ['URL', 'Handler', 'Response', 'State']
+		argnames is ['URL', 'Handler', 'Response', 'State'],
+		exceptions is [
+			'Any exception that can be thrown by ``http_websocket_client_service::open/4``' - error
+		]
 	]).
 
 	:- public(open_session/5).
@@ -177,21 +234,30 @@
 
 	:- info(open_session/5, [
 		comment is 'Convenience wrapper over ``http_websocket_client_service::open/5``.',
-		argnames is ['URL', 'Handler', 'Response', 'State', 'Options']
+		argnames is ['URL', 'Handler', 'Response', 'State', 'Options'],
+		exceptions is [
+			'Any exception that can be thrown by ``http_websocket_client_service::open/5``' - error
+		]
 	]).
 
 	:- public(serve_once/5).
 	:- mode(serve_once(+compound, +object_identifier, -compound, -compound, -compound), one_or_error).
 	:- info(serve_once/5, [
 		comment is 'Convenience wrapper that accepts one incoming WebSocket connection on the given listener, performs the opening handshake using the default server policy, and runs one callback-driven server session.',
-		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo']
+		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo'],
+		exceptions is [
+			'Any exception that can be thrown by ``serve_once/6`` using the default options' - error
+		]
 	]).
 
 	:- public(serve_once/6).
 	:- mode(serve_once(+compound, +object_identifier, -compound, -compound, -compound, +list), one_or_error).
 	:- info(serve_once/6, [
 		comment is 'Convenience wrapper that accepts one incoming WebSocket connection on the given listener and runs one callback-driven server session using the given combined handshake and session options.',
-		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo', 'Options']
+		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo', 'Options'],
+		exceptions is [
+			'``Listener`` or ``Options`` are invalid for WebSocket server-session startup, or the delegated handshake/session loop raises an exception' - error
+		]
 	]).
 
 	:- private(handle_seed_/1).

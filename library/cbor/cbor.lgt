@@ -22,9 +22,9 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:12:1,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-06-14,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -35,14 +35,22 @@
 	:- mode(parse(@list(byte), -ground), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses a list of bytes in the CBOR format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).',
-		argnames is ['Bytes', 'Term']
+		argnames is ['Bytes', 'Term'],
+		exceptions is [
+			'``Bytes`` is not ground' - instantiation_error,
+			'``Bytes`` is not a valid CBOR byte sequence' - domain_error(cbor_byte_sequence, 'Bytes')
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(@ground, -list(byte)), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates a list of bytes in the CBOR format representing the given term. Throws an error when generating is not possible (usually due to a term that have no CBOR corresponding representation).',
-		argnames is ['Term', 'Bytes']
+		argnames is ['Term', 'Bytes'],
+		exceptions is [
+			'``Term`` is a variable' - instantiation_error,
+			'``Term`` is neither a variable nor has a corresponding CBOR representation' - domain_error(cbor_term, 'Term')
+		]
 	]).
 
 	:- uses(list, [

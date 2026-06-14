@@ -38,28 +38,44 @@
 	:- mode(write_request(+stream, +compound), one_or_error).
 	:- info(write_request/2, [
 		comment is 'Writes exactly one normalized HTTP request term to a binary stream.',
-		argnames is ['Output', 'Request']
+		argnames is ['Output', 'Request'],
+		exceptions is [
+			'``Request`` or ``Output`` are invalid for the delegated ``http_core::generate_request/2`` call' - error
+		]
 	]).
 
 	:- public(read_response/2).
 	:- mode(read_response(+stream, --compound), zero_or_one).
 	:- info(read_response/2, [
 		comment is 'Reads exactly one HTTP response from a binary stream and returns it as a normalized response term. Fails on clean end-of-file before reading any bytes. Responses may be status-bodyless, Content-Length framed, Transfer-Encoding chunked, or close-delimited by end-of-file. Close-delimited responses are annotated with a ``body_framing(close_delimited)`` property.',
-		argnames is ['Input', 'Response']
+		argnames is ['Input', 'Response'],
+		exceptions is [
+			'The input stream does not contain a valid normalized HTTP response message' - domain_error(http_response_stream, malformed_response('Bytes'))
+		]
 	]).
 
 	:- public(exchange/4).
 	:- mode(exchange(+stream, +stream, +compound, --compound), one_or_error).
 	:- info(exchange/4, [
 		comment is 'Writes one normalized request to a binary output stream and then reads one normalized response from a binary input stream.',
-		argnames is ['Input', 'Output', 'Request', 'Response']
+		argnames is ['Input', 'Output', 'Request', 'Response'],
+		exceptions is [
+			'``Request`` or ``Output`` are invalid for the delegated request writer' - error,
+			'The input stream ends before a complete response is read' - domain_error(http_response_stream, unexpected_end_of_file),
+			'The input stream does not contain a valid normalized HTTP response message' - domain_error(http_response_stream, malformed_response('Bytes'))
+		]
 	]).
 
 	:- public(exchange_connection/4).
 	:- mode(exchange_connection(+stream, +stream, ++list(compound), --list(compound)), one_or_error).
 	:- info(exchange_connection/4, [
 		comment is 'Performs a sequence of request-response exchanges on the same binary stream pair. If additional requests remain when HTTP persistence rules require connection closure, an error is thrown.',
-		argnames is ['Input', 'Output', 'Requests', 'Responses']
+		argnames is ['Input', 'Output', 'Requests', 'Responses'],
+		exceptions is [
+			'``Requests`` is not a valid list of normalized HTTP request terms' - domain_error(http_client_connection, 'Requests'),
+			'A request in ``Requests`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'HTTP persistence requires the connection to close while requests remain to be exchanged' - domain_error(http_client_connection, remaining_requests('Requests'))
+		]
 	]).
 
 	:- uses(list, [

@@ -45,7 +45,10 @@
 	:- public(check/0).
 	:- mode(check, one_or_error).
 	:- info(check/0, [
-		comment is 'Checks if the command-line option definition is valid. Throws an error if the definition is invalid.'
+		comment is 'Checks if the command-line option definition is valid. Throws an error if the definition is invalid.',
+		exceptions is [
+			'The importing object is missing ``name/1`` or returns values with invalid types for the option declaration predicates' - error
+		]
 	]).
 
 	:- public(valid/0).

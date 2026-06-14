@@ -463,6 +463,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parameters(+compound,+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term or <code class="docutils literal notranslate"><span class="pre">Declarations</span></code> are not valid parameter declarations:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+<div class="line">The request parameters fail declared type or constraint validation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),Context)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parameter-3">
@@ -503,6 +516,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open_api_parameters(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Declarations</span></code> are not valid HTTP parameter declarations for OpenAPI export:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

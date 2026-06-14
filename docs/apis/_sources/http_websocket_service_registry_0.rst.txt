@@ -73,6 +73,10 @@ Closes a session registry and removes all registered sessions and queued message
 | **Mode and number of proofs:**
 |    ``close(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Registry`` is not an open WebSocket service registry handle:
+|        ``error``
+
 
 ------------
 
@@ -92,6 +96,10 @@ Registers a new active session in the given registry and returns its session ide
 | **Mode and number of proofs:**
 |    ``register(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Registry`` is not an open WebSocket service registry handle:
+|        ``error``
+
 
 ------------
 
@@ -110,6 +118,10 @@ Removes a session from the given registry together with any queued outbound mess
 |    ``unregister(Registry,Session)``
 | **Mode and number of proofs:**
 |    ``unregister(+compound,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Registry`` or ``Session`` are not valid registered WebSocket service handles:
+|        ``error``
 
 
 ------------
@@ -149,6 +161,10 @@ Returns the list of active session identifiers registered in the given registry.
 | **Mode and number of proofs:**
 |    ``sessions(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Registry`` is not an open WebSocket service registry handle:
+|        ``error``
+
 
 ------------
 
@@ -167,6 +183,10 @@ Returns the number of active sessions currently registered in the given registry
 |    ``session_count(Registry,Count)``
 | **Mode and number of proofs:**
 |    ``session_count(+compound,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Registry`` is not an open WebSocket service registry handle:
+|        ``error``
 
 
 ------------
@@ -187,6 +207,10 @@ Queues a normalized outbound message for the specified registered session.
 | **Mode and number of proofs:**
 |    ``send(+compound,+compound,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Registry`` or ``Session`` are invalid, or ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
+
 
 ------------
 
@@ -205,6 +229,10 @@ Queues a normalized outbound message for all currently registered sessions.
 |    ``broadcast(Registry,Message)``
 | **Mode and number of proofs:**
 |    ``broadcast(+compound,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Registry`` is invalid or ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
 
 
 ------------
@@ -225,6 +253,10 @@ Queues a normalized outbound message for all currently registered sessions excep
 | **Mode and number of proofs:**
 |    ``broadcast_except(+compound,+compound,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Registry`` or ``Session`` are invalid, or ``Message`` is not a valid normalized WebSocket message term:
+|        ``error``
+
 
 ------------
 
@@ -243,6 +275,10 @@ Removes and returns the queued outbound messages for the specified registered se
 |    ``take_pending(Registry,Session,Messages)``
 | **Mode and number of proofs:**
 |    ``take_pending(+compound,+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Registry`` or ``Session`` are not valid registered WebSocket service handles:
+|        ``error``
 
 
 ------------

@@ -118,6 +118,9 @@
 	:- info(read_message/4, [
 		comment is 'Reads the next session-level WebSocket message from a binary stream using the given input state. Fragmented text and binary messages are reassembled across calls, interleaved control frames are surfaced immediately, and close-message state transitions are tracked in the returned state.',
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message'],
+		exceptions is [
+			'``Stream`` or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+		],
 		remarks is [
 			'End of file' - 'Returns ``end_of_file`` only when the input state is idle and the stream is already exhausted.',
 			'Masking policy' - 'Incoming frame masking is validated against the session role: client sessions expect unmasked inbound frames and server sessions expect masked inbound frames.',
@@ -130,6 +133,9 @@
 	:- info(read_message/5, [
 		comment is 'Reads the next session-level WebSocket message from a binary input stream using the given state and automatically orchestrates the close handshake on the given binary output stream when a close message is received.',
 		argnames is ['Input', 'Output', 'State', 'UpdatedState', 'Message'],
+		exceptions is [
+			'``Input``, ``Output``, or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+		],
 		remarks is [
 			'Close handshake' - 'When a close message is received and no close message has yet been sent for the tracked session state, a matching close message is written automatically on the output stream and the returned state records the completed handshake.'
 		]
@@ -140,6 +146,9 @@
 	:- info(read_message/6, [
 		comment is 'Reads the next session-level WebSocket message from a binary input stream using the given state, automatically orchestrates the close handshake on the given binary output stream, and applies optional automatic control-message policies.',
 		argnames is ['Input', 'Output', 'State', 'UpdatedState', 'Message', 'Options'],
+		exceptions is [
+			'``Input``, ``Output``, ``State``, or ``Options`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+		],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes a pong message with the same payload when a ping message is read while still returning the ping message to the caller.',
 			'Option ``auto_pong(off)``' - 'Disables automatic pong replies. This is the default.',
@@ -151,7 +160,10 @@
 	:- mode(write_message(+stream_or_alias, +compound), one_or_error).
 	:- info(write_message/2, [
 		comment is 'Stateless convenience wrapper that writes one validated WebSocket message using the masking policy implied by the session role. Client sessions mask all outgoing frames; server sessions leave them unmasked.',
-		argnames is ['Stream', 'Message']
+		argnames is ['Stream', 'Message'],
+		exceptions is [
+			'``Stream`` or ``Message`` are invalid for the current session role' - error
+		]
 	]).
 
 	:- public(write_message/3).
@@ -159,6 +171,9 @@
 	:- info(write_message/3, [
 		comment is 'Stateless convenience wrapper that writes one validated WebSocket message using the masking policy implied by the session role and the given write options.',
 		argnames is ['Stream', 'Message', 'Options'],
+		exceptions is [
+			'``Stream``, ``Message``, or ``Options`` are invalid for the current session role' - error
+		],
 		remarks is [
 			'Option ``fragment_size(Size)``' - 'When writing ``text`` or ``binary`` messages, split the payload into frames of at most ``Size`` bytes. Control messages always remain single final frames.'
 		]
@@ -169,6 +184,9 @@
 	:- info(write_message/4, [
 		comment is 'Writes one validated WebSocket message using the masking policy implied by the session role and updates the given session state with any close-handshake transition caused by the write.',
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message'],
+		exceptions is [
+			'``Stream``, ``State``, or ``Message`` are invalid for the current session role or close-handshake state' - error
+		],
 		remarks is [
 			'Closing state' - 'After a peer close is recorded, only the matching close reply may be written. After a local close is recorded, further data messages are rejected.'
 		]
@@ -179,6 +197,9 @@
 	:- info(write_message/5, [
 		comment is 'Writes one validated WebSocket message using the masking policy implied by the session role and the given write options while updating the given session state with any close-handshake transition caused by the write.',
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message', 'Options'],
+		exceptions is [
+			'``Stream``, ``State``, ``Message``, or ``Options`` are invalid for the current session role or close-handshake state' - error
+		],
 		remarks is [
 			'Option ``fragment_size(Size)``' - 'When writing ``text`` or ``binary`` messages, split the payload into frames of at most ``Size`` bytes. Control messages always remain single final frames.'
 		]
@@ -189,21 +210,30 @@
 	:- protected(validate_role/0).
 	:- mode(validate_role, one_or_error).
 	:- info(validate_role/0, [
-		comment is 'Validates the session role parameter. Throws a domain error when the role is neither ``client`` nor ``server``.'
+		comment is 'Validates the session role parameter. Throws a domain error when the role is neither ``client`` nor ``server``.',
+		exceptions is [
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_')
+		]
 	]).
 
 	:- protected(read_session_message/5).
 	:- mode(read_session_message(+stream_or_alias, +compound, +term, -compound, -term), one_or_error).
 	:- info(read_session_message/5, [
 		comment is 'Protected helper that validates the session role and state and reads the next session-level message, returning the updated pending-fragment bookkeeping term and the message. Close-state transitions are left to the caller.',
-		argnames is ['Stream', 'State', 'MaxPayloadLength', 'Pending', 'Message']
+		argnames is ['Stream', 'State', 'MaxPayloadLength', 'Pending', 'Message'],
+		exceptions is [
+			'The session role or state is invalid, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+		]
 	]).
 
 	:- protected(apply_session_read/6).
 	:- mode(apply_session_read(+stream_or_alias, +compound, +atom, +compound, +term, -compound), one_or_error).
 	:- info(apply_session_read/6, [
 		comment is 'Protected helper that applies the close-state and automatic control-message transitions for a message read outside this object and returns the updated session state.',
-		argnames is ['Output', 'State', 'AutoPong', 'Pending', 'Message', 'UpdatedState']
+		argnames is ['Output', 'State', 'AutoPong', 'Pending', 'Message', 'UpdatedState'],
+		exceptions is [
+			'The session state, automatic-control options, or message are invalid for session-read post-processing' - error
+		]
 	]).
 
 	:- protected(current_close_state/2).

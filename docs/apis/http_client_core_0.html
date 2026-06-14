@@ -464,6 +464,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_request(+stream,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> or <code class="docutils literal notranslate"><span class="pre">Output</span></code> are invalid for the delegated <code class="docutils literal notranslate"><span class="pre">http_core::generate_request/2</span></code> call:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="read-response-2">
@@ -483,6 +492,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_response(+stream,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The input stream does not contain a valid normalized HTTP response message:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,malformed_response(Bytes))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -506,6 +524,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(+stream,+stream,+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> or <code class="docutils literal notranslate"><span class="pre">Output</span></code> are invalid for the delegated request writer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+<div class="line">The input stream ends before a complete response is read:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,unexpected_end_of_file)</span></code></div>
+</div>
+<div class="line">The input stream does not contain a valid normalized HTTP response message:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,malformed_response(Bytes))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="exchange-connection-4">
@@ -525,6 +560,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+stream,+stream,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Requests</span></code> is not a valid list of normalized HTTP request terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_connection,Requests)</span></code></div>
+</div>
+<div class="line">A request in <code class="docutils literal notranslate"><span class="pre">Requests</span></code> is not a valid normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">HTTP persistence requires the connection to close while requests remain to be exchanged:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_connection,remaining_requests(Requests))</span></code></div>
+</div>
 </div>
 </div>
 </section>

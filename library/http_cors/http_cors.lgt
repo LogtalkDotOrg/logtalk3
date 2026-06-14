@@ -54,14 +54,21 @@
 	:- mode(preflight_response(+compound, -compound, +list(compound)), one_or_error).
 	:- info(preflight_response/3, [
 		comment is 'Builds a normalized CORS preflight response using the given policy options. Allowed preflight requests return ``200 OK`` with the relevant ``Access-Control-*`` headers and denied requests return ``403 Forbidden``. Non-preflight requests raise an error.',
-		argnames is ['Request', 'Response', 'Options']
+		argnames is ['Request', 'Response', 'Options'],
+		exceptions is [
+			'``Request`` is not a CORS preflight request' - domain_error(http_cors_preflight_request, 'Request'),
+			'``Options`` contain invalid CORS policy declarations' - error
+		]
 	]).
 
 	:- public(add_response_headers/4).
 	:- mode(add_response_headers(+compound, +compound, -compound, +list(compound)), one_or_error).
 	:- info(add_response_headers/4, [
 		comment is 'Decorates a normalized response with the relevant CORS response headers when the request matches and the policy allows it. Denied requests preserve or add cache-relevant ``Vary`` metadata but do not add permission headers.',
-		argnames is ['Request', 'Response0', 'Response', 'Options']
+		argnames is ['Request', 'Response0', 'Response', 'Options'],
+		exceptions is [
+			'``Options`` contain invalid CORS policy declarations or the delegated response builder rejects the normalized response terms' - error
+		]
 	]).
 
 	:- uses(list, [

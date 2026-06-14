@@ -114,6 +114,10 @@ Returns the normalized request body term.
 | **Mode and number of proofs:**
 |    ``request_body(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The normalized request body is missing:
+|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected request body.)``
+
 
 ------------
 
@@ -354,6 +358,10 @@ Builds a ``204 No Content`` response.
 | **Mode and number of proofs:**
 |    ``no_content_response(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+
 
 ------------
 
@@ -535,6 +543,10 @@ Runs the action associated with the matched endpoint and normalizes any supporte
 |    ``dispatch_rest_endpoint(Request,Response)``
 | **Mode and number of proofs:**
 |    ``dispatch_rest_endpoint(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The routed endpoint identifier is missing, unknown, duplicated, or the endpoint action produces an invalid REST result term:
+|        ``error``
 
 
 ------------

@@ -525,6 +525,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid STOMP connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -575,6 +584,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid, <code class="docutils literal notranslate"><span class="pre">Body</span></code> cannot be encoded, or the SEND frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -608,6 +626,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid, the acknowledgment mode is unsupported, or the SUBSCRIBE frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -636,6 +663,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">unsubscribe(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the UNSUBSCRIBE frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="receive-3">
@@ -655,6 +691,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">receive(+compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the input stream does not contain a valid STOMP frame within the requested timeout:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -687,6 +732,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the ACK frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -713,6 +767,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">nack(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the NACK frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -744,6 +807,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">begin_transaction(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the BEGIN frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="commit-transaction-3">
@@ -763,6 +835,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">commit_transaction(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the COMMIT frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -786,6 +867,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">abort_transaction(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the ABORT frame cannot be transmitted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="send-heartbeat-1">
@@ -805,6 +895,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_heartbeat(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is invalid or the heartbeat cannot be written to the output stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stomp_error(error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

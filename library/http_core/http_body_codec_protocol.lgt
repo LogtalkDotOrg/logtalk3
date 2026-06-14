@@ -39,14 +39,20 @@
 	:- mode(encode_body(+atom, ++term, +list(compound), -compound), one_or_error).
 	:- info(encode_body/4, [
 		comment is 'Encodes a semantic payload term for the given media type and options into a normalized HTTP body term.',
-		argnames is ['MediaType', 'Payload', 'Options', 'Body']
+		argnames is ['MediaType', 'Payload', 'Options', 'Body'],
+		exceptions is [
+			'The implementing codec may throw media-type-specific validation or encoding exceptions' - error
+		]
 	]).
 
 	:- public(decode_body/4).
 	:- mode(decode_body(+atom, ++compound, +list(compound), -term), one_or_error).
 	:- info(decode_body/4, [
 		comment is 'Decodes a normalized HTTP body term for the given media type and options into a semantic payload term.',
-		argnames is ['MediaType', 'Body', 'Options', 'Payload']
+		argnames is ['MediaType', 'Body', 'Options', 'Payload'],
+		exceptions is [
+			'The implementing codec may throw media-type-specific validation or decoding exceptions' - error
+		]
 	]).
 
 :- end_protocol.

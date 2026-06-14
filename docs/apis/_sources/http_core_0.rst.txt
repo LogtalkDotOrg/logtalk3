@@ -60,6 +60,22 @@ Constructs a validated normalized ``request/6`` term from the given method, targ
 | **Mode and number of proofs:**
 |    ``request(+atom,+compound,+compound,+list(compound),+compound,+list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Method`` is not a valid HTTP method atom:
+|        ``domain_error(http_method,Method)``
+|    ``Target`` is not a valid normalized HTTP target term:
+|        ``domain_error(http_target,Target)``
+|    ``Version`` is not a valid HTTP version term:
+|        ``domain_error(http_version,Version)``
+|    ``Headers`` is not a valid normalized HTTP header list:
+|        ``domain_error(http_headers,Headers)``
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    ``Properties`` is not a valid normalized HTTP property list:
+|        ``domain_error(http_properties,Properties)``
+|    The request headers, body, or properties violate normalized HTTP request semantics:
+|        ``error``
+
 
 ------------
 
@@ -78,6 +94,20 @@ Constructs a validated normalized ``response/5`` term from the given version, st
 |    ``response(Version,Status,Headers,Body,Properties,Response)``
 | **Mode and number of proofs:**
 |    ``response(+compound,+compound,+list(compound),+compound,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Version`` is not a valid HTTP version term:
+|        ``domain_error(http_version,Version)``
+|    ``Status`` is not a valid normalized HTTP status term:
+|        ``domain_error(http_status,Status)``
+|    ``Headers`` is not a valid normalized HTTP header list:
+|        ``domain_error(http_headers,Headers)``
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    ``Properties`` is not a valid normalized HTTP property list:
+|        ``domain_error(http_properties,Properties)``
+|    The response headers, body, or properties violate normalized HTTP response semantics:
+|        ``error``
 
 
 ------------
@@ -136,6 +166,14 @@ Parses a complete HTTP request message from the given source (``bytes(List)``, `
 | **Mode and number of proofs:**
 |    ``parse_request(++compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
+|    The parsed request violates normalized HTTP request validation or semantics:
+|        ``error``
+
 
 ------------
 
@@ -154,6 +192,14 @@ Generates a complete HTTP request message to the given sink (``bytes(List)``, ``
 |    ``generate_request(Sink,Request)``
 | **Mode and number of proofs:**
 |    ``generate_request(+compound,++compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``error``
 
 
 ------------
@@ -174,6 +220,14 @@ Parses a complete HTTP response message from the given source (``bytes(List)``, 
 | **Mode and number of proofs:**
 |    ``parse_response(++compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
+|    The parsed response violates normalized HTTP response validation or semantics:
+|        ``error``
+
 
 ------------
 
@@ -192,6 +246,14 @@ Generates a complete HTTP response message to the given sink (``bytes(List)``, `
 |    ``generate_response(Sink,Response)``
 | **Mode and number of proofs:**
 |    ``generate_response(+compound,++compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Response`` is not a valid normalized HTTP response term:
+|        ``error``
 
 
 ------------
@@ -212,6 +274,14 @@ Generates an HTTP response status line and effective header block, terminated by
 | **Mode and number of proofs:**
 |    ``generate_response_headers(+compound,++compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Response`` is not a valid normalized HTTP response term:
+|        ``error``
+
 
 ------------
 
@@ -230,6 +300,12 @@ Parses an HTTP request line from the given source (``codes(List)``, ``chars(List
 |    ``parse_request_line(Source,RequestLine)``
 | **Mode and number of proofs:**
 |    ``parse_request_line(++compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
 
 
 ------------
@@ -250,6 +326,12 @@ Generates an HTTP request line to the given sink (``codes(List)``, ``chars(List)
 | **Mode and number of proofs:**
 |    ``generate_request_line(+compound,++compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+
 
 ------------
 
@@ -268,6 +350,12 @@ Parses an HTTP status line from the given source (``codes(List)``, ``chars(List)
 |    ``parse_status_line(Source,StatusLine)``
 | **Mode and number of proofs:**
 |    ``parse_status_line(++compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
 
 
 ------------
@@ -288,6 +376,12 @@ Generates an HTTP status line to the given sink (``codes(List)``, ``chars(List)`
 | **Mode and number of proofs:**
 |    ``generate_status_line(+compound,++compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+
 
 ------------
 
@@ -306,6 +400,12 @@ Parses an HTTP header block from the given source (``codes(List)``, ``chars(List
 |    ``parse_headers(Source,Headers)``
 | **Mode and number of proofs:**
 |    ``parse_headers(++compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
 
 
 ------------
@@ -326,6 +426,14 @@ Generates an HTTP header block to the given sink (``codes(List)``, ``chars(List)
 | **Mode and number of proofs:**
 |    ``generate_headers(+compound,++list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Headers`` is not a valid normalized HTTP header list:
+|        ``domain_error(http_headers,Headers)``
+
 
 ------------
 
@@ -344,6 +452,18 @@ Parses a body payload from the given source (``bytes(List)``, ``codes(List)``, `
 |    ``parse_body(Source,MediaType,Options,Body)``
 | **Mode and number of proofs:**
 |    ``parse_body(++compound,++atom,+list(compound),--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
+|    ``MediaType`` is not a valid HTTP media type atom:
+|        ``domain_error(http_media_type,MediaType)``
+|    ``Options`` is not a valid HTTP body options list:
+|        ``domain_error(http_body_options,Options)``
+|    No registered HTTP body codec exists for ``MediaType`` when codec-based decoding is required:
+|        ``existence_error(http_body_codec,MediaType)``
 
 
 ------------
@@ -364,6 +484,18 @@ Generates a body payload to the given sink (``bytes(List)``, ``codes(List)``, ``
 | **Mode and number of proofs:**
 |    ``generate_body(+compound,++compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    ``Options`` is not a valid HTTP body options list:
+|        ``domain_error(http_body_options,Options)``
+|    No registered HTTP body codec exists for the body media type when codec-based encoding is required:
+|        ``existence_error(http_body_codec,MediaType)``
+
 
 ------------
 
@@ -382,6 +514,14 @@ Encodes a semantic payload term using the registered concrete body codec for the
 |    ``encode_body(MediaType,Payload,Options,Body)``
 | **Mode and number of proofs:**
 |    ``encode_body(+atom,++term,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``MediaType`` is not a valid HTTP media type atom:
+|        ``domain_error(http_media_type,MediaType)``
+|    ``Options`` is not a valid HTTP body options list:
+|        ``domain_error(http_body_options,Options)``
+|    No registered HTTP body codec exists for ``MediaType``:
+|        ``existence_error(http_body_codec,MediaType)``
 
 
 ------------
@@ -402,6 +542,14 @@ Decodes a normalized body term using the registered concrete body codec for the 
 | **Mode and number of proofs:**
 |    ``decode_body(+atom,++compound,+list(compound),--term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``MediaType`` is not a valid HTTP media type atom:
+|        ``domain_error(http_media_type,MediaType)``
+|    ``Options`` is not a valid HTTP body options list:
+|        ``domain_error(http_body_options,Options)``
+|    No registered HTTP body codec exists for ``MediaType``:
+|        ``existence_error(http_body_codec,MediaType)``
+
 
 ------------
 
@@ -420,6 +568,8 @@ Returns the request method from a normalized ``request/6`` term.
 |    ``method(Request,Method)``
 | **Mode and number of proofs:**
 |    ``method(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
 
 
 ------------
@@ -440,6 +590,8 @@ Returns the request target from a normalized ``request/6`` term.
 | **Mode and number of proofs:**
 |    ``target(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+
 
 ------------
 
@@ -458,6 +610,8 @@ Returns the HTTP version from a normalized request or response term.
 |    ``version(Message,Version)``
 | **Mode and number of proofs:**
 |    ``version(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
 
 
 ------------
@@ -478,6 +632,8 @@ Returns the response status from a normalized ``response/5`` term.
 | **Mode and number of proofs:**
 |    ``status(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+
 
 ------------
 
@@ -496,6 +652,8 @@ Returns the normalized header list from a request or response term.
 |    ``headers(Message,Headers)``
 | **Mode and number of proofs:**
 |    ``headers(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
 
 
 ------------
@@ -534,6 +692,8 @@ Returns the normalized body term from a request or response term.
 |    ``body(Message,Body)``
 | **Mode and number of proofs:**
 |    ``body(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
 
 
 ------------

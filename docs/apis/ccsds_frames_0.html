@@ -638,6 +638,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">update_fecf(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid CCSDS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_term,Frame)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="verify-fecf-1">
@@ -680,6 +693,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">extract_packets(+compound,+integer,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid CCSDS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line">The frame data field is not a valid CCSDS packet byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_byte_sequence,Bytes)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="insert-packets-4">
@@ -699,6 +737,39 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_packets(+list(compound),+integer,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid CCSDS transfer frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Packet</span></code> of <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a variable or <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Packet</span></code> of <code class="docutils literal notranslate"><span class="pre">Packets</span></code> is neither a variable nor a valid CCSDS packet term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_term,Packet)</span></code></div>
+</div>
 </div>
 </div>
 </section>

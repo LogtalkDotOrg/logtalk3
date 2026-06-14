@@ -35,14 +35,20 @@
 	:- mode(annotate_server_session_request(+compound, -compound), one_or_error).
 	:- info(annotate_server_session_request/2, [
 		comment is 'Router middleware helper that annotates a normalized request with a server-session handle and state before route dispatch.',
-		argnames is ['Request', 'Action']
+		argnames is ['Request', 'Action'],
+		exceptions is [
+			'Any exception that can be thrown by ``http_server_session::begin/3`` for the configured manager and request' - error
+		]
 	]).
 
 	:- protected(add_server_session_response/3).
 	:- mode(add_server_session_response(+compound, +compound, -compound), one_or_error).
 	:- info(add_server_session_response/3, [
 		comment is 'Router response-middleware helper that finalizes server-session cookie lifecycle changes after route dispatch.',
-		argnames is ['Request', 'Response0', 'Response']
+		argnames is ['Request', 'Response0', 'Response'],
+		exceptions is [
+			'Any exception that can be thrown by ``http_server_session::finish/3`` for the configured manager request/response pair' - error
+		]
 	]).
 
 	annotate_server_session_request(Request, continue(AnnotatedRequest)) :-

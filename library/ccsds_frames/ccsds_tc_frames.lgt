@@ -23,9 +23,9 @@
 	implements(ccsds_frame_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-06-14,
 		comment is 'CCSDS telecommand transfer frame parser and generator.',
 		parameters is [
 			'FrameLength' - 'Fixed telecommand transfer frame length in octets.',
@@ -66,7 +66,11 @@
 	:- mode(update_fecf(+compound, -compound), one_or_error).
 	:- info(update_fecf/2, [
 		comment is 'Computes the correct telecommand transfer frame FECF for the selected object configuration and returns the corresponding updated frame term.',
-		argnames is ['Frame', 'UpdatedFrame']
+		argnames is ['Frame', 'UpdatedFrame'],
+		exceptions is [
+			'``Frame`` is a variable' - instantiation_error,
+			'``Frame`` is neither a variable nor a valid telecommand transfer frame term' - domain_error(ccsds_frame_term, 'Frame')
+		]
 	]).
 
 	:- public(verify_fecf/1).

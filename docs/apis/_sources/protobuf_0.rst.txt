@@ -56,6 +56,14 @@ Parses Protocol Buffers binary data from the given source (``bytes(List)``, ``st
 | **Mode and number of proofs:**
 |    ``parse(++compound,--pair)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Protocol Buffers source term:
+|        ``domain_error(protobuf_source,Source)``
+|    ``Schema`` is not a valid Protocol Buffers schema for the encoded message:
+|        ``domain_error(protobuf_schema,Schema)``
+
 
 ------------
 
@@ -74,6 +82,14 @@ Parses Protocol Buffers binary data from the given source using the provided sch
 |    ``parse(Source,Schema,Data)``
 | **Mode and number of proofs:**
 |    ``parse(++compound,++term,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid Protocol Buffers source term:
+|        ``domain_error(protobuf_source,Source)``
+|    ``Schema`` is not a valid Protocol Buffers schema for the encoded message:
+|        ``domain_error(protobuf_schema,Schema)``
 
 
 ------------
@@ -94,6 +110,14 @@ Generates Protocol Buffers binary data to the given sink (``bytes(List)``, ``str
 | **Mode and number of proofs:**
 |    ``generate(++compound,++term,++term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Protocol Buffers sink term:
+|        ``domain_error(protobuf_sink,Sink)``
+|    ``Schema`` is not a valid Protocol Buffers schema for ``Data``:
+|        ``domain_error(protobuf_schema,Schema)``
+
 
 ------------
 
@@ -112,6 +136,14 @@ Generates Protocol Buffers binary data to the given sink from the given schema a
 |    ``generate(Sink,IncludeSchema,Schema,Data)``
 | **Mode and number of proofs:**
 |    ``generate(++compound,++boolean,++term,++term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid Protocol Buffers sink term:
+|        ``domain_error(protobuf_sink,Sink)``
+|    ``Schema`` is not a valid Protocol Buffers schema for ``Data``:
+|        ``domain_error(protobuf_schema,Schema)``
 
 
 ------------

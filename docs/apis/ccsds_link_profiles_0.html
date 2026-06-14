@@ -703,6 +703,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pending_fragments(+compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="valid-discontinuity-policy-1">
@@ -849,6 +862,43 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_packets(+compound,+integer,+compound,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is neither a variable nor a supported link profile term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is a telecommand profile and therefore does not support packet reassembly:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM or AOS frame term for the selected profile:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A delegated packet continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-packets-7">
@@ -868,6 +918,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_packets(+compound,+integer,+compound,+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is neither a variable nor a supported link profile term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is a telecommand profile and therefore does not support packet reassembly:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM or AOS frame term for the selected profile:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A delegated packet continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -891,6 +982,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_packets(+compound,+integer,+compound,+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is neither a variable nor a supported link profile term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is a telecommand profile and therefore does not support packet reassembly:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is neither a variable nor a valid TM or AOS frame term for the selected profile:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_term,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A delegated packet continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-frames-6">
@@ -910,6 +1042,43 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_frames(+compound,+integer,+list(compound),+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Frames</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is neither a variable nor a supported link profile term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is a telecommand profile and therefore does not support packet reassembly:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a list of valid TM or AOS frame terms for the selected profile:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A delegated packet continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -933,6 +1102,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_frames(+compound,+integer,+list(compound),+atom,+compound,-list(compound),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is neither a variable nor a supported link profile term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is a telecommand profile and therefore does not support packet reassembly:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a list of TM or AOS frame terms for the selected profile:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A delegated packet continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="reassemble-frames-8">
@@ -952,6 +1162,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reassemble_frames(+compound,+integer,+list(compound),+atom,+compound,-list(compound),-compound,-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code>, <code class="docutils literal notranslate"><span class="pre">Frames</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is neither a variable nor a supported link profile term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Profile</span></code> is a telecommand profile and therefore does not support packet reassembly:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,Profile)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frames</span></code> is neither a variable nor a list of TM or AOS frame terms for the selected profile:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_frame_terms,Frames)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SecondaryHeaderLength</span></code> is neither a variable nor a valid CCSDS packet secondary header length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Policy</span></code> is neither a variable nor a valid discontinuity recovery policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_discontinuity_policy,Policy)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is neither a variable nor a valid channel reassembly state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_channel_reassembly_state,State)</span></code></div>
+</div>
+<div class="line">The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the <code class="docutils literal notranslate"><span class="pre">throw</span></code> policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))</span></code></div>
+</div>
+<div class="line">A delegated packet continuation fragment is followed by a new packet before the previous packet is completed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)</span></code></div>
+</div>
 </div>
 </div>
 </section>

@@ -394,8 +394,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-07</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -596,6 +596,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">save(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">No TZif terms are cached:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(tzif_cache,tzif)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor a valid file name atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(file_name,File)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="clear-cache-0">
@@ -718,6 +735,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">zones(-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">No TZif terms are cached:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(tzif_cache,tzif)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="time-type-4">
@@ -760,6 +786,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">time_type(+atom,+types([integer,compound]),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="time-type-2">
@@ -779,6 +814,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">time_type(+types([integer,compound]),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">No TZif terms are cached:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(tzif_cache,tzif)</span></code></div>
+</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -823,6 +871,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">offset(+atom,+types([integer,compound]),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/3</span></code> for the given zone and UTC instant:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="offset-2">
@@ -842,6 +899,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">offset(+types([integer,compound]),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/2</span></code> for the given UTC instant:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -886,6 +952,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">daylight_saving_time(+atom,+types([integer,compound]),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/3</span></code> for the given zone and UTC instant:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="daylight-saving-time-2">
@@ -905,6 +980,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">daylight_saving_time(+types([integer,compound]),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/2</span></code> for the given UTC instant:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -949,6 +1033,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">abbreviation(+atom,+types([integer,compound]),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/3</span></code> for the given zone and UTC instant:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="abbreviation-2">
@@ -968,6 +1061,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">abbreviation(+types([integer,compound]),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/2</span></code> for the given UTC instant:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1012,6 +1114,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_time_type(+atom,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is neither a variable nor a valid <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(date_time,LocalDateTime)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-time-type-2">
@@ -1031,6 +1150,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_time_type(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is neither a variable nor a valid <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(date_time,LocalDateTime)</span></code></div>
+</div>
+<div class="line">No TZif terms are cached:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(tzif_cache,tzif)</span></code></div>
+</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1138,6 +1278,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_offset(+atom,+compound,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/3</span></code> for the given zone and local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-offset-2">
@@ -1157,6 +1306,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_offset(+compound,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/2</span></code> for the given local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1264,6 +1422,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time(+atom,+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/3</span></code> for the given zone and local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-daylight-saving-time-2">
@@ -1283,6 +1450,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/2</span></code> for the given local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1390,6 +1566,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_abbreviation(+atom,+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/3</span></code> for the given zone and local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-abbreviation-2">
@@ -1409,6 +1594,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_abbreviation(+compound,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/2</span></code> for the given local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1516,6 +1710,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_time_type_reified(+atom,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is neither a variable nor a valid <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(date_time,LocalDateTime)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-time-type-reified-2">
@@ -1535,6 +1746,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_time_type_reified(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LocalDateTime</span></code> is neither a variable nor a valid <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(date_time,LocalDateTime)</span></code></div>
+</div>
+<div class="line">No TZif terms are cached:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(tzif_cache,tzif)</span></code></div>
+</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1579,6 +1811,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_offset_reified(+atom,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/3</span></code> for the given zone and local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-offset-reified-2">
@@ -1598,6 +1839,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_offset_reified(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2</span></code> for the given local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1642,6 +1892,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time_reified(+atom,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/3</span></code> for the given zone and local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-daylight-saving-time-reified-2">
@@ -1661,6 +1920,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_daylight_saving_time_reified(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2</span></code> for the given local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1705,6 +1973,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_abbreviation_reified(+atom,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/3</span></code> for the given zone and local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="local-abbreviation-reified-2">
@@ -1724,6 +2001,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_abbreviation_reified(+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2</span></code> for the given local civil time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

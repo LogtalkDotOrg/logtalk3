@@ -32,7 +32,10 @@
 	:- mode(handle(+compound, -compound), one_or_error).
 	:- info(handle/2, [
 		comment is 'Handles a normalized HTTP request term and returns a normalized HTTP response term.',
-		argnames is ['Request', 'Response']
+		argnames is ['Request', 'Response'],
+		exceptions is [
+			'The implementing handler may throw request-specific or response-construction exceptions' - error
+		]
 	]).
 
 :- end_protocol.

@@ -14,8 +14,8 @@ Helpers for parsing and generating self-describing CCSDS time fields using descr
 |    ``logtalk_load(ccsds_time_fields(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-09
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -133,6 +133,12 @@ Returns the CCSDS time-code format selected by a descriptor term.
 | **Mode and number of proofs:**
 |    ``format(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Descriptor`` is a variable:
+|        ``instantiation_error``
+|    ``Descriptor`` is neither a variable nor a supported CCSDS time-field descriptor term:
+|        ``domain_error(ccsds_time_field_descriptor,Descriptor)``
+
 
 ------------
 
@@ -151,6 +157,12 @@ Returns the epoch selected by a descriptor term. Calendar segmented descriptors 
 |    ``epoch(Descriptor,Epoch)``
 | **Mode and number of proofs:**
 |    ``epoch(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Descriptor`` is a variable:
+|        ``instantiation_error``
+|    ``Descriptor`` is neither a variable nor a supported CCSDS time-field descriptor term:
+|        ``domain_error(ccsds_time_field_descriptor,Descriptor)``
 
 
 ------------

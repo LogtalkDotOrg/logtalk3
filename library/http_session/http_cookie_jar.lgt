@@ -40,70 +40,101 @@
 	:- mode(open(-compound, +list(compound)), one_or_error).
 	:- info(open/2, [
 		comment is 'Opens a new cookie jar using the given options list. Supported options include ``cookies_file(File)`` for preloading previously persisted cookies from disk.',
-		argnames is ['Jar', 'Options']
+		argnames is ['Jar', 'Options'],
+		exceptions is [
+			'``Options`` contain invalid cookie-jar configuration or persisted-cookie input' - error
+		]
 	]).
 
 	:- public(close/1).
 	:- mode(close(+compound), one_or_error).
 	:- info(close/1, [
 		comment is 'Closes a cookie jar and removes all stored cookies.',
-		argnames is ['Jar']
+		argnames is ['Jar'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle' - error
+		]
 	]).
 
 	:- public(clear/1).
 	:- mode(clear(+compound), one_or_error).
 	:- info(clear/1, [
 		comment is 'Removes all currently stored cookies from a cookie jar while keeping the jar handle valid.',
-		argnames is ['Jar']
+		argnames is ['Jar'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle' - error
+		]
 	]).
 
 	:- public(store_set_cookies/3).
 	:- mode(store_set_cookies(+compound, +atom, +list(compound)), one_or_error).
 	:- info(store_set_cookies/3, [
 		comment is 'Stores normalized Set-Cookie terms for the given absolute URL, replacing existing cookies with the same name, domain, and path.',
-		argnames is ['Jar', 'URL', 'SetCookies']
+		argnames is ['Jar', 'URL', 'SetCookies'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle' - error,
+			'``URL`` is not a supported absolute cookie-jar URL or ``SetCookies`` is not a valid set-cookie list' - error
+		]
 	]).
 
 	:- public(request_cookies/3).
 	:- mode(request_cookies(+compound, +atom, -list(compound)), one_or_error).
 	:- info(request_cookies/3, [
 		comment is 'Returns the cookie name-value pairs currently applicable to the given absolute URL using the convenience default ``request_context(get, source_url(URL), false)``.',
-		argnames is ['Jar', 'URL', 'Cookies']
+		argnames is ['Jar', 'URL', 'Cookies'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle or ``URL`` is not a supported absolute cookie-jar URL' - error
+		]
 	]).
 
 	:- public(request_cookies/4).
 	:- mode(request_cookies(+compound, +atom, +compound, -list(compound)), one_or_error).
 	:- info(request_cookies/4, [
 		comment is 'Returns the cookie name-value pairs currently applicable to the given absolute URL for an explicit request context represented as ``request_context(Method, Source, TopLevelNavigation)`` where ``Source`` is either ``source_url(URL)`` for an absolute HTTP or HTTPS URL or ``source_origin(Origin)`` for a bare Origin header value.',
-		argnames is ['Jar', 'URL', 'RequestContext', 'Cookies']
+		argnames is ['Jar', 'URL', 'RequestContext', 'Cookies'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle, ``URL`` is invalid, or ``RequestContext`` is not a valid cookie-jar request context' - error
+		]
 	]).
 
 	:- public(cookies/2).
 	:- mode(cookies(+compound, -list(compound)), one_or_error).
 	:- info(cookies/2, [
 		comment is 'Returns the currently stored cookies as cookie(Name, Value, Attributes) terms.',
-		argnames is ['Jar', 'Cookies']
+		argnames is ['Jar', 'Cookies'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle' - error
+		]
 	]).
 
 	:- public(cookie_count/2).
 	:- mode(cookie_count(+compound, -integer), one_or_error).
 	:- info(cookie_count/2, [
 		comment is 'Returns the number of currently stored cookies.',
-		argnames is ['Jar', 'Count']
+		argnames is ['Jar', 'Count'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle' - error
+		]
 	]).
 
 	:- public(save/2).
 	:- mode(save(+compound, +atom), one_or_error).
 	:- info(save/2, [
 		comment is 'Persists the currently stored cookies to a file using a canonical Logtalk term representation.',
-		argnames is ['Jar', 'File']
+		argnames is ['Jar', 'File'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle or ``File`` is not a valid persistence target' - error
+		]
 	]).
 
 	:- public(load/2).
 	:- mode(load(+compound, +atom), one_or_error).
 	:- info(load/2, [
 		comment is 'Loads previously persisted cookies from a file, replacing the current jar contents.',
-		argnames is ['Jar', 'File']
+		argnames is ['Jar', 'File'],
+		exceptions is [
+			'``Jar`` is not an open cookie-jar handle, ``File`` is invalid, or the persisted cookie data is malformed' - error
+		]
 	]).
 
 	:- private(jar_seed_/1).

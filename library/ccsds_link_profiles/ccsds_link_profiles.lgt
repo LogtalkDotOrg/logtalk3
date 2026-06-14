@@ -106,7 +106,11 @@
 	:- mode(pending_fragments(+compound, -list(compound)), one_or_error).
 	:- info(pending_fragments/2, [
 		comment is 'Returns the non-empty pending packet fragments currently buffered per TM or AOS virtual channel.',
-		argnames is ['State', 'PendingFragments']
+		argnames is ['State', 'PendingFragments'],
+		exceptions is [
+			'``State`` is a variable' - instantiation_error,
+			'``State`` is not a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State')
+		]
 	]).
 
 	:- public(valid_discontinuity_policy/1).
@@ -151,42 +155,106 @@
 	:- mode(reassemble_packets(+compound, +integer, +compound, +compound, -list(compound), -compound), one_or_error).
 	:- info(reassemble_packets/6, [
 		comment is 'Reassembles complete packets from a single TM or AOS transfer frame using the default ``throw`` discontinuity recovery policy.',
-		argnames is ['Profile', 'SecondaryHeaderLength', 'Frame', 'State', 'Packets', 'UpdatedState']
+		argnames is ['Profile', 'SecondaryHeaderLength', 'Frame', 'State', 'Packets', 'UpdatedState'],
+		exceptions is [
+			'``Profile``, ``SecondaryHeaderLength``, ``Frame``, or ``State`` is a variable' - instantiation_error,
+			'``Profile`` is neither a variable nor a supported link profile term' - domain_error(ccsds_link_profile, 'Profile'),
+			'``Profile`` is a telecommand profile and therefore does not support packet reassembly' - domain_error(ccsds_packet_link_profile, 'Profile'),
+			'``Frame`` is neither a variable nor a valid TM or AOS frame term for the selected profile' - domain_error(ccsds_frame_term, 'Frame'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'``State`` is neither a variable nor a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State'),
+			'The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state' - domain_error(ccsds_packet_reassembly_continuation, packet_reassembly_state('PendingData')),
+			'A delegated packet continuation fragment is followed by a new packet before the previous packet is completed' - domain_error(ccsds_packet_reassembly_continuation, incomplete_continuation_before_new_packet)
+		]
 	]).
 
 	:- public(reassemble_packets/7).
 	:- mode(reassemble_packets(+compound, +integer, +compound, +atom, +compound, -list(compound), -compound), one_or_error).
 	:- info(reassemble_packets/7, [
 		comment is 'Reassembles complete packets from a single TM or AOS transfer frame using the selected discontinuity recovery policy.',
-		argnames is ['Profile', 'SecondaryHeaderLength', 'Frame', 'Policy', 'State', 'Packets', 'UpdatedState']
+		argnames is ['Profile', 'SecondaryHeaderLength', 'Frame', 'Policy', 'State', 'Packets', 'UpdatedState'],
+		exceptions is [
+			'``Profile``, ``SecondaryHeaderLength``, ``Frame``, ``Policy``, or ``State`` is a variable' - instantiation_error,
+			'``Profile`` is neither a variable nor a supported link profile term' - domain_error(ccsds_link_profile, 'Profile'),
+			'``Profile`` is a telecommand profile and therefore does not support packet reassembly' - domain_error(ccsds_packet_link_profile, 'Profile'),
+			'``Frame`` is neither a variable nor a valid TM or AOS frame term for the selected profile' - domain_error(ccsds_frame_term, 'Frame'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'``Policy`` is neither a variable nor a valid discontinuity recovery policy' - domain_error(ccsds_discontinuity_policy, 'Policy'),
+			'``State`` is neither a variable nor a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State'),
+			'The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the ``throw`` policy' - domain_error(ccsds_packet_reassembly_continuation, packet_reassembly_state('PendingData')),
+			'A delegated packet continuation fragment is followed by a new packet before the previous packet is completed' - domain_error(ccsds_packet_reassembly_continuation, incomplete_continuation_before_new_packet)
+		]
 	]).
 
 	:- public(reassemble_packets/8).
 	:- mode(reassemble_packets(+compound, +integer, +compound, +atom, +compound, -list(compound), -compound, -list(compound)), one_or_error).
 	:- info(reassemble_packets/8, [
 		comment is 'Reassembles complete packets from a single TM or AOS transfer frame using the selected discontinuity recovery policy and returns any recovery events.',
-		argnames is ['Profile', 'SecondaryHeaderLength', 'Frame', 'Policy', 'State', 'Packets', 'UpdatedState', 'Events']
+		argnames is ['Profile', 'SecondaryHeaderLength', 'Frame', 'Policy', 'State', 'Packets', 'UpdatedState', 'Events'],
+		exceptions is [
+			'``Profile``, ``SecondaryHeaderLength``, ``Frame``, ``Policy``, or ``State`` is a variable' - instantiation_error,
+			'``Profile`` is neither a variable nor a supported link profile term' - domain_error(ccsds_link_profile, 'Profile'),
+			'``Profile`` is a telecommand profile and therefore does not support packet reassembly' - domain_error(ccsds_packet_link_profile, 'Profile'),
+			'``Frame`` is neither a variable nor a valid TM or AOS frame term for the selected profile' - domain_error(ccsds_frame_term, 'Frame'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'``Policy`` is neither a variable nor a valid discontinuity recovery policy' - domain_error(ccsds_discontinuity_policy, 'Policy'),
+			'``State`` is neither a variable nor a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State'),
+			'The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the ``throw`` policy' - domain_error(ccsds_packet_reassembly_continuation, packet_reassembly_state('PendingData')),
+			'A delegated packet continuation fragment is followed by a new packet before the previous packet is completed' - domain_error(ccsds_packet_reassembly_continuation, incomplete_continuation_before_new_packet)
+		]
 	]).
 
 	:- public(reassemble_frames/6).
 	:- mode(reassemble_frames(+compound, +integer, +list(compound), +compound, -list(compound), -compound), one_or_error).
 	:- info(reassemble_frames/6, [
 		comment is 'Reassembles complete packets across a sequence of TM or AOS transfer frames using the default ``throw`` discontinuity recovery policy.',
-		argnames is ['Profile', 'SecondaryHeaderLength', 'Frames', 'State', 'Packets', 'UpdatedState']
+		argnames is ['Profile', 'SecondaryHeaderLength', 'Frames', 'State', 'Packets', 'UpdatedState'],
+		exceptions is [
+			'``Profile``, ``SecondaryHeaderLength``, ``Frames``, or ``State`` is a variable' - instantiation_error,
+			'``Profile`` is neither a variable nor a supported link profile term' - domain_error(ccsds_link_profile, 'Profile'),
+			'``Profile`` is a telecommand profile and therefore does not support packet reassembly' - domain_error(ccsds_packet_link_profile, 'Profile'),
+			'``Frames`` is neither a variable nor a list of valid TM or AOS frame terms for the selected profile' - domain_error(ccsds_frame_terms, 'Frames'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'``State`` is neither a variable nor a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State'),
+			'The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state' - domain_error(ccsds_packet_reassembly_continuation, packet_reassembly_state('PendingData')),
+			'A delegated packet continuation fragment is followed by a new packet before the previous packet is completed' - domain_error(ccsds_packet_reassembly_continuation, incomplete_continuation_before_new_packet)
+		]
 	]).
 
 	:- public(reassemble_frames/7).
 	:- mode(reassemble_frames(+compound, +integer, +list(compound), +atom, +compound, -list(compound), -compound), one_or_error).
 	:- info(reassemble_frames/7, [
 		comment is 'Reassembles complete packets across a sequence of TM or AOS transfer frames using the selected discontinuity recovery policy.',
-		argnames is ['Profile', 'SecondaryHeaderLength', 'Frames', 'Policy', 'State', 'Packets', 'UpdatedState']
+		argnames is ['Profile', 'SecondaryHeaderLength', 'Frames', 'Policy', 'State', 'Packets', 'UpdatedState'],
+		exceptions is [
+			'``Profile``, ``SecondaryHeaderLength``, ``Frames``, ``Policy``, or ``State`` is a variable' - instantiation_error,
+			'``Profile`` is neither a variable nor a supported link profile term' - domain_error(ccsds_link_profile, 'Profile'),
+			'``Profile`` is a telecommand profile and therefore does not support packet reassembly' - domain_error(ccsds_packet_link_profile, 'Profile'),
+			'``Frames`` is neither a variable nor a list of TM or AOS frame terms for the selected profile' - domain_error(ccsds_frame_terms, 'Frames'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'``Policy`` is neither a variable nor a valid discontinuity recovery policy' - domain_error(ccsds_discontinuity_policy, 'Policy'),
+			'``State`` is neither a variable nor a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State'),
+			'The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the ``throw`` policy' - domain_error(ccsds_packet_reassembly_continuation, packet_reassembly_state('PendingData')),
+			'A delegated packet continuation fragment is followed by a new packet before the previous packet is completed' - domain_error(ccsds_packet_reassembly_continuation, incomplete_continuation_before_new_packet)
+		]
 	]).
 
 	:- public(reassemble_frames/8).
 	:- mode(reassemble_frames(+compound, +integer, +list(compound), +atom, +compound, -list(compound), -compound, -list(compound)), one_or_error).
 	:- info(reassemble_frames/8, [
 		comment is 'Reassembles complete packets across a sequence of TM or AOS transfer frames using the selected discontinuity recovery policy and returns any recovery events.',
-		argnames is ['Profile', 'SecondaryHeaderLength', 'Frames', 'Policy', 'State', 'Packets', 'UpdatedState', 'Events']
+		argnames is ['Profile', 'SecondaryHeaderLength', 'Frames', 'Policy', 'State', 'Packets', 'UpdatedState', 'Events'],
+		exceptions is [
+			'``Profile``, ``SecondaryHeaderLength``, ``Frames``, ``Policy``, or ``State`` is a variable' - instantiation_error,
+			'``Profile`` is neither a variable nor a supported link profile term' - domain_error(ccsds_link_profile, 'Profile'),
+			'``Profile`` is a telecommand profile and therefore does not support packet reassembly' - domain_error(ccsds_packet_link_profile, 'Profile'),
+			'``Frames`` is neither a variable nor a list of TM or AOS frame terms for the selected profile' - domain_error(ccsds_frame_terms, 'Frames'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'``Policy`` is neither a variable nor a valid discontinuity recovery policy' - domain_error(ccsds_discontinuity_policy, 'Policy'),
+			'``State`` is neither a variable nor a valid channel reassembly state term' - domain_error(ccsds_channel_reassembly_state, 'State'),
+			'The delegated packet reassembly detects a discontinuous frame sequence, inconsistent counter modulus, or invalid continuation state under the ``throw`` policy' - domain_error(ccsds_packet_reassembly_continuation, packet_reassembly_state('PendingData')),
+			'A delegated packet continuation fragment is followed by a new packet before the previous packet is completed' - domain_error(ccsds_packet_reassembly_continuation, incomplete_continuation_before_new_packet)
+		]
 	]).
 
 	valid_profile(tm_profile(FrameLength, SecondaryHeaderLength, HasFECF)) :-

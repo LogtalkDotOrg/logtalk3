@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-08,
+		date is 2026-06-14,
 		comment is 'Multipart helper predicates built on top of the normalized body and part terms provided by the http library.'
 	]).
 
@@ -33,7 +33,11 @@
 	:- mode(body(+atom, +list(compound), -compound), one_or_error).
 	:- info(body/3, [
 		comment is 'Constructs a validated normalized multipart body term from a multipart media type atom and a list of multipart parts.',
-		argnames is ['MediaType', 'Parts', 'Body']
+		argnames is ['MediaType', 'Parts', 'Body'],
+		exceptions is [
+			'``MediaType`` is not a valid multipart media type atom' - domain_error(http_multipart_media_type, 'MediaType'),
+			'``Parts`` is not a valid list of normalized multipart parts' - domain_error(http_multipart_parts, 'Parts')
+		]
 	]).
 
 	:- public(is_body/1).
@@ -48,7 +52,12 @@
 
 	:- info(parse/4, [
 		comment is 'Parses a multipart body from a source term by delegating to the underlying ``http_core::parse_body/4`` predicate after validating the media type.',
-		argnames is ['Source', 'MediaType', 'Options', 'Body']
+		argnames is ['Source', 'MediaType', 'Options', 'Body'],
+		exceptions is [
+			'``MediaType`` is not a valid multipart media type atom' - domain_error(http_multipart_media_type, 'MediaType'),
+			'``Source`` or ``Options`` are not valid for ``http_core::parse_body/4``' - error,
+			'The parsed body is not a valid normalized multipart body term' - domain_error(http_multipart_body, 'Body')
+		]
 	]).
 
 	:- public(generate/3).
@@ -56,42 +65,61 @@
 
 	:- info(generate/3, [
 		comment is 'Generates a multipart body to a sink term by delegating to the underlying ``http_core::generate_body/3`` predicate after validating the multipart body term.',
-		argnames is ['Sink', 'Body', 'Options']
+		argnames is ['Sink', 'Body', 'Options'],
+		exceptions is [
+			'``Body`` is not a valid normalized multipart body term' - domain_error(http_multipart_body, 'Body'),
+			'``Sink`` or ``Options`` are not valid for ``http_core::generate_body/3``' - error
+		]
 	]).
 
 	:- public(media_type/2).
 	:- mode(media_type(+compound, -atom), one_or_error).
 	:- info(media_type/2, [
 		comment is 'Returns the media type atom of a validated multipart body term.',
-		argnames is ['Body', 'MediaType']
+		argnames is ['Body', 'MediaType'],
+		exceptions is [
+			'``Body`` is not a valid normalized multipart body term' - domain_error(http_multipart_body, 'Body')
+		]
 	]).
 
 	:- public(parts/2).
 	:- mode(parts(+compound, -list(compound)), one_or_error).
 	:- info(parts/2, [
 		comment is 'Returns the list of multipart part terms of a validated multipart body term.',
-		argnames is ['Body', 'Parts']
+		argnames is ['Body', 'Parts'],
+		exceptions is [
+			'``Body`` is not a valid normalized multipart body term' - domain_error(http_multipart_body, 'Body')
+		]
 	]).
 
 	:- public(fields/2).
 	:- mode(fields(+compound, -list(compound)), one_or_error).
 	:- info(fields/2, [
 		comment is 'Returns the list of form-data field(Name, Value, Parameters) descriptors found in a validated multipart/form-data body, preserving part order.',
-		argnames is ['Body', 'Fields']
+		argnames is ['Body', 'Fields'],
+		exceptions is [
+			'``Body`` is not a valid normalized multipart/form-data body term' - domain_error(http_multipart_form_data_body, 'Body')
+		]
 	]).
 
 	:- public(files/2).
 	:- mode(files(+compound, -list(compound)), one_or_error).
 	:- info(files/2, [
 		comment is 'Returns the list of form-data ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors found in a validated multipart/form-data body, preserving part order.',
-		argnames is ['Body', 'Files']
+		argnames is ['Body', 'Files'],
+		exceptions is [
+			'``Body`` is not a valid normalized multipart/form-data body term' - domain_error(http_multipart_form_data_body, 'Body')
+		]
 	]).
 
 	:- public(part/4).
 	:- mode(part(+list(compound), +compound, +list(compound), -compound), one_or_error).
 	:- info(part/4, [
 		comment is 'Constructs a validated normalized multipart part term from headers, body, and properties.',
-		argnames is ['Headers', 'Body', 'Properties', 'Part']
+		argnames is ['Headers', 'Body', 'Properties', 'Part'],
+		exceptions is [
+			'The given headers, body, and properties do not form a valid normalized multipart part term' - domain_error(http_multipart_part, 'Part')
+		]
 	]).
 
 	:- public(is_part/1).
@@ -105,21 +133,30 @@
 	:- mode(part_headers(+compound, -list(compound)), one_or_error).
 	:- info(part_headers/2, [
 		comment is 'Returns the headers of a validated multipart part term.',
-		argnames is ['Part', 'Headers']
+		argnames is ['Part', 'Headers'],
+		exceptions is [
+			'``Part`` is not a valid normalized multipart part term' - domain_error(http_multipart_part, 'Part')
+		]
 	]).
 
 	:- public(part_body/2).
 	:- mode(part_body(+compound, -compound), one_or_error).
 	:- info(part_body/2, [
 		comment is 'Returns the body of a validated multipart part term.',
-		argnames is ['Part', 'Body']
+		argnames is ['Part', 'Body'],
+		exceptions is [
+			'``Part`` is not a valid normalized multipart part term' - domain_error(http_multipart_part, 'Part')
+		]
 	]).
 
 	:- public(part_properties/2).
 	:- mode(part_properties(+compound, -list(compound)), one_or_error).
 	:- info(part_properties/2, [
 		comment is 'Returns the properties of a validated multipart part term.',
-		argnames is ['Part', 'Properties']
+		argnames is ['Part', 'Properties'],
+		exceptions is [
+			'``Part`` is not a valid normalized multipart part term' - domain_error(http_multipart_part, 'Part')
+		]
 	]).
 
 	:- public(field/4).
@@ -140,21 +177,35 @@
 	:- mode(field_part(+atom, +term, +list(compound), -compound), one_or_error).
 	:- info(field_part/4, [
 		comment is 'Constructs a normalized multipart part for a textual form-data field using a content-disposition header, a text/plain body, and additional disposition parameters.',
-		argnames is ['Name', 'Value', 'Parameters', 'Part']
+		argnames is ['Name', 'Value', 'Parameters', 'Part'],
+		exceptions is [
+			'``Name`` is not a valid form-data field name' - domain_error(http_multipart_form_data_parameter_name, 'Name'),
+			'``Parameters`` is not a valid list of additional form-data disposition parameters' - domain_error(http_multipart_form_data_parameters, 'Parameters'),
+			'A form-data disposition parameter is invalid for a textual field part' - domain_error(http_multipart_form_data_parameter, 'Parameter')
+		]
 	]).
 
 	:- public(file_part/6).
 	:- mode(file_part(+atom, +atom, +atom, +compound, +list(compound), -compound), one_or_error).
 	:- info(file_part/6, [
 		comment is 'Constructs a normalized multipart part for a form-data file using a content-disposition header, the given media type and payload, and additional disposition parameters.',
-		argnames is ['Name', 'Filename', 'MediaType', 'Payload', 'Parameters', 'Part']
+		argnames is ['Name', 'Filename', 'MediaType', 'Payload', 'Parameters', 'Part'],
+		exceptions is [
+			'``Name`` is not a valid form-data field name' - domain_error(http_multipart_form_data_parameter_name, 'Name'),
+			'``Filename`` is not a valid form-data filename value' - domain_error(http_multipart_form_data_parameter_value, 'Filename'),
+			'``Parameters`` is not a valid list of additional form-data disposition parameters' - domain_error(http_multipart_form_data_parameters, 'Parameters'),
+			'A form-data disposition parameter is invalid for a file part' - domain_error(http_multipart_form_data_parameter, 'Parameter')
+		]
 	]).
 
 	:- public(form_data_body/2).
 	:- mode(form_data_body(+list(compound), -compound), one_or_error).
 	:- info(form_data_body/2, [
 		comment is 'Constructs a multipart/form-data body from an ordered list of ``field(Name, Value, Parameters)`` and ``file(Name, Filename, MediaType, Payload, Parameters)`` descriptors.',
-		argnames is ['Items', 'Body']
+		argnames is ['Items', 'Body'],
+		exceptions is [
+			'``Items`` is not a valid list of form-data field or file descriptors' - domain_error(http_multipart_form_data_items, 'Items')
+		]
 	]).
 
 	:- uses(list, [

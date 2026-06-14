@@ -22,9 +22,9 @@
 :- category(ieee_754_common(_Precision_, _ByteOrder_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-06-14,
 		comment is 'Shared IEEE 754 exact bit and byte handling predicates for the high-level codec and low-level field inspection objects.',
 		parnames is ['Precision', 'ByteOrder']
 	]).
@@ -41,7 +41,12 @@
 	:- mode(source_bits(++compound, --integer), one_or_error).
 	:- info(source_bits/2, [
 		comment is 'Validates and normalizes a source term into canonical-order unsigned integer bits for the selected precision and byte order.',
-		argnames is ['Source', 'Bits']
+		argnames is ['Source', 'Bits'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is not a variable but uses ``bytes(Bytes)`` or ``bits(Bits)`` with an encoding incompatible with the selected precision' - domain_error(ieee_754_encoding, 'Source'),
+			'``Source`` is not a valid IEEE 754 source term' - domain_error(ieee_754_source, 'Source')
+		]
 	]).
 
 	:- protected(bits_fields/5).

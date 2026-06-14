@@ -14,8 +14,8 @@ Nested dictionary protocol.
 |    ``logtalk_load(nested_dictionaries(loader))``
 
 | **Author:** Paul Brown and Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2021-04-07
+| **Version:** 0:1:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static``
@@ -92,6 +92,14 @@ Creates a (nested) dictionary term from a curly-brackted term representation.
 | **Mode and number of proofs:**
 |    ``as_nested_dictionary(++term,--dictionary)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Term`` is a variable:
+|        ``instantiation_error``
+|    ``Term`` is neither a variable nor a valid curly-bracketed term representation:
+|        ``type_error(curly_bracketed_term,Term)``
+|    ``Dictionary`` is instantiated:
+|        ``uninstantiation_error(Dictionary)``
+
 
 ------------
 
@@ -110,6 +118,12 @@ Creates a a curly-brackted term representation from a (nested) dictionary.
 |    ``as_curly_bracketed(Dictionary,Term)``
 | **Mode and number of proofs:**
 |    ``as_curly_bracketed(+dictionary,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Dictionary`` is a variable or contains a variable leaf value that cannot be represented:
+|        ``instantiation_error``
+|    ``Term`` is instantiated:
+|        ``uninstantiation_error(Term)``
 
 
 ------------

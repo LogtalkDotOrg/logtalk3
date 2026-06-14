@@ -138,6 +138,8 @@ Classifies the request as one of ``ordinary``, ``fragment``, ``boosted``, or ``h
 | **Mode and number of proofs:**
 |    ``request_kind(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+
 
 ------------
 
@@ -271,6 +273,8 @@ Returns a list of derived HTMX request properties and request classification com
 | **Mode and number of proofs:**
 |    ``request_properties(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+
 
 ------------
 
@@ -309,6 +313,10 @@ Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an `
 | **Mode and number of proofs:**
 |    ``reply(+compound,+term,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Content`` or the derived HTMX response options are invalid for HTML reply generation:
+|        ``error``
+
 
 ------------
 
@@ -327,6 +335,10 @@ Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an `
 |    ``reply(Request,Content,Response,Options)``
 | **Mode and number of proofs:**
 |    ``reply(+compound,+term,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Content`` or ``Options`` are invalid for HTMX HTML reply generation:
+|        ``error``
 
 
 ------------
@@ -347,6 +359,10 @@ Builds a normalized ``text/html`` response using the fragment content when ``is_
 | **Mode and number of proofs:**
 |    ``page_fragment_reply(+compound,+term,+term,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``PageContent`` or ``FragmentContent`` are invalid for HTMX HTML reply generation:
+|        ``error``
+
 
 ------------
 
@@ -366,6 +382,10 @@ Builds a normalized ``text/html`` response using the fragment content when ``is_
 | **Mode and number of proofs:**
 |    ``page_fragment_reply(+compound,+term,+term,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``PageContent``, ``FragmentContent``, or ``Options`` are invalid for HTMX HTML reply generation:
+|        ``error``
+
 
 ------------
 
@@ -384,6 +404,10 @@ Decorates a normalized response with the relevant HTMX response headers and opti
 |    ``add_response_headers(Request,Response0,Response,Options)``
 | **Mode and number of proofs:**
 |    ``add_response_headers(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` contain invalid HTMX response-header declarations or the delegated response builder rejects them:
+|        ``error``
 
 
 ------------

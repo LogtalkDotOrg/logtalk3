@@ -61,6 +61,10 @@ Parses the arguments ``ApplArguments`` according to the option objects ``OptionO
 | **Mode and number of proofs:**
 |    ``parse(+list(object),+list(atom),-list,-list(atom))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``parse/5`` using the default parsing options:
+|        ``error``
+
 
 ------------
 
@@ -79,6 +83,14 @@ Parses the arguments ``ApplArguments`` according to the option objects ``OptionO
 |    ``parse(OptionObjects,ApplArguments,Options,PositionalArguments,ParseOptions)``
 | **Mode and number of proofs:**
 |    ``parse(+list(object),+list(atom),-list,-list(atom),+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags:
+|        ``error``
+|    ``ApplArguments`` is not a list of atoms, an unknown flag is found, a flag value cannot be parsed, or ``ParseOptions`` contains an invalid option:
+|        ``error``
+|    A short option is written using the disallowed ``-f=value`` syntax:
+|        ``syntax_error(disallowed: <shortflag>=<value>)``
 
 
 ------------
@@ -99,6 +111,10 @@ Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObje
 | **Mode and number of proofs:**
 |    ``help(+list(object),-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``help/3`` using the default help options:
+|        ``error``
+
 
 ------------
 
@@ -117,6 +133,12 @@ Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObje
 |    ``help(OptionObjects,Help,HelpOptions)``
 | **Mode and number of proofs:**
 |    ``help(+list(object),-atom,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags:
+|        ``error``
+|    ``HelpOptions`` contains an invalid option or invalid option value:
+|        ``error``
 
 
 ------------

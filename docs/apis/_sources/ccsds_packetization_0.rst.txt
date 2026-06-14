@@ -14,8 +14,8 @@ Helpers for packetizing CCSDS space packets into TM and AOS service-data regions
 |    ``logtalk_load(ccsds_packetization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-09
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -74,6 +74,12 @@ Extracts the non-empty queued packets and pending trailing packet bytes buffered
 | **Mode and number of proofs:**
 |    ``pending_packets(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``State`` is a variable:
+|        ``instantiation_error``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+
 
 ------------
 
@@ -92,6 +98,18 @@ Packetizes packets into the packet service region of a TM transfer frame, preser
 |    ``packetize_tm_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedFrame,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``packetize_tm_packets(+compound,+integer,+compound,+list(compound),-compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
 
 
 ------------
@@ -112,6 +130,18 @@ Packetizes packets into the packet service region of a TM transfer frame and als
 | **Mode and number of proofs:**
 |    ``packetize_tm_packets(+compound,+integer,+compound,+list(compound),-compound,-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
+
 
 ------------
 
@@ -130,6 +160,18 @@ Packetizes packets into the packet service region of an AOS transfer frame, pres
 |    ``packetize_aos_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedFrame,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``packetize_aos_packets(+compound,+integer,+compound,+list(compound),-compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
 
 
 ------------
@@ -150,6 +192,18 @@ Packetizes packets into the packet service region of an AOS transfer frame and a
 | **Mode and number of proofs:**
 |    ``packetize_aos_packets(+compound,+integer,+compound,+list(compound),-compound,-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
+
 
 ------------
 
@@ -168,6 +222,18 @@ Packetizes packets across a sequence of TM transfer frames. Packets that remain 
 |    ``packetize_tm_frames(Frames,SecondaryHeaderLength,State,Packets,UpdatedFrames,RemainingPackets,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``packetize_tm_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frames`` is neither a variable nor a valid list of TM transfer frame terms:
+|        ``domain_error(ccsds_tm_transfer_frame_terms,Frames)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
 
 
 ------------
@@ -188,6 +254,18 @@ Packetizes packets across a sequence of TM transfer frames and also returns expl
 | **Mode and number of proofs:**
 |    ``packetize_tm_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frames`` is neither a variable nor a valid list of TM transfer frame terms:
+|        ``domain_error(ccsds_tm_transfer_frame_terms,Frames)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
+
 
 ------------
 
@@ -206,6 +284,18 @@ Packetizes packets across a sequence of AOS transfer frames. Packets that remain
 |    ``packetize_aos_frames(Frames,SecondaryHeaderLength,State,Packets,UpdatedFrames,RemainingPackets,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``packetize_aos_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frames`` is neither a variable nor a valid list of AOS transfer frame terms:
+|        ``domain_error(ccsds_aos_transfer_frame_terms,Frames)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
 
 
 ------------
@@ -226,6 +316,18 @@ Packetizes packets across a sequence of AOS transfer frames and also returns exp
 | **Mode and number of proofs:**
 |    ``packetize_aos_frames(+list(compound),+integer,+compound,+list(compound),-list(compound),-list(compound),-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``State``, or ``Packets`` is a variable:
+|        ``instantiation_error``
+|    ``Frames`` is neither a variable nor a valid list of AOS transfer frame terms:
+|        ``domain_error(ccsds_aos_transfer_frame_terms,Frames)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packetizer state term:
+|        ``domain_error(ccsds_packetizer_state,State)``
+|    ``Packets`` is neither a variable nor a valid list of CCSDS packet terms:
+|        ``domain_error(ccsds_packet_terms,Packets)``
+
 
 ------------
 
@@ -244,6 +346,16 @@ Generates a telemetry idle packet using APID 2047, the given packet secondary he
 |    ``generate_idle_packet(SecondaryHeaderLength,SequenceCount,UserDataLength,Packet)``
 | **Mode and number of proofs:**
 |    ``generate_idle_packet(+integer,+integer,+integer,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SecondaryHeaderLength``, ``SequenceCount``, or ``UserDataLength`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``SequenceCount`` is neither a variable nor a valid CCSDS packet sequence count:
+|        ``domain_error(ccsds_packet_sequence_count,SequenceCount)``
+|    ``UserDataLength`` is neither a variable nor a valid idle-packet user-data length:
+|        ``domain_error(ccsds_idle_user_data_length,UserDataLength)``
 
 
 ------------

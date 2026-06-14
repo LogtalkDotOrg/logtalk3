@@ -57,6 +57,12 @@ Extracts typed parameters from a normalized HTTP request using the given declara
 | **Mode and number of proofs:**
 |    ``parameters(+compound,+list(compound),-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` is not a valid normalized HTTP request term or ``Declarations`` are not valid parameter declarations:
+|        ``error``
+|    The request parameters fail declared type or constraint validation:
+|        ``error(http_parameter_validation(Errors),Context)``
+
 
 ------------
 
@@ -94,6 +100,10 @@ Generates OpenAPI ``parameter/5`` descriptors for query, path, header, and cooki
 |    ``open_api_parameters(Declarations,Parameters)``
 | **Mode and number of proofs:**
 |    ``open_api_parameters(+list(compound),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Declarations`` are not valid HTTP parameter declarations for OpenAPI export:
+|        ``error``
 
 
 ------------

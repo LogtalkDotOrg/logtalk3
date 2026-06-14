@@ -102,6 +102,10 @@ Reads the next session-level WebSocket message from a binary stream using the gi
 | **Mode and number of proofs:**
 |    ``read_message(+stream_or_alias,+compound,-compound,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Stream`` or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:
+|        ``error``
+
 | **Remarks:**
 
     - End of file: Returns ``end_of_file`` only when the input state is idle and the stream is already exhausted.
@@ -127,6 +131,10 @@ Reads the next session-level WebSocket message from a binary input stream using 
 | **Mode and number of proofs:**
 |    ``read_message(+stream_or_alias,+stream_or_alias,+compound,-compound,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Input``, ``Output``, or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:
+|        ``error``
+
 | **Remarks:**
 
     - Close handshake: When a close message is received and no close message has yet been sent for the tracked session state, a matching close message is written automatically on the output stream and the returned state records the completed handshake.
@@ -149,6 +157,10 @@ Reads the next session-level WebSocket message from a binary input stream using 
 |    ``read_message(Input,Output,State,UpdatedState,Message,Options)``
 | **Mode and number of proofs:**
 |    ``read_message(+stream_or_alias,+stream_or_alias,+compound,-compound,-term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Input``, ``Output``, ``State``, or ``Options`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:
+|        ``error``
 
 | **Remarks:**
 
@@ -175,6 +187,10 @@ Stateless convenience wrapper that writes one validated WebSocket message using 
 | **Mode and number of proofs:**
 |    ``write_message(+stream_or_alias,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Stream`` or ``Message`` are invalid for the current session role:
+|        ``error``
+
 
 ------------
 
@@ -193,6 +209,10 @@ Stateless convenience wrapper that writes one validated WebSocket message using 
 |    ``write_message(Stream,Message,Options)``
 | **Mode and number of proofs:**
 |    ``write_message(+stream_or_alias,+compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Stream``, ``Message``, or ``Options`` are invalid for the current session role:
+|        ``error``
 
 | **Remarks:**
 
@@ -217,6 +237,10 @@ Writes one validated WebSocket message using the masking policy implied by the s
 | **Mode and number of proofs:**
 |    ``write_message(+stream_or_alias,+compound,-compound,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Stream``, ``State``, or ``Message`` are invalid for the current session role or close-handshake state:
+|        ``error``
+
 | **Remarks:**
 
     - Closing state: After a peer close is recorded, only the matching close reply may be written. After a local close is recorded, further data messages are rejected.
@@ -239,6 +263,10 @@ Writes one validated WebSocket message using the masking policy implied by the s
 |    ``write_message(Stream,State,UpdatedState,Message,Options)``
 | **Mode and number of proofs:**
 |    ``write_message(+stream_or_alias,+compound,-compound,+compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Stream``, ``State``, ``Message``, or ``Options`` are invalid for the current session role or close-handshake state:
+|        ``error``
 
 | **Remarks:**
 
@@ -264,6 +292,10 @@ Validates the session role parameter. Throws a domain error when the role is nei
 | **Mode and number of proofs:**
 |    ``validate_role`` - ``one_or_error``
 
+| **Exceptions:**
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+
 
 ------------
 
@@ -283,6 +315,10 @@ Protected helper that validates the session role and state and reads the next se
 | **Mode and number of proofs:**
 |    ``read_session_message(+stream_or_alias,+compound,+term,-compound,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The session role or state is invalid, or the inbound frame/message sequence violates RFC 6455 session rules:
+|        ``error``
+
 
 ------------
 
@@ -301,6 +337,10 @@ Protected helper that applies the close-state and automatic control-message tran
 |    ``apply_session_read(Output,State,AutoPong,Pending,Message,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``apply_session_read(+stream_or_alias,+compound,+atom,+compound,+term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The session state, automatic-control options, or message are invalid for session-read post-processing:
+|        ``error``
 
 
 ------------

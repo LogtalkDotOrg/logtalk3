@@ -56,6 +56,10 @@ Constructs a validated normalized WebSocket frame term from the fragmentation st
 | **Mode and number of proofs:**
 |    ``frame(+atom,+atom,+list(byte),+list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Final``, ``Opcode``, ``Payload``, or ``Properties`` do not define a valid normalized WebSocket frame term:
+|        ``error``
+
 | **Remarks:**
 
     - Final atoms: Use ``final`` for FIN=1 and ``more`` for FIN=0.
@@ -101,6 +105,14 @@ Parses one WebSocket frame from a source term. Supported sources are ``bytes(Byt
 | **Mode and number of proofs:**
 |    ``parse(++compound,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid WebSocket frame source term:
+|        ``domain_error(http_websocket_source,Source)``
+|    The source bytes do not encode a valid normalized WebSocket frame:
+|        ``error``
+
 
 ------------
 
@@ -119,6 +131,10 @@ Generates one validated WebSocket frame to a sink term. Supported sinks are ``by
 |    ``generate(Sink,Frame)``
 | **Mode and number of proofs:**
 |    ``generate(++compound,+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is invalid or ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
 
 
 ------------
@@ -139,6 +155,10 @@ Reads one WebSocket frame from a binary stream without requiring end-of-file. Re
 | **Mode and number of proofs:**
 |    ``read_frame(+stream_or_alias,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``read_frame/3`` using the default options:
+|        ``error``
+
 
 ------------
 
@@ -157,6 +177,10 @@ Reads one WebSocket frame from a binary stream using the given read options. Ret
 |    ``read_frame(Stream,Frame,Options)``
 | **Mode and number of proofs:**
 |    ``read_frame(+stream_or_alias,-term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Stream`` is a variable, ``Options`` are invalid, the payload length exceeds the configured limit, or the stream bytes do not encode a valid frame:
+|        ``error``
 
 | **Remarks:**
 
@@ -182,6 +206,10 @@ Writes one validated WebSocket frame to a binary stream and flushes the stream.
 | **Mode and number of proofs:**
 |    ``write_frame(+stream_or_alias,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Stream`` is a variable or ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
+
 
 ------------
 
@@ -200,6 +228,10 @@ Returns the fragmentation state atom of a validated WebSocket frame term.
 |    ``final(Frame,Final)``
 | **Mode and number of proofs:**
 |    ``final(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
 
 
 ------------
@@ -220,6 +252,10 @@ Returns the opcode atom of a validated WebSocket frame term.
 | **Mode and number of proofs:**
 |    ``opcode(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
+
 
 ------------
 
@@ -238,6 +274,10 @@ Returns the payload byte list of a validated WebSocket frame term.
 |    ``payload(Frame,Payload)``
 | **Mode and number of proofs:**
 |    ``payload(+compound,-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
 
 
 ------------
@@ -258,6 +298,10 @@ Returns the normalized property list of a validated WebSocket frame term.
 | **Mode and number of proofs:**
 |    ``properties(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
+
 
 ------------
 
@@ -276,6 +320,10 @@ True when the validated WebSocket frame term contains the given property. When t
 |    ``property(Frame,Property)``
 | **Mode and number of proofs:**
 |    ``property(+compound,?compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` is not a valid normalized WebSocket frame term:
+|        ``error``
 
 
 ------------

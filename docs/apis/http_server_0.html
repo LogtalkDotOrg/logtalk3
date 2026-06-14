@@ -491,6 +491,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_response(+stream,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> or <code class="docutils literal notranslate"><span class="pre">Output</span></code> are invalid for the delegated HTTP response generator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="dispatch-3">
@@ -511,6 +520,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dispatch(+object_identifier,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
 </div>
 <hr class="docutils" />
 </section>
@@ -554,6 +566,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_connection(+stream,+stream,+object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The binary streams or delegated request/response processing predicates raise a serving error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="accept-websocket-3">
@@ -573,6 +594,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">accept_websocket(+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized WebSocket opening-handshake request or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -602,6 +632,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_websocket(+stream,+stream,+object_identifier,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The binary streams or delegated WebSocket handshake processing predicates raise a serving error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

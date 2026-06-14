@@ -32,14 +32,20 @@
 	:- mode(annotate_htmx_request(+compound, -compound), one_or_error).
 	:- info(annotate_htmx_request/2, [
 		comment is 'Router middleware helper that annotates a normalized request with derived HTMX properties and continues the middleware chain.',
-		argnames is ['Request', 'Action']
+		argnames is ['Request', 'Action'],
+		exceptions is [
+			'Any exception that can be thrown by ``http_htmx::request_properties/2`` for the routed request' - error
+		]
 	]).
 
 	:- protected(add_htmx_response_headers/3).
 	:- mode(add_htmx_response_headers(+compound, +compound, -compound), one_or_error).
 	:- info(add_htmx_response_headers/3, [
 		comment is 'Router response-middleware helper that decorates a normalized response using ``htmx_response_options/1`` request or response properties.',
-		argnames is ['Request', 'Response0', 'Response']
+		argnames is ['Request', 'Response0', 'Response'],
+		exceptions is [
+			'Any exception that can be thrown by ``http_htmx::add_response_headers/4`` for the derived HTMX response options' - error
+		]
 	]).
 
 	:- uses(list, [

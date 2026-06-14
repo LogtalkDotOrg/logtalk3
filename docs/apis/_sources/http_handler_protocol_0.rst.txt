@@ -54,6 +54,10 @@ Handles a normalized HTTP request term and returns a normalized HTTP response te
 | **Mode and number of proofs:**
 |    ``handle(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The implementing handler may throw request-specific or response-construction exceptions:
+|        ``error``
+
 
 ------------
 

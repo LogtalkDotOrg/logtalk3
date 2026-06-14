@@ -33,14 +33,20 @@
 	:- mode(serve(+atom, +compound, +atom, -compound), one_or_error).
 	:- info(serve/4, [
 		comment is 'Serves a directory listing for a relative request path from the given document root using the default options and returns a normalized response.',
-		argnames is ['Path', 'Request', 'DocumentRoot', 'Response']
+		argnames is ['Path', 'Request', 'DocumentRoot', 'Response'],
+		exceptions is [
+			'``Path``, ``Request``, or ``DocumentRoot`` are invalid for directory-listing serving' - error
+		]
 	]).
 
 	:- public(serve/5).
 	:- mode(serve(+atom, +compound, +atom, -compound, +list(compound)), one_or_error).
 	:- info(serve/5, [
 		comment is 'Serves a directory listing for a relative request path from the given document root using the given options and returns a normalized response.',
-		argnames is ['Path', 'Request', 'DocumentRoot', 'Response', 'Options']
+		argnames is ['Path', 'Request', 'DocumentRoot', 'Response', 'Options'],
+		exceptions is [
+			'``Path``, ``Request``, ``DocumentRoot``, or ``Options`` are invalid for directory-listing serving' - error
+		]
 	]).
 
 	:- uses(list, [

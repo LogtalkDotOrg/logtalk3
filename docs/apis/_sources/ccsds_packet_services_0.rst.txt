@@ -14,8 +14,8 @@ Helpers for CCSDS packet service packet-zone splitting and cross-frame TM/AOS pa
 |    ``logtalk_load(ccsds_packet_services(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2026-05-08
+| **Version:** 0:1:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -264,6 +264,16 @@ Splits a packet-zone byte sequence using the first header pointer and parses any
 | **Mode and number of proofs:**
 |    ``split_packet_zone(+list(byte),+integer,+integer,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Bytes``, ``FirstHeaderPointer``, or ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``Bytes`` is neither a variable nor a valid packet-zone byte sequence:
+|        ``domain_error(ccsds_packet_zone_bytes,Bytes)``
+|    ``FirstHeaderPointer`` is neither a variable nor a valid first header pointer for ``Bytes``:
+|        ``domain_error(ccsds_first_header_pointer,FirstHeaderPointer)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+
 
 ------------
 
@@ -282,6 +292,14 @@ Encodes a packet-zone term back into bytes and returns the corresponding first h
 |    ``join_packet_zone(PacketZone,SecondaryHeaderLength,Bytes,FirstHeaderPointer)``
 | **Mode and number of proofs:**
 |    ``join_packet_zone(+compound,+integer,-list(byte),-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PacketZone`` or ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``PacketZone`` is neither a variable nor a valid packet-zone term:
+|        ``domain_error(ccsds_packet_zone,PacketZone)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
 
 
 ------------
@@ -302,6 +320,16 @@ Extracts a TM transfer frame packet zone as a packet-zone term using the frame f
 | **Mode and number of proofs:**
 |    ``extract_tm_packets(+compound,+integer,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` or ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    The frame packet-zone bytes or first header pointer are invalid:
+|        ``domain_error(ccsds_packet_zone_bytes,Bytes)``
+
 
 ------------
 
@@ -320,6 +348,16 @@ Updates a TM transfer frame data field and first header pointer from a packet-zo
 |    ``insert_tm_packets(PacketZone,SecondaryHeaderLength,Frame,UpdatedFrame)``
 | **Mode and number of proofs:**
 |    ``insert_tm_packets(+compound,+integer,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PacketZone``, ``SecondaryHeaderLength``, or ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``PacketZone`` is neither a variable nor a valid packet-zone term:
+|        ``domain_error(ccsds_packet_zone,PacketZone)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
 
 
 ------------
@@ -340,6 +378,14 @@ Splits an AOS M_PDU packet-service data field into a packet-zone term. The first
 | **Mode and number of proofs:**
 |    ``split_aos_packet_zone(+list(byte),+integer,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Bytes`` or ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``Bytes`` is neither a variable nor a valid AOS packet-zone byte sequence:
+|        ``domain_error(ccsds_aos_packet_zone_bytes,Bytes)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+
 
 ------------
 
@@ -358,6 +404,16 @@ Encodes a packet-zone term as an AOS M_PDU packet-service data field, including 
 |    ``join_aos_packet_zone(PacketZone,SecondaryHeaderLength,Bytes)``
 | **Mode and number of proofs:**
 |    ``join_aos_packet_zone(+compound,+integer,-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PacketZone`` or ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``PacketZone`` is neither a variable nor a valid packet-zone term:
+|        ``domain_error(ccsds_packet_zone,PacketZone)``
+|    ``PacketZone`` has neither packets nor a pure prefix or suffix and therefore cannot be encoded as an empty AOS packet zone:
+|        ``domain_error(ccsds_aos_packet_zone,PacketZone)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
 
 
 ------------
@@ -378,6 +434,20 @@ Reassembles complete packets from a packet-zone term and a prior packet reassemb
 | **Mode and number of proofs:**
 |    ``reassemble_packet_zone(+compound,+integer,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``PacketZone``, ``SecondaryHeaderLength``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``PacketZone`` is neither a variable nor a valid packet-zone term:
+|        ``domain_error(ccsds_packet_zone,PacketZone)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid packet reassembly state:
+|        ``domain_error(ccsds_packet_reassembly_state,State)``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -396,6 +466,16 @@ Extracts an AOS transfer frame packet zone as a packet-zone term using the two-o
 |    ``extract_aos_packets(Frame,SecondaryHeaderLength,PacketZone)``
 | **Mode and number of proofs:**
 |    ``extract_aos_packets(+compound,+integer,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` or ``SecondaryHeaderLength`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    The frame data field is not a valid AOS packet-zone byte sequence:
+|        ``domain_error(ccsds_aos_packet_zone_bytes,Bytes)``
 
 
 ------------
@@ -416,6 +496,18 @@ Updates an AOS transfer frame data field from a packet-zone term by regenerating
 | **Mode and number of proofs:**
 |    ``insert_aos_packets(+compound,+integer,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``PacketZone``, ``SecondaryHeaderLength``, or ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``PacketZone`` is neither a variable nor a valid packet-zone term:
+|        ``domain_error(ccsds_packet_zone,PacketZone)``
+|    ``PacketZone`` cannot be encoded as an AOS empty packet zone:
+|        ``domain_error(ccsds_aos_packet_zone,PacketZone)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+
 
 ------------
 
@@ -434,6 +526,24 @@ Extracts the packet zone from a TM transfer frame, using the default ``throw`` d
 |    ``reassemble_tm_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``reassemble_tm_packets(+compound,+integer,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    The TM frame sequence is discontinuous:
+|        ``domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current TM frame counter moduli differ:
+|        ``domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
 
 
 ------------
@@ -454,6 +564,26 @@ Extracts the packet zone from a TM transfer frame, applies the selected disconti
 | **Mode and number of proofs:**
 |    ``reassemble_tm_packets(+compound,+integer,+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    The TM frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current TM frame counter moduli differ:
+|        ``domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -472,6 +602,26 @@ Extracts the packet zone from a TM transfer frame, applies the selected disconti
 |    ``reassemble_tm_packets(Frame,SecondaryHeaderLength,Policy,State,Packets,UpdatedState,Events)``
 | **Mode and number of proofs:**
 |    ``reassemble_tm_packets(+compound,+integer,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    The TM frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current TM frame counter moduli differ:
+|        ``domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
 
 
 ------------
@@ -492,6 +642,24 @@ Reassembles complete packets across a sequence of TM transfer frames using the d
 | **Mode and number of proofs:**
 |    ``reassemble_tm_frames(+list(compound),+integer,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    The TM frame sequence is discontinuous:
+|        ``domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current TM frame counter moduli differ:
+|        ``domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -510,6 +678,26 @@ Reassembles complete packets across a sequence of TM transfer frames using the s
 |    ``reassemble_tm_frames(Frames,SecondaryHeaderLength,Policy,State,Packets,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``reassemble_tm_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    The TM frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current TM frame counter moduli differ:
+|        ``domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
 
 
 ------------
@@ -530,6 +718,26 @@ Reassembles complete packets across a sequence of TM transfer frames using the s
 | **Mode and number of proofs:**
 |    ``reassemble_tm_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid TM transfer frame term:
+|        ``domain_error(ccsds_tm_transfer_frame_term,Frame)``
+|    The TM frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_tm_transfer_frame_sequence,tm_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current TM frame counter moduli differ:
+|        ``domain_error(ccsds_tm_transfer_frame_counter_modulus,tm_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -548,6 +756,24 @@ Extracts the packet zone from an AOS transfer frame, using the default ``throw``
 |    ``reassemble_aos_packets(Frame,SecondaryHeaderLength,State,Packets,UpdatedState)``
 | **Mode and number of proofs:**
 |    ``reassemble_aos_packets(+compound,+integer,+compound,-list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    The AOS frame sequence is discontinuous:
+|        ``domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current AOS frame counter moduli differ:
+|        ``domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
 
 
 ------------
@@ -568,6 +794,26 @@ Extracts the packet zone from an AOS transfer frame, applies the selected discon
 | **Mode and number of proofs:**
 |    ``reassemble_aos_packets(+compound,+integer,+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    The AOS frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current AOS frame counter moduli differ:
+|        ``domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -586,6 +832,26 @@ Extracts the packet zone from an AOS transfer frame, applies the selected discon
 |    ``reassemble_aos_packets(Frame,SecondaryHeaderLength,Policy,State,Packets,UpdatedState,Events)``
 | **Mode and number of proofs:**
 |    ``reassemble_aos_packets(+compound,+integer,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    The AOS frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current AOS frame counter moduli differ:
+|        ``domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
 
 
 ------------
@@ -606,6 +872,24 @@ Reassembles complete packets across a sequence of AOS transfer frames using the 
 | **Mode and number of proofs:**
 |    ``reassemble_aos_frames(+list(compound),+integer,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    The AOS frame sequence is discontinuous:
+|        ``domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current AOS frame counter moduli differ:
+|        ``domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -625,6 +909,26 @@ Reassembles complete packets across a sequence of AOS transfer frames using the 
 | **Mode and number of proofs:**
 |    ``reassemble_aos_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    The AOS frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current AOS frame counter moduli differ:
+|        ``domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
+
 
 ------------
 
@@ -643,6 +947,26 @@ Reassembles complete packets across a sequence of AOS transfer frames using the 
 |    ``reassemble_aos_frames(Frames,SecondaryHeaderLength,Policy,State,Packets,UpdatedState,Events)``
 | **Mode and number of proofs:**
 |    ``reassemble_aos_frames(+list(compound),+integer,+atom,+compound,-list(compound),-compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frames``, ``SecondaryHeaderLength``, ``Policy``, or ``State`` is a variable:
+|        ``instantiation_error``
+|    ``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length:
+|        ``domain_error(ccsds_secondary_header_length,SecondaryHeaderLength)``
+|    ``Policy`` is neither a variable nor a valid discontinuity recovery policy:
+|        ``domain_error(ccsds_discontinuity_policy,Policy)``
+|    ``State`` is neither a variable nor a valid channel reassembly state term:
+|        ``domain_error(ccsds_channel_reassembly_state,State)``
+|    An element ``Frame`` of ``Frames`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_aos_transfer_frame_term,Frame)``
+|    The AOS frame sequence is discontinuous under the ``throw`` recovery policy:
+|        ``domain_error(ccsds_aos_transfer_frame_sequence,aos_transfer_frame_sequence(SpacecraftId,VirtualChannelId,ExpectedFrameCount,VirtualChannelFrameCount))``
+|    The stored and current AOS frame counter moduli differ:
+|        ``domain_error(ccsds_aos_transfer_frame_counter_modulus,aos_transfer_frame_counter_modulus(SpacecraftId,VirtualChannelId,StoredCounterModulus,CounterModulus))``
+|    A pending fragment cannot be continued by the packet zone prefix data:
+|        ``domain_error(ccsds_packet_reassembly_continuation,packet_reassembly_state(PendingData))``
+|    A continuation fragment is followed by a new packet before the previous packet is completed:
+|        ``domain_error(ccsds_packet_reassembly_continuation,incomplete_continuation_before_new_packet)``
 
 
 ------------

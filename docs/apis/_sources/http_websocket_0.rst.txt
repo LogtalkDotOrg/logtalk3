@@ -65,6 +65,10 @@ Opens a client WebSocket connection to the given ``ws://`` or ``wss://`` URL and
 | **Mode and number of proofs:**
 |    ``open(+atom,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``open/3`` using the default options:
+|        ``error``
+
 
 ------------
 
@@ -83,6 +87,10 @@ Opens a client WebSocket connection to the given URL, returning an opaque handle
 |    ``open(URL,WebSocket,Options)``
 | **Mode and number of proofs:**
 |    ``open(+atom,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` or ``Options`` are invalid for WebSocket opening, or the delegated opening handshake raises an exception:
+|        ``error``
 
 
 ------------
@@ -103,6 +111,10 @@ Accepts one incoming WebSocket connection on the given listener using the defaul
 | **Mode and number of proofs:**
 |    ``accept(+compound,-compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``accept/4`` using the default options:
+|        ``error``
+
 
 ------------
 
@@ -121,6 +133,10 @@ Accepts one incoming WebSocket connection on the given listener and returns an o
 |    ``accept(Listener,WebSocket,ClientInfo,Options)``
 | **Mode and number of proofs:**
 |    ``accept(+compound,-compound,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Listener`` or ``Options`` are invalid for WebSocket acceptance, or the delegated server handshake raises an exception:
+|        ``error``
 
 
 ------------
@@ -141,6 +157,10 @@ Writes one outbound WebSocket message using the opaque handle. Accepts normalize
 | **Mode and number of proofs:**
 |    ``send(+compound,+term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or ``Message`` is not a valid outbound WebSocket message:
+|        ``error``
+
 
 ------------
 
@@ -159,6 +179,10 @@ Writes one outbound WebSocket message using the opaque handle and the given writ
 |    ``send(WebSocket,Message,Options)``
 | **Mode and number of proofs:**
 |    ``send(+compound,+term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket``, ``Message``, or ``Options`` are invalid for outbound WebSocket writes:
+|        ``error``
 
 
 ------------
@@ -179,6 +203,10 @@ Reads the next normalized WebSocket message using the opaque handle. Returns ``e
 | **Mode and number of proofs:**
 |    ``receive(+compound,-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or the delegated session read raises an exception:
+|        ``error``
+
 
 ------------
 
@@ -197,6 +225,10 @@ Reads the next normalized WebSocket message using the opaque handle and the give
 |    ``receive(WebSocket,Message,Options)``
 | **Mode and number of proofs:**
 |    ``receive(+compound,-term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket`` or ``Options`` are invalid for inbound WebSocket reads, or the delegated session read raises an exception:
+|        ``error``
 
 
 ------------
@@ -217,6 +249,10 @@ Best-effort graceful close of the WebSocket handle using the normal close payloa
 | **Mode and number of proofs:**
 |    ``close(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle:
+|        ``error``
+
 
 ------------
 
@@ -235,6 +271,10 @@ Best-effort graceful close of the WebSocket handle using the given close payload
 |    ``close(WebSocket,Payload)``
 | **Mode and number of proofs:**
 |    ``close(+compound,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or ``Payload`` is not a valid close payload:
+|        ``error``
 
 
 ------------
@@ -275,6 +315,10 @@ Convenience wrapper for sending one text message.
 | **Mode and number of proofs:**
 |    ``send_text(+compound,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or ``Text`` is not a valid text payload:
+|        ``error``
+
 
 ------------
 
@@ -293,6 +337,10 @@ Reads the next message and returns its text payload when the message type is ``t
 |    ``receive_text(WebSocket,Text)``
 | **Mode and number of proofs:**
 |    ``receive_text(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or the received message is not a text message:
+|        ``error``
 
 
 ------------
@@ -313,6 +361,10 @@ Convenience wrapper for sending one binary message.
 | **Mode and number of proofs:**
 |    ``send_binary(+compound,+list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or ``Bytes`` is not a valid binary payload:
+|        ``error``
+
 
 ------------
 
@@ -331,6 +383,10 @@ Reads the next message and returns its binary payload when the message type is `
 |    ``receive_binary(WebSocket,Bytes)``
 | **Mode and number of proofs:**
 |    ``receive_binary(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or the received message is not a binary message:
+|        ``error``
 
 
 ------------
@@ -351,6 +407,10 @@ Serializes a JSON term as UTF-8 text and sends it as one text message. Uses curl
 | **Mode and number of proofs:**
 |    ``send_json(+compound,+nonvar)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or ``JSON`` cannot be serialized as a text WebSocket message:
+|        ``error``
+
 
 ------------
 
@@ -369,6 +429,10 @@ Reads the next text message and decodes its payload as JSON. Returns ``end_of_fi
 |    ``receive_json(WebSocket,JSON)``
 | **Mode and number of proofs:**
 |    ``receive_json(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or the received text payload is not valid JSON:
+|        ``error``
 
 
 ------------
@@ -389,6 +453,10 @@ Serializes a Prolog term using canonical write options and sends it as one text 
 | **Mode and number of proofs:**
 |    ``send_term(+compound,+term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or ``Term`` cannot be serialized as a text WebSocket message:
+|        ``error``
+
 
 ------------
 
@@ -407,6 +475,10 @@ Reads the next text message and parses its payload as one Prolog term. Returns `
 |    ``receive_term(WebSocket,Term)``
 | **Mode and number of proofs:**
 |    ``receive_term(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``WebSocket`` is not an open opaque WebSocket handle or the received text payload is not a canonical Prolog term:
+|        ``error``
 
 
 ------------
@@ -427,6 +499,10 @@ Convenience wrapper over ``http_websocket_client_service::open/4`` that keeps th
 | **Mode and number of proofs:**
 |    ``open_session(+atom,+object_identifier,-compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``http_websocket_client_service::open/4``:
+|        ``error``
+
 
 ------------
 
@@ -445,6 +521,10 @@ Convenience wrapper over ``http_websocket_client_service::open/5``.
 |    ``open_session(URL,Handler,Response,State,Options)``
 | **Mode and number of proofs:**
 |    ``open_session(+atom,+object_identifier,-compound,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``http_websocket_client_service::open/5``:
+|        ``error``
 
 
 ------------
@@ -465,6 +545,10 @@ Convenience wrapper that accepts one incoming WebSocket connection on the given 
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,-compound,-compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``serve_once/6`` using the default options:
+|        ``error``
+
 
 ------------
 
@@ -483,6 +567,10 @@ Convenience wrapper that accepts one incoming WebSocket connection on the given 
 |    ``serve_once(Listener,Handler,Response,State,ClientInfo,Options)``
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,-compound,-compound,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Listener`` or ``Options`` are invalid for WebSocket server-session startup, or the delegated handshake/session loop raises an exception:
+|        ``error``
 
 
 ------------

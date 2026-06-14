@@ -38,7 +38,10 @@
 	:- mode(route_parameters(+compound, -list(compound)), one_or_error).
 	:- info(route_parameters/2, [
 		comment is 'Extracts typed parameters for the route identified by the routed request ``route/1`` annotation.',
-		argnames is ['Request', 'Parameters']
+		argnames is ['Request', 'Parameters'],
+		exceptions is [
+			'The routed request is missing route annotations, the route declarations are invalid, or typed parameter extraction fails' - error
+		]
 	]).
 
 	:- protected(route_parameter_declarations/2).

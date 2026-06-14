@@ -32,21 +32,34 @@
 	:- mode(validate_relative_path(+atom), one_or_error).
 	:- info(validate_relative_path/1, [
 		comment is 'Validates a document-root relative request path atom.',
-		argnames is ['Path']
+		argnames is ['Path'],
+		exceptions is [
+			'``Path`` is a variable' - instantiation_error,
+			'``Path`` is neither a variable nor an atom' - type_error(atom, 'Path'),
+			'``Path`` is not a safe document-root relative path' - domain_error(http_docroot_relative_path, 'Path')
+		]
 	]).
 
 	:- protected(validate_request/1).
 	:- mode(validate_request(+compound), one_or_error).
 	:- info(validate_request/1, [
 		comment is 'Validates a normalized HTTP request term.',
-		argnames is ['Request']
+		argnames is ['Request'],
+		exceptions is [
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request')
+		]
 	]).
 
 	:- protected(validate_document_root/1).
 	:- mode(validate_document_root(+atom), one_or_error).
 	:- info(validate_document_root/1, [
 		comment is 'Validates an absolute document root path atom.',
-		argnames is ['DocumentRoot']
+		argnames is ['DocumentRoot'],
+		exceptions is [
+			'``DocumentRoot`` is a variable' - instantiation_error,
+			'``DocumentRoot`` is neither a variable nor an atom' - type_error(atom, 'DocumentRoot'),
+			'``DocumentRoot`` is not a valid absolute document root path' - domain_error(http_docroot_document_root, 'DocumentRoot')
+		]
 	]).
 
 	:- protected(supported_method/1).

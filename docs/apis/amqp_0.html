@@ -588,6 +588,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound,+integer,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid AMQP connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="connection-alive-1">
@@ -660,6 +669,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">channel_close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is not a valid AMQP channel handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="channel-close-3">
@@ -681,6 +699,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">channel_close(+compound,+integer,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is not a valid AMQP channel handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="exchange-declare-3">
@@ -700,6 +727,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_declare(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the exchange declaration:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(exchange_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -736,6 +772,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the exchange deletion:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(exchange_error(Message))</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -762,6 +807,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_bind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the exchange binding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(exchange_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -794,6 +848,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_unbind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the exchange unbinding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(exchange_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="queue-declare-3">
@@ -813,6 +876,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">queue_declare(+compound,?atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the queue declaration:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(queue_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -848,6 +920,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the queue deletion:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(queue_error(Message))</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -875,6 +956,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">queue_bind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the queue binding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(queue_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -907,6 +997,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">queue_unbind(+compound,+atom,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the queue unbinding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(queue_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="queue-purge-2">
@@ -928,6 +1027,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">queue_purge(+compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the queue purge request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(queue_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="basic-publish-4">
@@ -947,6 +1055,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">basic_publish(+compound,+atom,+term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid, <code class="docutils literal notranslate"><span class="pre">Body</span></code> cannot be encoded, or the frame/content transmission fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -994,6 +1111,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the consume request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(basic_error(Message))</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -1026,6 +1152,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">basic_cancel(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the cancel request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(basic_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="basic-get-3">
@@ -1045,6 +1180,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">basic_get(+compound,+atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server replies with an unexpected <code class="docutils literal notranslate"><span class="pre">basic.get</span></code> result:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(basic_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -1077,6 +1221,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the acknowledgment frame cannot be sent:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -1103,6 +1256,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">basic_nack(+compound,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the negative-acknowledgment frame cannot be sent:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -1136,6 +1298,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the reject frame cannot be sent:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -1162,6 +1333,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">basic_qos(+compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the QoS request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(basic_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -1196,6 +1376,15 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects the recover request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(basic_error(Message))</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -1222,6 +1411,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">receive(+compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the received frame sequence is not a valid AMQP content delivery:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -1253,6 +1451,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tx_select(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects <code class="docutils literal notranslate"><span class="pre">tx.select</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(tx_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="tx-commit-1">
@@ -1272,6 +1479,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tx_commit(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects <code class="docutils literal notranslate"><span class="pre">tx.commit</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(tx_error(Message))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1295,6 +1511,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tx_rollback(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects <code class="docutils literal notranslate"><span class="pre">tx.rollback</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(tx_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="confirm-select-1">
@@ -1316,6 +1541,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">confirm_select(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel</span></code> is invalid or the server rejects <code class="docutils literal notranslate"><span class="pre">confirm.select</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">amqp_error(confirm_error(Message))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="send-heartbeat-1">
@@ -1335,6 +1569,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_heartbeat(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid AMQP connection handle or the heartbeat frame cannot be sent:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1505,6 +1748,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_frame(+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> do not encode a valid complete AMQP frame payload:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
@@ -1516,10 +1768,30 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="decode-field-value-3">
 <span id="amqp-0-decode-field-value-3"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decode_field_value/3</span></code></a><a class="headerlink" href="#decode-field-value-3" title="Link to this heading"></a></h3>
+<p>Decodes one AMQP field-table value from a byte list, returning the normalized typed value plus the remaining undecoded bytes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_field_value(Bytes,Value,Rest)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">decode_field_value(+list(integer),-compound,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> do not start with a supported AMQP field-table value encoding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

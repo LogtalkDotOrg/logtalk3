@@ -33,56 +33,78 @@
 	:- mode(open(-compound), one_or_error).
 	:- info(open/1, [
 		comment is 'Opens a new server-session manager using the default cookie and timeout options.',
-		argnames is ['Manager']
+		argnames is ['Manager'],
+		exceptions is []
 	]).
 
 	:- public(open/2).
 	:- mode(open(-compound, +list(compound)), one_or_error).
 	:- info(open/2, [
 		comment is 'Opens a new server-session manager using the given cookie, timeout, and store options.',
-		argnames is ['Manager', 'Options']
+		argnames is ['Manager', 'Options'],
+		exceptions is [
+			'``Options`` contain invalid server-session configuration' - error
+		]
 	]).
 
 	:- public(close/1).
 	:- mode(close(+compound), one_or_error).
 	:- info(close/1, [
 		comment is 'Closes a server-session manager and discards all in-memory request contexts and stored sessions owned by it.',
-		argnames is ['Manager']
+		argnames is ['Manager'],
+		exceptions is [
+			'``Manager`` is not an open server-session manager handle' - error
+		]
 	]).
 
 	:- public(begin/3).
 	:- mode(begin(+compound, +compound, -compound), one_or_error).
 	:- info(begin/3, [
 		comment is 'Begins server-session processing for a normalized request, annotating it with a per-request session handle and the current session state.',
-		argnames is ['Manager', 'Request', 'AnnotatedRequest']
+		argnames is ['Manager', 'Request', 'AnnotatedRequest'],
+		exceptions is [
+			'``Manager`` is not an open server-session manager handle or ``Request`` is not a valid normalized HTTP request' - error
+		]
 	]).
 
 	:- public(finish/3).
 	:- mode(finish(+compound, +compound, -compound), one_or_error).
 	:- info(finish/3, [
 		comment is 'Finishes server-session processing for an annotated normalized request and a normalized response, adding any needed Set-Cookie lifecycle properties.',
-		argnames is ['Request', 'Response0', 'Response']
+		argnames is ['Request', 'Response0', 'Response'],
+		exceptions is [
+			'``Request`` is not a valid annotated server-session request or ``Response0`` is not a valid normalized HTTP response' - error
+		]
 	]).
 
 	:- public(current/2).
 	:- mode(current(+compound, -compound), one_or_error).
 	:- info(current/2, [
 		comment is 'Returns the request-bound current server-session handle from an annotated normalized request.',
-		argnames is ['Request', 'Session']
+		argnames is ['Request', 'Session'],
+		exceptions is [
+			'``Request`` is not a valid annotated server-session request' - error
+		]
 	]).
 
 	:- public(ensure/2).
 	:- mode(ensure(+compound, -compound), one_or_error).
 	:- info(ensure/2, [
 		comment is 'Ensures that the annotated request has a backing stored server session and returns its request-bound handle.',
-		argnames is ['Request', 'Session']
+		argnames is ['Request', 'Session'],
+		exceptions is [
+			'``Request`` is not a valid annotated server-session request' - error
+		]
 	]).
 
 	:- public(data/2).
 	:- mode(data(+compound, -list(compound)), one_or_error).
 	:- info(data/2, [
 		comment is 'Returns the current session key-value data pairs for a request-bound server-session handle or ``[]`` when no backing session exists yet.',
-		argnames is ['Session', 'Data']
+		argnames is ['Session', 'Data'],
+		exceptions is [
+			'``Session`` is not a valid request-bound server-session handle' - error
+		]
 	]).
 
 	:- public(get/3).
@@ -96,7 +118,10 @@
 	:- mode(set(+compound, +term, +term), one_or_error).
 	:- info(set/3, [
 		comment is 'Sets or replaces a session data key-value pair, creating a backing stored session when needed.',
-		argnames is ['Session', 'Key', 'Value']
+		argnames is ['Session', 'Key', 'Value'],
+		exceptions is [
+			'``Session`` is not a valid request-bound server-session handle' - error
+		]
 	]).
 
 	:- public(remove/3).
@@ -110,28 +135,40 @@
 	:- mode(destroy(+compound), one_or_error).
 	:- info(destroy/1, [
 		comment is 'Destroys the backing stored session, causing finish/3 to emit a deletion cookie when applicable.',
-		argnames is ['Session']
+		argnames is ['Session'],
+		exceptions is [
+			'``Session`` is not a valid request-bound server-session handle' - error
+		]
 	]).
 
 	:- public(renew/2).
 	:- mode(renew(+compound, -atom), one_or_error).
 	:- info(renew/2, [
 		comment is 'Renews the backing stored session identifier and returns the new opaque cookie identifier.',
-		argnames is ['Session', 'NewIdentifier']
+		argnames is ['Session', 'NewIdentifier'],
+		exceptions is [
+			'``Session`` is not a valid request-bound server-session handle' - error
+		]
 	]).
 
 	:- public(gc/2).
 	:- mode(gc(+compound, -integer), one_or_error).
 	:- info(gc/2, [
 		comment is 'Performs opportunistic garbage collection of expired stored sessions for the given manager and returns the number collected.',
-		argnames is ['Manager', 'Collected']
+		argnames is ['Manager', 'Collected'],
+		exceptions is [
+			'``Manager`` is not an open server-session manager handle' - error
+		]
 	]).
 
 	:- public(count/2).
 	:- mode(count(+compound, -integer), one_or_error).
 	:- info(count/2, [
 		comment is 'Returns the number of currently stored sessions owned by the given manager.',
-		argnames is ['Manager', 'Count']
+		argnames is ['Manager', 'Count'],
+		exceptions is [
+			'``Manager`` is not an open server-session manager handle' - error
+		]
 	]).
 
 	:- protected(http_server_session_event/2).

@@ -54,6 +54,10 @@ Processes a received normalized WebSocket message and returns a list of zero or 
 | **Mode and number of proofs:**
 |    ``handle(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    The implementing handler may throw message-specific or reply-construction exceptions:
+|        ``error``
+
 
 ------------
 

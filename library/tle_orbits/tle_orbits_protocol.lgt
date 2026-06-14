@@ -33,63 +33,90 @@
 	:- mode(parse(++compound, --list(compound)), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses one or more TLE records from a source specification into canonical ``tle(...)`` terms. Supported source specifications are ``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, and ``file(Path)``.',
-		argnames is ['Source', 'TLEs']
+		argnames is ['Source', 'TLEs'],
+		exceptions is [
+			'Any exception defined by the implementing TLE parser for invalid sources or malformed TLE data' - error
+		]
 	]).
 
 	:- public(parse_lines/4).
 	:- mode(parse_lines(++nonvar, ++atom, ++atom, --compound), one_or_error).
 	:- info(parse_lines/4, [
 		comment is 'Parses a single TLE record given an optional name atom or the atom ``none`` plus the two raw TLE lines.',
-		argnames is ['Name', 'Line1', 'Line2', 'TLE']
+		argnames is ['Name', 'Line1', 'Line2', 'TLE'],
+		exceptions is [
+			'Any exception defined by the implementing TLE parser for invalid line syntax, checksums, or orbital element ranges' - error
+		]
 	]).
 
 	:- public(propagate/3).
 	:- mode(propagate(++compound, ++nonvar, --compound), one_or_error).
 	:- info(propagate/3, [
 		comment is 'Propagates a parsed TLE using the default ``approximate`` model and returns a ``geographic(Latitude,Longitude,Height)`` coordinate. Supported time specifications are ``date_time(Year,Month,Day,Hours,Minutes,Seconds)``, ``julian_date(JulianDate)``, and ``offset_seconds(SecondsSinceEpoch)``.',
-		argnames is ['TLE', 'Time', 'Coordinate']
+		argnames is ['TLE', 'Time', 'Coordinate'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, or propagation-domain failures' - error
+		]
 	]).
 
 	:- public(propagate/4).
 	:- mode(propagate(++compound, ++nonvar, ++atom, --compound), one_or_error).
 	:- info(propagate/4, [
 		comment is 'Propagates a parsed TLE using the default ``approximate`` model and returns coordinates in the requested frame. Supported frames are ``eci`` returning ``eci(X,Y,Z)``, ``ecef`` returning ``ecef(X,Y,Z)``, and ``wgs84_3d`` returning ``geographic(Latitude,Longitude,Height)``.',
-		argnames is ['TLE', 'Time', 'Frame', 'Coordinate']
+		argnames is ['TLE', 'Time', 'Frame', 'Coordinate'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures' - error
+		]
 	]).
 
 	:- public(propagate/5).
 	:- mode(propagate(++compound, ++nonvar, ++atom, ++atom, --compound), one_or_error).
 	:- info(propagate/5, [
 		comment is 'Propagates a parsed TLE using the requested propagation model and returns coordinates in the requested frame. Supported models are ``approximate`` for automatic near-earth versus deep-space dispatch, ``approximate_near_earth`` for the low-period approximate branch with J2 secular and short-period corrections plus low-order B* drag handling, ``approximate_deep_space`` for the dedicated deep-space approximate branch with resonance-aware long-period corrections, and ``two_body`` for the legacy Keplerian approximation.',
-		argnames is ['TLE', 'Time', 'Frame', 'Model', 'Coordinate']
+		argnames is ['TLE', 'Time', 'Frame', 'Model', 'Coordinate'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures' - error
+		]
 	]).
 
 	:- public(propagate_state/4).
 	:- mode(propagate_state(++compound, ++nonvar, ++atom, --compound), one_or_error).
 	:- info(propagate_state/4, [
 		comment is 'Propagates a parsed TLE using the default ``approximate`` model and returns ``state(Position,Velocity)`` in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported frames are ``eci`` returning ``state(eci(X,Y,Z), eci(VX,VY,VZ))``, ``ecef`` returning ``state(ecef(X,Y,Z), ecef(VX,VY,VZ))``, and ``wgs84_3d`` returning ``state(geographic(Latitude,Longitude,Height), enu(East,North,Up))``.',
-		argnames is ['TLE', 'Time', 'Frame', 'State']
+		argnames is ['TLE', 'Time', 'Frame', 'State'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures' - error
+		]
 	]).
 
 	:- public(propagate_state/5).
 	:- mode(propagate_state(++compound, ++nonvar, ++atom, ++atom, --compound), one_or_error).
 	:- info(propagate_state/5, [
 		comment is 'Propagates a parsed TLE using the requested propagation model and returns ``state(Position,Velocity)`` in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported models are ``approximate``, ``approximate_near_earth``, ``approximate_deep_space``, and ``two_body``.',
-		argnames is ['TLE', 'Time', 'Frame', 'Model', 'State']
+		argnames is ['TLE', 'Time', 'Frame', 'Model', 'State'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures' - error
+		]
 	]).
 
 	:- public(ground_track/5).
 	:- mode(ground_track(++compound, ++compound, ++compound, ++number, --list(compound)), one_or_error).
 	:- info(ground_track/5, [
 		comment is 'Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds using the default ``approximate`` model, returning ``sample(DateTime, geographic(Latitude,Longitude,Height))`` terms.',
-		argnames is ['TLE', 'StartDateTime', 'EndDateTime', 'StepSeconds', 'Samples']
+		argnames is ['TLE', 'StartDateTime', 'EndDateTime', 'StepSeconds', 'Samples'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, or propagation-domain failures' - error
+		]
 	]).
 
 	:- public(ground_track/6).
 	:- mode(ground_track(++compound, ++compound, ++compound, ++number, ++atom, --list(compound)), one_or_error).
 	:- info(ground_track/6, [
 		comment is 'Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds using the requested propagation model. Supported models are ``approximate``, ``approximate_near_earth``, ``approximate_deep_space``, and ``two_body``.',
-		argnames is ['TLE', 'StartDateTime', 'EndDateTime', 'StepSeconds', 'Model', 'Samples']
+		argnames is ['TLE', 'StartDateTime', 'EndDateTime', 'StepSeconds', 'Model', 'Samples'],
+		exceptions is [
+			'Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, model identifiers, or propagation-domain failures' - error
+		]
 	]).
 
 :- end_protocol.

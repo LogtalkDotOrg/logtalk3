@@ -20,8 +20,8 @@ CCSDS advanced orbiting systems transfer frame parser and generator.
 |    ``logtalk_load(ccsds_frames(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-09
+| **Version:** 1:0:1
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -119,6 +119,12 @@ Computes the correct AOS transfer frame FECF for the selected object configurati
 |    ``update_fecf(Frame,UpdatedFrame)``
 | **Mode and number of proofs:**
 |    ``update_fecf(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Frame`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is neither a variable nor a valid AOS transfer frame term:
+|        ``domain_error(ccsds_frame_term,Frame)``
 
 
 ------------

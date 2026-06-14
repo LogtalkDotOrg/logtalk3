@@ -54,7 +54,10 @@
 	:- mode(request_body(+compound, -compound), one_or_error).
 	:- info(request_body/2, [
 		comment is 'Returns the normalized request body term.',
-		argnames is ['Request', 'Body']
+		argnames is ['Request', 'Body'],
+		exceptions is [
+			'The normalized request body is missing' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected request body.')
+		]
 	]).
 
 	:- public(json_body/2).
@@ -158,7 +161,10 @@
 	:- mode(no_content_response(+compound, -compound), one_or_error).
 	:- info(no_content_response/2, [
 		comment is 'Builds a ``204 No Content`` response.',
-		argnames is ['Request', 'Response']
+		argnames is ['Request', 'Response'],
+		exceptions is [
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request')
+		]
 	]).
 
 	:- public(problem_response/6).
@@ -226,7 +232,10 @@
 	:- mode(dispatch_rest_endpoint(+compound, -compound), one_or_error).
 	:- info(dispatch_rest_endpoint/2, [
 		comment is 'Runs the action associated with the matched endpoint and normalizes any supported returned or thrown result term into an HTTP response.',
-		argnames is ['Request', 'Response']
+		argnames is ['Request', 'Response'],
+		exceptions is [
+			'The routed endpoint identifier is missing, unknown, duplicated, or the endpoint action produces an invalid REST result term' - error
+		]
 	]).
 
 	:- uses(list, [

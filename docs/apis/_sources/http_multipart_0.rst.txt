@@ -15,7 +15,7 @@ Multipart helper predicates built on top of the normalized body and part terms p
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-08
+| **Date:** 2026-06-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -57,6 +57,12 @@ Constructs a validated normalized multipart body term from a multipart media typ
 | **Mode and number of proofs:**
 |    ``body(+atom,+list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``MediaType`` is not a valid multipart media type atom:
+|        ``domain_error(http_multipart_media_type,MediaType)``
+|    ``Parts`` is not a valid list of normalized multipart parts:
+|        ``domain_error(http_multipart_parts,Parts)``
+
 
 ------------
 
@@ -95,6 +101,14 @@ Parses a multipart body from a source term by delegating to the underlying ``htt
 | **Mode and number of proofs:**
 |    ``parse(++compound,+atom,+list,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``MediaType`` is not a valid multipart media type atom:
+|        ``domain_error(http_multipart_media_type,MediaType)``
+|    ``Source`` or ``Options`` are not valid for ``http_core::parse_body/4``:
+|        ``error``
+|    The parsed body is not a valid normalized multipart body term:
+|        ``domain_error(http_multipart_body,Body)``
+
 
 ------------
 
@@ -113,6 +127,12 @@ Generates a multipart body to a sink term by delegating to the underlying ``http
 |    ``generate(Sink,Body,Options)``
 | **Mode and number of proofs:**
 |    ``generate(++compound,+compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a valid normalized multipart body term:
+|        ``domain_error(http_multipart_body,Body)``
+|    ``Sink`` or ``Options`` are not valid for ``http_core::generate_body/3``:
+|        ``error``
 
 
 ------------
@@ -133,6 +153,10 @@ Returns the media type atom of a validated multipart body term.
 | **Mode and number of proofs:**
 |    ``media_type(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Body`` is not a valid normalized multipart body term:
+|        ``domain_error(http_multipart_body,Body)``
+
 
 ------------
 
@@ -151,6 +175,10 @@ Returns the list of multipart part terms of a validated multipart body term.
 |    ``parts(Body,Parts)``
 | **Mode and number of proofs:**
 |    ``parts(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a valid normalized multipart body term:
+|        ``domain_error(http_multipart_body,Body)``
 
 
 ------------
@@ -171,6 +199,10 @@ Returns the list of form-data field(Name, Value, Parameters) descriptors found i
 | **Mode and number of proofs:**
 |    ``fields(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Body`` is not a valid normalized multipart/form-data body term:
+|        ``domain_error(http_multipart_form_data_body,Body)``
+
 
 ------------
 
@@ -190,6 +222,10 @@ Returns the list of form-data ``file(Name, Filename, MediaType, Payload, Paramet
 | **Mode and number of proofs:**
 |    ``files(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Body`` is not a valid normalized multipart/form-data body term:
+|        ``domain_error(http_multipart_form_data_body,Body)``
+
 
 ------------
 
@@ -208,6 +244,10 @@ Constructs a validated normalized multipart part term from headers, body, and pr
 |    ``part(Headers,Body,Properties,Part)``
 | **Mode and number of proofs:**
 |    ``part(+list(compound),+compound,+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The given headers, body, and properties do not form a valid normalized multipart part term:
+|        ``domain_error(http_multipart_part,Part)``
 
 
 ------------
@@ -247,6 +287,10 @@ Returns the headers of a validated multipart part term.
 | **Mode and number of proofs:**
 |    ``part_headers(+compound,-list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Part`` is not a valid normalized multipart part term:
+|        ``domain_error(http_multipart_part,Part)``
+
 
 ------------
 
@@ -266,6 +310,10 @@ Returns the body of a validated multipart part term.
 | **Mode and number of proofs:**
 |    ``part_body(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Part`` is not a valid normalized multipart part term:
+|        ``domain_error(http_multipart_part,Part)``
+
 
 ------------
 
@@ -284,6 +332,10 @@ Returns the properties of a validated multipart part term.
 |    ``part_properties(Part,Properties)``
 | **Mode and number of proofs:**
 |    ``part_properties(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Part`` is not a valid normalized multipart part term:
+|        ``domain_error(http_multipart_part,Part)``
 
 
 ------------
@@ -342,6 +394,14 @@ Constructs a normalized multipart part for a textual form-data field using a con
 | **Mode and number of proofs:**
 |    ``field_part(+atom,+term,+list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Name`` is not a valid form-data field name:
+|        ``domain_error(http_multipart_form_data_parameter_name,Name)``
+|    ``Parameters`` is not a valid list of additional form-data disposition parameters:
+|        ``domain_error(http_multipart_form_data_parameters,Parameters)``
+|    A form-data disposition parameter is invalid for a textual field part:
+|        ``domain_error(http_multipart_form_data_parameter,Parameter)``
+
 
 ------------
 
@@ -361,6 +421,16 @@ Constructs a normalized multipart part for a form-data file using a content-disp
 | **Mode and number of proofs:**
 |    ``file_part(+atom,+atom,+atom,+compound,+list(compound),-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Name`` is not a valid form-data field name:
+|        ``domain_error(http_multipart_form_data_parameter_name,Name)``
+|    ``Filename`` is not a valid form-data filename value:
+|        ``domain_error(http_multipart_form_data_parameter_value,Filename)``
+|    ``Parameters`` is not a valid list of additional form-data disposition parameters:
+|        ``domain_error(http_multipart_form_data_parameters,Parameters)``
+|    A form-data disposition parameter is invalid for a file part:
+|        ``domain_error(http_multipart_form_data_parameter,Parameter)``
+
 
 ------------
 
@@ -379,6 +449,10 @@ Constructs a multipart/form-data body from an ordered list of ``field(Name, Valu
 |    ``form_data_body(Items,Body)``
 | **Mode and number of proofs:**
 |    ``form_data_body(+list(compound),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Items`` is not a valid list of form-data field or file descriptors:
+|        ``domain_error(http_multipart_form_data_items,Items)``
 
 
 ------------

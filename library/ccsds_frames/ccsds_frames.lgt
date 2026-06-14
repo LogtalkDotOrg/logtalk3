@@ -88,7 +88,11 @@
 	:- mode(update_fecf(+compound, -compound), one_or_error).
 	:- info(update_fecf/2, [
 		comment is 'Refreshes a present frame error control field from the remaining frame fields while leaving frames without an FECF unchanged.',
-		argnames is ['Frame', 'UpdatedFrame']
+		argnames is ['Frame', 'UpdatedFrame'],
+		exceptions is [
+			'``Frame`` is a variable' - instantiation_error,
+			'``Frame`` is not a valid CCSDS transfer frame term' - domain_error(ccsds_frame_term, 'Frame')
+		]
 	]).
 
 	:- public(verify_fecf/1).
@@ -102,14 +106,30 @@
 	:- mode(extract_packets(+compound, +integer, -list(compound)), one_or_error).
 	:- info(extract_packets/3, [
 		comment is 'Parses the raw frame data field as CCSDS space packet bytes using the given packet secondary header length.',
-		argnames is ['Frame', 'SecondaryHeaderLength', 'Packets']
+		argnames is ['Frame', 'SecondaryHeaderLength', 'Packets'],
+		exceptions is [
+			'``Frame`` is a variable' - instantiation_error,
+			'``SecondaryHeaderLength`` is a variable' - instantiation_error,
+			'``Frame`` is neither a variable nor a valid CCSDS transfer frame term' - domain_error(ccsds_frame_term, 'Frame'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'The frame data field is not a valid CCSDS packet byte sequence' - domain_error(ccsds_byte_sequence, 'Bytes')
+		]
 	]).
 
 	:- public(insert_packets/4).
 	:- mode(insert_packets(+list(compound), +integer, +compound, -compound), one_or_error).
 	:- info(insert_packets/4, [
 		comment is 'Generates CCSDS packet bytes and replaces the raw data field of a frame term, preserving the remaining header fields unchanged.',
-		argnames is ['Packets', 'SecondaryHeaderLength', 'Frame', 'UpdatedFrame']
+		argnames is ['Packets', 'SecondaryHeaderLength', 'Frame', 'UpdatedFrame'],
+		exceptions is [
+			'``Packets`` is a variable' - instantiation_error,
+			'``SecondaryHeaderLength`` is a variable' - instantiation_error,
+			'``Frame`` is a variable' - instantiation_error,
+			'``Frame`` is neither a variable nor a valid CCSDS transfer frame term' - domain_error(ccsds_frame_term, 'Frame'),
+			'``SecondaryHeaderLength`` is neither a variable nor a valid CCSDS packet secondary header length' - domain_error(ccsds_secondary_header_length, 'SecondaryHeaderLength'),
+			'An element ``Packet`` of ``Packets`` is a variable or ``Packets`` is a partial list' - instantiation_error,
+			'An element ``Packet`` of ``Packets`` is neither a variable nor a valid CCSDS packet term' - domain_error(ccsds_packet_term, 'Packet')
+		]
 	]).
 
 	:- uses(type, [

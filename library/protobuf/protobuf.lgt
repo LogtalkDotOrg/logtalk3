@@ -32,28 +32,48 @@
 	:- mode(parse(++compound, --pair), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses Protocol Buffers binary data from the given source (``bytes(List)``, ``stream(Stream)``, or ``file(Path)``) returning a ``Schema-Data`` pair. When the schema is not present in the file, ``Schema`` is unified with ``false``.',
-		argnames is ['Source', 'Schema-Data']
+		argnames is ['Source', 'Schema-Data'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Protocol Buffers source term' - domain_error(protobuf_source, 'Source'),
+			'``Schema`` is not a valid Protocol Buffers schema for the encoded message' - domain_error(protobuf_schema, 'Schema')
+		]
 	]).
 
 	:- public(parse/3).
 	:- mode(parse(++compound, ++term, --term), one_or_error).
 	:- info(parse/3, [
 		comment is 'Parses Protocol Buffers binary data from the given source using the provided schema, returning the decoded data.',
-		argnames is ['Source', 'Schema', 'Data']
+		argnames is ['Source', 'Schema', 'Data'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid Protocol Buffers source term' - domain_error(protobuf_source, 'Source'),
+			'``Schema`` is not a valid Protocol Buffers schema for the encoded message' - domain_error(protobuf_schema, 'Schema')
+		]
 	]).
 
 	:- public(generate/3).
 	:- mode(generate(++compound, ++term, ++term), one_or_error).
 	:- info(generate/3, [
 		comment is 'Generates Protocol Buffers binary data to the given sink (``bytes(List)``, ``stream(Stream)``, or ``file(Path)``) from the given schema and data. The schema is not included in the output.',
-		argnames is ['Sink', 'Schema', 'Data']
+		argnames is ['Sink', 'Schema', 'Data'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Protocol Buffers sink term' - domain_error(protobuf_sink, 'Sink'),
+			'``Schema`` is not a valid Protocol Buffers schema for ``Data``' - domain_error(protobuf_schema, 'Schema')
+		]
 	]).
 
 	:- public(generate/4).
 	:- mode(generate(++compound, ++boolean, ++term, ++term), one_or_error).
 	:- info(generate/4, [
 		comment is 'Generates Protocol Buffers binary data to the given sink from the given schema and data. When ``IncludeSchema`` is ``true``, the schema is embedded in a wrapper message.',
-		argnames is ['Sink', 'IncludeSchema', 'Schema', 'Data']
+		argnames is ['Sink', 'IncludeSchema', 'Schema', 'Data'],
+		exceptions is [
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid Protocol Buffers sink term' - domain_error(protobuf_sink, 'Sink'),
+			'``Schema`` is not a valid Protocol Buffers schema for ``Data``' - domain_error(protobuf_schema, 'Schema')
+		]
 	]).
 
 	:- uses(list, [

@@ -22,9 +22,9 @@
 :- protocol(json_schema_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-01-29,
+		date is 2026-06-14,
 		comment is 'JSON Schema parser and validator protocol.'
 	]).
 
@@ -32,7 +32,12 @@
 	:- mode(parse(++compound, --term), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses a JSON schema from the given source (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) into a schema term.',
-		argnames is ['Source', 'Schema']
+		argnames is ['Source', 'Schema'],
+		exceptions is [
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid JSON source term or does not contain parsable JSON' - domain_error(json_source, 'Source'),
+			'The parsed JSON value is not a valid JSON Schema term' - domain_error(json_schema, 'Schema')
+		]
 	]).
 
 	:- public(validate/2).

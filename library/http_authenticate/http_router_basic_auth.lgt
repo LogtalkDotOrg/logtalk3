@@ -36,7 +36,10 @@
 	:- mode(authorize_basic_auth_request(+compound, -compound), one_or_error).
 	:- info(authorize_basic_auth_request/2, [
 		comment is 'Router helper that applies Basic-auth route metadata to a routed request and returns either ``continue(Request)`` or ``respond(Response)``.',
-		argnames is ['Request', 'Action']
+		argnames is ['Request', 'Action'],
+		exceptions is [
+			'Route metadata options are not a proper list or the delegated Basic-auth protection predicate raises an exception' - error
+		]
 	]).
 
 	:- uses(list, [

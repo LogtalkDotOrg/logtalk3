@@ -57,6 +57,10 @@ Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, open
 | **Mode and number of proofs:**
 |    ``open(+atom,+object_identifier,-compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``URL`` or ``Handler`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception:
+|        ``error``
+
 
 ------------
 
@@ -75,6 +79,10 @@ Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, open
 |    ``open(URL,Handler,Response,State,Options)``
 | **Mode and number of proofs:**
 |    ``open(+atom,+object_identifier,-compound,-compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL``, ``Handler``, or ``Options`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception:
+|        ``error``
 
 | **Remarks:**
 

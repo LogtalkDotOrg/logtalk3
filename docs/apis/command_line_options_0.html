@@ -466,6 +466,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse(+list(object),+list(atom),-list,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">parse/5</span></code> using the default parsing options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="parse-5">
@@ -485,6 +494,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse(+list(object),+list(atom),-list,-list(atom),+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">OptionObjects</span></code> is not a list of valid option objects or the option set contains duplicate names or flags:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ApplArguments</span></code> is not a list of atoms, an unknown flag is found, a flag value cannot be parsed, or <code class="docutils literal notranslate"><span class="pre">ParseOptions</span></code> contains an invalid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+<div class="line">A short option is written using the disallowed <code class="docutils literal notranslate"><span class="pre">-f=value</span></code> syntax:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">syntax_error(disallowed:</span> <span class="pre">&lt;shortflag&gt;=&lt;value&gt;)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -508,6 +534,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">help(+list(object),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">help/3</span></code> using the default help options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="help-3">
@@ -527,6 +562,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">help(+list(object),-atom,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">OptionObjects</span></code> is not a list of valid option objects or the option set contains duplicate names or flags:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">HelpOptions</span></code> contains an invalid option or invalid option value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
 </div>
 </div>
 </section>

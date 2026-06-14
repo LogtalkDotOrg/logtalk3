@@ -54,6 +54,10 @@ Parses NMEA sentences from a source specification into canonical raw sentence te
 | **Mode and number of proofs:**
 |    ``parse(++compound,--list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data:
+|        ``error``
+
 
 ------------
 
@@ -72,6 +76,10 @@ Parses NMEA sentences from a source specification using parser options. Supporte
 |    ``parse(Source,Options,Sentences)``
 | **Mode and number of proofs:**
 |    ``parse(++compound,++list(compound),--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data:
+|        ``error``
 
 
 ------------

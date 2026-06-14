@@ -47,49 +47,70 @@
 	:- mode(parse_challenge(++text, -compound), one_or_error).
 	:- info(parse_challenge/2, [
 		comment is 'Parses one Basic challenge header field value into a normalized ``basic_challenge/1`` term.',
-		argnames is ['Text', 'Challenge']
+		argnames is ['Text', 'Challenge'],
+		exceptions is [
+			'``Text`` is not a valid Basic challenge header value' - error
+		]
 	]).
 
 	:- public(generate_challenge/2).
 	:- mode(generate_challenge(+compound, -atom), one_or_error).
 	:- info(generate_challenge/2, [
 		comment is 'Generates one canonical Basic challenge header field value from a normalized ``basic_challenge/1`` term.',
-		argnames is ['Challenge', 'HeaderValue']
+		argnames is ['Challenge', 'HeaderValue'],
+		exceptions is [
+			'``Challenge`` is not a valid normalized Basic challenge term' - error
+		]
 	]).
 
 	:- public(parse_authorization/2).
 	:- mode(parse_authorization(++text, -compound), one_or_error).
 	:- info(parse_authorization/2, [
 		comment is 'Parses one Basic authorization header field value into a normalized ``basic_authorization/1`` term.',
-		argnames is ['Text', 'Authorization']
+		argnames is ['Text', 'Authorization'],
+		exceptions is [
+			'``Text`` is not a valid Basic authorization header value' - error
+		]
 	]).
 
 	:- public(generate_authorization/2).
 	:- mode(generate_authorization(+compound, -atom), one_or_error).
 	:- info(generate_authorization/2, [
 		comment is 'Generates one canonical Basic authorization header field value from a normalized ``basic_authorization/1`` term.',
-		argnames is ['Authorization', 'HeaderValue']
+		argnames is ['Authorization', 'HeaderValue'],
+		exceptions is [
+			'``Authorization`` is not a valid normalized Basic authorization term' - error
+		]
 	]).
 
 	:- public(protect_request/4).
 	:- mode(protect_request(+compound, +object_identifier, -compound, +list(compound)), one_or_error).
 	:- info(protect_request/4, [
 		comment is 'Verifies a normalized HTTP request using a Basic verifier object and returns either ``continue(Request)`` or ``respond(Response)``.',
-		argnames is ['Request', 'Verifier', 'Action', 'Options']
+		argnames is ['Request', 'Verifier', 'Action', 'Options'],
+		exceptions is [
+			'``Request`` or ``Options`` are invalid, or the verifier object rejects the request with an exception' - error
+		]
 	]).
 
 	:- public(unauthorized_response/3).
 	:- mode(unauthorized_response(-compound, -compound, +list(compound)), one_or_error).
 	:- info(unauthorized_response/3, [
 		comment is 'Builds a normalized ``401 Unauthorized`` response and returns the generated normalized Basic challenge term.',
-		argnames is ['Challenge', 'Response', 'Options']
+		argnames is ['Challenge', 'Response', 'Options'],
+		exceptions is [
+			'``Options`` are invalid for Basic challenge generation or response construction' - error
+		]
 	]).
 
 	:- public(unauthorized_response/4).
 	:- mode(unauthorized_response(+compound, +compound, -compound, +list(compound)), one_or_error).
 	:- info(unauthorized_response/4, [
 		comment is 'Decorates a normalized HTTP response with an explicit normalized Basic challenge term and returns the resulting ``401 Unauthorized`` response.',
-		argnames is ['Challenge', 'Response0', 'Response', 'Options']
+		argnames is ['Challenge', 'Response0', 'Response', 'Options'],
+		exceptions is [
+			'``Challenge`` or ``Response0`` are invalid, or ``Options`` are invalid for unauthorized-response construction' - error
+		]
 	]).
 
 	:- uses(http_core, [

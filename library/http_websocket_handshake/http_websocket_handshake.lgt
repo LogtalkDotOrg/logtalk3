@@ -39,7 +39,11 @@
 	:- mode(websocket_accept(++term, --atom), one_or_error).
 	:- info(websocket_accept/2, [
 		comment is 'Computes the canonical `Sec-WebSocket-Accept` value for a valid WebSocket opening key.',
-		argnames is ['Key', 'Accept']
+		argnames is ['Key', 'Accept'],
+		exceptions is [
+			'``Key`` is a variable' - instantiation_error,
+			'``Key`` is not a valid WebSocket opening key value' - domain_error(http_websocket_key, 'Key')
+		]
 	]).
 
 	:- uses(crypto, [

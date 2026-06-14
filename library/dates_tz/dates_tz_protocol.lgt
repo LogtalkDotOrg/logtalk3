@@ -22,9 +22,9 @@
 :- protocol(dates_tz_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-08,
+		date is 2026-06-14,
 		comment is 'Protocol for zone-aware date-time conversion using cached TZif data.',
 		see_also is [dates_tz]
 	]).
@@ -33,14 +33,22 @@
 	:- mode(utc_to_local_tz(+compound, +atom, -compound), one_or_error).
 	:- info(utc_to_local_tz/3, [
 		comment is 'Converts a UTC date-time to the civil local date-time in the named zone. Requires the zone to be present in the cached TZif data.',
-		argnames is ['UTCDateTime', 'Zone', 'LocalDateTime']
+		argnames is ['UTCDateTime', 'Zone', 'LocalDateTime'],
+		exceptions is [
+			'``Zone`` is not present in the cached TZif data' - existence_error(time_zone, 'Zone')
+		]
 	]).
 
 	:- public(local_to_utc_tz/3).
 	:- mode(local_to_utc_tz(+compound, +atom, -compound), zero_or_one_or_error).
 	:- info(local_to_utc_tz/3, [
 		comment is 'Converts a civil local date-time in the named zone to UTC. This strict variant fails silently if the local time falls in a DST gap (non-existent time) or a DST fold (ambiguous time). Requires the zone to be present in the cached TZif data.',
-		argnames is ['LocalDateTime', 'Zone', 'UTCDateTime']
+		argnames is ['LocalDateTime', 'Zone', 'UTCDateTime'],
+		exceptions is [
+			'``LocalDateTime`` is a variable' - instantiation_error,
+			'``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term' - type_error(date_time, 'LocalDateTime'),
+			'``Zone`` is not present in the cached TZif data' - existence_error(time_zone, 'Zone')
+		]
 	]).
 
 	:- public(local_to_utc_tz_with_resolution/4).
@@ -54,7 +62,13 @@
 	:- mode(convert_zones(+compound, +atom, +atom, -compound), zero_or_one_or_error).
 	:- info(convert_zones/4, [
 		comment is 'Converts a civil local date-time in one zone to the civil local date-time in another zone. Uses strict interpretation: fails if the source local time is in a DST gap or fold. Requires both zones to be present in the cached TZif data.',
-		argnames is ['LocalDateTime', 'FromZone', 'ToZone', 'ResultDateTime']
+		argnames is ['LocalDateTime', 'FromZone', 'ToZone', 'ResultDateTime'],
+		exceptions is [
+			'``LocalDateTime`` is a variable' - instantiation_error,
+			'``LocalDateTime`` is neither a variable nor a valid ``date_time/6`` term' - type_error(date_time, 'LocalDateTime'),
+			'``FromZone`` is not present in the cached TZif data' - existence_error(time_zone, 'FromZone'),
+			'``ToZone`` is not present in the cached TZif data' - existence_error(time_zone, 'ToZone')
+		]
 	]).
 
 	:- public(convert_zones_with_resolution/5).

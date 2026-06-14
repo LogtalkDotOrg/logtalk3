@@ -61,6 +61,8 @@ Opens a new HTTP session with a freshly created owned cookie jar.
 | **Mode and number of proofs:**
 |    ``open(-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+
 
 ------------
 
@@ -79,6 +81,10 @@ Opens a new HTTP session using the given defaults and cookie-jar options, includ
 |    ``open(Session,Options)``
 | **Mode and number of proofs:**
 |    ``open(-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` contain invalid session defaults or cookie-jar options:
+|        ``error``
 
 
 ------------
@@ -99,6 +105,10 @@ Closes a session and, when applicable, the owned cookie jar created for it.
 | **Mode and number of proofs:**
 |    ``close(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Session`` is not an open HTTP client session handle:
+|        ``error``
+
 
 ------------
 
@@ -117,6 +127,10 @@ Returns the configured cookie jar handle or the atom ``none`` when the session d
 |    ``cookie_jar(Session,Jar)``
 | **Mode and number of proofs:**
 |    ``cookie_jar(+compound,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is not an open HTTP client session handle:
+|        ``error``
 
 
 ------------
@@ -137,6 +151,14 @@ Performs one HTTP request using session defaults and automatic cookie replay/sto
 | **Mode and number of proofs:**
 |    ``request(+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Session`` is not an open HTTP client session handle:
+|        ``error``
+|    ``Options`` contain invalid session request options or cookie-replay context metadata:
+|        ``error``
+|    The delegated stateless HTTP request or cookie-jar processing raises an exception:
+|        ``error``
+
 
 ------------
 
@@ -155,6 +177,10 @@ Convenience wrapper over request/5 using the ``get`` method.
 |    ``get(Session,URL,Response,Options)``
 | **Mode and number of proofs:**
 |    ``get(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` for the given session, URL, and options:
+|        ``error``
 
 
 ------------
@@ -175,6 +201,10 @@ Convenience wrapper over request/5 using the ``head`` method.
 | **Mode and number of proofs:**
 |    ``head(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` for the given session, URL, and options:
+|        ``error``
+
 
 ------------
 
@@ -193,6 +223,10 @@ Convenience wrapper over request/5 using the ``delete`` method.
 |    ``delete(Session,URL,Response,Options)``
 | **Mode and number of proofs:**
 |    ``delete(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` for the given session, URL, and options:
+|        ``error``
 
 
 ------------
@@ -213,6 +247,10 @@ Convenience wrapper over request/5 using the ``post`` method and the given body.
 | **Mode and number of proofs:**
 |    ``post(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
+|        ``error``
+
 
 ------------
 
@@ -232,6 +270,10 @@ Convenience wrapper over request/5 using the ``put`` method and the given body.
 | **Mode and number of proofs:**
 |    ``put(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
+|        ``error``
+
 
 ------------
 
@@ -250,6 +292,10 @@ Convenience wrapper over request/5 using the ``patch`` method and the given body
 |    ``patch(Session,URL,Body,Response,Options)``
 | **Mode and number of proofs:**
 |    ``patch(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
+|        ``error``
 
 
 ------------

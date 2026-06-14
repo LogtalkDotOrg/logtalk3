@@ -41,14 +41,20 @@
 	:- mode(parse(++compound, --term), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses an OpenAPI document from the given source (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) into the JSON term representation used by the ``json`` library.',
-		argnames is ['Source', 'Document']
+		argnames is ['Source', 'Document'],
+		exceptions is [
+			'``Source`` is invalid or JSON parsing of the OpenAPI document fails' - error
+		]
 	]).
 
 	:- public(generate/2).
 	:- mode(generate(+compound, ++term), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) for an OpenAPI document term using JSON serialization.',
-		argnames is ['Sink', 'Document']
+		argnames is ['Sink', 'Document'],
+		exceptions is [
+			'``Sink`` is invalid or JSON serialization of the OpenAPI document fails' - error
+		]
 	]).
 
 	:- public(validate_document/1).
@@ -69,7 +75,10 @@
 	:- mode(operation(+object_identifier, +atom, -compound), one_or_error).
 	:- info(operation/3, [
 		comment is 'Resolves an operation descriptor exposed by a provider object using its ``operationId`` atom.',
-		argnames is ['Provider', 'OperationId', 'Operation']
+		argnames is ['Provider', 'OperationId', 'Operation'],
+		exceptions is [
+			'``Provider`` does not expose the requested ``operationId`` or provider hooks violate OpenAPI descriptor expectations' - error
+		]
 	]).
 
 	:- public(validate_request/3).

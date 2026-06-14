@@ -33,7 +33,10 @@
 	:- mode(handle(+compound, -compound), one_or_error).
 	:- info(handle/2, [
 		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses.',
-		argnames is ['Request', 'Response']
+		argnames is ['Request', 'Response'],
+		exceptions is [
+			'The request, route metadata, middleware, or delegated route handler raise a routing exception' - error
+		]
 	]).
 
 	:- public(api_info/1).
@@ -110,7 +113,10 @@
 	:- mode(authorize_routed_request(+compound, -compound), one_or_error).
 	:- info(authorize_routed_request/2, [
 		comment is 'Optional hook predicate that validates or decorates a routed request after route matching and metadata annotation but before route handler dispatch. It must return either ``continue(Request)`` or ``respond(Response)``. The default implementation continues with the routed request unchanged.',
-		argnames is ['Request', 'Action']
+		argnames is ['Request', 'Action'],
+		exceptions is [
+			'The authorizer hook may throw request-specific authorization exceptions' - error
+		]
 	]).
 
 	:- protected(route_open_api_request_body_example/2).
@@ -173,7 +179,10 @@
 	:- mode(path_template_parameters(+atom, -list(compound)), one_or_error).
 	:- info(path_template_parameters/2, [
 		comment is 'Returns the normalized placeholder descriptors declared in a path template as ``parameter(Name, Type)`` terms.',
-		argnames is ['PathTemplate', 'Parameters']
+		argnames is ['PathTemplate', 'Parameters'],
+		exceptions is [
+			'``PathTemplate`` is not a valid router path template' - error
+		]
 	]).
 
 	:- protected(route_not_found_response/2).

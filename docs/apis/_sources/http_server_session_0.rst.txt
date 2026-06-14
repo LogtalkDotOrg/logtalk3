@@ -60,6 +60,8 @@ Opens a new server-session manager using the default cookie and timeout options.
 | **Mode and number of proofs:**
 |    ``open(-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+
 
 ------------
 
@@ -78,6 +80,10 @@ Opens a new server-session manager using the given cookie, timeout, and store op
 |    ``open(Manager,Options)``
 | **Mode and number of proofs:**
 |    ``open(-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` contain invalid server-session configuration:
+|        ``error``
 
 
 ------------
@@ -98,6 +104,10 @@ Closes a server-session manager and discards all in-memory request contexts and 
 | **Mode and number of proofs:**
 |    ``close(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Manager`` is not an open server-session manager handle:
+|        ``error``
+
 
 ------------
 
@@ -116,6 +126,10 @@ Begins server-session processing for a normalized request, annotating it with a 
 |    ``begin(Manager,Request,AnnotatedRequest)``
 | **Mode and number of proofs:**
 |    ``begin(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Manager`` is not an open server-session manager handle or ``Request`` is not a valid normalized HTTP request:
+|        ``error``
 
 
 ------------
@@ -136,6 +150,10 @@ Finishes server-session processing for an annotated normalized request and a nor
 | **Mode and number of proofs:**
 |    ``finish(+compound,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` is not a valid annotated server-session request or ``Response0`` is not a valid normalized HTTP response:
+|        ``error``
+
 
 ------------
 
@@ -154,6 +172,10 @@ Returns the request-bound current server-session handle from an annotated normal
 |    ``current(Request,Session)``
 | **Mode and number of proofs:**
 |    ``current(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Request`` is not a valid annotated server-session request:
+|        ``error``
 
 
 ------------
@@ -174,6 +196,10 @@ Ensures that the annotated request has a backing stored server session and retur
 | **Mode and number of proofs:**
 |    ``ensure(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Request`` is not a valid annotated server-session request:
+|        ``error``
+
 
 ------------
 
@@ -192,6 +218,10 @@ Returns the current session key-value data pairs for a request-bound server-sess
 |    ``data(Session,Data)``
 | **Mode and number of proofs:**
 |    ``data(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``error``
 
 
 ------------
@@ -231,6 +261,10 @@ Sets or replaces a session data key-value pair, creating a backing stored sessio
 | **Mode and number of proofs:**
 |    ``set(+compound,+term,+term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``error``
+
 
 ------------
 
@@ -269,6 +303,10 @@ Destroys the backing stored session, causing finish/3 to emit a deletion cookie 
 | **Mode and number of proofs:**
 |    ``destroy(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``error``
+
 
 ------------
 
@@ -287,6 +325,10 @@ Renews the backing stored session identifier and returns the new opaque cookie i
 |    ``renew(Session,NewIdentifier)``
 | **Mode and number of proofs:**
 |    ``renew(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``error``
 
 
 ------------
@@ -307,6 +349,10 @@ Performs opportunistic garbage collection of expired stored sessions for the giv
 | **Mode and number of proofs:**
 |    ``gc(+compound,-integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Manager`` is not an open server-session manager handle:
+|        ``error``
+
 
 ------------
 
@@ -325,6 +371,10 @@ Returns the number of currently stored sessions owned by the given manager.
 |    ``count(Manager,Count)``
 | **Mode and number of proofs:**
 |    ``count(+compound,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Manager`` is not an open server-session manager handle:
+|        ``error``
 
 
 ------------
