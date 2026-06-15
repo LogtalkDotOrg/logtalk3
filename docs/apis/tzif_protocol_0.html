@@ -395,7 +395,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2026-06-14</div>
+<div class="line"><strong>Date:</strong> 2026-06-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -874,9 +874,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/3</span></code> for the given zone and UTC instant:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -904,9 +904,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/2</span></code> for the given UTC instant:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -955,9 +955,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/3</span></code> for the given zone and UTC instant:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -985,9 +985,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/2</span></code> for the given UTC instant:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1036,9 +1036,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/3</span></code> for the given zone and UTC instant:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -1066,9 +1066,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">time_type/2</span></code> for the given UTC instant:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1281,9 +1281,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/3</span></code> for the given zone and local civil time:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -1311,9 +1311,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/2</span></code> for the given local civil time:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1425,9 +1425,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/3</span></code> for the given zone and local civil time:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -1455,9 +1455,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/2</span></code> for the given local civil time:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1569,9 +1569,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/3</span></code> for the given zone and local civil time:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -1599,9 +1599,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type/2</span></code> for the given local civil time:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1814,9 +1814,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/3</span></code> for the given zone and local civil time:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -1844,9 +1844,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2</span></code> for the given local civil time:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1895,9 +1895,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/3</span></code> for the given zone and local civil time:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -1925,9 +1925,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2</span></code> for the given local civil time:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>
@@ -1976,9 +1976,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/3</span></code> for the given zone and local civil time:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Zone</span></code> is not present in the cached TZif terms:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(time_zone,Zone)</span></code></div>
 </div>
 </div>
 </div>
@@ -2006,9 +2006,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">local_time_type_reified/2</span></code> for the given local civil time:</div>
+<div class="line">The cached TZif terms do not contain exactly one zone:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(single_zone_tzif_cache,TZifs)</span></code></div>
 </div>
 </div>
 </div>

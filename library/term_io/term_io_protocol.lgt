@@ -55,7 +55,7 @@
 		exceptions is [
 			'``Atom`` is a variable' - instantiation_error,
 			'``Atom`` is neither a variable nor an atom' - type_error(atom, 'Atom'),
-			'``Atom`` text cannot be read as a term' - error
+			'``Atom`` text cannot be read as a term' - syntax_error('BackendDependentArgument')
 		]
 	]).
 
@@ -67,6 +67,7 @@
 		exceptions is [
 			'``Chars`` contains a variable element' - instantiation_error,
 			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
+			'``Chars`` text cannot be read as a term' - syntax_error('BackendDependentArgument'),
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
@@ -82,6 +83,7 @@
 		argnames is ['Chars', 'Term', 'Tail', 'Options'],
 		exceptions is [
 			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
+			'``Chars`` text cannot be read as a term' - syntax_error('BackendDependentArgument'),
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
@@ -98,7 +100,7 @@
 		exceptions is [
 			'``Chars`` contains a variable element' - instantiation_error,
 			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
-			'``Chars`` text cannot be read as a term' - error
+			'``Chars`` text cannot be read as a term' - syntax_error('BackendDependentArgument')
 		]
 	]).
 
@@ -110,6 +112,7 @@
 		exceptions is [
 			'``Codes`` contains a variable element' - instantiation_error,
 			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
+			'``Codes`` text cannot be read as a term' - syntax_error('BackendDependentArgument'),
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
@@ -125,6 +128,7 @@
 		argnames is ['Codes', 'Term', 'Tail', 'Options'],
 		exceptions is [
 			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
+			'``Codes`` text cannot be read as a term' - syntax_error('BackendDependentArgument'),
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
@@ -141,6 +145,7 @@
 		exceptions is [
 			'``Codes`` contains a variable element' - instantiation_error,
 			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
+			'``Codes`` text cannot be read as a term' - syntax_error('BackendDependentArgument'),
 			'``Options`` is a variable' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,

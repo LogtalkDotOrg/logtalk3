@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-15,
 		comment is 'Protocol for loading TZif data sets, persisting loaded terms, and answering zone-aware UTC-based offset, DST, and abbreviation queries.'
 	]).
 
@@ -153,7 +153,7 @@
 		comment is 'Returns the UTC offset in seconds for a zone in the cached TZif terms.',
 		argnames is ['Zone', 'UTC', 'OffsetSeconds'],
 		exceptions is [
-			'Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -163,7 +163,7 @@
 		comment is 'Cached single-zone convenience variant of ``offset/3`` using the cached TZif terms; requires exactly one cached zone.',
 		argnames is ['UTC', 'OffsetSeconds'],
 		exceptions is [
-			'Any exception that can be thrown by ``time_type/2`` for the given UTC instant' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -180,7 +180,7 @@
 		comment is 'Returns daylight-saving information for a zone in the cached TZif terms.',
 		argnames is ['Zone', 'UTC', 'IsDST'],
 		exceptions is [
-			'Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -190,7 +190,7 @@
 		comment is 'Cached single-zone convenience variant of ``daylight_saving_time/3`` using the cached TZif terms; requires exactly one cached zone.',
 		argnames is ['UTC', 'IsDST'],
 		exceptions is [
-			'Any exception that can be thrown by ``time_type/2`` for the given UTC instant' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -207,7 +207,7 @@
 		comment is 'Returns the time-zone abbreviation for a zone in the cached TZif terms.',
 		argnames is ['Zone', 'UTC', 'Abbreviation'],
 		exceptions is [
-			'Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -217,7 +217,7 @@
 		comment is 'Cached single-zone convenience variant of ``abbreviation/3`` using the cached TZif terms; requires exactly one cached zone.',
 		argnames is ['UTC', 'Abbreviation'],
 		exceptions is [
-			'Any exception that can be thrown by ``time_type/2`` for the given UTC instant' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -287,7 +287,7 @@
 		comment is 'Returns the UTC offset in seconds for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
 		argnames is ['Zone', 'LocalDateTime', 'OffsetSeconds'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -297,7 +297,7 @@
 		comment is 'Cached single-zone convenience variant of strict local civil-time offset lookup.',
 		argnames is ['LocalDateTime', 'OffsetSeconds'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type/2`` for the given local civil time' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -335,7 +335,7 @@
 		comment is 'Returns daylight-saving information for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
 		argnames is ['Zone', 'LocalDateTime', 'IsDST'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -345,7 +345,7 @@
 		comment is 'Cached single-zone convenience variant of strict local daylight-saving lookup.',
 		argnames is ['LocalDateTime', 'IsDST'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type/2`` for the given local civil time' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -383,7 +383,7 @@
 		comment is 'Returns the time-zone abbreviation for a zone in the cached TZif terms. This strict variant fails unless the local civil time has a unique interpretation.',
 		argnames is ['Zone', 'LocalDateTime', 'Abbreviation'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -393,7 +393,7 @@
 		comment is 'Cached single-zone convenience variant of strict local abbreviation lookup.',
 		argnames is ['LocalDateTime', 'Abbreviation'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type/2`` for the given local civil time' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -463,7 +463,7 @@
 		comment is 'Returns a reified local offset lookup result for a zone in the cached TZif terms as one of ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
 		argnames is ['Zone', 'LocalDateTime', 'Result'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -473,7 +473,7 @@
 		comment is 'Cached single-zone convenience variant of reified local offset lookup; returns ``unique(OffsetSeconds)``, ``ambiguous(OffsetSecondsList)``, or ``nonexistent``.',
 		argnames is ['LocalDateTime', 'Result'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -490,7 +490,7 @@
 		comment is 'Returns a reified local daylight-saving lookup result for a zone in the cached TZif terms as one of ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
 		argnames is ['Zone', 'LocalDateTime', 'Result'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -500,7 +500,7 @@
 		comment is 'Cached single-zone convenience variant of reified local daylight-saving lookup; returns ``unique(IsDST)``, ``ambiguous(IsDSTList)``, or ``nonexistent``.',
 		argnames is ['LocalDateTime', 'Result'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 
@@ -517,7 +517,7 @@
 		comment is 'Returns a reified local abbreviation lookup result for a zone in the cached TZif terms as one of ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
 		argnames is ['Zone', 'LocalDateTime', 'Result'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time' - error
+			'``Zone`` is not present in the cached TZif terms' - existence_error(time_zone, 'Zone')
 		]
 	]).
 
@@ -527,7 +527,7 @@
 		comment is 'Cached single-zone convenience variant of reified local abbreviation lookup; returns ``unique(Abbreviation)``, ``ambiguous(Abbreviations)``, or ``nonexistent``.',
 		argnames is ['LocalDateTime', 'Result'],
 		exceptions is [
-			'Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time' - error
+			'The cached TZif terms do not contain exactly one zone' - domain_error(single_zone_tzif_cache, 'TZifs')
 		]
 	]).
 

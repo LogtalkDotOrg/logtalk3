@@ -96,7 +96,7 @@ Reads a term from an atom using default read options. Shorthand for ``read_term_
 |    ``Atom`` is neither a variable nor an atom:
 |        ``type_error(atom,Atom)``
 |    ``Atom`` text cannot be read as a term:
-|        ``error``
+|        ``syntax_error(BackendDependentArgument)``
 
 
 ------------
@@ -122,6 +122,8 @@ Reads a term from a list of characters using the given read options. A period at
 |        ``instantiation_error``
 |    ``Chars`` contains an element that is not a character:
 |        ``type_error(character,Char)``
+|    ``Chars`` text cannot be read as a term:
+|        ``syntax_error(BackendDependentArgument)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -155,6 +157,8 @@ Reads a term from a list of characters using the given read options, also return
 | **Exceptions:**
 |    ``Chars`` contains an element that is not a character:
 |        ``type_error(character,Char)``
+|    ``Chars`` text cannot be read as a term:
+|        ``syntax_error(BackendDependentArgument)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -191,7 +195,7 @@ Reads a term from a list of characters using default read options. Shorthand for
 |    ``Chars`` contains an element that is not a character:
 |        ``type_error(character,Char)``
 |    ``Chars`` text cannot be read as a term:
-|        ``error``
+|        ``syntax_error(BackendDependentArgument)``
 
 
 ------------
@@ -217,6 +221,8 @@ Reads a term from a list of character codes using the given read options. A peri
 |        ``instantiation_error``
 |    ``Codes`` contains an element that is not a character code:
 |        ``type_error(integer,Code)``
+|    ``Codes`` text cannot be read as a term:
+|        ``syntax_error(BackendDependentArgument)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -250,6 +256,8 @@ Reads a term from a list of character codes using the given read options, also r
 | **Exceptions:**
 |    ``Codes`` contains an element that is not a character code:
 |        ``type_error(integer,Code)``
+|    ``Codes`` text cannot be read as a term:
+|        ``syntax_error(BackendDependentArgument)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -285,6 +293,8 @@ Reads a term from a list of character codes using default read options. Shorthan
 |        ``instantiation_error``
 |    ``Codes`` contains an element that is not a character code:
 |        ``type_error(integer,Code)``
+|    ``Codes`` text cannot be read as a term:
+|        ``syntax_error(BackendDependentArgument)``
 |    ``Options`` is a variable:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:

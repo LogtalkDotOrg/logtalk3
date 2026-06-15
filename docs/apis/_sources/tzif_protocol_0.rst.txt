@@ -15,7 +15,7 @@ Protocol for loading TZif data sets, persisting loaded terms, and answering zone
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:1
-| **Date:** 2026-06-14
+| **Date:** 2026-06-15
 
 | **Compilation flags:**
 |    ``static``
@@ -360,8 +360,8 @@ Returns the UTC offset in seconds for a zone in the cached TZif terms.
 |    ``offset(+atom,+types([integer,compound]),-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -383,8 +383,8 @@ Cached single-zone convenience variant of ``offset/3`` using the cached TZif ter
 |    ``offset(+types([integer,compound]),-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``time_type/2`` for the given UTC instant:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -425,8 +425,8 @@ Returns daylight-saving information for a zone in the cached TZif terms.
 |    ``daylight_saving_time(+atom,+types([integer,compound]),-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -448,8 +448,8 @@ Cached single-zone convenience variant of ``daylight_saving_time/3`` using the c
 |    ``daylight_saving_time(+types([integer,compound]),-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``time_type/2`` for the given UTC instant:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -490,8 +490,8 @@ Returns the time-zone abbreviation for a zone in the cached TZif terms.
 |    ``abbreviation(+atom,+types([integer,compound]),-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``time_type/3`` for the given zone and UTC instant:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -513,8 +513,8 @@ Cached single-zone convenience variant of ``abbreviation/3`` using the cached TZ
 |    ``abbreviation(+types([integer,compound]),-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``time_type/2`` for the given UTC instant:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -687,8 +687,8 @@ Returns the UTC offset in seconds for a zone in the cached TZif terms. This stri
 |    ``local_offset(+atom,+compound,-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -710,8 +710,8 @@ Cached single-zone convenience variant of strict local civil-time offset lookup.
 |    ``local_offset(+compound,-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type/2`` for the given local civil time:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -809,8 +809,8 @@ Returns daylight-saving information for a zone in the cached TZif terms. This st
 |    ``local_daylight_saving_time(+atom,+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -832,8 +832,8 @@ Cached single-zone convenience variant of strict local daylight-saving lookup.
 |    ``local_daylight_saving_time(+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type/2`` for the given local civil time:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -931,8 +931,8 @@ Returns the time-zone abbreviation for a zone in the cached TZif terms. This str
 |    ``local_abbreviation(+atom,+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type/3`` for the given zone and local civil time:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -954,8 +954,8 @@ Cached single-zone convenience variant of strict local abbreviation lookup.
 |    ``local_abbreviation(+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type/2`` for the given local civil time:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -1128,8 +1128,8 @@ Returns a reified local offset lookup result for a zone in the cached TZif terms
 |    ``local_offset_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -1151,8 +1151,8 @@ Cached single-zone convenience variant of reified local offset lookup; returns `
 |    ``local_offset_reified(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -1193,8 +1193,8 @@ Returns a reified local daylight-saving lookup result for a zone in the cached T
 |    ``local_daylight_saving_time_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -1216,8 +1216,8 @@ Cached single-zone convenience variant of reified local daylight-saving lookup; 
 |    ``local_daylight_saving_time_reified(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
@@ -1258,8 +1258,8 @@ Returns a reified local abbreviation lookup result for a zone in the cached TZif
 |    ``local_abbreviation_reified(+atom,+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type_reified/3`` for the given zone and local civil time:
-|        ``error``
+|    ``Zone`` is not present in the cached TZif terms:
+|        ``existence_error(time_zone,Zone)``
 
 
 ------------
@@ -1281,8 +1281,8 @@ Cached single-zone convenience variant of reified local abbreviation lookup; ret
 |    ``local_abbreviation_reified(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``local_time_type_reified/2`` for the given local civil time:
-|        ``error``
+|    The cached TZif terms do not contain exactly one zone:
+|        ``domain_error(single_zone_tzif_cache,TZifs)``
 
 
 ------------
