@@ -15,7 +15,7 @@ JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructin
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:1
-| **Date:** 2026-06-14
+| **Date:** 2026-06-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -311,8 +311,10 @@ Decodes a JSON atom into a JSON-RPC 2.0 term (request, notification, response, e
 |    ``decode(+atom,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``parse/2`` when decoding the JSON atom into a JSON-RPC term:
-|        ``error``
+|    ``JSON`` is a variable:
+|        ``instantiation_error``
+|    ``JSON`` is neither a variable nor a valid JSON atom term or does not contain parsable JSON by the implementation:
+|        ``domain_error(json_source,JSON)``
 
 
 ------------

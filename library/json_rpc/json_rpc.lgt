@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-15,
 		comment is 'JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructing and parsing JSON-RPC 2.0 request, notification, response, and error objects. Uses the ``json`` library for JSON parsing and generation.',
 		remarks is [
 			'Specification' - 'Implements the JSON-RPC 2.0 specification: https://www.jsonrpc.org/specification',
@@ -197,7 +197,8 @@
 		comment is 'Decodes a JSON atom into a JSON-RPC 2.0 term (request, notification, response, error, or batch).',
 		argnames is ['JSON', 'Term'],
 		exceptions is [
-			'Any exception that can be thrown by ``parse/2`` when decoding the JSON atom into a JSON-RPC term' - error
+			'``JSON`` is a variable' - instantiation_error,
+			'``JSON`` is neither a variable nor a valid JSON atom term or does not contain parsable JSON by the implementation' - domain_error(json_source, 'JSON')
 		]
 	]).
 

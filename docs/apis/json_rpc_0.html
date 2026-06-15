@@ -393,7 +393,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2026-06-14</div>
+<div class="line"><strong>Date:</strong> 2026-06-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -769,9 +769,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> when decoding the JSON atom into a JSON-RPC term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JSON</span></code> is neither a variable nor a valid JSON atom term or does not contain parsable JSON by the implementation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(json_source,JSON)</span></code></div>
 </div>
 </div>
 </div>
