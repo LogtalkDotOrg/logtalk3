@@ -14,8 +14,8 @@ GeoJSON (RFC 7946) parser, generator, and validator protocol.
 |    ``logtalk_load(geojson(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2026-05-08
+| **Version:** 1:0:0
+| **Date:** 2026-06-15
 
 | **Compilation flags:**
 |    ``static``
@@ -126,6 +126,10 @@ Validates a native GeoJSON term returning a list of reason terms whose final arg
 |    ``validate(Term,Errors)``
 | **Mode and number of proofs:**
 |    ``validate(@term,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Term`` is a variable:
+|        ``instantiation_error``
 
 | **Remarks:**
 

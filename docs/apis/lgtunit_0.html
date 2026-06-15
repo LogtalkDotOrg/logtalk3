@@ -410,8 +410,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 22:7:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-01</div>
+<div class="line"><strong>Version:</strong> 22:7:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1320,6 +1320,43 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">run_quick_check_tests(&#64;callable,+list,--nonvar,--number,--list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Template</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(template_error(Template),instantiation_error)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Template</span></code> is not a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(template_error(Template),type_error(callable,Template))</span></code></div>
+</div>
+<div class="line">An error is raised while checking a generated test pre-condition:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(pre_condition_error(Condition),Error)</span></code></div>
+</div>
+<div class="line">All generated tests fail the pre-condition:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(pre_condition_always_fails(Condition))</span></code></div>
+</div>
+<div class="line">An error is raised while evaluating a label goal:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(label_goal_error(Label),Error)</span></code></div>
+</div>
+<div class="line">A label goal fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(label_goal_failure(Label))</span></code></div>
+</div>
+<div class="line">An error is raised while generating test arguments:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(generate_test_error(Template),Error)</span></code></div>
+</div>
+<div class="line">Test argument generation fails:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check_broken(generate_test_failure(Template),Type)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

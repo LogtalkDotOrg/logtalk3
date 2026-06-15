@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:7:0,
+		version is 22:7:1,
 		author is 'Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-06-15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -286,7 +286,17 @@
 	:- mode(run_quick_check_tests(@callable, +list, --nonvar, --number, --list(pair)), one_or_error).
 	:- info(run_quick_check_tests/5, [
 		comment is 'Runs a QuickCheck test using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.',
-		argnames is ['Template', 'Options', 'Seed', 'Discarded', 'Labels']
+		argnames is ['Template', 'Options', 'Seed', 'Discarded', 'Labels'],
+		exceptions is [
+			'``Template`` is a variable' - quick_check_broken(template_error('Template'), instantiation_error),
+			'``Template`` is not a callable term' - quick_check_broken(template_error('Template'), type_error(callable, 'Template')),
+			'An error is raised while checking a generated test pre-condition' - quick_check_broken(pre_condition_error('Condition'), 'Error'),
+			'All generated tests fail the pre-condition' - quick_check_broken(pre_condition_always_fails('Condition')),
+			'An error is raised while evaluating a label goal' - quick_check_broken(label_goal_error('Label'), 'Error'),
+			'A label goal fails' - quick_check_broken(label_goal_failure('Label')),
+			'An error is raised while generating test arguments' - quick_check_broken(generate_test_error('Template'), 'Error'),
+			'Test argument generation fails' - quick_check_broken(generate_test_failure('Template'), 'Type')
+		]
 	]).
 
 	:- protected(condition/0).

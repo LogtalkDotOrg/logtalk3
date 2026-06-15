@@ -394,7 +394,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:3:1</div>
-<div class="line"><strong>Date:</strong> 2026-06-14</div>
+<div class="line"><strong>Date:</strong> 2026-06-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -487,9 +487,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Atom)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid list of standard read options or <code class="docutils literal notranslate"><span class="pre">Atom</span></code> text cannot be read as a term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(read_option,Option)</span></code></div>
 </div>
 </div>
 </div>
@@ -563,9 +579,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(character,Char)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid list of standard read options or <code class="docutils literal notranslate"><span class="pre">Chars</span></code> text cannot be read as a term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(read_option,Option)</span></code></div>
 </div>
 </div>
 </div>
@@ -597,9 +629,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(character,Char)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid list of standard read options or <code class="docutils literal notranslate"><span class="pre">Chars</span></code> text cannot be read as a term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(read_option,Option)</span></code></div>
 </div>
 </div>
 </div>
@@ -673,9 +721,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Code)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid list of standard read options or <code class="docutils literal notranslate"><span class="pre">Codes</span></code> text cannot be read as a term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(read_option,Option)</span></code></div>
 </div>
 </div>
 </div>
@@ -707,9 +771,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Code)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid list of standard read options or <code class="docutils literal notranslate"><span class="pre">Codes</span></code> text cannot be read as a term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(read_option,Option)</span></code></div>
 </div>
 </div>
 </div>
@@ -745,9 +825,25 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Code)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Codes</span></code> text cannot be read as a term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(read_option,Option)</span></code></div>
 </div>
 </div>
 </div>
@@ -770,6 +866,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_atom(&#64;term,-atom,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(write_option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -811,7 +932,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,-list(character),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,-list(character),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(write_option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -832,7 +978,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,-list(character),&#64;term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,-list(character),&#64;term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(write_option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -874,7 +1045,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,-list(character_code),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,-list(character_code),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(write_option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -895,7 +1091,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,-list(character_code),&#64;term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,-list(character_code),&#64;term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(write_option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

@@ -22,9 +22,9 @@
 :- protocol(wkt_wkb_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-06-15,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator protocol.',
 		see_also is [wkt_wkb, geojson, geospatial]
 	]).
@@ -66,6 +66,9 @@
 	:- info(validate/2, [
 		comment is 'Validates a native geometry term returning a list of reason terms whose final argument is the failing path.',
 		argnames is ['Geometry', 'Errors'],
+		exceptions is [
+			'``Geometry`` is a variable' - instantiation_error
+		],
 		remarks is [
 			'invalid_geometry_term(Path)' - 'The term is not any supported geometry representation.',
 			'invalid_options(Path)' - 'The options argument is not a list.',

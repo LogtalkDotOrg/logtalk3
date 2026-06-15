@@ -22,9 +22,9 @@
 :- protocol(geojson_protocol).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-08,
+		date is 2026-06-15,
 		comment is 'GeoJSON (RFC 7946) parser, generator, and validator protocol.',
 		see_also is [geojson, json, geospatial]
 	]).
@@ -65,6 +65,9 @@
 	:- info(validate/2, [
 		comment is 'Validates a native GeoJSON term returning a list of reason terms whose final argument is the failing path.',
 		argnames is ['Term', 'Errors'],
+		exceptions is [
+			'``Term`` is a variable' - instantiation_error
+		],
 		remarks is [
 			'invalid_geojson_term(Path)' - 'The term is not any supported GeoJSON geometry, feature, or feature collection representation.',
 			'invalid_geometry(Path)' - 'A geometry member is neither a valid geometry term nor ``@null`` where ``@null`` is allowed.',

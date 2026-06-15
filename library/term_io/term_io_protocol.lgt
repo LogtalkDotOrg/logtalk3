@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-15,
 		comment is 'Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		remarks is [
 			'Portability notes' - 'To keep calls to these library predicates portable, use only standard read/write options and specify output formats using atoms.'
@@ -39,7 +39,11 @@
 		exceptions is [
 			'``Atom`` is a variable' - instantiation_error,
 			'``Atom`` is neither a variable nor an atom' - type_error(atom, 'Atom'),
-			'``Options`` is not a valid list of standard read options or ``Atom`` text cannot be read as a term' - error
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(read_option, 'Option')
 		]
 	]).
 
@@ -63,7 +67,11 @@
 		exceptions is [
 			'``Chars`` contains a variable element' - instantiation_error,
 			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
-			'``Options`` is not a valid list of standard read options or ``Chars`` text cannot be read as a term' - error
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(read_option, 'Option')
 		]
 	]).
 
@@ -74,7 +82,11 @@
 		argnames is ['Chars', 'Term', 'Tail', 'Options'],
 		exceptions is [
 			'``Chars`` contains an element that is not a character' - type_error(character, 'Char'),
-			'``Options`` is not a valid list of standard read options or ``Chars`` text cannot be read as a term' - error
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(read_option, 'Option')
 		]
 	]).
 
@@ -98,7 +110,11 @@
 		exceptions is [
 			'``Codes`` contains a variable element' - instantiation_error,
 			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
-			'``Options`` is not a valid list of standard read options or ``Codes`` text cannot be read as a term' - error
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(read_option, 'Option')
 		]
 	]).
 
@@ -109,7 +125,11 @@
 		argnames is ['Codes', 'Term', 'Tail', 'Options'],
 		exceptions is [
 			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
-			'``Options`` is not a valid list of standard read options or ``Codes`` text cannot be read as a term' - error
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(read_option, 'Option')
 		]
 	]).
 
@@ -121,7 +141,11 @@
 		exceptions is [
 			'``Codes`` contains a variable element' - instantiation_error,
 			'``Codes`` contains an element that is not a character code' - type_error(integer, 'Code'),
-			'``Codes`` text cannot be read as a term' - error
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(read_option, 'Option')
 		]
 	]).
 
@@ -129,7 +153,14 @@
 	:- mode(write_term_to_atom(@term, -atom, +list(write_option)), one).
 	:- info(write_term_to_atom/3, [
 		comment is 'Writes a term to an atom using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.',
-		argnames is ['Term', 'Atom', 'Options']
+		argnames is ['Term', 'Atom', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(write_option, 'Option')
+		]
 	]).
 
 	:- public(write_to_atom/2).
@@ -140,17 +171,31 @@
 	]).
 
 	:- public(write_term_to_chars/3).
-	:- mode(write_term_to_chars(@term, -list(character), +list(write_option)), one).
+	:- mode(write_term_to_chars(@term, -list(character), +list(write_option)), one_or_error).
 	:- info(write_term_to_chars/3, [
 		comment is 'Writes a term to a list of characters using the given write options. Shorthand for ``write_term_to_chars(Term,Chars,[],Options)``. Valid options are those supported by the standard ``write_term/3`` predicate.',
-		argnames is ['Term', 'Chars', 'Options']
+		argnames is ['Term', 'Chars', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(write_option, 'Option')
+		]
 	]).
 
 	:- public(write_term_to_chars/4).
-	:- mode(write_term_to_chars(@term, -list(character), @term, +list(write_option)), one).
+	:- mode(write_term_to_chars(@term, -list(character), @term, +list(write_option)), one_or_error).
 	:- info(write_term_to_chars/4, [
 		comment is 'Writes a term to a list of characters with the given tail using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.',
-		argnames is ['Term', 'Chars', 'Tail', 'Options']
+		argnames is ['Term', 'Chars', 'Tail', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(write_option, 'Option')
+		]
 	]).
 
 	:- public(write_to_chars/2).
@@ -161,17 +206,31 @@
 	]).
 
 	:- public(write_term_to_codes/3).
-	:- mode(write_term_to_codes(@term, -list(character_code), +list(write_option)), one).
+	:- mode(write_term_to_codes(@term, -list(character_code), +list(write_option)), one_or_error).
 	:- info(write_term_to_codes/3, [
 		comment is 'Writes a term to a list of character codes using the given write options. Shorthand for ``write_term_to_codes(Term,Codes,[],Options)``. Valid options are those supported by the standard ``write_term/3`` predicate.',
-		argnames is ['Term', 'Codes', 'Options']
+		argnames is ['Term', 'Codes', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(write_option, 'Option')
+		]
 	]).
 
 	:- public(write_term_to_codes/4).
-	:- mode(write_term_to_codes(@term, -list(character_code), @term, +list(write_option)), one).
+	:- mode(write_term_to_codes(@term, -list(character_code), @term, +list(write_option)), one_or_error).
 	:- info(write_term_to_codes/4, [
 		comment is 'Writes a term to a list of character codes with the given tail using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.',
-		argnames is ['Term', 'Codes', 'Tail', 'Options']
+		argnames is ['Term', 'Codes', 'Tail', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(write_option, 'Option')
+		]
 	]).
 
 	:- public(write_to_codes/2).

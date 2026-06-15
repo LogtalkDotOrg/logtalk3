@@ -49,7 +49,6 @@
 		]
 	]).
 
-
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2
 	]).

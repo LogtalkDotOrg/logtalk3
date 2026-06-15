@@ -23,9 +23,9 @@
 	imports((tool_diagnostics_common, tutor_explanations, options))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-03-30,
+		date is 2026-06-15,
 		comment is 'Intercepts compiler linter warnings and caches them as machine-readable diagnostics.',
 		remarks is [
 			'Usage' - 'Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and then query the cached warnings using either the legacy warning predicates or the diagnostics protocol predicates. The standalone ``sarif`` tool can generate SARIF reports by querying these diagnostics.',
@@ -43,7 +43,14 @@
 	:- mode(enable(+list(compound)), one_or_error).
 	:- info(enable/1, [
 		comment is 'Enables warning collection and starts a fresh warning collection session using the given options.',
-		argnames is ['Options']
+		argnames is ['Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(disable/0).
