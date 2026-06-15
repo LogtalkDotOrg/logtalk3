@@ -32,8 +32,7 @@
 	cover(sbom).
 
 	:- uses(sbom, [
-		document/1, document/2,
-		(export)/1, (export)/2
+		document/1, document/2, (export)/1, (export)/2
 	]).
 
 	:- uses(registries, [
@@ -41,9 +40,7 @@
 	]).
 
 	:- uses(packs, [
-		directory/2,
-		install/4,
-		reset/0
+		directory/2, install/4, reset/0
 	]).
 
 	:- uses(list, [
@@ -55,15 +52,11 @@
 	]).
 
 	:- uses(json_schema, [
-		parse/2 as json_schema_parse/2,
-		validate/2 as json_schema_validate/2
+		parse/2 as json_schema_parse/2, validate/2 as json_schema_validate/2
 	]).
 
 	:- uses(os, [
-		change_directory/1,
-		decompose_file_name/3,
-		make_directory_path/1,
-		path_concat/3
+		change_directory/1, decompose_file_name/3, make_directory_path/1, path_concat/3
 	]).
 
 	setup :-

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-02,
+		date is 2026-06-15,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -66,9 +66,7 @@
 	]).
 
 	:- uses(list, [
-		append/3,
-		member/2,
-		subtract/3
+		append/2, append/3, member/2, subtract/3
 	]).
 
 	:- uses(json, [
@@ -76,32 +74,23 @@
 	]).
 
 	:- uses(json_schema, [
-		parse/2 as json_schema_parse/2,
-		validate/2 as json_schema_validate/2
+		parse/2 as json_schema_parse/2, validate/2 as json_schema_validate/2
 	]).
 
 	:- uses(term_io, [
-		format_to_atom/3,
-		write_term_to_atom/3
+		format_to_atom/3, write_term_to_atom/3
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2,
-		atomic_list_concat/3
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	:- uses(os, [
-		date_time/7,
-		decompose_file_name/3,
-		path_concat/3,
-		pid/1,
-		wall_time/1
+		date_time/7, decompose_file_name/3, path_concat/3, pid/1, wall_time/1
 	]).
 
 	:- uses(packs, [
-		loaded_pack_dependency/6,
-		loaded_pack/3,
-		pack_metadata/4
+		loaded_pack_dependency/6, loaded_pack/3, pack_metadata/4
 	]).
 
 	:- uses(uuid, [
@@ -115,8 +104,7 @@
 	document(Document, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		sbom_document(Document, UserOptions, Options),
-		!.
+		sbom_document(Document, UserOptions, Options).
 
 	document(Document) :-
 		document(Document, []).
@@ -129,8 +117,7 @@
 			validate_document(Document, Options)
 		;	true
 		),
-		json_generate(Sink, Document),
-		!.
+		json_generate(Sink, Document).
 
 	export(Sink) :-
 		export(Sink, []).
@@ -296,16 +283,14 @@
 		cyclonedx_component_pairs(Metadata, Checksum, Reference, Name, Version, License, Purpose, required, Description, Pairs0),
 		application_cyclonedx_identity_pairs(Options, IdentityPairs),
 		application_cyclonedx_external_reference_pairs(Options, ExternalReferencePairs),
-		append(Pairs0, IdentityPairs, Pairs1),
-		append(Pairs1, ExternalReferencePairs, Pairs),
+		append([Pairs0, IdentityPairs, ExternalReferencePairs], Pairs),
 		json_object(Pairs, JSON).
 
 	application_cyclonedx_identity_pairs(Options, Pairs) :-
 		application_cyclonedx_purl_pairs(Options, PurlPairs),
 		application_cyclonedx_omnibor_pairs(Options, OmniborPairs),
 		application_cyclonedx_swhid_pairs(Options, SwhidPairs),
-		append(PurlPairs, OmniborPairs, Pairs0),
-		append(Pairs0, SwhidPairs, Pairs).
+		append([PurlPairs, OmniborPairs, SwhidPairs], Pairs).
 
 	application_cyclonedx_purl_pairs(Options, [purl-PURL]) :-
 		application_external_reference_values(purl, [PURL| _], Options),
@@ -563,7 +548,8 @@
 		Home = Home0,
 		SourceURL = SourceURL0.
 
-	normalize_pack_license(none, 'NOASSERTION').
+	normalize_pack_license(none, 'NOASSERTION') :-
+		!.
 	normalize_pack_license(License, License).
 
 	normalize_pack_checksum(none, none).
@@ -602,11 +588,7 @@
 		cyclonedx_external_reference_pairs(Reference, Name, Version, ExternalReferencePairs),
 		cyclonedx_entity_pairs(Metadata, EntityPairs),
 		cyclonedx_property_pairs(Metadata, PropertyPairs),
-		append(BasePairs, HashPairs, Pairs0),
-		append(Pairs0, LicensePairs, Pairs1),
-		append(Pairs1, ExternalReferencePairs, Pairs2),
-		append(Pairs2, EntityPairs, Pairs3),
-		append(Pairs3, PropertyPairs, Pairs).
+		append([BasePairs, HashPairs, LicensePairs, ExternalReferencePairs, EntityPairs, PropertyPairs], Pairs).
 
 	cyclonedx_component_type('APPLICATION', application).
 	cyclonedx_component_type('FRAMEWORK', framework).
@@ -622,10 +604,13 @@
 		!.
 	cyclonedx_external_reference_pairs(_, _, _, []).
 
-	cyclonedx_external_reference('SPDXRef-Logtalk', _, _, {type-website, url-'https://logtalk.org/'}).
+	cyclonedx_external_reference('SPDXRef-Logtalk', _, _, {type-website, url-'https://logtalk.org/'}) :-
+		!.
 	cyclonedx_external_reference('SPDXRef-Backend', Name, _, {type-website, url-URL}) :-
+		!,
 		backend(_, Name, _, URL).
-	cyclonedx_external_reference('logtalk:tool:sbom', _, _, {type-website, url-'https://logtalk.org/'}).
+	cyclonedx_external_reference('logtalk:tool:sbom', _, _, {type-website, url-'https://logtalk.org/'}) :-
+		!.
 	cyclonedx_external_reference(Reference, Name, Version, ExternalReference) :-
 		sub_atom(Reference, 0, _, _, 'SPDXRef-Pack-'),
 		cyclonedx_pack_external_reference(Name, Version, ExternalReference).
@@ -640,7 +625,8 @@
 		resolved_pack_metadata(Registry, Name, VersionTerm, _License, _Checksum, _Home, URL),
 		URL \== none.
 
-	cyclonedx_license_pairs('NOASSERTION', []).
+	cyclonedx_license_pairs('NOASSERTION', []) :-
+		!.
 	cyclonedx_license_pairs(License, [licenses-[LicenseJSON]]) :-
 		cyclonedx_license_json(License, LicenseJSON).
 
@@ -676,7 +662,8 @@
 		spdx_required_blanks,
 		spdx_and_expression,
 		spdx_or_expression_rest.
-	spdx_or_expression_rest --> [].
+	spdx_or_expression_rest -->
+		[].
 
 	spdx_and_expression -->
 		spdx_with_expression,
@@ -688,7 +675,8 @@
 		spdx_required_blanks,
 		spdx_with_expression,
 		spdx_and_expression_rest.
-	spdx_and_expression_rest --> [].
+	spdx_and_expression_rest -->
+		[].
 
 	spdx_with_expression -->
 		spdx_primary_expression,
@@ -700,7 +688,8 @@
 		spdx_required_blanks,
 		spdx_license_token,
 		spdx_blanks.
-	spdx_with_expression_rest --> [].
+	spdx_with_expression_rest -->
+		[].
 
 	spdx_primary_expression -->
 		spdx_blanks,
@@ -742,7 +731,8 @@
 		{ Code =\= 0'(, Code =\= 0'), \+ is_space(Code) },
 		!,
 		spdx_token_codes_rest(Codes).
-	spdx_token_codes_rest([]) --> [].
+	spdx_token_codes_rest([]) -->
+		[].
 
 	spdx_required_blanks -->
 		[Code],
@@ -754,7 +744,8 @@
 		{ is_space(Code) },
 		!,
 		spdx_blanks.
-	spdx_blanks --> [].
+	spdx_blanks -->
+		[].
 
 	is_space(32).
 	is_space(0'\t).
@@ -865,12 +856,7 @@
 		spdx_external_reference_pairs(SPDXID, Name, Version, Options, ExternalReferencePairs),
 		checksum_pairs(Checksum, ChecksumPairs),
 		metadata_pairs(Metadata, MetadataPairs),
-		append(BasePairs, ChecksumPairs, Pairs0),
-		append(Pairs0, LicensePairs, Pairs1),
-		append(Pairs1, HomepagePairs, Pairs2),
-		append(Pairs2, ExternalReferencePairs, Pairs3),
-		append(Pairs3, MetadataPairs, Pairs4),
-		append(Pairs4, TrailingPairs, Pairs).
+		append([BasePairs, ChecksumPairs, LicensePairs, HomepagePairs, ExternalReferencePairs, MetadataPairs, TrailingPairs], Pairs).
 
 	spdx_download_location_pairs('SPDXRef-Application', _, _, [downloadLocation-URL]) :-
 		application_distribution(URL),
@@ -897,11 +883,14 @@
 	spdx_external_reference_pairs(_, _, _, _, []).
 
 	spdx_package_external_reference('SPDXRef-Application', _, _, Reference, Options) :-
+		!,
 		application_external_reference(Type, URL, Options),
 		spdx_external_reference_json(Type, URL, Reference).
 	spdx_package_external_reference('SPDXRef-Logtalk', _, _, Reference, _) :-
+		!,
 		spdx_external_reference_json(website, 'https://logtalk.org/', Reference).
 	spdx_package_external_reference('SPDXRef-Backend', Name, _, Reference, _) :-
+		!,
 		backend(_, Name, _, URL),
 		spdx_external_reference_json(website, URL, Reference).
 	spdx_package_external_reference(SPDXID, Name, Version, Reference, _) :-
@@ -956,10 +945,7 @@
 		optional_pair(validUntilDate, ValidUntilDate, ValidUntilDatePairs),
 		optional_pair(supplier, Supplier, SupplierPairs),
 		optional_pair(originator, Originator, OriginatorPairs),
-		append(BuiltDatePairs, ReleaseDatePairs, Pairs0),
-		append(Pairs0, ValidUntilDatePairs, Pairs1),
-		append(Pairs1, SupplierPairs, Pairs2),
-		append(Pairs2, OriginatorPairs, Pairs).
+		append([BuiltDatePairs, ReleaseDatePairs, ValidUntilDatePairs, SupplierPairs, OriginatorPairs], Pairs).
 
 	optional_pair(_, absent, []) :-
 		!.
@@ -979,9 +965,8 @@
 		application_pack_references(PackRecords, ApplicationPackReferences),
 		application_pack_relationships(ApplicationPackReferences, ApplicationRelationships),
 		pack_relationships(PackRecords, PackRelationships),
-		append(BaseRelationships, ApplicationRelationships, Relationships0),
-		append(Relationships0, PackRelationships, Relationships1),
-		sort(Relationships1, Relationships).
+		append([BaseRelationships, ApplicationRelationships, PackRelationships], Relationships0),
+		sort(Relationships0, Relationships).
 
 	base_relationships([
 		{spdxElementId-'SPDXRef-DOCUMENT', relationshipType-'DESCRIBES', relatedSpdxElement-'SPDXRef-Application'},
@@ -1002,21 +987,21 @@
 	pack_relationships(PackRecords, Relationships) :-
 		pack_relationships(PackRecords, PackRecords, Relationships).
 
-	pack_relationships(_, [], []).
-	pack_relationships(AllPackRecords, [pack_record(SPDXID, _, _, _)| PackRecords], Relationships) :-
+	pack_relationships([], _, []).
+	pack_relationships([pack_record(SPDXID, _, _, _)| PackRecords], AllPackRecords, Relationships) :-
 		pack_dependency_references(AllPackRecords, SPDXID, DependencyReferences),
-		pack_dependency_relationships(SPDXID, DependencyReferences, PackRelationships),
-		pack_relationships(AllPackRecords, PackRecords, Relationships0),
-		append(PackRelationships, Relationships0, Relationships).
+		pack_dependency_relationships(DependencyReferences, SPDXID, PackRelationships),
+		append(PackRelationships, Relationships0, Relationships),
+		pack_relationships(PackRecords, AllPackRecords, Relationships0).
 
-	pack_dependency_relationships(_, [], []).
-	pack_dependency_relationships(SPDXID, [DependencyReference| DependencyReferences], [Relationship| Relationships]) :-
+	pack_dependency_relationships([], _, []).
+	pack_dependency_relationships([DependencyReference| DependencyReferences], SPDXID, [Relationship| Relationships]) :-
 		Relationship = {
 			spdxElementId-SPDXID,
 			relationshipType-'DEPENDS_ON',
 			relatedSpdxElement-DependencyReference
 		},
-		pack_dependency_relationships(SPDXID, DependencyReferences, Relationships).
+		pack_dependency_relationships(DependencyReferences, SPDXID, Relationships).
 
 	application_pack_references(PackRecords, ApplicationPackReferences) :-
 		findall(SPDXID, member(pack_record(SPDXID, _, _, _), PackRecords), AllPackReferences0),
