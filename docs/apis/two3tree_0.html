@@ -397,8 +397,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Michael T. Richter</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-04</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-06-16</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -516,6 +516,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">union_impl(LargerTree,SmallerTree,Union)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">union_impl(+two3tree,+two3tree,-two3tree)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -533,6 +537,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">union_impl_list(Pairs,Dictionary,Union)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">union_impl_list(+list(pair),+two3tree,-two3tree)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -550,6 +558,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone_impl(Tree,Clone,ClonePairs)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clone_impl(+two3tree,-two3tree,-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -567,6 +579,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">clone_impl2(Tree,Clone,Pairs,ClonePairs)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clone_impl2(+two3tree,-two3tree,-list(pair),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -584,6 +600,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_root_underflow(Tree,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">handle_root_underflow(+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -601,6 +621,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_impl(Tree,Key,Value,NewTree,Underflow)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">delete_impl(+term,+term,?term,-term,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -618,6 +642,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node2_left_underflow(LeftSubtree,RightSubtree,Key,Value,NewTree,Underflow)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node2_left_underflow(+term,+term,+term,+term,-term,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -635,6 +663,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node2_right_underflow(LeftSubtree,RightSubtree,Key,Value,NewTree,Underflow)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node2_right_underflow(+term,+term,+term,+term,-term,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -652,6 +684,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node3_left_underflow(LeftSubtree,MiddleSubtree,RightSubtree,LeftKey,LeftValue,RightKey,RightValue,NewTree,Underflow)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node3_left_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -669,6 +705,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node3_middle_underflow(LeftSubtree,MiddleSubtree,RightSubtree,LeftKey,LeftValue,RightKey,RightValue,NewTree,Underflow)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node3_middle_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -686,6 +726,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node3_right_underflow(LeftSubtree,MiddleSubtree,RightSubtree,LeftKey,LeftValue,RightKey,RightValue,NewTree,Underflow)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">fix_node3_right_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -703,6 +747,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_curly_bracketed_impl(Pairs,Term)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">as_curly_bracketed_impl(+list(pairs),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -720,6 +768,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">as_curly_bracketed_impl(Pairs,Pair,Term)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">as_curly_bracketed_impl(+list(pairs),+pair,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -737,6 +789,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_impl(OldTree,Key,Value,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_impl(+term,+term,+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -754,6 +810,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_empty(EmptyTree,Key,Value,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_empty(+empty,+term,+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -771,6 +831,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node2_2(Tree,Key,Value,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node2_2(+term,+term,+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -788,6 +852,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node2_4(Tree,Key,Value,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node2_4(+term,+term,+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -805,6 +873,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node3_4(Tree,Key,Value,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node3_4(+term,+term,+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -822,6 +894,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node3_7(Tree,Key,Value,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">insert_node3_7(+term,+term,+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -839,6 +915,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">intersection_impl(Pairs,Tree,Accumulator,Intersection)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">intersection_impl(+list(pair),+two3tree,+list(pair),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -856,6 +936,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">is_node4(Term)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">is_node4(+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -873,6 +957,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_impl(Tree,Closure)</span></code></div>
+</div>
 <div class="line"><strong>Meta-predicate template:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">map_impl(*,1)</span></code></div>
@@ -894,6 +982,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">map_impl(OldTree,Closure,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Meta-predicate template:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">map_impl(*,2,*)</span></code></div>
@@ -915,6 +1007,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">next_impl(Tree,Key,NextKey,NextValue,Successor)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">next_impl(+two3tree,+key,-key,-value,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -932,6 +1028,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">previous_impl(Tree,Key,PreviousKey,PreviousValue,Predecessor)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">previous_impl(+two3tree,+key,-key,-value,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
@@ -949,6 +1049,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">node2_from_node4(Node4,Tree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">node2_from_node4(+term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -966,6 +1070,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_impl(Pairs,OldTree,NewTree)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">update_impl(&#64;list(pair),+two3tree,-two3tree)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>

@@ -14,8 +14,8 @@
 |    ``logtalk_load(dictionaries(loader))``
 
 | **Author:** Michael T. Richter
-| **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Version:** 1:0:1
+| **Date:** 2026-06-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -79,6 +79,8 @@ Inserts all key-value pairs of the smaller tree into the larger tree to compute 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``union_impl(LargerTree,SmallerTree,Union)``
 | **Mode and number of proofs:**
 |    ``union_impl(+two3tree,+two3tree,-two3tree)`` - ``zero_or_one``
 
@@ -96,6 +98,8 @@ Inserts a list of key-value pairs into a dictionary one by one.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``union_impl_list(Pairs,Dictionary,Union)``
 | **Mode and number of proofs:**
 |    ``union_impl_list(+list(pair),+two3tree,-two3tree)`` - ``zero_or_one``
 
@@ -113,6 +117,8 @@ Recursively clones a tree, leaving all values unbound and collecting the pairs o
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``clone_impl(Tree,Clone,ClonePairs)``
 | **Mode and number of proofs:**
 |    ``clone_impl(+two3tree,-two3tree,-list(pair))`` - ``one``
 
@@ -130,6 +136,8 @@ Recursively clones a tree, returning both the original pairs and the clone pairs
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``clone_impl2(Tree,Clone,Pairs,ClonePairs)``
 | **Mode and number of proofs:**
 |    ``clone_impl2(+two3tree,-two3tree,-list(pair),-list(pair))`` - ``one``
 
@@ -147,6 +155,8 @@ After a deletion, if the root has become a 2-node with a single child, replace i
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``handle_root_underflow(Tree,NewTree)``
 | **Mode and number of proofs:**
 |    ``handle_root_underflow(+term,-term)`` - ``one``
 
@@ -164,6 +174,8 @@ Recursive deletion that returns the resulting tree and a flag indicating whether
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``delete_impl(Tree,Key,Value,NewTree,Underflow)``
 | **Mode and number of proofs:**
 |    ``delete_impl(+term,+term,?term,-term,-boolean)`` - ``zero_or_one``
 
@@ -181,6 +193,8 @@ Repairs an underflow after a deletion in the left subtree of a node2.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``fix_node2_left_underflow(LeftSubtree,RightSubtree,Key,Value,NewTree,Underflow)``
 | **Mode and number of proofs:**
 |    ``fix_node2_left_underflow(+term,+term,+term,+term,-term,-boolean)`` - ``one``
 
@@ -198,6 +212,8 @@ Repairs an underflow after a deletion in the right subtree of a node2.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``fix_node2_right_underflow(LeftSubtree,RightSubtree,Key,Value,NewTree,Underflow)``
 | **Mode and number of proofs:**
 |    ``fix_node2_right_underflow(+term,+term,+term,+term,-term,-boolean)`` - ``one``
 
@@ -215,6 +231,8 @@ Repairs an underflow after a deletion in the left subtree of a node3.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``fix_node3_left_underflow(LeftSubtree,MiddleSubtree,RightSubtree,LeftKey,LeftValue,RightKey,RightValue,NewTree,Underflow)``
 | **Mode and number of proofs:**
 |    ``fix_node3_left_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)`` - ``one``
 
@@ -232,6 +250,8 @@ Repairs an underflow after a deletion in the middle subtree of a node3.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``fix_node3_middle_underflow(LeftSubtree,MiddleSubtree,RightSubtree,LeftKey,LeftValue,RightKey,RightValue,NewTree,Underflow)``
 | **Mode and number of proofs:**
 |    ``fix_node3_middle_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)`` - ``one``
 
@@ -249,6 +269,8 @@ Repairs an underflow after a deletion in the right subtree of a node3.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``fix_node3_right_underflow(LeftSubtree,MiddleSubtree,RightSubtree,LeftKey,LeftValue,RightKey,RightValue,NewTree,Underflow)``
 | **Mode and number of proofs:**
 |    ``fix_node3_right_underflow(+term,+term,+term,+term,+term,+term,+term,-term,-boolean)`` - ``one``
 
@@ -266,6 +288,8 @@ Builds a curly-bracketed term from a list of key-value pairs.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``as_curly_bracketed_impl(Pairs,Term)``
 | **Mode and number of proofs:**
 |    ``as_curly_bracketed_impl(+list(pairs),-term)`` - ``one``
 
@@ -283,6 +307,8 @@ Helper that accumulates a comma-separated list inside curly braces.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``as_curly_bracketed_impl(Pairs,Pair,Term)``
 | **Mode and number of proofs:**
 |    ``as_curly_bracketed_impl(+list(pairs),+pair,-term)`` - ``one``
 
@@ -300,6 +326,8 @@ Recursive insertion that may return a node4 on the way up.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``insert_impl(OldTree,Key,Value,NewTree)``
 | **Mode and number of proofs:**
 |    ``insert_impl(+term,+term,+term,-term)`` - ``one``
 
@@ -317,6 +345,8 @@ Inserts into an empty tree.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``insert_empty(EmptyTree,Key,Value,NewTree)``
 | **Mode and number of proofs:**
 |    ``insert_empty(+empty,+term,+term,-term)`` - ``one``
 
@@ -334,6 +364,8 @@ Inserts a key-value pair into a leaf 2-node, creating a leaf 3-node.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``insert_node2_2(Tree,Key,Value,NewTree)``
 | **Mode and number of proofs:**
 |    ``insert_node2_2(+term,+term,+term,-term)`` - ``one``
 
@@ -351,6 +383,8 @@ Inserts into a non-leaf 2-node, possibly splitting a child 4-node.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``insert_node2_4(Tree,Key,Value,NewTree)``
 | **Mode and number of proofs:**
 |    ``insert_node2_4(+term,+term,+term,-term)`` - ``one``
 
@@ -368,6 +402,8 @@ Inserts a key-value pair into a leaf 3-node, creating a leaf 4-node.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``insert_node3_4(Tree,Key,Value,NewTree)``
 | **Mode and number of proofs:**
 |    ``insert_node3_4(+term,+term,+term,-term)`` - ``one``
 
@@ -385,6 +421,8 @@ Inserts into a non-leaf 3-node, possibly splitting a child 4-node.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``insert_node3_7(Tree,Key,Value,NewTree)``
 | **Mode and number of proofs:**
 |    ``insert_node3_7(+term,+term,+term,-term)`` - ``one``
 
@@ -402,6 +440,8 @@ Computes the intersection of a list of key-value pairs with a tree, inserting co
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``intersection_impl(Pairs,Tree,Accumulator,Intersection)``
 | **Mode and number of proofs:**
 |    ``intersection_impl(+list(pair),+two3tree,+list(pair),-list(pair))`` - ``zero_or_one``
 
@@ -419,6 +459,8 @@ True if the term is a 4-node (temporary representation).
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``is_node4(Term)``
 | **Mode and number of proofs:**
 |    ``is_node4(+term)`` - ``zero_or_one``
 
@@ -436,6 +478,8 @@ Traverses the tree and applies a closure to each key-value pair.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``map_impl(Tree,Closure)``
 | **Meta-predicate template:**
 |    ``map_impl(*,1)``
 | **Mode and number of proofs:**
@@ -455,6 +499,8 @@ Traverses the tree, applies a closure to each key-value pair, and builds a new t
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``map_impl(OldTree,Closure,NewTree)``
 | **Meta-predicate template:**
 |    ``map_impl(*,2,*)``
 | **Mode and number of proofs:**
@@ -474,6 +520,8 @@ Recursively finds the next key-value pair after a given key.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``next_impl(Tree,Key,NextKey,NextValue,Successor)``
 | **Mode and number of proofs:**
 |    ``next_impl(+two3tree,+key,-key,-value,+term)`` - ``zero_or_one``
 
@@ -491,6 +539,8 @@ Recursively finds the previous key-value pair before a given key.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``previous_impl(Tree,Key,PreviousKey,PreviousValue,Predecessor)``
 | **Mode and number of proofs:**
 |    ``previous_impl(+two3tree,+key,-key,-value,+term)`` - ``zero_or_one``
 
@@ -508,6 +558,8 @@ Converts a 4-node (temporary) into a balanced 2-node with two 2-node children.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``node2_from_node4(Node4,Tree)``
 | **Mode and number of proofs:**
 |    ``node2_from_node4(+term,-term)`` - ``one``
 
@@ -525,6 +577,8 @@ Updates a dictionary with a list of key-value pairs sequentially.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``update_impl(Pairs,OldTree,NewTree)``
 | **Mode and number of proofs:**
 |    ``update_impl(@list(pair),+two3tree,-two3tree)`` - ``zero_or_one``
 

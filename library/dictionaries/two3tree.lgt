@@ -24,9 +24,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Michael T. Richter',
-		date is 2026-04-04,
+		date is 2026-06-16,
 		comment is '2-3 tree implementation.',
 		see_also is [avltree, bintree, rbtree, splaytree, dictionaryp]
 	]).
@@ -336,7 +336,8 @@
 	:- private(union_impl/3).
 	:- mode(union_impl(+two3tree, +two3tree, -two3tree), zero_or_one).
 	:- info(union_impl/3, [
-		comment is 'Inserts all key-value pairs of the smaller tree into the larger tree to compute the union.'
+		comment is 'Inserts all key-value pairs of the smaller tree into the larger tree to compute the union.',
+		argnames is ['LargerTree', 'SmallerTree', 'Union']
 	]).
 
 	union_impl(T1, T2, U) :-
@@ -346,7 +347,8 @@
 	:- private(union_impl_list/3).
 	:- mode(union_impl_list(+list(pair), +two3tree, -two3tree), zero_or_one).
 	:- info(union_impl_list/3, [
-		comment is 'Inserts a list of key-value pairs into a dictionary one by one.'
+		comment is 'Inserts a list of key-value pairs into a dictionary one by one.',
+		argnames is ['Pairs', 'Dictionary', 'Union']
 	]).
 
 	union_impl_list([], U, U).
@@ -357,7 +359,8 @@
 	:- private(clone_impl/3).
 	:- mode(clone_impl(+two3tree, -two3tree, -list(pair)), one).
 	:- info(clone_impl/3, [
-		comment is 'Recursively clones a tree, leaving all values unbound and collecting the pairs of the clone.'
+		comment is 'Recursively clones a tree, leaving all values unbound and collecting the pairs of the clone.',
+		argnames is ['Tree', 'Clone', 'ClonePairs']
 	]).
 
 	clone_impl(empty, empty, []) :-
@@ -383,7 +386,8 @@
 	:- private(clone_impl2/4).
 	:- mode(clone_impl2(+two3tree, -two3tree, -list(pair), -list(pair)), one).
 	:- info(clone_impl2/4, [
-		comment is 'Recursively clones a tree, returning both the original pairs and the clone pairs.'
+		comment is 'Recursively clones a tree, returning both the original pairs and the clone pairs.',
+		argnames is ['Tree', 'Clone', 'Pairs', 'ClonePairs']
 	]).
 
 	clone_impl2(empty, empty, [], []) :-
@@ -413,7 +417,8 @@
 	:- private(handle_root_underflow/2).
 	:- mode(handle_root_underflow(+term, -term), one).
 	:- info(handle_root_underflow/2, [
-		comment is 'After a deletion, if the root has become a 2-node with a single child, replace it by that child; otherwise keep the root.'
+		comment is 'After a deletion, if the root has become a 2-node with a single child, replace it by that child; otherwise keep the root.',
+		argnames is ['Tree', 'NewTree']
 	]).
 
 	handle_root_underflow(node2(_, _, Child, empty), Child) :-
@@ -427,7 +432,8 @@
 	:- private(delete_impl/5).
 	:- mode(delete_impl(+term, +term, ?term, -term, -boolean), zero_or_one).
 	:- info(delete_impl/5, [
-		comment is 'Recursive deletion that returns the resulting tree and a flag indicating whether an underflow has occurred at the current node.'
+		comment is 'Recursive deletion that returns the resulting tree and a flag indicating whether an underflow has occurred at the current node.',
+		argnames is ['Tree', 'Key', 'Value', 'NewTree', 'Underflow']
 	]).
 
 	delete_impl(empty, _, _, _, _) :-
@@ -521,7 +527,8 @@
 	:- private(fix_node2_left_underflow/6).
 	:- mode(fix_node2_left_underflow(+term, +term, +term, +term, -term, -boolean), one).
 	:- info(fix_node2_left_underflow/6, [
-		comment is 'Repairs an underflow after a deletion in the left subtree of a node2.'
+		comment is 'Repairs an underflow after a deletion in the left subtree of a node2.',
+		argnames is ['LeftSubtree', 'RightSubtree', 'Key', 'Value', 'NewTree', 'Underflow']
 	]).
 
 	fix_node2_left_underflow(L, R, K0, V0, T2, Underflow) :-
@@ -550,7 +557,8 @@
 	:- private(fix_node2_right_underflow/6).
 	:- mode(fix_node2_right_underflow(+term, +term, +term, +term, -term, -boolean), one).
 	:- info(fix_node2_right_underflow/6, [
-		comment is 'Repairs an underflow after a deletion in the right subtree of a node2.'
+		comment is 'Repairs an underflow after a deletion in the right subtree of a node2.',
+		argnames is ['LeftSubtree', 'RightSubtree', 'Key', 'Value', 'NewTree', 'Underflow']
 	]).
 
 	fix_node2_right_underflow(L, R, K0, V0, T2, Underflow) :-
@@ -579,7 +587,8 @@
 	:- private(fix_node3_left_underflow/9).
 	:- mode(fix_node3_left_underflow(+term, +term, +term, +term, +term, +term, +term, -term, -boolean), one).
 	:- info(fix_node3_left_underflow/9, [
-		comment is 'Repairs an underflow after a deletion in the left subtree of a node3.'
+		comment is 'Repairs an underflow after a deletion in the left subtree of a node3.',
+		argnames is ['LeftSubtree', 'MiddleSubtree', 'RightSubtree', 'LeftKey', 'LeftValue', 'RightKey', 'RightValue', 'NewTree', 'Underflow']
 	]).
 
 	fix_node3_left_underflow(L, M, R, KL, VL, KR, VR, T2, Underflow) :-
@@ -613,7 +622,8 @@
 	:- private(fix_node3_middle_underflow/9).
 	:- mode(fix_node3_middle_underflow(+term, +term, +term, +term, +term, +term, +term, -term, -boolean), one).
 	:- info(fix_node3_middle_underflow/9, [
-		comment is 'Repairs an underflow after a deletion in the middle subtree of a node3.'
+		comment is 'Repairs an underflow after a deletion in the middle subtree of a node3.',
+		argnames is ['LeftSubtree', 'MiddleSubtree', 'RightSubtree', 'LeftKey', 'LeftValue', 'RightKey', 'RightValue', 'NewTree', 'Underflow']
 	]).
 
 	fix_node3_middle_underflow(L, M, R, KL, VL, KR, VR, T2, Underflow) :-
@@ -663,7 +673,8 @@
 	:- private(fix_node3_right_underflow/9).
 	:- mode(fix_node3_right_underflow(+term, +term, +term, +term, +term, +term, +term, -term, -boolean), one).
 	:- info(fix_node3_right_underflow/9, [
-		comment is 'Repairs an underflow after a deletion in the right subtree of a node3.'
+		comment is 'Repairs an underflow after a deletion in the right subtree of a node3.',
+		argnames is ['LeftSubtree', 'MiddleSubtree', 'RightSubtree', 'LeftKey', 'LeftValue', 'RightKey', 'RightValue', 'NewTree', 'Underflow']
 	]).
 
 	fix_node3_right_underflow(L, M, R, KL, VL, KR, VR, T2, Underflow) :-
@@ -697,7 +708,8 @@
 	:- private(as_curly_bracketed_impl/2).
 	:- mode(as_curly_bracketed_impl(+list(pairs), -term), one).
 	:- info(as_curly_bracketed_impl/2, [
-		comment is 'Builds a curly-bracketed term from a list of key-value pairs.'
+		comment is 'Builds a curly-bracketed term from a list of key-value pairs.',
+		argnames is ['Pairs', 'Term']
 	]).
 
 	as_curly_bracketed_impl([], {}).
@@ -707,7 +719,8 @@
 	:- private(as_curly_bracketed_impl/3).
 	:- mode(as_curly_bracketed_impl(+list(pairs), +pair, -term), one).
 	:- info(as_curly_bracketed_impl/3, [
-		comment is 'Helper that accumulates a comma-separated list inside curly braces.'
+		comment is 'Helper that accumulates a comma-separated list inside curly braces.',
+		argnames is ['Pairs', 'Pair', 'Term']
 	]).
 
 	as_curly_bracketed_impl([], P, P).
@@ -717,7 +730,8 @@
 	:- private(insert_impl/4).
 	:- mode(insert_impl(+term, +term, +term, -term), one).
 	:- info(insert_impl/4, [
-		comment is 'Recursive insertion that may return a node4 on the way up.'
+		comment is 'Recursive insertion that may return a node4 on the way up.',
+		argnames is ['OldTree', 'Key', 'Value', 'NewTree']
 	]).
 
 	insert_impl(T0, K, V, T1) :-
@@ -738,7 +752,8 @@
 	:- private(insert_empty/4).
 	:- mode(insert_empty(+empty, +term, +term, -term), one).
 	:- info(insert_empty/4, [
-		comment is 'Inserts into an empty tree.'
+		comment is 'Inserts into an empty tree.',
+		argnames is ['EmptyTree', 'Key', 'Value', 'NewTree']
 	]).
 
 	insert_empty(empty, K, V, node2(K, V)).
@@ -746,7 +761,8 @@
 	:- private(insert_node2_2/4).
 	:- mode(insert_node2_2(+term, +term, +term, -term), one).
 	:- info(insert_node2_2/4, [
-		comment is 'Inserts a key-value pair into a leaf 2-node, creating a leaf 3-node.'
+		comment is 'Inserts a key-value pair into a leaf 2-node, creating a leaf 3-node.',
+		argnames is ['Tree', 'Key', 'Value', 'NewTree']
 	]).
 
 	insert_node2_2(node2(K0, V0), K, V, T1) :-
@@ -758,7 +774,8 @@
 	:- private(insert_node2_4/4).
 	:- mode(insert_node2_4(+term, +term, +term, -term), one).
 	:- info(insert_node2_4/4, [
-		comment is 'Inserts into a non-leaf 2-node, possibly splitting a child 4-node.'
+		comment is 'Inserts into a non-leaf 2-node, possibly splitting a child 4-node.',
+		argnames is ['Tree', 'Key', 'Value', 'NewTree']
 	]).
 
 	insert_node2_4(node2(K0, V0, L0, R0), K, V, T1) :-
@@ -791,7 +808,8 @@
 	:- private(insert_node3_4/4).
 	:- mode(insert_node3_4(+term, +term, +term, -term), one).
 	:- info(insert_node3_4/4, [
-		comment is 'Inserts a key-value pair into a leaf 3-node, creating a leaf 4-node.'
+		comment is 'Inserts a key-value pair into a leaf 3-node, creating a leaf 4-node.',
+		argnames is ['Tree', 'Key', 'Value', 'NewTree']
 	]).
 
 	insert_node3_4(node3(KL, VL, KR, VR), K, V, T1) :-
@@ -806,7 +824,8 @@
 	:- private(insert_node3_7/4).
 	:- mode(insert_node3_7(+term, +term, +term, -term), one).
 	:- info(insert_node3_7/4, [
-		comment is 'Inserts into a non-leaf 3-node, possibly splitting a child 4-node.'
+		comment is 'Inserts into a non-leaf 3-node, possibly splitting a child 4-node.',
+		argnames is ['Tree', 'Key', 'Value', 'NewTree']
 	]).
 
 	insert_node3_7(node3(KL0, VL0, KR0, VR0, L0, M0, R0), K, V, T1) :-
@@ -852,7 +871,8 @@
 	:- private(intersection_impl/4).
 	:- mode(intersection_impl(+list(pair), +two3tree, +list(pair), -list(pair)), zero_or_one).
 	:- info(intersection_impl/4, [
-		comment is 'Computes the intersection of a list of key-value pairs with a tree, inserting common pairs into an accumulator.'
+		comment is 'Computes the intersection of a list of key-value pairs with a tree, inserting common pairs into an accumulator.',
+		argnames is ['Pairs', 'Tree', 'Accumulator', 'Intersection']
 	]).
 
 	intersection_impl([], _, I, I).
@@ -866,7 +886,8 @@
 	:- private(is_node4/1).
 	:- mode(is_node4(+term), zero_or_one).
 	:- info(is_node4/1, [
-		comment is 'True if the term is a 4-node (temporary representation).'
+		comment is 'True if the term is a 4-node (temporary representation).',
+		argnames is ['Term']
 	]).
 
 	is_node4(node4(_, _, _, _, _, _)).
@@ -876,7 +897,8 @@
 	:- mode(map_impl(+two3tree, @callable), zero_or_more).
 	:- meta_predicate(map_impl(*, 1)).
 	:- info(map_impl/2, [
-		comment is 'Traverses the tree and applies a closure to each key-value pair.'
+		comment is 'Traverses the tree and applies a closure to each key-value pair.',
+		argnames is ['Tree', 'Closure']
 	]).
 
 	map_impl(empty, _).
@@ -900,7 +922,8 @@
 	:- mode(map_impl(+two3tree, @callable, -two3tree), zero_or_more).
 	:- meta_predicate(map_impl(*, 2, *)).
 	:- info(map_impl/3, [
-		comment is 'Traverses the tree, applies a closure to each key-value pair, and builds a new tree with the results.'
+		comment is 'Traverses the tree, applies a closure to each key-value pair, and builds a new tree with the results.',
+		argnames is ['OldTree', 'Closure', 'NewTree']
 	]).
 
 	map_impl(empty, _, empty).
@@ -927,7 +950,8 @@
 	:- private(next_impl/5).
 	:- mode(next_impl(+two3tree, +key, -key, -value, +term), zero_or_one).
 	:- info(next_impl/5, [
-		comment is 'Recursively finds the next key-value pair after a given key.'
+		comment is 'Recursively finds the next key-value pair after a given key.',
+		argnames is ['Tree', 'Key', 'NextKey', 'NextValue', 'Successor']
 	]).
 
 	next_impl(empty, _, _, _, _) :-
@@ -999,7 +1023,8 @@
 	:- private(previous_impl/5).
 	:- mode(previous_impl(+two3tree, +key, -key, -value, +term), zero_or_one).
 	:- info(previous_impl/5, [
-		comment is 'Recursively finds the previous key-value pair before a given key.'
+		comment is 'Recursively finds the previous key-value pair before a given key.',
+		argnames is ['Tree', 'Key', 'PreviousKey', 'PreviousValue', 'Predecessor']
 	]).
 
 	previous_impl(empty, _, _, _, _) :-
@@ -1072,7 +1097,8 @@
 	:- private(node2_from_node4/2).
 	:- mode(node2_from_node4(+term, -term), one).
 	:- info(node2_from_node4/2, [
-		comment is 'Converts a 4-node (temporary) into a balanced 2-node with two 2-node children.'
+		comment is 'Converts a 4-node (temporary) into a balanced 2-node with two 2-node children.',
+		argnames is ['Node4', 'Tree']
 	]).
 
 	node2_from_node4(node4(KL, VL, KM, VM, KR, VR), node2(KM, VM, node2(KL, VL), node2(KR, VR))).
@@ -1081,7 +1107,8 @@
 	:- private(update_impl/3).
 	:- mode(update_impl(@list(pair), +two3tree, -two3tree), zero_or_one).
 	:- info(update_impl/3, [
-		comment is 'Updates a dictionary with a list of key-value pairs sequentially.'
+		comment is 'Updates a dictionary with a list of key-value pairs sequentially.',
+		argnames is ['Pairs', 'OldTree', 'NewTree']
 	]).
 
 	update_impl([K-V|KVs], T0, T2) :-
