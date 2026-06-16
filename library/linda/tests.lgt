@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-06-16,
 		comment is 'Unit tests for the "linda" library.'
 	]).
 
@@ -365,8 +365,8 @@
 		client1::linda_timeout(Old, off).
 
 	% tests are called from an initialization/1 directive, which can not be
-	% interrupted by call_with_timeout/3 in SWI-Prolog and Trealla Prolog
-	test(linda_timeout_03, error(linda_error(timeout)), [condition(current_logtalk_flag(prolog_dialect,xvm)), cleanup(reset_timeout_and_reconnect_client1)]) :-
+	% interrupted by call_with_timeout/3 in SWI-Prolog
+	test(linda_timeout_03, error(linda_error(timeout)), [condition(\+ current_logtalk_flag(prolog_dialect,swi)), cleanup(reset_timeout_and_reconnect_client1)]) :-
 		client1::linda_timeout(_, 0:100),
 		client1::in(timeout_missing_tuple_03).
 
