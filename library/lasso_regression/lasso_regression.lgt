@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-06-16,
 		comment is 'Lasso regression regressor supporting continuous and mixed-feature datasets using coordinate descent with coefficient-wise L1 shrinkage. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, knn_regression, regression_tree, random_forest_regression,
@@ -99,13 +99,13 @@
 	rows_to_training_matrix(Rows, FeatureCount, Targets, Columns, RowCount) :-
 		length(Rows, RowCount),
 		zero_columns(FeatureCount, EmptyColumns),
-		rows_to_training_matrix_acc(Rows, Targets, EmptyColumns, Columns0),
+		rows_to_training_matrix_(Rows, Targets, EmptyColumns, Columns0),
 		reverse_nested_lists(Columns0, Columns).
 
-	rows_to_training_matrix_acc([], [], Columns, Columns).
-	rows_to_training_matrix_acc([Features-Target| Rows], [Target| Targets], Columns0, Columns) :-
+	rows_to_training_matrix_([], [], Columns, Columns).
+	rows_to_training_matrix_([Features-Target| Rows], [Target| Targets], Columns0, Columns) :-
 		prepend_features_to_columns(Features, Columns0, Columns1),
-		rows_to_training_matrix_acc(Rows, Targets, Columns1, Columns).
+		rows_to_training_matrix_(Rows, Targets, Columns1, Columns).
 
 	prepend_features_to_columns([], [], []).
 	prepend_features_to_columns([Feature| Features], [Column| Columns0], [[Feature| Column]| Columns]) :-

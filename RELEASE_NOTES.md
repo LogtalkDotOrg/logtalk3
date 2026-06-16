@@ -79,8 +79,8 @@ queries to avoid computing and discarding velocity values.
 `arrangements`, `combinations`, `linear_algebra`, `tle_orbits`, `wkt_wkb`,
 `ica_projection`, `fp_growth_pattern_miner`, `gaussian_process_regression`,
 `lasso_regression`, `string_distance`, `colley_ranker`, `hodge_rank`,
-`massey_ranker`, `rank_centrality`, `ranked_pairs`, and `regression_protocols`
-libraries.
+`massey_ranker`, `rank_centrality`, `ranked_pairs`, `regression_protocols`,
+`ccsds_packetization`, and `elastic_net_regression` libraries.
 
 * UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
 libraries to use the new `crypto` library.

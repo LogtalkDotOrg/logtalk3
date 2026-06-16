@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-06-16,
 		comment is 'Elastic net regression regressor supporting continuous and mixed-feature datasets using coordinate descent with coefficient-wise L1 shrinkage plus L2 stabilization. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction and exported as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, knn_regression, regression_tree,
@@ -99,14 +99,13 @@
 	rows_to_training_matrix(Rows, FeatureCount, Targets, Columns, RowCount) :-
 		length(Rows, RowCount),
 		zero_columns(FeatureCount, EmptyColumns),
-		rows_to_training_matrix_acc(Rows, [], Targets0, EmptyColumns, Columns0),
-		reverse(Targets0, Targets),
+		rows_to_training_matrix_(Rows, Targets, EmptyColumns, Columns0),
 		reverse_nested_lists(Columns0, Columns).
 
-	rows_to_training_matrix_acc([], Targets, Targets, Columns, Columns).
-	rows_to_training_matrix_acc([Features-Target| Rows], Targets0, Targets, Columns0, Columns) :-
+	rows_to_training_matrix_([], [], Columns, Columns).
+	rows_to_training_matrix_([Features-Target| Rows], [Target| Targets], Columns0, Columns) :-
 		prepend_features_to_columns(Features, Columns0, Columns1),
-		rows_to_training_matrix_acc(Rows, [Target| Targets0], Targets, Columns1, Columns).
+		rows_to_training_matrix_(Rows, Targets, Columns1, Columns).
 
 	prepend_features_to_columns([], [], []).
 	prepend_features_to_columns([Feature| Features], [Column| Columns0], [[Feature| Column]| Columns]) :-

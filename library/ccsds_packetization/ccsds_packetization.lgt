@@ -22,9 +22,9 @@
 :- object(ccsds_packetization).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-16,
 		comment is 'Helpers for packetizing CCSDS space packets into TM and AOS service-data regions with cross-frame carryover and idle fill generation.'
 	]).
 
@@ -172,7 +172,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, reverse/2, take/4
+		append/3, length/2, take/4
 	]).
 
 	:- uses(type, [
@@ -597,16 +597,13 @@
 	idle_secondary_header(SecondaryHeaderLength, secondary_header(Bytes)) :-
 		zero_bytes(SecondaryHeaderLength, Bytes).
 
-	zero_bytes(Length, Bytes) :-
-		zero_bytes_(Length, [], ReversedBytes),
-		reverse(ReversedBytes, Bytes).
-
-	zero_bytes_(Length, Accumulator, Accumulator) :-
+	zero_bytes(Length, []) :-
 		Length =< 0,
 		!.
-	zero_bytes_(Length, Accumulator, Bytes) :-
+	zero_bytes(Length, [0| Bytes]) :-
+		Length > 0,
 		NextLength is Length - 1,
-		zero_bytes_(NextLength, [0| Accumulator], Bytes).
+		zero_bytes(NextLength, Bytes).
 
 	minimum_packet_bytes_length(SecondaryHeaderLength, MinimumLength) :-
 		MinimumLength is 7 + SecondaryHeaderLength.
