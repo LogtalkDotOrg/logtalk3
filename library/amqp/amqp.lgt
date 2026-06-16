@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(amqp).
+:- object(amqp,
+	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-06-16,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -654,14 +655,16 @@
 	% ==========================================================================
 
 	connect(Host, Port, Connection, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
-		option(reconnect(Reconnect), Options, false),
+		^^option(reconnect(Reconnect), MergedOptions),
 		(	Reconnect == true ->
-			option(reconnect_attempts(MaxAttempts), Options, 3),
-			option(reconnect_delay(Delay), Options, 1),
-			connect_with_retry(Host, Port, Connection, Options, Context, MaxAttempts, Delay)
+			^^option(reconnect_attempts(MaxAttempts), MergedOptions),
+			^^option(reconnect_delay(Delay), MergedOptions),
+			connect_with_retry(Host, Port, Connection, MergedOptions, Context, MaxAttempts, Delay)
 		;	catch(
-				connect_(Host, Port, Connection, Options, Context),
+				connect_(Host, Port, Connection, MergedOptions, Context),
 				Error,
 				throw(Error)
 			)
@@ -710,8 +713,8 @@
 		member(mechanisms-Mechanisms, StartArguments),
 		(	member(locales-_Locales, StartArguments) -> true ; true),
 		% Send Connection.Start-Ok
-		option(username(Username), Options, 'guest'),
-		option(password(Password), Options, 'guest'),
+		^^option(username(Username), Options),
+		^^option(password(Password), Options),
 		build_sasl_response(Username, Password, Mechanisms, SaslResponse),
 		StartOkArguments = [
 			client_properties-[
@@ -742,9 +745,9 @@
 		member(channel_max-ServerChannelMax, TuneArguments),
 		member(frame_max-ServerFrameMax, TuneArguments),
 		member(heartbeat-ServerHeartbeat, TuneArguments),
-		option(channel_max(ClientChannelMax), Options, 0),
-		option(frame_max(ClientFrameMax), Options, 131072),
-		option(heartbeat(ClientHeartbeat), Options, 60),
+		^^option(channel_max(ClientChannelMax), Options),
+		^^option(frame_max(ClientFrameMax), Options),
+		^^option(heartbeat(ClientHeartbeat), Options),
 		negotiate_value(ClientChannelMax, ServerChannelMax, NegotiatedChannelMax),
 		negotiate_value(ClientFrameMax, ServerFrameMax, NegotiatedFrameMax),
 		negotiate_heartbeat(ClientHeartbeat, ServerHeartbeat, NegotiatedHeartbeat),
@@ -756,7 +759,7 @@
 		],
 		send_method(Output, 0, connection, tune_ok, TuneOkArguments),
 		% Send Connection.Open
-		option(virtual_host(VHost), Options, '/'),
+		^^option(virtual_host(VHost), Options),
 		OpenArguments = [
 			virtual_host-VHost,
 			reserved_1-'',
@@ -853,16 +856,18 @@
 	% ==========================================================================
 
 	exchange_declare(Channel, Exchange, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(type(Type), Options, direct),
-		option(durable(Durable), Options, false),
-		option(auto_delete(AutoDelete), Options, false),
-		option(internal(Internal), Options, false),
-		option(arguments(Arguments), Options, []),
+		^^option(type(Type), MergedOptions, type(direct)),
+		^^option(durable(Durable), MergedOptions),
+		^^option(auto_delete(AutoDelete), MergedOptions),
+		^^option(internal(Internal), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		boolean_to_integer(Durable, DurableInt),
 		boolean_to_integer(AutoDelete, AutoDeleteInt),
 		boolean_to_integer(Internal, InternalInt),
@@ -883,12 +888,14 @@
 		).
 
 	exchange_delete(Channel, Exchange, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(if_unused(IfUnused), Options, false),
+		^^option(if_unused(IfUnused), MergedOptions),
 		boolean_to_integer(IfUnused, IfUnusedInt),
 		Flags is (IfUnusedInt << 0),
 		DeleteArguments = [
@@ -904,13 +911,15 @@
 		).
 
 	exchange_bind(Channel, Destination, Source, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(routing_key(RoutingKey), Options, ''),
-		option(arguments(Arguments), Options, []),
+		^^option(routing_key(RoutingKey), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		BindArguments = [
 			reserved_1-0,
 			destination-Destination,
@@ -927,13 +936,15 @@
 		).
 
 	exchange_unbind(Channel, Destination, Source, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(routing_key(RoutingKey), Options, ''),
-		option(arguments(Arguments), Options, []),
+		^^option(routing_key(RoutingKey), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		UnbindArguments = [
 			reserved_1-0,
 			destination-Destination,
@@ -954,15 +965,17 @@
 	% ==========================================================================
 
 	queue_declare(Channel, Queue, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(durable(Durable), Options, false),
-		option(exclusive(Exclusive), Options, false),
-		option(auto_delete(AutoDelete), Options, false),
-		option(arguments(Arguments), Options, []),
+		^^option(durable(Durable), MergedOptions),
+		^^option(exclusive(Exclusive), MergedOptions),
+		^^option(auto_delete(AutoDelete), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		boolean_to_integer(Durable, DurableInt),
 		boolean_to_integer(Exclusive, ExclusiveInt),
 		boolean_to_integer(AutoDelete, AutoDeleteInt),
@@ -989,13 +1002,15 @@
 		).
 
 	queue_delete(Channel, Queue, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(if_unused(IfUnused), Options, false),
-		option(if_empty(IfEmpty), Options, false),
+		^^option(if_unused(IfUnused), MergedOptions),
+		^^option(if_empty(IfEmpty), MergedOptions),
 		boolean_to_integer(IfUnused, IfUnusedInt),
 		boolean_to_integer(IfEmpty, IfEmptyInt),
 		Flags is (IfUnusedInt << 0) \/ (IfEmptyInt << 1),
@@ -1012,13 +1027,15 @@
 		).
 
 	queue_bind(Channel, Queue, Exchange, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(routing_key(RoutingKey), Options, ''),
-		option(arguments(Arguments), Options, []),
+		^^option(routing_key(RoutingKey), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		BindArguments = [
 			reserved_1-0,
 			queue-Queue,
@@ -1035,13 +1052,15 @@
 		).
 
 	queue_unbind(Channel, Queue, Exchange, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(routing_key(RoutingKey), Options, ''),
-		option(arguments(Arguments), Options, []),
+		^^option(routing_key(RoutingKey), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		UnbindArguments = [
 			reserved_1-0,
 			queue-Queue,
@@ -1079,13 +1098,15 @@
 	% ==========================================================================
 
 	basic_publish(Channel, Exchange, Body, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(2, Connection, Output),
-		option(routing_key(RoutingKey), Options, ''),
-		option(mandatory(Mandatory), Options, false),
-		option(immediate(Immediate), Options, false),
+		^^option(routing_key(RoutingKey), MergedOptions),
+		^^option(mandatory(Mandatory), MergedOptions),
+		^^option(immediate(Immediate), MergedOptions),
 		boolean_to_integer(Mandatory, MandatoryInt),
 		boolean_to_integer(Immediate, ImmediateInt),
 		Flags is (MandatoryInt << 0) \/ (ImmediateInt << 1),
@@ -1098,7 +1119,7 @@
 		% Send method frame
 		send_method(Output, ChannelNumber, basic, publish, PublishArguments),
 		% Build content properties
-		build_content_properties(Options, Properties, PropertyFlags),
+		build_content_properties(MergedOptions, Properties, PropertyFlags),
 		% Convert body to bytes
 		body_to_bytes(Body, BodyBytes),
 		length(BodyBytes, BodySize),
@@ -1110,16 +1131,18 @@
 		send_content_body(Output, ChannelNumber, BodyBytes, MaxBodySize, Context).
 
 	basic_consume(Channel, Queue, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(consumer_tag(ConsumerTag), Options, ''),
-		option(no_local(NoLocal), Options, false),
-		option(no_ack(NoAck), Options, false),
-		option(exclusive(Exclusive), Options, false),
-		option(arguments(Arguments), Options, []),
+		^^option(consumer_tag(ConsumerTag), MergedOptions),
+		^^option(no_local(NoLocal), MergedOptions),
+		^^option(no_ack(NoAck), MergedOptions),
+		^^option(exclusive(Exclusive), MergedOptions),
+		^^option(arguments(Arguments), MergedOptions),
 		boolean_to_integer(NoLocal, NoLocalInt),
 		boolean_to_integer(NoAck, NoAckInt),
 		boolean_to_integer(Exclusive, ExclusiveInt),
@@ -1138,7 +1161,9 @@
 		;	throw(error(amqp_error(basic_error('Basic consume failed')), Context))
 		).
 
-	basic_cancel(Channel, ConsumerTag, _Options) :-
+	basic_cancel(Channel, ConsumerTag, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, _MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
@@ -1156,12 +1181,14 @@
 		).
 
 	basic_get(Channel, Queue, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(no_ack(NoAck), Options, false),
+		^^option(no_ack(NoAck), MergedOptions),
 		boolean_to_integer(NoAck, NoAckInt),
 		GetArguments = [
 			reserved_1-0,
@@ -1178,10 +1205,12 @@
 		).
 
 	basic_ack(Channel, DeliveryTag, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(2, Connection, Output),
-		option(multiple(Multiple), Options, false),
+		^^option(multiple(Multiple), MergedOptions),
 		boolean_to_integer(Multiple, MultipleInt),
 		AckArguments = [
 			delivery_tag-DeliveryTag,
@@ -1190,11 +1219,13 @@
 		send_method(Output, ChannelNumber, basic, ack, AckArguments).
 
 	basic_nack(Channel, DeliveryTag, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(2, Connection, Output),
-		option(multiple(Multiple), Options, false),
-		option(requeue(Requeue), Options, true),
+		^^option(multiple(Multiple), MergedOptions),
+		^^option(requeue(Requeue), MergedOptions, requeue(true)),
 		boolean_to_integer(Multiple, MultipleInt),
 		boolean_to_integer(Requeue, RequeueInt),
 		Flags is (MultipleInt << 0) \/ (RequeueInt << 1),
@@ -1205,10 +1236,12 @@
 		send_method(Output, ChannelNumber, basic, nack, NackArguments).
 
 	basic_reject(Channel, DeliveryTag, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(2, Connection, Output),
-		option(requeue(Requeue), Options, true),
+		^^option(requeue(Requeue), MergedOptions, requeue(true)),
 		boolean_to_integer(Requeue, RequeueInt),
 		RejectArguments = [
 			delivery_tag-DeliveryTag,
@@ -1217,14 +1250,16 @@
 		send_method(Output, ChannelNumber, basic, reject, RejectArguments).
 
 	basic_qos(Channel, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(prefetch_size(PrefetchSize), Options, 0),
-		option(prefetch_count(PrefetchCount), Options, 0),
-		option(global(Global), Options, false),
+		^^option(prefetch_size(PrefetchSize), MergedOptions),
+		^^option(prefetch_count(PrefetchCount), MergedOptions),
+		^^option(global(Global), MergedOptions),
 		boolean_to_integer(Global, GlobalInt),
 		QosArguments = [
 			prefetch_size-PrefetchSize,
@@ -1239,12 +1274,14 @@
 		).
 
 	basic_recover(Channel, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
-		option(requeue(Requeue), Options, false),
+		^^option(requeue(Requeue), MergedOptions, requeue(false)),
 		boolean_to_integer(Requeue, RequeueInt),
 		RecoverArguments = [
 			requeue-RequeueInt
@@ -1261,11 +1298,13 @@
 	% ==========================================================================
 
 	receive(Channel, Message, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Channel, Connection),
 		arg(2, Channel, ChannelNumber),
 		arg(1, Connection, Input),
-		option(timeout(_Timeout), Options, -1),
+		^^option(timeout(_Timeout), MergedOptions),
 		% Read the deliver/return method frame
 		read_frame(Input, MethodFrame, Context),
 		(	MethodFrame = frame(method, ChannelNumber, basic, deliver, DeliverArguments) ->
@@ -2362,6 +2401,129 @@
 	decode_typed_value(longlong, Bytes, Value, Rest) :- decode_longlong(Bytes, Value, Rest).
 	decode_typed_value(table, Bytes, Value, Rest) :- decode_table(Bytes, Value, Rest).
 
+	valid_option(username(Username)) :-
+		atom(Username).
+	valid_option(password(Password)) :-
+		atom(Password).
+	valid_option(virtual_host(VHost)) :-
+		atom(VHost).
+	valid_option(heartbeat(Heartbeat)) :-
+		integer(Heartbeat),
+		Heartbeat >= 0.
+	valid_option(channel_max(ChannelMax)) :-
+		integer(ChannelMax),
+		ChannelMax >= 0.
+	valid_option(frame_max(FrameMax)) :-
+		integer(FrameMax),
+		FrameMax >= 0.
+	valid_option(reconnect(Reconnect)) :-
+		once((Reconnect == true; Reconnect == false)).
+	valid_option(reconnect_attempts(MaxAttempts)) :-
+		integer(MaxAttempts),
+		MaxAttempts > 0.
+	valid_option(reconnect_delay(Delay)) :-
+		number(Delay),
+		Delay >= 0.
+	valid_option(type(Type)) :-
+		atom(Type).
+	valid_option(durable(Durable)) :-
+		once((Durable == true; Durable == false)).
+	valid_option(auto_delete(AutoDelete)) :-
+		once((AutoDelete == true; AutoDelete == false)).
+	valid_option(internal(Internal)) :-
+		once((Internal == true; Internal == false)).
+	valid_option(arguments(Arguments)) :-
+		is_list(Arguments).
+	valid_option(if_unused(IfUnused)) :-
+		once((IfUnused == true; IfUnused == false)).
+	valid_option(routing_key(RoutingKey)) :-
+		atom(RoutingKey).
+	valid_option(exclusive(Exclusive)) :-
+		once((Exclusive == true; Exclusive == false)).
+	valid_option(if_empty(IfEmpty)) :-
+		once((IfEmpty == true; IfEmpty == false)).
+	valid_option(mandatory(Mandatory)) :-
+		once((Mandatory == true; Mandatory == false)).
+	valid_option(immediate(Immediate)) :-
+		once((Immediate == true; Immediate == false)).
+	valid_option(content_type(ContentType)) :-
+		atom(ContentType).
+	valid_option(content_encoding(ContentEncoding)) :-
+		atom(ContentEncoding).
+	valid_option(headers(Headers)) :-
+		is_list(Headers).
+	valid_option(delivery_mode(DeliveryMode)) :-
+		integer(DeliveryMode),
+		once((DeliveryMode == 1; DeliveryMode == 2)).
+	valid_option(priority(Priority)) :-
+		integer(Priority),
+		Priority >= 0,
+		Priority =< 9.
+	valid_option(correlation_id(CorrelationID)) :-
+		atom(CorrelationID).
+	valid_option(reply_to(ReplyTo)) :-
+		atom(ReplyTo).
+	valid_option(expiration(Expiration)) :-
+		atom(Expiration).
+	valid_option(message_id(MessageID)) :-
+		atom(MessageID).
+	valid_option(timestamp(Timestamp)) :-
+		integer(Timestamp),
+		Timestamp >= 0.
+	valid_option(user_id(UserID)) :-
+		atom(UserID).
+	valid_option(app_id(AppID)) :-
+		atom(AppID).
+	valid_option(consumer_tag(ConsumerTag)) :-
+		atom(ConsumerTag).
+	valid_option(no_local(NoLocal)) :-
+		once((NoLocal == true; NoLocal == false)).
+	valid_option(no_ack(NoAck)) :-
+		once((NoAck == true; NoAck == false)).
+	valid_option(multiple(Multiple)) :-
+		once((Multiple == true; Multiple == false)).
+	valid_option(requeue(Requeue)) :-
+		once((Requeue == true; Requeue == false)).
+	valid_option(prefetch_size(PrefetchSize)) :-
+		integer(PrefetchSize),
+		PrefetchSize >= 0.
+	valid_option(prefetch_count(PrefetchCount)) :-
+		integer(PrefetchCount),
+		PrefetchCount >= 0.
+	valid_option(global(Global)) :-
+		once((Global == true; Global == false)).
+	valid_option(timeout(Timeout)) :-
+		integer(Timeout),
+		Timeout >= -1.
+
+	default_option(username('guest')).
+	default_option(password('guest')).
+	default_option(virtual_host('/')).
+	default_option(heartbeat(60)).
+	default_option(channel_max(0)).
+	default_option(frame_max(131072)).
+	default_option(reconnect(false)).
+	default_option(reconnect_attempts(3)).
+	default_option(reconnect_delay(1)).
+	default_option(durable(false)).
+	default_option(auto_delete(false)).
+	default_option(internal(false)).
+	default_option(arguments([])).
+	default_option(if_unused(false)).
+	default_option(routing_key('')).
+	default_option(exclusive(false)).
+	default_option(if_empty(false)).
+	default_option(mandatory(false)).
+	default_option(immediate(false)).
+	default_option(consumer_tag('')).
+	default_option(no_local(false)).
+	default_option(no_ack(false)).
+	default_option(multiple(false)).
+	default_option(prefetch_size(0)).
+	default_option(prefetch_count(0)).
+	default_option(global(false)).
+	default_option(timeout(-1)).
+
 	% ==========================================================================
 	% Frame I/O
 	% ==========================================================================
@@ -2465,12 +2627,6 @@
 	% ==========================================================================
 	% Auxiliary Predicates
 	% ==========================================================================
-
-	option(Option, Options, _Default) :-
-		member(Option, Options),
-		!.
-	option(Option, _, Default) :-
-		Option =.. [_, Default].
 
 	boolean_to_integer(true,  1).
 	boolean_to_integer(false, 0).

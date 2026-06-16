@@ -424,6 +424,13 @@ link in a web browser.</p>
 <p>Note: Integration tests require a running AMQP 0-9-1 server (e.g.,
 RabbitMQ). RabbitMQ AMQP listens on port 5672 by default with
 guest/guest credentials.</p>
+<p>For example, on macOS using Homebrew, uou can setup a server using the
+commands:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install rabbitmq
+<span class="err">$</span> rabbitmq<span class="o">-</span>plugins enable rabbitmq_amqp1_0
+<span class="err">$</span> brew services restart rabbitmq
+</pre></div>
+</div>
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>

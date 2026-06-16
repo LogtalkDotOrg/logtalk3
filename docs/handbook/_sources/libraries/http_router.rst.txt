@@ -97,8 +97,11 @@ Request annotations
 -------------------
 
 The router category calls the matched handler after annotating the
-request with ``route(Id)`` and ``path_params(Pairs)``. On the normal
-routing path it also scrubs stale internal synthetic properties such as
+request with ``route(Id)``, ``path_params(Pairs)``, and any
+``route_metadata/2`` properties. When ``route_produces/2`` is defined
+and the request ``Accept`` header can be satisfied, it also adds the
+negotiated ``response_media_type(MediaType)`` property. On the normal
+routing path it scrubs stale internal synthetic properties such as
 ``open_api_probe/1``, ``automatic_options/1``, ``effective_methods/1``,
 and ``response_media_type/1`` before handler execution.
 
@@ -130,7 +133,10 @@ handler dispatch using:
 The hook must return either ``continue(Request)`` or
 ``respond(Response)``. Short-circuited responses still flow through
 response middleware and keep the routed request annotations such as
-``route/1``, ``path_params/1``, and any route metadata properties.
+``route/1``, ``path_params/1``, and any route metadata properties. This
+hook is the main place to validate or decorate a routed request after
+route matching and metadata annotation but before the route handler is
+dispatched.
 
 Content negotiation
 -------------------
@@ -163,7 +169,8 @@ The ``Handler`` argument is the name of a declared local predicate with
 arity 2 that receives the current request and returns either
 ``continue(Request)`` or ``respond(Response)``. Middleware runs before
 route matching, so it can rewrite requests before dispatch or
-short-circuit processing with an immediate response.
+short-circuit processing with an immediate response. Ordered middleware
+descriptors are evaluated in declaration order.
 
 Response middleware
 -------------------
@@ -177,7 +184,8 @@ The ``Handler`` argument is the name of a declared local predicate with
 arity 3 that receives the current request, the current response, and
 returns the transformed response. Response middleware runs after route
 dispatch or short-circuit processing, so it can decorate or rewrite any
-generated response.
+generated response. It is the final place where a response can be
+adjusted before it is returned to the caller.
 
 HEAD fallback
 -------------
@@ -214,9 +222,11 @@ Importing router objects can optionally define:
 Dedicated route-handler exceptions matching
 ``error(http_parameter_validation(Errors), Context)`` with a non-empty
 ``Errors`` list are translated into ``400 Bad Request`` responses before
-response middleware runs. The routed request annotations remain
-available to the optional ``route_bad_request_response/3`` hook and to
-any later response middleware.
+response middleware runs. The router uses the optional
+``route_bad_request_response/3`` hook when it is defined and otherwise
+falls back to a default plain-text response. The routed request
+annotations remain available to the hook and to any later response
+middleware.
 
 Custom error responses
 ----------------------

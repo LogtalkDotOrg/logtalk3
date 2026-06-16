@@ -58,6 +58,13 @@ To test this library predicates, load the `tester.lgt` file:
 Note: Integration tests require a running AMQP 0-9-1 server (e.g., RabbitMQ).
 RabbitMQ AMQP listens on port 5672 by default with guest/guest credentials.
 
+For example, on macOS using Homebrew, uou can setup a server using the
+commands:
+
+    $ brew install rabbitmq
+    $ rabbitmq-plugins enable rabbitmq_amqp1_0
+    $ brew services restart rabbitmq
+
 
 Features
 --------

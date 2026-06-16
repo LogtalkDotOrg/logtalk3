@@ -19,18 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(amqp_pool).
+:- category(amqp_pool,
+	extends(options)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-16,
 		comment is 'AMQP connection pool category. Import this category into an object to create a named connection pool with automatic connection management.'
 	]).
 
 	:- public(initialize/1).
 	:- mode(initialize(+list), one_or_error).
-
 	:- info(initialize/1, [
 		comment is 'Initializes the connection pool with the given configuration options. Must be called before using other pool predicates.',
 		argnames is ['Options'],
@@ -117,20 +117,22 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, valid/1 as proper_list/1
 	]).
 
 	initialize(Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		% Clear any existing state
 		::retractall(pool_config(_, _, _, _, _)),
 		::retractall(available(_)),
 		::retractall(in_use(_, _)),
 		% Extract configuration
-		option(host(Host), Options, localhost),
-		option(port(Port), Options, 5672),
-		option(min_size(MinSize), Options, 1),
-		option(max_size(MaxSize), Options, 10),
-		option(connection_options(ConnOptions), Options, []),
+		^^option(host(Host), MergedOptions),
+		^^option(port(Port), MergedOptions),
+		^^option(min_size(MinSize), MergedOptions),
+		^^option(max_size(MaxSize), MergedOptions),
+		^^option(connection_options(ConnOptions), MergedOptions),
 		% Validate configuration
 		(	MinSize > MaxSize ->
 			throw(error(pool_error(invalid_config('min_size > max_size')), _))
@@ -272,10 +274,24 @@
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		Timestamp = timestamp(Year, Month, Day, Hours, Minutes, Seconds).
 
-	option(Option, Options, _) :-
-		member(Option, Options),
-		!.
-	option(Option, _, Default) :-
-		Option =.. [_, Default].
+	valid_option(host(Host)) :-
+		atom(Host).
+	valid_option(port(Port)) :-
+		integer(Port),
+		Port > 0.
+	valid_option(min_size(MinSize)) :-
+		integer(MinSize),
+		MinSize >= 0.
+	valid_option(max_size(MaxSize)) :-
+		integer(MaxSize),
+		MaxSize >= 0.
+	valid_option(connection_options(ConnectionOptions)) :-
+		proper_list(ConnectionOptions).
+
+	default_option(host(localhost)).
+	default_option(port(5672)).
+	default_option(min_size(1)).
+	default_option(max_size(10)).
+	default_option(connection_options([])).
 
 :- end_category.

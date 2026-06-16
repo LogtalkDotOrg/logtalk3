@@ -456,8 +456,11 @@ segments, plain <code class="docutils literal notranslate"><span class="pre">{na
 <section id="request-annotations">
 <h2>Request annotations<a class="headerlink" href="#request-annotations" title="Link to this heading"></a></h2>
 <p>The router category calls the matched handler after annotating the
-request with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>. On the normal
-routing path it also scrubs stale internal synthetic properties such as
+request with <code class="docutils literal notranslate"><span class="pre">route(Id)</span></code>, <code class="docutils literal notranslate"><span class="pre">path_params(Pairs)</span></code>, and any
+<code class="docutils literal notranslate"><span class="pre">route_metadata/2</span></code> properties. When <code class="docutils literal notranslate"><span class="pre">route_produces/2</span></code> is defined
+and the request <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header can be satisfied, it also adds the
+negotiated <code class="docutils literal notranslate"><span class="pre">response_media_type(MediaType)</span></code> property. On the normal
+routing path it scrubs stale internal synthetic properties such as
 <code class="docutils literal notranslate"><span class="pre">open_api_probe/1</span></code>, <code class="docutils literal notranslate"><span class="pre">automatic_options/1</span></code>, <code class="docutils literal notranslate"><span class="pre">effective_methods/1</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">response_media_type/1</span></code> before handler execution.</p>
 </section>
@@ -487,7 +490,10 @@ handler dispatch using:</p>
 <p>The hook must return either <code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. Short-circuited responses still flow through
 response middleware and keep the routed request annotations such as
-<code class="docutils literal notranslate"><span class="pre">route/1</span></code>, <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code>, and any route metadata properties.</p>
+<code class="docutils literal notranslate"><span class="pre">route/1</span></code>, <code class="docutils literal notranslate"><span class="pre">path_params/1</span></code>, and any route metadata properties. This
+hook is the main place to validate or decorate a routed request after
+route matching and metadata annotation but before the route handler is
+dispatched.</p>
 </section>
 <section id="content-negotiation">
 <h2>Content negotiation<a class="headerlink" href="#content-negotiation" title="Link to this heading"></a></h2>
@@ -517,7 +523,8 @@ descriptors using:</p>
 arity 2 that receives the current request and returns either
 <code class="docutils literal notranslate"><span class="pre">continue(Request)</span></code> or <code class="docutils literal notranslate"><span class="pre">respond(Response)</span></code>. Middleware runs before
 route matching, so it can rewrite requests before dispatch or
-short-circuit processing with an immediate response.</p>
+short-circuit processing with an immediate response. Ordered middleware
+descriptors are evaluated in declaration order.</p>
 </section>
 <section id="response-middleware">
 <h2>Response middleware<a class="headerlink" href="#response-middleware" title="Link to this heading"></a></h2>
@@ -530,7 +537,8 @@ middleware descriptors using:</p>
 arity 3 that receives the current request, the current response, and
 returns the transformed response. Response middleware runs after route
 dispatch or short-circuit processing, so it can decorate or rewrite any
-generated response.</p>
+generated response. It is the final place where a response can be
+adjusted before it is returned to the caller.</p>
 </section>
 <section id="head-fallback">
 <h2>HEAD fallback<a class="headerlink" href="#head-fallback" title="Link to this heading"></a></h2>
@@ -564,9 +572,11 @@ middleware.</p>
 <p>Dedicated route-handler exceptions matching
 <code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),</span> <span class="pre">Context)</span></code> with a non-empty
 <code class="docutils literal notranslate"><span class="pre">Errors</span></code> list are translated into <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> responses before
-response middleware runs. The routed request annotations remain
-available to the optional <code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> hook and to
-any later response middleware.</p>
+response middleware runs. The router uses the optional
+<code class="docutils literal notranslate"><span class="pre">route_bad_request_response/3</span></code> hook when it is defined and otherwise
+falls back to a default plain-text response. The routed request
+annotations remain available to the hook and to any later response
+middleware.</p>
 </section>
 <section id="custom-error-responses">
 <h2>Custom error responses<a class="headerlink" href="#custom-error-responses" title="Link to this heading"></a></h2>

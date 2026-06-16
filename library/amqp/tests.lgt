@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-11,
+		date is 2026-06-16,
 		comment is 'Unit tests for the "amqp" library.'
 	]).
 
@@ -545,16 +545,6 @@
 
 	test(amqp_negotiate_heartbeat_both_nonzero, true(Value == 30)) :-
 		amqp<<negotiate_heartbeat(30, 60, Value).
-
-	% ==========================================================================
-	% Option Helper Tests
-	% ==========================================================================
-
-	test(amqp_option_3_found, true(Value == bar)) :-
-		amqp<<option(foo(Value), [foo(bar)], default).
-
-	test(amqp_option_3_default, true(Value == default)) :-
-		amqp<<option(foo(Value), [], default).
 
 	% ==========================================================================
 	% Body to Bytes Helper Tests
