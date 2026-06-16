@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-03,
+		date is 2026-06-16,
 		comment is 'REST authoring layer built on top of the HTTP router category.'
 	]).
 
@@ -51,13 +51,10 @@
 	]).
 
 	:- public(request_body/2).
-	:- mode(request_body(+compound, -compound), one_or_error).
+	:- mode(request_body(+compound, -compound), zero_or_one).
 	:- info(request_body/2, [
 		comment is 'Returns the normalized request body term.',
-		argnames is ['Request', 'Body'],
-		exceptions is [
-			'The normalized request body is missing' - problem(400, 'urn:logtalk:invalid-request-body', 'Bad Request', 'Expected request body.')
-		]
+		argnames is ['Request', 'Body']
 	]).
 
 	:- public(json_body/2).

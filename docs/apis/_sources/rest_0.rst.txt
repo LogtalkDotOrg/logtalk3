@@ -15,7 +15,7 @@ REST authoring layer built on top of the HTTP router category.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-03
+| **Date:** 2026-06-16
 
 | **Compilation flags:**
 |    ``static``
@@ -112,11 +112,7 @@ Returns the normalized request body term.
 | **Template:**
 |    ``request_body(Request,Body)``
 | **Mode and number of proofs:**
-|    ``request_body(+compound,-compound)`` - ``one_or_error``
-
-| **Exceptions:**
-|    The normalized request body is missing:
-|        ``problem(400,urn:logtalk:invalid-request-body,Bad Request,Expected request body.)``
+|    ``request_body(+compound,-compound)`` - ``zero_or_one``
 
 
 ------------
