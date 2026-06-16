@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-16,
 		comment is 'Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http_client_core``, and ``http_server`` libraries.'
 	]).
 
@@ -130,7 +130,10 @@
 		length/2, reverse/2, valid/1 as proper_list/1
 	]).
 
-	:- meta_predicate(call_with_catch_cleanup(0, 0)).
+	:- uses(user, [
+		setup_call_cleanup/3
+	]).
+
 	:- meta_predicate(call_with_shutdown_policy(*, *, 0)).
 	:- meta_predicate(serve_until_shutdown(*, *, *, *, 0)).
 	:- if(current_logtalk_flag(threads, supported)).
@@ -205,8 +208,8 @@
 
 	exchange(Host, Port, Request, Response) :-
 		one_shot_request(Request, OneShotRequest),
-		socket::client_open(Host, Port, Input, Output),
-		call_with_catch_cleanup(
+		setup_call_cleanup(
+			socket::client_open(Host, Port, Input, Output),
 			http_client_core::exchange(Input, Output, OneShotRequest, Response),
 			socket::close(Input, Output)
 		).
@@ -214,8 +217,8 @@
 	exchange_connection(_Host, _Port, [], []) :-
 		!.
 	exchange_connection(Host, Port, Requests0, Responses) :-
-		socket::client_open(Host, Port, Input, Output),
-		call_with_catch_cleanup(
+		setup_call_cleanup(
+			socket::client_open(Host, Port, Input, Output),
 			(	one_shot_request_sequence(Requests0, Requests),
 				http_client_core::exchange_connection(Input, Output, Requests, Responses)
 			),
@@ -257,8 +260,8 @@
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		serve_accepted_connection(Input, Output, Handler) :-
-			adopt_connection_streams(Input, Output),
-			call_with_catch_cleanup(
+			setup_call_cleanup(
+				adopt_connection_streams(Input, Output),
 				http_server::serve_connection(Input, Output, Handler),
 				socket::close(Input, Output)
 			).
@@ -266,7 +269,8 @@
 	:- else.
 
 		serve_accepted_connection(Input, Output, Handler) :-
-			call_with_catch_cleanup(
+			setup_call_cleanup(
+				true,
 				http_server::serve_connection(Input, Output, Handler),
 				socket::close(Input, Output)
 			).
@@ -433,21 +437,8 @@
 		integer(Size),
 		Size > 0.
 
-	call_with_catch_cleanup(Goal, Cleanup) :-
-		catch(
-			(	call(Goal) ->
-				call(Cleanup)
-			;	call(Cleanup),
-				fail
-			),
-			Error,
-			(	catch(call(Cleanup), _, true),
-				throw(Error)
-			)
-		).
-
 	call_with_shutdown_policy(close, Listener, Goal) :-
-		call_with_catch_cleanup(Goal, close_listener(Listener)).
+		setup_call_cleanup(true, once(Goal), close_listener(Listener)).
 	call_with_shutdown_policy(keep_open, _Listener, Goal) :-
 		call(Goal).
 
@@ -602,7 +593,8 @@
 					throw(Error)
 				)
 			) ->
-			call_with_catch_cleanup(
+			setup_call_cleanup(
+				true,
 				serve_until_shutdown_with_workers(Workers, Listener, Handler, Control, RunId),
 				(	catch(close_listener(Listener), _, true),
 					cleanup_shutdown_control(Control, RunId)
@@ -631,8 +623,8 @@
 
 	serve_listener_with_workers_impl(Workers, Listener, Handler, Count, ClientInfos) :-
 		bounded_listener_control(Listener, Control),
-		register_shutdown_control(Control, Listener, RunId),
-		call_with_catch_cleanup(
+		setup_call_cleanup(
+			register_shutdown_control(Control, Listener, RunId),
 			serve_listener_with_workers_impl(Workers, Listener, Handler, Count, ClientInfos, Control, RunId),
 			cleanup_shutdown_control(Control, RunId)
 		).
@@ -805,7 +797,8 @@
 		).
 
 	spawn_notifying_connection_worker(Notification, Input, Output, Handler, worker(Tag, Goal)) :-
-		Goal = call_with_catch_cleanup(
+		Goal = setup_call_cleanup(
+			true,
 			serve_accepted_connection(Input, Output, Handler),
 			threaded_notify(Notification)
 		),
@@ -1033,7 +1026,8 @@
 		throw(Error).
 
 	spawn_open_connection_worker(Control, RunId, Input, Output, Handler) :-
-		Goal = call_with_catch_cleanup(
+		Goal = setup_call_cleanup(
+			true,
 			catch(
 				serve_accepted_connection(Input, Output, Handler),
 				Error,

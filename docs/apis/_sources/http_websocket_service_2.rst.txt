@@ -19,7 +19,7 @@ Callback-driven WebSocket session loops over upgraded http_socket connections, i
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-11
+| **Date:** 2026-06-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -33,6 +33,7 @@ Callback-driven WebSocket session loops over upgraded http_socket connections, i
 |    :ref:`http_websocket_service_registry <http_websocket_service_registry/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 

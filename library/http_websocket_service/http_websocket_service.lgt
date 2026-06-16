@@ -68,7 +68,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-16,
 		comment is 'Callback-driven WebSocket session loops over upgraded http_socket connections, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
@@ -143,12 +143,16 @@
 		sleep/1, wall_time/1
 	]).
 
+	:- uses(user, [
+		setup_call_cleanup/3
+	]).
+
 	run_session(Connection, Handler, State) :-
 		run_session(Connection, Handler, State, []).
 
 	run_session(Connection, Handler, State, Options) :-
-		^^initial_state(State0),
-		run_once_with_cleanup_(
+		setup_call_cleanup(
+			^^initial_state(State0),
 			run_session_connection(Connection, handler_replies(Handler), State0, State, Options),
 			catch(http_socket::close_connection(Connection), _, true)
 		).
@@ -161,8 +165,8 @@
 		Context = loop_context(HandlerMode, AutoPong, KeepaliveInterval, IdleTimeout, PollInterval, MaxPayloadLength),
 		ensure_timed_session_support(Context),
 		initial_loop_timers(Context, Timers0),
-		http_socket::connection_streams(Connection, Input, Output),
-		run_once_with_cleanup_(
+		setup_call_cleanup(
+			http_socket::connection_streams(Connection, Input, Output),
 			run_session_loop(Input, Output, Context, Timers0, State0, none, Reader, State),
 			cancel_session_reader(Reader)
 		).
@@ -688,13 +692,6 @@
 		^^write_message(Output, State0, State1, Reply),
 		write_reply_messages(Output, State1, Replies, State).
 
-	:- meta_predicate(run_once_with_cleanup_(0, 0)).
-
-	run_once_with_cleanup_(Goal, Cleanup) :-
-		catch((Goal -> Succeeded = true; Succeeded = false), Error, (Cleanup, throw(Error))),
-		once(Cleanup),
-		Succeeded == true.
-
 :- end_object.
 
 
@@ -704,12 +701,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-16,
 		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.'
-	]).
-
-	:- uses(list, [
-		member/2, valid/1 as proper_list/1
 	]).
 
 	:- public(open/4).
@@ -741,15 +734,23 @@
 		]
 	]).
 
+	:- uses(list, [
+		member/2, valid/1 as proper_list/1
+	]).
+
+	:- uses(user, [
+		setup_call_cleanup/3
+	]).
+
 	open(URL, Handler, Response, State) :-
 		open(URL, Handler, Response, State, []).
 
 	open(URL, Handler, Response, State, Options) :-
 		parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions),
 		http_client::open_websocket(URL, Connection, Response, WebSocketOptions),
-		run_once_with_cleanup_(
-			(	^^initial_state(State0),
-				write_initial_messages(Connection, State0, State1, InitialMessages),
+		setup_call_cleanup(
+			^^initial_state(State0),
+			(	write_initial_messages(Connection, State0, State1, InitialMessages),
 				^^run_session_connection(Connection, handler_replies(Handler), State1, State, SessionOptions)
 			),
 			catch(http_socket::close_connection(Connection), _, true)
@@ -862,13 +863,6 @@
 		^^write_message(Output, State0, State1, Message),
 		write_initial_message_list(Output, State1, State, Messages).
 
-	:- meta_predicate(run_once_with_cleanup_(0, 0)).
-
-	run_once_with_cleanup_(Goal, Cleanup) :-
-		catch((Goal -> Succeeded = true; Succeeded = false), Error, (Cleanup, throw(Error))),
-		once(Cleanup),
-		Succeeded == true.
-
 :- end_object.
 
 
@@ -878,7 +872,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-16,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.'
 	]).
 
@@ -1010,13 +1004,17 @@
 		length/2
 	]).
 
+	:- uses(user, [
+		setup_call_cleanup/3
+	]).
+
 	serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control) :-
 		serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control, []).
 
 	serve_until_shutdown(Listener, HandshakeHandler, SessionHandler, Registry, Control, Options) :-
 		validate_session_registry(Registry),
-		register_shutdown_control(Control, Listener, RunId),
-		run_once_with_cleanup_(
+		setup_call_cleanup(
+			register_shutdown_control(Control, Listener, RunId),
 			serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options),
 			(	catch(http_socket::close_listener(Listener), _, true),
 				cleanup_shutdown_control(Control, RunId)
@@ -1111,7 +1109,8 @@
 		register_active_worker(Control, RunId, worker(Tag, Goal)).
 
 	serve_session_worker(Control, RunId, Connection, Registry, SessionHandler, Options) :-
-		run_once_with_cleanup_(
+		setup_call_cleanup(
+			true,
 			catch(
 				serve_registered_session(Connection, Registry, SessionHandler, Options),
 				Error,
@@ -1124,9 +1123,10 @@
 
 	serve_registered_session(Connection, Registry, SessionHandler, Options) :-
 		http_websocket_service_registry::register(Registry, Session),
-		^^initial_state(State0),
-		run_once_with_cleanup_(
-			run_once_with_cleanup_(
+		setup_call_cleanup(
+			^^initial_state(State0),
+			setup_call_cleanup(
+				true,
 				^^run_session_connection(Connection, handler_registry(Registry, Session, SessionHandler), State0, _State, Options),
 				http_websocket_service_registry::unregister(Registry, Session)
 			),
@@ -1203,12 +1203,5 @@
 		throw(not_available(http_websocket_server_service_registry)).
 
 	:- endif.
-
-	:- meta_predicate(run_once_with_cleanup_(0, 0)).
-
-	run_once_with_cleanup_(Goal, Cleanup) :-
-		catch((Goal -> Succeeded = true; Succeeded = false), Error, (Cleanup, throw(Error))),
-		once(Cleanup),
-		Succeeded == true.
 
 :- end_object.

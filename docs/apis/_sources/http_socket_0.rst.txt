@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-14
+| **Date:** 2026-06-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -33,6 +33,7 @@ Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http
 |    :ref:`http_server <http_server/0>`
 |    :ref:`list <list/0>`
 |    :ref:`socket <socket/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
