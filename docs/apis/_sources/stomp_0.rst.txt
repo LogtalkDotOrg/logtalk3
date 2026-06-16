@@ -14,13 +14,15 @@ Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the 
 |    ``logtalk_load(stomp(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-09
+| **Version:** 1:1:0
+| **Date:** 2026-06-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`socket <socket/0>`
@@ -38,7 +40,7 @@ Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the 
    - Frame encoding: Properly encodes/decodes header values according to STOMP 1.2 escaping rules.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

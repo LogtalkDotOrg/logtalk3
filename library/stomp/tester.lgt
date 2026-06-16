@@ -45,6 +45,7 @@
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(basic_types(loader)),
+		logtalk_load(options(loader)),
 		logtalk_load(sockets(loader)),
 		logtalk_load(term_io(loader)),
 		logtalk_load(uuid(loader)),

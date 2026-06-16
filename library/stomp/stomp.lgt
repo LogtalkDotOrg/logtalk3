@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(stomp).
+:- object(stomp,
+	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-09,
+		date is 2026-06-16,
 		comment is 'Portable STOMP 1.2 (Simple Text Orientated Messaging Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, and SWI-Prolog (same as the sockets library).',
@@ -265,9 +266,11 @@
 	% ==========================================================================
 
 	connect(Host, Port, Connection, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		catch(
-			connect_(Host, Port, Connection, Options, Context),
+			connect_(Host, Port, Connection, MergedOptions, Context),
 			Error,
 			throw(Error)
 		).
@@ -280,8 +283,8 @@
 			throw(error(stomp_error(connection_failed), Context))
 		),
 		% Build CONNECT frame
-		option(host(VirtualHost), Options, host(Host)),
-		option(heartbeat(ClientCx, ClientCy), Options, heartbeat(0, 0)),
+		^^option(host(VirtualHost), Options, host(Host)),
+		^^option(heartbeat(ClientCx, ClientCy), Options),
 		build_connect_frame(VirtualHost, Options, ClientCx, ClientCy, Frame),
 		% Send CONNECT frame
 		send_frame(Output, Frame),
@@ -319,12 +322,12 @@
 	build_connect_frame(VirtualHost, Options, ClientCx, ClientCy, Frame) :-
 		Headers0 = ['accept-version'-'1.2', 'host'-VirtualHost],
 		% Add login if provided
-		(	option(login(Login), Options) ->
+		(	^^option(login(Login), Options) ->
 			Headers1 = ['login'-Login| Headers0]
 		;	Headers1 = Headers0
 		),
 		% Add passcode if provided
-		(	option(passcode(Passcode), Options) ->
+		(	^^option(passcode(Passcode), Options) ->
 			Headers2 = ['passcode'-Passcode| Headers1]
 		;	Headers2 = Headers1
 		),
@@ -337,14 +340,14 @@
 		Frame = frame('CONNECT', Headers, '').
 
 	disconnect(Connection, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Connection, Input),
 		arg(2, Connection, Output),
 		% Generate receipt ID if not provided
-		(	option(receipt(ReceiptId), Options) ->
-			true
-		;	uuid_v7(ReceiptId)
-		),
+		uuid_v7(GeneratedReceiptId),
+		^^option(receipt(ReceiptId), MergedOptions, receipt(GeneratedReceiptId)),
 		% Build and send DISCONNECT frame
 		Frame = frame('DISCONNECT', ['receipt'-ReceiptId], ''),
 		catch(
@@ -375,6 +378,8 @@
 	% ==========================================================================
 
 	send(Connection, Destination, Body, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		% Encode body to bytes
@@ -382,30 +387,27 @@
 		% Build headers
 		Headers0 = ['destination'-Destination],
 		% Add content-type if provided
-		(	option(content_type(ContentType), Options) ->
+		(	^^option(content_type(ContentType), MergedOptions) ->
 			Headers1 = ['content-type'-ContentType| Headers0]
 		;	Headers1 = Headers0
 		),
 		% Add content-length
-		(	option(content_length(CL), Options) ->
-			Length = CL
-		;	Length = BodyLength
-		),
+		^^option(content_length(Length), MergedOptions, content_length(BodyLength)),
 		number_codes(Length, LengthCodes),
 		atom_codes(LengthAtom, LengthCodes),
 		Headers2 = ['content-length'-LengthAtom| Headers1],
 		% Add transaction if provided
-		(	option(transaction(TransactionId), Options) ->
+		(	^^option(transaction(TransactionId), MergedOptions) ->
 			Headers3 = ['transaction'-TransactionId| Headers2]
 		;	Headers3 = Headers2
 		),
 		% Add receipt if provided
-		(	option(receipt(ReceiptId), Options) ->
+		(	^^option(receipt(ReceiptId), MergedOptions) ->
 			Headers4 = ['receipt'-ReceiptId | Headers3]
 		;	Headers4 = Headers3
 		),
 		% Add custom headers
-		add_custom_headers(Options, Headers4, Headers5),
+		add_custom_headers(MergedOptions, Headers4, Headers5),
 		Frame = frame('SEND', Headers5, BodyBytes),
 		catch(
 			send_frame(Output, Frame),
@@ -414,12 +416,14 @@
 		).
 
 	subscribe(Connection, Destination, SubscriptionId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		% Build headers
 		Headers0 = ['id'-SubscriptionId, 'destination'-Destination],
 		% Add ack mode
-		(	option(ack(AckMode), Options) ->
+		(	^^option(ack(AckMode), MergedOptions) ->
 			ack_mode_value(AckMode, AckValue),
 			Headers = ['ack'-AckValue| Headers0]
 		;	Headers = Headers0
@@ -435,7 +439,9 @@
 	ack_mode_value(client, 'client').
 	ack_mode_value(client_individual, 'client-individual').
 
-	unsubscribe(Connection, SubscriptionId, _Options) :-
+	unsubscribe(Connection, SubscriptionId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, _MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		Frame = frame('UNSUBSCRIBE', ['id'-SubscriptionId], ''),
@@ -446,9 +452,11 @@
 		).
 
 	receive(Connection, Frame, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(1, Connection, Input),
-		option(timeout(Timeout), Options, -1),
+		^^option(timeout(Timeout), MergedOptions),
 		receive_frame(Input, Frame, Timeout, Context).
 
 	% ==========================================================================
@@ -456,10 +464,12 @@
 	% ==========================================================================
 
 	ack(Connection, AckId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		Headers0 = ['id'-AckId],
-		(	option(transaction(TransactionId), Options) ->
+		(	^^option(transaction(TransactionId), MergedOptions) ->
 			Headers = ['transaction'-TransactionId | Headers0]
 		;	Headers = Headers0
 		),
@@ -471,10 +481,12 @@
 		).
 
 	nack(Connection, AckId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		Headers0 = ['id'-AckId],
-		(	option(transaction(TransactionId), Options) ->
+		(	^^option(transaction(TransactionId), MergedOptions) ->
 			Headers = ['transaction'-TransactionId| Headers0]
 		;	Headers = Headers0
 		),
@@ -489,7 +501,9 @@
 	% Implementation - Transactions
 	% ==========================================================================
 
-	begin_transaction(Connection, TransactionId, _Options) :-
+	begin_transaction(Connection, TransactionId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, _MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		Frame = frame('BEGIN', ['transaction'-TransactionId], ''),
@@ -499,7 +513,9 @@
 			throw(error(stomp_error(Error), Context))
 		).
 
-	commit_transaction(Connection, TransactionId, _Options) :-
+	commit_transaction(Connection, TransactionId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, _MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		Frame = frame('COMMIT', ['transaction'-TransactionId], ''),
@@ -509,7 +525,9 @@
 			throw(error(stomp_error(Error), Context))
 		).
 
-	abort_transaction(Connection, TransactionId, _Options) :-
+	abort_transaction(Connection, TransactionId, Options) :-
+		^^check_options(Options),
+		^^merge_options(Options, _MergedOptions),
 		context(Context),
 		arg(2, Connection, Output),
 		Frame = frame('ABORT', ['transaction'-TransactionId], ''),
@@ -766,19 +784,46 @@
 		;	read_body_null_acc(Stream, [Byte | Acc], Codes, Context)
 		).
 
+	valid_option(login(Login)) :-
+		atom(Login).
+	valid_option(passcode(Passcode)) :-
+		atom(Passcode).
+	valid_option(host(VirtualHost)) :-
+		atom(VirtualHost).
+	valid_option(heartbeat(ClientMs, ServerMs)) :-
+		integer(ClientMs),
+		ClientMs >= 0,
+		integer(ServerMs),
+		ServerMs >= 0.
+	valid_option(receipt(ReceiptId)) :-
+		atom(ReceiptId).
+	valid_option(content_type(ContentType)) :-
+		atom(ContentType).
+	valid_option(content_length(ContentLength)) :-
+		integer(ContentLength),
+		ContentLength >= 0.
+	valid_option(transaction(TransactionId)) :-
+		atom(TransactionId).
+	valid_option(header(Name, Value)) :-
+		atom(Name),
+		atom(Value).
+	valid_option(ack(AckMode)) :-
+		once((
+			AckMode == auto;
+			AckMode == client;
+			AckMode == client_individual
+		)).
+	valid_option(timeout(Timeout)) :-
+		integer(Timeout),
+		Timeout >= -1.
+
+	default_option(heartbeat(0, 0)).
+	default_option(ack(auto)).
+	default_option(timeout(-1)).
+
 	% ==========================================================================
 	% Auxiliary Predicates
 	% ==========================================================================
-
-	% Option handling
-	option(Option, Options) :-
-		member(Option, Options),
-		!.
-
-	option(Option, Options, _Default) :-
-		member(Option, Options),
-		!.
-	option(Option, _, Option).
 
 	% Add custom headers from options
 	add_custom_headers([], Headers, Headers).
