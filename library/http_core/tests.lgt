@@ -73,7 +73,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-06-18,
 		comment is 'Unit tests for the "http" library.'
 	]).
 
@@ -493,6 +493,17 @@
 		property(Response, content_length(17)),
 		property(Response, decoded_body(true)).
 
+	test(http_parse_response_2_04, deterministic) :-
+		atom_codes('HTTP/1.1 200 OK\r\ncontent-type: text/plain; charset=utf-8\r\ncontent-length: 2\r\n\r\n', HeaderBytes),
+		utf_8_text_body_bytes(BodyBytes),
+		append(HeaderBytes, BodyBytes, Message),
+		parse_response(bytes(Message), Response),
+		body(Response, content('text/plain', text(Text))),
+		atom_codes(Text, [225]),
+		property(Response, content_length(2)),
+		property(Response, decoded_body(true)),
+		is_response(Response).
+
 	test(http_generate_response_headers_2_01, deterministic(Message == 'HTTP/1.1 206 Partial Content\r\ncontent-length: 3\r\ncontent-type: application/octet-stream\r\n\r\n')) :-
 		write_file_atom('test_http_response_body.tmp', 'abcde'),
 		^^file_path('test_http_response_body.tmp', File),
@@ -593,5 +604,7 @@
 		write_bytes(Bytes, Output).
 
 	unicode_escaped_json_body_bytes([123, 34, 99, 105, 116, 121, 34, 58, 34, 92, 117, 48, 48, 101, 49, 34, 125]).
+
+	utf_8_text_body_bytes([195, 161]).
 
 :- end_object.

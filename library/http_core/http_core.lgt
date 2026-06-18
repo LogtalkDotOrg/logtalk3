@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-05,
+		date is 2026-06-18,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -534,7 +534,7 @@
 
 	validate_request_semantics(Target, Headers, Body, Properties, Mode) :-
 		validate_transfer_encoding_semantics(Headers, Properties),
-		validate_header_body_semantics(Headers, Body, Mode),
+		validate_header_body_semantics(Headers, Body, Properties, Mode),
 		validate_header_target_semantics(Target, Headers),
 		derived_request_properties(Target, Headers, Body, DerivedProperties),
 		validate_property_semantics(Properties, DerivedProperties).
@@ -544,7 +544,7 @@
 
 	validate_response_semantics(Headers, Body, Properties, Mode) :-
 		validate_transfer_encoding_semantics(Headers, Properties),
-		validate_header_body_semantics(Headers, Body, Mode),
+		validate_header_body_semantics(Headers, Body, Properties, Mode),
 		derived_response_properties(Headers, Body, DerivedProperties),
 		validate_property_semantics(Properties, DerivedProperties).
 
@@ -581,9 +581,9 @@
 		;	true
 		).
 
-	validate_header_body_semantics(Headers, Body, Mode) :-
+	validate_header_body_semantics(Headers, Body, Properties, Mode) :-
 		(	semantic_single_header_value(Headers, content_length, Length) ->
-			validate_content_length_semantics(Mode, Length, Body)
+			validate_content_length_semantics(Mode, Headers, Properties, Length, Body)
 		;	true
 		),
 		(	semantic_single_header_value(Headers, content_type, MediaTypeProperty) ->
@@ -591,9 +591,9 @@
 		;	true
 		).
 
-	validate_content_length_semantics(parsed, _Length, _Body).
-	validate_content_length_semantics(strict, Length, Body) :-
-		validate_content_length_semantics(Length, Body).
+	validate_content_length_semantics(parsed, _Headers, _Properties, _Length, _Body).
+	validate_content_length_semantics(strict, Headers, Properties, Length, Body) :-
+		validate_content_length_semantics(Headers, Properties, Length, Body).
 
 	validate_header_target_semantics(Target, Headers) :-
 		(	semantic_single_header_value(Headers, host, HeaderHost), target_host_property(Target, TargetHost) ->
@@ -604,8 +604,8 @@
 		;	true
 		).
 
-	validate_content_length_semantics(Length, Body) :-
-		(	body_length_if_known(Body, BodyLength) ->
+	validate_content_length_semantics(Headers, Properties, Length, Body) :-
+		(	body_length_if_known(Headers, Properties, Body, BodyLength) ->
 			(	Length =:= BodyLength ->
 				true
 			;	domain_error(http_header_semantics, content_length(Length))
@@ -987,17 +987,20 @@
 		header_name_present(Headers, Name).
 
 	request_body_bytes(Headers, Body, Properties, Bytes) :-
-		body_serialization_options(Headers, Properties, Body, Options),
+		wire_body_serialization_options(Headers, Properties, Body, Options),
 		body_term_to_bytes(Body, Options, Bytes).
 
 	response_body_bytes(Headers, Body, Properties, Bytes) :-
-		body_serialization_options(Headers, Properties, Body, Options),
+		wire_body_serialization_options(Headers, Properties, Body, Options),
 		body_term_to_bytes(Body, Options, Bytes).
 
 	body_serialization_options(_Headers, _Properties, empty, []) :-
 		!.
 	body_serialization_options(Headers, Properties, content(MediaType, _), Options) :-
 		body_options_from_headers_and_properties(Headers, Properties, MediaType, Options).
+
+	wire_body_serialization_options(Headers, Properties, Body, [wire_bytes(true)| Options]) :-
+		body_serialization_options(Headers, Properties, Body, Options).
 
 	body_options_from_headers_and_properties(Headers, _Properties, MediaType, Options) :-
 		semantic_single_header_value(Headers, content_type, media_type(HeaderMediaType, Parameters)),
@@ -1193,7 +1196,7 @@
 
 	multipart_part_bytes(part(Headers0, Body, Properties), BoundaryCodes, Bytes) :-
 		part_effective_headers(Headers0, Body, Properties, Headers),
-		body_serialization_options(Headers, Properties, Body, Options),
+		wire_body_serialization_options(Headers, Properties, Body, Options),
 		body_term_to_bytes(Body, Options, BodyBytes),
 		multipart_open_marker_codes(BoundaryCodes, BoundaryBytes),
 		headers_codes(Headers, HeaderBytes),
@@ -1330,17 +1333,25 @@
 	charset_object_name_codes([Code| CharsetCodes], [Code| CharsetObjectCodes]) :-
 		charset_object_name_codes(CharsetCodes, CharsetObjectCodes).
 
-	generate_wire_payload(MediaType, Payload, _Options, Bytes) :-
+	generate_wire_payload(MediaType, Payload, Options, Bytes) :-
 		(	json_media_type(MediaType) ->
-			json::generate(codes(Bytes), Payload)
+			json::generate(codes(Codes), Payload),
+			payload_codes_to_bytes(MediaType, Codes, Options, Bytes)
 		;	form_media_type(MediaType) ->
 			parse_form_payload(Payload, Pairs),
 			generate_www_form_codes(Pairs, Bytes)
 		;	text_media_type(MediaType) ->
-			text_to_codes(Payload, Bytes)
+			text_to_codes(Payload, Codes),
+			payload_codes_to_bytes(MediaType, Codes, Options, Bytes)
 		;	octet_stream_media_type(MediaType) ->
 			( Payload = binary(RawBytes) -> Bytes = RawBytes ; Bytes = Payload )
 		;	existence_error(http_body_codec, MediaType)
+		).
+
+	payload_codes_to_bytes(MediaType, Codes, Options, Bytes) :-
+		(	payload_charset(MediaType, Options, CharsetObject) ->
+			CharsetObject::codes_to_bytes(Codes, Bytes)
+		;	Bytes = Codes
 		).
 
 	body_codec(MediaType, http_json_body_codec) :-
@@ -1990,18 +2001,17 @@
 		catch(body_term_to_bytes(Body, [], Bytes), _, fail),
 		length(Bytes, Length).
 
-	body_length_if_known(_Headers, _Properties, Body, Length) :-
-		body_length_if_known(Body, Length),
-		!.
 	body_length_if_known(Headers, Properties, Body, Length) :-
 		catch(
-			(	body_serialization_options(Headers, Properties, Body, Options),
+			(	wire_body_serialization_options(Headers, Properties, Body, Options),
 				body_term_to_bytes(Body, Options, Bytes),
 				length(Bytes, Length)
 			),
 			_,
 			fail
 		).
+	body_length_if_known(_Headers, _Properties, Body, Length) :-
+		body_length_if_known(Body, Length).
 
 	file_body_bytes(Path, Offset, Length, Bytes) :-
 		open(Path, read, Stream, [type(binary)]),
