@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-18,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
@@ -196,6 +196,10 @@
 		member/2, memberchk/2, valid/1 as proper_list/1
 	]).
 
+	:- uses(http_socket, [
+		close_connection/1, exchange/3, exchange/4, open_connection/4
+	]).
+
 	:- uses(http_websocket_handshake, [
 		websocket_accept/2,
 		websocket_opening_key/1
@@ -208,13 +212,13 @@
 	request(Method, URL, Response, Options) :-
 		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties),
 		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Host, Port, Request),
-		http_socket::exchange(Host, Port, Request, Response).
+		exchange(Host, Port, Request, Response).
 
 	request(ConnectionOrPool, Method, URL, Response, Options) :-
 		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties),
 		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Host, Port, Request),
 		validate_connection_or_pool_endpoint(ConnectionOrPool, Host, Port),
-		http_socket::exchange(ConnectionOrPool, Request, Response).
+		exchange(ConnectionOrPool, Request, Response).
 
 	get(URL, Response, Options) :-
 		request(get, URL, Response, Options).
@@ -261,13 +265,13 @@
 	open_websocket(URL, Connection, Response, Options) :-
 		parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions),
 		build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Host, Port, Request),
-		http_socket::open_connection(Host, Port, Connection, ConnectionOptions),
+		open_connection(Host, Port, Connection, ConnectionOptions),
 		catch(
-			(	http_socket::exchange(Connection, Request, Response),
+			(	exchange(Connection, Request, Response),
 				validate_websocket_response(Request, Response)
 			),
 			Error,
-			(	catch(http_socket::close_connection(Connection), _, true),
+			(	catch(close_connection(Connection), _, true),
 				throw(Error)
 			)
 		).

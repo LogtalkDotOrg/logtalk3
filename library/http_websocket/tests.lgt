@@ -63,12 +63,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-18,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 
 	:- uses(http_core, [
 		property/2, status/2
+	]).
+
+	:- uses(http_socket, [
+		close_listener/1, open_listener/4
 	]).
 
 	:- uses(http_websocket_messages, [
@@ -82,18 +86,18 @@
 		:- threaded.
 
 		test(http_websocket_direct_text_2_01, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(server_accept_text_exchange(Listener, ServerSession), Tag),
 			catch(
 				client_direct_text_exchange(Port, ClientSession),
 				Error,
-				(	catch(http_socket::close_listener(Listener), _, true),
+				(	catch(close_listener(Listener), _, true),
 					catch(threaded_exit(server_accept_text_exchange(Listener, _ServerSession), Tag), _, true),
 					throw(Error)
 				)
 			),
 			threaded_exit(server_accept_text_exchange(Listener, ServerSession), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(close_listener(Listener), _, true),
 			ServerSession = session(ServerResponse, server, chat, message(text, hello), message(close, status(1000, done))),
 			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, 'Echo: hello')),
 			status(ServerResponse, status(101, 'Switching Protocols')),
@@ -103,46 +107,46 @@
 
 		test(http_websocket_direct_json_2_01, deterministic(ReplyJSON == JSON)) :-
 			JSON = {message-hello, count-1},
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(server_accept_json_exchange(Listener, _ReceivedJSON), Tag),
 			catch(
 				client_direct_json_exchange(Port, JSON, ReplyJSON),
 				Error,
-				(	catch(http_socket::close_listener(Listener), _, true),
+				(	catch(close_listener(Listener), _, true),
 					catch(threaded_exit(server_accept_json_exchange(Listener, _ServerReceivedJSON), Tag), _, true),
 					throw(Error)
 				)
 			),
 			threaded_exit(server_accept_json_exchange(Listener, _ReceivedJSON), Tag),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(close_listener(Listener), _, true).
 
 		test(http_websocket_direct_term_2_01, deterministic(ReplyTerm == hello(world, 42))) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(server_accept_term_exchange(Listener, _ReceivedTerm), Tag),
 			catch(
 				client_direct_term_exchange(Port, hello(world, 42), ReplyTerm),
 				Error,
-				(	catch(http_socket::close_listener(Listener), _, true),
+				(	catch(close_listener(Listener), _, true),
 					catch(threaded_exit(server_accept_term_exchange(Listener, _ServerReceivedTerm), Tag), _, true),
 					throw(Error)
 				)
 			),
 			threaded_exit(server_accept_term_exchange(Listener, _ReceivedTerm), Tag),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(close_listener(Listener), _, true).
 
 		test(http_websocket_open_session_5_01, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(server_accept_for_open_session(Listener, ServerSession), Tag),
 			catch(
 				client_open_session_exchange(Port, ClientResponse, ClientState),
 				Error,
-				(	catch(http_socket::close_listener(Listener), _, true),
+				(	catch(close_listener(Listener), _, true),
 					catch(threaded_exit(server_accept_for_open_session(Listener, _ServerSession), Tag), _, true),
 					throw(Error)
 				)
 			),
 			threaded_exit(server_accept_for_open_session(Listener, ServerSession), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(close_listener(Listener), _, true),
 			ServerSession = session(ServerResponse, message(text, hello), message(close, status(1000, done))),
 			status(ServerResponse, status(101, 'Switching Protocols')),
 			property(ServerResponse, websocket_protocol([chat])),
@@ -151,18 +155,18 @@
 			ClientState = session_state(idle, closed(status(1000, done), status(1000, done))).
 
 		test(http_websocket_serve_once_6_01, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag),
 			catch(
 				client_direct_text_exchange(Port, ClientSession),
 				Error,
-				(	catch(http_socket::close_listener(Listener), _, true),
+				(	catch(close_listener(Listener), _, true),
 					catch(threaded_exit(server_serve_once_exchange(Listener, _Response, _State), Tag), _, true),
 					throw(Error)
 				)
 			),
 			threaded_exit(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(close_listener(Listener), _, true),
 			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, hello)),
 			status(ServerResponse, status(101, 'Switching Protocols')),
 			property(ServerResponse, websocket_protocol([chat])),

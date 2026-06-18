@@ -25,18 +25,20 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
-		comment is 'Unit tests for the http_session library.'
+		date is 2026-06-18,
+		comment is 'Unit tests for the "http_session" library.'
 	]).
 
 	:- uses(http_core, [
-		body/2,
-		property/2
+		body/2, property/2
+	]).
+
+	:- uses(http_socket, [
+		close_listener/1, open_listener/4, serve_listener/5
 	]).
 
 	:- uses(list, [
-		member/2,
-		memberchk/2
+		member/2, memberchk/2
 	]).
 
 	:- uses(user, [
@@ -322,45 +324,45 @@
 		:- threaded.
 
 		test(http_client_session_01, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL),
 			http_client_session::open(Session),
 			http_client_session::get(Session, URL, FirstResponse, []),
 			http_client_session::get(Session, URL, SecondResponse, []),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			body(FirstResponse, content('text/plain', text('1'))),
 			body(SecondResponse, content('text/plain', text('2'))).
 
 		test(http_client_session_02, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL),
 			http_client_session::open(Session, [cookie_jar(none)]),
 			http_client_session::get(Session, URL, FirstResponse, []),
 			http_client_session::get(Session, URL, SecondResponse, []),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			body(FirstResponse, content('text/plain', text('1'))),
 			body(SecondResponse, content('text/plain', text('1'))).
 
 		test(http_client_session_03, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_test_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_test_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL),
 			http_client_session::open(Session),
 			http_client_session::get(Session, URL, Response, [cookies([visits-'7'])]),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_test_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_test_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			body(Response, content('text/plain', text('8'))).
 
 		test(http_client_session_09, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_request_echo_handler, 5, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_request_echo_handler, 5, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/echo'], URL),
 			http_client_session::open(Session),
 			http_client_session::head(Session, URL, HeadResponse, []),
@@ -369,8 +371,8 @@
 			http_client_session::put(Session, URL, content('text/plain', text(put)), PutResponse, []),
 			http_client_session::patch(Session, URL, content('text/plain', text(patch)), PatchResponse, []),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_request_echo_handler, 5, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 5, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			body(HeadResponse, empty),
 			body(DeleteResponse, content('text/plain', text(delete))),
 			body(PostResponse, content('text/plain', text(post))),
@@ -378,8 +380,8 @@
 			body(PatchResponse, content('text/plain', text(patch))).
 
 		test(http_client_session_10, deterministic(Cookies == [session-'1'])) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/login'], LoginURL),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/request-info'], URL),
 			http_cookie_jar::open(Jar),
@@ -387,15 +389,15 @@
 			http_client_session::open(Session, [cookie_jar(Jar), headers([accept-'application/json']), query([lang-'en', page-'1']), version(http(1, 1)), properties([trace(default), keep(default)])]),
 			http_client_session::get(Session, URL, Response, [headers([accept-'application/json']), query([page-'2', item-'7']), version(http(1, 0)), properties([trace(request), cookies([session-'property'])]), cookies([session-'explicit'])]),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			http_cookie_jar::request_cookies(Jar, URL, Cookies),
 			http_cookie_jar::close(Jar),
 			body(Response, content('application/json', json({lang-'en', page-'2', item-'7', session-'explicit', major-1, minor-0}))).
 
 		test(http_client_session_14, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/login'], LoginURL),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/cookie-info'], URL),
 			http_cookie_jar::open(Jar),
@@ -403,14 +405,14 @@
 			http_client_session::open(Session, [cookie_jar(Jar)]),
 			http_client_session::get(Session, URL, Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			http_cookie_jar::close(Jar),
 			body(Response, content('text/plain', text('1'))).
 
 		test(http_client_session_15, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/login'], LoginURL),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/cookie-info'], URL),
 			http_cookie_jar::open(Jar),
@@ -418,8 +420,8 @@
 			http_client_session::open(Session, [cookie_jar(Jar)]),
 			http_client_session::post(Session, URL, content('text/plain', text(post)), Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
 			http_client_session::close(Session),
-			once(threaded_exit(http_socket::serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
-			catch(http_socket::close_listener(Listener), _, true),
+			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
+			catch(close_listener(Listener), _, true),
 			http_cookie_jar::close(Jar),
 			body(Response, content('text/plain', text('none'))).
 

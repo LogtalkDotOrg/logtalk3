@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-18,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -135,6 +135,10 @@
 		]
 	]).
 
+	:- uses(http_socket, [
+		close_connection/1, connection_streams/3
+	]).
+
 	:- uses(list, [
 		valid/1 as proper_list/1
 	]).
@@ -154,7 +158,7 @@
 		setup_call_cleanup(
 			^^initial_state(State0),
 			run_session_connection(Connection, handler_replies(Handler), State0, State, Options),
-			catch(http_socket::close_connection(Connection), _, true)
+			catch(close_connection(Connection), _, true)
 		).
 
 	run_session_connection(Connection, HandlerDescriptor, State0, State, Options) :-
@@ -166,7 +170,7 @@
 		ensure_timed_session_support(Context),
 		initial_loop_timers(Context, Timers0),
 		setup_call_cleanup(
-			http_socket::connection_streams(Connection, Input, Output),
+			connection_streams(Connection, Input, Output),
 			run_session_loop(Input, Output, Context, Timers0, State0, none, Reader, State),
 			cancel_session_reader(Reader)
 		).

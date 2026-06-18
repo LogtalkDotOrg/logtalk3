@@ -25,12 +25,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-06-18,
 		comment is 'Unit tests for the "http_client" library.'
 	]).
 
 	:- uses(http_core, [
 		body/2, parse_request/2, property/2, status/2, version/2
+	]).
+
+	:- uses(http_socket, [
+		close_connection/1, close_listener/1, open_connection/4, open_listener/4, serve_once/3
 	]).
 
 	cover(http_client).
@@ -40,49 +44,49 @@
 	:- threaded.
 
 	test(http_client_head_3_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HeadResponse = 'HTTP/1.1 200 OK\r\ncontent-type: text/plain\r\ncontent-length: 5\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HeadResponse), Tag),
 		local_http_url(Port, '/head', URL),
 		http_client::head(URL, Response, []),
 		threaded_exit(raw_server_once(Listener, HeadResponse), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, empty),
 		property(Response, body_omitted(head)),
 		property(Response, omitted_body_length(5)).
 
 	test(http_client_get_3_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_ignore(server_serve_once(Listener, target_http_client_handler)),
 		local_http_url(Port, '/search', URL),
 		http_client::get(URL, Response, [query([q-'logtalk', page-'1'])]),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/search?q=logtalk&page=1'))).
 
 	test(http_client_get_3_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_ignore(server_serve_once(Listener, target_http_client_handler)),
 		local_http_url(Port, '/userinfo', URL0),
 		atom_concat('http://', Suffix, URL0),
 		atom_concat('http://user@', Suffix, URL),
 		http_client::get(URL, Response, []),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/userinfo'))).
 
 	test(http_client_post_4_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_ignore(server_serve_once(Listener, echo_http_client_handler)),
 		local_http_url(Port, '/echo', URL),
 		http_client::post(URL, content('text/plain', text(hello)), Response, []),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text(hello))).
 
 	test(http_client_post_4_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_once(Listener, multipart_http_client_handler), Tag),
 		local_http_url(Port, '/upload', URL),
 		http_client::post(
@@ -95,18 +99,18 @@
 			[]
 		),
 		threaded_exit(server_serve_once(Listener, multipart_http_client_handler), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('title=Logtalk; upload=notes.txt'))).
 
 	test(http_client_open_websocket_4_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
-		threaded_once(http_socket::serve_once(Listener, websocket_http_client_handler, _ClientInfo), Tag),
+		open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(serve_once(Listener, websocket_http_client_handler, _ClientInfo), Tag),
 		local_ws_url(Port, '/socket', URL),
 		http_client::open_websocket(URL, Connection, Response, [protocols([chat, superchat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
-		http_socket::close_connection(Connection),
-		threaded_exit(http_socket::serve_once(Listener, websocket_http_client_handler, _ClientInfo), Tag),
-		http_socket::close_listener(Listener),
+		close_connection(Connection),
+		threaded_exit(serve_once(Listener, websocket_http_client_handler, _ClientInfo), Tag),
+		close_listener(Listener),
 		status(Response, status(101, 'Switching Protocols')),
 		body(Response, empty),
 		property(Response, connection([upgrade])),
@@ -115,7 +119,7 @@
 		property(Response, websocket_protocol([chat])).
 
 	test(http_client_open_websocket_4_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		InvalidResponse = 'HTTP/1.0 200 OK\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, InvalidResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -124,17 +128,17 @@
 		version(Response, http(1, 0)),
 		status(Response, status(200, 'OK')),
 		threaded_exit(raw_server_once(Listener, InvalidResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_03, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: keep-alive, Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-protocol: chat\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		http_client::open_websocket(URL, Connection, Response, [protocols([chat, superchat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
-		http_socket::close_connection(Connection),
+		close_connection(Connection),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(101, 'Switching Protocols')),
 		body(Response, empty),
 		property(Response, connection(['keep-alive', upgrade])),
@@ -146,14 +150,14 @@
 		http_client::open_websocket('ws://example.com/socket', _Connection, _Response, [version(http(2, 0))]).
 
 	test(http_client_open_websocket_4_05, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		http_client::open_websocket(URL, Connection, Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]),
-		http_socket::close_connection(Connection),
+		close_connection(Connection),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(101, 'Switching Protocols')),
 		body(Response, empty),
 		property(Response, connection([upgrade])),
@@ -162,48 +166,48 @@
 		\+ property(Response, websocket_protocol(_)).
 
 	test(http_client_open_websocket_4_06, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-protocol: chat\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
 		expected_websocket_response_error(Error),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_07, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-extensions: permessage-deflate\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
 		expected_websocket_response_error(Error),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_08, error(domain_error(http_client_websocket_headers, [sec_websocket_extensions-'permessage-deflate']))) :-
 		http_client::open_websocket('ws://example.com/socket', _Connection, _Response, [headers([sec_websocket_extensions-'permessage-deflate'])]).
 
 	test(http_client_open_websocket_4_09, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(raw_websocket_key_server_once(Listener), Tag),
 		local_ws_url(Port, '/socket', URL),
 		http_client::open_websocket(URL, Connection, Response, []),
-		http_socket::close_connection(Connection),
+		close_connection(Connection),
 		threaded_exit(raw_websocket_key_server_once(Listener), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(101, 'Switching Protocols')),
 		body(Response, empty).
 
 	test(http_client_open_websocket_4_10, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		http_client::open_websocket(URL, Connection, Response, [protocols([chat, superchat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
-		http_socket::close_connection(Connection),
+		close_connection(Connection),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(101, 'Switching Protocols')),
 		body(Response, empty),
 		property(Response, connection([upgrade])),
@@ -212,7 +216,7 @@
 		\+ property(Response, websocket_protocol(_)).
 
 	test(http_client_open_websocket_4_11, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.0 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -220,10 +224,10 @@
 		Error = error(domain_error(http_client_websocket_response, Response), _),
 		version(Response, http(1, 0)),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_12, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 426 Upgrade Required\r\nsec-websocket-version: 13\r\nsec-websocket-version: 8, 7\r\ncontent-type: text/plain\r\ncontent-length: 16\r\n\r\nUpgrade Required',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -232,10 +236,10 @@
 		status(Response, status(426, 'Upgrade Required')),
 		property(Response, websocket_version([13, 8, 7])),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_13, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 401 Unauthorized\r\nwww-authenticate: Basic realm="socket"\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -243,10 +247,10 @@
 		Error = error(domain_error(http_client_websocket_authentication_rejection, Response), _),
 		status(Response, status(401, 'Unauthorized')),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_14, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 302 Found\r\nlocation: /other-socket\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -254,57 +258,57 @@
 		Error = error(domain_error(http_client_websocket_redirection_rejection, Response), _),
 		status(Response, status(302, 'Found')),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_15, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		catch(http_client::open_websocket(URL, _Connection, _Response, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
 		expected_websocket_response_error(Error),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_16, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 101 Switching Protocols\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\r\nsec-websocket-protocol: chat\r\nsec-websocket-protocol: chat\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
 		catch(http_client::open_websocket(URL, _Connection, _Response, [protocols([chat, superchat]), key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
 		expected_websocket_response_error(Error),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	test(http_client_open_websocket_4_17, error(domain_error(http_client_websocket_url, 'ws://example.com/socket#frag'))) :-
 		http_client::open_websocket('ws://example.com/socket#frag', _Connection, _Response, []).
 
 	test(http_client_get_4_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_request_once(Listener, target_http_client_handler), Tag),
-		http_socket::open_connection('127.0.0.1', Port, Connection, []),
+		open_connection('127.0.0.1', Port, Connection, []),
 		local_http_url(Port, '/via-connection', URL),
 		http_client::get(Connection, URL, Response, []),
-		http_socket::close_connection(Connection),
+		close_connection(Connection),
 		threaded_exit(server_serve_request_once(Listener, target_http_client_handler), Tag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/via-connection'))).
 
 	test(http_client_get_4_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_accept_and_close_once(Listener), Tag),
-		http_socket::open_connection('127.0.0.1', Port, Connection, []),
+		open_connection('127.0.0.1', Port, Connection, []),
 		WrongPort is Port + 1,
 		local_http_url(WrongPort, '/mismatch', WrongURL),
 		catch(http_client::get(Connection, WrongURL, _Response, []), Error, true),
 		expected_connection_target_error(Error),
-		http_socket::close_connection(Connection),
+		close_connection(Connection),
 		threaded_exit(server_accept_and_close_once(Listener), Tag),
-		http_socket::close_listener(Listener).
+		close_listener(Listener).
 
 	server_serve_once(Listener, Handler) :-
-		catch(http_socket::serve_once(Listener, Handler, _ClientInfo), _, true).
+		catch(serve_once(Listener, Handler, _ClientInfo), _, true).
 
 	server_serve_request_once(Listener, Handler) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),

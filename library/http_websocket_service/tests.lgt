@@ -25,12 +25,22 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-18,
 		comment is 'Unit tests for the "http_websocket_service" library.'
 	]).
 
-	:- uses(http_core, [request/7, status/2]).
-	:- uses(user, [atomic_list_concat/2]).
+	:- uses(http_core, [
+		request/7, status/2
+	]).
+
+	:- uses(http_socket, [
+		close_connection/1, close_listener/1, connection_streams/3, exchange/3, open_connection/4,
+		open_listener/4, serve_websocket_once/5
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
 
 	cover(http_websocket_service(_, _)).
 	cover(http_websocket_client_service).
@@ -70,10 +80,10 @@
 	:- if(current_logtalk_flag(threads, supported)).
 
 	test(http_websocket_service_run_session_4_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_service_loop_handler, ServerResponse, ServerState, [auto_pong(on)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		% exchange the frames incrementally to avoid stressing buffered
 		% socket writes on backends that stall on burst frame writes
 		write_client_frame(final, ping, [0'!], [1, 2, 3, 4], ClientOutput),
@@ -99,10 +109,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_service_run_session_4_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		write_client_frame(final, continuation, [], [1, 2, 3, 4], ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
 		catch(threaded_exit(server_run_session(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, []), ServerTag), ServerError, true),
@@ -116,10 +126,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_service_run_session_4_03, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		write_client_frame(final, text, [0xC3, 0x28], [1, 2, 3, 4], ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
 		catch(threaded_exit(server_run_session(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, []), ServerTag), ServerError, true),
@@ -133,10 +143,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_service_run_session_4_04, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_run_session(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		write_bytes([0x83, 0x80, 0x01, 0x02, 0x03, 0x04], ClientOutput),
 		flush_output(ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
@@ -151,10 +161,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_service_serve_once_7_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once_with_client_info(Listener, websocket_service_loop_handler, ServerResponse, ServerState, ClientInfo, [auto_pong(on)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		write_client_frame(final, ping, [0'!], [1, 2, 3, 4], ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, PongFrame),
 		write_client_frame(final, text, [0'h, 0'e, 0'l, 0'l, 0'o], [5, 6, 7, 8], ClientOutput),
@@ -179,7 +189,7 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_client_service_open_5_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, websocket_service_loop_handler, ServerResponse, ServerState, _ClientInfo, [auto_pong(on)]), ServerTag),
 		local_ws_url(Port, '/socket', URL),
 		http_websocket_client_service::open(
@@ -198,17 +208,17 @@
 			]
 		),
 		threaded_exit(http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, websocket_service_loop_handler, ServerResponse, ServerState, _ClientInfo, [auto_pong(on)]), ServerTag),
-		http_socket::close_listener(Listener),
+		close_listener(Listener),
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		ServerState == session_state(idle, closed(status(1000), status(1000))),
 		ClientState == session_state(idle, closed(status(1000), status(1000))).
 
 	test(http_websocket_server_service_serve_once_7_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, ServerState, [keepalive_interval(0.2)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, PingFrame),
 		write_client_close(ClientOutput, status(1000)),
 		read_reply_frames_until_close(2.0, ClientInput, [CloseFrame]),
@@ -226,10 +236,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_service_serve_once_7_03, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, ServerState, [idle_timeout(0.2)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
 		write_client_close(ClientOutput, status(1001, idle_timeout)),
 		threaded_exit(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, ServerState, [idle_timeout(0.2)]), ServerTag),
@@ -243,10 +253,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_service_serve_once_7_04, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, [keepalive_interval(5)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		write_client_frame(final, continuation, [], [1, 2, 3, 4], ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
 		catch(threaded_exit(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, [keepalive_interval(5)]), ServerTag), ServerError, true),
@@ -260,10 +270,10 @@
 		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	test(http_websocket_server_service_serve_once_7_05, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, [max_payload_length(0)]), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		write_client_frame(final, text, [0'h], [1, 2, 3, 4], ClientOutput),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
 		catch(threaded_exit(server_session_once(Listener, websocket_service_loop_handler, ServerResponse, _ServerState, [max_payload_length(0)]), ServerTag), ServerError, true),
@@ -278,7 +288,7 @@
 
 	test(http_websocket_client_service_open_5_02, deterministic) :-
 		websocket_keepalive_close_handler::reset,
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_keepalive_close_handler, ServerResponse, ServerState, []), ServerTag),
 		local_ws_url(Port, '/socket', URL),
 		http_websocket_client_service::open(
@@ -302,7 +312,7 @@
 		Message == message(ping, []).
 
 	test(http_websocket_client_service_open_5_03, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 401 Unauthorized\r\nwww-authenticate: Basic realm="socket"\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -313,7 +323,7 @@
 		safe_close_listener(Listener).
 
 	test(http_websocket_client_service_open_5_04, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		HandshakeResponse = 'HTTP/1.1 302 Found\r\nlocation: /other-socket\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
@@ -324,15 +334,15 @@
 		safe_close_listener(Listener).
 
 	test(http_websocket_server_service_serve_until_shutdown_6_01, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		http_websocket_service_registry::open(Registry),
 		Control = websocket_broadcast_control(Port),
 		threaded_once(server_session_until_shutdown(Listener, websocket_broadcast_service_handler, Registry, Control, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection1, ClientResponse1),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection2, ClientResponse2),
 		wait_for_registry_session_count(Registry, 2),
-		http_socket::connection_streams(ClientConnection1, ClientInput1, ClientOutput1),
-		http_socket::connection_streams(ClientConnection2, ClientInput2, ClientOutput2),
+		connection_streams(ClientConnection1, ClientInput1, ClientOutput1),
+		connection_streams(ClientConnection2, ClientInput2, ClientOutput2),
 		http_websocket_client_session::message(text, hello, BroadcastMessage),
 		http_websocket_client_session::write_message(ClientOutput1, BroadcastMessage),
 		read_frame_with_timeout(2.0, ClientInput2, BroadcastFrame),
@@ -361,15 +371,15 @@
 		\+ http_websocket_frames::property(CloseFrame2, masking_key(_)).
 
 	test(http_websocket_server_service_serve_until_shutdown_6_02, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		http_websocket_service_registry::open(Registry),
 		Control = websocket_close_broadcast_control(Port),
 		threaded_once(server_session_until_shutdown(Listener, websocket_close_broadcast_service_handler, Registry, Control, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection1, ClientResponse1),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection2, ClientResponse2),
 		wait_for_registry_session_count(Registry, 2),
-		http_socket::connection_streams(ClientConnection1, ClientInput1, ClientOutput1),
-		http_socket::connection_streams(ClientConnection2, ClientInput2, ClientOutput2),
+		connection_streams(ClientConnection1, ClientInput1, ClientOutput1),
+		connection_streams(ClientConnection2, ClientInput2, ClientOutput2),
 		write_client_close(ClientOutput1, status(1000)),
 		read_frame_with_timeout(2.0, ClientInput1, CloseFrame1),
 		write_client_close(ClientOutput2, status(1000)),
@@ -393,13 +403,13 @@
 		\+ http_websocket_frames::property(CloseFrame2, masking_key(_)).
 
 	test(http_websocket_server_service_serve_until_shutdown_6_03, deterministic) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		open_listener('127.0.0.1', Port, Listener, []),
 		http_websocket_service_registry::open(Registry),
 		Control = websocket_close_flush_control(Port),
 		threaded_once(server_session_until_shutdown(Listener, websocket_close_then_broadcast_service_handler, Registry, Control, []), ServerTag),
 		websocket_client_exchange('127.0.0.1', Port, '/socket', [chat], 'dGhlIHNhbXBsZSBub25jZQ==', ClientConnection, ClientResponse),
 		wait_for_registry_session_count(Registry, 1),
-		http_socket::connection_streams(ClientConnection, ClientInput, ClientOutput),
+		connection_streams(ClientConnection, ClientInput, ClientOutput),
 		http_websocket_client_session::message(text, hello, Message),
 		http_websocket_client_session::write_message(ClientOutput, Message),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
@@ -464,11 +474,11 @@
 			],
 			Request
 		),
-		http_socket::open_connection(Host, Port, Connection, []),
+		open_connection(Host, Port, Connection, []),
 		catch(
-			http_socket::exchange(Connection, Request, Response),
+			exchange(Connection, Request, Response),
 			Error,
-			(	catch(http_socket::close_connection(Connection), _, true),
+			(	catch(close_connection(Connection), _, true),
 				throw(Error)
 			)
 		).
@@ -483,7 +493,7 @@
 		http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, SessionHandler, Response, State, ClientInfo, Options).
 
 	server_run_session(Listener, SessionHandler, Response, State, Options) :-
-		http_socket::serve_websocket_once(Listener, websocket_handshake_handler, Connection, Response, _ClientInfo),
+		serve_websocket_once(Listener, websocket_handshake_handler, Connection, Response, _ClientInfo),
 		http_websocket_server_service::run_session(Connection, SessionHandler, State, Options).
 
 	server_session_until_shutdown(Listener, SessionHandler, Registry, Control, Options) :-
@@ -554,10 +564,10 @@
 		flush_output(Output).
 
 	safe_close_connection(Connection) :-
-		catch(http_socket::close_connection(Connection), _, true).
+		catch(close_connection(Connection), _, true).
 
 	safe_close_listener(Listener) :-
-		catch(http_socket::close_listener(Listener), _, true).
+		catch(close_listener(Listener), _, true).
 
 	safe_close_registry(Registry) :-
 		catch(http_websocket_service_registry::close(Registry), _, true).

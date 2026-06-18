@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-18,
 		comment is 'Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.',
 		remarks is [
 			'Option precedence' - 'When the same session default, Digest default, or per-request option is given multiple times, the first occurrence is used.',
@@ -165,6 +165,10 @@
 			current_session_state/2
 		]).
 	:- endif.
+
+	:- uses(http_socket, [
+		exchange/4
+	]).
 
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
@@ -550,7 +554,7 @@
 		atom_codes('multipart/form-data', Codes).
 
 	exchange_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, Jar, Response) :-
-		http_socket::exchange(Host, Port, Request, InitialResponse),
+		exchange(Host, Port, Request, InitialResponse),
 		store_response_cookies(Jar, URL, InitialResponse),
 		maybe_retry_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, Jar, InitialResponse, Response).
 
@@ -558,7 +562,7 @@
 		digest_challenge_response(InitialResponse, Challenge),
 		!,
 		http_digest::authorize_request(Request, Challenge, Username, Password, AuthorizedRequest, DigestOptions),
-		http_socket::exchange(Host, Port, AuthorizedRequest, Response),
+		exchange(Host, Port, AuthorizedRequest, Response),
 		store_response_cookies(Jar, URL, Response).
 	maybe_retry_digest_request(_Host, _Port, _URL, _Username, _Password, _Request, _DigestOptions, _Jar, Response, Response).
 
