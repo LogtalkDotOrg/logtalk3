@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-06-20,
 		comment is 'Echo handler used by the "http_socket_process" library server-side tests.'
 	]).
 
@@ -139,6 +139,23 @@
 	test(http_socket_process_open_listener_4_04, error(domain_error(http_socket_process_listener_tls_options, [tls_certificate_file(none), tls_key_file(none)])), [condition(executable_available(ncat))]) :-
 		http_socket_process::open_listener('127.0.0.1', _Port, _Listener, [listener_transport(tls)]).
 
+	test(http_socket_process_open_listener_4_05, deterministic, [condition(executable_available(ncat))]) :-
+		Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
+		ResponseAtom = 'HTTP/1.1 200 OK\r\ncontent-length: 0\r\n\r\n',
+		setup_call_cleanup(
+			http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
+			setup_call_cleanup(
+				open_pending_raw_connection('127.0.0.1', Port, Request, Input, Output),
+				(	raw_server_once(Listener, ResponseAtom, ClientInfo),
+					http_client_core::read_response(Input, Response),
+					compound(ClientInfo),
+					http_core::status(Response, status(200, 'OK'))
+				),
+				close_stream_pair_silently(Input, Output)
+			),
+			http_socket_process::close_listener(Listener)
+		).
+
 	test(http_socket_process_serve_once_3_01, deterministic, [condition(executable_available(ncat))]) :-
 		Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
 		setup_call_cleanup(
@@ -203,18 +220,42 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-		test(http_socket_process_request_shutdown_1_01, deterministic, [condition(executable_available(ncat))]) :-
-		Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
-		http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
-		threaded_once(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, control, []), Tag),
-		client_exchange_ignore('127.0.0.1', Port, Request),
-		http_socket_process::request_shutdown(control),
-		threaded_exit(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, control, []), Tag).
+		test(http_socket_process_exchange_4_02, deterministic, [condition(executable_available(ncat))]) :-
+			Host = '127.0.0.1',
+			Request = request(get, origin('/ping'), http(1, 1), [host-host(Host)], empty, []),
+			http_socket_process::open_listener(Host, Port, Listener, []),
+			threaded_once(http_socket_process::exchange(Host, Port, Request, Response), Tag),
+			http_socket_process::serve_once(Listener, echo_http_socket_process_handler, ClientInfo),
+			threaded_exit(http_socket_process::exchange(Host, Port, Request, Response), Tag),
+			http_socket_process::close_listener(Listener),
+			compound(ClientInfo),
+			http_core::status(Response, status(200, 'OK')).
 
-		test(http_socket_process_serve_until_shutdown_5_01, deterministic, [condition(executable_available(ncat))]) :-
-		Control = control_ready,
-		http_socket_process::open_listener('127.0.0.1', _Port, Listener, []),
-		http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, Control, [], request_ready_shutdown(Control)).
+		test(http_socket_process_open_listener_4_06, deterministic, [condition(executable_available(ncat))]) :-
+			setup_call_cleanup(
+				http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
+				(	threaded_once(server_accept_and_close_once(Listener), Tag),
+					setup_call_cleanup(
+						http_socket_process::open_connection('127.0.0.1', Port, Connection, []),
+						threaded_exit(server_accept_and_close_once(Listener), Tag),
+						http_socket_process::close_connection(Connection)
+					)
+				),
+				http_socket_process::close_listener(Listener)
+			).
+
+		test(http_socket_process_request_shutdown_1_01, deterministic, [condition(executable_available(ncat))]) :-
+			Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
+			http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, control, []), Tag),
+			client_exchange_ignore('127.0.0.1', Port, Request),
+			http_socket_process::request_shutdown(control),
+			threaded_exit(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, control, []), Tag).
+
+			test(http_socket_process_serve_until_shutdown_5_01, deterministic, [condition(executable_available(ncat))]) :-
+			Control = control_ready,
+			http_socket_process::open_listener('127.0.0.1', _Port, Listener, []),
+			http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, Control, [], request_ready_shutdown(Control)).
 
 	:- endif.
 
@@ -236,6 +277,33 @@
 	open_pending_raw_connection(Host, Port, Request, Input, Output) :-
 		open_raw_connection(Host, Port, Input, Output),
 		http_client_core::write_request(Output, Request).
+
+	raw_server_once(Listener, ResponseAtom, ClientInfo) :-
+		socket::server_accept(Listener, Input, Output, ClientInfo),
+		( 	catch(
+				(	http_server::read_request(Input, _Request),
+					atom_codes(ResponseAtom, Bytes),
+					write_bytes(Bytes, Output),
+					flush_output(Output)
+				),
+				Error,
+				(	catch(close_stream_pair(Input, Output), _, true),
+					throw(Error)
+				)
+			) ->
+			close_stream_pair(Input, Output)
+		;	close_stream_pair(Input, Output),
+			fail
+		).
+
+	server_accept_and_close_once(Listener) :-
+		socket::server_accept(Listener, Input, Output, _ClientInfo),
+		close_stream_pair(Input, Output).
+
+	write_bytes([], _Output).
+	write_bytes([Byte| Bytes], Output) :-
+		put_byte(Output, Byte),
+		write_bytes(Bytes, Output).
 
 	close_stream_pair_silently(Input, Output) :-
 		catch(close_stream_pair(Input, Output), _, true).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-20,
 		comment is 'Echo handler used by the http_socket_process live smoke tests.'
 	]).
 
@@ -109,13 +109,19 @@
 	test(http_socket_process_exchange_4_live_01, deterministic) :-
 		live_endpoint(Host, Port, Path),
 		live_request(Host, Path, Request),
-		http_socket_process::exchange(Host, Port, Request, Response),
-		valid_live_client_response(Response).
+		http_socket_process::open_connection(Host, Port, Connection, [type(binary), connection_transport(tls)]),
+		setup_call_cleanup(
+			true,
+			(	http_socket_process::exchange(Connection, Request, Response),
+				valid_live_client_response(Response)
+			),
+			http_socket_process::close_connection(Connection)
+		).
 
 	test(http_socket_process_open_connection_4_live_01, deterministic) :-
 		live_endpoint(Host, Port, Path),
 		live_request(Host, Path, Request),
-		http_socket_process::open_connection(Host, Port, Connection, [type(binary)]),
+		http_socket_process::open_connection(Host, Port, Connection, [type(binary), connection_transport(tls)]),
 		setup_call_cleanup(
 			true,
 			(	http_socket_process::exchange(Connection, Request, Response),
@@ -127,7 +133,7 @@
 	test(http_socket_process_exchange_connection_3_live_01, deterministic) :-
 		live_endpoint(Host, Port, Path),
 		live_request(Host, Path, Request),
-		http_socket_process::open_connection(Host, Port, Connection, [type(binary)]),
+		http_socket_process::open_connection(Host, Port, Connection, [type(binary), connection_transport(tls)]),
 		setup_call_cleanup(
 			true,
 			(	http_socket_process::exchange_connection(Connection, [Request, Request], [Response1, Response2]),
@@ -140,7 +146,7 @@
 	test(http_socket_process_open_connection_pool_4_live_01, deterministic) :-
 		live_endpoint(Host, Port, Path),
 		live_request(Host, Path, Request),
-		http_socket_process::open_connection_pool(Host, Port, Pool, [min_size(1), max_size(1), connection_options([type(binary)])]),
+		http_socket_process::open_connection_pool(Host, Port, Pool, [min_size(1), max_size(1), connection_options([type(binary), connection_transport(tls)])]),
 		setup_call_cleanup(
 			true,
 			(	http_socket_process::connection_pool_stats(Pool, stats(1, 0, 1, 1, 1)),
@@ -226,7 +232,7 @@
 
 		local_tls_exchange(Host, Port, CertificateFile, Request, Response) :-
 			setup_call_cleanup(
-				http_socket_process::open_connection(Host, Port, Connection, [type(binary), server_name(none), openssl_arguments(['-CAfile', CertificateFile, '-verify_return_error'])]),
+				http_socket_process::open_connection(Host, Port, Connection, [type(binary), connection_transport(tls), server_name(none), openssl_arguments(['-CAfile', CertificateFile, '-verify_return_error'])]),
 				http_socket_process::exchange(Connection, Request, Response),
 				http_socket_process::close_connection(Connection)
 			).
@@ -248,7 +254,7 @@
 				],
 				Request
 			),
-			http_socket_process::open_connection(Host, Port, Connection, [type(binary), server_name(none), openssl_arguments(['-CAfile', CertificateFile, '-verify_return_error'])]),
+			http_socket_process::open_connection(Host, Port, Connection, [type(binary), connection_transport(tls), server_name(none), openssl_arguments(['-CAfile', CertificateFile, '-verify_return_error'])]),
 			catch(
 				http_socket_process::exchange(Connection, Request, Response),
 				Error,

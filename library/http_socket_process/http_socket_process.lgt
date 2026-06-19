@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-06-20,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -84,6 +84,14 @@
 	:- info(process_listener_state_/5, [
 		comment is 'Registered process state for open listeners.',
 		argnames is ['ListenerId', 'Executable', 'Process', 'RelayListener', 'Error']
+	]).
+
+	:- private(listener_handle_alias_/2).
+	:- dynamic(listener_handle_alias_/2).
+	:- mode(listener_handle_alias_(?term, ?positive_integer), zero_or_more).
+	:- info(listener_handle_alias_/2, [
+		comment is 'Maps public listener handles to registered process listener identifiers.',
+		argnames is ['Listener', 'ListenerId']
 	]).
 
 	:- private(listener_event_/2).
@@ -215,8 +223,9 @@
 		Port = BoundPort,
 		allocate_listener_id(ListenerId),
 		register_process_listener(ListenerId, ListenerExecutableKind, Process, relay(RelayListener, RelayPort), Error),
+		register_listener_handle_alias(RelayListener, ListenerId),
 		start_listener_error_drain(ListenerId, Error),
-		Listener = http_process_listener(Transport, NormalizedHost, BoundPort, ListenerId).
+		Listener = RelayListener.
 
 	close_listener(Listener) :-
 		listener_id(Listener, ListenerId),
@@ -226,11 +235,12 @@
 		finalize_process_listener_outcome(FinalizeOutcome, Listener).
 
 	open_connection(Host, Port, Connection, Options) :-
-		parse_connection_options(Options, Type, Executable, ServerNameOption, OpensslArguments),
+		context(Context),
+		parse_connection_options(Options, Type, Transport, Executable, ServerNameOption, OpensslArguments),
 		normalize_connection_endpoint(Host, Port, NormalizedHost),
-		build_openssl_arguments(Host, Port, ServerNameOption, OpensslArguments, Arguments),
+		build_connection_arguments(Transport, Host, Port, ServerNameOption, OpensslArguments, Arguments),
 		resolve_command_path(Executable, ExecutablePath),
-		open_process_connection(ExecutablePath, Arguments, Type, NormalizedHost, Port, Connection).
+		open_process_connection(Transport, ExecutablePath, Arguments, Type, NormalizedHost, Port, Context, Connection).
 
 	close_connection(http_websocket_connection(_ClientInfo, Input, Output)) :-
 		!,
@@ -388,7 +398,7 @@
 	serve_websocket_outcome(end_of_file, _Input, _Output, _Connection, _Response, _ClientInfo) :-
 		existence_error(http_socket_websocket_request, end_of_file).
 
-	open_process_connection(Executable, Arguments, Type, NormalizedHost, Port, Connection) :-
+	open_process_connection(Transport, Executable, Arguments, Type, NormalizedHost, Port, Context, Connection) :-
 		% the type/1 option is only effective for the SICStus Prolog, SWI-Prolog, and Trealla Prolog backends
 		process::create(Executable, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(Type)]),
 		Connection = http_connection(NormalizedHost, Port, Input, Output),
@@ -400,7 +410,40 @@
 				throw(SetupError)
 			)
 		),
+		catch(
+			wait_for_connection_startup(Transport, Error, Context),
+			StartupError,
+			(	cleanup_process_connection(Connection, Process, Error),
+				throw(StartupError)
+			)
+		),
 		register_process_connection(Connection, Process, Error).
+
+	wait_for_connection_startup(tcp, Error, Context) :-
+		wait_for_ncat_connection_startup(Error, Context).
+	wait_for_connection_startup(tls, _Error, _Context).
+
+	wait_for_ncat_connection_startup(Error, Context) :-
+		line_to_codes(Error, Codes),
+		codes_line_atom(Codes, Line),
+		(	Line == end_of_file ->
+			throw(error(resource_error(http_socket_process_connection), Context))
+		;	ncat_connection_ready_line(Line) ->
+			true
+		;	ncat_connection_ignorable_line(Line) ->
+			wait_for_ncat_connection_startup(Error, Context)
+		;	throw(error(socket_error(Line), Context))
+		).
+
+	ncat_connection_ready_line(Line) :-
+		atom(Line),
+		atom_length('Ncat: Connected to ', PrefixLength),
+		sub_atom(Line, 0, PrefixLength, _, 'Ncat: Connected to ').
+
+	ncat_connection_ignorable_line(Line) :-
+		atom(Line),
+		atom_length('Ncat: Version ', PrefixLength),
+		sub_atom(Line, 0, PrefixLength, _, 'Ncat: Version ').
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
@@ -522,9 +565,9 @@
 	listener_process_arguments(socat, _ResolvedExecutable, Host, Port, Backlog, Transport, CertificateFile, KeyFile, RelayPort, ['-d', '-d', ListenAddress, RelayAddress]) :-
 		listener_listen_address(socat, Transport, Host, Port, Backlog, CertificateFile, KeyFile, ListenAddress),
 		listener_relay_address(socat, RelayPort, RelayAddress).
-	listener_process_arguments(ncat, ResolvedExecutable, Host, Port, _Backlog, Transport, CertificateFile, KeyFile, RelayPort, Arguments) :-
+	listener_process_arguments(ncat, _ResolvedExecutable, Host, Port, _Backlog, Transport, CertificateFile, KeyFile, RelayPort, Arguments) :-
 		listener_listen_address(ncat, Transport, Host, Port, _Backlog, CertificateFile, KeyFile, ListenArguments),
-		listener_relay_address(ncat, ResolvedExecutable, RelayPort, RelayCommand),
+		listener_relay_address(ncat, RelayPort, RelayCommand),
 		append(ListenArguments, ['--sh-exec', RelayCommand], Arguments).
 
 	:- if(current_logtalk_flag(threads, supported)).
@@ -565,9 +608,13 @@
 	listener_relay_address(socat, RelayPort, RelayAddress) :-
 		local_loopback_host(LoopbackHost),
 		atomic_list_concat(['TCP:', LoopbackHost, ':', RelayPort], RelayAddress).
-	listener_relay_address(ncat, _, RelayPort, RelayCommand) :-
+	listener_relay_address(ncat, RelayPort, RelayCommand) :-
 		local_loopback_host(LoopbackHost),
-		atomic_list_concat([ncat, LoopbackHost, RelayPort], ' ', RelayCommand).
+		listener_bind_family_option(LoopbackHost, FamilyOption),
+		atomic_list_concat([ncat, '-n', FamilyOption, LoopbackHost, RelayPort], ' ', RelayCommand).
+
+	client_connect_arguments(Host, Port, ['-v', '-n', FamilyOption, Host, Port]) :-
+		listener_bind_family_option(Host, FamilyOption).
 
 	startup_listener_response(ListenerExecutableKind, Error, Context, BoundPort) :-
 		line_to_codes(Error, Codes),
@@ -740,6 +787,9 @@
 
 	listener_id(http_process_listener(_Transport, _Host, _Port, ListenerId), ListenerId) :-
 		!.
+	listener_id(Listener, ListenerId) :-
+		listener_handle_alias_(Listener, ListenerId),
+		!.
 	listener_id(Listener, _ListenerId) :-
 		(	var(Listener) ->
 			instantiation_error
@@ -787,6 +837,9 @@
 
 	register_process_listener(ListenerId, ListenerExecutableKind, Process, RelayListener, Error) :-
 		assertz(process_listener_state_(ListenerId, ListenerExecutableKind, Process, RelayListener, Error)).
+
+	register_listener_handle_alias(Listener, ListenerId) :-
+		assertz(listener_handle_alias_(Listener, ListenerId)).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -850,6 +903,7 @@
 
 	take_process_listener(ListenerId, listener(ListenerExecutableKind, Process, RelayListener, Error)) :-
 		retract(process_listener_state_(ListenerId, ListenerExecutableKind, Process, relay(RelayListener, _RelayPort), Error)),
+		retractall(listener_handle_alias_(_Listener, ListenerId)),
 		retractall(process_listener_shutdown_requested_(ListenerId)),
 		retractall(listener_event_(ListenerId, _)),
 		!.
@@ -878,14 +932,33 @@
 		;	finalize_process_listener_outcome(Outcome, Listener)
 		).
 
-	parse_connection_options(Options, Type, Executable, ServerName, OpensslArguments) :-
+	parse_connection_options(Options, Type, Transport, Executable, ServerName, OpensslArguments) :-
 		^^check_options(Options),
 		check_connection_options(Options),
 		^^merge_options(Options, MergedOptions),
 		^^option(type(Type), MergedOptions),
-		^^option(openssl_executable(Executable), MergedOptions),
+		resolve_connection_transport(Options, Transport),
+		resolve_connection_executable(Transport, Executable, Options, MergedOptions),
 		^^option(server_name(ServerName), MergedOptions),
 		^^option(openssl_arguments(OpensslArguments), MergedOptions).
+
+	resolve_connection_transport(Options, Transport) :-
+		(	member(connection_transport(Transport0), Options) ->
+			Transport = Transport0
+		;	Transport = tcp
+		).
+
+	resolve_connection_executable(tcp, ncat, _Options, _MergedOptions).
+	resolve_connection_executable(tls, Executable, Options, MergedOptions) :-
+		(	member(openssl_executable(Executable0), Options) ->
+			Executable = Executable0
+		;	^^option(openssl_executable(Executable), MergedOptions)
+		).
+
+	build_connection_arguments(tcp, Host, Port, _ServerNameOption, _OpensslArguments, Arguments) :-
+		client_connect_arguments(Host, Port, Arguments).
+	build_connection_arguments(tls, Host, Port, ServerNameOption, OpensslArguments, Arguments) :-
+		build_openssl_arguments(Host, Port, ServerNameOption, OpensslArguments, Arguments).
 
 	build_openssl_arguments(Host, Port, ServerNameOption, OpensslArguments, Arguments) :-
 		resolve_server_name(ServerNameOption, Host, ServerName),
@@ -1018,6 +1091,8 @@
 
 	valid_option(type(Type)) :-
 		valid_stream_type_option(Type).
+	valid_option(connection_transport(Transport)) :-
+		once((Transport == tcp; Transport == tls)).
 	valid_option(backlog(Backlog)) :-
 		integer(Backlog),
 		Backlog > 0.
@@ -1052,6 +1127,7 @@
 		valid_connection_options(ConnectionOptions).
 
 	default_option(type(binary)).
+	default_option(connection_transport(tcp)).
 	default_option(openssl_executable(openssl)).
 	default_option(server_name(default)).
 	default_option(backlog(5)).
@@ -1084,6 +1160,7 @@
 		valid_connection_compatibility_option(Option).
 
 	connection_compatibility_option(type(_)).
+	connection_compatibility_option(connection_transport(_)).
 	connection_compatibility_option(openssl_executable(_)).
 	connection_compatibility_option(server_name(_)).
 	connection_compatibility_option(openssl_arguments(_)).
@@ -1097,6 +1174,8 @@
 
 	valid_connection_compatibility_option(type(Type)) :-
 		valid_stream_type_option(Type).
+	valid_connection_compatibility_option(connection_transport(Transport)) :-
+		once((Transport == tcp; Transport == tls)).
 	valid_connection_compatibility_option(Option) :-
 		valid_process_connection_option(Option).
 
