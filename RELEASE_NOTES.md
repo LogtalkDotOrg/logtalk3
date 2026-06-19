@@ -63,6 +63,9 @@ library.
 
 * ADDED: New `os::resolve_command_path/2` library predicate.
 
+* ADDED: New `process::create/3` library predicate `type/1` option to set the
+process input and output streams type to `binary` or `text`.
+
 * ADDED: New `reader::line_to_bytes/2-3` library predicates.
 
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,

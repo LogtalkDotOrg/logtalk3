@@ -14,8 +14,8 @@ Portable process handling predicates.
 |    ``logtalk_load(process(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-02-04
+| **Version:** 2:0:0
+| **Date:** 2026-06-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,7 @@ Portable process handling predicates.
 | **Remarks:**
 
    - Supported backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+   - Option ``type/1`` limitation: This option is ignored on ECLiPSe, GNU Prolog, and XVM.
 
 | **Inherited public predicates:**
 |    (none)
@@ -45,7 +46,7 @@ Public predicates
 ``create/3``
 ^^^^^^^^^^^^
 
-Creates a new process from the given executable and list of arguments. Supported options are ``process(Pid)``, ``stdin(Stream)``, ``stdout(Stream)``, and ``stderr(Stream)``.
+Creates a new process from the given executable and list of arguments. Supported options are ``process(Pid)``, ``stdin(Stream)``, ``stdout(Stream)``, ``stderr(Stream)``, and ``type(Type)``.
 
 | **Compilation flags:**
 |    ``static``

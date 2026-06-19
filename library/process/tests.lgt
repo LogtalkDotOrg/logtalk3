@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-06-19,
 		comment is 'Unit tests for the "process" library.'
 	]).
 
@@ -44,6 +44,12 @@
 
 		test(process_create_3_02, true, [cleanup(catch(close(Out), _, true))]) :-
 			create('cmd.exe', ['/c', 'echo', 'hello'], [stdout(Out)]).
+
+		test(process_create_3_03, true, [cleanup(catch(close(Out), _, true))]) :-
+			create('cmd.exe', ['/c', 'echo', 'hello'], [stdout(Out), type(text)]).
+
+		test(process_create_3_04, true, [cleanup(catch(close(Out), _, true))]) :-
+			create('cmd.exe', ['/c', 'echo', '42'], [stdout(Out), type(binary)]).
 
 		test(process_wait_2_01, true((Status == exit(0) ; Status == 0))) :-
 			create('cmd.exe', ['/c', 'echo', 'hello'], [process(Pid)]),
@@ -70,6 +76,12 @@
 
 		test(process_create_3_02, true, [cleanup(catch(close(Out), _, true))]) :-
 			create('/bin/echo', ['hello'], [stdout(Out)]).
+
+		test(process_create_3_03, true, [cleanup(catch(close(Out), _, true))]) :-
+			create('/bin/echo', ['hello'], [stdout(Out), type(text)]).
+
+		test(process_create_3_04, true, [cleanup(catch(close(Out), _, true))]) :-
+			create('/bin/echo', ['42'], [stdout(Out), type(binary)]).
 
 		test(process_wait_2_01, true((Status == exit(0) ; Status == 0))) :-
 			create('/bin/echo', ['hello'], [process(Pid)]),

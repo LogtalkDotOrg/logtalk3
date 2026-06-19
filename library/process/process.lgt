@@ -22,12 +22,13 @@
 :- object(process).
 
 	:- info([
-		version is 1:0:1,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-04,
+		date is 2026-06-19,
 		comment is 'Portable process handling predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.'
+			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
+			'Option ``type/1`` limitation' - 'This option is ignored on ECLiPSe, GNU Prolog, and XVM.'
 		],
 		see_also is [os]
 	]).
@@ -35,7 +36,7 @@
 	:- public(create/3).
 	:- mode(create(+atom, +list(atom), +list(compound)), zero_or_one).
 	:- info(create/3, [
-		comment is 'Creates a new process from the given executable and list of arguments. Supported options are ``process(Pid)``, ``stdin(Stream)``, ``stdout(Stream)``, and ``stderr(Stream)``.',
+		comment is 'Creates a new process from the given executable and list of arguments. Supported options are ``process(Pid)``, ``stdin(Stream)``, ``stdout(Stream)``, ``stderr(Stream)``, and ``type(Type)``.',
 		argnames is ['Executable', 'Arguments', 'Options']
 	]).
 
@@ -62,22 +63,18 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
-		:- uses(user, [
-			member/2
-		]).
-
 		create(Executable, Arguments, Options) :-
 			build_streams_list(Options, Streams),
-			(	member(process(Pid), Options) ->
+			(	{member(process(Pid), Options)} ->
 				{exec([Executable| Arguments], Streams, Pid)}
 			;	{exec([Executable| Arguments], Streams, _)}
 			),
 			bind_streams(Options, Streams).
 
 		build_streams_list(Options, [Stdin, Stdout, Stderr]) :-
-			(member(stdin(_), Options) -> true ; Stdin = null),
-			(member(stdout(_), Options) -> true ; Stdout = null),
-			(member(stderr(_), Options) -> true ; Stderr = null).
+			({member(stdin(_), Options)} -> true ; Stdin = null),
+			({member(stdout(_), Options)} -> true ; Stdout = null),
+			({member(stderr(_), Options)} -> true ; Stderr = null).
 
 		bind_streams([], _).
 		bind_streams([Option| Options], [Stdin, Stdout, Stderr]) :-
@@ -168,18 +165,30 @@
 				Path = Executable
 			;	Path = path(Executable)
 			),
-			translate_options(Options, NativeOptions),
+			translate_options(Options, Options, NativeOptions),
+			writeq(NativeOptions), nl,
 			{process:process_create(Path, Arguments, NativeOptions)}.
 
-		translate_options([], []).
-		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
-			translate_option(Option, NativeOption),
-			translate_options(Options, NativeOptions).
+		translate_options([], _, []).
+		translate_options([Option| Options], AllOptions, NativeOptions) :-
+			(	translate_option(Option, AllOptions, NativeOption) ->
+				NativeOptions = [NativeOption| NativeOptionsTail]
+			;	NativeOptions = NativeOptionsTail
+			),
+			translate_options(Options, AllOptions, NativeOptionsTail).
 
-		translate_option(process(Pid), process(Pid)).
-		translate_option(stdin(Stream), stdin(pipe(Stream))).
-		translate_option(stdout(Stream), stdout(pipe(Stream))).
-		translate_option(stderr(Stream), stderr(pipe(Stream))).
+		translate_option(process(Pid), _, process(Pid)).
+		translate_option(stdin(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdin(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdin(pipe(Stream))
+			).
+		translate_option(stdout(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdout(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdout(pipe(Stream))
+			).
+		translate_option(stderr(Stream), _, stderr(pipe(Stream))).
 
 		wait(Process, Status) :-
 			{process:process_wait(Process, Status)}.
@@ -203,18 +212,29 @@
 				Path = Executable
 			;	Path = path(Executable)
 			),
-			translate_options(Options, NativeOptions),
+			translate_options(Options, Options, NativeOptions),
 			{process:process_create(Path, Arguments, NativeOptions)}.
 
-		translate_options([], []).
-		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
-			translate_option(Option, NativeOption),
-			translate_options(Options, NativeOptions).
+		translate_options([], _, []).
+		translate_options([Option| Options], AllOptions, NativeOptions) :-
+			(	translate_option(Option, AllOptions, NativeOption) ->
+				NativeOptions = [NativeOption| NativeOptionsTail]
+			;	NativeOptions = NativeOptionsTail
+			),
+			translate_options(Options, AllOptions, NativeOptionsTail).
 
-		translate_option(process(Pid), process(Pid)).
-		translate_option(stdin(Stream), stdin(pipe(Stream))).
-		translate_option(stdout(Stream), stdout(pipe(Stream))).
-		translate_option(stderr(Stream), stderr(pipe(Stream))).
+		translate_option(process(Pid), _, process(Pid)).
+		translate_option(stdin(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdin(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdin(pipe(Stream))
+			).
+		translate_option(stdout(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdout(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdout(pipe(Stream))
+			).
+		translate_option(stderr(Stream), _, stderr(pipe(Stream))).
 
 		wait(Pid, Status) :-
 			{process:process_wait(Pid, Status)}.
@@ -232,18 +252,29 @@
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
 		create(Executable, Arguments, Options) :-
-			translate_options(Options, NativeOptions),
+			translate_options(Options, Options, NativeOptions),
 			{process_create(Executable, Arguments, NativeOptions)}.
 
-		translate_options([], []).
-		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
-			translate_option(Option, NativeOption),
-			translate_options(Options, NativeOptions).
+		translate_options([], _, []).
+		translate_options([Option| Options], AllOptions, NativeOptions) :-
+			(	translate_option(Option, AllOptions, NativeOption) ->
+				NativeOptions = [NativeOption| NativeOptionsTail]
+			;	NativeOptions = NativeOptionsTail
+			),
+			translate_options(Options, AllOptions, NativeOptionsTail).
 
-		translate_option(process(Pid), process(Pid)).
-		translate_option(stdin(Stream), stdin(pipe(Stream))).
-		translate_option(stdout(Stream), stdout(pipe(Stream))).
-		translate_option(stderr(Stream), stderr(pipe(Stream))).
+		translate_option(process(Pid), _, process(Pid)).
+		translate_option(stdin(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdin(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdin(pipe(Stream))
+			).
+		translate_option(stdout(Stream), Options, NativeOption) :-
+			(	{member(type(Type), Options)} ->
+				NativeOption = stdout(pipe(Stream, [type(Type)]))
+			;	NativeOption = stdout(pipe(Stream))
+			).
+		translate_option(stderr(Stream), _, stderr(pipe(Stream))).
 
 		% Trealla's process_wait/2 takes options as second argument (input),
 		% not a status output. process_wait/1 just waits for the process.
@@ -270,9 +301,12 @@
 			{process_create(Executable, Arguments, NativeOptions)}.
 
 		translate_options([], []).
-		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
-			translate_option(Option, NativeOption),
-			translate_options(Options, NativeOptions).
+		translate_options([Option| Options], NativeOptions) :-
+			(	translate_option(Option, NativeOption) ->
+				NativeOptions = [NativeOption| NativeOptionsTail]
+			;	NativeOptions = NativeOptionsTail
+			),
+			translate_options(Options, NativeOptionsTail).
 
 		translate_option(process(Pid), process(Pid)).
 		translate_option(stdin(Stream), stdin(pipe(Stream))).
@@ -299,9 +333,12 @@
 			{process:process_call(Executable, Arguments, NativeOptions)}.
 
 		translate_options([], []).
-		translate_options([Option| Options], [NativeOption| NativeOptions]) :-
-			translate_option(Option, NativeOption),
-			translate_options(Options, NativeOptions).
+		translate_options([Option| Options], NativeOptions) :-
+			(	translate_option(Option, NativeOption) ->
+				NativeOptions = [NativeOption| NativeOptionsTail]
+			;	NativeOptions = NativeOptionsTail
+			),
+			translate_options(Options, NativeOptionsTail).
 
 		translate_option(process(Pid), process(Pid)).
 		translate_option(stdin(Stream), stdin(pipe(Stream))).

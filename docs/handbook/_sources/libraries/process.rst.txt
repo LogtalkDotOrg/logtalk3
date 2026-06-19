@@ -53,10 +53,15 @@ The ``create/3`` predicate supports the following options:
 - ``stdin(Stream)`` - Binds Stream to the process standard input
 - ``stdout(Stream)`` - Binds Stream to the process standard output
 - ``stderr(Stream)`` - Binds Stream to the process standard error
+- ``type(Type)`` - Sets the type (``binary`` or ``text``) of the
+  ``stdin/1`` and ``stdout/1`` streams
 
-Note: Process identifiers (PIDs) should be treated as opaque ground
-terms. Their internal representation varies between backend Prolog
-systems.
+Process identifiers (PIDs) should be treated as opaque ground terms.
+Their internal representation varies between backend Prolog systems.
+
+The ``type/1`` option is ignored on ECLiPSe, GNU Prolog, and XVM as
+these systems don't provide the necessary support to set the streams
+type at process creation.
 
 Example:
 

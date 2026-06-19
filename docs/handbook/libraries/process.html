@@ -400,10 +400,14 @@ ground term)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stdin(Stream)</span></code> - Binds Stream to the process standard input</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stdout(Stream)</span></code> - Binds Stream to the process standard output</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stderr(Stream)</span></code> - Binds Stream to the process standard error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type(Type)</span></code> - Sets the type (<code class="docutils literal notranslate"><span class="pre">binary</span></code> or <code class="docutils literal notranslate"><span class="pre">text</span></code>) of the
+<code class="docutils literal notranslate"><span class="pre">stdin/1</span></code> and <code class="docutils literal notranslate"><span class="pre">stdout/1</span></code> streams</p></li>
 </ul>
-<p>Note: Process identifiers (PIDs) should be treated as opaque ground
-terms. Their internal representation varies between backend Prolog
-systems.</p>
+<p>Process identifiers (PIDs) should be treated as opaque ground terms.
+Their internal representation varies between backend Prolog systems.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">type/1</span></code> option is ignored on ECLiPSe, GNU Prolog, and XVM as
+these systems don’t provide the necessary support to set the streams
+type at process creation.</p>
 <p>Example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> process<span class="o">::</span>create(<span class="s">&#39;/bin/echo&#39;</span>, [<span class="s">&#39;hello.&#39;</span>], [stdout(<span class="nv">Out</span>), process(<span class="nv">PID</span>)]),
      <span class="k">read_term</span>(<span class="nv">Out</span>, <span class="nv">Term</span>, []),
