@@ -229,6 +229,7 @@
 		http_parameters(loader),
 		http_server(loader),
 		http_socket(loader),
+		http_socket_process(loader),
 		http_websocket_handshake(loader),
 		http_websocket_frames(loader),
 		http_websocket_messages(loader),

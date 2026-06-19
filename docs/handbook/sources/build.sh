@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 11, 2026
+##   Last updated on June 19, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -183,6 +183,7 @@ sed '1,19d' ../../../library/http_router/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/http_server/NOTES.md | pandoc -f gfm -t rst -o libraries/http_server.rst
 sed '1,19d' ../../../library/http_session/NOTES.md | pandoc -f gfm -t rst -o libraries/http_session.rst
 sed '1,19d' ../../../library/http_socket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket.rst
+sed '1,19d' ../../../library/http_socket_process/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket_process.rst
 sed '1,19d' ../../../library/http_static_files/NOTES.md | pandoc -f gfm -t rst -o libraries/http_static_files.rst
 sed '1,19d' ../../../library/http_websocket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket.rst
 sed '1,19d' ../../../library/http_websocket_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_frames.rst

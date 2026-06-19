@@ -132,6 +132,7 @@ directory in the ``NOTES.md`` file.
    http_server
    http_session
    http_socket
+   http_socket_process
    http_static_files
    http_websocket
    http_websocket_frames

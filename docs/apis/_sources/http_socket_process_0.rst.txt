@@ -1,0 +1,315 @@
+.. index:: single: http_socket_process
+.. _http_socket_process/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_socket_process``
+=======================
+
+Process-backed HTTP transport predicates using the process library and helper processes.
+
+| **Availability:** 
+|    ``logtalk_load(http_socket_process(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls, threaded``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_socket_protocol <http_socket_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`http_client_core <http_client_core/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_server <http_server/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`process <process/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`socket <socket/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_listener_shutdown/1`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_until_shutdown/5`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: process_connection_state_/3
+.. _http_socket_process/0::process_connection_state_/3:
+
+``process_connection_state_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Registered helper-process state for open reusable client connections.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``process_connection_state_(Connection,Process,Error)``
+| **Mode and number of proofs:**
+|    ``process_connection_state_(?compound,?ground,?stream)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: connection_pool_seed_/1
+.. _http_socket_process/0::connection_pool_seed_/1:
+
+``connection_pool_seed_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Last allocated connection pool identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_seed_(PoolId)``
+| **Mode and number of proofs:**
+|    ``connection_pool_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: connection_pool_config_/6
+.. _http_socket_process/0::connection_pool_config_/6:
+
+``connection_pool_config_/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Stored connection pool configuration indexed by pool identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_config_(PoolId,Host,Port,MinSize,MaxSize,ConnectionOptions)``
+| **Mode and number of proofs:**
+|    ``connection_pool_config_(?positive_integer,?atom,?integer,?non_negative_integer,?positive_integer,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: connection_pool_available_/2
+.. _http_socket_process/0::connection_pool_available_/2:
+
+``connection_pool_available_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reusable idle client connections indexed by pool identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_available_(PoolId,Connection)``
+| **Mode and number of proofs:**
+|    ``connection_pool_available_(?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: connection_pool_in_use_/2
+.. _http_socket_process/0::connection_pool_in_use_/2:
+
+``connection_pool_in_use_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checked-out client connections indexed by pool identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``connection_pool_in_use_(PoolId,Connection)``
+| **Mode and number of proofs:**
+|    ``connection_pool_in_use_(?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: listener_seed_/1
+.. _http_socket_process/0::listener_seed_/1:
+
+``listener_seed_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Last allocated listener identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_seed_(ListenerId)``
+| **Mode and number of proofs:**
+|    ``listener_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: process_listener_state_/5
+.. _http_socket_process/0::process_listener_state_/5:
+
+``process_listener_state_/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Registered process state for open listeners.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``process_listener_state_(ListenerId,Executable,Process,RelayListener,Error)``
+| **Mode and number of proofs:**
+|    ``process_listener_state_(?positive_integer,?atom,?ground,?compound,?stream)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: listener_event_/2
+.. _http_socket_process/0::listener_event_/2:
+
+``listener_event_/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Queued listener events parsed from the listener helper diagnostics stream.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_event_(ListenerId,Event)``
+| **Mode and number of proofs:**
+|    ``listener_event_(?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: process_listener_shutdown_requested_/1
+.. _http_socket_process/0::process_listener_shutdown_requested_/1:
+
+``process_listener_shutdown_requested_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Flag recording that a listener shutdown request was already sent.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``process_listener_shutdown_requested_(ListenerId)``
+| **Mode and number of proofs:**
+|    ``process_listener_shutdown_requested_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: listener_shutdown_seed_/1
+.. _http_socket_process/0::listener_shutdown_seed_/1:
+
+``listener_shutdown_seed_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Last allocated shutdown-run identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_shutdown_seed_(RunId)``
+| **Mode and number of proofs:**
+|    ``listener_shutdown_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: listener_shutdown_control_/3
+.. _http_socket_process/0::listener_shutdown_control_/3:
+
+``listener_shutdown_control_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maps public shutdown control terms to listeners and active serving runs.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_shutdown_control_(Control,Listener,RunId)``
+| **Mode and number of proofs:**
+|    ``listener_shutdown_control_(?nonvar,?compound,?positive_integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: listener_shutdown_requested_/2
+.. _http_socket_process/0::listener_shutdown_requested_/2:
+
+``listener_shutdown_requested_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Recorded shutdown requests for serve_until_shutdown/4 runs.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_shutdown_requested_(Control,RunId)``
+| **Mode and number of proofs:**
+|    ``listener_shutdown_requested_(?nonvar,?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: listener_active_worker_/3
+.. _http_socket_process/0::listener_active_worker_/3:
+
+``listener_active_worker_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Tracked active connection workers for a serve_until_shutdown/4 run.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_active_worker_(Control,RunId,Worker)``
+| **Mode and number of proofs:**
+|    ``listener_active_worker_(?nonvar,?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

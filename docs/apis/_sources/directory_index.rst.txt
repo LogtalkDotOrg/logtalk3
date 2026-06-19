@@ -1346,6 +1346,16 @@ To load an entity, always load the library that includes it using the goal ``log
    http_socket <http_socket_0>
    http_socket_protocol <http_socket_protocol_0>
 
+``library/http_socket_process/``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_socket_process <http_socket_process_0>
+
 ``library/http_static_files/``
 ------------------------------
 
