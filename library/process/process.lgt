@@ -166,7 +166,6 @@
 			;	Path = path(Executable)
 			),
 			translate_options(Options, Options, NativeOptions),
-			writeq(NativeOptions), nl,
 			{process:process_create(Path, Arguments, NativeOptions)}.
 
 		translate_options([], _, []).
