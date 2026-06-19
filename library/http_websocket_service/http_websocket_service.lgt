@@ -68,7 +68,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-06-19,
 		comment is 'Callback-driven WebSocket session loops over upgraded http_socket connections, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
@@ -705,7 +705,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-06-19,
 		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.'
 	]).
 
@@ -729,13 +729,21 @@
 		],
 		remarks is [
 			'Repeated options' - 'When the same handshake or session option is given multiple times, the first occurrence is used.',
-			'Handshake options' - 'The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `http_client::open_websocket/4`.',
+			'Handshake options' - 'The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`.',
 			'Session option ``auto_pong(on|off)``' - 'Controls automatic pong replies during the session loop.',
 			'Session option ``initial_messages(Messages)``' - 'Writes the given list of normalized outbound messages before entering the session loop.',
 			'Session option ``keepalive_interval(Seconds)``' - 'Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.',
 			'Session option ``idle_timeout(Seconds)``' - 'Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.',
 			'Session option ``max_payload_length(Bytes)``' - 'Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.'
 		]
+	]).
+
+	:- uses(http_client, [
+		open_websocket/4
+	]).
+
+	:- uses(http_socket, [
+		close_connection/1, connection_streams/3
 	]).
 
 	:- uses(list, [
@@ -751,13 +759,13 @@
 
 	open(URL, Handler, Response, State, Options) :-
 		parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions),
-		http_client::open_websocket(URL, Connection, Response, WebSocketOptions),
+		open_websocket(URL, Connection, Response, WebSocketOptions),
 		setup_call_cleanup(
 			^^initial_state(State0),
 			(	write_initial_messages(Connection, State0, State1, InitialMessages),
 				^^run_session_connection(Connection, handler_replies(Handler), State1, State, SessionOptions)
 			),
-			catch(http_socket::close_connection(Connection), _, true)
+			catch(close_connection(Connection), _, true)
 		).
 
 	parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions) :-
@@ -858,7 +866,7 @@
 	write_initial_messages(_Connection, State, State, []) :-
 		!.
 	write_initial_messages(Connection, State0, State, Messages) :-
-		http_socket::connection_streams(Connection, _Input, Output),
+		connection_streams(Connection, _Input, Output),
 		write_initial_message_list(Output, State0, State, Messages).
 
 	write_initial_message_list(_Output, State, State, []) :-
@@ -876,7 +884,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-06-19,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.'
 	]).
 
@@ -995,11 +1003,15 @@
 		:- meta_predicate(collect_finished_worker(*, 0, *, *, *, *)).
 	:- endif.
 
+	:- uses(http_socket, [
+		close_connection/1, close_listener/1, request_listener_shutdown/1, serve_websocket_once/5
+	]).
+
 	serve_once(Listener, HandshakeHandler, SessionHandler, Response, State, ClientInfo) :-
 		serve_once(Listener, HandshakeHandler, SessionHandler, Response, State, ClientInfo, []).
 
 	serve_once(Listener, HandshakeHandler, SessionHandler, Response, State, ClientInfo, Options) :-
-		http_socket::serve_websocket_once(Listener, HandshakeHandler, Connection, Response, ClientInfo),
+		serve_websocket_once(Listener, HandshakeHandler, Connection, Response, ClientInfo),
 		^^run_session(Connection, SessionHandler, State, Options).
 
 	:- if(current_logtalk_flag(threads, supported)).
@@ -1020,7 +1032,7 @@
 		setup_call_cleanup(
 			register_shutdown_control(Control, Listener, RunId),
 			serve_until_shutdown_loop(Listener, HandshakeHandler, SessionHandler, Registry, Control, RunId, Options),
-			(	catch(http_socket::close_listener(Listener), _, true),
+			(	catch(close_listener(Listener), _, true),
 				cleanup_shutdown_control(Control, RunId)
 			)
 		).
@@ -1064,7 +1076,7 @@
 		;	assertz(shutdown_requested_(Control, RunId))
 		),
 		(	shutdown_control_(Control, Listener, RunId) ->
-			catch(http_socket::request_listener_shutdown(Listener), _, true)
+			catch(request_listener_shutdown(Listener), _, true)
 		;	true
 		).
 
@@ -1086,7 +1098,7 @@
 		).
 
 	accept_session_connection(Listener, HandshakeHandler, Control, RunId, Outcome) :-
-		catch(http_socket::serve_websocket_once(Listener, HandshakeHandler, Connection, _Response, _ClientInfo), Error, true),
+		catch(serve_websocket_once(Listener, HandshakeHandler, Connection, _Response, _ClientInfo), Error, true),
 		(	var(Error) ->
 			Outcome = accepted(Connection)
 		;	shutdown_requested(Control, RunId) ->
@@ -1106,7 +1118,7 @@
 			threaded_once(Goal, Tag),
 			Error,
 			(	force_shutdown_control(Control, RunId),
-				catch(http_socket::close_connection(Connection), _, true),
+				catch(close_connection(Connection), _, true),
 				throw(Error)
 			)
 		),
@@ -1134,7 +1146,7 @@
 				^^run_session_connection(Connection, handler_registry(Registry, Session, SessionHandler), State0, _State, Options),
 				http_websocket_service_registry::unregister(Registry, Session)
 			),
-			catch(http_socket::close_connection(Connection), _, true)
+			catch(close_connection(Connection), _, true)
 		).
 
 	register_active_worker(Control, RunId, Worker) :-
