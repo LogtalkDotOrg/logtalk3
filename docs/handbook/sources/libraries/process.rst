@@ -46,6 +46,11 @@ process handling:
 - ``kill(Process)`` - Terminates a process using the default signal
   (SIGKILL)
 
+Exit status depends on the backend. For a successfully terminated
+process, ``Status`` is either ``0`` or ``exit(0)``. For unsuccessful
+processes, ``Status`` cannot be sensibly abstracted. Consult the backens
+documentation for the details.
+
 The ``create/3`` predicate supports the following options:
 
 - ``process(Pid)`` - Unifies Pid with the process identifier (an opaque

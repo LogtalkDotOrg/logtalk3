@@ -41,9 +41,9 @@
 	]).
 
 	:- public(wait/2).
-	:- mode(wait(+process_or_pid, -integer), zero_or_one).
+	:- mode(wait(+process_or_pid, -integer_or_compound), one).
 	:- info(wait/2, [
-		comment is 'Waits for a process to terminate and retrieves its exit status.',
+		comment is 'Waits for a process to terminate and retrieves its exit status. The value of ``Status`` depends on the backend. For a successfully terminated process, ``Status`` is either ``0`` or ``exit(0)``.',
 		argnames is ['Process', 'Status']
 	]).
 

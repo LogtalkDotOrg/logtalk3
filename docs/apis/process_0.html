@@ -462,7 +462,7 @@
 </section>
 <section id="wait-2">
 <span id="process-0-wait-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">wait/2</span></code></a><a class="headerlink" href="#wait-2" title="Link to this heading"></a></h3>
-<p>Waits for a process to terminate and retrieves its exit status.</p>
+<p>Waits for a process to terminate and retrieves its exit status. The value of <code class="docutils literal notranslate"><span class="pre">Status</span></code> depends on the backend. For a successfully terminated process, <code class="docutils literal notranslate"><span class="pre">Status</span></code> is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">exit(0)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -476,7 +476,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(+process_or_pid,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">wait(+process_or_pid,-integer_or_compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

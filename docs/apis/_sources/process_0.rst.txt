@@ -65,7 +65,7 @@ Creates a new process from the given executable and list of arguments. Supported
 ``wait/2``
 ^^^^^^^^^^
 
-Waits for a process to terminate and retrieves its exit status.
+Waits for a process to terminate and retrieves its exit status. The value of ``Status`` depends on the backend. For a successfully terminated process, ``Status`` is either ``0`` or ``exit(0)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -73,7 +73,7 @@ Waits for a process to terminate and retrieves its exit status.
 | **Template:**
 |    ``wait(Process,Status)``
 | **Mode and number of proofs:**
-|    ``wait(+process_or_pid,-integer)`` - ``zero_or_one``
+|    ``wait(+process_or_pid,-integer_or_compound)`` - ``one``
 
 
 ------------

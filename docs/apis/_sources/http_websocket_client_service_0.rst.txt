@@ -15,7 +15,7 @@ Client-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-16
+| **Date:** 2026-06-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -88,7 +88,7 @@ Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, open
 | **Remarks:**
 
     - Repeated options: When the same handshake or session option is given multiple times, the first occurrence is used.
-    - Handshake options: The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `http_client::open_websocket/4`.
+    - Handshake options: The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`.
     - Session option ``auto_pong(on|off)``: Controls automatic pong replies during the session loop.
     - Session option ``initial_messages(Messages)``: Writes the given list of normalized outbound messages before entering the session loop.
     - Session option ``keepalive_interval(Seconds)``: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.

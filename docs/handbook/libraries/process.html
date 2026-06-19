@@ -393,6 +393,10 @@ signal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kill(Process)</span></code> - Terminates a process using the default signal
 (SIGKILL)</p></li>
 </ul>
+<p>Exit status depends on the backend. For a successfully terminated
+process, <code class="docutils literal notranslate"><span class="pre">Status</span></code> is either <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">exit(0)</span></code>. For unsuccessful
+processes, <code class="docutils literal notranslate"><span class="pre">Status</span></code> cannot be sensibly abstracted. Consult the backens
+documentation for the details.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">create/3</span></code> predicate supports the following options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">process(Pid)</span></code> - Unifies Pid with the process identifier (an opaque

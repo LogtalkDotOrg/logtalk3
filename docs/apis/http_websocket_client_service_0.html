@@ -398,7 +398,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-16</div>
+<div class="line"><strong>Date:</strong> 2026-06-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -510,7 +510,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Repeated options: When the same handshake or session option is given multiple times, the first occurrence is used.</p></li>
-<li><p>Handshake options: The <cite>headers/1</cite>, <cite>query/1</cite>, <cite>version/1</cite>, <cite>protocols/1</cite>, <cite>key/1</cite>, and <cite>connection_options/1</cite> options are forwarded to <cite>http_client::open_websocket/4</cite>.</p></li>
+<li><p>Handshake options: The <cite>headers/1</cite>, <cite>query/1</cite>, <cite>version/1</cite>, <cite>protocols/1</cite>, <cite>key/1</cite>, and <cite>connection_options/1</cite> options are forwarded to <cite>open_websocket/4</cite>.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code>: Controls automatic pong replies during the session loop.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">initial_messages(Messages)</span></code>: Writes the given list of normalized outbound messages before entering the session loop.</p></li>
 <li><p>Session option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.</p></li>

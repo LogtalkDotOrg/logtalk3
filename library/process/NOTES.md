@@ -52,12 +52,18 @@ To test this library predicates, load the `tester.lgt` file:
 Usage
 -----
 
-The `process` object provides the following predicates for portable process handling:
+The `process` object provides the following predicates for portable process
+handling:
 
 - `create(Executable, Arguments, Options)` - Creates a new process
 - `wait(Process, Status)` - Waits for a process to terminate
 - `kill(Process, Signal)` - Terminates a process with a specific signal
 - `kill(Process)` - Terminates a process using the default signal (SIGKILL)
+
+Exit status depends on the backend. For a successfully terminated process,
+`Status` is either `0` or `exit(0)`. For unsuccessful processes, `Status`
+cannot be sensibly abstracted. Consult the backens documentation for the
+details.
 
 The `create/3` predicate supports the following options:
 
