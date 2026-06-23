@@ -15,7 +15,7 @@ Portable process handling predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-06-19
+| **Date:** 2026-06-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ Portable process handling predicates.
 | **Remarks:**
 
    - Supported backend Prolog systems: ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
-   - Option ``type/1`` limitation: This option is ignored on ECLiPSe, GNU Prolog, and XVM.
+   - Option ``type/1`` limitation: This option is ignored on ECLiPSe, GNU Prolog, Trealla Prolog, and XVM.
 
 | **Inherited public predicates:**
 |    (none)

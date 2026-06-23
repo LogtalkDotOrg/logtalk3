@@ -24,11 +24,11 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-06-23,
 		comment is 'Portable process handling predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
-			'Option ``type/1`` limitation' - 'This option is ignored on ECLiPSe, GNU Prolog, and XVM.'
+			'Option ``type/1`` limitation' - 'This option is ignored on ECLiPSe, GNU Prolog, Trealla Prolog, and XVM.'
 		],
 		see_also is [os]
 	]).
@@ -251,29 +251,21 @@
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
 		create(Executable, Arguments, Options) :-
-			translate_options(Options, Options, NativeOptions),
+			translate_options(Options, NativeOptions),
 			{process_create(Executable, Arguments, NativeOptions)}.
 
-		translate_options([], _, []).
-		translate_options([Option| Options], AllOptions, NativeOptions) :-
-			(	translate_option(Option, AllOptions, NativeOption) ->
+		translate_options([], []).
+		translate_options([Option| Options], NativeOptions) :-
+			(	translate_option(Option, NativeOption) ->
 				NativeOptions = [NativeOption| NativeOptionsTail]
 			;	NativeOptions = NativeOptionsTail
 			),
-			translate_options(Options, AllOptions, NativeOptionsTail).
+			translate_options(Options, NativeOptionsTail).
 
-		translate_option(process(Pid), _, process(Pid)).
-		translate_option(stdin(Stream), Options, NativeOption) :-
-			(	{member(type(Type), Options)} ->
-				NativeOption = stdin(pipe(Stream, [type(Type)]))
-			;	NativeOption = stdin(pipe(Stream))
-			).
-		translate_option(stdout(Stream), Options, NativeOption) :-
-			(	{member(type(Type), Options)} ->
-				NativeOption = stdout(pipe(Stream, [type(Type)]))
-			;	NativeOption = stdout(pipe(Stream))
-			).
-		translate_option(stderr(Stream), _, stderr(pipe(Stream))).
+		translate_option(process(Pid),   process(Pid)).
+		translate_option(stdin(Stream),  stdin(pipe(Stream))).
+		translate_option(stdout(Stream), stdout(pipe(Stream))).
+		translate_option(stderr(Stream), stderr(pipe(Stream))).
 
 		% Trealla's process_wait/2 takes options as second argument (input),
 		% not a status output. process_wait/1 just waits for the process.

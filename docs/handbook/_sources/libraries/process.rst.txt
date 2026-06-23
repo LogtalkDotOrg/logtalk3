@@ -64,9 +64,9 @@ The ``create/3`` predicate supports the following options:
 Process identifiers (PIDs) should be treated as opaque ground terms.
 Their internal representation varies between backend Prolog systems.
 
-The ``type/1`` option is ignored on ECLiPSe, GNU Prolog, and XVM as
-these systems don't provide the necessary support to set the streams
-type at process creation.
+The ``type/1`` option is ignored on ECLiPSe, GNU Prolog, Trealla Prolog,
+and XVM as these systems don't provide the necessary support to set the
+streams type at process creation.
 
 Example:
 

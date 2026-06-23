@@ -476,7 +476,7 @@
 		existence_error(http_socket_websocket_request, end_of_file).
 
 	open_process_connection(Transport, Executable, Arguments, Type, NormalizedHost, Port, Context, Connection) :-
-		% the type/1 option is only effective for the SICStus Prolog, SWI-Prolog, and Trealla Prolog backends
+		% the type/1 option is only effective for the SICStus Prolog and SWI-Prolog backends
 		process::create(Executable, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(Type)]),
 		Connection = http_connection(NormalizedHost, Port, Input, Output),
 		catch(
