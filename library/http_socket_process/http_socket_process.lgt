@@ -134,14 +134,6 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-		:- private(listener_error_drain_worker_/2).
-		:- dynamic(listener_error_drain_worker_/2).
-		:- mode(listener_error_drain_worker_(?positive_integer, ?compound), zero_or_one).
-		:- info(listener_error_drain_worker_/2, [
-			comment is 'Tracked background diagnostics drain worker for an open listener.',
-			argnames is ['ListenerId', 'Worker']
-		]).
-
 		:- private(listener_shutdown_seed_/1).
 		:- dynamic(listener_shutdown_seed_/1).
 		:- mode(listener_shutdown_seed_(?positive_integer), zero_or_one).
@@ -188,8 +180,6 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
-			register_listener_error_drain_worker/2,
-			take_listener_error_drain_worker/2,
 			register_shutdown_control/3,
 			cleanup_shutdown_control/2,
 			force_shutdown_control/2,
@@ -271,7 +261,6 @@
 		register_process_listener(ListenerId, ListenerExecutableKind, Process, relay(RelayListener, RelayPort), Error),
 		register_listener_temporary_tls_credentials(ListenerId, TemporaryTLSCredentials),
 		register_listener_handle_alias(RelayListener, ListenerId),
-		start_listener_error_drain(ListenerId, Error),
 		Listener = RelayListener.
 
 	close_listener(Listener) :-
@@ -280,9 +269,7 @@
 		finalize_process_listener(ListenerId, FinalizeOutcome),
 		setup_call_cleanup(
 			true,
-			(	cancel_listener_error_drain(ListenerId),
-				finalize_process_listener_outcome(FinalizeOutcome, Listener)
-			),
+			finalize_process_listener_outcome(FinalizeOutcome, Listener),
 			finalize_listener_temporary_tls_credentials(ListenerId)
 		).
 
@@ -660,26 +647,6 @@
 		listener_relay_address(ncat, RelayPort, RelayCommand),
 		append(ListenArguments, ['--sh-exec', RelayCommand], Arguments).
 
-	:- if(current_logtalk_flag(threads, supported)).
-		:- if(current_logtalk_flag(prolog_dialect, xvm)).
-
-		start_listener_error_drain(_ListenerId, _Error).
-
-		:- else.
-
-	start_listener_error_drain(ListenerId, Error) :-
-		Goal = ignore(drain_listener_process_error(ListenerId, Error)),
-		threaded_once(Goal, Tag),
-		register_listener_error_drain_worker(ListenerId, reader(Goal, Tag)).
-
-		:- endif.
-
-	:- else.
-
-	start_listener_error_drain(_ListenerId, _Error).
-
-	:- endif.
-
 	listener_listen_address(socat, tcp, Host, Port, Backlog, _CertificateFile, _KeyFile, ListenAddress) :-
 		!,
 		listener_bind_family_suffix(Host, FamilySuffix),
@@ -768,23 +735,6 @@
 		!.
 	codes_line_atom(Codes, Line) :-
 		atom_codes(Line, Codes).
-
-	drain_listener_process_error(ListenerId, Error) :-
-		listener_executable(ListenerId, ListenerExecutableKind),
-		adopt_listener_process_stream(Error),
-		drain_listener_process_error_loop(ListenerId, ListenerExecutableKind, Error).
-
-	drain_listener_process_error_loop(ListenerId, ListenerExecutableKind, Error) :-
-		line_to_codes(Error, Codes),
-		codes_line_atom(Codes, Line),
-		(	listener_process_error_event(ListenerExecutableKind, Line, Event) ->
-			register_listener_event(ListenerId, Event)
-		;	true
-		),
-		( 	Line == end_of_file ->
-			true
-		;	drain_listener_process_error_loop(ListenerId, ListenerExecutableKind, Error)
-		).
 
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
@@ -957,24 +907,9 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-	register_listener_error_drain_worker(ListenerId, Worker) :-
-		retractall(listener_error_drain_worker_(ListenerId, _)),
-		assertz(listener_error_drain_worker_(ListenerId, Worker)).
-
-	take_listener_error_drain_worker(ListenerId, Worker) :-
-		retract(listener_error_drain_worker_(ListenerId, Worker)),
-		!.
-	take_listener_error_drain_worker(_ListenerId, none).
-
-	:- endif.
-
-	:- if(current_logtalk_flag(threads, supported)).
-
 	register_listener_event(ListenerId, Event) :-
 		assertz(listener_event_(ListenerId, Event)),
 		threaded_notify(listener_event(ListenerId)).
-
-	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 	take_listener_event(ListenerId, Event) :-
 		( 	retract(listener_event_(ListenerId, Event)) ->
@@ -984,17 +919,6 @@
 			adopt_listener_process_stream(Error),
 			listener_process_event(ListenerExecutableKind, Error, Event)
 		).
-
-	:- else.
-
-	take_listener_event(ListenerId, Event) :-
-		( 	retract(listener_event_(ListenerId, Event)) ->
-			true
-		;	threaded_wait(listener_event(ListenerId)),
-			take_listener_event(ListenerId, Event)
-		).
-
-	:- endif.
 
 	:- else.
 
@@ -1092,30 +1016,12 @@
 		finalize_process_listener(ListenerId, Outcome),
 		setup_call_cleanup(
 			true,
-			(	cancel_listener_error_drain(ListenerId),
-				(	Outcome == missing ->
-					true
-				;	finalize_process_listener_outcome(Outcome, Listener)
-				)
+			(	Outcome == missing ->
+				true
+			;	finalize_process_listener_outcome(Outcome, Listener)
 			),
 			finalize_listener_temporary_tls_credentials(ListenerId)
 		).
-
-	:- if(current_logtalk_flag(threads, supported)).
-
-	cancel_listener_error_drain(ListenerId) :-
-		take_listener_error_drain_worker(ListenerId, Worker),
-		cancel_listener_error_drain_worker(Worker).
-
-	cancel_listener_error_drain_worker(reader(_Goal, Tag)) :-
-		catch(threaded_cancel(Tag), _, true).
-	cancel_listener_error_drain_worker(none).
-
-	:- else.
-
-	cancel_listener_error_drain(_ListenerId).
-
-	:- endif.
 
 	parse_connection_options(Options, Type, Transport, Executable, ServerName, OpensslArguments) :-
 		^^check_options(Options),
