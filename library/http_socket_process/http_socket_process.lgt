@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-23,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -202,9 +202,13 @@
 		append/3, length/2, member/2, reverse/2, valid/1 as proper_list/1
 	]).
 
+	:- uses(logtalk, [
+		print_message/3
+	]).
+
 	:- uses(os, [
-		delete_file/1, file_exists/1, operating_system_type/1, path_concat/3, pid/1,
-		resolve_command_path/2, temporary_directory/1
+		delete_file/1, file_exists/1, operating_system_type/1, path_concat/3, pid/1, resolve_command_path/2,
+		temporary_directory/1, shell/1
 	]).
 
 	:- uses(reader, [
@@ -215,10 +219,6 @@
 		atomic_list_concat/2, atomic_list_concat/3, setup_call_cleanup/3
 	]).
 
-	:- meta_predicate(call_with_shutdown_policy(*, *, 0)).
-	:- meta_predicate(serve_until_shutdown(*, *, *, *, 0)).
-	:- meta_predicate(serve_until_shutdown_impl(*, *, *, *, 0)).
-
 	:- if(current_logtalk_flag(threads, supported)).
 		:- threaded.
 
@@ -228,6 +228,8 @@
 		:- meta_predicate(collect_finished_worker(*, 0, *, *, *, *)).
 		:- meta_predicate(wait_for_workers(*, *)).
 	:- endif.
+
+	:- initialization(verify_commands_availability).
 
 	supported_request_scheme(http).
 	supported_request_scheme(https).
@@ -443,9 +445,6 @@
 
 	serve_until_shutdown(Listener, Handler, Control, Options) :-
 		serve_until_shutdown(Listener, Handler, Control, Options, true).
-
-	serve_until_shutdown(Listener, Handler, Control, Options, Ready) :-
-		serve_until_shutdown_impl(Listener, Handler, Control, Options, Ready).
 
 	request_shutdown(Control) :-
 		request_shutdown_impl(Control).
@@ -1427,6 +1426,8 @@
 		atom(Argument),
 		valid_atom_list(Arguments).
 
+	:- meta_predicate(call_with_shutdown_policy(*, *, 0)).
+
 	call_with_shutdown_policy(close, Listener, Goal) :-
 		setup_call_cleanup(true, once(Goal), close_listener(Listener)).
 	call_with_shutdown_policy(keep_open, _Listener, Goal) :-
@@ -1580,7 +1581,9 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-	serve_until_shutdown_impl(Listener, Handler, Control, Options, Ready) :-
+	:- meta_predicate(serve_until_shutdown(*, *, *, *, 0)).
+
+	serve_until_shutdown(Listener, Handler, Control, Options, Ready) :-
 		parse_open_listener_options(Options, Workers),
 		register_shutdown_control(Control, Listener, RunId),
 		(	catch(
@@ -1963,7 +1966,7 @@
 
 	:- else.
 
-	serve_until_shutdown_impl(_Listener, _Handler, _Control, _Options, _Ready) :-
+	serve_until_shutdown(_Listener, _Handler, _Control, _Options, _Ready) :-
 		throw(error(resource_error(threads), http_socket_process::serve_until_shutdown(_, _, _, _, _))).
 
 	request_shutdown_impl(_Control) :-
@@ -2059,5 +2062,30 @@
 		atom_codes(Atom, Codes).
 
 	:- endif.
+
+	verify_commands_availability :-
+		operating_system_type(OS),
+		verify_commands_availability(OS).
+
+	verify_commands_availability(unix) :-
+		(	shell('type openssl >/dev/null 2>&1') ->
+			true
+		;	print_message(warning, http_socket_process, @'Missing openssl command!')
+		),
+		(	shell('type ncat >/dev/null 2>&1') ->
+			true
+		;	print_message(warning, http_socket_process, @'Missing ncat command!')
+		).
+	verify_commands_availability(windows) :-
+		(	shell('where /q openssl.exe') ->
+			true
+		;	print_message(warning, http_socket_process, @'Missing openssl command!')
+		),
+		(	shell('where /q ncat.exe') ->
+			true
+		;	print_message(warning, http_socket_process, @'Missing ncat command!')
+		).
+	verify_commands_availability(unknown) :-
+		verify_commands_availability(unix).
 
 :- end_object.
