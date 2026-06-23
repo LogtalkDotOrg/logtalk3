@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-23,
 		comment is 'Router-agnostic directory listing helper built on the normalized ``http_core`` library.'
 	]).
 
@@ -322,7 +322,7 @@
 		;	float(ModifiedTime) ->
 			NormalizedTime is floor(ModifiedTime)
 		;	ModifiedTime = dt(Year, Month, Day, Hours, Minutes, Seconds),
-			date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), ModifiedTime)
+			date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), NormalizedTime)
 		).
 
 	modified_display(ModifiedTime, Display) :-

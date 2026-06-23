@@ -394,7 +394,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-22</div>
+<div class="line"><strong>Date:</strong> 2026-06-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -419,6 +419,7 @@
 <div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
 <div class="line"><a class="reference internal" href="http_server_0.html#http-server-0"><span class="std std-ref">http_server</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 <div class="line"><a class="reference internal" href="process_0.html#process-0"><span class="std std-ref">process</span></a></div>
 <div class="line"><a class="reference internal" href="reader_0.html#reader-0"><span class="std std-ref">reader</span></a></div>
@@ -460,14 +461,13 @@
 <li><p><a class="reference internal" href="#listener-handle-alias-2" id="id14"><code class="docutils literal notranslate"><span class="pre">listener_handle_alias_/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#listener-event-2" id="id15"><code class="docutils literal notranslate"><span class="pre">listener_event_/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#process-listener-shutdown-requested-1" id="id16"><code class="docutils literal notranslate"><span class="pre">process_listener_shutdown_requested_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-error-drain-worker-2" id="id17"><code class="docutils literal notranslate"><span class="pre">listener_error_drain_worker_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-shutdown-seed-1" id="id18"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-shutdown-control-3" id="id19"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-shutdown-requested-2" id="id20"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#listener-active-worker-3" id="id21"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-shutdown-seed-1" id="id17"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-shutdown-control-3" id="id18"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-shutdown-requested-2" id="id19"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#listener-active-worker-3" id="id20"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id21">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -752,29 +752,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="listener-error-drain-worker-2">
-<span id="http-socket-process-0-listener-error-drain-worker-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_error_drain_worker_/2</span></code></a><a class="headerlink" href="#listener-error-drain-worker-2" title="Link to this heading"></a></h3>
-<p>Tracked background diagnostics drain worker for an open listener.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">listener_error_drain_worker_(ListenerId,Worker)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">listener_error_drain_worker_(?positive_integer,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
 <section id="listener-shutdown-seed-1">
-<span id="http-socket-process-0-listener-shutdown-seed-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a><a class="headerlink" href="#listener-shutdown-seed-1" title="Link to this heading"></a></h3>
+<span id="http-socket-process-0-listener-shutdown-seed-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_seed_/1</span></code></a><a class="headerlink" href="#listener-shutdown-seed-1" title="Link to this heading"></a></h3>
 <p>Last allocated shutdown-run identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -795,7 +774,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-shutdown-control-3">
-<span id="http-socket-process-0-listener-shutdown-control-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a><a class="headerlink" href="#listener-shutdown-control-3" title="Link to this heading"></a></h3>
+<span id="http-socket-process-0-listener-shutdown-control-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_control_/3</span></code></a><a class="headerlink" href="#listener-shutdown-control-3" title="Link to this heading"></a></h3>
 <p>Maps public shutdown control terms to listeners and active serving runs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -816,7 +795,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-shutdown-requested-2">
-<span id="http-socket-process-0-listener-shutdown-requested-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a><a class="headerlink" href="#listener-shutdown-requested-2" title="Link to this heading"></a></h3>
+<span id="http-socket-process-0-listener-shutdown-requested-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_shutdown_requested_/2</span></code></a><a class="headerlink" href="#listener-shutdown-requested-2" title="Link to this heading"></a></h3>
 <p>Recorded shutdown requests for serve_until_shutdown/4 runs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -837,7 +816,7 @@
 <hr class="docutils" />
 </section>
 <section id="listener-active-worker-3">
-<span id="http-socket-process-0-listener-active-worker-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a><a class="headerlink" href="#listener-active-worker-3" title="Link to this heading"></a></h3>
+<span id="http-socket-process-0-listener-active-worker-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">listener_active_worker_/3</span></code></a><a class="headerlink" href="#listener-active-worker-3" title="Link to this heading"></a></h3>
 <p>Tracked active connection workers for a serve_until_shutdown/4 run.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -15,7 +15,7 @@ Process-backed HTTP transport predicates using the process library and helper pr
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-22
+| **Date:** 2026-06-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -32,6 +32,7 @@ Process-backed HTTP transport predicates using the process library and helper pr
 |    :ref:`http_core <http_core/0>`
 |    :ref:`http_server <http_server/0>`
 |    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
 |    :ref:`process <process/0>`
 |    :ref:`reader <reader/0>`
@@ -302,25 +303,6 @@ Flag recording that a synthetic listener shutdown wakeup is pending.
 |    ``process_listener_shutdown_requested_(ListenerId)``
 | **Mode and number of proofs:**
 |    ``process_listener_shutdown_requested_(?positive_integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: listener_error_drain_worker_/2
-.. _http_socket_process/0::listener_error_drain_worker_/2:
-
-``listener_error_drain_worker_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Tracked background diagnostics drain worker for an open listener.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``listener_error_drain_worker_(ListenerId,Worker)``
-| **Mode and number of proofs:**
-|    ``listener_error_drain_worker_(?positive_integer,?compound)`` - ``zero_or_one``
 
 
 ------------
