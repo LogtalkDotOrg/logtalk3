@@ -679,7 +679,8 @@
 		listener_bind_family_option(LoopbackHost, FamilyOption),
 		atomic_list_concat([ncat, '-n', FamilyOption, LoopbackHost, RelayPort], ' ', RelayCommand).
 
-	client_connect_arguments(Host, Port, ['-v', '-n', FamilyOption, Host, Port]) :-
+	client_connect_arguments(Host, Port, ['-v', '-n', FamilyOption, Host, PortAtom]) :-
+		atom_number(PortAtom, Port),
 		listener_bind_family_option(Host, FamilyOption).
 
 	startup_listener_response(ListenerExecutableKind, Error, Context, BoundPort) :-
