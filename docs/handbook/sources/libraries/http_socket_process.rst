@@ -134,6 +134,8 @@ Connection options accepted by ``open_connection/4``:
 
 - ``type(binary)``
 - ``type(text)``
+- ``connection_transport(tcp)``
+- ``connection_transport(tls)``
 - ``openssl_executable(Executable)``
 - ``server_name(Name)``
 - ``openssl_arguments(Arguments)``
@@ -142,13 +144,17 @@ Notes on those options:
 
 - ``type(binary)`` and ``type(text)`` match the shared ``http_socket``
   client-side option surface; the selected value is applied to the
-  client connection streams after the ``openssl s_client`` process is
-  started
+  client connection streams after the helper process is started
+- ``connection_transport(tcp)`` is the default and uses ``ncat`` as the
+  helper process
+- ``connection_transport(tls)`` uses ``openssl s_client`` for the client
+  connection helper process
 - the default ``server_name(default)`` value maps to the requested host
   except for colon-containing hosts, where the SNI option is omitted by
-  default
+  default when ``connection_transport(tls)`` is selected
 - ``openssl_arguments/1`` can be used to pass verification, CA, ALPN, or
-  client certificate flags directly to ``openssl s_client``
+  client certificate flags directly to ``openssl s_client`` when
+  ``connection_transport(tls)`` is selected
 
 Connection-pool options accepted by ``open_connection_pool/4``:
 
@@ -164,6 +170,7 @@ Listener options accepted by ``open_listener/4``:
 - ``listener_transport(tcp)``
 - ``listener_transport(tls)``
 - ``listener_helper_executable(Executable)``
+- ``temporary_tls_credentials(Prefix)``
 - ``tls_certificate_file(File)``
 - ``tls_key_file(File)``
 
@@ -175,8 +182,24 @@ Notes on those listener options:
 - ``listener_helper_executable/1`` is a compatibility option name for
   selecting the helper executable used for the public listener and
   loopback relay
+- ``temporary_tls_credentials(Prefix)`` generates a temporary
+  self-signed certificate and key owned by the listener when
+  ``listener_transport(tls)`` is selected; both files are deleted by
+  ``close_listener/1`` and by the ``serve_until_shutdown/4-5``
+  finalization path
 - ``tls_certificate_file/1`` and ``tls_key_file/1`` are required
-  together when ``listener_transport(tls)`` is selected
+  together when ``listener_transport(tls)`` is selected unless
+  ``temporary_tls_credentials/1`` is used instead
+- ``temporary_tls_credentials/1`` is mutually exclusive with
+  ``tls_certificate_file/1`` and ``tls_key_file/1``
+
+Helper predicate:
+
+- ``temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile)``
+  computes the temporary certificate and key file paths for a given
+  prefix without creating those files; this is useful for client-side
+  trust configuration when the listener itself owns certificate creation
+  via ``temporary_tls_credentials(Prefix)``
 
 Serving options accepted by ``serve_listener/5``:
 

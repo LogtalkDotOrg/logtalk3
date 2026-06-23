@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-22,
-		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.',
+		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless ``http_client`` facade.',
 		remarks is [
 			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.',
 			'Transport options' - 'The ``connection_options(Options)`` session default and request option forwards one-shot transport configuration to the underlying ``http_client`` facade.'

@@ -177,6 +177,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage-overview">Usage overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
@@ -377,6 +379,11 @@ request annotation and response finalization</p></li>
 cookie persistence is scoped to explicit client-session handles, while
 server-side session state stays in an explicit in-memory manager keyed
 by opaque cookie identifiers.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">http_client_session</span></code> uses the <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> transport
+through the default <code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade. The parametric
+<code class="docutils literal notranslate"><span class="pre">http_client_session(_HTTPSocket_)</span></code> object can also be parameterized
+with alternative <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> implementations such as
+<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>, which supports TLS-backed client transport.</p>
 <p>This library can be used with backend Prolog systems that supports
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
@@ -468,7 +475,9 @@ value.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">cookies_file/1</span></code> session option is a convenience for opening a
 fresh owned cookie jar from disk. It is mutually exclusive with the
 <code class="docutils literal notranslate"><span class="pre">cookie_jar/1</span></code> session option.</p>
-<p>Current scope:</p>
+</section>
+<section id="current-scope">
+<h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>in-memory cookie storage with explicit save and load support</p></li>
 <li><p>automatic cookie replay for explicit client-session handles</p></li>
@@ -480,10 +489,12 @@ matching <code class="docutils literal notranslate"><span class="pre">http_clien
 identifiers</p></li>
 <li><p>direct server-session request begin/finish operations plus
 plain-handler and router adapters</p></li>
-<li><p>client-session transport over absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs via the
-existing <code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade, while cookie storage and SameSite
-source parsing also accept <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs and bare <code class="docutils literal notranslate"><span class="pre">Origin</span></code>
-values</p></li>
+<li><p>client-session transport via the existing parameterized
+<code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade; with the default <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
+parameterization this means absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs, while
+parameterizations such as <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code> also support
+<code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs; cookie storage and SameSite source parsing accept
+both <code class="docutils literal notranslate"><span class="pre">http://</span></code> and <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs plus bare <code class="docutils literal notranslate"><span class="pre">Origin</span></code> values</p></li>
 <li><p>core handling for host-only and domain cookies, default path
 computation, secure filtering, <code class="docutils literal notranslate"><span class="pre">Max-Age</span></code>, normalized <code class="docutils literal notranslate"><span class="pre">Expires</span></code>
 HTTP-date values, and <code class="docutils literal notranslate"><span class="pre">SameSite</span></code> values</p></li>
@@ -494,9 +505,14 @@ as Lax-by-default</p></li>
 template and validation that explicit <code class="docutils literal notranslate"><span class="pre">same_site-none</span></code> also requires
 <code class="docutils literal notranslate"><span class="pre">secure-true</span></code></p></li>
 </ul>
-<p>Out of scope for this first implementation:</p>
+</section>
+<section id="current-limitations">
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>HTTPS transport support in the client facade</p></li>
+<li><p>HTTPS transport is not available with the default <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
+parameterization; use a TLS-capable parameterization such as
+<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code> when client-session transport must support
+<code class="docutils literal notranslate"><span class="pre">https://</span></code></p></li>
 <li><p>automatic synchronization with the full Mozilla Public Suffix List
 snapshot</p></li>
 <li><p>browser-specific temporary Lax-allowing-unsafe grace windows</p></li>

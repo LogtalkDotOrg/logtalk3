@@ -4,14 +4,20 @@
 ===============
 
 The ``http_client`` library provides a request-oriented client layer on
-top of the ``http_core``, ``url``, and ``http_socket`` libraries. It is
-the request-oriented client-side entry point: it builds normalized
-requests from absolute ``http://`` URLs plus options and delegates
-transport to the sockets-backed layer.
+top of the ``http_core``, ``url``, and parameterized HTTP transport
+libraries. It is the request-oriented client-side entry point: it builds
+normalized requests from absolute URLs plus options and delegates
+transport to the selected ``http_socket_protocol``-compatible layer,
+such as ``http_socket`` or ``http_socket_process``.
 
 This library can be used with backend Prolog systems that supports
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
+When using the default ``http_client`` object, the transport
+parameterization is ``http_socket``. The parametric
+``http_client(_HTTPSocket_)`` object can also be instantiated with
+alternative transports that implement the same protocol.
 
 API documentation
 -----------------
@@ -144,15 +150,20 @@ Current scope
 
 The initial request-oriented implementation provides:
 
-- ``request/4`` for one-shot requests against absolute ``http://`` URLs.
+- ``request/4`` for one-shot requests against absolute URLs supported by
+  the selected transport parameterization.
 - ``open_websocket/4`` for validated WebSocket opening handshakes
-  against absolute ``ws://`` URLs, returning the upgraded reusable
-  connection handle and the ``101`` response.
-- ``request/5`` for requests over an already open ``http_socket``
+  against absolute WebSocket URLs supported by the selected transport
+  parameterization, returning the upgraded reusable connection handle
+  and the ``101`` response.
+- ``request/5`` for requests over an already open compatible reusable
   connection or connection pool handle, with endpoint validation against
   the supplied URL.
 - ``get/3-4``, ``head/3-4``, ``delete/3-4``, ``post/4-5``, ``put/4-5``,
   and ``patch/4-5`` convenience predicates.
+
+When the same request-construction or WebSocket opening-handshake option
+is given multiple times, the first occurrence is used.
 
 Supported request options are:
 
@@ -168,6 +179,9 @@ Supported request options are:
 - ``version(Version)`` to override the default ``http(1,1)`` version.
 - ``properties(Properties)`` to supply additional normalized request
   properties.
+- ``connection_options(Options)`` to pass transport-specific options
+  through to the underlying ``open_connection/4`` call for one-shot
+  requests.
 
 Supported WebSocket opening-handshake options are:
 
@@ -180,8 +194,11 @@ Supported WebSocket opening-handshake options are:
 - ``protocols(Protocols)`` to request one or more subprotocol tokens.
 - ``key(Key)`` to provide an explicit ``Sec-WebSocket-Key`` value. When
   omitted, a fresh key is generated automatically.
-- ``connection_options(Options)`` to pass socket options through to
-  ``http_socket::open_connection/4``.
+- ``connection_options(Options)`` to pass transport-specific options
+  through to the selected transport ``open_connection/4`` predicate.
+
+The stream-based primitives remain available from the
+``http_client_core`` object.
 
 Multipart workflow
 ------------------
@@ -225,40 +242,44 @@ WebSocket workflow
 The current WebSocket workflow is intentionally limited to the opening
 handshake:
 
-- Call ``open_websocket/4`` with an absolute ``ws://`` URL.
-- The helper opens a dedicated reusable ``http_socket`` connection,
-  sends a normalized opening-handshake request, and validates the server
-  ``101`` response including the ``Sec-WebSocket-Accept`` value.
+- Call ``open_websocket/4`` with an absolute WebSocket URL supported by
+  the selected transport parameterization.
+- The helper opens a dedicated reusable transport connection, sends a
+  normalized opening-handshake request, and validates the server ``101``
+  response including the ``Sec-WebSocket-Accept`` value.
 - When the call succeeds, the returned connection handle remains open so
   a higher layer can take over the upgraded stream, typically by calling
-  ``http_socket::connection_streams/3`` and then using the
-  ``http_websocket`` frame predicates, the ``http_websocket_messages``
-  message predicates, or the stateful ``http_websocket_session``
-  predicates with explicit close-state and automatic control-message
-  handling, including the higher-level ``http_websocket_service``
-  ``run_session/3-4`` callback loop.
-
-  - When client-side code wants one entry point for handshake plus
-    session execution, the ``http_websocket_client_service::open/4-5``
-    predicates layer on top of ``open_websocket/4``, can write optional
-    initial outbound messages, and then run the callback-driven session
-    loop.
-
+  the selected transport ``connection_streams/3`` predicate and then
+  using the ``http_websocket`` frame predicates, the
+  ``http_websocket_messages`` message predicates, or the stateful
+  ``http_websocket_session`` predicates with explicit close-state and
+  automatic control-message handling, including the higher-level
+  ``http_websocket_service`` ``run_session/3-4`` callback loop.
+- When client-side code wants one entry point for handshake plus session
+  execution, the ``http_websocket_client_service::open/4-5`` predicates
+  layer on top of ``open_websocket/4``, can write optional initial
+  outbound messages, and then run the callback-driven session loop.
 - Callers are responsible for eventually closing that connection using
-  ``http_socket::close_connection/1`` if a later layer does not take
-  ownership of it. The ``http_websocket_service::run_session/3-4``
-  predicates do take ownership of the upgraded connection and close it
-  automatically when the session loop finishes, as do the higher-level
+  the selected transport ``close_connection/1`` predicate if a later
+  layer does not take ownership of it. The
+  ``http_websocket_service::run_session/3-4`` predicates do take
+  ownership of the upgraded connection and close it automatically when
+  the session loop finishes, as do the higher-level
   ``http_websocket_client_service::open/4-5`` predicates.
 
 Current limitations
 -------------------
 
-- Only absolute ``http://`` URLs are supported by the request-oriented
-  facade. ``https://`` URLs are rejected until transport-level TLS
-  support is added.
-- The WebSocket helper supports only plain ``ws://`` opening handshakes.
-  ``wss://`` remains out of scope until TLS support exists.
+- URL scheme support depends on the selected transport parameterization.
+  With the default ``http_socket`` parameterization, only absolute
+  ``http://`` URLs are currently supported by the request-oriented
+  facade and only plain ``ws://`` opening handshakes are supported by
+  ``open_websocket/4``. The corresponding TLS-backed ``https://`` and
+  ``wss://`` schemes are therefore not supported in this
+  parameterization.
+- This non-TLS limitation does not apply to the ``http_socket_process``
+  parameterization, which provides transport support for secure schemes
+  via the same ``http_socket_protocol`` interface.
 - The ``open_websocket/4`` predicate is limited to opening-handshake
   validation. See the dedicated WebSocket libraries for frame parsing,
   message reassembly, and related functionality.

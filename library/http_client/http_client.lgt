@@ -27,22 +27,13 @@
 		author is 'Paulo Moura',
 		date is 2026-06-22,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
-		parnames is ['HTTPSocket'],
-		remarks is [
-			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
-			'Request construction' - 'The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library. One-shot requests can also pass transport-specific ``connection_options(Options)`` forwarded to the underlying ``open_connection/4`` call.',
-			'Option precedence' - 'When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.',
-			'WebSocket opening handshake' - 'The ``open_websocket/4`` predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.',
-			'Multipart form-data' - 'The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a parameter-aware ``form_data(Items)`` descriptor using the ``field(Name, Value, Parameters)`` and ``file(Name, Filename, MediaType, Payload, Parameters)`` shapes supported by the ``http_multipart`` library; the request builder translates those descriptors and annotates the request with a multipart boundary property before construction.',
-			'Reusable transports' - 'The ``request/5`` and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.',
-			'Low-level core' - 'The stream-based primitives are available from the ``http_client_core`` object.'
-		]
+		parnames is ['HTTPSocket']
 	]).
 
 	:- public(request/4).
 	:- mode(request(+atom, +atom, --compound, +list), one_or_error).
 	:- info(request/4, [
-		comment is 'Builds a normalized request from the given method, absolute ``http://`` URL, and options, performs a one-shot exchange, and returns the response.',
+		comment is 'Builds a normalized request from the given method, absolute URL supported by the selected transport parameterization, and options, performs a one-shot exchange, and returns the response.',
 		argnames is ['Method', 'URL', 'Response', 'Options'],
 		exceptions is [
 			'``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options' - error,
@@ -53,7 +44,7 @@
 	:- public(request/5).
 	:- mode(request(+compound, +atom, +atom, --compound, +list), one_or_error).
 	:- info(request/5, [
-		comment is 'Builds a normalized request from the given method, absolute ``http://`` URL, and options, validates it against an open http_socket connection or pool handle endpoint, performs one exchange, and returns the response.',
+		comment is 'Builds a normalized request from the given method, absolute URL supported by the selected transport parameterization, and options, validates it against an open compatible connection or pool handle endpoint, performs one exchange, and returns the response.',
 		argnames is ['ConnectionOrPool', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
 			'``ConnectionOrPool`` is not a valid reusable connection or pool handle for ``URL``' - error,
@@ -185,7 +176,7 @@
 	:- public(open_websocket/4).
 	:- mode(open_websocket(+atom, --compound, --compound, +list), one_or_error).
 	:- info(open_websocket/4, [
-		comment is 'Builds a WebSocket opening-handshake request from the given absolute ``ws://`` URL and options, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.',
+		comment is 'Builds a WebSocket opening-handshake request from the given absolute WebSocket URL supported by the selected transport parameterization and options, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.',
 		argnames is ['URL', 'Connection', 'Response', 'Options'],
 		exceptions is [
 			'``URL`` is not a supported absolute WebSocket URL or ``Options`` contain invalid opening-handshake options' - error,

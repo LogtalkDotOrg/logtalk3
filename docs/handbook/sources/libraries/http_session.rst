@@ -24,6 +24,12 @@ cookie persistence is scoped to explicit client-session handles, while
 server-side session state stays in an explicit in-memory manager keyed
 by opaque cookie identifiers.
 
+By default, ``http_client_session`` uses the ``http_socket`` transport
+through the default ``http_client`` facade. The parametric
+``http_client_session(_HTTPSocket_)`` object can also be parameterized
+with alternative ``http_socket_protocol`` implementations such as
+``http_socket_process``, which supports TLS-backed client transport.
+
 This library can be used with backend Prolog systems that supports
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.
@@ -140,7 +146,8 @@ The ``cookies_file/1`` session option is a convenience for opening a
 fresh owned cookie jar from disk. It is mutually exclusive with the
 ``cookie_jar/1`` session option.
 
-Current scope:
+Current scope
+-------------
 
 - in-memory cookie storage with explicit save and load support
 - automatic cookie replay for explicit client-session handles
@@ -152,10 +159,12 @@ Current scope:
   identifiers
 - direct server-session request begin/finish operations plus
   plain-handler and router adapters
-- client-session transport over absolute ``http://`` URLs via the
-  existing ``http_client`` facade, while cookie storage and SameSite
-  source parsing also accept ``https://`` URLs and bare ``Origin``
-  values
+- client-session transport via the existing parameterized
+  ``http_client`` facade; with the default ``http_socket``
+  parameterization this means absolute ``http://`` URLs, while
+  parameterizations such as ``http_socket_process`` also support
+  ``https://`` URLs; cookie storage and SameSite source parsing accept
+  both ``http://`` and ``https://`` URLs plus bare ``Origin`` values
 - core handling for host-only and domain cookies, default path
   computation, secure filtering, ``Max-Age``, normalized ``Expires``
   HTTP-date values, and ``SameSite`` values
@@ -166,9 +175,13 @@ Current scope:
   template and validation that explicit ``same_site-none`` also requires
   ``secure-true``
 
-Out of scope for this first implementation:
+Current limitations
+-------------------
 
-- HTTPS transport support in the client facade
+- HTTPS transport is not available with the default ``http_socket``
+  parameterization; use a TLS-capable parameterization such as
+  ``http_socket_process`` when client-session transport must support
+  ``https://``
 - automatic synchronization with the full Mozilla Public Suffix List
   snapshot
 - browser-specific temporary Lax-allowing-unsafe grace windows

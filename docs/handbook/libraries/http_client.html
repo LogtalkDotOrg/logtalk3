@@ -363,13 +363,18 @@
   <section id="http-client">
 <span id="library-http-client"></span><h1><code class="docutils literal notranslate"><span class="pre">http_client</span></code><a class="headerlink" href="#http-client" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_client</span></code> library provides a request-oriented client layer on
-top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> libraries. It is
-the request-oriented client-side entry point: it builds normalized
-requests from absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs plus options and delegates
-transport to the sockets-backed layer.</p>
+top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, and parameterized HTTP transport
+libraries. It is the request-oriented client-side entry point: it builds
+normalized requests from absolute URLs plus options and delegates
+transport to the selected <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code>-compatible layer,
+such as <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> or <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p>
 <p>This library can be used with backend Prolog systems that supports
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
+<p>When using the default <code class="docutils literal notranslate"><span class="pre">http_client</span></code> object, the transport
+parameterization is <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>. The parametric
+<code class="docutils literal notranslate"><span class="pre">http_client(_HTTPSocket_)</span></code> object can also be instantiated with
+alternative transports that implement the same protocol.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -485,16 +490,20 @@ After the handshake, either close it explicitly with
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
 <p>The initial request-oriented implementation provides:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">request/4</span></code> for one-shot requests against absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request/4</span></code> for one-shot requests against absolute URLs supported by
+the selected transport parameterization.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> for validated WebSocket opening handshakes
-against absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URLs, returning the upgraded reusable
-connection handle and the <code class="docutils literal notranslate"><span class="pre">101</span></code> response.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">request/5</span></code> for requests over an already open <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
+against absolute WebSocket URLs supported by the selected transport
+parameterization, returning the upgraded reusable connection handle
+and the <code class="docutils literal notranslate"><span class="pre">101</span></code> response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request/5</span></code> for requests over an already open compatible reusable
 connection or connection pool handle, with endpoint validation against
 the supplied URL.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">get/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">head/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">delete/3-4</span></code>, <code class="docutils literal notranslate"><span class="pre">post/4-5</span></code>, <code class="docutils literal notranslate"><span class="pre">put/4-5</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">patch/4-5</span></code> convenience predicates.</p></li>
 </ul>
+<p>When the same request-construction or WebSocket opening-handshake option
+is given multiple times, the first occurrence is used.</p>
 <p>Supported request options are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">headers(Headers)</span></code> to supply normalized request headers.</p></li>
@@ -509,6 +518,9 @@ string.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">version(Version)</span></code> to override the default <code class="docutils literal notranslate"><span class="pre">http(1,1)</span></code> version.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">properties(Properties)</span></code> to supply additional normalized request
 properties.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> to pass transport-specific options
+through to the underlying <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> call for one-shot
+requests.</p></li>
 </ul>
 <p>Supported WebSocket opening-handshake options are:</p>
 <ul class="simple">
@@ -521,9 +533,11 @@ The opening handshake requires HTTP/1.1 or later.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">protocols(Protocols)</span></code> to request one or more subprotocol tokens.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">key(Key)</span></code> to provide an explicit <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code> value. When
 omitted, a fresh key is generated automatically.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> to pass socket options through to
-<code class="docutils literal notranslate"><span class="pre">http_socket::open_connection/4</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> to pass transport-specific options
+through to the selected transport <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> predicate.</p></li>
 </ul>
+<p>The stream-based primitives remain available from the
+<code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object.</p>
 </section>
 <section id="multipart-workflow">
 <h2>Multipart workflow<a class="headerlink" href="#multipart-workflow" title="Link to this heading"></a></h2>
@@ -564,42 +578,45 @@ generated on the wire without extra caller bookkeeping.</p></li>
 <p>The current WebSocket workflow is intentionally limited to the opening
 handshake:</p>
 <ul class="simple">
-<li><p>Call <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> with an absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL.</p></li>
-<li><p>The helper opens a dedicated reusable <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> connection,
-sends a normalized opening-handshake request, and validates the server
-<code class="docutils literal notranslate"><span class="pre">101</span></code> response including the <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> value.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> with an absolute WebSocket URL supported by
+the selected transport parameterization.</p></li>
+<li><p>The helper opens a dedicated reusable transport connection, sends a
+normalized opening-handshake request, and validates the server <code class="docutils literal notranslate"><span class="pre">101</span></code>
+response including the <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> value.</p></li>
 <li><p>When the call succeeds, the returned connection handle remains open so
 a higher layer can take over the upgraded stream, typically by calling
-<code class="docutils literal notranslate"><span class="pre">http_socket::connection_streams/3</span></code> and then using the
-<code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> frame predicates, the <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>
-message predicates, or the stateful <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>
-predicates with explicit close-state and automatic control-message
-handling, including the higher-level <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code>
-<code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback loop.</p>
-<ul>
-<li><p>When client-side code wants one entry point for handshake plus
-session execution, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code>
-predicates layer on top of <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>, can write optional
-initial outbound messages, and then run the callback-driven session
-loop.</p></li>
-</ul>
-</li>
+the selected transport <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code> predicate and then
+using the <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code> frame predicates, the
+<code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code> message predicates, or the stateful
+<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> predicates with explicit close-state and
+automatic control-message handling, including the higher-level
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code> <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback loop.</p></li>
+<li><p>When client-side code wants one entry point for handshake plus session
+execution, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code> predicates
+layer on top of <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>, can write optional initial
+outbound messages, and then run the callback-driven session loop.</p></li>
 <li><p>Callers are responsible for eventually closing that connection using
-<code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> if a later layer does not take
-ownership of it. The <code class="docutils literal notranslate"><span class="pre">http_websocket_service::run_session/3-4</span></code>
-predicates do take ownership of the upgraded connection and close it
-automatically when the session loop finishes, as do the higher-level
+the selected transport <code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code> predicate if a later
+layer does not take ownership of it. The
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service::run_session/3-4</span></code> predicates do take
+ownership of the upgraded connection and close it automatically when
+the session loop finishes, as do the higher-level
 <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code> predicates.</p></li>
 </ul>
 </section>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Only absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are supported by the request-oriented
-facade. <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs are rejected until transport-level TLS
-support is added.</p></li>
-<li><p>The WebSocket helper supports only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes.
-<code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
+<li><p>URL scheme support depends on the selected transport parameterization.
+With the default <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> parameterization, only absolute
+<code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are currently supported by the request-oriented
+facade and only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes are supported by
+<code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>. The corresponding TLS-backed <code class="docutils literal notranslate"><span class="pre">https://</span></code> and
+<code class="docutils literal notranslate"><span class="pre">wss://</span></code> schemes are therefore not supported in this
+parameterization.</p></li>
+<li><p>This non-TLS limitation does not apply to the <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>
+parameterization, which provides transport support for secure schemes
+via the same <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> interface.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate is limited to opening-handshake
 validation. See the dedicated WebSocket libraries for frame parsing,
 message reassembly, and related functionality.</p></li>

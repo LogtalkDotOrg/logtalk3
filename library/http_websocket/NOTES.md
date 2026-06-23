@@ -22,7 +22,13 @@ ________________________________________________________________________
 ================
 
 This library provides high-level WebSocket predicates for opening and
-closing connections and for exchanging messages.
+closing connections, for exchanging messages, and for running common client
+and server session loops.
+
+By default, the `http_websocket` object uses the `http_socket` transport,
+which is limited to the `ws://` scheme. The parametric `http_websocket(_HTTPSocket_)`
+object supports alternative `http_socket_protocol` implementations such as
+`http_socket_process`, which supports both `ws://` and `wss://` schemes.
 
 This library can be used with backend Prolog systems that supports unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
@@ -58,9 +64,12 @@ Current scope
 The current implementation provides the following predicates:
 
 - `open/2-3` for opening client WebSocket connections and
-  returning opaque handles.
+  returning opaque handles. The accepted `ws://` and `wss://` schemes depend
+  on the selected transport parameterization.
 - `accept/3-4` for accepting one server-side WebSocket
-  connection on an open listener and returning opaque handles.
+  connection on an open listener and returning opaque handles. The listener
+  must be created by the same transport parameterization, such as
+  `http_socket` or `http_socket_process`.
 - `send/2-3`, `receive/2-3`, and
   `close/1-2` for direct message exchange using those
   handles.
@@ -73,6 +82,10 @@ The current implementation provides the following predicates:
 - `open_session/4-5` and `serve_once/5-6`
   for callback-driven client and server sessions built on top of the
   `http_websocket_service` layer.
+
+The default `http_websocket` object is the `http_websocket(http_socket)`
+specialization. The test suite also exercises the `http_socket_process`
+parameterization, which supports the `wss://` scheme.
 
 
 Current workflow
@@ -91,6 +104,14 @@ For the common direct server case:
        http_websocket::accept(Listener, WebSocket, ClientInfo, [protocol(chat)]),
        http_websocket::receive(WebSocket, Message),
        http_websocket::send(WebSocket, Message).
+
+To use the process-backed transport instead, pair the matching listener and
+WebSocket parameterization:
+
+  | ?- http_socket_process::open_listener('127.0.0.1', 8080, Listener, []),
+       http_websocket(http_socket_process)::accept(Listener, WebSocket, ClientInfo, [protocol(chat)]),
+       http_websocket(http_socket_process)::receive(WebSocket, Message),
+       http_websocket(http_socket_process)::send(WebSocket, Message).
 
 For callback-driven client sessions that should stay on the high-level
 surface, use:

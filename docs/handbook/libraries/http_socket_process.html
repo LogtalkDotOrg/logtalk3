@@ -469,6 +469,8 @@ provided</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">type(binary)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type(text)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tcp)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openssl_executable(Executable)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">server_name(Name)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openssl_arguments(Arguments)</span></code></p></li>
@@ -477,13 +479,17 @@ provided</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">type(binary)</span></code> and <code class="docutils literal notranslate"><span class="pre">type(text)</span></code> match the shared <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
 client-side option surface; the selected value is applied to the
-client connection streams after the <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">s_client</span></code> process is
-started</p></li>
+client connection streams after the helper process is started</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tcp)</span></code> is the default and uses <code class="docutils literal notranslate"><span class="pre">ncat</span></code> as the
+helper process</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code> uses <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">s_client</span></code> for the client
+connection helper process</p></li>
 <li><p>the default <code class="docutils literal notranslate"><span class="pre">server_name(default)</span></code> value maps to the requested host
 except for colon-containing hosts, where the SNI option is omitted by
-default</p></li>
+default when <code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code> is selected</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openssl_arguments/1</span></code> can be used to pass verification, CA, ALPN, or
-client certificate flags directly to <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">s_client</span></code></p></li>
+client certificate flags directly to <code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">s_client</span></code> when
+<code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code> is selected</p></li>
 </ul>
 <p>Connection-pool options accepted by <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code>:</p>
 <ul class="simple">
@@ -499,6 +505,7 @@ client certificate flags directly to <code class="docutils literal notranslate">
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tcp)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tls)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(Executable)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials(Prefix)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_certificate_file(File)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_key_file(File)</span></code></p></li>
 </ul>
@@ -510,8 +517,24 @@ listener implementation</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable/1</span></code> is a compatibility option name for
 selecting the helper executable used for the public listener and
 loopback relay</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials(Prefix)</span></code> generates a temporary
+self-signed certificate and key owned by the listener when
+<code class="docutils literal notranslate"><span class="pre">listener_transport(tls)</span></code> is selected; both files are deleted by
+<code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code> and by the <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4-5</span></code>
+finalization path</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_certificate_file/1</span></code> and <code class="docutils literal notranslate"><span class="pre">tls_key_file/1</span></code> are required
-together when <code class="docutils literal notranslate"><span class="pre">listener_transport(tls)</span></code> is selected</p></li>
+together when <code class="docutils literal notranslate"><span class="pre">listener_transport(tls)</span></code> is selected unless
+<code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials/1</span></code> is used instead</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials/1</span></code> is mutually exclusive with
+<code class="docutils literal notranslate"><span class="pre">tls_certificate_file/1</span></code> and <code class="docutils literal notranslate"><span class="pre">tls_key_file/1</span></code></p></li>
+</ul>
+<p>Helper predicate:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials_files(Prefix,</span> <span class="pre">CertificateFile,</span> <span class="pre">KeyFile)</span></code>
+computes the temporary certificate and key file paths for a given
+prefix without creating those files; this is useful for client-side
+trust configuration when the listener itself owns certificate creation
+via <code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials(Prefix)</span></code></p></li>
 </ul>
 <p>Serving options accepted by <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code>:</p>
 <ul class="simple">

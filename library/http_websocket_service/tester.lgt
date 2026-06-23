@@ -35,7 +35,9 @@
 		logtalk_load([
 			http_websocket_service_handler_protocol,
 			http_websocket_service_registry,
-			http_websocket_service
+			http_websocket_service,
+			http_websocket_client_service,
+			http_websocket_server_service
 		], [
 			debug(on),
 			source_data(on)

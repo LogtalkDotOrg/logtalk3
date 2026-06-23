@@ -365,11 +365,19 @@
 <span id="library-http-websocket-service"></span><h1><code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code><a class="headerlink" href="#http-websocket-service" title="Link to this heading"></a></h1>
 <p>This library provides higher-level callback-driven WebSocket session
 loops on top of the <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> state-machine library and
-upgraded <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> WebSocket connections. It adds connection
-lifecycle ownership, optional auto-pong, keepalive, and idle-timeout
-policies, client- and server-side conveniences that collapse the opening
-handshake and the session loop into a single call, and a registry-backed
-broadcast helper for multi-session servers.</p>
+upgraded WebSocket connections provided by a selected
+<code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> implementation. It adds connection lifecycle
+ownership, optional auto-pong, keepalive, and idle-timeout policies,
+client- and server-side conveniences that collapse the opening handshake
+and the session loop into a single call, and a registry-backed broadcast
+helper for multi-session servers.</p>
+<p>By default, the convenience objects use the <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> transport.
+The parametric
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service(_HTTPSocket_,</span> <span class="pre">_Role_,</span> <span class="pre">_TextRepresentation_)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(_HTTPSocket_)</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">http_websocket_server_service(_HTTPSocket_)</span></code> objects can also use
+alternative <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> implementations such as
+<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p>
 <p>This library can be used with backend Prolog systems that supports
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM. On backends that don’t
@@ -400,19 +408,22 @@ link in a web browser.</p>
 <p>The current implementation provides:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> for higher-level callback-driven loops over
-upgraded <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> WebSocket connection handles that keep
-reading until the close handshake completes or the peer closes the
-stream and then close the upgraded connection automatically, with
-optional auto-pong, keepalive, idle-timeout, and maximum payload
-length policies.</p></li>
+upgraded WebSocket connection handles produced by the selected
+transport parameterization that keep reading until the close handshake
+completes or the peer closes the stream and then close the upgraded
+connection automatically, with optional auto-pong, keepalive,
+idle-timeout, and maximum payload length policies.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">open/4-5</span></code> in the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service</span></code> object as a
 client-side convenience that combines
 <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code>, optional initial outbound messages,
-and the higher-level session loop.</p></li>
+and the higher-level session loop. The accepted URL schemes depend on
+the selected transport parameterization, e.g. <code class="docutils literal notranslate"><span class="pre">ws://</span></code> for
+<code class="docutils literal notranslate"><span class="pre">http_socket</span></code> and both <code class="docutils literal notranslate"><span class="pre">ws://</span></code> and <code class="docutils literal notranslate"><span class="pre">wss://</span></code> for
+<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve_once/6-7</span></code> in the <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service</span></code> object as
-a server-side convenience that combines
-<code class="docutils literal notranslate"><span class="pre">http_socket::serve_websocket_once/5</span></code> with the higher-level session
-loop.</p></li>
+a server-side convenience that combines the selected transport
+parameterization <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code> predicate with the
+higher-level session loop.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5-6</span></code> and <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> in the
 <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service</span></code> object for registry-backed
 multi-session servers with queued broadcast delivery.</p></li>
@@ -424,9 +435,10 @@ sessions and queued outbound messages.</p></li>
 </section>
 <section id="higher-level-session-loop">
 <h2>Higher-level session loop<a class="headerlink" href="#higher-level-session-loop" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> predicates accept an upgraded <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
-WebSocket connection handle together with a handler object that
-implements the <code class="docutils literal notranslate"><span class="pre">http_websocket_service_handler_protocol</span></code> protocol:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> predicates accept an upgraded WebSocket
+connection handle produced by the selected transport parameterization
+together with a handler object that implements the
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service_handler_protocol</span></code> protocol:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>handle(<span class="nv">Message</span>, <span class="nv">Replies</span>)
 </pre></div>
 </div>
@@ -487,7 +499,7 @@ handle, run the loop with either:</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> predicates take ownership of the upgraded
-connection, so no explicit <code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> call is
+connection, so no explicit transport <code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code> call is
 needed afterwards.</p>
 <p>For a client that wants to collapse the opening handshake and the
 callback loop into a single call, the <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service</span></code>
@@ -499,6 +511,12 @@ object provides:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">open</span>(<span class="nv">URL</span>, <span class="nv">SessionHandler</span>, <span class="nv">Response</span>, <span class="nv">FinalState</span>, [protocols([chat]), initial_messages([message(text, hello)]), auto_pong(on)])
 </pre></div>
 </div>
+<p>The accepted WebSocket URL schemes depend on the selected transport
+parameterization. For example, the default
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service</span></code> object uses <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> and
+therefore accepts <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URLs, while
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(http_socket_process)</span></code> also accepts
+<code class="docutils literal notranslate"><span class="pre">wss://</span></code> URLs.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">initial_messages(Messages)</span></code> option writes the given list of
 normalized outbound messages immediately after the handshake and before
 the first session read. The <code class="docutils literal notranslate"><span class="pre">open/4-5</span></code> predicates also accept the
@@ -521,6 +539,10 @@ opening handshake via the given HTTP handler, run the session loop via
 the given session handler, and then close the upgraded connection
 automatically. They also accept the <code class="docutils literal notranslate"><span class="pre">keepalive_interval/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">idle_timeout/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">max_payload_length/1</span></code> session-loop options.</p>
+<p>For server-side helpers, the <code class="docutils literal notranslate"><span class="pre">Listener</span></code> must come from the same
+selected transport parameterization as the service object, e.g.
+<code class="docutils literal notranslate"><span class="pre">http_websocket_server_service(http_socket_process)</span></code> must be paired
+with a listener opened by <code class="docutils literal notranslate"><span class="pre">http_socket_process::open_listener/4</span></code>.</p>
 </section>
 <section id="registry-backed-server-helper">
 <h2>Registry-backed server helper<a class="headerlink" href="#registry-backed-server-helper" title="Link to this heading"></a></h2>
@@ -618,9 +640,14 @@ layer close it when the close handshake completes.</p></li>
 lifecycle, call <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code> and let
 the service layer handle the opening handshake, any configured initial
 outbound messages, and the final connection close.</p></li>
+<li><p>When the client transport must support secure <code class="docutils literal notranslate"><span class="pre">wss://</span></code> URLs, use the
+a TLS-capable parameterization such as <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p></li>
 <li><p>When server-side code already owns a listener and wants a single entry
 point for handshake plus session execution, call
 <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service::serve_once/6-7</span></code>.</p></li>
+<li><p>When server-side code uses a non-default transport such as
+<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>, use the matching parametric service object
+and open the listener with that same transport parameterization.</p></li>
 <li><p>When server-side code needs multiple active sessions plus queued
 broadcast delivery, create a registry with
 <code class="docutils literal notranslate"><span class="pre">http_websocket_service_registry::open/1</span></code> and call
