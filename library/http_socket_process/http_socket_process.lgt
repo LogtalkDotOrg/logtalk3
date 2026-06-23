@@ -202,7 +202,7 @@
 	]).
 
 	:- uses(reader, [
-		line_to_codes/2
+		line_to_codes/2 as reader_line_to_codes/2
 	]).
 
 	:- uses(user, [
@@ -1966,6 +1966,20 @@
 	atom_number(Atom, Number) :-
 		number_codes(Number, Codes),
 		atom_codes(Atom, Codes).
+
+	:- endif.
+
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+
+	% workaround ECLiPSe broken implementation of the at_end_of_stream/1 standard predicate
+	line_to_codes(Stream, Codes) :-
+		ignore(peek_code(Stream, _)),
+		reader_line_to_codes(Stream, Codes).
+
+	:- else.
+
+	line_to_codes(Stream, Codes) :-
+		reader_line_to_codes(Stream, Codes).
 
 	:- endif.
 
