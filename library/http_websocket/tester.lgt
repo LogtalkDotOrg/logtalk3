@@ -40,7 +40,10 @@
 		logtalk_load(http_websocket, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
+		lgtunit::run_test_sets([
+			tests(http_socket),
+			tests(http_socket_process)
+		])
 	)).
 
 :- else.

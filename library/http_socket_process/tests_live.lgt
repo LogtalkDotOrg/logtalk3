@@ -59,7 +59,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Opt-in live smoke tests for the "http_socket_process" library covering external HTTPS client paths and local plain/TLS/WSS server paths.'
 	]).
 
@@ -91,18 +91,19 @@
 
 	setup :-
 		cleanup,
-		^^file_path('http_socket_process_live_cert.pem', CertificateFile),
-		^^file_path('http_socket_process_live_key.pem', KeyFile),
-		os::resolve_command_path(openssl, Path),
-		process::create(Path, ['req', '-quiet', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', KeyFile, '-out', CertificateFile, '-subj', '/CN=127.0.0.1', '-days', '1'], [process(Process)]),
-		process::wait(Process, Status),
-		once((Status == 0; Status == exit(0))),
+		http_socket_process::temporary_tls_credentials('logtalk_http_socket_process_live_', CertificateFile, KeyFile),
 		assertz(certificate_file(CertificateFile)),
 		assertz(key_file(KeyFile)).
 
 	cleanup :-
-		^^clean_file('http_socket_process_live_cert.pem'),
-		^^clean_file('http_socket_process_live_key.pem'),
+		(	certificate_file(CertificateFile) ->
+			^^clean_file(CertificateFile)
+		;	true
+		),
+		(	key_file(KeyFile) ->
+			^^clean_file(KeyFile)
+		;	true
+		),
 		retractall(certificate_file(_)),
 		retractall(key_file(_)).
 

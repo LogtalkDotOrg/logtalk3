@@ -19,14 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client_digest_session,
+:- object(http_client_digest_session(_HTTPSocket_),
 	imports([options, http_text_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.',
+		parnames is ['HTTPSocket'],
 		remarks is [
 			'Option precedence' - 'When the same session default, Digest default, or per-request option is given multiple times, the first occurrence is used.',
 			'Reactive authentication' - 'Requests are sent once without credentials and retried automatically only when the response carries a ``401`` Digest challenge accepted by the core ``http_digest`` object.'
@@ -166,7 +167,7 @@
 		]).
 	:- endif.
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		exchange/4
 	]).
 
@@ -591,17 +592,12 @@
 	validate_request_scheme(Components) :-
 		member(scheme(Scheme), Components),
 		!,
-		validate_request_scheme_name(Scheme).
+		(	_HTTPSocket_::supported_request_scheme(Scheme) ->
+			true
+		;	domain_error(http_client_scheme, Scheme)
+		).
 	validate_request_scheme(_Components) :-
 		domain_error(http_client_url, missing_scheme).
-
-	validate_request_scheme_name(http) :-
-		!.
-	validate_request_scheme_name(https) :-
-		!,
-		domain_error(http_client_scheme, https).
-	validate_request_scheme_name(Scheme) :-
-		domain_error(http_client_scheme, Scheme).
 
 	components_endpoint(Components, Host, Port) :-
 		member(authority(Authority), Components),
@@ -713,5 +709,18 @@
 	digit_code(Code) :-
 		Code >= 0'0,
 		Code =< 0'9.
+
+:- end_object.
+
+
+:- object(http_client_digest_session,
+	extends(http_client_digest_session(http_socket))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-22,
+		comment is 'By deafult, Stateful HTTP Digest client sessions use the ``http_socket`` library.'
+	]).
 
 :- end_object.

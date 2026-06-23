@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-20,
+		date is 2026-06-22,
 		comment is 'Echo handler used by the "http_socket_process" library server-side tests.'
 	]).
 
@@ -139,6 +139,23 @@
 	test(http_socket_process_open_listener_4_04, error(domain_error(http_socket_process_listener_tls_options, [tls_certificate_file(none), tls_key_file(none)])), [condition(executable_available(ncat))]) :-
 		http_socket_process::open_listener('127.0.0.1', _Port, _Listener, [listener_transport(tls)]).
 
+	test(http_socket_process_open_listener_4_07, deterministic, [condition(tls_listener_available)]) :-
+		Prefix = 'logtalk_http_socket_process_test_',
+		temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile),
+		delete_file_if_exists(CertificateFile),
+		delete_file_if_exists(KeyFile),
+		setup_call_cleanup(
+			http_socket_process::open_listener('127.0.0.1', Port, Listener, [listener_transport(tls), temporary_tls_credentials(Prefix)]),
+			(	integer(Port),
+				Port > 0,
+				os::file_exists(CertificateFile),
+				os::file_exists(KeyFile)
+			),
+			http_socket_process::close_listener(Listener)
+		),
+		\+ os::file_exists(CertificateFile),
+		\+ os::file_exists(KeyFile).
+
 	test(http_socket_process_open_listener_4_05, deterministic, [condition(executable_available(ncat))]) :-
 		Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
 		ResponseAtom = 'HTTP/1.1 200 OK\r\ncontent-length: 0\r\n\r\n',
@@ -244,15 +261,44 @@
 				http_socket_process::close_listener(Listener)
 			).
 
-		test(http_socket_process_request_shutdown_1_01, deterministic, [condition(executable_available(ncat))]) :-
-			Request = request(get, origin('/ping'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
-			http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, control, []), Tag),
-			client_exchange_ignore('127.0.0.1', Port, Request),
-			http_socket_process::request_shutdown(control),
-			threaded_exit(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, control, []), Tag).
+		test(http_socket_process_serve_listener_5_01, deterministic, [condition(executable_available(ncat))]) :-
+			Host = '127.0.0.1',
+			Request1 = request(post, origin('/one'), http(1, 1), [host-host(Host)], content('text/plain', text(one)), []),
+			Request2 = request(post, origin('/two'), http(1, 1), [host-host(Host)], content('text/plain', text(two)), []),
+			setup_call_cleanup(
+				http_socket_process::open_listener(Host, Port, Listener, []),
+				(	threaded_once(http_socket_process::serve_listener(Listener, echo_http_socket_process_handler, 2, ClientInfos, [shutdown(keep_open)]), ServeTag),
+					threaded_once(http_socket_process::exchange(Host, Port, Request1, Response1), ClientTag1),
+					threaded_exit(http_socket_process::exchange(Host, Port, Request1, Response1), ClientTag1),
+					http_socket_process::request_listener_shutdown(Listener),
+					threaded_exit(http_socket_process::serve_listener(Listener, echo_http_socket_process_handler, 2, ClientInfos, [shutdown(keep_open)]), ServeTag),
+					threaded_once(http_socket_process::exchange(Host, Port, Request2, Response2), ClientTag2),
+					http_socket_process::serve_once(Listener, echo_http_socket_process_handler, ClientInfo2),
+					threaded_exit(http_socket_process::exchange(Host, Port, Request2, Response2), ClientTag2),
+					ClientInfos = [ClientInfo1],
+					compound(ClientInfo1),
+					compound(ClientInfo2),
+					http_core::status(Response1, status(200, 'OK')),
+					http_core::body(Response1, content('text/plain', text(one))),
+					http_core::status(Response2, status(200, 'OK')),
+					http_core::body(Response2, content('text/plain', text(two)))
+				),
+				http_socket_process::close_listener(Listener)
+			).
 
-			test(http_socket_process_serve_until_shutdown_5_01, deterministic, [condition(executable_available(ncat))]) :-
+		test(http_socket_process_request_shutdown_1_01, deterministic, [condition(executable_available(ncat))]) :-
+			Control = serial_listener_control,
+			Request = request(post, origin('/serial-shutdown'), http(1, 1), [host-host('example.com')], content('text/plain', text(serial)), []),
+			http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, Control, []), ServeTag),
+			threaded_once(http_socket_process::exchange('127.0.0.1', Port, Request, Response), ClientTag),
+			threaded_exit(http_socket_process::exchange('127.0.0.1', Port, Request, Response), ClientTag),
+			http_socket_process::request_shutdown(Control),
+			threaded_exit(http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, Control, []), ServeTag),
+			http_core::status(Response, status(200, 'OK')),
+			http_core::body(Response, content('text/plain', text(serial))).
+
+		test(http_socket_process_serve_until_shutdown_5_01, deterministic, [condition(executable_available(ncat))]) :-
 			Control = control_ready,
 			http_socket_process::open_listener('127.0.0.1', _Port, Listener, []),
 			http_socket_process::serve_until_shutdown(Listener, echo_http_socket_process_handler, Control, [], request_ready_shutdown(Control)).
@@ -314,6 +360,21 @@
 		;	close(Input),
 			close(Output)
 		).
+
+	tls_listener_available :-
+		executable_available(ncat),
+		executable_available(openssl).
+
+	temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile) :-
+		os::temporary_directory(TemporaryDirectory),
+		os::pid(PID),
+		user::atomic_list_concat([Prefix, PID, '_cert.pem'], CertificateName),
+		user::atomic_list_concat([Prefix, PID, '_key.pem'], KeyName),
+		os::path_concat(TemporaryDirectory, CertificateName, CertificateFile),
+		os::path_concat(TemporaryDirectory, KeyName, KeyFile).
+
+	delete_file_if_exists(File) :-
+		catch(os::delete_file(File), _, true).
 
 	executable_available(Executable) :-
 		os::resolve_command_path(Executable, _).

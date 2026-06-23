@@ -26,8 +26,22 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-20,
+		date is 2026-06-22,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
+	]).
+
+	:- public(temporary_tls_credentials/3).
+	:- mode(temporary_tls_credentials(+atom, -atom, -atom), one_or_error).
+	:- info(temporary_tls_credentials/3, [
+		comment is 'Creates or reuses temporary TLS certificate and key files under the system temporary directory using the given file name prefix.',
+		argnames is ['Prefix', 'CertificateFile', 'KeyFile']
+	]).
+
+	:- public(temporary_tls_credentials_files/3).
+	:- mode(temporary_tls_credentials_files(+atom, -atom, -atom), one_or_error).
+	:- info(temporary_tls_credentials_files/3, [
+		comment is 'Computes the temporary TLS certificate and key file paths used for a given file name prefix without creating the files.',
+		argnames is ['Prefix', 'CertificateFile', 'KeyFile']
 	]).
 
 	:- private(process_connection_state_/3).
@@ -86,6 +100,14 @@
 		argnames is ['ListenerId', 'Executable', 'Process', 'RelayListener', 'Error']
 	]).
 
+	:- private(listener_temporary_tls_credentials_/3).
+	:- dynamic(listener_temporary_tls_credentials_/3).
+	:- mode(listener_temporary_tls_credentials_(?positive_integer, ?atom, ?atom), zero_or_one).
+	:- info(listener_temporary_tls_credentials_/3, [
+		comment is 'Tracked temporary TLS credential files owned by open listeners.',
+		argnames is ['ListenerId', 'CertificateFile', 'KeyFile']
+	]).
+
 	:- private(listener_handle_alias_/2).
 	:- dynamic(listener_handle_alias_/2).
 	:- mode(listener_handle_alias_(?term, ?positive_integer), zero_or_more).
@@ -106,11 +128,19 @@
 	:- dynamic(process_listener_shutdown_requested_/1).
 	:- mode(process_listener_shutdown_requested_(?positive_integer), zero_or_one).
 	:- info(process_listener_shutdown_requested_/1, [
-		comment is 'Flag recording that a listener shutdown request was already sent.',
+		comment is 'Flag recording that a synthetic listener shutdown wakeup is pending.',
 		argnames is ['ListenerId']
 	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
+
+		:- private(listener_error_drain_worker_/2).
+		:- dynamic(listener_error_drain_worker_/2).
+		:- mode(listener_error_drain_worker_(?positive_integer, ?compound), zero_or_one).
+		:- info(listener_error_drain_worker_/2, [
+			comment is 'Tracked background diagnostics drain worker for an open listener.',
+			argnames is ['ListenerId', 'Worker']
+		]).
 
 		:- private(listener_shutdown_seed_/1).
 		:- dynamic(listener_shutdown_seed_/1).
@@ -151,11 +181,15 @@
 		register_connection_pool/7, acquire_pool_connection/2, release_pool_connection/3,
 		discard_pool_connection/2, close_connection_pool_state/2, connection_pool_id_outcome/2,
 		allocate_listener_id/1, register_process_listener/5, request_process_listener_shutdown/2,
-		take_process_listener/2, register_listener_event/2, take_listener_event/2
+		clear_process_listener_shutdown_request/1, register_listener_temporary_tls_credentials/2,
+		take_listener_temporary_tls_credentials/2, take_process_listener/2, register_listener_event/2,
+		take_listener_event/2
 	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
+			register_listener_error_drain_worker/2,
+			take_listener_error_drain_worker/2,
 			register_shutdown_control/3,
 			cleanup_shutdown_control/2,
 			force_shutdown_control/2,
@@ -169,7 +203,8 @@
 	]).
 
 	:- uses(os, [
-		operating_system_type/1, resolve_command_path/2
+		delete_file/1, file_exists/1, operating_system_type/1, path_concat/3, pid/1,
+		resolve_command_path/2, temporary_directory/1
 	]).
 
 	:- uses(reader, [
@@ -194,11 +229,18 @@
 		:- meta_predicate(wait_for_workers(*, *)).
 	:- endif.
 
+	supported_request_scheme(http).
+	supported_request_scheme(https).
+
+	supported_websocket_scheme(ws).
+	supported_websocket_scheme(wss).
+
 	open_listener(Host, Port, Listener, Options) :-
 		context(Context),
 		validate_listener_port(Port, RequestedPort),
 		normalize_listener_host(Host, NormalizedHost),
-		parse_listener_socket_options(Options, Backlog, Transport, ListenerExecutable, CertificateFile, KeyFile),
+		parse_listener_socket_options(Options, Backlog, Transport, ListenerExecutable, TemporaryTLSCredentialsPrefix, CertificateFile0, KeyFile0),
+		resolve_listener_tls_credentials(Transport, TemporaryTLSCredentialsPrefix, CertificateFile0, KeyFile0, CertificateFile, KeyFile, TemporaryTLSCredentials),
 		resolve_listener_executable(ListenerExecutable, ResolvedHelperExecutable, ListenerExecutableKind),
 		select_listener_port(ListenerExecutableKind, NormalizedHost, RequestedPort, SelectedPort),
 		open_loopback_listener(binary, Backlog, RelayPort, RelayListener),
@@ -209,6 +251,7 @@
 			process::create(ResolvedHelperExecutable, Arguments, [stderr(Error), process(Process)]),
 			CreateError,
 			(	close_server_socket(RelayListener),
+				cleanup_temporary_tls_credentials(TemporaryTLSCredentials),
 				throw(CreateError)
 			)
 		),
@@ -217,22 +260,52 @@
 			StartupError,
 			(	close_server_socket(RelayListener),
 				cleanup_listener_process(Process, Error),
+				cleanup_temporary_tls_credentials(TemporaryTLSCredentials),
 				throw(StartupError)
 			)
 		),
 		Port = BoundPort,
 		allocate_listener_id(ListenerId),
 		register_process_listener(ListenerId, ListenerExecutableKind, Process, relay(RelayListener, RelayPort), Error),
+		register_listener_temporary_tls_credentials(ListenerId, TemporaryTLSCredentials),
 		register_listener_handle_alias(RelayListener, ListenerId),
 		start_listener_error_drain(ListenerId, Error),
 		Listener = RelayListener.
 
 	close_listener(Listener) :-
 		listener_id(Listener, ListenerId),
-		request_process_listener_shutdown(ListenerId, RequestOutcome),
-		request_process_listener_shutdown_outcome(RequestOutcome, ListenerId, Listener),
+		terminate_process_listener_transport(ListenerId),
 		finalize_process_listener(ListenerId, FinalizeOutcome),
-		finalize_process_listener_outcome(FinalizeOutcome, Listener).
+		setup_call_cleanup(
+			true,
+			(	cancel_listener_error_drain(ListenerId),
+				finalize_process_listener_outcome(FinalizeOutcome, Listener)
+			),
+			finalize_listener_temporary_tls_credentials(ListenerId)
+		).
+
+	temporary_tls_credentials(Prefix, CertificateFile, KeyFile) :-
+		validate_temporary_tls_credentials_prefix(Prefix),
+		temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile),
+		(	file_exists(CertificateFile),
+			file_exists(KeyFile) ->
+			true
+		;	cleanup_temporary_tls_credentials(credentials(CertificateFile, KeyFile)),
+			resolve_command_path(openssl, Path),
+			process::create(
+				Path,
+				['req', '-quiet', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', KeyFile, '-out', CertificateFile, '-subj', '/CN=127.0.0.1', '-days', '1'],
+				[stdout(Output), stderr(Error), process(Process)]
+			),
+			process::wait(Process, Status),
+			close_process_stream(Output),
+			close_process_stream(Error),
+			(	once((Status == 0; Status == exit(0))) ->
+				true
+			;	cleanup_temporary_tls_credentials(credentials(CertificateFile, KeyFile)),
+				throw(error(resource_error(http_socket_process_temporary_tls_credentials), http_socket_process::temporary_tls_credentials(Prefix, _, _)))
+			)
+		).
 
 	open_connection(Host, Port, Connection, Options) :-
 		context(Context),
@@ -244,7 +317,8 @@
 
 	close_connection(http_websocket_connection(_ClientInfo, Input, Output)) :-
 		!,
-		close_stream_pair(Input, Output).
+		connection_streams(http_websocket_connection(_ClientInfo, Input, Output), AdoptedInput, AdoptedOutput),
+		close_stream_pair(AdoptedInput, AdoptedOutput).
 	close_connection(Connection) :-
 		take_process_connection(Connection, Outcome),
 		close_process_connection_outcome(Outcome, Connection).
@@ -320,9 +394,12 @@
 		http_client_core::exchange_connection(Input, Output, Requests, Responses).
 
 	exchange(Host, Port, Request, Response) :-
+		exchange(Host, Port, Request, Response, []).
+
+	exchange(Host, Port, Request, Response, Options) :-
 		one_shot_request(Request, OneShotRequest),
 		setup_call_cleanup(
-			open_connection(Host, Port, Connection, [type(binary)]),
+			open_connection(Host, Port, Connection, [type(binary)| Options]),
 			exchange(Connection, OneShotRequest, Response),
 			close_connection(Connection)
 		).
@@ -375,10 +452,15 @@
 
 	serve_listener_serial(_Listener, _Handler, 0, []) :-
 		!.
-	serve_listener_serial(Listener, Handler, Count, [ClientInfo| ClientInfos]) :-
-		serve_once(Listener, Handler, ClientInfo),
-		NextCount is Count - 1,
-		serve_listener_serial(Listener, Handler, NextCount, ClientInfos).
+	serve_listener_serial(Listener, Handler, Count, ClientInfos) :-
+		try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome),
+		(	Outcome == shutdown ->
+			ClientInfos = []
+		;	serve_accepted_connection(Input, Output, Handler),
+			NextCount is Count - 1,
+			ClientInfos = [ClientInfo| RemainingClientInfos],
+			serve_listener_serial(Listener, Handler, NextCount, RemainingClientInfos)
+		).
 
 	serve_accepted_connection(Input, Output, Handler) :-
 		setup_call_cleanup(
@@ -391,6 +473,15 @@
 		adopt_connection_streams(Input, Output),
 		http_server::serve_websocket(Input, Output, Handler, Outcome),
 		serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+
+	try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome) :-
+		catch(
+			(	accept_process_listener_connection(Listener, Input, Output, ClientInfo),
+				Outcome = accepted
+			),
+			listener_shutdown(Listener),
+			Outcome = shutdown
+		).
 
 	serve_websocket_outcome(accepted(_Request, Response), Input, Output, http_websocket_connection(ClientInfo, Input, Output), Response, ClientInfo).
 	serve_websocket_outcome(rejected(Response), _Input, _Output, _Connection, _RejectedResponse, _ClientInfo) :-
@@ -571,9 +662,18 @@
 		append(ListenArguments, ['--sh-exec', RelayCommand], Arguments).
 
 	:- if(current_logtalk_flag(threads, supported)).
+		:- if(current_logtalk_flag(prolog_dialect, xvm)).
+
+		start_listener_error_drain(_ListenerId, _Error).
+
+		:- else.
 
 	start_listener_error_drain(ListenerId, Error) :-
-		threaded_ignore(ignore(drain_listener_process_error(ListenerId, Error))).
+		Goal = ignore(drain_listener_process_error(ListenerId, Error)),
+		threaded_once(Goal, Tag),
+		register_listener_error_drain_worker(ListenerId, reader(Goal, Tag)).
+
+		:- endif.
 
 	:- else.
 
@@ -722,23 +822,33 @@
 		listener_id(Listener, ListenerId),
 		( 	listener_relay_socket(ListenerId, RelayListener) ->
 			socket::server_accept(RelayListener, Input, Output, _RelayClientInfo, [type(binary)]),
-			accept_listener_metadata(ListenerId, Listener, Input, Output, ClientInfo)
+			accept_listener_outcome(ListenerId, Listener, Input, Output, ClientInfo)
 		;	existence_error(http_socket_listener, Listener)
 		),
 		!.
 
+	accept_listener_outcome(ListenerId, Listener, Input, Output, ClientInfo) :-
+		( 	process_listener_shutdown_requested_(ListenerId) ->
+			clear_process_listener_shutdown_request(ListenerId),
+			clear_process_listener_shutdown_event(ListenerId),
+			close_stream_pair(Input, Output),
+			throw(listener_shutdown(Listener))
+		;	accept_listener_metadata(ListenerId, Listener, Input, Output, ClientInfo)
+		).
+
 	accept_listener_metadata(ListenerId, Listener, Input, Output, ClientInfo) :-
 		take_listener_event(ListenerId, Event),
-		accept_listener_event(Event, Listener, Input, Output, ClientInfo).
+		accept_listener_event(Event, ListenerId, Listener, Input, Output, ClientInfo).
 
-	accept_listener_event(end_of_file, Listener, Input, Output, _ClientInfo) :-
+	accept_listener_event(end_of_file, _ListenerId, Listener, Input, Output, _ClientInfo) :-
 		close_stream_pair(Input, Output),
 		existence_error(http_socket_listener, Listener).
-	accept_listener_event(accept(PeerAddress), _Listener, _Input, _Output, client(PeerAddress)) :-
+	accept_listener_event(accept(PeerAddress), _ListenerId, _Listener, _Input, _Output, client(PeerAddress)) :-
 		!.
-	accept_listener_event(shutdown, Listener, Input, Output, _ClientInfo) :-
+	accept_listener_event(shutdown, ListenerId, Listener, Input, Output, _ClientInfo) :-
+		clear_process_listener_shutdown_request(ListenerId),
 		close_stream_pair(Input, Output),
-		existence_error(http_socket_listener, Listener).
+		throw(listener_shutdown(Listener)).
 
 	listener_accept_line_peer_address(Line, PeerAddress) :-
 		atom(Line),
@@ -838,8 +948,26 @@
 	register_process_listener(ListenerId, ListenerExecutableKind, Process, RelayListener, Error) :-
 		assertz(process_listener_state_(ListenerId, ListenerExecutableKind, Process, RelayListener, Error)).
 
+	register_listener_temporary_tls_credentials(_ListenerId, none) :-
+		!.
+	register_listener_temporary_tls_credentials(ListenerId, credentials(CertificateFile, KeyFile)) :-
+		assertz(listener_temporary_tls_credentials_(ListenerId, CertificateFile, KeyFile)).
+
 	register_listener_handle_alias(Listener, ListenerId) :-
 		assertz(listener_handle_alias_(Listener, ListenerId)).
+
+	:- if(current_logtalk_flag(threads, supported)).
+
+	register_listener_error_drain_worker(ListenerId, Worker) :-
+		retractall(listener_error_drain_worker_(ListenerId, _)),
+		assertz(listener_error_drain_worker_(ListenerId, Worker)).
+
+	take_listener_error_drain_worker(ListenerId, Worker) :-
+		retract(listener_error_drain_worker_(ListenerId, Worker)),
+		!.
+	take_listener_error_drain_worker(_ListenerId, none).
+
+	:- endif.
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -847,12 +975,27 @@
 		assertz(listener_event_(ListenerId, Event)),
 		threaded_notify(listener_event(ListenerId)).
 
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
+
+	take_listener_event(ListenerId, Event) :-
+		( 	retract(listener_event_(ListenerId, Event)) ->
+			true
+		; 	listener_executable(ListenerId, ListenerExecutableKind),
+			listener_error_stream(ListenerId, Error),
+			adopt_listener_process_stream(Error),
+			listener_process_event(ListenerExecutableKind, Error, Event)
+		).
+
+	:- else.
+
 	take_listener_event(ListenerId, Event) :-
 		( 	retract(listener_event_(ListenerId, Event)) ->
 			true
 		;	threaded_wait(listener_event(ListenerId)),
 			take_listener_event(ListenerId, Event)
 		).
+
+	:- endif.
 
 	:- else.
 
@@ -881,20 +1024,28 @@
 		!.
 	request_process_listener_shutdown(_ListenerId, missing).
 
+	clear_process_listener_shutdown_request(ListenerId) :-
+		retractall(process_listener_shutdown_requested_(ListenerId)).
+
+	clear_process_listener_shutdown_event(ListenerId) :-
+		retractall(listener_event_(ListenerId, shutdown)).
+
 	request_process_listener_shutdown_outcome(requested, ListenerId, _Listener) :-
-		catch(shutdown_process_listener_transport(ListenerId), _, true).
+		catch(signal_process_listener_accept_shutdown(ListenerId), _, true).
 	request_process_listener_shutdown_outcome(already_requested, _ListenerId, _Listener).
 	request_process_listener_shutdown_outcome(missing, _ListenerId, Listener) :-
 		existence_error(http_socket_listener, Listener).
 
-	shutdown_process_listener_transport(ListenerId) :-
-		process_listener_state_(ListenerId, _ListenerExecutableKind, Process, _RelayListener, _Error),
-		catch(process::kill(Process, sigterm), _, true),
+	signal_process_listener_accept_shutdown(ListenerId) :-
 		register_listener_event(ListenerId, shutdown),
 		( 	listener_relay_port(ListenerId, RelayPort) ->
 			catch(signal_process_listener_shutdown(RelayPort), _, true)
 		;	true
 		).
+
+	terminate_process_listener_transport(ListenerId) :-
+		process_listener_state_(ListenerId, _ListenerExecutableKind, Process, _RelayListener, _Error),
+		catch(process::kill(Process, sigterm), _, true).
 
 	signal_process_listener_shutdown(RelayPort) :-
 		local_loopback_host(LoopbackHost),
@@ -909,28 +1060,63 @@
 		!.
 	take_process_listener(_ListenerId, missing).
 
+	take_listener_temporary_tls_credentials(ListenerId, credentials(CertificateFile, KeyFile)) :-
+		retract(listener_temporary_tls_credentials_(ListenerId, CertificateFile, KeyFile)),
+		!.
+	take_listener_temporary_tls_credentials(_ListenerId, none).
+
 	finalize_process_listener(ListenerId, Outcome) :-
 		take_process_listener(ListenerId, Outcome).
 
 	finalize_process_listener_outcome(listener(_ListenerExecutableKind, Process, RelayListener, Error), _Listener) :-
 		close_server_socket(RelayListener),
-		catch(process::wait(Process, _Status), _, true),
-		close_process_stream(Error).
+		close_process_stream(Error),
+		catch(process::wait(Process, _Status), _, true).
 	finalize_process_listener_outcome(missing, Listener) :-
 		existence_error(http_socket_listener, Listener).
 
 	request_listener_shutdown(Listener) :-
-		listener_id(Listener, ListenerId),
-		request_process_listener_shutdown(ListenerId, Outcome),
-		request_process_listener_shutdown_outcome(Outcome, ListenerId, Listener).
+		(	listener_shutdown_id(Listener, ListenerId) ->
+			request_process_listener_shutdown(ListenerId, Outcome),
+			request_process_listener_shutdown_outcome(Outcome, ListenerId, Listener)
+		;	true
+		).
+
+	listener_shutdown_id(http_process_listener(_Transport, _Host, _Port, ListenerId), ListenerId) :-
+		!.
+	listener_shutdown_id(Listener, ListenerId) :-
+		listener_handle_alias_(Listener, ListenerId).
 
 	finalize_shutdown_listener(Listener) :-
 		listener_id(Listener, ListenerId),
+		terminate_process_listener_transport(ListenerId),
 		finalize_process_listener(ListenerId, Outcome),
-		(	Outcome == missing ->
-			true
-		;	finalize_process_listener_outcome(Outcome, Listener)
+		setup_call_cleanup(
+			true,
+			(	cancel_listener_error_drain(ListenerId),
+				(	Outcome == missing ->
+					true
+				;	finalize_process_listener_outcome(Outcome, Listener)
+				)
+			),
+			finalize_listener_temporary_tls_credentials(ListenerId)
 		).
+
+	:- if(current_logtalk_flag(threads, supported)).
+
+	cancel_listener_error_drain(ListenerId) :-
+		take_listener_error_drain_worker(ListenerId, Worker),
+		cancel_listener_error_drain_worker(Worker).
+
+	cancel_listener_error_drain_worker(reader(_Goal, Tag)) :-
+		catch(threaded_cancel(Tag), _, true).
+	cancel_listener_error_drain_worker(none).
+
+	:- else.
+
+	cancel_listener_error_drain(_ListenerId).
+
+	:- endif.
 
 	parse_connection_options(Options, Type, Transport, Executable, ServerName, OpensslArguments) :-
 		^^check_options(Options),
@@ -967,22 +1153,41 @@
 		add_server_name_argument(ServerName, BaseArguments0, BaseArguments),
 		append(BaseArguments, OpensslArguments, Arguments).
 
-	parse_listener_socket_options(Options, Backlog, Transport, ListenerExecutable, CertificateFile, KeyFile) :-
+	parse_listener_socket_options(Options, Backlog, Transport, ListenerExecutable, TemporaryTLSCredentialsPrefix, CertificateFile, KeyFile) :-
 		^^check_options(Options),
 		check_listener_socket_options(Options),
 		^^merge_options(Options, MergedOptions),
 		^^option(backlog(Backlog), MergedOptions),
 		^^option(listener_transport(Transport), MergedOptions),
 		^^option(listener_helper_executable(ListenerExecutable), MergedOptions),
-		^^option(tls_certificate_file(CertificateFile), MergedOptions),
-		^^option(tls_key_file(KeyFile), MergedOptions),
-		validate_listener_transport_options(Transport, CertificateFile, KeyFile).
+		^^option(temporary_tls_credentials(TemporaryTLSCredentialsPrefix), MergedOptions, temporary_tls_credentials(none)),
+		^^option(tls_certificate_file(CertificateFile), MergedOptions, tls_certificate_file(none)),
+		^^option(tls_key_file(KeyFile), MergedOptions, tls_key_file(none)),
+		validate_listener_transport_options(Transport, TemporaryTLSCredentialsPrefix, CertificateFile, KeyFile).
 
-	validate_listener_transport_options(tcp, _CertificateFile, _KeyFile).
-	validate_listener_transport_options(tls, CertificateFile, KeyFile) :-
-		(	CertificateFile == none ; KeyFile == none ) ->
-			domain_error(http_socket_process_listener_tls_options, [tls_certificate_file(CertificateFile), tls_key_file(KeyFile)])
-		;	true.
+	validate_listener_transport_options(tcp, TemporaryTLSCredentialsPrefix, _CertificateFile, _KeyFile) :-
+		(	TemporaryTLSCredentialsPrefix == none ->
+			true
+		;	domain_error(http_socket_process_listener_tcp_options, [listener_transport(tcp), temporary_tls_credentials(TemporaryTLSCredentialsPrefix)])
+		).
+	validate_listener_transport_options(tls, TemporaryTLSCredentialsPrefix, CertificateFile, KeyFile) :-
+		(	TemporaryTLSCredentialsPrefix == none ->
+			(	(CertificateFile == none ; KeyFile == none) ->
+				domain_error(http_socket_process_listener_tls_options, [tls_certificate_file(CertificateFile), tls_key_file(KeyFile)])
+			;	true
+			)
+		;	(	CertificateFile == none,
+				KeyFile == none ->
+				true
+			;	domain_error(http_socket_process_listener_tls_options, [temporary_tls_credentials(TemporaryTLSCredentialsPrefix), tls_certificate_file(CertificateFile), tls_key_file(KeyFile)])
+			)
+		).
+
+	resolve_listener_tls_credentials(tcp, _TemporaryTLSCredentialsPrefix, CertificateFile, KeyFile, CertificateFile, KeyFile, none).
+	resolve_listener_tls_credentials(tls, none, CertificateFile, KeyFile, CertificateFile, KeyFile, none) :-
+		!.
+	resolve_listener_tls_credentials(tls, TemporaryTLSCredentialsPrefix, _CertificateFile, _KeyFile, CertificateFile, KeyFile, credentials(CertificateFile, KeyFile)) :-
+		temporary_tls_credentials(TemporaryTLSCredentialsPrefix, CertificateFile, KeyFile).
 
 	resolve_server_name(default, Host, ServerName) :-
 		(	sub_atom(Host, _, _, _, ':') ->
@@ -1104,6 +1309,8 @@
 		once((Transport == tcp; Transport == tls)).
 	valid_option(listener_helper_executable(Executable)) :-
 		once((Executable == ncat; Executable == socat)).
+	valid_option(temporary_tls_credentials(Prefix)) :-
+		atom(Prefix).
 	valid_option(tls_certificate_file(File)) :-
 		atom(File).
 	valid_option(tls_key_file(File)) :-
@@ -1133,8 +1340,6 @@
 	default_option(backlog(5)).
 	default_option(listener_transport(tcp)).
 	default_option(listener_helper_executable(ncat)).
-	default_option(tls_certificate_file(none)).
-	default_option(tls_key_file(none)).
 	default_option(shutdown(keep_open)).
 	default_option(workers(serial)).
 	default_option(openssl_arguments([])).
@@ -1169,8 +1374,35 @@
 	listener_socket_compatibility_option(type(_)).
 	listener_socket_compatibility_option(listener_transport(_)).
 	listener_socket_compatibility_option(listener_helper_executable(_)).
+	listener_socket_compatibility_option(temporary_tls_credentials(_)).
 	listener_socket_compatibility_option(tls_certificate_file(_)).
 	listener_socket_compatibility_option(tls_key_file(_)).
+
+	finalize_listener_temporary_tls_credentials(ListenerId) :-
+		take_listener_temporary_tls_credentials(ListenerId, Credentials),
+		cleanup_temporary_tls_credentials(Credentials).
+
+	cleanup_temporary_tls_credentials(none).
+	cleanup_temporary_tls_credentials(credentials(CertificateFile, KeyFile)) :-
+		catch(delete_file(CertificateFile), _, true),
+		catch(delete_file(KeyFile), _, true).
+
+	temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile) :-
+		validate_temporary_tls_credentials_prefix(Prefix),
+		temporary_directory(TemporaryDirectory),
+		pid(PID),
+		atomic_list_concat([Prefix, PID, '_cert.pem'], CertificateName),
+		atomic_list_concat([Prefix, PID, '_key.pem'], KeyName),
+		path_concat(TemporaryDirectory, CertificateName, CertificateFile),
+		path_concat(TemporaryDirectory, KeyName, KeyFile).
+
+	validate_temporary_tls_credentials_prefix(Prefix) :-
+		(	var(Prefix) ->
+			instantiation_error
+		;	atom(Prefix) ->
+			true
+		;	type_error(atom, Prefix)
+		).
 
 	valid_connection_compatibility_option(type(Type)) :-
 		valid_stream_type_option(Type).
@@ -1419,19 +1651,27 @@
 
 	serve_listener_parallel(_Listener, _Handler, 0, [], Workers, Workers) :-
 		!.
-	serve_listener_parallel(Listener, Handler, Count, [ClientInfo| ClientInfos], Workers0, Workers) :-
-		accept_process_listener_connection(Listener, Input, Output, ClientInfo),
-		spawn_connection_worker(Input, Output, Handler, Worker),
-		NextCount is Count - 1,
-		serve_listener_parallel(Listener, Handler, NextCount, ClientInfos, [Worker| Workers0], Workers).
+	serve_listener_parallel(Listener, Handler, Count, ClientInfos, Workers0, Workers) :-
+		try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome),
+		(	Outcome == shutdown ->
+			ClientInfos = [],
+			Workers = Workers0
+		;	spawn_connection_worker(Input, Output, Handler, Worker),
+			NextCount is Count - 1,
+			ClientInfos = [ClientInfo| RemainingClientInfos],
+			serve_listener_parallel(Listener, Handler, NextCount, RemainingClientInfos, [Worker| Workers0], Workers)
+		).
 
 	serve_listener_pool_batch(_Listener, _Handler, _Size, 0, ClientInfos, ClientInfos) :-
 		!.
 	serve_listener_pool_batch(Listener, Handler, Size, Count, ClientInfos0, ClientInfos) :-
 		pool_batch_counts(Size, Count, BatchCount, RemainingCount),
-		accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos1, [], ReversedWorkers),
+		accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos1, [], ReversedWorkers, Status),
 		wait_for_reversed_workers(ReversedWorkers),
-		serve_listener_pool_batch(Listener, Handler, Size, RemainingCount, ClientInfos1, ClientInfos).
+		(	Status == shutdown ->
+			ClientInfos = ClientInfos1
+		;	serve_listener_pool_batch(Listener, Handler, Size, RemainingCount, ClientInfos1, ClientInfos)
+		).
 
 	serve_listener_pool_rolling(_Listener, _Handler, _RunId, _Size, 0, ClientInfos, ClientInfos, Workers, Workers) :-
 		!.
@@ -1443,21 +1683,30 @@
 		),
 		length(Workers1, ActiveWorkers),
 		(	ActiveWorkers < Size ->
-			accept_process_listener_connection(Listener, Input, Output, ClientInfo),
-			spawn_notifying_connection_worker(listener_pool_worker_finished(RunId), Input, Output, Handler, Worker),
-			NextCount is Count - 1,
-			serve_listener_pool_rolling(Listener, Handler, RunId, Size, NextCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers1], Workers)
+			try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome),
+			(	Outcome == shutdown ->
+				ClientInfos = ClientInfos0,
+				Workers = Workers1
+			;	spawn_notifying_connection_worker(listener_pool_worker_finished(RunId), Input, Output, Handler, Worker),
+				NextCount is Count - 1,
+				serve_listener_pool_rolling(Listener, Handler, RunId, Size, NextCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers1], Workers)
+			)
 		;	threaded_wait(listener_pool_worker_finished(RunId)),
 			serve_listener_pool_rolling(Listener, Handler, RunId, Size, Count, ClientInfos0, ClientInfos, Workers1, Workers)
 		).
 
-	accept_worker_batch(_Listener, _Handler, 0, ClientInfos, ClientInfos, Workers, Workers) :-
+	accept_worker_batch(_Listener, _Handler, 0, ClientInfos, ClientInfos, Workers, Workers, completed) :-
 		!.
-	accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos, Workers0, Workers) :-
-		accept_process_listener_connection(Listener, Input, Output, ClientInfo),
-		spawn_connection_worker(Input, Output, Handler, Worker),
-		NextBatchCount is BatchCount - 1,
-		accept_worker_batch(Listener, Handler, NextBatchCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers0], Workers).
+	accept_worker_batch(Listener, Handler, BatchCount, ClientInfos0, ClientInfos, Workers0, Workers, Status) :-
+		try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome),
+		(	Outcome == shutdown ->
+			ClientInfos = ClientInfos0,
+			Workers = Workers0,
+			Status = shutdown
+		;	spawn_connection_worker(Input, Output, Handler, Worker),
+			NextBatchCount is BatchCount - 1,
+			accept_worker_batch(Listener, Handler, NextBatchCount, [ClientInfo| ClientInfos0], ClientInfos, [Worker| Workers0], Workers, Status)
+		).
 
 	pool_batch_counts(Size, Count, BatchCount, RemainingCount) :-
 		(	Count =< Size ->
@@ -1558,38 +1807,51 @@
 
 	serve_until_shutdown_serial(Listener, Handler, Control, RunId) :-
 		(	shutdown_requested(Control, RunId) ->
-			true
-		;	catch(
-				serve_once(Listener, Handler, _ClientInfo),
-				Error,
-				(	shutdown_requested(Control, RunId) ->
-					true
-				;	force_shutdown_control(Control, RunId),
-					throw(Error)
-				)
-			),
-			serve_until_shutdown_serial(Listener, Handler, Control, RunId)
+			drain_shutdown_accept(Listener, Control, RunId)
+		;	try_process_listener_accept(Listener, Control, RunId, Input, Output) ->
+			(	shutdown_requested(Control, RunId) ->
+				catch(close_stream_pair(Input, Output), _, true)
+			;	catch(
+					serve_accepted_connection(Input, Output, Handler),
+					Error,
+					(	force_shutdown_control(Control, RunId),
+						throw(Error)
+					)
+				),
+				serve_until_shutdown_serial(Listener, Handler, Control, RunId)
+			)
+		;	true
 		).
 
 	serve_until_shutdown_parallel(Listener, Handler, Control, RunId) :-
 		check_finished_workers(Control, RunId),
 		(	shutdown_requested(Control, RunId) ->
+			drain_shutdown_accept(Listener, Control, RunId),
 			wait_for_active_workers(Control, RunId)
 		;	try_process_listener_accept(Listener, Control, RunId, Input, Output) ->
-			spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
-			serve_until_shutdown_parallel(Listener, Handler, Control, RunId)
+			(	shutdown_requested(Control, RunId) ->
+				catch(close_stream_pair(Input, Output), _, true),
+				wait_for_active_workers(Control, RunId)
+			;	spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
+				serve_until_shutdown_parallel(Listener, Handler, Control, RunId)
+			)
 		;	wait_for_active_workers(Control, RunId)
 		).
 
 	serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size) :-
 		check_finished_workers(Control, RunId),
 		(	shutdown_requested(Control, RunId) ->
+			drain_shutdown_accept(Listener, Control, RunId),
 			wait_for_active_workers(Control, RunId)
 		;	active_worker_count(Control, RunId, Count),
 			(	Count < Size ->
 				(	try_process_listener_accept(Listener, Control, RunId, Input, Output) ->
-					spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
-					serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size)
+					(	shutdown_requested(Control, RunId) ->
+						catch(close_stream_pair(Input, Output), _, true),
+						wait_for_active_workers(Control, RunId)
+					;	spawn_open_connection_worker(Control, RunId, Input, Output, Handler),
+						serve_until_shutdown_pool(Listener, Handler, Control, RunId, Size)
+					)
 				;	wait_for_active_workers(Control, RunId)
 				)
 			;	wait_for_one_active_worker(Control, RunId),
@@ -1611,6 +1873,12 @@
 	handle_accept_error(Control, RunId, Error) :-
 		force_shutdown_control(Control, RunId),
 		throw(Error).
+
+	drain_shutdown_accept(Listener, Control, RunId) :-
+		( 	try_process_listener_accept(Listener, Control, RunId, Input, Output) ->
+			catch(close_stream_pair(Input, Output), _, true)
+		; 	true
+		).
 
 	spawn_open_connection_worker(Control, RunId, Input, Output, Handler) :-
 		Goal = setup_call_cleanup(

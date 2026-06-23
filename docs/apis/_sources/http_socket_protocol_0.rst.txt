@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-14
+| **Date:** 2026-06-22
 
 | **Compilation flags:**
 |    ``static``
@@ -320,6 +320,29 @@ Opens a client socket connection to the given host and port, performs a single H
 
 ------------
 
+.. index:: exchange/5
+.. _http_socket_protocol/0::exchange/5:
+
+``exchange/5``
+^^^^^^^^^^^^^^
+
+Opens a client socket connection to the given host and port using the given connection options, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, ``Connection: close`` is added automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(Host,Port,Request,Response,Options)``
+| **Mode and number of proofs:**
+|    ``exchange(+atom,+integer,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The transport implementation may throw connection-opening, request-validation, option-validation, or exchange exceptions:
+|        ``error``
+
+
+------------
+
 .. index:: exchange_connection/4
 .. _http_socket_protocol/0::exchange_connection/4:
 
@@ -526,6 +549,44 @@ Requests shutdown of an open-ended serving loop started with ``serve_until_shutd
 | **Exceptions:**
 |    The transport implementation may throw shutdown-control validation exceptions:
 |        ``error``
+
+
+------------
+
+.. index:: supported_request_scheme/1
+.. _http_socket_protocol/0::supported_request_scheme/1:
+
+``supported_request_scheme/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of supported request schemas.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_request_scheme(Scheme)``
+| **Mode and number of proofs:**
+|    ``supported_request_scheme(+nonvar)`` - ``one_or_more``
+
+
+------------
+
+.. index:: supported_websocket_scheme/1
+.. _http_socket_protocol/0::supported_websocket_scheme/1:
+
+``supported_websocket_scheme/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of supported websocket schemas.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_websocket_scheme(Scheme)``
+| **Mode and number of proofs:**
+|    ``supported_websocket_scheme(+nonvar)`` - ``one_or_more``
 
 
 ------------

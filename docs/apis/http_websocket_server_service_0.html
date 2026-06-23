@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_websocket_service(Role,TextRepresentation)" href="http_websocket_service_2.html" />
-    <link rel="prev" title="http_websocket_client_service" href="http_websocket_client_service_0.html" />
+    <link rel="next" title="http_websocket_server_service(HTTPSocket)" href="http_websocket_server_service_1.html" />
+    <link rel="prev" title="http_websocket_client_service(HTTPSocket)" href="http_websocket_client_service_1.html" />
    
 </head>
 
@@ -186,8 +186,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket-service"><span class="xref std std-ref">http_websocket_service</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_client_service_0.html">http_websocket_client_service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_client_service_1.html">http_websocket_client_service(HTTPSocket)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_server_service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_service_2.html">http_websocket_service(Role,TextRepresentation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_1.html">http_websocket_server_service(HTTPSocket)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_service_3.html">http_websocket_service(HTTPSocket,Role,TextRepresentation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_handler_protocol_0.html">http_websocket_service_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_loop_options_0.html">http_websocket_service_loop_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_registry_0.html">http_websocket_service_registry</a></li>
@@ -389,7 +391,7 @@
   <p class="right" id="http-websocket-server-service-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="http-websocket-server-service">
 <h1><code class="docutils literal notranslate"><span class="pre">http_websocket_server_service</span></code><a class="headerlink" href="#http-websocket-server-service" title="Link to this heading"></a></h1>
-<p>Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.</p>
+<p>By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> library.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -399,25 +401,18 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-19</div>
+<div class="line"><strong>Date:</strong> 2026-06-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls,</span> <span class="pre">threaded</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_websocket_service_2.html#http-websocket-service-2"><span class="std std-ref">http_websocket_service(server,atom)</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
-<div class="line"><a class="reference internal" href="http_websocket_service_registry_0.html#http-websocket-service-registry-0"><span class="std std-ref">http_websocket_service_registry</span></a></div>
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_websocket_service_3.html#http-websocket-service-3"><span class="std std-ref">http_websocket_service(http_socket,server,atom)</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -429,308 +424,29 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-initial-state-1"><span class="std std-ref">initial_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-is-message-1"><span class="std std-ref">is_message/1</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-is-state-1"><span class="std std-ref">is_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-message-3"><span class="std std-ref">message/3</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-payload-2"><span class="std std-ref">payload/2</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-read-message-2"><span class="std std-ref">read_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-4"><span class="std std-ref">read_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-5"><span class="std std-ref">read_message/5</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-6"><span class="std std-ref">read_message/6</span></a>  <a class="reference internal" href="http_websocket_service_2.html#http-websocket-service-2-run-session-3"><span class="std std-ref">run_session/3</span></a>  <a class="reference internal" href="http_websocket_service_2.html#http-websocket-service-2-run-session-4"><span class="std std-ref">run_session/4</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-type-2"><span class="std std-ref">type/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-2"><span class="std std-ref">write_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-3"><span class="std std-ref">write_message/3</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-4"><span class="std std-ref">write_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-5"><span class="std std-ref">write_message/5</span></a></div>
+<div class="line"> <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-initial-state-1"><span class="std std-ref">initial_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-is-message-1"><span class="std std-ref">is_message/1</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-is-state-1"><span class="std std-ref">is_state/1</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-message-3"><span class="std std-ref">message/3</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-payload-2"><span class="std std-ref">payload/2</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-read-message-2"><span class="std std-ref">read_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-4"><span class="std std-ref">read_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-5"><span class="std std-ref">read_message/5</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-read-message-6"><span class="std std-ref">read_message/6</span></a>  <a class="reference internal" href="http_websocket_service_3.html#http-websocket-service-3-run-session-3"><span class="std std-ref">run_session/3</span></a>  <a class="reference internal" href="http_websocket_service_3.html#http-websocket-service-3-run-session-4"><span class="std std-ref">run_session/4</span></a>  <a class="reference internal" href="http_websocket_messages_1.html#http-websocket-messages-1-type-2"><span class="std std-ref">type/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-2"><span class="std std-ref">write_message/2</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-3"><span class="std std-ref">write_message/3</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-4"><span class="std std-ref">write_message/4</span></a>  <a class="reference internal" href="http_websocket_session_2.html#http-websocket-session-2-write-message-5"><span class="std std-ref">write_message/5</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#serve-once-6" id="id2"><code class="docutils literal notranslate"><span class="pre">serve_once/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-once-7" id="id3"><code class="docutils literal notranslate"><span class="pre">serve_once/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-until-shutdown-5" id="id4"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-until-shutdown-6" id="id5"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#request-shutdown-1" id="id6"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#shutdown-seed-1" id="id9"><code class="docutils literal notranslate"><span class="pre">shutdown_seed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#shutdown-control-3" id="id10"><code class="docutils literal notranslate"><span class="pre">shutdown_control_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#shutdown-requested-2" id="id11"><code class="docutils literal notranslate"><span class="pre">shutdown_requested_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#active-worker-3" id="id12"><code class="docutils literal notranslate"><span class="pre">active_worker_/3</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="serve-once-6">
-<span id="http-websocket-server-service-0-serve-once-6"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/6</span></code></a><a class="headerlink" href="#serve-once-6" title="Link to this heading"></a></h3>
-<p>Accepts one incoming socket connection on the given listener, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler until the close handshake completes or the peer closes the stream.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(Listener,HandshakeHandler,SessionHandler,Response,State,ClientInfo)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,+object_identifier,-compound,-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">The listener or delegated WebSocket handshake and session handlers raise an exception:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="serve-once-7">
-<span id="http-websocket-server-service-0-serve-once-7"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/7</span></code></a><a class="headerlink" href="#serve-once-7" title="Link to this heading"></a></h3>
-<p>Accepts one incoming socket connection on the given listener, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler and the given session-loop options.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(Listener,HandshakeHandler,SessionHandler,Response,State,ClientInfo,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,+object_identifier,-compound,-compound,-compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">The listener, session handlers, or loop options are invalid for WebSocket server-session startup:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(on)</span></code>: Automatically writes pong replies while still forwarding ping messages to the session handler.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(off)</span></code>: Disables automatic pong replies. This is the default.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">idle_timeout(Seconds)</span></code>: Closes the session with <code class="docutils literal notranslate"><span class="pre">status(1001,</span> <span class="pre">idle_timeout)</span></code> after the given positive number of seconds without an inbound message. This option requires backend thread support.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Oversized frames are treated as <code class="docutils literal notranslate"><span class="pre">1009</span></code> close errors in the session loop. Use a non-negative integer.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="serve-until-shutdown-5">
-<span id="http-websocket-server-service-0-serve-until-shutdown-5"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a><a class="headerlink" href="#serve-until-shutdown-5" title="Link to this heading"></a></h3>
-<p>Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(Listener,HandshakeHandler,SessionHandler,Registry,Control)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(+compound,+object_identifier,+object_identifier,+compound,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">The listener, registry, control term, or delegated session handlers are invalid for registry-backed serving:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Thread support: This helper requires backend thread support so that multiple sessions can stay active concurrently.</p></li>
-<li><p>Handler actions: Plain normalized messages are written back to the originating session. <code class="docutils literal notranslate"><span class="pre">broadcast(Message)</span></code> queues <code class="docutils literal notranslate"><span class="pre">Message</span></code> for all registered sessions and <code class="docutils literal notranslate"><span class="pre">broadcast_others(Message)</span></code> queues it for all registered sessions except the originating one.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="serve-until-shutdown-6">
-<span id="http-websocket-server-service-0-serve-until-shutdown-6"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/6</span></code></a><a class="headerlink" href="#serve-until-shutdown-6" title="Link to this heading"></a></h3>
-<p>Accepts WebSocket opening handshakes on the given listener until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(Listener,HandshakeHandler,SessionHandler,Registry,Control,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(+compound,+object_identifier,+object_identifier,+compound,+nonvar,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">The listener, registry, control term, or session-loop options are invalid for registry-backed serving:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Remarks:</strong></div>
-</div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code>: Controls automatic pong replies in each active session loop.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">keepalive_interval(Seconds)</span></code>: Schedules empty ping messages when a peer stays silent for the given positive number of seconds.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">idle_timeout(Seconds)</span></code>: Closes a session with <code class="docutils literal notranslate"><span class="pre">status(1001,</span> <span class="pre">idle_timeout)</span></code> after the given positive number of seconds without an inbound message.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes)</span></code>: Rejects inbound frames whose declared payload length is greater than <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> before allocating payload storage. Oversized frames are treated as <code class="docutils literal notranslate"><span class="pre">1009</span></code> close errors in each session loop. Use a non-negative integer.</p></li>
-</ul>
-</div></blockquote>
-<hr class="docutils" />
-</section>
-<section id="request-shutdown-1">
-<span id="http-websocket-server-service-0-request-shutdown-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a><a class="headerlink" href="#request-shutdown-1" title="Link to this heading"></a></h3>
-<p>Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request_shutdown(Control)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request_shutdown(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is not a valid registered server-loop shutdown control term:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="shutdown-seed-1">
-<span id="http-websocket-server-service-0-shutdown-seed-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_seed_/1</span></code></a><a class="headerlink" href="#shutdown-seed-1" title="Link to this heading"></a></h3>
-<p>Last allocated shutdown run identifier for open-ended WebSocket server loops.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_seed_(RunId)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_seed_(?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="shutdown-control-3">
-<span id="http-websocket-server-service-0-shutdown-control-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_control_/3</span></code></a><a class="headerlink" href="#shutdown-control-3" title="Link to this heading"></a></h3>
-<p>Registered shutdown control terms and their associated listeners.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_control_(Control,Listener,RunId)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_control_(?nonvar,?compound,?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="shutdown-requested-2">
-<span id="http-websocket-server-service-0-shutdown-requested-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_requested_/2</span></code></a><a class="headerlink" href="#shutdown-requested-2" title="Link to this heading"></a></h3>
-<p>Recorded shutdown requests indexed by control term and run identifier.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_requested_(Control,RunId)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">shutdown_requested_(?nonvar,?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="active-worker-3">
-<span id="http-websocket-server-service-0-active-worker-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">active_worker_/3</span></code></a><a class="headerlink" href="#active-worker-3" title="Link to this heading"></a></h3>
-<p>Active WebSocket session worker records indexed by control term and run identifier.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">active_worker_(Control,RunId,Worker)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">active_worker_(?nonvar,?positive_integer,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
@@ -741,8 +457,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_websocket_client_service_0.html" class="btn btn-neutral float-left" title="http_websocket_client_service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_websocket_service_2.html" class="btn btn-neutral float-right" title="http_websocket_service(Role,TextRepresentation)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_websocket_client_service_1.html" class="btn btn-neutral float-left" title="http_websocket_client_service(HTTPSocket)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_websocket_server_service_1.html" class="btn btn-neutral float-right" title="http_websocket_server_service(HTTPSocket)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

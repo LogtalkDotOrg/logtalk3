@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(tests(_HTTPSocket_),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Unit tests for the "http_session" library.'
 	]).
 
@@ -33,7 +33,7 @@
 		body/2, property/2
 	]).
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_listener/1, open_listener/4, serve_listener/5
 	]).
 
@@ -46,7 +46,7 @@
 	]).
 
 	cover(http_cookie_jar).
-	cover(http_client_session).
+	cover(http_client_session(_)).
 	cover(http_server_session).
 	cover(http_server_session_handler(_, _)).
 	cover(http_server_session_router(_)).

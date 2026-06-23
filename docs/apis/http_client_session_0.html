@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_cookie_jar" href="http_cookie_jar_0.html" />
+    <link rel="next" title="http_client_session(A)" href="http_client_session_1.html" />
     <link rel="prev" title="http_server" href="http_server_0.html" />
    
 </head>
@@ -178,6 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_client_session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_client_session_1.html">http_client_session(A)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_cookie_jar_0.html">http_cookie_jar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_server_session_1.html">http_router_server_session(Manager)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_server_session_0.html">http_server_session</a></li>
@@ -388,7 +389,7 @@
   <p class="right" id="http-client-session-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="http-client-session">
 <h1><code class="docutils literal notranslate"><span class="pre">http_client_session</span></code><a class="headerlink" href="#http-client-session" title="Link to this heading"></a></h1>
-<p>Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.</p>
+<p>By default, stateful HTTP client sessions use the <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> library.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -398,7 +399,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-06</div>
+<div class="line"><strong>Date:</strong> 2026-06-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -407,445 +408,43 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Imports:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_origin_site_helpers_0.html#http-origin-site-helpers-0"><span class="std std-ref">http_origin_site_helpers</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="http_client_0.html#http-client-0"><span class="std std-ref">http_client</span></a></div>
-<div class="line"><a class="reference internal" href="http_cookie_jar_0.html#http-cookie-jar-0"><span class="std std-ref">http_cookie_jar</span></a></div>
-<div class="line"><a class="reference internal" href="http_cookies_1.html#http-cookies-1"><span class="std std-ref">http_cookies(Representation)</span></a></div>
-<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_client_session_1.html#http-client-session-1"><span class="std std-ref">http_client_session(http_socket)</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Option precedence: When the same session default or per-request option is given multiple times, the first occurrence is used.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-close-1"><span class="std std-ref">close/1</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-cookie-jar-2"><span class="std std-ref">cookie_jar/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-delete-4"><span class="std std-ref">delete/4</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-get-4"><span class="std std-ref">get/4</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-head-4"><span class="std std-ref">head/4</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-open-1"><span class="std std-ref">open/1</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-open-2"><span class="std std-ref">open/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-patch-5"><span class="std std-ref">patch/5</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-post-5"><span class="std std-ref">post/5</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-put-5"><span class="std std-ref">put/5</span></a>  <a class="reference internal" href="http_client_session_1.html#http-client-session-1-request-5"><span class="std std-ref">request/5</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#open-1" id="id2"><code class="docutils literal notranslate"><span class="pre">open/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-2" id="id3"><code class="docutils literal notranslate"><span class="pre">open/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#close-1" id="id4"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#cookie-jar-2" id="id5"><code class="docutils literal notranslate"><span class="pre">cookie_jar/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#request-5" id="id6"><code class="docutils literal notranslate"><span class="pre">request/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#get-4" id="id7"><code class="docutils literal notranslate"><span class="pre">get/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#head-4" id="id8"><code class="docutils literal notranslate"><span class="pre">head/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#delete-4" id="id9"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#post-5" id="id10"><code class="docutils literal notranslate"><span class="pre">post/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#put-5" id="id11"><code class="docutils literal notranslate"><span class="pre">put/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#patch-5" id="id12"><code class="docutils literal notranslate"><span class="pre">patch/5</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#session-seed-1" id="id15"><code class="docutils literal notranslate"><span class="pre">session_seed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#session-state-2" id="id16"><code class="docutils literal notranslate"><span class="pre">session_state_/2</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="open-1">
-<span id="http-client-session-0-open-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open/1</span></code></a><a class="headerlink" href="#open-1" title="Link to this heading"></a></h3>
-<p>Opens a new HTTP session with a freshly created owned cookie jar.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(Session)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="open-2">
-<span id="http-client-session-0-open-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open/2</span></code></a><a class="headerlink" href="#open-2" title="Link to this heading"></a></h3>
-<p>Opens a new HTTP session using the given defaults and cookie-jar options, including <code class="docutils literal notranslate"><span class="pre">cookies_file(File)</span></code> for reopening a saved owned cookie jar.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(Session,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open(-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid session defaults or cookie-jar options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="close-1">
-<span id="http-client-session-0-close-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">close/1</span></code></a><a class="headerlink" href="#close-1" title="Link to this heading"></a></h3>
-<p>Closes a session and, when applicable, the owned cookie jar created for it.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close(Session)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not an open HTTP client session handle:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="cookie-jar-2">
-<span id="http-client-session-0-cookie-jar-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cookie_jar/2</span></code></a><a class="headerlink" href="#cookie-jar-2" title="Link to this heading"></a></h3>
-<p>Returns the configured cookie jar handle or the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> when the session does not persist cookies.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_jar(Session,Jar)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">cookie_jar(+compound,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not an open HTTP client session handle:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="request-5">
-<span id="http-client-session-0-request-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request/5</span></code></a><a class="headerlink" href="#request-5" title="Link to this heading"></a></h3>
-<p>Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include <code class="docutils literal notranslate"><span class="pre">source_url(URL)</span></code> for an absolute HTTP or HTTPS URL, <code class="docutils literal notranslate"><span class="pre">source_origin(Origin)</span></code> for a bare Origin header value, and <code class="docutils literal notranslate"><span class="pre">top_level_navigation(Boolean)</span></code> to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to <code class="docutils literal notranslate"><span class="pre">source_url(URL)</span></code> and <code class="docutils literal notranslate"><span class="pre">top_level_navigation(false)</span></code>.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(Session,Method,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(+compound,+atom,+atom,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not an open HTTP client session handle:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid session request options or cookie-replay context metadata:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-<div class="line">The delegated stateless HTTP request or cookie-jar processing raises an exception:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="get-4">
-<span id="http-client-session-0-get-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">get/4</span></code></a><a class="headerlink" href="#get-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over request/5 using the <code class="docutils literal notranslate"><span class="pre">get</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">get(Session,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">get(+compound,+atom,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> for the given session, URL, and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="head-4">
-<span id="http-client-session-0-head-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">head/4</span></code></a><a class="headerlink" href="#head-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over request/5 using the <code class="docutils literal notranslate"><span class="pre">head</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">head(Session,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">head(+compound,+atom,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> for the given session, URL, and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="delete-4">
-<span id="http-client-session-0-delete-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a><a class="headerlink" href="#delete-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over request/5 using the <code class="docutils literal notranslate"><span class="pre">delete</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(Session,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+compound,+atom,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> for the given session, URL, and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="post-5">
-<span id="http-client-session-0-post-5"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">post/5</span></code></a><a class="headerlink" href="#post-5" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over request/5 using the <code class="docutils literal notranslate"><span class="pre">post</span></code> method and the given body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">post(Session,URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">post(+compound,+atom,+compound,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="put-5">
-<span id="http-client-session-0-put-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">put/5</span></code></a><a class="headerlink" href="#put-5" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over request/5 using the <code class="docutils literal notranslate"><span class="pre">put</span></code> method and the given body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">put(Session,URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">put(+compound,+atom,+compound,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="patch-5">
-<span id="http-client-session-0-patch-5"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">patch/5</span></code></a><a class="headerlink" href="#patch-5" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over request/5 using the <code class="docutils literal notranslate"><span class="pre">patch</span></code> method and the given body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">patch(Session,URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">patch(+compound,+atom,+compound,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="session-seed-1">
-<span id="http-client-session-0-session-seed-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">session_seed_/1</span></code></a><a class="headerlink" href="#session-seed-1" title="Link to this heading"></a></h3>
-<p>Last allocated session identifier.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">session_seed_(SessionId)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">session_seed_(?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="session-state-2">
-<span id="http-client-session-0-session-state-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">session_state_/2</span></code></a><a class="headerlink" href="#session-state-2" title="Link to this heading"></a></h3>
-<p>Per-session stored cookie jar ownership and default request state.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">session_state_(SessionId,State)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">session_state_(?positive_integer,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
@@ -857,7 +456,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="http_server_0.html" class="btn btn-neutral float-left" title="http_server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_cookie_jar_0.html" class="btn btn-neutral float-right" title="http_cookie_jar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_client_session_1.html" class="btn btn-neutral float-right" title="http_client_session(A)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -8,32 +8,27 @@
 ``http_websocket_client_service``
 =================================
 
-Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.
+By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket_service(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-19
+| **Date:** 2026-06-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`http_websocket_service(client,atom) <http_websocket_service/2>`
-| **Uses:**
-|    :ref:`http_client <http_client/0>`
-|    :ref:`http_socket <http_socket/0>`
-|    :ref:`list <list/0>`
-|    :ref:`user <user/0>`
+|    ``public`` :ref:`http_websocket_service(http_socket,client,atom) <http_websocket_service/3>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`http_websocket_session/2::initial_state/1`  :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_session/2::is_state/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_session/2::read_message/4`  :ref:`http_websocket_session/2::read_message/5`  :ref:`http_websocket_session/2::read_message/6`  :ref:`http_websocket_service/2::run_session/3`  :ref:`http_websocket_service/2::run_session/4`  :ref:`http_websocket_messages/1::type/2`  :ref:`http_websocket_session/2::write_message/2`  :ref:`http_websocket_session/2::write_message/3`  :ref:`http_websocket_session/2::write_message/4`  :ref:`http_websocket_session/2::write_message/5`  
+|     :ref:`http_websocket_session/2::initial_state/1`  :ref:`http_websocket_messages/1::is_message/1`  :ref:`http_websocket_session/2::is_state/1`  :ref:`http_websocket_messages/1::message/3`  :ref:`http_websocket_messages/1::payload/2`  :ref:`http_websocket_messages/1::read_message/2`  :ref:`http_websocket_session/2::read_message/4`  :ref:`http_websocket_session/2::read_message/5`  :ref:`http_websocket_session/2::read_message/6`  :ref:`http_websocket_service/3::run_session/3`  :ref:`http_websocket_service/3::run_session/4`  :ref:`http_websocket_messages/1::type/2`  :ref:`http_websocket_session/2::write_message/2`  :ref:`http_websocket_session/2::write_message/3`  :ref:`http_websocket_session/2::write_message/4`  :ref:`http_websocket_session/2::write_message/5`  
 
 .. contents::
    :local:
@@ -42,61 +37,7 @@ Client-side convenience for callback-driven WebSocket sessions with atom text re
 Public predicates
 -----------------
 
-.. index:: open/4
-.. _http_websocket_client_service/0::open/4:
-
-``open/4``
-^^^^^^^^^^
-
-Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop until the close handshake completes or the peer closes the stream.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``open(URL,Handler,Response,State)``
-| **Mode and number of proofs:**
-|    ``open(+atom,+object_identifier,-compound,-compound)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``URL`` or ``Handler`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception:
-|        ``error``
-
-
-------------
-
-.. index:: open/5
-.. _http_websocket_client_service/0::open/5:
-
-``open/5``
-^^^^^^^^^^
-
-Builds a WebSocket opening handshake from the given absolute ``ws://`` URL, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop using the given combined handshake and session options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``open(URL,Handler,Response,State,Options)``
-| **Mode and number of proofs:**
-|    ``open(+atom,+object_identifier,-compound,-compound,+list)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``URL``, ``Handler``, or ``Options`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception:
-|        ``error``
-
-| **Remarks:**
-
-    - Repeated options: When the same handshake or session option is given multiple times, the first occurrence is used.
-    - Handshake options: The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`.
-    - Session option ``auto_pong(on|off)``: Controls automatic pong replies during the session loop.
-    - Session option ``initial_messages(Messages)``: Writes the given list of normalized outbound messages before entering the session loop.
-    - Session option ``keepalive_interval(Seconds)``: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.
-    - Session option ``idle_timeout(Seconds)``: Closes the session with ``status(1001, idle_timeout)`` after the given positive number of seconds without an inbound message. This option requires backend thread support.
-    - Session option ``max_payload_length(Bytes)``: Rejects inbound frames whose declared payload length is greater than ``Bytes`` before allocating payload storage. Oversized frames are treated as ``1009`` close errors in the session loop. Use a non-negative integer.
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

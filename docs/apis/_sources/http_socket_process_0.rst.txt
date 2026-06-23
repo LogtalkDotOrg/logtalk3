@@ -15,7 +15,7 @@ Process-backed HTTP transport predicates using the process library and helper pr
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-19
+| **Date:** 2026-06-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -42,7 +42,7 @@ Process-backed HTTP transport predicates using the process library and helper pr
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_listener_shutdown/1`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_until_shutdown/5`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange/5`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_listener_shutdown/1`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_until_shutdown/5`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`http_socket_protocol/0::supported_request_scheme/1`  :ref:`http_socket_protocol/0::supported_websocket_scheme/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -51,7 +51,43 @@ Process-backed HTTP transport predicates using the process library and helper pr
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: temporary_tls_credentials/3
+.. _http_socket_process/0::temporary_tls_credentials/3:
+
+``temporary_tls_credentials/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates or reuses temporary TLS certificate and key files under the system temporary directory using the given file name prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``temporary_tls_credentials(Prefix,CertificateFile,KeyFile)``
+| **Mode and number of proofs:**
+|    ``temporary_tls_credentials(+atom,-atom,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: temporary_tls_credentials_files/3
+.. _http_socket_process/0::temporary_tls_credentials_files/3:
+
+``temporary_tls_credentials_files/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the temporary TLS certificate and key file paths used for a given file name prefix without creating the files.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``temporary_tls_credentials_files(Prefix,CertificateFile,KeyFile)``
+| **Mode and number of proofs:**
+|    ``temporary_tls_credentials_files(+atom,-atom,-atom)`` - ``one_or_error``
+
+
+------------
 
 Protected predicates
 --------------------
@@ -194,6 +230,44 @@ Registered process state for open listeners.
 
 ------------
 
+.. index:: listener_temporary_tls_credentials_/3
+.. _http_socket_process/0::listener_temporary_tls_credentials_/3:
+
+``listener_temporary_tls_credentials_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Tracked temporary TLS credential files owned by open listeners.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_temporary_tls_credentials_(ListenerId,CertificateFile,KeyFile)``
+| **Mode and number of proofs:**
+|    ``listener_temporary_tls_credentials_(?positive_integer,?atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: listener_handle_alias_/2
+.. _http_socket_process/0::listener_handle_alias_/2:
+
+``listener_handle_alias_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maps public listener handles to registered process listener identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_handle_alias_(Listener,ListenerId)``
+| **Mode and number of proofs:**
+|    ``listener_handle_alias_(?term,?positive_integer)`` - ``zero_or_more``
+
+
+------------
+
 .. index:: listener_event_/2
 .. _http_socket_process/0::listener_event_/2:
 
@@ -219,7 +293,7 @@ Queued listener events parsed from the listener helper diagnostics stream.
 ``process_listener_shutdown_requested_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Flag recording that a listener shutdown request was already sent.
+Flag recording that a synthetic listener shutdown wakeup is pending.
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -228,6 +302,25 @@ Flag recording that a listener shutdown request was already sent.
 |    ``process_listener_shutdown_requested_(ListenerId)``
 | **Mode and number of proofs:**
 |    ``process_listener_shutdown_requested_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: listener_error_drain_worker_/2
+.. _http_socket_process/0::listener_error_drain_worker_/2:
+
+``listener_error_drain_worker_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Tracked background diagnostics drain worker for an open listener.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``listener_error_drain_worker_(ListenerId,Worker)``
+| **Mode and number of proofs:**
+|    ``listener_error_drain_worker_(?positive_integer,?compound)`` - ``zero_or_one``
 
 
 ------------

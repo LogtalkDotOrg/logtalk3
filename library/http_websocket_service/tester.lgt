@@ -30,6 +30,7 @@
 		logtalk_load(timeout(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_socket(loader)),
+		logtalk_load(http_socket_process(loader)),
 		logtalk_load(http_websocket_session(loader)),
 		logtalk_load([
 			http_websocket_service_handler_protocol,
@@ -42,7 +43,10 @@
 		logtalk_load(test_objects),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
+		lgtunit::run_test_sets([
+			tests(http_socket),
+			tests(http_socket_process)
+		])
 	)).
 
 :- else.

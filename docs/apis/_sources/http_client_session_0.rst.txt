@@ -8,35 +8,27 @@
 ``http_client_session``
 =======================
 
-Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.
+By default, stateful HTTP client sessions use the ``http_socket`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_session(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-06
+| **Date:** 2026-06-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Imports:**
-|    ``public`` :ref:`options <options/0>`
-|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
-| **Uses:**
-|    :ref:`http_client <http_client/0>`
-|    :ref:`http_cookie_jar <http_cookie_jar/0>`
-|    :ref:`http_cookies(Representation) <http_cookies/1>`
-|    :ref:`http_core <http_core/0>`
-|    :ref:`list <list/0>`
+| **Extends:**
+|    ``public`` :ref:`http_client_session(http_socket) <http_client_session/1>`
 
 | **Remarks:**
-
-   - Option precedence: When the same session default or per-request option is given multiple times, the first occurrence is used.
+|    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_client_session/1::close/1`  :ref:`http_client_session/1::cookie_jar/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_client_session/1::delete/4`  :ref:`http_client_session/1::get/4`  :ref:`http_client_session/1::head/4`  :ref:`http_client_session/1::open/1`  :ref:`http_client_session/1::open/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_client_session/1::patch/5`  :ref:`http_client_session/1::post/5`  :ref:`http_client_session/1::put/5`  :ref:`http_client_session/1::request/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -45,260 +37,7 @@ Stateful HTTP client sessions that add cookie persistence on top of the stateles
 Public predicates
 -----------------
 
-.. index:: open/1
-.. _http_client_session/0::open/1:
-
-``open/1``
-^^^^^^^^^^
-
-Opens a new HTTP session with a freshly created owned cookie jar.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``open(Session)``
-| **Mode and number of proofs:**
-|    ``open(-compound)`` - ``one_or_error``
-
-| **Exceptions:**
-
-
-------------
-
-.. index:: open/2
-.. _http_client_session/0::open/2:
-
-``open/2``
-^^^^^^^^^^
-
-Opens a new HTTP session using the given defaults and cookie-jar options, including ``cookies_file(File)`` for reopening a saved owned cookie jar.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``open(Session,Options)``
-| **Mode and number of proofs:**
-|    ``open(-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Options`` contain invalid session defaults or cookie-jar options:
-|        ``error``
-
-
-------------
-
-.. index:: close/1
-.. _http_client_session/0::close/1:
-
-``close/1``
-^^^^^^^^^^^
-
-Closes a session and, when applicable, the owned cookie jar created for it.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``close(Session)``
-| **Mode and number of proofs:**
-|    ``close(+compound)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Session`` is not an open HTTP client session handle:
-|        ``error``
-
-
-------------
-
-.. index:: cookie_jar/2
-.. _http_client_session/0::cookie_jar/2:
-
-``cookie_jar/2``
-^^^^^^^^^^^^^^^^
-
-Returns the configured cookie jar handle or the atom ``none`` when the session does not persist cookies.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``cookie_jar(Session,Jar)``
-| **Mode and number of proofs:**
-|    ``cookie_jar(+compound,-term)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Session`` is not an open HTTP client session handle:
-|        ``error``
-
-
-------------
-
-.. index:: request/5
-.. _http_client_session/0::request/5:
-
-``request/5``
-^^^^^^^^^^^^^
-
-Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include ``source_url(URL)`` for an absolute HTTP or HTTPS URL, ``source_origin(Origin)`` for a bare Origin header value, and ``top_level_navigation(Boolean)`` to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to ``source_url(URL)`` and ``top_level_navigation(false)``.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``request(Session,Method,URL,Response,Options)``
-| **Mode and number of proofs:**
-|    ``request(+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Session`` is not an open HTTP client session handle:
-|        ``error``
-|    ``Options`` contain invalid session request options or cookie-replay context metadata:
-|        ``error``
-|    The delegated stateless HTTP request or cookie-jar processing raises an exception:
-|        ``error``
-
-
-------------
-
-.. index:: get/4
-.. _http_client_session/0::get/4:
-
-``get/4``
-^^^^^^^^^
-
-Convenience wrapper over request/5 using the ``get`` method.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``get(Session,URL,Response,Options)``
-| **Mode and number of proofs:**
-|    ``get(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    Any exception that can be thrown by ``request/5`` for the given session, URL, and options:
-|        ``error``
-
-
-------------
-
-.. index:: head/4
-.. _http_client_session/0::head/4:
-
-``head/4``
-^^^^^^^^^^
-
-Convenience wrapper over request/5 using the ``head`` method.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``head(Session,URL,Response,Options)``
-| **Mode and number of proofs:**
-|    ``head(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    Any exception that can be thrown by ``request/5`` for the given session, URL, and options:
-|        ``error``
-
-
-------------
-
-.. index:: delete/4
-.. _http_client_session/0::delete/4:
-
-``delete/4``
-^^^^^^^^^^^^
-
-Convenience wrapper over request/5 using the ``delete`` method.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``delete(Session,URL,Response,Options)``
-| **Mode and number of proofs:**
-|    ``delete(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    Any exception that can be thrown by ``request/5`` for the given session, URL, and options:
-|        ``error``
-
-
-------------
-
-.. index:: post/5
-.. _http_client_session/0::post/5:
-
-``post/5``
-^^^^^^^^^^
-
-Convenience wrapper over request/5 using the ``post`` method and the given body.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``post(Session,URL,Body,Response,Options)``
-| **Mode and number of proofs:**
-|    ``post(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
-|        ``error``
-
-
-------------
-
-.. index:: put/5
-.. _http_client_session/0::put/5:
-
-``put/5``
-^^^^^^^^^
-
-Convenience wrapper over request/5 using the ``put`` method and the given body.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``put(Session,URL,Body,Response,Options)``
-| **Mode and number of proofs:**
-|    ``put(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
-|        ``error``
-
-
-------------
-
-.. index:: patch/5
-.. _http_client_session/0::patch/5:
-
-``patch/5``
-^^^^^^^^^^^
-
-Convenience wrapper over request/5 using the ``patch`` method and the given body.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``patch(Session,URL,Body,Response,Options)``
-| **Mode and number of proofs:**
-|    ``patch(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
-
-| **Exceptions:**
-|    Any exception that can be thrown by ``request/5`` when the given body is merged into the request options:
-|        ``error``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------
@@ -308,43 +47,7 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: session_seed_/1
-.. _http_client_session/0::session_seed_/1:
-
-``session_seed_/1``
-^^^^^^^^^^^^^^^^^^^
-
-Last allocated session identifier.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``session_seed_(SessionId)``
-| **Mode and number of proofs:**
-|    ``session_seed_(?positive_integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: session_state_/2
-.. _http_client_session/0::session_state_/2:
-
-``session_state_/2``
-^^^^^^^^^^^^^^^^^^^^
-
-Per-session stored cookie jar ownership and default request state.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``session_state_(SessionId,State)``
-| **Mode and number of proofs:**
-|    ``session_state_(?positive_integer,?compound)`` - ``zero_or_more``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

@@ -19,14 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_websocket,
+:- object(http_websocket(_HTTPSocket_),
 	imports(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
-		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.'
+		date is 2026-06-22,
+		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.',
+		parnames is ['HTTPSocket']
 	]).
 
 	:- public(open/2).
@@ -288,7 +289,7 @@
 		member/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(http_client, [
+	:- uses(http_client(_HTTPSocket_), [
 		open_websocket/4 as open_client_websocket/4
 	]).
 
@@ -296,11 +297,11 @@
 		property/2 as http_property/2
 	]).
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_connection/1, connection_streams/3, serve_websocket_once/5
 	]).
 
-	:- uses(http_websocket_client_service, [
+	:- uses(http_websocket_client_service(_HTTPSocket_), [
 		open/5 as open_client_session/5
 	]).
 
@@ -313,7 +314,7 @@
 		is_message/1, message/3 as websocket_message/3
 	]).
 
-	:- uses(http_websocket_server_service, [
+	:- uses(http_websocket_server_service(_HTTPSocket_), [
 		serve_once/7 as serve_server_session/7
 	]).
 
@@ -708,12 +709,25 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-04,
+		date is 2026-06-22,
 		comment is 'Internal opening-handshake adapter used by the high-level http_websocket server predicates.',
 		parnames is ['Options']
 	]).
 
 	handle(Request, Response) :-
 		http_server::accept_websocket(Request, Response, _Options_).
+
+:- end_object.
+
+
+:- object(http_websocket,
+	extends(http_websocket(http_socket))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-22,
+		comment is 'By default, the high-level WebSocket predicates use the ``http_socket`` library.'
+	]).
 
 :- end_object.

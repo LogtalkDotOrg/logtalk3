@@ -333,6 +333,27 @@
 		body(Response, content('text/plain', text(cancel))),
 		client_connection_state('127.0.0.1', Port, closed).
 
+	test(http_socket_serve_listener_5_07, deterministic) :-
+		Request1 = request(post, origin('/shutdown-reuse-one'), http(1, 1), [host-host('example.com')], content('text/plain', text(one)), []),
+		Request2 = request(post, origin('/shutdown-reuse-two'), http(1, 1), [host-host('example.com')], content('text/plain', text(two)), []),
+		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(http_socket::serve_listener(Listener, echo_http_socket_handler, 2, ClientInfos, [shutdown(keep_open)]), ServeTag),
+		threaded_once(client_exchange_response('127.0.0.1', Port, Request1, Response1), ClientTag1),
+		threaded_exit(client_exchange_response('127.0.0.1', Port, Request1, Response1), ClientTag1),
+		http_socket::request_listener_shutdown(Listener),
+		threaded_exit(http_socket::serve_listener(Listener, echo_http_socket_handler, 2, ClientInfos, [shutdown(keep_open)]), ServeTag),
+		ClientInfos = [ClientInfo1],
+		threaded_once(client_exchange_response('127.0.0.1', Port, Request2, Response2), ClientTag2),
+		http_socket::serve_once(Listener, echo_http_socket_handler, ClientInfo2),
+		http_socket::close_listener(Listener),
+		threaded_exit(client_exchange_response('127.0.0.1', Port, Request2, Response2), ClientTag2),
+		compound(ClientInfo1),
+		compound(ClientInfo2),
+		status(Response1, status(200, 'OK')),
+		body(Response1, content('text/plain', text(one))),
+		status(Response2, status(200, 'OK')),
+		body(Response2, content('text/plain', text(two))).
+
 	test(http_socket_serve_until_shutdown_4_01, deterministic) :-
 		Control = serial_listener_control,
 		Request = request(post, origin('/serial-shutdown'), http(1, 1), [host-host('example.com')], content('text/plain', text(serial)), []),

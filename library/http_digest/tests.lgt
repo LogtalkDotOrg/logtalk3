@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(tests(_HTTPSocket_),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Unit tests for the "http_digest" library.'
 	]).
 
@@ -33,7 +33,7 @@
 		body/2, headers/2, property/2, request/7, response/6, status/2
 	]).
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_listener/1, open_listener/4, serve_listener/5
 	]).
 

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-06-22,
 		comment is 'Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http_client_core``, and ``http_server`` libraries.'
 	]).
 
@@ -144,6 +144,10 @@
 		:- meta_predicate(wait_for_workers(*, *)).
 	:- endif.
 
+	supported_request_scheme(http).
+
+	supported_websocket_scheme(ws).
+
 	open_listener(Host, Port, Listener, Options) :-
 		socket::server_open(Host, Port, Listener, Options),
 		register_listener_endpoint(Listener, Host, Port).
@@ -207,11 +211,14 @@
 		http_client_core::exchange_connection(Input, Output, Requests, Responses).
 
 	exchange(Host, Port, Request, Response) :-
+		exchange(Host, Port, Request, Response, []).
+
+	exchange(Host, Port, Request, Response, Options) :-
 		one_shot_request(Request, OneShotRequest),
 		setup_call_cleanup(
-			socket::client_open(Host, Port, Input, Output),
+			open_connection(Host, Port, http_connection(Host, Port, Input, Output), Options),
 			http_client_core::exchange(Input, Output, OneShotRequest, Response),
-			socket::close(Input, Output)
+			close_connection(http_connection(Host, Port, Input, Output))
 		).
 
 	exchange_connection(_Host, _Port, [], []) :-

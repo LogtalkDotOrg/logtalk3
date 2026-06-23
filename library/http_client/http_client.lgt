@@ -19,17 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client,
+:- object(http_client(_HTTPSocket_),
 	imports([options, http_message_helpers, http_text_helpers, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
+		parnames is ['HTTPSocket'],
 		remarks is [
 			'URL support' - 'This initial facade currently supports only absolute ``http://`` URLs. ``https://`` URLs are rejected until TLS support is added to the transport layer.',
-			'Request construction' - 'The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.',
+			'Request construction' - 'The ``request/4-5`` predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library. One-shot requests can also pass transport-specific ``connection_options(Options)`` forwarded to the underlying ``open_connection/4`` call.',
 			'Option precedence' - 'When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.',
 			'WebSocket opening handshake' - 'The ``open_websocket/4`` predicate validates an absolute ``ws://`` URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the ``101`` response, and returns the upgraded connection handle together with the response. ``wss://`` remains out of scope until TLS support exists.',
 			'Multipart form-data' - 'The body option and the ``post/4-5``, ``put/4-5``, and ``patch/4-5`` predicates accept a parameter-aware ``form_data(Items)`` descriptor using the ``field(Name, Value, Parameters)`` and ``file(Name, Filename, MediaType, Payload, Parameters)`` shapes supported by the ``http_multipart`` library; the request builder translates those descriptors and annotates the request with a multipart boundary property before construction.',
@@ -196,8 +197,8 @@
 		member/2, memberchk/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(http_socket, [
-		close_connection/1, exchange/3, exchange/4, open_connection/4
+	:- uses(_HTTPSocket_, [
+		close_connection/1, exchange/3, exchange/5, open_connection/4
 	]).
 
 	:- uses(http_websocket_handshake, [
@@ -210,12 +211,12 @@
 	]).
 
 	request(Method, URL, Response, Options) :-
-		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties),
+		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions),
 		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Host, Port, Request),
-		exchange(Host, Port, Request, Response).
+		exchange(Host, Port, Request, Response, ConnectionOptions).
 
 	request(ConnectionOrPool, Method, URL, Response, Options) :-
-		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties),
+		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, _ConnectionOptions),
 		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Host, Port, Request),
 		validate_connection_or_pool_endpoint(ConnectionOrPool, Host, Port),
 		exchange(ConnectionOrPool, Request, Response).
@@ -276,7 +277,7 @@
 			)
 		).
 
-	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties) :-
+	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions) :-
 		^^check_options(Options),
 		check_request_options(Options),
 		^^merge_options(Options, MergedOptions),
@@ -285,6 +286,7 @@
 		^^option(query(QueryPairs), MergedOptions),
 		^^option(version(Version), MergedOptions),
 		^^option(properties(Properties0), MergedOptions),
+		^^option(connection_options(ConnectionOptions), MergedOptions),
 		resolve_request_body(Body0, Headers, Properties0, Body, Properties).
 
 	parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions) :-
@@ -348,6 +350,8 @@
 		!.
 	check_request_option(properties(_)) :-
 		!.
+	check_request_option(connection_options(_)) :-
+		!.
 	check_request_option(Option) :-
 		domain_error(http_client_request_option, Option).
 
@@ -383,6 +387,8 @@
 		Minor >= 0.
 	valid_option(properties(Properties)) :-
 		proper_list(Properties).
+	valid_option(connection_options(ConnectionOptions)) :-
+		proper_list(ConnectionOptions).
 
 	valid_option(protocols(Protocols)) :-
 		proper_list(Protocols).
@@ -395,9 +401,9 @@
 	default_option(query([])).
 	default_option(version(http(1, 1))).
 	default_option(properties([])).
+	default_option(connection_options([])).
 	default_option(protocols([])).
 	default_option(key(none)).
-	default_option(connection_options([])).
 
 	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Host, Port, Request) :-
 		parse_http_url(URL, Host, Port, Path, URLQuery),
@@ -446,32 +452,22 @@
 	validate_request_scheme(Components) :-
 		member(scheme(Scheme), Components),
 		!,
-		validate_request_scheme_name(Scheme).
+		(	_HTTPSocket_::supported_request_scheme(Scheme) ->
+			true
+		;	domain_error(http_client_scheme, Scheme)
+		).
 	validate_request_scheme(_Components) :-
 		domain_error(http_client_url, missing_scheme).
-
-	validate_request_scheme_name(http) :-
-		!.
-	validate_request_scheme_name(https) :-
-		!,
-		domain_error(http_client_scheme, https).
-	validate_request_scheme_name(Scheme) :-
-		domain_error(http_client_scheme, Scheme).
 
 	validate_websocket_scheme(Components) :-
 		member(scheme(Scheme), Components),
 		!,
-		validate_websocket_scheme_name(Scheme).
+		(	_HTTPSocket_::supported_websocket_scheme(Scheme) ->
+			true
+		;	domain_error(http_client_websocket_scheme, Scheme)
+		).
 	validate_websocket_scheme(_Components) :-
 		domain_error(http_client_websocket_url, missing_scheme).
-
-	validate_websocket_scheme_name(ws) :-
-		!.
-	validate_websocket_scheme_name(wss) :-
-		!,
-		domain_error(http_client_websocket_scheme, wss).
-	validate_websocket_scheme_name(Scheme) :-
-		domain_error(http_client_websocket_scheme, Scheme).
 
 	validate_websocket_fragment(Components, URL) :-
 		(	member(fragment(Fragment), Components), Fragment \== '' ->
@@ -692,5 +688,18 @@
 
 	lowercase_ascii_codes(Codes, LowercaseCodes) :-
 		^^lowercase_ascii_codes(Codes, LowercaseCodes).
+
+:- end_object.
+
+
+:- object(http_client,
+	extends(http_client(http_socket))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-22,
+		comment is 'By default, the request-oriented HTTP client facade uses the ``http_socket`` library.'
+	]).
 
 :- end_object.

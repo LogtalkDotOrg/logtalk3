@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(tests(_HTTPSocket_),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Unit tests for the "http_websocket_service" library.'
 	]).
 
@@ -33,18 +33,26 @@
 		request/7, status/2
 	]).
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_connection/1, close_listener/1, connection_streams/3, exchange/3, open_connection/4,
 		open_listener/4, serve_websocket_once/5
+	]).
+
+	:- uses(http_websocket_client_service(_HTTPSocket_), [
+		open/5
+	]).
+
+	:- uses(http_websocket_server_service(_HTTPSocket_), [
+		request_shutdown/1, run_session/4, serve_once/7, serve_until_shutdown/6
 	]).
 
 	:- uses(user, [
 		atomic_list_concat/2
 	]).
 
-	cover(http_websocket_service(_, _)).
-	cover(http_websocket_client_service).
-	cover(http_websocket_server_service).
+	cover(http_websocket_service(_, _, _)).
+	cover(http_websocket_client_service(_)).
+	cover(http_websocket_server_service(_)).
 	cover(http_websocket_service_registry).
 
 	:- if(current_logtalk_flag(threads, supported)).
@@ -190,9 +198,9 @@
 
 	test(http_websocket_client_service_open_5_01, deterministic) :-
 		open_listener('127.0.0.1', Port, Listener, []),
-		threaded_once(http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, websocket_service_loop_handler, ServerResponse, ServerState, _ClientInfo, [auto_pong(on)]), ServerTag),
+		threaded_once(serve_once(Listener, websocket_handshake_handler, websocket_service_loop_handler, ServerResponse, ServerState, _ClientInfo, [auto_pong(on)]), ServerTag),
 		local_ws_url(Port, '/socket', URL),
-		http_websocket_client_service::open(
+		open(
 			URL,
 			websocket_client_service_loop_handler,
 			ClientResponse,
@@ -207,7 +215,7 @@
 				max_payload_length(5)
 			]
 		),
-		threaded_exit(http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, websocket_service_loop_handler, ServerResponse, ServerState, _ClientInfo, [auto_pong(on)]), ServerTag),
+		threaded_exit(serve_once(Listener, websocket_handshake_handler, websocket_service_loop_handler, ServerResponse, ServerState, _ClientInfo, [auto_pong(on)]), ServerTag),
 		close_listener(Listener),
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
@@ -291,7 +299,7 @@
 		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_session_once(Listener, websocket_keepalive_close_handler, ServerResponse, ServerState, []), ServerTag),
 		local_ws_url(Port, '/socket', URL),
-		http_websocket_client_service::open(
+		open(
 			URL,
 			websocket_client_service_loop_handler,
 			ClientResponse,
@@ -316,7 +324,7 @@
 		HandshakeResponse = 'HTTP/1.1 401 Unauthorized\r\nwww-authenticate: Basic realm="socket"\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
-		catch(http_websocket_client_service::open(URL, websocket_client_service_loop_handler, _Response, _State, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		catch(open(URL, websocket_client_service_loop_handler, _Response, _State, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
 		Error = error(domain_error(http_client_websocket_authentication_rejection, Response), _),
 		status(Response, status(401, 'Unauthorized')),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
@@ -327,7 +335,7 @@
 		HandshakeResponse = 'HTTP/1.1 302 Found\r\nlocation: /other-socket\r\ncontent-length: 0\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HandshakeResponse), Tag),
 		local_ws_url(Port, '/socket', URL),
-		catch(http_websocket_client_service::open(URL, websocket_client_service_loop_handler, _Response, _State, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
+		catch(open(URL, websocket_client_service_loop_handler, _Response, _State, [key('dGhlIHNhbXBsZSBub25jZQ==')]), Error, true),
 		Error = error(domain_error(http_client_websocket_redirection_rejection, Response), _),
 		status(Response, status(302, 'Found')),
 		threaded_exit(raw_server_once(Listener, HandshakeResponse), Tag),
@@ -352,7 +360,7 @@
 		read_reply_frames_until_close(2.0, ClientInput2, [CloseFrame2]),
 		safe_close_connection(ClientConnection1),
 		safe_close_connection(ClientConnection2),
-		http_websocket_server_service::request_shutdown(Control),
+		request_shutdown(Control),
 		threaded_exit(server_session_until_shutdown(Listener, websocket_broadcast_service_handler, Registry, Control, []), ServerTag),
 		http_websocket_service_registry::session_count(Registry, Count),
 		safe_close_listener(Listener),
@@ -386,7 +394,7 @@
 		read_reply_frames_until_close(2.0, ClientInput2, Client2Frames),
 		safe_close_connection(ClientConnection1),
 		safe_close_connection(ClientConnection2),
-		http_websocket_server_service::request_shutdown(Control),
+		request_shutdown(Control),
 		threaded_exit(server_session_until_shutdown(Listener, websocket_close_broadcast_service_handler, Registry, Control, []), ServerTag),
 		http_websocket_service_registry::session_count(Registry, Count),
 		safe_close_listener(Listener),
@@ -416,7 +424,7 @@
 		write_client_close(ClientOutput, status(1000)),
 		read_frame_with_timeout(2.0, ClientInput, NextFrame),
 		safe_close_connection(ClientConnection),
-		http_websocket_server_service::request_shutdown(Control),
+		request_shutdown(Control),
 		threaded_exit(server_session_until_shutdown(Listener, websocket_close_then_broadcast_service_handler, Registry, Control, []), ServerTag),
 		http_websocket_service_registry::session_count(Registry, Count),
 		safe_close_listener(Listener),
@@ -487,17 +495,17 @@
 		atomic_list_concat(['ws://127.0.0.1:', Port, Path], URL).
 
 	server_session_once(Listener, SessionHandler, Response, State, Options) :-
-		http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, SessionHandler, Response, State, _ClientInfo, Options).
+		serve_once(Listener, websocket_handshake_handler, SessionHandler, Response, State, _ClientInfo, Options).
 
 	server_session_once_with_client_info(Listener, SessionHandler, Response, State, ClientInfo, Options) :-
-		http_websocket_server_service::serve_once(Listener, websocket_handshake_handler, SessionHandler, Response, State, ClientInfo, Options).
+		serve_once(Listener, websocket_handshake_handler, SessionHandler, Response, State, ClientInfo, Options).
 
 	server_run_session(Listener, SessionHandler, Response, State, Options) :-
 		serve_websocket_once(Listener, websocket_handshake_handler, Connection, Response, _ClientInfo),
-		http_websocket_server_service::run_session(Connection, SessionHandler, State, Options).
+		run_session(Connection, SessionHandler, State, Options).
 
 	server_session_until_shutdown(Listener, SessionHandler, Registry, Control, Options) :-
-		http_websocket_server_service::serve_until_shutdown(Listener, websocket_handshake_handler, SessionHandler, Registry, Control, Options).
+		serve_until_shutdown(Listener, websocket_handshake_handler, SessionHandler, Registry, Control, Options).
 
 	wait_for_registry_session_count(Registry, ExpectedCount) :-
 		wait_for_registry_session_count(Registry, ExpectedCount, 100).

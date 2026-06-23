@@ -19,16 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client_session,
+:- object(http_client_session(_HTTPSocket_),
 	imports([options, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-06,
+		date is 2026-06-22,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless http_client facade.',
 		remarks is [
-			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.'
+			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.',
+			'Transport options' - 'The ``connection_options(Options)`` session default and request option forwards one-shot transport configuration to the underlying ``http_client`` facade.'
 		]
 	]).
 
@@ -43,7 +44,7 @@
 	:- public(open/2).
 	:- mode(open(-compound, +list(compound)), one_or_error).
 	:- info(open/2, [
-		comment is 'Opens a new HTTP session using the given defaults and cookie-jar options, including ``cookies_file(File)`` for reopening a saved owned cookie jar.',
+		comment is 'Opens a new HTTP session using the given defaults and cookie-jar options, including ``cookies_file(File)`` for reopening a saved owned cookie jar and ``connection_options(Options)`` for one-shot transport configuration.',
 		argnames is ['Session', 'Options'],
 		exceptions is [
 			'``Options`` contain invalid session defaults or cookie-jar options' - error
@@ -73,7 +74,7 @@
 	:- public(request/5).
 	:- mode(request(+compound, +atom, +atom, -compound, +list(compound)), one_or_error).
 	:- info(request/5, [
-		comment is 'Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include ``source_url(URL)`` for an absolute HTTP or HTTPS URL, ``source_origin(Origin)`` for a bare Origin header value, and ``top_level_navigation(Boolean)`` to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to ``source_url(URL)`` and ``top_level_navigation(false)``.',
+		comment is 'Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include ``connection_options(Options)`` for one-shot transport configuration, ``source_url(URL)`` for an absolute HTTP or HTTPS URL, ``source_origin(Origin)`` for a bare Origin header value, and ``top_level_navigation(Boolean)`` to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to ``source_url(URL)`` and ``top_level_navigation(false)``.',
 		argnames is ['Session', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
 			'``Session`` is not an open HTTP client session handle' - error,
@@ -174,30 +175,31 @@
 		open(Session, []).
 
 	open(Session, Options) :-
-		parse_open_options(Options, JarOption, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties),
+		parse_open_options(Options, JarOption, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultConnectionOptions, DefaultProperties),
 		resolve_session_jar(JarOption, Jar, Ownership),
-		open_session(Session, session_state(Jar, Ownership, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties)).
+		open_session(Session, session_state(Jar, Ownership, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultConnectionOptions, DefaultProperties)).
 
 	close(Session) :-
 		close_session(Session).
 
 	cookie_jar(Session, Jar) :-
-		current_session_state(Session, session_state(Jar, _Ownership, _Headers, _QueryPairs, _Version, _Properties)).
+		current_session_state(Session, session_state(Jar, _Ownership, _Headers, _QueryPairs, _Version, _ConnectionOptions, _Properties)).
 
 	request(Session, Method, URL, Response, Options) :-
-		current_session_state(Session, session_state(Jar, _Ownership, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties0)),
-		parse_request_options(Options, RequestHeaders, Body, RequestQueryPairs, RequestVersion, RequestProperties0, ExplicitCookiePairs, RequestSource, TopLevelNavigation),
+		current_session_state(Session, session_state(Jar, _Ownership, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultConnectionOptions, DefaultProperties0)),
+		parse_request_options(Options, RequestHeaders, Body, RequestQueryPairs, RequestVersion, RequestConnectionOptions, RequestProperties0, ExplicitCookiePairs, RequestSource, TopLevelNavigation),
 		extract_request_cookie_properties(RequestProperties0, PropertyCookiePairs, RequestProperties),
 		merge_named_pairs(DefaultHeaders, RequestHeaders, MergedHeaders),
 		merge_named_pairs(DefaultQueryPairs, RequestQueryPairs, MergedQueryPairs),
+		merge_connection_options(DefaultConnectionOptions, RequestConnectionOptions, MergedConnectionOptions),
 		merge_properties(DefaultProperties0, RequestProperties, MergedProperties0),
 		jar_request_cookie_pairs(Jar, Method, URL, RequestSource, TopLevelNavigation, JarCookiePairs),
 		merge_named_pairs(JarCookiePairs, PropertyCookiePairs, PropertyMergedCookiePairs),
 		merge_named_pairs(PropertyMergedCookiePairs, ExplicitCookiePairs, FinalCookiePairs),
 		maybe_add_cookie_property(FinalCookiePairs, MergedProperties0, MergedProperties),
 		final_request_version(DefaultVersion, RequestVersion, FinalVersion),
-		build_client_request_options(MergedHeaders, Body, MergedQueryPairs, FinalVersion, MergedProperties, ClientOptions),
-		http_client::request(Method, URL, Response, ClientOptions),
+		build_client_request_options(MergedHeaders, Body, MergedQueryPairs, FinalVersion, MergedConnectionOptions, MergedProperties, ClientOptions),
+		http_client(_HTTPSocket_)::request(Method, URL, Response, ClientOptions),
 		store_response_cookies(Jar, URL, Response).
 
 	get(Session, URL, Response, Options) :-
@@ -221,7 +223,7 @@
 		RequestOptions = [body(Body)| Options],
 		request(Session, patch, URL, Response, RequestOptions).
 
-	parse_open_options(UserOptions, JarOption, Headers, QueryPairs, Version, Properties) :-
+	parse_open_options(UserOptions, JarOption, Headers, QueryPairs, Version, ConnectionOptions, Properties) :-
 		^^check_options(UserOptions),
 		ensure_consistent_cookie_source_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -232,6 +234,7 @@
 		^^option(headers(Headers), Options),
 		^^option(query(QueryPairs), Options),
 		^^option(version(Version), Options),
+		^^option(connection_options(ConnectionOptions), Options),
 		^^option(properties(Properties), Options),
 		ensure_no_default_cookie_property(Properties).
 
@@ -239,6 +242,7 @@
 	default_option(headers([])).
 	default_option(query([])).
 	default_option(version(http(1, 1))).
+	default_option(connection_options([])).
 	default_option(properties([])).
 
 	valid_option(cookie_jar(new)) :-
@@ -264,10 +268,13 @@
 		integer(Minor),
 		Minor >= 0,
 		!.
+	valid_option(connection_options(ConnectionOptions)) :-
+		proper_list(ConnectionOptions),
+		!.
 	valid_option(properties(Properties)) :-
 		proper_list(Properties).
 
-	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, CookiePairs, Source, TopLevelNavigation) :-
+	parse_request_options(Options, Headers, Body, QueryPairs, Version, ConnectionOptions, Properties, CookiePairs, Source, TopLevelNavigation) :-
 		validate_request_options(Options),
 		(	member(headers(Headers0), Options) ->
 			Headers = Headers0
@@ -284,6 +291,10 @@
 		(	member(version(Version0), Options) ->
 			Version = Version0
 		;	Version = none
+		),
+		(	member(connection_options(ConnectionOptions0), Options) ->
+			ConnectionOptions = ConnectionOptions0
+		;	ConnectionOptions = []
 		),
 		(	member(properties(Properties0), Options) ->
 			Properties = Properties0
@@ -330,6 +341,9 @@
 		Major >= 0,
 		integer(Minor),
 		Minor >= 0,
+		!.
+	validate_request_option(connection_options(ConnectionOptions)) :-
+		proper_list(ConnectionOptions),
 		!.
 	validate_request_option(source_url(SourceURL)) :-
 		atom(SourceURL),
@@ -385,7 +399,7 @@
 		assertz(session_state_(SessionId, State)).
 
 	close_session(Session) :-
-		current_session_state(Session, session_state(Jar, Ownership, _Headers, _QueryPairs, _Version, _Properties)),
+		current_session_state(Session, session_state(Jar, Ownership, _Headers, _QueryPairs, _Version, _ConnectionOptions, _Properties)),
 		retract(session_state_(SessionId, _State)),
 		Session = http_client_session(SessionId),
 		maybe_close_owned_jar(Jar, Ownership).
@@ -428,6 +442,9 @@
 		;	FilteredPairs = [Name-Value| RemainingPairs],
 			filter_named_pairs(Pairs, OverridePairs, RemainingPairs)
 		).
+
+	merge_connection_options(DefaultConnectionOptions, OverrideConnectionOptions, MergedConnectionOptions) :-
+		append(OverrideConnectionOptions, DefaultConnectionOptions, MergedConnectionOptions).
 
 	merge_properties(DefaultProperties, OverrideProperties, MergedProperties) :-
 		filter_properties(DefaultProperties, OverrideProperties, FilteredDefaultProperties),
@@ -482,8 +499,12 @@
 		!.
 	final_request_version(DefaultVersion, none, DefaultVersion).
 
-	build_client_request_options(Headers, Body, QueryPairs, Version, Properties, Options) :-
-		base_request_options(Headers, QueryPairs, Version, Properties, BaseOptions),
+	build_client_request_options(Headers, Body, QueryPairs, Version, ConnectionOptions, Properties, Options) :-
+		base_request_options(Headers, QueryPairs, Version, Properties, BaseOptions0),
+		(	ConnectionOptions == [] ->
+			BaseOptions = BaseOptions0
+		;	append(BaseOptions0, [connection_options(ConnectionOptions)], BaseOptions)
+		),
 		(	Body == empty ->
 			Options = BaseOptions
 		;	append(BaseOptions, [body(Body)], Options)
@@ -498,5 +519,18 @@
 			http_cookie_jar::store_set_cookies(Jar, URL, SetCookies)
 		;	true
 		).
+
+:- end_object.
+
+
+:- object(http_client_session,
+	extends(http_client_session(http_socket))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-22,
+		comment is 'By default, stateful HTTP client sessions use the ``http_socket`` library.'
+	]).
 
 :- end_object.

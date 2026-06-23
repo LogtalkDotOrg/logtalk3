@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="http_client_core" href="http_client_core_0.html" />
+    <link rel="next" title="http_client(HTTPSocket)" href="http_client_1.html" />
     <link rel="prev" title="http_server_basic_handler(Verifier,Handler,ProtectOptions)" href="http_server_basic_handler_3.html" />
    
 </head>
@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-authenticate"><span class="xref std std-ref">http_authenticate</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">http_client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_client_1.html">http_client(HTTPSocket)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client-core"><span class="xref std std-ref">http_client_core</span></a></li>
@@ -384,7 +385,7 @@
   <p class="right" id="http-client-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="http-client">
 <h1><code class="docutils literal notranslate"><span class="pre">http_client</span></code><a class="headerlink" href="#http-client" title="Link to this heading"></a></h1>
-<p>Request-oriented HTTP client facade built on top of the url and http_socket libraries.</p>
+<p>By default, the request-oriented HTTP client facade uses the <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> library.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -394,7 +395,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-18</div>
+<div class="line"><strong>Date:</strong> 2026-06-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -403,540 +404,35 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Imports:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_message_helpers_0.html#http-message-helpers-0"><span class="std std-ref">http_message_helpers</span></a></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_text_helpers_0.html#http-text-helpers-0"><span class="std std-ref">http_text_helpers</span></a></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_origin_site_helpers_0.html#http-origin-site-helpers-0"><span class="std std-ref">http_origin_site_helpers</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
-<div class="line"><a class="reference internal" href="http_multipart_0.html#http-multipart-0"><span class="std std-ref">http_multipart</span></a></div>
-<div class="line"><a class="reference internal" href="http_socket_0.html#http-socket-0"><span class="std std-ref">http_socket</span></a></div>
-<div class="line"><a class="reference internal" href="http_websocket_handshake_0.html#http-websocket-handshake-0"><span class="std std-ref">http_websocket_handshake</span></a></div>
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="url_1.html#url-1"><span class="std std-ref">url(Representation)</span></a></div>
-<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
-<div class="line"><a class="reference internal" href="uuid_1.html#uuid-1"><span class="std std-ref">uuid(Representation)</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_client_1.html#http-client-1"><span class="std std-ref">http_client(http_socket)</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>URL support: This initial facade currently supports only absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs. <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs are rejected until TLS support is added to the transport layer.</p></li>
-<li><p>Request construction: The <code class="docutils literal notranslate"><span class="pre">request/4-5</span></code> predicates build normalized HTTP requests from URLs and options before delegating transport to the http_socket library.</p></li>
-<li><p>Option precedence: When the same request-construction or WebSocket-handshake option is given multiple times, the first occurrence is used.</p></li>
-<li><p>WebSocket opening handshake: The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate validates an absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL, opens a reusable socket connection, performs a WebSocket opening handshake, validates the <code class="docutils literal notranslate"><span class="pre">101</span></code> response, and returns the upgraded connection handle together with the response. <code class="docutils literal notranslate"><span class="pre">wss://</span></code> remains out of scope until TLS support exists.</p></li>
-<li><p>Multipart form-data: The body option and the <code class="docutils literal notranslate"><span class="pre">post/4-5</span></code>, <code class="docutils literal notranslate"><span class="pre">put/4-5</span></code>, and <code class="docutils literal notranslate"><span class="pre">patch/4-5</span></code> predicates accept a parameter-aware <code class="docutils literal notranslate"><span class="pre">form_data(Items)</span></code> descriptor using the <code class="docutils literal notranslate"><span class="pre">field(Name,</span> <span class="pre">Value,</span> <span class="pre">Parameters)</span></code> and <code class="docutils literal notranslate"><span class="pre">file(Name,</span> <span class="pre">Filename,</span> <span class="pre">MediaType,</span> <span class="pre">Payload,</span> <span class="pre">Parameters)</span></code> shapes supported by the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> library; the request builder translates those descriptors and annotates the request with a multipart boundary property before construction.</p></li>
-<li><p>Reusable transports: The <code class="docutils literal notranslate"><span class="pre">request/5</span></code> and verb helper predicates accept open http_socket connection or pool handles and validate that the URL endpoint matches the handle endpoint.</p></li>
-<li><p>Low-level core: The stream-based primitives are available from the <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-delete-3"><span class="std std-ref">delete/3</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-delete-4"><span class="std std-ref">delete/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-get-3"><span class="std std-ref">get/3</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-get-4"><span class="std std-ref">get/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-head-3"><span class="std std-ref">head/3</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-head-4"><span class="std std-ref">head/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-open-websocket-4"><span class="std std-ref">open_websocket/4</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-patch-4"><span class="std std-ref">patch/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-patch-5"><span class="std std-ref">patch/5</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-post-4"><span class="std std-ref">post/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-post-5"><span class="std std-ref">post/5</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-put-4"><span class="std std-ref">put/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-put-5"><span class="std std-ref">put/5</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-request-4"><span class="std std-ref">request/4</span></a>  <a class="reference internal" href="http_client_1.html#http-client-1-request-5"><span class="std std-ref">request/5</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#request-4" id="id2"><code class="docutils literal notranslate"><span class="pre">request/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#request-5" id="id3"><code class="docutils literal notranslate"><span class="pre">request/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#get-3" id="id4"><code class="docutils literal notranslate"><span class="pre">get/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#get-4" id="id5"><code class="docutils literal notranslate"><span class="pre">get/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#head-3" id="id6"><code class="docutils literal notranslate"><span class="pre">head/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#head-4" id="id7"><code class="docutils literal notranslate"><span class="pre">head/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#delete-3" id="id8"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#delete-4" id="id9"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#post-4" id="id10"><code class="docutils literal notranslate"><span class="pre">post/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#post-5" id="id11"><code class="docutils literal notranslate"><span class="pre">post/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#put-4" id="id12"><code class="docutils literal notranslate"><span class="pre">put/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#put-5" id="id13"><code class="docutils literal notranslate"><span class="pre">put/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#patch-4" id="id14"><code class="docutils literal notranslate"><span class="pre">patch/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#patch-5" id="id15"><code class="docutils literal notranslate"><span class="pre">patch/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-websocket-4" id="id16"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id17">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="request-4">
-<span id="http-client-0-request-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request/4</span></code></a><a class="headerlink" href="#request-4" title="Link to this heading"></a></h3>
-<p>Builds a normalized request from the given method, absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URL, and options, performs a one-shot exchange, and returns the response.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(Method,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(+atom,+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute HTTP URL or <code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid request-construction options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-<div class="line">The delegated socket exchange fails request validation or transport processing:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="request-5">
-<span id="http-client-0-request-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request/5</span></code></a><a class="headerlink" href="#request-5" title="Link to this heading"></a></h3>
-<p>Builds a normalized request from the given method, absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URL, and options, validates it against an open http_socket connection or pool handle endpoint, performs one exchange, and returns the response.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(ConnectionOrPool,Method,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">request(+compound,+atom,+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle for <code class="docutils literal notranslate"><span class="pre">URL</span></code>:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute HTTP URL or <code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid request-construction options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-<div class="line">The delegated socket exchange fails request validation or transport processing:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="get-3">
-<span id="http-client-0-get-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">get/3</span></code></a><a class="headerlink" href="#get-3" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">get</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">get(URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">get(+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/4</span></code> for the given URL and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="get-4">
-<span id="http-client-0-get-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">get/4</span></code></a><a class="headerlink" href="#get-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">get</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">get(ConnectionOrPool,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">get(+compound,+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> for the given connection, URL, and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="head-3">
-<span id="http-client-0-head-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">head/3</span></code></a><a class="headerlink" href="#head-3" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">head</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">head(URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">head(+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/4</span></code> for the given URL and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="head-4">
-<span id="http-client-0-head-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">head/4</span></code></a><a class="headerlink" href="#head-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">head</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">head(ConnectionOrPool,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">head(+compound,+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> for the given connection, URL, and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="delete-3">
-<span id="http-client-0-delete-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete/3</span></code></a><a class="headerlink" href="#delete-3" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">delete</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/4</span></code> for the given URL and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="delete-4">
-<span id="http-client-0-delete-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete/4</span></code></a><a class="headerlink" href="#delete-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">delete</span></code> method.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(ConnectionOrPool,URL,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete(+compound,+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> for the given connection, URL, and options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="post-4">
-<span id="http-client-0-post-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">post/4</span></code></a><a class="headerlink" href="#post-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">post</span></code> method and the given request body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">post(URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">post(+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/4</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="post-5">
-<span id="http-client-0-post-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">post/5</span></code></a><a class="headerlink" href="#post-5" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">post</span></code> method and the given request body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">post(ConnectionOrPool,URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">post(+compound,+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="put-4">
-<span id="http-client-0-put-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">put/4</span></code></a><a class="headerlink" href="#put-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">put</span></code> method and the given request body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">put(URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">put(+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/4</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="put-5">
-<span id="http-client-0-put-5"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">put/5</span></code></a><a class="headerlink" href="#put-5" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">put</span></code> method and the given request body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">put(ConnectionOrPool,URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">put(+compound,+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="patch-4">
-<span id="http-client-0-patch-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">patch/4</span></code></a><a class="headerlink" href="#patch-4" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">patch</span></code> method and the given request body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">patch(URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">patch(+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/4</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="patch-5">
-<span id="http-client-0-patch-5"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">patch/5</span></code></a><a class="headerlink" href="#patch-5" title="Link to this heading"></a></h3>
-<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">patch</span></code> method and the given request body.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">patch(ConnectionOrPool,URL,Body,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">patch(+compound,+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">request/5</span></code> when the given body is merged into the request options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="open-websocket-4">
-<span id="http-client-0-open-websocket-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a><a class="headerlink" href="#open-websocket-4" title="Link to this heading"></a></h3>
-<p>Builds a WebSocket opening-handshake request from the given absolute <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URL and options, opens a reusable socket connection, validates the server <code class="docutils literal notranslate"><span class="pre">101</span></code> response, and returns both the connection handle and the response.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_websocket(URL,Connection,Response,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">open_websocket(+atom,--compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Exceptions:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute WebSocket URL or <code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid opening-handshake options:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-<div class="line">The delegated socket or handshake processing rejects the connection or server response:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -956,7 +452,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="http_server_basic_handler_3.html" class="btn btn-neutral float-left" title="http_server_basic_handler(Verifier,Handler,ProtectOptions)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="http_client_core_0.html" class="btn btn-neutral float-right" title="http_client_core" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="http_client_1.html" class="btn btn-neutral float-right" title="http_client(HTTPSocket)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

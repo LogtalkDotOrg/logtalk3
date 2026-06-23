@@ -45,7 +45,10 @@
 		]),
 		logtalk_load(test_objects),
 		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
+		lgtunit::run_test_sets([
+			tests(http_socket),
+			tests(http_socket_process)
+		])
 	)).
 
 :- else.

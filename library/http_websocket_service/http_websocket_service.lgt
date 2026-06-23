@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-22,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -62,15 +62,16 @@
 :- end_object.
 
 
-:- object(http_websocket_service(_Role_, _TextRepresentation_),
+:- object(http_websocket_service(_HTTPSocket_, _Role_, _TextRepresentation_),
 	extends(http_websocket_session(_Role_, _TextRepresentation_))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-06-22,
 		comment is 'Callback-driven WebSocket session loops over upgraded http_socket connections, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
+			'HTTPSocket' - 'The object implementing ``http_socket_protocol``.',
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
 			'TextRepresentation' - 'Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		],
@@ -135,7 +136,7 @@
 		]
 	]).
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_connection/1, connection_streams/3
 	]).
 
@@ -699,14 +700,15 @@
 :- end_object.
 
 
-:- object(http_websocket_client_service,
-	extends(http_websocket_service(client, atom))).
+:- object(http_websocket_client_service(_HTTPSocket_),
+	extends(http_websocket_service(_HTTPSocket_, client, atom))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
-		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.'
+		date is 2026-06-22,
+		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.',
+		parnames is ['HTTPSocket']
 	]).
 
 	:- public(open/4).
@@ -738,11 +740,11 @@
 		]
 	]).
 
-	:- uses(http_client, [
+	:- uses(http_client(_HTTPSocket_), [
 		open_websocket/4
 	]).
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_connection/1, connection_streams/3
 	]).
 
@@ -878,14 +880,29 @@
 :- end_object.
 
 
-:- object(http_websocket_server_service,
-	extends(http_websocket_service(server, atom))).
+
+:- object(http_websocket_client_service,
+	extends(http_websocket_service(http_socket, client, atom))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
-		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.'
+		date is 2026-06-22,
+		comment is 'By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket`` library.'
+	]).
+
+:- end_object.
+
+
+:- object(http_websocket_server_service(_HTTPSocket_),
+	extends(http_websocket_service(_HTTPSocket_, server, atom))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-22,
+		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.',
+		parnames is ['HTTPSocket']
 	]).
 
 	:- public(serve_once/6).
@@ -1003,7 +1020,7 @@
 		:- meta_predicate(collect_finished_worker(*, 0, *, *, *, *)).
 	:- endif.
 
-	:- uses(http_socket, [
+	:- uses(_HTTPSocket_, [
 		close_connection/1, close_listener/1, request_listener_shutdown/1, serve_websocket_once/5
 	]).
 
@@ -1219,5 +1236,18 @@
 		throw(not_available(http_websocket_server_service_registry)).
 
 	:- endif.
+
+:- end_object.
+
+
+:- object(http_websocket_server_service,
+	extends(http_websocket_service(http_socket, server, atom))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-22,
+		comment is 'By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket`` library.'
+	]).
 
 :- end_object.

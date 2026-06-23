@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-16
+| **Date:** 2026-06-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -39,7 +39,7 @@ Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_listener_shutdown/1`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_until_shutdown/5`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`http_socket_protocol/0::close_connection/1`  :ref:`http_socket_protocol/0::close_connection_pool/1`  :ref:`http_socket_protocol/0::close_listener/1`  :ref:`http_socket_protocol/0::connection_pool_stats/2`  :ref:`http_socket_protocol/0::connection_streams/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_socket_protocol/0::exchange/3`  :ref:`http_socket_protocol/0::exchange/4`  :ref:`http_socket_protocol/0::exchange/5`  :ref:`http_socket_protocol/0::exchange_connection/3`  :ref:`http_socket_protocol/0::exchange_connection/4`  :ref:`http_socket_protocol/0::open_connection/4`  :ref:`http_socket_protocol/0::open_connection_pool/4`  :ref:`http_socket_protocol/0::open_listener/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_socket_protocol/0::request_listener_shutdown/1`  :ref:`http_socket_protocol/0::request_shutdown/1`  :ref:`http_socket_protocol/0::serve_listener/4`  :ref:`http_socket_protocol/0::serve_listener/5`  :ref:`http_socket_protocol/0::serve_once/3`  :ref:`http_socket_protocol/0::serve_until_shutdown/4`  :ref:`http_socket_protocol/0::serve_until_shutdown/5`  :ref:`http_socket_protocol/0::serve_websocket_once/5`  :ref:`http_socket_protocol/0::supported_request_scheme/1`  :ref:`http_socket_protocol/0::supported_websocket_scheme/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

@@ -395,7 +395,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-14</div>
+<div class="line"><strong>Date:</strong> 2026-06-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -437,19 +437,22 @@
 <li><p><a class="reference internal" href="#exchange-3" id="id11"><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#exchange-connection-3" id="id12"><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#exchange-4" id="id13"><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-connection-4" id="id14"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-once-3" id="id15"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-websocket-once-5" id="id16"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-listener-4" id="id17"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-listener-5" id="id18"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-until-shutdown-4" id="id19"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#serve-until-shutdown-5" id="id20"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#request-shutdown-1" id="id21"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-5" id="id14"><code class="docutils literal notranslate"><span class="pre">exchange/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-connection-4" id="id15"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-once-3" id="id16"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-websocket-once-5" id="id17"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-listener-4" id="id18"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-listener-5" id="id19"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-until-shutdown-4" id="id20"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#serve-until-shutdown-5" id="id21"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#request-shutdown-1" id="id22"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#supported-request-scheme-1" id="id23"><code class="docutils literal notranslate"><span class="pre">supported_request_scheme/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#supported-websocket-scheme-1" id="id24"><code class="docutils literal notranslate"><span class="pre">supported_websocket_scheme/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id22">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id23">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -824,8 +827,38 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="exchange-5">
+<span id="http-socket-protocol-0-exchange-5"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange/5</span></code></a><a class="headerlink" href="#exchange-5" title="Link to this heading"></a></h3>
+<p>Opens a client socket connection to the given host and port using the given connection options, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> is added automatically.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(Host,Port,Request,Response,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange(+atom,+integer,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The transport implementation may throw connection-opening, request-validation, option-validation, or exchange exceptions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="exchange-connection-4">
-<span id="http-socket-protocol-0-exchange-connection-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a><a class="headerlink" href="#exchange-connection-4" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-exchange-connection-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a><a class="headerlink" href="#exchange-connection-4" title="Link to this heading"></a></h3>
 <p>Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> is added automatically to that final request.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -855,7 +888,7 @@
 <hr class="docutils" />
 </section>
 <section id="serve-once-3">
-<span id="http-socket-protocol-0-serve-once-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a><a class="headerlink" href="#serve-once-3" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-serve-once-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a><a class="headerlink" href="#serve-once-3" title="Link to this heading"></a></h3>
 <p>Accepts one incoming socket connection on the given server socket, serves that connection using the http_server library, closes the streams, and returns client information.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -885,7 +918,7 @@
 <hr class="docutils" />
 </section>
 <section id="serve-websocket-once-5">
-<span id="http-socket-protocol-0-serve-websocket-once-5"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a><a class="headerlink" href="#serve-websocket-once-5" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-serve-websocket-once-5"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a><a class="headerlink" href="#serve-websocket-once-5" title="Link to this heading"></a></h3>
 <p>Accepts one incoming socket connection on the given listener, serves exactly one WebSocket opening handshake using the given handler, and on success returns an upgraded connection handle that remains open together with the handshake response and client information. Rejected or malformed handshakes are written to the stream, the accepted streams are closed, and the predicate throws.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -915,7 +948,7 @@
 <hr class="docutils" />
 </section>
 <section id="serve-listener-4">
-<span id="http-socket-protocol-0-serve-listener-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a><a class="headerlink" href="#serve-listener-4" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-serve-listener-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a><a class="headerlink" href="#serve-listener-4" title="Link to this heading"></a></h3>
 <p>Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code> call for the listener may interrupt the bounded loop before Count connections are accepted.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -945,7 +978,7 @@
 <hr class="docutils" />
 </section>
 <section id="serve-listener-5">
-<span id="http-socket-protocol-0-serve-listener-5"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a><a class="headerlink" href="#serve-listener-5" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-serve-listener-5"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code></a><a class="headerlink" href="#serve-listener-5" title="Link to this heading"></a></h3>
 <p>Accepts and serves <code class="docutils literal notranslate"><span class="pre">Count</span></code> incoming connections on the given listener using the specified shutdown and worker options. A <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code> call for the listener may interrupt the bounded loop before <code class="docutils literal notranslate"><span class="pre">Count</span></code> connections are accepted.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -988,7 +1021,7 @@
 <hr class="docutils" />
 </section>
 <section id="serve-until-shutdown-4">
-<span id="http-socket-protocol-0-serve-until-shutdown-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a><a class="headerlink" href="#serve-until-shutdown-4" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-serve-until-shutdown-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a><a class="headerlink" href="#serve-until-shutdown-4" title="Link to this heading"></a></h3>
 <p>Accepts and serves incoming connections on the given listener until <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> is called for the specified control term, then closes the listener before returning.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1031,7 +1064,7 @@
 <hr class="docutils" />
 </section>
 <section id="serve-until-shutdown-5">
-<span id="http-socket-protocol-0-serve-until-shutdown-5"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a><a class="headerlink" href="#serve-until-shutdown-5" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-serve-until-shutdown-5"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code></a><a class="headerlink" href="#serve-until-shutdown-5" title="Link to this heading"></a></h3>
 <p>Accepts and serves incoming connections on the given listener until <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1075,7 +1108,7 @@
 <hr class="docutils" />
 </section>
 <section id="request-shutdown-1">
-<span id="http-socket-protocol-0-request-shutdown-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a><a class="headerlink" href="#request-shutdown-1" title="Link to this heading"></a></h3>
+<span id="http-socket-protocol-0-request-shutdown-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code></a><a class="headerlink" href="#request-shutdown-1" title="Link to this heading"></a></h3>
 <p>Requests shutdown of an open-ended serving loop started with <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> or <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code> for the specified control term and wakes any blocked accept call so the loop can terminate portably.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1100,6 +1133,48 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
 </div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="supported-request-scheme-1">
+<span id="http-socket-protocol-0-supported-request-scheme-1"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">supported_request_scheme/1</span></code></a><a class="headerlink" href="#supported-request-scheme-1" title="Link to this heading"></a></h3>
+<p>Table of supported request schemas.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">supported_request_scheme(Scheme)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">supported_request_scheme(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="supported-websocket-scheme-1">
+<span id="http-socket-protocol-0-supported-websocket-scheme-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">supported_websocket_scheme/1</span></code></a><a class="headerlink" href="#supported-websocket-scheme-1" title="Link to this heading"></a></h3>
+<p>Table of supported websocket schemas.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">supported_websocket_scheme(Scheme)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">supported_websocket_scheme(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
 </div>
 </div>
 </section>

@@ -3,7 +3,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-22,
 		comment is 'Sockets-backed HTTP transport predicates.'
 	]).
 
@@ -132,6 +132,16 @@
 		]
 	]).
 
+	:- public(exchange/5).
+	:- mode(exchange(+atom, +integer, +compound, --compound, +list), one_or_error).
+	:- info(exchange/5, [
+		comment is 'Opens a client socket connection to the given host and port using the given connection options, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, ``Connection: close`` is added automatically.',
+		argnames is ['Host', 'Port', 'Request', 'Response', 'Options'],
+		exceptions is [
+			'The transport implementation may throw connection-opening, request-validation, option-validation, or exchange exceptions' - error
+		]
+	]).
+
 	:- public(exchange_connection/4).
 	:- mode(exchange_connection(+atom, +integer, ++list(compound), --list(compound)), one_or_error).
 	:- info(exchange_connection/4, [
@@ -232,6 +242,20 @@
 		exceptions is [
 			'The transport implementation may throw shutdown-control validation exceptions' - error
 		]
+	]).
+
+	:- public(supported_request_scheme/1).
+	:- mode(supported_request_scheme(+nonvar), one_or_more).
+	:- info(supported_request_scheme/1, [
+		comment is 'Table of supported request schemas.',
+		argnames is ['Scheme']
+	]).
+
+	:- public(supported_websocket_scheme/1).
+	:- mode(supported_websocket_scheme(+nonvar), one_or_more).
+	:- info(supported_websocket_scheme/1, [
+		comment is 'Table of supported websocket schemas.',
+		argnames is ['Scheme']
 	]).
 
 :- end_protocol.
