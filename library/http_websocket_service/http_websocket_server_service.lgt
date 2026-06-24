@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-24,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.',
 		parnames is ['HTTPSocket']
 	]).
@@ -142,6 +142,7 @@
 			current_active_workers/3
 		]).
 
+		:- meta_predicate(wait_for_worker(*, 0, *, *, *, *)).
 		:- meta_predicate(collect_finished_worker(*, 0, *, *, *, *)).
 	:- endif.
 
@@ -157,10 +158,6 @@
 		^^run_session(Connection, SessionHandler, State, Options).
 
 	:- if(current_logtalk_flag(threads, supported)).
-
-	:- uses(list, [
-		length/2
-	]).
 
 	:- uses(user, [
 		setup_call_cleanup/3
@@ -300,10 +297,6 @@
 	current_active_workers(Control, RunId, Workers) :-
 		findall(Worker, active_worker_(Control, RunId, Worker), Workers).
 
-	active_worker_count(Control, RunId, Count) :-
-		current_active_workers(Control, RunId, Workers),
-		length(Workers, Count).
-
 	check_finished_workers(Control, RunId) :-
 		collect_finished_workers(Control, RunId, no_error, Error),
 		(	Error == no_error ->
@@ -312,20 +305,22 @@
 		).
 
 	wait_for_active_workers(Control, RunId) :-
-		active_worker_count(Control, RunId, Count),
-		(	Count =:= 0 ->
-			true
-		;	wait_for_one_active_worker(Control, RunId),
-			wait_for_active_workers(Control, RunId)
-		).
-
-	wait_for_one_active_worker(Control, RunId) :-
-		threaded_wait(websocket_service_worker_finished(Control, RunId)),
-		collect_finished_workers(Control, RunId, no_error, Error),
+		current_active_workers(Control, RunId, Workers),
+		wait_for_workers(Workers, Control, RunId, no_error, Error),
 		(	Error == no_error ->
 			true
 		;	throw(Error)
 		).
+
+	wait_for_workers([], _Control, _RunId, Error, Error).
+	wait_for_workers([worker(Tag, Goal)| Workers], Control, RunId, Error0, Error) :-
+		wait_for_worker(Tag, Goal, Control, RunId, Error0, Error1),
+		wait_for_workers(Workers, Control, RunId, Error1, Error).
+
+	wait_for_worker(Tag, Goal, Control, RunId, Error0, Error) :-
+		unregister_active_worker(Control, RunId, worker(Tag, Goal)),
+		catch(threaded_exit(Goal, Tag), WorkerError, true),
+		remember_worker_error(Error0, WorkerError, Error).
 
 	collect_finished_workers(Control, RunId, Error0, Error) :-
 		current_active_workers(Control, RunId, Workers),
