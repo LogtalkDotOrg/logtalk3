@@ -25,19 +25,26 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-24,
+		date is 2026-06-24,
 		comment is 'Unit tests for the "json_rpc" library.'
 	]).
 
 	cover(json_rpc).
 
 	cleanup :-
-		^^clean_file('test_json_rpc.tmp'),
+		^^clean_file('test_json_rpc_1.tmp'),
+		^^clean_file('test_json_rpc_2.tmp'),
 		^^clean_file('test_json_rpc_multi.tmp'),
 		^^clean_file('test_json_rpc_eof.tmp'),
-		^^clean_file('test_json_rpc_framed.tmp'),
-		^^clean_file('test_json_rpc_framed_multi.tmp'),
-		^^clean_file('test_json_rpc_framed_eof.tmp').
+		^^clean_file('test_json_rpc_framed_1.tmp'),
+		^^clean_file('test_json_rpc_framed_2.tmp'),
+		^^clean_file('test_json_rpc_framed_3.tmp'),
+		^^clean_file('test_json_rpc_framed_4.tmp'),
+		^^clean_file('test_json_rpc_framed_5.tmp'),
+		^^clean_file('test_json_rpc_framed_multi_1.tmp'),
+		^^clean_file('test_json_rpc_framed_multi_2.tmp'),
+		^^clean_file('test_json_rpc_framed_eof_1.tmp'),
+		^^clean_file('test_json_rpc_framed_eof_2.tmp').
 
 	% request construction tests
 
@@ -283,7 +290,7 @@
 
 	test(json_rpc_write_read_message_01, true(json_rpc::is_request(ReadMsg))) :-
 		json_rpc::request(subtract, [42,23], 1, Request),
-		^^file_path('test_json_rpc.tmp', File),
+		^^file_path('test_json_rpc_1.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_message(Output, Request),
 		close(Output),
@@ -293,7 +300,7 @@
 
 	test(json_rpc_write_read_message_02, true(Method-Id == subtract-1)) :-
 		json_rpc::request(subtract, [42,23], 1, Request),
-		^^file_path('test_json_rpc.tmp', File),
+		^^file_path('test_json_rpc_2.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_message(Output, Request),
 		close(Output),
@@ -330,7 +337,7 @@
 	% Write and read back a single framed request
 	test(json_rpc_write_read_framed_message_01, true(json_rpc::is_request(ReadMsg))) :-
 		json_rpc::request(subtract, [42,23], 1, Request),
-		^^file_path('test_json_rpc_framed.tmp', File),
+		^^file_path('test_json_rpc_framed.tmp_1', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Request),
 		close(Output),
@@ -341,7 +348,7 @@
 	% Verify field values survive the framed write/read roundtrip
 	test(json_rpc_write_read_framed_message_02, true(Method-Id == subtract-1)) :-
 		json_rpc::request(subtract, [42,23], 1, Request),
-		^^file_path('test_json_rpc_framed.tmp', File),
+		^^file_path('test_json_rpc_framed_2.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Request),
 		close(Output),
@@ -354,7 +361,7 @@
 	% Framed roundtrip preserves a response with a structured result
 	test(json_rpc_write_read_framed_message_03, true(Result == 19)) :-
 		json_rpc::response(19, 1, Response),
-		^^file_path('test_json_rpc_framed.tmp', File),
+		^^file_path('test_json_rpc_framed_3.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Response),
 		close(Output),
@@ -366,7 +373,7 @@
 	% Framed roundtrip preserves an error response
 	test(json_rpc_write_read_framed_message_04, true(Code == -32601)) :-
 		json_rpc::error_response(-32601, 'Method not found', 1, ErrorResponse),
-		^^file_path('test_json_rpc_framed.tmp', File),
+		^^file_path('test_json_rpc_framed_4.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, ErrorResponse),
 		close(Output),
@@ -378,7 +385,7 @@
 	% Framed roundtrip preserves a notification (no id)
 	test(json_rpc_write_read_framed_message_05, true(json_rpc::is_notification(ReadMsg))) :-
 		json_rpc::notification(update, [1,2,3], Notification),
-		^^file_path('test_json_rpc_framed.tmp', File),
+		^^file_path('test_json_rpc_framed_5.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Notification),
 		close(Output),
@@ -390,7 +397,7 @@
 	test(json_rpc_write_read_framed_multiple_01, true(M1-M2 == subtract-update)) :-
 		json_rpc::request(subtract, [42,23], 1, Request),
 		json_rpc::notification(update, [1,2,3], Notification),
-		^^file_path('test_json_rpc_framed_multi.tmp', File),
+		^^file_path('test_json_rpc_framed_multi_1.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Request),
 		json_rpc::write_framed_message(Output, Notification),
@@ -407,7 +414,7 @@
 		json_rpc::request(foo, [1], 1, Req),
 		json_rpc::response(42, 1, Resp),
 		json_rpc::notification(bar, [2], Notif),
-		^^file_path('test_json_rpc_framed_multi.tmp', File),
+		^^file_path('test_json_rpc_framed_multi_2.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Req),
 		json_rpc::write_framed_message(Output, Resp),
@@ -424,7 +431,7 @@
 
 	% Reading from an empty file fails
 	test(json_rpc_read_framed_message_eof_01, false, [cleanup(close(in))]) :-
-		^^file_path('test_json_rpc_framed_eof.tmp', File),
+		^^file_path('test_json_rpc_framed_eof_1.tmp', File),
 		open(File, write, Output),
 		close(Output),
 		open(File, read, Input, [alias(in)]),
@@ -433,7 +440,7 @@
 	% After reading all framed messages, a subsequent read fails
 	test(json_rpc_read_framed_message_eof_02, false, [cleanup(close(in))]) :-
 		json_rpc::request(foo, [1], 1, Request),
-		^^file_path('test_json_rpc_framed_eof.tmp', File),
+		^^file_path('test_json_rpc_framed_eof_2.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Request),
 		close(Output),

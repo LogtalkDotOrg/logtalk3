@@ -85,6 +85,9 @@ queries to avoid computing and discarding velocity values.
 `massey_ranker`, `rank_centrality`, `ranked_pairs`, `regression_protocols`,
 `ccsds_packetization`, and `elastic_net_regression` libraries.
 
+* IMPROVED: The `json_rpc` library tests by avoiding tests interdependency
+due to shared temporary files.
+
 * UPDATED: The `amqp` and `stomp` libraries to use the `options` library.
 
 * UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
