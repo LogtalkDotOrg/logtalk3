@@ -57,9 +57,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-06-24,
 		comment is 'Unit tests for the "http_socket_process" library.'
 	]).
 
@@ -141,7 +141,7 @@
 
 	test(http_socket_process_open_listener_4_07, deterministic, [condition(tls_listener_available)]) :-
 		Prefix = 'logtalk_http_socket_process_test_',
-		temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile),
+		http_socket_process::temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile),
 		delete_file_if_exists(CertificateFile),
 		delete_file_if_exists(KeyFile),
 		setup_call_cleanup(
@@ -364,14 +364,6 @@
 	tls_listener_available :-
 		executable_available(ncat),
 		executable_available(openssl).
-
-	temporary_tls_credentials_files(Prefix, CertificateFile, KeyFile) :-
-		os::temporary_directory(TemporaryDirectory),
-		os::pid(PID),
-		user::atomic_list_concat([Prefix, PID, '_cert.pem'], CertificateName),
-		user::atomic_list_concat([Prefix, PID, '_key.pem'], KeyName),
-		os::path_concat(TemporaryDirectory, CertificateName, CertificateFile),
-		os::path_concat(TemporaryDirectory, KeyName, KeyFile).
 
 	delete_file_if_exists(File) :-
 		catch(os::delete_file(File), _, true).
