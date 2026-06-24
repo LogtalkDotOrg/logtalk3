@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-24,
 		comment is 'Unit tests for the "http_client" library.',
 		parnames is ['HTTPSocket']
 	]).
@@ -55,7 +55,7 @@
 		HeadResponse = 'HTTP/1.1 200 OK\r\ncontent-type: text/plain\r\ncontent-length: 5\r\n\r\n',
 		threaded_once(raw_server_once(Listener, HeadResponse), Tag),
 		local_http_url(Port, '/head', URL),
-		http_client::head(URL, Response, []),
+		http_client(_HTTPSocket_)::head(URL, Response, []),
 		threaded_exit(raw_server_once(Listener, HeadResponse), Tag),
 		close_listener(Listener),
 		status(Response, status(200, 'OK')),
@@ -67,7 +67,7 @@
 		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_ignore(server_serve_once(Listener, target_http_client_handler)),
 		local_http_url(Port, '/search', URL),
-		http_client::get(URL, Response, [query([q-'logtalk', page-'1'])]),
+		http_client(_HTTPSocket_)::get(URL, Response, [query([q-'logtalk', page-'1'])]),
 		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/search?q=logtalk&page=1'))).
@@ -78,7 +78,7 @@
 		local_http_url(Port, '/userinfo', URL0),
 		atom_concat('http://', Suffix, URL0),
 		atom_concat('http://user@', Suffix, URL),
-		http_client::get(URL, Response, []),
+		http_client(_HTTPSocket_)::get(URL, Response, []),
 		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/userinfo'))).
@@ -87,7 +87,7 @@
 		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_ignore(server_serve_once(Listener, echo_http_client_handler)),
 		local_http_url(Port, '/echo', URL),
-		http_client::post(URL, content('text/plain', text(hello)), Response, []),
+		http_client(_HTTPSocket_)::post(URL, content('text/plain', text(hello)), Response, []),
 		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text(hello))).
@@ -96,7 +96,7 @@
 		open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_once(Listener, multipart_http_client_handler), Tag),
 		local_http_url(Port, '/upload', URL),
-		http_client::post(
+		http_client(_HTTPSocket_)::post(
 			URL,
 			form_data([
 				field(title, 'Logtalk', []),
@@ -295,7 +295,7 @@
 		threaded_once(server_serve_request_once(Listener, target_http_client_handler), Tag),
 		open_connection('127.0.0.1', Port, Connection, []),
 		local_http_url(Port, '/via-connection', URL),
-		http_client::get(Connection, URL, Response, []),
+		http_client(_HTTPSocket_)::get(Connection, URL, Response, []),
 		close_connection(Connection),
 		threaded_exit(server_serve_request_once(Listener, target_http_client_handler), Tag),
 		close_listener(Listener),
@@ -308,7 +308,7 @@
 		open_connection('127.0.0.1', Port, Connection, []),
 		WrongPort is Port + 1,
 		local_http_url(WrongPort, '/mismatch', WrongURL),
-		catch(http_client::get(Connection, WrongURL, _Response, []), Error, true),
+		catch(http_client(_HTTPSocket_)::get(Connection, WrongURL, _Response, []), Error, true),
 		expected_connection_target_error(Error),
 		close_connection(Connection),
 		threaded_exit(server_accept_and_close_once(Listener), Tag),
