@@ -23,9 +23,9 @@
 	implements(ccsds_time_code_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-08,
+		date is 2026-06-24,
 		comment is 'CCSDS calendar segmented time code parser and generator.',
 		parameters is [
 			'CalendarVariant' - 'Calendar representation. Supported values are ``calendar`` and ``day_of_year``.',
@@ -100,8 +100,17 @@
 		!,
 		generate(TimeCode, Bytes, []),
 		open(File, write, Stream, [type(binary)]),
-		write_bytes(Bytes, Stream),
-		close(Stream).
+		(	catch(
+				write_bytes(Bytes, Stream),
+				Error,
+				(	catch(close(Stream), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Stream)
+		; 	catch(close(Stream), _, true),
+			fail
+		).
 	generate(stream(Stream), TimeCode) :-
 		!,
 		generate(TimeCode, Bytes, []),

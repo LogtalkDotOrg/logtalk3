@@ -23,9 +23,9 @@
 	implements(ccsds_frame_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-24,
 		comment is 'CCSDS telemetry transfer frame parser and generator.',
 		parameters is [
 			'FrameLength' - 'Fixed telemetry transfer frame length in octets.',
@@ -150,8 +150,17 @@
 	generate(file(File), Frames) :-
 		!,
 		open(File, write, Stream, [type(binary)]),
-		generate_all_stream(Frames, Stream),
-		close(Stream).
+		(	catch(
+				generate_all_stream(Frames, Stream),
+				Error,
+				(	catch(close(Stream), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Stream)
+		; 	catch(close(Stream), _, true),
+			fail
+		).
 	generate(stream(Stream), Frames) :-
 		!,
 		generate_all_stream(Frames, Stream).

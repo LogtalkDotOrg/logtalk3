@@ -80,8 +80,17 @@
 		!,
 		generate(TimeCode, Bytes, []),
 		open(File, write, Stream, [type(binary)]),
-		write_bytes(Bytes, Stream),
-		close(Stream).
+		(	catch(
+				write_bytes(Bytes, Stream),
+				Error,
+				(	catch(close(Stream), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Stream)
+		; 	catch(close(Stream), _, true),
+			fail
+		).
 	generate(stream(Stream), TimeCode) :-
 		!,
 		generate(TimeCode, Bytes, []),

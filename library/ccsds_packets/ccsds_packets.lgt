@@ -22,9 +22,9 @@
 :- object(ccsds_packets(_SecondaryHeaderLength_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-06-24,
 		comment is 'CCSDS Space Packet parser following the CCSDS 133.0-B-2 standard. Parses binary packet data including optional secondary headers.',
 		parameters is [
 			'SecondaryHeaderLength' - 'Length in bytes of the secondary header when present (0 for no secondary header parsing, or a positive integer).'
@@ -185,8 +185,17 @@
 	generate(file(File), Packets) :-
 		!,
 		open(File, write, Stream, [type(binary)]),
-		generate_all_stream(Packets, Stream),
-		close(Stream).
+		(	catch(
+				generate_all_stream(Packets, Stream),
+				Error,
+				(	catch(close(Stream), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Stream)
+		; 	catch(close(Stream), _, true),
+			fail
+		).
 	generate(stream(Stream), Packets) :-
 		!,
 		generate_all_stream(Packets, Stream).
