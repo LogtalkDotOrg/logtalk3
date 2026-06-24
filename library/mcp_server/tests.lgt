@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Paulo Moura',
-		date is 2026-02-24,
+		date is 2026-06-24,
 		comment is 'Unit tests for the "mcp_server" library.'
 	]).
 
@@ -41,13 +41,17 @@
 	cover(mcp_server).
 
 	cleanup :-
-		^^clean_file('mcp_input.tmp'),
+		^^clean_file('mcp_input_1.tmp'),
+		^^clean_file('mcp_input_2.tmp'),
+		^^clean_file('mcp_input_3.tmp'),
+		^^clean_file('mcp_input_4.tmp'),
+		^^clean_file('mcp_input_5.tmp'),
 		^^clean_file('mcp_output.tmp').
 
 	% json_rpc Content-Length framing tests
 
 	test(json_rpc_write_read_message_01, true(json_rpc::is_request(ReadMsg))) :-
-		^^file_path('mcp_input.tmp', File),
+		^^file_path('mcp_input_1.tmp', File),
 		open(File, write, Output),
 		json_rpc::request(subtract, [42,23], 1, Request),
 		json_rpc::write_message(Output, Request),
@@ -57,7 +61,7 @@
 		close(Input).
 
 	test(json_rpc_write_read_message_02, true(Method-Id == subtract-1)) :-
-		^^file_path('mcp_input.tmp', File),
+		^^file_path('mcp_input_2.tmp', File),
 		open(File, write, Output),
 		json_rpc::request(subtract, [42,23], 1, Request),
 		json_rpc::write_message(Output, Request),
@@ -69,7 +73,7 @@
 		json_rpc::id(ReadMsg, Id).
 
 	test(json_rpc_write_read_framed_multiple_01, true(M1-M2 == subtract-update)) :-
-		^^file_path('mcp_input.tmp', File),
+		^^file_path('mcp_input_3.tmp', File),
 		open(File, write, Output),
 		json_rpc::request(subtract, [42,23], 1, R1),
 		json_rpc::notification(update, [1,2,3], N1),
@@ -84,7 +88,7 @@
 		json_rpc::method(ReadMsg2, M2).
 
 	test(json_rpc_read_framed_eof_01, fail) :-
-		^^file_path('mcp_input.tmp', File),
+		^^file_path('mcp_input_4.tmp', File),
 		open(File, write, Output),
 		close(Output),
 		open(File, read, Input),
@@ -929,7 +933,7 @@
 
 	% Run an MCP exchange with a specific application object and options
 	run_mcp_exchange_with_options(Application, Options, RequestSpecs, Responses) :-
-		^^file_path('mcp_input.tmp', InputFile),
+		^^file_path('mcp_input_5.tmp', InputFile),
 		^^file_path('mcp_output.tmp', OutputFile),
 		% Write all requests to input file
 		open(InputFile, write, Out),

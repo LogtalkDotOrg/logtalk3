@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
 		date is 2026-06-24,
 		comment is 'Unit tests for the "json_rpc" library.'
