@@ -341,8 +341,17 @@
 	write_frames_file(Path, Frames) :-
 		^^file_path(Path, File),
 		open(File, write, Output, [type(binary)]),
-		write_frames(Frames, Output),
-		close(Output).
+		( 	catch(
+				write_frames(Frames, Output),
+				Error,
+				(	catch(close(Output), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Output)
+		; 	catch(close(Output), _, true),
+			fail
+		).
 
 	write_frames([], _Output).
 	write_frames([Frame| Frames], Output) :-
@@ -352,8 +361,17 @@
 	read_frames_file(Path, Frames) :-
 		^^file_path(Path, File),
 		open(File, read, Input, [type(binary)]),
-		read_frames(Input, Frames),
-		close(Input).
+		( 	catch(
+				read_frames(Input, Frames),
+				Error,
+				(	catch(close(Input), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Input)
+		; 	catch(close(Input), _, true),
+			fail
+		).
 
 	read_frames(Input, Frames) :-
 		http_websocket_frames::read_frame(Input, Frame),
@@ -366,8 +384,17 @@
 	open_file_read_stateful_message(Path, Session, State0, State, Message) :-
 		^^file_path(Path, File),
 		open(File, read, Input, [type(binary)]),
-		Session::read_message(Input, State0, State, Message),
-		close(Input).
+		( 	catch(
+				Session::read_message(Input, State0, State, Message),
+				Error,
+				(	catch(close(Input), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Input)
+		; 	catch(close(Input), _, true),
+			fail
+		).
 
 :- end_object.
 

@@ -112,8 +112,17 @@
 	write_frames_file(Path, Frames) :-
 		^^file_path(Path, File),
 		open(File, write, Output, [type(binary)]),
-		write_frames(Frames, Output),
-		close(Output).
+		( 	catch(
+				write_frames(Frames, Output),
+				Error,
+				(	catch(close(Output), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Output)
+		; 	catch(close(Output), _, true),
+			fail
+		).
 
 	write_frames([], _Output).
 	write_frames([Frame| Frames], Output) :-
@@ -123,7 +132,16 @@
 	open_file_read_message(Path, Message) :-
 		^^file_path(Path, File),
 		open(File, read, Input, [type(binary)]),
-		read_message(Input, Message),
-		close(Input).
+		( 	catch(
+				read_message(Input, Message),
+				Error,
+				(	catch(close(Input), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Input)
+		; 	catch(close(Input), _, true),
+			fail
+		).
 
 :- end_object.
