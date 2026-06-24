@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-24,
 		comment is 'Unit tests for the "http_session" library.'
 	]).
 
@@ -275,49 +275,49 @@
 		http_cookie_jar::store_set_cookies(SourceJar, 'http://example.com/login', [set_cookie(session, '1', [path-('/'), http_only-true])]),
 		http_cookie_jar::save(SourceJar, Path),
 		http_cookie_jar::close(SourceJar),
-		http_client_session::open(Session, [cookies_file(Path)]),
-		http_client_session::cookie_jar(Session, RestoredJar),
+		http_client_session(_HTTPSocket_)::open(Session, [cookies_file(Path)]),
+		http_client_session(_HTTPSocket_)::cookie_jar(Session, RestoredJar),
 		http_cookie_jar::request_cookies(RestoredJar, 'http://example.com/dashboard', Cookies),
-		http_client_session::close(Session).
+		http_client_session(_HTTPSocket_)::close(Session).
 
 	test(http_client_session_04, deterministic(Cookies == [session-'1'])) :-
 		http_cookie_jar::open(Jar),
 		http_cookie_jar::store_set_cookies(Jar, 'http://example.com/login', [set_cookie(session, '1', [path-('/'), http_only-true])]),
-		http_client_session::open(Session, [cookie_jar(Jar), headers([accept-'application/json']), query([lang-'en']), version(http(1, 0)), properties([trace(default), keep(default)])]),
-		http_client_session::cookie_jar(Session, Jar),
-		http_client_session::close(Session),
+		http_client_session(_HTTPSocket_)::open(Session, [cookie_jar(Jar), headers([accept-'application/json']), query([lang-'en']), version(http(1, 0)), properties([trace(default), keep(default)])]),
+		http_client_session(_HTTPSocket_)::cookie_jar(Session, Jar),
+		http_client_session(_HTTPSocket_)::close(Session),
 		http_cookie_jar::request_cookies(Jar, 'http://example.com/dashboard', Cookies),
 		http_cookie_jar::close(Jar).
 
 	test(http_client_session_05, error(domain_error(http_client_session, foo))) :-
-		http_client_session::cookie_jar(foo, _Jar).
+		http_client_session(_HTTPSocket_)::cookie_jar(foo, _Jar).
 
 	test(http_client_session_06, error(domain_error(http_client_session_options, [cookie_jar(none), cookies_file('cookies.tmp')]))) :-
-		http_client_session::open(_Session, [cookie_jar(none), cookies_file('cookies.tmp')]).
+		http_client_session(_HTTPSocket_)::open(_Session, [cookie_jar(none), cookies_file('cookies.tmp')]).
 
 	test(http_client_session_07, error(domain_error(http_client_session_option, properties([cookies([session-'1'])])))) :-
-		http_client_session::open(_Session, [properties([cookies([session-'1'])])]).
+		http_client_session(_HTTPSocket_)::open(_Session, [properties([cookies([session-'1'])])]).
 
-	test(http_client_session_08, error(domain_error(http_client_session_request_option, unsupported_option)), [cleanup(catch(http_client_session::close(Session), _, true))]) :-
-		http_client_session::open(Session),
-		http_client_session::get(Session, 'http://example.com/', _Response, [unsupported_option]).
+	test(http_client_session_08, error(domain_error(http_client_session_request_option, unsupported_option)), [cleanup(catch(http_client_session(_HTTPSocket_)::close(Session), _, true))]) :-
+		http_client_session(_HTTPSocket_)::open(Session),
+		http_client_session(_HTTPSocket_)::get(Session, 'http://example.com/', _Response, [unsupported_option]).
 
-	test(http_client_session_08a, error(domain_error(http_client_session_request_option, source_url('/relative'))), [cleanup(catch(http_client_session::close(Session), _, true))]) :-
-		http_client_session::open(Session),
-		http_client_session::get(Session, 'http://example.com/', _Response, [source_url('/relative')]).
+	test(http_client_session_08a, error(domain_error(http_client_session_request_option, source_url('/relative'))), [cleanup(catch(http_client_session(_HTTPSocket_)::close(Session), _, true))]) :-
+		http_client_session(_HTTPSocket_)::open(Session),
+		http_client_session(_HTTPSocket_)::get(Session, 'http://example.com/', _Response, [source_url('/relative')]).
 
-	test(http_client_session_08b, error(domain_error(http_client_session_request_option, source_origin('https://other.example.net/path'))), [cleanup(catch(http_client_session::close(Session), _, true))]) :-
-		http_client_session::open(Session),
-		http_client_session::get(Session, 'http://example.com/', _Response, [source_origin('https://other.example.net/path')]).
+	test(http_client_session_08b, error(domain_error(http_client_session_request_option, source_origin('https://other.example.net/path'))), [cleanup(catch(http_client_session(_HTTPSocket_)::close(Session), _, true))]) :-
+		http_client_session(_HTTPSocket_)::open(Session),
+		http_client_session(_HTTPSocket_)::get(Session, 'http://example.com/', _Response, [source_origin('https://other.example.net/path')]).
 
 	test(http_client_session_11, error(instantiation_error)) :-
-		http_client_session::cookie_jar(_Session, _Jar).
+		http_client_session(_HTTPSocket_)::cookie_jar(_Session, _Jar).
 
 	test(http_client_session_12, error(instantiation_error)) :-
-		http_client_session::cookie_jar(http_client_session(_SessionId), _Jar).
+		http_client_session(_HTTPSocket_)::cookie_jar(http_client_session(_SessionId), _Jar).
 
 	test(http_client_session_13, error(instantiation_error)) :-
-		http_client_session::open(_Session, [cookie_jar(cookie_jar(_JarId))]).
+		http_client_session(_HTTPSocket_)::open(_Session, [cookie_jar(cookie_jar(_JarId))]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -327,10 +327,10 @@
 			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL),
-			http_client_session::open(Session),
-			http_client_session::get(Session, URL, FirstResponse, []),
-			http_client_session::get(Session, URL, SecondResponse, []),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session),
+			http_client_session(_HTTPSocket_)::get(Session, URL, FirstResponse, []),
+			http_client_session(_HTTPSocket_)::get(Session, URL, SecondResponse, []),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			body(FirstResponse, content('text/plain', text('1'))),
@@ -340,10 +340,10 @@
 			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL),
-			http_client_session::open(Session, [cookie_jar(none)]),
-			http_client_session::get(Session, URL, FirstResponse, []),
-			http_client_session::get(Session, URL, SecondResponse, []),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session, [cookie_jar(none)]),
+			http_client_session(_HTTPSocket_)::get(Session, URL, FirstResponse, []),
+			http_client_session(_HTTPSocket_)::get(Session, URL, SecondResponse, []),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_test_handler, 2, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			body(FirstResponse, content('text/plain', text('1'))),
@@ -353,9 +353,9 @@
 			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_listener(Listener, http_session_test_handler, 1, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL),
-			http_client_session::open(Session),
-			http_client_session::get(Session, URL, Response, [cookies([visits-'7'])]),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session),
+			http_client_session(_HTTPSocket_)::get(Session, URL, Response, [cookies([visits-'7'])]),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_test_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			body(Response, content('text/plain', text('8'))).
@@ -364,13 +364,13 @@
 			open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_listener(Listener, http_session_request_echo_handler, 5, _ClientInfos, [shutdown(close)]), Tag),
 			atomic_list_concat(['http://127.0.0.1:', Port, '/echo'], URL),
-			http_client_session::open(Session),
-			http_client_session::head(Session, URL, HeadResponse, []),
-			http_client_session::delete(Session, URL, DeleteResponse, []),
-			http_client_session::post(Session, URL, content('text/plain', text(post)), PostResponse, []),
-			http_client_session::put(Session, URL, content('text/plain', text(put)), PutResponse, []),
-			http_client_session::patch(Session, URL, content('text/plain', text(patch)), PatchResponse, []),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session),
+			http_client_session(_HTTPSocket_)::head(Session, URL, HeadResponse, []),
+			http_client_session(_HTTPSocket_)::delete(Session, URL, DeleteResponse, []),
+			http_client_session(_HTTPSocket_)::post(Session, URL, content('text/plain', text(post)), PostResponse, []),
+			http_client_session(_HTTPSocket_)::put(Session, URL, content('text/plain', text(put)), PutResponse, []),
+			http_client_session(_HTTPSocket_)::patch(Session, URL, content('text/plain', text(patch)), PatchResponse, []),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 5, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			body(HeadResponse, empty),
@@ -386,9 +386,9 @@
 			atomic_list_concat(['http://127.0.0.1:', Port, '/request-info'], URL),
 			http_cookie_jar::open(Jar),
 			http_cookie_jar::store_set_cookies(Jar, LoginURL, [set_cookie(session, '1', [path-('/'), http_only-true])]),
-			http_client_session::open(Session, [cookie_jar(Jar), headers([accept-'application/json']), query([lang-'en', page-'1']), version(http(1, 1)), properties([trace(default), keep(default)])]),
-			http_client_session::get(Session, URL, Response, [headers([accept-'application/json']), query([page-'2', item-'7']), version(http(1, 0)), properties([trace(request), cookies([session-'property'])]), cookies([session-'explicit'])]),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session, [cookie_jar(Jar), headers([accept-'application/json']), query([lang-'en', page-'1']), version(http(1, 1)), properties([trace(default), keep(default)])]),
+			http_client_session(_HTTPSocket_)::get(Session, URL, Response, [headers([accept-'application/json']), query([page-'2', item-'7']), version(http(1, 0)), properties([trace(request), cookies([session-'property'])]), cookies([session-'explicit'])]),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			http_cookie_jar::request_cookies(Jar, URL, Cookies),
@@ -402,9 +402,9 @@
 			atomic_list_concat(['http://127.0.0.1:', Port, '/cookie-info'], URL),
 			http_cookie_jar::open(Jar),
 			http_cookie_jar::store_set_cookies(Jar, LoginURL, [set_cookie(session, '1', [path-('/'), http_only-true])]),
-			http_client_session::open(Session, [cookie_jar(Jar)]),
-			http_client_session::get(Session, URL, Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session, [cookie_jar(Jar)]),
+			http_client_session(_HTTPSocket_)::get(Session, URL, Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			http_cookie_jar::close(Jar),
@@ -417,9 +417,9 @@
 			atomic_list_concat(['http://127.0.0.1:', Port, '/cookie-info'], URL),
 			http_cookie_jar::open(Jar),
 			http_cookie_jar::store_set_cookies(Jar, LoginURL, [set_cookie(session, '1', [path-('/'), http_only-true])]),
-			http_client_session::open(Session, [cookie_jar(Jar)]),
-			http_client_session::post(Session, URL, content('text/plain', text(post)), Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
-			http_client_session::close(Session),
+			http_client_session(_HTTPSocket_)::open(Session, [cookie_jar(Jar)]),
+			http_client_session(_HTTPSocket_)::post(Session, URL, content('text/plain', text(post)), Response, [source_url('https://other.example.net/start'), top_level_navigation(true)]),
+			http_client_session(_HTTPSocket_)::close(Session),
 			once(threaded_exit(serve_listener(Listener, http_session_request_echo_handler, 1, _ClientInfos, [shutdown(close)]), Tag)),
 			catch(close_listener(Listener), _, true),
 			http_cookie_jar::close(Jar),
