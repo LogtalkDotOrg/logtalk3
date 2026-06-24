@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-25,
 		comment is 'Unit tests for the "http_websocket_service" library.'
 	]).
 
@@ -421,8 +421,12 @@
 		http_websocket_client_session::message(text, hello, Message),
 		http_websocket_client_session::write_message(ClientOutput, Message),
 		read_frame_with_timeout(2.0, ClientInput, CloseFrame),
+		http_websocket_service_registry::sessions(Registry, [Session]),
+		http_websocket_service_registry::take_pending(Registry, Session, PendingMessages),
+		PendingMessages == [message(text, should_not_flush)],
+		http_websocket_service_registry::send(Registry, Session, message(text, should_not_flush)),
 		write_client_close(ClientOutput, status(1000)),
-		read_frame_with_timeout(2.0, ClientInput, NextFrame),
+		wait_for_registry_session_count(Registry, 0),
 		safe_close_connection(ClientConnection),
 		request_shutdown(Control),
 		threaded_exit(server_session_until_shutdown(Listener, websocket_close_then_broadcast_service_handler, Registry, Control, []), ServerTag),
@@ -433,8 +437,7 @@
 		status(ClientResponse, status(101, 'Switching Protocols')),
 		http_websocket_frames::opcode(CloseFrame, close),
 		http_websocket_frames::payload(CloseFrame, [0x03, 0xE8]),
-		\+ http_websocket_frames::property(CloseFrame, masking_key(_)),
-		NextFrame == end_of_file.
+		\+ http_websocket_frames::property(CloseFrame, masking_key(_)).
 
 	:- endif.
 
