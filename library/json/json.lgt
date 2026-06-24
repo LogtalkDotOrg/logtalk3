@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:14:1,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2026-01-25,
+		date is 2026-06-24,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -74,8 +74,17 @@
 	generate(file(File), Term) :-
 		phrase(encode(Term), Codes),
 		open(File, write, Stream),
-		write_codes(Codes, Stream),
-		close(Stream),
+		(	catch(
+				write_codes(Codes, Stream),
+				Error,
+				(	catch(close(Stream), _, true),
+					throw(Error)
+				)
+			) ->
+			close(Stream)
+		; 	catch(close(Stream), _, true),
+			fail
+		),
 		!.
 	generate(stream(Stream), Term) :-
 		phrase(encode(Term), Codes),
