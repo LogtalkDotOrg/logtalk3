@@ -303,16 +303,12 @@
 		body(Response, content('text/plain', text('/via-connection'))).
 
 	test(http_client_get_4_02, deterministic) :-
-		open_listener('127.0.0.1', Port, Listener, []),
-		threaded_once(server_accept_and_close_once(Listener), Tag),
-		open_connection('127.0.0.1', Port, Connection, []),
+		Port = 80,
+		Connection = http_connection('127.0.0.1', Port, dummy_input, dummy_output),
 		WrongPort is Port + 1,
 		local_http_url(WrongPort, '/mismatch', WrongURL),
 		catch(http_client(_HTTPSocket_)::get(Connection, WrongURL, _Response, []), Error, true),
-		expected_connection_target_error(Error),
-		close_connection(Connection),
-		threaded_exit(server_accept_and_close_once(Listener), Tag),
-		close_listener(Listener).
+		expected_connection_target_error(Error).
 
 	server_serve_once(Listener, Handler) :-
 		catch(serve_once(Listener, Handler, _ClientInfo), _, true).
