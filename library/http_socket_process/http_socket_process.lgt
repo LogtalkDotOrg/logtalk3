@@ -283,7 +283,7 @@
 			resolve_command_path(openssl, Path),
 			process::create(
 				Path,
-				['req', '-quiet', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', KeyFile, '-out', CertificateFile, '-subj', '/CN=127.0.0.1', '-days', '1'],
+				['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', KeyFile, '-out', CertificateFile, '-subj', '/CN=127.0.0.1', '-days', '1'],
 				[stdout(Output), stderr(Error), process(Process)]
 			),
 			process::wait(Process, Status),
